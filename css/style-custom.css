@@ -2,6 +2,10 @@
     font-size: 20px;
 }
 
+li.active {
+    color: #DE3053;
+}
+
 .expand .social-icon a {
     padding-left: 60px;
     padding-right: 60px;
@@ -54,13 +58,13 @@ p.subheading {
     height: 380px;
 }
 
-#float-panel ul {
+#sticky-menu ul {
     list-style: none;
     padding-left: 0;
 }
 
-#float-panel ul li span:hover,
-#float-panel ul li a:hover {
+#sticky-menu ul li span:hover,
+#sticky-menu ul li a:hover {
     border-left: 4px;
     border-top: 0;
     border-bottom: 0;
@@ -71,14 +75,14 @@ p.subheading {
     padding-left: 5px;
 }
 
-#float-panel ul.subnav {
+#sticky-menu ul.subnav {
     padding-left: 40px;
     margin-top: 10px;
     margin-bottom: 0px;
 }
 
-#float-panel li span,
-#float-panel li a {
+#sticky-menu li span,
+#sticky-menu li a {
     color: #777;
     cursor: pointer;
     -webkit-transition: all 0.2s ease-in-out;
@@ -88,7 +92,7 @@ p.subheading {
     transition: all 0.2s ease-in-out;
 }
 
-#float-panel li a.current {
+#sticky-menu li a.current {
     border-left: 4px;
     border-top: 0;
     border-bottom: 0;
@@ -99,11 +103,11 @@ p.subheading {
     padding-left: 5px;
 }
 
-#float-panel li span:hover {
+#sticky-menu li span:hover {
     color: #DE3053;
 }
 
-#float-panel li.subnav_drop {
+#sticky-menu li.subnav_drop {
     border-top: 0;
     border-bottom: 1px;
     border-style: solid;
@@ -114,7 +118,7 @@ p.subheading {
     padding-top: 5px;
 }
 
-#float-panel .toctree-l1 {
+#sticky-menu .toctree-l1 {
     padding-top: 3px;
     padding-bottom: 3px;
 }
@@ -171,4 +175,28 @@ p.subheading {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 12px;
+}
+
+#sticky-menu {
+    position: sticky;
+    top: 56px;
+}
+
+@media screen and (max-width: 991px) {
+    #sticky-menu {
+        position: relative !important;
+        top: 0 !important;
+    }
+    #doc-container h2#section-title {
+        font-size: 40px;
+    }
+    #doc-container h1 {
+        font-size: 30px;
+    }
+    pre {
+        padding: 16px;
+    }
+    pre code {
+        white-space: pre !important;
+    }
 }

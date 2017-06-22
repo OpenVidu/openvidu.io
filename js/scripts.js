@@ -242,7 +242,7 @@
     /* -------------------
     Active menu item on page scroll
     ---------------------*/
-    var sections = $('section')
+    /*var sections = $('section')
     , nav = $('nav.nav-default')
     , nav_height = nav.outerHeight();
     $(window).on('scroll', function () {
@@ -257,7 +257,7 @@
           nav.find('a[href="#'+$(this).attr('id')+'"]').addClass('current');
         }
       });
-    });
+    });*/
     /* -------------------
     Auto-close responsive navbar
     ---------------------*/
