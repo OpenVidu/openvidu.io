@@ -1,0 +1,402 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Intro
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Intro')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop').click(function (i, e) {
+			$('li.subnav_drop').not(this).find('ul.subnav').hide();
+			$(this).find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#float-panel').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Intro')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+	<div class="holder range">
+		<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12"> <div id="float-panel" class="float-panel" data-top="56">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Home</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Tutorials</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Intro</a>
+        
+         
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="openvidu-insecure-js/">openvidu-insecure-js</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="openvidu-insecure-angular/">openvidu-insecure-angular</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="openvidu-js-java/">openvidu-js-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="openvidu-mvc-java/">openvidu-mvc-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="openvidu-js-node/">openvidu-js-node</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="openvidu-mvc-node/">openvidu-mvc-node</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>API</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../api/">API</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Deployment</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../deployment/">Deployment</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div></div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">OpenVidu Tutorials</h2>
+
+<hr>
+
+<!-- Start Blog Classic -->
+
+<section id="blog" class="docs-tutorials">
+    <div class="container">
+
+        <div class="col-md-12 text-center wow fadeInUp">
+            <h3 class="section-title">Client Side only </h3>
+            <p class="subheading">Get started in 5 minutes with the simplest version of OpenVidu</p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/javascript.png" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="/docs/tutorials/openvidu-insecure-js" class="cbp-singlePage"><i class="icon ion-edit"></i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>JavaScript</h4>
+                    <p>Vanilla JavaScript app: good old JS code for a traditional approach.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/angular.png" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="/docs/tutorials/openvidu-insecure-angular"><i class="icon ion-edit"></i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>Angular</h4>
+                    <p>Try this fantastic tutorial using the last version of Angular framework.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/react.png" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="#" onClick="return false;">Coming soon...</i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>React</h4>
+                    <p>This React app will get you going in the blink of an eye.</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Row -->
+
+        <hr>
+
+        <div class="col-md-12 text-center wow fadeInUp">
+            <h3 class="section-title">Client Side + Server Side </h3>
+            <p class="subheading">Try any of our ready-for-production web apps to see the secure version of OpenVidu in action with a real
+                example
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/js_java.jpg" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="/docs/tutorials/openvidu-js-java"><i class="icon ion-edit"></i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>JavaScript + Java SPA</h4>
+                    <p>Vanilla JavasCript frontend and a SPA Java Backend: forget building HTML templates, just feed your
+                        front with HTTP requests</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/js_java.jpg" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="/docs/tutorials/openvidu-mvc-java"><i class="icon ion-edit"></i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>JavaScript + Java MVC</h4>
+                    <p>Vanilla JavasCript frontend and a traditional Java MVC Backend: serve HTML pages from your server</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/js_node.jpg" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="/docs/tutorials/openvidu-js-node"><i class="icon ion-edit"></i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>JavaScript + Node SPA</h4>
+                    <p>Vanilla JavasCript frontend and a SPA Node Backend: forget building HTML templates, just feed your
+                        front with HTTP requests</p>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- End Row -->
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-4 team-member">
+                <div class="effect effects wow fadeInUp">
+                    <div class="img">
+                        <img src="/img/assets/js_node.jpg" class="img-responsive img-tutorials" alt="" />
+                        <div class="overlay">
+                            <ul class="expand">
+                                <li class="social-icon"><a href="/docs/tutorials/openvidu-mvc-node"><i class="icon ion-edit"></i></a></li>
+                            </ul>
+                            <a class="close-overlay hidden">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info wow fadeInUp">
+                    <h4>JavaScript + Node MVC</h4>
+                    <p>Vanilla JavasCript frontend and a traditional Node MVC backend: serve HTML pages from your server</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- End Blog Classic --> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="openvidu-insecure-js/" class="btn btn-xs btn-primary float-right" title="openvidu-insecure-js">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-xs btn-primary" title="Home"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/tutorials/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>

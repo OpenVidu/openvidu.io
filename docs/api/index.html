@@ -1,0 +1,233 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - API
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('API')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop').click(function (i, e) {
+			$('li.subnav_drop').not(this).find('ul.subnav').hide();
+			$(this).find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#float-panel').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('API')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+	<div class="holder range">
+		<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12"> <div id="float-panel" class="float-panel" data-top="56">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Home</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Tutorials</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/">Intro</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/openvidu-js-java/">openvidu-js-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/openvidu-js-node/">openvidu-js-node</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>API</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 current">
+        <a class="current" href="./">API</a>
+        
+         
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Deployment</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../deployment/">Deployment</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div></div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">OpenVidu API</h2> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployment/" class="btn btn-xs btn-primary float-right" title="Deployment">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../tutorials/openvidu-mvc-node/" class="btn btn-xs btn-primary" title="openvidu-mvc-node"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/api/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>

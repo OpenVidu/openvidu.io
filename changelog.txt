@@ -1,0 +1,28 @@
+
+Version 1.4
+--NEW--
+Added centered tabs in shortcodes.html page
+
+
+
+Version 1.3
+--FIXES--
+Added !Modernizr in smoothscroll.js
+Modernizr moved up in jQuery list in all html files.
+
+Version 1.2 
+--NEW--
+Added Preloader (index.html, style.css, scripts.js)
+Added Blog Pages (style.css, html pages, masonry.js)
+--FIXES--
+Fixed Shortcode List icons (style.css)
+Fixed Revolution slider heading wrap (index.html -white-space:normal;)
+Fixed Revolution slider loader (style.css)
+
+Version 1.1 
+--FIXES--
+Fixed home slider headings responsive positioning and resizing (style.css).
+Fixed home fullwidth headings vertical position (style.css).
+Fixed footer columns responsive positioning (style.css).
+--NEW--
+Added dotted overlay removal explanation in documentation file.

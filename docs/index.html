@@ -1,0 +1,453 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Home
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Home')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop').click(function (i, e) {
+			$('li.subnav_drop').not(this).find('ul.subnav').hide();
+			$(this).find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#float-panel').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Home')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+	<div class="holder range">
+		<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12"> <div id="float-panel" class="float-panel" data-top="56">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Home</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 current">
+        <a class="current" href=".">Home</a>
+        
+         
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Tutorials</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/">Intro</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/openvidu-js-java/">openvidu-js-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/openvidu-mvc-java/">openvidu-mvc-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/openvidu-js-node/">openvidu-js-node</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="tutorials/openvidu-mvc-node/">openvidu-mvc-node</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>API</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="api/">API</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Deployment</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="deployment/">Deployment</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div></div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">OpenVidu Documentation</h2>
+
+<hr>
+
+<h1 id="what-is-openvidu">What is OpenVidu?</h1>
+<p>OpenVidu is a platform to facilitate the addition of video calls in your web or mobile 
+application, either group or one-to-one calls. In fact, any combination you come up with is easy to implement with OpenVidu.</p>
+<p>It is based on <a href="http://www.kurento.org">Kurento</a>, the WebRTC platform for multimedia applications. Openvidu was forked from <a href="https://github.com/Kurento/kurento-room">KurentoRoom project</a>.</p>
+<p>OpenVidu and Kurento are licensed under Apache License v2.</p>
+<hr />
+<h1 id="table-of-contents">Table of contents</h1>
+<ul>
+<li><a href="#running-a-videocall-demo-application">Running a videocall demo</a></li>
+<li><a href="#building-a-simple-app-with-openvidu">Building a simple app</a></li>
+<li><a href="#securization">Securization</a></li>
+<li><a href="#sharing-data-between-users">Sharing data between users</a></li>
+<li><a href="#acknowledgments">Acknowledgments</a></li>
+</ul>
+<hr />
+<h1 id="running-a-videocall-demo-application">Running a videocall demo application</h1>
+<p>We have implemented a very basic demo application to see OpenVidu in action. To ease the installation, we have packaged it as a docker image. </p>
+<ul>
+<li>Please be sure that you have <a href="https://store.docker.com/search?type=edition&amp;offering=community">docker CE installed</a></li>
+<li>Run this Docker container</li>
+</ul>
+<pre><code>docker run -p 5000:5000 -p 4040:4040 -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.security=false openvidu/openvidu-plainjs-demo
+</code></pre>
+
+<ul>
+<li>Wait until you see a public URL ended with <code>.ngrok.io</code>. You can connect locally in <a href="http://localhost:5000"><code>localhost:5000</code></a> or by using the ngrok public URL. You can also share this URL with anyone you want to test the app over the Internet!</li>
+</ul>
+<hr />
+<h1 id="building-a-simple-app-with-openvidu">Building a simple app with OpenVidu</h1>
+<p align="center">
+  <img src="https://docs.google.com/uc?id=0B61cQ4sbhmWSNF9ZWHREUXo3QlE">
+</p>
+
+<p>OpenVidu has a traditional <strong>Client - Server</strong> architecture built on three modules that are shown in the image above. To run <strong>openvidu-server</strong> and <strong>Kurento Media Server</strong> you can execute the following container: </p>
+<pre><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.security=false openvidu/openvidu-server-kms
+</code></pre>
+
+<p>Then, you have to use the library <strong>openvidu-browser</strong> in your JavaScript browser application (frontend). This library is packaged in [OpenVidu.js] file that you can download from https://github.com/OpenVidu/openvidu/blob/master/openvidu-browser/src/main/resources/static/js/OpenVidu.js. Then add the file in your HTML with <code>&lt;script src="OpenVidu.js"&gt;&lt;/script&gt;</code>.</p>
+<p>With the <strong>openvidu-browser</strong> library you can handle all available operations straight away from your client, as creating video calls, joining users to them or publishing/unpublishing video and audio</p>
+<h2 id="sample-application">Sample application</h2>
+<p>Once you have up and running Kurento Media Server and openvidu-server, you just need to add a few lines of code in your frontend to make your first video call with OpenVidu. You can take a look to the simplest sample application in GitHub https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-js.</p>
+<p>You can clone the repo and serve the app locally with your favourite tool (we recommend http-server: <code>npm install -g http-server</code>)</p>
+<pre><code>git clone https://github.com/OpenVidu/openvidu-tutorials.git
+cd openvidu-tutorials/openvidu-insecure-js/web
+http-server
+</code></pre>
+
+<p>You can now start editing HTML, JS and CSS files. Just reload your browser to see your changes (mind the browser's cache!).</p>
+<h3 id="code-description">Code description</h3>
+<ol>
+<li>Get an <em>OpenVidu</em> object and initialize a session with a <em>sessionId</em>. Have in mind that this is the parameter that defines which video call to connect.</li>
+</ol>
+<pre><code class="javascript">var OV = new OpenVidu(&quot;wss://&quot; + OPENVIDU_SERVER_IP + &quot;:8443/&quot;);
+var session = OV.initSession(sessionId);
+</code></pre>
+
+<ol>
+<li>Set the events to be listened by your session. For example, this snippet below will automatically append the new participants videos to HTML element with 'subscriber' id. Available events for the Session object are detailed in <a href="#session">API section</a>.</li>
+</ol>
+<pre><code class="javascript">session.on('streamCreated', function (event) {
+    session.subscribe(event.stream, 'subscriber');
+});
+</code></pre>
+
+<ol>
+<li>Connect to the session. For a non-secure approach, the value of <em>token</em> parameter is irrelevant. You can pass as second parameter a callback to be executed after connection is stablished. A common use-case for users that want to stream their own video is the following one: if the connection to the session has been succesful, get a Publisher object (appended to HTML element with id 'publisher') and publish it. The rest of participants will receive the stream.</li>
+</ol>
+<pre><code class="javascript">session.connect(token, function (error) {
+    // If connection successful, get a publisher and publish to the session
+    if (!error) {
+        var publisher = OV.initPublisher('publisher', {
+            audio: true,
+            video: true,
+            quality: 'MEDIUM' //'LOW','MEDIUM','HIGH'
+        });
+        session.publish(publisher);
+    } else {
+        console.log('Error while connecting to the session');
+    }
+});
+</code></pre>
+
+<ol>
+<li>Finally, whenever you want to leave the video call...</li>
+</ol>
+<pre><code class="javascript">session.disconnect();
+</code></pre>
+
+<p>With these few lines of code you will already have a functional video-call capability in your app. Check <a href="#securization">Securization</a> section to learn how to easily make your app ready for production.</p>
+<p>If you prefer, there's an Angular version of the sample app that uses <em>openvidu-browser</em> npm package. Check it out <a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-angular">here</a>.</p>
+<hr />
+<h1 id="securization">Securization</h1>
+<h2 id="why">Why?</h2>
+<p>In a production environment probably you don't want unauthorized users swamping your video calls. It's not possible to control access to them with the first approach we have seen in the sections above: anyone who knows the <em>sessionId</em> could connect to your video call, and if it turns out that the <em>sessionId</em> doesn't belong to an existing session, a new one would be created.</p>
+<p>In addition, a secure version also means you can choose the role each user has in your video calls (see <a href="#openvidurole">OpenViduRole</a> section).</p>
+<p>Thus, a non-secure version of OpenVidu is only intended for development environments. Don't worry, adding securization is not a difficult task.</p>
+<h2 id="how">How?</h2>
+<p align="center">
+  <img src="https://docs.google.com/uc?id=0B61cQ4sbhmWSeDNIekd5R2ZhQUE">
+</p>
+
+<p>In the image above you can see the main difference with the non-secure version of OpenVidu. Your backend will now have to call two HTTP REST operations in openvidu-server to get the two parameters needed in the securization process:</p>
+<ul>
+<li><strong><em>sessionId</em></strong>: just as in the non-secure version, it identifies each specific video-call</li>
+<li><strong><em>token</em></strong>: any user joining a specific video call will need to pass a valid token as a parameter</li>
+</ul>
+<p>You have three different options available for getting sessionIds and tokens from openvidu-server:</p>
+<ul>
+<li><a href="https://github.com/OpenVidu">REST API</a></li>
+<li><a href="https://github.com/OpenVidu">openvidu-java-client</a></li>
+<li><a href="https://github.com/OpenVidu">openvidu-node-client</a></li>
+</ul>
+<h2 id="a-sequence-diagram-to-sum-up">A sequence diagram to sum up</h2>
+<p align="center">
+  <img src="http://www.plantuml.com/plantuml/png/ZP9TIyCm58QlcrznY3SJNFsus8KNmgPJAcKPRWWYkyYQT8HXKfBiu-URkcn4cxhUji_xdFSSOjP2LbJJBnYf_PGo9kGARcyGSX-jA4H5fGNyeJOQdhMI5l_-eIekju9j-akjTePhZ11QgZtW7vXBXk623ygxiaH9gp4vetGQSD9Ofn4jrcsLN7ORDAhHKw6I3sA53hhaVz-fJhW4z1z21zp3PqvUiWcGwVXjEC_8P76EVoKEVy-UnWGUXtc-G6cQ7eSSe3hpjuvBNg-udN5ZX98PGqsYCGgR8uqx-INVpPKxNYUthSccDzpTBHjKkFAHo84QRy55NHdms_O2ooMAqCt1Fj1jb8VJGad92zlpHLj7nMxdizy0">
+</p>
+
+<ol>
+<li>Identify your user and listen to a request for joining a video call (represented by [LOGIN OPERATION] and [JOIN VIDEO CALL] in the diagram). This process is entirely up to you.</li>
+<li>You must get a <em>sessionId</em>: a new one if the video call is being created or an existing one for an active video call. In the first case you need to ask openvidu-server for it (as shown in the diagram), in the second case you must retrieve it from wherever you stored it when it was created (a data-base or maybe your backend itself).</li>
+<li>You also need a new valid <em>token</em> for this session. Ask openvidu-server for it passing the <em>sessionId</em>.</li>
+<li>Finally return both parameters to your frontend, where using openvidu-browser you may initilize your session with <em>sessionId</em> and then connect to it with <em>token</em>. Good news: <strong>the code is exactly the same as explained before in <a href="#code-description">Code description</a> section</strong></li>
+</ol>
+<blockquote>
+<p>Communication between <em>Your Back</em> and <em>openvidu-server</em> modules is outlined in the diagram, but it does not correspond to the real methods. Remember you can handle this from your backend by consuming the <a href="#rest-api">REST API</a> or by using <a href="#openvidu-backend-client">openvidu-backend-client</a> package.</p>
+</blockquote>
+<h2 id="running-a-secure-videocall-application">Running a secure videocall application</h2>
+<p>We have implemented a very basic <a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-js-java">demo application</a> to see the secure version of OpenVidu in action. It has a Java backend to manage the user sessions and the securization process with OpenVidu Server.</p>
+<ul>
+<li>Please be sure that you have <a href="https://store.docker.com/search?type=edition&amp;offering=community">docker CE installed</a></li>
+<li>Run this Docker container</li>
+</ul>
+<pre><code>docker run -p 5000:5000 -p 3000:3000 -p 4040:4040 -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 openvidu/openvidu-sample-secure
+</code></pre>
+
+<ul>
+<li>Wait until you see a public URL ended with <code>.ngrok.io</code>. You can connect locally in <a href="http://localhost:3000"><code>localhost:3000</code></a> or by using the ngrok public URL. You can also share this URL with anyone you want to test the app over the Internet!</li>
+</ul>
+<h2 id="running-a-sample-advanced-app">Running a sample advanced app</h2>
+<p>Wanna try a <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-sample-app">real sample application</a> that makes use of everything we have talked about? Take a look at this app. It wraps a frontend built with Angular, a backend built with Spring and a MySQL database:</p>
+<ul>
+<li>Please be sure that you have docker-compose (<code>sudo apt-get install docker-compose</code>)</li>
+<li>Download the <code>docker-compose.yml</code> file and run it:</li>
+</ul>
+<pre><code>wget -O docker-compose.yml https://raw.githubusercontent.com/OpenVidu/openvidu-docker/master/openvidu-sample-app/docker-compose.yml
+docker-compose up
+</code></pre>
+
+<ul>
+<li>
+<p>Wait until you see an output like <code>Started App in XXX seconds (JVM running for XXX)</code></p>
+</li>
+<li>
+<p>Go to <a href="https://localhost:5000"><code>https://localhost:5000</code></a> and accept the self-signed certificate. Here you have a couple registered users (use a standard window and an incognito window to test both of them at the same time):</p>
+<table>
+<thead>
+<tr>
+<th>user</th>
+<th>password</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>teacher@<span></span>gmail.com</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>student1@<span></span>gmail.com</td>
+<td>pass</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<hr />
+<h1 id="sharing-data-between-users">Sharing data between users</h1>
+<p>Whatever app you are developing, chances are you will need to pass some data for each user, at least a nickname. You can do it in two different places:</p>
+<ul>
+<li><strong>openvidu-browser</strong>: when calling <code>session.connect</code> method</li>
+</ul>
+<pre><code>session.connect(token, DATA, function (error) { ... });
+</code></pre>
+
+<ul>
+<li><strong>API REST</strong>: when asking for a token to <em>/api/tokens</em>, you can pass data as third parameter in the BODY of the POST request </li>
+</ul>
+<pre><code>{“session”: “sessionId”, “role”: “role”, “data”: &quot;DATA&quot;}
+</code></pre>
+
+<blockquote>
+<p>Java and Node clients (<em>openvidu-java-client</em> and <em>openvidu-node-client</em>) allow you to pass data when creating a Token object: </br>
+<code>tokenOptions = new TokenOptions.Builder().data("DATA").build();</code></p>
+</blockquote>
+<p>The result will be that in all clients, <em>Connection</em> objects will have in their <em>data</em> property the pertinent value you have provided for each user. So, an easy way to get the data associated to any user would be:</p>
+<pre><code class="javascript">session.on('streamCreated', function (event) {
+    session.subscribe(event.stream, 'subscriber');
+    console.log('USER DATA: ' + event.stream.connection.data);
+});
+</code></pre>
+
+<p>Some clarifications:</p>
+<ul>
+<li>
+<p><em>Connection.data</em> will be a simple string if you have provided data only with one of the methods, and will be a string with the following format if you provide data both from openvidu-browser and your backend: "OPENVIDUBROWSER_DATA%/%APIREST_DATA" </p>
+</li>
+<li>
+<p>Using only first option is not secure, as clients could modify the value of the second parameter. It is intended only in development environments. If you want total control over shared data, please use the second way.</p>
+</li>
+<li>You can choose whatever format you like for the data string, but if you are planning to share more than a simple field, maybe a standard format as JSON would be a wise choice.</li>
+</ul>
+<h1 id="acknowledgments">Acknowledgments</h1>
+<p>OpenVidu platform has been supported under project LERNIM (RTC-2016-4674-7) confunded by the <em>Ministry of Economy, Finance and Competitiveness</em> of Spain, as well as by the <em>European Union</em> FEDER, whose main goal with this funds is to promote technological development, innovation and high-quality research.</p>
+<p align="center">
+  <img width="400px" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSQzNLQnF4SnhFLWc">
+</p>
+
+<p align="center">
+  <img width="400px" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSa205YXNkSW9VNUE">
+</p> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorials/" class="btn btn-xs btn-primary float-right" title="Intro">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>

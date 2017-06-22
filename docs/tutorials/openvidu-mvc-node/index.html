@@ -1,0 +1,616 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - openvidu-mvc-node
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('openvidu-mvc-node')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop').click(function (i, e) {
+			$('li.subnav_drop').not(this).find('ul.subnav').hide();
+			$(this).find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#float-panel').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('openvidu-mvc-node')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+	<div class="holder range">
+		<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12"> <div id="float-panel" class="float-panel" data-top="56">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Home</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Tutorials</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../">Intro</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-insecure-js/">openvidu-insecure-js</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-insecure-angular/">openvidu-insecure-angular</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-js-java/">openvidu-js-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-mvc-java/">openvidu-mvc-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-js-node/">openvidu-js-node</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 current">
+        <a class="current" href="./">openvidu-mvc-node</a>
+        
+         
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>API</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../../api/">API</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Deployment</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../../deployment/">Deployment</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div></div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h1 id="openvidu-mvc-node">openvidu-mvc-node</h1>
+<p>A secure OpenVidu sample app with a Node backend and a traditional MVC frontend. With regard to the use of OpenVidu, it is identical to <em>openvidu-js-node</em>. This tutorial is intended for developers who feel more comfortable with MVC web architectures for their frontends. <a href="http://www.embeddedjs.com/">Embedded JavaScript</a> is the template engine of choice for this tutorial.</p>
+<h2 id="understanding-this-example">Understanding this example</h2>
+<p align="center">
+  <img src="https://docs.google.com/uc?id=0B61cQ4sbhmWSSGxqS2hYOVQzLW8">
+</p>
+
+<p>OpenVidu is composed by the modules displayed on the image above.</p>
+<ul>
+<li><strong>openvidu-browser</strong>: JavaScript library for the browser. It allows you to manage your video-calls straight away from your clients</li>
+<li><strong>openvidu-node-client</strong>: NPM package to easily get the necessary params (sessionId's and tokens) from openvidu-server. Quick alternative to REST API</li>
+<li><strong>openvidu-server</strong>: Java application that controls Kurento Media Server</li>
+<li><strong>Kurento Media Server</strong>: server that handles low level operations of media flow transmissions</li>
+</ul>
+<blockquote>
+<p>You will only have to make use of <strong>openvidu-browser</strong> and <strong>openvidu-node-client</strong> to get this sample app working</p>
+</blockquote>
+<h2 id="executing-this-example">Executing this example</h2>
+<ol>
+<li>
+<p>Clone the repo:</p>
+<p><code>bash
+git clone https://github.com/OpenVidu/openvidu-tutorials.git</code></p>
+</li>
+<li>
+<p>You will need <em>node</em> and <em>NPM</em> to execute the app. You can install them with:</p>
+<p><code>bash
+sudo apt-get install nodejs
+sudo apt-get install npm</code></p>
+</li>
+<li>
+<p>To run the sample application, execute the following commands in the project. They will install the NPM dependencies and will execute <code>server.js</code> server passing two arguments: "localhost:8443" as the URL where <em>openvidu-server</em> will be listening and "MY_SECRET" as the secret share with it:</p>
+<p><code>bash
+cd openvidu-mvc-node
+npm install
+node server.js localhost:8443 MY_SECRET</code></p>
+</li>
+<li>
+<p><em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<p><code>bash
+docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code></p>
+</li>
+<li>
+<p>Go to <a href="https://localhost:5000"><code>https://localhost:5000</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call. To test two users in the same computer, use a standard window and an incognito window.</p>
+</li>
+</ol>
+<h2 id="understanding-the-code">Understanding the code</h2>
+<p>This is a very basic web application with a pretty simple vanilla JS/HTML/CSS frontend and a straightforward Node backend built with <a href="http://expressjs.com"><em>express</em></a> that serves HTML files with a MVC approach, building the templates with the help of <a href="http://www.embeddedjs.com/">Embedded JavaScript</a>.</p>
+<p>OpenVidu assumes you can identify your users so you can tell which users can connect to which video-calls, and what role (and therefore what permissions) each one of them will have in the calls. You can do this as you prefer. Here our backend will manage the users and their sessions with the easy-to-use and non-intrusive <a href="https://github.com/expressjs/session"><em>express-session</em></a> API.</p>
+<ul>
+<li>
+<p><strong>Backend</strong>: node server</p>
+<ul>
+<li><code>server.js</code> : single file which handles all operations of server. It returns HTML templates as response to HTTP requests.</li>
+</ul>
+</li>
+<li>
+<p><strong>Frontend templates</strong>: Pure JS/HTML/CSS files served by the backend, with <code>.ejs</code> extension to support Embedded JavaScript (<code>/views</code> folder)</p>
+<ul>
+<li><code>index.ejs</code> : template with the login form</li>
+<li><code>dashboard.ejs</code> : template with the form to join a video-call</li>
+<li><code>session.ejs</code> : template of the video-call itself</li>
+</ul>
+</li>
+<li>
+<p><strong>Frontend static files</strong> (<code>/public</code> folder)</p>
+<ul>
+<li><code>OpenVidu.js</code> : openvidu-browser library. You don't have to manipulate this file</li>
+<li><code>style.css</code> : some CSS classes to style the templates</li>
+</ul>
+</li>
+</ul>
+<p>Let's describe the code following this scenario: a user logs in to the app and connects to the video-call "TUTORIAL", where he publishes his webcam. A second user will connect to the same video-call just after that and publish its own webcam. Both of them will leave the call after a while.</p>
+<hr />
+<h3 id="1-user-logs-in">1) User logs in</h3>
+<p>At path <code>/</code> a login form will be displayed:</p>
+<p align="center">
+  <img src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMlh0QkZoYmpQMkE">
+</p>
+
+<p>The form will execute a POST operation to path <code>/dashboard</code> whenever "Log in" button is clicked, passing the username and the password:</p>
+<pre><code class="html">&lt;form action=&quot;/dashboard&quot; method=&quot;post&quot;&gt;
+    &lt;p&gt;
+        &lt;label&gt;User&lt;/label&gt; &lt;input type=&quot;text&quot; name=&quot;user&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;label&gt;Pass&lt;/label&gt; &lt;input type=&quot;password&quot; name=&quot;pass&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;button type=&quot;submit&quot;&gt;Log in&lt;/button&gt;
+    &lt;/p&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p><code>server.js</code> at <code>/dashboard</code> first checks if the user is already logged (maybe he has just refreshed <code>/dashboard</code> page), and if so it just redirects to the dashboard itself. If the user is actually logging in, the method checks that the params are correct and if so sets a new <em>express-session</em> for the newly logged user (adding a <em>loggedUser</em> property with its username in the <em>req.session</em> object). Finally it returns <code>dashboard.ejs</code> template:</p>
+<pre><code class="javascript">app.post('/dashboard', dashboardController);
+app.get('/dashboard', dashboardController);
+
+function dashboardController(req, res) {
+
+    // Check if the user is already logged in
+    if (isLogged(req.session)) {
+        // User is already logged. Immediately return dashboard
+        user = req.session.loggedUser;
+        res.render('dashboard.ejs', {
+            user: user
+        });
+    } else {
+        // User wasn't logged and wants to
+
+        // Retrieve params from POST body
+        var user = req.body.user;
+        var pass = req.body.pass;
+
+        if (login(user, pass)) { // Correct user-pass
+            // Validate session and return OK 
+            // Value stored in req.session allows us to identify the user in future requests
+            req.session.loggedUser = user;
+            res.render('dashboard.ejs', {
+                user: user
+            });
+        } else { // Wrong user-pass
+            // Invalidate session and return index template
+            req.session.destroy();
+            res.redirect('/');
+        }
+    }
+}
+</code></pre>
+
+<hr />
+<h3 id="2-user-connects-to-tutorial-video-call">2) User connects to "TUTORIAL" video-call</h3>
+<p><code>dashboard.html</code> template will display a form asking for the video-call to connect and the nickname the user wants to have in it. So our 'publisher1' user would write TUTORIAL in "Session" field:</p>
+<p align="center">
+  <img src="https://docs.google.com/uc?id=0B61cQ4sbhmWSWkJsOFltSXhYbmc">
+</p>
+
+<p>The form will execute a POST operation to path <code>/session</code> whenever "Join!" button is clicked, passing the nickname and the session name:</p>
+<pre><code class="html">&lt;form action=&quot;/session&quot; method=&quot;post&quot;&gt;
+    &lt;p&gt;
+        &lt;label&gt;Name: &lt;/label&gt; &lt;input name=&quot;data&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;label&gt;Session: &lt;/label&gt; &lt;input name=&quot;sessionname&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;button type=&quot;submit&quot;&gt;Join!&lt;/button&gt;
+    &lt;/p&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>When <code>server.js</code> receives a request at <code>/session</code> path is when things get interesting.
+First of all there are some important attributes in this class we must mention:</p>
+<pre><code class="javascript">// Environment variable: URL where our OpenVidu server is listening
+var OPENVIDU_URL = process.argv[2];
+// Environment variable: secret shared with our OpenVidu server
+var OPENVIDU_SECRET = process.argv[3];
+
+// OpenVidu object to ask openvidu-server for sessionId and token
+var OV = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
+
+// Collection to pair session names and OpenVidu Session objects
+var mapSessionNameSession = {};
+// Collection to pair sessionId's (identifiers of Session objects) and tokens
+var mapSessionIdTokens = {};
+</code></pre>
+
+<p>Rest controller method receives both params sent by the client (whatever nickname the user has chosen and "TUTORIAL" as the sessionName). First it prepares a param we will need a little further on: <code>tokenOptions</code>.</p>
+<pre><code class="javascript">app.post('/session', (req, res) =&gt; {
+// Check the user is logged ... 
+
+// The nickname sent by the client
+var clientData = req.body.data;
+// The video-call to connect (&quot;TUTORIAL&quot;)
+var sessionName = req.body.sessionname;
+
+// Role associated to this user
+var role = users.find(u =&gt; (u.user === req.session.loggedUser)).role;
+
+// Optional data to be passed to other users when this user connects to the video-call
+// In this case, a JSON with the value we stored in the req.session object on login
+var serverData = '{&quot;serverData&quot;: &quot;' + req.session.loggedUser + '&quot;}';
+
+// Build tokenOptions object with the serverData and the role
+var tokenOptions = new TokenOptions.Builder()
+    .data(serverData)
+    .role(role)
+    .build();
+</code></pre>
+
+<p>Just after that an <em>if-else</em> statement comes into play: does the session "TUTORIAL" already exitsts? </p>
+<pre><code class="javascript">if (mapSessionNameSession[sessionName]) { ...
+</code></pre>
+
+<p>In this case it doesn't because 'publisher1' is the first user connecting to it. So we focus on the <em>else</em> branch:</p>
+<pre><code class="javascript">else { // New session: return a new sessionId and a new token
+    // Create a new OpenVidu Session
+    var mySession = OV.createSession();
+
+    // Get the sessionId asynchronously
+    mySession.getSessionId(function (sessionId) {
+
+        // Store the new Session in the collection of Sessions
+        mapSessionNameSession[sessionName] = mySession;
+        // Store a new empty array in the collection of tokens
+        mapSessionIdTokens[sessionId] = [];
+
+        // Generate a new token asynchronously with the recently created tokenOptions
+        mySession.generateToken(tokenOptions, function (token) {
+
+            // Store the new token in the collection of tokens
+            mapSessionIdTokens[sessionId].push(token);
+
+            // Return session template with all the needed attributes
+            res.render('session.ejs', {
+                sessionId: sessionId,
+                token: token,
+                nickName: clientData,
+                userName: req.session.loggedUser,
+                sessionName: sessionName
+            });
+        });
+    });
+}
+</code></pre>
+
+<p>We are almost there! Now in <code>session.html</code> JavaScript code (preceded by a tag <code>&lt;script&gt;</code>) we can init a new Session with <em>sessionId</em> and connect to it with <em>token</em>:</p>
+<pre><code class="javascript">// Get all the attributes from the template in EJS style
+var sessionId = &lt;%- JSON.stringify(sessionId) %&gt;;
+var token = &lt;%- JSON.stringify(token) %&gt;;
+var nickName = &lt;%- JSON.stringify(nickName) %&gt;;
+var userName = &lt;%- JSON.stringify(userName) %&gt;;
+var sessionName = &lt;%- JSON.stringify(sessionName) %&gt;;
+
+// --- 1) Get an OpenVidu object and init a session with the retrieved sessionId ---
+
+var OV = new OpenVidu();
+var session = OV.initSession(sessionId);
+
+
+// --- 2) Specify the actions when events take place ---
+
+// On every new Stream received...
+session.on('streamCreated', function (event) {
+
+    // Subscribe to the Stream to receive it
+    // HTML video will be appended to element with 'subscriber' id
+    var subscriber = session.subscribe(event.stream, 'subscriber');
+
+    // When the HTML video has been appended to DOM...
+    subscriber.on('videoElementCreated', function (event) {
+
+        // Add a new &lt;p&gt; element for the user's name and nickname just below its video
+        appendUserData(event.element, subscriber.stream.connection);
+    });
+});
+
+// On every Stream destroyed...
+session.on('streamDestroyed', function (event) {
+    // Delete the HTML element with the user's name and nickname
+    removeUserData(event.stream.connection);
+});
+
+
+// --- 3) Connect to the session passing the retrieved token and some more data from
+//         the client (in this case a JSON with the nickname chosen by the user) ---
+
+session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}', function (err) {
+
+    // If the connection is successful, initialize a publisher and publish to the session
+    if (!err) {
+
+        // Here we check somehow if the user has at least 'PUBLISHER' role before
+        // trying to publish its stream. Even if someone modified the client's code and
+        // published the stream, it wouldn't work if the token sent in Session.connect
+        // method doesn't belong to a 'PUBLIHSER' role
+        if (isPublisher(userName)) {
+
+            // --- 4) Get your own camera stream ---
+
+            var publisher = OV.initPublisher('publisher', {
+                audio: true,
+                video: true,
+                quality: 'MEDIUM'
+            });
+
+            // --- 5) Publish your stream ---
+
+            session.publish(publisher);
+
+        } else {
+            console.warn('You don\'t have permissions to publish');
+        }
+    } else {
+        console.warn('Error connecting to the session:', error.code, error.message);
+    }
+}); 
+</code></pre>
+
+<p>The user will now see its own video on the page. The connection to the session has completed!</p>
+<hr />
+<h3 id="3-another-user-connects-to-the-video-call">3) Another user connects to the video-call</h3>
+<p>The process would be exactly the same as before until <code>server.js</code> executes controller at <code>/api-sessions/get-sessionid-token</code>. Now session 'TUTORIAL' already exists, so in the <em>if-else</em> statement the <em>if</em> branch would be the one executed:</p>
+<pre><code class="javascript">if (mapSessionNameSession[sessionName]) {
+    // Session already exists: return existing sessionId and a new token
+
+    // Get the existing Session from the collection
+    var mySession = mapSessionNameSession[sessionName];
+
+    // Generate a new token asynchronously with the recently created tokenOptions
+    mySession.generateToken(tokenOptions, function (token) {
+
+        // Get the existing sessionId
+        var sessionId = mySession.getSessionId();
+
+        // Store the new token in the collection of tokens
+        mapSessionIdTokens[sessionId].push(token);
+
+        // Return session template with all the needed attributes
+        res.render('session.ejs', {
+            sessionId: sessionId,
+            token: token,
+            nickName: clientData,
+            userName: req.session.loggedUser,
+            sessionName: sessionName
+        });
+    });
+}
+</code></pre>
+
+<p>The code executed in <code>session.html</code> <em>&lt; script &gt;</em> tag would also be the same. After the <code>Session.publish()</code> method has been succesful, both users will be seeing each other's video, as well as the username and the nickname below it.</p>
+<hr />
+<h3 id="4-users-leave-the-video-call">4) Users leave the video-call</h3>
+<p>After a while both users decide to leave the session. Apart from calling <code>session.disconnect()</code> (triggered in <code>leaveSession()</code> <em>onclick</em> method) to destroy the connection on openvidu-server, we need another POST operation to let the backend know that certain user has left the session so it can update the collections with the active sessions and tokens.</p>
+<p>In <code>session.html</code> template the "Leave session" button actually performs a POST operation to path <code>/leave-session</code> with a hidden form. Notice that when the user clicks the submit button, a POST operation will be triggered but also the <code>leaveSession()</code> method. First updates our backend. Second updates our openvidu-server.</p>
+<pre><code class="html">&lt;form action=&quot;/leave-session&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;session-name&quot; th:value=&quot;${sessionName}&quot;&gt;&lt;/input&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;token&quot; th:value=&quot;${token}&quot;&gt;&lt;/input&gt;
+    &lt;button type=&quot;submit&quot; onclick=&quot;leaveSession()&quot;&gt;Leave session&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>In <code>server.js</code> we update the collections at <code>/leave-session</code>:</p>
+<pre><code class="javascript">app.post('/leave-session', function (req, res) {
+    // Check the user is logged ...
+
+    // Retrieve params from POST body
+    var sessionName = req.body.sessionname;
+    var token = req.body.token;
+
+    // If the session exists (&quot;TUTORIAL&quot; in this case)
+    var mySession = mapSessionNameSession[sessionName];
+    if (mySession) {
+        var tokens = mapSessionIdTokens[mySession.getSessionId()];
+        if (tokens) {
+            var index = tokens.indexOf(token);
+
+            // If the token exists
+            if (index !== -1) {
+                // Token removed!
+                tokens.splice(index, 1);
+            } else {
+                res.status(500).send('The TOKEN wasn\'t valid');
+            }
+            if (mapSessionIdTokens[mySession.getSessionId()].length == 0) {
+                // Last user left: session &quot;TUTORIAL&quot; must be removed
+                delete mapSessionNameSession[sessionName];
+            }
+            res.redirect('/dashboard');
+        } else {
+            res.status(500).send('The SESSIONID wasn\'t valid');
+        }
+    } else {
+        res.status(500).send('The SESSION does not exist');
+    }
+}
+</code></pre>
+
+<p>When the last user leaves the session <code>delete mapSessionNameSession[sessionName]</code> will be executed: this means the session is empty and that it is going to be closed. The <em>sessionId</em> and all <em>token</em> params associated to it will be invalidated.</p>
+<hr />
+<blockquote>
+<p>At this point we have covered all the important code from the tutorial. With this scenario we have seen the most common use-case, but you can modify whatever you want to suit your needs. And remember that this is just one of the many possible approaches: <strong>you can implement your frontend and your backend as you want</strong>. </p>
+<p>The only actual requirements are getting <strong><em>sessionId</em></strong> and <strong><em>token</em></strong> params from  <strong><em>openvidu-server</em></strong> (by using one of the available clients or with the REST API) and using them along with <strong><em>openvidu-browser</em></strong> to connect your clients to the sessions.</p>
+</blockquote> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../api/" class="btn btn-xs btn-primary float-right" title="API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-js-node/" class="btn btn-xs btn-primary" title="openvidu-js-node"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/tutorials/openvidu-mvc-node.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>

@@ -1,0 +1,410 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - openvidu-insecure-angular
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('openvidu-insecure-angular')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop').click(function (i, e) {
+			$('li.subnav_drop').not(this).find('ul.subnav').hide();
+			$(this).find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#float-panel').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('openvidu-insecure-angular')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+	<div class="holder range">
+		<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12"> <div id="float-panel" class="float-panel" data-top="56">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Home</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Tutorials</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../">Intro</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-insecure-js/">openvidu-insecure-js</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 current">
+        <a class="current" href="./">openvidu-insecure-angular</a>
+        
+         
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-js-java/">openvidu-js-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-mvc-java/">openvidu-mvc-java</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-js-node/">openvidu-js-node</a>
+        
+    </li>
+
+
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../openvidu-mvc-node/">openvidu-mvc-node</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>API</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../../api/">API</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+    
+   
+    <li class="subnav_drop"><span>Deployment</span>
+<ul class="subnav">
+        
+             
+
+    <li class="toctree-l1 ">
+        <a class="" href="../../deployment/">Deployment</a>
+        
+    </li>
+
+
+        
+</li>
+</ul>
+    
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div></div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h1 id="openvidu-insecure-angular">openvidu-insecure-angular</h1>
+<p>This is the Angular version of <em>openvidu-insecure-js</em>. Try it if you plan to use Angular framework for your frontend.</p>
+<h2 id="understanding-this-example">Understanding this example</h2>
+<p align="center">
+  <img src="https://docs.google.com/uc?id=0B61cQ4sbhmWSbmtwcXNnXy1ZSkU">
+</p>
+
+<p>OpenVidu is composed by the three modules displayed on the image above in its insecure version.</p>
+<ul>
+<li><strong>openvidu-browser</strong>: NPM package for your Angular app. It allows you to manage your video-calls straight away from your clients</li>
+<li><strong>openvidu-server</strong>: Java application that controls Kurento Media Server</li>
+<li><strong>Kurento Media Server</strong>: server that handles low level operations of media flow transmissions</li>
+</ul>
+<blockquote>
+<p>You will only have to make use of <strong>openvidu-browser</strong> NPM package to get this sample app working</p>
+</blockquote>
+<h2 id="executing-this-example">Executing this example</h2>
+<ol>
+<li>
+<p>Clone the repo:</p>
+<p><code>git clone https://github.com/OpenVidu/openvidu-tutorials.git</code></p>
+</li>
+<li>
+<p>You will need angular-cli to serve the Angular frontend. You can install it with the following command:</p>
+<p><code>npm install -g @angular/cli</code></p>
+</li>
+<li>
+<p>To run the sample application, execute the following command in the project:</p>
+<p><code>cd openvidu-insecure-angular
+npm install
+ng serve</code></p>
+</li>
+<li>
+<p><em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<p><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.security=false openvidu/openvidu-server-kms</code></p>
+</li>
+<li>
+<p>Go to <a href="http://localhost:4200"><code>localhost:4200</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+</li>
+</ol>
+<h2 id="understanding-the-code">Understanding the code</h2>
+<p>This is an Angular project generated with angular-cli, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. After getting <code>openvidu-browser</code> NPM package (<code>npm install openvidu-browser</code>), we will focus on the following files under <code>src/app/</code> folder:</p>
+<ul>
+<li><code>app.component.ts</code>: AppComponent, main component of the app. It contains the functionalities for joining a video-call and for handling the video-calls themselves.</li>
+<li><code>app.component.html</code>: HTML for AppComponent.</li>
+<li><code>app.component.css</code>: CSS for AppComponent.</li>
+<li><code>stream.component.css</code>: StreamComponent, auxiliary component to manage Stream objects on our own. It wraps the final HTML <code>&lt;video&gt;</code> which will display the video of its Stream property, as well as the user's nickname in a <code>&lt;p&gt;</code> element.</li>
+</ul>
+<p>Let's see how <code>app.component.ts</code> uses <code>openvidu-browser</code>:</p>
+<ul>
+<li>First line imports the necessary objects from <code>openvidu-browser</code>:</li>
+</ul>
+<pre><code class="typescript">import { OpenVidu, Session, Stream } from 'openvidu-browser';
+</code></pre>
+
+<ul>
+<li><code>app.component.ts</code> declares the following properties:</li>
+</ul>
+<pre><code class="typescript">// OpenVidu objects
+OV: OpenVidu;
+session: Session;
+
+// Streams to feed StreamComponent's
+remoteStreams: Stream[] = [];
+localStream: Stream;
+
+// Join form
+sessionId: string;
+token: string;
+</code></pre>
+
+<p><code>OpenVidu</code> object will allow us to get a <code>Session</code> object, which is declared just after it. <code>remoteStreams</code> array will store the active streams of other users in the video-call and <code>localStream</code> will be your own local webcam stream. Finally, <code>sessionId</code> and <code>token</code> params simply represent the video-call and your participant's nickname, as you will see in a moment.</p>
+<ul>
+<li>Whenever a user clicks on the submit input defined in <code>app.component.html</code>, <code>joinSession()</code> method is called:</li>
+</ul>
+<pre><code class="javascript">// --- 1) Get an OpenVidu object and init a session with a sessionId ---
+
+// OpenVidu listening on &quot;localhost:8443&quot;
+this.OV = new OpenVidu('wss://' + location.hostname + ':8443/');
+
+// We will join the video-call &quot;sessionId&quot;
+this.session = this.OV.initSession(this.sessionId);
+</code></pre>
+
+<p>Since we are in a local sample app, <code>OV</code> is initialize with <code>localhost:8443</code> as its <em>openvidu-server</em> URL. <code>session</code> is initialize with <code>sessionId</code> param: this means we will connect to <code>sessionId</code> video-call. In this case, this parameter is binded from an <code>&lt;input&gt;</code> element of <code>app.component.html</code>, which may be filled by the user.</p>
+<pre><code class="javascript">// --- 2) Specify the actions when events take place ---
+
+// On every new Stream received...
+this.session.on('streamCreated', (event) =&gt; {
+
+    // Add the new stream to 'remoteStreams' array
+    this.remoteStreams.push(event.stream);
+
+    // Subscribe to the Stream to receive it. Second parameter is an empty string 
+    // so OpenVidu doesn't create an HTML video by its own 
+    this.session.subscribe(event.stream, '');
+});
+
+// On every Stream destroyed...
+this.session.on('streamDestroyed', (event) =&gt; {
+
+    // Avoid OpenVidu trying to remove the HTML video element
+    event.preventDefault();
+
+    // Remove the stream from 'remoteStreams' array
+    this.deleteRemoteStream(event.stream);
+});
+</code></pre>
+
+<p>Here we subscribe to the Session events that interest us. As we are using Angular framework, a good approach will be treating each Stream as a component, contained in a StreamComponent. Thus, we need to store each new stream we received in an array (<code>remoteStreams</code>), and we must remove from it every deleted stream whenever it is necessary. To achieve this, we use the following events:</p>
+<p><code>streamCreated</code>: for each new Stream received by OpenVidu, we store it in our <code>remoteStreams</code> array and immediately subscribe to it so we can receive its video (empty string as second parameter, so OpenVidu doesn't create an HTML video on its own). HTML template of AppComponent will show the new video, as it contains an <code>ngFor</code> directive which will create a new StreamComponent for each Stream object stored in the array:</p>
+<pre><code class="html">&lt;div id=&quot;subscriber&quot;&gt;
+    &lt;div *ngFor=&quot;let s of this.remoteStreams&quot;&gt;
+        &lt;stream-component [stream]=&quot;s&quot;&gt;&lt;/stream-component&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><code>streamDestroyed</code>: for each Stream that has been destroyed (which means a user has left the video-call), we remove it from <code>remoteStreams</code> array, so Angular will automatically delete the required StreamComponent from HTML. We call <code>event.preventDefault()</code> to cancel OpenVidu default behaviour towards <code>streamDestroyed</code> event, which is the deletion of the previously created HTML video element on <code>streamCreated</code> event. Because we are handling the video elements by ourselves taking advantage of Angular capabilities, we tell OpenVidu not to create them on <code>streamCreated</code> and not to delete them on <code>streamDestroyed</code>, by passing an empty string as second parameter on <code>Session.subscribe()</code> method on <code>streamCreated</code> and by calling <code>event.preventDefault()</code> on <code>streamDestroyed</code>.</p>
+<ul>
+<li>Finally connect to the session and publish your webcam:</li>
+</ul>
+<pre><code class="javascript">
+// --- 3) Connect to the session ---
+
+// 'token' param irrelevant when using insecure version of OpenVidu. Second param will be received by every user
+// in Stream.connection.data property, which will be appended to DOM as the user's nickname
+this.session.connect(this.token, '{&quot;clientData&quot;: &quot;' + this.token + '&quot;}', (error) =&gt; {
+
+    // If the connection is successful...
+    if (!error) {
+
+    // --- 4) Get your own camera stream with the desired resolution ---
+
+    // Both audio and video will be active. HTML video element will be appended to element with 'publisher' id
+    let publisher = this.OV.initPublisher('', {
+        audio: true,
+        video: true,
+        quality: 'MEDIUM'
+    });
+
+    //Store your webcam stream in 'localStream' object
+    this.localStream = publisher.stream;
+
+    // --- 5) Publish your stream ---
+
+    this.session.publish(publisher);
+
+    } else {
+    console.log('There was an error connecting to the session:', error.code, error.message);
+    }
+});
+</code></pre>
+
+<p><code>token</code> param is irrelevant when using insecure version of OpenVidu. Second parameter will supply the user's nickname showed by StreamComponent inside its <code>&lt;p&gt;</code> element. So in this case it is a JSON formatted string with a "clientData" tag with "token" value, which is retrieved from HTML input <code>&lt;input type="text" name="token" id="token" [(ngModel)]="token" required&gt;</code> (filled by the user).</p>
+<p>In the callback of <code>Session.connect</code> method, we check the connection has been succesful (<code>error</code> value must be <em>null</em>) and right after that we get a <code>Publisher</code> object with both audio and video activated and MEDIUM quality. We then store our local Stream (contained in <code>Publisher.stream</code> object) in <code>localStream</code> and publish the Publisher object through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event.</p>
+<p>With regard to our local Stream, AppComponent's HTML template has also one StreamComponent declaration ready to show our own webcam as we did with remote streams:</p>
+<pre><code class="html">&lt;div id=&quot;publisher&quot;&gt;
+    &lt;div *ngIf=&quot;this.localStream&quot;&gt;
+        &lt;stream-component [stream]=&quot;this.localStream&quot;&gt;&lt;/stream-component&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Last point worth considering is the <code>ngDoCheck()</code> implementation of StreamComponent. As we are handling Stream objects by ourselves (task which usually is taken care by OpenVidu), and because the URL of Stream objects takes some time to get its final value as the WebRTC negotiation takes place, we must listen to any change in <code>stream</code> @Input property. This allows us to update <code>videoSrc</code> value of the component, which finally ends up being the <em>src</em> value of the <code>&lt;video&gt;</code> element. If we didn't do this, the Stream object will update its <em>src</em> property, but our StreamComponent would keep the same initial <code>videoSrc</code> value. This ensures that all our StreamComponent's will properly display all the videos in the video-call using the correct <em>src</em> value.</p>
+<pre><code class="javascript">ngDoCheck() { // Detect any change in 'stream' property
+
+    // If 'src' of Stream object has changed, 'videoSrc' value must be updated
+    if (!(this.videSrcUnsafe === this.stream.getVideoSrc())) {
+
+        // Angular mandatory URL sanitization
+        this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(this.stream.getVideoSrc());
+
+        // Auxiliary value to store the URL as a string for upcoming comparisons
+        this.videSrcUnsafe = this.stream.getVideoSrc();
+    }
+}
+</code></pre> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../openvidu-js-java/" class="btn btn-xs btn-primary float-right" title="openvidu-js-java">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-insecure-js/" class="btn btn-xs btn-primary" title="openvidu-insecure-js"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/tutorials/openvidu-insecure-angular.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>

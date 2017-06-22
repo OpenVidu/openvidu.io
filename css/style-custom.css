@@ -1,0 +1,149 @@
+.navbar .icon {
+    font-size: 20px;
+}
+
+.expand .social-icon a {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.expand .social-icon i {
+    font-size: 40px;
+}
+
+.img-tutorials {
+    margin: auto;
+    max-height: 250px;
+}
+
+p.subheading {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.social-footer-icon {
+    font-size: 33px;
+}
+
+.up-icon::before {
+    line-height: inherit;
+}
+
+.navbar-alt .navbar-nav>li>a,
+.navbar-alt .navbar-nav>li>span {
+    font-size: 14px;
+}
+
+#get-connected-community {
+    padding-top: 100px;
+    padding-bottom: 90px;
+}
+
+#get-connected-community .connected-icon a:hover .icon {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.bg-custom {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.custom-page-top {
+    height: 380px;
+}
+
+#float-panel ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#float-panel ul li span:hover,
+#float-panel ul li a:hover {
+    border-left: 4px;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+    border-color: #de3053;
+    color: #DE3053;
+    border-style: solid;
+    padding-left: 5px;
+}
+
+#float-panel ul.subnav {
+    padding-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#float-panel li span,
+#float-panel li a {
+    color: #777;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+#float-panel li a.current {
+    border-left: 4px;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+    border-color: #de3053;
+    color: #DE3053;
+    border-style: solid;
+    padding-left: 5px;
+}
+
+#float-panel li span:hover {
+    color: #DE3053;
+}
+
+#float-panel li.subnav_drop {
+    border-top: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-left: 0;
+    border-right: 0;
+    border-color: #eeeeee;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#doc-container .docs-tutorials img {
+    max-height: 100px;
+}
+
+#doc-container #blog.docs-tutorials {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.float-right {
+    float: right;
+}
+
+#edit-github {
+    margin-top: 15px;
+}
+
+#edit-github a:hover {
+    color: #DE3053;
+    font-weight: bold;
+}
+
+#doc-container h1 {
+    font-size: 40px;
+}
+
+#doc-container h2 {
+    font-size: 30px;
+}
+
+#doc-container h2#section-title{
+    font-size: 50px;
+}

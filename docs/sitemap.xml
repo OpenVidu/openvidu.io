@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+        
+    <url>
+     <loc>/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/tutorials/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/openvidu-insecure-js/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/openvidu-insecure-angular/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/openvidu-js-java/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/openvidu-mvc-java/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/openvidu-js-node/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/openvidu-mvc-node/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/api/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/deployment/</loc>
+     <lastmod>2017-06-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+</urlset>
