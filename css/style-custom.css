@@ -114,6 +114,11 @@ p.subheading {
     padding-top: 5px;
 }
 
+#float-panel .toctree-l1 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
 #doc-container .docs-tutorials img {
     max-height: 100px;
 }
@@ -144,6 +149,26 @@ p.subheading {
     font-size: 30px;
 }
 
-#doc-container h2#section-title{
+#doc-container h2#section-title {
     font-size: 50px;
+}
+
+#doc-container table {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#doc-container table tr {
+    border-bottom: 1px;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-color: #eeeeee;
+}
+
+#doc-container table td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 12px;
 }

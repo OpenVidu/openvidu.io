@@ -202,7 +202,547 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h2 id="section-title">OpenVidu API</h2> 
+							 <h2 id="section-title">OpenVidu API</h2>
+
+<hr>
+
+<blockquote>
+<p>NOTE: all input parameters ("Parameters" columns) are listed in strict order, optional ones in <em>italics</em></p>
+</blockquote>
+<h2 id="openvidu-browser">openvidu-browser</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#openvidu">OpenVidu</a></td>
+<td>Use it to initialize your sessions and publishers</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>Represents a video call. It can also be seen as a room where multiple users can connect. Participants who publish their videos to a session will be seen by the rest of users connected to that specific session</td>
+</tr>
+<tr>
+<td>Publisher</td>
+<td>Packs local media streams. Users can publish it to a session</td>
+</tr>
+<tr>
+<td>Subscriber</td>
+<td>Packs remote media streams. Users automatically receive them when others publish their streams</td>
+</tr>
+<tr>
+<td>Stream</td>
+<td>Represents each one of the videos send and receive by a user in a session. Therefore each Publisher and Subscriber has an attribute of type Stream</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>Represents each one of the user's connection to the session (the local one and other user's connections). Therefore each Session and Stream object has an attribute of type Connection</td>
+</tr>
+</tbody>
+</table>
+<h4 id="openvidu"><strong>OpenVidu</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initSession</code></td>
+<td>Session</td>
+<td><em><code>apikey:string</code></em><br/><code>sessionId:string</code></td>
+<td>Returns a session with id <strong>sessionId</strong></td>
+</tr>
+<tr>
+<td><code>initPublisher</code></td>
+<td>Publisher</td>
+<td><code>parentId:string</code><br/><em><code>cameraOptions:any</code></em><br/><em><code>callback:function</code></em></td>
+<td>Starts local video stream, appending it to <strong>parentId</strong> HTML element, with the specific <strong>cameraOptions</strong> settings and executing <strong>callback</strong> function in the end. <em>cameraOptions</em> must be an object with three properties: <strong>{audio:boolean, video:boolean, quality:string}</strong>, being <em>audio</em>/<em>video</em> false if you want to initialize them muted (<em>Publisher.publishAudio(true)</em> and <em>Publisher.publishVideo(true)</em> can unmute them later) and <em>quality</em> must be 'LOW', 'MEDIUM' or 'HIGH'</td>
+</tr>
+<tr>
+<td><code>checkSystemRequirements</code></td>
+<td>Number</td>
+<td></td>
+<td>Returns 1 if the browser supports WebRTC, 0 otherwise</td>
+</tr>
+<tr>
+<td><code>getDevices</code></td>
+<td>Promise</td>
+<td><code>callback(error, deviceInfo):function</code></td>
+<td>Collects information about the media input and output devices available on the system, returned in <strong>deviceInfo</strong> array</td>
+</tr>
+</tbody>
+</table>
+<h4 id="session"><strong>Session</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connect</code></td>
+<td></td>
+<td><code>token:string</code><br/><em><code>metadata:string</code></em><br/><code>callback(error):function</code></td>
+<td>Connects to the session using <strong>token</strong> and executes <strong>callback</strong> in the end (<em>error</em> parameter null if success). <strong>metadata</strong> parameter allows you to pass a string as extra data to share with other users when they receive <em>participantJoined</em> event. You can also add metadata through openvidu-backend-client when generating tokens (see <a href="#tokenoptions">TokenOptions</a>). The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
+</tr>
+<tr>
+<td><code>disconnect</code></td>
+<td></td>
+<td></td>
+<td>Leaves the session, destroying all streams and deleting the user as a participant</td>
+</tr>
+<tr>
+<td><code>publish</code></td>
+<td></td>
+<td><code>publisher:Publisher</code></td>
+<td>Publishes the specific user's local stream contained in <strong>publisher</strong> object to the session</td>
+</tr>
+<tr>
+<td><code>unpublish</code></td>
+<td></td>
+<td><code>publisher:Publisher</code></td>
+<td>Unpublishes the specific user's local stream contained in <strong>publisher</strong> object</td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td></td>
+<td><code>eventName:string</code><br/><code>callback:function</code></td>
+<td><strong>callback</strong> function will be triggered each time <strong>eventName</strong> event is recieved</td>
+</tr>
+<tr>
+<td><code>once</code></td>
+<td></td>
+<td><code>eventName:string</code><br/><code>callback:function</code></td>
+<td><strong>callback</strong> function will be triggered once when <strong>eventName</strong> event is recieved. The listener is removed immediately</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td></td>
+<td><code>eventName:string</code><br/><code>eventHandler:any</code></td>
+<td>Removes <strong>eventHandler</strong> handler for <strong>eventName</strong> event</td>
+</tr>
+<tr>
+<td><code>subscribe</code></td>
+<td>Subscriber</td>
+<td><code>stream:Stream</code><br/><code>htmlId:string</code><br/><em><code>videoOptions:any</code></em></td>
+<td>Subscribes to <strong>stream</strong>, appending a new HTML Video element to DOM element of <strong>htmlId</strong> id, with <strong>videoOptions</strong> settings. This method is usually called in the callback of <em>streamCreated</em> event</td>
+</tr>
+<tr>
+<td><code>unsubscribe</code></td>
+<td></td>
+<td><code>subscriber:Subscriber</code></td>
+<td>Unsubscribes from <strong>subscriber</strong>, automatically removing its HTML Video element</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>string</td>
+<td>The unique id of the session</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>streamCreated</code></td>
+<td>stream:Stream</td>
+<td>Triggered by Session object when a new Stream has been created and added to it</td>
+</tr>
+<tr>
+<td><code>streamDestroyed</code></td>
+<td>stream:Stream<br/>preventDefault():Function</td>
+<td>Triggered by Session object when an existing Stream has been destroyed. The default behaviour is the deletion of the HTML video element associated to it. To prevent it, call <code>preventDefault()</code> method on the event object</td>
+</tr>
+<tr>
+<td><code>connectionCreated</code></td>
+<td>connection:Connection</td>
+<td>Triggered by Session object whenever any user has joined the session. This includes dispatching one event for each user that joins the session when you are already connected to it, one for each existing participant the first time you connect to the session and once for your own local connection</td>
+</tr>
+<tr>
+<td><code>connectionDestroyed</code></td>
+<td>connection:Connection</td>
+<td>Triggered by Session object whenever a user leaves the session. This event can also mean that <code>streamDestroyed</code> events could be dispatched, depending on the streams associated to it</td>
+</tr>
+<tr>
+<td><code>sessionDisconnected</code></td>
+<td>preventDefault():Function</td>
+<td>Triggered by Session object when the user disconnects from the Session. Default behaviour is the deletion of all HTML video elements. Call <code>preventDefault()</code> on event object to prevent it and delete them by yourself</td>
+</tr>
+</tbody>
+</table>
+<h4 id="publisher"><strong>Publisher</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>publishAudio</code></td>
+<td></td>
+<td><code>value:boolean</code></td>
+<td>Enable or disable the audio track depending on whether value is <em>true</em> or <em>false</em></td>
+</tr>
+<tr>
+<td><code>publishVideo</code></td>
+<td></td>
+<td><code>value:boolean</code></td>
+<td>Enable or disable the video track depending on whether value is <em>true</em> or <em>false</em></td>
+</tr>
+<tr>
+<td><code>destroy</code></td>
+<td>Publisher</td>
+<td></td>
+<td>Delets the publisher object and removes it from DOM. The rest of users will trigger a <em>streamDestroyed</em> event</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accessAllowed</code></td>
+<td>boolean</td>
+<td><em>true</em> if the user has granted access to the camera, <em>false</em> otherwise</td>
+</tr>
+<tr>
+<td><code>element</code></td>
+<td>Element</td>
+<td>The parent HTML Element which contains the publisher</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>The id of the HTML Video element of the publisher</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>Stream</td>
+<td>The stream object of the publisher</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>Session</td>
+<td>The session to which the publisher belongs</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accessAllowed</code></td>
+<td></td>
+<td>Triggered by Publisher object when the user has granted access to the camera/microphone</td>
+</tr>
+<tr>
+<td><code>accessDenied</code></td>
+<td></td>
+<td>Triggered by Publisher object when the user has rejected access to the camera/microphone</td>
+</tr>
+<tr>
+<td><code>videoElementCreated</code></td>
+<td>element:HTMLVideoElement</td>
+<td>Triggered by Publisher object inmediately after a new video element has been added to DOM</td>
+</tr>
+</tbody>
+</table>
+<h4 id="subscriber"><strong>Subscriber</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td>Element</td>
+<td>The parent HTML Element which contains the subscriber</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>The id of the HTML Video element of the subscriber</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>Stream</td>
+<td>The stream object of the subscriber</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>videoElementCreated</code></td>
+<td>element:HTMLVideoElement</td>
+<td>Triggered by Subscriber object inmediately after a new video element has been added to DOM</td>
+</tr>
+</tbody>
+</table>
+<h4 id="connection"><strong>Connection</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connectionId</code></td>
+<td>string</td>
+<td>Unique identifier of the connection</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>string</td>
+<td>Data associated to this connection (and therefore to certain user). This is an important field: it allows you to broadcast all the information you want for each user (a username, for example)</td>
+</tr>
+<tr>
+<td><code>creationTime</code></td>
+<td>number</td>
+<td>Time when this connection was created</td>
+</tr>
+</tbody>
+</table>
+<h2 id="openvidu-java-client">openvidu-java-client</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenVidu</td>
+<td>Use it to create all the sessions you need</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>Allows for the creation of tokens</td>
+</tr>
+<tr>
+<td>OpenViduRole</td>
+<td>Enum that defines the values accepted by <em>TokenOptions.Builder.role(OpenViduRole role)</em> method</td>
+</tr>
+<tr>
+<td>TokenOptions</td>
+<td>Customize each token with this class when generating them</td>
+</tr>
+</tbody>
+</table>
+<h4 id="openvidu_1"><strong>OpenVidu</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenVidu()</td>
+<td></td>
+<td><code>String:urlOpenViduServer</code><br><code>String:secret</code></td>
+<td>The constructor receives the URL of your OpenVidu Server and the secret shared with it</td>
+</tr>
+<tr>
+<td>createSession()</td>
+<td>Session</td>
+<td></td>
+<td>Get a Session object by calling this method. You can then store it as you want</td>
+</tr>
+</tbody>
+</table>
+<h4 id="session_1"><strong>Session</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getSessionId()</td>
+<td>String</td>
+<td></td>
+<td>Returns the unique identifier of the session. You will need to return this parameter to the client side to pass it during the connection process to the session</td>
+</tr>
+<tr>
+<td>generateToken()</td>
+<td>String</td>
+<td><em><code>TokenOptions:tokenOptions</code></em></td>
+<td>The value returned is required in the client side just as the sessionId in order to connect to a session</td>
+</tr>
+</tbody>
+</table>
+<h4 id="openvidurole"><strong>OpenViduRole</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUBSCRIBER</td>
+<td>They can subscribe to published streams of other users</td>
+</tr>
+<tr>
+<td>PUBLISHER</td>
+<td>They can subscribe to published streams of other users and publish their own streams</td>
+</tr>
+<tr>
+<td>MODERATOR</td>
+<td>They can subscribe to published streams of other users, publish their own streams and force <em>unpublish()</em> and <em>disconnect()</em> over a third-party stream or user</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tokenoptions"><strong>TokenOptions</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getData()</td>
+<td>String</td>
+<td></td>
+<td>Returns the metadata associated to the token</td>
+</tr>
+<tr>
+<td>getRole()</td>
+<td>OpenViduRole</td>
+<td></td>
+<td>Returns the role associated to the token</td>
+</tr>
+</tbody>
+</table>
+<h5 id="tokenoptionsbuilder-inner-static-class"><strong>TokenOptions.Builder</strong> <em>(inner static class)</em></h5>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TokenOptions.Builder()</td>
+<td></td>
+<td></td>
+<td>Constructor</td>
+</tr>
+<tr>
+<td>build()</td>
+<td>TokenOptions</td>
+<td></td>
+<td>Returns a new <strong>TokenOptions</strong> object with the stablished properties. Default values if methods <em>data()</em> and <em>role()</em> are not called are an empty string and OpenViduRole.PUBLISHER, respectively</td>
+</tr>
+<tr>
+<td>data()</td>
+<td>TokenOptions.Builder</td>
+<td><code>String:data</code></td>
+<td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
+</tr>
+<tr>
+<td>role()</td>
+<td>TokenOptions.Builder</td>
+<td><code>OpenViduRole:role</code></td>
+<td>The role associated to this token</td>
+</tr>
+</tbody>
+</table> 
 						</div>
 					</div> <footer>
 <hr>

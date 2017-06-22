@@ -15,12 +15,12 @@ top-subtitle: Send us a message with the form below. We will reply as soon as po
                 <!-- Contact Form will be functional only on your server. Upload to your server when testing. -->
                 <form method="post" action="php/contact-form.php" name="contactform" id="contactform">
                     <fieldset>
-                        <input name="name" type="text" id="name" placeholder="Name" />
-                        <input name="email" type="text" id="email" placeholder="Email" />
-                        <input name="subject" type="text" id="subject" placeholder="Subject" />
+                        <input name="name" type="text" id="name" placeholder="Name" required/>
+                        <input name="email" type="email" id="email" placeholder="Email" required/>
+                        <input name="subject" type="text" id="subject" placeholder="Subject" required/>
                     </fieldset>
                     <fieldset>
-                        <textarea name="comments" cols="40" rows="3" id="comments" placeholder="Message"></textarea>
+                        <textarea name="comments" cols="40" rows="3" id="comments" placeholder="Message" required></textarea>
                     </fieldset>
                     <input type="submit" class="submit" id="submit" value="Send Message" />
                 </form>
