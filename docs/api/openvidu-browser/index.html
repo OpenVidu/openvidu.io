@@ -1,15 +1,19 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - API
+title: OpenVidu Documentation - openvidu-browser
 active: documentation
 ---
 
 <script src="/js/jquery-3.2.1.slim.min.js"></script>
 
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('API')").each(function (i, e) {
+		$(".subnav").find("li:contains('openvidu-browser')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -20,16 +24,16 @@ active: documentation
 				"visibility": "visible"
 			});
 		});
-		$('li.subnav_drop').click(function (i, e) {
-			$('li.subnav_drop').not(this).find('ul.subnav').hide();
-			$(this).find('ul.subnav').toggle();
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
 		});
 
 		var minHeight = $('#sticky-menu').outerHeight() + 100;
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('API')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('openvidu-browser')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -47,12 +51,12 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>Home</span>
+<li class="subnav_drop"><div><span>Home</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="..">Home</a> 
+    <a class="" href="../..">Home</a> 
 </li>
 
  
@@ -65,48 +69,48 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>Tutorials</span>
+<li class="subnav_drop"><div><span>Tutorials</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/">Intro</a> 
+    <a class="" href="../../tutorials/">Intro</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
  
@@ -119,12 +123,24 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>API</span>
+<li class="subnav_drop"><div><span>API</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 current">
-    <a class="current" href="./">API</a>  
+    <a class="current" href="./">openvidu-browser</a>  
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-java-client/">openvidu-java-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-node-client/">openvidu-node-client</a> 
 </li>
 
  
@@ -137,12 +153,30 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>Deployment</span>
+<li class="subnav_drop"><div><span>Deployment</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../deployment/">Deployment</a> 
+    <a class="" href="../../deployment/">Deploying on AWS</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
 </li>
 
  
@@ -165,14 +199,13 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h2 id="section-title">OpenVidu API</h2>
+							 <h2 id="section-title">openvidu-browser API</h2>
 
 <hr>
 
 <blockquote>
 <p>NOTE: all input parameters ("Parameters" columns) are listed in strict order, optional ones in <em>italics</em></p>
 </blockquote>
-<h2 id="openvidu-browser">openvidu-browser</h2>
 <table>
 <thead>
 <tr>
@@ -182,27 +215,27 @@ active: documentation
 </thead>
 <tbody>
 <tr>
-<td>OpenVidu</td>
+<td><a href="#openvidu">OpenVidu</a></td>
 <td>Use it to initialize your sessions and publishers</td>
 </tr>
 <tr>
-<td>Session</td>
+<td><a href="#session">Session</a></td>
 <td>Represents a video call. It can also be seen as a room where multiple users can connect. Participants who publish their videos to a session will be seen by the rest of users connected to that specific session</td>
 </tr>
 <tr>
-<td>Publisher</td>
+<td><a href="#publisher">Publisher</a></td>
 <td>Packs local media streams. Users can publish it to a session</td>
 </tr>
 <tr>
-<td>Subscriber</td>
+<td><a href="#subscriber">Subscriber</a></td>
 <td>Packs remote media streams. Users automatically receive them when others publish their streams</td>
 </tr>
 <tr>
-<td>Stream</td>
+<td><a href="#stream">Stream</a></td>
 <td>Represents each one of the videos send and receive by a user in a session. Therefore each Publisher and Subscriber has an attribute of type Stream</td>
 </tr>
 <tr>
-<td>Connection</td>
+<td><a href="#connection">Connection</a></td>
 <td>Represents each one of the user's connection to the session (the local one and other user's connections). Therefore each Session and Stream object has an attribute of type Connection</td>
 </tr>
 </tbody>
@@ -517,6 +550,23 @@ active: documentation
 </tr>
 </tbody>
 </table>
+<h4 id="stream"><strong>Stream</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connection</code></td>
+<td>Connection</td>
+<td>The Connection object to which the Stream belongs</td>
+</tr>
+</tbody>
+</table>
 <h4 id="connection"><strong>Connection</strong></h4>
 <table>
 <thead>
@@ -543,168 +593,6 @@ active: documentation
 <td>Time when this connection was created</td>
 </tr>
 </tbody>
-</table>
-<h2 id="openvidu-java-client">openvidu-java-client</h2>
-<table>
-<thead>
-<tr>
-<th>Class</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OpenVidu</td>
-<td>Use it to create all the sessions you need</td>
-</tr>
-<tr>
-<td>Session</td>
-<td>Allows for the creation of tokens</td>
-</tr>
-<tr>
-<td>OpenViduRole</td>
-<td>Enum that defines the values accepted by <em>TokenOptions.Builder.role(OpenViduRole role)</em> method</td>
-</tr>
-<tr>
-<td>TokenOptions</td>
-<td>Customize each token with this class when generating them</td>
-</tr>
-</tbody>
-</table>
-<h4 id="openvidu_1"><strong>OpenVidu</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OpenVidu()</td>
-<td></td>
-<td><code>String:urlOpenViduServer</code><br><code>String:secret</code></td>
-<td>The constructor receives the URL of your OpenVidu Server and the secret shared with it</td>
-</tr>
-<tr>
-<td>createSession()</td>
-<td>Session</td>
-<td></td>
-<td>Get a Session object by calling this method. You can then store it as you want</td>
-</tr>
-</tbody>
-</table>
-<h4 id="session_1"><strong>Session</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>getSessionId()</td>
-<td>String</td>
-<td></td>
-<td>Returns the unique identifier of the session. You will need to return this parameter to the client side to pass it during the connection process to the session</td>
-</tr>
-<tr>
-<td>generateToken()</td>
-<td>String</td>
-<td><em><code>TokenOptions:tokenOptions</code></em></td>
-<td>The value returned is required in the client side just as the sessionId in order to connect to a session</td>
-</tr>
-</tbody>
-</table>
-<h4 id="openvidurole"><strong>OpenViduRole</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SUBSCRIBER</td>
-<td>They can subscribe to published streams of other users</td>
-</tr>
-<tr>
-<td>PUBLISHER</td>
-<td>They can subscribe to published streams of other users and publish their own streams</td>
-</tr>
-<tr>
-<td>MODERATOR</td>
-<td>They can subscribe to published streams of other users, publish their own streams and force <em>unpublish()</em> and <em>disconnect()</em> over a third-party stream or user</td>
-</tr>
-</tbody>
-</table>
-<h4 id="tokenoptions"><strong>TokenOptions</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>getData()</td>
-<td>String</td>
-<td></td>
-<td>Returns the metadata associated to the token</td>
-</tr>
-<tr>
-<td>getRole()</td>
-<td>OpenViduRole</td>
-<td></td>
-<td>Returns the role associated to the token</td>
-</tr>
-</tbody>
-</table>
-<h5 id="tokenoptionsbuilder-inner-static-class"><strong>TokenOptions.Builder</strong> <em>(inner static class)</em></h5>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TokenOptions.Builder()</td>
-<td></td>
-<td></td>
-<td>Constructor</td>
-</tr>
-<tr>
-<td>build()</td>
-<td>TokenOptions</td>
-<td></td>
-<td>Returns a new <strong>TokenOptions</strong> object with the stablished properties. Default values if methods <em>data()</em> and <em>role()</em> are not called are an empty string and OpenViduRole.PUBLISHER, respectively</td>
-</tr>
-<tr>
-<td>data()</td>
-<td>TokenOptions.Builder</td>
-<td><code>String:data</code></td>
-<td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
-</tr>
-<tr>
-<td>role()</td>
-<td>TokenOptions.Builder</td>
-<td><code>OpenViduRole:role</code></td>
-<td>The role associated to this token</td>
-</tr>
-</tbody>
 </table> 
 						</div>
 					</div> <footer>
@@ -712,10 +600,10 @@ active: documentation
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../deployment/" class="btn btn-xs btn-primary float-right" title="Deployment">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-java-client/" class="btn btn-xs btn-primary float-right" title="openvidu-java-client">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../tutorials/openvidu-mvc-node/" class="btn btn-xs btn-primary" title="openvidu-mvc-node"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../../tutorials/openvidu-mvc-node/" class="btn btn-xs btn-primary" title="openvidu-mvc-node"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -724,7 +612,7 @@ active: documentation
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/api/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/api/openvidu-browser.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

@@ -1,0 +1,363 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Developing OpenVidu
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Developing OpenVidu')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Developing OpenVidu')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Home</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="..">Home</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>API</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../api/openvidu-browser/">openvidu-browser</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../api/openvidu-java-client/">openvidu-java-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../api/openvidu-node-client/">openvidu-node-client</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/">Deploying on AWS</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">Developing OpenVidu</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h1 id="developing-openvidu">Developing OpenVidu</h1>
+<p>Packages required:</p>
+<p><code>sudo apt-get update</code></p>
+<table>
+<thead>
+<tr>
+<th>Dependecy</th>
+<th>Check version</th>
+<th>Install</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node</td>
+<td><code>nodejs -v</code></td>
+<td><code>sudo apt-get install -g nodejs</code></td>
+</tr>
+<tr>
+<td>npm</td>
+<td><code>npm -v</code></td>
+<td><code>sudo apt-get install -g npm</code></td>
+</tr>
+<tr>
+<td>maven</td>
+<td><code>mvn -v</code></td>
+<td><code>sudo apt-get install -g maven</code></td>
+</tr>
+<tr>
+<td>angular-cli</td>
+<td><code>ng -v</code></td>
+<td><code>sudo npm install -g @angular/cli</code></td>
+</tr>
+<tr>
+<td>typescript</td>
+<td><code>tsc -v</code></td>
+<td><code>sudo npm install -g typescript</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="openvidu-with-kms">OpenVidu with KMS</h2>
+<p>How to <em>install</em> and <em>run</em> KMS in your development machine:</p>
+<p>Ubuntu 14.04 LTS Trusty (64 bits)</p>
+<pre><code>echo &quot;deb http://ubuntu.kurento.org trusty kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install kurento-media-server-6.0
+</code></pre>
+
+<p>Ubuntu 16.04 LTS Xenial (64 bits)</p>
+<pre><code>echo &quot;deb http://ubuntu.kurento.org xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install kurento-media-server-6.0
+</code></pre>
+
+<p>Start and stop the service</p>
+<pre><code>sudo service kurento-media-server-6.0 start
+sudo service kurento-media-server-6.0 stop
+</code></pre>
+
+<p><a href="http://doc-kurento.readthedocs.io/en/stable/installation_guide.html">Here</a> you can check Kurento's official documentation.</p>
+<h2 id="setup-for-development">Setup for development</h2>
+<p>Here we show how to develop an Angular app with OpenVidu having all packages linked in your local machine, so you can modify them and check the final result. After installing Kurento Media Server and forking or downloading the repo, these are the necessary steps to start developing <strong>openvidu-ng-testapp</strong>:</p>
+<pre><code>sudo service kurento-media-server-6.0 start
+</code></pre>
+
+<p><strong>/openvidu/openvidu-browser/src/main/resources</strong></p>
+<pre><code>npm install
+sudo npm link
+</code></pre>
+
+<p><strong>/openvidu/openvidu-ng-testapp</strong></p>
+<pre><code>npm install
+npm link openvidu-browser
+ng serve
+</code></pre>
+
+<p><strong>/openvidu</strong></p>
+<pre><code>mvn compile -DskipTests=true
+mvn install -DskipTests=true
+</code></pre>
+
+<p><strong>/openvidu/openvidu-server</strong></p>
+<pre><code>mvn clean compile package exec:java
+</code></pre>
+
+<p><em>(or if you prefer you can just run the Java application in your favourite IDE)</em></p>
+<hr />
+<p>At these point, you can start modifying <em>openvidu-ng-testapp</em>, <em>openvidu-browser</em> or <em>openvidu-server</em>.</p>
+<ul>
+<li><em>openvidu-ng-testapp</em>:  the previous "ng serve" command will take care of refreshing the browser's page whenever any change takes place.</li>
+<li><em>openvidu-browser</em>: after modifying any typescript file, you will need to run the following command to update your changes (<em>typescript</em> package is necessary):</li>
+</ul>
+<p><strong>/openvidu/openvidu-browser/src/main/resources</strong> 
+ <code>npm run updatetsc</code>
+ - <em>openvidu-server</em>: after modifying any file, there is no other alternative but to re-launch the java application if you want to update your changes.</p>
+<p><strong>/openvidu/openvidu-server</strong> 
+ <code>mvn clean compile package exec:java</code>
+<em>(or re-launch the Java application in your IDE. Some IDE's support automatic re-launch in response to changes)</em></p>
+<h2 id="setup-for-advanced-development-publishing-in-local-server">Setup for advanced development (publishing in local server)</h2>
+<p>You can also use different machines in the same network to build a more advanced development environment, so you can test the application in different devices at the same time. It's very similar to the process outlined above:</p>
+<p>You will need a server for the built app (if you don't have any, we recommend <em>http-server</em>):
+<code>npm install -g http-server</code></p>
+<p>Then...</p>
+<pre><code>sudo service kurento-media-server-6.0 start
+</code></pre>
+
+<p><strong>/openvidu/openvidu-browser/src/main/resources</strong></p>
+<pre><code>npm install
+sudo npm link
+</code></pre>
+
+<p><strong>/openvidu/openvidu-ng-testapp</strong></p>
+<pre><code>npm install
+npm link openvidu-browser
+</code></pre>
+
+<p><strong>/openvidu</strong></p>
+<pre><code>mvn compile -DskipTests=true
+mvn install -DskipTests=true
+</code></pre>
+
+<p><strong>/openvidu/openvidu-server</strong></p>
+<pre><code>mvn clean compile package exec:java
+</code></pre>
+
+<p><em>(or if you prefer you can just run the Java application in your favourite IDE)</em></p>
+<p>The following commands will be the ones which you should relaunch to update your changes:
+<strong>/openvidu/openvidu-ng-testapp</strong></p>
+<pre><code>ng build
+cd dist
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem  [ACCEPT ALL FIELDS]
+http-server -S
+</code></pre>
+
+<p>These commands build the Angular project, generate a self-signed certificate (which unfortunately is a mandatory requirement for http-server SSL) and serves the content in http-server.</p>
+<p>Finally, to launch the app connect to <em>https://127.0.0.1:8080</em> in the machine running the http-server and to <em>https://[HOST]:8080</em> in other devices of the same network ([HOST] the IP of the machine running the http-server).</p>
+<p>Don't forget to accept the certificate at <em>https://[HOST]:8443</em> !</p> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../deployment/" class="btn btn-xs btn-primary" title="Deploying on AWS"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/developing/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

@@ -6,6 +6,10 @@ active: documentation
 
 <script src="/js/jquery-3.2.1.slim.min.js"></script>
 
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
@@ -20,9 +24,9 @@ active: documentation
 				"visibility": "visible"
 			});
 		});
-		$('li.subnav_drop').click(function (i, e) {
-			$('li.subnav_drop').not(this).find('ul.subnav').hide();
-			$(this).find('ul.subnav').toggle();
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
 		});
 
 		var minHeight = $('#sticky-menu').outerHeight() + 100;
@@ -47,7 +51,7 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>Home</span>
+<li class="subnav_drop"><div><span>Home</span></div>
     <ul class="subnav" hidden>
           
 
@@ -65,7 +69,7 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>Tutorials</span>
+<li class="subnav_drop"><div><span>Tutorials</span></div>
     <ul class="subnav" hidden>
           
 
@@ -119,12 +123,24 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>API</span>
+<li class="subnav_drop"><div><span>API</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../api/">API</a> 
+    <a class="" href="../../api/openvidu-browser/">openvidu-browser</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-java-client/">openvidu-java-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-node-client/">openvidu-node-client</a> 
 </li>
 
  
@@ -137,12 +153,30 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><span>Deployment</span>
+<li class="subnav_drop"><div><span>Deployment</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../deployment/">Deployment</a> 
+    <a class="" href="../../deployment/">Deploying on AWS</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
 </li>
 
  
@@ -182,28 +216,24 @@ active: documentation
 <p>You will only have to make use of <strong>openvidu-browser</strong> to get this sample app working.</p>
 </blockquote>
 <h2 id="executing-this-example">Executing this example</h2>
-<ol>
-<li>
-<p>Clone the repo:</p>
-<p><code>git clone https://github.com/OpenVidu/openvidu-tutorials.git</code></p>
-</li>
-<li>
-<p>You will need an http web server installed in your development computer to execute the sample application. If you have <em>node.js</em> installed, you can use <a href="https://github.com/indexzero/http-server">http-server</a> to serve application files. It can be installed with:</p>
-<p><code>npm install -g http-server</code></p>
-</li>
-<li>
-<p>To run the sample application, execute the following command in the project:</p>
-<p><code>cd openvidu-insecure-js/web
-http-server</code></p>
-</li>
-<li>
-<p><em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<p><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.security=false openvidu/openvidu-server-kms</code></p>
-</li>
-<li>
-<p>Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
-</li>
-</ol>
+<p>1) Clone the repo:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
+</code></pre>
+
+<p>2) You will need an http web server installed in your development computer to execute the sample application. If you have <em>node.js</em> installed, you can use <a href="https://github.com/indexzero/http-server">http-server</a> to serve application files. It can be installed with:</p>
+<pre><code class="bash">npm install -g http-server
+</code></pre>
+
+<p>3) To run the sample application, execute the following command in the project:</p>
+<pre><code class="bash">cd openvidu-insecure-js/web
+http-server
+</code></pre>
+
+<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.security=false openvidu/openvidu-server-kms
+</code></pre>
+
+<p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This application is very simple. It has only 4 files:</p>
 <ul>
@@ -220,16 +250,14 @@ http-server</code></p>
 <li><code>style.css</code>: some CSS classes to style <em>index.html</em>. You can manipulate this file to suit your needs.</li>
 </ul>
 <p>Let's see how <code>app.js</code> uses <code>OpenVidu.js</code>:</p>
-<ul>
-<li>First lines declare the two variables that will be needed in different points along the code. <code>OV</code> will be our OpenVidu object and <code>session</code> the video-call we will connect to:</li>
-</ul>
+<hr />
+<p><strong>First lines declare the two variables that will be needed in different points along the code. <code>OV</code> will be our OpenVidu object and <code>session</code> the video-call we will connect to:</strong></p>
 <pre><code class="javascript">var OV;
 var session;
 </code></pre>
 
-<ul>
-<li>Let's initialize a new session and configure our events:</li>
-</ul>
+<hr />
+<p><strong>Let's initialize a new session and configure our events:</strong></p>
 <pre><code class="javascript">// --- 1) Get an OpenVidu object and init a session with a sessionId ---
 
 // OpenVidu listening on &quot;localhost:8443&quot;
@@ -268,9 +296,8 @@ session.on('streamDestroyed', function (event) {
 <p><code>streamCreated</code>: for each new Stream received by OpenVidu, we immediately subscribe to it so we can see its video. A new HTML video element will be appended to element with id 'subscriber'. </p>
 <p><code>videoElementCreated</code>: event triggered by Subscriber object (returned by the previous <code>Session.subscribe</code> method). This allows us to add the participant nickname to the new video previously added in <code>streamCreated</code> event. Auxiliary method <code>appendUserData</code> is responsible for appending a new paragraph element just below the <code>event.element</code> video, containing <code>subscriber.stream.connection.data</code> field (which has the user's nickname).</p>
 <p><code>streamDestroyed</code>: for each Stream that has been destroyed (which means a user has left the video-call), we remove the paragraph element with the user's nickname that we added in the previous event (<code>appendUserData</code> method created the element with an <em>id</em> containing <code>event.stream.connection.connectionId</code> unique value, so we can now identify the right element to be removed). The video element is automatically deleted by default, so we don't need to do anything else.</p>
-<ul>
-<li>Finally connect to the session and publish your webcam:</li>
-</ul>
+<hr />
+<p><strong>Finally connect to the session and publish your webcam:</strong></p>
 <pre><code class="javascript">// --- 3) Connect to the session ---
 
 // 'token' param irrelevant when using insecure version of OpenVidu. Second param will be received by every user

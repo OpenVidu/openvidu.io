@@ -63,16 +63,9 @@ p.subheading {
     padding-left: 0;
 }
 
-#sticky-menu ul li span:hover,
-#sticky-menu ul li a:hover {
-    border-left: 4px;
-    border-top: 0;
-    border-bottom: 0;
-    border-right: 0;
-    border-color: #de3053;
-    color: #DE3053;
-    border-style: solid;
-    padding-left: 5px;
+#sticky-menu ul li.toctree-l1  a {
+    display: block;
+    width: 100%;
 }
 
 #sticky-menu ul.subnav {
@@ -81,15 +74,33 @@ p.subheading {
     margin-bottom: 0px;
 }
 
+#sticky-menu ul li div,
+#sticky-menu ul li.toctree-l1 {
+    cursor: pointer;
+}
+
 #sticky-menu li span,
 #sticky-menu li a {
     color: #777;
     cursor: pointer;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+#sticky-menu ul li div:hover span,
+#sticky-menu ul li.toctree-l1:hover  a {
+    border-left: 4px;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+    border-color: #de3053;
+    color: #DE3053;
+    font-weight: bold;
+    border-style: solid;
+    padding-left: 5px;
 }
 
 #sticky-menu li a.current {
@@ -101,10 +112,6 @@ p.subheading {
     color: #DE3053;
     border-style: solid;
     padding-left: 5px;
-}
-
-#sticky-menu li span:hover {
-    color: #DE3053;
 }
 
 #sticky-menu li.subnav_drop {
@@ -151,6 +158,7 @@ p.subheading {
 
 #doc-container h2 {
     font-size: 30px;
+    margin-top: 40px;
 }
 
 #doc-container h2#section-title {
@@ -182,6 +190,10 @@ p.subheading {
     top: 56px;
 }
 
+li.subnav_drop span {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 991px) {
     #sticky-menu {
         position: relative !important;
@@ -199,4 +211,28 @@ p.subheading {
     pre code {
         white-space: pre !important;
     }
+}
+
+
+
+
+#doc-container .section h1,
+#doc-container .section h4 {
+    border-top: 60px solid transparent;
+    margin-top: -60px;
+}
+
+#doc-container pre {
+    background: transparent;
+}
+
+#doc-container pre code {
+    padding: 9.5px !important;
+    border-radius: 4px !important;
+}
+
+#doc-container table {
+    display: block;
+    width: 100%;
+    overflow: auto;
 }
