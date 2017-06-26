@@ -249,3 +249,51 @@ li.subnav_drop span {
     width: 100%;
     overflow: auto;
 }
+
+div.cc-window {
+    border-top: solid 2px #DE3053 !important;
+    width: 100% !important;
+}
+
+a.cc-btn {
+    border: none !important;
+    font-weight: bold !important;
+    margin-top: 8px !important;
+    text-decoration: none;
+    text-shadow: none;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    margin: 0 5px 0 5px;
+    box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
+    -moz-box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
+    -webkit-box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
+    -o-box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
+    text-transform: uppercase;
+    -webkit-transition: all ease .3s;
+    -moz-transition: all ease .3s;
+    -o-transition: all ease .3s;
+    -ms-transition: all ease .3s;
+    transition: all ease .3s;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media screen and (max-width: 991px) {
+    span.cc-message {
+        margin-bottom: 0 !important;
+    }
+}

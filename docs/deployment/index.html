@@ -234,7 +234,7 @@ active: documentation
   </p></p>
 <hr />
 <h2 id="deploying-on-aws-with-native-services-and-executables">Deploying on AWS with native services and executables</h2>
-<p>If you prefer to have your own local . In this case, KMS and openvidu-server run in the same machine, the first one as a native service and the second one in a Docker container.</p>
+<p>If you prefer having KMS installed in your EC2 machine and your own version of openvidu-server, follow these few steps. In this case, KMS and openvidu-server run in the same machine.</p>
 <h4 id="1-install-kms-in-first-command-xenial-for-1604-trusty-for-1404">1. Install KMS (in first command: <strong><em>xenial</em></strong> for 16.04, <strong><em>trusty</em></strong> for 14.04)</h4>
 <pre><code class="bash">echo &quot;deb http://ubuntu.kurento.org xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
 wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
@@ -271,8 +271,12 @@ simple-log
 sudo service kurento-media-server-6.0 restart
 </code></pre>
 
-<h4 id="7-init-openvidu-server-docker-container-securization-enabled">7. Init openvidu-server Docker container (securization enabled)</h4>
-<pre><code class="html">sudo docker run -d -p 8443:8443 -e openvidu.security=true -e openvidu.secret=YOUR_SECRET -e kms.uris=[\&quot;ws://YOUR_MACHINE'S_INTERNAL_IP:8888/kurento\&quot;] openvidu/openvidu-server
+<h4 id="7a-init-openvidu-server-docker-container-securization-enabled">7A. Init openvidu-server Docker container (securization enabled)...</h4>
+<pre><code class="html">sudo docker run -d -p 8443:8443 -e openvidu.security=true -e openvidu.secret=YOUR_SECRET openvidu/openvidu-server
+</code></pre>
+
+<h4 id="7b-or-init-your-own-openvidu-server-executable-securization-enabled">7B. ...or init your own openvidu-server executable (securization enabled)</h4>
+<pre><code class="bash">java -jar -Dopenvidu.security=true -Dopenvidu.secret=YOUR_SECRET openvidu-server.jar
 </code></pre> 
 						</div>
 					</div> <footer>
