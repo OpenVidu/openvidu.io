@@ -253,19 +253,19 @@ active: documentation
 <tbody>
 <tr>
 <td><code>initSession</code></td>
-<td>Session</td>
+<td><a href="#session">Session</a></td>
 <td><em><code>apikey:string</code></em><br/><code>sessionId:string</code></td>
 <td>Returns a session with id <strong>sessionId</strong></td>
 </tr>
 <tr>
 <td><code>initPublisher</code></td>
-<td>Publisher</td>
+<td><a href="#publisher">Publisher</a></td>
 <td><code>parentId:string</code><br/><em><code>cameraOptions:any</code></em><br/><em><code>callback:function</code></em></td>
 <td>Starts local video stream, appending it to <strong>parentId</strong> HTML element, with the specific <strong>cameraOptions</strong> settings and executing <strong>callback</strong> function in the end. <em>cameraOptions</em> must be an object with three properties: <strong>{audio:boolean, video:boolean, quality:string}</strong>, being <em>audio</em>/<em>video</em> false if you want to initialize them muted (<em>Publisher.publishAudio(true)</em> and <em>Publisher.publishVideo(true)</em> can unmute them later) and <em>quality</em> must be 'LOW', 'MEDIUM' or 'HIGH'</td>
 </tr>
 <tr>
 <td><code>checkSystemRequirements</code></td>
-<td>Number</td>
+<td>number</td>
 <td></td>
 <td>Returns 1 if the browser supports WebRTC, 0 otherwise</td>
 </tr>
@@ -332,7 +332,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>subscribe</code></td>
-<td>Subscriber</td>
+<td><a href="#subscriber">Subscriber</a></td>
 <td><code>stream:Stream</code><br/><code>htmlId:string</code><br/><em><code>videoOptions:any</code></em></td>
 <td>Subscribes to <strong>stream</strong>, appending a new HTML Video element to DOM element of <strong>htmlId</strong> id, with <strong>videoOptions</strong> settings. This method is usually called in the callback of <em>streamCreated</em> event</td>
 </tr>
@@ -371,22 +371,22 @@ active: documentation
 <tbody>
 <tr>
 <td><code>streamCreated</code></td>
-<td>stream:Stream</td>
+<td>stream:<a href="#stream">Stream</a></td>
 <td>Triggered by Session object when a new Stream has been created and added to it</td>
 </tr>
 <tr>
 <td><code>streamDestroyed</code></td>
-<td>stream:Stream<br/>preventDefault():Function</td>
+<td>stream:<a href="#stream">Stream</a><br/>preventDefault():Function</td>
 <td>Triggered by Session object when an existing Stream has been destroyed. The default behaviour is the deletion of the HTML video element associated to it. To prevent it, call <code>preventDefault()</code> method on the event object</td>
 </tr>
 <tr>
 <td><code>connectionCreated</code></td>
-<td>connection:Connection</td>
+<td>connection:<a href="#connection">Connection</a></td>
 <td>Triggered by Session object whenever any user has joined the session. This includes dispatching one event for each user that joins the session when you are already connected to it, one for each existing participant the first time you connect to the session and once for your own local connection</td>
 </tr>
 <tr>
 <td><code>connectionDestroyed</code></td>
-<td>connection:Connection</td>
+<td>connection:<a href="#connection">Connection</a></td>
 <td>Triggered by Session object whenever a user leaves the session. This event can also mean that <code>streamDestroyed</code> events could be dispatched, depending on the streams associated to it</td>
 </tr>
 <tr>
@@ -421,7 +421,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>destroy</code></td>
-<td>Publisher</td>
+<td><a href="#publihser">Publisher</a></td>
 <td></td>
 <td>Delets the publisher object and removes it from DOM. The rest of users will trigger a <em>streamDestroyed</em> event</td>
 </tr>
@@ -453,12 +453,12 @@ active: documentation
 </tr>
 <tr>
 <td><code>stream</code></td>
-<td>Stream</td>
+<td><a href="#stream">Stream</a></td>
 <td>The stream object of the publisher</td>
 </tr>
 <tr>
 <td><code>session</code></td>
-<td>Session</td>
+<td><a href="#session">Session</a></td>
 <td>The session to which the publisher belongs</td>
 </tr>
 </tbody>
@@ -529,7 +529,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>stream</code></td>
-<td>Stream</td>
+<td><a href="#stream">Stream</a></td>
 <td>The stream object of the subscriber</td>
 </tr>
 </tbody>
@@ -562,7 +562,7 @@ active: documentation
 <tbody>
 <tr>
 <td><code>connection</code></td>
-<td>Connection</td>
+<td><a href="#connection">Connection</a></td>
 <td>The Connection object to which the Stream belongs</td>
 </tr>
 </tbody>

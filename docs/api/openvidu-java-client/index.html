@@ -215,19 +215,19 @@ active: documentation
 </thead>
 <tbody>
 <tr>
-<td>OpenVidu</td>
+<td><a href="#openvidu">OpenVidu</a></td>
 <td>Use it to create all the sessions you need</td>
 </tr>
 <tr>
-<td>Session</td>
+<td><a href="#session">Session</a></td>
 <td>Allows for the creation of tokens</td>
 </tr>
 <tr>
-<td>OpenViduRole</td>
+<td><a href="#openvidurole">OpenViduRole</a></td>
 <td>Enum that defines the values accepted by <em>TokenOptions.Builder.role(OpenViduRole role)</em> method</td>
 </tr>
 <tr>
-<td>TokenOptions</td>
+<td><a href="#tokenoptions">TokenOptions</a></td>
 <td>Customize each token with this class when generating them</td>
 </tr>
 </tbody>
@@ -251,7 +251,7 @@ active: documentation
 </tr>
 <tr>
 <td>createSession()</td>
-<td>Session</td>
+<td><a href="#session">Session</a></td>
 <td></td>
 <td>Get a Session object by calling this method. You can then store it as you want</td>
 </tr>
@@ -324,13 +324,14 @@ active: documentation
 </tr>
 <tr>
 <td>getRole()</td>
-<td>OpenViduRole</td>
+<td><a href="#openvidurole">OpenViduRole</a></td>
 <td></td>
 <td>Returns the role associated to the token</td>
 </tr>
 </tbody>
 </table>
-<h5 id="tokenoptionsbuilder-inner-static-class"><strong>TokenOptions.Builder</strong> <em>(inner static class)</em></h5>
+<h5 id="tokenoptionsbuilder"><strong>TokenOptions.Builder</strong></h5>
+<p><em>(inner static class)</em></p>
 <table>
 <thead>
 <tr>
@@ -349,19 +350,19 @@ active: documentation
 </tr>
 <tr>
 <td>build()</td>
-<td>TokenOptions</td>
+<td><a href="#tokenoptions">TokenOptions</a></td>
 <td></td>
 <td>Returns a new <strong>TokenOptions</strong> object with the stablished properties. Default values if methods <em>data()</em> and <em>role()</em> are not called are an empty string and OpenViduRole.PUBLISHER, respectively</td>
 </tr>
 <tr>
 <td>data()</td>
-<td>TokenOptions.Builder</td>
+<td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
 <td><code>String:data</code></td>
 <td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
 </tr>
 <tr>
 <td>role()</td>
-<td>TokenOptions.Builder</td>
+<td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
 <td><code>OpenViduRole:role</code></td>
 <td>The role associated to this token</td>
 </tr>

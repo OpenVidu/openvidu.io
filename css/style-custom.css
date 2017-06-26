@@ -179,7 +179,7 @@ p.subheading {
     border-color: #eeeeee;
 }
 
-#doc-container table td {
+#doc-container table td, #doc-container table th {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 12px;
@@ -217,9 +217,22 @@ li.subnav_drop span {
 
 
 #doc-container .section h1,
+#doc-container .section h2,
 #doc-container .section h4 {
     border-top: 60px solid transparent;
     margin-top: -60px;
+}
+
+#doc-container .section h1 {
+    padding-top: 40px;
+}
+
+#doc-container .section h2 {
+    padding-top: 40px;
+}
+
+#doc-container .section h4 {
+    padding-top: 25px;
 }
 
 #doc-container pre {
