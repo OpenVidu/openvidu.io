@@ -424,8 +424,9 @@ var token = &lt;%- JSON.stringify(token) %&gt;;
 var nickName = &lt;%- JSON.stringify(nickName) %&gt;;
 var userName = &lt;%- JSON.stringify(userName) %&gt;;
 var sessionName = &lt;%- JSON.stringify(sessionName) %&gt;;
+</code></pre>
 
-// --- 1) Get an OpenVidu object and init a session with the retrieved sessionId ---
+<pre><code class="javascript">// --- 1) Get an OpenVidu object and init a session with the retrieved sessionId ---
 
 var OV = new OpenVidu();
 var session = OV.initSession(sessionId);

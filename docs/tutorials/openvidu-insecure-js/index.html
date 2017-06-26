@@ -225,8 +225,7 @@ active: documentation
 </code></pre>
 
 <p>3) To run the sample application, execute the following command in the project:</p>
-<pre><code class="bash">cd openvidu-insecure-js/web
-http-server
+<pre><code class="bash">http-server openvidu-insecure-js/web
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
@@ -300,16 +299,18 @@ session.on('streamDestroyed', function (event) {
 <p><strong>Finally connect to the session and publish your webcam:</strong></p>
 <pre><code class="javascript">// --- 3) Connect to the session ---
 
-// 'token' param irrelevant when using insecure version of OpenVidu. Second param will be received by every user
-// in Stream.connection.data property, which will be appended to DOM as the user's nickname
+// 'token' param irrelevant when using insecure version of OpenVidu.
+// Second param will be received by every user in Stream.connection.data property,
+// which will be appended to DOM as the user's nickname
 session.connect(token, '{&quot;clientData&quot;: &quot;' + token + '&quot;}', function (error) {
 
-    // If the connection is successful, initialize a publisher and publish to the session
+    // If connection successful, initialize a publisher and publish to the session
     if (!error) {
 
         // --- 4) Get your own camera stream with the desired resolution ---
 
-        // Both audio and video will be active. HTML video element will be appended to element with 'publisher' id
+        // Both audio and video will be active. HTML video element will be
+        // appended to element with 'publisher' id
         var publisher = OV.initPublisher('publisher', {
             audio: true,
             video: true,
