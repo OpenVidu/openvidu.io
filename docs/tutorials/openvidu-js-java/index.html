@@ -56,7 +56,13 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../..">Home</a> 
+    <a class="" href="../../home/">Home</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
  
@@ -141,6 +147,12 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../api/openvidu-node-client/">openvidu-node-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/REST-API/">REST API</a> 
 </li>
 
  
@@ -385,7 +397,7 @@ public ResponseEntity&lt;JSONObject&gt; getSessionIdToken(@RequestBody String se
     JSONObject responseJson = new JSONObject();
 </code></pre>
 
-<p>Just after that an <em>if-else</em> statement comes into play: does the session "TUTORIAL" already exitsts? </p>
+<p>Just after that an <em>if-else</em> statement comes into play: does the session "TUTORIAL" already exist? </p>
 <pre><code class="java">if (this.mapSessions.get(sessionName) != null) { ...
 </code></pre>
 

@@ -1,0 +1,317 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - REST API
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('REST API')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('REST API')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Home</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/">Home</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>API</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-browser/">openvidu-browser</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-java-client/">openvidu-java-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-node-client/">openvidu-node-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">REST API</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/">Deploying on AWS</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">REST API</h2>
+
+<hr>
+
+<p>This is the straightforward way to get <strong>sessionId</strong> and <strong>token</strong> params from openvidu-server without using <em>openvidu-java-client</em> or <em>openvidu-node-client</em>.</p>
+<p>Two REST operations are provided: <strong><em>/api/sessions</em></strong> and <strong><em>/api/tokens</em></strong>.
+Both operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). An example is shown below:</p>
+<p>For secret "MY_SECRET", the final header would be</p>
+<blockquote>
+<p>Authorization:Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</p>
+</blockquote>
+<h3 id="apisessions">/api/sessions</h3>
+<table>
+<thead>
+<tr>
+<th><em>NEW SESSIONID</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>POST</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://[YOUR_OPENVIDUSERVER_IP]/api/sessions</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>{"id": "SESSIONID"}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="apitokens">/api/tokens</h3>
+<table>
+<thead>
+<tr>
+<th><em>NEW TOKEN</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>POST</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://[YOUR_OPENVIDUSERVER_IP]/api/tokens</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type:application/json</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td>{"session": "SESSIONID", "role": "ROLE", "data": "DATA"}</td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>{"token": "TOKEN", "session": "SESSIONID", "role": "ROLE", "data": "DATA", "id": "TOKEN"}</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ROLE</strong> value in Body field of POST to "/api/tokens" can be:</p>
+<ul>
+<li>SUBSCRIBER</li>
+<li>PUBLISHER</li>
+<li>MODERATOR</li>
+</ul>
+<p>(See <a href="../../api/openvidu-java-client/#openvidurole">OpenViduRole</a> section)</p>
+</blockquote> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../deployment/" class="btn btn-xs btn-primary float-right" title="Deploying on AWS">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-node-client/" class="btn btn-xs btn-primary" title="openvidu-node-client"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/api/REST-API.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

@@ -35,16 +35,16 @@
           {% if page.page-type=="home" %}
           <li {% if page.active=="home" %} class="active to-top" {% else %}  class="to-top" {% endif %}><a>Home</a></li>
           {% else %}
-          <li {% if page.active=="home" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/index.html">Home</a></li>
+          <li {% if page.active=="home" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/index">Home</a></li>
           {% endif %}
 
-          <li {% if page.active=="tutorials" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/tutorials.html">Tutorials</a></li>
-          <li {% if page.active=="documentation" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/docs">Documentation</a></li>
+          <li {% if page.active=="tutorials" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/tutorials">Tutorials</a></li>
+          <li {% if page.active=="documentation" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/docs/home">Documentation</a></li>
 
           {% if page.page-type=="home" %}
           <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="#get-connected">Community</a></li>
           {% else %}
-          <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/community.html">Community</a></li>
+          <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/community">Community</a></li>
           {% endif %}
 
           <!--<li class="dropdown">
@@ -59,7 +59,7 @@
                             </ul>
                         </li>-->
 
-          <li {% if page.active=="contact" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/contact.html">Contact</a></li>
+          <li {% if page.active=="contact" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/contact">Contact</a></li>
           <li><a class="social-icon" target="_blank" href="https://twitter.com/openvidu"><i class="icon ion-social-twitter"></i></a></li>
           <li><a class="social-icon" target="_blank" href="https://github.com/OpenVidu"><i class="icon ion-social-github"></i></a></li>
         </ul>
