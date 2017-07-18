@@ -119,6 +119,12 @@ active: documentation
     <a class="" href="../openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
  
 </li>
 </ul>
@@ -534,7 +540,7 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
 
 <p>The code executed in <code>session.html</code> <em>&lt; script &gt;</em> tag would also be the same. After the <code>Session.publish()</code> method has been succesful, both users will be seeing each other's video, as well as the username and the nickname below it.</p>
 <hr />
-<h3 id="4-users-leave-the-video-call">4) Users leave the video-call**</h3>
+<h3 id="4-users-leave-the-video-call">4) Users leave the video-call</h3>
 <p>After a while both users decide to leave the session. Apart from calling <code>session.disconnect()</code> (triggered in <code>leaveSession()</code> <em>onclick</em> method) to destroy the connection on openvidu-server, we need another POST operation to let the backend know that certain user has left the session so it can update the collections with the active sessions and tokens.</p>
 <p>In <code>session.html</code> template the "Leave session" button actually performs a POST operation to path <code>/leave-session</code> with a hidden form. Notice that when the user clicks the submit button, a POST operation will be triggered but also the <code>leaveSession()</code> method. First updates our backend. Second updates our openvidu-server.</p>
 <pre><code class="html">&lt;form action=&quot;/leave-session&quot; method=&quot;post&quot;&gt;

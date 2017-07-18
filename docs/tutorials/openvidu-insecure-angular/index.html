@@ -119,6 +119,12 @@ active: documentation
     <a class="" href="../openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
  
 </li>
 </ul>
@@ -281,11 +287,11 @@ token: string;
 <p><strong>Whenever a user clicks on the submit input defined in <code>app.component.html</code>, <code>joinSession()</code> method is called:</strong></p>
 <pre><code class="javascript">// --- 1) Get an OpenVidu object and init a session with a sessionId ---
 
-// OpenVidu listening on &quot;localhost:8443&quot;
-this.OV = new OpenVidu('wss://' + location.hostname + ':8443/');
+// Init OpenVidu object
+this.OV = new OpenVidu();
 
-// We will join the video-call &quot;sessionId&quot;
-this.session = this.OV.initSession(this.sessionId);
+// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server
+this.session = this.OV.initSession('wss://' + location.hostname + ':8443/' + this.sessionId);
 </code></pre>
 
 <p>Since we are in a local sample app, <code>OV</code> is initialize with <code>localhost:8443</code> as its <em>openvidu-server</em> URL. <code>session</code> is initialize with <code>sessionId</code> param: this means we will connect to <code>sessionId</code> video-call. In this case, this parameter is binded from an <code>&lt;input&gt;</code> element of <code>app.component.html</code>, which may be filled by the user.</p>

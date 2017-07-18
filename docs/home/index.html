@@ -119,6 +119,12 @@ active: documentation
     <a class="" href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
  
 </li>
 </ul>
@@ -265,10 +271,10 @@ http-server
 <p>You can now start editing HTML, JS and CSS files. Just reload your browser to see your changes (mind the browser's cache!).</p>
 <h3 id="code-description">Code description</h3>
 <ol>
-<li>Get an <em>OpenVidu</em> object and initialize a session with a <em>sessionId</em>. Have in mind that this is the parameter that defines which video call to connect.</li>
+<li>Get an <em>OpenVidu</em> object and initialize a session with a <em>sessionId</em>. Have in mind that this is the parameter that defines which video call to connect, and that it should start with the openvidu-server IP.</li>
 </ol>
-<pre><code class="javascript">var OV = new OpenVidu(&quot;wss://&quot; + OPENVIDU_SERVER_IP + &quot;:8443/&quot;);
-var session = OV.initSession(sessionId);
+<pre><code class="javascript">var OV = new OpenVidu();
+var session = OV.initSession(&quot;wss://&quot; + OPENVIDU_SERVER_IP + &quot;/&quot; + sessionId);
 </code></pre>
 
 <ol>
@@ -318,7 +324,7 @@ var session = OV.initSession(sessionId);
 
 <p>In the image above you can see the main difference with the non-secure version of OpenVidu. Your backend will now have to call two HTTP REST operations in openvidu-server to get the two parameters needed in the securization process:</p>
 <ul>
-<li><strong><em>sessionId</em></strong>: just as in the non-secure version, it identifies each specific video-call</li>
+<li><strong><em>sessionId</em></strong>: just as in the non-secure version, it identifies each specific video-call. It always starts with the URL of openvidu-server.</li>
 <li><strong><em>token</em></strong>: any user joining a specific video call will need to pass a valid token as a parameter</li>
 </ul>
 <p>You have three different options available for getting sessionIds and tokens from openvidu-server:</p>

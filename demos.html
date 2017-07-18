@@ -1,0 +1,266 @@
+---
+layout: pagetop-layout
+title: OpenVidu Demos
+active: demos
+top-title: OPENVIDU DEMOS
+top-subtitle: Try OpenVidu
+custom_js:
+- demos
+---
+
+<!-- Start Blog Classic -->
+<section id="blog">
+    <div id="demo-container" class="container">
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="row no-margin">
+                <div class="row no-margin demo-title" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    <div class="col-md-8 col-title-demo">
+                        <h2>Basic Videoconference</h2>
+                    </div>
+                    <div class="col-md-4 col-img-demo"><img class="img-demo" src="/img/demos/basic_videoconference.png"></div>
+                </div>
+                <div id="collapse1" class="collapse row no-margin">
+                    <div class="col-md-12 demo-description">
+                        <p>Users can freely connect to any videoconference session. If it does not exist, a new one will be
+                            created. This demo is a 100% frontend application which makes use of the insecure version of
+                            OpenVidu.
+                        </p>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/docker.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            <code id="code-1">docker run -p 5000:5000 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.security=false openvidu/basic-videoconference-demo</code>
+                            <button id="btn-copy-1" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                        </div>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            LINK TO AWS DEPLOYMENT
+                        </div>
+                    </div>
+                    <div class="col-md-12 demo-description">
+                        <p>This demo is derived directly from the tutorials. If you want a deep understanding of the ins and
+                            outs you can check either of the following tutorials (whichever you feel most comfortable with):</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h5>Plain JavaScript</h5>
+                                    </td>
+                                    <td><a href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Angular</h5>
+                                    </td>
+                                    <td><a href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row no-margin">
+                <div class="row no-margin demo-title" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    <div class="col-md-8 col-title-demo">
+                        <h2>Basic Webinar</h2>
+                    </div>
+                    <div class="col-md-4 col-img-demo"><img class="img-demo" src="/img/demos/basic_webinar.png"></div>
+                </div>
+                <div id="collapse2" class="collapse row no-margin">
+                    <div class="col-md-12 demo-description">
+                        <p>Users are identified via a login authentication system. This means users are given a certain role
+                            depending on their identity when connecting to a videoconference session. This demo wraps a simple
+                            frontend and a straightforward backend, making use of the secure version of OpenVidu.</p>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/docker.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            <code id="code-2">docker run -p 5000:5000 -p 3000:3000 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-webinar-demo</code>
+                            <button id="btn-copy-2" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                        </div>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            LINK TO AWS DEPLOYMENT
+                        </div>
+                    </div>
+                    <div class="col-md-12 demo-description">
+                        <p>This demo is derived directly from the tutorials. If you want a deep understanding of the ins and
+                            outs you can check either of the following tutorials (whichever you feel most comfortable with):</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h5>Java (Single Page Application)</h5>
+                                    </td>
+                                    <td><a href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Java (Model View Controller)</h5>
+                                    </td>
+                                    <td><a href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Node (Single Page Application)</h5>
+                                    </td>
+                                    <td><a href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Node (Model View Controller)</h5>
+                                    </td>
+                                    <td><a href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row no-margin">
+                <div class="row no-margin demo-title" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                    <div class="col-md-8 col-title-demo">
+                        <h2>OpenVidu GetARoom</h2>
+                    </div>
+                    <div class="col-md-4 col-img-demo"><img class="img-demo img-demo-2" src="/img/demos/openvidu_getaroom.png"></div>
+                </div>
+                <div id="collapse3" class="collapse row no-margin">
+                    <div class="col-md-12 demo-description">
+                        <p>Users can create new videoconference rooms by clicking a button. Then they can share the link of
+                            the room to invite new participants. This demo is a 100% frontend application which makes use
+                            of the insecure version of OpenVidu.</p>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/docker.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            <code id="code-3">docker run -p 8443:8443 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.security=false openvidu/getaroom-demo</code>
+                            <button id="btn-copy-3" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                        </div>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            LINK TO AWS DEPLOYMENT
+                        </div>
+                    </div>
+                    <div class="col-md-12 demo-description demo-margin-bottom">
+                        <p>This demo is also provided in the form of tutorial. You can check it out here: <a href="/docs/tutorials/openvidu-getaroom/">openvidu-getaroom</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row no-margin">
+                <div class="row no-margin demo-title" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                    <div class="col-md-8 col-title-demo">
+                        <h2>OpenVidu Classroom</h2>
+                    </div>
+                    <div class="col-md-4 col-img-demo"><img class="img-demo img-demo-2" src="/img/demos/openvidu_classroom.png"></div>
+                </div>
+                <div id="collapse4" class="collapse row no-margin">
+                    <div class="col-md-12 demo-description">
+                        <p>This is a fully functional application that makes use of the secure version of OpenVidu to connect
+                            teachers and students in video sessions. It has a frontend built with Angular, a backend built
+                            with Spring Boot and a MySQL database. There are two types of roles: teachers and students. First
+                            ones can create/edit/remove lessons and invite students to them. Only when a teacher initialize
+                            a lesson authorized students can connect to it.</p>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/docker.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            <code id="code-4">wget -O docker-compose.yml https://raw.githubusercontent.com/OpenVidu/classroom-demo/master/docker/docker-compose.yml<br>docker-compose up</code>
+                            <button id="btn-copy-4" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                        </div>
+                    </div>
+                    <div class="row row-run-demo">
+                        <div class="col col-md-2"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                        <div class="col col-md-10">
+                            LINK TO AWS DEPLOYMENT
+                        </div>
+                    </div>
+
+                    <div class="row no-margin demo-description">
+                        <p>There's no tutorial for this application, but you can run it in your local machine by following these steps:
+                            <ol>
+                                <li><p>Clone the repo</p>
+                                    <code id="code-5">git clone https://github.com/OpenVidu/classroom-demo.git</code>
+                                    <button id="btn-copy-5" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li><p>You will need <i>node</i>, <i>NPM</i> and <i>angular-cli</i> to execute the app. You can install them with:</p>
+                                    <code id="code-6">sudo apt-get update<br>sudo apt-get install nodejs<br>sudo apt-get install npm<br>sudo npm install -g @angular/cli</code>
+                                    <button id="btn-copy-6" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li><p>This demo needs a MySQL database to store the info. Install MySQL:</p>
+                                    <code id="code-7">sudo apt-get install mysql-server<br>sudo mysql_secure_installation<br>sudo mysql_install_db</code>
+                                    <button id="btn-copy-7" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                    <p>And create a new database:</p>
+                                    <code id="code-8">mysql -u root -p CREATE DATABASE openvidu_sample_app;<br>exit</code>
+                                    <button id="btn-copy-8" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li><p><i>openvidu-server</i> and <i>Kurento Media Server</i> must be up and running in your development machine.
+                                    The easiest way is running this Docker container which wraps both of them (you will need
+                                    <a href="https://store.docker.com/search?type=edition&offering=community">Docker CE</a>):</p>
+                                    <code id="code-9">docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code>
+                                    <button id="btn-copy-9" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li><p>Install NPM dependencies of frontend:</p>
+                                    <code id="code-10">cd classroom-demo/src/angular/frontend<br>npm install</code>
+                                    <button id="btn-copy-10" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li><p>Build the frontend, exporting the files to the static folder of the Java application:</p>
+                                    <code id="code-11">ng build --output-path ../../main/resources/static</code>
+                                    <button id="btn-copy-11" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li><p>Finally run the Spring Boot application:</p>
+                                    <code id="code-12">cd ../../../ mvn clean package exec:java</code>
+                                    <button id="btn-copy-12" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard">Copy</button>
+                                    <p>Go to <a href="https://localhost:5000">https://localhost:5000</a>
+                                    to test the app once the server is running. The first time you use the docker container,
+                                    an alert message will suggest you accept the self-signed certificate of <i>openvidu-server</i>
+                                    when you first try to join a video-call. To test two users in the same computer, use
+                                    a standard window and an incognito window.</p>
+                                </li>
+                            </ol>
+                        </p>
+                        <p>
+                            Without going into greater detail, the backend has <a href="https://github.com/OpenVidu/classroom-demo/blob/master/src/main/java/io/openvidu/classroom/demo/lesson/LessonController.java">one controller</a> for the REST operations of the lessons (create new ones or edit/remove existing ones) and <a href="https://github.com/OpenVidu/classroom-demo/blob/master/src/main/java/io/openvidu/classroom/demo/session_manager/SessionController.java">one controller</a> for handling the videoconferences.
+                            This controller is pretty similar to the one described in any of the secure tutorials. Basically it listens to the operations of creating a new session (returning a <i>sessionId</i> from <i>openvidu-server</i>), generating a new
+                            user token (returning the <i>token</i> from <i>openvidu-server</i>) and removing the users when they leave the session.
+                        </p>
+                    </div>
+                    <div class="row no-margin row-gallery">
+                        <div class="col-md-4">
+                            <a data-fancybox="gallery" href="/img/tutorials/openvidu-classroom.png">
+                            <img class="img-responsive" src="/img/tutorials/openvidu-classroom.png">
+                        </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a data-fancybox="gallery" href="/img/tutorials/openvidu-classroom-dashboard.png">
+                            <img class="img-responsive" src="/img/tutorials/openvidu-classroom-dashboard.png">
+                        </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a data-fancybox="gallery" href="/img/tutorials/openvidu-classroom-video.png">
+                            <img class="img-responsive" src="/img/tutorials/openvidu-classroom-video.png">
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Blog Classic -->

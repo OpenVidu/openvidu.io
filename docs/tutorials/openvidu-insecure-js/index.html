@@ -119,6 +119,12 @@ active: documentation
     <a class="" href="../openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
  
 </li>
 </ul>
@@ -250,7 +256,7 @@ active: documentation
 <ul>
 <li><code>OpenVidu.js</code>: openvidu-browser library. You don't have to manipulate this file. </li>
 <li><code>app.js</code>: sample application main JavaScritp file, which makes use of <em>OpenVidu.js</em>. You can manipulate this file to suit your needs.</li>
-<li><code>index.html</code>: HTML code for the form to connect to a video-call and for the video-call itself. You can manipulate this file to adapt it to suit your needs. 
+<li><code>index.html</code>: HTML code for the form to connect to a video-call and for the video-call itself. You can manipulate this file to suit your needs. 
     It has two links to both JavaScript files: </li>
 </ul>
 <pre><code class="html">&lt;script src=&quot;OpenVidu.js&quot;&gt;&lt;/script&gt;
@@ -271,11 +277,11 @@ var session;
 <p><strong>Let's initialize a new session and configure our events:</strong></p>
 <pre><code class="javascript">// --- 1) Get an OpenVidu object and init a session with a sessionId ---
 
-// OpenVidu listening on &quot;localhost:8443&quot;
-OV = new OpenVidu(&quot;wss://&quot; + location.hostname + &quot;:8443/&quot;);
+// Init OpenVidu object
+OV = new OpenVidu();
 
-// We will join the video-call &quot;sessionId&quot;
-session = OV.initSession(sessionId);
+// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server
+session = OV.initSession('wss://' + location.hostname + ':8443/' + sessionId);
 </code></pre>
 
 <p>Since we are in a local sample app, <code>OV</code> object is initialize with <code>localhost:8443</code> as its <em>openvidu-server</em> URL. <code>session</code> object is initialize with <code>sessionId</code> param: this means we will connect to <code>sessionId</code> video-call. In this case, this parameter is retrieve from HTML input     <code>&lt;input type="text" id="sessionId" required&gt;</code>, which may be filled by the user.</p>
