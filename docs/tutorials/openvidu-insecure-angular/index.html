@@ -253,15 +253,37 @@ ng serve
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:4200"><code>localhost:4200</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<script>
+    $(document).ready(function(){
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+    });
+</script>
+
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery1" href="/img/demos/insecure-join.png">
+        <img class="img-responsive" src="/img/demos/insecure-join.png">
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery1" href="/img/demos/insecure-session.png">
+        <img class="img-responsive" src="/img/demos/insecure-session.png">
+    </a>
+    </div>
+</div>
+
 <h2 id="understanding-the-code">Understanding the code</h2>
-<p>This is an Angular project generated with angular-cli, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. After getting <code>openvidu-browser</code> NPM package (<code>npm install openvidu-browser</code>), we will focus on the following files under <code>src/app/</code> folder:</p>
+<p>This is an Angular project generated with angular-cli, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>src/app/</code> folder:</p>
 <ul>
 <li><code>app.component.ts</code>: AppComponent, main component of the app. It contains the functionalities for joining a video-call and for handling the video-calls themselves.</li>
 <li><code>app.component.html</code>: HTML for AppComponent.</li>
 <li><code>app.component.css</code>: CSS for AppComponent.</li>
 <li><code>stream.component.css</code>: StreamComponent, auxiliary component to manage Stream objects on our own. It wraps the final HTML <code>&lt;video&gt;</code> which will display the video of its Stream property, as well as the user's nickname in a <code>&lt;p&gt;</code> element.</li>
 </ul>
-<p>Let's see how <code>app.component.ts</code> uses <code>openvidu-browser</code>:</p>
+<p>Let's see how <code>app.component.ts</code> uses NPM package <code>openvidu-browser</code>:</p>
 <hr />
 <p><strong>First line imports the necessary objects from <code>openvidu-browser</code>:</strong></p>
 <pre><code class="typescript">import { OpenVidu, Session, Stream } from 'openvidu-browser';
@@ -280,22 +302,26 @@ localStream: Stream;
 // Join form
 sessionId: string;
 token: string;
+
+// Main video of the page, will be 'localStream' or one of the 'remoteStreams',
+// updated by an Output event of StreamComponent children
+@Input() mainVideoStream: Stream;
 </code></pre>
 
 <p><code>OpenVidu</code> object will allow us to get a <code>Session</code> object, which is declared just after it. <code>remoteStreams</code> array will store the active streams of other users in the video-call and <code>localStream</code> will be your own local webcam stream. Finally, <code>sessionId</code> and <code>token</code> params simply represent the video-call and your participant's nickname, as you will see in a moment.</p>
 <hr />
 <p><strong>Whenever a user clicks on the submit input defined in <code>app.component.html</code>, <code>joinSession()</code> method is called:</strong></p>
-<pre><code class="javascript">// --- 1) Get an OpenVidu object and init a session with a sessionId ---
+<pre><code class="typescript">// --- 1) Get an OpenVidu object and init a session with a sessionId ---
 
 // Init OpenVidu object
 this.OV = new OpenVidu();
 
-// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server
+// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server, with secure WebSocket protocol ('wss://')
 this.session = this.OV.initSession('wss://' + location.hostname + ':8443/' + this.sessionId);
 </code></pre>
 
-<p>Since we are in a local sample app, <code>OV</code> is initialize with <code>localhost:8443</code> as its <em>openvidu-server</em> URL. <code>session</code> is initialize with <code>sessionId</code> param: this means we will connect to <code>sessionId</code> video-call. In this case, this parameter is binded from an <code>&lt;input&gt;</code> element of <code>app.component.html</code>, which may be filled by the user.</p>
-<pre><code class="javascript">// --- 2) Specify the actions when events take place ---
+<p>Session's identifiers must begin with the URL where <em>openvidu-server</em> listens, so they can connect through WebSocket to it. It is necessary to explicitly set this URL in the param received by <code>OV.initSession</code> method only when using the insecure version of OpenVidu. Since we are in a local sample app, <code>OV.initSession</code> will finally receive <code>wss://localhost:8443/</code> as its <em>openvidu-server</em> URL. Last param appended, <code>sessionId</code>, is the distinctive portion of the session identifier and allows OpenVidu to differentiate sessions from each other. In this case, this parameter is retrieved from HTML input <code>&lt;input type="text" id="sessionId" required&gt;</code>, which may be filled by the user.</p>
+<pre><code class="typescript">// --- 2) Specify the actions when events take place ---
 
 // On every new Stream received...
 this.session.on('streamCreated', (event) =&gt; {
@@ -320,23 +346,24 @@ this.session.on('streamDestroyed', (event) =&gt; {
 </code></pre>
 
 <p>Here we subscribe to the Session events that interest us. As we are using Angular framework, a good approach will be treating each Stream as a component, contained in a StreamComponent. Thus, we need to store each new stream we received in an array (<code>remoteStreams</code>), and we must remove from it every deleted stream whenever it is necessary. To achieve this, we use the following events:</p>
-<p><code>streamCreated</code>: for each new Stream received by OpenVidu, we store it in our <code>remoteStreams</code> array and immediately subscribe to it so we can receive its video (empty string as second parameter, so OpenVidu doesn't create an HTML video on its own). HTML template of AppComponent will show the new video, as it contains an <code>ngFor</code> directive which will create a new StreamComponent for each Stream object stored in the array:</p>
-<pre><code class="html">&lt;div id=&quot;subscriber&quot;&gt;
-    &lt;div *ngFor=&quot;let s of this.remoteStreams&quot;&gt;
-        &lt;stream-component [stream]=&quot;s&quot;&gt;&lt;/stream-component&gt;
-    &lt;/div&gt;
+<ul>
+<li><code>streamCreated</code>: for each new Stream received by OpenVidu, we store it in our <code>remoteStreams</code> array and immediately subscribe to it so we can receive its video (empty string as second parameter, so OpenVidu doesn't create an HTML video on its own). HTML template of AppComponent will show the new video, as it contains an <code>ngFor</code> directive which will create a new StreamComponent for each Stream object stored in the array:</li>
+</ul>
+<pre><code class="html">&lt;div *ngFor=&quot;let s of this.remoteStreams&quot; class=&quot;stream-container col-md-6 col-xs-6&quot; &gt;
+    &lt;stream-component [stream]=&quot;s&quot; (mainVideoStream)=&quot;getMainVideoStream($event)&quot;&gt;&lt;/stream-component&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p><code>streamDestroyed</code>: for each Stream that has been destroyed (which means a user has left the video-call), we remove it from <code>remoteStreams</code> array, so Angular will automatically delete the required StreamComponent from HTML. We call <code>event.preventDefault()</code> to cancel OpenVidu default behaviour towards <code>streamDestroyed</code> event, which is the deletion of the previously created HTML video element on <code>streamCreated</code> event. Because we are handling the video elements by ourselves taking advantage of Angular capabilities, we tell OpenVidu not to create them on <code>streamCreated</code> and not to delete them on <code>streamDestroyed</code>, by passing an empty string as second parameter on <code>Session.subscribe()</code> method on <code>streamCreated</code> and by calling <code>event.preventDefault()</code> on <code>streamDestroyed</code>.</p>
+<ul>
+<li><code>streamDestroyed</code>: for each Stream that has been destroyed (which means a user has left the video-call), we remove it from <code>remoteStreams</code> array, so Angular will automatically delete the required StreamComponent from HTML. We call <code>event.preventDefault()</code> to cancel OpenVidu default behaviour towards <code>streamDestroyed</code> event, which is the deletion of the previously created HTML video element on <code>streamCreated</code> event. Because we are handling the video elements by ourselves taking advantage of Angular capabilities, we tell OpenVidu not to create them on <code>streamCreated</code> and not to delete them on <code>streamDestroyed</code>, by passing an empty string as second parameter on <code>Session.subscribe()</code> method on <code>streamCreated</code> and by calling <code>event.preventDefault()</code> on <code>streamDestroyed</code>.</li>
+</ul>
 <hr />
 <p><strong>Finally connect to the session and publish your webcam:</strong></p>
-<pre><code class="javascript">
+<pre><code class="typescript">
 // --- 3) Connect to the session ---
 
-// 'token' param irrelevant when using insecure version of OpenVidu
-// Second param will be received by every user in Stream.connection.data property,
-// which will be appended to DOM as the user's nickname
+// 'token' param irrelevant when using insecure version of OpenVidu. Second param will be received by every user
+// in Stream.connection.data property, which will be appended to DOM as the user's nickname
 this.session.connect(this.token, '{&quot;clientData&quot;: &quot;' + this.token + '&quot;}', (error) =&gt; {
 
     // If connection successful, initialize a publisher and publish to the session
@@ -344,8 +371,8 @@ this.session.connect(this.token, '{&quot;clientData&quot;: &quot;' + this.token 
 
         // --- 4) Get your own camera stream with the desired resolution ---
 
-        // Both audio and video will be active. HTML video element will be
-        // appended to element with 'publisher' id
+        // Both audio and video will be active. Second parameter is an empty string
+        // so OpenVidu doesn't create an HTML video by its own
         let publisher = this.OV.initPublisher('', {
             audio: true,
             video: true,
@@ -354,6 +381,8 @@ this.session.connect(this.token, '{&quot;clientData&quot;: &quot;' + this.token 
 
         // Store your webcam stream in 'localStream' object
         this.localStream = publisher.stream;
+        // Set the main video in the page to display our webcam
+        this.mainVideoStream = this.localStream;
 
         // --- 5) Publish your stream ---
 
@@ -365,18 +394,16 @@ this.session.connect(this.token, '{&quot;clientData&quot;: &quot;' + this.token 
 });
 </code></pre>
 
-<p><code>token</code> param is irrelevant when using insecure version of OpenVidu. Second parameter will supply the user's nickname showed by StreamComponent inside its <code>&lt;p&gt;</code> element. So in this case it is a JSON formatted string with a "clientData" tag with "token" value, which is retrieved from HTML input <code>&lt;input type="text" name="token" id="token" [(ngModel)]="token" required&gt;</code> (filled by the user).</p>
-<p>In the callback of <code>Session.connect</code> method, we check the connection has been succesful (<code>error</code> value must be <em>null</em>) and right after that we get a <code>Publisher</code> object with both audio and video activated and MEDIUM quality. We then store our local Stream (contained in <code>Publisher.stream</code> object) in <code>localStream</code> and publish the Publisher object through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event.</p>
+<p>In <code>session.connect</code> method: <code>token</code> param is irrelevant when using insecure version of OpenVidu. Remember <code>videoElementCreated</code> event, when we added the user's nickname to the HTML? Well, second parameter is the actual value you will receive in <code>Stream.connection.data</code> property. So in this case it is a JSON formatted string with a "clientData" tag with "token" value, which is retrieved from HTML input <code>&lt;input type="text" id="participantId" required&gt;</code> (filled by the user and also reused for the first <code>token</code> param).</p>
+<p>In the callback of <code>Session.connect</code> method, we check the connection has been succesful (<code>error</code> value must be <em>null</em>) and right after that we get a <code>Publisher</code> object with both audio and video activated and MEDIUM quality. We then store our local Stream (contained in <code>Publisher.stream</code> object) in <code>localStream</code>, make our main video display our stream and publish the Publisher object through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event.</p>
 <p>With regard to our local Stream, AppComponent's HTML template has also one StreamComponent declaration ready to show our own webcam as we did with remote streams:</p>
-<pre><code class="html">&lt;div id=&quot;publisher&quot;&gt;
-    &lt;div *ngIf=&quot;this.localStream&quot;&gt;
-        &lt;stream-component [stream]=&quot;this.localStream&quot;&gt;&lt;/stream-component&gt;
-    &lt;/div&gt;
+<pre><code class="html">&lt;div *ngIf=&quot;this.localStream&quot; class=&quot;stream-container col-md-6 col-xs-6&quot;&gt;
+    &lt;stream-component [stream]=&quot;this.localStream&quot; (mainVideoStream)=&quot;getMainVideoStream($event)&quot;&gt;&lt;/stream-component&gt;
 &lt;/div&gt;
 </code></pre>
 
 <p>Last point worth considering is the <code>ngDoCheck()</code> implementation of StreamComponent. As we are handling Stream objects by ourselves (task which usually is taken care by OpenVidu), and because the URL of Stream objects takes some time to get its final value as the WebRTC negotiation takes place, we must listen to any change in <code>stream</code> @Input property. This allows us to update <code>videoSrc</code> value of the component, which finally ends up being the <em>src</em> value of the <code>&lt;video&gt;</code> element. If we didn't do this, the Stream object will update its <em>src</em> property, but our StreamComponent would keep the same initial <code>videoSrc</code> value. This ensures that all our StreamComponent's will properly display all the videos in the video-call using the correct <em>src</em> value.</p>
-<pre><code class="javascript">ngDoCheck() { // Detect any change in 'stream' property
+<pre><code class="typescript">ngDoCheck() { // Detect any change in 'stream' property
 
     // If 'src' of Stream object has changed, 'videoSrc' value must be updated
     if (!(this.videSrcUnsafe === this.stream.getVideoSrc())) {
@@ -387,6 +414,18 @@ this.session.connect(this.token, '{&quot;clientData&quot;: &quot;' + this.token 
         // Auxiliary value to store the URL as a string for upcoming comparisons
         this.videSrcUnsafe = this.stream.getVideoSrc();
     }
+}
+</code></pre>
+
+<hr />
+<p><strong>Leaving the session:</strong></p>
+<p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method:</p>
+<pre><code class="typescript">leaveSession() {
+
+    // --- 6) Leave the session by calling 'disconnect' method over the Session object ---
+    if (this.OV) { this.session.disconnect(); };
+
+    ...
 }
 </code></pre> 
 						</div>

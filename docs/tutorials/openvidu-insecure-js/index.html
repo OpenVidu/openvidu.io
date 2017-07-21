@@ -251,6 +251,28 @@ active: documentation
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<script>
+    $(document).ready(function(){
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+    });
+</script>
+
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery1" href="/img/demos/insecure-join.png">
+        <img class="img-responsive" src="/img/demos/insecure-join.png">
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery1" href="/img/demos/insecure-session.png">
+        <img class="img-responsive" src="/img/demos/insecure-session.png">
+    </a>
+    </div>
+</div>
+
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This application is very simple. It has only 4 files:</p>
 <ul>
@@ -280,18 +302,18 @@ var session;
 // Init OpenVidu object
 OV = new OpenVidu();
 
-// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server
+// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server, with secure WebSocket protocol ('wss://')
 session = OV.initSession('wss://' + location.hostname + ':8443/' + sessionId);
 </code></pre>
 
-<p>Since we are in a local sample app, <code>OV</code> object is initialize with <code>localhost:8443</code> as its <em>openvidu-server</em> URL. <code>session</code> object is initialize with <code>sessionId</code> param: this means we will connect to <code>sessionId</code> video-call. In this case, this parameter is retrieve from HTML input     <code>&lt;input type="text" id="sessionId" required&gt;</code>, which may be filled by the user.</p>
+<p>Session's identifiers must begin with the URL where <em>openvidu-server</em> listens, so they can connect through WebSocket to it. It is necessary to explicitly set this URL in the param received by <code>OV.initSession</code> method only when using the insecure version of OpenVidu. Since we are in a local sample app, <code>OV.initSession</code> will finally receive <code>wss://localhost:8443/</code> as its <em>openvidu-server</em> URL. Last param appended, <code>sessionId</code>, is the distinctive portion of the session identifier and allows OpenVidu to differentiate sessions from each other. In this case, this parameter is retrieved from HTML input <code>&lt;input type="text" id="sessionId" required&gt;</code>, which may be filled by the user.</p>
 <pre><code class="javascript">// --- 2) Specify the actions when events take place ---
 
 // On every new Stream received...
 session.on('streamCreated', function (event) {
 
-    // Subscribe to the Stream to receive it. HTML video will be appended to element with 'subscriber' id
-    var subscriber = session.subscribe(event.stream, 'subscriber');
+    // Subscribe to the Stream to receive it. HTML video will be appended to element with 'video-container' id
+    var subscriber = session.subscribe(event.stream, 'video-container');
 
     // When the HTML video has been appended to DOM...
     subscriber.on('videoElementCreated', function (event) {
@@ -309,44 +331,74 @@ session.on('streamDestroyed', function (event) {
 });
 </code></pre>
 
-<p>Here we subscribe to the events that interest us. In this case, we want to receive all videos published to the video-call, as well as displaying every user's nickname nex to its video. To achieve this:</p>
-<p><code>streamCreated</code>: for each new Stream received by OpenVidu, we immediately subscribe to it so we can see its video. A new HTML video element will be appended to element with id 'subscriber'. </p>
+<p>Here we subscribe to the events that interest us. In this case, we want to receive all videos published to the video-call, as well as displaying every user's nickname next to its video. To achieve this:</p>
+<ul>
+<li>
+<p><code>streamCreated</code>: for each new Stream received by OpenVidu, we immediately subscribe to it so we can see its video. A new HTML video element will be appended to element with id 'video-container'. </p>
+</li>
+<li>
 <p><code>videoElementCreated</code>: event triggered by Subscriber object (returned by the previous <code>Session.subscribe</code> method). This allows us to add the participant nickname to the new video previously added in <code>streamCreated</code> event. Auxiliary method <code>appendUserData</code> is responsible for appending a new paragraph element just below the <code>event.element</code> video, containing <code>subscriber.stream.connection.data</code> field (which has the user's nickname).</p>
-<p><code>streamDestroyed</code>: for each Stream that has been destroyed (which means a user has left the video-call), we remove the paragraph element with the user's nickname that we added in the previous event (<code>appendUserData</code> method created the element with an <em>id</em> containing <code>event.stream.connection.connectionId</code> unique value, so we can now identify the right element to be removed). The video element is automatically deleted by default, so we don't need to do anything else.</p>
+</li>
+<li>
+<p><code>streamDestroyed</code>: for each Stream that has been destroyed (which means a user has left the video-call), we remove the element with the user's nickname that we added in the previous event with the auxiliary method <code>removeUserData</code> (<code>appendUserData</code> method created the element with an <em>id</em> containing <code>event.stream.connection.connectionId</code> unique value, so we can now identify the right element to be removed). OpenVidu automatically deletes the proper video element by default, so we don't need to do anything else.</p>
+</li>
+</ul>
 <hr />
 <p><strong>Finally connect to the session and publish your webcam:</strong></p>
 <pre><code class="javascript">// --- 3) Connect to the session ---
 
-// 'token' param irrelevant when using insecure version of OpenVidu.
-// Second param will be received by every user in Stream.connection.data property,
-// which will be appended to DOM as the user's nickname
-session.connect(token, '{&quot;clientData&quot;: &quot;' + token + '&quot;}', function (error) {
+    // 'token' param irrelevant when using insecure version of OpenVidu. Second param will be received by every user
+    // in Stream.connection.data property, which will be appended to DOM as the user's nickname
+    session.connect(token, '{&quot;clientData&quot;: &quot;' + token + '&quot;}', function (error) {
 
-    // If connection successful, initialize a publisher and publish to the session
-    if (!error) {
+        // If the connection is successful, initialize a publisher and publish to the session
+        if (!error) {
 
-        // --- 4) Get your own camera stream with the desired resolution ---
+            // --- 4) Get your own camera stream with the desired resolution ---
 
-        // Both audio and video will be active. HTML video element will be
-        // appended to element with 'publisher' id
-        var publisher = OV.initPublisher('publisher', {
-            audio: true,
-            video: true,
-            quality: 'MEDIUM'
-        });
+            var publisher = OV.initPublisher('video-container', {
+                audio: true,
+                video: true,
+                quality: 'MEDIUM'
+            });
 
-        // --- 5) Publish your stream ---
+            // When our HTML video has been added to DOM...
+            publisher.on('videoElementCreated', function (event) {
+                initMainVideo(event.element, token);
+                appendUserData(event.element, token);
+            });
 
-        session.publish(publisher);
+            // --- 5) Publish your stream ---
 
-    } else {
-        console.log('There was an error connecting to the session:', error.code, error.message);
-    }
-});
+            session.publish(publisher);
+
+        } else {
+            console.log('There was an error connecting to the session:', error.code, error.message);
+        }
+    });
 </code></pre>
 
-<p><code>token</code> param is irrelevant when using insecure version of OpenVidu. Remember <code>videoElementCreated</code> event, when we added the user's nickname to the HTML? Well, second parameter is the actual value you will receive in <code>Stream.connection.data</code> property. So in this case it is a JSON formatted string with a "clientData" tag with "token" value, which is retrieved from HTML input <code>&lt;input type="text" id="participantId" required&gt;</code> (filled by the user).</p>
-<p>In the callback of <code>Session.connect</code> method, we check the connection has been succesful (<code>error</code> value must be <em>null</em>) and right after that we get a <code>Publisher</code> object with both audio and video activated and MEDIUM quality. This process will end with the addition of a new HTML video element showing your camera, as a child of element with <em>id</em> 'publisher'. We then just have to publish this object through <code>Session.publish</code> method, and the rest of users will begin receiving our webcam.</p> 
+<p>In <code>session.connect</code> method: <code>token</code> param is irrelevant when using insecure version of OpenVidu. Remember <code>videoElementCreated</code> event, when we added the user's nickname to the HTML? Well, second parameter is the actual value you will receive in <code>Stream.connection.data</code> property. So in this case it is a JSON formatted string with a "clientData" tag with "token" value, which is retrieved from HTML input <code>&lt;input type="text" id="participantId" required&gt;</code> (filled by the user and also reused for the first <code>token</code> param).</p>
+<p>In the callback of <code>Session.connect</code> method, we check the connection has been succesful (<code>error</code> value must be <em>null</em>) and right after that we get a <code>Publisher</code> object with both audio and video activated and MEDIUM quality. This process will end with the addition of a new HTML video element showing your camera, as a child of element with <em>id</em> 'video-container'. Event <code>videoElementCreated</code> will be fired by the Publisher object just after this video is added to DOM, so we can subscribe to it and do whatever we want with it. In this case, we init a big video element with our video and append our nickname to it, by using auxiliary methods <code>initMainVideo</code> and <code>appendUserData</code>.</p>
+<p>Finally we just have to publish <code>publisher</code> object through <code>Session.publish</code> method, and the rest of users will begin receiving our webcam.</p>
+<hr />
+<p><strong>Leaving the session:</strong></p>
+<p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method:</p>
+<pre><code class="javascript">function leaveSession() {
+
+    // --- 6) Leave the session by calling 'disconnect' method over the Session object ---
+
+    session.disconnect();
+
+    // Removing all HTML elements with the user's nicknames. 
+    // HTML videos are automatically removed when leaving a Session
+    removeAllUserData();
+
+    // Back to 'Join session' page
+    document.getElementById('join').style.display = 'block';
+    document.getElementById('session').style.display = 'none';
+}
+</code></pre> 
 						</div>
 					</div> <footer>
 <hr>

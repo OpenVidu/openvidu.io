@@ -8,10 +8,10 @@ The _openvidu.io_ web is generated with [Jekyll](https://jekyllrb.com/).
 ```
 https://github.com/OpenVidu/openvidu.io
 ```
-- To locally preview the changes, you can execute the following command in the root folder of the repository (you need [Docker](https://store.docker.com/search?type=edition&offering=community) installed) and visit [`http://localhost:4000`](http://localhost:4000):
+- To locally preview the changes, you can execute the following command in the root folder of the repository (you need [Docker](https://store.docker.com/search?type=edition&offering=community) installed) and visit [`localhost`](http://localhost:80):
 
 ```
-docker run --rm --label=jekyll --volume="$(pwd)":/srv/jekyll -it -p 127.0.0.1:4000:4000 jekyll/jekyll bundle exec jekyll serve
+docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
 ```
 
 # Documentation
