@@ -9,13 +9,13 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="keywords" content="OpenVidu, openvidu, WebRTC, Video, mobile" />
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <!-- Stlylesheet -->
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <link href="css/style-custom.css" rel="stylesheet" type="text/css" />
   <link href="css/index-layout.css" rel="stylesheet" type="text/css" />
   <!-- Skin Color -->
-  <link rel="stylesheet" href="css/colors/red2.css" id="color-skins" />
+  <link rel="stylesheet" href="css/colors/yellow.css" id="color-skins" />
 
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
   
@@ -28,7 +28,7 @@
             "background": "#000"
           },
           "button": {
-            "background": "#DE3053",
+            "background": "#0088aa",
             "color": "#fff",
             "padding": "9px 22px",
             "box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
@@ -59,7 +59,7 @@
   <div id="preloader">
     <div class="loader">
       <!--<img src="img/assets/preloader-logo.png" alt="Vossen"> -->
-      <p>OpenVidu</p>
+      <p style="font-family: Arciform; font-size: 20px">openVidu</p>
     </div>
   </div>
   <!-- End Preloader -->
@@ -73,24 +73,24 @@
         <div class="tp-banner">
           <ul>
             <!-- SLIDE 1 -->
-            <li data-transition="fade" data-slotamount="7" data-masterspeed="2000" data-thumb="img/backgrounds/bg-home-fullscreen.jpg"
+            <li class="my-gray-background" data-transition="fade" data-slotamount="7" data-masterspeed="2000" data-thumb="img/backgrounds/bg-home-fullscreen.jpg"
               data-delay="10000" data-saveperformance="on" data-title="OpenVidu">
-              <img src="img/backgrounds/bg-home-fullscreen.jpg" alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+              <!--<img src="img/backgrounds/bg-home-fullscreen.jpg" alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">-->
 
               <!-- Home Heading -->
-              <div class="tp-caption sft" data-x="center" data-y="260" data-speed="1200" data-start="1100" data-easing="Power3.easeInOut"
+              <div class="tp-caption sft" data-x="center" data-y="50" data-speed="1200" data-start="1100" data-easing="Power3.easeInOut"
                 data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
                 style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
-                <h2 class="home-heading op-1">OpenVidu</h2>
+                <h2 class="home-heading op-1"><img id="openvidu-logo" src="img/logos/openvidu_white_bg_transp.png"/></h2>
               </div>
               <!-- Home Subheading -->
-              <div class="tp-caption home-subheading sft " data-x="center" data-y="360" data-speed="1200" data-start="1350" data-easing="Power3.easeInOut"
+              <div class="tp-caption home-subheading sft " data-x="center" data-y="450" data-speed="1200" data-start="1350" data-easing="Power3.easeInOut"
                 data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
                 style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
-                <div class="op-1">Simple Real-Time-Communications through the Internet</div>
+                <div class="op-1">Easy videoconference in your web or mobile app</div>
               </div>
               <!-- Home Button -->
-              <div class="tp-caption home-button sft fadeout" data-x="center" data-y="400" data-speed="1200" data-start="1550" data-easing="Power3.easeInOut"
+              <div class="tp-caption home-button sft fadeout" data-x="center" data-y="450" data-speed="1200" data-start="1550" data-easing="Power3.easeInOut"
                 data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
                 style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
                 <div class="op-1"><a href="#features" class="btn btn-primary btn-scroll">GET STARTED</a></div>
@@ -126,6 +126,8 @@
     <!-- End Page Content-->
 
     {% include footer.html %}
+    
+    <div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/home" style="color: #ffffff">Beta 1</a></div>
 
   </div>
   <!-- End Site Wrapper -->

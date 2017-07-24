@@ -253,8 +253,43 @@ mvn package exec:java
 </code></pre>
 
 <p>5) Go to <a href="https://localhost:5000"><code>https://localhost:5000</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call. To test two users in the same computer, use a standard window and an incognito window.</p>
+<script>
+    $(document).ready(function(){
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+    });
+</script>
+
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery2" href="/img/demos/secure-login.png">
+            <img class="img-responsive" src="/img/demos/secure-login.png">
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery2" href="/img/demos/secure-join.png">
+            <img class="img-responsive" src="/img/demos/secure-join.png">
+        </a>
+    </div>
+</div>
+
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery2" href="/img/demos/secure-session-2.png">
+            <img class="img-responsive" src="/img/demos/secure-session-2.png">
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery2" href="/img/demos/secure-session-1.png">
+            <img class="img-responsive" src="/img/demos/secure-session-1.png">
+        </a>
+    </div>
+</div>
+
 <h2 id="understanding-the-code">Understanding the code</h2>
-<p>This is a very basic web application with a pretty simple vanilla JS/HTML/CSS frontend and a straightforward Java backend that serves HTML files with a MVC approach, building the templates with the help of <a href="http://www.thymeleaf.org/">Thymeleaf</a>.</p>
+<p>This is a very basic web application with a pretty simple JS/HTML/CSS frontend and a straightforward Java backend that serves HTML files with a MVC approach, building the templates with the help of <a href="http://www.thymeleaf.org/">Thymeleaf</a>.</p>
 <p>OpenVidu assumes you can identify your users so you can tell which users can connect to which video-calls, and what role (and therefore what permissions) each one of them will have in the calls. You can do this as you prefer. Here our backend will manage the users and their sessions with the easy-to-use and non-intrusive <em>HttpSession</em> API. In these posts multiple options for user session management in Java are explained, inlcuding the one used in this tutorial: <a href="http://www.journaldev.com/1907/java-session-management-servlet-httpsession-url-rewriting">journaldev.com</a>, <a href="http://www.studytonight.com/servlet/session-management.php">studytonight.com</a>.</p>
 <ul>
 <li>
@@ -286,19 +321,21 @@ mvn package exec:java
 <h3 id="1-user-logs-in">1) User logs in</h3>
 <p>At path <code>/</code> a login form will be displayed:</p>
 <p align="center">
-  <img class="img-responsive" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMlh0QkZoYmpQMkE">
+  <img class="img-responsive" style="max-width: 300px; padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSV3phM2JTWHBxakk">
 </p>
 
 <p>The form will execute a POST operation to path <code>/dashboard</code> whenever "Log in" button is clicked, passing the username and the password:</p>
-<pre><code class="html">&lt;form action=&quot;/dashboard&quot; method=&quot;post&quot;&gt;
+<pre><code class="html">&lt;form class=&quot;form-group jumbotron&quot; action=&quot;/dashboard&quot; method=&quot;post&quot;&gt;
     &lt;p&gt;
-        &lt;label&gt;User&lt;/label&gt; &lt;input type=&quot;text&quot; name=&quot;user&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+        &lt;label&gt;User&lt;/label&gt;
+        &lt;input class=&quot;form-control&quot; type=&quot;text&quot; name=&quot;user&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
     &lt;/p&gt;
     &lt;p&gt;
-        &lt;label&gt;Pass&lt;/label&gt; &lt;input type=&quot;password&quot; name=&quot;pass&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+        &lt;label&gt;Pass&lt;/label&gt;
+        &lt;input class=&quot;form-control&quot; type=&quot;password&quot; name=&quot;pass&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
     &lt;/p&gt;
-    &lt;p&gt;
-        &lt;button type=&quot;submit&quot;&gt;Log in&lt;/button&gt;
+    &lt;p class=&quot;text-center&quot;&gt;
+        &lt;button class=&quot;btn btn-lg btn-info&quot; type=&quot;submit&quot;&gt;Log in&lt;/button&gt;
     &lt;/p&gt;
 &lt;/form&gt;
 </code></pre>
@@ -340,19 +377,21 @@ public String login(@RequestParam(name = &quot;user&quot;, required = false) Str
 <h3 id="2-user-connects-to-tutorial-video-call">2) User connects to "TUTORIAL" video-call</h3>
 <p><code>dashboard.html</code> template will display a form asking for the video-call to connect and the nickname the user wants to have in it. So our 'publisher1' user would write TUTORIAL in "Session" field:</p>
 <p align="center">
-  <img class="img-responsive" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSWkJsOFltSXhYbmc">
+  <img class="img-responsive" style="max-width: 500px; padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMElwU2l1cGpKQzQ">
 </p>
 
 <p>The form will execute a POST operation to path <code>/session</code> whenever "Join!" button is clicked, passing the nickname and the session name:</p>
-<pre><code class="html">&lt;form action=&quot;/session&quot; method=&quot;post&quot;&gt;
+<pre><code class="html">&lt;form class=&quot;form-group&quot; action=&quot;/session&quot; method=&quot;post&quot;&gt;
     &lt;p&gt;
-        &lt;label&gt;Name: &lt;/label&gt; &lt;input name=&quot;data&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+        &lt;label&gt;Participant&lt;/label&gt;
+        &lt;input class=&quot;form-control&quot; type=&quot;text&quot; name=&quot;data&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
     &lt;/p&gt;
     &lt;p&gt;
-        &lt;label&gt;Session: &lt;/label&gt; &lt;input name=&quot;session-name&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
+        &lt;label&gt;Session&lt;/label&gt;
+        &lt;input class=&quot;form-control&quot; type=&quot;text&quot; name=&quot;session-name&quot; required=&quot;true&quot;&gt;&lt;/input&gt;
     &lt;/p&gt;
-    &lt;p&gt;
-        &lt;button type=&quot;submit&quot;&gt;Join!&lt;/button&gt;
+    &lt;p class=&quot;text-center&quot;&gt;
+        &lt;button class=&quot;btn btn-lg btn-success&quot; type=&quot;submit&quot;&gt;Join!&lt;/button&gt;
     &lt;/p&gt;
 &lt;/form&gt;
 </code></pre>
@@ -450,13 +489,13 @@ var session = OV.initSession(sessionId);
 session.on('streamCreated', function (event) {
 
     // Subscribe to the Stream to receive it
-    // HTML video will be appended to element with 'subscriber' id
-    var subscriber = session.subscribe(event.stream, 'subscriber');
+    // HTML video will be appended to element with 'video-container' id
+    var subscriber = session.subscribe(event.stream, 'video-container');
 
     // When the HTML video has been appended to DOM...
     subscriber.on('videoElementCreated', function (event) {
 
-        // Add a new &lt;p&gt; element for the user's name and nickname just below its video
+        // Add a new HTML element for the user's name and nickname just below its video
         appendUserData(event.element, subscriber.stream.connection);
     });
 });
@@ -484,11 +523,20 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
 
             // --- 4) Get your own camera stream ---
 
-            var publisher = OV.initPublisher('publisher', {
+            var publisher = OV.initPublisher('video-container', {
                 audio: true,
                 video: true,
                 quality: 'MEDIUM'
             });
+
+            // When our HTML video has been added to DOM...
+            publisher.on('videoElementCreated', function (event) {
+                // Init the main video with ours and append our data
+                var userData = {nickName: nickName, userName: userName};
+                initMainVideo(event.element, userData);
+                appendUserData(event.element, userData);
+            });
+
 
             // --- 5) Publish your stream ---
 
@@ -496,11 +544,12 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
 
         } else {
             console.warn('You don\'t have permissions to publish');
+            initMainVideoThumbnail(); // Show SUBSCRIBER message in main video
         }
     } else {
-        console.warn('Error connecting to the session:', error.code, error.message);
+        console.warn('There was an error connecting to the session:', error.code, error.message);
     }
-}); 
+});
 </code></pre>
 
 <p>The user will now see its own video on the page. The connection to the session has completed!</p>
@@ -546,7 +595,8 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
 <pre><code class="html">&lt;form action=&quot;/leave-session&quot; method=&quot;post&quot;&gt;
     &lt;input type=&quot;hidden&quot; name=&quot;session-name&quot; th:value=&quot;${sessionName}&quot;&gt;&lt;/input&gt;
     &lt;input type=&quot;hidden&quot; name=&quot;token&quot; th:value=&quot;${token}&quot;&gt;&lt;/input&gt;
-    &lt;button type=&quot;submit&quot; onclick=&quot;leaveSession()&quot;&gt;Leave session&lt;/button&gt;
+    &lt;button id=&quot;buttonLeaveSession&quot; class=&quot;btn btn-large btn-danger&quot; type=&quot;submit&quot; onclick=&quot;leaveSession()&quot;&gt;
+        Leave session&lt;/button&gt;
 &lt;/form&gt;
 </code></pre>
 
