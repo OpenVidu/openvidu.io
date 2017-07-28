@@ -77,7 +77,7 @@
         }, 
         {
             "location": "/home/openvidu-basics/", 
-            "text": "OpenVidu Basics\n\n\n\n\n\n\nComing soon...", 
+            "text": "OpenVidu Basics\n\n\n\n\n\n\nOpenVidu makes the integration of videoconference capabilities into your app an easy task. The process is conceptually simple:\n\n\n\n\nSession: these are the virtual rooms where your users will connect to see each other. Only users connected to the same Session can see each other.\n\n\nStream: when connected to a session, users can send and receive Streams of media.\n\n\nPublisher: allows you to publish the Stream of a user.\n\n\nSubscriber: allows you to receive the Stream of other user.\n\n\nConnection: represents the connection of one user to one Session. Custom user info can be stored in the Connection, and will be received by every other user in the Session (a nickname, a photo URL, ...). That way broadcasting user data is very simple.", 
             "title": "OpenVidu Basics"
         }, 
         {

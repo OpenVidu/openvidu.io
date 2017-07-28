@@ -118,6 +118,10 @@ p.subheading {
     height: 100% !important;
 }
 
+#div-page-top {
+    position: fixed;
+}
+
 .custom-page-top {
     height: 380px;
 }
@@ -489,6 +493,15 @@ a.cc-btn {
     }
     pre code {
         white-space: pre !important;
+    }
+    #page-top {
+        height: 330px;
+    }
+    #page-top .page-top-title {
+        top: 85px;
+    }
+    #page-top .page-top-title h2 {
+        font-size: 50px;
     }
 }
 
