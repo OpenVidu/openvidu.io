@@ -7,7 +7,9 @@
 }
 
 
-
+.loader img {
+    width: 8em;
+}
 
 #openvidu-logo {
     max-width: 10em;
