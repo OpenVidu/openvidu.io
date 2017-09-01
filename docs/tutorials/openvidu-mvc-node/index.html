@@ -65,6 +65,12 @@ active: documentation
     <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
  
 </li>
 </ul>
@@ -311,7 +317,7 @@ node server.js localhost:8443 MY_SECRET
 <li>
 <p><strong>Frontend static files</strong> (<code>/public</code> folder)</p>
 <ul>
-<li><code>OpenVidu.js</code> : openvidu-browser library. You don't have to manipulate this file</li>
+<li><code>openvidu-browser-VERSION.js</code> : openvidu-browser library. You don't have to manipulate this file</li>
 <li><code>style.css</code> : some CSS classes to style the templates</li>
 </ul>
 </li>
@@ -378,7 +384,7 @@ function dashboardController(req, res) {
 
 <hr />
 <h3 id="2-user-connects-to-tutorial-video-call">2) User connects to "TUTORIAL" video-call</h3>
-<p><code>dashboard.html</code> template will display a form asking for the video-call to connect and the nickname the user wants to have in it. So our 'publisher1' user would write TUTORIAL in "Session" field:</p>
+<p><code>dashboard.ejs</code> template will display a form asking for the video-call to connect and the nickname the user wants to have in it. So our 'publisher1' user would write TUTORIAL in "Session" field:</p>
 <p align="center">
   <img class="img-responsive" style="max-width: 500px; padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMElwU2l1cGpKQzQ">
 </p>
@@ -417,25 +423,25 @@ var mapSessionIdTokens = {};
 
 <p>Rest controller method receives both params sent by the client (whatever nickname the user has chosen and "TUTORIAL" as the sessionName). First it prepares a param we will need a little further on: <code>tokenOptions</code>.</p>
 <pre><code class="javascript">app.post('/session', (req, res) =&gt; {
-// Check the user is logged ... 
+    // Check the user is logged ... 
 
-// The nickname sent by the client
-var clientData = req.body.data;
-// The video-call to connect (&quot;TUTORIAL&quot;)
-var sessionName = req.body.sessionname;
+    // The nickname sent by the client
+    var clientData = req.body.data;
+    // The video-call to connect (&quot;TUTORIAL&quot;)
+    var sessionName = req.body.sessionname;
 
-// Role associated to this user
-var role = users.find(u =&gt; (u.user === req.session.loggedUser)).role;
+    // Role associated to this user
+    var role = users.find(u =&gt; (u.user === req.session.loggedUser)).role;
 
-// Optional data to be passed to other users when this user connects to the video-call
-// In this case, a JSON with the value we stored in the req.session object on login
-var serverData = '{&quot;serverData&quot;: &quot;' + req.session.loggedUser + '&quot;}';
+    // Optional data to be passed to other users when this user connects to the video-call
+    // In this case, a JSON with the value we stored in the req.session object on login
+    var serverData = '{&quot;serverData&quot;: &quot;' + req.session.loggedUser + '&quot;}';
 
-// Build tokenOptions object with the serverData and the role
-var tokenOptions = new TokenOptions.Builder()
-    .data(serverData)
-    .role(role)
-    .build();
+    // Build tokenOptions object with the serverData and the role
+    var tokenOptions = new TokenOptions.Builder()
+        .data(serverData)
+        .role(role)
+        .build();
 </code></pre>
 
 <p>Just after that an <em>if-else</em> statement comes into play: does the session "TUTORIAL" already exist? </p>
@@ -474,7 +480,7 @@ var tokenOptions = new TokenOptions.Builder()
 }
 </code></pre>
 
-<p>We are almost there! Now in <code>session.html</code> JavaScript code (preceded by a tag <code>&lt;script&gt;</code>) we can init a new Session with <em>sessionId</em> and connect to it with <em>token</em>:</p>
+<p>We are almost there! Now in <code>session.ejs</code> JavaScript code (preceded by a tag <code>&lt;script&gt;</code>) we can init a new Session with <em>sessionId</em> and connect to it with <em>token</em>:</p>
 <pre><code class="javascript">// Get all the attributes from the template in EJS style
 var sessionId = &lt;%- JSON.stringify(sessionId) %&gt;;
 var token = &lt;%- JSON.stringify(token) %&gt;;
@@ -525,11 +531,11 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
         // trying to publish its stream. Even if someone modified the client's code and
         // published the stream, it wouldn't work if the token sent in Session.connect
         // method doesn't belong to a 'PUBLIHSER' role
-        if (isPublisher(userName)) {
+        if (isPublisher()) {
 
             // --- 4) Get your own camera stream ---
 
-            var publisher = OV.initPublisher('publisher', {
+            var publisher = OV.initPublisher('video-container', {
                 audio: true,
                 video: true,
                 quality: 'MEDIUM'
@@ -538,9 +544,13 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
             // When our HTML video has been added to DOM...
             publisher.on('videoElementCreated', function (event) {
                 // Init the main video with ours and append our data
-                var userData = {nickName: nickName, userName: userName};
+                var userData = {
+                    nickName: nickName,
+                    userName: userName
+                };
                 initMainVideo(event.element, userData);
                 appendUserData(event.element, userData);
+                $(event.element).prop('muted', true); // Mute local video
             });
 
 
@@ -555,7 +565,7 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
     } else {
         console.warn('There was an error connecting to the session:', error.code, error.message);
     }
-}); 
+});
 </code></pre>
 
 <p>The user will now see its own video on the page. The connection to the session has completed!</p>
@@ -589,11 +599,11 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
 }
 </code></pre>
 
-<p>The code executed in <code>session.html</code> <em>&lt; script &gt;</em> tag would also be the same. After the <code>Session.publish()</code> method has been succesful, both users will be seeing each other's video, as well as the username and the nickname below it.</p>
+<p>The code executed in <code>session.ejs</code> <em>&lt; script &gt;</em> tag would also be the same. After the <code>Session.publish()</code> method has been succesful, both users will be seeing each other's video, as well as the username and the nickname below it.</p>
 <hr />
 <h3 id="4-users-leave-the-video-call">4) Users leave the video-call</h3>
 <p>After a while both users decide to leave the session. Apart from calling <code>session.disconnect()</code> (triggered in <code>leaveSession()</code> <em>onclick</em> method) to destroy the connection on openvidu-server, we need another POST operation to let the backend know that certain user has left the session so it can update the collections with the active sessions and tokens.</p>
-<p>In <code>session.html</code> template the "Leave session" button actually performs a POST operation to path <code>/leave-session</code> with a hidden form. Notice that when the user clicks the submit button, a POST operation will be triggered but also the <code>leaveSession()</code> method. First updates our backend. Second updates our openvidu-server.</p>
+<p>In <code>session.ejs</code> template the "Leave session" button actually performs a POST operation to path <code>/leave-session</code> with a hidden form. Notice that when the user clicks the submit button, a POST operation will be triggered but also the <code>leaveSession()</code> method. First updates our backend. Second updates our openvidu-server.</p>
 <pre><code class="html">&lt;form action=&quot;/leave-session&quot; method=&quot;post&quot;&gt;
     &lt;input style=&quot;display:none&quot; name=&quot;sessionname&quot; value=&quot;&lt;%= sessionName %&gt;&quot;&gt;&lt;/input&gt;
     &lt;input style=&quot;display:none&quot; name=&quot;token&quot; value=&quot;&lt;%= token %&gt;&quot;&gt;&lt;/input&gt;

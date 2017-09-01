@@ -65,6 +65,12 @@ active: documentation
     <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
  
 </li>
 </ul>
@@ -311,7 +317,7 @@ mvn package exec:java
 <li>
 <p><strong>Frontend static files</strong> (<code>src/main/resources/static</code>)</p>
 <ul>
-<li><code>OpenVidu.js</code> : openvidu-browser library. You don't have to manipulate this file</li>
+<li><code>openvidu-browser-VERSION.js</code> : openvidu-browser library. You don't have to manipulate this file</li>
 <li><code>style.css</code> : some CSS classes to style the templates</li>
 </ul>
 </li>
@@ -495,7 +501,7 @@ session.on('streamCreated', function (event) {
     // When the HTML video has been appended to DOM...
     subscriber.on('videoElementCreated', function (event) {
 
-        // Add a new HTML element for the user's name and nickname just below its video
+        // Add a new HTML element for the user's name and nickname over its video
         appendUserData(event.element, subscriber.stream.connection);
     });
 });
@@ -509,17 +515,16 @@ session.on('streamDestroyed', function (event) {
 
 // --- 3) Connect to the session passing the retrieved token and some more data from
 //         the client (in this case a JSON with the nickname chosen by the user) ---
-
-session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}', function (err) {
+session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}', function (error) {
 
     // If the connection is successful, initialize a publisher and publish to the session
-    if (!err) {
+    if (!error) {
 
         // Here we check somehow if the user has at least 'PUBLISHER' role before
         // trying to publish its stream. Even if someone modified the client's code and
         // published the stream, it wouldn't work if the token sent in Session.connect
         // method doesn't belong to a 'PUBLIHSER' role
-        if (isPublisher(userName)) {
+        if (isPublisher()) {
 
             // --- 4) Get your own camera stream ---
 
@@ -532,9 +537,13 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}',
             // When our HTML video has been added to DOM...
             publisher.on('videoElementCreated', function (event) {
                 // Init the main video with ours and append our data
-                var userData = {nickName: nickName, userName: userName};
+                var userData = {
+                    nickName: nickName,
+                    userName: userName
+                };
                 initMainVideo(event.element, userData);
                 appendUserData(event.element, userData);
+                $(event.element).prop('muted', true);  // Mute local video
             });
 
 
@@ -614,26 +623,22 @@ public String removeUser(@RequestParam(name = &quot;session-name&quot;) String s
         if (this.mapSessionIdsTokens.containsKey(sessionId)) {
             // If the token exists
             if (this.mapSessionIdsTokens.get(sessionId).remove(token) != null) {
-                // Token has been removed
+                // User left the session
                 if (this.mapSessionIdsTokens.get(sessionId).isEmpty()) {
                     // Last user left: session &quot;TUTORIAL&quot; must be removed
                     this.mapSessions.remove(sessionName);
                 }
-                model.addAttribute(&quot;sessionId&quot;, sessionId);
                 return &quot;redirect:/dashboard&quot;;
             } else {
                 // The TOKEN wasn't valid
-                model.addAttribute(&quot;sessionId&quot;, sessionId);
                 return &quot;redirect:/dashboard&quot;;
             }
         } else {
             // The SESSIONID wasn't valid
-            model.addAttribute(&quot;sessionId&quot;, sessionId);
             return &quot;redirect:/dashboard&quot;;
         }
     } else {
         // The SESSION does not exist
-        model.addAttribute(&quot;sessionId&quot;, sessionId);
         return &quot;redirect:/dashboard&quot;;
     }
 }

@@ -1,0 +1,411 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - OpenVidu Artifacts
+active: documentation
+---
+
+<script src="/js/jquery-3.2.1.slim.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('OpenVidu Artifacts')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('OpenVidu Artifacts')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Home</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../">Home</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-basics/">OpenVidu Basics</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">OpenVidu Artifacts</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>API</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-browser/">openvidu-browser</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-java-client/">openvidu-java-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-node-client/">openvidu-node-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/REST-API/">REST API</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/">Deploying on AWS</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">OpenVidu Artifacts</h2>
+
+<hr>
+
+<p><br>
+<h3>Main artifacts</h3></p>
+<table>
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Latest version</th>
+    <th>Link</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>1.0.3-beta.3</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser" target="_blank">NPM</a></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>1.0.3-beta.3</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases" target="_blank">GitHub</a></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-java-client</td>
+    <td>JAR</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases" target="_blank">GitHub</a></td>
+  </tr>
+  <tr>
+    <td>MVN package</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://mvnrepository.com/artifact/io.openvidu/openvidu-java-client/1.0.0-beta.1" target="_blank">MVN Repository</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>1.0.1-beta.1</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client" target="_blank">NPM</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-cloud-devops</td>
+    <td>File?</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu-cloud-devops/releases" target="_blank">GitHub</a></td>
+  </tr>
+
+</table>
+
+<p><br>
+<h3>Demos and tutorials artifacts</h3></p>
+<table>
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Latest version</th>
+    <th>Link</th>
+  </tr>
+
+  <tr>
+    <td>openvidu-js-java</td>
+    <td>JAR</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu-tutorials/releases" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-mvc-java</td>
+    <td>JAR</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu-tutorials/releases" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td>basic-webinar-demo</td>
+    <td>Docker container</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/basic-webinar-demo/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>basic-videoconference-demo</td>
+    <td>Docker container</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/basic-videoconference-demo/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="2">classroom-demo</td>
+    <td>Docker container</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/classroom-demo/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+  <tr>
+    <td>WAR</td>
+    <td>1.0.0-beta.1</td>
+    <td><a class="" href="https://github.com/OpenVidu/classroom-demo/releases" target="_blank">GitHub</a></td>
+  </tr>
+
+</table>
+
+<p><br>
+<h3>Tutorials artifacts without a binary distribution</h3></p>
+<table>
+
+  <tr>
+    <th>Artifact</th>
+    <th>How to run it</th>
+  </tr>
+
+  <tr>
+    <td>openvidu-js-node</td>
+    <td><a href="/docs/tutorials/openvidu-js-node/#executing-this-example" target="_blank">Go</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-mvc-node</td>
+    <td><a href="/docs/tutorials/openvidu-mvc-node/#executing-this-example" target="_blank">Go</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-insecure-js</td>
+    <td><a href="/docs/tutorials/openvidu-insecure-js/#executing-this-example" target="_blank">Go</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-insecure-angular</td>
+    <td><a href="/docs/tutorials/openvidu-insecure-angular/#executing-this-example" target="_blank">Go</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-getaroom</td>
+    <td><a href="/docs/tutorials/openvidu-getaroom/#executing-this-example" target="_blank">Go</a></td>
+  </tr>
+
+</table> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../tutorials/" class="btn btn-xs btn-primary float-right" title="Intro">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-basics/" class="btn btn-xs btn-primary" title="OpenVidu Basics"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/home/openvidu-artifacts.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

@@ -96,6 +96,15 @@
   {% endif %}
 
   {% if page.active == "demos" %}
+    <script src="js/tabs.js"></script>
+    <script>
+      var myTabs = tabs({
+        el: '#tabs',
+        tabNavigationLinks: '.c-tabs-nav__link',
+        tabContentContainers: '.c-tab'
+      });
+      myTabs.init();
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
   {% endif %}

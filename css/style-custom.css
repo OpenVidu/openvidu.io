@@ -1,3 +1,7 @@
+::selection {
+    color: white;
+}
+
 .my-gray-background {
     background-color: #4d4d4d !important;
 }
@@ -5,7 +9,6 @@
 .my-blue-font-light {
     color: #00C8F7 !important;
 }
-
 
 .loader img {
     width: 8em;
@@ -64,6 +67,7 @@ li.active {
 .navbar-default button.navbar-toggle span {
     background: #00C8F7 !important;
 }
+
 .navbar-default.navbar-small button.navbar-toggle span {
     background: #0088aa !important;
 }
@@ -125,7 +129,7 @@ p.subheading {
 }
 
 .custom-page-top {
-    height: 380px;
+    height: 350px;
 }
 
 #sticky-menu ul {
@@ -198,6 +202,10 @@ p.subheading {
 #sticky-menu .toctree-l1 {
     padding-top: 3px;
     padding-bottom: 3px;
+}
+
+#doc-container li {
+    color: #7a7a7a;
 }
 
 #doc-container .docs-tutorials img {
@@ -298,6 +306,18 @@ li.subnav_drop span {
     display: block;
     width: 100%;
     overflow: auto;
+}
+
+#img-mob {
+    max-height: 240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#img-mob2 {
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.cc-window {
@@ -445,6 +465,121 @@ a.cc-btn {
     display: inline-block;
 }
 
+#demo-container .demo-description p {
+    color: #404040;
+}
+
+.img-docker {
+    padding: 10px;
+}
+
+#tabs h3 {}
+
+.c-tabs-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.c-tabs-nav__link {
+    flex: 1;
+    margin-right: 4px;
+    padding: 12px;
+    color: #fff;
+    background-color: #E1E2E1;
+    text-align: center;
+    transition: color 0.3s;
+}
+
+.c-tabs-nav__link:last-child {
+    margin-right: 0;
+}
+
+.c-tabs-nav__link:hover {
+    color: #6d6d6d;
+}
+
+.c-tabs-nav__link.is-active {
+    color: #dc446e;
+    background-color: #f3f3f3;
+}
+
+.c-tabs-nav__link i,
+.c-tabs-nav__link span {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.c-tabs-nav__link i {
+    font-size: 18px;
+}
+
+.c-tabs-nav__link span {
+    display: none;
+    font-size: 18px;
+}
+
+
+/**
+ * Tab
+ */
+
+.c-tab {
+    display: none;
+    background-color: #f3f3f3;
+}
+
+.c-tab.is-active {
+    display: block;
+}
+
+.c-tab__content {
+    padding: 3.5rem;
+}
+
+
+/**
+ * Tabs no-js fallback
+ */
+
+.c-tabs.no-js .c-tabs-nav {
+    display: none;
+}
+
+.c-tabs.no-js .c-tab {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.c-tabs.no-js .c-tab:last-child {
+    margin-bottom: 0;
+}
+
+@media all and (min-width: 768px) {
+    .c-tabs-nav__link i {
+        margin-bottom: 12px;
+        font-size: 22px;
+    }
+    .c-tabs-nav__link span {
+        display: block;
+    }
+}
+
+@media all and (max-width: 767px) {
+    a.c-tabs-nav__link {
+        padding: 6px;
+    }
+    .c-tab__content {
+        padding: 1rem;
+    }
+    #doc-container {
+        margin-top: -25px;
+    }
+}
+
+
 /*.row-gallery {
     margin-top: 50px;
 }*/
@@ -476,14 +611,24 @@ a.cc-btn {
     #doc-container h1 {
         font-size: 30px;
     }
+    #img-mob {
+        max-height: 400px;
+    }
+    #img-mob2 {
+        max-height: 400px;
+    }
     #demo-container .col-img-demo {
         text-align: center;
     }
     #demo-container .col-title-demo {
         text-align: center;
     }
-    #demo-container .img-demo {
-        max-width: 200px;
+    #demo-container #tabs .img-demo {
+        max-width: inherit;
+        width: 100%;
+    }
+    #demo-container #tabs h3 {
+        display: none;
     }
     #demo-container ol li code {
         display: inline-block;
@@ -497,22 +642,37 @@ a.cc-btn {
         white-space: pre !important;
     }
     #page-top {
-        height: 330px;
+        height: 270px;
     }
     #page-top .page-top-title {
-        top: 85px;
+        top: 93px;
     }
     #page-top .page-top-title h2 {
-        font-size: 50px;
+        font-size: 37px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #page-top .home-subheading {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #contact {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    #get-connected-community {
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 }
 
-
 @font-face {
-  font-family: 'Arciform';
-  src: url('/fonts/Arciform.eot'); /* IE9 Compat Modes */
-  src: url('/fonts/Arciform.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/Arciform.woff') format('woff'), /* Modern Browsers */
-       url('/fonts/Arciform.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/Arciform.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-family: 'Arciform';
+    src: url('/fonts/Arciform.eot');
+    /* IE9 Compat Modes */
+    src: url('/fonts/Arciform.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/Arciform.woff') format('woff'), /* Modern Browsers */
+    url('/fonts/Arciform.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/fonts/Arciform.svg#svgFontName') format('svg');
+    /* Legacy iOS */
 }

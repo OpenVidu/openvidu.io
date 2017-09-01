@@ -65,6 +65,12 @@ active: documentation
     <a class="" href="../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
  
 </li>
 </ul>
@@ -290,11 +296,11 @@ sudo service kurento-media-server-6.0 restart
 </code></pre>
 
 <h4 id="7a-init-openvidu-server-docker-container-securization-enabled">7A. Init openvidu-server Docker container (securization enabled)...</h4>
-<pre><code class="html">sudo docker run -d -p 8443:8443 -e openvidu.security=true -e openvidu.secret=YOUR_SECRET openvidu/openvidu-server
+<pre><code class="html">sudo docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET openvidu/openvidu-server
 </code></pre>
 
 <h4 id="7b-or-init-your-own-openvidu-server-executable-securization-enabled">7B. ...or init your own openvidu-server executable (securization enabled)</h4>
-<pre><code class="bash">java -jar -Dopenvidu.security=true -Dopenvidu.secret=YOUR_SECRET openvidu-server.jar
+<pre><code class="bash">java -jar -Dopenvidu.secret=YOUR_SECRET openvidu-server.jar
 </code></pre> 
 						</div>
 					</div> <footer>

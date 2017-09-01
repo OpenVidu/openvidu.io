@@ -65,6 +65,12 @@ active: documentation
     <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
  
 </li>
 </ul>
@@ -247,7 +253,7 @@ active: documentation
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.security=false openvidu/openvidu-server-kms
+<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 openvidu/openvidu-server-kms
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
@@ -276,19 +282,19 @@ active: documentation
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This application is very simple. It has only 4 files:</p>
 <ul>
-<li><code>OpenVidu.js</code>: openvidu-browser library. You don't have to manipulate this file. </li>
+<li><code>openvidu-browser-VERSION.js</code>: openvidu-browser library. You don't have to manipulate this file. </li>
 <li><code>app.js</code>: sample application main JavaScritp file, which makes use of <em>OpenVidu.js</em>. You can manipulate this file to suit your needs.</li>
 <li><code>index.html</code>: HTML code for the form to connect to a video-call and for the video-call itself. You can manipulate this file to suit your needs. 
     It has two links to both JavaScript files: </li>
 </ul>
-<pre><code class="html">&lt;script src=&quot;OpenVidu.js&quot;&gt;&lt;/script&gt;
+<pre><code class="html">&lt;script src=&quot;openvidu-browser-VERSION.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 
 <ul>
 <li><code>style.css</code>: some CSS classes to style <em>index.html</em>. You can manipulate this file to suit your needs.</li>
 </ul>
-<p>Let's see how <code>app.js</code> uses <code>OpenVidu.js</code>:</p>
+<p>Let's see how <code>app.js</code> uses <code>openvidu-browser-VERSION.js</code>:</p>
 <hr />
 <p><strong>First lines declare the two variables that will be needed in different points along the code. <code>OV</code> will be our OpenVidu object and <code>session</code> the video-call we will connect to:</strong></p>
 <pre><code class="javascript">var OV;
@@ -302,11 +308,11 @@ var session;
 // Init OpenVidu object
 OV = new OpenVidu();
 
-// We will join the video-call &quot;sessionId&quot;. This parameter must start with the URL of OpenVidu Server, with secure WebSocket protocol ('wss://')
-session = OV.initSession('wss://' + location.hostname + ':8443/' + sessionId);
+// We will join the video-call &quot;sessionId&quot;. As there's no server, this parameter must start with the URL of OpenVidu Server (with secure websocket protocol: &quot;wss://&quot;) and must include the OpenVidu secret at the end
+session = OV.initSession(&quot;wss://&quot; + location.hostname + &quot;:8443/&quot; + sessionId + '?secret=MY_SECRET');
 </code></pre>
 
-<p>Session's identifiers must begin with the URL where <em>openvidu-server</em> listens, so they can connect through WebSocket to it. It is necessary to explicitly set this URL in the param received by <code>OV.initSession</code> method only when using the insecure version of OpenVidu. Since we are in a local sample app, <code>OV.initSession</code> will finally receive <code>wss://localhost:8443/</code> as its <em>openvidu-server</em> URL. Last param appended, <code>sessionId</code>, is the distinctive portion of the session identifier and allows OpenVidu to differentiate sessions from each other. In this case, this parameter is retrieved from HTML input <code>&lt;input type="text" id="sessionId" required&gt;</code>, which may be filled by the user.</p>
+<p>Session's identifiers must begin with the URL where <em>openvidu-server</em> listens, so they can connect through WebSocket to it. It is necessary to explicitly set this URL in the param when using a pure frontend web. Since we are in a local sample app, <code>OV.initSession</code> will finally receive <code>wss://localhost:8443/</code> as its <em>openvidu-server</em> URL. <code>sessionId</code> is the distinctive portion of the session identifier and allows OpenVidu to differentiate sessions from each other. In this case, this parameter is retrieved from HTML input <code>&lt;input class="form-control" type="text" id="sessionId" required&gt;</code>, which may be filled by the user. Finally, <code>'?secret=MY_SECRET'</code> string allows us to connect to OpenVidu directly from the browser, without a server side. <strong>WARNING: this is only for demos and developing environments. Do NOT include your secret in production.</strong></p>
 <pre><code class="javascript">// --- 2) Specify the actions when events take place ---
 
 // On every new Stream received...

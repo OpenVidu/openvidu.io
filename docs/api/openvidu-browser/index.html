@@ -65,6 +65,12 @@ active: documentation
     <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
  
 </li>
 </ul>
@@ -310,7 +316,7 @@ active: documentation
 <td><code>connect</code></td>
 <td></td>
 <td><code>token:string</code><br/><em><code>metadata:string</code></em><br/><code>callback(error):function</code></td>
-<td>Connects to the session using <strong>token</strong> and executes <strong>callback</strong> in the end (<em>error</em> parameter null if success). <strong>metadata</strong> parameter allows you to pass a string as extra data to share with other users when they receive <em>participantJoined</em> event. You can also add metadata through openvidu-backend-client when generating tokens (see <a href="#tokenoptions">TokenOptions</a>). The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
+<td>Connects to the session using <strong>token</strong> and executes <strong>callback</strong> in the end (<em>error</em> parameter null if success). <strong>metadata</strong> parameter allows you to pass a string as extra data to share with other users when they receive <em>streamCreated</em> event. You can also add metadata through openvidu-backend-client when generating tokens (see <a href="#tokenoptions">TokenOptions</a>). The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
 </tr>
 <tr>
 <td><code>disconnect</code></td>

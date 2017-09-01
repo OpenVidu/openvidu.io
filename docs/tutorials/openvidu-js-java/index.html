@@ -65,6 +65,12 @@ active: documentation
     <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
  
 </li>
 </ul>
@@ -302,14 +308,13 @@ mvn package exec:java
 <li>
 <p><strong>Frontend</strong>: Pure JS/HTML/CSS files (<code>src/main/resources/static</code>)</p>
 <ul>
-<li><code>OpenVidu.js</code> : openvidu-browser library. You don't have to manipulate this file. </li>
-<li><code>app.js</code> : sample application main JavaScritp file, which makes use of <em>OpenVidu.js</em>.</li>
+<li><code>openvidu-browser-VERSION.js</code> : openvidu-browser library. You don't have to manipulate this file. </li>
+<li><code>app.js</code> : sample application main JavaScritp file, which makes use of <em>openvidu-browser-VERSION.js</em>.</li>
 <li>
-<p><code>index.html</code> : HTML code for the form to login, the form to connect to a video-call and for the video-call itself.
-    It has two links to both JavaScript files: 
-    <code>html
-    &lt;script src="OpenVidu.js"&gt;&lt;/script&gt;
-    &lt;script src="app.js"&gt;&lt;/script&gt;</code></p>
+<p><code>index.html</code> : HTML code for the form to login, the form to connect to a video-call and for the video-call itself. It has two links to both JavaScript files:</p>
+<pre><code>&lt;script src="openvidu-browser-VERSION.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+</code></pre>
 </li>
 <li>
 <p><code>style.css</code>: some CSS classes to style <em>index.html</em>.</p>
@@ -348,16 +353,15 @@ mvn package exec:java
 </code></pre>
 
 <p><code>LoginController.java</code> checks the params are correct and if so sets an <em>HttpSession</em> for the newly logged user (adding a "loggedUser" attribute with its username in the HttpSession object):</p>
-<pre><code class="java">@RequestMapping(value = &quot;/api-login/login&quot;, method = RequestMethod.POST)
-public ResponseEntity&lt;Object&gt; login(@RequestBody String userPass, HttpSession httpSession) 
-                    throws ParseException {
+<pre><code class="java">@RequestMapping(value = &quot;/login&quot;, method = RequestMethod.POST)
+public ResponseEntity&lt;Object&gt; login(@RequestBody String userPass, HttpSession httpSession) throws ParseException {
 
     // Retrieve params from POST body
     JSONObject userPassJson = (JSONObject) new JSONParser().parse(userPass);
     String user = (String) userPassJson.get(&quot;user&quot;);
     String pass = (String) userPassJson.get(&quot;pass&quot;);
 
-    if (login(user, pass)){ // Correct user-pass
+    if (login(user, pass)) { // Correct user-pass
         // Validate session and return OK 
         // Value stored in HttpSession allows us to identify the user in future requests
         httpSession.setAttribute(&quot;loggedUser&quot;, user);
@@ -384,7 +388,9 @@ public ResponseEntity&lt;Object&gt; login(@RequestBody String userPass, HttpSess
 
 <p>So the first thing to do here is to retrieve a <em>sessionId</em> and a <em>token</em> from our backend. Only when we have them available in the browser we will continue with the <em>join</em> operation. Let's see what <code>getSessionIdAndToken()</code> looks like:</p>
 <pre><code class="javascript">function getSessionIdAndToken(callback) {
-    sessionName = $(&quot;#sessionName&quot;).val(); // Video-call to connect (&quot;TUTORIAL&quot;)
+    sessionName = $(&quot;#sessionName&quot;).val(); // Video-call chosen by the user (&quot;TUTORIAL&quot;)
+    nickName = $(&quot;#participantName&quot;).val(); // Nickname chosen by the user
+
     var jsonBody = JSON.stringify({ // Body of POST request
         'session': sessionName
     });
@@ -492,7 +498,7 @@ session.on('streamCreated', function (event) {
     // When the HTML video has been appended to DOM...
     subscriber.on('videoElementCreated', function (event) {
 
-        // Add a new &lt;p&gt; element for the user's name and nickname just below its video
+        // Add a new HTML element for the user's name and nickname over its video
         appendUserData(event.element, subscriber.stream.connection);
     });
 });
@@ -507,10 +513,10 @@ session.on('streamDestroyed', function (event) {
 // --- 3) Connect to the session passing the retrieved token and some more data from
 //         the client (in this case a JSON with the nickname chosen by the user) ---
 
-session.connect(token, '{&quot;clientData&quot;: &quot;' + participantName + '&quot;}', function (error) {
+session.connect(token, '{&quot;clientData&quot;: &quot;' + nickName + '&quot;}', function (error) {
 
     // If the connection is successful, initialize a publisher and publish to the session
-    if (!err) {
+    if (!error) {
 
         // Here we check somehow if the user has at least 'PUBLISHER' role before
         // trying to publish its stream. Even if someone modified the client's code and
@@ -529,9 +535,13 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + participantName + '&q
             // When our HTML video has been added to DOM...
             publisher.on('videoElementCreated', function (event) {
                 // Init the main video with ours and append our data
-                var userData = {nickName: participantName, userName: userName};
+                var userData = {
+                    nickName: nickName,
+                    userName: userName
+                };
                 initMainVideo(event.element, userData);
                 appendUserData(event.element, userData);
+                $(event.element).prop('muted', true); // Mute local video
             });
 
 
@@ -544,7 +554,7 @@ session.connect(token, '{&quot;clientData&quot;: &quot;' + participantName + '&q
             initMainVideoThumbnail(); // Show SUBSCRIBER message in main video
         }
     } else {
-        console.warn('Error connecting to the session:', error.code, error.message);
+        console.warn('There was an error connecting to the session:', error.code, error.message);
     }
 });
 
@@ -620,7 +630,7 @@ public ResponseEntity&lt;JSONObject&gt; removeUser(@RequestBody String sessionNa
         if (this.mapSessionIdsTokens.containsKey(sessionId)) {
             // If the token exists
             if (this.mapSessionIdsTokens.get(sessionId).remove(token) != null) {
-                // Token has been removed
+                // User left the session
                 if (this.mapSessionIdsTokens.get(sessionId).isEmpty()) {
                     // Last user left: session &quot;TUTORIAL&quot; must be removed
                     this.mapSessions.remove(sessionName);

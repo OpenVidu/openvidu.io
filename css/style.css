@@ -36,7 +36,7 @@ Table of Contents:
 @import "revolution-slider.css";
 @import "owl.carousel.css";
 @import "animate.css";
-@import "cubeportfolio.min.css"; 
+@import "cubeportfolio.min.css";
 
 /*----- Fonts -----*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
@@ -2817,7 +2817,7 @@ outline-offset: 0;
     width: 100%;
 }
 .page-top-title {
-    top:160px;
+    top:155px;
     position:relative;
     z-index: 99;
 }
