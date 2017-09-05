@@ -306,18 +306,22 @@ custom_js:
                                 <li>
                                     <p>You will need <i>node</i>, <i>NPM</i> and <i>angular-cli</i> to execute the app. You
                                         can install them with:</p>
-                                    <code id="code-6">sudo apt-get update<br>sudo apt-get install nodejs<br>sudo apt-get install npm<br>sudo npm install -g @angular/cli</code>
+                                    <code id="code-6">sudo apt-get update<br>sudo apt-get install -y nodejs<br>sudo apt-get install -y npm<br>sudo npm install -g @angular/cli</code>
                                     <button id="btn-copy-6" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                 </li>
                                 <li>
                                     <p>This demo needs a MySQL database to store the info. Install MySQL:</p>
-                                    <code id="code-7">sudo apt-get install mysql-server<br>sudo mysql_secure_installation<br>sudo mysql_install_db</code>
+                                    <code id="code-7">sudo apt-get install -y mysql-server<br>sudo mysql_secure_installation</code>
                                     <button id="btn-copy-7" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                     <p>And create a new database:</p>
-                                    <code id="code-8">mysql -u root -p CREATE DATABASE openvidu_sample_app;<br>exit</code>
+                                    <code id="code-8">mysql -u root -p</code>
                                     <button id="btn-copy-8" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                        title="Copy to Clipboard">Copy</button>
+                                        <p style="font-size:13px">(Enter the same password you set during the installation process)</p>
+                                    <code id="code-9">CREATE DATABASE openvidu_sample_app;<br>exit</code>
+                                    <button id="btn-copy-9" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                 </li>
                                 <li>
@@ -325,26 +329,26 @@ custom_js:
                                         development machine. The easiest way is running this Docker container which wraps
                                         both of them (you will need
                                         <a href="https://store.docker.com/search?type=edition&offering=community">Docker CE</a>):</p>
-                                    <code id="code-9">docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code>
-                                    <button id="btn-copy-9" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p>Install NPM dependencies of frontend:</p>
-                                    <code id="code-10">cd classroom-demo/src/angular/frontend<br>npm install</code>
+                                    <code id="code-10">sudo docker run -d -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code>
                                     <button id="btn-copy-10" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                 </li>
                                 <li>
-                                    <p>Build the frontend, exporting the files to the static folder of the Java application:</p>
-                                    <code id="code-11">ng build --output-path ../../main/resources/static</code>
+                                    <p>Install NPM dependencies of frontend:</p>
+                                    <code id="code-11">cd classroom-demo/src/angular/frontend<br>npm install</code>
                                     <button id="btn-copy-11" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                 </li>
                                 <li>
-                                    <p>Finally run the Spring Boot application:</p>
-                                    <code id="code-12">cd ../../../ mvn clean package exec:java</code>
+                                    <p>Build the frontend, exporting the files to the static folder of the Java application:</p>
+                                    <code id="code-12">ng build --output-path ../../main/resources/static</code>
                                     <button id="btn-copy-12" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                        title="Copy to Clipboard">Copy</button>
+                                </li>
+                                <li>
+                                    <p>Finally run the Spring Boot application:</p>
+                                    <code id="code-13">cd ../../../<br>mvn clean package exec:java</code>
+                                    <button id="btn-copy-13" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                     <p>Go to <a href="https://localhost:5000">https://localhost:5000</a> to test the app once
                                         the server is running. The first time you use the docker container, an alert message

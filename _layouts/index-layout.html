@@ -18,38 +18,6 @@
   <link rel="stylesheet" href="css/colors/yellow.css" id="color-skins" />
 
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-  <script>
-    window.addEventListener("load", function () {
-      window.cookieconsent.initialise({
-        "palette": {
-          "popup": {
-            "background": "#000"
-          },
-          "button": {
-            "background": "#0088aa",
-            "color": "#fff",
-            "padding": "9px 22px",
-            "box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "-moz-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "-webkit-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "-o-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "margin": "0 7px 0 7px",
-            "text-transform": "uppercase",
-            "text-decoration": "none",
-            "color": "#ff7302",
-            "text-shadow": "none",
-            "-webkit-transition": "all .2s ease-out",
-            "-moz-transition": "all .2s ease-out",
-            "-o-transition": "all .2s ease-out",
-            "-ms-transition": "all .2s ease-out"
-          }
-        },
-        "theme": "classic"
-      })
-    });
-  </script>
 
 </head>
 
@@ -59,7 +27,7 @@
   <div id="preloader">
     <div class="loader">
       <!--<img src="img/assets/preloader-logo.png" alt="Vossen"> -->
-      <img src="img/logos/openvidu_grey_bg_transp_cropped.png"/>
+      <img src="img/logos/openvidu_grey_bg_transp_cropped.png" />
     </div>
   </div>
   <!-- End Preloader -->
@@ -81,7 +49,7 @@
               <div class="tp-caption sft" data-x="center" data-y="50" data-speed="1200" data-start="1100" data-easing="Power3.easeInOut"
                 data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
                 style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
-                <h2 class="home-heading op-1"><img id="openvidu-logo" src="img/logos/openvidu_white_bg_transp.png"/></h2>
+                <h2 class="home-heading op-1"><img id="openvidu-logo" src="img/logos/openvidu_white_bg_transp.png" /></h2>
               </div>
               <!-- Home Subheading -->
               <div class="tp-caption home-subheading sft " data-x="center" data-y="450" data-speed="1200" data-start="1350" data-easing="Power3.easeInOut"
@@ -126,8 +94,8 @@
     <!-- End Page Content-->
 
     {% include footer.html %}
-    
-    <div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/home" style="color: #ffffff">Beta 1</a></div>
+
+    <div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/home" style="color: #ffffff; font-weight: bold">Beta 1</a></div>
 
   </div>
   <!-- End Site Wrapper -->
@@ -165,6 +133,39 @@
 
     ga('create', 'UA-101392924-1', 'auto');
     ga('send', 'pageview');
+  </script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#000"
+          },
+          "button": {
+            "background": "#0088aa",
+            "color": "#fff",
+            "padding": "9px 22px",
+            "box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
+            "-moz-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
+            "-webkit-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
+            "-o-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
+            "margin": "0 7px 0 7px",
+            "text-transform": "uppercase",
+            "text-decoration": "none",
+            "color": "#ff7302",
+            "text-shadow": "none",
+            "-webkit-transition": "all .2s ease-out",
+            "-moz-transition": "all .2s ease-out",
+            "-o-transition": "all .2s ease-out",
+            "-ms-transition": "all .2s ease-out"
+          }
+        },
+        "theme": "classic",
+        "position": "bottom-right"
+      })
+    });
   </script>
 
 </body>

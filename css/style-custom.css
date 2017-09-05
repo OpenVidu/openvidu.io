@@ -344,14 +344,15 @@ li.subnav_drop span {
 }
 
 div.cc-window {
-    border-top: solid 2px #0088aa !important;
-    width: 100% !important;
+    padding: 0.9em !important;
+    font-size: 14px;
 }
 
 a.cc-btn {
+    min-width: 100px !important;
     border: none !important;
     font-weight: bold !important;
-    margin-top: 8px !important;
+    font-size: 12px !important;
     text-decoration: none;
     text-shadow: none;
     font-family: 'Montserrat', sans-serif;
@@ -369,7 +370,7 @@ a.cc-btn {
     -ms-transition: all ease .3s;
     transition: all ease .3s;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 4px;
     margin-bottom: 0;
     font-size: 14px;
     line-height: 1.6;
@@ -383,6 +384,10 @@ a.cc-btn {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+span.cc-message {
+    margin-bottom: 0.5em !important;
 }
 
 #demo-container hr {
@@ -608,6 +613,20 @@ a.cc-btn {
 }
 
 @media all and (max-width: 767px) {
+    div.cc-window {
+        display: inline;
+        position: fixed;
+    }
+    span.cc-message {
+        width: 66.66%;
+        display: inline-block !important;
+    }
+    div.cc-compliance {
+        width: 33.33%;
+        display: inline-block !important;
+        position: absolute;
+        top: 33%;
+    }
     a.c-tabs-nav__link {
         padding: 6px;
     }

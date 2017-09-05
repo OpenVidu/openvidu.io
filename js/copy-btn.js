@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
-    for (var i = 1; i < 13; i++) {
+    for (var i = 1; i < 14; i++) {
 
         $('#btn-copy-' + i).bind('click', {id : i}, function (event) {
             window.getSelection().empty();
