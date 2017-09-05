@@ -273,6 +273,16 @@ p.subheading {
     padding-right: 12px;
 }
 
+.last-table-col {
+    padding-left: 12px;
+    text-align: center;
+}
+
+.last-table-col i {
+    font-size: 18px;
+    color: #0088aa;
+}
+
 #sticky-menu {
     position: sticky;
     top: 56px;
