@@ -5,7 +5,7 @@ active: demos
 top-title: OPENVIDU DEMOS
 top-subtitle: Try OpenVidu
 custom_js:
-- demos
+- copy-btn
 ---
 
 <!-- Start Blog Classic -->
@@ -33,27 +33,39 @@ custom_js:
             <div class="c-tab is-active">
                 <div class="c-tab__content">
                     <h2>Basic Videoconference</h2>
-                    <div class="col-md-12 demo-description">
+                    <div class="demo-description">
                         <p>Users can freely connect to any videoconference session. If it does not exist, a new one will be
                             created. This demo is a 100% frontend application which makes use of the insecure version of
                             OpenVidu.
                         </p>
                     </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <code id="code-1">docker run -p 5000:5000 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-videoconference-demo</code>
-                            <button id="btn-copy-1" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                title="Copy to Clipboard">Copy</button>
+                    <div class="run-div">
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <code id="code-1">docker run -p 5000:5000 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-videoconference-demo</code>
+                                <button id="btn-copy-1" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard">Copy</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <a href="/docs/deployment/#deploying-on-aws-with-cloud-formation" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="/docs/deployment/#deploying-openvidu-demos" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                            </div>
                         </div>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/logos/openvidu_globe_bg_transp_cropped.png" class="img-responsive img-run-demo img-openvidu" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="https://demos.openvidu.io/basic-videoconference/" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
-                    <div class="col-md-12 demo-description">
+                    <div class="demo-description">
                         <p>This demo is derived directly from the tutorials. If you want a deep understanding of the ins and
                             outs you can check either of the following tutorials (whichever you feel most comfortable with):
                         </p>
@@ -76,12 +88,12 @@ custom_js:
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-6">
-                            <a data-fancybox="gallery1" href="img/demos/insecure-join.png">
+                            <a data-fancybox="gallery0" href="img/demos/insecure-join.png">
                                                 <img class="img-responsive" src="img/demos/insecure-join.png">
                                             </a>
                         </div>
                         <div class="col-md-6">
-                            <a data-fancybox="gallery1" href="img/demos/insecure-session.png">
+                            <a data-fancybox="gallery0" href="img/demos/insecure-session.png">
                                                 <img class="img-responsive" src="img/demos/insecure-session.png">
                                             </a>
                         </div>
@@ -91,27 +103,39 @@ custom_js:
             <div class="c-tab">
                 <div class="c-tab__content">
                     <h2>Basic Webinar</h2>
-                    <div class="col-md-12 demo-description">
+                    <div class="demo-description">
                         <p>Users are identified via a login authentication system. This means users are given a certain role
                             depending on their identity when connecting to a videoconference session. This demo wraps a simple
                             frontend and a straightforward backend, making use of the secure version of OpenVidu.
                         </p>
                     </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <code id="code-2">docker run -p 5000:5000 -p 3000:3000 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-webinar-demo</code>
-                            <button id="btn-copy-2" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                title="Copy to Clipboard">Copy</button>
+                    <div class="run-div">
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <code id="code-2">docker run -p 5000:5000 -p 3000:3000 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-webinar-demo</code>
+                                <button id="btn-copy-2" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard">Copy</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <a href="/docs/deployment/#deploying-on-aws-with-cloud-formation" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="/docs/deployment/#deploying-openvidu-demos" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                            </div>
                         </div>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/logos/openvidu_globe_bg_transp_cropped.png" class="img-responsive img-run-demo img-openvidu" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="https://demos.openvidu.io/basic-webinar/" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
-                    <div class="col-md-12 demo-description">
+                    <div class="demo-description">
                         <p>This demo is derived directly from the tutorials. If you want a deep understanding of the ins and
                             outs you can check either of the following tutorials (whichever you feel most comfortable with):
                         </p>
@@ -146,24 +170,24 @@ custom_js:
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-6">
-                            <a data-fancybox="gallery2" href="img/demos/secure-login.png">
+                            <a data-fancybox="gallery1" href="img/demos/secure-login.png">
                                                     <img class="img-responsive" src="img/demos/secure-login.png">
                                                 </a>
                         </div>
                         <div class="col-md-6">
-                            <a data-fancybox="gallery2" href="img/demos/secure-join.png">
+                            <a data-fancybox="gallery1" href="img/demos/secure-join.png">
                                                     <img class="img-responsive" src="img/demos/secure-join.png">
                                                 </a>
                         </div>
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-6">
-                            <a data-fancybox="gallery2" href="img/demos/secure-session-2.png">
+                            <a data-fancybox="gallery1" href="img/demos/secure-session-2.png">
                                                     <img class="img-responsive" src="img/demos/secure-session-2.png">
                                                 </a>
                         </div>
                         <div class="col-md-6">
-                            <a data-fancybox="gallery2" href="img/demos/secure-session-1.png">
+                            <a data-fancybox="gallery1" href="img/demos/secure-session-1.png">
                                                     <img class="img-responsive" src="img/demos/secure-session-1.png">
                                                 </a>
                         </div>
@@ -173,24 +197,36 @@ custom_js:
             <div class="c-tab">
                 <div class="c-tab__content">
                     <h2>OpenVidu GetARoom</h2>
-                    <div class="col-md-12 demo-description">
+                    <div class="demo-description">
                         <p>Users can create new videoconference rooms by clicking a button. Then they can share the link of
                             the room to invite new participants. This demo is a 100% frontend application which makes use
                             of the insecure version of OpenVidu.</p>
                     </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <code id="code-3">docker run -p 8443:8443 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/getaroom-demo</code>
-                            <button id="btn-copy-3" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                title="Copy to Clipboard">Copy</button>
+                    <div class="run-div">
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <code id="code-3">docker run -p 8443:8443 -p 4040:4040 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/getaroom-demo</code>
+                                <button id="btn-copy-3" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard">Copy</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <a href="docs/deployment/#deploying-on-aws-with-cloud-formation" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="/docs/deployment/#deploying-openvidu-demos" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                            </div>
                         </div>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/logos/openvidu_globe_bg_transp_cropped.png" class="img-responsive img-run-demo img-openvidu" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="https://demos.openvidu.io/getaroom/" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
                     <div class="demo-description demo-margin-bottom">
                         <p>This demo is also provided in the form of tutorial. You can check it out here: <a href="/docs/tutorials/openvidu-getaroom/">openvidu-getaroom</a></p>
@@ -224,28 +260,39 @@ custom_js:
             <div class="c-tab">
                 <div class="c-tab__content">
                     <h2>OpenVidu Classroom</h2>
-                    <div class="col-md-12 demo-description">
+                    <div class="demo-description">
                         <p>This is a fully functional application that makes use of the secure version of OpenVidu to connect
                             teachers and students in video sessions. It has a frontend built with Angular, a backend built
                             with Spring Boot and a MySQL database. There are two types of roles: teachers and students. First
                             ones can create/edit/remove lessons and invite students to them. Only when a teacher initialize
                             a lesson authorized students can connect to it.</p>
                     </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <code id="code-4">wget -O docker-compose.yml https://raw.githubusercontent.com/OpenVidu/classroom-demo/master/docker/docker-compose.yml<br>docker-compose up</code>
-                            <button id="btn-copy-4" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                title="Copy to Clipboard">Copy</button>
+                    <div class="run-div">
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <code id="code-4">wget -O docker-compose.yml https://raw.githubusercontent.com/OpenVidu/classroom-demo/master/docker/docker-compose.yml<br>docker-compose up</code>
+                                <button id="btn-copy-4" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard">Copy</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row row-run-demo">
-                        <div class="col col-md-2 col-sm-4 col-xs-4"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
-                        <div class="col col-md-10 col-sm-8 col-xs-8">
-                            <a href="/docs/deployment/#deploying-on-aws-with-cloud-formation" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="/docs/deployment/#deploying-openvidu-demos" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                            </div>
                         </div>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/logos/openvidu_globe_bg_transp_cropped.png" class="img-responsive img-run-demo img-openvidu" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="https://demos.openvidu.io/classroom/" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
-
                     <div class="row no-margin demo-description">
                         <p>There's no tutorial for this application, but you can run it in your local machine by following these
                             steps:
@@ -317,17 +364,17 @@ custom_js:
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-4">
-                            <a data-fancybox="gallery" href="img/demos/openvidu-classroom.png">
+                            <a data-fancybox="gallery3" href="img/demos/openvidu-classroom.png">
                                     <img class="img-responsive" src="img/demos/openvidu-classroom.png">
                                 </a>
                         </div>
                         <div class="col-md-4">
-                            <a data-fancybox="gallery" href="img/demos/openvidu-classroom-dashboard.png">
+                            <a data-fancybox="gallery3" href="img/demos/openvidu-classroom-dashboard.png">
                                     <img class="img-responsive" src="img/demos/openvidu-classroom-dashboard.png">
                                 </a>
                         </div>
                         <div class="col-md-4">
-                            <a data-fancybox="gallery" href="img/demos/openvidu-classroom-video.png">
+                            <a data-fancybox="gallery3" href="img/demos/openvidu-classroom-video.png">
                                     <img class="img-responsive" src="img/demos/openvidu-classroom-video.png">
                                 </a>
                         </div>

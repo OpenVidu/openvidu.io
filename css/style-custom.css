@@ -110,6 +110,15 @@ p.subheading {
     font-size: 14px;
 }
 
+#try-now-btn {
+    text-align: center;
+    margin-top: 60px;
+}
+
+#try-now-btn a {
+    background-color: #06d362;
+}
+
 #get-connected-community {
     padding-top: 100px;
     padding-bottom: 90px;
@@ -289,6 +298,11 @@ li.subnav_drop span {
     padding-top: 40px;
 }
 
+#doc-container .section h3 {
+    border-top: 80px solid transparent;
+    margin-top: -60px;
+}
+
 #doc-container .section h4 {
     padding-top: 25px;
 }
@@ -306,6 +320,15 @@ li.subnav_drop span {
     display: block;
     width: 100%;
     overflow: auto;
+}
+
+#doc-container .deploy-img {
+    border: solid 8px #0088aa;
+    border-radius: 4px;
+}
+
+#doc-container .deploy-fields-table {
+    text-align: start;
 }
 
 #img-mob {
@@ -386,6 +409,8 @@ a.cc-btn {
 
 .demo-description {
     margin-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .demo-description table {
@@ -407,7 +432,14 @@ a.cc-btn {
     max-height: 140px;
 }
 
+.run-div {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 40px;
+}
+
 .row-run-demo {
+    width: 100%;
     display: table;
     table-layout: fixed;
 }
@@ -416,6 +448,10 @@ a.cc-btn {
     display: table-cell;
     vertical-align: middle;
     float: none;
+}
+
+#demo-container .run-div hr {
+    border-top: 1px solid #e1e2e1;
 }
 
 .btn-copy-code {
@@ -471,6 +507,10 @@ a.cc-btn {
 
 .img-docker {
     padding: 10px;
+}
+
+.img-openvidu {
+    padding: 20px;
 }
 
 #tabs h3 {}
@@ -577,6 +617,20 @@ a.cc-btn {
     #doc-container {
         margin-top: -25px;
     }
+    .row-run-demo {
+        display: inherit;
+        margin-bottom: 20px;
+    }
+    .row-run-demo .col {
+        display: inherit;
+        vertical-align: inherit;
+        float: inherit;
+        text-align: center;
+    }
+    .row-run-demo .col img {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 
@@ -610,6 +664,9 @@ a.cc-btn {
     }
     #doc-container h1 {
         font-size: 30px;
+    }
+    #doc-container h4 code {
+        word-wrap: break-word;
     }
     #img-mob {
         max-height: 400px;
