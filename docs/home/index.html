@@ -277,7 +277,7 @@ application, either group or one-to-one calls. In fact, any combination you come
 </p>
 
 <p>OpenVidu has a traditional <strong>Client - Server</strong> architecture built on three modules that are shown in the image above. To run <strong>openvidu-server</strong> and <strong>Kurento Media Server</strong> you can execute the following container: </p>
-<pre><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=193.147.51.12 -e KMS_STUN_PORT=3478 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
+<pre><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
 </code></pre>
 
 <p>Then, you have to use the library <strong>openvidu-browser</strong> in your JavaScript browser application (frontend). This library is packaged in a JavaScript file. You can use the <a href="https://github.com/OpenVidu/openvidu/releases">last relase version</a> or the <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/main/resources/static/js">development version</a>. Add the file in your HTML with <code>&lt;script src="openvidu-browser-VERSION.js"&gt;&lt;/script&gt;</code>.</p>
