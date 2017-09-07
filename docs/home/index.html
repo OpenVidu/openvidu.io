@@ -309,7 +309,7 @@ http-server
 var session = OV.initSession(&quot;wss://&quot; + location.hostname + &quot;:8443/&quot; + sessionId + '?secret=MY_SECRET');
 </code></pre>
 
-<p><strong>2)</strong> Set the events to be listened by your session. For example, this snippet below will automatically append the new participants videos to HTML element with 'subscriber' id. Available events for the Session object are detailed in <a href="#session">API section</a>.</p>
+<p><strong>2)</strong> Set the events to be listened by your session. For example, this snippet below will automatically append the new participants videos to HTML element with 'subscriber' id. Available events for the Session object are detailed in <a href="../docs/api/openvidu-browser/#session">API section</a>.</p>
 <pre><code class="javascript">session.on('streamCreated', function (event) {
     session.subscribe(event.stream, 'subscriber');
 });
@@ -341,7 +341,7 @@ var session = OV.initSession(&quot;wss://&quot; + location.hostname + &quot;:844
 <h1 id="securization">Securization</h1>
 <h2 id="why">Why?</h2>
 <p>In a production environment probably you don't want unauthorized users swamping your video calls. It's not possible to control access to them with the first approach we have seen in the sections above: anyone who knows the <em>sessionId</em> could connect to your video call, and if it turns out that the <em>sessionId</em> doesn't belong to an existing session, a new one would be created. The time when we talked about appending your openvidu secret in your JavaScript file, it was clear that this is not an advisable approach for a production app.</p>
-<p>In addition, a secure version also means you can choose the role each user has in your video calls (see <a href="#openvidurole">OpenViduRole</a> section).</p>
+<p>In addition, a secure version also means you can choose the role each user has in your video calls (see <a href="../docs/api/openvidu-java-client/#openvidurole">OpenViduRole</a> section).</p>
 <p>Thus, a non-secure version of OpenVidu is only intended for development environments. Don't worry, adding securization is not a difficult task.</p>
 <h2 id="how">How?</h2>
 <p align="center">
@@ -355,9 +355,9 @@ var session = OV.initSession(&quot;wss://&quot; + location.hostname + &quot;:844
 </ul>
 <p>You have three different options available for getting sessionIds and tokens from openvidu-server:</p>
 <ul>
-<li><a href="./api/REST-API/">REST API</a></li>
-<li><a href="./api/openvidu-java-client/">openvidu-java-client</a></li>
-<li><a href="./api/openvidu-node-client/">openvidu-node-client</a></li>
+<li><a href="../docs/api/REST-API/">REST API</a></li>
+<li><a href="../docs/api/openvidu-java-client/">openvidu-java-client</a></li>
+<li><a href="../docs/api/openvidu-node-client/">openvidu-node-client</a></li>
 </ul>
 <h2 id="a-sequence-diagram-to-sum-up">A sequence diagram to sum up</h2>
 <p align="center">
@@ -371,7 +371,7 @@ var session = OV.initSession(&quot;wss://&quot; + location.hostname + &quot;:844
 <li>Finally return both parameters to your frontend, where using openvidu-browser you may initilize your session with <em>sessionId</em> and then connect to it with <em>token</em>. Good news: <strong>the code is exactly the same as explained before in <a href="#code-description">Code description</a> section</strong></li>
 </ol>
 <blockquote>
-<p>Communication between <em>Your Back</em> and <em>openvidu-server</em> modules is outlined in the diagram, but it does not correspond to the real methods. Remember you can handle this from your backend by consuming the <a href="#rest-api">REST API</a> or by using <a href="#openvidu-backend-client">openvidu-backend-client</a> package.</p>
+<p>Communication between <em>Your Back</em> and <em>openvidu-server</em> modules is outlined in the diagram, but it does not correspond to the real methods. Remember you can handle this from your backend by consuming the <a href="../docs/api/REST-API/">REST API</a> or by using <a href="#openvidu-backend-client">openvidu-java-client</a> / <a href="#openvidu-node-client">openvidu-node-client</a></p>
 </blockquote>
 <h2 id="running-a-secure-videocall-application">Running a secure videocall application</h2>
 <p>We have implemented a very basic <a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-js-java">demo application</a> to see the secure version of OpenVidu in action. It has a Java backend to manage the user sessions and the securization process with OpenVidu Server.</p>

@@ -484,6 +484,9 @@ node myserver.js 4040
 </blockquote>
 </li>
 </ul>
+<h5 id="php-ruby-python-net">PHP, Ruby, Python, .NET...</h5>
+<p>We are not going to spell out in detail what is to be done with the rest of backend technologies, but you can get the idea from the Java and Node steps above. It is always the same process: take your app to your instance, place it under <code>/var/www/html/</code>, configure Nginx and Supervisor (this last with the necessary launching script depending on your technology) and relaunch both services.</p>
+<p>Voilà! It is really this simple.</p>
 <h4 id="ps-multiple-apps-in-the-same-instance">PS: Multiple apps in the same instance</h4>
 <p>To launch multiple apps in the same instance, just store each one of them inside its own folder under <code>/var/www/html/</code>. For example:</p>
 <ul>
