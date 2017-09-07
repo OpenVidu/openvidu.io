@@ -182,7 +182,19 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../deployment/">Deploying on AWS</a> 
+    <a class="" href="../deployment/deploying-demos-aws/">Tutorial - Deploying OpenVidu Demos on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/custom-certificate/">Using your own certificate</a> 
 </li>
 
  
@@ -235,6 +247,11 @@ Packages required:</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>java JDK</td>
+<td><code>java -version</code></td>
+<td><code>sudo apt-get install default-jdk</code></td>
+</tr>
 <tr>
 <td>node</td>
 <td><code>nodejs -v</code></td>
@@ -387,7 +404,7 @@ sudo service kurento-media-server-6.0 stop
 <p><a href="http://doc-kurento.readthedocs.io/en/stable/installation_guide.html">Here</a> you can check Kurento's official documentation.</p>
 <hr />
 <h2 id="adding-kurento-parent-pom-to-your-local-respository">Adding Kurento parent POM to your local respository</h2>
-<p>You will need development version of Kurento's parent POM in your local repository in order to compile <em>openvidu-server</em>. To achieve this, add in your <code>/home/.m2</code> a file <code>settings.xml</code> with the following content:</p>
+<p>You will need development version of Kurento's parent POM in your local repository in order to compile <em>openvidu-server</em>. To achieve this, add a file <code>~/.m2/settings.xml</code> with the following content:</p>
 <pre><code class="xml">&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;
   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
   xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0
@@ -446,7 +463,7 @@ sudo service kurento-media-server-6.0 stop
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../deployment/" class="btn btn-xs btn-primary" title="Deploying on AWS"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../deployment/custom-certificate/" class="btn btn-xs btn-primary" title="Using your own certificate"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

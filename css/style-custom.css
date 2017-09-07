@@ -149,6 +149,7 @@ p.subheading {
 #sticky-menu ul li.toctree-l1 a {
     display: block;
     width: 100%;
+    text-align: left;
 }
 
 #sticky-menu ul.subnav {
@@ -263,7 +264,7 @@ p.subheading {
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-color: #eeeeee;
+    border-color: #dddddd;
 }
 
 #doc-container table td,
@@ -271,10 +272,21 @@ p.subheading {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 12px;
+    padding-left: 12px;
+}
+
+#doc-container blockquote {
+    background-color: rgba(238, 238, 238, 0.35);
+    margin-left: 30px;
+}
+
+#doc-container p code {
+    word-wrap: break-word;
+    overflow-x: auto;
 }
 
 .last-table-col {
-    padding-left: 12px;
+    padding-left: 12px !important;
     text-align: center;
 }
 
@@ -339,6 +351,59 @@ li.subnav_drop span {
 
 #doc-container .deploy-fields-table {
     text-align: start;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
+#doc-container .deploy-fields-table th {
+    text-transform: uppercase;
+}
+
+#doc-container .deploy-fields-table td.first-col {
+    font-weight: bold;
+}
+
+#doc-container span.field-comment {
+    font-size: 12px;
+    color: #7a7a7a;
+}
+
+#doc-container table.artifact-table tr td {
+    padding-left: 0;
+}
+
+#doc-container table.artifact-table tr th {
+    padding-left: 0;
+}
+
+#doc-container table.color-table tr td:nth-child(1) {
+    padding-left: 0;
+}
+
+#doc-container table.color-table tr th:nth-child(2) {
+    background-color: rgba(255, 204, 0, 0.15);
+}
+
+#doc-container table.color-table tr th:nth-child(3) {
+    background-color: rgba(0, 136, 170, 0.15);
+}
+
+#doc-container table.color-table tr th:nth-child(4) {
+    background-color: rgba(6, 211, 98, 0.15);
+}
+
+#doc-container table.color-table tr td:nth-child(2) {
+    background-color: rgba(255, 204, 0, 0.05);
+}
+
+#doc-container table.color-table tr td:nth-child(3) {
+    background-color: rgba(0, 136, 170, 0.05);
+}
+
+#doc-container table.color-table tr td:nth-child(4) {
+    background-color: rgba(6, 211, 98, 0.05);
 }
 
 #img-mob {

@@ -1,0 +1,310 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Using your own certificate
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Using your own certificate')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Using your own certificate')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Home</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/">Home</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>API</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-browser/">openvidu-browser</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-java-client/">openvidu-java-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/openvidu-node-client/">openvidu-node-client</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../api/REST-API/">REST API</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../deploying-demos-aws/">Tutorial - Deploying OpenVidu Demos on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">Using your own certificate</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">Using your own certificate</h2>
+
+<hr>
+
+<h2 id="for-a-jar-binary-of-openvidu-server">For a JAR binary of OpenVidu Server</h2>
+<p>You will need a Java keystore (<strong>.jks</strong>). Check <a href="#get-jks-from-crt-and-key">Get JKS from CRT and KEY</a> section to see how to get it from your certificate's files.
+In order to use your JKS, just set the following values for the these properties on launch:</p>
+<ul>
+<li>server.ssl.key-store</li>
+<li>server.ssl.key-store-password</li>
+<li>server.ssl.key-alias</li>
+</ul>
+<p><br></p>
+<h5 id="example">Example</h5>
+<pre><code class="console">java -jar -Dserver.ssl.key-store=PATH/TO/YOUR/KEYSTORE.jks -Dserver.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -Dserver.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu-server.jar
+</code></pre>
+
+<hr />
+<h2 id="for-the-docker-container-of-openvidu-server">For the Docker container of OpenVidu Server</h2>
+<p>You will need a Java keystore (<strong>.jks</strong>). Check <a href="#get-jks-from-crt-and-key">Get JKS from CRT and KEY</a> section to see how to get it from your certificate's files.
+In order to use your JKS, just set the following values for the these properties on launch:</p>
+<ul>
+<li>server.ssl.key-store</li>
+<li>server.ssl.key-store-password</li>
+<li>server.ssl.key-alias</li>
+</ul>
+<p>You must also indicate the <em>volume</em> flag (-v) to mount your keystore file, letting know Docker the location of the file and that it should be only readable:</p>
+<ul>
+<li>-v /ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:ro</li>
+</ul>
+<p><br></p>
+<h5 id="example_1">Example</h5>
+<pre><code class="console">docker run -d -p 8443:8443 --rm -v /ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:ro -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=YOUR_SECRET -e server.ssl.key-store=/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks -e server.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -e server.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu/openvidu-server-kms
+</code></pre>
+
+<hr />
+<h2 id="for-the-cloudformation-of-openvidu-server">For the CloudFormation of OpenVidu Server</h2>
+<p>First of all, remember we provide a super simple way of using a <strong>FREE</strong>, <strong>AUTOMATIC</strong> and 100% <strong>VALID</strong> certificate thanks to Let's Encrypt technology: when deploying your CloudFormation Stack, just fill in the form fields with the values from the column <strong><a href="../../deployment/deploying-aws#4-complete-the-configuration-fields">LET'S ENCRYPT CERTIFICATE</a></strong>.</p>
+<p>If, however, you have already purchased your own certificate and you are determined to use it, you can easily add it to your CloudFormation stack. Just fill in the form fields with the values from the column <strong><a href="../../deployment/deploying-aws#4-complete-the-configuration-fields">CUSTOM CERTIFICATE</a></strong>.</p>
+<hr />
+<h2 id="get-jks-from-crt-and-key">Get JKS from CRT and KEY</h2>
+<p>OpenVidu Server is a Java application and therefore needs a Java keystore (.jks) for providing security certificates. If you don't have it, you can easily obtain a <strong>.jks</strong> file from your certificate (<strong>.crt</strong>) and private key (<strong>.key</strong>) files by using <strong><em>openssl</em></strong> and <strong><em>keytool</em></strong> :</p>
+<pre><code class="console">openssl pkcs12 -export -name YOUR_CERT_NAME -in YOUR_CRT.crt -inkey YOUR_PRIVATE_KEY.key -out p12keystore.p12
+</code></pre>
+
+<pre><code class="console">keytool -importkeystore -destkeystore YOUR_KEYSTORE_NAME.jks -srckeystore p12keystore.p12 -srcstoretype pkcs12 -alias YOUR_JKS_ALIAS
+</code></pre> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../developing/" class="btn btn-xs btn-primary float-right" title="Developing OpenVidu">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../deploying-aws/" class="btn btn-xs btn-primary" title="Deploying OpenVidu Server and your app on AWS"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/deployment/custom-certificate.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>
