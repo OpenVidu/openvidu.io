@@ -266,7 +266,7 @@ active: documentation
     <img class="img-responsive deploy-img" src="/img/docs/deployment/CF_newstack.png">
   </p></p>
 <h4 id="3-option-specify-an-amazon-s3-template-url-with-the-following-url">3. Option <em>Specify an Amazon S3 template URL</em> with the following URL</h4>
-<p><code id="code-2">https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/CF-OpenVidu.json</code>
+<p><code id="code-2">https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/CF-OpenVidu-latest.json</code>
   <button id="btn-copy-2" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                 title="Copy to Clipboard">Copy</button></p>
 <p><p>
@@ -490,8 +490,8 @@ node myserver.js 4040
 <h4 id="ps-multiple-apps-in-the-same-instance">PS: Multiple apps in the same instance</h4>
 <p>To launch multiple apps in the same instance, just store each one of them inside its own folder under <code>/var/www/html/</code>. For example:</p>
 <ul>
-<li><code>/var/www/html/YOUR_APP_1</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_1</code></li>
-<li><code>/var/www/html/YOUR_APP_2</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_2</code></li>
+<li><code>/var/www/html/YOUR_APP_1</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_1/</code></li>
+<li><code>/var/www/html/YOUR_APP_2</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_2/</code></li>
 </ul>
 <p>The other steps explained above also need some adjustments related to paths:</p>
 <ul>
