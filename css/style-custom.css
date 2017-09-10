@@ -861,6 +861,9 @@ span.cc-message {
     .carousel-inner img {
         max-height: 207px !important;
     }
+    .twitter-row {
+        width: 100% !important;
+    }
 }
 
 .carousel-inner {
@@ -879,4 +882,10 @@ span.cc-message {
 
 .carousel-indicators .active {
     background-color: #0088aa;
+}
+
+.twitter-row {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }

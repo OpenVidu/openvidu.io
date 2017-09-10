@@ -60,6 +60,7 @@
                             </ul>
                         </li>-->
 
+          <li {% if page.active=="news" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/news">News</a></li>
           <li {% if page.active=="contact" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/contact">Contact</a></li>
           <li><a class="social-icon" target="_blank" href="https://twitter.com/openvidu"><i class="icon ion-social-twitter"></i></a></li>
           <li><a class="social-icon" target="_blank" href="https://github.com/OpenVidu"><i class="icon ion-social-github"></i></a></li>
