@@ -145,13 +145,13 @@
     /* -------------------
     Twitter Feed
     ---------------------*/
-    $('.tweet').twittie({
+    /*$('.tweet').twittie({
         username: 'VossenDesign',
         dateFormat: '%b. %d, %Y',
         template: '{{tweet}} <div class="date">{{date}}</div>',
         count: 2,
         hideReplies: true
-    }); 
+    }); */
     /* -------------------
     Animated progress bars
     ---------------------*/

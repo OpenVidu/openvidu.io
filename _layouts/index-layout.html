@@ -97,7 +97,7 @@
 
     {% include footer.html %}
 
-    <div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/home" style="color: #ffffff; font-weight: bold">Beta 1</a></div>
+    <div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/home" style="color: #ffffff; font-weight: bold">Beta</a></div>
 
   </div>
   <!-- End Site Wrapper -->
@@ -112,8 +112,7 @@
   <script src="js/plugins/easign1.3.min.js"></script>
   <script src="js/plugins/cubeportfolio.min.js"></script>
   <script src="js/plugins/owlcarousel.min.js"></script>
-  <script src="js/plugins/tweetie.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZWhfVEI1Ck_c2OsKO-f5WvgRpb81PN7A&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZWhfVEI1Ck_c2OsKO-f5WvgRpb81PN7A"></script>
   <script src="js/plugins/gmap3.min.js"></script>
   <script src="js/plugins/wow.min.js"></script>
   <script src="js/plugins/counterup.min.js"></script>
@@ -135,6 +134,25 @@
     ga('create', 'UA-101392924-1', 'auto');
     ga('send', 'pageview');
   </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+  <script src="js/gallery.js"></script>
+
+  <script>
+    $("[data-fancybox]").fancybox({
+      buttons : [
+        'slideShow',
+        'fullScreen',
+        'close'
+      ],
+      protect : true,
+      fullScreen : {
+        autoStart : false,
+      },
+    });
+  </script>
+
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
   <script>

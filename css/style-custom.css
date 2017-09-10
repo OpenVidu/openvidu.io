@@ -827,3 +827,56 @@ span.cc-message {
     url('/fonts/Arciform.svg#svgFontName') format('svg');
     /* Legacy iOS */
 }
+
+#myCarousel {
+    margin-top: 40px;
+}
+
+.bs-carousel-control-left {
+    margin-left: -15px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.bs-carousel-control {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .bs-carousel-control {
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        font-size: 30px;
+    }
+    .carousel-indicators {
+        bottom: -50px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .carousel-inner img {
+        max-height: 207px !important;
+    }
+}
+
+.carousel-inner {
+    max-height: 450px !important;
+}
+
+.carousel-inner img {
+    max-height: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-indicators li {
+    border: 2px solid #0088aa;
+}
+
+.carousel-indicators .active {
+    background-color: #0088aa;
+}

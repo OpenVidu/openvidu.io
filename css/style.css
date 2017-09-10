@@ -1072,12 +1072,13 @@ nav {
 
 /*----- Features -----*/
 #features {
-    padding-top: 90px;
-    padding-bottom: 80px;
+    min-height: 95vh;
+    padding-top: 60px;
+    padding-bottom: 50px;
 }
 @media (min-width: 992px) {
     .features-row {
-        margin-bottom: 70px;
+        margin-bottom: 50px;
         text-align: left
     }
     .feature-column {

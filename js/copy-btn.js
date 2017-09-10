@@ -35,11 +35,4 @@ $(document).ready(function(){
                 .tooltip('fixTitle');
         });
     }
-
-    $(document).ready(function(){
-        $(".fancybox").fancybox({
-            openEffect: "none",
-            closeEffect: "none"
-        });
-    });
 });
