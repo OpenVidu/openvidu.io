@@ -2,74 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
-        
     <url>
      <loc>/home/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    <url>
-     <loc>/home/openvidu-basics/</loc>
-     <lastmod>2017-09-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/home/openvidu-artifacts/</loc>
-     <lastmod>2017-09-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
     
 
     
         
     <url>
      <loc>/tutorials/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-js/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-angular/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-java/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-java/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-node/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-node/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-getaroom/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -78,26 +64,32 @@
     
         
     <url>
-     <loc>/api/openvidu-browser/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <loc>/reference-docs/openvidu-browser/</loc>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/api/openvidu-java-client/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <loc>/reference-docs/openvidu-java-client/</loc>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/api/openvidu-node-client/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <loc>/reference-docs/openvidu-node-client/</loc>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/api/REST-API/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <loc>/reference-docs/REST-API/</loc>
+     <lastmod>2017-09-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/reference-docs/openvidu-artifacts/</loc>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -107,19 +99,25 @@
         
     <url>
      <loc>/deployment/deploying-demos-aws/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-aws/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/deployment/deploying-ubuntu/</loc>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/custom-certificate/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -129,7 +127,7 @@
         
     <url>
      <loc>/developing/</loc>
-     <lastmod>2017-09-10</lastmod>
+     <lastmod>2017-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

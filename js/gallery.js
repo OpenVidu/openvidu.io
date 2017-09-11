@@ -5,9 +5,13 @@ $(document).ready(function(){
         arrows : false,
         loop: true,
         buttons : [
-        'close'
+            'close'
         ],
         clickOutside : 'close',
+        clickSlide   : 'close',
+        touch : {
+			vertical : false
+		}
     });
 
 });

@@ -1,0 +1,369 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Deploying OpenVidu as a native service
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Deploying OpenVidu as a native service')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Deploying OpenVidu as a native service')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Reference documentation</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">Deploying OpenVidu as a native service</a>  
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../custom-certificate/">Using your own certificate</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">Deploying on Ubuntu with native services and executables</h2>
+
+<hr>
+
+<h2 id="installation-process">Installation process</h2>
+<p>If you prefer having KMS installed in your EC2 machine and your own version of openvidu-server, follow these few steps. <strong>Ubuntu xenial 14.04</strong> and <strong>Ubuntu trusty 16.04</strong> are supported.</p>
+<h4 id="1-install-kms-in-first-command-xenial-for-1604-trusty-for-1404">1. Install KMS (in first command: <strong><em>xenial</em></strong> for 16.04, <strong><em>trusty</em></strong> for 14.04)</h4>
+<pre><code class="console">echo &quot;deb http://ubuntu.kurento.org xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install kurento-media-server-6.0
+</code></pre>
+
+<h4 id="2-install-coturn">2. Install COTURN</h4>
+<pre><code class="console">sudo apt-get -y install coturn
+</code></pre>
+
+<blockquote>
+<p>This is a great implementation of a STUN/TURN server, necessary for connecting your users under some complicated circumstances. You can check its documentation <a href="https://github.com/coturn/coturn">here</a>.
+If there's any problem with the installation on <strong>Ubuntu trusty 14.04</strong>:</p>
+<p><code>wget -c http://ftp.us.debian.org/debian/pool/main/c/coturn/coturn_4.2.1.2-1_amd64.deb</code></br>
+<code>sudo dpkg -i coturn_4.2.1.2-1_amd64.deb</code></br>
+<code>sudo apt-get -f -y install</code></br>
+<code>sudo dpkg -i coturn_4.2.1.2-1_amd64.deb</code></br></p>
+</blockquote>
+<h4 id="3-file-etckurentomoduleskurentowebrtcendpointconfini">3. File <code>/etc/kurento/modules/kurento/WebRtcEndpoint.conf.ini</code></h4>
+<pre><code class="console">stunServerAddress=YOUR_MACHINE_PUBLIC_IP
+stunServerPort=3478
+turnURL=USER:PASS@YOUR_MACHINE_PUBLIC_IP:3478
+</code></pre>
+
+<h4 id="4-file-etcturnserverconf">4. File <code>/etc/turnserver.conf</code></h4>
+<pre><code class="console">external-ip=YOUR_MACHINE_PUBLIC_IP
+fingerprint
+user=USER:PASS
+lt-cred-mech
+realm=kurento.org
+log-file=/var/log/turnserver/turnserver.log
+simple-log
+</code></pre>
+
+<h4 id="5-file-etcdefaultcoturn">5. File <code>/etc/default/coturn</code></h4>
+<pre><code>TURNSERVER_ENABLED=1
+</code></pre>
+
+<h4 id="6-init-services">6. Init services</h4>
+<pre><code class="bash">sudo service coturn restart
+sudo service kurento-media-server-6.0 restart
+</code></pre>
+
+<h4 id="7a-init-openvidu-server-docker-container">7A. Init openvidu-server Docker container...</h4>
+<pre><code class="console">sudo docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET --net=&quot;host&quot; openvidu/openvidu-server
+</code></pre>
+
+<blockquote>
+<p>To quickly install the latest official stable version of <strong>Docker CE</strong>:</p>
+<p><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</code></br>
+<code>sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"</code></br>
+<code>sudo apt-get update</code></br>
+<code>sudo apt-get -y install docker-ce</code></br>
+</p>
+</blockquote>
+<p>Go to <a href="../../deployment/custom-certificate#for-the-docker-container-of-openvidu-server">Using your own certificate</a> to add your certificate to the container instead of using the self-signed default one.</p>
+<h4 id="7b-or-init-your-own-openvidu-server-executable">7B. ...or init your own openvidu-server executable</h4>
+<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET openvidu-server.jar &amp;
+</code></pre>
+
+<p>Go to <a href="../../deployment/custom-certificate#for-a-jar-binary-of-openvidu-server">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one.</p>
+<h4 id="8-finally-check-your-server">8. Finally check your server</h4>
+<p>You can connect to OpenVidu dashboard through <code>https://YOUR_MACHINE_PUBLIC_IP:8443</code> (authorization is <code>OPENVIDUAPP:YOUR_SECRET</code>). Make sure you allow TCP and UDP inbound connections to your machine!</p>
+<p>Now you can deploy your application in the same machine (if the app is not pure frontend HTML/CSS/JS and has a <a href="../../home/#securization">secure backend</a>, connect it to OpenVidu Server through <em>https://localhost:8443</em>) or in a different one (connect to OpenVidu server through <em>https://YOUR_MACHINE_PUBLIC_IP:8443</em>).</p>
+<h2 id="server-network-requirements">Server network requirements</h2>
+<p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your <em>COTURN</em> server:</p>
+<ul>
+<li>
+<p>First of all, you certainly need this machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: <em>COTURN</em> is necessary to cover those situations where the final users are hidden behind NATs or complex networks. If the <em>COTURN</em> itself is running in an unreachable machine, your video transmission couold fail in certain cases.</p>
+</li>
+<li>
+<p>Besides, <em>COTURN</em> server needs some ports opened in the firewall:</p>
+<ul>
+<li><strong>3478 TCP &amp; UDP</strong> (this server implementation listens on port 3478 by default)</li>
+<li><strong>49152 - 65535 UDP</strong> (TURN exchanges media through any of these ports)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>You can test your <em>COTURN</em> server on this website: <a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Trickle ICE</a></p>
+</blockquote>
+<h2 id="architectures">Architectures</h2>
+<p>You can have the following scenarios depending on how many machines you have and what architecture you prefer. What are the advantages and disadvantages of each one of them? Well, it really depends on the power of the machine, the nature of your application and the load expected. In general, having all the services running in one machine will reduce its performance and scalability, but on the other hand, makes it easier the process of installation, configuration and launching.</p>
+<p>If you are deploying with these instructions for the first time, we recommend using only one machine. When you verify that everything is working as expected, you can try different configurations to compare overall performance and load capacity.</p>
+<div id="deploy-arch-row" class="row">
+  <div class="col-md-8">
+    <img class="img-responsive" src="/img/docs/deployment/app-ovserver-kms-final.png">
+  </div>
+  <div id="deploy-arch-desc" class="col-md-4">
+  <blockquote>
+    <ol>
+      <li>App, OpenVidu Server and KMS run in the same machine</li>
+      <li>App runs in its own machine. OpenVidu Server and KMS run in the same machine</li>
+      <li>App, OpenVidu Server and KMS all run in different machines</li>
+    </ol>
+    </blockquote>
+  </div>
+</div>
+
+<p>The instructions above portray scenarios 1 and 2. In other words, we are supposing that OpenVidu Server and KMS will be hosted in the same machine. The only difference between options 1-2 and option 3 is that for steps 7A and 7B, another parameter is required when launching your openvidu-server:</p>
+<h4 id="7a">7A</h4>
+<pre><code class="console">sudo docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET -e kms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] --net=&quot;host&quot; openvidu/openvidu-server
+</code></pre>
+
+<h4 id="7b">7B</h4>
+<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dkms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] openvidu-server.jar &amp;
+</code></pre> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../custom-certificate/" class="btn btn-xs btn-primary float-right" title="Using your own certificate">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../deploying-aws/" class="btn btn-xs btn-primary" title="Deploying OpenVidu Server and your app on AWS"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/deployment/deploying-ubuntu.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

@@ -10,10 +10,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="keywords" content="OpenVidu, openvidu, WebRTC, Video, mobile" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-  <!-- Stlylesheet -->
+  
+  <!-- Stylesheet -->
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <link href="css/style-custom.css" rel="stylesheet" type="text/css" />
   <link href="css/pagetop-layout.css" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Stylesheets -->
+  {% if page.custom_css %}
+    {% for css_file in page.custom_css %}
+      <link href="css/{{ css_file }}.css" rel="stylesheet" type="text/css" />
+    {% endfor %}
+  {% endif %}
+
   <!-- Skin Color -->
   <link rel="stylesheet" href="css/colors/yellow.css" id="color-skins" />
 

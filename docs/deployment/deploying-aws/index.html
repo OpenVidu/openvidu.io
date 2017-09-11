@@ -51,29 +51,9 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><div><span>Home</span></div>
-    <ul class="subnav" hidden>
-          
-
 <li class="toctree-l1 ">
-    <a class="" href="../../home/">Home</a> 
+    <a class="" href="../../home/">What is OpenVidu?</a> 
 </li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
-</li>
-
- 
-</li>
-</ul>
 
 </ul>
 						</li>
@@ -141,30 +121,36 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><div><span>API</span></div>
+<li class="subnav_drop"><div><span>Reference documentation</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../api/openvidu-browser/">openvidu-browser</a> 
+    <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../api/openvidu-java-client/">openvidu-java-client</a> 
+    <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../api/openvidu-node-client/">openvidu-node-client</a> 
+    <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../api/REST-API/">REST API</a> 
+    <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
 </li>
 
  
@@ -182,13 +168,19 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../deploying-demos-aws/">Tutorial - Deploying OpenVidu Demos on AWS</a> 
+    <a class="" href="../deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
 </li>
 
    
 
 <li class="toctree-l1 current">
     <a class="current" href="./">Deploying OpenVidu Server and your app on AWS</a>  
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
 </li>
 
    
@@ -520,74 +512,6 @@ location /YOUR_APP_2 {
 </code></pre>
 </li>
 </ul>
-<hr />
-<h2 id="deploying-on-aws-with-native-services-and-executables">Deploying on AWS with native services and executables</h2>
-<p>If you prefer having KMS installed in your EC2 machine and your own version of openvidu-server, follow these few steps. In this case, KMS and openvidu-server run in the same machine. <em>Ubuntu xenial 14.04</em> and <em>Ubuntu trusty 16.04</em> are supported.</p>
-<h4 id="1-install-kms-in-first-command-xenial-for-1604-trusty-for-1404">1. Install KMS (in first command: <strong><em>xenial</em></strong> for 16.04, <strong><em>trusty</em></strong> for 14.04)</h4>
-<pre><code class="console">echo &quot;deb http://ubuntu.kurento.org xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
-wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y install kurento-media-server-6.0
-</code></pre>
-
-<h4 id="2-install-coturn">2. Install COTURN</h4>
-<pre><code class="console">sudo apt-get -y install coturn
-</code></pre>
-
-<blockquote>
-<p>This is a great implementation of a STUN/TURN server, necessary for connecting your users under some complicated circumstances. You can check its documentation <a href="https://github.com/coturn/coturn">here</a>.
-If there's any problem with the installation on <strong>Ubuntu trusty 14.04</strong>:</p>
-<p><code>wget -c http://ftp.us.debian.org/debian/pool/main/c/coturn/coturn_4.2.1.2-1_amd64.deb</code></br>
-<code>sudo dpkg -i coturn_4.2.1.2-1_amd64.deb</code></br>
-<code>sudo apt-get -f -y install</code></br>
-<code>sudo dpkg -i coturn_4.2.1.2-1_amd64.deb</code></br></p>
-</blockquote>
-<h4 id="3-file-etckurentomoduleskurentowebrtcendpointconfini">3. File <code>/etc/kurento/modules/kurento/WebRtcEndpoint.conf.ini</code></h4>
-<pre><code class="console">stunServerAddress=YOUR_MACHINE_PUBLIC_IP
-stunServerPort=3478
-turnURL=USER:PASS@YOUR_MACHINE_PUBLIC_IP:3478
-</code></pre>
-
-<h4 id="4-file-etcturnserverconf">4. File <code>/etc/turnserver.conf</code></h4>
-<pre><code class="console">external-ip=YOUR_MACHINE_PUBLIC_IP
-fingerprint
-user=USER:PASS
-lt-cred-mech
-realm=kurento.org
-log-file=/var/log/turnserver/turnserver.log
-simple-log
-</code></pre>
-
-<h4 id="5-file-etcdefaultcoturn">5. File <code>/etc/default/coturn</code></h4>
-<pre><code>TURNSERVER_ENABLED=1
-</code></pre>
-
-<h4 id="6-init-services">6. Init services</h4>
-<pre><code class="bash">sudo service coturn restart
-sudo service kurento-media-server-6.0 restart
-</code></pre>
-
-<h4 id="7a-init-openvidu-server-docker-container">7A. Init openvidu-server Docker container...</h4>
-<pre><code class="console">sudo docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET --net=&quot;host&quot; openvidu/openvidu-server
-</code></pre>
-
-<blockquote>
-<p>To quickly install the latest official stable version of <strong>Docker CE</strong>:</p>
-<p><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</code></br>
-<code>sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"</code></br>
-<code>sudo apt-get update</code></br>
-<code>sudo apt-get -y install docker-ce</code></br>
-</p>
-</blockquote>
-<p>Go to <a href="../../deployment/custom-certificate#for-the-docker-container-of-openvidu-server">Using your own certificate</a> to add your certificate to the container instead of using the self-signed default one.</p>
-<h4 id="7b-or-init-your-own-openvidu-server-executable">7B. ...or init your own openvidu-server executable</h4>
-<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET openvidu-server.jar &amp;
-</code></pre>
-
-<p>Go to <a href="../../deployment/custom-certificate#for-a-jar-binary-of-openvidu-server">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one.</p>
-<h4 id="8-finally-check-your-server">8. Finally check your server</h4>
-<p>You can connect to OpenVidu dashboard through <code>https://YOUR_MACHINE_PUBLIC_IP:8443</code> (authorization is <code>OPENVIDUAPP:YOUR_SECRET</code>). Make sure you allow TCP and UDP inbound connections to your machine!</p>
-<p>Now you can deploy your application in the same machine (if the app is not pure frontend HTML/CSS/JS and has a <a href="../../home/#securization">secure backend</a>, connect it to OpenVidu Server through <em>https://localhost:8443</em>) or in a different one (connect to OpenVidu server through <em>https://YOUR_MACHINE_PUBLIC_IP:8443</em>).</p>
 <script src="/js/copy-btn.js"></script> 
 						</div>
 					</div> <footer>
@@ -595,10 +519,10 @@ sudo service kurento-media-server-6.0 restart
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../custom-certificate/" class="btn btn-xs btn-primary float-right" title="Using your own certificate">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../deploying-ubuntu/" class="btn btn-xs btn-primary float-right" title="Deploying OpenVidu as a native service">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../deploying-demos-aws/" class="btn btn-xs btn-primary" title="Tutorial - Deploying OpenVidu Demos on AWS"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../deploying-demos-aws/" class="btn btn-xs btn-primary" title="Deploying OpenVidu Demos on AWS (TUTORIAL)"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

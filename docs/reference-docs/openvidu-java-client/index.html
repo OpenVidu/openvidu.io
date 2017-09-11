@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - openvidu-node-client
+title: OpenVidu Documentation - openvidu-java-client API
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('openvidu-node-client')").each(function (i, e) {
+		$(".subnav").find("li:contains('openvidu-java-client API')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('openvidu-node-client')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('openvidu-java-client API')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -51,29 +51,9 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><div><span>Home</span></div>
-    <ul class="subnav" hidden>
-          
-
 <li class="toctree-l1 ">
-    <a class="" href="../../home/">Home</a> 
+    <a class="" href="../../home/">What is OpenVidu?</a> 
 </li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../../home/openvidu-basics/">OpenVidu Basics</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../../home/openvidu-artifacts/">OpenVidu Artifacts</a> 
-</li>
-
- 
-</li>
-</ul>
 
 </ul>
 						</li>
@@ -141,30 +121,36 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><div><span>API</span></div>
+<li class="subnav_drop"><div><span>Reference documentation</span></div>
     <ul class="subnav" hidden>
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-browser/">openvidu-browser</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../openvidu-java-client/">openvidu-java-client</a> 
+    <a class="" href="../openvidu-browser/">openvidu-browser API</a> 
 </li>
 
    
 
 <li class="toctree-l1 current">
-    <a class="current" href="./">openvidu-node-client</a>  
+    <a class="current" href="./">openvidu-java-client API</a>  
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../REST-API/">REST API</a> 
+    <a class="" href="../openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-artifacts/">OpenVidu Artifacts</a> 
 </li>
 
  
@@ -182,13 +168,19 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../deployment/deploying-demos-aws/">Tutorial - Deploying OpenVidu Demos on AWS</a> 
+    <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
     <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
 </li>
 
    
@@ -235,7 +227,7 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h2 id="section-title">openvidu-node-client API</h2>
+							 <h2 id="section-title">openvidu-java-client API</h2>
 
 <hr>
 
@@ -282,7 +274,7 @@ active: documentation
 <tr>
 <td>OpenVidu()</td>
 <td></td>
-<td><code>urlOpenViduServer:string</code><br><code>secret:string</code></td>
+<td><code>String:urlOpenViduServer</code><br><code>String:secret</code></td>
 <td>The constructor receives the URL of your OpenVidu Server and the secret shared with it</td>
 </tr>
 <tr>
@@ -306,14 +298,14 @@ active: documentation
 <tbody>
 <tr>
 <td>getSessionId()</td>
+<td>String</td>
 <td></td>
-<td><code>callback(sessionId:string):function</code></td>
-<td>Returns the unique identifier of the session as the only parameter (<code>sessionId</code>) in your <code>callback</code> function. You will need to return this parameter to the client side to pass it during the connection process to the session</td>
+<td>Returns the unique identifier of the session. You will need to return this parameter to the client side to pass it during the connection process to the session</td>
 </tr>
 <tr>
 <td>generateToken()</td>
-<td></td>
-<td><em><code>tokenOptions:TokenOptions</code></em></td>
+<td>String</td>
+<td><em><code>TokenOptions:tokenOptions</code></em></td>
 <td>The value returned is required in the client side just as the sessionId in order to connect to a session</td>
 </tr>
 </tbody>
@@ -354,7 +346,7 @@ active: documentation
 <tbody>
 <tr>
 <td>getData()</td>
-<td>string</td>
+<td>String</td>
 <td></td>
 <td>Returns the metadata associated to the token</td>
 </tr>
@@ -393,13 +385,13 @@ active: documentation
 <tr>
 <td>data()</td>
 <td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
-<td><code>data:string</code></td>
+<td><code>String:data</code></td>
 <td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
 </tr>
 <tr>
 <td>role()</td>
 <td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
-<td><code>role:OpenViduRole</code></td>
+<td><code>OpenViduRole:role</code></td>
 <td>The role associated to this token</td>
 </tr>
 </tbody>
@@ -410,10 +402,10 @@ active: documentation
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../REST-API/" class="btn btn-xs btn-primary float-right" title="REST API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-node-client/" class="btn btn-xs btn-primary float-right" title="openvidu-node-client API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../openvidu-java-client/" class="btn btn-xs btn-primary" title="openvidu-java-client"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../openvidu-browser/" class="btn btn-xs btn-primary" title="openvidu-browser API"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -422,7 +414,7 @@ active: documentation
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/api/openvidu-node-client.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/reference-docs/openvidu-java-client.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

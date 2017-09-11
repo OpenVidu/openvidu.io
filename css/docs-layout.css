@@ -1,0 +1,322 @@
+.page-content {
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+
+#sticky-menu {
+    position: sticky;
+    top: 56px;
+    z-index: 1000;
+}
+
+#sticky-menu ul#menu-list > li:first-child {
+    font-weight: bold;
+    border-top: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-left: 0;
+    border-right: 0;
+    border-color: #eeeeee;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#sticky-menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#sticky-menu ul li.toctree-l1 a {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#sticky-menu ul.subnav {
+    padding-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#sticky-menu ul li div,
+#sticky-menu ul li.toctree-l1 {
+    cursor: pointer;
+}
+
+#sticky-menu li span,
+#sticky-menu li a {
+    color: #777;
+    cursor: pointer;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+#sticky-menu ul li div:hover span,
+#sticky-menu ul li.toctree-l1:hover a {
+    border-left: 4px;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+    border-color: #0088aa;
+    color: #0088aa;
+    font-weight: bold;
+    border-style: solid;
+    padding-left: 5px;
+}
+
+#sticky-menu li a.current {
+    border-left: 4px;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+    border-color: #0088aa;
+    color: #0088aa;
+    border-style: solid;
+    padding-left: 5px;
+}
+
+#sticky-menu li.subnav_drop {
+    border-top: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-left: 0;
+    border-right: 0;
+    border-color: #eeeeee;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#sticky-menu .toctree-l1 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#sticky-menu ul#menu-list > li:first-child {
+    font-weight: bold;
+    border-top: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-left: 0;
+    border-right: 0;
+    border-color: #eeeeee;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+
+#doc-container li {
+    color: #7a7a7a;
+}
+
+#doc-container .docs-tutorials img {
+    max-height: 100px;
+}
+
+#doc-container #blog.docs-tutorials {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#doc-container h1 {
+    font-size: 40px;
+}
+
+#doc-container h2 {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+#doc-container h2#section-title {
+    font-size: 50px;
+}
+
+#doc-container table {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#doc-container table tr {
+    border-bottom: 1px;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-color: #dddddd;
+}
+
+#doc-container table td,
+#doc-container table th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+#doc-container blockquote {
+    background-color: rgba(238, 238, 238, 0.35);
+    margin-left: 30px;
+}
+
+#doc-container p code {
+    word-wrap: break-word;
+    overflow-x: auto;
+}
+
+
+#doc-container .section h1,
+#doc-container .section h2,
+#doc-container .section h4 {
+    border-top: 60px solid transparent;
+    margin-top: -60px;
+}
+
+#doc-container .section h1 {
+    padding-top: 40px;
+}
+
+#doc-container .section h2 {
+    padding-top: 40px;
+}
+
+#doc-container .section h3 {
+    border-top: 80px solid transparent;
+    margin-top: -60px;
+}
+
+#doc-container .section h4 {
+    padding-top: 25px;
+}
+
+#doc-container pre {
+    background: transparent;
+}
+
+#doc-container pre code {
+    padding: 9.5px !important;
+    border-radius: 4px !important;
+}
+
+#doc-container table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+
+#doc-container .deploy-img {
+    border: solid 8px #0088aa;
+    border-radius: 4px;
+}
+
+#doc-container .deploy-fields-table {
+    text-align: start;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
+#doc-container .deploy-fields-table th {
+    text-transform: uppercase;
+}
+
+#doc-container .deploy-fields-table td.first-col {
+    font-weight: bold;
+}
+
+#doc-container span.field-comment {
+    font-size: 12px;
+    color: #7a7a7a;
+}
+
+#doc-container table.artifact-table tr td {
+    padding-left: 0;
+}
+
+#doc-container table.artifact-table tr th {
+    padding-left: 0;
+}
+
+#doc-container table.color-table tr td:nth-child(1) {
+    padding-left: 0;
+}
+
+#doc-container table.color-table tr th:nth-child(2) {
+    background-color: rgba(255, 204, 0, 0.15);
+}
+
+#doc-container table.color-table tr th:nth-child(3) {
+    background-color: rgba(0, 136, 170, 0.15);
+}
+
+#doc-container table.color-table tr th:nth-child(4) {
+    background-color: rgba(6, 211, 98, 0.15);
+}
+
+#doc-container table.color-table tr td:nth-child(2) {
+    background-color: rgba(255, 204, 0, 0.05);
+}
+
+#doc-container table.color-table tr td:nth-child(3) {
+    background-color: rgba(0, 136, 170, 0.05);
+}
+
+#doc-container table.color-table tr td:nth-child(4) {
+    background-color: rgba(6, 211, 98, 0.05);
+}
+
+#doc-container #deploy-arch-row {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#doc-container #deploy-arch-desc ol {
+    padding-left: 18px;
+}
+
+#doc-container #deploy-arch-desc ol li {
+    padding-bottom: 25px;
+}
+
+#doc-container #deploy-arch-desc ol li:last-child {
+    padding-bottom: 0;
+}
+
+@media screen and (max-width: 991px) {
+    #sticky-menu {
+        position: relative !important;
+        top: 0 !important;
+    }
+    #doc-container h2#section-title {
+        font-size: 40px;
+    }
+    #doc-container h1 {
+        font-size: 30px;
+    }
+    #doc-container h4 code {
+        word-wrap: break-word;
+    }
+}
+
+@media all and (max-width: 767px) {
+    #doc-container {
+        margin-top: -25px;
+    }
+    #doc-container #deploy-arch-row {
+        display: inherit;
+        align-items: inherit; 
+    }
+    #doc-container #deploy-arch-desc {
+        margin: 30px 20px 10px 20px;
+    }
+    #doc-container #deploy-arch-desc ol li {
+        font-size: 15px;
+    }
+    #doc-container #deploy-arch-desc blockquote {
+        margin-left: 0;
+    }
+}
