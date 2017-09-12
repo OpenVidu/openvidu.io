@@ -190,12 +190,23 @@
 <script>
     $('.main-gallery').slick({
       autoplay: true,
+      arrows: true,
+      prevArrow: '<div class="slick-btn slick-btn-prev"><i class="icon ion-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-btn slick-btn-next"><i class="icon ion-chevron-right"></i></div>',
       autoplaySpeed: 4000,
       dots: true,
       infinite: true,
       pauseOnHover: false,
       pauseOnFocus: false,
-
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1
+        }
+      },
+    ]
     });
 </script>
 

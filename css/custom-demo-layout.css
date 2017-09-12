@@ -34,6 +34,11 @@
     color: #404040;
 }
 
+#demo-container code {
+    word-wrap: break-word;
+    overflow-x: auto;
+}
+
 .c-tabs-nav {
     display: flex;
     list-style: none;

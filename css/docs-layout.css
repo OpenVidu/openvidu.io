@@ -160,7 +160,7 @@
     margin-left: 30px;
 }
 
-#doc-container p code {
+#doc-container code {
     word-wrap: break-word;
     overflow-x: auto;
 }
@@ -286,10 +286,24 @@
     padding-bottom: 0;
 }
 
+@media all and (min-width: 992px) {
+    #doc-container img.login-form-img {
+        max-width: 300px;
+    }
+    
+    #doc-container img.join-form-img {
+        max-width: 500px;   
+    }
+}
+
 @media screen and (max-width: 991px) {
     #sticky-menu {
         position: relative !important;
         top: 0 !important;
+    }
+    #sticky-menu a, #sticky-menu li.subnav_drop > div {
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
     #doc-container h2#section-title {
         font-size: 40px;

@@ -9,9 +9,6 @@ $(document).ready(function(){
         ],
         clickOutside : 'close',
         clickSlide   : 'close',
-        touch : {
-			vertical : false
-		}
     });
 
 });

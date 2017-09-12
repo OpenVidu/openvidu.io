@@ -327,7 +327,7 @@ node server.js localhost:8443 MY_SECRET
 <p>Where <code>method</code> is whether "POST" or "GET", <code>url</code> the path of the REST operation, <code>body</code> the data to be passed, <code>errorMsg</code> the output error message if something goes wrong and <code>callback</code> the function to execute in case of success. As mentioned above, we need to call this method three times for each user that LOGS IN 🡒 CONNECTS TO A VIDEO-CALL 🡒 LEAVES THE VIDEO-CALL.</p>
 <p><code>index.html</code> will first show a form to log in:</p>
 <p align="center">
-  <img class="img-responsive" style="max-width: 300px; padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSV3phM2JTWHBxakk">
+  <img class="img-responsive login-form-img" style="padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSV3phM2JTWHBxakk">
 </p>
 
 <p><code>app.js</code> sends an HTTP request to "/api-login/login" passing the username and the password retrieved from the HTML form whenever "Log in" button is clicked:</p>
@@ -370,7 +370,7 @@ node server.js localhost:8443 MY_SECRET
 <h3 id="2-user-connects-to-tutorial-video-call">2) User connects to "TUTORIAL" video-call</h3>
 <p>HTML will display now the user has logged a different form, asking for the video-call to connect and the nickname the user wants to have in it. So our 'publisher1' user would write TUTORIAL in "Session" field and press "Join!" button:</p>
 <p align="center">
-  <img class="img-responsive" style="max-width: 500px; padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMElwU2l1cGpKQzQ">
+  <img class="img-responsive join-form-img" style="padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMElwU2l1cGpKQzQ">
 </p>
 
 <p><code>app.js</code> will execute <code>joinSession()</code> method, which starts like this:</p>
