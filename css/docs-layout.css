@@ -106,6 +106,16 @@
     padding-top: 5px;
 }
 
+#sticky-menu ul#menu-list > li:last-child {
+    font-weight: bold;
+    border-top: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-left: 0;
+    border-right: 0;
+    border-color: #eeeeee;
+}
+
 
 #doc-container li {
     color: #7a7a7a;
@@ -302,8 +312,8 @@
         top: 0 !important;
     }
     #sticky-menu a, #sticky-menu li.subnav_drop > div {
-        margin-top: 8px;
-        margin-bottom: 8px;
+        margin-top: 6px;
+        margin-bottom: 6px;
     }
     #doc-container h2#section-title {
         font-size: 40px;

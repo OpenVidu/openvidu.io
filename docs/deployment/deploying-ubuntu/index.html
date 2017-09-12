@@ -213,6 +213,16 @@ active: documentation
 
 </ul>
 						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
 						 
 					</ul>
 				</div>
@@ -302,7 +312,7 @@ sudo service kurento-media-server-6.0 restart
 <p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your <em>COTURN</em> server:</p>
 <ul>
 <li>
-<p>First of all, you certainly need this machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: <em>COTURN</em> is necessary to cover those situations where the final users are hidden behind NATs or complex networks. If the <em>COTURN</em> itself is running in an unreachable machine, your video transmission couold fail in certain cases.</p>
+<p>First of all, you certainly need this machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: <em>COTURN</em> is necessary to cover those situations where the final users are hidden behind NATs or complex networks. If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission could fail in certain cases.</p>
 </li>
 <li>
 <p>Besides, <em>COTURN</em> server needs some ports opened in the firewall:</p>
@@ -314,6 +324,7 @@ sudo service kurento-media-server-6.0 restart
 </ul>
 <blockquote>
 <p>You can test your <em>COTURN</em> server on this website: <a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Trickle ICE</a></p>
+<p>If you were still in trouble, we provide a ready-to-use Amazon CloudFormation Stack to easily deploy OpenVidu in a few minutes <a href="../../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">here</a>.</p>
 </blockquote>
 <h2 id="architectures">Architectures</h2>
 <p>You can have the following scenarios depending on how many machines you have and what architecture you prefer. What are the advantages and disadvantages of each one of them? Well, it really depends on the power of the machine, the nature of your application and the load expected. In general, having all the services running in one machine will reduce its performance and scalability, but on the other hand, makes it easier the process of installation, configuration and launching.</p>

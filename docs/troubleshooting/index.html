@@ -1,0 +1,317 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Troubleshooting / FAQ
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Troubleshooting / FAQ')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Troubleshooting / FAQ')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Reference documentation</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../deployment/custom-certificate/">Using your own certificate</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">Troubleshooting / FAQ</a>  
+</li>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">Troubleshooting and FAQ</h2>
+
+<hr>
+
+<h3 id="everything-looks-alright-but-i-cannot-see-any-remote-video">Everything looks alright, but I cannot see any remote video</h3>
+<p>You have implemented an app that uses OpenVidu to stream some video user-to-user, and the process looks perfectly okey. No errors on the console and all the OpenVidu events you are subscribed to are correctly triggered. So what's happening?</p>
+<p>Okey, you have come across the most common issue with WebRTC. And 99% of the time this is a problem related with <strong><a href="#what-are-stun-and-turn-servers-and-why-do-i-need-them">STUN/TURN servers</a></strong>.</p>
+<p>To provide a a solid service you definitely need both STUN and TURN servers. There are many public, free-to-use STUN servers (<a href="https://gist.github.com/zziuni/3741933">STUN server list</a>), but because TURN always faces a much larger load when coming into play, no one offers it free of charge. The good news is that it is very easy to install a COTURN server, which offers both STUN and TURN:</p>
+<ul>
+<li>Our ready-to-use <a href="../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">CloudFormation stack</a> already includes a properly configured COTURN server.</li>
+<li>If you are deploying OpenVidu Server by your own, there are detailed instructions in the <a href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> section, which explains how to install, configure and run COTURN in Ubuntu.</li>
+</ul>
+<p>These are the recommended steps to follow when videos are not received, even after COTURN has been added:</p>
+<ul>
+<li>Access your OpenVidu dashboard (<code>https://YOUR_OPENVIDU_IP:8443</code>) to quickly test the video transmission.</li>
+<li>Please be sure that the COTURN host meets the <a href="../deployment/deploying-ubuntu#server-network-requirements">network requirements</a>.</li>
+<li>Check that your COTURN server is properly working with the <a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Trickle ICE web</a>. To do so, remove the default Google server from the list and add your own following this format: <code>turn:YOUR_TURN_IP:YOUR_TURN_PORT</code> (add your TURN username and password below).</li>
+</ul>
+<h3 id="why-does-my-app-need-a-server-side">Why does my app need a server-side?</h3>
+<p>First of all, let's differentiate between OpenVidu server-side and your application's server-side. </p>
+<ul>
+<li>You will always need OpenVidu Server deployed at some place on the Internet (check the <a href="../deployment/deploying-aws/">Deployment section</a> to learn how to do it in 5 minutes). For now, OpenVidu doesn't support p2p direct connections between two users, so all the traffic must flow to OpenVidu Server or from OpenVidu Server.</li>
+<li>You will generally want your application to have its own server-side. Why?</li>
+</ul>
+<p>Well, it is really not necessary. You can have a pure client-side application if you want. Just check any of these tutorials:<br><a href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>, <a href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a></p>
+<p>The problem here is pretty evident: if you don't have any kind of server side to control your users, anyone can use your app. In fact, you can respectively see <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/5049635370ab4d6abc95a7caccd95965a939fb1e/openvidu-insecure-js/web/app.js#L19">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/5049635370ab4d6abc95a7caccd95965a939fb1e/openvidu-getaroom/web/app.js#L46">here</a> that when initializing the Session object, the SECRET is hardcoded in the JavaScript file. That means that any user with basic knowledge can get your SECRET just by looking at the source code in the browser.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong>: Don't include your SECRET in your JavaScript or HTML files in a production environment!</p>
+</blockquote>
+<h3 id="the-cloudformation-stack-is-a-nice-option-for-amazon-but-i-dont-like-it-i-want-more-control">The CloudFormation Stack is a nice option for Amazon, but I don't like it. I want more control</h3>
+<p>You can always deploy everything by yourself. To do so, check <a href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> section. It is very important to understand all the posibilities you have available regarding to the architecture of your system: you can have everything running in the same host or split the services between two or even more machines. That's up to you.</p>
+<div id="deploy-arch-row" class="row">
+  <div class="col-md-8">
+    <img class="img-responsive" src="/img/docs/deployment/app-ovserver-kms-final.png">
+  </div>
+  <div id="deploy-arch-desc" class="col-md-4">
+  <blockquote>
+    <ol>
+      <li>App, OpenVidu Server and KMS run in the same machine</li>
+      <li>App runs in its own machine. OpenVidu Server and KMS run in the same machine</li>
+      <li>App, OpenVidu Server and KMS all run in different machines</li>
+    </ol>
+    </blockquote>
+  </div>
+</div>
+
+<p>In this diagram <a href="#what-are-stun-and-turn-servers-and-why-do-i-need-them">STUN/TURN server</a> is not outlined. It is another necessary service, and it can be hosted wherever you want (we recommend running it in the same host as Kurento Media Server).</p>
+<h3 id="what-are-stun-and-turn-servers-and-why-do-i-need-them">What are STUN and TURN servers and why do I need them?</h3>
+<p>If the user's devices don't have a public and reachable IP, WebRTC connections cannot be established and therefore, video streams cannot be sent or received. This occurs when the users are behind NAT's and Firewalls. In brief, when they are hidden under complex networks.</p>
+<p>In order to support these circumstances, WebRTC relies on <strong>STUN and TURN</strong> servers:</p>
+<ul>
+<li><strong>STUN</strong> can easily provide to the user's devices their own public IP (the IP that other devices on the Internet use to connect to it), so they can tell OpenVidu where to send the video streams. Only with a STUN server, around <strong>86%</strong> of the time the connection will be successful.</li>
+<li><strong>TURN</strong> is an extension of STUN, and covers the most extreme cases where both sides of the connection are hidden behind complex networks. It acts as a gateway, passing all the media streams form one side to the other. This situation will occur with a probability of around <strong>8%</strong>.</li>
+</ul> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../developing/" class="btn btn-xs btn-primary" title="Developing OpenVidu"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/troubleshooting/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

@@ -213,6 +213,16 @@ active: documentation
 
 </ul>
 						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
 						 
 					</ul>
 				</div>
@@ -362,7 +372,7 @@ it will take a bit longer until you can access your OpenVidu Server. Be patient.
 <h5 id="plain-htmlcssjs">Plain HTML/CSS/JS</h5>
 <ul>
 <li>
-<p>Add your web files into <code>/var/www/html/</code>. You should have instant access to it through <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/</code></p>
+<p>Add your web files into <code>/opt/</code>. You should have instant access to it through <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/</code></p>
 <blockquote>
 <p>If you want to test the deployment of a plain HTML/CSS/JS app, you can use <strong><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-js">openvidu-insecure-js</a></strong></p>
 </blockquote>
@@ -371,15 +381,16 @@ it will take a bit longer until you can access your OpenVidu Server. Be patient.
 <h5 id="java">Java</h5>
 <ul>
 <li>
-<p>Copy your JAR or WAR into <code>/var/www/html/</code></p>
+<p>Copy your JAR or WAR into <code>/opt/</code></p>
 </li>
 <li>
-<p>Write a script to launch your app with all the parameters it needs, and store it under <code>/var/www/html/</code>. For example, a file <code>/var/www/html/YOUR_LAUNCHER.sh</code> containing:</p>
-<pre><code>cd /var/www/html
+<p>Write a script to launch your app with all the parameters it needs, and store it under <code>/opt/</code>. For example, a file <code>/opt/YOUR_LAUNCHER.sh</code> containing:</p>
+<pre><code>cd /opt
 java -jar -Dserver.port=4040 myapp.jar
 </code></pre>
 <blockquote>
-<p><strong>IMPORTANT</strong>: It is crucial to navigate to <strong>/var/www/html</strong> before the launching command. Otherwise, the system will surely have some problems for finding your files</p>
+<p><strong>IMPORTANT 1</strong>: It is crucial to navigate to <strong>/opt</strong> before the launching command. Otherwise, the system will surely have some problems for finding your files</p>
+<p><strong>IMPORTANT 2</strong>: Obviously your app will need Java to run. You must install the correct version of Java in your machine (check version: <code>java -version</code>)</p>
 </blockquote>
 </li>
 <li>
@@ -399,7 +410,7 @@ java -jar -Dserver.port=4040 myapp.jar
 <li>
 <p>Configure Supervisor: add the script you wrote in the second step to the file <code>/etc/supervisor/conf.d/openvidu.conf</code> like this:</p>
 <pre><code>  [program:YOUR_APP]
-  command=/bin/bash /var/www/html/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
+  command=/bin/bash /opt/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
   redirect_stderr=true
 </code></pre>
 <blockquote>
@@ -425,15 +436,16 @@ java -jar -Dserver.port=4040 myapp.jar
 <h5 id="node">Node</h5>
 <ul>
 <li>
-<p>Add your web files into <code>/var/www/html/</code></p>
+<p>Add your web files into <code>/opt/</code></p>
 </li>
 <li>
-<p>Write a script to launch your app with all the parameters it needs, and store it under <code>/var/www/html/</code>. For example, a file <code>/var/www/html/YOUR_LAUNCHER.sh</code> containing:</p>
-<pre><code>cd /var/www/html
+<p>Write a script to launch your app with all the parameters it needs, and store it under <code>/opt/</code>. For example, a file <code>/opt/YOUR_LAUNCHER.sh</code> containing:</p>
+<pre><code>cd /opt
 node myserver.js 4040
 </code></pre>
 <blockquote>
-<p><strong>IMPORTANT</strong>: It is crucial to navigate to <strong>/var/www/html</strong> before the launching command. Otherwise, the system will surely have some problems for finding your files</p>
+<p><strong>IMPORTANT 1</strong>: It is crucial to navigate to <strong>/opt</strong> before the launching command. Otherwise, the system will surely have some problems for finding your files</p>
+<p><strong>IMPORTANT 2</strong>: Obviously your app will need Node to run. You must install the correct version of Node in your machine (check version: <code>nodejs -v</code>)</p>
 </blockquote>
 </li>
 <li>
@@ -456,7 +468,7 @@ node myserver.js 4040
 <li>
 <p>Configure Supervisor: add the script you wrote in the second step to <code>/etc/supervisor/conf.d/openvidu.conf</code> like this:</p>
 <pre><code>  [program:YOUR_APP]
-  command=/bin/bash /var/www/html/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
+  command=/bin/bash /opt/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
   redirect_stderr=true
 </code></pre>
 <blockquote>
@@ -477,13 +489,13 @@ node myserver.js 4040
 </li>
 </ul>
 <h5 id="php-ruby-python-net">PHP, Ruby, Python, .NET...</h5>
-<p>We are not going to spell out in detail what is to be done with the rest of backend technologies, but you can get the idea from the Java and Node steps above. It is always the same process: take your app to your instance, place it under <code>/var/www/html/</code>, configure Nginx and Supervisor (this last with the necessary launching script depending on your technology) and relaunch both services.</p>
+<p>We are not going to spell out in detail what is to be done with the rest of backend technologies, but you can get the idea from the Java and Node steps above. It is always the same process: take your app to your instance, place it under <code>/opt/</code>, configure Nginx and Supervisor (this last with the necessary launching script depending on your technology) and relaunch both services. Be sure that your machine has all the necessary dependencies and technologies to execute your application, depending on the framework (Java for a Java app, Node for a Node app, Ruby for a Ruby app...)</p>
 <p>Voilà! It is really this simple.</p>
 <h4 id="ps-multiple-apps-in-the-same-instance">PS: Multiple apps in the same instance</h4>
-<p>To launch multiple apps in the same instance, just store each one of them inside its own folder under <code>/var/www/html/</code>. For example:</p>
+<p>To launch multiple apps in the same instance, just store each one of them inside its own folder under <code>/opt/</code>. For example:</p>
 <ul>
-<li><code>/var/www/html/YOUR_APP_1</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_1/</code></li>
-<li><code>/var/www/html/YOUR_APP_2</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_2/</code></li>
+<li><code>/opt/YOUR_APP_1</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_1/</code></li>
+<li><code>/opt/YOUR_APP_2</code> : will be available at <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/YOUR_APP_2/</code></li>
 </ul>
 <p>The other steps explained above also need some adjustments related to paths:</p>
 <ul>
@@ -503,11 +515,11 @@ location /YOUR_APP_2 {
 <li>
 <p>Configure Supervisor: now...</p>
 <pre><code>  [program:YOUR_APP_1]
-  command=/bin/bash /var/www/html/YOUR_APP_1/YOUR_LAUNCHER_1.sh YOUR_APP1_PARAM_1 YOUR_APP1_PARAM_2 ...
+  command=/bin/bash /opt/YOUR_APP_1/YOUR_LAUNCHER_1.sh YOUR_APP1_PARAM_1 YOUR_APP1_PARAM_2 ...
   redirect_stderr=true
 
   [program:YOUR_APP_2]
-  command=/bin/bash /var/www/html/YOUR_APP_2/YOUR_LAUNCHER_2.sh YOUR_APP2_PARAM_1 YOUR_APP2_PARAM_2 ...
+  command=/bin/bash /opt/YOUR_APP_2/YOUR_LAUNCHER_2.sh YOUR_APP2_PARAM_1 YOUR_APP2_PARAM_2 ...
   redirect_stderr=true
 </code></pre>
 </li>
