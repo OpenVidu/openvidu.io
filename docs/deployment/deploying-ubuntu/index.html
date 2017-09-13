@@ -72,6 +72,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
 </li>
 
@@ -121,7 +127,7 @@ active: documentation
 						<li>
 							<ul> 
 
-<li class="subnav_drop"><div><span>Reference documentation</span></div>
+<li class="subnav_drop"><div><span>Reference Documentation</span></div>
     <ul class="subnav" hidden>
           
 
@@ -299,31 +305,30 @@ sudo service kurento-media-server-6.0 restart
 <code>sudo apt-get -y install docker-ce</code></br>
 </p>
 </blockquote>
-<p>Go to <a href="../../deployment/custom-certificate#for-the-docker-container-of-openvidu-server">Using your own certificate</a> to add your certificate to the container instead of using the self-signed default one.</p>
+<p>Go to <a href="../../deployment/custom-certificate#for-the-docker-container-of-openvidu-server">Using your own certificate</a> to add your certificate to the container instead of using the self-signed default one (which will launch a security warning on the user's browser).</p>
 <h4 id="7b-or-init-your-own-openvidu-server-executable">7B. ...or init your own openvidu-server executable</h4>
 <pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET openvidu-server.jar &amp;
 </code></pre>
 
-<p>Go to <a href="../../deployment/custom-certificate#for-a-jar-binary-of-openvidu-server">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one.</p>
+<p>Go to <a href="../../deployment/custom-certificate#for-a-jar-binary-of-openvidu-server">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one (which will launch a security warning on the user's browser).</p>
 <h4 id="8-finally-check-your-server">8. Finally check your server</h4>
 <p>You can connect to OpenVidu dashboard through <code>https://YOUR_MACHINE_PUBLIC_IP:8443</code> (authorization is <code>OPENVIDUAPP:YOUR_SECRET</code>). Make sure you allow TCP and UDP inbound connections to your machine!</p>
 <p>Now you can deploy your application in the same machine (if the app is not pure frontend HTML/CSS/JS and has a <a href="../../home/#securization">secure backend</a>, connect it to OpenVidu Server through <em>https://localhost:8443</em>) or in a different one (connect to OpenVidu server through <em>https://YOUR_MACHINE_PUBLIC_IP:8443</em>).</p>
 <h2 id="server-network-requirements">Server network requirements</h2>
-<p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your <em>COTURN</em> server:</p>
+<p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your services:</p>
 <ul>
 <li>
-<p>First of all, you certainly need this machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: <em>COTURN</em> is necessary to cover those situations where the final users are hidden behind NATs or complex networks. If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission could fail in certain cases.</p>
+<p>First of all, you certainly need the machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: we are precisely installing <em>COTURN</em> service to cover those situations where the final users are hidden behind NATs or complex networks (<a href="../../troubleshooting#what-are-stun-and-turn-servers-and-why-do-i-need-them">learn more</a>). If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission could fail in certain cases.</p>
 </li>
 <li>
-<p>Besides, <em>COTURN</em> server needs some ports opened in the firewall:</p>
+<p>Besides, the server needs some <strong>ports</strong> opened in the firewall:</p>
 <ul>
-<li><strong>3478 TCP &amp; UDP</strong> (this server implementation listens on port 3478 by default)</li>
-<li><strong>49152 - 65535 UDP</strong> (TURN exchanges media through any of these ports)</li>
+<li><strong>3478 TCP &amp; UDP</strong> (<em>COTURN</em> listens on port 3478 by default)</li>
+<li><strong>49152 - 65535 UDP</strong> (WebRTC exchanges media through any of these ports)</li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>You can test your <em>COTURN</em> server on this website: <a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Trickle ICE</a></p>
 <p>If you were still in trouble, we provide a ready-to-use Amazon CloudFormation Stack to easily deploy OpenVidu in a few minutes <a href="../../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">here</a>.</p>
 </blockquote>
 <h2 id="architectures">Architectures</h2>
@@ -344,7 +349,7 @@ sudo service kurento-media-server-6.0 restart
   </div>
 </div>
 
-<p>The instructions above portray scenarios 1 and 2. In other words, we are supposing that OpenVidu Server and KMS will be hosted in the same machine. The only difference between options 1-2 and option 3 is that for steps 7A and 7B, another parameter is required when launching your openvidu-server:</p>
+<p>The instructions above portray scenarios 1 and 2 in the image. In other words, we are supposing that OpenVidu Server and KMS will be hosted in the same machine. The only difference between options 1-2 and option 3 is that for steps 7A and 7B, another parameter is required when launching your openvidu-server:</p>
 <h4 id="7a">7A</h4>
 <pre><code class="console">sudo docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET -e kms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] --net=&quot;host&quot; openvidu/openvidu-server
 </code></pre>

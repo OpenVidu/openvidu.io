@@ -296,6 +296,19 @@
     padding-bottom: 0;
 }
 
+#doc-container .html-scripts {
+    margin-left: 25%;
+    display: inline-flex;
+}
+
+#doc-container .html-scripts code {
+    background-color: #f9f2f4;
+}
+
+#doc-container .html-scripts code span {
+    color: #c7254e !important;
+}
+
 @media all and (min-width: 992px) {
     #doc-container img.login-form-img {
         max-width: 300px;
@@ -342,5 +355,9 @@
     }
     #doc-container #deploy-arch-desc blockquote {
         margin-left: 0;
+    }
+    #doc-container .html-scripts {
+        margin-left: inherit;
+        display: inherit;
     }
 }

@@ -76,6 +76,52 @@ li.active {
     margin: 0;
 }
 
+.no-margin-lateral {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.no-margin-top {
+    margin-top: 0;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0;
+}
+
+.no-margin-right {
+    margin-right: 0;
+}
+
+.no-margin-left {
+    margin-left: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-padding-lateral {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-padding-top {
+    padding-top: 0;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0;
+}
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
 .expand .social-icon a {
     padding-left: 60px;
     padding-right: 60px;
