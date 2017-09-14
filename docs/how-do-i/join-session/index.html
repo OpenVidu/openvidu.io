@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - REST  API
+title: OpenVidu Documentation - Join a session
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('REST  API')").each(function (i, e) {
+		$(".subnav").find("li:contains('Join a session')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('REST  API')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Join a session')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -132,19 +132,19 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
+    <a class="" href="../create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">Join a session</a>  
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+    <a class="" href="../share-data/">Share data between users</a> 
 </li>
 
  
@@ -162,31 +162,31 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-browser/">openvidu-browser API</a> 
+    <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-java-client/">openvidu-java-client API</a> 
+    <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-node-client/">openvidu-node-client API</a> 
-</li>
-
-   
-
-<li class="toctree-l1 current">
-    <a class="current" href="./">REST  API</a>  
+    <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
 </li>
 
  
@@ -273,94 +273,32 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h2 id="section-title">REST API</h2>
+							 <h1 id="join-a-session">Join a session</h1>
+<p>By calling <code>session.connect</code> method you can join a properly initialized session.</p>
+<pre><code class="javascript">session.connect(token, function(error) {...});
+</code></pre>
 
-<hr>
-
-<p>This is the straightforward way to get <strong>sessionId</strong> and <strong>token</strong> params from openvidu-server without using <em>openvidu-java-client</em> or <em>openvidu-node-client</em>.</p>
-<p>Two REST operations are provided: <strong><em>/api/sessions</em></strong> and <strong><em>/api/tokens</em></strong>.
-Both operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). An example is shown below:</p>
-<p>For secret "MY_SECRET", the final header would be</p>
-<blockquote>
-<p>Authorization:Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</p>
-</blockquote>
-<h3 id="apisessions">/api/sessions</h3>
-<table>
-<thead>
-<tr>
-<th><em>NEW SESSIONID</em></th>
-<th><em>PARAMETERS</em></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Operation</strong></td>
-<td>POST</td>
-</tr>
-<tr>
-<td><strong>URL</strong></td>
-<td>https://[YOUR_OPENVIDUSERVER_IP]/api/sessions</td>
-</tr>
-<tr>
-<td><strong>Headers</strong></td>
-<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em></td>
-</tr>
-<tr>
-<td><strong>Returns</strong></td>
-<td>{"id": "SESSIONID"}</td>
-</tr>
-</tbody>
-</table>
-<h3 id="apitokens">/api/tokens</h3>
-<table>
-<thead>
-<tr>
-<th><em>NEW TOKEN</em></th>
-<th><em>PARAMETERS</em></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Operation</strong></td>
-<td>POST</td>
-</tr>
-<tr>
-<td><strong>URL</strong></td>
-<td>https://[YOUR_OPENVIDUSERVER_IP]/api/tokens</td>
-</tr>
-<tr>
-<td><strong>Headers</strong></td>
-<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type:application/json</td>
-</tr>
-<tr>
-<td><strong>Body</strong></td>
-<td>{"session": "SESSIONID", "role": "ROLE", "data": "DATA"}</td>
-</tr>
-<tr>
-<td><strong>Returns</strong></td>
-<td>{"token": "TOKEN", "session": "SESSIONID", "role": "ROLE", "data": "DATA", "id": "TOKEN"}</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>ROLE</strong> value in Body field of POST to "/api/tokens" can be:</p>
 <ul>
-<li>SUBSCRIBER</li>
-<li>PUBLISHER</li>
-<li>MODERATOR</li>
+<li>
+<p>If you have a server-side, you should ask for a user's <code>token</code> to OpenVidu Server (thanks to the <a href="../../reference-docs//REST-API/">REST API</a>, <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>) and return it to the client to use it on <code>connect</code> method.</p>
+</li>
+<li>
+<p>If you don't have a server side, <code>token</code> value is completely irrelevant, so it can be undefined or null.</p>
+</li>
 </ul>
-<p>(See <a href="../../api/openvidu-java-client/#openvidurole">OpenViduRole</a> section)</p>
-</blockquote> 
+<p>You can add an optional second parameter to pass some user metadata that will be recieved by every other user connected to the same session (check <a href="../../how-do-i/share-data/">Share data between users</a> to learn more).</p>
+<pre><code class="javascript">session.connect(token, DATA, function(error) {...});
+</code></pre> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-artifacts/" class="btn btn-xs btn-primary float-right" title="OpenVidu Artifacts">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../share-data/" class="btn btn-xs btn-primary float-right" title="Share data between users">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../openvidu-node-client/" class="btn btn-xs btn-primary" title="openvidu-node-client API"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../create-session/" class="btn btn-xs btn-primary" title="Create a session"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -369,7 +307,7 @@ Both operations have in common the header referred to authorization. It is imple
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/reference-docs/REST-API.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/join-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

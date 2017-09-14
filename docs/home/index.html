@@ -127,6 +127,36 @@ active: documentation
 						<li>
 							<ul> 
 
+<li class="subnav_drop"><div><span>How do I ... ?</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../how-do-i/create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../how-do-i/join-session/">Join a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
 <li class="subnav_drop"><div><span>Reference Documentation</span></div>
     <ul class="subnav" hidden>
           
@@ -366,9 +396,9 @@ var session = OV.initSession(&quot;wss://&quot; + location.hostname + &quot;:844
 </ul>
 <p>You have three different options available for getting sessionIds and tokens from openvidu-server:</p>
 <ul>
-<li><a href="../docs/api/REST-API/">REST API</a></li>
-<li><a href="../docs/api/openvidu-java-client/">openvidu-java-client</a></li>
-<li><a href="../docs/api/openvidu-node-client/">openvidu-node-client</a></li>
+<li><a href="../reference-docs//REST-API/">REST API</a></li>
+<li><a href="../reference-docs/openvidu-java-client/">openvidu-java-client</a></li>
+<li><a href="../reference-docs/openvidu-node-client/">openvidu-node-client</a></li>
 </ul>
 <h2 id="a-sequence-diagram-to-sum-up">A sequence diagram to sum up</h2>
 <p align="center">
@@ -410,41 +440,6 @@ docker-compose up
 <li>Wait until you see a public URL ended with <code>.ngrok.io</code> and connect to it.  You can share this URL with anyone you want to test the app over the Internet! To try it on your own, use a standard window and an incognito window to test two users at the same time.</li>
 </ul>
 <hr />
-<h1 id="sharing-data-between-users">Sharing data between users</h1>
-<p>Whatever app you are developing, chances are you will need to pass some data for each user, at least a nickname. You can do it in two different places:</p>
-<ul>
-<li><strong>openvidu-browser</strong>: when calling <code>session.connect</code> method</li>
-</ul>
-<pre><code>session.connect(token, DATA, function (error) { ... });
-</code></pre>
-
-<ul>
-<li><strong>API REST</strong>: when asking for a token to <em>/api/tokens</em>, you can pass data as third parameter in the BODY of the POST request </li>
-</ul>
-<pre><code>{“session”: “sessionId”, “role”: “role”, “data”: &quot;DATA&quot;}
-</code></pre>
-
-<blockquote>
-<p>Java and Node clients (<em>openvidu-java-client</em> and <em>openvidu-node-client</em>) allow you to pass data when creating a Token object: </br>
-<code>tokenOptions = new TokenOptions.Builder().data("DATA").build();</code></p>
-</blockquote>
-<p>The result will be that in all clients, <em>Connection</em> objects will have in their <em>data</em> property the pertinent value you have provided for each user. So, an easy way to get the data associated to any user would be:</p>
-<pre><code class="javascript">session.on('streamCreated', function (event) {
-    session.subscribe(event.stream, 'subscriber');
-    console.log('USER DATA: ' + event.stream.connection.data);
-});
-</code></pre>
-
-<p>Some clarifications:</p>
-<ul>
-<li>
-<p><em>Connection.data</em> will be a simple string if you have provided data only with one of the methods, and will be a string with the following format if you provide data both from openvidu-browser and your backend: "OPENVIDUBROWSER_DATA%/%APIREST_DATA" </p>
-</li>
-<li>
-<p>Using only first option is not secure, as clients could modify the value of the second parameter. It is intended only in development environments. If you want total control over shared data, please use the second way.</p>
-</li>
-<li>You can choose whatever format you like for the data string, but if you are planning to share more than a simple field, maybe a standard format as JSON would be a wise choice.</li>
-</ul>
 <h1 id="acknowledgments">Acknowledgments</h1>
 <p>OpenVidu platform has been supported under project LERNIM (RTC-2016-4674-7) confunded by the <em>Ministry of Economy, Finance and Competitiveness</em> of Spain, as well as by the <em>European Union</em> FEDER, whose main goal with this funds is to promote technological development, innovation and high-quality research.</p>
 <p align="center">

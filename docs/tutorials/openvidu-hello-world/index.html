@@ -127,6 +127,36 @@ active: documentation
 						<li>
 							<ul> 
 
+<li class="subnav_drop"><div><span>How do I ... ?</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
 <li class="subnav_drop"><div><span>Reference Documentation</span></div>
     <ul class="subnav" hidden>
           
@@ -265,6 +295,9 @@ http-server openvidu-hello-world/web
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<blockquote>
+<p>This <a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a> will give you some tips to develop with OpenVidu</p>
+</blockquote>
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This application is very simple. It has only 4 files:</p>
 <ul>
@@ -273,10 +306,11 @@ http-server openvidu-hello-world/web
 <li><code>style.css</code>: some CSS classes to style <em>index.html</em>.</li>
 <li><code>index.html</code>: HTML code for the form to connect to a video-call and for the video-call itself. It has two links to both JavaScript files: </li>
 </ul>
-<p><pre class="html-scripts">
-    <code>&lt;script src="openvidu-browser-VERSION.js"&gt;&lt;/script&gt;
+<pre class="html-scripts">
+  <code>&lt;script src="openvidu-browser-VERSION.js"&gt;&lt;/script&gt;
 &lt;script src="app.js"&gt;&lt;/script&gt;</code>
-  </pre></p>
+</pre>
+
 <p>Let's see how <code>app.js</code> uses <code>openvidu-browser-VERSION.js</code>:</p>
 <hr />
 <h4 id="first-lines-declare-the-two-variables-that-will-be-needed-in-different-points-along-the-code-ov-will-be-our-openvidu-object-and-session-the-video-call-we-will-connect-to">First lines declare the two variables that will be needed in different points along the code. <code>OV</code> will be our OpenVidu object and <code>session</code> the video-call we will connect to:</h4>
@@ -298,19 +332,19 @@ session.on('streamCreated', function (event) {
 <p style="text-align: center"><strong>"wss://"</strong> + <code>OPENVIDU_IP</code> + <strong>":8443/"</strong> + <code>SESSION_ID</code> + <strong>"?secret="</strong> + <code>OPENVIDU_SECRET</code></p>
 
 <ul>
-<li><code>OPENVIDU_IP</code>  is the IP where your OpenVidu Server is running. In this case, it will be localhost.</li>
-<li><code>SESSION_ID</code> is the unique identifier of your session. This parameter will determine which session you are connecting to.</li>
+<li><code>OPENVIDU_IP</code>  is the IP where your OpenVidu Server is running. In this case, it will be <em>localhost</em>.</li>
+<li><code>SESSION_ID</code> is the unique identifier of your session. This parameter will determine which session you are connecting to: in this case, we get this from the HTML text input, where the user can type whatever he wants.</li>
 <li><code>OPENVIDU_SECRET</code> is the same secret as used to initialize you OpenVidu Server (check param <code>openvidu.secret</code> in step 4 of <a href="#running-this-tutorial">Running this tutorial</a>).</li>
 </ul>
 <blockquote>
-<p>This is only necessary when your app has no server-side. Obviously in a production environment this is not recommended. Check <a href="../../troubleshooting#what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">this FAQ</a> to learn more.</p>
+<p>This parameter building process for <em>initrSession</em> method is only necessary when your app has no server-side. Obviously in a production environment appending your secret is not recommended. Check <a href="../../troubleshooting#4-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">this FAQ</a> to learn more.</p>
 </blockquote>
 <p>Then you can subscribe to all the events you want for your session. In this case we just want to subscribe to every stream that is being created in the session: on <code>streamCreated</code> we subscribe to the specific stream, available at <code>event.stream</code> property.</p>
 <blockquote>
 <p>You can take a look at all the events in the <a href="../../reference-docs/openvidu-browser/">Reference Documentation</a></p>
 </blockquote>
 <hr />
-<h4 id="finally-connect-to-the-session-and-publish-your-webcam">Finally connect to the session and publish your webcam:</h4>
+<h4 id="connect-to-the-session-and-publish-your-webcam">Connect to the session and publish your webcam:</h4>
 <pre><code class="javascript">session.connect(null, function (error) {
 
   if (!error) {
@@ -323,9 +357,15 @@ session.on('streamCreated', function (event) {
 });
 </code></pre>
 
-<p>We simply need to call <code>session.connect</code> method providing a callback to execute when the operation is completed. First parameter <code>null</code> is now irrelevant because we have no server-side (check the <a href="../../troubleshooting#what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">FAQ</a>).</p>
-<p>The only parameter received by our callback is <code>error</code> object, which will be undefined if everything has gone well. To publish our webcam to the session we just get a <code>publisher</code> (thanks to <code>OpenVidu.initPublisher</code> method), and a new HTML video will be appended to the page inside element with id <em>publisher</em>.</p>
-<p>Last but not least, we publish this <code>publisher</code> object thanks to <code>session.publish</code>. At this point the rest of users connected to this session will trigger <code>streamCreated</code> event and can start watching our webcam.</p> 
+<p>We simply need to call <code>session.connect</code> method providing a callback to execute when the operation is completed. First parameter <code>null</code> is now irrelevant because we have no server-side (check the <a href="../../troubleshooting#4-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">FAQ</a>).</p>
+<p>The only parameter received by our callback is <code>error</code> object, which will be undefined if everything has gone well. To publish our webcam to the session we just get a <code>publisher</code> (thanks to <code>OpenVidu.initPublisher</code> method), and a new HTML video showing our webcam will be appended to the page inside element with id <em>publisher</em>.</p>
+<p>Last but not least, we publish this <code>publisher</code> object thanks to <code>session.publish</code>. At this point the rest of users connected to this session will trigger their own <code>streamCreated</code> event and can start watching our webcam.</p>
+<hr />
+<h4 id="leaving-the-session">Leaving the session:</h4>
+<pre><code class="javascript">session.disconnect();
+</code></pre>
+
+<p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method. Here it will be called inside <em>leaveSession</em> function, triggered when the user clicks on "LEAVE" button.</p> 
 						</div>
 					</div> <footer>
 <hr>

@@ -4,6 +4,8 @@ $(document).ready(function(){
         infobar : true,
         arrows : false,
         loop: true,
+        protect: true,
+        transitionEffect: 'slide',
         buttons : [
             'close'
         ],

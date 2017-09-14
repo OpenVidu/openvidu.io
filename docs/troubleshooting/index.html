@@ -127,6 +127,36 @@ active: documentation
 						<li>
 							<ul> 
 
+<li class="subnav_drop"><div><span>How do I ... ?</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../how-do-i/create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../how-do-i/join-session/">Join a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
 <li class="subnav_drop"><div><span>Reference Documentation</span></div>
     <ul class="subnav" hidden>
           
@@ -259,9 +289,21 @@ active: documentation
 <h3 id="2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">2. Any tips to make easier the development of my app with OpenVidu?</h3>
 <p>You can do some things to improve your efficiency while using OpenVidu:</p>
 <ul>
-<li>You can test the video transmision between multiple tabs in the same browser. <strong>WARNING:</strong> You may have trouble for testing at the same time with a Chrome and a Firefox tab, as they compete for the camera access.</li>
-<li>Be very aware of the browser's console. There you will find warning messages reporting the triggering of events and other important stuff. Error messages can also help you to solve many issues.</li>
-<li>Do you want to be able to publish your development app over your network or even the Internet, without really having to deploy it in a server? This can be very helpful, as you can test with different devices and browsers at the same time. NGROK</li>
+<li><strong>Multiple tabs to test the video transmission</strong>: you can use multiple tabs in the same browser to test your video streams. WARNING: you may have trouble for testing with a Chrome and a Firefox tab at the same time, as they compete for the camera access.</li>
+<li><strong>Be very aware of the browser's console</strong>: there you will find warning messages reporting the triggering of events and other important stuff. Error messages can also help you to solve many issues.</li>
+<li><strong>Remember the browser's cache</strong>: if you have changed your HTML, JavaScript or CSS code, refreshed the page and cannot see the changes on the browser, probably the cache is still serving the old files. To perform a hard reload of your page on the browser, press <code>Ctrl + Shift + R</code></li>
+<li><strong>Use <em>Ngrok</em> to share your app</strong>: do you want to be able to publish your development app over your network or even the Internet, without really having to deploy it in a server? This can be very helpful, as you can test with different devices and browsers at the same time. To achieve this, you can use <em>Ngrok</em>. The set up is quite simple:<ul>
+<li>Download <em>Ngrok</em> with this link [<strong><a href="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip">LINK</a></strong>] and unzip it.</li>
+<li>Download this <em>Ngrok</em> configuration file (named <code>ngrok.yml</code>) from our GitHub repo <strong>[<a href="https://raw.githubusercontent.com/OpenVidu/openvidu-tutorials/master/openvidu-js-java/docker/ngrok.yml">LINK</a>]</strong> and place it in the same path as <em>Ngrok</em> binary.</li>
+<li>Run <em>Ngrok</em> with this command: <code>./ngrok start --all -config=ngrok.yml</code>. You will get two public IPs (ended with <code>.ngrok.io</code>) publishing your local address <code>localhost:5000</code> and <code>localhost:3000</code>.</li>
+<li>You just have to run you app at port <code>3000</code> and run OpenVidu Server locally adding this parameter:<ul>
+<li>When running OpenVidu Server as a Docker container: <code>-Dspring.profiles.active=ngrok</code></li>
+<li>When running OpenVidu Server as a JAR: <code>-e spring.profiles.active=ngrok</code></li>
+</ul>
+</li>
+<li>That's it! Now you can connect to your app through the <em>Ngrok</em> public IP and the connection to OpenVidu Server will work just fine. You have "deployed" your app on your own computer, and cross-device testing through your own network is now possible. Connecting to your app over the Internet is also possible, but the video transmission may not work (check <a href="#1-everything-looks-alright-but-i-cannot-see-any-remote-video">this FAQ</a> to learn why).</li>
+</ul>
+</li>
 </ul>
 <h3 id="3-why-does-my-app-need-a-server-side">3. Why does my app need a server-side?</h3>
 <p>First of all, let's differentiate between OpenVidu server-side and your application's server-side. </p>
