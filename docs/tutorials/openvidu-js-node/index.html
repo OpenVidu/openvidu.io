@@ -317,12 +317,12 @@ node server.js localhost:8443 MY_SECRET
 </blockquote>
 <div class="row no-margin row-gallery">
     <div class="col-md-6">
-        <a data-fancybox="gallery2" href="/img/demos/secure-login.png">
+        <a data-fancybox="gallery" href="/img/demos/secure-login.png">
             <img class="img-responsive" src="/img/demos/secure-login.png">
         </a>
     </div>
     <div class="col-md-6">
-        <a data-fancybox="gallery2" href="/img/demos/secure-join.png">
+        <a data-fancybox="gallery" href="/img/demos/secure-join.png">
             <img class="img-responsive" src="/img/demos/secure-join.png">
         </a>
     </div>
@@ -330,12 +330,12 @@ node server.js localhost:8443 MY_SECRET
 
 <div class="row no-margin row-gallery">
     <div class="col-md-6">
-        <a data-fancybox="gallery2" href="/img/demos/secure-session-1.png">
+        <a data-fancybox="gallery" href="/img/demos/secure-session-1.png">
             <img class="img-responsive" src="/img/demos/secure-session-1.png">
         </a>
     </div>
     <div class="col-md-6">
-        <a data-fancybox="gallery2" href="/img/demos/secure-session-2.png">
+        <a data-fancybox="gallery" href="/img/demos/secure-session-2.png">
             <img class="img-responsive" src="/img/demos/secure-session-2.png">
         </a>
     </div>
@@ -686,7 +686,24 @@ For the POST operation, in <code>app.js</code> we run:</p>
 <blockquote>
 <p>At this point we have covered all the important code from the tutorial. With this scenario we have seen the most common use-case, but you can modify whatever you want to suit your needs. And remember that this is just one of the many possible approaches: <strong>you can implement your frontend and your backend as you want</strong>. </p>
 <p>The only actual requirements are getting <strong><em>sessionId</em></strong> and <strong><em>token</em></strong> params from  <strong><em>openvidu-server</em></strong> (by using one of the available clients or with the REST API) and using them along with <strong><em>openvidu-browser</em></strong> to connect your clients to the sessions.</p>
-</blockquote> 
+</blockquote>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p> 
 						</div>
 					</div> <footer>
 <hr>

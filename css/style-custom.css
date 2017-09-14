@@ -483,3 +483,64 @@ span.cc-message {
         padding-right: 10px !important;
     }
 }
+
+.main-gallery {
+    margin-top: 40px;
+}
+
+.docs-gallery {
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.img-wellcome {
+    max-height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slick-btn-prev {
+    left: -35px;
+}
+
+.slick-btn-next {
+    right: -35px;
+}
+
+.slick-btn {
+    width: 30px;
+    height: 30px;
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    padding: 0;
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    border-radius: 25px;
+}
+
+.slick-btn:hover {
+    background-color: rgba(0, 136, 170, 0.15);
+}
+
+.slick-btn:active {
+    background-color: rgba(0, 136, 170, 0.3);
+}
+
+.slick-btn i {
+    color: #0088aa;
+    font-size: 12px;
+    line-height: 30px;
+}

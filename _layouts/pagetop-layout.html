@@ -151,7 +151,20 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
-    <script src="js/gallery.js"></script>
+    <script>
+      $("[data-fancybox]").fancybox({
+        infobar : true,
+        arrows : false,
+        loop: true,
+        protect: true,
+        transitionEffect: 'slide',
+        buttons : [
+            'close'
+        ],
+        clickOutside : 'close',
+        clickSlide   : 'close',
+    });
+    </script>
   {% endif %}
 
 </body>

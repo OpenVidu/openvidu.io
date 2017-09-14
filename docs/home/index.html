@@ -302,14 +302,44 @@ application, either group or one-to-one calls. In fact, any combination you come
     ">OpenVidu has been released under <strong>1.0.0-beta</strong> (check the <a href="https://github.com/OpenVidu/openvidu/releases" target="_blank">GitHub release</a>). This means that some bugs may appear while working to provide a stable release version as soon as possible.<br>You can make use of the <a href="https://groups.google.com/forum/#!forum/openvidu">Mailing List</a> or the <a href="https://github.com/OpenVidu/bugtracker">Issue Tracker repository</a> to warn about unknown bugs and to clear up any doubts.</div></div>
 
 <hr />
-<h1 id="table-of-contents">Table of contents</h1>
+<h1 id="what-can-i-do-with-openvidu">What can I do with OpenVidu?</h1>
+<p>You can add video-call functionalities to your app, among many other things. The process is really simple: OpenVidu offers all the necessary services and tools. You just need to integrate them in your app to start enjoying its benefits: what about adding a video-call center for attending your customers face to face? Or maybe you are developing an application to hold meetings via videoconference. Or you are thinking about a teacher streaming to all his students with online lessons. The possibilities are endless.</p>
+<p>You can check our <a href="http://openvidu.io/demos">Demos</a> to get an idea of what you can do with OpenVidu. Here are some cool pictures of them:</p>
+<div class="docs-gallery">
+    <a data-fancybox="gallery-wellcome" href="/img/demos/insecure-session.png"><img class="img-responsive img-wellcome" src="/img/demos/insecure-session.png"/></a>
+    <a data-fancybox="gallery-wellcome" href="/img/demos/getaroom-session-6.png"><img class="img-responsive img-wellcome" src="/img/demos/getaroom-session-6.png"/></a>
+    <a data-fancybox="gallery-wellcome" href="/img/demos/getaroom-session-6-mob.png"><img class="img-responsive img-wellcome" src="/img/demos/getaroom-session-6-mob.png"/></a>
+    <a data-fancybox="gallery-wellcome" href="/img/demos/openvidu-classroom-video.png"><img class="img-responsive img-wellcome" src="/img/demos/openvidu-classroom-video.png"/></a>
+</div>
+
+<hr />
+<h1 id="openvidu-architecture">OpenVidu Architecture</h1>
+<p align="center" style="margin-top: 50px; margin-bottom: 50px">
+  <img class="img-responsive" src="/img/docs/home/openvidu-new-architecture.png">
+</p>
+
+<p>OpenVidu is divided into two parts: OpenVidu Browser and OpenVidu Server:</p>
 <ul>
-<li><a href="#running-a-videocall-demo-application">Running a videocall demo</a></li>
-<li><a href="#building-a-simple-app-with-openvidu">Building a simple app</a></li>
-<li><a href="#securization">Securization</a></li>
-<li><a href="#sharing-data-between-users">Sharing data between users</a></li>
-<li><a href="#acknowledgments">Acknowledgments</a></li>
+<li><strong>OpenVidu Browser</strong>: it is a library to use in your client side (available for JavaScript and TypeScript). It allows you to create video-calls, join users to them, send and receive video and audio, etc... All the actions available with OpenVidu are managed via OpenVidu Browser.</li>
+<li><strong>OpenVidu Server</strong>: it is an application that handles the server-side stuff. It receives the operations from OpenVidu Browser and do whatever is necessary to establish and manage your video-calls. You will never have to explicitly use it: just to run it and know its IP address.</li>
 </ul>
+<hr />
+<h1 id="get-started">Get started</h1>
+<p>These are the recommended steps for getting started with OpenVidu:</p>
+<ol>
+<li>
+<p>The best way to get your first app working in a few minutes is following our <strong><a href="../tutorials/openvidu-hello-world/">OpenVidu Hello Word Tutorial</a></strong>.</p>
+</li>
+<li>
+<p>After that, you can try any of our <strong><a href="../tutorials/#client-side-only">Client-Side-Only</a></strong> tutorials, or maybe go straight to step 3 if you think that you already handle OpenVidu reasonably well.</p>
+</li>
+<li>
+<p>Try now any of our <strong><a href="../tutorials/#client-side-server-side">Client-Side + Server-Side</a></strong> tutorials, where you can see how a complete web application works with OpenVidu. Choose your preferred framework, since all 4 applications are exactly the same regarding their look and functionality.</p>
+</li>
+<li>
+<p>Finally you can <strong>deploy your first app</strong> and see it working in the real world. You can follow our tutorial, where you can deploy our Demos in your own Amazon machine in a few minutes (<strong><a href="../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS</a></strong>). Then you can deploy your own app following these steps (<strong><a href="../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a></strong>).</p>
+</li>
+</ol>
 <hr />
 <h1 id="running-a-videocall-demo-application">Running a videocall demo application</h1>
 <p>We have implemented a very basic demo application to see OpenVidu in action. To ease the installation, we have packaged it as a docker image. </p>
@@ -448,7 +478,47 @@ docker-compose up
 
 <p align="center">
   <img class="img-responsive" width="400px" src="/img/docs/home/european-union.png">
-</p> 
+</p>
+
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery-wellcome"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p>
+<p><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script></p>
+<script>
+    $('.docs-gallery').slick({
+      autoplay: true,
+      autoplaySpeed: 4000,
+      dots: true,
+      infinite: true,
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1
+        }
+      },
+    ]
+    });
+</script> 
 						</div>
 					</div> <footer>
 <hr>
