@@ -372,7 +372,7 @@ mvn package exec:java
 <h3 id="1-user-logs-in">1) User logs in</h3>
 <p>At path <code>/</code> a login form will be displayed:</p>
 <p align="center">
-  <img class="img-responsive login-form-img" style="padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSV3phM2JTWHBxakk">
+  <img class="img-responsive login-form-img" style="padding: 25px 0;" src="/img/docs/tutorials/login-form.png">
 </p>
 
 <p>The form will execute a POST operation to path <code>/dashboard</code> whenever "Log in" button is clicked, passing the username and the password:</p>
@@ -428,7 +428,7 @@ public String login(@RequestParam(name = &quot;user&quot;, required = false) Str
 <h3 id="2-user-connects-to-tutorial-video-call">2) User connects to "TUTORIAL" video-call</h3>
 <p><code>dashboard.html</code> template will display a form asking for the video-call to connect and the nickname the user wants to have in it. So our 'publisher1' user would write TUTORIAL in "Session" field:</p>
 <p align="center">
-  <img class="img-responsive join-form-img" style="padding: 25px 0;" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSMElwU2l1cGpKQzQ">
+  <img class="img-responsive join-form-img" style="padding: 25px 0;" src="/img/docs/tutorials/join-form.png">
 </p>
 
 <p>The form will execute a POST operation to path <code>/session</code> whenever "Join!" button is clicked, passing the nickname and the session name:</p>

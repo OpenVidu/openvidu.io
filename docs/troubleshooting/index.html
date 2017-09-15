@@ -382,7 +382,45 @@ session.connect(token, function() { ... });
 <p>You can test your <em>COTURN</em> server on this website: <a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Trickle ICE</a>. To do so, remove the default Google server from the list and add your own following this format: <code>turn:YOUR_TURN_IP:YOUR_TURN_PORT</code> (add your TURN username and password below)</p>
 </blockquote>
 </li>
-</ul> 
+</ul>
+<h3 id="7-what-does-openvidu-not-integrate-regarding-webrtc-and-kurento-yet">7. What does OpenVidu not integrate regarding WebRTC and Kurento yet?</h3>
+<p>As the main goal OpenVidu has is to make as simple as possible the integration of video-call capabilities in applications, it would make little sense to support all the features provided by Kurento: why would most of developers want visual recognition or augmented reality capabilities when adding video-calls to their apps?</p>
+<p>But there's also a bunch of features supported by Kurento or WebRTC that will be part of OpenVidu as well:</p>
+<ul>
+<li><strong>Video composing</strong>: right now OpenVidu streams are always sent and received without any processing in Kurento Media Server, so every subscription to a video stream in a video-session implies its own WebRTC connection. We intend to provide the possibility of configuring video-sessions to be processed and send as only one video, composed in a grid by all the published streams.</li>
+<li><strong>Direct p2p connections betwwen users</strong>: OpenVidu will offer the possibility of connecting users without having to use Kurento Media Server as central node. This can be very advantegeous for certain use-cases, as will reduce the need of infraestructure.</li>
+<li><strong>Video recording</strong>: OpenVidu will support multiple (grid) and single stream recording, so developers can easily access video files later.</li>
+<li><strong>Screen share</strong>: OpenVidu will support screen sharing.</li>
+<li><strong>Mobile platforms</strong>: OpenVIdu will provide clients for both Android and iOS.</li>
+</ul>
+<h3 id="8-does-openvidu-support-android-and-ios">8. Does OpenVidu support Android and iOS?</h3>
+<p>At the moment there are no OpenVidu clients for mobile platforms, but we are working on it. In the future you will have available <strong>OpenVidu Android</strong> and <strong>OpenVidu iOS</strong>, joining <strong>OpenVidu Browser</strong>. The main goal here is that all of them are fully compatible with one another.</p>
+<h3 id="9-which-is-the-current-status-of-openvidu-on-scalability-and-fault-tolerance">9. Which is the current status of OpenVidu on scalability and fault tolerance?</h3>
+<p>This particular point relies on Kurento Media Server performance, as it is the media server used by OpenVidu. <a href="https://testrtc.com/">TestRTC</a> published on September 13, 2017 a very interesting article describing in detail the behaviour of Kurento Media Server while holding a different number of video-sessions. <a href="https://testrtc.com/sessions-kurento-server/">Here</a> is the complete article.</p>
+<p>These are the conclusions for a machine with <strong>8 cores and 15 GB of RAM</strong>. The upper limit where the following scenarios guaranteed good quality of service are:</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1:1 video calls</td>
+<td>18 users in 9 parallel sessions</td>
+</tr>
+<tr>
+<td>4-way group video calls (grid composing)</td>
+<td>3 rooms of 4 users each</td>
+</tr>
+<tr>
+<td>1:N broadcast</td>
+<td>1 broadcaster + 80-150 viewers</td>
+</tr>
+</tbody>
+</table>
+<p>That said, one of the most important features OpenVidu will offer is the possibility of automated scalability and fault tolerance. We intend to provide an easy-to-use service integrated with Amazon Web Services to allow the automated launching and shutdown of servers depending on the workload of your application. </p> 
 						</div>
 					</div> <footer>
 <hr>

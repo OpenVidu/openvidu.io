@@ -156,13 +156,17 @@ p.subheading {
     font-size: 14px;
 }
 
-#try-now-btn {
+#wellcome-btn {
     text-align: center;
     margin-top: 60px;
 }
 
-#try-now-btn a {
+#wellcome-btn a.try-now-btn {
     background-color: #06d362;
+}
+
+#wellcome-btn a.go-docs-btn {
+    background-color: #ffcc00;
 }
 
 .bg-custom {
@@ -361,33 +365,6 @@ span.cc-message {
     padding-bottom: 90px;
 }
 
-@media screen and (max-width: 991px) {
-    #padding-top-bottom {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-}
-
-@media all and (max-width: 767px) {
-    .row-run-demo {
-        display: inherit;
-        margin-bottom: 20px;
-    }
-    .row-run-demo .col {
-        display: inherit;
-        vertical-align: inherit;
-        float: inherit;
-        text-align: center;
-    }
-    .row-run-demo .col img {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .img-wellcome {
-        max-height: 215px !important;
-    }
-}
-
 .row-gallery div {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -395,47 +372,6 @@ span.cc-message {
 
 .row-gallery img {
     border: 2px solid #eeeeee;
-}
-
-@media screen and (max-width: 991px) {
-    #openvidu-logo {
-        min-width: 10em;
-        height: auto !important;
-    }
-    span.cc-message {
-        margin-bottom: 0 !important;
-    }
-    #img-mob {
-        max-height: 400px;
-    }
-    #img-mob2 {
-        max-height: 400px;
-    }
-    pre {
-        padding: 16px;
-    }
-    pre code {
-        white-space: pre !important;
-    }
-    #page-top {
-        height: 270px;
-    }
-    #page-top .page-top-title {
-        top: 93px;
-    }
-    #page-top .page-top-title h2 {
-        font-size: 37px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    #page-top .home-subheading {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    #contact {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
 }
 
 @font-face {
@@ -448,17 +384,6 @@ span.cc-message {
     url('/fonts/Arciform.svg#svgFontName') format('svg');
     /* Legacy iOS */
 }
-
-@media screen and (min-width: 768px) {
-
-}
-
-@media screen and (max-width: 767px) {
-    .twitter-row {
-        width: 100% !important;
-    }
-}
-
 
 .twitter-row {
     width: 60%;
@@ -474,14 +399,6 @@ span.cc-message {
 .secure-tutorials-right {
     padding-left: 6em;
     padding-right: 10em;
-}
-
-@media screen and (max-width: 991px) {
-    .row-secure-tutorials .secure-tutorials-left,
-    .row-secure-tutorials .secure-tutorials-right {
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
 }
 
 .main-gallery {
@@ -543,4 +460,155 @@ span.cc-message {
     color: #0088aa;
     font-size: 12px;
     line-height: 30px;
+}
+
+.row-more-info {
+    text-align: center;
+}
+
+
+.row-more-info a:before {
+    content:'+ info'
+}
+    
+.row-more-info a[aria-expanded="true"]:before {
+    content:'- info';
+}
+
+.row-more-info a {
+    background-color: #efefef;
+    color: #7a7a7a;
+    margin-bottom: 2em;
+}
+
+.more-info-tutorials {
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px;
+}
+
+.more-info-tutorials-int {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+img.img-more-info {
+    max-height: 40vh !important;
+    margin: auto;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 2px solid rgba(0, 136, 170, 0.75);
+}
+
+.more-info-desc {
+    text-align: justify;
+}
+
+.more-info-desc p {
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 20px;
+    margin-bottom: 42px;
+}
+
+.more-info-desc p:last-child {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 992px) {
+    .more-info-tutorials-int {
+        min-height: 150px;
+        align-items: center;
+        display: flex;
+        background-color: #eee;
+    }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+    .col-img-more-info {
+        padding-right: 0;
+    }
+    .more-info-desc {
+        padding-left: 0;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    #padding-top-bottom {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    #openvidu-logo {
+        min-width: 10em;
+        height: auto !important;
+    }
+    span.cc-message {
+        margin-bottom: 0 !important;
+    }
+    #img-mob {
+        max-height: 400px;
+    }
+    #img-mob2 {
+        max-height: 400px;
+    }
+    pre {
+        padding: 16px;
+    }
+    pre code {
+        white-space: pre !important;
+    }
+    #page-top {
+        height: 270px;
+    }
+    #page-top .page-top-title {
+        top: 93px;
+    }
+    #page-top .page-top-title h2 {
+        font-size: 37px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #page-top .home-subheading {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #contact {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .row-secure-tutorials .secure-tutorials-left,
+    .row-secure-tutorials .secure-tutorials-right {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    .more-info-tutorials-int {
+        padding-bottom: 0;
+    }
+    .more-info-desc {
+        padding-top: 2em;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .row-run-demo {
+        display: inherit;
+        margin-bottom: 20px;
+    }
+    .row-run-demo .col {
+        display: inherit;
+        vertical-align: inherit;
+        float: inherit;
+        text-align: center;
+    }
+    .row-run-demo .col img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .img-wellcome {
+        max-height: 215px !important;
+    }
+    .twitter-row {
+        width: 100% !important;
+    }
 }
