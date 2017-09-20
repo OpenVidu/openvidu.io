@@ -275,7 +275,7 @@ active: documentation
 						<div class="section">
 							 <h1 id="developing-openvidu">Developing OpenVidu</h1>
 <p><br>
-Packages required:</p>
+This documentation is suitable for <strong>Linux</strong>. Packages required:</p>
 <table>
 <thead>
 <tr>
@@ -286,24 +286,19 @@ Packages required:</p>
 </thead>
 <tbody>
 <tr>
-<td>java JDK</td>
+<td>java 8 JDK</td>
 <td><code>java -version</code></td>
-<td><code>sudo apt-get install default-jdk</code></td>
+<td><code>sudo apt-get install -y default-jdk</code></td>
 </tr>
 <tr>
 <td>node</td>
-<td><code>nodejs -v</code></td>
-<td><code>sudo apt-get install -g nodejs</code></td>
-</tr>
-<tr>
-<td>npm</td>
-<td><code>npm -v</code></td>
-<td><code>sudo apt-get install -g npm</code></td>
+<td><code>node -v</code></td>
+<td><code>sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -</code><br><code>sudo apt-get install -y nodejs</code></td>
 </tr>
 <tr>
 <td>maven</td>
 <td><code>mvn -v</code></td>
-<td><code>sudo apt-get install -g maven</code></td>
+<td><code>sudo apt-get install -y maven</code></td>
 </tr>
 <tr>
 <td>angular-cli</td>
@@ -317,38 +312,37 @@ Packages required:</p>
 </tr>
 </tbody>
 </table>
-<hr />
 <h2 id="setup-for-development">Setup for development</h2>
-<p>Here we show how to develop an Angular app with OpenVidu having all packages linked in your local machine, so you can modify them and check the final result. You will have <em>openvidu-browser</em> and <em>openvidu-server</em> as local dependencies, waiting to be modified as you want.</p>
+<p>Here we show how to develop an Angular app (<em>openvidu-insecure-angular</em> tutorial) with <strong><em>openvidu-browser</em></strong> and <strong><em>openvidu-server</em></strong> as local dependencies, waiting to be modified as you want.</p>
 <p>1) <a href="#installing-kms">Install KMS</a></p>
 <p>2) <a href="#adding-kurento-parent-pom-to-your-local-respository">Add Kurento parent Maven dependency to your local repo</a></p>
-<p>3) Clone <em>openvidu</em> repo:</p>
+<p>3) Clone repos:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
+git clone https://github.com/OpenVidu/openvidu-tutorials.git
 </code></pre>
 
-<p>4) Start KMS in your machine:</p>
-<pre><code class="bash">sudo service kurento-media-server-6.0 start
-</code></pre>
-
-<p>5) <code>/openvidu/openvidu-browser/src/main/resources</code></p>
+<p>4) <code>openvidu/openvidu-browser/src/main/resources/</code></p>
 <pre><code class="bash">npm install
 npm run updatetsc
 sudo npm link
 </code></pre>
 
-<p>6) <code>/openvidu</code></p>
-<pre><code class="bash">mvn compile -DskipTests=true
-mvn install -DskipTests=true
+<p>5) <code>openvidu/</code></p>
+<pre><code class="bash">mvn compile &amp;&amp; mvn install
 </code></pre>
 
-<p>7) <code>/openvidu/openvidu-ng-testapp</code></p>
+<p>6) <code>openvidu-tutorials/openvidu-insecure-angular/</code></p>
 <pre><code class="bash">npm install
 npm link openvidu-browser
 ng serve
 </code></pre>
 
-<p>8) <code>/openvidu/openvidu-server</code></p>
-<pre><code class="bash">mvn -DskipTests=true clean compile package exec:java
+<p>7) Start KMS in your machine:</p>
+<pre><code class="bash">sudo service kurento-media-server-6.0 restart
+</code></pre>
+
+<p>8) <code>openvidu/openvidu-server/</code></p>
+<pre><code class="bash">mvn package exec:java
 </code></pre>
 
 <p><em>(or if you prefer you can just run the Java application in your favourite IDE)</em></p>
@@ -356,7 +350,7 @@ ng serve
 <p>At these point, you can start modifying <em>openvidu-ng-testapp</em>, <em>openvidu-browser</em> or <em>openvidu-server</em>.</p>
 <ul>
 <li>
-<p><strong><em>openvidu-ng-testapp</em></strong>:  the previous "ng serve" command will take care of refreshing the browser's page whenever any change takes place.</p>
+<p><strong><em>openvidu-insecure-angular</em></strong>:  the previous "ng serve" command will take care of refreshing the browser's page whenever any change takes place.</p>
 </li>
 <li>
 <p><strong><em>openvidu-browser</em></strong>: after modifying any typescript file, you will need to run the following command to update your changes (<em>typescript</em> package is necessary):</p>
@@ -366,7 +360,7 @@ ng serve
 <li>
 <p><strong><em>openvidu-server</em></strong>: after modifying any file, there is no other alternative but to re-launch the java application if you want to update your changes.</p>
 <p><strong>/openvidu/openvidu-server</strong></p>
-<p><code>mvn clean compile package exec:java</code></p>
+<p><code>mvn clean package exec:java</code></p>
 <p><em>(or re-launch the Java application in your IDE. Some IDE's support automatic re-launch in response to changes)</em></p>
 </li>
 </ul>
@@ -375,48 +369,16 @@ ng serve
 <p>You can also use <strong>different machines</strong> in the <strong>same network</strong> to build a more advanced development environment, so you can test the application in different devices at the same time. It's very similar to the process outlined above:</p>
 <p>You will need a server for the built app (if you don't have any, we recommend <em>http-server</em>):
 <code>npm install -g http-server</code></p>
-<p>1) <a href="#installing-kms">Install KMS</a></p>
-<p>2) <a href="#adding-kurento-parent-pom-to-your-local-respository">Add Kurento parent Maven dependency to your local repo</a></p>
-<p>3) Clone <em>openvidu</em> repo:</p>
-<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
-</code></pre>
-
-<p>4) Start KMS in your machine:</p>
-<pre><code class="bash">sudo service kurento-media-server-6.0 start
-</code></pre>
-
-<p>5) <code>/openvidu/openvidu-browser/src/main/resources</code></p>
-<pre><code class="bash">npm install
-npm run updatetsc
-sudo npm link
-</code></pre>
-
-<p>6) <code>/openvidu/openvidu-ng-testapp</code></p>
-<pre><code class="bash">npm install
-npm link openvidu-browser
-</code></pre>
-
-<p>7) <code>/openvidu</code></p>
-<pre><code class="bash">mvn compile -DskipTests=true
-mvn install -DskipTests=true
-</code></pre>
-
-<p>8) <code>/openvidu/openvidu-server</code></p>
-<pre><code class="bash">mvn -DskipTests=true clean compile package exec:java
-</code></pre>
-
-<p><em>(or if you prefer you can just run the Java application in your favourite IDE)</em></p>
-<p>The following commands will be the ones which you should relaunch to update your changes:
-<code>/openvidu/openvidu-ng-testapp</code></p>
-<pre><code class="bash">ng build
+<p>Run exactly the same commands as the process above, but on step <strong>6)</strong> skip <code>ng serve</code>. We don't want Angular-CLI to serve our app. Instead, these commands will be the ones which you should launch (and relaunch to update your changes):</p>
+<p><code>openvidu-tutorials/openvidu-insecure-angular/</code></p>
+<pre><code class="bash">ng build -op ./dist
 cd dist
-openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem  [ACCEPT ALL FIELDS]
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '/CN=www.mydom.com/O=My Company LTD./C=US' -keyout key.pem -out cert.pem
 http-server -S
 </code></pre>
 
-<p>These commands build the Angular project, generate a self-signed certificate (which unfortunately is a mandatory requirement for http-server SSL) and serves the content in http-server.</p>
-<p>Finally, to launch the app connect to <code>https://127.0.0.1:8080</code> in the machine running the http-server and to <code>https://[HOST]:8080</code> in other devices of the same network ([HOST] the IP of the machine running the http-server).</p>
-<p>Don't forget to accept the certificate at <code>https://[HOST]:8443</code> !</p>
+<p>This builds the Angular project, generate a self-signed certificate (which unfortunately is a mandatory requirement for http-server SSL) and serves the content with http-server.</p>
+<p>Finally, to launch the app connect to <code>https://localhost:8080</code> in the machine running the http-server and to <code>https://[HOST]:8080</code> in other devices of the same network (<code>[HOST]</code> being the IP of the machine running the http-server).</p>
 <hr />
 <h2 id="installing-kms">Installing KMS</h2>
 <p>How to <em>install</em> and <em>run</em> KMS in your development machine:</p>
@@ -424,14 +386,14 @@ http-server -S
 <pre><code class="bash">echo &quot;deb http://ubuntu.kurento.org trusty kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
 wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
 sudo apt-get update
-sudo apt-get install kurento-media-server-6.0
+sudo apt-get install -y kurento-media-server-6.0
 </code></pre>
 
 <p>Ubuntu 16.04 LTS Xenial (64 bits)</p>
 <pre><code class="bash">echo &quot;deb http://ubuntu.kurento.org xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
 wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
 sudo apt-get update
-sudo apt-get install kurento-media-server-6.0
+sudo apt-get install -y kurento-media-server-6.0
 </code></pre>
 
 <p>Start and stop the service</p>
@@ -442,7 +404,7 @@ sudo service kurento-media-server-6.0 stop
 <p><a href="http://doc-kurento.readthedocs.io/en/stable/installation_guide.html">Here</a> you can check Kurento's official documentation.</p>
 <hr />
 <h2 id="adding-kurento-parent-pom-to-your-local-respository">Adding Kurento parent POM to your local respository</h2>
-<p>You will need development version of Kurento's parent POM in your local repository in order to compile the development version of <em>openvidu-server</em>. To achieve this, add a file <code>~/.m2/settings.xml</code> with the following content:</p>
+<p>You will need development version of Kurento's parent POM in your local repository in order to compile the development version of <em>openvidu-server</em>. To achieve this, add a file <code>~/.m2/settings.xml</code> with the following content (if it doesn't exist, create it on that exact path):</p>
 <pre><code class="xml">&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;
   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
   xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0

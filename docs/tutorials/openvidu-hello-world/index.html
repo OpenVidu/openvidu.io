@@ -295,8 +295,10 @@ http-server openvidu-hello-world/web
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p><br></p>
 <blockquote>
-<p>This <a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a> will give you some tips to develop with OpenVidu</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
 </blockquote>
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This application is very simple. It has only 4 files:</p>
@@ -337,7 +339,7 @@ session.on('streamCreated', function (event) {
 <li><code>OPENVIDU_SECRET</code> is the same secret as used to initialize you OpenVidu Server (check param <code>openvidu.secret</code> in step 4 of <a href="#running-this-tutorial">Running this tutorial</a>).</li>
 </ul>
 <blockquote>
-<p>This parameter building process for <em>initrSession</em> method is only necessary when your app has no server-side. Obviously in a production environment appending your secret is not recommended. Check <a href="../../troubleshooting#4-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">this FAQ</a> to learn more.</p>
+<p>This parameter building process for <em>initrSession</em> method is only necessary when your app has no server-side. Obviously in a production environment appending your secret is not recommended. Check <a href="../../troubleshooting#5-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">this FAQ</a> to learn more.</p>
 </blockquote>
 <p>Then you can subscribe to all the events you want for your session. In this case we just want to subscribe to every stream that is being created in the session: on <code>streamCreated</code> we subscribe to the specific stream, available at <code>event.stream</code> property.</p>
 <blockquote>
@@ -357,7 +359,7 @@ session.on('streamCreated', function (event) {
 });
 </code></pre>
 
-<p>We simply need to call <code>session.connect</code> method providing a callback to execute when the operation is completed. First parameter <code>null</code> is now irrelevant because we have no server-side (check the <a href="../../troubleshooting#4-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">FAQ</a>).</p>
+<p>We simply need to call <code>session.connect</code> method providing a callback to execute when the operation is completed. First parameter <code>null</code> is now irrelevant because we have no server-side (check the <a href="../../troubleshooting#5-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">FAQ</a>).</p>
 <p>The only parameter received by our callback is <code>error</code> object, which will be undefined if everything has gone well. To publish our webcam to the session we just get a <code>publisher</code> (thanks to <code>OpenVidu.initPublisher</code> method), and a new HTML video showing our webcam will be appended to the page inside element with id <em>publisher</em>.</p>
 <p>Last but not least, we publish this <code>publisher</code> object thanks to <code>session.publish</code>. At this point the rest of users connected to this session will trigger their own <code>streamCreated</code> event and can start watching our webcam.</p>
 <hr />
