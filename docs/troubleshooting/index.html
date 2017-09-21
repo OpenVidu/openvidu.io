@@ -288,11 +288,42 @@ active: documentation
 </ul>
 <h3 id="2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">2. Any tips to make easier the development of my app with OpenVidu?</h3>
 <p>You can do some things to improve your efficiency while using OpenVidu:</p>
+<p><br></p>
+<h5 id="multiple-tabs-to-test-the-video-transmission">Multiple tabs to test the video transmission</h5>
+<p>You can use multiple tabs in the same browser to test your video streams.</p>
+<p><strong>WARNING</strong>: you may have trouble for testing with a Chrome and a Firefox tab at the same time, as they compete for the camera access.</p>
+<p><br></p>
+<h5 id="be-very-aware-of-the-browsers-console">Be very aware of the browser's console</h5>
+<p>There you can find logs reporting important stuff. Error messages can help you to solve many issues.</p>
+<div class="row" style="margin-bottom: 10px">
+  <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 20px">
+    <img class="img-responsive img-more-info" src="/img/docs/troubleshooting/chrome_logging.png">
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 20px">
+    <img class="img-responsive img-more-info" src="/img/docs/troubleshooting/firefox_logging.png">
+  </div>
+  <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px">
+    <p style="text-align: justify; font-size: 13px">
+      <em>OpenVidu Browser is developed with both <strong>Chrome</strong> (first image) and <strong>Firefox</strong> (second image) in mind in terms of logging. By default the browser's console displays OpenVidu's high-level messages (that's when the options 'Info' is enabled, as seen in the images). This means logs about OpenVidu objects being created and destroyed and logs for each triggered event (only for those you are subscribed to).</em>
+    </p>
+    <div class="hidden-sm hidden-xs"></div>
+    <p style="text-align: justify; font-size: 13px">
+      <em>Warn and Error messages are specifically reserved for unwanted situations, and you should check your code in case you spot one of them.</em>
+    </p>
+    <div class="hidden-sm hidden-xs"></div>
+    <p style="text-align: justify; font-size: 13px">
+      <em>If you enable the lowest level of logging you can see all the messages concerning the WebRTC negotiation process (generally not very interesting for an OpenVidu user).</em>
+    </p>
+  </div>
+</div>
+
+<p><br></p>
+<h5 id="remember-the-browsers-cache">Remember the browser's cache</h5>
+<p>If you have changed your HTML, JavaScript or CSS code, refreshed the page and cannot see the changes on the browser, probably the cache is still serving the old files. To perform a hard reload of your page on the browser, press <code>Ctrl + Shift + R</code></p>
+<p><br></p>
+<h5 id="use-ngrok-to-share-your-app">Use <em>Ngrok</em> to share your app</h5>
+<p>Do you want to be able to publish your development app over your network or even the Internet, without really having to deploy it in a server? This can be very helpful, as you can test with different devices and browsers at the same time. To achieve this, you can use <em>Ngrok</em>. The set up is quite simple:</p>
 <ul>
-<li><strong>Multiple tabs to test the video transmission</strong>: you can use multiple tabs in the same browser to test your video streams. WARNING: you may have trouble for testing with a Chrome and a Firefox tab at the same time, as they compete for the camera access.</li>
-<li><strong>Be very aware of the browser's console</strong>: there you will find warning messages reporting the triggering of events and other important stuff. Error messages can also help you to solve many issues.</li>
-<li><strong>Remember the browser's cache</strong>: if you have changed your HTML, JavaScript or CSS code, refreshed the page and cannot see the changes on the browser, probably the cache is still serving the old files. To perform a hard reload of your page on the browser, press <code>Ctrl + Shift + R</code></li>
-<li><strong>Use <em>Ngrok</em> to share your app</strong>: do you want to be able to publish your development app over your network or even the Internet, without really having to deploy it in a server? This can be very helpful, as you can test with different devices and browsers at the same time. To achieve this, you can use <em>Ngrok</em>. The set up is quite simple:<ul>
 <li>Download <em>Ngrok</em> with this link [<strong><a href="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip">LINK</a></strong>] and unzip it.</li>
 <li>Download this <em>Ngrok</em> configuration file (named <code>ngrok.yml</code>) from our GitHub repo <strong>[<a href="https://raw.githubusercontent.com/OpenVidu/openvidu-tutorials/master/openvidu-js-java/docker/ngrok.yml">LINK</a>]</strong> and place it in the same path as <em>Ngrok</em> binary.</li>
 <li>Run <em>Ngrok</em> with this command: <code>./ngrok start --all -config=ngrok.yml</code>. You will get two public IPs (ended with <code>.ngrok.io</code>) publishing your local address <code>localhost:5000</code> and <code>localhost:3000</code>.</li>
@@ -302,8 +333,6 @@ active: documentation
 </ul>
 </li>
 <li>That's it! Now you can connect to your app through the <em>Ngrok</em> public IP and the connection to OpenVidu Server will work just fine. You have "deployed" your app on your own computer, and cross-device testing through your own network is now possible. Connecting to your app over the Internet is also possible, but the video transmission may not work (check <a href="#1-everything-looks-alright-but-i-cannot-see-any-remote-video">this FAQ</a> to learn why).</li>
-</ul>
-</li>
 </ul>
 <h3 id="3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">3. I am using Windows to run the tutorials / develop my app. Anything I should know?</h3>
 <p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). When running any tutorial or developing any application, depending if it is <em>Client-Side Only</em> or <em>Client-Side + Server-Side</em>:</p>
@@ -317,12 +346,10 @@ active: documentation
 </code></pre>
 <blockquote>
 <p>Also you will need to serve your apps over <strong>https</strong>. Browsers only accept camera usage on http when the address is <em>localhost</em>, and here it will be <code>192.168.99.100</code> or the one that Docker picks up for you. To serve over https with <code>http-server</code>, generate a self-signed certificate and run with <code>-S</code> flag on the root path of your app:</p>
-<p><em>Generate a selfsigned certificate</em></p>
-<pre><code>openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '/CN=www.mydom.com/O=My Company LTD./C=US' -keyout key.pem -out cert.pem
-</code></pre>
+<p><em>Generate a selfsigned certificate (run in  your Docker console)</em></p>
+<p><code>openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '/CN=www.mydom.com/O=My Company LTD./C=US' -keyout key.pem -out cert.pem</code></p>
 <p><em>Run with SSL flag</em></p>
-<pre><code>http-server -S
-</code></pre>
+<p><code>http-server -S</code></p>
 </blockquote>
 <h4 id="client-side-server-side">Client-Side + Server-Side</h4>
 <p>Just need to add a new parameter when launching you openvidu-server container and your tutorial/app:</p>
@@ -377,16 +404,16 @@ active: documentation
     <img class="img-responsive img-more-info" src="/img/docs/home/openvidu-new-architecture.png">
   </div>
   <div class="col-md-4 col-sm-12 col-xs-12" style="margin-top: 40px">
-    <p style="text-align: justify">
-      First an OpenVidu app Client-Side Only.
+    <p style="text-align: justify; font-size: 13px">
+      <em>First an OpenVidu app Client-Side Only.</em>
     </p>
     <div class="hidden-sm hidden-xs"><br></div>
-    <p>
-      Second an OpenVidu app Client-Side + Server-Side.
+    <p style="text-align: justify; font-size: 13px">
+      <em>Second an OpenVidu app Client-Side + Server-Side.</em>
     </p>
     <div class="hidden-sm hidden-xs"><br></div>
-    <p>
-      In production you will usually want the second option to avoid unwanted users.
+    <p style="text-align: justify; font-size: 13px">
+      <em>In production you will usually want the second option to avoid unwanted users.</em>
     </p>
   </div>
 </div>
@@ -495,7 +522,29 @@ session.connect(token, function() { ... });
 </tr>
 </tbody>
 </table>
-<p>That said, one of the most important features OpenVidu will offer is the possibility of automated scalability and fault tolerance. We intend to provide an easy-to-use service integrated with Amazon Web Services to allow the automated launching and shutdown of servers depending on the workload of your application. </p> 
+<p>That said, one of the most important features OpenVidu will offer is the possibility of automated scalability and fault tolerance. We intend to provide an easy-to-use service integrated with Amazon Web Services to allow the automated launching and shutdown of servers depending on the workload of your application.</p>
+<h3 id="11-i-am-getting-an-error-accesing-the-camera-and-i-have-already-granted-permissions-on-the-browser">11. I am getting an "Error accesing the camera" and I have already granted permissions on the browser</h3>
+<p>This can be due to two different reasons:</p>
+<ul>
+<li>
+<p>Maybe you are making <strong>two different browsers access the same camera at the same time</strong>. Remember that Chrome, Firefox, Opera, Safari and Edge are distinct processes which cannot generally access the same physical resource (as a webcam) at the same time on your computer. On the other hand, accessing the camera with different tabs of the same browser is tipically possible.</p>
+</li>
+<li>
+<p>In Chrome you <strong>cannot access the camera or microphone from a <code>http</code> URL if it is not <code>localhost</code> or <code>127.0.0.1</code></strong>. In a nutshell: in Chrome accessing the webcam on <code>http://localhost:8080</code> or <code>http://127.0.0.1:8080</code> is perfectly OK. But, for example, on <code>http://172.17.0.1:8080</code> it will through an error saying "<em>Only secure origins are allowed</em>". If for any reason you want to serve your app locally on a custom URL, the only solution is to serve it over <code>https</code> with a certificate. If you are making use of the web server we have strongly suggested over the documentation (<code>npm install -g http-server</code>), you can do this with the following commands on your application's root path:</p>
+<ul>
+<li>
+<p>Generate a selfsigned certificate with <em>openssl</em></p>
+<pre><code>openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '/CN=www.mydom.com/O=My Company LTD./C=US' -keyout key.pem -out cert.pem
+</code></pre>
+</li>
+<li>
+<p>Run <em>http-server</em> with SSL flag</p>
+<pre><code>http-server -S
+</code></pre>
+</li>
+</ul>
+</li>
+</ul> 
 						</div>
 					</div> <footer>
 <hr>

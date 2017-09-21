@@ -43,7 +43,7 @@
           <li {% if page.active=="documentation" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/docs/home">Docs</a></li>
 
           {% if page.page-type=="home" %}
-          <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="#get-connected">Community</a></li>
+          <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section to-real-section" {% endif %}><a href="#get-connected">Community</a></li>
           {% else %}
           <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/community">Community</a></li>
           {% endif %}

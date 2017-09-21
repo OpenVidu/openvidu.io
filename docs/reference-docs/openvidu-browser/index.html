@@ -349,6 +349,12 @@ active: documentation
 <td><code>callback(error, deviceInfo):function</code></td>
 <td>Collects information about the media input and output devices available on the system, returned in <strong>deviceInfo</strong> array</td>
 </tr>
+<tr>
+<td><code>enableProdMode</code></td>
+<td></td>
+<td></td>
+<td>Disable all logging except error level</td>
+</tr>
 </tbody>
 </table>
 <h4 id="session"><strong>Session</strong></h4>
@@ -446,27 +452,27 @@ active: documentation
 <tr>
 <td><code>streamCreated</code></td>
 <td>stream:<a href="#stream">Stream</a></td>
-<td>Triggered by Session object when a new Stream has been created and added to it</td>
+<td>Triggered by Session object when a new Stream (published by other client) has been created and added to it</td>
 </tr>
 <tr>
 <td><code>streamDestroyed</code></td>
 <td>stream:<a href="#stream">Stream</a><br/>preventDefault():Function</td>
-<td>Triggered by Session object when an existing Stream has been destroyed. The default behaviour is the deletion of the HTML video element associated to it. To prevent it, call <code>preventDefault()</code> method on the event object</td>
+<td>Triggered by Session object when an existing Stream (published by other client) has been destroyed. The default behaviour is the deletion of the HTML video element associated to it. To prevent it, call <code>preventDefault()</code> method on the event object</td>
 </tr>
 <tr>
 <td><code>connectionCreated</code></td>
 <td>connection:<a href="#connection">Connection</a></td>
-<td>Triggered by Session object whenever any user has joined the session. This includes dispatching one event for each user that joins the session when you are already connected to it, one for each existing participant the first time you connect to the session and once for your own local connection</td>
+<td>Triggered by Session object whenever any client has joined the session. This includes dispatching one event for each client that joins the session when you are already connected to it, one for each existing participant the first time you connect to the session and once for your own local connection</td>
 </tr>
 <tr>
 <td><code>connectionDestroyed</code></td>
 <td>connection:<a href="#connection">Connection</a></td>
-<td>Triggered by Session object whenever a user leaves the session. This event can also mean that <code>streamDestroyed</code> events could be dispatched, depending on the streams associated to it</td>
+<td>Triggered by Session object whenever a client (other than your own) leaves the session. This event can also mean that <code>streamDestroyed</code> events could be dispatched, depending on the streams associated to it</td>
 </tr>
 <tr>
 <td><code>sessionDisconnected</code></td>
 <td>preventDefault():Function</td>
-<td>Triggered by Session object when the user disconnects from the Session. Default behaviour is the deletion of all HTML video elements. Call <code>preventDefault()</code> on event object to prevent it and delete them by yourself</td>
+<td>Triggered by Session object when the client disconnects from the Session. Default behaviour is the deletion of all HTML video elements. Call <code>preventDefault()</code> on event object to prevent it and delete them by yourself</td>
 </tr>
 </tbody>
 </table>
@@ -498,6 +504,18 @@ active: documentation
 <td><a href="#publihser">Publisher</a></td>
 <td></td>
 <td>Delets the publisher object and removes it from DOM. The rest of users will trigger a <em>streamDestroyed</em> event</td>
+</tr>
+<tr>
+<td><code>subscribeToRemote</code></td>
+<td></td>
+<td></td>
+<td>Local video will be replaced by your remote video (same stream as other clients will receive from you)</td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td></td>
+<td><code>eventName:string</code><br/><code>callback:function</code></td>
+<td><strong>callback</strong> function will be triggered each time <strong>eventName</strong> event is recieved</td>
 </tr>
 </tbody>
 </table>
@@ -560,6 +578,11 @@ active: documentation
 <td><code>videoElementCreated</code></td>
 <td>element:HTMLVideoElement</td>
 <td>Triggered by Publisher object inmediately after a new video element has been added to DOM</td>
+</tr>
+<tr>
+<td><code>remoteVideoPlaying</code></td>
+<td>element:HTMLVideoElement</td>
+<td>Triggered by Publisher object when your looped remote video starts playing. Only triggered for those Publisher objects which have called their method <em>subscribeToRemote</em></td>
 </tr>
 </tbody>
 </table>
