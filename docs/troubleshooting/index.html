@@ -286,12 +286,13 @@ active: documentation
 <li>Access your OpenVidu dashboard (<code>https://YOUR_OPENVIDU_IP:8443</code>) to quickly test the video transmission.</li>
 <li>Please be sure that your OpenVidu Server host meets the <a href="../deployment/deploying-ubuntu#server-network-requirements">network requirements</a>.</li>
 </ul>
+<p>The other 1% of the time this can be an attempt of <strong>accessing the same camera from two different browsers at the same time</strong>. Remember that Chrome, Firefox, Opera, Safari and Edge are distinct processes which cannot generally access the same physical resource (as a webcam) at the same time on your computer. On the other hand, accessing the camera from different tabs of the same browser is tipically possible.</p>
 <h3 id="2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">2. Any tips to make easier the development of my app with OpenVidu?</h3>
 <p>You can do some things to improve your efficiency while using OpenVidu:</p>
 <p><br></p>
 <h5 id="multiple-tabs-to-test-the-video-transmission">Multiple tabs to test the video transmission</h5>
 <p>You can use multiple tabs in the same browser to test your video streams.</p>
-<p><strong>WARNING</strong>: you may have trouble for testing with a Chrome and a Firefox tab at the same time, as they compete for the camera access.</p>
+<p><strong>WARNING</strong>: you may have trouble for testing with tabs from different browsers the same time, as they compete for the camera access.</p>
 <p><br></p>
 <h5 id="be-very-aware-of-the-browsers-console">Be very aware of the browser's console</h5>
 <p>There you can find logs reporting important stuff. Error messages can help you to solve many issues.</p>
@@ -524,13 +525,7 @@ session.connect(token, function() { ... });
 </table>
 <p>That said, one of the most important features OpenVidu will offer is the possibility of automated scalability and fault tolerance. We intend to provide an easy-to-use service integrated with Amazon Web Services to allow the automated launching and shutdown of servers depending on the workload of your application.</p>
 <h3 id="11-i-am-getting-an-error-accesing-the-camera-and-i-have-already-granted-permissions-on-the-browser">11. I am getting an "Error accesing the camera" and I have already granted permissions on the browser</h3>
-<p>This can be due to two different reasons:</p>
-<ul>
-<li>
-<p>Maybe you are making <strong>two different browsers access the same camera at the same time</strong>. Remember that Chrome, Firefox, Opera, Safari and Edge are distinct processes which cannot generally access the same physical resource (as a webcam) at the same time on your computer. On the other hand, accessing the camera with different tabs of the same browser is tipically possible.</p>
-</li>
-<li>
-<p>In Chrome you <strong>cannot access the camera or microphone from a <code>http</code> URL if it is not <code>localhost</code> or <code>127.0.0.1</code></strong>. In a nutshell: in Chrome accessing the webcam on <code>http://localhost:8080</code> or <code>http://127.0.0.1:8080</code> is perfectly OK. But, for example, on <code>http://172.17.0.1:8080</code> it will through an error saying "<em>Only secure origins are allowed</em>". If for any reason you want to serve your app locally on a custom URL, the only solution is to serve it over <code>https</code> with a certificate. If you are making use of the web server we have strongly suggested over the documentation (<code>npm install -g http-server</code>), you can do this with the following commands on your application's root path:</p>
+<p>If you are using <strong>Chrome</strong>: you <strong>cannot access the camera or microphone from a <code>http</code> URL if it is not <code>localhost</code> or <code>127.0.0.1</code></strong>. In a nutshell: in Chrome accessing the webcam on <code>http://localhost:8080</code> or <code>http://127.0.0.1:8080</code> is perfectly OK. But, for example, on <code>http://172.17.0.1:8080</code> it will through an error saying "<em>Only secure origins are allowed</em>". If for any reason you want to serve your app locally on a custom URL, the only solution is to serve it over <code>https</code> with a certificate. If you are making use of the web server we have strongly suggested over the documentation (<code>npm install -g http-server</code>), you can do this with the following commands on your application's root path:</p>
 <ul>
 <li>
 <p>Generate a selfsigned certificate with <em>openssl</em></p>
@@ -541,8 +536,6 @@ session.connect(token, function() { ... });
 <p>Run <em>http-server</em> with SSL flag</p>
 <pre><code>http-server -S
 </code></pre>
-</li>
-</ul>
 </li>
 </ul> 
 						</div>
