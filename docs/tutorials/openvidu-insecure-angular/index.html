@@ -502,19 +502,16 @@ this.session.connect(null, '{&quot;clientData&quot;: &quot;' + this.userName + '
 &lt;/div&gt;
 </code></pre>
 
-<p>Last point worth considering is the implementation of StreamComponent. As we are handling Stream objects by ourselves (task which usually is taken care by OpenVidu), and because the URL of Stream objects takes some time to get its final value as the WebRTC negotiation takes place, we must listen to any change in <code>stream</code> @Input property. We do so thanks to <code>ngDoCheck()</code> hook method. This allows us to update <code>videoSrc</code> value of the component, which finally ends up being the <em>src</em> value of the <code>&lt;video&gt;</code> element. If we didn't do this, the Stream object will update its <em>src</em> property, but our StreamComponent would keep the same initial <code>videoSrc</code> value. This ensures that all our StreamComponent's will properly display all the videos in the video-call using the correct <em>src</em> value.</p>
+<p>Last point worth considering is the implementation of StreamComponent. As we are handling Stream objects by ourselves (task which usually is taken care by OpenVidu), and because the URL of Stream objects takes some time to get its final value as the WebRTC negotiation takes place, we must listen to any change in <code>stream</code> @Input property. We do so getting the <code>HTMLVideoElement</code> from our view on <code>ngAfterViewInit()</code> hook method (attribute <code>videoElement</code>), and then listening to <code>ngDoCheck()</code>. This allows us to update <code>videoElement.srcObject</code> value, which is the ultimate property that indicates our<code>&lt;video&gt;</code> element where to receive the media stream. If we didn't do this, the Stream object will update its <em>srcObject</em> property, but our StreamComponent would keep the same initial <code>videoElement.srcObject</code> value. This ensures that all our StreamComponent's will properly display all the videos in the video-call using the correct <em>srcOjbect</em> value.</p>
 <p><code>getNickNameTag()</code> method feeds the view of StreamComponent with the nickName of the user. Remember <code>session.connect</code> method and its second param? It can be now found at <code>stream.connection.data</code>, so every user will receive the nickName of others.</p>
 <p><code>videoClicked()</code> tells our AppComponent parent that the user has clicked on certain video, and that the main view should update the main video stream.</p>
-<pre><code class="typescript">ngDoCheck() { // Detect any change in 'stream' property
+<pre><code class="typescript">ngAfterViewInit() { // Get HTMLVideoElement from the view
+    this.videoElement = this.elementRef.nativeElement;
+}
 
-    // If 'src' of Stream object has changed, 'videoSrc' value must be updated
-    if (!(this.videSrcUnsafe === this.stream.getVideoSrc())) {
-
-        // Angular mandatory URL sanitization
-        this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(this.stream.getVideoSrc());
-
-        // Auxiliary value to store the URL as a string for upcoming comparisons
-        this.videSrcUnsafe = this.stream.getVideoSrc();
+ngDoCheck() { // Detect any change in 'stream' property (specifically in its 'srcObject' property)
+    if (this.videoElement &amp;&amp; (this.videoElement.srcObject !== this.stream.getVideoSrcObject())) {
+        this.videoElement.srcObject = this.stream.getVideoSrcObject();
     }
 }
 

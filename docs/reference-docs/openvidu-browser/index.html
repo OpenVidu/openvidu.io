@@ -580,6 +580,11 @@ active: documentation
 <td>Triggered by Publisher object inmediately after a new video element has been added to DOM</td>
 </tr>
 <tr>
+<td><code>videoPlaying</code></td>
+<td>element:HTMLVideoElement</td>
+<td>Triggered by Subscriber object when the video (same as <code>videoElementCreated</code>) starts playing. Only triggered for those Publisher objects which have NOT called their method <em>subscribeToRemote</em></td>
+</tr>
+<tr>
 <td><code>remoteVideoPlaying</code></td>
 <td>element:HTMLVideoElement</td>
 <td>Triggered by Publisher object when your looped remote video starts playing. Only triggered for those Publisher objects which have called their method <em>subscribeToRemote</em></td>
@@ -644,6 +649,11 @@ active: documentation
 <td><code>videoElementCreated</code></td>
 <td>element:HTMLVideoElement</td>
 <td>Triggered by Subscriber object inmediately after a new video element has been added to DOM</td>
+</tr>
+<tr>
+<td><code>videoPlaying</code></td>
+<td>element:HTMLVideoElement</td>
+<td>Triggered by Subscriber object when the video (same as <code>videoElementCreated</code>) starts playing</td>
 </tr>
 </tbody>
 </table>
