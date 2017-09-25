@@ -4,7 +4,7 @@
     
     <url>
      <loc>/home/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,55 +13,55 @@
         
     <url>
      <loc>/tutorials/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-hello-world/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-js/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-angular/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-java/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-java/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-node/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-node/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-getaroom/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -71,19 +71,19 @@
         
     <url>
      <loc>/how-do-i/create-session/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/join-session/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/share-data/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -93,31 +93,31 @@
         
     <url>
      <loc>/reference-docs/openvidu-browser/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-java-client/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-node-client/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/REST-API/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-artifacts/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -127,25 +127,25 @@
         
     <url>
      <loc>/deployment/deploying-demos-aws/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-aws/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-ubuntu/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/custom-certificate/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -155,7 +155,7 @@
         
     <url>
      <loc>/developing/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -164,7 +164,7 @@
     
     <url>
      <loc>/troubleshooting/</loc>
-     <lastmod>2017-09-22</lastmod>
+     <lastmod>2017-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

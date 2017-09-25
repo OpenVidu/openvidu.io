@@ -292,21 +292,22 @@ active: documentation
 <p>You will only have to make use of <strong>openvidu-browser</strong> and <strong>openvidu-java-client</strong> to get this sample app working</p>
 </blockquote>
 <h2 id="running-this-tutorial">Running this tutorial</h2>
-<p>1) Clone the repo:</p>
+<p>1) Clone the repo and checkout to version v1.1.0:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
+cd openvidu-tutorials &amp;&amp; git checkout v1.1.0
 </code></pre>
 
 <p>2) You will need <em>maven</em> to build the project. You can install it with:</p>
 <pre><code class="bash">sudo apt-get install maven
 </code></pre>
 
-<p>3) To run the sample application, execute the following command in the project:</p>
+<p>3) Run the tutorial:</p>
 <pre><code class="bash">cd openvidu-mvc-java
 mvn package exec:java
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
+<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:1.1.0
 </code></pre>
 
 <p>5) Go to <a href="https://localhost:5000"><code>https://localhost:5000</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call. To test two users in the same computer, use a standard window and an incognito window.</p>
