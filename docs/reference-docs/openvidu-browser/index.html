@@ -144,6 +144,36 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/receive-stream/">Receive other users streams</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/publish-stream/">Publish a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute audio/video</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -312,6 +342,14 @@ active: documentation
 <td><a href="#connection">Connection</a></td>
 <td>Represents each one of the user's connection to the session (the local one and other user's connections). Therefore each Session and Stream object has an attribute of type Connection</td>
 </tr>
+<tr>
+<td><a href="#openviduerror">OpenViduError</a></td>
+<td>Simple object to identify errors on runtime</td>
+</tr>
+<tr>
+<td><a href="#openviduerrorname">OpenViduErrorName</a></td>
+<td>OpenViduError names enum</td>
+</tr>
 </tbody>
 </table>
 <h4 id="openvidu"><strong>OpenVidu</strong></h4>
@@ -326,6 +364,12 @@ active: documentation
 </thead>
 <tbody>
 <tr>
+<td><em><code>constructor</code></em></td>
+<td><a href="#OpenVidu">OpenVidu</a></td>
+<td></td>
+<td>Returns a new OpenVidu object. This is the entry point to OpenVidu in the browser</td>
+</tr>
+<tr>
 <td><code>initSession</code></td>
 <td><a href="#session">Session</a></td>
 <td><em><code>apikey:string</code></em><br/><code>sessionId:string</code></td>
@@ -335,7 +379,7 @@ active: documentation
 <td><code>initPublisher</code></td>
 <td><a href="#publisher">Publisher</a></td>
 <td><code>parentId:string</code><br/><em><code>cameraOptions:any</code></em><br/><em><code>callback:function</code></em></td>
-<td>Starts local video stream, appending it to <strong>parentId</strong> HTML element, with the specific <strong>cameraOptions</strong> settings and executing <strong>callback</strong> function in the end. <em>cameraOptions</em> must be an object with three properties: <strong>{audio:boolean, video:boolean, quality:string}</strong>, being <em>audio</em>/<em>video</em> false if you want to initialize them muted (<em>Publisher.publishAudio(true)</em> and <em>Publisher.publishVideo(true)</em> can unmute them later) and <em>quality</em> must be 'LOW', 'MEDIUM' or 'HIGH'</td>
+<td>Starts local video stream, appending it to <strong>parentId</strong> HTML element, with the specific <strong>cameraOptions</strong> settings and executing <strong>callback</strong> function in the end. <em>cameraOptions</em> is an object with the following (optional) properties:<br/><br/><strong>var cameraOptions = {</br><span style="padding-left: 20px">audio: boolean,</span></br><span style="padding-left: 20px">video: boolean,</span></br><span style="padding-left: 20px">audioActive: boolean,</span></br><span style="padding-left: 20px">videoActive: boolean,</span></br><span style="padding-left: 20px">quality: string,</span></br><span style="padding-left: 20px">screen: boolean</span><br/>}</strong><br/><br/><ul style="padding-left: 20px"><li><strong>audio</strong>: whether to transmit audio or not</li><li><strong>video</strong>: whether to transmit video or not</li><li><strong>audioActive</strong>: whether to join the session with the audio unmuted or muted. Only makes sense if property <em>audio</em> is set to true. You can change audio state later during the session with <em>Publisher.publishAudio(true)</em></li><li><strong>videoActive</strong>: whether to join the session with the video enabled or disabled. Only makes sense if property <em>video</em> is set to true. You can change video state later during the session with <em>Publisher.publishVideo(true)</em></li><li><strong>quality</strong>: quality of the video ("LOW", "MEDIUM", "HIGH")</li><li><strong>screen</strong>: whether to use screen capturing as the video source instead of a camera or not</li></ul></td>
 </tr>
 <tr>
 <td><code>checkSystemRequirements</code></td>
@@ -698,6 +742,86 @@ active: documentation
 <td><code>creationTime</code></td>
 <td>number</td>
 <td>Time when this connection was created</td>
+</tr>
+</tbody>
+</table>
+<h4 id="openviduerror"><strong>OpenViduError</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><code>constructor</code></em></td>
+<td><a href="#openviduerror">OpenViduError</a></td>
+<td><em><code>name:OpenViduErrorName</code></em><br/><code>message:string</code></td>
+<td>Returns a new OpenViduError object</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><a href="#openviduerrorname">OpenViduErrorName</a></td>
+<td>The name and unique identifier of the error</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>string</td>
+<td>Further information about the error</td>
+</tr>
+</tbody>
+</table>
+<h4 id="openviduerrorname"><strong>OpenViduErrorName</strong></h4>
+<p><em>(enum)</em></p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CAMERA_ACCESS_DENIED</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>MICROPHONE_ACCESS_DENIED</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SCREEN_CAPTURE_DENIED</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>NO_VIDEO_DEVICE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>NO_INPUT_DEVICE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SCREEN_EXTENSION_NOT_INSTALLED</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>GENERIC_ERROR</code></td>
+<td></td>
 </tr>
 </tbody>
 </table> 

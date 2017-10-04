@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Create a session
+title: OpenVidu Documentation - Publish a stream
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Create a session')").each(function (i, e) {
+		$(".subnav").find("li:contains('Publish a stream')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Create a session')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Publish a stream')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -131,8 +131,8 @@ active: documentation
     <ul class="subnav" hidden>
           
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">Create a session</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../create-session/">Create a session</a> 
 </li>
 
    
@@ -155,8 +155,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../publish-stream/">Publish a stream</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">Publish a stream</a>  
 </li>
 
    
@@ -303,23 +303,33 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="create-a-session">Create a session</h1>
-<p>You must get an <code>OpenVidu</code> object and call <code>initSession</code> method. This must receive just one string parameter: the <code>sessionID</code>, which unambiguously identify your session:</p>
-<ul>
-<li>
-<p>If you have a server-side, you should ask for the <code>sessionId</code> to OpenVidu Server (thanks to the <a href="../../reference-docs//REST-API/">REST API</a>, <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>) and return it to the client to use it on <code>initSession</code> method.</p>
-</li>
-<li>
-<p>If you don't have a server side, you willl have to build <code>sessionId</code> param by yourself with the following format (this is not recommended for production as the secret must be hardcoded in your JavaScript code):</p>
-</li>
-</ul>
-<p style="text-align: center"><strong>"wss://"</strong> + <code>OPENVIDU_IP</code> + <strong>":8443/"</strong> + <code>SESSION_IDENTIFIER</code> + <strong>"?secret="</strong> + <code>OPENVIDU_SECRET</code></p>
+							 <h1 id="publish-a-stream">Publish a stream</h1>
+<p>After joining a session, get a <code>Publisher</code> object through OpenVidu object (<code>OpenVidu.initPublisher</code>) and publish it with <code>Session</code> object.</p>
+<pre><code class="javascript">// After joining a session...
 
-<pre><code class="javascript">// Get sessionId by asking OpenVidu Server from your application server
-// and then returning it here or generate it by your own with the format above
+var publisher = OV.initPublisher('html-id');
+session.publish(publisher);
+</code></pre>
 
-var OV = new OpenVidu();
-var session = OV.initSession(sessionId);
+<p><code>initPublisher</code> method will append to DOM a new HTML video element inside the element with id <code>html-id</code>, showing your camera. You can then publish it to the session whenever you want (perhaps you want the user to confirm that his camera is working well before publishing it).</p>
+<p>You can add two more parameters to <code>initPublisher</code> method: an object with properties about your publisher stream and a callback function to be executed in case any error takes places during publisher initialization:</p>
+<pre><code class="javascript">OV.initPublisher(
+    'html-element-id',
+    {
+        audio: true,        // Whether you want to transmit audio or not
+        video: true,        // Whether you want to transmit video or not
+        audioActive: true,  // Whetehr you want to start the publishing with your audio unmuted ot muted
+        videoActive: true,  // Whether you want to join the publishing with your video enabled or disabled
+        quality: 'MEDIUM',  // The quality of yur video ('LOW', 'MEDIUM', 'HIGH')
+        screen: false       // true to get your screen as video source instead of your camera.
+                            // See 'How do I...?' -&gt; 'Screen share' section to learn more
+    },
+    function(error) {       // Function to be executed in case the PUblisher initialization fails
+        if (error) {
+            console.log('Error while initializing publisher: ', error);
+        }
+    }
+);
 </code></pre> 
 						</div>
 					</div> <footer>
@@ -327,10 +337,10 @@ var session = OV.initSession(sessionId);
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../join-session/" class="btn btn-xs btn-primary float-right" title="Join a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mute-audio-video/" class="btn btn-xs btn-primary float-right" title="Mute audio/video">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../tutorials/openvidu-getaroom/" class="btn btn-xs btn-primary" title="openvidu-getaroom"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../receive-stream/" class="btn btn-xs btn-primary" title="Receive other users streams"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -339,7 +349,7 @@ var session = OV.initSession(sessionId);
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/create-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/publish-stream.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

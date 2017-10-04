@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Create a session
+title: OpenVidu Documentation - Leave a session
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Create a session')").each(function (i, e) {
+		$(".subnav").find("li:contains('Leave a session')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Create a session')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Leave a session')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -131,8 +131,8 @@ active: documentation
     <ul class="subnav" hidden>
           
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">Create a session</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../create-session/">Create a session</a> 
 </li>
 
    
@@ -143,8 +143,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../leave-session/">Leave a session</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">Leave a session</a>  
 </li>
 
    
@@ -303,23 +303,16 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="create-a-session">Create a session</h1>
-<p>You must get an <code>OpenVidu</code> object and call <code>initSession</code> method. This must receive just one string parameter: the <code>sessionID</code>, which unambiguously identify your session:</p>
-<ul>
-<li>
-<p>If you have a server-side, you should ask for the <code>sessionId</code> to OpenVidu Server (thanks to the <a href="../../reference-docs//REST-API/">REST API</a>, <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>) and return it to the client to use it on <code>initSession</code> method.</p>
-</li>
-<li>
-<p>If you don't have a server side, you willl have to build <code>sessionId</code> param by yourself with the following format (this is not recommended for production as the secret must be hardcoded in your JavaScript code):</p>
-</li>
-</ul>
-<p style="text-align: center"><strong>"wss://"</strong> + <code>OPENVIDU_IP</code> + <strong>":8443/"</strong> + <code>SESSION_IDENTIFIER</code> + <strong>"?secret="</strong> + <code>OPENVIDU_SECRET</code></p>
+							 <h1 id="leave-a-session">Leave a session</h1>
+<p>By calling <code>session.disconnect</code> method you can leave the session.</p>
+<pre><code class="javascript">session.disconnect();
+</code></pre>
 
-<pre><code class="javascript">// Get sessionId by asking OpenVidu Server from your application server
-// and then returning it here or generate it by your own with the format above
-
-var OV = new OpenVidu();
-var session = OV.initSession(sessionId);
+<p><code>sessionDisconnected</code> event will be triggered by <code>session</code> object. The default behaviour is the deletion of all HTML video elements associated to this particular session. To avoid this, call <code>event.preventDefault()</code> method:</p>
+<pre><code class="javascript">session.on('sessionDisconnected', function (event) {
+    event.preventDefault();
+    // Do wahtever you want when the user leaves the session
+});
 </code></pre> 
 						</div>
 					</div> <footer>
@@ -327,10 +320,10 @@ var session = OV.initSession(sessionId);
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../join-session/" class="btn btn-xs btn-primary float-right" title="Join a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../receive-stream/" class="btn btn-xs btn-primary float-right" title="Receive other users streams">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../tutorials/openvidu-getaroom/" class="btn btn-xs btn-primary" title="openvidu-getaroom"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../join-session/" class="btn btn-xs btn-primary" title="Join a session"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -339,7 +332,7 @@ var session = OV.initSession(sessionId);
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/create-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/leave-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

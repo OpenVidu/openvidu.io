@@ -144,6 +144,36 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/receive-stream/">Receive other users streams</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/publish-stream/">Publish a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute audio/video</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -287,7 +317,7 @@ In order to use your JKS, just set the following values for these properties on 
 </ul>
 <p><br></p>
 <h5 id="example">Example</h5>
-<pre><code class="console">java -jar -Dserver.ssl.key-store=PATH/TO/YOUR/KEYSTORE.jks -Dserver.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -Dserver.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu-server.jar
+<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dserver.ssl.key-store=PATH/TO/YOUR/KEYSTORE.jks -Dserver.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -Dserver.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu-server.jar
 </code></pre>
 
 <hr />

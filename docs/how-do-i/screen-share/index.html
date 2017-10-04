@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Create a session
+title: OpenVidu Documentation - Screen share
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Create a session')").each(function (i, e) {
+		$(".subnav").find("li:contains('Screen share')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Create a session')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Screen share')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -131,8 +131,8 @@ active: documentation
     <ul class="subnav" hidden>
           
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">Create a session</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../create-session/">Create a session</a> 
 </li>
 
    
@@ -167,8 +167,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../screen-share/">Screen share</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">Screen share</a>  
 </li>
 
    
@@ -303,34 +303,34 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="create-a-session">Create a session</h1>
-<p>You must get an <code>OpenVidu</code> object and call <code>initSession</code> method. This must receive just one string parameter: the <code>sessionID</code>, which unambiguously identify your session:</p>
-<ul>
-<li>
-<p>If you have a server-side, you should ask for the <code>sessionId</code> to OpenVidu Server (thanks to the <a href="../../reference-docs//REST-API/">REST API</a>, <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>) and return it to the client to use it on <code>initSession</code> method.</p>
-</li>
-<li>
-<p>If you don't have a server side, you willl have to build <code>sessionId</code> param by yourself with the following format (this is not recommended for production as the secret must be hardcoded in your JavaScript code):</p>
-</li>
-</ul>
-<p style="text-align: center"><strong>"wss://"</strong> + <code>OPENVIDU_IP</code> + <strong>":8443/"</strong> + <code>SESSION_IDENTIFIER</code> + <strong>"?secret="</strong> + <code>OPENVIDU_SECRET</code></p>
+							 <h1 id="screen-share">Screen share</h1>
+<p>To share your screen instead of your webcam, the process is exactly the same as stated in <a href="../../how-do-i/publish-stream/">Publish a stream</a> section, but setting to <em>true</em> <code>screen</code> property when initializing a Publisher object:</p>
+<pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true });
+</code></pre>
 
-<pre><code class="javascript">// Get sessionId by asking OpenVidu Server from your application server
-// and then returning it here or generate it by your own with the format above
+<p>Both Chrome and Firefox support screen sharing.</p>
+<p>For Chrome, it is a necessary requirement that the user has an extension installed. If it is not, <code>initPublisher</code> will return an error with <em>name</em> <code>SCREEN_EXTENSION_NOT_INSTALLED</code> and <em>message</em> the URL of Chrome Web Store where to install the extension. So, a possible approach would be:</p>
+<pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true }, function(error) {
+    if (error.name == 'SCREEN_EXTENSION_NOT_INSTALLED') {
+        showWarning(error.message);
+        // showWarning could show a button with href 'error.message',
+        // so the user can navigate to install the extension.
+        // A browser refresh is also needed after installation
+    }
+});
+</code></pre>
 
-var OV = new OpenVidu();
-var session = OV.initSession(sessionId);
-</code></pre> 
+<p>For Firefox it is even easier, as it supports native screen capturing since version 52, so no extension is needed (a typical alert telling the user to select the window to share will pop up, similar to camera/microphone permission alert).</p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../join-session/" class="btn btn-xs btn-primary float-right" title="Join a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../share-data/" class="btn btn-xs btn-primary float-right" title="Share data between users">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../tutorials/openvidu-getaroom/" class="btn btn-xs btn-primary" title="openvidu-getaroom"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../mute-audio-video/" class="btn btn-xs btn-primary" title="Mute audio/video"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -339,7 +339,7 @@ var session = OV.initSession(sessionId);
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/create-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/screen-share.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
