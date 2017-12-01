@@ -308,8 +308,8 @@ active: documentation
 <pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true });
 </code></pre>
 
-<p>Both Chrome and Firefox support screen sharing.</p>
-<p>For Chrome, it is a necessary requirement that the user has an extension installed. If it is not, <code>initPublisher</code> will return an error with <em>name</em> <code>SCREEN_EXTENSION_NOT_INSTALLED</code> and <em>message</em> the URL of Chrome Web Store where to install the extension. So, a possible approach would be:</p>
+<p>Both <strong>Chrome</strong> and <strong>Firefox</strong> support screen sharing.</p>
+<p>For <strong>Chrome</strong>, it is a necessary requirement that the user has an extension installed. If it is not, <code>initPublisher</code> will return an error with <em>name</em> <code>SCREEN_EXTENSION_NOT_INSTALLED</code> and <em>message</em> the URL of Chrome Web Store where to install the extension. So, a possible approach would be:</p>
 <pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true }, function(error) {
     if (error.name == 'SCREEN_EXTENSION_NOT_INSTALLED') {
         showWarning(error.message);
@@ -320,7 +320,11 @@ active: documentation
 });
 </code></pre>
 
-<p>For Firefox it is even easier, as it supports native screen capturing since version 52, so no extension is needed (a typical alert telling the user to select the window to share will pop up, similar to camera/microphone permission alert).</p> 
+<p>For <strong>Firefox</strong> it is even easier, as it supports native screen capturing since version 52, so no extension is needed (a typical alert telling the user to select the window to share will pop up, similar to camera/microphone permission alert).</p>
+<p><br/></p>
+<blockquote>
+<p><strong>NOTE</strong>: when testing and developing screen sharing feature, in Chrome it is possible to do so over HTTP in <code>http://localhost:PORT</code>, but in Firefox it is a mandatory requirement to serve your application over HTTPS even though you are connecting through localhost</p>
+</blockquote> 
 						</div>
 					</div> <footer>
 <hr>

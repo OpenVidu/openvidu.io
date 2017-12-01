@@ -417,15 +417,17 @@ it will take a bit longer until you can access your OpenVidu Server. Be patient.
 <p>Remember that the key will be the same you indicated when configuring the <a href="#4-complete-the-configuration-fields">CloudFormation fields</a>. In case of doubt, check <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">AWS docs</a>.</p>
 <h4 id="3-configure-your-app">3. Configure your app</h4>
 <p>Depending on the framework of your app:</p>
+<p><br></p>
 <h5 id="plain-htmlcssjs">Plain HTML/CSS/JS</h5>
 <ul>
 <li>
-<p>Add your web files into <code>/opt/</code>. You should have instant access to it through <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/</code></p>
+<p>If your app doesn't have a server-side and it is plain HTML, CSS and JavaScript, you just have to add your web files into <code>/var/www/html/</code>. You will have instant access to it through <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/</code></p>
 <blockquote>
 <p>If you want to test the deployment of a plain HTML/CSS/JS app, you can use <strong><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-js">openvidu-insecure-js</a></strong></p>
 </blockquote>
 </li>
 </ul>
+<p><br></p>
 <h5 id="java">Java</h5>
 <ul>
 <li>
@@ -481,6 +483,7 @@ java -jar -Dserver.port=4040 myapp.jar
 </blockquote>
 </li>
 </ul>
+<p><br></p>
 <h5 id="node">Node</h5>
 <ul>
 <li>
@@ -536,6 +539,7 @@ node myserver.js 4040
 </blockquote>
 </li>
 </ul>
+<p><br></p>
 <h5 id="php-ruby-python-net">PHP, Ruby, Python, .NET...</h5>
 <p>We are not going to spell out in detail what is to be done with the rest of backend technologies, but you can get the idea from the Java and Node steps above. It is always the same process: take your app to your instance, place it under <code>/opt/</code>, configure Nginx and Supervisor (this last with the necessary launching script depending on your technology) and relaunch both services. Be sure that your machine has all the necessary dependencies and technologies to execute your application, depending on the framework (Java for a Java app, Node for a Node app, Ruby for a Ruby app...)</p>
 <p>Voilà! It is really this simple.</p>
