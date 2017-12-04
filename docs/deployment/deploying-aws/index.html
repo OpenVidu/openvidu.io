@@ -397,9 +397,9 @@ active: documentation
 
 <h4 id="5-create-your-stack">5. Create your Stack</h4>
 <p>No extra options are necessary. Click on  <strong><em>Next</em></strong> ➞ <strong><em>Next</em></strong> ➞ <strong><em>Create</em></strong></p>
-<p><strong><em>CREATE_IN_PROGRESS</em></strong> status will show up. You will now have to wait for a few minutes.</p>
+<p><strong><em>CREATE_IN_PROGRESS</em></strong> status will show up. You will now have to wait for a few minutes until it shows <strong><em>CREATE_COMPLETE</em></strong>.</p>
 <h4 id="6-access-and-test-your-openvidu-server-through-your-new-ip">6. Access and test your OpenVidu Server through your new IP</h4>
-<p>Go to <strong><em>Outputs</em></strong> tab to get your brand new IP and click on it (or if you have deployed under your own custom domain, then you should access through it).</p>
+<p>After status changes to <strong><em>CREATE_COMPLETE</em></strong>, go to <strong><em>Outputs</em></strong> tab to get your brand new IP and click on it (or if you have deployed under your own custom domain, then you should access through it).</p>
 <p><p>
     <img class="img-responsive deploy-img" src="/img/docs/deployment/CF_output.png">
   </p></p>
@@ -409,10 +409,6 @@ active: documentation
 <li>The secret you chose on <a href="#4-complete-the-configuration-fields">Step 4</a> as password (field <strong>OpenVidu Secret</strong> in the table). </li>
 </ul>
 <p>At OpenVidu dashboard you can test the video transmission. You can now add your own application to your instance. To learn how check the <a href="#adding-your-own-app-to-cloudformation-openvidu-server">next section</a>.</p>
-<blockquote>
-<p><strong>IMPORTANT</strong>: Even though the Status of your new Stack shows "CREATE_COMPLETE", 
-it will take a bit longer until you can access your OpenVidu Server. Be patient.</p>
-</blockquote>
 <h2 id="adding-your-own-app-to-cloudformation-openvidu-server">Adding your own app to CloudFormation OpenVidu Server</h2>
 <p>Once you have deployed your CloudFormation OpenVidu Server and checked that it is up and running, you can easily add your own application to the instance. Follow these steps:</p>
 <h4 id="1-upload-your-app-to-your-ec2-instance">1. Upload your app to your EC2 instance</h4>

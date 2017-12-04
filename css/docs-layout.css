@@ -26,6 +26,14 @@
     padding-left: 0;
 }
 
+ul#menu-list {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    height: 80vh;
+    overflow-y: auto;
+}
+
 #sticky-menu ul li.toctree-l1 a {
     display: block;
     width: 100%;
@@ -328,6 +336,13 @@
 }
 
 @media screen and (max-width: 991px) {
+    ul#menu-list {
+        position: inherit;
+        top: inherit;
+        bottom: inherit;
+        height: inherit;
+        overflow-y: inherit;
+    }
     #sticky-menu {
         position: relative !important;
         top: 0 !important;
