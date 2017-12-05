@@ -442,6 +442,7 @@ java -jar -Dserver.port=4040 myapp.jar
 <blockquote>
 <p><strong>IMPORTANT 1</strong>: It is crucial to navigate to <strong>/opt</strong> before the launching command. Otherwise, the system will surely have some problems for finding your files</p>
 <p><strong>IMPORTANT 2</strong>: Obviously your app will need Java to run. You must install the correct version of Java in your machine (check version: <code>java -version</code>)</p>
+<p><strong>IMPORTANT 3</strong>: Make sure the script you made is executable.(For Linux you could do like this <code>chmod +x YOUR_LAUNCHER.sh</code>)</p>
 </blockquote>
 </li>
 <li>
@@ -461,6 +462,20 @@ java -jar -Dserver.port=4040 myapp.jar
 <li>
 <p>Configure Supervisor: add the script you wrote in the second step to the file <code>/etc/supervisor/conf.d/openvidu.conf</code> like this:</p>
 <pre><code>  [program:YOUR_APP]
+  command=/bin/bash /opt/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
+  redirect_stderr=true
+</code></pre>
+<p>Now your <code>/etc/supervisor/conf.d/openvidu.conf</code> must looks like this:</p>
+<pre><code>  [supervisord]
+  nodaemon=true
+  logfile=/var/log/supervisor/supervisord.log
+  pidfile=/var/run/supervisord.pid
+  loglevel=debug
+
+  [program:openvidu-server]
+  command=java -jar -Dopenvidu.secret="MY_SECRET" -Dserver.ssl.enabled=false -Dopenvidu.pu$
+
+  [program:YOUR_APP]
   command=/bin/bash /opt/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
   redirect_stderr=true
 </code></pre>
@@ -498,6 +513,7 @@ node myserver.js 4040
 <blockquote>
 <p><strong>IMPORTANT 1</strong>: It is crucial to navigate to <strong>/opt</strong> before the launching command. Otherwise, the system will surely have some problems for finding your files</p>
 <p><strong>IMPORTANT 2</strong>: Obviously your app will need Node to run. You must install the correct version of Node in your machine (check version: <code>nodejs -v</code>)</p>
+<p><strong>IMPORTANT 3</strong>: Make sure the script you made is executable.(For Linux you could do like this <code>chmod +x YOUR_LAUNCHER.sh</code>)</p>
 </blockquote>
 </li>
 <li>
@@ -520,6 +536,20 @@ node myserver.js 4040
 <li>
 <p>Configure Supervisor: add the script you wrote in the second step to <code>/etc/supervisor/conf.d/openvidu.conf</code> like this:</p>
 <pre><code>  [program:YOUR_APP]
+  command=/bin/bash /opt/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
+  redirect_stderr=true
+</code></pre>
+<p>Now your <code>/etc/supervisor/conf.d/openvidu.conf</code> must looks like this:</p>
+<pre><code>  [supervisord]
+  nodaemon=true
+  logfile=/var/log/supervisor/supervisord.log
+  pidfile=/var/run/supervisord.pid
+  loglevel=debug
+
+  [program:openvidu-server]
+  command=java -jar -Dopenvidu.secret="MY_SECRET" -Dserver.ssl.enabled=false -Dopenvidu.pu$
+
+  [program:YOUR_APP]
   command=/bin/bash /opt/YOUR_LAUNCHER.sh YOUR_APP_PARAM_1 YOUR_APP_PARAM_2 ...
   redirect_stderr=true
 </code></pre>
