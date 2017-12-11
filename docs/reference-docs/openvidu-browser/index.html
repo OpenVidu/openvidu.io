@@ -177,6 +177,12 @@ active: documentation
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
  
 </li>
 </ul>
@@ -465,6 +471,12 @@ active: documentation
 <td></td>
 <td><code>subscriber:Subscriber</code></td>
 <td>Unsubscribes from <strong>subscriber</strong>, automatically removing its HTML Video element</td>
+</tr>
+<tr>
+<td><code>signal</code></td>
+<td></td>
+<td><code>signal:any</code></td>
+<td>Sends one signal. <code>signal</code> object has the following properties: {data:<code>string</code>, to:<code>Connection[]</code>, type:<code>string</code>} (all optional properties)<br/>All users subscribed to that signal (<code>session.on('signal:type', ...)</code> or <code>session.on('signal', ...)</code> for all signals) and whose Connection objects are in <code>to</code> array will receive it</td>
 </tr>
 </tbody>
 </table>
@@ -834,7 +846,7 @@ active: documentation
         <a href="../openvidu-java-client/" class="btn btn-xs btn-primary float-right" title="openvidu-java-client API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../how-do-i/share-data/" class="btn btn-xs btn-primary" title="Share data between users"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../../how-do-i/send-messages/" class="btn btn-xs btn-primary" title="Send text messages"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

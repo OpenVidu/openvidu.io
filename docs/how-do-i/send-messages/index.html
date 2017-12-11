@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Publish a stream
+title: OpenVidu Documentation - Send text messages
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Publish a stream')").each(function (i, e) {
+		$(".subnav").find("li:contains('Send text messages')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Publish a stream')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Send text messages')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -155,8 +155,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">Publish a stream</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../publish-stream/">Publish a stream</a> 
 </li>
 
    
@@ -179,8 +179,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../send-messages/">Send text messages</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">Send text messages</a>  
 </li>
 
  
@@ -309,33 +309,58 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="publish-a-stream">Publish a stream</h1>
-<p>After joining a session, get a <code>Publisher</code> object through OpenVidu object (<code>OpenVidu.initPublisher</code>) and publish it with <code>Session</code> object.</p>
-<pre><code class="javascript">// After joining a session...
+							 <h1 id="send-text-messages-between-users">Send text messages between users</h1>
+<p><em>(since <strong>v1.2.0</strong>)</em></p>
+<p>Any user connected to a session can send messages to every other participant of the session, as a broadcast message for everyone or to one or more specific participants. To do so:</p>
+<pre><code class="javascript">// Sender of the message (after calling 'session.connect')
 
-var publisher = OV.initPublisher('html-id');
-session.publish(publisher);
-</code></pre>
-
-<p><code>initPublisher</code> method will append to DOM a new HTML video element inside the element with id <code>html-id</code>, showing your camera. You can then publish it to the session whenever you want (perhaps you want the user to confirm that his camera is working well before publishing it).</p>
-<p>You can add two more parameters to <code>initPublisher</code> method: an object with properties about your publisher stream and a callback function to be executed in case any error takes places during publisher initialization:</p>
-<pre><code class="javascript">OV.initPublisher(
-    'html-element-id',
-    {
-        audio: true,        // Whether you want to transmit audio or not
-        video: true,        // Whether you want to transmit video or not
-        audioActive: true,  // Whether you want to start the publishing with your audio unmuted or muted
-        videoActive: true,  // Whether you want to start the publishing with your video enabled or disabled
-        quality: 'MEDIUM',  // The quality of your video ('LOW', 'MEDIUM', 'HIGH')
-        screen: false       // true to get your screen as video source instead of your camera
-                            // See 'How do I...?' -&gt; 'Screen share' section to learn more
+session.signal({
+        data: 'My custom message',  // Any string (optional)
+        to: [],                     // Array of Connection objects (optional)
+        type: 'my-chat'             // The type of message (optional)
     },
-    function(error) {       // Function to be executed in case the Publisher initialization fails
+    function (error) {              // Callback for catching errors ('error' is null if success)
         if (error) {
-            console.log('Error while initializing publisher: ', error);
+            console.log('Error sending signal: ' + error);
         }
     }
 );
+</code></pre>
+
+<p>Any user subscribed to that <em>type</em> will receive the message:</p>
+<pre><code class="javascript">// Receiver of the message (usually before calling 'session.connect')
+
+session.on('signal:my-chat', (event) =&gt; {
+    console.log(event.data); // Message
+    console.log(event.from); // Connection object of the sender
+    console.log(event.type); // The type of message (&quot;my-chat&quot;)
+});
+</code></pre>
+
+<p>You can subscribe to <strong>all signals</strong> just by calling:</p>
+<pre><code class="javascript">// Receiver of all messages (usually before calling 'session.connect')
+
+session.on('signal', (event) =&gt; {
+    console.log(event.data); // Message
+    console.log(event.from); // Connection object of the sender
+    console.log(event.type); // The type of message
+});
+</code></pre>
+
+<p>You can send messages to specific users adding to <code>to</code> array the proper Connection objects:</p>
+<pre><code class="javascript">// Sender of the message (after calling 'session.connect')
+
+session.signal({
+    data: 'My private custom message',
+    to: [connection1, connection2],
+    type: 'my-private-chat'
+});
+</code></pre>
+
+<p>Only participants represented by <code>connection1</code> and <code>connection2</code> objects will receive the signal event (only if they are subscribed to it!). You can get Connection objects by subscribing to <code>connectionCreated</code> event before connecting to a session:</p>
+<pre><code class="javascript">this.session.on('connectionCreated', (event) =&gt; {
+    console.log(event.connection);
+});
 </code></pre> 
 						</div>
 					</div> <footer>
@@ -343,10 +368,10 @@ session.publish(publisher);
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../mute-audio-video/" class="btn btn-xs btn-primary float-right" title="Mute audio/video">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../reference-docs/openvidu-browser/" class="btn btn-xs btn-primary float-right" title="openvidu-browser API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../receive-stream/" class="btn btn-xs btn-primary" title="Receive other users streams"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../share-data/" class="btn btn-xs btn-primary" title="Share data between users"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -355,7 +380,7 @@ session.publish(publisher);
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/publish-stream.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/send-messages.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
