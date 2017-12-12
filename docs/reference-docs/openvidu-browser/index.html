@@ -473,7 +473,7 @@ active: documentation
 <td>Unsubscribes from <strong>subscriber</strong>, automatically removing its HTML Video element</td>
 </tr>
 <tr>
-<td><code>signal</code></td>
+<td><code>signal</code></br><em>(since  <strong>v1.2.0</strong>)</em></td>
 <td></td>
 <td><code>signal:any</code></td>
 <td>Sends one signal. <code>signal</code> object has the following properties: {data:<code>string</code>, to:<code>Connection[]</code>, type:<code>string</code>} (all optional properties)<br/>All users subscribed to that signal (<code>session.on('signal:type', ...)</code> or <code>session.on('signal', ...)</code> for all signals) and whose Connection objects are in <code>to</code> array will receive it</td>
@@ -500,7 +500,7 @@ active: documentation
 <thead>
 <tr>
 <th>Event</th>
-<th>Properties</th>
+<th>Properties of <code>event</code> object</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -529,6 +529,16 @@ active: documentation
 <td><code>sessionDisconnected</code></td>
 <td>preventDefault():Function</td>
 <td>Triggered by Session object when the client disconnects from the Session. Default behaviour is the deletion of all HTML video elements. Call <code>preventDefault()</code> on event object to prevent it and delete them by yourself</td>
+</tr>
+<tr>
+<td><code>publisherStartSpeaking</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td>connection:<a href="#connection">Connection</a></br>streamId:string</td>
+<td>Triggered by Session object when any Publisher starts speaking. <code>connection</code> property identifies the participant who is speaking, and <code>streamId</code> identifies the specific Stream for which the event has been triggered</td>
+</tr>
+<tr>
+<td><code>publisherStopSpeaking</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td>connection:<a href="#connection">Connection</a></br>streamId:string</td>
+<td>Triggered by Session object when any Publisher stops speaking. <code>connection</code> property identifies the participant who is has stopped speaking, and <code>streamId</code> identifies the specific Stream for which the event has been triggered. For this event to be triggered, <code>publisherStartSpeaking</code> event must have been previously triggered</td>
 </tr>
 </tbody>
 </table>
@@ -615,7 +625,7 @@ active: documentation
 <thead>
 <tr>
 <th>Event</th>
-<th>Properties</th>
+<th>Properties of <code>event</code> object</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -696,7 +706,7 @@ active: documentation
 <thead>
 <tr>
 <th>Event</th>
-<th>Properties</th>
+<th>Properties of <code>event</code> object</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -727,6 +737,26 @@ active: documentation
 <td><code>connection</code></td>
 <td><a href="#connection">Connection</a></td>
 <td>The Connection object to which the Stream belongs</td>
+</tr>
+<tr>
+<td><code>streamId</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td>string</td>
+<td>The unique id of the stream</td>
+</tr>
+<tr>
+<td><code>hasAudio</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td>boolean</td>
+<td><em>true</em> if there's an audio stream, <em>false</em> otherwise</td>
+</tr>
+<tr>
+<td><code>hasVideo</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td>boolean</td>
+<td><em>true</em> if there's a video stream, <em>false</em> otherwise</td>
+</tr>
+<tr>
+<td><code>typeOfVideo</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td>string</td>
+<td><em>"CAMERA"</em>, <em>"SCREEN"</em> or <em>""</em> (empty string) for a Stream publishing the video of a camera (with or without audio), doing screen sharing (with or without audio) or sending only audio respectively</td>
 </tr>
 </tbody>
 </table>
