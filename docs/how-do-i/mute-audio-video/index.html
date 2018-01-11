@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Mute audio/video
+title: OpenVidu Documentation - Mute/Unmute audio and video
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Mute audio/video')").each(function (i, e) {
+		$(".subnav").find("li:contains('Mute/Unmute audio and video')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Mute audio/video')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Mute/Unmute audio and video')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -150,19 +150,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../receive-stream/">Receive other users streams</a> 
+    <a class="" href="../subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../publish-stream/">Publish a stream</a> 
+    <a class="" href="../publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 current">
-    <a class="current" href="./">Mute audio/video</a>  
+    <a class="current" href="./">Mute/Unmute audio and video</a>  
 </li>
 
    
@@ -309,8 +309,8 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="mute-audiovideo">Mute audio/video</h1>
-<p>By calling <code>publisher.publishAudio()</code> or <code>publisher.publishVideo()</code> method you can toggle audio and video. For these methods to have effect your Publisher object must have been initialized with <code>audio: true</code> and <code>video: true</code> respectively (see <a href="../../how-do-i/publish-stream/">Publish a stream</a> section).</p>
+							 <h1 id="muteunmute-audio-and-video">Mute/Unmute audio and video</h1>
+<p>By calling <code>publisher.publishAudio()</code> or <code>publisher.publishVideo()</code> method you can toggle audio and video. For these methods to have effect your Publisher object must have been initialized with <code>audio: true</code> and <code>video: true</code> respectively (see <a href="../../how-do-i/publish-unpublish/">Publish a stream</a> section).</p>
 <pre><code class="javascript">publisher.publishAudio(audioEnabled);   // true to unmute the audio, false to mute it
 publisher.publishVideo(videoEnabled);   // true to enable the video, false to disable it 
                                         // (a black screen will show up instead)
@@ -324,7 +324,7 @@ publisher.publishVideo(videoEnabled);   // true to enable the video, false to di
         <a href="../screen-share/" class="btn btn-xs btn-primary float-right" title="Screen share">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../publish-stream/" class="btn btn-xs btn-primary" title="Publish a stream"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../publish-unpublish/" class="btn btn-xs btn-primary" title="Publish/Unpublish a stream"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

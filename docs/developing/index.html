@@ -150,19 +150,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../how-do-i/receive-stream/">Receive other users streams</a> 
+    <a class="" href="../how-do-i/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../how-do-i/publish-stream/">Publish a stream</a> 
+    <a class="" href="../how-do-i/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../how-do-i/mute-audio-video/">Mute audio/video</a> 
+    <a class="" href="../how-do-i/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
    
@@ -310,8 +310,7 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="developing-openvidu">Developing OpenVidu</h1>
-<p><br>
-This documentation is suitable for <strong>Ubuntu 14.04</strong> or <strong>Ubuntu 16.04</strong>. Packages required:</p>
+<p>This documentation is suitable for <strong>Ubuntu 14.04</strong> or <strong>Ubuntu 16.04</strong>. Packages required:</p>
 <table>
 <thead>
 <tr>
@@ -344,12 +343,11 @@ This documentation is suitable for <strong>Ubuntu 14.04</strong> or <strong>Ubun
 </tbody>
 </table>
 <h2 id="setup-for-development">Setup for development</h2>
-<p>Here we show how to develop an Angular app (<em>openvidu-insecure-angular</em> tutorial) with <strong><em>openvidu-browser</em></strong> and <strong><em>openvidu-server</em></strong> as local dependencies, waiting to be modified as you want.</p>
+<p>Here we show how to develop an Angular app (<em>openvidu-testapp</em>) with <strong><em>openvidu-browser</em></strong> and <strong><em>openvidu-server</em></strong> as local dependencies, waiting to be modified as you want.</p>
 <p>1) <a href="#installing-kms">Install KMS</a></p>
 <p>2) <a href="#adding-kurento-parent-pom-to-your-local-respository">Add Kurento parent Maven dependency to your local repo</a></p>
-<p>3) Clone repos:</p>
+<p>3) Clone repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
-git clone https://github.com/OpenVidu/openvidu-tutorials.git
 </code></pre>
 
 <p>4) <code>openvidu/openvidu-browser/</code></p>
@@ -359,10 +357,10 @@ sudo npm link
 </code></pre>
 
 <p>5) <code>openvidu/</code></p>
-<pre><code class="bash">mvn compile &amp;&amp; mvn install
+<pre><code class="bash">mvn -DskipTests=true compile &amp;&amp; mvn -DskipTests=true install
 </code></pre>
 
-<p>6) <code>openvidu-tutorials/openvidu-insecure-angular/</code></p>
+<p>6) <code>openvidu/openvidu-testapp/</code></p>
 <pre><code class="bash">npm install
 npm link openvidu-browser
 ng serve
@@ -373,7 +371,7 @@ ng serve
 </code></pre>
 
 <p>8) <code>openvidu/openvidu-server/</code></p>
-<pre><code class="bash">mvn package exec:java
+<pre><code class="bash">mvn exec:java
 </code></pre>
 
 <p><em>(or if you prefer you can just run the Java application in your favourite IDE)</em></p>
@@ -381,17 +379,17 @@ ng serve
 <p>At these point, you can start modifying <em>openvidu-ng-testapp</em>, <em>openvidu-browser</em> or <em>openvidu-server</em>.</p>
 <ul>
 <li>
-<p><strong><em>openvidu-insecure-angular</em></strong>:  the previous "ng serve" command will take care of refreshing the browser's page whenever any change takes place.</p>
+<p><strong><em>openvidu-testapp</em></strong> :  the previous "ng serve" command will take care of refreshing the browser's page whenever any change takes place.</p>
 </li>
 <li>
-<p><strong><em>openvidu-browser</em></strong>: after modifying any typescript file, you will need to run the following command to update your changes:</p>
+<p><strong><em>openvidu-browser</em></strong> : after modifying any typescript file, you will need to run the following command to update your changes:</p>
 <p><strong>/openvidu/openvidu-browser</strong> </p>
 <p><code>npm run updatetsc</code></p>
 </li>
 <li>
-<p><strong><em>openvidu-server</em></strong>: after modifying any file, there is no other alternative but to re-launch the java application if you want to update your changes.</p>
+<p><strong><em>openvidu-server</em></strong> : after modifying any file, there is no other alternative but to re-launch the java application if you want to update your changes.</p>
 <p><strong>/openvidu/openvidu-server</strong></p>
-<p><code>mvn clean package exec:java</code></p>
+<p><code>mvn clean exec:java</code></p>
 <p><em>(or re-launch the Java application in your IDE. Some IDE's support automatic re-launch in response to changes)</em></p>
 </li>
 </ul>
@@ -401,7 +399,7 @@ ng serve
 <p>You will need a server for the built app (if you don't have any, we recommend <em>http-server</em>):
 <code>npm install -g http-server</code></p>
 <p>Run exactly the same commands as the process above, but on step <strong>6)</strong> skip <code>ng serve</code>. We don't want Angular-CLI to serve our app. Instead, these commands will be the ones which you should launch (and relaunch to update your changes):</p>
-<p><code>openvidu-tutorials/openvidu-insecure-angular/</code></p>
+<p><code>openvidu/openvidu-testapp/</code></p>
 <pre><code class="bash">ng build -op ./dist
 cd dist
 openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '/CN=www.mydom.com/O=My Company LTD./C=US' -keyout key.pem -out cert.pem

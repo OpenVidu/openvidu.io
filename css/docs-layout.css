@@ -183,6 +183,9 @@ ul#menu-list {
     overflow-x: auto;
 }
 
+#doc-container div.section > h1:first-child {
+    margin-bottom: 35px;
+}
 
 #doc-container .section h1,
 #doc-container .section h2,

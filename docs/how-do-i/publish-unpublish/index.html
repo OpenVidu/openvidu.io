@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Receive other users streams
+title: OpenVidu Documentation - Publish/Unpublish a stream
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Receive other users streams')").each(function (i, e) {
+		$(".subnav").find("li:contains('Publish/Unpublish a stream')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Receive other users streams')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Publish/Unpublish a stream')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -149,20 +149,20 @@ active: documentation
 
    
 
+<li class="toctree-l1 ">
+    <a class="" href="../subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+   
+
 <li class="toctree-l1 current">
-    <a class="current" href="./">Receive other users streams</a>  
+    <a class="current" href="./">Publish/Unpublish a stream</a>  
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../publish-stream/">Publish a stream</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../mute-audio-video/">Mute audio/video</a> 
+    <a class="" href="../mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
    
@@ -309,29 +309,54 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="receive-other-users-streams">Receive other users streams</h1>
-<pre><code class="javascript">session.on('streamCreated', function(event) {
-    session.subscribe(event.stream, 'html-id');
-});
+							 <h1 id="publishunpublish-a-stream">Publish/Unpublish a stream</h1>
+<p>You can publish a stream after joining a session: get a <code>Publisher</code> object through OpenVidu object (<code>OpenVidu.initPublisher</code>) and publish it with <code>Session</code> object.</p>
+<pre><code class="javascript">// After joining a session...
+
+var publisher = OV.initPublisher('html-id');
+session.publish(publisher);
 </code></pre>
 
-<p>A new HTML video element will be appended to DOM inside the element with id <code>html-id</code>. If you prefer to manage the stream object by yourself, you can always get its <code>srcObject</code> property to insert it on any <code>HTMLMediaElement</code> (such as a <code>&lt;video&gt;</code> element). For example:</p>
-<pre><code class="javascript">session.on('streamCreated', function(event) {
-    session.subscribe(event.stream, ''); // Empty html id
-    var video = document.getElementById('myVideoElement'); 
-    video.srcObject = event.stream.getVideoSrcObject();
-});
-</code></pre> 
+<p><code>initPublisher</code> method will append to DOM a new HTML video element inside the element with id <code>html-id</code>, showing your camera. You can then publish it to the session whenever you want (perhaps you want the user to confirm that his camera is working well before publishing it).</p>
+<p>You can add two more parameters to <code>initPublisher</code> method: an object with properties about your publisher stream and a callback function to be executed in case any error takes places during publisher initialization:</p>
+<pre><code class="javascript">OV.initPublisher(
+    'html-element-id',
+    {
+        audio: true,        // Whether you want to transmit audio or not
+        video: true,        // Whether you want to transmit video or not
+        audioActive: true,  // Whether you want to start the publishing with your audio unmuted or muted
+        videoActive: true,  // Whether you want to start the publishing with your video enabled or disabled
+        quality: 'MEDIUM',  // The quality of your video ('LOW', 'MEDIUM', 'HIGH')
+        screen: false       // true to get your screen as video source instead of your camera
+                            // See 'How do I...?' -&gt; 'Screen share' section to learn more
+    },
+    function(error) {       // Function to be executed in case the Publisher initialization fails
+        if (error) {
+            console.log('Error while initializing publisher: ', error);
+        }
+    }
+);
+</code></pre>
+
+<p>To unpublish the stream:</p>
+<pre><code class="javascript">session.unpublish(publisher);
+</code></pre>
+
+<p>As long as you have the Publisher object available, you can alternately call <code>Session.publish</code> and <code>Session.unpublish</code> as many times as you want.</p>
+<p><br/></p>
+<blockquote>
+<p><strong>NOTE</strong>: only users with Role <code>PUBLISHER</code> or <code>MODERATOR</code> can call <code>Session.publish</code> method (see <a href="../../reference-docs/openvidu-java-client#openvidurole">OpenViduRole</a> section)</p>
+</blockquote> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../publish-stream/" class="btn btn-xs btn-primary float-right" title="Publish a stream">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mute-audio-video/" class="btn btn-xs btn-primary float-right" title="Mute/Unmute audio and video">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../leave-session/" class="btn btn-xs btn-primary" title="Leave a session"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../subscribe-unsubscribe/" class="btn btn-xs btn-primary" title="Subscribe/Unsubscribe from a stream"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -340,7 +365,7 @@ active: documentation
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/receive-stream.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/publish-unpublish.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
