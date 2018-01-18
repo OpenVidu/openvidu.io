@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - REST  API
+title: OpenVidu Documentation - OpenVidu Server configuration
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('REST  API')").each(function (i, e) {
+		$(".subnav").find("li:contains('OpenVidu Server configuration')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('REST  API')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('OpenVidu Server configuration')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -215,14 +215,14 @@ active: documentation
 
    
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">REST  API</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../REST-API/">REST  API</a> 
 </li>
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../openvidu-server-params/">OpenVidu Server configuration</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">OpenVidu Server configuration</a>  
 </li>
 
    
@@ -315,94 +315,94 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h2 id="section-title">REST API</h2>
+							 <h2 id="section-title">OpenVidu Server configuration parameters</h2>
 
 <hr>
 
-<p>This is the straightforward way to get <strong>sessionId</strong> and <strong>token</strong> params from openvidu-server without using <em>openvidu-java-client</em> or <em>openvidu-node-client</em>.</p>
-<p>Two REST operations are provided: <strong><em>/api/sessions</em></strong> and <strong><em>/api/tokens</em></strong>.
-Both operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). An example is shown below:</p>
-<p>For secret "MY_SECRET", the final header would be</p>
-<blockquote>
-<p>Authorization:Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</p>
-</blockquote>
-<h3 id="apisessions">/api/sessions</h3>
+<h4 id="list-of-configuration-parameters-when-launching-openvidu-server">List of configuration parameters when launching openvidu-server:</h4>
 <table>
 <thead>
 <tr>
-<th><em>NEW SESSIONID</em></th>
-<th><em>PARAMETERS</em></th>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Operation</strong></td>
-<td>POST</td>
+<td><code>openvidu.secret</code></td>
+<td>Secret used to connect to OpenVidu Server. This value is required when using the <a href="../../reference-docs/REST-API/">REST API</a> or any server client (<a href="../../reference-docs/openvidu-java-client">openvidu-java-client</a>, <a href="../../reference-docs/openvidu-node-client">openvidu-node-client</a>), as well as when connecting to openvidu-server dashboard</td>
+<td><strong><em>MY_SECRET</em></strong></td>
 </tr>
 <tr>
-<td><strong>URL</strong></td>
-<td>https://[YOUR_OPENVIDUSERVER_IP]/api/sessions</td>
+<td><code>openvidu.publicurl</code></td>
+<td>URL to connect clients to OpenVidu Server. This must be the full IP of your OpenVidu Server, including <em>protocol</em>, <em>host</em> and <em>port</em> (for example: <code>https://my.openvidu.server.ip:8443</code>). If no <em>port</em> argument is provided, <code>server.port</code> param will be appended to it</td>
+<td><strong><em>local</em></strong><br>(with default value <em>local</em> this parameter will be set to <code>localhost:PORT</code>, being <em>PORT</em> the param <code>server.port</code>)</td>
 </tr>
 <tr>
-<td><strong>Headers</strong></td>
-<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em></td>
+<td><code>openvidu.cdr</code></td>
+<td>Whether to enable Call Detail Record or not</td>
+<td><strong><em>false</em></strong></td>
 </tr>
 <tr>
-<td><strong>Returns</strong></td>
-<td>{"id": "SESSIONID"}</td>
+<td><code>server.port</code></td>
+<td>Port where OpenVidu Server will listen to client's connections</td>
+<td><strong><em>8443</em></strong></td>
+</tr>
+<tr>
+<td><code>kms.uris</code></td>
+<td>KMS URL's to which OpenVidu Server will try to connect. They are tested in order until a valid one is found</td>
+<td><strong><em>[\"ws://localhost:8888/kurento\"]</em></strong><br>(default value for a KMS running in the same machine as OpenVidu Server)</td>
 </tr>
 </tbody>
 </table>
-<h3 id="apitokens">/api/tokens</h3>
+<p>Example:</p>
+<pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://my.openvidu.server.ip:3333 -Dopenvidu.cdr=true -Dserver.port=3333 -Dkms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] -jar openvidu-server.jar
+</code></pre>
+
+<h4 id="list-of-additional-configuration-parameters-when-launching-openvidu-server-kms-docker-container">List of additional configuration parameters when launching <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">openvidu-server-kms</a> Docker container:</h4>
 <table>
 <thead>
 <tr>
-<th><em>NEW TOKEN</em></th>
-<th><em>PARAMETERS</em></th>
+<th>Parameter</th>
+<th>Description</th>
+<th>Sample value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Operation</strong></td>
-<td>POST</td>
+<td><code>KMS_STUN_IP</code></td>
+<td>IP of STUN server used by KMS</td>
+<td><code>stun.l.google.com</code> (free STUN server from Google)</td>
 </tr>
 <tr>
-<td><strong>URL</strong></td>
-<td>https://[YOUR_OPENVIDUSERVER_IP]/api/tokens</td>
+<td><code>KMS_STUN_PORT</code></td>
+<td>PORT of STUN server used by KMS</td>
+<td><code>19302</code> (free STUN server from Google)</td>
 </tr>
 <tr>
-<td><strong>Headers</strong></td>
-<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type:application/json</td>
-</tr>
-<tr>
-<td><strong>Body</strong></td>
-<td>{"session": "SESSIONID", "role": "ROLE", "data": "DATA"}</td>
-</tr>
-<tr>
-<td><strong>Returns</strong></td>
-<td>{"token": "TOKEN", "session": "SESSIONID", "role": "ROLE", "data": "DATA", "id": "TOKEN"}</td>
+<td><code>KMS_TURN_URL</code></td>
+<td>Configuration for TURN server used by KMS</td>
+<td><code>user:pass@turn_public_ip:turn_port</code> (<em>user</em> and <em>pass</em> of the TURN server, <em>turn_public_ip</em> its publicly accessible url and <em>turn_port</em> the port the TURN server listens to</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>ROLE</strong> value in Body field of POST to "/api/tokens" can be:</p>
-<ul>
-<li>SUBSCRIBER</li>
-<li>PUBLISHER</li>
-<li>MODERATOR</li>
-</ul>
-<p>(See <a href="../../reference-docs/openvidu-java-client#openvidurole">OpenViduRole</a> section)</p>
-</blockquote> 
+<p>Example:</p>
+<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e KMS_TURN_URL=myuser:mypass@54.54.54.54:3478 openvidu/openvidu-server-kms
+</code></pre>
+
+<h4 id="call-detail-record">Call Detail Record</h4>
+<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every connection established by each one of the users. To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>.</p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-server-params/" class="btn btn-xs btn-primary float-right" title="OpenVidu Server configuration">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-artifacts/" class="btn btn-xs btn-primary float-right" title="OpenVidu Artifacts">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../openvidu-node-client/" class="btn btn-xs btn-primary" title="openvidu-node-client API"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../REST-API/" class="btn btn-xs btn-primary" title="REST  API"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -411,7 +411,7 @@ Both operations have in common the header referred to authorization. It is imple
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/reference-docs/REST-API.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/reference-docs/openvidu-server-params.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
