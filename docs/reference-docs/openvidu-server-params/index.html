@@ -392,7 +392,288 @@ active: documentation
 </code></pre>
 
 <h4 id="call-detail-record">Call Detail Record</h4>
-<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every connection established by each one of the users. To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>.</p> 
+<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every connection established by each one of the users. To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>.</p>
+<p>The record is a plain text file containing one standard JSON entry for each line. All JSON entries have the following structure:</p>
+<p><code>{"[EVENT_NAME]": {"sessionId": "[SESSION_ID]", "timestamp": "[TIMESTAMP]", "[CUSTOM_PROPERTY_1]": "[CUSTOM_VALUE_1]","[CUSTOM_PROPERTY_2]": "[CUSTOM_VALUE_2]", ... }}</code></p>
+<p>So every entry is a JSON object identified by a specific event name, and all of them have as properties the <code>sessionId</code> identifying the video-session for which this event was registered and the <code>timestamp</code>. Besides this two common properties, there are custom properties for every specific event with useful information. The complete list of possible JSON entries is available below:</p>
+<hr>
+
+<h5 id="sessioncreated">sessionCreated</h5>
+<p>Recorded when a new session has been created.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;timestamp&quot;:1516292370848}}
+</code></pre>
+
+<hr>
+
+<h5 id="sessiondestroyed">sessionDestroyed</h5>
+<p>Recored when a session has finished.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the session started</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>endTime</code></td>
+<td>Time when the session finished</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Total duration of the session</td>
+<td>Seconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;duration&quot;:4,&quot;startTime&quot;:1516292370848,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;endTime&quot;:1516292375176,&quot;timestamp&quot;:1516292375176}}
+</code></pre>
+
+<hr>
+
+<h5 id="participantjoined">participantJoined</h5>
+<p>Recorded when a user has connected to a session.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+</tbody>
+</table>
+<p>Example: </p>
+<pre><code class="json">{&quot;participantJoined&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;timestamp&quot;:1516292370885}}
+</code></pre>
+
+<hr>
+
+<h5 id="participantleft">participantLeft</h5>
+<p>Recorded when a user has left a session.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the participant joined the session</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>endTime</code></td>
+<td>Time when the participant left the session</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Total duration of the participant's connection to the session</td>
+<td>Seconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;participantLeft&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;duration&quot;:4,&quot;startTime&quot;:1516292370885,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;endTime&quot;:1516292375195,&quot;timestamp&quot;:1516292375195}}
+</code></pre>
+
+<hr>
+
+<h5 id="webrtcconnectioncreated">webrtcConnectionCreated</h5>
+<p>Recorded when a new media stream has been established. Can be an "INBOUND" connection (the user is receiving a stream from a publisher of the session) or an "OUTBOUND" connection (the user is a publishing a stream to the session).</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>connection</code></td>
+<td>Whether the media connection is an inbound connection (the participant is receiving media from OpenVidu) or an outbound connection (the participant is sending media to OpenVidu)</td>
+<td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
+</tr>
+<tr>
+<td><code>audioEnabled</code></td>
+<td>Whether the media connection is sending audio or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoEnabled</code></td>
+<td>Whether the media connection is sending video or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoSource</code></td>
+<td>If <code>videoEnabled</code> is true, the type of video that is being transmitted</td>
+<td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292371499}}
+</code></pre>
+
+<hr>
+
+<h5 id="webrtcconnectiondestroyed">webrtcConnectionDestroyed</h5>
+<p>Recorded when any media stream connection is closed.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>connection</code></td>
+<td>Whether the media connection is an inbound connection (the participant is receiving media from OpenVidu) or an outbound connection (the participant is sending media to OpenVidu)</td>
+<td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
+</tr>
+<tr>
+<td><code>audioEnabled</code></td>
+<td>Whether the media connection is sending audio or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoEnabled</code></td>
+<td>Whether the media connection is sending video or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoSource</code></td>
+<td>If <code>videoEnabled</code> is true, the type of video that is being transmitted</td>
+<td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the media connection was established</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>endTime</code></td>
+<td>Time when the media connection closed</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Total duration of the media connection</td>
+<td>Seconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;duration&quot;:3,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;startTime&quot;:1516292371499,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;endTime&quot;:1516292375180,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292375180}}
+</code></pre> 
 						</div>
 					</div> <footer>
 <hr>
