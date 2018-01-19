@@ -341,7 +341,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>openvidu.cdr</code></td>
-<td>Whether to enable Call Detail Record or not</td>
+<td>Whether to enable Call Detail Record or not (check <a href="#call-detail-record">Call Detail Record</a>)</td>
 <td><strong><em>false</em></strong></td>
 </tr>
 <tr>
@@ -392,7 +392,7 @@ active: documentation
 </code></pre>
 
 <h4 id="call-detail-record">Call Detail Record</h4>
-<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every connection established by each one of the users. To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>.</p>
+<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every connection established by each one of the users. To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>. The CDR file will be located under <code>log/</code> folder in the same path as your Java executable.</p>
 <p>The record is a plain text file containing one standard JSON entry for each line. All JSON entries have the following structure:</p>
 <p><code>{"[EVENT_NAME]": {"sessionId": "[SESSION_ID]", "timestamp": "[TIMESTAMP]", "[CUSTOM_PROPERTY_1]": "[CUSTOM_VALUE_1]","[CUSTOM_PROPERTY_2]": "[CUSTOM_VALUE_2]", ... }}</code></p>
 <p>So every entry is a JSON object identified by a specific event name, and all of them have as properties the <code>sessionId</code> identifying the video-session for which this event was registered and the <code>timestamp</code>. Besides this two common properties, there are custom properties for every specific event with useful information. The complete list of possible JSON entries is available below:</p>
