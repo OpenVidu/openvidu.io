@@ -354,9 +354,8 @@ active: documentation
 </div>
 
 <h2 id="running-this-tutorial">Running this tutorial</h2>
-<p>1) Clone the repo and checkout to version v1.1.0:</p>
+<p>1) Clone the repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
-cd openvidu-tutorials &amp;&amp; git checkout v1.1.0
 </code></pre>
 
 <p>2) You will need an http web server installed in your development computer to execute the sample application. If you have <em>node.js</em> installed, you can use <a href="https://github.com/indexzero/http-server">http-server</a> to serve application files. It can be installed with:</p>
@@ -364,11 +363,11 @@ cd openvidu-tutorials &amp;&amp; git checkout v1.1.0
 </code></pre>
 
 <p>3) Run the tutorial:</p>
-<pre><code class="bash">http-server openvidu-insecure-js/web
+<pre><code class="bash">http-server openvidu-tutorials/openvidu-insecure-js/web
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:1.1.0
+<pre><code class="bash">docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
