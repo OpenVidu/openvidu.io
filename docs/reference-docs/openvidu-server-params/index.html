@@ -168,12 +168,6 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/screen-share/">Screen share</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -181,6 +175,36 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
  
@@ -258,7 +282,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
 </li>
 
    
@@ -330,6 +354,16 @@ active: documentation
 </thead>
 <tbody>
 <tr>
+<td><code>server.port</code></td>
+<td>Port where OpenVidu Server will listen to client's connections</td>
+<td><strong><em>8443</em></strong></td>
+</tr>
+<tr>
+<td><code>kms.uris</code></td>
+<td>KMS URL's to which OpenVidu Server will try to connect. They are tested in order until a valid one is found</td>
+<td><strong><em>[\"ws://localhost:8888/kurento\"]</em></strong><br>(default value for a KMS running in the same machine as OpenVidu Server)</td>
+</tr>
+<tr>
 <td><code>openvidu.secret</code></td>
 <td>Secret used to connect to OpenVidu Server. This value is required when using the <a href="../../reference-docs/REST-API/">REST API</a> or any server client (<a href="../../reference-docs/openvidu-java-client">openvidu-java-client</a>, <a href="../../reference-docs/openvidu-node-client">openvidu-node-client</a>), as well as when connecting to openvidu-server dashboard</td>
 <td><strong><em>MY_SECRET</em></strong></td>
@@ -345,14 +379,19 @@ active: documentation
 <td><strong><em>false</em></strong></td>
 </tr>
 <tr>
-<td><code>server.port</code></td>
-<td>Port where OpenVidu Server will listen to client's connections</td>
-<td><strong><em>8443</em></strong></td>
+<td><code>openvidu.recording</code></td>
+<td>Whether to enable recording module or not (check <a href="../../advanced-features/recording/">Recording</a>)</td>
+<td><strong><em>false</em></strong></td>
 </tr>
 <tr>
-<td><code>kms.uris</code></td>
-<td>KMS URL's to which OpenVidu Server will try to connect. They are tested in order until a valid one is found</td>
-<td><strong><em>[\"ws://localhost:8888/kurento\"]</em></strong><br>(default value for a KMS running in the same machine as OpenVidu Server)</td>
+<td><code>openvidu.recording.path</code></td>
+<td>System path where to store the video files of recorded sessions</td>
+<td><strong><em>/opt/openvidu/recordings</em></strong></td>
+</tr>
+<tr>
+<td><code>openvidu.recording.free-access</code></td>
+<td>Whether to allow free http access to recorded sessions or not.<br>If <em>true</em> path <code>https://OPENVIDU_SERVER_IP:[server.port]/[openvidu.recording.path]</code> will be publicly accessible through <code>https://OPENVIDU_SERVER_IP:[server.port]/recordings</code> path. For example, for OpenVidu Server launched in <em>my-domain.com</em> and configured with <em>server.port=5000</em>, <em>openvidu.recording=true</em>, <em>openvidu.recording-path=/my/path</em> and <em>openvidu.recording.free-access=true</em> : A session with id <em>foo</em> that has been recorded will generate a video file locally stored under <code>/my/path/foo.mp4</code> and accesible by any client connecting to <code>https://my-domain.com:5000/recordings/foo.mp4</code>.<br>If <em>false</em> HTTP basic authentication will be required to access any video file stored under that route (as requested when connecting to OpenVidu dashboard on <code>https://OPENVIDU_SERVER_IP:[server.port]</code>)</td>
+<td><strong><em>false</em></strong></td>
 </tr>
 </tbody>
 </table>
@@ -586,6 +625,11 @@ active: documentation
 <td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
 </tr>
 <tr>
+<td><code>receivingFrom</code></td>
+<td>If <code>connection</code> is <code>"INBOUND"</code>, the participant from whom the media stream is being received</td>
+<td>A string with the participant (sender) unique identifier</td>
+</tr>
+<tr>
 <td><code>audioEnabled</code></td>
 <td>Whether the media connection is sending audio or not</td>
 <td>[<code>true</code>,<code>false</code>]</td>
@@ -597,7 +641,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>videoSource</code></td>
-<td>If <code>videoEnabled</code> is true, the type of video that is being transmitted</td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the type of video that is being transmitted</td>
 <td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
 </tr>
 </tbody>
@@ -640,6 +684,11 @@ active: documentation
 <td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
 </tr>
 <tr>
+<td><code>receivingFrom</code></td>
+<td>If <code>connection</code> is <code>"INBOUND"</code>, the participant from whom the media stream is being received</td>
+<td>A string with the participant (sender) unique identifier</td>
+</tr>
+<tr>
 <td><code>audioEnabled</code></td>
 <td>Whether the media connection is sending audio or not</td>
 <td>[<code>true</code>,<code>false</code>]</td>
@@ -651,7 +700,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>videoSource</code></td>
-<td>If <code>videoEnabled</code> is true, the type of video that is being transmitted</td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the type of video that is being transmitted</td>
 <td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
 </tr>
 <tr>

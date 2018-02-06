@@ -203,7 +203,7 @@ ul#menu-list {
 }
 
 #doc-container .section h3 {
-    border-top: 80px solid transparent;
+    border-top: 100px solid transparent;
     margin-top: -60px;
 }
 
@@ -326,6 +326,10 @@ ul#menu-list {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#doc-container blockquote li {
+    font-size: 14px;
 }
 
 @media all and (min-width: 992px) {

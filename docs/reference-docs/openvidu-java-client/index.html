@@ -168,12 +168,6 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/screen-share/">Screen share</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -181,6 +175,36 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
  
@@ -258,7 +282,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
 </li>
 
    
@@ -319,6 +343,26 @@ active: documentation
 
 <hr>
 
+<h2 id="code-sample">Code sample</h2>
+<p><em>(&gt;= v1.7.0)</em></p>
+<pre><code class="java">OpenVidu openvidu = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
+SessionProperties properties = new SessionProperties.Builder().build();
+Session session = openVidu.createSession(properties);
+
+// Getting a sessionId
+String sessionId = session.getSessionId();
+
+// Getting a token
+TokenOptions tokenOptions = new TokenOptions.Builder().build();
+String token = session.generateToken(tokenOptions);
+
+// Store all the objects you need for later use and return 'sessionId' and 'token' to the client
+</code></pre>
+
+<p><br>
+<hr></p>
+<h2 id="api">API</h2>
+<p><br></p>
 <blockquote>
 <p>NOTE: all input parameters ("Parameters" columns) are listed in strict order, optional ones in <em>italics</em></p>
 </blockquote>
@@ -339,12 +383,28 @@ active: documentation
 <td>Allows for the creation of tokens</td>
 </tr>
 <tr>
+<td><a href="#tokenoptions">TokenOptions</a></td>
+<td>Customize each token with this class when generating them</td>
+</tr>
+<tr>
 <td><a href="#openvidurole">OpenViduRole</a></td>
 <td>Enum that defines the values accepted by <em>TokenOptions.Builder.role(OpenViduRole role)</em> method</td>
 </tr>
 <tr>
-<td><a href="#tokenoptions">TokenOptions</a></td>
-<td>Customize each token with this class when generating them</td>
+<td><a href="#sessionproperties">SessionProperties</a></td>
+<td>Customize each session with this class when creating them</td>
+</tr>
+<tr>
+<td><a href="#mediamode">MediaMode</a></td>
+<td>Enum that defines the type of connections in a session: p2p or through OpenVidu Server</td>
+</tr>
+<tr>
+<td><a href="#archivemode">ArchiveMode</a></td>
+<td>Enum that defines if automatically start the recording of a session or if it must be explicitly invoked</td>
+</tr>
+<tr>
+<td><a href="#archivelayout">ArchiveLayout</a></td>
+<td>Enum that defines the layout for a session recording</td>
 </tr>
 </tbody>
 </table>
@@ -368,8 +428,8 @@ active: documentation
 <tr>
 <td>createSession()</td>
 <td><a href="#session">Session</a></td>
-<td></td>
-<td>Get a Session object by calling this method. You can then store it as you want</td>
+<td><em><code>SessionProperties:properties</code></em></td>
+<td>Get a Session object by calling this method (optionally configured with <code>properties</code> parameter). You can then store it as you want for later use</td>
 </tr>
 </tbody>
 </table>
@@ -385,39 +445,22 @@ active: documentation
 </thead>
 <tbody>
 <tr>
+<td>generateToken()</td>
+<td>String</td>
+<td><em><code>TokenOptions:tokenOptions</code></em></td>
+<td>The value returned is required in the client side just as the sessionId in order to connect to a session. It is a single-use-only token</td>
+</tr>
+<tr>
 <td>getSessionId()</td>
 <td>String</td>
 <td></td>
 <td>Returns the unique identifier of the session. You will need to return this parameter to the client side to pass it during the connection process to the session</td>
 </tr>
 <tr>
-<td>generateToken()</td>
-<td>String</td>
-<td><em><code>TokenOptions:tokenOptions</code></em></td>
-<td>The value returned is required in the client side just as the sessionId in order to connect to a session</td>
-</tr>
-</tbody>
-</table>
-<h4 id="openvidurole"><strong>OpenViduRole</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SUBSCRIBER</td>
-<td>They can subscribe to published streams of other users</td>
-</tr>
-<tr>
-<td>PUBLISHER</td>
-<td>They can subscribe to published streams of other users and publish their own streams</td>
-</tr>
-<tr>
-<td>MODERATOR</td>
-<td>They can subscribe to published streams of other users, publish their own streams and force <em>unpublish()</em> and <em>disconnect()</em> over a third-party stream or user</td>
+<td>getProperties()</td>
+<td><a href="#sessionproperties">SessionProperties</a></td>
+<td></td>
+<td>Returns the properties of the session. These define if the media streams will pass through OpenVidu Server or not and the configuration for the sessin recording (if desired)</td>
 </tr>
 </tbody>
 </table>
@@ -481,6 +524,157 @@ active: documentation
 <td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
 <td><code>OpenViduRole:role</code></td>
 <td>The role associated to this token</td>
+</tr>
+</tbody>
+</table>
+<h4 id="openvidurole"><strong>OpenViduRole</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUBSCRIBER</td>
+<td>They can subscribe to published streams of other users</td>
+</tr>
+<tr>
+<td>PUBLISHER</td>
+<td>They can subscribe to published streams of other users and publish their own streams</td>
+</tr>
+<tr>
+<td>MODERATOR</td>
+<td>They can subscribe to published streams of other users, publish their own streams and force <em>unpublish()</em> and <em>disconnect()</em> over a third-party stream or user</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sessionproperties"><strong>SessionProperties</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>archiveLayout()</td>
+<td><a href="#archivelayout">ArchiveLayout</a></td>
+<td></td>
+<td>Returns the ArchiveLayout associated to the session</td>
+</tr>
+<tr>
+<td>archiveMode()</td>
+<td><a href="#archivemode">ArchiveMode</a></td>
+<td></td>
+<td>Returns the ArchiveMode associated to the session</td>
+</tr>
+<tr>
+<td>mediaMode()</td>
+<td><a href="#mediamode">MediaMode</a></td>
+<td></td>
+<td>Returns the MediaMode associated to the session</td>
+</tr>
+</tbody>
+</table>
+<h5 id="sessionpropertiesbuilder"><strong>SessionProperties.Builder</strong></h5>
+<p><em>(inner static class)</em></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SessionProperties.Builder()</td>
+<td></td>
+<td></td>
+<td>Constructor</td>
+</tr>
+<tr>
+<td>archiveLayout()</td>
+<td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
+<td><code>ArchiveLayout:archiveLayout</code></td>
+<td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
+</tr>
+<tr>
+<td>archiveMode()</td>
+<td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
+<td><code>ArchiveMode:archiveMode</code></td>
+<td>The role associated to this token</td>
+</tr>
+<tr>
+<td>mediaMode()</td>
+<td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
+<td><code>MediaMode:mediaMode</code></td>
+<td>The role associated to this token</td>
+</tr>
+<tr>
+<td>build()</td>
+<td><a href="#sessionproperties">SessionProperties</a></td>
+<td></td>
+<td>Returns a new <strong>TokenOptions</strong> object with the stablished properties. Default values if methods <em>data()</em> and <em>role()</em> are not called are an empty string and OpenViduRole.PUBLISHER, respectively</td>
+</tr>
+</tbody>
+</table>
+<h4 id="mediamode"><strong>MediaMode</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RELAYED</td>
+<td>The session will attempt to transmit streams directly between clients (P2P)<br><strong><em>(feature not available yet)</em></strong></td>
+</tr>
+<tr>
+<td>ROUTED</td>
+<td>The session will transmit streams using OpenVidu Media Server. This is the mandatory option for session recording</td>
+</tr>
+</tbody>
+</table>
+<h4 id="archivemode"><strong>ArchiveMode</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALWAYS</td>
+<td>The session recording will start automatically as soon as the first participant publishes a stream. It will end automatically when the last participant leaves the session</td>
+</tr>
+<tr>
+<td>MANUAL</td>
+<td>The session recording only starts when <code>OpenVidu.startRecording()</code> method is called and stops only when <code>OpenVidu.stopRecording()</code> is called<br><strong><em>(feature not available yet. MANUAL mode means no recording at all in the current version)</em></strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="archivelayout"><strong>ArchiveLayout</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BEST_FIT</td>
+<td>Grid layout where all the videos are evenly distributed, taking up as much space as possible</td>
 </tr>
 </tbody>
 </table> 

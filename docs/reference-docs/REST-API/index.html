@@ -168,12 +168,6 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/screen-share/">Screen share</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -181,6 +175,36 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
  
@@ -258,7 +282,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
 </li>
 
    
@@ -348,11 +372,36 @@ Both operations have in common the header referred to authorization. It is imple
 <td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em></td>
 </tr>
 <tr>
+<td><strong>Body</strong> <em>*see notes below</em></td>
+<td>{"archiveMode": "ARCHIVE_MODE", "archiveLayout": "ARCHIVE_LAYOUT", "mediaMode": "MEDIA_MODE"}</td>
+</tr>
+<tr>
 <td><strong>Returns</strong></td>
 <td>{"id": "SESSIONID"}</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p><strong>Body parameters</strong></p>
+<ul>
+<li>All of them are optional (the Body of the POST operation may be empty)</li>
+<li>ARCHIVE_MODE<ul>
+<li><code>ALWAYS</code>: Automatic recording from the first user publishing until the last participant leaves the session</li>
+<li><code>MANUAL</code> (<em>default</em>) : If you want to manage when start and stop the recording. <em>NOT AVAILABLE YET: no recording at all if this Archive Mode is set</em></li>
+</ul>
+</li>
+<li>ARCHIVE_LAYOUT<ul>
+<li><code>BEST_FIT</code>(<em>default</em>) : A grid layout where all the videos are evenly distributed</li>
+<li>Not available yet: <code>PICTURE_IN_PICTURE</code>, <code>VERTICAL_PRESENTATION</code>, <code>HORIZONTAL_PRESENTATION</code></li>
+</ul>
+</li>
+<li>MEDIA_MODE<ul>
+<li><code>ROUTED</code> (<em>default</em>) : Media streams will be routed through OpenVidu Server. This Media Mode is mandatory for session recording</li>
+<li>Not available yet: <code>RELAYED</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
 <h3 id="apitokens">/api/tokens</h3>
 <table>
 <thead>
@@ -385,13 +434,17 @@ Both operations have in common the header referred to authorization. It is imple
 </tbody>
 </table>
 <blockquote>
-<p><strong>ROLE</strong> value in Body field of POST to "/api/tokens" can be:</p>
+<p><strong>Body parameters</strong></p>
 <ul>
-<li>SUBSCRIBER</li>
-<li>PUBLISHER</li>
-<li>MODERATOR</li>
+<li>SESSIONID: the sessionId for which the token should be associated</li>
+<li>ROLE <em>(See <a href="../../reference-docs/openvidu-java-client#openvidurole">OpenViduRole</a> section)</em><ul>
+<li><code>SUBSCRIBER</code></li>
+<li><code>PUBLISHER</code></li>
+<li><code>MODERATOR</code> (not available yet)</li>
 </ul>
-<p>(See <a href="../../reference-docs/openvidu-java-client#openvidurole">OpenViduRole</a> section)</p>
+</li>
+<li>DATA: an optional string to associate any metadata to this token (usually participant's information)</li>
+</ul>
 </blockquote> 
 						</div>
 					</div> <footer>

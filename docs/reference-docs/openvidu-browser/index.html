@@ -168,12 +168,6 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../how-do-i/screen-share/">Screen share</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -181,6 +175,36 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
  
@@ -258,7 +282,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> 
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
 </li>
 
    
@@ -365,6 +389,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="openvidu"><strong>OpenVidu</strong></h4>
+<p>Use it to initialize your sessions and publishers</p>
 <table>
 <thead>
 <tr>
@@ -414,6 +439,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="session"><strong>Session</strong></h4>
+<p>Represents a video call. It can also be seen as a room where multiple users can connect. Participants who publish their videos to a session will be seen by the rest of users connected to that specific session</p>
 <table>
 <thead>
 <tr>
@@ -500,6 +526,11 @@ active: documentation
 <td>string</td>
 <td>The unique id of the session</td>
 </tr>
+<tr>
+<td><code>connection</code></td>
+<td><a href="#connection">Connection</a></td>
+<td>The local connection to the session. Only available after <code>Session.connect()</code> method has been called succesfully</td>
+</tr>
 </tbody>
 </table>
 <table>
@@ -549,6 +580,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="publisher"><strong>Publisher</strong></h4>
+<p>Packs local media streams. Users can publish it to a session</p>
 <table>
 <thead>
 <tr>
@@ -664,6 +696,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="subscriber"><strong>Subscriber</strong></h4>
+<p>Packs remote media streams. Users automatically receive them when others publish their streams</p>
 <table>
 <thead>
 <tr>
@@ -730,6 +763,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="stream"><strong>Stream</strong></h4>
+<p>Represents each one of the videos send and receive by a user in a session. Therefore each Publisher and Subscriber has an attribute of type Stream</p>
 <table>
 <thead>
 <tr>
@@ -767,6 +801,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="connection"><strong>Connection</strong></h4>
+<p>Represents each one of the user's connection to the session (the local one and other user's connections). Therefore each Session and Stream object has an attribute of type Connection</p>
 <table>
 <thead>
 <tr>
@@ -794,6 +829,7 @@ active: documentation
 </tbody>
 </table>
 <h4 id="openviduerror"><strong>OpenViduError</strong></h4>
+<p>Simple object to identify errors on runtime</p>
 <table>
 <thead>
 <tr>
@@ -835,6 +871,7 @@ active: documentation
 </table>
 <h4 id="openviduerrorname"><strong>OpenViduErrorName</strong></h4>
 <p><em>(enum)</em></p>
+<p>OpenViduError names enum</p>
 <table>
 <thead>
 <tr>
@@ -882,7 +919,7 @@ active: documentation
         <a href="../openvidu-java-client/" class="btn btn-xs btn-primary float-right" title="openvidu-java-client API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../how-do-i/send-messages/" class="btn btn-xs btn-primary" title="Send text messages"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../../advanced-features/speech-detection/" class="btn btn-xs btn-primary" title="Speech detection"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

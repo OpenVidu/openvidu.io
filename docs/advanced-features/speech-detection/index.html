@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Join a session
+title: OpenVidu Documentation - Speech detection
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Join a session')").each(function (i, e) {
+		$(".subnav").find("li:contains('Speech detection')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Join a session')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Speech detection')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -132,49 +132,49 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../create-session/">Create a session</a> 
-</li>
-
-   
-
-<li class="toctree-l1 current">
-    <a class="current" href="./">Join a session</a>  
+    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../leave-session/">Leave a session</a> 
+    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../publish-unpublish/">Publish/Unpublish a stream</a> 
+    <a class="" href="../../how-do-i/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../mute-audio-video/">Mute/Unmute audio and video</a> 
+    <a class="" href="../../how-do-i/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../share-data/">Share data between users</a> 
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../send-messages/">Send text messages</a> 
+    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
 </li>
 
  
@@ -192,19 +192,19 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../advanced-features/recording/">Recording</a> 
+    <a class="" href="../recording/">Recording</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+    <a class="" href="../screen-share/">Screen share</a> 
 </li>
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">Speech detection</a>  
 </li>
 
  
@@ -339,32 +339,30 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="join-a-session">Join a session</h1>
-<p>By calling <code>session.connect</code> method you can join a properly initialized session.</p>
-<pre><code class="javascript">session.connect(token, function(error) {...});
+							 <h1 id="speech-detection">Speech detection</h1>
+<p><em>(since <strong>v1.3.0</strong>)</em></p>
+<p>A pretty common requested event is one that allows you to detect when a publisher starts and stops speaking. OpenVidu offers this ability through two events that can be configured for <a href="../../reference-docs/openvidu-browser/#session">Session</a> objects:</p>
+<pre><code class="javascript">session.on('publisherStartSpeaking', (event) =&gt; {
+    console.log('Publisher ' + event.connection.connectionId + ' start speaking');
+});
+
+session.on('publisherStopSpeaking', (event) =&gt; {
+    console.log('Publisher ' + event.connection.connectionId + ' stop speaking');
+});
 </code></pre>
 
-<ul>
-<li>
-<p>If you have a server-side, you should ask for a user's <code>token</code> to OpenVidu Server (thanks to the <a href="../../reference-docs//REST-API/">REST API</a>, <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>) and return it to the client to use it on <code>connect</code> method.</p>
-</li>
-<li>
-<p>If you don't have a server side, <code>token</code> value is completely irrelevant, so it can be undefined or null.</p>
-</li>
-</ul>
-<p>You can add an optional second parameter to pass some user metadata that will be recieved by every other user connected to the same session (check <a href="../../how-do-i/share-data/">Share data between users</a> to learn more).</p>
-<pre><code class="javascript">session.connect(token, DATA, function(error) {...});
-</code></pre> 
+<p>Event <code>publisherStopSpeaking</code> for certain <a href="../../reference-docs/openvidu-browser/#connection">Connection</a> object can only be triggered after <code>publisherStartSpeaking</code> has been called for that specific Connection object. In other words, none of these events can be triggered twice in a row for one Connection: they are always launched alternately.</p>
+<p>With these events it is really easy to build a layout that can make the main speaker video the bigger one, and alternate the main view between the participants of a session as they take the floor. You can check the complete API reference for these events in <a href="../../reference-docs/openvidu-browser/#session">Session events</a> section.</p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../leave-session/" class="btn btn-xs btn-primary float-right" title="Leave a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../reference-docs/openvidu-browser/" class="btn btn-xs btn-primary float-right" title="openvidu-browser API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../create-session/" class="btn btn-xs btn-primary" title="Create a session"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../screen-share/" class="btn btn-xs btn-primary" title="Screen share"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -373,7 +371,7 @@ active: documentation
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/join-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/advanced-features/speech-detection.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
