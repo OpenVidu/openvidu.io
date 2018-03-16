@@ -344,22 +344,26 @@ active: documentation
 <pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true });
 </code></pre>
 
-<p>Both <strong>Chrome</strong> and <strong>Firefox</strong> support screen sharing.</p>
-<p>For <strong>Chrome</strong>, it is a necessary requirement that the user has an extension installed. If it is not, <code>initPublisher</code> will return an error with <em>name</em> <code>SCREEN_EXTENSION_NOT_INSTALLED</code> and <em>message</em> the URL of Chrome Web Store where to install the extension. So, a possible approach would be:</p>
+<p>Both <strong>Chrome</strong> and <strong>Firefox</strong> support screen sharing. Chrome needs an extension and Firefox supports native screen sharing since version 52. Two different <a href="http://openvidu.io/docs/reference-docs/openvidu-browser/#openviduerror">OpenViduError</a> can be returned in the callback function:</p>
+<ul>
+<li><code>SCREEN_SHARING_NOT_SUPPORTED</code>: if the browser does not support screen sharing.</li>
+<li><code>SCREEN_EXTENSION_NOT_INSTALLED</code>: Chrome needs an extension to allow screen sharing. <code>error.message</code> has the URL of Chrome Web Store where to install the extension.</li>
+</ul>
 <pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true }, function(error) {
     if (error.name == 'SCREEN_EXTENSION_NOT_INSTALLED') {
         showWarning(error.message);
         // showWarning could show a button with href 'error.message',
         // so the user can navigate to install the extension.
         // A browser refresh is also needed after installation
+    } else if (error.name == 'SCREEN_SHARING_NOT_SUPPORTED') {
+        alert('Your browser does not support screen sharing');
     }
 });
 </code></pre>
 
-<p>For <strong>Firefox</strong> it is even easier, as it supports native screen capturing since version 52, so no extension is needed (a typical alert telling the user to select the window to share will pop up, similar to camera/microphone permission alert).</p>
 <p><br/></p>
 <blockquote>
-<p><strong>NOTE</strong>: when testing and developing screen sharing feature, in Chrome it is possible to do so over HTTP in <code>http://localhost:PORT</code>, but in Firefox it is a mandatory requirement to serve your application over HTTPS even though you are connecting through localhost</p>
+<p><strong>NOTE</strong>: for testing screen sharing in <strong>Firefox &lt; 59</strong> it is a mandatory requirement to serve your application over HTTPS, even though you are connecting through <code>localhost</code>. For Chrome and Firefox ≥ 59 you can serve your app through <code>http://localhost:PORT</code> when developing without a problem.</p>
 </blockquote> 
 						</div>
 					</div> <footer>

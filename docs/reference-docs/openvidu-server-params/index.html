@@ -390,8 +390,23 @@ active: documentation
 </tr>
 <tr>
 <td><code>openvidu.recording.free-access</code></td>
-<td>Whether to allow free http access to recorded sessions or not.<br>If <em>true</em> path <code>https://OPENVIDU_SERVER_IP:[server.port]/[openvidu.recording.path]</code> will be publicly accessible through <code>https://OPENVIDU_SERVER_IP:[server.port]/recordings</code> path.<br>For example, for OpenVidu Server launched in <em>my-domain.com</em> and configured with <em>server.port=5000</em>, <em>openvidu.recording=true</em>, <em>openvidu.recording-path=/my/path</em> and <em>openvidu.recording.free-access=true</em> : A session with id <em>foo</em> that has been recorded will generate a video file locally stored under <code>/my/path/foo.mkv</code> and accesible by any client connecting to <code>https://my-domain.com:5000/recordings/foo.mkv</code>.<br>If <em>false</em> HTTP basic authentication will be required to access any video file stored under that route (as requested when connecting to OpenVidu dashboard on <code>https://OPENVIDU_SERVER_IP:[server.port]</code>)</td>
+<td>Whether to allow free http access to recorded sessions or not.<br>If <em>true</em> path <code>https://OPENVIDU_SERVER_IP:[server.port]/[openvidu.recording.path]</code> will be publicly accessible through <code>https://OPENVIDU_SERVER_IP:[server.port]/recordings</code> path.<br>For example, for OpenVidu Server launched in <em>my-domain.com</em> and configured with <em>server.port=5000</em>, <em>openvidu.recording=true</em>, <em>openvidu.recording-path=/my/path</em> and <em>openvidu.recording.free-access=true</em> : A session with id <em>foo</em> that has been recorded will generate a video file locally stored under <code>/my/path/foo.mp4</code> and accesible by any client connecting to <code>https://my-domain.com:5000/recordings/foo.mp4</code>.<br>If <em>false</em> HTTP basic authentication will be required to access any video file stored under that route (as requested when connecting to OpenVidu dashboard on <code>https://OPENVIDU_SERVER_IP:[server.port]</code>)</td>
 <td><strong><em>false</em></strong></td>
+</tr>
+<tr>
+<td><code>server.ssl.key-store</code></td>
+<td>Path for using custom JKS certificate</td>
+<td><em>(selfsigned OpenVidu key-store)</em></td>
+</tr>
+<tr>
+<td><code>server.ssl.key-store-password</code></td>
+<td>Password for the custom JKS</td>
+<td><em>(selfsigned OpenVidu password)</em></td>
+</tr>
+<tr>
+<td><code>server.ssl.key-alias</code></td>
+<td>Alias for the custom JKS</td>
+<td><em>(selfsigned OpenVidu alias)</em></td>
 </tr>
 </tbody>
 </table>
@@ -431,9 +446,9 @@ active: documentation
 </code></pre>
 
 <h4 id="call-detail-record">Call Detail Record</h4>
-<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every connection established by each one of the users. To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>. The CDR file will be located under <code>log/</code> folder in the same path as your Java executable.</p>
+<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every media connection established by each one of the users (sending or receiving). To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>. The CDR file will be located under <code>log/</code> folder in the same path as your Java executable.</p>
 <p>The record is a plain text file containing one standard JSON entry for each line. All JSON entries have the following structure:</p>
-<p><code>{"[EVENT_NAME]": {"sessionId": "[SESSION_ID]", "timestamp": "[TIMESTAMP]", "[CUSTOM_PROPERTY_1]": "[CUSTOM_VALUE_1]","[CUSTOM_PROPERTY_2]": "[CUSTOM_VALUE_2]", ... }}</code></p>
+<p><code>{"EVENT_NAME": {"sessionId": "SESSION_ID", "timestamp": TIMESTAMP, "PROPERTY_1": "VALUE_1","PROPERTY_2": "VALUE_2", ... }}</code></p>
 <p>So every entry is a JSON object identified by a specific event name, and all of them have as properties the <code>sessionId</code> identifying the video-session for which this event was registered and the <code>timestamp</code>. Besides this two common properties, there are custom properties for every specific event with useful information. The complete list of possible JSON entries is available below:</p>
 <hr>
 
@@ -461,7 +476,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;timestamp&quot;:1516292370848}}
+<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1516292370848}}
 </code></pre>
 
 <hr>
@@ -505,7 +520,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;duration&quot;:4,&quot;startTime&quot;:1516292370848,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;endTime&quot;:1516292375176,&quot;timestamp&quot;:1516292375176}}
+<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;duration&quot;:4,&quot;startTime&quot;:1516292370848,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1516292375176,&quot;timestamp&quot;:1516292375176}}
 </code></pre>
 
 <hr>
@@ -539,7 +554,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example: </p>
-<pre><code class="json">{&quot;participantJoined&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;timestamp&quot;:1516292370885}}
+<pre><code class="json">{&quot;participantJoined&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1516292370885}}
 </code></pre>
 
 <hr>
@@ -588,7 +603,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;participantLeft&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;duration&quot;:4,&quot;startTime&quot;:1516292370885,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;endTime&quot;:1516292375195,&quot;timestamp&quot;:1516292375195}}
+<pre><code class="json">{&quot;participantLeft&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;duration&quot;:4,&quot;startTime&quot;:1516292370885,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1516292375195,&quot;timestamp&quot;:1516292375195}}
 </code></pre>
 
 <hr>
@@ -647,7 +662,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292371499}}
+<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292371499}}
 </code></pre>
 
 <hr>
@@ -721,7 +736,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id5a8p4a6ejp&quot;,&quot;duration&quot;:3,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;startTime&quot;:1516292371499,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3hlrfh3sdf6d&quot;,&quot;endTime&quot;:1516292375180,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292375180}}
+<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;duration&quot;:3,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;startTime&quot;:1516292371499,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1516292375180,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292375180}}
 </code></pre> 
 						</div>
 					</div> <footer>

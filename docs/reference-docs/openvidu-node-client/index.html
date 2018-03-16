@@ -406,6 +406,14 @@ session.getSessionId(function(sessionId) {
 <td><a href="#archivelayout">ArchiveLayout</a></td>
 <td>Enum that defines the layout for a session recording</td>
 </tr>
+<tr>
+<td><a href="#archive">Archive</a></td>
+<td>Represents one recording file</td>
+</tr>
+<tr>
+<td><a href="#archivestatus">Archive.Status</a></td>
+<td>Status of the recording</td>
+</tr>
 </tbody>
 </table>
 <h4 id="openvidu"><strong>OpenVidu</strong></h4>
@@ -430,6 +438,36 @@ session.getSessionId(function(sessionId) {
 <td><a href="#session">Session</a></td>
 <td><em><code>SessionProperties:properties</code></em></td>
 <td>Get a Session object by calling this method (optionally configured with <code>properties</code> parameter). You can then store it as you want for later use</td>
+</tr>
+<tr>
+<td>startRecording()</td>
+<td>Promise&lt;<a href="#archive">Archive</a>&gt;</td>
+<td><code>String:sessionId</code></td>
+<td>Start the recording for the session with id <code>sessionId</code>. Once the Promise is resolved, the recording can be stopped with guarantees</td>
+</tr>
+<tr>
+<td>stopRecording()</td>
+<td>Promise&lt;<a href="#archive">Archive</a>&gt;</td>
+<td><code>String:recordingId</code></td>
+<td>Stop the recording with id <code>recordingId</code></td>
+</tr>
+<tr>
+<td>getRecording()</td>
+<td>Promise&lt;<a href="#archive">Archive</a>&gt;</td>
+<td><code>String:recordingId</code></td>
+<td>Get the updated information of the recording with id <code>recordingId</code></td>
+</tr>
+<tr>
+<td>listRecordings()</td>
+<td>Promise&lt;<a href="#archive">Archive</a>[]&gt;</td>
+<td></td>
+<td>Get the information of all recordings</td>
+</tr>
+<tr>
+<td>deleteRecording()</td>
+<td>Promise&lt;Error&gt;</td>
+<td><code>String:recordingId</code></td>
+<td>Delete the recording with id <code>recordingId</code></td>
 </tr>
 </tbody>
 </table>
@@ -640,7 +678,7 @@ session.getSessionId(function(sessionId) {
 </tr>
 <tr>
 <td>ROUTED</td>
-<td>The session will transmit streams using OpenVidu Media Server. This is the mandatory option for session recording</td>
+<td><em>DEFAULT</em> The session will transmit streams using OpenVidu Media Server. This is the mandatory option for session recording</td>
 </tr>
 </tbody>
 </table>
@@ -655,11 +693,11 @@ session.getSessionId(function(sessionId) {
 <tbody>
 <tr>
 <td>ALWAYS</td>
-<td>The session recording will start automatically as soon as the first participant publishes a stream. It will end automatically when the last participant leaves the session</td>
+<td>The session recording will start automatically as soon as the first participant publishes a stream. It will end automatically when the last participant leaves the session (or you can call <code>OpenVidu.stopRecording()</code>)</td>
 </tr>
 <tr>
 <td>MANUAL</td>
-<td>The session recording only starts when <code>OpenVidu.startRecording()</code> method is called and stops only when <code>OpenVidu.stopRecording()</code> is called<br><strong><em>(feature not available yet. MANUAL mode means no recording at all in the current version)</em></strong></td>
+<td><em>DEFAULT</em> The session recording only starts when <code>OpenVidu.startRecording()</code> method is called and stops only when <code>OpenVidu.stopRecording()</code> is called</td>
 </tr>
 </tbody>
 </table>
@@ -674,7 +712,106 @@ session.getSessionId(function(sessionId) {
 <tbody>
 <tr>
 <td>BEST_FIT</td>
-<td>Grid layout where all the videos are evenly distributed, taking up as much space as possible</td>
+<td><em>DEFAULT</em> Grid layout where all the videos are evenly distributed, taking up as much space as possible</td>
+</tr>
+</tbody>
+</table>
+<h4 id="archive"><strong>Archive</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getId()</td>
+<td>String</td>
+<td></td>
+<td>Returns the recording identifier</td>
+</tr>
+<tr>
+<td>getName()</td>
+<td>String</td>
+<td></td>
+<td>Returns the recording name</td>
+</tr>
+<tr>
+<td>getSessionId()</td>
+<td>String</td>
+<td></td>
+<td>Returns the session identifier associated to this recording</td>
+</tr>
+<tr>
+<td>getCreatedAt()</td>
+<td>long</td>
+<td></td>
+<td>Returns the time when the recording started (UTC milliseconds)</td>
+</tr>
+<tr>
+<td>getSize()</td>
+<td>long</td>
+<td></td>
+<td>Returns the size of the recording in bytes (0 until the recording is stopped)</td>
+</tr>
+<tr>
+<td>getDuration()</td>
+<td>double</td>
+<td></td>
+<td>Returns the duration of the recording in seconds (0 until the recording is stopped)</td>
+</tr>
+<tr>
+<td>hasAudio()</td>
+<td>boolean</td>
+<td></td>
+<td>Returns if the recording has audio tracks (currently fixed to true)</td>
+</tr>
+<tr>
+<td>hasVideo()</td>
+<td>boolean</td>
+<td></td>
+<td>Returns if the recording has video tracks (currently fixed to true)</td>
+</tr>
+<tr>
+<td>getStatus()</td>
+<td><a href="#archivestatus">Archive.Status</a></td>
+<td></td>
+<td>Returns the status of the recording</td>
+</tr>
+</tbody>
+</table>
+<h5 id="archivestatus"><strong>Archive.Status</strong></h5>
+<p><em>(inner enum)</em></p>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>starting</td>
+<td>The recording is starting (cannot be stopped)</td>
+</tr>
+<tr>
+<td>started</td>
+<td>The recording has started and is going on</td>
+</tr>
+<tr>
+<td>stopped</td>
+<td>The recording has finished OK</td>
+</tr>
+<tr>
+<td>available</td>
+<td>The recording is available for downloading. This status is reached for all stopped recordings if openvidu-server property <code>openvidu.recording.free-access</code> is true</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>The recording has failed</td>
 </tr>
 </tbody>
 </table> 

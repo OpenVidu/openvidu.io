@@ -379,6 +379,10 @@ active: documentation
 <td>Represents each one of the user's connection to the session (the local one and other user's connections). Therefore each Session and Stream object has an attribute of type Connection</td>
 </tr>
 <tr>
+<td><a href="#localrecorder">LocalRecorder</a></td>
+<td>Easy recording of Stream objects in the browser</td>
+</tr>
+<tr>
 <td><a href="#openviduerror">OpenViduError</a></td>
 <td>Simple object to identify errors on runtime</td>
 </tr>
@@ -419,6 +423,12 @@ active: documentation
 <td>Starts local video stream, appending it to <strong>parentId</strong> HTML element, with the specific <strong>cameraOptions</strong> settings and executing <strong>callback</strong> function in the end. <em>cameraOptions</em> is an object with the following (optional) properties:<br/><br/><strong>var cameraOptions = {</br><span style="padding-left: 20px">audio: boolean,</span></br><span style="padding-left: 20px">video: boolean,</span></br><span style="padding-left: 20px">audioActive: boolean,</span></br><span style="padding-left: 20px">videoActive: boolean,</span></br><span style="padding-left: 20px">quality: string,</span></br><span style="padding-left: 20px">screen: boolean</span><br/>}</strong><br/><br/><ul style="padding-left: 20px"><li><strong>audio</strong>: whether to transmit audio or not</li><li><strong>video</strong>: whether to transmit video or not</li><li><strong>audioActive</strong>: whether to join the session with the audio unmuted or muted. Only makes sense if property <em>audio</em> is set to true. You can change audio state later during the session with <em>Publisher.publishAudio(true)</em></li><li><strong>videoActive</strong>: whether to join the session with the video enabled or disabled. Only makes sense if property <em>video</em> is set to true. You can change video state later during the session with <em>Publisher.publishVideo(true)</em></li><li><strong>quality</strong>: quality of the video ("LOW", "MEDIUM", "HIGH")</li><li><strong>screen</strong>: whether to use screen capturing as the video source instead of a camera or not</li></ul></td>
 </tr>
 <tr>
+<td><code>initLocalRecorder</code></td>
+<td><a href="#localrecorder">LocalRecorder</a></td>
+<td><code>stream:Stream</code></td>
+<td>Returns a new LocalRecorder object, ready to locally record the provided Stream (from a Publisher or Subscriber object)</td>
+</tr>
+<tr>
 <td><code>checkSystemRequirements</code></td>
 <td>number</td>
 <td></td>
@@ -439,7 +449,8 @@ active: documentation
 </tbody>
 </table>
 <h4 id="session"><strong>Session</strong></h4>
-<p>Represents a video call. It can also be seen as a room where multiple users can connect. Participants who publish their videos to a session will be seen by the rest of users connected to that specific session</p>
+<p>Represents a video call. It can also be seen as a room where multiple users can connect. Participants who publish their videos to a session will be seen by the rest of users connected to that specific session.
+Initialized with <code>OpenVidu.initSession</code> method</p>
 <table>
 <thead>
 <tr>
@@ -505,7 +516,7 @@ active: documentation
 <td>Unsubscribes from <strong>subscriber</strong>, automatically removing its HTML Video element</td>
 </tr>
 <tr>
-<td><code>signal</code></br><em>(since  <strong>v1.2.0</strong>)</em></td>
+<td><code>signal</code></br><em>(since  v1.2.0)</em></td>
 <td></td>
 <td><code>signal:any</code></td>
 <td>Sends one signal. <code>signal</code> object has the following properties: {data:<code>string</code>, to:<code>Connection[]</code>, type:<code>string</code>} (all optional properties)<br/>All users subscribed to that signal (<code>session.on('signal:type', ...)</code> or <code>session.on('signal', ...)</code> for all signals) and whose Connection objects are in <code>to</code> array will receive it</td>
@@ -568,19 +579,20 @@ active: documentation
 <td>Triggered by Session object when the client disconnects from the Session. Default behaviour is the deletion of all HTML video elements. Call <code>preventDefault()</code> on event object to prevent it and delete them by yourself</td>
 </tr>
 <tr>
-<td><code>publisherStartSpeaking</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td><code>publisherStartSpeaking</code><br/><em>(since  v1.3.0)</em></td>
 <td>connection:<a href="#connection">Connection</a></br>streamId:string</td>
 <td>Triggered by Session object when any Publisher starts speaking. <code>connection</code> property identifies the participant who is speaking, and <code>streamId</code> identifies the specific Stream for which the event has been triggered</td>
 </tr>
 <tr>
-<td><code>publisherStopSpeaking</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td><code>publisherStopSpeaking</code><br/><em>(since  v1.3.0)</em></td>
 <td>connection:<a href="#connection">Connection</a></br>streamId:string</td>
 <td>Triggered by Session object when any Publisher stops speaking. <code>connection</code> property identifies the participant who is has stopped speaking, and <code>streamId</code> identifies the specific Stream for which the event has been triggered. For this event to be triggered, <code>publisherStartSpeaking</code> event must have been previously triggered</td>
 </tr>
 </tbody>
 </table>
 <h4 id="publisher"><strong>Publisher</strong></h4>
-<p>Packs local media streams. Users can publish it to a session</p>
+<p>Packs local media streams. Users can publish it to a session.
+Initialized with <code>OpenVidu.initPublisher()</code> method</p>
 <table>
 <thead>
 <tr>
@@ -779,22 +791,22 @@ active: documentation
 <td>The Connection object to which the Stream belongs</td>
 </tr>
 <tr>
-<td><code>streamId</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td><code>streamId</code><br/><em>(since  v1.3.0)</em></td>
 <td>string</td>
 <td>The unique id of the stream</td>
 </tr>
 <tr>
-<td><code>hasAudio</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td><code>hasAudio</code><br/><em>(since  v1.3.0)</em></td>
 <td>boolean</td>
 <td><em>true</em> if there's an audio stream, <em>false</em> otherwise</td>
 </tr>
 <tr>
-<td><code>hasVideo</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td><code>hasVideo</code><br/><em>(since  v1.3.0)</em></td>
 <td>boolean</td>
 <td><em>true</em> if there's a video stream, <em>false</em> otherwise</td>
 </tr>
 <tr>
-<td><code>typeOfVideo</code><br/><em>(since  <strong>v1.3.0</strong>)</em></td>
+<td><code>typeOfVideo</code><br/><em>(since  v1.3.0)</em></td>
 <td>string</td>
 <td><em>"CAMERA"</em>, <em>"SCREEN"</em> or <em>""</em> (empty string) for a Stream publishing the video of a camera (with or without audio), doing screen sharing (with or without audio) or sending only audio respectively</td>
 </tr>
@@ -825,6 +837,97 @@ active: documentation
 <td><code>creationTime</code></td>
 <td>number</td>
 <td>Time when this connection was created</td>
+</tr>
+</tbody>
+</table>
+<h4 id="localrecorder"><strong>LocalRecorder</strong></h4>
+<p>Easy recording of Stream objects in the browser.
+Initialized with <code>OpenVidu.initLocalRecorder</code> method</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>record</code></td>
+<td></td>
+<td></td>
+<td>Starts the recording of the Stream. <code>LocalRecorder.state</code> must be <code>READY</code> (set to <code>RECORDING</code>)</td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td></td>
+<td></td>
+<td>Pauses the recording of the Stream. <code>LocalRecorder.state</code> must be <code>RECORDING</code> (set to <code>PAUSED</code>)</td>
+</tr>
+<tr>
+<td><code>resume</code></td>
+<td></td>
+<td></td>
+<td>Resumes the recording of the Stream. <code>LocalRecorder.state</code> must be <code>PAUSED</code> (set to <code>RECORDING</code>)</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>Promise</td>
+<td></td>
+<td>Ends the recording of the Stream. <code>LocalRecorder.state</code> must be <code>RECORDING</code> or <code>PAUSED</code> (set to <code>FINISHED</code>)</td>
+</tr>
+<tr>
+<td><code>preview</code></td>
+<td>HTMLVideoElement</td>
+<td><code>parentId:string</code></td>
+<td>Previews the recording, appending a new HTMLVideoElement to element with id <code>parentId</code>. <code>LocalRecorder.state</code> must be <code>FINISHED</code></td>
+</tr>
+<tr>
+<td><code>download</code></td>
+<td></td>
+<td></td>
+<td>Downloads the recorded video. <code>LocalRecorder.state</code> must be <code>FINISHED</code></td>
+</tr>
+<tr>
+<td><code>uploadAsBinary</code></td>
+<td>Promise</td>
+<td><code>endpoint:string</code><br/><em><code>headers:any</code></em></td>
+<td>Uploads the recorded video as a binary file performing an HTTP/POST operation to URL <code>endpoint</code>. Optional HTTP headers can be passed as second parameter. For example: <br/><br/><strong>var headers = {</br><span style="padding-left: 20px">"Cookie": "$Version=1; Skin=new;",</span></br><span style="padding-left: 20px">"Authorization":"Basic QWxhZGpbjpuIHNlctZQ=="</span></br>}</strong><br/><br/> <code>LocalRecorder.state</code> must be <code>FINISHED</code></td>
+</tr>
+<tr>
+<td><code>uploadAsMultipartfile</code></td>
+<td>Promise</td>
+<td><code>endpoint:string</code><br/><em><code>headers:any</code></em></td>
+<td>Uploads the recorded video as a multipart file performing an HTTP/POST operation to URL <code>endpoint</code>. Optional HTTP headers can be passed as second parameter. For example: <br/><br/><strong>var headers = {</br><span style="padding-left: 20px">"Cookie": "$Version=1; Skin=new;",</span></br><span style="padding-left: 20px">"Authorization":"Basic QWxhZGpbjpuIHNlctZQ=="</span></br>}</strong><br/><br/> <code>LocalRecorder.state</code> must be <code>FINISHED</code></td>
+</tr>
+<tr>
+<td><code>getBlob</code></td>
+<td>Blob</td>
+<td></td>
+<td>Gets the raw Blob file. Methods <code>preview</code>, <code>download</code>,<code>uploadAsBinary</code> and <code>uploadAsMultipartfile</code> use this same file to perform their specific actions. <code>LocalRecorder.state</code> must be <code>FINISHED</code></td>
+</tr>
+<tr>
+<td><code>clean</code></td>
+<td></td>
+<td></td>
+<td>Gracefully stops and cleans the current recording. Sets <code>LocalRecorder.state</code> to <code>READY</code> so the recording can start again</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td>Current state of the recording [<code>READY</code>, <code>RECORDING</code>, <code>PAUSED</code>, <code>FINISHED</code>]</td>
 </tr>
 </tbody>
 </table>
@@ -898,6 +1001,10 @@ active: documentation
 </tr>
 <tr>
 <td><code>NO_INPUT_DEVICE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SCREEN_SHARING_NOT_SUPPORTED</code></td>
 <td></td>
 </tr>
 <tr>

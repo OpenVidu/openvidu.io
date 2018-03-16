@@ -395,8 +395,8 @@ active: documentation
 <li>Download this <em>Ngrok</em> configuration file (named <code>ngrok.yml</code>) from our GitHub repo <strong>[<a href="https://raw.githubusercontent.com/OpenVidu/openvidu-tutorials/master/openvidu-js-java/docker/ngrok.yml">LINK</a>]</strong> and place it in the same path as <em>Ngrok</em> binary.</li>
 <li>Run <em>Ngrok</em> with this command: <code>./ngrok start --all -config=ngrok.yml</code>. You will get two public IPs (ended with <code>.ngrok.io</code>) publishing your local address <code>localhost:5000</code> and <code>localhost:3000</code>.</li>
 <li>You just have to run you app at port <code>3000</code> and run OpenVidu Server locally adding this parameter:<ul>
-<li>When running OpenVidu Server as a Docker container: <code>-Dspring.profiles.active=ngrok</code></li>
-<li>When running OpenVidu Server as a JAR: <code>-e spring.profiles.active=ngrok</code></li>
+<li>When running OpenVidu Server as a Docker container: <code>-e spring.profiles.active=ngrok</code></li>
+<li>When running OpenVidu Server as a JAR: <code>-Dspring.profiles.active=ngrok</code></li>
 </ul>
 </li>
 <li>That's it! Now you can connect to your app through the <em>Ngrok</em> public IP and the connection to OpenVidu Server will work just fine. You have "deployed" your app on your own computer, and cross-device testing through your own network is now possible. Connecting to your app over the Internet is also possible, but the video transmission may not work (check <a href="#1-everything-looks-alright-but-i-cannot-see-any-remote-video">this FAQ</a> to learn why).</li>

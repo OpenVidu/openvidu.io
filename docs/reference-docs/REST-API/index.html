@@ -343,14 +343,12 @@ active: documentation
 
 <hr>
 
-<p>This is the straightforward way to get <strong>sessionId</strong> and <strong>token</strong> params from openvidu-server without using <em>openvidu-java-client</em> or <em>openvidu-node-client</em>.</p>
-<p>Two REST operations are provided: <strong><em>/api/sessions</em></strong> and <strong><em>/api/tokens</em></strong>.
-Both operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). An example is shown below:</p>
-<p>For secret "MY_SECRET", the final header would be</p>
+<p>All REST operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). An example is shown below:</p>
+<p>For secret "MY_SECRET", the final HTTP header would be</p>
 <blockquote>
-<p>Authorization:Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</p>
+<p><code>Authorization: Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</code></p>
 </blockquote>
-<h3 id="apisessions">/api/sessions</h3>
+<h3 id="post-apisessions">POST <code>/api/sessions</code></h3>
 <table>
 <thead>
 <tr>
@@ -365,19 +363,19 @@ Both operations have in common the header referred to authorization. It is imple
 </tr>
 <tr>
 <td><strong>URL</strong></td>
-<td>https://[YOUR_OPENVIDUSERVER_IP]/api/sessions</td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/sessions</td>
 </tr>
 <tr>
 <td><strong>Headers</strong></td>
-<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type: application/json</td>
 </tr>
 <tr>
-<td><strong>Body</strong> <em>*see notes below</em></td>
-<td>{"archiveMode": "ARCHIVE_MODE", "archiveLayout": "ARCHIVE_LAYOUT", "mediaMode": "MEDIA_MODE"}</td>
+<td><strong>Body</strong></td>
+<td><code>{"archiveMode": "ARCHIVE_MODE", "archiveLayout": "ARCHIVE_LAYOUT", "mediaMode": "MEDIA_MODE"}</code></td>
 </tr>
 <tr>
-<td><strong>Returns</strong></td>
-<td>{"id": "SESSIONID"}</td>
+<td><strong>Sample return</strong></td>
+<td><code>{"id": "wss://localhost:8443/jpifeuzfati5qaj8"}</code></td>
 </tr>
 </tbody>
 </table>
@@ -387,7 +385,7 @@ Both operations have in common the header referred to authorization. It is imple
 <li>All of them are optional (the Body of the POST operation may be empty)</li>
 <li>ARCHIVE_MODE<ul>
 <li><code>ALWAYS</code>: Automatic recording from the first user publishing until the last participant leaves the session</li>
-<li><code>MANUAL</code> (<em>default</em>) : If you want to manage when start and stop the recording. <em>NOT AVAILABLE YET: no recording at all if this Archive Mode is set</em></li>
+<li><code>MANUAL</code> (<em>default</em>) : If you want to manage when start and stop the recording</li>
 </ul>
 </li>
 <li>ARCHIVE_LAYOUT<ul>
@@ -402,7 +400,25 @@ Both operations have in common the header referred to authorization. It is imple
 </li>
 </ul>
 </blockquote>
-<h3 id="apitokens">/api/tokens</h3>
+<div></div>
+
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>id</code>: session identifier. Store it for generating tokens and starting session's recording. It is actually the URL where the client will connect to access the session</li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: session succesfully created and sessionId ready to be used</li>
+<li><code>400</code>: problem with body parameters</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="post-apitokens">POST <code>/api/tokens</code></h3>
 <table>
 <thead>
 <tr>
@@ -417,26 +433,26 @@ Both operations have in common the header referred to authorization. It is imple
 </tr>
 <tr>
 <td><strong>URL</strong></td>
-<td>https://[YOUR_OPENVIDUSERVER_IP]/api/tokens</td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/tokens</td>
 </tr>
 <tr>
 <td><strong>Headers</strong></td>
-<td>Authorization:Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type:application/json</td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type: application/json</td>
 </tr>
 <tr>
 <td><strong>Body</strong></td>
-<td>{"session": "SESSIONID", "role": "ROLE", "data": "DATA"}</td>
+<td><code>{"session": "SESSION_ID", "role": "ROLE", "data": "DATA"}</code></td>
 </tr>
 <tr>
-<td><strong>Returns</strong></td>
-<td>{"token": "TOKEN", "session": "SESSIONID", "role": "ROLE", "data": "DATA", "id": "TOKEN"}</td>
+<td><strong>Sample return</strong></td>
+<td><code>{"token": "tjyqiq2dw1j4fxjr", "session": "wss://localhost:8443/jpifeuzfati5qaj8", "role": "PUBLISHER", "data": "secure_user_data", "id": "tjyqiq2dw1j4fxjr"}</code></td>
 </tr>
 </tbody>
 </table>
 <blockquote>
 <p><strong>Body parameters</strong></p>
 <ul>
-<li>SESSIONID: the sessionId for which the token should be associated</li>
+<li>SESSION_ID: the sessionId for which the token should be associated</li>
 <li>ROLE <em>(See <a href="../../reference-docs/openvidu-java-client#openvidurole">OpenViduRole</a> section)</em><ul>
 <li><code>SUBSCRIBER</code></li>
 <li><code>PUBLISHER</code></li>
@@ -445,7 +461,350 @@ Both operations have in common the header referred to authorization. It is imple
 </li>
 <li>DATA: an optional string to associate any metadata to this token (usually participant's information)</li>
 </ul>
-</blockquote> 
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>token</code>: token value. Send it to one client to pass it as a parameter in openvidu-browser method <code>Session.connect()</code></li>
+<li><code>session</code>: same as in the body request</li>
+<li><code>role</code>: same as in the body request</li>
+<li><code>data</code>: same as in the body request</li>
+<li><code>id</code>: same value as <code>token</code></li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: token succesfully created and ready to be used by one client to connec to the associated session</li>
+<li><code>400</code>: problem with body parameters</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="post-apirecordingsstart">POST <code>/api/recordings/start</code></h3>
+<p><em>(since v1.8.0)</em></p>
+<table>
+<thead>
+<tr>
+<th><em>START SESSION RECORDING</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>POST</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/recordings/start</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type: application/json</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><code>{"session": "SESSION_ID"}</code></td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"createdAt": 1521196095981, "duration": 0, "hasAudio": true, "hasVideo": true, "id": "jpifeuzfati5qaj8", "name": "jpifeuzfati5qaj8", "sessionId": "wss://localhost:8443/jpifeuzfati5qaj8", "size": 0, "status": "started", "url": null}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Body parameters</strong></p>
+<ul>
+<li>SESSION_ID: the sessionId belonging to the session you want to start recording</li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
+<li><code>duration</code>: duration of the video file in seconds (0 until stop operation is called)</li>
+<li><code>hasAudio</code>: true if the recording has an audio track, false otherwise (currently fixed to <code>true</code>)</li>
+<li><code>hasVideo</code>: true if the recording has a video track, false otherwise (currently fixed to <code>true</code>)</li>
+<li><code>id</code>: recording identifier. Store it to perform other operations such as stop, get or delete the recording</li>
+<li><code>name</code>: name of the recording (currently same as <code>id</code>)</li>
+<li><code>sessionId</code>: session associated to the recording (same value as <code>session</code> in the body request)</li>
+<li><code>size</code>: size in bytes of the video file (0 until stop operation is called)</li>
+<li><code>status</code>: set to <code>"started"</code></li>
+<li><code>url</code>: set to <code>null</code></li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: the session has started to be recorded. The moment this response is retrieved, it means that the video file is already created and contains proper data, and that the recording can be stopped with guarantees</li>
+<li><code>404</code>: no session exists for the passed sessionId</li>
+<li><code>400</code>: the session has no connected participants</li>
+<li><code>409</code>: the session is not configured for using MediaMode <code>ROUTED</code> or it is already being recorded</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="post-apirecordingsstoprecording_id">POST <code>/api/recordings/stop/&lt;RECORDING_ID&gt;</code></h3>
+<p><em>(since v1.8.0)</em></p>
+<table>
+<thead>
+<tr>
+<th><em>STOP SESSION RECORDING</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>POST</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/recordings/stop/&lt;RECORDING_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"createdAt": 1521196095981, "duration": 20.88,, "hasAudio": true, "hasVideo": true, "id": "jpifeuzfati5qaj8", "name": "jpifeuzfati5qaj8", "sessionId": "wss://localhost:8443/jpifeuzfati5qaj8", "size": 3766979, "status": "stopped", "url": null}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
+<li><code>duration</code>: duration of the video file in seconds</li>
+<li><code>hasAudio</code>: true if the recording has an audio track, false otherwise (currently fixed to <code>true</code>)</li>
+<li><code>hasVideo</code>: true if the recording has a video track, false otherwise (currently fixed to <code>true</code>)</li>
+<li><code>id</code>: recording identifier</li>
+<li><code>name</code>: name of the recording (currently same as <code>id</code>)</li>
+<li><code>sessionId</code>: session associated to the recording</li>
+<li><code>size</code>: size in bytes of the video file</li>
+<li><code>status</code>: set to <code>"stopped"</code> or <code>"available"</code> depending on whether openvidu-server property <em>openvidu.recording.free-access</em> is false or true</li>
+<li><code>url</code>: set to <code>null</code> or <code>"https://YOUR_OPENVIDU_SERVER_IP/recordings/&lt;RECORDING_ID&gt;.mp4"</code> depending on whether openvidu-server property <em>openvidu.recording.free-access</em> is false or true</li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: the session has succesfully stopped from being recorded. The video file is ready to be reproduced</li>
+<li><code>400</code>: RECORDING_ID parameter not found in form url-encoded</li>
+<li><code>404</code>: no recording exists for the passed recording id</li>
+<li><code>406</code>: recording has <code>starting</code> status. Wait until <code>started</code> status before stopping the recording</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="get-apirecordingsrecording_id">GET <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
+<p><em>(since v1.8.0)</em></p>
+<table>
+<thead>
+<tr>
+<th><em>GET RECORDING INFO</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>GET</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/recordings/&lt;RECORDING_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"createdAt": 1521196095981, "duration": 20.88,, "hasAudio": true, "hasVideo": true, "id": "jpifeuzfati5qaj8", "name": "jpifeuzfati5qaj8", "sessionId": "wss://localhost:8443/jpifeuzfati5qaj8", "size": 3766979, "status": "stopped", "url": null}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
+<li><code>duration</code>: duration of the video file in seconds (0 until stop operation is called)</li>
+<li><code>hasAudio</code>: true if the recording has an audio track, false otherwise (currently fixed to <code>true</code>)</li>
+<li><code>hasVideo</code>: true if the recording has a video track, false otherwise (currently fixed to <code>true</code>)</li>
+<li><code>id</code>: recording identifier. Store it to perform other operations such as stop, get or delete the recording</li>
+<li><code>name</code>: name of the recording (currently same as <code>id</code>)</li>
+<li><code>sessionId</code>: session associated to the recording (same value as <code>session</code> in the body request)</li>
+<li><code>size</code>: size in bytes of the video file (0 until stop operation is called)</li>
+<li><code>status</code>: status of the recording (<code>"starting"</code>, <code>"started"</code>, <code>"stopped"</code>, <code>"available"</code>, <code>"failed"</code>)</li>
+<li><code>url</code>: set to <code>null</code> until stop operation is called. Then can be <code>null</code> or <code>"https://YOUR_OPENVIDU_SERVER_IP/recordings/&lt;RECORDING_ID&gt;.mp4"</code> depending on whether openvidu-server property <em>openvidu.recording.free-access</em> is false or true</li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: the recording information has been succesfully retrieved</li>
+<li><code>404</code>: no recording exists for the passed recording id</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="get-apirecordings">GET <code>/api/recordings</code></h3>
+<p><em>(since v1.8.0)</em></p>
+<table>
+<thead>
+<tr>
+<th><em>LIST RECORDINGS INFO</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>GET</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/recordings</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em></td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"count": 2, "items": [{"duration": 132.08, "hasVideo": true, "createdAt": 1521202349460, "hasAudio": true, "size": 22887561, "name": "n0kcws1evvn3esmo", "id": "n0kcws1evvn3esmo", "sessionId": "wss://localhost:8443/n0kcws1evvn3esmo", "url": "https://localhost:8443/recordings/n0kcws1evvn3esmo.mp4", "status": "available"}, {"duration": 20.88, "hasVideo": true, "createdAt": 1521200592175, "hasAudio": true, "size": 3766979, "name": "gm0hdsv6n8asjgcs", "id": "gm0hdsv6n8asjgcs", "sessionId": "wss://localhost:8443/gm0hdsv6n8asjgcs", "url": "https://localhost:8443/recordings/gm0hdsv6n8asjgcs.mp4", "status": "available"}]}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>count</code>: number of total recordings</li>
+<li><code>items</code>: array of recording information in JSON format. Each item has the same properties as stated in the return value of method <a href="../../reference-docs/REST-API/#get-apirecordingsrecording_id">GET /api/recordings/<RECORDING_ID></a></li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: all of the available recording information has been succesfully retrieved</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="delete-apirecordingsrecording_id">DELETE <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
+<p><em>(since v1.8.0)</em></p>
+<table>
+<thead>
+<tr>
+<th><em>DELETE RECORDING</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/recordings/&lt;RECORDING_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:[YOUR_SECRET])</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><em>Returns nothing</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>204</code>: the video file and all of its metadata has been succesfully deleted from the host</li>
+<li><code>404</code>: no recording exists for the passed recording id</li>
+<li><code>409</code>: the recording has <code>"started"</code> status. Stop it before deletion</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getId()</td>
+<td>String</td>
+<td></td>
+<td>Returns the recording identifier</td>
+</tr>
+<tr>
+<td>getName()</td>
+<td>String</td>
+<td></td>
+<td>Returns the recording name</td>
+</tr>
+<tr>
+<td>getSessionId()</td>
+<td>String</td>
+<td></td>
+<td>Returns the session identifier associated to this recording</td>
+</tr>
+<tr>
+<td>getCreatedAt()</td>
+<td>long</td>
+<td></td>
+<td>Returns the time when the recording started (UTC milliseconds)</td>
+</tr>
+<tr>
+<td>getSize()</td>
+<td>long</td>
+<td></td>
+<td>Returns the size of the recording in bytes (0 until the recording is stopped)</td>
+</tr>
+<tr>
+<td>getDuration()</td>
+<td>double</td>
+<td></td>
+<td>Returns the duration of the recording in seconds (0 until the recording is stopped)</td>
+</tr>
+<tr>
+<td>hasAudio()</td>
+<td>boolean</td>
+<td></td>
+<td>Returns if the recording has audio tracks (currently fixed to true)</td>
+</tr>
+<tr>
+<td>hasVideo()</td>
+<td>boolean</td>
+<td></td>
+<td>Returns if the recording has video tracks (currently fixed to true)</td>
+</tr>
+<tr>
+<td>getStatus()</td>
+<td><a href="#archivestatus">Archive.Status</a></td>
+<td></td>
+<td>Returns the status of the recording</td>
+</tr>
+</tbody>
+</table> 
 						</div>
 					</div> <footer>
 <hr>
