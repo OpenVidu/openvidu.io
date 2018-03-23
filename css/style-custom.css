@@ -515,6 +515,10 @@ img.img-more-info {
     margin-bottom: 0;
 }
 
+.acknowledgments-footer {
+    width: 100%;
+}
+
 @media screen and (min-width: 992px) {
     .more-info-tutorials-int {
         min-height: 150px;
@@ -532,6 +536,7 @@ img.img-more-info {
         padding-left: 0;
         padding-right: 30px;
     }
+
 }
 
 @media screen and (max-width: 991px) {

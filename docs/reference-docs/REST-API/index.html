@@ -738,73 +738,7 @@ active: documentation
 <li><code>404</code>: no recording exists for the passed recording id</li>
 <li><code>409</code>: the recording has <code>"started"</code> status. Stop it before deletion</li>
 </ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>getId()</td>
-<td>String</td>
-<td></td>
-<td>Returns the recording identifier</td>
-</tr>
-<tr>
-<td>getName()</td>
-<td>String</td>
-<td></td>
-<td>Returns the recording name</td>
-</tr>
-<tr>
-<td>getSessionId()</td>
-<td>String</td>
-<td></td>
-<td>Returns the session identifier associated to this recording</td>
-</tr>
-<tr>
-<td>getCreatedAt()</td>
-<td>long</td>
-<td></td>
-<td>Returns the time when the recording started (UTC milliseconds)</td>
-</tr>
-<tr>
-<td>getSize()</td>
-<td>long</td>
-<td></td>
-<td>Returns the size of the recording in bytes (0 until the recording is stopped)</td>
-</tr>
-<tr>
-<td>getDuration()</td>
-<td>double</td>
-<td></td>
-<td>Returns the duration of the recording in seconds (0 until the recording is stopped)</td>
-</tr>
-<tr>
-<td>hasAudio()</td>
-<td>boolean</td>
-<td></td>
-<td>Returns if the recording has audio tracks (currently fixed to true)</td>
-</tr>
-<tr>
-<td>hasVideo()</td>
-<td>boolean</td>
-<td></td>
-<td>Returns if the recording has video tracks (currently fixed to true)</td>
-</tr>
-<tr>
-<td>getStatus()</td>
-<td><a href="#archivestatus">Archive.Status</a></td>
-<td></td>
-<td>Returns the status of the recording</td>
-</tr>
-</tbody>
-</table> 
+</blockquote> 
 						</div>
 					</div> <footer>
 <hr>
