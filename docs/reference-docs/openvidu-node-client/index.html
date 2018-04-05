@@ -651,25 +651,25 @@ session.getSessionId(function(sessionId) {
 <td>archiveLayout()</td>
 <td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
 <td><code>ArchiveLayout:archiveLayout</code></td>
-<td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
+<td>How the videos will be distributed in the recording layout</td>
 </tr>
 <tr>
 <td>archiveMode()</td>
 <td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
 <td><code>ArchiveMode:archiveMode</code></td>
-<td>The role associated to this token</td>
+<td>When will the session recording process start</td>
 </tr>
 <tr>
 <td>mediaMode()</td>
 <td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
 <td><code>MediaMode:mediaMode</code></td>
-<td>The role associated to this token</td>
+<td>How the media streams will be transmitted (as p2p direct connections between clients or routed through OpenVidu Media Server). Recording service requires MediaMode.ROUTED</td>
 </tr>
 <tr>
 <td>build()</td>
 <td><a href="#sessionproperties">SessionProperties</a></td>
 <td></td>
-<td>Returns a new <strong>TokenOptions</strong> object with the stablished properties. Default values if methods <em>data()</em> and <em>role()</em> are not called are an empty string and OpenViduRole.PUBLISHER, respectively</td>
+<td>Returns a new <strong>SessionProperties</strong> object with the stablished properties. Default values if methods <em>archiveLayout()</em>, <em>archiveMode()</em> <em>mediaMode()</em> are not called are BEST_FIT, MANUAL and ROUTED, respectively</td>
 </tr>
 </tbody>
 </table>
