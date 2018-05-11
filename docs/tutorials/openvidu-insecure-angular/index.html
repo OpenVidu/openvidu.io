@@ -547,7 +547,7 @@ this.getToken().then(token =&gt; {
 </code></pre>
 
 <p>Now we need a token from OpenVidu Server. In a production environment we would perform this operation in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we are actually using OpenVidu Node Client, taking advantage of the fact that we have a <em>package.json</em> in which we can include this library very easily. But remember: do not retrieve tokens from OpenVidu Server directly from your clients. Do it from your application's backend.</p>
-<p>You can inspect method <code>getToken()</code> in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L160">GitHub repo</a>.</p>
+<p>You can inspect method <code>getToken()</code> in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-angular/src/app/app.component.ts#L162">GitHub repo</a>.</p>
 <hr />
 <h4 id="finally-connect-to-the-session-and-publish-your-webcam">Finally connect to the session and publish your webcam:</h4>
 <pre><code class="typescript">// --- 4) Connect to the session with a valid user token ---

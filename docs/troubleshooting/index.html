@@ -425,10 +425,10 @@ active: documentation
 </code></pre>
 <p>This applies to:</p>
 <ul>
-<li><strong>openvidu-hello-world</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L64">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L80">here</a></li>
-<li><strong>openvidu-insecure-js</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#L195">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#L211">here</a></li>
-<li><strong>openvidu-insecure-angular</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L163">here</a></li>
-<li><strong>openvidu-getaroom</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-getaroom/web/app.js#L277">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-getaroom/web/app.js#L293">here</a></li>
+<li><strong>openvidu-hello-world</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-hello-world/web/app.js#L64">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-hello-world/web/app.js#L80">here</a></li>
+<li><strong>openvidu-insecure-js</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-js/web/app.js#L195">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-js/web/app.js#L211">here</a></li>
+<li><strong>openvidu-insecure-angular</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-angular/src/app/app.component.ts#L163">here</a></li>
+<li><strong>openvidu-getaroom</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-getaroom/web/app.js#L277">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-getaroom/web/app.js#L293">here</a></li>
 </ul>
 <p><br></p>
 <blockquote>
@@ -484,7 +484,7 @@ active: documentation
 <li>You will generally want your application to have its own server-side. Why?</li>
 </ul>
 <p>Well, it is really not necessary. You can have a pure client-side application if you want. Just check any of these tutorials:<br><a href="../tutorials/openvidu-hello-world/">openvidu-hello-world</a>, <a href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>, <a href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a></p>
-<p>The problem here is pretty evident: if you don't have any kind of server side to control your users, anyone can use your app. In fact, you can respectively see <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L48">here</a>, <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#l171">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-getaroom/web/app.js#L251">here</a> a comment warning about this matter in every insecure tutorial. Due to the lack of a server-side in these tutorials, we have no choice but to embed the REST API consumption methods in our JavaScript code, which includes hardcoding our secret in the JS client code.</p>
+<p>The problem here is pretty evident: if you don't have any kind of server side to control your users, anyone can use your app. In fact, you can respectively see <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-hello-world/web/app.js#L46">here</a>, <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-js/web/app.js#L177">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-getaroom/web/app.js#L259">here</a> a comment warning about this matter in every insecure tutorial. Due to the lack of a server-side in these tutorials, we have no choice but to embed the REST API consumption methods in our JavaScript code, which includes hardcoding our secret in the JS client code.</p>
 <p><br></p>
 <blockquote>
 <p><strong>IMPORTANT</strong>: Do NOT include your SECRET in your JavaScript or HTML files in a production environment!</p>

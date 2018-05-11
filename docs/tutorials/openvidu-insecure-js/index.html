@@ -538,7 +538,7 @@ getToken(mySessionId).then(token =&gt; {
 <li>First ajax request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
 <li>Second ajax request performas a POST to <code>/api/tokens</code> (we send a <code>sessionId</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#L187">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-js/web/app.js#L187">GitHub repo</a>.</p>
 <hr />
 <h4 id="finally-connect-to-the-session-using-the-token-and-publish-your-webcam">Finally connect to the session using the token and publish your webcam:</h4>
 <pre><code class="javascript">// --- 4) Connect to the session with a valid user token ---
