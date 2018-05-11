@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -350,22 +350,9 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="create-a-session">Create a session</h1>
-<p>You must get an <code>OpenVidu</code> object and call <code>initSession</code> method. This must receive just one string parameter: the <code>sessionID</code>, which unambiguously identify your session:</p>
-<ul>
-<li>
-<p>If you have a server-side, you should ask for the <code>sessionId</code> to OpenVidu Server (thanks to the <a href="../../reference-docs//REST-API/">REST API</a>, <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>) and return it to the client to use it on <code>initSession</code> method.</p>
-</li>
-<li>
-<p>If you don't have a server side, you willl have to build <code>sessionId</code> param by yourself with the following format (this is not recommended for production as the secret must be hardcoded in your JavaScript code):</p>
-</li>
-</ul>
-<p style="text-align: center"><strong>"wss://"</strong> + <code>OPENVIDU_IP</code> + <strong>":8443/"</strong> + <code>SESSION_IDENTIFIER</code> + <strong>"?secret="</strong> + <code>OPENVIDU_SECRET</code></p>
-
-<pre><code class="javascript">// Get sessionId by asking OpenVidu Server from your application server
-// and then returning it here or generate it by your own with the format above
-
-var OV = new OpenVidu();
-var session = OV.initSession(sessionId);
+<p>You must get an <code>OpenVidu</code> object and call <code>initSession</code> method:</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+var session = OV.initSession();
 </code></pre> 
 						</div>
 					</div> <footer>

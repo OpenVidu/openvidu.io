@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -381,7 +381,7 @@ In order to use your JKS, just set the following values for these properties on 
 </ul>
 <p><br></p>
 <h5 id="example_1">Example</h5>
-<pre><code class="console">docker run -d -p 8443:8443 --rm -v /ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:ro -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=YOUR_SECRET -e server.ssl.key-store=/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks -e server.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -e server.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu/openvidu-server-kms
+<pre><code class="console">docker run -d -p 4443:4443 --rm -v /ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:ro -e openvidu.secret=YOUR_SECRET -e server.ssl.key-store=/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks -e server.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -e server.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu/openvidu-server-kms
 </code></pre>
 
 <hr />

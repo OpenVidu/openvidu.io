@@ -1,0 +1,818 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - OpenVidu Server CDR
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('OpenVidu Server CDR')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('OpenVidu Server CDR')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>How do I ... ?</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Reference Documentation</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">OpenVidu Server CDR</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/custom-certificate/">Using your own certificate</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../releases/">Releases</a> 
+</li>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">OpenVidu Server Call Detail Record</h2>
+
+<hr>
+
+<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every media connection established by each one of the users (sending or receiving). To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>. The CDR file will be located under <code>log/</code> folder in the same path as your Java executable.</p>
+<p>The record is a plain text file containing one standard JSON entry for each line. All JSON entries have the following structure:</p>
+<p><code>{"EVENT_NAME": {"sessionId": "SESSION_ID", "timestamp": TIMESTAMP, "PROP_1": "VALUE_1","PROP_2": "VALUE_2", ... }}</code></p>
+<p>So every entry is a JSON object identified by a specific event name, and all of them have as properties the <code>sessionId</code> identifying the video-session for which this event was registered and the <code>timestamp</code>. Besides this two common properties, there are custom properties for every specific event with useful information. The complete list of possible JSON entries is available below:</p>
+<hr>
+
+<h4 id="sessioncreated">sessionCreated</h4>
+<p>Recorded when a new session has been created.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1516292370848}}
+</code></pre>
+
+<hr>
+
+<h4 id="sessiondestroyed">sessionDestroyed</h4>
+<p>Recorded when a session has finished.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the session started</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>endTime</code></td>
+<td>Time when the session finished</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Total duration of the session</td>
+<td>Seconds</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>Why the session was destroyed</td>
+<td>[<code>"lastParticipantLeft"</code>,<br><code>"openviduServerStopped"</code>]</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;duration&quot;:9,&quot;reason&quot;:&quot;lastParticipantLeft&quot;,&quot;startTime&quot;:1523971683579,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1523971692891,&quot;timestamp&quot;:1523971692891}}
+</code></pre>
+
+<hr>
+
+<h4 id="participantjoined">participantJoined</h4>
+<p>Recorded when a user has connected to a session.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;participantJoined&quot;:{&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1523971683629}}
+</code></pre>
+
+<hr>
+
+<h4 id="participantleft">participantLeft</h4>
+<p>Recorded when a user has left a session.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the participant joined the session</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>endTime</code></td>
+<td>Time when the participant left the session</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Total duration of the participant's connection to the session</td>
+<td>Seconds</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>How the participant left the session</td>
+<td>[<code>"unsubscribe"</code>,<br><code>"unpublish"</code>,<br><code>"disconnect"</code>,<br><code>"networkDisconnect"</code>,<br><code>"openviduServerStopped"</code>]</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;participantLeft&quot;:{&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;duration&quot;:9,&quot;reason&quot;:&quot;disconnect&quot;,&quot;startTime&quot;:1523971683629,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1523971692866,&quot;timestamp&quot;:1523971692866}}
+</code></pre>
+
+<hr>
+
+<h4 id="webrtcconnectioncreated">webrtcConnectionCreated</h4>
+<p>Recorded when a new media stream has been established. Can be an "INBOUND" connection (the user is receiving a stream from a publisher of the session) or an "OUTBOUND" connection (the user is a publishing a stream to the session).</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>connection</code></td>
+<td>Whether the media connection is an inbound connection (the participant is receiving media from OpenVidu) or an outbound connection (the participant is sending media to OpenVidu)</td>
+<td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
+</tr>
+<tr>
+<td><code>receivingFrom</code></td>
+<td>If <code>connection</code> is <code>"INBOUND"</code>, the participant from whom the media stream is being received</td>
+<td>A string with the participant (sender) unique identifier</td>
+</tr>
+<tr>
+<td><code>audioEnabled</code></td>
+<td>Whether the media connection is sending audio or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoEnabled</code></td>
+<td>Whether the media connection is sending video or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoSource</code></td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the type of video that is being transmitted</td>
+<td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
+</tr>
+<tr>
+<td><code>videoFramerate</code></td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the framerate of the transmitted video</td>
+<td>Number of fps</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;INBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;videoEnabled&quot;:true,&quot;receivingFrom&quot;:&quot;eedki0mookh577mx&quot;,&quot;timestamp&quot;:1523971686215,&quot;videoFramerate&quot;:30}}
+</code></pre>
+
+<hr>
+
+<h4 id="webrtcconnectiondestroyed">webrtcConnectionDestroyed</h4>
+<p>Recorded when any media stream connection is closed.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>connection</code></td>
+<td>Whether the media connection is an inbound connection (the participant is receiving media from OpenVidu) or an outbound connection (the participant is sending media to OpenVidu)</td>
+<td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
+</tr>
+<tr>
+<td><code>receivingFrom</code></td>
+<td>If <code>connection</code> is <code>"INBOUND"</code>, the participant from whom the media stream is being received</td>
+<td>A string with the participant (sender) unique identifier</td>
+</tr>
+<tr>
+<td><code>audioEnabled</code></td>
+<td>Whether the media connection is sending audio or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoEnabled</code></td>
+<td>Whether the media connection is sending video or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>videoSource</code></td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the type of video that is being transmitted</td>
+<td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
+</tr>
+<tr>
+<td><code>videoFramerate</code></td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the framerate of the transmitted video</td>
+<td>Number of fps</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the media connection was established</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>endTime</code></td>
+<td>Time when the media connection was disposed</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Total duration of the media connection</td>
+<td>Seconds</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>How the WebRTC connection was destroyed</td>
+<td>[<code>"unsubscribe"</code>,<br><code>"unpublish"</code>,<br><code>"disconnect"</code>,<br><code>"networkDisconnect"</code>,<br><code>"openviduServerStopped"</code>]</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;reason&quot;:&quot;disconnect&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;videoEnabled&quot;:true,&quot;receivingFrom&quot;:&quot;eedki0mookh577mx&quot;,&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;duration&quot;:6,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;INBOUND&quot;,&quot;startTime&quot;:1523971686215,&quot;endTime&quot;:1523971692831,&quot;timestamp&quot;:1523971692831,&quot;videoFramerate&quot;:30}}
+</code></pre>
+
+<hr>
+
+<h4 id="recordingstarted">recordingStarted</h4>
+<p>Recorded when a new session has started to be recorded</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>Unique identifier of the recording</td>
+<td>A string with the recording unique identifier</td>
+</tr>
+<tr>
+<td><code>recordingLayout</code></td>
+<td>The type of layout used in the recording</td>
+<td>A <a href="../openvidu-java-client/#recordinglayout"><code>RecordingLayout</code></a> value (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+</tr>
+<tr>
+<td><code>hasAudio</code></td>
+<td>Wheter the recording file has audio or not</td>
+<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+</tr>
+<tr>
+<td><code>hasVideo</code></td>
+<td>Wheter the recording file has video or not</td>
+<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>The size of the video file</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Duration of the video file</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;recordingStarted&quot;:{&quot;duration&quot;:0,&quot;hasVideo&quot;:true,&quot;hasAudio&quot;:true,&quot;size&quot;:0,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;id&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;layout&quot;:&quot;BEST_FIT&quot;,&quot;timestamp&quot;:1523973259519}}
+</code></pre>
+
+<hr>
+
+<h4 id="recordingstopped">recordingStopped</h4>
+<p>Recorded when a new session has stopped being recorded</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>Unique identifier of the recording</td>
+<td>A string with the recording unique identifier</td>
+</tr>
+<tr>
+<td><code>recordingLayout</code></td>
+<td>The type of layout used in the recording</td>
+<td>A <a href="../openvidu-java-client/#recordinglayout"><code>RecordingLayout</code></a> value (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+</tr>
+<tr>
+<td><code>hasAudio</code></td>
+<td>Wheter the recording file has audio or not</td>
+<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+</tr>
+<tr>
+<td><code>hasVideo</code></td>
+<td>Wheter the recording file has video or not</td>
+<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>The size of the video file</td>
+<td>Bytes</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Duration of the video file</td>
+<td>Seconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;recordingStopped&quot;:{&quot;duration&quot;:4,&quot;hasVideo&quot;:true,&quot;hasAudio&quot;:true,&quot;size&quot;:4919937,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;id&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;layout&quot;:&quot;BEST_FIT&quot;,&quot;timestamp&quot;:1523973286992}}
+</code></pre>
+
+<p><br></p> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../deployment/deploying-demos-aws/" class="btn btn-xs btn-primary float-right" title="Deploying OpenVidu Demos on AWS (TUTORIAL)">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-server-params/" class="btn btn-xs btn-primary" title="OpenVidu Server configuration"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/reference-docs/openvidu-server-cdr.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

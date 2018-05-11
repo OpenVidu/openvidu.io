@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -352,37 +352,36 @@ active: documentation
 							 <h1 id="share-data-between-users">Share data between users</h1>
 <p>Whatever app you are developing, chances are you will need to pass some data for each user, at least a nickname. You can do it in two different places:</p>
 <ul>
-<li>
-<p><strong>openvidu-browser</strong>: when calling <code>session.connect</code> method</p>
-<pre><code>session.connect(token, DATA, function (error) { ... });
+<li><strong>Client-Side</strong>: when calling <code>Session.connect</code> method in openvidu-browser:</li>
+</ul>
+<pre><code class="javascript">session.connect(token, &quot;USER_DATA&quot;)
+    .then( ... )
+    .catch( ... );
 </code></pre>
-</li>
+
+<ul>
 <li>
-<p><strong>API REST</strong>: when asking for a token to <em>/api/tokens</em>, you can pass data as third parameter in the BODY of the POST request </p>
-<pre><code>{“session”: “sessionId”, “role”: “role”, “data”: "DATA"}
-</code></pre>
+<p><strong>Server-Side</strong>: when generating a token</p>
+<ul>
+<li><a href="../../reference-docs/REST-API#post-apitokens">API REST</a>: add body parameter <code>"data"</code> to the POST operation</li>
+<li><a href="../../reference-docs/openvidu-java-client#generate-a-token">openvidu-java-client</a>: construct TokenOptions with <code>TokenOptions.Builder().data("USER_DATA").build()</code></li>
+<li><a href="../../reference-docs/openvidu-node-client#generate-a-token">openvidu-node-client</a>: construct TokenOptions with <code>{data: "USER_DATA"}</code> <br><br></li>
+</ul>
 </li>
 </ul>
-<blockquote>
-<p>Java and Node clients (<a href="../../reference-docs/openvidu-java-client#tokenoptionsbuilder">openvidu-java-client</a> and <a href="../../reference-docs/openvidu-node-client#tokenoptionsbuilder">openvidu-node-client</a>) allow you to pass data when creating a Token object: </br>
-<code>tokenOptions = new TokenOptions.Builder().data("DATA").build();</code></p>
-</blockquote>
 <p>The result will be that in all clients, <em>Connection</em> objects will have in their <em>data</em> property the pertinent value you have provided for each user. So, an easy way to get the data associated to any user would be:</p>
-<pre><code class="javascript">session.on('streamCreated', function (event) {
-    session.subscribe(event.stream, 'subscriber');
-    console.log('USER DATA: ' + event.stream.connection.data);
+<pre><code class="javascript">session.on(&quot;streamCreated&quot;, function (event) {
+    session.subscribe(event.stream, &quot;subscriber&quot;);
+    console.log(&quot;USER DATA: &quot; + event.stream.connection.data);
 });
 </code></pre>
 
-<p>Some clarifications:</p>
+<p><br>
+Some clarifications:</p>
 <ul>
-<li>
-<p><em>Connection.data</em> will be a simple string if you have provided data only with one of the methods, and will be a string with the following format if you provide data both from openvidu-browser and your backend: "OPENVIDUBROWSER_DATA%/%APIREST_DATA" </p>
-</li>
-<li>
-<p>Using only first option is not secure, as clients could modify the value of the second parameter. It is intended only in development environments. If you want total control over shared data, please use the second way.</p>
-</li>
-<li>You can choose whatever format you like for the data string, but if you are planning to share more than a simple field, maybe a standard format as JSON would be a wise choice.</li>
+<li>Using only first option is not secure, as clients could modify the value of the second parameter. It is intended for development environments or non critical data. If you want total control over shared data, please use the server-side way.</li>
+<li><em>Connection.data</em> will be a simple string if you have provided data only with one of the methods, and will be a string with the following format if you provide data both from openvidu-browser and your backend: <code>"CLIENT_SIDE_DATA%/%SERVER_SIDE_DATA"</code> (both separated by string <code>%/%</code>).</li>
+<li>You can choose whatever format you like for the data string, but if you are planning to share more than a simple field, maybe a standard format as JSON would be a wise choice. Method <code>Session.connect</code> in Openvidu Browser directly admits as data parameter a standard object (it will be finally stringified).</li>
 </ul> 
 						</div>
 					</div> <footer>

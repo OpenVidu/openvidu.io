@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -353,27 +353,37 @@ active: documentation
 <p>You can publish a stream after joining a session: get a <code>Publisher</code> object through OpenVidu object (<code>OpenVidu.initPublisher</code>) and publish it with <code>Session</code> object.</p>
 <pre><code class="javascript">// After joining a session...
 
-var publisher = OV.initPublisher('html-id');
+var publisher = OV.initPublisher(targetElement);
 // Register all the events you want with 'publisher.on(...)'
 session.publish(publisher);
 </code></pre>
 
-<p><code>initPublisher</code> method will append to DOM a new HTML video element inside the element with id <code>html-id</code>, showing your camera. You can then publish it to the session whenever you want (perhaps you want the user to confirm that his camera is working well before publishing it).</p>
-<p>You can add two more parameters to <code>initPublisher</code> method: an object with properties about your publisher stream and a callback function to be executed in case any error takes places during publisher initialization:</p>
+<ul>
+<li>
+<p><code>OpenVidu.initPublisher</code> method will insert into DOM a new HTML video element inside the element <code>targetElement</code>, showing your camera. This target element can be an <code>HTMLElement</code> or its <code>id</code> attribute, and you can also indicate how to insert the video according to it (see <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#insertmode">PublisherProperties.insertMode</a>). You can then publish it to the session whenever you want (perhaps you want the user to confirm that the camera is working well before publishing it).</p>
+</li>
+<li>
+<p><code>Session.publish</code> method will make <a href="../../../api/openvidu-browser/classes/publisher.html">Publisher</a> object trigger <code>streamCreated</code> event in the local user that is publishing and will make <a href="../../../api/openvidu-browser/classes/session.html">Session</a> object trigger <code>streamCreated</code> event in every other remote user connected to the session. <br><br></p>
+</li>
+</ul>
+<p>You can add two more parameters to <code>initPublisher</code> method: an object with properties about your publisher stream and a callback function to be executed just after the method finishes and before the publisher object dispatches <code>accessAllowed</code> or <code>accessDenied</code> event:</p>
 <pre><code class="javascript">OV.initPublisher(
-    'html-element-id',
+    targetElement,
     {
-        audio: true,        // Whether you want to transmit audio or not
-        video: true,        // Whether you want to transmit video or not
-        audioActive: true,  // Whether you want to start the publishing with your audio unmuted or muted
-        videoActive: true,  // Whether you want to start the publishing with your video enabled or disabled
-        quality: 'MEDIUM',  // The quality of your video ('LOW', 'MEDIUM', 'HIGH')
-        screen: false       // true to get your screen as video source instead of your camera
-                            // See 'How do I...?' -&gt; 'Screen share' section to learn more
+        audioSource: undefined, // The source of audio. If undefined default audio input
+        videoSource: undefined, // The source of video. If undefined default video input
+        publishAudio: true,     // Whether you want to start the publishing with audio unmuted or muted
+        publishVideo: true,     // Whether you want to start the publishing with video enabled or disabled
+        resolution: '640x480',  // The resolution of your video
+        frameRate: 30,          // The frame rate of your video
+        insertMode: 'APPEND',   // How the video will be inserted according to targetElement
+        mirror: false           // Whether to mirror your local video or not
     },
-    function(error) {       // Function to be executed in case the Publisher initialization fails
+    (error) =&gt; {                // Function to be executed when the method finishes
         if (error) {
-            console.log('Error while initializing publisher: ', error);
+            console.error('Error while initializing publisher: ', error);
+        } else {
+            console.log('Publisher successfully initialized');
         }
     }
 );
@@ -390,10 +400,9 @@ newPublisher = OV.initPublisher(newOptions);
 session.publish(newPublisher);
 </code></pre>
 
-<p>In future updates one user will be able to publish more than one Publisher at once.</p>
 <p><br/></p>
 <blockquote>
-<p><strong>NOTE</strong>: only users with Role <code>PUBLISHER</code> or <code>MODERATOR</code> can call <code>Session.publish</code> method (see <a href="../../reference-docs/openvidu-java-client#openvidurole">OpenViduRole</a> section)</p>
+<p><strong>NOTE</strong>: only users with Role <code>PUBLISHER</code> or <code>MODERATOR</code> can call <code>Session.publish</code> method. You can check <a href="../../../api/openvidu-node-client/enums/openvidurole.html">OpenViduRole</a> section of OpenVidu Node Client for a complete description</p>
 </blockquote> 
 						</div>
 					</div> <footer>

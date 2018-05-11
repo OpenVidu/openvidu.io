@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -353,478 +353,46 @@ active: documentation
 
 <hr>
 
-<h2 id="code-sample">Code sample</h2>
-<p><em>(&gt;= v1.7.0)</em></p>
+<h3>Check <a href="../../../api/openvidu-java-client/">JavaDoc documentation</a></h3>
+
+<hr>
+
+<h2 id="code-samples">Code samples</h2>
+<h3 id="create-a-session">Create a session</h3>
 <pre><code class="java">OpenVidu openvidu = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
 SessionProperties properties = new SessionProperties.Builder().build();
 Session session = openVidu.createSession(properties);
-
-// Getting a sessionId
-String sessionId = session.getSessionId();
-
-// Getting a token
-TokenOptions tokenOptions = new TokenOptions.Builder().build();
-String token = session.generateToken(tokenOptions);
-
-// Store all the objects you need for later use and return 'sessionId' and 'token' to the client
 </code></pre>
 
-<p><br>
-<hr></p>
-<h2 id="api">API</h2>
-<p><br></p>
-<blockquote>
-<p>NOTE: all input parameters ("Parameters" columns) are listed in strict order, optional ones in <em>italics</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Class</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="#openvidu">OpenVidu</a></td>
-<td>Use it to create sessions and manage recordings</td>
-</tr>
-<tr>
-<td><a href="#session">Session</a></td>
-<td>Allows for the creation of tokens</td>
-</tr>
-<tr>
-<td><a href="#tokenoptions">TokenOptions</a></td>
-<td>Customize each token with this class when generating them</td>
-</tr>
-<tr>
-<td><a href="#openvidurole">OpenViduRole</a></td>
-<td>Enum that defines the values accepted by <em>TokenOptions.Builder.role(OpenViduRole role)</em> method</td>
-</tr>
-<tr>
-<td><a href="#sessionproperties">SessionProperties</a></td>
-<td>Customize each session with this class when creating them</td>
-</tr>
-<tr>
-<td><a href="#mediamode">MediaMode</a></td>
-<td>Enum that defines the type of connections in a session: p2p or through OpenVidu Server</td>
-</tr>
-<tr>
-<td><a href="#archivemode">ArchiveMode</a></td>
-<td>Enum that defines if automatically start the recording of a session or if it must be explicitly invoked</td>
-</tr>
-<tr>
-<td><a href="#archivelayout">ArchiveLayout</a></td>
-<td>Enum that defines the layout for a session recording</td>
-</tr>
-<tr>
-<td><a href="#archive">Archive</a></td>
-<td>Represents one recording file</td>
-</tr>
-<tr>
-<td><a href="#archivestatus">Archive.Status</a></td>
-<td>Status of the recording</td>
-</tr>
-</tbody>
-</table>
-<h4 id="openvidu"><strong>OpenVidu</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OpenVidu()</td>
-<td></td>
-<td><code>String:urlOpenViduServer</code><br><code>String:secret</code></td>
-<td>The constructor receives the URL of your OpenVidu Server and the secret shared with it</td>
-</tr>
-<tr>
-<td>createSession()</td>
-<td><a href="#session">Session</a></td>
-<td><em><code>SessionProperties:properties</code></em></td>
-<td>Get a Session object by calling this method (optionally configured with <code>properties</code> parameter). You can then store it as you want for later use</td>
-</tr>
-<tr>
-<td>startRecording()</td>
-<td><a href="#archive">Archive</a></td>
-<td><code>String:sessionId</code></td>
-<td>Start the recording for the session with id <code>sessionId</code>. Once the method returns, the recording can be stopped with guarantees</td>
-</tr>
-<tr>
-<td>stopRecording()</td>
-<td><a href="#archive">Archive</a></td>
-<td><code>String:recordingId</code></td>
-<td>Stop the recording with id <code>recordingId</code></td>
-</tr>
-<tr>
-<td>getRecording()</td>
-<td><a href="#archive">Archive</a></td>
-<td><code>String:recordingId</code></td>
-<td>Get the updated information of the recording with id <code>recordingId</code></td>
-</tr>
-<tr>
-<td>listRecordings()</td>
-<td>List&lt;<a href="#archive">Archive</a>&gt;</td>
-<td></td>
-<td>Get the information of all recordings</td>
-</tr>
-<tr>
-<td>deleteRecording()</td>
-<td></td>
-<td><code>String:recordingId</code></td>
-<td>Delete the recording with id <code>recordingId</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="session"><strong>Session</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>generateToken()</td>
-<td>String</td>
-<td><em><code>TokenOptions:tokenOptions</code></em></td>
-<td>The value returned is required in the client side just as the sessionId in order to connect to a session. It is a single-use-only token</td>
-</tr>
-<tr>
-<td>getSessionId()</td>
-<td>String</td>
-<td></td>
-<td>Returns the unique identifier of the session. You will need to return this parameter to the client side to pass it during the connection process to the session</td>
-</tr>
-<tr>
-<td>getProperties()</td>
-<td><a href="#sessionproperties">SessionProperties</a></td>
-<td></td>
-<td>Returns the properties of the session. These define if the media streams will pass through OpenVidu Server or not and the configuration for the sessin recording (if desired)</td>
-</tr>
-</tbody>
-</table>
-<h4 id="tokenoptions"><strong>TokenOptions</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>getData()</td>
-<td>String</td>
-<td></td>
-<td>Returns the metadata associated to the token</td>
-</tr>
-<tr>
-<td>getRole()</td>
-<td><a href="#openvidurole">OpenViduRole</a></td>
-<td></td>
-<td>Returns the role associated to the token</td>
-</tr>
-</tbody>
-</table>
-<h5 id="tokenoptionsbuilder"><strong>TokenOptions.Builder</strong></h5>
-<p><em>(inner static class)</em></p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TokenOptions.Builder()</td>
-<td></td>
-<td></td>
-<td>Constructor</td>
-</tr>
-<tr>
-<td>build()</td>
-<td><a href="#tokenoptions">TokenOptions</a></td>
-<td></td>
-<td>Returns a new <strong>TokenOptions</strong> object with the stablished properties. Default values if methods <em>data()</em> and <em>role()</em> are not called are an empty string and OpenViduRole.PUBLISHER, respectively</td>
-</tr>
-<tr>
-<td>data()</td>
-<td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
-<td><code>String:data</code></td>
-<td>Some extra metadata to be associated to the user through its token. The structure of this string is up to you (maybe some standarized format as JSON or XML is a good idea), the only restriction is a maximum length of 1000 chars</td>
-</tr>
-<tr>
-<td>role()</td>
-<td><a href="#tokenoptionsbuilder">TokenOptions.Builder</a></td>
-<td><code>OpenViduRole:role</code></td>
-<td>The role associated to this token</td>
-</tr>
-</tbody>
-</table>
-<h4 id="openvidurole"><strong>OpenViduRole</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SUBSCRIBER</td>
-<td>They can subscribe to published streams of other users</td>
-</tr>
-<tr>
-<td>PUBLISHER</td>
-<td>They can subscribe to published streams of other users and publish their own streams</td>
-</tr>
-<tr>
-<td>MODERATOR</td>
-<td>They can subscribe to published streams of other users, publish their own streams and force <em>unpublish()</em> and <em>disconnect()</em> over a third-party stream or user</td>
-</tr>
-</tbody>
-</table>
-<h4 id="sessionproperties"><strong>SessionProperties</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>archiveLayout()</td>
-<td><a href="#archivelayout">ArchiveLayout</a></td>
-<td></td>
-<td>Returns the ArchiveLayout associated to the session</td>
-</tr>
-<tr>
-<td>archiveMode()</td>
-<td><a href="#archivemode">ArchiveMode</a></td>
-<td></td>
-<td>Returns the ArchiveMode associated to the session</td>
-</tr>
-<tr>
-<td>mediaMode()</td>
-<td><a href="#mediamode">MediaMode</a></td>
-<td></td>
-<td>Returns the MediaMode associated to the session</td>
-</tr>
-</tbody>
-</table>
-<h5 id="sessionpropertiesbuilder"><strong>SessionProperties.Builder</strong></h5>
-<p><em>(inner static class)</em></p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SessionProperties.Builder()</td>
-<td></td>
-<td></td>
-<td>Constructor</td>
-</tr>
-<tr>
-<td>archiveLayout()</td>
-<td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
-<td><code>ArchiveLayout:archiveLayout</code></td>
-<td>How the videos will be distributed in the recording layout</td>
-</tr>
-<tr>
-<td>archiveMode()</td>
-<td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
-<td><code>ArchiveMode:archiveMode</code></td>
-<td>When will the session recording process start</td>
-</tr>
-<tr>
-<td>mediaMode()</td>
-<td><a href="#sessionpropertiesbuilder">SessionProperties.Builder</a></td>
-<td><code>MediaMode:mediaMode</code></td>
-<td>How the media streams will be transmitted (as p2p direct connections between clients or routed through OpenVidu Media Server). Recording service requires MediaMode.ROUTED</td>
-</tr>
-<tr>
-<td>build()</td>
-<td><a href="#sessionproperties">SessionProperties</a></td>
-<td></td>
-<td>Returns a new <strong>SessionProperties</strong> object with the stablished properties. Default values if methods <em>archiveLayout()</em>, <em>archiveMode()</em> <em>mediaMode()</em> are not called are BEST_FIT, MANUAL and ROUTED, respectively</td>
-</tr>
-</tbody>
-</table>
-<h4 id="mediamode"><strong>MediaMode</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RELAYED</td>
-<td>The session will attempt to transmit streams directly between clients (P2P)<br><strong><em>(feature not available yet)</em></strong></td>
-</tr>
-<tr>
-<td>ROUTED</td>
-<td><em>DEFAULT</em> The session will transmit streams using OpenVidu Media Server. This is the mandatory option for session recording</td>
-</tr>
-</tbody>
-</table>
-<h4 id="archivemode"><strong>ArchiveMode</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ALWAYS</td>
-<td>The session recording will start automatically as soon as the first participant publishes a stream. It will end automatically when the last participant leaves the session (or you can call <code>OpenVidu.stopRecording()</code>)</td>
-</tr>
-<tr>
-<td>MANUAL</td>
-<td><em>DEFAULT</em> The session recording only starts when <code>OpenVidu.startRecording()</code> method is called and stops only when <code>OpenVidu.stopRecording()</code> is called</td>
-</tr>
-</tbody>
-</table>
-<h4 id="archivelayout"><strong>ArchiveLayout</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BEST_FIT</td>
-<td><em>DEFAULT</em> Grid layout where all the videos are evenly distributed, taking up as much space as possible</td>
-</tr>
-</tbody>
-</table>
-<h4 id="archive"><strong>Archive</strong></h4>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Returns</th>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>getId()</td>
-<td>String</td>
-<td></td>
-<td>Returns the recording identifier</td>
-</tr>
-<tr>
-<td>getName()</td>
-<td>String</td>
-<td></td>
-<td>Returns the recording name</td>
-</tr>
-<tr>
-<td>getSessionId()</td>
-<td>String</td>
-<td></td>
-<td>Returns the session identifier associated to this recording</td>
-</tr>
-<tr>
-<td>getCreatedAt()</td>
-<td>long</td>
-<td></td>
-<td>Returns the time when the recording started (UTC milliseconds)</td>
-</tr>
-<tr>
-<td>getSize()</td>
-<td>long</td>
-<td></td>
-<td>Returns the size of the recording in bytes (0 until the recording is stopped)</td>
-</tr>
-<tr>
-<td>getDuration()</td>
-<td>double</td>
-<td></td>
-<td>Returns the duration of the recording in seconds (0 until the recording is stopped)</td>
-</tr>
-<tr>
-<td>hasAudio()</td>
-<td>boolean</td>
-<td></td>
-<td>Returns if the recording has audio tracks (currently fixed to true)</td>
-</tr>
-<tr>
-<td>hasVideo()</td>
-<td>boolean</td>
-<td></td>
-<td>Returns if the recording has video tracks (currently fixed to true)</td>
-</tr>
-<tr>
-<td>getStatus()</td>
-<td><a href="#archivestatus">Archive.Status</a></td>
-<td></td>
-<td>Returns the status of the recording</td>
-</tr>
-</tbody>
-</table>
-<h5 id="archivestatus"><strong>Archive.Status</strong></h5>
-<p><em>(inner enum)</em></p>
-<table>
-<thead>
-<tr>
-<th>Enum</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>starting</td>
-<td>The recording is starting (cannot be stopped)</td>
-</tr>
-<tr>
-<td>started</td>
-<td>The recording has started and is going on</td>
-</tr>
-<tr>
-<td>stopped</td>
-<td>The recording has finished OK</td>
-</tr>
-<tr>
-<td>available</td>
-<td>The recording is available for downloading. This status is reached for all stopped recordings if openvidu-server property <code>openvidu.recording.free-access</code> is true</td>
-</tr>
-<tr>
-<td>failed</td>
-<td>The recording has failed</td>
-</tr>
-</tbody>
-</table> 
+<h3 id="generate-a-token">Generate a token</h3>
+<pre><code class="java">TokenOptions tokenOptions = new TokenOptions.Builder()
+    .role(OpenViduRole.PUBLISHER)
+    .data(&quot;user_data&quot;)
+    .build();
+String token = session.generateToken(tokenOptions);
+</code></pre>
+
+<h3 id="manage-recordings">Manage recordings</h3>
+<pre><code class="java">// Start recording
+String sessionId = session.getSessionId();
+RecordingProperties properties = new RecordingProperties.Builder().build();
+Recording recordingStarted = openVidu.startRecording(sessionId, properties);
+
+// Stop recording
+String recordingId = recordingStarted.getId();
+Recording recordingStopped = openvidu.stopRecording(recordingId);
+
+// Get recording
+Recording recordingRetrieved = openvidu.getRecording(recordingId);
+
+// List recordings
+List&lt;Recording&gt; recordingList = openVidu.listRecordings();
+
+// Delete recording
+openVidu.deleteRecording(recordingId);
+</code></pre>
+
+<p><br></p> 
 						</div>
 					</div> <footer>
 <hr>

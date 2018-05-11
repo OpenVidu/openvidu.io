@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -353,7 +353,7 @@ active: documentation
 
 <hr>
 
-<h4 id="list-of-configuration-parameters-when-launching-openvidu-server">List of configuration parameters when launching openvidu-server:</h4>
+<h3 id="list-of-configuration-parameters-when-launching-openvidu-server">List of configuration parameters when launching openvidu-server</h3>
 <table>
 <thead>
 <tr>
@@ -366,7 +366,7 @@ active: documentation
 <tr>
 <td><code>server.port</code></td>
 <td>Port where OpenVidu Server will listen to client's connections</td>
-<td><strong><em>8443</em></strong></td>
+<td><strong><em>4443</em></strong></td>
 </tr>
 <tr>
 <td><code>kms.uris</code></td>
@@ -380,7 +380,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>openvidu.publicurl</code></td>
-<td>URL to connect clients to OpenVidu Server. This must be the full IP of your OpenVidu Server, including <em>protocol</em>, <em>host</em> and <em>port</em> (for example: <code>https://my.openvidu.server.ip:8443</code>). If no <em>port</em> argument is provided, <code>server.port</code> param will be appended to it</td>
+<td>URL to connect clients to OpenVidu Server. This must be the full IP of your OpenVidu Server, including <em>protocol</em>, <em>host</em> and <em>port</em> (for example: <code>https://my.openvidu.server.ip:4443</code>). If no <em>port</em> argument is provided, <code>server.port</code> param will be appended to it</td>
 <td><strong><em>local</em></strong><br>(with default value <em>local</em> this parameter will be set to <code>localhost:PORT</code>, being <em>PORT</em> the param <code>server.port</code>)</td>
 </tr>
 <tr>
@@ -399,9 +399,19 @@ active: documentation
 <td><strong><em>/opt/openvidu/recordings</em></strong></td>
 </tr>
 <tr>
-<td><code>openvidu.recording.free-access</code></td>
-<td>Whether to allow free http access to recorded sessions or not.<br>If <em>true</em> path <code>https://OPENVIDU_SERVER_IP:[server.port]/[openvidu.recording.path]</code> will be publicly accessible through <code>https://OPENVIDU_SERVER_IP:[server.port]/recordings</code> path.<br>For example, for OpenVidu Server launched in <em>my-domain.com</em> and configured with <em>server.port=5000</em>, <em>openvidu.recording=true</em>, <em>openvidu.recording-path=/my/path</em> and <em>openvidu.recording.free-access=true</em> : A session with id <em>foo</em> that has been recorded will generate a video file locally stored under <code>/my/path/foo.mp4</code> and accesible by any client connecting to <code>https://my-domain.com:5000/recordings/foo.mp4</code>.<br>If <em>false</em> HTTP basic authentication will be required to access any video file stored under that route (as requested when connecting to OpenVidu dashboard on <code>https://OPENVIDU_SERVER_IP:[server.port]</code>)</td>
+<td><code>openvidu.recording.public-access</code></td>
+<td>Whether to allow free http access to recorded sessions or not.<br>If <em>true</em> path <code>https://OPENVIDU_SERVER_IP:[server.port]/[openvidu.recording.path]</code> will be publicly accessible through <code>https://OPENVIDU_SERVER_IP:[server.port]/recordings</code> path.<br>For example, for OpenVidu Server launched in <em>my-domain.com</em> and configured with <em>server.port=5000</em>, <em>openvidu.recording=true</em>, <em>openvidu.recording-path=/my/path</em> and <em>openvidu.recording.public-access=true</em> : A session with id <em>foo</em> that has been recorded will generate a video file locally stored under <code>/my/path/foo.mp4</code> and accesible by any client connecting to <code>https://my-domain.com:5000/recordings/foo.mp4</code>.<br>If <em>false</em> HTTP basic authentication will be required to access any video file stored under that route (as requested when connecting to OpenVidu dashboard on <code>https://OPENVIDU_SERVER_IP:[server.port]</code>)</td>
 <td><strong><em>false</em></strong></td>
+</tr>
+<tr>
+<td><code>openvidu.recording.notification</code></td>
+<td>Which users should receive the recording events in the client side (<code>recordingStarted</code>, <code>recordingStopped</code>). Can be <code>all</code> (every user connected to the session), <code>publisher_moderator</code> (users with role 'PUBLISHER' or 'MODERATOR') or <code>none</code> (no user will receive these events)</td>
+<td><strong><em>publisher_moderator</em></strong></td>
+</tr>
+<tr>
+<td><code>openvidu.recording.custom-layout</code></td>
+<td>Where should OpenVidu Server look for custom recording layouts</td>
+<td><strong><em>/opt/openvidu/custom-layout</em></strong></td>
 </tr>
 <tr>
 <td><code>server.ssl.key-store</code></td>
@@ -420,11 +430,15 @@ active: documentation
 </tr>
 </tbody>
 </table>
-<p>Example:</p>
+<p>Examples:</p>
 <pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://my.openvidu.server.ip:3333 -Dopenvidu.cdr=true -Dserver.port=3333 -Dkms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] -jar openvidu-server.jar
 </code></pre>
 
-<h4 id="list-of-additional-configuration-parameters-when-launching-openvidu-server-kms-docker-container">List of additional configuration parameters when launching <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">openvidu-server-kms</a> Docker container:</h4>
+<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e kms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] openvidu/openvidu-server
+</code></pre>
+
+<p><br></p>
+<h3 id="list-of-additional-configuration-parameters-when-launching-openvidu-server-kms-docker-container">List of additional configuration parameters when launching <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">openvidu-server-kms</a> Docker container</h3>
 <table>
 <thead>
 <tr>
@@ -455,306 +469,14 @@ active: documentation
 <pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e KMS_TURN_URL=myuser:mypass@54.54.54.54:3478 openvidu/openvidu-server-kms
 </code></pre>
 
-<h4 id="call-detail-record">Call Detail Record</h4>
-<p>OpenVidu Server offers a CDR logging system, so you can easily keep record of every session, every user connecting to them and every media connection established by each one of the users (sending or receiving). To start OpenVidu Server with CDR enabled, launch it with option <code>openvidu.cdr=true</code>. The CDR file will be located under <code>log/</code> folder in the same path as your Java executable.</p>
-<p>The record is a plain text file containing one standard JSON entry for each line. All JSON entries have the following structure:</p>
-<p><code>{"EVENT_NAME": {"sessionId": "SESSION_ID", "timestamp": TIMESTAMP, "PROPERTY_1": "VALUE_1","PROPERTY_2": "VALUE_2", ... }}</code></p>
-<p>So every entry is a JSON object identified by a specific event name, and all of them have as properties the <code>sessionId</code> identifying the video-session for which this event was registered and the <code>timestamp</code>. Besides this two common properties, there are custom properties for every specific event with useful information. The complete list of possible JSON entries is available below:</p>
-<hr>
-
-<h5 id="sessioncreated">sessionCreated</h5>
-<p>Recorded when a new session has been created.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sessionId</code></td>
-<td>Session for which the event was triggered</td>
-<td>A string with the session unique identifier</td>
-</tr>
-<tr>
-<td><code>timestamp</code></td>
-<td>Time when the event was triggered</td>
-<td>UTC milliseconds</td>
-</tr>
-</tbody>
-</table>
-<p>Example:</p>
-<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1516292370848}}
-</code></pre>
-
-<hr>
-
-<h5 id="sessiondestroyed">sessionDestroyed</h5>
-<p>Recored when a session has finished.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sessionId</code></td>
-<td>Session for which the event was triggered</td>
-<td>A string with the session unique identifier</td>
-</tr>
-<tr>
-<td><code>timestamp</code></td>
-<td>Time when the event was triggered</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>startTime</code></td>
-<td>Time when the session started</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>endTime</code></td>
-<td>Time when the session finished</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>duration</code></td>
-<td>Total duration of the session</td>
-<td>Seconds</td>
-</tr>
-</tbody>
-</table>
-<p>Example:</p>
-<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;duration&quot;:4,&quot;startTime&quot;:1516292370848,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1516292375176,&quot;timestamp&quot;:1516292375176}}
-</code></pre>
-
-<hr>
-
-<h5 id="participantjoined">participantJoined</h5>
-<p>Recorded when a user has connected to a session.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sessionId</code></td>
-<td>Session for which the event was triggered</td>
-<td>A string with the session unique identifier</td>
-</tr>
-<tr>
-<td><code>timestamp</code></td>
-<td>Time when the event was triggered</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>participantId</code></td>
-<td>Identifier of the participant</td>
-<td>A string with the participant unique identifier</td>
-</tr>
-</tbody>
-</table>
-<p>Example: </p>
-<pre><code class="json">{&quot;participantJoined&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1516292370885}}
-</code></pre>
-
-<hr>
-
-<h5 id="participantleft">participantLeft</h5>
-<p>Recorded when a user has left a session.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sessionId</code></td>
-<td>Session for which the event was triggered</td>
-<td>A string with the session unique identifier</td>
-</tr>
-<tr>
-<td><code>timestamp</code></td>
-<td>Time when the event was triggered</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>participantId</code></td>
-<td>Identifier of the participant</td>
-<td>A string with the participant unique identifier</td>
-</tr>
-<tr>
-<td><code>startTime</code></td>
-<td>Time when the participant joined the session</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>endTime</code></td>
-<td>Time when the participant left the session</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>duration</code></td>
-<td>Total duration of the participant's connection to the session</td>
-<td>Seconds</td>
-</tr>
-</tbody>
-</table>
-<p>Example:</p>
-<pre><code class="json">{&quot;participantLeft&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;duration&quot;:4,&quot;startTime&quot;:1516292370885,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1516292375195,&quot;timestamp&quot;:1516292375195}}
-</code></pre>
-
-<hr>
-
-<h5 id="webrtcconnectioncreated">webrtcConnectionCreated</h5>
-<p>Recorded when a new media stream has been established. Can be an "INBOUND" connection (the user is receiving a stream from a publisher of the session) or an "OUTBOUND" connection (the user is a publishing a stream to the session).</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sessionId</code></td>
-<td>Session for which the event was triggered</td>
-<td>A string with the session unique identifier</td>
-</tr>
-<tr>
-<td><code>timestamp</code></td>
-<td>Time when the event was triggered</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>participantId</code></td>
-<td>Identifier of the participant</td>
-<td>A string with the participant unique identifier</td>
-</tr>
-<tr>
-<td><code>connection</code></td>
-<td>Whether the media connection is an inbound connection (the participant is receiving media from OpenVidu) or an outbound connection (the participant is sending media to OpenVidu)</td>
-<td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
-</tr>
-<tr>
-<td><code>receivingFrom</code></td>
-<td>If <code>connection</code> is <code>"INBOUND"</code>, the participant from whom the media stream is being received</td>
-<td>A string with the participant (sender) unique identifier</td>
-</tr>
-<tr>
-<td><code>audioEnabled</code></td>
-<td>Whether the media connection is sending audio or not</td>
-<td>[<code>true</code>,<code>false</code>]</td>
-</tr>
-<tr>
-<td><code>videoEnabled</code></td>
-<td>Whether the media connection is sending video or not</td>
-<td>[<code>true</code>,<code>false</code>]</td>
-</tr>
-<tr>
-<td><code>videoSource</code></td>
-<td>If <code>videoEnabled</code> is <code>true</code>, the type of video that is being transmitted</td>
-<td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
-</tr>
-</tbody>
-</table>
-<p>Example:</p>
-<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292371499}}
-</code></pre>
-
-<hr>
-
-<h5 id="webrtcconnectiondestroyed">webrtcConnectionDestroyed</h5>
-<p>Recorded when any media stream connection is closed.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sessionId</code></td>
-<td>Session for which the event was triggered</td>
-<td>A string with the session unique identifier</td>
-</tr>
-<tr>
-<td><code>timestamp</code></td>
-<td>Time when the event was triggered</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>participantId</code></td>
-<td>Identifier of the participant</td>
-<td>A string with the participant unique identifier</td>
-</tr>
-<tr>
-<td><code>connection</code></td>
-<td>Whether the media connection is an inbound connection (the participant is receiving media from OpenVidu) or an outbound connection (the participant is sending media to OpenVidu)</td>
-<td>[<code>"INBOUND"</code>,<code>"OUTBOUND"</code>]</td>
-</tr>
-<tr>
-<td><code>receivingFrom</code></td>
-<td>If <code>connection</code> is <code>"INBOUND"</code>, the participant from whom the media stream is being received</td>
-<td>A string with the participant (sender) unique identifier</td>
-</tr>
-<tr>
-<td><code>audioEnabled</code></td>
-<td>Whether the media connection is sending audio or not</td>
-<td>[<code>true</code>,<code>false</code>]</td>
-</tr>
-<tr>
-<td><code>videoEnabled</code></td>
-<td>Whether the media connection is sending video or not</td>
-<td>[<code>true</code>,<code>false</code>]</td>
-</tr>
-<tr>
-<td><code>videoSource</code></td>
-<td>If <code>videoEnabled</code> is <code>true</code>, the type of video that is being transmitted</td>
-<td>[<code>"CAMERA"</code>,<code>"SCREEN"</code>]</td>
-</tr>
-<tr>
-<td><code>startTime</code></td>
-<td>Time when the media connection was established</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>endTime</code></td>
-<td>Time when the media connection closed</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
-<td><code>duration</code></td>
-<td>Total duration of the media connection</td>
-<td>Seconds</td>
-</tr>
-</tbody>
-</table>
-<p>Example:</p>
-<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;participantId&quot;:&quot;ogjud06fhgkck4id&quot;,&quot;duration&quot;:3,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;OUTBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;startTime&quot;:1516292371499,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1516292375180,&quot;videoEnabled&quot;:true,&quot;timestamp&quot;:1516292375180}}
-</code></pre> 
+<p><br></p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-artifacts/" class="btn btn-xs btn-primary float-right" title="OpenVidu Artifacts">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-server-cdr/" class="btn btn-xs btn-primary float-right" title="OpenVidu Server CDR">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../REST-API/" class="btn btn-xs btn-primary" title="REST  API"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>

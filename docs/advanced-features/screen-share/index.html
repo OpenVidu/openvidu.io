@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -350,31 +350,49 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="screen-share">Screen share</h1>
-<p>To share your screen instead of your webcam, the process is exactly the same as stated in <a href="../../how-do-i/publish-unpublish/">Publish a stream</a> section, but setting to <em>true</em> <code>screen</code> property when initializing a Publisher object:</p>
-<pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true });
+<p>To share your screen instead of your webcam, the process is exactly the same as stated in <a href="../../how-do-i/publish-unpublish/">Publish a stream</a> section, but setting to <em>"screen"</em> <code>videoSource</code> property when initializing a Publisher object:</p>
+<pre><code class="javascript">OV.initPublisher(&quot;html-element-id&quot;, { videoSource: &quot;screen&quot; });
 </code></pre>
 
-<p>Both <strong>Chrome</strong> and <strong>Firefox</strong> support screen sharing. Chrome needs an extension and Firefox supports native screen sharing since version 52. Two different <a href="http://openvidu.io/docs/reference-docs/openvidu-browser/#openviduerror">OpenViduError</a> can be returned in the callback function:</p>
+<p>Both <strong>Chrome</strong> and <strong>Firefox</strong> support screen sharing. Chrome needs an extension and Firefox supports native screen sharing since version 52. An OpenViduError object may be returned with the following <a href="../../../api/openvidu-browser/enums/openviduerrorname.html">OpenViduError.name</a> property in the callback function:</p>
 <ul>
 <li><code>SCREEN_SHARING_NOT_SUPPORTED</code>: if the browser does not support screen sharing.</li>
 <li><code>SCREEN_EXTENSION_NOT_INSTALLED</code>: Chrome needs an extension to allow screen sharing. <code>error.message</code> has the URL of Chrome Web Store where to install the extension.</li>
+<li><code>SCREEN_EXTENSION_DISABLED</code>: if Chrome's screen extension is installed but disabled</li>
+<li><code>SCREEN_CAPTURE_DENIED</code>: if the user doesn't grant permissions to capture the screen when the browser asks to.</li>
 </ul>
 <pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true }, function(error) {
     if (error.name == 'SCREEN_EXTENSION_NOT_INSTALLED') {
         showWarning(error.message);
+
         // showWarning could show a button with href 'error.message',
         // so the user can navigate to install the extension.
         // A browser refresh is also needed after installation
+
     } else if (error.name == 'SCREEN_SHARING_NOT_SUPPORTED') {
         alert('Your browser does not support screen sharing');
+    } else if (error.name == 'SCREEN_EXTENSION_DISABLED') {
+        alert('You need to enable screen sharing extension');
+    } else if (error.name == 'SCREEN_CAPTURE_DENIED') {
+        alert('You need to choose a window or application to share');
     }
 });
 </code></pre>
 
-<p><br/></p>
-<blockquote>
-<p><strong>NOTE</strong>: for testing screen sharing in <strong>Firefox &lt; 59</strong> it is a mandatory requirement to serve your application over HTTPS, even though you are connecting through <code>localhost</code>. For Chrome and Firefox ≥ 59 you can serve your app through <code>http://localhost:PORT</code> when developing without a problem.</p>
-</blockquote> 
+<p><br><br>
+<hr></p>
+<h1 id="custom-screen-sharing-extension-for-chrome">Custom Screen Sharing extension for Chrome</h1>
+<p><br>
+We provide a default extension that will work on any domain, but you can create your own Chrome extension always based on ours (<a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension">OpenVidu Screen Sharing extension</a>). This way your extension may have your own icon, name, description and custom valid domains.</p>
+<p>To use your extension, just configure OpenVidu object like this after initializing it:</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+OV.setAdvancedConfiguration(
+    { screenShareChromeExtension: &quot;https://chrome.google.com/webstore/detail/EXTENSION_NAME/EXTENSION_ID&quot; }
+);
+</code></pre>
+
+<p>Check the <a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension">GitHub README</a> for further information.</p>
+<p><br></p> 
 						</div>
 					</div> <footer>
 <hr>

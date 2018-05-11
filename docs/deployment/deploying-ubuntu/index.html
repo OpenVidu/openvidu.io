@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -356,10 +356,11 @@ active: documentation
 <h2 id="installation-process">Installation process</h2>
 <p>If you prefer having KMS installed in your EC2 machine and your own version of openvidu-server, follow these few steps. <strong>Ubuntu xenial 14.04</strong> and <strong>Ubuntu trusty 16.04</strong> are supported.</p>
 <h4 id="1-install-kms-in-first-command-xenial-for-1604-trusty-for-1404">1. Install KMS (in first command: <strong><em>xenial</em></strong> for 16.04, <strong><em>trusty</em></strong> for 14.04)</h4>
-<pre><code class="console">echo &quot;deb http://ubuntu.kurento.org xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
-wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y install kurento-media-server-6.0
+<pre><code class="console">echo &quot;deb http://ubuntu.openvidu.io/6.7.0 xenial kms6&quot; | tee /etc/apt/sources.list.d/kurento.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
+apt-get update
+apt-get -y install kurento-media-server
+apt-get -y install openh264-gst-plugins-bad-1.5
 </code></pre>
 
 <h4 id="2-install-coturn">2. Install COTURN</h4>
@@ -396,11 +397,11 @@ simple-log
 
 <h4 id="6-init-services">6. Init services</h4>
 <pre><code class="bash">sudo service coturn restart
-sudo service kurento-media-server-6.0 restart
+sudo service kurento-media-server restart
 </code></pre>
 
 <h4 id="7a-init-openvidu-server-docker-container">7A. Init openvidu-server Docker container...</h4>
-<pre><code class="console">sudo docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:8443/ --net=&quot;host&quot; openvidu/openvidu-server
+<pre><code class="console">sudo docker run -d -p 4443:4443 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ --net=&quot;host&quot; openvidu/openvidu-server
 </code></pre>
 
 <blockquote>
@@ -413,18 +414,18 @@ sudo service kurento-media-server-6.0 restart
 </blockquote>
 <p>Go to <a href="../../deployment/custom-certificate#for-the-docker-container-of-openvidu-server">Using your own certificate</a> to add your certificate to the container instead of using the self-signed default one (which will launch a security warning on the user's browser).</p>
 <h4 id="7b-or-init-your-own-openvidu-server-executable">7B. ...or init your own openvidu-server executable</h4>
-<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:8443/ openvidu-server.jar &amp;
+<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ openvidu-server.jar &amp;
 </code></pre>
 
 <p>Go to <a href="../../deployment/custom-certificate#for-a-jar-binary-of-openvidu-server">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one (which will launch a security warning on the user's browser).</p>
 <h4 id="8-finally-check-your-server">8. Finally check your server</h4>
-<p>You can connect to OpenVidu dashboard through <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:8443</code> (authorization is <code>OPENVIDUAPP:YOUR_SECRET</code>). Make sure you allow TCP and UDP inbound connections to your machine!</p>
-<p>To connect your application to OpenVidu Server, use the same URL <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:8443</code>. To learn more, this scenario is exactly the same as portrayed <a href="../../deployment/deploying-aws#connecting-your-external-app-to-cloudformation-openvidu-server">here</a>.</p>
+<p>You can connect to OpenVidu dashboard through <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:4443</code> (authorization is <code>OPENVIDUAPP:YOUR_SECRET</code>). Make sure you allow TCP and UDP inbound connections to your machine!</p>
+<p>To connect your application to OpenVidu Server, use the same URL <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:4443</code>. To learn more, this scenario is exactly the same as portrayed <a href="../../deployment/deploying-aws#connecting-your-external-app-to-cloudformation-openvidu-server">here</a>.</p>
 <h2 id="server-network-requirements">Server network requirements</h2>
 <p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your services:</p>
 <ul>
 <li>
-<p>First of all, you certainly need the machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: we are precisely installing <em>COTURN</em> service to cover those situations where the final users are hidden behind NATs or complex networks (<a href="../../troubleshooting#7-what-are-stun-and-turn-servers-and-why-do-i-need-them">learn more</a>). If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission could fail in certain cases.</p>
+<p>First of all, you certainly need the machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: we are precisely installing <em>COTURN</em> service to cover those situations where the final users are hidden behind NATs or complex networks (<a href="../../troubleshooting#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">learn more</a>). If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission could fail in certain cases.</p>
 </li>
 <li>
 <p>Besides, the server needs some <strong>ports</strong> opened in the firewall:</p>
@@ -457,11 +458,11 @@ sudo service kurento-media-server-6.0 restart
 
 <p>The instructions above portray scenarios 1 and 2 in the image. In other words, we are supposing that OpenVidu Server and KMS will be hosted in the same machine. The only difference between options 1-2 and option 3 is that for steps 7A and 7B, another parameter is required when launching your openvidu-server:</p>
 <h4 id="7a">7A</h4>
-<pre><code class="console">docker run -d -p 8443:8443 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:8443/ -e kms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] openvidu/openvidu-server
+<pre><code class="console">docker run -d -p 4443:4443 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ -e kms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] openvidu/openvidu-server
 </code></pre>
 
 <h4 id="7b">7B</h4>
-<pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:8443/ -Dkms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] -jar openvidu-server.jar
+<pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ -Dkms.uris=[\&quot;ws://YOUR_KMS_MACHINE_IP:8888/kurento\&quot;] -jar openvidu-server.jar
 </code></pre> 
 						</div>
 					</div> <footer>

@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -355,14 +355,15 @@ active: documentation
 
 <h3 id="1-everything-looks-alright-but-i-cannot-see-any-remote-video">1. Everything looks alright, but I cannot see any remote video</h3>
 <p>You have an app that uses OpenVidu to stream some video user-to-user, and the process looks perfectly okey. No errors on the console and all the OpenVidu events you are subscribed to are correctly triggered. So what's happening?</p>
-<p>99% of the time this is a problem related with <strong>OPENVIDU SERVER NOT HAVING A PUBLIC IP</strong>. To learn more about it, you can check <a href="#7-what-are-stun-and-turn-servers-and-why-do-i-need-them">this FAQ</a>. The quickest solution to this problem is to deploy in Amazon our ready-to-use OpenVidu Server with <a href="../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">CloudFormation</a>.</p>
+<p>99% of the time this is a problem related with <strong>OPENVIDU SERVER NOT HAVING A PUBLIC IP</strong>. To learn more about it, you can check <a href="#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">this FAQ</a>. The quickest solution to this problem is to deploy in Amazon our ready-to-use OpenVidu Server with <a href="../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">CloudFormation</a>.</p>
 <p>If you are a bit reluctant to this quick solution with Amazon CloudFormation, you can always deploy OpenVidu by yourself in Ubuntu 14.04 and 16.04. Check <a href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> section to learn how to properly do it.</p>
 <p>Besides that, these are the recommended steps to follow when videos are not received:</p>
 <ul>
-<li>Access your OpenVidu dashboard (<code>https://YOUR_OPENVIDU_IP:8443</code>) to quickly test the video transmission.</li>
+<li>Access your OpenVidu dashboard (<code>https://YOUR_OPENVIDU_IP:4443</code>) to quickly test the video transmission (user: <em>OPENVIDUAPP</em>, pass: <em>[your private secret]</em>)</li>
 <li>Please be sure that your OpenVidu Server host meets the <a href="../deployment/deploying-ubuntu#server-network-requirements">network requirements</a>.</li>
 </ul>
-<p>The other 1% of the time this can be an attempt of <strong>accessing the same camera from two different browsers at the same time</strong>. Remember that Chrome, Firefox, Opera, Safari and Edge are distinct processes which cannot generally access the same physical resource (as a webcam) at the same time on your computer. On the other hand, accessing the camera from different tabs of the same browser is tipically possible.</p>
+<p>The other 1% of the time this can be an attempt of <strong>accessing the same camera from two different browsers at the same time</strong>. Remember that Chrome, Firefox, Opera and Safari are distinct processes which cannot generally access the same physical resource (as a webcam) at the same time on your computer. On the other hand, accessing the camera from different tabs of the same browser is tipically possible.</p>
+<hr />
 <h3 id="2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">2. Any tips to make easier the development of my app with OpenVidu?</h3>
 <p>You can do some things to improve your efficiency while using OpenVidu:</p>
 <p><br></p>
@@ -411,16 +412,25 @@ active: documentation
 </li>
 <li>That's it! Now you can connect to your app through the <em>Ngrok</em> public IP and the connection to OpenVidu Server will work just fine. You have "deployed" your app on your own computer, and cross-device testing through your own network is now possible. Connecting to your app over the Internet is also possible, but the video transmission may not work (check <a href="#1-everything-looks-alright-but-i-cannot-see-any-remote-video">this FAQ</a> to learn why).</li>
 </ul>
+<hr />
 <h3 id="3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">3. I am using Windows to run the tutorials / develop my app. Anything I should know?</h3>
-<p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). When running any tutorial or developing any application, depending if it is <em>Client-Side Only</em> or <em>Client-Side + Server-Side</em>:</p>
-<h4 id="client-side-only">Client-Side Only</h4>
+<p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). To let your applications know how to connect to OpenVidu Server:</p>
+<h4 id="applications-client-side-only">Applications <em>Client-Side Only</em></h4>
 <p>(Tutorials <em><a href="../tutorials/openvidu-hello-world/">openvidu-hello-world</a></em>, <em><a href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a></em>, <em><a href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a></em>, <em><a href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a></em>)</p>
-<p>When initializing your Session object, change <code>location.hostname</code> to the IP of the Docker container running openvidu-server (usually <code>192.168.99.100</code>). For example:</p>
-<pre><code>OV.initSession('wss://' + location.hostname + ':8443/' + ...
+<p>When consuming openvidu-server REST api, change <code>location.hostname</code> to the IP of the Docker container running openvidu-server (usually <code>192.168.99.100</code>). For every one of the insecure tutorials listed above, the url where to send the REST operations ...</p>
+<pre><code>"https://" + location.hostname + ":4443/api/&lt;OPERATION&gt;"
 </code></pre>
-<p>in Windows is...</p>
-<pre><code>OV.initSession('wss://192.168.99.100:8443/' + ...
+<p>... in Windows is ...</p>
+<pre><code>"https://192.168.99.100:4443/api/&lt;OPERATION&gt;"
 </code></pre>
+<p>This applies to:</p>
+<ul>
+<li><strong>openvidu-hello-world</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L64">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L80">here</a></li>
+<li><strong>openvidu-insecure-js</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#L195">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#L211">here</a></li>
+<li><strong>openvidu-insecure-angular</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L163">here</a></li>
+<li><strong>openvidu-getaroom</strong>: <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-getaroom/web/app.js#L277">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-getaroom/web/app.js#L293">here</a></li>
+</ul>
+<p><br></p>
 <blockquote>
 <p>Also you will need to serve your apps over <strong>https</strong>. Browsers only accept camera usage on http when the address is <em>localhost</em>, and here it will be <code>192.168.99.100</code> or the one that Docker picks up for you. To serve over https with <code>http-server</code>, generate a self-signed certificate and run with <code>-S</code> flag on the root path of your app:</p>
 <p><em>Generate a selfsigned certificate (run in  your Docker console)</em></p>
@@ -428,48 +438,54 @@ active: documentation
 <p><em>Run with SSL flag</em></p>
 <p><code>http-server -S</code></p>
 </blockquote>
-<h4 id="client-side-server-side">Client-Side + Server-Side</h4>
-<p>Just need to add a new parameter when launching you openvidu-server container and your tutorial/app:</p>
+<h4 id="applications-client-side-server-side">Applications <em>Client-Side + Server-Side</em></h4>
+<p>(Tutorials <em><a href="../tutorials/openvidu-js-java/">openvidu-js-java</a></em>, <em><a href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a></em>, <em><a href="../tutorials/openvidu-js-node/">openvidu-js-node</a></em>, <em><a href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a></em>)</p>
+<p>Just need to add a new parameter when launching you openvidu-server container:</p>
 <ul>
 <li>
 <p><strong>openvidu/openvidu-server-kms Docker container</strong> (See <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">DockerHub</a>): override the default value of the property <code>openvidu.publicurl</code>:</p>
-<pre><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
+<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
 </code></pre>
 <p>in Windows is...</p>
-<pre><code>docker run -p 8443:8443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:8443/ openvidu/openvidu-server-kms
+<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms
 </code></pre>
 </li>
+</ul>
+<p>And let know your app/tutorial how to initialize <em>openvidu-java-client</em> or <em>openvidu-node-client</em> (or where to send your REST API operations in case you are not using any of these clients). For example:</p>
+<ul>
 <li>
 <p><strong>Java tutorials</strong> (tutorials <em><a href="../tutorials/openvidu-js-java/">openvidu-js-java</a></em>, <em><a href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a></em>): override the default value of the property <code>openvidu.url</code>:</p>
 <pre><code>mvn package exec:java
 </code></pre>
 <p>in Windows is...</p>
-<pre><code>mvn -Dopenvidu.url=https://192.168.99.100:8443/ package exec:java
+<pre><code>mvn -Dopenvidu.url=https://192.168.99.100:4443/ package exec:java
 </code></pre>
 <blockquote>
-<p>Here we are simply changing the param <code>urlOpenViduServer</code> that our OpenVidu object from <strong>openvidu-java-client</strong> will receive in <a href="../reference-docs/openvidu-java-client/#openvidu">its constructor</a>. This change is something related to these specific applications.</p>
+<p>With this change we are simply changing the param <code>urlOpenViduServer</code> that our OpenVidu object from <strong>openvidu-java-client</strong> will receive in <a href="./../../api/openvidu-java-client/io/openvidu/java/client/OpenVidu.html#OpenVidu-java.lang.String-java.lang.String-">its constructor</a>. This change is something related to these specific applications.</p>
 </blockquote>
 </li>
 <li>
 <p><strong>Node tutorials</strong> (tutorials <em><a href="../tutorials/openvidu-js-node/">openvidu-js-node</a></em>, <em><a href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a></em>): change the URL param passed on launch:</p>
-<pre><code>node server.js https://localhost:8443/ MY_SECRET
+<pre><code>node server.js https://localhost:4443/ MY_SECRET
 </code></pre>
 <p>in Windows is...</p>
-<pre><code>node server.js https://192.168.99.100:8443/ MY_SECRET
+<pre><code>node server.js https://192.168.99.100:4443/ MY_SECRET
 </code></pre>
 <blockquote>
-<p>Here we are simply changing the param <code>urlOpenViduServer</code> that our OpenVidu object from <strong>openvidu-node-client</strong> will receive in <a href="../reference-docs/openvidu-node-client/#openvidu">its constructor</a>. This change is something related to these specific applications.</p>
+<p>With this change we are simply changing the param <code>urlOpenViduServer</code> that our OpenVidu object from <strong>openvidu-node-client</strong> will receive in <a href="./../../api/openvidu-node-client/classes/openvidu.html#constructor">its constructor</a>. This change is something related to these specific applications.</p>
 </blockquote>
 </li>
 </ul>
-<h3 id="4-why-does-my-app-need-a-server-side">4. Why does my app need a server-side?</h3>
+<hr />
+<h3 id="4-does-my-app-need-a-server-side">4. Does my app need a server-side?</h3>
 <p>First of all, let's differentiate between OpenVidu server-side and your application's server-side. </p>
 <ul>
 <li>You will always need OpenVidu Server deployed at some place on the Internet (check the <a href="../deployment/deploying-aws/">Deployment section</a> to learn how to do it in 5 minutes). For now, OpenVidu doesn't support p2p direct connections between two users, so all the traffic must flow to OpenVidu Server or from OpenVidu Server.</li>
 <li>You will generally want your application to have its own server-side. Why?</li>
 </ul>
 <p>Well, it is really not necessary. You can have a pure client-side application if you want. Just check any of these tutorials:<br><a href="../tutorials/openvidu-hello-world/">openvidu-hello-world</a>, <a href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>, <a href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a></p>
-<p>The problem here is pretty evident: if you don't have any kind of server side to control your users, anyone can use your app. In fact, you can respectively see <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/f3c8b29fadf033b75200830a05da64029fed7541/openvidu-hello-world/web/app.js#L9">here</a>, <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/f3c8b29fadf033b75200830a05da64029fed7541/openvidu-insecure-js/web/app.js#L19">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/f3c8b29fadf033b75200830a05da64029fed7541/openvidu-getaroom/web/app.js#L46">here</a> that when initializing the Session object, the SECRET is hardcoded in the JavaScript file. That means that any user with basic knowledge can get your SECRET just by looking at the source code in the browser.</p>
+<p>The problem here is pretty evident: if you don't have any kind of server side to control your users, anyone can use your app. In fact, you can respectively see <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L48">here</a>, <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-js/web/app.js#l171">here</a> and <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-getaroom/web/app.js#L251">here</a> a comment warning about this matter in every insecure tutorial. Due to the lack of a server-side in these tutorials, we have no choice but to embed the REST API consumption methods in our JavaScript code, which includes hardcoding our secret in the JS client code.</p>
+<p><br></p>
 <blockquote>
 <p><strong>IMPORTANT</strong>: Do NOT include your SECRET in your JavaScript or HTML files in a production environment!</p>
 </blockquote>
@@ -495,39 +511,8 @@ active: documentation
   </div>
 </div>
 
-<h3 id="5-what-are-the-differences-related-to-openvidu-between-an-app-without-a-server-side-and-an-app-with-a-server-side">5. What are the differences related to OpenVidu between an app without a server-side and an app with a server-side?</h3>
-<p>OpenVidu works pretty much the same way, but the process you will follow for connecting to a session is a little bit different:</p>
-<p>When you have a server-side, your server may ask OpenVidu Server for a <code>sessionId</code> and a <code>token</code>: the first one will give you the session and the second one will connect the user to it.</p>
-<p>When you don't have a server side, the <code>sessionId</code> must be built in your JavaScript code in the browser, indicating your OpenVidu Server IP, the identifier of the session and your OpenVidu Server secret. Besides, the <code>token</code> param is now completely irrelevant.</p>
-<p>So for initializing and connecting to a session:</p>
-<ul>
-<li>
-<p><strong>OpenVidu app without a server-side</strong></p>
-<pre><code>var OPENVIDU_IP = "my.domain.com"
-var OPENVIDU_SECRET = "MY_SECRET";
-var SESSION_ID = "MY_SESSION";
-
-var OV = new OpenVidu();
-var session = OV.initSession("wss://" + OPENVIDU_IP + ":8443/" + SESSION_ID + "?secret=" + OPENVIDU_SECRET);
-
-session.connect(null, function() { ... });
-</code></pre>
-</li>
-<li>
-<p><strong>OpenVidu app with a server-side</strong></p>
-<pre><code>// Return a sessionId and a token from your server...
-
-var OV = new OpenVidu();
-var session = OV.initSession(sessionId)
-
-session.connect(token, function() { ... });
-</code></pre>
-</li>
-</ul>
-<blockquote>
-<p>To get a sessionId and a token from OpenVidu Server, you can make use of the <a href="../reference-docs/REST-API/">REST API</a>, <a href="../reference-docs/openvidu-java-client/">openvidu-java-client</a> or <a href="../reference-docs/openvidu-node-client/">openvidu-node-client</a></p>
-</blockquote>
-<h3 id="6-the-cloudformation-stack-is-a-nice-option-for-amazon-but-i-dont-like-it-i-want-more-control">6. The CloudFormation Stack is a nice option for Amazon, but I don't like it. I want more control</h3>
+<hr />
+<h3 id="5-the-cloudformation-stack-is-a-nice-option-for-amazon-but-i-dont-like-it-i-want-more-control">5. The CloudFormation Stack is a nice option for Amazon, but I don't like it. I want more control</h3>
 <p>You can always deploy everything by yourself. To do so, check <a href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> section. It is very important to understand all the posibilities you have available regarding to the architecture of your system: you can have everything running in the same host or split the services between two or even more machines. That's up to you.</p>
 <div id="deploy-arch-row" class="row">
   <div class="col-md-8">
@@ -544,8 +529,9 @@ session.connect(token, function() { ... });
   </div>
 </div>
 
-<p>In this diagram <a href="#7-what-are-stun-and-turn-servers-and-why-do-i-need-them">STUN/TURN server</a> is not outlined. It is another necessary service, and it can be hosted wherever you want (we recommend running it in the same host as Kurento Media Server).</p>
-<h3 id="7-what-are-stun-and-turn-servers-and-why-do-i-need-them">7. What are STUN and TURN servers and why do I need them?</h3>
+<p>In this diagram <a href="#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">STUN/TURN server</a> is not outlined. It is another necessary service, and it can be hosted wherever you want (we recommend running it in the same host as Kurento Media Server).</p>
+<hr />
+<h3 id="6-what-are-stun-and-turn-servers-and-why-do-i-need-them">6. What are STUN and TURN servers and why do I need them?</h3>
 <p>If the user's devices don't have a public and reachable IP, WebRTC connections cannot be established and therefore, video streams cannot be sent or received. This occurs when the users are behind NAT's and Firewalls. In brief, when they are hidden under complex networks.</p>
 <p>In order to support these circumstances, WebRTC relies on <strong>STUN and TURN</strong> servers:</p>
 <ul>
@@ -562,18 +548,21 @@ session.connect(token, function() { ... });
 </blockquote>
 </li>
 </ul>
-<h3 id="8-what-does-openvidu-not-integrate-regarding-webrtc-and-kurento-yet">8. What does OpenVidu not integrate regarding WebRTC and Kurento yet?</h3>
+<hr />
+<h3 id="7-what-does-openvidu-not-integrate-regarding-webrtc-and-kurento-yet">7. What does OpenVidu not integrate regarding WebRTC and Kurento yet?</h3>
 <p>As the main goal OpenVidu has is to make as simple as possible the integration of video-call capabilities in applications, it would make little sense to support all the features provided by Kurento: why would most of developers want visual recognition or augmented reality capabilities when adding video-calls to their apps?</p>
 <p>But there's also a bunch of features supported by Kurento or WebRTC that will be part of OpenVidu as well:</p>
 <ul>
 <li><strong>Video composing</strong>: right now OpenVidu streams are always sent and received without any processing in Kurento Media Server, so every subscription to a video stream in a video-session implies its own WebRTC connection. We intend to provide the possibility of configuring video-sessions to be processed and send as only one video, composed in a grid by all the published streams.</li>
 <li><strong>Direct p2p connections between users</strong>: OpenVidu will offer the possibility of connecting users without having to use Kurento Media Server as central node. This can be very advantegeous for certain use-cases, as will reduce the need of infraestructure.</li>
-<li><strong>Video recording</strong>: OpenVidu will support multiple (grid) and single stream recording, so developers can easily access video files later.</li>
-<li><strong>Mobile platforms</strong>: OpenVIdu will provide clients for both Android and iOS.</li>
+<li><strong>Single stream video recording</strong>: OpenVidu will support single stream recording, not only composed recording.</li>
+<li><strong>Mobile platforms</strong>: OpenVidu will provide clients for both Android and iOS.</li>
 </ul>
-<h3 id="9-does-openvidu-support-android-and-ios">9. Does OpenVidu support Android and iOS?</h3>
+<hr />
+<h3 id="8-does-openvidu-support-android-and-ios">8. Does OpenVidu support Android and iOS?</h3>
 <p>At the moment there are no OpenVidu clients for mobile platforms, but we are working on it. In the future you will have available <strong>OpenVidu Android</strong> and <strong>OpenVidu iOS</strong>, joining <strong>OpenVidu Browser</strong>. The main goal here is that all of them are fully compatible with one another.</p>
-<h3 id="10-which-is-the-current-status-of-openvidu-on-scalability-and-fault-tolerance">10. Which is the current status of OpenVidu on scalability and fault tolerance?</h3>
+<hr />
+<h3 id="9-which-is-the-current-status-of-openvidu-on-scalability-and-fault-tolerance">9. Which is the current status of OpenVidu on scalability and fault tolerance?</h3>
 <p>This particular point relies on Kurento Media Server performance, as it is the media server used by OpenVidu. <a href="https://testrtc.com/">TestRTC</a> published on September 13, 2017 a very interesting article describing in detail the behaviour of Kurento Media Server while holding a different number of video-sessions. <a href="https://testrtc.com/sessions-kurento-server/">Here</a> is the complete article.</p>
 <p>These are the conclusions for a machine with <strong>8 cores and 15 GB of RAM</strong>. The upper limit where the following scenarios guaranteed good quality of service are:</p>
 <table>
@@ -599,7 +588,8 @@ session.connect(token, function() { ... });
 </tbody>
 </table>
 <p>That said, one of the most important features OpenVidu will offer is the possibility of automated scalability and fault tolerance. We intend to provide an easy-to-use service integrated with Amazon Web Services to allow the automated launching and shutdown of servers depending on the workload of your application.</p>
-<h3 id="11-i-am-getting-an-error-accesing-the-camera-and-i-have-already-granted-permissions-on-the-browser">11. I am getting an "Error accesing the camera" and I have already granted permissions on the browser</h3>
+<hr />
+<h3 id="10-i-am-getting-an-error-accesing-the-camera-and-i-have-already-granted-permissions-on-the-browser">10. I am getting an "Error accesing the camera" and I have already granted permissions on the browser</h3>
 <p>If you are using <strong>Chrome</strong>: you <strong>cannot access the camera or microphone from a <code>http</code> URL if it is not <code>localhost</code> or <code>127.0.0.1</code></strong>. In a nutshell: in Chrome accessing the webcam on <code>http://localhost:8080</code> or <code>http://127.0.0.1:8080</code> is perfectly OK. But, for example, on <code>http://172.17.0.1:8080</code> it will through an error saying "<em>Only secure origins are allowed</em>". If for any reason you want to serve your app locally on a custom URL, the only solution is to serve it over <code>https</code> with a certificate. If you are making use of the web server we have strongly suggested over the documentation (<code>npm install -g http-server</code>), you can do this with the following commands on your application's root path:</p>
 <ul>
 <li>

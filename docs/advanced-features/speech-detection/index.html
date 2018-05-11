@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -350,8 +350,7 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="speech-detection">Speech detection</h1>
-<p><em>(since 1.3.0)</em></p>
-<p>A pretty common requested event is one that allows you to detect when a publisher starts and stops speaking. OpenVidu offers this ability through two events that can be configured for <a href="../../reference-docs/openvidu-browser/#session">Session</a> objects:</p>
+<p>A pretty common requested event is one that allows you to detect when a publisher starts and stops speaking. OpenVidu offers this ability through <a href="../../../api/openvidu-browser/classes/publisherspeakingevent.html">PublisherSpeakingEvents</a> that can be configured for <a href="../../../api/openvidu-browser/classes/session.html">Session</a> objects:</p>
 <pre><code class="javascript">session.on('publisherStartSpeaking', (event) =&gt; {
     console.log('Publisher ' + event.connection.connectionId + ' start speaking');
 });
@@ -361,8 +360,18 @@ session.on('publisherStopSpeaking', (event) =&gt; {
 });
 </code></pre>
 
-<p>Event <code>publisherStopSpeaking</code> for certain <a href="../../reference-docs/openvidu-browser/#connection">Connection</a> object can only be triggered after <code>publisherStartSpeaking</code> has been called for that specific Connection object. In other words, none of these events can be triggered twice in a row for one Connection: they are always launched alternately.</p>
-<p>With these events it is really easy to build a layout that can make the main speaker video the bigger one, and alternate the main view between the participants of a session as they take the floor. You can check the complete API reference for these events in <a href="../../reference-docs/openvidu-browser/#session">Session events</a> section.</p> 
+<p>Event <code>publisherStopSpeaking</code> for certain <a href="../../../api/openvidu-browser/classes/connection.html">Connection</a> object can only be triggered after <code>publisherStartSpeaking</code> has been called for that specific Connection object. In other words, none of these events can be triggered twice in a row for one Connection: they are always launched alternately.</p>
+<p>You can further configure the behaviour of these two events by using <a href="../../../api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration">OpenVidu.setAdvancedConfiguration</a> method:</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+OV.setAdvancedConfiguration({
+    publisherSpeakingEventsOptions: {
+        interval: 50,   // Frequency of the polling of audio streams in ms
+        threshold: -50  // Threshold volume in dB
+    }
+});
+</code></pre>
+
+<p>With these events it is really easy to build a layout that can make the main speaker video the bigger one, and alternate the main view between the participants of a session as they take the floor.</p> 
 						</div>
 					</div> <footer>
 <hr>

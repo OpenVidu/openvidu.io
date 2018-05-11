@@ -134,7 +134,7 @@ footer #social-icons li a:hover,
 
 .corner-ribbon{
   z-index: 1;
-  width: 200px;
+  width: 300px;
   background: #e43;
   position: absolute;
   top: 25px;
@@ -176,8 +176,8 @@ footer #social-icons li a:hover,
 
 .corner-ribbon.bottom-left{
   top: auto;
-  bottom: 25px;
-  left: -50px;
+  bottom: 50px;
+  left: -75px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }

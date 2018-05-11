@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -350,21 +350,20 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="send-text-messages-between-users">Send text messages between users</h1>
-<p><em>(since v1.2.0)</em></p>
 <p>Any user connected to a session can send messages to every other participant of the session, as a broadcast message for everyone or to one or more specific participants. To do so:</p>
-<pre><code class="javascript">// Sender of the message (after calling 'session.connect')
+<pre><code class="javascript">// Sender of the message (after 'session.connect')
 
 session.signal({
-        data: 'My custom message',  // Any string (optional)
-        to: [],                     // Array of Connection objects (optional. Broadcast to everyone if empty)
-        type: 'my-chat'             // The type of message (optional)
-    },
-    function (error) {              // Callback for catching errors ('error' is null if success)
-        if (error) {
-            console.log('Error sending signal: ' + error);
-        }
-    }
-);
+      data: 'My custom message',  // Any string (optional)
+      to: [],                     // Array of Connection objects (optional. Broadcast to everyone if empty)
+      type: 'my-chat'             // The type of message (optional)
+    })
+    .then(() =&gt; {
+        console.log('Message successfully sent');
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
 </code></pre>
 
 <p>Any user subscribed to that <em>type</em> will receive the message:</p>
@@ -388,7 +387,7 @@ session.on('signal', (event) =&gt; {
 </code></pre>
 
 <p>You can send messages to specific users adding to <code>to</code> array the proper Connection objects:</p>
-<pre><code class="javascript">// Sender of the message (after calling 'session.connect')
+<pre><code class="javascript">// Sender of the adressed message (after calling 'session.connect')
 
 session.signal({
     data: 'My private custom message',
@@ -397,7 +396,7 @@ session.signal({
 });
 </code></pre>
 
-<p>Only participants represented by <code>connection1</code> and <code>connection2</code> objects will receive the signal event (only if they are subscribed to it!). You can get Connection objects by subscribing to <code>connectionCreated</code> event before connecting to a session:</p>
+<p>In this last case, only participants represented by <code>connection1</code> and <code>connection2</code> objects will receive the signal event (only if they are subscribed to it!). You can get Connection objects by subscribing to <code>connectionCreated</code> event before connecting to a session:</p>
 <pre><code class="javascript">this.session.on('connectionCreated', (event) =&gt; {
     console.log(event.connection);
 });

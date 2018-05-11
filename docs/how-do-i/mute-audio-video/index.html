@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -350,10 +350,14 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="muteunmute-audio-and-video">Mute/Unmute audio and video</h1>
-<p>By calling <code>publisher.publishAudio()</code> or <code>publisher.publishVideo()</code> method you can toggle audio and video. For these methods to have effect your Publisher object must have been initialized with <code>audio: true</code> and <code>video: true</code> respectively (see <a href="../../how-do-i/publish-unpublish/">Publish a stream</a> section).</p>
-<pre><code class="javascript">publisher.publishAudio(audioEnabled);   // true to unmute the audio, false to mute it
-publisher.publishVideo(videoEnabled);   // true to enable the video, false to disable it 
-                                        // (a black screen will show up instead)
+<p>By calling <code>Publisher.publishAudio()</code> or <code>Publisher.publishVideo()</code> method you can toggle audio and video of your Publisher object. Every user subscribed to its stream will stop receiving audio or video.</p>
+<pre><code class="javascript">publisher.publishAudio(audioEnabled);   // true to unmute the audio track, false to mute it
+publisher.publishVideo(videoEnabled);   // true to enable the video track, false to disable it
+</code></pre>
+
+<p>By calling <code>Subscriber.subscribeToAudio()</code> or <code>Subscriber.subscribeToVideo()</code> method you can toggle audio and video of any Subscriber object. You will stop receiving audio or video from it (only affects the client calling the method).</p>
+<pre><code class="javascript">subscriber.subscribeToAudio(audioEnabled);  // true to unmute the audio track, false to mute it
+subscriber.subscribeToVideo(videoEnabled);  // true to enable the video, false to disable it
 </code></pre> 
 						</div>
 					</div> <footer>

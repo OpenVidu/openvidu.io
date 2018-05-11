@@ -252,7 +252,7 @@ active: documentation
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../reference-docs/openvidu-artifacts/">OpenVidu Artifacts</a> 
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
  
@@ -427,7 +427,7 @@ active: documentation
       <td><em>Your choice</em></td>
     </tr>
     <tr>
-      <td class="first-col">Free HTTP access to recorded videos<br><span class="field-comment">(see <code>openvidu.recording.free-access</code> property <a href="/docs/reference-docs/openvidu-server-params/#list-of-configuration-parameters-when-launching-openvidu-server">here</a>)<span></td>
+      <td class="first-col">Free HTTP access to recorded videos<br><span class="field-comment">(see <code>openvidu.recording.public-access</code> property <a href="/docs/reference-docs/openvidu-server-params/#list-of-configuration-parameters-when-launching-openvidu-server">here</a>)<span></td>
       <td><em>true / false</em></td>
       <td><em>true / false</em></td>
       <td><em>true / false</em></td>
@@ -535,7 +535,7 @@ java -jar -Dserver.port=4040 myapp.jar
   redirect_stderr=true
 </code></pre>
 <blockquote>
-<p>To connect your Java app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <a href="../../reference-docs/REST-API/">REST API</a> or <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a>), you will need to use the URL <code>https://localhost:8443</code>. <em>localhost</em> because both your app and OpenVidu Server run in the same machine. <em>8443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-java</em> sets this parameter as an environment variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ba5121c622ea59aa9708021f3635f922acb3ff73/openvidu-js-java/src/main/resources/application.properties#L8">right here</a>.</p>
+<p>To connect your Java app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <a href="../../reference-docs/REST-API/">REST API</a> or <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a>), you will need to use the URL <code>https://localhost:4443</code>. <em>localhost</em> because both your app and OpenVidu Server run in the same machine. <em>4443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-java</em> sets this parameter as an environment variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ba5121c622ea59aa9708021f3635f922acb3ff73/openvidu-js-java/src/main/resources/application.properties#L8">right here</a>.</p>
 </blockquote>
 </li>
 <li>
@@ -609,7 +609,7 @@ node myserver.js 4040
   redirect_stderr=true
 </code></pre>
 <blockquote>
-<p>To connect your Node app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <a href="../../reference-docs/REST-API/">REST API</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>), you will need to use the URL <code>https://localhost:8443</code>. <em>localhost</em> because both your app and OpenVidu Server run in the same machine. <em>8443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-node</em> expects this parameter as the first argument on launch command <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ba5121c622ea59aa9708021f3635f922acb3ff73/openvidu-js-node/server.js#L64">right here</a>.</p>
+<p>To connect your Node app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <a href="../../reference-docs/REST-API/">REST API</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>), you will need to use the URL <code>https://localhost:4443</code>. <em>localhost</em> because both your app and OpenVidu Server run in the same machine. <em>4443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-node</em> expects this parameter as the first argument on launch command <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ba5121c622ea59aa9708021f3635f922acb3ff73/openvidu-js-node/server.js#L64">right here</a>.</p>
 </blockquote>
 </li>
 <li>
@@ -668,7 +668,7 @@ location /YOUR_APP_2 {
 <p>The best production setup for OpenVidu is having your application deployed in a different dedicated server. That is, not being included in the same host as OpenVidu Server, which is the scenario explained in the <a href="#adding-your-own-app-to-cloudformation-openvidu-server">previous section</a> (that all-in-one scenario is easier for the first approach to the deployment of your OpenVidu app. Try it if you want detailed instructions on how to deploy your app).</p>
 <p>Once you have deployed your CloudFormation OpenVidu Server and checked that it is up and running, and after setting up your own application in its dedicated server:</p>
 <ul>
-<li>Make sure you know your <strong>OpenVidu Server public IP</strong>. That includes the protocol (<code>https</code>), the location and the port. For example: <code>https://YOUR_SERVER_IP:8443/</code></li>
+<li>Make sure you know your <strong>OpenVidu Server public IP</strong>. That includes the protocol (<code>https</code>), the location and the port. For example: <code>https://YOUR_SERVER_IP:4443/</code></li>
 <li>Use it in your application server to perform the <strong><a href="../../reference-docs/REST-API/">REST</a></strong> operations, or to initialize your OpenVidu object if you are making use of <strong><a href="../../reference-docs/openvidu-java-client/">openvdiu-java-client</a></strong> or <strong><a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a></strong> :<ul>
 <li><em>REST</em> operations to <code>https://OPENVIDUSERVER_PUBLIC_IP/api/METHOD</code> </li>
 <li><em>openvidu-java-client</em> entrypoint is <code>new OpenVidu(OPENVIDUSERVER_PUBLIC_IP, OPENVIDU_SECRET)</code></li>
@@ -678,7 +678,7 @@ location /YOUR_APP_2 {
 </ul>
 <p><br></p>
 <blockquote>
-<p>In the one-server-scenario of the <a href="#adding-your-own-app-to-cloudformation-openvidu-server">previous section</a> the OpenVidu Server public IP would be <code>https://localhost:8443</code>, as both OpenVidu Server and your app live in the same host.</p>
+<p>In the one-server-scenario of the <a href="#adding-your-own-app-to-cloudformation-openvidu-server">previous section</a> the OpenVidu Server public IP would be <code>https://localhost:4443</code>, as both OpenVidu Server and your app live in the same host.</p>
 </blockquote> 
 						</div>
 					</div> <footer>
