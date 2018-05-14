@@ -58,7 +58,7 @@ custom_css:
                                         title="Copy to Clipboard">Copy</button>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        <code id="code-1">docker run -p 4443:4443 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-videoconference-demo</code>
+                                        <code id="code-1">docker run -p 4443:4443 openvidu/basic-videoconference-demo</code>
                                     </div>
                                 </div>
                                 <div class="row no-margin docker-info-div">
@@ -147,7 +147,7 @@ custom_css:
                                         title="Copy to Clipboard">Copy</button>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        <code id="code-2">docker run -p 5000:5000 -p 3000:3000 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/basic-webinar-demo</code>
+                                        <code id="code-2">docker run -p 5000:5000 -p 3000:3000 openvidu/basic-webinar-demo</code>
                                     </div>
                                 </div>
                                 <div class="row no-margin docker-info-div">
@@ -258,7 +258,7 @@ custom_css:
                                         title="Copy to Clipboard">Copy</button>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        <code id="code-3">docker run -p 4443:4443 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 openvidu/getaroom-demo</code>
+                                        <code id="code-3">docker run -p 4443:4443 openvidu/getaroom-demo</code>
                                     </div>
                                 </div>
                                 <div class="row no-margin docker-info-div">
@@ -405,7 +405,7 @@ custom_css:
                                         development machine. The easiest way is running this Docker container which wraps
                                         both of them (you will need
                                         <a href="https://store.docker.com/search?type=edition&offering=community">Docker CE</a>):</p>
-                                    <code id="code-10">sudo docker run -d -p 4443:4443 --rm -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code>
+                                    <code id="code-10">docker run -d -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code>
                                     <button id="btn-copy-10" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
                                         title="Copy to Clipboard">Copy</button>
                                 </li>
