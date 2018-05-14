@@ -401,7 +401,7 @@ sudo service kurento-media-server restart
 </code></pre>
 
 <h4 id="7a-init-openvidu-server-docker-container">7A. Init openvidu-server Docker container...</h4>
-<pre><code class="console">sudo docker run -d -p 4443:4443 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ --net=&quot;host&quot; openvidu/openvidu-server
+<pre><code class="console">sudo docker run -d -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ --net=&quot;host&quot; openvidu/openvidu-server
 </code></pre>
 
 <blockquote>
