@@ -440,10 +440,6 @@ ng serve
 <pre><code class="typescript">import { OpenVidu, Session, Stream, StreamEvent } from 'openvidu-browser';
 </code></pre>
 
-<p>We are also using package <code>openvidu-node-client</code> in this example. This is a node library intended to be used in the server-side of a Node app, but since this is a serverless tutorial, we will use it directly from the browser.</p>
-<pre><code class="typescript">import { OpenVidu as OpenViduAPI } from 'openvidu-node-client';
-</code></pre>
-
 <hr />
 <h4 id="appcomponentts-declares-the-following-properties"><code>app.component.ts</code> declares the following properties:</h4>
 <pre><code class="typescript">// OpenVidu objects
@@ -546,8 +542,12 @@ this.getToken().then(token =&gt; {
 });
 </code></pre>
 
-<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operation in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we are actually using OpenVidu Node Client, taking advantage of the fact that we have a <em>package.json</em> in which we can include this library very easily. But remember: do not retrieve tokens from OpenVidu Server directly from your clients. Do it from your application's backend.</p>
-<p>You can inspect method <code>getToken()</code> in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/ff2c3b74658baf70b18ed03e3d3998ebeb011894/openvidu-insecure-angular/src/app/app.component.ts#L162">GitHub repo</a>.</p>
+<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a mehtod <code>getToken()</code> that returns a Promise with the token, using <code>@angular/http</code> library. Without going into too much detail, this method performs two POST requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<ul>
+<li>First request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
+<li>Second request performas a POST to <code>/api/tokens</code> (we send a <code>sessionId</code> field to assign the token to this same session)</li>
+</ul>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/9f4a181bf4f43ca8743d554345338e0c132d78be/openvidu-insecure-angular/src/app/app.component.ts#L164">GitHub repo</a>.</p>
 <hr />
 <h4 id="finally-connect-to-the-session-and-publish-your-webcam">Finally connect to the session and publish your webcam:</h4>
 <pre><code class="typescript">// --- 4) Connect to the session with a valid user token ---

@@ -4,7 +4,7 @@
     
     <url>
      <loc>/home/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,55 +13,55 @@
         
     <url>
      <loc>/tutorials/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-hello-world/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-js/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-angular/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-java/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-java/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-node/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-node/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-getaroom/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -71,49 +71,49 @@
         
     <url>
      <loc>/how-do-i/create-session/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/join-session/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/leave-session/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/subscribe-unsubscribe/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/publish-unpublish/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/mute-audio-video/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/share-data/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/how-do-i/send-messages/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -123,19 +123,19 @@
         
     <url>
      <loc>/advanced-features/recording/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/advanced-features/screen-share/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/advanced-features/speech-detection/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -145,37 +145,37 @@
         
     <url>
      <loc>/reference-docs/openvidu-browser/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-java-client/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-node-client/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/REST-API/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-server-params/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-server-cdr/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -185,25 +185,25 @@
         
     <url>
      <loc>/deployment/deploying-demos-aws/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-aws/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-ubuntu/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/custom-certificate/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -213,7 +213,7 @@
         
     <url>
      <loc>/developing/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -222,7 +222,7 @@
     
     <url>
      <loc>/troubleshooting/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -230,7 +230,7 @@
     
     <url>
      <loc>/releases/</loc>
-     <lastmod>2018-05-14</lastmod>
+     <lastmod>2018-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
