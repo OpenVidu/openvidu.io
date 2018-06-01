@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Create a session
+title: OpenVidu Documentation - Manage video players
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Create a session')").each(function (i, e) {
+		$(".subnav").find("li:contains('Manage video players')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Create a session')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('Manage video players')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -131,8 +131,8 @@ active: documentation
     <ul class="subnav" hidden>
           
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">Create a session</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../create-session/">Create a session</a> 
 </li>
 
    
@@ -167,8 +167,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../manage-videos/">Manage video players</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">Manage video players</a>  
 </li>
 
    
@@ -355,21 +355,85 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="create-a-session">Create a session</h1>
-<p>You must get an <code>OpenVidu</code> object and call <code>initSession</code> method:</p>
-<pre><code class="javascript">var OV = new OpenVidu();
-var session = OV.initSession();
-</code></pre> 
+							 <h1 id="manage-videos">Manage videos</h1>
+<p>OpenVidu makes very easy the management of the video players. You can let OpenVidu take care of their lifecycle or you can use your own HTML video elements.
+Every Publisher and Subscriber object can display a media stream in as many video players as you want.</p>
+<h3 id="let-openvidu-take-care-of-the-video-players">Let OpenVidu take care of the video players</h3>
+<p><br></p>
+<h5 id="a-publisher-videos">A) Publisher videos</h5>
+<ul>
+<li>
+<p>When initalizing a Publisher object, you can insert a video player by passing a valid <code>targetElement</code> in method <code>OpenVidu.initPublisher</code> (can be an HTMLElement or its <code>id</code> attribute). Second parameter allows you to customize the publisher's stream, including how OpenVidu must insert the video player according to targetElement (more info in <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html">OpenVidu Browser Docs</a>):</p>
+<pre><code>var publisher = OV.initPublisher(targetElement, {insertMode: 'APPEND'});
+</code></pre>
+</li>
+<li>
+<p>After getting the Publisher object, you can create more video players to display its media stream just by calling <code>Publisher.createVideoElement</code>. Pass a valid <code>targetElement</code> and the <a href="../../../api/openvidu-browser/enums/videoinsertmode.html">insertMode</a>:</p>
+<pre><code>publisher.createVideoElement(targetElement, 'APPEND');
+</code></pre>
+</li>
+</ul>
+<p><br></p>
+<h5 id="b-subscriber-videos">B) Subscriber videos</h5>
+<ul>
+<li>
+<p>When subscribing to a Stream, you can insert a video player by passing a valid <code>targetElement</code> in method <code>Session.subscribe</code> (can be an HTMLElement or its <code>id</code> attribute). Third parameter allows you to customize the subscriber's stream, including how OpenVidu must insert the video player according to targetElement (more info in <a href="../../../api/openvidu-browser/interfaces/subscriberproperties.html">OpenVidu Browser Docs</a>):</p>
+<pre><code>var subscriber;
+session.on('streamCreated', event =&gt; {
+    subscriber = session.subscribe(event.stream, targetElement, {insertMode: 'APPEND'});
+});
+</code></pre>
+</li>
+<li>
+<p>After getting the Subscriber object, you can create more video players to display its media stream just by calling <code>Subscriber.createVideoElement</code>. Pass a valid <code>targetElement</code> and the <a href="../../../api/openvidu-browser/enums/videoinsertmode.html">insertMode</a>:</p>
+<pre><code>subscriber.createVideoElement(targetElement, 'APPEND');
+</code></pre>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>Publisher and Subscriber objects will dispatch a <code>videoElementCreated</code> event for every video inserted into DOM by these methods.
+Also these videos will be automatically removed from DOM when required and Publisher and Subscriber objects will dispatch a
+<code>videoElementDestroyed</code> event for every one of them</p>
+</blockquote>
+<h3 id="you-take-care-of-the-video-players">You take care of the video players</h3>
+<p><br></p>
+<h5 id="a-publisher-videos_1">A) Publisher videos</h5>
+<ul>
+<li>Pass <em>undefined</em> as <code>targetElement</code> when initializing your Publisher and when you have it available just call method <code>Publisher.addVideoElement</code>, passing an already existing HTML video element of the DOM:<pre><code>var publisher = OV.initPublisher(undefined, publisherProperties);
+publisher.addVideoElement(videoElement);
+</code></pre>
+</li>
+</ul>
+<p><br></p>
+<h5 id="b-subscriber-videos_1">B) Subscriber videos</h5>
+<ul>
+<li>Pass <em>undefined</em> as <code>targetElement</code> when subscribing to a Stream and when you have Subscriber object available just call method <code>Subscriber.addVideoElement</code>, passing an already existing HTML video element of the DOM:<pre><code>var subscriber;
+session.on('streamCreated', event =&gt; {
+    subscriber = session.subscribe(event.stream, undefined);
+    subscriber.addVideoElement(videoElement);
+});
+</code></pre>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>This way of managing the video players is very useful when developing your application with some frontend declarative framework such as <strong>Angular</strong>,
+<strong>React</strong> or <strong>Vue.js</strong>. It allows you to add to the proper <code>Publisher</code> or <code>Subscriber</code> any video element managed by the framework. Besides, it is possible to
+treat both Publishers and Subscribers the same way regarding their rendering in the page, as they both inherit from the parent class <code>StreamManager</code>. If you are
+interested in these concepts, you can check out our super simple <a href="http://localhost:4000/docs/tutorials/openvidu-insecure-angular/">Angular tutorial</a>.</p>
+</blockquote>
+<p><br></p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../join-session/" class="btn btn-xs btn-primary float-right" title="Join a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../share-data/" class="btn btn-xs btn-primary float-right" title="Share data between users">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../tutorials/openvidu-getaroom/" class="btn btn-xs btn-primary" title="openvidu-getaroom"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../mute-audio-video/" class="btn btn-xs btn-primary" title="Mute/Unmute audio and video"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -378,7 +442,7 @@ var session = OV.initSession();
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/create-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/manage-videos.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

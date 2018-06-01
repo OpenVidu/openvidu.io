@@ -168,6 +168,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/manage-videos/">Manage video players</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -380,7 +386,7 @@ active: documentation
 </tr>
 <tr>
 <td><code>openvidu.publicurl</code></td>
-<td>URL to connect clients to OpenVidu Server. This must be the full IP of your OpenVidu Server, including <em>protocol</em>, <em>host</em> and <em>port</em> (for example: <code>https://my.openvidu.server.ip:4443</code>). If no <em>port</em> argument is provided, <code>server.port</code> param will be appended to it</td>
+<td>URL to connect clients to OpenVidu Server. This can be the full IP (protocol, host and port) or just a domain name if you have configured it. For example:<br>• <code>https://my.openvidu.server.com</code><br>• <code>https://12.34.56.78:4443/</code></td>
 <td><strong><em>local</em></strong><br>(with default value <em>local</em> this parameter will be set to <code>localhost:PORT</code>, being <em>PORT</em> the param <code>server.port</code>)</td>
 </tr>
 <tr>

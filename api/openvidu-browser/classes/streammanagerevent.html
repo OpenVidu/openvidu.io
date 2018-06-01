@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>StreamEvent | OpenVidu Browser</title>
+	<title>StreamManagerEvent | OpenVidu Browser</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="streamevent.html">StreamEvent</a>
+					<a href="streammanagerevent.html">StreamManagerEvent</a>
 				</li>
 			</ul>
-			<h1>Class StreamEvent</h1>
+			<h1>Class StreamManagerEvent</h1>
 		</div>
 	</div>
 </header>
@@ -72,8 +72,7 @@
 					<div class="lead">
 						<p>Defines the following events:</p>
 						<ul>
-							<li><code>streamCreated</code>: dispatched by <a href="session.html">Session</a> and <a href="publisher.html">Publisher</a></li>
-							<li><code>streamDestroyed</code>: dispatched by <a href="session.html">Session</a> and <a href="publisher.html">Publisher</a></li>
+							<li><code>streamPlaying</code>: dispatched by <a href="streammanager.html">StreamManager</a> (<a href="publisher.html">Publisher</a> and <a href="subscriber.html">Subscriber</a>)</li>
 						</ul>
 					</div>
 				</div>
@@ -85,7 +84,7 @@
 						<a href="event.html" class="tsd-signature-type">Event</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">StreamEvent</span>
+								<span class="target">StreamManagerEvent</span>
 							</li>
 						</ul>
 					</li>
@@ -95,27 +94,25 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streamevent.html#cancelable" class="tsd-kind-icon">cancelable</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streamevent.html#reason" class="tsd-kind-icon">reason</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streamevent.html#stream" class="tsd-kind-icon">stream</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streamevent.html#target" class="tsd-kind-icon">target</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streamevent.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#cancelable" class="tsd-kind-icon">cancelable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#target" class="tsd-kind-icon">target</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="streamevent.html#isdefaultprevented" class="tsd-kind-icon">is<wbr>Default<wbr>Prevented</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="streamevent.html#preventdefault" class="tsd-kind-icon">prevent<wbr>Default</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#isdefaultprevented" class="tsd-kind-icon">is<wbr>Default<wbr>Prevented</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#preventdefault" class="tsd-kind-icon">prevent<wbr>Default</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="cancelable" class="tsd-anchor"></a>
@@ -130,42 +127,6 @@
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Whether the event has a default behaviour that may be prevented by calling <a href="event.html#preventdefault">Event.preventDefault</a></p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="reason" class="tsd-anchor"></a>
-					<h3>reason</h3>
-					<div class="tsd-signature tsd-kind-icon">reason<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Events/StreamEvent.ts#L44">OpenViduInternal/Events/StreamEvent.ts:44</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>For &#39;streamDestroyed&#39; event:</p>
-							<ul>
-								<li>&quot;unpublish&quot;: method <code>Session.unpublish()</code> has been called</li>
-								<li>&quot;disconnect&quot;: method <code>Session.disconnect()</code> has been called</li>
-								<li>&quot;networkDisconnect&quot;: the user&#39;s network connection has dropped</li>
-							</ul>
-						</div>
-						<p>For &#39;streamCreated&#39; empty string</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="stream" class="tsd-anchor"></a>
-					<h3>stream</h3>
-					<div class="tsd-signature tsd-kind-icon">stream<span class="tsd-signature-symbol">:</span> <a href="stream.html" class="tsd-signature-type">Stream</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Events/StreamEvent.ts#L34">OpenViduInternal/Events/StreamEvent.ts:34</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Stream object that was created or destroyed</p>
 						</div>
 					</div>
 				</section>
@@ -325,42 +286,36 @@
 					<li class=" tsd-kind-class">
 						<a href="stream.html" class="tsd-kind-icon">Stream</a>
 					</li>
+					<li class=" tsd-kind-class">
+						<a href="streamevent.html" class="tsd-kind-icon">Stream<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="streammanager.html" class="tsd-kind-icon">Stream<wbr>Manager</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="streamevent.html" class="tsd-kind-icon">Stream<wbr>Event</a>
+						<a href="streammanagerevent.html" class="tsd-kind-icon">Stream<wbr>Manager<wbr>Event</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="streamevent.html#cancelable" class="tsd-kind-icon">cancelable</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="streamevent.html#reason" class="tsd-kind-icon">reason</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="streamevent.html#stream" class="tsd-kind-icon">stream</a>
+								<a href="streammanagerevent.html#cancelable" class="tsd-kind-icon">cancelable</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="streamevent.html#target" class="tsd-kind-icon">target</a>
+								<a href="streammanagerevent.html#target" class="tsd-kind-icon">target</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="streamevent.html#type" class="tsd-kind-icon">type</a>
+								<a href="streammanagerevent.html#type" class="tsd-kind-icon">type</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="streamevent.html#isdefaultprevented" class="tsd-kind-icon">is<wbr>Default<wbr>Prevented</a>
+								<a href="streammanagerevent.html#isdefaultprevented" class="tsd-kind-icon">is<wbr>Default<wbr>Prevented</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="streamevent.html#preventdefault" class="tsd-kind-icon">prevent<wbr>Default</a>
+								<a href="streammanagerevent.html#preventdefault" class="tsd-kind-icon">prevent<wbr>Default</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="streammanager.html" class="tsd-kind-icon">Stream<wbr>Manager</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streammanagerevent.html" class="tsd-kind-icon">Stream<wbr>Manager<wbr>Event</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="streampropertychangedevent.html" class="tsd-kind-icon">Stream<wbr>Property<wbr>Changed<wbr>Event</a>
 					</li>

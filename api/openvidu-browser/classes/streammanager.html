@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Publisher | OpenVidu Browser</title>
+	<title>StreamManager | OpenVidu Browser</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="publisher.html">Publisher</a>
+					<a href="streammanager.html">StreamManager</a>
 				</li>
 			</ul>
-			<h1>Class Publisher</h1>
+			<h1>Class StreamManager</h1>
 		</div>
 	</div>
 </header>
@@ -70,18 +70,26 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Packs local media streams. Participants can publish it to a session. Initialized with <a href="openvidu.html#initpublisher">OpenVidu.initPublisher</a> method</p>
+						<p>Interface in charge of displaying the media streams in the HTML DOM. This wraps any <a href="publisher.html">Publisher</a> and <a href="subscriber.html">Subscriber</a> object.
+							You can insert as many video players fo the same Stream as you want by calling <a href="streammanager.html#addvideoelement">StreamManager.addVideoElement</a> or
+						<a href="streammanager.html#createvideoelement">StreamManager.createVideoElement</a>.</p>
 					</div>
+					<p>The use of StreamManager wrapper is particularly useful when you don&#39;t need to differentiate between Publisher or Subscriber streams or just
+						want to directly manage your own video elements (even more than one video element per Stream). This scenario is pretty common in
+					declarative, MVC frontend frameworks such as Angular, React or Vue.js</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="streammanager.html" class="tsd-signature-type">StreamManager</a>
+						<span class="target">StreamManager</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Publisher</span>
+								<a href="publisher.html" class="tsd-signature-type">Publisher</a>
+							</li>
+							<li>
+								<a href="subscriber.html" class="tsd-signature-type">Subscriber</a>
 							</li>
 						</ul>
 					</li>
@@ -100,27 +108,21 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#accessallowed" class="tsd-kind-icon">access<wbr>Allowed</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#issubscribedtoremote" class="tsd-kind-icon">is<wbr>Subscribed<wbr>ToRemote</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#remote" class="tsd-kind-icon">remote</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#session" class="tsd-kind-icon">session</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#stream" class="tsd-kind-icon">stream</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#targetelement" class="tsd-kind-icon">target<wbr>Element</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#videos" class="tsd-kind-icon">videos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streammanager.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streammanager.html#remote" class="tsd-kind-icon">remote</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streammanager.html#stream" class="tsd-kind-icon">stream</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streammanager.html#targetelement" class="tsd-kind-icon">target<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streammanager.html#videos" class="tsd-kind-icon">videos</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#addvideoelement" class="tsd-kind-icon">add<wbr>Video<wbr>Element</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#createvideoelement" class="tsd-kind-icon">create<wbr>Video<wbr>Element</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="publisher.html#off" class="tsd-kind-icon">off</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="publisher.html#on" class="tsd-kind-icon">on</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="publisher.html#once" class="tsd-kind-icon">once</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="publisher.html#publishaudio" class="tsd-kind-icon">publish<wbr>Audio</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="publisher.html#publishvideo" class="tsd-kind-icon">publish<wbr>Video</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="publisher.html#subscribetoremote" class="tsd-kind-icon">subscribe<wbr>ToRemote</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="streammanager.html#addvideoelement" class="tsd-kind-icon">add<wbr>Video<wbr>Element</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="streammanager.html#createvideoelement" class="tsd-kind-icon">create<wbr>Video<wbr>Element</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="streammanager.html#off" class="tsd-kind-icon">off</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="streammanager.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="streammanager.html#once" class="tsd-kind-icon">once</a></li>
 							</ul>
 						</section>
 					</div>
@@ -129,26 +131,10 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="accessallowed" class="tsd-anchor"></a>
-					<h3>access<wbr>Allowed</h3>
-					<div class="tsd-signature tsd-kind-icon">access<wbr>Allowed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L41">OpenVidu/Publisher.ts:41</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Whether the Publisher has been granted access to the requested input devices or not</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#id">id</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L69">OpenVidu/StreamManager.ts:69</a></li>
 						</ul>
@@ -164,26 +150,10 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="issubscribedtoremote" class="tsd-anchor"></a>
-					<h3>is<wbr>Subscribed<wbr>ToRemote</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Subscribed<wbr>ToRemote<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L46">OpenVidu/Publisher.ts:46</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Whether you have called <a href="publisher.html#subscribetoremote">Publisher.subscribeToRemote</a> with value <code>true</code> or <code>false</code> (<em>false</em> by default)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="remote" class="tsd-anchor"></a>
 					<h3>remote</h3>
 					<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#remote">remote</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L55">OpenVidu/StreamManager.ts:55</a></li>
 						</ul>
@@ -199,26 +169,10 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="session" class="tsd-anchor"></a>
-					<h3>session</h3>
-					<div class="tsd-signature tsd-kind-icon">session<span class="tsd-signature-symbol">:</span> <a href="session.html" class="tsd-signature-type">Session</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L51">OpenVidu/Publisher.ts:51</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The <a href="session.html">Session</a> to which the Publisher belongs</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="stream" class="tsd-anchor"></a>
 					<h3>stream</h3>
 					<div class="tsd-signature tsd-kind-icon">stream<span class="tsd-signature-symbol">:</span> <a href="stream.html" class="tsd-signature-type">Stream</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#stream">stream</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L43">OpenVidu/StreamManager.ts:43</a></li>
 						</ul>
@@ -229,12 +183,11 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="targetelement" class="tsd-anchor"></a>
 					<h3>target<wbr>Element</h3>
 					<div class="tsd-signature tsd-kind-icon">target<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#targetelement">targetElement</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L62">OpenVidu/StreamManager.ts:62</a></li>
 						</ul>
@@ -249,12 +202,11 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="videos" class="tsd-anchor"></a>
 					<h3>videos</h3>
 					<div class="tsd-signature tsd-kind-icon">videos<span class="tsd-signature-symbol">:</span> <a href="../interfaces/streammanagervideo.html" class="tsd-signature-type">StreamManagerVideo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#videos">videos</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L48">OpenVidu/StreamManager.ts:48</a></li>
 						</ul>
@@ -268,23 +220,22 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="addvideoelement" class="tsd-anchor"></a>
 					<h3>add<wbr>Video<wbr>Element</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Video<wbr>Element<span class="tsd-signature-symbol">(</span>video<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLVideoElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#addvideoelement">addVideoElement</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L220">OpenVidu/StreamManager.ts:220</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Makes <code>video</code> element parameter display this <a href="publisher.html#stream">stream</a>. This is useful when you are
+									<p>Makes <code>video</code> element parameter display this <a href="streammanager.html#stream">stream</a>. This is useful when you are
 									<a href="/docs/how-do-i/manage-videos/#you-take-care-of-the-video-players">managing the video elements on your own</a></p>
 								</div>
 								<p>Calling this method with a video already added to other Publisher/Subscriber will cause the video element to be
@@ -303,23 +254,22 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="createvideoelement" class="tsd-anchor"></a>
 					<h3>create<wbr>Video<wbr>Element</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">create<wbr>Video<wbr>Element<span class="tsd-signature-symbol">(</span>targetElement<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLElement</span>, insertMode<span class="tsd-signature-symbol">?: </span><a href="../enums/videoinsertmode.html" class="tsd-signature-type">VideoInsertMode</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLVideoElement</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#createvideoelement">createVideoElement</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L266">OpenVidu/StreamManager.ts:266</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Creates a new video element displaying this <a href="publisher.html#stream">stream</a>. This allows you to have multiple video elements displaying the same media stream.</p>
+									<p>Creates a new video element displaying this <a href="streammanager.html#stream">stream</a>. This allows you to have multiple video elements displaying the same media stream.</p>
 								</div>
 								<h4 id="events-dispatched">Events dispatched</h4>
 								<p>The Publisher/Subscriber object will dispatch a <code>videoElementCreated</code> event once the HTML video element has been added to DOM. See <a href="videoelementevent.html">VideoElementEvent</a></p>
@@ -343,16 +293,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="off" class="tsd-anchor"></a>
 					<h3>off</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streammanager.html" class="tsd-signature-type">StreamManager</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#off">off</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L200">OpenVidu/StreamManager.ts:200</a></li>
 								</ul>
@@ -393,18 +342,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="on" class="tsd-anchor"></a>
 					<h3>on</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/eventdispatcher.html" class="tsd-signature-type">EventDispatcher</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L105">OpenVidu/Publisher.ts:105</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L139">OpenVidu/StreamManager.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -443,18 +391,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="once" class="tsd-anchor"></a>
 					<h3>once</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="publisher.html" class="tsd-signature-type">Publisher</a></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streammanager.html" class="tsd-signature-type">StreamManager</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="streammanager.html">StreamManager</a>.<a href="streammanager.html#once">once</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L142">OpenVidu/Publisher.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/StreamManager.ts#L170">OpenVidu/StreamManager.ts:170</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -489,97 +436,7 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="publisher.html" class="tsd-signature-type">Publisher</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="publishaudio" class="tsd-anchor"></a>
-					<h3>publish<wbr>Audio</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">publish<wbr>Audio<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L76">OpenVidu/Publisher.ts:76</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Publish or unpublish the audio stream (if available). Calling this method twice in a row passing same value will have no effect</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p><code>true</code> to publish the audio stream, <code>false</code> to unpublish it</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="publishvideo" class="tsd-anchor"></a>
-					<h3>publish<wbr>Video</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">publish<wbr>Video<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L86">OpenVidu/Publisher.ts:86</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Publish or unpublish the video stream (if available). Calling this method twice in a row passing same value will have no effect</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p><code>true</code> to publish the video stream, <code>false</code> to unpublish it</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="subscribetoremote" class="tsd-anchor"></a>
-					<h3>subscribe<wbr>ToRemote</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">subscribe<wbr>ToRemote<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Publisher.ts#L95">OpenVidu/Publisher.ts:95</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Call this method before <a href="session.html#publish">Session.publish</a> to subscribe to your Publisher&#39;s remote stream instead of using the local stream, as any other user would do.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="streammanager.html" class="tsd-signature-type">StreamManager</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -622,63 +479,9 @@
 					<li class=" tsd-kind-class">
 						<a href="openviduerror.html" class="tsd-kind-icon">Open<wbr>Vidu<wbr>Error</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="publisher.html" class="tsd-kind-icon">Publisher</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="publisher.html#accessallowed" class="tsd-kind-icon">access<wbr>Allowed</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="publisher.html#issubscribedtoremote" class="tsd-kind-icon">is<wbr>Subscribed<wbr>ToRemote</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#remote" class="tsd-kind-icon">remote</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="publisher.html#session" class="tsd-kind-icon">session</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#stream" class="tsd-kind-icon">stream</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#targetelement" class="tsd-kind-icon">target<wbr>Element</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#videos" class="tsd-kind-icon">videos</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#addvideoelement" class="tsd-kind-icon">add<wbr>Video<wbr>Element</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#createvideoelement" class="tsd-kind-icon">create<wbr>Video<wbr>Element</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="publisher.html#off" class="tsd-kind-icon">off</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="publisher.html#on" class="tsd-kind-icon">on</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="publisher.html#once" class="tsd-kind-icon">once</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="publisher.html#publishaudio" class="tsd-kind-icon">publish<wbr>Audio</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="publisher.html#publishvideo" class="tsd-kind-icon">publish<wbr>Video</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="publisher.html#subscribetoremote" class="tsd-kind-icon">subscribe<wbr>ToRemote</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="publisherspeakingevent.html" class="tsd-kind-icon">Publisher<wbr>Speaking<wbr>Event</a>
 					</li>
@@ -700,9 +503,45 @@
 					<li class=" tsd-kind-class">
 						<a href="streamevent.html" class="tsd-kind-icon">Stream<wbr>Event</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="streammanager.html" class="tsd-kind-icon">Stream<wbr>Manager</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="streammanager.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="streammanager.html#remote" class="tsd-kind-icon">remote</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="streammanager.html#stream" class="tsd-kind-icon">stream</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="streammanager.html#targetelement" class="tsd-kind-icon">target<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="streammanager.html#videos" class="tsd-kind-icon">videos</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="streammanager.html#addvideoelement" class="tsd-kind-icon">add<wbr>Video<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="streammanager.html#createvideoelement" class="tsd-kind-icon">create<wbr>Video<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="streammanager.html#off" class="tsd-kind-icon">off</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="streammanager.html#on" class="tsd-kind-icon">on</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="streammanager.html#once" class="tsd-kind-icon">once</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="streammanagerevent.html" class="tsd-kind-icon">Stream<wbr>Manager<wbr>Event</a>
 					</li>

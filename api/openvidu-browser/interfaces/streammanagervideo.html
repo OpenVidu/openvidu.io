@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OpenViduAdvancedConfiguration | OpenVidu Browser</title>
+	<title>StreamManagerVideo | OpenVidu Browser</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="openviduadvancedconfiguration.html">OpenViduAdvancedConfiguration</a>
+					<a href="streammanagervideo.html">StreamManagerVideo</a>
 				</li>
 			</ul>
-			<h1>Interface OpenViduAdvancedConfiguration</h1>
+			<h1>Interface StreamManagerVideo</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">OpenViduAdvancedConfiguration</span>
+						<span class="target">StreamManagerVideo</span>
 					</li>
 				</ul>
 			</section>
@@ -82,9 +82,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="openviduadvancedconfiguration.html#iceservers" class="tsd-kind-icon">ice<wbr>Servers</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="openviduadvancedconfiguration.html#publisherspeakingeventsoptions" class="tsd-kind-icon">publisher<wbr>Speaking<wbr>Events<wbr>Options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="openviduadvancedconfiguration.html#screensharechromeextension" class="tsd-kind-icon">screen<wbr>Share<wbr>Chrome<wbr>Extension</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="streammanagervideo.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="streammanagervideo.html#insertmode" class="tsd-kind-icon">insert<wbr>Mode</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="streammanagervideo.html#targetelement" class="tsd-kind-icon">target<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="streammanagervideo.html#video" class="tsd-kind-icon">video</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,52 +94,80 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="iceservers" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ice<wbr>Servers</h3>
-					<div class="tsd-signature tsd-kind-icon">ice<wbr>Servers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RTCIceServer</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration.ts#L23">OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts#L33">OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Array of <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer">RTCIceServer</a> to be used by OpenVidu Browser instead of the default free ice server array (got from <a href="https://github.com/DamonOehlman/freeice">freeice</a> library)</p>
+							<p><code>id</code> attribute of the DOM video element displaying the StreamManager&#39;s stream</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="publisherspeakingeventsoptions" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> publisher<wbr>Speaking<wbr>Events<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">publisher<wbr>Speaking<wbr>Events<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="insertmode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> insert<wbr>Mode</h3>
+					<div class="tsd-signature tsd-kind-icon">insert<wbr>Mode<span class="tsd-signature-symbol">:</span> <a href="../enums/videoinsertmode.html" class="tsd-signature-type">VideoInsertMode</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration.ts#L36">OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts#L55">OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Custom configuration for the <a href="../classes/publisherspeakingevent.html">PublisherSpeakingEvent</a> feature. It is an object which includes the following optional properties:</p>
+							<p>How the DOM video element should be inserted with respect to <code>targetElement</code>. This property is defined when:</p>
 							<ul>
-								<li><code>interval</code>: (number) how frequently the analyser polls the audio stream to check if speaking has started or stopped. Default <strong>50</strong> (ms)</li>
-								<li><code>threshold</code>: (number) the volume at which <em>publisherStartSpeaking</em> and <em>publisherStopSpeaking</em> events will be fired. Default <strong>-50</strong> (dB)</li>
+								<li><a href="../classes/openvidu.html#initpublisher">OpenVidu.initPublisher</a> or <a href="../classes/session.html#subscribe">Session.subscribe</a> methods have been called passing a valid <code>targetElement</code> parameter.</li>
+								<li>[[SessionManager.createVideoElement]] has been called.</li>
 							</ul>
 						</div>
+						<p>This property is undefined when:</p>
+						<ul>
+							<li><a href="../classes/openvidu.html#initpublisher">OpenVidu.initPublisher</a> or <a href="../classes/session.html#subscribe">Session.subscribe</a> methods have been called passing <em>null</em> or <em>undefined</em> as <code>targetElement</code> parameter.</li>
+							<li>[[SessionManager.addVideoElement]] has been called.</li>
+						</ul>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="screensharechromeextension" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> screen<wbr>Share<wbr>Chrome<wbr>Extension</h3>
-					<div class="tsd-signature tsd-kind-icon">screen<wbr>Share<wbr>Chrome<wbr>Extension<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="targetelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> target<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">target<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration.ts#L29">OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts#L44">OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>URL to a custom screen share extension for Chrome (always based on ours: <a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension">openvidu-screen-sharing-chrome-extension</a>) to be used instead of the default one.
-							Must be something like this: <code>https://chrome.google.com/webstore/detail/YOUR_WEBSTORE_EXTENSION_NAME/YOUR_EXTENSION_ID</code></p>
+							<p>The DOM HTMLElement assigned as target element when creating a video for the StreamManager. This property is defined when:</p>
+							<ul>
+								<li><a href="../classes/openvidu.html#initpublisher">OpenVidu.initPublisher</a> or <a href="../classes/session.html#subscribe">Session.subscribe</a> methods have been called passing a valid <code>targetElement</code> parameter.</li>
+								<li>[[SessionManager.createVideoElement]] has been called.</li>
+							</ul>
+						</div>
+						<p>This property is undefined when:</p>
+						<ul>
+							<li><a href="../classes/openvidu.html#initpublisher">OpenVidu.initPublisher</a> or <a href="../classes/session.html#subscribe">Session.subscribe</a> methods have been called passing <em>null</em> or <em>undefined</em> as <code>targetElement</code> parameter.</li>
+							<li>[[SessionManager.addVideoElement]] has been called.</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="video" class="tsd-anchor"></a>
+					<h3>video</h3>
+					<div class="tsd-signature tsd-kind-icon">video<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLVideoElement</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts#L28">OpenViduInternal/Interfaces/Public/StreamManagerVideo.ts:28</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>DOM video element displaying the StreamManager&#39;s stream</p>
 						</div>
 					</div>
 				</section>
@@ -226,33 +255,36 @@
 					<li class=" tsd-kind-interface">
 						<a href="eventdispatcher.html" class="tsd-kind-icon">Event<wbr>Dispatcher</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="openviduadvancedconfiguration.html" class="tsd-kind-icon">Open<wbr>Vidu<wbr>Advanced<wbr>Configuration</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="openviduadvancedconfiguration.html#iceservers" class="tsd-kind-icon">ice<wbr>Servers</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="openviduadvancedconfiguration.html#publisherspeakingeventsoptions" class="tsd-kind-icon">publisher<wbr>Speaking<wbr>Events<wbr>Options</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="openviduadvancedconfiguration.html#screensharechromeextension" class="tsd-kind-icon">screen<wbr>Share<wbr>Chrome<wbr>Extension</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="publisherproperties.html" class="tsd-kind-icon">Publisher<wbr>Properties</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="signaloptions.html" class="tsd-kind-icon">Signal<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="streammanagervideo.html" class="tsd-kind-icon">Stream<wbr>Manager<wbr>Video</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="streammanagervideo.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="streammanagervideo.html#insertmode" class="tsd-kind-icon">insert<wbr>Mode</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="streammanagervideo.html#targetelement" class="tsd-kind-icon">target<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="streammanagervideo.html#video" class="tsd-kind-icon">video</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="subscriberproperties.html" class="tsd-kind-icon">Subscriber<wbr>Properties</a>
 					</li>

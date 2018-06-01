@@ -168,6 +168,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/manage-videos/">Manage video players</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
 </li>
 
@@ -427,17 +433,18 @@ ng serve
 </div>
 
 <h2 id="understanding-the-code">Understanding the code</h2>
-<p>This is an Angular project generated with angular-cli, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>src/app/</code> folder:</p>
+<p>This is an Angular project generated with angular-cli tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>src/app/</code> folder:</p>
 <ul>
-<li><code>app.component.ts</code>: main component of the app. It contains the functionalities for joining a video-call and for handling the video-calls themselves.</li>
+<li><code>app.component.ts</code>: defines <em>AppComponent</em>, main component of the app. It contains the functionalities for joining a video-call and for handling the video-calls themselves.</li>
 <li><code>app.component.html</code>: HTML for AppComponent.</li>
 <li><code>app.component.css</code>: CSS for AppComponent.</li>
-<li><code>stream.component.css</code>: auxiliary component to manage Stream objects ourselves. It wraps the final HTML <code>&lt;video&gt;</code> which will display the video of its Stream property, as well as the user's nickname in a <code>&lt;p&gt;</code> element.</li>
+<li><code>user-video.component.ts</code>: defines <em>UserVideoComponent</em>, used to display every user video. It contains one <em>OpenViduVideoComponent</em>, the name of the user and also handles a click event to update the view of <em>AppComponent</em>.</li>
+<li><code>ov-video.component.ts</code>: defines <em>OpenViduVideoComponent</em>, which wraps the final HTML <code>&lt;video&gt;</code> that finally displays the media stream.</li>
 </ul>
-<p>Let's see how <code>app.component.ts</code> uses NPM package <code>openvidu-browser</code>:</p>
+<p>Let's see first how <code>app.component.ts</code> uses NPM package <code>openvidu-browser</code>:</p>
 <hr />
 <h4 id="we-import-the-necessary-objects-from-openvidu-browser">We import the necessary objects from <code>openvidu-browser</code>:</h4>
-<pre><code class="typescript">import { OpenVidu, Session, Stream, StreamEvent } from 'openvidu-browser';
+<pre><code class="typescript">import { OpenVidu, Session, StreamManager, Publisher, Subscriber, StreamEvent } from 'openvidu-browser';
 </code></pre>
 
 <hr />
@@ -445,21 +452,19 @@ ng serve
 <pre><code class="typescript">// OpenVidu objects
 OV: OpenVidu;
 session: Session;
-
-// Streams to feed StreamComponent's
-remoteStreams: Stream[] = [];
-localStream: Stream;
+publisher: StreamManager; // Local
+subscribers: StreamManager[] = []; // Remotes
 
 // Join form
 mySessionId: string;
 myUserName: string;
 
-// Main video of the page, will be 'localStream' or one of the 'remoteStreams',
-// updated by an Output event of StreamComponent children
-@Input() mainVideoStream: Stream;
+// Main video of the page, will be 'publisher' or one of the 'subscribers',
+// updated by an Output event of UserVideoComponent children
+@Input() mainStreamManager: StreamManager;
 </code></pre>
 
-<p><code>OpenVidu</code> object will allow us to get a <code>Session</code> object, which is declared just after it. <code>remoteStreams</code> array will store the active streams of other users in the video-call and <code>localStream</code> will be your own local webcam stream. Finally, <code>mySessionId</code> and <code>myUserName</code> params simply represent the video-call and your participant's nickname, as you will see in a moment.</p>
+<p><code>OpenVidu</code> object will allow us to get a <code>Session</code> object, which is declared just after it. <code>publisher</code> StreamManager object will be will be our own local webcam stream and <code>subscribers</code> StreamManager array will store the active streams of other users in the video-call. Finally, <code>mySessionId</code> and <code>myUserName</code> params simply represent the video-call and your participant's nickname, as you will see in a moment.</p>
 <hr />
 <h4 id="whenever-a-user-clicks-on-the-submit-input-defined-in-appcomponenthtml-joinsession-method-is-called">Whenever a user clicks on the submit input defined in <code>app.component.html</code>, <code>joinSession()</code> method is called:</h4>
 <p><br></p>
@@ -479,33 +484,31 @@ this.session = this.OV.initSession();
 // On every new Stream received...
 this.session.on('streamCreated', (event: StreamEvent) =&gt; {
 
-    // Add the new stream to 'remoteStreams' array
-    this.remoteStreams.push(event.stream);
-
     // Subscribe to the Stream to receive it. Second parameter is undefined
     // so OpenVidu doesn't create an HTML video by its own
-    this.session.subscribe(event.stream, undefined);
+    let subscriber: Subscriber = this.session.subscribe(event.stream, undefined);
+    this.subscribers.push(subscriber);
 });
 
 // On every Stream destroyed...
 this.session.on('streamDestroyed', (event: StreamEvent) =&gt; {
 
-    // Remove the stream from 'remoteStreams' array
-    this.deleteRemoteStream(event.stream);
+    // Remove the stream from 'subscribers' array
+    this.deleteSubscriber(event.stream.streamManager);
 });
 </code></pre>
 
-<p>As we are using Angular framework, a good approach will be treating each Stream as a component, contained in a StreamComponent. Thus, we need to store each new stream we received in an array (<code>remoteStreams</code>), and we must remove from it every deleted stream whenever it is necessary. To achieve this, we use the following events:</p>
+<p>As we are using Angular framework, a good approach for managing the remote media streams is to loop across an array of them, feeding a common component with each <code>Subscriber</code> object and let it manage its video. This component will be our <em>UserVideoComponent</em>. To do this, we need to store each new Subscriber we received in array <code>subscribers</code> (of the parent class <code>StreamManager</code>), and we must remove from it every deleted subscriber whenever it is necessary. To achieve this, we use the following events:</p>
 <ul>
 <li>
-<p><code>streamCreated</code>: for each new Stream received by the Session object, we store it in our <code>remoteStreams</code> array and immediately subscribe to it so we can receive its video (empty string as second parameter, so OpenVidu doesn't create an HTML video on its own). HTML template of AppComponent will show the new video, as it contains an <code>ngFor</code> directive which will create a new StreamComponent for each Stream object stored in the array:</p>
-<pre><code>&lt;div *ngFor="let s of this.remoteStreams" class="stream-container col-md-6 col-xs-6"&gt;
-  &lt;stream-component [stream]="s" (mainVideoStream)="getMainVideoStream($event)"&gt;&lt;/stream-component&gt;
+<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM on its own (we will use the video element contained in one of our child components). HTML template of <em>AppComponent</em> loops through <code>subscribers</code> array with an <code>ngFor</code> directive, declaring a <em>UserVideoComponent</em> for each subscriber. We feed them not really as <code>Subscriber</code> objects, but rather as their parent class <code>StreamManager</code>. This way we can reuse <em>UserVideoComponent</em> to also display our <code>Publisher</code> object (that also inhertis from class StreamManager). <code>user-video</code> also declares an output event to let <em>AppComponent</em> know when the user has clicked on it.</p>
+<pre><code>&lt;div *ngFor="let sub of subscribers" class="stream-container col-md-6 col-xs-6"&gt;
+    &lt;user-video [streamManager]="sub" (clicked)="updateMainStreamManager(sub)"&gt;&lt;/user-video&gt;
 &lt;/div&gt;
 </code></pre>
 </li>
 <li>
-<p><code>streamDestroyed</code>: for each Stream that has been destroyed from the Session object (which means a user has left the video-call), we remove it from <code>remoteStreams</code> array, so Angular will automatically delete the required StreamComponent from HTML.</p>
+<p><code>streamDestroyed</code>: for each Stream that has been destroyed from the Session object (which means a user has left the video-call), we remove the associated Subscriber from <code>subscribers</code> array, so Angular will automatically delete the required UserVideoComponent from HTML. Each Stream object has a property <code>streamManager</code> that indicates which Subscriber or Publisher owns it (in the same way, each StreamManager object also has a reference to its Stream).</p>
 </li>
 </ul>
 <hr />
@@ -547,10 +550,10 @@ this.getToken().then(token =&gt; {
 <li>First request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
 <li>Second request performas a POST to <code>/api/tokens</code> (we send a <code>sessionId</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L167">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L160">GitHub repo</a>.</p>
 <hr />
 <h4 id="finally-connect-to-the-session-and-publish-your-webcam">Finally connect to the session and publish your webcam:</h4>
-<pre><code class="typescript">// --- 4) Connect to the session with a valid user token ---
+<pre><code class="typescript"> // --- 4) Connect to the session with a valid user token ---
 
 // 'getToken' method is simulating what your server-side should do.
 // 'token' parameter should be retrieved and returned by your own backend
@@ -564,8 +567,8 @@ this.getToken().then(token =&gt; {
             // --- 5) Get your own camera stream ---
 
             // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-            // element: we will manage it ourselves) and with the desired properties
-            let publisher = this.OV.initPublisher(undefined, {
+            // element: we will manage it on our own) and with the desired properties
+            let publisher: Publisher = this.OV.initPublisher(undefined, {
                 audioSource: undefined, // The source of audio. If undefined default microphone
                 videoSource: undefined, // The source of video. If undefined default webcam
                 publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
@@ -576,14 +579,13 @@ this.getToken().then(token =&gt; {
                 mirror: false           // Whether to mirror your local video or not
             });
 
-            // Store your webcam stream in 'localStream' object
-            this.localStream = publisher.stream;
-            // Set the main video in the page to display our webcam
-            this.mainVideoStream = this.localStream;
-
             // --- 6) Publish your stream ---
 
             this.session.publish(publisher);
+
+            // Set the main video in the page to display our webcam and store our Publisher
+            this.mainStreamManager = publisher;
+            this.publisher = publisher;
         })
         .catch(error =&gt; {
             console.log('There was an error connecting to the session:', error.code, error.message);
@@ -591,52 +593,85 @@ this.getToken().then(token =&gt; {
 });
 </code></pre>
 
-<p>In <code>session.connect</code> method first param is the recently retrieved user token. Second param is the value every user will receive in <code>event.stream.connection.data</code> property on <code>streamCreated</code> event (this value will be used by StreamComponent to append the user's nickname to the his video). So in this case it is an object with a property "clientData" with value "myUserName", which is binded from HTML input <code>&lt;input class="form-control" type="text" id="userName" name="userName" [(ngModel)]="myUserName" required&gt;</code> (filled by the user).</p>
-<p>If the method succeeds, we proceed to publish our webcam to the session. To do so we get a <code>Publisher</code> object with the desired properties. We then store our local Stream (contained in <code>Publisher.stream</code> object) in <code>localStream</code>, make our main video display our own stream and publish the Publisher object through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event.</p>
-<p>With regard to our local Stream, AppComponent's HTML template has also one StreamComponent declaration ready to show our own webcam as we did with remote streams:</p>
-<pre><code class="html">&lt;div *ngIf=&quot;this.localStream&quot; class=&quot;stream-container col-md-6 col-xs-6&quot;&gt;
-    &lt;stream-component [stream]=&quot;this.localStream&quot; (mainVideoStream)=&quot;getMainVideoStream($event)&quot;&gt;&lt;/stream-component&gt;
+<p>In <code>session.connect</code> method first param is the recently retrieved user token. Second param is the value every user will receive in <code>event.stream.connection.data</code> property on <code>streamCreated</code> event (this value will be used by <em>UserVideoComponent</em> to append the user's nickname to the his video). So in this case it is an object with a property "clientData" with value "myUserName", which is binded from HTML input <code>&lt;input class="form-control" type="text" id="userName" name="userName" [(ngModel)]="myUserName" required&gt;</code> (filled by the user).</p>
+<p>If the method succeeds, we proceed to publish our webcam to the session. To do so we get a <code>Publisher</code> object with the desired properties and publish it to the Session through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event. Finally we make the main video player (which is just another <em>UserVideoComponent</em>) display the Publisher object by default. This is the HTML code that will display the main stream manager:</p>
+<pre><code class="html">&lt;div *ngIf=&quot;mainStreamManager&quot; id=&quot;main-video&quot; class=&quot;col-md-6&quot;&gt;
+    &lt;user-video [streamManager]=&quot;mainStreamManager&quot;&gt;&lt;/user-video&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>Last point worth considering is the implementation of StreamComponent. As we are handling Stream objects by ourselves (task which usually is taken care by OpenVidu), and because the URL of Stream objects takes some time to get its final value as the WebRTC negotiation takes place, we must listen to any change in <code>stream</code> @Input property. We do so getting the <code>HTMLVideoElement</code> from our view on <code>ngAfterViewInit()</code> hook method (attribute <code>videoElement</code>), and then listening to <code>ngDoCheck()</code>. This allows us to update <code>videoElement.srcObject</code> value, which is the ultimate property that indicates our<code>&lt;video&gt;</code> element where to receive the media stream. If we didn't do this, the Stream object will update its <em>srcObject</em> property, but our StreamComponent would keep the same initial <code>videoElement.srcObject</code> value. This ensures that all our StreamComponent's will properly display all the videos in the video-call using the correct <em>srcOjbect</em> value.</p>
-<p><code>getNickNameTag()</code> method feeds the view of StreamComponent with the nickName of the user. Remember <code>session.connect</code> method and its second param? It can be now found at <code>stream.connection.data</code>, so every user will receive the nickName of others.</p>
-<p><code>videoClicked()</code> tells our AppComponent parent that the user has clicked on certain video, and that the main video display should update the its Stream object.</p>
-<pre><code class="typescript">ngAfterViewInit() { // Get HTMLVideoElement from the view
-    this.videoElement = this.elementRef.nativeElement;
-}
+<p>And we store the Publisher under <code>this.publisher</code>, which is also of parent class <code>StreamManager</code>. This way our webcam will be appended along all remote subscribers, in exactly the same way they are shown (remember all of them are displayed by <em>UserVideoComponent</em>):</p>
+<pre><code class="html">&lt;div *ngIf=&quot;publisher&quot; class=&quot;stream-container col-md-6 col-xs-6&quot;&gt;
+    &lt;user-video [streamManager]=&quot;publisher&quot; (clicked)=&quot;updateMainStreamManager(publisher)&quot;&gt;&lt;/user-video&gt;
+&lt;/div&gt;
+</code></pre>
 
-ngDoCheck() { // Detect any change in 'stream' property (specifically in its 'srcObject' property)
-    if (this.videoElement &amp;&amp; (this.videoElement.srcObject !== this.stream.getVideoSrcObject())) {
-        this.videoElement.srcObject = this.stream.getVideoSrcObject();
+<p>Last point worth considering is the implementation of <em>UserVideoComonent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsability), but displaying custom information for each one of them (the user's nickname) and handling the click event on them to update property <code>mainStreamManager</code> of parent <em>AppComponent</em>:</p>
+<pre><code class="html">&lt;div (click)=&quot;videoClicked()&quot;&gt;
+    &lt;ov-video [streamManager]=&quot;streamManager&quot;&gt;&lt;/ov-video&gt;
+    &lt;div&gt;&lt;p&gt;{% raw %}{{getNicknameTag()}}{% endraw %}&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<pre><code class="typescript">export class UserVideoComponent {
+
+    @Input()
+    streamManager: StreamManager;
+
+    @Output()
+    clicked = new EventEmitter();
+
+    getNicknameTag() { // Gets the nickName of the user
+        return JSON.parse(this.streamManager.stream.connection.data).clientData;
+    }
+
+    videoClicked() { // Triggers event for the parent component to update its main video display
+        this.clicked.emit();
     }
 }
+</code></pre>
 
-getNicknameTag() { // Gets the nickName of the user
-    return JSON.parse(this.stream.connection.data).clientData;
-}
+<p><em>OpenViduVideoComponent</em> html template is just the video element:</p>
+<pre><code class="html">&lt;video #videoElement&gt;&lt;/video&gt;
+</code></pre>
 
-videoClicked() { // Triggers event for the parent component to update its main video display
-    this.mainVideoStream.next(this.stream);
+<p>And the unique responsability of the component's logic is letting OpenVidu know the exact HTML DOM video player associated to its StreamManger. To do so we use method <code>StreamManager.addVideoElement</code>, which receives a native HTML video element. The way we implement this is Angular dependant: we get the video element with <em>@ViewChild</em> tag and we call the method once after the view has initialized (<em>ngAfterViewInit</em>) and once every time the StreamManager input changes (<em>set</em> method with <em>@Input</em> tag)</p>
+<pre><code class="typescript">export class OpenViduVideoComponent implements AfterViewInit {
+
+    @ViewChild('videoElement') elementRef: ElementRef;
+
+    _streamManager: StreamManager;
+
+    ngAfterViewInit() {
+        this._streamManager.addVideoElement(this.elementRef.nativeElement);
+    }
+
+    @Input()
+    set streamManager(streamManager: StreamManager) {
+        this._streamManager = streamManager;
+        if (!!this.elementRef) {
+            this._streamManager.addVideoElement(this.elementRef.nativeElement);
+        }
+    }
 }
 </code></pre>
 
 <hr />
 <h4 id="leaving-the-session">Leaving the session:</h4>
-<p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method:</p>
-<pre><code class="typescript">leaveSession() {
+<p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method in <code>app.component.ts</code>:</p>
+<pre><code class="typescript">  leaveSession() {
 
     // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
 
     if (this.session) { this.session.disconnect(); };
 
     // Empty all properties...
-    this.remoteStreams = [];
-    this.localStream = null;
-    this.session = null;
-    this.OV = null;
+    this.subscribers = [];
+    delete this.publisher;
+    delete this.session;
+    delete this.OV;
     this.generateParticipantInfo();
-}
+  }
 </code></pre>
 
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
