@@ -28,6 +28,10 @@ custom_css:
                     <img class="img-demo" src="img/demos/openvidu_getaroom.png">
                 </a>
                 <a href="#" class="c-tabs-nav__link">
+                    <h3>OpenVidu Call</h3>
+                    <img class="img-demo" src="img/demos/openvidu_call.png">
+                </a>
+                <a href="#" class="c-tabs-nav__link">
                     <h3>OpenVidu Classroom</h3>
                     <img class="img-demo" src="img/demos/openvidu_classroom.png">
                 </a>
@@ -239,6 +243,7 @@ custom_css:
                     <div class="demo-description">
                         <p>Users can create new videoconference rooms by clicking a button. Then they can share the link of
                             the room to invite new participants. This demo is a 100% frontend application (without any kind of security).</p>
+                            <p><a href="/docs/demos/openvidu-getaroom/index.html">Check this to know more</a></p>
                     </div>
                     <div class="run-div">
                         <hr>
@@ -312,6 +317,99 @@ custom_css:
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="c-tab">
+                <div class="c-tab__content">
+                    <h2>OpenVidu Call</h2>
+                    <div class="demo-description">
+                        <p>OpenVidu Call is the videconferences application focused on makeing video calls with whoever you want.  This is fully front end application built with <strong>Angular 6</strong> covered by a amazingly nice layout.
+                            This application provides a chatting system for allow to users to type each others. Moreover, OpenVidu Call allows you to mute your microphone, unpublish your webcam and share your screen with your video roommates.
+                       </p>
+                       <p><a href="/docs/demos/openvidu-call/index.html">Check this to know more</a></p>
+
+                    </div>
+
+                    <hr>
+                    <div class="run-div">
+                        <!--<hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/logos/openvidu_globe_bg_transp_cropped.png" class="img-responsive img-run-demo img-openvidu" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="https://demos.openvidu.io/classroom/" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
+                            </div>
+                        </div>-->
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <div class="row no-margin">
+                                    <div class="col-lg-1 col-md-2 col-sm-2 no-padding">
+                                        <button id="btn-copy-4" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
+                                        title="Copy to Clipboard">Copy</button>
+                                    </div>
+                                    <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
+                                        <code id="code-4">docker run -p 4443:4443 openvidu/openvidu-call</code>
+                                    </div>
+                                </div>
+                                <div class="row no-margin docker-info-div">
+                                    <div class="col-lg-1 col-md-2 col-sm-2 no-padding docker-info-icon">
+                                        <i class="icon ion-information-circled"></i>
+                                    </div>
+                                    <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
+                                        Wait until you see on the output a line <strong><em>
+                                        <a data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img style='width:180px' src='img/demos/public_ip.png'/>">
+                                            PUBLIC IP
+                                        </a></em></strong>. 
+                                        Connect to the app with this URL. You can share it to easily test the app with other devices (it may not work over the Internet in some cases. Check
+                                        <a href="/docs/troubleshooting#1-everything-looks-alright-but-i-cannot-see-any-remote-video">Troubleshooting</a> section to learn why)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row row-run-demo no-margin">
+                            <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/amazonAWS.png" class="img-responsive img-run-demo" alt="" /></div>
+                            <div class="col col-md-10 col-sm-8 col-xs-12">
+                                <a href="/docs/deployment/deploying-demos-aws/" class="btn-xs btn-primary btn-copy-code" title="Deploy on Amazon">Deploy on Amazon</a>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row no-margin row-gallery">
+                        <div class="col-md-4">
+                            <a data-fancybox="gallery4" href="img/demos/openvidu_call_login.png">
+                                    <img class="img-responsive" src="img/demos/openvidu_call_login.png">
+                                </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a data-fancybox="gallery4" href="img/demos/openvidu_call1.png">
+                                    <img class="img-responsive" src="img/demos/openvidu_call1.png">
+                                </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a data-fancybox="gallery4" href="img/demos/openvidu_call2.png">
+                                <img class="img-responsive" src="img/demos/openvidu_call2.png">
+                            </a>
+                        </div>                      
+                    </div>
+                    <div class="row no-margin row-gallery">
+                    <div class="col-md-4">
+                        <a data-fancybox="gallery4" href="img/demos/openvidu_call_chat.png">
+                            <img class="img-responsive" src="img/demos/openvidu_call_chat.png">
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a data-fancybox="gallery4" href="img/demos/openvidu_call3.png">
+                            <img class="img-responsive" src="img/demos/openvidu_call3.png">
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a data-fancybox="gallery4" href="img/demos/openvidu_call4.png">
+                            <img class="img-responsive" src="img/demos/openvidu_call4.png">
+                        </a>
+                    </div>
+                </div>
                 </div>
             </div>
             <div class="c-tab">
