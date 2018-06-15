@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Join a session
+title: OpenVidu Documentation - openvidu-classroom
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Join a session')").each(function (i, e) {
+		$(".subnav").find("li:contains('openvidu-classroom')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Join a session')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('openvidu-classroom')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -126,19 +126,19 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+    <a class="" href="../openvidu-getaroom/">openvidu-getaroom</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+    <a class="" href="../openvidu-call/">openvidu-call</a> 
 </li>
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">openvidu-classroom</a>  
 </li>
 
  
@@ -156,55 +156,55 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../create-session/">Create a session</a> 
-</li>
-
-   
-
-<li class="toctree-l1 current">
-    <a class="current" href="./">Join a session</a>  
+    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../leave-session/">Leave a session</a> 
+    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../publish-unpublish/">Publish/Unpublish a stream</a> 
+    <a class="" href="../../how-do-i/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../mute-audio-video/">Mute/Unmute audio and video</a> 
+    <a class="" href="../../how-do-i/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../manage-videos/">Manage video players</a> 
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../share-data/">Share data between users</a> 
+    <a class="" href="../../how-do-i/manage-videos/">Manage video players</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../send-messages/">Send text messages</a> 
+    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
 </li>
 
  
@@ -379,51 +379,83 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="join-a-session">Join a session</h1>
-<p>By calling <code>session.connect</code> method you can join a properly initialized session.</p>
-<pre><code class="javascript">session.connect(token)
-    .then( ... )
-    .catch( ... );
+							 <h1 id="openvidu-classroom">openvidu-classroom</h1>
+<p><a href="https://github.com/OpenVidu/classroom-demo" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
+<p>This is a fully functional application that makes use of the secure version of OpenVidu to connect teachers and students in video sessions. It has a frontend built with <strong>Angular 6</strong>, a backend built with <strong>Spring Boot</strong> and a <strong>MySQL</strong> database. There are two types of roles: teachers and students. First ones can create/edit/remove lessons and invite students to them. Only when a teacher initialize a lesson authorized students can connect to it.</p>
+<h2 id="running-this-tutorial">Running this tutorial</h2>
+<p>1) Clone the repo:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/classroom-demo.git
 </code></pre>
 
-<p><br>
-You must ask OpenVidu Server for a user token. To do so:</p>
-<ol>
-<li>
-<p><strong>Initialize a Session in OpenVidu Server</strong></p>
-<ul>
-<li><a href="../../reference-docs/REST-API#post-apisessions">API REST</a></li>
-<li><a href="../../reference-docs/openvidu-java-client#create-a-session">openvidu-java-client</a></li>
-<li><a href="../../reference-docs/openvidu-node-client#create-a-session">openvidu-node-client</a><br><br></li>
-</ul>
-</li>
-<li>
-<p><strong>Generate a token for this session in OpenVidu Server</strong></p>
-<ul>
-<li><a href="../../reference-docs/REST-API#post-apitokens">API REST</a></li>
-<li><a href="../../reference-docs/openvidu-java-client#generate-a-token">openvidu-java-client</a></li>
-<li><a href="../../reference-docs/openvidu-node-client#generate-a-token">openvidu-node-client</a><br><br></li>
-</ul>
-</li>
-<li>
-<p><strong>Return this token to your client-side to use it on </strong><code>Session.connect()</code><br><br></p>
-</li>
-</ol>
-<p>You can add an optional second parameter to pass some user metadata that will be recieved by every other user connected to the same session (check <a href="../../how-do-i/share-data/">Share data between users</a> to learn more).</p>
-<pre><code class="javascript">session.connect(token, DATA)
-    .then( ... )
-    .catch( ... );
-</code></pre> 
+<p>2) You will need node, NPM and angular-cli to execute the app. You can install them with:</p>
+<pre><code class="bash">sudo apt-get update
+sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -
+sudo apt-get install -y nodejs
+sudo npm install -g @angular/cli
+</code></pre>
+
+<p>3) This demo needs a MySQL database to store the info. Install MySQL:</p>
+<pre><code class="bash">sudo apt-get install -y mysql-server
+sudo mysql_secure_installation
+</code></pre>
+
+<p>And create a new database:</p>
+<pre><code class="bash">mysql -u root -p
+</code></pre>
+
+<p>(Enter the same password you set during the installation process)</p>
+<pre><code class="bash">CREATE DATABASE openvidu_sample_app;
+exit
+</code></pre>
+
+<p>4) <em>openvidu-server</em> and <strong>Kurento Media Server</strong> must be up and running in your development machine. The easiest way is running this Docker container which wraps         both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>:</p>
+<pre><code class="bash">docker run -d -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
+</code></pre>
+
+<p>5) Install NPM dependencies of frontend:</p>
+<pre><code class="bash">cd classroom-demo/src/angular/frontend
+npm install
+</code></pre>
+
+<p>6) Build the frontend, exporting the files to the static folder of the Java application:</p>
+<pre><code class="bash">ng build --output-path ../../main/resources/static
+</code></pre>
+
+<p>7) Finally run the Spring Boot application:</p>
+<pre><code class="bash">cd ../../../
+mvn clean package exec:java
+</code></pre>
+
+<p>Go to <a href="https://localhost:5000">https://localhost:5000</a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <i>openvidu-server</i> when you first try to join a video-call. To test two users in the same computer, use a standard window and an incognito window.</p>
+<p><br></p>
+<p>Without going into greater detail, the backend has<a href="https://github.com/OpenVidu/classroom-demo/blob/master/src/main/java/io/openvidu/classroom/demo/lesson/LessonController.java">one controller</a> for the REST operations of the lessons (create new ones or edit/remove existing ones) and <a href="https://github.com/OpenVidu/classroom-demo/blob/master/src/main/java/io/openvidu/classroom/demo/session_manager/SessionController.java">one controller</a> for handling the videoconferences. This controller is pretty similar to the one described in any of the secure tutorials. Basically it listens to the operations of creating a new session (returning a <em>sessionId</em> from <em>openvidu-server</em>), generating a new user token (returning the <em>token</em> from <em>openvidu-server</em>) and removing the users when they leave the session.</p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../leave-session/" class="btn btn-xs btn-primary float-right" title="Leave a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../how-do-i/create-session/" class="btn btn-xs btn-primary float-right" title="Create a session">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../create-session/" class="btn btn-xs btn-primary" title="Create a session"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../openvidu-call/" class="btn btn-xs btn-primary" title="openvidu-call"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -432,7 +464,7 @@ You must ask OpenVidu Server for a user token. To do so:</p>
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/how-do-i/join-session.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/demos/openvidu-classroom.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

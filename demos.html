@@ -243,7 +243,6 @@ custom_css:
                     <div class="demo-description">
                         <p>Users can create new videoconference rooms by clicking a button. Then they can share the link of
                             the room to invite new participants. This demo is a 100% frontend application (without any kind of security).</p>
-                            <p><a href="/docs/demos/openvidu-getaroom/index.html">Check this to know more</a></p>
                     </div>
                     <div class="run-div">
                         <hr>
@@ -291,7 +290,7 @@ custom_css:
                         <hr>
                     </div>
                     <div class="demo-description demo-margin-bottom">
-                        <p>This demo is also provided in the form of tutorial. You can check it out here: <a href="/docs/tutorials/openvidu-getaroom/">openvidu-getaroom</a></p>
+                        <p>You can know more here: <a href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a></p>
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-6">
@@ -327,19 +326,17 @@ custom_css:
                             OpenVidu Call allows you to join into multi-party videoconference calls, displayed in a nice layout. In the calls you can mute/unmute and publish/unpublish your microphone and webcam,
                             share your screen and chat with the rest of users. All of these features are implemented exclusively by making use of OpenVidu Browser library.
                        </p>
-                       <p><a href="/docs/demos/openvidu-call/index.html">Check this to know more</a></p>
-
                     </div>
 
                     <hr>
                     <div class="run-div">
-                        <!--<hr>
+                        <hr>
                         <div class="row row-run-demo no-margin">
                             <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/logos/openvidu_globe_bg_transp_cropped.png" class="img-responsive img-run-demo img-openvidu" alt="" /></div>
                             <div class="col col-md-10 col-sm-8 col-xs-12">
-                                <a href="https://demos.openvidu.io/classroom/" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
+                                <a href="https://demos.openvidu.io/openvidu-call" class="btn-xs btn-primary btn-copy-code" title="Try it now!">Try it now!</a>
                             </div>
-                        </div>-->
+                        </div>
                         <hr>
                         <div class="row row-run-demo no-margin">
                             <div class="col col-md-2 col-sm-4 col-xs-12"><img src="img/assets/docker.png" class="img-responsive img-run-demo img-docker" alt="" /></div>
@@ -376,6 +373,9 @@ custom_css:
                             </div>
                         </div>
                         <hr>
+                    </div>
+                    <div class="demo-description demo-margin-bottom">
+                        <p>You can know more here: <a href="/docs/demos/openvidu-call/">openvidu-call</a></p>
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-4">
@@ -468,78 +468,8 @@ custom_css:
                         </div>
                         <hr>
                     </div>
-                    <div class="row no-margin demo-description">
-                        <p>There's no tutorial for this application, but you can run it in your local machine by following these
-                            steps:
-                            <ol>
-                                <li>
-                                    <p>Clone the repo</p>
-                                    <code id="code-5">git clone https://github.com/OpenVidu/classroom-demo.git</code>
-                                    <button id="btn-copy-5" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p>You will need <i>node</i>, <i>NPM</i> and <i>angular-cli</i> to execute the app. You
-                                        can install them with:</p>
-                                    <code id="code-6">sudo apt-get update<br>sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -<br>sudo apt-get install -y nodejs<br>sudo npm install -g @angular/cli</code>
-                                    <button id="btn-copy-6" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p>This demo needs a MySQL database to store the info. Install MySQL:</p>
-                                    <code id="code-7">sudo apt-get install -y mysql-server<br>sudo mysql_secure_installation</code>
-                                    <button id="btn-copy-7" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                    <p>And create a new database:</p>
-                                    <code id="code-8">mysql -u root -p</code>
-                                    <button id="btn-copy-8" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                        <p style="font-size:13px">(Enter the same password you set during the installation process)</p>
-                                    <code id="code-9">CREATE DATABASE openvidu_sample_app;<br>exit</code>
-                                    <button id="btn-copy-9" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p><i>openvidu-server</i> and <i>Kurento Media Server</i> must be up and running in your
-                                        development machine. The easiest way is running this Docker container which wraps
-                                        both of them (you will need
-                                        <a href="https://store.docker.com/search?type=edition&offering=community">Docker CE</a>):</p>
-                                    <code id="code-10">docker run -d -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms</code>
-                                    <button id="btn-copy-10" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p>Install NPM dependencies of frontend:</p>
-                                    <code id="code-11">cd classroom-demo/src/angular/frontend<br>npm install</code>
-                                    <button id="btn-copy-11" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p>Build the frontend, exporting the files to the static folder of the Java application:</p>
-                                    <code id="code-12">ng build --output-path ../../main/resources/static</code>
-                                    <button id="btn-copy-12" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                </li>
-                                <li>
-                                    <p>Finally run the Spring Boot application:</p>
-                                    <code id="code-13">cd ../../../<br>mvn clean package exec:java</code>
-                                    <button id="btn-copy-13" class="btn-xs btn-primary btn-copy-code hidden-xs" data-toggle="tooltip" data-placement="button"
-                                        title="Copy to Clipboard">Copy</button>
-                                    <p>Go to <a href="https://localhost:5000">https://localhost:5000</a> to test the app once
-                                        the server is running. The first time you use the docker container, an alert message
-                                        will suggest you accept the self-signed certificate of <i>openvidu-server</i> when
-                                        you first try to join a video-call. To test two users in the same computer, use a
-                                        standard window and an incognito window.</p>
-                                </li>
-                            </ol>
-                        </p>
-                        <p>
-                            Without going into greater detail, the backend has <a href="https://github.com/OpenVidu/classroom-demo/blob/master/src/main/java/io/openvidu/classroom/demo/lesson/LessonController.java">one controller</a>                            for the REST operations of the lessons (create new ones or edit/remove existing ones) and
-                            <a href="https://github.com/OpenVidu/classroom-demo/blob/master/src/main/java/io/openvidu/classroom/demo/session_manager/SessionController.java">one controller</a>                            for handling the videoconferences. This controller is pretty similar to the one described in
-                            any of the secure tutorials. Basically it listens to the operations of creating a new session
-                            (returning a <i>sessionId</i> from <i>openvidu-server</i>), generating a new user token (returning
-                            the <i>token</i> from <i>openvidu-server</i>) and removing the users when they leave the session.
-                        </p>
+                    <div class="demo-description demo-margin-bottom">
+                        <p>You can know more here: <a href="/docs/demos/openvidu-classroom/">openvidu-classroom</a></p>
                     </div>
                     <div class="row no-margin row-gallery">
                         <div class="col-md-4">
