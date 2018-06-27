@@ -383,7 +383,14 @@ active: documentation
 
 <hr>
 
-<h2 id="210">2.1.0</h2>
+<ul>
+<li><a href="#220">2.2.0</a></li>
+<li><a href="#210">2.1.0</a></li>
+<li><a href="#200">2.0.0</a></li>
+<li><a href="#190-beta-1">1.9.0-beta-1</a></li>
+</ul>
+<hr />
+<h2 id="220">2.2.0</h2>
 <h3 id="artifacts">Artifacts</h3>
 <table class="artifact-table">
 
@@ -398,46 +405,46 @@ active: documentation
   <tr>
     <td rowspan="2">openvidu-browser</td>
     <td>NPM package</td>
-    <td>2.1.0</td>
+    <td>2.2.0</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
     <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>JS file</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
+    <td>2.2.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.2.0" target="_blank">GitHub</a></td>
   </tr>
 
   <tr>
     <td rowspan="3">openvidu-server</td>
     <td>JAR</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
+    <td>2.2.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.2.0" target="_blank">GitHub</a></td>
     <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>Docker container</td>
-    <td>2.1.0</td>
+    <td>2.2.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
   </tr>
     <tr>
     <td>Docker container (+KMS)</td>
-    <td>2.1.0</td>
+    <td>2.2.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
   </tr>
 
   <tr>
     <td>openvidu-java-client</td>
     <td>MVN package</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.0.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td>2.2.0</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.2.0%7Cjar" target="_blank">MVN Repository</a></td>
     <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
   </tr>
 
   <tr>
     <td>openvidu-node-client</td>
     <td>NPM package</td>
-    <td>2.0.0</td>
+    <td>2.2.0</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
     <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
   </tr>
@@ -446,13 +453,11 @@ active: documentation
 
 <h3 id="release-notes">Release Notes</h3>
 <p><br></p>
-<h4 id="new-features">NEW FEATURES</h4>
-<p><strong>OpenVidu Browser support for video management</strong></p>
-<p>We have implemented a new class in OpenVidu Browser aimed to better support declarative frontend framewroks such as Angular, React or Vue.js.</p>
-<p>Now Publisher and Subscriber objects both inherit from <a href="./../../api/openvidu-browser/classes/streammanager.html">StreamManager</a>, which provides 2 different methods to tell OpenVidu what DOM video players should display each specific stream (<code>addVideoElement</code> and <code>createVideoElement</code>). This allows us to let OpenVidu take control of the video elements (even if our framework dinamically creates them) and do not worry about its internals. This is all explained in detail in <a href="../how-do-i/manage-videos">Manage video players</a> section.</p>
-<p>If you want to check out a real example of this behaviuor, explore our renovated <a href="../tutorials/openvidu-insecure-angular/">OpenVidu Angular tutorial</a>.<br><br></p>
+<p>OpenVidu now offers <strong>integrated and automated support for TURN server</strong>. We encourage developers to check out our <strong><a href="https://medium.com/@openvidu/openvidu-2-2-0-turn-made-easy-9d7e145f8905">post on Medium</a></strong> to learn more about it.</p>
+<p>The platform now integrates by default a COTURN server as part of its ecosystem. This means that media connections will work OK even when clients are located on restricted networks. When <a href="https://openvidu.io/docs/deployment/deploying-aws/">deploying OpenVidu Server in Amazon Web Services</a> with our Cloud Formation template no changes are required at all. If you are deploying OpenVidu Server on your own in an Ubuntu machine, installation instructions have changed a little bit. You have them properly updated <a href="https://openvidu.io/docs/deployment/deploying-ubuntu/">here</a>.</p>
 <hr />
-<h2 id="200">2.0.0</h2>
+<p><br></p>
+<h2 id="210">2.1.0</h2>
 <h3 id="artifacts_1">Artifacts</h3>
 <table class="artifact-table">
 
@@ -467,31 +472,31 @@ active: documentation
   <tr>
     <td rowspan="2">openvidu-browser</td>
     <td>NPM package</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
     <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>JS file</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td>2.1.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
   </tr>
 
   <tr>
     <td rowspan="3">openvidu-server</td>
     <td>JAR</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td>2.1.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
     <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>Docker container</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
   </tr>
     <tr>
     <td>Docker container (+KMS)</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
   </tr>
 
@@ -514,6 +519,76 @@ active: documentation
 </table>
 
 <h3 id="release-notes_1">Release Notes</h3>
+<p><br></p>
+<h4 id="new-features">NEW FEATURES</h4>
+<p><strong>OpenVidu Browser support for video management</strong></p>
+<p>We have implemented a new class in OpenVidu Browser aimed to better support declarative frontend frameworks such as Angular, React or Vue.js.</p>
+<p>Now Publisher and Subscriber objects both inherit from <a href="./../../api/openvidu-browser/classes/streammanager.html">StreamManager</a>, which provides 2 different methods to tell OpenVidu what DOM video players should display each specific stream (<code>addVideoElement</code> and <code>createVideoElement</code>). This allows us to let OpenVidu take control of the video elements (even if our framework dynamically creates them) and do not worry about its internals. This is all explained in detail in <a href="../how-do-i/manage-videos">Manage video players</a> section.</p>
+<p>If you want to check out a real example of this behavior, explore our renovated <a href="../tutorials/openvidu-insecure-angular/">OpenVidu Angular tutorial</a>.<br><br></p>
+<hr />
+<p><br></p>
+<h2 id="200">2.0.0</h2>
+<h3 id="artifacts_2">Artifacts</h3>
+<table class="artifact-table">
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Compatible Version</th>
+    <th>Link</th>
+    <th class="last-table-col">Info</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
+    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-java-client</td>
+    <td>MVN package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.0.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+</table>
+
+<h3 id="release-notes_2">Release Notes</h3>
 <p><br></p>
 <p>This is the first breaking change update for OpenVidu, which brings in lots of new features and internal improvements.</p>
 <h4 id="new-features_1">NEW FEATURES</h4>
@@ -613,7 +688,7 @@ active: documentation
 <p><strong>OpenVidu Node Client</strong></p>
 <ul>
 <li>We have removed the builder pattern in all openvidu-node-client classes. Now objects are used instead, which includes classes <code>TokenOptions</code>, <code>SessionProperties</code> and <code>RecordingProperties</code>. For example, instead of getting a TokenOptions object like this: <code>var tokenOptions = new TokenOptions.Builder().data(serverData).role(role).build()</code> now it must be like this: <code>var tokenOptions = {data: serverData, role: role}</code></li>
-<li>There has been a simple change in certain asynchronous call. Method <code>Session.getSessionId()</code> is now synchronous, but method <code>OpenVidu.createSession()</code> is now asynchronous (the reason is pretty simple: now method <em>createSession</em> implements the behaviour that <em>getSessionId</em> was providing the first time it was called for certain <em>Session</em> object).</li>
+<li>There has been a simple change in certain asynchronous call. Method <code>Session.getSessionId()</code> is now synchronous, but method <code>OpenVidu.createSession()</code> is now asynchronous (the reason is pretty simple: now method <em>createSession</em> implements the behavior that <em>getSessionId</em> was providing the first time it was called for certain <em>Session</em> object).</li>
 <li>All callback methods have been promisified. This includes method <code>Session.generateToken(tokenOptions?, callback): void</code> (now  <code>Session.generateToken(tokenOptions?): Promise&lt;string&gt;</code>) and method <code>Session.getSessionId(callback): void</code> (now <code>OpenVidu.createSession(): Promise&lt;Session&gt;</code>, take also into account that the async call has changed from one method to the other as stated in the previous point).</li>
 <li>All <code>Archive</code> entities are now called <code>Recording</code>. This includes: object <code>Archive</code> to <code>Recording</code>, object <code>ArchiveMode</code> to <code>RecordingMode</code>, object <code>ArchiveLayout</code> to <code>RecordingLayout</code>, method <code>SessionProperties.archiveLayout()</code> to <code>SessionProperties.recordingLayout()</code>, method <code>SessionProperties.archiveMode()</code> to <code>SessionProperties.recordingMode()</code>, method <code>SessionProperties.Builder.archiveLayout()</code> to <code>SessionProperties.Builder.recordingLayout()</code>, method <code>SessionProperties.Builder.archiveMode()</code> to <code>SessionProperties.Builder.recordingMode()</code></li>
 <li><code>recordingLayout</code> property in <a href="./../../api/openvidu-node-client/interfaces/sessionproperties.html"><code>SessionProperties</code></a> has changed to <code>defaultRecordingLayout</code>. This means that if one Session is gonna be recorded more than once, each recording layout may be customize with <code>recordingLayout</code> property (of <a href="./../../api/openvidu-node-client/interfaces/recordingproperties.html">RecordingProperties</a> interface, which will overwrite the default one globally configured in SessionProperties object. <br><br></li>
@@ -634,10 +709,10 @@ active: documentation
 </ul>
 </li>
 </ul>
-<p><br>
-<hr></p>
+<hr />
+<p><br></p>
 <h2 id="190-beta-1">1.9.0-beta-1</h2>
-<h3 id="artifacts_2">Artifacts</h3>
+<h3 id="artifacts_3">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -697,7 +772,7 @@ active: documentation
 
 </table>
 
-<h3 id="release-notes_2">Release Notes</h3>
+<h3 id="release-notes_3">Release Notes</h3>
 <p><br></p>
 <ul>
 <li><strong>Safari support</strong>: now OpenVidu is compatible with the most recent versions of Safari in Mac and iOS. It is necessary to use Kurento Media Server 6.7.0:<br><br><ul>
