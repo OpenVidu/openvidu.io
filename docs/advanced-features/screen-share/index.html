@@ -391,7 +391,7 @@ active: documentation
 <li><code>SCREEN_EXTENSION_DISABLED</code>: if Chrome's screen extension is installed but disabled</li>
 <li><code>SCREEN_CAPTURE_DENIED</code>: if the user doesn't grant permissions to capture the screen when the browser asks to.</li>
 </ul>
-<pre><code class="javascript">OV.initPublisher('html-element-id', { screen: true }, function(error) {
+<pre><code class="javascript">OV.initPublisher('html-element-id', { videoSource: &quot;screen&quot; }, function(error) {
     if (error.name == 'SCREEN_EXTENSION_NOT_INSTALLED') {
         showWarning(error.message);
 
