@@ -438,6 +438,13 @@ active: documentation
 </div></p>
 <hr />
 <h2 id="running-this-demo">Running this demo</h2>
+<p>You have several options to run OpenVidu Call:</p>
+<h4 id="using-docker">Using Docker</h4>
+<p>The easiest way is running this Docker container (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 openvidu/openvidu-call
+</code></pre>
+
+<h4 id="cloning-github-repository">Cloning GitHub Repository</h4>
 <p>1)  Clone the repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-call.git
 </code></pre>
@@ -467,6 +474,38 @@ npm install
 <p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
 <p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
 </blockquote>
+<h4 id="using-the-release">Using the Release</h4>
+<p>As you can see <a href="https://github.com/OpenVidu/openvidu-call/releases">here</a>, OpenVidu Call has new release. 
+The <strong>openvidu-call-X.X.X.tar.gz</strong> file contains the compiled app served in <code>/</code> and <strong>openvidu-call-demos-X.X.X.tar.gz</strong> file contains the compiled app served in <code>/openvidu-call/</code>.</p>
+<p>To run OpenVidu Call with the compiled files you will need:</p>
+<p>1) openvidu-server and Kurento Media Server must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
+</code></pre>
+
+<p>2) Download the release:</p>
+<pre><code class="bash">wget https://github.com/OpenVidu/openvidu-call/releases/download/v1.0.1/openvidu-call-1.0.1.tar.gz
+</code></pre>
+
+<p>3) Decompress the dowloaded file:</p>
+<pre><code>mkdir openvidu-call
+tar -xvzf openvidu-call-1.0.1.tar.gz -C openvidu-call/
+cd openvidu-call
+</code></pre>
+
+<p>4) You will need a HTTP server to display the app like <a href="https://www.nginx.com/">NGINX</a> or <a href="https://www.npmjs.com/package/http-server">http-server</a>.  We will use <strong>http-server</strong>:</p>
+<p>You will need <strong>node</strong> and <strong>NPM</strong> to install http-server. You can install them with:</p>
+<pre><code class="bash">sudo apt-get update
+sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+sudo apt-get install -y nodejs
+</code></pre>
+
+<p>5) Install <strong>http-server</strong> and serve the app:</p>
+<pre><code>npm i http-server
+http-server
+</code></pre>
+
+<p>Wait until you see on the output a line IP address. </p>
+<p>By default, the app will be served in <code>http://127.0.0.1</code> address. You will need go to <a href="https://127.0.0.1:4443"><code>https://127.0.0.1:4443</code></a> to sign the certificate. Once signed, you will can test OpenVidu Call in the default IP <a href="http://127.0.0.1:8080"><code>http://127.0.0.1:8080</code></a></p>
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 <script>
