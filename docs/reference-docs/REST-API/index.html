@@ -72,6 +72,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
@@ -383,11 +389,28 @@ active: documentation
 
 <hr>
 
-<p>All REST operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). An example is shown below:</p>
-<p>For secret "MY_SECRET", the final HTTP header would be</p>
+<p>All REST operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). If authorization header is wrong, every call to any REST API operation will return HTTP status <code>401</code>.</p>
+<p>For example, for secret "MY_SECRET", the final valid HTTP header would be</p>
 <blockquote>
 <p><code>Authorization: Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</code></p>
 </blockquote>
+<h3 id="list-of-available-operations">List of available operations</h3>
+<p><br></p>
+<ul>
+<li>Initialize a session: <a href="#post-apisessions"><strong>POST /api/sessions</strong></a></li>
+<li>Generate a token: <a href="#post-apitokens"><strong>POST /api/tokens</strong></a></li>
+<li>Retrieve active session info: <a href="#get-apisessionssession_id"><strong>GET /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
+<li>Retrieve all active sessions info: <a href="#get-apisessions"><strong>GET /api/sessions</strong></a></li>
+<li>Close a session: <a href="#delete-apisessionssession_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
+<li>Force the disconnection of a user from a session: <a href="#delete-apisessionssession_idconnectionconnection_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</strong></a></li>
+<li>Force the unpublishing of a user's stream from a session: <a href="#delete-apisessionssession_idstreamstream_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</strong></a></li>
+<li>Start the recording of a session: <a href="#post-apirecordingsstart"><strong>POST /api/recordings/start</strong></a></li>
+<li>Stop the recording of a session: <a href="#post-apirecordingsstoprecording_id"><strong>POST/api/recordings/stop/&lt;RECORDING_ID&gt;</strong></a></li>
+<li>Get recording info: <a href="#get-apirecordingsrecording_id"><strong>GET /api/recordings/&lt;RECORDING_ID&gt;</strong></a></li>
+<li>Get all recordings info: <a href="#get-apirecordings"><strong>GET /api/recordings</strong></a></li>
+<li>Delete a recording: <a href="#delete-apirecordingsrecording_id"><strong>DELETE /api/recordings/&lt;RECORDING_ID&gt;</strong></a></li>
+</ul>
+<hr />
 <h3 id="post-apisessions">POST <code>/api/sessions</code></h3>
 <table>
 <thead>
@@ -535,6 +558,213 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
+<h3 id="get-apisessionssession_id">GET <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>GET SESSION INFO</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>GET</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/sessions/&lt;SESSION_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"mediaMode":"ROUTED","recording":false,"sessionId":"TestSession","recordingMode":"MANUAL","connections":{"numberOfElements":2,"content":[{"role":"PUBLISHER","subscribers":[{"streamId":"xm3zcg6d9ntp0qbn_CAMERA_MJALP","publisher":"xm3zcg6d9ntp0qbn"}],"connectionId":"rxrqelmbskpsxwx1","publishers":[],"clientData":"TestClient","serverData":"","token":"wss://localhost:4443?sessionId=TestSession&amp;token=okx9wldlu4u4okmt&amp;role=PUBLISHER&amp;turnUsername=5VKPTG&amp;turnCredential=udv4gy"},{"role":"PUBLISHER","subscribers":[],"connectionId":"xm3zcg6d9ntp0qbn","publishers":[{"streamId":"xm3zcg6d9ntp0qbn_CAMERA_MJALP","mediaOptions":{"hasVideo":true,"frameRate":30,"hasAudio":false,"videoActive":true,"videoDimensions":"{\"width\":640,\"height\":480}","typeOfVideo":"CAMERA"}}],"clientData":"TestClient","serverData":"","token":"wss://localhost:4443?sessionId=TestSession&amp;token=mltylf00bpapshru&amp;role=PUBLISHER&amp;turnUsername=O1NDC2&amp;turnCredential=xcjany"}]},"defaultRecordingLayout":"BEST_FIT"}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>sessionId</code>: identifier of the session (identical to <em>SESSION_ID</em> url parameter)</li>
+<li><code>mediaMode</code>: media mode configured for the session (<code>ROUTED</code> or <code>RELAYED</code>)</li>
+<li><code>recording</code>: whether the session is being recorded or not at this moment</li>
+<li><code>recordingMode</code>: recording mode configured for the session (<code>ALWAYS</code> or <code>MANUAL</code>)</li>
+<li><code>defaultRecordingLayout</code>: the default recording layout configured for the session</li>
+<li><code>connections</code>: collection of active connections in the session. This object is defined by a <code>numberOfElements</code> property counting the total number of active connections and a <code>content</code> array with the actual connections. Each object of this array has this structure:<ul>
+<li><code>connectionId</code>: identifier of the user's connection</li>
+<li><code>role</code>: role of the connection</li>
+<li><code>clientData</code>: data defined in OpenVidu Browser when calling <a href="../../../api/openvidu-browser/classes/session.html#connect"><code>Session.connect</code></a> (<em>metadata</em> parameter)</li>
+<li><code>serverData</code>: data assigned to the user's token when generating the token in OpenVidu Server</li>
+<li><code>token</code>: user's token</li>
+<li><code>publishers</code>: array of Publisher objects (streams the user is publishing). Each one is defined by the unique <code>streamId</code> property and has a <code>mediaOptions</code> object with the current properties of the published stream ("hasVideo","hasAudio","videoActive","audioActive","frameRate","videoDimensions","typeOfVideo")</li>
+<li><code>subscribers</code>: array of Subscriber objects (streams the user is subscribed to). Each on is defined by the unique <code>streamId</code> and a <code>publisher</code> property with the <em>connectionId</em> to identify the connection publishing the stream (must be present inside the <code>connections.content</code> array of the session)</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: the session information has been successfully retrieved</li>
+<li><code>404</code>: no session exists for the passed SESSION_ID</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="get-apisessions">GET <code>/api/sessions</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>GET ALL SESSION INFO</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>GET</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/sessions</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em></td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"numberOfElements":1,"content":[{"mediaMode":"ROUTED","recording":false,"sessionId":"TestSession","recordingMode":"MANUAL","connections":{"numberOfElements":2,"content":[{"role":"PUBLISHER","subscribers":[{"streamId":"xm3zcg6d9ntp0qbn_CAMERA_MJALP","publisher":"xm3zcg6d9ntp0qbn"}],"connectionId":"rxrqelmbskpsxwx1","publishers":[],"clientData":"TestClient","serverData":"","token":"wss://localhost:4443?sessionId=TestSession&amp;token=okx9wldlu4u4okmt&amp;role=PUBLISHER&amp;turnUsername=5VKPTG&amp;turnCredential=udv4gy"},{"role":"PUBLISHER","subscribers":[],"connectionId":"xm3zcg6d9ntp0qbn","publishers":[{"streamId":"xm3zcg6d9ntp0qbn_CAMERA_MJALP","mediaOptions":{"hasVideo":true,"frameRate":30,"hasAudio":false,"videoActive":true,"videoDimensions":"{\"width\":640,\"height\":480}","typeOfVideo":"CAMERA"}}],"clientData":"TestClient","serverData":"","token":"wss://localhost:4443?sessionId=TestSession&amp;token=mltylf00bpapshru&amp;role=PUBLISHER&amp;turnUsername=O1NDC2&amp;turnCredential=xcjany"}]},"defaultRecordingLayout":"BEST_FIT"}]}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>numberOfElements</code>: total number of active sessions</li>
+<li><code>content</code>: array of sessions. Each object has the same structure as defined in the returned JSON of <a href="#get-apisessionssession_id"><strong>GET /api/sessions/<SESSION_ID></strong></a></li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: all the session information has been successfully retrieved</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="delete-apisessionssession_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>CLOSE SESSION</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/sessions/&lt;SESSION_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><em>Returns nothing</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>204</code>: the session has been successfully closed. Every participant will have received the proper events in OpenVidu Browser: <a href="../../../api/openvidu-browser/classes/streamevent.html"><code>streamDestroyed</code></a>, <a href="../../../api/openvidu-browser/classes/connectionevent.html"><code>connectionDestroyed</code></a> and <a href="../../../api/openvidu-browser/classes/sessiondisconnectedevent.html"><code>sessionDisconnected</code></a>, all of them with "reason" property set to "sessionClosedByServer". Depending on the order of eviction of the users, some of them will receive more events than the others (the first one will only receive the events related to himself, last one will receive every possible event)</li>
+<li><code>404</code>: no session exists for the passed SESSION_ID</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="delete-apisessionssession_idconnectionconnection_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>FORCE DISCONNECTION</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><em>Returns nothing</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>204</code>: the user has been successfully evicted from the session. Every participant will have received the proper events in OpenVidu Browser: <a href="../../../api/openvidu-browser/classes/streamevent.html"><code>streamDestroyed</code></a> if the user was publishing, <a href="../../../api/openvidu-browser/classes/connectionevent.html"><code>connectionDestroyed</code></a> for the remaining users and <a href="../../../api/openvidu-browser/classes/sessiondisconnectedevent.html"><code>sessionDisconnected</code></a> for the evicted user. All of them with "reason" property set to "forceDisconnectByServer"</li>
+<li><code>400</code>: no session exists for the passed SESSION_ID</li>
+<li><code>404</code>: no connection exists for the passed CONNECTION_ID</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="delete-apisessionssession_idstreamstream_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>FORCE UNPUBLISHING</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><em>Returns nothing</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>204</code>: the stream has been successfully unpublished. Every participant will have received the proper <a href="../../../api/openvidu-browser/classes/streamevent.html"><code>streamDestroyed</code></a> event in OpenVidu Browser with "reason" property set to "forceUnpublishByServer"</li>
+<li><code>400</code>: no session exists for the passed SESSION_ID</li>
+<li><code>404</code>: no stream exists for the passed STREAM_ID</li>
+</ul>
+</blockquote>
+<hr />
 <h3 id="post-apirecordingsstart">POST <code>/api/recordings/start</code></h3>
 <table>
 <thead>
@@ -599,7 +829,7 @@ active: documentation
 <p><strong>HTTP responses</strong></p>
 <ul>
 <li><code>200</code>: the session has started to be recorded. The moment this response is retrieved, it means that the video file is already created and contains proper data, and that the recording can be stopped with guarantees</li>
-<li><code>404</code>: no session exists for the passed sessionId</li>
+<li><code>404</code>: no session exists for the passed SESSION_ID</li>
 <li><code>400</code>: the session has no connected participants</li>
 <li><code>409</code>: the session is not configured for using MediaMode <code>ROUTED</code> or it is already being recorded</li>
 <li><code>501</code>: OpenVidu Server recording module is disabled (<code>openvidu.recording</code> property set to <code>false</code>)</li>
@@ -656,7 +886,7 @@ active: documentation
 <ul>
 <li><code>200</code>: the session has successfully stopped from being recorded. The video file is ready to be reproduced</li>
 <li><code>400</code>: RECORDING_ID parameter not found in form url-encoded</li>
-<li><code>404</code>: no recording exists for the passed recording id</li>
+<li><code>404</code>: no recording exists for the passed RECORDING_ID</li>
 <li><code>406</code>: recording has <code>starting</code> status. Wait until <code>started</code> status before stopping the recording</li>
 </ul>
 </blockquote>
@@ -710,7 +940,7 @@ active: documentation
 <p><strong>HTTP responses</strong></p>
 <ul>
 <li><code>200</code>: the recording information has been successfully retrieved</li>
-<li><code>404</code>: no recording exists for the passed recording id</li>
+<li><code>404</code>: no recording exists for the passed RECORDING_ID</li>
 </ul>
 </blockquote>
 <hr />
@@ -788,7 +1018,7 @@ active: documentation
 <p><strong>HTTP responses</strong></p>
 <ul>
 <li><code>204</code>: the video file and all of its metadata has been successfully deleted from the host</li>
-<li><code>404</code>: no recording exists for the passed recording id</li>
+<li><code>404</code>: no recording exists for the passed RECORDING_ID</li>
 <li><code>409</code>: the recording has <code>"started"</code> status. Stop it before deletion</li>
 </ul>
 </blockquote> 

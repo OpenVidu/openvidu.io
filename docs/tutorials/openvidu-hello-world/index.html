@@ -71,6 +71,12 @@ active: documentation
 
    
 
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
 <li class="toctree-l1 current">
     <a class="current" href="./">openvidu-hello-world</a>  
 </li>
@@ -381,7 +387,7 @@ active: documentation
 						<div class="section">
 							 <h1 id="openvidu-hello-world">openvidu-hello-world</h1>
 <p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-hello-world" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
-<p>This is the simplest demo you can try to get started with OpenVidu. It has the minimum set of features to make a group video-call. You will only need a few minutes to get your first application working!</p>
+<p>This is the simplest demo you can try to get started with OpenVidu API. It has the minimum set of features to make a group video-call. You will only need a few minutes to get your first application working!</p>
 <h2 id="running-this-tutorial">Running this tutorial</h2>
 <p>1) Clone the repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
@@ -474,10 +480,10 @@ session.on('streamCreated', function (event) {
 });
 </code></pre>
 
-<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a mehtod <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
 <ul>
 <li>First ajax request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
-<li>Second ajax request performas a POST to <code>/api/tokens</code> (we send a <code>sessionId</code> field to assign the token to this same session)</li>
+<li>Second ajax request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
 <p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-hello-world/web/app.js#L58">GitHub repo</a>.</p>
 <hr />
@@ -517,7 +523,7 @@ session.on('streamCreated', function (event) {
         <a href="../openvidu-insecure-js/" class="btn btn-xs btn-primary float-right" title="openvidu-insecure-js">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-xs btn-primary" title="Intro"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../openvidu-webcomponent/" class="btn btn-xs btn-primary" title="openvidu-webcomponent"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

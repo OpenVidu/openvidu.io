@@ -72,6 +72,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
@@ -384,14 +390,189 @@ active: documentation
 <hr>
 
 <ul>
+<li><a href="#230">2.3.0</a></li>
 <li><a href="#220">2.2.0</a></li>
 <li><a href="#210">2.1.0</a></li>
 <li><a href="#200">2.0.0</a></li>
 <li><a href="#190-beta-1">1.9.0-beta-1</a></li>
 </ul>
 <hr />
-<h2 id="220">2.2.0</h2>
+<h2 id="230">2.3.0</h2>
 <h3 id="artifacts">Artifacts</h3>
+<table class="artifact-table">
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Compatible Version</th>
+    <th>Link</th>
+    <th class="last-table-col">Info</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>2.3.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser/v/2.3.0" target="_blank">NPM</a></td>
+    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>2.3.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.3.0" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>2.3.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.3.0" target="_blank">GitHub</a></td>
+    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>2.3.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>2.3.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-java-client</td>
+    <td>MVN package</td>
+    <td>2.2.0</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.2.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>2.2.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-webcomponent</td>
+    <td>ZIP</td>
+    <td>2.3.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.3.0" target="_blank">GitHub</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Web Component. Easier way to add OpenVidu video calls to your existing web application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+</table>
+
+<h3 id="release-notes">Release Notes</h3>
+<h4 id="openvidu-web-component">OPENVIDU WEB COMPONENT</h4>
+<p>OpenVidu platform now offers an easier way to get started: just include our new Web Component into your web and start enjoying video call capabilities with just 3 new lines of code:</p>
+<p>Add to your <code>index.html</code> OpenVidu Web Component files:</p>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;openvidu-webcomponent.css&quot; /&gt;
+&lt;script src=&quot;openvidu-webcomponent.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>And add your video-call element wherever you want in your application:</p>
+<pre><code class="html">&lt;openvidu-webcomponent session-config='{&quot;user&quot;:&quot;NICKNAME&quot;, &quot;token&quot;:&quot;TOKEN&quot;}' theme=&quot;dark&quot;&gt;&lt;/openvidu-webcomponent&gt;
+</code></pre>
+
+<p>Being <code>NICKNAME</code> the user's name during the call and <code>TOKEN</code> one token generated in OpenVidu Server. Of course, if you want to connect users to the same session, the tokens should be generated for the same session.
+Attribute <code>theme</code> can be <code>dark</code> or <code>light</code>. Use the one that better fits your application.</p>
+<p>OpenVidu Web Component supports a reasonable amount of different dimensions, and every video displayed inside of it will be automatically relocated and resized for its optimal position upon window resizing. You can set the position, width and height of the component by styling it like this:</p>
+<ol>
+<li>Setting its property <code>position</code> to <code>absolute</code> or <code>fixed</code>, depending on your web layout and the desired behavior you want the component to have.</li>
+<li>Playing with values:<ul>
+<li><code>width</code></li>
+<li><code>height</code></li>
+<li><code>top</code> or <code>bottom</code></li>
+<li><code>right</code> or <code>left</code></li>
+</ul>
+</li>
+</ol>
+<p>For example, the following CSS rule would position the upper OpenVidu Web Component in the bottom-right corner of your web, taking up half of the height of the page and a third of its width.</p>
+<pre><code class="css">openvidu-webcomponent {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 33vw;
+  height: 50vh;
+}
+</code></pre>
+
+<p>If you give enough width to the component (at least <code>700px</code>), users can communicate through an integrated chat.</p>
+<blockquote>
+<p>To see some images of OpenVidu Web Component in action, check this post on <a href="https://medium.com/@openvidu/openvidu-2-3-0-web-component-and-tons-of-new-features-3341d46cbb54">Medium</a>. If you want to learn more about OpenVidu Web Component, visit <a href="../tutorials/openvidu-webcomponent">Tutorials section</a></p>
+</blockquote>
+<p><br></p>
+<h4 id="new-features">NEW FEATURES</h4>
+<p><br></p>
+<h5 id="streampropertychangedevent-see-here">StreamPropertyChangedEvent (See <a href="https://openvidu.io/api/openvidu-browser/classes/streampropertychangedevent.html">here</a>)</h5>
+<p>OpenVidu Browser now lets users connected to a Session know when any Stream they are subscribed to undergoes any possible change in its properties. Every Session object will dispatch this new event (you can subscribe to it to every Publisher or Subscriber object too). This event can refer to the following Stream properties:</p>
+<ul>
+<li><code>Stream.audioActive</code>: this property may change if the user publishing the Stream calls <code>Publisher.pusblishAudio(bool)</code>.</li>
+<li><code>Stream.videoActive</code>: this property may change if the user publishing the Stream calls <code>Publisher.publishVideo(bool)</code>.</li>
+<li><code>Stream.videoDimensions</code>: this property may change if...<ul>
+<li>...the user publishing the stream is screen-sharing and the shared window changes its dimensions.</li>
+<li>...the user is publishing from a mobile device and it is rotated (every camera from a phone will invert the resolution in the output video when rotated).</li>
+</ul>
+</li>
+</ul>
+<p>So, for example, now you can do:</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+var session = OV.initSession();
+session.on('streamPropertyChanged', event =&gt; {
+    if (event.changedProperty === 'audioActive') {
+        console.log('The state of the audio of the publisher has changed. Is enabled? -&gt; ' + event.newValue);
+    } else if (event.changedProperty === 'videoActive') {
+        console.log('The state of the video of the publisher has changed. Is enabled? -&gt; ' + event.newValue);
+    } else if (event.changedProperty === 'videoDimensions') {
+        console.log('The video dimensions of the publisher has changed. New dimensions: ' + event.newValue);
+    }
+});
+</code></pre>
+
+<p>This way you can react more easily upon this variations in the published streams and update your application's layout accordingly.</p>
+<p><br></p>
+<h5 id="sessioncapabilities-see-here">Session.capabilities (See <a href="https://openvidu.io/api/openvidu-browser/interfaces/capabilities.html">here</a>)</h5>
+<p>You can check capabilities property of Session object to know which methods are able to invoke each one of your clients, depending on their role. Also, if a client tries to call a method for which he has no permissions, now an OpenViduError is thrown with property <code>name</code> being <a href="https://openvidu.io/api/openvidu-browser/enums/openviduerrorname.html#openvidu_permission_denied"><code>OPENVIDU_PERMISSION_DENIED</code></a>.</p>
+<p><br></p>
+<h5 id="new-moderator-role">New MODERATOR role</h5>
+<p>At last developers have available the new role that has been in our roadmap for a long time. Users connecting to a session with a token configured with MODERATOR role can call every method granted for SUBSCRIBER and PUBLISHER roles, but also:</p>
+<ul>
+<li><a href="https://openvidu.io/api/openvidu-browser/classes/session.html#forcedisconnect"><code>Session.forceDisconnect</code></a>: you can evict any user from the Session (force the method <code>Session.disconnect</code>)</li>
+<li><a href="https://openvidu.io/api/openvidu-browser/classes/session.html#forceunpublish"><code>Session.forceUnpublish</code></a>: you can stop the Publisher of any user publishing in the Session (force the method <code>Session.unpublish</code>)</li>
+</ul>
+<p><br></p>
+<h5 id="rest-api-extended">REST API extended</h5>
+<p>5 new methods join the <a href="https://openvidu.io/docs/reference-docs/REST-API/">REST API of OpenVidu Server</a>:</p>
+<ul>
+<li>Retrieve active session info: <a href="https://openvidu.io/docs/reference-docs/REST-API/#get-apisessionssession_id"><strong>GET /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
+<li>Retrieve all active sessions info: <a href="https://openvidu.io/docs/reference-docs/REST-API/#get-apisessions"><strong>GET /api/sessions</strong></a></li>
+<li>Close a session: <a href="https://openvidu.io/docs/reference-docs/REST-API/#delete-apisessionssession_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
+<li>Force the disconnection of a user from a session: <a href="https://openvidu.io/docs/reference-docs/REST-API/#delete-apisessionssession_idconnectionconnection_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</strong></a></li>
+<li>Force the unpublishing of a user's stream from a session: <a href="https://openvidu.io/docs/reference-docs/REST-API/#delete-apisessionssession_idstreamstream_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</strong></a></li>
+</ul>
+<blockquote>
+<p>Future iterations will add this capabilities to <a href="https://openvidu.io/docs/reference-docs/openvidu-java-client/">openvidu-java-client</a> and <a href="https://openvidu.io/docs/reference-docs/openvidu-node-client/">openvidu-node-client</a> libraries</p>
+</blockquote>
+<p><br></p>
+<h5 id="configure-global-bandwidth-for-your-webrtc-connections">Configure global bandwidth for your WebRTC connections</h5>
+<p>We have included a first way to set the maximum and minimum bandwidths for the media connections established between browsers and OpenVidu Server. You can configure it with the following system properties, as stated in <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> sections:</p>
+<ul>
+<li><code>openvidu.streams.video.max-recv-bandwidth</code>: Maximum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained (default 600)</li>
+<li><code>openvidu.streams.video.min-recv-bandwidth</code>: Minimum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained (default 300)</li>
+<li><code>openvidu.streams.video.max-send-bandwidth</code>: Maximum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained (default 600)</li>
+<li><code>openvidu.streams.video.min-send-bandwidth</code>: Minimum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained (default 300)</li>
+</ul>
+<blockquote>
+<p>Future iterations will study the possibility of configuring this same parameters for each session individually or even for each incoming or outgoing WebRTC connection (maybe as part of <a href="https://openvidu.io/api/openvidu-browser/interfaces/publisherproperties.html"><code>PublisherProperties</code></a> or <a href="https://openvidu.io/api/openvidu-browser/interfaces/subscriberproperties.html"><code>SubscriberProperties</code></a>)</p>
+</blockquote>
+<hr />
+<p><br></p>
+<h2 id="220">2.2.0</h2>
+<h3 id="artifacts_1">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -451,83 +632,13 @@ active: documentation
 
 </table>
 
-<h3 id="release-notes">Release Notes</h3>
+<h3 id="release-notes_1">Release Notes</h3>
 <p><br></p>
 <p>OpenVidu now offers <strong>integrated and automated support for TURN server</strong>. We encourage developers to check out our <strong><a href="https://medium.com/@openvidu/openvidu-2-2-0-turn-made-easy-9d7e145f8905">post on Medium</a></strong> to learn more about it.</p>
 <p>The platform now integrates by default a COTURN server as part of its ecosystem. This means that media connections will work OK even when clients are located on restricted networks. When <a href="https://openvidu.io/docs/deployment/deploying-aws/">deploying OpenVidu Server in Amazon Web Services</a> with our Cloud Formation template no changes are required at all. If you are deploying OpenVidu Server on your own in an Ubuntu machine, installation instructions have changed a little bit. You have them properly updated <a href="https://openvidu.io/docs/deployment/deploying-ubuntu/">here</a>.</p>
 <hr />
 <p><br></p>
 <h2 id="210">2.1.0</h2>
-<h3 id="artifacts_1">Artifacts</h3>
-<table class="artifact-table">
-
-  <tr>
-    <th>Artifact</th>
-    <th>Type</th>
-    <th>Compatible Version</th>
-    <th>Link</th>
-    <th class="last-table-col">Info</th>
-  </tr>
-
-  <tr>
-    <td rowspan="2">openvidu-browser</td>
-    <td>NPM package</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
-    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
-  </tr>
-  <tr>
-    <td>JS file</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
-  </tr>
-
-  <tr>
-    <td rowspan="3">openvidu-server</td>
-    <td>JAR</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
-    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
-  </tr>
-  <tr>
-    <td>Docker container</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
-  </tr>
-    <tr>
-    <td>Docker container (+KMS)</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-java-client</td>
-    <td>MVN package</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.0.0%7Cjar" target="_blank">MVN Repository</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-node-client</td>
-    <td>NPM package</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
-  </tr>
-
-</table>
-
-<h3 id="release-notes_1">Release Notes</h3>
-<p><br></p>
-<h4 id="new-features">NEW FEATURES</h4>
-<p><strong>OpenVidu Browser support for video management</strong></p>
-<p>We have implemented a new class in OpenVidu Browser aimed to better support declarative frontend frameworks such as Angular, React or Vue.js.</p>
-<p>Now Publisher and Subscriber objects both inherit from <a href="./../../api/openvidu-browser/classes/streammanager.html">StreamManager</a>, which provides 2 different methods to tell OpenVidu what DOM video players should display each specific stream (<code>addVideoElement</code> and <code>createVideoElement</code>). This allows us to let OpenVidu take control of the video elements (even if our framework dynamically creates them) and do not worry about its internals. This is all explained in detail in <a href="../how-do-i/manage-videos">Manage video players</a> section.</p>
-<p>If you want to check out a real example of this behavior, explore our renovated <a href="../tutorials/openvidu-insecure-angular/">OpenVidu Angular tutorial</a>.<br><br></p>
-<hr />
-<p><br></p>
-<h2 id="200">2.0.0</h2>
 <h3 id="artifacts_2">Artifacts</h3>
 <table class="artifact-table">
 
@@ -542,31 +653,31 @@ active: documentation
   <tr>
     <td rowspan="2">openvidu-browser</td>
     <td>NPM package</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
     <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>JS file</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td>2.1.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
   </tr>
 
   <tr>
     <td rowspan="3">openvidu-server</td>
     <td>JAR</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td>2.1.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
     <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>Docker container</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
   </tr>
     <tr>
     <td>Docker container (+KMS)</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
   </tr>
 
@@ -590,8 +701,78 @@ active: documentation
 
 <h3 id="release-notes_2">Release Notes</h3>
 <p><br></p>
-<p>This is the first breaking change update for OpenVidu, which brings in lots of new features and internal improvements.</p>
 <h4 id="new-features_1">NEW FEATURES</h4>
+<p><strong>OpenVidu Browser support for video management</strong></p>
+<p>We have implemented a new class in OpenVidu Browser aimed to better support declarative frontend frameworks such as Angular, React or Vue.js.</p>
+<p>Now Publisher and Subscriber objects both inherit from <a href="./../../api/openvidu-browser/classes/streammanager.html">StreamManager</a>, which provides 2 different methods to tell OpenVidu what DOM video players should display each specific stream (<code>addVideoElement</code> and <code>createVideoElement</code>). This allows us to let OpenVidu take control of the video elements (even if our framework dynamically creates them) and do not worry about its internals. This is all explained in detail in <a href="../how-do-i/manage-videos">Manage video players</a> section.</p>
+<p>If you want to check out a real example of this behavior, explore our renovated <a href="../tutorials/openvidu-insecure-angular/">OpenVidu Angular tutorial</a>.<br><br></p>
+<hr />
+<p><br></p>
+<h2 id="200">2.0.0</h2>
+<h3 id="artifacts_3">Artifacts</h3>
+<table class="artifact-table">
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Compatible Version</th>
+    <th>Link</th>
+    <th class="last-table-col">Info</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
+    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-java-client</td>
+    <td>MVN package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.0.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+</table>
+
+<h3 id="release-notes_3">Release Notes</h3>
+<p><br></p>
+<p>This is the first breaking change update for OpenVidu, which brings in lots of new features and internal improvements.</p>
+<h4 id="new-features_2">NEW FEATURES</h4>
 <ul>
 <li>
 <p><strong>OpenVidu Browser new methods</strong></p>
@@ -712,7 +893,7 @@ active: documentation
 <hr />
 <p><br></p>
 <h2 id="190-beta-1">1.9.0-beta-1</h2>
-<h3 id="artifacts_3">Artifacts</h3>
+<h3 id="artifacts_4">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -772,7 +953,7 @@ active: documentation
 
 </table>
 
-<h3 id="release-notes_3">Release Notes</h3>
+<h3 id="release-notes_4">Release Notes</h3>
 <p><br></p>
 <ul>
 <li><strong>Safari support</strong>: now OpenVidu is compatible with the most recent versions of Safari in Mac and iOS. It is necessary to use Kurento Media Server 6.7.0:<br><br><ul>

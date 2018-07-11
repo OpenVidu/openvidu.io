@@ -72,6 +72,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
@@ -569,10 +575,10 @@ this.getToken().then(token =&gt; {
 });
 </code></pre>
 
-<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a mehtod <code>getToken()</code> that returns a Promise with the token, using <code>@angular/http</code> library. Without going into too much detail, this method performs two POST requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token, using <code>@angular/http</code> library. Without going into too much detail, this method performs two POST requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
 <ul>
 <li>First request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
-<li>Second request performas a POST to <code>/api/tokens</code> (we send a <code>sessionId</code> field to assign the token to this same session)</li>
+<li>Second request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
 <p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L160">GitHub repo</a>.</p>
 <hr />
@@ -630,7 +636,7 @@ this.getToken().then(token =&gt; {
 &lt;/div&gt;
 </code></pre>
 
-<p>Last point worth considering is the implementation of <em>UserVideoComonent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsability), but displaying custom information for each one of them (the user's nickname) and handling the click event on them to update property <code>mainStreamManager</code> of parent <em>AppComponent</em>:</p>
+<p>Last point worth considering is the implementation of <em>UserVideoComonent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsibility), but displaying custom information for each one of them (the user's nickname) and handling the click event on them to update property <code>mainStreamManager</code> of parent <em>AppComponent</em>:</p>
 <pre><code class="html">&lt;div (click)=&quot;videoClicked()&quot;&gt;
     &lt;ov-video [streamManager]=&quot;streamManager&quot;&gt;&lt;/ov-video&gt;
     &lt;div&gt;&lt;p&gt;{% raw %}{{getNicknameTag()}}{% endraw %}&lt;/p&gt;&lt;/div&gt;
@@ -659,7 +665,7 @@ this.getToken().then(token =&gt; {
 <pre><code class="html">&lt;video #videoElement&gt;&lt;/video&gt;
 </code></pre>
 
-<p>And the unique responsability of the component's logic is letting OpenVidu know the exact HTML DOM video player associated to its StreamManger. To do so we use method <code>StreamManager.addVideoElement</code>, which receives a native HTML video element. The way we implement this is Angular dependant: we get the video element with <em>@ViewChild</em> tag and we call the method once after the view has initialized (<em>ngAfterViewInit</em>) and once every time the StreamManager input changes (<em>set</em> method with <em>@Input</em> tag)</p>
+<p>And the unique responsibility of the component's logic is letting OpenVidu know the exact HTML DOM video player associated to its StreamManger. To do so we use method <code>StreamManager.addVideoElement</code>, which receives a native HTML video element. The way we implement this is Angular dependant: we get the video element with <em>@ViewChild</em> tag and we call the method once after the view has initialized (<em>ngAfterViewInit</em>) and once every time the StreamManager input changes (<em>set</em> method with <em>@Input</em> tag)</p>
 <pre><code class="typescript">export class OpenViduVideoComponent implements AfterViewInit {
 
     @ViewChild('videoElement') elementRef: ElementRef;

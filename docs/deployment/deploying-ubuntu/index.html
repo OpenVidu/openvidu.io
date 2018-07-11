@@ -72,6 +72,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
@@ -384,13 +390,12 @@ active: documentation
 <hr>
 
 <h2 id="installation-process">Installation process</h2>
-<p>If you prefer having KMS installed in your EC2 machine and your own version of openvidu-server, follow these few steps. Only <strong>Ubuntu xenial 16.04</strong> is supported.</p>
+<p>Only <strong>Ubuntu xenial 16.04</strong> is supported.</p>
 <h4 id="1-install-kms">1. Install KMS</h4>
-<pre><code class="console">echo &quot;deb http://ubuntu.openvidu.io/6.7.2 xenial kms6&quot; | tee /etc/apt/sources.list.d/kurento.list
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
-apt-get update
-apt-get -y install kurento-media-server
-apt-get -y install openh264-gst-plugins-bad-1.5
+<pre><code class="console">sudo echo &quot;deb http://ubuntu.openvidu.io/6.7.2 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
+sudo apt-get update
+sudo apt-get -y install kurento-media-server
 </code></pre>
 
 <h4 id="2-install-coturn">2. Install COTURN</h4>
@@ -439,9 +444,7 @@ sudo service kurento-media-server restart
 
 <blockquote>
 <p>You will need Java 8 to run OpenVidu Server:</p>
-<p><code>sudo add-apt-repository -y ppa:openjdk-r/ppa</code></br>
-<code>sudo sudo apt-get update</code></br>
-<code>sudo apt-get install -y openjdk-8-jre</code></br></p>
+<p><code>sudo apt-get install -y openjdk-8-jre</code></br></p>
 <p>You can get any <a href="../../releases/">version</a> of OpenVidu Server running:</p>
 <p><code>wget https://github.com/OpenVidu/openvidu/releases/download/v{VERSION}/openvidu-server-{VERSION}.jar</code></br></p>
 </blockquote>
@@ -453,18 +456,19 @@ sudo service kurento-media-server restart
 <p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your services:</p>
 <ul>
 <li>
-<p>First of all, you certainly need the machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: we are precisely installing <em>COTURN</em> service to cover those situations where the final users are hidden behind NATs or complex networks (<a href="../../troubleshooting#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">learn more</a>). If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission could fail in certain cases.</p>
+<p>First of all, you certainly need the machine to have a <strong>public, reachable IP</strong>. The reason is pretty simple: we are precisely installing <em>COTURN</em> service to cover those situations where the final users are hidden behind NATs or complex networks (<a href="../../troubleshooting#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">learn more</a>). If the <em>COTURN</em> itself is running inside an unreachable machine, your video transmission will probably fail.</p>
 </li>
 <li>
 <p>Besides, the server needs some <strong>ports</strong> opened in the firewall:</p>
 <ul>
-<li><strong>3478 TCP &amp; UDP</strong> (<em>COTURN</em> listens on port 3478 by default)</li>
-<li><strong>49152 - 65535 UDP</strong> (WebRTC exchanges media through any of these ports)</li>
+<li><strong>4443 TCP</strong> (<em>OpenVidu Server</em> listens on port 4443 by default)</li>
+<li><strong>3478 TCP</strong> (<em>COTURN</em> listens on port 3478 by default)</li>
+<li><strong>49152 - 65535 UDP</strong> (these ports are recommended to be opened, as WebRTC randomly exchanges media through any of them)</li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>If you were still in trouble, we provide a ready-to-use Amazon CloudFormation Stack to easily deploy OpenVidu in a few minutes <a href="../../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">here</a>.</p>
+<p>If you were still in trouble, we provide a ready-to-use Amazon CloudFormation Stack to easily deploy OpenVidu in just a few minutes <a href="../../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">here</a>.</p>
 </blockquote>
 <h2 id="architectures">Architectures</h2>
 <p>You can have the following scenarios depending on how many machines you have and what architecture you prefer. What are the advantages and disadvantages of each one of them? Well, it really depends on the power of the machine, the nature of your application and the load expected. In general, having all the services running in one machine will reduce its performance and scalability, but on the other hand, makes it easier the process of installation, configuration and launching.</p>

@@ -72,6 +72,12 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
@@ -435,13 +441,33 @@ active: documentation
 </tr>
 <tr>
 <td><code>openvidu.recording.notification</code></td>
-<td>Which users should receive the recording events in the client side (<code>recordingStarted</code>, <code>recordingStopped</code>). Can be <code>all</code> (every user connected to the session), <code>publisher_moderator</code> (users with role 'PUBLISHER' or 'MODERATOR') or <code>none</code> (no user will receive these events)</td>
+<td>Which users should receive the recording events in the client side (<code>recordingStarted</code>, <code>recordingStopped</code>). Can be <code>all</code> (every user connected to the session), <code>publisher_moderator</code> (users with role 'PUBLISHER' or 'MODERATOR'), <code>moderator</code> (only users with role 'MODERATOR') or <code>none</code> (no user will receive these events)</td>
 <td><strong><em>publisher_moderator</em></strong></td>
 </tr>
 <tr>
 <td><code>openvidu.recording.custom-layout</code></td>
 <td>Where should OpenVidu Server look for custom recording layouts</td>
 <td><strong><em>/opt/openvidu/custom-layout</em></strong></td>
+</tr>
+<tr>
+<td><code>openvidu.streams.video.max-recv-bandwidth</code></td>
+<td>Maximum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained</td>
+<td>600</td>
+</tr>
+<tr>
+<td><code>openvidu.streams.video.min-recv-bandwidth</code></td>
+<td>Minimum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained</td>
+<td>300</td>
+</tr>
+<tr>
+<td><code>openvidu.streams.video.max-send-bandwidth</code></td>
+<td>Maximum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained</td>
+<td>600</td>
+</tr>
+<tr>
+<td><code>openvidu.streams.video.min-send-bandwidth</code></td>
+<td>Minimum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained</td>
+<td>300</td>
 </tr>
 <tr>
 <td><code>server.ssl.key-store</code></td>
