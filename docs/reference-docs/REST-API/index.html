@@ -788,7 +788,7 @@ active: documentation
 </tr>
 <tr>
 <td><strong>Body</strong></td>
-<td><code>{"session": "SESSION_ID", "name": "NAME", "recordingLayout": "RECORDING_LAYOUT"}</code></td>
+<td><code>{"session": "SESSION_ID", "name": "NAME", "recordingLayout": "RECORDING_LAYOUT", "customLayout": "CUSTOM_LAYOUT"}</code></td>
 </tr>
 <tr>
 <td><strong>Sample return</strong></td>
@@ -803,6 +803,7 @@ active: documentation
 <li><strong>session</strong>: the sessionId belonging to the session you want to start recording<br><br></li>
 <li><strong>name</strong> <em>(optional)</em> : the name you want to give to the video file. You can access this same property in openvidu-browser on recordingEvents. If no name is provided, the video file will be named after <code>id</code> property of the recording<br><br></li>
 <li><strong>recordingLayout</strong> <em>(optional)</em> : you can override the <code>defaultRecordingLayout</code> property set on <a href="#post-apisessions">POST /api/sessions</a>. This allows you to use different layouts if you start and stop recording the same session more than once</li>
+<li><strong>customLayout</strong> <em>(optional)</em> : you can override the <code>defaultCustomLayout</code> property set on <a href="#post-apisessions">POST /api/sessions</a>. This allows you to use different custom layouts if you start and stop recording the same session more than once</li>
 </ul>
 </blockquote>
 <div></div>
