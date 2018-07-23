@@ -78,7 +78,7 @@
 					</div>
 					<p>More information:</p>
 					<ul>
-						<li>This events will only be triggered for <strong>remote streams that have audio tracks</strong></li>
+						<li>This events will only be triggered for <strong>remote streams that have audio tracks</strong> (<a href="stream.html#hasaudio">Stream.hasAudio</a> must be true)</li>
 						<li>Both events share the same lifecycle. That means that you can subscribe to only one of them if you want, but if you call <code>Session.off(&#39;publisherStopSpeaking&#39;)</code>,
 						keep in mind that this will also internally remove any &#39;publisherStartSpeaking&#39; event</li>
 						<li>You can further configure how the events are dispatched by setting property <code>publisherSpeakingEventsOptions</code> in the call of <a href="openvidu.html#setadvancedconfiguration">OpenVidu.setAdvancedConfiguration</a></li>
