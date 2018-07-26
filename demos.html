@@ -347,7 +347,7 @@ custom_css:
                                         title="Copy to Clipboard">Copy</button>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        <code id="code-4">docker run -p 4443:4443 openvidu/openvidu-call</code>
+                                        <code id="code-4">docker run -t --name openvidu-call -e OV_PROFILE=ngrok -p 4443:4443 openvidu/openvidu-call</code>
                                     </div>
                                 </div>
                                 <div class="row no-margin docker-info-div">
