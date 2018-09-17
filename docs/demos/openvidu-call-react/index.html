@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - Using your own certificate
+title: OpenVidu Documentation - openvidu-call-react
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Using your own certificate')").each(function (i, e) {
+		$(".subnav").find("li:contains('openvidu-call-react')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('Using your own certificate')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('openvidu-call-react')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -138,25 +138,25 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+    <a class="" href="../openvidu-getaroom/">openvidu-getaroom</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+    <a class="" href="../openvidu-call/">openvidu-call</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">openvidu-call-react</a>  
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
-</li>
-
-   
-
-<li class="toctree-l1 ">
-    <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+    <a class="" href="../openvidu-classroom/">openvidu-classroom</a> 
 </li>
 
  
@@ -318,25 +318,25 @@ active: documentation
           
 
 <li class="toctree-l1 ">
-    <a class="" href="../deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+    <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+    <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
 </li>
 
    
 
 <li class="toctree-l1 ">
-    <a class="" href="../deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
 </li>
 
    
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">Using your own certificate</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/custom-certificate/">Using your own certificate</a> 
 </li>
 
  
@@ -397,63 +397,109 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h2 id="section-title">Using your own certificate</h2>
-
+							 <h1 id="openvidu-call-react">openvidu-call-react</h1>
+<p><a href="https://github.com/OpenVidu/openvidu-call-react" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
+<p>OpenVidu Call demo,<strong> built with React</strong>,  allows users to make videoconference calls with many of the capabilities integrated by OpenVidu platform. It is a frontend-only application.</p>
+<p>OpenVidu-Call-React is composed by the five React components displayed in the image below.</p>
+<p><br>
+<p align="center">
+  <img  class="img-responsive" src="/img/demos/openvidu_call_react_diagram.png">
+</p></p>
+<p><hr>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <p align="center"><strong>VideoRoom Component</strong></p>
+        <p>This is the main component of <strong>OpenVidu-Call-React</strong>. It allows you to establish a connection with your video roommates. This component allows the user to mute the microphone, unpublish the webcam, share the screen, open the chat and leave the session.</p>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/openvidu_call_react1.png">
+            <img class="img-responsive" src="/img/demos/openvidu_call_react1.png">
+        </a>
+    </div>
+</div>
 <hr>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/openvidu_call_react_chat.png">
+            <img class="img-responsive" src="/img/demos/openvidu_call_react_chat.png">
+        </a>
+    </div>
+    <div class="col-md-6">
+        <p align="center"><strong>Chat Component</strong></p>
+        <p>This component provides to Video-room Component a chatting system, integrated with the layout, that allows users to type to each other.
+        </p>
+    </div>
+</div>
+<hr>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <p align="center"><strong>Stream Component</strong></p>
+        <p> With OpenVidu Layout, this component is the responsible of displaying the video stream of each user in a nice way. On the right, we can see four streams displayed in the same videoconference.</p>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/openvidu_call_react2.png">
+            <img class="img-responsive" src="/img/demos/openvidu_call_react2.png">
+        </a>
+    </div>
+</div></p>
+<hr />
+<h2 id="running-this-demo">Running this demo</h2>
+<h4 id="cloning-github-repository">Cloning GitHub Repository</h4>
+<p>1)  Clone the repo:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-call-react.git
+</code></pre>
 
-<h2 id="for-a-jar-binary-of-openvidu-server">For a JAR binary of OpenVidu Server</h2>
-<p>You will need a Java keystore (<strong>.jks</strong>). Check <a href="#get-jks-from-crt-and-key">Get JKS from CRT and KEY</a> section to see how to get it from your certificate's files.
-In order to use your JKS, just set the following values for these properties on launch:</p>
-<ul>
-<li><code>server.ssl.key-store</code></li>
-<li><code>server.ssl.key-store-password</code></li>
-<li><code>server.ssl.key-alias</code></li>
-</ul>
+<p>2) You will need node, NPM and to execute the app. You can install them with:</p>
+<pre><code class="bash">sudo apt-get update
+sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+sudo apt-get install -y nodejs
+</code></pre>
+
+<p>3)  <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.4.0
+</code></pre>
+
+<p>4)  Install NPM dependencies of Angular app:</p>
+<pre><code>cd openvidu-call-react/front/openvidu-call-react
+npm install
+</code></pre>
+
+<p>5)  Launch the server:</p>
+<pre><code>npm start
+</code></pre>
+
 <p><br></p>
-<h5 id="example">Example</h5>
-<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dserver.ssl.key-store=PATH/TO/YOUR/KEYSTORE.jks -Dserver.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -Dserver.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu-server.jar
-</code></pre>
-
-<hr />
-<h2 id="for-the-docker-container-of-openvidu-server">For the Docker container of OpenVidu Server</h2>
-<p>You will need a Java keystore (<strong>.jks</strong>). Check <a href="#get-jks-from-crt-and-key">Get JKS from CRT and KEY</a> section to see how to get it from your certificate's files.
-In order to use your JKS, just set the following values for these properties on launch:</p>
-<ul>
-<li><code>server.ssl.key-store</code></li>
-<li><code>server.ssl.key-store-password</code></li>
-<li><code>server.ssl.key-alias</code></li>
-</ul>
-<p>You must also indicate the <em>volume</em> flag (-v) to mount your keystore file, letting know Docker the location of the file and that it should be only readable:</p>
-<ul>
-<li><code>-v /ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:ro</code></li>
-</ul>
-<p><br></p>
-<h5 id="example_1">Example</h5>
-<pre><code class="console">docker run -d -p 4443:4443 --rm -v /ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks:ro -e openvidu.secret=YOUR_SECRET -e server.ssl.key-store=/ABSOLUTE/PATH/TO/YOUR/KEYSTORE.jks -e server.ssl.key-store-password=YOUR_KEYSTORE_PASSWORD -e server.ssl.key-alias=YOUR_KEYSTORE_ALIAS openvidu/openvidu-server-kms
-</code></pre>
-
-<hr />
-<h2 id="for-the-cloudformation-of-openvidu-server">For the CloudFormation of OpenVidu Server</h2>
-<p>First of all, remember we provide a super simple way of using a <strong>FREE</strong>, <strong>AUTOMATIC</strong> and 100% <strong>VALID</strong> certificate thanks to Let's Encrypt technology: when deploying your CloudFormation Stack, just fill in the form fields with the values from the column <strong><a href="../../deployment/deploying-aws#4-complete-the-configuration-fields">LET'S ENCRYPT CERTIFICATE</a></strong>.</p>
-<p>If, however, you have already purchased your own certificate and you are determined to use it, you can easily add it to your CloudFormation stack. Just fill in the form fields with the values from the column <strong><a href="../../deployment/deploying-aws#4-complete-the-configuration-fields">CUSTOM CERTIFICATE</a></strong>.</p>
-<hr />
-<h2 id="get-jks-from-crt-and-key">Get JKS from CRT and KEY</h2>
-<p>OpenVidu Server is a Java application and therefore needs a Java keystore (.jks) for providing security certificates. If you don't have it, you can easily obtain a <strong>.jks</strong> file from your certificate (<strong>.crt</strong>) and private key (<strong>.key</strong>) files by using <strong><em>openssl</em></strong> and <strong><em>keytool</em></strong> :</p>
-<pre><code class="console">openssl pkcs12 -export -name YOUR_CERT_NAME -in YOUR_CRT.crt -inkey YOUR_PRIVATE_KEY.key -out p12keystore.p12
-</code></pre>
-
-<pre><code class="console">keytool -importkeystore -destkeystore YOUR_KEYSTORE_NAME.jks -srckeystore p12keystore.p12 -srcstoretype pkcs12 -alias YOUR_JKS_ALIAS
-</code></pre> 
+<blockquote>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
+</blockquote>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p> 
 						</div>
 					</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../developing/" class="btn btn-xs btn-primary float-right" title="Developing OpenVidu">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-classroom/" class="btn btn-xs btn-primary float-right" title="openvidu-classroom">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../deploying-ubuntu/" class="btn btn-xs btn-primary" title="Deploying OpenVidu in Ubuntu"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../openvidu-call/" class="btn btn-xs btn-primary" title="openvidu-call"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -462,7 +508,7 @@ In order to use your JKS, just set the following values for these properties on 
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/deployment/custom-certificate.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/demos/openvidu-call-react.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
