@@ -96,7 +96,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
    
@@ -253,6 +265,12 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
 </li>
 
  
@@ -452,7 +470,7 @@ ng serve
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.4.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.5.0
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:4200"><code>localhost:4200</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
@@ -486,7 +504,7 @@ ng serve
 <p>Let's see first how <code>app.component.ts</code> uses NPM package <code>openvidu-browser</code>:</p>
 <hr />
 <h4 id="we-import-the-necessary-objects-from-openvidu-browser">We import the necessary objects from <code>openvidu-browser</code>:</h4>
-<pre><code class="typescript">import { OpenVidu, Session, StreamManager, Publisher, Subscriber, StreamEvent } from 'openvidu-browser';
+<pre><code class="typescript">import { OpenVidu, Publisher, Session, StreamEvent, StreamManager, Subscriber } from 'openvidu-browser';
 </code></pre>
 
 <hr />
@@ -502,8 +520,8 @@ mySessionId: string;
 myUserName: string;
 
 // Main video of the page, will be 'publisher' or one of the 'subscribers',
-// updated by an Output event of UserVideoComponent children
-@Input() mainStreamManager: StreamManager;
+// updated by click event in UserVideoComponent children
+mainStreamManager: StreamManager;
 </code></pre>
 
 <p><code>OpenVidu</code> object will allow us to get a <code>Session</code> object, which is declared just after it. <code>publisher</code> StreamManager object will be our own local webcam stream and <code>subscribers</code> StreamManager array will store the active streams of other users in the video-call. Finally, <code>mySessionId</code> and <code>myUserName</code> params simply represent the video-call and your participant's nickname, as you will see in a moment.</p>
@@ -543,9 +561,9 @@ this.session.on('streamDestroyed', (event: StreamEvent) =&gt; {
 <p>As we are using Angular framework, a good approach for managing the remote media streams is to loop across an array of them, feeding a common component with each <code>Subscriber</code> object and let it manage its video. This component will be our <em>UserVideoComponent</em>. To do this, we need to store each new Subscriber we received in array <code>subscribers</code> (of the parent class <code>StreamManager</code>), and we must remove from it every deleted subscriber whenever it is necessary. To achieve this, we use the following events:</p>
 <ul>
 <li>
-<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM on its own (we will use the video element contained in one of our child components). HTML template of <em>AppComponent</em> loops through <code>subscribers</code> array with an <code>ngFor</code> directive, declaring a <em>UserVideoComponent</em> for each subscriber. We feed them not really as <code>Subscriber</code> objects, but rather as their parent class <code>StreamManager</code>. This way we can reuse <em>UserVideoComponent</em> to also display our <code>Publisher</code> object (that also inhertis from class StreamManager). <code>user-video</code> also declares an output event to let <em>AppComponent</em> know when the user has clicked on it.</p>
+<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM on its own (we will use the video element contained in one of our child components). HTML template of <em>AppComponent</em> loops through <code>subscribers</code> array with an <code>ngFor</code> directive, declaring a <em>UserVideoComponent</em> for each subscriber. We feed them not really as <code>Subscriber</code> objects, but rather as their parent class <code>StreamManager</code>. This way we can reuse <em>UserVideoComponent</em> to also display our <code>Publisher</code> object (that also inhertis from class StreamManager). <code>user-video</code> also declares the <code>click</code> event so we can update the main video player view when the user clicks on its Publisher or any Subscriber videos.</p>
 <pre><code>&lt;div *ngFor="let sub of subscribers" class="stream-container col-md-6 col-xs-6"&gt;
-    &lt;user-video [streamManager]="sub" (clicked)="updateMainStreamManager(sub)"&gt;&lt;/user-video&gt;
+    &lt;user-video [streamManager]="sub" (click)="updateMainStreamManager(sub)"&gt;&lt;/user-video&gt;
 &lt;/div&gt;
 </code></pre>
 </li>
@@ -644,12 +662,13 @@ this.getToken().then(token =&gt; {
 
 <p>And we store the Publisher under <code>this.publisher</code>, which is also of parent class <code>StreamManager</code>. This way our webcam will be appended along all remote subscribers, in exactly the same way they are shown (remember all of them are displayed by <em>UserVideoComponent</em>):</p>
 <pre><code class="html">&lt;div *ngIf=&quot;publisher&quot; class=&quot;stream-container col-md-6 col-xs-6&quot;&gt;
-    &lt;user-video [streamManager]=&quot;publisher&quot; (clicked)=&quot;updateMainStreamManager(publisher)&quot;&gt;&lt;/user-video&gt;
+    &lt;user-video [streamManager]=&quot;publisher&quot; (click)=&quot;updateMainStreamManager(publisher)&quot;&gt;&lt;/user-video&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>Last point worth considering is the implementation of <em>UserVideoComponent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsibility), but displaying custom information for each one of them (the user's nickname) and handling the click event on them to update property <code>mainStreamManager</code> of parent <em>AppComponent</em>:</p>
-<pre><code class="html">&lt;div (click)=&quot;videoClicked()&quot;&gt;
+<p>You can see that every <code>&lt;user-video&gt;</code> component for our Publisher and every Subscriber also updates the main video player when clicking on it.</p>
+<p>Last point worth considering is the implementation of <em>UserVideoComponent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsibility), but displaying custom information for each one of them (the user's nickname in this case):</p>
+<pre><code class="html">&lt;div&gt;
     &lt;ov-video [streamManager]=&quot;streamManager&quot;&gt;&lt;/ov-video&gt;
     &lt;div&gt;&lt;p&gt;{% raw %}{{getNicknameTag()}}{% endraw %}&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -660,15 +679,8 @@ this.getToken().then(token =&gt; {
     @Input()
     streamManager: StreamManager;
 
-    @Output()
-    clicked = new EventEmitter();
-
     getNicknameTag() { // Gets the nickName of the user
         return JSON.parse(this.streamManager.stream.connection.data).clientData;
-    }
-
-    videoClicked() { // Triggers event for the parent component to update its main video display
-        this.clicked.emit();
     }
 }
 </code></pre>
@@ -739,7 +751,7 @@ this.getToken().then(token =&gt; {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-insecure-react/" class="btn btn-xs btn-primary float-right" title="openvidu-insecure-react">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-library-angular/" class="btn btn-xs btn-primary float-right" title="openvidu-library-angular">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../openvidu-insecure-js/" class="btn btn-xs btn-primary" title="openvidu-insecure-js"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>

@@ -96,7 +96,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
    
@@ -255,6 +267,12 @@ active: documentation
     <a class="" href="../speech-detection/">Speech detection</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../filters/">Voice and video filters</a> 
+</li>
+
  
 </li>
 </ul>
@@ -402,7 +420,7 @@ active: documentation
 <pre><code class="javascript">OV.initPublisher(&quot;html-element-id&quot;, { videoSource: &quot;screen&quot; });
 </code></pre>
 
-<p>Both <strong>Chrome</strong> and <strong>Firefox</strong> support screen sharing. Chrome needs an extension and Firefox supports native screen sharing since version 52. An OpenViduError object may be returned with the following <a href="../../../api/openvidu-browser/enums/openviduerrorname.html">OpenViduError.name</a> property in the callback function:</p>
+<p><strong>Chrome</strong>, <strong>Firefox</strong> and <strong>Opera</strong> support screen sharing. Chrome (and Opera) need an extension and Firefox supports native screen sharing since version 52. An OpenViduError object may be returned with the following <a href="../../../api/openvidu-browser/enums/openviduerrorname.html">OpenViduError.name</a> property in the callback function:</p>
 <ul>
 <li><code>SCREEN_SHARING_NOT_SUPPORTED</code>: if the browser does not support screen sharing.</li>
 <li><code>SCREEN_EXTENSION_NOT_INSTALLED</code>: Chrome needs an extension to allow screen sharing. <code>error.message</code> has the URL of Chrome Web Store where to install the extension.</li>
@@ -427,9 +445,15 @@ active: documentation
 });
 </code></pre>
 
+<p>For <strong>Firefox</strong> two different <code>videoSource</code> strings are allowed in order to screen share:</p>
+<ul>
+<li><code>"screen"</code>: entire screen</li>
+<li><code>"window"</code>: specific application window</li>
+</ul>
+<p>In Chrome and Opera <code>"screen"</code> value will give access to both entire screen and specific application windows.</p>
 <p><br><br>
 <hr></p>
-<h1 id="custom-screen-sharing-extension-for-chrome">Custom Screen Sharing extension for Chrome</h1>
+<h1 id="custom-screen-sharing-extension-for-chrome-and-opera">Custom Screen Sharing extension for Chrome (and Opera)</h1>
 <p><br>
 We provide a default extension that will work on any domain, but you can create your own Chrome extension always based on ours (<a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension">OpenVidu Screen Sharing extension</a>). This way your extension may have your own icon, name, description and custom valid domains.</p>
 <p>To use your extension, just configure OpenVidu object like this after initializing it:</p>

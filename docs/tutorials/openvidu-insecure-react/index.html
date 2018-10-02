@@ -95,8 +95,20 @@ active: documentation
 
    
 
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
 <li class="toctree-l1 current">
     <a class="current" href="./">openvidu-insecure-react</a>  
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
    
@@ -253,6 +265,12 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
 </li>
 
  
@@ -448,7 +466,7 @@ npm start
 </code></pre>
 
 <p>3) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.4.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.5.0
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:3000"><code>localhost:3000</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
@@ -764,10 +782,10 @@ this.getToken().then(token =&gt; {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-js-java/" class="btn btn-xs btn-primary float-right" title="openvidu-js-java">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-library-react/" class="btn btn-xs btn-primary float-right" title="openvidu-library-react">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../openvidu-insecure-angular/" class="btn btn-xs btn-primary" title="openvidu-insecure-angular"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../openvidu-library-angular/" class="btn btn-xs btn-primary" title="openvidu-library-angular"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   

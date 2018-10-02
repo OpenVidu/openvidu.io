@@ -96,7 +96,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
    
@@ -253,6 +265,12 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
 </li>
 
  
@@ -431,7 +449,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1516292370848}}
+<pre><code class="json">{&quot;sessionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481330577}}
 </code></pre>
 
 <hr>
@@ -463,11 +481,6 @@ active: documentation
 <td>UTC milliseconds</td>
 </tr>
 <tr>
-<td><code>endTime</code></td>
-<td>Time when the session finished</td>
-<td>UTC milliseconds</td>
-</tr>
-<tr>
 <td><code>duration</code></td>
 <td>Total duration of the session</td>
 <td>Seconds</td>
@@ -480,7 +493,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;duration&quot;:9,&quot;reason&quot;:&quot;lastParticipantLeft&quot;,&quot;startTime&quot;:1523971683579,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1523971692891,&quot;timestamp&quot;:1523971692891}}
+<pre><code class="json">{&quot;sessionDestroyed&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481699154,&quot;startTime&quot;:1538481330577,&quot;duration&quot;:368,&quot;reason&quot;:&quot;lastParticipantLeft&quot;}}
 </code></pre>
 
 <hr>
@@ -511,10 +524,20 @@ active: documentation
 <td>Identifier of the participant</td>
 <td>A string with the participant unique identifier</td>
 </tr>
+<tr>
+<td><code>location</code></td>
+<td>Geo location of the participant <em>(ONLY IN OPENVIDU PRO)</em></td>
+<td>A string with format <code>"CITY, COUNTRY"</code> (or <code>"unknown"</code>)</td>
+</tr>
+<tr>
+<td><code>platform</code></td>
+<td>Complete description of the platform used by the participant to connect to the session</td>
+<td>A string with the platform description</td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;participantJoined&quot;:{&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1523971683629}}
+<pre><code class="json">{&quot;participantJoined&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481330760,&quot;participantId&quot;:&quot;wsalcr1r72goj8sk&quot;,&quot;location&quot;:&quot;Berlin, Germany&quot;,&quot;platform&quot;:&quot;Chrome 69.0.3497.81 on OS X 10.13.6 64-bit&quot;}}
 </code></pre>
 
 <hr>
@@ -546,13 +569,18 @@ active: documentation
 <td>A string with the participant unique identifier</td>
 </tr>
 <tr>
-<td><code>startTime</code></td>
-<td>Time when the participant joined the session</td>
-<td>UTC milliseconds</td>
+<td><code>location</code></td>
+<td>Geo location of the participant <em>(ONLY IN OPENVIDU PRO)</em></td>
+<td>A string with format <code>"CITY, COUNTRY"</code> (or <code>"unknown"</code>)</td>
 </tr>
 <tr>
-<td><code>endTime</code></td>
-<td>Time when the participant left the session</td>
+<td><code>platform</code></td>
+<td>Complete description of the platform used by the participant to connect to the session</td>
+<td>A string with the platform description</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the participant joined the session</td>
 <td>UTC milliseconds</td>
 </tr>
 <tr>
@@ -568,7 +596,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;participantLeft&quot;:{&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;duration&quot;:9,&quot;reason&quot;:&quot;disconnect&quot;,&quot;startTime&quot;:1523971683629,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;endTime&quot;:1523971692866,&quot;timestamp&quot;:1523971692866}}
+<pre><code class="json">{&quot;participantLeft&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481597612,&quot;startTime&quot;:1538481532507,&quot;duration&quot;:65,&quot;reason&quot;:&quot;disconnect&quot;,&quot;participantId&quot;:&quot;lgge40niviipjzwg&quot;,&quot;location&quot;:&quot;Berlin, Germany&quot;,&quot;platform&quot;:&quot;Chrome 69.0.3497.81 on OS X 10.13.6 64-bit&quot;}}
 </code></pre>
 
 <hr>
@@ -611,12 +639,12 @@ active: documentation
 </tr>
 <tr>
 <td><code>audioEnabled</code></td>
-<td>Whether the media connection is sending audio or not</td>
+<td>Whether the media connection has negotiated audio or not</td>
 <td>[<code>true</code>,<code>false</code>]</td>
 </tr>
 <tr>
 <td><code>videoEnabled</code></td>
-<td>Whether the media connection is sending video or not</td>
+<td>Whether the media connection has negotiated video or not</td>
 <td>[<code>true</code>,<code>false</code>]</td>
 </tr>
 <tr>
@@ -629,10 +657,15 @@ active: documentation
 <td>If <code>videoEnabled</code> is <code>true</code>, the framerate of the transmitted video</td>
 <td>Number of fps</td>
 </tr>
+<tr>
+<td><code>videoDimensions</code></td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the dimensions transmitted video</td>
+<td>String with the dimensions (e.g. <code>"1920x1080"</code>)</td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;INBOUND&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;videoEnabled&quot;:true,&quot;receivingFrom&quot;:&quot;eedki0mookh577mx&quot;,&quot;timestamp&quot;:1523971686215,&quot;videoFramerate&quot;:30}}
+<pre><code class="json">{&quot;webrtcConnectionCreated&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481419726,&quot;participantId&quot;:&quot;ges2furjsjjmyi0b&quot;,&quot;connection&quot;:&quot;INBOUND&quot;,&quot;receivingFrom&quot;:&quot;wsalcr1r72goj8sk&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;videoFramerate&quot;:30,&quot;videoDimensions&quot;:&quot;{\&quot;width\&quot;:640,\&quot;height\&quot;:480}&quot;,&quot;audioEnabled&quot;:true,&quot;videoEnabled&quot;:true}}
 </code></pre>
 
 <hr>
@@ -675,12 +708,12 @@ active: documentation
 </tr>
 <tr>
 <td><code>audioEnabled</code></td>
-<td>Whether the media connection is sending audio or not</td>
+<td>Whether the media connection has negotiated audio or not</td>
 <td>[<code>true</code>,<code>false</code>]</td>
 </tr>
 <tr>
 <td><code>videoEnabled</code></td>
-<td>Whether the media connection is sending video or not</td>
+<td>Whether the media connection has negotiated video or not</td>
 <td>[<code>true</code>,<code>false</code>]</td>
 </tr>
 <tr>
@@ -694,13 +727,13 @@ active: documentation
 <td>Number of fps</td>
 </tr>
 <tr>
-<td><code>startTime</code></td>
-<td>Time when the media connection was established</td>
-<td>UTC milliseconds</td>
+<td><code>videoDimensions</code></td>
+<td>If <code>videoEnabled</code> is <code>true</code>, the dimensions transmitted video</td>
+<td>String with the dimensions (e.g. <code>"1920x1080"</code>)</td>
 </tr>
 <tr>
-<td><code>endTime</code></td>
-<td>Time when the media connection was disposed</td>
+<td><code>startTime</code></td>
+<td>Time when the media connection was established</td>
 <td>UTC milliseconds</td>
 </tr>
 <tr>
@@ -716,7 +749,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;reason&quot;:&quot;disconnect&quot;,&quot;audioEnabled&quot;:true,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;videoEnabled&quot;:true,&quot;receivingFrom&quot;:&quot;eedki0mookh577mx&quot;,&quot;participantId&quot;:&quot;6ptvp0in09fhbroy&quot;,&quot;duration&quot;:6,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;connection&quot;:&quot;INBOUND&quot;,&quot;startTime&quot;:1523971686215,&quot;endTime&quot;:1523971692831,&quot;timestamp&quot;:1523971692831,&quot;videoFramerate&quot;:30}}
+<pre><code class="json">{&quot;webrtcConnectionDestroyed&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481449060,&quot;startTime&quot;:1538481419726,&quot;duration&quot;:29,&quot;reason&quot;:&quot;disconnect&quot;,&quot;participantId&quot;:&quot;ges2furjsjjmyi0b&quot;,&quot;connection&quot;:&quot;INBOUND&quot;,&quot;receivingFrom&quot;:&quot;wsalcr1r72goj8sk&quot;,&quot;videoSource&quot;:&quot;CAMERA&quot;,&quot;videoFramerate&quot;:30,&quot;videoDimensions&quot;:&quot;{\&quot;width\&quot;:640,\&quot;height\&quot;:480}&quot;,&quot;audioEnabled&quot;:true,&quot;videoEnabled&quot;:true}}
 </code></pre>
 
 <hr>
@@ -775,7 +808,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;recordingStarted&quot;:{&quot;duration&quot;:0,&quot;hasVideo&quot;:true,&quot;hasAudio&quot;:true,&quot;size&quot;:0,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;id&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;layout&quot;:&quot;BEST_FIT&quot;,&quot;timestamp&quot;:1523973259519}}
+<pre><code class="json">{&quot;recordingStarted&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481536707,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;TestSession&quot;,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;hasAudio&quot;:true,&quot;hasVideo&quot;:true,&quot;size&quot;:0,&quot;duration&quot;:0.0}}
 </code></pre>
 
 <hr>
@@ -839,7 +872,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;recordingStopped&quot;:{&quot;duration&quot;:4,&quot;hasVideo&quot;:true,&quot;hasAudio&quot;:true,&quot;size&quot;:4919937,&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;id&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;layout&quot;:&quot;BEST_FIT&quot;,&quot;timestamp&quot;:1523973286992}}
+<pre><code class="json">{&quot;recordingStopped&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481568974,&quot;startTime&quot;:1538481536707,&quot;duration&quot;:28.72,&quot;reason&quot;:&quot;recordingStoppedByServer&quot;,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;TestSession&quot;,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;hasAudio&quot;:false,&quot;hasVideo&quot;:false,&quot;size&quot;:6084390}}
 </code></pre>
 
 <p><br></p> 

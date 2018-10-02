@@ -132,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">capabilities<span class="tsd-signature-symbol">:</span> <a href="../interfaces/capabilities.html" class="tsd-signature-type">Capabilities</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L71">OpenVidu/Session.ts:71</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L73">OpenVidu/Session.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -148,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <a href="connection.html" class="tsd-signature-type">Connection</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L55">OpenVidu/Session.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L57">OpenVidu/Session.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -163,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L60">OpenVidu/Session.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L62">OpenVidu/Session.ts:62</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -178,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">stream<wbr>Managers<span class="tsd-signature-symbol">:</span> <a href="streammanager.html" class="tsd-signature-type">StreamManager</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L65">OpenVidu/Session.ts:65</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L67">OpenVidu/Session.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -201,16 +201,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L105">OpenVidu/Session.ts:105</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L107">OpenVidu/Session.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Connects to the session using <code>token</code>. Parameter <code>metadata</code> allows you to pass extra data to share with other users when
-										they receive <code>streamCreated</code> event. The structure of <code>metadata</code> string is up to you (maybe some standarized format
+										they receive <code>streamCreated</code> event. The structure of <code>metadata</code> string is up to you (maybe some standardized format
 									as JSON or XML is a good idea), the only restriction is a maximum length of 10000 chars.</p>
 								</div>
-								<p>This metadata is not considered secure, as it is generated in the client side. To pass securized data, add it as a parameter in the
+								<p>This metadata is not considered secure, as it is generated in the client side. To pass secure data, add it as a parameter in the
 								token generation operation (through the API REST, openvidu-java-client or openvidu-node-client).</p>
 								<p>Only after the returned Promise is successfully resolved <a href="session.html#connection">Session.connection</a> object will be available and properly defined.</p>
 								<h4 id="events-dispatched">Events dispatched</h4>
@@ -237,16 +237,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L106">OpenVidu/Session.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L108">OpenVidu/Session.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Connects to the session using <code>token</code>. Parameter <code>metadata</code> allows you to pass extra data to share with other users when
-										they receive <code>streamCreated</code> event. The structure of <code>metadata</code> string is up to you (maybe some standarized format
+										they receive <code>streamCreated</code> event. The structure of <code>metadata</code> string is up to you (maybe some standardized format
 									as JSON or XML is a good idea), the only restriction is a maximum length of 10000 chars.</p>
 								</div>
-								<p>This metadata is not considered secure, as it is generated in the client side. To pass securized data, add it as a parameter in the
+								<p>This metadata is not considered secure, as it is generated in the client side. To pass secure data, add it as a parameter in the
 								token generation operation (through the API REST, openvidu-java-client or openvidu-node-client).</p>
 								<p>Only after the returned Promise is successfully resolved <a href="session.html#connection">Session.connection</a> object will be available and properly defined.</p>
 								<h4 id="events-dispatched">Events dispatched</h4>
@@ -285,7 +285,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L185">OpenVidu/Session.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L187">OpenVidu/Session.ts:187</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -326,7 +326,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L433">OpenVidu/Session.ts:433</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L435">OpenVidu/Session.ts:435</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -362,7 +362,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L472">OpenVidu/Session.ts:472</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L474">OpenVidu/Session.ts:474</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -396,7 +396,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L602">OpenVidu/Session.ts:602</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L604">OpenVidu/Session.ts:604</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -445,7 +445,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L544">OpenVidu/Session.ts:544</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L546">OpenVidu/Session.ts:546</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -494,7 +494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L573">OpenVidu/Session.ts:573</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L575">OpenVidu/Session.ts:575</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -543,7 +543,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L328">OpenVidu/Session.ts:328</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L330">OpenVidu/Session.ts:330</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -576,14 +576,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L508">OpenVidu/Session.ts:508</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L510">OpenVidu/Session.ts:510</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Sends one signal. <code>signal</code> object has the following optional properties:</p>
-									<pre><code class="lang-json">{data:string, to:Connection[], type:string}
-</code></pre>
+									<pre><code class="language-json">{data:string, to:Connection[], type:string}</code></pre>
 									<p>All users subscribed to that signal (<code>session.on(&#39;signal:type&#39;, ...)</code> or <code>session.on(&#39;signal&#39;, ...)</code> for all signals) and whose Connection objects are in <code>to</code> array will receive it. Their local
 									Session objects will dispatch a <code>signal</code> or <code>signal:type</code> event. See <a href="signalevent.html">SignalEvent</a> to learn more.</p>
 								</div>
@@ -613,7 +612,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L189">OpenVidu/Session.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L191">OpenVidu/Session.ts:191</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -650,7 +649,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L190">OpenVidu/Session.ts:190</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L192">OpenVidu/Session.ts:192</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -690,7 +689,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L191">OpenVidu/Session.ts:191</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L193">OpenVidu/Session.ts:193</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -753,7 +752,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L192">OpenVidu/Session.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L194">OpenVidu/Session.ts:194</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -829,7 +828,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L257">OpenVidu/Session.ts:257</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L259">OpenVidu/Session.ts:259</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -851,7 +850,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L258">OpenVidu/Session.ts:258</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L260">OpenVidu/Session.ts:260</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -880,7 +879,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L383">OpenVidu/Session.ts:383</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L385">OpenVidu/Session.ts:385</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -920,7 +919,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenVidu/Session.ts#L293">OpenVidu/Session.ts:293</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Session.ts#L295">OpenVidu/Session.ts:295</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -971,6 +970,12 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="filter.html" class="tsd-kind-icon">Filter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="filterevent.html" class="tsd-kind-icon">Filter<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="localrecorder.html" class="tsd-kind-icon">Local<wbr>Recorder</a>
