@@ -90,6 +90,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="publisherproperties.html#audiosource" class="tsd-kind-icon">audio<wbr>Source</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="publisherproperties.html#filter" class="tsd-kind-icon">filter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="publisherproperties.html#framerate" class="tsd-kind-icon">frame<wbr>Rate</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="publisherproperties.html#insertmode" class="tsd-kind-icon">insert<wbr>Mode</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="publisherproperties.html#mirror" class="tsd-kind-icon">mirror</a></li>
@@ -110,7 +111,7 @@
 					<div class="tsd-signature tsd-kind-icon">audio<wbr>Source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L32">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L33">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -130,12 +131,28 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="filter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> filter</h3>
+					<div class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">:</span> <a href="../classes/filter.html" class="tsd-signature-type">Filter</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L90">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:90</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p><strong>WARNING</strong>: experimental option. This property may change in the near future</p>
+						</div>
+						<p>Define a filter to apply in the Publisher&#39;s stream</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="framerate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> frame<wbr>Rate</h3>
 					<div class="tsd-signature tsd-kind-icon">frame<wbr>Rate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L39">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L40">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:40</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -156,7 +173,7 @@
 					<div class="tsd-signature tsd-kind-icon">insert<wbr>Mode<span class="tsd-signature-symbol">:</span> <a href="../enums/videoinsertmode.html" class="tsd-signature-type">VideoInsertMode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L45">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L46">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:46</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -176,7 +193,7 @@
 					<div class="tsd-signature tsd-kind-icon">mirror<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L51">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L52">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:52</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -196,7 +213,7 @@
 					<div class="tsd-signature tsd-kind-icon">publish<wbr>Audio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L57">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L58">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:58</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -216,7 +233,7 @@
 					<div class="tsd-signature tsd-kind-icon">publish<wbr>Video<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L63">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L64">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -236,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">resolution<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L69">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L70">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +273,7 @@
 					<div class="tsd-signature tsd-kind-icon">video<wbr>Source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L81">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Interfaces/Public/PublisherProperties.ts#L83">OpenViduInternal/Interfaces/Public/PublisherProperties.ts:83</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -266,7 +283,8 @@
 								<li>Property <code>deviceId</code> of a <a href="device.html">Device</a></li>
 								<li><code>&quot;screen&quot;</code> to screen-share. We provide a default screen-shraring extension for Chrome that can run in any domain, but you can customize it so it has your own icon, your own name, etc. Visit this
 									<a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension/">GitHub repository</a> to learn how. Once you have uploaded your own extension to Chrome Web Store,
-								simply call <code>OpenVidu.setAdvancedConfiguration({screenShareChromeExtension : &quot;https://chrome.google.com/webstore/detail/YOUR_EXTENSION_NAME/YOUR_EXTENSION_ID&quot;})</code> before calling <code>OpenVidu.initPublisher(targetElement, {videoSource: &quot;screen&quot;})</code>.</li>
+									simply call <code>OpenVidu.setAdvancedConfiguration({screenShareChromeExtension : &quot;https://chrome.google.com/webstore/detail/YOUR_EXTENSION_NAME/YOUR_EXTENSION_ID&quot;})</code> before calling <code>OpenVidu.initPublisher(targetElement, {videoSource: &quot;screen&quot;})</code>.
+								For Firefox <code>&quot;screen&quot;</code> string will ask for permissions to share the entire screen. To ask for a specific window or application, use <code>&quot;window&quot;</code> string instead (this only applies to Firefox).</li>
 								<li>A MediaStreamTrack obtained from a MediaStream object with <a href="../classes/openvidu.html#getusermedia">OpenVidu.getUserMedia</a></li>
 								<li><code>false</code> or null to have an audio-only publisher</li>
 							</ul>
@@ -307,6 +325,12 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/filter.html" class="tsd-kind-icon">Filter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/filterevent.html" class="tsd-kind-icon">Filter<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/localrecorder.html" class="tsd-kind-icon">Local<wbr>Recorder</a>
@@ -375,6 +399,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="publisherproperties.html#audiosource" class="tsd-kind-icon">audio<wbr>Source</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="publisherproperties.html#filter" class="tsd-kind-icon">filter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="publisherproperties.html#framerate" class="tsd-kind-icon">frame<wbr>Rate</a>

@@ -83,6 +83,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="session.html#activeconnections" class="tsd-kind-icon">active<wbr>Connections</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="session.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="session.html#properties" class="tsd-kind-icon">properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="session.html#recording" class="tsd-kind-icon">recording</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="session.html#sessionid" class="tsd-kind-icon">session<wbr>Id</a></li>
@@ -110,7 +111,7 @@
 					<div class="tsd-signature tsd-kind-icon">active<wbr>Connections<span class="tsd-signature-symbol">:</span> <a href="connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L52">Session.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L57">Session.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -127,12 +128,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="createdat" class="tsd-anchor"></a>
+					<h3>created<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L40">Session.ts:40</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestamp when this session was created, in UTC milliseconds (ms since Jan 1, 1970, 00:00:00 UTC)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="properties" class="tsd-anchor"></a>
 					<h3>properties</h3>
 					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="../interfaces/sessionproperties.html" class="tsd-signature-type">SessionProperties</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L40">Session.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L45">Session.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -147,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">recording<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L57">Session.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L62">Session.ts:62</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -162,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L35">Session.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L35">Session.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,7 +200,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L142">Session.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L150">Session.ts:150</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -207,14 +223,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L187">Session.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L199">Session.ts:199</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Updates every property of the Session with the current status it has in OpenVidu Server. This is especially useful for accessing the list of active
-									connections to the Session (<a href="session.html#activeconnections">Session.activeConnections</a>) and use those values to call <a href="session.html#forcedisconnect">Session.forceDisconnect</a> or <a href="session.html#forceunpublish">Session.forceUnpublish</a></p>
+									connections of the Session (<a href="session.html#activeconnections">Session.activeConnections</a>) and use those values to call <a href="session.html#forcedisconnect">Session.forceDisconnect</a> or <a href="session.html#forceunpublish">Session.forceUnpublish</a>.</p>
 								</div>
+								<p>To update every Session object owned by OpenVidu object, call <a href="openvidu.html#fetch">OpenVidu.fetch</a></p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>A promise resolved to true if the Session status has changed with respect to the server, or to false if not.
@@ -232,7 +249,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L237">Session.ts:237</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L251">Session.ts:251</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -264,7 +281,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L304">Session.ts:304</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L330">Session.ts:330</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -296,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L93">Session.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L98">Session.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -325,7 +342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Session.ts#L84">Session.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Session.ts#L89">Session.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -380,6 +397,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="session.html#activeconnections" class="tsd-kind-icon">active<wbr>Connections</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="session.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="session.html#properties" class="tsd-kind-icon">properties</a>

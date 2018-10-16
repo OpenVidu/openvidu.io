@@ -1,0 +1,666 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Voice and video filters
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Voice and video filters')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Voice and video filters')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Demos</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>How do I ... ?</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/manage-videos/">Manage video players</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../speech-detection/">Speech detection</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">Voice and video filters</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Reference Documentation</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/custom-certificate/">Using your own certificate</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../releases/">Releases</a> 
+</li>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h1 id="voice-and-video-filters">Voice and video filters</h1>
+<p>OpenVidu API offers a simple way of applying filters to video and audio streams in the server side by making use of Kurento Media Server capabilities. This is the current status of filter support in OpenVidu:</p>
+<ul>
+<li>You can apply <strong>one filter at a time to a published Stream</strong>. Every user subscribed to it will receive the modified stream.</li>
+<li>You can <strong>remove an applied filter</strong>.</li>
+<li>You can <strong>call any remote method</strong> offered by an applied filter</li>
+<li>You can <strong>add and remove event listeners</strong> to any event dispatched by an applied filter.</li>
+<li>You must configure in the participant token the allowed filters the user can apply.</li>
+</ul>
+<div style="
+    display: table;
+    border: 1px solid #0088aa;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;"><div style="display: table-cell">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #0088aa;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    <strong>WARNING</strong>: experimental option. This feature may suffer breaking changes in the near future.
+</div>
+</div>
+
+<hr />
+<h2 id="step-by-step">Step by step</h2>
+<p><br></p>
+<h5 id="1-generate-a-token-with-the-filters-the-user-will-be-able-to-apply">1) Generate a token with the filters the user will be able to apply</h5>
+<p>This is a simple way of securing the ability of applying filters from OpenVidu Browser, so that not every user is able to apply any filter at any time.</p>
+<ul>
+<li>
+<p><a href="../../reference-docs/REST-API#post-apitokens">API REST</a>: include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code> (a string array containing the name of the filters the user will be able to apply)</p>
+<pre><code>{
+    "session": "6fpivlanw91qjy6n",
+    "data": "user_data",
+    "role": "PUBLISHER",
+    "kurentoOptions": {
+        "allowedFilters": ["GStreamerFilter", "FaceOverlayFilter"]
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><a href="../../reference-docs/openvidu-java-client#generate-a-token">openvidu-java-client</a>: call <code>TokenOptions.Builder#kurentoOptions(KurentoOptions)</code> to set <code>allowedFilters</code> value with method <code>KurentoOptions.Builder#allowedFilters(String[])</code></p>
+<pre><code>TokenOptions tokenOptions = new TokenOptions.Builder()
+    .role(OpenViduRole.PUBLISHER)
+    .data("user_data")
+    .kurentoOptions(
+        new KurentoOptions.Builder()
+            .allowedFilters(new String[]{"GStreamerFilter", "FaceOverlayFilter"})
+            .build())
+    .build();
+String token = session.generateToken(tokenOptions);
+</code></pre>
+</li>
+<li>
+<p><a href="../../reference-docs/openvidu-node-client#generate-a-token">openvidu-node-client</a>: include in <a href="../../../api/openvidu-node-client/interfaces/tokenoptions.html">TokenOptions</a> parameter a <code>kurentoOptions</code> property with <code>allowedFiters</code> array</p>
+<pre><code>var tokenOptions = {
+    role: "PUBLISHER",
+    data: "user_data",
+    kurentoOptions: {
+        allowedFilters: ["GStreamerFilter", "FaceOverlayFilter"]
+    }
+};
+session.generateToken(tokenOptions).then(token =&gt; { ... });
+</code></pre>
+</li>
+</ul>
+<p><br></p>
+<h5 id="2a-initialize-a-publisher-object-configured-for-using-a-filter-from-the-beginning-of-the-publishing">2.A) Initialize a Publisher object configured for using a filter from the beginning of the publishing ...</h5>
+<p>Use <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html">PublisherProperties</a>, specifically property <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#filter">filter</a>:</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+var publisher = OV.initPublisher(
+    targetElement,
+    {filter: {type: &quot;GStreamerFilter&quot;, options: &quot;videoflip method=vertical-flip&quot;}}
+);
+
+// ... user already connected to &quot;session&quot; with the appropriate token
+session.publish(publisher);
+</code></pre>
+
+<p><br></p>
+<h5 id="2b-or-apply-the-filter-dynamically-after-publishing-the-stream-whenever-you-want">2.B) ... or apply the filter dynamically after publishing the stream, whenever you want</h5>
+<pre><code class="javascript">// ... user already connected to the session with the appropriate token
+// and successfully publishing the Publisher object
+
+publisher.stream.applyFilter(&quot;GStreamerFilter&quot;, &quot;videoflip method=vertical-flip&quot;)
+    .then(() =&gt; {
+        console.log(&quot;Video rotated!&quot;);
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
+</code></pre>
+
+<p><br></p>
+<h5 id="3-you-can-execute-any-method-offered-by-the-filter">3) You can execute any method offered by the filter</h5>
+<pre><code class="javascript">// ... user already connected to the session with the appropriate token,
+// successfully publishing the Publisher object and a filter being applied to its stream
+
+publisher.stream.filter.execMethod(&quot;setElementProperty&quot;, {&quot;propertyName&quot;:&quot;method&quot;,&quot;propertyValue&quot;:&quot;horizontal-flip&quot;})
+    .then(() =&gt; {
+        console.log(&quot;Video rotation direction modified!&quot;);
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
+</code></pre>
+
+<p><br></p>
+<h5 id="4-you-can-also-subscribe-to-any-filter-event-if-it-dispatches-any-and-later-unsubscribe-from-it">4) You can also subscribe to any filter event (if it dispatches any), and later unsubscribe from it</h5>
+<pre><code class="javascript">// ... user already connected to the session with the appropriate token,
+// successfully publishing the Publisher object and a filter being applied to its stream
+
+publisher.stream.filter.addEventListener(&quot;FooFilterEvent&quot;, filterEvent =&gt; {
+        console.log('Filter event received!. Data: ' + filterEvent.data);
+    });
+
+...
+
+publisher.stream.filter.removeEventListener(&quot;FooFilterEvent&quot;);
+</code></pre>
+
+<p><br></p>
+<h5 id="4-to-remove-the-filter">4) To remove the filter</h5>
+<pre><code class="javascript">// ... user already connected to the session with the appropriate token,
+// successfully publishing the Publisher object and a filter being applied to its stream
+
+publisher.stream.removeFilter()
+    .then(() =&gt; {
+        console.log(&quot;Filter removed&quot;);
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
+</code></pre>
+
+<p><br></p>
+<blockquote>
+<p>Moderators are not only able to call all of these methods over their <code>Publisher.stream</code> object, but also over any <code>Subscriber.stream</code> object. Also, they don't need any special token permission to apply filters and can bypass any token restriction set to other user tokens</p>
+</blockquote>
+<p><br></p>
+<hr />
+<h2 id="filter-samples">Filter samples</h2>
+<h4 id="kurento-filters">Kurento filters</h4>
+<p><br></p>
+<ul>
+<li><strong>FaceOverlayFilter</strong> <em>(overlay an image over detected faces)</em><pre><code>publisher.stream.applyFilter("FaceOverlayFilter")
+    .then(filter =&gt; {
+        filter.execMethod(
+            "setOverlayedImage",
+            {
+                "uri":"https://cdn.pixabay.com/photo/2013/07/12/14/14/derby-148046_960_720.png",
+                "offsetXPercent":"-0.2F",
+                "offsetYPercent":"-0.8F",
+                "widthPercent":"1.3F",
+                "heightPercent":"1.0F"
+            });
+    });
+</code></pre>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><strong>ChromaFilter</strong> <em>(set a chroma background)</em><pre><code>publisher.stream.applyFilter(
+    "ChromaFilter",
+    {
+        "window": {
+            "topRightCornerX": 0,
+            "topRightCornerY": 0,
+            "width": 50,
+            "height": 50
+        },
+        "backgroundImage": "https://www.maxpixel.net/static/photo/1x/Cool-Blue-Liquid-Lake-Abstract-Background-Clear-316144.jpg"
+    });
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>You must install Kurento ChromaFilter library in the same host as Kurento Media Server: <code>sudo apt-get install kms-chroma</code></p>
+</blockquote>
+<p><br></p>
+<ul>
+<li><strong>ZBarFilter</strong> <em>(detect and read bar codes information)</em><pre><code>publisher.stream.applyFilter("ZBarFilter")
+    .then(filter =&gt; {
+        filter.addEventListener("CodeFound", filterEvent =&gt; {
+            console.log('Bar code found!. Data: ' + filterEvent.data);
+        }
+    });
+</code></pre>
+</li>
+</ul>
+<h4 id="gstreamer-filters">GStreamer filters</h4>
+<p>These filters are set with <em>type</em> <code>GStreamerFilter</code> and an <em>options</em> parameter like this:</p>
+<pre><code class="javascript">publisher.stream.applyFilter(&quot;GStreamerFilter&quot;, {&quot;command&quot;: &quot;GSTREAMER_COMMAND&quot;})
+</code></pre>
+
+<p>A list of interesting values for <code>GSTREAMER_COMMAND</code> parameter is stated below. Replace <code>GSTREAMER_COMMAND</code> in the upper code snippet for any of the examples provided in the following list items:</p>
+<ul>
+<li><strong>coloreffects</strong>: apply different color filters to the video stream<br>Example: <code>coloreffects preset=heat</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>videobalance</strong>: change different properties of the video stream such as brightness, contrast, hue or saturation<br>Example: <code>videobalance saturation=0.0</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>videoflip</strong>: rotate the video stream<br>Example: <code>videoflip method=vertical-flip</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>videobox</strong>: crop the video stream<br>Example: <code>videobox fill=black top=20 bottom=20 left=-10 right=-10</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>gamma</strong>: adjust gamma level of the video stream<br>Example: <code>gamma gamma=5.0</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>videomedian</strong>: add a median filter to the video stream<br>Example: <code>videomedian filtersize=9 lum-only=false</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>textoverlay</strong>: add an embedded text to the video<br>Example: <code>textoverlay text="Embedded text" valignment=top halignment=right font-desc="Cantarell 25"</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>timeoverlay</strong>: embed the time the video stream has been playing<br>Example: <code>timeoverlay valignment=bottom halignment=right font-desc="Sans, 20"</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>clockoverlay</strong>: embed a clock with the local time (in OpenVidu Server)<br>Example: <code>clockoverlay valignment=bottom halignment=right shaded-background=true font-desc="Sans, 20"</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>audioecho</strong>: add reverb to the audio stream<br>Example: <code>audioecho delay=50000000 intensity=0.6 feedback=0.4</code><div style="margin-bottom: 7px"></div></li>
+<li><strong>audioamplify</strong>: amplifies an audio stream by a given factor<br>Example: <code>audioamplify amplification=1.5 clipping-method=wrap-positive</code><div style="margin-bottom: 7px"></div></li>
+<li>Other audio filters: check them out in <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-plugin-audiofx.html">GStreamer site</a><div style="margin-bottom: 7px"></div></li>
+<li>Many effects of <strong><a href="https://wiki.gnome.org/Projects/GnomeVideoEffects/Effects">effectv project</a></strong> : funny filters for the video stream like <code>agingtv</code>, <code>dicetv</code>, <code>optv</code>, <code>quarktv</code>, <code>radioactv</code>, <code>revtv</code>, <code>rippletv</code>, <code>shagadelictv</code>, <code>streaktv</code>, <code>vertigotv</code>, <code>warptv</code><br>Example: <code>radioactv</code></li>
+</ul>
+<p>All available GStreamer plugins can be found in <a href="https://gstreamer.freedesktop.org/documentation/plugins.html">GStreamer site</a>.</p>
+<p><br></p> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../reference-docs/openvidu-browser/" class="btn btn-xs btn-primary float-right" title="openvidu-browser API">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../speech-detection/" class="btn btn-xs btn-primary" title="Speech detection"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/advanced-features/filters.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

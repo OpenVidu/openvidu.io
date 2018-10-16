@@ -91,6 +91,9 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#clientdata" class="tsd-kind-icon">client<wbr>Data</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#connectionid" class="tsd-kind-icon">connection<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#location" class="tsd-kind-icon">location</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#platform" class="tsd-kind-icon">platform</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#publishers" class="tsd-kind-icon">publishers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#role" class="tsd-kind-icon">role</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="connection.html#serverdata" class="tsd-kind-icon">server<wbr>Data</a></li>
@@ -109,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">client<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L50">Connection.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L66">Connection.ts:66</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -125,7 +128,7 @@
 					<div class="tsd-signature tsd-kind-icon">connection<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L29">Connection.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L29">Connection.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -135,12 +138,58 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="createdat" class="tsd-anchor"></a>
+					<h3>created<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L34">Connection.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestamp when this connection was established, in UTC milliseconds (ms since Jan 1, 1970, 00:00:00 UTC)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="location" class="tsd-anchor"></a>
+					<h3>location</h3>
+					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L50">Connection.ts:50</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Geo location of the connection, with the following format: <code>&quot;CITY, COUNTRY&quot;</code> (<code>&quot;unknown&quot;</code> if it wasn&#39;t possible to locate it)
+							<em>(ONLY IN OPENVIDU PRO)</em></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="platform" class="tsd-anchor"></a>
+					<h3>platform</h3>
+					<div class="tsd-signature tsd-kind-icon">platform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L55">Connection.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A complete description of the platform used by the participant to connect to the session</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="publishers" class="tsd-anchor"></a>
 					<h3>publishers</h3>
 					<div class="tsd-signature tsd-kind-icon">publishers<span class="tsd-signature-symbol">:</span> <a href="publisher.html" class="tsd-signature-type">Publisher</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L56">Connection.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L72">Connection.ts:72</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -156,7 +205,7 @@
 					<div class="tsd-signature tsd-kind-icon">role<span class="tsd-signature-symbol">:</span> <a href="../enums/openvidurole.html" class="tsd-signature-type">OpenViduRole</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L34">Connection.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L39">Connection.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -171,7 +220,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L44">Connection.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L60">Connection.ts:60</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -186,7 +235,7 @@
 					<div class="tsd-signature tsd-kind-icon">subscribers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L62">Connection.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L78">Connection.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,7 +251,7 @@
 					<div class="tsd-signature tsd-kind-icon">token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Connection.ts#L39">Connection.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Connection.ts#L44">Connection.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -245,6 +294,15 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="connection.html#connectionid" class="tsd-kind-icon">connection<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="connection.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="connection.html#location" class="tsd-kind-icon">location</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="connection.html#platform" class="tsd-kind-icon">platform</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="connection.html#publishers" class="tsd-kind-icon">publishers</a>

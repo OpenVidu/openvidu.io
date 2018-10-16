@@ -96,7 +96,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
    
@@ -253,6 +265,12 @@ active: documentation
 
 <li class="toctree-l1 ">
     <a class="" href="../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../advanced-features/filters/">Voice and video filters</a> 
 </li>
 
  
@@ -416,7 +434,7 @@ active: documentation
 <tr>
 <td>node</td>
 <td><code>node -v</code></td>
-<td><code>sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -</code><br><code>sudo apt-get install -y nodejs</code></td>
+<td><code>sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -</code><br><code>sudo apt-get install -y nodejs</code></td>
 </tr>
 <tr>
 <td>maven</td>
@@ -499,19 +517,17 @@ http-server -S
 <h2 id="installing-kms">Installing KMS</h2>
 <p>How to <em>install</em> and <em>run</em> KMS in your development machine:</p>
 <p>Ubuntu 14.04 LTS Trusty (64 bits)</p>
-<pre><code class="bash">echo &quot;deb http://ubuntu.openvidu.io/6.7.0 trusty kms6&quot; | tee /etc/apt/sources.list.d/kurento.list
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
-apt-get update
-apt-get -y install kurento-media-server
-apt-get -y install openh264-gst-plugins-bad-1.5
+<pre><code class="bash">sudo echo &quot;deb http://ubuntu.openvidu.io/6.8.0 trusty kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
+sudo apt-get update
+sudo apt-get -y install kurento-media-server
 </code></pre>
 
 <p>Ubuntu 16.04 LTS Xenial (64 bits)</p>
-<pre><code class="bash">echo &quot;deb http://ubuntu.openvidu.io/6.7.0 xenial kms6&quot; | tee /etc/apt/sources.list.d/kurento.list
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
-apt-get update
-apt-get -y install kurento-media-server
-apt-get -y install openh264-gst-plugins-bad-1.5
+<pre><code class="bash">sudo echo &quot;deb http://ubuntu.openvidu.io/6.8.0 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
+sudo apt-get update
+sudo apt-get -y install kurento-media-server
 </code></pre>
 
 <p>Start and stop the service</p>

@@ -88,15 +88,10 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="publisher.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#audioactive" class="tsd-kind-icon">audio<wbr>Active</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#framerate" class="tsd-kind-icon">frame<wbr>Rate</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#hasaudio" class="tsd-kind-icon">has<wbr>Audio</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="publisher.html#hasvideo" class="tsd-kind-icon">has<wbr>Video</a></li>
@@ -110,32 +105,6 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Publisher<span class="tsd-signature-symbol">(</span>json<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="publisher.html" class="tsd-signature-type">Publisher</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L67">Publisher.ts:67</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>json: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="publisher.html" class="tsd-signature-type">Publisher</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="audioactive" class="tsd-anchor"></a>
@@ -143,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">audio<wbr>Active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L47">Publisher.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L51">Publisher.ts:51</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,12 +122,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="createdat" class="tsd-anchor"></a>
+					<h3>created<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L36">Publisher.ts:36</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestamp when this Publisher started publishing, in UTC milliseconds (ms since Jan 1, 1970, 00:00:00 UTC)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="framerate" class="tsd-anchor"></a>
 					<h3>frame<wbr>Rate</h3>
 					<div class="tsd-signature tsd-kind-icon">frame<wbr>Rate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L57">Publisher.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L61">Publisher.ts:61</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -173,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Audio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L37">Publisher.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L41">Publisher.ts:41</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Video<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L42">Publisher.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L46">Publisher.ts:46</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -203,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">stream<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L32">Publisher.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L31">Publisher.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -220,7 +204,7 @@
 					<div class="tsd-signature tsd-kind-icon">type<wbr>OfVideo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L62">Publisher.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L66">Publisher.ts:66</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -235,7 +219,7 @@
 					<div class="tsd-signature tsd-kind-icon">video<wbr>Active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L52">Publisher.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L56">Publisher.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -250,7 +234,7 @@
 					<div class="tsd-signature tsd-kind-icon">video<wbr>Dimensions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/tree/master/openvidu-node-client/src/Publisher.ts#L67">Publisher.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Publisher.ts#L71">Publisher.ts:71</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -294,11 +278,11 @@
 					<li class="current tsd-kind-class">
 						<a href="publisher.html" class="tsd-kind-icon">Publisher</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="publisher.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="publisher.html#audioactive" class="tsd-kind-icon">audio<wbr>Active</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="publisher.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="publisher.html#framerate" class="tsd-kind-icon">frame<wbr>Rate</a>

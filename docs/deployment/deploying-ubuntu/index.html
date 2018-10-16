@@ -96,7 +96,19 @@ active: documentation
    
 
 <li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
     <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
    
@@ -255,6 +267,12 @@ active: documentation
     <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
+</li>
+
  
 </li>
 </ul>
@@ -404,7 +422,7 @@ active: documentation
 <h2 id="installation-process">Installation process</h2>
 <p>Only <strong>Ubuntu xenial 16.04</strong> is supported.</p>
 <h4 id="1-install-kms">1. Install KMS</h4>
-<pre><code class="console">sudo echo &quot;deb http://ubuntu.openvidu.io/6.7.2 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+<pre><code class="console">sudo echo &quot;deb http://ubuntu.openvidu.io/6.8.0 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
 sudo apt-get update
 sudo apt-get -y install kurento-media-server
@@ -451,9 +469,10 @@ sudo service kurento-media-server restart
 </code></pre>
 
 <h4 id="8-init-openvidu-server-jar-executable">8. Init Openvidu Server JAR executable</h4>
-<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ openvidu-server.jar &amp;
+<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ openvidu-server-{VERSION}.jar &amp;
 </code></pre>
 
+<p>Being <code>YOUR_SECRET</code> the password you want for securing your OpenVidu Server. This will be needed for connecting to OpenVidu Server dashboard and for consuming OpenVidu Server REST API. Keep it safe!</p>
 <blockquote>
 <p>You will need Java 8 to run OpenVidu Server:</p>
 <p><code>sudo apt-get install -y openjdk-8-jre</code></br></p>
