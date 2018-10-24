@@ -60,6 +60,12 @@
     </url>
         
     <url>
+     <loc>/tutorials/openvidu-ionic/</loc>
+     <lastmod>2018-10-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>/tutorials/openvidu-js-java/</loc>
      <lastmod>2018-10-24</lastmod>
      <changefreq>daily</changefreq>
@@ -101,6 +107,12 @@
         
     <url>
      <loc>/demos/openvidu-call-react/</loc>
+     <lastmod>2018-10-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/demos/openvidu-call-ionic/</loc>
      <lastmod>2018-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>

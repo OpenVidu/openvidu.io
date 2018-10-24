@@ -1,6 +1,6 @@
 ---
 layout: docs-layout
-title: OpenVidu Documentation - openvidu-insecure-angular
+title: OpenVidu Documentation - openvidu-ionic
 active: documentation
 ---
 
@@ -13,7 +13,7 @@ active: documentation
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('openvidu-insecure-angular')").each(function (i, e) {
+		$(".subnav").find("li:contains('openvidu-ionic')").each(function (i, e) {
 			var currentElement = $(e);
 			currentElement.parent().css({
 				"display": "block",
@@ -33,7 +33,7 @@ active: documentation
 		$('#doc-container').css('min-height', minHeight + 'px');
 	});
 
-	$(".wy-nav-content").find("li:contains('openvidu-insecure-angular')").css('color', 'red');
+	$(".wy-nav-content").find("li:contains('openvidu-ionic')").css('color', 'red');
 </script>
 
 <div id="doc-container" class="container text-justify">
@@ -89,8 +89,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 current">
-    <a class="current" href="./">openvidu-insecure-angular</a>  
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-insecure-angular/">openvidu-insecure-angular</a> 
 </li>
 
    
@@ -113,8 +113,8 @@ active: documentation
 
    
 
-<li class="toctree-l1 ">
-    <a class="" href="../openvidu-ionic/">openvidu-ionic</a> 
+<li class="toctree-l1 current">
+    <a class="current" href="./">openvidu-ionic</a>  
 </li>
 
    
@@ -427,14 +427,40 @@ active: documentation
 
 					<div role="main">
 						<div class="section">
-							 <h1 id="openvidu-insecure-angular">openvidu-insecure-angular</h1>
-<p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-angular" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
-<p>A client-side only application built with <strong>Angular 6</strong> framework.</p>
-<p>If it is the first time you use OpenVidu, it is higly recommended to start with <strong><a href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a></strong> tutorial, as this app is no more than an extension of it with some new features and sytles.</p>
-<p>This is the Angular version of <a href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>. Try it if you plan to use Angular framework for your frontend.</p>
+							 <h1 id="openvidu-ionic">openvidu-ionic</h1>
+<p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-ionic" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
+<p>A client-side only application built with <strong>Ionic v4</strong> and <strong>Angular 6</strong> frameworks.</p>
+<p>If it is the first time you use OpenVidu, it is higly recommended to start with <strong><a href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a></strong> tutorial due to this is a cordova ionic  app and it could be a little bit more complex for the beginning.</p>
+<div style="
+    display: table;
+    border: 2px solid #ffb600;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #FFFBF1;
+    margin-bottom: 25px;"><div style="display: table-cell">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #ffb600;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding: 10px 20px;">
+    Nowadays, we need to take account that we are developing our code with <strong>Ionic v4-beta</strong>. This means that is a preview version of Ionic 4 and it could has sporadics problems due to it is a inestable version.
+    <br><br>
+    <strong>Bugs reported:</strong><br>
+    <li>Android 5 and 6.0 will not work with Ionic v4-beta until <a href="https://github.com/ionic-team/ionic/issues/15438#issuecomment-426686443" target="_blank">this issue</a> is solved</li>
+    <li>This app will not work in iOS because of <a href="https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc/49467964#49467964">problems between WebRTC and iOS</a></li>
+
+</div>
+</div>
+
 <h2 id="understanding-this-tutorial">Understanding this tutorial</h2>
 <p align="center">
-  <img class="img-responsive" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSbmtwcXNnXy1ZSkU">
+  <img class="img-responsive" src="/img/tutorials/openvidu-ionic.png">
 </p>
 
 <p>OpenVidu is composed by the three modules displayed on the image above in its insecure version.</p>
@@ -466,46 +492,116 @@ active: documentation
 </div>
 </div>
 
-<h2 id="running-this-tutorial">Running this tutorial</h2>
+<h2 id="running-this-tutorial">Running this tutorial:</h2>
+<h4 id="using-the-browser">Using the browser</h4>
 <p>1) Clone the repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
 </code></pre>
 
-<p>2) You will need angular-cli (and of course NPM) to serve the Angular frontend. You can install it with the following command:</p>
-<pre><code class="bash">npm install -g @angular/cli@6.2.4
+<p>2) You will need ionic-cli (and of course node 8.9 or greater) to serve the Ionic app. You can install it with the following command:</p>
+<pre><code class="bash">npm install -g ionic@latest
 </code></pre>
 
 <p>3) Run the tutorial:</p>
-<pre><code class="bash">cd openvidu-tutorials/openvidu-insecure-angular
+<pre><code class="bash">cd openvidu-tutorials/openvidu-ionic
 npm install
-ng serve
+ionic serve
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
 <pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.5.0
 </code></pre>
 
-<p>5) Go to <a href="http://localhost:4200"><code>localhost:4200</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p>5) Go to <a href="http://localhost:8100"><code>localhost:8100</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p>6) To show the app with the device appearance, press <code>F12</code> button in your keyboard and the browser DevTool will be opened.</p>
+<p>7) Then, you can find a button with a device icon at the top of the browser page. Pressing this button, you should see the device appearance and it will allow you choose your favourite device.</p>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ionic-chrome1.png">
+        <img class="img-responsive" src="/img/demos/ionic-chrome1.png">
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ionic-chrome2.png">
+        <img class="img-responsive" src="/img/demos/ionic-chrome2.png">
+    </a>
+    </div>
+</div>
+
 <p><br></p>
 <blockquote>
 <p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
 <p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
 </blockquote>
-<div class="row no-margin row-gallery">
-    <div class="col-md-6">
-        <a data-fancybox="gallery" href="/img/demos/insecure-join.png">
-        <img class="img-responsive" src="/img/demos/insecure-join.png">
+<h4 id="using-the-android-apk-in-an-android-device">Using the Android apk in an Android device</h4>
+<p>To deploy the apk Android not only you need to have <strong>Java JDK8</strong>, <strong>Android Studio</strong> and <strong>Android SDK</strong> installed but also you have to set up the specific <strong>environment variables</strong>. Fortunately, Ionic provide us a <a href="https://beta.ionicframework.com/docs/installation/android">great guide</a> to allows us to configure step by step all the requirements.</p>
+<p>After we have finished the Ionic tutorial, we must have to follow these steps:</p>
+<p>1) Clone the repo:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
+</code></pre>
+
+<p>2) You will need ionic-cli (and of course node 8.9 or greater) to serve the Ionic app. You can install it with the following command:</p>
+<pre><code class="bash">npm install -g ionic@latest
+</code></pre>
+
+<p>3) Run the tutorial:</p>
+<pre><code class="bash">cd openvidu-tutorials/openvidu-ionic
+npm install
+ionic cordova run android
+</code></pre>
+
+<div style="
+    display: table;
+    border: 1px solid #ffb600;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #FFFBF1;
+    margin-bottom: 25px;"><div style="display: table-cell">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #ffb600;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    To deploy apps to an Android device and debug them, developer mode must be enabled and allow for USB debugging turned on. Check out <a href="https://developer.android.com/studio/debug/dev-options#enable">these instructions</a> to do this on a device.
+</div>
+</div>
+
+<p>4) Connect the device to the same network as the PC. </p>
+<p>5) Establishing the same WIFI in both devices, you need to know IP of your PC in the network. For know that, you can execute <code>ifconfig</code> in your command shell and you will can find something like <code>192.168.0.105</code>.</p>
+<p>Your <code>public_url</code> will be <code>https://192.168.0.105</code> with the port <code>4443</code> (https://192.168.0.105:4443). </p>
+<p>Finally, you will must set the <code>OPENVIDU_SERVER_URL</code> variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/app.component.ts#L20">in the app</a> and the <code>openvidu.publicurl</code> parameter used to run <em>openvidu-server</em> with your <em>public_url</em> and the <em>port</em>. </p>
+<p>6) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=&quot;your_public_url&quot;:4443 openvidu/openvidu-server-kms:2.5.0
+</code></pre>
+
+<div class="row no-margin ">
+    <div class="col-md-4 col-sm-4">
+        <a data-fancybox="gallery" href="/img/demos/ov-ionic1.png">
+        <img class="img-responsive" src="/img/demos/ov-ionic1.png">
     </a>
     </div>
-    <div class="col-md-6">
-        <a data-fancybox="gallery" href="/img/demos/insecure-session.png">
-        <img class="img-responsive" src="/img/demos/insecure-session.png">
+    <div class="col-md-4 col-sm-4">
+        <a data-fancybox="gallery" href="/img/demos/ov-ionic2.png">
+        <img class="img-responsive" src="/img/demos/ov-ionic2.png">
+    </a>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <a data-fancybox="gallery" href="/img/demos/ov-ionic3.png">
+        <img class="img-responsive" src="/img/demos/ov-ionic3.png">
     </a>
     </div>
 </div>
 
 <h2 id="understanding-the-code">Understanding the code</h2>
-<p>This is an Angular project generated with angular-cli tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>src/app/</code> folder:</p>
+<p>This is an Ionic project generated with ionic-cli tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>src/app/</code> folder:</p>
 <ul>
 <li><code>app.component.ts</code>: defines <em>AppComponent</em>, main component of the app. It contains the functionalities for joining a video-call and for handling the video-calls themselves.</li>
 <li><code>app.component.html</code>: HTML for AppComponent.</li>
@@ -516,7 +612,7 @@ ng serve
 <p>Let's see first how <code>app.component.ts</code> uses NPM package <code>openvidu-browser</code>:</p>
 <hr />
 <h4 id="we-import-the-necessary-objects-from-openvidu-browser">We import the necessary objects from <code>openvidu-browser</code>:</h4>
-<pre><code class="typescript">import { OpenVidu, Publisher, Session, StreamEvent, StreamManager, Subscriber } from 'openvidu-browser';
+<pre><code class="typescript">import { OpenVidu, Session, StreamManager, Publisher, Subscriber, StreamEvent } from 'openvidu-browser';
 </code></pre>
 
 <hr />
@@ -538,7 +634,7 @@ mainStreamManager: StreamManager;
 
 <p><code>OpenVidu</code> object will allow us to get a <code>Session</code> object, which is declared just after it. <code>publisher</code> StreamManager object will be our own local webcam stream and <code>subscribers</code> StreamManager array will store the active streams of other users in the video-call. Finally, <code>mySessionId</code> and <code>myUserName</code> params simply represent the video-call and your participant's nickname, as you will see in a moment.</p>
 <hr />
-<h4 id="whenever-a-user-clicks-on-the-submit-input-defined-in-appcomponenthtml-joinsession-method-is-called">Whenever a user clicks on the submit input defined in <code>app.component.html</code>, <code>joinSession()</code> method is called:</h4>
+<h4 id="whenever-a-user-clicks-on-the-join-button-defined-in-appcomponenthtml-joinsession-method-is-called">Whenever a user clicks on the join button defined in <code>app.component.html</code>, <code>joinSession()</code> method is called:</h4>
 <p><br></p>
 <p>We first get an OpenVidu object and initialize a Session object with it.</p>
 <pre><code class="typescript">// --- 1) Get an OpenVidu object ---
@@ -570,13 +666,15 @@ this.session.on('streamDestroyed', (event: StreamEvent) =&gt; {
 });
 </code></pre>
 
-<p>As we are using Angular framework, a good approach for managing the remote media streams is to loop across an array of them, feeding a common component with each <code>Subscriber</code> object and let it manage its video. This component will be our <em>UserVideoComponent</em>. To do this, we need to store each new Subscriber we received in array <code>subscribers</code> (of the parent class <code>StreamManager</code>), and we must remove from it every deleted subscriber whenever it is necessary. To achieve this, we use the following events:</p>
+<p>As we are using Ionic and Angular framework, a good approach for managing the remote media streams is to loop across an array of them, feeding a common component with each <code>Subscriber</code> object and let it manage its video. This component will be our <em>UserVideoComponent</em>. To do this, we need to store each new Subscriber we received in array <code>subscribers</code> (of the parent class <code>StreamManager</code>), and we must remove from it every deleted subscriber whenever it is necessary. To achieve this, we use the following events:</p>
 <ul>
 <li>
-<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM on its own (we will use the video element contained in one of our child components). HTML template of <em>AppComponent</em> loops through <code>subscribers</code> array with an <code>ngFor</code> directive, declaring a <em>UserVideoComponent</em> for each subscriber. We feed them not really as <code>Subscriber</code> objects, but rather as their parent class <code>StreamManager</code>. This way we can reuse <em>UserVideoComponent</em> to also display our <code>Publisher</code> object (that also inhertis from class StreamManager). <code>user-video</code> also declares the <code>click</code> event so we can update the main video player view when the user clicks on its Publisher or any Subscriber videos.</p>
-<pre><code>&lt;div *ngFor="let sub of subscribers" class="stream-container col-md-6 col-xs-6"&gt;
+<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM on its own (we will use the video element contained in one of our child components). HTML template of <em>AppComponent</em> loops through <code>subscribers</code> array with an <code>ngFor</code> directive, declaring a <em>UserVideoComponent</em> for each subscriber. We feed them not really as <code>Subscriber</code> objects, but rather as their parent class <code>StreamManager</code>. This way we can reuse <em>UserVideoComponent</em> to also display our <code>Publisher</code> object (that also inhertis from class StreamManager). <code>user-video</code> also declares an output event to let <em>AppComponent</em> know when the user has clicked on it.</p>
+<pre><code>&lt;ion-col size="6" *ngFor="let sub of subscribers"&gt;
+  &lt;div class="stream-container"&gt;
     &lt;user-video [streamManager]="sub" (click)="updateMainStreamManager(sub)"&gt;&lt;/user-video&gt;
-&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/ion-col&gt;
 </code></pre>
 </li>
 <li>
@@ -622,9 +720,9 @@ this.getToken().then(token =&gt; {
 <li>First request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
 <li>Second request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L160">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/app.component.ts#L251">GitHub repo</a>.</p>
 <hr />
-<h4 id="finally-connect-to-the-session-and-publish-your-webcam">Finally connect to the session and publish your webcam:</h4>
+<h4 id="connect-to-the-session">Connect to the session:</h4>
 <pre><code class="typescript"> // --- 4) Connect to the session with a valid user token ---
 
 // 'getToken' method is simulating what your server-side should do.
@@ -633,54 +731,66 @@ this.getToken().then(token =&gt; {
 
     // First param is the token got from OpenVidu Server. Second param can be retrieved by every user on event
     // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-    this.session.connect(token, { clientData: this.myUserName })
-        .then(() =&gt; {
+    this.session.connect(token, { clientData: this.myUserName }).then(() =&gt; {
 
-            // --- 5) Get your own camera stream ---
+        if (this.platform.is('cordova')) {
 
-            // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-            // element: we will manage it on our own) and with the desired properties
-            let publisher: Publisher = this.OV.initPublisher(undefined, {
-                audioSource: undefined, // The source of audio. If undefined default microphone
-                videoSource: undefined, // The source of video. If undefined default webcam
-                publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
-                publishVideo: true,     // Whether you want to start publishing with your video enabled or not
-                resolution: '640x480',  // The resolution of your video
-                frameRate: 30,          // The frame rate of your video
-                insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
-                mirror: false           // Whether to mirror your local video or not
-            });
-
-            // --- 6) Publish your stream ---
-
-            this.session.publish(publisher);
-
-            // Set the main video in the page to display our webcam and store our Publisher
-            this.mainStreamManager = publisher;
-            this.publisher = publisher;
-        })
-        .catch(error =&gt; {
-            console.log('There was an error connecting to the session:', error.code, error.message);
-        });
+            // --- 5) Requesting and Checking Android Permissions
+            this.checkAndroidPermissions().then(() =&gt; {
+                this.initPublisher();
+            })
+            .catch((err) =&gt; console.error(err));
+        } else {
+            this.initPublisher();
+        }
+    })
+    .catch(error =&gt; {
+        console.log('There was an error connecting to the session:', error.code, error.message);
+    });
 });
 </code></pre>
 
-<p>In <code>session.connect</code> method first param is the recently retrieved user token. Second param is the value every user will receive in <code>event.stream.connection.data</code> property on <code>streamCreated</code> event (this value will be used by <em>UserVideoComponent</em> to append the user's nickname to the his video). So in this case it is an object with a property "clientData" with value "myUserName", which is binded from HTML input <code>&lt;input class="form-control" type="text" id="userName" name="userName" [(ngModel)]="myUserName" required&gt;</code> (filled by the user).</p>
-<p>If the method succeeds, we proceed to publish our webcam to the session. To do so we get a <code>Publisher</code> object with the desired properties and publish it to the Session through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event. Finally we make the main video player (which is just another <em>UserVideoComponent</em>) display the Publisher object by default. This is the HTML code that will display the main stream manager:</p>
-<pre><code class="html">&lt;div *ngIf=&quot;mainStreamManager&quot; id=&quot;main-video&quot; class=&quot;col-md-6&quot;&gt;
+<p>In <code>session.connect</code> method first param is the recently retrieved user token. Second param is the value every user will receive in <code>event.stream.connection.data</code> property on <code>streamCreated</code> event (this value will be used by <em>UserVideoComponent</em> to append the user's nickname to the his video). So in this case it is an object with a property "clientData" with value "myUserName", which is binded from HTML input <code>&lt;ion-input [(ngModel)]="myUserName"&gt;&lt;/ion-input&gt;</code> (filled by the user).</p>
+<p>If the method succeeds and is running under a cordova platform, we will call and receive a promise from <code>checkAndroidPermissions()</code> method. That method requests and checks the Android permissions that the device give to our device. Once the promise has been resolved, the <code>initPublisher()</code> method will be called. </p>
+<p>We will talk about the Android permissions in the next section.</p>
+<h4 id="finally-publish-your-webcam-calling-to-initpublisher-method">Finally publish your webcam calling to <code>initPublisher()</code> method:</h4>
+<pre><code class="typescript">// Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
+// element: we will manage it on our own) and with the desired properties
+const publisher: Publisher = this.OV.initPublisher(undefined, {
+    audioSource: undefined, // The source of audio. If undefined default microphone
+    videoSource: undefined, // The source of video. If undefined default webcam
+    publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
+    publishVideo: true, // Whether you want to start publishing with your video enabled or not
+    resolution: '640x480', // The resolution of your video
+    frameRate: 30, // The frame rate of your video
+    insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
+    mirror: true, // Whether to mirror your local video or not
+});
+
+// --- 6) Publish your stream ---
+
+this.session.publish(publisher);
+
+// Set the main video in the page to display our webcam and store our Publisher
+this.mainStreamManager = publisher;
+this.publisher = publisher;
+
+</code></pre>
+
+<p>After to receive the promise resolved from <code>checkAndroidPermissions()</code> or if we are running the app in a browser,  we proceed to publish our webcam to the session. To do so we get a <code>Publisher</code> object with the desired properties and publish it to the Session through <code>Session.publish()</code> method. The rest of users will receive our Stream object and will execute their <code>streamCreated</code> event. Finally we make the main video player (which is just another <em>UserVideoComponent</em>) display the Publisher object by default. This is the HTML code that will display the main stream manager:</p>
+<pre><code class="html">&lt;div *ngIf=&quot;mainStreamManager&quot; id=&quot;main-video&quot;&gt;
     &lt;user-video [streamManager]=&quot;mainStreamManager&quot;&gt;&lt;/user-video&gt;
 &lt;/div&gt;
 </code></pre>
 
 <p>And we store the Publisher under <code>this.publisher</code>, which is also of parent class <code>StreamManager</code>. This way our webcam will be appended along all remote subscribers, in exactly the same way they are shown (remember all of them are displayed by <em>UserVideoComponent</em>):</p>
-<pre><code class="html">&lt;div *ngIf=&quot;publisher&quot; class=&quot;stream-container col-md-6 col-xs-6&quot;&gt;
+<pre><code class="html">&lt;div *ngIf=&quot;publisher&quot; class=&quot;stream-container&quot;&gt;
     &lt;user-video [streamManager]=&quot;publisher&quot; (click)=&quot;updateMainStreamManager(publisher)&quot;&gt;&lt;/user-video&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>You can see that every <code>&lt;user-video&gt;</code> component for our Publisher and every Subscriber also updates the main video player when clicking on it.</p>
-<p>Last point worth considering is the implementation of <em>UserVideoComponent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsibility), but displaying custom information for each one of them (the user's nickname in this case):</p>
-<pre><code class="html">&lt;div&gt;
+<p>Last point worth considering is the implementation of <em>UserVideoComponent</em> and <em>OpenViduVideoComponent</em>. Each <em>UserVideoComponent</em> manages one StreamManager object (a Subscriber or a Publisher) that will be fed to its child component <em>OpenViduVideoComponent</em>. Its main task is not managing the final video player (that is <em>OpenViduVideoComponent</em> responsibility), but displaying custom information for each one of them (the user's nickname) and handling the click event on them to update property <code>mainStreamManager</code> of parent <em>AppComponent</em>:</p>
+<pre><code class="html">&lt;div (click)=&quot;videoClicked()&quot;&gt;
     &lt;ov-video [streamManager]=&quot;streamManager&quot;&gt;&lt;/ov-video&gt;
     &lt;div&gt;&lt;p&gt;{% raw %}{{getNicknameTag()}}{% endraw %}&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -691,8 +801,11 @@ this.getToken().then(token =&gt; {
     @Input()
     streamManager: StreamManager;
 
-    getNicknameTag() { // Gets the nickName of the user
+    // Gets the nickName of the user
+    try {
         return JSON.parse(this.streamManager.stream.connection.data).clientData;
+    } catch (err) {
+        console.error('ClientData does not exist');
     }
 }
 </code></pre>
@@ -740,6 +853,53 @@ this.getToken().then(token =&gt; {
   }
 </code></pre>
 
+<h2 id="android-permisions">Android Permisions</h2>
+<p>In the previous section, we have seen how we can connect to the session and publish our webcam. Before we publish our webcam, we have to take account that we are working with a cordova application. </p>
+<p>Keeping this in mind, our app will need get access to the camera and the microphone. We have to provide to it with the necessary permission of the device.</p>
+<p>Following the next steps, we will be able to do that.</p>
+<p>1) Install <a href="https://beta.ionicframework.com/docs/native/android-permissions">android-permissions</a> Cordova and Ionic Native Plugin:</p>
+<pre><code class="bash">ionic cordova plugin add cordova-plugin-android-permissions
+
+npm install --save @ionic-native/android-permissions@beta
+</code></pre>
+
+<p>2) Add this plugin to your app's module:</p>
+<pre><code class="typescript">import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+@NgModule({
+    providers: [
+        // others providers
+        AndroidPermissions,
+    ],
+)}
+</code></pre>
+
+<p>3) Add this plugin to your component and use it: </p>
+<pre><code class="typescript">import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
+export class AppComponent  {
+
+    constructor(private androidPermissions: AndroidPermissions)
+}
+</code></pre>
+
+<p>Now, we are ready to request permissions to our device. To do that, we need to use <code>requestPermissions()</code> and <code>checkPermission()</code> methods the plugin provide us. </p>
+<p>It is important to call to these methods under <code>platform.ready()</code> because of that function returns us a promise when the platform is ready and the native funcionality can be called.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/app.component.ts#L166">GitHub repo</a>.</p>
+<p>You also should declare an array of permissions to use like parameter of <code>requestPermissions()</code>: </p>
+<pre><code class="typescript">ANDROID_PERMISSIONS = [
+    this.androidPermissions.PERMISSION.CAMERA,
+    this.androidPermissions.PERMISSION.RECORD_AUDIO,
+    this.androidPermissions.PERMISSION.MODIFY_AUDIO_SETTINGS,
+];
+</code></pre>
+
+<p>4) Last but not least, under <code>platforms/android/app/src/main</code> (platform directory will be created after execute <code>ionic cordova prepare android</code>) is found <code>AndroidManifest.xml</code>. These permissions must be included:</p>
+<pre><code class="xml">&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot; /&gt;
+</code></pre>
+
+<p>Once we have added that  lines to our code, our app will be ready to works in our device.</p>
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 <script>
@@ -763,10 +923,10 @@ this.getToken().then(token =&gt; {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-library-angular/" class="btn btn-xs btn-primary float-right" title="openvidu-library-angular">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-js-java/" class="btn btn-xs btn-primary float-right" title="openvidu-js-java">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../openvidu-insecure-js/" class="btn btn-xs btn-primary" title="openvidu-insecure-js"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="../openvidu-library-react/" class="btn btn-xs btn-primary" title="openvidu-library-react"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -775,7 +935,7 @@ this.getToken().then(token =&gt; {
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/tutorials/openvidu-insecure-angular.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/tutorials/openvidu-ionic.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 

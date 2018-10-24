@@ -1,0 +1,645 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - openvidu-call-ionic
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('openvidu-call-ionic')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('openvidu-call-ionic')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Tutorials</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Demos</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-call/">openvidu-call</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+   
+
+<li class="toctree-l1 current">
+    <a class="current" href="./">openvidu-call-ionic</a>  
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>How do I ... ?</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/create-session/">Create a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/join-session/">Join a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/leave-session/">Leave a session</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/manage-videos/">Manage video players</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/share-data/">Share data between users</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../how-do-i/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Advanced features</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Reference Documentation</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Deployment</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu Server and your app on AWS</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu in Ubuntu</a> 
+</li>
+
+   
+
+<li class="toctree-l1 ">
+    <a class="" href="../../deployment/custom-certificate/">Using your own certificate</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="subnav_drop"><div><span>Contribute</span></div>
+    <ul class="subnav" hidden>
+          
+
+<li class="toctree-l1 ">
+    <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul> 
+
+<li class="toctree-l1 ">
+    <a class="" href="../../releases/">Releases</a> 
+</li>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h1 id="openvidu-call-ionic">openvidu-call-ionic</h1>
+<p><a href="https://github.com/OpenVidu/openvidu-call-ionic" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
+<p>OpenVidu Call Ionic demo, built with <strong>Ionic v4 and Angular 6</strong>,  allows users to make videoconference calls in theirs devices with many of the capabilities integrated by OpenVidu platform. It is a frontend-only application.</p>
+<p>OpenVidu-Call-Ionic is composed by the five Angular components displayed in the image below.</p>
+<div style="
+    display: table;
+    border: 2px solid #ffb600;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #FFFBF1;
+    margin-bottom: 25px;"><div style="display: table-cell">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #ffb600;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding: 10px 20px;">
+    Nowadays, we need to take account that we are developing our code with <strong>Ionic v4-beta</strong>. This means that is a preview version of Ionic 4 and it could has sporadics problems due to it is a inestable version.
+    <br><br>
+    <strong>Bugs reported:</strong><br>
+    <li>Android 5 and 6.0 will not work with Ionic v4-beta until <a href="https://github.com/ionic-team/ionic/issues/15438#issuecomment-426686443" target="_blank">this issue</a> is solved</li>
+    <li>This app will not work in iOS because of <a href="https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc/49467964#49467964">problems between WebRTC and iOS</a></li>
+
+</div>
+</div>
+
+<p><br>
+<p align="center">
+  <img  class="img-responsive" src="/img/demos/openvidu-call-ionic-diagram.png">
+</p></p>
+<hr>
+
+<div class="row wow fadeInUp">
+
+<div class="screenshots-gallery" style="text-align: -webkit-center; width: 90%; margin: auto;" >
+    <a data-fancybox="gallery-screenshot" href="/img/demos/ov-call-ionic1.png">
+        <img class="/img-responsive img-gallery" style="max-height: 600px" src="/img/demos/ov-call-ionic1.png"/>
+    </a>
+    <a data-fancybox="gallery-screenshot" href="/img/demos/ov-call-ionic2.png">
+        <img class="img-responsive img-gallery" style="max-height: 600px" src="/img/demos/ov-call-ionic2.png"/>
+    </a>
+    <a data-fancybox="gallery-screenshot" href="/img/demos/ov-call-ionic5.png">
+        <img class="img-responsive img-gallery" style="max-height: 600px" src="/img/demos/ov-call-ionic5.png"/>
+    </a>
+    <a data-fancybox="gallery-screenshot" href="/img/demos/ov-call-ionic3.png">
+        <img class="img-responsive img-gallery" style="max-height: 600px" src="/img/demos/ov-call-ionic3.png"/>
+    </a>
+    <a data-fancybox="gallery-screenshot" href="/img/demos/ov-call-ionic4.png">
+        <img class="img-responsive img-gallery" style="max-height: 600px" src="/img/demos/ov-call-ionic4.png"/>
+    </a>
+</div>
+</div>
+
+<h2 id="running-this-demo">Running this demo</h2>
+<h4 id="using-the-browser">Using the browser</h4>
+<p>1) Clone the repo:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-call-ionic.git
+</code></pre>
+
+<p>2) You will need ionic-cli (and of course node 8.9 or greater) to serve the Ionic app. You can install it with the following command:</p>
+<pre><code class="bash">npm install -g ionic@latest
+</code></pre>
+
+<p>3) Run the tutorial:</p>
+<pre><code class="bash">cd openvidu-call-ionic
+npm install
+ionic serve
+</code></pre>
+
+<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.5.0
+</code></pre>
+
+<p>5) Go to <a href="http://localhost:8100"><code>localhost:8100</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p>6) To show the app with the device appearance, press <code>F12</code> button in your keyboard and the browser DevTool will be opened.</p>
+<p>7) Then, you can find a button with a device icon at the top of the browser page. Pressing this button, you should see the device appearance and it will allow you choose your favourite device.</p>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-call-ionic-browser.png">
+        <img class="img-responsive" src="/img/demos/ov-call-ionic-browser.png">
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-call-ionic-browser2.png">
+        <img class="img-responsive" src="/img/demos/ov-call-ionic-browser2.png">
+    </a>
+    </div>
+</div>
+
+<p><br></p>
+<blockquote>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
+</blockquote>
+<h4 id="using-the-android-apk-in-an-android-device">Using the Android apk in an Android device</h4>
+<p>To deploy the apk Android not only you need to have <strong>Java JDK8</strong>, <strong>Android Studio</strong> and <strong>Android SDK</strong> installed but also you have to set up the specific <strong>environment variables</strong>. Fortunately, Ionic provide us a <a href="https://beta.ionicframework.com/docs/installation/android">great guide</a> to allows us to configure step by step all the requirements.</p>
+<p>After we have finished the Ionic tutorial, we must have to follow these steps:</p>
+<p>1) Clone the repo:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-call-ionic.git
+</code></pre>
+
+<p>2) You will need ionic-cli (and of course node 8.9 or greater) to serve the Ionic app. You can install it with the following command:</p>
+<pre><code class="bash">npm install -g ionic@latest
+</code></pre>
+
+<p>3) Run the tutorial:</p>
+<pre><code class="bash">cd openvidu-call-ionic
+npm install
+ionic cordova run android
+</code></pre>
+
+<div style="
+    display: table;
+    border: 1px solid #ffb600;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #FFFBF1;
+    margin-bottom: 25px;"><div style="display: table-cell">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #ffb600;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    To deploy apps to an Android device and debug them, developer mode must be enabled and allow for USB debugging turned on. Check out <a href="https://developer.android.com/studio/debug/dev-options#enable">these instructions</a> to do this on a device.
+</div>
+</div>
+
+<p>4) Connect the device to the same network as the PC. </p>
+<p>5) Establishing the same WIFI in both devices, you need to know IP of your PC in the network. For know that, you can execute <code>ifconfig</code> in your command shell and you will can find something like <code>192.168.0.105</code>.</p>
+<p>Your <code>public_url</code> will be <code>https://192.168.0.105</code> with the port <code>4443</code> (https://192.168.0.105:4443). </p>
+<p>Finally, you will must set the <code>OPENVIDU_SERVER_URL</code> variable <a href="https://github.com/OpenVidu/openvidu-call-ionic/blob/180f4577a0be9ae9c83170ff9684ded2e40c0808/src/app/shared/services/openvidu.service.ts#L11">in the app</a> and the <code>openvidu.publicurl</code> parameter used to run <em>openvidu-server</em> with your <em>public_url</em> and the <em>port</em>. </p>
+<p>6) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=&quot;your_public_url&quot;:4443 openvidu/openvidu-server-kms:2.5.0
+</code></pre>
+
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p>
+<p><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script></p>
+<script>
+    $('.screenshots-gallery').slick({
+      autoplay: false,
+      arrows: true,
+        prevArrow: '<div class="slick-btn slick-btn-prev"><i class="icon ion-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-btn slick-btn-next"><i class="icon ion-chevron-right"></i></div>',
+      autoplaySpeed: 4000,
+      dots: true,
+      infinite: true,
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1
+        }
+      },
+    ]
+    });
+</script> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../openvidu-classroom/" class="btn btn-xs btn-primary float-right" title="openvidu-classroom">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-call-react/" class="btn btn-xs btn-primary" title="openvidu-call-react"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/demos/openvidu-call-ionic.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>
