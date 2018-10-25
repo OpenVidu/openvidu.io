@@ -544,7 +544,16 @@ ionic serve
 <pre><code class="bash">npm install -g ionic@latest
 </code></pre>
 
-<p>3) Run the tutorial:</p>
+<p>3) Connect the device to the same network as the PC. </p>
+<p>4) Establishing the same WIFI in both devices, you need to know IP of your PC in the network. For know that, you can execute <code>ifconfig</code> in your command shell and you will can find something like <code>192.168.0.105</code>.</p>
+<p>Your <code>public_url</code> will be <code>https://192.168.0.105</code> with the port <code>4443</code> (https://192.168.0.105:4443). </p>
+<p>Finally, you will must set the <code>OPENVIDU_SERVER_URL</code> variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/app.component.ts#L20">in the app</a> and the <code>openvidu.publicurl</code> parameter used to run <em>openvidu-server</em> with your <em>public_url</em> and the <em>port</em>. </p>
+<p>5) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=&quot;your_public_url&quot;:4443 openvidu/openvidu-server-kms:2.5.0
+</code></pre>
+
+<p>6) Connect the device to the PC. You can check if your device is authoriced with the <code>adb devices</code> command.</p>
+<p>7) Run the tutorial:</p>
 <pre><code class="bash">cd openvidu-tutorials/openvidu-ionic
 npm install
 ionic cordova run android
@@ -573,14 +582,6 @@ ionic cordova run android
     To deploy apps to an Android device and debug them, developer mode must be enabled and allow for USB debugging turned on. Check out <a href="https://developer.android.com/studio/debug/dev-options#enable">these instructions</a> to do this on a device.
 </div>
 </div>
-
-<p>4) Connect the device to the same network as the PC. </p>
-<p>5) Establishing the same WIFI in both devices, you need to know IP of your PC in the network. For know that, you can execute <code>ifconfig</code> in your command shell and you will can find something like <code>192.168.0.105</code>.</p>
-<p>Your <code>public_url</code> will be <code>https://192.168.0.105</code> with the port <code>4443</code> (https://192.168.0.105:4443). </p>
-<p>Finally, you will must set the <code>OPENVIDU_SERVER_URL</code> variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/app.component.ts#L20">in the app</a> and the <code>openvidu.publicurl</code> parameter used to run <em>openvidu-server</em> with your <em>public_url</em> and the <em>port</em>. </p>
-<p>6) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=&quot;your_public_url&quot;:4443 openvidu/openvidu-server-kms:2.5.0
-</code></pre>
 
 <div class="row no-margin ">
     <div class="col-md-4 col-sm-4">
@@ -854,9 +855,10 @@ this.publisher = publisher;
 </code></pre>
 
 <h2 id="android-permisions">Android Permisions</h2>
-<p>In the previous section, we have seen how we can connect to the session and publish our webcam. Before we publish our webcam, we have to take account that we are working with a cordova application. </p>
+<p>In the previous section, we have seen how we can connect to the session and publish our webcam. Before we publish it, we have to take account that we are working with a cordova application. </p>
 <p>Keeping this in mind, our app will need get access to the camera and the microphone. We have to provide to it with the necessary permission of the device.</p>
-<p>Following the next steps, we will be able to do that.</p>
+<p>Following the next steps, we have been able to set up the permisions required for OpenVidu works in Android device.</p>
+<p>These configurations are included in the <strong>openvidu-ionic</strong> project we provide you. Otherwise, if you want to <strong>start a new project with Ionic and OpenVidu</strong>, you should follow these four steps:</p>
 <p>1) Install <a href="https://beta.ionicframework.com/docs/native/android-permissions">android-permissions</a> Cordova and Ionic Native Plugin:</p>
 <pre><code class="bash">ionic cordova plugin add cordova-plugin-android-permissions
 
@@ -884,7 +886,7 @@ export class AppComponent  {
 
 <p>Now, we are ready to request permissions to our device. To do that, we need to use <code>requestPermissions()</code> and <code>checkPermission()</code> methods the plugin provide us. </p>
 <p>It is important to call to these methods under <code>platform.ready()</code> because of that function returns us a promise when the platform is ready and the native funcionality can be called.</p>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/app.component.ts#L166">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/99f0c03ba11d3d59e68a0ab840175764ce24399b/openvidu-ionic/src/app/app.component.ts#L172">GitHub repo</a>.</p>
 <p>You also should declare an array of permissions to use like parameter of <code>requestPermissions()</code>: </p>
 <pre><code class="typescript">ANDROID_PERMISSIONS = [
     this.androidPermissions.PERMISSION.CAMERA,
@@ -893,10 +895,18 @@ export class AppComponent  {
 ];
 </code></pre>
 
-<p>4) Last but not least, under <code>platforms/android/app/src/main</code> (platform directory will be created after execute <code>ionic cordova prepare android</code>) is found <code>AndroidManifest.xml</code>. These permissions must be included:</p>
-<pre><code class="xml">&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot; /&gt;
+<p>4) Last but not least, in <code>root</code> directory is found <code>config.xml</code>. These permissions must be included inside of android platform:</p>
+<pre><code class="xml">&lt;config-file mode=&quot;merge&quot; parent=&quot;/*&quot; target=&quot;AndroidManifest.xml&quot;&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot; /&gt;
+&lt;/config-file&gt;
+</code></pre>
+
+<p>Moreover, you must to add <code>xmlns:android="http://schemas.android.com/apk/res/android"</code> to the end of the opening <code>widget</code> node.</p>
+<pre><code class="xml">&lt;widget id=&quot;io.openvidu.sample&quot; version=&quot;2.5.0&quot; xmlns=&quot;http://www.w3.org/ns/widgets&quot; xmlns:cdv=&quot;http://cordova.apache.org/ns/1.0&quot; xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+...
+&lt;/widget&gt;
 </code></pre>
 
 <p>Once we have added that  lines to our code, our app will be ready to works in our device.</p>
