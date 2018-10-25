@@ -151,8 +151,7 @@ p.subheading {
     line-height: inherit;
 }
 
-.navbar-alt .navbar-nav>li>a,
-.navbar-alt .navbar-nav>li>span {
+.navbar-alt .navbar-nav>li>a, .navbar-alt .navbar-nav>li>span {
     font-size: 14px;
 }
 
@@ -466,13 +465,12 @@ span.cc-message {
     text-align: center;
 }
 
-
 .row-more-info a:before {
-    content:'+ info'
+    content: '+ info'
 }
-    
+
 .row-more-info a[aria-expanded="true"]:before {
-    content:'- info';
+    content: '- info';
 }
 
 .row-more-info a {
@@ -519,6 +517,66 @@ img.img-more-info {
     width: 100%;
 }
 
+.video-responsive {
+    position: relative;
+    padding-bottom: 52.9%;
+    /* 16/9 ratio */
+    padding-top: 30px;
+    /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+}
+
+.video-responsive iframe, .video-responsive object, .video-responsive embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.icon-Amazon_Web_Services_Logo:before {
+    content: "\e900";
+}
+
+.feature-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 180px;
+}
+
+.feature-row h3 {
+    margin-top: 0 !important;
+    border-top: 0 !important;
+}
+
+.feature-img-col {
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.feature-img {
+    max-width: 100%;
+    max-height: 160px;
+    -webkit-filter: grayscale(20%) opacity(92%);
+    filter: grayscale(20%) opacity(92%);
+}
+
+.icon-img {
+    max-height: 120px;
+    -webkit-filter: opacity(69.5%);
+    filter: opacity(69.5%);
+}
+
+.feature-text {
+    vertical-align: middle;
+    color: #7a7a7a;
+}
+
 @media screen and (min-width: 992px) {
     .more-info-tutorials-int {
         min-height: 150px;
@@ -536,7 +594,6 @@ img.img-more-info {
         padding-left: 0;
         padding-right: 30px;
     }
-
 }
 
 @media screen and (max-width: 991px) {
@@ -582,8 +639,7 @@ img.img-more-info {
         padding-top: 40px;
         padding-bottom: 40px;
     }
-    .row-secure-tutorials .secure-tutorials-left,
-    .row-secure-tutorials .secure-tutorials-right {
+    .row-secure-tutorials .secure-tutorials-left, .row-secure-tutorials .secure-tutorials-right {
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
@@ -592,6 +648,13 @@ img.img-more-info {
     }
     .more-info-desc {
         padding-top: 2em;
+    }
+    .pre-video-responsive {
+        margin-left: -46px;
+        margin-right: -46px;
+    }
+    #openvidu-pro-tag {
+        line-height: 32px !important;
     }
 }
 
@@ -615,5 +678,14 @@ img.img-more-info {
     }
     .twitter-row {
         width: 100% !important;
+    }
+    .feature-row {
+        height: auto !important;
+    }
+    .feature-img-col {
+        margin-bottom: 30px;
+    }
+    .feature-text-col h3 {
+        text-align: center !important;
     }
 }
