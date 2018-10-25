@@ -505,7 +505,7 @@ sudo npm install -g @angular/cli
 </code></pre>
 
 <p>3)  <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.5.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 
 <p>4)  Install NPM dependencies of Angular app:</p>
@@ -527,7 +527,7 @@ npm install
 The <strong>openvidu-call-X.X.X.tar.gz</strong> file contains the compiled app served in <code>/</code> and <strong>openvidu-call-demos-X.X.X.tar.gz</strong> file contains the compiled app served in <code>/openvidu-call/</code>.</p>
 <p>To run OpenVidu Call with the compiled files you will need:</p>
 <p>1) openvidu-server and Kurento Media Server must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.5.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 
 <p>2) Download the release:</p>
