@@ -532,7 +532,7 @@ active: documentation
 <pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://my.openvidu.server.ip:3333 -Dopenvidu.cdr=true -Dserver.port=3333 -Dkms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] -jar openvidu-server.jar
 </code></pre>
 
-<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e kms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] openvidu/openvidu-server
+<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e kms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] openvidu/openvidu-server:2.6.0
 </code></pre>
 
 <p><br></p>
@@ -564,7 +564,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e KMS_TURN_URL=myuser:mypass@54.54.54.54:3478 openvidu/openvidu-server-kms
+<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e KMS_TURN_URL=myuser:mypass@54.54.54.54:3478 openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 
 <p><br></p> 

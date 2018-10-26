@@ -522,10 +522,10 @@ active: documentation
 <ul>
 <li>
 <p><strong>openvidu/openvidu-server-kms Docker container</strong> (See <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">DockerHub</a>): override the default value of the property <code>openvidu.publicurl</code>:</p>
-<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms
+<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 <p>in Windows is...</p>
-<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms
+<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 </li>
 </ul>

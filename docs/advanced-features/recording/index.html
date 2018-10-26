@@ -502,7 +502,7 @@ openvidu/openvidu-server-kms
     -e MY_UID=$(id -u $USER) \
     -e openvidu.recording.path=/PATH/TO/VIDEO/FILES \
     -e openvidu.recording.public-access=true \
-openvidu/openvidu-server
+openvidu/openvidu-server:2.6.0
 </code></pre>
 
 <ul>
@@ -653,7 +653,7 @@ openvidu-server.jar
     -e openvidu.recording=true \
     -e openvidu.recording.path=/PATH/TO/VIDEO/FILES \
     -e openvidu.recording.custom-layout=/PATH/TO/INDEX/CUSTOM/LAYOUT \
-openvidu/openvidu-server-kms
+openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 
 <p><strong><a href="https://hub.docker.com/r/openvidu/openvidu-server/">openvidu/openvidu-server</a></strong> (KMS up and running in the host machine)</p>
@@ -665,7 +665,7 @@ openvidu/openvidu-server-kms
     -e openvidu.recording=true \
     -e openvidu.recording.path=/PATH/TO/VIDEO/FILES \
     -e openvidu.recording.custom-layout=/PATH/TO/INDEX/CUSTOM/LAYOUT \
-openvidu/openvidu-server-kms
+openvidu/openvidu-server-kms:2.6.0
 </code></pre>
 
 <hr />
@@ -712,12 +712,12 @@ Path <code>RELATIVE/PATH/TO/INDEX</code> is the path from openvidu-server config
 <p>You should start openvidu-server with property <code>openvidu.recording.custom-layout=/opt/openvidu/my_custom_layouts</code> and you can use any of the 3 <code>index.html</code> files for recording any of your sessions. To use the outer layout, just configure <code>defaultRecordingLayout</code> to <code>CUSTOM</code>. To use any of the inner layouts, also configure <code>defaultCustomLayout</code> to <code>layout1</code> or <code>layout2</code>.</p>
 <hr />
 <h2 id="sample-custom-layout">Sample custom layout</h2>
-<p>This is literally the simplest HTML for a custom recording layout. Use it as a template for building more complex ones.</p>
+<p>This is literally the simplest HTML for a custom recording layout. Use it as a template for building more complex ones (you will need <a href="https://github.com/OpenVidu/openvidu/releases">latest <code>openvidu-browser-VERSION.min.js</code> file</a> to be in the same folder)</p>
 <pre><code class="html">&lt;html&gt;
 
-&lt;head&gt;&lt;script src=&quot;openvidu-browser-2.0.0.min.js&quot;&gt;&lt;/script&gt;&lt;/head&gt;
+&lt;head&gt;&lt;script src=&quot;openvidu-browser-2.6.0.min.js&quot;&gt;&lt;/script&gt;&lt;/head&gt;
 
-&lt;body&gt;
+&lt;body style=&quot;cursor: none&quot;&gt;
     &lt;div id=&quot;videos&quot;&gt;&lt;/div&gt;
 &lt;/body&gt;
 
