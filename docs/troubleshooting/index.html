@@ -492,7 +492,17 @@ active: documentation
 </ul>
 <hr />
 <h3 id="3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">3. I am using Windows to run the tutorials / develop my app. Anything I should know?</h3>
-<p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). To let your applications know how to connect to OpenVidu Server:</p>
+<p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). </p>
+<p>First of all, you must launch the developing Docker container of OpenVidu Server (<a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">openvidu/openvidu-server-kms</a>) setting paramater <code>openvidu.publicurl</code> to the IP allocated for Docker in your Windows machine.</p>
+<p>What in Linux/Mac is... </p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.6.0
+</code></pre>
+
+<p>...in Windows is...</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms:2.6.0
+</code></pre>
+
+<p>Then, to let your applications know how to connect to OpenVidu Server:</p>
 <h4 id="applications-client-side-only">Applications <em>Client-Side Only</em></h4>
 <p>(Tutorials <em><a href="../tutorials/openvidu-hello-world/">openvidu-hello-world</a></em>, <em><a href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a></em>, <em><a href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a></em>, <em><a href="../tutorials/openvidu-getaroom/">openvidu-getaroom</a></em>)</p>
 <p>When consuming openvidu-server REST api, change <code>location.hostname</code> to the IP of the Docker container running openvidu-server (usually <code>192.168.99.100</code>). For every one of the insecure tutorials listed above, the url where to send the REST operations ...</p>
@@ -511,25 +521,14 @@ active: documentation
 <p><br></p>
 <blockquote>
 <p>Also you will need to serve your apps over <strong>https</strong>. Browsers only accept camera usage on http when the address is <em>localhost</em>, and here it will be <code>192.168.99.100</code> or the one that Docker picks up for you. To serve over https with <code>http-server</code>, generate a self-signed certificate and run with <code>-S</code> flag on the root path of your app:</p>
-<p><em>Generate a selfsigned certificate (run in  your Docker console)</em></p>
-<p><code>openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '/CN=www.mydom.com/O=My Company LTD./C=US' -keyout key.pem -out cert.pem</code></p>
+<p><em>Generate a selfsigned certificate (run in your Docker console)</em></p>
+<p><code>openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -subj '//CN=www.mydom.com\O=My Company LTD.\C=US' -keyout key.pem -out cert.pem</code></p>
 <p><em>Run with SSL flag</em></p>
 <p><code>http-server -S</code></p>
 </blockquote>
 <h4 id="applications-client-side-server-side">Applications <em>Client-Side + Server-Side</em></h4>
 <p>(Tutorials <em><a href="../tutorials/openvidu-js-java/">openvidu-js-java</a></em>, <em><a href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a></em>, <em><a href="../tutorials/openvidu-js-node/">openvidu-js-node</a></em>, <em><a href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a></em>)</p>
-<p>Just need to add a new parameter when launching you openvidu-server container:</p>
-<ul>
-<li>
-<p><strong>openvidu/openvidu-server-kms Docker container</strong> (See <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/">DockerHub</a>): override the default value of the property <code>openvidu.publicurl</code>:</p>
-<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.6.0
-</code></pre>
-<p>in Windows is...</p>
-<pre><code>docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms:2.6.0
-</code></pre>
-</li>
-</ul>
-<p>And let know your app/tutorial how to initialize <em>openvidu-java-client</em> or <em>openvidu-node-client</em> (or where to send your REST API operations in case you are not using any of these clients). For example:</p>
+<p>You must let know your app/tutorial how to initialize <em>openvidu-java-client</em> or <em>openvidu-node-client</em> (or where to send your REST API operations in case you are not using any of these clients). For example:</p>
 <ul>
 <li>
 <p><strong>Java tutorials</strong> (tutorials <em><a href="../tutorials/openvidu-js-java/">openvidu-js-java</a></em>, <em><a href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a></em>): override the default value of the property <code>openvidu.url</code>:</p>
