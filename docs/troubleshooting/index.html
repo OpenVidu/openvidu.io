@@ -472,7 +472,7 @@ active: documentation
 <h3 id="1-everything-looks-alright-but-i-cannot-see-any-remote-video">1. Everything looks alright, but I cannot see any remote video</h3>
 <p>You have an app that uses OpenVidu to stream some video user-to-user, and the process looks perfectly okey. No errors on the console and all the OpenVidu events you are subscribed to are correctly triggered. So what's happening?</p>
 <p>99% of the time this is a problem related with <strong>OPENVIDU SERVER NOT HAVING A PUBLIC IP</strong>. To learn more about it, you can check <a href="#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">this FAQ</a>. The quickest solution to this problem is to deploy in Amazon our ready-to-use OpenVidu Server with <a href="../deployment/deploying-aws/#deploying-openvidu-server-on-aws-with-cloud-formation">CloudFormation</a>.</p>
-<p>If you are a bit reluctant to this quick solution with Amazon CloudFormation, you can always deploy OpenVidu by yourself in Ubuntu 14.04 and 16.04. Check <a href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> section to learn how to properly do it.</p>
+<p>If you are a bit reluctant to this quick solution with Amazon CloudFormation, you can always deploy OpenVidu by yourself in Ubuntu 16.04. Check <a href="../deployment/deploying-ubuntu/">Deploying OpenVidu as a native service</a> section to learn how to properly do it.</p>
 <p>Besides that, these are the recommended steps to follow when videos are not received:</p>
 <ul>
 <li>Access your OpenVidu dashboard (<code>https://YOUR_OPENVIDU_IP:4443</code>) to quickly test the video transmission (user: <em>OPENVIDUAPP</em>, pass: <em>[your private secret]</em>)</li>
