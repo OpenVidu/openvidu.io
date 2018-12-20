@@ -1057,7 +1057,6 @@ set streamManager(streamManager: StreamManager) {
         this._streamManager.on('streamPropertyChanged', event =&gt; {
             if ((&lt;StreamPropertyChangedEvent&gt;event).changedProperty === 'videoDimensions') {
                 this.applyIosIonicVideoAttributes();
-                cordova.plugins.iosrtc.refreshVideos();
             }
         });
     }
@@ -1073,7 +1072,6 @@ set streamManager(streamManager: StreamManager) {
             // Give the remote video some time to update its dimensions when rotating the device
             setTimeout(() =&gt; {
                 this.applyIosIonicVideoAttributes();
-                cordova.plugins.iosrtc.refreshVideos();
             }, 250);
         };
         (&lt;any&gt;window).addEventListener('orientationchange', this.rotationFunction);
