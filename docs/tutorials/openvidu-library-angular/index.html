@@ -583,11 +583,13 @@ ng serve
 <li><code>sessionName</code>: the session name that will be displayed inside the component</li>
 <li><code>user</code>: the nickname that the user will have in the session</li>
 <li><code>token</code>: the retrieved token from OpenVidu Server</li>
+<li><code>ovSettings</code>: the configuration that the user want to have on the session</li>
 </ul>
 <pre><code class="html">&lt;opv-session
   [sessionName]=&quot;mySessionId&quot;
   [user]=&quot;myUserName&quot;
   [token]=&quot;token&quot;
+  [ovSettings]=&quot;ovSettings&quot;
   (leaveSession)=&quot;handlerLeaveSessionEvent($event)&quot;
   (joinSession)=&quot;handlerJoinSessionEvent($event)&quot;
   (error)=&quot;handlerErrorEvent($event)&quot;&gt;
@@ -606,6 +608,69 @@ ng serve
   handlerErrorEvent(event): void {
     // Do something
   }
+</code></pre>
+
+<p>In addiction, <strong>openvidu-library-angular</strong> allows you to have access to specifics internals variables such as <em>OpenVidu Session</em>, <em>OpenVidu Layout</em>, <em>Local User</em> or <em>Remotes User</em>.</p>
+<p>You can access to them through the following way:</p>
+<p>1) You must assign a referece to the <code>opv-session</code>, inside of <code>app.component.html</code> with <strong>#ovSessionComponent</strong>:</p>
+<pre><code class="html">&lt;opv-session
+  #ovSessionComponent
+  [sessionName]=&quot;mySessionId&quot;
+  [user]=&quot;myUserName&quot;
+  [token]=&quot;token&quot;
+  [ovSettings]=&quot;ovSettings&quot;
+  (leaveSession)=&quot;handlerLeaveSessionEvent($event)&quot;
+  (joinSession)=&quot;handlerJoinSessionEvent($event)&quot;
+  (error)=&quot;handlerErrorEvent($event)&quot;&gt;
+&lt;/opv-session&gt;
+</code></pre>
+
+<p>2) You have to declare the openvidu component variable in <code>app.component.ts</code>:</p>
+<pre><code class="typescript">@ViewChild('ovSessionComponent')
+public ovSessionComponent: OpenviduSessionComponent;
+</code></pre>
+
+<p>3) After that, <strong>ovSessionComponent</strong> will provides us some methods to get the internal variables we need. These methods are:</p>
+<ul>
+<li>getSession</li>
+<li>getLocalUser</li>
+<li>getOpenviduLayout</li>
+<li>getOpenviduLayputOptions</li>
+</ul>
+<pre><code class="typescript">myMethod() {
+  this.ovSession = this.ovSessionComponent.getSession();
+  this.ovLocalUser = this.ovSessionComponent.getLocalUser();
+  this.ovLayout = this.ovSessionComponent.getOpenviduLayout();
+  this.ovLayoutOptions = this.ovSessionComponent.getOpenviduLayputOptions();
+}
+</code></pre>
+
+<p>We are invoking <em>myMethod</em> inside of <em>handlerJoinSessionEvent</em>.</p>
+<p>4) Last but not least, you must stablish the local variables like this: </p>
+<pre><code class="typescript">import {OpenviduSessionComponent, StreamEvent, Session, UserModel, OpenViduLayout, OpenViduLayoutOptions, OvSettings} from 'openvidu-angular';
+</code></pre>
+
+<pre><code class="typescript">ovSession: Session;
+ovRemotesArray: UserModel[];
+ovLocalUser: UserModel;
+ovLayout: OpenViduLayout;
+ovLayoutOptions: OpenViduLayoutOptions;
+ovSettings: OvSettings;
+</code></pre>
+
+<p>Moreover, if you want to customize the interface of <strong>opv-session-component</strong> you can provide with the <code>ovSettings</code> variable tothe component. We have explain more details of this <a href="../openvidu-webcomponent/#interface-configuration">here</a>.</p>
+<p>And initializate it with the config properties:</p>
+<pre><code class="typescript">this.ovSettings = {
+  chat: false,
+  autopublish: true,
+  toolbarButtons: {
+    audio: true,
+    video: true,
+    screenShare: true,
+    fullscreen: true,
+    exit: true,
+  }
+};
 </code></pre>
 
 <hr />

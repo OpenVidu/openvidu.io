@@ -487,6 +487,19 @@ With just a few lines of code you will have your first video call working!</p>
 </code></pre>
 
 <p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-webcomponent2.png">
+        <img class="img-responsive" src="/img/demos/ov-webcomponent2.png">
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-webcomponent1.png">
+        <img class="img-responsive" src="/img/demos/ov-webcomponent1.png">
+    </a>
+    </div>
+</div>
+
 <p><br></p>
 <blockquote>
 <p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
@@ -563,12 +576,13 @@ We just need to get the element once the document is ready and add all the liste
 <p>In this tutorial, we just alternate the view between the form and the web component, hiding or showing them when receiving <code>joinSession</code> or <code>leaveSession</code> events.</p>
 <hr />
 <h4 id="appjs-ii-configuring-openvidu-web-component">app.js (II): Configuring OpenVidu Web Component</h4>
+<h5 id="session-configuration">Session Configuration</h5>
 <p>Method <code>joinSession()</code> gets:</p>
 <ul>
 <li>The form input values, with the video-call to connect and the nickname the user will have in it.</li>
 <li>The <code>token</code> from OpenVidu Server. Check out <a href="#get-a-token-from-openvidu-server">next point</a> to see how this is done.</li>
 </ul>
-<p>When we have our token available, the only thing left to do is to give the desired configuration to openvidu-webcomponent. To do so we use an object with three parameters: <code>sessionName</code>, <code>user</code> and <code>token</code>.</p>
+<p>When we have our token available, the only thing left to do is to give the desired configuration to openvidu-webcomponent. To do so we use an object with three parameters: <code>sessionName</code>, <code>user</code> and  <code>token</code>.</p>
 <ul>
 <li><code>sessionName</code>: the session name that will be displayed inside the component</li>
 <li><code>user</code>: the nickname that the user will have in the session</li>
@@ -586,6 +600,39 @@ We just need to get the element once the document is ready and add all the liste
 </code></pre>
 
 <p>That's it. Once you configure the token into the webcomponent, it will automatically join the proper session (<code>joinSession</code> event will be dispatched so you can update your web). The user will see in the webcomponent all other users joined to the same session and will publish the webcam. You have a video-call working!</p>
+<h5 id="interface-configuration">Interface Configuration</h5>
+<p>Optionally, you can add an extra JSON param inside of <strong>webcomponent.sessionConfig</strong> object named <code>ovSettings</code>. This parameter allows you to set up an extra custom interface. We have the choice to enabling or disabling the chat and each of the toolbar buttons. Besides, openvidu-webcomponent allows you configure your <strong>camera</strong> and <strong>audio device</strong>, your <strong>avatar</strong> and your <strong>nickname</strong> before join to the room. To do that, you only have to set <code>autopublish</code> property to <code>false</code>.</p>
+<p>To do that, is necessary to declare the following <strong>ovSettings</strong> variable:  </p>
+<pre><code class="javascript">var ovSettings = {
+  chat: true,
+  autopublish: true,
+  toolbarButtons: {
+    audio: true,
+    video: true,
+    screenShare: true,
+    fullscreen: true,
+    exit: true,
+  }
+};
+</code></pre>
+
+<p>and add it inside of <strong>webcomponent.sessionConfig</strong> object: </p>
+<pre><code class="javascript">webComponent.sessionConfig = { sessionName, user, token, ovSettings };
+</code></pre>
+
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-webcomponent3.png">
+        <img class="img-responsive" src="/img/demos/ov-webcomponent3.png">
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-webcomponent4.png">
+        <img class="img-responsive" src="/img/demos/ov-webcomponent4.png">
+    </a>
+    </div>
+</div>
+
 <hr />
 <h4 id="get-a-token-from-openvidu-server">Get a <em>token</em> from OpenVidu Server</h4>
 <div style="
@@ -634,9 +681,15 @@ We just need to get the element once the document is ready and add all the liste
 <pre><code class="html">&lt;openvidu-webcomponent session-config='{&quot;sessionName&quot;:&quot;SessionA&quot;, &quot;user&quot;:&quot;User1&quot;, &quot;token&quot;: &quot;TOKEN_RETRIEVED_FROM_OPENVIDU_SERVER&quot;}'&gt;&lt;/openvidu-webcomponent&gt;
 </code></pre>
 
+<p>Besides, openvidu-webcomponent allows you to add <strong>ovSettings</strong> parameter statically:</p>
+<pre><code class="html">&lt;openvidu-webcomponent session-config='{&quot;sessionName&quot;:&quot;SessionA&quot;, &quot;user&quot;:&quot;User1&quot;,               &quot;ovSettings&quot;: {&quot;chat&quot;: true, &quot;autopublish&quot;: true, &quot;toolbarButtons&quot;: {&quot;audio&quot;: true,
+ &quot;video&quot;: true, &quot;screenShare&quot;: true, &quot;fullscreen&quot;: true, &quot;exit&quot;: true }}}'&gt;
+&lt;/openvidu-webcomponent&gt;
+</code></pre>
+
 <p>And if you want to let the webcomponent get the token for you, you can just dispense with the token and provide two more attributes to it. This is only meant for developing purposes, as you need to hardcode the secret of your OpenVidu Server in the JavaScript code:</p>
-<pre><code class="html">&lt;openvidu-webcomponent session-config='{&quot;sessionName&quot;:&quot;SessionA&quot;, &quot;user&quot;:&quot;User1&quot;}'
-openvidu-server-url=&quot;https://localhost:4443&quot; openvidu-secret=&quot;MY_SECRET&quot;&gt;&lt;/openvidu-webcomponent&gt;
+<pre><code class="html">&lt;openvidu-webcomponent  openvidu-server-url=&quot;https://localhost:4443&quot; openvidu-secret=&quot;MY_SECRET&quot; session-config='{&quot;sessionName&quot;:&quot;SessionA&quot;, &quot;user&quot;:&quot;User1&quot;, &quot;ovSettings&quot;: {&quot;chat&quot;: true, &quot;autopublish&quot;: true, &quot;toolbarButtons&quot;: {&quot;audio&quot;: true, &quot;video&quot;:true, &quot;screenShare&quot;: true, &quot;fullscreen&quot;: true, &quot;exit&quot;: true }}}'&gt;
+&lt;/openvidu-webcomponent&gt;
 </code></pre>
 
 <div style="
@@ -670,7 +723,38 @@ openvidu-server-url=&quot;https://localhost:4443&quot; openvidu-secret=&quot;MY_
 <h4 id="choose-a-theme">Choose a theme</h4>
 <p>OpenVidu  allows you to choose between two themes. By default, the theme selected is <strong>dark theme</strong> but if you prefer change it for a <strong>light them</strong>, you can add <code>theme="light"</code></p>
 <pre><code class="html">&lt;openvidu-webcomponent theme=&quot;light&quot;&gt;&lt;/openvidu-webcomponent&gt;
-</code></pre> 
+</code></pre>
+
+<div class="row no-margin row-gallery">
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-webcomponent5.png">
+            <img class="img-responsive" src="/img/demos/ov-webcomponent5.png">
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a data-fancybox="gallery" href="/img/demos/ov-webcomponent6.png">
+            <img class="img-responsive" src="/img/demos/ov-webcomponent6.png">
+        </a>
+    </div>
+</div>
+
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p> 
 						</div>
 					</div> <footer>
 <hr>

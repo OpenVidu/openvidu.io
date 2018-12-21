@@ -595,7 +595,8 @@ sudo apt-get install -y nodejs
 
 <p>Wait until you see on the output a line IP address. </p>
 <p>By default, the app will be served in <code>localhost:8080</code> address. You will need go to <a href="https://localhost:4443/"><code>https://localhost:4443/</code></a> to accept the self-signed certificate. Once accepted, you will be able to test OpenVidu Call in the default IP <a href="http://localhost:8080"><code>localhost:8080</code></a></p>
-<p>In addiction, you can set up the address where you app will be served with <code>http-server -a "your_address"</code>. Moreover, includying a <strong>JSON</strong> file named <strong>ov-credentials.json</strong> in the root directory, you will can configure the <code>openvidu_url</code> and <code>openvidu_secret</code>:</p>
+<h2 id="extra-features">Extra features</h2>
+<p>Using the OpenVidu Call release, you can set up the address where you app will be served with <code>http-server -a "your_address"</code>. Moreover, includying a <strong>JSON</strong> file named <strong>ov-settings.json</strong> in the root directory, you will can configure the <code>openvidu_url</code> and <code>openvidu_secret</code> on this way:</p>
 <pre><code class="json">{
   &quot;openviduCredentials&quot;: {
     &quot;openvidu_url&quot;: &quot;https://0.0.0.0:4443&quot;,
@@ -604,6 +605,7 @@ sudo apt-get install -y nodejs
 }
 </code></pre>
 
+<p>Not only you can establish your own <strong>openvidu_url</strong> and <strong>openvidu_secret</strong> parameters but also, you can customize the session interface adding an extra JSON object named  <strong>openviduSetttings</strong> inside of the file. We have explained with details what the <strong>openviduSettings</strong> must be filled  <a href="../../tutorials/openvidu-webcomponent/#interface-configuration">here</a>.</p>
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 <script>
