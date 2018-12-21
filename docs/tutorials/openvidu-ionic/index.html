@@ -946,9 +946,8 @@ You can inspect this method in detail in the <a href="https://github.com/OpenVid
 <p>Unfortunately, Ionic's WebView layer on iOS devices (<a href="https://ionicframework.com/docs/wkwebview/">WKWebview</a>) does not support WebRTC (blame Apple and its politics). So the only way to make WebRTC work on iOS Ionic platform is by using a plugin. The result works just fine, but a little work is needed to make your Ionic app compatible with iOS. OpenVidu makes use of <a href="https://github.com/BasqueVoIPMafia/cordova-plugin-iosrtc">cordova-plugin-iosrtc</a> to achieve this.</p>
 <p>This <strong>openvidu-ionic</strong> project is ready to work on iOS devices, but we will go through every aspect related to iOS compatibility in case your already have an Ionic application in which you want to integrate OpenVidu.</p>
 <h3 id="configuration-requirements">Configuration requirements</h3>
-<p>1) Install cordova-plugin-iosrtc and xcode</p>
+<p>1) Install cordova-plugin-iosrtc</p>
 <pre><code class="bash">ionic cordova plugin add cordova-plugin-iosrtc
-npm install xcode --save
 </code></pre>
 
 <p>2) Add the following files to your Ionic app. Consider relative paths under root folder, the one containing your <code>package.json</code> file</p>
@@ -1013,16 +1012,10 @@ declare var cordova;
 
 <p><strong>3)</strong> Every <code>&lt;video&gt;</code> element should be managed carefully on cordova iOS. The plugin inserts iOS native video elements whenever it finds an HTMLVideoElement, respecting certain CSS rules. In general, we recommend that at the moment you have video metadata, you apply programmatically the following styles: <code>object-fit</code>, <code>z-index</code>, <code>width</code> and <code>height</code>.
 In openvidu-ionic app this is done as follows in file <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-ionic/src/app/ov-video.component.ts"><code>ov-video.component.ts</code></a></p>
-<p>We check if the platform is iOS with the following method: </p>
-<pre><code class="typescript">private isIos(): boolean {
-    return this.platform.is('ios') &amp;&amp; this.platform.is('cordova');
-}
-</code></pre>
-
 <p>We call the following <code>updateVideoView</code> method inside <code>ngAfterViewInit</code>, so our video elementRef is properly defined:</p>
 <pre><code class="typescript">private updateVideoView() {
     this._streamManager.addVideoElement(this.elementRef.nativeElement);
-    if (this.isIos()) {
+    if (this.platform.is('ios') &amp;&amp; this.platform.is('cordova')) {
         (&lt;HTMLVideoElement&gt;this.elementRef.nativeElement).onloadedmetadata = () =&gt; {
             this.applyIosIonicVideoAttributes();
         };
