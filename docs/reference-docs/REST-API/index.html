@@ -479,16 +479,16 @@ active: documentation
 <ul>
 <li>Initialize a session: <a href="#post-apisessions"><strong>POST /api/sessions</strong></a></li>
 <li>Generate a token: <a href="#post-apitokens"><strong>POST /api/tokens</strong></a></li>
-<li>Retrieve active session info: <a href="#get-apisessionsltsession_idgt"><strong>GET /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
+<li>Retrieve active session info: <a href="#get-apisessionssession_id"><strong>GET /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
 <li>Retrieve all active sessions info: <a href="#get-apisessions"><strong>GET /api/sessions</strong></a></li>
-<li>Close a session: <a href="#delete-apisessionsltsession_idgt"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
-<li>Force the disconnection of a user from a session: <a href="#delete-apisessionsltsession_idgtconnectionltconnection_idgt"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</strong></a></li>
-<li>Force the unpublishing of a user's stream from a session: <a href="#delete-apisessionsltsession_idgtstreamltstream_idgt"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</strong></a></li>
+<li>Close a session: <a href="#delete-apisessionssession_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
+<li>Force the disconnection of a user from a session: <a href="#delete-apisessionssession_idconnectionconnection_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</strong></a></li>
+<li>Force the unpublishing of a user's stream from a session: <a href="#delete-apisessionssession_idstreamstream_id"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</strong></a></li>
 <li>Start the recording of a session: <a href="#post-apirecordingsstart"><strong>POST /api/recordings/start</strong></a></li>
-<li>Stop the recording of a session: <a href="#post-apirecordingsstopltrecording_idgt"><strong>POST/api/recordings/stop/&lt;RECORDING_ID&gt;</strong></a></li>
-<li>Get recording info: <a href="#get-apirecordingsltrecording_idgt"><strong>GET /api/recordings/&lt;RECORDING_ID&gt;</strong></a></li>
+<li>Stop the recording of a session: <a href="#post-apirecordingsstoprecording_id"><strong>POST/api/recordings/stop/&lt;RECORDING_ID&gt;</strong></a></li>
+<li>Get recording info: <a href="#get-apirecordingsrecording_id"><strong>GET /api/recordings/&lt;RECORDING_ID&gt;</strong></a></li>
 <li>Get all recordings info: <a href="#get-apirecordings"><strong>GET /api/recordings</strong></a></li>
-<li>Delete a recording: <a href="#delete-apirecordingsltrecording_idgt"><strong>DELETE /api/recordings/&lt;RECORDING_ID&gt;</strong></a></li>
+<li>Delete a recording: <a href="#delete-apirecordingsrecording_id"><strong>DELETE /api/recordings/&lt;RECORDING_ID&gt;</strong></a></li>
 </ul>
 <hr />
 <h3 id="post-apisessions">POST <code>/api/sessions</code></h3>
@@ -648,7 +648,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="get-apisessionssession_id">GET <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
+<h3 id="get-apisessionsltsession_idgt">GET <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -754,7 +754,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apisessionssession_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
+<h3 id="delete-apisessionsltsession_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -789,7 +789,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apisessionssession_idconnectionconnection_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</code></h3>
+<h3 id="delete-apisessionsltsession_idgtconnectionltconnection_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -825,7 +825,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apisessionssession_idstreamstream_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</code></h3>
+<h3 id="delete-apisessionsltsession_idgtstreamltstream_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -933,7 +933,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="post-apirecordingsstoprecording_id">POST <code>/api/recordings/stop/&lt;RECORDING_ID&gt;</code></h3>
+<h3 id="post-apirecordingsstopltrecording_idgt">POST <code>/api/recordings/stop/&lt;RECORDING_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -988,7 +988,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="get-apirecordingsrecording_id">GET <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
+<h3 id="get-apirecordingsltrecording_idgt">GET <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -1085,7 +1085,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apirecordingsrecording_id">DELETE <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
+<h3 id="delete-apirecordingsltrecording_idgt">DELETE <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
