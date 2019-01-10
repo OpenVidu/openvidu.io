@@ -515,19 +515,10 @@ active: documentation
 <h5 id="remember-the-browsers-cache">Remember the browser's cache</h5>
 <p>If you have changed your HTML, JavaScript or CSS code, refreshed the page and cannot see the changes on the browser, probably the cache is still serving the old files. To perform a hard reload of your page on the browser, press <code>Ctrl + Shift + R</code></p>
 <p><br></p>
-<h5 id="use-ngrok-to-share-your-app">Use <em>Ngrok</em> to share your app</h5>
-<p>Do you want to be able to publish your development app over your network or even the Internet, without really having to deploy it in a server? This can be very helpful, as you can test with different devices and browsers at the same time. To achieve this, you can use <em>Ngrok</em>. The set up for Ubuntu is quite simple:</p>
-<ul>
-<li>Download <em>Ngrok</em> with this link [<strong><a href="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip">LINK</a></strong>] and unzip it.</li>
-<li>Download this <em>Ngrok</em> configuration file (named <code>ngrok.yml</code>) from our GitHub repo <strong>[<a href="https://raw.githubusercontent.com/OpenVidu/openvidu-tutorials/master/openvidu-js-java/docker/ngrok.yml">LINK</a>]</strong> and place it in the same path as <em>Ngrok</em> binary.</li>
-<li>Run <em>Ngrok</em> with this command: <code>./ngrok start --all -config=ngrok.yml</code>. You will get two public IPs (ended with <code>.ngrok.io</code>) publishing your local address <code>localhost:5000</code> and <code>localhost:3000</code>.</li>
-<li>You just have to run you app at port <code>3000</code> and run OpenVidu Server locally adding this parameter:<ul>
-<li>When running OpenVidu Server as a Docker container: <code>-e spring.profiles.active=ngrok</code></li>
-<li>When running OpenVidu Server as a JAR: <code>-Dspring.profiles.active=ngrok</code></li>
-</ul>
-</li>
-<li>That's it! Now you can connect to your app through the <em>Ngrok</em> public IP and the connection to OpenVidu Server will work just fine. You have "deployed" your app on your own computer, and cross-device testing through your own network is now possible. Connecting to your app over the Internet is also possible, but the video transmission may not work (check <a href="#1-everything-looks-alright-but-i-cannot-see-any-remote-video">this FAQ</a> to learn why).</li>
-</ul>
+<h5 id="share-your-app-through-your-network-to-test-with-multiple-devices">Share your app through your network to test with multiple devices</h5>
+<p>Making your app accessible to any device connected to your WiFi is very useful for quickly testing your app with different devices at the same time. To achieve this, you just have to indicate OpenVidu Server to use your dev machine LAN IP address as public url. For example, let's say that your machine has assigned ip <code>192.168.0.107</code> in your network:</p>
+<p><code>docker run -p 4443:4443 -e openvidu.publicurl=https://192.168.0.107:4443/ openvidu/openvidu-server-kms:6.9.0</code></p>
+<p>Then you just have to configure your app (REST API address / OpenVidu Java Client / OpenVidu Node Client) to connect to OpenVidu through <code>https://192.168.0.107:4443/</code>. Any user connecting to your app through <code>https://192.168.0.107:WHICHEVER_PORT_YOUR_APP_IS_LISTENING_THROUGH</code> will be able to send and receive video.</p>
 <hr />
 <h3 id="3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">3. I am using Windows to run the tutorials / develop my app. Anything I should know?</h3>
 <p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). </p>

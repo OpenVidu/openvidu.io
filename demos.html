@@ -70,12 +70,18 @@ custom_css:
                                         <i class="icon ion-information-circled"></i>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        Wait until you see on the output a line <strong><em>
-                                        <a data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img style='width:180px' src='img/demos/public_ip.png'/>">
-                                            PUBLIC IP
-                                        </a></em></strong>. 
-                                        Connect to the app with this URL. You can share it to easily test the app with other devices (it may not work over the Internet in some cases. Check
-                                        <a href="/docs/troubleshooting#1-everything-looks-alright-but-i-cannot-see-any-remote-video" target="_blank">Troubleshooting</a> section to learn why)
+                                        Once the container has started, connect to the app through <a href="https://localhost:4443/" target="_blank">https://localhost:4443</a>.
+                                        You can serve it in your WiFi network just by adding property <pre style="
+                                        padding: 2px 4px;
+                                        font-size: 90%;
+                                        color: #c7254e;
+                                        background-color: #f9f2f4;
+                                        border-radius: 4px;
+                                        margin: 0;
+                                        display: inline-flex;
+                                        white-space: normal;
+                                        word-break: break-word;">-e openvidu.publicurl=https://YOUR_MACHINE_LOCAL_NETWORK_IP:4443/</pre> to the <i>docker run</i> command.
+                                        This way you will be able to test the app in multiple devices as long as they are connected to your network and access through the specified ip
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +163,7 @@ custom_css:
                                         title="Copy to Clipboard">Copy</button>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        <code id="code-2">docker run -p 5000:5000 -p 3000:3000 openvidu/basic-webinar-demo</code>
+                                        <code id="code-2">docker run -p 5000:5000 -p 4443:4443 openvidu/basic-webinar-demo</code>
                                     </div>
                                 </div>
                                 <div class="row no-margin docker-info-div">
@@ -165,12 +171,18 @@ custom_css:
                                         <i class="icon ion-information-circled"></i>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        Wait until you see on the output a line <strong><em>
-                                        <a data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img style='width:180px' src='img/demos/public_ip.png'/>">
-                                            PUBLIC IP
-                                        </a></em></strong>. 
-                                        Connect to the app with this URL. You can share it to easily test the app with other devices (it may not work over the Internet in some cases. Check
-                                        <a href="/docs/troubleshooting#1-everything-looks-alright-but-i-cannot-see-any-remote-video" target="_blank">Troubleshooting</a> section to learn why)
+                                        Once the container has started, connect to the app through <a href="https://localhost:5000/" target="_blank">https://localhost:5000</a>.
+                                        You can serve it in your WiFi network just by adding property <pre style="
+                                        padding: 2px 4px;
+                                        font-size: 90%;
+                                        color: #c7254e;
+                                        background-color: #f9f2f4;
+                                        border-radius: 4px;
+                                        margin: 0;
+                                        display: inline-flex;
+                                        white-space: normal;
+                                        word-break: break-word;">-e openvidu.publicurl=https://YOUR_MACHINE_LOCAL_NETWORK_IP:4443/</pre> to the <i>docker run</i> command.
+                                        This way you will be able to test the app in multiple devices as long as they are connected to your network and access through the specified ip
                                     </div>
                                 </div>
                             </div>
@@ -276,12 +288,18 @@ custom_css:
                                         <i class="icon ion-information-circled"></i>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        Wait until you see on the output a line <strong><em>
-                                        <a data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img style='width:180px' src='img/demos/public_ip.png'/>">
-                                            PUBLIC IP
-                                        </a></em></strong>. 
-                                        Connect to the app with this URL. You can share it to easily test the app with other devices (it may not work over the Internet in some cases. Check
-                                        <a href="/docs/troubleshooting#1-everything-looks-alright-but-i-cannot-see-any-remote-video" target="_blank">Troubleshooting</a> section to learn why)
+                                        Once the container has started, connect to the app through <a href="https://localhost:4443/" target="_blank">https://localhost:4443</a>.
+                                        You can serve it in your WiFi network just by adding property <pre style="
+                                        padding: 2px 4px;
+                                        font-size: 90%;
+                                        color: #c7254e;
+                                        background-color: #f9f2f4;
+                                        border-radius: 4px;
+                                        margin: 0;
+                                        display: inline-flex;
+                                        white-space: normal;
+                                        word-break: break-word;">-e openvidu.publicurl=https://YOUR_MACHINE_LOCAL_NETWORK_IP:4443/</pre> to the <i>docker run</i> command.
+                                        This way you will be able to test the app in multiple devices as long as they are connected to your network and access through the specified ip
                                     </div>
                                 </div>
                             </div>
@@ -353,7 +371,7 @@ custom_css:
                                         title="Copy to Clipboard">Copy</button>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        <code id="code-4">docker run -t --name openvidu-call -e OV_PROFILE=ngrok -p 4443:4443 openvidu/openvidu-call</code>
+                                        <code id="code-4"> docker run -p 4443:4443 openvidu/openvidu-call</code>
                                     </div>
                                 </div>
                                 <div class="row no-margin docker-info-div">
@@ -361,12 +379,18 @@ custom_css:
                                         <i class="icon ion-information-circled"></i>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        Wait until you see on the output a line <strong><em>
-                                        <a data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img style='width:180px' src='img/demos/public_ip.png'/>">
-                                            PUBLIC IP
-                                        </a></em></strong>. 
-                                        Connect to the app with this URL. You can share it to easily test the app with other devices (it may not work over the Internet in some cases. Check
-                                        <a href="/docs/troubleshooting#1-everything-looks-alright-but-i-cannot-see-any-remote-video" target="_blank">Troubleshooting</a> section to learn why)
+                                        Once the container has started, connect to the app through <a href="https://localhost:4443/" target="_blank">https://localhost:4443</a>.
+                                        You can serve it in your WiFi network just by adding property <pre style="
+                                        padding: 2px 4px;
+                                        font-size: 90%;
+                                        color: #c7254e;
+                                        background-color: #f9f2f4;
+                                        border-radius: 4px;
+                                        margin: 0;
+                                        display: inline-flex;
+                                        white-space: normal;
+                                        word-break: break-word;">-e openvidu.publicurl=https://YOUR_MACHINE_LOCAL_NETWORK_IP:4443/</pre> to the <i>docker run</i> command.
+                                        This way you will be able to test the app in multiple devices as long as they are connected to your network and access through the specified ip
                                     </div>
                                 </div>
                             </div>
@@ -403,6 +427,11 @@ custom_css:
                     </div>
                     <div class="row no-margin row-gallery">
                     <div class="col-md-4">
+                        <a data-fancybox="gallery4" href="img/demos/openvidu_call_chat.png">
+                            <img class="img-responsive" src="img/demos/openvidu_call_chat.png">
+                        </a>
+                    </div>
+                    <div class="col-md-4">
                         <a data-fancybox="gallery4" href="img/demos/openvidu_call3.png">
                             <img class="img-responsive" src="img/demos/openvidu_call3.png">
                         </a>
@@ -410,11 +439,6 @@ custom_css:
                     <div class="col-md-4">
                         <a data-fancybox="gallery4" href="img/demos/openvidu_call4.png">
                             <img class="img-responsive" src="img/demos/openvidu_call4.png">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a data-fancybox="gallery4" href="img/demos/openvidu_call5.png">
-                            <img class="img-responsive" src="img/demos/openvidu_call5.png">
                         </a>
                     </div>
                 </div>
@@ -456,12 +480,18 @@ custom_css:
                                         <i class="icon ion-information-circled"></i>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
-                                        Wait until you see on the output a line <strong><em>
-                                        <a data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img style='width:180px' src='img/demos/public_ip.png'/>">
-                                            PUBLIC IP
-                                        </a></em></strong>. 
-                                        Connect to the app with this URL. You can share it to easily test the app with other devices (it may not work over the Internet in some cases. Check
-                                        <a href="/docs/troubleshooting#1-everything-looks-alright-but-i-cannot-see-any-remote-video" target="_blank">Troubleshooting</a> section to learn why)
+                                        Once the containers have started, connect to the app through <a href="https://localhost:5000/" target="_blank">https://localhost:5000</a>.
+                                        You can serve it in your WiFi network just by running <pre style="
+                                        padding: 2px 4px;
+                                        font-size: 90%;
+                                        color: #c7254e;
+                                        background-color: #f9f2f4;
+                                        border-radius: 4px;
+                                        margin: 0;
+                                        display: inline-flex;
+                                        white-space: normal;
+                                        word-break: break-word;">export OPENVIDU_PUBLICURL=https://YOUR_MACHINE_LOCAL_NETWORK_IP:4443/</pre> before executing <i>docker-compose up</i>.
+                                        This way you will be able to test the app in multiple devices as long as they are connected to your network and access through the specified ip
                                     </div>
                                 </div>
                             </div>
