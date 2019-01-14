@@ -680,36 +680,34 @@ private String SECRET;
     JSONObject responseJson = new JSONObject();
 </code></pre>
 
-<p>Just after that an <em>if-else</em> statement comes into play: does the session "TUTORIAL" already exist?</p>
+<p>Just after that we check if the session "TUTORIAL" already exists</p>
 <pre><code class="java">if (this.mapSessions.get(sessionName) != null) { ...
 </code></pre>
 
-<p>In this case it doesn't because 'publisher1' is the first user connecting to it. So we focus on the <em>else</em> branch:</p>
-<pre><code class="java">else {
-    // New session
-    System.out.println(&quot;New session &quot; + sessionName);
-    try {
+<p>In this case it doesn't because 'publisher1' is the first user connecting to it. So we directly create a new session:</p>
+<pre><code class="java">// New session
+System.out.println(&quot;New session &quot; + sessionName);
+try {
 
-        // Create a new OpenVidu Session
-        Session session = this.openVidu.createSession();
-        // Generate a new token with the recently created tokenOptions
-        String token = session.generateToken(tokenOptions);
+    // Create a new OpenVidu Session
+    Session session = this.openVidu.createSession();
+    // Generate a new token with the recently created tokenOptions
+    String token = session.generateToken(tokenOptions);
 
-        // Store the session and the token in our collections
-        this.mapSessions.put(sessionName, session);
-        this.mapSessionNamesTokens.put(sessionName, new ConcurrentHashMap&lt;&gt;());
-        this.mapSessionNamesTokens.get(sessionName).put(token, role);
+    // Store the session and the token in our collections
+    this.mapSessions.put(sessionName, session);
+    this.mapSessionNamesTokens.put(sessionName, new ConcurrentHashMap&lt;&gt;());
+    this.mapSessionNamesTokens.get(sessionName).put(token, role);
 
-        // Prepare the response with the token
-        responseJson.put(0, token);
+    // Prepare the response with the token
+    responseJson.put(0, token);
 
-        // Return the response to the client
-        return new ResponseEntity&lt;&gt;(responseJson, HttpStatus.OK);
+    // Return the response to the client
+    return new ResponseEntity&lt;&gt;(responseJson, HttpStatus.OK);
 
-    } catch (Exception e) {
-        // If error generate an error message and return it to client
-        return getErrorResponse(e);
-    }
+} catch (Exception e) {
+    // If error generate an error message and return it to client
+    return getErrorResponse(e);
 }
 </code></pre>
 
@@ -811,7 +809,7 @@ session.connect(token, { clientData: nickName })
 <p>The user will now see its own video on the page. The connection to the session has completed!</p>
 <hr />
 <h3 id="3-another-user-connects-to-the-video-call">3) Another user connects to the video-call</h3>
-<p>The process would be exactly the same as before until <code>SessionController.java</code> executes <code>getToken()</code> method. Now session 'TUTORIAL' already exists, so in the <em>if-else</em> statement the <em>if</em> branch would be the one executed:</p>
+<p>The process would be exactly the same as before until <code>SessionController.java</code> executes <code>getToken()</code> method. Now session 'TUTORIAL' already exists, so now we do enter the <em>if</em> branch that we ignored in the previous step:</p>
 <pre><code class="java">if (this.mapSessions.get(sessionName) != null) {
     // Session already exists
     System.out.println(&quot;Existing session &quot; + sessionName);
@@ -828,10 +826,16 @@ session.connect(token, { clientData: nickName })
 
         // Return the response to the client
         return new ResponseEntity&lt;&gt;(responseJson, HttpStatus.OK);
-
-    } catch (Exception e) {
-        // If error generate an error message and return it to client
-        return getErrorResponse(e);
+    } catch (OpenViduJavaClientException e1) {
+        // If internal error generate an error message and return it to client
+        return getErrorResponse(e1);
+    } catch (OpenViduHttpException e2) {
+        if (404 == e2.getStatus()) {
+            // Invalid sessionId (user left unexpectedly). Session object is not valid
+            // anymore. Clean collections and continue as new session
+            this.mapSessions.remove(sessionName);
+            this.mapSessionNamesTokens.remove(sessionName);
+        }
     }
 }
 </code></pre>
