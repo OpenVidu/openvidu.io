@@ -118,7 +118,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L82">OpenVidu.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L88">OpenVidu.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -155,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">active<wbr>Sessions<span class="tsd-signature-symbol">:</span> <a href="session.html" class="tsd-signature-type">Session</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L82">OpenVidu.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L88">OpenVidu.ts:88</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +188,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L99">OpenVidu.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L105">OpenVidu.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +217,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L356">OpenVidu.ts:356</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L373">OpenVidu.ts:373</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -252,7 +252,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L400">OpenVidu.ts:400</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L417">OpenVidu.ts:417</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -277,7 +277,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L264">OpenVidu.ts:264</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L279">OpenVidu.ts:279</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -312,7 +312,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L306">OpenVidu.ts:306</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L321">OpenVidu.ts:321</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -337,7 +337,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L113">OpenVidu.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L119">OpenVidu.ts:119</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -357,10 +357,13 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="recording.html" class="tsd-signature-type">Recording</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A Promise that is resolved to the <a href="recording.html">Recording</a> if it successfully started (the recording can be stopped with guarantees) and rejected with an Error object if not. This Error object has as <code>message</code> property with the following values:</p>
+							<p>A Promise that is resolved to the <a href="recording.html">Recording</a> if it successfully started (the recording can be stopped with guarantees) and rejected with an Error
+							object if not. This Error object has as <code>message</code> property with the following values:</p>
 							<ul>
 								<li><code>404</code>: no session exists for the passed <code>sessionId</code></li>
-								<li><code>400</code>: the session has no connected participants</li>
+								<li><code>406</code>: the session has no connected participants</li>
+								<li><code>422</code>: when passing <a href="../interfaces/recordingproperties.html">RecordingProperties</a>, <code>resolution</code> parameter exceeds acceptable values (for both width and height, min 100px and max 1999px) or trying
+								to start a recording with both <code>hasAudio</code> and <code>hasVideo</code> to false</li>
 								<li><code>409</code>: the session is not configured for using <a href="../enums/mediamode.html#routed">MediaMode.ROUTED</a> or it is already being recorded</li>
 								<li><code>501</code>: OpenVidu Server recording module is disabled (<code>openvidu.recording</code> property set to <code>false</code>)</li>
 							</ul>
@@ -368,7 +371,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L114">OpenVidu.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L120">OpenVidu.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -390,17 +393,19 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The name you want to give to the video file. You can access this same value in your clients on recording events (<code>recordingStarted</code>, <code>recordingStopped</code>)
-											<strong>WARNING: this parameter follows an overwriting policy.</strong> If you name two recordings the same, the newest MP4 file will overwrite the oldest one</p>
+											<p>The name you want to give to the video file. You can access this same value in your clients on recording events (<code>recordingStarted</code>, <code>recordingStopped</code>)</p>
 										</div>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="recording.html" class="tsd-signature-type">Recording</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A Promise that is resolved to the <a href="recording.html">Recording</a> if it successfully started (the recording can be stopped with guarantees) and rejected with an Error object if not. This Error object has as <code>message</code> property with the following values:</p>
+							<p>A Promise that is resolved to the <a href="recording.html">Recording</a> if it successfully started (the recording can be stopped with guarantees) and rejected with an Error
+							object if not. This Error object has as <code>message</code> property with the following values:</p>
 							<ul>
 								<li><code>404</code>: no session exists for the passed <code>sessionId</code></li>
-								<li><code>400</code>: the session has no connected participants</li>
+								<li><code>406</code>: the session has no connected participants</li>
+								<li><code>422</code>: when passing <a href="../interfaces/recordingproperties.html">RecordingProperties</a>, <code>resolution</code> parameter exceeds acceptable values (for both width and height, min 100px and max 1999px) or trying
+								to start a recording with both <code>hasAudio</code> and <code>hasVideo</code> to false</li>
 								<li><code>409</code>: the session is not configured for using <a href="../enums/mediamode.html#routed">MediaMode.ROUTED</a> or it is already being recorded</li>
 								<li><code>501</code>: OpenVidu Server recording module is disabled (<code>openvidu.recording</code> property set to <code>false</code>)</li>
 							</ul>
@@ -408,7 +413,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L115">OpenVidu.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L121">OpenVidu.ts:121</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,10 +436,13 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="recording.html" class="tsd-signature-type">Recording</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A Promise that is resolved to the <a href="recording.html">Recording</a> if it successfully started (the recording can be stopped with guarantees) and rejected with an Error object if not. This Error object has as <code>message</code> property with the following values:</p>
+							<p>A Promise that is resolved to the <a href="recording.html">Recording</a> if it successfully started (the recording can be stopped with guarantees) and rejected with an Error
+							object if not. This Error object has as <code>message</code> property with the following values:</p>
 							<ul>
 								<li><code>404</code>: no session exists for the passed <code>sessionId</code></li>
-								<li><code>400</code>: the session has no connected participants</li>
+								<li><code>406</code>: the session has no connected participants</li>
+								<li><code>422</code>: when passing <a href="../interfaces/recordingproperties.html">RecordingProperties</a>, <code>resolution</code> parameter exceeds acceptable values (for both width and height, min 100px and max 1999px) or trying
+								to start a recording with both <code>hasAudio</code> and <code>hasVideo</code> to false</li>
 								<li><code>409</code>: the session is not configured for using <a href="../enums/mediamode.html#routed">MediaMode.ROUTED</a> or it is already being recorded</li>
 								<li><code>501</code>: OpenVidu Server recording module is disabled (<code>openvidu.recording</code> property set to <code>false</code>)</li>
 							</ul>
@@ -451,7 +459,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/OpenVidu.ts#L212">OpenVidu.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/OpenVidu.ts#L227">OpenVidu.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

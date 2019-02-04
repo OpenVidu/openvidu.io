@@ -99,6 +99,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stream.html#audioactive" class="tsd-kind-icon">audio<wbr>Active</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stream.html#connection" class="tsd-kind-icon">connection</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stream.html#creationtime" class="tsd-kind-icon">creation<wbr>Time</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stream.html#filter" class="tsd-kind-icon">filter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stream.html#framerate" class="tsd-kind-icon">frame<wbr>Rate</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stream.html#hasaudio" class="tsd-kind-icon">has<wbr>Audio</a></li>
@@ -131,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">audio<wbr>Active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L78">OpenVidu/Stream.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L82">OpenVidu/Stream.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -148,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <a href="connection.html" class="tsd-signature-type">Connection</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L46">OpenVidu/Stream.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L50">OpenVidu/Stream.ts:50</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -158,12 +159,31 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="creationtime" class="tsd-anchor"></a>
+					<h3>creation<wbr>Time</h3>
+					<div class="tsd-signature tsd-kind-icon">creation<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L96">OpenVidu/Stream.ts:96</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Time when this stream was created in OpenVidu Server (UTC milliseconds). Depending on the owner of this stream:</p>
+							<ul>
+								<li>Subscriber object: property <code>creationTime</code> is always defined</li>
+								<li>Publisher object: property <code>creationTime</code> is only defined after successful execution of <a href="session.html#publish">Session.publish</a></li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="filter" class="tsd-anchor"></a>
 					<h3>filter</h3>
 					<div class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">:</span> <a href="filter.html" class="tsd-signature-type">Filter</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L114">OpenVidu/Stream.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L127">OpenVidu/Stream.ts:127</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -181,7 +201,7 @@
 					<div class="tsd-signature tsd-kind-icon">frame<wbr>Rate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L52">OpenVidu/Stream.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L56">OpenVidu/Stream.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -197,7 +217,7 @@
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Audio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L62">OpenVidu/Stream.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L66">OpenVidu/Stream.ts:66</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -212,7 +232,7 @@
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Video<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L57">OpenVidu/Stream.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L61">OpenVidu/Stream.ts:61</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -227,12 +247,16 @@
 					<div class="tsd-signature tsd-kind-icon">stream<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L83">OpenVidu/Stream.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L89">OpenVidu/Stream.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Unique identifier of the stream</p>
+							<p>Unique identifier of the stream. If the stream belongs to a...</p>
+							<ul>
+								<li>Subscriber object: property <code>streamId</code> is always defined</li>
+								<li>Publisher object: property <code>streamId</code> is only defined after successful execution of <a href="session.html#publish">Session.publish</a></li>
+							</ul>
 						</div>
 					</div>
 				</section>
@@ -242,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">stream<wbr>Manager<span class="tsd-signature-symbol">:</span> <a href="streammanager.html" class="tsd-signature-type">StreamManager</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L94">OpenVidu/Stream.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L107">OpenVidu/Stream.ts:107</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -257,7 +281,7 @@
 					<div class="tsd-signature tsd-kind-icon">type<wbr>OfVideo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L89">OpenVidu/Stream.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L102">OpenVidu/Stream.ts:102</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -273,7 +297,7 @@
 					<div class="tsd-signature tsd-kind-icon">video<wbr>Active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L70">OpenVidu/Stream.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L74">OpenVidu/Stream.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -290,7 +314,7 @@
 					<div class="tsd-signature tsd-kind-icon">video<wbr>Dimensions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L105">OpenVidu/Stream.ts:105</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L118">OpenVidu/Stream.ts:118</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -329,7 +353,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L269">OpenVidu/Stream.ts:269</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L295">OpenVidu/Stream.ts:295</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -367,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L251">OpenVidu/Stream.ts:251</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L277">OpenVidu/Stream.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -416,7 +440,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L219">OpenVidu/Stream.ts:219</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L245">OpenVidu/Stream.ts:245</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -465,7 +489,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L235">OpenVidu/Stream.ts:235</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L261">OpenVidu/Stream.ts:261</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -514,7 +538,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenVidu/Stream.ts#L306">OpenVidu/Stream.ts:306</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenVidu/Stream.ts#L332">OpenVidu/Stream.ts:332</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -600,6 +624,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="stream.html#connection" class="tsd-kind-icon">connection</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="stream.html#creationtime" class="tsd-kind-icon">creation<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="stream.html#filter" class="tsd-kind-icon">filter</a>

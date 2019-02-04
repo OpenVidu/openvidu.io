@@ -502,45 +502,54 @@ active: documentation
 <p><br></p>
 <h5 id="1-generate-a-token-with-the-filters-the-user-will-be-able-to-apply">1) Generate a token with the filters the user will be able to apply</h5>
 <p>This is a simple way of securing the ability of applying filters from OpenVidu Browser, so that not every user is able to apply any filter at any time.</p>
-<ul>
-<li>
-<p><a href="../../reference-docs/REST-API#post-apitokens">API REST</a>: include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code> (a string array containing the name of the filters the user will be able to apply)</p>
-<pre><code>{
-    "session": "6fpivlanw91qjy6n",
-    "data": "user_data",
-    "role": "PUBLISHER",
-    "kurentoOptions": {
-        "allowedFilters": ["GStreamerFilter", "FaceOverlayFilter"]
+<div class="lang-tabs-container">
+<div class="lang-tabs-header">
+  <button class="lang-tabs-btn" onclick="changeLangTab(event)" style="background-color: #eee; font-weight: bold">REST API</button>
+  <button class="lang-tabs-btn" onclick="changeLangTab(event)">Java</button>
+  <button class="lang-tabs-btn" onclick="changeLangTab(event)">Node</button>
+</div>
+
+<div class="lang-tabs-content" id="rest-api">
+<p>When generating a token with operation <a href="../../reference-docs/REST-API#post-apitokens">POST /api/tokens</a> include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code>: a string array containing the name of the filters the user will be able to apply</p>
+<pre><code class="json">{
+    &quot;session&quot;: &quot;6fpivlanw91qjy6n&quot;,
+    &quot;data&quot;: &quot;user_data&quot;,
+    &quot;role&quot;: &quot;PUBLISHER&quot;,
+    &quot;kurentoOptions&quot;: {
+        &quot;allowedFilters&quot;: [&quot;GStreamerFilter&quot;, &quot;FaceOverlayFilter&quot;]
     }
 }
 </code></pre>
-</li>
-<li>
-<p><a href="../../reference-docs/openvidu-java-client#generate-a-token">openvidu-java-client</a>: call <code>TokenOptions.Builder#kurentoOptions(KurentoOptions)</code> to set <code>allowedFilters</code> value with method <code>KurentoOptions.Builder#allowedFilters(String[])</code></p>
-<pre><code>TokenOptions tokenOptions = new TokenOptions.Builder()
+
+</div>
+<div class="lang-tabs-content" id="java" style="display:none">
+<p>When generating a token, call <code>TokenOptions.Builder#kurentoOptions(KurentoOptions)</code> to set <code>allowedFilters</code> value with method <code>KurentoOptions.Builder#allowedFilters(String[])</code>. This method receives a string array containing the name of the filters the user will be able to apply</p>
+<pre><code class="java">TokenOptions tokenOptions = new TokenOptions.Builder()
     .role(OpenViduRole.PUBLISHER)
-    .data("user_data")
+    .data(&quot;user_data&quot;)
     .kurentoOptions(
         new KurentoOptions.Builder()
-            .allowedFilters(new String[]{"GStreamerFilter", "FaceOverlayFilter"})
+            .allowedFilters(new String[]{&quot;GStreamerFilter&quot;, &quot;FaceOverlayFilter&quot;})
             .build())
     .build();
 String token = session.generateToken(tokenOptions);
 </code></pre>
-</li>
-<li>
-<p><a href="../../reference-docs/openvidu-node-client#generate-a-token">openvidu-node-client</a>: include in <a href="../../../api/openvidu-node-client/interfaces/tokenoptions.html">TokenOptions</a> parameter a <code>kurentoOptions</code> property with <code>allowedFiters</code> array</p>
-<pre><code>var tokenOptions = {
-    role: "PUBLISHER",
-    data: "user_data",
+
+</div>
+<div class="lang-tabs-content" id="node" style="display:none">
+<p>When generating a token, include in <a href="../../../api/openvidu-node-client/interfaces/tokenoptions.html">TokenOptions</a> parameter a <code>kurentoOptions</code> object with <code>allowedFiters</code> property: a string array containing the name of the filters the user will be able to apply</p>
+<pre><code class="javascript">var tokenOptions = {
+    role: &quot;PUBLISHER&quot;,
+    data: &quot;user_data&quot;,
     kurentoOptions: {
-        allowedFilters: ["GStreamerFilter", "FaceOverlayFilter"]
+        allowedFilters: [&quot;GStreamerFilter&quot;, &quot;FaceOverlayFilter&quot;]
     }
 };
 session.generateToken(tokenOptions).then(token =&gt; { ... });
 </code></pre>
-</li>
-</ul>
+
+</div>
+</div>
 <p><br></p>
 <h5 id="2a-initialize-a-publisher-object-configured-for-using-a-filter-from-the-beginning-of-the-publishing">2.A) Initialize a Publisher object configured for using a filter from the beginning of the publishing ...</h5>
 <p>Use <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html">PublisherProperties</a>, specifically property <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#filter">filter</a>:</p>
@@ -687,7 +696,35 @@ publisher.stream.removeFilter()
 <li>Many effects of <strong><a href="https://wiki.gnome.org/Projects/GnomeVideoEffects/Effects">effectv project</a></strong> : funny filters for the video stream like <code>agingtv</code>, <code>dicetv</code>, <code>optv</code>, <code>quarktv</code>, <code>radioactv</code>, <code>revtv</code>, <code>rippletv</code>, <code>shagadelictv</code>, <code>streaktv</code>, <code>vertigotv</code>, <code>warptv</code><br>Example: <code>radioactv</code></li>
 </ul>
 <p>All available GStreamer plugins can be found in <a href="https://gstreamer.freedesktop.org/documentation/plugins.html">GStreamer site</a>.</p>
-<p><br></p> 
+<p><br></p>
+<script>
+function changeLangTab(event) {
+  var parent = event.target.parentNode.parentNode;
+  var txt = event.target.textContent || event.target.innerText;
+  var txt = txt.replace(/\s/g, "-").toLowerCase();
+  for (var i = 0; i < parent.children.length; i++) {
+    var child = parent.children[i];
+    // Change appearance of language buttons
+    if (child.classList.contains("lang-tabs-header")) {
+        for (var j = 0; j < child.children.length; j++) {
+            var btn = child.children[j];
+            if (btn.classList.contains("lang-tabs-btn")) {
+                btn.style.backgroundColor = btn === event.target ? '#eee' : '#f9f9f9';
+                btn.style.fontWeight = btn === event.target ? 'bold' : 'normal';
+            }
+        }
+    }
+    // Change visibility of language content
+    if (child.classList.contains("lang-tabs-content")) {
+        if (child.id === txt) {
+            child.style.display = "block";
+        } else {
+            child.style.display = "none";
+        }
+    }
+  }
+}
+</script> 
 						</div>
 					</div> <footer>
 <hr>

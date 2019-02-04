@@ -89,6 +89,7 @@
 						<section class="tsd-index-section ">
 							<h3>Enumerations</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum tsd-parent-kind-class tsd-is-static"><a href="../enums/recording.outputmode.html" class="tsd-kind-icon">Output<wbr>Mode</a></li>
 								<li class="tsd-kind-enum tsd-parent-kind-class tsd-is-static"><a href="../enums/recording.status.html" class="tsd-kind-icon">Status</a></li>
 							</ul>
 						</section>
@@ -97,11 +98,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#duration" class="tsd-kind-icon">duration</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#hasaudio" class="tsd-kind-icon">has<wbr>Audio</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#hasvideo" class="tsd-kind-icon">has<wbr>Video</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#recordinglayout" class="tsd-kind-icon">recording<wbr>Layout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#properties" class="tsd-kind-icon">properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#sessionid" class="tsd-kind-icon">session<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#size" class="tsd-kind-icon">size</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recording.html#status-1" class="tsd-kind-icon">status</a></li>
@@ -119,7 +117,7 @@
 					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L38">Recording.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L39">Recording.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -134,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L48">Recording.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L49">Recording.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -144,42 +142,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="hasaudio" class="tsd-anchor"></a>
-					<h3>has<wbr>Audio</h3>
-					<div class="tsd-signature tsd-kind-icon">has<wbr>Audio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L58">Recording.ts:58</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p><code>true</code> if the recording has an audio track, <code>false</code> otherwise (currently fixed to true)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="hasvideo" class="tsd-anchor"></a>
-					<h3>has<wbr>Video</h3>
-					<div class="tsd-signature tsd-kind-icon">has<wbr>Video<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L63">Recording.ts:63</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p><code>true</code> if the recording has a video track, <code>false</code> otherwise (currently fixed to true)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L28">Recording.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L29">Recording.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -189,34 +157,17 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="properties" class="tsd-anchor"></a>
+					<h3>properties</h3>
+					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="../interfaces/recordingproperties.html" class="tsd-signature-type">RecordingProperties</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L75">Recording.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L64">Recording.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Name of the Recording. The video file will be named after this property.
-								You can access this same value in your clients on recording events
-							(<code>recordingStarted</code>, <code>recordingStopped</code>)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="recordinglayout" class="tsd-anchor"></a>
-					<h3>recording<wbr>Layout</h3>
-					<div class="tsd-signature tsd-kind-icon">recording<wbr>Layout<span class="tsd-signature-symbol">:</span> <a href="../enums/recordinglayout.html" class="tsd-signature-type">RecordingLayout</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L80">Recording.ts:80</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The layout used in this Recording</p>
+							<p>Technical properties of the recorded file</p>
 						</div>
 					</div>
 				</section>
@@ -226,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L33">Recording.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L34">Recording.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -241,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L43">Recording.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L44">Recording.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <a href="../enums/recording.status.html" class="tsd-signature-type">Status</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L68">Recording.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L59">Recording.ts:59</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -271,7 +222,7 @@
 					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-node-client/src/Recording.ts#L53">Recording.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L54">Recording.ts:54</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -319,6 +270,9 @@
 						<a href="recording.html" class="tsd-kind-icon">Recording</a>
 						<ul>
 							<li class=" tsd-kind-enum tsd-parent-kind-class tsd-is-static">
+								<a href="../enums/recording.outputmode.html" class="tsd-kind-icon">Output<wbr>Mode</a>
+							</li>
+							<li class=" tsd-kind-enum tsd-parent-kind-class tsd-is-static">
 								<a href="../enums/recording.status.html" class="tsd-kind-icon">Status</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -328,19 +282,10 @@
 								<a href="recording.html#duration" class="tsd-kind-icon">duration</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="recording.html#hasaudio" class="tsd-kind-icon">has<wbr>Audio</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="recording.html#hasvideo" class="tsd-kind-icon">has<wbr>Video</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="recording.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="recording.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="recording.html#recordinglayout" class="tsd-kind-icon">recording<wbr>Layout</a>
+								<a href="recording.html#properties" class="tsd-kind-icon">properties</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="recording.html#sessionid" class="tsd-kind-icon">session<wbr>Id</a>

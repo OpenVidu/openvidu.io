@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SignalOptions | OpenVidu Browser</title>
+	<title>OutputMode | OpenVidu Node Client</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a style="position: absolute" href="/docs/reference-docs/openvidu-browser/" class="title">
+					<a style="position: absolute" href="/docs/reference-docs/openvidu-node-client/" class="title">
 						<img class="logo-small" style="height: 26px; margin-top: 7px" src="/img/logos/openvidu_vert_grey_bg_transp_cropped.png">
 					</a>
 				</div>
@@ -57,10 +57,13 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="signaloptions.html">SignalOptions</a>
+					<a href="../classes/recording.html">Recording</a>
+				</li>
+				<li>
+					<a href="recording.outputmode.html">OutputMode</a>
 				</li>
 			</ul>
-			<h1>Interface SignalOptions</h1>
+			<h1>Enumeration OutputMode</h1>
 		</div>
 	</div>
 </header>
@@ -70,79 +73,53 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>See <a href="../classes/session.html#signal">Session.signal</a></p>
+						<p>See <a href="../interfaces/recordingproperties.html#outputmode">RecordingProperties.outputMode</a></p>
 					</div>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">SignalOptions</span>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signaloptions.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signaloptions.html#to" class="tsd-kind-icon">to</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signaloptions.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.outputmode.html#composed" class="tsd-kind-icon">COMPOSED</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.outputmode.html#individual" class="tsd-kind-icon">INDIVIDUAL</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="data" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="composed" class="tsd-anchor"></a>
+					<h3>COMPOSED</h3>
+					<div class="tsd-signature tsd-kind-icon">COMPOSED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;COMPOSED&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Interfaces/Public/SignalOptions.ts#L28">OpenViduInternal/Interfaces/Public/SignalOptions.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L139">Recording.ts:139</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The actual message of the signal.</p>
+							<p>Record all streams in a grid layout in a single archive</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="to" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> to</h3>
-					<div class="tsd-signature tsd-kind-icon">to<span class="tsd-signature-symbol">:</span> <a href="../classes/connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">[]</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="individual" class="tsd-anchor"></a>
+					<h3>INDIVIDUAL</h3>
+					<div class="tsd-signature tsd-kind-icon">INDIVIDUAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;INDIVIDUAL&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Interfaces/Public/SignalOptions.ts#L34">OpenViduInternal/Interfaces/Public/SignalOptions.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-node-client/src/Recording.ts#L144">Recording.ts:144</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The participants to whom to send the signal. They will only receive it if they are subscribed to
-							event <code>Session.on(&#39;signal&#39;)</code>. If empty or undefined, the signal will be send to all participants.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Interfaces/Public/SignalOptions.ts#L40">OpenViduInternal/Interfaces/Public/SignalOptions.ts:40</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type of the signal. Participants subscribed to event <code>Session.on(&#39;signal:type&#39;)</code> will
-							receive it. Participants subscribed to <code>Session.on(&#39;signal&#39;)</code> will receive all signals.</p>
+							<p>Record each stream individually</p>
 						</div>
 					</div>
 				</section>
@@ -159,115 +136,84 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
-						<a href="../enums/localrecorderstate.html" class="tsd-kind-icon">Local<wbr>Recorder<wbr>State</a>
+						<a href="mediamode.html" class="tsd-kind-icon">Media<wbr>Mode</a>
 					</li>
 					<li class=" tsd-kind-enum">
-						<a href="../enums/openviduerrorname.html" class="tsd-kind-icon">Open<wbr>Vidu<wbr>Error<wbr>Name</a>
+						<a href="openvidurole.html" class="tsd-kind-icon">Open<wbr>Vidu<wbr>Role</a>
 					</li>
 					<li class=" tsd-kind-enum">
-						<a href="../enums/videoinsertmode.html" class="tsd-kind-icon">Video<wbr>Insert<wbr>Mode</a>
+						<a href="recordinglayout.html" class="tsd-kind-icon">Recording<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="recordingmode.html" class="tsd-kind-icon">Recording<wbr>Mode</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/connection.html" class="tsd-kind-icon">Connection</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/connectionevent.html" class="tsd-kind-icon">Connection<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/event.html" class="tsd-kind-icon">Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/filter.html" class="tsd-kind-icon">Filter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/filterevent.html" class="tsd-kind-icon">Filter<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/localrecorder.html" class="tsd-kind-icon">Local<wbr>Recorder</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="../classes/openvidu.html" class="tsd-kind-icon">Open<wbr>Vidu</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/openviduerror.html" class="tsd-kind-icon">Open<wbr>Vidu<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/publisher.html" class="tsd-kind-icon">Publisher</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/publisherspeakingevent.html" class="tsd-kind-icon">Publisher<wbr>Speaking<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/recordingevent.html" class="tsd-kind-icon">Recording<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/session.html" class="tsd-kind-icon">Session</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/sessiondisconnectedevent.html" class="tsd-kind-icon">Session<wbr>Disconnected<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/signalevent.html" class="tsd-kind-icon">Signal<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/stream.html" class="tsd-kind-icon">Stream</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/streamevent.html" class="tsd-kind-icon">Stream<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/streammanager.html" class="tsd-kind-icon">Stream<wbr>Manager</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/streammanagerevent.html" class="tsd-kind-icon">Stream<wbr>Manager<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/streampropertychangedevent.html" class="tsd-kind-icon">Stream<wbr>Property<wbr>Changed<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/subscriber.html" class="tsd-kind-icon">Subscriber</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/videoelementevent.html" class="tsd-kind-icon">Video<wbr>Element<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="capabilities.html" class="tsd-kind-icon">Capabilities</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="device.html" class="tsd-kind-icon">Device</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="eventdispatcher.html" class="tsd-kind-icon">Event<wbr>Dispatcher</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="openviduadvancedconfiguration.html" class="tsd-kind-icon">Open<wbr>Vidu<wbr>Advanced<wbr>Configuration</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="publisherproperties.html" class="tsd-kind-icon">Publisher<wbr>Properties</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="signaloptions.html" class="tsd-kind-icon">Signal<wbr>Options</a>
+					<li class="current tsd-kind-class">
+						<a href="../classes/recording.html" class="tsd-kind-icon">Recording</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="signaloptions.html#data" class="tsd-kind-icon">data</a>
+							<li class="current tsd-kind-enum tsd-parent-kind-class tsd-is-static">
+								<a href="recording.outputmode.html" class="tsd-kind-icon">Output<wbr>Mode</a>
+								<ul>
+									<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+										<a href="recording.outputmode.html#composed" class="tsd-kind-icon">COMPOSED</a>
+									</li>
+									<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+										<a href="recording.outputmode.html#individual" class="tsd-kind-icon">INDIVIDUAL</a>
+									</li>
+								</ul>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="signaloptions.html#to" class="tsd-kind-icon">to</a>
+							<li class=" tsd-kind-enum tsd-parent-kind-class tsd-is-static">
+								<a href="recording.status.html" class="tsd-kind-icon">Status</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="signaloptions.html#type" class="tsd-kind-icon">type</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#duration" class="tsd-kind-icon">duration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#properties" class="tsd-kind-icon">properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#sessionid" class="tsd-kind-icon">session<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#size" class="tsd-kind-icon">size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#status-1" class="tsd-kind-icon">status</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/recording.html#url" class="tsd-kind-icon">url</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="streammanagervideo.html" class="tsd-kind-icon">Stream<wbr>Manager<wbr>Video</a>
+					<li class=" tsd-kind-class">
+						<a href="../classes/session.html" class="tsd-kind-icon">Session</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="subscriberproperties.html" class="tsd-kind-icon">Subscriber<wbr>Properties</a>
+						<a href="../interfaces/recordingproperties.html" class="tsd-kind-icon">Recording<wbr>Properties</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/sessionproperties.html" class="tsd-kind-icon">Session<wbr>Properties</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/tokenoptions.html" class="tsd-kind-icon">Token<wbr>Options</a>
 					</li>
 				</ul>
 			</nav>

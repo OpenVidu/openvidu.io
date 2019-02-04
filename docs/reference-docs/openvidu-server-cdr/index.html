@@ -842,19 +842,34 @@ active: documentation
 <td>A string with the recording unique identifier</td>
 </tr>
 <tr>
-<td><code>recordingLayout</code></td>
-<td>The type of layout used in the recording</td>
-<td>A <a href="../openvidu-java-client/#recordinglayout"><code>RecordingLayout</code></a> value (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+<td><code>name</code></td>
+<td>Name given to the recording file</td>
+<td>A string with the recording name</td>
+</tr>
+<tr>
+<td><code>outputMode</code></td>
+<td>Output mode of the recording (<code>COMPOSED</code> or <code>INDIVIDUAL</code>)</td>
+<td>A string with the recording output mode</td>
 </tr>
 <tr>
 <td><code>hasAudio</code></td>
 <td>Wheter the recording file has audio or not</td>
-<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+<td>[<code>true</code>,<code>false</code>]</td>
 </tr>
 <tr>
 <td><code>hasVideo</code></td>
 <td>Wheter the recording file has video or not</td>
-<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>recordingLayout</code></td>
+<td>The type of layout used in the recording. Only defined if <code>outputMode</code> is <code>COMPOSED</code> and <code>hasVideo</code> is true</td>
+<td>A <a href="../../../api/openvidu-java-client/io/openvidu/java/client/RecordingLayout.html"><code>RecordingLayout</code></a> value (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+</tr>
+<tr>
+<td><code>resolution</code></td>
+<td>Resolution of the recorded file. Only defined if <code>outputMode</code> is <code>COMPOSED</code> and <code>hasVideo</code> is true</td>
+<td>A string with the width and height of the video file in pixels. e.g. <code>"1280x720"</code></td>
 </tr>
 <tr>
 <td><code>size</code></td>
@@ -869,7 +884,7 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;recordingStarted&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481536707,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;TestSession&quot;,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;hasAudio&quot;:true,&quot;hasVideo&quot;:true,&quot;size&quot;:0,&quot;duration&quot;:0.0}}
+<pre><code class="json">{&quot;recordingStarted&quot;:{&quot;sessionId&quot;:&quot;TestSession&quot;,&quot;timestamp&quot;:1549015630563,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;MyRecording&quot;,&quot;outputMode&quot;:&quot;COMPOSED&quot;,&quot;hasAudio&quot;:false,&quot;hasVideo&quot;:true,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;resolution&quot;:&quot;1920x1080&quot;,&quot;size&quot;:0,&quot;duration&quot;:0.0}}
 </code></pre>
 
 <hr>
@@ -896,24 +911,44 @@ active: documentation
 <td>UTC milliseconds</td>
 </tr>
 <tr>
+<td><code>startTime</code></td>
+<td>Time when the stopped recording started</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
 <td><code>id</code></td>
 <td>Unique identifier of the recording</td>
 <td>A string with the recording unique identifier</td>
 </tr>
 <tr>
-<td><code>recordingLayout</code></td>
-<td>The type of layout used in the recording</td>
-<td>A <a href="../../../api/openvidu-node-client/enums/recordinglayout.html"><code>RecordingLayout</code></a> value (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+<td><code>name</code></td>
+<td>Name given to the recording file</td>
+<td>A string with the recording name</td>
+</tr>
+<tr>
+<td><code>outputMode</code></td>
+<td>Output mode of the recording (<code>COMPOSED</code> or <code>INDIVIDUAL</code>)</td>
+<td>A string with the recording output mode</td>
 </tr>
 <tr>
 <td><code>hasAudio</code></td>
 <td>Wheter the recording file has audio or not</td>
-<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+<td>[<code>true</code>,<code>false</code>]</td>
 </tr>
 <tr>
 <td><code>hasVideo</code></td>
 <td>Wheter the recording file has video or not</td>
-<td>[<code>true</code>,<code>false</code>] (current version always <code>true</code>)</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>recordingLayout</code></td>
+<td>The type of layout used in the recording. Only defined if <code>outputMode</code> is <code>COMPOSED</code> and <code>hasVideo</code> is true</td>
+<td>A <a href="../../../api/openvidu-java-client/io/openvidu/java/client/RecordingLayout.html"><code>RecordingLayout</code></a> value (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+</tr>
+<tr>
+<td><code>resolution</code></td>
+<td>Resolution of the recorded file. Only defined if <code>outputMode</code> is <code>COMPOSED</code> and <code>hasVideo</code> is true</td>
+<td>A string with the width and height of the video file in pixels. e.g. <code>"1280x720"</code></td>
 </tr>
 <tr>
 <td><code>size</code></td>
@@ -928,12 +963,12 @@ active: documentation
 <tr>
 <td><code>reason</code></td>
 <td>Why the recording stopped</td>
-<td>[<code>"recordingStoppedByServer"</code>,<br><code>"lastParticipantLeft"</code>,<br><code>"sessionClosedByServer"</code>,<br><code>"openviduServerStopped"</code>]</td>
+<td>[<code>"recordingStoppedByServer"</code>,<br><code>"lastParticipantLeft"</code>,<br><code>"sessionClosedByServer"</code>,<br><code>"automaticStop"</code>,<br><code>"openviduServerStopped"</code>]</td>
 </tr>
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="json">{&quot;recordingStopped&quot;:{&quot;sessionId&quot;:&quot;fds4e07mdug1ga3h&quot;,&quot;timestamp&quot;:1538481568974,&quot;startTime&quot;:1538481536707,&quot;duration&quot;:28.72,&quot;reason&quot;:&quot;recordingStoppedByServer&quot;,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;TestSession&quot;,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;hasAudio&quot;:false,&quot;hasVideo&quot;:false,&quot;size&quot;:6084390}}
+<pre><code class="json">{&quot;recordingStopped&quot;:{&quot;sessionId&quot;:&quot;TestSession&quot;,&quot;timestamp&quot;:1549015640859,&quot;startTime&quot;:1549015630563,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;MyRecording&quot;,&quot;outputMode&quot;:&quot;COMPOSED&quot;,&quot;hasAudio&quot;:false,&quot;hasVideo&quot;:true,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;resolution&quot;:&quot;1920x1080&quot;,&quot;size&quot;:617509,&quot;duration&quot;:5.967,&quot;reason&quot;:&quot;recordingStoppedByServer&quot;}}
 </code></pre>
 
 <p><br></p> 

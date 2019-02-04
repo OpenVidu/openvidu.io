@@ -569,7 +569,11 @@ sudo apt-get update
 sudo apt-get -y install kurento-media-server
 </code></pre>
 
-<p>Start and stop the service</p>
+<p>Change the default user running KMS to your current user with this line:</p>
+<pre><code class="bash">sudo sed -i &quot;s/DAEMON_USER=\&quot;kurento\&quot;/DAEMON_USER=\&quot;${USER}\&quot;/g&quot; /etc/default/kurento-media-server
+</code></pre>
+
+<p>To start and stop KMS service:</p>
 <pre><code class="bash">sudo service kurento-media-server start
 sudo service kurento-media-server stop
 </code></pre>

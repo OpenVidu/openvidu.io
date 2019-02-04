@@ -472,10 +472,14 @@ active: documentation
 <h2 id="installation-process">Installation process</h2>
 <p>Only <strong>Ubuntu xenial 16.04</strong> is supported.</p>
 <h4 id="1-install-kms">1. Install KMS</h4>
-<pre><code class="console">sudo echo &quot;deb http://ubuntu.openvidu.io/6.9.0 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+<pre><code class="bash">sudo echo &quot;deb http://ubuntu.openvidu.io/6.9.0 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
 sudo apt-get update
 sudo apt-get -y install kurento-media-server
+</code></pre>
+
+<p>Change the default user running KMS to the current one with this line:</p>
+<pre><code class="bash">sudo sed -i &quot;s/DAEMON_USER=\&quot;kurento\&quot;/DAEMON_USER=\&quot;${USER}\&quot;/g&quot; /etc/default/kurento-media-server
 </code></pre>
 
 <h4 id="2-install-coturn">2. Install COTURN</h4>
@@ -519,20 +523,23 @@ sudo service kurento-media-server restart
 </code></pre>
 
 <h4 id="8-init-openvidu-server-jar-executable">8. Init Openvidu Server JAR executable</h4>
-<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ openvidu-server-{VERSION}.jar &amp;
+<pre><code class="console">java -jar -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://YOUR_MACHINE_PUBLIC_IP:4443/ openvidu-server-{VERSION}.jar
 </code></pre>
 
 <p>Being <code>YOUR_SECRET</code> the password you want for securing your OpenVidu Server. This will be needed for connecting to OpenVidu Server dashboard and for consuming OpenVidu Server REST API. Keep it safe!</p>
+<p><br></p>
 <blockquote>
-<p>You will need Java 8 to run OpenVidu Server:</p>
+<p><strong>1)</strong> You will need Java 8 to run OpenVidu Server:</p>
 <p><code>sudo apt-get install -y openjdk-8-jre</code></br></p>
-<p>You can get any <a href="../../releases/">version</a> of OpenVidu Server running:</p>
+<p><strong>2)</strong> You can get any <a href="../../releases/">version</a> of OpenVidu Server running:</p>
 <p><code>wget https://github.com/OpenVidu/openvidu/releases/download/v{VERSION}/openvidu-server-{VERSION}.jar</code></br></p>
+<p><strong>3)</strong> If you want to enable recording module of OpenVidu Server to record your sessions, you must install <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">Docker CE</a> and add <a href="../../advanced-features/recording/#2-launch-openvidu-server-with-new-environment-variables">some more system properties</a> to the <code>java -jar</code> command. Check out <a href="../../advanced-features/recording">Recording</a> section to learn more</p>
 </blockquote>
-<p>Go to <a href="#using-your-own-certificate">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one (which will launch a security warning on the user's browser).</p>
+<p><br>
+Go to <a href="#using-your-own-certificate">Using your own certificate</a> to add your certificate to the JAR instead of using the self-signed default one (which will launch a security warning on the user's browser).</p>
 <h4 id="9-finally-check-your-server">9. Finally check your server</h4>
 <p>You can connect to OpenVidu dashboard through <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:4443</code> (authorization is <code>OPENVIDUAPP:YOUR_SECRET</code>). Make sure you allow TCP and UDP inbound connections to your machine!</p>
-<p>To connect your application to OpenVidu Server, use the same URL <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:4443</code>. To learn more, this scenario is exactly the same as portrayed <a href="../../deployment/deploying-aws#connecting-your-external-app-to-cloudformation-openvidu-server">here</a>.</p>
+<p>To connect your application to OpenVidu Server, use the same URL <code>https://YOUR_OPENVIDU_SERVER_MACHINE_PUBLIC_IP:4443</code>. To learn more, check out <a href="../../deployment/deploying-app/#connecting-your-external-app-to-openvidu">Connecting your app to OpenVidu</a>.</p>
 <hr />
 <h2 id="server-network-requirements">Server network requirements</h2>
 <p>In order for this deployment to work, you will have to meet 2 sets of needs in the machine hosting your services:</p>
@@ -563,7 +570,8 @@ openssl pkcs12 -export -name YOUR_KEYSTORE_ALIAS -in YOUR_CRT.crt -inkey YOUR_PR
 keytool -importkeystore -srckeystore p12keystore.p12 -srcstoretype pkcs12 -deststoretype pkcs12 -alias YOUR_KEYSTORE_ALIAS -destkeystore YOUR_KEYSTORE_NAME.jks
 </code></pre>
 
-<p>In order to use your JKS, just give the proper value to the following OpenVidu Server properties on launch:</p>
+<p><br>
+In order to use your JKS, just give the proper value to the following OpenVidu Server properties on launch:</p>
 <ul>
 <li><code>server.ssl.key-store</code>=/PATH/TO/YOUR_KEYSTORE_NAME.jks</li>
 <li><code>server.ssl.key-store-password</code>=value_provided_when_generating_jks</li>
@@ -574,6 +582,7 @@ keytool -importkeystore -srckeystore p12keystore.p12 -srcstoretype pkcs12 -dests
 <pre><code class="bash">java -jar -Dopenvidu.secret=MY_SECRET -Dserver.ssl.key-store=/opt/openvidu/my_keystore.jks -Dserver.ssl.key-store-password=MY_KEYSTORE_SECRET -Dserver.ssl.key-alias=my_cert_alias openvidu-server-2.5.0.jar
 </code></pre>
 
+<p><br></p>
 <blockquote>
 <p>Remember we provide a super simple way of using a <strong>FREE</strong>, <strong>AUTOMATIC</strong> and 100% <strong>VALID</strong> certificate thanks to Let's Encrypt technology: when deploying your CloudFormation Stack, just fill in the form fields with the values from the column <strong><a href="../../deployment/deploying-aws#4-complete-the-configuration-fields">LET'S ENCRYPT CERTIFICATE</a></strong></p>
 </blockquote>

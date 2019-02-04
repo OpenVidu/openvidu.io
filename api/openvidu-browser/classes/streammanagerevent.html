@@ -72,7 +72,11 @@
 					<div class="lead">
 						<p>Defines the following events:</p>
 						<ul>
-							<li><code>streamPlaying</code>: dispatched by <a href="streammanager.html">StreamManager</a> (<a href="publisher.html">Publisher</a> and <a href="subscriber.html">Subscriber</a>)</li>
+							<li><code>streamPlaying</code>: dispatched by <a href="streammanager.html">StreamManager</a> (<a href="publisher.html">Publisher</a> and <a href="subscriber.html">Subscriber</a>) whenever its media stream starts playing (one of its videos has media
+							and has begun to play)</li>
+							<li><code>streamAudioVolumeChange</code>: dispatched by <a href="streammanager.html">StreamManager</a> (<a href="publisher.html">Publisher</a> and <a href="subscriber.html">Subscriber</a>) when the volume of its Stream&#39;s audio track
+								changes. Only applies if <a href="stream.html#hasaudio">Stream.hasAudio</a> is <code>true</code>. The frequency this event is fired with is defined by property <code>interval</code> of
+							<a href="../interfaces/openviduadvancedconfiguration.html#publisherspeakingeventsoptions">OpenViduAdvancedConfiguration.publisherSpeakingEventsOptions</a> (default 50ms)</li>
 						</ul>
 					</div>
 				</div>
@@ -94,12 +98,13 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#cancelable" class="tsd-kind-icon">cancelable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#target" class="tsd-kind-icon">target</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="streammanagerevent.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="streammanagerevent.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
@@ -112,7 +117,7 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="cancelable" class="tsd-anchor"></a>
@@ -121,7 +126,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#cancelable">cancelable</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L28">OpenViduInternal/Events/Event.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L28">OpenViduInternal/Events/Event.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -137,7 +142,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#target">target</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L33">OpenViduInternal/Events/Event.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L33">OpenViduInternal/Events/Event.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,13 +158,33 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#type">type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L38">OpenViduInternal/Events/Event.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L38">OpenViduInternal/Events/Event.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The type of event. This is the same string you pass as first parameter when calling method <code>on()</code> of any object implementing <a href="../interfaces/eventdispatcher.html">EventDispatcher</a> interface</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/StreamManagerEvent.ts#L38">OpenViduInternal/Events/StreamManagerEvent.ts:38</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>For <code>streamAudioVolumeChange</code> event:</p>
+							<ul>
+								<li><code>{newValue: number, oldValue: number}</code>: new and old audio volume values. These values are between -100 (silence) and 0 (loudest possible volume).
+								They are not exact and depend on how the browser is managing the audio track, but -100 and 0 can be taken as limit values.</li>
+							</ul>
+						</div>
+						<p>For <code>streamPlaying</code> event undefined</p>
 					</div>
 				</section>
 			</section>
@@ -176,7 +201,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#isdefaultprevented">isDefaultPrevented</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L54">OpenViduInternal/Events/Event.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L54">OpenViduInternal/Events/Event.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +224,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#preventdefault">preventDefault</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/6e7d345/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L72">OpenViduInternal/Events/Event.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L72">OpenViduInternal/Events/Event.ts:72</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -311,6 +336,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="streammanagerevent.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="streammanagerevent.html#value" class="tsd-kind-icon">value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="streammanagerevent.html#isdefaultprevented" class="tsd-kind-icon">is<wbr>Default<wbr>Prevented</a>
