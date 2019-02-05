@@ -510,7 +510,7 @@ active: documentation
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When generating a token with operation <a href="../../reference-docs/REST-API#post-apitokens">POST /api/tokens</a> include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code>: a string array containing the name of the filters the user will be able to apply</p>
+<p>When generating a token with operation <a href="../../reference-docs/REST-API#post-apitokens" target="_blank">POST /api/tokens</a> include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code>: a string array containing the name of the filters the user will be able to apply</p>
 <pre><code class="json">{
     &quot;session&quot;: &quot;6fpivlanw91qjy6n&quot;,
     &quot;data&quot;: &quot;user_data&quot;,
@@ -537,7 +537,7 @@ String token = session.generateToken(tokenOptions);
 
 </div>
 <div class="lang-tabs-content" id="node" style="display:none">
-<p>When generating a token, include in <a href="../../../api/openvidu-node-client/interfaces/tokenoptions.html">TokenOptions</a> parameter a <code>kurentoOptions</code> object with <code>allowedFiters</code> property: a string array containing the name of the filters the user will be able to apply</p>
+<p>When generating a token, include in <a href="../../../api/openvidu-node-client/interfaces/tokenoptions.html" target="_blank">TokenOptions</a> parameter a <code>kurentoOptions</code> object with <code>allowedFiters</code> property: a string array containing the name of the filters the user will be able to apply</p>
 <pre><code class="javascript">var tokenOptions = {
     role: &quot;PUBLISHER&quot;,
     data: &quot;user_data&quot;,
@@ -552,7 +552,7 @@ session.generateToken(tokenOptions).then(token =&gt; { ... });
 </div>
 <p><br></p>
 <h5 id="2a-initialize-a-publisher-object-configured-for-using-a-filter-from-the-beginning-of-the-publishing">2.A) Initialize a Publisher object configured for using a filter from the beginning of the publishing ...</h5>
-<p>Use <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html">PublisherProperties</a>, specifically property <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#filter">filter</a>:</p>
+<p>Use <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a>, specifically property <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#filter" target="_blank">filter</a>:</p>
 <pre><code class="javascript">var OV = new OpenVidu();
 var publisher = OV.initPublisher(
     targetElement,
@@ -692,10 +692,10 @@ publisher.stream.removeFilter()
 <li><strong>clockoverlay</strong>: embed a clock with the local time (in OpenVidu Server)<br>Example: <code>clockoverlay valignment=bottom halignment=right shaded-background=true font-desc="Sans, 20"</code><div style="margin-bottom: 7px"></div></li>
 <li><strong>audioecho</strong>: add reverb to the audio stream<br>Example: <code>audioecho delay=50000000 intensity=0.6 feedback=0.4</code><div style="margin-bottom: 7px"></div></li>
 <li><strong>audioamplify</strong>: amplifies an audio stream by a given factor<br>Example: <code>audioamplify amplification=1.5 clipping-method=wrap-positive</code><div style="margin-bottom: 7px"></div></li>
-<li>Other audio filters: check them out in <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-plugin-audiofx.html">GStreamer site</a><div style="margin-bottom: 7px"></div></li>
-<li>Many effects of <strong><a href="https://wiki.gnome.org/Projects/GnomeVideoEffects/Effects">effectv project</a></strong> : funny filters for the video stream like <code>agingtv</code>, <code>dicetv</code>, <code>optv</code>, <code>quarktv</code>, <code>radioactv</code>, <code>revtv</code>, <code>rippletv</code>, <code>shagadelictv</code>, <code>streaktv</code>, <code>vertigotv</code>, <code>warptv</code><br>Example: <code>radioactv</code></li>
+<li>Other audio filters: check them out in <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-plugin-audiofx.html" target="_blank">GStreamer site</a><div style="margin-bottom: 7px"></div></li>
+<li>Many effects of <strong><a href="https://wiki.gnome.org/Projects/GnomeVideoEffects/Effects" target="_blank">effectv project</a></strong> : funny filters for the video stream like <code>agingtv</code>, <code>dicetv</code>, <code>optv</code>, <code>quarktv</code>, <code>radioactv</code>, <code>revtv</code>, <code>rippletv</code>, <code>shagadelictv</code>, <code>streaktv</code>, <code>vertigotv</code>, <code>warptv</code><br>Example: <code>radioactv</code></li>
 </ul>
-<p>All available GStreamer plugins can be found in <a href="https://gstreamer.freedesktop.org/documentation/plugins.html">GStreamer site</a>.</p>
+<p>All available GStreamer plugins can be found in <a href="https://gstreamer.freedesktop.org/documentation/plugins.html" target="_blank">GStreamer site</a>.</p>
 <p><br></p>
 <script>
 function changeLangTab(event) {

@@ -475,10 +475,10 @@ session.publish(publisher);
 
 <ul>
 <li>
-<p><code>OpenVidu.initPublisher</code> method will insert into DOM a new HTML video element inside the element <code>targetElement</code>, showing your camera. This target element can be an <code>HTMLElement</code> or its <code>id</code> attribute, and you can also indicate how to insert the video according to it (see <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#insertmode">PublisherProperties.insertMode</a>). You can then publish it to the session whenever you want (perhaps you want the user to confirm that the camera is working well before publishing it).</p>
+<p><code>OpenVidu.initPublisher</code> method will insert into DOM a new HTML video element inside the element <code>targetElement</code>, showing your camera. This target element can be an <code>HTMLElement</code> or its <code>id</code> attribute, and you can also indicate how to insert the video according to it (see <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#insertmode" target="_blank">PublisherProperties.insertMode</a>). You can then publish it to the session whenever you want (perhaps you want the user to confirm that the camera is working well before publishing it).</p>
 </li>
 <li>
-<p><code>Session.publish</code> method will make <a href="../../../api/openvidu-browser/classes/publisher.html">Publisher</a> object trigger <code>streamCreated</code> event in the local user that is publishing and will make <a href="../../../api/openvidu-browser/classes/session.html">Session</a> object trigger <code>streamCreated</code> event in every other remote user connected to the session. <br><br></p>
+<p><code>Session.publish</code> method will make <a href="../../../api/openvidu-browser/classes/publisher.html" target="_blank">Publisher</a> object trigger <code>streamCreated</code> event in the local user that is publishing and will make <a href="../../../api/openvidu-browser/classes/session.html" target="_blank">Session</a> object trigger <code>streamCreated</code> event in every other remote user connected to the session. <br><br></p>
 </li>
 </ul>
 <p>You can add two more parameters to <code>initPublisher</code> method: an object with properties about your publisher stream and a callback function to be executed just after the method finishes and before the publisher object dispatches <code>accessAllowed</code> or <code>accessDenied</code> event:</p>
@@ -517,7 +517,7 @@ session.publish(newPublisher);
 
 <p><br/></p>
 <blockquote>
-<p><strong>NOTE</strong>: only users with Role <code>PUBLISHER</code> or <code>MODERATOR</code> can call <code>Session.publish</code> method. You can check <a href="../../../api/openvidu-node-client/enums/openvidurole.html">OpenViduRole</a> section of OpenVidu Node Client for a complete description</p>
+<p><strong>NOTE</strong>: only users with Role <code>PUBLISHER</code> or <code>MODERATOR</code> can call <code>Session.publish</code> method. You can check <a href="../../../api/openvidu-node-client/enums/openvidurole.html" target="_blank">OpenViduRole</a> section of OpenVidu Node Client for a complete description</p>
 </blockquote> 
 						</div>
 					</div> <footer>

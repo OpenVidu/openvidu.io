@@ -466,7 +466,7 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="speech-detection">Speech detection</h1>
-<p>A pretty common requested event is one that allows you to detect when a publisher starts and stops speaking. OpenVidu offers this ability through <a href="../../../api/openvidu-browser/classes/publisherspeakingevent.html">PublisherSpeakingEvents</a> that can be configured for <a href="../../../api/openvidu-browser/classes/session.html">Session</a> objects:</p>
+<p>A pretty common requested event is one that allows you to detect when a publisher starts and stops speaking. OpenVidu offers this ability through <a href="../../../api/openvidu-browser/classes/publisherspeakingevent.html" target="_blank">PublisherSpeakingEvents</a> that can be configured for <a href="../../../api/openvidu-browser/classes/session.html" target="_blank">Session</a> objects:</p>
 <pre><code class="javascript">session.on('publisherStartSpeaking', (event) =&gt; {
     console.log('Publisher ' + event.connection.connectionId + ' start speaking');
 });
@@ -476,8 +476,8 @@ session.on('publisherStopSpeaking', (event) =&gt; {
 });
 </code></pre>
 
-<p>Event <code>publisherStopSpeaking</code> for certain <a href="../../../api/openvidu-browser/classes/connection.html">Connection</a> object can only be triggered after <code>publisherStartSpeaking</code> has been called for that specific Connection object. In other words, none of these events can be triggered twice in a row for one Connection: they are always launched alternately.</p>
-<p>You can further configure the behavior of these two events by using <a href="../../../api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration">OpenVidu.setAdvancedConfiguration</a> method:</p>
+<p>Event <code>publisherStopSpeaking</code> for certain <a href="../../../api/openvidu-browser/classes/connection.html" target="_blank">Connection</a> object can only be triggered after <code>publisherStartSpeaking</code> has been called for that specific Connection object. In other words, none of these events can be triggered twice in a row for one Connection: they are always launched alternately.</p>
+<p>You can further configure the behavior of these two events by using <a href="../../../api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration" target="_blank">OpenVidu.setAdvancedConfiguration</a> method:</p>
 <pre><code class="javascript">var OV = new OpenVidu();
 OV.setAdvancedConfiguration({
     publisherSpeakingEventsOptions: {
@@ -489,7 +489,7 @@ OV.setAdvancedConfiguration({
 
 <p>With these events it is really easy to build a layout that can make the main speaker video the bigger one, and alternate the main view between the participants of a session as they take the floor.</p>
 <h3 id="audio-volume-detection">Audio volume detection</h3>
-<p>Since release 2.7.0, you have also available a new <a href="../../../api/openvidu-browser/classes/streammanagerevent.html">StreamManagerEvent</a> called <code>streamAudioVolumeChange</code>. You can get the audio volume (-100 being silence to 0 being max volume) of any Publisher or Subscriber by doing this:</p>
+<p>Since release 2.7.0, you have also available a new <a href="../../../api/openvidu-browser/classes/streammanagerevent.html" target="_blank">StreamManagerEvent</a> called <code>streamAudioVolumeChange</code>. You can get the audio volume (-100 being silence to 0 being max volume) of any Publisher or Subscriber by doing this:</p>
 <pre><code class="javascript">publisher.on('streamAudioVolumeChange', (event) =&gt; {
     console.log('Publisher audio volume change from ' + event.value.oldValue + ' to' + event.value.newValue);
 });

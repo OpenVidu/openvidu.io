@@ -548,12 +548,12 @@ active: documentation
 </li>
 <li><strong>defaultRecordingLayout</strong> <em>(optional string. Only applies if <code>defaultOutputMode</code> is set to <code>COMPOSED</code>)</em><ul>
 <li><code>BEST_FIT</code><em>(default)</em> : A grid layout where all the videos are evenly distributed</li>
-<li><code>CUSTOM</code>: Use your own custom layout. See <a href="../../advanced-features/recording/#custom-recording-layouts">Custom recording layouts</a> section to learn how</li>
+<li><code>CUSTOM</code>: Use your own custom layout. See <a href="../../advanced-features/recording/#custom-recording-layouts" target="_blank">Custom recording layouts</a> section to learn how</li>
 <li>Not available yet: <code>PICTURE_IN_PICTURE</code>, <code>VERTICAL_PRESENTATION</code>, <code>HORIZONTAL_PRESENTATION</code><br><br></li>
 </ul>
 </li>
 <li><strong>defaultCustomLayout</strong> <em>(optional string. Only applies if <code>defaultRecordingLayout</code> is set to <code>CUSTOM</code>)</em><ul>
-<li>A relative path indicating the custom recording layout to be used if more than one is available. Default to empty string (if so custom layout expected under path set with <a href="../openvidu-server-params/">openvidu-server configuration</a> property <code>openvidu.recording.custom-layout</code>)</li>
+<li>A relative path indicating the custom recording layout to be used if more than one is available. Default to empty string (if so custom layout expected under path set with <a href="../openvidu-server-params/" target="_blank">openvidu-server configuration</a> property <code>openvidu.recording.custom-layout</code>)</li>
 </ul>
 </li>
 </ul>
@@ -614,7 +614,7 @@ active: documentation
 <hr />
 <ul>
 <li><strong>session</strong> <em>(optional string)</em>: the sessionId for which the token should be associated<br><br></li>
-<li><strong>role</strong> <em>(optional string. Check <a href="../../../api/openvidu-node-client/enums/openvidurole.html">OpenViduRole</a> section of OpenVidu Node Client for a complete description)</em><ul>
+<li><strong>role</strong> <em>(optional string. Check <a href="../../../api/openvidu-node-client/enums/openvidurole.html" target="_blank">OpenViduRole</a> section of OpenVidu Node Client for a complete description)</em><ul>
 <li><code>SUBSCRIBER</code></li>
 <li><code>PUBLISHER</code> <em>(default)</em></li>
 <li><code>MODERATOR</code><br><br></li>
@@ -622,11 +622,11 @@ active: documentation
 </li>
 <li><strong>data</strong> <em>(optional string)</em> : metadata associated to this token (usually participant's information)<br><br></li>
 <li><strong>kurentoOptions</strong> <em>(optional JSON object)</em> : you can set some configuration properties for the participant owning this token regarding Kurento. This is a JSON object with the following optional properties:<br><br><ul>
-<li><strong>videoMaxRecvBandwidth</strong>: maximum number of Kbps that the client owning the token will be able to receive from Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/#list-of-configuration-parameters-when-launching-openvidu-server">OpenVidu Server configuration</a> (parameter <code>openvidu.streams.video.max-recv-bandwidth</code>) for every incoming stream of the user owning the token. <em><strong>WARNING</strong>: the lower value set to this property limits every other bandwidth of the WebRTC pipeline this server-to-client stream belongs to. This includes the user publishing the stream and every other user subscribed to the same stream.</em></li>
-<li><strong>videoMinRecvBandwidth</strong>: minimum number of Kbps that the client owning the token will try to receive from Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/#list-of-configuration-parameters-when-launching-openvidu-server">OpenVidu Server configuration</a> (parameter <code>openvidu.streams.video.min-recv-bandwidth</code>) for every incoming stream of the user owning the token.</li>
-<li><strong>videoMaxSendBandwidth</strong>: maximum number of Kbps that the client owning the token will be able to send to Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/#list-of-configuration-parameters-when-launching-openvidu-server">OpenVidu Server configuration</a> (parameter <code>openvidu.streams.video.max-send-bandwidth</code>) for every outgoing stream of the user owning the token. <em><strong>WARNING</strong>: this value limits every other bandwidth of the WebRTC pipeline this client-to-server stream belongs to. This includes every other user subscribed to the stream.</em></li>
-<li><strong>videoMinSendBandwidth</strong>: minimum number of Kbps that the client owning the token will try to send to Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/#list-of-configuration-parameters-when-launching-openvidu-server">OpenVidu Server configuration</a> (parameter <code>openvidu.streams.video.min-send-bandwidth</code>) for every outgoing stream of the user owning the token.</li>
-<li><strong>allowedFilters</strong>: array of strings containing the names of the filters the user owning the token will be able to apply (see <a href="../../advanced-features/filters/">Voice and video filters</a>)</li>
+<li><strong>videoMaxRecvBandwidth</strong>: maximum number of Kbps that the client owning the token will be able to receive from Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <em><a href="https://openvidu.io/docs/reference-docs/openvidu-server-params" target="_blank">OpenVidu Server configuration</a></em> (parameter <code>openvidu.streams.video.max-recv-bandwidth</code>) for every incoming stream of the user owning the token. <em><strong>WARNING</strong>: the lower value set to this property limits every other bandwidth of the WebRTC pipeline this server-to-client stream belongs to. This includes the user publishing the stream and every other user subscribed to the same stream.</em></li>
+<li><strong>videoMinRecvBandwidth</strong>: minimum number of Kbps that the client owning the token will try to receive from Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <em><a href="https://openvidu.io/docs/reference-docs/openvidu-server-params" target="_blank">OpenVidu Server configuration</a></em> (parameter <code>openvidu.streams.video.min-recv-bandwidth</code>) for every incoming stream of the user owning the token.</li>
+<li><strong>videoMaxSendBandwidth</strong>: maximum number of Kbps that the client owning the token will be able to send to Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <em><a href="https://openvidu.io/docs/reference-docs/openvidu-server-params" target="_blank">OpenVidu Server configuration</a></em> (parameter <code>openvidu.streams.video.max-send-bandwidth</code>) for every outgoing stream of the user owning the token. <em><strong>WARNING</strong>: this value limits every other bandwidth of the WebRTC pipeline this client-to-server stream belongs to. This includes every other user subscribed to the stream.</em></li>
+<li><strong>videoMinSendBandwidth</strong>: minimum number of Kbps that the client owning the token will try to send to Kurento Media Server. 0 means unconstrained. Giving a value to this property will override the global configuration set in <em><a href="https://openvidu.io/docs/reference-docs/openvidu-server-params" target="_blank">OpenVidu Server configuration</a></em> (parameter <code>openvidu.streams.video.min-send-bandwidth</code>) for every outgoing stream of the user owning the token.</li>
+<li><strong>allowedFilters</strong>: array of strings containing the names of the filters the user owning the token will be able to apply (see <a href="../../advanced-features/filters/" target="_blank">Voice and video filters</a>)</li>
 </ul>
 </li>
 </ul>
@@ -636,7 +636,7 @@ active: documentation
 <blockquote>
 <p><strong>Returned JSON</strong></p>
 <ul>
-<li><code>token</code>: token value. Send it to one client to pass it as a parameter in openvidu-browser method <code>Session.connect()</code></li>
+<li><code>token</code>: token value. Send it to one client to pass it as a parameter in openvidu-browser method <em><a href="../../../api/openvidu-browser/classes/session.html#connect" target="_blank"><code>Session.connect</code></a></em></li>
 <li><code>session</code>: same as in the body request</li>
 <li><code>role</code>: same as in the body request</li>
 <li><code>data</code>: same as in the body request</li>
@@ -700,7 +700,7 @@ active: documentation
 <li><code>location</code>: geo location of the participant <a href="/docs/openvidu-pro/"><div id="openvidu-pro-tag" style="display: inline-block; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; margin-left: 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div></a></li>
 <li><code>platform</code>: complete description of the platform used by the participant to connect to the session</li>
 <li><code>role</code>: role of the connection</li>
-<li><code>clientData</code>: data defined in OpenVidu Browser when calling <a href="../../../api/openvidu-browser/classes/session.html#connect"><code>Session.connect</code></a> (<em>metadata</em> parameter)</li>
+<li><code>clientData</code>: data defined in OpenVidu Browser when calling <em><a href="../../../api/openvidu-browser/classes/session.html#connect" target="_blank"><code>Session.connect</code></a></em> (<em>metadata</em> parameter)</li>
 <li><code>serverData</code>: data assigned to the user's token when generating the token in OpenVidu Server</li>
 <li><code>token</code>: user's token</li>
 <li><code>publishers</code>: array of Publisher objects (streams the user is publishing). Each one is defined by the unique <code>streamId</code> property, has a <code>createdAt</code> property indicating the time it was created in UTC milliseconds and has a <code>mediaOptions</code> object with the current properties of the published stream ("hasVideo","hasAudio","videoActive","audioActive","frameRate","videoDimensions","typeOfVideo", "filter")</li>
@@ -792,7 +792,7 @@ active: documentation
 <blockquote>
 <p><strong>HTTP responses</strong></p>
 <ul>
-<li><code>204</code>: the session has been successfully closed. Every participant will have received the proper events in OpenVidu Browser: <a href="../../../api/openvidu-browser/classes/streamevent.html"><code>streamDestroyed</code></a>, <a href="../../../api/openvidu-browser/classes/connectionevent.html"><code>connectionDestroyed</code></a> and <a href="../../../api/openvidu-browser/classes/sessiondisconnectedevent.html"><code>sessionDisconnected</code></a>, all of them with "reason" property set to "sessionClosedByServer". Depending on the order of eviction of the users, some of them will receive more events than the others (the first one will only receive the events related to himself, last one will receive every possible event)</li>
+<li><code>204</code>: the session has been successfully closed. Every participant will have received the proper events in OpenVidu Browser: <a href="../../../api/openvidu-browser/classes/streamevent.html" target="_blank"><code>streamDestroyed</code></a>, <a href="../../../api/openvidu-browser/classes/connectionevent.html" target="_blank"><code>connectionDestroyed</code></a> and <a href="../../../api/openvidu-browser/classes/sessiondisconnectedevent.html" target="_blank"><code>sessionDisconnected</code></a>, all of them with "reason" property set to "sessionClosedByServer". Depending on the order of eviction of the users, some of them will receive more events than the others (the first one will only receive the events related to himself, last one will receive every possible event)</li>
 <li><code>404</code>: no session exists for the passed SESSION_ID</li>
 </ul>
 </blockquote>
@@ -827,7 +827,7 @@ active: documentation
 <blockquote>
 <p><strong>HTTP responses</strong></p>
 <ul>
-<li><code>204</code>: the user has been successfully evicted from the session. Every participant will have received the proper events in OpenVidu Browser: <a href="../../../api/openvidu-browser/classes/streamevent.html"><code>streamDestroyed</code></a> if the user was publishing, <a href="../../../api/openvidu-browser/classes/connectionevent.html"><code>connectionDestroyed</code></a> for the remaining users and <a href="../../../api/openvidu-browser/classes/sessiondisconnectedevent.html"><code>sessionDisconnected</code></a> for the evicted user. All of them with "reason" property set to "forceDisconnectByServer"</li>
+<li><code>204</code>: the user has been successfully evicted from the session. Every participant will have received the proper events in OpenVidu Browser: <a href="../../../api/openvidu-browser/classes/streamevent.html" target="_blank"><code>streamDestroyed</code></a> if the user was publishing, <a href="../../../api/openvidu-browser/classes/connectionevent.html" target="_blank"><code>connectionDestroyed</code></a> for the remaining users and <a href="../../../api/openvidu-browser/classes/sessiondisconnectedevent.html" target="_blank"><code>sessionDisconnected</code></a> for the evicted user. All of them with "reason" property set to "forceDisconnectByServer"</li>
 <li><code>400</code>: no session exists for the passed SESSION_ID</li>
 <li><code>404</code>: no connection exists for the passed CONNECTION_ID</li>
 </ul>
@@ -863,7 +863,7 @@ active: documentation
 <blockquote>
 <p><strong>HTTP responses</strong></p>
 <ul>
-<li><code>204</code>: the stream has been successfully unpublished. Every participant will have received the proper <a href="../../../api/openvidu-browser/classes/streamevent.html"><code>streamDestroyed</code></a> event in OpenVidu Browser with "reason" property set to "forceUnpublishByServer"</li>
+<li><code>204</code>: the stream has been successfully unpublished. Every participant will have received the proper <a href="../../../api/openvidu-browser/classes/streamevent.html" target="_blank"><code>streamDestroyed</code></a> event in OpenVidu Browser with "reason" property set to "forceUnpublishByServer"</li>
 <li><code>400</code>: no session exists for the passed SESSION_ID</li>
 <li><code>404</code>: no stream exists for the passed STREAM_ID</li>
 </ul>
@@ -915,11 +915,11 @@ active: documentation
 <li><strong>hasVideo</strong> <em>(optional boolean)</em> : whether to record video or not. Default to true <br><br></li>
 <li><strong>recordingLayout</strong> <em>(optional string. Only applies if <code>outputMode</code> is set to <code>COMPOSED</code> and <code>hasVideo</code> to true)</em> : the layout to be used in this recording. This property will override the <code>defaultRecordingLayout</code> property set on <a href="#post-apisessions">POST /api/sessions</a> for this particular recording.<ul>
 <li><code>BEST_FIT</code><em>(default)</em> : A grid layout where all the videos are evenly distributed</li>
-<li><code>CUSTOM</code>: Use your own custom layout. See <a href="../../advanced-features/recording/#custom-recording-layouts">Custom recording layouts</a> section to learn how</li>
+<li><code>CUSTOM</code>: Use your own custom layout. See <a href="../../advanced-features/recording/#custom-recording-layouts" target="_blank">Custom recording layouts</a> section to learn how</li>
 <li>Not available yet: <code>PICTURE_IN_PICTURE</code>, <code>VERTICAL_PRESENTATION</code>, <code>HORIZONTAL_PRESENTATION</code><br><br></li>
 </ul>
 </li>
-<li><strong>customLayout</strong> <em>(optional string. Only applies if <code>recordingLayout</code> is set to <code>CUSTOM</code>)</em> : a relative path indicating the custom recording layout to be used if more than one is available. Default to empty string (if so custom layout expected under path set with <a href="../openvidu-server-params/">openvidu-server system property</a> <code>openvidu.recording.custom-layout</code>) . This property will override the <code>defaultCustomLayout</code> property set on <a href="#post-apisessions">POST /api/sessions</a> for this particular recording<br><br></li>
+<li><strong>customLayout</strong> <em>(optional string. Only applies if <code>recordingLayout</code> is set to <code>CUSTOM</code>)</em> : a relative path indicating the custom recording layout to be used if more than one is available. Default to empty string (if so custom layout expected under path set with <a href="../openvidu-server-params/" target="_blank">openvidu-server system property</a> <code>openvidu.recording.custom-layout</code>) . This property will override the <code>defaultCustomLayout</code> property set on <a href="#post-apisessions">POST /api/sessions</a> for this particular recording<br><br></li>
 <li><strong>resolution</strong> <em>(optional string. Only applies if <code>outputMode</code> is set to <code>COMPOSED</code> and <code>hasVideo</code> to true)</em> : the resolution of the recorded video file. It is a string indicating the width and height in pixels like this: <code>"1920x1080"</code>. Values for both width and height must be between 100 and 1999</li>
 </ul>
 </blockquote>
@@ -1001,8 +1001,8 @@ active: documentation
 <li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
 <li><code>size</code>: size in bytes of the video file</li>
 <li><code>duration</code>: duration of the video file in seconds</li>
-<li><code>url</code>: set to <code>null</code> or <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code> depending on whether <a href="../openvidu-server-params/">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
-<li><code>status</code>: set to <code>"stopped"</code> or <code>"available"</code> depending on whether <a href="../openvidu-server-params/">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
+<li><code>url</code>: set to <code>null</code> or <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code> depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
+<li><code>status</code>: set to <code>"stopped"</code> or <code>"available"</code> depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
 </ul>
 </blockquote>
 <div></div>
@@ -1059,7 +1059,7 @@ active: documentation
 <li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
 <li><code>size</code>: size in bytes of the video file (0 until stop operation is called)</li>
 <li><code>duration</code>: duration of the video file in seconds (0 until stop operation is called)</li>
-<li><code>url</code>: set to <code>null</code> until stop operation is called. Then can be <code>null</code> or <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code> depending on whether <a href="../openvidu-server-params/">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true.</li>
+<li><code>url</code>: set to <code>null</code> until stop operation is called. Then can be <code>null</code> or <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code> depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true.</li>
 <li><code>status</code>: status of the recording (<code>"starting"</code>, <code>"started"</code>, <code>"stopped"</code>, <code>"available"</code>, <code>"failed"</code>)</li>
 </ul>
 </blockquote>
@@ -1104,7 +1104,7 @@ active: documentation
 <p><strong>Returned JSON</strong></p>
 <ul>
 <li><code>count</code>: number of total recordings</li>
-<li><code>items</code>: array of recording information in JSON format. Each item has the same properties as stated in the return value of method <a href="../../reference-docs/REST-API/#get-apirecordingsrecording_id">GET /api/recordings/<RECORDING_ID></a></li>
+<li><code>items</code>: array of recording information in JSON format. Each item has the same properties as stated in the return value of method <a href="#get-apirecordingsltrecording_idgt">GET /api/recordings/&lt;RECORDING_ID&gt;</a></li>
 </ul>
 </blockquote>
 <div></div>
@@ -1183,7 +1183,7 @@ active: documentation
 <p><strong>Returned JSON</strong></p>
 <ul>
 <li><code>version</code>: version of OpenVidu Server</li>
-<li><strong>Rest of properties</strong>: values given to <strong><a href="../../reference-docs/openvidu-server-params/">configuration properties</a></strong> on OpenVidu Server launch</li>
+<li><strong>Rest of properties</strong>: values given to <strong><a href="../../reference-docs/openvidu-server-params/" target="_blank">system properties</a></strong> on OpenVidu Server launch</li>
 </ul>
 </blockquote> 
 						</div>

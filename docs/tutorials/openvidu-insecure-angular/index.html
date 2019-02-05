@@ -468,8 +468,8 @@ active: documentation
 							 <h1 id="openvidu-insecure-angular">openvidu-insecure-angular</h1>
 <p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-angular" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
 <p>A client-side only application built with <strong>Angular 7</strong> framework.</p>
-<p>If it is the first time you use OpenVidu, it is higly recommended to start with <strong><a href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a></strong> tutorial, as this app is no more than an extension of it with some new features and sytles.</p>
-<p>This is the Angular version of <a href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a>. Try it if you plan to use Angular framework for your frontend.</p>
+<p>If it is the first time you use OpenVidu, it is higly recommended to start with <strong><a href="../../tutorials/openvidu-hello-world/" target="_blank">openvidu-hello-world</a></strong> tutorial, as this app is no more than an extension of it with some new features and sytles.</p>
+<p>This is the Angular version of <a href="../../tutorials/openvidu-insecure-js/" target="_blank">openvidu-insecure-js</a>. Try it if you plan to use Angular framework for your frontend.</p>
 <h2 id="understanding-this-tutorial">Understanding this tutorial</h2>
 <p align="center">
   <img class="img-responsive" src="https://docs.google.com/uc?id=0B61cQ4sbhmWSbmtwcXNnXy1ZSkU">
@@ -519,15 +519,15 @@ npm install
 ng serve
 </code></pre>
 
-<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>):</p>
 <pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.8.0
 </code></pre>
 
-<p>5) Go to <a href="http://localhost:4200"><code>localhost:4200</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p>5) Go to <em><a href="http://localhost:4200" target="_blank"><code>localhost:4200</code></a></em> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
 <p><br></p>
 <blockquote>
-<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
-<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="_blank">FAQ</a></strong> to properly run the tutorial</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu" target="_blank">FAQ</a></strong></p>
 </blockquote>
 <div class="row no-margin row-gallery">
     <div class="col-md-6">
@@ -655,12 +655,12 @@ this.getToken().then(token =&gt; {
 });
 </code></pre>
 
-<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token, using <code>@angular/http</code> library. Without going into too much detail, this method performs two POST requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em>, <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">OpenVidu Java Client</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">OpenVidu Node Client</a></em>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token, using <code>@angular/http</code> library. Without going into too much detail, this method performs two POST requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
 <ul>
 <li>First request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
 <li>Second request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L160">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-insecure-angular/src/app/app.component.ts#L161" target="_blank">GitHub repo</a>.</p>
 <hr />
 <h4 id="finally-connect-to-the-session-and-publish-your-webcam">Finally connect to the session and publish your webcam:</h4>
 <pre><code class="typescript"> // --- 4) Connect to the session with a valid user token ---

@@ -470,13 +470,13 @@ active: documentation
 <hr>
 
 <h2 id="adding-your-own-app-to-openvidu-aws-deployment">Adding your own app to OpenVidu AWS deployment</h2>
-<p>In order to show how an application that makes use of OpenVidu might be deployed, here you have a guide to do so in AWS after launching it with <a href="../../deployment/deploying-aws/">CloudFormation OpenVidu</a>.</p>
+<p>In order to show how an application that makes use of OpenVidu might be deployed, here you have a guide to do so in AWS after launching it with <a href="../../deployment/deploying-aws/" target="_blank">CloudFormation OpenVidu</a>.</p>
 <p>Once you have checked that your AWS OpenVidu Server is up and running, adding your own application to the same instance is not hard. Follow these steps:</p>
 <h4 id="1-upload-your-app-to-your-ec2-instance">1. Upload your app to your EC2 instance</h4>
-<p>In Linux/Mac you can use <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html#AccessingInstancesLinuxSCP">scp</a> command. In Windows (or If you prefer a more friendly GUI) you can use <a href="https://beamtic.com/connect-to-aws-ec2-with-ftp">FileZilla</a>. Furthermore, if your app is stored in a GitHub repo, you can directly clone it once you connect to your instance.</p>
-<p>Remember that the key will be the same you indicated when configuring the <a href="../../deployment/deploying-aws/#4-complete-the-configuration-fields">CloudFormation fields</a>. </p>
+<p>In Linux/Mac you can use <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html#AccessingInstancesLinuxSCP" target="_blank">scp</a> command. In Windows (or If you prefer a more friendly GUI) you can use <a href="https://beamtic.com/connect-to-aws-ec2-with-ftp" target="_blank">FileZilla</a>. Furthermore, if your app is stored in a GitHub repo, you can directly clone it once you connect to your instance.</p>
+<p>Remember that the key will be the same you indicated when configuring the <a href="../../deployment/deploying-aws/#4-complete-the-configuration-fields" target="_blank">CloudFormation fields</a>. </p>
 <h4 id="2-connect-to-your-ec2-instance-through-ssh">2. Connect to your EC2 instance through SSH</h4>
-<p>Remember that the key will be the same you indicated when configuring the <a href="../../deployment/deploying-aws/#4-complete-the-configuration-fields">CloudFormation fields</a>. In case of doubt, check <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">AWS docs</a>.</p>
+<p>Remember that the key will be the same you indicated when configuring the <a href="../../deployment/deploying-aws/#4-complete-the-configuration-fields" target="_blank">CloudFormation fields</a>. In case of doubt, check <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank">AWS docs</a>.</p>
 <h4 id="3-configure-your-app">3. Configure your app</h4>
 <p>Depending on the framework of your app:</p>
 <p><br></p>
@@ -485,7 +485,7 @@ active: documentation
 <li>
 <p>If your app doesn't have a server-side and it is plain HTML, CSS and JavaScript, you just have to add your web files into <code>/var/www/html/</code>. You will have instant access to it through <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN/</code></p>
 <blockquote>
-<p>If you want to test the deployment of a plain HTML/CSS/JS app, you can use <strong><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-js">openvidu-insecure-js</a></strong></p>
+<p>If you want to test the deployment of a plain HTML/CSS/JS app, you can use <strong><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-insecure-js" target="_blank">openvidu-insecure-js</a></strong></p>
 </blockquote>
 </li>
 </ul>
@@ -541,7 +541,7 @@ java -jar -Dserver.port=4040 myapp.jar
   redirect_stderr=true
 </code></pre>
 <blockquote>
-<p>To connect your Java app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <a href="../../reference-docs/REST-API/">REST API</a> or <a href="../../reference-docs/openvidu-java-client/">openvidu-java-client</a>), you will need to use the URL <code>https://localhost:4443</code>. <em>localhost</em> because in this case both your app and OpenVidu Server run in the same machine. <em>4443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-java</em> sets this parameter as an environment variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/4ea5f6849762bc7eaa501217b145ede0339092e3/openvidu-js-java/src/main/resources/application.properties#L8">right here</a>.</p>
+<p>To connect your Java app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em> or <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">openvidu-java-client</a>)</em>, you will need to use the URL <code>https://localhost:4443</code>. <em>localhost</em> because in this case both your app and OpenVidu Server run in the same machine. <em>4443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-java</em> sets this parameter as an environment variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/4ea5f6849762bc7eaa501217b145ede0339092e3/openvidu-js-java/src/main/resources/application.properties#L8" target="_blank">right here</a></p>
 </blockquote>
 </li>
 <li>
@@ -556,7 +556,7 @@ java -jar -Dserver.port=4040 myapp.jar
 <li>
 <p>Troubleshooting: If your app is not working as expected, there are a few files you should check for debugging: <code>/var/log/nginx/</code> (info about the proxy), <code>/var/log/supervisor/</code> (output of your app). You can also try to connect to your app directly through the port like <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN:YOUR_APP_PORT</code></p>
 <blockquote>
-<p>If you want to test the deployment of a Java app, you can use <strong>openvidu-js-java</strong> or <strong>openvidu-mvc-java</strong> (<a href="https://github.com/OpenVidu/openvidu-tutorials/releases">release here</a>)</p>
+<p>If you want to test the deployment of a Java app, you can use <strong>openvidu-js-java</strong> or <strong>openvidu-mvc-java</strong> (<a href="https://github.com/OpenVidu/openvidu-tutorials/releases" target="_blank">release here</a>)</p>
 </blockquote>
 </li>
 </ul>
@@ -615,7 +615,7 @@ node myserver.js 4040
   redirect_stderr=true
 </code></pre>
 <blockquote>
-<p>To connect your Node app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <a href="../../reference-docs/REST-API/">REST API</a> or <a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a>), you will need to use the URL <code>https://localhost:4443</code>. <em>localhost</em> because in this case both your app and OpenVidu Server run in the same machine. <em>4443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-node</em> expects this parameter as the first argument on launch command <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/4ea5f6849762bc7eaa501217b145ede0339092e3/openvidu-js-node/server.js#L62">right here</a>.</p>
+<p>To connect your Node app to OpenVidu Server in order to get your sessionIds and tokens (whether you use the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">openvidu-node-client</a></em>), you will need to use the URL <code>https://localhost:4443</code>. <em>localhost</em> because in this case both your app and OpenVidu Server run in the same machine. <em>4443</em> because there's where OpenVidu Server listens for petitions. For example, our tutorial <em>openvidu-js-node</em> expects this parameter as the first argument on launch command <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/4ea5f6849762bc7eaa501217b145ede0339092e3/openvidu-js-node/server.js#L62" target="_blank">right here</a></p>
 </blockquote>
 </li>
 <li>
@@ -627,7 +627,7 @@ node myserver.js 4040
 <li>
 <p>Troubleshooting: If your app is not working as expected, there are a few files you should check for debugging: <code>/var/log/nginx/</code> (info about the proxy), <code>/var/log/supervisor/</code> (output of your app). You can also try to connect to your app directly through the port like <code>https://AMAZON_URL_OR_YOUR_CUSTOM_DOMAIN:YOUR_APP_PORT</code></p>
 <blockquote>
-<p>If you want to test the deployment of a Node app, you can use <strong><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-js-node">openvidu-js-node</a></strong></p>
+<p>If you want to test the deployment of a Node app, you can use <strong><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-js-node" target="_blank">openvidu-js-node</a></strong></p>
 </blockquote>
 </li>
 </ul>
@@ -676,7 +676,7 @@ location /YOUR_APP_2 {
 <p>Once you have deployed OpenVidu and checked that it is up and running, and after setting up your own application in its dedicated server:</p>
 <ul>
 <li>Make sure you know your <strong>OpenVidu Server public IP</strong>. That includes the protocol (<code>https</code>), the location and the port. For example: <code>https://OPENVIDUSERVER_PUBLIC_IP:4443/</code>. Or if you have set up a domain name you can use it instead of the public ip (this is highly recommended for production setups)</li>
-<li>Use it in your application server to perform the <strong><a href="../../reference-docs/REST-API/">REST</a></strong> operations, or to initialize your OpenVidu object if you are making use of <strong><a href="../../reference-docs/openvidu-java-client/">openvdiu-java-client</a></strong> or <strong><a href="../../reference-docs/openvidu-node-client/">openvidu-node-client</a></strong> :<ul>
+<li>Use it in your application server to perform the <strong><a href="../../reference-docs/REST-API/" target="_blank">REST</a></strong> operations, or to initialize your OpenVidu object if you are making use of <strong><a href="../../reference-docs/openvidu-java-client/" target="_blank">openvdiu-java-client</a></strong> or <strong><a href="../../reference-docs/openvidu-node-client/" target="_blank">openvidu-node-client</a></strong> :<ul>
 <li><em>REST</em> operations to <code>https://OPENVIDUSERVER_PUBLIC_IP:4443/api/METHOD</code> </li>
 <li><em>openvidu-java-client</em> entrypoint is <code>new OpenVidu(https://OPENVIDUSERVER_PUBLIC_IP:4443/, OPENVIDU_SECRET)</code></li>
 <li><em>openvidu-node-client</em> entrypoint is <code>new OpenVidu(https://OPENVIDUSERVER_PUBLIC_IP:4443/, OPENVIDU_SECRET)</code> </li>

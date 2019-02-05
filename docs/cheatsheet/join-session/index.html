@@ -484,24 +484,24 @@ You must ask OpenVidu Server for a user token. To do so:</p>
 <li>
 <p><strong>Initialize a Session in OpenVidu Server</strong></p>
 <ul>
-<li><a href="../../reference-docs/REST-API#post-apisessions">API REST</a></li>
-<li><a href="../../reference-docs/openvidu-java-client#create-a-session">openvidu-java-client</a></li>
-<li><a href="../../reference-docs/openvidu-node-client#create-a-session">openvidu-node-client</a><br><br></li>
+<li><a href="../../reference-docs/REST-API#post-apisessions" target="_blank">API REST</a></li>
+<li><a href="../../reference-docs/openvidu-java-client#create-a-session" target="_blank">openvidu-java-client</a></li>
+<li><a href="../../reference-docs/openvidu-node-client#create-a-session" target="_blank">openvidu-node-client</a><br><br></li>
 </ul>
 </li>
 <li>
 <p><strong>Generate a token for this session in OpenVidu Server</strong></p>
 <ul>
-<li><a href="../../reference-docs/REST-API#post-apitokens">API REST</a></li>
-<li><a href="../../reference-docs/openvidu-java-client#generate-a-token">openvidu-java-client</a></li>
-<li><a href="../../reference-docs/openvidu-node-client#generate-a-token">openvidu-node-client</a><br><br></li>
+<li><a href="../../reference-docs/REST-API#post-apitokens" target="_blank">API REST</a></li>
+<li><a href="../../reference-docs/openvidu-java-client#generate-a-token" target="_blank">openvidu-java-client</a></li>
+<li><a href="../../reference-docs/openvidu-node-client#generate-a-token" target="_blank">openvidu-node-client</a><br><br></li>
 </ul>
 </li>
 <li>
 <p><strong>Return this token to your client-side to use it on </strong><code>Session.connect()</code><br><br></p>
 </li>
 </ol>
-<p>You can add an optional second parameter to pass some user metadata that will be recieved by every other user connected to the same session (check <a href="../../cheatsheet/share-data/">Share data between users</a> to learn more).</p>
+<p>You can add an optional second parameter to pass some user metadata that will be recieved by every other user connected to the same session (check <a href="../../cheatsheet/share-data/" target="_blank">Share data between users</a> to learn more).</p>
 <pre><code class="javascript">session.connect(token, DATA)
     .then( ... )
     .catch( ... );

@@ -473,12 +473,12 @@ Every Publisher and Subscriber object can display a media stream in as many vide
 <h5 id="a-publisher-videos">A) Publisher videos</h5>
 <ul>
 <li>
-<p>When initalizing a Publisher object, you can insert a video player by passing a valid <code>targetElement</code> in method <code>OpenVidu.initPublisher</code> (can be an HTMLElement or its <code>id</code> attribute). Second parameter allows you to customize the publisher's stream, including how OpenVidu must insert the video player according to targetElement (more info in <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html">OpenVidu Browser Docs</a>):</p>
+<p>When initalizing a Publisher object, you can insert a video player by passing a valid <code>targetElement</code> in method <code>OpenVidu.initPublisher</code> (can be an HTMLElement or its <code>id</code> attribute). Second parameter allows you to customize the publisher's stream, including how OpenVidu must insert the video player according to targetElement (more info in <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">OpenVidu Browser Docs</a>):</p>
 <pre><code>var publisher = OV.initPublisher(targetElement, {insertMode: 'APPEND'});
 </code></pre>
 </li>
 <li>
-<p>After getting the Publisher object, you can create more video players to display its media stream just by calling <code>Publisher.createVideoElement</code>. Pass a valid <code>targetElement</code> and the <a href="../../../api/openvidu-browser/enums/videoinsertmode.html">insertMode</a>:</p>
+<p>After getting the Publisher object, you can create more video players to display its media stream just by calling <code>Publisher.createVideoElement</code>. Pass a valid <code>targetElement</code> and the <a href="../../../api/openvidu-browser/enums/videoinsertmode.html" target="_blank">insertMode</a>:</p>
 <pre><code>publisher.createVideoElement(targetElement, 'APPEND');
 </code></pre>
 </li>
@@ -487,7 +487,7 @@ Every Publisher and Subscriber object can display a media stream in as many vide
 <h5 id="b-subscriber-videos">B) Subscriber videos</h5>
 <ul>
 <li>
-<p>When subscribing to a Stream, you can insert a video player by passing a valid <code>targetElement</code> in method <code>Session.subscribe</code> (can be an HTMLElement or its <code>id</code> attribute). Third parameter allows you to customize the subscriber's stream, including how OpenVidu must insert the video player according to targetElement (more info in <a href="../../../api/openvidu-browser/interfaces/subscriberproperties.html">OpenVidu Browser Docs</a>):</p>
+<p>When subscribing to a Stream, you can insert a video player by passing a valid <code>targetElement</code> in method <code>Session.subscribe</code> (can be an HTMLElement or its <code>id</code> attribute). Third parameter allows you to customize the subscriber's stream, including how OpenVidu must insert the video player according to targetElement (more info in <a href="../../../api/openvidu-browser/interfaces/subscriberproperties.html" target="_blank">OpenVidu Browser Docs</a>):</p>
 <pre><code>var subscriber;
 session.on('streamCreated', event =&gt; {
     subscriber = session.subscribe(event.stream, targetElement, {insertMode: 'APPEND'});
@@ -495,7 +495,7 @@ session.on('streamCreated', event =&gt; {
 </code></pre>
 </li>
 <li>
-<p>After getting the Subscriber object, you can create more video players to display its media stream just by calling <code>Subscriber.createVideoElement</code>. Pass a valid <code>targetElement</code> and the <a href="../../../api/openvidu-browser/enums/videoinsertmode.html">insertMode</a>:</p>
+<p>After getting the Subscriber object, you can create more video players to display its media stream just by calling <code>Subscriber.createVideoElement</code>. Pass a valid <code>targetElement</code> and the <a href="../../../api/openvidu-browser/enums/videoinsertmode.html" target="_blank">insertMode</a>:</p>
 <pre><code>subscriber.createVideoElement(targetElement, 'APPEND');
 </code></pre>
 </li>
@@ -531,7 +531,7 @@ session.on('streamCreated', event =&gt; {
 <p>This way of managing the video players is very useful when developing your application with some frontend declarative framework such as <strong>Angular</strong>,
 <strong>React</strong> or <strong>Vue.js</strong>. It allows you to add to the proper <code>Publisher</code> or <code>Subscriber</code> any video element managed by the framework. Besides, it is possible to
 treat both Publishers and Subscribers the same way regarding their rendering in the page, as they both inherit from the parent class <code>StreamManager</code>. If you are
-interested in these concepts, you can check out our super simple <a href="../../tutorials/openvidu-insecure-angular/">Angular tutorial</a>.</p>
+interested in these concepts, you can check out our super simple <a href="../../tutorials/openvidu-insecure-angular/" target="_blank">Angular tutorial</a>.</p>
 </blockquote>
 <p><br></p> 
 						</div>

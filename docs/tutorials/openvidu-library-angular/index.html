@@ -466,7 +466,7 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="openvidu-library-angular">openvidu-library-angular</h1>
-<p><a href="#" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
+<p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-library-angular" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
 <p>OpenVidu Library Angular is one of the simplest and quickest tutorials to add videoconference capabilities to your existing web application. This tutorial uses <em>openvidu-angular</em> library.</p>
 <h2 id="running-this-tutorial">Running this tutorial</h2>
 <p>1) Clone the repo:</p>
@@ -483,15 +483,15 @@ npm install
 ng serve
 </code></pre>
 
-<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>):</p>
 <pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.8.0
 </code></pre>
 
-<p>5) Go to <a href="http://localhost:4200"><code>localhost:4200</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p>5) Go to <em><a href="http://localhost:4200" target="_blank"><code>localhost:4200</code></a></em> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
 <p><br></p>
 <blockquote>
-<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
-<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="_blank">FAQ</a></strong> to properly run the tutorial</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu" target="_blank">FAQ</a></strong></p>
 </blockquote>
 <div class="row no-margin row-gallery">
     <div class="col-md-6">
@@ -519,7 +519,7 @@ ng serve
 <pre><code>npm install openvidu-angular --save
 </code></pre>
 
-<p>2) <a href="https://material.angular.io/guide/getting-started">Angular Material</a> is included in openvidu-angular neverthelesst you need to include a theme style in your application. If you're using the Angular CLI, you can add this to your <code>styles.css</code>:</p>
+<p>2) <a href="https://material.angular.io/guide/getting-started" target="_blank">Angular Material</a> is included in openvidu-angular neverthelesst you need to include a theme style in your application. If you're using the Angular CLI, you can add this to your <code>styles.css</code>:</p>
 <pre><code>@import &quot;~@angular/material/prebuilt-themes/indigo-pink.css&quot;;
 </code></pre>
 
@@ -632,10 +632,10 @@ public ovSessionComponent: OpenviduSessionComponent;
 
 <p>3) After that, <strong>ovSessionComponent</strong> will provides us some methods to get the internal variables we need. These methods are:</p>
 <ul>
-<li><strong>getSession</strong>: This method will provide you the Session. Check the Session documentation <a href="https://openvidu.io/api/openvidu-browser/classes/session.html">here</a></li>
-<li><strong>getLocalUser</strong>: This method will provide you the User. You can check the documentation about the User Class <a href="../user-doc/modules/user_model.html">here</a></li>
-<li><strong>getOpenviduLayout</strong>: This method will return the OpenVidu Layout Object. You can check the information about the OpenVidu Layout Class <a href="../layout-doc/classes/openvidu_layout.openvidulayout.html">here</a></li>
-<li><strong>getOpenviduLayoutOptions</strong>: This method will return the layout options. Click <a href="../layout-doc/interfaces/openvidu_layout.openvidulayoutoptions.html">here</a> to more information.</li>
+<li><strong>getSession</strong>: This method will provide you the Session. Check the Session documentation <a href="https://openvidu.io/api/openvidu-browser/classes/session.html" target="_blank">here</a></li>
+<li><strong>getLocalUser</strong>: This method will provide you the User. You can check the documentation about the User Class <a href="../user-doc/classes/user_model.usermodel.html" target="_blank">here</a></li>
+<li><strong>getOpenviduLayout</strong>: This method will return the OpenVidu Layout Object. You can check the information about the OpenVidu Layout Class <a href="../layout-doc/classes/openvidu_layout.openvidulayout.html" target="_blank">here</a></li>
+<li><strong>getOpenviduLayoutOptions</strong>: This method will return the layout options. Click <a href="../layout-doc/interfaces/openvidu_layout.openvidulayoutoptions.html" target="_blank">here</a> to more information.</li>
 </ul>
 <pre><code class="typescript">myMethod() {
   this.ovSession = this.ovSessionComponent.getSession();
@@ -658,7 +658,7 @@ ovLayoutOptions: OpenViduLayoutOptions;
 ovSettings: OvSettings;
 </code></pre>
 
-<p>Moreover, if you want to customize the interface of <strong>opv-session-component</strong> you can provide with the <code>ovSettings</code> variable tothe component. We have explain more details of this <a href="../openvidu-webcomponent/#interface-configuration">here</a>.</p>
+<p>Moreover, if you want to customize the interface of <strong>opv-session-component</strong> you can provide a parameter <code>ovSettings</code> to the component. Further details on this topic <a href="../openvidu-webcomponent/#interface-configuration" target="_blank">here</a>.</p>
 <p>And initializate it with the config properties:</p>
 <pre><code class="typescript">this.ovSettings = {
   chat: false,
@@ -703,12 +703,12 @@ ovSettings: OvSettings;
 });
 </code></pre>
 
-<p>In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<p>In a production environment we would perform this operations in our application backend, by making use of the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em>, <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">OpenVidu Java Client</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">OpenVidu Node Client</a></em>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
 <ul>
 <li>First ajax request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>sessionName</code> value retrieved from HTML input)</li>
 <li>Second ajax request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-webcomponent/web/app.js#L43">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-webcomponent/web/app.js#L44" target="_blank">GitHub repo</a>.</p>
 <hr>
 
 <h2 id="extra-features-of-openvidu-angular">Extra features of OpenVidu Angular</h2>

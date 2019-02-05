@@ -474,7 +474,7 @@ With just a few lines of code you will have your first video call working!</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
 </code></pre>
 
-<p>2) You will need an http web server installed in your development computer to execute the tutorial. If you have <em>node.js</em> installed, you can use <a href="https://github.com/indexzero/http-server">http-server</a> to serve application files. It can be installed with:</p>
+<p>2) You will need an http web server installed in your development computer to execute the tutorial. If you have <em>node.js</em> installed, you can use <a href="https://github.com/indexzero/http-server" target="_blank">http-server</a> to serve application files. It can be installed with:</p>
 <pre><code class="bash">npm install -g http-server
 </code></pre>
 
@@ -482,11 +482,11 @@ With just a few lines of code you will have your first video call working!</p>
 <pre><code class="bash">http-server openvidu-tutorials/openvidu-webcomponent/web
 </code></pre>
 
-<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker CE</a>):</p>
+<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>):</p>
 <pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.8.0
 </code></pre>
 
-<p>5) Go to <a href="http://localhost:8080"><code>localhost:8080</code></a> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
+<p>5) Go to <em><a href="http://localhost:8080" target="_blank"><code>localhost:8080</code></a></em> to test the app once the server is running. The first time you use the docker container, an alert message will suggest you accept the self-signed certificate of <em>openvidu-server</em> when you first try to join a video-call.</p>
 <div class="row no-margin row-gallery">
     <div class="col-md-6">
         <a data-fancybox="gallery" href="/img/demos/ov-webcomponent2.png">
@@ -502,8 +502,8 @@ With just a few lines of code you will have your first video call working!</p>
 
 <p><br></p>
 <blockquote>
-<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">FAQ</a></strong> to properly run the tutorial</p>
-<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">FAQ</a></strong></p>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="_blank">FAQ</a></strong> to properly run the tutorial</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu" target="_blank">FAQ</a></strong></p>
 </blockquote>
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This application is very simple. It has only 4 files:</p>
@@ -663,12 +663,12 @@ We just need to get the element once the document is ready and add all the liste
 });
 </code></pre>
 
-<p>In a production environment we would perform this operations in our application backend, by making use of the <a href="../../reference-docs/REST-API/">API REST</a>, <a href="../../reference-docs/openvidu-java-client/">OpenVidu Java Client</a> or <a href="../../reference-docs/openvidu-node-client/">OpenVidu Node Client</a>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<p>In a production environment we would perform this operations in our application backend, by making use of the <em><a href="../../reference-docs/REST-API/" target="_blank">API REST</a></em>, <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">OpenVidu Java Client</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">OpenVidu Node Client</a></em>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
 <ul>
 <li>First ajax request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>sessionName</code> value retrieved from HTML input)</li>
 <li>Second ajax request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-webcomponent/web/app.js#L43">GitHub repo</a>.</p>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-webcomponent/web/app.js#L44" target="_blank">GitHub repo</a>.</p>
 <hr>
 
 <h2 id="extra-features-of-openvidu-web-component">Extra features of OpenVidu Web Component</h2>
