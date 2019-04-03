@@ -159,6 +159,7 @@ p.subheading {
 #wellcome-btn {
     text-align: center;
     margin-top: 60px;
+    margin-bottom: 112px;
 }
 
 #wellcome-btn a.try-now-btn {
@@ -374,6 +375,11 @@ span.cc-message {
     border: 2px solid #eeeeee;
 }
 
+img.img-pro {
+    margin: auto;
+    border: 2px solid #eeeeee;
+}
+
 @font-face {
     font-family: 'Arciform';
     src: url('/fonts/Arciform.eot');
@@ -414,7 +420,7 @@ span.cc-message {
 }
 
 .img-wellcome {
-    max-height: 400px;
+    max-height: 450px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -439,7 +445,6 @@ span.cc-message {
     padding: 0;
     cursor: pointer;
     color: transparent;
-    border: none;
     outline: none;
     background: transparent;
     text-align: center;
@@ -461,8 +466,35 @@ span.cc-message {
 
 .slick-btn i {
     color: #0088aa;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 30px;
+}
+
+.slick-btn.slick-disabled {
+    pointer-events: none;
+}
+
+.slick-btn.slick-disabled i {
+    color: transparent;
+}
+
+.slick-btn.slick-disabled:hover {
+    background-color: transparent;
+}
+
+.slick-captions {
+    margin-top: 43px;
+}
+
+.slick-captions .caption {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+
+.slick-captions .caption p {
+    color: #4c4c4c;
 }
 
 .row-more-info {
@@ -583,6 +615,12 @@ img.img-more-info {
     color: #7a7a7a;
 }
 
+@media screen and (min-width: 1200px) {
+    img.img-responsive.img-pro.img-pro-small {
+        max-width: 750px !important;
+    }
+}
+
 @media screen and (min-width: 992px) {
     .more-info-tutorials-int {
         min-height: 150px;
@@ -701,7 +739,7 @@ img.img-more-info {
     }
 
     .img-wellcome {
-        max-height: 215px !important;
+        max-height: 225px !important;
     }
 
     .twitter-row {
@@ -759,7 +797,7 @@ div.lang-tabs-container {
 
 div.lang-tabs-container div.lang-tabs-header {
     width: 100%;
-    display: inline-flex;
+    display: flex;
 }
 
 div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn {
@@ -770,17 +808,17 @@ div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn {
     transition: background-color 0.2s ease-out;
     font-family: arciform;
     font-size: 18px;
-    border-top: 2px solid #eee;
+    border-top: 2px solid #e8e8e8;
 }
 
 div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn:first-of-type {
     border-top-left-radius: 5px;
-    border-left: 2px solid #eee;
+    border-left: 2px solid #e8e8e8;
 }
 
 div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn:last-of-type {
     border-top-right-radius: 5px;
-    border-right: 2px solid #eee;
+    border-right: 2px solid #e8e8e8;
 }
 
 div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn:hover {
@@ -789,19 +827,54 @@ div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn:hover {
 
 div.lang-tabs-container div.lang-tabs-header .lang-tabs-btn:focus {
     outline: 0 !important;
-    background-color: #eee !important;
+    background-color: #e8e8e8 !important;
 }
 
 div.lang-tabs-container div.lang-tabs-content {
-    padding: 20px 12px 8px 12px;
-    background-color: #eee;
+    padding: 20px 15px 8px 15px;
+    background-color: #e8e8e8;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    border-left: 2px #eee solid;
-    border-bottom: 2px #eee solid;
-    border-right: 2px #eee solid;
+    border-left: 2px #e8e8e8 solid;
+    border-bottom: 2px #e8e8e8 solid;
+    border-right: 2px #e8e8e8 solid;
+}
+
+div.lang-tabs-container div.lang-tabs-content pre {
+    padding: 9.5px 0;
+}
+
+div.lang-tabs-container div.lang-tabs-content p {
+    color: #4c4c4c;
 }
 
 div.lang-tabs-container div.lang-tabs-content ol {
     padding-left: 18px;
+}
+
+
+div.lang-tabs-container.elastic-events div.lang-tabs-header {
+    overflow-x: auto;
+}
+
+div.lang-tabs-container.elastic-events div.lang-tabs-header .lang-tabs-btn {
+    width: unset !important;
+    font-size: 11.8px !important;
+    font-weight: bold !important;
+    padding: 6px 5px 6px 5px !important;
+    font-family: inherit;
+}
+
+div.lang-tabs-container.elastic-events div.lang-tabs-content pre {
+    padding: 0 !important;
+}
+
+@media screen and (max-width: 767px) {
+    div.lang-tabs-container div.lang-tabs-content {
+        padding: 12px 20px 12px 15px !important;
+    }
+
+    div.lang-tabs-container.elastic-events div.lang-tabs-content pre {
+        margin-bottom: 0 !important;
+    }
 }

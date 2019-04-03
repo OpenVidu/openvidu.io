@@ -1073,8 +1073,8 @@ nav {
 /*----- Features -----*/
 #features {
     min-height: 95vh;
-    padding-top: 60px;
-    padding-bottom: 50px;
+    padding-top: 42px;
+    padding-bottom: 25px;
 }
 @media (min-width: 992px) {
     .features-row {

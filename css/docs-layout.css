@@ -372,6 +372,10 @@ ul#menu-list {
     #doc-container img.join-form-img {
         max-width: 500px;   
     }
+
+    #doc-container img.openvidu-pro-img {
+        max-width: 500px;   
+    }
 }
 
 @media screen and (max-width: 991px) {
@@ -403,6 +407,13 @@ ul#menu-list {
         max-width: 100%;
         height: auto;
         display: inline-block;
+    }
+    blockquote {
+        margin-left: 12px !important;
+        padding: 10px 20px 10px 10px !important;
+    }
+    blockquote ul {
+        padding-left: 30px !important;
     }
 }
 
