@@ -84,7 +84,7 @@ a:focus, a:active, button::-moz-focus-inner, input[type="reset"]::-moz-focus-inn
         padding: 0 90px;
     }
 }
-@media (min-width: 768px) and (max-width: 992px)) {
+@media (min-width: 768px) and (max-width: 992px) {
     .container { 
         width: 100%; 
     }
@@ -1073,8 +1073,8 @@ nav {
 /*----- Features -----*/
 #features {
     min-height: 95vh;
-    padding-top: 60px;
-    padding-bottom: 50px;
+    padding-top: 42px;
+    padding-bottom: 25px;
 }
 @media (min-width: 992px) {
     .features-row {

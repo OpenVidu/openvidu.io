@@ -151,13 +151,15 @@ p.subheading {
     line-height: inherit;
 }
 
-.navbar-alt .navbar-nav>li>a, .navbar-alt .navbar-nav>li>span {
+.navbar-alt .navbar-nav>li>a,
+.navbar-alt .navbar-nav>li>span {
     font-size: 14px;
 }
 
 #wellcome-btn {
     text-align: center;
     margin-top: 60px;
+    margin-bottom: 112px;
 }
 
 #wellcome-btn a.try-now-btn {
@@ -377,10 +379,13 @@ span.cc-message {
     font-family: 'Arciform';
     src: url('/fonts/Arciform.eot');
     /* IE9 Compat Modes */
-    src: url('/fonts/Arciform.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('/fonts/Arciform.woff') format('woff'), /* Modern Browsers */
-    url('/fonts/Arciform.ttf') format('truetype'), /* Safari, Android, iOS */
-    url('/fonts/Arciform.svg#svgFontName') format('svg');
+    src: url('/fonts/Arciform.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('/fonts/Arciform.woff') format('woff'),
+        /* Modern Browsers */
+        url('/fonts/Arciform.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('/fonts/Arciform.svg#svgFontName') format('svg');
     /* Legacy iOS */
 }
 
@@ -410,7 +415,7 @@ span.cc-message {
 }
 
 .img-wellcome {
-    max-height: 400px;
+    max-height: 450px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -527,7 +532,9 @@ img.img-more-info {
     overflow: hidden;
 }
 
-.video-responsive iframe, .video-responsive object, .video-responsive embed {
+.video-responsive iframe,
+.video-responsive object,
+.video-responsive embed {
     position: absolute;
     top: 0;
     left: 0;
@@ -590,6 +597,7 @@ img.img-more-info {
     .col-img-more-info {
         padding-right: 0;
     }
+
     .more-info-desc {
         padding-left: 0;
         padding-right: 30px;
@@ -601,58 +609,75 @@ img.img-more-info {
         padding-top: 40px;
         padding-bottom: 40px;
     }
+
     #openvidu-logo {
         min-width: 10em;
         height: auto !important;
     }
+
     span.cc-message {
         margin-bottom: 0 !important;
     }
+
     #img-mob {
         max-height: 400px;
     }
+
     #img-mob2 {
         max-height: 400px;
     }
+
     pre {
         padding: 16px;
     }
+
     pre code {
         white-space: pre !important;
     }
+
     #page-top {
         height: 270px;
     }
+
     #page-top .page-top-title {
         top: 93px;
     }
+
     #page-top .page-top-title h2 {
         font-size: 37px;
         padding-left: 20px;
         padding-right: 20px;
     }
+
     #page-top .home-subheading {
         padding-left: 20px;
         padding-right: 20px;
     }
+
     #contact {
         padding-top: 40px;
         padding-bottom: 40px;
     }
-    .row-secure-tutorials .secure-tutorials-left, .row-secure-tutorials .secure-tutorials-right {
+
+    .row-secure-tutorials .secure-tutorials-left,
+    .row-secure-tutorials .secure-tutorials-right {
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
+
     .more-info-tutorials-int {
         padding-bottom: 0;
     }
+
     .more-info-desc {
         padding-top: 2em;
     }
+
     .pre-video-responsive {
         margin-left: -46px;
         margin-right: -46px;
     }
+
     #openvidu-pro-tag {
         line-height: 32px !important;
     }
@@ -663,28 +688,35 @@ img.img-more-info {
         display: inherit;
         margin-bottom: 20px;
     }
+
     .row-run-demo .col {
         display: inherit;
         vertical-align: inherit;
         float: inherit;
         text-align: center;
     }
+
     .row-run-demo .col img {
         margin-left: auto;
         margin-right: auto;
     }
+
     .img-wellcome {
-        max-height: 215px !important;
+        max-height: 225px !important;
     }
+
     .twitter-row {
         width: 100% !important;
     }
+
     .feature-row {
         height: auto !important;
     }
+
     .feature-img-col {
         margin-bottom: 30px;
     }
+
     .feature-text-col h3 {
         text-align: center !important;
     }
