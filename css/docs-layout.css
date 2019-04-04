@@ -143,7 +143,7 @@ ul#menu-list {
 
 #sticky-menu ul#menu-list > li:last-child li.toctree-l1:hover a,
 #sticky-menu ul#menu-list > li:last-child li.toctree-l1:focus a {
-    border-color: none;
+    border-color: transparent;
     opacity: .7;
     color: #333;
     text-decoration: none;
