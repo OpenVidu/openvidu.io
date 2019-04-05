@@ -10,6 +10,14 @@
     color: #00C8F7 !important;
 }
 
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
 .loader img {
     width: 8em;
 }
