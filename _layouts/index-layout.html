@@ -1,219 +1,223 @@
 <!DOCTYPE html>
 <html lang="en" xml:lang="en">
+  <head>
+      <!-- Site Title-->
+      <title>{{ page.title }}</title>
+      <meta charset="utf-8" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+      <meta name="keywords" content="OpenVidu, openvidu, WebRTC, Video, mobile" />
+      <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+      <!-- Stlylesheet -->
+      <link href="css/style.css" rel="stylesheet" type="text/css" />
+      <link href="css/style-custom.css" rel="stylesheet" type="text/css" />
+      <link href="css/index-layout.css" rel="stylesheet" type="text/css" />
+      <!-- Skin Color -->
+      <link rel="stylesheet" href="css/colors/yellow.css" id="color-skins" />
 
-<head>
-  <!-- Site Title-->
-  <title>{{page.title}}</title>
-  <meta charset="utf-8">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="keywords" content="OpenVidu, openvidu, WebRTC, Video, mobile" />
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <!-- Stlylesheet -->
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
-  <link href="css/style-custom.css" rel="stylesheet" type="text/css" />
-  <link href="css/index-layout.css" rel="stylesheet" type="text/css" />
-  <!-- Skin Color -->
-  <link rel="stylesheet" href="css/colors/yellow.css" id="color-skins" />
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
+      <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+      <link
+          rel="stylesheet"
+          type="text/css"
+          href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
+      />
 
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
-  
-  <script src="js/plugins/jquery.min.js"></script>
+      <script src="js/plugins/jquery.min.js"></script>
+  </head>
 
-</head>
-
-<body>
-
-  <!-- Start Preloader -->
-  <div id="preloader">
-    <div class="loader">
-      <!--<img src="img/assets/preloader-logo.png" alt="Vossen"> -->
-      <img src="img/logos/openvidu_grey_bg_transp_cropped.png" />
-    </div>
-  </div>
-  <!-- End Preloader -->
-
-  {% include header.html %}
-
-  <!-- Start Home Revolution Slider Parallax Section -->
-  <section id="home-revolution-slider">
-    <div class="hero">
-      <div class="tp-banner-container">
-        <div class="tp-banner">
-          <ul>
-            <!-- SLIDE 1 -->
-            <li class="my-gray-background" data-transition="fade" data-slotamount="7" data-masterspeed="2000" data-thumb="img/backgrounds/bg-home-fullscreen.jpg"
-              data-delay="10000" data-saveperformance="on" data-title="OpenVidu">
-              <!--<img src="img/backgrounds/bg-home-fullscreen.jpg" alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">-->
-
-              <!-- Home Heading -->
-              <div class="tp-caption sft" data-x="center" data-y="50" data-speed="1200" data-start="1100" data-easing="Power3.easeInOut"
-                data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
-                style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
-                <h2 class="home-heading op-1"><img id="openvidu-logo" src="img/logos/openvidu_white_bg_transp.png" /></h2>
-              </div>
-              <!-- Home Subheading -->
-              <div class="tp-caption home-subheading sft " data-x="center" data-y="450" data-speed="1200" data-start="1350" data-easing="Power3.easeInOut"
-                data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
-                style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
-                <div class="op-1">Easy videoconference in your web or mobile app</div>
-              </div>
-              <!-- Home Button -->
-              <div class="tp-caption home-button sft fadeout" data-x="center" data-y="450" data-speed="1200" data-start="1550" data-easing="Power3.easeInOut"
-                data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"
-                style="z-index: 4; max-width: auto; max-height: auto; white-space:normal;">
-                <div class="op-1"><a href="#features" class="btn btn-primary btn-scroll">GET STARTED</a></div>
-              </div>
-
-            </li>
-
-          </ul>
-          <div class="tp-bannertimer"></div>
-        </div>
-
-        <div class="home-bottom">
-          <div class="container text-center">
-            <div class="move bounce">
-              <a href="#features" class="ion-ios-arrow-down btn-scroll"></a>
-            </div>
-          </div>
-        </div>
-
+  <body>
+    <!-- Start Preloader -->
+    <div id="preloader">
+      <div class="loader">
+        <!--<img src="img/assets/preloader-logo.png" alt="Vossen"> -->
+        <img src="img/logos/openvidu_grey_bg_transp_cropped.png" />
       </div>
     </div>
-  </section>
-  <!-- End Home Revolution Slider Parallax Section -->
+    <!-- End Preloader -->
 
-  <div class="site-wrapper content">
+    {% include header.html %}
 
-    <!-- Page Content-->
-    <main class="page-content">
+    <!-- Start Home Revolution Slider Parallax Section -->
+    <section id="home-revolution-slider">
+        <div class="hero">
+            <div class="tp-banner-container">
+                <div class="tp-banner">
+                    <div class="container" style="padding: 100px 50px;">
+                        <div class="row features-row wow fadeInUp" id="cards-container">
+                            <div class="col-lg-12 col-md-12 banner-text">
+                                <img id="openvidu-logo" src="img/logos/openvidu_white_bg_transp.png" />
+                                <div class="home-subheading sft">
+                                    <div class="">Easy videoconference in your web or mobile app</div>
+                                </div>
+                                <div id="wellcome-btn" class="row wow fadeInUp">
+                                    <a href="#features" class="btn btn-lg btn-primary btn-scroll">GET STARTED</a>
+                                </div>
+                            </div>
+                        </div>
 
-      {{ content }}
+                        <div class="row features-row wow fadeInUp" id="cards-container">
+                            <!-- Community Card -->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 card">
+                                <div class="card-community">
+                                    <div id="ce-btn" class="row wow fadeInUp">
+                                        <a href="/docs/home/index.html" class="btn-primary btn-scroll try-now-btn"
+                                            >OpenVidu CE</a
+                                        >
+                                    </div>
+                                </div>
+                            </div>
 
-    </main>
-    <!-- End Page Content-->
+                            <!-- PRO Card -->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 card">
+                                <div class="card-pro">
+                                    <div id="pro-btn" class="row wow fadeInUp">
+                                        <a href="/docs/openvidu-pro/index.html" class="btn-primary btn-scroll pro-btn"
+                                            >OpenVidu PRO</a
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    {% include footer.html %}
+                <div class="home-bottom">
+                    <div class="container text-center">
+                        <div class="move bounce">
+                            <a href="#features" class="ion-ios-arrow-down btn-scroll"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Home Revolution Slider Parallax Section -->
 
-    <!--<div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/releases" style="color: #ffffff; font-weight: bold">v2.0.0 NOW AVAILABLE</a></div>-->
+    <div class="site-wrapper content">
+        <!-- Page Content-->
+        <main class="page-content">
+            {{ content }}
+        </main>
+        <!-- End Page Content-->
 
-  </div>
-  <!-- End Site Wrapper -->
+        {% include footer.html %}
 
-  <!-- jQuery -->
-  <script src="js/plugins/moderniz.min.js"></script>
-  <script src="js/plugins/smoothscroll.min.js"></script>
-  <script src="js/plugins/revslider.min.js"></script>
-  <script src="js/plugins/bootstrap.min.js"></script>
-  <script src="js/plugins/waypoints.min.js"></script>
-  <script src="js/plugins/parallax.min.js"></script>
-  <script src="js/plugins/easign1.3.min.js"></script>
-  <script src="js/plugins/cubeportfolio.min.js"></script>
-  <script src="js/plugins/owlcarousel.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZWhfVEI1Ck_c2OsKO-f5WvgRpb81PN7A"></script>
-  <script src="js/plugins/gmap3.min.js"></script>
-  <script src="js/plugins/wow.min.js"></script>
-  <script src="js/plugins/counterup.min.js"></script>
-  <script src="js/scripts.js"></script>
+        <!--<div class="corner-ribbon bottom-left sticky blue shadow"><a href="/docs/releases" style="color: #ffffff; font-weight: bold">v2.0.0 NOW AVAILABLE</a></div>-->
+    </div>
+    <!-- End Site Wrapper -->
 
-  <script>
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    <!-- jQuery -->
+    <script src="js/plugins/moderniz.min.js"></script>
+    <script src="js/plugins/smoothscroll.min.js"></script>
+    <script src="js/plugins/revslider.min.js"></script>
+    <script src="js/plugins/bootstrap.min.js"></script>
+    <script src="js/plugins/waypoints.min.js"></script>
+    <script src="js/plugins/parallax.min.js"></script>
+    <script src="js/plugins/easign1.3.min.js"></script>
+    <script src="js/plugins/cubeportfolio.min.js"></script>
+    <script src="js/plugins/owlcarousel.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZWhfVEI1Ck_c2OsKO-f5WvgRpb81PN7A"></script>
+    <script src="js/plugins/gmap3.min.js"></script>
+    <script src="js/plugins/wow.min.js"></script>
+    <script src="js/plugins/counterup.min.js"></script>
+    <script src="js/scripts.js"></script>
 
-    ga('create', 'UA-101392924-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            (i[r] =
+                i[r] ||
+                function() {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-  <script>
-    window.addEventListener("load", function () {
-      window.cookieconsent.initialise({
-        "palette": {
-          "popup": {
-            "background": "#000"
-          },
-          "button": {
-            "background": "#0088aa",
-            "color": "#fff",
-            "padding": "9px 22px",
-            "box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "-moz-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "-webkit-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "-o-box-shadow": "0 -3px rgba(0, 0, 0, 0.3) inset",
-            "margin": "0 7px 0 7px",
-            "text-transform": "uppercase",
-            "text-decoration": "none",
-            "color": "#ff7302",
-            "text-shadow": "none",
-            "-webkit-transition": "all .2s ease-out",
-            "-moz-transition": "all .2s ease-out",
-            "-o-transition": "all .2s ease-out",
-            "-ms-transition": "all .2s ease-out"
-          }
-        },
-        "theme": "classic",
-        "position": "bottom-right"
-      })
-    });
-  </script>
+        ga('create', 'UA-101392924-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
-<script>
-  $().fancybox({
-    selector : '[data-fancybox="gallery-wellcome"]',
-    infobar : true,
-    arrows : false,
-    loop: true,
-    protect: true,
-    transitionEffect: 'slide',
-    buttons : [
-        'close'
-    ],
-    clickOutside : 'close',
-    clickSlide   : 'close',
-  });
-</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            window.cookieconsent.initialise({
+                palette: {
+                    popup: {
+                        background: '#000',
+                    },
+                    button: {
+                        background: '#0088aa',
+                        color: '#fff',
+                        padding: '9px 22px',
+                        'box-shadow': '0 -3px rgba(0, 0, 0, 0.3) inset',
+                        '-moz-box-shadow': '0 -3px rgba(0, 0, 0, 0.3) inset',
+                        '-webkit-box-shadow': '0 -3px rgba(0, 0, 0, 0.3) inset',
+                        '-o-box-shadow': '0 -3px rgba(0, 0, 0, 0.3) inset',
+                        margin: '0 7px 0 7px',
+                        'text-transform': 'uppercase',
+                        'text-decoration': 'none',
+                        color: '#ff7302',
+                        'text-shadow': 'none',
+                        '-webkit-transition': 'all .2s ease-out',
+                        '-moz-transition': 'all .2s ease-out',
+                        '-o-transition': 'all .2s ease-out',
+                        '-ms-transition': 'all .2s ease-out',
+                    },
+                },
+                theme: 'classic',
+                position: 'bottom-right',
+            });
+        });
+    </script>
 
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+    <script>
+        $().fancybox({
+            selector: '[data-fancybox="gallery-wellcome"]',
+            infobar: true,
+            arrows: false,
+            loop: true,
+            protect: true,
+            transitionEffect: 'slide',
+            buttons: ['close'],
+            clickOutside: 'close',
+            clickSlide: 'close',
+        });
+    </script>
 
-<script>
-    $('.main-gallery').slick({
-      autoplay: true,
-      arrows: true,
-      prevArrow: '<div class="slick-btn slick-btn-prev"><i class="icon ion-chevron-left"></i></div>',
-      nextArrow: '<div class="slick-btn slick-btn-next"><i class="icon ion-chevron-right"></i></div>',
-      autoplaySpeed: 4000,
-      dots: true,
-      infinite: true,
-      pauseOnHover: false,
-      pauseOnFocus: false,
-      responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          slidesToShow: 1
-        }
-      },
-    ]
-    });
-</script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 
-
-</body>
-
+    <script>
+        $('.main-gallery').slick({
+            autoplay: true,
+            arrows: true,
+            prevArrow: '<div class="slick-btn slick-btn-prev"><i class="icon ion-chevron-left"></i></div>',
+            nextArrow: '<div class="slick-btn slick-btn-next"><i class="icon ion-chevron-right"></i></div>',
+            autoplaySpeed: 4000,
+            dots: true,
+            infinite: true,
+            pauseOnHover: false,
+            pauseOnFocus: false,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 1,
+                    },
+                },
+            ],
+        });
+    </script>
+  </body>
 </html>

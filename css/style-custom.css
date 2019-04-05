@@ -15,7 +15,7 @@
 }
 
 #openvidu-logo {
-    max-width: 10em;
+    max-width: 45%;
 }
 
 .open {
@@ -158,11 +158,11 @@ p.subheading {
 
 #wellcome-btn {
     text-align: center;
-    margin-top: 60px;
-    margin-bottom: 112px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-#wellcome-btn a.try-now-btn {
+#wellcome-btn a.try-now-btn, #ce-btn a.try-now-btn  {
     background-color: #06d362;
 }
 
@@ -170,6 +170,10 @@ p.subheading {
     background-color: #ffcc00;
 }
 
+#ce-btn, #pro-btn {
+    text-align: center;
+    margin: auto;
+}
 .bg-custom {
     width: 100% !important;
     height: 100% !important;
@@ -641,6 +645,13 @@ img.img-more-info {
     }
 }
 
+@media screen and (max-width: 1200px) and (min-width: 991px) {
+    #openvidu-logo {
+        max-width: 80% !important;
+        height: auto !important;
+    }
+}
+
 @media screen and (max-width: 991px) {
     #padding-top-bottom {
         padding-top: 40px;
@@ -648,7 +659,7 @@ img.img-more-info {
     }
 
     #openvidu-logo {
-        min-width: 10em;
+        max-width: 100% !important;
         height: auto !important;
     }
 
