@@ -1,0 +1,617 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - REST API Pro
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('REST API Pro')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('REST API Pro')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Tutorials</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Demos</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Cheatsheet</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/join-session/">Join a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/leave-session/">Leave a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/manage-videos/">Manage video players</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/share-data/">Share data between users</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Advanced features</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Reference Documentation</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Deployment</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-app/">Deploying your OpenVidu app</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/upgrading/">Upgrading OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Contribute</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../releases/">Releases</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  style="width: 100%; display: inline-block"  class="subnav_drop">
+        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
+                        href="/docs/openvidu-pro/">
+                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
+                </a></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../">Home</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-inspector/">OpenVidu Inspector</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 current">
+        <a class="current" href="./">REST API Pro</a>  
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">REST API Pro</h2>
+
+<hr>
+
+<p>OpenVidu Pro provides all of <a href="../../reference-docs/REST-API/" target="_blank">OpenVidu Community Edition REST operations</a>, but also includes some extra REST operations of its own.</p>
+<p>All REST operations have in common the header referred to authorization. It is implemented via Basic Auth, and it is as simple as applying Base64 encoding to the username (always "OPENVIDUAPP") and the password (your <strong>secret</strong> shared with openvidu-server). If authorization header is wrong, every call to any REST API operation will return HTTP status <code>401</code>.</p>
+<p>For example, for secret "MY_SECRET", the final valid HTTP header would be</p>
+<blockquote>
+<p><code>Authorization: Basic T1BFTlZJRFVBUFA6TVlfU0VDUkVU</code></p>
+</blockquote>
+<h3 id="list-of-available-operations">List of available operations</h3>
+<p><br></p>
+<ul>
+<li>Get OpenVidu Pro active configuration: <a href="#get-proconfig"><strong>GET /pro/config</strong></a></li>
+<li>Restart OpenVidu Pro: <a href="#post-prorestart"><strong>POST /pro/restart</strong></a></li>
+</ul>
+<h3 id="get-proconfig">GET <code>/pro/config</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>GET OPENVIDU PRO CONFIGURATION</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>GET</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/config</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em></td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"version": "2.9.0", "openviduServerDependencyVersion": "2.9.0", "openviduProStatsMonitoringInterval": 30, "openviduProStatsWebrtcInterval": 20, "openviduPublicurl": "https://localhost:4443/", "openviduCdr": false, "maxRecvBandwidth": 1000, "minRecvBandwidth": 300, "maxSendBandwidth": 1000, "minSendBandwidth": 300, "openviduRecording": true, "openviduRecordingVersion": "2.9.0", "openviduRecordingPath": "/opt/openvidu/recordings/", "openviduRecordingPublicAccess": true, "openviduRecordingNotification": "publisher_moderator", "openviduRecordingCustomLayout": "/opt/openvidu/custom-layout/", "openviduRecordingAutostopTimeout": 120}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>version</code>: version of OpenVidu Server Pro</li>
+<li><code>openviduServerDependencyVersion</code>: version of OpenVidu Server Community Edition upon which this version of OpenVidu Server Pro is built on</li>
+<li><code>openviduProStatsMonitoringInterval</code>: interval in seconds for CPU, memory and net usage stats gathering in OpenVidu Server Pro host machine</li>
+<li><code>openviduProStatsWebrtcInterval</code>: interval in seconds for WebRTC stats gathering from Kurento Media Server WebRTC endpoints</li>
+<li><strong>Rest of properties</strong>: values given to <strong><a href="../../reference-docs/openvidu-server-params/" target="_blank">system properties</a></strong> on OpenVidu Server Pro launch. These properties are common to method <a href="../../reference-docs/REST-API/#get-config" target="_blank">GET /config</a> of OpenVidu Server Community Edition</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="post-prorestart">POST <code>/pro/restart</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>RESTART OPENVIDU PRO</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>POST</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/restart/</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/json</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><code>{"openvidu.secret": "MY_SECRET", "openvidu.cdr": true, "openvidu.recording": true, "openvidu.recording.public-access": true, "openvidu.recording.notification": "publisher_moderator", "openvidu.recording.path": "/opt/openvidu/recordings", "openvidu.recording.custom-layout": "/opt/openvidu/custom-layout", "openvidu.recording.autostop-timeout": 120, "openvidu.streams.video.max-recv-bandwidth": 1000, "openvidu.streams.video.min-recv-bandwidth": 300, "openvidu.streams.video.max-send-bandwidth": 1000, "openvidu.streams.video.min-send-bandwidth": 300, "openvidu.pro.stats.monitoring-interval": 30, "openvidu.pro.stats.webrtc-interval": 20}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Body parameters</strong></p>
+<p>The body of the POST request is a JSON object with the new <a href="../../reference-docs/openvidu-server-params/" target="_blank">OpenVidu system properties</a> to be applied on the restart process. Not all of them are available, and a few are exclusive to OpenVidu Pro (<code>openvidu.pro.stats.monitoring-interval</code>, <code>openvidu.pro.stats.webrtc-interval</code>). The complete list of available properties is listed below</p>
+<hr />
+<ul>
+<li><strong>openvidu.secret</strong> <em>(optional string)</em> : new secret to secure OpenVidu Pro</li>
+<li><strong>openvidu.cdr</strong> <em>(optional boolean)</em> : whether to enable OpenVidu Call Detail Record or not</li>
+<li><strong>openvidu.recording</strong> <em>(optional boolean)</em> : whether to enable OpenVidu recording module or not</li>
+<li><strong>openvidu.recording.public-access</strong> <em>(optional boolean)</em> : whether to allow free http access to recorded sessions or not</li>
+<li><strong>openvidu.recording.notification</strong> <em>(optional string)</em> : which users should receive the recording events in the client side (<code>"all"</code>, <code>"publisher_moderator"</code>, <code>"moderator"</code> or <code>"none"</code>)</li>
+<li><strong>openvidu.recording.path</strong> <em>(optional string)</em> : system path where to store the video files of recorded session</li>
+<li><strong>openvidu.recording.custom-layout</strong> <em>(optional string)</em> : sytem path where OpenVidu Server should look for custom recording layouts</li>
+<li><strong>openvidu.recording.autostop-timeout</strong> <em>(optional number)</em> : timeout in seconds for recordings to automatically stop</li>
+<li><strong>openvidu.streams.video.max-recv-bandwidth</strong> <em>(optional number)</em> : maximum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained</li>
+<li><strong>openvidu.streams.video.min-recv-bandwidth</strong> <em>(optional number)</em> : minimum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained</li>
+<li><strong>openvidu.streams.video.max-send-bandwidth</strong> <em>(optional number)</em> : maximum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained</li>
+<li><strong>openvidu.streams.video.min-send-bandwidth</strong> <em>(optional number)</em> : minimum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained</li>
+<li><strong>openvidu.pro.stats.monitoring-interval</strong> <em>(optional number)</em> : interval in seconds for CPU, memory and net usage stats gathering in OpenVidu Server Pro host machine. 0 means no gathering at all</li>
+<li><strong>openvidu.pro.stats.webrtc-interval</strong> <em>(optional number)</em> : interval in seconds for WebRTC stats gathering from Kurento Media Server WebRTC endpoints. 0 means no gathering at all</li>
+</ul>
+</blockquote>
+<div></div>
+
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: the restarting process has been initialized. All properties are valid and OpenVidu Server should restart properly</li>
+<li><code>400</code>: there's some problem with a body parameter. The response message will provide further details</li>
+</ul>
+</blockquote> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../deploying-openvidu-pro/" class="btn btn-xs btn-primary" title="Deploying OpenVidu Pro"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/openvidu-pro/REST-API-pro.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>
