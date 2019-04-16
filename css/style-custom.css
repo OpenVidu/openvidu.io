@@ -1,3 +1,59 @@
+#first-row-main-page {
+    margin-top: 105px;
+    text-align: center;
+}
+
+#gallery-main-page .slick-btn i {
+    color: #ddd !important;
+}
+
+#gallery-main-page .slick-btn:hover {
+    background-color: rgba(221, 221, 221, 0.15) !important;
+}
+
+#gallery-main-page .slick-dots li button:before {
+    color: #ddd;
+}
+
+section#main-buttons {
+    padding-top: 80px;
+    padding-bottom: 70px;
+}
+
+@media screen and (max-width: 991px) {
+    header nav.nav-home-page .logo-big {
+        visibility: hidden;
+    }
+    #first-row-main-page {
+        margin-top: 40px;
+    }
+    #openvidu-logo {
+        max-width: 450px !important;
+    }
+    #wellcome-btn a {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 991px) and (min-height: 700px) {
+    section#logo {
+        height: 40vh;
+    }
+    section#gallery-main-page {
+        height: 50vh;
+    }
+    section#main-buttons {
+        height: 10vh;
+        padding: 0;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) and (min-height: 700px) {
+    #gallery-main-page .img-wellcome {
+        max-height: 320px !important;
+    }
+}
+
 ::selection {
     color: white;
 }
@@ -23,7 +79,8 @@
 }
 
 #openvidu-logo {
-    max-width: 45%;
+    width: 100%;
+    max-width: 500px;
 }
 
 .open {
@@ -166,22 +223,22 @@ p.subheading {
 
 #wellcome-btn {
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
-#wellcome-btn a.try-now-btn, #ce-btn a.try-now-btn  {
-    background-color: #06d362;
+a.try-now-btn {
+    background-color: #06d362 !important;
 }
 
 #wellcome-btn a.go-docs-btn {
     background-color: #ffcc00;
 }
 
-#ce-btn, #pro-btn {
+#ce-btn,
+#pro-btn {
     text-align: center;
     margin: auto;
 }
+
 .bg-custom {
     width: 100% !important;
     height: 100% !important;
@@ -374,8 +431,8 @@ span.cc-message {
 }
 
 #padding-top-bottom {
-    padding-top: 100px;
-    padding-bottom: 90px;
+    padding-top: 70px;
+    padding-bottom: 80px;
 }
 
 .row-gallery div {
@@ -423,7 +480,9 @@ img.img-pro {
 }
 
 .main-gallery {
+    margin: auto;
     margin-top: 40px;
+    max-width: 1000px;
 }
 
 .docs-gallery {
@@ -435,6 +494,8 @@ img.img-pro {
     max-height: 450px;
     margin-left: auto;
     margin-right: auto;
+    border: 3px solid #5e5e5e;
+    border-radius: 2px;
 }
 
 .slick-btn-prev {
@@ -655,7 +716,7 @@ img.img-more-info {
 
 @media screen and (max-width: 1200px) and (min-width: 991px) {
     #openvidu-logo {
-        max-width: 80% !important;
+        max-width: 60% !important;
         height: auto !important;
     }
 }
@@ -664,11 +725,6 @@ img.img-more-info {
     #padding-top-bottom {
         padding-top: 40px;
         padding-bottom: 40px;
-    }
-
-    #openvidu-logo {
-        max-width: 100% !important;
-        height: auto !important;
     }
 
     span.cc-message {
@@ -736,6 +792,14 @@ img.img-more-info {
 
     #openvidu-pro-tag {
         line-height: 32px !important;
+    }
+
+    .cards-container{
+        margin-bottom: 10px;
+    }
+
+    .index-card {
+        padding: 18px !important;
     }
 }
 
@@ -894,7 +958,7 @@ div.lang-tabs-container.elastic-events div.lang-tabs-content pre {
     background-color: #f9f9f9;
 }
 
-.monitoring-div > p:last-child {
+.monitoring-div>p:last-child {
     margin: 0 !important;
 }
 
@@ -915,10 +979,86 @@ div.lang-tabs-container.elastic-events div.lang-tabs-content pre {
     border-color: transparent;
     color: white;
     outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
 .version-buttons a:last-of-type {
     margin-right: 5px;
+}
+
+.index-card {
+    background: #d0cdcd47;
+    border-radius: 3px;
+    box-shadow: 0 -3px rgba(0, 0, 0, 0.4) inset;
+    -moz-box-shadow: 0 -3px rgba(0, 0, 0, 0.4) inset;
+    -webkit-box-shadow: 0 -3px rgba(0, 0, 0, 0.4) inset;
+    -o-box-shadow: 0 -3px rgba(0, 0, 0, 0.4) inset;
+}
+
+.index-card p {
+    color: white;
+    font-family: Montserrat;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+table.table-pricing {
+    display: table !important;
+    text-align: center !important;
+}
+
+#doc-container table.table-pricing {
+    margin-top: 50px;
+}
+
+#doc-container table.table-pricing th {
+    padding: 8px;
+}
+
+.table-pricing th {
+    vertical-align: middle !important;
+}
+
+.table-pricing td {
+    vertical-align: middle !important;
+    padding: 6px !important;
+}
+
+.table-pricing thead th {
+    font-family: Montserrat;
+}
+
+.pricing-table-icon {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.pricing-table-icon-info {
+    font-size: 17px;
+    color: #4d4d4d;
+    margin-left: 8px;
+}
+
+.pricing-table-icon.ion-checkmark {
+    color: #049145;
+}
+
+.pricing-table-icon.ion-close {
+    color: #990000;
+}
+
+.pricing-table-icon.ion-hammer {
+    color: #005f76;
+    transform: rotate(45deg);
+}
+
+.table-pricing .btn-primary {
+    font-size: 12px;
+    padding: 8px 8px;
+}
+
+.table-pricing .try-now-btn {
+    background-color: #06d362;
 }

@@ -84,7 +84,7 @@ a:focus, a:active, button::-moz-focus-inner, input[type="reset"]::-moz-focus-inn
         padding: 0 90px;
     }
 }
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .container { 
         width: 100%; 
     }
@@ -426,7 +426,7 @@ p {
         font-size: 72px;
     }
 }
-@media (min-width:768px) and (max-width:992px) {
+@media (min-width:768px) and (max-width:991px) {
     .home-heading {
         font-size: 55px;
     }
@@ -757,7 +757,7 @@ nav {
 
 
 /*Navbar Collapse*/  
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .navbar-default .navbar-collapse {
         margin-top: 18px;
         padding-right: 0px;
@@ -1004,7 +1004,7 @@ nav {
         overflow: visible!important;
     }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .dropdown-menu {
         float: none;
         position: static;
@@ -1097,7 +1097,7 @@ nav {
         font-size: 134px;
     }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .feature-column {
         margin-bottom: 15px;
     }
@@ -1182,7 +1182,7 @@ nav {
     padding-top: 80px;
 	padding-bottom: 60px;
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .skills-row {
         margin-bottom: 40px;
     }
@@ -1477,7 +1477,7 @@ blockquote strong {
         padding-right: 80px;
     } 
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     #quote blockquote {
         font-size: 22px;
     }
@@ -1848,7 +1848,7 @@ blockquote strong {
     padding-top: 75px;
     padding-bottom: 75px; 
 }
-@media (max-width:992px) {
+@media (max-width:991px) {
     #price-list {
         display: none;
     }
@@ -2321,7 +2321,7 @@ border-bottom:1px dotted #ccc;
         margin-bottom: 45px;
     }
 }
-@media (max-width:992px) {
+@media (max-width:991px) {
     #video-section .cbp {
         margin-bottom: 35px;
     }
@@ -2439,7 +2439,7 @@ footer #social-icons {
     float: right;
     margin: 0;
 }
-@media (max-width:992px) {
+@media (max-width:991px) {
     .footer-copyright p {
         text-align: center;
     }
@@ -2985,7 +2985,7 @@ ul.caret-list li:before {
     font-size:90%;
   }
 }
-@media (min-width: 769px) and (max-width: 992px) {
+@media (min-width: 769px) and (max-width: 991px) {
   .btn-responsive {
     font-size:100%;
   }
@@ -3453,7 +3453,7 @@ pre {
 @media (min-width:992px) {
     .column{ width: 33.3%; }
 }
-@media (min-width:564px) and (max-width:992px) {
+@media (min-width:564px) and (max-width:991px) {
     .column { width: 50%; }
 }
 @media (max-width:564px) {

@@ -362,8 +362,8 @@ span.cc-message {
 }
 
 #padding-top-bottom {
-    padding-top: 100px;
-    padding-bottom: 90px;
+    padding-top: 90px;
+    padding-bottom: 80px;
 }
 
 .row-gallery div {
@@ -604,7 +604,7 @@ img.img-more-info {
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (min-width: 601px) and (max-width: 991px) {
     #padding-top-bottom {
         padding-top: 40px;
         padding-bottom: 40px;
@@ -680,6 +680,10 @@ img.img-more-info {
 
     #openvidu-pro-tag {
         line-height: 32px !important;
+    }
+
+    .cards-container{
+        margin-bottom: 0px;
     }
 }
 

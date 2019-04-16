@@ -101,6 +101,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="recordingevent.html#cancelable" class="tsd-kind-icon">cancelable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recordingevent.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recordingevent.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="recordingevent.html#reason" class="tsd-kind-icon">reason</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="recordingevent.html#target" class="tsd-kind-icon">target</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="recordingevent.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
@@ -124,7 +125,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#cancelable">cancelable</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L28">OpenViduInternal/Events/Event.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L28">OpenViduInternal/Events/Event.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/RecordingEvent.ts#L32">OpenViduInternal/Events/RecordingEvent.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/RecordingEvent.ts#L32">OpenViduInternal/Events/RecordingEvent.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/RecordingEvent.ts#L42">OpenViduInternal/Events/RecordingEvent.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/RecordingEvent.ts#L42">OpenViduInternal/Events/RecordingEvent.ts:42</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -169,6 +170,28 @@
 						<p>If no name is supplied, this property will be undefined and the recorded file will be named after property <a href="recordingevent.html#id">id</a></p>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="reason" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> reason</h3>
+					<div class="tsd-signature tsd-kind-icon">reason<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/RecordingEvent.ts#L53">OpenViduInternal/Events/RecordingEvent.ts:53</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>For &#39;recordingStopped&#39; event:</p>
+							<ul>
+								<li>&quot;recordingStoppedByServer&quot;: the recording has been gracefully stopped by the application</li>
+								<li>&quot;sessionClosedByServer&quot;: the Session has been closed by the application</li>
+								<li>&quot;automaticStop&quot;: see <a href="https://openvidu.io/docs/advanced-features/recording/#automatic-stop-of-recordings">Automatic stop of recordings</a></li>
+								<li>&quot;mediaServerDisconnect&quot;: OpenVidu Media Server has crashed or lost its connection. A new media server instance is active and the recording has been stopped (no media streams are available in the new media server)</li>
+							</ul>
+						</div>
+						<p>For &#39;recordingStarted&#39; empty string</p>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="target" class="tsd-anchor"></a>
 					<h3>target</h3>
@@ -176,7 +199,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#target">target</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L33">OpenViduInternal/Events/Event.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L33">OpenViduInternal/Events/Event.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -192,7 +215,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#type">type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L38">OpenViduInternal/Events/Event.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L38">OpenViduInternal/Events/Event.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -215,7 +238,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#isdefaultprevented">isDefaultPrevented</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L54">OpenViduInternal/Events/Event.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L57">OpenViduInternal/Events/Event.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -238,7 +261,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="event.html">Event</a>.<a href="event.html#preventdefault">preventDefault</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/2f5cb22/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L72">OpenViduInternal/Events/Event.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/4b41120/openvidu-browser/src/OpenViduInternal/Events/Event.ts#L75">OpenViduInternal/Events/Event.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -329,6 +352,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="recordingevent.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="recordingevent.html#reason" class="tsd-kind-icon">reason</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="recordingevent.html#target" class="tsd-kind-icon">target</a>

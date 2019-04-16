@@ -1,0 +1,627 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - OpenVidu Inspector
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('OpenVidu Inspector')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('OpenVidu Inspector')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Tutorials</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/">Intro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Demos</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Cheatsheet</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/join-session/">Join a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/leave-session/">Leave a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/manage-videos/">Manage video players</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/share-data/">Share data between users</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Advanced features</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Reference Documentation</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Deployment</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-demos-aws/">Deploying OpenVidu Demos on AWS (TUTORIAL)</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-app/">Deploying your OpenVidu app</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/upgrading/">Upgrading OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Contribute</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../releases/">Releases</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  style="width: 100%; display: inline-block"  class="subnav_drop">
+        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
+                        href="/docs/openvidu-pro/">
+                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
+                </a></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../">Home</a> 
+</li>
+
+  
+
+<li class="toctree-l1 current">
+        <a class="current" href="./">OpenVidu Inspector</a>  
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../REST-API-pro/">REST API Pro</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h2 id="section-title">OpenVidu Inspector</h2>
+
+<hr>
+
+<p style="font-size: 18px; color: #7a7a7a; margin-top: 30px; padding: 4px;">
+A powerful, easy-to-use and visually attractive dashboard that will help you monitor, manage and review all your videoconferences. Some features already available in the current version of OpenVidu Pro are:
+</p>
+
+<p><br></p>
+<h4 id="full-in-depth-visualization-of-your-ongoing-video-sessions">Full in-depth visualization of your ongoing video sessions</h4>
+<p>Review each client connected to a video session and the media streams each one is sending and receiving. Our intuitive graph visualization will give you a complete summary of your sessions.</p>
+<div class="row">
+    <div class="pro-gallery" style="margin: 25px 15px 25px 15px">
+        <a data-fancybox="gallery-pro1" href="/img/docs/openvidu-pro/pro2.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro2.png"/></a>
+        <a data-fancybox="gallery-pro1" href="/img/docs/openvidu-pro/pro3.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro3.png"/></a>
+        <a data-fancybox="gallery-pro1" href="/img/docs/openvidu-pro/pro4.gif"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro4.gif"/></a>
+        <a data-fancybox="gallery-pro1" href="/img/docs/openvidu-pro/pro8.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro8.png"/></a>
+    </div>
+</div>
+
+<p><br></p>
+<h4 id="moderation-capabilities-of-ongoing-video-sessions">Moderation capabilities of ongoing video sessions</h4>
+<p>Through OpenVidu Inspector you are able to administrate your video sessions just by pressing buttons: cut the video or audio of any publisher, force the disconnection of any participant, start and stop the recording of any video session and close them whenever you want.</p>
+<div class="row">
+    <div class="pro-gallery" style="margin: 25px 15px 25px 15px">
+        <a data-fancybox="gallery-pro2" href="/img/docs/openvidu-pro/pro5.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro5.png"/></a>
+        <a data-fancybox="gallery-pro2" href="/img/docs/openvidu-pro/pro6.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro6.png"/></a>
+        <a data-fancybox="gallery-pro2" href="/img/docs/openvidu-pro/pro7.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro7.png"/></a>
+    </div>
+</div>
+
+<p><br></p>
+<h4 id="recording-management">Recording management</h4>
+<p>OpenVidu Inspector allows you to review all your recordings in a simple way. Preview them, download them or delete those you don't need anymore. Just with a couple of clicks.</p>
+<div class="row">
+    <div style="margin: 25px 15px 15px 15px">
+        <a data-fancybox="gallery-pro3" href="/img/docs/openvidu-pro/pro9.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro9.png"/></a>
+    </div>
+</div>
+
+<p><br></p>
+<h4 id="session-history">Session history</h4>
+<p>Every OpenVidu session event-flow is stored with great detail in OpenVidu Pro. This way you can review any past session in OpenVidu Inspector: its duration, the total streaming time, the users connected to it, who published and subscribed, the recordings started for the session... Lots of data to analyse your sessions once they are closed.</p>
+<div class="row">
+    <div class="pro-gallery" style="margin: 25px 15px 25px 15px">
+        <a data-fancybox="gallery-pro4" href="/img/docs/openvidu-pro/pro14.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro14.png"/></a>
+        <a data-fancybox="gallery-pro4" href="/img/docs/openvidu-pro/pro15.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro15.png"/></a>
+        <a data-fancybox="gallery-pro4" href="/img/docs/openvidu-pro/pro16.png"><img class="img-responsive img-pro" src="/img/docs/openvidu-pro/pro16.png"/></a>
+    </div>
+</div>
+
+<p><br></p>
+<h4 id="client-geographic-location">Client geographic location</h4>
+<p>OpenVidu Pro is able to locate your clients by city and country to make easier the identification of the users connecting to your sessions. You can consult this property to OpenVidu Server whenever you want with REST API or any server SDK. You also have available this info in OpenVidu Inspector:<br><br></p>
+<div class="row">
+    <div style="margin: 25px 15px 15px 15px">
+        <a data-fancybox="gallery-pro5" href="/img/docs/openvidu-pro/pro12.png"><img class="img-responsive img-pro" style="border: 2px solid #eeeeee" src="/img/docs/openvidu-pro/pro12.png"/></a>
+    </div>
+</div>
+
+<p><br></p>
+<blockquote>
+<p>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" target="_blank">http://www.maxmind.com</a></p>
+</blockquote>
+<h4 id="programmatic-reset">Programmatic reset</h4>
+<p>OpenVidu Pro supports programmatic reset. You may call a <a href="../../openvidu-pro/REST-API-pro#post-prorestart" target="_blank">REST API method</a> to restart your OpenVidu Server process. This way you can:</p>
+<ul>
+<li>A) Change OpenVidu Server <a href="../../reference-docs/openvidu-server-params/" target="_blank">configuration properties</a></li>
+<li>B) Easily clean up any garbage process or file that may have been stranded</li>
+</ul>
+<p>You may also restart OpenVidu Server Pro directly in OpenVidu Inspector:<br><br></p>
+<div class="row">
+    <div style="margin: 25px 15px 15px 15px">
+        <a data-fancybox="gallery-pro6" href="/img/docs/openvidu-pro/pro13.png"><img class="img-responsive img-pro" style="border: 2px solid #eeeeee; max-height: 650px" src="/img/docs/openvidu-pro/pro13.png"/></a>
+    </div>
+</div>
+
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p>
+<p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/brands.css" integrity="sha384-Px1uYmw7+bCkOsNAiAV5nxGKJ0Ixn5nChyW8lCK1Li1ic9nbO5pC/iXaq27X5ENt" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I" crossorigin="anonymous"></p>
+<p><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script></p>
+<script>
+    $('.pro-gallery').slick({
+      autoplay: true,
+      arrows: false,
+      autoplaySpeed: 3000,
+      dots: true,
+      infinite: true,
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1
+        }
+      },
+    ]
+    });
+</script> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../detailed-session-monitoring/" class="btn btn-xs btn-primary float-right" title="Detailed session monitoring">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../" class="btn btn-xs btn-primary" title="Home"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/openvidu-pro/openvidu-inspector.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

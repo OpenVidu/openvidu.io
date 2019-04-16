@@ -3,6 +3,8 @@
 
   {% if page.active=="documentation" %}
   <nav class="navbar navbar-default navbar-alt navbar-small">
+  {% elsif page.active=="home" %}
+  <nav class="nav-default navbar navbar-default navbar-alt nav-home-page" role="navigation">
   {% else %}
   <nav class="nav-default navbar navbar-default navbar-alt" role="navigation">
   {% endif %}
@@ -37,33 +39,27 @@
           {% else %}
           <li {% if page.active=="home" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/index">Home</a></li>
           {% endif %}
-
           <li {% if page.active=="demos" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/demos">Demos</a></li>
           <li {% if page.active=="tutorials" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/tutorials">Tutorials</a></li>
-          <li {% if page.active=="documentation" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/docs/home">Docs</a></li>
+          <li {% if page.active=="community" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/community">Community</a></li>
+          <li {% if page.active=="commercial" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/commercial">Commercial</a></li>
           <li {% if page.active=="pricing" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/pricing">Pricing</a></li>
-
-          {% if page.page-type=="home" %}
-          <li {% if page.active=="social" %} class="active to-section" {% else %} class="to-section to-real-section" {% endif %}><a href="#get-connected">Social</a></li>
-          {% else %}
-          <li {% if page.active=="social" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/social">Social</a></li>
-          {% endif %}
+          <li {% if page.active=="documentation" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/docs/home">Docs</a></li>
 
           <!--<li class="dropdown">
-                            <span class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></span>
-                            <ul class="dropdown-menu" role="menu">
-                                <li class="active"><a href="#">Home - Parallax</a></li>
-                                <li><a href="home-video.html">Home - Video Slider</a></li>
-                                <li><a href="home-fullwidth.html">Home - Fullwidth</a></li>
-                                <li><a href="home-landing-page.html">Home - Landing Page</a></li>
-                                <li><a href="shortcodes.html">Shortcodes</a></li>
-                                <li><a href="http://themeforest.net/user/VossenDesign/portfolio" id="btn-buy"><span class="btn-buy">Buy Now</span></a></li>
-                            </ul>
-                        </li>-->
+            <span class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></span>
+            <ul class="dropdown-menu" role="menu">
+                <li class="active"><a href="#">Home - Parallax</a></li>
+                <li><a href="home-video.html">Home - Video Slider</a></li>
+                <li><a href="home-fullwidth.html">Home - Fullwidth</a></li>
+                <li><a href="home-landing-page.html">Home - Landing Page</a></li>
+                <li><a href="shortcodes.html">Shortcodes</a></li>
+                <li><a href="http://themeforest.net/user/VossenDesign/portfolio" id="btn-buy"><span class="btn-buy">Buy Now</span></a></li>
+            </ul>
+          </li>-->
 
-          <li {% if page.active=="contact" %} class="active to-section" {% else %} class="to-section" {% endif %}><a href="/contact">Contact</a></li>
           <li><a class="social-icon" target="_blank" href="https://twitter.com/openvidu"><i class="icon ion-social-twitter"></i></a></li>
-          <li><a class="social-icon" target="_blank" href="https://github.com/OpenVidu"><i class="icon ion-social-github"></i></a></li>
+          <li><a class="social-icon" target="_blank" href="https://github.com/OpenVidu/openvidu"><i class="icon ion-social-github"></i></a></li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
