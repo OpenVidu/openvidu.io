@@ -707,6 +707,10 @@ var video = document.getElementById(&quot;hidden-video&quot;).play();
 <p>Possible solutions to this issue? Tweaking muted property on videos to have only one playing audio at a time. Maybe using user gestures to directly play videos can help too. There is not a clear solution to this problem, and depending on the web application some workarounds can succeed and some may not. On our tests we have even seen different behaviors in video playback from one execution to another, breaking the supposed consistency of the browser. It is really a matter of testing different approaches until you find a good enough solution.</p>
 <p>Usually any other WebRTC based service we have tested redirected to a native application when trying to connect through iOS Safari. You can implement your native OpenVidu app for both iOS and Android with Ionic (<a href="../tutorials/openvidu-ionic/" target="_blank">see the tutorial</a>)</p>
 <hr />
+<h3 id="13-deploying-openvidu-in-aws-is-failing">13. Deploying OpenVidu in AWS is failing</h3>
+<p>If you are deploying <a href="../deployment/deploying-aws/" target="_blank">OpenVidu Community</a> or <a href="../openvidu-pro/deploying-openvidu-pro/" target="_blank">OpenVidu Pro</a> in AWS and the CloudFormation reaches <code>CREATE_FAILED</code> status, then possibly you are missing a default VPC in that specific region.</p>
+<p>You can inspect your default VPCs like this: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc" target="_blank">https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc</a><br>
+And you can create a default VPC like this: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-vpc" target="_blank">https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-vpc</a> </p>
 <p><br></p> 
 						</div>
 					</div> <footer>
