@@ -510,7 +510,7 @@ active: documentation
     vertical-align: middle;
     display: table-cell;
     padding: 10px 20px;">
-    <strong>Openvidu-browser library needs to support React Native for openvidu-react-native tutorial works. Contact with <a href="mailto:openvidu@gmail.com">openvidu@gmail.com</a> to get it.</strong>
+    <strong>React Native support is a paid feature. A special version of openvidu-browser library is needed for openvidu-react-native tutorial to work. Contact us through <a href="/community">Commercial page support</a> to get it</strong>
 </div>
 </div>
 
@@ -590,7 +590,7 @@ Add the artifact in the root project </p>
     vertical-align: middle;
     display: table-cell;
     padding: 10px 20px;">
-    You should check your network is powerfull or connect your devide to 4G. We have had several problems with the network when we were tried to do a streaming communication.
+    Some problems have been encountered while streaming with iOS devices in some networks with complex restrictions. With mobile networks (4G) these problems have not taken place. Make sure there is no problem with the network you are using in your development environment before posting issues about it
 </div>
 </div>
 
@@ -617,7 +617,7 @@ Add the artifact in the root project </p>
     padding-left: 20px;
     padding-right: 20px;
     ">
-    This tutorial has been tested with Android 5.1 (Lollipop) and Android 9 (Pie)
+    This tutorial has been tested from Android 5.1 (Lollipop) to Android 9 (Pie)
 </div>
 </div>
 
@@ -653,7 +653,7 @@ react-native run-android
     padding-left: 20px;
     padding-right: 20px;
     ">
-    This tutorial has been tested with iPhone 7 (iOS 12.2) iPhone 7 Plus (iOS 12.1) and iPad Air (iOS 12.1.1)
+    This tutorial has been tested with iPhone 7 (iOS 12.2), iPhone 7 Plus (iOS 12.1) and iPad Air (iOS 12.1.1)
 </div>
 </div>
 
@@ -665,7 +665,7 @@ react-native run-android
 <p>To deploy the iOS app React has <a href="https://facebook.github.io/react-native/docs/running-on-device">this guide</a> to properly configure your development environment.</p>
 <p>To actually see the real implementation of this class, check out <a href="#ios-specific-requirements">iOS specific requirements</a> section, as most of its code is just adjustments to make it work on iOS devices.</p>
 <h2 id="understanding-the-code">Understanding the code</h2>
-<p>This is an React Native project generated with React Native CLI tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>App.js</code> file:</p>
+<p>This is a React Native project generated with React Native CLI tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>App.js</code> file:</p>
 <ul>
 <li><code>App.js</code>: defines <em>App</em> component, main component of the app. It contains the functionalities for joining a video-call and for handling the video-calls themselves.</li>
 </ul>
@@ -692,7 +692,7 @@ react-native run-android
 <hr />
 <h4 id="whenever-a-user-clicks-on-the-join-button-defined-in-appjs-joinsession-method-is-called">Whenever a user clicks on the join button defined in <code>App.js</code>, <code>joinSession()</code> method is called:</h4>
 <p><br></p>
-<p>We first get an OpenVidu object and initialize a session property in a state.</p>
+<p>We first get an OpenVidu object and initialize a session property inside the state.</p>
 <pre><code class="javascript">// --- 1) Get an OpenVidu object ---
 
 this.OV = new OpenVidu();
@@ -719,7 +719,7 @@ mySession.on('streamCreated', (event) =&gt; {
     // so OpenVidu doesn't create an HTML video by its own
     var subscriber = mySession.subscribe(event.stream, undefined);
 
-    //We use an auxiliar array to push the new stream
+    //We use an auxiliary array to push the new stream
     var subscribers = this.state.subscribers;
 
     subscribers.push(subscriber);
@@ -741,10 +741,10 @@ mySession.on('streamDestroyed', (event) =&gt; {
 // See next step
 </code></pre>
 
-<p>Here we subscribe to the Session events that interest us. As we are using React Native framework, a good approach for managing the remote media streams is to loop across an array of them, feeding a common component with each <code>Subscriber</code> object and let it manage its video. This component will be <em>RTCView</em> and is provided from <em>react-native-webrtc</em> library. To do this, we need to store each new Subscriber we received in array <code>subscribers</code>, and we must remove from it every deleted subscriber whenever it is necessary. To achieve this, we use the following events:</p>
+<p>Here we subscribe to the Session events that interest us. As we are using React Native framework, a good approach for managing the remote media streams is to loop across an array of them, feeding a common component with each <code>Subscriber</code> object and let it manage its video. This component will be <em>RTCView</em> and is provided from <strong><em>react-native-webrtc</em></strong> library. To do this, we need to store each new Subscriber we received in array <code>subscribers</code>, and we must remove from it every deleted subscriber whenever it is necessary. To achieve this, we use the following events:</p>
 <ul>
 <li>
-<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM due to,  as it is a native application, the DOM is not exist.  The render method of <em>App.js</em> will show the new video, as it contains a .map js function, declaring a <em>RTCView</em> for each subscriber. We get the reference to RTCView and we will run <em>addVideoElement</em> function with the aim of the video appears.</p>
+<p><code>streamCreated</code>: for each new Stream received by the Session object, we subscribe to it and store the returned Subscriber object in our <code>subscribers</code> array. Method <code>session.subscribe</code> has <em>undefined</em> as second parameter so OpenVidu doesn't insert and HTML video element in the DOM due to,  as it is a native application, the DOM does not exist.  The render method of <em>App.js</em> will show the new video, as it contains a .map js function, declaring a <em>RTCView</em> for each subscriber. We get the reference to RTCView and we will run openvidu-browser method <em>addVideoElement</em>, passing the reference of the RTCView when it is defined.</p>
 <pre><code>{this.state.subscribers.map((item, index) =&gt; {
     if(!!item){
         return (
@@ -932,7 +932,7 @@ mySession.publish(publisher);
 &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
 </code></pre>
 
-<p>2) In <code>android/settings.gradle</code>, includes WebRTCModule</p>
+<p>2) In <code>android/settings.gradle</code>, include WebRTCModule</p>
 <pre><code class="javascript">include ':WebRTCModule', ':app'
 project(':WebRTCModule').projectDir = new File(rootProject.projectDir, '../node_modules/openvidu-browser/node_modules/react-native-webrtc/android')
 </code></pre>
@@ -955,9 +955,9 @@ protected List&lt;ReactPackage&gt; getPackages() {
 </code></pre>
 
 <h2 id="ios-specific-requirements">iOS specific requirements</h2>
-<p>iOS apps need to include the WebRTC modules from react-native-webrtc plugin. We will do it by the following steps bellow. </p>
+<p>iOS apps need to include the WebRTC modules from react-native-webrtc plugin. We will do it by following the steps bellow.</p>
 <p>These configurations are already included in this <strong>openvidu-react-native project</strong>, so if you start from here no further configurations are needed. Otherwise, if you want to <strong>start a new project with React Native and OpenVidu</strong>, you should follow these simple steps:</p>
-<p>1) Add Files Into Project</p>
+<p>1) Add these files into your project</p>
 <ul>
 <li>in Xcode: Right click on <code>Libraries</code> and  <code>Add Files to {project}</code></li>
 <li>Go to <code>node_modules/openvidu-browser/node_modules/react-native-webrtc/ios/RCTWebRTC.xcodeproj</code> and click on <code>Add</code></li>
