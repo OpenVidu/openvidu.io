@@ -575,6 +575,30 @@ ionic serve
 </blockquote>
 <p><br></p>
 <h4 id="in-an-android-device-with-native-app">In an Android device with native app</h4>
+<p><div style="
+    display: table;
+    border: 2px solid #0088aa9e;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding: 5px 0 5px 0;
+    background-color: rgba(0, 136, 170, 0.04);"><div style="display: table-cell; vertical-align: middle;">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #0088aa;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    This tutorial has been tested on Android 9 (Pie)
+</div>
+</div></p>
 <p>To deploy the Android APK not only you need to have <strong>Java JDK8</strong>, <strong>Android Studio</strong> and <strong>Android SDK</strong> installed but also you have to set up the specific <strong>environment variables</strong>. Fortunately, Ionic provide us a <a href="https://beta.ionicframework.com/docs/installation/android" target="_blank">great guide</a> to allows us to configure step by step all the requirements.</p>
 <p>After we have completed all the steps of the Ionic guide and performed steps 1) , 2) and 3) stated above, we must continue with the following commands:</p>
 <p><br></p>
@@ -601,6 +625,31 @@ ionic cordova run android
 </code></pre>
 
 <h4 id="in-an-ios-device-with-native-app">In an iOS device with native app</h4>
+<div style="
+    display: table;
+    border: 2px solid #0088aa9e;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding: 5px 0 5px 0;
+    background-color: rgba(0, 136, 170, 0.04);"><div style="display: table-cell; vertical-align: middle;">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #0088aa;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    This tutorial has been tested with Xcode (10.2.1) and iPhone 7 (iOS 12.2), iPhone 7 Plus (iOS 12.1) and iPad Air (iOS 12.1.1)
+</div>
+</div>
+
 <p>To deploy the iOS app you will need first to follow <a href="https://beta.ionicframework.com/docs/installation/ios" target="_blank">this guide</a> to properly configure your development environment. Then, it is crucial to have an OpenVidu Server properly deployed with a <strong>valid certificate</strong>.</p>
 <div style="
     display: table;
@@ -970,7 +1019,7 @@ You can inspect this method in detail in the <a href="https://github.com/OpenVid
 <p>This <strong>openvidu-ionic</strong> project is ready to work on iOS devices, but we will go through every aspect related to iOS compatibility in case your already have an Ionic application in which you want to integrate OpenVidu.</p>
 <h3 id="configuration-requirements">Configuration requirements</h3>
 <p>1) Install cordova-plugin-iosrtc and xcode</p>
-<pre><code class="bash">ionic cordova plugin add cordova-plugin-iosrtc
+<pre><code class="bash">ionic cordova plugin add https://github.com/OpenVidu/cordova-plugin-iosrtc.git
 npm install xcode --save
 </code></pre>
 
