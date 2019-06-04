@@ -260,7 +260,7 @@ ul#menu-list {
 }
 
 #doc-container .deploy-img {
-    border: solid 8px #0088aa;
+    border: 3px solid #dddddd;
     border-radius: 4px;
 }
 
@@ -269,7 +269,7 @@ ul#menu-list {
     display: table;
     margin-left: auto;
     margin-right: auto;
-    width: auto;
+    width: 100%;
 }
 
 #doc-container .deploy-fields-table th {
@@ -297,6 +297,10 @@ ul#menu-list {
     padding-left: 0;
 }
 
+#doc-container table.color-table-gray tr td:nth-child(1) {
+    padding-left: 0;
+}
+
 #doc-container table.color-table tr th:nth-child(2) {
     background-color: rgba(255, 204, 0, 0.15);
 }
@@ -319,6 +323,18 @@ ul#menu-list {
 
 #doc-container table.color-table tr td:nth-child(4) {
     background-color: rgba(6, 211, 98, 0.05);
+}
+
+#doc-container table.color-table-gray tr:first-child {
+    border-top: 1px solid #dddddd;
+}
+
+#doc-container table.color-table-gray tr th:nth-child(2) {
+    background-color: rgba(135, 135, 135, 0.15);
+}
+
+#doc-container table.color-table-gray tr td:nth-child(2) {
+    background-color: rgba(135, 135, 135, 0.05);
 }
 
 #doc-container #deploy-arch-row {

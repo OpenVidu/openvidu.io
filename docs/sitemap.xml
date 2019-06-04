@@ -254,12 +254,6 @@
     
         
     <url>
-     <loc>/deployment/deploying-demos-aws/</loc>
-     <lastmod>2019-06-04</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>/deployment/deploying-aws/</loc>
      <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
