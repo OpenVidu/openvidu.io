@@ -4,7 +4,7 @@
     
     <url>
      <loc>/home/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,85 +13,85 @@
         
     <url>
      <loc>/tutorials/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-webcomponent/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-hello-world/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-js/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-angular/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-library-angular/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-insecure-react/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-library-react/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-ionic/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-react-native/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-java/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-java/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-js-node/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/openvidu-mvc-node/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -101,31 +101,31 @@
         
     <url>
      <loc>/demos/openvidu-getaroom/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/demos/openvidu-call/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/demos/openvidu-call-react/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/demos/openvidu-call-ionic/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/demos/openvidu-classroom/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -135,49 +135,49 @@
         
     <url>
      <loc>/cheatsheet/join-session/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/leave-session/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/subscribe-unsubscribe/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/publish-unpublish/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/mute-audio-video/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/manage-videos/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/share-data/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cheatsheet/send-messages/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -187,25 +187,25 @@
         
     <url>
      <loc>/advanced-features/recording/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/advanced-features/screen-share/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/advanced-features/speech-detection/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/advanced-features/filters/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -215,37 +215,37 @@
         
     <url>
      <loc>/reference-docs/openvidu-browser/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-java-client/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-node-client/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/REST-API/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-server-params/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/reference-docs/openvidu-server-cdr/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -255,31 +255,31 @@
         
     <url>
      <loc>/deployment/deploying-demos-aws/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-aws/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-ubuntu/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/deploying-app/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/deployment/upgrading/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -289,7 +289,7 @@
         
     <url>
      <loc>/developing/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -298,7 +298,7 @@
     
     <url>
      <loc>/troubleshooting/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -306,7 +306,7 @@
     
     <url>
      <loc>/releases/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -315,31 +315,31 @@
         
     <url>
      <loc>/openvidu-pro/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/openvidu-pro/openvidu-inspector/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/openvidu-pro/detailed-session-monitoring/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/openvidu-pro/deploying-openvidu-pro/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/openvidu-pro/REST-API-pro/</loc>
-     <lastmod>2019-05-27</lastmod>
+     <lastmod>2019-06-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
