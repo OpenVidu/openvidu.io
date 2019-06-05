@@ -127,6 +127,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../openvidu-electron/">openvidu-electron</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
@@ -510,7 +516,7 @@ active: documentation
 <p>This application is very simple. It has only 4 files:</p>
 <ul>
 <li><code>openvidu-browser-VERSION.js</code>: openvidu-browser library. You don't have to manipulate this file. </li>
-<li><code>app.js</code>: sample application main JavaScritp file, which makes use of <em>openvidu-browser-VERSION.js</em>.</li>
+<li><code>app.js</code>: sample application main JavaScript file, which makes use of <em>openvidu-browser-VERSION.js</em>.</li>
 <li><code>style.css</code>: some CSS classes to style <em>index.html</em>.</li>
 <li><code>index.html</code>: HTML code for the form to connect to a video-call and for the video-call itself. It has two links to both JavaScript files: </li>
 </ul>
@@ -526,7 +532,7 @@ active: documentation
 var session;
 </code></pre>
 
-<p><code>OV</code> will be our OpenVidu object (entrypoint to the libray). <code>session</code> will be the video-call we will connect to. As first sentence in the <code>joinSession()</code> method, we initialize the variable that will identify our video-call retrieving the value from the HTML input.</p>
+<p><code>OV</code> will be our OpenVidu object (entrypoint to the library). <code>session</code> will be the video-call we will connect to. As first sentence in the <code>joinSession()</code> method, we initialize the variable that will identify our video-call retrieving the value from the HTML input.</p>
 <pre><code class="javascript">var mySessionId = document.getElementById(&quot;sessionId&quot;).value;
 </code></pre>
 
@@ -606,7 +612,7 @@ session.on('streamCreated', function (event) {
 <p>In case of success we first set the view to the active video session. Then we proceed to publish our webcam. To do so we just get a <code>publisher</code> using <code>OpenVidu.initPublisher</code> method, and a new HTML video showing our webcam will be appended to the page inside element with id <em>"publisher"</em>.</p>
 <p>Last but not least, we publish this <code>publisher</code> object thanks to <code>session.publish</code>. At this point the rest of users connected to this session will trigger their own <code>streamCreated</code> event and can start watching our webcam.</p>
 <hr />
-<h4 id="leaving-the-session">Leaving the session:</h4>
+<h4 id="leaving-the-session">Leaving the session</h4>
 <pre><code class="javascript">session.disconnect();
 </code></pre>
 

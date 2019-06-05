@@ -127,6 +127,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../openvidu-electron/">openvidu-electron</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
@@ -617,7 +623,6 @@ Add the artifact in the root project </p>
 
 <p>To deploy the Android APK not only you need to have <strong>Java JDK8</strong>, <strong>Android Studio</strong> and <strong>Android SDK</strong> installed but also you have to set up the specific <strong>environment variables</strong>. Fortunately, React Native provide us a <a href="https://facebook.github.io/react-native/docs/getting-started" target="_blank">great guide</a> to allows us to configure step by step all the requirements. This tutorial is made with <strong>React Native CLI Quickstart</strong> so you should select and check the <strong>React Native CLI</strong> requirements inside of React guide website.</p>
 <p>After we have completed all the steps of the React Native CLI guide and performed steps 1) , 2) and 3) stated above, we must continue with the following commands:</p>
-<p><br></p>
 <p>4) Connect the device to the PC. You must enable USB debugging and give permissions (check out <a href="https://facebook.github.io/react-native/docs/running-on-device" target="_blank">first section here in React Native docs</a>)</p>
 <p>5) Run the tutorial. The app will be automatically launched in your Android device</p>
 <pre><code class="bash"># In openvidu-tutorials/openvidu-react-native
@@ -655,7 +660,6 @@ react-native run-android
 <p>5) Configure code signing</p>
 <p>6) Build and Run your app</p>
 <p>To deploy the iOS app React has <a href="https://facebook.github.io/react-native/docs/running-on-device">this guide</a> to properly configure your development environment.</p>
-<p>To actually see the real implementation of this class, check out <a href="#ios-specific-requirements">iOS specific requirements</a> section, as most of its code is just adjustments to make it work on iOS devices.</p>
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This is a React Native project generated with React Native CLI tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>App.js</code> file:</p>
 <ul>
@@ -884,7 +888,7 @@ mySession.publish(publisher);
 </code></pre>
 
 <hr />
-<h4 id="leaving-the-session">Leaving the session:</h4>
+<h4 id="leaving-the-session">Leaving the session</h4>
 <p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method in <code>app.component.ts</code>:</p>
 <pre><code class="javascript">leaveSession() {
     // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
@@ -1054,7 +1058,7 @@ protected List&lt;ReactPackage&gt; getPackages() {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-js-java/" class="btn btn-xs btn-primary float-right" title="openvidu-js-java">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-electron/" class="btn btn-xs btn-primary float-right" title="openvidu-electron">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../openvidu-ionic/" class="btn btn-xs btn-primary" title="openvidu-ionic"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>

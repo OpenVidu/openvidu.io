@@ -127,6 +127,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../../tutorials/openvidu-electron/">openvidu-electron</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
@@ -611,7 +617,7 @@ sudo apt-get install -y nodejs
 <p>Wait until you see on the output a line IP address. </p>
 <p>By default, the app will be served in <code>localhost:8080</code> address. You will need go to <a href="https://localhost:4443/" target="_blank"><code>https://localhost:4443/</code></a> to accept the self-signed certificate. Once accepted, you will be able to test OpenVidu Call in the default IP <a href="http://localhost:8080" target="_blank"><code>localhost:8080</code></a></p>
 <h2 id="extra-features">Extra features</h2>
-<p>Using the OpenVidu Call release, you can set up the address where you app will be served with <code>http-server -a "your_address"</code>. Moreover, includying a <strong>JSON</strong> file named <strong>ov-settings.json</strong> in the root directory, you will can configure the <code>openvidu_url</code> and <code>openvidu_secret</code> on this way:</p>
+<p>Using the OpenVidu Call release, you can set up the address where your app will be served with <code>http-server -a "your_address"</code>. Moreover, by including a <strong>JSON</strong> file named <strong>ov-settings.json</strong> in the root directory, you can configure the <code>openvidu_url</code> and <code>openvidu_secret</code>;</p>
 <pre><code class="json">{
   &quot;openviduCredentials&quot;: {
     &quot;openvidu_url&quot;: &quot;https://0.0.0.0:4443&quot;,
@@ -620,7 +626,7 @@ sudo apt-get install -y nodejs
 }
 </code></pre>
 
-<p>Not only you can establish your own <strong>openvidu_url</strong> and <strong>openvidu_secret</strong> parameters but also, you can customize the session interface adding an extra JSON object named  <strong>openviduSettings</strong> inside of the file. We have explained in detail how <strong>openviduSettings</strong> object must be treated <a href="../../tutorials/openvidu-webcomponent/#interface-configuration" target="_blank">here</a>.</p>
+<p>Not only you can establish your own <strong>openvidu_url</strong> and <strong>openvidu_secret</strong> parameters, but also you can customize the session interface adding an extra JSON object named  <strong>openviduSettings</strong> inside of the file. You have explained how <strong>openviduSettings</strong> object must be treated in detail <a href="../../tutorials/openvidu-webcomponent/#interface-configuration" target="_blank">here</a>.</p>
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 <script>

@@ -1,0 +1,782 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - openvidu-electron
+active: documentation
+---
+
+<script src="/js/plugins/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('openvidu-electron')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			$(this).parent().find('ul.subnav').toggle();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('openvidu-electron')").css('color', 'red');
+</script>
+
+<div id="doc-container" class="container text-justify">
+		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+			
+			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+					<div id="site-menu-title">
+						<h3>Explore docs</h3>
+						<hr>
+					</div>
+					<ul id="menu-list" class="current">
+						 
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Tutorials</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../">Intro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-ionic/">openvidu-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-react-native/">openvidu-react-native</a> 
+</li>
+
+  
+
+<li class="toctree-l1 current">
+        <a class="current" href="./">openvidu-electron</a>  
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Demos</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Cheatsheet</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/join-session/">Join a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/leave-session/">Leave a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/manage-videos/">Manage video players</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/share-data/">Share data between users</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../cheatsheet/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Advanced features</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/recording/">Recording</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Reference Documentation</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Deployment</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/deploying-app/">Deploying your OpenVidu app</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../deployment/upgrading/">Upgrading OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  class="subnav_drop">
+        <div><span>Contribute</span></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../developing/">Developing OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li class="toctree-l1 ">
+        <a class="" href="../../releases/">Releases</a> 
+</li>
+
+</ul>
+						</li>
+						  
+						<li>
+							<ul>
+
+<li  style="width: 100%; display: inline-block"  class="subnav_drop">
+        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
+                        href="/docs/openvidu-pro/">
+                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
+                </a></div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/">Home</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/REST-API-pro/">REST API Pro</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+						</li>
+						 
+					</ul>
+				</div>
+				&nbsp;
+			</nav>
+		</div>
+
+		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+			
+			<div>
+				<div>
+
+					<div role="main">
+						<div class="section">
+							 <h1 id="openvidu-electron">openvidu-electron</h1>
+<p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-electron" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
+<p>A client-side only application built with <strong>Electron</strong>. It can be compiled into a native desktop application for <strong>Windows</strong>, <strong>OSX</strong> and <strong>Linux</strong>. It includes <a href="https://www.electronforge.io/" target="_blank">electron-forge</a> as a dependency so the compilation process is as simple as running a single command.</p>
+<p>If it is the first time you use OpenVidu, it is highly recommended to start first with <strong><a href="../../tutorials/openvidu-hello-world/" target="_blank">openvidu-hello-world</a></strong> tutorial due to this being an Electron app and being a little more complex for OpenVidu starters.</p>
+<h2 id="understanding-this-tutorial">Understanding this tutorial</h2>
+<p align="center">
+  <img class="img-responsive" src="/img/tutorials/openvidu-electron.png">
+</p>
+
+<p>OpenVidu is composed by the three modules displayed on the image above.</p>
+<ul>
+<li><strong>openvidu-browser</strong>: JavaScript library for your Electron app. It allows you to manage your video-calls straight away from your clients</li>
+<li><strong>openvidu-server</strong>: Java application that controls Kurento Media Server</li>
+<li><strong>Kurento Media Server</strong>: server that handles low level operations of media flow transmissions</li>
+</ul>
+<h2 id="running-this-tutorial">Running this tutorial</h2>
+<p>1) You will need <strong>Node</strong> and <strong>NPM</strong>. Install them with the following commands</p>
+<pre><code class="bash">sudo curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+sudo apt-get install -y nodejs
+</code></pre>
+
+<p>2) Clone the repo</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials
+</code></pre>
+
+<p>3) Install dependencies and run the tutorial</p>
+<pre><code class="bash">cd openvidu-tutorials/openvidu-electron
+npm install
+npm start
+</code></pre>
+
+<p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>):</p>
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.10.0
+</code></pre>
+
+<p>5) The app will start automatically as a native desktop application, regardless of the OS you are using. If you are on Windows, it will launch as a Windows app. In OSX as an OSX app, and in Linux as a Linux app.</p>
+<p><br></p>
+<blockquote>
+<p>If you are using <strong>Windows</strong>, read this <strong><a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="_blank">FAQ</a></strong> to properly run the tutorial</p>
+<p>To learn <strong>some tips</strong> to develop with OpenVidu, check this <strong><a href="../../troubleshooting#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu" target="_blank">FAQ</a></strong></p>
+</blockquote>
+<h2 id="understanding-the-code">Understanding the code</h2>
+<p>As an Electron app, the project has a <code>main.js</code> file that serves as entry point. It has not been modified at all, so it remains the same as it is by default in the <a href="https://github.com/electron/electron-quick-start" target="_blank">electron-quick-start</a> example. Most important files are the following ones:</p>
+<ul>
+<li><code>openvidu-browser-VERSION.js</code>: openvidu-browser library. You don't have to manipulate this file.</li>
+<li><code>axios.min.js</code>: library for making HTTP requests from the app. You don't have to manipulate this file.</li>
+<li><code>modal.html</code>: this is the dialog for selecting the screen to share if the user wants to do so.</li>
+<li><code>app.js</code>: sample application main JavaScript file, which makes use of <em>openvidu-browser-VERSION.js</em>.</li>
+<li><code>style.css</code>: some CSS classes to style the app.</li>
+<li><code>index.html</code>: HTML code for the form to connect to a video-call and for the video-call itself. It has links to 3 JavaScript files:</li>
+</ul>
+<pre class="html-scripts">
+  <code>&lt;script src="openvidu-browser-VERSION.js"&gt;&lt;/script&gt;
+&lt;script src="axios.min.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;</code>
+</pre>
+
+<p>We have implemented screen-sharing capabilities in this application because the process is slightly different from the rest of platforms that support it. Electron does not provide a default screen selector dialog, so we must implement it ourselves (that is the purpose of <code>modal.html</code> file). You can check out this feature in the last section <a href="#screen-sharing">Screen sharing</a>.</p>
+<p>Let's see first how <code>app.js</code> uses <code>openvidu-browser-VERSION.js</code>:</p>
+<hr />
+<h4 id="first-lines-declare-the-variables-that-will-be-needed-in-different-points-along-the-code">First lines declare the variables that will be needed in different points along the code</h4>
+<pre><code class="javascript">const ipcRenderer = require('electron').ipcRenderer;
+const BrowserWindow = require('electron').remote.BrowserWindow;
+
+var openvidu;
+var session;
+var publisher;
+var mySessionId;
+</code></pre>
+
+<p>Constants <code>ipcRenderer</code> and <code>BrowserWindow</code> are Electron objects we will need for our screen selector dialog.</p>
+<p><code>openvidu</code> will be our OpenVidu object (entry point to the library). <code>session</code> will be the video-call we will connect to. <code>publisher</code> will be our media stream to publish to the session, and finally <code>mySessionId</code> simply identifies the session to connect to.</p>
+<hr />
+<h4 id="initialize-a-publisher">Initialize a publisher</h4>
+<pre><code class="javascript">function initPublisher() {
+
+    openvidu = new OpenVidu();
+
+    const shareScreen = document.getElementById(&quot;screen-sharing&quot;).checked;
+    if (shareScreen) {
+        openScreenShareModal();
+    } else {
+        publisher = openvidu.initPublisher(&quot;publisher&quot;);
+        joinSession();
+    }
+}
+</code></pre>
+
+<p>We will first initialize a Publisher before connecting to the session. If the user hasn't checked the screen sharing checkbox, we simply call <code>openvidu.initPublisher</code> indicating that we want openvidu-browser to insert our local video inside HTML element with id <code>publisher</code>. Then we proceed to join to the session.</p>
+<p>If you want to see how to initialize a screen sharing Publisher instead of the webcam, go to section <a href="#screen-sharing">Screen sharing</a></p>
+<hr />
+<h4 id="initialize-the-session">Initialize the session</h4>
+<pre><code class="javascript">function joinSession() {
+
+    session = openvidu.initSession();
+    session.on(&quot;streamCreated&quot;, function (event) {
+        session.subscribe(event.stream, &quot;subscriber&quot;);
+    });
+</code></pre>
+
+<p>Once we have our Publisher properly initialized, we continue by creating a Session object. We do so with <code>openvidu.initSession</code> method. We then have to configure our session to listen to <code>streamCreated</code> events, so we are able to subscribe to other user media streams when they publish.</p>
+<hr />
+<h4 id="get-a-token-from-openvidu-server">Get a <em>token</em> from OpenVidu Server</h4>
+<p>We are ready to join the session. But we still need an OpenVidu token, so we must ask for it to openvidu-server. We use <code>axios.min.js</code> library to do so.</p>
+<pre><code class="javascript">getToken(mySessionId).then(token =&gt; {
+  // See next point to see how to connect to the session using 'token'
+});
+</code></pre>
+
+<div style="
+    display: table;
+    border: 2px solid #0088aa9e;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding: 5px 0 5px 0;
+    background-color: rgba(0, 136, 170, 0.04);"><div style="display: table-cell; vertical-align: middle;">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #0088aa;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    <strong>WARNING</strong>: This is why this tutorial is an insecure application. We need to ask OpenVidu Server for a user token in order to connect to our session. <strong>This process should entirely take place in our server-side</strong>, not in our client-side. But due to the lack of an application backend in this tutorial, the JavaScript code itself will perform the POST operations to OpenVidu Server
+</div>
+</div>
+
+<p>In a production environment we would perform this operations in our application backend, by making use of the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em>, <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">OpenVidu Java Client</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">OpenVidu Node Client</a></em>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<ul>
+<li>First HTTP request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
+<li>Second ajax request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
+</ul>
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-electron/src/app.js#L102" target="_blank">GitHub repo</a>.</p>
+<hr />
+<h4 id="connect-to-the-session-using-the-token">Connect to the session using the token</h4>
+<pre><code class="javascript">getToken(mySessionId).then(token =&gt; {
+  session.connect(token)
+    .then(() =&gt; {
+        showSession();
+        session.publish(publisher);
+    })
+    .catch(error =&gt; {
+        console.log(&quot;There was an error connecting to the session:&quot;, error.code, error.message);
+    });
+});
+</code></pre>
+
+<p>We simply need to call <code>session.connect</code> passing the recently retrieved token from OpenVidu Server. This method returns a Promise to which you can subscribe to.</p>
+<p>In case of success we first set the view to the active video session. Then we proceed to publish our previously created Publisher by calling <code>session.publish</code>. At this point the rest of users connected to this session will trigger their own <code>streamCreated</code> event and can start watching our media stream.</p>
+<hr />
+<h4 id="leaving-the-session">Leaving the session</h4>
+<pre><code class="javascript">function leaveSession() {
+    session.disconnect();
+    hideSession();
+}
+</code></pre>
+
+<p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method. Here it will be called inside <em>leaveSession</em> function, triggered when the user clicks on "LEAVE" button. This function also returns the page to the "Join a video session" view.</p>
+<hr />
+<h4 id="screen-sharing">Screen sharing</h4>
+<p>The process to screen-share is slightly different from the rest of platforms that support it. Electron does not provide a default screen selector dialog as browser do, so we must implement it ourselves (that is the purpose of <code>modal.html</code> file). We need a screen unique identifier to initialize our Publisher object like this:</p>
+<pre><code class="javascript">OpenVidu.initPublisher({videoSource: &quot;screen:&quot; + SCREEN_ID});
+// While in other platforms is simply {videoSource: &quot;screen&quot;},
+// which triggers the screen selector dialog of the browser
+</code></pre>
+
+<p>First of all, we must be able to communicate different windows of the application, because in this case the screen selector dialog will be a completely separate window. But of course you could implement it in the same main window of your app, that's up to you.</p>
+<p>In <code>main.js</code> we import <code>ipcMain</code> from Electron and configure it to listen to <code>screen-share-selected</code> event. Upon this event it will notify our app with other event (<code>screen-share-ready</code>), passing the same message received from the sender.</p>
+<pre><code class="javascript">const {
+  app,
+  BrowserWindow,
+  ipcMain
+} = require('electron');
+
+// ...
+
+ipcMain.on('screen-share-selected', (event, message) =&gt; {
+  mainWindow.webContents.send('screen-share-ready', message);
+});
+</code></pre>
+
+<p>In <code>app.js</code> file, where all our logic lies, we import <code>ipcRenderer</code> and configure it to listen to <code>screen-share-ready</code> event, sent from our <code>main.js</code> file as shown above. At this point we have the necessary parameter to initialize our Publisher:</p>
+<pre><code class="javascript">ipcRenderer.on('screen-share-ready', (event, message) =&gt; {
+  // User has chosen a screen to share. screenId is message parameter
+  showSession();
+  publisher = openvidu.initPublisher(&quot;publisher&quot;, {
+    videoSource: &quot;screen:&quot; + message
+  });
+  joinSession();
+});
+</code></pre>
+
+<p>So, where's the code that initiates this whole event process? That is <code>modal.html</code> file. This HTML view will be launched by <code>app.js</code> file in method <code>initPublisher</code> if the user has checked the screen-sharing checkbox. Method <code>openScreenShareModal</code> will be called then:</p>
+<pre><code class="javascript">function openScreenShareModal() {
+    let win = new BrowserWindow({
+        parent: require('electron').remote.getCurrentWindow(),
+        modal: true,
+        minimizable: false,
+        maximizable: false,
+        webPreferences: {
+            nodeIntegration: true
+        },
+        resizable: false
+    })
+    win.setMenu(null);
+    // win.webContents.openDevTools();
+
+    var theUrl = 'file://' + __dirname + '/modal.html'
+    win.loadURL(theUrl);
+}
+</code></pre>
+
+<p>This code will launch <code>modal.html</code> template in a child window. In this file we use Electron API <code>desktopCapturer</code> to list and present all available screens. The user is able to select any of them and by clicking button "Share" the selected screen id will be sent as an event <code>screen-share-selected</code> just before closing this child window, by making use of the same <code>ipcRenderer</code> object as <code>app.js</code> do.</p>
+<pre><code class="javascript">var availableScreens = [];
+var htmlElements = [];
+var selectedElement;
+
+const {
+  desktopCapturer
+} = require('electron')
+
+const ipcRenderer = require('electron').ipcRenderer;
+
+// Call Electron API to list all available screens
+desktopCapturer.getSources({
+    types: ['window', 'screen']
+}).then(async sources =&gt; {
+  const list = document.getElementById(&quot;list-of-screens&quot;);
+  sources.forEach(source =&gt; {
+    // Add new element to the list with the thumbnail of the screen
+    var el = document.createElement(&quot;div&quot;);
+    el.onclick = () =&gt; {
+      // Style the new selected screen and store it as the current selection
+      htmlElements.forEach(e =&gt; {
+        e.style.border = &quot;none&quot;;
+        e.style.background = &quot;none&quot;;
+      })
+      el.style.border = &quot;2px solid #0088aa&quot;;
+      el.style.background = &quot;rgba(0, 0, 0, 0.06)&quot;;
+      selectedElement = el;
+      document.getElementById(&quot;share-btn&quot;).disabled = false;
+    }
+    // Store the new source and the new created HTML element
+    availableScreens.push(source);
+    htmlElements.push(el);
+    var img = document.createElement(&quot;img&quot;);
+    var name = document.createElement(&quot;span&quot;);
+    img.src = source.thumbnail.toDataURL();
+    name.innerHTML = source.name;
+    // Append new elements to the template
+    el.appendChild(img);
+    el.appendChild(name);
+    list.appendChild(el);
+  });
+});
+
+function sendScreenSelection() {
+  ipcRenderer.send('screen-share-selected', availableScreens[htmlElements.indexOf(selectedElement)].id);
+  closeWindow();
+}
+</code></pre> 
+						</div>
+					</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../openvidu-js-java/" class="btn btn-xs btn-primary float-right" title="openvidu-js-java">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../openvidu-react-native/" class="btn btn-xs btn-primary" title="openvidu-react-native"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/tutorials/openvidu-electron.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+				</div>
+			</div>
+		</section>
+</div>

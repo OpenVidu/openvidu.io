@@ -72,6 +72,12 @@
     </url>
         
     <url>
+     <loc>/tutorials/openvidu-electron/</loc>
+     <lastmod>2019-06-05</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>/tutorials/openvidu-js-java/</loc>
      <lastmod>2019-06-05</lastmod>
      <changefreq>daily</changefreq>
