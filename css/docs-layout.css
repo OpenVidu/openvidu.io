@@ -227,6 +227,13 @@ ul#menu-list {
     margin-top: -60px;
 }
 
+#doc-container .section .tutorials-doc-home h1,
+#doc-container .section .tutorials-doc-home h2,
+#doc-container .section .tutorials-doc-home h4 {
+    border-top: 0 !important;
+    margin-top: 0 !important;
+}
+
 #doc-container .section h1 {
     padding-top: 40px;
 }

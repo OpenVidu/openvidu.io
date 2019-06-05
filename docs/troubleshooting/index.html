@@ -668,9 +668,30 @@ active: documentation
 <li><strong>Direct p2p connections between users</strong>: OpenVidu will offer the possibility of connecting users without having to use Kurento Media Server as central node. This can be very advantegeous for certain use-cases, as will reduce the need of infraestructure.</li>
 </ul>
 <hr />
-<h3 id="8-does-openvidu-support-android-and-ios">8. Does OpenVidu support Android and iOS?</h3>
-<p>Since release 2.7.0 <strong>Android</strong> and <strong>iOS</strong> are supported through <strong><a href="https://ionicframework.com/" target="_blank">Ionic</a></strong>. You can try <a href="../tutorials/openvidu-ionic/" target="_blank">openvidu-ionic</a> tutorial and you will have an OpenVidu native application compatible with both Android ang iOS working in minutes.</p>
-<p>In the future OpenVidu team plans to support <strong><a href="https://facebook.github.io/react-native/" target="_blank">React Native</a></strong> and <strong><a href="https://www.nativescript.org/" target="_blank">Native Script</a></strong> frameworks in the same manner.</p>
+<h3 id="8-what-platforms-are-supported-by-openvidu">8. What platforms are supported by OpenVidu?</h3>
+<p>OpenVidu supports a wide range of platforms:</p>
+<p><br></p>
+<h5 id="desktop-browsers">Desktop browsers</h5>
+<p><strong>Chrome</strong>, <strong>Firefox</strong>, <strong>Opera</strong>, <strong>Safari</strong> and <strong>Internet Explorer</strong></p>
+<p><br></p>
+<h5 id="mobile-browsers">Mobile browsers</h5>
+<p><strong>Chrome</strong>, <strong>Firefox</strong> and <strong>Opera</strong> in Android and <strong>Safari</strong> on iOS</p>
+<p><br></p>
+<h5 id="mobile-native-applications">Mobile native applications</h5>
+<p><strong>Android</strong> and <strong>iOS</strong> are supported:</p>
+<ul>
+<li>
+<p>Since release <strong>2.7.0</strong> through <strong><a href="https://ionicframework.com/" target="_blank">Ionic</a></strong>. You can try <a href="../tutorials/openvidu-ionic/" target="_blank">openvidu-ionic</a> tutorial and you will have an OpenVidu native mobile application compatible working in minutes.</p>
+</li>
+<li>
+<p>Since release <strong>2.10.0</strong> through <strong><a href="https://facebook.github.io/react-native/" target="_blank">React Native</a></strong>. You can try <a href="../tutorials/openvidu-react-native/" target="_blank">openvidu-react-native</a> tutorial and you will have an OpenVidu native mobile application working in minutes.</p>
+</li>
+</ul>
+<p><br></p>
+<h5 id="desktop-native-applications">Desktop native applications</h5>
+<ul>
+<li><strong>Windows</strong>, <strong>OSX</strong> and <strong>Linux</strong> are supported since release <strong>2.10.0</strong> through <strong><a href="https://electronjs.org/" target="_blank">Electron</a></strong>. You can try <a href="../tutorials/openvidu-electron/" target="_blank">openvidu-electron</a> tutorial and you will have an OpenVidu native desktop application working in minutes.</li>
+</ul>
 <hr />
 <h3 id="9-which-is-the-current-status-of-openvidu-on-scalability-and-fault-tolerance">9. Which is the current status of OpenVidu on scalability and fault tolerance?</h3>
 <p>OpenVidu load testing process is described in detail in this <strong><a href="https://medium.com/@openvidu/openvidu-load-testing-a-systematic-study-of-openvidu-platform-performance-b1aa3c475ba9" target="_blank">Medium post</a></strong>. Results are the following for 7-to-7 sessions where every participant sends one audio-video stream (540x360, 30 fps) and receives 6 remote streams (same video). The table states the maximum number of entities that can be established until CPU reaches 100% use.</p>
