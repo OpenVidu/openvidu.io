@@ -62,12 +62,19 @@
 
 .c-tabs-nav__link {
     flex: 1;
-    margin-right: 4px;
     padding: 12px;
     color: #fff;
     background-color: #E1E2E1;
     text-align: center;
     transition: color 0.3s;
+}
+
+.c-tabs-nav__link:hover {
+    background-color: #eaeaea;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .c-tabs-nav__link:last-child {
