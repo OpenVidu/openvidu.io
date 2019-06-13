@@ -546,6 +546,10 @@ Add the artifact in the root project </p>
 <pre><code class="bash">npm install openvidu-browser-Y.Y.Z.tgz
 </code></pre>
 
+<p>4) Start Metro Bundler :</p>
+<pre><code class="bash">npm start
+</code></pre>
+
 <div style="
     display: table;
     border: 2px solid #ffb600;
@@ -622,9 +626,9 @@ Add the artifact in the root project </p>
 </div>
 
 <p>To deploy the Android APK not only you need to have <strong>Java JDK8</strong>, <strong>Android Studio</strong> and <strong>Android SDK</strong> installed but also you have to set up the specific <strong>environment variables</strong>. Fortunately, React Native provide us a <a href="https://facebook.github.io/react-native/docs/getting-started" target="_blank">great guide</a> to allows us to configure step by step all the requirements. This tutorial is made with <strong>React Native CLI Quickstart</strong> so you should select and check the <strong>React Native CLI</strong> requirements inside of React guide website.</p>
-<p>After we have completed all the steps of the React Native CLI guide and performed steps 1) , 2) and 3) stated above, we must continue with the following commands:</p>
-<p>4) Connect the device to the PC. You must enable USB debugging and give permissions (check out <a href="https://facebook.github.io/react-native/docs/running-on-device" target="_blank">first section here in React Native docs</a>)</p>
-<p>5) Run the tutorial. The app will be automatically launched in your Android device</p>
+<p>After we have completed all the steps of the React Native CLI guide and performed steps 1) , 2), 3) and 4) stated above, we must continue with the following commands:</p>
+<p>5) Connect the device to the PC. You must enable USB debugging and give permissions (check out <a href="https://facebook.github.io/react-native/docs/running-on-device" target="_blank">first section here in React Native docs</a>)</p>
+<p>6) Run the tutorial. The app will be automatically launched in your Android device</p>
 <pre><code class="bash"># In openvidu-tutorials/openvidu-react-native
 react-native run-android
 </code></pre>
@@ -656,9 +660,9 @@ react-native run-android
 </div>
 
 <p>After we have completed all the steps of the performed steps 1), 2) and 3) stated above, we must continue with the following commands:</p>
-<p>4) Plug in your device via USB</p>
-<p>5) Configure code signing</p>
-<p>6) Build and Run your app</p>
+<p>5) Plug in your device via USB</p>
+<p>6) Configure code signing</p>
+<p>7) Build and Run your app</p>
 <p>To deploy the iOS app React has <a href="https://facebook.github.io/react-native/docs/running-on-device">this guide</a> to properly configure your development environment.</p>
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This is a React Native project generated with React Native CLI tool, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>App.js</code> file:</p>
