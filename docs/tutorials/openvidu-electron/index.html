@@ -344,6 +344,12 @@ active: documentation
         <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
  
 </li>
 </ul>
@@ -457,6 +463,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
 </li>
 
@@ -518,7 +530,7 @@ npm start
 </code></pre>
 
 <p>4) <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>):</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.10.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.11.0
 </code></pre>
 
 <p>5) The app will start automatically as a native desktop application, regardless of the OS you are using. If you are on Windows, it will launch as a Windows app. In OSX as an OSX app, and in Linux as a Linux app.</p>
@@ -652,7 +664,7 @@ var mySessionId;
 <p>Whenever we want a user to leave the session, we just need to call <code>session.disconnect</code> method. Here it will be called inside <em>leaveSession</em> function, triggered when the user clicks on "LEAVE" button. This function also returns the page to the "Join a video session" view.</p>
 <hr />
 <h4 id="screen-sharing">Screen sharing</h4>
-<p>The process to screen-share is slightly different from the rest of platforms that support it. Electron does not provide a default screen selector dialog as browser do, so we must implement it ourselves (that is the purpose of <code>modal.html</code> file). We need a screen unique identifier to initialize our Publisher object like this:</p>
+<p>The process to screen-share is slightly different from the rest of platforms that support it. Electron does not provide a default screen selector dialog as browsers do, so we must implement it ourselves (that is the purpose of <code>modal.html</code> file). We need a screen unique identifier to initialize our Publisher object like this:</p>
 <pre><code class="javascript">OpenVidu.initPublisher({videoSource: &quot;screen:&quot; + SCREEN_ID});
 // While in other platforms is simply {videoSource: &quot;screen&quot;},
 // which triggers the screen selector dialog of the browser

@@ -344,6 +344,12 @@ active: documentation
         <a class="current" href="./">OpenVidu Server CDR</a>  
 </li>
 
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
  
 </li>
 </ul>
@@ -457,6 +463,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
 </li>
 
@@ -502,8 +514,9 @@ active: documentation
 <li><a href="#participantleft"><strong>participantLeft</strong></a></li>
 <li><a href="#webrtcconnectioncreated"><strong>webrtcConnectionCreated</strong></a></li>
 <li><a href="#webrtcconnectiondestroyed"><strong>webrtcConnectionDestroyed</strong></a></li>
-<li><a href="#recordingstarted"><strong>recordingStarted</strong></a></li>
-<li><a href="#recordingstopped"><strong>recordingStopped</strong></a></li>
+<li><a href="#recordingstarted"><strong>recordingStarted</strong></a> <em>(removed in OpenVidu 2.11.0. Use <strong>recordingStatusChanged</strong>)</em></li>
+<li><a href="#recordingstopped"><strong>recordingStopped</strong></a> <em>(removed in OpenVidu 2.11.0. Use <strong>recordingStatusChanged</strong>)</em></li>
+<li><a href="#recordingstatuschanged"><strong>recordingStatusChanged</strong></a></li>
 </ul>
 <p><br></p>
 <hr />
@@ -837,7 +850,8 @@ active: documentation
 <hr>
 
 <h4 id="recordingstarted">recordingStarted</h4>
-<p>Recorded when a new session has started to be recorded</p>
+<p><em>REMOVED IN OPENVIDU 2.11.0. Use <a href="#recordingstatuschanged"><strong>recordingStatusChanged</strong></a></em><br>
+Recorded when a new session has started to be recorded</p>
 <table>
 <thead>
 <tr>
@@ -911,7 +925,8 @@ active: documentation
 <hr>
 
 <h4 id="recordingstopped">recordingStopped</h4>
-<p>Recorded when a new session has stopped being recorded</p>
+<p><em>REMOVED IN OPENVIDU 2.11.0. Use <a href="#recordingstatuschanged"><strong>recordingStatusChanged</strong></a></em><br>
+Recorded when a new session has stopped being recorded</p>
 <table>
 <thead>
 <tr>
@@ -992,6 +1007,101 @@ active: documentation
 <pre><code class="json">{&quot;recordingStopped&quot;:{&quot;sessionId&quot;:&quot;TestSession&quot;,&quot;timestamp&quot;:1549015640859,&quot;startTime&quot;:1549015630563,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;MyRecording&quot;,&quot;outputMode&quot;:&quot;COMPOSED&quot;,&quot;hasAudio&quot;:false,&quot;hasVideo&quot;:true,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;resolution&quot;:&quot;1920x1080&quot;,&quot;size&quot;:617509,&quot;duration&quot;:5.967,&quot;reason&quot;:&quot;recordingStoppedByServer&quot;}}
 </code></pre>
 
+<hr>
+
+<h4 id="recordingstatuschanged">recordingStatusChanged</h4>
+<p>Recorded when the status of a recording has changed. The status may be:</p>
+<ul>
+<li><code>started</code>: the session is being recorded. This means the associated video(s) already exists and its size is greater than 0. <em>NOTE: when using COMPOSED recording with video, this event does not mean there are publisher's streams being recorded in the video file. It only ensures the video file exists and its size is greater than 0</em></li>
+<li><code>stopped</code>: the recording process has stopped and files are being processed. The recording entity's <em>duration</em> and <em>size</em> properties will still be set to 0.</li>
+<li><code>ready</code>: the recorded file has been successfully processed and is available for download. The recording entity's <em>duration</em> and <em>size</em> properties are properly defined now</li>
+<li><code>failed</code>: the recording process has failed. The final state of the recorded file cannot be guaranteed to be stable</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>startTime</code></td>
+<td>Time when the recording started</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>Unique identifier of the recording</td>
+<td>A string with the recording unique identifier</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Name given to the recording file</td>
+<td>A string with the recording name</td>
+</tr>
+<tr>
+<td><code>outputMode</code></td>
+<td>Output mode of the recording (<code>COMPOSED</code> or <code>INDIVIDUAL</code>)</td>
+<td>A string with the recording output mode</td>
+</tr>
+<tr>
+<td><code>hasAudio</code></td>
+<td>Wheter the recording file has audio or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>hasVideo</code></td>
+<td>Wheter the recording file has video or not</td>
+<td>[<code>true</code>,<code>false</code>]</td>
+</tr>
+<tr>
+<td><code>recordingLayout</code></td>
+<td>The type of layout used in the recording. Only defined if <code>outputMode</code> is <code>COMPOSED</code> and <code>hasVideo</code> is true</td>
+<td>A <strong><a href="../../../api/openvidu-java-client/io/openvidu/java/client/RecordingLayout.html" target="_blank"><code>RecordingLayout</code> value</a></strong> (BEST_FIT, PICTURE_IN_PICTURE, CUSTOM ...)</td>
+</tr>
+<tr>
+<td><code>resolution</code></td>
+<td>Resolution of the recorded file. Only defined if <code>outputMode</code> is <code>COMPOSED</code> and <code>hasVideo</code> is true</td>
+<td>A string with the width and height of the video file in pixels. e.g. <code>"1280x720"</code></td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>The size of the video file. 0 until status is <em>stopped</em></td>
+<td>Bytes</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Duration of the video file. 0 until status is <em>stopped</em></td>
+<td>Seconds</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Status of the recording</td>
+<td>[<code>"started"</code>,<code>"stopped"</code>,<code>"ready"</code>,<code>"failed"</code>]</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>Why the recording stopped. Only defined when status is <em>stopped</em> or <em>ready</em></td>
+<td>[<code>"recordingStoppedByServer"</code>,<br><code>"lastParticipantLeft"</code>,<br><code>"sessionClosedByServer"</code>,<br><code>"automaticStop"</code>,<br><code>"openviduServerStopped"</code>, <br><code>"mediaServerDisconnect"</code>]</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;recordingStatusChanged&quot;:{&quot;sessionId&quot;:&quot;TestSession&quot;,&quot;timestamp&quot;:1549015640859,&quot;startTime&quot;:1549015630563,&quot;duration&quot;:5.967,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;MyRecording&quot;,&quot;outputMode&quot;:&quot;COMPOSED&quot;,&quot;hasAudio&quot;:true,&quot;hasVideo&quot;:true,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;resolution&quot;:&quot;1920x1080&quot;,&quot;size&quot;:617509,&quot;status&quot;:&quot;stopped&quot;,&quot;reason&quot;:&quot;sessionClosedByServer&quot;}}
+</code></pre>
+
 <p><br></p> 
 						</div>
 					</div> <footer>
@@ -999,7 +1109,7 @@ active: documentation
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../deployment/deploying-aws/" class="btn btn-xs btn-primary float-right" title="Deploying OpenVidu on AWS">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../openvidu-server-webhook/" class="btn btn-xs btn-primary float-right" title="OpenVidu Server Webhook">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../openvidu-server-params/" class="btn btn-xs btn-primary" title="OpenVidu Server configuration"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>

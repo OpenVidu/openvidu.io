@@ -81,8 +81,8 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.status.html#available" class="tsd-kind-icon">available</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.status.html#failed" class="tsd-kind-icon">failed</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.status.html#ready" class="tsd-kind-icon">ready</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.status.html#started" class="tsd-kind-icon">started</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.status.html#starting" class="tsd-kind-icon">starting</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="recording.status.html#stopped" class="tsd-kind-icon">stopped</a></li>
@@ -94,34 +94,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="available" class="tsd-anchor"></a>
-					<h3>available</h3>
-					<div class="tsd-signature tsd-kind-icon">available<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;available&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/fafd42e/openvidu-node-client/src/Recording.ts#L123">Recording.ts:123</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The recording is available for downloading. This status is reached for all
-								stopped recordings if <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a>
-							property <code>openvidu.recording.public-access</code> is true</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="failed" class="tsd-anchor"></a>
 					<h3>failed</h3>
 					<div class="tsd-signature tsd-kind-icon">failed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;failed&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/fafd42e/openvidu-node-client/src/Recording.ts#L128">Recording.ts:128</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/91c06a0/openvidu-node-client/src/Recording.ts#L131">Recording.ts:131</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The recording has failed</p>
+							<p>The recording has failed. This status may be reached from &quot;starting&quot;,
+							&quot;started&quot; and &quot;stopped&quot; status</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="ready" class="tsd-anchor"></a>
+					<h3>ready</h3>
+					<div class="tsd-signature tsd-kind-icon">ready<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;ready&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/91c06a0/openvidu-node-client/src/Recording.ts#L125">Recording.ts:125</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The recording has finished OK and is available for download through OpenVidu
+								Server recordings endpoint:
+							<a href="https://YOUR_OPENVIDUSERVER_IP/recordings/%7BRECORDING_ID%7D/%7BRECORDING_NAME%7D.%7BEXTENSION%7D">https://YOUR_OPENVIDUSERVER_IP/recordings/{RECORDING_ID}/{RECORDING_NAME}.{EXTENSION}</a></p>
 						</div>
 					</div>
 				</section>
@@ -131,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">started<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;started&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/fafd42e/openvidu-node-client/src/Recording.ts#L111">Recording.ts:111</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/91c06a0/openvidu-node-client/src/Recording.ts#L112">Recording.ts:112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -146,12 +147,13 @@
 					<div class="tsd-signature tsd-kind-icon">starting<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;starting&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/fafd42e/openvidu-node-client/src/Recording.ts#L106">Recording.ts:106</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/91c06a0/openvidu-node-client/src/Recording.ts#L107">Recording.ts:107</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The recording is starting (cannot be stopped)</p>
+							<p>The recording is starting (cannot be stopped). Some recording may not go
+							through this status and directly reach &quot;started&quot; status</p>
 						</div>
 					</div>
 				</section>
@@ -161,12 +163,13 @@
 					<div class="tsd-signature tsd-kind-icon">stopped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;stopped&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/fafd42e/openvidu-node-client/src/Recording.ts#L116">Recording.ts:116</a></li>
+							<li>Defined in <a href="https://github.com/OpenVidu/openvidu/blob/91c06a0/openvidu-node-client/src/Recording.ts#L118">Recording.ts:118</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The recording has finished OK</p>
+							<p>The recording has stopped and is being processed. At some point it will reach
+							&quot;ready&quot; status</p>
 						</div>
 					</div>
 				</section>
@@ -215,10 +218,10 @@
 								<a href="recording.status.html" class="tsd-kind-icon">Status</a>
 								<ul>
 									<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-										<a href="recording.status.html#available" class="tsd-kind-icon">available</a>
+										<a href="recording.status.html#failed" class="tsd-kind-icon">failed</a>
 									</li>
 									<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-										<a href="recording.status.html#failed" class="tsd-kind-icon">failed</a>
+										<a href="recording.status.html#ready" class="tsd-kind-icon">ready</a>
 									</li>
 									<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 										<a href="recording.status.html#started" class="tsd-kind-icon">started</a>
@@ -288,6 +291,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -336,7 +340,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

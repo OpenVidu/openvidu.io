@@ -344,6 +344,12 @@ active: documentation
         <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
  
 </li>
 </ul>
@@ -457,6 +463,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
 </li>
 
@@ -531,8 +543,8 @@ OpenVidu Pro brings the power of <a href="https://www.elastic.co/" target="_blan
 
 <hr />
 <h4 id="accessing-kibana">Accessing Kibana</h4>
-<p>OpenVidu Pro serves Kibana through path <strong>/kibana</strong>. So, if you have deployed OpenVidu Pro with domain <strong>my.domain.com</strong>, you will be able to access OpenVidu Inspector through <strong>https://my.domain.com:4443</strong> and Kibana through <strong>https://my.domain.com/kibana</strong></p>
-<p>This path is secured with Basic Auth, so when connecting to it for the first time you will have to enter the user and password specified when <a href="../../openvidu-pro/deploying-openvidu-pro" target="_blank">deploying OpenVidu Pro</a>.</p>
+<p>OpenVidu Pro serves Kibana through path <strong>/kibana</strong>. So, if you have deployed OpenVidu Pro with domain <strong>my.domain.com</strong>, you will be able to access OpenVidu Inspector through <strong>https://my.domain.com/inspector</strong> and Kibana through <strong>https://my.domain.com/kibana</strong></p>
+<p>This path is secured with Basic Auth, so when connecting to it for the first time you will have to enter the user and password specified when deploying OpenVidu Pro.</p>
 <p><br></p>
 <hr />
 <h4 id="creating-your-own-visualizations-and-dashboards">Creating your own visualizations and dashboards</h4>
@@ -548,12 +560,13 @@ OpenVidu Pro brings the power of <a href="https://www.elastic.co/" target="_blan
 
 <div class="version-buttons">
   <a onclick="changeVersion(event)" class="btn btn-xs btn-primary pressed-btn" title="2.9.0">2.9.0/2.10.0</a>
+  <a onclick="changeVersion(event)" class="btn btn-xs btn-primary pressed-btn" title="2.11.0">2.11.0</a>
 </div>
 
-<div class="version-container" id="list-290">
+<div class="version-container" id="list-290" style="margin-right: 5px">
 <ul>
-<li><code>cdr</code>: event of Call Detail Record (see <a href="../../reference-docs/openvidu-server-cdr/" target="_blank">OpenVidu CDR</a>)</li>
-<li><code>kms</code>: Kurento Media Server event. These events are always associated to one WebRTC endpoint (a publisher or a subscriber)</li>
+<li><code>cdr</code>: event of Call Detail Record. Can take multiple forms according to the type of event (see <a href="../../reference-docs/openvidu-server-cdr/" target="_blank">OpenVidu CDR</a>)</li>
+<li><code>kms</code>: Kurento Media Server event. These events are always associated to one WebRTC endpoint (a publisher or a subscriber). Can take multiple forms according to the type of event (see <a href="https://doc-kurento.readthedocs.io/en/latest/features/events.html" target="_blank">Kurento docs</a>)</li>
 <li><code>monitoringStats</code>: event of CPU, memory and network statistics usage of OpenVidu Pro host</li>
 <li><code>webrtcStats</code>: event of WebRTC statistics for each media endpoint established in Kurento Media Server</li>
 <li><code>sessionSummary</code>: summary of a session, stored once it is closed</li>
@@ -916,8 +929,10 @@ OpenVidu Pro brings the power of <a href="https://www.elastic.co/" target="_blan
 </div></p>
 <p><br></p>
 <blockquote>
-<p><code>sessionSummary</code> contains all the information available in the rest of summary documents, including an array of <code>recordingSummary</code> and an array of <code>userSummary</code>. In turn <code>userSummary</code> contains an array of <code>connectionSummary</code>, that finally contains an array of <code>publisherSummary</code> and other of <code>subscriberSummary</code>.
+<p><strong>NOTE 1</strong>: <code>sessionSummary</code> contains all the information available in the rest of summary documents, including an array of <code>recordingSummary</code> and an array of <code>userSummary</code>. In turn <code>userSummary</code> contains an array of <code>connectionSummary</code>, that finally contains an array of <code>publisherSummary</code> and other of <code>subscriberSummary</code>.
 To sum up, this is just a denormalization of the <code>sessionSummary</code> document, so Elasticsearch requests and Kibana visualizations are more flexible and easier to accomplish</p>
+<hr />
+<p><strong>NOTE 2</strong>: <code>recordingSummary</code> events may not contain the final information of the actual recordings (specifically properties <code>size</code> and <code>duration</code>). This is so because <code>recordingSummary</code> event is generated just after its session is closed, but since release 2.11.0 recordings may need a post-processing phase before being available for download and having these properties properly defined. To overcome this limitation, you can simply use the <code>cdr</code> event of type <code>recordingStatusChanged</code> and status <code>ready</code> corresponding to this recording (see event in <a href="../../reference-docs/openvidu-server-cdr/#recordingstatuschanged" target="_blank">CDR docs</a>). There you will have all properties of the recording well defined</p>
 </blockquote>
 <p><br></p>
 <p>You can create powerful visualizations and dashboards by using these documents. Let's see a quick example. Imagine that you are interested in knowing <strong>how many users are connected to your OpenVidu sessions over time</strong>.</p>
@@ -1059,7 +1074,7 @@ function changeLangTab(event) {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../deploying-openvidu-pro/" class="btn btn-xs btn-primary float-right" title="Deploying OpenVidu Pro">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../scalability/" class="btn btn-xs btn-primary float-right" title="Scalability">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../openvidu-inspector/" class="btn btn-xs btn-primary" title="OpenVidu Inspector"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>

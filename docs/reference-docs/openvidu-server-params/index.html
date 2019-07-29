@@ -344,6 +344,12 @@ active: documentation
         <a class="" href="../openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
  
 </li>
 </ul>
@@ -457,6 +463,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
 </li>
 
@@ -490,7 +502,15 @@ active: documentation
 
 <hr>
 
-<h3 id="list-of-configuration-parameters-when-launching-openvidu-server">List of configuration parameters when launching openvidu-server</h3>
+<p><br></p>
+<ul>
+<li><strong><a href="#configuration-parameters-for-openvidu-server">Configuration parameters for OpenVidu Server</a></strong></li>
+<li><strong><a href="#extra-configuration-parameters-for-openvidu-server-docker-container">Extra configuration parameters for OpenVidu Server Docker container</a></strong></li>
+<li><strong><a href="#extra-configuration-parameters-for-openvidu-server-pro">Extra configuration parameters for OpenVidu Server Pro</a></strong></li>
+<li><strong><a href="#externalizing-configuration">Externalizing configuration</a></strong></li>
+</ul>
+<hr />
+<h3 id="configuration-parameters-for-openvidu-server">Configuration parameters for OpenVidu Server</h3>
 <table>
 <thead>
 <tr>
@@ -508,7 +528,7 @@ active: documentation
 <tr>
 <td><code>kms.uris</code></td>
 <td>KMS URL's to which OpenVidu Server will try to connect. They are tested in order until a valid one is found</td>
-<td><strong><em>[\"ws://localhost:8888/kurento\"]</em></strong><br>(default value for a KMS running in the same machine as OpenVidu Server)</td>
+<td><strong><em>["ws://localhost:8888/kurento"]</em></strong><br>(default value for a KMS running in the same machine as OpenVidu Server)</td>
 </tr>
 <tr>
 <td><code>openvidu.secret</code></td>
@@ -556,24 +576,44 @@ active: documentation
 <td><strong><em>120</em></strong></td>
 </tr>
 <tr>
+<td><code>openvidu.webhook</code></td>
+<td>Whether to enable webhook service or not (check <a href="../../reference-docs/openvidu-server-webhook/" target="_blank">OpenVidu Server Webhook</a>)</td>
+<td><strong><em>false</em></strong></td>
+</tr>
+<tr>
+<td><code>openvidu.webhook.endpoint</code></td>
+<td>HTTP endpoint where OpenVidu Server will send the POST messages with webhook events</td>
+<td></td>
+</tr>
+<tr>
+<td><code>openvidu.webhook.headers</code></td>
+<td>Array of strings with the HTTP headers that OpenVidu Server will append to each POST message of webhook events. For example, you may configure a Basic Auth header <em>name:pass</em> setting this property to <code>[\"Authorization:\ Basic\ bmFtZTpwYXNz\"]</code></td>
+<td><strong><em>[ ]</em></strong></td>
+</tr>
+<tr>
+<td><code>openvidu.webhook.events</code></td>
+<td>Array of strings with the type of events you want OpenVidu Server to send to your webhook</td>
+<td><span style="word-break: break-word; font-weight: bold; font-style: italic">["sessionCreated","sessionDestroyed","participantJoined","participantLeft","webrtcConnectionCreated","webrtcConnectionDestroyed","recordingStatusChanged"]</span><br>(all available events)</td>
+</tr>
+<tr>
 <td><code>openvidu.streams.video.max-recv-bandwidth</code></td>
 <td>Maximum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained</td>
-<td>1000</td>
+<td><strong><em>1000</em></strong></td>
 </tr>
 <tr>
 <td><code>openvidu.streams.video.min-recv-bandwidth</code></td>
 <td>Minimum video bandwidth sent from clients to OpenVidu Server, in kbps. 0 means unconstrained</td>
-<td>300</td>
+<td><strong><em>300</em></strong></td>
 </tr>
 <tr>
 <td><code>openvidu.streams.video.max-send-bandwidth</code></td>
 <td>Maximum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained</td>
-<td>1000</td>
+<td><strong><em>1000</em></strong></td>
 </tr>
 <tr>
 <td><code>openvidu.streams.video.min-send-bandwidth</code></td>
 <td>Minimum video bandwidth sent from OpenVidu Server to clients, in kbps. 0 means unconstrained</td>
-<td>300</td>
+<td><strong><em>300</em></strong></td>
 </tr>
 <tr>
 <td><code>server.ssl.key-store</code></td>
@@ -593,14 +633,12 @@ active: documentation
 </tbody>
 </table>
 <p>Examples:</p>
-<pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://my.openvidu.server.ip:3333 -Dopenvidu.cdr=true -Dserver.port=3333 -Dkms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] -jar openvidu-server.jar
-</code></pre>
-
-<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e kms.uris=[\&quot;ws://my.kms.ip:8888/kurento\&quot;] openvidu/openvidu-server:2.6.0
+<pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://my.openvidu.server.ip:3333/ -Dopenvidu.cdr=true -Dserver.port=3333 -Dkms.uris=[&quot;ws://my.kms.ip:8888/kurento&quot;] -jar openvidu-server.jar
 </code></pre>
 
 <p><br></p>
-<h3 id="list-of-additional-configuration-parameters-when-launching-openvidu-server-kms-docker-container">List of additional configuration parameters when launching <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu-server-kms</a> Docker container</h3>
+<hr />
+<h3 id="extra-configuration-parameters-for-openvidu-server-docker-container">Extra configuration parameters for <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">OpenVidu Server Docker container</a></h3>
 <table>
 <thead>
 <tr>
@@ -628,7 +666,61 @@ active: documentation
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333 -e openvidu.cdr=true -e server.port=3333 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e KMS_TURN_URL=myuser:mypass@54.54.54.54:3478 openvidu/openvidu-server-kms:2.10.0
+<pre><code class="console">docker run -d -p 3333:3333 -e openvidu.secret=YOUR_SECRET -e openvidu.publicurl=https://my.openvidu.server.ip:3333/ -e openvidu.cdr=true -e server.port=3333 -e KMS_STUN_IP=stun.l.google.com -e KMS_STUN_PORT=19302 -e KMS_TURN_URL=myuser:mypass@54.54.54.54:3478 openvidu/openvidu-server-kms:2.11.0
+</code></pre>
+
+<p><br></p>
+<hr />
+<h3 id="extra-configuration-parameters-for-openvidu-server-pro">Extra configuration parameters for <a href="../../openvidu-pro/" target="_blank">OpenVidu Server Pro</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openvidu.pro.stats.monitoring-interval</code></td>
+<td>Interval in seconds for CPU, memory and net usage stats gathering in OpenVidu Server Pro host. 0 for no gathering at all</td>
+<td>30</td>
+</tr>
+<tr>
+<td><code>openvidu.pro.stats.webrtc-interval</code></td>
+<td>Interval in seconds for WebRTC stats gathering from media servers WebRTC endpoints. 0 for no gathering at all</td>
+<td>30</td>
+</tr>
+<tr>
+<td><code>openvidu.pro.cluster</code></td>
+<td>Whether to launch OpenVidu in cluster mode or not. See <a href="../../openvidu-pro/scalability/" target="_blank">Scalability</a> section to learn more</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>openvidu.pro.cluster.load.strategy</code></td>
+<td>What parameter should be used to distribute the creation of new sessions (and therefore distribution of load) among all available media servers. Can be: [streams, sessions, mediaObjects, cpu]</td>
+<td><code>streams</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="console">java -Dopenvidu.secret=YOUR_SECRET -Dopenvidu.publicurl=https://my.openvidu.server.ip:4443/ -Dopenvidu.cdr=true -Dopenvidu.pro.cluster=true -Dopenvidu.pro.cluster.load.strategy=mediaObjects -Dkms.uris=[&quot;ws://my.kms.ip:8888/kurento&quot;,&quot;ws://my.other.kms.ip:8888/kurento&quot;] -Dopenvidu.pro.stats.webrtc-interval=0 -jar openvidu-server-pro.jar
+</code></pre>
+
+<p><br></p>
+<hr />
+<h3 id="externalizing-configuration">Externalizing configuration</h3>
+<p>You can use an external file to configure OpenVidu Server. Simply write the properties you want in a <code>*.properties</code> file and launch Java process with property <strong><code>spring.config.additional-location</code></strong> setting the path to the file. For example:</p>
+<pre><code class="console">java -Dspring.config.additional-location=/opt/openvidu/application.properties -jar openvidu-server.jar
+</code></pre>
+
+<p>And having file <em>/opt/openvidu/application.properties</em> one property per line. For example:</p>
+<pre><code class="console">openvidu.cdr=true
+openvidu.secret=1234
+openvidu.webhook=true
+openvidu.webhook.endpoint=http://my.webhook.com
+openvidu.webhook.events=[&quot;sessionCreated&quot;,&quot;sessionDestroyed&quot;]
+openvidu.recording=false
 </code></pre>
 
 <p><br></p> 

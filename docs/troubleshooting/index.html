@@ -344,6 +344,12 @@ active: documentation
         <a class="" href="../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
  
 </li>
 </ul>
@@ -457,6 +463,12 @@ active: documentation
   
 
 <li class="toctree-l1 ">
+        <a class="" href="../openvidu-pro/scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
         <a class="" href="../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
 </li>
 
@@ -490,6 +502,22 @@ active: documentation
 
 <hr>
 
+<ol>
+<li><a href="#1-everything-looks-alright-but-i-cannot-see-any-remote-video">Everything looks alright, but I cannot see any remote video</a></li>
+<li><a href="#2-any-tips-to-make-easier-the-development-of-my-app-with-openvidu">Any tips to make easier the development of my app with OpenVidu?</a></li>
+<li><a href="#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">I am using Windows to run the tutorials / develop my app. Anything I should know?</a></li>
+<li><a href="#4-does-my-app-need-a-server-side">Does my app need a server-side?</a></li>
+<li><a href="#5-the-cloudformation-stack-is-a-nice-option-for-amazon-but-i-dont-like-it-i-want-more-control">The CloudFormation Stack is a nice option for Amazon, but I don't like it. I want more control</a></li>
+<li><a href="#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">What are STUN and TURN servers and why do I need them?</a></li>
+<li><a href="#7-what-does-openvidu-not-integrate-regarding-webrtc-and-kurento-yet">What does OpenVidu not integrate regarding WebRTC and Kurento yet?</a></li>
+<li><a href="#8-what-platforms-are-supported-by-openvidu">What platforms are supported by OpenVidu?</a></li>
+<li><a href="#9-which-is-the-current-status-of-openvidu-regarding-performance-scalability-and-fault-tolerance">Which is the current status of OpenVidu regarding performance, scalability and fault tolerance?</a></li>
+<li><a href="#10-i-am-getting-an-error-accessing-the-camera-and-i-have-already-granted-permissions-on-the-browser">I am getting an "Error accessing the camera" and I have already granted permissions on the browser</a></li>
+<li><a href="#11-my-safari-users-with-role-subscriber-are-not-able-to-receive-any-remote-video">My Safari users with role SUBSCRIBER are not able to receive any remote video</a></li>
+<li><a href="#12-videos-are-freezing-on-safari-for-ios">Videos are freezing on Safari for iOS</a></li>
+<li><a href="#13-deploying-openvidu-in-aws-is-failing">Deploying OpenVidu in AWS is failing</a></li>
+</ol>
+<hr />
 <h3 id="1-everything-looks-alright-but-i-cannot-see-any-remote-video">1. Everything looks alright, but I cannot see any remote video</h3>
 <p>You have an app that uses OpenVidu to stream some video user-to-user, and the process looks perfectly okey. No errors on the console and all the OpenVidu events you are subscribed to are correctly triggered. So what's happening?</p>
 <p>99% of the time this is a problem related with <strong>OPENVIDU SERVER NOT HAVING A PUBLIC IP</strong>. To learn more about it, you can check <a href="#6-what-are-stun-and-turn-servers-and-why-do-i-need-them">this FAQ</a>. The quickest solution to this problem is to deploy our ready-to-use <a href="../deployment/deploying-aws" target="_blank">OpenVidu Server in Amazon</a>.</p>
@@ -538,24 +566,24 @@ active: documentation
 <p><br></p>
 <h5 id="share-your-app-through-your-network-to-test-with-multiple-devices">Share your app through your network to test with multiple devices</h5>
 <p>Making your app accessible to any device connected to your WiFi is very useful for quickly testing your app with different devices at the same time. To achieve this, you just have to indicate OpenVidu Server to use your dev machine LAN IP address as public url. For example, let's say that your machine has assigned ip <code>192.168.0.107</code> in your network:</p>
-<p><code>docker run -p 4443:4443 -e openvidu.publicurl=https://192.168.0.107:4443/ openvidu/openvidu-server-kms:2.10.0</code></p>
+<p><code>docker run -p 4443:4443 -e openvidu.publicurl=https://192.168.0.107:4443/ openvidu/openvidu-server-kms:2.11.0</code></p>
 <p>Then you just have to configure your app (REST API address / OpenVidu Java Client / OpenVidu Node Client) to connect to OpenVidu through <code>https://192.168.0.107:4443/</code>. Any user connecting to your app through <code>https://192.168.0.107:WHICHEVER_PORT_YOUR_APP_IS_LISTENING_THROUGH</code> will be able to send and receive video.</p>
 <hr />
 <h3 id="3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">3. I am using Windows to run the tutorials / develop my app. Anything I should know?</h3>
 <p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). </p>
 <p>First of all, you must launch the developing Docker container of OpenVidu Server (<a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu/openvidu-server-kms</a>) setting paramater <code>openvidu.publicurl</code> to the IP allocated for Docker in your Windows machine.</p>
 <p>What in Linux/Mac is... </p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.10.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.11.0
 </code></pre>
 
 <p>...in Windows is...</p>
-<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms:2.10.0
+<pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.99.100:4443/ openvidu/openvidu-server-kms:2.11.0
 </code></pre>
 
 <p>Then, to let your applications know how to connect to OpenVidu Server:</p>
 <h4 id="applications-client-side-only">Applications <em>Client-Side Only</em></h4>
 <p>(For example <em><a href="../tutorials/openvidu-hello-world/" target="_blank">openvidu-hello-world</a></em>, <em><a href="../tutorials/openvidu-insecure-js/" target="_blank">openvidu-insecure-js</a></em>, <em><a href="../tutorials/openvidu-insecure-angular/" target="_blank">openvidu-insecure-angular</a></em>, <em><a href="../demos/openvidu-getaroom/" target="_blank">openvidu-getaroom</a></em>)</p>
-<p>When consuming openvidu-server REST api, change <code>location.hostname</code> to the IP of the Docker container running openvidu-server (usually <code>192.168.99.100</code>). For every one of the insecure tutorials listed above, the url where to send the REST operations ...</p>
+<p>When consuming openvidu-server REST API, change <code>location.hostname</code> to the IP of the Docker container running openvidu-server (usually <code>192.168.99.100</code>). For every one of the insecure tutorials listed above, the url where to send the REST operations ...</p>
 <pre><code>"https://" + location.hostname + ":4443/api/&lt;OPERATION&gt;"
 </code></pre>
 <p>... in Windows is ...</p>
@@ -640,7 +668,8 @@ active: documentation
 
 <hr />
 <h3 id="5-the-cloudformation-stack-is-a-nice-option-for-amazon-but-i-dont-like-it-i-want-more-control">5. The CloudFormation Stack is a nice option for Amazon, but I don't like it. I want more control</h3>
-<p>You can always deploy everything by yourself. To do so, check <a href="../deployment/deploying-ubuntu/" target="_blank">Deploying OpenVidu on Ubuntu</a> section.</p>
+<p>You can always deploy everything by yourself. To do so, check <a href="../deployment/deploying-ubuntu/" target="_blank">Deploying OpenVidu on Ubuntu</a> section.
+ What platforms are supported by OpenVidu?</p>
 <hr />
 <h3 id="6-what-are-stun-and-turn-servers-and-why-do-i-need-them">6. What are STUN and TURN servers and why do I need them?</h3>
 <p>If the user's devices don't have a public and reachable IP, WebRTC connections cannot be established and therefore, video streams cannot be sent or received. This occurs when the users are behind NAT's and Firewalls. In brief, when they are hidden under complex networks.</p>
@@ -672,7 +701,7 @@ active: documentation
 <p>OpenVidu supports a wide range of platforms:</p>
 <p><br></p>
 <h5 id="desktop-browsers">Desktop browsers</h5>
-<p><strong>Chrome</strong>, <strong>Firefox</strong>, <strong>Opera</strong>, <strong>Safari</strong> and <strong>Internet Explorer</strong></p>
+<p><strong>Chrome</strong>, <strong>Firefox</strong>, <strong>Opera</strong>, <strong>Safari</strong> and <strong>Internet Explorer 11</strong></p>
 <p><br></p>
 <h5 id="mobile-browsers">Mobile browsers</h5>
 <p><strong>Chrome</strong>, <strong>Firefox</strong> and <strong>Opera</strong> in Android and <strong>Safari</strong> on iOS</p>
@@ -693,13 +722,14 @@ active: documentation
 <li><strong>Windows</strong>, <strong>OSX</strong> and <strong>Linux</strong> are supported since release <strong>2.10.0</strong> through <strong><a href="https://electronjs.org/" target="_blank">Electron</a></strong>. You can try <a href="../tutorials/openvidu-electron/" target="_blank">openvidu-electron</a> tutorial and you will have an OpenVidu native desktop application working in minutes.</li>
 </ul>
 <hr />
-<h3 id="9-which-is-the-current-status-of-openvidu-on-scalability-and-fault-tolerance">9. Which is the current status of OpenVidu on scalability and fault tolerance?</h3>
-<p>OpenVidu load testing process is described in detail in this <strong><a href="https://medium.com/@openvidu/openvidu-load-testing-a-systematic-study-of-openvidu-platform-performance-b1aa3c475ba9" target="_blank">Medium post</a></strong>. Results are the following for 7-to-7 sessions where every participant sends one audio-video stream (540x360, 30 fps) and receives 6 remote streams (same video). The table states the maximum number of entities that can be established until CPU reaches 100% use.</p>
+<h3 id="9-which-is-the-current-status-of-openvidu-regarding-performance-scalability-and-fault-tolerance">9. Which is the current status of OpenVidu regarding performance, scalability and fault tolerance?</h3>
+<p>In terms of <strong>performance</strong>, OpenVidu load testing process is described in detail in this <a href="https://medium.com/@openvidu/openvidu-load-testing-a-systematic-study-of-openvidu-platform-performance-b1aa3c475ba9" target="_blank">Medium post</a>. Results are the following for 7-to-7 sessions where every participant sends one audio-video stream (540x360, 30 fps) and receives 6 remote streams (same video). The table states the maximum number of entities that can be established until CPU reaches 100% use.</p>
 <div class="row" style="margin-bottom: 10px; text-align: center; text-align: -webkit-center">
   <img class="img-responsive" src="/img/docs/troubleshooting/load_test_results.png">
 </div>
 
-<p>That said, one of the most important features OpenVidu will offer is the possibility of automated scalability and fault tolerance. We intend to provide an easy-to-use service integrated with most popular cloud providers to allow the automated launching and shutdown of servers depending on the workload of your application.</p>
+<p>About <strong>scalability</strong>, you can try <a href="../openvidu-pro/scalability/" target="_blank">OpenVidu Pro scalability features</a>. With OpenVidu Pro you can deploy an OpenVidu cluster to make your application scalable.</p>
+<p>We intend to provide <strong>automated elasticity and fault tolerance</strong> in OpenVidu Pro tier in the near future. Always seamlessly integrated with most popular cloud providers and platforms (AWS, Azure, Ansible, Kubernetes...) with the final goal of providing automated server scale-in and scale-out capabilities depending on the workload of your application.</p>
 <hr />
 <h3 id="10-i-am-getting-an-error-accessing-the-camera-and-i-have-already-granted-permissions-on-the-browser">10. I am getting an "Error accessing the camera" and I have already granted permissions on the browser</h3>
 <p>If you are using <strong>Chrome</strong>: you <strong>cannot access the camera or microphone from a <code>http</code> URL if it is not <code>localhost</code> or <code>127.0.0.1</code></strong>. In a nutshell: in Chrome accessing the webcam on <code>http://localhost:8080</code> or <code>http://127.0.0.1:8080</code> is perfectly OK. But, for example, on <code>http://172.17.0.1:8080</code> it will through an error saying "<em>Only secure origins are allowed</em>". If for any reason you want to serve your app locally on a custom URL, the only solution is to serve it over <code>https</code> with a certificate. If you are making use of the web server we have strongly suggested over the documentation (<code>npm install -g http-server</code>), you can do this with the following commands on your application's root path:</p>
@@ -731,11 +761,11 @@ var video = document.getElementById(&quot;hidden-video&quot;).play();
 <hr />
 <h3 id="12-videos-are-freezing-on-safari-for-ios">12. Videos are freezing on Safari for iOS</h3>
 <p>Again, Apple's browser has "special" needs when it comes to video playback. In iPhones and iPads, Safari doesn't support out of the box the playback of multiple videos at the same time if they have audio tracks. Here you have a <a href="https://bugs.webkit.org/show_bug.cgi?id=176282#c4" target="_blank">link</a> to a bug related to this behavior.</p>
-<p>Possible solutions to this issue? Tweaking muted property on videos to have only one playing audio at a time. Maybe using user gestures to directly play videos can help too. There is not a clear solution to this problem, and depending on the web application some workarounds can succeed and some may not. On our tests we have even seen different behaviors in video playback from one execution to another, breaking the supposed consistency of the browser. It is really a matter of testing different approaches until you find a good enough solution.</p>
-<p>Usually any other WebRTC based service we have tested redirected to a native application when trying to connect through iOS Safari. You can implement your native OpenVidu app for both iOS and Android with Ionic (<a href="../tutorials/openvidu-ionic/" target="_blank">see the tutorial</a>)</p>
+<p>Possible solutions to this issue? Tweaking muted property on videos to have only one playing audio at a time. Maybe using user gestures to directly play videos can help too. Other users have reported that it usually works fine if dynamically adding audio tracks to the same MediaStream object. There is not a clear solution to this problem, and depending on the web application some workarounds can succeed and some may not. On our tests we have even seen different behaviors in video playback from one execution to another, breaking the supposed consistency of the browser. It is really a matter of testing different approaches until you find a good enough solution.</p>
+<p>Due to these problems, any other WebRTC based service we have tested usually redirected to a native application when trying to connect through iOS Safari. You can implement your native OpenVidu app for both iOS and Android with <a href="../tutorials/openvidu-ionic/" target="_blank">Ionic</a>) or <a href="../tutorials/openvidu-react-native/" target="_blank">Ractt Native</a>).</p>
 <hr />
 <h3 id="13-deploying-openvidu-in-aws-is-failing">13. Deploying OpenVidu in AWS is failing</h3>
-<p>If you are deploying <a href="../deployment/deploying-aws/" target="_blank">OpenVidu Community</a> or <a href="../openvidu-pro/deploying-openvidu-pro/" target="_blank">OpenVidu Pro</a> in AWS and the CloudFormation reaches <code>CREATE_FAILED</code> status, then possibly you are missing a default VPC in that specific region.</p>
+<p>If you are deploying <a href="../deployment/deploying-aws/" target="_blank">OpenVidu Community</a> or <a href="../openvidu-pro/deploying-openvidu-pro-aws/" target="_blank">OpenVidu Pro</a> in AWS and the CloudFormation reaches <code>CREATE_FAILED</code> status, then possibly you are missing a default VPC in that specific region.</p>
 <p>You can inspect your default VPCs like this: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc" target="_blank">https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc</a><br>
 And you can create a default VPC like this: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-vpc" target="_blank">https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-vpc</a> </p>
 <p><br></p> 

@@ -344,6 +344,12 @@ active: documentation
         <a class="" href="../openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
  
 </li>
 </ul>
@@ -452,6 +458,12 @@ active: documentation
 
 <li class="toctree-l1 ">
         <a class="" href="../../openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
 </li>
 
   
@@ -676,7 +688,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="get-apisessionssession_id">GET <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
+<h3 id="get-apisessionsltsession_idgt">GET <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -783,7 +795,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apisessionssession_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
+<h3 id="delete-apisessionsltsession_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -818,7 +830,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apisessionssession_idconnectionconnection_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</code></h3>
+<h3 id="delete-apisessionsltsession_idgtconnectionltconnection_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -854,7 +866,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apisessionssession_idstreamstream_id">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</code></h3>
+<h3 id="delete-apisessionsltsession_idgtstreamltstream_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -980,7 +992,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="post-apirecordingsstoprecording_id">POST <code>/api/recordings/stop/&lt;RECORDING_ID&gt;</code></h3>
+<h3 id="post-apirecordingsstopltrecording_idgt">POST <code>/api/recordings/stop/&lt;RECORDING_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -1037,7 +1049,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="get-apirecordingsrecording_id">GET <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
+<h3 id="get-apirecordingsltrecording_idgt">GET <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -1136,7 +1148,7 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="delete-apirecordingsrecording_id">DELETE <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
+<h3 id="delete-apirecordingsltrecording_idgt">DELETE <code>/api/recordings/&lt;RECORDING_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -1195,7 +1207,7 @@ active: documentation
 </tr>
 <tr>
 <td><strong>Sample return</strong></td>
-<td><code>{"version": "2.7.0", "openviduPublicurl": "https://localhost:4443/", "openviduCdr": false, "maxRecvBandwidth": 1000, "minRecvBandwidth": 300, "maxSendBandwidth": 1000, "minSendBandwidth": 300, "openviduRecording": true, "openviduRecordingVersion": "2.8.0", "openviduRecordingPath": "/opt/openvidu/recordings/", "openviduRecordingPublicAccess": true, "openviduRecordingNotification": "publisher_moderator", "openviduRecordingCustomLayout": "/opt/openvidu/custom-layout/"}</code></td>
+<td><code>{"version": "2.9.0", "openviduPublicurl": "https://localhost:4443/", "openviduCdr": false, "maxRecvBandwidth": 1000, "minRecvBandwidth": 300, "maxSendBandwidth": 1000, "minSendBandwidth": 300, "openviduRecording": true, "openviduRecordingVersion": "2.8.0", "openviduRecordingPath": "/opt/openvidu/recordings/", "openviduRecordingPublicAccess": true, "openviduRecordingNotification": "publisher_moderator", "openviduRecordingCustomLayout": "/opt/openvidu/custom-layout/", "openviduRecordingAutostopTimeout": 120, "openviduWebhook": true, "openviduWebhookEndpoint": "http://localhost:7777/webhook/", "openviduWebhookHeaders": ["Authorization: Basic YWJjZDphYmNk"], "openviduWebhookEvents": ["recordingStatusChanged"]}</code></td>
 </tr>
 </tbody>
 </table>
@@ -1205,7 +1217,8 @@ active: documentation
 <li><code>version</code>: version of OpenVidu Server</li>
 <li><strong>Rest of properties</strong>: values given to <strong><a href="../../reference-docs/openvidu-server-params/" target="_blank">system properties</a></strong> on OpenVidu Server launch</li>
 </ul>
-</blockquote> 
+</blockquote>
+<p><br></p> 
 						</div>
 					</div> <footer>
 <hr>
