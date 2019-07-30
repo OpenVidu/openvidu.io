@@ -509,29 +509,61 @@ active: documentation
 </thead>
 <tbody>
 <tr>
-<td>java 8 JDK</td>
+<td>Java 8 JDK</td>
 <td><code>java -version</code></td>
 <td><code>sudo apt-get install -y openjdk-8-jdk</code></td>
 </tr>
 <tr>
-<td>node</td>
-<td><code>node -v</code></td>
-<td><code>sudo curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -</code><br><code>sudo apt-get install -y nodejs</code></td>
-</tr>
-<tr>
-<td>maven</td>
+<td>Maven</td>
 <td><code>mvn -v</code></td>
 <td><code>sudo apt-get install -y maven</code></td>
 </tr>
 <tr>
-<td>angular-cli</td>
-<td><code>ng -v</code></td>
-<td><code>sudo npm install -g @angular/cli</code></td>
+<td>Node</td>
+<td><code>node -v</code></td>
+<td><code>sudo curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -</code><br><code>sudo apt-get install -y nodejs</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="setup-for-development">Setup for development</h2>
-<p>Here we show how to develop an Angular app (<em>openvidu-testapp</em>) with <strong><em>openvidu-browser</em></strong> and <strong><em>openvidu-server</em></strong> as local dependencies, waiting to be modified as you want.</p>
+<h2 id="compiling-openvidu-server">Compiling OpenVidu Server</h2>
+<p><strong>1)</strong> Clone OpenVidu parent repository and install local dependencies. <strong>This is only necessary the first time you compile openvidu-server</strong></p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
+cd openvidu
+mvn -DskipTests=true clean install
+</code></pre>
+
+<p><strong>2)</strong> Build openvidu-server</p>
+<pre><code class="bash">cd openvidu-server
+mvn clean compile package
+</code></pre>
+
+<h2 id="compiling-openvidu-browser">Compiling OpenVidu Browser</h2>
+<p><strong>1)</strong> Clone OpenVidu parent repository and install openvidu-browser dependencies</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
+cd openvidu/openvidu-browser
+npm install
+</code></pre>
+
+<p><strong>2)</strong> Build openvidu-browser</p>
+<pre><code class="bash">npm run build
+</code></pre>
+
+<p><strong>3)</strong> To install openvidu-browser as local NPM dependency</p>
+<pre><code class="bash">sudo npm link
+
+# You can link this local dependency to any project that has openvidu-browser as
+# dependency in its package.json, by calling &quot;sudo npm link openvidu-browser&quot;
+</code></pre>
+
+<p><strong>4)</strong> To obtain static JavaScript files</p>
+<pre><code class="bash">VERSION=2.0.0 npm run browserify # Regular JS version
+VERSION=2.0.0 npm run browserify-prod # Minified JS version
+
+# Static files will be built in path ./static/js/
+</code></pre>
+
+<h2 id="example-setup-for-development">Example: setup for development</h2>
+<p>Here we show how to develop an Angular app (<em>openvidu-testapp</em>) with <strong><em>openvidu-browser</em></strong> and <strong><em>openvidu-server</em></strong> as local dependencies, waiting to be modified as you want. You can install Angular with <code>sudo npm install -g @angular/cli</code>.</p>
 <p><strong>1)</strong> Run Kurento Media Server Docker container (<code>docker run -d -p 8888:8888 kurento/kurento-media-server:latest</code>) or <a href="#installing-kms">install and run KMS</a> (only for Ubuntu 16.04)</p>
 <p><strong>2)</strong> Clone repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
@@ -544,7 +576,7 @@ sudo npm link
 </code></pre>
 
 <p><strong>4)</strong> <code>openvidu/</code></p>
-<pre><code class="bash">mvn -DskipTests=true clean install
+<pre><code class="bash">mvn -DskipTests=true install
 </code></pre>
 
 <p><strong>5)</strong> <code>openvidu/openvidu-testapp/</code></p>
@@ -575,9 +607,9 @@ ng serve
 </li>
 </ul>
 <hr />
-<h2 id="setup-for-advanced-development-share-the-app-through-your-network">Setup for advanced development: share the app through your network</h2>
+<h2 id="example-setup-for-advanced-development-share-the-app-through-your-network">Example: setup for advanced development (share the app through your network)</h2>
 <p>You can also use <strong>different machines</strong> in the <strong>same network</strong> to build a more advanced development environment, so you can test the application in different devices at the same time. It's very similar to the process outlined above:</p>
-<p>Run exactly the same commands as the process above, but:</p>
+<p>Run exactly the same commands as in the previous section, but:</p>
 <ol>
 <li>
 <p>On step <strong>5)</strong> extend <code>ng serve</code> command with:</p>
