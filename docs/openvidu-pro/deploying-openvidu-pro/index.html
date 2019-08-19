@@ -707,10 +707,10 @@ sudo apt-get install -y ansible
 <h4 id="in-your-cluster-machines">In your cluster machines</h4>
 <p>You must have <strong>at least 2 different instances</strong> with a clean installation of <strong>Ubuntu 16.04</strong></p>
 <ul>
-<li>One instance for the <strong>OpenVidu Server Pro</strong> node</li>
-<li>One instance for a <strong>Media Server</strong> node</li>
+<li>One instance for the <strong>OpenVidu Server Pro Node</strong></li>
+<li>One instance for a <strong>Media Node</strong></li>
 </ul>
-<p>You can actually have as many instances as you want for Media Server nodes. The number of Media Server nodes determines the size of your cluster: the more Media Server nodes, the more video sessions your cluster will be able to handle.</p>
+<p>You can actually have as many instances as you want for Media Nodes. The number of Media Nodes determines the size of your cluster: the more Media Nodes, the more video sessions your cluster will be able to handle. Check out <a href="../../openvidu-pro/scalability/" target="_blank">Scalability</a> section for further details.</p>
 <p>Besides, be sure to meet the following criteria in your cluster instances:</p>
 <ul>
 <li>Have at least a minimum of <strong>2 CPUs and 8GB of RAM</strong>, and a generous network bandwidth</li>
@@ -719,18 +719,17 @@ sudo apt-get install -y ansible
 <p><br></p>
 <hr />
 <h3 id="2-network-requirements">2) Network requirements</h3>
-<p>These ports need to be opened for each type of instance in your cluster:</p>
+<p>These ports need to be opened and publicly accessible for each type of instance in your cluster:</p>
 <h4 id="openvidu-server-pro-instance">OpenVidu Server Pro instance</h4>
 <ul>
 <li><strong>4443 TCP</strong> (OpenVidu Server listens on port 4443 by default)</li>
 <li><strong>3478 TCP</strong> (coturn listens on port 3478 by default)</li>
-<li><strong>49152 - 65535 UDP</strong> (these ports are strongly recommended to be opened, as WebRTC randomly exchanges media through any of them and coturn server may need them when relaying media streams)</li>
 </ul>
-<h4 id="media-server-instances">Media Server instance(s)</h4>
+<h4 id="media-instances">Media instance(s)</h4>
 <ul>
-<li><strong>8888 TCP</strong> (Kurento Media Server listens on port 8888 by default)</li>
-<li><strong>1024 - 65535 UDP</strong> (WebRTC connections with clients may be established using a random port inside this range)</li>
-<li><strong>1024 - 65535 TCP</strong> (WebRTC connections with clients may be established using a random port inside this range, if UDP can't be used)</li>
+<li><strong>40000 - 65535 UDP</strong> (WebRTC connections with clients may be established using a random port inside this range)</li>
+<li><strong>40000 - 65535 TCP</strong> (WebRTC connections with clients may be established using a random port inside this range, if UDP can't be used because client network is blocking it)</li>
+<li><strong>8888 TCP (must only be accessible for OpenVidu Server Pro instance)</strong> (Kurento Media Server listens on port 8888 by default)</li>
 </ul>
 <p><br></p>
 <blockquote>

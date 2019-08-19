@@ -537,6 +537,23 @@ mvn -DskipTests=true clean install
 mvn clean compile package
 </code></pre>
 
+<h3 id="compiling-openvidu-server-dashboard">Compiling OpenVidu Server dashboard</h3>
+<p>You need Angular to compile OpenVidu Server dashboard:</p>
+<pre><code class="bash">sudo npm install -g @angular/cli
+</code></pre>
+
+<p>Enter the Angular project and install NPM dependencies. <strong>This is only necessary the first time you compile openvidu-server dashboard</strong></p>
+<pre><code class="bash">cd openvidu/openvidu-server/src/dashboard
+npm install
+</code></pre>
+
+<p>Build the project. This npm command will copy the output files into the static files folder of openvidu-server. Next time you compile openvidu-server it will serve this last compilation of the dashboard.</p>
+<pre><code class="bash">npm run build
+# For production compilation: npm run build-prod
+</code></pre>
+
+<p><br></p>
+<hr />
 <h2 id="compiling-openvidu-browser">Compiling OpenVidu Browser</h2>
 <p><strong>1)</strong> Clone OpenVidu parent repository and install openvidu-browser dependencies</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
@@ -562,9 +579,11 @@ VERSION=2.0.0 npm run browserify-prod # Minified JS version
 # Static files will be built in path ./static/js/
 </code></pre>
 
+<p><br></p>
+<hr />
 <h2 id="example-setup-for-development">Example: setup for development</h2>
 <p>Here we show how to develop an Angular app (<em>openvidu-testapp</em>) with <strong><em>openvidu-browser</em></strong> and <strong><em>openvidu-server</em></strong> as local dependencies, waiting to be modified as you want. You can install Angular with <code>sudo npm install -g @angular/cli</code>.</p>
-<p><strong>1)</strong> Run Kurento Media Server Docker container (<code>docker run -d -p 8888:8888 kurento/kurento-media-server:latest</code>) or <a href="#installing-kms">install and run KMS</a> (only for Ubuntu 16.04)</p>
+<p><strong>1)</strong> Run Kurento Media Server Docker container (<code>docker run -d -p 8888:8888 kurento/kurento-media-server:latest</code>) or <a href="#installing-kms">install and run KMS</a> (only for Ubuntu 16.04 or Ubuntu 18.04)</p>
 <p><strong>2)</strong> Clone repo:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu.git
 </code></pre>
@@ -590,6 +609,7 @@ ng serve
 </code></pre>
 
 <p><em>(or if you prefer you can just run the Java application in your favourite IDE)</em></p>
+<p><br></p>
 <hr />
 <p>At these point, you can start modifying <em>openvidu-testapp</em>, <em>openvidu-browser</em> or <em>openvidu-server</em>.</p>
 <ul>
@@ -606,6 +626,7 @@ ng serve
 <p><em>(or re-launch the Java application in your IDE. Some IDE's support automatic re-launch in response to changes)</em></p>
 </li>
 </ul>
+<p><br></p>
 <hr />
 <h2 id="example-setup-for-advanced-development-share-the-app-through-your-network">Example: setup for advanced development (share the app through your network)</h2>
 <p>You can also use <strong>different machines</strong> in the <strong>same network</strong> to build a more advanced development environment, so you can test the application in different devices at the same time. It's very similar to the process outlined above:</p>
@@ -625,10 +646,19 @@ ng serve
 </ol>
 <p>This way we first tell AngularCLI to serve our app through https and to expose the port in our WiFi network, and secondly we set OpenVidu Server public url to the public IP of the machine in our WiFi network. This way our devices will be able to reach it as long as they are connected to the same network.</p>
 <p>To connect to the application from any device, be sure to be connected to the same WiFi network and navigate to <code>https://HOST_LOCAL_IP:4200</code> (being <code>HOST_LOCAL_IP</code> the local IP that your machine serving the app has in your WiFi network).</p>
+<p><br></p>
 <hr />
 <h2 id="installing-kms">Installing KMS</h2>
-<p>How to <em>install</em> and <em>run</em> KMS in your development machine (Ubuntu 16.04):</p>
+<p>How to <em>install</em> and <em>run</em> KMS in your development machine (Ubuntu 16.04 and Ubuntu 18.04):</p>
+<p><strong>Ubuntu Xenial 16.04</strong></p>
 <pre><code class="bash">sudo echo &quot;deb [arch=amd64] http://ubuntu.openvidu.io/6.11.0 xenial kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
+sudo apt-get update
+sudo apt-get -y install kurento-media-server
+</code></pre>
+
+<p><strong>Ubuntu Bionic 18.04</strong></p>
+<pre><code class="bash">sudo echo &quot;deb [arch=amd64] http://ubuntu.openvidu.io/6.11.0 bionic kms6&quot; | sudo tee /etc/apt/sources.list.d/kurento.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5AFA7A83
 sudo apt-get update
 sudo apt-get -y install kurento-media-server

@@ -174,10 +174,10 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td><span style="font-size: 3em">Free</span></td>
                                 <td>
                                     <div style="margin: 1em"><span style="font-size: 2.5em">$10 / month</span><br>
-                                        <span style="font-size: 1.2em">with 14000 minutes of cores of media nodes included</span><br>
+                                        <span style="font-size: 1.2em">with 14000 minutes of cores of Media Nodes included</span><br>
                                         
                                         <span style="font-size: 2.5em">$0.00071</span><br>
-                                        <span style="font-size: 1.2em"> per additional core of media nodes per minute</span><br><br>
+                                        <span style="font-size: 1.2em"> per additional core of Media Nodes per minute</span><br><br>
                                         <span style="font-size: 1em; margin-top: 1em">(see below)</span>
                                     </div>
                                 </td>
@@ -185,9 +185,9 @@ top-subtitle: Choose your preferred tier according to your needs
                 </tr>
                 <tr>
                     <th scope="row"></th>
-                    <td><a href="/docs/home/index.html" class="btn-primary btn-scroll try-now-btn">
+                    <td><a href="/docs/home/index.html" class="btn-primary btn-scroll try-now-btn" target="_blank">
                             OpenVidu Community Docs</a></td>
-                    <td><a href="/docs/openvidu-pro/index.html" class="btn-primary btn-scroll pro-btn">
+                    <td><a href="/docs/openvidu-pro/index.html" class="btn-primary btn-scroll pro-btn" target="_blank">
                             OpenVidu Pro Docs</a></td>
                 </tr>
                 </tbody>
@@ -202,8 +202,8 @@ top-subtitle: Choose your preferred tier according to your needs
                 enterprise friendly Apache 2 open source license. You can deploy it anywhere (in a cloud
                 provider or on premises) and make modifications on your own to adapt the software to your
                 needs. <b>It is completely FREE (<a
-                        href="https://www.quora.com/What-is-the-difference-between-free-as-in-beer-and-free-as-in-speech">as
-                        a beer and as an speech</a>)!!</b><br><br>
+                        href="https://www.quora.com/What-is-the-difference-between-free-as-in-beer-and-free-as-in-speech" target="_blank">as
+                        in beer and as in speech</a>)!!</b><br><br>
 
                 <b>OpenVidu Pro</b> is the commercial version of
                 OpenVidu Community with enterprise features like scalability, advanced monitoring, and
@@ -212,9 +212,9 @@ top-subtitle: Choose your preferred tier according to your needs
                 Pro license and start using it without any change in your code.<br><br>
 
                 OpenVidu Pro can also be deployed in <a
-                    href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-aws">a cloud
+                    href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-aws" target="_blank">a cloud
                     provider</a> or <a
-                    href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-premise">on
+                    href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-premise" target="_blank">on
                     premises</a>.
                 OpenVidu Pro is not offered as a hosted service right now. <br><br>
 
@@ -223,23 +223,23 @@ top-subtitle: Choose your preferred tier according to your needs
                 and will be cheaper than a bigger cluster that manages much more media sessions.<br><br>
 
                 OpenVidu Pro is deployed in a master-worker setup (take a look to its
-                <a href="/docs/openvidu-pro/scalability/#openvidu-pro-architecture">architecture</a>).
+                <a href="/docs/openvidu-pro/scalability/#openvidu-pro-architecture" target="_blank">architecture</a>).
                 Master node executes
                 OpenVidu-Server and worker nodes execute all media related services (SFU, MCU and recording
-                process). We call worker nodes as media nodes. Price is based on CPU cores of media nodes. As an
-                OpenVidu Pro cluster is elastic (media nodes can grow and shrink based on demand), every minute
-                is charged based on how many CPU cores are being used in media nodes.<br><br>
+                process). We call worker nodes as Media Nodes. Price is based on CPU cores of Media Nodes. As an
+                OpenVidu Pro cluster is elastic (Media Nodes can grow and shrink based on demand), every minute
+                is charged based on how many CPU cores are being used in Media Nodes.<br><br>
 
                 OpenVidu Pro is priced as:<br><br>
 
                 <div style="margin: 3em; text-align: center; color: #000000;">
                     <div style="font-size: 4em;">$10/month</div>
-                    <div style="font-size: 1.5em;">with 14000 minutes of cores of media nodes included</div>
+                    <div style="font-size: 1.5em;">with 14000 minutes of cores of Media Nodes included</div>
                 </div>
 
                 <div style="margin: 3em; text-align: center; color: #000000;">
                     <div style="font-size: 4em;">$0.00071</div>
-                    <div style="font-size: 1.5em;">per additional core of media nodes per minute</div>
+                    <div style="font-size: 1.5em;">per additional core of Media Nodes per minute</div>
                 </div>
 
                 <h3>How much a session in OpenVidu Pro costs?</h3>
@@ -249,21 +249,21 @@ top-subtitle: Choose your preferred tier according to your needs
 
                 As there are too much variables to be taken into account, we will analyze
                 a fixed sized cluster with all sessions with the same number of participants. This is not
-                realistic because OpenVidu Pro can reduce and increase the number of media nodes depending on
+                realistic because OpenVidu Pro can reduce and increase the number of Media Nodes depending on
                 demand. Also, we have left out recording as it could complicate too much the
                 calculations.<br><br>
 
                 Let&rsquo;s assume you have a cluster with a master node deployed in a VM
-                with 2 CPUs and 4GB RAM and 2 media nodes with 8 CPUs and 16GB RAM each.<br><br>
+                with 2 CPUs and 4GB RAM and 2 Media Nodes with 8 CPUs and 16GB RAM each.<br><br>
 
                 <h4>Cluster Capacity</h4>
 
                 To know how many sessions can be handled by a cluster, it is important to know how
                 many participants are in every session. To maintain calculations simple, let&rsquo;s assume that
                 sessions have 7 participants each. In that case, according to <a
-                    href="https://medium.com/@openvidu/openvidu-load-testing-a-systematic-study-of-openvidu-platform-performance-b1aa3c475ba9">performance
+                    href="https://medium.com/@openvidu/openvidu-load-testing-a-systematic-study-of-openvidu-platform-performance-b1aa3c475ba9" target="_blank">performance
                     tests we executed</a>, 2 nodes with 8 CPUs and 16GB each, can manage
-                up to 30 simultaneous sessions (15 in every media node). It is not realistic consider that the
+                up to 30 simultaneous sessions (15 in every Media Node). It is not realistic consider that the
                 cluster will be using its maximum capacity 100% of the time. Different usage patterns and
                 different elastic policies can lead to a different percentage of cluster usage. Let&rsquo;s
                 consider that, in average, cluster is used at 50% of its capacity. Then, we assume that cluster
@@ -276,10 +276,10 @@ top-subtitle: Choose your preferred tier according to your needs
 
                 <ul>
                     <li><b>License costs:</b> With 16 vCPUs in
-                        total in media nodes, licence oost is $0.00071 x 16 = $0.01136 per minute.</li>
+                        total in Media Nodes, licence oost is $0.00071 x 16 = $0.01136 per minute.</li>
 
                     <li><b>Infrastructure costs:</b> Based on CPUs and
-                        memory, master node can be deployed in a c5.large AWS EC2 instance and media nodes in 2 AWS
+                        memory, master node can be deployed in a c5.large AWS EC2 instance and Media Nodes in 2 AWS
                         EC2 c5.2xlarge instances. Based on <a href="https://aws.amazon.com/ec2/pricing/on-demand">AWS
                             EC2 pricing</a>, if cluster is
                         deployed in US East (Ohio) will
@@ -366,7 +366,7 @@ top-subtitle: Choose your preferred tier according to your needs
                         border: 2px solid #0088aa9e;
                         border-radius: 5px;
                         width: 100%;
-                        margin-top: 30px;
+                        margin-top: 15px;
                         margin-bottom: 25px;
                         padding: 5px 0 5px 0;
                         background-color: rgba(0, 136, 170, 0.04);">
@@ -387,13 +387,12 @@ top-subtitle: Choose your preferred tier according to your needs
 
                         <br>
                         <strong>NOTE</strong>: Please take into account that managed services provide stable and
-                        predictable pricing in its offerings. When you operates your own infrastructure, on-premises
-                        or
-                        in a cloud provider, there are a lot of things to take care and real prices can be very
+                        predictable pricing in its offerings. When you operate your own infrastructure, on-premises
+                        or in a cloud provider, there are a lot of things to take care and real prices can be very
                         different to estimations and studies. In any case, we can assume that our calculations are
                         reasonable and we will use them to compare OpenVidu Pro with managed services.<br><br>
 
-                        Note that managed services can provide more features than ones provided
+                        Note that managed services can provide more features than the ones provided
                         by OpenVidu Pro. Also, OpenVidu Pro has to be operated by your operations team and managed
                         services are managed by experienced operations team and usually have SLAs to warranty
                         service
@@ -402,6 +401,8 @@ top-subtitle: Choose your preferred tier according to your needs
                         participants. For only a few sessions, cluster cost can suppose a high cost. <br><br>
                     </div>
                 </div>
+
+                <br>
 
                 <h4>Twilio Programmable Video</h4>
 
@@ -432,7 +433,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 <a href="https://tokbox.com/pricing">its
                     pricing web page</a>, every subscribed media stream is charged from
                 $0.00475 to $0.00425 depending on volume. For our calculations, let&rsquo;s consider it is
-                charged as $0.0045 per minute. As tokbox charges based on subscribed media stream, in a session
+                charged as $0.0045 per minute. As TokBox charges based on subscribed media stream, in a session
                 with 7 participants, every participant will be subscribed to 6 streams, so cost per participant
                 is 6 x $0.0045 = $0.027 per participant per minute. <br><br>
 

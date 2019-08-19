@@ -545,7 +545,7 @@ listening-port=3478
 fingerprint
 lt-cred-mech
 max-port=65535
-min-port=49152
+min-port=40000
 pidfile=&quot;/var/run/turnserver.pid&quot;
 realm=openvidu
 simple-log
@@ -594,7 +594,7 @@ Go to <a href="#using-your-own-certificate">Using your own certificate</a> to ad
 <ul>
 <li><strong>4443 TCP</strong> (<em>OpenVidu Server</em> listens on port 4443 by default)</li>
 <li><strong>3478 TCP</strong> (<em>COTURN</em> listens on port 3478 by default)</li>
-<li><strong>49152 - 65535 UDP</strong> (these ports are strongly recommended to be opened, as WebRTC randomly exchanges media through any of them)</li>
+<li><strong>40000 - 65535 UDP and TCP</strong> (WebRTC will randomly exchange media through any of these ports. TCP might be used if client network blocks UDP connections)</li>
 </ul>
 </li>
 </ul>
