@@ -10,7 +10,7 @@ top-subtitle: Choose your preferred tier according to your needs
 <section id="padding-top-bottom">
     <div class="container">
         <div class="features-row" id="cards-container">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 card">
+            <div>
                 <div class="">
                     <table class="table table-striped table-pricing" style="background: #e7e7e7">
                         <thead>
@@ -42,7 +42,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
                             <tr>
-                                <th scope="row">Tutorials: JS, Angular, React, Ionic, Electron</th>
+                                <th scope="row">Clients: JS, Angular, React, Ionic, Electron</th>
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
@@ -89,14 +89,24 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
                             <tr>
-                                <th scope="row">Scalability <i
+                                <th scope="row">Manual scalability <i
                                         class="icon ion-information-circled pricing-table-icon-info"
                                         data-toggle="tooltip" data-placement="right"
-                                        title="Increment or decrement the number of media servers manually or automatically according to user load">
+                                        title="Increment or decrement the number of media servers manually">
                                 </th>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
+                            <tr>
+                                <th scope="row">Elasticity<i
+                                            class="icon ion-information-circled pricing-table-icon-info"
+                                            data-toggle="tooltip" data-placement="right"
+                                            title="Increment or decrement the number of media servers automatically according to user load">
+                                    </th>
+                                    <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                    <td><i class="icon ion-hammer pricing-table-icon"></i></td>
+                                </tr>
+
                             <tr>
                                 <th scope="row">Fault Tolerance <i
                                         class="icon ion-information-circled pricing-table-icon-info"
@@ -117,16 +127,34 @@ top-subtitle: Choose your preferred tier according to your needs
                                         data-placement="right" title="Work in progress"></i></td>
                             </tr>
                             <tr>
-                                <th scope="row">Other media servers <i
+                                    <th scope="row">Other media servers<i
+                                            class="icon ion-information-circled pricing-table-icon-info"
+                                            data-toggle="tooltip" data-placement="right"
+                                            title="Support for other open-source media servers"></th>
+                                    <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                    <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
+                                            data-placement="right" title="Work in progress"></i></td>
+                                </tr>
+                                <tr>
+                                        <th scope="row">VP9<i
+                                                class="icon ion-information-circled pricing-table-icon-info"
+                                                data-toggle="tooltip" data-placement="right"
+                                                title="Advanced codec when supported by devices"></th>
+                                        <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                        <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
+                                                data-placement="right" title="Work in progress"></i></td>
+                                    </tr>    
+                            <tr>
+                                <th scope="row">Simulcast and SVC<i
                                         class="icon ion-information-circled pricing-table-icon-info"
                                         data-toggle="tooltip" data-placement="right"
-                                        title="Support for other open-source media servers"></th>
+                                        title="To provide improved quality"></th>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
                                         data-placement="right" title="Work in progress"></i></td>
                             </tr>
                             <tr>
-                                <th scope="row">Deployment on Kubernetes</th>
+                                <th scope="row">Kubernetes deployment</th>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
                                         data-placement="right" title="Work in progress"></i></td>
@@ -138,68 +166,399 @@ top-subtitle: Choose your preferred tier according to your needs
                             </tr>
                             <tr>
                                 <th scope="row">Support</th>
-                                <td>Community support</td>
-                                <td>Priority support</td>
+                                <td>Community support on forums</td>
+                                <td>Email support in business hours</td>
                             </tr>
                             <tr>
                                 <th scope="row">Price</th>
-                                <td>FREE</td>
-                                <td><a href="/pricing#ov-pricing"><strong>PAID</strong></a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"></th>
-                                <td><a href="/docs/home/index.html" class="btn-primary btn-scroll try-now-btn">Go to
-                                        OpenVidu Community</a></td>
-                                <td><a href="/docs/openvidu-pro/index.html" class="btn-primary btn-scroll pro-btn">Go to
-                                        OpenVidu Pro</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <td><span style="font-size: 3em">Free</span></td>
+                                <td>
+                                    <div style="margin: 1em"><span style="font-size: 2.5em">$10 / month</span><br>
+                                        <span style="font-size: 1.2em">with 14000 minutes of cores of media nodes included</span><br>
+                                        
+                                        <span style="font-size: 2.5em">$0.00071</span><br>
+                                        <span style="font-size: 1.2em"> per additional core of media nodes per minute</span><br><br>
+                                        <span style="font-size: 1em; margin-top: 1em">(see below)</span>
+                                    </div>
+                                </td>
+                </div>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td><a href="/docs/home/index.html" class="btn-primary btn-scroll try-now-btn">
+                            OpenVidu Community Docs</a></td>
+                    <td><a href="/docs/openvidu-pro/index.html" class="btn-primary btn-scroll pro-btn">
+                            OpenVidu Pro Docs</a></td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+
+            <a href="#" id="ov-pricing" style="visibility: hidden">Anchor tag</a>
+
+            <div style="font-size: 18px; color: #7a7a7a; margin-top: 30px; padding: 4px;">
+
+                <b>OpenVidu Community</b> has an
+                enterprise friendly Apache 2 open source license. You can deploy it anywhere (in a cloud
+                provider or on premises) and make modifications on your own to adapt the software to your
+                needs. <b>It is completely FREE (<a
+                        href="https://www.quora.com/What-is-the-difference-between-free-as-in-beer-and-free-as-in-speech">as
+                        a beer and as an speech</a>)!!</b><br><br>
+
+                <b>OpenVidu Pro</b> is the commercial version of
+                OpenVidu Community with enterprise features like scalability, advanced monitoring, and
+                much more. Take a look to comparison table above to see the differences between versions.
+                You can build an application using OpenVidu Community and, if you need it, you can purchase an OpenVidu
+                Pro license and start using it without any change in your code.<br><br>
+
+                OpenVidu Pro can also be deployed in <a
+                    href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-aws">a cloud
+                    provider</a> or <a
+                    href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-premise">on
+                    premises</a>.
+                OpenVidu Pro is not offered as a hosted service right now. <br><br>
+
+                OpenVidu Pro license price is proportional to the &ldquo;size&rdquo; of
+                the cluster in which it is deployed. In that way, a small cluster will hold less media sessions
+                and will be cheaper than a bigger cluster that manages much more media sessions.<br><br>
+
+                OpenVidu Pro is deployed in a master-worker setup (take a look to its
+                <a href="/docs/openvidu-pro/scalability/#openvidu-pro-architecture">architecture</a>).
+                Master node executes
+                OpenVidu-Server and worker nodes execute all media related services (SFU, MCU and recording
+                process). We call worker nodes as media nodes. Price is based on CPU cores of media nodes. As an
+                OpenVidu Pro cluster is elastic (media nodes can grow and shrink based on demand), every minute
+                is charged based on how many CPU cores are being used in media nodes.<br><br>
+
+                OpenVidu Pro is priced as:<br><br>
+
+                <div style="margin: 3em; text-align: center; color: #000000;">
+                    <div style="font-size: 4em;">$10/month</div>
+                    <div style="font-size: 1.5em;">with 14000 minutes of cores of media nodes included</div>
                 </div>
 
-                <a href="#" id="ov-pricing" style="visibility: hidden">Anchor tag</a>
-
-                <br>
-                <hr>
-                <br>
-
-                <div style="font-size: 18px; color: #7a7a7a; margin-top: 30px; padding: 4px;">
-                    OpenVidu Pro currently offers two different types of deployment:<br><br>
-
-                    <ul>
-                        <li><a href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-aws"
-                                target="_blank">Deployment on AWS</a></li>
-                        <li><a href="/docs/openvidu-pro/deploying-openvidu-pro#deploying-openvidu-pro-on-premise"
-                                target="_blank">Deployment on premise</a></li>
-                    </ul><br>
-
-                    The pricing is:<br><br>
-
-                    <h3>Pricing when deploying on AWS</h3>
-
-                    Currently you can try the CloudFormation deployment for free. In the near future OpenVidu Pro
-                    will be exclusively available through AWS Marketplace. Any piece of software offered in AWS
-                    Marketplace has two different charges: the cost of the AWS resources running the software and
-                    the cost of the software itself. Software manufacturers specify this second charge, and it is
-                    the only revenue they receive from the total cost of the stack. Having made this clear:<br><br>
-
-                    <ul>
-                        <li>There will be a generous free trial version for developers to try OpenVidu Pro through
-                            AWS Marketplace.</li>
-                        <li>The price will be proportional to the number and size of Media Server nodes (see
-                            <a href="/docs/openvidu-pro/scalability/#openvidu-pro-architecture" target="_blank">OpenVidu Pro
-                            architecture</a>).
-                            Any other node will have no extra charge for the software part.</li>
-                        <li>The moment you cancel your OpenVidu Pro subscription in AWS Marketplace, no more charges
-                            will be applied. You only pay for the time you are running the service.</li>
-                    </ul>
-
-                    <br>
-
-                    <h3>Pricing when deploying on premise</h3>
-
-                    Contact us through <a href="/commercial" target="_blank"><strong>Commercial page</strong></a>.
+                <div style="margin: 3em; text-align: center; color: #000000;">
+                    <div style="font-size: 4em;">$0.00071</div>
+                    <div style="font-size: 1.5em;">per additional core of media nodes per minute</div>
                 </div>
+
+                <h3>How much a session in OpenVidu Pro costs?</h3>
+
+                To calculate how much a session costs it is needed to consider several
+                costs: OpenVidu Pro license costs, infrastructure costs and data bandwidth used. <br><br>
+
+                As there are too much variables to be taken into account, we will analyze
+                a fixed sized cluster with all sessions with the same number of participants. This is not
+                realistic because OpenVidu Pro can reduce and increase the number of media nodes depending on
+                demand. Also, we have left out recording as it could complicate too much the
+                calculations.<br><br>
+
+                Let&rsquo;s assume you have a cluster with a master node deployed in a VM
+                with 2 CPUs and 4GB RAM and 2 media nodes with 8 CPUs and 16GB RAM each.<br><br>
+
+                <h4>Cluster Capacity</h4>
+
+                To know how many sessions can be handled by a cluster, it is important to know how
+                many participants are in every session. To maintain calculations simple, let&rsquo;s assume that
+                sessions have 7 participants each. In that case, according to <a
+                    href="https://medium.com/@openvidu/openvidu-load-testing-a-systematic-study-of-openvidu-platform-performance-b1aa3c475ba9">performance
+                    tests we executed</a>, 2 nodes with 8 CPUs and 16GB each, can manage
+                up to 30 simultaneous sessions (15 in every media node). It is not realistic consider that the
+                cluster will be using its maximum capacity 100% of the time. Different usage patterns and
+                different elastic policies can lead to a different percentage of cluster usage. Let&rsquo;s
+                consider that, in average, cluster is used at 50% of its capacity. Then, we assume that cluster
+                handles 15 simultaneous sessions of 7 participants each.<br><br>
+
+                <h4>Cluster Cost</h4>
+
+                OpenVidu Pro cluster cost is calculated considering three main
+                elements:<br><br>
+
+                <ul>
+                    <li><b>License costs:</b> With 16 vCPUs in
+                        total in media nodes, licence oost is $0.00071 x 16 = $0.01136 per minute.</li>
+
+                    <li><b>Infrastructure costs:</b> Based on CPUs and
+                        memory, master node can be deployed in a c5.large AWS EC2 instance and media nodes in 2 AWS
+                        EC2 c5.2xlarge instances. Based on <a href="https://aws.amazon.com/ec2/pricing/on-demand">AWS
+                            EC2 pricing</a>, if cluster is
+                        deployed in US East (Ohio) will
+                        be charged as $0.085 + 2 * $0.17 = $0.76 per hour = $0.01275 per minute.</li>
+
+                    <li><b>Data bandwidth:</b> Video calls are very
+                        intensive in data bandwidth. Depending on video quality, different bandwidth is used. For
+                        example, a 720p video stream consume 1.5 Mbps or more. Let&rsquo;s consider that we use 1
+                        Mbps per media stream in the conference. In a session with 7 participants, OpenVidu Pro has
+                        to receive 7 media streams. Also, it has to send 6 streams to every participant. That is, 6
+                        x 7 = 42Mbps = 5,25MB per second = 315MB per minute of data transfer out from AWS to
+                        Internet. If we consider 15 sessions, then the cluster send to participants 315MB x 15 =
+                        4725MB per minute = 4,61GB per minute. Based on <a
+                            href="https://aws.amazon.com/ec2/pricing/on-demand">AWS EC2 pricing</a></span><span>,
+                            transfer from Internet to AWS is free. Data transfer out from AWS to Internet is charged
+                            at $0.09 per GB with moderate bandwidth usage. As there are discounts for volume,
+                            let&rsquo;s assume that cost is $0.07 per GB. Then, the cost of data bandwidth in the
+                            cluster will be 4,61GB x $0.07 = $0.3227 per minute.</li>
+                </ul>
+
+                In summary, a cluster handling, in average, 15 sessions of 7 participants
+                will cost $0.01136 in license + $0.01275 in infrastructure costs + $0.3227 in bandwidth =
+                $0.34681 per minute.<br><br>
+
+                <h4>Cost per participant</h4>
+
+                The cost of every participant can be easily calculated as $0.34681 / 15 /
+                7 = $0.0033 in sessions of 7 participants.
+
+                <div style="margin: 3em; text-align: center; color: #000000;">
+                    <div style="font-size: 4em;">$0.0033</div>
+                    <div style="font-size: 1.5em;">per minute per participant in sessions of 7 in AWS</div>
+                </div>
+
+                It is important to remember that sessions with less participants will
+                have lower cost per participant as less media streams have to be sent to participants.<br><br>
+
+                <h4>Data transference prices and cloud providers</h4>
+
+                As you can see, in this cluster, <b>93% of cost is due to data
+                    transference</b>. For that reason, it is important to consider deploying the
+                cluster in a cloud provider with low prices in data transfer. In the moment of writing this
+                page, the prices for data transference in the main cloud providers are:<br><br>
+
+                <ul>
+                    <li><a href="https://cloud.google.com/compute/network-pricing">Google
+                            Cloud</a>: $0.12 to $0.08 per GB</li>
+                    <li><a href="https://aws.amazon.com/es/ec2/pricing/on-demand/">AWS</a>: $0.09 to $0.05 per Gb
+                        (1GB free per
+                        month)</li>
+                    <li><a href="https://azure.microsoft.com/es-es/pricing/details/bandwidth/">Azure</a>: $0.087 to
+                        $0.05 per Gb
+                        (5GB free per month)</li>
+                    <li><a href="https://www.digitalocean.com/pricing">DigitalOcean</a>: $0.01 Gb (From 1TB to 12TB
+                        free per month)
+                    </li>
+                </ul>
+
+                According to these transference prices we can roughly calculate the cost
+                of deploying the same cluster in DigitalOcean. Bandwidth cost will be 4,61GB x $0.01 = $0.0461
+                per minute.<br><br>
+
+                Assuming the same instance prices, the total price can be calculated as
+                $0.01136 in license + $0.01275 in infrastructure costs + $0.0461 in bandwidth = $0.07021 per
+                minute.<br><br>
+
+                The cost per participant can be easily calculated as $0.07021 / 15 / 7 =
+                $0.000669 per minute.
+
+                <div style="margin: 3em; text-align: center; color: #000000;">
+                    <div style="font-size: 4em;">$0.000669</div>
+                    <div style="font-size: 1.5em;">per minute per participant in sessions of 7 in Digital Ocean
+                    </div>
+                </div>
+
+                <h3>Comparison with hosted alternatives</h3>
+
+                If you are considering using a managed service to implement your
+                application based on video calls, it is important to compare features and prices. Let&rsquo;s
+                focus here comparing pricing of some hosted alternatives.<br><br>
+
+                <div style="
+                        display: table;
+                        border: 2px solid #0088aa9e;
+                        border-radius: 5px;
+                        width: 100%;
+                        margin-top: 30px;
+                        margin-bottom: 25px;
+                        padding: 5px 0 5px 0;
+                        background-color: rgba(0, 136, 170, 0.04);">
+
+                    <div style="display: table-cell; vertical-align: middle;">
+                        <i class="icon ion-android-alert" style="
+                                font-size: 50px;
+                                color: #0088aa;
+                                display: inline-block;
+                                padding-left: 25%;"></i>
+                    </div>
+
+                    <div style="
+                            vertical-align: middle;
+                            display: table-cell;
+                            padding-left: 20px;
+                            padding-right: 20px;">
+
+                        <br>
+                        <strong>NOTE</strong>: Please take into account that managed services provide stable and
+                        predictable pricing in its offerings. When you operates your own infrastructure, on-premises
+                        or
+                        in a cloud provider, there are a lot of things to take care and real prices can be very
+                        different to estimations and studies. In any case, we can assume that our calculations are
+                        reasonable and we will use them to compare OpenVidu Pro with managed services.<br><br>
+
+                        Note that managed services can provide more features than ones provided
+                        by OpenVidu Pro. Also, OpenVidu Pro has to be operated by your operations team and managed
+                        services are managed by experienced operations team and usually have SLAs to warranty
+                        service
+                        quality. Also, the scenario described is suitable for a medium to high number of sessions
+                        and
+                        participants. For only a few sessions, cluster cost can suppose a high cost. <br><br>
+                    </div>
+                </div>
+
+                <h4>Twilio Programmable Video</h4>
+
+                Twilio is a great company (as you probably know, we have a lot of friends there).
+                The <a href="https://www.twilio.com/video">programmable
+                    video service</a> provides an API and several client SDKs to
+                implement video conference applications like OpenVidu Pro.<br><br>
+
+                According to <a href="https://www.twilio.com/video/pricing">its
+                    pricing web page</a>, you can have small sessions (know as rooms) up
+                to 4 participants and big sessions (up to 50 participants). In our cost study, we have
+                considered sessions with 7 participants. The price of big sessions in Twilio is $0.01 per
+                participant per minute. <br><br>
+
+                Above we have calculated the cost of sessions of 7 participants
+                &nbsp;with an OpenVidu Pro cluster deployed in AWS as $0.0033 per participant per minute.
+                According to that, in that specific scenario, <b>OpenVidu Pro in AWS can reduce the cost in 67%
+                    compared with Twilio</b>. That is, Twilio is 3 times more expensive than OpenVidu Pro in AWS.
+                Moreover, if OpenVidu Pro cluster is deployed in Digital Ocean, the
+                cost can be reduced 93% compared with Twilio. From other perspective, <b>Twilio is 15 times
+                    more expensive than OpenVidu
+                    Pro in Digital Ocean.</b> <br><br>
+
+                <h4>Tokbox</h4>
+
+                <a href="https://tokbox.com/">Tokbox</a> is
+                also a great video service providing roughly the same features than OpenVidu Pro. According to
+                <a href="https://tokbox.com/pricing">its
+                    pricing web page</a>, every subscribed media stream is charged from
+                $0.00475 to $0.00425 depending on volume. For our calculations, let&rsquo;s consider it is
+                charged as $0.0045 per minute. As tokbox charges based on subscribed media stream, in a session
+                with 7 participants, every participant will be subscribed to 6 streams, so cost per participant
+                is 6 x $0.0045 = $0.027 per participant per minute. <br><br>
+
+                Above we have calculated the cost of sessions of 7 participants with an
+                OpenVidu Pro cluster deployed in AWS as $0.0033 per participant per minute. According to that,
+                in that specific scenario, <b>OpenVidu Pro in AWS can reduce the cost in 87,78% compared with
+                    Tokbox</b>. That
+                is, Twilio is 8 times more expensive than OpenVidu Pro in AWS. Moreover, if we deploy the
+                cluster in DigitalOcean, with a cost of $0.000669 per participant per minute, the cost can be
+                reduced 97,52%. From other perspective, <b>Tokbox is 40 times more expensive than OpenVidu Pro in
+                    Digital Ocean.</b><br><br>
+
+                <h4>Vidyo</h4>
+
+                <a href="https://vidyo.io/">Vidyo</a> provides a managed platform to build video streaming apps.
+                Related to pricing,
+                it charges 65$ per month with 6500 minutes per participant includes. More minutes are charged as
+                $0.01, just like Twilio price for big rooms (more than 4 participants).<br><br>
+
+                As the price per participant is the same than Twilio one, we can raise
+                exactly the same conclusions compared with OpenVidu Pro pricing. <b>OpenVidu Pro in AWS can reduce
+                    the cost in 67% compared with Vidyo</b>. That is, Vidyo is 3 times more expensive than OpenVidu
+                Pro in
+                AWS. The cost can be reduced 93% if OpenVidu Pro is deployed in Digital Ocean. From the other
+                perspective, <b>Vidyo is 15 times more expensive than OpenVidu Pro in Digital Ocean</b>.<br><br>
+
+                <h4>SkyLink</h4>
+
+                <a href="https://skylink.io/">Temasys
+                    SkyLink</a> is another hosted service to build video streaming
+                applications. Unfortunately, there is no public pricing web page and it is needed to create one
+                free account to get pricing information. Moreover, pricing details are described in such a way
+                that comparison with other services is difficult. Related to media sessions, the prices are
+                $0.15 per connection and $0.50 per GB of bandwidth. <br><br>
+
+                As we have seen previously, in our scenario,
+                every participant needs 6Mbps = 0.75MBps = 45MB per minute per participant of data transfer from
+                server to browser. And also 1Mbps = 0.125MBps = 7.5MB per minute of data transfer from browser
+                to server. That is, a total of 52,5MB per minute per participant. With a cost of $0.5 per GB =
+                $0.00048 per MB, every participant costs $0.0256 per minute in data transfer. Also, as every
+                connection costs $0.15 (independently of the session duration), it is needed to define session
+                duration. Let&rsquo;s consider that session duration is, in average, 30 minutes of duration.
+                Then, every minute, every participant can be charged $0.15 for 1/30 connections = $0.005 per
+                minute per participant in connection fee. In total, every participant will cost $0.0256 in data
+                transfer plus $0.005 in connection cost, that is $0.0306 per participant per minute. <br><br>
+
+                Above we have calculated the cost of sessions of 7 participants with an
+                OpenVidu Pro cluster deployed in AWS as $0.0033 per participant per minute. According to that,
+                in that specific scenario, <b>OpenVidu Pro in AWS can reduce the cost in 89,22% compared with
+                    SkyLink</b>.
+                That is, SkyLink is 9 times more expensive than OpenVidu Pro in AWS. Moreover, if we deploy the
+                cluster in DigitalOcean, with a cost of $0.000669 per participant per minute, the cost can be
+                reduced 97,81%. From other perspective, <b>SkyLink is 46 times more expensive than OpenVidu Pro in
+                    Digital Ocean.</b><br><br>
+
+                <h4>Summary</h4>
+
+                The following table and chart summarize the prices of the different alternatives
+                to build video conference applications with an average of 15 simultaneous sessions of 30 minutes
+                of duration and 7 participants each.<br><br>
+
+                <table class="table table-striped table-pricing" style="background: #e7e7e7">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="border-bottom: 2px solid #049145;">Service</th>
+                            <th scope="col" style="border-bottom: 2px solid #005f76;">Cost *</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Twilio
+                            </td>
+                            <td>
+                                $0.010000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tokbox
+                            </td>
+                            <td>
+                                $0.027000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Vidyo
+                            </td>
+                            <td>
+                                $0.010000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                SkyLink
+                            </td>
+                            <td>
+                                $0.030600
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                OpenVidu Pro AWS
+                            </td>
+                            <td>
+                                $0.003300
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                OpenVidu Pro Digital Ocean
+                            </td>
+                            <td>
+                                $0.000669
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img style="width: 70%; height: auto; display: block; margin-left: auto; margin-right: auto;"
+                    src="/img/pricing/cost_chart.svg" />
+
+                <span style="font-size: 0.8em">* Cost per minute per participant in USD in the studied scenario with
+                    15 sessions of 30 minutes with 7 participants</span>
+
             </div>
         </div>
     </div>
