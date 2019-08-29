@@ -538,6 +538,33 @@ active: documentation
 <li><strong>Kurento Media Server</strong>: server that handles low level operations of media flow transmissions</li>
 </ul>
 <h2 id="running-this-tutorial">Running this tutorial</h2>
+<div style="
+    display: table;
+    border: 2px solid #ffb600;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #FFFBF1;
+    margin-bottom: 25px;
+    padding: 5px 0 5px 0;
+    background-color: rgba(0, 136, 170, 0.04);"><div style="display: table-cell; vertical-align: middle;">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #ffb600;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding: 10px 20px;">
+    <div>
+    <strong>openvidu-react-native</strong> tutorial uses the latest version of React Native (above version 0.60.0) . React Native, from version 0.60.0 onwards, include some <strong>breaking changes for Andorid and iOS</strong> like migration to <strong>AndroidX</strong> and <strong>split React.podspec</strong> into separate podspecs for each Xcode project.</div> 
+    <div>  If you prefer to use the previous version that does not include these breaking changes you can use <a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-react-native-59.9" target="blank"><i>openvidu-react-native-59.9 </i></a> tutorial.</div>
+</div>
+
+</div>
+
 <p>1) You will need <strong>Node 8.3 </strong> or newer, <strong>NPM</strong>, <strong>React Native CLI</strong> to serve the app. Install them with the following command</p>
 <pre><code class="bash">sudo curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
 sudo apt-get install -y nodejs
@@ -549,6 +576,7 @@ sudo npm install -g react-native-cli
 </code></pre>
 
 <p>3) Install dependencies</p>
+<p><em>Remember! If you want to use the previous version withoud AndroidX and separate podspecs for each Xcode project you need to use openvidu-react-native-59.9:</em> <code>openvidu-tutorials/openvidu-react-native-59.9</code></p>
 <pre><code class="bash">cd openvidu-tutorials/openvidu-react-native
 npm install
 </code></pre>
@@ -954,7 +982,7 @@ mySession.publish(publisher);
 
 <p><br></p>
 <h2 id="android-specific-requirements">Android specific requirements</h2>
-<p>Android apps need to actively ask for permissions in the code to access camera and microphone using <em><a href="https://github.com/react-native-webrtc/react-native-webrtc">react-native-webrtc</a></em> plugin. By following steps below we have been able to properly set up the optimal configuration your React Native app will need to work along OpenVidu.</p>
+<p>Android apps need to actively ask for permissions in the code to access camera and microphone using <em><a href="https://github.com/react-native-webrtc/react-native-webrtc" target="_blank">react-native-webrtc</a></em> plugin. By following steps below we have been able to properly set up the optimal configuration your React Native app will need to work along OpenVidu.</p>
 <p>These configurations are already included in this <strong>openvidu-react-native</strong> project, so if you start from here no further configurations are needed. Otherwise, if you want to <strong>start a new project with React Native and OpenVidu</strong>, you should follow these simple steps:</p>
 <p>1) In <code>android/app/src/main/AndroidManifest.xml</code> add these permissions</p>
 <pre><code class="xml">&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
@@ -980,14 +1008,35 @@ project(':WebRTCModule').projectDir = new File(rootProject.projectDir, '../node_
 }
 </code></pre>
 
-<p>4) In <code>android/app/src/main/java/com/xxx/MainApplication.java</code></p>
-<pre><code class="java">@Override
+<p>4) In <code>android/app/src/main/java/com/xxx/MainApplication.java</code> import and add <strong>WebRTCModulePackage</strong>:</p>
+<p>If you are using a version prior to 0.60.0:</p>
+<pre><code class="java">import com.oney.WebRTCModule.WebRTCModulePackage;
+
+...
+
+@Override
 protected List&lt;ReactPackage&gt; getPackages() {
     return Arrays.&lt;ReactPackage&gt;asList(
         new MainReactPackage(),
         new WebRTCModulePackage() // &lt;-- Add this line
     );
 }
+</code></pre>
+
+<p>If you are using a version above to 0.60.0:</p>
+<pre><code class="java">import com.oney.WebRTCModule.WebRTCModulePackage;
+
+....
+
+@Override
+    protected List&lt;ReactPackage&gt; getPackages() {
+      @SuppressWarnings(&quot;UnnecessaryLocalVariable&quot;)
+      List&lt;ReactPackage&gt; packages = new PackageList(this).getPackages();
+      // Packages that cannot be autolinked yet can be added manually here, for example:
+      // packages.add(new MyReactNativePackage());
+      packages.add(new WebRTCModulePackage()); // &lt;-- Add this line
+      return packages;
+    }
 </code></pre>
 
 <div style="
@@ -1044,9 +1093,7 @@ protected List&lt;ReactPackage&gt; getPackages() {
 </code></pre>
 
 <p>3) Set up parameters</p>
-<ul>
-<li>Under <strong>Build setting</strong> set <strong>Dead Code Stripping</strong> to <code>No</code> also under <strong>Build Options</strong> set <strong>Enable Bitcode</strong> to <code>No</code> as well</li>
-</ul>
+<p>Under <strong>Build setting</strong> set <strong>Dead Code Stripping</strong> to <code>No</code> also under <strong>Build Options</strong> set <strong>Enable Bitcode</strong> to <code>No</code> as well</p>
 <p>4) Add Permissions
 <em> Navigate to <code>&lt;ProjectFolder&gt;/ios/&lt;ProjectName&gt;/</code>
 </em> Edit <strong>Info.plist</strong> and add the following lines</p>
