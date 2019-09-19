@@ -517,35 +517,34 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="switch-camera">Switch camera</h1>
-<p>Before to start, we highly recommend taking a look at our <em><a href="https://openvidu.io/docs/cheatsheet/publish-unpublish/" target="_blank">publish/unpublish tutorial</a></em> due to we have to be clear about how to publish and unpublish a stream.</p>
-<p>Once we have read the <em>publish/unpublish tutorial</em>, the steps to be able to switch the cameras are: </p>
+<p>As a first step, we strongly recommend taking a look at <em><a href="../../cheatsheet/publish-unpublish/" target="_blank">Publish/Unpublish stream</a></em> documentation, as we need to be very clear about those concepts before we address the switching camera operation.</p>
+<p>The general steps to switch the camera device are:</p>
 <ol>
 <li>Get the video devices</li>
-<li>Create a new publisher. The <strong>videoSource</strong> field will be the video device ID that we want to show.</li>
-<li>Unplublish our old publisher</li>
-<li>Publish our new publisher created with the current videoSource.</li>
+<li>Create a new publisher. The <code>videoSource</code> field will be the new video device ID.</li>
+<li>Unpublish the old publisher</li>
+<li>Publish our new publisher created with the new <code>videoSource</code>.</li>
 </ol>
-<p>To get the video and audio devices of your device, you must use <code>getDevices</code> method from OpenVidu : </p>
-<pre><code class="javascript">function getDevices() {
-    //Getting the devices
-    return OV.getDevices().then(devices =&gt; {
-        return devices;
-    });
-}
+<p>To list the video and audio devices of a client, you must use <code>OpenVidu.getDevices()</code> method (take a look to <a href="https://openvidu.io/api/openvidu-browser/classes/openvidu.html#getdevices" target="_blank">getDevices</a> method and <a href="https://openvidu.io/api/openvidu-browser/interfaces/device.html" target="_blank">Device</a> object in openvidu-browser documentation)</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+OV.getDevices().then(devices =&gt; {
+    return devices;
+});
 </code></pre>
 
-<p>Now we can create a new <strong>publisher</strong> with the specific videoSource, unpublish the old stream and publish and save the new: </p>
-<pre><code class="javascript">var isFrontCamera = false;
+<p>Now we can create a new <strong>publisher</strong> with the specific <code>videoSource</code>, unpublish the old stream and publish the new one:</p>
+<pre><code class="javascript">var isFrontCamera = false; // This allows as to toggle the camera between the front and back one
 
 function toggleCamera() {
     getDevices().then(devices =&gt; {
         // Getting only the video devices
-        var videoDevices = devices.filter((device) =&gt; device.kind === 'videoinput');
+        var videoDevices = devices.filter(device =&gt; device.kind === 'videoinput');
 
-        if(videoDevices &amp;&amp; videoDevices.length &gt; 1){
+        if (videoDevices &amp;&amp; videoDevices.length &gt; 1){
 
-            //Creating a new publisher with specific videoSource
-            var newPublisher = OV.initPublisher(undefined, {
+            // Creating a new publisher with specific videoSource
+            // In mobile devices the default and first camera is the front one
+            var newPublisher = OV.initPublisher('html-element-id', {
                 videoSource: isFrontCamera ? videoDevices[1].deviceId : videoDevices[0].deviceId,
                 publishAudio: true,
                 publishVideo: true,
@@ -569,10 +568,12 @@ function toggleCamera() {
 </code></pre>
 
 <h4 id="react-native">React Native</h4>
-<p>As we are using <strong>react-native-webrtc</strong> in React Native, we can use a specific way to switch the cameras.</p>
-<p>This function allows to switch the front / back cameras in a video track on the fly, without the need for adding / removing tracks or renegotiating.</p>
-<pre><code class="javascript">// _switchCamera() Method provided by react-native-webrtc:
-this.state.mainStreamManager.stream.getMediaStream().getVideoTracks()[0]._switchCamera();
+<p>In React Native the camera switching works in a different way. As we are using plugin <strong>react-native-webrtc</strong>, we must use a specific method provided by the plugin to switch the camera.</p>
+<p>This function allows us to switch between the front/back camera in a video track on the fly, without the need for adding/removing tracks or renegotiating the media.</p>
+<pre><code class="javascript">// _switchCamera() Method provided by react-native-webrtc plugin
+// It belongs to MediaStream object, contained in Stream object of openvidu-browser API
+
+stream.getMediaStream().getVideoTracks()[0]._switchCamera();
 </code></pre> 
 						</div>
 					</div> <footer>
