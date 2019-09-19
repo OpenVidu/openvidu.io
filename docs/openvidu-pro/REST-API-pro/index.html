@@ -533,10 +533,9 @@ active: documentation
 <li>Restart OpenVidu Pro: <a href="#post-prorestart"><strong>POST /pro/restart</strong></a></li>
 <li>Get media server info: <a href="#get-promedia-serversltmedia_server_idgt"><strong>GET /pro/media-servers/&lt;MEDIA_SERVER_ID&gt;</strong></a></li>
 <li>Get all media servers info: <a href="#get-promedia-servers"><strong>GET /pro/media-servers</strong></a></li>
+<li>Add new media server: <a href="#post-promedia-servers"><strong>POST /pro/media-servers</strong></a></li>
+<li>Remove media server: <a href="#delete-promedia-serversltmedia_server_idgt"><strong>DELETE /pro/media-servers/&lt;MEDIA_SERVER_ID&gt;</strong></a></li>
 </ul>
-<!-- - Register a new media server: [**POST /pro/media-servers**](#post-promedia-servers)
-- Deregister a media server: [**DELETE /pro/media-servers/&lt;MEDIA_SERVER_ID&gt;**](#delete-promedia-serversltmedia_server_idgt)-->
-
 <hr />
 <h3 id="get-proconfig">GET <code>/pro/config</code></h3>
 <table>
@@ -642,7 +641,7 @@ active: documentation
 <p>This method will restart OpenVidu Server Pro with the new provided configuration parameters. If your have <a href="../../reference-docs/openvidu-server-params/#externalizing-configuration" target="_blank">externalized OpenVidu Server Pro configuration</a>, the new variables will be stored in the configuration file, so you will be able to restart the host without losing your new configuration</p>
 </blockquote>
 <hr />
-<h3 id="get-promedia-serversmedia_server_id">GET <code>/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;</code></h3>
+<h3 id="get-promedia-serversltmedia_server_idgt">GET <code>/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;</code></h3>
 <table>
 <thead>
 <tr>
@@ -769,77 +768,124 @@ active: documentation
 <li><code>501</code>: <a href="../../reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openvidu-server-pro" target="_blank">configuration property <code>openvidu.pro.cluster</code></a> is set to false. You need to enable cluster mode to be able to manage media servers</li>
 </ul>
 </blockquote>
-<!--
-
----
-
-### POST `/pro/media-servers`
-
-| _REGISTER A NEW MEDIA SERVER_ | _PARAMETERS_                                                                                          |
-| ------------------------- | --------------------------------------------------------------------------------------------------------- |
-| **Operation**             | POST                                                                                                      |
-| **URL**                   | https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/media-servers                                                  |
-| **Headers**               | Authorization: Basic _EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)_<br/>Content-Type: application/json   |
-| **Body**                  | ```{"uri": "MEDIA_SERVER_URI"}```    |
-| **Sample return**         | ```{"id": "KMS-GVM2CW", "uri": "ws://localhost:8888/kurento", "ip": "localhost", "connected": true, "connectionTime": 1562746120857}``` |
-
-> **Body parameters**
->
-> ---
->
-> - **uri** _(mandatory string)_: the websocket endpoint of the running media server. For a Kurento Media Server, it should be something similar to `"ws://media.server.ip:8888/kurento"`
-
+<hr />
+<h3 id="post-promedia-servers">POST <code>/pro/media-servers</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>NEW MEDIA SERVER</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>POST</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/media-servers</td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/json</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><code>{"uri": "MEDIA_SERVER_URI"}</code></td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><code>{"id": "KMS-GVM2CW", "uri": "ws://localhost:8888/kurento", "ip": "localhost", "connected": true, "connectionTime": 1562746120857}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Body parameters</strong></p>
+<hr />
+<ul>
+<li><strong>uri</strong> <em>(optional string)</em>: the websocket endpoint of the running media server. For a Kurento Media Server, it should be something similar to <code>"ws://media.server.ip:8888/kurento"</code>.<br><br></li>
+</ul>
+<p><strong>NOTE</strong>: if no body parameter is sent in the POST request, OpenVidu Server Pro will launch a new media server instance for you</p>
+</blockquote>
 <div></div>
 
-> **Returned JSON**
->
-> - `id`: media server unique identifier. Use it to perform other REST operations on this media server
-> - `uri`: media server URI endpoint. Same value as provided in property `uri` of the body request
-> - `ip`: media server IP (got from the uri)
-> - `connected`: set to `true`
-> - `connectionTime`: when did OpenVidu Server establish the connection with the media server (in UTC milliseconds)
-
+<blockquote>
+<p><strong>Returned JSON</strong></p>
+<ul>
+<li><code>id</code>: media server unique identifier. Use it to perform other REST operations on this media server</li>
+<li><code>uri</code>: media server URI endpoint. Same value as provided in property <code>uri</code> of the body request</li>
+<li><code>ip</code>: media server IP (got from the uri)</li>
+<li><code>connected</code>: set to <code>true</code></li>
+<li><code>connectionTime</code>: when did OpenVidu Server establish the connection with the media server (in UTC milliseconds)</li>
+</ul>
+</blockquote>
 <div></div>
 
-> **HTTP responses**
->
-> - `200`: the media server has been successfully registered by OpenVidu Server
-> - `400`: problem with some body parameter
-> - `404`: the media server is not within reach of OpenVidu Server. This simply means that OpenVidu cannot establish a connection with it. This may be caused by multiple reasons: wrong IP, port or path, a network problem, too strict a proxy configuration...
-> - `409`: the media server was already registered in OpenVidu Server
-> - `501`: [configuration property `openvidu.pro.cluster`](/reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openvidu-server-pro){:target="_blank"} is set to false. You need to enable cluster mode to be able to manage media servers
-
----
-
-### DELETE `/pro/media-servers/<MEDIA_SERVER_ID>`
-
-| _DEREGISTER A MEDIA SERVER_ | _PARAMETERS_                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| **Operation**      | DELETE                                                                                                                   |
-| **URL**            | https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;                                        |
-| **Query params**    | `force`                                                                                                                 |
-| **Headers**        | Authorization: Basic _EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)_<br/>Content-Type: application/x-www-form-urlencoded |
-| **Sample return**  | _Returns nothing_                                                                                                        |
-
-> **Query params**
->
-> - `force` _(optional boolean, default to false)_ : whether to force the media server deregistration or not. If there's any OpenVidu session initialized inside this media server and parameter `force` is set to false, then this operation will fail with HTTP status set to `409`. If `force` is set to true, all OpenVidu sessions hosted by this media server will be closed with reason `mediaServerDisconnect` (all streams, participants and recordings of all these sessions will be stopped with that same reason)
->
-> ---
->
-> _Encode query params in the url like this:_ <br> _https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;**?force=true**_
-
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>200</code>: the media server has been successfully added</li>
+<li><code>400</code>: problem with some body parameter</li>
+<li><code>404</code>: the media server is not within reach of OpenVidu Server. This simply means that OpenVidu cannot establish a connection with it. This may be caused by multiple reasons: wrong IP, port or path, a network problem, too strict a proxy configuration...</li>
+<li><code>409</code>: the media server was already registered in OpenVidu Server</li>
+<li><code>501</code>: <a href="../../reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openvidu-server-pro" target="_blank">configuration property <code>openvidu.pro.cluster</code></a> is set to false. You need to enable cluster mode to be able to manage media servers</li>
+<li><code>502</code>: the process of launching a new media server instance failed. Only possible if no <code>uri</code> parameter was provided in the body POST request</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="delete-promedia-serversltmedia_server_idgt">DELETE <code>/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;</code></h3>
+<table>
+<thead>
+<tr>
+<th><em>REMOVE MEDIA SERVER</em></th>
+<th><em>PARAMETERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operation</strong></td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;</td>
+</tr>
+<tr>
+<td><strong>Query params</strong></td>
+<td><code>force</code>, <code>dropInstance</code></td>
+</tr>
+<tr>
+<td><strong>Headers</strong></td>
+<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td><strong>Sample return</strong></td>
+<td><em>Returns nothing</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Query params</strong></p>
+<ul>
+<li><code>force</code> <em>(optional boolean, default to false)</em> : whether to force the media server deregistration or not. If there's any OpenVidu session initialized inside this media server and parameter <code>force</code> is set to false, then this operation will fail with HTTP status set to <code>409</code>. If <code>force</code> is set to true, all OpenVidu sessions hosted by this media server will be closed with reason <code>mediaServerDisconnect</code> (all streams, participants and recordings of all these sessions will be stopped with that same reason)</li>
+<li><code>dropInstance</code> <em>(optional boolean, default to false)</em> : whether to terminate the instance of the media server or not.</li>
+</ul>
+<hr />
+<p><em>Encode query params in the url like this:</em> <br> <em>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/pro/media-servers/&lt;MEDIA_SERVER_ID&gt;<strong>?force=true&amp;dropInstance=false</strong></em></p>
+</blockquote>
 <div></div>
 
-> **HTTP responses**
->
-> - `204`: the media server was successfully deregistered
-> - `404`: no media server exists for the passed MEDIA_SERVER_ID
-> - `409`: there are running sessions in this media server. If you want to avoid this error and force the disconnection of the media server closing all sessions hosted inside of it, set query param `force` to true
-> - `501`: [configuration property `openvidu.pro.cluster`](/reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openvidu-server-pro){:target="_blank"} is set to false. You need to enable cluster mode to be able to manage media servers
-
--->
-
+<blockquote>
+<p><strong>HTTP responses</strong></p>
+<ul>
+<li><code>204</code>: the media server was successfully removed</li>
+<li><code>404</code>: no media server exists for the passed MEDIA_SERVER_ID</li>
+<li><code>409</code>: there are running sessions in this media server. If you want to avoid this error and force the disconnection of the media server closing all sessions hosted inside of it, set query param <code>force</code> to true</li>
+<li><code>501</code>: <a href="../../reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openvidu-server-pro" target="_blank">configuration property <code>openvidu.pro.cluster</code></a> is set to false. You need to enable cluster mode to be able to manage media servers</li>
+<li><code>502</code>: error while terminating the media server instance. Only possible if <code>dropInstance</code> query param was set to true</li>
+</ul>
+</blockquote>
 <p><br></p> 
 						</div>
 					</div> <footer>

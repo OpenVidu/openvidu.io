@@ -588,9 +588,9 @@ active: documentation
 <p>Then you just have to configure your app (REST API address / OpenVidu Java Client / OpenVidu Node Client) to connect to OpenVidu through <code>https://192.168.0.107:4443/</code>. Any user connecting to your app through <code>https://192.168.0.107:WHICHEVER_PORT_YOUR_APP_IS_LISTENING_THROUGH</code> will be able to send and receive video.</p>
 <hr />
 <h3 id="3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know">3. I am using Windows to run the tutorials / develop my app. Anything I should know?</h3>
-<p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accesible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>). </p>
-<p>First of all, you must launch the developing Docker container of OpenVidu Server (<a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu/openvidu-server-kms</a>) setting paramater <code>openvidu.publicurl</code> to the IP allocated for Docker in your Windows machine.</p>
-<p>What in Linux/Mac is... </p>
+<p>Yes, some little changes are needed because of the way Docker runs on Windows. In Linux/Mac, Docker containers are easily accessible through <code>localhost</code>, but in Windows you will have to use the specific IP allocated to your container (usually <code>192.168.99.100</code>).</p>
+<p>First of all, you must launch the developing Docker container of OpenVidu Server (<a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu/openvidu-server-kms</a>) setting parameter <code>openvidu.publicurl</code> to the IP allocated for Docker in your Windows machine.</p>
+<p>What in Linux/Mac is...</p>
 <pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET openvidu/openvidu-server-kms:2.11.0
 </code></pre>
 

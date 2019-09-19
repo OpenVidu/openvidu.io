@@ -518,8 +518,33 @@ active: documentation
 						<div class="section">
 							 <h1 id="openvidu-android">openvidu-android</h1>
 <p><a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-android" target="_blank"><i class="icon ion-social-github"> Check it on GitHub</i></a></p>
-<p>A client-side only <strong>Android native</strong> application built with <strong>Java</strong>.</p>
+<p>A client-side only <strong>Android native</strong> application built with <strong>Java</strong> and using official <strong>Google WebRTC library</strong>.</p>
 <p>If it is the first time you use OpenVidu, it is highly recommended to start first with <strong><a href="../../tutorials/openvidu-hello-world/" target="_blank">openvidu-hello-world</a></strong> tutorial due to this being a native Android app and being a little more complex for OpenVidu starters.</p>
+<div style="
+    display: table;
+    border: 2px solid #0088aa9e;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding: 5px 0 5px 0;
+    background-color: rgba(0, 136, 170, 0.04);"><div style="display: table-cell; vertical-align: middle;">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #0088aa;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+     OpenVidu does not provide an Android client SDK yet, so this application directly implements <a href="/docs/developing/rpc/" target="_blank">OpenVidu Server RPC protocol</a>. In other words, it internally implements what <a target="_blank" href="/docs/reference-docs/openvidu-browser">openvidu-browser</a> library does. Everything about this implementation is explained in section <a href="#using-openvidu-server-rpc-protocol">Using OpenVidu Server RPC protocol</a>
+</div>
+</div>
+
 <h2 id="understanding-this-tutorial">Understanding this tutorial</h2>
 <p align="center">
   <img class="img-responsive" src="/img/tutorials/openvidu-android.png">
@@ -553,64 +578,42 @@ active: documentation
     padding-left: 20px;
     padding-right: 20px;
     ">
-    This tutorial has been tested on Android 8.1.0 (Oreo)
+    This tutorial is compatible for Android >= 5.0 (API level >= 21)
 </div>
 </div>
 
 <p>To deploy the Android APK you need to have <strong>Android Studio</strong>, an <strong>Android device</strong> (recommended) or an <strong>Android emulator</strong> and <strong>Android SDK</strong> installed.
-You can download Android Studio <a href="https://developer.android.com/studio/index.html">here</a>. You also can chek the <a href="https://developer.android.com/studio/intro" target="_blank">official Android Studio guide</a></p>
-<p>After we have setted up Android Studio we must continue with the following commands:</p>
-<ol>
-<li>Clone the repo</li>
-</ol>
+You can download Android Studio <a href="https://developer.android.com/studio/index.html" target="_blank">here</a>. You also can check the <a href="https://developer.android.com/studio/intro" target="_blank">official Android Studio guide</a></p>
+<p>After we have set up Android Studio we must continue with the following commands:</p>
+<p><strong>1)</strong> Clone the repo</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-tutorials.git
 </code></pre>
 
-<ol>
-<li>
-<p>Open <strong>Android Studio</strong> and import the project <em>(openvidu-tutorials/openvidu-android)</em>.</p>
-</li>
-<li>
-<p>Now you need the IP of your PC in the network. In Linux you can simply get it by running this command on your shell</p>
-</li>
-</ol>
-<pre><code class="console">hostname -I | awk '{print $1}'
+<p><strong>2)</strong> Open <strong>Android Studio</strong> and import the project <em>(openvidu-tutorials/openvidu-android)</em></p>
+<p><strong>3)</strong> Now you need the IP of your PC in the network. In Linux/OSX you can simply get it by running this command on your shell</p>
+<pre><code class="console">awk '/inet / &amp;&amp; $2 != &quot;127.0.0.1&quot;{print $2}' &lt;(ifconfig)
 </code></pre>
 
 <blockquote>
 <p>It will probably output something like <code>192.168.0.105</code>. Your <strong>complete OpenVidu public url</strong> would then be <code>https://192.168.0.105:4443/</code></p>
 </blockquote>
 <p>When you have your OpenVidu public url, you must set it in <code>default_openvidu_url</code> variable <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/1439f20bce6cee1f3d4b6495c9f2c05d672d4b65/openvidu-android/app/src/main/res/values/strings.xml#L10" target="_blank"><strong>in the app</strong></a> and in the <code>openvidu.publicurl</code> parameter used to run <em>openvidu-server</em> (see next point)</p>
-<ol>
-<li><em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>)</li>
-</ol>
+<p><strong>4)</strong> <em>openvidu-server</em> and <em>Kurento Media Server</em> must be up and running in your development machine. The easiest way is running this Docker container which wraps both of them (you will need <a href="https://store.docker.com/search?type=edition&amp;offering=community" target="_blank">Docker CE</a>)</p>
 <pre><code class="bash">docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=YOUR_OPENVIDU_PUBLIC_URL openvidu/openvidu-server-kms:2.11.0
 </code></pre>
 
 <blockquote>
 <p>Remember changing <code>openvidu.publicurl</code> parameter to the actual value. In this example that would be:<br><code>-e openvidu.publicurl=https://192.168.0.105:4443/</code></p>
 </blockquote>
-<ol>
-<li>
-<p>Connect the device to the same network as your PC</p>
-</li>
-<li>
-<p>In Android Studio, you must modify the websocket address inside of <strong>strings.xml</strong> file.</p>
-</li>
-</ol>
+<p><strong>5)</strong> Connect the device to the same network as your PC</p>
+<p><strong>6)</strong> In Android Studio, you must modify the websocket address inside of <strong>strings.xml</strong> file.</p>
 <p>To do that, in Android Studio, go to <code>app &gt; res &gt; values &gt; strings.xml</code>. The value of <code>default_openvidu_url</code> will must be the IP of your PC.</p>
 <p>In this example that would be: <code>https://192.168.0.105:4443/</code></p>
-<ol>
-<li>
-<p>Connect the device to the PC. You must enable USB debugging and give permissions (check out <a href="https://developer.android.com/training/basics/firstapp/running-app" target="_blank">how run your first app</a>)</p>
-</li>
-<li>
-<p>Run the tutorial. In Android Studio, click the <strong>app</strong> module in the <strong>Project</strong> window and then select <strong>Run</strong> &gt; <strong>Run</strong> .
+<p><strong>7)</strong> Connect the device to the PC. You must enable USB debugging and give permissions (check out <a href="https://developer.android.com/training/basics/firstapp/running-app" target="_blank">official Android docs</a>)</p>
+<p><strong>8)</strong> Run the tutorial. In Android Studio, click the <strong>app</strong> module in the <strong>Project</strong> window and then select <strong>Run</strong> &gt; <strong>Run</strong> .
    In the <strong>Select Deployment Target</strong> window, select your device, and click <strong>OK</strong>.</p>
-</li>
-</ol>
 <p align="center">
-  <img class="img-responsive xcode-img" style="padding: 25px 0; max-width: 750px" src="/img/demos/openvidu-android-devices.png">
+  <img class="img-responsive" style="padding: 25px 0" src="/img/demos/openvidu-android-devices.png">
 </p>
 
 <p><br></p>
@@ -627,26 +630,28 @@ You can download Android Studio <a href="https://developer.android.com/studio/in
     </div>
 </div>
 
-<p><br></p>
+<hr />
 <h2 id="understanding-the-code">Understanding the code</h2>
 <p>This is an Android project generated with Android Studio, and therefore you will see lots of configuration files and other stuff that doesn't really matter to us. We will focus on the following files under <code>app/java</code> folder:</p>
 <ul>
-<li><code>SessionActivity.java</code>: This class defines the only Android activity that the app contains.</li>
-<li><code>Participant.java</code>: It is related to the participants info. This is the parent class of <code>RemoteParticipant</code> and <code>LocalParticipant</code>.</li>
-<li><code>Session.java</code>: The aim of this class is to manage the differents peers that make a conversation and set up the session.</li>
-<li><code>CustomWebSocket.java</code>: The negotiation with the <strong>openvidu-server</strong> takes place in this class. Its responsibility is to listen what comes to the socket we have, to handler the messages from and to <strong>openvidu-server</strong>. This class is based on <a href="http://localhost:4000/docs/developing/rpc/">OpenVidu Server RPC protocol</a>.</li>
+<li><code>SessionActivity.java</code>: this class defines the only Android activity of the app.</li>
+<li><code>Participant.java</code>: it is related to the participants info, such as connection information and their UI elements. This is the parent class of <code>RemoteParticipant</code> and <code>LocalParticipant</code>.</li>
+<li><code>Session.java</code>: this manages the collection of Participant objects, the behavior of SessionActivity layout and takes care of the creation of PeerConnection objects.</li>
+<li><code>CustomWebSocket.java</code>: the negotiation with <strong>openvidu-server</strong> takes place in this class. Its responsibility is to send RPC methods and listen to openvidu-server events through a websocket connection. To sum up, it implements <a href="http://localhost:4000/docs/developing/rpc/">OpenVidu Server RPC protocol</a>.</li>
 </ul>
+<p><br></p>
 <hr />
-<h4 id="websocket-address-session-name-and-participant-name">WebSocket address, session name and participant name:</h4>
-<p>As we have said above, you have to modify the value of <code>default_openvidu_url</code> with the IP of your PC. For example:</p>
+<h4 id="websocket-address-session-name-and-participant-name">WebSocket address, session name and participant name</h4>
+<p>As stated above in <a href="#running-this-tutorial">Running this tutorial</a>, you have to modify the value of <code>default_openvidu_url</code> with the IP of your PC in file <code>res &gt; values &gt; strings.xml</code>. For example:</p>
 <pre><code class="xml">&lt;string name=&quot;default_openvidu_url&quot;&gt;https://192.168.0.105:4443/&lt;/string&gt;
 </code></pre>
 
-<p>Besides, the name you give to the participant (<code>default_participant_name</code>) and the session name (<code>default_session_name</code>) allows to complete the address used to connect to the WebScoket. The initial value can be found in <code>res &gt; values &gt; strings.xml</code>.</p>
+<p>Besides, you can change the default values for the local participant name (<code>default_participant_name</code>) and session name (<code>default_session_name</code>). These will appear as default values in the form to connect to a session.</p>
 <pre><code class="xml">&lt;string name=&quot;default_session_name&quot;&gt;SessionA&lt;/string&gt;
 &lt;string name=&quot;default_participant_name&quot;&gt;Participant&lt;/string&gt;
 </code></pre>
 
+<p><br></p>
 <hr />
 <h4 id="get-a-token-from-openvidu-server">Get a <em>token</em> from OpenVidu Server</h4>
 <div style="
@@ -674,48 +679,49 @@ You can download Android Studio <a href="https://developer.android.com/studio/in
 </div>
 </div>
 
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/activities/SessionActivity.java" target="_blank">src/main/java/io/openvidu/openvidu_android/activities/SessionActivity.java</a></p>
+
 <pre><code class="java">private void getToken(String sessionId) {
     // See next point to see how to connect to the session using 'token'
     ...
 }
 </code></pre>
 
-<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em>, <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">OpenVidu Java Client</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">OpenVidu Node Client</a></em>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code> that returns a Promise with the token. Without going into too much detail, this method performs two <em>ajax</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them:</p>
+<p>Now we need a token from OpenVidu Server. In a production environment we would perform this operations in our application backend, by making use of the <em><a href="../../reference-docs/REST-API/" target="_blank">REST API</a></em>, <em><a href="../../reference-docs/openvidu-java-client/" target="_blank">OpenVidu Java Client</a></em> or <em><a href="../../reference-docs/openvidu-node-client/" target="_blank">OpenVidu Node Client</a></em>. Here we have implemented the POST requests to OpenVidu Server in a method <code>getToken()</code>. Without going into too much detail, this method performs two <em>POST</em> requests to OpenVidu Server, passing OpenVidu Server secret to authenticate them. We use an http-client we have wrapped in class <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/utils/CustomHttpClient.java" target="_blank"><code>CustomHttpClient</code></a>.</p>
 <ul>
-<li>First ajax request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to name the session with our <code>mySessionId</code> value retrieved from HTML input)</li>
-<li>Second ajax request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
+<li>First request performs a POST to <code>/api/sessions</code> (we send a <code>customSessionId</code> field to force the id of the session to be the value retrieved from the view's form. This way we don't need a server side to connect multiple users to the same session)</li>
+<li>Second request performs a POST to <code>/api/tokens</code> (we send a <code>session</code> field to assign the token to this same session)</li>
 </ul>
-<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/7e685c38fbefe5d1a2ff95fe975cad1e6448c33d/openvidu-android/app/src/main/java/com/example/openviduandroid/activities/SessionActivity.java#L137" target="_blank">GitHub repo</a>.</p>
-<h4 id="initialize-the-session">Initialize the session</h4>
-<p>Once we have gotten the token, we can set up the session and the websocket.
-We create our <strong>localParticipant</strong> and <strong>capture the camera</strong>:</p>
-<pre><code class="java">...
-String participantName = participant_name.getText().toString();
+<p>You can inspect this method in detail in the <a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/activities/SessionActivity.java#L136" target="_blank">GitHub repo</a>.</p>
+<p><br></p>
+<hr />
+<h4 id="when-token-available-start-the-process-to-connect-to-openvidu-server">When token available start the process to connect to openvidu-server</h4>
+<p>Once we have gotten the token, we can set up our session object, our camera and the websocket.
+We create our <strong>session</strong>, our <strong>localParticipant</strong> and <strong>capture the camera</strong>:</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/activities/SessionActivity.java" target="_blank">src/main/java/io/openvidu/openvidu_android/activities/SessionActivity.java</a></p>
 
-// Creating a session instance and setting up the PeerConnectionFactory
-session = new Session(sessionId, token, views_container, thisActivity);
+<pre><code class="java">private void getTokenSuccess(String token, String sessionId) {
+    // Initialize our session object
+    session = new Session(sessionId, token, views_container, this);
 
-// Creating the local participant instance
-LocalParticipant localParticipant = new LocalParticipant(participantName, session, thisActivity.getApplicationContext(), localVideoView);
+    // Initialize our local participant and start local camera
+    String participantName = participant_name.getText().toString();
+    LocalParticipant localParticipant = new LocalParticipant(participantName, session, this.getApplicationContext(), localVideoView);
+    localParticipant.startCamera();
+    runOnUiThread(() -&gt; {
+        // Update local participant view
+        main_participant.setText(participant_name.getText().toString());
+        main_participant.setPadding(20, 3, 20, 3);
+    });
 
-// Capturing the camera device. See next point to see the camera methods
-localParticipant.startCamera();
-
-runOnUiThread(() -&gt; {
-    main_participant.setText(participant_name.getText().toString());
-    main_participant.setPadding(20, 3, 20, 3);
-});
-
-// Creating a webSocket instance
-CustomWebSocket webSocket = new CustomWebSocket(session, OPENVIDU_URL, thisActivity);
-
-//Setting up the webSocket
-webSocket.execute();
-session.setWebSocket(webSocket);
-
+    // Initialize and connect the websocket to OpenVidu Server
+    startWebSocket();
+}
 </code></pre>
 
-<p>To configure the <strong>session</strong>, we are going to initialize and build the <code>PeerConnectionFactory</code>.</p>
+<p>To configure the <strong>session</strong>, we are going to initialize and build the <code>PeerConnectionFactory</code>. This is the way to initialize WebRTC peer connections with the official Google WebRTC library for Android.</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/openvidu/Session.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/Session.java</a></p>
+
 <pre><code class="Java">//Creating a new PeerConnectionFactory instance
 PeerConnectionFactory.InitializationOptions.Builder optionsBuilder = PeerConnectionFactory.InitializationOptions.builder(activity.getApplicationContext());
 optionsBuilder.setEnableInternalTracer(true);
@@ -736,8 +742,12 @@ peerConnectionFactory = PeerConnectionFactory.builder()
         .createPeerConnectionFactory();
 </code></pre>
 
+<p><br></p>
+<hr />
 <h4 id="capture-the-camera">Capture the camera</h4>
-<p>Android provides us a very easy way to use <strong>Camera</strong> API. This API includes support for various cameras and camera features available on devices, allowing you to capture pictures and videos in your application.</p>
+<p>Android provides us a very easy way to use <strong>Camera</strong> API. This API includes support for various cameras and camera features available on devices, allowing you to capture pictures and videos in your application. In the end, we need to store the video track.</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/openvidu/LocalParticipant.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/LocalParticipant.java</a></p>
+
 <pre><code class="java">public void startCamera() {
 
     final EglBase.Context eglBaseContext = EglBase.create().getEglBaseContext();
@@ -763,8 +773,9 @@ peerConnectionFactory = PeerConnectionFactory.builder()
 }
 </code></pre>
 
-<p>Since from API level 21, the <code>Camera</code> class was <strong>deprecated</strong>. Android introduced <code>Camera2</code> with <strong>Android 5.0 (Lollipop)</strong> (API level 21) and above.</p>
-<p>As the <a href="https://developer.android.com/guide/topics/media/camera" target="_blank">Android official documentation</a> recommends, we should use Camera2 on supported devices.</p>
+<p>Since API level 21, <code>Camera</code> class was deprecated. Android introduced <code>Camera2</code> with Android 5.0 (API level 21) and above. As the <a href="https://developer.android.com/guide/topics/media/camera" target="_blank">Android official documentation</a> recommends, we should use Camera2 on supported devices.</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/openvidu/LocalParticipant.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/LocalParticipant.java</a></p>
+
 <pre><code class="java">private VideoCapturer createCameraCapturer() {
     CameraEnumerator enumerator;
     if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.LOLLIPOP) {
@@ -797,28 +808,40 @@ peerConnectionFactory = PeerConnectionFactory.builder()
 </code></pre>
 
 <p>We also have to think about the media permissions. You can take a look to the Android permissions under section <a href="#android-specific-requirements">Android specific requirements</a>.</p>
-<h4 id="connect-to-the-session">Connect to the session:</h4>
-<p>In this point, we are trying to establish a connection between <strong>openvidu-server</strong> and our android application through the websocket:</p>
-<pre><code class="java">...
+<p><br></p>
+<hr />
+<h4 id="connect-the-websocket-to-openvidu-server">Connect the websocket to OpenVidu Server</h4>
+<p>Ath this point, we will establish a connection between <strong>openvidu-server</strong> and our Android app through the websocket. This way will be able to consume <a href="../../developing/rpc/" target="_blank">OpenVidu Server RPC protocol</a> to interact with the session (in the future, when OpenVidu Android SDK is available, this won't be necessary). We do so in background as an async task so the main execution thread is not blocked.</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
 
-WebSocketFactory factory = new WebSocketFactory();
+<pre><code class="java">@Override
+protected Void doInBackground(SessionActivity... sessionActivities) {
+    try {
+        WebSocketFactory factory = new WebSocketFactory();
 
-//Returns a SSLContext object that implements the specified secure socket protocol
-SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);
-sslContext.init(null, trustManagers, new java.security.SecureRandom());
-factory.setSSLContext(sslContext);
+        //Returns a SSLContext object that implements the specified secure socket protocol
+        SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);
+        sslContext.init(null, trustManagers, new java.security.SecureRandom());
+        factory.setSSLContext(sslContext);
 
-// Set the flag which indicates whether the hostname in the server's certificate should be verified or not.
-factory.setVerifyHostname(false);
+        // Set the flag which indicates whether the hostname in the server's certificate should be verified or not.
+        factory.setVerifyHostname(false);
 
-// Connecting the websocket to OpenVidu URL 
-websocket = factory.createSocket(getWebSocketAddress(openviduUrl));
-websocket.addListener(this);
-websocket.connect();
+        // Connecting the websocket to OpenVidu URL 
+        websocket = factory.createSocket(getWebSocketAddress(openviduUrl));
+        websocket.addListener(this);
+        websocket.connect();
+    } catch ( ... )
 </code></pre>
 
-<h4 id="we-listen-the-server-events">We listen the server events</h4>
-<p>We need an extra method to handle de messages from openvidu server. This will be essential in order to know when the <strong>ice candidates</strong> arrives, when a <strong>new user has been joined</strong> to the room or when the <strong>participant has left</strong> the session.</p>
+<p><br></p>
+<hr />
+<h3 id="using-openvidu-server-rpc-protocol">Using OpenVidu Server RPC protocol</h3>
+<p>Taking the references from <a href="https://openvidu.io/docs/developing/rpc/" target="_blank">OpenVidu Server RPC protocol</a>, we will be able call to the <strong>OpenVidu Server methods</strong> and <strong>receive events</strong> from OpenVidu Server.</p>
+<h4 id="listening-to-openvidu-server-events">Listening to OpenVidu Server events</h4>
+<p>We need an extra method to handle de messages from openvidu server. This will be essential in order to know when <strong>ice candidates</strong> arrive, when a <strong>new user joined</strong> the session, when a <strong>user published a video to the session</strong> or when some <strong>participant left</strong> the session.</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
+
 <pre><code class="java">private void handleServerEvent(JSONObject json) throws JSONException {
     if (!json.has(JsonConstants.PARAMS)) {
         Log.e(TAG, &quot;No params &quot; + json.toString());
@@ -845,27 +868,19 @@ websocket.connect();
 }
 </code></pre>
 
-<h4 id="add-remotes-users-connected">Add remotes users connected:</h4>
-<p><strong>OpenVidu Server</strong> will notify us if someone is connected in our room. We need to hanlde this type of events and do the right thing. In this case we have to add a new participant in our app.</p>
-<pre><code class="java">private RemoteParticipant newRemoteParticipantAux(JSONObject participantJson) throws JSONException {
-    final String connectionId = participantJson.getString(JsonConstants.ID);
-    final String participantName = new JSONObject(participantJson.getString(JsonConstants.METADATA)).getString(&quot;clientData&quot;);
-
-    // Creating a remote participant and saving it in a remoteParticipants Map
-    final RemoteParticipant remoteParticipant = new RemoteParticipant(connectionId, participantName, this.session);
-
-    //Creating a remote participant video view 
-    this.activity.createRemoteParticipantVideo(remoteParticipant);
-    this.session.createRemotePeerConnection(remoteParticipant.getConnectionId());
-    return remoteParticipant;
-}
-</code></pre>
-
+<ul>
+<li><code>iceCandidate</code>: this event brings a new ICE candidate generated in openvidu-server. We must include it in the proper PeerConnection object (we receive ICE candidates for our local PeerConnection and for each remote PeerConnection). To avoid timing problems, the application stores the received ICE candidates until that PeerConnection state is <code>STABLE</code>. Whenever it is reached, it processes all of them at once.</li>
+<li><code>participantJoined</code>: this event tells us a new participant has joined our session. We initialize a new PeerConnection object (so we may receive the new user's camera stream) and a new video element in the UI.</li>
+<li><code>participantPublished</code>: this event tells us a user has started sending a video to the session. We must start the ICE negotiation for receiving the new video stream over the proper and already initialized PeerConnection object. We do so by simply following WebRTC protocol: creating and setting a local SDP offer, sending it to openvidu-server with RPC method <code>receiveVideoFrom</code> and setting the answer received as remote SDP description of this PeerConnection.</li>
+<li><code>participantLeftEvent</code>: dispatched when some user has left the session. We simply dispose the proper PeerConnection and update our view.<br><br></li>
+</ul>
 <hr />
-<h3 id="using-openvidu-server-rpc-protocol">Using OpenVidu Server RPC protocol</h3>
-<p>Taking the references from <a href="https://openvidu.io/docs/developing/rpc/" target="_blank">OpenVidu Server RPC protocol</a>, we will be able call to the <strong>OpenVidu Server methods</strong> and <strong>receive the events</strong> from OpenVidu Server </p>
-<h4 id="whenever-a-the-websocket-is-connected-successfully-joinsession-method-is-called">Whenever a the websocket is connected successfully, <code>joinSession()</code> method is called:</h4>
-<p>Once the connection is established, we need to join to the room. Using a JSON using RPC 2.0 with <code>joinRoom</code> method and the followings parameteres we'll be able to connect to the room:</p>
+<h4 id="sending-methods-to-openvidu-server">Sending methods to OpenVidu Server</h4>
+<p>Below we list all the RPC methods that this Android app sends to OpenVidu Server. Each one of them will be answered by OpenVidu Server with a specific response. They must be properly processed and usually a new flow of method calls will follow the reception of these answers. We will not explain in detail every one of them to keep the length of this tutorial under control, but you can easily follow the flow of method calls in the source code.<br><br></p>
+<h5 id="joining-a-session-with-joinroom-method">Joining a session with <code>joinRoom</code> method</h5>
+<p>Once the websocket connection is established, we need to join to the session. By sending a JSON-RPC method <code>joinRoom</code> with the followings parameters we'll be able to connect to the session:</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
+
 <pre><code class="java">public void joinRoom() {
     Map&lt;String, String&gt; joinRoomParams = new HashMap&lt;&gt;();
 
@@ -881,8 +896,11 @@ websocket.connect();
 }
 </code></pre>
 
-<h4 id="finally-publish-your-webcam-calling-publishvideo-method">Finally publish your webcam calling <code>publishVideo()</code> method:</h4>
-<p>JSON RPC 2.0 helps us again. We need to send a JSON through the websocket with the required params that it's shown below:</p>
+<p>As response we will receive an object with all the existing participants in the session and all the published streams. We first process them as explained in events <code>participantJoined</code> and <code>participantPublished</code> in previous section <a href="#listening-to-openvidu-server-events">Listening to OpenVidu Server events</a>. And we must publish our own camera by initializing our local PeerConnection and MediaStream and calling <code>publishVideo</code> RPC method (see next point).<br><br></p>
+<h5 id="publishing-the-camera-with-publishvideo-method">Publishing the camera with <code>publishVideo</code> method</h5>
+<p>We need to send a JSO-RPC message through the websocket with the required params as shown below:</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
+
 <pre><code class="Java">public void publishVideo(SessionDescription sessionDescription) {
     Map&lt;String, String&gt; publishVideoParams = new HashMap&lt;&gt;();
 
@@ -902,62 +920,78 @@ websocket.connect();
 }
 </code></pre>
 
-<h4 id="leaving-the-session">Leaving the session</h4>
-<p>Whenever we want that an user leaves the session, we just need to call <code>leaveSession</code>::</p>
+<p><br></p>
+<h5 id="subscribing-to-a-remote-video-with-receivevideo-method">Subscribing to a remote video with <code>receiveVideo</code> method</h5>
+<p>We need to send a JSON-RPC through the websocket with the required params as shown below:</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
+
+<pre><code class="Java">public void receiveVideoFrom(SessionDescription sessionDescription, RemoteParticipant remoteParticipant, String streamId) {
+    Map&lt;String, String&gt; receiveVideoFromParams = new HashMap&lt;&gt;();
+    receiveVideoFromParams.put(&quot;sdpOffer&quot;, sessionDescription.description);
+    receiveVideoFromParams.put(&quot;sender&quot;, streamId);
+    this.IDS_RECEIVEVIDEO.put(
+        this.sendJson(JsonConstants.RECEIVEVIDEO_METHOD, receiveVideoFromParams),
+            remoteParticipant.getConnectionId());
+}
+</code></pre>
+
+<p><br></p>
+<h5 id="leaving-the-session-with-leaveroom-method">Leaving the session with 'leaveRoom' method</h5>
+<p>We need to send a JSON-RPC through the websocket (empty parameters in this case):</p>
+<p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
+
 <pre><code class="java">public void leaveRoom() {
     this.ID_LEAVEROOM.set(this.sendJson(JsonConstants.LEAVEROOM_METHOD));
 }
 </code></pre>
 
-<p>To leaving the session, we will use the same concept, to send a JSON RPC 2.0 through the websocket with an empty params.</p>
+<p><br></p>
 <hr />
 <h2 id="android-specific-requirements">Android specific requirements</h2>
 <p>Android apps need to actively ask for permissions in the code to access camera and microphone. By following steps below we have been able to properly set up the permissions your app will need to work along OpenVidu.
-You have a great complete guide <a href="https://developer.android.com/training/permissions/requesting#java" target="_blank">here</a></p>
+You have a great complete guide <a href="https://developer.android.com/training/permissions/requesting#java" target="_blank">here</a>.</p>
 <p>These configurations are already included in this <strong>openvidu-android</strong> project, so if you start from here no further configurations are needed. Otherwise, if you want to <strong>start a new Android project</strong>, you should follow these simple steps:</p>
-<ol>
-<li>Add the permissions you need to rquest to the manifest:</li>
-</ol>
+<p><strong>1)</strong> Add required permissions to your manifest file</p>
 <pre><code class="xml">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-        package=&quot;com.example.openviduapp&quot;&gt;
+    package=&quot;io.openvidu.openvidu_android&quot;&gt;
 
-    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
-    &lt;!-- other permissions go here --&gt;
-
-    &lt;application ...&gt;
+    &lt;application&gt;
         ...
     &lt;/application&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+
 &lt;/manifest&gt;
 </code></pre>
 
-<ol>
-<li>Check for permissions. To check if you have a permission, call the <code>ContextCompat.checkSelfPermission()</code> method. For example:</li>
-</ol>
-<pre><code class="java">if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_CALENDAR)
+<p><strong>2)</strong> Check if your application has already the necessary permissions. To do so, call the <code>ContextCompat.checkSelfPermission()</code> method. For example:</p>
+<pre><code class="java">if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         != PackageManager.PERMISSION_GRANTED) {
-    // Permission is not granted
+    // Permission for camera is not granted
 }
 </code></pre>
 
-<p>If the app has the permission, the method returns <strong>PERMISSION_GRANTED</strong>, and the app can proceed with the operation. If the app does not have the permission, the method returns <strong>PERMISSION_DENIED</strong>, and the app has to explicitly ask the user for permission.</p>
-<ol>
-<li>We are finally ready to request permissions to our device. Android provides several methods you can use to request a permission, such as <code>requestPermissions()</code>, as shown in the code snippet below. Calling these methods brings up a standard Android dialog, which you cannot customize.</li>
-</ol>
-<pre><code class="java">// Here, thisActivity is the current activity
-if (ContextCompat.checkSelfPermission(thisActivity,
+<p>If the app already has the permission, the method returns <code>PackageManager.PERMISSION_GRANTED</code> and the app can proceed with the operation. If the app does not have the permission, the method returns <code>PackageManager.PERMISSION_DENIED</code>, and the app has to explicitly ask the user for permission.</p>
+<p><strong>3)</strong> Android provides several methods to request for a permission, such as <code>requestPermissions()</code>, as shown in the code snippet below. Calling these methods brings up a standard Android dialog so the user may accept or decline the permissions.</p>
+<pre><code class="java">// Here, &quot;this&quot; object is the current activity
+if (ContextCompat.checkSelfPermission(this,
         Manifest.permission.READ_CONTACTS)
         != PackageManager.PERMISSION_GRANTED) {
 
     // Permission is not granted
     // Should we show an explanation?
-    if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
+    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
             Manifest.permission.READ_CONTACTS)) {
         // Show an explanation to the user *asynchronously* -- don't block
         // this thread waiting for the user's response! After the user
         // sees the explanation, try again to request the permission.
     } else {
-        // No explanation needed; request the permission
-        ActivityCompat.requestPermissions(thisActivity,
+        // No explanation needed. Request the permission
+        ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_CONTACTS},
                 MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 

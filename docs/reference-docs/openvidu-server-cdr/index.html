@@ -534,7 +534,8 @@ active: documentation
 <li><a href="#webrtcconnectiondestroyed"><strong>webrtcConnectionDestroyed</strong></a></li>
 <li><a href="#recordingstarted"><strong>recordingStarted</strong></a> <em>(removed in OpenVidu 2.11.0. Use <strong>recordingStatusChanged</strong>)</em></li>
 <li><a href="#recordingstopped"><strong>recordingStopped</strong></a> <em>(removed in OpenVidu 2.11.0. Use <strong>recordingStatusChanged</strong>)</em></li>
-<li><a href="#recordingstatuschanged"><strong>recordingStatusChanged</strong></a></li>
+<li><a href="#recordingstatuschanged"><strong>recordingStatusChanged</strong></a> <em>(from OpenVidu 2.11.0)</em></li>
+<li><a href="#filtereventdispatched"><strong>filterEventDispatched</strong></a> <em>(from OpenVidu 2.12.0)</em></li>
 </ul>
 <p><br></p>
 <hr />
@@ -1118,6 +1119,61 @@ Recorded when a new session has stopped being recorded</p>
 </table>
 <p>Example:</p>
 <pre><code class="json">{&quot;recordingStatusChanged&quot;:{&quot;sessionId&quot;:&quot;TestSession&quot;,&quot;timestamp&quot;:1549015640859,&quot;startTime&quot;:1549015630563,&quot;duration&quot;:5.967,&quot;id&quot;:&quot;TestSession&quot;,&quot;name&quot;:&quot;MyRecording&quot;,&quot;outputMode&quot;:&quot;COMPOSED&quot;,&quot;hasAudio&quot;:true,&quot;hasVideo&quot;:true,&quot;recordingLayout&quot;:&quot;BEST_FIT&quot;,&quot;resolution&quot;:&quot;1920x1080&quot;,&quot;size&quot;:617509,&quot;status&quot;:&quot;stopped&quot;,&quot;reason&quot;:&quot;sessionClosedByServer&quot;}}
+</code></pre>
+
+<hr>
+
+<h4 id="filtereventdispatched">filterEventDispatched</h4>
+<p><em>From OpenVidu 2.12.0</em><br>
+Recorded when a filter event has been dispatched. This event can only be triggered if a filter has been applied to a stream and a listener has been added to a specific event offered by the filter. See <a href="../../advanced-features/filters" target="_blank">Voice and video filters</a> to learn more.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sessionId</code></td>
+<td>Session for which the event was triggered</td>
+<td>A string with the session unique identifier</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Time when the event was triggered</td>
+<td>UTC milliseconds</td>
+</tr>
+<tr>
+<td><code>participantId</code></td>
+<td>Identifier of the participant</td>
+<td>A string with the participant unique identifier</td>
+</tr>
+<tr>
+<td><code>streamId</code></td>
+<td>Identifier of the stream for which the filter is applied</td>
+<td>A string with the stream unique identifier</td>
+</tr>
+<tr>
+<td><code>filterType</code></td>
+<td>Type of the filter applied to the stream</td>
+<td>A string with the type of filter</td>
+</tr>
+<tr>
+<td><code>eventType</code></td>
+<td>Event of the filter that was triggered</td>
+<td>A string with the type of event</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Data of the filter event</td>
+<td>A string with the data returned by the filter event. Its value will depend on the type of filter and event</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="json">{&quot;filterEventDispatched&quot;:{&quot;sessionId&quot;:&quot;TestSession&quot;,&quot;timestamp&quot;:1568645808285,&quot;participantId&quot;:&quot;oklnb2wgsisr0sd3&quot;,&quot;streamId&quot;:&quot;oklnb2wgsisr0sd3_CAMERA_GXTRU&quot;,&quot;filterType&quot;:&quot;ZBarFilter&quot;,&quot;eventType&quot;:&quot;CodeFound&quot;,&quot;data&quot;:&quot;{timestampMillis=1568645808285, codeType=EAN-13, source=23353-1d3c_kurento.MediaPipeline/1f56f4a5-807c-71a30d40_kurento.ZBarFilter, type=CodeFound, value=0012345678905, tags=[], timestamp=1568645808}&quot;}}
 </code></pre>
 
 <p><br></p> 
