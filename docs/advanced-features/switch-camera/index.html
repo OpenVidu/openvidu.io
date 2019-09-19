@@ -518,17 +518,33 @@ active: documentation
 						<div class="section">
 							 <h1 id="switch-camera">Switch camera</h1>
 <p>As a first step, we strongly recommend taking a look at <em><a href="../../cheatsheet/publish-unpublish/" target="_blank">Publish/Unpublish stream</a></em> documentation, as we need to be very clear about those concepts before we address the switching camera operation.</p>
-<p>The general steps to switch the camera device are:</p>
+<p>That being said, there are two ways of switching the media source of a published stream:</p>
+<h4 id="by-using-method-replacetrack">By using method <code>replaceTrack</code></h4>
+<p>Native WebAPI allows to replace a MediaStreamTrack on the fly. In OpenVidu Browser library, you can access this method through Publisher object:</p>
+<pre><code class="javascript">// 'myPublisher' a Publisher object obtained through 'OpenVidu.initPublisher()' method
+// 'myTrack' a MediaStreamTrack object
+
+myPublisher.stream.getRTCPeerConnection().getSenders()[0].replaceTrack(myTrack);
+</code></pre>
+
+<p>You can obtain this new <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack" target="_blank">MediaStreamTrack</a> by using the native Web API or simply with <a href="../../../api/openvidu-browser/classes/openvidu.html#getusermedia" target="_blank">OpenVidu.getUserMedia</a> method.</p>
+<p><br></p>
+<blockquote>
+<p><strong>WARNING:</strong> this method has been proven to work, but there may be some combinations of published/replaced tracks that may be incompatible between them and break the connection in OpenVidu Server.
+A complete renegotiation may be the only solution in this case</p>
+</blockquote>
+<h4 id="by-initializing-a-new-publisher">By initializing a new Publisher</h4>
+<p>You can also take a more "radical" path and directly use a new Publisher initialized with the new desired audio or video source. The general steps to switch the camera/microphone device in this way are:</p>
 <ol>
-<li>Get the video devices</li>
-<li>Create a new publisher. The <code>videoSource</code> field will be the new video device ID.</li>
-<li>Unpublish the old publisher</li>
-<li>Publish our new publisher created with the new <code>videoSource</code>.</li>
+<li>List all the client's available media devices</li>
+<li>Create a new Publisher with the desired device. If we want to switch the video, the <code>videoSource</code> field will be the new video deviceId</li>
+<li>Unpublish the old Publisher</li>
+<li>Publish our new Publisher created with the new <code>videoSource</code></li>
 </ol>
 <p>To list the video and audio devices of a client, you must use <code>OpenVidu.getDevices()</code> method (take a look to <a href="https://openvidu.io/api/openvidu-browser/classes/openvidu.html#getdevices" target="_blank">getDevices</a> method and <a href="https://openvidu.io/api/openvidu-browser/interfaces/device.html" target="_blank">Device</a> object in openvidu-browser documentation)</p>
 <pre><code class="javascript">var OV = new OpenVidu();
 OV.getDevices().then(devices =&gt; {
-    return devices;
+    // 'devices' array contains all available media devices
 });
 </code></pre>
 
@@ -557,7 +573,7 @@ function toggleCamera() {
             // Unpublishing the old publisher
             session.unpublish(publisher);
 
-            //Assigning the new publisher to the global variable 'publisher'
+            // Assigning the new publisher to our global variable 'publisher'
             publisher = newPublisher;
 
             // Publishing the new publisher
@@ -567,14 +583,18 @@ function toggleCamera() {
 }
 </code></pre>
 
-<h4 id="react-native">React Native</h4>
+<p><br></p>
+<hr />
+<h3 id="react-native">React Native</h3>
 <p>In React Native the camera switching works in a different way. As we are using plugin <strong>react-native-webrtc</strong>, we must use a specific method provided by the plugin to switch the camera.</p>
 <p>This function allows us to switch between the front/back camera in a video track on the fly, without the need for adding/removing tracks or renegotiating the media.</p>
 <pre><code class="javascript">// _switchCamera() Method provided by react-native-webrtc plugin
 // It belongs to MediaStream object, contained in Stream object of openvidu-browser API
 
 stream.getMediaStream().getVideoTracks()[0]._switchCamera();
-</code></pre> 
+</code></pre>
+
+<p><br></p> 
 						</div>
 					</div> <footer>
 <hr>
