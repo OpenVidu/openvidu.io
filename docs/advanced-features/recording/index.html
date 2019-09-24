@@ -524,8 +524,8 @@ active: documentation
 <li><strong><a href="#audio-only-and-video-only-recordings">Audio-only and video-only recordings</a></strong></li>
 <li><strong><a href="#automatic-stop-of-recordings">Automatic stop of recordings</a></strong></li>
 <li><strong><a href="#custom-recording-layouts">Custom recording layouts</a></strong><ul>
-<li><a href="#configuring-multiple-custom-layouts">Configuring multiple custom layouts</a></li>
-<li><a href="#using-an-external-custom-layout">Using an external custom layout</a></li>
+<li><a href="#configuring-multiple-custom-layouts">Configuring multiple custom layouts</a>
+<!-- - <a href="#using-an-external-custom-layout">Using an external custom layout</a>--></li>
 <li><a href="#debugging-your-custom-layouts">Debugging your custom layouts</a></li>
 <li><a href="#sample-custom-layout">Sample custom layout</a></li>
 </ul>
@@ -1103,48 +1103,50 @@ openvidu.startRecording(sessionId, {
 </code></pre>
 
 <p>You should start openvidu-server with property <code>openvidu.recording.custom-layout=/opt/openvidu/my_custom_layouts</code> and you can use any of the 3 <code>index.html</code> files for recording any of your sessions. To use the outer layout in a recording, just configure in recording properties <code>recordingLayout</code> to <code>CUSTOM</code>. To use any of the inner layouts, also configure <code>customLayout</code> to <code>layout1</code> or <code>layout2</code>.</p>
-<p><br></p>
-<hr />
-<h2 id="using-an-external-custom-layout">Using an external custom layout</h2>
-<p>OpenVidu allows you to configure a recording to use a custom layout deployed outside OpenVidu host. This is useful if, for whatever reason, you have your layout being served in a different server with a different IP. To achieve this, you just have to configure the complete URL where your layout is served in property <code>customLayout</code>:</p>
-<div class="lang-tabs-container">
+<!--<br>
+
+---
+
+## Using an external custom layout
+
+OpenVidu allows you to configure a recording to use a custom layout deployed outside OpenVidu host. This is useful if, for whatever reason, you have your layout being served in a different server with a different IP. To achieve this, you just have to configure the complete URL where your layout is served in property `customLayout`:
+
+<div class="lang-tabs-container" markdown="1">
+
 <div class="lang-tabs-header">
   <button class="lang-tabs-btn" onclick="changeLangTab(event)" style="background-color: #e8e8e8; font-weight: bold">REST API</button>
   <button class="lang-tabs-btn" onclick="changeLangTab(event)">Java</button>
   <button class="lang-tabs-btn" onclick="changeLangTab(event)">Node</button>
 </div>
 
-<div class="lang-tabs-content" id="rest-api">
-<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "https://USER:PASS@my.domain.com:8888/path?myParam=123"}</code></p>
-</div>
-<div class="lang-tabs-content" id="java" style="display:none">
-<pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
-    .outputMode(Recording.OutputMode.COMPOSED)
-    .recordingLayout(RecordingLayout.CUSTOM)
-    .customLayout(&quot;https://USER:PASS@my.domain.com:8888/path?myParam=123&quot;)
-    .build();
-Recording recording = openVidu.startRecording(session.getSessionId(), properties);
-</code></pre>
+<div id="rest-api" class="lang-tabs-content" markdown="1">
+
+When starting the recording of a session with method [POST /api/recordings/start](/reference-docs/REST-API#post-apirecordingsstart){:target="_blank"} pass parameters<br>`{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "https://USER:PASS@my.domain.com:8888/path?myParam=123"}`
 
 </div>
-<div class="lang-tabs-content" id="node" style="display:none">
-<pre><code class="javascript">var recording;
 
-openvidu.startRecording(sessionId, {
-    outputMode: Recording.OutputMode.COMPOSED,
-    recordingLayout: RecordingLayout.CUSTOM,
-    customLayout: &quot;https://USER:PASS@my.domain.com:8888/path?myParam=123&quot;
-})
-    .then(response =&gt; recording = response)
-    .catch(error =&gt; console.error(error));
-</code></pre>
+<div id="java" class="lang-tabs-content" style="display:none" markdown="1">
+
+
+wzxhzdk:19
+
 
 </div>
+
+<div id="node" class="lang-tabs-content" style="display:none" markdown="1">
+
+
+wzxhzdk:20
+
+
 </div>
-<p><br><br></p>
-<blockquote>
-<p>As you can see, this URL may have Basic Authentication credentials and any query parameter you may need in your custom layout. In the snippets above, you could access value <code>123</code> in your layout JS code just by calling <br><code>new URL(window.location.href).searchParams.get("myParam");</code></p>
-</blockquote>
+
+</div>
+
+<br><br>
+
+> As you can see, this URL may have Basic Authentication credentials and any query parameter you may need in your custom layout. In the snippets above, you could access value `123` in your layout JS code just by calling <br>`new URL(window.location.href).searchParams.get("myParam");`-->
+
 <p><br></p>
 <hr />
 <h2 id="debugging-your-custom-layouts">Debugging your custom layouts</h2>
