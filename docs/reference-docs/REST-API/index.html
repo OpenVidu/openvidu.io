@@ -532,7 +532,6 @@ active: documentation
 <li>Generate a token: <a href="#post-apitokens"><strong>POST /api/tokens</strong></a></li>
 <li>Retrieve active session info: <a href="#get-apisessionsltsession_idgt"><strong>GET /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
 <li>Retrieve all active sessions info: <a href="#get-apisessions"><strong>GET /api/sessions</strong></a></li>
-<li>Send a signal to a session: <a href="#post-apisignal"><strong>POST /api/signal</strong></a></li>
 <li>Close a session: <a href="#delete-apisessionsltsession_idgt"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;</strong></a></li>
 <li>Force the disconnection of a user from a session: <a href="#delete-apisessionsltsession_idgtconnectionltconnection_idgt"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/connection/&lt;CONNECTION_ID&gt;</strong></a></li>
 <li>Force the unpublishing of a user's stream from a session: <a href="#delete-apisessionsltsession_idgtstreamltstream_idgt"><strong>DELETE /api/sessions/&lt;SESSION_ID&gt;/stream/&lt;STREAM_ID&gt;</strong></a></li>
@@ -814,59 +813,6 @@ active: documentation
 </ul>
 </blockquote>
 <hr />
-<h3 id="post-apisignal">POST <code>/api/signal</code></h3>
-<table>
-<thead>
-<tr>
-<th><em>SEND A SIGNAL</em></th>
-<th><em>PARAMETERS</em></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Operation</strong></td>
-<td>POST</td>
-</tr>
-<tr>
-<td><strong>URL</strong></td>
-<td>https://&lt;YOUR_OPENVIDUSERVER_IP&gt;/api/signal</td>
-</tr>
-<tr>
-<td><strong>Headers</strong></td>
-<td>Authorization: Basic <em>EncodeBase64(OPENVIDUAPP:&lt;YOUR_SECRET&gt;)</em><br/>Content-Type: application/json</td>
-</tr>
-<tr>
-<td><strong>Body</strong></td>
-<td><code>{"session": "SESSION_ID", "to": ["connectionId1", "connectionId2"], "type": "MY_TYPE", "data": "This is my signal data"}</code></td>
-</tr>
-<tr>
-<td><strong>Sample return</strong></td>
-<td><em>Returns nothing</em></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Body parameters</strong></p>
-<hr />
-<ul>
-<li><strong>session</strong> <em>(mandatory string)</em>: the sessionId of the session you want to send the signal to<br><br></li>
-<li><strong>to</strong> <em>(optional array of strings)</em> : list of connection identifiers to which you want to send the signal. If this property is not included or is an empty array, the signal will be sent to all participants of the session<br><br></li>
-<li><strong>type</strong> <em>(optional string)</em> : type of the signal. In the body example of the table above, only users subscribed to <code>Session.on('signal:MY_TYPE')</code> will trigger that signal. Users subscribed to <code>Session.on('signal')</code> will trigger signals of any type<br><br></li>
-<li><strong>data</strong> <em>(optional string)</em> : actual data of the signal<br><br></li>
-</ul>
-</blockquote>
-<div></div>
-
-<blockquote>
-<p><strong>HTTP responses</strong></p>
-<ul>
-<li><code>200</code>: signal successfully sent. This doesn't necessary mean that all the intended recipients will have received it correctly. If any user has lost its connection to OpenVidu Server during this process, it may not receive the signal</li>
-<li><code>400</code>: there is a problem with some body parameter</li>
-<li><code>404</code>: no session exists for the passed SESSION_ID</li>
-<li><code>406</code>: no connection exists for the passed <code>to</code> array. This error may be triggered if the session has no connected participants or if you provide some string value that does not correspond to a valid connectionId of the session (even though others may be correct)</li>
-</ul>
-</blockquote>
-<hr />
 <h3 id="delete-apisessionsltsession_idgt">DELETE <code>/api/sessions/&lt;SESSION_ID&gt;</code></h3>
 <table>
 <thead>
@@ -1106,7 +1052,7 @@ active: documentation
 <li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
 <li><code>size</code>: size in bytes of the video file</li>
 <li><code>duration</code>: duration of the video file in seconds</li>
-<li><code>url</code>: set to <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code>. This path will be protected with OpenVidu credentials depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
+<li><code>url</code>: set to <code>null</code> or <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code> depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
 <li><code>status</code>: set to <code>"stopped"</code> or <code>"available"</code> depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true</li>
 </ul>
 </blockquote>
@@ -1163,7 +1109,7 @@ active: documentation
 <li><code>createdAt</code>: time when the recording started in UTC milliseconds</li>
 <li><code>size</code>: size in bytes of the video file (0 until stop operation is called)</li>
 <li><code>duration</code>: duration of the video file in seconds (0 until stop operation is called)</li>
-<li><code>url</code>: set to <code>null</code> until stop operation is called. Then it will be <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code>, path that may be protected with OpenVidu credentials depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true.</li>
+<li><code>url</code>: set to <code>null</code> until stop operation is called. Then can be <code>null</code> or <code>"https://YOUR_OPENVIDUSERVER_IP/recordings/&lt;RECORDING_ID&gt;/&lt;RECORDING_NAME&gt;.&lt;EXTENSION&gt;"</code> depending on whether <a href="../openvidu-server-params/" target="_blank">openvidu-server system property <code>openvidu.recording.public-access</code></a> is false or true.</li>
 <li><code>status</code>: status of the recording (<code>"starting"</code>, <code>"started"</code>, <code>"stopped"</code>, <code>"available"</code>, <code>"failed"</code>)</li>
 </ul>
 </blockquote>
