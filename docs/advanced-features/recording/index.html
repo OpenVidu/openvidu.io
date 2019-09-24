@@ -523,7 +523,13 @@ active: documentation
 <li><strong><a href="#individual-stream-recording">Individual stream recording</a></strong></li>
 <li><strong><a href="#audio-only-and-video-only-recordings">Audio-only and video-only recordings</a></strong></li>
 <li><strong><a href="#automatic-stop-of-recordings">Automatic stop of recordings</a></strong></li>
-<li><strong><a href="#custom-recording-layouts">Custom recording layouts</a></strong></li>
+<li><strong><a href="#custom-recording-layouts">Custom recording layouts</a></strong><ul>
+<li><a href="#configuring-multiple-custom-layouts">Configuring multiple custom layouts</a></li>
+<li><a href="#using-an-external-custom-layout">Using an external custom layout</a></li>
+<li><a href="#debugging-your-custom-layouts">Debugging your custom layouts</a></li>
+<li><a href="#sample-custom-layout">Sample custom layout</a></li>
+</ul>
+</li>
 <li><strong><a href="#local-recording-in-the-browser">Local recording in the browser</a></strong></li>
 </ul>
 <hr />
@@ -980,7 +986,7 @@ session.connect(TOKEN);
 <p><br></p>
 <hr />
 <h3 id="2-add-new-properties-when-launching-openvidu-server">2. Add new properties when launching openvidu-server</h3>
-<p>You can configure where should OpenVidu Server look for your custom layout in the system.<br>Default path is <code>/opt/openvidu/custom-layout</code>, but you can configure it with system property <code>openvidu.recording.custom-layout</code>. OpenVidu Server must have read access to that path.</p>
+<p>You can configure where should OpenVidu Server look for your custom layout in the system.<br>Default path is <code>/opt/openvidu/custom-layout</code>, but you can configure it with system property <code>openvidu.recording.custom-layout</code>. OpenVidu Server must have read access to that path, where you must have stored the <code>index.html</code> file of your layout.</p>
 <p><br>
 <strong><a href="https://github.com/OpenVidu/openvidu/releases" target="_blank">openvidu-server.jar</a></strong></p>
 <pre><code class="console">java -jar \
@@ -991,7 +997,7 @@ openvidu-server.jar
 </code></pre>
 
 <p><br>
-<strong><a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu/openvidu-server-kms</a></strong> <strong><em>(development environment)</em></strong></p>
+<strong><a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu/openvidu-server-kms Docker container</a></strong> <strong><em>(development environment)</em></strong></p>
 <pre><code class="console">docker run -p 4443:4443 --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /PATH/TO/VIDEO/FILES:/PATH/TO/VIDEO/FILES \
@@ -1099,8 +1105,66 @@ openvidu.startRecording(sessionId, {
 <p>You should start openvidu-server with property <code>openvidu.recording.custom-layout=/opt/openvidu/my_custom_layouts</code> and you can use any of the 3 <code>index.html</code> files for recording any of your sessions. To use the outer layout in a recording, just configure in recording properties <code>recordingLayout</code> to <code>CUSTOM</code>. To use any of the inner layouts, also configure <code>customLayout</code> to <code>layout1</code> or <code>layout2</code>.</p>
 <p><br></p>
 <hr />
+<h2 id="using-an-external-custom-layout">Using an external custom layout</h2>
+<p>OpenVidu allows you to configure a recording to use a custom layout deployed outside OpenVidu host. This is useful if, for whatever reason, you have your layout being served in a different server with a different IP. To achieve this, you just have to configure the complete URL where your layout is served in property <code>customLayout</code>:</p>
+<div class="lang-tabs-container">
+<div class="lang-tabs-header">
+  <button class="lang-tabs-btn" onclick="changeLangTab(event)" style="background-color: #e8e8e8; font-weight: bold">REST API</button>
+  <button class="lang-tabs-btn" onclick="changeLangTab(event)">Java</button>
+  <button class="lang-tabs-btn" onclick="changeLangTab(event)">Node</button>
+</div>
+
+<div class="lang-tabs-content" id="rest-api">
+<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "https://USER:PASS@my.domain.com:8888/path?myParam=123"}</code></p>
+</div>
+<div class="lang-tabs-content" id="java" style="display:none">
+<pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
+    .outputMode(Recording.OutputMode.COMPOSED)
+    .recordingLayout(RecordingLayout.CUSTOM)
+    .customLayout(&quot;https://USER:PASS@my.domain.com:8888/path?myParam=123&quot;)
+    .build();
+Recording recording = openVidu.startRecording(session.getSessionId(), properties);
+</code></pre>
+
+</div>
+<div class="lang-tabs-content" id="node" style="display:none">
+<pre><code class="javascript">var recording;
+
+openvidu.startRecording(sessionId, {
+    outputMode: Recording.OutputMode.COMPOSED,
+    recordingLayout: RecordingLayout.CUSTOM,
+    customLayout: &quot;https://USER:PASS@my.domain.com:8888/path?myParam=123&quot;
+})
+    .then(response =&gt; recording = response)
+    .catch(error =&gt; console.error(error));
+</code></pre>
+
+</div>
+</div>
+<p><br><br></p>
+<blockquote>
+<p>As you can see, this URL may have Basic Authentication credentials and any query parameter you may need in your custom layout. In the snippets above, you could access value <code>123</code> in your layout JS code just by calling <br><code>new URL(window.location.href).searchParams.get("myParam");</code></p>
+</blockquote>
+<p><br></p>
+<hr />
+<h2 id="debugging-your-custom-layouts">Debugging your custom layouts</h2>
+<p>To debug your custom layout, you just need to store it in the path declared with property <code>openvidu.recording.custom-layout</code>, as explained in section <a href="#2-add-new-properties-when-launching-openvidu-server">Add new properties when launching openvidu-server</a>.</p>
+<p>Then, by using your OpenVidu application, start a session and as many publishers as you expect to be recorded in your custom layout. Finally you just have to connect to your layout through <strong>Chrome</strong> by entering url:</p>
+<p><strong>https://OPENVIDUAPP:<code>SECRET</code>@<code>OPENVIDU_IP</code>:4443/layouts/custom/index.html?sessionId=<code>SESSION_ID</code>&amp;secret=<code>SECRET</code></strong></p>
+<p>Being:</p>
+<ul>
+<li><code>SECRET</code>: parameter <code>openvidu.secret</code> configured when launching openvidu-server</li>
+<li><code>OPENVIDU_IP</code>: the IP where openvidu-server is accessible in your development machine. You will be probably using <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu-server-kms docker container</a> in your development environment, so this parameter is <code>localhost</code> if you are in Mac or Linux, and the docker IP of the container if you are in Windows (see this <a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="&quot;_blank">FAQ</a>)</li>
+<li><code>SESSION_ID</code>: the session ID you have initialized for the debugging process. Here's a little tip: you can initialize the session in openvidu-server (<a href="http://localhost:4000/docs/reference-docs/REST-API/#post-apisessions" target="_blank">REST API</a>, <a href="http://localhost:4000/docs/reference-docs/openvidu-java-client/#create-a-session" target="_blank">openvidu-java-client</a>, <a href="http://localhost:4000/docs/reference-docs/openvidu-node-client/#create-a-session" target="_blank">openvidu-node-client</a>) configuring parameter <code>customSessionId</code> to fix this session ID and avoid having to change it every time you restart your session.</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>By connecting with Chrome to the above URL you will see the exact result obtained when recording a session with your custom layout. You can now start changing the HTML/CSS/JS files of your layout until you are happy with the outcome</p>
+</blockquote>
+<p><br></p>
+<hr />
 <h2 id="sample-custom-layout">Sample custom layout</h2>
-<p>This is literally the simplest HTML for a custom recording layout. Use it as a template for building more complex ones (you will need <strong><a href="https://github.com/OpenVidu/openvidu/releases" target="_blank">latest <code>openvidu-browser-VERSION.min.js</code> file</a></strong> to be in the same folder)</p>
+<p>This is literally the simplest HTML for a custom recording layout. Use it as a template for building more complex ones (you will need <strong><a href="https://github.com/OpenVidu/openvidu/releases" target="_blank">latest <code>openvidu-browser-VERSION.min.js</code> file</a></strong> to be in the same folder. Be sure to use the same version number as your openvidu-server!)</p>
 <pre><code class="html">&lt;html&gt;
 
 &lt;head&gt;&lt;script src=&quot;openvidu-browser-2.8.0.min.js&quot;&gt;&lt;/script&gt;&lt;/head&gt;

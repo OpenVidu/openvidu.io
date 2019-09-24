@@ -839,7 +839,7 @@ protected Void doInBackground(SessionActivity... sessionActivities) {
 <h3 id="using-openvidu-server-rpc-protocol">Using OpenVidu Server RPC protocol</h3>
 <p>Taking the references from <a href="https://openvidu.io/docs/developing/rpc/" target="_blank">OpenVidu Server RPC protocol</a>, we will be able call to the <strong>OpenVidu Server methods</strong> and <strong>receive events</strong> from OpenVidu Server.</p>
 <h4 id="listening-to-openvidu-server-events">Listening to OpenVidu Server events</h4>
-<p>We need an extra method to handle de messages from openvidu server. This will be essential in order to know when <strong>ice candidates</strong> arrive, when a <strong>new user joined</strong> the session, when a <strong>user published a video to the session</strong> or when some <strong>participant left</strong> the session.</p>
+<p>The app implements a method to handle event messages received from openvidu server. This will be essential in order to know when <strong>ice candidates</strong> arrive, when a <strong>new user joined</strong> the session, when a <strong>user published a video to the session</strong> or when some <strong>participant left</strong> the session.</p>
 <p style="text-align: center; font-weight: bold; margin-bottom: -9px; margin-top: 13px; font-size: 12px; word-break: break-word"><a href="https://github.com/OpenVidu/openvidu-tutorials/blob/master/openvidu-android/app/src/main/java/io/openvidu/openvidu_android/websocket/CustomWebSocket.java" target="_blank">src/main/java/io/openvidu/openvidu_android/openvidu/CustomWebSocket.java</a></p>
 
 <pre><code class="java">private void handleServerEvent(JSONObject json) throws JSONException {
