@@ -517,10 +517,19 @@ active: documentation
 					<div role="main">
 						<div class="section">
 							 <h1 id="screen-share">Screen share</h1>
+<ul>
+<li><strong><a href="#how-to-screen-share">How to screen share</a></strong></li>
+<li><strong><a href="#how-to-know-when-the-user-stops-sharing-the-screen">How to know when the user stops sharing the screen</a></strong></li>
+<li><strong><a href="#custom-screen-sharing-extension-for-chrome">Custom Screen Sharing extension for Chrome</a></strong></li>
+</ul>
+<p><br></p>
+<hr />
+<h2 id="how-to-screen-share">How to screen share</h2>
 <p><strong>Chrome</strong>, <strong>Opera</strong>, <strong>Firefox</strong>  and <strong>desktop Electron apps</strong> support screen sharing.</p>
 <h3 id="chrome-72-opera-based-on-chrome-72-and-firefox-66">Chrome &gt;=72, Opera (based on Chrome &gt;=72) and Firefox &gt;=66</h3>
 <p>To share your screen instead of your webcam, the process is exactly the same as stated in <strong><a href="../../cheatsheet/publish-unpublish" target="_blank">Publish a stream</a></strong> section, but setting to <em>"screen"</em> <code>videoSource</code> property when initializing a Publisher object:</p>
-<pre><code class="javascript">OV.initPublisher(&quot;html-element-id&quot;, { videoSource: &quot;screen&quot; });
+<pre><code class="javascript">var OV = new OpenVidu();
+var publisher = OV.initPublisher(&quot;html-element-id&quot;, { videoSource: &quot;screen&quot; });
 </code></pre>
 
 <h3 id="chrome-72-and-opera-based-on-chrome-72">Chrome &lt;72 and Opera (based on Chrome &lt;72)</h3>
@@ -531,7 +540,8 @@ active: documentation
 <li><code>SCREEN_EXTENSION_DISABLED</code>: if Chrome's screen extension is installed but disabled</li>
 <li><code>SCREEN_CAPTURE_DENIED</code>: if the user doesn't grant permissions to capture the screen when the browser asks to.</li>
 </ul>
-<pre><code class="javascript">OV.initPublisher('html-element-id', { videoSource: &quot;screen&quot; }, function(error) {
+<pre><code class="javascript">var OV = new OpenVidu();
+var publisher = OV.initPublisher('html-element-id', { videoSource: &quot;screen&quot; }, function(error) {
     if (error.name == 'SCREEN_EXTENSION_NOT_INSTALLED') {
         showWarning(error.message);
 
@@ -555,7 +565,7 @@ active: documentation
 <li><code>"screen"</code>: entire screen</li>
 <li><code>"window"</code>: specific application window</li>
 </ul>
-<p>In Chrome and Opera both values will always give access to both entire screen and specific application windows.</p>
+<p>In Chrome, Opera and Firefox &gt;=66 both values will always give access to both entire screen and specific application windows.</p>
 <h3 id="desktop-electron-apps">Desktop Electron apps</h3>
 <p>Electron allows screen-sharing, but there's no default screen selector built in the framework. For the rest of supported platforms, a native dialog will be shown when calling <code>OpenVidu.initPublisher</code> with <code>{ videoSource: "screen" }</code>, so the user can pick up the screen or application window to share.</p>
 <p>For Electron, you must build your own screen selection dialog using <a href="https://electronjs.org/docs/api/desktop-capturer" target="_blank">desktopCapturer</a> API and then append the desired screen identifier to string <code>"screen"</code> like this: <code>{ videoSource: "screen:SCREEN_IDENTIFIER" }</code></p>
@@ -572,6 +582,7 @@ active: documentation
         console.log(source.id);
 
         if (my_condition) {
+            var OV = new OpenVidu();
             var publisher = OV.initPublisher(&quot;html-element-id&quot;, { videoSource: &quot;screen:&quot; + source.id });
         }
     });
@@ -579,11 +590,30 @@ active: documentation
 </code></pre>
 
 <p>You can check out <a href="../../tutorials/openvidu-electron/" target="_blank">openvidu-electron tutorial</a>, which includes a fully functional screen selector dialog.</p>
-<p><br><br>
-<hr></p>
-<h1 id="custom-screen-sharing-extension-for-chrome">Custom Screen Sharing extension for Chrome</h1>
-<p><br>
-We provide a default extension that will work on any domain in case the client is using Chrome &lt;72 or Opera based on it. But you can create your own Chrome extension always based on ours (<a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension" target="_blank">OpenVidu Screen Sharing extension</a>). This way your extension may have your own icon, name, description and custom valid domains.</p>
+<p><br></p>
+<hr />
+<h2 id="how-to-know-when-the-user-stops-sharing-the-screen">How to know when the user stops sharing the screen</h2>
+<p>You can use native Web API to add a listener for determining when the user pressed the "Stop sharing" button shown by browsers when sharing a window or screen. You can do it like this:</p>
+<pre><code class="javascript">var OV = new OpenVidu();
+var publisher = OV.initPublisherAsync({
+    videoSource: &quot;screen&quot;
+}).then(publisher =&gt; {
+    publisher.stream.getMediaStream().addEventListener('inactive', () =&gt; {
+        console.log('User pressed the &quot;Stop sharing&quot; button');
+        // You can send a signal with Session.signal method to warn other participants
+    });
+});
+</code></pre>
+
+<p><br></p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/ended_event" target="_blank">Event ended of MediaStreamTrack</a> servers the same purpose. If you have any problem with <strong>inactive</strong> event of <strong>MediaStream</strong> object, you can try with <strong>ended</strong> event of <strong>MediaStreamTrack</strong> object. In the snippet above, that would be:</p>
+<p><code>publisher.stream.getMediaStream().getVideoTracks()[0].addEventListener('ended', () =&gt; { ... })</code></p>
+</blockquote>
+<p><br></p>
+<hr />
+<h2 id="custom-screen-sharing-extension-for-chrome">Custom Screen Sharing extension for Chrome</h2>
+<p>We provide a default extension that will work on any domain in case the client is using Chrome &lt;72 or Opera based on it. But you can create your own Chrome extension always based on ours (<a href="https://github.com/OpenVidu/openvidu-screen-sharing-chrome-extension" target="_blank">OpenVidu Screen Sharing extension</a>). This way your extension may have your own icon, name, description and custom valid domains.</p>
 <p>To use your extension, just configure OpenVidu object like this after initializing it:</p>
 <pre><code class="javascript">var OV = new OpenVidu();
 OV.setAdvancedConfiguration(
