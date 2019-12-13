@@ -611,7 +611,7 @@ Go to <a href="#using-your-own-certificate">Using your own certificate</a> to ad
 <p>Besides, the server needs some <strong>ports</strong> opened in the firewall:</p>
 <ul>
 <li><strong>4443 TCP</strong> (<em>OpenVidu Server</em> listens on port 4443 by default)</li>
-<li><strong>3478 TCP</strong> (<em>COTURN</em> listens on port 3478 by default)</li>
+<li><strong>3478 UDP and TCP</strong> (<em>COTURN</em> listens on port 3478 by default)</li>
 <li><strong>40000 - 65535 UDP and TCP</strong> (WebRTC will randomly exchange media through any of these ports. TCP might be used if client network blocks UDP connections)</li>
 </ul>
 </li>
