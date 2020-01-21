@@ -738,8 +738,9 @@ sudo apt-get install -y ansible
 <ul>
 <li><strong>4443 TCP</strong> (OpenVidu Server listens on port 4443 by default)</li>
 <li><strong>3478 TCP</strong> (coturn listens on port 3478 by default)</li>
+<li><strong>3478 UDP</strong> (opening also UDP port has been proved to facilitate connections with certain type of clients)</li>
 </ul>
-<h4 id="media-instances">Media instance(s)</h4>
+<h4 id="media-node-instances">Media Node instances</h4>
 <ul>
 <li><strong>40000 - 65535 UDP</strong> (WebRTC connections with clients may be established using a random port inside this range)</li>
 <li><strong>40000 - 65535 TCP</strong> (WebRTC connections with clients may be established using a random port inside this range, if UDP can't be used because client network is blocking it)</li>
@@ -758,31 +759,31 @@ git checkout v2.11.0
 cd openvidu-pro-clustering # This will be our working directory from now on
 </code></pre>
 
-<p>File <code>./inventory.yaml</code> defines our cluster instances. By default it is ready to use a single Media Server instance, but you can add as many <em>kurento-server</em> hosts as you want, as you can see in the commented lines.</p>
+<p>File <code>./inventory.yaml</code> defines our cluster instances. By default it is ready to use a single Media Node, but you can add as many <em>kurento-server</em> hosts as you want, as you can see in the commented lines.</p>
 <p>The IPs in the inventory file should be the addresses which can be reached from the Ansible host. In example, if your Ansible host is on the 192.168.x.x network should be ok to use that address range in your inventory file.</p>
 <pre><code class="yaml">---
 all:
   hosts:
     openvidu-server:
       ansible_host: OPENVIDU_SERVER_IP
-    media-server-1:
-      ansible_host: MEDIA_SERVER_1_IP
-    # media-server-2:
-    #   ansible_host: MEDIA_SERVER_2_IP
+    media-node-1:
+      ansible_host: MEDIA_NODE_1_IP
+    # media-node-2:
+    #   ansible_host: MEDIA_NODE_2_IP
     # ...
-    # media-server-N:
-    #   ansible_host: MEDIA_SERVER_N_IP
+    # media-node-N:
+    #   ansible_host: MEDIA_NODE_N_IP
   vars:
       ansible_become: true
       ansible_user: USER
       ansible_ssh_private_key_file: /PATH/TO/SSH_public_key
   children:
-    media-servers:
+    media-nodes:
       hosts:
-        media-server-1:
-      #   media-server-2:
+        media-node-1:
+      #   media-node-2:
       #   ...
-      #   media-server-N:
+      #   media-node-N:
     openvidu:
       hosts:
         openvidu-server:
@@ -793,7 +794,7 @@ all:
 <li><strong>Variable <code>ansible_user</code></strong>: the user you use to connect to the instances, i.e. Ubuntu Server Cloud uses <code>ubuntu</code>. If you've deployed those instances in OpenStack using Ubuntu Official Image, <code>ubuntu</code> will be the user.</li>
 <li><strong>Variable <code>ansible_ssh_private_key_file</code></strong>: path to the RSA private key you use to connect to your instances.</li>
 <li><strong>Value <code>OPENVIDU_SERVER_IP</code></strong>: public IP to connect to the OpenVidu Server Pro instance.</li>
-<li><strong>Value <code>MEDIA_SERVER_X_IP</code></strong>: public IP to connect to the Kurento Media Server instance(s).</li>
+<li><strong>Value <code>MEDIA_NODE_X_IP</code></strong>: public IP to connect to the Kurento Media Server instance(s).</li>
 </ul>
 <p><br></p>
 <hr />
