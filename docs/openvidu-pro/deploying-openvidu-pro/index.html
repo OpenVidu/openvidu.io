@@ -738,7 +738,7 @@ sudo apt-get install -y ansible
 <ul>
 <li><strong>4443 TCP</strong> (OpenVidu Server listens on port 4443 by default)</li>
 <li><strong>3478 TCP</strong> (coturn listens on port 3478 by default)</li>
-<li><strong>3478 UDP</strong> (opening also UDP port has been proved to facilitate connections with certain type of clients)</li>
+<li><strong>3479 UDP</strong> (opening also UDP port has been proved to facilitate connections with certain type of clients)</li>
 </ul>
 <h4 id="media-node-instances">Media Node instances</h4>
 <ul>
@@ -755,7 +755,7 @@ sudo apt-get install -y ansible
 <h3 id="3-ansibles-inventory">3) Ansible's inventory</h3>
 <p>Ansible uses an inventory file to know which instances connect to and how to configure them. Let's clone OpenVidu's Ansible repository to modify this file and prepare the cluster deployment:</p>
 <pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-pro-clustering
-git checkout v2.11.0
+git checkout 2.11.0
 cd openvidu-pro-clustering # This will be our working directory from now on
 </code></pre>
 
@@ -848,10 +848,55 @@ openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=1
 <p><br></p>
 <hr />
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p>If you get stuck deploying this playbook remember we're here to help you. So please, when you open a new issue provide the <strong>full Ansible output log</strong> and, if you were able to deploy OpenVidu Server Pro role, please provide also the content of the following files of OpenVidu Server pro instance:</p>
+<p>Sometimes things just doesn’t work as expected, but we’re here to help, to do that we’ll need some information about what was going on in the instance when the deployment exploded. Don't doubt to contact us <a href="https://openvidu.discourse.group/c/openvidu-deployment" target="_blank">here</a></p>
+<h4 id="troubleshooting-in-aws-and-cloudformation">Troubleshooting in AWS and Cloudformation</h4>
+<p>If you're deploying through CloudFormation you need to do this steps:</p>
 <ul>
-<li>Instance boot log: <code>/var/log/cloud-init-output.log</code></li>
-<li>OpenVidu Server Pro JAR artifact log: <code>sudo journalctl -u openvidu</code> (this command will output the log)</li>
+<li><strong>1</strong>. Fill up the form and click next. In Configure stack options under Advanced Options and then in Stack creation options check Disabled under Rollback on failure. This will prevent the instance to be terminated in case of failure. Once you’ve configured this, you’ll be able to access the instance through ssh and recover some files.</li>
+</ul>
+<div class="row">
+    <div style="margin: 25px 15px 25px 15px">
+        <a data-fancybox="gallery-pro13" href="/img/docs/deployment/CF_1_troubleshooting_rollback.png"><img class="img-responsive img-pro" src="/img/docs/deployment/CF_1_troubleshooting_rollback.png"/></a>
+    </div>
+</div>
+
+<ul>
+<li><strong>2</strong>. Also we will need the parameters you've used to deploy, to check problems in the configuration.</li>
+</ul>
+<div class="row">
+    <div style="margin: 25px 15px 25px 15px">
+        <a data-fancybox="gallery-pro14" href="/img/docs/deployment/CF_1_troubleshooting_rollback.png"><img class="img-responsive img-pro" src="/img/docs/deployment/CF_2_troubleshooting_parameters.png"/></a>
+    </div>
+</div>
+
+<ul>
+<li>
+<p><strong>3</strong>. SSH into the instances created and share with us these logs</p>
+<ul>
+<li><code>/var/log/cloud-init.log</code></li>
+<li><code>/var/log/cloud-init-output.log</code>
+<br><br></li>
+</ul>
+</li>
+<li>
+<p><strong>4</strong>. Get the log output of openvidu with this command and share with us the file openvidu.log:</p>
+<ul>
+<li><code>journalctl -u openvidu &gt; openvidu.log</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="troubleshooting-deployment-on-premise">Troubleshooting Deployment on premise</h4>
+<p>To troubleshoot problems with deployments on premise you need to do this steps:</p>
+<ul>
+<li>
+<p><strong>1</strong>  Provide us <code>ansible-playbook</code> logs.</p>
+</li>
+<li>
+<p><strong>2</strong> As in AWS with Cloudformation, SSH in to the OpenVidu machine and provide us Openvidu logs:</p>
+<ul>
+<li><code>journalctl -u openvidu &gt; openvidu.log</code></li>
+</ul>
+</li>
 </ul>
 <p><br></p>
 <p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
