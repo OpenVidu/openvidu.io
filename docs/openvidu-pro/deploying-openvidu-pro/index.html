@@ -738,7 +738,7 @@ sudo apt-get install -y ansible
 <ul>
 <li><strong>4443 TCP</strong> (OpenVidu Server listens on port 4443 by default)</li>
 <li><strong>3478 TCP</strong> (coturn listens on port 3478 by default)</li>
-<li><strong>3479 UDP</strong> (opening also UDP port has been proved to facilitate connections with certain type of clients)</li>
+<li><strong>3478 UDP</strong> (opening also UDP port has been proved to facilitate connections with certain type of clients)</li>
 </ul>
 <h4 id="media-node-instances">Media Node instances</h4>
 <ul>
@@ -848,11 +848,11 @@ openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=1
 <p><br></p>
 <hr />
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p>Sometimes things just doesn’t work as expected, but we’re here to help, to do that we’ll need some information about what was going on in the instance when the deployment exploded. Don't doubt to contact us <a href="https://openvidu.discourse.group/c/openvidu-deployment" target="_blank">here</a></p>
+<p>Sometimes things just doesn’t work as expected, but we’re here to help. To do that we’ll need some information about what was going on in the instance when the deployment exploded. Don't doubt to contact us in OpenVidu support forum, under section <a href="https://openvidu.discourse.group/c/openvidu-deployment" target="_blank">Deploy OpenVidu for production</a>. But first we'll need you to gather some information about the failure. To do so and depending on what deployment procedure you followed:</p>
 <h4 id="troubleshooting-in-aws-and-cloudformation">Troubleshooting in AWS and Cloudformation</h4>
-<p>If you're deploying through CloudFormation you need to do this steps:</p>
+<p>If you're deploying through CloudFormation please do these steps:</p>
 <ul>
-<li><strong>1</strong>. Fill up the form and click next. In Configure stack options under Advanced Options and then in Stack creation options check Disabled under Rollback on failure. This will prevent the instance to be terminated in case of failure. Once you’ve configured this, you’ll be able to access the instance through ssh and recover some files.</li>
+<li><strong>1)</strong> Try to deploy again, but this time disable option <code>Rollback on failure</code> (Configure stack options 🡆 Advanced Options 🡆 Stack creation options). This will prevent the instance to be terminated in case of failure so we can gather logs. Once you re-deploy with this option, the stack will still fail but you’ll be able to access instances through SSH and recover some files.</li>
 </ul>
 <div class="row">
     <div style="margin: 25px 15px 25px 15px">
@@ -861,7 +861,7 @@ openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=1
 </div>
 
 <ul>
-<li><strong>2</strong>. Also we will need the parameters you've used to deploy, to check problems in the configuration.</li>
+<li><strong>2)</strong> We will also need the parameters you've used to deploy, to check possible problems in their values</li>
 </ul>
 <div class="row">
     <div style="margin: 25px 15px 25px 15px">
@@ -871,7 +871,7 @@ openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=1
 
 <ul>
 <li>
-<p><strong>3</strong>. SSH into the instances created and share with us these logs</p>
+<p><strong>3)</strong> Once you have performed step 1) and the stack creation has failed, please SSH into the instances created and share with us Cloudformation logs</p>
 <ul>
 <li><code>/var/log/cloud-init.log</code></li>
 <li><code>/var/log/cloud-init-output.log</code>
@@ -879,20 +879,20 @@ openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=1
 </ul>
 </li>
 <li>
-<p><strong>4</strong>. Get the log output of openvidu with this command and share with us the file openvidu.log:</p>
+<p><strong>4)</strong> Get also the log output of openvidu with this command and share with us the output file:</p>
 <ul>
 <li><code>journalctl -u openvidu &gt; openvidu.log</code></li>
 </ul>
 </li>
 </ul>
-<h4 id="troubleshooting-deployment-on-premise">Troubleshooting Deployment on premise</h4>
+<h4 id="troubleshooting-deployments-on-premise">Troubleshooting Deployments on premise</h4>
 <p>To troubleshoot problems with deployments on premise you need to do this steps:</p>
 <ul>
 <li>
-<p><strong>1</strong>  Provide us <code>ansible-playbook</code> logs.</p>
+<p><strong>1)</strong> Provide to us <code>ansible-playbook</code> logs.</p>
 </li>
 <li>
-<p><strong>2</strong> As in AWS with Cloudformation, SSH in to the OpenVidu machine and provide us Openvidu logs:</p>
+<p><strong>2)</strong> As in AWS with Cloudformation, SSH in to the OpenVidu machine and provide to us Openvidu logs:</p>
 <ul>
 <li><code>journalctl -u openvidu &gt; openvidu.log</code></li>
 </ul>
