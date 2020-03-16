@@ -1,0 +1,1358 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - Adding videoconference to web and mobile apps
+active: documentation
+---
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/perfect-scrollbar.min.js"></script>
+<link rel="stylesheet" href="/css/perfect-scrollbar.css" />
+
+<div id="doc-container" class="container text-justify">
+	<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+		
+		<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+			<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+				<div id="site-menu-title">
+					<h3>Explore docs</h3>
+					<hr>
+				</div>
+				<ul id="menu-list">
+					 
+					<li>
+						<ul class="top-ul ">
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Tutorials</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/">Intro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-android/">openvidu-android</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-ionic/">openvidu-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-react-native/">openvidu-react-native</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-electron/">openvidu-electron</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Demos</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-call/">openvidu-call</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Cheatsheet</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/join-session/">Join a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/leave-session/">Leave a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/manage-videos/">Manage video players</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/share-data/">Share data between users</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Advanced features</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/recording/">Recording</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/screen-share/">Screen share</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/ip-cameras/">IP cameras</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/switch-camera/">Switch camera</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/automatic-reconnection/">Automatic reconnection</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/REST-API/">REST API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deployment</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/deploying-app/">Deploying your OpenVidu app</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/upgrading/">Upgrading OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Contribute</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/developing/">Developing OpenVidu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/developing/rpc/">OpenVidu Server RPC protocol</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/releases/">Releases</a> 
+</li>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li  style="width: 100%; display: inline-block" 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                        <a style="all: unset; display: inline">
+                                <div id="openvidu-pro-tag"
+                                        style=" pointer-events: none; float: left; margin-right: 12px; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">
+                                        PRO</div>
+                        </a>
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/">Home</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deploying OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/aws/">AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/on-premise/">On premise</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/kubernetes/">Kubernetes</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/REST-API-pro/">REST API Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/">OpenVidu Server Pro configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/">OpenVidu Server Pro CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					 
+				</ul>
+			</div>
+			&nbsp;
+		</nav>
+	</div>
+
+	<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+		
+		<div>
+			<div>
+
+				<div role="main">
+					<div class="section">
+						 <h1 id="adding-videoconference-to-web-and-mobile-apps">Adding videoconference to web and mobile apps</h1>
+<h3 id="section-title">Video Conference or Live Streaming</h3>
+
+<hr>
+
+<h4 id="i-live-streaming">I) Live Streaming</h4>
+<p>The <strong>videostreaming</strong> is an unidirectional platform that allows the retransmission of multimedia files (audio or audio and video) through Internet, from a place of emission to different places of reception. The video streaming is ideal for the retransmission of all kinds of events live to any part of the world and the playback can be stored for later viewing.</p>
+<h4 id="ii-videoconferences">II) VideoConferences</h4>
+<p>On the other hand, we have audiovisual equipment for the development of <strong>videoconference</strong>. A two-way platform for connecting live video between different people in different places over the Internet. Videoconferencing tools allows visual communication between a group of people from anywhere in the world. It is a multipoint or point-to-point system ideal for business meetings.</p>
+<p>You can choose between <strong>P2P or Media Server</strong>:</p>
+<h5 id="a-p2p-connect-your-users-directly-between-them">a) P2P: connect your users directly between them</h5>
+<p>This is a quick and cheap solution, as the need of a server side managing the media streams is removed from the equation. It has a lot of limitations though, especially in how big your videoconferences can get. Each user has to send their video to every other user in the call, and must receive a direct video stream from every one of them. This way the amount of media streams grows exponentially. More than 3 or 4 users per videocall usually end up in a rather unfortunate user experience. Besides that, the lack of a central node for controlling your calls means that you cannot perform such useful tasks as call recording or video forwarding.</p>
+<p>And perhaps the worst thing about this option is the fact that it does not release you from the use a media routing server. Many times your clients will be located behind firewalls or complex networks, and that makes the use of TURN servers mandatory. They act as a relay server to connect your clients whenever a direct connection is not possible, and that may happen pretty frequently.</p>
+<h5 id="b-media-server-route-every-video-stream-through-a-server">b) Media Server: route every video stream through a server</h5>
+<p>This is the most versatile solution. Using a media server to route your clients video streams expands every possible aspect of real-time video to a higher level (at the expense of having to maintain another service in your stack, of course). But as we stated before, dispensing with a media server is not a viable option in many use cases.</p>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6 col-sm-6" align="center">
+        <div class="img">
+            <img class="img-responsive" src="/img/docs/technologies/streaming.png">
+        </div>
+        <div class=" wow fadeInUp">
+            <h4>Live Streaming</h4>
+            <p></p>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6" align="center">
+        <div class="img" >
+            <img class="img-responsive" src="/img/docs/technologies/videoconferences.png">
+        </div>
+        <div class="member-info wow fadeInUp">
+              <h4>Video Conferences</h4>
+            <p></p>
+        </div>
+    </div>
+</div>
+
+<h4 id="section-title">When to use live streaming </h4>
+
+<p>Live streaming technology enables <strong>high quality video</strong> to be transmitted to <strong>tens of thousands of people</strong> in near real time. Keep in mind that the high quality of video produces a <strong>higher latency</strong> with respect to video conferences.
+In addition to this, live streaming platforms allow viewers to <strong>interact with their videos long after their live event is over</strong>.</p>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6 col-sm-6" >
+    <h5 style="color: green;">You should be using these tools for:</h5>
+        <ul>
+            <li>You want a versatile solution for a larger audience</li>
+            <li>You want simplicity for the viewer</li>
+            <li>You want production level quality</li>
+        </ul>   
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <h5 style="color: #d80000;">You shouldn't be using these tools for:</h5>
+        <ul>
+            <li>Face to face meetings</li>
+            <li>Create live events with less than one second of latency</li>
+        </ul> 
+    </div>
+</div>
+
+<h4 id="section-title">When to use video conferences </h4>
+
+<p>Videoconferencing tools are useful to set internal or external meetings and calls between <strong>one-on-one</strong> or <strong>small groups</strong> of people in multiple location. As it is a <strong>two-way communication</strong>, it allows an active interaction between the participants with <strong>hardly any audio and video delay</strong>.
+In addition, this type of tools allow you to communicate in a clearer and more consistent way to your work team. In turn, participants will have the opportunity to ask questions and provide <strong>feedback in real time</strong>.</p>
+<div class="row no-margin row-gallery">
+    <div class="col-md-6 col-sm-6" >
+    <h5 style="color: green;">You should be using these tools for:</h5>
+        <ul>
+            <li>One-on-One or groups meetings</li>
+            <li>Active interaction between participants</li>
+            <li>Low video and audio latency</li>
+        </ul>   
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <h5 style="color: #d80000;">You shouldn't be using these tools for:</h5>
+        <ul>
+            <li>Sending a stream to more than a few dozen people</li>
+            <li>Creating high quality live video</li>
+        </ul> 
+    </div>
+</div>
+
+<h3 id="section-title">Apps or Development Platforms</h3>
+
+<hr>
+
+<p>The next step, once you have decided to use Video Conferences or Live Streaming, is to choose which option adapts to your needs: </p>
+<h4 id="i-standalone-third-party-application">I) Standalone third-party application</h4>
+<p>Your needs may be met simply by using a third-party application as a non-integral solution, detached from your software core. Don't underestimate the most direct solution: if your user requirements allow the use of <em>Skype</em>, <em>Hangouts</em>, <em>Periscope</em> or <em>YouTube Live</em> to hold some meetings or to emit events, that's for sure the cheapest and easiest way to get real-time videocalls or retransmission in your business.</p>
+<h4>As a service</h4>
+
+<h5>Live Straming Apps</h5>
+
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/periscope.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.pscp.tv/" target="_blank" class="cbp-singlePage">Periscope</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/twitch.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.twitch.tv/">Twitch</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/youtube.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.youtube.com/" target="_blank" class="cbp-singlePage">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/fb.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://live.fb.com/" target="_blank" class="cbp-singlePage">FB Live</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/boxcast.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.boxcast.com/" target="_blank" class="cbp-singlePage">Boxcast</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/vimeo.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://vimeo.com" target="_blank" class="cbp-singlePage">Vimeo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h5>Video Conferences Apps</h5>
+
+<div class="row">
+
+<div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/openvidu.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://call.openvidu.io/" target="_blank" class="cbp-singlePage">OpenVidu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/skype.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.skype.com" target="_blank" class="cbp-singlePage">Skype</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/hangouts.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://hangouts.google.com/">Hangouts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/appear.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://appear.in/" target="_blank" class="cbp-singlePage">Appear.in</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/zoom.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://zoom.us/" target="_blank" class="cbp-singlePage">Zoom</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/gotomeeting.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.gotomeeting.com/features" target="_blank" class="cbp-singlePage">GoToMeeting</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>On premise</h4>
+
+<h5>Video Conferences Apps</h5>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/openvidu.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://github.com/OpenVidu/openvidu-call/releases" target="_blank" class="cbp-singlePage">OpenVidu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/bbb.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://bigbluebutton.org/" target="_blank" class="cbp-singlePage">BigBlueButton</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/jitsi.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://jitsi.org/" target="_blank" class="cbp-singlePage">Jitsi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 id="ii-software-as-a-service">II) Software as a Service</h4>
+<p>This can be a recommended option if: <strong><em>a) you can afford it</em></strong> and <strong><em>b) you are allowed to outsource the service</em></strong>. Besides, the video conference platforms usually support both P2P and routed videocalls and also bring more advanced features pretty useful for companies such as programmable SMS or phone calls, SIP integration and so on.</p>
+<h4>Streaming Companies</h4>
+
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-6 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/ant.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://antmedia.io/" target="_blank" class="cbp-singlePage">AntMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/wowza.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.wowza.com/" target="_blank" class="cbp-singlePage">Wowza</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Video Conferences Companies</h4>
+
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/tokbox.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.tokbox.com" target="_blank" class="cbp-singlePage">Tokbox</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/twilio.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.twilio.com/">Twilio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/agora.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.agora.io/en/" target="_blank" class="cbp-singlePage">Agora.io</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/vidyo.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://vidyo.io/" target="_blank" class="cbp-singlePage">Vidyo.io</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/temasys.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://temasys.io/" target="_blank" class="cbp-singlePage">Temasys</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/apiRTC.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://apirtc.com/" target="_blank" class="cbp-singlePage">apiRTC</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 id="iii-on-premises-software">III) On-Premises Software</h4>
+<h4>Video Conferences Open Source</h4>
+
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/kurento.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="http://www.kurento.org/" target="_blank" class="cbp-singlePage">Kurento</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/openvidu.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://openvidu.io/" target="_blank" class="cbp-singlePage">OpenVidu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/janus.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://janus.conf.meetecho.com/index.html">Janus</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/medooze.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="http://www.medooze.com/" target="_blank" class="cbp-singlePage">Medooze</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/licode.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="http://lynckia.com/licode/" target="_blank" class="cbp-singlePage">Licode</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/mediasoup.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://mediasoup.org/" target="_blank" class="cbp-singlePage">Mediasoup</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Video Conferences Closed Source</h4>
+
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/openvidu.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://openvidu.io/" target="_blank" class="cbp-singlePage">OpenVidu Pro</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/frozen.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.frozenmountain.com/" target="_blank" class="cbp-singlePage">Frozen Mountain</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/flashphoner.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://flashphoner.com/" target="_blank" class="cbp-singlePage">Flashphoner</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/dialogic.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.dialogic.com/" target="_blank" class="cbp-singlePage">Dialogic</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-4 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/quobis.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.quobis.com/" target="_blank" class="cbp-singlePage">Quobis</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h4>Streaming Open Source</h4>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/ant.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://antmedia.io/" target="_blank" class="cbp-singlePage">AntMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/red5.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="http://red5.org/" target="_blank" class="cbp-singlePage">Red5</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Streaming Closed Source</h4>
+
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-3 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/ant.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://antmedia.io/" target="_blank" class="cbp-singlePage">AntMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/wowza.jpg" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://www.wowza.com/" target="_blank" class="cbp-singlePage">Wowza</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-3 col-sm-3 col-xs-3 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/flashphoner.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://flashphoner.com/" target="_blank" class="cbp-singlePage">Flashphoner</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 team-member">
+        <div class="effect effects wow fadeInUp">
+            <div class="img">
+                <img src="/img/docs/technologies/red5pro.png" class="img-responsive img-tutorials" alt="" />
+                <div class="overlay">
+                    <ul class="expand">
+                        <li><a href="https://red5pro.com/" target="_blank" class="cbp-singlePage">Red5 Pro</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 id="section-title">Decision tree</h3>
+
+<hr>
+
+<div class="docs-gallery">
+  <a data-fancybox="gallery-wellcome" href="/img/docs/technologies/flowchartTech.jpg"><img class="img-responsive img-wellcome" src="/img/docs/technologies/flowchartTech.jpg"/></a>
+</div>
+
+<h4>OpenVidu</h4>
+
+<p>Once we have learned the differences between live streaming and video conferences and its subcategories, we will be able to clarify what openvidu is. </p>
+<p>First of all, OpenVidu is an <strong>on premise open and closed source video conferences platform</strong>. This means that OpenVidu is an OpenSource project lisenced under <a __blank_="&quot;_blank&quot;" href="https://choosealicense.com/licenses/apache-2.0/" target:="target:">Apache Lisence v2</a> and you can use it for free.<br />
+However, OpenVidu Team have developed <a href="http://openvidu.io/docs/openvidu-pro/">OpenVidu PRO</a> which consists of different modules working over OpenVidu Community Edition (OpenVidu CE).</p>
+<p>And secondly, OpenVidu offers <strong>as a service external app videoconference</strong> (<a href="https://call.openvidu.io">call.openvidu.io</a>) and <strong>on premise external app videoconference</strong> (<a href="https://github.com/OpenVidu/openvidu-call/releases">OpenVidu Call</a>).</p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox="gallery-wellcome"]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p> 
+					</div>
+				</div> <footer>
+<hr>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs//blob/master/docs/"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		const ps = new PerfectScrollbar('#menu-list', {
+			wheelSpeed: 1,
+			wheelPropagation: true,
+			suppressScrollX: true
+		});
+
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Adding videoconference to web and mobile apps')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			let submenu = $(this).parent().find('ul.subnav');
+			submenu.toggle();
+			submenu.parent().find('span.arrow-up').toggle();
+			submenu.parent().find('span.arrow-down').toggle();
+			ps.update();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Adding videoconference to web and mobile apps')").css('color', 'red');
+</script>

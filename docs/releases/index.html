@@ -4,160 +4,148 @@ title: OpenVidu Documentation - Releases
 active: documentation
 ---
 
-<script src="/js/plugins/jquery.min.js"></script>
-
 <link rel="stylesheet" href="/css/syntax.css" />
 <script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Releases')").each(function (i, e) {
-			var currentElement = $(e);
-			currentElement.parent().css({
-				"display": "block",
-				"visibility": "visible"
-			}); //css("background-color","blue");
-			currentElement.css({
-				"display": "block",
-				"visibility": "visible"
-			});
-		});
-		$('li.subnav_drop div').click(function (i, e) {
-			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
-			$(this).parent().find('ul.subnav').toggle();
-		});
-
-		var minHeight = $('#sticky-menu').outerHeight() + 100;
-		$('#doc-container').css('min-height', minHeight + 'px');
-	});
-
-	$(".wy-nav-content").find("li:contains('Releases')").css('color', 'red');
+<script>
+	hljs.initHighlightingOnLoad();
 </script>
 
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/perfect-scrollbar.min.js"></script>
+<link rel="stylesheet" href="/css/perfect-scrollbar.css" />
+
 <div id="doc-container" class="container text-justify">
-		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+	<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-			
-			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
-					<div id="site-menu-title">
-						<h3>Explore docs</h3>
-						<hr>
-					</div>
-					<ul id="menu-list" class="current">
-						 
-						<li>
-							<ul>
+		
+		<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+			<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+				<div id="site-menu-title">
+					<h3>Explore docs</h3>
+					<hr>
+				</div>
+				<ul id="menu-list">
+					 
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../home/">What is OpenVidu?</a> 
+        <a class="" href="/docs/home/">What is OpenVidu?</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Tutorials</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Tutorials</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/">Intro</a> 
+        <a class="" href="/docs/tutorials/">Intro</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+        <a class="" href="/docs/tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+        <a class="" href="/docs/tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-android/">openvidu-android</a> 
+        <a class="" href="/docs/tutorials/openvidu-android/">openvidu-android</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+        <a class="" href="/docs/tutorials/openvidu-ionic/">openvidu-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-react-native/">openvidu-react-native</a> 
+        <a class="" href="/docs/tutorials/openvidu-react-native/">openvidu-react-native</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-electron/">openvidu-electron</a> 
+        <a class="" href="/docs/tutorials/openvidu-electron/">openvidu-electron</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
  
@@ -165,42 +153,52 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Demos</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Demos</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+        <a class="" href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../demos/openvidu-call/">openvidu-call</a> 
+        <a class="" href="/docs/demos/openvidu-call/">openvidu-call</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../demos/openvidu-call-react/">openvidu-call-react</a> 
+        <a class="" href="/docs/demos/openvidu-call-react/">openvidu-call-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+        <a class="" href="/docs/demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../demos/openvidu-classroom/">openvidu-classroom</a> 
+        <a class="" href="/docs/demos/openvidu-classroom/">openvidu-classroom</a> 
 </li>
 
  
@@ -208,60 +206,70 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Cheatsheet</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Cheatsheet</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/join-session/">Join a session</a> 
+        <a class="" href="/docs/cheatsheet/join-session/">Join a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/leave-session/">Leave a session</a> 
+        <a class="" href="/docs/cheatsheet/leave-session/">Leave a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+        <a class="" href="/docs/cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+        <a class="" href="/docs/cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+        <a class="" href="/docs/cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/manage-videos/">Manage video players</a> 
+        <a class="" href="/docs/cheatsheet/manage-videos/">Manage video players</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/share-data/">Share data between users</a> 
+        <a class="" href="/docs/cheatsheet/share-data/">Share data between users</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../cheatsheet/send-messages/">Send text messages</a> 
+        <a class="" href="/docs/cheatsheet/send-messages/">Send text messages</a> 
 </li>
 
  
@@ -269,42 +277,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Advanced features</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Advanced features</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../advanced-features/recording/">Recording</a> 
+        <a class="" href="/docs/advanced-features/recording/">Recording</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../advanced-features/screen-share/">Screen share</a> 
+        <a class="" href="/docs/advanced-features/screen-share/">Screen share</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../advanced-features/speech-detection/">Speech detection</a> 
+        <a class="" href="/docs/advanced-features/ip-cameras/">IP cameras</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../advanced-features/filters/">Voice and video filters</a> 
+        <a class="" href="/docs/advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../advanced-features/switch-camera/">Switch camera</a> 
+        <a class="" href="/docs/advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/switch-camera/">Switch camera</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/automatic-reconnection/">Automatic reconnection</a> 
 </li>
 
  
@@ -312,54 +342,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Reference Documentation</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-browser/">openvidu-browser API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/REST-API/">REST  API</a> 
+        <a class="" href="/docs/reference-docs/REST-API/">REST API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
 </li>
 
  
@@ -367,36 +407,46 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Deployment</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deployment</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+        <a class="" href="/docs/deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+        <a class="" href="/docs/deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../deployment/deploying-app/">Deploying your OpenVidu app</a> 
+        <a class="" href="/docs/deployment/deploying-app/">Deploying your OpenVidu app</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../deployment/upgrading/">Upgrading OpenVidu</a> 
+        <a class="" href="/docs/deployment/upgrading/">Upgrading OpenVidu</a> 
 </li>
 
  
@@ -404,24 +454,34 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Contribute</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Contribute</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../developing/">Developing OpenVidu</a> 
+        <a class="" href="/docs/developing/">Developing OpenVidu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../developing/rpc/">OpenVidu Server RPC protocol</a> 
+        <a class="" href="/docs/developing/rpc/">OpenVidu Server RPC protocol</a> 
 </li>
 
  
@@ -429,98 +489,173 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../troubleshooting/">Troubleshooting / FAQ</a> 
+        <a class="" href="/docs/troubleshooting/">Troubleshooting / FAQ</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul current">
 
 <li class="toctree-l1 current">
-        <a class="current" href="./">Releases</a>  
+        <a class="current" href="/docs/releases/">Releases</a>  
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  style="width: 100%; display: inline-block"  class="subnav_drop">
-        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
-                        href="/docs/openvidu-pro/">
-                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
-                </a></div>
+<li  style="width: 100%; display: inline-block" 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                        <a style="all: unset; display: inline">
+                                <div id="openvidu-pro-tag"
+                                        style=" pointer-events: none; float: left; margin-right: 12px; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">
+                                        PRO</div>
+                        </a>
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../openvidu-pro/">Home</a> 
+        <a class="" href="/docs/openvidu-pro/">Home</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+        <a class="" href="/docs/openvidu-pro/scalability/">Scalability</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+        <a class="" href="/docs/openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../openvidu-pro/scalability/">Scalability</a> 
+        <a class="" href="/docs/openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deploying OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/aws/">AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/on-premise/">On premise</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../openvidu-pro/REST-API-pro/">REST API Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/kubernetes/">Kubernetes</a> 
 </li>
 
  
 </li>
 </ul>
 
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/REST-API-pro/">REST API Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/">OpenVidu Server Pro configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/">OpenVidu Server Pro CDR</a> 
+</li>
+
+ 
+</li>
 </ul>
-						</li>
-						 
-					</ul>
-				</div>
-				&nbsp;
-			</nav>
-		</div>
 
-		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-			
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					 
+				</ul>
+			</div>
+			&nbsp;
+		</nav>
+	</div>
+
+	<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+		
+		<div>
 			<div>
-				<div>
 
-					<div role="main">
-						<div class="section">
-							 <h2 id="section-title">Releases</h2>
+				<div role="main">
+					<div class="section">
+						 <h2 id="section-title">Releases</h2>
 
 <hr>
 
 <ul>
+<li><a href="#2120">2.12.0</a></li>
 <li><a href="#2110">2.11.0</a></li>
 <li><a href="#2100">2.10.0</a></li>
 <li><a href="#290">2.9.0</a></li>
@@ -536,8 +671,180 @@ active: documentation
 <li><a href="#190-beta-1">1.9.0-beta-1</a></li>
 </ul>
 <hr />
-<h2 id="2110">2.11.0</h2>
+<h2 id="2120">2.12.0</h2>
 <h3 id="artifacts">Artifacts</h3>
+<table class="artifact-table">
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Compatible Version</th>
+    <th>Link</th>
+    <th class="last-table-col">Info</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser" target="_blank">NPM</a></td>
+    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.12.0" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.12.0" target="_blank">GitHub</a></td>
+    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-java-client</td>
+    <td>MVN package</td>
+    <td>2.12.1</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.12.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-webcomponent</td>
+    <td>ZIP</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.12.0" target="_blank">GitHub</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Web Component. Easier way to add OpenVidu video calls to your existing web application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-angular</td>
+    <td>NPM package</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-angular" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Angular. Easier way to add OpenVidu video calls to your existing Angular application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-react</td>
+    <td>NPM package</td>
+    <td>2.12.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-react" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu React. Easier way to add OpenVidu video calls to your existing React application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>Kurento Media Server</td>
+    <td>Ubuntu package</td>
+    <td>6.13.0</td>
+    <td><a class="" href="https://doc-kurento.readthedocs.io/en/6.13.0/user/installation.html#local-installation" target="_blank">Kurento Docs</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="Core component in charge of the media transmissions" class="icon ion-information-circled"></i></td>
+  </tr>
+
+</table>
+
+<h3 id="release-notes">Release Notes</h3>
+<h4 id="new-features-in-openvidu-ce">NEW FEATURES IN OPENVIDU CE</h4>
+<p><br></p>
+<h5 id="ip-cameras-support">IP cameras support</h5>
+<p>You can now publish IP cameras into an OpenVidu Session!. You users will be able to receive it as they receive any other regular webcam stream. With this new feature you can for example implement surveillance systems in the blink of an eye. How about receiving your IP camera video in your mobile app? And what about building a web dashboard where you can observe all of your security cameras footage in real-time? So many possibilities…</p>
+<blockquote>
+<p>You can check out <a href="/docs/advanced-features/ip-cameras/" target="_blank">IP cameras</a> section of
+OpenVidu official documentation to learn more</p>
+</blockquote>
+<p><br></p>
+<h5 id="send-signals-from-your-backend">Send signals from your backend</h5>
+<p>You are now able to send messages to the participants of an OpenVidu Session from your application’s backend with method <a href="/docs/reference-docs/REST-API/#post-apisignal" target="_blank">POST /api/signal</a>. This feature brings the power of <a href="/docs/cheatsheet/send-messages/" target="_blank">client side messaging</a> to your server side.</p>
+<p><br></p>
+<h5 id="record-your-webapp-with-composite-layout">Record your webapp with COMPOSITE layout</h5>
+<p>You can now use custom recording layouts deployed outside of OpenVidu Server host. Before it was mandatory to build an HTML/CSS layout and upload it to OpenVidu Server host before you could use it as a custom recording layout. But now you can record any webpage hosted anywhere. More information <a href="/docs/advanced-features/recording/#using-an-external-custom-layout" target="_blank">here</a>.</p>
+<p><br></p>
+<h5 id="new-cdrwebhook-event-filtereventdispatched">New CDR/Webhook event <code>filterEventDispatched</code></h5>
+<p>You can now register <a href="/docs/reference-docs/openvidu-server-cdr/#filtereventdispatched" target="_blank">filterEventDispatched</a> events in OpenVidu CDR and OpenVidu Webhook services. This way you can know when a <a href="/docs/advanced-features/filters/" target="_blank">voice or video filter</a> has emitted an event from your application’s server side (once you add an event listener to a filter).</p>
+<p><br></p>
+<h5 id="new-data-in-cdrwebhook-event-participantjoined-and-participantleft">New data in CDR/Webhook event <code>participantJoined</code> and <code>participantLeft</code></h5>
+<p>Both <a href="/docs/reference-docs/openvidu-server-cdr/#participantjoined" target="_blank">participantJoined</a> and <a href="/docs/reference-docs/openvidu-server-cdr/#participantleft" target="_blank">participantLeft</a> CDR/Webhook events include now <code>clientData</code> and <code>serverData</code> properties. This allows you to better identify your users from your application’s server side.</p>
+<p><br></p>
+<h5 id="automatic-reconnection-when-connection-is-lost">Automatic reconnection when connection is lost</h5>
+<p>Now your clients can listen to brand new reconnection events triggered by <a href="https://openvidu.io/api/openvidu-browser/classes/session.html" target="_blank">Session</a> object: <code>reconnecting</code> and <code>reconnected</code> events. <code>reconnecting</code> event is triggered when a client connected to a Session loses its network connection with OpenVidu. Automatically openvidu-browser tries to reconnect to the Session with an endless polling. Once the client recovers its network connection, openvidu-browser will automatically try to reset the user state in the session. If it is too late and OpenVidu has already evicted the user due to inactivity, then a <a href="https://openvidu.io/api/openvidu-browser/classes/sessiondisconnectedevent.html" target="_blank">SessionDisconnectedEvent</a> with reason <code>networkDisconnect</code> will be triggered. If the user reconnected on time, everything’s back to normal, event <code>reconnected</code> will be  dispatched by the Session object and media connections will be automatically re-established if necessary (see <a href="#media-freeze-bug">Media freeze bug</a> in BUG FIXES).</p>
+<blockquote>
+<p>You can check out <a href="/docs/advanced-features/automatic-reconnection/" target="_blank">Automatic reconnection</a> section of OpenVidu official documentation to learn more</p>
+</blockquote>
+<p><br></p>
+<h5 id="switch-from-camera-to-screenshare-instantly">Switch from camera to screenshare instantly</h5>
+<p>You can use new <a href="/api/openvidu-browser/classes/publisher.html#replacetrack" target="_blank">Publisher.replaceTrack()</a> method available in openvidu-browser to change the audio or video tracks of a Publisher object on the fly, without unpublishing and re-publishing again (so, no need of WebRTC renegotiation!). This also helps changing the video track (front camera for back camera, webcam for screenshare…) keeping your audio connection at all times.</p>
+<blockquote>
+<p>You can check out <a href="/docs/advanced-features/switch-camera/" target="_blank">Switch camera</a> section of OpenVidu official documentation to learn more</p>
+</blockquote>
+<p><br></p>
+<h5 id="change-publisherspeakingevents-configuration-on-the-fly-in-your-clients">Change publisherSpeakingEvents configuration on the fly in your clients</h5>
+<p>New method <a href="/api/openvidu-browser/classes/streammanager.html#updatepublisherspeakingeventsoptions" target="_blank">StreamManager.updatePublisherSpeakingEventsOptions()</a> allows you to dynamically change the threshold for audio events in openvidu-browser. Affected events are <code>publisherStartSpeaking</code>, <code>publisherStopSpeaking</code> and <code>streamAudioVolumeChange</code>. This way you can adjust in real time the limits and frequency of audio stream polling in the browser to make better use of these events.</p>
+<p><br></p>
+<h5 id="all-the-goodnes-from-kurento-6120-and-6130-releases">All the goodnes from Kurento 6.12.0 and 6.13.0 releases</h5>
+<p>OpenVidu 2.12.0 is now using the latest 6.13.0 version of <a href="https://doc-kurento.readthedocs.io/en/6.13.0/" target="_blank">Kurento</a>. There are lots of improvements in both Kurento 6.12.0 and 6.13.0, including some several critical bug fixes. You can take a look to all of them here:</p>
+<ul>
+<li><a href="https://doc-kurento.readthedocs.io/en/6.13.0/project/relnotes/v6_12_0.html#" target="_blank">Kurento 6.12.0 Release Notes</a></li>
+<li><a href="https://doc-kurento.readthedocs.io/en/6.13.0/project/relnotes/v6_13_0.html" target="_blank">Kurento 6.13.0 Release Notes</a></li>
+</ul>
+<p><br></p>
+<h4 id="new-features-in-openvidu-pro">NEW FEATURES IN OPENVIDU PRO</h4>
+<p><br></p>
+<h5 id="new-payment-method">New payment method</h5>
+<p>This is possibly the biggest change for this release. The number of customers of our OpenVidu Pro tier has increased considerably in recent times, and we needed to facilitate the process of subscribing to OpenVidu Pro. We have introduced a new <strong>license key</strong> system for deploying OpenVidu Pro. Now anyone can create an <a href="/account" target="_blank">OpenVidu account</a>, and in just a few clicks you will be able to purchase an OpenVidu Pro license to launch as many OpenVidu Pro clusters as you want.</p>
+<blockquote>
+<p>Visit <a href="/pricing" target="_blank">Pricing</a> section to learn more about the new OpenVidu Pro subscription model. You have a <strong>15-day free trial period</strong> when registering as an OpenVidu user!</p>
+</blockquote>
+<p><br></p>
+<h5 id="simplified-pricing">Simplified pricing</h5>
+<p>Related to previous point, we have now removed the minimum 10$ per month fee and users receive a 15-day free trial period when they <a href="/account" target="_blank">register as OpenVidu users</a>. Check it out now for free!</p>
+<p><br></p>
+<h5 id="dynamic-scalability">Dynamic scalability</h5>
+<p>OpenVidu Pro 2.11.0 allowed you to initialize your OpenVidu Pro cluster with a fixed number of Media Nodes. Now you can add and remove as many Media Nodes as you want on the fly from <strong>OpenVidu Inspector </strong>or through <strong>OpenVidu Pro REST API</strong>. Visit <a href="/docs/openvidu-pro/scalability/" target="_blank">Scalability</a> section to learn more.</p>
+<p><br></p>
+<h5 id="openvidu-inspector-big-upgrade">OpenVidu Inspector big upgrade</h5>
+<p><a href="/docs/openvidu-pro/openvidu-inspector/" target="_blank">OpenVidu Inspector</a> has undergone a major upgrade to support the new clustering features of OpenVidu Pro 2.12.0. You can now <a href="/docs/openvidu-pro/openvidu-inspector/#cluster-management" target="_blank">manage your cluster</a> directly from OpenVidu Inspector. Besides, it is now built with Angular 9, which makes it even more efficient and less heavy!</p>
+<p><br></p>
+<h5 id="detailed-session-monitoring-improved">Detailed session monitoring improved</h5>
+<p>OpenVidu Pro is now using the <a href="https://www.elastic.co/blog/elastic-stack-7-6-0-released" target="_blank">latest Elasticsearch and Kibana version</a>. And every new event and important piece of information generated by 2.12.0 is of course stored and processed for later use. Visit <a href="/docs/openvidu-pro/detailed-session-monitoring/" target="_blank">Detailed session monitoring</a> section to learn more.</p>
+<p><br></p>
+<h4 id="bug-fixes">BUG FIXES</h4>
+<ul>
+<li><em>Media freeze bug</em>: media connections are now automatically re-negotiated under the hood if they remain freezed after a user is successfully reconnected following a network failure. This happens when a user loses its Internet connection and manages to reconnect to OpenVidu before it was automatically evicted from the Session, but its media streams are broken. This is so because media connections flow through their own plane, separated from Client-OpenViduServer signaling plane.</li>
+<li><em>openvidu-server</em>: race condition fixed for same final user establishing more than one connection to a session at the same time. This might be related to some sessions getting stuck even when no participants are connected to it.</li>
+<li><em>openvidu-server</em>: concurrency problems when closing a session being recorded in COMPOSED video mode (fix for <a href="https://github.com/OpenVidu/openvidu/issues/364" target="_blank">issue 364</a>). Other possible concurrency problems of the same nature have also been addressed, so stability of OpenVidu Server should have improved for these kind of corner cases.</li>
+<li><em>openvidu-server</em>: configuration parameter <code>openvidu.recording.public-access</code> could not take effect when set to false. Now it always does.</li>
+<li><em>openvidu-browser</em>: <a href="/api/openvidu-browser/classes/localrecorder.html" target="_blank">LocalRecorder</a> was broken for recent versions of Firefox. Now <a href="/api/openvidu-browser/classes/localrecorder.html#record" target="_blank">LocalRecorder.record()</a> method has an optional string parameter to indicate the desired <em>mimeType</em>. If none is provided, then default browser codecs wil be used to record media streams in the browser.</li>
+<li><em>openvidu-browser</em>: method <a href="/api/openvidu-browser/classes/openvidu.html#getusermedia" target="_blank">OpenVidu.getUserMedia()</a> was broken when requesting screen sharing. Now it works just fine.</li>
+<li><em>openvidu-browser</em>: setting a listener for <a href="/api/openvidu-browser/classes/streammanagerevent.html" target="_blank">streamAudioVolumeChange</a> event just after initializing a Publisher or Subscriber object could trigger an Exception. Now it doesn’t.</li>
+<li><em>openvidu-browser</em>: <a href="/api/openvidu-browser/classes/session.html#signal" target="_blank">Session.signal()</a> wrong <code>to</code> array now does not trigger a fatal error.</li>
+<li><em>openvidu-node-client</em>: <a href="/api/openvidu-node-client/classes/openvidu.html#constructor" target="_blank">OpenVidu</a> entrypoint object would throw an error if initialized with a URL with no port. Now you can use your openvidu-server domain name without a port (default 443) to initialized it.</li>
+<li><em>OpenVidu Inspector</em>: thumbnails of recording files were sometimes asking for the secret in order to be loaded. Now they don’t.</li>
+</ul>
+<p><br></p>
+<hr />
+<h2 id="2110">2.11.0</h2>
+<h3 id="artifacts_1">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -629,7 +936,7 @@ active: documentation
 
 </table>
 
-<h3 id="release-notes">Release Notes</h3>
+<h3 id="release-notes_1">Release Notes</h3>
 <h4 id="new-features-in-openvidu-community">NEW FEATURES IN OPENVIDU COMMUNITY</h4>
 <p><br></p>
 <h5 id="openvidu-webhook-service">OpenVidu Webhook service</h5>
@@ -647,14 +954,14 @@ active: documentation
 <blockquote>
 <p>You have all the information in the official documentation: <a href="https://openvidu.io/docs/reference-docs/openvidu-server-params/#externalizing-configuration" target="_blank">Externalizing configuration</a></p>
 </blockquote>
-<h4 id="new-features-in-openvidu-pro">NEW FEATURES IN OPENVIDU PRO</h4>
+<h4 id="new-features-in-openvidu-pro_1">NEW FEATURES IN OPENVIDU PRO</h4>
 <p><br></p>
 <h5 id="first-version-of-scalability">First version of scalability</h5>
-<p>Finally OpenVidu brings the possibility of deploying a cluster with multiple media server instances. OpenVidu Pro will distribute your sessions among all available media servers based on their current load. Take a look to the official OpenVidu Pro tier documentation to learn more: <a href="https://openvidu.io/docs/openvidu-pro/scalability" target="_blank">Scalability</a></p>
+<p>Finally OpenVidu brings the possibility of deploying a cluster with multiple Media Nodes. OpenVidu Pro will distribute your sessions among all available Media Nodes based on their current load. Take a look to the official OpenVidu Pro tier documentation to learn more: <a href="https://openvidu.io/docs/openvidu-pro/scalability" target="_blank">Scalability</a></p>
 <p><br></p>
 <h5 id="persistent-configuration-when-restarting-openvidu-server-pro">Persistent configuration when restarting OpenVidu Server Pro</h5>
-<p>Whenever you restart OpenVidu Server Pro by using the <a href="https://openvidu.io/docs/openvidu-pro/REST-API-pro/#post-prorestart" target="_blank">REST API</a>, the new parameters you provide will be saved to disk. This way you will be able to stop the service or even the host without losing the last configuration you provided when restarting OpenVidu Server Pro through REST API.</p>
-<h4 id="bug-fixes">BUG FIXES</h4>
+<p>Whenever you restart OpenVidu Server Pro by using the <a href="https://openvidu.io/docs/openvidu-pro/reference-docs/REST-API-pro/#post-prorestart" target="_blank">REST API</a>, the new parameters you provide will be saved to disk. This way you will be able to stop the service or even the host without losing the last configuration you provided when restarting OpenVidu Server Pro through REST API.</p>
+<h4 id="bug-fixes_1">BUG FIXES</h4>
 <ul>
 <li><em>openvidu-browser</em>: when sharing the entire screen in Electron, no Publisher was being initalized. Now it does.</li>
 <li><em>openvidu-browser</em>: mobile devices where sending a streamPropertyChanged event when rotating the phone even when the Publisher wasn't being published to the session (error on the websocket connection). Now they don't.</li>
@@ -670,7 +977,7 @@ active: documentation
 <p><br></p>
 <hr />
 <h2 id="2100">2.10.0</h2>
-<h3 id="artifacts_1">Artifacts</h3>
+<h3 id="artifacts_2">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -762,7 +1069,7 @@ active: documentation
 
 </table>
 
-<h3 id="release-notes_1">Release Notes</h3>
+<h3 id="release-notes_2">Release Notes</h3>
 <h4 id="new-features">NEW FEATURES</h4>
 <p>This release brings support to more and more clients, so you can expand your OpenVidu client-side range. Of course, they are all compatible with each other and with every other platform already supported.</p>
 <p><br></p>
@@ -786,7 +1093,7 @@ Using Electron means that the same codebase you are already using for your web a
 <p>Internet Explorer support is not part of the open source stack of OpenVidu platform. Please, contact us through <a href="https://openvidu.io/commercial" target="_blank">Commercial</a> page to ask for React Native support. You can then use <a href="https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-internet-explorer/" target="_blank">openvidu-internet-explorer</a> tutorial to quickly get started</p>
 </blockquote>
 <p><br></p>
-<h4 id="bug-fixes_1">BUG FIXES</h4>
+<h4 id="bug-fixes_2">BUG FIXES</h4>
 <ul>
 <li><em>openvidu-angular</em> and <em>openvidu-webcomponent</em> were failing when screen sharing. Now they don’t.</li>
 <li><em>openvidu-browser</em>: screen-sharing streams are not mirrored in the local videos now by default.</li>
@@ -798,7 +1105,7 @@ Using Electron means that the same codebase you are already using for your web a
 <hr />
 <p><br></p>
 <h2 id="290">2.9.0</h2>
-<h3 id="artifacts_2">Artifacts</h3>
+<h3 id="artifacts_3">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -890,7 +1197,7 @@ Using Electron means that the same codebase you are already using for your web a
 
 </table>
 
-<h3 id="release-notes_2">Release Notes</h3>
+<h3 id="release-notes_3">Release Notes</h3>
 <h4 id="new-features_1">NEW FEATURES</h4>
 <p><br></p>
 <h5 id="ubuntu-1804-bionic-support">Ubuntu 18.04 bionic support</h5>
@@ -922,7 +1229,7 @@ Using Electron means that the same codebase you are already using for your web a
 <a href="https://openvidu.io/docs/demos/openvidu-call-ionic/" target="_blank">openvidu-call-ionic</a> (Ionic version of OpenVidu Call for mobile devices) now supports Ionic 4 and works fine in iOS.ready to</li>
 </ul>
 <p><br></p>
-<h4 id="bug-fixes_2">BUG FIXES</h4>
+<h4 id="bug-fixes_3">BUG FIXES</h4>
 <ul>
 <li>For COMPOSED recording with video, when multiple screen sharing streams were being published it crashed. Now it doesn't.</li>
 <li>For COMPOSED recordings with video, when stopping them immediatley after started, sometimes the generated video file would not be playable. Now in this cases <code>failed</code> status is set to this recordings, so you can take care of them properly.</li>
@@ -939,7 +1246,7 @@ Using Electron means that the same codebase you are already using for your web a
 <p><br></p>
 <hr />
 <h2 id="280">2.8.0</h2>
-<h3 id="artifacts_3">Artifacts</h3>
+<h3 id="artifacts_4">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -1031,27 +1338,27 @@ Using Electron means that the same codebase you are already using for your web a
 
 </table>
 
-<h3 id="release-notes_3">Release Notes</h3>
+<h3 id="release-notes_4">Release Notes</h3>
 <h4 id="new-features_2">NEW FEATURES</h4>
 <p><br></p>
 <h5 id="individual-stream-recording">Individual stream recording</h5>
 <p>Finally individual stream recording is available in OpenVidu. When recording a session you can now configure it to store each published stream in its own file.</p>
 <p>This, on the one hand, gives developers lots of freedom to compose any kind of layout and achieve any kind of result once the recording has stopped, by using some post-processing video tool. On the other hand, this type of recording has proven to be 4x more efficient in comparison with previous grid recording in our first tests, allowing a better quality and a higher number of streams per recording, and more simultaneous recordings.</p>
-<p>We have entirely rewritten <a href="../advanced-features/recording/" target="_blank">Recording documentation</a> explaining all these new features. Take a look at it!</p>
+<p>We have entirely rewritten <a href="/docs/advanced-features/recording/" target="_blank">Recording documentation</a> explaining all these new features. Take a look at it!</p>
 <p><br></p>
 <h5 id="audio-only-and-video-only-recording">Audio-only and video-only recording</h5>
-<p>Configure your recordings to be audio-only or video-only. This is available for both <code>COMPOSED</code> and <code>INDIVIDUAL</code> recordings. It is worth mentioning that audio-only <code>COMPOSED</code> recordings takes advantage of the new recording capabilities introduced in this release to make it an extremley efficient process. Check out the <strong><a href="../advanced-features/recording/#audio-only-and-video-only-recordings" target="_blank">full documentation</a></strong> on this subject.</p>
+<p>Configure your recordings to be audio-only or video-only. This is available for both <code>COMPOSED</code> and <code>INDIVIDUAL</code> recordings. It is worth mentioning that audio-only <code>COMPOSED</code> recordings takes advantage of the new recording capabilities introduced in this release to make it an extremley efficient process. Check out the <strong><a href="/docs/advanced-features/recording/#audio-only-and-video-only-recordings" target="_blank">full documentation</a></strong> on this subject.</p>
 <p><br></p>
 <h5 id="other-improvements">Other improvements</h5>
 <ul>
 <li>New property <code>resolution</code> when starting recordings. With it you can set the width and height in pixels of the recorded file. This is only available for <code>COMPOSED</code> recordings. <code>INDIVIDUAL</code> recordings will always record the video files with the native resolution of each video stream</li>
-<li>Automatic stop of recordings is greatly improved. Check it out <strong><a href="../advanced-features/recording/#automatic-stop-of-recordings" target="_blank">here</a></strong></li>
+<li>Automatic stop of recordings is greatly improved. Check it out <strong><a href="/docs/advanced-features/recording/#automatic-stop-of-recordings" target="_blank">here</a></strong></li>
 <li>New property <strong><a href="https://openvidu.io/api/openvidu-browser/classes/stream.html#creationtime" target="_blank">Stream.creationTime</a></strong> in OpenVidu Browser. This is the time when a stream was created in OpenVidu Server. Reflects the real starting time of the media stream transmission on the server side.</li>
 <li>OpenVidu Server now destroys any stranded recording container left on the host on start up. This allows keeping the host machine clean when restarting the service</li>
-<li>New REST method available in OpenVidu Server: <code>GET /config</code>. You can consult OpenVidu Server version and all active configuration properties with it. Check it out <strong><a href="../reference-docs/REST-API/#get-config" target="_blank">here</a></strong>.</li>
+<li>New REST method available in OpenVidu Server: <code>GET /config</code>. You can consult OpenVidu Server version and all active configuration properties with it. Check it out <strong><a href="/docs/reference-docs/REST-API/#get-config" target="_blank">here</a></strong>.</li>
 </ul>
 <p><br></p>
-<h4 id="bug-fixes_3">BUG FIXES</h4>
+<h4 id="bug-fixes_4">BUG FIXES</h4>
 <ul>
 <li>Fixed a problem that was causing unexpected websocket disconnections from OpenVidu Server due to HttpSessions expiring after half an hour. It has been fixed by adding real reconnection capailities to websockets established from clients. This also fixes a problem with recordings longer than 30 minutes sometimes failing. <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/146" target="_blank">#146</a></em></li>
 <li>Recording layout improved: default BEST_FIT layout used in COMPOSED recordings was including small black bars in the upper and left margins of the layout, that were visible in the final video file. This is now fixed.</li>
@@ -1063,132 +1370,12 @@ Using Electron means that the same codebase you are already using for your web a
 <p>Even though this is not a major update with incompatibility changes according to <em>semver</em>, there are in fact a couple of changes that are worth mentioning:</p>
 <ul>
 <li>Recorded files folder structure has changed: each recording is stored now in its own folder, named after the unique recording id. This doesn't affect the recordings management through REST API, openvidu-java-client or openvidu-node-client. But if you were locally managing the recordings, then a new folder structure is expected now.</li>
-<li>openvidu-node-client: Recording properties <code>Recording.hasAudio</code>, <code>Recording.hasVideo</code> and  <code>Recording.name</code> have been included into new <a href="../../api/openvidu-node-client/classes/recording.html#properties" target="_blank">Recording.properties</a> attribute: <code>Recording.properties.hasAudio</code>, <code>Recording.properties.hasVideo</code> and <code>Recording.properties.name</code></li>
+<li>openvidu-node-client: Recording properties <code>Recording.hasAudio</code>, <code>Recording.hasVideo</code> and  <code>Recording.name</code> have been included into new <a href="/api/openvidu-node-client/classes/recording.html#properties" target="_blank">Recording.properties</a> attribute: <code>Recording.properties.hasAudio</code>, <code>Recording.properties.hasVideo</code> and <code>Recording.properties.name</code></li>
 </ul>
 <p><br></p>
 <hr />
 <p><br></p>
 <h2 id="270">2.7.0</h2>
-<h3 id="artifacts_4">Artifacts</h3>
-<table class="artifact-table">
-
-  <tr>
-    <th>Artifact</th>
-    <th>Type</th>
-    <th>Compatible Version</th>
-    <th>Link</th>
-    <th class="last-table-col">Info</th>
-  </tr>
-
-  <tr>
-    <td rowspan="2">openvidu-browser</td>
-    <td>NPM package</td>
-    <td>2.7.0</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser" target="_blank">NPM</a></td>
-    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
-  </tr>
-  <tr>
-    <td>JS file</td>
-    <td>2.7.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.7.0" target="_blank">GitHub</a></td>
-  </tr>
-
-  <tr>
-    <td rowspan="3">openvidu-server</td>
-    <td>JAR</td>
-    <td>2.7.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.7.0" target="_blank">GitHub</a></td>
-    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
-  </tr>
-  <tr>
-    <td>Docker container</td>
-    <td>2.7.0</td>
-    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
-  </tr>
-    <tr>
-    <td>Docker container (+KMS)</td>
-    <td>2.7.0</td>
-    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-java-client</td>
-    <td>MVN package</td>
-    <td>2.5.0</td>
-    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.5.0%7Cjar" target="_blank">MVN Repository</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-node-client</td>
-    <td>NPM package</td>
-    <td>2.5.0</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client" target="_blank">NPM</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-webcomponent</td>
-    <td>ZIP</td>
-    <td>2.7.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.7.0" target="_blank">GitHub</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Web Component. Easier way to add OpenVidu video calls to your existing web application" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-angular</td>
-    <td>NPM package</td>
-    <td>2.7.1</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-angular" target="_blank">NPM</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Angular. Easier way to add OpenVidu video calls to your existing Angular application" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-react</td>
-    <td>NPM package</td>
-    <td>2.7.1</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-react" target="_blank">NPM</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu React. Easier way to add OpenVidu video calls to your existing React application" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>Kurento Media Server</td>
-    <td>Ubuntu package</td>
-    <td>6.8.1</td>
-    <td><a class="" href="https://doc-kurento.readthedocs.io/en/6.8.1/user/installation.html#local-installation" target="_blank">Kurento Docs</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="Core component in charge of the media transmissions" class="icon ion-information-circled"></i></td>
-  </tr>
-
-</table>
-
-<h3 id="release-notes_4">Release Notes</h3>
-<h4 id="new-features_3">NEW FEATURES</h4>
-<p><br></p>
-<h5 id="safari-support">Safari support</h5>
-<p>OpenVidu finally brings Safari to its collection of supported platforms. Two things to take into account when developing a Safari compatible application:</p>
-<ul>
-<li>If there are gonna be other types of clients rather than Safari connecting to the same session, then transcoding will be necessary in OpenVidu Server. This will bring up CPU load significantly. This behavior is due to Safari not supporting any other codec than H264, when rest of platforms usually prefer VP8. Good news is this is a problem that will soon fix on its own: Safari will support VP8 in the near future (see <a href="https://webkit.org/blog/8475/release-notes-for-safari-technology-preview-68/" target="_blank">Release 68 Notes</a>)</li>
-<li>A little hack is needed in your app if your Safari users are gonna have <code>SUBSCRIBER</code> role (only receiving video, without accessing their microphone or camera). <a href="../troubleshooting/#11-my-safari-users-with-role-subscriber-are-not-able-to-receive-any-remote-video" target="_blank">Learn more here</a></li>
-</ul>
-<p><br></p>
-<h5 id="ionic-support-for-ios">Ionic support for iOS</h5>
-<p>Apple support is completed with Ionic platform for iOS. Now you can implement an Ionic app that will compile OK into an iOS native application. Our <a href="../tutorials/openvidu-ionic/" target="_blank">openvidu-ionic</a> tutorial is now fully compatible with iPhones and iPads. We recommend to use it as a starting point for your Android/iOS application, but in openvidu-ionic tutorial you also have everything you need to integrate OpenVidu in any Ionic app. Take a look at it!</p>
-<p><br></p>
-<h5 id="new-event-streamaudiovolumechange">New event <code>streamAudioVolumeChange</code></h5>
-<p>You can now listen to volume changes in any Publisher or Subscriber object. You can, for example, add a real-time audio wave or perform some action when certain level of noise or silence is reached. More details <a href="../advanced-features/speech-detection/#audio-volume-detection" target="_blank">here</a>.</p>
-<h4 id="bug-fixes_4">BUG FIXES</h4>
-<p><br></p>
-<ul>
-<li>Recording layout now internally hides cursor (no need of styling the layout with <code>cursor:none</code>). <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/138" target="_blank">#138</a></em></li>
-<li>Recording stopping process reinforced to terminate and gracefully generate video files for failed recording containers (those that do not receive any video from the session caused by a misconfiguration or a wrong custom recording layout). This will help getting rid off dead containers and keeping OpenVidu Server clean. <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/148" target="_blank">#148</a></em></li>
-<li>Mirroring local video fix: when changing to screen-share, local video is now un-mirrored, and viceversa. <em>Issue <a href="https://github.com/OpenVidu/openvidu-call/issues/13" target="_blank">#13</a></em></li>
-<li>Sessions configured with <code>Recording.MANUAL</code> now automatically stop their recording if last participant left the session and no user published to the same session in 2 minutes. <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/149" target="_blank">#149</a></em></li>
-<li><code>Publisher.publishAudio</code> and <code>Publisher.publishVideo</code> may be called without having initialized a Session or having called <code>Session.publish(Publisher)</code></li>
-</ul>
-<p><br></p>
-<hr />
-<p><br></p>
-<h2 id="260">2.6.0</h2>
 <h3 id="artifacts_5">Artifacts</h3>
 <table class="artifact-table">
 
@@ -1203,31 +1390,31 @@ Using Electron means that the same codebase you are already using for your web a
   <tr>
     <td rowspan="2">openvidu-browser</td>
     <td>NPM package</td>
-    <td>2.6.0</td>
+    <td>2.7.0</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-browser" target="_blank">NPM</a></td>
     <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>JS file</td>
-    <td>2.6.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.6.0" target="_blank">GitHub</a></td>
+    <td>2.7.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.7.0" target="_blank">GitHub</a></td>
   </tr>
 
   <tr>
     <td rowspan="3">openvidu-server</td>
     <td>JAR</td>
-    <td>2.6.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.6.0" target="_blank">GitHub</a></td>
+    <td>2.7.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.7.0" target="_blank">GitHub</a></td>
     <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>Docker container</td>
-    <td>2.6.0</td>
+    <td>2.7.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
   </tr>
     <tr>
     <td>Docker container (+KMS)</td>
-    <td>2.6.0</td>
+    <td>2.7.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
   </tr>
 
@@ -1250,15 +1437,15 @@ Using Electron means that the same codebase you are already using for your web a
   <tr>
     <td>openvidu-webcomponent</td>
     <td>ZIP</td>
-    <td>2.6.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.6.0" target="_blank">GitHub</a></td>
+    <td>2.7.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.7.0" target="_blank">GitHub</a></td>
     <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Web Component. Easier way to add OpenVidu video calls to your existing web application" class="icon ion-information-circled"></i></td>
   </tr>
 
   <tr>
     <td>openvidu-angular</td>
     <td>NPM package</td>
-    <td>2.6.0</td>
+    <td>2.7.1</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-angular" target="_blank">NPM</a></td>
     <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Angular. Easier way to add OpenVidu video calls to your existing Angular application" class="icon ion-information-circled"></i></td>
   </tr>
@@ -1266,7 +1453,7 @@ Using Electron means that the same codebase you are already using for your web a
   <tr>
     <td>openvidu-react</td>
     <td>NPM package</td>
-    <td>2.6.0</td>
+    <td>2.7.1</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-react" target="_blank">NPM</a></td>
     <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu React. Easier way to add OpenVidu video calls to your existing React application" class="icon ion-information-circled"></i></td>
   </tr>
@@ -1282,29 +1469,149 @@ Using Electron means that the same codebase you are already using for your web a
 </table>
 
 <h3 id="release-notes_5">Release Notes</h3>
+<h4 id="new-features_3">NEW FEATURES</h4>
+<p><br></p>
+<h5 id="safari-support">Safari support</h5>
+<p>OpenVidu finally brings Safari to its collection of supported platforms. Two things to take into account when developing a Safari compatible application:</p>
+<ul>
+<li>If there are gonna be other types of clients rather than Safari connecting to the same session, then transcoding will be necessary in OpenVidu Server. This will bring up CPU load significantly. This behavior is due to Safari not supporting any other codec than H264, when rest of platforms usually prefer VP8. Good news is this is a problem that will soon fix on its own: Safari will support VP8 in the near future (see <a href="https://webkit.org/blog/8475/release-notes-for-safari-technology-preview-68/" target="_blank">Release 68 Notes</a>)</li>
+<li>A little hack is needed in your app if your Safari users are gonna have <code>SUBSCRIBER</code> role (only receiving video, without accessing their microphone or camera). <a href="/docs/troubleshooting/#11-my-safari-users-with-role-subscriber-are-not-able-to-receive-any-remote-video" target="_blank">Learn more here</a></li>
+</ul>
+<p><br></p>
+<h5 id="ionic-support-for-ios">Ionic support for iOS</h5>
+<p>Apple support is completed with Ionic platform for iOS. Now you can implement an Ionic app that will compile OK into an iOS native application. Our <a href="/docs/tutorials/openvidu-ionic/" target="_blank">openvidu-ionic</a> tutorial is now fully compatible with iPhones and iPads. We recommend to use it as a starting point for your Android/iOS application, but in openvidu-ionic tutorial you also have everything you need to integrate OpenVidu in any Ionic app. Take a look at it!</p>
+<p><br></p>
+<h5 id="new-event-streamaudiovolumechange">New event <code>streamAudioVolumeChange</code></h5>
+<p>You can now listen to volume changes in any Publisher or Subscriber object. You can, for example, add a real-time audio wave or perform some action when certain level of noise or silence is reached. More details <a href="/docs/advanced-features/speech-detection/#audio-volume-detection" target="_blank">here</a>.</p>
+<h4 id="bug-fixes_5">BUG FIXES</h4>
+<p><br></p>
+<ul>
+<li>Recording layout now internally hides cursor (no need of styling the layout with <code>cursor:none</code>). <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/138" target="_blank">#138</a></em></li>
+<li>Recording stopping process reinforced to terminate and gracefully generate video files for failed recording containers (those that do not receive any video from the session caused by a misconfiguration or a wrong custom recording layout). This will help getting rid off dead containers and keeping OpenVidu Server clean. <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/148" target="_blank">#148</a></em></li>
+<li>Mirroring local video fix: when changing to screen-share, local video is now un-mirrored, and viceversa. <em>Issue <a href="https://github.com/OpenVidu/openvidu-call/issues/13" target="_blank">#13</a></em></li>
+<li>Sessions configured with <code>Recording.MANUAL</code> now automatically stop their recording if last participant left the session and no user published to the same session in 2 minutes. <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/149" target="_blank">#149</a></em></li>
+<li><code>Publisher.publishAudio</code> and <code>Publisher.publishVideo</code> may be called without having initialized a Session or having called <code>Session.publish(Publisher)</code></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+<h2 id="260">2.6.0</h2>
+<h3 id="artifacts_6">Artifacts</h3>
+<table class="artifact-table">
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Compatible Version</th>
+    <th>Link</th>
+    <th class="last-table-col">Info</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser" target="_blank">NPM</a></td>
+    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.6.0" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.6.0" target="_blank">GitHub</a></td>
+    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-java-client</td>
+    <td>MVN package</td>
+    <td>2.5.0</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.5.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>2.5.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-webcomponent</td>
+    <td>ZIP</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.6.0" target="_blank">GitHub</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Web Component. Easier way to add OpenVidu video calls to your existing web application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-angular</td>
+    <td>NPM package</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-angular" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu Angular. Easier way to add OpenVidu video calls to your existing Angular application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-react</td>
+    <td>NPM package</td>
+    <td>2.6.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-react" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu React. Easier way to add OpenVidu video calls to your existing React application" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>Kurento Media Server</td>
+    <td>Ubuntu package</td>
+    <td>6.8.1</td>
+    <td><a class="" href="https://doc-kurento.readthedocs.io/en/6.8.1/user/installation.html#local-installation" target="_blank">Kurento Docs</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="Core component in charge of the media transmissions" class="icon ion-information-circled"></i></td>
+  </tr>
+
+</table>
+
+<h3 id="release-notes_6">Release Notes</h3>
 <h4 id="new-features_4">NEW FEATURES</h4>
 <p><br></p>
 <h5 id="ionic-support">Ionic support</h5>
-<p>There's a <a href="../tutorials/openvidu-ionic/" target="_blank">complete tutorial</a> in OpenVidu Docs to get a native Android app working with OpenVidu in just a few steps. You can just clone and use our sample application as a starting point or maybe you want to add OpenVidu to your existing Ionic app. <a href="../tutorials/openvidu-ionic/#android-specific-requirements" target="_blank">Here you have</a> the necessary configuration steps to do so (basically Android permissions stuff).</p>
+<p>There's a <a href="/docs/tutorials/openvidu-ionic/" target="_blank">complete tutorial</a> in OpenVidu Docs to get a native Android app working with OpenVidu in just a few steps. You can just clone and use our sample application as a starting point or maybe you want to add OpenVidu to your existing Ionic app. <a href="/docs/tutorials/openvidu-ionic/#android-specific-requirements" target="_blank">Here you have</a> the necessary configuration steps to do so (basically Android permissions stuff).</p>
 <p>We are currently working on making OpenVidu work on iOS with Ionic.</p>
 <p><br></p>
 <h5 id="new-types-of-filters-supported">New types of filters supported</h5>
-<p>OpenVidu 2.5.0 brought a fantastic and a differentiating element: <a href="../advanced-features/filters/" target="_blank">real time audio and video filters</a>. Now we have extended this capability to support new GStreamer based filters such as <strong>textoverlay</strong>, <strong>timeoverlay</strong> or <strong>clockoverlay</strong>.</p>
-<p>You can embed any text, the timestamp of the video or the current time, easily customizing its position and format. Check these filters in <a href="../advanced-features/filters/#gstreamer-filters" target="_blank">GStreamer section</a> of filters documentation.</p>
+<p>OpenVidu 2.5.0 brought a fantastic and a differentiating element: <a href="/docs/advanced-features/filters/" target="_blank">real time audio and video filters</a>. Now we have extended this capability to support new GStreamer based filters such as <strong>textoverlay</strong>, <strong>timeoverlay</strong> or <strong>clockoverlay</strong>.</p>
+<p>You can embed any text, the timestamp of the video or the current time, easily customizing its position and format. Check these filters in <a href="/docs/advanced-features/filters/#gstreamer-filters" target="_blank">GStreamer section</a> of filters documentation.</p>
 <p><br></p>
 <h5 id="recording-service-now-generates-a-thumbnail-when-stopping-the-recording">Recording service now generates a thumbnail when stopping the recording</h5>
 <p>Whenever you stop the recording of a session, OpenVidu will automatically generate a thumbnail for the video, getting it from the middle of the video timeline. You can access it from <code>https://OPENVIDU_SERVER_IP:4443/recordings/RECORDING_NAME.jpg</code></p>
 <p>Do not worry about their lifecycle: they are linked to the video file itself. If you decide to delete the recording, thumbnail will also be deleted.</p>
-<h4 id="bug-fixes_5">BUG FIXES</h4>
+<h4 id="bug-fixes_6">BUG FIXES</h4>
 <p><br></p>
 <h5 id="important-fix-for-increasing-success-rate-in-establishing-media-connections">Important fix for increasing success rate in establishing media connections</h5>
-<p>Time ago we ran into a pretty ugly bug that was causing some problems during WebRTC negotiation, resulting in some clients located in complex networks (like a company's WiFi network) not being able to connect to OpenVidu Server. What developers perceived was that in certain scenarios some users simply couldn't receive or send any media connection.</p>
+<p>Time ago we ran into a pretty ugly bug that was causing some problems during WebRTC negotiation, resulting in some clients located in complex networks (like a company's internal network) not being able to connect to OpenVidu Server. What developers perceived was that in certain scenarios some users simply couldn't receive or send any media connection.</p>
 <p>This bug has been completely solved in OpenVidu 2.6.0. Now media connections will work fine in almost every client network configuration.</p>
 <p><br></p>
 <hr />
 <p><br></p>
 <h2 id="250">2.5.0</h2>
-<h3 id="artifacts_6">Artifacts</h3>
+<h3 id="artifacts_7">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -1388,7 +1695,7 @@ Using Electron means that the same codebase you are already using for your web a
 
 </table>
 
-<h3 id="release-notes_6">Release Notes</h3>
+<h3 id="release-notes_7">Release Notes</h3>
 <h4 id="new-features_5">NEW FEATURES</h4>
 <p><br></p>
 <h5 id="kurento-filters-support">Kurento filters support</h5>
@@ -1460,7 +1767,7 @@ mySession.generateToken(tokenOptions).then(token =&gt; { ... } );
 <h5 id="new-openvidu-angular-and-openvidu-react-libraries">New OpenVidu Angular and OpenVidu React libraries</h5>
 <p>We introduced OpenVidu Web Component in release <a href="#230">2.3.0</a>. Now we offer native libraries for both Angular and React (latest versions) to insert the same powerful component in your applications by making use of each framework capabilities. You can check a tutorial for OpenVidu Angular (<a href="https://openvidu.io/docs/tutorials/openvidu-library-angular/" target="_blank">openvidu-library-angular</a>) and  for OpenVidu React (<a href="https://openvidu.io/docs/tutorials/openvidu-library-react/" target="_blank">openvidu-library-react</a>) right now.</p>
 <p>Of course you can keep using OpenVidu Browser library instead of these components in any frontend framework. These tutorials show a basic use of OpenVidu Browser in an Angular app (<a href="https://openvidu.io/docs/tutorials/openvidu-insecure-angular/" target="_blank">openvidu-insecure-angular</a>) and in a React app (<a href="https://openvidu.io/docs/tutorials/openvidu-insecure-react/" target="_blank">openvidu-insecure-react</a>).</p>
-<h4 id="bug-fixes_6">BUG FIXES</h4>
+<h4 id="bug-fixes_7">BUG FIXES</h4>
 <ul>
 <li>Local tracks now are not stopped on stream disposal if property <em><a href="https://openvidu.io/api/openvidu-browser/interfaces/publisherproperties.html#videosource" target="_blank"><code>PublisherProperties.videoSource</code></a></em> was of type MediaStreamTrack (custom stream got with <em><a href="https://openvidu.io/api/openvidu-browser/classes/openvidu.html#getusermedia" target="_blank"><code>OpenVidu.getUserMedia()</code></a></em>). <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/107" target="_blank">#107</a>, PR <a href="https://github.com/OpenVidu/openvidu/pull/108" target="_blank">#108</a></em></li>
 <li>Deprecated <code>RTCPeerConnection.getRemoteStreams</code> and <code>RTCPeerConnection.getLocalStreams</code> to <code>RTCPeerConnection.getReceivers</code> and <code>RTCPeerConnection.getSenders</code>. <em>Issue <a href="https://github.com/OpenVidu/openvidu/issues/54" target="_blank">#54</a></em></li>
@@ -1472,7 +1779,7 @@ mySession.generateToken(tokenOptions).then(token =&gt; { ... } );
 <hr />
 <p><br></p>
 <h2 id="240">2.4.0</h2>
-<h3 id="artifacts_7">Artifacts</h3>
+<h3 id="artifacts_8">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -1540,7 +1847,7 @@ mySession.generateToken(tokenOptions).then(token =&gt; { ... } );
 
 </table>
 
-<h3 id="release-notes_7">Release Notes</h3>
+<h3 id="release-notes_8">Release Notes</h3>
 <h4 id="new-features_6">NEW FEATURES</h4>
 <p><br></p>
 <h5 id="openvidu-java-client-and-openvidu-node-client-rest-api-support-for-v230">OpenVidu Java Client and OpenVidu Node Client REST API support for v2.3.0</h5>
@@ -1574,7 +1881,7 @@ mySession.generateToken(tokenOptions).then(token =&gt; { ... } );
 <li>New send button (bottom right corner)</li>
 <li>New avatar user in each message. A new snapshot image will be displayed with each new message</li>
 </ul>
-<h4 id="bug-fixes_7">BUG FIXES</h4>
+<h4 id="bug-fixes_8">BUG FIXES</h4>
 <ul>
 <li>OpenVidu Server dashboard test could sometimes fail because of a misuse of TURN server</li>
 <li>OpenVidu Java Client: pending requests bug fixed</li>
@@ -1584,7 +1891,7 @@ mySession.generateToken(tokenOptions).then(token =&gt; { ... } );
 <hr />
 <p><br></p>
 <h2 id="230">2.3.0</h2>
-<h3 id="artifacts_8">Artifacts</h3>
+<h3 id="artifacts_9">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -1652,7 +1959,7 @@ medium
 
 </table>
 
-<h3 id="release-notes_8">Release Notes</h3>
+<h3 id="release-notes_9">Release Notes</h3>
 <h4 id="openvidu-web-component">OPENVIDU WEB COMPONENT</h4>
 <p>OpenVidu platform now offers an easier way to get started: just include our new Web Component into your web and start enjoying video call capabilities with just 3 new lines of code:</p>
 <p>Add to your <code>index.html</code> OpenVidu Web Component files:</p>
@@ -1689,7 +1996,7 @@ Attribute <code>theme</code> can be <code>dark</code> or <code>light</code>. Use
 
 <p>If you give enough width to the component (at least <code>700px</code>), users can communicate through an integrated chat.</p>
 <blockquote>
-<p>To see some images of OpenVidu Web Component in action, check this post on <a href="https://medium.com/@openvidu/openvidu-2-3-0-web-component-and-tons-of-new-features-3341d46cbb54" target="_blank">Medium</a>. If you want to learn more about OpenVidu Web Component, visit <a href="../tutorials/openvidu-webcomponent" target="_blank">Tutorials section</a></p>
+<p>To see some images of OpenVidu Web Component in action, check this post on <a href="https://medium.com/@openvidu/openvidu-2-3-0-web-component-and-tons-of-new-features-3341d46cbb54" target="_blank">Medium</a>. If you want to learn more about OpenVidu Web Component, visit <a href="/docs/tutorials/openvidu-webcomponent" target="_blank">Tutorials section</a></p>
 </blockquote>
 <p><br></p>
 <h4 id="new-features_7">NEW FEATURES</h4>
@@ -1759,7 +2066,7 @@ session.on('streamPropertyChanged', event =&gt; {
 <hr />
 <p><br></p>
 <h2 id="220">2.2.0</h2>
-<h3 id="artifacts_9">Artifacts</h3>
+<h3 id="artifacts_10">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -1819,7 +2126,7 @@ session.on('streamPropertyChanged', event =&gt; {
 
 </table>
 
-<h3 id="release-notes_9">Release Notes</h3>
+<h3 id="release-notes_10">Release Notes</h3>
 <p><br></p>
 <p>OpenVidu now offers <strong>integrated and automated support for TURN server</strong>. We encourage developers to check out our <strong><a href="https://medium.com/@openvidu/openvidu-2-2-0-turn-made-easy-9d7e145f8905" target="_blank">post on Medium</a></strong> to learn more about it.</p>
 <p>The platform now integrates by default a COTURN server as part of its ecosystem. This means that media connections will work OK even when clients are located on restricted networks. When <a href="https://openvidu.io/docs/deployment/deploying-aws/" target="_blank">deploying OpenVidu Server in Amazon Web Services</a> with our Cloud Formation template no changes are required at all. If you are deploying OpenVidu Server on your own in an Ubuntu machine, installation instructions have changed a little bit. You have them properly updated <a href="https://openvidu.io/docs/deployment/deploying-ubuntu/" target="_blank">here</a>.</p>
@@ -1827,77 +2134,6 @@ session.on('streamPropertyChanged', event =&gt; {
 <hr />
 <p><br></p>
 <h2 id="210">2.1.0</h2>
-<h3 id="artifacts_10">Artifacts</h3>
-<table class="artifact-table">
-
-  <tr>
-    <th>Artifact</th>
-    <th>Type</th>
-    <th>Compatible Version</th>
-    <th>Link</th>
-    <th class="last-table-col">Info</th>
-  </tr>
-
-  <tr>
-    <td rowspan="2">openvidu-browser</td>
-    <td>NPM package</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
-    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
-  </tr>
-  <tr>
-    <td>JS file</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
-  </tr>
-
-  <tr>
-    <td rowspan="3">openvidu-server</td>
-    <td>JAR</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
-    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
-  </tr>
-  <tr>
-    <td>Docker container</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
-  </tr>
-    <tr>
-    <td>Docker container (+KMS)</td>
-    <td>2.1.0</td>
-    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-java-client</td>
-    <td>MVN package</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.0.0%7Cjar" target="_blank">MVN Repository</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
-  </tr>
-
-  <tr>
-    <td>openvidu-node-client</td>
-    <td>NPM package</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
-    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
-  </tr>
-
-</table>
-
-<h3 id="release-notes_10">Release Notes</h3>
-<p><br></p>
-<h4 id="new-features_8">NEW FEATURES</h4>
-<p><strong>OpenVidu Browser support for video management</strong></p>
-<p>We have implemented a new class in OpenVidu Browser aimed to better support declarative frontend frameworks such as Angular, React or Vue.js.</p>
-<p>Now Publisher and Subscriber objects both inherit from <a href="./../../api/openvidu-browser/classes/streammanager.html" target="_blank">StreamManager</a>, which provides 2 different methods to tell OpenVidu what DOM video players should display each specific stream (<code>addVideoElement</code> and <code>createVideoElement</code>). This allows us to let OpenVidu take control of the video elements (even if our framework dynamically creates them) and do not worry about its internals. This is all explained in detail in <a href="../cheatsheet/manage-videos" target="_blank">Manage video players</a> section.</p>
-<p>If you want to check out a real example of this behavior, explore our renovated <a href="../tutorials/openvidu-insecure-angular/" target="_blank">OpenVidu Angular tutorial</a>.<br><br></p>
-<p><br></p>
-<hr />
-<p><br></p>
-<h2 id="200">2.0.0</h2>
 <h3 id="artifacts_11">Artifacts</h3>
 <table class="artifact-table">
 
@@ -1912,31 +2148,31 @@ session.on('streamPropertyChanged', event =&gt; {
   <tr>
     <td rowspan="2">openvidu-browser</td>
     <td>NPM package</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
     <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>JS file</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td>2.1.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
   </tr>
 
   <tr>
     <td rowspan="3">openvidu-server</td>
     <td>JAR</td>
-    <td>2.0.0</td>
-    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td>2.1.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.1.0" target="_blank">GitHub</a></td>
     <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
   </tr>
   <tr>
     <td>Docker container</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
   </tr>
     <tr>
     <td>Docker container (+KMS)</td>
-    <td>2.0.0</td>
+    <td>2.1.0</td>
     <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
   </tr>
 
@@ -1960,6 +2196,77 @@ session.on('streamPropertyChanged', event =&gt; {
 
 <h3 id="release-notes_11">Release Notes</h3>
 <p><br></p>
+<h4 id="new-features_8">NEW FEATURES</h4>
+<p><strong>OpenVidu Browser support for video management</strong></p>
+<p>We have implemented a new class in OpenVidu Browser aimed to better support declarative frontend frameworks such as Angular, React or Vue.js.</p>
+<p>Now Publisher and Subscriber objects both inherit from <a href="/api/openvidu-browser/classes/streammanager.html" target="_blank">StreamManager</a>, which provides 2 different methods to tell OpenVidu what DOM video players should display each specific stream (<code>addVideoElement</code> and <code>createVideoElement</code>). This allows us to let OpenVidu take control of the video elements (even if our framework dynamically creates them) and do not worry about its internals. This is all explained in detail in <a href="/docs/cheatsheet/manage-videos" target="_blank">Manage video players</a> section.</p>
+<p>If you want to check out a real example of this behavior, explore our renovated <a href="/docs/tutorials/openvidu-insecure-angular/" target="_blank">OpenVidu Angular tutorial</a>.<br><br></p>
+<p><br></p>
+<hr />
+<p><br></p>
+<h2 id="200">2.0.0</h2>
+<h3 id="artifacts_12">Artifacts</h3>
+<table class="artifact-table">
+
+  <tr>
+    <th>Artifact</th>
+    <th>Type</th>
+    <th>Compatible Version</th>
+    <th>Link</th>
+    <th class="last-table-col">Info</th>
+  </tr>
+
+  <tr>
+    <td rowspan="2">openvidu-browser</td>
+    <td>NPM package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-browser?activeTab=versions" target="_blank">NPM</a></td>
+    <td rowspan="2" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu client side. It is a library for the browser. It allows you to control your videos and sessions directly from your client's browsers" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>JS file</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">openvidu-server</td>
+    <td>JAR</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://github.com/OpenVidu/openvidu/releases/tag/v2.0.0" target="_blank">GitHub</a></td>
+    <td rowspan="3" class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="OpenVidu server side. It receives the remote procedure calls from openvidu-browser and manage all the media streams operations. YOU DON'T HAVE TO MAKE DIRECT USE OF IT. Just to run it and know its IP address and password" class="icon ion-information-circled"></i></td>
+  </tr>
+  <tr>
+    <td>Docker container</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+    <tr>
+    <td>Docker container (+KMS)</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://hub.docker.com/r/openvidu/openvidu-server-kms/tags/" target="_blank">DockerHub</a></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-java-client</td>
+    <td>MVN package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://search.maven.org/#artifactdetails%7Cio.openvidu%7Copenvidu-java-client%7C2.0.0%7Cjar" target="_blank">MVN Repository</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your JAVA server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+  <tr>
+    <td>openvidu-node-client</td>
+    <td>NPM package</td>
+    <td>2.0.0</td>
+    <td><a class="" href="https://www.npmjs.com/package/openvidu-node-client?activeTab=versions" target="_blank">NPM</a></td>
+    <td class="last-table-col"><i data-toggle="tooltip" data-placement="right" title="SDK for your NODE server. Simple alternative to the REST API" class="icon ion-information-circled"></i></td>
+  </tr>
+
+</table>
+
+<h3 id="release-notes_12">Release Notes</h3>
+<p><br></p>
 <p>This is the first breaking change update for OpenVidu, which brings in lots of new features and internal improvements.</p>
 <h4 id="new-features_9">NEW FEATURES</h4>
 <ul>
@@ -1970,7 +2277,7 @@ session.on('streamPropertyChanged', event =&gt; {
 <li><code>Session.signal()</code>: now returns a Promise so you can tell if the method was successful or not.</li>
 <li><code>Subcriber.subscribeToAudio()</code> and <code>Subscriber.subscribeToVideo()</code>: new methods that allows you to mute the audio or video tracks of a remote stream.</li>
 <li>
-<p><code>OpenVidu.initPublisher()</code>: now expects properties as interface <a href="./../../api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a>. They include:</p>
+<p><code>OpenVidu.initPublisher()</code>: now expects properties as interface <a href="/api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a>. They include:</p>
 <pre><code>{
     audioSource: undefined, // The source of audio. If undefined default audio input
     videoSource: undefined, // The source of video. If undefined default video input
@@ -1984,7 +2291,7 @@ session.on('streamPropertyChanged', event =&gt; {
 </code></pre>
 </li>
 <li>
-<p><code>Session.subscribe()</code>: now expects properties as interface <a href="./../../api/openvidu-browser/interfaces/subscriberproperties.html" target="_blank">SubscriberProperties</a>. They include:</p>
+<p><code>Session.subscribe()</code>: now expects properties as interface <a href="/api/openvidu-browser/interfaces/subscriberproperties.html" target="_blank">SubscriberProperties</a>. They include:</p>
 <pre><code>{
     insertMode: 'APPEND',   // How the video will be inserted in the target element
     subscribeToAudio: true, // Whether to initially subscribe to the stream's audio track or not
@@ -1995,7 +2302,7 @@ session.on('streamPropertyChanged', event =&gt; {
 <li>
 <p><code>OpenVidu.getDevices()</code>: now you can use certain video or audio input device when calling <code>OpenVidu.initPublisher()</code>, thanks to properties <code>audioSource</code> or <code>videoSource</code> of <code>PublisherProperties</code> object. Just set these variables to the property <code>deviceId</code> of any of the devices returned by this method.</p>
 </li>
-<li><code>OpenVidu.getUserMedia()</code>: method improved. Now devs can customize a MediaStream object before calling <code>OpenVidu.initPublisher()</code> method, setting property <code>audioSource</code> or <code>videoSource</code> to a MediaStreamTrack object (see <a href="./../../api/openvidu-browser/classes/openvidu.html#getusermedia" target="_blank">docs</a> for further information)<br><br></li>
+<li><code>OpenVidu.getUserMedia()</code>: method improved. Now devs can customize a MediaStream object before calling <code>OpenVidu.initPublisher()</code> method, setting property <code>audioSource</code> or <code>videoSource</code> to a MediaStreamTrack object (see <a href="/api/openvidu-browser/classes/openvidu.html#getusermedia" target="_blank">docs</a> for further information)<br><br></li>
 </ul>
 </li>
 <li>
@@ -2008,33 +2315,33 @@ session.on('streamPropertyChanged', event =&gt; {
 <p><strong>OpenVidu Browser events</strong></p>
 <ul>
 <li>New events <code>accessDialogOpened</code> and <code>accessDialogClosed</code>: dispatched by Publisher objects when the browser asks the user to grant permissions to camera or michrophone by opening a pop-up. You can use them to warn your users about it.</li>
-<li>New events <code>recordingStarted</code> and <code>recordingStopped</code>: dispatched by Session object when the recording of a Session starts and stops. You can customize which clients will receive this event thanks to new property <code>openvidu.recording.notification</code> (see <a href="../reference-docs/openvidu-server-params/" target="_blank">OpenVidu Server configuration</a>)</li>
-<li>Events <code>publisherStartSpeaking</code> and <code>publisherStopSpeaking</code> improved: more customizable thanks to <a href="./../../api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration" target="_blank">OpenVidu.setAdvancedConfiguration()</a> and better overall performance.</li>
-<li>Events <code>streamDestroyed</code>, <code>connectionDestroyed</code> and <code>sessionDisconnected</code> have new property <code>reason</code>. This gives more information about why the events have been dispatched so you can take specific actions depending on the context: maybe a stream has been destroyed because the user publishing has deliberately diposed it or maybe the network connection has unexpectedly closed (see docs for <a href="./../../api/openvidu-browser/classes/streamevent.html" target="_blank">StreamEvent</a>, <a href="./../../api/openvidu-browser/classes/connectionevent.html" target="_blank">ConnectionEvent</a> and <a href="./../../api/openvidu-browser/classes/sessiondisconnectedevent.html" target="_blank">SessionDisconnectedEvent</a>)<br><br></li>
+<li>New events <code>recordingStarted</code> and <code>recordingStopped</code>: dispatched by Session object when the recording of a Session starts and stops. You can customize which clients will receive this event thanks to new property <code>openvidu.recording.notification</code> (see <a href="/docs/reference-docs/openvidu-server-params/" target="_blank">OpenVidu Server configuration</a>)</li>
+<li>Events <code>publisherStartSpeaking</code> and <code>publisherStopSpeaking</code> improved: more customizable thanks to <a href="/api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration" target="_blank">OpenVidu.setAdvancedConfiguration()</a> and better overall performance.</li>
+<li>Events <code>streamDestroyed</code>, <code>connectionDestroyed</code> and <code>sessionDisconnected</code> have new property <code>reason</code>. This gives more information about why the events have been dispatched so you can take specific actions depending on the context: maybe a stream has been destroyed because the user publishing has deliberately diposed it or maybe the network connection has unexpectedly closed (see docs for <a href="/api/openvidu-browser/classes/streamevent.html" target="_blank">StreamEvent</a>, <a href="/api/openvidu-browser/classes/connectionevent.html" target="_blank">ConnectionEvent</a> and <a href="/api/openvidu-browser/classes/sessiondisconnectedevent.html" target="_blank">SessionDisconnectedEvent</a>)<br><br></li>
 </ul>
 </li>
 <li>
 <p><strong>Other improvements in OpenVidu Browser</strong></p>
 <ul>
-<li>Support for <a href="../advanced-features/screen-share/#custom-screen-sharing-extension-for-chrome" target="_blank">custom screen sharing extensions for Chrome</a></li>
-<li>Support for custom STUN and TURN servers in openvidu-browser. Use <a href="./../../api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration" target="_blank">OpenVidu.setAdvancedConfiguration()</a></li>
+<li>Support for <a href="/docs/advanced-features/screen-share/#custom-screen-sharing-extension-for-chrome" target="_blank">custom screen sharing extensions for Chrome</a></li>
+<li>Support for custom STUN and TURN servers in openvidu-browser. Use <a href="/api/openvidu-browser/classes/openvidu.html#setadvancedconfiguration" target="_blank">OpenVidu.setAdvancedConfiguration()</a></li>
 <li>Library size decreased in almost 30% (<em>openvidu-browser.min.js</em> from 300 KB to 216 KB)<br><br></li>
 </ul>
 </li>
 <li>
 <p><strong>OpenVidu Server new features</strong></p>
 <ul>
-<li>New property <code>name</code> for recordings: you can now specify which name should OpenVidu Server give to each one of your recording files. You can do it by using the <strong>REST API</strong> (by setting <a href="../reference-docs/REST-API/#post-apirecordingsstart" target="_blank">body parameter "name" in POST /api/recordings/start</a>), <strong>openvidu-java-client</strong> (by using <a href="./../../api/openvidu-java-client/io/openvidu/java/client/RecordingProperties.Builder.html" target="_blank">RecordingProperties.Builder.name()</a>) or <strong>openvidu-node-client</strong> (by setting property <a href="./../../api/openvidu-node-client/interfaces/recordingproperties.html#name" target="_blank">RecordingProperties.name</a>)</li>
-<li>Now support for initializing sessions with a custom <code>sessionId</code>. You can take advantage of this new property to facilitate the mapping between OpenVidu Server 'session' entities and your own 'session' entities. You can set it by using the <strong>REST API</strong> (by setting <a href="../reference-docs/REST-API/#post-apisessions" target="_blank">body parameter "customSessionId" in POST /api/sessions</a>), <strong>openvidu-java-client</strong> (by using <a href="./../../api/openvidu-java-client/io/openvidu/java/client/SessionProperties.Builder.html" target="_blank">SessionProperties.Builder.customSessionId()</a>) or <strong>openvidu-node-client</strong> (by setting property <a href="./../../api/openvidu-node-client/interfaces/sessionproperties.html#customsessionid" target="_blank">SessionProperties.customSessionId</a>)</li>
+<li>New property <code>name</code> for recordings: you can now specify which name should OpenVidu Server give to each one of your recording files. You can do it by using the <strong>REST API</strong> (by setting <a href="/docs/reference-docs/REST-API/#post-apirecordingsstart" target="_blank">body parameter "name" in POST /api/recordings/start</a>), <strong>openvidu-java-client</strong> (by using <a href="/api/openvidu-java-client/io/openvidu/java/client/RecordingProperties.Builder.html" target="_blank">RecordingProperties.Builder.name()</a>) or <strong>openvidu-node-client</strong> (by setting property <a href="/api/openvidu-node-client/interfaces/recordingproperties.html#name" target="_blank">RecordingProperties.name</a>)</li>
+<li>Now support for initializing sessions with a custom <code>sessionId</code>. You can take advantage of this new property to facilitate the mapping between OpenVidu Server 'session' entities and your own 'session' entities. You can set it by using the <strong>REST API</strong> (by setting <a href="/docs/reference-docs/REST-API/#post-apisessions" target="_blank">body parameter "customSessionId" in POST /api/sessions</a>), <strong>openvidu-java-client</strong> (by using <a href="/api/openvidu-java-client/io/openvidu/java/client/SessionProperties.Builder.html" target="_blank">SessionProperties.Builder.customSessionId()</a>) or <strong>openvidu-node-client</strong> (by setting property <a href="/api/openvidu-node-client/interfaces/sessionproperties.html#customsessionid" target="_blank">SessionProperties.customSessionId</a>)</li>
 <li>Call Detail Record extended: new events <code>recordingStarted</code> and <code>recordingStopped</code>, property <code>reason</code> for events <code>sessionDestroyed</code>, <code>participantLeft</code> and <code>webrtcConnectionDestroyed</code>.</li>
 </ul>
 </li>
 </ul>
-<h4 id="bug-fixes_8">BUG FIXES</h4>
+<h4 id="bug-fixes_9">BUG FIXES</h4>
 <ul>
 <li>Now when any participant unexpectedly disconnects from a session (for example, due to a network failure), <code>connectionDestroyed</code> event is sent to the rest of participants with property <code>reason</code> set to <code>networkDisconnect</code>.</li>
 <li>When OpenVidu Server is stopped, it will try to gracefully finish every in progress session and recording. This way no recording file will end corrupted upon OpenVidu Server termination (this cannot be granted if the process crashes or is forcibly terminated)</li>
-<li>Now both STUN and TURN <a href="../reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openVidu-server-docker-container" target="_blank">OpenVidu Server configuration parameters</a> can be set up at the same time with no overwritings.</li>
+<li>Now both STUN and TURN <a href="/docs/reference-docs/openvidu-server-params/#extra-configuration-parameters-for-openVidu-server-docker-container" target="_blank">OpenVidu Server configuration parameters</a> can be set up at the same time with no overwritings.</li>
 <li>Tons of small fixes and code refactoring that makes OpenVidu more stable and easy to test and develop</li>
 </ul>
 <h4 id="breaking-changes_2">BREAKING CHANGES</h4>
@@ -2042,16 +2349,16 @@ session.on('streamPropertyChanged', event =&gt; {
 <li>
 <p><strong>OpenVidu Browser</strong></p>
 <ul>
-<li><a href="./../../api/openvidu-browser/classes/openvidu.html#initsession" target="_blank"><code>OpenVidu.initSession</code></a> now doesn't receive any input parameter.</li>
-<li><a href="./../../api/openvidu-browser/classes/openvidu.html#initpublisher" target="_blank"><code>OpenVidu.initPublisher</code></a> input parameters have changed. Now <code>properties</code> parameter must match <a href="./../..//api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a> interface.</li>
-<li><a href="./../../api/openvidu-browser/classes/session.html#connect" target="_blank"><code>Session.connect</code></a> method has been promisified. Change the last mandatory <code>callback</code> parameter for a Promise implementation: <code>session.connect(token, (error) =&gt; { ... })</code> to <code>session.connect(token).then(() =&gt; {...}).catch(error =&gt; {...});</code> <br><br></li>
+<li><a href="/api/openvidu-browser/classes/openvidu.html#initsession" target="_blank"><code>OpenVidu.initSession</code></a> now doesn't receive any input parameter.</li>
+<li><a href="/api/openvidu-browser/classes/openvidu.html#initpublisher" target="_blank"><code>OpenVidu.initPublisher</code></a> input parameters have changed. Now <code>properties</code> parameter must match <a href="/api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a> interface.</li>
+<li><a href="/api/openvidu-browser/classes/session.html#connect" target="_blank"><code>Session.connect</code></a> method has been promisified. Change the last mandatory <code>callback</code> parameter for a Promise implementation: <code>session.connect(token, (error) =&gt; { ... })</code> to <code>session.connect(token).then(() =&gt; {...}).catch(error =&gt; {...});</code> <br><br></li>
 </ul>
 </li>
 <li>
 <p><strong>OpenVidu Java Client</strong></p>
 <ul>
 <li>All <code>Archive</code> entities are now called <code>Recording</code>. This includes: class <code>Archive</code> to <code>Recording</code>, class <code>ArchiveMode</code> to <code>RecordingMode</code>, class <code>ArchiveLayout</code> to <code>RecordingLayout</code>, method <code>SessionProperties.archiveLayout()</code> to <code>SessionProperties.recordingLayout()</code>, method <code>SessionProperties.archiveMode()</code> to <code>SessionProperties.recordingMode()</code>, method <code>SessionProperties.Builder.archiveLayout()</code> to <code>SessionProperties.Builder.recordingLayout()</code>, method <code>SessionProperties.Builder.archiveMode()</code> to <code>SessionProperties.Builder.recordingMode()</code></li>
-<li><code>RecordingLayout</code> property in <a href="./../../api/openvidu-java-client/io/openvidu/java/client/SessionProperties.Builder.html" target="_blank"><code>SessionProperties.Builder</code></a> is now configured calling method <code>defaultRecordingLayout()</code> instead of <code>recordingLayout()</code>. This means that if one Session is gonna be recorded more than once, each recording layout may be customize with <code>RecordingProperties.Builder.recordingLayout()</code>, which will overwrite the default one globally configured in SessionProperties object. <br><br></li>
+<li><code>RecordingLayout</code> property in <a href="/api/openvidu-java-client/io/openvidu/java/client/SessionProperties.Builder.html" target="_blank"><code>SessionProperties.Builder</code></a> is now configured calling method <code>defaultRecordingLayout()</code> instead of <code>recordingLayout()</code>. This means that if one Session is gonna be recorded more than once, each recording layout may be customize with <code>RecordingProperties.Builder.recordingLayout()</code>, which will overwrite the default one globally configured in SessionProperties object. <br><br></li>
 </ul>
 </li>
 <li>
@@ -2061,7 +2368,7 @@ session.on('streamPropertyChanged', event =&gt; {
 <li>There has been a simple change in certain asynchronous call. Method <code>Session.getSessionId()</code> is now synchronous, but method <code>OpenVidu.createSession()</code> is now asynchronous (the reason is pretty simple: now method <em>createSession</em> implements the behavior that <em>getSessionId</em> was providing the first time it was called for certain <em>Session</em> object).</li>
 <li>All callback methods have been promisified. This includes method <code>Session.generateToken(tokenOptions?, callback): void</code> (now  <code>Session.generateToken(tokenOptions?): Promise&lt;string&gt;</code>) and method <code>Session.getSessionId(callback): void</code> (now <code>OpenVidu.createSession(): Promise&lt;Session&gt;</code>, take also into account that the async call has changed from one method to the other as stated in the previous point).</li>
 <li>All <code>Archive</code> entities are now called <code>Recording</code>. This includes: object <code>Archive</code> to <code>Recording</code>, object <code>ArchiveMode</code> to <code>RecordingMode</code>, object <code>ArchiveLayout</code> to <code>RecordingLayout</code>, method <code>SessionProperties.archiveLayout()</code> to <code>SessionProperties.recordingLayout()</code>, method <code>SessionProperties.archiveMode()</code> to <code>SessionProperties.recordingMode()</code>, method <code>SessionProperties.Builder.archiveLayout()</code> to <code>SessionProperties.Builder.recordingLayout()</code>, method <code>SessionProperties.Builder.archiveMode()</code> to <code>SessionProperties.Builder.recordingMode()</code></li>
-<li><code>recordingLayout</code> property in <a href="./../../api/openvidu-node-client/interfaces/sessionproperties.html" target="_blank"><code>SessionProperties</code></a> has changed to <code>defaultRecordingLayout</code>. This means that if one Session is gonna be recorded more than once, each recording layout may be customize with <code>recordingLayout</code> property (of <a href="./../../api/openvidu-node-client/interfaces/recordingproperties.html" target="_blank">RecordingProperties</a> interface, which will overwrite the default one globally configured in SessionProperties object. <br><br></li>
+<li><code>recordingLayout</code> property in <a href="/api/openvidu-node-client/interfaces/sessionproperties.html" target="_blank"><code>SessionProperties</code></a> has changed to <code>defaultRecordingLayout</code>. This means that if one Session is gonna be recorded more than once, each recording layout may be customize with <code>recordingLayout</code> property (of <a href="/api/openvidu-node-client/interfaces/recordingproperties.html" target="_blank">RecordingProperties</a> interface, which will overwrite the default one globally configured in SessionProperties object. <br><br></li>
 </ul>
 </li>
 <li>
@@ -2083,7 +2390,7 @@ session.on('streamPropertyChanged', event =&gt; {
 <hr />
 <p><br></p>
 <h2 id="190-beta-1">1.9.0-beta-1</h2>
-<h3 id="artifacts_12">Artifacts</h3>
+<h3 id="artifacts_13">Artifacts</h3>
 <table class="artifact-table">
 
   <tr>
@@ -2143,7 +2450,7 @@ session.on('streamPropertyChanged', event =&gt; {
 
 </table>
 
-<h3 id="release-notes_12">Release Notes</h3>
+<h3 id="release-notes_13">Release Notes</h3>
 <p><br></p>
 <ul>
 <li><strong>Safari support</strong>: now OpenVidu is compatible with the most recent versions of Safari in Mac and iOS. It is necessary to use Kurento Media Server 6.7.0:<br><br><ul>
@@ -2166,16 +2473,16 @@ sudo apt-get -y install openh264-gst-plugins-bad-1.5
 <pre style="padding-left: 80px"><code class="bash hljs">sudo service kurento-media-server start
 sudo service kurento-media-server stop
 </code></pre> 
-						</div>
-					</div> <footer>
+					</div>
+				</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../openvidu-pro/" class="btn btn-xs btn-primary float-right" title="Home">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="/docs/openvidu-pro/" class="btn btn-xs btn-primary float-right" title="Home">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../troubleshooting/" class="btn btn-xs btn-primary" title="Troubleshooting / FAQ"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="/docs/troubleshooting/" class="btn btn-xs btn-primary" title="Troubleshooting / FAQ"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -2184,11 +2491,48 @@ sudo service kurento-media-server stop
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/releases/index.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs//blob/master/docs/"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
-				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		const ps = new PerfectScrollbar('#menu-list', {
+			wheelSpeed: 1,
+			wheelPropagation: true,
+			suppressScrollX: true
+		});
+
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Releases')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			let submenu = $(this).parent().find('ul.subnav');
+			submenu.toggle();
+			submenu.parent().find('span.arrow-up').toggle();
+			submenu.parent().find('span.arrow-down').toggle();
+			ps.update();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Releases')").css('color', 'red');
+</script>

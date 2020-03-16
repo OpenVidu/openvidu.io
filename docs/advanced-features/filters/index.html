@@ -4,160 +4,148 @@ title: OpenVidu Documentation - Voice and video filters
 active: documentation
 ---
 
-<script src="/js/plugins/jquery.min.js"></script>
-
 <link rel="stylesheet" href="/css/syntax.css" />
 <script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Voice and video filters')").each(function (i, e) {
-			var currentElement = $(e);
-			currentElement.parent().css({
-				"display": "block",
-				"visibility": "visible"
-			}); //css("background-color","blue");
-			currentElement.css({
-				"display": "block",
-				"visibility": "visible"
-			});
-		});
-		$('li.subnav_drop div').click(function (i, e) {
-			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
-			$(this).parent().find('ul.subnav').toggle();
-		});
-
-		var minHeight = $('#sticky-menu').outerHeight() + 100;
-		$('#doc-container').css('min-height', minHeight + 'px');
-	});
-
-	$(".wy-nav-content").find("li:contains('Voice and video filters')").css('color', 'red');
+<script>
+	hljs.initHighlightingOnLoad();
 </script>
 
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/perfect-scrollbar.min.js"></script>
+<link rel="stylesheet" href="/css/perfect-scrollbar.css" />
+
 <div id="doc-container" class="container text-justify">
-		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+	<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-			
-			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
-					<div id="site-menu-title">
-						<h3>Explore docs</h3>
-						<hr>
-					</div>
-					<ul id="menu-list" class="current">
-						 
-						<li>
-							<ul>
+		
+		<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+			<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+				<div id="site-menu-title">
+					<h3>Explore docs</h3>
+					<hr>
+				</div>
+				<ul id="menu-list">
+					 
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../home/">What is OpenVidu?</a> 
+        <a class="" href="/docs/home/">What is OpenVidu?</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Tutorials</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Tutorials</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/">Intro</a> 
+        <a class="" href="/docs/tutorials/">Intro</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+        <a class="" href="/docs/tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+        <a class="" href="/docs/tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-android/">openvidu-android</a> 
+        <a class="" href="/docs/tutorials/openvidu-android/">openvidu-android</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+        <a class="" href="/docs/tutorials/openvidu-ionic/">openvidu-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-react-native/">openvidu-react-native</a> 
+        <a class="" href="/docs/tutorials/openvidu-react-native/">openvidu-react-native</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-electron/">openvidu-electron</a> 
+        <a class="" href="/docs/tutorials/openvidu-electron/">openvidu-electron</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
  
@@ -165,42 +153,52 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Demos</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Demos</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+        <a class="" href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+        <a class="" href="/docs/demos/openvidu-call/">openvidu-call</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+        <a class="" href="/docs/demos/openvidu-call-react/">openvidu-call-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+        <a class="" href="/docs/demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+        <a class="" href="/docs/demos/openvidu-classroom/">openvidu-classroom</a> 
 </li>
 
  
@@ -208,60 +206,70 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Cheatsheet</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Cheatsheet</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/join-session/">Join a session</a> 
+        <a class="" href="/docs/cheatsheet/join-session/">Join a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/leave-session/">Leave a session</a> 
+        <a class="" href="/docs/cheatsheet/leave-session/">Leave a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+        <a class="" href="/docs/cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+        <a class="" href="/docs/cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+        <a class="" href="/docs/cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/manage-videos/">Manage video players</a> 
+        <a class="" href="/docs/cheatsheet/manage-videos/">Manage video players</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/share-data/">Share data between users</a> 
+        <a class="" href="/docs/cheatsheet/share-data/">Share data between users</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/send-messages/">Send text messages</a> 
+        <a class="" href="/docs/cheatsheet/send-messages/">Send text messages</a> 
 </li>
 
  
@@ -269,42 +277,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul current">
 
-<li  class="subnav_drop">
-        <div><span>Advanced features</span></div>
+<li 
+        class="subnav_drop current">
+        <div style="display: flex; justify-content: space-between">
+                <span>Advanced features</span>
+                <div>
+                        
+                        <span class="arrow-up">▴</span>
+                        <span class="arrow-down" style="display: none">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../recording/">Recording</a> 
+        <a class="" href="/docs/advanced-features/recording/">Recording</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../screen-share/">Screen share</a> 
+        <a class="" href="/docs/advanced-features/screen-share/">Screen share</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../speech-detection/">Speech detection</a> 
+        <a class="" href="/docs/advanced-features/ip-cameras/">IP cameras</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
   
 
 <li class="toctree-l1 current">
-        <a class="current" href="./">Voice and video filters</a>  
+        <a class="current" href="/docs/advanced-features/filters/">Voice and video filters</a>  
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../switch-camera/">Switch camera</a> 
+        <a class="" href="/docs/advanced-features/switch-camera/">Switch camera</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/automatic-reconnection/">Automatic reconnection</a> 
 </li>
 
  
@@ -312,54 +342,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Reference Documentation</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-browser/">openvidu-browser API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+        <a class="" href="/docs/reference-docs/REST-API/">REST API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
 </li>
 
  
@@ -367,36 +407,46 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Deployment</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deployment</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+        <a class="" href="/docs/deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+        <a class="" href="/docs/deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/deploying-app/">Deploying your OpenVidu app</a> 
+        <a class="" href="/docs/deployment/deploying-app/">Deploying your OpenVidu app</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/upgrading/">Upgrading OpenVidu</a> 
+        <a class="" href="/docs/deployment/upgrading/">Upgrading OpenVidu</a> 
 </li>
 
  
@@ -404,24 +454,34 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Contribute</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Contribute</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../developing/">Developing OpenVidu</a> 
+        <a class="" href="/docs/developing/">Developing OpenVidu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../developing/rpc/">OpenVidu Server RPC protocol</a> 
+        <a class="" href="/docs/developing/rpc/">OpenVidu Server RPC protocol</a> 
 </li>
 
  
@@ -429,94 +489,168 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+        <a class="" href="/docs/troubleshooting/">Troubleshooting / FAQ</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../releases/">Releases</a> 
+        <a class="" href="/docs/releases/">Releases</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  style="width: 100%; display: inline-block"  class="subnav_drop">
-        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
-                        href="/docs/openvidu-pro/">
-                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
-                </a></div>
+<li  style="width: 100%; display: inline-block" 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                        <a style="all: unset; display: inline">
+                                <div id="openvidu-pro-tag"
+                                        style=" pointer-events: none; float: left; margin-right: 12px; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">
+                                        PRO</div>
+                        </a>
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/">Home</a> 
+        <a class="" href="/docs/openvidu-pro/">Home</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+        <a class="" href="/docs/openvidu-pro/scalability/">Scalability</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+        <a class="" href="/docs/openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
+        <a class="" href="/docs/openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deploying OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/aws/">AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/on-premise/">On premise</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/REST-API-pro/">REST API Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/kubernetes/">Kubernetes</a> 
 </li>
 
  
 </li>
 </ul>
 
-</ul>
-						</li>
-						 
-					</ul>
-				</div>
-				&nbsp;
-			</nav>
-		</div>
+  
 
-		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-			
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/REST-API-pro/">REST API Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/">OpenVidu Server Pro configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/">OpenVidu Server Pro CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					 
+				</ul>
+			</div>
+			&nbsp;
+		</nav>
+	</div>
+
+	<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+		
+		<div>
 			<div>
-				<div>
 
-					<div role="main">
-						<div class="section">
-							 <h1 id="voice-and-video-filters">Voice and video filters</h1>
+				<div role="main">
+					<div class="section">
+						 <h1 id="voice-and-video-filters">Voice and video filters</h1>
 <p>OpenVidu API offers a simple way of applying filters to video and audio streams in the server side by making use of Kurento Media Server capabilities. This is the current status of filter support in OpenVidu:</p>
 <ul>
 <li>You can apply <strong>one filter at a time to a published Stream</strong>. Every user subscribed to it will receive the modified stream.</li>
@@ -546,7 +680,7 @@ active: documentation
     padding-left: 20px;
     padding-right: 20px;
     ">
-    <strong>WARNING</strong>: video filters that make use of <strong>OpenCV are not enabled right now for OpenVidu >= 2.9.0</strong> due to Ubuntu Bionic support. These affects the following <a href="https://doc-kurento.readthedocs.io/en/latest/features/kurento_modules.html" target="_blank">Kurento filters</a>: <i>FaceOverlayFilter</i>, <i>ChromaFilter</i>, <i>PointerDetectorFilter</i>, <i>CrowdDetectorFilter</i>, <i>PlateDetectorFilter</i>
+    <strong>WARNING</strong>: video filters that make use of <strong>OpenCV are not available for OpenVidu installations in Ubuntu 18.04</strong>, only in Ubuntu 16.04. This affects the following <a href="https://doc-kurento.readthedocs.io/en/latest/features/kurento_modules.html" target="_blank">Kurento filters</a>: <i>FaceOverlayFilter</i>, <i>ChromaFilter</i>, <i>PointerDetectorFilter</i>, <i>CrowdDetectorFilter</i>, <i>PlateDetectorFilter</i>. All other filters work fine in Ubuntu 18.04
 </div>
 </div>
 
@@ -563,7 +697,7 @@ active: documentation
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When generating a token with operation <a href="../../reference-docs/REST-API#post-apitokens" target="_blank">POST /api/tokens</a> include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code>: a string array containing the name of the filters the user will be able to apply</p>
+<p>When generating a token with operation <a href="/docs/reference-docs/REST-API#post-apitokens" target="_blank">POST /api/tokens</a> include in the JSON body a parameter <code>kurentoOptions</code> with a property <code>allowedFilters</code>: a string array containing the name of the filters the user will be able to apply</p>
 <pre><code class="json">{
     &quot;session&quot;: &quot;6fpivlanw91qjy6n&quot;,
     &quot;data&quot;: &quot;user_data&quot;,
@@ -590,7 +724,7 @@ String token = session.generateToken(tokenOptions);
 
 </div>
 <div class="lang-tabs-content" id="node" style="display:none">
-<p>When generating a token, include in <a href="../../../api/openvidu-node-client/interfaces/tokenoptions.html" target="_blank">TokenOptions</a> parameter a <code>kurentoOptions</code> object with <code>allowedFiters</code> property: a string array containing the name of the filters the user will be able to apply</p>
+<p>When generating a token, include in <a href="/api/openvidu-node-client/interfaces/tokenoptions.html" target="_blank">TokenOptions</a> parameter a <code>kurentoOptions</code> object with <code>allowedFiters</code> property: a string array containing the name of the filters the user will be able to apply</p>
 <pre><code class="javascript">var tokenOptions = {
     role: &quot;PUBLISHER&quot;,
     data: &quot;user_data&quot;,
@@ -605,11 +739,16 @@ session.generateToken(tokenOptions).then(token =&gt; { ... });
 </div>
 <p><br></p>
 <h5 id="2a-initialize-a-publisher-object-configured-for-using-a-filter-from-the-beginning-of-the-publishing">2.A) Initialize a Publisher object configured for using a filter from the beginning of the publishing ...</h5>
-<p>Use <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a>, specifically property <a href="../../../api/openvidu-browser/interfaces/publisherproperties.html#filter" target="_blank">filter</a>:</p>
+<p>Use <a href="/api/openvidu-browser/interfaces/publisherproperties.html" target="_blank">PublisherProperties</a>, specifically property <a href="/api/openvidu-browser/interfaces/publisherproperties.html#filter" target="_blank">filter</a>:</p>
 <pre><code class="javascript">var OV = new OpenVidu();
 var publisher = OV.initPublisher(
     targetElement,
-    {filter: {type: &quot;GStreamerFilter&quot;, options: &quot;videoflip method=vertical-flip&quot;}}
+    filter: {
+        type: &quot;GStreamerFilter&quot;,
+        options: {
+            command: &quot;videoflip method=vertical-flip&quot;
+        }
+    }
 );
 
 // ... user already connected to &quot;session&quot; with the appropriate token
@@ -621,7 +760,7 @@ session.publish(publisher);
 <pre><code class="javascript">// ... user already connected to the session with the appropriate token
 // and successfully publishing the Publisher object
 
-publisher.stream.applyFilter(&quot;GStreamerFilter&quot;, &quot;videoflip method=vertical-flip&quot;)
+publisher.stream.applyFilter(&quot;GStreamerFilter&quot;, { command: &quot;videoflip method=vertical-flip&quot; })
     .then(() =&gt; {
         console.log(&quot;Video rotated!&quot;);
     })
@@ -672,13 +811,50 @@ publisher.stream.removeFilter()
     });
 </code></pre>
 
-<p><br></p>
 <blockquote>
 <p>Moderators are not only able to call all of these methods over their <code>Publisher.stream</code> object, but also over any <code>Subscriber.stream</code> object. Also, they don't need any special token permission to apply filters and can bypass any token restriction set to other user tokens</p>
 </blockquote>
 <p><br></p>
 <hr />
 <h2 id="filter-samples">Filter samples</h2>
+<h4 id="gstreamer-filters">GStreamer filters</h4>
+<p>These filters are set with <em>type</em> <code>GStreamerFilter</code> and an <em>options</em> parameter like this:</p>
+<pre><code class="javascript">publisher.stream.applyFilter(&quot;GStreamerFilter&quot;, {&quot;command&quot;: &quot;GSTREAMER_COMMAND&quot;})
+</code></pre>
+
+<p>A list of interesting values for <code>GSTREAMER_COMMAND</code> parameter is stated below. Replace <code>GSTREAMER_COMMAND</code> in the upper code snippet for any of the examples provided in the following list items:</p>
+<p><br></p>
+<h5 id="video-overlay-filters">Video overlay filters</h5>
+<ul>
+<li><strong>gdkpixbufoverlay</strong> : overlays an image on top of the video. This is very useful, for example, to add a logo<br>Example: <code>gdkpixbufoverlay location=/images/img.png offset-x=10 offset-y=10 overlay-height=200 overlay-width=200</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/gdkpixbuf/gdkpixbufoverlay.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>textoverlay</strong> : overlays an embedded text on top of the video<br>Example: <code>textoverlay text="Embedded text" valignment=top halignment=right font-desc="Cantarell 25"</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/pango/textoverlay.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>timeoverlay</strong> : overlays the time the video stream has been playing<br>Example: <code>timeoverlay valignment=bottom halignment=right font-desc="Sans, 20"</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/pango/timeoverlay.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>clockoverlay</strong> : overlays a clock with the local time (in OpenVidu Server host)<br>Example: <code>clockoverlay valignment=bottom halignment=right shaded-background=true font-desc="Sans, 20"</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/pango/clockoverlay.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+</ul>
+<p><br></p>
+<h5 id="video-effect-filters">Video effect filters</h5>
+<ul>
+<li><strong>videoflip</strong> : rotates the video stream<br>Example: <code>videoflip method=vertical-flip</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/videofilter/videoflip.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>videocrop</strong> : crops the video steam<br>Example: <code>videocrop top=100 left=35 right=0 bottom=0</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/videocrop/videocrop.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>videobox</strong> : resizes a video stream by adding borders or cropping<br>Example: <code>videobox fill=black top=20 bottom=20 left=-10 right=-10</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/videobox/index.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>chromahold</strong> : removes all colors from the video stream except the RGB indicated one<br>Example: <code>chromahold target-r=0 target-g=0 target-b=255 tolerance=90</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/coloreffects/chromahold.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>coloreffects</strong> : applies different color filters to the video stream<br>Example: <code>coloreffects preset=heat</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/coloreffects/coloreffects.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>videobalance</strong> : changes different properties of the video stream such as brightness, contrast, hue or saturation<br>Example: <code>videobalance saturation=0.0</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/videofilter/videobalance.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>gamma</strong> : adjusts gamma level of the video stream<br>Example: <code>gamma gamma=5.0</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/videofilter/gamma.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>videomedian</strong> : adds a median filter to the video stream<br>Example: <code>videomedian filtersize=9 lum-only=false</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/videofilter/videomedian.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li>Many effects of <strong><a href="https://wiki.gnome.org/Projects/GnomeVideoEffects/Effects" target="_blank">effectv project</a></strong> : funny filters for the video stream like <code>agingtv</code>, <code>dicetv</code>, <code>optv</code>, <code>quarktv</code>, <code>radioactv</code>, <code>revtv</code>, <code>rippletv</code>, <code>shagadelictv</code>, <code>streaktv</code>, <code>vertigotv</code>, <code>warptv</code><br>Example: <code>radioactv</code></li>
+</ul>
+<p><br></p>
+<h5 id="audio-filters">Audio filters</h5>
+<ul>
+<li><strong>audioecho</strong> : adds reverb to the audio stream<br>Example: <code>audioecho delay=50000000 intensity=0.6 feedback=0.4</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/audiofx/audioecho.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>audioamplify</strong> : amplifies an audio stream by a given factor<br>Example: <code>audioamplify amplification=1.5 clipping-method=wrap-positive</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/audiofx/audioamplify.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li><strong>pitch</strong> : controls the pitch of an audio stream<br>Example: <code>pitch pitch=1.2</code><br>Documentation: <a href="https://gstreamer.freedesktop.org/documentation/soundtouch/pitch.html" target="_blank">Link</a><div style="margin-bottom: 7px"></div></li>
+<li>Other audio filters: check them out in <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-plugin-audiofx.html" target="_blank">GStreamer site</a><div style="margin-bottom: 7px"></div></li>
+</ul>
+<blockquote>
+<p>All available GStreamer plugins can be found in <a href="https://gstreamer.freedesktop.org/documentation/plugins_doc.html" target="_blank">GStreamer site</a>.</p>
+</blockquote>
 <h4 id="kurento-filters">Kurento filters</h4>
 <p><br></p>
 <ul>
@@ -727,28 +903,6 @@ publisher.stream.removeFilter()
 </code></pre>
 </li>
 </ul>
-<h4 id="gstreamer-filters">GStreamer filters</h4>
-<p>These filters are set with <em>type</em> <code>GStreamerFilter</code> and an <em>options</em> parameter like this:</p>
-<pre><code class="javascript">publisher.stream.applyFilter(&quot;GStreamerFilter&quot;, {&quot;command&quot;: &quot;GSTREAMER_COMMAND&quot;})
-</code></pre>
-
-<p>A list of interesting values for <code>GSTREAMER_COMMAND</code> parameter is stated below. Replace <code>GSTREAMER_COMMAND</code> in the upper code snippet for any of the examples provided in the following list items:</p>
-<ul>
-<li><strong>coloreffects</strong>: apply different color filters to the video stream<br>Example: <code>coloreffects preset=heat</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>videobalance</strong>: change different properties of the video stream such as brightness, contrast, hue or saturation<br>Example: <code>videobalance saturation=0.0</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>videoflip</strong>: rotate the video stream<br>Example: <code>videoflip method=vertical-flip</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>videobox</strong>: crop the video stream<br>Example: <code>videobox fill=black top=20 bottom=20 left=-10 right=-10</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>gamma</strong>: adjust gamma level of the video stream<br>Example: <code>gamma gamma=5.0</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>videomedian</strong>: add a median filter to the video stream<br>Example: <code>videomedian filtersize=9 lum-only=false</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>textoverlay</strong>: add an embedded text to the video<br>Example: <code>textoverlay text="Embedded text" valignment=top halignment=right font-desc="Cantarell 25"</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>timeoverlay</strong>: embed the time the video stream has been playing<br>Example: <code>timeoverlay valignment=bottom halignment=right font-desc="Sans, 20"</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>clockoverlay</strong>: embed a clock with the local time (in OpenVidu Server)<br>Example: <code>clockoverlay valignment=bottom halignment=right shaded-background=true font-desc="Sans, 20"</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>audioecho</strong>: add reverb to the audio stream<br>Example: <code>audioecho delay=50000000 intensity=0.6 feedback=0.4</code><div style="margin-bottom: 7px"></div></li>
-<li><strong>audioamplify</strong>: amplifies an audio stream by a given factor<br>Example: <code>audioamplify amplification=1.5 clipping-method=wrap-positive</code><div style="margin-bottom: 7px"></div></li>
-<li>Other audio filters: check them out in <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-plugin-audiofx.html" target="_blank">GStreamer site</a><div style="margin-bottom: 7px"></div></li>
-<li>Many effects of <strong><a href="https://wiki.gnome.org/Projects/GnomeVideoEffects/Effects" target="_blank">effectv project</a></strong> : funny filters for the video stream like <code>agingtv</code>, <code>dicetv</code>, <code>optv</code>, <code>quarktv</code>, <code>radioactv</code>, <code>revtv</code>, <code>rippletv</code>, <code>shagadelictv</code>, <code>streaktv</code>, <code>vertigotv</code>, <code>warptv</code><br>Example: <code>radioactv</code></li>
-</ul>
-<p>All available GStreamer plugins can be found in <a href="https://gstreamer.freedesktop.org/documentation/plugins_doc.html" target="_blank">GStreamer site</a>.</p>
 <p><br></p>
 <script>
 function changeLangTab(event) {
@@ -778,16 +932,16 @@ function changeLangTab(event) {
   }
 }
 </script> 
-						</div>
-					</div> <footer>
+					</div>
+				</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../switch-camera/" class="btn btn-xs btn-primary float-right" title="Switch camera">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="/docs/advanced-features/switch-camera/" class="btn btn-xs btn-primary float-right" title="Switch camera">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../speech-detection/" class="btn btn-xs btn-primary" title="Speech detection"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="/docs/advanced-features/speech-detection/" class="btn btn-xs btn-primary" title="Speech detection"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -796,11 +950,48 @@ function changeLangTab(event) {
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/advanced-features/filters.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs//blob/master/docs/"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
-				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		const ps = new PerfectScrollbar('#menu-list', {
+			wheelSpeed: 1,
+			wheelPropagation: true,
+			suppressScrollX: true
+		});
+
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Voice and video filters')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			let submenu = $(this).parent().find('ul.subnav');
+			submenu.toggle();
+			submenu.parent().find('span.arrow-up').toggle();
+			submenu.parent().find('span.arrow-down').toggle();
+			ps.update();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Voice and video filters')").css('color', 'red');
+</script>

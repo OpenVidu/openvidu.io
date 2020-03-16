@@ -4,160 +4,148 @@ title: OpenVidu Documentation - Recording
 active: documentation
 ---
 
-<script src="/js/plugins/jquery.min.js"></script>
-
 <link rel="stylesheet" href="/css/syntax.css" />
 <script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Recording')").each(function (i, e) {
-			var currentElement = $(e);
-			currentElement.parent().css({
-				"display": "block",
-				"visibility": "visible"
-			}); //css("background-color","blue");
-			currentElement.css({
-				"display": "block",
-				"visibility": "visible"
-			});
-		});
-		$('li.subnav_drop div').click(function (i, e) {
-			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
-			$(this).parent().find('ul.subnav').toggle();
-		});
-
-		var minHeight = $('#sticky-menu').outerHeight() + 100;
-		$('#doc-container').css('min-height', minHeight + 'px');
-	});
-
-	$(".wy-nav-content").find("li:contains('Recording')").css('color', 'red');
+<script>
+	hljs.initHighlightingOnLoad();
 </script>
 
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/perfect-scrollbar.min.js"></script>
+<link rel="stylesheet" href="/css/perfect-scrollbar.css" />
+
 <div id="doc-container" class="container text-justify">
-		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+	<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-			
-			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
-					<div id="site-menu-title">
-						<h3>Explore docs</h3>
-						<hr>
-					</div>
-					<ul id="menu-list" class="current">
-						 
-						<li>
-							<ul>
+		
+		<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+			<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+				<div id="site-menu-title">
+					<h3>Explore docs</h3>
+					<hr>
+				</div>
+				<ul id="menu-list">
+					 
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../home/">What is OpenVidu?</a> 
+        <a class="" href="/docs/home/">What is OpenVidu?</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Tutorials</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Tutorials</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/">Intro</a> 
+        <a class="" href="/docs/tutorials/">Intro</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+        <a class="" href="/docs/tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+        <a class="" href="/docs/tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-android/">openvidu-android</a> 
+        <a class="" href="/docs/tutorials/openvidu-android/">openvidu-android</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+        <a class="" href="/docs/tutorials/openvidu-ionic/">openvidu-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-react-native/">openvidu-react-native</a> 
+        <a class="" href="/docs/tutorials/openvidu-react-native/">openvidu-react-native</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-electron/">openvidu-electron</a> 
+        <a class="" href="/docs/tutorials/openvidu-electron/">openvidu-electron</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
  
@@ -165,42 +153,52 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Demos</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Demos</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+        <a class="" href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+        <a class="" href="/docs/demos/openvidu-call/">openvidu-call</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+        <a class="" href="/docs/demos/openvidu-call-react/">openvidu-call-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+        <a class="" href="/docs/demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+        <a class="" href="/docs/demos/openvidu-classroom/">openvidu-classroom</a> 
 </li>
 
  
@@ -208,60 +206,70 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Cheatsheet</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Cheatsheet</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/join-session/">Join a session</a> 
+        <a class="" href="/docs/cheatsheet/join-session/">Join a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/leave-session/">Leave a session</a> 
+        <a class="" href="/docs/cheatsheet/leave-session/">Leave a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+        <a class="" href="/docs/cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+        <a class="" href="/docs/cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+        <a class="" href="/docs/cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/manage-videos/">Manage video players</a> 
+        <a class="" href="/docs/cheatsheet/manage-videos/">Manage video players</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/share-data/">Share data between users</a> 
+        <a class="" href="/docs/cheatsheet/share-data/">Share data between users</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/send-messages/">Send text messages</a> 
+        <a class="" href="/docs/cheatsheet/send-messages/">Send text messages</a> 
 </li>
 
  
@@ -269,42 +277,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul current">
 
-<li  class="subnav_drop">
-        <div><span>Advanced features</span></div>
+<li 
+        class="subnav_drop current">
+        <div style="display: flex; justify-content: space-between">
+                <span>Advanced features</span>
+                <div>
+                        
+                        <span class="arrow-up">▴</span>
+                        <span class="arrow-down" style="display: none">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 current">
-        <a class="current" href="./">Recording</a>  
+        <a class="current" href="/docs/advanced-features/recording/">Recording</a>  
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../screen-share/">Screen share</a> 
+        <a class="" href="/docs/advanced-features/screen-share/">Screen share</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../speech-detection/">Speech detection</a> 
+        <a class="" href="/docs/advanced-features/ip-cameras/">IP cameras</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../filters/">Voice and video filters</a> 
+        <a class="" href="/docs/advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../switch-camera/">Switch camera</a> 
+        <a class="" href="/docs/advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/switch-camera/">Switch camera</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/automatic-reconnection/">Automatic reconnection</a> 
 </li>
 
  
@@ -312,54 +342,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Reference Documentation</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-browser/">openvidu-browser API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+        <a class="" href="/docs/reference-docs/REST-API/">REST API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
 </li>
 
  
@@ -367,36 +407,46 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Deployment</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deployment</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+        <a class="" href="/docs/deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+        <a class="" href="/docs/deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/deploying-app/">Deploying your OpenVidu app</a> 
+        <a class="" href="/docs/deployment/deploying-app/">Deploying your OpenVidu app</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../deployment/upgrading/">Upgrading OpenVidu</a> 
+        <a class="" href="/docs/deployment/upgrading/">Upgrading OpenVidu</a> 
 </li>
 
  
@@ -404,24 +454,34 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Contribute</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Contribute</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../developing/">Developing OpenVidu</a> 
+        <a class="" href="/docs/developing/">Developing OpenVidu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../developing/rpc/">OpenVidu Server RPC protocol</a> 
+        <a class="" href="/docs/developing/rpc/">OpenVidu Server RPC protocol</a> 
 </li>
 
  
@@ -429,94 +489,168 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+        <a class="" href="/docs/troubleshooting/">Troubleshooting / FAQ</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../releases/">Releases</a> 
+        <a class="" href="/docs/releases/">Releases</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  style="width: 100%; display: inline-block"  class="subnav_drop">
-        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
-                        href="/docs/openvidu-pro/">
-                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
-                </a></div>
+<li  style="width: 100%; display: inline-block" 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                        <a style="all: unset; display: inline">
+                                <div id="openvidu-pro-tag"
+                                        style=" pointer-events: none; float: left; margin-right: 12px; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">
+                                        PRO</div>
+                        </a>
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/">Home</a> 
+        <a class="" href="/docs/openvidu-pro/">Home</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+        <a class="" href="/docs/openvidu-pro/scalability/">Scalability</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+        <a class="" href="/docs/openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
+        <a class="" href="/docs/openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deploying OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/aws/">AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/on-premise/">On premise</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/REST-API-pro/">REST API Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/kubernetes/">Kubernetes</a> 
 </li>
 
  
 </li>
 </ul>
 
-</ul>
-						</li>
-						 
-					</ul>
-				</div>
-				&nbsp;
-			</nav>
-		</div>
+  
 
-		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-			
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/REST-API-pro/">REST API Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/">OpenVidu Server Pro configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/">OpenVidu Server Pro CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					 
+				</ul>
+			</div>
+			&nbsp;
+		</nav>
+	</div>
+
+	<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+		
+		<div>
 			<div>
-				<div>
 
-					<div role="main">
-						<div class="section">
-							 <h1 id="recording">Recording</h1>
+				<div role="main">
+					<div class="section">
+						 <h1 id="recording">Recording</h1>
 <ul>
 <li><strong><a href="#how-to-record-sessions">How to record sessions</a></strong></li>
 <li><strong><a href="#composed-recording">Composed recording</a></strong></li>
@@ -524,8 +658,8 @@ active: documentation
 <li><strong><a href="#audio-only-and-video-only-recordings">Audio-only and video-only recordings</a></strong></li>
 <li><strong><a href="#automatic-stop-of-recordings">Automatic stop of recordings</a></strong></li>
 <li><strong><a href="#custom-recording-layouts">Custom recording layouts</a></strong><ul>
-<li><a href="#configuring-multiple-custom-layouts">Configuring multiple custom layouts</a>
-<!-- - <a href="#using-an-external-custom-layout">Using an external custom layout</a>--></li>
+<li><a href="#configuring-multiple-custom-layouts">Configuring multiple custom layouts</a></li>
+<li><a href="#using-an-external-custom-layout">Using an external custom layout</a></li>
 <li><a href="#debugging-your-custom-layouts">Debugging your custom layouts</a></li>
 <li><a href="#sample-custom-layout">Sample custom layout</a></li>
 </ul>
@@ -550,9 +684,8 @@ active: documentation
 <h3 id="1-have-docker-ce-installed-in-the-host-machine">1. Have Docker CE installed in the host machine</h3>
 <p>OpenVidu recording module may use a Docker image that needs to be downloaded from the cloud. The process is <strong>100% automatic</strong>, but you will need <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" target="_blank">Docker CE</a> installed in your server. If you enable OpenVidu recording service but there's no Docker installed, OpenVidu Server will fail to init, throwing the following exception:</p>
 <p><code>Exception connecting to Docker daemon: you need Docker installed in this machine to enable OpenVidu recorder service</code></p>
-<p><br></p>
 <blockquote>
-<p><strong><a href="../../deployment/deploying-aws/" target="_blank">OpenVidu AWS deployment</a> already includes the Docker image for recording service and is always launched with recording module enabled. You don't need to install anything or wait during the first execution if you use this type of deployment for OpenVidu Server. You can go straight to <a href="#3-configure-your-sessions-to-be-recorded">step 3</a></strong></p>
+<p><strong><a href="/docs/deployment/deploying-aws/" target="_blank">OpenVidu AWS deployment</a> already includes the Docker image for recording service and is always launched with recording module enabled. You don't need to install anything or wait during the first execution if you use this type of deployment for OpenVidu Server. You can go straight to <a href="#3-configure-your-sessions-to-be-recorded">step 3</a></strong></p>
 </blockquote>
 <p><br></p>
 <hr />
@@ -568,9 +701,8 @@ openvidu-server.jar
 <li><code>openvidu.recording</code>: if <em>true</em> OpenVidu recording service is enabled and sessions can be configured to be recorded. During the first execution of <em>openvidu-server.jar</em>, a Docker image (<a href="https://hub.docker.com/r/openvidu/openvidu-recording/" target="_blank">openvidu/openvidu-recording</a>) will be downloaded.</li>
 <li><code>openvidu.recording.path</code>: where to store the recorded video files on the host machine. OpenVidu Server must have write access to this path</li>
 </ul>
-<p><br></p>
 <blockquote>
-<p>There are other environment variables related to recordings configuration that may be set. To see the full list, visit <a href="../../reference-docs/openvidu-server-params/" target="_blank">OpenVidu Server configuration parameters</a></p>
+<p>There are other environment variables related to recordings configuration that may be set. To see the full list, visit <a href="/docs/reference-docs/openvidu-server-params/" target="_blank">OpenVidu Server configuration parameters</a></p>
 </blockquote>
 <h4 id="for-openvidu-server-docker-image-development-environment">For OpenVidu Server Docker image <em>(development environment)</em></h4>
 <pre><code class="console">docker run -p 4443:4443 --rm \
@@ -578,7 +710,7 @@ openvidu-server.jar
     -v /PATH/TO/VIDEO/FILES:/PATH/TO/VIDEO/FILES \
     -e openvidu.recording=true \
     -e openvidu.recording.path=/PATH/TO/VIDEO/FILES \
-openvidu/openvidu-server-kms:2.11.0
+openvidu/openvidu-server-kms:2.12.0
 </code></pre>
 
 <ul>
@@ -590,7 +722,6 @@ openvidu/openvidu-server-kms:2.11.0
 <li><code>-v /var/run/docker.sock:/var/run/docker.sock</code>: gives openvidu-server container access to the local Docker daemon</li>
 <li><code>-v /PATH/TO/VIDEO/FILES:/PATH/TO/VIDEO/FILES</code>: gives access to the recorded video files through the container</li>
 </ul>
-<p><br></p>
 <blockquote>
 <p><strong>IMPORTANT!</strong> <code>/PATH/TO/VIDEO/FILES</code> must be the same in property <code>openvidu.recording.path=/PATH/TO/VIDEO/FILES</code> and in both sides of flag <code>-v /PATH/TO/VIDEO/FILES:/PATH/TO/VIDEO/FILES</code></p>
 </blockquote>
@@ -609,7 +740,7 @@ Recording can be configured in two ways:</p>
 </ul>
 <p>In both cases you can stop the recording manually, and every recording will always be automatically stopped if last user leaves the session and certain timeout elapses (see <a href="#automatic-stop-of-recordings">Automatic stop of recordings</a>).</p>
 <p><br></p>
-<p>You can use <a href="../../reference-docs/REST-API/" target="_blank">REST API</a> or any of the server SDKs (<a href="../../reference-docs/openvidu-java-client/" target="_blank">openvidu-java-client</a>, <a href="../../reference-docs/openvidu-node-client/" target="_blank">openvidu-node-client</a>) to manage your recorded sessions.</p>
+<p>You can use <a href="/docs/reference-docs/REST-API/" target="_blank">REST API</a> or any of the server SDKs (<a href="/docs/reference-docs/openvidu-java-client/" target="_blank">openvidu-java-client</a>, <a href="/docs/reference-docs/openvidu-node-client/" target="_blank">openvidu-node-client</a>) to manage your recorded sessions.</p>
 <div class="lang-tabs-container">
 <div class="lang-tabs-header">
   <button class="lang-tabs-btn" onclick="changeLangTab(event)" style="background-color: #e8e8e8; font-weight: bold">REST API</button>
@@ -620,16 +751,16 @@ Recording can be configured in two ways:</p>
 <div class="lang-tabs-content" id="rest-api">
 <ol>
 <li>
-<p>Initialize your sessions with this POST method: <a href="../../reference-docs/REST-API#post-apisessions" target="_blank">POST /api/sessions</a><br>You may configure default values for recordings started for this session by sending params such as <code>defaultOutputMode</code> or <code>defaultRecordingLayout</code>. This way you can pre-configure recordings that will be automatically started (for sessions with <code>{"recordingMode": "ALWAYS"}</code>). For these sessions configured with <code>ALWAYS</code> recording mode, no more steps are needed.</p>
+<p>Initialize your sessions with this POST method: <a href="/docs/reference-docs/REST-API#post-apisessions" target="_blank">POST /api/sessions</a><br>You may configure default values for recordings started for this session by sending params such as <code>defaultOutputMode</code> or <code>defaultRecordingLayout</code>. This way you can pre-configure recordings that will be automatically started (for sessions with <code>{"recordingMode": "ALWAYS"}</code>). For these sessions configured with <code>ALWAYS</code> recording mode, no more steps are needed.</p>
 </li>
 <li>
 <p>If you have configured your session with <code>"recordingMode": "MANUAL"</code></p>
 <ul>
 <li>
-<p>Start the recording with this POST method: <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a><br>You can pass parameters to override default recording configuration values set in step 1 and to further configure it with other available options</p>
+<p>Start the recording with this POST method: <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a><br>You can pass parameters to override default recording configuration values set in step 1 and to further configure it with other available options</p>
 </li>
 <li>
-<p>Stop the recording with this POST method: <a href="../../reference-docs/REST-API#post-apirecordingsstopltrecording_idgt" target="_blank">POST /api/recordings/stop</a></p>
+<p>Stop the recording with this POST method: <a href="/docs/reference-docs/REST-API#post-apirecordingsstopltrecording_idgt" target="_blank">POST /api/recordings/stop</a></p>
 </li>
 </ul>
 </li>
@@ -648,7 +779,7 @@ Session session = openVidu.createSession(properties);
 </code></pre>
 </li>
 <li>
-<p>If Session is configured with <code>RecordingMode.MANUAL</code>, manually start and stop the recording whenever you want. You may pass a <a href="../../../api/openvidu-java-client/io/openvidu/java/client/RecordingProperties.html" target="_blank">RecordingProperties</a> object when calling <code>OpenVidu.startRecording</code> method to override default values configured in step 1 and to further configure it with other available options</p>
+<p>If Session is configured with <code>RecordingMode.MANUAL</code>, manually start and stop the recording whenever you want. You may pass a <a href="/api/openvidu-java-client/io/openvidu/java/client/RecordingProperties.html" target="_blank">RecordingProperties</a> object when calling <code>OpenVidu.startRecording</code> method to override default values configured in step 1 and to further configure it with other available options</p>
 <pre><code>RecordingProperties properties = new RecordingProperties.Builder()
     .outputMode(Recording.OutputMode.COMPOSED)
     .name("MY_RECORDING_NAME")
@@ -672,7 +803,7 @@ var mySession = openvidu.createSession(properties);
 </code></pre>
 </li>
 <li>
-<p>If Session is configured with <code>RecordingMode.MANUAL</code>, manually start and stop the recording whenever you want. You may pass a <a href="../../../api/openvidu-node-client/interfaces/recordingproperties.html" target="_blank">RecordingProperties</a> object when calling <code>OpenVidu.startRecording</code> method to override default values configured in step 1 and to further configure it with other available options</p>
+<p>If Session is configured with <code>RecordingMode.MANUAL</code>, manually start and stop the recording whenever you want. You may pass a <a href="/api/openvidu-node-client/interfaces/recordingproperties.html" target="_blank">RecordingProperties</a> object when calling <code>OpenVidu.startRecording</code> method to override default values configured in step 1 and to further configure it with other available options</p>
 <pre><code>var recording;
 
 // Starts recording
@@ -706,7 +837,7 @@ openvidu.stopRecording(recording.id)
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode: "COMPOSED", "recordingLayout": "BEST_FIT"}</code></p>
+<p>When starting the recording of a session with method <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode: "COMPOSED", "recordingLayout": "BEST_FIT"}</code></p>
 </div>
 <div class="lang-tabs-content" id="java" style="display:none">
 <pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
@@ -737,7 +868,6 @@ openvidu.startRecording(sessionId, {
     <img class="img-responsive" src="/img/docs/advanced-features/recorded-video.png">
 </p>
 
-<p><br></p>
 <blockquote>
 <p><strong>Notes on COMPOSED recordings</strong><br></p>
 <ul>
@@ -758,7 +888,7 @@ openvidu.startRecording(sessionId, {
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameter <code>{"outputMode:"INDIVIDUAL"}</code></p>
+<p>When starting the recording of a session with method <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameter <code>{"outputMode:"INDIVIDUAL"}</code></p>
 </div>
 <div class="lang-tabs-content" id="java" style="display:none">
 <pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
@@ -858,7 +988,7 @@ openvidu.startRecording(sessionId, {
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> simply pass parameters <code>hasAudio</code> or <code>hasVideo</code> with the desired values.</p>
+<p>When starting the recording of a session with method <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> simply pass parameters <code>hasAudio</code> or <code>hasVideo</code> with the desired values.</p>
 </div>
 <div class="lang-tabs-content" id="java" style="display:none">
 <pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
@@ -882,7 +1012,6 @@ openvidu.startRecording(sessionId, {
 
 </div>
 </div>
-<p><br></p>
 <blockquote>
 <p><strong>Notes on audio/video only recordings</strong><br></p>
 <ul>
@@ -895,7 +1024,7 @@ openvidu.startRecording(sessionId, {
 <p><br></p>
 <hr />
 <h1 id="automatic-stop-of-recordings">Automatic stop of recordings</h1>
-<p>Any started recording will automatically be stopped when any of the following situations occur and certain timeout elapses. This timeout is by default 120 seconds, but you can configure it with <a href="../../reference-docs/openvidu-server-params/" target="_blank">system property <code>openvidu.recording.autostop-timeout</code></a>. The automatic recording stop timout will start:</p>
+<p>Any started recording will automatically be stopped when any of the following situations occur and certain timeout elapses. This timeout is by default 120 seconds, but you can configure it with <a href="/docs/reference-docs/openvidu-server-params/" target="_blank">system property <code>openvidu.recording.autostop-timeout</code></a>. The automatic recording stop timout will start:</p>
 <ul>
 <li>
 <p>For any recorded session, if last user disconnects from the session</p>
@@ -916,7 +1045,7 @@ openvidu.startRecording(sessionId, {
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p><a href="../../reference-docs/REST-API#post-apirecordingsstopltrecording_idgt" target="_blank">POST /api/recordings/stop/&lt;RECORDING_ID&gt;</a></p>
+<p><a href="/docs/reference-docs/REST-API#post-apirecordingsstopltrecording_idgt" target="_blank">POST /api/recordings/stop/&lt;RECORDING_ID&gt;</a></p>
 </div>
 <div class="lang-tabs-content" id="java" style="display:none">
 <pre><code class="java">Recording stoppedRecording = openVidu.stopRecording(recordingId);
@@ -1006,14 +1135,14 @@ openvidu-server.jar
     -e openvidu.recording=true \
     -e openvidu.recording.path=/PATH/TO/VIDEO/FILES \
     -e openvidu.recording.custom-layout=/PATH/TO/INDEX/CUSTOM/LAYOUT \
-openvidu/openvidu-server-kms:2.11.0
+openvidu/openvidu-server-kms:2.12.0
 </code></pre>
 
 <blockquote>
 <p><strong>WARNING</strong>: remember to add the <code>-v</code> option mounting the path defined with <code>openvidu.recording.custom-layout</code></p>
 </blockquote>
 <p><br>
-<strong><a href="../../deployment/deploying-aws/" target="_blank">OpenVidu AWS deployment</a></strong></p>
+<strong><a href="/docs/deployment/deploying-aws/" target="_blank">OpenVidu AWS deployment</a></strong></p>
 <p>You must store your custom layouts in the server under default path <code>/opt/openvidu/custom-layout</code></p>
 <p><br></p>
 <hr />
@@ -1026,7 +1155,7 @@ openvidu/openvidu-server-kms:2.11.0
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM"}</code></p>
+<p>When starting the recording of a session with method <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM"}</code></p>
 </div>
 <div class="lang-tabs-content" id="java" style="display:none">
 <pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
@@ -1062,7 +1191,7 @@ openvidu.startRecording(sessionId, {
 </div>
 
 <div class="lang-tabs-content" id="rest-api">
-<p>When starting the recording of a session with method <a href="../../reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "RELATIVE/PATH/TO/INDEX"}</code></p>
+<p>When starting the recording of a session with method <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "RELATIVE/PATH/TO/INDEX"}</code></p>
 </div>
 <div class="lang-tabs-content" id="java" style="display:none">
 <pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
@@ -1103,50 +1232,48 @@ openvidu.startRecording(sessionId, {
 </code></pre>
 
 <p>You should start openvidu-server with property <code>openvidu.recording.custom-layout=/opt/openvidu/my_custom_layouts</code> and you can use any of the 3 <code>index.html</code> files for recording any of your sessions. To use the outer layout in a recording, just configure in recording properties <code>recordingLayout</code> to <code>CUSTOM</code>. To use any of the inner layouts, also configure <code>customLayout</code> to <code>layout1</code> or <code>layout2</code>.</p>
-<!--<br>
-
----
-
-## Using an external custom layout
-
-OpenVidu allows you to configure a recording to use a custom layout deployed outside OpenVidu host. This is useful if, for whatever reason, you have your layout being served in a different server with a different IP. To achieve this, you just have to configure the complete URL where your layout is served in property `customLayout`:
-
-<div class="lang-tabs-container" markdown="1">
-
+<p><br></p>
+<hr />
+<h2 id="using-an-external-custom-layout">Using an external custom layout</h2>
+<p>OpenVidu allows you to configure a recording to use a custom layout deployed outside OpenVidu host. This is useful if, for whatever reason, you have your layout being served in a different server. To achieve this, you just have to configure the complete URL where your layout is served in property <code>customLayout</code>:</p>
+<div class="lang-tabs-container">
 <div class="lang-tabs-header">
   <button class="lang-tabs-btn" onclick="changeLangTab(event)" style="background-color: #e8e8e8; font-weight: bold">REST API</button>
   <button class="lang-tabs-btn" onclick="changeLangTab(event)">Java</button>
   <button class="lang-tabs-btn" onclick="changeLangTab(event)">Node</button>
 </div>
 
-<div id="rest-api" class="lang-tabs-content" markdown="1">
-
-When starting the recording of a session with method [POST /api/recordings/start](/reference-docs/REST-API#post-apirecordingsstart){:target="_blank"} pass parameters<br>`{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "https://USER:PASS@my.domain.com:8888/path?myParam=123"}`
+<div class="lang-tabs-content" id="rest-api">
+<p>When starting the recording of a session with method <a href="/docs/reference-docs/REST-API#post-apirecordingsstart" target="_blank">POST /api/recordings/start</a> pass parameters<br><code>{"outputMode": "COMPOSED", "recordingLayout": "CUSTOM", "customLayout": "https://USER:PASS@my.domain.com:8888/path?myParam=123"}</code></p>
+</div>
+<div class="lang-tabs-content" id="java" style="display:none">
+<pre><code class="java">RecordingProperties properties = new RecordingProperties.Builder()
+    .outputMode(Recording.OutputMode.COMPOSED)
+    .recordingLayout(RecordingLayout.CUSTOM)
+    .customLayout(&quot;https://USER:PASS@my.domain.com:8888/path?myParam=123&quot;)
+    .build();
+Recording recording = openVidu.startRecording(session.getSessionId(), properties);
+</code></pre>
 
 </div>
+<div class="lang-tabs-content" id="node" style="display:none">
+<pre><code class="javascript">var recording;
 
-<div id="java" class="lang-tabs-content" style="display:none" markdown="1">
-
-
-wzxhzdk:19
-
-
-</div>
-
-<div id="node" class="lang-tabs-content" style="display:none" markdown="1">
-
-
-wzxhzdk:20
-
+openvidu.startRecording(sessionId, {
+    outputMode: Recording.OutputMode.COMPOSED,
+    recordingLayout: RecordingLayout.CUSTOM,
+    customLayout: &quot;https://USER:PASS@my.domain.com:8888/path?myParam=123&quot;
+})
+    .then(response =&gt; recording = response)
+    .catch(error =&gt; console.error(error));
+</code></pre>
 
 </div>
-
 </div>
-
-<br><br>
-
-> As you can see, this URL may have Basic Authentication credentials and any query parameter you may need in your custom layout. In the snippets above, you could access value `123` in your layout JS code just by calling <br>`new URL(window.location.href).searchParams.get("myParam");`-->
-
+<p><br></p>
+<blockquote>
+<p>As you can see, this URL may have credentials and any query parameter or token you may need in your custom layout.<br>For example, in the snippets above the layout files would be protected by Basic Auth with "USER" ans "PASS" as username and password, and you could access value <code>123</code> in your layout JS code just by calling <br><code>new URL(window.location.href).searchParams.get("myParam");</code></p>
+</blockquote>
 <p><br></p>
 <hr />
 <h2 id="debugging-your-custom-layouts">Debugging your custom layouts</h2>
@@ -1156,10 +1283,9 @@ When starting the recording of a session with method [POST /api/recordings/start
 <p>Being:</p>
 <ul>
 <li><code>SECRET</code>: parameter <code>openvidu.secret</code> configured when launching openvidu-server</li>
-<li><code>OPENVIDU_IP</code>: the IP where openvidu-server is accessible in your development machine. You will be probably using <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu-server-kms docker container</a> in your development environment, so this parameter is <code>localhost</code> if you are in Mac or Linux, and the docker IP of the container if you are in Windows (see this <a href="../../troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="&quot;_blank">FAQ</a>)</li>
+<li><code>OPENVIDU_IP</code>: the IP where openvidu-server is accessible in your development machine. You will be probably using <a href="https://hub.docker.com/r/openvidu/openvidu-server-kms/" target="_blank">openvidu-server-kms docker container</a> in your development environment, so this parameter is <code>localhost</code> if you are in Mac or Linux, and the docker IP of the container if you are in Windows (see this <a href="/docs/troubleshooting/#3-i-am-using-windows-to-run-the-tutorials-develop-my-app-anything-i-should-know" target="&quot;_blank">FAQ</a>)</li>
 <li><code>SESSION_ID</code>: the session ID you have initialized for the debugging process. Here's a little tip: you can initialize the session in openvidu-server (<a href="http://localhost:4000/docs/reference-docs/REST-API/#post-apisessions" target="_blank">REST API</a>, <a href="http://localhost:4000/docs/reference-docs/openvidu-java-client/#create-a-session" target="_blank">openvidu-java-client</a>, <a href="http://localhost:4000/docs/reference-docs/openvidu-node-client/#create-a-session" target="_blank">openvidu-node-client</a>) configuring parameter <code>customSessionId</code> to fix this session ID and avoid having to change it every time you restart your session.</li>
 </ul>
-<p><br></p>
 <blockquote>
 <p>By connecting with Chrome to the above URL you will see the exact result obtained when recording a session with your custom layout. You can now start changing the HTML/CSS/JS files of your layout until you are happy with the outcome</p>
 </blockquote>
@@ -1198,7 +1324,7 @@ When starting the recording of a session with method [POST /api/recordings/start
 <p><br><br></p>
 <hr />
 <h1 id="local-recording-in-the-browser">Local recording in the browser</h1>
-<p>OpenVidu Browser offers an extremely simple API to record Streams directly in the client's browser. Check it out <a href="../../../api/openvidu-browser/classes/localrecorder.html" target="_blank">here</a>.</p>
+<p>OpenVidu Browser offers an extremely simple API to record Streams directly in the client's browser. Check it out <a href="/api/openvidu-browser/classes/localrecorder.html" target="_blank">here</a>.</p>
 <p><br></p>
 <script>
 function changeLangTab(event) {
@@ -1228,16 +1354,16 @@ function changeLangTab(event) {
   }
 }
 </script> 
-						</div>
-					</div> <footer>
+					</div>
+				</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../screen-share/" class="btn btn-xs btn-primary float-right" title="Screen share">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="/docs/advanced-features/screen-share/" class="btn btn-xs btn-primary float-right" title="Screen share">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../cheatsheet/send-messages/" class="btn btn-xs btn-primary" title="Send text messages"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="/docs/cheatsheet/send-messages/" class="btn btn-xs btn-primary" title="Send text messages"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -1246,11 +1372,48 @@ function changeLangTab(event) {
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/advanced-features/recording.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs//blob/master/docs/"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
-				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		const ps = new PerfectScrollbar('#menu-list', {
+			wheelSpeed: 1,
+			wheelPropagation: true,
+			suppressScrollX: true
+		});
+
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Recording')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			let submenu = $(this).parent().find('ul.subnav');
+			submenu.toggle();
+			submenu.parent().find('span.arrow-up').toggle();
+			submenu.parent().find('span.arrow-down').toggle();
+			ps.update();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Recording')").css('color', 'red');
+</script>

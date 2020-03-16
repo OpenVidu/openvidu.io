@@ -1,0 +1,1029 @@
+---
+layout: docs-layout
+title: OpenVidu Documentation - On premise
+active: documentation
+---
+
+<link rel="stylesheet" href="/css/syntax.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/perfect-scrollbar.min.js"></script>
+<link rel="stylesheet" href="/css/perfect-scrollbar.css" />
+
+<div id="doc-container" class="container text-justify">
+	<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+		
+		<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+			<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+				<div id="site-menu-title">
+					<h3>Explore docs</h3>
+					<hr>
+				</div>
+				<ul id="menu-list">
+					 
+					<li>
+						<ul class="top-ul ">
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/home/">What is OpenVidu?</a> 
+</li>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Tutorials</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/">Intro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-library-react/">openvidu-library-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-android/">openvidu-android</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-ionic/">openvidu-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-react-native/">openvidu-react-native</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-electron/">openvidu-electron</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Demos</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-call/">openvidu-call</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-call-react/">openvidu-call-react</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/demos/openvidu-classroom/">openvidu-classroom</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Cheatsheet</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/join-session/">Join a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/leave-session/">Leave a session</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/manage-videos/">Manage video players</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/share-data/">Share data between users</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/cheatsheet/send-messages/">Send text messages</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Advanced features</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/recording/">Recording</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/screen-share/">Screen share</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/ip-cameras/">IP cameras</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/speech-detection/">Speech detection</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/switch-camera/">Switch camera</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/automatic-reconnection/">Automatic reconnection</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-browser/">openvidu-browser API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/REST-API/">REST API</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deployment</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/deploying-app/">Deploying your OpenVidu app</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/deployment/upgrading/">Upgrading OpenVidu</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Contribute</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/developing/">Developing OpenVidu</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/developing/rpc/">OpenVidu Server RPC protocol</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/troubleshooting/">Troubleshooting / FAQ</a> 
+</li>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/releases/">Releases</a> 
+</li>
+
+</ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul current">
+
+<li  style="width: 100%; display: inline-block" 
+        class="subnav_drop current">
+        <div style="display: flex; justify-content: space-between">
+                <span>OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up">▴</span>
+                        <span class="arrow-down" style="display: none">▾</span>
+                        
+                        
+                        <a style="all: unset; display: inline">
+                                <div id="openvidu-pro-tag"
+                                        style=" pointer-events: none; float: left; margin-right: 12px; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">
+                                        PRO</div>
+                        </a>
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/">Home</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/scalability/">Scalability</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li 
+        class="subnav_drop current">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deploying OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up">▴</span>
+                        <span class="arrow-down" style="display: none">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/aws/">AWS</a> 
+</li>
+
+  
+
+<li class="toctree-l1 current">
+        <a class="current" href="/docs/openvidu-pro/deployment/on-premise/">On premise</a>  
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/kubernetes/">Kubernetes</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/REST-API-pro/">REST API Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/">OpenVidu Server Pro configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/">OpenVidu Server Pro CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					 
+				</ul>
+			</div>
+			&nbsp;
+		</nav>
+	</div>
+
+	<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+		
+		<div>
+			<div>
+
+				<div role="main">
+					<div class="section">
+						 <h2 id="section-title">Deploy OpenVidu Pro on premise</h2>
+
+<hr>
+
+<ul>
+<li><strong><a href="#deployment-instructions">Deployment instructions</a></strong><ul>
+<li><a href="#1-prerequisites">1) Prerequisites</a></li>
+<li><a href="#2-network-requirements">2) Network requirements</a></li>
+<li><a href="#3-ansible-inventory">3) Ansible inventory</a></li>
+<li><a href="#4-ansible-variables">4) Ansible variables</a></li>
+<li><a href="#5-deployment-command">5) Deployment command</a></li>
+</ul>
+</li>
+<li><strong><a href="#scalability">Scalability</a></strong><ul>
+<li><a href="#set-the-number-of-media-nodes-on-startup">Set the number of Media Nodes on startup</a></li>
+<li><a href="#change-the-number-of-media-nodes-on-the-fly">Change the number of Media Nodes on the fly</a></li>
+</ul>
+</li>
+<li><strong><a href="#updating-openvidu-pro-configuration">Updating OpenVidu Pro configuration</a></strong></li>
+<li><strong><a href="#troubleshooting">Troubleshooting</a></strong></li>
+</ul>
+<hr />
+<div style="
+    display: table;
+    border: 2px solid #0088aa9e;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding: 5px 0 5px 0;
+    background-color: rgba(0, 136, 170, 0.04);"><div style="display: table-cell; vertical-align: middle">
+    <i class="icon ion-android-alert" style="
+    font-size: 50px;
+    color: #0088aa;
+    display: inline-block;
+    padding-left: 25%;
+"></i></div>
+<div style="
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 20px;
+    padding-right: 20px;
+    ">
+    Before deploying OpenVidu Pro you need to <strong><a href="/account" target="_blank">create an OpenVidu account</a></strong> to get your license key.<br>There's a <strong>15 day free trial</strong> waiting for you!
+</div>
+</div>
+
+<h2 id="deployment-instructions">Deployment instructions</h2>
+<h3 id="1-prerequisites">1) Prerequisites</h3>
+<h4 id="in-your-local-machine">In your local machine</h4>
+<p>You need <strong>Ansible</strong> installed on your laptop or wherever you are running this playbook. You can install Ansible with:</p>
+<pre><code class="bash">sudo apt-add-repository -y ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install -y ansible
+</code></pre>
+
+<p>Besides you need to install this role for Docker:</p>
+<pre><code class="bash">sudo ansible-galaxy install -p /etc/ansible/roles geerlingguy.docker
+</code></pre>
+
+<h4 id="in-your-cluster-machines">In your cluster machines</h4>
+<p>You must have <strong>at least 2 different instances</strong> with a clean installation of <strong>Ubuntu 16.04</strong></p>
+<ul>
+<li>One instance for the <strong>OpenVidu Server Pro Node</strong></li>
+<li>One instance for a <strong>Media Node</strong></li>
+</ul>
+<p>You can actually have as many instances as you want for Media Nodes. The number of Media Nodes determines the size of your cluster: the more Media Nodes, the more video sessions your cluster will be able to handle. Check out <a href="/docs/openvidu-pro/scalability/" target="_blank">Scalability</a> section for further details.</p>
+<p>Besides, be sure to meet the following criteria in your cluster instances:</p>
+<ul>
+<li>Have at least a minimum of <strong>2 CPUs and 8GB of RAM</strong>, and a generous network bandwidth</li>
+<li>Have <strong>Python 3</strong> installed (check version with <code>python3 --version</code>)</li>
+</ul>
+<hr />
+<h3 id="2-network-requirements">2) Network requirements</h3>
+<p>These ports need to be opened and publicly accessible for each type of instance in your cluster:</p>
+<h4 id="openvidu-server-pro-instance">OpenVidu Server Pro instance</h4>
+<ul>
+<li><strong>4443 TCP</strong> (OpenVidu Server listens on port 4443 by default)</li>
+<li><strong>3478 TCP</strong> (coturn listens on port 3478 by default)</li>
+<li><strong>3478 UDP</strong> (opening also UDP port has been proved to facilitate connections with certain type of clients)</li>
+</ul>
+<h4 id="media-node-instances">Media Node instances</h4>
+<ul>
+<li><strong>40000 - 65535 UDP</strong> (WebRTC connections with clients may be established using a random port inside this range)</li>
+<li><strong>40000 - 65535 TCP</strong> (WebRTC connections with clients may be established using a random port inside this range, if UDP can't be used because client network is blocking it)</li>
+<li><strong>8888 TCP (must only be accessible for OpenVidu Server Pro instance)</strong> (Kurento Media Server listens on port 8888 by default)</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong>: in production environments you will have to configure a <strong>fully qualified domain name</strong> in your <strong>OpenVidu Server Pro instance</strong>. You can register a FQDN for the OpenVidu Server Pro instance using a DNS server, pairing the OpenVidu Server Pro instance public IP with your domain name. This is the only way to later set up a valid certificate in OpenVidu Server Pro instance, so clients don't get a warning when connecting to a video session</p>
+</blockquote>
+<hr />
+<h3 id="3-ansible-inventory">3) Ansible inventory</h3>
+<p>Ansible uses an inventory file to know which instances connect to and how to configure them. Let's clone OpenVidu's Ansible repository to modify this file and prepare the cluster deployment:</p>
+<pre><code class="bash">git clone https://github.com/OpenVidu/openvidu-pro-clustering
+git checkout 2.12.0-on-premise
+cd openvidu-pro-clustering # This will be our working directory from now on
+</code></pre>
+
+<p>File <code>./inventory.yaml</code> defines our cluster instances. By default it is ready to use a single Media Node, but you can add as many <em>kurento-server</em> hosts as you want, as you can see in the commented lines.</p>
+<p>The IPs in the inventory file should be the addresses which can be reached from the Ansible host. In example, if your Ansible host is on the 192.168.x.x network should be ok to use that address range in your inventory file.</p>
+<pre><code class="yaml">---
+all:
+  hosts:
+    openvidu-server:
+      ansible_host: OPENVIDU_SERVER_IP
+    media-node-1:
+      ansible_host: MEDIA_NODE_1_IP
+    # media-node-2:
+    #   ansible_host: MEDIA_NODE_2_IP
+    # ...
+    # media-node-N:
+    #   ansible_host: MEDIA_NODE_N_IP
+  vars:
+      ansible_become: true
+      ansible_user: USER
+      ansible_ssh_private_key_file: /PATH/TO/SSH_public_key
+  children:
+    media-nodes:
+      hosts:
+        media-node-1:
+      #   media-node-2:
+      #   ...
+      #   media-node-N:
+    openvidu:
+      hosts:
+        openvidu-server:
+</code></pre>
+
+<p>You need to change:</p>
+<ul>
+<li><strong>Variable <code>ansible_user</code></strong>: the user you use to connect to the instances, i.e. Ubuntu Server Cloud uses <code>ubuntu</code>. If you've deployed those instances in OpenStack using Ubuntu Official Image, <code>ubuntu</code> will be the user.</li>
+<li><strong>Variable <code>ansible_ssh_private_key_file</code></strong>: path to the RSA private key you use to connect to your instances.</li>
+<li><strong>Value <code>OPENVIDU_SERVER_IP</code></strong>: public IP to connect to the OpenVidu Server Pro instance.</li>
+<li><strong>Value <code>MEDIA_NODE_X_IP</code></strong>: public IP to connect to the Kurento Media Server instance(s).</li>
+</ul>
+<hr />
+<h3 id="4-ansible-variables">4) Ansible variables</h3>
+<p>In <code>./group_vars/all</code> file you will find all the parameters used to configure the infrastructure.</p>
+<p>One of them is your <strong>OpenVidu Pro license key</strong>. You need an <strong><a href="/account" target="_blank">OpenVidu account</a></strong> to purchase it. There's a <strong>15 day free trial</strong> waiting for you!</p>
+<blockquote>
+<p><strong>WARNING</strong>: when giving value to the variables in <code>./group_vars/all</code> file, go through all of them very carefully. Some of them do not have default values, as they are dependant on your infrastructure. Be also very careful to not delete any of them, as the deployment will fail if any variable is missing. For further information about them check out <a href="/docs/reference-docs/openvidu-server-params/" target="_blank">OpenVidu Server CE configuration</a> and <a href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/" target="_blank">OpenVidu Server Pro configuration</a></p>
+</blockquote>
+<hr />
+<h3 id="5-deployment-command">5) Deployment command</h3>
+<p>First time you connect to an instance through SSH, it will ask you to confirm the instance's fingerprint, so try to <strong>login into all the instances</strong> to accept the fingerprint so Ansible can automatically do the job.</p>
+<pre><code class="bash">ssh -i /PATH/TO/SSH_public_key USER@INSTANCE_IP
+</code></pre>
+
+<p>Check that Ansible can access the instances. The following command (run it in the repository root folder) will perform a <em>ping</em> to all the instances declared in <code>./inventory.yaml</code> file. You should see a successful log message for each one of them if everything is correct.</p>
+<pre><code class="bash">ansible -i inventory.yaml -m ping all
+</code></pre>
+
+<p>Finally, launch the Ansible's playbook to deploy your cluster:</p>
+<pre><code class="bash">ansible-playbook -i inventory.yaml play.yaml
+</code></pre>
+
+<p>The playbook command will end with the following log:</p>
+<pre><code class="console">*********************************************************
+ TASK [check-app-ready : check every 60 seconds for 10 attempts if openvidu is up and ready]
+*********************************************************
+FAILED - RETRYING: check every 60 seconds for 10 attempts if openvidu is up and ready (10 retries left).
+FAILED - RETRYING: check every 60 seconds for 10 attempts if openvidu is up and ready ( 9 retries left).
+ok: [openvidu-server]
+
+*********************************************************
+ PLAY RECAP
+*********************************************************
+kurento-server-1       : ok=21  changed=18  unreachable=0   failed=0   skipped=0   rescued=0   ignored=0
+kurento-server-2       : ok=21  changed=18  unreachable=0   failed=0   skipped=0   rescued=0   ignored=0
+openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=14  rescued=0   ignored=0
+</code></pre>
+
+<p>Once the playbook command has successfully finished, you will have OpenVidu Pro services accessible through the following URLs:</p>
+<ul>
+<li><strong>OpenVidu Pro Inspector</strong> (<a href="/docs/openvidu-pro/openvidu-inspector/" target="_blank">more info</a>) : <code>https://YOUR_DNS_NAME/inspector</code></li>
+<li><strong>OpenVidu Pro Kibana dashboard</strong> (<a href="/docs/openvidu-pro/detailed-session-monitoring/" target="_blank">more info</a>) :  <code>https://YOUR_DNS_NAME/kibana</code></li>
+<li><strong>OpenVidu Pro REST endpoint</strong> (<a href="/docs/openvidu-pro/reference-docs/REST-API-pro/" target="_blank">more info</a>) : <code>https://YOUR_DNS_NAME:4443</code> (or the port you defined in property <code>openvidu_server_port</code> in file <code>./group_vars/all</code>)</li>
+</ul>
+<blockquote>
+<p>Regarding the compatibility of <strong>openvidu-browser</strong> and <strong>server SDKs</strong> (REST API, openvidu-java-client, openvidu-node-client), use the same version numbers as stated for openvidu-server in <a href="/docs/releases/" target="_blank">Releases page</a>. For example, for OpenVidu Pro 2.10.0, use the artifact versions indicated in <a href="/docs/releases#2100" target="_blank">2.10.0 release table</a></p>
+</blockquote>
+<p><br></p>
+<hr />
+<h2 id="scalability">Scalability</h2>
+<h3 id="set-the-number-of-media-nodes-on-startup">Set the number of Media Nodes on startup</h3>
+<p><a href="#deployment-instructions">Deployment instructions</a> inherently contain all the requirements needed to deploy your OpenVidu Pro cluster with a specific initial number of Media Nodes. You first have to prepare the maximum number of Media Nodes you want. For example, if you want your cluster to be able to grow up to 3 Media Nodes, then you will need 4 hosts in your infrastructure: one for the OpenVidu Server Pro Node and three for each Media Node. Check out the <a href="#in-your-cluster-machines">Cluster machines prerequisites</a>.</p>
+<p>Then you just need to properly <a href="#3-ansible-inventory">configure the <code>inventory.yml</code> file</a> with each instance IP before running Ansible's playbook. This way your cluster will start with the desired number of Media Nodes.</p>
+<h3 id="change-the-number-of-media-nodes-on-the-fly">Change the number of Media Nodes on the fly</h3>
+<p>You can launch and drop Media Nodes dynamically in two different ways:</p>
+<h4 id="from-openvidu-inspector">From OpenVidu Inspector</h4>
+<p>In Cluster page you can launch and drop Media Nodes just by pressing buttons.</p>
+<div class="row">
+    <div style="margin: 5px 15px 35px 15px">
+        <a data-fancybox="gallery-pro3" href="/img/docs/openvidu-pro/pro18.png"><img class="img-responsive img-pro img-pro-small" src="/img/docs/openvidu-pro/pro18.png"/></a>
+    </div>
+</div>
+
+<h4 id="with-openvidu-pro-rest-api">With OpenVidu Pro REST API</h4>
+<p>You can programmatically launch and drop Media Nodes from your application by consuming OpenVidu Pro REST API.</p>
+<ul>
+<li><strong>Launch a Media Node</strong>: <strong><a href="/docs/openvidu-pro/reference-docs/REST-API-pro#post-promedia-nodes" target="_blank">POST /pro/media-nodes</a></strong></li>
+<li><strong>Drop a Media Node</strong>: <strong><a href="/docs/openvidu-pro/reference-docs/REST-API-pro/#delete-promedia-nodesltmedia_node_idgt" target="_blank">DELETE /pro/media-nodes</a></strong></li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong>: there are some important aspects to keep in mind when launching and dropping Media Nodes in on premises OpenVidu Pro clusters:</p>
+<ul>
+<li>Trying to drop a Media Node which is currently hosting an OpenVidu Session will fail by default. You can manage the drop policy when calling <a href="/docs/openvidu-pro/reference-docs/REST-API-pro/#delete-promedia-nodesltmedia_node_idgt" target="_blank">DELETE /pro/media-nodes</a> through parameter <code>deletion-strategy</code>.</li>
+<li>Launching and dropping Media Nodes in on premise deployments will not automatically start and terminate your instances. So to launch a new Media Node in on premise deployments you are required to have the Media Node already running and to provide the Media Node's URI when calling <a href="/docs/openvidu-pro/reference-docs/REST-API-pro#post-promedia-nodes" target="_blank">POST /pro/media-nodes</a> (using <code>uri</code> query parameter). When dropping it you will have to terminate the instance yourself after successfully calling <a href="/docs/openvidu-pro/reference-docs/REST-API-pro/#delete-promedia-nodesltmedia_node_idgt" target="_blank">DELETE /pro/media-nodes</a>, if that's what you want. You can listen to <a href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/#medianodestatuschanged" target="_blank">mediaNodeStatusChanged</a> event through OpenVidu Webhook to know when you can safely terminate your instances (listen to <code>terminated</code> status).</li>
+</ul>
+</blockquote>
+<p><br></p>
+<hr />
+<h2 id="updating-openvidu-pro-configuration">Updating OpenVidu Pro configuration</h2>
+<p>You may want to change the current configuration of an existing OpenVidu Pro cluster. This configuration includes all of the parameters listed in these pages:</p>
+<ul>
+<li><a href="/docs/reference-docs/openvidu-server-params" target="_blank">OpenVidu Server CE configuration</a></li>
+<li><a href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params" target="_blank">OpenVidu Server Pro configuration</a></li>
+</ul>
+<p>When deploying an OpenVidu Pro cluster you give value to these parameters directly or indirectly, depending on the <a href="/docs/openvidu-pro/scalability/#how-to-deploy-your-openvidu-pro-cluster" target="_blank">deployment environment</a>. Once the cluster is running, there are different ways you can update the value of the configuration parameters. Take into account that all of them require restarting your OpenVidu Server Pro process, so <strong>any active OpenVidu Session will be terminated</strong>.</p>
+<h3 id="1-with-openvidu-inspector">1) With OpenVidu Inspector</h3>
+<p>OpenVidu Inspector allows you to restart the OpenVidu Server Pro process from <strong>Config</strong> page just by filling a formulary.<br>More information <a href="/docs/openvidu-pro/openvidu-inspector#programmatic-reset" target="_blank">here</a>.</p>
+<blockquote>
+<p><strong>NOTE 1</strong>: take into account that not all configuration properties are able to be updated this way<br>
+<strong>NOTE 2</strong>: new values will be stored and remembered, so they will be used when OpenVidu Server Pro is restarted in the future</p>
+</blockquote>
+<h3 id="2-with-openvidu-pro-rest-api">2) With OpenVidu Pro REST API</h3>
+<p>You can consume REST API method <strong><a href="/docs/openvidu-pro/reference-docs/REST-API-pro/#post-prorestart" target="_blank">POST /pro/restart</a></strong> to programmatically restart the OpenVidu Server Pro process and update its configuration values.</p>
+<blockquote>
+<p><strong>NOTE 1</strong>: take into account that not all configuration properties are able to be updated this way<br>
+<strong>NOTE 2</strong>: new values will be stored and remembered, so they will be used when OpenVidu Server Pro is restarted in the future</p>
+</blockquote>
+<h3 id="3-manually-connecting-through-ssh">3) Manually connecting through SSH</h3>
+<p>The ultimate and most definitive way of updating the configuration parameters of an OpenVidu Pro cluster is connecting to the OpenVidu Server Pro Node through SSH and changing the desired values:</p>
+<ol>
+<li>SSH to the OpenVidu Server Pro machine using your private rsa key</li>
+<li>Update file <code>/opt/openvidu/application.properties</code> with the new configuration values</li>
+<li>Restart OpenVidu Server Pro with <code>sudo systemctl restart openvidu</code></li>
+</ol>
+<p>To validate your changes and check that everything went well, you should take a look to OpenVidu Server Pro logs. If there were any errors with any configuration parameter, OpenVidu Server Pro log should help you fix the issue. You can show last 200 lines of the logs with command <code>journalctl -n 200 -u openvidu | cat</code></p>
+<p><br></p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>To troubleshoot problems with OpenVidu Pro on premises deployments follow these steps:</p>
+<ul>
+<li>
+<p><strong>1)</strong>  Provide to us <code>ansible-playbook</code> logs (the output of the <code>ansible-playbook</code> command)</p>
+</li>
+<li>
+<p><strong>2)</strong>  SSH in to the <strong>OpenVidu Server Pro Node</strong> and provide to us Openvidu logs:</p>
+<ul>
+<li><code>journalctl -u openvidu &gt; openvidu.log</code></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p>
+<p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/brands.css" integrity="sha384-Px1uYmw7+bCkOsNAiAV5nxGKJ0Ixn5nChyW8lCK1Li1ic9nbO5pC/iXaq27X5ENt" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I" crossorigin="anonymous"></p>
+<p><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script></p>
+<script>
+    $('.pro-gallery').slick({
+      autoplay: true,
+      arrows: false,
+      autoplaySpeed: 3000,
+      dots: true,
+      infinite: true,
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          slidesToShow: 1
+        }
+      },
+    ]
+    });
+    $('.pro-gallery-steps').slick({
+      autoplay: false,
+      arrows: true,
+      prevArrow: '<div class="slick-btn slick-btn-prev"><i class="icon ion-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-btn slick-btn-next"><i class="icon ion-chevron-right"></i></div>',
+      dots: true,
+      infinite: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: true,
+          slidesToShow: 1
+        }
+      },
+    ]
+    });
+</script> 
+					</div>
+				</div> <footer>
+<hr>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="/docs/openvidu-pro/deployment/kubernetes/" class="btn btn-xs btn-primary float-right" title="Kubernetes">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="/docs/openvidu-pro/deployment/aws/" class="btn btn-xs btn-primary" title="AWS"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+      
+    </div>
+  
+
+
+  
+  <div id="edit-github">
+  
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs//blob/master/docs/"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+  
+  </div>
+</footer> 
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		const ps = new PerfectScrollbar('#menu-list', {
+			wheelSpeed: 1,
+			wheelPropagation: true,
+			suppressScrollX: true
+		});
+
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('On premise')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			let submenu = $(this).parent().find('ul.subnav');
+			submenu.toggle();
+			submenu.parent().find('span.arrow-up').toggle();
+			submenu.parent().find('span.arrow-down').toggle();
+			ps.update();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('On premise')").css('color', 'red');
+</script>

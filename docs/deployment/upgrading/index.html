@@ -4,160 +4,148 @@ title: OpenVidu Documentation - Upgrading OpenVidu
 active: documentation
 ---
 
-<script src="/js/plugins/jquery.min.js"></script>
-
 <link rel="stylesheet" href="/css/syntax.css" />
 <script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('li.subnav_drop').find('ul.subnav').hide();
-		$(".subnav").find("li:contains('Upgrading OpenVidu')").each(function (i, e) {
-			var currentElement = $(e);
-			currentElement.parent().css({
-				"display": "block",
-				"visibility": "visible"
-			}); //css("background-color","blue");
-			currentElement.css({
-				"display": "block",
-				"visibility": "visible"
-			});
-		});
-		$('li.subnav_drop div').click(function (i, e) {
-			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
-			$(this).parent().find('ul.subnav').toggle();
-		});
-
-		var minHeight = $('#sticky-menu').outerHeight() + 100;
-		$('#doc-container').css('min-height', minHeight + 'px');
-	});
-
-	$(".wy-nav-content").find("li:contains('Upgrading OpenVidu')").css('color', 'red');
+<script>
+	hljs.initHighlightingOnLoad();
 </script>
 
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/perfect-scrollbar.min.js"></script>
+<link rel="stylesheet" href="/css/perfect-scrollbar.css" />
+
 <div id="doc-container" class="container text-justify">
-		<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+	<div id="sticky-menu" class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-			
-			<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-				<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
-					<div id="site-menu-title">
-						<h3>Explore docs</h3>
-						<hr>
-					</div>
-					<ul id="menu-list" class="current">
-						 
-						<li>
-							<ul>
+		
+		<nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+			<div class="wy-menu wy-menu-vertical" role="navigation" aria-label="main navigation">
+				<div id="site-menu-title">
+					<h3>Explore docs</h3>
+					<hr>
+				</div>
+				<ul id="menu-list">
+					 
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../home/">What is OpenVidu?</a> 
+        <a class="" href="/docs/home/">What is OpenVidu?</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Tutorials</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Tutorials</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/">Intro</a> 
+        <a class="" href="/docs/tutorials/">Intro</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
+        <a class="" href="/docs/tutorials/openvidu-webcomponent/">openvidu-webcomponent</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
+        <a class="" href="/docs/tutorials/openvidu-hello-world/">openvidu-hello-world</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-js/">openvidu-insecure-js</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-angular/">openvidu-insecure-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-angular/">openvidu-library-angular</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-insecure-react/">openvidu-insecure-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-library-react/">openvidu-library-react</a> 
+        <a class="" href="/docs/tutorials/openvidu-library-react/">openvidu-library-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-android/">openvidu-android</a> 
+        <a class="" href="/docs/tutorials/openvidu-android/">openvidu-android</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-ionic/">openvidu-ionic</a> 
+        <a class="" href="/docs/tutorials/openvidu-ionic/">openvidu-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-react-native/">openvidu-react-native</a> 
+        <a class="" href="/docs/tutorials/openvidu-react-native/">openvidu-react-native</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-electron/">openvidu-electron</a> 
+        <a class="" href="/docs/tutorials/openvidu-electron/">openvidu-electron</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-js-java/">openvidu-js-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-java/">openvidu-js-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-java/">openvidu-mvc-java</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-js-node/">openvidu-js-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-js-node/">openvidu-js-node</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
+        <a class="" href="/docs/tutorials/openvidu-mvc-node/">openvidu-mvc-node</a> 
 </li>
 
  
@@ -165,42 +153,52 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Demos</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Demos</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-getaroom/">openvidu-getaroom</a> 
+        <a class="" href="/docs/demos/openvidu-getaroom/">openvidu-getaroom</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call/">openvidu-call</a> 
+        <a class="" href="/docs/demos/openvidu-call/">openvidu-call</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call-react/">openvidu-call-react</a> 
+        <a class="" href="/docs/demos/openvidu-call-react/">openvidu-call-react</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
+        <a class="" href="/docs/demos/openvidu-call-ionic/">openvidu-call-ionic</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../demos/openvidu-classroom/">openvidu-classroom</a> 
+        <a class="" href="/docs/demos/openvidu-classroom/">openvidu-classroom</a> 
 </li>
 
  
@@ -208,60 +206,70 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Cheatsheet</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Cheatsheet</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/join-session/">Join a session</a> 
+        <a class="" href="/docs/cheatsheet/join-session/">Join a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/leave-session/">Leave a session</a> 
+        <a class="" href="/docs/cheatsheet/leave-session/">Leave a session</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
+        <a class="" href="/docs/cheatsheet/subscribe-unsubscribe/">Subscribe/Unsubscribe from a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
+        <a class="" href="/docs/cheatsheet/publish-unpublish/">Publish/Unpublish a stream</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
+        <a class="" href="/docs/cheatsheet/mute-audio-video/">Mute/Unmute audio and video</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/manage-videos/">Manage video players</a> 
+        <a class="" href="/docs/cheatsheet/manage-videos/">Manage video players</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/share-data/">Share data between users</a> 
+        <a class="" href="/docs/cheatsheet/share-data/">Share data between users</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../cheatsheet/send-messages/">Send text messages</a> 
+        <a class="" href="/docs/cheatsheet/send-messages/">Send text messages</a> 
 </li>
 
  
@@ -269,42 +277,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Advanced features</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Advanced features</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../advanced-features/recording/">Recording</a> 
+        <a class="" href="/docs/advanced-features/recording/">Recording</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../advanced-features/screen-share/">Screen share</a> 
+        <a class="" href="/docs/advanced-features/screen-share/">Screen share</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../advanced-features/speech-detection/">Speech detection</a> 
+        <a class="" href="/docs/advanced-features/ip-cameras/">IP cameras</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../advanced-features/filters/">Voice and video filters</a> 
+        <a class="" href="/docs/advanced-features/speech-detection/">Speech detection</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../advanced-features/switch-camera/">Switch camera</a> 
+        <a class="" href="/docs/advanced-features/filters/">Voice and video filters</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/switch-camera/">Switch camera</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/advanced-features/automatic-reconnection/">Automatic reconnection</a> 
 </li>
 
  
@@ -312,54 +342,64 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Reference Documentation</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-browser/">openvidu-browser API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-browser/">openvidu-browser API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-java-client/">openvidu-java-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
+        <a class="" href="/docs/reference-docs/openvidu-node-client/">openvidu-node-client API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/REST-API/">REST  API</a> 
+        <a class="" href="/docs/reference-docs/REST-API/">REST API</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-params/">OpenVidu Server configuration</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-cdr/">OpenVidu Server CDR</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
+        <a class="" href="/docs/reference-docs/openvidu-server-webhook/">OpenVidu Server Webhook</a> 
 </li>
 
  
@@ -367,36 +407,46 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul current">
 
-<li  class="subnav_drop">
-        <div><span>Deployment</span></div>
+<li 
+        class="subnav_drop current">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deployment</span>
+                <div>
+                        
+                        <span class="arrow-up">▴</span>
+                        <span class="arrow-down" style="display: none">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../deploying-aws/">Deploying OpenVidu on AWS</a> 
+        <a class="" href="/docs/deployment/deploying-aws/">Deploying OpenVidu on AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
+        <a class="" href="/docs/deployment/deploying-ubuntu/">Deploying OpenVidu on Ubuntu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../deploying-app/">Deploying your OpenVidu app</a> 
+        <a class="" href="/docs/deployment/deploying-app/">Deploying your OpenVidu app</a> 
 </li>
 
   
 
 <li class="toctree-l1 current">
-        <a class="current" href="./">Upgrading OpenVidu</a>  
+        <a class="current" href="/docs/deployment/upgrading/">Upgrading OpenVidu</a>  
 </li>
 
  
@@ -404,24 +454,34 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  class="subnav_drop">
-        <div><span>Contribute</span></div>
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Contribute</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../developing/">Developing OpenVidu</a> 
+        <a class="" href="/docs/developing/">Developing OpenVidu</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../developing/rpc/">OpenVidu Server RPC protocol</a> 
+        <a class="" href="/docs/developing/rpc/">OpenVidu Server RPC protocol</a> 
 </li>
 
  
@@ -429,94 +489,168 @@ active: documentation
 </ul>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../troubleshooting/">Troubleshooting / FAQ</a> 
+        <a class="" href="/docs/troubleshooting/">Troubleshooting / FAQ</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
 <li class="toctree-l1 ">
-        <a class="" href="../../releases/">Releases</a> 
+        <a class="" href="/docs/releases/">Releases</a> 
 </li>
 
 </ul>
-						</li>
-						  
-						<li>
-							<ul>
+					</li>
+					  
+					<li>
+						<ul class="top-ul ">
 
-<li  style="width: 100%; display: inline-block"  class="subnav_drop">
-        <div><span>OpenVidu Pro</span><a style="all: unset; display: inline"
-                        href="/docs/openvidu-pro/">
-                        <div id="openvidu-pro-tag" style="float: right; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">PRO</div>
-                </a></div>
+<li  style="width: 100%; display: inline-block" 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                        <a style="all: unset; display: inline">
+                                <div id="openvidu-pro-tag"
+                                        style=" pointer-events: none; float: left; margin-right: 12px; background-color: rgb(0, 136, 170); color: white; font-weight: bold; padding: 0px 5px; border-radius: 3px; font-size: 13px; line-height:21px; font-family: Montserrat, sans-serif;">
+                                        PRO</div>
+                        </a>
+                </div>
+        </div>
         <ul class="subnav" hidden>
                  
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/">Home</a> 
+        <a class="" href="/docs/openvidu-pro/">Home</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
+        <a class="" href="/docs/openvidu-pro/scalability/">Scalability</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+        <a class="" href="/docs/openvidu-pro/openvidu-inspector/">OpenVidu Inspector</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/scalability/">Scalability</a> 
+        <a class="" href="/docs/openvidu-pro/detailed-session-monitoring/">Detailed session monitoring</a> 
+</li>
+
+  
+
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Deploying OpenVidu Pro</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/deployment/aws/">AWS</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/deploying-openvidu-pro/">Deploying OpenVidu Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/on-premise/">On premise</a> 
 </li>
 
   
 
 <li class="toctree-l1 ">
-        <a class="" href="../../openvidu-pro/REST-API-pro/">REST API Pro</a> 
+        <a class="" href="/docs/openvidu-pro/deployment/kubernetes/">Kubernetes</a> 
 </li>
 
  
 </li>
 </ul>
 
-</ul>
-						</li>
-						 
-					</ul>
-				</div>
-				&nbsp;
-			</nav>
-		</div>
+  
 
-		<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-			
+<li 
+        class="subnav_drop ">
+        <div style="display: flex; justify-content: space-between">
+                <span>Reference Documentation</span>
+                <div>
+                        
+                        <span class="arrow-up" style="display: none">▴</span>
+                        <span class="arrow-down">▾</span>
+                        
+                        
+                </div>
+        </div>
+        <ul class="subnav" hidden>
+                 
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/REST-API-pro/">REST API Pro</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-params/">OpenVidu Server Pro configuration</a> 
+</li>
+
+  
+
+<li class="toctree-l1 ">
+        <a class="" href="/docs/openvidu-pro/reference-docs/openvidu-server-pro-cdr/">OpenVidu Server Pro CDR</a> 
+</li>
+
+ 
+</li>
+</ul>
+
+ 
+</li>
+</ul>
+
+</ul>
+					</li>
+					 
+				</ul>
+			</div>
+			&nbsp;
+		</nav>
+	</div>
+
+	<section class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+		
+		<div>
 			<div>
-				<div>
 
-					<div role="main">
-						<div class="section">
-							 <h2 id="section-title">Upgrading OpenVidu</h2>
+				<div role="main">
+					<div class="section">
+						 <h2 id="section-title">Upgrading OpenVidu</h2>
 
 <hr>
 
@@ -549,25 +683,25 @@ active: documentation
 </div>
 
 <h1 id="for-aws-deployments">For AWS deployments</h1>
-<p>We provide an automated script to easily update the OpenVidu version of your AWS deployment.</p>
-<h4 id="1-connect-through-ssh-to-your-aws-instance">1) Connect through <em>ssh</em> to your AWS instance</h4>
-<pre><code class="console">ssh -i /path/to/your/private/key/file.pem ubuntu@12.34.56.78
-</code></pre>
+<p>The upgrading process is 100% automatic. Just navigate to <strong><a href="https://console.aws.amazon.com/cloudformation" target="_blank">AWS CloudFormation dashboard</a></strong> and follow below steps:</p>
+<div class="row">
+    <div class="upgrade-cf-steps" style="margin: 25px 35px 25px 35px">
+        <a data-fancybox="gallery-upgrade-cf" data-caption="Click on 'Update' button" href="/img/docs/upgrading/CF_update1.png"><img class="img-responsive img-pro" src="/img/docs/upgrading/CF_update1.png"/></a>
+        <a data-fancybox="gallery-upgrade-cf" data-caption="Select 'Use current template' and click on 'Next'" href="/img/docs/upgrading/CF_update2.png"><img class="img-responsive img-pro" src="/img/docs/upgrading/CF_update2.png"/></a>
+        <a data-fancybox="gallery-upgrade-cf" data-caption="Change field 'OpenVidu Version'" href="/img/docs/upgrading/CF_update3.png"><img class="img-responsive img-pro" src="/img/docs/upgrading/CF_update3.png"/></a>
+    </div>
+    <div class="slick-captions">
+      <div class="caption"><p><strong>1)</strong> Select your CloudFormation stack and click on <strong>Update</strong> button</p></div>
+      <div class="caption"><p><strong>2)</strong> Select <strong>Use current template</strong> and click on <strong>Next</strong></p></div>
+      <div class="caption"><p><strong>3)</strong> Change field <strong>OpenVidu version</strong> inside "Other configuration" section and at the bottom of the page click on <strong>Next 🡆 Next 🡆 Update stack</stack></p></div>
+    </div>
+</div>
 
-<h4 id="2-download-the-script-from-github">2) Download the script from GitHub</h4>
-<pre><code class="console">wget https://raw.githubusercontent.com/OpenVidu/adm-scripts/master/scripts/openvidu_update_stack.sh
-sudo chmod 777 openvidu_update_stack.sh
-</code></pre>
-
-<h4 id="3-run-the-script-indicating-the-openvidu-version-you-want-to-upgrade-to">3) Run the script, indicating the OpenVidu version you want to upgrade to</h4>
-<p>Better do this as the <em>root</em> user. <strong>WARNING</strong>: running the script will stop OpenVidu Server. After upgrading all the services, it will be automatically restarted.</p>
-<pre><code class="console">sudo -s
-export OV_NEW_VERSION=2.8.0
-./openvidu_update_stack.sh
-</code></pre>
-
-<h4 id="4-update-openvidu-browser-library-version-in-your-clients">4) Update <em>openvidu-browser</em> library version in your clients</h4>
-<p>Comply version compatibility according to <strong><a href="../../releases" target="_blank">Releases</a></strong> page.</p>
+<p><br></p>
+<p>After performing the steps above, you will be redirect to Events page, where you will see a new <code>UPDATE_IN_PROGRESS</code> status. Wait until <code>UPDATE_COMPLETE</code> and your new version of OpenVidu will be ready.</p>
+<blockquote>
+<p>Remember to update <strong>openvidu-browser</strong> library in your clients. Comply version compatibility according to <strong><a href="/docs/releases" target="_blank">Releases</a></strong> page</p>
+</blockquote>
 <p><br></p>
 <hr />
 <h1 id="for-ubuntu-deployments">For Ubuntu deployments</h1>
@@ -575,7 +709,7 @@ export OV_NEW_VERSION=2.8.0
 <h4 id="1-stop-openvidu-server-and-kurento-media-server-services">1) Stop OpenVidu Server and Kurento Media Server services</h4>
 <p>First one is a Java process that may be killed with a simple <code>kill -9 PID_NUMBER</code> command, and second one is usually stopped with <code>sudo service kurento-media-server stop</code></p>
 <h4 id="2-upgrade-kurento-media-server-package-and-replace-openvidu-server-jar-file-for-the-new-version">2) Upgrade kurento-media-server package and replace openvidu-server JAR file for the new version</h4>
-<p>It is mandatory to comply version compatibility between OpenVidu and Kurento Media Server. Check it out in <strong><a href="../../releases" target="_blank">Releases</a></strong> page.
+<p>It is mandatory to comply version compatibility between OpenVidu and Kurento Media Server. Check it out in <strong><a href="/docs/releases" target="_blank">Releases</a></strong> page.
 You should be able to reinstall a new version of KMS while maintaining all the configuration files with these commands:</p>
 <p><strong>For Ubuntu Xenial 16.04</strong>  <em>(do not run below command if you run this one)</em></p>
 <pre><code class="bash">export DISTRO=xenial
@@ -599,20 +733,71 @@ wget https://github.com/OpenVidu/openvidu/releases/download/v{VERSION}/openvidu-
 </code></pre>
 
 <h4 id="3-restart-openvidu-server-and-kurento-media-server-services">3) Restart OpenVidu Server and Kurento Media Server services</h4>
-<p>Run Kurento Media Server with <code>sudo service kurento-media-server start</code> and launch openvidu-server JAR file as stated in <a href="../../deployment/deploying-ubuntu/#8-init-openvidu-server-jar-executable" target="_blank">Deploying OpenVidu in Ubuntu</a> section.</p>
-<h4 id="4-update-openvidu-browser-library-version-in-your-clients_1">4) Update <em>openvidu-browser</em> library version in your clients</h4>
-<p>Comply version compatibility according to <strong><a href="../../releases" target="_blank">Releases</a></strong> page.</p>
-<p><br><br></p> 
-						</div>
-					</div> <footer>
+<p>Run Kurento Media Server with <code>sudo service kurento-media-server start</code> and launch openvidu-server JAR file as stated in <a href="/docs/deployment/deploying-ubuntu/#8-init-openvidu-server-jar-executable" target="_blank">Deploying OpenVidu in Ubuntu</a> section.</p>
+<blockquote>
+<p>Remember to update <strong>openvidu-browser</strong> library in your clients. Comply version compatibility according to <strong><a href="/docs/releases" target="_blank">Releases</a></strong> page</p>
+</blockquote>
+<p><br><br></p>
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+<script>
+  $().fancybox({
+    selector : '[data-fancybox]',
+    infobar : true,
+    arrows : false,
+    loop: true,
+    protect: true,
+    transitionEffect: 'slide',
+    buttons : [
+        'close'
+    ],
+    clickOutside : 'close',
+    clickSlide   : 'close',
+  });
+</script></p>
+<p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/brands.css" integrity="sha384-Px1uYmw7+bCkOsNAiAV5nxGKJ0Ixn5nChyW8lCK1Li1ic9nbO5pC/iXaq27X5ENt" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I" crossorigin="anonymous"></p>
+<p><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script></p>
+<script>
+    $('.slick-captions').slick({
+      asNavFor: '.upgrade-cf-steps',
+      arrows: false,
+      infinite: false,
+      speed: 200,
+      fade: true,
+      dots: false
+    });
+    $('.upgrade-cf-steps').slick({
+      asNavFor: '.slick-captions',
+      autoplay: false,
+      arrows: true,
+      prevArrow: '<div class="slick-btn slick-btn-prev"><i class="icon ion-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-btn slick-btn-next"><i class="icon ion-chevron-right"></i></div>',
+      infinite: false,
+      dots: true,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: true,
+          slidesToShow: 1
+        }
+      },
+    ]
+    });
+</script> 
+					</div>
+				</div> <footer>
 <hr>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../developing/" class="btn btn-xs btn-primary float-right" title="Developing OpenVidu">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
+        <a href="/docs/developing/" class="btn btn-xs btn-primary float-right" title="Developing OpenVidu">Next &raquo;<span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../deploying-app/" class="btn btn-xs btn-primary" title="Deploying your OpenVidu app"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
+        <a href="/docs/deployment/deploying-app/" class="btn btn-xs btn-primary" title="Deploying your OpenVidu app"><span class="icon icon-circle-arrow-left"></span> &laquo; Prev</a>
       
     </div>
   
@@ -621,11 +806,48 @@ wget https://github.com/OpenVidu/openvidu/releases/download/v{VERSION}/openvidu-
   
   <div id="edit-github">
   
-	  <a href="https://github.com/OpenVidu/openvidu.io-docs/blob/master/docs/deployment/upgrading.md"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
+	  <a href="https://github.com/OpenVidu/openvidu.io-docs//blob/master/docs/"><i class="icon ion-social-github"></i> Edit Documentation on GitHub</a>
   
   </div>
 </footer> 
-				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		const ps = new PerfectScrollbar('#menu-list', {
+			wheelSpeed: 1,
+			wheelPropagation: true,
+			suppressScrollX: true
+		});
+
+		$('li.subnav_drop').find('ul.subnav').hide();
+		$(".subnav").find("li:contains('Upgrading OpenVidu')").each(function (i, e) {
+			var currentElement = $(e);
+			currentElement.parent().css({
+				"display": "block",
+				"visibility": "visible"
+			}); //css("background-color","blue");
+			currentElement.css({
+				"display": "block",
+				"visibility": "visible"
+			});
+		});
+		$('li.subnav_drop div').click(function (i, e) {
+			//$('li.subnav_drop span').not(this).find('ul.subnav').hide();
+			let submenu = $(this).parent().find('ul.subnav');
+			submenu.toggle();
+			submenu.parent().find('span.arrow-up').toggle();
+			submenu.parent().find('span.arrow-down').toggle();
+			ps.update();
+		});
+
+		var minHeight = $('#sticky-menu').outerHeight() + 100;
+		$('#doc-container').css('min-height', minHeight + 'px');
+	});
+
+	$(".wy-nav-content").find("li:contains('Upgrading OpenVidu')").css('color', 'red');
+</script>

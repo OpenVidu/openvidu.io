@@ -19,80 +19,16 @@ ul#menu-list {
     top: 0;
     bottom: 0;
     height: 80vh;
-    overflow-y: auto;
+    padding-right: 10px;
+    margin-right: -10px;
+    padding-bottom: 15px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-#sticky-menu ul li.toctree-l1 a {
-    display: block;
-    width: 100%;
-    text-align: left;
-}
-
-#sticky-menu ul.subnav {
-    padding-left: 40px;
-    margin-top: 10px;
-    margin-bottom: 0px;
-}
-
-#sticky-menu ul li div,
-#sticky-menu ul li.toctree-l1 {
-    cursor: pointer;
-}
-
-#sticky-menu li span,
-#sticky-menu li a {
-    color: #777;
-    cursor: pointer;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
-}
-
-#sticky-menu ul li div:hover span,
-#sticky-menu ul li.toctree-l1:hover a {
-    border-left: 4px;
-    border-top: 0;
-    border-bottom: 0;
-    border-right: 0;
-    border-color: #0088aa;
-    color: #0088aa;
-    font-weight: bold;
-    border-style: solid;
-    padding-left: 5px;
-}
-
-#sticky-menu li a.current {
-    border-left: 4px;
-    border-top: 0;
-    border-bottom: 0;
-    border-right: 0;
-    border-color: #0088aa;
-    color: #0088aa;
-    border-style: solid;
-    padding-left: 5px;
-}
-
-#sticky-menu ul#menu-list > li > ul > li {
-    border-top: 0;
-    border-bottom: 1px;
-    border-style: solid;
-    border-left: 0;
-    border-right: 0;
-    border-color: #eeeeee;
-    padding-bottom: 5px;
-    padding-top: 5px;
-}
-
-#sticky-menu .toctree-l1 {
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-
-#sticky-menu ul#menu-list > li > ul > li > a {
-    font-weight: bold;
-}
 
 /*#sticky-menu ul#menu-list > li:last-child > ul > li {
     float: right;
@@ -182,6 +118,7 @@ ul#menu-list {
 
 #doc-container h2#section-title {
     font-size: 50px;
+    text-align: initial;
 }
 
 #doc-container table {
@@ -209,6 +146,7 @@ ul#menu-list {
 #doc-container blockquote {
     background-color: #f9f9f9;
     margin-left: 30px;
+    margin-top: 30px;
 }
 
 #doc-container code {
@@ -387,6 +325,96 @@ ul#menu-list {
     font-size: 14px;
 }
 
+ul#menu-list > li > ul.top-ul {
+	padding-left: 8px;
+	padding-right: 8px;
+	border-radius: 2px;
+}
+
+ul#menu-list li.subnav_drop {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+ul#menu-list > li > ul.top-ul ul.subnav > li.subnav_drop.current {
+    background-color: #eeeeee;
+}
+
+ul#menu-list > li > ul.top-ul.current {
+    background-color: #f7f7f7;
+}
+
+ul.subnav > li.current {
+    background-color: #e9e9e9;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+ul.subnav > li.current {
+    background-color: #0088aa1f;
+    margin-left: -25px;
+    padding-left: 25px;
+}
+
+#sticky-menu ul li.toctree-l1 a {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#sticky-menu ul.subnav {
+    padding-left: 25px;
+    margin-top: 10px;
+}
+
+#sticky-menu ul li div,
+#sticky-menu ul li.toctree-l1 {
+    cursor: pointer;
+}
+
+#sticky-menu li span,
+#sticky-menu li a {
+    color: #777;
+    cursor: pointer;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+#sticky-menu ul li div:hover span,
+#sticky-menu ul li.toctree-l1:hover a {
+    color: #0088aa;
+    font-weight: bold;
+}
+
+#sticky-menu li a.current {
+    color: #0088aa;
+}
+
+#sticky-menu ul#menu-list > li > ul > li {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#sticky-menu .toctree-l1 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#sticky-menu ul#menu-list > li > ul > li > a {
+    font-weight: bold;
+}
+
+span.arrow-up {
+    color: #bfbfbf !important;
+}
+
+span.arrow-down {
+    color: #bfbfbf !important;
+}
+
 @media all and (min-width: 992px) {
     #doc-container img.login-form-img {
         max-width: 300px;
@@ -407,7 +435,8 @@ ul#menu-list {
         top: inherit;
         bottom: inherit;
         height: inherit;
-        overflow-y: inherit;
+        margin-right: unset;
+        padding-right: unset;
     }
     #sticky-menu {
         position: relative !important;

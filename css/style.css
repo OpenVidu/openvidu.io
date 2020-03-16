@@ -885,6 +885,9 @@ nav {
         margin-top: 7px;
         margin-bottom: 3px;
     }
+    .navbar-default #account-btn {
+        padding-left: 0px !important;
+    }
 }
 @media (min-width: 768px) {
     .navbar-nav.navbar-right:last-child {
@@ -2428,15 +2431,22 @@ border-bottom:1px dotted #ccc;
         max-height: 160px;
     }
 }
+footer {
+    font-family: "Open Sans", sans-serif;
+}
 footer h4 {
     font-size: 16px;
     color: #DDD;
     margin-bottom: 20px;
     text-transform: uppercase;
+    height: inherit;
+    font-weight: 700;
 }
 footer p {
     font-size: 13px;
     color: #a0a0a0;
+    height: inherit;
+    font-weight: 400;
 }
 .tweet ul {
     list-style: none;
@@ -2470,7 +2480,7 @@ footer .contact-details {
     line-height: 26px;
     color: #8C8989;
 }
-footer #social-icons {
+footer .footer-list {
     list-style: none;
     float: right;
     margin: 0;
@@ -2479,20 +2489,20 @@ footer #social-icons {
     .footer-copyright p {
         text-align: center;
     }
-    footer #social-icons {
+    .footer-list {
         float: none!important;
         text-align: center;
         padding-left: 0px;
         padding-top: 10px;
-    } 
+    }
 }
-footer #social-icons li {
+#social-icons.footer-list li {
     font-size: 20px;
     display: inline-block;
     margin-left: 10px;
     margin-right: 10px;
 }
-footer #social-icons li a {
+.footer-list li a {
     color: #46494a;
 }
 footer a:hover {
@@ -3504,4 +3514,16 @@ pre {
 #masonry .blog-column .btn {
     margin-top: 20px;
     margin-left: 0;
+}
+
+#page-container-for-footer {
+    display: flex;                  /* establish flex container */
+    flex-direction: column;         /* align child elements ("flex items") vertically */
+    justify-content: space-between; /* pin both flex items to opposite ends */
+    margin: 0;
+    min-height: 100%;
+}
+
+.mat-dialog-actions {
+    min-height: 68px !important;
 }
