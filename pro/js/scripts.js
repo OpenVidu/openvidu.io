@@ -128,7 +128,7 @@
     /* -------------------
     Google map
     ---------------------*/
-    $("#map").gmap3({
+    /*$("#map").gmap3({
         marker:{     
         address:"Calle Tulipán, s/n, 28933 Móstoles, Madrid", 
         options:{ icon: "img/assets/marker.png"}},
@@ -141,7 +141,7 @@
         scrollwheel:false,
         draggable: true }
         }
-    });	
+    });	*/
     /* -------------------
     Twitter Feed
     ---------------------*/
@@ -210,9 +210,9 @@
     $(window).ready(function(){ 
         setTimeout(function() { 
             $('.loader').fadeOut('slow');
-            $('#preloader').delay(350).fadeOut('slow'); 
-        }, 1000 ); 
-    }); 
+            $('#preloader').delay(100).fadeOut('slow'); 
+        }, 200 ); 
+    });
     /* -------------------
     Page Hero Parallax
     ---------------------*/
