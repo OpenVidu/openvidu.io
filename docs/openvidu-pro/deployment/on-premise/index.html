@@ -863,7 +863,7 @@ openvidu-server        : ok=53  changed=43  unreachable=0   failed=0   skipped=1
 <li><strong>Drop a Media Node</strong>: <strong><a href="/docs/openvidu-pro/reference-docs/REST-API-pro/#delete-promedia-nodesltmedia_node_idgt" target="_blank">DELETE /pro/media-nodes</a></strong></li>
 </ul>
 <blockquote>
-<p><strong>WARNING</strong>: there are some important aspects to keep in mind when launching and dropping Media Nodes in on premises OpenVidu Pro clusters:</p>
+<p><strong>WARNING</strong>: there are some important aspects to keep in mind when launching and dropping Media Nodes through REST API in on premises OpenVidu Pro clusters:</p>
 <ul>
 <li>Trying to drop a Media Node which is currently hosting an OpenVidu Session will fail by default. You can manage the drop policy when calling <a href="/docs/openvidu-pro/reference-docs/REST-API-pro/#delete-promedia-nodesltmedia_node_idgt" target="_blank">DELETE /pro/media-nodes</a> through parameter <code>deletion-strategy</code>.<br><br></li>
 <li>Launching/Dropping Media Nodes in on premise deployments will not automatically start/terminate your instances:<ul>
