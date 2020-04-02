@@ -9,7 +9,16 @@
         cursor: pointer;
     }
 </style>
-<select>
-    <option value="2.12.0"><a href="/en/2.12.0/">2.12.0</a></option>
-    <option value="2.11.0"><a href="/en/2.11.0/">2.11.0</a></option>
+<select id="version-selector" onchange="location = this.value">
+    <option value="/en/2.12.0/"><a href="/en/2.12.0/">2.12.0</a></option>
+    <option value="/en/2.11.0/"><a href="/en/2.11.0/">≤ 2.11.0</a></option>
 </select>
+
+<script>
+    $(document).ready(function () {
+        const urlVersion = window.location.pathname.split("/").filter(function (el) {
+            return el.length != 0
+        })[1];
+        document.getElementById('version-selector').value = '/en/' + urlVersion + "/";
+    });
+</script>
