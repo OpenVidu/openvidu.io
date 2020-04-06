@@ -6,7 +6,6 @@
 #sticky-menu {
     position: sticky;
     top: 56px;
-    z-index: 1000;
 }
 
 #sticky-menu ul {
@@ -29,70 +28,13 @@ ul#menu-list {
     user-select: none;
 }
 
-
-/*#sticky-menu ul#menu-list > li:last-child > ul > li {
-    float: right;
+#explore-docs {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-top: 25px;
 }
-
-#sticky-menu ul#menu-list > li:last-child > ul > li > a {
-    font-size: 10px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    line-height: 1.6;
-    letter-spacing: 1px;
-    margin: 0 5px 0 5px;
-    padding: 5px 10px;
-    text-align: center;
-    box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
-    -moz-box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
-    -webkit-box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
-    -o-box-shadow: 0 -3px rgba(0, 0, 0, 0.3) inset;
-    -webkit-transition: all ease .3s;
-    -moz-transition: all ease .3s;
-    -o-transition: all ease .3s;
-    -ms-transition: all ease .3s;
-    transition: all ease .3s;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-
-    background-color: #efefef;
-    color: #7a7a7a;
-    margin-left: 0px;
-    margin-right: 0px;
-}
-
-#sticky-menu ul#menu-list > li:last-child li.toctree-l1:hover a,
-#sticky-menu ul#menu-list > li:last-child li.toctree-l1:focus a {
-    border-color: transparent;
-    opacity: .7;
-    color: #333;
-    text-decoration: none;
-}
-
-#sticky-menu ul#menu-list > li:last-child li.toctree-l1:active a {
-    background-image: none;
-    outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-}*/
-
-
 
 #doc-container li {
     color: #7a7a7a;
@@ -327,8 +269,9 @@ ul#menu-list {
 
 ul#menu-list > li > ul.top-ul {
 	padding-left: 8px;
-	padding-right: 8px;
-	border-radius: 2px;
+    padding-right: 8px;
+    padding-top: 0;
+    border-radius: 2px;
 }
 
 ul#menu-list li.subnav_drop {
