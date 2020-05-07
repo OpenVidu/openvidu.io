@@ -84,7 +84,7 @@ a:focus, a:active, button::-moz-focus-inner, input[type="reset"]::-moz-focus-inn
         padding: 0 90px;
     }
 }
-@media (min-width: 768px) and (max-width: 991px)) {
+@media (min-width: 768px) and (max-width: 991px) {
     .container { 
         width: 100%; 
     }
@@ -620,7 +620,7 @@ nav {
     -ms-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
-@media (min-width: 1360px and max-width: 1920px) {
+@media (min-width: 1360px) and (max-width: 1920px) {
     nav { max-width: 1903px; }
 }
 @media (max-width: 1360px) {
@@ -3520,4 +3520,9 @@ pre {
 
 .mat-dialog-actions {
     min-height: 68px !important;
+}
+
+.ovCallText {
+    font-size: 17px;
+    text-align: justify;
 }
