@@ -31,7 +31,8 @@ section#main-buttons {
         max-width: 450px !important;
     }
     #wellcome-btn a {
-        font-size: 16px;
+        font-size: 13px;
+        padding: 10px 15px;
     }
 }
 
