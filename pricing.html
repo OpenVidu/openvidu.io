@@ -105,14 +105,6 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
                             <tr>
-                                <th scope="row">Kurento Media Server <i
-                                        class="icon ion-information-circled pricing-table-icon-info"
-                                        data-toggle="tooltip" data-placement="right"
-                                        title="Support for Kurento as core media server"></th>
-                                <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
-                                <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
-                            </tr>
-                            <tr>
                                 <th scope="row">OpenVidu Inspector <i
                                         class="icon ion-information-circled pricing-table-icon-info"
                                         data-toggle="tooltip" data-placement="right"
@@ -148,7 +140,24 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
-
+                            <tr>
+                                <th scope="row">S3 recording storage<i
+                                        class="icon ion-information-circled pricing-table-icon-info"
+                                        data-toggle="tooltip" data-placement="right"
+                                        title="Store your recordings in AWS S3">
+                                </th>
+                                <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Network quality API<i
+                                        class="icon ion-information-circled pricing-table-icon-info"
+                                        data-toggle="tooltip" data-placement="right"
+                                        title="Monitor the network quality of your clients">
+                                </th>
+                                <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
+                            </tr>
                             <tr>
                                 <th scope="row">Fault Tolerance <i
                                         class="icon ion-information-circled pricing-table-icon-info"
@@ -169,15 +178,6 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                                         data-placement="right" title="Work in progress"></i></td>
                             </tr>
                             <tr>
-                                <th scope="row">Other media servers<i
-                                        class="icon ion-information-circled pricing-table-icon-info"
-                                        data-toggle="tooltip" data-placement="right"
-                                        title="Support for other open-source media servers"></th>
-                                <td><i class="icon ion-close pricing-table-icon"></i></td>
-                                <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
-                                        data-placement="right" title="Work in progress"></i></td>
-                            </tr>
-                            <tr>
                                 <th scope="row">VP9<i class="icon ion-information-circled pricing-table-icon-info"
                                         data-toggle="tooltip" data-placement="right"
                                         title="Advanced codec when supported by devices"></th>
@@ -190,12 +190,6 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                                         class="icon ion-information-circled pricing-table-icon-info"
                                         data-toggle="tooltip" data-placement="right"
                                         title="To provide improved quality"></th>
-                                <td><i class="icon ion-close pricing-table-icon"></i></td>
-                                <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
-                                        data-placement="right" title="Work in progress"></i></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Kubernetes deployment</th>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
                                         data-placement="right" title="Work in progress"></i></td>
@@ -220,7 +214,8 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                     <th scope="row"></th>
                     <td><a href="https://docs.openvidu.io" class="btn-primary btn-scroll try-now-btn" target="_blank">
                             OpenVidu CE Docs</a></td>
-                    <td><a href="https://docs.openvidu.io/en/stable/openvidu-pro/" class="btn-primary btn-scroll pro-btn" target="_blank">
+                    <td><a href="https://docs.openvidu.io/en/stable/openvidu-pro/"
+                            class="btn-primary btn-scroll pro-btn" target="_blank">
                             OpenVidu Pro Docs</a></td>
                 </tr>
                 </tbody>
@@ -252,7 +247,8 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                 </div>
 
                 OpenVidu Pro is deployed as a cluster following a Master-Slave model (take a look to its
-                <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture" target="_blank">architecture</a>).
+                <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture"
+                    target="_blank">architecture</a>).
                 Every minute is charged based on how many CPU cores are available for your cluster(s). OpenVidu Pro is
                 priced as:
 
@@ -271,10 +267,11 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                         you will pay more. If your cluster decreases the next hour, next hour will be cheaper. Currently
                         all Nodes have the same core per minute price.</li>
                     <li>Your cluster (specifically your <a
-                            href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture" target="_blank">OpenVidu
+                            href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture"
+                            target="_blank">OpenVidu
                             Server Pro Node</a>) needs Internet access at all times. If your specific use case
-                        doesn't allow your cluster to have Internet access, please contact us through <a
-                            href="/support" target="_blank">Commercial page</a>.</li>
+                        doesn't allow your cluster to have Internet access, please contact us through <a href="/support"
+                            target="_blank">Commercial page</a>.</li>
                 </ol>
 
                 <div style="
@@ -542,8 +539,10 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                     <li>The type of media streams being published to the Session (only audio, only video, audio + video)
                     </li>
                     <li>Whether your Sessions are using advanced features such as <a
-                            href="https://docs.openvidu.io/en/stable/advanced-features/recording" target="_blank">recording</a> or <a
-                            href="https://docs.openvidu.io/en/stable/advanced-features/filters" target="_blank">audio/video filters</a></li>
+                            href="https://docs.openvidu.io/en/stable/advanced-features/recording"
+                            target="_blank">recording</a> or <a
+                            href="https://docs.openvidu.io/en/stable/advanced-features/filters"
+                            target="_blank">audio/video filters</a></li>
                 </ul>
 
                 You will need to perform some tests for your specific use case, and adapt the size of your cluster
@@ -588,7 +587,8 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need
                 Internet access at all times. You won't be able to run your OpenVidu Pro cluster unless your OpenVidu
                 Server Pro Node has Internet access (see
-                <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture" target="_blank">OpenVidu Pro
+                <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture"
+                    target="_blank">OpenVidu Pro
                     architecture</a>). If your specific use case doesn't allow your cluster to have Internet access,
                 please contact us through <a href="/support" target="_blank">Commercial page</a>.
 
@@ -613,7 +613,8 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                 <h4>3. If I deploy an OpenVidu Pro cluster in a cloud provider, does its size automatically adapt to the
                     user load?</h4>
                 Yes! You can adapt its size manually from OpenVidu Inspector or by consuming OpenVidu Pro REST
-                API (more info <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#change-the-number-of-media-nodes-on-the-fly"
+                API (more info <a
+                    href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#change-the-number-of-media-nodes-on-the-fly"
                     target="_blank">here</a>). Nonetheless automatic elasticity is included in OpenVidu Pro
                 roadmap.<br><br>
 
@@ -628,7 +629,7 @@ Mensualmente con tarjeta de crédito. Compras una licencia (es gratis mientras n
                     href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#change-the-number-of-media-nodes-on-the-fly"
                     target="_blank">when dropped</a>. If you then want to actually shut down the physical machine, you
                 will have to listen to <a
-                    href="https://docs.openvidu.io/en/stable/openvidu-pro/reference-docs/openvidu-server-pro-cdr/#medianodestatuschanged"
+                    href="https://docs.openvidu.io/en/stable/reference-docs/openvidu-server-cdr/#medianodestatuschanged"
                     target="_blank">mediaNodeStatusChanged</a> event until the Media Node reaches
                 <code>terminated</code> status,
                 and then you can safely terminate your server. When deploying OpenVidu Pro in a supported cloud
