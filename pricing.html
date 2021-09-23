@@ -193,6 +193,16 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
                             </tr>
                             <tr>
+                                <th scope="row">High Availability</th>
+                                <td scope="row"><i
+                                        class="icon ion-information-circled pricing-table-icon-info"
+                                        data-toggle="tooltip" data-placement="right"
+                                        title="Replication and decentralization of all nodes in AWS. Load balancing of clients"></td>
+                                <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                <td><i class="icon ion-close pricing-table-icon"></i></td>
+                                <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
+                            </tr>
+                            <tr>
                                 <th scope="row">VP9</th>
                                 <td scope="row"><i
                                         class="icon ion-information-circled pricing-table-icon-info"
@@ -200,7 +210,8 @@ top-subtitle: Choose your preferred tier according to your needs
                                         title="Advanced codec by supported devices"></td>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
-                                <td><i class="icon ion-checkmark pricing-table-icon"></i></td>
+                                <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
+                                    data-placement="right" title="Work in progress"></i></td>
                             </tr>
                             <tr>
                                 <th scope="row">Large scale sessions</th>
@@ -208,17 +219,6 @@ top-subtitle: Choose your preferred tier according to your needs
                                         class="icon ion-information-circled pricing-table-icon-info"
                                         data-toggle="tooltip" data-placement="right"
                                         title="Support for sessions with hundreds or even thousands of users"></td>
-                                <td><i class="icon ion-close pricing-table-icon"></i></td>
-                                <td><i class="icon ion-close pricing-table-icon"></i></td>
-                                <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
-                                        data-placement="right" title="Work in progress"></i></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">High Availability</th>
-                                <td scope="row"><i
-                                        class="icon ion-information-circled pricing-table-icon-info"
-                                        data-toggle="tooltip" data-placement="right"
-                                        title="Replication and decentralization of all nodes in AWS. Load balancing of clients"></td>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-close pricing-table-icon"></i></td>
                                 <td><i class="icon ion-hammer pricing-table-icon" data-toggle="tooltip"
@@ -334,7 +334,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 </div>
                 </div>
 
-                OpenVidu Pro is deployed as a cluster following a Master-Slave model (take a look to its
+                OpenVidu Pro is deployed as a cluster following a Master-Worker model (take a look to its
                 <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture"
                     target="_blank">architecture</a>).
                 Every minute is charged based on how many CPU cores are available for your cluster(s). OpenVidu Pro is
@@ -356,8 +356,7 @@ top-subtitle: Choose your preferred tier according to your needs
                         all Nodes have the same core per minute price.</li>
                     <li>Your cluster (specifically your <a
                             href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#openvidu-pro-architecture"
-                            target="_blank">OpenVidu
-                            Server Pro Node</a>) needs Internet access at all times. If your specific use case
+                            target="_blank">Master Node</a>) needs Internet access at all times. If your specific use case
                         doesn't allow your cluster to have Internet access, please contact us through <a href="/support"
                             target="_blank">Commercial page</a>.</li>
                 </ol>
@@ -409,7 +408,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 <div class="row price-row">
                     <div class="col-sm-6 col-xs-12">
                         <h4 style="text-align: left">Cluster with 6 cores in total</h4>
-                        <span>Let's suppose we have our OpenVidu Server Pro Node running in a
+                        <span>Let's suppose we have our Master Node running in a
                             2-core server and a single Media Node running in a 4-core server. This topology should be
                             enough for many use cases that do not expect tons of media streams established at the same
                             time.<br><br>
@@ -433,7 +432,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 <div class="row price-row">
                     <div class="col-sm-6 col-xs-12">
                         <h4 style="text-align: left">Cluster with 10 cores in total</h4>
-                        <span>If we have our OpenVidu Server Pro Node running in a
+                        <span>If we have our Master Node running in a
                             2-core server and 2 Media Nodes running in 4-core servers, prices will be the following
                             ones:<br><br>
                             8 hours of use would cost:<br><span class="price-calc">8 hours * 60 minutes/hour * 10 cores
@@ -457,7 +456,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 <div class="row price-row">
                     <div class="col-sm-6 col-xs-12">
                         <h4 style="text-align: left">Cluster with 18 cores in total</h4>
-                        <span>Let's suppose we have our OpenVidu Server Pro Node running in a
+                        <span>Let's suppose we have our Master Node running in a
                             2-core server and 2 Media Nodes running in 8-core servers. This cluster is pretty powerful
                             and should be able to handle a considerable amount of users.<br><br>
                             8 hours of use would cost:<br><span class="price-calc">8 hours * 60 minutes/hour * 18 cores
@@ -483,7 +482,7 @@ top-subtitle: Choose your preferred tier according to your needs
                         <h4 id="cluster-with-a-variable-number-of-cores" style="text-align: left">Cluster with a
                             variable number of cores</h4>
                         <span>This use case takes advantage of OpenVidu Pro scalablity features. Let's suppose we
-                            deploy a cluster with the OpenVidu Server Pro Node running in a 2-core server and a single
+                            deploy a cluster with the Master Node running in a 2-core server and a single
                             Media Node running in a 4-core server.<br><br>
                             We are fine running this cluster configuration during 8 hours. But suddenly we see a peak in
                             the demand, so we add 2 new Media Nodes to the cluster in 8-core servers to attend the
@@ -642,7 +641,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 sessions where every participant sends one audio-video stream (540x360, 30 fps) and receives 6 remote
                 streams (same video). The table states the maximum number of entities that can be established until the
                 Media Node CPU reaches 100% use. Take into account from a pricing point that the number of cores in each
-                column header does not sum up the total number of cores of the cluster (OpenVidu Server Pro Node cores
+                column header does not sum up the total number of cores of the cluster (Master Node cores
                 should also be counted).
 
                 <div class="row" style="margin: 10px; text-align: center; text-align: -webkit-center">
@@ -687,10 +686,10 @@ top-subtitle: Choose your preferred tier according to your needs
 
                 <h4>1. If I don't have any ongoing video session in my OpenVidu Pro cluster, do I have to pay?</h4>
                 Yes, OpenVidu Pro license is charged for any running OpenVidu Pro cluster, even when there are no active
-                sessions. If your cluster is on, you will at least have to pay for the OpenVidu Server Pro Node. But
+                sessions. If your cluster is on, you will at least have to pay for the Master Node. But
                 remember you can drop Media Nodes to reduce the cluster size and reduce your bill according to user
                 load. And as a definite measure you can always turn off the cluster so you don't even pay for the
-                OpenVidu Server Pro Node.<br><br>
+                Master Node.<br><br>
 
                 <h4>2. What is the price per minute of each call?</h4>
                 The cost per minute of video call depends very much on the utilization ratio of your OpenVidu Pro
