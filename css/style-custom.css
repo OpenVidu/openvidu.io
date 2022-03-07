@@ -273,7 +273,7 @@ a.try-now-btn {
 
 .last-table-col i {
     font-size: 18px;
-    color: #0088aa;
+    color: #4d4d4d;
 }
 
 ul.top-ul > li.subnav_drop > div > span {
@@ -1036,6 +1036,18 @@ table.table-pricing {
     margin-left: 8px;
 }
 
+a .pricing-table-icon-info {
+    color: #007492;
+}
+
+.icon-info-right {
+    float: right;
+}
+
+.table-pricing-bordered {
+    border-right: 2px solid #ddd;
+}
+
 .pricing-table-icon.ion-checkmark {
     color: #049145;
 }
@@ -1169,4 +1181,8 @@ nav.navbar.navbar-small #sign-in-button:hover {
     .navbar-small .lds-ripple div {
         border-color: #fff;
     }
+}
+
+.table-pricing tbody tr:hover {
+    background-color: rgb(239 239 239) !important;
 }
