@@ -446,9 +446,10 @@ top-subtitle: Choose your preferred tier according to your needs
                 <ul>
                     <li>The examples represent a <strong>continuous usage</strong> of the cluster, but remember that you can shut it down whenever you are not using it
                         and that you can drop nodes to save resources.</li>
-                    <li>Each example shows in a table the price for <strong>8 hours</strong>, <strong>1 day</strong> and <strong>1 month</strong> of continuous usage, as well as the approximated amount
-                        of <strong>sessions of 5 participants</strong> the cluster would support. This is done to provide a basic insight into the capacity of each cluster.
-                        These 5:5 sessions assume 25 media streams in total for each one of them, with no recording and no screen-sharing.</li>
+                    <li>Each example shows in a table the price for <strong>8 hours</strong>, <strong>1 day</strong> and <strong>1 month</strong> of continuous usage, as well as the
+                        <strong>approximated amount of media streams</strong> and <strong>sessions of 5 participants</strong> the cluster would support. This is done to provide a basic
+                        insight into the capacity of each cluster. These 5:5 sessions assume 25 media streams in total for each one of them (1 publisher and 4 subscribers per participant),
+                        with no recording and no screen-sharing.</li>
                     <li>In every example <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/#kurento-vs-mediasoup"><strong>mediasoup</strong></a>
                         is assumed for Enterprise edition.</li>
                 </ul>
@@ -476,6 +477,11 @@ top-subtitle: Choose your preferred tier according to your needs
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <th>Number of media streams</th>
+                                        <td>400</td>
+                                        <td>2000</td>
+                                    </tr>
                                     <tr>
                                         <th>Number of sessions with 5 participants</th>
                                         <td>16</td>
@@ -532,6 +538,11 @@ top-subtitle: Choose your preferred tier according to your needs
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <th>Number of media streams</th>
+                                        <td>800</td>
+                                        <td>4000</td>
+                                    </tr>
+                                    <tr>
                                         <th>Number of sessions with 5 participants</th>
                                         <td>32</td>
                                         <td>160</td>
@@ -587,6 +598,11 @@ top-subtitle: Choose your preferred tier according to your needs
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <th>Number of media streams</th>
+                                        <td>1600</td>
+                                        <td>8000</td>
+                                    </tr>
+                                    <tr>
                                         <th>Number of sessions with 5 participants</th>
                                         <td>64</td>
                                         <td>320</td>
@@ -639,6 +655,10 @@ top-subtitle: Choose your preferred tier according to your needs
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <th>Number of media streams</th>
+                                        <td>4000</td>
+                                    </tr>
                                     <tr>
                                         <th>Number of sessions with 5 participants</th>
                                         <td>160</td>
@@ -696,12 +716,17 @@ top-subtitle: Choose your preferred tier according to your needs
                                 </thead>
                                 <tbody>
                                     <tr style="background-color: #f9f9f9;">
-                                        <th rowspan="2">First 8 hours wit low demand <span style="font-weight: normal">(6 cores)</span></th>
+                                        <th rowspan="3">First 8 hours wit low demand <span style="font-weight: normal">(6 cores)</span></th>
                                         <td style="border-left: 1px solid #ddd;">Price</td>
                                         <td>$1.73 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
                                             data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 6 cores * $0.0006 = 1.73"></td>
                                         <td>$5.18 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
                                             data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 6 cores * $0.0018 = 5.18"></td>
+                                    </tr>
+                                    <tr style="background-color: #f9f9f9;">
+                                        <td style="border-left: 1px solid #ddd;">Media streams</td>
+                                        <td>400</td>
+                                        <td>2000</td>
                                     </tr>
                                     <tr style="background-color: #f9f9f9;">
                                         <td style="border-left: 1px solid #ddd;">Sessions with 5 participants</td>
@@ -709,7 +734,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                         <td>80</td>
                                     </tr>
                                     <tr style="background-color: #e7e7e7;">
-                                        <th rowspan="2">Next 8 hours with high demand <span style="font-weight: normal">(22 cores)</span></th>
+                                        <th rowspan="3">Next 8 hours with high demand <span style="font-weight: normal">(22 cores)</span></th>
                                         <td style="border-left: 1px solid #ddd;">Price</td>
                                         <td>$6.33 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
                                             data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 22 cores * $0.0006 = 6.33"></td>
@@ -717,17 +742,27 @@ top-subtitle: Choose your preferred tier according to your needs
                                             data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 22 cores * $0.0018 = 19.00"></td>
                                     </tr>
                                     <tr style="background-color: #e7e7e7;">
+                                        <td style="border-left: 1px solid #ddd;">Media streams</td>
+                                        <td>2000</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr style="background-color: #e7e7e7;">
                                         <td style="border-left: 1px solid #ddd;">Sessions with 5 participants</td>
                                         <td>80</td>
                                         <td>400</td>
                                     </tr>
                                     <tr style="background-color: #f9f9f9;">
-                                        <th rowspan="2">Last 8 hours with low demand <span style="font-weight: normal">(6 cores)</span></th>
+                                        <th rowspan="3">Last 8 hours with low demand <span style="font-weight: normal">(6 cores)</span></th>
                                         <td style="border-left: 1px solid #ddd;">Price</td>
                                         <td>$1.73 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
                                             data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 6 cores * $0.0006 = 1.73"></td>
                                         <td>$5.18 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
                                             data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 6 cores * $0.0018 = 5.18"></td>
+                                    </tr>
+                                    <tr style="background-color: #f9f9f9;">
+                                        <td style="border-left: 1px solid #ddd;">Media streams</td>
+                                        <td>400</td>
+                                        <td>2000</td>
                                     </tr>
                                     <tr style="background-color: #f9f9f9;">
                                         <td style="border-left: 1px solid #ddd;">Sessions with 5 participants</td>
@@ -762,7 +797,8 @@ top-subtitle: Choose your preferred tier according to your needs
                 This table summarizes all of the examples above. It shows:<br><br>
 
                 <ul>
-                    <li>The maximum number of simultaneous media streams supported by the cluster, based on the number of Media Node cores.</li>
+                    <li>The approximated maximum number of simultaneous media streams and 5:5 sessions supported by the cluster, based on the number of Media Node cores.
+                        This numbers assume no recording, no screen-sharing and using <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/#kurento-vs-mediasoup">mediasoup</a> for Enterprise edition.</li>
                     <li>The price for each configuration, based on the total number of cores and the running time.</li>
                 </ul>
 
@@ -791,6 +827,18 @@ top-subtitle: Choose your preferred tier according to your needs
                             <td colspan="2" class="table-pricing-bordered"><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">ENTERPRISE</div></td>
                             <td><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #0088aa; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">PRO</div></td>
                             <td><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">ENTERPRISE</div></td>
+                        </tr>
+                        <tr>
+                            <th class="table-pricing-bordered"><span style="white-space: nowrap">Media streams</th>
+                            <td>400</td>
+                            <td class="table-pricing-bordered">2000</td>
+                            <td>800</td>
+                            <td class="table-pricing-bordered">4000</td>
+                            <td>1600</td>
+                            <td class="table-pricing-bordered">8000</td>
+                            <td colspan="2" class="table-pricing-bordered">4000</td>
+                            <td><span style="white-space: nowrap">400 - 2000</span></td>
+                            <td><span style="white-space: nowrap">2000 - 10000</span></td>
                         </tr>
                         <tr>
                             <th class="table-pricing-bordered"><span style="white-space: nowrap">Sessions with</span> <span style="white-space: nowrap">5 participants</span></th>
@@ -921,11 +969,25 @@ top-subtitle: Choose your preferred tier according to your needs
                 </ul>
 
                 <br>
+                <hr style="width: 50%">
+                <br>
 
-                It is also important to note that Master Nodes also have a limit in the amount of users they can handle. OpenVidu Enterprise offers a High Availability deployment option that 
-                can help ..... The signaling procedures done by Master Nodes can be a bottle neck
+                It is also important to note that Master Nodes also have a limit in the amount of users they can handle. The signaling procedures performed by Master Nodes can become a bottleneck
+                with a high number of users. Usually this is not a problem, as the amount of users supported by a Master Node is significant and Media Nodes are generally the ones that really define
+                the limit of the cluster. But with the ability to launch an indefinite number of Media Nodes, the bottleneck in the Master Node may appear earlier or later, depending on the application's logic:
+                
+                <br><br>
 
+                <ul>
+                    <li>If lots of users are connecting/disconnecting to/from OpenVidu sessions in a very small time interval, the load on the signaling plane (and therefore on the Master Node) will be increased.</li>
+                    <li>If your application has OpenVidu sessions with a high number of participants per session, the load of the signaling plane (and therefore on the Master Node) will be higher than for sessions with less participants per session (even with the same number of total participants).</li>
+                    <li>If your application makes heavy use of OpenVidu SDK methods that involve sending and receiving signals and events in your clients, the load on the signaling plane (and therefore on the Master Node) will be increased.</li>
+                </ul>
 
+                <br>
+
+                To overcome this bottleneck in the Master Node, OpenVidu Enterprise offers a High Availability deployment option with replication of Master Nodes.
+                You can check it out here: <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/">High Availability</a>.
 
                 <br><br>
                 <hr><br>
