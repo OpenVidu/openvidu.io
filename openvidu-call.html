@@ -80,7 +80,7 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
                 <p class="ovCallText">Of course, you can modify OpenVidu Call to control how users enter to your sessions.</p>
             </div>
             <div class="col-md-6">
-                <a data-fancybox="gallery" href="img/demos/openvidu_call_login.png">
+                <a data-fancybox="gallery" data-type="image" class="fancybox-img" href="img/demos/openvidu_call_login.png">
                     <img class="img-responsive" src="img/demos/openvidu_call_login.png">
                 </a>
             </div>
@@ -104,7 +104,7 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
                 </p>
             </div>
             <div class="col-md-6 col-md-pull-6">
-                <a data-fancybox="gallery" href="img/demos/ov-call-prejoin.png">
+                <a data-fancybox="gallery" data-type="image" class="fancybox-img" href="img/demos/ov-call-prejoin.png">
                     <img class="img-responsive" src="img/demos/ov-call-prejoin.png">
                 </a>
             </div>
@@ -123,7 +123,7 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
                 </p>
             </div>
             <div class="col-md-6">
-                <a>
+                <a data-fancybox="gallery" data-type="iframe" class="fancybox-img" href="video/components/ov-call-vb.mp4">
                     <video class="img-responsive" src="video/components/ov-call-vb.mp4" muted playsinline autoplay loop async></video>
                 </a>
             </div>
@@ -141,7 +141,9 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
                     all the participants connected to the session.</p>
             </div>
             <div class="col-md-6 col-md-pull-6">
-                <video class="img-responsive" src="video/components/ov-call-participants.mp4" muted playsinline autoplay loop async></video>
+                <a data-fancybox="gallery" data-type="iframe" class="fancybox-img" href="video/components/ov-call-participants.mp4">
+                    <video class="img-responsive" src="video/components/ov-call-participants.mp4" muted playsinline autoplay loop async></video>
+                </a>
             </div>
         </div>
 
@@ -163,7 +165,9 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
                 </p>
             </div>
             <div class="col-md-6">
-                <video class="img-responsive" src="video/components/ov-call-screenshare.mp4" muted playsinline autoplay loop async></video>
+                <a data-fancybox="gallery" data-type="iframe" class="fancybox-img" href="video/components/ov-call-screenshare.mp4">
+                    <video class="img-responsive" src="video/components/ov-call-screenshare.mp4" muted playsinline autoplay loop async></video>
+                </a>
             </div>
         </div>
 
@@ -186,7 +190,9 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
                 </p>
             </div>
             <div class="col-md-6 col-md-pull-6">
-                <video class="img-responsive" src="video/components/ov-call-chat.mp4" muted playsinline autoplay loop async></video>
+                <a data-fancybox="gallery" data-type="iframe" class="fancybox-img" href="video/components/ov-call-chat.mp4">
+                    <video class="img-responsive" src="video/components/ov-call-chat.mp4" muted playsinline autoplay loop async></video>
+                </a>
             </div>
         </div>
 
@@ -223,18 +229,4 @@ top-subtitle: The videoconferencing app built on top of OpenVidu platform
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
-<script>
-    $().fancybox({
-        selector: '[data-fancybox="gallery"]',
-        infobar: true,
-        arrows: false,
-        loop: true,
-        protect: true,
-        transitionEffect: 'slide',
-        buttons: [
-            'close'
-        ],
-        clickOutside: 'close',
-        clickSlide: 'close',
-    });
-</script>
+<script type='text/javascript' src='/js/fancybox-setup.js'></script>

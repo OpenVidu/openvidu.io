@@ -22,17 +22,21 @@ page-type: home
     <div class="container">
         <div class="row wow fadeInUp">
             <div class="main-gallery">
-                <a>
+                <a data-fancybox="gallery-wellcome" data-type="iframe" class="fancybox-img" href="/video/components/ov-call-greetings.mp4">
                     <video class="img-responsive img-wellcome" src="/video/components/ov-call-greetings.mp4" muted playsinline autoplay loop async></video>
                 </a>
-                <a data-fancybox="gallery-wellcome" href="/img/demos/insecure-session.png"><img
-                        class="img-responsive img-wellcome" src="/img/demos/insecure-session.png" /></a>
-                <a data-fancybox="gallery-wellcome" href="/img/demos/getaroom-session-6.png"><img
-                        class="img-responsive img-wellcome" src="/img/demos/getaroom-session-6.png" /></a>
-                <a data-fancybox="gallery-wellcome" href="/img/demos/getaroom-session-6-mob.png"><img
-                        class="img-responsive img-wellcome" src="/img/demos/getaroom-session-6-mob.png" /></a>
-                <a data-fancybox="gallery-wellcome" href="/img/demos/openvidu-classroom-video.png"><img
-                        class="img-responsive img-wellcome" src="/img/demos/openvidu-classroom-video.png" /></a>
+                <a data-fancybox="gallery-wellcome" data-type="image" class="fancybox-img" href="/img/demos/insecure-session.png">
+                    <img class="img-responsive img-wellcome" src="/img/demos/insecure-session.png" />
+                </a>
+                <a data-fancybox="gallery-wellcome" data-type="image" class="fancybox-img" href="/img/demos/getaroom-session-6.png">
+                    <img class="img-responsive img-wellcome" src="/img/demos/getaroom-session-6.png" />
+                </a>
+                <a data-fancybox="gallery-wellcome" data-type="image" class="fancybox-img" href="/img/demos/getaroom-session-6-mob.png">
+                    <img class="img-responsive img-wellcome" src="/img/demos/getaroom-session-6-mob.png" />
+                </a>
+                <a data-fancybox="gallery-wellcome" data-type="image" class="fancybox-img" href="/img/demos/openvidu-classroom-video.png">
+                    <img class="img-responsive img-wellcome" src="/img/demos/openvidu-classroom-video.png" />
+                </a>
             </div>
         </div>
     </div>
@@ -42,7 +46,7 @@ page-type: home
     <div class="container">
         <div id="wellcome-btn" class="row wow fadeInUp">
             <a href="/demos" class="btn btn-lg btn-primary btn-scroll try-now-btn">Try our demos</a>
-            <a href="https://docs.openvidu.io" class="btn btn-lg btn-primary btn-scroll go-docs-btn">Go to docs</a>
+            <a href="https://docs.openvidu.io/getting-started/" class="btn btn-lg btn-primary btn-scroll go-docs-btn">Go to docs</a>
         </div>
     </div>
 </section>
@@ -85,16 +89,16 @@ page-type: home
                         enter a video conference, if they can publish video or not, etc.</p>
                     <p class="feature-description">
                         Just pick a frontend technology (<a
-                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-js/">Vanilla JS</a>, <a
-                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-angular/">Angular</a>
-                        or <a href="https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-react/">React</a>) or
+                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-js/">Vanilla JS</a>, <a
+                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-angular/">Angular</a>
+                        or <a href="https://docs.openvidu.io/en/stable/tutorials/openvidu-react/">React</a>) or
                         mobile technology (<a
                             href="https://docs.openvidu.io/en/stable/tutorials/openvidu-ionic/">Ionic</a>, <a
                             href="https://docs.openvidu.io/en/stable/tutorials/openvidu-react-native/">React Native</a>
                         or <a href="https://docs.openvidu.io/en/stable/tutorials/openvidu-android/">native</a>) and a
                         backend technology (<a
-                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-js-java/">Java</a>, <a
-                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-js-node/">NodeJS</a> or <a
+                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-roles-java/">Java</a>, <a
+                            href="https://docs.openvidu.io/en/stable/tutorials/openvidu-roles-node/">NodeJS</a> or <a
                             href="https://docs.openvidu.io/en/stable/reference-docs/REST-API/">any other</a>) and start
                         creating your own solution.</p>
                 </div>
@@ -230,9 +234,8 @@ page-type: home
                 </div>
                 <div class="feature-info">
                     <h4>Compatible with lots of frontend technologies </h4>
-                    <p class="feature-description">JavaScript, TypeScript, Angular, React, Vue.js, Ionic... Just choose
-                        your
-                        preferred language and framework</p>
+                    <p class="feature-description">JavaScript, Angular, React, Vue.js, Ionic, React Native, Electron...
+                        Just choose your preferred language and framework</p>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12 feature-column">
@@ -336,6 +339,25 @@ page-type: home
         <div class="row features-row wow fadeInUp">
 
             <div class="col-md-4 col-sm-12 feature-column">
+                <div class="feature-icon">
+                    <img class="feature-img svg" src="/img/docs/home/feature20.svg" />
+                    <img class="feature-img big" src="/img/docs/home/feature20.svg" />
+                </div>
+                <div class="feature-info">
+                    <h4>Streaming to YouTube/Twitch </h4>
+                    <p class="feature-description">OpenVidu offers a special module to export your sessions to RTMP, so that you can easily broadcast them to live-streaming platforms such as YouTube or Twitch. Check it out <a href="https://docs.openvidu.io/en/stable/advanced-features/streaming/">here</a>.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12 feature-column">
+                <div class="feature-icon">
+                    <img class="feature-img svg" src="/img/docs/home/feature21.svg" />
+                    <img class="feature-img big" src="/img/docs/home/feature21.svg" />
+                </div>
+                <div class="feature-info">
+                    <h4>Phone call integration </h4>
+                    <p class="feature-description">You can add phone call participants to your OpenVidu sessions making use of OpenVidu SIP bridge module. Check it out <a href="https://docs.openvidu.io/en/stable/advanced-features/sip/">here</a>.</p>
+                </div>
             </div>
 
             <div class="col-md-4 col-sm-12 feature-column">
@@ -714,7 +736,7 @@ page-type: home
     <div class="container">
         <div id="wellcome-btn" class="row wow fadeInUp">
             <a href="/demos" class="btn btn-lg btn-primary btn-scroll try-now-btn">Try our demos</a>
-            <a href="https://docs.openvidu.io" class="btn btn-lg btn-primary btn-scroll go-docs-btn">Go to docs</a>
+            <a href="https://docs.openvidu.io/getting-started/" class="btn btn-lg btn-primary btn-scroll go-docs-btn">Go to docs</a>
         </div>
     </div>
 </section>

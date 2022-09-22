@@ -129,6 +129,9 @@ p {
     letter-spacing: 1px;
     font-size: 30px;
 }
+.pricing-section-title:target {
+    scroll-margin-top: 90px;
+}
 .subheading { 
     font-size: 14px;
     line-height: 20px;

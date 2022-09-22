@@ -12,8 +12,18 @@ top-subtitle: Choose your preferred tier according to your needs
 
         <div class="features-row" id="cards-container">
 
+            <ul style="list-style-type: none; text-align: center">
+                <li><h4><a href="#openvidu-editions">OpenVidu Editions</a></h4></li>
+                <li><h4><a href="#openvidu-pricing">OpenVidu Pricing</a></h4></li>
+                <li><h4><a href="#pricing-examples">Pricing Examples</a></h4></li>
+                <!--<li><h4><a href="#openvidu-vs-other-alternatives">OpenVidu vs Other alternatives</a></h4></li>-->
+                <li><h4><a href="#pricing-faqs">Pricing FAQs</a></h4></li>
+            </ul>
+
+            <br><hr><br>
+
             <div class="col-md-12 text-center">
-                <h2 class="section-title">OpenVidu Editions</h2>
+                <h2 id="openvidu-editions" class="section-title pricing-section-title">OpenVidu Editions</h2>
                 <p class="subheading"></p>
             </div>
 
@@ -344,10 +354,10 @@ top-subtitle: Choose your preferred tier according to your needs
                         OpenVidu Pro and OpenVidu Enterprise.<br>Any application built for OpenVidu Pro is compatible with OpenVidu Enterprise.</div>
                 </div>
 
-                <br><hr><br>
+                <br><hr><br><br>
 
                 <div class="col-md-12 text-center">
-                    <h2 class="section-title">How does pricing works?</h2>
+                    <h2 id="openvidu-pricing" class="section-title pricing-section-title">OpenVidu Pricing</h2>
                     <p class="subheading"></p>
                 </div>
 
@@ -442,11 +452,10 @@ top-subtitle: Choose your preferred tier according to your needs
                             style="display: table-cell; vertical-align:middle">Get an OpenVidu license</span></a>
                 </p>
 
-                <br><br>
-                <hr><br>
+                <br><br><hr><br><br>
 
                 <div class="col-md-12 text-center">
-                    <h2 class="section-title">Pricing examples</h2>
+                    <h2 id="pricing-examples" class="section-title pricing-section-title">Pricing Examples</h2>
                     <p class="subheading"></p>
                 </div>
 
@@ -460,7 +469,7 @@ top-subtitle: Choose your preferred tier according to your needs
                         <strong>approximated amount of media streams</strong> and <strong>sessions of 5 participants</strong> the cluster would support. This is done to provide a basic
                         insight into the capacity of each cluster. These 5:5 sessions assume 25 media streams in total for each one of them (1 publisher and 4 subscribers per participant),
                         with no recording and no screen-sharing.</li>
-                    <li>In every example <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/#kurento-vs-mediasoup"><strong>mediasoup</strong></a>
+                    <li>In every example <a target="_blank" href="https://docs.openvidu.io/en/stable/openvidu-enterprise/#kurento-vs-mediasoup"><strong>mediasoup</strong></a>
                         is assumed for Enterprise edition.</li>
                 </ul>
 
@@ -931,10 +940,50 @@ top-subtitle: Choose your preferred tier according to your needs
                     </div>
                 </div>
 
-                <br><br>
-                <hr><br>
+                <!--<br><br><hr><br><br>
 
-                <h3 id="how-many-users-can-my-openvidu-pro-cluster-handle">How many users can my OpenVidu Pro/Enterprise cluster handle?</h3><br>
+                <div class="col-md-12 text-center">
+                    <h2 id="openvidu-vs-other-alternatives" class="section-title pricing-section-title">OpenVidu vs Other alternatives</h2>
+                    <p class="subheading"></p>
+                </div>
+
+                OpenVidu commercial editions have been designed to offer a price that is not only fair, but rather inexpensive compared to other alternatives.
+                Of course, OpenVidu requires you to manage your own infrastructure, either on your own servers or on any cloud provider. But even taking into
+                account these infrastructure costs, the platform offers a pretty good deal. Let's perform a quick comparison study with the most known alternatives in the industry.
+
+                <br><br>
+
+                Let's set up a specific scenario to be able to handle real numbers. We will be considering the total cost of 100 sessions with 5 participants each,
+                with an average duration of 30 minutes per session.
+
+                <br><br>
+
+                <h4>OpenVidu cluster cost</h4>
+
+                The cost of an OpenVidu Pro or OpenVidu Enterprise cluster is calculated considering three main elements:<br><br>
+
+                <ul>
+                    <li><b>License cost:</b> depending on the size of your cluster and your OpenVidu edition.</li>
+                    <li><b>Infrastructure cost:</b> depending on your cloud provider.</li>
+                    <li><b>Data bandwidth cost:</b> depending on the amount of video data passing through your OpenVidu cluster.
+                        Video calls are very intensive in data bandwidth, and it varies according to video quality.</li>
+                </ul>
+
+                As OpenVidu allows on premises installations, both the infrastructure and data bandwidth cost could be considered 0
+                for those organizations which already own their infrastructure.
+
+                Of course all of the CPaaS platforms charge extra fees for other common features, such as recording and firewall traversal.
+
+                NOTE: all of these prices ignore volume discounts that companies usually offer for clients with-->
+
+                <br><br><hr><br><br>
+
+                <div class="col-md-12 text-center">
+                    <h2 id="pricing-faqs" class="section-title pricing-section-title">Pricing FAQs</h2>
+                    <p class="subheading"></p>
+                </div>
+
+                <h4 id="how-many-users-can-my-openvidu-pro-cluster-handle">1. How many users can my OpenVidu Pro/Enterprise cluster handle?</h4>
 
                 This is probably one of the most important questions when using OpenVidu Pro/Enterprise. The number of Media Nodes
                 you need and the size of each Media Node depends on the answer. Therefore, the price of your OpenVidu
@@ -945,7 +994,7 @@ top-subtitle: Choose your preferred tier according to your needs
 
                 <ul>
                     <li>The topology of each OpenVidu Session (1:1, 1:N, N:M)</li>
-                    <li>The type of media streams being published to the Session (only audio, only video, audio + video, screen sharing)</li>
+                    <li>The type of media streams being published to the Session (only audio, only video, audio + video, HD video, screen sharing)</li>
                     <li>Whether your Sessions are using advanced features such as <a
                             href="https://docs.openvidu.io/en/stable/advanced-features/recording"
                             target="_blank">recording</a> or <a
@@ -981,10 +1030,6 @@ top-subtitle: Choose your preferred tier according to your needs
                     </li>
                 </ul>
 
-                <br>
-                <hr style="width: 50%">
-                <br>
-
                 It is also important to note that Master Nodes also have a limit in the amount of users they can handle. The signaling procedures performed by Master Nodes can become a bottleneck
                 with a high number of users. Usually this is not a problem, as the amount of users supported by a Master Node is significant and Media Nodes are generally the ones that really define
                 the limit of the cluster. But with the ability to launch an indefinite number of Media Nodes, the bottleneck in the Master Node may appear earlier or later, depending on the application's logic:
@@ -1003,9 +1048,10 @@ top-subtitle: Choose your preferred tier according to your needs
                 You can check it out here: <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/">High Availability</a>.
 
                 <br><br>
-                <hr><br>
+                <hr style="width: 50%">
+                <br>
 
-                <h3>How do I get charged when using OpenVidu Pro/Enterprise?</h3><br>
+                <h4>2. How do I get charged when using OpenVidu Pro/Enterprise?</h4>
 
                 Users must create an <a href="/account" target="_blank">OpenVidu account</a> and get an OpenVidu
                 License that can be used to <a href="https://docs.openvidu.io/en/stable/deployment/">
@@ -1030,32 +1076,44 @@ top-subtitle: Choose your preferred tier according to your needs
                 please contact us through <a href="/support" target="_blank">Commercial page</a>.
 
                 <br><br>
-                <hr><br>
+                <hr style="width: 50%">
+                <br>
 
-                <h3>Pricing FAQs</h3><br>
-
-                <h4>1. If I don't have any ongoing video session in my OpenVidu Pro/Enterprise cluster, do I have to pay?</h4>
+                <h4>3. If I don't have any ongoing video session in my OpenVidu Pro/Enterprise cluster, do I have to pay?</h4>
                 Yes, OpenVidu License is charged for any running OpenVidu Pro/Enterprise cluster, even when there are no active
                 sessions. If your cluster is on, you will at least have to pay for the Master Node(s). But
                 remember you can drop Media Nodes to reduce the cluster size and reduce your bill according to user
                 load. And as a definite measure you can always turn off the cluster so you don't even pay for the
-                Master Node(s).<br><br>
+                Master Node(s).
 
-                <h4>2. What is the price per minute of each OpenVidu session?</h4>
+                <br><br>
+                <hr style="width: 50%">
+                <br>
+
+
+                <h4>4. What is the price per minute of each OpenVidu session?</h4>
                 The cost per minute of video call depends very much on the utilization ratio of your OpenVidu Pro/Enterprise
                 cluster. That is, the number of calls you are able to maintain at the same time. If you use a cluster
                 for an average of only 2 calls per hour, the cost per call will be rather high. If you manage to keep a
-                number of calls adjusted to the size of the cluster, the cost will be lower.<br><br>
+                number of calls adjusted to the size of the cluster, the cost will be lower.
 
-                <h4>3. If I deploy an OpenVidu Pro/Enterprise cluster in a cloud provider, does its size automatically adapt to the
+                <br><br>
+                <hr style="width: 50%">
+                <br>
+
+                <h4>5. If I deploy an OpenVidu Pro/Enterprise cluster in a cloud provider, does its size automatically adapt to the
                     user load?</h4>
                 Yes! You can adapt its size manually from OpenVidu Inspector or by consuming OpenVidu REST API (more info <a
                     href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#change-the-number-of-media-nodes-on-the-fly"
                     target="_blank">here</a>). Or you can use the <a href="https://docs.openvidu.io/en/stable/openvidu-pro/scalability/#autoscaling"
                     target="_blank">Autoscaling</a> feature to let the cluster automatically decide when
-                    to increase or decrease the number of nodes.<br><br>
+                    to increase or decrease the number of nodes.
 
-                <h4>4. If I deploy OpenVidu Pro/Enterprise on premises, can I change the size of my cluster?</h4>
+                <br><br>
+                <hr style="width: 50%">
+                <br>
+
+                <h4>6. If I deploy OpenVidu Pro/Enterprise on premises, can I change the size of my cluster?</h4>
                 Of course. It is important to understand two different concepts when using on premises deployments of
                 OpenVidu Pro/Enterprise: it's one thing the number of physical machines you have available in your cluster, and
                 it's another thing the number of Media Nodes that are actually connected to your cluster.<br><br>
@@ -1071,17 +1129,25 @@ top-subtitle: Choose your preferred tier according to your needs
                 <code>terminated</code> status,
                 and then you can safely terminate your server. When deploying OpenVidu Pro/Enterprise in a supported cloud
                 provider, the cluster can automatically handle the launch and termination of the physical machines on
-                its own.<br><br>
+                its own.
 
-                <h4>5. Which is the ideal size of an OpenVidu Pro/Enterprise cluster for my specific use case?</h4>
+                <br><br>
+                <hr style="width: 50%">
+                <br>
+
+                <h4>7. Which is the ideal size of an OpenVidu Pro/Enterprise cluster for my specific use case?</h4>
                 As explained <a href="#how-many-users-can-my-openvidu-pro-cluster-handle">here</a>, the answer can vary
                 greatly depending on multiple factors. You can use <a
                     href="https://github.com/OpenVidu/openvidu-loadtest" target="_blank">OpenVidu Load Test</a> tool to
                 perform a load test as similar as possible to your use case. OpenVidu team can perform these tests for
                 you as part of their commercial services (contact us through <a href="/support"
-                    target="_blank">Commercial page</a> to ask for an estimate).<br><br>
+                    target="_blank">Commercial page</a> to ask for an estimate).
 
-                <h4>6. I have built my application using OpenVidu CE. Is it compatible with OpenVidu Pro and OpenVidu Enterprise?</h4>
+                <br><br>
+                <hr style="width: 50%">
+                <br>
+
+                <h4>8. I have built my application using OpenVidu CE. Is it compatible with OpenVidu Pro and OpenVidu Enterprise?</h4>
                 Yes. You don't have to change a thing in your application when upgrading your tier: it will work
                 out-of-the-box with OpenVidu Pro and with OpenVidu Enterprise.<br><br>
 
