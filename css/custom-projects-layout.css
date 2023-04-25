@@ -3,107 +3,11 @@
     border-top: 2px solid #eee;
 }
 
-#demo-container code {
-    display: block;
-}
-
-#demo-container .run-div hr {
-    border-top: 1px solid #e1e2e1;
-}
-
-#demo-container ol li {
-    margin-top: 20px;
-}
-
-#demo-container ol li p {
-    font-size: 16px;
-    font-weight: 400;
-}
-
-#demo-container ol li code {
-    display: inline-block;
-    width: 50%;
-    margin-bottom: 10px;
-}
-
-#demo-container ol li .btn-copy-code {
-    display: inline-block;
-}
-
-#demo-container .demo-description p {
-    color: #404040;
-}
-
-#demo-container code {
-    word-wrap: break-word;
-    overflow-x: auto;
-}
-
-#demo-container .docker-info-div {
-    margin-top: 1em;
-    font-size: 12px;
-    color: #7b7b7b;
-}
-
-#demo-container .docker-info-icon {
-    text-align: center;
-}
-
-#demo-container .docker-info-icon i {
-    font-size: 22px;
-}
-
 .c-tabs-nav {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-.c-tabs-nav__link {
-    flex: 1;
-    padding: 12px;
-    color: #fff;
-    background-color: #E1E2E1;
-    text-align: center;
-    transition: color 0.3s;
-}
-
-.c-tabs-nav__link:hover {
-    background-color: #eaeaea;
-    -moz-transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-}
-
-.c-tabs-nav__link:last-child {
-    margin-right: 0;
-}
-
-.c-tabs-nav__link:hover {
-    color: #6d6d6d;
-}
-
-.c-tabs-nav__link.is-active {
-    color: #dc446e;
-    background-color: #f3f3f3;
-}
-
-.c-tabs-nav__link i,
-.c-tabs-nav__link span {
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-}
-
-.c-tabs-nav__link i {
-    font-size: 18px;
-}
-
-.c-tabs-nav__link span {
-    display: none;
-    font-size: 18px;
 }
 
 
@@ -114,10 +18,6 @@
 .c-tab {
     display: none;
     background-color: #f3f3f3;
-}
-
-.c-tab.is-active {
-    display: block;
 }
 
 .c-tab__content {
@@ -138,9 +38,7 @@
     margin-bottom: 1.5rem;
 }
 
-.c-tabs.no-js .c-tab:last-child {
-    margin-bottom: 0;
-}
+
 
 
 
