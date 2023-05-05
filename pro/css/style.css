@@ -409,7 +409,7 @@ p {
         display: none;
     }
 }
-.home-subheading {
+.home-subheading, .home-subheading h1 {
     font-family: 'Montserrat',sans-serif;
     font-size: 14px;
     letter-spacing: .5px;
