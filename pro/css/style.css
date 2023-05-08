@@ -2784,8 +2784,12 @@ outline-offset: 0;
     position:relative;
     z-index: 99;
 }
-.page-top-title h2 {
+.page-top-title h1 {
     font-size:60px;
+    letter-spacing:2px;
+}
+.page-top-title h2 {
+    font-size:14px;
     letter-spacing:2px;
 }
 .shortcode-heading {

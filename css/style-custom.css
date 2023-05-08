@@ -742,13 +742,13 @@ img.img-more-info {
         top: 93px;
     }
 
-    #page-top .page-top-title h2 {
+    #page-top .page-top-title h1 {
         font-size: 37px;
         padding-left: 20px;
         padding-right: 20px;
     }
 
-    #page-top .home-subheading {
+    #page-top .home-subheading h2{
         padding-left: 20px;
         padding-right: 20px;
     }
