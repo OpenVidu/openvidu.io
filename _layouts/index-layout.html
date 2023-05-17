@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="keywords" content="OpenVidu, openvidu, WebRTC, Video, mobile" />
     {% if page.description %}
-    <meta name="description" content="{{ page.description }}">
+        {% include meta.html %}
     {% endif %}
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <!-- Stlylesheet -->
@@ -183,5 +183,4 @@
         });
     </script>
 </body>
-
 </html>
