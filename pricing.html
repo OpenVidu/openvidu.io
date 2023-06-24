@@ -384,19 +384,24 @@ top-subtitle: Choose your preferred tier according to your needs
                 <span>OpenVidu <div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #0088aa; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">
                     PRO</div></span> and <span>OpenVidu <div id="openvidu-pro-tag"
                     style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">
-                    ENTERPRISE</div></span> are deployed as a cluster following a Master-Worker model. Below are some examples of OpenVidu clusters.
+                    ENTERPRISE</div></span> are deployed as a cluster following a Master-Worker model or as unique nodes.
+                    Below are some examples of OpenVidu clusters.
 
                 <div class="row price-row" style="margin: 40px 0 40px 0">
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
                         <img class="pricing-cluster-img" src="/img/pricing/pro-architecture.png"/>
                         <div style="font-size: 14px; margin: 10px; text-align: center;">OpenVidu Pro cluster with 1 Master Node and 3 Media Nodes</div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
                         <img class="pricing-cluster-img" src="/img/pricing/enterprise-no-ha-architecture.png"/>
                         <div style="font-size: 14px; margin: 10px; text-align: center;">OpenVidu Enterprise cluster with 1 Master Node and 3 Media Nodes</div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
                         <img class="pricing-cluster-img" src="/img/pricing/enterprise-ha-architecture.png"/>
+                        <div style="font-size: 14px; margin: 10px; text-align: center;">OpenVidu Enterprise cluster with 2 Master Nodes and 3 Media Nodes</div>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                        <img class="pricing-cluster-img" src="/img/pricing/enterprise-ha-onprem.png"/>
                         <div style="font-size: 14px; margin: 10px; text-align: center;">OpenVidu Enterprise cluster with 2 Master Nodes and 3 Media Nodes</div>
                     </div>
                 </div>
@@ -679,7 +684,7 @@ top-subtitle: Choose your preferred tier according to your needs
                 <hr>
                 <div class="row price-row">
                     <div class="col-sm-6 col-xs-12">
-                        <h4 style="text-align: left">OpenVidu Enterprise HA cluster with 12 cores in total</h4>
+                        <h4 style="text-align: left">OpenVidu Enterprise HA cluster (AWS) with 12 cores in total</h4>
                         <span>OpenVidu Enterprise HA (<a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/">High Availability</a>)
                             provides Master Node replication. This ensures load balancing for clients and advanced fault tolerance, getting rid of any single
                             point of failure. <br><br>
@@ -724,6 +729,59 @@ top-subtitle: Choose your preferred tier according to your needs
                     </div>
                     <div class="col-sm-6 col-xs-12 feature-img-col">
                         <img class="pricing-cluster-img" src="/img/pricing/pricing-enterprise-ha.png" />
+                    </div>
+                </div>
+                <hr>
+                <div class="row price-row">
+                    <div class="col-sm-6 col-xs-12">
+                        <h4 style="text-align: left">OpenVidu Enterprise HA cluster (On premises) with 16 cores in total</h4>
+                        <span>OpenVidu Enterprise HA On-Premises offers a robust solution for deploying the
+                            <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/">High Availability</a> version of OpenVidu
+                            on your own infrastructure. The architecture of the system is simplified by merging Master Nodes and Media Nodes into one,
+                            facilitating an easier setup and scaling process. This single node setup ensures load balancing, advanced fault tolerance,
+                            and eliminates any single points of failure, enhancing system reliability and uptime.
+                            <br><br>
+
+                            <table class="table table-striped table-pricing" style="background: #e7e7e7; margin-bottom: 12px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="border-bottom: 2px solid #005f76;"></th>
+                                        <th scope="col" style="border-bottom: 2px solid #005f76;"><div id="openvidu-pro-tag"
+                                            style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">
+                                            ENTERPRISE</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Number of media streams</th>
+                                        <td>8000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Number of sessions with 5 participants</th>
+                                        <td>320</td>
+                                    </tr>
+                                    <tr>
+                                        <th>8 hours</th>
+                                        <td>$13.82 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
+                                            data-container="body" data-placement="right" title="8 hours * 60 minutes/hour * 12 cores * $0.0018 = 10.37"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>24 hours <span style="font-weight: normal">(1 day of uninterrupted use)</span></th>
+                                        <td>$41.47 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
+                                            data-container="body" data-placement="right" title="24 hours * 60 minutes/hour * 12 cores * $0.0018 = 31.10"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>720 hours <span style="font-weight: normal">(1 month of uninterrupted use)</span></th>
+                                        <td>$1244.16 <i class="icon ion-information-circled pricing-table-icon-info icon-info-right" data-toggle="tooltip"
+                                            data-container="body" data-placement="right" title="720 hours * 60 minutes/hour * 12 cores * $0.0018 = 933.12"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </span>
+                    </div>
+                    <div class="col-sm-6 col-xs-12 feature-img-col">
+                        <img class="pricing-cluster-img" src="/img/pricing/pricing-enterprise-ha-onprem.png" />
                     </div>
                 </div>
                 <hr>
@@ -851,7 +909,8 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2" class="table-pricing-bordered">6 cores</th>
                                 <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2" class="table-pricing-bordered">10 cores</th>
                                 <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2" class="table-pricing-bordered">18 cores</th>
-                                <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2" class="table-pricing-bordered">12 cores <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/" target="_blank">HA</a></th>
+                                <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2" class="table-pricing-bordered">12 cores <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/" target="_blank">HA</a> AWS</th>
+                                <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2" class="table-pricing-bordered">16 cores <a href="https://docs.openvidu.io/en/stable/openvidu-enterprise/high-availability/" target="_blank">HA</a> On premises</th>
                                 <th scope="col" style="border-bottom: 2px solid #005f76;" colspan="2">Variable number of cores *</th>
                             </tr>
                         </thead>
@@ -865,6 +924,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #0088aa; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">PRO</div></td>
                                 <td class="table-pricing-bordered"><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">ENTERPRISE</div></td>
                                 <td colspan="2" class="table-pricing-bordered"><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">ENTERPRISE</div></td>
+                                <td colspan="2" class="table-pricing-bordered"><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">ENTERPRISE</div></td>
                                 <td><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #0088aa; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">PRO</div></td>
                                 <td><div id="openvidu-pro-tag" style="font-family: Montserrat, sans-serif; pointer-events: none; display: inline-block; margin-right: 6px; background-color: #9c27b0; color: white; font-weight: bold; padding: 0px 5px; margin-left: 4px; border-radius: 3px; font-size: 18px; line-height:26px">ENTERPRISE</div></td>
                             </tr>
@@ -877,6 +937,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td>1600</td>
                                 <td class="table-pricing-bordered">8000</td>
                                 <td colspan="2" class="table-pricing-bordered">4000</td>
+                                <td colspan="2" class="table-pricing-bordered">8000</td>
                                 <td><span style="white-space: nowrap">400 - 2000</span></td>
                                 <td><span style="white-space: nowrap">2000 - 10000</span></td>
                             </tr>
@@ -889,6 +950,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td>64</td>
                                 <td class="table-pricing-bordered">320</td>
                                 <td colspan="2" class="table-pricing-bordered">160</td>
+                                <td colspan="2" class="table-pricing-bordered">320</td>
                                 <td><span style="white-space: nowrap">16 - 80</span></td>
                                 <td><span style="white-space: nowrap">80 - 400</span></td>
                             </tr>
@@ -901,6 +963,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td>$5.18</td>
                                 <td class="table-pricing-bordered">$15.55</td>
                                 <td colspan="2" class="table-pricing-bordered">$10.37</td>
+                                <td colspan="2" class="table-pricing-bordered">$13.82</td>
                                 <td><span style="white-space: nowrap">$1.73 - $6.33</span></td>
                                 <td><span style="white-space: nowrap">$5.18 - $29.36</span></td>
                             </tr>
@@ -913,6 +976,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td>$15.55</td>
                                 <td class="table-pricing-bordered">$46.66</td>
                                 <td colspan="2" class="table-pricing-bordered">$31.10</td>
+                                <td colspan="2" class="table-pricing-bordered">$41.47</td>
                                 <td><span style="white-space: nowrap">$9.79</span></td>
                                 <td><span style="white-space: nowrap">$29.36</span></td>
                             </tr>
@@ -925,6 +989,7 @@ top-subtitle: Choose your preferred tier according to your needs
                                 <td>$466.56</td>
                                 <td class="table-pricing-bordered">$1399.68</td>
                                 <td colspan="2" class="table-pricing-bordered">$933.12</td>
+                                <td colspan="2" class="table-pricing-bordered">$1244.16</td>
                                 <td><span style="white-space: nowrap">$293.7</span></td>
                                 <td><span style="white-space: nowrap">$881.1</span></td>
                             </tr>
