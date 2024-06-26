@@ -118,7 +118,7 @@ If you want to automate the installation process, you can generate a command wit
 
 ```
 docker run -it openvidu/openvidu-installer:latest \
-    --deployment-type=single-node
+    --deployment-type=single_node
 ```
 
 --8<-- "docs/docs/installation/shared/install-version.md"
