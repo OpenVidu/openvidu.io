@@ -1,0 +1,242 @@
+site_name: openVidu
+site_url: "https://openvidu.io/"
+site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted. Performant. Fault Tolerant. Scalable. Observable.
+repo_name: openvidu/openvidu
+repo_url: https://github.com/openvidu/openvidu
+
+nav:
+  - Home: index.md
+  - Docs:
+      - Getting started: docs/getting-started.md
+      - Comparing OpenVidu: docs/comparing-openvidu.md
+      - Developing your OpenVidu app:
+          - docs/developing-your-openvidu-app/index.md
+          - How to: docs/developing-your-openvidu-app/how-to.md
+      - Tutorials:
+          - Application Server:
+              - docs/tutorials/application-server/index.md
+              - Node.js: docs/tutorials/application-server/node.md
+              - Go: docs/tutorials/application-server/go.md
+              - Ruby: docs/tutorials/application-server/ruby.md
+              - Java: docs/tutorials/application-server/java.md
+              - Python: docs/tutorials/application-server/python.md
+              - Rust: docs/tutorials/application-server/rust.md
+              - PHP: docs/tutorials/application-server/php.md
+              - .NET: docs/tutorials/application-server/dotnet.md
+          - Application Client:
+              - docs/tutorials/application-client/index.md
+              - JavaScript: docs/tutorials/application-client/javascript.md
+              - React: docs/tutorials/application-client/react.md
+              - Angular: docs/tutorials/application-client/angular.md
+              - Vue: docs/tutorials/application-client/vue.md
+              - Electron: docs/tutorials/application-client/electron.md
+              - Ionic: docs/tutorials/application-client/ionic.md
+          - Angular Components:
+              - docs/tutorials/angular-components/index.md
+              - Custom UI: docs/tutorials/angular-components/openvidu-custom-ui.md
+              - Custom Toolbar: docs/tutorials/angular-components/openvidu-custom-toolbar.md
+              - Toolbar Buttons: docs/tutorials/angular-components/openvidu-toolbar-buttons.md
+              - Toolbar Panel Buttons: docs/tutorials/angular-components/openvidu-toolbar-panel-buttons.md
+              - Custom Layout: docs/tutorials/angular-components/openvidu-custom-layout.md
+              - Custom Stream: docs/tutorials/angular-components/openvidu-custom-stream.md
+              - Custom Panels: docs/tutorials/angular-components/openvidu-custom-panels.md
+              - Additional Panels: docs/tutorials/angular-components/openvidu-additional-panels.md
+              - Custom Chat Panel: docs/tutorials/angular-components/openvidu-custom-chat-panel.md
+              - Custom Activities Panel: docs/tutorials/angular-components/openvidu-custom-activities-panel.md
+              - Custom Participants Panel: docs/tutorials/angular-components/openvidu-custom-participants-panel.md
+              - Custom Participant Panel Item: docs/tutorials/angular-components/openvidu-custom-participant-panel-item.md
+              - Custom Participant Panel Item Element: docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element.md
+              - Toggle Hand: docs/tutorials/angular-components/openvidu-toggle-hand.md
+              - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
+      - Self-hosting:
+          - Deployment types: docs/self-hosting/deployment-types.md
+          - Production ready:
+            - docs/self-hosting/production-ready/index.md
+            - Performant: docs/self-hosting/production-ready/performance.md
+            - Scalable: docs/self-hosting/production-ready/scalability.md
+            - Fault Tolerant: docs/self-hosting/production-ready/fault-tolerance.md
+            - Observable:
+                - docs/self-hosting/production-ready/observability/index.md
+                - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
+                - Grafana stack: docs/self-hosting/production-ready/observability/grafana-stack.md
+          - Local (Development): docs/installation/local.md
+          - Single Node:
+              - docs/installation/single-node/index.md
+              - On Premises:
+                  - Install: docs/installation/single-node/install/on-premises.md
+                  - Configuration And Administration: docs/installation/single-node/admin/on-premises.md
+              - AWS:
+                  - Install: docs/installation/single-node/install/aws.md
+                  - Configuration And Administration: docs/installation/single-node/admin/aws.md
+          - Elastic:
+              - docs/installation/elastic/index.md
+              - On Premises:
+                  - Install: docs/installation/elastic/install/on-premises.md
+                  - Configuration And Administration: docs/installation/elastic/admin/on-premises.md
+              - AWS:
+                  - Install: docs/installation/elastic/install/aws.md
+                  - Configuration And Administration: docs/installation/elastic/admin/aws.md
+          - High Availability:
+              - docs/installation/ha/index.md
+              - On Premises:
+                  - Install with DNS Load Balancing: docs/installation/ha/install/on-premises-dlb.md
+                  - Install with Network Load Balancer: docs/installation/ha/install/on-premises-nlb.md
+                  - Configuration And Administration: docs/installation/ha/admin/on-premises.md
+              - AWS:
+                  - Install: docs/installation/ha/install/aws.md
+                  - Configuration And Administration: docs/installation/ha/admin/aws.md
+          # - FAQ: docs/installation/faq.md
+      - UI Components:
+          - Angular Components: docs/ui-components/angular-components.md
+          - React Components: docs/ui-components/react-components.md
+      - OpenVidu Call:
+          - docs/openvidu-call/index.md
+          - Docs: docs/openvidu-call/docs.md
+      - Releases: docs/releases.md
+  # - Blog:
+  #     - blog/index.md
+  - Support:
+      - support.md
+  - Pricing:
+      - pricing.md
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  language: en
+  features:
+    - content.code.copy
+    - content.tabs.link
+    - content.code.annotate
+    - content.tooltips
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.footer
+    # - navigation.expand
+    # - navigation.path
+    # - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    # - toc.follow
+    # - toc.integrate
+    - search.suggest
+    - search.highlight
+    # - header.autohide
+    - announce.dismiss
+  font:
+    text: Tomorrow # Nunito Sans, Rubik, Barlow, Raleway, Open Sans, Tomorrow, IBM Plex Sans
+    code: Roboto Mono
+  palette:
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  favicon: assets/images/logo.png
+  logo: assets/images/openvidu_globe_bg_transp_cropped.png
+
+plugins:
+  - search
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      autoplayVideos: true
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      skip_classes:
+        - do-not-include-in-gallery
+      auto_caption: false
+      caption_position: bottom
+      background: none
+      shadow: false
+  - blog
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: "#"
+      permalink_title: Anchor link to this section for reference
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.snippets:
+      url_download: true
+      check_paths: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  version:
+    provider: mike
+    default: latest
+  generator: false
+  social:
+    - icon: simple/github
+      link: https://github.com/OpenVidu
+    - icon: simple/x
+      link: https://twitter.com/openvidu
+    - icon: simple/medium
+      link: https://medium.com/@openvidu
+    - icon: simple/youtube
+      link: https://www.youtube.com/@openvidu
+  consent:
+    title: Cookie consent
+    description: >
+      This website uses cookies to ensure you get the best experience on our website.
+      <a href="https://openvidu.io/conditions/cookie-policy" target="_blank">See cookie policy</a>
+
+extra_css:
+  - stylesheets/colors.css
+  - stylesheets/extra.css
+  - stylesheets/unsemantic-grid.css
+  - stylesheets/livekit-tutorials.css
+  - stylesheets/amplify.css
+  - stylesheets/home.css
+  - stylesheets/openvidu-call.css
+  - javascripts/openvidu-register/openvidu-register.css
+
+extra_javascript:
+  - javascripts/extra.js
+  - javascripts/consent.js
+  - javascripts/openvidu-register/openvidu-register.js
+
+copyright: >
+  2024 &copy; OpenVidu –
+  <a href="#__consent">Change cookie settings</a>

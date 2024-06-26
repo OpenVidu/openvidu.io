@@ -1,22 +1,53 @@
-# openvidu.io
+# openvidu-docs
 
-The _openvidu.io_ web is generated with [Jekyll](https://jekyllrb.com/).
+This documentation is built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
 
-# Local development
+1. Create custom Docker image with necessary extra plugins:
 
-- Clone _openvidu.io_ repository
+```bash
+docker build --pull --no-cache --rm=true -t squidfunk/mkdocs-material .
 ```
-https://github.com/OpenVidu/openvidu.io
+
+2. Serve:
+
+```bash
+docker run --name=mkdocs --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
 ```
-- To locally preview the changes, you can execute the following command in the root folder of the repository (you need [Docker](https://store.docker.com/search?type=edition&offering=community) installed) and visit [`localhost:4000`](http://localhost:4000):
 
+3. Build:
+
+```bash
+docker run --rm -it -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build
 ```
-docker run --rm --volume=$PWD:/srv/jekyll -p 4000:4000 -it jekyll/jekyll:4.2.0 jekyll serve
+
+Parameters:
+
+- `GOOGLE_ANALYTICS_KEY`: Google Analytics key to track page views. This is the **MEASUREMENT ID** of the web stream details.
+
+## Deploying a new version using `mike`
+
+MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for versioning. mike uses GitHub pages to host the documentation, and builds each version on branh `gh-pages`.
+
+To upload a new version:
+
+> Remove `--push` to test locally without pushing to GitHub
+
+```bash
+mike deploy --push VERSION 3.0.0
 ```
-(Run `fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p` to increase the number of files that can be monitored if any problem appears when running this docker container)
 
-# Documentation
+```bash
+mike deploy --push VERSION latest
+```
 
-The _openvidu.io_ documentation is generated with [MkDocs](http://www.mkdocs.org).
+```bash
+mike set-default --push latest
+```
 
-**To add documentation go to [openvidu.io-docs project](https://github.com/OpenVidu/openvidu.io-docs)**
+To test locally the versioning:
+
+> This only works if `mike deploy VERSION X.Y.Z` has been called first
+
+```bash
+mike serve
+```

@@ -1,0 +1,6 @@
+FROM squidfunk/mkdocs-material:latest
+RUN pip install mkdocs-glightbox
+RUN pip install mike
+RUN mike deploy
+ENTRYPOINT ["/sbin/tini", "--", "mike"]
+CMD ["serve", "--dev-addr=0.0.0.0:8000"]

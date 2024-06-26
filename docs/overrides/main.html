@@ -1,0 +1,119 @@
+<!-- Elements added to main will be displayed on all pages -->
+{% extends "base.html" %}
+
+{% block announce %}
+<div id="announce">Coming from OpenVidu 2? Find out all you need to know <a href="https://docs.openvidu.io/en/latest/openvidu3/" target="_blank"> on this page</a></div>
+{% endblock %}
+
+{% block libs %}
+
+{{ super() }}
+
+<!-- GLightbox -->
+<script>
+  window.setupGallery = function () {
+    const gallery = 'gallery';
+    var lightbox = GLightbox({
+      touchNavigation: true,
+      loop: false,
+      autoplayVideos: true,
+      zoomable: false,
+      draggable: true,
+      preload: true,
+      width: "50%",
+      closeEffect: 'fade',
+      plyr: {
+        config: {
+          controls: [],
+          autoplay: true,
+          playsinline: true,
+          muted: true,
+          volume: 0,
+          hideControls: true,
+          loop: { active: true },
+          clickToPlay: false,
+          disableContextMenu: true,
+          resetOnEnd: true,
+          keyboard: { focused: false, global: false },
+          tooltips: { controls: false, seek: false },
+          displayDuration: false,
+          fullscreen: { enabled: false, fallback: false, iosNative: false, container: null },
+        }
+      }
+    });
+    console.debug('Gallery setup');
+  }
+  //# sourceURL=setupgallery.js
+</script>
+
+<!-- wow -->
+<script>
+  window.setupWow = function () {
+    if (!document.getElementById('wowjs')) {
+      const jsScript = document.createElement('script')
+      jsScript.src = "javascripts/wow.min.js"
+      jsScript.id = "wowjs"
+      jsScript.addEventListener('load', () => {
+        new WOW().init();
+        console.debug('wow loaded');
+      })
+      document.head.appendChild(jsScript);
+    }
+  }
+  window.setupCardGlow = function () {
+    console.debug('card glow setup');
+    const cards = document.querySelectorAll(".feature-cards .grid.cards > ul > li");
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    function handleMouseMove(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+      angle = (angle + 360) % 360;
+      this.style.setProperty("--start", angle + 60);
+    }
+  }
+</script>
+
+{% endblock %}
+
+{% block outdated %}
+<span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
+<a href="{{ '../' ~ base_url }}">
+  <strong>GO TO LATEST VERSION</strong>
+</a>
+{% endblock %}
+
+{% block extrahead %}
+<!-- Add head tags that need to be applied before here -->
+{{ super() }}
+<!-- Add head tags that need to be applied afterwards here -->
+{% endblock %}
+
+{% block scripts %}
+<!-- Add scripts that need to run before here -->
+{{ super() }}
+<!-- Add scripts that need to run afterwards here -->
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+{% if page.meta and page.meta.hide %}
+{% if "footer-prev" in page.meta.hide %}
+<style>
+  .md-footer__link--prev {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "footer-next" in page.meta.hide %}
+<style>
+  .md-footer__link--next {
+    display: none;
+  }
+</style>
+{% endif %}
+{% endif %}
+{% endblock %}
