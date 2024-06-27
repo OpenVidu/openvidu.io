@@ -7,7 +7,7 @@ This section is optional. It is useful when your users are behind a restrictive 
 
     The parameters in this section may look like this:
 
-    ![TURN server configuration with TLS](../../../../assets/images/installation/shared/aws-turn-tls.png)
+    ![TURN server configuration with TLS](../../../../assets/images/self-hosting/shared/aws-turn-tls.png)
 
     Set the **TurnDomainName** parameter to the domain name you intend to use for your TURN server. It should be pointing to the `PublicElasticIP` specified in the previous section.
 

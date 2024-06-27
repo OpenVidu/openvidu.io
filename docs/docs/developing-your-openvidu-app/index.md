@@ -9,8 +9,7 @@ Here's a high-level overview of the steps involved in building an OpenVidu appli
 
 ## 1. Launch an OpenVidu deployment
 
-The quickest way is to use [OpenVidu local deployment](../installation/local/).
-
+The quickest way is to use [OpenVidu local deployment](../self-hosting/local.md).
 
 ## 2. Use LiveKit Server SDK in your application server
 
@@ -31,49 +30,49 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node"
 
-    [:octicons-arrow-right-24: Node Tutorial](../tutorials/application-server/node/)
+    [:octicons-arrow-right-24: Node Tutorial](../tutorials/application-server/node.md)
 
     [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    [:octicons-arrow-right-24: Go Tutorial](../tutorials/application-server/go/)
+    [:octicons-arrow-right-24: Go Tutorial](../tutorials/application-server/go.md)
 
     [:octicons-arrow-right-24: Reference Docs](https://pkg.go.dev/github.com/livekit/server-sdk-go){target="\_blank"}
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    [:octicons-arrow-right-24: Ruby Tutorial](../tutorials/application-server/ruby/)
+    [:octicons-arrow-right-24: Ruby Tutorial](../tutorials/application-server/ruby.md)
 
     [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    [:octicons-arrow-right-24: Java Tutorial](../tutorials/application-server/java/)
+    [:octicons-arrow-right-24: Java Tutorial](../tutorials/application-server/java.md)
 
     [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
 
 === ":simple-python:{.icon .lg-icon .tab-icon} Python"
 
-    [:octicons-arrow-right-24: Python Tutorial](../tutorials/application-server/python/)
+    [:octicons-arrow-right-24: Python Tutorial](../tutorials/application-server/python.md)
 
     [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/python-sdks){target="\_blank"}
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
-    [:octicons-arrow-right-24: Rust Tutorial](../tutorials/application-server/rust/)
+    [:octicons-arrow-right-24: Rust Tutorial](../tutorials/application-server/rust.md)
 
     [:octicons-arrow-right-24: Reference Docs](https://docs.rs/livekit-api/latest/livekit_api/index.html){target="\_blank"}
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
-    [:octicons-arrow-right-24: PHP Tutorial](../tutorials/application-server/php/)
+    [:octicons-arrow-right-24: PHP Tutorial](../tutorials/application-server/php.md)
 
     [:octicons-arrow-right-24: GitHub Repository](https://github.com/agence104/livekit-server-sdk-php){target="\_blank"}
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    [:octicons-arrow-right-24: .NET Tutorial](../tutorials/application-server/dotnet/)
+    [:octicons-arrow-right-24: .NET Tutorial](../tutorials/application-server/dotnet.md)
 
     > There is no .NET SDK for LiveKit available. Visit the tutorial to learn how to create tokens and receive Webhook events directly from your .NET application server.
 
@@ -89,17 +88,17 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
 There are two main strategies to build the UI of your client application:
 
-- **Use a high-level UI Components library**: you can use [Angular Components](../ui-components/angular-components/) and [React Components](../ui-components/react-components/) to quickly set up your UI with building blocks that manage the events and state of the Room for you.
+- **Use a high-level UI Components library**: you can use [Angular Components](../ui-components/angular-components.md) and [React Components](../ui-components/react-components.md) to quickly set up your UI with building blocks that manage the events and state of the Room for you.
 - **Use a low-level client SDK**: if you want extensive control and maximum flexibility when designing your UI, use any of the [LiveKit Client SDKs](https://docs.livekit.io/reference/){target="\_blank"}.
 
 The table below summarizes the key differences between these two strategies to help you make an informed decision:
 
 |  | UI Components  | Low-level client SDKs  |
 |------|--------------------|----------------------------------------------------------|
-| **What is it?** | Frontend libraries offering videoconferencing components to build your own application. There are [Angular Components](../ui-components/angular-components/) or [React Components](../ui-components/react-components/) | Integrate OpenVidu from scratch in your web, mobile or desktop application using [LiveKit Client SDKs](https://docs.livekit.io/reference/){target="\_blank"} |
+| **What is it?** | Frontend libraries offering videoconferencing components to build your own application. There are [Angular Components](../ui-components/angular-components.md) or [React Components](../ui-components/react-components.md) | Integrate OpenVidu from scratch in your web, mobile or desktop application using [LiveKit Client SDKs](https://docs.livekit.io/reference/){target="\_blank"} |
 | **Pros** | <ul><li>Very flexible components: adapt, extend or replace any component</li><li>Have your first version running in minutes, work on your customizations from there</li><li>Easily keep your client code up to date with the latest features</li></ul> | <ul><li>Unlimited level of customization: build your own UI from scratch as you please</li><li>Available for all client platforms: browsers, iOS, Android, Flutter, React Native, Unity...</li></ul> |
 | **Cons** | <ul><li>Only available for Angular and React web apps</li></ul>                                                                                                                            | <ul><li>Higher complexity, although there are plenty of tutorials to smooth the learning curve</li></ul>                                                                     |
-| **Tutorials** | [Angular Components tutorials](../tutorials/angular-components/) | [Application client tutorials](../tutorials/application-client/) |
+| **Tutorials** | [Angular Components tutorials](../tutorials/angular-components/index.md) | [Application client tutorials](../tutorials/application-client/index.md) |
 
 Whatever strategy you choose to build the UI of your application, most common steps to perform are:
 
@@ -130,4 +129,4 @@ Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs](https://docs.
 
 ## 4. Deploy OpenVidu and your application
 
-You have different options to deploy OpenVidu in a production-ready environment, depending on the level of scalability, fault tolerance and observability you need. See [Deployment types](../self-hosting/deployment-types/) for more information.
+You have different options to deploy OpenVidu in a production-ready environment, depending on the level of scalability, fault tolerance and observability you need. See [Deployment types](../self-hosting/deployment-types.md) for more information.

@@ -11,7 +11,7 @@ These are the three possible scenarios you may have to configure in this section
 
     Then, you need to fill in the following parameters:
 
-    ![Let's Encrypt certificates](../../../../assets/images/installation/shared/aws-letsencrypt.png)
+    ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/aws-letsencrypt.png)
 
     As you can see, you need to specify the **DomainName** with your FQDN, the **PublicElasticIP** with the Elastic IP that the domain points to, and the **LetsEncryptEmail** with your email address for Let’s Encrypt notifications. These parameters are mandatory.
 
@@ -24,7 +24,7 @@ These are the three possible scenarios you may have to configure in this section
 
     These are the parameters needed in this section to use self-signed certificates:
 
-    ![Self-signed certificates](../../../../assets/images/installation/shared/aws-selfsigned.png)
+    ![Self-signed certificates](../../../../assets/images/self-hosting/shared/aws-selfsigned.png)
 
     You don’t need to specify any parameters; just select the **CertificateType** as _self-signed_. The domain name used will be an AWS-generated one.
 
@@ -38,7 +38,7 @@ These are the three possible scenarios you may have to configure in this section
 
     The configured parameters would look like this:
 
-    ![Custom certificates](../../../../assets/images/installation/shared/aws-owncert.png)
+    ![Custom certificates](../../../../assets/images/self-hosting/shared/aws-owncert.png)
 
     You need to specify at **OwnPublicCertificate** and **OwnPrivateCertificate** the URLs where the public and private certificates are hosted, respectively. The **DomainName** and **PublicElasticIP** are mandatory parameters.
 

@@ -4,7 +4,7 @@
 
 This tutorial is a simple video-call application built with **Ionic**, using **Angular** and **Capacitor**, that allows:
 
--   Joining a video call room by requesting a token from any [application server](../application-server/)
+-   Joining a video call room by requesting a token from any [application server](../application-server/index.md).
 -   Publishing your camera and microphone.
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
@@ -83,7 +83,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
             The WebRTC API demands a secure connection for functionality outside of localhost, necessitating the serving of the application over HTTPS.
 
-        If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your app from other devices in your network](../../installation/local/#accessing-your-local-deployment-from-other-devices-on-your-network){target="_blank"}.
+        If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your app from other devices in your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
 
         Now, let's explore how to run the application on a mobile device:
 
@@ -99,7 +99,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         === ":fontawesome-brands-apple:{.icon .lg-icon .tab-icon} iOS"
 
-            You will need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){target="_blank"} and [Cocoapods](https://guides.cocoapods.org/using/getting-started.html){target="_blank"} installed in your computer.
+            You will need [Ruby](https://www.ruby-lang.org/en/documentation/self-hosting/){target="_blank"} and [Cocoapods](https://guides.cocoapods.org/using/getting-started.html){target="_blank"} installed in your computer.
 
             The app must be signed with a development team. To do so, open the project in **Xcode** and select a development team in the **Signing & Capabilities** editor.
 

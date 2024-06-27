@@ -69,7 +69,7 @@ As OpenVidu 2 did not provide native SDKs for Android or iOS, it is necessary to
 
 ### 2. Deploy OpenVidu 3
 
-An OpenVidu 2 deployment is *NOT* directly upgradable to an OpenVidu 3 deployment. You will have to deploy OpenVidu 3 completely from scratch. Just follow the [official instructions](https://openvidu.io/docs/installation/).
+An OpenVidu 2 deployment is *NOT* directly upgradable to an OpenVidu 3 deployment. You will have to deploy OpenVidu 3 completely from scratch. Just follow the [official instructions](https://openvidu.io/docs/self-hosting/).
 
 ### 3. Point your server application to your new OpenVidu 3 deployment
 

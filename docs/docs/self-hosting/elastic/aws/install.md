@@ -4,7 +4,7 @@
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in AWS. Deployed services are the same as the [On Premises Elastic Installation](./on-premises.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in AWS. Deployed services are the same as the [On Premises Elastic Installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -23,7 +23,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
     This is how the architecture of the deployment looks:
 
     <figure markdown>
-    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/installation/elastic/aws/elastic-aws-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/self-hosting/elastic/aws/elastic-aws-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic AWS Architecture</figcaption>
     </figure>
 
@@ -36,7 +36,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 Depending on your needs, you need to fill in the following CloudFormation parameters:
 
---8<-- "docs/docs/installation/shared/aws-ssl-domain.md"
+--8<-- "docs/docs/self-hosting/shared/aws-ssl-domain.md"
 
 ### OpenVidu Elastic Configuration
 
@@ -46,13 +46,13 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     The parameters in this section might appear as follows:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/installation/elastic/aws/openvidu-elastic-config.png)
+    ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/elastic/aws/openvidu-elastic-config.png)
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account){:target=_blank}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
 
-    --8<-- "docs/docs/installation/shared/mediasoup-warning.md"
+    --8<-- "docs/docs/self-hosting/shared/mediasoup-warning.md"
 
 ### EC2 Instance Configuration
 
@@ -62,7 +62,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     The parameters in this section may look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/installation/elastic/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/self-hosting/elastic/aws/ec2-instance-config.png)
 
     Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Amazon Image ID (AMI) to use at **AmiId**.
 
@@ -76,7 +76,7 @@ The number of Media Nodes can scale up or down based on the system load. You can
 
     The parameters in this section may look like this:
 
-    ![Media Nodes Autoscaling Group Configuration](../../../../assets/images/installation/elastic/aws/media-nodes-asg-config.png)
+    ![Media Nodes Autoscaling Group Configuration](../../../../assets/images/self-hosting/elastic/aws/media-nodes-asg-config.png)
 
     The **InitialNumberOfMediaNodes** parameter specifies the initial number of Media Nodes to deploy. The **MinNumberOfMediaNodes** and **MaxNumberOfMediaNodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 
@@ -90,7 +90,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The parameters in this section may look like this:
 
-    ![VPC Configuration](../../../../assets/images/installation/elastic/aws/vpc-config.png)
+    ![VPC Configuration](../../../../assets/images/self-hosting/elastic/aws/vpc-config.png)
 
     The **OpenViduVPC** parameter specifies the VPC where the deployment will be created.
 
@@ -99,7 +99,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
     !!!warning
         You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
 
---8<-- "docs/docs/installation/shared/aws-turn-domain.md"
+--8<-- "docs/docs/self-hosting/shared/aws-turn-domain.md"
 
 ## Deploying the Stack
 
@@ -109,7 +109,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/installation/elastic/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/self-hosting/elastic/aws/outputs.png)
 
 ## Deployment Credentials
 
@@ -119,9 +119,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/installation/elastic/aws/1-secrets-retrieve.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/installation/elastic/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/self-hosting/elastic/aws/1-secrets-retrieve.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/self-hosting/elastic/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/installation/elastic/aws/2-secrets.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/installation/elastic/aws/2-secrets.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/self-hosting/elastic/aws/2-secrets.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/self-hosting/elastic/aws/2-secrets.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -141,10 +141,10 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "docs/docs/installation/shared/aws-troubleshooting.md"
+--8<-- "docs/docs/self-hosting/shared/aws-troubleshooting.md"
 
-4. If everything seems fine, check the [status](../admin/on-premises.md#checking-the-status-of-services) and the [logs](../admin/on-premises.md#checking-logs) of the installed OpenVidu services in the Master Node and Media Nodes.
+4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in the Master Node and Media Nodes.
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Elastic deployment is ready to use. You can check the [Configuration and Administration](../admin/aws.md) section to learn how to manage your OpenVidu Elastic deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Elastic deployment is ready to use. You can check the [Configuration and Administration](../aws/admin.md) section to learn how to manage your OpenVidu Elastic deployment.

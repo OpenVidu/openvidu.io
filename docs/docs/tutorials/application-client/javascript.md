@@ -4,7 +4,7 @@
 
 This tutorial is a simple video-call application built with plain **JavaScript**, **HTML** and **CSS** that allows:
 
--   Joining a video call room by requesting a token from any [application server](../application-server/)
+-   Joining a video call room by requesting a token from any [application server](../application-server/index.md).
 -   Publishing your camera and microphone.
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.

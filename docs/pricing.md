@@ -51,9 +51,9 @@ hide:
   </tr>
   <tr>
     <td class="first-column border-right">Installation instructions</td>
-    <td class="border-right"><a class="md-button" href="/docs/installation/single-node/">Install</a></td>
-    <td class="border-right"><a class="md-button" href="/docs/installation/elastic/">Install</a></td>
-    <td><a class="md-button" href="/docs/installation/ha/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="/docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="/docs/self-hosting/elastic/">Install</a></td>
+    <td><a class="md-button" href="/docs/self-hosting/ha/">Install</a></td>
   </tr>
 </table>
 
@@ -103,7 +103,7 @@ There are deliberate reasons for this pricing model in OpenVidu Pro:
 
 ## When and how are you charged?
 
-Users must create an [OpenVidu account](account.md) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](../docs/installation/elastic/) or [OpenVidu High Availability](../docs/installation/ha/)).
+Users must create an [OpenVidu account](account.md) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](docs/self-hosting/ha/index.md)).
 
 When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a **15-day free trial period** during which you will not be charged at all.
 

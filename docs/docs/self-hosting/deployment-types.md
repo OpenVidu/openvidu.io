@@ -8,7 +8,7 @@ There are different deployment options available, depending on your needs:
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability | Same benefits as OpenVidu Single Node plus **2x performance**, **scalability** and **advanced observability** | Same benefits as OpenVidu Single Node and OpenVidu Elastic plus **fault tolerance** |
 | **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="no-break">N Media Nodes</span> | 4 Master Nodes +<br><span class="no-break">N Media Nodes</span> |
-| **Installation instructions** | [Install](../installation/local.md){ .md-button } | [Install](../installation/single-node/index.md){ .md-button } | [Install](../installation/elastic/index.md){ .md-button } | [Install](../installation/ha/index.md){ .md-button } |
+| **Installation instructions** | [Install](../self-hosting/local.md){ .md-button } | [Install](../self-hosting/single-node/index.md){ .md-button } | [Install](../self-hosting/elastic/index.md){ .md-button } | [Install](../self-hosting/ha/index.md){ .md-button } |
 
 <br>
 

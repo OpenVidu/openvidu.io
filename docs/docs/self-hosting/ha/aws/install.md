@@ -4,7 +4,7 @@
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability Installation](./on-premises-nlb.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability Installation](../on-premises/install-nlb.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -23,7 +23,7 @@ This is how the architecture of the deployment looks like.
 === "Architecture overview"
 
     <figure markdown>
-    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/installation/ha/aws/ha-aws-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/self-hosting/ha/aws/ha-aws-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability AWS Architecture</figcaption>
     </figure>
 
@@ -36,7 +36,7 @@ This is how the architecture of the deployment looks like.
 === "Architecture overview with TURN over TLS"
 
     <figure markdown>
-    ![OpenVidu High Availability AWS Architecture with TURN over TLS](../../../../assets/images/installation/ha/aws/ha-aws-architecture-turn.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability AWS Architecture with TURN over TLS](../../../../assets/images/self-hosting/ha/aws/ha-aws-architecture-turn.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability AWS Architecture with TURN over TLS</figcaption>
     </figure>
 
@@ -59,7 +59,7 @@ In this section, you need to specify the domain name and the SSL certificate to 
 
     The parameters in this section might look like this:
 
-    ![Domain and Load Balancer configuration](../../../../assets/images/installation/ha/aws/domain-and-lb-config.png)
+    ![Domain and Load Balancer configuration](../../../../assets/images/self-hosting/ha/aws/domain-and-lb-config.png)
 
     Set the **DomainName** parameter to the domain name you intend to use for your OpenVidu deployment. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
@@ -73,13 +73,13 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     The parameters in this section might appear as follows:
 
-    ![OpenVidu HA Configuration](../../../../assets/images/installation/ha/aws/openvidu-ha-config.png)
+    ![OpenVidu HA Configuration](../../../../assets/images/self-hosting/ha/aws/openvidu-ha-config.png)
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
 
-    --8<-- "docs/docs/installation/shared/mediasoup-warning.md"
+    --8<-- "docs/docs/self-hosting/shared/mediasoup-warning.md"
 
 ### EC2 Instance Configuration
 
@@ -89,7 +89,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     The parameters in this section may look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/installation/ha/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/self-hosting/ha/aws/ec2-instance-config.png)
 
     Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Amazon Image ID (AMI) to use at **AmiId**.
 
@@ -103,7 +103,7 @@ The number of Media Nodes can scale up or down based on the system load. You can
 
     The parameters in this section may look like this:
 
-    ![Media Nodes Autoscaling Group Configuration](../../../../assets/images/installation/ha/aws/media-nodes-asg-config.png)
+    ![Media Nodes Autoscaling Group Configuration](../../../../assets/images/self-hosting/ha/aws/media-nodes-asg-config.png)
 
     The **InitialNumberOfMediaNodes** parameter specifies the initial number of Media Nodes to deploy. The **MinNumberOfMediaNodes** and **MaxNumberOfMediaNodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 
@@ -117,7 +117,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The parameters in this section may look like this:
 
-    ![VPC Configuration](../../../../assets/images/installation/ha/aws/vpc-config.png)
+    ![VPC Configuration](../../../../assets/images/self-hosting/ha/aws/vpc-config.png)
 
     The **OpenViduVPC** parameter specifies the VPC where the deployment will be created.
 
@@ -137,7 +137,7 @@ This section is optional. It is useful when your users are behind a restrictive 
 
     The parameters in this section may look like this:
 
-    ![TURN server configuration with TLS](../../../../assets/images/installation/ha/aws/turn-config.png)
+    ![TURN server configuration with TLS](../../../../assets/images/self-hosting/ha/aws/turn-config.png)
 
     Set the **TurnDomainName** parameter to the domain name you intend to use for your TURN server. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
@@ -151,7 +151,7 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
     The parameters in this section may look like this:
 
-    ![Volumes Configuration](../../../../assets/images/installation/ha/aws/volumes-config.png)
+    ![Volumes Configuration](../../../../assets/images/self-hosting/ha/aws/volumes-config.png)
 
     The **RetainVolumes** parameter specifies whether the EBS volumes should be retained when the stack is deleted. If you set this parameter to `true`, the EBS volumes will not be deleted when the stack is deleted. This is useful if you want to keep the recordings and metrics data after deleting the stack. If you set this parameter to `false`, the EBS volumes will be deleted when the stack is deleted. In any case, it is recommended to create a snapshot backup policy.
 
@@ -165,7 +165,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/installation/ha/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/self-hosting/ha/aws/outputs.png)
 
 ## Deployment Credentials
 
@@ -175,9 +175,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/installation/ha/aws/1-secrets-retrieve.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/installation/ha/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/self-hosting/ha/aws/1-secrets-retrieve.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/self-hosting/ha/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/installation/ha/aws/2-secrets.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/installation/ha/aws/2-secrets.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/self-hosting/ha/aws/2-secrets.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/self-hosting/ha/aws/2-secrets.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -197,10 +197,10 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "docs/docs/installation/shared/aws-troubleshooting.md"
+--8<-- "docs/docs/self-hosting/shared/aws-troubleshooting.md"
 
-4. If everything seems fine, check the [status](../admin/on-premises.md/#checking-the-status-of-services) and the [logs](../admin/on-premises.md/#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
+4. If everything seems fine, check the [status](../on-premises/admin.md/#checking-the-status-of-services) and the [logs](../on-premises/admin.md/#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu High Availability deployment is ready to use. You can check the [Configuration and Administration](../admin/aws.md) section to learn how to manage your deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu High Availability deployment is ready to use. You can check the [Configuration and Administration](../aws/admin.md) section to learn how to manage your deployment.

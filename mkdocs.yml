@@ -59,33 +59,33 @@ nav:
                 - docs/self-hosting/production-ready/observability/index.md
                 - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
                 - Grafana stack: docs/self-hosting/production-ready/observability/grafana-stack.md
-          - Local (Development): docs/installation/local.md
+          - Local (Development): docs/self-hosting/local.md
           - Single Node:
-              - docs/installation/single-node/index.md
+              - docs/self-hosting/single-node/index.md
               - On Premises:
-                  - Install: docs/installation/single-node/install/on-premises.md
-                  - Configuration And Administration: docs/installation/single-node/admin/on-premises.md
+                  - Install: docs/self-hosting/single-node/on-premises/install.md
+                  - Configuration And Administration: docs/self-hosting/single-node/on-premises/admin.md
               - AWS:
-                  - Install: docs/installation/single-node/install/aws.md
-                  - Configuration And Administration: docs/installation/single-node/admin/aws.md
+                  - Install: docs/self-hosting/single-node/aws/install.md
+                  - Configuration And Administration: docs/self-hosting/single-node/aws/admin.md
           - Elastic:
-              - docs/installation/elastic/index.md
+              - docs/self-hosting/elastic/index.md
               - On Premises:
-                  - Install: docs/installation/elastic/install/on-premises.md
-                  - Configuration And Administration: docs/installation/elastic/admin/on-premises.md
+                  - Install: docs/self-hosting/elastic/on-premises/install.md
+                  - Configuration And Administration: docs/self-hosting/elastic/on-premises/admin.md
               - AWS:
-                  - Install: docs/installation/elastic/install/aws.md
-                  - Configuration And Administration: docs/installation/elastic/admin/aws.md
+                  - Install: docs/self-hosting/elastic/aws/install.md
+                  - Configuration And Administration: docs/self-hosting/elastic/aws/admin.md
           - High Availability:
-              - docs/installation/ha/index.md
+              - docs/self-hosting/ha/index.md
               - On Premises:
-                  - Install with DNS Load Balancing: docs/installation/ha/install/on-premises-dlb.md
-                  - Install with Network Load Balancer: docs/installation/ha/install/on-premises-nlb.md
-                  - Configuration And Administration: docs/installation/ha/admin/on-premises.md
+                  - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
+                  - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
+                  - Configuration And Administration: docs/self-hosting/ha/on-premises/admin.md
               - AWS:
-                  - Install: docs/installation/ha/install/aws.md
-                  - Configuration And Administration: docs/installation/ha/admin/aws.md
-          # - FAQ: docs/installation/faq.md
+                  - Install: docs/self-hosting/ha/aws/install.md
+                  - Configuration And Administration: docs/self-hosting/ha/aws/admin.md
+          # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md

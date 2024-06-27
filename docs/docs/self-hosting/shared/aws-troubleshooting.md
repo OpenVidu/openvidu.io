@@ -6,7 +6,7 @@ If something goes wrong during the initial CloudFormation stack creation, your s
     === "Disable Rollback on failure"
 
         <figure markdown>
-        ![Disable Rollback on failure](../../../../assets/images/installation/shared/disable-rollback.png){ .svg-img .dark-img }
+        ![Disable Rollback on failure](../../../../assets/images/self-hosting/shared/disable-rollback.png){ .svg-img .dark-img }
         </figure>
 
 2. Check if the EC2 instance or instances are running. If they are not, check the CloudFormation events for any error messages.

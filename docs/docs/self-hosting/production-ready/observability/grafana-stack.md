@@ -174,7 +174,7 @@ Then, there is a row for each selected **service**, containing **all logs**, **w
 
 ### Limitations
 
-For now, in [**OpenVidu High Availability deployments**](../../../deployment-types/#openvidu-high-availability), we have decided to **not** implement Grafana in High Availability (HA) mode. This decision is based on the fact that Grafana needs a configured HA MySQL or PostgreSQL database to work in HA mode, and we want to keep the deployment as simple as possible.
+For now, in [**OpenVidu High Availability deployments**](../../deployment-types.md#openvidu-high-availability), we have decided to **not** implement Grafana in High Availability (HA) mode. This decision is based on the fact that Grafana needs a configured HA MySQL or PostgreSQL database to work in HA mode, and we want to keep the deployment as simple as possible.
 
 There are 4 instances of Grafana in an OpenVidu High Availability deployment, one for each Master Node, but they are not synchronized between them. Therefore, if you make any change (change your admin password, create a new dashboard...) in one Grafana instance and the Master Node suddenly goes down, you will be redirected to another Grafana instance where the changes will not be reflected. That is the reason why we disable user signups and saving dashboard or datasource modifications in Grafana.
 

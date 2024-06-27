@@ -157,7 +157,7 @@ You just need to point your OpenVidu and LiveKit applications to `http://localho
 Testing WebRTC applications can be challenging because devices require a secure context (HTTPS) to access the camera and microphone. When using LiveKit Open Source, this isn't an issue if you access your app from the same computer where the LiveKit Server is running, as `localhost` is considered a secure context even over plain HTTP. Consider the following architecture:
 
 <figure markdown="span">
-  ![Image title](../../../assets/images/comparing-openvidu/livekit-architecture.svg){ width="450" style="border-radius: 8px" }
+  ![Image title](../../assets/images/comparing-openvidu/livekit-architecture.svg){ width="450" style="border-radius: 8px" }
 </figure>
 
 The simplest way to test your application is:
@@ -208,4 +208,4 @@ This setup simplifies the configuration of local OpenVidu deployments with SSL, 
 
 The HTTPS offered by `openvidu-local.dev` is intended for development or testing purposes with the only goal of making your local devices trust your application (which is mandatory in WebRTC applications). For any other use case, it should be treated with the same security considerations as plain HTTP.
 
-For production, you should consider deploying a [production-grade OpenVidu deployment](../../self-hosting/deployment-types/#openvidu-single-node).
+For production, you should consider deploying a [production-grade OpenVidu deployment](deployment-types.md#openvidu-single-node).

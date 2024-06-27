@@ -28,7 +28,7 @@ With OpenVidu Community you get a handful of features on top of LiveKit Open Sou
 - **S3 compatible storage for Egress recordings**: OpenVidu Community comes with an S3 compatible storage already configured to store [Egress](https://docs.livekit.io/realtime/egress/overview/){target="_blank"} recordings ([Minio](https://min.io/){target="_blank"}).
 - **Administration dashboard to monitor your Rooms**: OpenVidu comes with an administration dashboard that allows you to monitor the status of your Rooms. Not only in real time, but also historically: the number of participants, the number of published tracks, Egress and Ingress processes... This is a great tool to have when developing your app, as it can help spotting issues and debugging your application's logic. [See more](./self-hosting/production-ready/observability/openvidu-dashboard.md).
 - **OpenVidu Call**: a fully-fledged videoconference application that you can customize and adapt to your needs. [See more](./openvidu-call/index.md).
-- **Powerful and easy to use local development environment**: OpenVidu provides a Docker Compose based deployment designed for development and testing devices on your local network. It comes with automatic certificate management that makes it easy to test mobile devices in your LAN. [See more](./installation/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
+- **Powerful and easy to use local development environment**: OpenVidu provides a Docker Compose based deployment designed for development and testing devices on your local network. It comes with automatic certificate management that makes it easy to test mobile devices in your LAN. [See more](./self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
 
 ### OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</span> vs LiveKit Open Source
 
@@ -56,7 +56,7 @@ The main difference between OpenVidu and these services is who owns the infrastr
 - Different sets of SDKs to integrate with your application. Some more complete than others, and maybe some low-code options.
 - A pricing model usually based on one of this two options: minutes-per-participant or total GBs of bandwidth consumed.
 
-Using a SaaS provider is a great option for some use cases, but not all. **OpenVidu is designed to be self-hosted**. This allows you to have full control over your infrastructure and data, taking the most out of your own resources and complying with the most strict regulations. While having the best features provided by SaaS: scalability, fault tolerance, observability. See [Production ready](../self-hosting/production-ready/) for more information.
+Using a SaaS provider is a great option for some use cases, but not all. **OpenVidu is designed to be self-hosted**. This allows you to have full control over your infrastructure and data, taking the most out of your own resources and complying with the most strict regulations. While having the best features provided by SaaS: scalability, fault tolerance, observability. See [Production ready](self-hosting/production-ready/index.md) for more information.
 
 ## OpenVidu vs SFUs
 
@@ -76,4 +76,4 @@ OpenVidu uses mediasoup internally to transmit media streams. We have embedded m
 
 All these well-known video conferencing tools are final applications that provide little to no customization at all. They are proprietary, closed-source apps designed to be used as-is, and they are not intended to be integrated into other systems.
 
-OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](../getting-started#use-cases) for some examples of what you can build with OpenVidu.
+OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](getting-started.md#use-cases) for some examples of what you can build with OpenVidu.

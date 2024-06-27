@@ -1,6 +1,6 @@
 # OpenVidu Single Node Installation: On-premises
 
---8<-- "docs/docs/installation/single-node/shared/v2compat-warning.md"
+--8<-- "docs/docs/self-hosting/single-node/shared/v2compat-warning.md"
 
 This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
 
@@ -9,7 +9,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Sin
     This is how the architecture of the deployment looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/installation/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node On Premises Architecture</figcaption>
     </figure>
 
@@ -62,7 +62,7 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
 sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
 ```
 
---8<-- "docs/docs/installation/shared/install-version.md"
+--8<-- "docs/docs/self-hosting/shared/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -121,7 +121,7 @@ docker run -it openvidu/openvidu-installer:latest \
     --deployment-type=single_node
 ```
 
---8<-- "docs/docs/installation/shared/install-version.md"
+--8<-- "docs/docs/self-hosting/shared/install-version.md"
 
 This is going to generate a command like this, but it may vary depending on the answers you provide. Here are three examples of the command you can run depending on the certificate type you choose:
 
@@ -153,7 +153,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --letsencrypt-email='example@example.io'
     ```
 
-    --8<-- "docs/docs/installation/shared/install-version.md"
+    --8<-- "docs/docs/self-hosting/shared/install-version.md"
 
 === "Self-signed certificates"
 
@@ -183,7 +183,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --letsencrypt-email='example@example.io'
     ```
 
-    --8<-- "docs/docs/installation/shared/install-version.md"
+    --8<-- "docs/docs/self-hosting/shared/install-version.md"
 
 === "Custom certificates"
 
@@ -223,7 +223,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --turn-owncert-public-key="$CERT_TURN_PUBLIC_KEY"
     ```
 
-    --8<-- "docs/docs/installation/shared/install-version.md"
+    --8<-- "docs/docs/self-hosting/shared/install-version.md"
 
     - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
     - `--turn-owncert-private-key` and `--turn-owncert-public-key` are optional. You only need to pass them if you want to enable TURN with TLS.
@@ -244,4 +244,4 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Configuration and Administration](../admin/on-premises.md) section to learn how to manage your OpenVidu Single Node deployment.
+Once you have OpenVidu deployed, you can check the [Configuration and Administration](../on-premises/admin.md) section to learn how to manage your OpenVidu Single Node deployment.

@@ -1,8 +1,8 @@
 # OpenVidu Single Node Installation: AWS
 
---8<-- "docs/docs/installation/single-node/shared/v2compat-warning.md"
+--8<-- "docs/docs/self-hosting/single-node/shared/v2compat-warning.md"
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in AWS. Deployed services are the same as the [On Premises Single Node Installation](./on-premises.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in AWS. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -21,7 +21,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
     This is how the architecture of the deployment looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/installation/single-node/aws/single-node-aws-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/self-hosting/single-node/aws/single-node-aws-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node AWS Architecture</figcaption>
     </figure>
 
@@ -29,7 +29,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
 Depending on your needs, you need to fill the following CloudFormation parameters:
 
---8<-- "docs/docs/installation/shared/aws-ssl-domain.md"
+--8<-- "docs/docs/self-hosting/shared/aws-ssl-domain.md"
 
 ### EC2 Instance Configuration
 
@@ -39,13 +39,13 @@ You need to specify some properties for the EC2 instance that will be created.
 
     The parameters in this section may look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/installation/single-node/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/self-hosting/single-node/aws/ec2-instance-config.png)
 
     Simply select the type of instance you want to deploy at **InstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Amazon Image ID (AMI) to use at **AmiId**.
 
     By default, the parameter **AmiId** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
---8<-- "docs/docs/installation/shared/aws-turn-domain.md"
+--8<-- "docs/docs/self-hosting/shared/aws-turn-domain.md"
 
 ## Deploying the Stack
 
@@ -55,7 +55,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/installation/single-node/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/self-hosting/single-node/aws/outputs.png)
 
 ## Deployment Credentials
 
@@ -65,10 +65,10 @@ Just point your app to the **OpenViduServerURL** parameter of the CloudFormation
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "docs/docs/installation/shared/aws-troubleshooting.md"
+--8<-- "docs/docs/self-hosting/shared/aws-troubleshooting.md"
 
-4. If everything seems fine, check the [status](../admin/on-premises.md#checking-the-status-of-services) and the [logs](../admin/on-premises.md#checking-logs) of the installed OpenVidu services.
+4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node deployment is ready to use. You can check the [Configuration and Administration](../admin/aws.md) section to learn how to manage your deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node deployment is ready to use. You can check the [Configuration and Administration](../aws/admin.md) section to learn how to manage your deployment.

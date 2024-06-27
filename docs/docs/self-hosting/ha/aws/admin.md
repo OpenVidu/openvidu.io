@@ -2,7 +2,7 @@
 
 The deployment of OpenVidu High Availability on AWS is automated using AWS CloudFormation, with Master and Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. The Auto Scaling Group of Master Nodes is fixed to 4 instances while the Auto Scaling Group of Media Nodes is configured to scale based on the target average CPU utilization.
 
-Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](./on-premises.md/) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
+Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
 
 ## Cluster Shutdown and Startup
 
@@ -16,19 +16,19 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`**, and click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
     5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to 0, and click on _"Update"_.
         <figure markdown>
-        ![Set Desired Capacity to 0](../../../../assets/images/installation/shared/aws-admin-set-desired-capacity-stop.png){ .svg-img .dark-img }
+        ![Set Desired Capacity to 0](../../../../assets/images/self-hosting/shared/aws-admin-set-desired-capacity-stop.png){ .svg-img .dark-img }
         </figure>
     6. Wait until the _"Instance Management"_ tab shows that there are no instances in the Auto Scaling Group.
         <figure markdown>
-        ![Instance Management](../../../../assets/images/installation/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
+        ![Instance Management](../../../../assets/images/self-hosting/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
         </figure>
 
         !!!warning
@@ -36,19 +36,19 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     7. After confirming that all Media Node instances are terminated, go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Master Nodes selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
         </figure>
     8. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
         </figure>
     9. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to 0, and click on _"Update"_.
         <figure markdown>
-        ![Set Desired Capacity to 0](../../../../assets/images/installation/shared/aws-admin-set-desired-capacity-stop.png){ .svg-img .dark-img }
+        ![Set Desired Capacity to 0](../../../../assets/images/self-hosting/shared/aws-admin-set-desired-capacity-stop.png){ .svg-img .dark-img }
         </figure>
     10. Wait until the _"Instance Management"_ tab shows that there are no instances in the Auto Scaling Group.
         <figure markdown>
-        ![Instance Management](../../../../assets/images/installation/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
+        ![Instance Management](../../../../assets/images/self-hosting/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
         </figure>
 
 === "Startup the Cluster"
@@ -59,35 +59,35 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. Locate the resource with the logical ID: **`OpenViduMasterNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Master Nodes selected.
         <figure markdown>
-        ![Select CloudFormation Stack](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
+        ![Select CloudFormation Stack](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
         </figure>
     5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the desired number of Media Nodes, and click on _"Update"_. **For the Master Nodes auto scaling group, the number of instances must be 4**.
         <figure markdown>
-        ![Set Desired Capacity to 2](../../../../assets/images/installation/ha/aws/aws-ha-admin-set-desired-capacity-master-start.png){ .svg-img .dark-img }
+        ![Set Desired Capacity to 2](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-set-desired-capacity-master-start.png){ .svg-img .dark-img }
         </figure>
     6. Wait until the _"Instance Management"_ tab shows that there are the desired number of instances in the Auto Scaling Group.
         <figure markdown>
-        ![Instance Management](../../../../assets/images/installation/ha/aws/aws-ha-admin-instance-management-master-start.png){ .svg-img .dark-img }
+        ![Instance Management](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-instance-management-master-start.png){ .svg-img .dark-img }
         </figure>
     7. Go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
         </figure>
     8. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
     9. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the desired number of Media Nodes, and click on _"Update"_. In this example, we set the desired capacity to 2.
         <figure markdown>
-        ![Set Desired Capacity to 2](../../../../assets/images/installation/shared/aws-admin-set-desired-capacity-start.png){ .svg-img .dark-img }
+        ![Set Desired Capacity to 2](../../../../assets/images/self-hosting/shared/aws-admin-set-desired-capacity-start.png){ .svg-img .dark-img }
         </figure>
     10. Wait until the _"Instance Management"_ tab shows that there are the desired number of instances in the Auto Scaling Group.
         <figure markdown>
-        ![Instance Management](../../../../assets/images/installation/ha/aws/aws-ha-admin-instance-management-media-start.png){ .svg-img .dark-img }
+        ![Instance Management](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-instance-management-media-start.png){ .svg-img .dark-img }
         </figure>
 
 
@@ -104,23 +104,23 @@ It is possible to change the instance type of both the Master Node and the Media
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. Locate the resource with the logical ID: **`OpenViduMasterLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Master Nodes selected.
         <figure markdown>
-        ![Select Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-launch-template-master.png){ .svg-img .dark-img }
+        ![Select Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-launch-template-master.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Modify template (Create new version)"_.
         <figure markdown>
-        ![Edit Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-action-modify-template-master.png){ .svg-img .dark-img }
+        ![Edit Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-action-modify-template-master.png){ .svg-img .dark-img }
         </figure>
     5. In the _"Instance type"_ section, select the new instance type and click on _"Create template version"_.
         <figure markdown>
-        ![Change instance type](../../../../assets/images/installation/shared/aws-admin-template-instance-type.png){ .svg-img .dark-img }
+        ![Change instance type](../../../../assets/images/self-hosting/shared/aws-admin-template-instance-type.png){ .svg-img .dark-img }
         </figure>
     6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Master Nodes selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
         </figure>
     7. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
         </figure>
     8. In the Launch Template section, select the new version of the launch template we just created at step 5 which is the highest version number.
 
@@ -129,7 +129,7 @@ It is possible to change the instance type of both the Master Node and the Media
         !!!info
             By configuring _"Latest"_ as the launch template version,  you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
 
-        ![Change launch template version](../../../../assets/images/installation/ha/aws/aws-ha-admin-asg-update-launch-template-master.png){ .svg-img .dark-img }
+        ![Change launch template version](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-asg-update-launch-template-master.png){ .svg-img .dark-img }
 
     9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new instance type.
 
@@ -142,23 +142,23 @@ It is possible to change the instance type of both the Master Node and the Media
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. Locate the resource with the logical ID: **`OpenViduMediaNodeLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Media Nodes selected.
         <figure markdown>
-        ![Select Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-launch-template-media.png){ .svg-img .dark-img }
+        ![Select Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-launch-template-media.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Modify template (Create new version)"_.
         <figure markdown>
-        ![Edit Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-action-modify-template-media.png){ .svg-img .dark-img }
+        ![Edit Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-action-modify-template-media.png){ .svg-img .dark-img }
         </figure>
     5. In the _"Instance type"_ section, select the new instance type and click on _"Create template version"_.
         <figure markdown>
-        ![Change instance type](../../../../assets/images/installation/shared/aws-admin-template-instance-type.png){ .svg-img .dark-img }
+        ![Change instance type](../../../../assets/images/self-hosting/shared/aws-admin-template-instance-type.png){ .svg-img .dark-img }
         </figure>
     6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
         </figure>
     7. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
     8. In the Launch Template section, select the new version of the launch template we just created at step 5 which is the highest version number.
 
@@ -167,7 +167,7 @@ It is possible to change the instance type of both the Master Node and the Media
         !!!info
             By configuring _"Latest"_ as the launch template version,  you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
 
-        ![Change launch template version](../../../../assets/images/installation/ha/aws/aws-ha-admin-asg-update-launch-template-media.png){ .svg-img .dark-img }
+        ![Change launch template version](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-asg-update-launch-template-media.png){ .svg-img .dark-img }
 
     9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new instance type.
 
@@ -185,19 +185,19 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
     5. To configure scaling policies, navigate to the _"Automatic scaling"_ tab within the Auto Scaling Group Dashboard, select the unique _"Target tracking scaling"_ autoscaling policy, and click on _"Actions > Edit"_.
         <figure markdown>
-        ![Scaling Policies](../../../../assets/images/installation/ha/aws/aws-ha-admin-automatic-scaling.png){ .svg-img .dark-img }
+        ![Scaling Policies](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-automatic-scaling.png){ .svg-img .dark-img }
         </figure>
     6. It will open a panel where you can configure multiple parameters. In this example, we set the target average CPU utilization to 30%. Then, click on _"Update"_.
         <figure markdown>
-        ![Edit Scaling Policies](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-scaling-policies.png){ .svg-img .dark-img }
+        ![Edit Scaling Policies](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-scaling-policies.png){ .svg-img .dark-img }
         </figure>
 
         !!!info
@@ -213,19 +213,19 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
     5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the fixed number of Media Nodes you require, and click on _"Update"_. In this example, we set the desired capacity to 2.
         <figure markdown>
-        ![Set Fixed Desired Capacity](../../../../assets/images/installation/shared/aws-admin-set-desired-capacity-start.png){ .svg-img .dark-img }
+        ![Set Fixed Desired Capacity](../../../../assets/images/self-hosting/shared/aws-admin-set-desired-capacity-start.png){ .svg-img .dark-img }
         </figure>
     6. Wait until the _"Instance Management"_ tab shows that the Auto Scaling Group has the fixed number of instances running.
         <figure markdown>
-        ![Instance Management](../../../../assets/images/installation/ha/aws/aws-ha-admin-instance-management-media-start.png){ .svg-img .dark-img }
+        ![Instance Management](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-instance-management-media-start.png){ .svg-img .dark-img }
         </figure>
 
 
@@ -243,7 +243,7 @@ To avoid manual intervention after deployment, you can pre-configure the node se
 
 === "Master Node"
 
-    1. Get the CloudFormation YAML template used to deploy [OpenVidu High Availability on AWS](../install/aws.md).
+    1. Get the CloudFormation YAML template used to deploy [OpenVidu High Availability on AWS](../aws/install.md).
     2. Locate the section defining the Launch Template for the Master Node and update the `UserData` property with the required configuration parameters. The section looks like this:
 
         ```yaml
@@ -289,7 +289,7 @@ To avoid manual intervention after deployment, you can pre-configure the node se
 
 === "Media Nodes"
 
-    1. Get the CloudFormation YAML template used to deploy [OpenVidu High Availability on AWS](../install/aws.md).
+    1. Get the CloudFormation YAML template used to deploy [OpenVidu High Availability on AWS](../aws/install.md).
     2. Locate the section defining the Launch Template for the Media Nodes and update the `UserData` property with the required configuration parameters. The section looks like this:
 
         ```yaml
@@ -340,15 +340,15 @@ The global configuration parameters for the OpenVidu High Availability deploymen
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduSharedInfo`** and click on it to view the secret in AWS Secrets Manager.
         <figure markdown>
-        ![View Global Configuration Parameters](../../../../assets/images/installation/ha/aws/aws-ha-admin-view-global-configuration.png){ .svg-img .dark-img }
+        ![View Global Configuration Parameters](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-view-global-configuration.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Retrieve secret value"_ to view the parameters.
         <figure markdown>
-        ![Retrieve Secret Value](../../../../assets/images/installation/shared/aws-admin-retrieve-secret-value.png){ .svg-img .dark-img }
+        ![Retrieve Secret Value](../../../../assets/images/self-hosting/shared/aws-admin-retrieve-secret-value.png){ .svg-img .dark-img }
         </figure>
     5. Edit the desired parameters within the secret. For example, you can change the `RTC_ENGINE` parameter to `pion` or `mediasoup` depending on the WebRTC engine you want to use. Just click on _"Edit"_, modify the value, and click on _"Save"_.
         <figure markdown>
-        ![Edit Global Configuration Parameters](../../../../assets/images/installation/shared/aws-admin-edit-global-configuration.png){ .svg-img .dark-img }
+        ![Edit Global Configuration Parameters](../../../../assets/images/self-hosting/shared/aws-admin-edit-global-configuration.png){ .svg-img .dark-img }
         </figure>
     6. To apply the changes, stop the cluster and then start it again following the procedures outlined in the [Cluster Shutdown and Startup](#cluster-shutdown-and-startup) section.
 
@@ -364,30 +364,30 @@ The node services configuration parameters for the OpenVidu High Availability de
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. Locate the resource with the logical ID: **`OpenViduMasterLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Master Node selected.
         <figure markdown>
-        ![Select Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-launch-template-master.png){ .svg-img .dark-img }
+        ![Select Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-launch-template-master.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Modify template (Create new version)"_.
         <figure markdown>
-        ![Edit Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-action-modify-template-master.png){ .svg-img .dark-img }
+        ![Edit Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-action-modify-template-master.png){ .svg-img .dark-img }
         </figure>
-    5. Go to the _"Advanced details"_ section and modify the _"User data"_ field with the new configuration. You can modify the configuration parameters of the services running on the Master Node following the same script structure as the one used in the [Automatic installation and configuration of nodes](./on-premises.md#automatic-installation-and-configuration-of-nodes), for the Master Node. When you finish, click on _"Create template version"_.
+    5. Go to the _"Advanced details"_ section and modify the _"User data"_ field with the new configuration. You can modify the configuration parameters of the services running on the Master Node following the same script structure as the one used in the [Automatic installation and configuration of nodes](../on-premises/admin.md#automatic-installation-and-configuration-of-nodes), for the Master Node. When you finish, click on _"Create template version"_.
         <figure markdown>
-        ![Edit User Data](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-user-data-master.png){ .svg-img .dark-img }
+        ![Edit User Data](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-user-data-master.png){ .svg-img .dark-img }
         </figure>
     6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNodeASG`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-master-asg.png){ .svg-img .dark-img }
         </figure>
     7. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-master-asg.png){ .svg-img .dark-img }
         </figure>
     8. In the Launch Template section, select the new version of the launch template we just created at step 5 which is the highest version number. Then, click on _"Update"_.
 
         !!!info
             By configuring _"Latest"_ as the launch template version,  you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
 
-        ![Change launch template version](../../../../assets/images/installation/ha/aws/aws-ha-admin-asg-update-launch-template-master.png){ .svg-img .dark-img }
+        ![Change launch template version](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-asg-update-launch-template-master.png){ .svg-img .dark-img }
 
     9. Terminate the old instances manually from the EC2 Dashboard. New instances will be launched with the new configuration.
 
@@ -403,30 +403,30 @@ The node services configuration parameters for the OpenVidu High Availability de
     2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
     3. Locate the resource with the logical ID: **`OpenViduMediaNodeLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Media Nodes selected.
         <figure markdown>
-        ![Select Launch Template](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-launch-template-media.png){ .svg-img .dark-img }
+        ![Select Launch Template](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-launch-template-media.png){ .svg-img .dark-img }
         </figure>
     4. Click on _"Actions > Modify template (Create new version)"_.
         <figure markdown>
-        ![Edit Launch Template](../../../../assets/images/installation/elastic/aws/aws-elastic-admin-action-modify-template.png){ .svg-img .dark-img }
+        ![Edit Launch Template](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-action-modify-template.png){ .svg-img .dark-img }
         </figure>
-    5. Go to the _"Advanced details"_ section and modify the _"User data"_ field with the new configuration. You can modify the configuration parameters of the services running on the Media Nodes following the same script structure as the one used in the [Automatic installation and configuration of nodes](./on-premises.md#automatic-installation-and-configuration-of-nodes), for the Media Nodes. When you finish, click on _"Create template version"_.
+    5. Go to the _"Advanced details"_ section and modify the _"User data"_ field with the new configuration. You can modify the configuration parameters of the services running on the Media Nodes following the same script structure as the one used in the [Automatic installation and configuration of nodes](../on-premises/admin.md#automatic-installation-and-configuration-of-nodes), for the Media Nodes. When you finish, click on _"Create template version"_.
         <figure markdown>
-        ![Edit User Data](../../../../assets/images/installation/elastic/aws/aws-elastic-admin-edit-user-data.png){ .svg-img .dark-img }
+        ![Edit User Data](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-edit-user-data.png){ .svg-img .dark-img }
         </figure>
     6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
         <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
+        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-select-media-asg.png){ .svg-img .dark-img }
         </figure>
     7. Click on _"Actions > Edit"_.
         <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/installation/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
     8. In the Launch Template section, select the new version of the launch template we just created at step 5 which is the highest version number. Then, click on _"Update"_.
 
         !!!info
             By configuring _"Latest"_ as the launch template version,  you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
 
-        ![Change launch template version](../../../../assets/images/installation/ha/aws/aws-ha-admin-asg-update-launch-template-media.png){ .svg-img .dark-img }
+        ![Change launch template version](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-asg-update-launch-template-media.png){ .svg-img .dark-img }
 
     9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new configuration.
 

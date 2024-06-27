@@ -41,7 +41,7 @@ The primary goal of the OpenVidu team is to minimize the developer's effort when
 
 ## How to use
 
-Using Angular Components in your application is straightforward. The official [Angular Components Tutorials](../../tutorials/angular-components/) cover everything Angular Components offers, from customizing colors and branding logos to injecting new custom features.
+Using Angular Components in your application is straightforward. The official [Angular Components Tutorials](../tutorials/angular-components/index.md) cover everything Angular Components offers, from customizing colors and branding logos to injecting new custom features.
 
 ## Featured Components
 
@@ -118,7 +118,7 @@ You can check out all component events in the [Angular Components API Reference]
 
 ## Applications
 
-A practical example showcases the potential of Angular Components is our production-ready flagship application, [**OpenVidu Call**](../../openvidu-call). This application is built using Angular Components and demonstrates the power and flexibility of the library.
+A practical example showcases the potential of Angular Components is our production-ready flagship application, [**OpenVidu Call**](../openvidu-call/index.md). This application is built using Angular Components and demonstrates the power and flexibility of the library.
 
 ## References
 
