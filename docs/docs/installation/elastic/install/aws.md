@@ -9,7 +9,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Ela
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
 <div class="center-align" markdown>
-[AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduElastic&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-openvidu-elastic.yaml){.md-button target="_blank"}
+[Deploy OpenVidu Elastic in :fontawesome-brands-aws:{style="font-size:32px; margin-left: 7px"}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduElastic&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-openvidu-elastic.yaml){.md-button .deploy-button target="_blank"}
 </div>
 
 ...or access your [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target=_blank} and manually set this S3 URL in the `Specify template` section:
