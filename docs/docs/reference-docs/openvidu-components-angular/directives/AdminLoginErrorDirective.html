@@ -90,7 +90,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Directives</li>
-  <li class="breadcrumb-item" >LayoutDirective</li>
+  <li class="breadcrumb-item" >AdminLoginErrorDirective</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -108,7 +108,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/openvidu-components-angular/src/lib/directives/template/openvidu-components-angular.directive.ts</code>
+            <code>projects/openvidu-components-angular/src/lib/directives/api/admin.directive.ts</code>
         </p>
 
 
@@ -116,187 +116,19 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>The *<strong>ovLayout</strong> directive empowers you to replace the default room layout with a customized one.</p>
-<p>To ensure that the default <a href="../components/StreamComponent.html">StreamComponent</a> functions correctly with participant tracks, you can access all local tracks using the <a href="../classes/ParticipantModel.html#tracks">tracks</a> accessor.
-Extracting streams from remote participants can be more complex, but openvidu-angular simplifies the process with the <a href="../pipes/RemoteParticipantTracksPipe.html">RemoteParticipantTracksPipe</a>, which facilitates the extraction of each participant&#39;s stream.</p>
-<p>In the example below, take note of the HTML template&#39;s structure. The <code>*ngFor</code> statements employ the <code>| tracks</code> pipe to handle tracks effectively.</p>
-<!--ovLayout-start-tutorial-->
-<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { HttpClient } from &#39;&#64;angular/common/http&#39;;
-import { Component, OnDestroy, OnInit } from &#39;&#64;angular/core&#39;;
-import { lastValueFrom, Subscription } from &#39;rxjs&#39;;
-import {
-    ParticipantModel,
-    ParticipantService,
-    OpenViduComponentsModule,
-} from &#39;openvidu-components-angular&#39;;
-import { NgClass } from &#39;&#64;angular/common&#39;;
-
-&#64;Component({
-    selector: &#39;app-root&#39;,
-    template: `
-        &lt;!-- OpenVidu Video Conference Component --&gt;
-        &lt;ov-videoconference
-            [token]=&quot;token&quot;
-            [livekitUrl]=&quot;LIVEKIT_URL&quot;
-            (onTokenRequested)=&quot;onTokenRequested($event)&quot;
-        &gt;
-            &lt;!-- Custom Layout for Video Streams --&gt;
-            &lt;div *ovLayout&gt;
-                &lt;div class=&quot;container&quot;&gt;
-                    &lt;!-- Local Participant&#39;s Tracks --&gt;
-                    &#64;for (track of localParticipant.tracks; track track) {
-                    &lt;div
-                        class=&quot;item&quot;
-                        [ngClass]=&quot;{
-                            hidden:
-                                track.isAudioTrack &amp;&amp; !track.participant.onlyHasAudioTracks
-                        }&quot;
-                    &gt;
-                        &lt;ov-stream [track]=&quot;track&quot;&gt;&lt;/ov-stream&gt;
-                    &lt;/div&gt;
-                    }
-
-                    &lt;!-- Remote Participants&#39; Tracks --&gt;
-                    &#64;for (track of remoteParticipants | tracks; track track) {
-                    &lt;div
-                        class=&quot;item&quot;
-                        [ngClass]=&quot;{
-                            hidden:
-                                track.isAudioTrack &amp;&amp; !track.participant.onlyHasAudioTracks
-                        }&quot;
-                    &gt;
-                        &lt;ov-stream [track]=&quot;track&quot;&gt;&lt;/ov-stream&gt;
-                    &lt;/div&gt;
-                    }
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/ov-videoconference&gt;
-    `,
-    styles: `
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .item {
-            flex: 0 50%;
-            height: 250px;
-            margin-bottom: 2%;
-        }
-        .hidden {
-            display: none;
-        }
-    `,
-    standalone: true,
-    imports: [OpenViduComponentsModule, NgClass],
-})
-export class AppComponent implements OnInit, OnDestroy {
-    // For local development, leave these variables empty
-    // For production, configure them with correct URLs depending on your deployment
-    APPLICATION_SERVER_URL = &#39;&#39;;
-    LIVEKIT_URL = &#39;&#39;;
-
-    // Define the name of the room and initialize the token variable
-    roomName = &#39;custom-layout&#39;;
-    token!: string;
-
-    // Participant-related properties
-    localParticipant!: ParticipantModel;
-    remoteParticipants!: ParticipantModel[];
-    localParticipantSubs!: Subscription;
-    remoteParticipantsSubs!: Subscription;
-
-    constructor(
-        private httpClient: HttpClient,
-        private participantService: ParticipantService
-    ) {
-        this.configureUrls();
-    }
-
-    private configureUrls() {
-        // If APPLICATION_SERVER_URL is not configured, use default value from local development
-        if (!this.APPLICATION_SERVER_URL) {
-            if (window.location.hostname === &#39;localhost&#39;) {
-                this.APPLICATION_SERVER_URL = &#39;http://localhost:6080/&#39;;
-            } else {
-                this.APPLICATION_SERVER_URL =
-                    &#39;https://&#39; + window.location.hostname + &#39;:6443/&#39;;
-            }
-        }
-
-        // If LIVEKIT_URL is not configured, use default value from local development
-        if (!this.LIVEKIT_URL) {
-            if (window.location.hostname === &#39;localhost&#39;) {
-                this.LIVEKIT_URL = &#39;ws://localhost:7880/&#39;;
-            } else {
-                this.LIVEKIT_URL = &#39;wss://&#39; + window.location.hostname + &#39;:7443/&#39;;
-            }
-        }
-    }
-
-    ngOnInit() {
-        // Subscribe to participants&#39; updates
-        this.subscribeToParticipants();
-    }
-
-    // Function to request a token when a participant joins the room
-    async onTokenRequested(participantName: string) {
-        const { token } = await this.getToken(this.roomName, participantName);
-        this.token = token;
-    }
-
-    ngOnDestroy() {
-        // Unsubscribe from participant updates to prevent memory leaks
-        this.localParticipantSubs.unsubscribe();
-        this.remoteParticipantsSubs.unsubscribe();
-    }
-
-    // Subscribe to updates for local and remote participants
-    subscribeToParticipants() {
-        this.localParticipantSubs =
-            this.participantService.localParticipant$.subscribe((p) =&gt; {
-                if (p) this.localParticipant = p;
-            });
-
-        this.remoteParticipantsSubs =
-            this.participantService.remoteParticipants$.subscribe(
-                (participants) =&gt; {
-                    this.remoteParticipants = participants;
-                }
-            );
-    }
-
-    // Function to get a token from the server
-    getToken(roomName: string, participantName: string): Promise&lt;any&gt; {
-        try {
-            // Send a POST request to the server to obtain a token
-            return lastValueFrom(
-                this.httpClient.post&lt;any&gt;(this.APPLICATION_SERVER_URL + &#39;token&#39;, {
-                    roomName,
-                    participantName,
-                })
-            );
-        } catch (error: any) {
-            // Handle errors, e.g., if the server is not reachable
-            if (error.status === 404) {
-                throw {
-                    status: error.status,
-                    message:
-                        &#39;Cannot connect with the backend. &#39; + error.url + &#39; not found&#39;,
-                };
-            }
-            throw error;
-        }
-    }
-}
-</code></pre></div><!--ovLayout-end-tutorial-->
-
-
-<p>For a comprehensive guide on implementing custom layouts, please refer to the associated tutorial <a href="https://docs.openvidu.io/en/stable/components/openvidu-custom-layout">here</a>.</p>
-
+                <p>The <strong>error</strong> directive allows show the authentication error in <a href="../components/AdminLoginComponent.html">AdminLoginComponent</a>.</p>
+<p>Default: <code>null</code></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-admin-login [error]=&quot;error&quot;&gt;&lt;/ov-admin-login&gt;</code></pre></div>
             </p>
 
 
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>AfterViewInit</code>
+                        <code>OnDestroy</code>
+            </p>
 
 
         <section data-compodoc="block-metadata">
@@ -306,7 +138,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
                     <tr>
                         <td class="col-md-3">Selector</td>
-                        <td class="col-md-9"><code>[ovLayout]</code></td>
+                        <td class="col-md-9"><code>ov-admin-login[error]</code></td>
                     </tr>
 
 
@@ -330,11 +162,43 @@ export class AppComponent implements OnInit, OnDestroy {
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#container" >container</a>
+                                <a href="#elementRef" >elementRef</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#template" >template</a>
+                                <a href="#errorValue" >errorValue</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clear" >clear</a>
+                            </li>
+                            <li>
+                                <a href="#update" >update</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#error" >error</a>
                             </li>
                         </ul>
                     </td>
@@ -343,8 +207,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
 
-
-
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#error" >error</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         </tbody>
     </table>
 </section>
@@ -355,7 +231,7 @@ export class AppComponent implements OnInit, OnDestroy {
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(template: TemplateRef<any>, container: ViewContainerRef)</code>
+<code>constructor(elementRef: ElementRef, libService: OpenViduComponentsConfigService)</code>
                     </td>
                 </tr>
 
@@ -373,10 +249,10 @@ export class AppComponent implements OnInit, OnDestroy {
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>template</td>
+                                                        <td>elementRef</td>
                                                   
                                                         <td>
-                                                                    <code>TemplateRef&lt;any&gt;</code>
+                                                                    <code>ElementRef</code>
                                                         </td>
                                                   
                                                     <td>
@@ -385,10 +261,10 @@ export class AppComponent implements OnInit, OnDestroy {
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>container</td>
+                                                        <td>libService</td>
                                                   
                                                         <td>
-                                                                    <code>ViewContainerRef</code>
+                                                                    <code>OpenViduComponentsConfigService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -405,11 +281,126 @@ export class AppComponent implements OnInit, OnDestroy {
         </table>
 </section>
 
+            <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="error"></a>
+                        <b>error</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clear"></a>
+                    <span class="name">
+                        <span ><b>clear</b></span>
+                        <a href="#clear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clear()</code>
+                </td>
+            </tr>
 
 
 
 
+            <tr>
+                <td class="col-md-4">
 
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>update(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
             <section data-compodoc="block-properties">
     
     <h3 id="inputs">
@@ -419,17 +410,17 @@ export class AppComponent implements OnInit, OnDestroy {
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="container"></a>
+                    <a name="elementRef"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
-                        <span ><b>container</b></span>
-                        <a href="#container"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>elementRef</b></span>
+                        <a href="#elementRef"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>ViewContainerRef</code>
+                        <i>Type : </i>    <code>ElementRef</code>
 
                     </td>
                 </tr>
@@ -441,18 +432,22 @@ export class AppComponent implements OnInit, OnDestroy {
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="template"></a>
+                    <a name="errorValue"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>template</b></span>
-                        <a href="#template"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>errorValue</b></span>
+                        <a href="#errorValue"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
                     </td>
                 </tr>
 
@@ -461,6 +456,65 @@ export class AppComponent implements OnInit, OnDestroy {
     </table>
 </section>
 
+            <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="error"></a>
+                        <span class="name"><b>error</b><a href="#error"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>error(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code></span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
 
     </div>
 
@@ -507,7 +561,7 @@ export class AppComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
-            var COMPODOC_CURRENT_PAGE_URL = 'LayoutDirective.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AdminLoginErrorDirective.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

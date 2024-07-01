@@ -59,13 +59,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApiDirectiveModule.html" data-type="entity-link" >ApiDirectiveModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
-                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-046ee9f964778720b3a3d02d48b4fa0eb3a02f56eeda9b33c47f2c47b482cc28ac8c60ac787857a82b68bc83dd0d550e54b4d828ca3ae17598af534b9384112d"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-046ee9f964778720b3a3d02d48b4fa0eb3a02f56eeda9b33c47f2c47b482cc28ac8c60ac787857a82b68bc83dd0d550e54b4d828ca3ae17598af534b9384112d"' }>
+                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-046ee9f964778720b3a3d02d48b4fa0eb3a02f56eeda9b33c47f2c47b482cc28ac8c60ac787857a82b68bc83dd0d550e54b4d828ca3ae17598af534b9384112d"' :
-                                        'id="xs-directives-links-module-ApiDirectiveModule-046ee9f964778720b3a3d02d48b4fa0eb3a02f56eeda9b33c47f2c47b482cc28ac8c60ac787857a82b68bc83dd0d550e54b4d828ca3ae17598af534b9384112d"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' :
+                                        'id="xs-directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' }>
                                         <li class="link">
                                             <a href="directives/ActivitiesPanelBroadcastingActivityDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelBroadcastingActivityDirective</a>
                                         </li>
@@ -73,10 +73,10 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <a href="directives/ActivitiesPanelRecordingActivityDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelRecordingActivityDirective</a>
                                         </li>
                                         <li class="link">
-                                            <a href="directives/AdminLoginDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminLoginDirective</a>
+                                            <a href="directives/AdminDashboardRecordingsListDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminDashboardRecordingsListDirective</a>
                                         </li>
                                         <li class="link">
-                                            <a href="directives/AdminRecordingsListDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminRecordingsListDirective</a>
+                                            <a href="directives/AdminLoginErrorDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminLoginErrorDirective</a>
                                         </li>
                                         <li class="link">
                                             <a href="directives/AudioEnabledDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AudioEnabledDirective</a>
