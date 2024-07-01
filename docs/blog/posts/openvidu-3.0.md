@@ -8,6 +8,8 @@ authors:
 hide:
   - navigation
   - toc
+  - search-bar
+  - version-selector
 ---
 
 # OpenVidu 3.0.0 (BETA)

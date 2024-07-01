@@ -1,6 +1,0 @@
----
-hide:
-    - footer
----
-
-# LiveKit Tutorials

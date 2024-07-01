@@ -3,6 +3,8 @@ title: Terms of Service
 hide:
   - navigation
   - toc
+  - search-bar
+  - version-selector
 ---
 
 The purpose of the following terms and conditions is to explain our obligations as providers of the service, as well as your obligations as a client. Please read them carefully. 

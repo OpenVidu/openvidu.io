@@ -81,7 +81,7 @@
 
 {% block outdated %}
 <span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
-<a href="{{ '../' ~ base_url }}">
+<a href="{{ '../' ~ base_url ~ '/latest/docs/getting-started/' }}">
   <strong>GO TO LATEST VERSION</strong>
 </a>
 {% endblock %}
@@ -111,6 +111,20 @@
 {% if "footer-next" in page.meta.hide %}
 <style>
   .md-footer__link--next {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "search-bar" in page.meta.hide %}
+<style>
+  div.md-search {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "version-selector" in page.meta.hide %}
+<style>
+  div.md-version {
     display: none;
   }
 </style>

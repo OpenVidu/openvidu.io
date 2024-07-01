@@ -4,6 +4,8 @@ hide:
   - navigation
   - toc
   - footer
+  - search-bar
+  - version-selector
 ---
 
 # Support

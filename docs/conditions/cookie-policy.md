@@ -3,6 +3,8 @@ title: Cookie Policy
 hide:
   - navigation
   - toc
+  - search-bar
+  - version-selector
 ---
 
 ## What are cookies?

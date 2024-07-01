@@ -1,5 +1,5 @@
 site_name: openVidu
-site_url: "https://openvidu.io/"
+site_url: https://openvidu.io/
 site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted. Performant. Fault Tolerant. Scalable. Observable.
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
@@ -51,14 +51,14 @@ nav:
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
-            - docs/self-hosting/production-ready/index.md
-            - Performant: docs/self-hosting/production-ready/performance.md
-            - Scalable: docs/self-hosting/production-ready/scalability.md
-            - Fault Tolerant: docs/self-hosting/production-ready/fault-tolerance.md
-            - Observable:
-                - docs/self-hosting/production-ready/observability/index.md
-                - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
-                - Grafana stack: docs/self-hosting/production-ready/observability/grafana-stack.md
+              - docs/self-hosting/production-ready/index.md
+              - Performant: docs/self-hosting/production-ready/performance.md
+              - Scalable: docs/self-hosting/production-ready/scalability.md
+              - Fault Tolerant: docs/self-hosting/production-ready/fault-tolerance.md
+              - Observable:
+                  - docs/self-hosting/production-ready/observability/index.md
+                  - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
+                  - Grafana stack: docs/self-hosting/production-ready/observability/grafana-stack.md
           - Local (Development): docs/self-hosting/local.md
           - Single Node:
               - docs/self-hosting/single-node/index.md
@@ -116,9 +116,6 @@ theme:
     - content.tooltips
     - navigation.tabs
     # - navigation.tabs.sticky
-    - navigation.instant
-    - navigation.instant.progress
-    - navigation.instant.prefetch
     - navigation.tracking
     - navigation.footer
     # - navigation.expand
@@ -221,6 +218,10 @@ extra:
     description: >
       This website uses cookies to ensure you get the best experience on our website.
       <a href="https://openvidu.io/conditions/cookie-policy" target="_blank">See cookie policy</a>
+    cookies:
+      analytics:
+        name: Google Analytics
+        checked: true
 
 extra_css:
   - stylesheets/colors.css

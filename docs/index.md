@@ -5,6 +5,8 @@ hide:
   - navigation
   - toc
   - footer
+  - search-bar
+  - version-selector
 ---
 
 # Home { .hide }
