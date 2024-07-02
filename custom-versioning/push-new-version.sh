@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # This script builds and pushes a new version of the documentation
 # It updates the non-versioned pages of the documentation
 
@@ -35,25 +35,19 @@ mike set-default --push latest
 # Checkout to gh-pages branch
 git checkout gh-pages
 
-sleep 3
-
 # Pull again for remote changes
 git pull origin gh-pages
 
-sleep 3
+# Delete site folder
+rm -rf site
 
 # Copy necessary files from main branch
 git restore --source main custom-versioning/.
-
-sleep 3
 
 # Wait until this file exists in branch gh-pages
 until [ -f ./custom-versioning/redirect-from-version-to-root.html ]; do
     sleep 1
 done
-
-# Delete site folder
-rm -rf site
 
 ASSETS=("assets" "javascripts" "stylesheets" "search")
 NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog")
@@ -82,11 +76,11 @@ for page in "${NON_VERSIONED_PAGES[@]}"; do # Other non-versioned pages
     done
 done
 
-# Create redirections for docs
+# Create redirections to latest for docs in root
 for page in "${VERSIONED_PAGES[@]}"; do
     # Delete previous root version of the page
     rm -rf "${page}"
-    # Copy the new version of the asset folder to root
+    # Copy the new version of the oage to root
     cp -r "${VERSION}"/"${page}" .
     REDIRECTION_FOR_DOCS=$(find "./docs" -iname 'index.html')
     for html in $REDIRECTION_FOR_DOCS; do
@@ -95,14 +89,13 @@ for page in "${VERSIONED_PAGES[@]}"; do
     done
 done
 
-for asset in "${ASSETS[@]}"; do # Commit asset folders
-    git add "${asset}"
-done
-
-# Remove unnecessary files from main branch
-git reset custom-versioning/.
+# Remove unnecessary files from gh-pages branch
 rm -rf custom-versioning
 
+# Commit asset folders
+for asset in "${ASSETS[@]}"; do
+    git add "${asset}"
+done
 # Commit the new version folder
 git add "${VERSION}"
 # Commit home page

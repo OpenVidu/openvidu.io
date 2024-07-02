@@ -39,17 +39,34 @@ Once the MkDocs Material project is properly setup and our documentation complet
 
 ```bash
 cd custom-versioning
-./push.sh 3.0.0
+./push-new-version.sh 3.0.0
 ```
 
 ### Understanding the versioning script
 
-Script `push.sh` performs the following steps:
+Script `push-new-version.sh` performs the following steps:
 
 - Deploy a new version of the documentation with `mike`.
 - Update the non-versioned HTML files (home, support, pricing...) accessible from "/" to the state of the new version. This keeps the global pages served on "/ always updated to the latest published version.
 - Rewrite the non-versioned HTML files (home, support, pricing...) accessible from "/X.Y.Z/" to redirect to their non-versioned counterparts served in "/". For example, this allows redirecting from `https://openvidu.io/3.0.0/pricing` to `https://openvidu.io/pricing`.
 - Rewrite the versioned HTML files (docs) accessible from "/" to redirect to their versioned counterparts served in "/latest/". For example, this allows redirecting from `https://openvidu.io/docs/getting-started` to `https://openvidu.io/latest/docs/getting-started`.
+
+## Overwriting the latest version
+
+It is very likely that some typos or improvements are spotted after publishing a new version. It is possible to overwrite the latest published version of the documentation very easily:
+
+First delete the version from the remote `gh-pages` branch:
+
+```bash
+mike delete --push X.Y.Z
+```
+
+Then simply re-run the `push-new-version.sh` script with the same version:
+
+```bash
+cd custom-versioning
+./push-new-version.sh X.Y.Z
+```
 
 ## Testing versioning locally
 

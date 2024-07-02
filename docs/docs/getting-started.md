@@ -22,7 +22,7 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" src="../../assets/images/getting-started/videoconference.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu videoconference use case" src="../../assets/images/getting-started/videoconference.svg" />
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -51,7 +51,7 @@ Ultra-low latency live streaming (below 300ms) allows for actual real-time inter
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" src="../../assets/images/getting-started/livestream.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="../../assets/images/getting-started/livestream.svg" />
 </div>
 
 </div>
@@ -61,7 +61,7 @@ Ultra-low latency live streaming (below 300ms) allows for actual real-time inter
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-40 tablet-grid-40">
-<img class="do-not-include-in-gallery use-case-img" src="../../assets/images/getting-started/robotics.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="../../assets/images/getting-started/robotics.svg" />
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
