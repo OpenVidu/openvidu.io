@@ -33,7 +33,7 @@ The repository must be using MkDocs Material and must be properly setup like exp
 - Adding `extra.version.provider: mike` to mkdocs.yml.
 - Properly configuring the default alias like `extra.version.default: latest` in mkdocs.yml.
 - Adding `extra.version.alias: true` to mkdocs.yml (just to show the default alias tag next to the version selector).
-- Properly configuring `site_url` in mkdocs.yml to the actual domain name in which the docs will be served (thi allows staying on the same path when switching versions).
+- Properly configuring `site_url` in mkdocs.yml to the actual domain name in which the docs will be served (this allows staying on the same path when switching versions).
 
 Once the MkDocs Material project is properly setup and our documentation completed, all we have to do is run this script:
 
