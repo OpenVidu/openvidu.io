@@ -34,11 +34,23 @@ mike set-default --push latest
 
 # Checkout to gh-pages branch
 git checkout gh-pages
+
+sleep 3
+
 # Pull again for remote changes
 git pull origin gh-pages
 
+sleep 3
+
 # Copy necessary files from main branch
-git checkout main -- custom-versioning/.
+git restore --source main custom-versioning/.
+
+sleep 3
+
+# Wait until this file exists in branch gh-pages
+until [ -f ./custom-versioning/redirect-from-version-to-root.html ]; do
+    sleep 1
+done
 
 # Delete site folder
 rm -rf site
