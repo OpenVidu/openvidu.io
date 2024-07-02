@@ -1,4 +1,4 @@
-To run this server application, you need [Ruby](https://www.ruby-lang.org/en/downloads/){:target="\_blank"} installed on your device.
+To run this server application, you need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){:target="\_blank"} installed on your device.
 
 1. Navigate into the server directory
 ```bash

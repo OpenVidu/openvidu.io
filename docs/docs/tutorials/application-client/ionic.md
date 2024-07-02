@@ -99,7 +99,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         === ":fontawesome-brands-apple:{.icon .lg-icon .tab-icon} iOS"
 
-            You will need [Ruby](https://www.ruby-lang.org/en/documentation/self-hosting/){target="_blank"} and [Cocoapods](https://guides.cocoapods.org/using/getting-started.html){target="_blank"} installed in your computer.
+            You will need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){target="_blank"} and [Cocoapods](https://guides.cocoapods.org/using/getting-started.html){target="_blank"} installed in your computer.
 
             The app must be signed with a development team. To do so, open the project in **Xcode** and select a development team in the **Signing & Capabilities** editor.
 

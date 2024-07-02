@@ -117,7 +117,7 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs2.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../..assets/images/grafana/nodes_logs3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs3.png" loading="lazy"/></a></p></div>
 
 </div>
 

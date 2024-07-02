@@ -203,6 +203,7 @@ extra:
   version:
     provider: mike
     default: latest
+    alias: true
   generator: false
   social:
     - icon: simple/github
