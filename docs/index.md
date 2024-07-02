@@ -126,7 +126,7 @@ hide:
 
     E2E encryption, fine-grained access control and highly secure deployments for the most demanding security requirements.
 
--   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 
     ---
 

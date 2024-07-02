@@ -53,9 +53,9 @@ The application will seamlessly initiate as a native desktop program, adapting i
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/join-electron.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/join-electron.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-electron.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-electron.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/room-electron.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/room-electron.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-electron.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-electron.png" loading="lazy"/></a></p></div>
 
 </div>
 

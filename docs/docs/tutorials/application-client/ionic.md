@@ -61,9 +61,9 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
             To show the app with a mobile device appearance, open the dev tools in your browser and find the button to adapt the viewport to a mobile device aspect ratio. You may also choose predefined types of devices to see the behavior of your app in different resolutions.
 
-        <div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/join-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/join-ionic-web.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-web.png" loading="lazy"/></a></p></div>
 
-        <div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/room-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
 
         --8<-- "docs/docs/tutorials/shared/testing-other-devices.md"
 
@@ -113,9 +113,9 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         <div class="grid-container">
 
-        <div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/join-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/join-ionic-device.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy"/></a></p></div>
 
-        <div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/room-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/room-ionic-device.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy"/></a></p></div>
 
         </div>
 
