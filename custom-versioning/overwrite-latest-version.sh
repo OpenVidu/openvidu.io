@@ -1,7 +1,14 @@
 #!/bin/bash
+set -e
 
-# This script completely overwrites the latest version of the documentation
-# It updates the non-versioned pages of the documentation located at root
+# This script completely overwrites the latest version of the
+# documentation, also updating the non-versioned pages located at root
+
+# Check if mike is installed
+command -v mike >/dev/null 2>&1 || {
+    echo >&2 "mike not found. Install it with \"pip install mike\""
+    exit 1
+}
 
 # If there is no version passed to the script as an argument, exit
 if [ "$#" -ne 1 ]; then
@@ -15,5 +22,18 @@ fi
 cd "$(dirname "$0")" || exit
 cd ..
 
-mike delete --push "${VERSION}"
-source ./custom-versioning/push-new-version.sh "${VERSION}"
+# Delete the version in gh-pages branch
+mike delete --push "${VERSION}" || {
+    echo 'Failure deleting version with mike'
+    exit 1
+}
+# Publish again
+echo "Overwriting latest version ${VERSION}"
+cd ./custom-versioning
+source ./push-new-version.sh "${VERSION}"
+
+# Merge latest commits of main into VERSION branch. This keeps the latest VERSION branch up to date with main
+git switch "${VERSION}"
+git rebase main
+git push --force
+git switch main
