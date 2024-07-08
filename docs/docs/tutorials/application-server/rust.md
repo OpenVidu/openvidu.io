@@ -28,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 The application is a simple Rust app with a single file `main.rs` that exports two endpoints:
 
 - `/token` : generate a token for a given Room name and Participant name.
-- `/webhook` : receive LiveKit webhook events.
+- `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `main.rs` file:
 
@@ -61,7 +61,7 @@ async fn main() {
 
     let app = Router::new() // (4)!
         .route("/token", post(create_token))
-        .route("/webhook", post(receive_webhook))
+        .route("/livekit/webhook", post(receive_webhook))
         .layer(cors);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:".to_string() + &server_port)
@@ -74,7 +74,7 @@ async fn main() {
 1. Import all necessary dependencies from the Rust LiveKit library.
 2. Load environment variables from `.env` file.
 3. Enable CORS support.
-4. Define `/token` and `/webhook` endpoints.
+4. Define `/token` and `/livekit/webhook` endpoints.
 5. Start the server listening on the specified port.
 
 The `main.rs` file imports the required dependencies and loads the necessary environment variables:
@@ -168,7 +168,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 #### Receive webhook
 
-The endpoint `/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
 ```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/rust/src/main.rs#L90-L126' target='_blank'>main.rs</a>" linenums="90"
 async fn receive_webhook(headers: HeaderMap, body: String) -> (StatusCode, String) {

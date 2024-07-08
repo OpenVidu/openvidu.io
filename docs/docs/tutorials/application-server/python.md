@@ -28,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 The application is a simple Flask app with a single file `app.py` that exports two endpoints:
 
 - `/token` : generate a token for a given Room name and Participant name.
-- `/webhook` : receive LiveKit webhook events.
+- `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `app.py` file:
 
@@ -110,14 +110,14 @@ If required fields are available, a new JWT token is created. For that we use th
 
 #### Receive webhook
 
-The endpoint `/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
 ```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/python/app.py#L34-L51' target='_blank'>app.py</a>" linenums="34"
 token_verifier = TokenVerifier(LIVEKIT_API_KEY, LIVEKIT_API_SECRET) # (1)!
 webhook_receiver = WebhookReceiver(token_verifier) # (2)!
 
 
-@app.post("/webhook")
+@app.post("/livekit/webhook")
 def receive_webhook():
     auth_token = request.headers.get("Authorization") # (3)!
 

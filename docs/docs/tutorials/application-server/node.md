@@ -28,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 The application is a simple Express app with a single file `index.js` that exports two endpoints:
 
 - `/token` : generate a token for a given Room name and Participant name.
-- `/webhook` : receive LiveKit webhook events.
+- `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `index.js` file:
 
@@ -56,7 +56,7 @@ app.use(express.raw({ type: "application/webhook+json" })); // (8)!
 5. Initialize the Express application.
 6. Enable CORS support.
 7. Enable JSON body parsing for the `/token` endpoint.
-8. Enable raw body parsing for the `/webhook` endpoint.
+8. Enable raw body parsing for the `/livekit/webhook` endpoint.
 
 The `index.js` file imports the required dependencies and loads the necessary environment variables:
 
@@ -66,7 +66,7 @@ The `index.js` file imports the required dependencies and loads the necessary en
 
 It also initializes the `WebhookReceiver` object that will help validating and decoding incoming [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
-Finally the `express` application is initialized. CORS is allowed, JSON body parsing is enabled for the `/token` endpoint and raw body parsing is enabled for the `/webhook` endpoint.
+Finally the `express` application is initialized. CORS is allowed, JSON body parsing is enabled for the `/token` endpoint and raw body parsing is enabled for the `/livekit/webhook` endpoint.
 
 ---
 
@@ -114,7 +114,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 #### Receive webhook
 
-The endpoint `/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/node/index.js#L33-L49' target='_blank'>index.js</a>" linenums="33"
 const webhookReceiver = new WebhookReceiver( // (1)!
@@ -122,7 +122,7 @@ const webhookReceiver = new WebhookReceiver( // (1)!
   LIVEKIT_API_SECRET
 );
 
-app.post("/webhook", async (req, res) => {
+app.post("/livekit/webhook", async (req, res) => {
   try {
     const event = await webhookReceiver.receive(
       req.body, // (2)!

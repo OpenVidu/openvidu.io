@@ -28,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 The application is a simple Ruby app using the popular Sinatra web library. It has a single file `app.rb` that exports two endpoints:
 
 - `/token` : generate a token for a given Room name and Participant name.
-- `/webhook` : receive LiveKit webhook events.
+- `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `app.rb` file:
 
@@ -115,10 +115,10 @@ If required fields are available, a new JWT token is created. For that we use th
 
 #### Receive webhook
 
-The endpoint `/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
 ```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/ruby/app.rb#L36-L47' target='_blank'>app.rb</a>" linenums="36"
-post '/webhook' do
+post '/livekit/webhook' do
   auth_header = request.env['HTTP_AUTHORIZATION'] # (1)!
   token_verifier = LiveKit::TokenVerifier.new(api_key: LIVEKIT_API_KEY, api_secret: LIVEKIT_API_SECRET) # (2)!
   begin

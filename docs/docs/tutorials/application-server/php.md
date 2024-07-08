@@ -32,7 +32,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 The application is a simple PHP app with a single file `index.php` that exports two endpoints:
 
 - `/token` : generate a token for a given Room name and Participant name.
-- `/webhook` : receive LiveKit webhook events.
+- `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `index.php` file:
 
@@ -122,13 +122,13 @@ If required fields are available, a new JWT token is created. For that we use th
 
 #### Receive webhook
 
-The endpoint `/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
 ```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/php/index.php#L45-L62' target='_blank'>index.php</a>" linenums="44"
 <?php
 $webhookReceiver = (new WebhookReceiver($LIVEKIT_API_KEY, $LIVEKIT_API_SECRET)); // (1)!
 
-if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" && $_SERVER["PATH_INFO"] === "/webhook") {
+if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" && $_SERVER["PATH_INFO"] === "/livekit/webhook") {
     $headers = getallheaders();
     $authHeader = $headers["Authorization"]; // (2)!
     $body = file_get_contents("php://input"); // (3)!
