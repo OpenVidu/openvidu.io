@@ -107,8 +107,7 @@ To install OpenVidu locally, follow these steps:
     !!!info
         <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th> runs locally in evaluation mode for free for development and testing purposes. Some limits apply:
 
-        - Maximum 2 concurrent Rooms
-        - Maximum 8 Participants per Room
+        - Maximum 8 Participants across all Rooms
         - Maximum 5 minutes duration per Room
 
         For a production environment, you need to [create an OpenVidu account](https://openvidu.io/account){:target="_blank"} to get a license key.
