@@ -218,7 +218,7 @@ OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 - OpenVidu Server PRO: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
 - LiveKit API: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"} and [wss://openvidu.example.io/](wss://openvidu.example.io/){:target="_blank"}
 
-## Deployment Credentials
+## Configure your Application to use the Deployment
 
 To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env` of any Master Node. All access credentials of all services are defined in this file.
 

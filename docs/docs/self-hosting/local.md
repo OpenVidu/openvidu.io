@@ -151,6 +151,34 @@ By visiting [http://localhost:7880](http://localhost:7880){:target="\_blank"} yo
 
 You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](../tutorials/application-client/index.md){:target="\_blank"} if you want a step-by-step guide to develop your first application using OpenVidu.
 
+## Configure your Application to use the Local Deployment
+
+To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880) or simply check the `.env` file. All access credentials of all services are defined in this file.
+
+=== "OpenVidu <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+
+    Your authentication credentials and URLs to point your applications to are:
+
+    - **URL**: It must be `ws://localhost:7880` or `http://localhost:7880` depending on the SDK you are using.
+    - **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
+    - **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+
+=== "OpenVidu <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+
+    Your authentication credentials and URLs to point your applications to are:
+
+    - Applications developed with LiveKit SDK:
+        - **URL**: It must be `ws://localhost:7880/` or `http://localhost:7880/` depending on the SDK you are using.
+        - **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
+        - **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+
+    - Applications developed with OpenVidu v2:
+        - **URL**: The value in `.env` of `DOMAIN_NAME` as a URL. For example, `http://localhost:7880`
+        - **Username**: `OPENVIDUAPP`
+        - **Password**: The value in `.env` of `LIVEKIT_API_SECRET`
+
+If you want to use the OpenVidu Local deployment from other devices on your network, follow the instructions in the [next section](#accessing-your-local-deployment-from-other-devices-on-your-network).
+
 ## Accessing your local deployment from other devices on your network
 
 Testing WebRTC applications can be challenging because devices require a secure context (HTTPS) to access the camera and microphone. When using LiveKit Open Source, this isn't an issue if you access your app from the same computer where the LiveKit Server is running, as `localhost` is considered a secure context even over plain HTTP. Consider the following architecture:
@@ -194,10 +222,10 @@ When developing web applications with this deployment, you can use the following
 ```javascript
 if (window.location.hostname === "localhost") {
   APPLICATION_SERVER_URL = "http://localhost:6080";
-  OPENVIDU_URL = "wss://localhost:7443";
+  OPENVIDU_URL = "ws://localhost:7880";
 } else {
   APPLICATION_SERVER_URL = "https://" + window.location.hostname + ":6443";
-  OPENVIDU_URL = "ws://" + window.location.hostname + ":7880";
+  OPENVIDU_URL = "wss://" + window.location.hostname + ":7443";
 }
 ```
 

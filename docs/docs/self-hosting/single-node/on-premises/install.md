@@ -102,7 +102,7 @@ If everything goes well, all containers will be up and running without restarts,
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
 
-## Deployment Credentials
+## Configure your Application to use the Deployment
 
 To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env`. All access credentials of all services are defined in this file.
 

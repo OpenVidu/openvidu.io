@@ -167,7 +167,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
     ![CloudFormation Outputs](../../../../assets/images/self-hosting/ha/aws/outputs.png)
 
-## Deployment Credentials
+## Configure your Application to use the Deployment
 
 The Output Key **ServicesAndCredentials** of the [previous section](#deploying-the-stack) points to an AWS Secret Manager secret that contains all URLs and credentials to access the services deployed. You can access the secret by clicking on the link in the **Output Value** column.
 

@@ -350,7 +350,7 @@ Below is an example using NGINX as a Load Balancer:
     - Notice that `openvidu.example.com` is the domain name you have chosen for your OpenVidu deployment and `turn.example.com` is the domain name you have chosen for your TURN with TLS. Both domains should be configured in your DNS to point to the Load Balancer. Also, the `openvidu-cert.pem`, `openvidu-key.pem`, `turn-cert.pem`, and `turn-key.pem` must be valid SSL certificates for your domains.
     - Replace `<MASTER_NODE_IP_X>` with the private IP addresses of your Master Nodes and `<MEDIA_NODE_IP_X>` with the private IP addresses of your Media Nodes.
 
-## Deployment Credentials
+## Configure your Application to use the Deployment
 
 To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env` of any Master Node. All access credentials of all services are defined in this file.
 

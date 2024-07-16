@@ -57,11 +57,16 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
     ![CloudFormation Outputs](../../../../assets/images/self-hosting/single-node/aws/outputs.png)
 
-## Deployment Credentials
+## Configure your Application to use the Deployment
 
 To point your applications to your OpenVidu deployment, check the file of the EC2 instance `/opt/openvidu/.env`. All access credentials of all services are defined in this file.
 
-Just point your app to the **OpenViduServerURL** parameter of the CloudFormation outputs and get the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the `.env` file to connect your app to the OpenVidu Single Node deployment.
+Your authentication credentials and URLs to point your applications to are:
+
+- **URL**: The value in `.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+- **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
+- **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
