@@ -49,8 +49,6 @@ OpenVidu developers are hard at work with integrating *mediasoup* as a WebRTC en
 
 There are, for now, some limitations that are expected to be ironed out over time:
 
-- Data messages are not supported ([LiveKit reference](https://docs.livekit.io/realtime/client/data-messages/#Data-messages){target="\_blank"}).
-- No Ingress ([LiveKit reference](https://docs.livekit.io/realtime/ingress/overview/){target="\_blank"}).
 - No support for Speaker Detection events ([LiveKit reference](https://docs.livekit.io/realtime/client/receive/#Speaker-detection){target="\_blank"}).
 - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
 - No support for Dynacast ([LiveKit reference](https://docs.livekit.io/realtime/client/publish/#Dynamic-broadcasting){target="\_blank"}).
