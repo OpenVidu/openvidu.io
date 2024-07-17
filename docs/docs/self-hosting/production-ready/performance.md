@@ -53,7 +53,6 @@ There are, for now, some limitations that are expected to be ironed out over tim
 - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
 - No support for Dynacast ([LiveKit reference](https://docs.livekit.io/realtime/client/publish/#Dynamic-broadcasting){target="\_blank"}).
 - No support for Adaptive Streaming ([LiveKit reference](https://docs.livekit.io/realtime/client/receive/#Adaptive-stream){target="\_blank"}).
-- Compatibility with OpenVidu v2 applications is limited with mediasoup. If your OpenVidu deployment is using module `v2compatibility`, do not use mediasoup.
 
 ## Benchmarking
 
