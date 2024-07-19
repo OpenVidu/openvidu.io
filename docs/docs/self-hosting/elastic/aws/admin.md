@@ -221,7 +221,7 @@ To avoid manual intervention after deployment, you can pre-configure the node se
 
                         ######### APPLY CUSTOM CONFIGURATIONS #########
                         # If you want to apply any modification to the configuration files
-                        # of the OpenVidu services at /opt/openvidu, you can do it here.
+                        # of the OpenVidu services at /opt/openvidu/config, you can do it here.
                         # Examples:
                         #
                         # - Change minio public port
@@ -370,3 +370,36 @@ The configuration for individual node services can be managed through different 
 
         !!!warning
             This process requires downtime, as it involves terminating the old instances and launching new ones with the updated configuration.
+
+### Enabling Webhooks
+
+A common use case for custom configuration is to enable webhooks. To enable webhooks you need to add the webhook URL to every Media Node. As the Media Nodes are managed by an Auto Scaling Group, you need to update the Launch Template to include the webhook URL. Just follow the instructions at the [Node Services Configuration](#node-services-configuration) to update the Launch Template with the webhook URL, specifically add this command to the `UserData` section:
+
+```bash
+yq eval '.webhook.urls += ["<YOUR_WEBHOOK_URL"]' \
+    -i /opt/openvidu/config/livekit.yaml
+```
+
+Where `<YOUR_WEBHOOK_URL>` is the URL of the webhook you want to enable. Remember to terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the updated configuration.
+
+In case you want to enable webhooks before the deployment, you can pre-configure the CloudFormation YAML template with the webhook URL. Just follow the instructions at the [Configuring CloudFormation YAML for Node Services Configuration](#configuring-cloudformation-yaml-for-node-services-configuration) to update the Launch Template with the webhook URL.
+
+### Enabling OpenVidu v2 webhooks (v2compatibility)
+
+If you are using the `v2compatibility` module, if you want to enable webhooks, you need to add the webhook URL in the `/opt/openvidu/.env` file of the Master Node. The Master Node does not run in an Auto Scaling Group, so you can directly modify the `/opt/openvidu/.env` file, simply modify the `V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT` parameter with the webhook URL.
+
+```bash
+V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=<YOUR_WEBHOOK_URL>
+```
+
+Where `<YOUR_WEBHOOK_URL>` is the URL of the webhook you want to enable. Remember to reboot the Master Node to apply the changes.
+
+In case you want to enable webhooks before the deployment, you can pre-configure the CloudFormation YAML template with the webhook URL. Just follow the instructions at the [Configuring CloudFormation YAML for Node Services Configuration](#configuring-cloudformation-yaml-for-node-services-configuration) to update the Master Node Launch Template with the webhook URL and add the following command to the `UserData` section:
+
+```bash
+sed -i \
+    's/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=.*/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT="<YOUR_WEBHOOK_URL>"/' \
+    /opt/openvidu/.env
+```
+
+Where `<YOUR_WEBHOOK_URL>` is the URL of the webhook you want to enable.

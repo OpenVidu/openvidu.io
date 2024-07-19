@@ -211,7 +211,7 @@ For environments like the cloud, where instances are frequently spun up and down
     # 2. Add custom configurations (3)
     ######### APPLY CUSTOM CONFIGURATIONS #########
     # If you want to apply any modification to the configuration files
-    # of the OpenVidu services at /opt/openvidu, you can do it here.
+    # of the OpenVidu services at /opt/openvidu/config, you can do it here.
 
     # Example 1: Change Minio public port
     yq eval '.apps.http.servers.minio.listen[0] = ":9001"' -i /opt/openvidu/config/caddy.yaml
@@ -221,6 +221,11 @@ For environments like the cloud, where instances are frequently spun up and down
       select(.handle[]?.handler == "subroute" and \
       .handle[].routes[].handle[].strip_path_prefix == "/dashboard"))' \
       -i /opt/openvidu/config/caddy.yaml
+
+    # Example 3: Enable webhooks for OpenVidu V2 compatibility
+    sed -i \
+        's/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=.*/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT="http://new-endpoint.example.com/webhook"/' \
+        /opt/openvidu/.env
 
     ######### END CUSTOM CONFIGURATIONS #########
 
@@ -274,6 +279,48 @@ For environments like the cloud, where instances are frequently spun up and down
     --8<-- "docs/docs/self-hosting/shared/install-version.md"
 
     Just install the Media Node first with the installer and then run some extra commands to apply the custom configurations. This way, you can automate the process of installing the Media Node and applying custom configurations.
+
+### Enabling webhooks
+
+A common use case for custom configurations is enabling webhooks in OpenVidu. In every Media Node, add the following parameter to the `config/livekit.yaml` file:
+```yaml
+webhook:
+    <LIVEKIT_API_KEY>: <LIVEKIT_API_SECRET>
+    urls:
+        ... # Other possible URLs
+        - <YOUR_WEBHOOK_URL>
+```
+
+In case you want to automate the installation and configuration of OpenVidu with webhooks, you can use the script template provided in the [automatic installation and configuration of nodes](#automatic-installation-and-configuration-of-nodes) section, specifically this command:
+
+```bash
+yq eval '.webhook.urls += ["<YOUR_WEBHOOK_URL"]' \
+    -i /opt/openvidu/config/livekit.yaml
+```
+
+Replace `<YOUR_WEBHOOK_URL>` with the URL where the webhook will send the data.
+
+For this to work, you need to have `yq` installed in your system. You can find more information about `yq` [here](https://mikefarah.gitbook.io/yq/){:target=_blank}. Also, remember to restart every Media Node after applying the configuration changes.
+
+### Enabling OpenVidu v2 webhooks (v2compatibility)
+
+In case you are using the OpenVidu V2 Compatibility service, the procedure is different to have OpenVidu v2 webhooks working.
+
+In every Master Node, add the following parameter to the `.env` file:
+
+```bash
+V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT="<YOUR_WEBHOOK_URL>"
+```
+
+In case you want to automate the installation and configuration of OpenVidu with webhooks, you can use the script template provided in the [automatic installation and configuration of nodes](#automatic-installation-and-configuration-of-nodes) section, specifically this command:
+
+```bash
+sed -i 's/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=.*/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT="<YOUR_WEBHOOK_URL>"/' /opt/openvidu/.env
+```
+
+Replace `<YOUR_WEBHOOK_URL>` with the URL where the webhook will send the data.
+
+For this to work, you need to restart every Master Node after applying the configuration changes.
 
 ### Enabling and Disabling OpenVidu Modules
 

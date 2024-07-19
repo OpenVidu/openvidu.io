@@ -202,6 +202,31 @@ systemctl start openvidu
 
 Just install OpenVidu first with the installer and then run some extra commands to apply the custom configurations. This way, you can automate the process of installing OpenVidu and applying custom configurations.
 
+### Enabling webhooks
+
+A common use case for custom configurations is enabling webhooks in OpenVidu. To do so, you need to add the webhook URL to the LiveKit configuration file located at `/opt/openvidu/config/livekit.yaml`, as shown in the following example:
+
+```yaml
+webhook:
+    <LIVEKIT_API_KEY>: <LIVEKIT_API_SECRET>
+    urls:
+        ... # Other possible URLs
+        - <YOUR_WEBHOOK_URL>
+```
+
+Where `<LIVEKIT_API_KEY>` and `<LIVEKIT_API_SECRET>` are the API key and secret to access the LiveKit service and `<YOUR_WEBHOOK_URL>` is the URL where the webhook will send the data.
+
+In case you want to automate the installation and configuration of OpenVidu with webhooks, you can use the script template provided in the [automatic installation and configuration](#automatic-installation-and-configuration) section, specifically this command:
+
+```bash
+yq eval '.webhook.urls += ["<YOUR_WEBHOOK_URL"]' \
+    -i /opt/openvidu/config/livekit.yaml
+```
+
+Replace `<YOUR_WEBHOOK_URL>` with the URL where the webhook will send the data.
+
+For this to work, you need to have `yq` installed in your system. You can find more information about `yq` [here](https://mikefarah.gitbook.io/yq/){:target=_blank}. Also, remember to restart OpenVidu after applying the changes.
+
 ### Enabling and disabling OpenVidu modules
 
 The `COMPOSE_PROFILES` parameter in the `.env` file allows you to enable or disable specific modules in OpenVidu. The following modules can be enabled or disabled:

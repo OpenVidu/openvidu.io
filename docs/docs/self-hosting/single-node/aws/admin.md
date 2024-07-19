@@ -40,3 +40,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
         </figure>
 
 3. Select the new instance type and click on _"Apply"_.
+
+## Advanced configuration
+
+For any advanced configuration, you can follow the instructions from the [On Premises Single Node](../on-premises/admin.md) section.
