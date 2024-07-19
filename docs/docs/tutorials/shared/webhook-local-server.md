@@ -26,23 +26,23 @@ These tools provide you with a public URL that forwards requests to your local s
 
 === "OpenVidu Local"
 
-    [Go to reference]()
+    [Go to reference](../../self-hosting/local.md#configuring-webhooks)
 
 === "OpenVidu Single Node"
 
-    - Change webhooks in an **On-Premises deployment**. [Go to reference](#).
+    - Change webhooks in an **On-Premises deployment**. [Go to reference](../../self-hosting/single-node/on-premises/admin.md#enabling-webhooks).
 
-    - Change webhooks in an **AWS deployment**. [Go to reference](#).
+    - Change webhooks in an **AWS deployment**. [Go to reference](../../self-hosting/single-node/on-premises/admin.md#enabling-webhooks).
 
 
 === "OpenVidu Elastic"
 
-    - Change webhooks in an **On-Premises deployment**. [Go to reference](#).
+    - Change webhooks in an **On-Premises deployment**. [Go to reference](../../self-hosting/elastic/on-premises/admin.md#enabling-webhooks).
 
-    - Change webhooks in an **AWS deployment**. [Go to reference](#).
+    - Change webhooks in an **AWS deployment**. [Go to reference](../../self-hosting/elastic/aws/admin.md#enabling-webhooks).
 
 === "OpenVidu High Availability"
 
-    - Change webhooks in an **On-Premises deployment**. [Go to reference](#).
+    - Change webhooks in an **On-Premises deployment**. [Go to reference](../../self-hosting/ha/on-premises/admin.md#enabling-webhooks).
 
-    - Change webhooks in an **AWS deployment**. [Go to reference](#).
+    - Change webhooks in an **AWS deployment**. [Go to reference](../../self-hosting/ha/aws/admin.md#enabling-webhooks).

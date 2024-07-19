@@ -151,7 +151,9 @@ By visiting [http://localhost:7880](http://localhost:7880){:target="\_blank"} yo
 
 You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](../tutorials/application-client/index.md){:target="\_blank"} if you want a step-by-step guide to develop your first application using OpenVidu.
 
-## Configure your Application to use the Local Deployment
+## Configuration
+
+### Configure your Application to use the Local Deployment
 
 To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880) or simply check the `.env` file. All access credentials of all services are defined in this file.
 
@@ -178,6 +180,26 @@ To point your applications to your local OpenVidu Local deployment, check the cr
         - **Password**: The value in `.env` of `LIVEKIT_API_SECRET`
 
 If you want to use the OpenVidu Local deployment from other devices on your network, follow the instructions in the [next section](#accessing-your-local-deployment-from-other-devices-on-your-network).
+
+
+### Configuring webhooks
+
+To configure webhooks in your local deployment, simply go to the file `livekit.yaml` and add to the `webhooks` section the URL where you want to receive the events:
+
+```yaml
+webhook:
+    <LIVEKIT_API_KEY>:<LIVEKIT_API_SECRET>:
+    urls:
+        - <YOUR_WEBHOOK_URL>
+```
+
+In case you are using the _v2compatibility_ and you want to receive webhooks for OpenVidu v2 applications, you can configure the webhooks in the `.env` file. For example:
+
+```yaml
+V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=<YOUR_WEBHOOK_URL>
+```
+
+Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the events.
 
 ## Accessing your local deployment from other devices on your network
 
