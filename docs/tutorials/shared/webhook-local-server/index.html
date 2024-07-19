@@ -7,21 +7,21 @@
       <meta http-equiv="refresh" content="1; url=latest/" />
     </noscript>
     <script>
-      function removeFirstPathSectionFromUrl(url) {
+      function addAsFirstPathOfUrl(url, firstSectionOfPath) {
         const urlObj = new URL(url);
         const pathSections = urlObj.pathname
           .split("/")
-          .filter((elm) => elm)
-          .slice(1);
+          .filter((elm) => elm);
+        pathSections.unshift(firstSectionOfPath);
         urlObj.pathname = "/" + pathSections.join("/");
         return urlObj.toString();
       }
       window.location.replace(
-        removeFirstPathSectionFromUrl(window.location.href)
+        addAsFirstPathOfUrl(window.location.href, "latest")
       );
     </script>
   </head>
   <body>
-    Redirecting to <a href="/">/</a>...
+    Redirecting to <a href="/latest">/latest</a>...
   </body>
 </html>
