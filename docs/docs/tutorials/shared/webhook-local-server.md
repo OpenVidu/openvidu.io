@@ -26,14 +26,11 @@ These tools provide you with a public URL that forwards requests to your local s
 
 === "OpenVidu Local"
 
-    [Go to reference](../../self-hosting/local.md#configuring-webhooks)
+    - Change webhooks in a **Local deployment**. [Go to reference](../../self-hosting/local.md#configuring-webhooks).
 
 === "OpenVidu Single Node"
 
-    - Change webhooks in an **On-Premises deployment**. [Go to reference](../../self-hosting/single-node/on-premises/admin.md#enabling-webhooks).
-
-    - Change webhooks in an **AWS deployment**. [Go to reference](../../self-hosting/single-node/on-premises/admin.md#enabling-webhooks).
-
+    - Change webhooks in an OpenVidu **Single Node deployment**. [Go to reference](../../self-hosting/single-node/on-premises/admin.md#enabling-webhooks).
 
 === "OpenVidu Elastic"
 
