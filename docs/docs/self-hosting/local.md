@@ -1,4 +1,4 @@
-# Local Installation (Development)
+# Local installation (Development)
 
 For development purposes, we provide an [easy to install local deployment](https://github.com/OpenVidu/openvidu-local-deployment){:target="\_blank"} based on Docker Compose which will automatically configure all the necessary services for OpenVidu to develop and test your applications seamlessly.
 

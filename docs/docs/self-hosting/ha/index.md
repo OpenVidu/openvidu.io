@@ -1,4 +1,4 @@
-# OpenVidu High Availability Installation
+# OpenVidu High Availability installation
 
 OpenVidu High Availability is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> edition of OpenVidu. You have the following deployment options:
 

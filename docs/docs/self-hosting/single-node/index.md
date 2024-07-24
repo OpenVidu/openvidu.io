@@ -1,4 +1,4 @@
-# OpenVidu Single Node installation.
+# OpenVidu Single Node installation
 
 OpenVidu Single Node is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> edition of OpenVidu. You have the following deployment options:
 
