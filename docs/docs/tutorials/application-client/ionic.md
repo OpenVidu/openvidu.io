@@ -532,7 +532,7 @@ In order to be able to test the application on an Android or iOS device, the app
 
 === ":fontawesome-brands-android:{.icon .lg-icon .tab-icon} Android"
 
-    The application must include the following permissions in the `AndroidManifest.xml` file located in the `android/app/src/main/AndroidManifest.xml` directory:
+    The application must include the following permissions in the `AndroidManifest.xml` file located in the `android/app/src/main` directory:
 
     ```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/android/app/src/main/AndroidManifest.xml#L41-L43' target='_blank'>AndroidManifest.xml</a>" linenums="41"
     <uses-permission android:name="android.permission.CAMERA" />
@@ -542,7 +542,7 @@ In order to be able to test the application on an Android or iOS device, the app
 
 === ":fontawesome-brands-apple:{.icon .lg-icon .tab-icon} iOS"
 
-    The application must include the following permissions in the `Info.plist` file located in the `ios/App/App/Info.plist` directory:
+    The application must include the following permissions in the `Info.plist` file located in the `ios/App/App` directory:
 
     ```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/ios/App/App/Info.plist#L48-L51' target='_blank'>Info.plist</a>" linenums="48"
     <key>NSCameraUsageDescription</key>

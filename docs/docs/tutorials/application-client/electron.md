@@ -59,7 +59,9 @@ The application will seamlessly initiate as a native desktop program, adapting i
 
 </div>
 
---8<-- "docs/docs/tutorials/shared/testing-other-devices.md"
+!!! info "Running your application client from other devices in your local network"
+
+    One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates. For more information, see section [Accessing your app from other devices in your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){target="_blank"}.
 
 ## Understanding the code
 
@@ -301,7 +303,7 @@ async function leaveRoom() {
 
     // Enable 'Join' button
     document.getElementById("join-button").disabled = false;
-	document.getElementById("join-button").innerText = "Join!";
+    document.getElementById("join-button").innerText = "Join!";
 }
 
 // (4)!

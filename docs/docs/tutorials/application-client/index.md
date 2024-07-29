@@ -29,12 +29,12 @@ Every application client below is interchangeable with the others, because:
 
 [:simple-ionic:{.icon .lg-icon .tab-icon} **Ionic**](./ionic.md){ .md-button .md-button--primary .tutorial-link}
 
-<!--[:simple-react:{.icon .lg-icon .tab-icon} **React Native**](./react.md){ .md-button .md-button--primary .tutorial-link}
+<!-- [:simple-react:{.icon .lg-icon .tab-icon} **React Native**](./react.md){ .md-button .md-button--primary .tutorial-link} -->
 
-[:simple-flutter:{.icon .lg-icon .tab-icon} **Flutter**](./flutter.md){ .md-button .md-button--primary .tutorial-link}
+<!-- [:simple-flutter:{.icon .lg-icon .tab-icon} **Flutter**](./flutter.md){ .md-button .md-button--primary .tutorial-link} -->
 
 [:simple-android:{.icon .lg-icon .tab-icon} **Android**](./android.md){ .md-button .md-button--primary .tutorial-link}
 
-[:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](./ios.md){ .md-button .md-button--primary .tutorial-link}-->
+<!-- [:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](./ios.md){ .md-button .md-button--primary .tutorial-link} -->
 
 </div>
