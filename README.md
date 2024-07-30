@@ -22,7 +22,7 @@ docker run --rm -it -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk
 
 Parameters:
 
-- `GOOGLE_ANALYTICS_KEY`: Google Analytics key to track page views. This is the **MEASUREMENT ID** of the web stream details.
+-   `GOOGLE_ANALYTICS_KEY`: Google Analytics key to track page views. This is the **MEASUREMENT ID** of the web stream details.
 
 ## Versioning
 
@@ -30,12 +30,25 @@ MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for vers
 
 The repository must be using MkDocs Material and must be properly setup like explained [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-versioning/). This proper setup includes the following points:
 
-- Adding `extra.version.provider: mike` to mkdocs.yml.
-- Properly configuring the default alias like `extra.version.default: latest` in mkdocs.yml.
-- Adding `extra.version.alias: true` to mkdocs.yml (just to show the default alias tag next to the version selector).
-- Properly configuring `site_url` in mkdocs.yml to the actual domain name in which the docs will be served (this allows staying on the same path when switching versions).
+-   Adding `extra.version.provider: mike` to mkdocs.yml.
+-   Properly configuring the default alias like `extra.version.default: latest` in mkdocs.yml.
+-   Adding `extra.version.alias: true` to mkdocs.yml (just to show the default alias tag next to the version selector).
+-   Properly configuring `site_url` in mkdocs.yml to the actual domain name in which the docs will be served (this allows staying on the same path when switching versions).
 
 These configurations get the repository ready for versioning.
+
+### Prerequisites
+
+Before running the scripts below, ensure you have the following packages installed in addition to `mike`:
+
+-   `mkdocs-material`
+-   `mkdocs-glightbox`
+
+You can install them using pip:
+
+```bash
+pip install mkdocs-material mkdocs-glightbox
+```
 
 ### Publishing a new version
 
@@ -94,3 +107,12 @@ To build a new version without pushing to GitHub:
 ```bash
 mike deploy 3.0.0
 ```
+
+## Updating tutorials
+
+Whenever any changes are made to the **application-client** or **application-server tutorials** documentation, theses changes must be also reflected in [livekit-tutorials-docs repository](https://github.com/OpenVidu/livekit-tutorials-docs).
+
+In order to publish the changes in the tutorials, follow these steps:
+
+-   In this repository, push the changes to the `main` branch and execute the script [Overwriting the latest version](#overwriting-the-latest-version) to update the latest version of the documentation.
+-   In the [livekit-tutorials-docs repository](https://github.com/OpenVidu/livekit-tutorials-docs), push the changes to the `main` branch, go to `Actions` and run the workflow named "Publish Web" selecting the `main` branch.
