@@ -89,7 +89,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         !!! warning "Requirements"
 
-            Before running the application on a mobile device, make sure that the device is connected to the same network as your PC and the mobile is connected to the PC via USB.
+            Before running the application on a mobile device, make sure that the device is connected to the same network as your PC and the mobile is connected to the PC via USB or Wi-Fi.
 
         === ":fontawesome-brands-android:{.icon .lg-icon .tab-icon} Android"
 
@@ -113,9 +113,9 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         <div class="grid-container">
 
-        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
-        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
         </div>
 
@@ -137,14 +137,15 @@ npm install livekit-client
 
 Now let's see the code of the `app.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L36-L120' target='_blank'>app.component.ts</a>" linenums="36"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L33-L123' target='_blank'>app.component.ts</a>" linenums="33"
 type TrackInfo = { // (1)!
     trackPublication: RemoteTrackPublication;
     participantIdentity: string;
 };
 
 // For local development launching app in web browser, leave these variables empty
-// For production or when launching app in device, configure them with correct URLs
+// For production or when launching app in a mobile device, configure them with correct URLs
+// If you leave them empty when launching app in a mobile device, the user will be prompted to enter the URLs
 var APPLICATION_SERVER_URL = ''; // (2)!
 var LIVEKIT_URL = ''; // (3)!
 
@@ -163,8 +164,6 @@ var LIVEKIT_URL = ''; // (3)!
         IonTitle,
         IonButtons,
         IonButton,
-        IonFab,
-        IonFabButton,
         IonIcon,
         IonContent,
         IonList,
@@ -179,11 +178,18 @@ export class AppComponent implements OnDestroy {
         participantName: new FormControl('Participant' + Math.floor(Math.random() * 100), Validators.required),
     });
 
-    room = signal<Room | undefined>(undefined); // (6)!
-    localTrack = signal<LocalVideoTrack | undefined>(undefined); // (7)!
-    remoteTracksMap = signal<Map<string, TrackInfo>>(new Map()); // (8)!
+    urlsForm = new FormGroup({ // (6)!
+        serverUrl: new FormControl('', Validators.required),
+        livekitUrl: new FormControl('', Validators.required),
+    });
 
-    constructor(private httpClient: HttpClient) {
+    room = signal<Room | undefined>(undefined); // (7)!
+    localTrack = signal<LocalVideoTrack | undefined>(undefined); // (8)!
+    remoteTracksMap = signal<Map<string, TrackInfo>>(new Map()); // (9)!
+
+    settingUrls = signal(false); // (10)!
+
+    constructor(private httpClient: HttpClient, private platform: Platform) {
         this.configureUrls();
         addIcons({
             logoGithub,
@@ -193,28 +199,28 @@ export class AppComponent implements OnDestroy {
     }
 
     configureUrls() {
-        const deviceMode = this.platform.is('hybrid');
+        const mobileMode = this.platform.is('hybrid');
 
-        // If APPLICATION_SERVER_URL is not configured and app is not launched in device mode,
-        // use default value from local development
-        if (!APPLICATION_SERVER_URL) {
-            if (deviceMode) {
-                APPLICATION_SERVER_URL = 'https://{YOUR-LAN-IP}.openvidu-local.dev:6443/';
-            } else {
+        // If URLs are not configured and app is launched in a mobile device,
+        // prompt the user to configure them
+        if (mobileMode) {
+            if (!APPLICATION_SERVER_URL || !LIVEKIT_URL) {
+                this.settingUrls.set(true);
+            }
+        } else {
+            // If APPLICATION_SERVER_URL is not configured and app is not launched in a mobile device,
+            // use default value from local development
+            if (!APPLICATION_SERVER_URL) {
                 if (window.location.hostname === 'localhost') {
                     APPLICATION_SERVER_URL = 'http://localhost:6080/';
                 } else {
                     APPLICATION_SERVER_URL = 'https://' + window.location.hostname + ':6443/';
                 }
             }
-        }
 
-        // If LIVEKIT_URL is not configured and app is not launched in device mode,
-        // use default value from local development
-        if (!LIVEKIT_URL) {
-            if (deviceMode) {
-                LIVEKIT_URL = 'wss://{YOUR-LAN-IP}.openvidu-local.dev:7443/';
-            } else {
+            // If LIVEKIT_URL is not configured and app is not launched in a mobile device,
+            // use default value from local development
+            if (!LIVEKIT_URL) {
                 if (window.location.hostname === 'localhost') {
                     LIVEKIT_URL = 'ws://localhost:7880/';
                 } else {
@@ -230,24 +236,38 @@ export class AppComponent implements OnDestroy {
 3. The URL of the LiveKit server.
 4. Angular component decorator that defines the `AppComponent` class and associates the HTML and CSS files with it.
 5. The `roomForm` object, which is a form group that contains the `roomName` and `participantName` fields. These fields are used to join a video call room.
-6. The room object, which represents the video call room.
-7. The local video track, which represents the user's camera.
-8. Map that links track SIDs with `TrackInfo` objects. This map is used to store remote tracks and their associated participant identities.
+6. The `urlsForm` object, which is a form group that contains the `serverUrl` and `livekitUrl` fields. These fields are used to configure the application server and LiveKit URLs.
+7. The room object, which represents the video call room.
+8. The local video track, which represents the user's camera.
+9. Map that links track SIDs with `TrackInfo` objects. This map is used to store remote tracks and their associated participant identities.
+10. A boolean flag that indicates whether the user is configuring the application server and LiveKit URLs.
 
 The `app.component.ts` file defines the following variables:
 
 -   `APPLICATION_SERVER_URL`: The URL of the application server. This variable is used to make requests to the server to obtain a token for joining the video call room.
 -   `LIVEKIT_URL`: The URL of the LiveKit server. This variable is used to connect to the LiveKit server and interact with the video call room.
 -   `roomForm`: A form group that contains the `roomName` and `participantName` fields. These fields are used to join a video call room.
+-   `urlsForm`: A form group that contains the `serverUrl` and `livekitUrl` fields. These fields are used to configure the application server and LiveKit URLs.
 -   `room`: The room object, which represents the video call room.
 -   `localTrack`: The local video track, which represents the user's camera.
 -   `remoteTracksMap`: A map that links track SIDs with `TrackInfo` objects. This map is used to store remote tracks and their associated participant identities.
+-   `settingUrls`: A boolean flag that indicates whether the user is configuring the application server and LiveKit URLs.
 
-!!! warning "Configure the URLs"
+---
 
-    For local development launching the app in a web browser, leave `APPLICATION_SERVER_URL` and `LIVEKIT_URL` variables empty. The function `configureUrls()` will automatically configure them with default values. However, for production or when launching the app in a mobile device, you should configure these variables with the correct URLs depending on your deployment.
+### Configuring URLs
 
-    You can also configure these variables once the application has been launched by clicking on the settings button in the bottom right corner of the screen.
+For local development launching the app in a web browser, leave `APPLICATION_SERVER_URL` and `LIVEKIT_URL` variables empty. The function `configureUrls()` will automatically configure them with default values. However, for production or when launching the app in a mobile device, you should configure these variables with the correct URLs depending on your deployment.
+
+In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+
+If you leave them empty and app is launched in a mobile device, the user will be prompted to enter the URLs when the application starts:
+
+<div class="grid-container">
+
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
+
+</div>
 
 ---
 
@@ -255,7 +275,7 @@ The `app.component.ts` file defines the following variables:
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` method is called:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L166-L215' target='_blank'>app.component.ts</a>" linenums="166"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L131-L180' target='_blank'>app.component.ts</a>" linenums="131"
 async joinRoom() {
     // Initialize a new Room object
     const room = new Room();
@@ -339,7 +359,7 @@ The `joinRoom()` method performs the following actions:
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 
-    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L232-L250' target='_blank'>app.component.ts</a>" linenums="232"
+    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L197-L215' target='_blank'>app.component.ts</a>" linenums="197"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -372,7 +392,7 @@ The `joinRoom()` method performs the following actions:
 
 In order to display participants' video and audio tracks, the `app.component.html` file integrates the `VideoComponent` and `AudioComponent`.
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.html#L73-L91' target='_blank'>app.component.html</a>" linenums="73"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.html#L108-L125' target='_blank'>app.component.html</a>" linenums="108"
 <div id="layout-container">
     @if (localTrack()) {
     <video-component
@@ -496,7 +516,7 @@ The `AudioComponent` class is similar to the `VideoComponent` class, but it is u
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` method:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L217-L230' target='_blank'>app.component.ts</a>" linenums="217"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ionic/src/app/app.component.ts#L182-L195' target='_blank'>app.component.ts</a>" linenums="182"
 async leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await this.room()?.disconnect(); // (1)!
