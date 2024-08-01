@@ -83,7 +83,7 @@ Now let's see the code of the `app.js` file:
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L1-L7' target='_blank'>app.js</a>" linenums="1"
 const { Room, RoomEvent } = require("livekit-client"); // (1)!
 
-// Configure this constants with correct URLs depending on your deployment
+// Configure these constants with correct URLs depending on your deployment
 const APPLICATION_SERVER_URL = "http://localhost:6080/"; // (2)!
 const LIVEKIT_URL = "ws://localhost:7880/"; // (3)!
 
