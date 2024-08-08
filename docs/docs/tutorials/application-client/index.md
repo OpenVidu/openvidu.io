@@ -35,6 +35,6 @@ Every application client below is interchangeable with the others, because:
 
 [:simple-android:{.icon .lg-icon .tab-icon} **Android**](./android.md){ .md-button .md-button--primary .tutorial-link}
 
-<!-- [:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](./ios.md){ .md-button .md-button--primary .tutorial-link} -->
+[:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](./ios.md){ .md-button .md-button--primary .tutorial-link}
 
 </div>

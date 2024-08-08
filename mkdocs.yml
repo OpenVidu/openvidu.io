@@ -32,6 +32,7 @@ nav:
               - Electron: docs/tutorials/application-client/electron.md
               - Ionic: docs/tutorials/application-client/ionic.md
               - Android: docs/tutorials/application-client/android.md
+              - iOS: docs/tutorials/application-client/ios.md
           - Angular Components:
               - docs/tutorials/angular-components/index.md
               - Custom UI: docs/tutorials/angular-components/openvidu-custom-ui.md
