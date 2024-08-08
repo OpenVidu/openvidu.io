@@ -79,7 +79,7 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
     If your backend technology does not have its own SDK, you have two different options:
-    
+
     1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/reference/server/server-apis/){target="\_blank"}
 
     2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/livekit-cli){target="\_blank"}
@@ -109,7 +109,7 @@ Whatever strategy you choose to build the UI of your application, most common st
 
 Of course, depending on the use case, this may not be necessary for all users, or other additional steps may need to be taken. For example, in a live streaming application, only presenters will publish Tracks, while all other viewers will only subscribe to them. Or it is possible that users may need exchange messages through a chat. Each specific application will need to refine its use of the UI Components or client SDKs to meet its requirements.
 
-Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs](https://docs.livekit.io/reference/){target="\_blank"}. Below is a list of application client tutorials, which are perfect starting points for your client application. 
+Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs](https://docs.livekit.io/reference/){target="\_blank"}. Below is a list of application client tutorials, which are perfect starting points for your client application.
 
 <div class="tutorials-container" markdown>
 
@@ -124,6 +124,10 @@ Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs](https://docs.
 [:simple-electron:{.icon .lg-icon .tab-icon} **Electron**](../tutorials/application-client/electron.md){ .md-button .md-button--primary .tutorial-link}
 
 [:simple-ionic:{.icon .lg-icon .tab-icon} **Ionic**](../tutorials/application-client/ionic.md){ .md-button .md-button--primary .tutorial-link}
+
+[:simple-android:{.icon .lg-icon .tab-icon} **Android**](../tutorials/application-client/android.md){ .md-button .md-button--primary .tutorial-link}
+
+[:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](../tutorials/application-client/ios.md){ .md-button .md-button--primary .tutorial-link}
 
 </div>
 
