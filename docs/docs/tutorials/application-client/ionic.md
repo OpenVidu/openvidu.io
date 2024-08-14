@@ -113,6 +113,16 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         <div class="grid-container">
 
+        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
+
+        </div>
+
+        This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
+
+        Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
+
+        <div class="grid-container">
+
         <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
         <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
@@ -143,8 +153,8 @@ type TrackInfo = { // (1)!
     participantIdentity: string;
 };
 
-// For local development launching app in web browser, leave these variables empty
-// For production or when launching app in a mobile device, configure them with correct URLs
+// When running OpenVidu locally and launching app in web browser, leave these variables empty
+// For other deployment type or when launching app in a mobile device, configure them with correct URLs
 // If you leave them empty when launching app in a mobile device, the user will be prompted to enter the URLs
 var APPLICATION_SERVER_URL = ''; // (2)!
 var LIVEKIT_URL = ''; // (3)!
@@ -179,8 +189,8 @@ export class AppComponent implements OnDestroy {
     });
 
     urlsForm = new FormGroup({ // (6)!
-        serverUrl: new FormControl('', Validators.required),
-        livekitUrl: new FormControl('', Validators.required),
+        serverUrl: new FormControl(APPLICATION_SERVER_URL, Validators.required),
+        livekitUrl: new FormControl(LIVEKIT_URL, Validators.required),
     });
 
     room = signal<Room | undefined>(undefined); // (7)!
@@ -209,7 +219,7 @@ export class AppComponent implements OnDestroy {
             }
         } else {
             // If APPLICATION_SERVER_URL is not configured and app is not launched in a mobile device,
-            // use default value from local development
+            // use default value from OpenVidu Local deployment
             if (!APPLICATION_SERVER_URL) {
                 if (window.location.hostname === 'localhost') {
                     APPLICATION_SERVER_URL = 'http://localhost:6080/';
@@ -219,7 +229,7 @@ export class AppComponent implements OnDestroy {
             }
 
             // If LIVEKIT_URL is not configured and app is not launched in a mobile device,
-            // use default value from local development
+            // use default value from OpenVidu Local deployment
             if (!LIVEKIT_URL) {
                 if (window.location.hostname === 'localhost') {
                     LIVEKIT_URL = 'ws://localhost:7880/';
@@ -257,9 +267,9 @@ The `app.component.ts` file defines the following variables:
 
 ### Configuring URLs
 
-For local development launching the app in a web browser, leave `APPLICATION_SERVER_URL` and `LIVEKIT_URL` variables empty. The function `configureUrls()` will automatically configure them with default values. However, for production or when launching the app in a mobile device, you should configure these variables with the correct URLs depending on your deployment.
+When [running OpenVidu locally](#run-openvidu-locally) and launching the app in a web browser, leave `APPLICATION_SERVER_URL` and `LIVEKIT_URL` variables empty. The function `configureUrls()` will automatically configure them with default values. However, for other deployment type or when launching the app in a mobile device, you should configure these variables with the correct URLs depending on your deployment.
 
-In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+In case you are [running OpenVidu locally](#run-openvidu-locally) and launching the app in a mobile device, you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If you leave them empty and app is launched in a mobile device, the user will be prompted to enter the URLs when the application starts:
 

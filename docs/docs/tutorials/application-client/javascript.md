@@ -78,8 +78,8 @@ Then, you can use the `LivekitClient` object in your JavaScript code by referenc
 Now let's see the code of the `app.js` file:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-js/src/app.js#L1-L28' target='_blank'>app.js</a>" linenums="1"
-// For local development, leave these variables empty
-// For production, configure them with correct URLs depending on your deployment
+// When running OpenVidu locally, leave these variables empty
+// For other deployment type, configure them with correct URLs depending on your deployment
 var APPLICATION_SERVER_URL = ""; // (1)!
 var LIVEKIT_URL = ""; // (2)!
 configureUrls();
@@ -88,7 +88,7 @@ const LivekitClient = window.LivekitClient; // (3)!
 var room; // (4)!
 
 function configureUrls() {
-    // If APPLICATION_SERVER_URL is not configured, use default value from local development
+    // If APPLICATION_SERVER_URL is not configured, use default value from OpenVidu Local deployment
     if (!APPLICATION_SERVER_URL) {
         if (window.location.hostname === "localhost") {
             APPLICATION_SERVER_URL = "http://localhost:6080/";
@@ -97,7 +97,7 @@ function configureUrls() {
         }
     }
 
-    // If LIVEKIT_URL is not configured, use default value from local development
+    // If LIVEKIT_URL is not configured, use default value from OpenVidu Local deployment
     if (!LIVEKIT_URL) {
         if (window.location.hostname === "localhost") {
             LIVEKIT_URL = "ws://localhost:7880/";
