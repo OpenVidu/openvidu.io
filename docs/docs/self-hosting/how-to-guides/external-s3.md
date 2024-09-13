@@ -51,7 +51,7 @@ If you are using `v2compatibility` module, you also need to configure the `openv
 
     ```bash
     V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE=s3
-    V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET=openvidu-elastic-s3-recordings/test-path/recordings
+    V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET=openvidu-recordings
     V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT=https://s3.amazonaws.com
     V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY=<YOUR_AWS_ACCESS_KEY>
     V2COMPAT_OPENVIDU_PRO_AWS_SECRET_KEY=<YOUR_AWS_ACCESS_SECRET>
@@ -62,4 +62,13 @@ If you are using `v2compatibility` module, you also need to configure the `openv
 
     ```bash
     systemctl restart openvidu
+    ```
+
+!!!info
+    If you are using `v2compatibility` and you want to use a path in the bucket configuration, you need to set the `V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET` with the path included. It is not necessary to add the path in the `egress.yaml` configuration.
+
+    For example:
+
+    ```
+    V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET=openvidu-recordings/path-in-bucket
     ```
