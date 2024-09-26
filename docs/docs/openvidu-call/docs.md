@@ -31,10 +31,10 @@ git clone https://github.com/OpenVidu/openvidu-call.git
 #### 3. Run the OpenVidu Call backend
 
 
-1. Navigate to the `openvidu-call-back` directory:
+1. Navigate to the `backend` directory:
 
     ```bash
-    cd openvidu-call/openvidu-call-back
+    cd openvidu-call/backend
     ```
 
 2. Install the dependencies:
@@ -53,10 +53,10 @@ git clone https://github.com/OpenVidu/openvidu-call.git
 
 Launching another terminal, under the `openvidu-call` directory:
 
-1. Navigate to the `openvidu-call-front` directory:
+1. Navigate to the `frontend` directory:
 
     ```bash
-    cd openvidu-call/openvidu-call-front
+    cd openvidu-call/frontend
     ```
 
 2. Install the dependencies:
@@ -78,8 +78,8 @@ The application will be available at [`http://localhost:5080`](http://localhost:
 
 The OpenVidu Call architecture is divided into two main components:
 
-* **OpenVidu Call frontend** which is the client-side application built with Angular and OpenVidu Components.
-* **OpenVidu Call backend** which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
+* **frontend**: which is the client-side application built with Angular and OpenVidu Components.
+* **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
 <figure markdown>
   ![OpenVidu Call Architecture](../../assets/images/openvidu-call/openvidu-call-achitecture.png){ loading=lazy .svg-img .mkdocs-img}
@@ -93,7 +93,7 @@ The OpenVidu Call architecture is divided into two main components:
     The project architecture is divided into the following directories:
 
     - `components`: Contains the components that define the UI elements.
-    - `services`: Contains the services that interact with the OpenVidu Call backend in a RESTful manner.
+    - `services`: Contains the services that interact with the backend in a RESTful manner.
 
     Additionally, the project hosts the following files:
 
@@ -102,7 +102,7 @@ The OpenVidu Call architecture is divided into two main components:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} OpenVidu Call backend"
 
-    The server-side application built with Node.js and Express that manages the communication between the OpenVidu Server and the OpenVidu Call Frontend.
+    The server-side application built with Node.js and Express that manages the communication between the OpenVidu Server and the frontend.
 
     It uses the LiveKit Server SDK library to interact with the OpenVidu Server and handle the authentication, videoconference rooms, recordings, broadcasts, and other features.
 
@@ -123,7 +123,7 @@ The OpenVidu Call architecture is divided into two main components:
 
 ### Authentication
 
-OpenVidu Call provides user authentication to ensure that only authorized users can access the videoconference rooms. The authentication process is handled by the OpenVidu Call backend, which uses **Basic Authentication** to verify the user credentials.
+OpenVidu Call provides user authentication to ensure that only authorized users can access the videoconference rooms. The authentication process is handled by the backend, which uses **Basic Authentication** to verify the user credentials.
 
 ### Video conferencing
 
@@ -254,14 +254,14 @@ The process to build a Docker image of OpenVidu call is really easy, you just ne
 2. Run the Docker container:
 
 	```bash
-	docker run -p 5000:5000 \
+	docker run -p 6080:6080 \
 	-e LIVEKIT_URL=wss://your-livekit-server-url \
 	-e LIVEKIT_API_KEY=your-livekit-api-key \
 	-e LIVEKIT_API_SECRET=your-livekit-api-secret \
 	openvidu-call
 	```
 
-	Once the container is running, you can access the OpenVidu Call application by visiting [`http://localhost:5000`](http://localhost:5000){:target="\_blank"}.
+	Once the container is running, you can access the OpenVidu Call application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}.
 
 ### Package bundle
 
@@ -270,15 +270,15 @@ To build the OpenVidu Call application without using Docker, you can follow the 
 1. Build the frontend application:
 
 	```bash
-	cd openvidu-call-front
-	npm install
-	npm run prod:build
+	cd frontend
+	npm install && npm run build-and-copy
+    cd ..
 	```
 
 2. Build the backend application:
 
 	```bash
-	cd openvidu-call-back
+	cd backend
 	npm install
 	npm run build
 	```
@@ -286,6 +286,5 @@ To build the OpenVidu Call application without using Docker, you can follow the 
 3. Start the backend application:
 
 	```bash
-	cd dist
-	node server.js
+	node dist/src/server.js
 	```
