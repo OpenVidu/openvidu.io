@@ -25,7 +25,7 @@ Introducing **OpenVidu Call**, the premier videoconference application that show
 #### 2. Download OpenVidu Call code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-call.git
+git clone https://github.com/OpenVidu/openvidu-call.git -b v3.0.0-beta2
 ```
 
 #### 3. Run the OpenVidu Call backend
@@ -92,13 +92,16 @@ The OpenVidu Call architecture is divided into two main components:
 
     The project architecture is divided into the following directories:
 
-    - `components`: Contains the components that define the UI elements.
+    - `guards`: Contains the guards that handle the authentication.
+    - `models`: Contains the models that define the data structures.
+    - `pages`: Contains the components that define the different pages of the application.
     - `services`: Contains the services that interact with the backend in a RESTful manner.
 
     Additionally, the project hosts the following files:
 
     - `app.component.ts`: The main file that initializes the Angular application.
-    - `app-routing.module.ts`: Contains the routes that define the application navigation.
+    - `app-routes.ts`: Contains the routes that define the application navigation.
+    - `app,config.ts`: Contains the configuration settings for the application. This file is where import for the OpenVidu Angular Components are defined.
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} OpenVidu Call backend"
 
