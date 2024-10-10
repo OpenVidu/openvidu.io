@@ -20,8 +20,8 @@ Adding toolbar buttons is made simple with the **ToolbarAdditionalPanelButtonsDi
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
-git clone https://github.com/OpenVidu/openvidu-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b v3.0.0-beta3
 ```
 
 #### 3. Run the server application

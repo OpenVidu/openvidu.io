@@ -14,7 +14,7 @@ It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby
 Download the tutorial code:
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
 ```
 
 --8<-- "docs/docs/tutorials/shared/ruby.md"

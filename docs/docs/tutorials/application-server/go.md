@@ -14,7 +14,7 @@ It internally uses the [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/se
 Download the tutorial code:
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
 ```
 
 --8<-- "docs/docs/tutorials/shared/go.md"

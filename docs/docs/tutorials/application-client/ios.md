@@ -20,7 +20,7 @@ It uses the [LiveKit Swift SDK](https://docs.livekit.io/client-sdk-swift/documen
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
 ```
 
 ### 3. Run a server application

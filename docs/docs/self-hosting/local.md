@@ -28,7 +28,7 @@ To install OpenVidu locally, follow these steps:
     1.  Clone the following repository:
 
         ```bash
-        git clone https://github.com/OpenVidu/openvidu-local-deployment
+        git clone https://github.com/OpenVidu/openvidu-local-deployment -b v3.0.0-beta3
         ```
 
         !!!info
@@ -68,7 +68,7 @@ To install OpenVidu locally, follow these steps:
     1.  Clone the following repository:
 
         ```bash
-        git clone https://github.com/OpenVidu/openvidu-local-deployment
+        git clone https://github.com/OpenVidu/openvidu-local-deployment -b v3.0.0-beta3
         ```
 
         !!!info

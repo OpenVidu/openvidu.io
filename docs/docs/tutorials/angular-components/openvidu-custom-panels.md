@@ -20,8 +20,8 @@ Customizing the videoconference panels is made simple with the **PanelDirective*
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
-git clone https://github.com/OpenVidu/openvidu-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b v3.0.0-beta3
 ```
 
 #### 3. Run the server application
