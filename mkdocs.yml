@@ -33,6 +33,10 @@ nav:
               - Ionic: docs/tutorials/application-client/ionic.md
               - Android: docs/tutorials/application-client/android.md
               - iOS: docs/tutorials/application-client/ios.md
+          - Advanced Features:
+              - docs/tutorials/advanced-features/index.md
+              - Recording Basic: docs/tutorials/advanced-features/recording-basic.md
+              - Recording Advanced: docs/tutorials/advanced-features/recording-advanced.md
           - Angular Components:
               - docs/tutorials/angular-components/index.md
               - Custom UI: docs/tutorials/angular-components/openvidu-custom-ui.md
