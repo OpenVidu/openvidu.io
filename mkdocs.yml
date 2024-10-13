@@ -91,6 +91,10 @@ nav:
               - AWS:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Configuration And Administration: docs/self-hosting/ha/aws/admin.md
+          - Configuration:
+            - Changing Config: docs/self-hosting/configuration/changing-config.md
+            - Config Sytem In depth: docs/self-hosting/configuration/in-depth.md
+            - Config References: docs/self-hosting/configuration/reference.md
           - How To Guides:
             - docs/self-hosting/how-to-guides/index.md
             - Configure External S3: docs/self-hosting/how-to-guides/external-s3.md
