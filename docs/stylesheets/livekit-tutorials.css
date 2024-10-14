@@ -27,6 +27,10 @@
 	padding: 10px !important;
 }
 
+.no-width {
+	width: inherit;
+}
+
 .responsive-card {
 	flex: 0 32%;
 }
