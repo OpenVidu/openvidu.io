@@ -46,7 +46,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
 ## Administration and Configuration
 
-For administration, you can follow the instructions from the [On Premises Single Node](../on-premises/admin.md) section.
+For administration, you can follow the instructions from the [On Premises Single Node Administration](../on-premises/admin.md) section.
 
 Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](/docs/self-hosting/configuration/changing-config) section. Additionally, the [How to Guides](/docs/self-hosting/how-to-guides) offer multiple resources to assist with specific configuration changes.
 

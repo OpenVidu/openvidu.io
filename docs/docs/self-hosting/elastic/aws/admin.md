@@ -192,9 +192,10 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
         ![Instance Management](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-instance-management-start.png){ .svg-img .dark-img }
         </figure>
 
+
 ## Administration and Configuration
 
-For administration, you can follow the instructions from the [On Premises Elastic](../on-premises/admin.md) section.
+For administration, you can follow the instructions from the [On Premises Elastic Administration](../on-premises/admin.md) section.
 
 Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](/docs/self-hosting/configuration/changing-config) section. Additionally, the [How to Guides](/docs/self-hosting/how-to-guides) offer multiple resources to assist with specific configuration changes.
 
@@ -204,18 +205,18 @@ In addition to these, an AWS deployment provides the capability to manage global
 
     1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Elastic Node deployment.
+    3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Elastic Deployment.
         <figure markdown>
-        ![Select Secrets Manager](../../../../../assets/images/self-hosting/elastic/aws/outputs.png){ .svg-img .dark-img }
+        ![Select Secrets Manager](../../../../assets/images/self-hosting/elastic/aws/outputs.png){ .svg-img .dark-img }
         </figure>
     4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
         <figure markdown>
-        ![Retrieve Secret Value](../../../../../assets/images/self-hosting/elastic/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
+        ![Retrieve Secret Value](../../../../assets/images/self-hosting/elastic/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
         </figure>
     5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu Elastic deployment.
-    6. Go to the EC2 Console and click on _"Reboot instance"_ to apply the changes to the Master Node.
+    6. Go to the EC2 Console and click on _"Reboot instance"_ in the Master Node instance to apply the changes.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/elastic/aws/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
-    The changes will be applied automatically.
+    The changes will be applied automatically in all the Nodes of the OpenVidu Elastic deployment.

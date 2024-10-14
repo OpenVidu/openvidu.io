@@ -72,7 +72,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP      | 1935        | 0.0.0.0/0, ::/0           | (Optional) For ingesting RTMP streams using Ingress service.                                      |
 | TCP      | 9000        | 0.0.0.0/0, ::/0           | (Optional) To expose MinIO publicly.                                                              |
 | TCP      | 3000        | Master Nodes              | (Optional) For load balancing requests to Grafana (Observability module).                         |
-| TCP      | 8080        | Master Nodes              | For load balancing requests to OpenVidu Dashboard.                                                |
+| TCP      | 5000        | Master Nodes              | For load balancing requests to OpenVidu Dashboard.                                                |
 | TCP      | 9101        | Master Nodes              | For load balancing requests to MinIO Console.                                                     |
 | TCP      | 7946-7947   | Master Nodes              | (Optional) For Mimir and Loki cluster communication (Observability module).                       |
 | TCP      | 9095-9096   | Master Nodes              | (Optional) For Mimir and Loki cluster communication (Observability module).                       |
@@ -256,6 +256,7 @@ Each installation command for each type of node looks like this:
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,app' \
+            --rtc-engine='pion' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -282,6 +283,7 @@ Each installation command for each type of node looks like this:
         Notes:
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account){:target="_blank"}.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
     === "Self-signed certificates"
@@ -295,6 +297,7 @@ Each installation command for each type of node looks like this:
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,app' \
+            --rtc-engine='pion' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -318,6 +321,7 @@ Each installation command for each type of node looks like this:
         --8<-- "docs/docs/self-hosting/shared/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account){:target="_blank"}.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
     === "Custom certificates"
@@ -338,6 +342,7 @@ Each installation command for each type of node looks like this:
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,app' \
+            --rtc-engine='pion' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -366,6 +371,7 @@ Each installation command for each type of node looks like this:
 
         - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account){:target="_blank"}.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
         - `--turn-owncert-private-key` and `--turn-owncert-public-key` are optional. You only need to pass them if you want to enable TURN with TLS.
 
@@ -376,27 +382,15 @@ Each installation command for each type of node looks like this:
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
         --node-role='media-node' \
-        --domain-name='openvidu.example.io' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
-        --openvidu-pro-license='xxxxx' \
-        --rtc-engine='pion' \
         --enabled-modules='observability,v2compatibility,app' \
-        --turn-domain-name='openvidu.example.io' \
-        --livekit-api-key='xxxxx' \
-        --livekit-api-secret='xxxxx' \
-        --redis-password='xxxxx' \
-        --minio-access-key='xxxxx' \
-        --minio-secret-key='xxxxx' \
-        --mongo-admin-user='xxxxx' \
-        --mongo-admin-password='xxxxx'
+        --redis-password='xxxxx'
     ```
 
     --8<-- "docs/docs/self-hosting/shared/install-version.md"
 
-    - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
-    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media.
-    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account){:target="_blank"}.
+    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.no-break}.
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
 

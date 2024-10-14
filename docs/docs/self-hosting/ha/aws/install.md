@@ -37,7 +37,7 @@ This is how the architecture of the deployment looks like.
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - An autoscaling group of Master Nodes is created with a fixed number of 4 Master Nodes. It must always have 4 Master Nodes to ensure high availability.
+    - 4 fixed EC2 Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
 === "Architecture overview with TURN over TLS"
@@ -51,7 +51,7 @@ This is how the architecture of the deployment looks like.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - An additional Load Balancer is created to route TURN over TLS traffic to the TURN server running on the Media Nodes. It is used to allow users behind restrictive firewalls to connect to the Media Nodes.
-    - An autoscaling group of Master Nodes is created with a fixed number of 4 Master Nodes. It must always have 4 Master Nodes to ensure high availability.
+    - 4 fixed EC2 Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
 ## CloudFormation Parameters
