@@ -18,6 +18,13 @@ First of all, import the template in the AWS CloudFormation console. You can cli
 https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu-ha.yaml
 ```
 
+!!! info
+    If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
+
+    ```
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.0.0/aws/cf-openvidu-ha.yaml
+    ```
+
 This is how the architecture of the deployment looks like.
 
 === "Architecture overview"
