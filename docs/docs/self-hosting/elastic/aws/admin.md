@@ -192,217 +192,30 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
         ![Instance Management](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-instance-management-start.png){ .svg-img .dark-img }
         </figure>
 
+## Administration and Configuration
 
-## Configuration Management
+For administration, you can follow the instructions from the [On Premises Elastic](../on-premises/admin.md) section.
 
-This section explains how to manage and update the configuration settings for your OpenVidu Elastic deployment. It is divided into three parts:
+Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](/docs/self-hosting/configuration/changing-config) section. Additionally, the [How to Guides](/docs/self-hosting/how-to-guides) offer multiple resources to assist with specific configuration changes.
 
-1. **Configuring CloudFormation YAML for Node Services Configuration**: Details how to pre-configure settings in the CloudFormation template to avoid manual interventions post-deployment.
-2. **Global Configuration**: Covers parameters that affect the entire cluster when the CloudFormation stack is already deployed.
-3. **Node Services Configuration**: Focuses on settings specific to Master and Media Nodes services when the CloudFormation stack is already deployed.
+In addition to these, an AWS deployment provides the capability to manage global configurations via the AWS Console using AWS Secrets created during the deployment. To manage configurations this way, follow these steps:
 
-### Configuring CloudFormation YAML for Node Services Configuration
-
-To avoid manual intervention after deployment, you can pre-configure the node services configuration directly in the CloudFormation YAML template. This ensures that the necessary configurations are applied automatically upon deployment.
-
-=== "Master Node"
-
-    1. Get the CloudFormation YAML template used to deploy [OpenVidu Elastic on AWS](../aws/install.md).
-    2. Locate the section defining the Launch Template for the Master Node and update the `UserData` property with the required configuration parameters. The section looks like this:
-
-        ```yaml
-        OpenViduMasterNode:
-            Type: AWS::EC2::Instance
-            Properties:
-                UserData:
-                    Fn::Base64: !Sub |
-                        #!/bin/bash
-                        ...
-                        ...
-                        # Install OpenVidu
-                        /usr/local/bin/install.sh || { echo "[OpenVidu] error installing OpenVidu"; exit 1; }
-
-                        ######### APPLY CUSTOM CONFIGURATIONS #########
-                        # If you want to apply any modification to the configuration files
-                        # of the OpenVidu services at /opt/openvidu/config, you can do it here.
-                        # Examples:
-                        #
-                        # - Change minio public port
-                        # yq eval '.apps.http.servers.minio.listen[0] = ":9001"' -i /opt/openvidu/config/caddy.yaml
-                        #
-                        # - Disable dashboard access
-                        # yq eval 'del(.apps.http.servers.public.routes[] | \
-                        #  select(.handle[]?.handler == "subroute" and \
-                        #  .handle[].routes[].handle[].strip_path_prefix == "/dashboard"))' \
-                        #  -i /opt/openvidu/config/caddy.yaml
-
-
-
-                        ######### END CUSTOM CONFIGURATIONS #########
-
-                        # Start OpenVidu
-                        systemctl start openvidu || { echo "[OpenVidu] error starting OpenVidu"; exit 1; }
-                        ...
-                        ...
-
-        ```
-
-        The area between **`APPLY CUSTOM CONFIGURATIONS`** and **`END CUSTOM CONFIGURATIONS`** is where you can add your custom configuration commands. You can use [`yq`](https://mikefarah.gitbook.io/yq){:target=_blank} to modify the configuration files of the OpenVidu services. The example shows how to change the `minio` public port and how to disable dashboard access in the `caddy.yaml` configuration file.
-
-    3. Save the YAML file and use it to deploy your CloudFormation stack. This will apply the Master Node configuration automatically during the deployment process.
-
-=== "Media Nodes"
-
-    1. Get the CloudFormation YAML template used to deploy [OpenVidu Elastic on AWS](../aws/install.md).
-    2. Locate the section defining the Launch Template for the Media Nodes and update the `UserData` property with the required configuration parameters. The section looks like this:
-
-        ```yaml
-        OpenViduMediaNodeLaunchTemplate:
-            Type: "AWS::EC2::LaunchTemplate"
-            Properties:
-            LaunchTemplateData:
-                UserData:
-                    Fn::Base64: !Sub |
-                        #!/bin/bash
-                        ...
-                        ...
-                        # Install OpenVidu #
-                        /usr/local/bin/install.sh || { echo "[OpenVidu] error installing OpenVidu"; /usr/local/bin/set_as_unhealthy.sh; exit 1; }
-
-                        ######### APPLY CUSTOM CONFIGURATIONS #########
-                        # If you want to apply any modification to the configuration files
-                        # of the OpenVidu services at /opt/openvidu, you can do it in this section.
-                        # Examples:
-                        #
-                        # - Announce specific IP address for the Media Node
-                        # yq eval '.rtc.node_ip = 1.2.3.4' -i /opt/openvidu/config/livekit.yaml
-                        #
-                        # - Add webhooks to livekit
-                        # yq eval '.webhook.urls += ["http://new-endpoint.example.com/webhook"]' -i /opt/openvidu/config/livekit.yaml
-
-
-
-                        ######### END CUSTOM CONFIGURATIONS #########
-
-                        # Start OpenVidu
-                        systemctl start openvidu || { echo "[OpenVidu] error starting OpenVidu"; /usr/local/bin/set_as_unhealthy.sh; exit 1; }
-        ```
-
-        The area between **`APPLY CUSTOM CONFIGURATIONS`** and **`END CUSTOM CONFIGURATIONS`** is where you can add your custom configuration commands. You can use [`yq`](https://mikefarah.gitbook.io/yq){:target=_blank} to modify the configuration files of the OpenVidu services. The example shows how to change the `rtc.node_ip` parameter and how to add a webhook to the `livekit.yaml` configuration file.
-
-    3. Save the YAML file and use it to deploy your CloudFormation stack. This will apply the node services configuration automatically during the deployment process.
-
-By pre-configuring the CloudFormation template, you streamline the deployment process and reduce the need for post-deployment manual configuration.
-
-### Global Configuration
-
-The global configuration parameters for the OpenVidu Elastic deployment are stored in a secret resource deployed by the CloudFormation stack. These parameters can affect the configuration of all the nodes in the cluster. To update any of these parameters, follow the steps below:
-
-=== "Update Global Configuration Parameters"
+=== "Changing Configuration through AWS Secrets"
 
     1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduSharedInfo`** and click on it to view the secret in AWS Secrets Manager.
+    3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Elastic Node deployment.
         <figure markdown>
-        ![View Global Configuration Parameters](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-view-global-configuration.png){ .svg-img .dark-img }
+        ![Select Secrets Manager](../../../../../assets/images/self-hosting/elastic/aws/outputs.png){ .svg-img .dark-img }
         </figure>
-    4. Click on _"Retrieve secret value"_ to view the parameters.
+    4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
         <figure markdown>
-        ![Retrieve Secret Value](../../../../assets/images/self-hosting/shared/aws-admin-retrieve-secret-value.png){ .svg-img .dark-img }
+        ![Retrieve Secret Value](../../../../../assets/images/self-hosting/elastic/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
         </figure>
-    5. Edit the desired parameters within the secret. For example, you can change the `RTC_ENGINE` parameter to `pion` or `mediasoup` depending on the WebRTC engine you want to use. Just click on _"Edit"_, modify the value, and click on _"Save"_.
+    5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu Elastic deployment.
+    6. Go to the EC2 Console and click on _"Reboot instance"_ to apply the changes to the Master Node.
         <figure markdown>
-        ![Edit Global Configuration Parameters](../../../../assets/images/self-hosting/shared/aws-admin-edit-global-configuration.png){ .svg-img .dark-img }
+        ![Reboot Instance](../../../../assets/images/self-hosting/elastic/aws/reboot-instance.png){ .svg-img .dark-img }
         </figure>
-    6. To apply the changes, stop the cluster and then start it again following the procedures outlined in the [Cluster Shutdown and Startup](#cluster-shutdown-and-startup) section.
 
-### Node Services Configuration
-
-The configuration for individual node services can be managed through different methods depending on the node type.
-
-=== "Master Node"
-
-    The Master Node's configuration can be directly modified on the internal machine since it is an EC2 instance. To update the configuration:
-
-    1. Connect to the Master Node EC2 instance using SSH.
-    2. Edit the configuration files as necessary. Check the [On Premises Elastic](../on-premises/admin.md#master-node) documentation related to the Master Node configuration.
-
-    Once the changes are made, restart the OpenVidu Server to apply the new configuration.
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-    !!!warning
-        Take into account that some changes may require modifying the Master Nodes configuration as well. Check the [On Premises Elastic Advanced Configuration](../on-premises/admin.md#advanced-configuration) for more information.
-
-=== "Media Node"
-
-    Media Node configurations require changes to be made in the Launch Template _"User Data"_ section. To update the configuration:
-
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. Locate the resource with the logical ID: **`OpenViduMediaNodeLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Media Nodes selected.
-        <figure markdown>
-        ![Select Launch Template](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-select-launch-template.png){ .svg-img .dark-img }
-        </figure>
-    4. Click on _"Actions > Modify template (Create new version)"_.
-        <figure markdown>
-        ![Edit Launch Template](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-action-modify-template.png){ .svg-img .dark-img }
-        </figure>
-    5. Go to the _"Advanced details"_ section and modify the _"User data"_ field with the new configuration. You can modify the configuration parameters of the services running on the Media Nodes following the same script structure as the one used in the [Automatic installation and configuration of nodes](../on-premises/admin.md#automatic-installation-and-configuration-of-nodes) for the Media Nodes. When you finish, click on _"Create template version"_.
-        <figure markdown>
-        ![Edit User Data](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-edit-user-data.png){ .svg-img .dark-img }
-        </figure>
-    6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-        <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-select-media-asg.png){ .svg-img .dark-img }
-        </figure>
-    7. Click on _"Actions > Edit"_.
-        <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-edit-media-asg.png){ .svg-img .dark-img }
-        </figure>
-    8. In the Launch Template section, select the new version of the launch template we just created at step 5, which is the highest version number. Then, click on _"Update"_.
-
-        !!!info
-            By configuring _"Latest"_ as the launch template version, you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
-
-        ![Change launch template version](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-asg-update-launch-template.png){ .svg-img .dark-img }
-
-    9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new configuration.
-
-        !!!warning
-            This process requires downtime, as it involves terminating the old instances and launching new ones with the updated configuration.
-
-### Enabling Webhooks
-
-A common use case for custom configuration is to enable webhooks. To enable webhooks you need to add the webhook URL to every Media Node. As the Media Nodes are managed by an Auto Scaling Group, you need to update the Launch Template to include the webhook URL. Just follow the instructions at the [Node Services Configuration](#node-services-configuration) to update the Launch Template with the webhook URL, specifically add this command to the `UserData` section:
-
-```bash
-yq eval '.webhook.urls += ["<YOUR_WEBHOOK_URL"]' \
-    -i /opt/openvidu/config/livekit.yaml
-```
-
-Where `<YOUR_WEBHOOK_URL>` is the URL of the webhook you want to enable. Remember to terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the updated configuration.
-
-In case you want to enable webhooks before the deployment, you can pre-configure the CloudFormation YAML template with the webhook URL. Just follow the instructions at the [Configuring CloudFormation YAML for Node Services Configuration](#configuring-cloudformation-yaml-for-node-services-configuration) to update the Launch Template with the webhook URL.
-
-### Enabling OpenVidu v2 webhooks (v2compatibility)
-
-If you are using the `v2compatibility` module, if you want to enable webhooks, you need to add the webhook URL in the `/opt/openvidu/.env` file of the Master Node. The Master Node does not run in an Auto Scaling Group, so you can directly modify the `/opt/openvidu/.env` file, simply modify the `V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT` parameter with the webhook URL.
-
-```bash
-V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=<YOUR_WEBHOOK_URL>
-```
-
-Where `<YOUR_WEBHOOK_URL>` is the URL of the webhook you want to enable. Remember to reboot the Master Node to apply the changes.
-
-In case you want to enable webhooks before the deployment, you can pre-configure the CloudFormation YAML template with the webhook URL. Just follow the instructions at the [Configuring CloudFormation YAML for Node Services Configuration](#configuring-cloudformation-yaml-for-node-services-configuration) to update the Master Node Launch Template with the webhook URL and add the following command to the `UserData` section:
-
-```bash
-sed -i \
-    's/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=.*/V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT="<YOUR_WEBHOOK_URL>"/' \
-    /opt/openvidu/.env
-```
-
-Where `<YOUR_WEBHOOK_URL>` is the URL of the webhook you want to enable.
+    The changes will be applied automatically.
