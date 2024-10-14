@@ -51,7 +51,7 @@ You need to specify some properties for the EC2 instance that will be created.
 
 When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.
 
-When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation with all deployed services.
+When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation:
 
 === "CloudFormation Outputs"
 
@@ -59,13 +59,26 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 ## Configure your Application to use the Deployment
 
-To point your applications to your OpenVidu deployment, check the file of the EC2 instance `/opt/openvidu/.env`. All access credentials of all services are defined in this file.
+The Output Key **ServicesAndCredentials** of the [previous section](#deploying-the-stack) points to an AWS Secret Manager secret that contains all URLs and credentials to access the services deployed. You can access the secret by clicking on the link in the **Output Value** column.
 
-Your authentication credentials and URLs to point your applications to are:
+Then, click on **Retrieve secret value** to get the JSON with all the information.
 
-- **URL**: The value in `.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
-- **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+<div class="grid-container">
+
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
+
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/single-node/aws/2-secrets.png" loading="lazy"/></a></p></div>
+
+</div>
+
+To point your applications to your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object.
+
+Your authentication credentials and URL to point your applications would be:
+
+- **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+- **API Key**: The value in the AWS Secret of `LIVEKIT_API_KEY`
+- **API Secret**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
+
 
 
 ## Troubleshooting Initial CloudFormation Stack Creation

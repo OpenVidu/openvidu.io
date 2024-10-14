@@ -227,7 +227,7 @@ Each installation command for each type of node looks like this:
         sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
-            --domain-name-or-ip='openvidu.example.io' \
+            --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,app' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
@@ -265,7 +265,7 @@ Each installation command for each type of node looks like this:
         sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
-            --domain-name-or-ip='openvidu.example.io' \
+            --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,app' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
@@ -307,7 +307,7 @@ Each installation command for each type of node looks like this:
         sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
-            --domain-name-or-ip='openvidu.example.io' \
+            --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,app' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
@@ -348,7 +348,7 @@ Each installation command for each type of node looks like this:
     sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
         --node-role='media-node' \
         --openvidu-pro-license='xxxxx' \
-        --domain-name-or-ip='openvidu.example.io' \
+        --domain-name='openvidu.example.io' \
         --rtc-engine='pion' \
         --enabled-modules='observability,v2compatibility,app' \
         --turn-domain-name='turn.example.io' \

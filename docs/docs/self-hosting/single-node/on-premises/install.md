@@ -131,7 +131,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
-        --domain-name-or-ip='openvidu.example.io' \
+        --domain-name='openvidu.example.io' \
         --enabled-modules='observability,app' \
         --turn-domain-name='turn.example.io' \
         --livekit-api-key='xxxxx' \
@@ -161,7 +161,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
-        --domain-name-or-ip='openvidu.example.io' \
+        --domain-name='openvidu.example.io' \
         --enabled-modules='observability,app' \
         --turn-domain-name='turn.example.io' \
         --livekit-api-key='xxxxx' \
@@ -198,7 +198,7 @@ This is going to generate a command like this, but it may vary depending on the 
     CERT_TURN_PUBLIC_KEY=$(cat turn-fullchain.pem | base64 -w 0)
 
     sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
-        --domain-name-or-ip='openvidu.example.io' \
+        --domain-name='openvidu.example.io' \
         --enabled-modules='observability,app' \
         --turn-domain-name='turn.example.io' \
         --livekit-api-key='xxxxx' \

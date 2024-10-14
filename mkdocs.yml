@@ -70,10 +70,10 @@ nav:
               - docs/self-hosting/single-node/index.md
               - On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
-                  - Configuration And Administration: docs/self-hosting/single-node/on-premises/admin.md
+                  - Administration: docs/self-hosting/single-node/on-premises/admin.md
               - AWS:
                   - Install: docs/self-hosting/single-node/aws/install.md
-                  - Configuration And Administration: docs/self-hosting/single-node/aws/admin.md
+                  - Administration: docs/self-hosting/single-node/aws/admin.md
           - Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
