@@ -112,7 +112,8 @@ Before the installation, ensure that all your machines meet the [prerequisites](
 To install OpenVidu High Availability, **begin by generating the commands required for setting up all nodes in the cluster**. This is a simple and straightforward process; simply **run the following command on any machine that has Docker installed**:
 
 ```bash
-docker run -it openvidu/openvidu-installer:latest \
+docker run --pull always --rm -it \
+    openvidu/openvidu-installer:latest \
     --deployment-type=ha
 ```
 
@@ -225,14 +226,14 @@ To point your applications to your OpenVidu deployment, check the file at `/opt/
 Your authentication credentials and URL to point your applications would be:
 
 - Applications developed with LiveKit SDK:
-    - **URL**: The value in `.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
-    - **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+    - **URL**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+    - **API Key**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_KEY`
+    - **API Secret**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_SECRET`
 
 - Applications developed with OpenVidu v2:
-    - **URL**: The value in `.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. For example, `https://openvidu.example.io/`
+    - **URL**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. For example, `https://openvidu.example.io/`
     - **Username**: `OPENVIDUAPP`
-    - **Password**: The value in `.env` of `LIVEKIT_API_SECRET`
+    - **Password**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_SECRET`
 
 ## Non-interactive installation
 

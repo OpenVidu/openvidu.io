@@ -186,14 +186,14 @@ To point your applications to your OpenVidu deployment, check the values of the 
 Your authentication credentials and URL to point your applications would be:
 
 - Applications developed with LiveKit SDK:
-    - **URL**: The value in `.env` of `DOMAIN_NAME` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
-    - **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+    - **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+    - **API Key**: The value in the AWS Secret of `LIVEKIT_API_KEY`
+    - **API Secret**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
 
 - Applications developed with OpenVidu v2:
-    - **URL**: The value in `.env` of `DOMAIN_NAME` as a URL. For example, `https://openvidu.example.io/`
+    - **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. For example, `https://openvidu.example.io/`
     - **Username**: `OPENVIDUAPP`
-    - **Password**: The value in `.env` of `LIVEKIT_API_SECRET`
+    - **Password**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 

@@ -117,7 +117,8 @@ Your authentication credentials and URLs to point your applications to are:
 If you want to automate the installation process, you can generate a command with all the parameters needed to install OpenVidu by answering the wizard questions. You can do this by running the following command:
 
 ```
-docker run -it openvidu/openvidu-installer:latest \
+docker run --pull always --rm -it \
+    openvidu/openvidu-installer:latest \
     --deployment-type=single_node
 ```
 

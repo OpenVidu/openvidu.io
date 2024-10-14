@@ -45,6 +45,10 @@ This file defines the configuration parameters for the OpenVidu Call application
 
 ## <span class="openvidu-tag openvidu-pro-tag">PRO</span> `v2compatibility.env`
 
+!!!info
+    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
+    There's a 15-day free trial waiting for you!
+
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server.
 
 | Parameter | Description |
@@ -101,6 +105,11 @@ openvidu:
 5. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
 
 ### <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Server Configuration:
+
+
+!!!info
+    Before deploying OpenVidu PRO, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
+    There's a 15-day free trial waiting for you!
 
 ```yaml
 openvidu:
