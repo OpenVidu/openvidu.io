@@ -85,7 +85,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 
 ## `livekit.yaml`:
 
-As OpenVidu Server is [built on top of LiveKit](/docs/comparing-openvidu/#openvidu-vs-livekit){:target="_blank"}, the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration](https://github.com/livekit/livekit/blob/master/config-sample.yaml){:target="_blank"}.
+As OpenVidu Server is [built on top of LiveKit](../../comparing-openvidu.md#openvidu-vs-livekit){:target="_blank"}, the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration](https://github.com/livekit/livekit/blob/master/config-sample.yaml){:target="_blank"}.
 
 ### <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> OpenVidu Server Configuration:
 

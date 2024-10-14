@@ -84,7 +84,7 @@ You can also review your logs using the Grafana dashboard provided with OpenVidu
 
 ## Changing the configuration
 
-You can check how to change the configuration in the [Changing Configuration](/docs/self-hosting/configuration/changing-config) section. Also, there are multiple guides in the [How to Guides](/docs/self-hosting/how-to-guides) section that can help you with specific configuration changes.
+You can check how to change the configuration in the [Changing Configuration](../../../self-hosting/configuration/changing-config.md) section. Also, there are multiple guides in the [How to Guides](../../../self-hosting/how-to-guides/index.md) section that can help you with specific configuration changes.
 
 ## Uninstalling OpenVidu
 
