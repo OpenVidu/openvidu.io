@@ -32,10 +32,6 @@ If you need to integrate OpenVidu with other services, you can use webhooks to s
 
 ## <span class="openvidu-tag openvidu-pro-tag">PRO</span> V2 Compatibility Configuration
 
-!!!info
-    Before deploying OpenVidu PRO, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
-    There's a 15-day free trial waiting for you!
-
 If you are using the V2 Compatibility module, you can also enable webhooks for the V2 Compatibility layer.
 
 1. SSH into one of your Master Nodes (or Single Node).
