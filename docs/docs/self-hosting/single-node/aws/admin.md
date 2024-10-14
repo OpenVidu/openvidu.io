@@ -1,4 +1,4 @@
-# OpenVidu Single Node: AWS configuration and administration
+# OpenVidu Single Node: AWS Administration
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu Single Node.

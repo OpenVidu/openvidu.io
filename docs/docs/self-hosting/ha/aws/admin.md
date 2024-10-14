@@ -1,4 +1,4 @@
-# OpenVidu High Availability: AWS Configuration and Administration
+# OpenVidu High Availability: AWS Administration
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu High Availability.

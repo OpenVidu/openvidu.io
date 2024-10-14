@@ -1,4 +1,4 @@
-# OpenVidu Elastic: AWS Configuration and Administration
+# OpenVidu Elastic: AWS Administration
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu Elastic.

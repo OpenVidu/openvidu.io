@@ -455,4 +455,4 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Configuration and Administration](../on-premises/admin.md) section to learn how to manage your OpenVidu High Availability deployment.
+Once you have OpenVidu deployed, you can check the [Administration](../on-premises/admin.md) section to learn how to manage your OpenVidu High Availability deployment.

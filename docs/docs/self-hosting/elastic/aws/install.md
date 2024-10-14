@@ -154,4 +154,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Elastic deployment is ready to use. You can check the [Configuration and Administration](../aws/admin.md) section to learn how to manage your OpenVidu Elastic deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Elastic deployment is ready to use. You can check the [Administration](../aws/admin.md) section to learn how to manage your OpenVidu Elastic deployment.

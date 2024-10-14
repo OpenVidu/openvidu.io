@@ -1,4 +1,4 @@
-# OpenVidu High Availability: On-premises configuration and administration
+# OpenVidu High Availability: On-premises Administration
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu High Availability.
