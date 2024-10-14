@@ -24,9 +24,9 @@ The `openvidu.env` file defines global parameters used in service configurations
     - **Elastic / High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
 
     !!! warning
-        In AWS it is necessary to specify the region in the endpoint URL as you can see in `RECORDINGS_S3_ENDPOINT`. Check the [AWS S3 endpoints documentation](https://docs.aws.amazon.com/general/latest/gr/s3.html) for more information.
+        In AWS it is necessary to specify the region in the endpoint URL as you can see in `RECORDINGS_S3_ENDPOINT`. Check the [AWS S3 endpoints documentation](https://docs.aws.amazon.com/general/latest/gr/s3.html){:target="_blank"} for more information.
     !!! info
-        The parameters defined at `openvidu.env` can be used in other configuration files by using the `${openvidu.VARIABLE_NAME}` syntax. If you want to know more about the configuration system of OpenVidu, check the [Configuration In-depth](/docs/self-hosting/configuration/in-depth/) section.
+        The parameters defined at `openvidu.env` can be used in other configuration files by using the `${openvidu.VARIABLE_NAME}` syntax. If you want to know more about the configuration system of OpenVidu, check the [Configuration In-depth](/docs/self-hosting/configuration/in-depth/){:target="_blank} section.
 
 
 
@@ -74,7 +74,7 @@ If using the Default App (OpenVidu Call) or V2 Compatibility, additional configu
     The location of the file depends on the type of deployment:
 
     - **Single Node**: `/opt/openvidu/config/app.env`
-    - **Elastic /High Availability**: `/opt/openvidu/config/cluster/master_node/app.env`
+    - **Elastic / High Availability**: `/opt/openvidu/config/cluster/master_node/app.env`
 
 ### <span class="openvidu-tag openvidu-pro-tag">PRO</span> V2 Compatibility
 
@@ -93,4 +93,4 @@ If using the Default App (OpenVidu Call) or V2 Compatibility, additional configu
     The location of the file depends on the type of deployment:
 
     - **Single Node**: `/opt/openvidu/config/v2compatibility.env`
-    - **Elastic/High Availability**: `/opt/openvidu/config/cluster/master_node/v2compatibility.env`
+    - **Elastic / High Availability**: `/opt/openvidu/config/cluster/master_node/v2compatibility.env`
