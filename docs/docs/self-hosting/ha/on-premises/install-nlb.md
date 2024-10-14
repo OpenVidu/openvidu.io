@@ -420,7 +420,6 @@ Each installation command for each type of node looks like this:
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
         --node-role='media-node' \
-        --domain-name='openvidu.example.io' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
         --enabled-modules='observability,v2compatibility,app' \
         --redis-password='xxxxx'
