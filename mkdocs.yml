@@ -78,7 +78,7 @@ nav:
               - docs/self-hosting/elastic/index.md
               - On Premises:
                   - Install: docs/self-hosting/elastic/on-premises/install.md
-                  - Configuration And Administration: docs/self-hosting/elastic/on-premises/admin.md
+                  - Administration: docs/self-hosting/elastic/on-premises/admin.md
               - AWS:
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Configuration And Administration: docs/self-hosting/elastic/aws/admin.md

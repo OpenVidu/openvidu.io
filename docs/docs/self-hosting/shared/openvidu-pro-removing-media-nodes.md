@@ -1,5 +1,5 @@
 
-### Removing Media Nodes Gracefully
+## Removing Media Nodes Gracefully
 
 To stop a Media Node gracefully, you need to stop the containers `openvidu`, `ingress`, and `egress` with a `SIGINT` signal. Here is a simple script that you can use to stop all these containers gracefully:
 
@@ -28,7 +28,7 @@ When all the containers are stopped, you can then stop the systemd service and r
 sudo systemctl stop openvidu
 ```
 
-### Removing Media Nodes Forcefully
+## Removing Media Nodes Forcefully
 
 To remove a Media Node forcefully, without considering the rooms, ingress, and egress processes running in the node, you can simply stop the OpenVidu service in the Media Node and delete the VM.
 
