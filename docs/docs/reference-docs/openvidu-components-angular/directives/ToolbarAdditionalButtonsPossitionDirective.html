@@ -90,7 +90,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Directives</li>
-  <li class="breadcrumb-item" >ToolbarActivitiesPanelButtonDirective</li>
+  <li class="breadcrumb-item" >ToolbarAdditionalButtonsPossitionDirective</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -116,11 +116,11 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>The <strong>activitiesPanelButton</strong> directive allows show/hide the activities panel toolbar button.</p>
-<p>Default: <code>true</code></p>
-<p>It can be used in the parent element <a href="../components/VideoconferenceComponent.html">VideoconferenceComponent</a> specifying the name of the <code>toolbar</code> component:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-videoconference [toolbarActivitiesPanelButton]=&quot;false&quot;&gt;&lt;/ov-videoconference&gt;</code></pre></div><p><br>And it also can be used in the <a href="../components/ToolbarComponent.html">ToolbarComponent</a>.</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-toolbar [activitiesPanelButton]=&quot;false&quot;&gt;&lt;/ov-toolbar&gt;</code></pre></div>
+                <p>The <strong>ovToolbarAdditionalButtonsPosition</strong> defines the position where the additional buttons should be inserted.</p>
+<p>The possible values are: <a href="../miscellaneous/enumerations.html#ToolbarAdditionalButtonsPosition">ToolbarAdditionalButtonsPosition</a>
+Default: <code>afterMenu</code></p>
+<p>It can be used in the any element which contains the  structural directive <a href="../directives/ToolbarAdditionalButtonsDirective.html">ToolbarAdditionalButtonsDirective</a>.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ovToolbarAdditionalButtons [ovToolbarAdditionalButtonsPosition]=&quot;&#39;beforeMenu&#39;&quot;&gt;&lt;/div&gt;</code></pre></div>
             </p>
 
 
@@ -140,7 +140,7 @@
 
                     <tr>
                         <td class="col-md-3">Selector</td>
-                        <td class="col-md-9"><code>ov-videoconference[toolbarActivitiesPanelButton], ov-toolbar[activitiesPanelButton]</code></td>
+                        <td class="col-md-9"><code>[ovToolbarAdditionalButtonsPosition]</code></td>
                     </tr>
 
 
@@ -204,7 +204,7 @@
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
-            var COMPODOC_CURRENT_PAGE_URL = 'ToolbarActivitiesPanelButtonDirective.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToolbarAdditionalButtonsPossitionDirective.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

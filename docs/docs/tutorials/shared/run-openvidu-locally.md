@@ -1,7 +1,7 @@
 1.  Download OpenVidu
 
     ```bash
-    git clone https://github.com/OpenVidu/openvidu-local-deployment
+    git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.0.0-beta3
     ```
 
 2.  Configure the local deployment

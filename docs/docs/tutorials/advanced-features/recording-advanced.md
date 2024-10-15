@@ -18,7 +18,7 @@ This tutorial improves the [basic recording tutorial](./recording-basic.md){targ
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
 ```
 
 ### 3. Run the application

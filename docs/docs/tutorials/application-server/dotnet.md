@@ -14,7 +14,7 @@ Unfortunately there is no .NET SDK for LiveKit available, so the application has
 Download the tutorial code:
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
 ```
 
 --8<-- "docs/docs/tutorials/shared/dotnet.md"

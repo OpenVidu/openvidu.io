@@ -47,12 +47,10 @@ We believe that by combining the best of the LiveKit stack with a top-notch WebR
 
 OpenVidu developers are hard at work with integrating *mediasoup* as a WebRTC engine within LiveKit, aiming to provide feature parity with the original Pion engine.
 
-There are, for now, some limitations that are expected to be ironed out over time:
+Currently there are two [client SDK events](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"} that are not triggered when using mediasoup:
 
-- No support for Speaker Detection events ([LiveKit reference](https://docs.livekit.io/realtime/client/receive/#Speaker-detection){target="\_blank"}).
-- No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
-- No support for Dynacast ([LiveKit reference](https://docs.livekit.io/realtime/client/publish/#Dynamic-broadcasting){target="\_blank"}).
-- No support for Adaptive Streaming ([LiveKit reference](https://docs.livekit.io/realtime/client/receive/#Adaptive-stream){target="\_blank"}).
+- No `ConnectionQualityChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#ConnectionQualityChanged){target="\_blank"}).
+- No `TrackStreamStateChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#TrackStreamStateChanged){target="\_blank"}).
 
 ## Benchmarking
 

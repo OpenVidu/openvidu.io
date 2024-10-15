@@ -59,13 +59,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApiDirectiveModule.html" data-type="entity-link" >ApiDirectiveModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
-                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' }>
+                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' :
-                                        'id="xs-directives-links-module-ApiDirectiveModule-d757ced90e4da069cbbadfdebbe0bf27613446667adbd08fe7a93c35a8330228abe6b5ded9625fa63b5f5bfab4e472fb4b280a610623dbda03f120743348c59a"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' :
+                                        'id="xs-directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' }>
                                         <li class="link">
                                             <a href="directives/ActivitiesPanelBroadcastingActivityDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelBroadcastingActivityDirective</a>
                                         </li>
@@ -76,7 +76,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <a href="directives/AdminDashboardRecordingsListDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminDashboardRecordingsListDirective</a>
                                         </li>
                                         <li class="link">
+                                            <a href="directives/AdminDashboardTitleDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminDashboardTitleDirective</a>
+                                        </li>
+                                        <li class="link">
                                             <a href="directives/AdminLoginErrorDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminLoginErrorDirective</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="directives/AdminLoginTitleDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminLoginTitleDirective</a>
                                         </li>
                                         <li class="link">
                                             <a href="directives/AudioEnabledDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AudioEnabledDirective</a>
@@ -119,6 +125,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         </li>
                                         <li class="link">
                                             <a href="directives/ToolbarActivitiesPanelButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarActivitiesPanelButtonDirective</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="directives/ToolbarAdditionalButtonsPossitionDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarAdditionalButtonsPossitionDirective</a>
                                         </li>
                                         <li class="link">
                                             <a href="directives/ToolbarBackgroundEffectsButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarBackgroundEffectsButtonDirective</a>
@@ -296,6 +305,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <li class="link">
                                     <a href="injectables/RecordingService.html" data-type="entity-link" >RecordingService</a>
                                 </li>
+                                <li class="link">
+                                    <a href="injectables/TranslateService.html" data-type="entity-link" >TranslateService</a>
+                                </li>
                             </ul>
                         </li>
                     <li class="chapter">
@@ -394,6 +406,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
                             <li class="link">
                                 <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
                             </li>
                         </ul>
                     </li>

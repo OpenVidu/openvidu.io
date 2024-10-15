@@ -82,23 +82,69 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<h1>Openvidu Angular TestAPP</h1>
-<h2>Architechture</h2>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">openvidu-components-angular
-│
-└─── src (openvidu-components-testapp)
-│
-└───projects
-    │
-    └─── openvidu-components-angular</code></pre></div><h2>How to develop with ease:</h2>
-<p>Run <code>ng serve</code> for a dev server.</p>
-<p>Run, in a new terminal, <code>npm run lib:serve</code> for serving the openvidu-components-angular library with live reload for listening changes</p>
-<h2>Code scaffolding</h2>
-<p>For generate new components in openvidu-components-angular:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng g component components/component-name --project=openvidu-components-angular</code></pre></div><h2>Build library</h2>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run lib:build</code></pre></div><h2>Publishing</h2>
-<p>After the library is built, tun the following command:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">cd dist/ &amp;&amp; npm publish</code></pre></div>
+<h1>Welcome to OpenVidu Components Angular</h1>
+<p>Build powerful video conferencing applications with ease using OpenVidu Components Angular.</p>
+<h2>Introduction</h2>
+<p>Angular Components are the simplest way to create real-time videoconferencing apps with Angular. There&#39;s no need to manage state or low-level events; Angular Components from OpenVidu handle all the complexity for you.</p>
+<h2>Getting Started</h2>
+<p>To get started with OpenVidu Components Angular, visit our <a href="https://openvidu.io/docs/ui-components/angular-components/"><strong>Getting Started guide</strong></a>.</p>
+<ol>
+<li><p>Create an Angular Project (&gt;= 17.0.0)</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng new your-project-name</code></pre></div></li>
+<li><p>Add Angular Material to your project</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng add &#64;angular/material</code></pre></div></li>
+<li><p>Install OpenVidu Components Angular</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install openvidu-components-angular</code></pre></div></li>
+<li><p>Import and use OpenVidu Components Angular</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { OpenViduComponentsModule, OpenViduComponentsConfig } from &#39;openvidu-components-angular&#39;;
+
+// Other imports ...
+
+const config: OpenViduComponentsConfig = {
+    production: environment.production
+};
+
+bootstrapApplication(AppComponent, {
+    providers: [
+        importProvidersFrom(
+            OpenViduComponentsModule.forRoot(config)
+            // Other imports ...
+        ),
+        provideAnimations()
+    ]
+}).catch((err) =&gt; console.error(err));</code></pre></div></li>
+</ol>
+<p>You can also customize the styles in your <code>styles.scss</code> file:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-scss">:root {
+    --ov-primary-color: #303030;
+    --ov-secondary-color: #3e3f3f;
+    --ov-tertiary-color: #598eff;
+    --ov-warn-color: #eb5144;
+    --ov-accent-color: #ffae35;
+    --ov-light-color: #e6e6e6;
+
+    --ov-logo-background-color: #3a3d3d;
+
+    --ov-text-color: #ffffff;
+
+    --ov-panel-text-color: #1d1d1d;
+    --ov-panel-background: #ffffff;
+
+    --ov-buttons-radius: 50%;
+    --ov-leave-button-radius: 10px;
+    --ov-video-radius: 5px;
+    --ov-panel-radius: 5px;
+}</code></pre></div><h2>Usage</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-videoconference
+    [token]=&quot;token&quot;
+    [livekitUrl]=&quot;LIVEKIT_URL&quot;
+    (onTokenRequested)=&quot;onTokenRequested($event)&quot;
+&gt;
+&lt;/ov-videoconference&gt;</code></pre></div><h2>API Documentation</h2>
+<p>For detailed information on OpenVidu Angular Components, refer to our <a href="https://openvidu.io/docs/reference-docs/openvidu-components-angular"><strong>API Reference</strong></a>.</p>
+<h2>Support</h2>
+<p>If you have any questions or need assistance, please reach out to our <a href="https://openvidu.io/support/"><strong>Support page</strong></a>.</p>
+
 
 
 
@@ -173,7 +219,6 @@
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 

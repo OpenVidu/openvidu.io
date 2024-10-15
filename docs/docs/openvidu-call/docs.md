@@ -25,7 +25,7 @@ Introducing **OpenVidu Call**, the premier videoconference application that show
 #### 2. Download OpenVidu Call code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-call.git -b v3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-call.git -b 3.0.0-beta3
 ```
 
 #### 3. Run the OpenVidu Call backend

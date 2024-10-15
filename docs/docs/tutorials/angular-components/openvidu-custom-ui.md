@@ -20,8 +20,8 @@ Creating a unique and intuitive user interface (UI) is essential for ensuring a 
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b v3.0.0-beta3
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b v3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0-beta3
 ```
 
 #### 3. Run the server application

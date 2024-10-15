@@ -19,7 +19,7 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
 ```
 
 ### 3. Run the application
