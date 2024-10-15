@@ -226,6 +226,7 @@ Each installation command for each type of node looks like this:
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+            --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
@@ -266,6 +267,7 @@ Each installation command for each type of node looks like this:
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+            --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
@@ -310,6 +312,7 @@ Each installation command for each type of node looks like this:
         CERT_TURN_PUBLIC_KEY=$(cat turn-fullchain.pem | base64 -w 0)
 
         sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+            --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
@@ -353,6 +356,7 @@ Each installation command for each type of node looks like this:
 
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
+        --no-tty --install \
         --node-role='media-node' \
         --enabled-modules='observability,v2compatibility,app' \
         --master-node-private-ip='1.2.3.4' \

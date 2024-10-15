@@ -251,6 +251,7 @@ Each installation command for each type of node looks like this:
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+            --no-tty --install \
             --node-role='master-node' \
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
             --openvidu-pro-license='xxxxx' \
@@ -292,6 +293,7 @@ Each installation command for each type of node looks like this:
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+            --no-tty --install \
             --node-role='master-node' \
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
             --openvidu-pro-license='xxxxx' \
@@ -337,6 +339,7 @@ Each installation command for each type of node looks like this:
         CERT_TURN_PUBLIC_KEY=$(cat turn-fullchain.pem | base64 -w 0)
 
         sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+            --no-tty --install \
             --node-role='master-node' \
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
             --openvidu-pro-license='xxxxx' \
@@ -381,6 +384,7 @@ Each installation command for each type of node looks like this:
 
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
+        --no-tty --install \
         --node-role='media-node' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
         --enabled-modules='observability,v2compatibility,app' \
