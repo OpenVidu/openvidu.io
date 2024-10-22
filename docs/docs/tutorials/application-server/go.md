@@ -32,50 +32,41 @@ The application is a simple Go app with a single file `main.go` that exports two
 
 Let's see the code of the `main.go` file:
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go/#L14-L25' target='_blank'>main.go</a>" linenums="14"
-var (
-	SERVER_PORT        = getEnv("SERVER_PORT", "6080") // (1)!
-	LIVEKIT_API_KEY    = getEnv("LIVEKIT_API_KEY", "devkey") // (2)!
-	LIVEKIT_API_SECRET = getEnv("LIVEKIT_API_SECRET", "secret") // (3)!
-)
-
-func getEnv(key, defaultValue string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		return value
-	}
-	return defaultValue
-}
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go/#L15-L17' target='_blank'>main.go</a>" linenums="15"
+var SERVER_PORT string // (1)!
+var LIVEKIT_API_KEY string // (2)!
+var LIVEKIT_API_SECRET string // (3)!
 ```
 
 1. The port where the application will be listening
 2. The API key of LiveKit Server
 3. The API secret of LiveKit Server
 
-The `main.go` file first loads the necessary environment variables:
+The `main.go` file first declares the necessary global variables:
 
 - `SERVER_PORT`: the port where the application will be listening.
 - `LIVEKIT_API_KEY`: the API key of LiveKit Server.
 - `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
-Method `getEnv` simply load each environment variable, giving a default value if not found.
+The server launch takes place in the `main` function at the end of the file, where we first load the environment variables, then set the REST endpoints and finally start the server on `SERVER_PORT`:
 
-The server launch takes place in the `main` function at the end of the file, where we set the REST endpoints and start the server on `SERVER_PORT`:
-
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L71-L77' target='_blank'>main.go</a>" linenums="71"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L63-L70' target='_blank'>main.go</a>" linenums="63"
 func main() {
-	router := gin.Default() // (1)!
-	router.Use(cors.Default()) // (2)!
-	router.POST("/token", createToken) // (3)!
-	router.POST("/livekit/webhook", receiveWebhook) // (4)!
-	router.Run(":" + SERVER_PORT) // (5)!
+	loadEnv() // (1)!
+	router := gin.Default() // (2)!
+	router.Use(cors.Default()) // (3)!
+	router.POST("/token", createToken) // (4)!
+	router.POST("/livekit/webhook", receiveWebhook) // (5)!
+	router.Run(":" + SERVER_PORT) // (6)!
 }
 ```
 
-1. Create a new Gin router
-2. Enable CORS support
-3. Create the `/token` endpoint
-4. Create the `/livekit/webhook` endpoint
-5. Start the server on the `SERVER_PORT`
+1. Load environment variables
+2. Create a new Gin router
+3. Enable CORS support
+4. Create the `/token` endpoint
+5. Create the `/livekit/webhook` endpoint
+6. Start the server on the `SERVER_PORT`
 
 ---
 
@@ -86,7 +77,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 - `roomName`: the name of the Room where the user wants to connect.
 - `participantName`: the name of the participant that wants to connect to the Room.
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L27-L57' target='_blank'>main.go</a>" linenums="27"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L19-L49' target='_blank'>main.go</a>" linenums="19"
 func createToken(context *gin.Context) {
 	var body struct {
 		RoomName        string `json:"roomName"`
@@ -108,7 +99,7 @@ func createToken(context *gin.Context) {
 		RoomJoin: true,
 		Room:     body.RoomName,
 	}
-	at.AddGrant(grant).SetIdentity(body.ParticipantName) // (2)!
+	at.SetVideoGrant(grant).SetIdentity(body.ParticipantName) // (2)!
 
 	token, err := at.ToJWT() // (3)!
 	if err != nil {
@@ -140,7 +131,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L59-L69' target='_blank'>main.go</a>" linenums="59"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L51-L61' target='_blank'>main.go</a>" linenums="51"
 func receiveWebhook(context *gin.Context) {
 	authProvider := auth.NewSimpleKeyProvider( // (1)!
 		LIVEKIT_API_KEY, LIVEKIT_API_SECRET,
