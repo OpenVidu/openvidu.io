@@ -101,7 +101,7 @@ nav:
             - Force traffic to 443 TLS: docs/self-hosting/how-to-guides/force-443-tls.md
             - Enable Webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
             - Enable and Disable Modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
-
+            - Create and configurate AWS Certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
           # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
