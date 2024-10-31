@@ -236,8 +236,6 @@ If method `JwtSecurityTokenHandler#ValidateToken` does rise an exception when va
 
 Finally, we calculate the SHA256 hash of the body and compare it with the `sha256` claim in the token. If they match, it means the webhook event was not tampered and we can definitely trust it.
 
----
-
 --8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
 
 <br>

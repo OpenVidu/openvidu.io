@@ -1,28 +1,3 @@
-##### From production to a local server
+!!! warning "Configure Webhooks"
 
-When developing locally pointing to a production deployment and webhooks events are required by your application, you might face issues because OpenVidu cannot access your local server.
-
-To receive webhooks from OpenVidu on your local machine, you need to expose your local server to the internet. This exposure allows OpenVidu to send webhooks directly to your local server.
-
-The following images illustrate the difference between an unreachable local server and a reachable local server:
-
-<div class="grid cards" markdown>
-
-<figure markdown>
-  ![Unreachable local server](../../../assets/images/tutorials/webhook-fail.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>Unreachable local server</figcaption>
-</figure>
-
-<figure markdown>
-  ![Reachable local server](../../../assets/images/tutorials/webhook-success.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>Reachable local server</figcaption>
-</figure>
-
-</div>
-
-Exposing your local server to the internet is a common practice when developing applications locally. Tools like [Ngrok](https://ngrok.com/){target="\_blank"}, [LocalTunnel](https://localtunnel.github.io/www/){target="\_blank"}, [LocalXpose](https://localxpose.io/){target="\_blank"} and [Zrok](https://zrok.io/){target="\_blank"} can help you achieve this.
-
-These tools provide you with a public URL that forwards requests to your local server. You can use this URL to receive webhooks from OpenVidu. For information on how to add this URL as the webhook URL in the OpenVidu deployment, refer to the following documentation:
-
-- **OpenVidu Local Deployment (Development)**: [Configure webhooks](../../self-hosting/local.md#configuring-webhooks).
-- **OpenVidu Deployments**: [Enable webhooks](../../../self-hosting/how-to-guides/enable-webhooks/).
+    If you are using a [production deployment](#deploy-openvidu), remember to configure the webhook URL to point to your local application server as explained in the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server) section.

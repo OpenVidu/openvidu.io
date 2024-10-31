@@ -156,8 +156,6 @@ We first create a `WebhookReceiver` object using the `LIVEKIT_API_KEY` and `LIVE
 
 Finally, we obtain the `WebhookEvent` object using the `WebhookReceiver#receive` method. It takes the raw body as a String and the Authorization header of the request. We can consume the event as we wish (in this case, we just log it using the error output).
 
----
-
 --8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
 
 <br>

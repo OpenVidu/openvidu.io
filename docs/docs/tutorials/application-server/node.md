@@ -147,8 +147,6 @@ The endpoint receives the incoming webhook with the async method `WebhookReceive
 
 Remember to return a `200` OK response at the end to let LiveKit Server know that the webhook was received correctly.
 
----
-
 --8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
 
 <br>

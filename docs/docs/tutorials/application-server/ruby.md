@@ -146,8 +146,6 @@ If the verification is successful, we can parse the request JSON body and consum
 
 Remember to return a `200` OK response at the end to let LiveKit Server know that the webhook was received correctly.
 
----
-
 --8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
 
 <br>
