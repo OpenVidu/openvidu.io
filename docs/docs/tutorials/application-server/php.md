@@ -9,19 +9,25 @@ This is a minimal server application built for PHP  that allows:
 
 It internally uses [LiveKit PHP SDK](https://github.com/agence104/livekit-server-sdk-php){:target="\_blank"}.
 
-## Running this application
+## Running this tutorial
 
-Download the tutorial code:
+#### 1. Run OpenVidu Server
+
+--8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+
+### 2. Download the tutorial code
 
 ```bash
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
 ```
 
---8<-- "docs/docs/tutorials/shared/php.md"
+### 3. Run the server application
 
-!!! info
+--8<-- "docs/docs/tutorials/shared/application-server/php.md"
 
-    You can run any [Application Client](../application-client/index.md) to test against this server right away.
+### 4. Run a client application to test against this server
+
+--8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
 
 !!! warning
 

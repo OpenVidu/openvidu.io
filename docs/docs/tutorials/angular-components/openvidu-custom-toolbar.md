@@ -25,9 +25,9 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-be
 git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0-beta3
 ```
 
-#### 3. Run the server application
+#### 3. Run a server application
 
---8<-- "docs/docs/tutorials/shared/run-application-server.md"
+--8<-- "docs/docs/tutorials/shared/application-server/application-server-tabs.md"
 
 #### 4. Run the openvidu-custom-toolbar tutorial
 

@@ -9,19 +9,25 @@ This is a minimal server application built for Ruby with [Sinatra](https://sinat
 
 It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby){:target="\_blank"}.
 
-## Running this application
+## Running this tutorial
 
-Download the tutorial code:
+#### 1. Run OpenVidu Server
+
+--8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+
+### 2. Download the tutorial code
 
 ```bash
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
 ```
 
---8<-- "docs/docs/tutorials/shared/ruby.md"
+### 3. Run the server application
 
-!!! info
+--8<-- "docs/docs/tutorials/shared/application-server/ruby.md"
 
-    You can run any [Application Client](../application-client/index.md) to test against this server right away.
+### 4. Run a client application to test against this server
+
+--8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
 
 ## Understanding the code
 
