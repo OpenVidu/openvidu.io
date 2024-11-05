@@ -11,7 +11,7 @@ It internally uses [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-ko
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
 

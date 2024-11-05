@@ -3,7 +3,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 1.  Navigate into the application client directory:
 
     ```bash
-    cd openvidu-livekit-tutorials/application-client/openvidu-angular
+    cd openvidu-livekit-tutorials/application-client/openvidu-ionic
     ```
 
 2.  Install the required dependencies:
@@ -52,7 +52,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
             The WebRTC API demands a secure connection for functionality outside of localhost, necessitating the serving of the application over HTTPS.
 
-        If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your app from other devices in your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
+        If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
 
         Now, let's explore how to run the application on a mobile device:
 

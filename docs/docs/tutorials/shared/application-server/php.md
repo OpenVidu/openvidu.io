@@ -12,3 +12,7 @@ composer install
 ```bash
 composer start
 ```
+
+!!! warning
+
+    LiveKit PHP SDK requires library [BCMath](https://www.php.net/manual/en/book.bc.php){:target="\_blank"}. This is available out-of-the-box in PHP for Windows, but a manual installation might be necessary in other OS. Run **`sudo apt install php-bcmath`** or **`sudo yum install php-bcmath`**

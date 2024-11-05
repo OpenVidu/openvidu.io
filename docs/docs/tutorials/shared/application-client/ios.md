@@ -5,7 +5,8 @@ To run the client application tutorial, you need [Xcode](https://apps.apple.com/
 2. Run the application in an emulator or a physical device by clicking on the menu Product > Run or by ⌘R.
 
 !!! warning "Emulator limitations"
-Publishing the camera track is not supported by iOS Simulator.
+
+    Publishing the camera track is not supported by iOS Simulator.
 
 If you encounter code signing issues, make sure you change the **Team** and **bundle id** from the previous step.
 
@@ -21,14 +22,14 @@ This screen allows you to configure the URLs of the application server and the L
 
 !!! info "Connecting real iOS device to application server running in you local network"
 
-    One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client in a real iOS device and be able to reach the application server very easily without worrying about SSL certificates if they are both running in the same local network. For more information, see section [Accessing your app from other devices in your network](/openvidu-vs-livekit/#accessing-your-app-from-other-devices-in-your-network){target="_blank"}.
+    One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client in a real iOS device and be able to reach the application server very easily without worrying about SSL certificates if they are both running in the same local network. For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){target="_blank"}.
 
 Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
 
 <div class="grid-container">
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/application-clients/join-ios.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/join-ios.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ios.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ios.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/application-clients/room-ios.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="/assets/images/application-clients/room-ios.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-ios.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ios.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
 </div>

@@ -11,7 +11,7 @@ Unfortunately there is no .NET SDK for LiveKit available, so the application has
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
 

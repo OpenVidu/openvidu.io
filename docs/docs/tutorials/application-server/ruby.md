@@ -11,7 +11,7 @@ It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
 

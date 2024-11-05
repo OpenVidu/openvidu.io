@@ -11,7 +11,7 @@ It internally uses [LiveKit PHP SDK](https://github.com/agence104/livekit-server
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
 
@@ -28,10 +28,6 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-be
 ### 4. Run a client application to test against this server
 
 --8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
-
-!!! warning
-
-    LiveKit PHP SDK requires library [BCMath](https://www.php.net/manual/en/book.bc.php){:target="\_blank"}. This is available out-of-the-box in PHP for Windows, but a manual installation might be necessary in other OS. Run **`sudo apt install php-bcmath`** or **`sudo yum install php-bcmath`**
 
 ## Understanding the code
 

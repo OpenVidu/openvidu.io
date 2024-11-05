@@ -11,7 +11,7 @@ It internally uses the [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/se
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
 
