@@ -4,15 +4,15 @@ You will need this certificate to be able to deploy the High Availability deploy
 
 ## Prerequisites
 
-Is important to notice that in your AWS you will need to have acces to Route 53 and Certificate Manager.   
-You will need to have one Hosted Zone in Route 53 to be able to create the certificate.
+Is important to notice that in your AWS you will need to have access to the Certificate Manager. As well as having access to a domain provider.   
+You will need to have one domain to be able to create and vinculate the certificate.
 
 
 ## Creation
 
 === "AWS Certificate creation"
 
-    Those are the steps you need to follow to create the AWS certificate, keep in mind that you need a Hosted Zone.   
+    Those are the steps you need to follow to create the AWS certificate, keep in mind that you need a domain.   
     
     First go to AWS Certificate Manager and request a new public certificate. The following parameter is the most important.
     <figure markdown>
@@ -20,13 +20,19 @@ You will need to have one Hosted Zone in Route 53 to be able to create the certi
     <figcaption>Domain configuration</figcaption>
     </figure>
 
-    You need to replace **`yourdesiredname`** for whatever name you want and **`yourdomininroute53`** for the name of the domain that you have in Route 53.  
+    You need to replace **`yourdesiredname`** for whatever name you want and **`yourdomain`** for the name of the domain that you own.  
 
     Next leave the rest of the parameters as they are and click request.
 
 
 
-The next page will prompt out the certificate status, here you will need to create a record in Route 53 to validate the status, first you will have status pending.
+The next page will prompt out the certificate status, here you will need to create a record in your domain provider to validate the status, first you will have status pending.
+
+=== "Create record in your domain provider"
+
+    Here you will need to create a new CNAME record in the domain you own by using as subdomain the CNAME name until the domain name and the CNAME value as the value of that record.
+
+    In AWS Certificate Manager you can check the CNAME name and value clicking into the certificate you want.
 
 === "Create record in Route 53"
 
@@ -35,7 +41,7 @@ The next page will prompt out the certificate status, here you will need to crea
     <figcaption>Create record in Route 53</figcaption>
     </figure>
 
-    You need to click the button called Create records in Route 53. This will lead you to the next image where you just click Create records and that's it.
+    You need to click the button called **`Create records in Route 53`**. This will lead you to the next image where you just click Create records and that's it.
 
     <figure markdown>
     ![Create record page](../../../../assets/images/self-hosting/how-to-guides/create-configure-cert/create-record-page.png){ .png-img .dark-img }
@@ -45,6 +51,7 @@ The next page will prompt out the certificate status, here you will need to crea
     Please verify that you have a new entry in the records table of the specified Hosted Zone in Route 53 with the CNAME of the certificate you just created.   
     
     Try to refresh until you reach the Issued status in green.
+
 
 Finally when deploying the HA stack in CloudFormation follow these steps
 
@@ -58,7 +65,7 @@ Finally when deploying the HA stack in CloudFormation follow these steps
 
     Those are parameters related to the certificate you just created.    
 
-    You have to fill field **`DomainName`** with the domain name that appears in the certificate that you created, the one that matches yourdesiredname.yourdomininroute53 mentioned earlier.  
+    You have to fill field **`DomainName`** with the domain name that appears in the certificate that you created, the one that matches yourdesiredname.yourdomain mentioned earlier.  
 
     Next for the **`OpenViduCertificateARN`**, you can find it at the top of the same page I mentioned earlier, it is called **`ARN`**, as you can see in the image below.   
     
