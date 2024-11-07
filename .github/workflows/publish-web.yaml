@@ -1,0 +1,44 @@
+name: Publish Web
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "Select the script to execute"
+        required: true
+        type: choice
+        options:
+          - push-new-version
+          - overwrite-latest-version
+          - overwrite-past-version
+      version:
+        description: "Version to publish"
+        required: true
+        type: string
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install mike mkdocs-material mkdocs-glightbox
+
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Run selected script
+        working-directory: ./custom-versioning
+        run: |
+          ./${{ github.event.inputs.script }}.sh ${{ github.event.inputs.version }}
