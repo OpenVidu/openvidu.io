@@ -130,7 +130,7 @@ To build a new version without pushing to GitHub:
 mike deploy 3.0.0
 ```
 
-## Updating tutorials
+## Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_
 
 Whenever any changes are made to the tutorials documentation, theses changes must be also reflected in repository [livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs) so they end up available in [livekit-tutorials.openvidu.io](https://livekit-tutorials.openvidu.io/).
 
