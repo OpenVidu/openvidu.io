@@ -30,8 +30,9 @@ cd ..
 #     exit 1
 # fi
 
-# Fetch all branches
+# Fetch necessary branches for mike to work
 git fetch origin gh-pages
+git fetch origin "$VERSION"
 
 # Delete the version in gh-pages branch
 mike delete --push "${VERSION}" || {
