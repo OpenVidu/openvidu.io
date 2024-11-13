@@ -30,6 +30,9 @@ cd ..
 #     exit 1
 # fi
 
+# Fetch all branches
+git fetch origin gh-pages
+
 # Delete the version in gh-pages branch
 mike delete --push "${VERSION}" || {
     echo 'Failure deleting version with mike'
