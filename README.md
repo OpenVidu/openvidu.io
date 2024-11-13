@@ -26,7 +26,7 @@ Parameters:
 
 ## Versioning
 
-MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for versioning. mike uses GitHub pages to host the documentation, and builds each version on branch `gh-pages`. Install it with `pip install mike`.
+MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for versioning. mike uses GitHub pages to host the documentation, and builds each version on branch `gh-pages`.
 
 The repository must be using MkDocs Material and must be properly setup like explained [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-versioning/). This proper setup includes the following points:
 
@@ -37,18 +37,40 @@ The repository must be using MkDocs Material and must be properly setup like exp
 
 These configurations get the repository ready for versioning.
 
+## Versioning with GitHub Actions
+
+Run action [Publish Web](https://github.com/OpenVidu/livekit-tutorials-docs/actions/workflows/publish-web.yaml):
+
+### Publishing a new version
+
+- **Select the script to execute**: `push-new-version.sh`
+- **Version to publish**: `3.0.0`
+
+### Overwriting the latest version
+
+- **Select the script to execute**: `overwrite-latest-version.sh`
+- **Version to publish**: `3.0.0`
+
+### Overwriting a past version
+
+- **Select the script to execute**: `overwrite-past-version.sh`
+- **Version to publish**: `3.0.0`
+
+## Versioning locally
+
 ### Prerequisites
 
-Before running the scripts below, ensure you have the following packages installed in addition to `mike`:
+- `mike`:
 
--   `mkdocs-material`
--   `mkdocs-glightbox`
+    ```bash
+    pip install mike
+    ```
 
-You can install them using pip:
+- Packages `mkdocs-material` and `mkdocs-glightbox`:
 
-```bash
-pip install mkdocs-material mkdocs-glightbox
-```
+    ```bash
+    pip install mkdocs-material mkdocs-glightbox
+    ```
 
 ### Publishing a new version
 
@@ -110,9 +132,9 @@ mike deploy 3.0.0
 
 ## Updating tutorials
 
-Whenever any changes are made to the **application-client** or **application-server tutorials** documentation, theses changes must be also reflected in [livekit-tutorials-docs repository](https://github.com/OpenVidu/livekit-tutorials-docs).
+Whenever any changes are made to the tutorials documentation, theses changes must be also reflected in repository [livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs) so they end up available in [livekit-tutorials.openvidu.io](https://livekit-tutorials.openvidu.io/).
 
-In order to publish the changes in the tutorials, follow these steps:
+To apply changes in the web *livekit-tutorials.openvidu.io*:
 
--   In this repository, push the changes to the `main` branch and execute the script [Overwriting the latest version](#overwriting-the-latest-version) to update the latest version of the documentation.
--   In the [livekit-tutorials-docs repository](https://github.com/OpenVidu/livekit-tutorials-docs), push the changes to the `main` branch, go to `Actions` and run the workflow named "Publish Web" selecting the `main` branch.
+- In this repository, push the changes to tutorials documentation to the `main` branch and run GitHub Action to [overwrite the latest version](#overwriting-the-latest-version).
+- In respository [livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs), push the changes to the `main` branch, go to `Actions` and run the workflow named "Publish Web" selecting the `main` branch.
