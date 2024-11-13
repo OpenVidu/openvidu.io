@@ -1,5 +1,23 @@
 # openvidu-docs
 
+- [openvidu-docs](#openvidu-docs)
+  - [Development](#development)
+  - [Versioning](#versioning)
+  - [Versioning with GitHub Actions](#versioning-with-github-actions)
+    - [Publishing a new version](#publishing-a-new-version)
+    - [Overwriting the latest version](#overwriting-the-latest-version)
+    - [Overwriting a past version](#overwriting-a-past-version)
+  - [Versioning locally](#versioning-locally)
+    - [Prerequisites](#prerequisites)
+    - [Publishing a new version](#publishing-a-new-version-1)
+    - [Overwriting the latest version](#overwriting-the-latest-version-1)
+    - [Overwriting a past version](#overwriting-a-past-version-1)
+    - [Understanding the versioning script](#understanding-the-versioning-script)
+  - [Testing versioning locally](#testing-versioning-locally)
+  - [Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_](#sync-changes-between-openviduio-and-livekit-tutorialsopenviduio)
+
+## Development
+
 This documentation is built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
 
 1. Create custom Docker image with necessary extra plugins:
@@ -8,13 +26,13 @@ This documentation is built with [MkDocs Material](https://squidfunk.github.io/m
 docker build --pull --no-cache --rm=true -t squidfunk/mkdocs-material .
 ```
 
-2. Serve:
+2. Serve the documentation:
 
 ```bash
 docker run --name=mkdocs --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
 ```
 
-3. Build:
+3. Build the documentation:
 
 ```bash
 docker run --rm -it -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build
