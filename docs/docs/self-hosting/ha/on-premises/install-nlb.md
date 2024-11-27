@@ -423,7 +423,6 @@ Each installation command for each type of node looks like this:
         --no-tty --install \
         --node-role='media-node' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
-        --enabled-modules='observability,v2compatibility,app' \
         --redis-password='xxxxx'
     ```
 
@@ -434,7 +433,7 @@ Each installation command for each type of node looks like this:
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
 
-Some general notes about all commands:
+Some general notes about all the Master Node commands:
 
 - The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
 - In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack), `app` (Default App - OpenVidu Call), and `v2compatibility` (OpenVidu v2 compatibility API).

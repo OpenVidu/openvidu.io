@@ -23,6 +23,123 @@ Simply go to one of your Master Nodes or the only node in a Single Node deployme
 systemctl restart openvidu
 ```
 
+## About modules configuration
+
+If you've installed OpenVidu with all modules enabled, you may not need to change these configurations. But in case you've installed openvidu with some modules disabled, you may need to configure some parameters when enabling them.
+
+=== "app"
+
+    You need to configure the Livekit configuration to send webhooks to the OpenVidu V2 Compatibility service.
+
+    === "Single Node"
+
+        **Location:** `/opt/openvidu/config/livekit.yaml`
+
+        ```yaml
+        webhook:
+            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
+            urls:
+                - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
+        ```
+
+        With this configuration, the Livekit service will send webhooks to the OpenVidu Default App which is necessary.
+
+    === "Elastic"
+
+        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+
+        ```yaml
+        webhook:
+            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
+            urls:
+                - http://master-node:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
+        ```
+
+        With this configuration, the Livekit service will send webhooks to the OpenVidu Default App which is necessary.
+
+    === "High Availability"
+
+        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+
+        ```yaml
+        webhook:
+            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
+            urls:
+                - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
+        ```
+
+        With this configuration, the Livekit service will send webhooks to the OpenVidu Default App which is necessary.
+
+=== "v2compatibility"
+
+    You need to configure the Livekit configuration to send webhooks to the OpenVidu V2 Compatibility service.
+
+    === "Elastic"
+
+        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+
+        ```yaml
+        webhook:
+            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
+            urls:
+                - http://master-node:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
+        ```
+
+        With this configuration, the Livekit service will send webhooks to the OpenVidu V2 Compatibility service which is necessary.
+
+    === "High Availability"
+
+        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+
+        ```yaml
+        webhook:
+            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
+            urls:
+                - http://localhost:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
+        ```
+
+        With this configuration, the Livekit service will send webhooks to the OpenVidu V2 Compatibility service which is necessary.
+
+=== "observability"
+
+    You need the following parameters defined in the `openvidu.env` file.
+    
+    === "Single Node"
+
+        **Location:** `/opt/openvidu/config/openvidu.env`
+
+        ```bash
+        GRAFANA_ADMIN_USERNAME="<GRAFANA_ADMIN_USERNAME>"
+        GRAFANA_ADMIN_PASSWORD="<GRAFANA_ADMIN_PASSWORD>"
+        ```
+
+        With these parameters, you set the username and password for the Grafana admin user.
+    
+    === "Elastic"
+
+        **Location:** `/opt/openvidu/config/cluster/openvidu.env`
+
+        ```bash
+        GRAFANA_ADMIN_USERNAME="<GRAFANA_ADMIN_USERNAME>"
+        GRAFANA_ADMIN_PASSWORD="<GRAFANA_ADMIN_PASSWORD>"
+        ```
+
+        With these parameters, you set the username and password for the Grafana admin user.
+
+    === "High Availability"
+
+        **Location:** `/opt/openvidu/config/cluster/openvidu.env`
+
+        ```bash
+        GRAFANA_ADMIN_USERNAME="<GRAFANA_ADMIN_USERNAME>"
+        GRAFANA_ADMIN_PASSWORD="<GRAFANA_ADMIN_PASSWORD>"
+        ```
+
+        With these parameters, you set the username and password for the Grafana admin user.
+
+
+These configurations should be valid just by copying and pasting them into the `livekit.yaml` file. If you want to understand the `${openvidu.VARIABLE:?mandatory}` syntax, please refer to the [Configuration](../configuration/in-depth.md){:target="_blank"} section.
+
 ## Troubleshooting
 
 On any problem, check these sections:

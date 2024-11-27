@@ -7,4 +7,5 @@ sudo su
 systemctl stop openvidu
 rm -rf /opt/openvidu/
 rm /etc/systemd/system/openvidu.service
+rm /etc/sysctl.d/50-openvidu.conf
 ```

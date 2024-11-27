@@ -358,7 +358,6 @@ Each installation command for each type of node looks like this:
     sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --node-role='media-node' \
-        --enabled-modules='observability,v2compatibility,app' \
         --master-node-private-ip='1.2.3.4' \
         --redis-password='xxxxx'
     ```
@@ -370,7 +369,7 @@ Each installation command for each type of node looks like this:
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
 
-Some notes about all commands:
+Some notes about the Master Node installation command:
 
 - The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
 - At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack), `app` (Default App - OpenVidu Call), and `v2compatibility` (OpenVidu v2 compatibility API).

@@ -116,6 +116,18 @@ The number of Media Nodes can scale up or down based on the system load. You can
 
     The **ScaleTargetCPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html){:target="_blank"}.
 
+### S3 bucket for application data, cluster data and recordings
+
+You can specify two S3 buckets to store the application data, cluster data, and recordings.
+
+=== "S3 bucket for application data and recordings"
+
+    The parameters in this section may look like this:
+
+    ![S3 bucket for application data and recordings](../../../../assets/images/self-hosting/ha/aws/aws-s3-bucket.png)
+
+    If these parameters are not specified, new S3 buckets will be created by the CloudFormation stack.
+
 ### VPC Configuration
 
 In this section, you need to specify the VPC and Subnet configuration for the deployment.

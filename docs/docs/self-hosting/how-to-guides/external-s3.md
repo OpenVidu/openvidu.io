@@ -52,7 +52,7 @@ EXTERNAL_S3_ENDPOINT=https://s3.eu-west-1.amazonaws.com
 EXTERNAL_S3_ACCESS_KEY=<YOUR_AWS_ACCESS_KEY>
 EXTERNAL_S3_SECRET_KEY=<YOUR_AWS_SECRET_KEY>
 EXTERNAL_S3_REGION=eu-west-1
-EXTERNAL_S3_PATH_STYLE_ACCESS=false
+EXTERNAL_S3_PATH_STYLE_ACCESS=true
 EXTERNAL_S3_BUCKET_APP_DATA=my-openvidu-bucket
 
 # For High Availability deployments only
@@ -61,6 +61,20 @@ EXTERNAL_S3_BUCKET_CLUSTER_DATA=my-openvidu-cluster-bucket
 
 !!! warning
     Note that the region must be specified in the `EXTERNAL_S3_ENDPOINT` parameter for AWS S3. This may not be required for other S3 providers but is necessary for AWS S3.
+
+## About the Path-Style parameter
+
+The `EXTERNAL_S3_PATH_STYLE_ACCESS` parameter is used to specify whether to use path-style access if `true` or virtual-hosted-style access if `false`. Check this documentation for more information: [Amazon S3 Path Style Access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html){:target="_blank"}
+
+ This parameter requires a specific value depending on the S3 provider. Here is a table with some examples:
+
+| S3 Provider | `EXTERNAL_S3_PATH_STYLE_ACCESS` Value |
+|-------------|--------------------------------------|
+| AWS S3      | `true` or `false`  Recommend `true` |
+| MinIO | `false` |
+| DigitalOcean Spaces | `false` |
+
+Usually the value `false` is compatible with all S3 providers, but some providers may require `true`, so check the documentation of your S3 provider to confirm the correct value.
 
 ## Troubleshooting
 
