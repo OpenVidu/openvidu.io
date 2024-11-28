@@ -242,6 +242,7 @@ Each installation command for each type of node looks like this:
             --minio-secret-key='xxxxx' \
             --mongo-admin-user='xxxxx' \
             --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
             --default-app-user='xxxxx' \
@@ -283,6 +284,7 @@ Each installation command for each type of node looks like this:
             --minio-secret-key='xxxxx' \
             --mongo-admin-user='xxxxx' \
             --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
             --default-app-user='xxxxx' \
@@ -328,6 +330,7 @@ Each installation command for each type of node looks like this:
             --minio-secret-key='xxxxx' \
             --mongo-admin-user='xxxxx' \
             --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
             --default-app-user='xxxxx' \

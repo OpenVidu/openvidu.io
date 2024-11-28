@@ -145,6 +145,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --minio-secret-key='xxxxx' \
         --mongo-admin-user='xxxxx' \
         --mongo-admin-password='xxxxx' \
+        --mongo-replica-set-key='xxxxx' \
         --grafana-admin-user='xxxxx' \
         --grafana-admin-password='xxxxx' \
         --default-app-user='xxxxx' \
@@ -176,6 +177,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --minio-secret-key='xxxxx' \
         --mongo-admin-user='xxxxx' \
         --mongo-admin-password='xxxxx' \
+        --mongo-replica-set-key='xxxxx' \
         --grafana-admin-user='xxxxx' \
         --grafana-admin-password='xxxxx' \
         --default-app-user='xxxxx' \
@@ -214,6 +216,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --minio-secret-key='xxxxx' \
         --mongo-admin-user='xxxxx' \
         --mongo-admin-password='xxxxx' \
+        --mongo-replica-set-key='xxxxx' \
         --grafana-admin-user='xxxxx' \
         --grafana-admin-password='xxxxx' \
         --default-app-user='xxxxx' \
