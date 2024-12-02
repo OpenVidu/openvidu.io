@@ -18,7 +18,7 @@ It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 ```
 
 ### 3. Run the server application

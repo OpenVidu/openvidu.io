@@ -18,7 +18,7 @@ It internally uses [LiveKit Python SDK](https://github.com/livekit/python-sdks){
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 ```
 
 ### 3. Run the server application

@@ -20,7 +20,7 @@ It uses the [LiveKit JS SDK](https://docs.livekit.io/client-sdk-js){:target="\_b
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 ```
 
 ### 3. Run a server application

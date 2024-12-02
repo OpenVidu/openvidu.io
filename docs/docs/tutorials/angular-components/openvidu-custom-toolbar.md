@@ -21,8 +21,8 @@ Customizing the toolbar is made simple with the **ToolbarDirective**, which offe
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0
 ```
 
 #### 3. Run a server application

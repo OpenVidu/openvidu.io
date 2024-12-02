@@ -20,8 +20,8 @@ Customizing the video stream component is made simple with the **StreamDirective
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-beta3
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0-beta3
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0
 ```
 
 #### 3. Run a server application
