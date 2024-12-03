@@ -74,7 +74,7 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     [:octicons-arrow-right-24: .NET Tutorial](../tutorials/application-server/dotnet.md)
 
-    > There is no .NET SDK for LiveKit available. Visit the tutorial to learn how to create tokens and receive Webhook events directly from your .NET application server.
+    [:octicons-arrow-right-24: GitHub Repository](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
