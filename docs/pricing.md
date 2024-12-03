@@ -25,7 +25,7 @@ hide:
   <tr>
     <td class="first-column border-right">Price</td>
     <td class="border-right price-cell">Free</td>
-    <td colspan="2" class="border-right price-cell"><div><span class="strikethrough" style="font-weight: initial; font-size: 1.3em"><span style="font-family: system-ui;">0.0006$</span> core/minute</span></div><div>Free while in beta! <a href="#free-tier-info">*</a></div></td>
+    <td colspan="2" class="border-right price-cell"><div><span style="font-weight: bold"><span style="font-family: system-ui; font-size: 1.3em">0.0006$</span> core/minute</span></div></td>
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
@@ -58,16 +58,6 @@ hide:
     <td><a class="md-button" href="/docs/self-hosting/ha/">Install</a></td>
   </tr>
 </table>
-
-<div id="free-tier-info" markdown>
-
-!!! info "About OpenVidu Pro free beta period"
-
-    - OpenVidu Pro is currently in **beta** and will remain completely free until GA.
-    - All users running a beta version of OpenVidu Pro **will be notified** weeks before the free beta period ends, giving time to upgrade to the final GA version if desired.
-    - Active OpenVidu Pro clusters in beta version **will eventually shut down automatically** after the free beta period ends.
-
-</div>
 
 ## How is OpenVidu Pro priced?
 

@@ -570,25 +570,6 @@ a#account-btn .user-name {
   margin-left: 10px;
 }
 
-.strikethrough {
-  position: relative;
-}
-.strikethrough:before {
-  position: absolute;
-  content: "";
-  color: #c9302cc2;
-  left: 0;
-  top: 50%;
-  right: 0;
-  border-top: 2px solid;
-  border-color: inherit;
-  -webkit-transform: rotate(-5deg);
-  -moz-transform: rotate(-5deg);
-  -ms-transform: rotate(-5deg);
-  -o-transform: rotate(-5deg);
-  transform: rotate(-5deg);
-}
-
 .md-banner {
   background-color: #0088aa;
 }
