@@ -30,11 +30,11 @@ And now it is time to take the next big step: we are now integrating [**LiveKit*
 
 Being now based on LiveKit's fantastic stack, OpenVidu 3.0.0 incorporates the latest innovations and optimizations in real-time media. Here are some of the most important low-level features that will improve your application performance:
 
-- [Simulcast](https://docs.livekit.io/realtime/client/publish/#Video-simulcast){target="_blank"} for VP8 and H264 video codecs.
-- [Scalable Video Coding (SVC)](https://docs.livekit.io/guides/video-codecs/#Supported-codecs){target="_blank"} for VP9 and AV1 video codecs.
-- [Dynamic Broadcasting (Dynacast)](https://docs.livekit.io/realtime/client/publish/#Dynamic-broadcasting){target="_blank"} for minimizing bandwidth consumption. It pauses the publication of any video layer that is not being consumed by any subscriber.
-- [Adaptive Stream](https://docs.livekit.io/realtime/client/receive/#Adaptive-stream){target="_blank"} for UI-based video quality optimization. It sends to each user the minimum bits needed to display high-quality rendering based on the size of the video player. If a video player is hidden, the video stream is paused. This allows you to scale your application to large video rooms with thousands of users.
-- [Audio RED (REDundant Encoding)](https://docs.livekit.io/guides/audio-red){target="_blank"} and [Hi-fi audio](https://docs.livekit.io/guides/hi-fi-audio/){target="_blank"} for crisp, clear, high-quality audio streams.
+- [Simulcast](https://docs.livekit.io/home/client/tracks/publish/#Video-simulcast){target="_blank"} for VP8 and H264 video codecs.
+- [Scalable Video Coding (SVC)](https://docs.livekit.io/recipes/video-codecs/#supported-codecs){target="_blank"} for VP9 and AV1 video codecs.
+- [Dynamic Broadcasting (Dynacast)](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){target="_blank"} for minimizing bandwidth consumption. It pauses the publication of any video layer that is not being consumed by any subscriber.
+- [Adaptive Stream](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){target="_blank"} for UI-based video quality optimization. It sends to each user the minimum bits needed to display high-quality rendering based on the size of the video player. If a video player is hidden, the video stream is paused. This allows you to scale your application to large video rooms with thousands of users.
+- [Audio RED (REDundant Encoding)](https://docs.livekit.io/recipes/audio-red/){target="_blank"} and [Hi-fi audio](https://docs.livekit.io/recipes/hi-fi-audio/){target="_blank"} for crisp, clear, high-quality audio streams.
 - [Audio DTX (Discontinuous Transmission)](https://bloggeek.me/webrtcglossary/dtx/){target="_blank"} for detecting silence in audio tracks and reducing their bandwidth.
 - [End-To-End Encryption (E2EE)](https://en.wikipedia.org/wiki/End-to-end_encryption){target="_blank"} for the ultimate secure communication.
 - [WHIP](https://millicast.medium.com/whip-the-magic-bullet-for-webrtc-media-ingest-57c2b98fb285){target="_blank"} for low-latency media ingestion.
