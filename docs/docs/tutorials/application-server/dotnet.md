@@ -122,9 +122,9 @@ app.MapPost(
         )
         {
             var token = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET) // (2)!
-                .WithIdentity(participantName) // (3)!
-                .WithName(participantName)
-                .WithGrants(new VideoGrants{ RoomJoin = true, Room = roomName }); // (4)!
+                .WithIdentity(participantName.ToString()) // (3)!
+                .WithName(participantName.ToString())
+                .WithGrants(new VideoGrants{ RoomJoin = true, Room = roomName.ToString() }); // (4)!
 
             var jwt = token.ToJwt(); // (5)!
             return Results.Json(new { token = jwt }); // (6)!
