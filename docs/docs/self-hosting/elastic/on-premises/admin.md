@@ -71,13 +71,13 @@ Depending on the node type, you will see different services running.
     promtail     docker.io/grafana/promtail                     "/usr/bin/promtail -…"   promtail     53 seconds ago   Up 52 seconds
     ```
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-checking-logs.md"
+--8<-- "shared/self-hosting/openvidu-pro-checking-logs.md"
 
 ## Adding Media Nodes
 
 To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](install.md#media-node) on the new Media Node.
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-removing-media-nodes.md"
+--8<-- "shared/self-hosting/openvidu-pro-removing-media-nodes.md"
 
 ## Changing the configuration
 

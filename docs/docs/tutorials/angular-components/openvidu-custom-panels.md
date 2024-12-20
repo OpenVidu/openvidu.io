@@ -15,7 +15,7 @@ Customizing the videoconference panels is made simple with the **PanelDirective*
 
 #### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 #### 2. Download the tutorial code
 
@@ -26,7 +26,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0
 
 #### 3. Run a server application
 
---8<-- "docs/docs/tutorials/shared/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/application-server-tabs.md"
 
 #### 4. Run the openvidu-custom-panels tutorial
 
@@ -54,19 +54,19 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/components/custom-toolbar.png){ loading=lazy } -->
 
---8<-- "docs/docs/tutorials/shared/testing-other-devices.md"
+--8<-- "shared/tutorials/testing-other-devices.md"
 
 ## Understanding the code
 
---8<-- "docs/docs/tutorials/shared/openvidu-components-files.md"
+--8<-- "shared/tutorials/openvidu-components-files.md"
 
 ---
 
---8<-- "docs/docs/tutorials/shared/openvidu-components-install.md"
+--8<-- "shared/tutorials/openvidu-components-install.md"
 
 === "main.ts"
 
-    --8<-- "docs/docs/tutorials/shared/openvidu-components-import.md"
+    --8<-- "shared/tutorials/openvidu-components-import.md"
 
 === "app.component.ts"
 
@@ -172,11 +172,11 @@ Once the server is up and running, you can test the application by visiting [`ht
     - `onTokenRequested` method that fires when the VideoconferenceComponent requests a token to connect to the OpenVidu Room.
     - `getToken` method that requests a token to the server application.
 
-    --8<-- "docs/docs/tutorials/shared/configure-urls.md"
+    --8<-- "shared/tutorials/configure-urls.md"
 
 === "styles.scss"
 
-    --8<-- "docs/docs/tutorials/shared/openvidu-components-styles.md"
+    --8<-- "shared/tutorials/openvidu-components-styles.md"
 
 ### Customizing the panels
 

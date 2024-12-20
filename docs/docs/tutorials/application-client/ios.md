@@ -15,7 +15,7 @@ It uses the [LiveKit Swift SDK](https://docs.livekit.io/client-sdk-swift/documen
 
 ### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -25,11 +25,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run a server application
 
---8<-- "docs/docs/tutorials/shared/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/application-server-tabs.md"
 
 ### 4. Run the client application
 
---8<-- "docs/docs/tutorials/shared/application-client/ios.md"
+--8<-- "shared/tutorials/application-client/ios.md"
 
 ## Understanding the Code
 

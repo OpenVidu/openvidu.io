@@ -13,7 +13,7 @@ It internally uses [LiveKit Python SDK](https://github.com/livekit/python-sdks){
 
 ### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -23,11 +23,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run the server application
 
---8<-- "docs/docs/tutorials/shared/application-server/python.md"
+--8<-- "shared/tutorials/application-server/python.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/application-client-tabs.md"
 
 ## Understanding the code
 
@@ -153,6 +153,6 @@ Inside the `receive_webhook` handler we:
 2. Obtain the webhook event using the `WebhookReceiver#receive` method. It expects the raw body of the request and the `Authorization` header. In this way, we can validate the event to confirm it is actually coming from our LiveKit Server.
 3. If everything is ok, you can consume the event as you whish (in this case, we just log it).
 
---8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>

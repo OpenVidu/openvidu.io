@@ -14,7 +14,7 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 
 #### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 

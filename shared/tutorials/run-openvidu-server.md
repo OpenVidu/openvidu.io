@@ -1,6 +1,6 @@
 === "Run OpenVidu locally"
 
-    --8<-- "docs/docs/tutorials/shared/run-openvidu-locally.md"
+    --8<-- "shared/tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 

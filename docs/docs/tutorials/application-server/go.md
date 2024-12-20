@@ -13,7 +13,7 @@ It internally uses the [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/se
 
 ### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -23,11 +23,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run the server application
 
---8<-- "docs/docs/tutorials/shared/application-server/go.md"
+--8<-- "shared/tutorials/application-server/go.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/application-client-tabs.md"
 
 ## Understanding the code
 
@@ -161,6 +161,6 @@ func receiveWebhook(context *gin.Context) {
 2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](https://docs.livekit.io/realtime/server/webhooks/){:target="\_blank"}.
 3. Consume the event as you whish.
 
---8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>

@@ -34,7 +34,7 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
 
         <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
 
-        --8<-- "docs/docs/tutorials/shared/testing-other-devices.md"
+        --8<-- "shared/tutorials/testing-other-devices.md"
 
     === ":fontawesome-solid-mobile-screen-button:{.icon .lg-icon .tab-icon} Mobile"
 

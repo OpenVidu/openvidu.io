@@ -13,7 +13,7 @@ Introducing **OpenVidu Call**, the premier videoconference application that show
 
 #### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 !!! info "Accessible via openvidu-local-deployment"
 

@@ -13,7 +13,7 @@ It internally uses the [LiveKit .NET SDK](https://github.com/pabloFuente/livekit
 
 ### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -23,11 +23,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run the server application
 
---8<-- "docs/docs/tutorials/shared/application-server/dotnet.md"
+--8<-- "shared/tutorials/application-server/dotnet.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/application-client-tabs.md"
 
 ## Understanding the code
 
@@ -200,6 +200,6 @@ Then we need the raw body as a String and the `Authorization` header of the requ
 
 Remember to return a `200` OK response at the end to let LiveKit Server know that the webhook was received correctly.
 
---8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>
