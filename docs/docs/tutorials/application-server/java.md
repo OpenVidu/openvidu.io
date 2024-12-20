@@ -1,11 +1,11 @@
 # Java
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/java){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/java){ .md-button target=\_blank }
 
 This is a minimal server application built for Java with [Spring Boot](https://spring.io/){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple Spring Boot app with a single controller `Controller.java` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `Controller.java` file:
 
-```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L19-L27' target='_blank'>Controller.java</a>" linenums="19"
+```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L19-L27' target='_blank'>Controller.java</a>" linenums="19"
 @CrossOrigin(origins = "*") // (1)!
 @RestController // (2)!
 public class Controller {
@@ -60,13 +60,13 @@ public class Controller {
 
 Starting by the top, the `Controller` class has the following annotations:
 
-- `@CrossOrigin(origins = "*")`: allows the application to be accessed from any domain.
-- `@RestController`: marks the class as a controller where every method returns a domain object instead of a view.
+-   `@CrossOrigin(origins = "*")`: allows the application to be accessed from any domain.
+-   `@RestController`: marks the class as a controller where every method returns a domain object instead of a view.
 
 Going deeper, the `Controller` class has the following fields:
 
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server. It is injected from the property `livekit.api.key` defined in [`application.properties`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/java/src/main/resources/application.properties#L6){:target="\_blank"} using the `@Value("${livekit.api.key}")` annotation.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server. It is injected from the the property `livekit.api.secret` defined in [`application.properties`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/java/src/main/resources/application.properties#L7){:target="\_blank"} using the `@Value("${livekit.api.secret}")` annotation.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server. It is injected from the property `livekit.api.key` defined in [`application.properties`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/java/src/main/resources/application.properties#L6){:target="\_blank"} using the `@Value("${livekit.api.key}")` annotation.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server. It is injected from the the property `livekit.api.secret` defined in [`application.properties`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/java/src/main/resources/application.properties#L7){:target="\_blank"} using the `@Value("${livekit.api.secret}")` annotation.
 
 ---
 
@@ -74,10 +74,10 @@ Going deeper, the `Controller` class has the following fields:
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L33-L48' target='_blank'>Controller.java</a>" linenums="33"
+```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L33-L48' target='_blank'>Controller.java</a>" linenums="33"
 @PostMapping(value = "/token")
 public ResponseEntity<Map<String, String>> createToken(@RequestBody Map<String, String> params) {
 	String roomName = params.get("roomName");
@@ -116,7 +116,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L50-L60' target='_blank'>Controller.java</a>" linenums="50"
+```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L50-L60' target='_blank'>Controller.java</a>" linenums="50"
 @PostMapping(value = "/livekit/webhook", consumes = "application/webhook+json")
 public ResponseEntity<String> receiveWebhook(@RequestHeader("Authorization") String authHeader, @RequestBody String body) { // (1)!
 	WebhookReceiver webhookReceiver = new WebhookReceiver(LIVEKIT_API_KEY, LIVEKIT_API_SECRET); // (2)!

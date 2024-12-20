@@ -1,11 +1,11 @@
 # Go
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/go){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/go){ .md-button target=\_blank }
 
-This is a minimal server application built for Go with [Gin](https://gin-gonic.com/){:target="\_blank"}  that allows:
+This is a minimal server application built for Go with [Gin](https://gin-gonic.com/){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses the [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple Go app with a single file `main.go` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `main.go` file:
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go/#L15-L17' target='_blank'>main.go</a>" linenums="15"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/go/main.go/#L15-L17' target='_blank'>main.go</a>" linenums="15"
 var SERVER_PORT string // (1)!
 var LIVEKIT_API_KEY string // (2)!
 var LIVEKIT_API_SECRET string // (3)!
@@ -50,13 +50,13 @@ var LIVEKIT_API_SECRET string // (3)!
 
 The `main.go` file first declares the necessary global variables:
 
-- `SERVER_PORT`: the port where the application will be listening.
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `SERVER_PORT`: the port where the application will be listening.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 The server launch takes place in the `main` function at the end of the file, where we first load the environment variables, then set the REST endpoints and finally start the server on `SERVER_PORT`:
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L63-L70' target='_blank'>main.go</a>" linenums="63"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/go/main.go#L63-L70' target='_blank'>main.go</a>" linenums="63"
 func main() {
 	loadEnv() // (1)!
 	router := gin.Default() // (2)!
@@ -80,10 +80,10 @@ func main() {
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L19-L49' target='_blank'>main.go</a>" linenums="19"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/go/main.go#L19-L49' target='_blank'>main.go</a>" linenums="19"
 func createToken(context *gin.Context) {
 	var body struct {
 		RoomName        string `json:"roomName"`
@@ -137,7 +137,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/go/main.go#L51-L61' target='_blank'>main.go</a>" linenums="51"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/go/main.go#L51-L61' target='_blank'>main.go</a>" linenums="51"
 func receiveWebhook(context *gin.Context) {
 	authProvider := auth.NewSimpleKeyProvider( // (1)!
 		LIVEKIT_API_KEY, LIVEKIT_API_SECRET,

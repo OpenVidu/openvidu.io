@@ -1,6 +1,6 @@
 # openvidu-additional-panels
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-additional-panels){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-additional-panels){ .md-button target=\_blank }
 
 The **openvidu-additional-panels** tutorial demonstrates how to add new panels to the videoconference, providing a more tailored user experience.
 
@@ -227,47 +227,47 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<!-- OpenVidu Video Conference Component -->
-		<ov-videoconference
-			[token]="token"
-			[livekitUrl]="LIVEKIT_URL"
-			[toolbarDisplayRoomName]="false"
-			(onTokenRequested)="onTokenRequested($event)"
-		>
-			<!-- Additional Toolbar Buttons -->
-			<div *ovToolbarAdditionalPanelButtons style="text-align: center;">
-				<button mat-icon-button (click)="toggleMyPanel('my-panel1')">
-					<mat-icon>360</mat-icon>
-				</button>
-				<button mat-icon-button (click)="toggleMyPanel('my-panel2')">
-					<mat-icon>star</mat-icon>
-				</button>
-			</div>
+    selector: "app-root",
+    template: `
+        <!-- OpenVidu Video Conference Component -->
+        <ov-videoconference
+            [token]="token"
+            [livekitUrl]="LIVEKIT_URL"
+            [toolbarDisplayRoomName]="false"
+            (onTokenRequested)="onTokenRequested($event)"
+        >
+            <!-- Additional Toolbar Buttons -->
+            <div *ovToolbarAdditionalPanelButtons style="text-align: center;">
+                <button mat-icon-button (click)="toggleMyPanel('my-panel1')">
+                    <mat-icon>360</mat-icon>
+                </button>
+                <button mat-icon-button (click)="toggleMyPanel('my-panel2')">
+                    <mat-icon>star</mat-icon>
+                </button>
+            </div>
 
-			<!-- Additional Panels -->
-			<div *ovAdditionalPanels id="my-panels">
-				@if (showExternalPanel) {
-				<div id="my-panel1">
-					<h2>NEW PANEL 1</h2>
-					<p>This is my new additional panel</p>
-				</div>
-				} @if (showExternalPanel2) {
-				<div id="my-panel2">
-					<h2>NEW PANEL 2</h2>
-					<p>This is another new panel</p>
-				</div>
-				}
-			</div>
-		</ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
+            <!-- Additional Panels -->
+            <div *ovAdditionalPanels id="my-panels">
+                @if (showExternalPanel) {
+                <div id="my-panel1">
+                    <h2>NEW PANEL 1</h2>
+                    <p>This is my new additional panel</p>
+                </div>
+                } @if (showExternalPanel2) {
+                <div id="my-panel2">
+                    <h2>NEW PANEL 2</h2>
+                    <p>This is another new panel</p>
+                </div>
+                }
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule, MatIconButton, MatIcon]
 })
 export class AppComponent {
-	// ...
+    // ...
 }
 ```
 

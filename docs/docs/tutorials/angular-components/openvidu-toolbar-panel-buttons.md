@@ -1,6 +1,6 @@
 # openvidu-toolbar-panel-buttons
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target=\_blank }
 
 The **openvidu-toolbar-panel-buttons** tutorial demonstrates how to add custom buttons to the right part of the default toolbar in the OpenVidu Components Angular library.
 
@@ -185,27 +185,27 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<ov-videoconference
-			[token]="token"
-			[livekitUrl]="LIVEKIT_URL"
-			[toolbarDisplayRoomName]="false"
-			(onTokenRequested)="onTokenRequested($event)"
-		>
-			<div *ovToolbarAdditionalPanelButtons style="text-align: center;">
-				<button mat-icon-button (click)="onButtonClicked()">
-					<mat-icon>star</mat-icon>
-				</button>
-			</div>
-		</ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
+    selector: "app-root",
+    template: `
+        <ov-videoconference
+            [token]="token"
+            [livekitUrl]="LIVEKIT_URL"
+            [toolbarDisplayRoomName]="false"
+            (onTokenRequested)="onTokenRequested($event)"
+        >
+            <div *ovToolbarAdditionalPanelButtons style="text-align: center;">
+                <button mat-icon-button (click)="onButtonClicked()">
+                    <mat-icon>star</mat-icon>
+                </button>
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule, MatIconButton, MatIcon]
 })
 export class AppComponent {
-	// ...
+    // ...
 }
 ```
 

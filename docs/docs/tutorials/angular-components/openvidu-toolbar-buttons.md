@@ -1,11 +1,10 @@
 # openvidu-toolbar-buttons
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-toolbar-buttons){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-toolbar-buttons){ .md-button target=\_blank }
 
 The **openvidu-toolbar-buttons** tutorial demonstrates how to add custom buttons to the central part of the default toolbar in the OpenVidu Components Angular library.
 
 Adding toolbar buttons is made simple with the **ToolbarAdditionalButtonsDirective**, which offers a straightforward way to add custom buttons to the **ToolbarComponent**.
-
 
 <figure markdown>
   ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-toolbar-buttons.svg){ loading=lazy .svg-img  .mkdocs-img}
@@ -59,11 +58,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-
 --8<-- "docs/docs/tutorials/shared/openvidu-components-files.md"
 
 ---
-
 
 --8<-- "docs/docs/tutorials/shared/openvidu-components-install.md"
 
@@ -100,7 +97,7 @@ Once the server is up and running, you can test the application by visiting [`ht
       `,
       styles: [''],
       standalone: true,
-	    imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
+        imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
     })
     export class AppComponent {
       // For local development, leave these variables empty
@@ -191,7 +188,6 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     --8<-- "docs/docs/tutorials/shared/openvidu-components-styles.md"
 
-
 ### Adding additional buttons to the toolbar
 
 OpenVidu Components Angular provides a directive called `*ovToolbarAdditionalButtons` that allows you to add custom buttons to the toolbar.
@@ -200,30 +196,25 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-  selector: 'app-root',
-  template:`
-    <ov-videoconference
-      [token]="token"
-      [livekitUrl]="LIVEKIT_URL"
-      (onTokenRequested)="onTokenRequested($event)"
-    >
-      <div *ovToolbarAdditionalButtons style="text-align: center;">
-        <button mat-icon-button (click)="toggleVideo()">
-          <mat-icon>videocam</mat-icon>
-        </button>
-        <button mat-icon-button (click)="toggleAudio()">
-          <mat-icon>mic</mat-icon>
-        </button>
-      </div>
-
-    </ov-videoconference>
-  `,
-  styles: [''],
-  standalone: true,
-  imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
+    selector: "app-root",
+    template: `
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <div *ovToolbarAdditionalButtons style="text-align: center;">
+                <button mat-icon-button (click)="toggleVideo()">
+                    <mat-icon>videocam</mat-icon>
+                </button>
+                <button mat-icon-button (click)="toggleAudio()">
+                    <mat-icon>mic</mat-icon>
+                </button>
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule, MatIconButton, MatIcon]
 })
 export class AppComponent {
-  // ...
+    // ...
 }
 ```
 

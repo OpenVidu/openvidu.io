@@ -1,11 +1,11 @@
 # Rust
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/rust){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/rust){ .md-button target=\_blank }
 
 This is a minimal server application built for Rust with [Axum](https://github.com/tokio-rs/axum){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses the [LiveKit Rust SDK](https://github.com/livekit/rust-sdks){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple Rust app with a single file `main.rs` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `main.rs` file:
 
-```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/rust/src/main.rs#L1-L36' target='_blank'>main.rs</a>" linenums="1"
+```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/rust/src/main.rs#L1-L36' target='_blank'>main.rs</a>" linenums="1"
 use axum::http::HeaderMap;
 use axum::{
     extract::Json, http::header::CONTENT_TYPE, http::Method, http::StatusCode, routing::post,
@@ -85,9 +85,9 @@ async fn main() {
 
 The `main.rs` file imports the required dependencies and loads the necessary environment variables:
 
-- `SERVER_PORT`: the port where the application will be listening.
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `SERVER_PORT`: the port where the application will be listening.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 Then CORS support is enabled and the endpoints are defined. Finally the `axum` application is initialized on the specified port.
 
@@ -97,10 +97,10 @@ Then CORS support is enabled and the endpoints are defined. Finally the `axum` a
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/rust/src/main.rs#L38-L88' target='_blank'>main.rs</a>" linenums="38"
+```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/rust/src/main.rs#L38-L88' target='_blank'>main.rs</a>" linenums="38"
 async fn create_token(payload: Option<Json<Value>>) -> (StatusCode, Json<Value>) {
     if let Some(payload) = payload {
         let livekit_api_key = env::var("LIVEKIT_API_KEY").unwrap_or("devkey".to_string());
@@ -176,7 +176,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/rust/src/main.rs#L90-L126' target='_blank'>main.rs</a>" linenums="90"
+```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/rust/src/main.rs#L90-L126' target='_blank'>main.rs</a>" linenums="90"
 async fn receive_webhook(headers: HeaderMap, body: String) -> (StatusCode, String) {
     let livekit_api_key = env::var("LIVEKIT_API_KEY").unwrap_or("devkey".to_string());
     let livekit_api_secret = env::var("LIVEKIT_API_SECRET").unwrap_or("secret".to_string());

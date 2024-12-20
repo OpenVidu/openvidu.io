@@ -1,6 +1,6 @@
 # openvidu-toggle-hand
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-toggle-hand){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-toggle-hand){ .md-button target=\_blank }
 
 The **openvidu-toggle-hand** tutorial demonstrates how to add a toggle hand feature to the OpenVidu Components Angular library.
 
@@ -62,7 +62,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 --8<-- "docs/docs/tutorials/shared/openvidu-components-files.md"
 
-- `app/models/participant-app.model.ts`: Contains the `ParticipantAppModel` class that extends the `ParticipantModel` class to add the ability to raise and lower the hand.
+-   `app/models/participant-app.model.ts`: Contains the `ParticipantAppModel` class that extends the `ParticipantModel` class to add the ability to raise and lower the hand.
 
 ---
 
@@ -279,7 +279,6 @@ Once the server is up and running, you can test the application by visiting [`ht
 === "styles.scss"
 
     --8<-- "docs/docs/tutorials/shared/openvidu-components-styles.md"
-
 
 <!-- ## Deploying openvidu-toggle-hand
 

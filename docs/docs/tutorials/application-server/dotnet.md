@@ -1,11 +1,11 @@
 # .NET
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/dotnet){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/dotnet){ .md-button target=\_blank }
 
 This is a minimal server application built for .NET with [ASP.NET Core Minimal APIs](https://docs.microsoft.com/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses the [LiveKit .NET SDK](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple [ASP.NET Core Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){target=\_blank} app with a single file `Program.cs` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code `Program.cs` file:
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L1-L36' target='_blank'>Program.cs</a>" linenums="1"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/dotnet/Program.cs#L1-L36' target='_blank'>Program.cs</a>" linenums="1"
 using System.Text.Json;
 using Livekit.Server.Sdk.Dotnet; // (1)!
 
@@ -90,9 +90,9 @@ app.UseCors(MyAllowSpecificOrigins);
 
 The `Program.cs` file imports the required dependencies and loads the necessary environment variables (defined in `appsettings.json` file):
 
-- `SERVER_PORT`: the port where the application will be listening.
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `SERVER_PORT`: the port where the application will be listening.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 Finally the application enables CORS support and the port where the application will be listening.
 
@@ -102,10 +102,10 @@ Finally the application enables CORS support and the port where the application 
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L38-L68' target='_blank'>Program.cs</a>" linenums="38"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/dotnet/Program.cs#L38-L68' target='_blank'>Program.cs</a>" linenums="38"
 app.MapPost(
     "/token",
     async (HttpRequest request) =>
@@ -157,7 +157,7 @@ Finally, the returned token is sent back to the client.
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L70-L95' target='_blank'>Program.cs</a>" linenums="70"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/dotnet/Program.cs#L70-L95' target='_blank'>Program.cs</a>" linenums="70"
 app.MapPost(
     "/livekit/webhook",
     async (HttpRequest request) =>

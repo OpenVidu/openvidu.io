@@ -1,11 +1,10 @@
 # openvidu-custom-toolbar
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
 
 The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default toolbar with a custom one, providing a more tailored user experience.
 
 Customizing the toolbar is made simple with the **ToolbarDirective**, which offers a straightforward way to replace and adapt the **ToolbarComponent** to your needs.
-
 
 <figure markdown>
   ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-toolbar.svg){ loading=lazy .svg-img  .mkdocs-img}
@@ -59,11 +58,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-
 --8<-- "docs/docs/tutorials/shared/openvidu-components-files.md"
 
 ---
-
 
 --8<-- "docs/docs/tutorials/shared/openvidu-components-install.md"
 
@@ -185,7 +182,6 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     --8<-- "docs/docs/tutorials/shared/openvidu-components-styles.md"
 
-
 ### Customizing the toolbar
 
 The `*ov-toolbar` directive allows you to replace the default toolbar with a custom one. This directive is applied to a `div` element that contains the custom toolbar elements.
@@ -194,26 +190,21 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-  selector: 'app-root',
-  template:`
-    <ov-videoconference
-      [token]="token"
-      [livekitUrl]="LIVEKIT_URL"
-      (onTokenRequested)="onTokenRequested($event)"
-    >
-      <div *ovToolbar style="text-align: center;">
-        <button (click)="toggleVideo()">Toggle Video</button>
-        <button (click)="toggleAudio()">Toggle Audio</button>
-      </div>
-
-    </ov-videoconference>
-  `,
-  styles: [''],
-  standalone: true,
-  imports: [OpenViduComponentsModule],
+    selector: "app-root",
+    template: `
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <div *ovToolbar style="text-align: center;">
+                <button (click)="toggleVideo()">Toggle Video</button>
+                <button (click)="toggleAudio()">Toggle Audio</button>
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule]
 })
 export class AppComponent {
-  // ...
+    // ...
 }
 ```
 

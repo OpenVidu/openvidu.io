@@ -1,6 +1,6 @@
 # openvidu-custom-layout
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-layout){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-layout){ .md-button target=\_blank }
 
 The **openvidu-custom-layout** tutorial demonstrates how to replace the default layout of the OpenVidu Components Angular library with a custom layout.
 
@@ -241,52 +241,46 @@ In this tutorial, we are creating a very basic layout just for demonstration pur
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<!-- OpenVidu Video Conference Component -->
-		<ov-videoconference
-			[token]="token"
-			[livekitUrl]="LIVEKIT_URL"
-			(onTokenRequested)="onTokenRequested($event)"
-		>
-			<!-- Custom Layout for Video Streams -->
-			<div *ovLayout>
-				<div class="container">
-					<!-- Local Participant's Tracks -->
-					@for (track of localParticipant.tracks; track track) {
-					<div
-						class="item"
-						[ngClass]="{
-							hidden:
-								track.isAudioTrack && !track.participant.onlyHasAudioTracks
-						}"
-					>
-						<ov-stream [track]="track"></ov-stream>
-					</div>
-					}
+    selector: "app-root",
+    template: `
+        <!-- OpenVidu Video Conference Component -->
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <!-- Custom Layout for Video Streams -->
+            <div *ovLayout>
+                <div class="container">
+                    <!-- Local Participant's Tracks -->
+                    @for (track of localParticipant.tracks; track track) {
+                    <div
+                        class="item"
+                        [ngClass]="{
+                            hidden: track.isAudioTrack && !track.participant.onlyHasAudioTracks
+                        }"
+                    >
+                        <ov-stream [track]="track"></ov-stream>
+                    </div>
+                    }
 
-					<!-- Remote Participants' Tracks -->
-					@for (track of remoteParticipants | tracks; track track) {
-					<div
-						class="item"
-						[ngClass]="{
-							hidden:
-								track.isAudioTrack && !track.participant.onlyHasAudioTracks
-						}"
-					>
-						<ov-stream [track]="track"></ov-stream>
-					</div>
-					}
-				</div>
-			</div>
-		</ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
+                    <!-- Remote Participants' Tracks -->
+                    @for (track of remoteParticipants | tracks; track track) {
+                    <div
+                        class="item"
+                        [ngClass]="{
+                            hidden: track.isAudioTrack && !track.participant.onlyHasAudioTracks
+                        }"
+                    >
+                        <ov-stream [track]="track"></ov-stream>
+                    </div>
+                    }
+                </div>
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule, MatIconButton, MatIcon]
 })
 export class AppComponent implements OnInit, OnDestroy {
-	// ...
+    // ...
 }
 ```
 

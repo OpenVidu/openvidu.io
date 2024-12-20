@@ -1,6 +1,6 @@
 # openvidu-custom-participant-panel-item-element
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-participant-panel-item-elements){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-participant-panel-item-elements){ .md-button target=\_blank }
 
 The **openvidu-custom-participant-panel-item-element** tutorial demonstrates how to replace the default participant item element inside of the participants panel with a custom one, providing a more tailored user experience.
 
@@ -190,29 +190,25 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<!-- OpenVidu Video Conference Component -->
-		<ov-videoconference
-			[token]="token"
-			[livekitUrl]="LIVEKIT_URL"
-			(onTokenRequested)="onTokenRequested($event)"
-		>
-			<!-- Participant Panel Item Elements -->
-			<div *ovParticipantPanelItemElements="let participant">
-				<!-- Leave Button for Local Participant -->
-				@if (participant.isLocal) {
-				<button (click)="leaveSession()">Leave</button>
-				}
-			</div>
-		</ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule],
+    selector: "app-root",
+    template: `
+        <!-- OpenVidu Video Conference Component -->
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <!-- Participant Panel Item Elements -->
+            <div *ovParticipantPanelItemElements="let participant">
+                <!-- Leave Button for Local Participant -->
+                @if (participant.isLocal) {
+                <button (click)="leaveSession()">Leave</button>
+                }
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule]
 })
 export class AppComponent {
-	// ...
+    // ...
 }
 ```
 

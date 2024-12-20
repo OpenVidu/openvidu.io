@@ -1,11 +1,11 @@
 # Python
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/python){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/python){ .md-button target=\_blank }
 
 This is a minimal server application built for Python with [Flask](https://flask.palletsprojects.com/){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit Python SDK](https://github.com/livekit/python-sdks){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple Flask app with a single file `app.py` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `app.py` file:
 
-```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/python/app.py#L1-L15' target='_blank'>app.py</a>" linenums="1"
+```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/python/app.py#L1-L15' target='_blank'>app.py</a>" linenums="1"
 import os
 from flask import Flask, request
 from flask_cors import CORS
@@ -66,9 +66,9 @@ CORS(app) # (7)!
 
 The `app.py` file imports the required dependencies and loads the necessary environment variables from `.env` file using `dotenv` library:
 
-- `SERVER_PORT`: the port where the application will be listening.
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `SERVER_PORT`: the port where the application will be listening.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 Finally the `Flask` application is initialized and CORS support is enabled.
 
@@ -78,10 +78,10 @@ Finally the `Flask` application is initialized and CORS support is enabled.
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/python/app.py#L18-L31' target='_blank'>app.py</a>" linenums="18"
+```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/python/app.py#L18-L31' target='_blank'>app.py</a>" linenums="18"
 @app.post("/token")
 def create_token():
     room_name = request.json.get("roomName")
@@ -118,7 +118,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/python/app.py#L34-L51' target='_blank'>app.py</a>" linenums="34"
+```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/python/app.py#L34-L51' target='_blank'>app.py</a>" linenums="34"
 token_verifier = TokenVerifier(LIVEKIT_API_KEY, LIVEKIT_API_SECRET) # (1)!
 webhook_receiver = WebhookReceiver(token_verifier) # (2)!
 

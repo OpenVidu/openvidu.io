@@ -1,11 +1,11 @@
 # Node
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/node){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/node){ .md-button target=\_blank }
 
 This is a minimal server application built for Node with [Express](https://expressjs.com/){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit JS SDK](https://docs.livekit.io/server-sdk-js){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple Express app with a single file `index.js` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/node/index.js#L1-L14' target='_blank'>index.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/node/index.js#L1-L14' target='_blank'>index.js</a>" linenums="1"
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -66,9 +66,9 @@ app.use(express.raw({ type: "application/webhook+json" })); // (8)!
 
 The `index.js` file imports the required dependencies and loads the necessary environment variables:
 
-- `SERVER_PORT`: the port where the application will be listening.
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `SERVER_PORT`: the port where the application will be listening.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 It also initializes the `WebhookReceiver` object that will help validating and decoding incoming [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
@@ -80,25 +80,26 @@ Finally the `express` application is initialized. CORS is allowed, JSON body par
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/node/index.js#L16-L31' target='_blank'>index.js</a>" linenums="16"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/node/index.js#L16-L31' target='_blank'>index.js</a>" linenums="16"
 app.post("/token", async (req, res) => {
-  const roomName = req.body.roomName;
-  const participantName = req.body.participantName;
+    const roomName = req.body.roomName;
+    const participantName = req.body.participantName;
 
-  if (!roomName || !participantName) {
-    res.status(400).json({ errorMessage: "roomName and participantName are required" });
-    return;
-  }
+    if (!roomName || !participantName) {
+        res.status(400).json({ errorMessage: "roomName and participantName are required" });
+        return;
+    }
 
-  const at = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET, { // (1)!
-    identity: participantName,
-  });
-  at.addGrant({ roomJoin: true, room: roomName }); // (2)!
-  const token = await at.toJwt(); // (3)!
-  res.json({ token }); // (4)!
+    const at = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET, {
+        // (1)!
+        identity: participantName
+    });
+    at.addGrant({ roomJoin: true, room: roomName }); // (2)!
+    const token = await at.toJwt(); // (3)!
+    res.json({ token }); // (4)!
 });
 ```
 
@@ -122,23 +123,20 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/node/index.js#L33-L49' target='_blank'>index.js</a>" linenums="33"
-const webhookReceiver = new WebhookReceiver( // (1)!
-  LIVEKIT_API_KEY,
-  LIVEKIT_API_SECRET
-);
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/node/index.js#L33-L49' target='_blank'>index.js</a>" linenums="33"
+const webhookReceiver = new WebhookReceiver(LIVEKIT_API_KEY, LIVEKIT_API_SECRET); // (1)!
 
 app.post("/livekit/webhook", async (req, res) => {
-  try {
-    const event = await webhookReceiver.receive(
-      req.body, // (2)!
-      req.get("Authorization") // (3)!
-    );
-    console.log(event); // (4)!
-  } catch (error) {
-    console.error("Error validating webhook event", error);
-  }
-  res.status(200).send();
+    try {
+        const event = await webhookReceiver.receive(
+            req.body, // (2)!
+            req.get("Authorization") // (3)!
+        );
+        console.log(event); // (4)!
+    } catch (error) {
+        console.error("Error validating webhook event", error);
+    }
+    res.status(200).send();
 });
 ```
 

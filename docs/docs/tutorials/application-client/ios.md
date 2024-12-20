@@ -1,13 +1,13 @@
 # openvidu-ios
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-ios){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-client/openvidu-ios){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built for **iOS**, using **Swift**, that allows:
 
-- Joining a video call room by requesting a token from any [application server](../application-server/index.md).
-- Publishing your camera and microphone.
-- Subscribing to all other participants' video and audio tracks automatically.
-- Leaving the video call room at any time.
+-   Joining a video call room by requesting a token from any [application server](../application-server/index.md).
+-   Publishing your camera and microphone.
+-   Subscribing to all other participants' video and audio tracks automatically.
+-   Leaving the video call room at any time.
 
 It uses the [LiveKit Swift SDK](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
@@ -35,12 +35,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 This iOS project, created with Xcode and written in Swift, includes various files and directories. For this tutorial, focus on the following key components within the `openvidu-ios/Shared` directory:
 
-- `OpenViduApp.swift`: Initializes the application and sets up the main view.
-- `Support`: Contains files for secure storage, token management, and other support functions.
-- `Utils`: Includes utility files like `HttpClient.swift` for HTTP networking.
-- `Views`: Houses the user interface components of the application.
-- `Contexts`: Manages application state and room contexts for LiveKit interaction.
-- `Assets.xcassets`: Stores images and color assets used in the app.
+-   `OpenViduApp.swift`: Initializes the application and sets up the main view.
+-   `Support`: Contains files for secure storage, token management, and other support functions.
+-   `Utils`: Includes utility files like `HttpClient.swift` for HTTP networking.
+-   `Views`: Houses the user interface components of the application.
+-   `Contexts`: Manages application state and room contexts for LiveKit interaction.
+-   `Assets.xcassets`: Stores images and color assets used in the app.
 
 ### Integrating LiveKit
 
@@ -82,7 +82,6 @@ let package = Package(
 5. Enter the URL: `https://github.com/livekit/client-sdk-swift`.
 6. Choose the version you want, such as "Up to Next Major Version" with `2.0.12`.
 
-
 ### iOS Specific Requirements
 
 To test the application on an iOS device, you need to ensure it has permission to access the camera and microphone. These configurations are already included in this project. However, if you're starting a new project, follow these steps:
@@ -120,8 +119,8 @@ To test the application on an iOS device, you need to ensure it has permission t
 
 The `ConfigureUrlsView.swift` file defines a SwiftUI view for configuring the URLs required for the application:
 
-- **`applicationServerUrl`**: The URL of the application server used to obtain tokens for joining the video call room.
-- **`livekitUrl`**: The URL of the LiveKit server used to connect to the video call room and handle video communication.
+-   **`applicationServerUrl`**: The URL of the application server used to obtain tokens for joining the video call room.
+-   **`livekitUrl`**: The URL of the LiveKit server used to connect to the video call room and handle video communication.
 
 You should configure these URLs according to your deployment settings. If you are [running OpenVidu locally](#run-openvidu-locally), you can set `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443) and `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:7443), where `xxx-yyy-zzz-www` represents the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
@@ -135,7 +134,7 @@ If these URLs are left empty, the user will be prompted to enter them when the a
 
 When the user clicks the `Save` button, the `LKButton` action triggers the validation and saves the URLs into the `AppContext` and `RoomContext`. The `ConfigureUrlsView` handles this logic:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/Views/ConfigureUrlsView.swift#L50-L64' target='_blank'>ConfigureUrlsView.swift</a>" linenums="28"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-ios/Shared/Views/ConfigureUrlsView.swift#L50-L64' target='_blank'>ConfigureUrlsView.swift</a>" linenums="28"
 LKButton(title: "Save") {
     Task.detached { @MainActor in
         let isApplicationServerValid = isValidURL(self.applicationServerUrl)
@@ -156,7 +155,6 @@ LKButton(title: "Save") {
 In this code snippet, the `isValidURL` function checks the validity of the URLs. If both URLs are valid, they are saved into the `appCtx` and `roomCtx` contexts. If any URL is invalid, an error message is displayed.
 
 ---
-
 
 ### Joining a room
 
@@ -221,7 +219,7 @@ func enableCameraAndMicrophone() async {
 
 The `OpenViduApp.swift` handle the navigation page. When room status is `connected`, the user is redirected to the `RoomView`:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/OpenViduApp.swift' target='_blank'>OpenViduApp.swift</a>"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-ios/Shared/OpenViduApp.swift' target='_blank'>OpenViduApp.swift</a>"
 struct RoomSwitchView: View {
     @EnvironmentObject var appCtx: AppContext
     @EnvironmentObject var roomCtx: RoomContext
@@ -263,13 +261,11 @@ struct RoomSwitchView: View {
 
 ---
 
-
 ### Displaying Video Tracks
 
 To display the video tracks of participants in the room, the `RoomView.swift` uses various SwiftUI views and custom components. This approach allows the application to dynamically load and display the video tracks as they are received.
 
-
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/Views/RoomView.swift' target='_blank'>RoomView.swift</a>"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-ios/Shared/Views/RoomView.swift' target='_blank'>RoomView.swift</a>"
 struct RoomView: View {
     @EnvironmentObject var appCtx: AppContext
     @EnvironmentObject var roomCtx: RoomContext
@@ -311,7 +307,7 @@ The `ParticipantView` component is responsible for rendering the video track of 
 
 The **LiveKit Swift SDK** includes a VideoView class, based on UIKit, specifically designed for rendering video tracks. Additionally, subscribed audio tracks are automatically played by default.
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/Views/ParticipantView.swift' target='_blank'>ParticipantView.swift</a>"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-ios/Shared/Views/ParticipantView.swift' target='_blank'>ParticipantView.swift</a>"
 struct ParticipantView: View {
     @ObservedObject var participant: Participant
     @EnvironmentObject var appCtx: AppContext
@@ -347,13 +343,11 @@ struct ParticipantView: View {
 
 1. The `SwiftUIVideoView` component renders the participant's video track.
 
-
 ---
 
 ### Leaving the room
 
 To leave the room, the user can click the `Leave` button in the `RoomView`. This action triggers the `leaveRoom` method asynchronously:
-
 
 ```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/55d303d7b5f57edcaadd5d7864734fe6fa062067/application-client/openvidu-ios/Shared/Views/RoomView.swift#L111-L127' target='_blank'>RoomView.swift</a>" linenums="111"
 func content(geometry: GeometryProxy) -> some View {
@@ -381,4 +375,3 @@ func content(geometry: GeometryProxy) -> some View {
 ```
 
 After rome is disconnected, the room status is updated to `disconnected` and the `OpenViduApp.swift` handle this update to redirect the user to the `ConnectView`.
-

@@ -1,6 +1,6 @@
 # openvidu-custom-participants-panel
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-participants-panel){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-participants-panel){ .md-button target=\_blank }
 
 The **openvidu-custom-participants-panel** tutorial demonstrates how to customize the participants panel, providing a more tailored user experience.
 
@@ -75,7 +75,7 @@ Once the server is up and running, you can test the application by visiting [`ht
     ```typescript
     import {
       ParticipantModel,
-	    ParticipantService,
+        ParticipantService,
       OpenViduComponentsModule
     } from 'openvidu-components-angular';
 
@@ -225,33 +225,29 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<!-- OpenVidu Video Conference Component -->
-    <ov-videoconference
-      [token]="token"
-      [livekitUrl]="LIVEKIT_URL"
-      (onTokenRequested)="onTokenRequested($event)"
-    >
-      <!-- Custom Participants Panel -->
-      <div *ovParticipantsPanel id="my-panel">
-        <ul id="local">
-          <li>{{ localParticipant.name }}</li>
-        </ul>
-        <ul id="remote">
-          @for (p of remoteParticipants; track p) {
-          <li>{{ p.name }}</li>
-          }
-        </ul>
-      </div>
-    </ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule],
+    selector: "app-root",
+    template: `
+        <!-- OpenVidu Video Conference Component -->
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <!-- Custom Participants Panel -->
+            <div *ovParticipantsPanel id="my-panel">
+                <ul id="local">
+                    <li>{{ localParticipant.name }}</li>
+                </ul>
+                <ul id="remote">
+                    @for (p of remoteParticipants; track p) {
+                    <li>{{ p.name }}</li>
+                    }
+                </ul>
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule]
 })
-export class AppComponent implements OnInit, OnDestroy{
-	// ...
+export class AppComponent implements OnInit, OnDestroy {
+    // ...
 }
 ```
 

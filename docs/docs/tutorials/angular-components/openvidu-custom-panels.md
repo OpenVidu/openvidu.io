@@ -1,6 +1,6 @@
 # openvidu-custom-panels
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-panels){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-panels){ .md-button target=\_blank }
 
 The **openvidu-custom-panels** tutorial demonstrates how to replace the default panels with a custom ones, providing a more tailored user experience.
 
@@ -185,42 +185,33 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<!-- OpenVidu Video Conference Component -->
-		<ov-videoconference
-			[token]="token"
-			[livekitUrl]="LIVEKIT_URL"
-			(onTokenRequested)="onTokenRequested($event)"
-		>
-			<!-- Custom Panels -->
-			<ov-panel *ovPanel>
-				<!-- Custom Chat Panel -->
-				<div *ovChatPanel id="my-chat-panel">This is my custom chat panel</div>
+    selector: "app-root",
+    template: `
+        <!-- OpenVidu Video Conference Component -->
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <!-- Custom Panels -->
+            <ov-panel *ovPanel>
+                <!-- Custom Chat Panel -->
+                <div *ovChatPanel id="my-chat-panel">This is my custom chat panel</div>
 
-				<!-- Custom Participants Panel -->
-				<div *ovParticipantsPanel id="my-participants-panel">
-					This is my custom participants panel
-				</div>
+                <!-- Custom Participants Panel -->
+                <div *ovParticipantsPanel id="my-participants-panel">This is my custom participants panel</div>
 
-				<!-- Custom Activities Panel -->
-				<div *ovActivitiesPanel id="my-activities-panel">
-					This is my custom activities panel
-				</div>
-			</ov-panel>
-		</ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule],
+                <!-- Custom Activities Panel -->
+                <div *ovActivitiesPanel id="my-activities-panel">This is my custom activities panel</div>
+            </ov-panel>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule]
 })
 export class AppComponent {
-	// ...
+    // ...
 }
 ```
 
 In this code snippet, the `*ovPanel` directive is used to replace the default videoconference panels with custom ones. The `*ovChatPanel`, `*ovParticipantsPanel`, and `*ovActivitiesPanel` directives are used to replace the default chat, participants, and activities panels with custom ones.
-
 
 <!-- ## Deploying openvidu-custom-panels
 

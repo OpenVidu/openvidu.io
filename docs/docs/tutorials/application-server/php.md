@@ -1,11 +1,11 @@
 # PHP
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/php){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/php){ .md-button target=\_blank }
 
-This is a minimal server application built for PHP  that allows:
+This is a minimal server application built for PHP that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit PHP SDK](https://github.com/agence104/livekit-server-sdk-php){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple PHP app with a single file `index.php` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `index.php` file:
 
-```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/php/index.php#L1-L17' target='_blank'>index.php</a>" linenums="1"
+```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/php/index.php#L1-L17' target='_blank'>index.php</a>" linenums="1"
 <?php
 require __DIR__ . "/vendor/autoload.php";
 
@@ -65,8 +65,8 @@ $LIVEKIT_API_SECRET = $_ENV["LIVEKIT_API_SECRET"] ?? "secret"; // (4)!
 
 The `index.php` file imports the required dependencies, sets the HTTP headers for the web server and loads the necessary environment variables:
 
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 ---
 
@@ -74,10 +74,10 @@ The `index.php` file imports the required dependencies, sets the HTTP headers fo
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/php/index.php#L19-L43' target='_blank'>index.php</a>" linenums="18"
+```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/php/index.php#L19-L43' target='_blank'>index.php</a>" linenums="18"
 <?php
 if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" && $_SERVER["PATH_INFO"] === "/token") {
     $data = json_decode(file_get_contents("php://input"), true);
@@ -126,7 +126,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/php/index.php#L45-L62' target='_blank'>index.php</a>" linenums="44"
+```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/php/index.php#L45-L62' target='_blank'>index.php</a>" linenums="44"
 <?php
 $webhookReceiver = (new WebhookReceiver($LIVEKIT_API_KEY, $LIVEKIT_API_SECRET)); // (1)!
 

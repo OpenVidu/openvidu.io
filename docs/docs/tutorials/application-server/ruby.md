@@ -1,11 +1,11 @@
 # Ruby
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/ruby){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/ruby){ .md-button target=\_blank }
 
 This is a minimal server application built for Ruby with [Sinatra](https://sinatrarb.com/){:target="\_blank"} that allows:
 
-- Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby){:target="\_blank"}.
 
@@ -33,12 +33,12 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 The application is a simple Ruby app using the popular Sinatra web library. It has a single file `app.rb` that exports two endpoints:
 
-- `/token` : generate a token for a given Room name and Participant name.
-- `/livekit/webhook` : receive LiveKit webhook events.
+-   `/token` : generate a token for a given Room name and Participant name.
+-   `/livekit/webhook` : receive LiveKit webhook events.
 
 Let's see the code of the `app.rb` file:
 
-```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/ruby/app.rb#L1-L17' target='_blank'>app.rb</a>" linenums="1"
+```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/ruby/app.rb#L1-L17' target='_blank'>app.rb</a>" linenums="1"
 require 'sinatra'
 require 'sinatra/cors'
 require 'sinatra/json'
@@ -69,9 +69,9 @@ set :bind, '0.0.0.0' # (8)!
 
 The `app.rb` file imports the required dependencies and loads the necessary environment variables (defined in `env.rb` file):
 
-- `SERVER_PORT`: the port where the application will be listening.
-- `LIVEKIT_API_KEY`: the API key of LiveKit Server.
-- `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
+-   `SERVER_PORT`: the port where the application will be listening.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server.
 
 Finally the application configures the port, sets the CORS configuration for Sinatra and binds the application to all available network interfaces (0.0.0.0).
 
@@ -81,10 +81,10 @@ Finally the application configures the port, sets the CORS configuration for Sin
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
-- `roomName`: the name of the Room where the user wants to connect.
-- `participantName`: the name of the participant that wants to connect to the Room.
+-   `roomName`: the name of the Room where the user wants to connect.
+-   `participantName`: the name of the participant that wants to connect to the Room.
 
-```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/ruby/app.rb#L19-L34' target='_blank'>app.rb</a>" linenums="19"
+```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/ruby/app.rb#L19-L34' target='_blank'>app.rb</a>" linenums="19"
 post '/token' do
   body = JSON.parse(request.body.read)
   room_name = body['roomName']
@@ -123,7 +123,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/ruby/app.rb#L36-L47' target='_blank'>app.rb</a>" linenums="36"
+```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/ruby/app.rb#L36-L47' target='_blank'>app.rb</a>" linenums="36"
 post '/livekit/webhook' do
   auth_header = request.env['HTTP_AUTHORIZATION'] # (1)!
   token_verifier = LiveKit::TokenVerifier.new(api_key: LIVEKIT_API_KEY, api_secret: LIVEKIT_API_SECRET) # (2)!

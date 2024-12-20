@@ -1,6 +1,6 @@
 # openvidu-custom-stream
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-stream){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-stream){ .md-button target=\_blank }
 
 The **openvidu-custom-stream** tutorial demonstrates how to replace the default video stream with a custom one, providing a more tailored user experience.
 
@@ -179,30 +179,26 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-	selector: 'app-root',
-	template: `
-		<!-- OpenVidu Video Conference Component -->
-		<ov-videoconference
-			[token]="token"
-			[livekitUrl]="LIVEKIT_URL"
-			(onTokenRequested)="onTokenRequested($event)"
-		>
-			<!-- Display Video Streams -->
-			<div *ovStream="let track">
-				<!-- Video Stream Component -->
-				<ov-stream [track]="track" [displayParticipantName]="false"></ov-stream>
+    selector: "app-root",
+    template: `
+        <!-- OpenVidu Video Conference Component -->
+        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
+            <!-- Display Video Streams -->
+            <div *ovStream="let track">
+                <!-- Video Stream Component -->
+                <ov-stream [track]="track" [displayParticipantName]="false"></ov-stream>
 
-				<!-- Display Participant's Name -->
-				<p>{{ track.participant.name }}</p>
-			</div>
-		</ov-videoconference>
-	`,
-	styles: [''],
-	standalone: true,
-	imports: [OpenViduComponentsModule],
+                <!-- Display Participant's Name -->
+                <p>{{ track.participant.name }}</p>
+            </div>
+        </ov-videoconference>
+    `,
+    styles: [""],
+    standalone: true,
+    imports: [OpenViduComponentsModule]
 })
 export class AppComponent {
-	// ...
+    // ...
 }
 ```
 

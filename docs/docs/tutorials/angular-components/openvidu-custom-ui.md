@@ -1,15 +1,13 @@
 # openvidu-custom-ui
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
 
 Creating a unique and intuitive user interface (UI) is essential for ensuring a great user experience. **OpenVidu Components Angular** allows for flexibility in UI customization to fit your application's design requirements.
-
 
 <figure markdown>
   ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-ui.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>OpenVidu Components - Custom UI</figcaption>
 </figure>
-
 
 ## Running this tutorial
 
@@ -38,13 +36,13 @@ To run the client application tutorial, you need [Node](https://nodejs.org/en/do
       cd openvidu-tutorials/openvidu-components/openvidu-custom-ui
     ```
 
-2. Install the required dependencies:
+2.  Install the required dependencies:
 
     ```bash
       npm install
     ```
 
-3. Serve the application:
+3.  Serve the application:
 
     ```bash
       npm start
@@ -60,9 +58,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 --8<-- "docs/docs/tutorials/shared/openvidu-components-files.md"
 
-
 ---
-
 
 --8<-- "docs/docs/tutorials/shared/openvidu-components-install.md"
 
@@ -168,14 +164,14 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 To customize the appearance of OpenVidu Components, simply redefine the necessary CSS variables in your `styles.scss` file. For instance, to change the primary color used throughout your application, you would update the `--ov-primary-color` variable as shown below:
 
-
 ```css
 :root {
-  --ov-primary-color: #yourNewColor; /* Replace #yourNewColor with your chosen hex color code */
+    --ov-primary-color: #yourNewColor; /* Replace #yourNewColor with your chosen hex color code */
 
-  /* Others variables ... */
+    /* Others variables ... */
 }
 ```
+
 Once you redefine a variable, the new style will automatically apply to all components in the OpenVidu UI that use that variable.
 
 The library also allows you to customize **shape of buttons, panels and videos customization**, the **background color personalization** of panels, buttons and videoconference and also you can **change the text color**.
