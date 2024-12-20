@@ -1,6 +1,7 @@
 # OpenVidu Elastic Installation: AWS
 
-!!!info
+!!! info
+    
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -19,6 +20,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 ```
 
 !!! info
+    
     If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
@@ -105,7 +107,8 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The **OpenViduMasterNodeSubnet** and **OpenViduMediaNodeSubnet** parameters specify the subnets where the Master and Media Nodes will be deployed. All of them must be in the previously specified **OpenViduVPC**.
 
-    !!!warning
+    !!! warning
+        
         You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
 
 --8<-- "docs/docs/self-hosting/shared/aws-turn-domain.md"

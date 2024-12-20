@@ -1,6 +1,7 @@
 # OpenVidu High Availability Installation: On-premises with Network Load Balancer
 
-!!!info
+!!! info
+    
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -119,7 +120,8 @@ A wizard will guide you through the installation process. You will be asked for 
 
 - **Write all 'Master Node' Private IPs separated by commas**: Write the private IP of each Master Node separated by commas.
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
-!!!info
+!!! info
+    
     If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account){:target=_blank}.
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.

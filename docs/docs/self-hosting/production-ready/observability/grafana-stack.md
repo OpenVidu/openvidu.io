@@ -57,6 +57,7 @@ You can select the **Media Node** you want to see metrics from in the **media_no
 </figure>
 
 !!! info
+    
     If you add new Media Nodes to your OpenVidu deployment, you will have to refresh the page in order to see the new Media Nodes in the dropdown.
 
 <figure markdown>
@@ -130,6 +131,7 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 </div>
 
 !!! info
+    
     Note that some panels have no data. This is because some containers are running in **Master Nodes** and others in **Media Nodes**.
 
 <div class="grid-container">

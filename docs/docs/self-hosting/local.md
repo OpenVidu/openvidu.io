@@ -31,7 +31,8 @@ To install OpenVidu locally, follow these steps:
         git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.0.0
         ```
 
-        !!!info
+        !!! info
+            
             To use a specific OpenVidu version, switch to the desired tag with `git checkout <version>`, e.g., `git checkout 3.0.0`. By default, the latest version is used.
 
     2.  Configure the local deployment
@@ -71,7 +72,8 @@ To install OpenVidu locally, follow these steps:
         git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.0.0
         ```
 
-        !!!info
+        !!! info
+            
             To use a specific OpenVidu version, switch to the desired tag with `git checkout <version>`, e.g., `git checkout 3.0.0`. By default, the latest version is used.
 
 
@@ -104,7 +106,8 @@ To install OpenVidu locally, follow these steps:
         docker compose up
         ```
 
-    !!!info
+    !!! info
+        
         <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th> runs locally in evaluation mode for free for development and testing purposes. Some limits apply:
 
         - Maximum 8 Participants across all Rooms
@@ -232,10 +235,13 @@ When using OpenVidu Local Deployment, you can access OpenVidu Server (which is 1
 | Application Server (backend)      | [http://localhost:6080](http://localhost:6080)                 | [https://xxx-yyy-zzz-www.openvidu-local.dev:6443](https://xxx-yyy-zzz-www.openvidu-local.dev:6443)                            |
 | OpenVidu (LiveKit Compatible) URL | [http://localhost:7880](http://localhost:7880)                 | [https://xxx-yyy-zzz-www.openvidu-local.dev:7443](https://xxx-yyy-zzz-www.openvidu-local.dev:7443)                            |
 
-!!!info
+!!! info
+    
     - If you are developing locally, use `localhost` to access the services, but if you want to test your application from other devices on your network, use the `openvidu-local.dev` URLs.
     - Replace `xxx-yyy-zzz-www` with your local IP address. You can find it in the `.env` file in the `LAN_PRIVATE_IP` variable.
-!!!warning
+
+!!! warning
+    
     If the URL isn't working because the IP address is incorrect or the installation script couldn't detect it automatically, you can update the `LAN_PRIVATE_IP` value in the `.env` file and restart the deployment with `docker compose up`.
 
 

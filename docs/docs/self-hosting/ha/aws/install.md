@@ -1,6 +1,7 @@
 # OpenVidu High Availability Installation: AWS
 
-!!!info
+!!! info
+    
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -19,6 +20,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu
 ```
 
 !!! info
+    
     If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
@@ -144,7 +146,8 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The **OpenViduMediaNodeSubnets** specifies the subnets where the Media Nodes will be deployed. There is no limit on the number of subnets you can specify.
 
-    !!!warning
+    !!! warning
+        
         - It is recommended to deploy in a region with at least 4 availability zones and deploy the Master Nodes in 4 subnets, one in each availability zone. This is to ensure high availability.
         - You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
 

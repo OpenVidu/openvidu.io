@@ -1,6 +1,7 @@
 # OpenVidu Elastic Installation: On-premises
 
-!!!info
+!!! info
+    
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -101,7 +102,8 @@ A wizard will guide you through the installation process. You will be asked for 
 
 - **Write the 'Master Node' Private IP**: Write the private IP of the machine where you are going to install the Master Node.
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
-!!!info
+!!! info
+    
     If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account){:target="_blank"}.
 - **Select which certificate type to use**:
     - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.

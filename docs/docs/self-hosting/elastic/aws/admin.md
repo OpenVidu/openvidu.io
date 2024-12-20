@@ -1,6 +1,7 @@
 # OpenVidu Elastic: AWS Administration
 
-!!!warning
+!!! warning
+    
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu Elastic.
 
 The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
@@ -32,7 +33,8 @@ The Master Node is an EC2 instance, while the Media Nodes are part of an Auto Sc
         ![Instance Management](../../../../assets/images/self-hosting/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
         </figure>
 
-        !!!warning
+        !!! warning
+            
             It may happen that some instances are still in the _"Terminating:Wait"_ lifecycle state after setting the desired capacity to 0. This is because the Auto Scaling Group waits for the instances to finish processing any ongoing room, ingress, or egress operations before terminating them. This can take a few minutes. If you want to force the termination of the instances, you can manually terminate them from the EC2 Dashboard.
 
     7. After confirming that all Media Node instances are terminated, go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
@@ -83,12 +85,14 @@ It is possible to change the instance type of both the Master Node and the Media
 
 === "Master Nodes"
 
-    !!!warning
+    !!! warning
+        
         This procedure requires downtime, as it involves stopping the Master Node.
 
     1. [Shutdown the cluster](#shutdown-the-cluster).
 
         !!! info
+            
             You can stop only the Master Node instance to change its instance type, but it is recommended to stop the whole cluster to avoid any issues.
     2. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
         <figure markdown>
@@ -129,14 +133,16 @@ It is possible to change the instance type of both the Master Node and the Media
 
         Then, click on _"Update"_.
 
-        !!!info
+        !!! info
+            
             By configuring _"Latest"_ as the launch template version, you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
 
         ![Change launch template version](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-asg-update-launch-template.png){ .svg-img .dark-img }
 
     9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new instance type.
 
-        !!!info
+        !!! info
+            
             If you want to avoid downtime, you can wait until the Auto Scaling Group replaces the old instances with the new ones. But you will need to increase the desired capacity to force the replacement of the instances and then decrease it to the desired number of instances.
 
 ## Media Nodes Autoscaling Configuration
@@ -164,7 +170,8 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
         ![Edit Scaling Policies](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-edit-scaling-policies.png){ .svg-img .dark-img }
         </figure>
 
-        !!!info
+        !!! info
+            
             OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU utilization, however, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [AWS Auto Scaling documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html){:target=_blank}.
 
 ## Fixed Number of Media Nodes

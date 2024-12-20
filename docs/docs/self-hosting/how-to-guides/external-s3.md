@@ -3,6 +3,7 @@
 OpenVidu, by default, utilizes MinIO for recording storage, but it can be configured to use an external S3 provider instead. This guide provides the necessary steps to configure OpenVidu with an external S3 provider for your deployment.
 
 !!! info
+    
     It is important to note that if you are deploying using AWS CloudFormation, the S3 bucket is configured automatically to use the AWS S3 service, and you do not need to follow this guide.
 
 ## Configuration
@@ -60,6 +61,7 @@ EXTERNAL_S3_BUCKET_CLUSTER_DATA=my-openvidu-cluster-bucket
 ```
 
 !!! warning
+   
     Note that the region must be specified in the `EXTERNAL_S3_ENDPOINT` parameter for AWS S3. This may not be required for other S3 providers but is necessary for AWS S3.
 
 ## About the Path-Style parameter

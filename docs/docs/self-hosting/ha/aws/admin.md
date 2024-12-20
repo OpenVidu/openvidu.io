@@ -1,6 +1,7 @@
 # OpenVidu High Availability: AWS Administration
 
-!!!warning
+!!! warning
+   
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu High Availability.
 
 The deployment of OpenVidu High Availability on AWS is automated using AWS CloudFormation, with 4 EC2 Instances as Master Nodes and any number of Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. The Auto Scaling Group of Media Nodes is configured to scale based on the target average CPU utilization.
@@ -34,7 +35,8 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         ![Instance Management](../../../../assets/images/self-hosting/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
         </figure>
 
-        !!!warning
+        !!! warning
+            
             It may happen that some instances are still in the _"Terminating:Wait"_ lifecycle state after setting the desired capacity to 0. This is because the Auto Scaling Group waits for the instances to finish processing any ongoing room, ingress, or egress operations before terminating them. This can take a few minutes. If you want to force the termination of the instances, you can manually terminate them from the EC2 Dashboard.
 
     7. Navigate to the [EC2 Dashboard](https://console.aws.amazon.com/ec2/v2/home#Instances:sort=instanceId){:target="_blank"} on AWS.
@@ -96,7 +98,8 @@ It is possible to change the instance type of both the Master Node and the Media
 
 === "Master Nodes"
 
-    !!!warning
+    !!! warning
+        
         This procedure requires downtime, as it involves stopping all the Master Nodes and starting them again with the new instance type.
 
     1. Navigate to the [EC2 Dashboard](https://console.aws.amazon.com/ec2/v2/home#Instances:sort=instanceId){:target="_blank"} on AWS.
@@ -140,14 +143,16 @@ It is possible to change the instance type of both the Master Node and the Media
 
         Then, click on _"Update"_.
 
-        !!!info
+        !!! info
+            
             By configuring _"Latest"_ as the launch template version,  you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
 
         ![Change launch template version](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-asg-update-launch-template-media.png){ .svg-img .dark-img }
 
     9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new instance type.
 
-        !!!info
+        !!! info
+            
             If you want to avoid downtime, you can wait until the Auto Scaling Group replaces the old instances with the new ones. But you will need to increase the desired capacity to force the replacement of the instances and then decrease it to the desired number of instances.
 
 ## Media Nodes Autoscaling Configuration
@@ -176,7 +181,8 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
         ![Edit Scaling Policies](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-scaling-policies.png){ .svg-img .dark-img }
         </figure>
 
-        !!!info
+        !!! info
+            
             OpenVidu High Availability is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU utilization, however, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [AWS Auto Scaling documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html){:target=_blank}.
 
 ## Fixed Number of Media Nodes
