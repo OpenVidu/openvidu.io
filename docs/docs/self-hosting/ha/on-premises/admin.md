@@ -79,7 +79,7 @@ Depending on the node type, you will see different services running.
 
 ## Adding Media Nodes
 
-To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](../on-premises/install-nlb.md/#media-node) on the new Media Node.
+To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](../on-premises/install-nlb.md#media-node) on the new Media Node.
 
 --8<-- "docs/docs/self-hosting/shared/openvidu-pro-removing-media-nodes.md"
 
