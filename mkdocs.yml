@@ -235,7 +235,7 @@ extra:
     title: Cookie consent
     description: >
       This website uses cookies to ensure you get the best experience on our website.
-      <a href="https://openvidu.io/conditions/cookie-policy/" target="_blank">See cookie policy</a>
+      <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
     cookies:
       analytics:
         name: Google Analytics
