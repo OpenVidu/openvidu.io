@@ -7,8 +7,8 @@
 ### Known limitations
 
 - When using [mediasoup](self-hosting/production-ready/performance.md):
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
-    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
+    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
     - Limitted [ingress](https://docs.livekit.io/home/ingress/overview/){target="\_blank"} support: non-simulcast video tracks are not supported. Firefox may experience issues when subscribing to ingress video.
 
 ### Version table
@@ -53,8 +53,8 @@
 ### Known limitations
 
 - When using [mediasoup](self-hosting/production-ready/performance.md):
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
-    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
+    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
 
 ### Version table
 
@@ -78,11 +78,11 @@
 ### Changelog
 
 - Improved [mediasoup](self-hosting/production-ready/performance.md) support:
-    - Data messages work ([LiveKit reference](https://docs.livekit.io/realtime/client/data-messages/#Data-messages){:target="\_blank"}).
-    - Ingress supported ([LiveKit reference](https://docs.livekit.io/realtime/ingress/overview/){:target="\_blank"}).
+    - Data messages work ([LiveKit reference](https://docs.livekit.io/home/client/data/#Data-messages){:target="\_blank"}).
+    - Ingress supported ([LiveKit reference](https://docs.livekit.io/home/ingress/overview/){:target="\_blank"}).
 - Improved [OpenVidu Local Deployment](self-hosting/local.md):
-    - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/realtime/egress/room-composite/){:target="\_blank"}) support when using mediasoup.
-    - WebHooks ([LiveKit reference](https://docs.livekit.io/realtime/server/webhooks/){:target="\_blank"}) supported against a local [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally).
+    - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/home/egress/room-composite/){:target="\_blank"}) support when using mediasoup.
+    - WebHooks ([LiveKit reference](https://docs.livekit.io/home/server/webhooks/){:target="\_blank"}) supported against a local [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally).
 - Production deployments have a better private IP discovery process when there are multiple valid private IPs in the same host. This will make work more deployments out-of-the-box without the need of manual intervention.
 - [OpenVidu PRO Evaluation Mode](self-hosting/local.md#openvidu-pro) improved. Before a maximum a 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
 - Minor bug fixes related to [OpenVidu Call](openvidu-call/index.md).
@@ -91,7 +91,7 @@
 
 - When using [mediasoup](self-hosting/production-ready/performance.md):
     - No support for Speaker Detection events ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){target="\_blank"}).
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
     - No support for Dynacast ([LiveKit reference](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){target="\_blank"}).
     - No support for Adaptive Streaming ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){target="\_blank"}).
 - When using [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally) against an [OpenVidu Local Deployment](self-hosting/local.md), recordings cannot be accessed.
