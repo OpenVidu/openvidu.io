@@ -92,16 +92,16 @@ nav:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
           - Configuration:
-            - Changing Config: docs/self-hosting/configuration/changing-config.md
-            - Config Sytem In depth: docs/self-hosting/configuration/in-depth.md
-            - Config References: docs/self-hosting/configuration/reference.md
+              - Changing Config: docs/self-hosting/configuration/changing-config.md
+              - Config Sytem In depth: docs/self-hosting/configuration/in-depth.md
+              - Config References: docs/self-hosting/configuration/reference.md
           - How To Guides:
-            - docs/self-hosting/how-to-guides/index.md
-            - Configure External S3: docs/self-hosting/how-to-guides/external-s3.md
-            - Force traffic to 443 TLS: docs/self-hosting/how-to-guides/force-443-tls.md
-            - Enable Webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
-            - Enable and Disable Modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
-            - Create and configurate AWS Certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
+              - docs/self-hosting/how-to-guides/index.md
+              - Configure External S3: docs/self-hosting/how-to-guides/external-s3.md
+              - Force traffic to 443 TLS: docs/self-hosting/how-to-guides/force-443-tls.md
+              - Enable Webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
+              - Enable and Disable Modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
+              - Create and configurate AWS Certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
           # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
@@ -226,16 +226,16 @@ extra:
     - icon: simple/github
       link: https://github.com/OpenVidu
     - icon: simple/x
-      link: https://twitter.com/openvidu
+      link: https://x.com/openvidu
     - icon: simple/medium
-      link: https://medium.com/@openvidu
+      link: https://openvidu.medium.com/
     - icon: simple/youtube
       link: https://www.youtube.com/@openvidu
   consent:
     title: Cookie consent
     description: >
       This website uses cookies to ensure you get the best experience on our website.
-      <a href="https://openvidu.io/conditions/cookie-policy" target="_blank">See cookie policy</a>
+      <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
     cookies:
       analytics:
         name: Google Analytics

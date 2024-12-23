@@ -82,7 +82,7 @@ await Promise.all([
 ]);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/client/publish/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/tracks/publish/){target="\_blank"}
 
 ---
 
@@ -105,7 +105,7 @@ await track.mute();
 await track.unmute();
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/client/publish/#Mute-and-unmute){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/tracks/publish/#Mute-and-unmute){target="\_blank"}
 
 ---
 
@@ -237,7 +237,7 @@ await Promise.all([
 ]);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/client/publish/#Screen-sharing){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/tracks/publish/#Screen-sharing){target="\_blank"}
 
 ### Virtual Background
 
