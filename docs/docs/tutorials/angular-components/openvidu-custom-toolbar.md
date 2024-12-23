@@ -190,21 +190,26 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-    selector: "app-root",
-    template: `
-        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
-            <div *ovToolbar style="text-align: center;">
-                <button (click)="toggleVideo()">Toggle Video</button>
-                <button (click)="toggleAudio()">Toggle Audio</button>
-            </div>
-        </ov-videoconference>
-    `,
-    styles: [""],
-    standalone: true,
-    imports: [OpenViduComponentsModule]
+  selector: 'app-root',
+  template:`
+    <ov-videoconference
+      [token]="token"
+      [livekitUrl]="LIVEKIT_URL"
+      (onTokenRequested)="onTokenRequested($event)"
+    >
+      <div *ovToolbar style="text-align: center;">
+        <button (click)="toggleVideo()">Toggle Video</button>
+        <button (click)="toggleAudio()">Toggle Audio</button>
+      </div>
+
+    </ov-videoconference>
+  `,
+  styles: [''],
+  standalone: true,
+  imports: [OpenViduComponentsModule],
 })
 export class AppComponent {
-    // ...
+  // ...
 }
 ```
 

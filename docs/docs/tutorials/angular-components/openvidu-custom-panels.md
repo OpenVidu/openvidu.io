@@ -185,29 +185,37 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-    selector: "app-root",
-    template: `
-        <!-- OpenVidu Video Conference Component -->
-        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
-            <!-- Custom Panels -->
-            <ov-panel *ovPanel>
-                <!-- Custom Chat Panel -->
-                <div *ovChatPanel id="my-chat-panel">This is my custom chat panel</div>
+	selector: 'app-root',
+	template: `
+		<!-- OpenVidu Video Conference Component -->
+		<ov-videoconference
+			[token]="token"
+			[livekitUrl]="LIVEKIT_URL"
+			(onTokenRequested)="onTokenRequested($event)"
+		>
+			<!-- Custom Panels -->
+			<ov-panel *ovPanel>
+				<!-- Custom Chat Panel -->
+				<div *ovChatPanel id="my-chat-panel">This is my custom chat panel</div>
 
-                <!-- Custom Participants Panel -->
-                <div *ovParticipantsPanel id="my-participants-panel">This is my custom participants panel</div>
+				<!-- Custom Participants Panel -->
+				<div *ovParticipantsPanel id="my-participants-panel">
+					This is my custom participants panel
+				</div>
 
-                <!-- Custom Activities Panel -->
-                <div *ovActivitiesPanel id="my-activities-panel">This is my custom activities panel</div>
-            </ov-panel>
-        </ov-videoconference>
-    `,
-    styles: [""],
-    standalone: true,
-    imports: [OpenViduComponentsModule]
+				<!-- Custom Activities Panel -->
+				<div *ovActivitiesPanel id="my-activities-panel">
+					This is my custom activities panel
+				</div>
+			</ov-panel>
+		</ov-videoconference>
+	`,
+	styles: [''],
+	standalone: true,
+	imports: [OpenViduComponentsModule],
 })
 export class AppComponent {
-    // ...
+	// ...
 }
 ```
 

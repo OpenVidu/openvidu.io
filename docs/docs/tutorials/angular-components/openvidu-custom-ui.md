@@ -166,9 +166,9 @@ To customize the appearance of OpenVidu Components, simply redefine the necessar
 
 ```css
 :root {
-    --ov-primary-color: #yourNewColor; /* Replace #yourNewColor with your chosen hex color code */
+  --ov-primary-color: #yourNewColor; /* Replace #yourNewColor with your chosen hex color code */
 
-    /* Others variables ... */
+  /* Others variables ... */
 }
 ```
 

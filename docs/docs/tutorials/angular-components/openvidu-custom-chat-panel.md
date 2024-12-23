@@ -244,36 +244,36 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-    selector: "app-root",
-    template: `
-        <!-- OpenVidu Video Conference Component -->
-        <ov-videoconference
-            [token]="token"
-            [livekitUrl]="LIVEKIT_URL"
-            (onTokenRequested)="onTokenRequested($event)"
-            (onRoomCreated)="onRoomCreated($event)"
-        >
-            <!-- Chat Panel -->
-            <div *ovChatPanel id="my-panel">
-                <h3>Chat</h3>
-                <div>
-                    <ul>
-                        @for (msg of messages; track msg) {
-                        <li>{{ msg }}</li>
-                        }
-                    </ul>
-                </div>
-                <input value="Hello" #input />
-                <button (click)="send(input.value)">Send</button>
-            </div>
-        </ov-videoconference>
-    `,
-    styles: [""],
-    standalone: true,
-    imports: [OpenViduComponentsModule]
+	selector: 'app-root',
+	template: `
+		<!-- OpenVidu Video Conference Component -->
+		<ov-videoconference
+			[token]="token"
+			[livekitUrl]="LIVEKIT_URL"
+			(onTokenRequested)="onTokenRequested($event)"
+			(onRoomCreated)="onRoomCreated($event)"
+		>
+			<!-- Chat Panel -->
+			<div *ovChatPanel id="my-panel">
+				<h3>Chat</h3>
+				<div>
+					<ul>
+						@for (msg of messages; track msg) {
+						<li>{{ msg }}</li>
+						}
+					</ul>
+				</div>
+				<input value="Hello" #input />
+				<button (click)="send(input.value)">Send</button>
+			</div>
+		</ov-videoconference>
+	`,
+	styles: [''],
+	standalone: true,
+	imports: [OpenViduComponentsModule],
 })
 export class AppComponent {
-    // ...
+	// ...
 }
 ```
 

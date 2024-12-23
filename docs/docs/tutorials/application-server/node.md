@@ -85,21 +85,20 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/node/index.js#L16-L31' target='_blank'>index.js</a>" linenums="16"
 app.post("/token", async (req, res) => {
-    const roomName = req.body.roomName;
-    const participantName = req.body.participantName;
+  const roomName = req.body.roomName;
+  const participantName = req.body.participantName;
 
-    if (!roomName || !participantName) {
-        res.status(400).json({ errorMessage: "roomName and participantName are required" });
-        return;
-    }
+  if (!roomName || !participantName) {
+    res.status(400).json({ errorMessage: "roomName and participantName are required" });
+    return;
+  }
 
-    const at = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET, {
-        // (1)!
-        identity: participantName
-    });
-    at.addGrant({ roomJoin: true, room: roomName }); // (2)!
-    const token = await at.toJwt(); // (3)!
-    res.json({ token }); // (4)!
+  const at = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET, { // (1)!
+    identity: participantName,
+  });
+  at.addGrant({ roomJoin: true, room: roomName }); // (2)!
+  const token = await at.toJwt(); // (3)!
+  res.json({ token }); // (4)!
 });
 ```
 
@@ -124,19 +123,22 @@ If required fields are available, a new JWT token is created. For that we use th
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/node/index.js#L33-L49' target='_blank'>index.js</a>" linenums="33"
-const webhookReceiver = new WebhookReceiver(LIVEKIT_API_KEY, LIVEKIT_API_SECRET); // (1)!
+const webhookReceiver = new WebhookReceiver( // (1)!
+  LIVEKIT_API_KEY,
+  LIVEKIT_API_SECRET
+);
 
 app.post("/livekit/webhook", async (req, res) => {
-    try {
-        const event = await webhookReceiver.receive(
-            req.body, // (2)!
-            req.get("Authorization") // (3)!
-        );
-        console.log(event); // (4)!
-    } catch (error) {
-        console.error("Error validating webhook event", error);
-    }
-    res.status(200).send();
+  try {
+    const event = await webhookReceiver.receive(
+      req.body, // (2)!
+      req.get("Authorization") // (3)!
+    );
+    console.log(event); // (4)!
+  } catch (error) {
+    console.error("Error validating webhook event", error);
+  }
+  res.status(200).send();
 });
 ```
 

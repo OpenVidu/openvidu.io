@@ -176,23 +176,27 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-    selector: "app-root",
-    template: `
-        <!-- OpenVidu Video Conference Component -->
-        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
-            <!-- Custom activities panel -->
-            <div *ovActivitiesPanel id="my-panel">
-                <h3>ACTIVITIES</h3>
-                <div>CUSTOM ACTIVITIES</div>
-            </div>
-        </ov-videoconference>
-    `,
-    styles: [""],
-    standalone: true,
-    imports: [OpenViduComponentsModule]
+	selector: 'app-root',
+	template: `
+		<!-- OpenVidu Video Conference Component -->
+		<ov-videoconference
+			[token]="token"
+			[livekitUrl]="LIVEKIT_URL"
+			(onTokenRequested)="onTokenRequested($event)"
+		>
+			<!-- Custom activities panel -->
+			<div *ovActivitiesPanel id="my-panel">
+				<h3>ACTIVITIES</h3>
+				<div>CUSTOM ACTIVITIES</div>
+			</div>
+		</ov-videoconference>
+	`,
+	styles: [''],
+	standalone: true,
+	imports: [OpenViduComponentsModule],
 })
 export class AppComponent {
-    // ...
+	// ...
 }
 ```
 

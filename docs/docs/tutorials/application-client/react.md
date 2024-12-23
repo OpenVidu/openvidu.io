@@ -237,16 +237,22 @@ In order to display participants' video and audio tracks, the main component int
 ```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-react/src/App.tsx#L187-L205' target='_blank'>App.tsx</a>" linenums="187"
 <div id="layout-container">
     {localTrack && (
-    <VideoComponent track="{localTrack}" participantIdentity="{participantName}" local="{true}" />
-    )} {remoteTracks.map((remoteTrack) => remoteTrack.trackPublication.kind === "video" ? (
-    <VideoComponent
-        key="{remoteTrack.trackPublication.trackSid}"
-        track="{remoteTrack.trackPublication.videoTrack!}"
-        participantIdentity="{remoteTrack.participantIdentity}"
-    />
-    ) : (
-    <AudioComponent key="{remoteTrack.trackPublication.trackSid}" track="{remoteTrack.trackPublication.audioTrack!}" />
-    ) )}
+        <VideoComponent track={localTrack} participantIdentity={participantName} local={true} />
+    )}
+    {remoteTracks.map((remoteTrack) =>
+        remoteTrack.trackPublication.kind === "video" ? (
+            <VideoComponent
+                key={remoteTrack.trackPublication.trackSid}
+                track={remoteTrack.trackPublication.videoTrack!}
+                participantIdentity={remoteTrack.participantIdentity}
+            />
+        ) : (
+            <AudioComponent
+                key={remoteTrack.trackPublication.trackSid}
+                track={remoteTrack.trackPublication.audioTrack!}
+            />
+        )
+    )}
 </div>
 ```
 

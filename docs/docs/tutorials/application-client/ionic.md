@@ -312,15 +312,17 @@ In order to display participants' video and audio tracks, the `app.component.htm
         [participantIdentity]="roomForm.value.participantName!"
         [local]="true"
     ></video-component>
-    } @for (remoteTrack of remoteTracksMap().values(); track remoteTrack.trackPublication.trackSid) { @if
-    (remoteTrack.trackPublication.kind === 'video') {
-    <video-component
-        [track]="remoteTrack.trackPublication.videoTrack!"
-        [participantIdentity]="remoteTrack.participantIdentity"
-    ></video-component>
-    } @else {
-    <audio-component [track]="remoteTrack.trackPublication.audioTrack!" hidden></audio-component>
-    } }
+    }
+    @for (remoteTrack of remoteTracksMap().values(); track remoteTrack.trackPublication.trackSid) {
+        @if (remoteTrack.trackPublication.kind === 'video') {
+        <video-component
+            [track]="remoteTrack.trackPublication.videoTrack!"
+            [participantIdentity]="remoteTrack.participantIdentity"
+        ></video-component>
+        } @else {
+        <audio-component [track]="remoteTrack.trackPublication.audioTrack!" hidden></audio-component>
+        }
+    }
 </div>
 ```
 

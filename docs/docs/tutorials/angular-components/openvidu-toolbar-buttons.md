@@ -97,7 +97,7 @@ Once the server is up and running, you can test the application by visiting [`ht
       `,
       styles: [''],
       standalone: true,
-        imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
+      imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
     })
     export class AppComponent {
       // For local development, leave these variables empty
@@ -196,25 +196,30 @@ In the `app.component.ts` file, you can see the following code snippet:
 
 ```typescript
 @Component({
-    selector: "app-root",
-    template: `
-        <ov-videoconference [token]="token" [livekitUrl]="LIVEKIT_URL" (onTokenRequested)="onTokenRequested($event)">
-            <div *ovToolbarAdditionalButtons style="text-align: center;">
-                <button mat-icon-button (click)="toggleVideo()">
-                    <mat-icon>videocam</mat-icon>
-                </button>
-                <button mat-icon-button (click)="toggleAudio()">
-                    <mat-icon>mic</mat-icon>
-                </button>
-            </div>
-        </ov-videoconference>
-    `,
-    styles: [""],
-    standalone: true,
-    imports: [OpenViduComponentsModule, MatIconButton, MatIcon]
+  selector: 'app-root',
+  template:`
+    <ov-videoconference
+      [token]="token"
+      [livekitUrl]="LIVEKIT_URL"
+      (onTokenRequested)="onTokenRequested($event)"
+    >
+      <div *ovToolbarAdditionalButtons style="text-align: center;">
+        <button mat-icon-button (click)="toggleVideo()">
+          <mat-icon>videocam</mat-icon>
+        </button>
+        <button mat-icon-button (click)="toggleAudio()">
+          <mat-icon>mic</mat-icon>
+        </button>
+      </div>
+
+    </ov-videoconference>
+  `,
+  styles: [''],
+  standalone: true,
+  imports: [OpenViduComponentsModule, MatIconButton, MatIcon],
 })
 export class AppComponent {
-    // ...
+  // ...
 }
 ```
 
