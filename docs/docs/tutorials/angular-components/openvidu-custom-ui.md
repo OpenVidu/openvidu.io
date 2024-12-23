@@ -1,6 +1,6 @@
 # openvidu-custom-ui
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
 
 Creating a unique and intuitive user interface (UI) is essential for ensuring a great user experience. **OpenVidu Components Angular** allows for flexibility in UI customization to fit your application's design requirements.
 

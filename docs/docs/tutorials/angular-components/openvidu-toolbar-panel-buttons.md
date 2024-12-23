@@ -1,6 +1,6 @@
 # openvidu-toolbar-panel-buttons
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target=\_blank }
 
 The **openvidu-toolbar-panel-buttons** tutorial demonstrates how to add custom buttons to the right part of the default toolbar in the OpenVidu Components Angular library.
 

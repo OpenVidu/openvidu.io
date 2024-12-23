@@ -1,6 +1,6 @@
 # .NET
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/dotnet){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-server/dotnet){ .md-button target=\_blank }
 
 This is a minimal server application built for .NET with [ASP.NET Core Minimal APIs](https://docs.microsoft.com/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){:target="\_blank"} that allows:
 
@@ -38,7 +38,7 @@ The application is a simple ASP.NET Core Minimal APIs app with a single file `Pr
 
 Let's see the code `Program.cs` file:
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L8-L37' target='_blank'>Program.cs</a>" linenums="8"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-server/dotnet/Program.cs#L8-L37' target='_blank'>Program.cs</a>" linenums="8"
 var builder = WebApplication.CreateBuilder(args); // (1)!
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins"; // (2)!
 
@@ -98,7 +98,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 - `roomName`: the name of the Room where the user wants to connect.
 - `participantName`: the name of the participant that wants to connect to the Room.
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L39-L54' target='_blank'>Program.cs</a>" linenums="39"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-server/dotnet/Program.cs#L39-L54' target='_blank'>Program.cs</a>" linenums="39"
 app.MapPost("/token", async (HttpRequest request) =>
 {
     var body = new StreamReader(request.Body); // (1)!
@@ -126,7 +126,7 @@ The endpoint obtains a Dictionary from the body request, and check if fields `ro
 
 If required fields are available, a new JWT token is created. Unfortunately there is no .NET SDK for LiveKit, so we need to create the JWT token manually. The `CreateLiveKitJWT` method is responsible for creating the LiveKit compatible JWT token:
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L80-L100' target='_blank'>Program.cs</a>" linenums="80"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-server/dotnet/Program.cs#L80-L100' target='_blank'>Program.cs</a>" linenums="80"
 string CreateLiveKitJWT(string roomName, string participantName)
 {
     JwtHeader headers = new(new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(LIVEKIT_API_SECRET)), "HS256")); // (1)!
@@ -168,7 +168,7 @@ Finally, the returned token is sent back to the client.
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L56-L78' target='_blank'>Program.cs</a>" linenums="56"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-server/dotnet/Program.cs#L56-L78' target='_blank'>Program.cs</a>" linenums="56"
 app.MapPost("/livekit/webhook", async (HttpRequest request) =>
 {
     var body = new StreamReader(request.Body);
@@ -204,7 +204,7 @@ The endpoint receives the incoming webhook event and validates it to ensure it i
 
 Unfortunately there is no .NET SDK for LiveKit, so we need to manually validate the webhook event. The `VerifyWebhookEvent` method does that:
 
-```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-server/dotnet/Program.cs#L102-L125' target='_blank'>Program.cs</a>" linenums="102"
+```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-server/dotnet/Program.cs#L102-L125' target='_blank'>Program.cs</a>" linenums="102"
 void VerifyWebhookEvent(string authHeader, string body)
 {
     var utf8Encoding = new UTF8Encoding();

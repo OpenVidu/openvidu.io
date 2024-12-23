@@ -1,6 +1,6 @@
 # openvidu-toggle-hand
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-toggle-hand){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-toggle-hand){ .md-button target=\_blank }
 
 The **openvidu-toggle-hand** tutorial demonstrates how to add a toggle hand feature to the OpenVidu Components Angular library.
 

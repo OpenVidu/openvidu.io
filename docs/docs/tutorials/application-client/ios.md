@@ -1,6 +1,6 @@
 # openvidu-ios
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-ios){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-client/openvidu-ios){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built for **iOS**, using **Swift**, that allows:
 
@@ -135,7 +135,7 @@ If these URLs are left empty, the user will be prompted to enter them when the a
 
 When the user clicks the `Save` button, the `LKButton` action triggers the validation and saves the URLs into the `AppContext` and `RoomContext`. The `ConfigureUrlsView` handles this logic:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/Views/ConfigureUrlsView.swift#L50-L64' target='_blank'>ConfigureUrlsView.swift</a>" linenums="28"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-ios/Shared/Views/ConfigureUrlsView.swift#L50-L64' target='_blank'>ConfigureUrlsView.swift</a>" linenums="28"
 LKButton(title: "Save") {
     Task.detached { @MainActor in
         let isApplicationServerValid = isValidURL(self.applicationServerUrl)
@@ -221,7 +221,7 @@ func enableCameraAndMicrophone() async {
 
 The `OpenViduApp.swift` handle the navigation page. When room status is `connected`, the user is redirected to the `RoomView`:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/OpenViduApp.swift' target='_blank'>OpenViduApp.swift</a>"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-ios/Shared/OpenViduApp.swift' target='_blank'>OpenViduApp.swift</a>"
 struct RoomSwitchView: View {
     @EnvironmentObject var appCtx: AppContext
     @EnvironmentObject var roomCtx: RoomContext
@@ -269,7 +269,7 @@ struct RoomSwitchView: View {
 To display the video tracks of participants in the room, the `RoomView.swift` uses various SwiftUI views and custom components. This approach allows the application to dynamically load and display the video tracks as they are received.
 
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/Views/RoomView.swift' target='_blank'>RoomView.swift</a>"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-ios/Shared/Views/RoomView.swift' target='_blank'>RoomView.swift</a>"
 struct RoomView: View {
     @EnvironmentObject var appCtx: AppContext
     @EnvironmentObject var roomCtx: RoomContext
@@ -311,7 +311,7 @@ The `ParticipantView` component is responsible for rendering the video track of 
 
 The **LiveKit Swift SDK** includes a VideoView class, based on UIKit, specifically designed for rendering video tracks. Additionally, subscribed audio tracks are automatically played by default.
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-ios/Shared/Views/ParticipantView.swift' target='_blank'>ParticipantView.swift</a>"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-ios/Shared/Views/ParticipantView.swift' target='_blank'>ParticipantView.swift</a>"
 struct ParticipantView: View {
     @ObservedObject var participant: Participant
     @EnvironmentObject var appCtx: AppContext

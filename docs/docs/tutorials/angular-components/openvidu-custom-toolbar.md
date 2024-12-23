@@ -1,6 +1,6 @@
 # openvidu-custom-toolbar
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
 
 The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default toolbar with a custom one, providing a more tailored user experience.
 

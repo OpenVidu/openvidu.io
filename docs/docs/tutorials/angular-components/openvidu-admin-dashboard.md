@@ -1,6 +1,6 @@
 # openvidu-admin-dashboard
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target=\_blank }
 
 The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin dashboard to manage the recordings of a videoconference using the OpenVidu Components Angular library.
 

@@ -1,6 +1,6 @@
 # openvidu-custom-chat-panel
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-chat-panel){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-custom-chat-panel){ .md-button target=\_blank }
 
 The **openvidu-custom-chat-panel** tutorial demonstrates how to customize the chat panel, providing a more tailored user experience.
 

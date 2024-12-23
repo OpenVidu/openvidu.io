@@ -1,6 +1,6 @@
 # openvidu-additional-panels
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-additional-panels){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-additional-panels){ .md-button target=\_blank }
 
 The **openvidu-additional-panels** tutorial demonstrates how to add new panels to the videoconference, providing a more tailored user experience.
 

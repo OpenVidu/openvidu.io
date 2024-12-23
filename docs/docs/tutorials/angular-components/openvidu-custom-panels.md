@@ -1,6 +1,6 @@
 # openvidu-custom-panels
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-panels){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-custom-panels){ .md-button target=\_blank }
 
 The **openvidu-custom-panels** tutorial demonstrates how to replace the default panels with a custom ones, providing a more tailored user experience.
 

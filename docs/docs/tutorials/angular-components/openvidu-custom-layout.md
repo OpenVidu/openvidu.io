@@ -1,6 +1,6 @@
 # openvidu-custom-layout
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-layout){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-custom-layout){ .md-button target=\_blank }
 
 The **openvidu-custom-layout** tutorial demonstrates how to replace the default layout of the OpenVidu Components Angular library with a custom layout.
 

@@ -1,6 +1,6 @@
 # openvidu-electron
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-js){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-client/openvidu-js){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built with **Electron** that allows:
 
@@ -48,7 +48,7 @@ npm install livekit-client
 
 Now let's see the code of the `app.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L1-L7' target='_blank'>app.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L1-L7' target='_blank'>app.js</a>" linenums="1"
 const { Room, RoomEvent } = require("livekit-client"); // (1)!
 
 // Configure these constants with correct URLs depending on your deployment
@@ -79,7 +79,7 @@ The `app.js` file defines the following variables:
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L9-L57' target='_blank'>app.js</a>" linenums="9"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L9-L57' target='_blank'>app.js</a>" linenums="9"
 async function joinRoom() {
     // Disable 'Join' button
     document.getElementById("join-button").disabled = true;
@@ -148,7 +148,7 @@ The `joinRoom()` function performs the following actions:
 
     -   **`RoomEvent.TrackSubscribed`**: This event is triggered when a new track is received in the room. It handles the attachment of the track to the HTML page, assigning an ID, and appending it to the `layout-container` element. If the track is of kind `video`, a `video-container` is created and participant data is appended as well.
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L59-L72' target='_blank'>app.js</a>" linenums="59"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L59-L72' target='_blank'>app.js</a>" linenums="59"
     function addTrack(track, participantIdentity, local = false) {
         const element = track.attach(); // (1)!
         element.id = track.sid;
@@ -167,7 +167,7 @@ The `joinRoom()` function performs the following actions:
 
     1. Attach the track to an HTML element.
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L101-L121' target='_blank'>app.js</a>" linenums="101"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L101-L121' target='_blank'>app.js</a>" linenums="101"
     function createVideoContainer(participantIdentity, local = false) {
         const videoContainer = document.createElement("div");
         videoContainer.id = `camera-${participantIdentity}`;
@@ -193,7 +193,7 @@ The `joinRoom()` function performs the following actions:
 
     -   **`RoomEvent.TrackUnsubscribed`**: This event occurs when a track is destroyed, and it takes care of detaching the track from the HTML page and removing it from the DOM. If the track is a `video` track, `video-container` with the participant's identity is removed as well.
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L123-L126' target='_blank'>app.js</a>" linenums="123"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L123-L126' target='_blank'>app.js</a>" linenums="123"
     function removeVideoContainer(participantIdentity) {
         const videoContainer = document.getElementById(`camera-${participantIdentity}`);
         videoContainer?.remove();
@@ -209,7 +209,7 @@ The `joinRoom()` function performs the following actions:
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L135-L167' target='_blank'>app.js</a>" linenums="135"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L135-L167' target='_blank'>app.js</a>" linenums="135"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -257,7 +257,7 @@ The `joinRoom()` function performs the following actions:
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-electron/src/app.js#L74-L92' target='_blank'>app.js</a>" linenums="74"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-electron/src/app.js#L74-L92' target='_blank'>app.js</a>" linenums="74"
 async function leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await room.disconnect(); // (1)!

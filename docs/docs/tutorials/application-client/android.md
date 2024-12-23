@@ -1,6 +1,6 @@
 # openvidu-android
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-android){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-client/openvidu-android){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built for **Android**, using **Kotlin**, that allows:
 
@@ -45,7 +45,7 @@ The activity layout files are located in the `app/src/main/res/layout` directory
 
 To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK](https://docs.livekit.io/client-sdk-android){:target="\_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
 
-```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/build.gradle.kts#L43' target='_blank'>build.gradle.kts</a>"
+```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/build.gradle.kts#L43' target='_blank'>build.gradle.kts</a>"
 dependencies {
     implementation 'io.livekit:livekit-android:2.5.0'
 }
@@ -53,7 +53,7 @@ dependencies {
 
 You will also need JitPack as a repository in the `settings.gradle.kts` file:
 
-```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/settings.gradle.kts#L19' target='_blank'>settings.gradle.kts</a>"
+```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/settings.gradle.kts#L19' target='_blank'>settings.gradle.kts</a>"
 dependencyResolutionManagement {
     //...
     repositories {
@@ -72,7 +72,7 @@ In order to be able to test the application on an Android device, the applicatio
 
 First, you need to add the following permissions to the `AndroidManifest.xml` file located in the `app/src/main` directory:
 
-```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/AndroidManifest.xml#L9-L12' target='_blank'>AndroidManifest.xml</a>" linenums="9"
+```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/AndroidManifest.xml#L9-L12' target='_blank'>AndroidManifest.xml</a>" linenums="9"
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.CAMERA" />
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -81,7 +81,7 @@ First, you need to add the following permissions to the `AndroidManifest.xml` fi
 
 Then, the app need to request these permissions when the user joins the video call room. This is done in the `RoomLayoutActivity.kt` file by calling the `requestNeededPermissions` method in the `onCreate` method:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L175-L208' target='_blank'>RoomLayoutActivity.kt</a>" linenums="175"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L175-L208' target='_blank'>RoomLayoutActivity.kt</a>" linenums="175"
 private fun requestNeededPermissions(onHasPermissions: () -> Unit) {
     val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { grants ->
@@ -139,7 +139,7 @@ If these URLs are left empty, the user will be prompted to enter the URLs when t
 
 When the user clicks the `Save` button, the `onSaveUrls()` method is called, which saves the URLs in the `Urls` object and finishes the activity, returning to the MainActivity:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/ConfigureUrlsActivity.kt#L24-L35' target='_blank'>ConfigureUrlsActivity.kt</a>" linenums="24"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/ConfigureUrlsActivity.kt#L24-L35' target='_blank'>ConfigureUrlsActivity.kt</a>" linenums="24"
 private fun onSaveUrls() {
     val serverUrl = binding.serverUrl.text.toString()
     val livekitUrl = binding.livekitUrl.text.toString()
@@ -160,7 +160,7 @@ private fun onSaveUrls() {
 
 Before joining a room, the user must provide a room name and a user name. After the user specifies them, when they click the `Join` button, the `navigateToRoomLayoutActivity()` method of the `MainActivity.kt` file is called, which simply set the values of the participant name and room name in the intent and starts the `RoomLayoutActivity`:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/MainActivity.kt#L33-L49' target='_blank'>MainActivity.kt</a>" linenums="33"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/MainActivity.kt#L33-L49' target='_blank'>MainActivity.kt</a>" linenums="33"
 private fun navigateToRoomLayoutActivity() {
     binding.joinButton.isEnabled = false
 
@@ -182,7 +182,7 @@ private fun navigateToRoomLayoutActivity() {
 
 Now let's see the code of the `RoomLayoutActivity.kt` file:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L32-L50' target='_blank'>RoomLayoutActivity.kt</a>" linenums="32"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L32-L50' target='_blank'>RoomLayoutActivity.kt</a>" linenums="32"
 data class TrackInfo( // (1)!
     val track: VideoTrack,
     val participantIdentity: String,
@@ -218,7 +218,7 @@ The `RoomLayoutActivity.kt` file defines the following variables:
 
 When the activity is created, the `onCreate` method is called. This method initializes the activity layout, create a `Room` object, initializes the `RecyclerView` and request needed permissions:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L52-L69' target='_blank'>RoomLayoutActivity.kt</a>" linenums="52"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L52-L69' target='_blank'>RoomLayoutActivity.kt</a>" linenums="52"
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityRoomLayoutBinding.inflate(layoutInflater)
@@ -241,7 +241,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 After the application check if the user has granted permissions, the `connectToRoom()` method is called:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L77-L134' target='_blank'>RoomLayoutActivity.kt</a>" linenums="77"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L77-L134' target='_blank'>RoomLayoutActivity.kt</a>" linenums="77"
 private fun connectToRoom() {
     // Get the room name and participant name from the intent
     val participantName = intent.getStringExtra("participantName") ?: "Participant1" // (1)!
@@ -319,7 +319,7 @@ The `connectToRoom()` method performs the following actions:
 
     -   **`RoomEvent.TrackSubscribed`**: This event is triggered when a new track is received in the room. It manages the storage of the new track in the `participantTracks` list if it is a video track and notify the Adapter that a new item has been inserted.
 
-    ```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L136-L144' target='_blank'>RoomLayoutActivity.kt</a>" linenums="136"
+    ```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L136-L144' target='_blank'>RoomLayoutActivity.kt</a>" linenums="136"
     private fun onTrackSubscribed(event: RoomEvent.TrackSubscribed) {
         val track = event.track
 
@@ -333,7 +333,7 @@ The `connectToRoom()` method performs the following actions:
 
     -   **`RoomEvent.TrackUnsubscribed`**: This event occurs when a track is destroyed, and it takes care of removing the video track from the `participantTracks` list and notify the Adapter that an item has been removed.
 
-    ```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L146-L158' target='_blank'>RoomLayoutActivity.kt</a>" linenums="146"
+    ```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L146-L158' target='_blank'>RoomLayoutActivity.kt</a>" linenums="146"
     private fun onTrackUnsubscribed(event: RoomEvent.TrackUnsubscribed) {
         val track = event.track
 
@@ -357,7 +357,7 @@ The `connectToRoom()` method performs the following actions:
 
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 
-    ```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L210-L229' target='_blank'>RoomLayoutActivity.kt</a>" linenums="210"
+    ```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L210-L229' target='_blank'>RoomLayoutActivity.kt</a>" linenums="210"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -394,7 +394,7 @@ In order to display the video tracks of the participants in the room, the `RoomL
 
 Whenever a new video track is added to the `participantTracks` list, the `ParticipantAdapter` is notified that a new item has been inserted. The `ParticipantAdapter` then updates the `RecyclerView` to display the new video track by calling the `render` method of the `ParticipantViewHolder`:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/ParticipantViewHolder.kt#L12-L28' target='_blank'>ParticipantViewHolder.kt</a>" linenums="12"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/ParticipantViewHolder.kt#L12-L28' target='_blank'>ParticipantViewHolder.kt</a>" linenums="12"
 fun render(trackInfo: TrackInfo, room: Room) {
     val participantIdentity = if (trackInfo.isLocal) {
         trackInfo.participantIdentity + " (You)"
@@ -430,7 +430,7 @@ The `render` method performs the following actions:
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` method:
 
-```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L160-L173' target='_blank'>RoomLayoutActivity.kt</a>" linenums="160"
+```kotlin title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-android/app/src/main/java/io/openvidu/android/RoomLayoutActivity.kt#L160-L173' target='_blank'>RoomLayoutActivity.kt</a>" linenums="160"
 private fun leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     room.disconnect() // (1)!

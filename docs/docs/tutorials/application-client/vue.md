@@ -1,6 +1,6 @@
 # openvidu-vue
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-vue){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-client/openvidu-vue){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built with **Vue** that allows:
 
@@ -48,7 +48,7 @@ npm install livekit-client
 
 Now let's see the code of the `App.vue` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/App.vue#L14-L50' target='_blank'>App.vue</a>" linenums="14"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/App.vue#L14-L50' target='_blank'>App.vue</a>" linenums="14"
 type TrackInfo = {
     // (1)!
     trackPublication: RemoteTrackPublication;
@@ -116,7 +116,7 @@ The `App.vue` file defines the following variables:
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` function is called:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/App.vue#L52-L90' target='_blank'>App.vue</a>" linenums="52"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/App.vue#L52-L90' target='_blank'>App.vue</a>" linenums="52"
 async function joinRoom() {
     // Initialize a new Room object
     room.value = new Room(); // (1)!
@@ -190,7 +190,7 @@ The `joinRoom()` function performs the following actions:
 
 3.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:
 
-    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/App.vue#L109-L141' target='_blank'>App.vue</a>" linenums="109"
+    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/App.vue#L109-L141' target='_blank'>App.vue</a>" linenums="109"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -238,7 +238,7 @@ The `joinRoom()` function performs the following actions:
 
 In order to display participants' video and audio tracks, the main component integrates the `VideoComponent` and `AudioComponent`.
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/App.vue#L168-L183' target='_blank'>App.vue</a>" linenums="168"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/App.vue#L168-L183' target='_blank'>App.vue</a>" linenums="168"
 <div id="layout-container">
     <VideoComponent v-if="localTrack" :track="localTrack" :participantIdentity="participantName" :local="true" />
     <template v-for="remoteTrack of remoteTracksMap.values()" :key="remoteTrack.trackPublication.trackSid">
@@ -264,7 +264,7 @@ This code snippet does the following:
 
 Let's see now the code of the `VideoComponent.vue` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/components/VideoComponent.vue#L5-L26' target='_blank'>VideoComponent.vue</a>" linenums="5"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/components/VideoComponent.vue#L5-L26' target='_blank'>VideoComponent.vue</a>" linenums="5"
 const props = withDefaults(
     defineProps<{
         track: LocalVideoTrack | RemoteVideoTrack; // (1)!
@@ -310,7 +310,7 @@ The `VideoComponent` does the following:
 
 Finally, let's see the code of the `AudioComponent.vue` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/components/AudioComponent.vue#L5-L18' target='_blank'>AudioComponent.vue</a>" linenums="5"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/components/AudioComponent.vue#L5-L18' target='_blank'>AudioComponent.vue</a>" linenums="5"
 const props = defineProps<{
     track: LocalAudioTrack | RemoteAudioTrack; // (1)!
 }>();
@@ -340,7 +340,7 @@ The `AudioComponent` is similar to the `VideoComponent` but is used to display a
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` function:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/application-client/openvidu-vue/src/App.vue#L92-L107' target='_blank'>App.vue</a>" linenums="92"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0-beta3/application-client/openvidu-vue/src/App.vue#L92-L107' target='_blank'>App.vue</a>" linenums="92"
 async function leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await room.value?.disconnect(); // (1)!
