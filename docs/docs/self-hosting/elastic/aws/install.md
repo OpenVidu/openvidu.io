@@ -1,7 +1,7 @@
 # OpenVidu Elastic Installation: AWS
 
 !!!info
-    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target=_blank} to get your license key.
+    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in AWS. Deployed services are the same as the [On Premises Elastic Installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
@@ -55,7 +55,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/elastic/aws/openvidu-elastic-config.png)
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account){:target=_blank}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
 
