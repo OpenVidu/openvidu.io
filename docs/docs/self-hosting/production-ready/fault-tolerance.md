@@ -20,9 +20,9 @@ You can have any number of Media Nodes in an OpenVidu Elastic deployment. Media 
 
 In the event of a Media Node failure, there are [3 services](../deployment-types.md#media-node-services) affected with the following behaviors:
 
-- Active [Rooms](https://docs.livekit.io/realtime/concepts/api-primitives/){:target=_blank} hosted by the failed Media Node will suffer a temporary interruption of about 5 seconds (this is the time the clients take to realize the Media Node has crashed). After that time has elapsed, the Room will be automatically reconstructed in a healthy Media Node. Every participant and track will be recreated and the Room will be fully operational again.
-- Active [Egress](https://docs.livekit.io/egress-ingress/egress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. If the node's disk is still accessible, egress output files can still be recovered. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
-- Active [Ingress](https://docs.livekit.io/egress-ingress/ingress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events](https://docs.livekit.io/realtime/client/events/#Events){:target=_blank} indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some famous tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
+- Active [Rooms](https://docs.livekit.io/home/get-started/api-primitives/){:target=_blank} hosted by the failed Media Node will suffer a temporary interruption of about 5 seconds (this is the time the clients take to realize the Media Node has crashed). After that time has elapsed, the Room will be automatically reconstructed in a healthy Media Node. Every participant and track will be recreated and the Room will be fully operational again.
+- Active [Egress](https://docs.livekit.io/home/egress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. If the node's disk is still accessible, egress output files can still be recovered. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
+- Active [Ingress](https://docs.livekit.io/home/ingress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events](https://docs.livekit.io/home/client/events/#Events){:target=_blank} indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some famous tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
 
 ## Fault tolerance in OpenVidu High Availability
 
@@ -34,11 +34,11 @@ An OpenVidu High Availability deployment runs Master Nodes and Media Nodes in se
 
 The number of Master Nodes in an OpenVidu High Availability deployment is **4**. This minimum number of nodes ensures that every service running in the Master Nodes is fault tolerant.
 
-If **one** Master Node fails, the service won't be affected. Some users may trigger [event](https://docs.livekit.io/realtime/client/events/#Events){:target=_blank} `Reconnecting` closely followed by `Reconnected`, but the service will remain fully operational.
+If **one** Master Node fails, the service won't be affected. Some users may trigger [event](https://docs.livekit.io/home/client/events/#Events){:target=_blank} `Reconnecting` closely followed by `Reconnected`, but the service will remain fully operational.
 
 When two or more Master Nodes fail simultaneously, there can be some degradation of the service:
 
-- If **two** Master Nodes fail, the service will still be operational for the most part. Only active [Egress](https://docs.livekit.io/egress-ingress/egress/overview/){:target=_blank} might be affected, as they won't be stored in the Minio storage. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
+- If **two** Master Nodes fail, the service will still be operational for the most part. Only active [Egress](https://docs.livekit.io/home/egress/overview/){:target=_blank} might be affected, as they won't be stored in the Minio storage. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
 - If **three or four** Master Nodes fail, the service will be interrupted.
 
 In the event of Master Node failures, the service will be automatically restored as soon as the failed node(s) are recovered.
@@ -49,13 +49,13 @@ Fault tolerance of Media Nodes in OpenVidu Elastic behaves the same as in [OpenV
 
 ## Recovering Egress from node failures
 
-[Egress](https://docs.livekit.io/egress-ingress/egress/overview/){:target=_blank} processes can be affected by the crash of a Master Node or a Media Node. To recover Egress from...
+[Egress](https://docs.livekit.io/home/egress/overview/){:target=_blank} processes can be affected by the crash of a Master Node or a Media Node. To recover Egress from...
 
 ### From Master Node failures
 
 !!! info "This only applies to OpenVidu High Availability"
 
-If 2 Master Nodes crash, the Egress process won't be able to use the Minio storage. This has different consequences depending on the [configured outputs](https://docs.livekit.io/egress-ingress/egress/overview/#Supported-Outputs){:target=_blank} for your Egress process:
+If 2 Master Nodes crash, the Egress process won't be able to use the Minio storage. This has different consequences depending on the [configured outputs](https://docs.livekit.io/home/egress/overview/#Supported-Outputs){:target=_blank} for your Egress process:
 
 - For **MP4, OGG or WEBM files**, if the Egress is stopped when 2 Master Nodes are down, the output files will not be uploaded to Minio.
 - For **HLS**, the segments will stop being uploaded to Minio. If you are consuming these segments from another process, note that new segments will stop appearing.
@@ -68,4 +68,4 @@ In both cases, files are not lost and can be recovered. They will be available i
 
 If the Media Node hosting an ongoing Egress process crashes, then the Egress process will be immediately interrupted. But as long as the disk of the crashed Media Node is still accessible, you may recover the output files. They will be available in the Media Node at path `/opt/openvidu/egress_data/home/egress/tmp`.
 
-It is possible that if the crashed Egress had **MP4** as [configured output](https://docs.livekit.io/egress-ingress/egress/overview/#Supported-Outputs){:target=_blank} (which is an option available for [Room Composite](https://docs.livekit.io/egress-ingress/egress/overview/#Room-Composite-Egress){:target=_blank} and [Track Composite](https://docs.livekit.io/egress-ingress/egress/overview/#Track-Composite-Egress){:target=_blank}) the recovered file may not be directly playable and it may require a repair process.
+It is possible that if the crashed Egress had **MP4** as [configured output](https://docs.livekit.io/home/egress/overview/#Supported-Outputs){:target=_blank} (which is an option available for [Room Composite](https://docs.livekit.io/home/egress/overview/#Room-Composite-Egress){:target=_blank} and [Track Composite](https://docs.livekit.io/home/egress/overview/#Track-Composite-Egress){:target=_blank}) the recovered file may not be directly playable and it may require a repair process.

@@ -5,7 +5,7 @@
 This is a minimal server application built for Java with [Spring Boot](https://spring.io/){:target="\_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}.
 
@@ -98,7 +98,7 @@ public ResponseEntity<Map<String, String>> createToken(@RequestBody Map<String, 
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's name and identity in the AccessToken.
-3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/realtime/concepts/authentication/#Video-grant){:target="\_blank"}.
+3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 4. Finally, the token is sent back to the client.
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
@@ -107,14 +107,14 @@ If required fields are available, a new JWT token is created. For that we use th
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's name and identity in the AccessToken.
-3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/realtime/concepts/authentication/#Video-grant){:target="\_blank"}.
+3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 4. Finally, the token is sent back to the client.
 
 ---
 
 #### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
 ```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L50-L60' target='_blank'>Controller.java</a>" linenums="50"
 @PostMapping(value = "/livekit/webhook", consumes = "application/webhook+json")
@@ -131,7 +131,7 @@ public ResponseEntity<String> receiveWebhook(@RequestHeader("Authorization") Str
 ```
 
 1. We need the 'Authorization' header and the raw body of the HTTP request.
-2. Initialize the WebhookReceiver using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+2. Initialize the WebhookReceiver using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 3. Obtain the `WebhookEvent` object using the `WebhookReceiver#receive` method. It takes the raw body as a String and the Authorization header of the request.
 4. Consume the event as you whish.
 

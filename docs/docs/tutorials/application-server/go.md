@@ -5,7 +5,7 @@
 This is a minimal server application built for Go with [Gin](https://gin-gonic.com/){:target="\_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 
 It internally uses the [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="\_blank"}.
 
@@ -118,7 +118,7 @@ func createToken(context *gin.Context) {
 ```
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
-2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/realtime/concepts/authentication/#Video-grant){:target="\_blank"}.
+2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 3. We convert the AccessToken to a JWT token.
 4. Finally, the token is sent back to the client.
 
@@ -127,7 +127,7 @@ We first load the request body into a struct with `roomName` and `participantNam
 If required fields are available, a new JWT token is created. For that we use the [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="\_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
-2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/realtime/concepts/authentication/#Video-grant){:target="\_blank"}.
+2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 3. We convert the AccessToken to a JWT token and return it to the client.
 4. Finally, the token is sent back to the client.
 
@@ -135,7 +135,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 ### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
 ```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/go/main.go#L51-L61' target='_blank'>main.go</a>" linenums="51"
 func receiveWebhook(context *gin.Context) {
@@ -152,13 +152,13 @@ func receiveWebhook(context *gin.Context) {
 ```
 
 1. Create a `SimpleKeyProvider` with the `LIVEKIT_API_KEY` and `LIVEKIT_API`.
-2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](https://docs.livekit.io/realtime/server/webhooks/){:target="\_blank"}.
+2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](https://docs.livekit.io/home/server/webhooks/){:target="\_blank"}.
 3. Consume the event as you whish.
 
 <span></span>
 
 1. Create a `SimpleKeyProvider` with the `LIVEKIT_API_KEY` and `LIVEKIT_API`.
-2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](https://docs.livekit.io/realtime/server/webhooks/){:target="\_blank"}.
+2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](https://docs.livekit.io/home/server/webhooks/){:target="\_blank"}.
 3. Consume the event as you whish.
 
 --8<-- "shared/tutorials/webhook-local-server.md"

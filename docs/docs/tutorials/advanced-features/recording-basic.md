@@ -24,7 +24,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run the application
 
-To run this application, you need [Node](https://nodejs.org/es/download/){:target="\_blank"} installed on your device.
+To run this application, you need [Node](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -124,7 +124,7 @@ There are three new environment variables:
 
 Besides, the `index.js` file configures the server to serve static files from the `public` directory.
 
-It also initializes the `EgressClient`, which will help interacting with [Egress API](https://docs.livekit.io/realtime/egress/api/){:target="\_blank"} to manage recordings, and the `S3Service`, which will help interacting with the S3 bucket:
+It also initializes the `EgressClient`, which will help interacting with [Egress API](https://docs.livekit.io/home/egress/api/){:target="\_blank"} to manage recordings, and the `S3Service`, which will help interacting with the S3 bucket:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/advanced-features/openvidu-recording-basic-node/src/index.js#L59-L60' target='_blank'>index.js</a>" linenums="59"
 const egressClient = new EgressClient(LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET);
@@ -203,7 +203,7 @@ app.post("/recordings/start", async (req, res) => {
 2. If there is already an active recording for the room, the server returns a `409 Conflict` status code.
 3. Use the `EncodedFileOutput` class to export the recording to an external file.
 4. Define the file type as `MP4`.
-5. Define the file path where the recording will be stored. The `{room_name}`, `{room_id}`, and `{time}` templates will be replaced by the actual room name, room ID and timestamp, respectively. Check out all available [filename templates](https://docs.livekit.io/realtime/egress/overview/#Filename-templating){:target="\_blank"}.
+5. Define the file path where the recording will be stored. The `{room_name}`, `{room_id}`, and `{time}` templates will be replaced by the actual room name, room ID and timestamp, respectively. Check out all available [filename templates](https://docs.livekit.io/home/egress/overview/#Filename-templating){:target="\_blank"}.
 6. Start a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with the `roomName` and `fileOutput` as parameters.
 7. Extract the recording name from the `fileResults` array.
 8. Return the recording metadata to the client.
@@ -226,7 +226,7 @@ This endpoint does the following:
     };
     ```
 
-3.  Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{room_id}`, and `{time}` templates will be replaced by the actual room name, room ID, and timestamp, respectively. Check out all available [filename templates](https://docs.livekit.io/realtime/egress/overview/#Filename-templating){:target="\_blank"}.
+3.  Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{room_id}`, and `{time}` templates will be replaced by the actual room name, room ID, and timestamp, respectively. Check out all available [filename templates](https://docs.livekit.io/home/egress/overview/#Filename-templating){:target="\_blank"}.
 
     !!! info "Saving recording metadata"
 

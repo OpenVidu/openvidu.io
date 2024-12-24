@@ -3,7 +3,7 @@
 Every application server below has two specific purposes: 
 
 - Generate LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receive LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+- Receive LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 
 To do so they all define two REST endpoints:
 

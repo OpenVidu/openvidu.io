@@ -1,4 +1,4 @@
-To run the client application tutorial, you need [Xcode](https://apps.apple.com/es/app/xcode/id497799835?mt=12){:target="\_blank"} installed on your MacOS.
+To run the client application tutorial, you need [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12){:target="\_blank"} installed on your MacOS.
 
 1. Launch Xcode and open the `OpenViduIOS.xcodeproj` that you can find under `openvidu-livekit-tutorials/application-client/openvidu-ios`.
 

@@ -42,7 +42,7 @@ This application is designed to be beginner-friendly and consists of only three 
 To use the LiveKit JS SDK in your application, you need to include the library in your HTML file. You can do this by adding the following script tag to the `<head>` section of your HTML file:
 
 ```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/index.html#L32' target='_blank'>index.html</a>" linenums="32"
-<script src="https://cdn.jsdelivr.net/npm/livekit-client@2.1.5/dist/livekit-client.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/livekit-client@2.5.9/dist/livekit-client.umd.js"></script>
 ```
 
 Then, you can use the `LivekitClient` object in your JavaScript code by referencing it from the `window` object under `LivekitClient`. When accessing symbols from the class, you will need to prefix them with `LivekitClient.`. For example, `Room` becomes `LivekitClient.Room`.

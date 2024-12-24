@@ -29,7 +29,7 @@ const room = new Room();
 await room.connect(wsUrl, token);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/client/connect/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/){target="\_blank"}
 
 ---
 
@@ -39,7 +39,7 @@ await room.connect(wsUrl, token);
 await room.disconnect();
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/client/connect/#Leaving-a-Room){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#Leaving-a-Room){target="\_blank"}
 
 ---
 
@@ -188,7 +188,7 @@ participant.on(ParticipantEvent.DataReceived, (payload: Uint8Array, kind: DataPa
 });
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/client/data-messages/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/data/){target="\_blank"}
 
 ---
 
@@ -209,8 +209,8 @@ These operations are only available in the server SDKs, and not in the client SD
 You have here the complete list of the server-side operations, documented for the HTTP Server API. All the LiveKit Server SDKs have the same operations.
 
 - [**RoomService**](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}: to manage Rooms and Participants.
-- [**Egress**](https://docs.livekit.io/realtime/egress/overview/#API){target="\_blank"}: to manage egress operations.
-- [**Ingress**](https://docs.livekit.io/realtime/ingress/overview/#API){target="\_blank"}: to manage ingress operations.
+- [**Egress**](https://docs.livekit.io/home/egress/overview/#API){target="\_blank"}: to manage egress operations.
+- [**Ingress**](https://docs.livekit.io/home/ingress/overview/#API){target="\_blank"}: to manage ingress operations.
 
 ### Screen Sharing
 
@@ -281,7 +281,7 @@ You can record your Rooms using the Egress module. Egress allows exporting media
 
 Visit the LiveKit reference documentation for a detailed explanation of Egress:
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/egress/overview/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/egress/overview/){target="\_blank"}
 
 ### Webhooks
 
@@ -291,4 +291,4 @@ Every application server tutorial here is ready to receive webhooks: [Applicatio
 
 Visit the LiveKit reference documentation for a detailed explanation of each webhook event:
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/realtime/server/webhooks/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/server/webhooks/){target="\_blank"}

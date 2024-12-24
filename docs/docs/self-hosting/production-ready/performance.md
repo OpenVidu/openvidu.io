@@ -47,7 +47,7 @@ We believe that by combining the best of the LiveKit stack with a top-notch WebR
 
 OpenVidu developers are hard at work with integrating *mediasoup* as a WebRTC engine within LiveKit, aiming to provide feature parity with the original Pion engine.
 
-Currently there are two [client SDK events](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"} that are not triggered when using mediasoup:
+Currently there are two [client SDK events](https://docs.livekit.io/home/client/events/#Events){target="\_blank"} that are not triggered when using mediasoup:
 
 - No `ConnectionQualityChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#ConnectionQualityChanged){target="\_blank"}).
 - No `TrackStreamStateChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#TrackStreamStateChanged){target="\_blank"}).
@@ -108,7 +108,7 @@ Each test begins with no participants on the media server. First, the test contr
 - If the participants sends video and audio, the participant is connected after confirming that both local tracks are being sent correctly.
 - If the participant acts as viewer (is only receiving video and audio from a different participant), the participant is connected when it confirms that it is receiving at least both tracks from a user in the room.
 
-The test stops when it determines that no more users can be added to a room. This happens when a user has 5 failed connections. A connection is considered to have failed when it terminates with a fatal error (in LiveKit this is captured when a [`Disconnected`](https://docs.livekit.io/realtime/client/events/#Events){target="\_blank"} event occurs) or when the connection times out. A failure in connection can occur when trying to join a room (ending usually in timeout) or during the connection (a `Disconnected` event is thrown). Each time a failure is communicated to the controller, it will kill that browser and restart it again, effectively restarting the connection (up to 5 times, as mentioned before).
+The test stops when it determines that no more users can be added to a room. This happens when a user has 5 failed connections. A connection is considered to have failed when it terminates with a fatal error (in LiveKit this is captured when a [`Disconnected`](https://docs.livekit.io/home/client/events/#Events){target="\_blank"} event occurs) or when the connection times out. A failure in connection can occur when trying to join a room (ending usually in timeout) or during the connection (a `Disconnected` event is thrown). Each time a failure is communicated to the controller, it will kill that browser and restart it again, effectively restarting the connection (up to 5 times, as mentioned before).
 
 ### About OpenVidu LoadTest
 

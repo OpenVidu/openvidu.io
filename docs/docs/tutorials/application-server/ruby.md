@@ -5,7 +5,7 @@
 This is a minimal server application built for Ruby with [Sinatra](https://sinatrarb.com/){:target="\_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events](https://docs.livekit.io/realtime/server/webhooks/){target=\_blank}.
+-   Receiving LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 
 It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby){:target="\_blank"}.
 
@@ -105,7 +105,7 @@ end
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's identity in the AccessToken.
-3. We set the video grants in the AccessToken. `roomJoin` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/realtime/concepts/authentication/#Video-grant){:target="\_blank"}.
+3. We set the video grants in the AccessToken. `roomJoin` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 4. Finally, we convert the AccessToken to a JWT token and send it back to the client.
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
@@ -114,14 +114,14 @@ If required fields are available, a new JWT token is created. For that we use th
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's identity in the AccessToken.
-3. We set the video grants in the AccessToken. `roomJoin` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/realtime/concepts/authentication/#Video-grant){:target="\_blank"}.
+3. We set the video grants in the AccessToken. `roomJoin` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 4. Finally, we convert the AccessToken to a JWT token and send it back to the client.
 
 ---
 
 #### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/realtime/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
 ```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-server/ruby/app.rb#L36-L47' target='_blank'>app.rb</a>" linenums="36"
 post '/livekit/webhook' do
