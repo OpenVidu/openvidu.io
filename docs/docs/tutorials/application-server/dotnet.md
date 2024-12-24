@@ -13,7 +13,7 @@ Unfortunately there is no .NET SDK for LiveKit available, so the application has
 
 ### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -23,11 +23,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0-be
 
 ### 3. Run the server application
 
---8<-- "docs/docs/tutorials/shared/application-server/dotnet.md"
+--8<-- "shared/tutorials/application-server/dotnet.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "docs/docs/tutorials/shared/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/application-client-tabs.md"
 
 ## Understanding the code
 
@@ -242,6 +242,6 @@ If method `JwtSecurityTokenHandler#ValidateToken` does rise an exception when va
 
 Finally, we calculate the SHA256 hash of the body and compare it with the `sha256` claim in the token. If they match, it means the webhook event was not tampered and we can definitely trust it.
 
---8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>

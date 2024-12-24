@@ -16,7 +16,7 @@ Customizing the toolbar is made simple with the **ToolbarDirective**, which offe
 
 #### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 #### 2. Download the tutorial code
 
@@ -27,7 +27,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0-beta3
 
 #### 3. Run a server application
 
---8<-- "docs/docs/tutorials/shared/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/application-server-tabs.md"
 
 #### 4. Run the openvidu-custom-toolbar tutorial
 
@@ -55,21 +55,21 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/components/custom-toolbar.png){ loading=lazy } -->
 
---8<-- "docs/docs/tutorials/shared/testing-other-devices.md"
+--8<-- "shared/tutorials/testing-other-devices.md"
 
 ## Understanding the code
 
 
---8<-- "docs/docs/tutorials/shared/openvidu-components-files.md"
+--8<-- "shared/tutorials/openvidu-components-files.md"
 
 ---
 
 
---8<-- "docs/docs/tutorials/shared/openvidu-components-install.md"
+--8<-- "shared/tutorials/openvidu-components-install.md"
 
 === "main.ts"
 
-    --8<-- "docs/docs/tutorials/shared/openvidu-components-import.md"
+    --8<-- "shared/tutorials/openvidu-components-import.md"
 
 === "app.component.ts"
 
@@ -179,11 +179,11 @@ Once the server is up and running, you can test the application by visiting [`ht
     - `toggleAudio` method that toggles the microphone on and off.
     - `getToken` method that requests a token to the server application.
 
-    --8<-- "docs/docs/tutorials/shared/configure-urls.md"
+    --8<-- "shared/tutorials/configure-urls.md"
 
 === "styles.scss"
 
-    --8<-- "docs/docs/tutorials/shared/openvidu-components-styles.md"
+    --8<-- "shared/tutorials/openvidu-components-styles.md"
 
 
 ### Customizing the toolbar

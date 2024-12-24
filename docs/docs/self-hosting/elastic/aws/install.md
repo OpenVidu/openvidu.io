@@ -43,7 +43,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 Depending on your needs, you need to fill in the following CloudFormation parameters:
 
---8<-- "docs/docs/self-hosting/shared/aws-ssl-domain.md"
+--8<-- "shared/self-hosting/aws-ssl-domain.md"
 
 ### OpenVidu Elastic Configuration
 
@@ -59,7 +59,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
 
-    --8<-- "docs/docs/self-hosting/shared/mediasoup-warning.md"
+    --8<-- "shared/self-hosting/mediasoup-warning.md"
 
 ### EC2 Instance Configuration
 
@@ -106,7 +106,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
     !!!warning
         You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
 
---8<-- "docs/docs/self-hosting/shared/aws-turn-domain.md"
+--8<-- "shared/self-hosting/aws-turn-domain.md"
 
 ## Deploying the Stack
 
@@ -148,7 +148,7 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "docs/docs/self-hosting/shared/aws-troubleshooting.md"
+--8<-- "shared/self-hosting/aws-troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in the Master Node and Media Nodes.
 
