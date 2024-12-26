@@ -210,7 +210,7 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
 
 For administration, you can follow the instructions from the [On Premises High Availability Administration](../on-premises/admin.md) section.
 
-Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../../self-hosting/configuration/changing-config.md) section. Additionally, the [How to Guides](../../../self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
 In addition to these, an AWS deployment provides the capability to manage global configurations via the AWS Console using AWS Secrets created during the deployment. To manage configurations this way, follow these steps:
 
