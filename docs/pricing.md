@@ -29,9 +29,9 @@ hide:
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu Single Node</strong></a></td>
-    <td class="border-right"><a href="/docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu Elastic</strong></a></td>
-    <td><a href="/docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu High Availability</strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu Single Node</strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu Elastic</strong></a></td>
+    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu High Availability</strong></a></td>
   </tr>
   <tr>
     <td class="first-column border-right">Suitability</td>
@@ -53,9 +53,9 @@ hide:
   </tr>
   <tr>
     <td class="first-column border-right">Installation instructions</td>
-    <td class="border-right"><a class="md-button" href="/docs/self-hosting/single-node/">Install</a></td>
-    <td class="border-right"><a class="md-button" href="/docs/self-hosting/elastic/">Install</a></td>
-    <td><a class="md-button" href="/docs/self-hosting/ha/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/elastic/">Install</a></td>
+    <td><a class="md-button" href="../docs/self-hosting/ha/">Install</a></td>
   </tr>
 </table>
 
@@ -105,11 +105,11 @@ There are deliberate reasons for this pricing model in OpenVidu Pro:
 
 ## When and how are you charged?
 
-Users must create an [OpenVidu account](account.md) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](docs/self-hosting/ha/index.md)).
+Users must create an [OpenVidu account](/account/) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](docs/self-hosting/ha/index.md)).
 
 When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a **15-day free trial period** during which you will not be charged at all.
 
-After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](account.md) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe](https://stripe.com/){:target=_blank}.
+After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](/account/) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe](https://stripe.com/){:target=_blank}.
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
 

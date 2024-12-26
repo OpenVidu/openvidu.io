@@ -26,7 +26,7 @@ The `openvidu.env` file defines global parameters used in service configurations
     !!! warning
         In AWS it is necessary to specify the region in the endpoint URL as you can see in `RECORDINGS_S3_ENDPOINT`. Check the [AWS S3 endpoints documentation](https://docs.aws.amazon.com/general/latest/gr/s3.html){:target="_blank"} for more information.
     !!! info
-        The parameters defined at `openvidu.env` can be used in other configuration files by using the `${openvidu.VARIABLE_NAME}` syntax. If you want to know more about the configuration system of OpenVidu, check the [Configuration In-depth](../../self-hosting/configuration/in-depth.md){:target="_blank} section.
+        The parameters defined at `openvidu.env` can be used in other configuration files by using the `${openvidu.VARIABLE_NAME}` syntax. If you want to know more about the configuration system of OpenVidu, check the [Configuration In-depth](../configuration/in-depth.md){:target="_blank} section.
 
 
 

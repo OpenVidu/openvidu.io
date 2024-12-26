@@ -9,13 +9,13 @@ OpenVidu also provides different **Grafana dashboards** to monitor **metrics** f
 Grafana is available at [https://your.domain/grafana/]() and can be accessed using your **Grafana admin credentials**.
 
 <figure markdown>
-  ![Grafana login](../../../../../assets/images/grafana/login.png){ .mkdocs-img }
+  ![Grafana login](../../../../assets/images/grafana/login.png){ .mkdocs-img }
 </figure>
 
 Dashboards can be found in the **OpenVidu** folder at [https://your.domain/grafana/dashboards/f/openvidu-dashboards/openvidu]().
 
 <figure markdown>
-  ![Grafana dashboards folder](../../../../../assets/images/grafana/dashboards_folder.png){ .mkdocs-img }
+  ![Grafana dashboards folder](../../../../assets/images/grafana/dashboards_folder.png){ .mkdocs-img }
 </figure>
 
 ### Services
@@ -34,7 +34,7 @@ The **Grafana stack** that comes with OpenVidu is composed of the following serv
 
 This dashboard provides **metrics** about **OpenVidu Server**. It includes charts about **active rooms**, **active participants**, **published tracks**, **subscribed tracks**, **send/receive bytes**, **packet loss percentage** and **quality score**.
 
-In case you are using **OpenVidu** <a href="/pricing#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a> and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a> and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
 
 <div class="grid-container">
 
@@ -46,31 +46,31 @@ In case you are using **OpenVidu** <a href="/pricing#openvidu-pro"><span class="
 
 #### OpenVidu Media Nodes Server Metrics
 
-!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
+!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
 
 This dashboard provides the same **metrics** as the [OpenVidu Server Metrics](#openvidu-server-metrics) dashboard, but grouped by **Media Node**.
 
 You can select the **Media Node** you want to see metrics from in the **media_node** dropdown. You will see different charts in the same panel according to the selected **Media Nodes**.
 
 <figure markdown>
-  ![Media Node dropdown](../../../../../assets/images/grafana/nodes_metrics2.png){ .mkdocs-img }
+  ![Media Node dropdown](../../../../assets/images/grafana/nodes_metrics2.png){ .mkdocs-img }
 </figure>
 
 !!! info
     If you add new Media Nodes to your OpenVidu deployment, you will have to refresh the page in order to see the new Media Nodes in the dropdown.
 
 <figure markdown>
-  ![Media Node metrics](../../../../../assets/images/grafana/nodes_metrics1.png){ .mkdocs-img }
+  ![Media Node metrics](../../../../assets/images/grafana/nodes_metrics1.png){ .mkdocs-img }
 </figure>
 
 #### OpenVidu Logs
 
-In case you are using **OpenVidu** <a href="/pricing#openvidu-community"><span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-community"><span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
 
 There is a panel showing **all containers** logs,
 
 <figure markdown>
-  ![Single Node logs](../../../../../assets/images/grafana/single_node_logs1.png){ .mkdocs-img }
+  ![Single Node logs](../../../../assets/images/grafana/single_node_logs1.png){ .mkdocs-img }
 </figure>
 
 another panel to **filter** logs by **room_id** and **participant_id**,
@@ -86,29 +86,29 @@ another panel to **filter** logs by **room_id** and **participant_id**,
 and one row for each selected **service**, containing **all logs**, **warnings** and **errors** from that service.
 
 <figure markdown>
-  ![Single Node select services](../../../../../assets/images/grafana/single_node_logs2.png){ .mkdocs-img }
+  ![Single Node select services](../../../../assets/images/grafana/single_node_logs2.png){ .mkdocs-img }
 </figure>
 
 <figure markdown>
-  ![Single Node service logs](../../../../../assets/images/grafana/single_node_logs6.png){ .mkdocs-img }
+  ![Single Node service logs](../../../../assets/images/grafana/single_node_logs6.png){ .mkdocs-img }
 </figure>
 
 You can also filter logs containing a specific **text** by using the **filter search box**.
 
 <figure markdown>
-  ![Single Node filter logs](../../../../../assets/images/grafana/single_node_logs5.png){ .mkdocs-img }
+  ![Single Node filter logs](../../../../assets/images/grafana/single_node_logs5.png){ .mkdocs-img }
 </figure>
 
 #### OpenVidu Cluster Nodes Logs
 
-!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
+!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
 
-In case you are using **OpenVidu** <a href="/pricing#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
 
 First of all, there is a panel showing **all containers** logs from all nodes.
 
 <figure markdown>
-  ![Cluster logs](../../../../../assets/images/grafana/nodes_logs1.png){ .mkdocs-img }
+  ![Cluster logs](../../../../assets/images/grafana/nodes_logs1.png){ .mkdocs-img }
 </figure>
 
 Then, there is a row for each selected **node**, containing **all logs**, **warnings** and **errors** from that node. Besides, each row contains a panel for each selected container, showing all its logs.
@@ -143,14 +143,14 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 You can also filter logs containing a specific **text** by using the **filter search box**.
 
 <figure markdown>
-  ![Cluter filter logs](../../../../../assets/images/grafana/nodes_logs8.png){ .mkdocs-img }
+  ![Cluter filter logs](../../../../assets/images/grafana/nodes_logs8.png){ .mkdocs-img }
 </figure>
 
 #### OpenVidu Cluster Services Logs
 
-!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
+!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
 
-In case you are using **OpenVidu** <a href="/pricing#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
 
 First of all, there is a panel to **filter** logs by **room_id** and **participant_id**.
 
@@ -165,11 +165,11 @@ First of all, there is a panel to **filter** logs by **room_id** and **participa
 Then, there is a row for each selected **service**, containing **all logs**, **warnings** and **errors** from that service.
 
 <figure markdown>
-  ![Cluster select services](../../../../../assets/images/grafana/services_logs1.png){ .mkdocs-img }
+  ![Cluster select services](../../../../assets/images/grafana/services_logs1.png){ .mkdocs-img }
 </figure>
 
 <figure markdown>
-  ![Cluster service logs](../../../../../assets/images/grafana/services_logs2.png){ .mkdocs-img }
+  ![Cluster service logs](../../../../assets/images/grafana/services_logs2.png){ .mkdocs-img }
 </figure>
 
 ### Limitations

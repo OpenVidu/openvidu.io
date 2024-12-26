@@ -206,8 +206,8 @@ Your authentication credentials and URL to point your applications would be:
 
 --8<-- "shared/self-hosting/aws-troubleshooting.md"
 
-4. If everything seems fine, check the [status](../on-premises/admin.md/#checking-the-status-of-services) and the [logs](../on-premises/admin.md/#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
+4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu High Availability deployment is ready to use. You can check the [Administration](../aws/admin.md) section to learn how to manage your deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu High Availability deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your deployment.

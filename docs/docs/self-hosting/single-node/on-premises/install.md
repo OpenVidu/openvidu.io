@@ -248,4 +248,4 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](../on-premises/admin.md) section to learn how to manage your OpenVidu Single Node deployment.
+Once you have OpenVidu deployed, you can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Single Node deployment.

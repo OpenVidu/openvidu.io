@@ -44,7 +44,7 @@ If you are using the V2 Compatibility module, you can also enable webhooks for t
 
     Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
 
-    Check in the [Configuration Reference](../../self-hosting/configuration/reference.md#pro-v2compatibilityenv){:target=\_blank} all the webhook events that you can receive setting up the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
+    Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv){:target=\_blank} all the webhook events that you can receive setting up the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
 
 ## Send Webhooks to a Local Application Server
 
