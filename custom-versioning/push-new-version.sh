@@ -153,12 +153,16 @@ else
     echo "The latest version will be updated"
 
     # Remove version in all links of 404.html
-    sed -i "s|/$VERSION/||g" "$VERSION/404.html"
+    sed -i "s|/$VERSION/|/|g" "$VERSION/404.html"
     sed -i "s|\"/$VERSION\"|\"/\"|g" "$VERSION/404.html"
+
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        sed -i "s|href=\"/$VP/|href=\"/latest/$VP/|g" "$VERSION/404.html"
+    done
 
     # Modify all links in NVP that point to VP to use absolute links to the latest version ("/latest/VP/")
     for VP in "${VERSIONED_PAGES[@]}"; do
-        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" "$VERSION/404.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g"
+        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g"
     done
 
     # Remove version in the canonical tag of NVP
