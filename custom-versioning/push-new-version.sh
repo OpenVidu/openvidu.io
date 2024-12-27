@@ -105,6 +105,17 @@ rm -rf site
 # Delete overrides folder in the new version
 rm -rf "$VERSION/overrides"
 
+# Copy necessary file from main branch to gh-pages branch in root
+git restore --source main custom-versioning/redirect-from-version-to-getting-started.html || {
+    echo 'Failure copying file from main branch'
+    exit 1
+}
+
+# Wait until this file exists in branch gh-pages
+until [ -f ./custom-versioning/redirect-from-version-to-getting-started.html ]; do
+    sleep 1
+done
+
 # Modify all links in VP that point to NVP to use absolute links ("/NVP/")
 for NVP in "${NON_VERSIONED_PAGES[@]}"; do
     grep -Erl "href=\"(\.\./)*$NVP/" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*$NVP/|href=\"/$NVP/|g"
@@ -143,8 +154,10 @@ if [ "$UPDATE_LATEST" = false ]; then
 
     # Remove NVP from new version
     rm -rf $ALL_PREFIXED_NVP
-    rm "$VERSION/index.html"
     rm "$VERSION/404.html"
+
+    # Move redirect
+    mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
 
     # Commit the updated version folder
     git add .
@@ -186,6 +199,9 @@ else
         # Move new page as their root version
         mv "$VERSION/$NVP" .
     done
+
+    # Move redirect
+    mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
 
     git add .
     git commit -am "Version $VERSION updated. Non-versioned pages updated"
