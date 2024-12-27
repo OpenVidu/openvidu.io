@@ -4,8 +4,8 @@ set -e
 # This script builds and pushes a new version of the documentation
 # It updates the non-versioned pages of the documentation
 
-ASSETS=("assets" "javascripts" "stylesheets")
-NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog") # And root index.html
+ASSETS=("assets" "javascripts" "stylesheets" "search")
+NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog") # And root index.html and 404.html
 VERSIONED_PAGES=("docs")
 
 # Check if mike is installed
@@ -80,8 +80,6 @@ fi
 if [ "$UPDATE_LATEST" = true ]; then
     # Build and deploy the new version with mike, updating latest alias
     mike deploy --push --update-aliases "$VERSION" latest
-    # Set the default version to latest
-    mike set-default --push latest
     echo "New version $VERSION published with mike (latest alias updated to this new version)"
 else
     # Build and deploy the new version with mike
@@ -113,7 +111,7 @@ for NVP in "${NON_VERSIONED_PAGES[@]}"; do
 done
 
 # Links to index.html
-grep -Erl "href=\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*\.\.\"|href=\"/\"|g"
+grep -Erl "\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|\"\(\.\./\)*\.\.\"|\"/\"|g"
 
 # Remove version from NVP in sitemap.xml
 for NVP in "${NON_VERSIONED_PAGES[@]}"; do
@@ -146,16 +144,21 @@ if [ "$UPDATE_LATEST" = false ]; then
     # Remove NVP from new version
     rm -rf $ALL_PREFIXED_NVP
     rm "$VERSION/index.html"
+    rm "$VERSION/404.html"
 
     # Commit the updated version folder
-    git add "$VERSION"
+    git add .
     git commit -am "Version $VERSION updated. Non-versioned pages untouched"
 else
     echo "The latest version will be updated"
 
+    # Remove version in all links of 404.html
+    sed -i "s|/$VERSION/||g" "$VERSION/404.html"
+    sed -i "s|\"/$VERSION\"|\"/\"|g" "$VERSION/404.html"
+
     # Modify all links in NVP that point to VP to use absolute links to the latest version ("/latest/VP/")
     for VP in "${VERSIONED_PAGES[@]}"; do
-        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g"
+        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" "$VERSION/404.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g"
     done
 
     # Remove version in the canonical tag of NVP
@@ -171,6 +174,7 @@ else
 
     # Move NVP to root
     mv "$VERSION/index.html" . # Home page
+    mv "$VERSION/404.html" . # 404 page
 
     for NVP in "${NON_VERSIONED_PAGES[@]}"; do # Other NVP
         # Delete previous root version of the page
@@ -179,21 +183,7 @@ else
         mv "$VERSION/$NVP" .
     done
 
-    # Commit asset folders
-    for asset in "${ASSETS[@]}"; do
-        git add "$asset"
-    done
-
-    # Commit the new version folder
-    git add "$VERSION"
-    # Commit home page
-    git add index.html
-
-    # Commit other NVP
-    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
-        git add "$NVP"
-    done
-
+    git add .
     git commit -am "Version $VERSION updated. Non-versioned pages updated"
 fi
 
