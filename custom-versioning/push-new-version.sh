@@ -4,8 +4,8 @@ set -e
 # This script builds and pushes a new version of the documentation
 # It updates the non-versioned pages of the documentation
 
-ASSETS=("assets" "javascripts" "stylesheets" "search")
-NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog")
+ASSETS=("assets" "javascripts" "stylesheets")
+NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog") # And root index.html
 VERSIONED_PAGES=("docs")
 
 # Check if mike is installed
@@ -31,6 +31,9 @@ else
         exit 1
     fi
 fi
+
+ALL_PREFIXED_NVP="${NON_VERSIONED_PAGES[@]/#/$VERSION/}"
+ALL_PREFIXED_VP="${VERSIONED_PAGES[@]/#/$VERSION/}"
 
 # Navigate to the root of the repository based on the script location
 cd "$(dirname "$0")" || exit
@@ -65,7 +68,7 @@ if git ls-remote --heads origin "$VERSION_BRANCH" | grep -q "$VERSION_BRANCH"; t
     fi
 else
     if [ "$UPDATE_LATEST" = false ]; then
-        echo "The branch ${VERSION_BRANCH} does not exist. To update a past version, the branch must exist"
+        echo "The branch '$VERSION_BRANCH' does not exist. To update a past version, the branch must exist"
         exit 1
     else
         echo "Git branch '$VERSION_BRANCH' does not exist in the remote repository. Creating it"
@@ -76,14 +79,14 @@ fi
 
 if [ "$UPDATE_LATEST" = true ]; then
     # Build and deploy the new version with mike, updating latest alias
-    mike deploy --push --update-aliases "${VERSION}" latest
+    mike deploy --push --update-aliases "$VERSION" latest
     # Set the default version to latest
     mike set-default --push latest
-    echo "New version ${VERSION} published with mike (latest alias updated to this new version)"
+    echo "New version $VERSION published with mike (latest alias updated to this new version)"
 else
     # Build and deploy the new version with mike
-    mike deploy --push "${VERSION}"
-    echo "New version ${VERSION} published with mike (latest alias not updated)"
+    mike deploy --push "$VERSION"
+    echo "New version $VERSION published with mike (latest alias not updated)"
 fi
 
 # Checkout to gh-pages branch
@@ -101,102 +104,101 @@ git pull origin "$GH_BRANCH" || {
 # Delete site folder
 rm -rf site
 
-# Copy necessary files from main branch
-git restore --source main custom-versioning/. || {
-    echo 'Failure copying files from main branch'
-    exit 1
-}
+# Delete overrides folder in the new version
+rm -rf "$VERSION/overrides"
 
-# Wait until this file exists in branch gh-pages
-until [ -f ./custom-versioning/redirect-from-version-to-root.html ]; do
-    sleep 1
+# Modify all links in VP that point to NVP to use absolute links ("/NVP/")
+for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+    grep -Erl "href=\"(\.\./)*$NVP/" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*$NVP/|href=\"/$NVP/|g"
 done
 
-if [ "$UPDATE_LATEST" = false ]; then
+# Links to index.html
+grep -Erl "href=\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*\.\.\"|href=\"/\"|g"
 
+# Remove version from NVP in sitemap.xml
+for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+    sed -i "s|$VERSION/$NVP|$NVP|g" "$VERSION/sitemap.xml"
+done
+
+# Remove version from root in sitemap.xml
+sed -i "s|$VERSION/</loc>|</loc>|g" "$VERSION/sitemap.xml"
+
+# Regenerate sitemap.xml.gz
+gzip -k -f "$VERSION/sitemap.xml"
+
+# Modify links in search_index.json to use absolute links
+# Modify all links to VP to use absolute links including the version ("/X.Y.Z/VP/")
+for VP in "${VERSIONED_PAGES[@]}"; do
+    sed -i "s|\"location\":\"$VP/|\"location\":\"/$VERSION/$VP/|g" "$VERSION/search/search_index.json"
+done
+
+# Modify all links to NVP to use absolute links ("/NVP/")
+for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+    sed -i "s|\"location\":\"$NVP/|\"location\":\"/$NVP/|g" "$VERSION/search/search_index.json"
+done
+
+# Modify all links to root to use absolute links ("/")
+sed -i "s|\"location\":\"\"|\"location\":\"/\"|g" "$VERSION/search/search_index.json"
+
+if [ "$UPDATE_LATEST" = false ]; then
     echo "The latest version will not be updated"
 
-    # Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
-    # E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
-    for page in "${NON_VERSIONED_PAGES[@]}"; do
-        NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
-        for html in $NON_VERSIONED_HTMLS; do
-            cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
-        done
-    done
+    # Remove NVP from new version
+    rm -rf $ALL_PREFIXED_NVP
+    rm "$VERSION/index.html"
 
     # Commit the updated version folder
-    git add "${VERSION}"
-    git commit -am "Version ${VERSION} updated. Non-versioned pages untouched"
-
+    git add "$VERSION"
+    git commit -am "Version $VERSION updated. Non-versioned pages untouched"
 else
-
     echo "The latest version will be updated"
+
+    # Modify all links in NVP that point to VP to use absolute links to the latest version ("/latest/VP/")
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g"
+    done
+
+    # Remove version in the canonical tag of NVP
+    grep -Erl "$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|$VERSION/||g"
 
     # Copy asset folders to root
     for asset in "${ASSETS[@]}"; do
         # Delete previous root version of the asset folder
-        rm -rf "${asset}"
+        rm -rf "$asset"
         # Copy the new version of the asset folder to root
-        cp -r "${VERSION}"/"${asset}" .
+        cp -r "$VERSION/$asset" .
     done
 
-    # Copy non-versioned pages to root
-    cp "${VERSION}"/index.html . # Home page
-    cp ./custom-versioning/redirect-from-version-to-root.html "${VERSION}"/index.html
-    for page in "${NON_VERSIONED_PAGES[@]}"; do # Other non-versioned pages
-        # Delete previous root version of the page
-        rm -rf "${page}"
-        # Copy new page as their root version
-        cp -r "${VERSION}"/"${page}" .
-        # Overwrite the non-versioned pages inside /X.Y.Z/ with redirections to root
-        # E.g. allows redirecting from https://openvidu.io/3.0.0/pricing to https://openvidu.io/pricing
-        NON_VERSIONED_HTMLS=$(find "./${VERSION}"/"${page}" -iname 'index.html')
-        for html in $NON_VERSIONED_HTMLS; do
-            cp ./custom-versioning/redirect-from-version-to-root.html "${html}"
-        done
-    done
+    # Move NVP to root
+    mv "$VERSION/index.html" . # Home page
 
-    # Create redirections to latest for versioned pages in root
-    for page in "${VERSIONED_PAGES[@]}"; do
+    for NVP in "${NON_VERSIONED_PAGES[@]}"; do # Other NVP
         # Delete previous root version of the page
-        rm -rf "${page}"
-        # Copy the new version of the page to root
-        cp -r "${VERSION}"/"${page}" .
-        # Overwrite the root pages with redirections to latest
-        # E.g. allows redirecting from https://openvidu.io/docs/getting-started to https://openvidu.io/latest/docs/getting-started
-        REDIRECTION_FOR_DOCS=$(find "./${page}" -iname 'index.html')
-        for html in $REDIRECTION_FOR_DOCS; do
-            cp ./custom-versioning/redirect-from-root-to-latest.html "${html}"
-        done
+        rm -rf "$NVP"
+        # Move new page as their root version
+        mv "$VERSION/$NVP" .
     done
 
     # Commit asset folders
     for asset in "${ASSETS[@]}"; do
-        git add "${asset}"
+        git add "$asset"
     done
+
     # Commit the new version folder
-    git add "${VERSION}"
+    git add "$VERSION"
     # Commit home page
     git add index.html
-    # Commit other non-versioned pages
-    for page in "${NON_VERSIONED_PAGES[@]}"; do
-        git add "${page}"
-    done
-    # Commit versioned pages
-    for page in "${VERSIONED_PAGES[@]}"; do
-        git add "${page}"
+
+    # Commit other NVP
+    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+        git add "$NVP"
     done
 
-    git commit -am "Version ${VERSION} updated. Non-versioned pages updated"
-
+    git commit -am "Version $VERSION updated. Non-versioned pages updated"
 fi
-
-# Remove unnecessary files from gh-pages branch
-rm -rf custom-versioning
 
 git push --set-upstream origin "$GH_BRANCH"
 
 git checkout main
 
-echo "Success publishing documentation for version ${VERSION}!"
+echo "Success publishing documentation for version $VERSION!"

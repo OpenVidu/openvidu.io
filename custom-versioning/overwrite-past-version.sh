@@ -27,11 +27,12 @@ git fetch origin gh-pages
 git fetch origin "$VERSION"
 
 # Delete the version in gh-pages branch
-mike delete --push "${VERSION}" || {
-    echo 'Failure deleting version with mike'
+mike delete --push "$VERSION" || {
+    echo "Failure deleting version with mike"
     exit 1
 }
+
 # Publish again
-echo "Overwriting past version ${VERSION}"
+echo "Overwriting past version $VERSION"
 cd ./custom-versioning
-source ./push-new-version.sh "${VERSION}" false
+source ./push-new-version.sh "$VERSION" false

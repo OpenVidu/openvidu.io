@@ -27,17 +27,18 @@ git fetch origin gh-pages
 git fetch origin "$VERSION"
 
 # Delete the version in gh-pages branch
-mike delete --push "${VERSION}" || {
-    echo 'Failure deleting version with mike'
+mike delete --push "$VERSION" || {
+    echo "Failure deleting version with mike"
     exit 1
 }
+
 # Publish again
-echo "Overwriting latest version ${VERSION}"
+echo "Overwriting latest version $VERSION"
 cd ./custom-versioning
-source ./push-new-version.sh "${VERSION}"
+source ./push-new-version.sh "$VERSION"
 
 # Merge latest commits of main into VERSION branch. This keeps the latest VERSION branch up to date with main
-git switch "${VERSION}"
+git switch "$VERSION"
 git rebase main
 git push --force
 git switch main
