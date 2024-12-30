@@ -13,7 +13,13 @@ Introducing **OpenVidu Call**, the premier videoconference application that show
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+=== "Run OpenVidu locally"
+
+    --8<-- "shared/tutorials/run-openvidu-locally.md"
+
+=== "Deploy OpenVidu"
+
+    To use a production-ready OpenVidu deployment, visit the official [deployment guide](../self-hosting/deployment-types.md).
 
 !!! info "Accessible via openvidu-local-deployment"
 

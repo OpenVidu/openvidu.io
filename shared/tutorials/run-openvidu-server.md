@@ -4,5 +4,5 @@
 
 === "Deploy OpenVidu"
 
-    To use a production-ready OpenVidu deployment, visit the official [deployment guide](/docs/self-hosting/deployment-types/).
+    To use a production-ready OpenVidu deployment, visit the official [deployment guide](../../self-hosting/deployment-types.md).
 

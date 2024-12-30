@@ -8,7 +8,7 @@ Angular Components are the simplest way to create real-time videoconferencing ap
 This **Angular library**, offers developers a robust set of **powerful and comprehensive videoconferencing components**. These components are highly adaptable, extendable, and easily replaceable, allowing you to tailor them to your application's specific requirements.
 
 <figure markdown>
-  ![Angular Components Angular](../../../assets/images/components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![Angular Components Angular](../../assets/images/components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>Angular Components</figcaption>
 </figure>
 
@@ -77,17 +77,17 @@ Using Angular Components in your application is straightforward. The official [A
 
 <div class="grid three-cols">
 
-  <a href="/docs/reference-docs/openvidu-components-angular/components/ToolbarComponent.html" target="_blank" class="card no-shadow">Toolbar</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/LayoutComponent.html" target="_blank" class="card no-shadow">Layout</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/StreamComponent.html" target="_blank" class="card no-shadow">Stream</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/ChatPanelComponent.html" target="_blank" class="card no-shadow">ChatPanel</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/ParticipantsPanelComponent.html" target="_blank" class="card no-shadow">ParticipantsPanel</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/ParticipantPanelItemComponent.html" target="_blank" class="card no-shadow">ParticipantPanelItem</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/ActivitiesPanelComponent.html" target="_blank" class="card no-shadow">ActivitiesPanel</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/RecordingActivityComponent.html" target="_blank" class="card no-shadow">RecordingActivity</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/BroadcastingActivityComponent.html" target="_blank" class="card no-shadow">BroadcastingActivity</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/AdminLoginComponent.html" target="_blank" class="card no-shadow">AdminLogin</a>
-  <a href="/docs/reference-docs/openvidu-components-angular/components/AdminDashboardComponent.html" target="_blank" class="card no-shadow">AdminDashboard</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/ToolbarComponent.html" target="_blank" class="card no-shadow">Toolbar</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/LayoutComponent.html" target="_blank" class="card no-shadow">Layout</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/StreamComponent.html" target="_blank" class="card no-shadow">Stream</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/ChatPanelComponent.html" target="_blank" class="card no-shadow">ChatPanel</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/ParticipantsPanelComponent.html" target="_blank" class="card no-shadow">ParticipantsPanel</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/ParticipantPanelItemComponent.html" target="_blank" class="card no-shadow">ParticipantPanelItem</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/ActivitiesPanelComponent.html" target="_blank" class="card no-shadow">ActivitiesPanel</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/RecordingActivityComponent.html" target="_blank" class="card no-shadow">RecordingActivity</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/BroadcastingActivityComponent.html" target="_blank" class="card no-shadow">BroadcastingActivity</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/AdminLoginComponent.html" target="_blank" class="card no-shadow">AdminLogin</a>
+  <a href="../../reference-docs/openvidu-components-angular/components/AdminDashboardComponent.html" target="_blank" class="card no-shadow">AdminDashboard</a>
 
 </div>
 

@@ -42,7 +42,7 @@ hide:
 
     ---
 
-    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](support.md) now.
+    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](/support/) now.
 
 </div>
 </div>
@@ -68,7 +68,7 @@ hide:
 
     ---
 
-    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [Pricing](pricing.md).
+    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [Pricing](/pricing/).
 
 -   :material-lightning-bolt:{ .feature-icon .padding-icon } __Performant__{ .feature-name }
 

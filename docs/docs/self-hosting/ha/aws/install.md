@@ -1,7 +1,7 @@
 # OpenVidu High Availability Installation: AWS
 
 !!!info
-    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability Installation](../on-premises/install-nlb.md) but automate the process with AWS CloudFormation.
@@ -75,7 +75,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     ![OpenVidu HA Configuration](../../../../assets/images/self-hosting/ha/aws/openvidu-ha-config.png)
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account){:target="_blank"}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
 
@@ -199,7 +199,7 @@ Your authentication credentials and URL to point your applications would be:
 
 --8<-- "shared/self-hosting/aws-troubleshooting.md"
 
-4. If everything seems fine, check the [status](../on-premises/admin.md/#checking-the-status-of-services) and the [logs](../on-premises/admin.md/#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
+4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
 
 ## Configuration and administration
 
