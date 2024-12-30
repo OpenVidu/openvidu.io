@@ -23,7 +23,7 @@ Do not hesitate to contact us at [commercial@openvidu.io](mailto:commercial@open
 Let's work together and build something great!
 
 !!! info
-    Do you need help [**updating from OpenVidu 2 to OpenVidu 3**](https://docs.openvidu.io/en/latest/openvidu3/){:target=_blank}? Write us to [pro.support.v2apps@openvidu.io](mailto:pro.support.v2apps@openvidu.io){:target=_blank} and we will be happy to guide you through the process.
+    Do you need help [**updating from OpenVidu 2 to OpenVidu 3**](https://docs.openvidu.io/en/stable/openvidu3/){:target=_blank}? Write us to [pro.support.v2apps@openvidu.io](mailto:pro.support.v2apps@openvidu.io){:target=_blank} and we will be happy to guide you through the process.
 
 ## Community support
 
