@@ -235,7 +235,6 @@ extra_css:
   - javascripts/openvidu-register/openvidu-register.css
 
 extra_javascript:
-  - javascripts/extra.js
   - javascripts/consent.js
   - javascripts/openvidu-register/openvidu-register.js
 
