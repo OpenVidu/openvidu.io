@@ -17,7 +17,7 @@ Download the tutorial code:
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 ```
 
---8<-- "docs/docs/tutorials/shared/ruby.md"
+--8<-- "shared/tutorials/ruby.md"
 
 !!! info
 

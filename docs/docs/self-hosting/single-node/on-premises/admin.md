@@ -198,7 +198,7 @@ systemctl start openvidu
 2. Add the custom configurations you need to apply to the OpenVidu services. You can use `yq` or other tools to modify the configuration files. You can find more information about `yq` [here](https://mikefarah.gitbook.io/yq/){:target=_blank}.
 3. Start OpenVidu to apply the changes.
 
---8<-- "docs/docs/self-hosting/shared/install-version.md"
+--8<-- "shared/self-hosting/install-version.md"
 
 Just install OpenVidu first with the installer and then run some extra commands to apply the custom configurations. This way, you can automate the process of installing OpenVidu and applying custom configurations.
 

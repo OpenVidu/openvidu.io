@@ -115,15 +115,15 @@ Some services deployed with OpenVidu have their own configuration files located 
     | **Prometheus Service** | Used for monitoring. | <ul><li>**`MASTER_NODE_PRIVATE_IP`**: The private IP address of the Master Node. Used to connect to the Master Node services.</li></ul> |
     | **Promtail Service** | Collects logs and sends them to Loki. | <ul><li>**`MASTER_NODE_PRIVATE_IP`**: The private IP address of the Master Node. Used to connect to the Master Node services.</li></ul> |
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-configuration-parameters.md"
+--8<-- "shared/self-hosting/openvidu-pro-configuration-parameters.md"
 
 #### OpenVidu v2 Compatibility Configuration Parameters
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-v2-compatibility-common.md"
+--8<-- "shared/self-hosting/openvidu-pro-v2-compatibility-common.md"
 | **`V2COMPAT_OPENVIDU_RECORDING_PATH`** | OpenVidu Recording directory used to save the OpenVidu recording videos when `V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE` is set to `true`. Change it with the folder you want to use from your host. By default, it is bound in the container to `/opt/openvidu/recordings` | `/opt/openvidu/recordings` |
 | **`V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE`** | Where to store recording files. Can be 'local' (local storage) or 's3' (S3 compatible storage). | `local` |
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-start-stop-restart.md"
+--8<-- "shared/self-hosting/openvidu-pro-start-stop-restart.md"
 
 ## Checking the status of services
 
@@ -169,7 +169,7 @@ Depending on the node type, you will see different services running.
     promtail     docker.io/grafana/promtail                     "/usr/bin/promtail -…"   promtail     53 seconds ago   Up 52 seconds
     ```
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-checking-logs.md"
+--8<-- "shared/self-hosting/openvidu-pro-checking-logs.md"
 
 ### Adding Media Nodes
 
@@ -181,7 +181,7 @@ To add a new Media Node, simply spin up a new VM and run the OpenVidu installer 
 
 To automate the configuration of new nodes, check [this section](#automatic-installation-and-configuration-of-nodes).
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-removing-media-nodes.md"
+--8<-- "shared/self-hosting/openvidu-pro-removing-media-nodes.md"
 
 ## Advanced Configuration
 
@@ -227,7 +227,7 @@ For environments like the cloud, where instances are frequently spun up and down
     3. Add the custom configurations you need to apply to the Master Node services. You can use `yq` or other tools to modify the configuration files. You can find more information about `yq` [here](https://mikefarah.gitbook.io/yq/){:target=_blank}.
     4. Start the Master Node.
 
-    --8<-- "docs/docs/self-hosting/shared/install-version.md"
+    --8<-- "shared/self-hosting/install-version.md"
 
     Just install the Master Node first with the installer and then run some extra commands to apply the custom configurations. This way, you can automate the process of installing the Master Node and applying custom configurations.
 
@@ -265,7 +265,7 @@ For environments like the cloud, where instances are frequently spun up and down
     3. Add the custom configurations you need to apply to the Media Node services. You can use `yq` or other tools to modify the configuration files. You can find more information about `yq` [here](https://mikefarah.gitbook.io/yq/){:target=_blank}.
     4. Start the Media Node.
 
-    --8<-- "docs/docs/self-hosting/shared/install-version.md"
+    --8<-- "shared/self-hosting/install-version.md"
 
     Just install the Media Node first with the installer and then run some extra commands to apply the custom configurations. This way, you can automate the process of installing the Media Node and applying custom configurations.
 
@@ -831,4 +831,4 @@ Some configuration parameters may require modifying multiple configuration files
         sudo systemctl start openvidu
         ```
 
---8<-- "docs/docs/self-hosting/shared/openvidu-pro-uninstall.md"
+--8<-- "shared/self-hosting/openvidu-pro-uninstall.md"
