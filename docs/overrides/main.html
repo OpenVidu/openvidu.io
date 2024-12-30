@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block announce %}
-<div id="announce">Coming from OpenVidu 2? Find out all you need to know <a href="https://docs.openvidu.io/en/latest/openvidu3/" target="_blank"> on this page</a></div>
+<div id="announce">Coming from OpenVidu 2? Find out all you need to know <a href="https://docs.openvidu.io/en/stable/openvidu3/" target="_blank"> on this page</a></div>
 {% endblock %}
 
 {% block libs %}
@@ -81,7 +81,7 @@
 
 {% block outdated %}
 <span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
-<a href="{{ '../' ~ base_url ~ '/latest/docs/getting-started/' }}">
+<a href="{{ '/latest/docs/getting-started/' }}">
   <strong>GO TO LATEST VERSION</strong>
 </a>
 {% endblock %}

@@ -58,8 +58,8 @@ These are the general steps to migrate an application from OpenVidu 2 to OpenVid
 This includes any client application built with **JavaScript**, **Angular**, **Vue**, **React**, **React Native**, **Ionic** and **Electron**. Just update:
 
 - Dependency `openvidu-browser` to version 3.0.0 in your package.json.
-- Dependency `openvidu-angular` to version 3.0.0 in your package.json, if you use [OpenVidu Components](https://docs.openvidu.io/en/latest/components/){target="_blank"}.
-- Dependency `openvidu-react-native-adapter` to version 3.0.0 in your package.json, if you use [React Native](https://docs.openvidu.io/en/latest/tutorials/openvidu-react-native/){target="_blank"}.
+- Dependency `openvidu-angular` to version 3.0.0 in your package.json, if you use [OpenVidu Components](https://docs.openvidu.io/en/stable/components/){target="_blank"}.
+- Dependency `openvidu-react-native-adapter` to version 3.0.0 in your package.json, if you use [React Native](https://docs.openvidu.io/en/stable/tutorials/openvidu-react-native/){target="_blank"}.
 - File `openvidu-browser.js` to `openvidu-browser-3.0.0.js` if you are using a [local copy of the library](https://github.com/OpenVidu/openvidu/releases){target="_blank"}.
 
 #### For applications built for native Android or iOS
