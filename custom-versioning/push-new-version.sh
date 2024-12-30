@@ -118,11 +118,11 @@ done
 
 # Modify all links in VP that point to NVP to use absolute links ("/NVP/")
 for NVP in "${NON_VERSIONED_PAGES[@]}"; do
-    grep -Erl "href=\"(\.\./)*$NVP/" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*$NVP/|href=\"/$NVP/|g"
+    grep -Erl "href=\"(\.\./)*$NVP/" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*$NVP/|href=\"/$NVP/|g" || true
 done
 
 # Links to index.html
-grep -Erl "\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|\"\(\.\./\)*\.\.\"|\"/\"|g"
+grep -Erl "\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|\"\(\.\./\)*\.\.\"|\"/\"|g" || true
 
 # Remove version from NVP in sitemap.xml
 for NVP in "${NON_VERSIONED_PAGES[@]}"; do
@@ -175,11 +175,11 @@ else
 
     # Modify all links in NVP that point to VP to use absolute links to the latest version ("/latest/VP/")
     for VP in "${VERSIONED_PAGES[@]}"; do
-        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g"
+        grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g" || true
     done
 
     # Remove version in the canonical tag of NVP
-    grep -Erl "$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|$VERSION/||g"
+    grep -Erl "$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|$VERSION/||g" || true
 
     # Copy asset folders to root
     for asset in "${ASSETS[@]}"; do
