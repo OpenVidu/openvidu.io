@@ -17,7 +17,7 @@ Download the tutorial code:
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 ```
 
---8<-- "docs/docs/tutorials/shared/node.md"
+--8<-- "shared/tutorials/node.md"
 
 !!! info
 
@@ -149,6 +149,6 @@ Remember to return a `200` OK response at the end to let LiveKit Server know tha
 
 ---
 
---8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>

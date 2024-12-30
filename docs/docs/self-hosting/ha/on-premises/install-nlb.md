@@ -112,7 +112,7 @@ docker run -it openvidu/openvidu-installer:latest \
     --deployment-type=ha
 ```
 
---8<-- "docs/docs/self-hosting/shared/install-version.md"
+--8<-- "shared/self-hosting/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -125,7 +125,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **(Optional) TURN domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the Load Balancer you will use and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (The engine used by Livekit)** or **Mediasoup (Experimental)**.
 
-    --8<-- "docs/docs/self-hosting/shared/mediasoup-warning.md"
+    --8<-- "shared/self-hosting/mediasoup-warning.md"
 
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
@@ -147,7 +147,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "docs/docs/self-hosting/shared/install-version.md"
+    --8<-- "shared/self-hosting/install-version.md"
 
     Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -179,7 +179,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "docs/docs/self-hosting/shared/install-version.md"
+    --8<-- "shared/self-hosting/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -403,7 +403,7 @@ Each installation command for each type of node looks like this:
         --external-load-balancer
     ```
 
-    --8<-- "docs/docs/self-hosting/shared/install-version.md"
+    --8<-- "shared/self-hosting/install-version.md"
 
     Notes:
 
@@ -432,7 +432,7 @@ Each installation command for each type of node looks like this:
         --mongo-admin-password='xxxxx'
     ```
 
-    --8<-- "docs/docs/self-hosting/shared/install-version.md"
+    --8<-- "shared/self-hosting/install-version.md"
 
     - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change, and Media Nodes should be able to reach all Master Nodes using these IPs.

@@ -79,7 +79,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
 
-    --8<-- "docs/docs/self-hosting/shared/mediasoup-warning.md"
+    --8<-- "shared/self-hosting/mediasoup-warning.md"
 
 ### EC2 Instance Configuration
 
@@ -197,7 +197,7 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "docs/docs/self-hosting/shared/aws-troubleshooting.md"
+--8<-- "shared/self-hosting/aws-troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md/#checking-the-status-of-services) and the [logs](../on-premises/admin.md/#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
 

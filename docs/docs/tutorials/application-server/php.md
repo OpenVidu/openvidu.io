@@ -17,7 +17,7 @@ Download the tutorial code:
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 ```
 
---8<-- "docs/docs/tutorials/shared/php.md"
+--8<-- "shared/tutorials/php.md"
 
 !!! info
 
@@ -158,6 +158,6 @@ Finally, we obtain the `WebhookEvent` object using the `WebhookReceiver#receive`
 
 ---
 
---8<-- "docs/docs/tutorials/shared/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>

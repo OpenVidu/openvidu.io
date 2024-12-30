@@ -15,7 +15,7 @@ It uses the [LiveKit JS SDK](https://docs.livekit.io/client-sdk-js){:target="\_b
 
 #### 1. Run OpenVidu Server
 
---8<-- "docs/docs/tutorials/shared/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -25,7 +25,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git
 
 ### 3. Run a server application
 
---8<-- "docs/docs/tutorials/shared/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server-tabs.md"
 
 ### 4. Run the client application
 
@@ -59,7 +59,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 </div>
 
---8<-- "docs/docs/tutorials/shared/testing-other-devices.md"
+--8<-- "shared/tutorials/testing-other-devices.md"
 
 ## Understanding the code
 
@@ -138,7 +138,7 @@ The `App.vue` file defines the following variables:
 -   `participantName`: The participant's name.
 -   `roomName`: The room name.
 
---8<-- "docs/docs/tutorials/shared/configure-urls.md"
+--8<-- "shared/tutorials/configure-urls.md"
 
 ---
 
