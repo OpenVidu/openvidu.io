@@ -182,7 +182,7 @@ Adding and removing Media Nodes is straightforward. You can add new Media Nodes 
 
 ### Adding Media Nodes
 
-To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](../on-premises/install-nlb.md/#media-node) on the new Media Node.
+To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](../on-premises/install-nlb.md#media-node) on the new Media Node.
 
 !!!warning
     This installation command should be the same as the one you used to install the first Media Node. Make sure to use the same parameters and values as the first Media Node.

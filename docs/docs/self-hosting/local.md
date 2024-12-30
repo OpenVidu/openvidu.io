@@ -110,7 +110,7 @@ To install OpenVidu locally, follow these steps:
         - Maximum 8 Participants across all Rooms
         - Maximum 5 minutes duration per Room
 
-        For a production environment, you need to [create an OpenVidu account](https://openvidu.io/account){:target="_blank"} to get a license key.
+        For a production environment, you need to [create an OpenVidu account](/account/){:target="_blank"} to get a license key.
         There's a 15 day free trial waiting for you!
 
 The deployment is ready when you see the following message:

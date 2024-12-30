@@ -19,7 +19,7 @@ openvidu:
         log_tags: [info, ice, rtp, rtcp, message] # (11)
 ```
 
-1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](https://openvidu.io/account){:target=_blank}.
+1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 2. The cluster ID for the OpenVidu deployment. It is configured by default by OpenVidu Installer with the domain name of the deployment.
 3. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 4. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
