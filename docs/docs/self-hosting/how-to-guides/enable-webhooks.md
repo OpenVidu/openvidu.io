@@ -1,3 +1,7 @@
+---
+description: Learn how to enable webhooks in OpenVidu to integrate with other services and receive event notifications from your deployment.
+---
+
 # Enable Webhooks
 
 If you need to integrate OpenVidu with other services, you can use webhooks to send notifications about events that occur in your OpenVidu deployment. This guide explains how to enable webhooks.

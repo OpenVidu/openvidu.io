@@ -1,4 +1,9 @@
-# Configuration Reference
+---
+title: Configuration reference
+description: Reference for the configuration files used in all different OpenVidu deployments.
+---
+
+# Configuration reference
 
 ## `openvidu.env`:
 

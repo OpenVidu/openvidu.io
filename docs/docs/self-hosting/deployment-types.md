@@ -1,3 +1,9 @@
+---
+description: Discover OpenVidu deployment options. Local setup for development, single node for medium load, elastic scalability and high availability clusters.
+---
+
+# Deployment types
+
 OpenVidu offers **user-friendly installers** that facilitate quick **on-premises deployments**, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
 
 There are different deployment options available, depending on your needs:
@@ -12,7 +18,7 @@ There are different deployment options available, depending on your needs:
 
 <br>
 
-### OpenVidu Local (development)
+## OpenVidu Local (development)
 
 To run OpenVidu in your local machine, this is the quickest option. It is a Docker Compose setup that includes all the necessary services to run OpenVidu in your LAN, including automated SSL certificates that will be valid across all devices in your network.
 
@@ -21,7 +27,7 @@ To run OpenVidu in your local machine, this is the quickest option. It is a Dock
   <figcaption>OpenVidu Local (development)</figcaption>
 </figure>
 
-### OpenVidu Single Node
+## OpenVidu Single Node
 
 This is the simplest production-ready OpenVidu deployment available. It provides all the features you need, but lacks scalability and fault tolerance. But make no mistake about it: it is perfectly suitable for medium-scale production deployments. For most projects OpenVidu Single Node will be enough, at least until your user load gets serious. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community on a sufficiently powerful server!
 
@@ -32,7 +38,7 @@ It is composed of a single OpenVidu Node hosting all the necessary services in a
   <figcaption>OpenVidu Single Node</figcaption>
 </figure>
 
-### OpenVidu Elastic
+## OpenVidu Elastic
 
 This is the intermediate OpenVidu deployment. It provides **scalability** for your video rooms. Suitable for applications with dynamic load in the media plane that require scalability.
 
@@ -46,7 +52,7 @@ It is composed of two different types of nodes, one of them running on a cluster
   <figcaption>OpenVidu Elastic</figcaption>
 </figure>
 
-### OpenVidu High Availability
+## OpenVidu High Availability
 
 This is the most complete OpenVidu deployment. It provides **scalability** for your video rooms and **fault tolerance** in all its services. Suitable for applications where both scalability and availability are critical.
 

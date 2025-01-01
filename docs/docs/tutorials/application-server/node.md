@@ -1,8 +1,13 @@
-# Node
+---
+title: Node.js Server Tutorial
+description: Learn how to build a minimal Node.js server with Express to generate LiveKit tokens and receive webhook events using the LiveKit JS SDK.
+---
+
+# Node.js Server Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-server/node){ .md-button target=\_blank }
 
-This is a minimal server application built for Node with [Express](https://expressjs.com/){:target="\_blank"} that allows:
+This is a minimal server application built for Node.js with [Express](https://expressjs.com/){:target="\_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.

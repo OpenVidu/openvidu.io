@@ -1,3 +1,8 @@
+---
+title: How To Guides
+description: Explore step-by-step guides to customize your OpenVidu deployment for specific use cases
+---
+
 # How To Guides
 
 OpenVidu deployments are installed with sane defaults, but you may want to customize your deployment to suit your needs. This section contains guides on how to configure OpenVidu for specific use cases, so you can get the most out of your deployment.

@@ -1,4 +1,9 @@
-# Create AWS certificate for HA deployment
+---
+title: Create AWS certificate for HA deployment
+description: Learn how to create an AWS certificate for OpenVidu HA deployment, including domain setup, CNAME record creation and Load Balancer configuration
+---
+
+# Create AWS certificate for OpenVidu HA deployment
 
 You will need this certificate to be able to deploy the High Availability deployment. This guide is meant to show you how to do it.
 

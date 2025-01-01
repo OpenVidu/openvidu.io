@@ -1,4 +1,9 @@
-# openvidu-recording-basic-node
+---
+title: Basic Recording Tutorial
+description: Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
+---
+
+# Basic Recording Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/advanced-features/openvidu-recording-basic-node){ .md-button target=\_blank }
 
@@ -24,7 +29,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run the application
 
-To run this application, you need [Node](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your device.
 
 1. Navigate into the application directory
 

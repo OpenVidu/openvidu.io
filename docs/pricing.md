@@ -1,5 +1,6 @@
 ---
 title: Pricing
+description: Discover OpenVidu's transparent pricing for Community (free) and Pro editions.
 hide:
   - navigation
   - toc

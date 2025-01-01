@@ -1,3 +1,7 @@
+---
+description: Ensure seamless real-time media experiences with OpenVidu's fault tolerance. Handle node failures effortlessly with Elastic and High Availability deployments.
+---
+
 # Fault Tolerance :material-shield-refresh:
 
 Real-time media is particularly sensitive to downtime events, as they directly affect the user experience in a very disruptive way. OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.

@@ -1,3 +1,8 @@
+---
+title: Developing your OpenVidu app
+description: Learn how to build and deploy your OpenVidu application.
+---
+
 # Developing your OpenVidu application
 
 Here's a high-level overview of the steps involved in building an OpenVidu application:
@@ -24,13 +29,13 @@ There are also other optional tasks that you can perform from your application s
 - **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. This is the official LiveKit documentation with all the available methods of the **[`RoomServiceClient`](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}** exposed by the Server API. These methods are also available in all LiveKit Server SDKs.
 - **Manage Egress and Ingress**: if your application needs some kind of recording, broadcasting or media ingestion, this operations must all be performed by your application server.
 - **Receive Webhook events**: you can also listen to Webhook events in your application backend. In this way you can react to events happening in your Rooms: a Room has started, a Room has finished, a Participant has joined a Room, a Track has been published... Visit the official documentation about [Webhooks](https://docs.livekit.io/home/server/webhooks/){target="\_blank"}.
-- **Publish Tracks from your backend**: this is only for advanced applications that require server-side media publishing. Publishing media from your backend is possible by using [LiveKit CLI](https://github.com/livekit/livekit-cli){target="\_blank"}, [Python SDK](https://github.com/livekit/python-sdks){target="\_blank"}, [Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go){target="\_blank"}, [Node SDK](https://github.com/livekit/node-sdks){target="\_blank"} or [Rust SDK](https://github.com/livekit/rust-sdks){target="\_blank"}.
+- **Publish Tracks from your backend**: this is only for advanced applications that require server-side media publishing. Publishing media from your backend is possible by using [LiveKit CLI](https://github.com/livekit/livekit-cli){target="\_blank"}, [Python SDK](https://github.com/livekit/python-sdks){target="\_blank"}, [Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go){target="\_blank"}, [Node.js SDK](https://github.com/livekit/node-sdks){target="\_blank"} or [Rust SDK](https://github.com/livekit/rust-sdks){target="\_blank"}.
 
 To get you started, here is a list of all available LiveKit Server SDKs and an application server tutorial using them. These tutorials are all set up to **generate access tokens** and **receive webhook events**, so they are perfect starting points for your application server.
 
-=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node"
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    [:octicons-arrow-right-24: Node Tutorial](../tutorials/application-server/node.md)
+    [:octicons-arrow-right-24: Node.js Tutorial](../tutorials/application-server/node.md)
 
     [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
 

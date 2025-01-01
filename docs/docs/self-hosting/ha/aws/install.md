@@ -1,3 +1,8 @@
+---
+title: OpenVidu High Availability installation on AWS
+description: Learn how to deploy OpenVidu High Availability on AWS using CloudFormation
+---
+
 # OpenVidu High Availability Installation: AWS
 
 !!! info

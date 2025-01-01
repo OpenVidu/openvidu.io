@@ -1,3 +1,8 @@
+---
+title: OpenVidu Elastic installation on AWS
+description: Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
+---
+
 # OpenVidu Elastic Installation: AWS
 
 !!! info

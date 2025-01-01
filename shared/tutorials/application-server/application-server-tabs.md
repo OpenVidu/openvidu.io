@@ -1,4 +1,4 @@
-=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node"
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
     --8<-- "shared/tutorials/application-server/node.md"
 

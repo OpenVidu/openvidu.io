@@ -1,4 +1,9 @@
-# openvidu-call
+---
+title: OpenVidu Call Docs
+description: Learn how to run, deploy and customize OpenVidu Call, the premier videoconference application built with OpenVidu Components.
+---
+
+# OpenVidu Call Documentation
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-call){ .md-button target=\_blank }
 

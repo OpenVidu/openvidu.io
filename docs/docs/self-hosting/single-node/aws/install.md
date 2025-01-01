@@ -1,3 +1,8 @@
+---
+title: OpenVidu Single Node installation on AWS
+description: Learn how to deploy OpenVidu Single Node on AWS using CloudFormation
+---
+
 # OpenVidu Single Node Installation: AWS
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"

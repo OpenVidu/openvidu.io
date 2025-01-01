@@ -1,3 +1,8 @@
+---
+title: OpenVidu Elastic installation on-premises with DNS Load Balancing
+description: Learn how to deploy OpenVidu Elastic on-premises with DNS Load Balancing
+---
+
 # OpenVidu High Availability Installation: On-premises with DNS Load Balancing
 
 !!! info

@@ -1,4 +1,9 @@
-# openvidu-toolbar-panel-buttons
+---
+title: Add toolbar panel buttons using Angular Components
+description: Learn how to add custom panel buttons to the toolbar using OpenVidu Angular Components.
+---
+
+# Add toolbar panel buttons using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target=\_blank }
 
@@ -30,7 +35,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.0.0
 
 #### 4. Run the openvidu-toolbar-panel-buttons tutorial
 
-To run the client application tutorial, you need [Node](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 

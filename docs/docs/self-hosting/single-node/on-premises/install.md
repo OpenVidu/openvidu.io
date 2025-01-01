@@ -1,3 +1,8 @@
+---
+title: OpenVidu Single Node installation on-premises
+description: Learn how to deploy OpenVidu Single Node on-premises
+---
+
 # OpenVidu Single Node Installation: On-premises
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"

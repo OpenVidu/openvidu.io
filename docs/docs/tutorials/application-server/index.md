@@ -1,4 +1,9 @@
-# Application server tutorials
+---
+title: Application Server Tutorials
+description: Learn how to build an application server that generates LiveKit tokens and receives webhook events.
+---
+
+# Application Server Tutorials
 
 Every application server below has two specific purposes: 
 
@@ -14,7 +19,7 @@ They use the proper [LiveKit Server SDK](https://docs.livekit.io/reference/){tar
 
 <div class="tutorials-container" markdown>
 
-[:simple-nodedotjs:{.icon .lg-icon .tab-icon} **NodeJS**](./node.md){ .md-button .md-button--primary .tutorial-link }
+[:simple-nodedotjs:{.icon .lg-icon .tab-icon} **Node.js**](./node.md){ .md-button .md-button--primary .tutorial-link }
 
 [:simple-goland:{.icon .lg-icon .tab-icon} **Go**](./go.md){ .md-button .md-button--primary .tutorial-link}
 

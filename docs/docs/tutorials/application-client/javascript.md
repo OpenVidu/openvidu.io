@@ -1,4 +1,9 @@
-# openvidu-js
+---
+title: JavaScript Tutorial
+description: Learn how to build a simple video-call app using plain JavaScript, HTML and CSS with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# JavaScript Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-client/openvidu-js){ .md-button target=\_blank }
 

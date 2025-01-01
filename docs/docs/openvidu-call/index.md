@@ -1,4 +1,6 @@
 ---
+title: OpenVidu Call
+description: The videoconference application built on top of OpenVidu. It offers all the features you need to quickly build your perfect real-time application.
 hide:
   - toc
   - footer

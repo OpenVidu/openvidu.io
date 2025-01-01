@@ -1,4 +1,9 @@
-# openvidu-vue
+---
+title: Vue Tutorial
+description: Learn how to build a simple video-call app using Vue with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# Vue Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-client/openvidu-vue){ .md-button target=\_blank }
 

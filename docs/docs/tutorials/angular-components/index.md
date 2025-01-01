@@ -1,4 +1,9 @@
-# Angular Components tutorials
+---
+title: Angular Components Tutorials
+description: Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
+---
+
+# Angular Components Tutorials
 
 <figure markdown>
   ![Angular Components Angular](../../../assets/images/components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
@@ -18,7 +23,7 @@ In the following tutorials you can learn how to use each one of the available [A
 - [**Custom chat panel**](./openvidu-custom-chat-panel.md): learn how to replace the default chat panel with your own.
 - [**Custom activities panel**](./openvidu-custom-activities-panel.md): learn how to replace the default activities panel with your own.
 - [**Custom participants panel**](./openvidu-custom-participants-panel.md): learn how to replace the default participants panel with your own.
-- [**Custom participant panel item**](./openvidu-custom-participant-panel-item.md): learn how to replace the default participant panel item with your own.
+- [**Custom participant panel item**](./openvidu-custom-participant-panel-item.md): learn how to replace the default participants panel item with your own.
 - [**Custom participant panel item element**](./openvidu-custom-participant-panel-item-element.md): learn how to replace the default participant panel item element with your own.
 - [**Toggle hand**](./openvidu-toggle-hand.md): learn how to add extra features to the videoconference.
 - [**Admin dashboard**](./openvidu-admin-dashboard.md): learn how to add an admin dashboard to the videoconference.

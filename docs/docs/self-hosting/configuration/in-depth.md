@@ -1,4 +1,9 @@
-# OpenVidu Configuration In depth
+---
+title: Configuration system in depth
+description: Explore OpenVidu's flexible configuration system, including global and service file settings, variable interpolation, and how to manage clusters efficiently.
+---
+
+# OpenVidu configuration system in depth
 
 OpenVidu utilizes a powerful and flexible system for configuring services by expanding global parameters defined in the configuration files. This mechanism ensures consistency and simplifies management by allowing global settings to be referenced across multiple service configurations. The variable expansion follows the same interpolation rules as Docker Compose, providing a familiar syntax for those accustomed to Docker.
 
