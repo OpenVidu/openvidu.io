@@ -135,6 +135,32 @@ sed -i "s|$VERSION/</loc>|</loc>|g" "$VERSION/sitemap.xml"
 # Regenerate sitemap.xml.gz
 gzip -k -f "$VERSION/sitemap.xml"
 
+SITEMAP_INDEX="sitemap_index.xml"
+BASE_URL="https://openvidu.io"
+SITEMAP="$BASE_URL/$VERSION/sitemap.xml.gz"
+
+# Create sitemap_index.xml if it doesn't exist
+if [[ ! -f "$SITEMAP_INDEX" ]]; then
+    echo "Index sitemap not found. Creating new \"$SITEMAP_INDEX\"..."
+    echo '<?xml version="1.0" encoding="UTF-8"?>' > "$SITEMAP_INDEX"
+    echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> "$SITEMAP_INDEX"
+    echo '</sitemapindex>' >> "$SITEMAP_INDEX"
+fi
+
+# Current date
+LASTMOD=$(date +"%Y-%m-%d")
+
+# Check if the version is already included in sitemap_index.xml
+if grep -q "<loc>$SITEMAP</loc>" "$SITEMAP_INDEX"; then
+    echo "Version $VERSION already exists in sitemap_index.xml. Updating lastmod..."
+    # Update lastmod
+    sed -i "\|<loc>$SITEMAP</loc>|!b;n;c\    <lastmod>$LASTMOD</lastmod>" "$SITEMAP_INDEX"
+else
+    echo "Adding new version $VERSION to sitemap_index.xml..."
+    # Add new version to sitemap_index.xml before the </sitemapindex> tag
+    sed -i "\|</sitemapindex>|i \  <sitemap>\n    <loc>$SITEMAP</loc>\n    <lastmod>$LASTMOD</lastmod>\n  </sitemap>" "$SITEMAP_INDEX"
+fi
+
 # Modify links in search_index.json to use absolute links
 # Modify all links to VP to use absolute links including the version ("/X.Y.Z/VP/")
 for VP in "${VERSIONED_PAGES[@]}"; do
