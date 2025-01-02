@@ -1,3 +1,8 @@
+---
+title: OpenVidu Elastic
+description: Learn how to install OpenVidu Elastic on-premises or on AWS, with configuration and management guides for each deployment option.
+---
+
 # OpenVidu Elastic installation
 
 OpenVidu Elastic is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> edition of OpenVidu. You have the following deployment options:

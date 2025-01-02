@@ -1,4 +1,9 @@
-# OpenVidu Elastic: AWS Configuration and Administration
+---
+title: OpenVidu Elastic configuration and administration on AWS
+description: Learn how to configure and perform administrative tasks on an AWS OpenVidu Elastic deployment
+---
+
+# OpenVidu Elastic Configuration and Administration: AWS
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu Elastic.

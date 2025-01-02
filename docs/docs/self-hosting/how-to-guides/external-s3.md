@@ -1,5 +1,9 @@
+---
+title: Configuring external S3 for OpenVidu recordings
+description: Learn how to configure OpenVidu with an external S3 provider for recording storage.
+---
 
-# How to configure an external S3 bucket for recordings instead of the default MinIO
+# Configuring external S3 for OpenVidu recordings
 
 By default, OpenVidu uses MinIO to store recordings. However, you can configure OpenVidu to use an external S3 bucket to store recordings.
 

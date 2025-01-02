@@ -1,4 +1,9 @@
-# Node
+---
+title: Node.js Server Tutorial
+description: Learn how to build a minimal Node.js server with Express to generate LiveKit tokens and receive webhook events using the LiveKit JS SDK.
+---
+
+# Node.js Server Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-server/node){ .md-button target=\_blank }
 

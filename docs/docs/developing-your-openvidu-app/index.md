@@ -1,3 +1,8 @@
+---
+title: Developing your OpenVidu app
+description: Learn how to build and deploy your OpenVidu application.
+---
+
 # Developing your OpenVidu application
 
 Here's a high-level overview of the steps involved in building an OpenVidu application:

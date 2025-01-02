@@ -1,4 +1,9 @@
-# openvidu-android
+---
+title: Android Tutorial
+description: Learn how to build a simple video-call app for Android using Kotlin with LiveKit Android Kotlin SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# Android Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-android){ .md-button target=\_blank }
 

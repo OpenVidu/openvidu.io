@@ -1,4 +1,9 @@
-# openvidu-angular
+---
+title: Angular Tutorial
+description: Learn how to build a simple video-call app using Angular with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# Angular Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-angular){ .md-button target=\_blank }
 

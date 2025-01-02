@@ -1,4 +1,9 @@
-# openvidu-custom-ui
+---
+title: Custom UI using Angular Components
+description: Learn how to customize the UI, changing colors, shapes and add your branding logo using OpenVidu Angular Components.
+---
+
+# Custom UI using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
 

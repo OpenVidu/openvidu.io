@@ -1,4 +1,9 @@
-# openvidu-custom-stream
+---
+title: Custom stream using Angular Components
+description: Learn how to replace the default stream with your own using OpenVidu Angular Components.
+---
+
+# Custom stream using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-stream){ .md-button target=\_blank }
 

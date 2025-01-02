@@ -1,4 +1,9 @@
-# OpenVidu High Availability: On-premises configuration and administration
+---
+title: OpenVidu High Availability configuration and administration on-premises
+description: Learn how to configure and perform administrative tasks on an on-premises OpenVidu High Availability deployment
+---
+
+# OpenVidu High Availability Configuration and Administration: On-premises
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu High Availability.
