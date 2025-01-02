@@ -28,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
 
 1. Navigate into the application directory
 

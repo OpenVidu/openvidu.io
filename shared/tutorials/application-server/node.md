@@ -1,4 +1,4 @@
-To run this server application, you need [Node.js](https://nodejs.org/en/download/package-manager){:target="\_blank"} installed on your device.
+To run this server application, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
 
 1. Navigate into the server directory
 ```bash
