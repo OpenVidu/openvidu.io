@@ -1,6 +1,6 @@
 ---
 title: .NET Server Tutorial
-description: Learn how to build a minimal .NET application server with ASP.NET to generate LiveKit tokens and receive webhook events using the LiveKit .NET SDK.
+description: Learn how to build a minimal .NET application server with ASP.NET to generate LiveKit tokens and receive webhook events.
 ---
 
 # .NET Server Tutorial
