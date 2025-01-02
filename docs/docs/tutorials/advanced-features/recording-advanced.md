@@ -1,4 +1,9 @@
-# openvidu-recording-advanced-node
+---
+title: Advanced Recording Tutorial
+description: Learn how to improve the basic recording tutorial by adding complete recording metadata, real time recording status notification and more.
+---
+
+# Advanced Recording Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/advanced-features/openvidu-recording-advanced-node){ .md-button target=\_blank }
 

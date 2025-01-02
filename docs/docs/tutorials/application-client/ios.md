@@ -1,4 +1,9 @@
-# openvidu-ios
+---
+title: iOS Tutorial
+description: Learn how to build a simple video-call app for iOS using Swift with LiveKit Swift SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# iOS Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-client/openvidu-ios){ .md-button target=\_blank }
 

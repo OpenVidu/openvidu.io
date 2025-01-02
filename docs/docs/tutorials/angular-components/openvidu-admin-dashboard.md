@@ -1,4 +1,9 @@
-# openvidu-admin-dashboard
+---
+title: Create admin dashboard using Angular Components
+description: Learn how to add an admin dashboard to the videoconference using OpenVidu Angular Components.
+---
+
+# Create admin dashboard using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target=\_blank }
 

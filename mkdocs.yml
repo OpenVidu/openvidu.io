@@ -1,6 +1,6 @@
 site_name: openVidu
 site_url: https://openvidu.io/
-site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted. Performant. Fault Tolerant. Scalable. Observable.
+site_description: A powerful platform to develop WebRTC real-time applications. Self-hosted, performant, fault tolerant, scalable and observable.
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
@@ -64,7 +64,7 @@ nav:
               - Observable:
                   - docs/self-hosting/production-ready/observability/index.md
                   - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
-                  - Grafana stack: docs/self-hosting/production-ready/observability/grafana-stack.md
+                  - Grafana Stack: docs/self-hosting/production-ready/observability/grafana-stack.md
           - Local (Development): docs/self-hosting/local.md
           - Single Node:
               - docs/self-hosting/single-node/index.md
@@ -87,21 +87,21 @@ nav:
               - On Premises:
                   - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
                   - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
-                  - Configuration And Administration: docs/self-hosting/ha/on-premises/admin.md
+                  - Administration: docs/self-hosting/ha/on-premises/admin.md
               - AWS:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
           - Configuration:
-              - Changing Config: docs/self-hosting/configuration/changing-config.md
-              - Config Sytem In depth: docs/self-hosting/configuration/in-depth.md
-              - Config References: docs/self-hosting/configuration/reference.md
+              - Changing config: docs/self-hosting/configuration/changing-config.md
+              - Config system in depth: docs/self-hosting/configuration/in-depth.md
+              - Config reference: docs/self-hosting/configuration/reference.md
           - How To Guides:
               - docs/self-hosting/how-to-guides/index.md
-              - Configure External S3: docs/self-hosting/how-to-guides/external-s3.md
+              - Configure external S3: docs/self-hosting/how-to-guides/external-s3.md
               - Force traffic to 443 TLS: docs/self-hosting/how-to-guides/force-443-tls.md
-              - Enable Webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
-              - Enable and Disable Modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
-              - Create and configurate AWS Certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
+              - Enable webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
+              - Enable and disable modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
+              - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
           # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md

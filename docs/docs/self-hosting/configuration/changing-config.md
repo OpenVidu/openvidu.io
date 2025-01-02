@@ -1,3 +1,8 @@
+---
+title: Changing configuration
+description: Learn how to modify OpenVidu configuration files across different deployment types, including single node, elastic and high availability setups.
+---
+
 # How to change OpenVidu configuration
 
 The following steps are valid to change any configuration file in any deployment type. Simply just go to one of your Master Nodes, or the only Node in your deployment, and follow these steps:

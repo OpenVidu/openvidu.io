@@ -1,5 +1,6 @@
 ---
 title: Privacy Policy
+description: Learn how TIKAL TECHNOLOGIES SL handles your personal data in compliance with EU regulations.
 hide:
   - navigation
   - toc

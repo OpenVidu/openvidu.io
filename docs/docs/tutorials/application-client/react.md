@@ -1,4 +1,9 @@
-# openvidu-react
+---
+title: React Tutorial
+description: Learn how to build a simple video-call app using React with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# React Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-client/openvidu-react){ .md-button target=\_blank }
 

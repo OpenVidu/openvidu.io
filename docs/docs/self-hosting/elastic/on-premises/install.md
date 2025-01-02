@@ -1,3 +1,8 @@
+---
+title: OpenVidu Elastic installation on-premises
+description: Learn how to deploy OpenVidu Elastic on-premises
+---
+
 # OpenVidu Elastic Installation: On-premises
 
 !!!info

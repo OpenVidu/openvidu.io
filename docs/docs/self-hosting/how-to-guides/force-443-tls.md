@@ -1,3 +1,8 @@
+---
+title: Force traffic through 443 with TLS
+description: Learn how to force all OpenVidu traffic, including WebRTC, through port 443 with TLS for enhanced security and compatibility with restrictive networks.
+---
+
 # Force all traffic including WebRTC to go through 443 with TLS
 
 In certain scenarios, users may be behind restrictive firewalls or network policies that only permit traffic through port 443 using TLS. By default, OpenVidu is configured to allow traffic through port 443 with TLS if a TURN domain name is specified during the installation process. However, users in less restrictive environments can still utilize other ports to establish WebRTC connections.

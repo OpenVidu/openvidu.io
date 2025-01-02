@@ -1,4 +1,9 @@
-# OpenVidu Single Node: AWS Administration
+---
+title: OpenVidu Single Node administration on AWS
+description: Learn how to perform administrative tasks on an AWS OpenVidu Single Node deployment
+---
+
+# OpenVidu Single Node Administration: AWS
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu Single Node.

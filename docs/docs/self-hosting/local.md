@@ -1,8 +1,9 @@
-# Local installation (Development)
+---
+title: OpenVidu Local Installation
+description: Learn how to install OpenVidu locally for development with Docker Compose. Quickly set up a secure environment to test and build your applications.
+---
 
-For development purposes, we provide an [easy to install local deployment](https://github.com/OpenVidu/openvidu-local-deployment){:target="\_blank"} based on Docker Compose which will automatically configure all the necessary services for OpenVidu to develop and test your applications seamlessly.
-
-## Installation instructions
+# OpenVidu Local Installation (Development)
 
 First, make sure you have the following prerequisites:
 

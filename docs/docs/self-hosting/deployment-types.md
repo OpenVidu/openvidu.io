@@ -1,3 +1,9 @@
+---
+description: Discover OpenVidu deployment options. Local setup for development, single node for medium load, elastic scalability and high availability clusters.
+---
+
+# Deployment types
+
 OpenVidu offers **user-friendly installers** that facilitate quick **on-premises deployments**, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
 
 There are different deployment options available, depending on your needs:

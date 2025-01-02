@@ -1,4 +1,9 @@
-# openvidu-custom-participant-panel-item-element
+---
+title: Custom participants panel item element using Angular Components
+description: Learn how to replace the default participants panel item element with your own using OpenVidu Angular Components.
+---
+
+# Custom participants panel item element using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-custom-participant-panel-item-elements){ .md-button target=\_blank }
 

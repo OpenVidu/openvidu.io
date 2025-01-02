@@ -1,4 +1,8 @@
-# Enable and Disable modules
+---
+description: Learn how to enable or disable OpenVidu modules to customize your deployment configuration.
+---
+
+# Enable and disable modules
 
 OpenVidu allows you to enable or disable modules to customize your deployment. These modules are:
 

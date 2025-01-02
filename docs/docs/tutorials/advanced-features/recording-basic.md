@@ -1,4 +1,9 @@
-# openvidu-recording-basic-node
+---
+title: Basic Recording Tutorial
+description: Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
+---
+
+# Basic Recording Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/advanced-features/openvidu-recording-basic-node){ .md-button target=\_blank }
 

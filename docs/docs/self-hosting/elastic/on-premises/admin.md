@@ -1,4 +1,9 @@
-# OpenVidu Elastic: Administration
+---
+title: OpenVidu Elastic administration on-premises
+description: Learn how to perform administrative tasks on an on-premises OpenVidu Elastic deployment
+---
+
+# OpenVidu Elastic Administration: On-premises
 
 !!!warning
     While in **BETA** this section is subject to changes. We are working to simplify the configuration and administration of OpenVidu Elastic.

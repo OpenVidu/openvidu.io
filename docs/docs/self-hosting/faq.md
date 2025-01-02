@@ -1,3 +1,7 @@
+---
+description: Frequently Asked Questions about installing, configuring and using OpenVidu.
+---
+
 # Installation FAQs
 
 ## Common issues

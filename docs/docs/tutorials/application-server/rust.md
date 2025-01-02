@@ -1,4 +1,9 @@
-# Rust
+---
+title: Rust Server Tutorial
+description: Learn how to build a minimal Rust application server with Axum to generate LiveKit tokens and receive webhook events using the LiveKit Rust SDK.
+---
+
+# Rust Server Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0-beta3/application-server/rust){ .md-button target=\_blank }
 

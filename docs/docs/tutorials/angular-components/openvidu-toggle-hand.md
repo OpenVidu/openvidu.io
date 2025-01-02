@@ -1,4 +1,9 @@
-# openvidu-toggle-hand
+---
+title: Add toggle hand feature using Angular Components
+description: Learn how to add extra features, such as toggle hand, to the videoconference using OpenVidu Angular Components.
+---
+
+# Add toggle hand feature using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.0.0-beta3/openvidu-components-angular/openvidu-toggle-hand){ .md-button target=\_blank }
 
