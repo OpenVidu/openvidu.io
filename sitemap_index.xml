@@ -12,4 +12,8 @@
     <loc>https://openvidu.io/3.0.0-beta3/sitemap.xml.gz</loc>
     <lastmod>2025-01-02</lastmod>
   </sitemap>
+  <sitemap>
+    <loc>https://openvidu.io/3.0.0/sitemap.xml.gz</loc>
+    <lastmod>2025-01-02</lastmod>
+  </sitemap>
 </sitemapindex>
