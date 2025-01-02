@@ -1,3 +1,7 @@
+---
+description: Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, live streaming and robotics.
+---
+
 ## What is OpenVidu?
 
 OpenVidu is a platform that allows you to implement real-time applications. You can build your brand new OpenVidu app from scratch, but it is also very easy to integrate OpenVidu in your already existing application.

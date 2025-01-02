@@ -1,4 +1,9 @@
-# OpenVidu Elastic: On-premises configuration and administration
+---
+title: OpenVidu Elastic configuration and administration on-premises
+description: Learn how to configure and perform administrative tasks on an on-premises OpenVidu Elastic deployment
+---
+
+# OpenVidu Elastic Configuration and Administration: On-premises
 
 The OpenVidu installer offers an easy way to deploy OpenVidu Elastic on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
 

@@ -1,4 +1,9 @@
-# openvidu-toolbar-buttons
+---
+title: Add toolbar buttons using Angular Components
+description: Learn how to add custom buttons to the toolbar using OpenVidu Angular Components.
+---
+
+# Add toolbar buttons using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-toolbar-buttons){ .md-button target=\_blank }
 

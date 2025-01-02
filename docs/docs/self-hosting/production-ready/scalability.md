@@ -1,3 +1,7 @@
+---
+description: Scale effortlessly with OpenVidu's elastic deployments, handling small meetings to massive live streams, with autoscaling and high availability support.
+---
+
 # Scalability :material-chart-timeline-variant-shimmer:
 
 Scalability is a very broad term with implications on many levels. In the case of real-time applications, it usually refers to the number of simultaneous Rooms you can host and the maximum number of participants in each Room, or more accurately, the number of media tracks sent and received in each Room.

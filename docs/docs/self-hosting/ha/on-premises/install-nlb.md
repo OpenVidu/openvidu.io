@@ -1,3 +1,8 @@
+---
+title: OpenVidu Elastic installation on-premises with Network Load Balancer
+description: Learn how to deploy OpenVidu Elastic on-premises with Network Load Balancer
+---
+
 # OpenVidu High Availability Installation: On-premises with Network Load Balancer
 
 !!!info

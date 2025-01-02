@@ -1,4 +1,9 @@
-# openvidu-custom-chat-panel
+---
+title: Custom chat panel using Angular Components
+description: Learn how to replace the default chat panel with your own using OpenVidu Angular Components.
+---
+
+# Custom chat panel using Angular Components
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-custom-chat-panel){ .md-button target=\_blank }
 

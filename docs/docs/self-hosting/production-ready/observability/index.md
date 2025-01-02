@@ -1,3 +1,8 @@
+---
+title: Observability
+description: OpenVidu provides all the tools you need to monitor and analyze your deployment in real-time using OpenVidu Dashboard and a Grafana stack.
+---
+
 # Observability :material-microscope:
 
 Any production software needs to be observable. But in real-time applications this becomes an absolute priority. You must be able to:

@@ -1,3 +1,7 @@
+---
+description: Discover how OpenVidu boosts performance with mediasoup, doubling media track capacity per server while maintaining seamless LiveKit compatibility. 
+---
+
 # Performance :material-lightning-bolt:
 
 !!! warning

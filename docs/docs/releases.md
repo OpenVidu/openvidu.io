@@ -1,3 +1,7 @@
+---
+description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
+---
+
 ## 3.0.0-beta1
 
 <h3>Version table</h3>

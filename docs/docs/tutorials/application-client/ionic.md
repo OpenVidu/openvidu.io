@@ -1,4 +1,9 @@
-# openvidu-ionic
+---
+title: Ionic Tutorial
+description: Learn how to build a simple video-call app using Ionic and Angular with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+---
+
+# Ionic Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/master/application-client/openvidu-ionic){ .md-button target=\_blank }
 

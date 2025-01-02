@@ -1,5 +1,6 @@
 ---
 title: Account
+description: Create an account in OpenVidu Pro or log in to your existing account.
 hide:
   - navigation
   - toc

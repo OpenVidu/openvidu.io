@@ -1,5 +1,6 @@
 ---
 title: Support
+description: Discover support for OpenVidu, from commercial consultancy to community-driven solutions.
 hide:
   - navigation
   - toc

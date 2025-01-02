@@ -1,4 +1,9 @@
-# Application client tutorials
+---
+title: Application Client Tutorials
+description: Learn how to build a LiveKit application client to connect to a room, publish media and subscribe to media from other participants.
+---
+
+# Application Client Tutorials
 
 Every application client below shares the same core functionality:
 

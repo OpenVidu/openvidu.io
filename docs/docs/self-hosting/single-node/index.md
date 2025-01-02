@@ -1,4 +1,9 @@
-# OpenVidu Single Node installation.
+---
+title: OpenVidu Single Node
+description: Learn how to install OpenVidu Single Node on-premises or on AWS, with configuration and management guides for each deployment option.
+---
+
+# OpenVidu Single Node installation
 
 OpenVidu Single Node is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> edition of OpenVidu. You have the following deployment options:
 

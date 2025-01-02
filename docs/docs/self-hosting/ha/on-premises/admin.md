@@ -1,4 +1,9 @@
-# OpenVidu High Availability: On-premises configuration and administration
+---
+title: OpenVidu High Availability configuration and administration on-premises
+description: Learn how to configure and perform administrative tasks on an on-premises OpenVidu High Availability deployment
+---
+
+# OpenVidu High Availability Configuration and Administration: On-premises
 
 The OpenVidu installer offers an easy way to deploy OpenVidu High Availability on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
 

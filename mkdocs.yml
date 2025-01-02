@@ -1,6 +1,6 @@
 site_name: openVidu
 site_url: https://openvidu.io/
-site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted. Performant. Fault Tolerant. Scalable. Observable.
+site_description: A powerful platform to develop WebRTC real-time applications. Self-hosted, performant, fault tolerant, scalable and observable.
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
@@ -64,27 +64,27 @@ nav:
               - docs/self-hosting/single-node/index.md
               - On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
-                  - Configuration And Administration: docs/self-hosting/single-node/on-premises/admin.md
+                  - Configuration and administration: docs/self-hosting/single-node/on-premises/admin.md
               - AWS:
                   - Install: docs/self-hosting/single-node/aws/install.md
-                  - Configuration And Administration: docs/self-hosting/single-node/aws/admin.md
+                  - Configuration and administration: docs/self-hosting/single-node/aws/admin.md
           - Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
                   - Install: docs/self-hosting/elastic/on-premises/install.md
-                  - Configuration And Administration: docs/self-hosting/elastic/on-premises/admin.md
+                  - Configuration and administration: docs/self-hosting/elastic/on-premises/admin.md
               - AWS:
                   - Install: docs/self-hosting/elastic/aws/install.md
-                  - Configuration And Administration: docs/self-hosting/elastic/aws/admin.md
+                  - Configuration and administration: docs/self-hosting/elastic/aws/admin.md
           - High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
                   - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
                   - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
-                  - Configuration And Administration: docs/self-hosting/ha/on-premises/admin.md
+                  - Configuration and administration: docs/self-hosting/ha/on-premises/admin.md
               - AWS:
                   - Install: docs/self-hosting/ha/aws/install.md
-                  - Configuration And Administration: docs/self-hosting/ha/aws/admin.md
+                  - Configuration and administration: docs/self-hosting/ha/aws/admin.md
           # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
