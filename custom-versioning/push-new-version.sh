@@ -122,7 +122,7 @@ for NVP in "${NON_VERSIONED_PAGES[@]}"; do
 done
 
 # Links to index.html
-grep -Erl "\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|\"\(\.\./\)*\.\.\"|\"/\"|g" || true
+grep -Erl "href=\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*\.\.\"|href=\"/\"|g" || true
 
 # Remove version from NVP in sitemap.xml
 for NVP in "${NON_VERSIONED_PAGES[@]}"; do
