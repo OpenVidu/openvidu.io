@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <sitemap>
+        <loc>https://openvidu.io/3.0.0-beta2/sitemap.xml.gz</loc>
+        <lastmod>2025-01-03</lastmod>
+    </sitemap>
+    <sitemap>
         <loc>https://openvidu.io/3.0.0-beta1/sitemap.xml.gz</loc>
         <lastmod>2025-01-03</lastmod>
     </sitemap>
