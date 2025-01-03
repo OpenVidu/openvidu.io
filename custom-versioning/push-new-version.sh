@@ -121,44 +121,45 @@ for NVP in "${NON_VERSIONED_PAGES[@]}"; do
     grep -Erl "href=\"(\.\./)*$NVP/" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*$NVP/|href=\"/$NVP/|g" || true
 done
 
-# Links to index.html
+# Modify all links in VP that point to index.html to use absolute links ("/")
 grep -Erl "href=\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*\.\.\"|href=\"/\"|g" || true
 
-# Remove version from NVP in sitemap.xml
+# Change base URL to root in order to prevent asking for cookies consent in each version
+grep -Erl "URL\(\"(\.\./)*\.\.\"" 3.0.0/docs | xargs sed -i "s|URL(\"\(\.\./\)*\.\.\"|URL(\"/\"|g" || true
+
+BASE_URL="https://openvidu.io"
+SITEMAP_FILE="sitemap.xml"
+SITEMAP_INDEX="sitemap_index.xml"
+SITEMAP="$BASE_URL/$VERSION/$SITEMAP_FILE.gz"
+LASTMOD=$(date +%Y-%m-%d) # Current date
+
+# Remove NVP in sitemap.xml
 for NVP in "${NON_VERSIONED_PAGES[@]}"; do
-    sed -i "s|$VERSION/$NVP|$NVP|g" "$VERSION/sitemap.xml"
+    sed -i "\|<url>|{ :Loop N; \|</url>|! b Loop; \|$VERSION/$NVP|d }" "$VERSION/$SITEMAP_FILE"
 done
 
-# Remove version from root in sitemap.xml
-sed -i "s|$VERSION/</loc>|</loc>|g" "$VERSION/sitemap.xml"
-
 # Regenerate sitemap.xml.gz
-gzip -k -f "$VERSION/sitemap.xml"
-
-SITEMAP_INDEX="sitemap_index.xml"
-BASE_URL="https://openvidu.io"
-SITEMAP="$BASE_URL/$VERSION/sitemap.xml.gz"
+gzip -k -f "$VERSION/$SITEMAP_FILE"
 
 # Create sitemap_index.xml if it doesn't exist
 if [[ ! -f "$SITEMAP_INDEX" ]]; then
-    echo "Index sitemap not found. Creating new \"$SITEMAP_INDEX\"..."
-    echo '<?xml version="1.0" encoding="UTF-8"?>' > "$SITEMAP_INDEX"
-    echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> "$SITEMAP_INDEX"
-    echo '</sitemapindex>' >> "$SITEMAP_INDEX"
+    echo "Index sitemap not found, creating new one..."
+    cat <<EOF > "$SITEMAP_INDEX"
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+</sitemapindex>
+EOF
 fi
-
-# Current date
-LASTMOD=$(date +"%Y-%m-%d")
 
 # Check if the version is already included in sitemap_index.xml
 if grep -q "<loc>$SITEMAP</loc>" "$SITEMAP_INDEX"; then
     echo "Version $VERSION already exists in sitemap_index.xml. Updating lastmod..."
-    # Update lastmod
-    sed -i "\|<loc>$SITEMAP</loc>|!b;n;c\    <lastmod>$LASTMOD</lastmod>" "$SITEMAP_INDEX"
+    # Update lastmod of the version in sitemap_index.xml
+    sed -i "\|<loc>$SITEMAP</loc>|!b;n;c\        <lastmod>$LASTMOD</lastmod>" "$SITEMAP_INDEX"
 else
     echo "Adding new version $VERSION to sitemap_index.xml..."
-    # Add new version to sitemap_index.xml before the </sitemapindex> tag
-    sed -i "\|</sitemapindex>|i \  <sitemap>\n    <loc>$SITEMAP</loc>\n    <lastmod>$LASTMOD</lastmod>\n  </sitemap>" "$SITEMAP_INDEX"
+    # Add new version to sitemap_index.xml after the <sitemapindex> tag
+    sed -i "2a \    <sitemap>\n        <loc>$SITEMAP</loc>\n        <lastmod>$LASTMOD</lastmod>\n    </sitemap>" "$SITEMAP_INDEX"
 fi
 
 # Modify links in search_index.json to use absolute links
@@ -228,6 +229,45 @@ else
 
     # Move redirect
     mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
+
+    # Create root sitemap.xml
+    # Create header of the sitemap.xml
+    cat <<EOF > $SITEMAP_FILE
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>$BASE_URL/</loc>
+        <lastmod>$LASTMOD</lastmod>
+    </url>
+EOF
+
+    # Add NVP to the sitemap.xml
+    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+        cat <<EOF >> $SITEMAP_FILE
+    <url>
+        <loc>$BASE_URL/$NVP/</loc>
+        <lastmod>$LASTMOD</lastmod>
+    </url>
+EOF
+    done
+
+    # Close sitemap.xml
+    echo "</urlset>" >> $SITEMAP_FILE
+
+    # Generate sitemap.xml.gz
+    gzip -k -f "$SITEMAP_FILE"
+
+    SITEMAP="$BASE_URL/$SITEMAP_FILE.gz"
+    # Check if the root sitemap is already included in sitemap_index.xml
+    if grep -q "<loc>$SITEMAP</loc>" "$SITEMAP_INDEX"; then
+        echo "Root sitemap already exists in sitemap_index.xml. Updating lastmod..."
+        # Update lastmod of the root sitemap in sitemap_index.xml
+        sed -i "\|<loc>$SITEMAP</loc>|!b;n;c\        <lastmod>$LASTMOD</lastmod>" "$SITEMAP_INDEX"
+    else
+        echo "Adding root sitemap to sitemap_index.xml..."
+        # Add root sitemap to sitemap_index.xml before the </sitemapindex> tag
+        sed -i "\|</sitemapindex>|i \    <sitemap>\n        <loc>$SITEMAP</loc>\n        <lastmod>$LASTMOD</lastmod>\n    </sitemap>" "$SITEMAP_INDEX"
+    fi
 
     git add .
     git commit -am "Version $VERSION updated. Non-versioned pages updated"
