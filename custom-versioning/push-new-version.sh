@@ -285,7 +285,7 @@ updateWebsite() {
         echo "The latest version will not be updated"
 
         # Remove NVP from new version
-        rm -rf "${VERSIONED_PAGES[@]/#/$VERSION/}"
+        rm -rf "${NON_VERSIONED_PAGES[@]/#/$VERSION/}"
         rm "$VERSION/404.html"
 
         # Move redirection file to the new version
