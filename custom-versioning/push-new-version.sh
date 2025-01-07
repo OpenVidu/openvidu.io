@@ -100,7 +100,7 @@ changeVersionedPagesLinks() {
     grep -Erl "href=\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*\.\.\"|href=\"/\"|g" || true
 
     # Change base URL to root in order to prevent asking for cookies consent in each version
-    grep -Erl "URL\(\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|URL(\"\(\.\./\)*\.\.\"|URL(\"/\"|g" || true
+    # grep -Erl "URL\(\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|URL(\"\(\.\./\)*\.\.\"|URL(\"/\"|g" || true
 }
 
 changeNonVersionedPagesLinks() {
