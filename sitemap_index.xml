@@ -2,7 +2,7 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <sitemap>
         <loc>https://openvidu.io/3.0.0/sitemap.xml.gz</loc>
-        <lastmod>2025-01-03</lastmod>
+        <lastmod>2025-01-08</lastmod>
     </sitemap>
     <sitemap>
         <loc>https://openvidu.io/3.0.0-beta3/sitemap.xml.gz</loc>
@@ -18,6 +18,6 @@
     </sitemap>
     <sitemap>
         <loc>https://openvidu.io/sitemap.xml.gz</loc>
-        <lastmod>2025-01-03</lastmod>
+        <lastmod>2025-01-08</lastmod>
     </sitemap>
 </sitemapindex>
