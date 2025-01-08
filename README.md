@@ -2,6 +2,9 @@
 
 - [openvidu-docs](#openvidu-docs)
   - [Development](#development)
+  - [Docs writing guidelines](#docs-writing-guidelines)
+    - [Adding a new page](#adding-a-new-page)
+    - [Adding a new shared snippet](#adding-a-new-shared-snippet)
   - [Versioning](#versioning)
   - [Versioning with GitHub Actions](#versioning-with-github-actions)
     - [Publishing a new version](#publishing-a-new-version)
@@ -41,6 +44,63 @@ docker run --rm -it -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk
 Parameters:
 
 - `GOOGLE_ANALYTICS_KEY`: Google Analytics key to track page views. This is the **MEASUREMENT ID** of the web stream details.
+
+## Docs writing guidelines
+
+### Adding a new page
+
+When creating a new page, follow these steps:
+
+1. **Create the Markdown file**:  
+   Place a `.md` file in the appropriate folder under the [`docs`](docs) directory.
+
+2. **Add metadata**:  
+   Include the following metadata at the beginning of the file:
+
+   ```yaml
+   ---
+   title: Example # Unique title (only required if the title in "mkdocs.yml" is not unique or missing)
+   description: Some description # Unique description, max 160 characters
+   ---
+   ```
+
+3. **Reference in `mkdocs.yml`**:  
+   Add the new page to the `nav` section in [`mkdocs.yml`](mkdocs.yml) (if you want to include it in the navigation) and set the title.
+
+4. **Update custom versioning scripts (if needed)**:
+   - **Non-versioned pages**: If the new page is not versioned, add it to the `NON_VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
+   - **Versioned pages**: If the new page is part of a new set of versioned pages, add it to the `VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
+
+If the new page contains links to other pages, take into account the following:
+
+- **Markdown links**: Use relative paths pointing to the Markdown file (including the `.md` extension).
+- **HTML links**: Use relative paths pointing to the folder containing the HTML file. Keep in mind that, after building the documentation, the HTML files will be placed in a folder with the same name as the Markdown file (except `index.md` files, which will be placed in its parent folder as `index.html`). For example, if you have a Markdown file `performance.md`, it will be built to `performance/index.html`. Therefore, you must add an extra `../` to the path to point to the correct folder unless the markdown file from which you are linking is named `index.md`.
+
+> [!IMPORTANT]
+> Links to non-versioned pages must be absolute paths (e.g. `/pricing/`).
+
+> [!NOTE]
+> When serving the site locally using `mkdocs-material`, there should be no warnings about links except for using absolute paths to non-versioned pages. 
+
+### Adding a new shared snippet
+
+When creating a new shared snippet, follow these steps:
+
+1. **Create the Markdown file**:  
+   Place a `.md` file in the [`shared`](shared) directory.
+
+2. **Reference in a page**:
+   Use the following syntax to include the snippet in other snippets or pages:
+
+   ```markdown
+   --8<-- "shared/snippet.md"
+   ```
+
+   > [!NOTE]
+   > The path is relative to the root of the repository.
+
+> [!IMPORTANT]
+> If the new snippet contains links to other pages, the same rules as for pages apply. However, keep in mind that links will be relative to the page where the snippet is included. Therefore, ensure all referencing files are at the same level in the hierarchy.
 
 ## Versioning
 
