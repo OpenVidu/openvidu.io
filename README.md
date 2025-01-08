@@ -96,8 +96,8 @@ When creating a new shared snippet, follow these steps:
    --8<-- "shared/snippet.md"
    ```
 
-   > [!NOTE]
-   > The path is relative to the root of the repository.
+> [!NOTE]
+> The path is relative to the root of the repository.
 
 > [!IMPORTANT]
 > If the new snippet contains links to other pages, the same rules as for pages apply. However, keep in mind that links will be relative to the page where the snippet is included. Therefore, ensure all referencing files are at the same level in the hierarchy.
