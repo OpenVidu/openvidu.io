@@ -9,8 +9,10 @@ OpenVidu Single Node is part of the <span style="font-size: 12px;" class="openvi
 
 - [**On-premises Installation**](./on-premises/install.md): Set up OpenVidu Single Node on your own servers.
 - [**AWS Installation**](./aws/install.md): Deploy OpenVidu Single Node on Amazon Web Services.
+- [**Azure Installation**](./azure/install.md): Deploy OpenVidu Single Node on Microsoft Azure Cloud.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
 - [**On-premises: Configuration and Administration**](./on-premises/admin.md)
 - [**AWS: Configuration and Administration**](./aws/admin.md)
+- [**Azure: Configuration and Administration**](./azure/admin.md)

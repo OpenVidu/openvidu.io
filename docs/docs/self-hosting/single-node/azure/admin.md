@@ -55,24 +55,24 @@ For administration, you can follow the instructions from the [On Premises Single
 
 Regarding the configuration, in Azure it is managed similarly to an on-premises deployment or an AWS deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
-In addition to these, an AWS deployment provides the capability to manage global configurations via the AWS Console using AWS Secrets created during the deployment. To manage configurations this way, follow these steps:
+In addition to these, an Azure deployment provides the capability to manage global configurations via the Azure portal using KeyVault Secrets created during the deployment. To manage configurations this way, follow these steps:
 
-=== "Changing Configuration through AWS Secrets"
+=== "Changing Configuration through KeyVault secrets"
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Single Node.
-    3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Single Node deployment.
+    1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
+    2. Select the Resource Group where you deployed your OpenVidu Single Node Stack.
+    3. In the _"stackname-keyvault"_ resource, click at _"Objects -> Secrets"_ on the left panel. This will open the KeyVault Secrets Manager which contains all the configurations of the OpenVidu Single Node deployment.
         <figure markdown>
-        ![Select Secrets Manager](../../../../assets/images/self-hosting/single-node/aws/outputs.png){ .svg-img .dark-img }
+        ![Select KeyVault Secrets Manager](../../../../assets/images/self-hosting/single-node/azure/outputs.png){ .svg-img .dark-img }
         </figure>
     4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
         <figure markdown>
-        ![Retrieve Secret Value](../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
+        ![Retrieve Secret Value](../../../../assets/images/self-hosting/single-node/azure/1-secrets-retrieve.png){ .svg-img .dark-img }
         </figure>
     5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu Single Node deployment.
-    6. Go to the EC2 Console and click on _"Reboot instance"_ to apply the changes to the Master Node.
+    6. Go to the Instance resource of OpenVidu and click on _"Restart"_ to apply the changes to the Master Node.
         <figure markdown>
-        ![Reboot Instance](../../../../assets/images/self-hosting/single-node/aws/reboot-instance.png){ .svg-img .dark-img }
+        ![Reboot Instance](../../../../assets/images/self-hosting/single-node/azure/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
     The changes will be applied automatically.

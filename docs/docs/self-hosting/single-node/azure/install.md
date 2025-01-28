@@ -7,7 +7,7 @@ description: Learn how to deploy OpenVidu Single Node on Azure using Template sp
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in Azure. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM
+This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in Azure. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure   
 <div class="center-align" markdown>
@@ -19,7 +19,7 @@ To import the template into Azure you just need to click the button below and yo
     This is how the architecture of the deployment looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/self-hosting/single-node/aws/single-node-aws-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/self-hosting/single-node/azure/single-node-azure-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node Azure Architecture</figcaption>
     </figure>
 
@@ -69,7 +69,7 @@ When everything is ready, you will see the following links in the KeyVault resou
 
     You will need to do SSH to the single instance that is created and there you need to make the following steps:   
     
-    First go to the config folder using the following command: ```cd /opt/openvidu/config```. There you will see a lot of **.env** files, those files you need to check to retrieve all access credentials of all services are:
+    First go to the config folder using the following command: ```cd /opt/openvidu/config```. There you will see a lot of **.env** files, those are the files you need to check to retrieve all access credentials of all services are:
 
     - `openvidu.env`
     - `app.env`
@@ -80,13 +80,13 @@ As we mentioned before, if you have permissions to give yourself access to the K
 
 Your authentication credentials and URL to point your applications would be:
 
-- **URL**: The value in the Azure Secret of `DOMAIN_NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in the Azure Secret of `LIVEKIT_API_KEY` or in the instance in `openvidu.env`.
-- **API Secret**: The value in the Azure Secret of `LIVEKIT_API_SECRET` or in the instance in `openvidu.env`.
+- **URL**: The value in the KeyVault Secret of `DOMAIN_NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+- **API Key**: The value in the KeyVault Secret of `LIVEKIT_API_KEY` or in the instance in `openvidu.env`.
+- **API Secret**: The value in the KeyVault Secret of `LIVEKIT_API_SECRET` or in the instance in `openvidu.env`.
 
 
 
-## Troubleshooting Initial CloudFormation Stack Creation
+## Troubleshooting Initial Azure Stack Creation
 
 --8<-- "shared/self-hosting/azure-troubleshooting.md"
 
@@ -94,4 +94,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Azure stack reaches the **`Succeeded`** status, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install openvidu as we mentioned before. When this time has passed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Azure stack reaches the **`Succeeded`** status, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu as we mentioned before. When this time has passed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
