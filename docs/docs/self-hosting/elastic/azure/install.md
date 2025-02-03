@@ -14,7 +14,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Ela
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure   
 <div class="center-align" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)]()
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fs3.eu-west-1.amazonaws.com%2Fget.openvidu.io%2Fpro%2Felastic%2Fmain%2Fazure%2Fcf-openvidu-elastic.json)
 </div>
 
 === "Architecture overview"

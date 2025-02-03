@@ -1,11 +1,11 @@
 ---
-title: OpenVidu Elastic administration on AWS
-description: Learn how to perform administrative tasks on an AWS OpenVidu Elastic deployment
+title: OpenVidu Elastic administration on Azure
+description: Learn how to perform administrative tasks on an Azure OpenVidu Elastic deployment
 ---
 
-# OpenVidu Elastic Administration: AWS
+# OpenVidu Elastic Administration: Azure
 
-The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
+The deployment of OpenVidu Elastic on Azure is automated using Templates from ARM, with Media Nodes managed within an [Virtual Machine Scaling Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the Azure deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account.
 
 ## Cluster Shutdown and Startup
 
@@ -13,32 +13,27 @@ The Master Node is an EC2 instance, while the Media Nodes are part of an Auto Sc
 
 === "Shutdown the Cluster"
 
-    To shut down the cluster, you need to stop the Media Nodes first and then stop the Master Node. This way, any ongoing session will not be interrupted.
+    To shut down the cluster, you need to stop the Media Nodes and then stop the Master Node.
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`**, and click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-        <figure markdown>
-        ![Select Auto Scaling Group](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-select-media-asg.png){ .svg-img .dark-img }
-        </figure>
-    4. Click on _"Actions > Edit"_.
-        <figure markdown>
-        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-edit-media-asg.png){ .svg-img .dark-img }
-        </figure>
-    5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to 0, and click on _"Update"_.
-        <figure markdown>
-        ![Set Desired Capacity to 0](../../../../assets/images/self-hosting/shared/aws-admin-set-desired-capacity-stop.png){ .svg-img .dark-img }
-        </figure>
-    6. Wait until the _"Instance Management"_ tab shows that there are no instances in the Auto Scaling Group.
-        <figure markdown>
-        ![Instance Management](../../../../assets/images/self-hosting/shared/aws-admin-instance-management-stop.png){ .svg-img .dark-img }
-        </figure>
+    !!! warning "Gracefully stop of Media Nodes"
 
-        !!! warning
-            
-            It may happen that some instances are still in the _"Terminating:Wait"_ lifecycle state after setting the desired capacity to 0. This is because the Auto Scaling Group waits for the instances to finish processing any ongoing room, ingress, or egress operations before terminating them. This can take a few minutes. If you want to force the termination of the instances, you can manually terminate them from the EC2 Dashboard.
+        We have a limitation in Media Nodes that makes them to doesn't stop gracefully, be carefull stopping Media Nodes because they will simply stop without waiting for the possible ongoing sesion. You may wait for them to finish and then stop the cluster.   
+        We are working on removing this limitation, to leave the same behavior as we have in AWS or in OnPremises deployments. Currently the Media Nodes have a script that can make a gracefully stop of them, ssh to the Media Node you want to stop and execute `./usr/local/bin/stop_media_node.sh`
 
-    7. After confirming that all Media Node instances are terminated, go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
+    1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} and go to the resource group where you deployed OpenVidu Elastic.
+    2. Then go to the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, here click on _"Scaling"_ option.
+        <figure markdown>
+        ![](../../../../assets/images/self-hosting/elastic/azure/azure-elastic-admin-scaling-tab.png){ .svg-img .dark-img }
+        </figure>
+    3. On this tab, go at the very bottom and modify the _"Instance Limits"_ to 0.
+        <figure markdown>
+        ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/elastic/azure/azure-elastic-admin-edit-media-ss.png){ .svg-img .dark-img }
+        </figure>
+    4. Click on save and wait until is completed, you can check how is going in the _"Instance"_ tab.
+        <figure markdown>
+        ![Set Desired Capacity to 0](../../../../assets/images/self-hosting/shared/azure-admin-instance-tab.png){ .svg-img .dark-img }
+        </figure>
+    5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource that corresponds to ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
         <figure markdown>
         ![Delete CloudFormation Stack](../../../../assets/images/self-hosting/elastic/aws/aws-elastic-admin-select-master.png){ .svg-img .dark-img }
         </figure>

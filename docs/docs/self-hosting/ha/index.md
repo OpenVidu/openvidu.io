@@ -9,9 +9,11 @@ OpenVidu High Availability is part of the <span style="font-size: 12px;" class="
 
 - [**On-premises Installation (DNS Load Balancing)**](./on-premises/install-dlb.md): Set up OpenVidu High Availability on your own servers with a DNS Load Balancing mechanism.
 - [**On-premises Installation (Network Load Balancer)**](./on-premises/install-nlb.md): Set up OpenVidu High Availability on your own servers with a Network Load Balancer.
-- [**AWS Installation**](./aws/install.md): Deploy OpenVidu Elastic on Amazon Web Services.
+- [**AWS Installation**](./aws/install.md): Deploy OpenVidu High availability on Amazon Web Services.
+- [**Azure Installation**](./azure/install.md): Deploy OpenVidu High Availability on Microsoft Azure Cloud.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
 - [**On-premises: Configuration and Administration**](./on-premises/admin.md)
 - [**AWS: Configuration and Administration**](./aws/admin.md)
+- [**Azure: Configuration and Administration**](./azure/admin.md)
