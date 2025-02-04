@@ -26,7 +26,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu
 
 !!! info
     
-    If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
+    If you want to deploy an specific version of OpenVidu HA, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
     https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.0.0/aws/cf-openvidu-ha.yaml
@@ -83,7 +83,7 @@ In this section, you need to specify the domain name and the SSL certificate to 
 
 In this section, you need to specify some properties needed for the OpenVidu HA deployment.
 
-=== "OpenVidu Elastic Configuration"
+=== "OpenVidu HA Configuration"
 
     The parameters in this section might appear as follows:
 

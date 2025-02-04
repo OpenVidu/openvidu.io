@@ -203,7 +203,7 @@ OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 
 ## Configure your Application to use the Deployment
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/cofing/cluster/openvidu.env`. All access credentials for all services are defined in this file.
+To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/cofing/cluster/.env`. All access credentials for all services are defined in this file.
 
 Your authentication credentials and URL to point your applications would be:
 

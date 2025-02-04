@@ -9,7 +9,7 @@ description: Learn how to deploy OpenVidu Single Node on Azure using Template sp
 
 This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in Azure. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
 
-To import the template into Azure you just need to click the button below and you will be redirected to azure   
+To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fs3.eu-west-1.amazonaws.com%2Fget.openvidu.io%2Fcommunity%2Fsinglenode%2Fmain%2Fazure%2Fcf-openvidu-singlenode.json)
 </div>

@@ -12,14 +12,14 @@ description: Learn how to deploy OpenVidu Elastic on Azure using Template specs 
 
 This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Azure. Deployed services are the same as the [On Premises Elastic Installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
 
-To import the template into Azure you just need to click the button below and you will be redirected to azure   
+To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fs3.eu-west-1.amazonaws.com%2Fget.openvidu.io%2Fpro%2Felastic%2Fmain%2Fazure%2Fcf-openvidu-elastic.json)
 </div>
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks:
+    This is how the architecture of the deployment looks like:
 
     <figure markdown>
     ![OpenVidu Elastic Azure Architecture](../../../../assets/images/self-hosting/elastic/azure/elastic-azure-architecture.svg){ .svg-img .dark-img }
@@ -29,7 +29,7 @@ To import the template into Azure you just need to click the button below and yo
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Call, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - A scaling set of Media Nodes is created to scale the number of Media Nodes based on the system load.
+    - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
 ## Template Parameters
 
@@ -61,9 +61,9 @@ You need to specify some properties for the Azure instances that will be created
 
     The parameters in this section may look like this:
 
-    ![Azure Instance configuration](../../../../assets/images/self-hosting/single-node/azure/azure-instance-config.png)
+    ![Azure Instance configuration](../../../../assets/images/self-hosting/elastic/azure/azure-instance-config.png)
 
-    Simply select the type of instance you want to deploy at **Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, select the **Authentication Type** (recommended sshPublicKey), you will need to paste the value of the public key you've created previously to be able to make ssh to the instance. 
+    Simply select the type of instance you want on the master nodes at **Master Node Instance Type** and select the type of instance you want on the media nodes at **Media Node Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, and paste the value of the public key you've created previously in Azure to be able to make ssh to the instance. 
 
     !!! info "SSH key"
     
@@ -101,7 +101,7 @@ When everything is ready, you will see the following links in the KeyVault resou
 
 === "Azure KeyVault Outputs"
 
-    ![Azure KeyVault Outputs](../../../../assets/images/self-hosting/single-node/azure/outputs.png)
+    ![Azure KeyVault Outputs](../../../../assets/images/self-hosting/elastic/azure/outputs.png)
 
 === "Check outputs in the instance"
 

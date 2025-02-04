@@ -5,7 +5,9 @@ description: Learn how to perform administrative tasks on an Azure OpenVidu Elas
 
 # OpenVidu Elastic Administration: Azure
 
-The deployment of OpenVidu Elastic on Azure is automated using Templates from ARM, with Media Nodes managed within an [Virtual Machine Scaling Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the Azure deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account.
+The deployment of OpenVidu Elastic on Azure is automated using Templates from ARM, with Media Nodes managed within an [Virtual Machine Scaling Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization.   
+
+Internally, the Azure deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account.
 
 ## Cluster Shutdown and Startup
 
@@ -64,7 +66,7 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
 
 ## Change the instance type
 
-It is possible to change the instance type of both the Master Node and the Media Nodes. However, since the Media Nodes are part of an Auto Scaling Group, the process differs. The following section details the procedures.
+It is possible to change the instance type of both the Master Node and the Media Nodes. However, since the Media Nodes are part of an Virtual Machine Scale Set, the process differs. The following section details the procedures.
 
 === "Master Nodes"
 
@@ -90,7 +92,7 @@ It is possible to change the instance type of both the Master Node and the Media
         
         This will restart the media nodes without the gracefully delete option, if you want to stop them gracefully check the [Shutdown the Cluster](#shutdown-the-cluster) tab
 
-    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on AWS.
+    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_. Click on it to go to the Virtual Machine Scale Set.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Size"_.
@@ -102,11 +104,11 @@ It is possible to change the instance type of both the Master Node and the Media
 
 ## Media Nodes Autoscaling Configuration
 
-To configure the Auto Scaling settings for the Media Nodes, follow the steps outlined below. This configuration allows you to set the parameters that control how the Auto Scaling Group will scale based on the target average CPU utilization.
+To configure the Auto Scaling settings for the Media Nodes, follow the steps outlined below. This configuration allows you to set the parameters that control how the Virtual Machine Scale Set will scale based on the target average CPU utilization.
 
 === "Media Nodes Autoscaling Configuration"
 
-    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on AWS.
+    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Scaling"_ option.
@@ -143,11 +145,11 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
 
 ## Fixed Number of Media Nodes
 
-If you need to maintain a fixed number of Media Nodes instead of allowing the Auto Scaling Group to dynamically adjust based on CPU utilization, you can configure the desired capacity settings accordingly. Follow the steps below to set a fixed number of Media Nodes:
+If you need to maintain a fixed number of Media Nodes instead of allowing the Virtual Machine Scale Set to dynamically adjust based on CPU utilization, you can configure the desired capacity settings accordingly. Follow the steps below to set a fixed number of Media Nodes:
 
 === "Set Fixed Number of Media Nodes"
 
-    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on AWS.
+    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic, locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it
     3. On the left panel click on _"Availability + scale"_ and then in _"Scaling"_ tab.
         <figure markdown>
