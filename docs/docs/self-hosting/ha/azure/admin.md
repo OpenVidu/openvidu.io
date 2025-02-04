@@ -33,9 +33,9 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         </figure>
     4. Click on save and wait until is completed, you can check how is going in the _"Instances"_ tab.
         <figure markdown>
-        ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure-admin-instance-tab.png){ .svg-img .dark-img }
+        ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
-    5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource called _"stackName-VN-MasterNode1"_. Click on it to go to the Master Node 1 instance. There, click on _"Stop"_ to stop the instance.
+    5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource called _"stackName-VM-MasterNode1"_. Click on it to go to the Master Node 1 instance. There, click on _"Stop"_ to stop the instance.
         <figure markdown>
         ![Delete Deployment Stack](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-stop-master.png){ .svg-img .dark-img }
         </figure>
@@ -46,7 +46,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
     To start the cluster, we recommend starting the Master Node first and then the Media Nodes.
 
     1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu HA.
-    2. In the resource group click on the resource called _"stackName-VN-MasterNode1"_, here click on start to start the Master Node 1.
+    2. In the resource group click on the resource called _"stackName-VM-MasterNode1"_, here click on start to start the Master Node 1.
         <figure markdown>
         ![Start Master Node](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-start-master.png){ .svg-img .dark-img }
         </figure>
@@ -62,7 +62,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         </figure>
     7. Click on save and wait until is completed, you can check how is going in the _"Instances"_ tab.
         <figure markdown>
-        ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure-admin-instance-tab.png){ .svg-img .dark-img }
+        ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
 
 
@@ -77,7 +77,7 @@ It is possible to change the instance type of both the Master Node and the Media
         This procedure requires downtime, as it involves stopping the Master Node.
 
     1. [Shutdown the cluster](#shutdown-the-cluster).
-    2. Go to the Azure Resource Group where you deployed and locate the resource with the name _"stackName-VN-MasterNode1"_ and click on it.
+    2. Go to the Azure Resource Group where you deployed and locate the resource with the name _"stackName-VM-MasterNode1"_ and click on it.
     3. On the left panel click on _"Availability + scale"_ tab and inside click on _"Size"_ tab. Then select the size you desire and click on _"Resize"_
         <figure markdown>
         ![Change instance type master](../../../../assets/images/self-hosting/ha/azure/azure-instance-type-master.png){ .svg-img .dark-img }
@@ -111,7 +111,7 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Scaling"_ option.
         <figure markdown>
-        ![Select scaling option](../../../../assets/images/self-hosting/ha/azure/azure-ha-scaling-tab.png){ .svg-img .dark-img }
+        ![Select scaling option](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-scaling-tab.png){ .svg-img .dark-img }
         </figure>
     5. To configure scaling policies, navigate to the very bottom in the _"Default"_ box, you will find there a section called _"Rules"_. Here you can add new rules or else modify the existing ones
         
@@ -159,7 +159,7 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Vi
         </figure>
     5. Click on save and wait until is completed, you can check how is going in the _"Instances"_ tab.
         <figure markdown>
-        ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure-admin-instance-tab.png){ .svg-img .dark-img }
+        ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
 
 

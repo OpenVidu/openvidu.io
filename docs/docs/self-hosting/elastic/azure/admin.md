@@ -35,7 +35,7 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
         <figure markdown>
         ![Location Instance Tab](../../../../assets/images/self-hosting/shared/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
-    5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource called _"stackName-VN-MasterNode"_. Click on it to go to the Master Node instance. There, click on _"Stop"_ to stop the instance.
+    5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource called _"stackName-VM-MasterNode"_. Click on it to go to the Master Node instance. There, click on _"Stop"_ to stop the instance.
         <figure markdown>
         ![Delete Deployment Stack](../../../../assets/images/self-hosting/elastic/azure/azure-elastic-admin-stop-master.png){ .svg-img .dark-img }
         </figure>
@@ -45,7 +45,7 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
     To start the cluster, we recommend starting the Master Node first and then the Media Nodes.
 
     1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu Elastic.
-    2. In the resource group click on the resource called _"stackName-VN-MasterNode"_, here click on start to start the Master Node.
+    2. In the resource group click on the resource called _"stackName-VM-MasterNode"_, here click on start to start the Master Node.
         <figure markdown>
         ![Start Master Node](../../../../assets/images/self-hosting/elastic/azure/azure-elastic-admin-start-master.png){ .svg-img .dark-img }
         </figure>
@@ -79,7 +79,7 @@ It is possible to change the instance type of both the Master Node and the Media
         !!! info
             
             You can stop only the Master Node instance to change its instance type, but it is recommended to stop the whole cluster to avoid any issues.
-    2. Go to the Azure Resource Group where you deployed and locate the resource with the name _"stackName-VN-MasterNode"_ and click on it.
+    2. Go to the Azure Resource Group where you deployed and locate the resource with the name _"stackName-VM-MasterNode"_ and click on it.
     3. On the left panel click on _"Availability + scale"_ tab and inside click on _"Size"_ tab. Then select the size you desire and click on _"Resize"_
         <figure markdown>
         ![Change instance type master](../../../../assets/images/self-hosting/elastic/azure/azure-instance-type-master.png){ .svg-img .dark-img }
