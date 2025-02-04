@@ -49,7 +49,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
 4. Select the new instance type and click on _"Resize"_.
 
-## Administration and Configuration
+## Administration and Configuration (TODO)
 
 For administration, you can follow the instructions from the [On Premises Single Node Administration](../on-premises/admin.md) section.
 
