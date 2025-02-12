@@ -180,9 +180,7 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
     ![Volumes Configuration](../../../../assets/images/self-hosting/ha/aws/volumes-config.png)
 
-    The **RetainVolumes** parameter specifies whether the EBS volumes should be retained when the stack is deleted. If you set this parameter to `true`, the EBS volumes will not be deleted when the stack is deleted. This is useful if you want to keep the recordings and metrics data after deleting the stack. If you set this parameter to `false`, the EBS volumes will be deleted when the stack is deleted. In any case, it is recommended to create a snapshot backup policy.
-
-    The **DiskSize** parameter specifies the size of the EBS volumes in GB.
+    The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
 ## Deploying the Stack
 

@@ -115,7 +115,7 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
         </figure>
     5. To configure scaling policies, navigate to the very bottom in the _"Default"_ box, you will find there a section called _"Rules"_. Here you can add new rules or else modify the existing ones
         
-        !!! info
+        !!! warning
 
             You will find just one rule to scale out, thats because we have not implemented the gracefully delete of the media nodes and we are not scaling in this cluster by default.
 

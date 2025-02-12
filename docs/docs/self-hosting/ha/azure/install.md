@@ -50,17 +50,7 @@ This is how the architecture of the deployment looks like:
 
 Depending on your needs, you need to fill the following CloudFormation parameters:
 
-### Domain and Load Balancer configuration
-
-In this section, you just need to specify the domain name.
-
-=== "Domain and Load Balancer configuration"
-
-    The parameters in this section might look like this:
-
-    ![Domain and Load Balancer configuration](../../../../assets/images/self-hosting/ha/azure/domain-and-lb-config.png)
-
-    Set the **Domain Name** parameter to the domain name you intend to use for your OpenVidu deployment. Ensure this domain is not currently pointing to any other service, you can temporarily point it elsewhere.
+--8<-- "shared/self-hosting/azure-ssl-domain.md"
 
 ### OpenVidu HA Configuration
 
@@ -96,9 +86,9 @@ You need to specify some properties for the Azure instances that will be created
 
 ### Media Nodes Scaling Set Configuration
 
-!!! info "Scale Down"
+!!! info "Scale in"
 
-    We are working in the scale in feature in the elastic deployment because Azure doesn't make the gracefull delete of the Media Nodes possible so for now we only have scale up, to be able to scale down you will need to delete the media nodes manually.
+    We are working in the scale in feature in the High Availability deployment because Azure doesn't make the gracefull delete of the Media Nodes possible so for now we only have scale up, to be able to scale down you will need to delete the media nodes manually.
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
@@ -140,12 +130,33 @@ When everything is ready, you will see the following links in the KeyVault resou
 
 === "Check outputs in the instance"
 
-    You will need to do SSH to the single instance that is created and there you need to make the following steps:   
+    You will need to do SSH to one of the Master Nodes, is not an usual SSH because the Master Nodes do not have Public Ip Address, to do it follow these steps:
     
-    First go to the config folder using the following command: ```cd /opt/openvidu/config/cluster```. There you will see two folders and one **.env** file. To retrieve all access credentials check the following files:
+    1. Go to the resource group where you deployed OpenVidu High Availability and click on one of the Master Nodes resources.
+    2. Once you are in click on _"Connect -> Connect via Bastion"_.
+        <figure markdown>
+            ![Connect via bastion](../../../../assets/images/self-hosting/ha/azure/azure-connect-bastion.png){ .svg-img .dark-img }
+        </figure>
+    
+    3. Then click on _"Deploy Bastion"_.
+        <figure markdown>
+            ![Deploy Bastion](../../../../assets/images/self-hosting/ha/azure/azure-bastion-deploy.png){ .svg-img .dark-img }
+        </figure>
+
+    4. Now, change **Authentication Type** to _"SSH Private Key from Local File"_, fill the username with the username you've used when filling the parameters and select the local file corresponding to the SSH Private Key of the SSH Public Key yo've used when deploying.
+        <figure markdown>
+            ![Bastion parameters](../../../../assets/images/self-hosting/ha/azure/azure-bastion-parameters.png){ .svg-img .dark-img }
+        </figure>
+    
+    5. Click oon connect and you will be inside the Virtual Machine of the Master Node you've selected. You can do this for every Master Node the same way.
+    
+    When you are inside of one Master Node go to the config folder using the following command: ```cd /opt/openvidu/config/cluster```. There you will see two folders and one **.env** file. To retrieve all access credentials check the following files:
 
     - `openvidu.env`
     - `master_node/app.env`
+
+    !!! warning
+        We recommend to delete the **Bastion** once you finished because is not necessary and it is an expensive resource.
 
 ## Configure your Application to use the Deployment
 
@@ -164,6 +175,9 @@ Your authentication credentials and URL to point your applications would be:
     - **Password**: The value in the KeyVault Secret of `LIVEKIT_API_SECRET` or in the instance in `openvidu.env`.
  
 ## Troubleshooting Initial Azure Stack Creation
+
+!!! info
+    If you need to do SSH to a Master Node check [Check Outputs In The Instance](#check-outputs-in-the-instance)
 
 --8<-- "shared/self-hosting/azure-troubleshooting.md"
 
