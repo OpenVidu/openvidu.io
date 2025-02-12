@@ -7,7 +7,9 @@ This section is optional. It is useful when your users are behind a restrictive 
 
     The parameters in this section may look like this:
 
-    ![TURN server configuration with TLS](../../../../assets/images/self-hosting/shared/azure-turn-tls.png)
+    <figure markdown>
+    ![TURN server configuration with TLS](../../../../assets/images/self-hosting/shared/azure-turn-tls.png){ .svg-img .dark-img }
+    </figure>
 
     Set the **Turn Domain Name** parameter to the domain name you intend to use for your TURN server. It should be pointing to the `Public Ip Address` specified in the previous section.
 

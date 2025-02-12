@@ -10,9 +10,11 @@ These are the three possible scenarios you may have to configure in this section
     First, you need to have the FQDN pointing to the Public IP you are going to use.
 
     Then, you need to fill in the following parameters:
-
-    ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt.png)
-
+    
+    <figure markdown>
+    ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt.png){ .svg-img .dark-img }
+    </figure>
+    
     !!! warning "Public IP location"
 
         You need to match the Public Ip Address parameter with the Public Ip Address Resource name, the resource of Public Ip Address must be in the same region and resource group as the one where you are going to deploy this template.
@@ -27,9 +29,11 @@ These are the three possible scenarios you may have to configure in this section
     However, this convenience comes with the caveat that users will need to manually accept the certificate in their web browsers. Please be aware that this configuration is solely for developmental and testing purposes and is not suitable for a production environment.
 
     These are the parameters needed in this section to use self-signed certificates:
-
-    ![Self-signed certificates](../../../../assets/images/self-hosting/shared/azure-selfsigned.png)
-
+    
+    <figure markdown>
+    ![Self-signed certificates](../../../../assets/images/self-hosting/shared/azure-selfsigned.png){ .svg-img .dark-img }
+    </figure>
+    
     You don’t need to specify any parameters; just select the **CertificateType** as _self-signed_. The domain name used will be an Azure-generated one and you will be able to check it later.
 
 === "Custom Certificates"
@@ -41,8 +45,10 @@ These are the three possible scenarios you may have to configure in this section
     Also, you need a **temporary HTTP server** hosting your private and public certificate under a specific URL. These URLs are needed for the instance to be able to download and install your certificates.
 
     The configured parameters would look like this:
-
-    ![Custom certificates](../../../../assets/images/self-hosting/shared/azure-owncert.png)
+    
+    <figure markdown>
+    ![Custom certificates](../../../../assets/images/self-hosting/shared/azure-owncert.png){ .svg-img .dark-img }
+    </figure>
 
     !!! warning "Public IP location"
 
