@@ -5,18 +5,6 @@
         <lastmod>2025-01-08</lastmod>
     </sitemap>
     <sitemap>
-        <loc>https://openvidu.io/3.0.0-beta3/sitemap.xml.gz</loc>
-        <lastmod>2025-01-07</lastmod>
-    </sitemap>
-    <sitemap>
-        <loc>https://openvidu.io/3.0.0-beta2/sitemap.xml.gz</loc>
-        <lastmod>2025-01-07</lastmod>
-    </sitemap>
-    <sitemap>
-        <loc>https://openvidu.io/3.0.0-beta1/sitemap.xml.gz</loc>
-        <lastmod>2025-01-07</lastmod>
-    </sitemap>
-    <sitemap>
         <loc>https://openvidu.io/sitemap.xml.gz</loc>
         <lastmod>2025-01-08</lastmod>
     </sitemap>
