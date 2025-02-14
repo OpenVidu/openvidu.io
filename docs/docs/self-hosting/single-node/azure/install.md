@@ -41,7 +41,7 @@ You need to specify some properties for the Azure instance that will be created 
     ![Azure Instance configuration](../../../../assets/images/self-hosting/single-node/azure/azure-instance-config.png){ .svg-img .dark-img }
     </figure>
 
-    Simply select the type of instance you want to deploy at **Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, select the **Authentication Type** (recommended sshPublicKey), you will need to paste the value of the public key you've created previously to be able to make ssh to the instance. 
+    Simply select the type of instance you want to deploy at **Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, then you will need to paste the value of the public key you've created previously in **Admin Ssh Key** to be able to make ssh to the instance. 
 
     !!! info "SSH key"
     
@@ -53,40 +53,38 @@ You need to specify some properties for the Azure instance that will be created 
 
 !!! warning
 
-    Don't forget about changing the resource group where all the previous resources may be created and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources)
+    Don't forget about changing the resource group where all the previous resources may be created and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
 
 When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 5 to 10 minutes.
 
 When everything is ready, you will see the following links in the Key Vault resource:   
 
-!!! info
-    
-    If you have permission to give yourself access the Key Vault that has been created you will be able to see the outputs of the deployment there, if you don't have them you can use the other method to be able to get the outputs.
-
 === "Azure Key Vault Outputs"
-
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed, you can access in [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
-    2. Once you are in the Key Vault on the left panel click on _"Objects"_ and then into _"Secrets"_.
-
-    <figure markdown>
-    ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
-    </figure>
 
     !!! warning "Access Policy"
 
-        We are assumming you have configurated an access policy in the key vault if you have the rights to do it. If you don't know how to create an access policy go to [How to Guides: Access Policy in Key Vault (Azure)](). If you don't have the role assignments in azure to be able to administrate Key Vaults check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
+        If you don't have the role assignment in azure to be able to administrate Key Vaults check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
+
+    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed, you can access in [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
+
+
+    2. Once you are in the Key Vault on the left panel click on _"Objects"_ and then into _"Secrets"_.
+
+        <figure markdown>
+        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
+        </figure>
 
     3. Here click on the secret of your choice or whatever you need to check and click again in the current version of that secret
 
-    <figure markdown>
-    ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-value.png){ .svg-img .dark-img }
-    </figure>
+        <figure markdown>
+        ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-value.png){ .svg-img .dark-img }
+        </figure>
 
     4. Now you will see a lot of properties but the one you are searching for is located at the bottom and it will be revealed by clicking in _"Show Secret Value"_.
 
-    <figure markdown>
-    ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
-    </figure>
+        <figure markdown>
+        ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
+        </figure>
 
 === "Check outputs in the instance"
 
