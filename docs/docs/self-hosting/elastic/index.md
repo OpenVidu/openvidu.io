@@ -14,3 +14,8 @@ Once your deployment is complete, refer to the following sections for configurat
 
 - [**On-premises: Configuration and Administration**](./on-premises/admin.md)
 - [**AWS: Configuration and Administration**](./aws/admin.md)
+
+If you want to upgrade your OpenVidu Elastic installation, refer to this section:
+
+- [**Upgrade OpenVidu Elastic On-premises**](./on-premises/upgrade.md)
+- [**Upgrade OpenVidu Elastic AWS**](./aws/upgrade.md)

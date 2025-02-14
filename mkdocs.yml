@@ -71,26 +71,32 @@ nav:
               - On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
                   - Administration: docs/self-hosting/single-node/on-premises/admin.md
+                  - Upgrade: docs/self-hosting/single-node/on-premises/upgrade.md
               - AWS:
                   - Install: docs/self-hosting/single-node/aws/install.md
                   - Administration: docs/self-hosting/single-node/aws/admin.md
+                  - Upgrade: docs/self-hosting/single-node/aws/upgrade.md
           - Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
                   - Install: docs/self-hosting/elastic/on-premises/install.md
                   - Administration: docs/self-hosting/elastic/on-premises/admin.md
+                  - Upgrade: docs/self-hosting/elastic/on-premises/upgrade.md
               - AWS:
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Administration: docs/self-hosting/elastic/aws/admin.md
+                  - Upgrade: docs/self-hosting/elastic/aws/upgrade.md
           - High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
                   - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
                   - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
                   - Administration: docs/self-hosting/ha/on-premises/admin.md
+                  - Upgrade: docs/self-hosting/ha/on-premises/upgrade.md
               - AWS:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
+                  - Upgrade: docs/self-hosting/ha/aws/upgrade.md
           - Configuration:
               - Changing config: docs/self-hosting/configuration/changing-config.md
               - Config system in depth: docs/self-hosting/configuration/in-depth.md
