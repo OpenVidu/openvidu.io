@@ -83,6 +83,7 @@ You need to do this in all the nodes of your OpenVidu Elastic deployment to rest
 
 ## Recommendations
 
+- Always upgrade all the nodes of your OpenVidu High Availability deployment. Otherwise, you may face compatibility issues between the different versions of OpenVidu running in your deployment.
 - On any upgrade problem, a redeployment is always recommended for a clean installation.
 - Keep your Docker and Docker Compose versions updated.
 - Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
