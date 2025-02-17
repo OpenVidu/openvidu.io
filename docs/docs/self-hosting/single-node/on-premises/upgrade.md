@@ -76,3 +76,15 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 ```
 
 In the previous command, you have to replace the date and version with the one you want to restore.
+
+## Recommendations
+
+- On any upgrade problem, a redeployment is always recommended for a clean installation.
+- Keep your Docker and Docker Compose versions updated.
+- Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
+
+    ```bash
+    docker image prune -a
+    ```
+
+    This command will remove all the images that are not being used by any container.

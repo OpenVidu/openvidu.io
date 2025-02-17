@@ -80,3 +80,15 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 ```
 
 You need to do this in all the nodes of your OpenVidu Elastic deployment to restore to the previous version.
+
+## Recommendations
+
+- On any upgrade problem, a redeployment is always recommended for a clean installation.
+- Keep your Docker and Docker Compose versions updated.
+- Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
+
+    ```bash
+    docker image prune -a
+    ```
+
+    This command will remove all the images that are not being used by any container.
