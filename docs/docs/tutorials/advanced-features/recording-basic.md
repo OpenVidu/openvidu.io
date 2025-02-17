@@ -5,7 +5,7 @@ description: Learn how to record a room and manage recordings by extending a sim
 
 # Basic Recording Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/advanced-features/openvidu-recording-basic-node){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/advanced-features/openvidu-recording-basic-node){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application, built upon [Node.js server](../application-server/node.md){:target="\_blank"} and [JavaScript client](../application-client/javascript.md){:target="\_blank"} tutorials, and extends them by adding recording capabilities:
 
@@ -24,7 +24,7 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.1.0
 ```
 
 ### 3. Run the application
@@ -252,7 +252,7 @@ This endpoint does the following:
 
 The `POST /recordings/stop` endpoint stops the recording of a room. It receives the room name of the room to stop recording as a parameter and returns the updated recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/advanced-features/openvidu-recording-basic-node/src/index.js#L121-L149' target='_blank'>index.js</a>" linenums="121"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/index.js#L121-L149' target='_blank'>index.js</a>" linenums="121"
 app.post("/recordings/stop", async (req, res) => {
   const { roomName } = req.body;
 
@@ -485,7 +485,7 @@ This endpoint does the following:
 
 Finally, let's take a look at the `s3.service.js` file, which encapsulates the operations to interact with the S3 bucket:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/advanced-features/openvidu-recording-basic-node/src/s3.service.js' target='_blank'>s3.service.js</a>" linenums="9"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/s3.service.js' target='_blank'>s3.service.js</a>" linenums="9"
 // S3 configuration
 const S3_ENDPOINT = process.env.S3_ENDPOINT || "http://localhost:9000"; // (1)!
 const S3_ACCESS_KEY = process.env.S3_ACCESS_KEY || "minioadmin"; // (2)!

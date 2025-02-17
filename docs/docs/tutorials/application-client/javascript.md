@@ -5,7 +5,7 @@ description: Learn how to build a simple video-call app using plain JavaScript, 
 
 # JavaScript Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.0.0/application-client/openvidu-js){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/application-client/openvidu-js){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built with plain **JavaScript**, **HTML** and **CSS** that allows:
 
@@ -25,7 +25,7 @@ It uses the [LiveKit JS SDK](https://docs.livekit.io/client-sdk-js){:target="\_b
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.0.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.1.0
 ```
 
 ### 3. Run a server application
@@ -46,7 +46,7 @@ This application is designed to be beginner-friendly and consists of only three 
 
 To use the LiveKit JS SDK in your application, you need to include the library in your HTML file. You can do this by adding the following script tag to the `<head>` section of your HTML file:
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/index.html#L32' target='_blank'>index.html</a>" linenums="32"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/index.html#L32' target='_blank'>index.html</a>" linenums="32"
 <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.5.9/dist/livekit-client.umd.js"></script>
 ```
 
@@ -54,7 +54,7 @@ Then, you can use the `LivekitClient` object in your JavaScript code by referenc
 
 Now let's see the code of the `app.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L1-L28' target='_blank'>app.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L1-L28' target='_blank'>app.js</a>" linenums="1"
 // When running OpenVidu locally, leave these variables empty
 // For other deployment type, configure them with correct URLs depending on your deployment
 var APPLICATION_SERVER_URL = ""; // (1)!
@@ -105,7 +105,7 @@ The `app.js` file defines the following variables:
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L30-L78' target='_blank'>app.js</a>" linenums="30"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L30-L78' target='_blank'>app.js</a>" linenums="30"
 async function joinRoom() {
     // Disable 'Join' button
     document.getElementById("join-button").disabled = true;
@@ -174,7 +174,7 @@ The `joinRoom()` function performs the following actions:
 
     -   **`LivekitClient.RoomEvent.TrackSubscribed`**: This event is triggered when a new track is received in the room. It handles the attachment of the track to the HTML page, assigning an ID, and appending it to the `layout-container` element. If the track is of kind `video`, a `video-container` is created and participant data is appended as well.
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L80-L93' target='_blank'>app.js</a>" linenums="80"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L80-L93' target='_blank'>app.js</a>" linenums="80"
     function addTrack(track, participantIdentity, local = false) {
         const element = track.attach(); // (1)!
         element.id = track.sid;
@@ -193,7 +193,7 @@ The `joinRoom()` function performs the following actions:
 
     1. Attach the track to an HTML element.
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L122-L142' target='_blank'>app.js</a>" linenums="122"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L122-L142' target='_blank'>app.js</a>" linenums="122"
     function createVideoContainer(participantIdentity, local = false) {
         const videoContainer = document.createElement("div");
         videoContainer.id = `camera-${participantIdentity}`;
@@ -219,7 +219,7 @@ The `joinRoom()` function performs the following actions:
 
     -   **`LivekitClient.RoomEvent.TrackUnsubscribed`**: This event occurs when a track is destroyed, and it takes care of detaching the track from the HTML page and removing it from the DOM. If the track is a `video` track, `video-container` with the participant's identity is removed as well.
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L144-L147' target='_blank'>app.js</a>" linenums="144"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L144-L147' target='_blank'>app.js</a>" linenums="144"
     function removeVideoContainer(participantIdentity) {
         const videoContainer = document.getElementById(`camera-${participantIdentity}`);
         videoContainer?.remove();
@@ -235,7 +235,7 @@ The `joinRoom()` function performs the following actions:
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L156-L188' target='_blank'>app.js</a>" linenums="156"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L156-L188' target='_blank'>app.js</a>" linenums="156"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -283,7 +283,7 @@ The `joinRoom()` function performs the following actions:
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.0.0/application-client/openvidu-js/src/app.js#L95-L113' target='_blank'>app.js</a>" linenums="95"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-client/openvidu-js/src/app.js#L95-L113' target='_blank'>app.js</a>" linenums="95"
 async function leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await room.disconnect(); // (1)!

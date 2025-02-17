@@ -141,8 +141,8 @@ console.log(room.metadata);
 You can update the Room metadata at any time from your application server with the [`UpdateRoomMetadata` API](https://docs.livekit.io/reference/server/server-apis/#UpdateRoomMetadata){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The client side will be notified of the change with the `roomMetadataChanged` event of the `Room` object:
 
 ```typescript
-room.on('roomMetadataChanged', (metadata) => {
-  console.log('New room metadata', metadata);
+room.on("roomMetadataChanged", (metadata) => {
+  console.log("New room metadata", metadata);
 });
 ```
 
@@ -151,28 +151,46 @@ Secondly, you can also set Participant metadata. You do so when creating an [acc
 Participants can also update their own metadata from the client side, if their access token was created with [grant `canUpdateOwnMetadata`](https://docs.livekit.io/home/get-started/authentication/#Video-grant){target="\_blank"}.
 
 ```typescript
-room.localParticipant.setMetadata('new metadata');
+room.localParticipant.setMetadata("new metadata");
 ```
 
 The client side will be notified of the change with the `participantMetadataChanged` event of the `Room` and/or `Participant` object:
 
 ```typescript
 // To handle all metadata changes of all participants
-room.on(RoomEvent.ParticipantMetadataChanged, (previousMetadata: string, participant) => {
-  console.log('New metadata for participant', participant.identity, participant.metadata);
-});
+room.on(
+  RoomEvent.ParticipantMetadataChanged,
+  (previousMetadata: string, participant) => {
+    console.log(
+      "New metadata for participant",
+      participant.identity,
+      participant.metadata
+    );
+  }
+);
 
 // To handle only metadata changes of a specific participant
-participant.on(ParticipantEvent.ParticipantMetadataChanged, (previousMetadata) => {
-    console.log('New metadata for participant', participant.identity, participant.metadata);
-});
+participant.on(
+  ParticipantEvent.ParticipantMetadataChanged,
+  (previousMetadata) => {
+    console.log(
+      "New metadata for participant",
+      participant.identity,
+      participant.metadata
+    );
+  }
+);
 ```
 
 Finally, you can send messages to Participants in the Room using the [`LocalParticipant.publishData`](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#publishData){target="\_blank"} method:
 
 ```typescript
-const data: Uint8Array = new TextEncoder().encode(JSON.stringify(''));
-room.localParticipant.publishData(data, { reliable: true, topic: 'chat', destinationIdentities: ['participant-identity'] });
+const data: Uint8Array = new TextEncoder().encode(JSON.stringify(""));
+room.localParticipant.publishData(data, {
+  reliable: true,
+  topic: "chat",
+  destinationIdentities: ["participant-identity"],
+});
 ```
 
 The [`DataPublishOptions`](https://docs.livekit.io/client-sdk-js/types/DataPublishOptions.html){target="\_blank"} allow setting the reliability of the message (depending on the nature of the message it can be sent as a reliable or lossy message), a topic to easily filter messages, and the participants that will receive the message.
@@ -181,16 +199,22 @@ The client side will be notified of the message with the `dataReceived` event of
 
 ```typescript
 // To receive all messages from the Room
-room.on(RoomEvent.DataReceived, (payload: Uint8Array, participant: Participant, kind: DataPacket_Kind) => {
-  const strData = new TextDecoder().decode(payload);
-  console.log('Received data from', participant.identity, strData);
-});
+room.on(
+  RoomEvent.DataReceived,
+  (payload: Uint8Array, participant: Participant, kind: DataPacket_Kind) => {
+    const strData = new TextDecoder().decode(payload);
+    console.log("Received data from", participant.identity, strData);
+  }
+);
 
 // To receive messages only from a specific participant
-participant.on(ParticipantEvent.DataReceived, (payload: Uint8Array, kind: DataPacket_Kind) => {
-  const strData = new TextDecoder().decode(payload);
-  console.log('Received data from', participant.identity, strData);
-});
+participant.on(
+  ParticipantEvent.DataReceived,
+  (payload: Uint8Array, kind: DataPacket_Kind) => {
+    const strData = new TextDecoder().decode(payload);
+    console.log("Received data from", participant.identity, strData);
+  }
+);
 ```
 
 > [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/data/){target="\_blank"}
@@ -229,16 +253,16 @@ You can also create custom screen tracks, for example capturing the audio of the
 
 ```typescript
 const screenTracks = await room.localParticipant.createScreenTracks({
-    audio: true,
-    contentHint: "detail",
-    preferCurrentTab: true,
-    video: {
-        displaySurface: "window"
-    }
+  audio: true,
+  contentHint: "detail",
+  preferCurrentTab: true,
+  video: {
+    displaySurface: "window",
+  },
 });
 await Promise.all([
-    room.localParticipant.publishTrack(screenTracks[0]),
-    room.localParticipant.publishTrack(screenTracks[1]),
+  room.localParticipant.publishTrack(screenTracks[0]),
+  room.localParticipant.publishTrack(screenTracks[1]),
 ]);
 ```
 
@@ -257,7 +281,7 @@ npm add @livekit/track-processors
 To blur the background:
 
 ```typescript
-import { BackgroundBlur } from '@livekit/track-processors';
+import { BackgroundBlur } from "@livekit/track-processors";
 
 const videoTrack = await createLocalVideoTrack();
 const blur = BackgroundBlur(10);
@@ -267,10 +291,10 @@ await videoTrack.setProcessor(blur);
 To replace the background with an image:
 
 ```typescript
-import { VirtualBackground } from '@livekit/track-processors';
+import { VirtualBackground } from "@livekit/track-processors";
 
 const videoTrack = await createLocalVideoTrack();
-const image = VirtualBackground('https://picsum.photos/400');
+const image = VirtualBackground("https://picsum.photos/400");
 await videoTrack.setProcessor(image);
 ```
 
@@ -287,6 +311,228 @@ You can record your Rooms using the Egress module. Egress allows exporting media
 Visit the LiveKit reference documentation for a detailed explanation of Egress:
 
 > [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/egress/overview/){target="\_blank"}
+
+### Stream ingestion
+
+You can ingest media streams into your Rooms using the Ingress module. It supports different sources, including:
+
+- **RTMP**: the Ingress module exposes an RTMP endpoint to which your user can stream their content. The ingress module will transcode and publish the stream to the Room, making it available to all participants.
+- **WHIP**: the Ingress module exposes a WHIP endpoint to which your user can stream their content directly via WebRTC. You can choose whether the Ingress module should transcode the stream or directly relay it to the Room. Avoiding transcodification is the best option to minimize latency when ingesting media to a Room.
+- **Media files serve by an HTTP server**: the Ingress module will fetch a media file, transcode it and publish it to the Room.
+- **Media served by a SRT server**: the Ingress module will pull the media from an SRT server, transcode it and publish it to the Room.
+
+Visit the LiveKit reference documentation for a detailed explanation of Ingress:
+
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/ingress/overview/){target="\_blank"}
+
+### IP Cameras
+
+With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply use the [Ingress API](https://docs.livekit.io/home/ingress/overview/){target="\_blank"} to create and ingress of input type `URL`, providing the IP camera RTSP URL as value:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+
+    ```javascript
+    import { IngressClient, IngressInfo, IngressInput } from 'livekit-server-sdk';
+
+    const ingressClient = new IngressClient('https://my-openvidu-host', 'api-key', 'secret-key');
+
+    const ingress = {
+      name: 'my-ingress',
+      roomName: 'my-room',
+      participantIdentity: 'my-participant',
+      participantName: 'My Participant',
+      url: 'rtsp://admin:pass@192.168.1.79/mystream'
+    };
+
+    await ingressClient.createIngress(IngressInput.URL_INPUT, ingress);
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
+
+    ```go
+    import (
+      lksdk "github.com/livekit/server-sdk-go/v2"
+      livekit "github.com/livekit/protocol/livekit"
+    )
+
+    ingressClient := lksdk.NewIngressClient(
+        "https://my-openvidu-host",
+        "livekit-api-key",
+        "livekit-api-secret",
+    )
+
+    ingressRequest := &livekit.CreateIngressRequest{
+        InputType:           livekit.IngressInput_URL_INPUT,
+        Name:                "my-ingress",
+        RoomName:            "my-room",
+        ParticipantIdentity: "my-participant",
+        ParticipantName:     "My Participant",
+        Url:                 "rtsp://admin:pass@192.168.1.79/mystream",
+    }
+
+    ingressInfo, err := ingressClient.CreateIngress(context.Background(), ingressRequest)
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
+
+    ```ruby
+    require 'livekit'
+
+    ingressClient = LiveKit::IngressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "secret-key")
+    ingressInfo = ingressClient.create_ingress(
+      :URL_INPUT,
+      name: "my-ingress",
+      room_name: "my-room",
+      participant_identity: "my-participant",
+      participant_name: "My Participant",
+      url: "rtsp://admin:pass@192.168.1.79/mystream",
+    )
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
+
+    ```java
+    import io.livekit.server.IngressServiceClient;
+    import livekit.LivekitIngress.IngressInfo;
+    import livekit.LivekitIngress.IngressInput;
+
+    IngressServiceClient ingressService = IngressServiceClient.createClient("https://my-openvidu-host", "api-key", "secret-key");
+
+    IngressInfo ingressInfo = ingressService.createIngress(
+        "my-ingress", // Ingress name
+        "my-room", // Room name
+        "my-participant", // Ingress participant identity
+        "My Participant", // Ingress participant name
+        IngressInput.URL_INPUT, // Ingress input type
+        null, null, null, null, // Other default options
+        "rtsp://admin:pass@192.168.1.79/mystream" // Input URL
+    ).execute().body();
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK](https://github.com/livekit/rust-sdks){target="\_blank"}
+
+    ```rust
+    use livekit_api::services::ingress::*;
+    use livekit_protocol::*;
+
+    let ingress_client = IngressClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "secret-key",
+    );
+    let ingress_info = ingress_client.create_ingress(
+        IngressInput::UrlInput,
+        CreateIngressOptions {
+            name: "my-ingress".to_string(),
+            room_name: "my-room".to_string(),
+            participant_identity: "my-participant".to_string(),
+            participant_name: "My Participant".to_string(),
+            url: "rtsp://admin:pass@192.168.1.79/mystream".to_string(),
+            ..Default::default()
+        }).await;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK](https://github.com/agence104/livekit-server-sdk-php){target="\_blank"}
+
+    ```php
+    <?php
+    use Agence104\LiveKit\IngressServiceClient;
+    use Livekit\IngressInput;
+
+    $ingress_client = new IngressServiceClient("https://my-openvidu-host", "api-key", "secret-key");
+    $ingress_info = $ingress_client->createIngress(
+      IngressInput::URL_INPUT,
+      "my-ingress", // Ingress name
+      "my-room", // Room name
+      "my-participant", // Ingress participant identity
+      "My Participant", // Ingress participant name
+      NULL, NULL, NULL, // Other default options
+      "rtsp://admin:pass@192.168.1.79/mystream" // Input URL
+    );
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    IngressServiceClient ingressServiceClient = new IngressServiceClient(
+        "https://my-openvidu-host",
+        LIVEKIT_API_KEY,
+        LIVEKIT_API_SECRET
+    );
+    var ingressInfo = await ingressServiceClient.CreateIngress(new CreateIngressRequest
+    {
+        Name = "my-ingress",
+        RoomName = "my-room",
+        ParticipantIdentity = "my-participant",
+        ParticipantName = "My Participant",
+        InputType = IngressInput.UrlInput,
+        Url = "rtsp://admin:pass@192.168.1.79/mystream",
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two different options:
+
+    1. Consume the Ingress API directly: [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/home/ingress/overview/#api){target="\_blank"}
+
+    2. Use the [livekit-cli](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
+
+        Create a file at `ingress.json` with the following content:
+
+        ```json
+        {
+          "input_type": "URL_INPUT",
+          "name": "Name of the Ingress goes here",
+          "room_name": "Name of the room to connect to",
+          "participant_identity": "Unique identity for the room participant the Ingress service will connect as",
+          "participant_name": "Name displayed in the room for the participant",
+          "url": "rtsp://admin:pass@192.168.1.79/mystream"
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=secret-key
+
+        lk ingress create ingress.json
+        ```
+
+Many different audio and video codecs are supported for ingesting IP cameras:
+
+For video:
+
+- H264
+- VP8
+- VP9
+- MPEG4
+- MJPEG
+
+For audio:
+
+- AAC
+- MP3
+- OPUS
+- G711
 
 ### Webhooks
 
