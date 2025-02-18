@@ -165,28 +165,31 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Vi
         </figure>
 
 
-## Administration and Configuration (TODO)
+## Administration and Configuration
 
 For administration, you can follow the instructions from the [On Premises Elastic Administration](../on-premises/admin.md) section.
 
 Regarding the configuration, in Azure it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
-In addition to these, an Azure deployment provides the capability to manage global configurations via the Azure portal using KeyVault Secrets created during the deployment. To manage configurations this way, follow these steps:
+In addition to these, an Azure deployment provides the capability to manage global configurations via the Azure portal using Key Vault Secrets created during the deployment. To manage configurations this way, follow these steps:
 
-=== "Changing Configuration through KeyVault secrets"
+=== "Changing Configuration through Key Vault secrets"
 
     1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
-    2. Select the Resource Group where you deployed your OpenVidu Elastic Stack.
-    3. In the _"stackname-keyvault"_ resource, click at _"Objects -> Secrets"_ on the left panel. This will open the KeyVault Secrets Manager which contains all the configurations of the OpenVidu Elastic deployment.
+    2. Select the Resource Group where you deployed your OpenVidu Single Node Stack.
+    3. In the _"stackname-keyvault"_ resource, click at _"Objects -> Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu Single Node deployment.
         <figure markdown>
-        ![Select KeyVault Secrets Manager](../../../../assets/images/self-hosting/elastic/azure/outputs.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/elastic/azure/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
-    4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
+    4. Click on the desired secret you want to change and click on _"New Version"_.
         <figure markdown>
-        ![Retrieve Secret Value](../../../../assets/images/self-hosting/elastic/azure/1-secrets-retrieve.png){ .svg-img .dark-img }
+        ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/elastic/azure/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
         </figure>
-    5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu Elastic deployment.
-    6. Go to the Instance resource of OpenVidu and click on _"Restart"_ to apply the changes to the Master Node.
+    5. Enter the new secret value on _"Secret Value"_ filed and click on _"Create"_.
+        <figure markdown>
+        ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/elastic/azure/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
+        </figure>
+    6. Go to the Instance resource of OpenVidu and click on _"Restart"_ to apply the changes to the OpenVidu Single Node deployment.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/elastic/azure/reboot-instance.png){ .svg-img .dark-img }
         </figure>
