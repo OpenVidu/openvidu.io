@@ -45,7 +45,9 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     The parameters in this section might appear as follows:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/elastic/azure/openvidu-elastic-config.png)
+    <figure markdown>
+    ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/elastic/azure/openvidu-elastic-config.png){ .svg-img .dark-img }
+    </figure>
 
     Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 
@@ -61,7 +63,9 @@ You need to specify some properties for the Azure instances that will be created
 
     The parameters in this section may look like this:
 
-    ![Azure Instance configuration](../../../../assets/images/self-hosting/elastic/azure/azure-instance-config.png)
+    <figure markdown>
+    ![Azure Instance configuration](../../../../assets/images/self-hosting/elastic/azure/azure-instance-config.png){ .svg-img .dark-img }
+    </figure>
 
     Simply select the type of instance you want on the master nodes at **Master Node Instance Type** and select the type of instance you want on the media nodes at **Media Node Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, and paste the value of the public key you've created previously in Azure to be able to make ssh to the instance. 
 
@@ -81,7 +85,9 @@ The number of Media Nodes can scale up based on the system load. You can configu
 
     The parameters in this section may look like this:
 
-    ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/elastic/azure/media-nodes-asg-config.png)
+    <figure markdown>
+    ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/elastic/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
+    </figure>
 
     The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 
@@ -100,10 +106,6 @@ When you are ready with your Template parameters, just click on _"Next"_, then i
 When everything is ready, you will see the following links in the Key Vault resource:   
 
 === "Azure Key Vault Outputs"
-
-    !!! warning "Access Policy"
-
-        If you don't have the role assignment in azure to be able to administrate Key Vaults check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
 
     1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed, you can access in [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
 

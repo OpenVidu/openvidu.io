@@ -61,10 +61,6 @@ When everything is ready, you will see the following links in the Key Vault reso
 
 === "Azure Key Vault Outputs"
 
-    !!! warning "Access Policy"
-
-        If you don't have the role assignment in azure to be able to administrate Key Vaults check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
-
     1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed, you can access in [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
 
 
