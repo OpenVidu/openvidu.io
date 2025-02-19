@@ -128,7 +128,7 @@ This section is optional. It is useful when your users are behind a restrictive 
 
     Don't forget about changing the resource group where all the previous resources may be created (in case you use an existing public IP) and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
 
-When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 5 to 10 minutes.
+When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 10 to 15 minutes.
 
 When everything is ready, you will see the following links in the Key Vault resource:   
 
@@ -140,19 +140,19 @@ When everything is ready, you will see the following links in the Key Vault reso
     2. Once you are in the Key Vault on the left panel click on _"Objects"_ and then into _"Secrets"_.
 
         <figure markdown>
-        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/ha/azure/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
 
     3. Here click on the secret of your choice or whatever you need to check and click again in the current version of that secret
 
         <figure markdown>
-        ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/ha/azure/azure-keyvault-secret-value.png){ .svg-img .dark-img }
+        ![Azure Key Vault Secret Version](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-version.png){ .svg-img .dark-img }
         </figure>
 
     4. Now you will see a lot of properties but the one you are searching for is located at the bottom and it will be revealed by clicking in _"Show Secret Value"_.
 
         <figure markdown>
-        ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/ha/azure/azure-keyvault-output.png){ .svg-img .dark-img }
+        ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
         </figure>
 
 === "Check outputs in the instance"
@@ -165,17 +165,12 @@ When everything is ready, you will see the following links in the Key Vault reso
             ![Connect via bastion](../../../../assets/images/self-hosting/ha/azure/azure-connect-bastion.png){ .svg-img .dark-img }
         </figure>
     
-    3. Then click on _"Deploy Bastion"_.
-        <figure markdown>
-            ![Deploy Bastion](../../../../assets/images/self-hosting/ha/azure/azure-bastion-deploy.png){ .svg-img .dark-img }
-        </figure>
-
-    4. Now, change **Authentication Type** to _"SSH Private Key from Local File"_, fill the username with the username you've used when filling the parameters and select the local file corresponding to the SSH Private Key of the SSH Public Key yo've used when deploying.
+    3. Now, change **Authentication Type** to _"SSH Private Key from Local File"_, fill the username with the username you've used when filling the parameters and select the local file corresponding to the SSH Private Key of the SSH Public Key yo've used when deploying.
         <figure markdown>
             ![Bastion parameters](../../../../assets/images/self-hosting/ha/azure/azure-bastion-parameters.png){ .svg-img .dark-img }
         </figure>
     
-    5. Click oon connect and you will be inside the Virtual Machine of the Master Node you've selected. You can do this for every Master Node the same way.
+    4. Click oon connect and you will be inside the Virtual Machine of the Master Node you've selected. You can do this for every Master Node the same way.
     
     When you are inside of one Master Node go to the config folder using the following command: ```cd /opt/openvidu/config/cluster```. There you will see two folders and one **.env** file. To retrieve all access credentials check the following files:
 

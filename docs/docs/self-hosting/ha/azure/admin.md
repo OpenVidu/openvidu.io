@@ -174,20 +174,20 @@ In addition to these, an Azure deployment provides the capability to manage glob
 === "Changing Configuration through Key Vault secrets"
 
     1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
-    2. Select the Resource Group where you deployed your OpenVidu Single Node Stack.
-    3. In the _"stackname-keyvault"_ resource, click at _"Objects -> Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu Single Node deployment.
+    2. Select the Resource Group where you deployed your OpenVidu HA Stack.
+    3. In the _"stackname-keyvault"_ resource, click at _"Objects -> Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu HA deployment.
         <figure markdown>
-        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/ha/azure/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
     4. Click on the desired secret you want to change and click on _"New Version"_.
         <figure markdown>
-        ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/ha/azure/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
+        ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/shared/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
         </figure>
     5. Enter the new secret value on _"Secret Value"_ filed and click on _"Create"_.
         <figure markdown>
-        ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/ha/azure/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
+        ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
         </figure>
-    6. Go to the Instance resource of OpenVidu and click on _"Restart"_ to apply the changes to the OpenVidu Single Node deployment.
+    6. Go to the Master Node resource you've want to change the secrets on and click on _"Restart"_ to apply the changes to the OpenVidu HA deployment.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/ha/azure/reboot-instance.png){ .svg-img .dark-img }
         </figure>
