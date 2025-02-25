@@ -164,13 +164,18 @@ When everything is ready, you will see the following links in the Key Vault reso
         <figure markdown>
             ![Connect via bastion](../../../../assets/images/self-hosting/ha/azure/azure-connect-bastion.png){ .svg-img .dark-img }
         </figure>
-    
-    3. Now, change **Authentication Type** to _"SSH Private Key from Local File"_, fill the username with the username you've used when filling the parameters and select the local file corresponding to the SSH Private Key of the SSH Public Key yo've used when deploying.
+
+    3. After that, click on _"Deploy Bastion"_ button.
+        <figure markdown>
+            ![Deploy bastion](../../../../assets/images/self-hosting/ha/azure/azure-bastion-deploy.png){ .svg-img .dark-img }
+        </figure>
+
+    4. Now, change **Authentication Type** to _"SSH Private Key from Local File"_, fill the username with the username you've used when filling the parameters and select the local file corresponding to the SSH Private Key of the SSH Public Key yo've used when deploying.
         <figure markdown>
             ![Bastion parameters](../../../../assets/images/self-hosting/ha/azure/azure-bastion-parameters.png){ .svg-img .dark-img }
         </figure>
     
-    4. Click oon connect and you will be inside the Virtual Machine of the Master Node you've selected. You can do this for every Master Node the same way.
+    5. Click on connect and you will be inside the Virtual Machine of the Master Node you've selected. You can do this for every Master Node the same way.
     
     When you are inside of one Master Node go to the config folder using the following command: ```cd /opt/openvidu/config/cluster```. There you will see two folders and one **.env** file. To retrieve all access credentials check the following files:
 
