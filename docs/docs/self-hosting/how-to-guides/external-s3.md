@@ -66,7 +66,7 @@ EXTERNAL_S3_BUCKET_CLUSTER_DATA=my-openvidu-cluster-bucket
 ```
 
 !!! warning
-   
+
     Note that the region must be specified in the `EXTERNAL_S3_ENDPOINT` parameter for AWS S3. This may not be required for other S3 providers but is necessary for AWS S3.
 
 ## About the Path-Style parameter

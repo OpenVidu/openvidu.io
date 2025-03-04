@@ -49,10 +49,10 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
 | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
-| TCP         | 1935           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to ingest RTMP streams using Ingress service. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to allow WebRTC over TCP. |
-| UDP         | 7885           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to ingest WebRTC using WHIP protocol. |
-| TCP         | 9000           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to expose MinIO publicly. |
+| TCP         | 1935           | 0.0.0.0/0, ::/0 | Needed if you want to ingest RTMP streams using Ingress service. |
+| TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed if you want to allow WebRTC over TCP. |
+| UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP protocol. |
+| TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
 | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
 
 **Outbound port rules**:

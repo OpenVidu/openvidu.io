@@ -152,7 +152,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
     The **OpenViduMediaNodeSubnets** specifies the subnets where the Media Nodes will be deployed. There is no limit on the number of subnets you can specify.
 
     !!! warning
-        
+
         - It is recommended to deploy in a region with at least 4 availability zones and deploy the Master Nodes in 4 subnets, one in each availability zone. This is to ensure high availability.
         - You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
 

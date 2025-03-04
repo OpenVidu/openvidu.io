@@ -58,12 +58,12 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
-| TCP         | 1935           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to ingest RTMP streams using Ingress service. |
-| TCP         | 9000           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to expose MinIO publicly. |
-| TCP         | 4443           | Media Nodes     | (Optional. Only needed when _'OpenVidu v2 Compatibility'_ module is used) Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-| TCP         | 6080           | Media Nodes     | (Optional. Only needed when _'Default App'_ module is used) Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
-| TCP         | 3100           | Media Nodes     | (Optional. Only needed when _'Observability'_ module is used) Media Nodes need access to this port to reach Loki. |
-| TCP         | 9009           | Media Nodes     | (Optional. Only needed when _'Observability'_ module is used) Media Nodes need access to this port to reach Mimir. |
+| TCP         | 1935           | 0.0.0.0/0, ::/0 | Needed if you want to ingest RTMP streams using Ingress service. |
+| TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
+| TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
+| TCP         | 6080           | Media Nodes     | Needed when _'Default App'_  module is used (`app` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
+| TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
+| TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
 | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
 | TCP         | 9100           | Media Nodes     | Media Nodes need access to this port to reach MinIO. |
 | TCP         | 20000          | Media Nodes     | Media Nodes need access to this port to reach MongoDB. |
@@ -81,13 +81,13 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0   | (Optional). Only needed if you want to allow WebRTC over TCP. |
-| UDP         | 7885           | 0.0.0.0/0, ::/0   | (Optional). Only needed if you want to ingest WebRTC using WHIP. |
+| TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed if you want to allow WebRTC over TCP. |
+| UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
 | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | WebRTC Media traffic. |
-| TCP         | 1935           | Master Node     | (Optional). Only needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
-| TCP         | 5349           | Master Node     | (Optional). Only needed if you want to expose TURN service with TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
+| TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
+| TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
 | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
-| TCP         | 8080           | Master Node     | (Optional). Only needed if you want to ingest WebRTC streams using WHIP. Master Node needs access to this port to reach WHIP HTTP service. |
+| TCP         | 8080           | Master Node     | Needed if you want to ingest WebRTC streams using WHIP. Master Node needs access to this port to reach WHIP HTTP service. |
 
 ## Guided Installation
 
