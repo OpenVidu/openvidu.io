@@ -12,3 +12,4 @@ OpenVidu deployments are installed with sane defaults, but you may want to custo
 - [Enable webhooks](./enable-webhooks.md)
 - [Enable and Disable modules](./enable-disable-modules.md)
 - [Create and configurate AWS certificate for HA deployment](./create-configure-AWS-certificate.md)
+- [How to deploy and configure OpenVidu with an existing external proxy](./deploy-with-external-proxy.md)

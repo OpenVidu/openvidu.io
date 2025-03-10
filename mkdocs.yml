@@ -108,6 +108,7 @@ nav:
               - Enable webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
               - Enable and disable modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
               - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
+              - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
             # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
