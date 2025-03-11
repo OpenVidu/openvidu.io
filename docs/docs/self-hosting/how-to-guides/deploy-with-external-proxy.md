@@ -43,24 +43,34 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     You can follow the same rule ports of the [Single Node Deployment](../single-node/on-premises/install.md#port-rules){:target="_blank"} but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
 
-    | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
-    | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-    | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
-    | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
-    | TCP         | 5349           | External proxy | Needed if you want TURN with TLS. |
-    | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
-    | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed if you want to allow WebRTC over TCP. |
-    | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP protocol. |
-    | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
-    | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
+    === "OpenVidu Machine"
 
-    And the inbound rules for the proxy server would be as follows:
+        **Inbound Rules**
 
-    | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
-    | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-    | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
-    | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
-    | TCP         | 1935           | 0.0.0.0/0, ::/0 | RTMP with TLS. |
+        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
+        | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
+        | TCP         | 5349           | External proxy | Needed if you want TURN with TLS. |
+        | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed if you want to allow WebRTC over TCP. |
+        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP protocol. |
+        | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
+        | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
+
+        **Outbound Rules**
+
+        Typically, all outbound traffic is allowed.
+
+    === "Proxy Server"
+
+        **Inbound Rules**
+
+        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
+        | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
+        | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
+        | TCP         | 1935           | 0.0.0.0/0, ::/0 | RTMP with TLS. |
 
 
     **3. Install OpenVidu Single Node with `--external-proxy` flag**
@@ -144,75 +154,117 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     You can follow the same rule ports of the Elastic Deployment for the [Master Node](../elastic/on-premises/install.md#port-rules-master-node) and for the [Media Nodes](../elastic/on-premises/install.md#port-rules-media-nodes) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
 
-    | Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
-    | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-    | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
-    | TCP         | 1935           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
-    | TCP         | 5349           | External Proxy | Needed if you want TURN with TLS. |
-    | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-    | TCP         | 6080           | Media Nodes     | Needed when _'Default App'_  module is used (`app` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
-    | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
-    | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
-    | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
-    | TCP         | 9100           | Media Nodes     | Media Nodes need access to this port to reach MinIO. |
-    | TCP         | 20000          | Media Nodes     | Media Nodes need access to this port to reach MongoDB. |
+    === "Master Node"
 
-    And the inbound rules for the proxy server would be as follows:
+        **Inbound Rules**
 
-    | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
-    | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-    | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
-    | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
-    | TCP         | 1935           | 0.0.0.0/0, ::/0 | RTMP with TLS. |
+        | Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
+        | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
+        | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 1935           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
+        | TCP         | 5349           | External Proxy | Needed if you want TURN with TLS. |
+        | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
+        | TCP         | 6080           | Media Nodes     | Needed when _'Default App'_  module is used (`app` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
+        | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
+        | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
+        | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
+        | TCP         | 9100           | Media Nodes     | Media Nodes need access to this port to reach MinIO. |
+        | TCP         | 20000          | Media Nodes     | Media Nodes need access to this port to reach MongoDB. |
+
+        **Outbound Rules**
+
+        Typically, all outbound traffic is allowed.
+
+    === "Media Nodes"
+
+        **Inbound Rules**
+
+        | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+        | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
+        | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed if you want to allow WebRTC over TCP. |
+        | UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
+        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | WebRTC Media traffic. |
+        | TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
+        | TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
+        | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
+        | TCP         | 8080           | Master Node     | Needed if you want to ingest WebRTC streams using WHIP. Master Node needs access to this port to reach WHIP HTTP service. |
+
+        **Outbound Rules**
+
+        Typically, all outbound traffic is allowed.
+
+    === "Proxy Server"
+
+        And the inbound rules for the proxy server would be as follows:
+
+        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
+        | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
+        | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
+        | TCP         | 1935           | 0.0.0.0/0, ::/0 | RTMP with TLS. |
 
     **3. Install OpenVidu Elastic with `--external-proxy` flag**
 
     To deploy OpenVidu Elastic with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu Elastic with an external proxy is as follows:
 
-    **3.1. Install Master Node**
+    === "Install Master Node"
 
-    ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-        --no-tty --install \
-        --node-role='master-node' \
-        --openvidu-pro-license='xxxxx' \
-        --domain-name='openvidu.example.io' \
-        --turn-domain-name='turn.example.io' \
-        --enabled-modules='observability,v2compatibility,app' \
-        --rtc-engine='pion' \
-        --livekit-api-key='xxxxx' \
-        --livekit-api-secret='xxxxx' \
-        --dashboard-admin-user='xxxxx' \
-        --dashboard-admin-password='xxxxx' \
-        --redis-password='xxxxx' \
-        --minio-access-key='xxxxx' \
-        --minio-secret-key='xxxxx' \
-        --mongo-admin-user='xxxxx' \
-        --mongo-admin-password='xxxxx' \
-        --mongo-replica-set-key='xxxxx' \
-        --grafana-admin-user='xxxxx' \
-        --grafana-admin-password='xxxxx' \
-        --default-app-user='xxxxx' \
-        --default-app-password='xxxxx' \
-        --default-app-admin-user='xxxxx' \
-        --default-app-admin-password='xxxxx' \
-        --private-ip='<MASTER_NODE_PRIVATE_IP>' \
-        --external-proxy
-    ```
+        ```bash
+        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+            --no-tty --install \
+            --node-role='master-node' \
+            --openvidu-pro-license='xxxxx' \
+            --domain-name='openvidu.example.io' \
+            --turn-domain-name='turn.example.io' \
+            --enabled-modules='observability,v2compatibility,app' \
+            --rtc-engine='pion' \
+            --livekit-api-key='xxxxx' \
+            --livekit-api-secret='xxxxx' \
+            --dashboard-admin-user='xxxxx' \
+            --dashboard-admin-password='xxxxx' \
+            --redis-password='xxxxx' \
+            --minio-access-key='xxxxx' \
+            --minio-secret-key='xxxxx' \
+            --mongo-admin-user='xxxxx' \
+            --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
+            --grafana-admin-user='xxxxx' \
+            --grafana-admin-password='xxxxx' \
+            --default-app-user='xxxxx' \
+            --default-app-password='xxxxx' \
+            --default-app-admin-user='xxxxx' \
+            --default-app-admin-password='xxxxx' \
+            --private-ip='<MASTER_NODE_PRIVATE_IP>' \
+            --external-proxy
+        ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/install-version.md"
 
-    Notes:
+        Notes:
 
-    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
-    - Replace `openvidu.example.io` with your FQDN.
-    - The `turn-domain-name` parameter is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls. If you don't have a TURN server, you can remove it from the command. If you want to use TURN with TLS, replace `turn.example.io` with your TURN server FQDN.
-    - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
-    - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - Replace `openvidu.example.io` with your FQDN.
+        - The `turn-domain-name` parameter is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls. If you don't have a TURN server, you can remove it from the command. If you want to use TURN with TLS, replace `turn.example.io` with your TURN server FQDN.
+        - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
-    **3.2. Install Media Nodes**
+    === "Install Media Nodes"
 
-    To install the Media Nodes you can install it with the same command as the specified in the [Elastic Deployment Guide](../elastic/on-premises/install.md#media-node){:target="_blank"}.
+        To install a Media Node, you can use the following command:
+
+        ```bash
+        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
+            --no-tty --install \
+            --node-role='media-node' \
+            --master-node-private-ip='<MASTER_NODE_PRIVATE_IP>' \
+            --redis-password='xxxxx'
+        ```
+
+        --8<-- "shared/self-hosting/install-version.md"
+
+        - The `--master-node-private-ip` is the private IP of the Master Node. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
+        - The `--redis-password` is the password used to connect to the Redis service. Replace `xxxxx` with the same password used in the Master Node installation.
 
     **4. Configure the external proxy**
 

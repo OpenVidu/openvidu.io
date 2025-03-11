@@ -89,6 +89,10 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
 | TCP         | 8080           | Master Node     | Needed if you want to ingest WebRTC streams using WHIP. Master Node needs access to this port to reach WHIP HTTP service. |
 
+**Outbound port rules**:
+
+Typically, all outbound traffic is allowed.
+
 ## Guided Installation
 
 Before the installation, ensure that all your machines meet the [prerequisites](#prerequisites) and the port rules for the [Master Node](#port-rules-master-node) and [Media Nodes](#port-rules-media-nodes) are correctly configured.
@@ -375,6 +379,7 @@ Each installation command for each type of node looks like this:
     --8<-- "shared/self-hosting/install-version.md"
 
     - The `--master-node-private-ip` is the private IP of the Master Node. Media Nodes should be able to reach the Master Node using this IP.
+    - The `--redis-password` is the password defined in the Master Node installation. It is used to connect to the Redis service in the Master Node and register itself as a Media Node in the cluster.
     - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.no-break}.
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.

@@ -107,8 +107,8 @@ nav:
               - Force traffic to 443 TLS: docs/self-hosting/how-to-guides/force-443-tls.md
               - Enable webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
               - Enable and disable modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
-              - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
               - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
+              - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
             # - FAQ: docs/self-hosting/faq.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
