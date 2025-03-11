@@ -1,4 +1,13 @@
-=== "Nginx Configuration (With TLS for TURN)"
+=== "Nginx Configuration"
+
+    If you have installed OpenVidu with both domains (`openvidu.example.io` and `turn.example.io`) and both domains are pointing to the same proxy, the proxy needs to be configured as a Layer 4 proxy (TCP) because the TURN and HTTP traffic share the same port (443). We will use the Server Name Indication (SNI) of the TLS handshake to discern the traffic. The rules would be as follows:
+
+    1. Configure a redirect rule to redirect HTTP traffic to HTTPS in port 80.
+    2. Configure a rule to proxy all Layer 4 TLS incoming proxy traffic in port 443 to the OpenVidu Master Node in port 7880 for domain `openvidu.example.io`. This is for the HTTP traffic of the OpenVidu API and other services.
+    3. Configure a rule to proxy all Layer 4 TLS incoming proxy traffic in port 443 to the OpenVidu Master Node in port 5349 for domain `turn.example.io`. This is for the TURN service.
+    4. Configure a rule to proxy all Layer 4 TLS incoming proxy traffic in port 1935 to the OpenVidu Master Node in port 1945 for RTMP traffic.
+
+    The following is an example of an Nginx configuration file that includes all the rules mentioned above:
 
     ```nginx
     events {

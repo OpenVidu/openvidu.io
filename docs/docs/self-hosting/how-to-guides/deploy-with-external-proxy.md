@@ -37,7 +37,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     - The machine where OpenVidu is installed **must have a Public IP or a reachable IP from the users**.
     - The proxy server also **must have a Public IP or a reachable IP from the users**.
     - A domain name for your OpenVidu deployment pointing to the machine where the proxy server is running. In this guide, we will use `openvidu.example.io`.
-    - Optionally, an additional domain name pointing to the proxy machine where the proxy server is running. It will be used for TURN with TLS which is useful in case your users are behind restrictive firewalls. In this guide, we will use `turn.example.io`.
+    - Optionally (but recommended), you need an additional domain name pointing to the proxy machine where the proxy server is running. It will be used for TURN with TLS which is useful in case your users are behind restrictive firewalls to be able to connect to OpenVidu. In this guide, we will use `turn.example.io`.
 
     **2. Port Rules**
 
@@ -51,7 +51,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
-        | TCP         | 5349           | External proxy | Needed if you want TURN with TLS. |
+        | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
         | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed if you want to allow WebRTC over TCP. |
         | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP protocol. |
@@ -111,18 +111,17 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    After installing OpenVidu, you need to configure your proxy server to work with OpenVidu. The configuration for Nginx is as follows:
-
-    --8<-- "shared/self-hosting/proxy-nginx.md"
-
-        - Notice that `openvidu.example.io` is the domain name you used to deploy OpenVidu. Replace this domain name with your domain name. This domain name must be configured in your DNS to point to the proxy server.
-        - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the OpenVidu server.
-        - You can also have a proxy in the same machine as OpenVidu, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
-
+    We will use [Nginx](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
 
     --8<-- "shared/self-hosting/proxy-nginx-turn-tls.md"
 
-        - Notice that `openvidu.example.io` is the domain name you used to deploy OpenVidu and `turn.example.io` is the domain name you used for TURN with TLS. Replace these domain names with your domain names. These domain names must be configured in your DNS to point to the proxy server.
+        - Replace `openvidu.example.io` and `turn.example.io` with your domain names. These domain names must be configured in your DNS to point to the proxy server.
+        - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the OpenVidu server.
+        - You can also have a proxy in the same machine as OpenVidu, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
+
+    --8<-- "shared/self-hosting/proxy-nginx.md"
+
+        - Replace `openvidu.example.io` with your domain name. This domain name must be configured in your DNS to point to the proxy server.
         - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the OpenVidu server.
         - You can also have a proxy in the same machine as OpenVidu, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
 
@@ -148,7 +147,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     - **Each machine must have a Public IP or a reachable IP from the users**.
     - **The proxy server must have a Public IP or a reachable IP from the users**.
     - **A domain name for your OpenVidu deployment pointing to the proxy server**. In this guide, we will use `openvidu.example.io`.
-    - Optionally, an additional domain name pointing to the proxy server. It will be used for TURN with TLS which is useful in case your users are behind restrictive firewalls. In this guide, we will use `turn.example.io`.
+    - Optionally (but recommended), you need an additional domain name pointing to the proxy server. It will be used for TURN with TLS which is useful in case your users are behind restrictive firewalls. In this guide, we will use `turn.example.io`.
 
     **2. Port Rules**
 
@@ -162,7 +161,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 1935           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
-        | TCP         | 5349           | External Proxy | Needed if you want TURN with TLS. |
+        | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
         | TCP         | 6080           | Media Nodes     | Needed when _'Default App'_  module is used (`app` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
         | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
@@ -268,18 +267,17 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    After installing OpenVidu, you need to configure your proxy server to work with OpenVidu. The configuration for Nginx is as follows:
-
-    --8<-- "shared/self-hosting/proxy-nginx.md"
-
-        - Notice that `openvidu.example.io` is the domain name you used to deploy OpenVidu. Replace this domain name with your domain name. This domain name must be configured in your DNS to point to the proxy server.
-        - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
-        - You can also have a proxy in the same machine as the Master Node, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
-
+    We will use [Nginx](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
 
     --8<-- "shared/self-hosting/proxy-nginx-turn-tls.md"
 
-        - Notice that `openvidu.example.io` is the domain name you used to deploy OpenVidu and `turn.example.io` is the domain name you used for TURN with TLS. Replace these domain names with your domain names. These domain names must be configured in your DNS to point to the proxy server.
+        - Replace `openvidu.example.io` and `turn.example.io` with your domain names. These domain names must be configured in your DNS to point to the proxy server.
+        - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
+        - You can also have a proxy in the same machine as the Master Node, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
+
+    --8<-- "shared/self-hosting/proxy-nginx.md"
+
+        - Replace `openvidu.example.io` with your domain name. This domain name must be configured in your DNS to point to the proxy server.
         - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
         - You can also have a proxy in the same machine as the Master Node, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
 
