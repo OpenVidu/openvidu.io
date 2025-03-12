@@ -121,7 +121,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 |||
 |---|---|
 | **Number of video Tracks** | 2000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" } |
-| **Number of Rooms with 8 Participants** |  250 |
+| **Number of Rooms with 8 Participants** | 30 |
 | **8 hours** | $3.46 :material-information-outline:{ title="8 hours * 60 minutes/hour * 12 cores * $0.0006 = $3.45" } |
 | **24 hours** (1 day of uninterrupted use) | $10.37 :material-information-outline:{ title="24 hours * 60 minutes/hour * 12 cores * $0.0006 = $10.37" } |
 | **720 hours** (1 month of uninterrupted use) | $311.04 :material-information-outline:{ title="720 hours * 60 minutes/hour * 12 cores * $0.0006 = $311.04" } |
@@ -144,7 +144,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 |||
 |---|---|
 | **Number of video Tracks** | 4000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" } |
-| **Number of Rooms with 8 Participants** |  500 |
+| **Number of Rooms with 8 Participants** | 60 |
 | **8 hours** | $5.76 :material-information-outline:{ title="8 hours * 60 minutes/hour * 20 cores * $0.0006 = $5.76" } |
 | **24 hours** (1 day of uninterrupted use) | $17.28 :material-information-outline:{ title="24 hours * 60 minutes/hour * 20 cores * $0.0006 = $17.28" } | 
 | **720 hours** (1 month of uninterrupted use) | $518.40 :material-information-outline:{ title="720 hours * 60 minutes/hour * 20 cores * $0.0006 = $518.40" } |
@@ -167,7 +167,7 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 |||
 |---|---|
 | **Number of video Tracks** | 4000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" } |
-| **Number of Rooms with 8 Participants** |  500 |
+| **Number of Rooms with 8 Participants** |  60 |
 | **8 hours** | $9.21 :material-information-outline:{ title="8 hours * 60 minutes/hour * 32 cores * $0.0006 = $9.21" } |
 | **24 hours** (1 day of uninterrupted use) | $27.65 :material-information-outline:{ title="24 hours * 60 minutes/hour * 32 cores * $0.0006 = $27.65" } | 
 | **720 hours** (1 month of uninterrupted use) | $829.44 :material-information-outline:{ title="720 hours * 60 minutes/hour * 32 cores * $0.0006 = $829.44" } |
@@ -193,9 +193,9 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 
 |||
 |---|---|
-| **First 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Video Tracks</th><th markdown>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</th></tr></thead><tbody><tr><td>8x8 Rooms</td><td>125</td></tr><tr><td>Price</td><td markdown>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</td></tr></tbody></table> |
-| **Next 8 hours of the day with high demand**<br>(16 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Price</th><th markdown>$4.61 :material-information-outline:{ title="8 hours * 60 minutes/hour * 16 cores * $0.0006 = $4.61" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td markdown>3000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>375</td></tr></tbody></table> |
-| **Last 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Price</th><th markdown>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td markdown>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>125</td></tr></tbody></table>  |
+| **First 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Video Tracks</th><th markdown>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</th></tr></thead><tbody><tr><td>8x8 Rooms</td><td>15</td></tr><tr><td>Price</td><td markdown>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</td></tr></tbody></table> |
+| **Next 8 hours of the day with high demand**<br>(16 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Price</th><th markdown>$4.61 :material-information-outline:{ title="8 hours * 60 minutes/hour * 16 cores * $0.0006 = $4.61" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td markdown>3000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>45</td></tr></tbody></table> |
+| **Last 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Price</th><th markdown>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td markdown>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>15</td></tr></tbody></table>  |
 | **Total for 1 day** | $9.21 |
 | **Total for 1 month** | $276.30 |
 
