@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on-premises
 description: Learn how to deploy OpenVidu Elastic on-premises
 ---
 
-# OpenVidu Elastic Installation: On-premises
+# OpenVidu Elastic installation: On-premises
 
 !!! info
     
@@ -47,6 +47,17 @@ For the Media Nodes, the following services are configured:
 - **At least 2 machines**, each with a minimum of **4GB RAM**, **4 CPU cores**, and **Linux** installed (Ubuntu is recommended). One machine will serve as the Master Node, while the others will function as Media Nodes.
 - Significant disk space on the **Master Node, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
 - **Each machine must be assigned a Public IP**. Additionally, the machine designated as the Master Node must have a **Fully Qualified Domain Name (FQDN)** that resolves to its Public IP.
+- **All machines must have access to the following addresses and ports**:
+
+    | Host                     | Port    |
+    | ------------------------ | ------- |
+    | `accounts.openvidu.io`   | `443`   |
+    | `global.stun.twilio.com` | `3478`  |
+    | `stun.l.google.com`      | `19302` |
+    | `stun1.l.google.com`     | `19302` |
+
+    !!! info
+        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
 
 ## Port rules (Master Node)
 
@@ -93,7 +104,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 Typically, all outbound traffic is allowed.
 
-## Guided Installation
+## Guided installation
 
 Before the installation, ensure that all your machines meet the [prerequisites](#prerequisites) and the port rules for the [Master Node](#port-rules-master-node) and [Media Nodes](#port-rules-media-nodes) are correctly configured.
 
@@ -227,7 +238,7 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Non-interactive installation
 
-To automate the installation process, you just need to execute the specified command in the [Guided Installation](#guided-installation) section and execute the generated commands.
+To automate the installation process, you just need to execute the specified command in the [Guided installation](#guided-installation) section and execute the generated commands.
 
 Each installation command for each type of node looks like this:
 

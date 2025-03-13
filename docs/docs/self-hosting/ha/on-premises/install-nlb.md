@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on-premises with Network Load Balancer
 description: Learn how to deploy OpenVidu Elastic on-premises with Network Load Balancer
 ---
 
-# OpenVidu High Availability Installation: On-premises with Network Load Balancer
+# OpenVidu High Availability installation: On-premises with Network Load Balancer
 
 !!! info
 
@@ -66,6 +66,17 @@ For the Media Nodes, the following services are configured:
 - **Media Nodes must have a public IP**. This is required because Media traffic is sent directly to these nodes. Master Nodes can have private IPs and will be accessed through the Load Balancer.
 - **A Load Balancer** that supports TCP and UDP traffic. You can use a hardware load balancer or a software load balancer like HAProxy, Nginx, or AWS Network Load Balancer.
 - **A Fully Qualified Domain Name (FQDN)** pointing to the Load Balancer. This domain name will be used to access the OpenVidu services.
+- **All machines must have access to the following addresses and ports**:
+
+    | Host                     | Port    |
+    | ------------------------ | ------- |
+    | `accounts.openvidu.io`   | `443`   |
+    | `global.stun.twilio.com` | `3478`  |
+    | `stun.l.google.com`      | `19302` |
+    | `stun1.l.google.com`     | `19302` |
+
+    !!! info
+        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
 
 ## Port rules (Master Nodes)
 
@@ -116,7 +127,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 Typically, all outbound traffic is allowed.
 
-## Guided Installation
+## Guided installation
 
 Before the installation, ensure that all your machines meet the [prerequisites](#prerequisites) and the port rules for the [Master Nodes](#port-rules-master-nodes) and [Media Nodes](#port-rules-media-nodes) are correctly configured.
 
@@ -415,7 +426,7 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Non-interactive installation
 
-To automate the installation process, you just need to execute the specified command in the [Guided Installation](#guided-installation) section and execute the generated commands.
+To automate the installation process, you just need to execute the specified command in the [Guided installation](#guided-installation) section and execute the generated commands.
 
 Each installation command for each type of node looks like this:
 
