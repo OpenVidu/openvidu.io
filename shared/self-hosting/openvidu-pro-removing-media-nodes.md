@@ -1,14 +1,14 @@
 
 ## Removing Media Nodes Gracefully
 
-To stop a Media Node gracefully, you need to stop the containers `openvidu`, `ingress`, and `egress` with a `SIGINT` signal. Here is a simple script that you can use to stop all these containers gracefully:
+To stop a Media Node gracefully, you need to stop the containers `openvidu`, `ingress`, and `egress` with a `SIGQUIT` signal. Here is a simple script that you can use to stop all these containers gracefully:
 
 ```bash
 #!/bin/bash
 # Stop OpenVidu, Ingress, and Egress containers gracefully (1)
-docker container kill --signal=SIGINT openvidu || true
-docker container kill --signal=SIGINT ingress || true
-docker container kill --signal=SIGINT egress || true
+docker container kill --signal=SIGQUIT openvidu || true
+docker container kill --signal=SIGQUIT ingress || true
+docker container kill --signal=SIGQUIT egress || true
 
 # Wait for the containers to stop (2)
 while [ $(docker inspect -f '{{.State.Running}}' openvidu 2>/dev/null) == "true" ] || \
