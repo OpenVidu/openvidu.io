@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+<!-- Content -->
+{% block content %}
+  <h1>404 - Not found</h1>
+  <script>
+    // Get the current URL
+    const path = window.location.pathname;
+
+    // Check if the URL starts with "/docs/"
+    if (path.startsWith('/docs/')) {
+        // Redirect to "/latest/docs/" preserving the rest of the path
+        const newPath = path.replace('/docs/', '/latest/docs/');
+        window.location.replace(newPath);
+    }
+  </script>
+{% endblock %}
