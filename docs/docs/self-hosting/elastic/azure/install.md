@@ -75,10 +75,6 @@ You need to specify some properties for the Azure instances that will be created
 
 ### Media Nodes Scaling Set Configuration
 
-!!! info "Scale In"
-
-    We are working in the scale in feature in the elastic deployment because Azure doesn't make the gracefull delete of the Media Nodes possible so for now we only have scale up, to be able to scale down you will need to delete the media nodes manually.
-
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
 === "Media Nodes Scaling Set Configuration"
@@ -92,6 +88,20 @@ The number of Media Nodes can scale up based on the system load. You can configu
     The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 
     The **Scale Target CPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy](https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling){:target=_blank}
+
+### Scale In
+
+Azure has a restriction with the scale in, when it is determined that a instance is surplus, it can only wait at most 15 minutes for graceful shutdown. But that poses a problem when instance sessions can last longer. To avoid unexpectedly shutting down a instance's sessions, an indirect strategy has been implemented to get instances to not terminate until they have finished all their sessions.
+
+=== "Strategy used"
+
+    The instances in the autoscaling group are protected to prevent their shutdown when they are started. That prevents them from shutting down when the shutdown event arrives but that event can be captured and a custom action executed. That custom action determines the instance that has to terminate and executes the appropriate commands in the LiveKit services to not receive any more jobs. When all jobs on the instance identified to be shutdown are finished, then it autoshutdown with a command that kills the instance.   
+    Due to the limitations of azure, this strategy has the disadvantage that it can take up to 5 minutes from the time a instance is detected to be shutdown until the shutdown process is gracefully initiated.
+
+You will need to fill the next parameter in order to be able to create the automation account that contains the runbook that is going to be executed when a scale in event comes in.   
+<figure markdown>
+![Automation account name](../../../../assets/images/self-hosting/shared/azure-aacc-scalein.png){ .svg-img .dark-img }
+</figure>
 
 --8<-- "shared/self-hosting/azure-turn-domain.md"
 
