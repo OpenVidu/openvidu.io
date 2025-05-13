@@ -14,7 +14,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Hig
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fs3.eu-west-1.amazonaws.com%2Fget.openvidu.io%2Fpro%2Fha%2Fmain%2Fazure%2Fcf-openvidu-ha.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2Fmaster%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json)
 </div>
 
 This is how the architecture of the deployment looks like:
@@ -27,7 +27,7 @@ This is how the architecture of the deployment looks like:
     </figure>
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
+    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge, because it exists a limitation in Azure.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
@@ -40,15 +40,15 @@ This is how the architecture of the deployment looks like:
     </figure>
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
+    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge, because it exists a limitation in Azure.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - An additional Load Balancer is created to route TURN over TLS traffic to the TURN server running on the Media Nodes. It is used to allow users behind restrictive firewalls to connect to the Media Nodes.
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
-## CloudFormation Parameters
+## Template Parameters
 
-Depending on your needs, you need to fill the following CloudFormation parameters:
+Depending on your needs, you need to fill the following parameters:
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
@@ -118,6 +118,8 @@ You will need to fill the next parameter in order to be able to create the autom
 ![Automation account name](../../../../assets/images/self-hosting/shared/azure-aacc-scalein.png){ .svg-img .dark-img }
 </figure>
 
+--8<-- "shared/self-hosting/azure-storageaccount.md"
+
 ### (Optional) TURN server configuration with TLS
 
 This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic.
@@ -139,6 +141,11 @@ This section is optional. It is useful when your users are behind a restrictive 
     Don't forget about changing the resource group where all the previous resources may be created (in case you use an existing public IP) and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
 
 When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 10 to 15 minutes.
+
+!!! warning
+
+    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**, if you understand more try to remove that role in the IAM section, it will be shown as Uknown role in Contributor tab if the resource is deleted.   
+    In case that the error is something about conflict in the creation of a network interface just redeploy in another resource group with another **Stack Name**, this happens rarely
 
 When everything is ready, you will see the following links in the Key Vault resource:   
 

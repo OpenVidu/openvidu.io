@@ -11,7 +11,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Sin
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fs3.eu-west-1.amazonaws.com%2Fget.openvidu.io%2Fcommunity%2Fsinglenode%2Fmain%2Fazure%2Fcf-openvidu-singlenode.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2Fmaster%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json)
 </div>
 
 === "Architecture overview"
@@ -45,7 +45,9 @@ You need to specify some properties for the Azure instance that will be created 
 
     !!! info "SSH key"
     
-        We are working to make the UI of the template less tedious to fill it up and one of the things when releasing a full version of this feature will be selecting the SSH key pair from the UI and be able to create a new one from there. 
+        We are working to make the UI of the template less tedious to fill it up and one of the things when releasing a full version of this feature will be selecting the SSH key pair from the UI and be able to create a new one from there.   
+ 
+--8<-- "shared/self-hosting/azure-storageaccount.md"
 
 --8<-- "shared/self-hosting/azure-turn-domain.md"
 
@@ -53,9 +55,13 @@ You need to specify some properties for the Azure instance that will be created 
 
 !!! warning
 
-    Don't forget about changing the resource group where all the previous resources may be created (in case you use an existing public IP) and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
+    Don't forget about changing the resource group where all the previous resources may be created, this is needed because some roles creation can fail if there was an existing role for the instance and it is named the same again, and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
 
 When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 5 to 10 minutes.
+
+!!! warning
+
+    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**, if you understand more try to remove that role in the IAM section, it will be shown as Uknown role in Contributor tab if the resource is deleted.
 
 When everything is ready, you will see the following links in the Key Vault resource:   
 

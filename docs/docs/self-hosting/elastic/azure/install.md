@@ -14,7 +14,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Ela
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fs3.eu-west-1.amazonaws.com%2Fget.openvidu.io%2Fpro%2Felastic%2Fmain%2Fazure%2Fcf-openvidu-elastic.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2Fmaster%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2Fcf-openvidu-elastic.json)
 </div>
 
 === "Architecture overview"
@@ -103,6 +103,8 @@ You will need to fill the next parameter in order to be able to create the autom
 ![Automation account name](../../../../assets/images/self-hosting/shared/azure-aacc-scalein.png){ .svg-img .dark-img }
 </figure>
 
+--8<-- "shared/self-hosting/azure-storageaccount.md"
+
 --8<-- "shared/self-hosting/azure-turn-domain.md"
 
 ## Deploying the Stack
@@ -112,6 +114,10 @@ You will need to fill the next parameter in order to be able to create the autom
     Don't forget about changing the resource group where all the previous resources may be created (in case you use an existing public IP) and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
 
 When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 7 to 12 minutes.
+
+!!! warning
+
+    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**, if you understand more try to remove that role in the IAM section, it will be shown as Uknown role in Contributor tab if the resource is deleted.
 
 When everything is ready, you will see the following links in the Key Vault resource:   
 
