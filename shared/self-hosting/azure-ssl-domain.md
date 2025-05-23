@@ -14,10 +14,6 @@ These are the three possible scenarios you may have to configure in this section
     <figure markdown>
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt.png){ .svg-img .dark-img }
     </figure>
-    
-    !!! warning "Public IP location"
-
-        You need to match the Public Ip Address parameter with the Public Ip Address Resource name, the resource of Public Ip Address must be in the same region and resource group as the one where you are going to deploy this template.
 
     As you can see, you need to specify the **Domain Name** with your FQDN, the **Public Ip Address** with the Public IP that the domain points to, and the **Lets Encrypt Email** with your email address for Let’s Encrypt notifications. These parameters are mandatory.
 
@@ -50,10 +46,7 @@ These are the three possible scenarios you may have to configure in this section
     ![Custom certificates](../../../../assets/images/self-hosting/shared/azure-owncert.png){ .svg-img .dark-img }
     </figure>
 
-    !!! warning "Public IP location"
-
-        You need to match the Public Ip Address parameter with the Public Ip Address Resource name, the resource of Public Ip Address must be in the same region and resource group as the one where you are going to deploy this template.
     
-    You need to specify at **Own Public Certificate** and **Own Private Certificate** the URLs where the public and private certificates are hosted, respectively. The **Domain Name**, **Public Ip Address** and **Public Ip Address Resource Name** are mandatory parameters.
+    You need to specify at **Own Public Certificate** and **Own Private Certificate** the URLs where the public and private certificates are hosted, respectively. The **Domain Name**, **Public Ip Address** are mandatory parameters.
 
     Certificates need to be in PEM format and the URLs must be accessible from the instance.
