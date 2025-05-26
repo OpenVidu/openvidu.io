@@ -68,32 +68,40 @@ nav:
           - Local (Development): docs/self-hosting/local.md
           - Single Node:
               - docs/self-hosting/single-node/index.md
-              - On Premises:
+              - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
                   - Administration: docs/self-hosting/single-node/on-premises/admin.md
                   - Upgrade: docs/self-hosting/single-node/on-premises/upgrade.md
-              - AWS:
+              - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> AWS:
                   - Install: docs/self-hosting/single-node/aws/install.md
                   - Administration: docs/self-hosting/single-node/aws/admin.md
                   - Upgrade: docs/self-hosting/single-node/aws/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
+                  - Install: docs/self-hosting/single-node/on-premises/install-pro.md
+                  - Administration: docs/self-hosting/single-node/on-premises/admin-pro.md
+                  - Upgrade: docs/self-hosting/single-node/on-premises/upgrade-pro.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> AWS:
+                  - Install: docs/self-hosting/single-node/aws/install-pro.md
+                  - Administration: docs/self-hosting/single-node/aws/admin-pro.md
+                  - Upgrade: docs/self-hosting/single-node/aws/upgrade-pro.md
           - Elastic:
               - docs/self-hosting/elastic/index.md
-              - On Premises:
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
                   - Install: docs/self-hosting/elastic/on-premises/install.md
                   - Administration: docs/self-hosting/elastic/on-premises/admin.md
                   - Upgrade: docs/self-hosting/elastic/on-premises/upgrade.md
-              - AWS:
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> AWS:
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Administration: docs/self-hosting/elastic/aws/admin.md
                   - Upgrade: docs/self-hosting/elastic/aws/upgrade.md
           - High Availability:
               - docs/self-hosting/ha/index.md
-              - On Premises:
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
                   - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
                   - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
                   - Administration: docs/self-hosting/ha/on-premises/admin.md
                   - Upgrade: docs/self-hosting/ha/on-premises/upgrade.md
-              - AWS:
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> AWS:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
                   - Upgrade: docs/self-hosting/ha/aws/upgrade.md
