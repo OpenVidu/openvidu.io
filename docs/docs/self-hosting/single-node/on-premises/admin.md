@@ -3,7 +3,7 @@ title: OpenVidu Single Node administration on-premises
 description: Learn how to perform administrative tasks on an on-premises OpenVidu Single Node deployment
 ---
 
-# OpenVidu Single Node Administration: On-premises
+# <span span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Administration: On-premises
 
 The OpenVidu installer offers an easy way to deploy OpenVidu Single Node on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
 
