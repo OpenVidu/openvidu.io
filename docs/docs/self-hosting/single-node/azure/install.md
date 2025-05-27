@@ -5,6 +5,10 @@ description: Learn how to deploy OpenVidu Single Node on Azure using Template sp
 
 # OpenVidu Single Node Installation: Azure
 
+!!! info
+
+    Azure is Expermiental in version 3.2.0 of OpenVidu
+
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
 This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in Azure. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
@@ -25,7 +29,15 @@ To import the template into Azure you just need to click the button below and yo
 
 ## Template Parameters
 
-To be able to deploy the template you need to fill the following parameters
+To be able to deploy the template you need to fill the following parameters.
+
+!!! warning
+
+    The resource group may not be the same as a previous one, the deployment can fail if is the same. Fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources). Select the **Region** that you want or the region where the resource group is located (it will be autoselected).   
+
+    <figure markdown>
+    ![Azure Instance configuration](../../../../assets/images/self-hosting/shared/azure-stack-name-region.png){ .svg-img .dark-img }
+    </figure>
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
@@ -41,7 +53,7 @@ You need to specify some properties for the Azure instance that will be created 
     ![Azure Instance configuration](../../../../assets/images/self-hosting/single-node/azure/azure-instance-config.png){ .svg-img .dark-img }
     </figure>
 
-    Simply select the type of instance you want to deploy at **Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, then select the SSH key you've created previously in **Admin Ssh Key**, or you can create a new one in the same drop down, to be able to make ssh to the instance.   
+    Simply select the type of instance you want to deploy at **Type of Instance**, fill in the parameter **Admin Username** that will be set as admin username in the instance, then select the SSH key you've created previously in **SSH public key source**, or you can create a new one in the same drop down, to be able to make ssh to the instance.   
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
 
@@ -49,17 +61,13 @@ You need to specify some properties for the Azure instance that will be created 
 
 ## Deploying the Stack
 
-!!! warning
-
-    Don't forget about changing the resource group where all the previous resources may be created, this is needed because some roles creation can fail if there was an existing role for the instance and it is named the same again, and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
-
 When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 5 to 10 minutes.
 
 !!! warning
 
-    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**, if you understand more try to remove that role in the IAM section, it will be shown as Uknown role in Contributor tab if the resource is deleted.
+    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group go to [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove)
 
-When everything is ready, you will see the following links in the Key Vault resource:   
+When everything is ready, you can check the output secrets on the Key Vault or by making SSH to the instance, you can find how to do it in the next steps:  
 
 === "Azure Key Vault Outputs"
 
@@ -95,7 +103,7 @@ When everything is ready, you will see the following links in the Key Vault reso
 
 ## Configure your Application to use the Deployment 
 
-As we mentioned before, if you have permissions to give yourself access to the Key Vault you will be able to check there all the outputs, if you dont have them check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
+As we mentioned before, if you have permissions to give yourself access to the Key Vault you will be able to check there all the outputs in the tab [Azure Key Vault Outputs](#azure-key-vault-outputs), if you dont have them check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
 
 Your authentication credentials and URL to point your applications would be:
 

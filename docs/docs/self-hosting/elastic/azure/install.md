@@ -6,6 +6,11 @@ description: Learn how to deploy OpenVidu Elastic on Azure using Template specs 
 # OpenVidu Elastic Installation: Azure
 
 !!! info
+
+    Azure is Expermiental in version 3.2.0 of OpenVidu
+
+
+!!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
@@ -31,9 +36,23 @@ To import the template into Azure you just need to click the button below and yo
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
+We use a strategy to shut down gracefully the media nodes: 
+
+=== "Strategy used"
+
+    The instances in the scale set are protected to prevent their shutdown when they are started. That prevents them from shutting down when the shutdown event arrives but that event can be captured and a custom action executed. That custom action determines the instance that has to terminate and executes the appropriate commands in the LiveKit services to not receive any more jobs. When all jobs on the instance identified to be shutdown are finished, then it autoshutdown with a command that kills the instance.    
+
 ## Template Parameters
 
-Depending on your needs, you need to fill in the following parameters:
+Depending on your needs, you need to fill in the following parameters.
+
+!!! warning
+
+    The resource group may not be the same as a previous one, the deployment can fail if is the same, the only case you want it to be new is when using an existing IP. Fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources). Select the **Region** that you want or the region where the resource group is located (it will be autoselected).   
+
+    <figure markdown>
+    ![Azure Instance configuration](../../../../assets/images/self-hosting/shared/azure-stack-name-region.png){ .svg-img .dark-img }
+    </figure>
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
@@ -67,7 +86,7 @@ You need to specify some properties for the Azure instances that will be created
     ![Azure Instance configuration](../../../../assets/images/self-hosting/elastic/azure/azure-instance-config.png){ .svg-img .dark-img }
     </figure>
 
-    Simply select the type of instance you want on the master nodes at **Master Node Instance Type** and select the type of instance you want on the media nodes at **Media Node Instance Type**, modify the username that will be the one standard in the instance at **Admin Username**, then select the SSH key you've created previously in **Admin Ssh Key**, or you can create a new one in the same drop down, to be able to make ssh to the instance.   
+    Simply select the type of instance you want on the master nodes at **Master Node Instance Type** and select the type of instance you want on the media nodes at **Media Node Instance Type**, fill in the parameter **Admin Username** that will be set as admin username in the instance, then select the SSH key you've created previously in **SSH public key source**, or you can create a new one in the same drop down, to be able to make ssh to the instance.   
  
 
 ### Media Nodes Scaling Set Configuration
@@ -88,17 +107,18 @@ The number of Media Nodes can scale up based on the system load. You can configu
 
 ### Scale In
 
-Azure has a restriction with the scale in, when it is determined that a instance is surplus, it can only wait at most 15 minutes for graceful shutdown. But that poses a problem when instance sessions can last longer. To avoid unexpectedly shutting down a instance's sessions, an indirect strategy has been implemented to get instances to not terminate until they have finished all their sessions.
+Azure has a restriction with the scale in, when it is determined that a instance is surplus, it can only wait at most 15 minutes for graceful shutdown. But that poses a problem when instance sessions can last longer. To avoid unexpectedly shutting down a instance's sessions, an indirect strategy has been implemented to get instances to not terminate until they have finished all their sessions.   
 
-=== "Strategy used"
+Due to the limitations of azure, this strategy has the disadvantage that it can take up to 5 minutes from the time a instance is detected to be shutdown until the shutdown process is gracefully initiated.
 
-    The instances in the autoscaling group are protected to prevent their shutdown when they are started. That prevents them from shutting down when the shutdown event arrives but that event can be captured and a custom action executed. That custom action determines the instance that has to terminate and executes the appropriate commands in the LiveKit services to not receive any more jobs. When all jobs on the instance identified to be shutdown are finished, then it autoshutdown with a command that kills the instance.   
-    Due to the limitations of azure, this strategy has the disadvantage that it can take up to 5 minutes from the time a instance is detected to be shutdown until the shutdown process is gracefully initiated.
+=== "Automation Account Configuration"
 
-You will need to fill the next parameter in order to be able to create the automation account that contains the runbook that is going to be executed when a scale in event comes in.   
-<figure markdown>
-![Automation account name](../../../../assets/images/self-hosting/shared/azure-aacc-scalein.png){ .svg-img .dark-img }
-</figure>
+    You will need to fill the next parameter in order to be able to create the automation account that contains the runbook that is going to be executed when a scale in event comes in.   
+    You can choose the name that you want and it will be used to create a new automation account with that name, the only restriction that the name has is being an unique name for all the automation accounts that may be in the resource group that you are deploying. Leave it blank to set an autogenerated name.   
+    This resource cannot be reused between deployments.   
+    <figure markdown>
+    ![Automation account name](../../../../assets/images/self-hosting/shared/azure-aacc-scalein.png){ .svg-img .dark-img }
+    </figure>
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
 
@@ -106,17 +126,14 @@ You will need to fill the next parameter in order to be able to create the autom
 
 ## Deploying the Stack
 
-!!! warning
-
-    Don't forget about changing the resource group where all the previous resources may be created (in case you use an existing public IP) and don't forget to fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources).
-
-When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 7 to 12 minutes.
+When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 7 to 12 minutes.   
 
 !!! warning
 
-    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**, if you understand more try to remove that role in the IAM section, it will be shown as Uknown role in Contributor tab if the resource is deleted.
+    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group go to [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove)
 
-When everything is ready, you will see the following links in the Key Vault resource:   
+
+When everything is ready, you can check the output secrets on the Key Vault or by making SSH to the instance, you can find how to do it in the next steps:  
 
 === "Azure Key Vault Outputs"
 
@@ -151,7 +168,7 @@ When everything is ready, you will see the following links in the Key Vault reso
 
 ## Configure your Application to use the Deployment
 
-As we mentioned before, if you have permissions to give yourself access to the Key Vault you will be able to check there all the outputs, if you dont have them check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
+As we mentioned before, if you have permissions to give yourself access to the Key Vault you will be able to check there all the outputs in the tab [Azure Key Vault Outputs](#azure-key-vault-outputs), if you dont have them check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
 
 Your authentication credentials and URL to point your applications would be:
 
