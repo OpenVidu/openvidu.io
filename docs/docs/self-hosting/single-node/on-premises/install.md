@@ -3,11 +3,11 @@ title: OpenVidu Single Node installation on-premises
 description: Learn how to deploy OpenVidu Single Node on-premises
 ---
 
-# <span span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Installation: On-premises
+# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Installation: On-premises
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
 
 === "Architecture overview"
 

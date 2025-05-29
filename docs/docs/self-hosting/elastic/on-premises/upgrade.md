@@ -3,7 +3,7 @@ title: Upgrade OpenVidu Elastic - On premises
 description: How to upgrade OpenVidu Elastic on premises deployments
 ---
 
-# <span span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> Upgrade OpenVidu Elastic - On premises
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> Upgrade OpenVidu Elastic - On premises
 
 OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
 

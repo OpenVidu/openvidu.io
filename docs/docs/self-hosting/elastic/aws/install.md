@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on AWS
 description: Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
 ---
 
-# <span span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic Installation: AWS
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic Installation: AWS
 
 !!! info
     

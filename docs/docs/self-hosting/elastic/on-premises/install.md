@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on-premises
 description: Learn how to deploy OpenVidu Elastic on-premises
 ---
 
-# <span span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span>OpenVidu Elastic installation: On-premises
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span>OpenVidu Elastic installation: On-premises
 
 !!! info
     

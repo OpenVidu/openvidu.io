@@ -3,7 +3,7 @@ title: Upgrade OpenVidu Single Node
 description: How to upgrade OpenVidu Single Node deployments
 ---
 
-# <span span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> Upgrade OpenVidu Single Node
+# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> Upgrade OpenVidu Single Node
 
 OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
 

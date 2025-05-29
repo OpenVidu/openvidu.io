@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on-premises with DNS Load Balancing
 description: Learn how to deploy OpenVidu Elastic on-premises with DNS Load Balancing
 ---
 
-# <span span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability installation: On-premises with DNS Load Balancing
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability installation: On-premises with DNS Load Balancing
 
 !!! info
     
