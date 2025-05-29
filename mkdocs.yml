@@ -68,38 +68,43 @@ nav:
           - Local (Development): docs/self-hosting/local.md
           - Single Node:
               - docs/self-hosting/single-node/index.md
-              - On Premises:
+              - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
                   - Administration: docs/self-hosting/single-node/on-premises/admin.md
-              - AWS:
+                  - Upgrade: docs/self-hosting/single-node/on-premises/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> AWS:
                   - Install: docs/self-hosting/single-node/aws/install.md
                   - Administration: docs/self-hosting/single-node/aws/admin.md
-              - Azure:
-                  - Install: docs/self-hosting/single-node/azure/install.md
-                  - Administration: docs/self-hosting/single-node/azure/admin.md
+                  - Upgrade: docs/self-hosting/single-node/aws/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
+                  - Install: docs/self-hosting/single-node/on-premises/install-pro.md
+                  - Administration: docs/self-hosting/single-node/on-premises/admin-pro.md
+                  - Upgrade: docs/self-hosting/single-node/on-premises/upgrade-pro.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> AWS:
+                  - Install: docs/self-hosting/single-node/aws/install-pro.md
+                  - Administration: docs/self-hosting/single-node/aws/admin-pro.md
+                  - Upgrade: docs/self-hosting/single-node/aws/upgrade-pro.md
           - Elastic:
               - docs/self-hosting/elastic/index.md
-              - On Premises:
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
                   - Install: docs/self-hosting/elastic/on-premises/install.md
                   - Administration: docs/self-hosting/elastic/on-premises/admin.md
-              - AWS:
+                  - Upgrade: docs/self-hosting/elastic/on-premises/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> AWS:
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Administration: docs/self-hosting/elastic/aws/admin.md
-              - Azure:
-                  - Install: docs/self-hosting/elastic/azure/install.md
-                  - Administration: docs/self-hosting/elastic/azure/admin.md
+                  - Upgrade: docs/self-hosting/elastic/aws/upgrade.md
           - High Availability:
               - docs/self-hosting/ha/index.md
-              - On Premises:
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
                   - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
                   - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
                   - Administration: docs/self-hosting/ha/on-premises/admin.md
-              - AWS:
+                  - Upgrade: docs/self-hosting/ha/on-premises/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> AWS:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
-              - Azure:
-                  - Install: docs/self-hosting/ha/azure/install.md
-                  - Administration: docs/self-hosting/ha/azure/admin.md
+                  - Upgrade: docs/self-hosting/ha/aws/upgrade.md
           - Configuration:
               - Changing config: docs/self-hosting/configuration/changing-config.md
               - Config system in depth: docs/self-hosting/configuration/in-depth.md
@@ -110,6 +115,7 @@ nav:
               - Force traffic to 443 TLS: docs/self-hosting/how-to-guides/force-443-tls.md
               - Enable webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
               - Enable and disable modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
+              - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
               - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
             # - FAQ: docs/self-hosting/faq.md
       - UI Components:

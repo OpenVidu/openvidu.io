@@ -3,7 +3,7 @@ title: OpenVidu Single Node installation on AWS
 description: Learn how to deploy OpenVidu Single Node on AWS using CloudFormation
 ---
 
-# OpenVidu Single Node Installation: AWS
+# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Installation: AWS
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
@@ -22,11 +22,11 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 ```
 
 !!! info
-    
+
     If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.0.0/aws/cf-openvidu-singlenode.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.1.0/aws/cf-openvidu-singlenode.yaml
     ```
 
 === "Architecture overview"

@@ -17,3 +17,8 @@ Once your deployment is complete, refer to the following sections for configurat
 - [**On-premises: Configuration and Administration**](./on-premises/admin.md)
 - [**AWS: Configuration and Administration**](./aws/admin.md)
 - [**Azure: Configuration and Administration**](./azure/admin.md)
+
+If you want to upgrade your OpenVidu High Availability installation, refer to this section:
+
+- [**Upgrade OpenVidu High Availability On-premises**](./on-premises/upgrade.md)
+- [**Upgrade OpenVidu High Availability AWS**](./aws/upgrade.md)

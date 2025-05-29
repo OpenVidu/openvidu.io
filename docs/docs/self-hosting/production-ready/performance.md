@@ -1,12 +1,8 @@
 ---
-description: Discover how OpenVidu boosts performance with mediasoup, doubling media track capacity per server while maintaining seamless LiveKit compatibility. 
+description: Discover how OpenVidu boosts performance with mediasoup, doubling media track capacity per server while maintaining seamless LiveKit compatibility.
 ---
 
 # Performance :material-lightning-bolt:
-
-!!! warning
-
-    mediasoup integration in OpenVidu is **experimental**, and should not be used in production environments. There are some [limitations](#limitations) that are currently being worked on, expected to be ironed out in the near future.
 
 OpenVidu is able to handle up to **2x** the load in a single server, doubling the amount of media Tracks that can be transmitted compared to base LiveKit. By not only building upon the giant Open-Source shoulders of LiveKit, but also pushing the bar further, OpenVidu uses the best-in-class technologies to bring considerable performance improvements to the table.
 
@@ -15,7 +11,7 @@ The key element of any WebRTC server solution is the ability to exchange media b
 The key points of how this works are:
 
 - On the surface, OpenVidu is the same than LiveKit, and for the most part features work equally, such as connection establishment, participant management, and SDK support.
-- Internally however, **mediasoup** is used to replace the original WebRTC engine implementation of LiveKit. *mediasoup* is built with the most efficient technologies and has outstanding low-level optimizations, which translates in a **2x** improvement with respect to the original LiveKit Open Source performance.
+- Internally however, **mediasoup** is used to replace the original WebRTC engine implementation of LiveKit. _mediasoup_ is built with the most efficient technologies and has outstanding low-level optimizations, which translates in a **2x** improvement with respect to the original LiveKit Open Source performance.
 
 ## About mediasoup integration
 
@@ -27,7 +23,7 @@ LiveKit created its own WebRTC SFU, based on the [Pion](https://github.com/pion/
   ![OpenVidu with Pion WebRTC engine](../../../assets/images/openvidu-webrtc-engine-pion.svg){ .mkdocs-img }
 </figure>
 
-OpenVidu is built by a team of expert WebRTC developers who know all the ins and outs of low-level WebRTC development, so it was possible to replace LiveKit's own implementation with an alternative, and *mediasoup* was the clear best choice given its fantastic performance characteristics:
+OpenVidu is built by a team of expert WebRTC developers who know all the ins and outs of low-level WebRTC development, so it was possible to replace LiveKit's own implementation with an alternative, and _mediasoup_ was the clear best choice given its fantastic performance characteristics:
 
 <figure markdown>
   ![OpenVidu with mediasoup WebRTC engine](../../../assets/images/openvidu-webrtc-engine-mediasoup.svg){ .mkdocs-img }
@@ -41,20 +37,26 @@ In terms of the signaling protocol, API and SDKs, OpenVidu maintains the origina
 
 Both LiveKit and Pion are written in the [Go programming language](https://go.dev/){target="\_blank"}, and this has some implications for speed and efficiency. While Go is popular for its simplicity, readability, and approach to concurrency, when it comes to performance other alternatives rank higher in common benchmarks.
 
-First and foremost, the two most defining limitations of Go is that it requires a quite heavy runtime that is able to handle all of the low-level features of the language, such as *goroutines* and memory allocations. Also, speaking of memory management, Go requires a Garbage Collector, which knowledgeable readers will recognize as a hindrance for performance-critical applications.
+First and foremost, the two most defining limitations of Go is that it requires a quite heavy runtime that is able to handle all of the low-level features of the language, such as _goroutines_ and memory allocations. Also, speaking of memory management, Go requires a Garbage Collector, which knowledgeable readers will recognize as a hindrance for performance-critical applications.
 
-*mediasoup*, on the other hand, focuses all of its efforts on maximum efficiency. It is written in [C++](https://isocpp.org/){target="\_blank"}, and it is ultra-optimized for the specific task of routing media packets. C++ is a language that provides fully manual management of all resources, and direct access to the hardware, with the benefit of software that is as fast as it can be on any machine.
+_mediasoup_, on the other hand, focuses all of its efforts on maximum efficiency. It is written in [C++](https://isocpp.org/){target="\_blank"}, and it is ultra-optimized for the specific task of routing media packets. C++ is a language that provides fully manual management of all resources, and direct access to the hardware, with the benefit of software that is as fast as it can be on any machine.
 
-We believe that by combining the best of the LiveKit stack with a top-notch WebRTC engine like *mediasoup*, OpenVidu is the best option for those who need a self-hosted and high-performance real-time solution.
+We believe that by combining the best of the LiveKit stack with a top-notch WebRTC engine like _mediasoup_, OpenVidu is the best option for those who need a self-hosted and high-performance real-time solution.
 
 ## Limitations
 
-OpenVidu developers are hard at work with integrating *mediasoup* as a WebRTC engine within LiveKit, aiming to provide feature parity with the original Pion engine.
+OpenVidu developers are hard at work with integrating _mediasoup_ as a WebRTC engine within LiveKit, aiming to provide feature parity with the original Pion engine.
 
 Currently there are two [client SDK events](https://docs.livekit.io/home/client/events/#Events){target="\_blank"} that are not triggered when using mediasoup:
 
 - No `ConnectionQualityChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#ConnectionQualityChanged){target="\_blank"}).
 - No `TrackStreamStateChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#TrackStreamStateChanged){target="\_blank"}).
+
+Also, there are other limitations that must be taken into account:
+
+- All clients will use VP8 video codec.
+- Ingress will force VP8 video codec and will disable simulcast.
+- Screen sharing with simulcast may result in low-resolution video. It is recommended to disable simulcast for screen sharing video tracks to ensure good quality.
 
 ## Benchmarking
 

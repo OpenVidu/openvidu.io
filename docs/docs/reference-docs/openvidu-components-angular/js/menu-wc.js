@@ -59,13 +59,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApiDirectiveModule.html" data-type="entity-link" >ApiDirectiveModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
-                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' }>
+                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' :
-                                        'id="xs-directives-links-module-ApiDirectiveModule-f80a7e9d7921a4b318f89c9ee5d591c5cfc279511d24fa2382972e6d1b476317329f0289923600ee3df218ead38c50518a02d88f547191000743f0e1b5f4887e"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' :
+                                        'id="xs-directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' }>
                                         <li class="link">
                                             <a href="directives/ActivitiesPanelBroadcastingActivityDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelBroadcastingActivityDirective</a>
                                         </li>
@@ -344,6 +344,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/PanelStatusInfo.html" data-type="entity-link" >PanelStatusInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ParticipantLeftEvent.html" data-type="entity-link" >ParticipantLeftEvent</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ParticipantProperties.html" data-type="entity-link" >ParticipantProperties</a>

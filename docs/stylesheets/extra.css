@@ -20,6 +20,20 @@
   background-color: rgb(0 136 170 / 80%);
 }
 
+.openvidu-tag-nav {
+  pointer-events: none;
+  display: inline-block;
+  margin: 0 3px 0 3px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 5px;
+  border-radius: 3px;
+  font-size: 0.5em;
+  line-height: 1.8em;
+  font-family: var(--md-text-font-family);
+  font-feature-settings: "kern", "liga";
+}
+
 span:has(> .openvidu-tag) {
   display: inline-block;
 }

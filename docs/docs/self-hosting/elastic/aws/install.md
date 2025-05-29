@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on AWS
 description: Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
 ---
 
-# OpenVidu Elastic Installation: AWS
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic Installation: AWS
 
 !!! info
     
@@ -29,7 +29,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
     If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.0.0/aws/cf-openvidu-elastic.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.1.0/aws/cf-openvidu-elastic.yaml
     ```
 
 === "Architecture overview"

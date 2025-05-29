@@ -1,3 +1,5 @@
+
+
 # openvidu-docs
 
 - [openvidu-docs](#openvidu-docs)
@@ -46,6 +48,10 @@ Parameters:
 - `GOOGLE_ANALYTICS_KEY`: Google Analytics key to track page views. This is the **MEASUREMENT ID** of the web stream details.
 
 ## Docs writing guidelines
+
+### Branches
+
+If you are writing documentation for the current version in development, push commits to the `next` branch. On new releases, this branch will be merged to `main` by an OpenVidu developer
 
 ### Adding a new page
 

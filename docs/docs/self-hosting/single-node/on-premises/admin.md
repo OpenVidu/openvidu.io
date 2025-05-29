@@ -3,33 +3,13 @@ title: OpenVidu Single Node administration on-premises
 description: Learn how to perform administrative tasks on an on-premises OpenVidu Single Node deployment
 ---
 
-# OpenVidu Single Node Administration: On-premises
+# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Administration: On-premises
 
-The OpenVidu installer offers an easy way to deploy OpenVidu Single Node on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
+The OpenVidu installer offers an easy way to deploy OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
 
-This section provides details on configuration parameters and common administrative tasks for on-premises OpenVidu Single Node deployments.
+This section provides details on configuration parameters and common administrative tasks for this deployment.
 
-## Starting, stopping, and restarting OpenVidu
-
-You can start, stop, and restart the OpenVidu services using the following commands:
-
-**Start OpenVidu**
-
-```bash
-sudo systemctl start openvidu
-```
-
-**Stop OpenVidu**
-
-```bash
-sudo systemctl stop openvidu
-```
-
-**Restart OpenVidu**
-
-```bash
-sudo systemctl restart openvidu
-```
+--8<-- "shared/self-hosting/single-node/admin-start-stop.md"
 
 ## Checking the status of services
 
@@ -59,34 +39,9 @@ promtail     docker.io/grafana/promtail                   "/usr/bin/promtail -â€
 redis        docker.io/redis                              "docker-entrypoint.sâ€¦"   redis        19 seconds ago   Up 15 seconds
 ```
 
-## Checking logs
+--8<-- "shared/self-hosting/single-node/admin-checking-logs.md"
 
-If any of the services are not working as expected, you can check the logs of the services using the following command:
-
-```bash
-cd /opt/openvidu/
-docker compose logs <service-name>
-```
-
-Replace `<service-name>` with the name of the service you want to check. For example, to check the logs of the OpenVidu Server, use the following command:
-
-```bash
-cd /opt/openvidu/
-docker compose logs openvidu
-```
-
-To check the logs of all services, use the following command:
-
-```bash
-cd /opt/openvidu/
-docker compose logs
-```
-
-You can also review your logs using the Grafana dashboard provided with OpenVidu. To access it, go to [https://<your-domain.com\>/grafana](https://<your-domain.com>/grafana){:target=\_blank} and use the credentials located in `/opt/openvidu/.env` to log in. Once inside, navigate to the _"Home"_ section, select _"Dashboard"_, and then click on _"OpenVidu > OpenVidu Logs"_. All the logs will be displayed there.
-
-## Changing the configuration
-
-You can check how to change the configuration in the [Changing Configuration](../../configuration/changing-config.md) section. Also, there are multiple guides in the [How to Guides](../../how-to-guides/index.md) section that can help you with specific configuration changes.
+--8<-- "shared/self-hosting/single-node/admin-change-config.md"
 
 ## Uninstalling OpenVidu
 

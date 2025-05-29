@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on-premises with DNS Load Balancing
 description: Learn how to deploy OpenVidu Elastic on-premises with DNS Load Balancing
 ---
 
-# OpenVidu High Availability Installation: On-premises with DNS Load Balancing
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability installation: On-premises with DNS Load Balancing
 
 !!! info
     
@@ -64,6 +64,17 @@ For the Media Nodes, the following services are configured:
 - **All machines must have their own public IP**.
 - Significant disk space in all the **Master Nodes, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
 - **A Fully Qualified Domain Name (FQDN)** pointing to all the public IPs of the Master Nodes. Simply **create 4 A records in your DNS provider** pointing to the public IPs of the Master Nodes using the same domain name.
+- **All machines must have access to the following addresses and ports**:
+
+    | Host                     | Port    |
+    | ------------------------ | ------- |
+    | `accounts.openvidu.io`   | `443`   |
+    | `global.stun.twilio.com` | `3478`  |
+    | `stun.l.google.com`      | `19302` |
+    | `stun1.l.google.com`     | `19302` |
+
+    !!! info
+        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
 
 ## Port rules (Master Nodes)
 
@@ -75,17 +86,17 @@ Ensure all these rules are configured in your firewall, security group, or any k
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 80          | 0.0.0.0/0, ::/0           | Redirect HTTP to HTTPS and Let's Encrypt validation.                                              |
 | TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
-| TCP      | 1935        | 0.0.0.0/0, ::/0           | (Optional) For ingesting RTMP streams using Ingress service.                                      |
-| TCP      | 9000        | 0.0.0.0/0, ::/0           | (Optional) To expose MinIO publicly.                                                              |
-| TCP      | 3000        | Master Nodes              | (Optional) For load balancing requests to Grafana (Observability module).                         |
-| TCP      | 5000        | Master Nodes              | For load balancing requests to OpenVidu Dashboard.                                                |
-| TCP      | 9101        | Master Nodes              | For load balancing requests to MinIO Console.                                                     |
-| TCP      | 7946-7947   | Master Nodes              | (Optional) For Mimir and Loki cluster communication (Observability module).                       |
-| TCP      | 9095-9096   | Master Nodes              | (Optional) For Mimir and Loki cluster communication (Observability module).                       |
-| TCP      | 3100        | Media Nodes               | (Optional) For Loki (Observability module).                                                       |
-| TCP      | 9009        | Media Nodes               | (Optional) For Mimir (Observability module).                                                      |
-| TCP      | 4443        | Master Nodes, Media Nodes | (Optional) For OpenVidu V2 compatibility service.                                                 |
-| TCP      | 6080        | Master Nodes, Media Nodes | (Optional) For OpenVidu Call (Default Application).                                               |
+| TCP      | 1935        | 0.0.0.0/0, ::/0           | Needed if you want to ingest RTMP streams using Ingress service.                                      |
+| TCP      | 9000        | 0.0.0.0/0, ::/0           | Needed if you want to expose MinIO publicly.                                                              |
+| TCP      | 3000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana.                         |
+| TCP      | 5000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard.                                                |
+| TCP      | 9101        | Master Nodes              | Needed to load balance requests to MinIO Console.                                                     |
+| TCP      | 7946-7947   | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). Master nodes need access to this port for cluster communication.                       |
+| TCP      | 9095-9096   | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used for Mimir and Loki cluster communication.                       |
+| TCP      | 3100        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Loki service.                                                       |
+| TCP      | 9009        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service.                                                      |
+| TCP      | 4443        | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service.                                                 |
+| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'Default App'_ module is used (`app` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Call (Default Application).                                               |
 | TCP      | 7000-7001   | Master Nodes, Media Nodes | For internal Redis communication                                                                  |
 | TCP      | 9100        | Master Nodes, Media Nodes | For internal MinIO communication                                                                  |
 | TCP      | 20000       | Master Nodes, Media Nodes | For internal Mongo communication                                                                  |
@@ -103,15 +114,19 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional), only needed if you want to allow WebRTC over TCP. |
-| UDP         | 7885           | 0.0.0.0/0, ::/0   | (Optional). Only needed if you want to ingest WebRTC using WHIP. |
+| TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed if you want to allow WebRTC over TCP. |
+| UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
 | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | WebRTC Media traffic. |
-| TCP         | 1935           | Master Nodes     | (Optional). Only needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
-| TCP         | 5349           | Master Nodes     | (Optional). Only needed if you want to expose TURN service with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
+| TCP         | 1935           | Master Nodes      | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
+| TCP         | 5349           | Master Nodes     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS. (TURNS)  |
 | TCP         | 7880           | Master Nodes     | LiveKit API. Master Nodes need access to load balance LiveKit API and expose it through HTTPS. |
-| TCP         | 8080           | Master Nodes     | (Optional). Only needed if you want to ingest WebRTC streams using WHIP. Master Nodes need access to this port to reach WHIP HTTP service. |
+| TCP         | 8080           | Master Nodes     | Needed if you want to ingest WebRTC streams using WHIP. Master Nodes need access to this port to reach WHIP HTTP service. |
 
-## Guided Installation
+**Outbound port rules**:
+
+Typically, all outbound traffic is allowed.
+
+## Guided installation
 
 Before the installation, ensure that all your machines meet the [prerequisites](#prerequisites) and the port rules for the [Master Nodes](#port-rules-master-nodes) and [Media Nodes](#port-rules-media-nodes) are correctly configured.
 
@@ -130,7 +145,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Write all 'Master Node' Private IPs separated by commas**: Write the private IP of each Master Node separated by commas.
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 !!! info
-    
+
     If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
 - **Do you want to use an external load balancer?**: Select _**No**_. It means that you are going to use DNS Load Balancing.
 - **Select which certificate type to use**:
@@ -138,6 +153,10 @@ A wizard will guide you through the installation process. You will be asked for 
     - _Let's Encrypt_: It will automatically generate a certificate for your domain. The Let's Encrypt email is required and will be asked for later in the wizard.
     - _ZeroSSL_: It will automatically generate a certificate for your domain using ZeroSSL. An API Key is required and will be asked for later in the wizard.
     - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them.
+
+    !!! Note
+        If you want to manage the certificate in your proxy own proxy server instead of relaying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
+
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (The engine used by Livekit)** or **Mediasoup (Experimental)**.
@@ -244,7 +263,7 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Non-interactive installation
 
-To automate the installation process, you just need to execute the specified command in the [Guided Installation](#guided-installation) section and execute the generated commands.
+To automate the installation process, you just need to execute the specified command in the [Guided installation](#guided-installation) section and execute the generated commands.
 
 Each installation command for each type of node looks like this:
 
@@ -400,6 +419,7 @@ Each installation command for each type of node looks like this:
     --8<-- "shared/self-hosting/install-version.md"
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
+    - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.
     - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.no-break}.
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
