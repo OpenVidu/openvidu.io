@@ -102,7 +102,7 @@ The backend has been refactored to prevent code duplication and improve readabil
     export const S3_ACCESS_KEY = process.env.S3_ACCESS_KEY || "minioadmin";
     export const S3_SECRET_KEY = process.env.S3_SECRET_KEY || "minioadmin";
     export const AWS_REGION = process.env.AWS_REGION || "us-east-1";
-    export const S3_BUCKET = process.env.S3_BUCKET || "openvidu";
+    export const S3_BUCKET = process.env.S3_BUCKET || "openvidu-appdata";
 
     export const RECORDINGS_PATH = process.env.RECORDINGS_PATH ?? "recordings/";
     export const RECORDINGS_METADATA_PATH = ".metadata/";
