@@ -98,7 +98,7 @@ When the installation process finishes, you will see the following message:
 ```
 > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
 >                                                                             <
->  🎉 OpenVidu Community Installation Finished Successfully! 🎉               <
+>  🎉 OpenVidu Single Node PRO Installation Finished Successfully! 🎉         <
 >                                                                             <
 > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
 ```

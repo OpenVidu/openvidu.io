@@ -1,5 +1,5 @@
 ---
-title: OpenVidu Single Node PRO administration on-premises
+title: OpenVidu Single Node administration on-premises
 description: Learn how to perform administrative tasks on an on-premises OpenVidu Single Node PRO deployment
 ---
 
@@ -44,3 +44,5 @@ redis                      docker.io/redis:7.4.2-alpine                       "/
 --8<-- "shared/self-hosting/single-node/admin-checking-logs.md"
 
 --8<-- "shared/self-hosting/single-node/admin-change-config.md"
+
+--8<-- "shared/self-hosting/single-node/admin-uninstall.md"

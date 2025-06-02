@@ -43,14 +43,4 @@ redis        docker.io/redis                              "docker-entrypoint.sâ€
 
 --8<-- "shared/self-hosting/single-node/admin-change-config.md"
 
-## Uninstalling OpenVidu
-
-To uninstall OpenVidu, just execute the following commands:
-
-```bash
-sudo su
-systemctl stop openvidu
-rm -rf /opt/openvidu/
-rm /etc/systemd/system/openvidu.service
-rm /etc/sysctl.d/50-openvidu.conf
-```
+--8<-- "shared/self-hosting/single-node/admin-uninstall.md"
