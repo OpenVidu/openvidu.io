@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on Azure
 description: Learn how to deploy OpenVidu Elastic on Azure using Template specs of Azure Resource Manager
 ---
 
-# OpenVidu Elastic Installation: Azure
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic Installation: Azure
 
 !!! info
 

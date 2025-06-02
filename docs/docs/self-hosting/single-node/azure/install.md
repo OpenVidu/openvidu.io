@@ -3,7 +3,7 @@ title: OpenVidu Single Node installation on Azure
 description: Learn how to deploy OpenVidu Single Node on Azure using Template specs of Azure Resource Manager
 ---
 
-# OpenVidu Single Node Installation: Azure
+# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Installation: Azure
 
 !!! info
 

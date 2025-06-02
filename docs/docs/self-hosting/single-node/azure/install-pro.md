@@ -5,6 +5,10 @@ description: Learn how to deploy OpenVidu Single Node PRO on Azure using Templat
 
 # <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Single Node PRO Installation: Azure
 
+!!! info
+
+    Azure is Expermiental in version 3.2.0 of OpenVidu
+
 This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> deployment in Azure. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install-pro.md) but automate the process with Template Spec of ARM.
 
 To use the Azure template you just need to click the button below and you will be redirected to azure...   

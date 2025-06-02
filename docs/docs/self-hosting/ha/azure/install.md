@@ -3,7 +3,7 @@ title: OpenVidu High Availability installation on Azure
 description: Learn how to deploy OpenVidu High Availability on Azure using Template specs of Azure Resource Manager
 ---
 
-# OpenVidu High Availability Installation: Azure
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability Installation: Azure
 
 !!! info
 
