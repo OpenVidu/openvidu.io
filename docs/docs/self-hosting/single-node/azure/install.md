@@ -15,7 +15,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Sin
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2Fmaster%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2Fmaster%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2F3.2.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2F3.2.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json)
 </div>
 
 === "Architecture overview"
