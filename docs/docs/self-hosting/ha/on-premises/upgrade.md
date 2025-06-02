@@ -55,8 +55,9 @@ Upgrade OpenVidu High Availability is very simple. These are the steps you need 
     ```
 
 4. Answer `Yes` to the question and your OpenVidu will be upgraded to the asked version. For each version the system will ask you to confirm the upgrade.
-5. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
-6. Execute the following command in all the nodes:
+5. A `diff` will be shown with the changes made in the configuration files. You can review the changes and decide if you want to apply them or not. If you want to apply the changes, answer `Yes` to the question. If you want to discard the changes and stop the upgrading process, simply answer `No`.
+6. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
+7. Execute the following command in all the nodes:
 
 ```bash
 systemctl start openvidu && journalctl -f -u openvidu
