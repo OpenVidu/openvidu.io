@@ -17,7 +17,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Single Node"
 
     !!! note
-        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node Deployment](../single-node/on-premises/install.md){:target="_blank"}, but with some modifications to the installation command and port rules. We recommend you to read the [Single Node Deployment](../single-node/on-premises/install.md){:target="_blank"} guide before proceeding with this guide to have a better understanding of the deployment.
+        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span> Deployment](../single-node/on-premises/install.md){:target="_blank"} and the [Single Node <span class='openvidu-tag openvidu-pro-tag'>PRO</span> Deployment](../single-node/on-premises/install-pro.md){:target="_blank"}, but with some modifications to the installation command and port rules. We recommend you to read the installation guides before proceeding with this guide to have a better understanding of the deployment.
 
     This is how the architecture of the deployment looks like:
 
@@ -77,30 +77,61 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     To deploy OpenVidu with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu with an external proxy is as follows:
 
-    ```bash
-    sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
-        --no-tty --install \
-        --domain-name='openvidu.example.io' \
-        --turn-domain-name='turn.example.io' \
-        --enabled-modules='observability,app' \
-        --livekit-api-key='xxxxx' \
-        --livekit-api-secret='xxxxx' \
-        --dashboard-admin-user='xxxxx' \
-        --dashboard-admin-password='xxxxx' \
-        --redis-password='xxxxx' \
-        --minio-access-key='xxxxx' \
-        --minio-secret-key='xxxxx' \
-        --mongo-admin-user='xxxxx' \
-        --mongo-admin-password='xxxxx' \
-        --mongo-replica-set-key='xxxxx' \
-        --grafana-admin-user='xxxxx' \
-        --grafana-admin-password='xxxxx' \
-        --default-app-user='xxxxx' \
-        --default-app-password='xxxxx' \
-        --default-app-admin-user='xxxxx' \
-        --default-app-admin-password='xxxxx' \
-        --external-proxy
-    ```
+    === "Single Node <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+
+        ```bash
+        sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            --no-tty --install \
+            --domain-name='openvidu.example.io' \
+            --turn-domain-name='turn.example.io' \
+            --enabled-modules='observability,app' \
+            --livekit-api-key='xxxxx' \
+            --livekit-api-secret='xxxxx' \
+            --dashboard-admin-user='xxxxx' \
+            --dashboard-admin-password='xxxxx' \
+            --redis-password='xxxxx' \
+            --minio-access-key='xxxxx' \
+            --minio-secret-key='xxxxx' \
+            --mongo-admin-user='xxxxx' \
+            --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
+            --grafana-admin-user='xxxxx' \
+            --grafana-admin-password='xxxxx' \
+            --default-app-user='xxxxx' \
+            --default-app-password='xxxxx' \
+            --default-app-admin-user='xxxxx' \
+            --default-app-admin-password='xxxxx' \
+            --external-proxy
+        ```
+
+    === "Single Node <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+
+        ```bash
+        sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            --no-tty --install \
+            --openvidu-pro-license='xxxxx' \
+            --domain-name='openvidu.example.io' \
+            --turn-domain-name='turn.example.io' \
+            --enabled-modules='observability,app,v2compatibility' \
+            --rtc-engine='pion' \
+            --livekit-api-key='xxxxx' \
+            --livekit-api-secret='xxxxx' \
+            --dashboard-admin-user='xxxxx' \
+            --dashboard-admin-password='xxxxx' \
+            --redis-password='xxxxx' \
+            --minio-access-key='xxxxx' \
+            --minio-secret-key='xxxxx' \
+            --mongo-admin-user='xxxxx' \
+            --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
+            --grafana-admin-user='xxxxx' \
+            --grafana-admin-password='xxxxx' \
+            --default-app-user='xxxxx' \
+            --default-app-password='xxxxx' \
+            --default-app-admin-user='xxxxx' \
+            --default-app-admin-password='xxxxx' \
+            --external-proxy
+        ```
 
     --8<-- "shared/self-hosting/install-version.md"
 
@@ -108,6 +139,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     - Replace `openvidu.example.io` with your FQDN.
     - The `turn-domain-name` parameter is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.If you don't have a TURN server, you can remove it from the command. If you want to use TURN with TLS, replace `turn.example.io` with your TURN server FQDN.
+    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](/account/){:target="_blank"}.
+    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     **4. Configure the external proxy**
 
