@@ -38,7 +38,6 @@ nav:
               - Recording Basic S3: docs/tutorials/advanced-features/recording-basic-s3.md
               - Recording Advanced S3: docs/tutorials/advanced-features/recording-advanced-s3.md
               - Recording Basic Azure: docs/tutorials/advanced-features/recording-basic-azure.md
-              - Recording Advanced Azure: docs/tutorials/advanced-features/recording-advanced-azure.md
           - Angular Components:
               - docs/tutorials/angular-components/index.md
               - Custom UI: docs/tutorials/angular-components/openvidu-custom-ui.md
