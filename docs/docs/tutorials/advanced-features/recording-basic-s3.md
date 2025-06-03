@@ -301,7 +301,7 @@ This endpoint does the following:
 
 The `GET /recordings` endpoint lists all recordings stored in the S3 bucket. This endpoint also allows filtering recordings by room name or room ID:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L152-L173' target='_blank'>index.js</a>" linenums="152"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/index.js#L152-L173' target='_blank'>index.js</a>" linenums="152"
 app.get("/recordings", async (req, res) => {
   const roomId = req.query.roomId?.toString(); // (1)!
   try {
