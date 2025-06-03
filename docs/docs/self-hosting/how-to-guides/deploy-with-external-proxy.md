@@ -317,3 +317,27 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "High Availability"
 
     The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained  [in this section](../ha/on-premises/install-nlb.md){:target="_blank"}.
+
+# Can I force all traffic including WebRTC to go through the external proxy?
+
+Yes, but you need to use a domain name for TURN (`--turn-domain-name` parameter) and ensure that the following ports are explicitly closed in OpenVidu:
+
+**Single Node closed Ports**
+
+**Node**|**Port**|**Protocol**
+---|---|---
+OpenVidu Server|443|UDP
+OpenVidu Server|50000-60000|UDP
+
+**Elastic and High Availability closed Ports**
+
+**Node**|**Port**|**Protocol**
+---|---|---
+Media Node|443|UDP
+Media Node|50000-60000|UDP
+
+This configuration will force traffic to use TURN, so all traffic will go through the external proxy using the TURN domain name configured in the installation process. But you need to understand some considerations:
+
+- Media over UDP using WebRTC does not mean that the media is not encrypted. WebRTC encrypts the media using SRTP and DTLS. WebRTC is designed to be encrypted by default.
+
+- Media going through 443 with TLS has a penalty in the media quality and CPU usage. This is because of the TLS roundtrip, TCP being used and media processed twice by the TURN server and the Media Server. This can lead to a worse user experience and higher CPU usage in the Media Server. We recommend using this configuration only if it is strictly necessary.
