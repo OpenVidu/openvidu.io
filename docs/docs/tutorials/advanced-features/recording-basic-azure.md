@@ -1,11 +1,11 @@
 ---
-title: Basic Recording Tutorial
+title: Basic Recording Tutorial Azure
 description: Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
 ---
 
-# Basic Recording Tutorial
+# Basic Recording Tutorial Azure
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/advanced-features/openvidu-recording-basic-node){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/advanced-features/openvidu-recording-basic-node-azure){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application, built upon [Node.js server](../application-server/node.md){:target="\_blank"} and [JavaScript client](../application-client/javascript.md){:target="\_blank"} tutorials, and extends them by adding recording capabilities:
 
@@ -19,7 +19,7 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server-azure.md"
 
 ### 2. Download the tutorial code
 
@@ -34,7 +34,7 @@ To run this application, you need [Node.js](https://nodejs.org/en/download){:tar
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-livekit-tutorials/advanced-features/openvidu-recording-basic-node
+cd openvidu-livekit-tutorials/advanced-features/openvidu-recording-basic-node-azure
 ```
 
 2. Install dependencies
@@ -70,7 +70,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 This application consists of two essential backend files under the `src` directory:
 
 - `index.js`: This file holds the server application and defines the REST API endpoints.
-- `s3.service.js`: This file encapsulates the operations to interact with the S3 bucket.
+- `azure.blobstorage.service.js`: This file encapsulates the operations to interact with the Azure Blob Storage container.
 
 And the following essential frontend files under the `public` directory:
 
@@ -87,20 +87,19 @@ The server application extends the [Node.js server tutorial](../application-serv
 
 - **`POST /recordings/start`**: Starts the recording of a room.
 - **`POST /recordings/stop`**: Stops the recording of a room.
-- **`GET /recordings`**: Lists all recordings stored in the S3 bucket. This endpoint also allows filtering recordings by room ID.
-- **`GET /recordings/:recordingName`**: Retrieves a recording from the S3 bucket and returns it as a stream.
-- **`DELETE /recordings/:recordingName`**: This endpoint deletes a recording from the S3 bucket.
+- **`GET /recordings`**: Lists all recordings stored in the Azure Container. This endpoint also allows filtering recordings by room ID.
+- **`GET /recordings/:recordingName`**: Retrieves a recording from the Azure Container and returns it as a stream.
+- **`DELETE /recordings/:recordingName`**: This endpoint deletes a recording from the Azure Container.
 
 Before we dive into the code of each endpoint, let's first see the changes introduced in the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L15-L27' target='_blank'>index.js</a>" linenums="15" hl_lines="5 6-7 15-18"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L15-L26' target='_blank'>index.js</a>" linenums="15" hl_lines="5 6-7 15-18"
 // Configuration
 const SERVER_PORT = process.env.SERVER_PORT || 6080;
 const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || "devkey";
 const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || "secret";
 const LIVEKIT_URL = process.env.LIVEKIT_URL || "http://localhost:7880"; // (1)!
-const RECORDINGS_PATH = process.env.RECORDINGS_PATH ?? "recordings/"; // (2)!
-const RECORDING_FILE_PORTION_SIZE = 5 * 1024 * 1024; // (3)!
+const RECORDING_FILE_PORTION_SIZE = 5 * 1024 * 1024; // (2)!
 
 const app = express();
 
@@ -111,36 +110,34 @@ app.use(express.raw({ type: "application/webhook+json" }));
 // Set the static files location
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../public"))); // (4)!
+app.use(express.static(path.join(__dirname, "../public"))); // (3)!
 ```
 
 1. The URL of the LiveKit server.
-2. The path where recordings will be stored in the S3 bucket.
-3. The portion size of the recording that will be sent to the client in each request. This value is set to `5 MB`.
-4. Set the `public` directory as the static files location.
+2. The portion size of the recording that will be sent to the client in each request. This value is set to `5 MB`.
+3. Set the `public` directory as the static files location.
 
-There are three new environment variables:
+There are two new environment variables:
 
 - `LIVEKIT_URL`: The URL of the LiveKit server.
-- `RECORDINGS_PATH`: The path where recordings will be stored in the S3 bucket.
 - `RECORDING_FILE_PORTION_SIZE`: The portion size of the recording that will be sent to the client in each request.
 
 Besides, the `index.js` file configures the server to serve static files from the `public` directory.
 
-It also initializes the `EgressClient`, which will help interacting with [Egress API](https://docs.livekit.io/home/egress/api/){:target="\_blank"} to manage recordings, and the `S3Service`, which will help interacting with the S3 bucket:
+It also initializes the `EgressClient`, which will help interacting with [Egress API](https://docs.livekit.io/home/egress/api/){:target="\_blank"} to manage recordings, and the `AzureBlobStorageService`, which will help interacting with the Blob Container:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L34-L39' target='_blank'>index.js</a>" linenums="34"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L33-L38' target='_blank'>index.js</a>" linenums="33"
 const egressClient = new EgressClient(
   LIVEKIT_URL,
   LIVEKIT_API_KEY,
   LIVEKIT_API_SECRET
 );
-const s3Service = new S3Service();
+const azureBlobService = new AzureBlobService();
 ```
 
 The `POST /token` endpoint has been modified to add the `roomRecord` permission to the access token, so that participants can start recording a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L46-L63' target='_blank'>index.js</a>" linenums="46" hl_lines="14"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L45-L62' target='_blank'>index.js</a>" linenums="45" hl_lines="14"
 app.post("/token", async (req, res) => {
   const roomName = req.body.roomName;
   const participantName = req.body.participantName;
@@ -169,7 +166,7 @@ Now let's explore the code for each recording feature:
 
 The `POST /recordings/start` endpoint starts the recording of a room. It receives the name of the room to record as parameter and returns the recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L62-L96' target='_blank'>index.js</a>" linenums="62"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L79-L117' target='_blank'>index.js</a>" linenums="79"
 app.post("/recordings/start", async (req, res) => {
   const { roomName } = req.body;
 
@@ -191,7 +188,7 @@ app.post("/recordings/start", async (req, res) => {
   const fileOutput = new EncodedFileOutput({
     // (3)!
     fileType: EncodedFileType.MP4, // (4)!
-    filepath: `${RECORDINGS_PATH}/{room_name}-{time}-{room_id}`, // (5)!
+    filepath: `RoomComposite-{room_name}-{time}-{room_id}`, // (5)!
     disableManifest: true,
   });
 
@@ -227,7 +224,7 @@ This endpoint does the following:
 1.  Obtains the `roomName` parameter from the request body. If it is not available, it returns a `400` error.
 2.  Check if there is already an active recording for the room. If there is, it returns a `409` error to prevent starting a new recording. To accomplish this, we use the `getActiveRecordingByRoom` function, which lists all active egresses for a specified room by calling the `listEgress` method of the `EgressClient` with the `roomName` and `active` parameters, and then returns the egress ID of the first active egress found:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L236-L245' target='_blank'>index.js</a>" linenums="236"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L231-L240' target='_blank'>index.js</a>" linenums="231"
     const getActiveRecordingByRoom = async (roomName) => {
       try {
         // List all active egresses for the room
@@ -252,7 +249,7 @@ This endpoint does the following:
 
 The `POST /recordings/stop` endpoint stops the recording of a room. It receives the room name of the room to stop recording as a parameter and returns the updated recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/index.js#L121-L149' target='_blank'>index.js</a>" linenums="121"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L120-L148' target='_blank'>index.js</a>" linenums="120"
 app.post("/recordings/stop", async (req, res) => {
   const { roomName } = req.body;
 
@@ -299,28 +296,24 @@ This endpoint does the following:
 
 #### List recordings
 
-The `GET /recordings` endpoint lists all recordings stored in the S3 bucket. This endpoint also allows filtering recordings by room name or room ID:
+The `GET /recordings` endpoint lists all recordings stored in the Azure Container. This endpoint also allows filtering recordings by room name or room ID:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L152-L173' target='_blank'>index.js</a>" linenums="152"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/index.js#L152-L173' target='_blank'>index.js</a>" linenums="152"
 app.get("/recordings", async (req, res) => {
   const roomId = req.query.roomId?.toString(); // (1)!
   try {
-    const awsResponse = await s3Service.listObjects(RECORDINGS_PATH); // (2)!
+    const azureResponse = await azureBlobService.listObjects(); // (2)!
     let recordings = [];
-    if (awsResponse.Contents) {
-      recordings = awsResponse.Contents.map((recording) => {
+    if (azureResponse.length > 0) {
+      recordings = azureResponse.map((obj) => ({
         // (3)!
-        return {
-          name: recording.Key.split("/").pop(),
-        };
-      });
+        name: obj.name,
+      }));
     }
     // Filter recordings by room ID
-    recordings = recordings.filter(
-      (
-        recording // (4)!
-      ) => (roomId ? recording.name.includes(roomId) : true)
-    );
+    recordings = recordings.filter((recording) => // (4)!
+      roomId ? recording.name.includes(roomId) : true
+    ); 
     return res.json({ recordings }); // (5)!
   } catch (error) {
     console.error("Error listing recordings.", error);
@@ -330,36 +323,35 @@ app.get("/recordings", async (req, res) => {
 ```
 
 1. Obtain the `roomId` query parameter for later filtering, if available.
-2. List all Egress video files in the S3 bucket.
-3. Map all of the recording names from the S3 response.
+2. List all Egress video files in the Azure Container.
+3. Map all of the recording names from the Azure response.
 4. Filter the recordings by room ID, if available.
 5. Return the list of recordings to the client.
 
 This endpoint does the following:
 
 1.  Obtains the `roomId` query parameter for later filtering, if available.
-2.  Lists all Egress video files in the S3 bucket. To accomplish this, we use the `listObjects` method of the `S3Service` with the `RECORDINGS_PATH` parameter.
-3.  Extracts the recording names from the S3 response.
+2.  Lists all Egress video files in the Azure Container. To accomplish this, we use the `listObjects` method of the `AzureBlobService` with the `RECORDINGS_PATH` parameter.
+3.  Extracts the recording names from the Azure response.
 4.  Filters the recordings by room ID, if available. The room ID is part of the recording name, so we can filter with a quick check.
 5.  Returns the list of recordings to the client.
 
 #### Get recording
 
-The `GET /recordings/:recordingName` endpoint retrieves a specific portion of a recording from the S3 bucket and returns it as a stream. The server sends the recording file in portions of `5 MB` each time the client requests a range of the recording file. This is done to prevent loading the entire recording file into memory and to allow the client to play the recording while it is being downloaded and seek to a specific time:
+The `GET /recordings/:recordingName` endpoint retrieves a specific portion of a recording from the Azure Container and returns it as a stream. The server sends the recording file in portions of `5 MB` each time the client requests a range of the recording file. This is done to prevent loading the entire recording file into memory and to allow the client to play the recording while it is being downloaded and seek to a specific time:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L176-L207' target='_blank'>index.js</a>" linenums="176"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L173-L203' target='_blank'>index.js</a>" linenums="173"
 app.get("/recordings/:recordingName", async (req, res) => {
   const { recordingName } = req.params;
   const { range } = req.headers;
-  const key = RECORDINGS_PATH + recordingName;
-  const exists = await s3Service.exists(key); // (1)!
+  const exists = await azureBlobService.exists(recordingName); // (1)!
 
   if (!exists) {
     return res.status(404).json({ errorMessage: "Recording not found" });
   }
 
   try {
-    // Get the recording file from S3
+    // Get the recording file from azure
     const { stream, size, start, end } = await getRecordingStream(
       // (2)!
       recordingName,
@@ -383,8 +375,8 @@ app.get("/recordings/:recordingName", async (req, res) => {
 });
 ```
 
-1. Check if the recording exists in the S3 bucket.
-2. Get the recording file from the S3 bucket.
+1. Check if the recording exists in the Azure Container.
+2. Get the recording file from the Azure Container.
 3. Set the response status code to `206 Partial Content`.
 4. Set the `Cache-Control` header as `no-cache`.
 5. Set the `Content-Type` header as `video/mp4`.
@@ -396,13 +388,12 @@ app.get("/recordings/:recordingName", async (req, res) => {
 This endpoint does the following:
 
 1.  Extracts the `recordingName` parameter from the request.
-2.  Checks if the recording exists in the S3 bucket by calling the `exists` method of the `S3Service` with the `key` as a parameter. If the recording does not exist, it returns a `404` error.
+2.  Checks if the recording exists in the Azure Container by calling the `exists` method of the `AzureBlobService` with the `recordingName` as a parameter. If the recording does not exist, it returns a `404` error.
 3.  Gets the requested range of the recording file by calling the `getRecordingStream` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L247-L261' target='_blank'>index.js</a>" linenums="247"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L242-L255' target='_blank'>index.js</a>" linenums="242"
     const getRecordingStream = async (recordingName, range) => {
-      const key = RECORDINGS_PATH + recordingName;
-      const size = await s3Service.getObjectSize(key);
+      const size = await azureBlobService.getObjectSize(recordingName);
 
       // Get the requested range
       const parts = range?.replace(/bytes=/, "").split("-"); // (1)!
@@ -412,7 +403,7 @@ This endpoint does the following:
         : start + RECORDING_FILE_PORTION_SIZE; // (3)!
       const end = Math.min(endRange, size - 1); // (4)!
 
-      const stream = await s3Service.getObject(key, { start, end }); // (5)!
+      const stream = await azureBlobService.getObject(recordingName, { start, end }); // (5)!
       return { stream, size, start, end };
     };
     ```
@@ -421,15 +412,15 @@ This endpoint does the following:
     2. Get the start of the requested range.
     3. Get the end of the requested range or set it to the start plus the established portion size.
     4. Get the minimum between the end of the requested range and the size of the recording file minus one.
-    5. Get the recording file from the S3 bucket with the requested range.
+    5. Get the recording file from the Azure Container with the requested range.
 
     This function does the following:
 
-    1.  Gets the size of the recording file by calling the `getObjectSize` method of the `S3Service` with the `key` as a parameter.
+    1.  Gets the size of the recording file by calling the `getObjectSize` method of the `AzureBlobService` with the `recordingName` as a parameter.
     2.  Extracts the start of the requested range from the `range` header.
     3.  Extracts the end of the requested range from the `range` header. If the end is not provided, it sets the end to the start plus the established portion size.
     4.  Gets the minimum between the end of the requested range and the size of the recording file minus one. This is done to prevent requesting a range that exceeds the recording file size.
-    5.  Gets the recording file from the S3 bucket with the requested range by calling the `getObject` method of the `S3Service` with the `key` and `range` as parameters.
+    5.  Gets the recording file from the Azure Container with the requested range by calling the `getObject` method of the `AzureBlobService` with the `recordingName` and `range` as parameters.
 
 4.  Sets the response headers:
 
@@ -441,27 +432,22 @@ This endpoint does the following:
 
 5.  Pipes the recording file to the response.
 
-!!! info "Direct access to S3 bucket"
-
-    With this approach, the backend acts as a proxy between the client and S3, which may result in increased server resource usage. To avoid this, it is more efficient to provide the client with a **presigned URL**, allowing direct access to the recording files from the S3 bucket. In the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, we show how to implement this method, along with a discussion of its advantages and disadvantages.
-
 #### Delete recording
 
-The `DELETE /recordings/:recordingName` endpoint deletes a recording from the S3 bucket:
+The `DELETE /recordings/:recordingName` endpoint deletes a recording from the Azure Container:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L210-L227' target='_blank'>index.js</a>" linenums="210"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L206-L222' target='_blank'>index.js</a>" linenums="206"
 app.delete("/recordings/:recordingName", async (req, res) => {
   const { recordingName } = req.params;
-  const key = RECORDINGS_PATH + recordingName;
-  const exists = await s3Service.exists(key); // (1)!
+  const exists = await azureBlobService.exists(recordingName); // (1)!
 
   if (!exists) {
     return res.status(404).json({ errorMessage: "Recording not found" });
   }
 
   try {
-    // Delete the recording file from S3
-    await Promise.all([s3Service.deleteObject(key)]); // (2)!
+    // Delete the recording file from Azure
+    await Promise.all([azureBlobService.deleteObject(recordingName)]); // (2)!
     res.json({ message: "Recording deleted" });
   } catch (error) {
     console.error("Error deleting recording.", error);
@@ -470,141 +456,137 @@ app.delete("/recordings/:recordingName", async (req, res) => {
 });
 ```
 
-1. Check if the recording exists in the S3 bucket.
-2. Delete the recording file from the S3 bucket.
+1. Check if the recording exists in the Azure Container.
+2. Delete the recording file from the Azure Container.
 
 This endpoint does the following:
 
 1.  Extracts the `recordingName` parameter from the request.
-2.  Checks if the recording exists in the S3 bucket by calling the `exists` method of the `S3Service` with the `key` as a parameter. If the recording does not exist, it returns a `404` error.
-3.  Deletes the recording file from the S3 bucket by calling the `deleteObject` method of the `S3Service` with the object's `key` as a parameter.
+2.  Checks if the recording exists in the Azure Container by calling the `exists` method of the `AzureBlobService` with the `recordingName` as a parameter. If the recording does not exist, it returns a `404` error.
+3.  Deletes the recording file from the Azure Container by calling the `deleteObject` method of the `AzureBlobService` with the object's `recordingName` as a parameter.
 
 ---
 
-#### S3 service
+#### Azure Blob Storage Service
 
-Finally, let's take a look at the `s3.service.js` file, which encapsulates the operations to interact with the S3 bucket:
+Finally, let's take a look at the `azure.blobstorage.service.js` file, which encapsulates the operations to interact with the Azure Container:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/s3.service.js' target='_blank'>s3.service.js</a>" linenums="9"
-// S3 configuration
-const S3_ENDPOINT = process.env.S3_ENDPOINT || "http://localhost:9000"; // (1)!
-const S3_ACCESS_KEY = process.env.S3_ACCESS_KEY || "minioadmin"; // (2)!
-const S3_SECRET_KEY = process.env.S3_SECRET_KEY || "minioadmin"; // (3)!
-const AWS_REGION = process.env.AWS_REGION || "us-east-1"; // (4)!
-const S3_BUCKET = process.env.S3_BUCKET || "openvidu-appdata"; // (5)!
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/azure.blobstorage.service.js' target='_blank'>azure.blobstorage.service.js</a>" linenums="6"
+// Azure configuration
+const AZURE_ACCOUNT_NAME = process.env.AZURE_ACCOUNT_NAME || "devstoreaccount"; // (1)!
+const AZURE_ACCOUNT_KEY =
+    process.env.AZURE_ACCOUNT_KEY || "nokey"; // (2)!
+const AZURE_CONTAINER_NAME =
+    process.env.AZURE_CONTAINER_NAME || "openvidu-appdata"; // (3)!
 
-export class S3Service {
-  static instance;
+const AZURE_ENDPOINT =
+    process.env.AZURE_ENDPOINT ||
+    `https://${AZURE_ACCOUNT_NAME}.blob.core.windows.net`; // (4)!
 
-  constructor() {
-    if (S3Service.instance) {
-      return S3Service.instance;
+export class AzureBlobService {
+    static instance;
+
+    constructor() {
+        if (AzureBlobService.instance) {
+            return AzureBlobService.instance;
+        }
+        // (5)!
+        const sharedKeyCredential = new StorageSharedKeyCredential(
+            AZURE_ACCOUNT_NAME,
+            AZURE_ACCOUNT_KEY
+        );
+
+        this.blobServiceClient = new BlobServiceClient(
+            AZURE_ENDPOINT,
+            sharedKeyCredential
+        );
+
+        this.containerClient = this.blobServiceClient.getContainerClient(
+            AZURE_CONTAINER_NAME
+        );
+
+        AzureBlobService.instance = this;
+        return this;
     }
 
-    this.s3Client = new S3Client({ // (6)!
-      endpoint: S3_ENDPOINT,
-      credentials: {
-        accessKeyId: S3_ACCESS_KEY,
-        secretAccessKey: S3_SECRET_KEY,
-      },
-      region: AWS_REGION,
-      forcePathStyle: true,
-    });
-
-    S3Service.instance = this;
-    return this;
-  }
-
-  async exists(key) { // (7)!
-    try {
-      await this.headObject(key);
-      return true;
-    } catch (error) {
-      return false;
+    async exists(key) { // (6)!
+        const blobClient = this.containerClient.getBlobClient(key);
+        return await blobClient.exists();
     }
-  }
 
-  async headObject(key) { // (8)!
-    const params = {
-      Bucket: S3_BUCKET,
-      Key: key,
-    };
-    const command = new HeadObjectCommand(params);
-    return this.run(command);
-  }
+    async getObjectSize(key) { // (8)!
+        const props = await this.headObject(key);
+        return props.contentLength;
+    }
 
-  async getObjectSize(key) { // (9)!
-    const { ContentLength: size } = await this.headObject(key);
-    return size;
-  }
+    async headObject(key) { // (7)!
+        const blobClient = this.containerClient.getBlobClient(key);
+        const props = await blobClient.getProperties();
+        return props;
+    }
 
-  async getObject(key, range) { // (10)!
-    const params = {
-      Bucket: S3_BUCKET,
-      Key: key,
-      Range: range ? `bytes=${range.start}-${range.end}` : undefined,
-    };
-    const command = new GetObjectCommand(params);
-    const { Body: body } = await this.run(command);
-    return body;
-  }
+    async getObject(key, range) { // (9)!
+        const blobClient = this.containerClient.getBlobClient(key);
+        const downloadOptions = range
+            ? {
+                rangeGetContentMD5: false,
+                range: {
+                    offset: range.start,
+                    count: range.end - range.start + 1,
+                },
+            }
+            : {};
 
-  async listObjects(prefix) { // (11)!
-    const params = {
-      Bucket: S3_BUCKET,
-      Prefix: prefix,
-    };
-    const command = new ListObjectsV2Command(params);
-    return await this.run(command);
-  }
+        const response = await blobClient.download(
+            downloadOptions.range?.offset ?? 0,
+            downloadOptions.range?.count
+        );
 
-  async deleteObject(key) { // (12)!
-    const params = {
-      Bucket: S3_BUCKET,
-      Key: key,
-    };
-    const command = new DeleteObjectCommand(params);
-    return this.run(command);
-  }
+        return response.readableStreamBody;
+    }
 
-  async run(command) { // (13)!
-    return this.s3Client.send(command);
-  }
+    async listObjects() { // (10)!
+        const result = [];
+        for await (const blob of this.containerClient.listBlobsFlat()) {
+            result.push(blob);
+        }
+        return result;
+    }
+
+    async deleteObject(key) { // (11)!
+        const blobClient = this.containerClient.getBlobClient(key);
+        return await blobClient.deleteIfExists();
+    }
 }
 ```
 
-1. The URL of the S3 server.
-2. The access key of the S3 server.
-3. The secret key of the S3 server.
-4. The AWS region of the S3 server.
-5. The name of the S3 bucket.
-6. Initialize the `S3Client` with the provided configuration.
-7. Check if an object exists in the S3 bucket.
-8. Retrieve the metadata of an object in the S3 bucket.
-9. Retrieve the size of an object in the S3 bucket.
-10. Retrieve a specified range of bytes from an object in the S3 bucket.
-11. List objects in the S3 bucket that match a regex pattern.
-12. Delete an object from the S3 bucket.
-13. Execute an S3 command.
+1. The Storage Account Name of Azure.
+2. The access key of Azure Blob Storage.
+3. The name of Azure Container.
+4. The URL of Azure endpoint.
+5. Initialize the `Clients` with the provided configuration.
+6. Check if an object exists in the Azure Container.
+7. Retrieve the metadata of an object in the Azure Container.
+8. Retrieve the size of an object in the Azure Container.
+9. Retrieve a specified range of bytes from an object in the Azure Container.
+10. List objects in the Azure Container that match a regex pattern.
+11. Delete an object from the Azure Container.
 
-This file loads environment variables for the S3 configuration:
+This file loads environment variables for the Azure configuration:
 
-- `S3_ENDPOINT`: The URL of the S3 server.
-- `S3_ACCESS_KEY`: The access key of the S3 server.
-- `S3_SECRET_KEY`: The secret key of the S3 server.
-- `AWS_REGION`: The AWS region of the S3 server.
-- `S3_BUCKET`: The name of the S3 bucket.
+- `AZURE_ACCOUNT_NAME`: The name of the Azure Storage Account.
+- `AZURE_ACCOUNT_KEY`: The access key of Azure Blob Storage.
+- `AZURE_CONTAINER_NAME`: The name of the Azure Container.
+- `AZURE_ENDPOINT`: The URL of Azure endpoint.
 
-Then, it defines the `S3Service` class as a singleton, which initializes the `S3Client` with the provided configuration. The class encapsulates the following methods to interact with the S3 bucket:
+Then, it defines the `AzureBlobService` class as a singleton, which initializes the `Clients` with the provided configuration. The class encapsulates the following methods to interact with the Azure Container:
 
-- `exists`: Checks if an object exists in the S3 bucket.
-- `headObject`: Retrieves the metadata of an object in the S3 bucket.
-- `getObjectSize`: Retrieves the size of an object in the S3 bucket.
-- `getObject`: Retrieves an object from the S3 bucket.
-- `listObjects`: Lists objects in the S3 bucket that match a regex pattern.
-- `deleteObject`: Deletes an object from the S3 bucket.
-- `run`: Executes an S3 command.
-
+- `exists`: Checks if an object exists in the Azure Container.
+- `getObjectSize`: Retrieves the size of an object in the Azure Container.
+- `headObject`: Retrieves the metadata of an object in the Azure Container.
+- `getObject`: Retrieves an object from the Azure Container.
+- `listObjects`: Lists objects in the Azure Container that match a regex pattern.
+- `deleteObject`: Deletes an object from the Azure Container.
 ---
 
 ### Frontend
@@ -619,7 +601,7 @@ In order to update the user interface of all participants in the room according 
 
     To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
 async function joinRoom() {
   // Disable 'Join' button
   document.getElementById("join-button").disabled = true;
@@ -694,7 +676,7 @@ The `updateRecordingInfo` function updates the recording information of the room
 
 This function retrieves all recordings available for the room from the backend and displays their relevant information by invoking the `showRecordingList` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/app.js#L337-L370' target='_blank'>app.js</a>" linenums="337"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L337-L370' target='_blank'>app.js</a>" linenums="337"
 function showRecordingList(recordings) {
   const recordingsList = document.getElementById("recording-list");
 
@@ -741,7 +723,7 @@ The `showRecordingList` function creates a new `div` element for each recording 
 
 When the user clicks the play button, the `displayRecording` function is called to play the recording. This function opens a dialog window with an embedded video element and sets the source of the video to the [get recording endpoint](#get-recording) of the server application:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/app.js#L372-L379' target='_blank'>app.js</a>" linenums="372"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L372-L379' target='_blank'>app.js</a>" linenums="372"
 function displayRecording(recordingName) {
   const recordingVideoDialog = document.getElementById(
     "recording-video-dialog"
@@ -752,7 +734,7 @@ function displayRecording(recordingName) {
 }
 ```
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/index.html#L94-L99' target='_blank'>index.html</a>" linenums="94"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/index.html#L94-L99' target='_blank'>index.html</a>" linenums="94"
 <dialog id="recording-video-dialog">
     <video id="recording-video" autoplay controls></video>
     <button class="btn btn-secondary" id="close-recording-video-dialog" onclick="closeRecording()">
