@@ -1,9 +1,9 @@
 ---
-title: Basic Recording Tutorial
+title: Basic Recording Tutorial S3
 description: Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
 ---
 
-# Basic Recording Tutorial
+# Basic Recording Tutorial S3
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/advanced-features/openvidu-recording-basic-node){ .md-button target=\_blank }
 
@@ -169,7 +169,7 @@ Now let's explore the code for each recording feature:
 
 The `POST /recordings/start` endpoint starts the recording of a room. It receives the name of the room to record as parameter and returns the recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L62-L96' target='_blank'>index.js</a>" linenums="62"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L80-L118' target='_blank'>index.js</a>" linenums="80"
 app.post("/recordings/start", async (req, res) => {
   const { roomName } = req.body;
 
