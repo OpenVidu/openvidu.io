@@ -5,25 +5,26 @@ description: Learn how to improve the basic recording tutorial by adding complet
 
 # Advanced Recording Tutorial Azure
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/advanced-features/openvidu-recording-advanced-node){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.2.0/advanced-features/openvidu-recording-advanced-node-azure){ .md-button target=\_blank }
 
-This tutorial improves the [basic recording tutorial](./recording-basic.md){target="\_blank"} by doing the following:
+This tutorial improves the [basic recording tutorial](./recording-basic-azure.md){target="\_blank"} by doing the following:
 
 -   **Complete recording metadata**: Listen to webhook events and save all necessary metadata in a separate file.
 -   **Real time recording status notification**: Implement a custom notification system to inform participants about the recording status by listening to webhook events and updating room metadata.
 -   **Recording deletion notification**: Implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
--   **Direct access to recording files**: Add an additional method to allow access to recording files directly from the S3 bucket by creating a presigned URL.
+-   **Direct access to recording files**: Add an additional method to allow access to recording files directly from the Azure Container by creating a presigned URL.
 
 ## Running this tutorial
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+=== "Run OpenVidu locally"
 
+    --8<-- "shared/tutorials/run-openvidu-locally-azure.md"
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.1.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
 ```
 
 ### 3. Run the application
@@ -33,7 +34,7 @@ To run this application, you need [Node.js](https://nodejs.org/en/download){:tar
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-livekit-tutorials/advanced-features/openvidu-recording-advanced-node
+cd openvidu-livekit-tutorials/advanced-features/openvidu-recording-advanced-node-azure
 ```
 
 2. Install dependencies
@@ -64,7 +65,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     Access your application client through [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443){target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){target="_blank"}.
 
-    **Limitation**: Playing recordings with the `S3` strategy from other devices in your local network is not possible due to MinIO not being exposed. To play recordings from other devices, you need to change the environment variable `RECORDING_PLAYBACK_STRATEGY` to `PROXY`.
+    **Limitation**: Playing recordings with the `Azure` strategy from other devices in your local network is not possible due to MinIO not being exposed. To play recordings from other devices, you need to change the environment variable `RECORDING_PLAYBACK_STRATEGY` to `PROXY`.
 
 ## Enhancements
 
@@ -80,7 +81,7 @@ The backend has been refactored to prevent code duplication and improve readabil
 
 -   The `index.js` file now simply sets the route for each controller:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/index.js#L21-L23' target='_blank'>index.js</a>" linenums="21"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/index.js#L21-L23' target='_blank'>index.js</a>" linenums="21"
     app.use("/token", roomController);
     app.use("/recordings", recordingController);
     app.use("/livekit/webhook", webhookController);
@@ -88,25 +89,24 @@ The backend has been refactored to prevent code duplication and improve readabil
 
 -   The configuration of environment variables and constants has been moved to the `config.js` file:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/config.js' target='_blank'>config.js</a>" linenums="1"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node/src/config.js' target='_blank'>config.js</a>" linenums="1"
     export const SERVER_PORT = process.env.SERVER_PORT || 6080;
     export const APP_NAME = "openvidu-recording-advanced-node";
-
+    
     // LiveKit configuration
     export const LIVEKIT_URL = process.env.LIVEKIT_URL || "http://localhost:7880";
     export const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || "devkey";
     export const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || "secret";
-
-    // S3 configuration
-    export const S3_ENDPOINT = process.env.S3_ENDPOINT || "http://localhost:9000";
-    export const S3_ACCESS_KEY = process.env.S3_ACCESS_KEY || "minioadmin";
-    export const S3_SECRET_KEY = process.env.S3_SECRET_KEY || "minioadmin";
-    export const AWS_REGION = process.env.AWS_REGION || "us-east-1";
-    export const S3_BUCKET = process.env.S3_BUCKET || "openvidu";
-
+    
+    // Azure Blob Storage configuration
+    export const AZURE_ACCOUNT_NAME = process.env.AZURE_ACCOUNT_NAME || "your_account_name";
+    export const AZURE_ACCOUNT_KEY = process.env.AZURE_ACCOUNT_KEY || "your_account_key";
+    export const AZURE_CONTAINER_NAME = process.env.AZURE_CONTAINER_NAME || "openvidu-appdata";
+    export const AZURE_ENDPOINT = process.env.AZURE_ENDPOINT || `https://${AZURE_ACCOUNT_NAME}.blob.core.windows.net`;
+    
     export const RECORDINGS_PATH = process.env.RECORDINGS_PATH ?? "recordings/";
     export const RECORDINGS_METADATA_PATH = ".metadata/";
-    export const RECORDING_PLAYBACK_STRATEGY = process.env.RECORDING_PLAYBACK_STRATEGY || "S3"; // PROXY or S3
+    export const RECORDING_PLAYBACK_STRATEGY = process.env.RECORDING_PLAYBACK_STRATEGY || "Azure"; // PROXY or Azure
     export const RECORDING_FILE_PORTION_SIZE = 5 * 1024 * 1024; // 5MB
     ```
 
@@ -123,7 +123,7 @@ src
 ├── services
 │   ├── recording.service.js
 │   ├── room.service.js
-│   └── s3.service.js
+│   └── azure.blobstorage.service.js
 ├── config.js
 ├── index.js
 ```
@@ -136,7 +136,7 @@ Where `room.service.js` defines the `RoomService` class, that contains the logic
 
 In order to store the recording status in the room metadata, we have to create the room explicitly the first time a user joins it, setting the metadata field with an object that contains the recording status. This object also contains the app name, which is used to identify webhook events related to the application. This is done in the `POST /token` endpoint:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/room.controller.js#L10-L38' target='_blank'>room.controller.js</a>" linenums="10" hl_lines="16-28"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/room.controller.js#L10-L38' target='_blank'>room.controller.js</a>" linenums="10" hl_lines="16-28"
 roomController.post("/", async (req, res) => {
     const roomName = req.body.roomName;
     const participantName = req.body.participantName;
@@ -175,7 +175,7 @@ After generating the access token with the required permissions, this endpoint d
 
 1. Checks if the room exists by calling the `exists` method of the `RoomService` with the `roomName` as a parameter. This method returns a boolean indicating whether the room obtained from the `getRoom` method is not `null`. This other method lists all active rooms that match the `roomName` by calling the `listRooms` method of the `RoomServiceClient` with an array containing the `roomName` as a parameter, and returns the first element of the list if it exists:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/room.service.js#L30-L38' target='_blank'>room.service.js</a>" linenums="30"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/room.service.js#L30-L38' target='_blank'>room.service.js</a>" linenums="30"
     async getRoom(roomName) {
         const rooms = await this.roomClient.listRooms([roomName]); // (1)!
         return rooms.length > 0 ? rooms[0] : null; // (2)!
@@ -192,7 +192,7 @@ After generating the access token with the required permissions, this endpoint d
 
 2. Creates the room if it doesn't exist by calling the `createRoom` method of the `RoomService` with the `roomName` as a parameter. This method creates a room with the `roomName` and sets the metadata field with an object that contains the app name (defined in the `config.js` file) and the recording status initialized to `STOPPED`. To achieve this, the method calls the `createRoom` method of the `RoomServiceClient` with an object indicating the room name and metadata:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/room.service.js#L19-L28' target='_blank'>room.service.js</a>" linenums="19"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/room.service.js#L19-L28' target='_blank'>room.service.js</a>" linenums="19"
     async createRoom(roomName) {
         const roomOptions = {
             name: roomName,
@@ -215,7 +215,7 @@ After generating the access token with the required permissions, this endpoint d
 
 In previous tutorials, we listened to all webhook events and printed them in the console without doing anything else. In this tutorial, we have to first check if the webhook is related to the application and then act accordingly depending on the event type. This is done in the `POST /livekit/webhook` endpoint:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/webhook.controller.js#L14-L38' target='_blank'>webhook.controller.js</a>" linenums="14"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/webhook.controller.js#L14-L38' target='_blank'>webhook.controller.js</a>" linenums="14"
 webhookController.post("/", async (req, res) => {
     try {
         const webhookEvent = await webhookReceiver.receive(req.body, req.get("Authorization"));
@@ -252,7 +252,7 @@ After receiving the webhook event, this endpoint does the following:
 
 1. Checks if the webhook is related to the application by calling the `checkWebhookRelatedToMe` function with the webhook event as a parameter. This function returns a boolean indicating whether the app name obtained from the metadata field of the room related to the webhook event is equal to the app name defined in the `config.js` file:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/webhook.controller.js#L40-L55' target='_blank'>webhook.controller.js</a>" linenums="40"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/webhook.controller.js#L40-L55' target='_blank'>webhook.controller.js</a>" linenums="40"
     const checkWebhookRelatedToMe = async (webhookEvent) => {
         const { room, egressInfo, ingressInfo } = webhookEvent; // (1)!
         let roomInfo = room;
@@ -284,7 +284,7 @@ After receiving the webhook event, this endpoint does the following:
 
 4. If the event type is `egress_ended`, calls the `handleEgressEnded` function with the egress info as a parameter. This function saves the recording metadata in a separate file (see the [Saving recording metadata](#saving-recording-metadata) section) and notifies all participants in the room related to the egress info that the recording has been stopped:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/webhook.controller.js#L57-L65' target='_blank'>webhook.controller.js</a>" linenums="57"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/webhook.controller.js#L57-L65' target='_blank'>webhook.controller.js</a>" linenums="57"
     const handleEgressEnded = async (egressInfo) => {
         try {
             await recordingService.saveRecordingMetadata(egressInfo); // (1)!
@@ -305,7 +305,7 @@ After receiving the webhook event, this endpoint does the following:
 
 When the recording status changes, all participants in the room have to be notified. This is done by updating the metadata field of the room with the new recording status, which will trigger the `RoomEvent.RoomMetadataChanged` event in the client side. This is implemented in the `notifyRecordingStatusUpdate` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/webhook.controller.js#L67-L76' target='_blank'>webhook.controller.js</a>" linenums="67"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/webhook.controller.js#L67-L76' target='_blank'>webhook.controller.js</a>" linenums="67"
 const notifyRecordingStatusUpdate = async (egressInfo) => {
     const roomName = egressInfo.roomName; // (1)!
     const recordingStatus = recordingService.getRecordingStatus(egressInfo.status); // (2)!
@@ -326,7 +326,7 @@ After getting the room name from the egress info, this function does the followi
 
 1. Gets the recording status by calling the `getRecordingStatus` method of the `RecordingService` with the egress info status as a parameter. This method returns the recording status based on the egress info status:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/recording.service.js#L135-L148' target='_blank'>recording.service.js</a>" linenums="135"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/recording.service.js#L135-L148' target='_blank'>recording.service.js</a>" linenums="135"
     getRecordingStatus(egressStatus) {
         switch (egressStatus) {
             case EgressStatus.EGRESS_STARTING:
@@ -353,7 +353,7 @@ After getting the room name from the egress info, this function does the followi
 
 2. Updates the room metadata with the new recording status by calling the `updateRoomMetadata` method of the `RoomService` with the `roomName` and `recordingStatus` as parameters. This method updates the metadata field of the room with an object that contains the app name and the new recording status by calling the `updateRoomMetadata` method of the `RoomServiceClient` with the `roomName` and a stringified object as parameters:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/room.service.js#L40-L46' target='_blank'>room.service.js</a>" linenums="40"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/room.service.js#L40-L46' target='_blank'>room.service.js</a>" linenums="40"
     async updateRoomMetadata(roomName, recordingStatus) {
         const metadata = {
             createdBy: APP_NAME,
@@ -372,23 +372,23 @@ After getting the room name from the egress info, this function does the followi
 
 When the recording ends, the metadata related to the recording has to be saved in a separate file. This is done in the `saveRecordingMetadata` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/recording.service.js#L116-L120' target='_blank'>recording.service.js</a>" linenums="116"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/recording.service.js#L116-L120' target='_blank'>recording.service.js</a>" linenums="116"
 async saveRecordingMetadata(egressInfo) {
-    const recordingInfo = this.convertToRecordingInfo(egressInfo); // (1)!
-    const key = this.getMetadataKey(recordingInfo.name); // (2)!
-    await s3Service.uploadObject(key, recordingInfo); // (3)!
+    const recordingInfo = this.convertToRecordingInfo(egressInfo);
+    const key = this.getMetadataKey(recordingInfo.name);
+    await azureBlobService.uploadObject(key, recordingInfo);
 }
 ```
 
 1. Convert the egress info to a recording info object.
 2. Get the metadata key from the recording info name.
-3. Upload the recording metadata to the S3 bucket.
+3. Upload the recording metadata to the Azure Container.
 
 This method does the following:
 
 1.  Converts the egress info to a recording info object by calling the `convertToRecordingInfo` method:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/recording.service.js#L122-L133' target='_blank'>recording.service.js</a>" linenums="122"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/recording.service.js#L122-L133' target='_blank'>recording.service.js</a>" linenums="122"
     convertToRecordingInfo(egressInfo) {
         const file = egressInfo.fileResults[0];
         return {
@@ -405,27 +405,23 @@ This method does the following:
 
     !!! info "Getting recording metadata"
 
-        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
+        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the Azure Container, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
 
 2.  Gets the metadata key from the recordings path and the recordings metadata path, both defined in the `config.js` file, and the recording name replacing the `.mp4` extension with `.json`:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/recording.service.js#L154-L156' target='_blank'>recording.service.js</a>" linenums="154"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/recording.service.js#L154-L156' target='_blank'>recording.service.js</a>" linenums="154"
     getMetadataKey(recordingName) {
         return RECORDINGS_PATH + RECORDINGS_METADATA_PATH + recordingName.replace(".mp4", ".json");
     }
     ```
 
-3.  Uploads the recording metadata to the S3 bucket by calling the `uploadObject` method of the `S3Service` with the `key` and `recordingInfo` as parameters. This method uploads an object to the S3 bucket by sending a `PutObjectCommand` with the key and the stringified object as parameters:
+3.  Uploads the recording metadata to the Azure Container by calling the `uploadObject` method of the `AzureBlobService` with the `key` and `recordingInfo` as parameters. This method uploads an object to the Azure Container with the key and the stringified object as parameters:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/s3.service.js#L34-L42' target='_blank'>s3.service.js</a>" linenums="34"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/azure.blobstorage.service.js#L48-L52' target='_blank'>azure.blobstorage.service.js</a>" linenums="48"
     async uploadObject(key, body) {
-        const params = {
-            Bucket: S3_BUCKET,
-            Key: key,
-            Body: JSON.stringify(body)
-        };
-        const command = new PutObjectCommand(params);
-        return this.run(command);
+        const blockBlobClient = this.containerClient.getBlockBlobClient(key);
+        const data = JSON.stringify(body);
+        await blockBlobClient.upload(data, Buffer.byteLength(data));
     }
     ```
 
@@ -435,7 +431,7 @@ This method does the following:
 
 When a recording is deleted, all participants in the room have to be notified. This is done by sending a data message to all participants in the room. To achieve this, the `DELETE /recordings/:recordingName` endpoint has been modified as follows:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/recording.controller.js#L129-L154' target='_blank'>recording.controller.js</a>" linenums="129" hl_lines="14-19"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/recording.controller.js#L129-L154' target='_blank'>recording.controller.js</a>" linenums="129" hl_lines="14-19"
 recordingController.delete("/:recordingName", async (req, res) => {
     const { recordingName } = req.params;
     const exists = await recordingService.existsRecording(recordingName);
@@ -470,7 +466,7 @@ recordingController.delete("/:recordingName", async (req, res) => {
 
 Before deleting the recording, we get the room name from the recording metadata. After deleting the recording, we check if the room exists and, if it does, send a data message to the room indicating that the recording was deleted. This is done by calling the `sendDataToRoom` method of the `RoomService` with the `roomName` and an object containing the `recordingName` as parameters:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/room.service.js#L48-L60' target='_blank'>room.service.js</a>" linenums="48"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/room.service.js#L48-L60' target='_blank'>room.service.js</a>" linenums="48"
 async sendDataToRoom(roomName, rawData) {
     const data = encoder.encode(JSON.stringify(rawData)); // (1)!
     const options = {
@@ -500,11 +496,11 @@ This method does the following:
 
 ---
 
-### Accessing recording files directly from the S3 bucket
+### Accessing recording files directly from the Azure Container
 
-In this tutorial, we have added an additional method to allow access to recording files directly from the S3 bucket by creating a presigned URL. To accomplish this, we have created a new endpoint (`GET /recordings/:recordingName/url`) to get the recording URL depending on the playback strategy defined in the environment variable `RECORDING_PLAYBACK_STRATEGY`, whose value can be `PROXY` or `S3`:
+In this tutorial, we have added an additional method to allow access to recording files directly from the Azure Container by creating a presigned URL. To accomplish this, we have created a new endpoint (`GET /recordings/:recordingName/url`) to get the recording URL depending on the playback strategy defined in the environment variable `RECORDING_PLAYBACK_STRATEGY`, whose value can be `PROXY` or `AZURE`:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/controllers/recording.controller.js#L104-L127' target='_blank'>recording.controller.js</a>" linenums="104"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/controllers/recording.controller.js#L104-L127' target='_blank'>recording.controller.js</a>" linenums="104"
 recordingController.get("/:recordingName/url", async (req, res) => {
     const { recordingName } = req.params;
     const exists = await recordingService.existsRecording(recordingName); // (1)!
@@ -521,7 +517,7 @@ recordingController.get("/:recordingName/url", async (req, res) => {
     }
 
     try {
-        // If the recording playback strategy is "S3", return a signed URL to access the recording directly from S3
+        // If the recording playback strategy is "AZURE", return a signed URL to access the recording directly from Azure
         const recordingUrl = await recordingService.getRecordingUrl(recordingName); // (3)!
         res.json({ recordingUrl });
     } catch (error) {
@@ -533,33 +529,45 @@ recordingController.get("/:recordingName/url", async (req, res) => {
 
 1. Check if the recording exists.
 2. Return the `GET /recordings/:recordingName` endpoint URL if the playback strategy is `PROXY`.
-3. Create a presigned URL to access the recording directly from the S3 bucket if the playback strategy is `S3`.
+3. Create a presigned URL to access the recording directly from the Azure Container if the playback strategy is `Azure`.
 
 This endpoint does the following:
 
 1.  Extracts the `recordingName` parameter from the request.
 2.  Checks if the recording exists. If it does not exist, it returns a `404` error.
 3.  If the playback strategy is `PROXY`, it returns the `GET /recordings/:recordingName` endpoint URL to get the recording file from the backend.
-4.  If the playback strategy is `S3`, it creates a presigned URL to access the recording directly from the S3 bucket by calling the `getRecordingUrl` method of the `RecordingService` with the `recordingName` as a parameter. This method simply calls the `getObjectUrl` method of the `S3Service` with the key of the recording as a parameter:
+4.  If the playback strategy is `AZURE`, it creates a presigned URL to access the recording directly from the Azure Container by calling the `getRecordingUrl` method of the `RecordingService` with the `recordingName` as a parameter. This method simply calls the `getObjectUrl` method of the `AzureBlobService` with the key of the recording as a parameter:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/src/services/s3.service.js#L78-L85' target='_blank'>s3.service.js</a>" linenums="78"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/src/services/azure.blobstorage.service.js#L90-L109' target='_blank'>azure.blobstorage.service.js</a>" linenums="90"
     async getObjectUrl(key) {
-        const params = {
-            Bucket: S3_BUCKET,
-            Key: key
-        };
-        const command = new GetObjectCommand(params);
-        return getSignedUrl(this.s3Client, command, { expiresIn: 86400 }); // 24 hours
+        if (!AZURE_ACCOUNT_NAME || !AZURE_ACCOUNT_KEY) {
+            throw new Error("Credenciales de cuenta de Azure no están definidas para generar SAS");
+        }
+        const blobClient = this.containerClient.getBlobClient(key);
+        const expiresOn = new Date(new Date().valueOf() + 24 * 60 * 60 * 1000); // 24 horas
+        const sasPermissions = BlobSASPermissions.parse("r");
+        const sasToken = generateBlobSASQueryParameters(
+            {
+                containerName: AZURE_CONTAINER_NAME,
+                blobName: key,
+                expiresOn,
+                permissions: sasPermissions,
+                protocol: SASProtocol.Https
+            },
+            new StorageSharedKeyCredential(AZURE_ACCOUNT_NAME, AZURE_ACCOUNT_KEY)
+        ).toString();
+
+        return `${blobClient.url}?${sasToken}`;
     }
     ```
 
-    This method creates a presigned URL to access the object in the S3 bucket by calling the `getSignedUrl` function from the [@aws-sdk/s3-request-presigner](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-s3-request-presigner/){target="\_blank"} package, indicating the `S3Client`, `GetObjectCommand` and the expiration time in seconds as parameters. In this case, the expiration time is set to 24 hours.
+    This method creates a presigned URL to access the object in the Azure Container by getting the url of the blob client and generating a SAS token, indicating the `CONTAINER_NAME`, `key` and the expiration time in seconds as parameters. In this case, the expiration time is set to 24 hours.
 
     !!! info "Presigned URLs"
 
-        Presigned URLs are URLs that provide access to an S3 object for a limited time. This is useful when you want to share an object with someone for a limited time without providing them with your AWS credentials.
+        Presigned URLs are URLs that provide access to an Azure object for a limited time. This is useful when you want to share an object with someone for a limited time without providing them with your AWS credentials.
 
-        Compared to the proxy strategy, accessing recording files directly from the S3 bucket via presigned URLs is more efficient, as it reduces server load. However, it presents a security risk, as the URL, once generated, can be used by anyone until it expires.
+        Compared to the proxy strategy, accessing recording files directly from the Azure Container via presigned URLs is more efficient, as it reduces server load. However, it presents a security risk, as the URL, once generated, can be used by anyone until it expires.
 
 ---
 
@@ -567,7 +575,7 @@ This endpoint does the following:
 
 In the client side, we have to handle the new room events related to the recording status and the recording deletion. This is done by listening to the `RoomEvent.RoomMetadataChanged` and `RoomEvent.DataReceived` events in the `joinRoom` method:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/public/app.js#L44-L57' target='_blank'>app.js</a>" linenums="42"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/public/app.js#L44-L57' target='_blank'>app.js</a>" linenums="42"
 async function joinRoom() {
     // ...
     // When recording status changes...
@@ -592,7 +600,7 @@ When a new `RoomEvent.RoomMetadataChanged` event is received, we parse the metad
 
 In addition to handling this event, we need to update the recording info in the UI the first time a user joins the room. Once the user has joined, we retrieve the current room metadata and update the UI accordingly. Recordings will be listed unless the recording status is `STOPPED` or `FAILED`, to prevent listing recordings twice:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-advanced-node/public/app.js#L80-L87' target='_blank'>app.js</a>" linenums="78"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-advanced-node-azure/public/app.js#L80-L87' target='_blank'>app.js</a>" linenums="78"
 async function joinRoom() {
     // ...
     // Update recording info
