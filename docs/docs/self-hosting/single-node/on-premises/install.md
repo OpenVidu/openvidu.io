@@ -113,13 +113,15 @@ If everything goes well, all containers will be up and running without restarts,
 
 ## Configure your Application to use the Deployment
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env`. All access credentials of all services are defined in this file.
+To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/config/openvidu.env`. All access credentials of almost all services are defined in this file.
 
 Your authentication credentials and URLs to point your applications to are:
 
-- **URL**: The value in `.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
-- **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+- **URL**: The value in `openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+- **API Key**: The value in `openvidu.env` of `LIVEKIT_API_KEY`
+- **API Secret**: The value in `openvidu.env` of `LIVEKIT_API_SECRET`
+
+To check credentials for Openvidu default app (Openvidu Call) go to `/opt/openvidu/config/app.env`
 
 ## Non-interactive installation
 

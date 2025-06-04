@@ -26,7 +26,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu
 
 !!! info
     
-    If you want to deploy an specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
+    If you want to deploy an specific version of OpenVidu HA, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
     https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.1.0/aws/cf-openvidu-ha.yaml
@@ -83,7 +83,7 @@ In this section, you need to specify the domain name and the SSL certificate to 
 
 In this section, you need to specify some properties needed for the OpenVidu HA deployment.
 
-=== "OpenVidu Elastic Configuration"
+=== "OpenVidu HA Configuration"
 
     The parameters in this section might appear as follows:
 
@@ -180,9 +180,7 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
     ![Volumes Configuration](../../../../assets/images/self-hosting/ha/aws/volumes-config.png)
 
-    The **RetainVolumes** parameter specifies whether the EBS volumes should be retained when the stack is deleted. If you set this parameter to `true`, the EBS volumes will not be deleted when the stack is deleted. This is useful if you want to keep the recordings and metrics data after deleting the stack. If you set this parameter to `false`, the EBS volumes will be deleted when the stack is deleted. In any case, it is recommended to create a snapshot backup policy.
-
-    The **DiskSize** parameter specifies the size of the EBS volumes in GB.
+    The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
 ## Deploying the Stack
 

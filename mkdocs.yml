@@ -35,8 +35,10 @@ nav:
               - iOS: docs/tutorials/application-client/ios.md
           - Advanced Features:
               - docs/tutorials/advanced-features/index.md
-              - Recording Basic: docs/tutorials/advanced-features/recording-basic.md
-              - Recording Advanced: docs/tutorials/advanced-features/recording-advanced.md
+              - Recording Basic S3: docs/tutorials/advanced-features/recording-basic-s3.md
+              - Recording Advanced S3: docs/tutorials/advanced-features/recording-advanced-s3.md
+              - Recording Basic Azure: docs/tutorials/advanced-features/recording-basic-azure.md
+              - Recording Advanced Azure: docs/tutorials/advanced-features/recording-advanced-azure.md
           - Angular Components:
               - docs/tutorials/angular-components/index.md
               - Custom UI: docs/tutorials/angular-components/openvidu-custom-ui.md
@@ -76,6 +78,9 @@ nav:
                   - Install: docs/self-hosting/single-node/aws/install.md
                   - Administration: docs/self-hosting/single-node/aws/admin.md
                   - Upgrade: docs/self-hosting/single-node/aws/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Azure:
+                  - Install: docs/self-hosting/single-node/azure/install.md
+                  - Administration: docs/self-hosting/single-node/azure/admin.md
               - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install-pro.md
                   - Administration: docs/self-hosting/single-node/on-premises/admin-pro.md
@@ -84,6 +89,9 @@ nav:
                   - Install: docs/self-hosting/single-node/aws/install-pro.md
                   - Administration: docs/self-hosting/single-node/aws/admin-pro.md
                   - Upgrade: docs/self-hosting/single-node/aws/upgrade-pro.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Azure:
+                  - Install: docs/self-hosting/single-node/azure/install-pro.md
+                  - Administration: docs/self-hosting/single-node/azure/admin-pro.md
           - Elastic:
               - docs/self-hosting/elastic/index.md
               - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
@@ -94,6 +102,9 @@ nav:
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Administration: docs/self-hosting/elastic/aws/admin.md
                   - Upgrade: docs/self-hosting/elastic/aws/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Azure:
+                  - Install: docs/self-hosting/elastic/azure/install.md
+                  - Administration: docs/self-hosting/elastic/azure/admin.md
           - High Availability:
               - docs/self-hosting/ha/index.md
               - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> On Premises:
@@ -105,6 +116,9 @@ nav:
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
                   - Upgrade: docs/self-hosting/ha/aws/upgrade.md
+              - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Azure:
+                  - Install: docs/self-hosting/ha/azure/install.md
+                  - Administration: docs/self-hosting/azure/aws/admin.md
           - Configuration:
               - Changing config: docs/self-hosting/configuration/changing-config.md
               - Config system in depth: docs/self-hosting/configuration/in-depth.md
