@@ -1,3 +1,3 @@
 !!! note
 
-    In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.1.0`.
+    In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.2.0`.
