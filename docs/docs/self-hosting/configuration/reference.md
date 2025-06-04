@@ -9,13 +9,20 @@ description: Reference for the configuration files used in all different OpenVid
 
 This file defines global configuration parameters used by other services. Such as the domain name, credentials, etc.
 
-| Parameter | Description |
+| <div style="width: 17em;">Parameter</div> | Description |
 | --------- | ----------- |
 | **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access. OpenVidu APIs and services. |
 | **`LIVEKIT_API_KEY`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
 | **`LIVEKIT_API_SECRET`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
 | **`MINIO_ACCESS_KEY`** | Access key for MinIO. |
 | **`MINIO_SECRET_KEY`** | Secret key for MinIO. |
+| **`EXTERNAL_S3_ENDPOINT`** | If defined, Minio will not be used and the deployment will use an external S3 service. This is the endpoint of the external S3 service. |
+| **`EXTERNAL_S3_ACCESS_KEY`** | Access key for the external S3 service if used. |
+| **`EXTERNAL_S3_SECRET_KEY`** | Secret key for the external S3 service if used. |
+| **`EXTERNAL_S3_REGION`** | Region of the external S3 service if used. |
+| **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | If `true`, use path-style access for the external S3 service if used. |
+| **`EXTERNAL_S3_BUCKET_APP_DATA`** | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
+| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | External S3 bucket used in High Availability to store Observability data. |
 | **`MONGO_ADMIN_USERNAME`** | MongoDB admin username. |
 | **`MONGO_ADMIN_PASSWORD`** | MongoDB admin password. |
 | **`DASHBOARD_ADMIN_USERNAME`** | Admin username for OpenVidu Dashboard |
