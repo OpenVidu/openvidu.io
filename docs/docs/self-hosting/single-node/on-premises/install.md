@@ -3,7 +3,7 @@ title: OpenVidu Single Node installation on-premises
 description: Learn how to deploy OpenVidu Single Node on-premises
 ---
 
-# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Installation: On-premises
+# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node installation: On-premises
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 

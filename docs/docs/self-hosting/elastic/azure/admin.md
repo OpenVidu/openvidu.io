@@ -3,7 +3,7 @@ title: OpenVidu Elastic administration on Azure
 description: Learn how to perform administrative tasks on an Azure OpenVidu Elastic deployment
 ---
 
-# OpenVidu Elastic Administration: Azure
+# OpenVidu Elastic administration: Azure
 
 The deployment of OpenVidu Elastic on Azure is automated using Templates from ARM, with Media Nodes managed within an [Virtual Machine Scaling Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization.   
 
@@ -165,7 +165,7 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Vi
         </figure>
 
 
-## Administration and Configuration
+## Administration and configuration
 
 For administration, you can follow the instructions from the [On Premises Elastic Administration](../on-premises/admin.md) section.
 

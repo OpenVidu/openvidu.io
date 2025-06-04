@@ -3,14 +3,14 @@ title: OpenVidu High Availability installation on AWS
 description: Learn how to deploy OpenVidu High Availability on AWS using CloudFormation
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability Installation: AWS
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability installation: AWS
 
 !!! info
     
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability Installation](../on-premises/install-nlb.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability installation](../on-premises/install-nlb.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 

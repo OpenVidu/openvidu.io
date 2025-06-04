@@ -213,8 +213,7 @@ img.svg-img {
   max-width: none;
   margin: 0;
   min-height: calc(100vh - 4.8rem);
-  padding: 3em;
-  padding-bottom: 5em;
+  padding: 3em 15em 5em 15em;
   background: var(--top-home-section-color);
   display: flex;
   flex-direction: column;
@@ -315,6 +314,7 @@ img.svg-img {
 @media (max-width: 1219px) {
   .top-home-section {
     min-height: calc(100vh - 2.4rem);
+    padding: 3em 3em 5em 3em;
   }
 }
 

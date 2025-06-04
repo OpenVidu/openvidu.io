@@ -3,14 +3,14 @@ title: OpenVidu Elastic installation on AWS
 description: Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic Installation: AWS
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic installation: AWS
 
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in AWS. Deployed services are the same as the [On Premises Elastic Installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in AWS. Deployed services are the same as the [On Premises Elastic installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 

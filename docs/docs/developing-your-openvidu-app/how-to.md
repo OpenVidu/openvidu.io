@@ -336,7 +336,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
     ```javascript
     import { IngressClient, IngressInfo, IngressInput } from 'livekit-server-sdk';
 
-    const ingressClient = new IngressClient('https://my-openvidu-host', 'api-key', 'secret-key');
+    const ingressClient = new IngressClient('https://my-openvidu-host', 'api-key', 'api-secret');
 
     const ingress = {
       name: 'my-ingress',
@@ -361,8 +361,8 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
     ingressClient := lksdk.NewIngressClient(
         "https://my-openvidu-host",
-        "livekit-api-key",
-        "livekit-api-secret",
+        "api-key",
+        "api-secret",
     )
 
     ingressRequest := &livekit.CreateIngressRequest{
@@ -384,8 +384,8 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
     ```ruby
     require 'livekit'
 
-    ingressClient = LiveKit::IngressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "secret-key")
-    ingressInfo = ingressClient.create_ingress(
+    ingressClient = LiveKit::IngressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+    response = ingressClient.create_ingress(
       :URL_INPUT,
       name: "my-ingress",
       room_name: "my-room",
@@ -393,6 +393,12 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
       participant_name: "My Participant",
       url: "rtsp://admin:pass@192.168.1.79/mystream",
     )
+    if response.error
+        puts "Error creating ingress: #{response.error}"
+    else
+        ingressInfo = response.data
+        puts "Ingress created: #{ingressInfo}"
+    end
     ```
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
@@ -404,7 +410,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
     import livekit.LivekitIngress.IngressInfo;
     import livekit.LivekitIngress.IngressInput;
 
-    IngressServiceClient ingressService = IngressServiceClient.createClient("https://my-openvidu-host", "api-key", "secret-key");
+    IngressServiceClient ingressService = IngressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
 
     IngressInfo ingressInfo = ingressService.createIngress(
         "my-ingress", // Ingress name
@@ -415,6 +421,27 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
         null, null, null, null, // Other default options
         "rtsp://admin:pass@192.168.1.79/mystream" // Input URL
     ).execute().body();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK](https://github.com/livekit/python-sdks){target="\_blank"}
+
+    ```python
+    from livekit.api import LiveKitAPI
+
+    lkapi = LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    request = CreateIngressRequest(
+        url="rtsp://admin:pass@192.168.1.79/mystream",
+        name="my-ingress",
+        room_name="my-room",
+        participant_identity="my-participant",
+        participant_name="My Participant",
+        input_type=IngressInput.URL_INPUT,
+    )
+    ingressInfo = await lkapi.ingress.create_ingress(request)
     ```
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
@@ -428,7 +455,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
     let ingress_client = IngressClient::with_api_key(
         "https://my-openvidu-host",
         "api-key",
-        "secret-key",
+        "api-secret",
     );
     let ingress_info = ingress_client.create_ingress(
         IngressInput::UrlInput,
@@ -451,7 +478,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
     use Agence104\LiveKit\IngressServiceClient;
     use Livekit\IngressInput;
 
-    $ingress_client = new IngressServiceClient("https://my-openvidu-host", "api-key", "secret-key");
+    $ingress_client = new IngressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
     $ingress_info = $ingress_client->createIngress(
       IngressInput::URL_INPUT,
       "my-ingress", // Ingress name
@@ -472,8 +499,8 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
     IngressServiceClient ingressServiceClient = new IngressServiceClient(
         "https://my-openvidu-host",
-        LIVEKIT_API_KEY,
-        LIVEKIT_API_SECRET
+        "api-key",
+        "api-secret"
     );
     var ingressInfo = await ingressServiceClient.CreateIngress(new CreateIngressRequest
     {
@@ -512,7 +539,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
         ```bash
         export LIVEKIT_URL=https://my-openvidu-host
         export LIVEKIT_API_KEY=api-key
-        export LIVEKIT_API_SECRET=secret-key
+        export LIVEKIT_API_SECRET=api-secret
 
         lk ingress create ingress.json
         ```

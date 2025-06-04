@@ -3,7 +3,7 @@ title: OpenVidu Elastic installation on Azure
 description: Learn how to deploy OpenVidu Elastic on Azure using Template specs of Azure Resource Manager
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic Installation: Azure
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic installation: Azure
 
 !!! info
 
@@ -15,7 +15,7 @@ description: Learn how to deploy OpenVidu Elastic on Azure using Template specs 
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Azure. Deployed services are the same as the [On Premises Elastic Installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
+This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Azure. Deployed services are the same as the [On Premises Elastic installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
 
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 <div class="center-align" markdown>

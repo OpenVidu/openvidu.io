@@ -3,10 +3,7 @@ title: OpenVidu Single Node PRO administration on Azure
 description: Learn how to perform administrative tasks on an Azure OpenVidu Single Node PRO deployment
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Single Node Administration: Azure
-
-
-# OpenVidu Single Node Administration: Azure
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Single Node administration: Azure
 
 Azure deployment of OpenVidu Single Node is internally identical to the on-premises deployment and AWS deployment, so you can follow the same instructions from the [On Premises Single Node](../on-premises/admin-pro.md) for administration and configuration. The only difference is that the deployment is automated with ARM Templates from Azure.
 
@@ -52,7 +49,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
 4. Select the new instance type and click on _"Resize"_.
 
-## Administration and Configuration
+## Administration and configuration
 
 For administration, you can follow the instructions from the [On Premises Single Node Administration](../on-premises/admin-pro.md) section.
 

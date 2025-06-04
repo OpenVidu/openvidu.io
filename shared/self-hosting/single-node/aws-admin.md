@@ -7,7 +7,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 --8<-- "shared/self-hosting/single-node/aws-change-instance-type.md"
 
-## Administration and Configuration
+## Administration and configuration
 
 For administration, you can follow the instructions from the [On Premises Single Node Administration](../on-premises/admin.md) section.
 

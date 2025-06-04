@@ -3,9 +3,9 @@ title: OpenVidu Single Node installation on AWS
 description: Learn how to deploy OpenVidu Single Node PRO on AWS using CloudFormation
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Single Node PRO Installation: AWS
+# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Single Node PRO installation: AWS
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> deployment in AWS. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install-pro.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> deployment in AWS. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install-pro.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
