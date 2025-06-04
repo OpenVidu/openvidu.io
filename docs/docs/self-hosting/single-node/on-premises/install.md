@@ -5,42 +5,46 @@ description: Learn how to deploy OpenVidu Single Node on-premises
 
 # <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node Installation: On-premises
 
---8<-- "shared/self-hosting/single-node/v2compat-warning.md"
+This section contains the instructions to deploy a production-ready OpenVidu Meet <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> in a single node using Docker. 
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
-
-=== "Architecture overview"
-
-    This is how the architecture of the deployment looks like:
-
-    <figure markdown>
-    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node On Premises Architecture</figcaption>
-    </figure>
-
-All services are deployed on a single machine, which includes:
-
-- **OpenVidu Server (LiveKit compatible)**.
-- **Ingress** and **Egress** services.
-- **OpenVidu Dashboard**, a web application interface to visualize your Rooms, Ingress, and Egress services.
-- **MinIO** as an S3 storage service for recordings.
-- **Redis** as a shared database for OpenVidu Server and Ingress/Egress services.
-- **MongoDB** as a database for storing analytics and monitoring data.
-- **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates.
-- **OpenVidu Call (Default Application module)**, an optional ready-to-use videoconferencing application.
-- **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
-
-## Prerequisites
+## Requirements
 
 Before starting the installation process, make sure you have the following prerequisites:
 
-- **A machine with at least 4GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**.
-- **Generous disk space (100GB recommended)** if you are going to record your sessions.
-- The machine **must have a Public IP** and an FQDN (Fully Qualified Domain Name) pointing to it.
+- Machine with **Linux installed (Ubuntu recommended)**.
 
-## Port rules
+### Hardware
 
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your machine.
+The hardware requirements will depend on the number of users, size of the rooms, and rooms recordings.
+
+Here are some scenarios to help you understand the minimum requirements for your deployment:
+
+#### Scenario 1: Rooms without recording
+
+- Hardware: **4GB RAM, 2 CPU cores and 30GB of disk**.
+- Capacity: Up to 100 concurrent users in rooms with 8 users. The smallest the rooms, the more concurrent users you can handle.
+
+#### Scenario 2: Rooms with recording
+
+Recordings requires more CPU and disk space, so the requirements are higher. By default, every recording will consume 4 CPUs, so if you want to have multiple recordings at the same time, you will need to increase the number of CPUs in your machine. Each recording will consume around 500KB per second of video, so if you want to record a 1-hour meeting you will need around 1.8GB of disk space per recording.
+
+- Hardware: **16GB RAM, 16 CPU cores and 200GB of disk**. 
+- Capacity: This will allow you to have up to 4 recordings at the same time and will be able to store 100 hours of recordings.
+
+
+### Network 
+
+- **Public IP address** assigned to the machine.
+- **Fully Qualified Domain Name (FQDN)** pointing to the public IP.
+- **Opened ports**: 22 TCP (SSH), 80 TCP (HTTP), 443 TCP (HTTPS), 443 UDP (Media).
+- **Free ports**: TODO (in a fresh ubuntu installation all these ports are free).
+
+For better media quality and performance you can optionally open more ports: 
+
+- **Additional ports**: 1935 TCP, 7881 TCP, 7885 UDP, 9000 TCP, 50000-60000 UDP., 
+
+To allow the connection of users behind restrictive firewalls you can add an additional domain (pointing to the same public IP).
+
 
 **Inbound port rules**:
 
@@ -61,79 +65,96 @@ Typically, all outbound traffic is allowed.
 
 ## Guided Installation
 
-Before the installation, ensure that your machine meets the [prerequisites](#prerequisites) and the [port rules](#port-rules). Then, execute the following command on the machine where you want to deploy OpenVidu:
+Execute the following command in the machine where you want to install OpenVidu Meet:
 
 ```bash
-sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
+sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install_openvidu_meet.sh)
 ```
 
 --8<-- "shared/self-hosting/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
-- **Select which certificate type to use**:
-    - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
-    - _Let's Encrypt_: It will automatically generate a certificate for your domain. The Let's Encrypt email is required and will be asked later in the wizard.
-    - _ZeroSSL_: It will automatically generate a certificate for your domain using ZeroSSL. An API Key is required and will be asked later in the wizard.
-    - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them.
+- **Domain name**: Domain name pointing to the public IP of your machine.
+- **Additional Domain name (Optional)**: Another domain name pointing also to the same public IP.
+- **Show credentials (Y)**: Whether to show the credentials at the end of the installation process.
 
-    !!! Note
-        If you want to manage the certificate in your proxy own proxy server instead of relaying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
-
-- **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
-- **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
-    - _Default App_: OpenVidu Call, a ready-to-use videoconferencing application.
-    - _Observability_: Grafana stack, which includes logs and monitoring stats.
-
-The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
-
-When the installation process finishes, you will see the following message:
+When the installation process finishes, you will see the URLs and credentials to access OpenVidu Meet:
 
 ```
 > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
 >                                                                             <
->  🎉 OpenVidu Community Installation Finished Successfully! 🎉               <
+>  🎉 OpenVidu Meet Community Installation Finished Successfully! 🎉          <
 >                                                                             <
+> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
+>                                                                             <
+>     * OpenVidu Meet 
+         * URL: https://www.myserver.com                            <
+>        * User: admin                                                        <
+>        * password: xxxxxxx                                                  <
+>                                                                             <
+> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
+>                                                                             <
+>  # Observability Services
+>                      
+>    * OpenVidu Dashboard: 
+         * https://www.myserver.com/dashboard
+>        * User: admin
+>        * Password: xxxxxxx
+
+>    * Grafana: 
+         * https://www.myserver.com/grafana                          <
+>        * User: admin
+>        * Password: xxxxxxx
+>
+>
 > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
 ```
 
-OpenVidu will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
+Warning: Guide installation is the recommended way to install OpenVidu Single Node, but you can also install it in an advanced way configuring deployment options like certificate type, rtcengine (pion or mediasoup), service passwords, etc. Check the [Advanced installation](#advanced-installation) section for more information.
 
-```bash
-systemctl start openvidu
-```
+## Administration
 
-If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
+### Starting, stopping, and restarting
 
-- OpenVidu Call (Default Application): [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target=_blank}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
+--8<-- "shared/self-hosting/single-node/admin-start-stop.md"
 
-## Configure your Application to use the Deployment
+### Configuration
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env`. All access credentials of all services are defined in this file.
+Some configuration parameters can be changed in OpenVidu Meet using the config section in the web interface.
 
-Your authentication credentials and URLs to point your applications to are:
+Other low level configuration parameters are defined in configuration files and can be changed only by modifying them directly and restarting OpenVidu Meet:
 
-- **URL**: The value in `.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
-- **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
+    1. Go to `/opt/openvidu/config` directory.
+    2. Find and change the configuration parameter you want to modify, it could be any file: `openvidu.env`, `livekit.yaml`, `egress.yaml`, etc.
+    3. Restart OpenVidu just by executing:
 
-## Non-interactive installation
+        ```
+        systemctl restart openvidu
+        ```
 
-If you want to automate the installation process, you can generate a command with all the parameters needed to install OpenVidu by answering the wizard questions. You can do this by running the following command:
+To know more about the configuration files, check the [OpenVidu Configuration In depth](./in-depth.md){:target="_blank"} section.
 
-```
-docker run --pull always --rm -it \
-    openvidu/openvidu-installer:latest \
-    --deployment-type=single_node
-```
+### Observability
 
---8<-- "shared/self-hosting/install-version.md"
+You can check the health of OpenVidu Meet in the following ways:
 
-This is going to generate a command like this, but it may vary depending on the answers you provide. Here are three examples of the command you can run depending on the certificate type you choose:
+- **OpenVidu Dashboard**: Web tool to see low level details of rooms, users, recodings, etc. (More info)
+- **Grafana**: Web tool to see aggregated information (graphs) about rooms, users, recordings, etc. and service logs (More info)
+- **Services health status**: Using docker tools (More info)
+- **Services logs**: Using docker tools to access logs (More info)
+
+You can see detailed information about these observability tools in the [OpenVidu Observability](./observability.md){:target="_blank"} section.
+
+## OpenVidu Unistalling 
+
+--8<-- "shared/self-hosting/single-node/admin-uninstall.md"
+
+## Advanced installation
+
+(Otra página)
+
+Guided installation is the recommended way to install OpenVidu Single Node, but you can also install it in an advanced way configuring deployment options like certificate type, rtcengine (pion or mediasoup), service passwords, etc. 
 
 === "Let's Encrypt certificates"
 
@@ -251,13 +272,3 @@ Some notes about the command:
 - The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
 - In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack) and `app` (Default App - OpenVidu Call).
 - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media.
-
-To start OpenVidu, remember to run:
-
-```bash
-systemctl start openvidu
-```
-
-## Configuration and administration
-
-Once you have OpenVidu deployed, you can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Single Node deployment.
