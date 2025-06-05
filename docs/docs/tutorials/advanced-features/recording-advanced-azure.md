@@ -18,9 +18,8 @@ This tutorial improves the [basic recording tutorial](./recording-basic-azure.md
 
 #### 1. Run OpenVidu Server
 
-=== "Run OpenVidu locally"
+--8<-- "shared/tutorials/run-openvidu-server-azure.md"
 
-    --8<-- "shared/tutorials/run-openvidu-locally-azure.md"
 ### 2. Download the tutorial code
 
 ```bash
