@@ -58,7 +58,7 @@ The `journalctl` command will show you the logs of the OpenVidu services. You ca
 
 ## Backups and Rollback
 
-When you finish the upgrade process, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. To backup to an specific date and version, you can execute the following command:
+When you finish the upgrade process, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. To backup to a specific date and version, you can execute the following command:
 
 ```bash
 cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu

@@ -14,8 +14,8 @@ OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu
 Install OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> in your preferred environment:
 
 - [**On-premises installation**](./on-premises/install.md): set up on your own servers.
-- [**AWS installation**](./aws/install.md): deploy on Amazon Web Services.
-- [**Azure installation**](./azure/install.md): deploy on Microsoft Azure.
+- [**AWS installation**](./aws/install.md): deploy to Amazon Web Services.
+- [**Azure installation**](./azure/install.md): deploy to Microsoft Azure.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 

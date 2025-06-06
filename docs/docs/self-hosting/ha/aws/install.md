@@ -24,7 +24,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu
 
 !!! info
     
-    If you want to deploy an specific version of OpenVidu HA, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu HA, replace `latest` with the version you want to deploy. For example, to deploy version `3.0.0`, use the following URL:
 
     ```
     https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.1.0/aws/cf-openvidu-ha.yaml
