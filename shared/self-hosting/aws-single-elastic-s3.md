@@ -5,7 +5,7 @@ You can specify an S3 bucket to store the recordings and application data. If th
 
 === "S3 bucket for application data and recordings"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![S3 bucket for application data and recordings](../../../../assets/images/self-hosting/shared/aws-s3-bucket.png)
 

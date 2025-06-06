@@ -3,9 +3,9 @@ title: OpenVidu Single Node PRO installation on-premises
 description: Learn how to deploy OpenVidu Single Node PRO on-premises
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Single Node installation: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: On-premises
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
 
 === "Architecture overview"
 
@@ -82,10 +82,7 @@ A wizard will guide you through the installation process. You will be asked for 
 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (The engine used by Livekit)** or **Mediasoup(Experimental)**.
-
-    --8<-- "shared/self-hosting/mediasoup-warning.md"
-
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../../production-ready/performance/).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
     - _Default App_: OpenVidu Call, a ready-to-use videoconferencing application.
@@ -116,7 +113,7 @@ If everything goes well, all containers will be up and running without restarts,
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
 To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env`. All access credentials of all services are defined in this file.
 
@@ -279,4 +276,4 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](./admin-pro.md) section to learn how to manage your OpenVidu Single Node deployment.
+Once you have OpenVidu deployed, you can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Single Node deployment.

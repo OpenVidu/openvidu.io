@@ -3,7 +3,7 @@ title: Upgrade OpenVidu High Availability - AWS
 description: How to upgrade OpenVidu High Availability on AWS deployments
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> Upgrade OpenVidu High Availability - AWS
+# Upgrade OpenVidu High Availability - AWS
 
 In AWS environments, we recommend upgrading by redeploying the [OpenVidu High Availability CloudFormation](../aws/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as CloudFormation templates and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 

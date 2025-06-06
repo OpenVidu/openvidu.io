@@ -9,7 +9,7 @@ OpenVidu Elastic is part of the <span style="font-size: 12px;" class="openvidu-t
 
 - [**On-premises installation**](./on-premises/install.md): Set up OpenVidu Elastic on your own servers.
 - [**AWS installation**](./aws/install.md): Deploy OpenVidu Elastic on Amazon Web Services.
-- [**Azure installation**](./azure/install.md): Deploy OpenVidu Elastic on Microsoft Azure Cloud.
+- [**Azure installation**](./azure/install.md): Deploy OpenVidu Elastic on Microsoft Azure.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 

@@ -3,7 +3,7 @@ title: OpenVidu Elastic administration on AWS
 description: Learn how to perform administrative tasks on an AWS OpenVidu Elastic deployment
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic administration: AWS
+# OpenVidu Elastic administration: AWS
 
 The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
 
@@ -221,10 +221,10 @@ In addition to these, an AWS deployment provides the capability to manage global
         <figure markdown>
         ![Retrieve Secret Value](../../../../assets/images/self-hosting/elastic/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
         </figure>
-    5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu Elastic deployment.
+    5. Modify the parameter you want to change and click on _"Save"_.
     6. Go to the EC2 Console and click on _"Reboot instance"_ in the Master Node instance to apply the changes.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/elastic/aws/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
-    The changes will be applied automatically in all the Nodes of the OpenVidu Elastic deployment.
+    Changes will be applied automatically in all the nodes of your OpenVidu Elastic deployment.

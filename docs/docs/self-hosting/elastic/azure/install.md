@@ -3,23 +3,23 @@ title: OpenVidu Elastic installation on Azure
 description: Learn how to deploy OpenVidu Elastic on Azure using Template specs of Azure Resource Manager
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu Elastic installation: Azure
+# OpenVidu Elastic installation: Azure
 
-!!! info
+!!! warning
 
-    Azure is Expermiental in version 3.2.0 of OpenVidu
-
+    Azure deployments are considered in Beta in version 3.2.0 of OpenVidu.
 
 !!! info
     
-    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Azure. Deployed services are the same as the [On Premises Elastic installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
 
-To import the template into Azure you just need to click the button below and you will be redirected to azure.   
-<div class="center-align" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2F3.2.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2Fcf-openvidu-elastic.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Fheads%2F3.2.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2FcreateUiDefinition.json)
+To import the template into Azure you just need to click the button below and you will be redirected to azure.
+
+<div class="center-align deploy-button deploy-to-azure-btn" markdown>
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.2.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2Fcf-openvidu-elastic.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.2.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
 === "Architecture overview"
@@ -36,23 +36,13 @@ To import the template into Azure you just need to click the button below and yo
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
-We use a strategy to shut down gracefully the media nodes: 
-
-=== "Strategy used"
-
-    The instances in the scale set are protected to prevent their shutdown when they are started. That prevents them from shutting down when the shutdown event arrives but that event can be captured and a custom action executed. That custom action determines the instance that has to terminate and executes the appropriate commands in the LiveKit services to not receive any more jobs. When all jobs on the instance identified to be shutdown are finished, then it autoshutdown with a command that kills the instance.    
+--8<-- "shared/self-hosting/azure-custom-scale-in.md"
 
 ## Template Parameters
 
-Depending on your needs, you need to fill in the following parameters.
+To deploy the template you need to fill the following parameters.
 
-!!! warning
-
-    The resource group may not be the same as a previous one, the deployment can fail if is the same, the only case you want it to be new is when using an existing IP. Fill the parameter **Stack Name** with the name you want for the stack (it will be used to create the names of the resources). Select the **Region** that you want or the region where the resource group is located (it will be autoselected).   
-
-    <figure markdown>
-    ![Azure Instance configuration](../../../../assets/images/self-hosting/shared/azure-stack-name-region.png){ .svg-img .dark-img }
-    </figure>
+--8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
@@ -62,7 +52,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
 === "OpenVidu Elastic Configuration"
 
-    The parameters in this section might appear as follows:
+    Parameters of this section look like this:
 
     <figure markdown>
     ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/elastic/azure/openvidu-elastic-config.png){ .svg-img .dark-img }
@@ -70,9 +60,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 
-    For the **RTC Engine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
-
-    --8<-- "shared/self-hosting/mediasoup-warning.md"
+    For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../../production-ready/performance/).
 
 ### Azure Instance Configuration
 
@@ -80,22 +68,21 @@ You need to specify some properties for the Azure instances that will be created
 
 === "Azure Instance configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     <figure markdown>
     ![Azure Instance configuration](../../../../assets/images/self-hosting/elastic/azure/azure-instance-config.png){ .svg-img .dark-img }
     </figure>
 
-    Simply select the type of instance you want on the master nodes at **Master Node Instance Type** and select the type of instance you want on the media nodes at **Media Node Instance Type**, fill in the parameter **Admin Username** that will be set as admin username in the instance, then select the SSH key you've created previously in **SSH public key source**, or you can create a new one in the same drop down, to be able to make ssh to the instance.   
+    Simply select the type of instance you want for your Master Node at **Master Node Instance Type** and select the type of instance you want for your Media Nodes at **Media Node Instance Type**. Fill in the parameter **Admin Username** that will be set as admin username in the instance. Select the SSH key you've created previously in **SSH public key source** (or create a new one in the same drop down) to allow you to SSH into the instances.
  
-
 ### Media Nodes Scaling Set Configuration
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
 === "Media Nodes Scaling Set Configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     <figure markdown>
     ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/elastic/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
@@ -103,44 +90,29 @@ The number of Media Nodes can scale up based on the system load. You can configu
 
     The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 
-    The **Scale Target CPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy](https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling){:target=_blank}
+    The **Scale Target CPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy](https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling){:target=_blank}.
 
-### Scale In
-
-Azure has a restriction with the scale in, when it is determined that a instance is surplus, it can only wait at most 15 minutes for graceful shutdown. But that poses a problem when instance sessions can last longer. To avoid unexpectedly shutting down a instance's sessions, an indirect strategy has been implemented to get instances to not terminate until they have finished all their sessions.   
-
-Due to the limitations of azure, this strategy has the disadvantage that it can take up to 5 minutes from the time a instance is detected to be shutdown until the shutdown process is gracefully initiated.
-
-=== "Automation Account Configuration"
-
-    You will need to fill the next parameter in order to be able to create the automation account that contains the runbook that is going to be executed when a scale in event comes in.   
-    You can choose the name that you want and it will be used to create a new automation account with that name, the only restriction that the name has is being an unique name for all the automation accounts that may be in the resource group that you are deploying. Leave it blank to set an autogenerated name.   
-    This resource cannot be reused between deployments.   
-    <figure markdown>
-    ![Automation account name](../../../../assets/images/self-hosting/shared/azure-aacc-scalein.png){ .svg-img .dark-img }
-    </figure>
+--8<-- "shared/self-hosting/azure-scale-in-config.md"
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
 
 --8<-- "shared/self-hosting/azure-turn-domain.md"
 
-## Deploying the Stack
+## Deploying the stack
 
-When you are ready with your Template parameters, just click on _"Next"_, then it will go through some validations, and if everything is correct, click on _"Create"_, then it will start deploying and you will have to wait the time that takes to install Openvidu, it takes about 7 to 12 minutes.   
+Whenever you are satisfied with your Template paremeters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 7 to 12 minutes).
 
 !!! warning
 
-    In case of fail, it might be that some role failed to create, in this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group go to [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove)
+    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
+When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
 
-When everything is ready, you can check the output secrets on the Key Vault or by making SSH to the instance, you can find how to do it in the next steps:  
+=== "Check deployment outputs in Azure Key Vault"
 
-=== "Azure Key Vault Outputs"
+    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
 
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed, you can access in [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
-
-
-    2. Once you are in the Key Vault on the left panel click on _"Objects"_ and then into _"Secrets"_.
+    2. Once you are in the Key Vault on the left panel click on _"Objects"_ 🡒 _"Secrets"_.
 
         <figure markdown>
         ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
@@ -155,34 +127,33 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     4. Now you will see a lot of properties but the one you are searching for is located at the bottom and it will be revealed by clicking in _"Show Secret Value"_.
 
         <figure markdown>
-        ![Azure Key Vault Outputs](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
+        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
         </figure>
-=== "Check outputs in the instance"
 
-    You will need to do SSH to the single instance of Master Node that is created and there you need to make the following steps:   
-    
-    First go to the config folder using the following command: ```cd /opt/openvidu/config/cluster```. There you will see two folders and one **.env** file. To retrieve all access credentials check the following files:
+=== "Check deployment outputs in the instance"
+
+    SSH to the Master Node instance and navigate to the config folder `/opt/openvidu/config/cluster`. Files with the access credentials outputs are:
 
     - `openvidu.env`
     - `master_node/app.env`
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
-As we mentioned before, if you have permissions to give yourself access to the Key Vault you will be able to check there all the outputs in the tab [Azure Key Vault Outputs](#azure-key-vault-outputs), if you dont have them check the tab [Check outputs in the instance](#check-outputs-in-the-instance).
+You need your Azure deployment outputs to configure your OpenVidu application. If you have permissions to access the Key Vault you will be able to check there all the outputs ([Check deployment outputs in Azure Key Vault](#check-deployment-outputs-in-azure-key-vault)). If you don't have permissions to access the Key Vault you can still check the outputs directly in the instance through SSH ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
 Your authentication credentials and URL to point your applications would be:
 
 - Applications developed with LiveKit SDK:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN_NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in the Key Vault Secret of `LIVEKIT_API_KEY` or in the instance in `openvidu.env`.
-    - **API Secret**: The value in the Key Vault Secret of `LIVEKIT_API_SECRET` or in the instance in `openvidu.env`.
+    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
+    - **API Key**: The value in the Key Vault Secret of `LIVEKIT-API-KEY` or in the instance in `openvidu.env`.
+    - **API Secret**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
 
 - Applications developed with OpenVidu v2:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN_NAME` or in the instance in `openvidu.env` as a URL. For example, `https://openvidu.example.io/`.
+    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. For example, `https://openvidu.example.io/`.
     - **Username**: `OPENVIDUAPP`.
-    - **Password**: The value in the Key Vault Secret of `LIVEKIT_API_SECRET` or in the instance in `openvidu.env`.
+    - **Password**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
  
-## Troubleshooting Initial Azure Stack Creation
+## Troubleshooting initial Azure stack creation
 
 --8<-- "shared/self-hosting/azure-troubleshooting.md"
 
@@ -190,4 +161,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Azure stack reaches the **`Succeeded`** status, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu. When this time has passed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Azure stack reaches the **`Succeeded`** status, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.

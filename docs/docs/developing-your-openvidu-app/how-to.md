@@ -8,7 +8,7 @@ description: Explore common OpenVidu operations for developing your application,
 This page is a collection of the most common operations you may want to perform in your application while integrating OpenVidu. Depending on the scope of the operation, these operations will be performed on the client side using a LiveKit Client SDK, or on the server side using a LiveKit Server SDK (or directly using the HTTP server API). Consider the architecture of an OpenVidu application:
 
 <figure markdown style="max-width: 500px">
-  ![OpenVidu app architecture](../../assets/images/getting-started/openvidu-app-achitecture.drawio.svg)
+  ![OpenVidu app architecture](../../assets/images/getting-started/openvidu-app-architecture.drawio.svg)
 </figure>
 
 You can use this page as a cheat sheet to know at a glance how to do something, and you have links to the LiveKit reference documentation of each operation for a more detailed explanation.

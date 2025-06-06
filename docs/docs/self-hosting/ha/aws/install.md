@@ -3,20 +3,18 @@ title: OpenVidu High Availability installation on AWS
 description: Learn how to deploy OpenVidu High Availability on AWS using CloudFormation
 ---
 
-# <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> OpenVidu High Availability installation: AWS
+# OpenVidu High Availability installation: AWS
 
 !!! info
     
-    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability installation](../on-premises/install-nlb.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
-<div class="center-align" markdown>
-[Deploy OpenVidu High Availability in :fontawesome-brands-aws:{style="font-size:32px; margin-left: 7px"}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduHA&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu-ha.yaml){.md-button .deploy-button target="_blank"}
-</div>
+[:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduHA&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu-ha.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
 ...or access your [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target=_blank} and manually set this S3 URL in the `Specify template` section:
 
@@ -85,15 +83,13 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
 === "OpenVidu HA Configuration"
 
-    The parameters in this section might appear as follows:
+    Parameters of this section look like this:
 
     ![OpenVidu HA Configuration](../../../../assets/images/self-hosting/ha/aws/openvidu-ha-config.png)
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target="_blank"}.
 
-    For the **RTCEngine** parameter, you can choose between **Pion** (the engine used by LiveKit) and **Mediasoup** (experimental).
-
-    --8<-- "shared/self-hosting/mediasoup-warning.md"
+    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../../production-ready/performance/).
 
 ### EC2 Instance Configuration
 
@@ -101,7 +97,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
 === "EC2 Instance configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![EC2 Instance configuration](../../../../assets/images/self-hosting/ha/aws/ec2-instance-config.png)
 
@@ -115,7 +111,7 @@ The number of Media Nodes can scale up or down based on the system load. You can
 
 === "Media Nodes Autoscaling Group Configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![Media Nodes Autoscaling Group Configuration](../../../../assets/images/self-hosting/ha/aws/media-nodes-asg-config.png)
 
@@ -129,7 +125,7 @@ You can specify two S3 buckets to store the application data, cluster data, and 
 
 === "S3 bucket for application data and recordings"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![S3 bucket for application data and recordings](../../../../assets/images/self-hosting/ha/aws/aws-s3-bucket.png)
 
@@ -141,7 +137,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
 === "VPC Configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![VPC Configuration](../../../../assets/images/self-hosting/ha/aws/vpc-config.png)
 
@@ -162,7 +158,7 @@ This section is optional. It is useful when your users are behind a restrictive 
 
 === "TURN server configuration with TLS"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![TURN server configuration with TLS](../../../../assets/images/self-hosting/ha/aws/turn-config.png)
 
@@ -176,13 +172,13 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
 === "Volumes Configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![Volumes Configuration](../../../../assets/images/self-hosting/ha/aws/volumes-config.png)
 
     The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
-## Deploying the Stack
+## Deploying the stack
 
 When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.
 
@@ -192,7 +188,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
     ![CloudFormation Outputs](../../../../assets/images/self-hosting/ha/aws/outputs.png)
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
 The Output Key **ServicesAndCredentials** of the [previous section](#deploying-the-stack) points to an AWS Secret Manager secret that contains all URLs and credentials to access the services deployed. You can access the secret by clicking on the link in the **Output Value** column.
 

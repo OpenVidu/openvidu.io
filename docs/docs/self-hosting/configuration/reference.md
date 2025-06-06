@@ -59,7 +59,7 @@ This file defines the configuration parameters for the OpenVidu Call application
 
 !!! info
     
-    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2**](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target=_blank}, adding prefix `V2COMPAT_` to the parameter name.

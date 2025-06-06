@@ -1,22 +1,20 @@
 ---
 title: OpenVidu Single Node installation on Azure
-description: Learn how to deploy OpenVidu Single Node on Azure using Template specs of Azure Resource Manager
+description: Learn how to deploy OpenVidu Single Node PRO on Azure using Template specs of Azure Resource Manager
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Azure
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Azure
 
 !!! warning
 
     Azure deployments are considered in Beta in version 3.2.0 of OpenVidu.
 
---8<-- "shared/self-hosting/single-node/v2compat-warning.md"
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in Azure. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with Template Spec of ARM.
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in Azure. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
-
-To import the template into Azure you just need to click the button below (you will be redirected to Azure).
+To use the Azure template you just need to click the button below (you will be redirected to Azure).
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.2.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.2.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.2.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.2.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
 === "Architecture overview"
@@ -35,6 +33,21 @@ To deploy the template you need to fill the following parameters.
 --8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
+
+
+### OpenVidu Single Node PRO configuration
+
+In this section, you need to specify some properties needed for the OpenVidu Single Node PRO deployment.
+
+=== "OpenVidu Single Node PRO Configuration"
+
+    Parameters of this section look like this:
+
+    ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/single-node/azure/single-node-pro-config.png)
+
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
+
+    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../../production-ready/performance/).
 
 ### Azure Instance Configuration
 

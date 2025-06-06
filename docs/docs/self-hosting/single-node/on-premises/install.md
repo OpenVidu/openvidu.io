@@ -3,11 +3,11 @@ title: OpenVidu Single Node installation on-premises
 description: Learn how to deploy OpenVidu Single Node on-premises
 ---
 
-# <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> OpenVidu Single Node installation: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: On-premises
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .5em">COMMUNITY</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
 
 === "Architecture overview"
 
@@ -111,7 +111,7 @@ If everything goes well, all containers will be up and running without restarts,
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
 To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/config/openvidu.env`. All access credentials of almost all services are defined in this file.
 

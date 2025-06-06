@@ -12,10 +12,10 @@ In addition to these, an AWS deployment provides the capability to manage global
         <figure markdown>
         ![Retrieve Secret Value](../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
         </figure>
-    5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu Single Node deployment.
+    5. Modify the parameter you want to change and click on _"Save"_.
     6. Go to the EC2 Console and click on _"Reboot instance"_ to apply the changes to the Master Node.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/single-node/aws/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
-    The changes will be applied automatically.
+    Changes will be applied automatically.
