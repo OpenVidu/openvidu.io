@@ -10,6 +10,11 @@
   line-height: 1.8em;
   font-family: var(--md-text-font-family);
   font-feature-settings: "kern", "liga";
+  vertical-align: text-bottom;
+}
+
+#pricing-table .openvidu-tag {
+  vertical-align: top;
 }
 
 .openvidu-community-tag {
@@ -18,6 +23,21 @@
 
 .openvidu-pro-tag {
   background-color: rgb(0 136 170 / 80%);
+}
+
+.openvidu-tag-nav {
+  pointer-events: none;
+  display: inline-block;
+  margin: 0 3px 0 3px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 5px;
+  border-radius: 3px;
+  font-size: 0.6em;
+  line-height: 1.9em;
+  font-family: var(--md-text-font-family);
+  font-feature-settings: "kern", "liga";
+  vertical-align: text-bottom;
 }
 
 span:has(> .openvidu-tag) {
@@ -199,8 +219,7 @@ img.svg-img {
   max-width: none;
   margin: 0;
   min-height: calc(100vh - 4.8rem);
-  padding: 3em;
-  padding-bottom: 5em;
+  padding: 3em 15em 5em 15em;
   background: var(--top-home-section-color);
   display: flex;
   flex-direction: column;
@@ -301,6 +320,7 @@ img.svg-img {
 @media (max-width: 1219px) {
   .top-home-section {
     min-height: calc(100vh - 2.4rem);
+    padding: 3em 3em 5em 3em;
   }
 }
 
@@ -521,7 +541,7 @@ a#account-btn .user-name {
 #pricing-table td {
   text-align: center;
   vertical-align: middle;
-  width: 29%;
+  width: 22%;
   font-size: 0.7rem;
 }
 
@@ -663,4 +683,33 @@ div[data-md-component="outdated"] aside {
   justify-content: center;
   max-width: fit-content;
   margin: auto;
+}
+
+@import url('https://fonts.cdnfonts.com/css/amazon-ember');
+
+.deploy-button.deploy-to-aws-btn {
+  background-color: #FF9900;
+  border: none;
+  border-radius: 5px;
+  color: #252F3E !important;
+  padding: 8px 24px;
+  font-size: 1.2em;
+  font-family: 'Amazon Ember', sans-serif;
+  transition: all .125s ease;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.deploy-button.deploy-to-aws-btn:hover {
+  background-color: #FF9900 !important;
+  filter: saturate(50%) brightness(130%);
+}
+
+.deploy-to-azure-btn img {
+  min-width: 250px;
+  transition: all .125s ease;
+}
+
+.deploy-to-azure-btn img:hover {
+  filter: saturate(50%) brightness(130%);
 }

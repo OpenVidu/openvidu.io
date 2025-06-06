@@ -7,7 +7,7 @@ description: Learn how to deploy OpenVidu Elastic on-premises with Network Load 
 
 !!! info
 
-    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
@@ -151,10 +151,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **(Optional) TURN domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the Load Balancer you will use and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (The engine used by Livekit)** or **Mediasoup (Experimental)**.
-
-    --8<-- "shared/self-hosting/mediasoup-warning.md"
-
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../../production-ready/performance/).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
     - _Default App_: OpenVidu Call, a ready-to-use videoconferencing application.
@@ -408,9 +405,9 @@ Below is an example using NGINX as a Load Balancer:
     - Notice that `openvidu.example.com` is the domain name you have chosen for your OpenVidu deployment and `turn.example.com` is the domain name you have chosen for your TURN with TLS. Both domains should be configured in your DNS to point to the Load Balancer. Also, the `openvidu-cert.pem`, `openvidu-key.pem`, `turn-cert.pem`, and `turn-key.pem` must be valid SSL certificates for your domains.
     - Replace `<MASTER_NODE_IP_X>` with the private IP addresses of your Master Nodes and `<MEDIA_NODE_IP_X>` with the private IP addresses of your Media Nodes.
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env` of any Master Node. All access credentials of all services are defined in this file.
+To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/config/cluster/.env` of any Master Node. All access credentials of all services are defined in this file.
 
 Your authentication credentials and URL to point your applications would be:
 

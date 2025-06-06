@@ -6,7 +6,7 @@ By default, OpenVidu is deployed with an internal [Caddy server](https://caddyse
 - A specific proxy server is required for enhanced security.
 - You need to integrate a proxy server already in your infrastructure.
 
-If none of these scenarios apply to you and you prefer to use the default internal Caddy server, please refer to the [official installation guides](../deployment-types.md){:target="_blank"}.
+If none of these scenarios apply to you and you prefer to use the default internal Caddy server, please refer to the [official installation guides](../deployment-types.md).
 
 For those needing to deploy OpenVidu using an external proxy, this guide offers detailed steps to deploy it and configure the external proxy.
 
@@ -17,7 +17,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Single Node"
 
     !!! note
-        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node Deployment](../single-node/on-premises/install.md){:target="_blank"}, but with some modifications to the installation command and port rules. We recommend you to read the [Single Node Deployment](../single-node/on-premises/install.md){:target="_blank"} guide before proceeding with this guide to have a better understanding of the deployment.
+        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 10px">COMMUNITY</span> Deployment](../single-node/on-premises/install.md) and the [Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span> Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend you to read the installation guides before proceeding with this guide to have a better understanding of the deployment.
 
     This is how the architecture of the deployment looks like:
 
@@ -32,7 +32,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
 
     - **A machine with at least 4GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**. This machine will serve as the OpenVidu server.
-    - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as OpenVidu, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../single-node/on-premises/install.md#port-rules){:target="_blank"}, except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
+    - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as OpenVidu, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../single-node/on-premises/install.md#port-rules), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
     - **Generous disk space (100GB recommended)** if you are going to record your sessions.
     - The machine where OpenVidu is installed **must have a Public IP or a reachable IP from the users**.
     - The proxy server also **must have a Public IP or a reachable IP from the users**.
@@ -41,7 +41,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **2. Port Rules**
 
-    You can follow the same rule ports of the [Single Node Deployment](../single-node/on-premises/install.md#port-rules){:target="_blank"} but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
+    You can follow the same rule ports of the [Single Node Deployment](../single-node/on-premises/install.md#port-rules) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
 
     === "OpenVidu Machine"
 
@@ -77,30 +77,61 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     To deploy OpenVidu with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu with an external proxy is as follows:
 
-    ```bash
-    sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
-        --no-tty --install \
-        --domain-name='openvidu.example.io' \
-        --turn-domain-name='turn.example.io' \
-        --enabled-modules='observability,app' \
-        --livekit-api-key='xxxxx' \
-        --livekit-api-secret='xxxxx' \
-        --dashboard-admin-user='xxxxx' \
-        --dashboard-admin-password='xxxxx' \
-        --redis-password='xxxxx' \
-        --minio-access-key='xxxxx' \
-        --minio-secret-key='xxxxx' \
-        --mongo-admin-user='xxxxx' \
-        --mongo-admin-password='xxxxx' \
-        --mongo-replica-set-key='xxxxx' \
-        --grafana-admin-user='xxxxx' \
-        --grafana-admin-password='xxxxx' \
-        --default-app-user='xxxxx' \
-        --default-app-password='xxxxx' \
-        --default-app-admin-user='xxxxx' \
-        --default-app-admin-password='xxxxx' \
-        --external-proxy
-    ```
+    === "Single Node <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+
+        ```bash
+        sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            --no-tty --install \
+            --domain-name='openvidu.example.io' \
+            --turn-domain-name='turn.example.io' \
+            --enabled-modules='observability,app' \
+            --livekit-api-key='xxxxx' \
+            --livekit-api-secret='xxxxx' \
+            --dashboard-admin-user='xxxxx' \
+            --dashboard-admin-password='xxxxx' \
+            --redis-password='xxxxx' \
+            --minio-access-key='xxxxx' \
+            --minio-secret-key='xxxxx' \
+            --mongo-admin-user='xxxxx' \
+            --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
+            --grafana-admin-user='xxxxx' \
+            --grafana-admin-password='xxxxx' \
+            --default-app-user='xxxxx' \
+            --default-app-password='xxxxx' \
+            --default-app-admin-user='xxxxx' \
+            --default-app-admin-password='xxxxx' \
+            --external-proxy
+        ```
+
+    === "Single Node <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+
+        ```bash
+        sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            --no-tty --install \
+            --openvidu-pro-license='xxxxx' \
+            --domain-name='openvidu.example.io' \
+            --turn-domain-name='turn.example.io' \
+            --enabled-modules='observability,app,v2compatibility' \
+            --rtc-engine='pion' \
+            --livekit-api-key='xxxxx' \
+            --livekit-api-secret='xxxxx' \
+            --dashboard-admin-user='xxxxx' \
+            --dashboard-admin-password='xxxxx' \
+            --redis-password='xxxxx' \
+            --minio-access-key='xxxxx' \
+            --minio-secret-key='xxxxx' \
+            --mongo-admin-user='xxxxx' \
+            --mongo-admin-password='xxxxx' \
+            --mongo-replica-set-key='xxxxx' \
+            --grafana-admin-user='xxxxx' \
+            --grafana-admin-password='xxxxx' \
+            --default-app-user='xxxxx' \
+            --default-app-password='xxxxx' \
+            --default-app-admin-user='xxxxx' \
+            --default-app-admin-password='xxxxx' \
+            --external-proxy
+        ```
 
     --8<-- "shared/self-hosting/install-version.md"
 
@@ -108,6 +139,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     - Replace `openvidu.example.io` with your FQDN.
     - The `turn-domain-name` parameter is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.If you don't have a TURN server, you can remove it from the command. If you want to use TURN with TLS, replace `turn.example.io` with your TURN server FQDN.
+    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](/account/){:target="_blank"}.
+    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     **4. Configure the external proxy**
 
@@ -128,7 +161,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Elastic"
 
     !!! note
-        The Elastic deployment with an external proxy is based on the same instructions as the [Elastic Deployment](../elastic/on-premises/install.md){:target="_blank"}, but with some modifications to the installation command and port rules. We recommend you to read the [Elastic Deployment](../elastic/on-premises/install.md){:target="_blank"} guide before proceeding with this guide to have a better understanding of the deployment.
+        The Elastic deployment with an external proxy is based on the same instructions as the [Elastic Deployment](../elastic/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend you to read the [Elastic Deployment](../elastic/on-premises/install.md) guide before proceeding with this guide to have a better understanding of the deployment.
 
     This is how the architecture of the deployment looks like:
 
@@ -142,7 +175,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     To deploy OpenVidu Elastic with an external proxy, ensure you have the following prerequisites:
 
     - **At least 2 machines** for OpenVidu, each with a minimum of **4GB RAM**, **4 CPU cores**, and **Linux** installed (Ubuntu is recommended). One machine will serve as the Master Node, while the others will function as Media Nodes.
-    - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../elastic/on-premises/install.md#port-rules-master-node){:target="_blank"}, except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
+    - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../elastic/on-premises/install.md#port-rules-master-node), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
     - Significant disk space on the **Master Node, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
     - **Each machine must have a Public IP or a reachable IP from the users**.
     - **The proxy server must have a Public IP or a reachable IP from the users**.
@@ -283,4 +316,28 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
 === "High Availability"
 
-    The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained  [in this section](../ha/on-premises/install-nlb.md){:target="_blank"}.
+    The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained  [in this section](../ha/on-premises/install-nlb.md).
+
+# Can I force all traffic including WebRTC to go through the external proxy?
+
+Yes, but you need to use a domain name for TURN (`--turn-domain-name` parameter) and ensure that the following ports are explicitly closed in OpenVidu:
+
+**Single Node closed Ports**
+
+**Node**|**Port**|**Protocol**
+---|---|---
+OpenVidu Server|443|UDP
+OpenVidu Server|50000-60000|UDP
+
+**Elastic and High Availability closed Ports**
+
+**Node**|**Port**|**Protocol**
+---|---|---
+Media Node|443|UDP
+Media Node|50000-60000|UDP
+
+This configuration will force traffic to use TURN, so all traffic will go through the external proxy using the TURN domain name configured in the installation process. But you need to understand some considerations:
+
+- Media over UDP using WebRTC does not mean that the media is not encrypted. WebRTC encrypts the media using SRTP and DTLS. WebRTC is designed to be encrypted by default.
+
+- Media going through 443 with TLS has a penalty in the media quality and CPU usage. This is because of the TLS roundtrip, TCP being used and media processed twice by the TURN server and the Media Server. This can lead to a worse user experience and higher CPU usage in the Media Server. We recommend using this configuration only if it is strictly necessary.

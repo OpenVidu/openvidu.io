@@ -2,6 +2,56 @@
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
 ---
 
+## 3.2.0
+
+### Changelog
+
+- **OpenVidu Single Node PRO**: OpenVidu Single Node PRO is a new type of OpenVidu deployment targeting users that want to deploy OpenVidu as a single-node setup but that still want the [2x performance boost](self-hosting/production-ready/performance.md) and the [advanced observability](self-hosting/production-ready/observability/index.md) provided by multi-node OpenVidu PRO deployments.
+- **Azure deployments (Beta)**: OpenVidu now supports native deployments in Microsoft Azure. You can now deploy [OpenVidu Single Node COMMUNITY](self-hosting/single-node/azure/install.md), [OpenVidu Single Node PRO](self-hosting/single-node-pro/azure/install.md), [OpenVidu Elastic](self-hosting/elastic/azure/install.md) and [OpenVidu High Availability](self-hosting/ha/azure/install.md) in Azure using ARM templates. _During version 3.2.0, Azure deployments will be considered in Beta_.
+- **New Azure recording tutorials**: OpenVidu deployments in Azure use Azure Blob Storage to store recordings (instead of S3). For this reason, we have extended our recording tutorials with Azure Blob Storage compatible examples. You can find them in the following links:
+    - [Recording Basic Azure](tutorials/advanced-features/recording-basic-azure.md).
+    - [Recording Advanced Azure](tutorials/advanced-features/recording-advanced-azure.md).
+
+- **External proxy configuration**: By default, OpenVidu is deployed with an internal [Caddy server](https://caddyserver.com/) to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
+    - You wish to manage SSL certificates manually.
+    - A specific proxy server is required for enhanced security.
+    - You need to integrate a proxy server already in your infrastructure.
+
+    For any of these cases, now all OpenVidu deployments allow configuring external proxies. You can find the instructions to do so in [this how-to guide](self-hosting/how-to-guides/deploy-with-external-proxy.md).
+
+- **LiveKit stack updated to v1.8.4**: OpenVidu 3.2.0 is now based on LiveKit v1.8.4, which includes several improvements and bug fixes. You can find the [release notes here](https://github.com/livekit/livekit/releases/tag/v1.8.4).
+- **OpenVidu installer improvements**: Some users have reported issues when installing OpenVidu, which were finally caused by old versions of Docker and/or Docker Compose. The OpenVidu installer now checks both versions and displays a descriptive error message if they are incompatible.
+- **OpenVidu Angular Components**: see [Angular Components documentation](ui-components/angular-components.md).
+    - Virtual Backgrounds improvements: More efficient use of resources by reusing the existing context. Avoid video flickering when changing the background. Improved resource reallocation management for smoother rendering. Contribution to LiveKit’s track-processors-js package ([PR 86](https://github.com/livekit/track-processors-js/pull/86)) resolving an issue affecting its dependencies.
+    - Fixed panel reopening issue with [`ovAdditionalPanels`](reference-docs/openvidu-components-angular/directives/AdditionalPanelsDirective.html) directive. Custom panels created with `ovAdditionalPanels` would not reopen correctly after switching between default panels (activities, participants or chat). Now, returning to a custom panel restores it as expected without closing all panels.
+    - Minor style fixes.
+
+- **Deployment bug fixes**:
+    - OpenVidu On Premises deployments that made use of [v2compatibility module](https://docs.openvidu.io/en/stable/openvidu3/#updating-from-openvidu-v2-to-openvidu-v3){:target="\_blank"} had a wrong configuration affecting the S3 MinIO bucket. This could cause issues when recording sessions from your OpenVidu v2 application. This is now fixed.
+    - Wrong Caddy configuration in OpenVidu High Availability deployments made some services not reachable in specific scenarios of fault tolerance. This is now fixed.
+ 
+### Breaking changes
+
+- For OpenVidu On Premises deployments, the default S3 bucket in MinIO has been renamed from `app-data` to `openvidu-appdata` (in Single Node and Elastic deployments) and from `cluster-data` to `openvidu-clusterdata` (in High Availability deployments).
+- Port rules in [OpenVidu High Availability with Network Load Balancer](self-hosting/ha/on-premises/install-nlb.md) have changed. Check the port rules from the installation instructions.
+
+### Version table
+
+| Artifact               | Version | Info | Link         |
+| ---------------------- | ------- | ---- | ---------- |
+| livekit/livekit-server | v1.8.4  | :material-information-outline:{ title="Version of livekit-server in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/livekit/livekit/releases/tag/v1.8.4){:target="\_blank"} |
+| mediasoup              | 3.12.16 | :material-information-outline:{ title="Version of mediasoup in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/versatica/mediasoup/releases/tag/3.12.16){:target="\_blank"} |
+| livekit/egress         | v1.9.1  | :material-information-outline:{ title="Egress version used by OpenVidu deployments. Used to export media from a Room (for example, recordings or RTMP broadcasting)" } | [:octicons-link-24:](https://github.com/livekit/egress/releases/tag/v1.9.1){:target="\_blank"} |
+| livekit/ingress        | v1.4.3  | :material-information-outline:{ title="Ingress version used by OpenVidu deployments. Used to import media into a Room (for example, an MP4 video or an RTSP stream)" } | [:octicons-link-24:](https://github.com/livekit/ingress/releases/tag/v1.4.3){:target="\_blank"} |
+| MinIO | 2025.5.24 | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/minio/minio/releases/tag/RELEASE.2025-05-24T17-08-30Z){:target="\_blank"} |
+| Caddy | 2.10.0 | :material-information-outline:{ title="Version of Caddy used by OpenVidu deployments. It is a reverse proxy used as a loadbalancer to distribute client connections across your nodes and automatically manage your TLS certificate" } |  [:octicons-link-24:](https://github.com/caddyserver/caddy/releases/tag/v2.10.0){:target="\_blank"}|
+| MongoDB | 8.0.9 | :material-information-outline:{ title="Version of MongoDB used by OpenVidu deployments. Used to store analytics and monitoring persistent data. In <i>OpenVidu High Availability</i> this is an instance of a <i>MongoDB Replica Set</i>" } | [:octicons-link-24:](https://www.mongodb.com/docs/manual/release-notes/8.0/#8.0.9---may-1--2025){:target="\_blank"} |
+| Redis | 7.4.4 | :material-information-outline:{ title="Version of Redis used by OpenVidu deployments. Used to share transient information between Media Nodes and coordinate them. In <i>OpenVidu High Availability</i> this is an instance of a <i>Redis Cluster</i>" } | [:octicons-link-24:](https://github.com/redis/redis/releases/tag/7.4.4){:target="\_blank"} |
+| Grafana | 11.6.2 | :material-information-outline:{ title="Version of Grafana used by OpenVidu deployments. Observability module used to query and visualize logs and metrics in dashboards" } | [:octicons-link-24:](https://github.com/grafana/grafana/releases/tag/v11.6.2){:target="\_blank"} |
+| Prometheus | 3.4.0 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Observability module from Grafana stack, used to collect metrics from Media Nodes and send them to Mimir" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.4.0){:target="\_blank"} |
+| Promtail / Loki | 3.5.1 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.1){:target="\_blank"} |
+| Mimir | 2.16.0 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-2.16.0){:target="\_blank"} |
+
 ## 3.1.0
 
 ### Changelog

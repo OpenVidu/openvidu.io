@@ -87,8 +87,8 @@ Usually the value `false` is compatible with all S3 providers, but some provider
 
 On any problem, check these sections:
 
-- [Config Troubleshooting](../configuration/changing-config.md#troubleshooting-configuration){:target="_blank"}
+- [Config Troubleshooting](../configuration/changing-config.md#troubleshooting-configuration)
 - Status and Checking Logs sections of Administration sections of each deployment type:
-    - [Single Node](../single-node/on-premises/admin.md#checking-the-status-of-services){:target="_blank"}
-    - [Elastic](../elastic/on-premises/admin.md#checking-the-status-of-services){:target="_blank"}
-    - [High Availability](../ha/on-premises/admin.md#checking-the-status-of-services){:target="_blank"}
+    - [Single Node](../single-node/on-premises/admin.md#checking-the-status-of-services)
+    - [Elastic](../elastic/on-premises/admin.md#checking-the-status-of-services)
+    - [High Availability](../ha/on-premises/admin.md#checking-the-status-of-services)

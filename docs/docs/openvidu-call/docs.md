@@ -97,7 +97,7 @@ The OpenVidu Call architecture is divided into two main components:
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
 <figure markdown>
-  ![OpenVidu Call Architecture](../../assets/images/openvidu-call/openvidu-call-achitecture.png){ loading=lazy .svg-img .mkdocs-img}
+  ![OpenVidu Call Architecture](../../assets/images/openvidu-call/openvidu-call-architecture.png){ loading=lazy .svg-img .mkdocs-img}
   <figcaption>OpenVidu Call Architecture</figcaption>
 </figure>
 

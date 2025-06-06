@@ -1,7 +1,6 @@
 ### Domain and SSL Certificate Configuration
 
-These are the three possible scenarios you may have to configure in this section:
-
+There are three possible scenarios for this section:
 
 === "Let's Encrypt Certificate (recommended)"
 

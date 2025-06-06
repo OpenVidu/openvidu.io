@@ -3,7 +3,7 @@ title: OpenVidu High Availability administration on AWS
 description: Learn how to perform administrative tasks on an AWS OpenVidu High Availability deployment
 ---
 
-# OpenVidu High Availability Administration: AWS
+# OpenVidu High Availability administration: AWS
 
 The deployment of OpenVidu High Availability on AWS is automated using AWS CloudFormation, with 4 EC2 Instances as Master Nodes and any number of Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. The Auto Scaling Group of Media Nodes is configured to scale based on the target average CPU utilization.
 
@@ -160,7 +160,6 @@ It is possible to change the instance type of both the Master Node and the Media
 
 To configure the Auto Scaling settings for the Media Nodes, follow the steps outlined below. This configuration allows you to set the parameters that control how the Auto Scaling Group will scale based on the target average CPU utilization.
 
-
 === "Media Nodes Autoscaling Configuration"
 
     1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
@@ -211,7 +210,7 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
         ![Instance Management](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-instance-management-media-start.png){ .svg-img .dark-img }
         </figure>
 
-## Administration and Configuration
+## Administration and configuration
 
 For administration, you can follow the instructions from the [On Premises High Availability Administration](../on-premises/admin.md) section.
 
@@ -231,10 +230,10 @@ In addition to these, an AWS deployment provides the capability to manage global
         <figure markdown>
         ![Retrieve Secret Value](../../../../assets/images/self-hosting/ha/aws/1-secrets-retrieve.png){ .svg-img .dark-img }
         </figure>
-    5. Modify the parameter you want to change and click on _"Save"_. The changes will be applied to the OpenVidu High Availability deployment.
+    5. Modify the parameter you want to change and click on _"Save"_.
     6. Go to the EC2 Console and click on _"Reboot instance"_ in the Master Node instance to apply the changes.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/ha/aws/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
-    The changes will be applied automatically in all the Nodes of the OpenVidu High Availability deployment.
+    Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.

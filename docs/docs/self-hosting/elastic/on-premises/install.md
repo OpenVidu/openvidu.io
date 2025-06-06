@@ -7,7 +7,7 @@ description: Learn how to deploy OpenVidu Elastic on-premises
 
 !!! info
     
-    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
+    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to the workload.
@@ -136,10 +136,7 @@ A wizard will guide you through the installation process. You will be asked for 
 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (The engine used by Livekit)** or **Mediasoup(Experimental)**.
-
-    --8<-- "shared/self-hosting/mediasoup-warning.md"
-
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../../production-ready/performance/).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
     - _Default App_: OpenVidu Call, a ready-to-use videoconferencing application.
@@ -220,9 +217,9 @@ OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 - OpenVidu Server PRO: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
 - LiveKit API: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"} and [wss://openvidu.example.io/](wss://openvidu.example.io/){:target="_blank"}
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/.env`. All access credentials for all services are defined in this file.
+To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/cofing/cluster/.env`. All access credentials for all services are defined in this file.
 
 Your authentication credentials and URL to point your applications would be:
 

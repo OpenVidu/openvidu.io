@@ -1,11 +1,11 @@
 
 ### (Optional) TURN server configuration with TLS
 
-This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic. This parameter will only works if you are using `letsencrypt` or `owncert` as the **CertificateType** parameter.
+This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic. This parameter will only work if you are using `letsencrypt` or `owncert` as the **CertificateType** parameter.
 
 === "TURN server configuration with TLS"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![TURN server configuration with TLS](../../../../assets/images/self-hosting/shared/aws-turn-tls.png)
 

@@ -3,7 +3,7 @@ title: Upgrade OpenVidu Single Node - AWS
 description: How to upgrade OpenVidu Single Node on premises deployments
 ---
 
-# Upgrade OpenVidu Single Node - AWS
+# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> - AWS
 
 In AWS, we recommend upgrading by redeploying the [OpenVidu Single Node CloudFormation](../aws/install.md) with the latest version.
 

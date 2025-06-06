@@ -21,40 +21,45 @@ hide:
   <tr>
     <th></th>
     <th class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
-    <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
+    <th colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
   </tr>
   <tr>
     <td class="first-column border-right">Price</td>
     <td class="border-right price-cell">Free</td>
-    <td colspan="2" class="border-right price-cell"><div><span style="font-weight: bold"><span style="font-family: system-ui; font-size: 1.3em">0.0006$</span> core/minute</span></div></td>
+    <td colspan="3" class="border-right price-cell"><div><span style="font-weight: bold"><span style="font-family: system-ui; font-size: 1.3em">0.0006$</span> core/minute</span></div></td>
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu Single Node</strong></a></td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu Elastic</strong></a></td>
-    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu High Availability</strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
+    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="no-break">High Availability</span></strong></a></td>
   </tr>
   <tr>
     <td class="first-column border-right">Suitability</td>
     <td class="border-right">For applications with medium user load</td>
+    <td class="border-right">Enjoy the benefits of OpenVidu PRO in a <span class="no-break">single-node</span> installation</td>
     <td class="border-right">For applications with dynamic user load that require scalability</td>
     <td>For applications where both scalability and fault tolerance are critical</td>
   </tr>
   <tr>
     <td class="first-column border-right">Features</td>
     <td class="border-right">Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability</td>
-    <td class="border-right">Same benefits as OpenVidu Single Node plus <strong style="white-space: nowrap">2x performance</strong>, <strong>scalability</strong> and <strong>advanced observability</strong></td>
-    <td>Same benefits as OpenVidu Single Node and OpenVidu Elastic plus <strong style="white-space: nowrap">fault tolerance</strong></td>
+    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong style="white-space: nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
+    <td class="border-right">Same benefits as OpenVidu Single Node PRO plus <strong>scalability</strong></td>
+    <td>Same benefits as OpenVidu Elastic plus <strong>fault tolerance</strong></td>
   </tr>
   <tr>
     <td class="first-column border-right">Number of servers</td>
+    <td class="border-right">1 Node</td>
     <td class="border-right">1 Node</td>
     <td class="border-right">1 Master Node +<br><span class="no-break">N Media Nodes</span></td>
     <td> 4 Master Nodes +<br><span class="no-break">N Media Nodes</span></td>
   </tr>
   <tr>
     <td class="first-column border-right">Installation instructions</td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node-pro">Install</a></td>
     <td class="border-right"><a class="md-button" href="../docs/self-hosting/elastic/">Install</a></td>
     <td><a class="md-button" href="../docs/self-hosting/ha/">Install</a></td>
   </tr>
@@ -67,7 +72,7 @@ OpenVidu Pro follows a simple pricing model based on the number of cores used by
 <div class="pricing-text" style="text-align: center; font-size: 1.5em">
 <div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
 per core per minute available<br>
-for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8em">PRO</span> cluster
+for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8em; vertical-align: middle">PRO</span> cluster
 </div>
 
 Taking into account the following points:

@@ -64,7 +64,7 @@ Using a SaaS provider is a great option for some use cases, but not all. **OpenV
 
 ## OpenVidu vs SFUs
 
-This includes projects such as [Kurento](https://kurento.openvidu.io/){target="\_blank"}, [mediasoup](https://mediasoup.org/){target="\_blank"}, [Pion](https://pion.ly/){target="\_blank"}, [Janus](https://janus.conf.meetecho.com/){target="\_blank"}, [Jitsi Videobridge](https://jitsi.org/jitsi-videobridge/){target="\_blank"} or [Medooze](https://github.com/medooze/media-server){target="\_blank"}.
+This includes projects such as [Kurento](https://doc-kurento.readthedocs.io/){target="\_blank"}, [mediasoup](https://mediasoup.org/){target="\_blank"}, [Pion](https://pion.ly/){target="\_blank"}, [Janus](https://janus.conf.meetecho.com/){target="\_blank"}, [Jitsi Videobridge](https://jitsi.org/jitsi-videobridge/){target="\_blank"} or [Medooze](https://github.com/medooze/sfu){target="\_blank"}.
 
 These are all media servers. More specifically, they fall under the umbrella of the so-called **SFUs** (Selective Forwarding Units): they are able to receive media streams from different clients and *selectively forward* them to other clients, usually without transcoding or mixing the media.
 

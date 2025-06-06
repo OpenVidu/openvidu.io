@@ -9,13 +9,20 @@ description: Reference for the configuration files used in all different OpenVid
 
 This file defines global configuration parameters used by other services. Such as the domain name, credentials, etc.
 
-| Parameter | Description |
+| <div style="width: 17em;">Parameter</div> | Description |
 | --------- | ----------- |
 | **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access. OpenVidu APIs and services. |
 | **`LIVEKIT_API_KEY`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
 | **`LIVEKIT_API_SECRET`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
 | **`MINIO_ACCESS_KEY`** | Access key for MinIO. |
 | **`MINIO_SECRET_KEY`** | Secret key for MinIO. |
+| **`EXTERNAL_S3_ENDPOINT`** | If defined, Minio will not be used and the deployment will use an external S3 service. This is the endpoint of the external S3 service. |
+| **`EXTERNAL_S3_ACCESS_KEY`** | Access key for the external S3 service if used. |
+| **`EXTERNAL_S3_SECRET_KEY`** | Secret key for the external S3 service if used. |
+| **`EXTERNAL_S3_REGION`** | Region of the external S3 service if used. |
+| **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | If `true`, use path-style access for the external S3 service if used. |
+| **`EXTERNAL_S3_BUCKET_APP_DATA`** | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
+| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | External S3 bucket used in High Availability to store Observability data. |
 | **`MONGO_ADMIN_USERNAME`** | MongoDB admin username. |
 | **`MONGO_ADMIN_PASSWORD`** | MongoDB admin password. |
 | **`DASHBOARD_ADMIN_USERNAME`** | Admin username for OpenVidu Dashboard |
@@ -52,10 +59,10 @@ This file defines the configuration parameters for the OpenVidu Call application
 
 !!! info
     
-    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This file defines the configuration parameters for the OpenVidu V2 Compatibility Server.
+This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2**](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target=_blank}, adding prefix `V2COMPAT_` to the parameter name.
 
 | Parameter | Description |
 | --------- | ----------- |
@@ -160,7 +167,7 @@ OpenVidu comes with other services configured to work in the deployment. These a
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
-| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config](https://github.com/livekit/livekit/blob/v1.7.2/config-sample.yaml)</li></ul>
+| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config](https://github.com/livekit/livekit/blob/v1.7.2/config-sample.yaml){:target=_blank}</li></ul>
 | **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config](https://github.com/livekit/ingress/blob/v1.4.2/README.md#config){:target=_blank} |
 | **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config](https://github.com/livekit/egress/blob/v1.8.4/README.md#config){:target=_blank} |
 | **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure](https://caddyserver.com/docs/json/){:target=_blank} |

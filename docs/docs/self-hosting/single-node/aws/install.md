@@ -3,17 +3,15 @@ title: OpenVidu Single Node installation on AWS
 description: Learn how to deploy OpenVidu Single Node on AWS using CloudFormation
 ---
 
-# OpenVidu Single Node Installation: AWS
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: AWS
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in AWS. Deployed services are the same as the [On Premises Single Node Installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment in AWS. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
-<div class="center-align" markdown>
-[Deploy OpenVidu Single Node in :fontawesome-brands-aws:{style="font-size:32px; margin-left: 7px"}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button target="_blank"}
-</div>
+[:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
 ...or access your [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target=_blank} and manually set this S3 URL in the `Specify template` section:
 
@@ -50,7 +48,7 @@ You need to specify some properties for the EC2 instance that will be created.
 
 === "EC2 Instance configuration"
 
-    The parameters in this section may look like this:
+    Parameters in this section look like this:
 
     ![EC2 Instance configuration](../../../../assets/images/self-hosting/single-node/aws/ec2-instance-config.png)
 
@@ -62,7 +60,7 @@ You need to specify some properties for the EC2 instance that will be created.
 
 --8<-- "shared/self-hosting/aws-turn-domain.md"
 
-## Deploying the Stack
+## Deploying the stack
 
 When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.
 
@@ -72,7 +70,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
     ![CloudFormation Outputs](../../../../assets/images/self-hosting/single-node/aws/outputs.png)
 
-## Configure your Application to use the Deployment
+## Configure your application to use the deployment
 
 The Output Key **ServicesAndCredentials** of the [previous section](#deploying-the-stack) points to an AWS Secret Manager secret that contains all URLs and credentials to access the services deployed. You can access the secret by clicking on the link in the **Output Value** column.
 
