@@ -88,8 +88,8 @@ It is possible to change the instance type of both the Master Node and the Media
 === "Media Nodes"
 
     !!! info
-        
-        This will restart the media nodes without the gracefully delete option, if you want to stop them gracefully check the [Shutdown the Cluster](#shutdown-the-cluster) tab
+
+        This will restart the media nodes without the graceful delete option, if you want to stop them gracefully check the [Shutdown the Cluster](#shutdown-the-cluster) tab
 
     1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu High Availability.
