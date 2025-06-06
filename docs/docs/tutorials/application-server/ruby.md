@@ -5,7 +5,7 @@ description: Learn how to build a minimal Ruby application server with Sinatra t
 
 # Ruby Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/application-server/ruby){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.2.0/application-server/ruby){ .md-button target=\_blank }
 
 This is a minimal server application built for Ruby with [Sinatra](https://sinatrarb.com/){:target="\_blank"} that allows:
 
@@ -23,7 +23,7 @@ It internally uses [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.1.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
 ```
 
 ### 3. Run the server application
@@ -43,7 +43,7 @@ The application is a simple Ruby app using the popular Sinatra web library. It h
 
 Let's see the code of the `app.rb` file:
 
-```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-server/ruby/app.rb#L1-L17' target='_blank'>app.rb</a>" linenums="1"
+```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/ruby/app.rb#L1-L17' target='_blank'>app.rb</a>" linenums="1"
 require 'sinatra'
 require 'sinatra/cors'
 require 'sinatra/json'
@@ -89,7 +89,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 -   `roomName`: the name of the Room where the user wants to connect.
 -   `participantName`: the name of the participant that wants to connect to the Room.
 
-```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-server/ruby/app.rb#L19-L34' target='_blank'>app.rb</a>" linenums="19"
+```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/ruby/app.rb#L19-L34' target='_blank'>app.rb</a>" linenums="19"
 post '/token' do
   body = JSON.parse(request.body.read)
   room_name = body['roomName']
@@ -128,7 +128,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
-```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/application-server/ruby/app.rb#L36-L47' target='_blank'>app.rb</a>" linenums="36"
+```ruby title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/ruby/app.rb#L36-L47' target='_blank'>app.rb</a>" linenums="36"
 post '/livekit/webhook' do
   auth_header = request.env['HTTP_AUTHORIZATION'] # (1)!
   token_verifier = LiveKit::TokenVerifier.new(api_key: LIVEKIT_API_KEY, api_secret: LIVEKIT_API_SECRET) # (2)!

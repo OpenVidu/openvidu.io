@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content miscellaneous-typealiases">
+               <div class="content directive">
                    <div class="content-data">
 
 
@@ -88,96 +88,94 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Miscellaneous</li>
-  <li class="breadcrumb-item">Type aliases</li>
+  <li class="breadcrumb-item">Directives</li>
+  <li class="breadcrumb-item" >ToolbarCameraButtonDirective</li>
 </ol>
 
-<section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <ul class="index-list">
-                        <li>
-                            <a href="#AdditionalTranslationsType" title="projects/openvidu-components-angular/src/lib/models/lang.model.ts" ><b>AdditionalTranslationsType</b>&nbsp;&nbsp;&nbsp;(projects/.../lang.model.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#AvailableLangs" title="projects/openvidu-components-angular/src/lib/models/lang.model.ts" ><b>AvailableLangs</b>&nbsp;&nbsp;&nbsp;(projects/.../lang.model.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#OpenViduLangs" title="projects/openvidu-components-angular/src/lib/models/lang.model.ts" ><b>OpenViduLangs</b>&nbsp;&nbsp;&nbsp;(projects/.../lang.model.ts)</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+</ul>
 
-    <h3>projects/openvidu-components-angular/src/lib/models/lang.model.ts</h3>
-    <section data-compodoc="block-typealias">
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="AdditionalTranslationsType"></a>
-                    <span class="name "><b>AdditionalTranslationsType</b><a href="#AdditionalTranslationsType"><span class="icon ion-ios-link"></span></a></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <code>        <code><a href="../miscellaneous/typealiases.html#AvailableLangs" target="_self" >Record&lt;AvailableLangs | Record&lt;string, any&gt;&gt;</a></code>
-</code>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="AvailableLangs"></a>
-                    <span class="name "><b>AvailableLangs</b><a href="#AvailableLangs"><span class="icon ion-ios-link"></span></a></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <code>        <code><a href="../miscellaneous/typealiases.html#OpenViduLangs" target="_self" >OpenViduLangs | string</a></code>
-</code>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="OpenViduLangs"></a>
-                    <span class="name "><b>OpenViduLangs</b><a href="#OpenViduLangs"><span class="icon ion-ios-link"></span></a></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <code>    <code>&quot;en&quot; | &quot;es&quot; | &quot;de&quot; | &quot;fr&quot; | &quot;cn&quot; | &quot;hi&quot; | &quot;it&quot; | &quot;ja&quot; | &quot;nl&quot; | &quot;pt&quot;</code>
-</code>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>projects/openvidu-components-angular/src/lib/directives/api/toolbar.directive.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The <strong>cameraButton</strong> directive allows show/hide the camera toolbar button.</p>
+<p>Default: <code>true</code></p>
+<p>It can be used in the parent element <a href="../components/VideoconferenceComponent.html">VideoconferenceComponent</a> specifying the name of the <code>toolbar</code> component:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-videoconference [toolbarCameraButton]=&quot;false&quot;&gt;&lt;/ov-videoconference&gt;</code></pre></div><p><br>And it also can be used in the <a href="../components/ToolbarComponent.html">ToolbarComponent</a>.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-toolbar [cameraButton]=&quot;false&quot;&gt;&lt;/ov-toolbar&gt;</code></pre></div>
+            </p>
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>AfterViewInit</code>
+                        <code>OnDestroy</code>
+            </p>
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+
+                    <tr>
+                        <td class="col-md-3">Selector</td>
+                        <td class="col-md-9"><code>ov-videoconference[toolbarCameraButton], ov-toolbar[cameraButton]</code></td>
+                    </tr>
+
+
+
+
+                </tbody>
+            </table>
+        </section>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                    </div><div class="search-results">
@@ -205,8 +203,8 @@
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
-            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToolbarCameraButtonDirective.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

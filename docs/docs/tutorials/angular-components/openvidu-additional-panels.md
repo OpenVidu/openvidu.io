@@ -5,7 +5,7 @@ description: Learn how to add a new extra panel besides the default ones using O
 
 # Additional panels using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.1.0/openvidu-components-angular/openvidu-additional-panels){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.2.0/openvidu-components-angular/openvidu-additional-panels){ .md-button target=\_blank }
 
 The **openvidu-additional-panels** tutorial demonstrates how to add new panels to the videoconference, providing a more tailored user experience.
 
@@ -27,8 +27,8 @@ This tutorial combines the use of the **ToolbarAdditionalPanelButtonsDirective**
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.1.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.1.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.2.0
 ```
 
 #### 3. Run a server application

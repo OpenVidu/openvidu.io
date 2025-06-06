@@ -188,7 +188,7 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Connects to the Room</p>
+                        <div class="io-description"><p>Connects local participant to the room</p>
 </div>
 
                         <div class="io-description">
@@ -214,7 +214,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>disconnectRoom()</code>
+                    <code>disconnectRoom(callback?: () => void, shouldHandleClientInitiatedDisconnectEvent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
@@ -223,13 +223,73 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Disconnects the room</p>
+                        <div class="io-description"><p>Disconnects from the current room.</p>
+<p>This method will check if there&#39;s an active connection to a room before attempting to disconnect.
+If the room is connected, it will perform the disconnection and call the optional callback function.</p>
 </div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>callback</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Optional function to be executed after a successful disconnection</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>shouldHandleClientInitiatedDisconnectEvent</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A Promise that resolves once the disconnection is complete</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -324,7 +384,7 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns if the room is connected or not</p>
+                        <div class="io-description"><p>Returns if local participant is connected to the room</p>
 </div>
 
                         <div class="io-description">
