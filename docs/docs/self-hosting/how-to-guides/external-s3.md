@@ -9,7 +9,7 @@ OpenVidu, by default, utilizes MinIO for recording storage, but it can be config
 
 !!! info
     
-    It is important to note that if you are deploying using AWS CloudFormation, the S3 bucket is configured automatically to use the AWS S3 service, and you do not need to follow this guide.
+    If you are deploying using AWS CloudFormation, the S3 bucket is configured automatically to use the AWS S3 service. **In this case there is no need to follow this guide**.
 
 ## Configuration
 
