@@ -59,13 +59,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApiDirectiveModule.html" data-type="entity-link" >ApiDirectiveModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
-                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' }>
+                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-f4c5c3ef5055ac1ecab1a814a75dcf3510b3084ebce069c3ce3d2ebddd7ec1e1429d4afc2725dd62b1ef52aa0b3a92d917a1d0957b4015a3a5815c83779dc3c4"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-f4c5c3ef5055ac1ecab1a814a75dcf3510b3084ebce069c3ce3d2ebddd7ec1e1429d4afc2725dd62b1ef52aa0b3a92d917a1d0957b4015a3a5815c83779dc3c4"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' :
-                                        'id="xs-directives-links-module-ApiDirectiveModule-3343a4365b6bbf0a38d234aa00b127e0c9f27c4d2602fcb4c10e8884d73db21dcdafe93f1747d1fef973e34f94efa15f4b8abda2b29256e0d9ca806497b07190"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-f4c5c3ef5055ac1ecab1a814a75dcf3510b3084ebce069c3ce3d2ebddd7ec1e1429d4afc2725dd62b1ef52aa0b3a92d917a1d0957b4015a3a5815c83779dc3c4"' :
+                                        'id="xs-directives-links-module-ApiDirectiveModule-f4c5c3ef5055ac1ecab1a814a75dcf3510b3084ebce069c3ce3d2ebddd7ec1e1429d4afc2725dd62b1ef52aa0b3a92d917a1d0957b4015a3a5815c83779dc3c4"' }>
                                         <li class="link">
                                             <a href="directives/ActivitiesPanelBroadcastingActivityDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelBroadcastingActivityDirective</a>
                                         </li>
@@ -109,6 +109,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <a href="directives/PrejoinDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >PrejoinDirective</a>
                                         </li>
                                         <li class="link">
+                                            <a href="directives/RecordingStreamBaseUrlDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >RecordingStreamBaseUrlDirective</a>
+                                        </li>
+                                        <li class="link">
                                             <a href="directives/StreamDisplayAudioDetectionDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >StreamDisplayAudioDetectionDirective</a>
                                         </li>
                                         <li class="link">
@@ -136,6 +139,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <a href="directives/ToolbarBroadcastingButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarBroadcastingButtonDirective</a>
                                         </li>
                                         <li class="link">
+                                            <a href="directives/ToolbarCameraButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarCameraButtonDirective</a>
+                                        </li>
+                                        <li class="link">
                                             <a href="directives/ToolbarChatPanelButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarChatPanelButtonDirective</a>
                                         </li>
                                         <li class="link">
@@ -149,6 +155,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         </li>
                                         <li class="link">
                                             <a href="directives/ToolbarLeaveButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarLeaveButtonDirective</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="directives/ToolbarMicrophoneButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarMicrophoneButtonDirective</a>
                                         </li>
                                         <li class="link">
                                             <a href="directives/ToolbarParticipantsPanelButtonDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ToolbarParticipantsPanelButtonDirective</a>

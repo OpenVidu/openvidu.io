@@ -5,7 +5,7 @@ description: Learn how to record a room and manage recordings by extending a sim
 
 # Basic Recording Tutorial Azure
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.1.0/advanced-features/openvidu-recording-basic-node-azure){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.2.0/advanced-features/openvidu-recording-basic-node-azure){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application, built upon [Node.js server](../application-server/node.md){:target="\_blank"} and [JavaScript client](../application-client/javascript.md){:target="\_blank"} tutorials, and extends them by adding recording capabilities:
 
@@ -24,7 +24,7 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.1.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
 ```
 
 ### 3. Run the application
@@ -93,7 +93,7 @@ The server application extends the [Node.js server tutorial](../application-serv
 
 Before we dive into the code of each endpoint, let's first see the changes introduced in the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L15-L26' target='_blank'>index.js</a>" linenums="15" hl_lines="5 6-7 15-18"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L15-L26' target='_blank'>index.js</a>" linenums="15" hl_lines="5 6-7 15-18"
 // Configuration
 const SERVER_PORT = process.env.SERVER_PORT || 6080;
 const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || "devkey";
@@ -126,7 +126,7 @@ Besides, the `index.js` file configures the server to serve static files from th
 
 It also initializes the `EgressClient`, which will help interacting with [Egress API](https://docs.livekit.io/home/egress/api/){:target="\_blank"} to manage recordings, and the `AzureBlobStorageService`, which will help interacting with the Blob Container:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L33-L38' target='_blank'>index.js</a>" linenums="33"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L33-L38' target='_blank'>index.js</a>" linenums="33"
 const egressClient = new EgressClient(
   LIVEKIT_URL,
   LIVEKIT_API_KEY,
@@ -137,7 +137,7 @@ const azureBlobService = new AzureBlobService();
 
 The `POST /token` endpoint has been modified to add the `roomRecord` permission to the access token, so that participants can start recording a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L45-L62' target='_blank'>index.js</a>" linenums="45" hl_lines="14"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L45-L62' target='_blank'>index.js</a>" linenums="45" hl_lines="14"
 app.post("/token", async (req, res) => {
   const roomName = req.body.roomName;
   const participantName = req.body.participantName;
@@ -166,7 +166,7 @@ Now let's explore the code for each recording feature:
 
 The `POST /recordings/start` endpoint starts the recording of a room. It receives the name of the room to record as parameter and returns the recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L79-L117' target='_blank'>index.js</a>" linenums="79"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L79-L117' target='_blank'>index.js</a>" linenums="79"
 app.post("/recordings/start", async (req, res) => {
   const { roomName } = req.body;
 
@@ -224,7 +224,7 @@ This endpoint does the following:
 1.  Obtains the `roomName` parameter from the request body. If it is not available, it returns a `400` error.
 2.  Check if there is already an active recording for the room. If there is, it returns a `409` error to prevent starting a new recording. To accomplish this, we use the `getActiveRecordingByRoom` function, which lists all active egresses for a specified room by calling the `listEgress` method of the `EgressClient` with the `roomName` and `active` parameters, and then returns the egress ID of the first active egress found:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L231-L240' target='_blank'>index.js</a>" linenums="231"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L231-L240' target='_blank'>index.js</a>" linenums="231"
     const getActiveRecordingByRoom = async (roomName) => {
       try {
         // List all active egresses for the room
@@ -249,7 +249,7 @@ This endpoint does the following:
 
 The `POST /recordings/stop` endpoint stops the recording of a room. It receives the room name of the room to stop recording as a parameter and returns the updated recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L120-L148' target='_blank'>index.js</a>" linenums="120"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L120-L148' target='_blank'>index.js</a>" linenums="120"
 app.post("/recordings/stop", async (req, res) => {
   const { roomName } = req.body;
 
@@ -298,7 +298,7 @@ This endpoint does the following:
 
 The `GET /recordings` endpoint lists all recordings stored in the Azure Container. This endpoint also allows filtering recordings by room name or room ID:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node/src/index.js#L152-L173' target='_blank'>index.js</a>" linenums="152"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node/src/index.js#L152-L173' target='_blank'>index.js</a>" linenums="152"
 app.get("/recordings", async (req, res) => {
   const roomId = req.query.roomId?.toString(); // (1)!
   try {
@@ -340,7 +340,7 @@ This endpoint does the following:
 
 The `GET /recordings/:recordingName` endpoint retrieves a specific portion of a recording from the Azure Container and returns it as a stream. The server sends the recording file in portions of `5 MB` each time the client requests a range of the recording file. This is done to prevent loading the entire recording file into memory and to allow the client to play the recording while it is being downloaded and seek to a specific time:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L173-L203' target='_blank'>index.js</a>" linenums="173"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L173-L203' target='_blank'>index.js</a>" linenums="173"
 app.get("/recordings/:recordingName", async (req, res) => {
   const { recordingName } = req.params;
   const { range } = req.headers;
@@ -391,7 +391,7 @@ This endpoint does the following:
 2.  Checks if the recording exists in the Azure Container by calling the `exists` method of the `AzureBlobService` with the `recordingName` as a parameter. If the recording does not exist, it returns a `404` error.
 3.  Gets the requested range of the recording file by calling the `getRecordingStream` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L242-L255' target='_blank'>index.js</a>" linenums="242"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L242-L255' target='_blank'>index.js</a>" linenums="242"
     const getRecordingStream = async (recordingName, range) => {
       const size = await azureBlobService.getObjectSize(recordingName);
 
@@ -436,7 +436,7 @@ This endpoint does the following:
 
 The `DELETE /recordings/:recordingName` endpoint deletes a recording from the Azure Container:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L206-L222' target='_blank'>index.js</a>" linenums="206"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L206-L222' target='_blank'>index.js</a>" linenums="206"
 app.delete("/recordings/:recordingName", async (req, res) => {
   const { recordingName } = req.params;
   const exists = await azureBlobService.exists(recordingName); // (1)!
@@ -471,7 +471,7 @@ This endpoint does the following:
 
 Finally, let's take a look at the `azure.blobstorage.service.js` file, which encapsulates the operations to interact with the Azure Container:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/src/azure.blobstorage.service.js' target='_blank'>azure.blobstorage.service.js</a>" linenums="6"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/src/azure.blobstorage.service.js' target='_blank'>azure.blobstorage.service.js</a>" linenums="6"
 // Azure configuration
 const AZURE_ACCOUNT_NAME = process.env.AZURE_ACCOUNT_NAME || "devstoreaccount"; // (1)!
 const AZURE_ACCOUNT_KEY =
@@ -601,7 +601,7 @@ In order to update the user interface of all participants in the room according 
 
     To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
 async function joinRoom() {
   // Disable 'Join' button
   document.getElementById("join-button").disabled = true;
@@ -676,7 +676,7 @@ The `updateRecordingInfo` function updates the recording information of the room
 
 This function retrieves all recordings available for the room from the backend and displays their relevant information by invoking the `showRecordingList` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L337-L370' target='_blank'>app.js</a>" linenums="337"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L337-L370' target='_blank'>app.js</a>" linenums="337"
 function showRecordingList(recordings) {
   const recordingsList = document.getElementById("recording-list");
 
@@ -723,7 +723,7 @@ The `showRecordingList` function creates a new `div` element for each recording 
 
 When the user clicks the play button, the `displayRecording` function is called to play the recording. This function opens a dialog window with an embedded video element and sets the source of the video to the [get recording endpoint](#get-recording) of the server application:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L372-L379' target='_blank'>app.js</a>" linenums="372"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L372-L379' target='_blank'>app.js</a>" linenums="372"
 function displayRecording(recordingName) {
   const recordingVideoDialog = document.getElementById(
     "recording-video-dialog"
@@ -734,7 +734,7 @@ function displayRecording(recordingName) {
 }
 ```
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.1.0/advanced-features/openvidu-recording-basic-node-azure/public/index.html#L94-L99' target='_blank'>index.html</a>" linenums="94"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/advanced-features/openvidu-recording-basic-node-azure/public/index.html#L94-L99' target='_blank'>index.html</a>" linenums="94"
 <dialog id="recording-video-dialog">
     <video id="recording-video" autoplay controls></video>
     <button class="btn btn-secondary" id="close-recording-video-dialog" onclick="closeRecording()">

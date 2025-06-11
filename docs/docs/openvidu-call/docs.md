@@ -40,7 +40,7 @@ Introducing **OpenVidu Call**, the premier videoconference application that show
 #### 2. Download OpenVidu Call code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-call.git -b 3.1.0
+git clone https://github.com/OpenVidu/openvidu-call.git -b 3.2.0
 ```
 
 #### 3. Run the OpenVidu Call backend
