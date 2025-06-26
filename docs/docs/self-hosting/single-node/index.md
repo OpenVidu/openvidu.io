@@ -23,3 +23,4 @@ If you want to upgrade your OpenVidu Single Node <span style="font-size: 12px;" 
 
 - [**On-premises: upgrade OpenVidu Single Node Community**](./on-premises/upgrade.md)
 - [**AWS: upgrade OpenVidu Single Node Community**](./aws/upgrade.md)
+- [**Azure: upgrade OpenVidu Single Node Community**](./azure/upgrade.md)
