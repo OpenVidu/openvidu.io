@@ -59,6 +59,7 @@ These are the configuration files for each kind of deployment:
         |-- prometheus.yaml
         |-- promtail.yaml
         |-- app.env
+        |-- agent-speech-processing.yaml
         `-- grafana/
     ```
 
@@ -92,7 +93,8 @@ These are the configuration files for each kind of deployment:
         |       |-- ingress.yaml
         |       |-- livekit.yaml
         |       |-- prometheus.yaml
-        |       `-- promtail.yaml
+        |       |-- promtail.yaml
+        |       `-- agent-speech-processing.yaml
         `-- node/
         `-- master_node.env
     ```
@@ -139,7 +141,8 @@ These are the configuration files for each kind of deployment:
         |       |-- ingress.yaml
         |       |-- livekit.yaml
         |       |-- prometheus.yaml
-        |       `-- promtail.yaml
+        |       |-- promtail.yaml
+        |       `-- agent-speech-processing.yaml
         `-- node/
         `-- master_node.env
     ```
