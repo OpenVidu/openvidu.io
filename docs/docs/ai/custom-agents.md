@@ -240,7 +240,7 @@ It can be very useful to access your agent's YAML configuration file from within
     console.log(config);
     ```
 
-## Limitations of custom agents vs OpenVidu agents
+## Custom agents vs OpenVidu agents
 
 Take into account that [OpenVidu agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents) have an advantage over a regular LiveKit agent when running in an multi-node OpenVidu deployment ([OpenVidu Elastic](../self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](../self-hosting/deployment-types.md#openvidu-high-availability)): OpenVidu agents are designed to **allow graceful shutdowns** when scaling down Media Nodes.
 
