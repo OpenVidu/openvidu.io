@@ -1,7 +1,7 @@
 1.  Download OpenVidu
 
     ```bash
-    git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.2.0
+    git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.3.0
     ```
 
 2.  Configure the local deployment
@@ -29,7 +29,7 @@
 
 3. Enable the Speech Processing agent
 
-    Modify file [`openvidu-local-deployment/community/agent-speech-processing.yaml`](https://github.com/OpenVidu/openvidu-local-deployment/blob/3.2.0/community/agent-speech-processing.yaml) to enable the Speech Processing agent. At least you need to set the following properties:
+    Modify file [`openvidu-local-deployment/community/agent-speech-processing.yaml`](https://github.com/OpenVidu/openvidu-local-deployment/blob/3.3.0/community/agent-speech-processing.yaml) to enable the Speech Processing agent. At least you need to set the following properties:
 
     ```yaml
     enabled: true

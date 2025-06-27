@@ -5,7 +5,7 @@ description: Learn how to build a simple video-call app using Ionic and Angular 
 
 # Ionic Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.2.0/application-client/openvidu-ionic){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-client/openvidu-ionic){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built with **Ionic**, using **Angular** and **Capacitor**, that allows:
 
@@ -25,7 +25,7 @@ It uses the [LiveKit JS SDK](https://docs.livekit.io/client-sdk-js){:target="\_b
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 ```
 
 ### 3. Run a server application
@@ -54,7 +54,7 @@ npm install livekit-client
 
 Now let's see the code of the `app.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/app.component.ts#L33-L123' target='_blank'>app.component.ts</a>" linenums="33"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/app.component.ts#L33-L123' target='_blank'>app.component.ts</a>" linenums="33"
 type TrackInfo = { // (1)!
     trackPublication: RemoteTrackPublication;
     participantIdentity: string;
@@ -192,7 +192,7 @@ If you leave them empty and app is launched in a mobile device, the user will be
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` method is called:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/app.component.ts#L131-L180' target='_blank'>app.component.ts</a>" linenums="131"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/app.component.ts#L131-L180' target='_blank'>app.component.ts</a>" linenums="131"
 async joinRoom() {
     // Initialize a new Room object
     const room = new Room();
@@ -276,7 +276,7 @@ The `joinRoom()` method performs the following actions:
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 
-    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/app.component.ts#L197-L215' target='_blank'>app.component.ts</a>" linenums="197"
+    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/app.component.ts#L197-L215' target='_blank'>app.component.ts</a>" linenums="197"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -309,7 +309,7 @@ The `joinRoom()` method performs the following actions:
 
 In order to display participants' video and audio tracks, the `app.component.html` file integrates the `VideoComponent` and `AudioComponent`.
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/app.component.html#L108-L125' target='_blank'>app.component.html</a>" linenums="108"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/app.component.html#L108-L125' target='_blank'>app.component.html</a>" linenums="108"
 <div id="layout-container">
     @if (localTrack()) {
     <video-component
@@ -343,7 +343,7 @@ This code snippet does the following:
 
 Let's see now the code of the `video.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/video/video.component.ts#L4-L27' target='_blank'>video.component.ts</a>" linenums="3"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/video/video.component.ts#L4-L27' target='_blank'>video.component.ts</a>" linenums="3"
 // (1)!
 @Component({
     selector: "video-component",
@@ -393,7 +393,7 @@ The `VideoComponent` does the following:
 
 Finally, let's see the code of the `audio.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/audio/audio.component.ts#L4-L25' target='_blank'>audio.component.ts</a>" linenums="3"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/audio/audio.component.ts#L4-L25' target='_blank'>audio.component.ts</a>" linenums="3"
 // (1)!
 @Component({
     selector: "audio-component",
@@ -433,7 +433,7 @@ The `AudioComponent` class is similar to the `VideoComponent` class, but it is u
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` method:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/src/app/app.component.ts#L182-L195' target='_blank'>app.component.ts</a>" linenums="182"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/src/app/app.component.ts#L182-L195' target='_blank'>app.component.ts</a>" linenums="182"
 async leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await this.room()?.disconnect(); // (1)!
@@ -471,7 +471,7 @@ In order to be able to test the application on an Android or iOS device, the app
 
     The application must include the following permissions in the `AndroidManifest.xml` file located in the `android/app/src/main` directory:
 
-    ```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/android/app/src/main/AndroidManifest.xml#L41-L43' target='_blank'>AndroidManifest.xml</a>" linenums="41"
+    ```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/android/app/src/main/AndroidManifest.xml#L41-L43' target='_blank'>AndroidManifest.xml</a>" linenums="41"
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -481,7 +481,7 @@ In order to be able to test the application on an Android or iOS device, the app
 
     The application must include the following permissions in the `Info.plist` file located in the `ios/App/App` directory:
 
-    ```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-ionic/ios/App/App/Info.plist#L48-L51' target='_blank'>Info.plist</a>" linenums="48"
+    ```xml title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-ionic/ios/App/App/Info.plist#L48-L51' target='_blank'>Info.plist</a>" linenums="48"
     <key>NSCameraUsageDescription</key>
     <string>This Application uses your camera to make video calls.</string>
     <key>NSMicrophoneUsageDescription</key>
