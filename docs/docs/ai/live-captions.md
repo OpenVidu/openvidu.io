@@ -34,30 +34,22 @@ live_captions:
 Live Captions are received in your frontend application using the [Text Stream API](https://docs.livekit.io/home/client/data/text-streams/#handling-incoming-streams){:target="\_blank"} of LiveKit client SDKs. You must specifically subscribe to the Room topic **`lk.transcription`** to automatically receive transcription events. For example, in JavaScript:
 
 ```javascript {#live-captions-js}
-room.registerTextStreamHandler(
-  "lk.transcription",
-  async (reader, participantInfo) => {
+room.registerTextStreamHandler("lk.transcription", async (reader, participantInfo) => {
     const message = await reader.readAll();
     const isFinal = reader.info.attributes["lk.transcription_final"] === "true";
-    const audioTrackId = reader.info.attributes["lk.transcribed_track_id"];
+    const trackId = reader.info.attributes["lk.transcribed_track_id"];
 
-    // Due to a bug in LiveKit Server the participantInfo object may be empty.
-    // You can still get the participant owning the audio track like below:
     let participant;
-    if (localParticipant.audioTrackPublications.has(audioTrackId)) {
+    if (localParticipant.audioTrackPublications.has(trackId)) {
       participant = room.localParticipant;
     } else {
-      participant = room.remoteParticipants.values().find(p => p.audioTrackPublications.has(audioTrackId));
+      participant = room.remoteParticipants.values().find(p => p.audioTrackPublications.has(trackId));
     }
 
     if (isFinal) {
-      console.log(
-        `Participant ${participantInfo.identity} and track ${trackId} said: ${message}`
-      );
+      console.log(`Participant ${participant.identity} and track ${trackId} said: ${message}`);
     } else {
-      console.log(
-        `Participant ${participantInfo.identity} and track ${trackId} is saying: ${message}`
-      );
+      console.log(`Participant ${participant.identity} and track ${trackId} is saying: ${message}`);
     }
   }
 );
