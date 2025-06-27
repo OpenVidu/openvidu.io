@@ -44,7 +44,7 @@ This application is designed to be beginner-friendly and consists of only three 
 -   `index.html`: This HTML file is responsible for creating the user interface. It contains the form to connect to a video call and the video call layout.
 -   `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
 
-To use the LiveKit JS SDK in your application, you need to include the library in your HTML file. You can do this by adding the following script tag to the `<head>` section of your HTML file:
+To use the LiveKit JS SDK in your application, you need to include the library in your HTML file. The tutorial does this by adding the following script tag to the `<head>` section of the HTML file:
 
 ```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-client/openvidu-js/src/index.html#L32' target='_blank'>index.html</a>" linenums="32"
 <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.5.9/dist/livekit-client.umd.js"></script>

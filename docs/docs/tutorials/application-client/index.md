@@ -30,6 +30,10 @@ Every application client below is interchangeable with the others, because:
 
 [:simple-vuedotjs:{.icon .lg-icon .tab-icon} **Vue**](./vue.md){ .md-button .md-button--primary .tutorial-link}
 
+</div>
+
+<div class="tutorials-container" markdown>
+
 [:simple-electron:{.icon .lg-icon .tab-icon} **Electron**](./electron.md){ .md-button .md-button--primary .tutorial-link}
 
 [:simple-ionic:{.icon .lg-icon .tab-icon} **Ionic**](./ionic.md){ .md-button .md-button--primary .tutorial-link}

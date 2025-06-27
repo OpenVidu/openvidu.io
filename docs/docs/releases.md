@@ -12,7 +12,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
     - [Recording Basic Azure](tutorials/advanced-features/recording-basic-azure.md).
     - [Recording Advanced Azure](tutorials/advanced-features/recording-advanced-azure.md).
 
-- **External proxy configuration**: By default, OpenVidu is deployed with an internal [Caddy server](https://caddyserver.com/) to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
+- **External proxy configuration**: By default, OpenVidu is deployed with an internal [Caddy server](https://caddyserver.com/){:target="\_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
     - You wish to manage SSL certificates manually.
     - A specific proxy server is required for enhanced security.
     - You need to integrate a proxy server already in your infrastructure.

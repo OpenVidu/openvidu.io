@@ -1,6 +1,6 @@
 ---
 title: Upgrade OpenVidu Single Node - AWS
-description: How to upgrade OpenVidu Single Node on premises deployments
+description: How to upgrade OpenVidu Single Node in AWS.
 ---
 
 # Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> - AWS

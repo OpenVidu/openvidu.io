@@ -49,7 +49,7 @@ In the event of Master Node failures, the service will be automatically restored
 
 ### Media Nodes
 
-Fault tolerance of Media Nodes in OpenVidu Elastic behaves the same as in [OpenVidu High Availability](#media-nodes).
+Fault tolerance of Media Nodes in OpenVidu High Availability behaves the same as in [OpenVidu Elastic](#media-nodes).
 
 ## Recovering Egress from node failures
 

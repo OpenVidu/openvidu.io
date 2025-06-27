@@ -56,6 +56,9 @@ nav:
               - Custom Participant Panel Item Element: docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element.md
               - Toggle Hand: docs/tutorials/angular-components/openvidu-toggle-hand.md
               - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
+          - AI Services:
+              - docs/tutorials/ai-services/index.md
+              - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
@@ -81,6 +84,7 @@ nav:
               - Azure:
                   - Install: docs/self-hosting/single-node/azure/install.md
                   - Administration: docs/self-hosting/single-node/azure/admin.md
+                  - Upgrade: docs/self-hosting/single-node/azure/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
@@ -94,6 +98,7 @@ nav:
               - Azure:
                   - Install: docs/self-hosting/single-node-pro/azure/install.md
                   - Administration: docs/self-hosting/single-node-pro/azure/admin.md
+                  - Upgrade: docs/self-hosting/single-node-pro/azure/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
@@ -107,6 +112,7 @@ nav:
               - Azure:
                   - Install: docs/self-hosting/elastic/azure/install.md
                   - Administration: docs/self-hosting/elastic/azure/admin.md
+                  - Upgrade: docs/self-hosting/elastic/azure/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
@@ -121,6 +127,7 @@ nav:
               - Azure:
                   - Install: docs/self-hosting/ha/azure/install.md
                   - Administration: docs/self-hosting/ha/azure/admin.md
+                  - Upgrade: docs/self-hosting/ha/azure/upgrade.md
           - Configuration:
               - Changing config: docs/self-hosting/configuration/changing-config.md
               - Config system in depth: docs/self-hosting/configuration/in-depth.md
@@ -134,6 +141,14 @@ nav:
               - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
               - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
             # - FAQ: docs/self-hosting/faq.md
+      - AI Services:
+          - Overview: docs/ai/overview.md
+          - Live captions: docs/ai/live-captions.md
+          - OpenVidu agents:
+            - Overview: docs/ai/openvidu-agents/overview.md
+            - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
+            - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
+          - Custom agents: docs/ai/custom-agents.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md

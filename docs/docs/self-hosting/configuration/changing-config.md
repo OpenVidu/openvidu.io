@@ -10,9 +10,9 @@ The following steps are valid to change any configuration file in any deployment
 === "Steps to change OpenVidu configuration"
 
     1. Go to one of your Master Nodes (or the only node in your deployment).
-    1. Go to `/opt/openvidu/config` directory.
-    2. Find and change the configuration parameter you want to modify, it could be any file: `openvidu.env`, `master_node.env`, `livekit.yaml`, `egress.yaml`, etc.
-    3. Restart OpenVidu just by executing:
+    2. Go to `/opt/openvidu/config` directory.
+    3. Find and change the configuration parameter you want to modify, it could be any file: `openvidu.env`, `master_node.env`, `livekit.yaml`, `egress.yaml`, etc.
+    4. Restart OpenVidu just by executing:
 
         ```
         systemctl restart openvidu
@@ -59,6 +59,7 @@ These are the configuration files for each kind of deployment:
         |-- prometheus.yaml
         |-- promtail.yaml
         |-- app.env
+        |-- agent-speech-processing.yaml
         `-- grafana/
     ```
 
@@ -92,7 +93,8 @@ These are the configuration files for each kind of deployment:
         |       |-- ingress.yaml
         |       |-- livekit.yaml
         |       |-- prometheus.yaml
-        |       `-- promtail.yaml
+        |       |-- promtail.yaml
+        |       `-- agent-speech-processing.yaml
         `-- node/
         `-- master_node.env
     ```
@@ -139,7 +141,8 @@ These are the configuration files for each kind of deployment:
         |       |-- ingress.yaml
         |       |-- livekit.yaml
         |       |-- prometheus.yaml
-        |       `-- promtail.yaml
+        |       |-- promtail.yaml
+        |       `-- agent-speech-processing.yaml
         `-- node/
         `-- master_node.env
     ```

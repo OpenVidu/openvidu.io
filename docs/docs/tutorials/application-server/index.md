@@ -27,6 +27,10 @@ They use the proper [LiveKit Server SDK](https://docs.livekit.io/reference/){tar
 
 [:fontawesome-brands-java:{.icon .lg-icon .tab-icon} **Java**](./java.md){ .md-button .md-button--primary .tutorial-link}
 
+</div>
+
+<div class="tutorials-container" markdown>
+
 [:simple-python:{.icon .lg-icon .tab-icon} **Python**](./python.md){ .md-button .md-button--primary .tutorial-link}
 
 [:simple-rust:{.icon .lg-icon .tab-icon} **Rust**](./rust.md){ .md-button .md-button--primary .tutorial-link}

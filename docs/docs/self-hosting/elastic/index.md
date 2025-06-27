@@ -21,3 +21,4 @@ If you want to upgrade your OpenVidu Elastic installation, refer to this section
 
 - [**Upgrade OpenVidu Elastic On-premises**](./on-premises/upgrade.md)
 - [**Upgrade OpenVidu Elastic AWS**](./aws/upgrade.md)
+- [**Upgrade OpenVidu Elastic Azure**](./azure/upgrade.md)

@@ -22,3 +22,4 @@ If you want to upgrade your OpenVidu High Availability installation, refer to th
 
 - [**Upgrade OpenVidu High Availability On-premises**](./on-premises/upgrade.md)
 - [**Upgrade OpenVidu High Availability AWS**](./aws/upgrade.md)
+- [**Upgrade OpenVidu High Availability Azure**](./azure/upgrade.md)
