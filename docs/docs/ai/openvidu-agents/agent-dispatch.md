@@ -7,9 +7,18 @@ OpenVidu agents remain idle until they are dispatched to a Room. This **idle sta
 To configure automatic dispatch for an agent's AI service, set this property in your <code>agent-<strong>AGENT_NAME</strong>.yaml</code> file:
 
 ```yaml
-live_captions:
+AI_SERVICE:
     processing: automatic
 ```
+
+!!! tip
+    For example, for the [Live Captions](../live-captions.md) service:
+
+    ```yaml
+    live_captions:
+        processing: automatic
+    ```
+    
 
 Agents configured with `processing: automatic` in one of their AI services will immediately join new Rooms and will start processing media tracks as soon as possible. This _"as soon as possible"_ moment can vary depending on the type of agent, the AI service that is is providing, and its configuration.
 
@@ -17,12 +26,20 @@ Agents configured with `processing: automatic` in one of their AI services will 
 
 ## Explicit agent dispatch
 
-To configure explicit dispatch for an agent, set this property in your <code>agent-<strong>AGENT_NAME</strong>.yaml</code> file:
+To configure explicit dispatch for an agent's AI service, set this property in your <code>agent-<strong>AGENT_NAME</strong>.yaml</code> file:
 
 ```yaml
-live_captions:
+AI_SERVICE:
     processing: manual
 ```
+
+!!! tip
+    For example, for the [Live Captions](../live-captions.md) service:
+
+    ```yaml
+    live_captions:
+        processing: automatic
+    ```
 
 Agents configured with `processing: manual` in their AI services will not join any Room automatically. Instead, the agent must be explicitly dispatched to the required Room at the required time.
 

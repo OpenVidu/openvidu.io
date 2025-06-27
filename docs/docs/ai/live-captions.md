@@ -69,7 +69,7 @@ room.registerTextStreamHandler("lk.transcription", async (reader, participantInf
 
 - From the `reader.info.attributes` you can get the following properties:
 
-    - `lk.transcription_final`: string that is `"true"` if the transcription is final or `"false"` if it is an interim. See [Final vs Interim transcriptions](#final-vs-interim-transcriptions) section for more.
+    - `lk.transcription_final`: string that is `"true"` if the transcription is final or `"false"` if it is an interim. See [Final vs Interim transcriptions](#final-vs-interim-transcriptions) section for more details.
     - `lk.transcribed_track_id`: string with the ID of the audio track that was transcribed. This can be used to identify the exact source of the transcription in case the participant is publishing multiple audio tracks.
 
 ### Final vs Interim transcriptions
