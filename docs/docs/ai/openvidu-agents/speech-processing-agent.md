@@ -110,7 +110,7 @@ After restarting OpenVidu your agent will be up and running, ready to process ne
 
 Below is the full list of configuration properties available for the Speech Processing agent.
 
-```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.2.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.3.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 # Docker image of the agent.
 docker_image: docker.io/openvidu/agent-speech-processing:main
 

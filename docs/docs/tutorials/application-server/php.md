@@ -5,7 +5,7 @@ description: Learn how to build a minimal PHP server to generate LiveKit tokens 
 
 # PHP Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.2.0/application-server/php){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-server/php){ .md-button target=\_blank }
 
 This is a minimal server application built for PHP that allows:
 
@@ -23,7 +23,7 @@ It internally uses [LiveKit PHP SDK](https://github.com/agence104/livekit-server
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 ```
 
 ### 3. Run the server application
@@ -43,7 +43,7 @@ The application is a simple PHP app with a single file `index.php` that exports 
 
 Let's see the code of the `index.php` file:
 
-```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/php/index.php#L1-L17' target='_blank'>index.php</a>" linenums="1"
+```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/php/index.php#L1-L17' target='_blank'>index.php</a>" linenums="1"
 <?php
 require __DIR__ . "/vendor/autoload.php";
 
@@ -82,7 +82,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 -   `roomName`: the name of the Room where the user wants to connect.
 -   `participantName`: the name of the participant that wants to connect to the Room.
 
-```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/php/index.php#L19-L43' target='_blank'>index.php</a>" linenums="18"
+```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/php/index.php#L19-L43' target='_blank'>index.php</a>" linenums="18"
 <?php
 if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" && $_SERVER["PATH_INFO"] === "/token") {
     $data = json_decode(file_get_contents("php://input"), true);
@@ -131,7 +131,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
-```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/php/index.php#L45-L62' target='_blank'>index.php</a>" linenums="44"
+```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/php/index.php#L45-L62' target='_blank'>index.php</a>" linenums="44"
 <?php
 $webhookReceiver = (new WebhookReceiver($LIVEKIT_API_KEY, $LIVEKIT_API_SECRET)); // (1)!
 

@@ -5,7 +5,7 @@ description: Learn how to build a minimal Rust application server with Axum to g
 
 # Rust Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.2.0/application-server/rust){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-server/rust){ .md-button target=\_blank }
 
 This is a minimal server application built for Rust with [Axum](https://github.com/tokio-rs/axum){:target="\_blank"} that allows:
 
@@ -23,7 +23,7 @@ It internally uses the [LiveKit Rust SDK](https://github.com/livekit/rust-sdks){
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.2.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 ```
 
 ### 3. Run the server application
@@ -43,7 +43,7 @@ The application is a simple Rust app with a single file `main.rs` that exports t
 
 Let's see the code of the `main.rs` file:
 
-```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/rust/src/main.rs#L1-L36' target='_blank'>main.rs</a>" linenums="1"
+```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/rust/src/main.rs#L1-L36' target='_blank'>main.rs</a>" linenums="1"
 use axum::http::HeaderMap;
 use axum::{
     extract::Json, http::header::CONTENT_TYPE, http::Method, http::StatusCode, routing::post,
@@ -105,7 +105,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 -   `roomName`: the name of the Room where the user wants to connect.
 -   `participantName`: the name of the participant that wants to connect to the Room.
 
-```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/rust/src/main.rs#L38-L88' target='_blank'>main.rs</a>" linenums="38"
+```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/rust/src/main.rs#L38-L88' target='_blank'>main.rs</a>" linenums="38"
 async fn create_token(payload: Option<Json<Value>>) -> (StatusCode, Json<Value>) {
     if let Some(payload) = payload {
         let livekit_api_key = env::var("LIVEKIT_API_KEY").unwrap_or("devkey".to_string());
@@ -181,7 +181,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
-```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.2.0/application-server/rust/src/main.rs#L90-L126' target='_blank'>main.rs</a>" linenums="90"
+```rust title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/rust/src/main.rs#L90-L126' target='_blank'>main.rs</a>" linenums="90"
 async fn receive_webhook(headers: HeaderMap, body: String) -> (StatusCode, String) {
     let livekit_api_key = env::var("LIVEKIT_API_KEY").unwrap_or("devkey".to_string());
     let livekit_api_secret = env::var("LIVEKIT_API_SECRET").unwrap_or("secret".to_string());

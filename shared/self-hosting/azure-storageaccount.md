@@ -4,7 +4,7 @@ You need to fill some parameters about the storage account that the deployment w
 
 !!! warning
 
-    Recordings are not available in OpenVidu v2 Compatibility mode (v2compat) in OpenVidu 3.2.0 deployed in Azure.
+    Recordings are not available in OpenVidu v2 Compatibility mode (v2compat) for OpenVidu Azure deployments.
 
 === "Azure Storage Account configuration"
     
