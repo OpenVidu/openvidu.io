@@ -212,6 +212,17 @@ You can control when to dispatch your agent in your agent's code. By default age
 
 Then you can manually dispatch your agent using the [Dispatch API](http://localhost:8000/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-api) or via a [Participant connection](http://localhost:8000/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-a-participant-connection).
 
+<!-- ### Env vars available for your custom agent
+
+You can access the following useful environment variables from within your agent's code:
+
+- `LIVEKIT_API_KEY`
+- `LIVEKIT_API_SECRET`
+- `LIVEKIT_URL`
+
+!!! tip
+    These env vars are especially useful when creating your `WorkerOptions`, as they are required to connect your agent to your OpenVidu deployment. -->
+
 ### Accessing the agent's configuration file
 
 It can be very useful to access your agent's YAML configuration file from within your agent's code. OpenVidu automatically mounts file `agent-AGENT_NAME.yaml` for your agent's Docker container. You have the path to the file in env var `AGENT_CONFIG_FILE`. You can read the file's content directly in your agent's code (a YAML parser can be very useful). For example:
