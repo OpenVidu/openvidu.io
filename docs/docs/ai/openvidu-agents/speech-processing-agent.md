@@ -112,7 +112,7 @@ Below is the full list of configuration properties available for the Speech Proc
 
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.3.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing:main
+docker_image: docker.io/openvidu/agent-speech-processing:3.3.0
 
 # Whether to run the agent or not.
 enabled: false

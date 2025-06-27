@@ -60,21 +60,23 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-You can first take a look at the [JavaScript client tutorial](../application-client/javascript.md), as this application shares the same codebase. The only thing added by this tutorial is a new handle for the [`Room`](https://docs.livekit.io/reference/client-sdk-js/classes/Room.html){:target="\_blank"} object to receive transcription messages and display them as live captions in the HTML:
+You can first take a look at the [JavaScript client tutorial](../application-client/javascript.md), as this application shares the same codebase. The only thing added by this tutorial is a new handler for the [`Room`](https://docs.livekit.io/reference/client-sdk-js/classes/Room.html){:target="\_blank"} object to receive transcription messages and display them as live captions in the HTML:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/ai-services/openvidu-live-captions/src/app.js#L60-L81' target='_blank'>app.js</a>" linenums="60"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/ai-services/openvidu-live-captions/src/app.js#L60-L83' target='_blank'>app.js</a>" linenums="60"
 room.registerTextStreamHandler("lk.transcription", async (reader, participantInfo) => { // (1)!
     const message = await reader.readAll(); // (2)!
     const isFinal = reader.info.attributes["lk.transcription_final"] === "true"; // (3)!
+    const trackId = reader.info.attributes["lk.transcribed_track_id"]; // (4)!
 
     if (isFinal) {
-      const audioTrackId = reader.info.attributes["lk.transcribed_track_id"]; // (4)!
-
       // Due to a bug in LiveKit Server the participantInfo object may be empty.
       // You can still get the participant owning the audio track like below:
-      const participant = [room.localParticipant]
-        .concat(Array.from(room.remoteParticipants.values()))
-        .find((p) => p.audioTrackPublications.has(audioTrackId));
+      let participant;
+      if (localParticipant.audioTrackPublications.has(trackId)) {
+        participant = room.localParticipant;
+      } else {
+        participant = room.remoteParticipants.values().find(p => p.audioTrackPublications.has(trackId));
+      }
 
       const captionsTextarea = document.getElementById("captions"); // (5)!
       const timestamp = new Date().toLocaleTimeString();

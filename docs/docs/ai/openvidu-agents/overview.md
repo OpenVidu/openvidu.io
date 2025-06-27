@@ -12,6 +12,7 @@ All OpenVidu agents follow the following general principles:
 !!! note "In more detail, each OpenVidu agent adheres to the following principles:"
 
     - **Each agent is automatically deployed as a Docker container once per node**: once in the only node of an [OpenVidu Single Node](../../self-hosting/deployment-types.md#openvidu-single-node) deployment, and once in each Media Node of [OpenVidu Elastic](../../self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](../../self-hosting/deployment-types.md#openvidu-high-availability) deployments.
+    - **Each agent is downloaded in background during OpenVidu startup**: take into account that it might not be available immediately after OpenVidu starts, as it may take some time to download the agent image from the Docker registry.
     - **Each agent is identified, configured and deployed declaratively via its own `agent-AGENT_NAME.yaml` file**: your OpenVidu deployment will detect agent YAML files and will automatically launch and configure them. **`AGENT_NAME`** must be a unique identifier per agent.
     - **Each agent container of each node can process multiple Rooms simultaneously**: the limit is set by the node's hardware.
     - **Each enabled agent remains always running**: this happens even when not processing any Rooms. This idle state may consume some resources, but ensures that agents are ready to process Rooms immediately.
