@@ -713,3 +713,18 @@ div[data-md-component="outdated"] aside {
 .deploy-to-azure-btn img:hover {
   filter: saturate(50%) brightness(130%);
 }
+
+.ai-service-icon {
+  font-size: 2em;
+  margin-right: 0.3em;
+}
+
+.ai-agent-link {
+  display: block;
+  margin-left: 3em;
+}
+
+.ai-provider-icon {
+  width: 24px;
+  height: 24px;
+}

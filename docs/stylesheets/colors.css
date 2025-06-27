@@ -22,7 +22,13 @@
   --slate-md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
   --slate-md-default-fg-color--light: hsla(var(--md-hue), 15%, 90%, 0.56);
 
-  --gradient: conic-gradient(from 60deg at 50% 50%, rgba(0, 136, 170, 1) 0%, rgba(0, 136, 170, 1) 13%, rgba(0, 136, 170, 1) 61%, rgba(0, 136, 170, 1) 99%);
+  --gradient: conic-gradient(
+    from 60deg at 50% 50%,
+    rgba(0, 136, 170, 1) 0%,
+    rgba(0, 136, 170, 1) 13%,
+    rgba(0, 136, 170, 1) 61%,
+    rgba(0, 136, 170, 1) 99%
+  );
 }
 
 /* Custom colors for dark mode */
@@ -40,7 +46,13 @@
     border-color: var(--md-accent-fg-color--transparent);
   }
   hr {
-    background-image: linear-gradient(to right, transparent 0%, rgb(202, 202, 202) 25%, rgba(202, 202, 202) 75%, transparent 100%);
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(202, 202, 202) 25%,
+      rgba(202, 202, 202) 75%,
+      transparent 100%
+    );
   }
   svg.home-icon {
     filter: brightness(33%);
@@ -75,6 +87,9 @@
   }
   .price-cell {
     color: black;
+  }
+  .ai-provider-icon {
+    filter: brightness(0.4);
   }
 }
 

@@ -10,9 +10,9 @@ The following steps are valid to change any configuration file in any deployment
 === "Steps to change OpenVidu configuration"
 
     1. Go to one of your Master Nodes (or the only node in your deployment).
-    1. Go to `/opt/openvidu/config` directory.
-    2. Find and change the configuration parameter you want to modify, it could be any file: `openvidu.env`, `master_node.env`, `livekit.yaml`, `egress.yaml`, etc.
-    3. Restart OpenVidu just by executing:
+    2. Go to `/opt/openvidu/config` directory.
+    3. Find and change the configuration parameter you want to modify, it could be any file: `openvidu.env`, `master_node.env`, `livekit.yaml`, `egress.yaml`, etc.
+    4. Restart OpenVidu just by executing:
 
         ```
         systemctl restart openvidu

@@ -59,20 +59,40 @@ Ultra-low latency live streaming (below 300ms) allows for actual real-time inter
 
 </div>
 
-### Robotics and embedded systems
+### AI Agents
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-40 tablet-grid-40">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="../../assets/images/getting-started/robotics.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="../../assets/images/getting-started/ai-agents.svg" />
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
+AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your in application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
+
+- Implement **real-time subtitles, translations, word-detection, sentiment analysis, profanity filter**, etc. in your video conferences.
+- Add a **summary generator** to your video conference app, that can extract the most important parts of the conversation to be shared with the participants.
+- Build a 1-to-1 **virtual assistant** that can speak naturally with your users, using the latest Text-To-Speech AI models.
+- Implement **object detection** in your live streaming app, to detect and track objects in real-time in the video feed.
+
+</div>
+
+</div>
+
+### Robotics and embedded systems
+
+<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+
+<div class="grid-65 tablet-grid-65" markdown>
 The future lies in the integration of cameras and sensors in all kinds of devices, everywhere: industry, homes, public spaces, emergency services... OpenVidu can be used to receive and process video and audio streams from these devices, and doing so in real-time. For example:
 
 - A **security system** to receive the feed of IP cameras and sending an alert when detecting a person.
 - A **drone control system** to receive the video feed from each drone camera and securely record it. Any other sensor reading could also be sent to be synchronized later with the recorded video feed.
 - A **real-time translation app** that uses the latest AI models to provide high-quality translations of spoken language in real time.
+</div>
+
+<div class="grid-35 tablet-grid-35">
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="../../assets/images/getting-started/robotics.svg" />
 </div>
 
 </div>

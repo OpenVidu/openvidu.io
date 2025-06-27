@@ -56,6 +56,9 @@ nav:
               - Custom Participant Panel Item Element: docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element.md
               - Toggle Hand: docs/tutorials/angular-components/openvidu-toggle-hand.md
               - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
+          - AI Services:
+              - docs/tutorials/ai-services/index.md
+              - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
@@ -138,6 +141,14 @@ nav:
               - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
               - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
             # - FAQ: docs/self-hosting/faq.md
+      - AI Services:
+          - Overview: docs/ai/overview.md
+          - Live captions: docs/ai/live-captions.md
+          - OpenVidu agents:
+            - Overview: docs/ai/openvidu-agents/overview.md
+            - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
+            - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
+          - Custom agents: docs/ai/custom-agents.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md
