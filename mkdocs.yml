@@ -6,7 +6,30 @@ repo_url: https://github.com/openvidu/openvidu
 
 nav:
   - Home: index.md
-  - Docs:
+  - OpenVidu Meet:
+      - Home: meet/home.md
+      - Features:
+          - Rooms and meetings: meet/features/rooms-and-meetings.md
+          - Users and permissions: meet/features/users-and-permissions.md
+          - Recordings: meet/features/recordings.md
+          - Live Captions: meet/features/live-captions.md
+          # - Transcriptions: meet-transcriptions.md
+          # - Translations: meet-translations.md
+          # - Summaries: meet-summaries.md
+      - Deployment:
+          - Try OpenVidu locally: meet/deployment/local.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
+          - Basic deployment: meet/deployment/basic.md
+          - Advanced deployments: meet/deployment/advanced.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
+      - OpenVidu Meet integrations:
+          - Introduction: meet/integrations/intro.md # Basic concepts...
+          - Quickstart: meet/integrations/quickstart.md # Gettings started: step 1 (curl), step 2(embed html), ...
+          - Tutorials:
+              - Room tutorial: meet/integrations/tutorials/meet-room-tutorial.md
+              - Recording tutorial: meet/integrations/tutorials/meet-recording-tutorial.md
+          - Reference:
+              - REST API: meet/integrations/reference/rest-api.md
+              - Webcomponent: meet/integrations/reference/webcomponent.md
+  - OpenVidu Platform:
       - Getting started: docs/getting-started.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
       - Developing your OpenVidu app:
@@ -145,9 +168,9 @@ nav:
           - Overview: docs/ai/overview.md
           - Live captions: docs/ai/live-captions.md
           - OpenVidu agents:
-            - Overview: docs/ai/openvidu-agents/overview.md
-            - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
-            - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
+              - Overview: docs/ai/openvidu-agents/overview.md
+              - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
+              - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
           - Custom agents: docs/ai/custom-agents.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
@@ -232,6 +255,7 @@ plugins:
       background: none
       shadow: false
   - blog
+  - meta
 
 markdown_extensions:
   - admonition

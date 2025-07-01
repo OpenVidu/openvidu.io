@@ -98,7 +98,9 @@
 <!-- Add scripts that need to run before here -->
 {{ super() }}
 <!-- Add scripts that need to run afterwards here -->
-{% endblock %} {% block styles %}
+{% endblock %}
+
+{% block styles %}
 <style>
   @font-face {
     font-family: "Amazon Ember";
@@ -108,29 +110,41 @@
       url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
   }
 </style>
-{{ super() }} {% if page.meta and page.meta.hide %} {% if "footer-prev" in
-page.meta.hide %}
-<style>
-  .md-footer__link--prev {
-    display: none;
-  }
-</style>
-{% endif %} {% if "footer-next" in page.meta.hide %}
-<style>
-  .md-footer__link--next {
-    display: none;
-  }
-</style>
-{% endif %} {% if "search-bar" in page.meta.hide %}
-<style>
-  div.md-search {
-    display: none;
-  }
-</style>
-{% endif %} {% if "version-selector" in page.meta.hide %}
-<style>
-  div.md-version {
-    display: none;
-  }
-</style>
-{% endif %} {% endif %} {% endblock %}
+{{ super() }}
+{% if page.meta %} 
+  {% if page.meta.hide %}
+    {% if "footer-prev" in page.meta.hide %}
+    <style>
+      .md-footer__link--prev {
+        display: none;
+      }
+    </style>
+    {% endif %}
+    {% if "footer-next" in page.meta.hide %}
+    <style>
+      .md-footer__link--next {
+        display: none;
+      }
+    </style>
+    {% endif %}
+    {% if "search-bar" in page.meta.hide %}
+    <style>
+      div.md-search {
+        display: none;
+      }
+    </style>
+    {% endif %}
+    {% if "version-selector" in page.meta.hide %}
+    <style>
+      div.md-version {
+        display: none;
+      }
+    </style>
+    {% endif %}
+  {% endif %}
+  {% if page.meta.tags and "Meet" in page.meta.tags %}
+  <!-- Import file stylesheets/meet.css -->
+  <link rel="stylesheet" href="{{ '/stylesheets/meet.css' }}" />
+  {% endif %}
+{% endif %}
+{% endblock %}

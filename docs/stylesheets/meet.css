@@ -1,0 +1,36 @@
+:root {
+  --meet-primary-color: #0088aa;
+  --meet-primary-dark: #003947;
+  --meet-body-color-dark: #00222b;
+}
+
+[data-md-color-scheme="default"] {
+  --meet-body-color-dark: #f5f5f5;
+}
+
+header.md-header {
+  background-color: var(--meet-primary-color);
+}
+
+nav.md-tabs {
+  background-color: var(--meet-primary-color);
+}
+
+footer.md-footer {
+  background-color: var(--meet-primary-color);
+}
+
+footer .md-footer-meta {
+  background-color: var(--meet-primary-dark);
+}
+
+body {
+  background-color: var(--meet-body-color-dark);
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    background: var(--meet-body-color-dark);
+    box-shadow: 0 0 0.4rem 0.4rem var(--meet-body-color-dark);
+  }
+}
