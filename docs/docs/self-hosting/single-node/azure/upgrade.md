@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Single Node - Azure
-description: How to upgrade OpenVidu Single Node in Azure.
+title: Upgrade OpenVidu Single Node COMMUNITY - Azure
+description: How to upgrade OpenVidu Single Node COMMUNITY in Azure.
 ---
 
 # Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> - Azure

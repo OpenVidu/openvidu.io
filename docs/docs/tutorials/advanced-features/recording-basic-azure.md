@@ -599,7 +599,7 @@ In order to update the user interface of all participants in the room according 
 
     By using the `RoomEvent.RecordingStatusChanged` event, we can only detect when the recording has started or stopped, but not other states like `starting`, `stopping` or `failed`. Additionally, when the recording stops, the event is not triggered until the recorder participant leaves the room, causing a delay of 20 seconds approximately between the stop and when participants are notified.
 
-    To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
+    To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced-azure.md){:target="\_blank"}, where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
 async function joinRoom() {
@@ -719,7 +719,7 @@ The `showRecordingList` function creates a new `div` element for each recording 
 
     When a recording is deleted, it is removed from the recording list, but only for the user who initiated the deletion. Other users will continue to see the recording in their list until it is refreshed.
 
-    In the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, we show how to implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
+    In the [advanced recording tutorial](./recording-advanced-azure.md){:target="\_blank"}, we show how to implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
 
 When the user clicks the play button, the `displayRecording` function is called to play the recording. This function opens a dialog window with an embedded video element and sets the source of the video to the [get recording endpoint](#get-recording) of the server application:
 

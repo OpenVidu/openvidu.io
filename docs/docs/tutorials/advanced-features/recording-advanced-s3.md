@@ -7,7 +7,7 @@ description: Learn how to improve the basic recording tutorial by adding complet
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/advanced-features/openvidu-recording-advanced-node){ .md-button target=\_blank }
 
-This tutorial improves the [basic recording tutorial](./recording-basic.md){target="\_blank"} by doing the following:
+This tutorial improves the [basic recording tutorial](./recording-basic-s3.md){target="\_blank"} by doing the following:
 
 -   **Complete recording metadata**: Listen to webhook events and save all necessary metadata in a separate file.
 -   **Real time recording status notification**: Implement a custom notification system to inform participants about the recording status by listening to webhook events and updating room metadata.
@@ -405,7 +405,7 @@ This method does the following:
 
     !!! info "Getting recording metadata"
 
-        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
+        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic-s3.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
 
 2.  Gets the metadata key from the recordings path and the recordings metadata path, both defined in the `config.js` file, and the recording name replacing the `.mp4` extension with `.json`:
 

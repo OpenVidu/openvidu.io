@@ -404,7 +404,7 @@ This method does the following:
 
     !!! info "Getting recording metadata"
 
-        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the Azure Container, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
+        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the Azure Container, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic-azure.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
 
 2.  Gets the metadata key from the recordings path and the recordings metadata path, both defined in the `config.js` file, and the recording name replacing the `.mp4` extension with `.json`:
 
