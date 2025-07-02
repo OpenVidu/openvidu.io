@@ -174,5 +174,5 @@ OpenVidu comes with other services configured to work in the deployment. These a
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config](https://grafana.com/docs/grafana/latest/administration/configuration/){:target=_blank} |
 | **Mimir Service** | Service for long-term prometheus storage | [Mimir Config](https://grafana.com/docs/mimir/v2.11.x/configure/about-configurations/){:target=_blank} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config](https://grafana.com/docs/loki/v2.8.x/configuration/){:target=_blank} |
-| **Prometheus Service**  | Used for monitoring. | [Prometheus Config](https://prometheus.io/docs/prometheus/2.50/getting_started/){:target=_blank} |
+| **Prometheus Service**  | Used for monitoring. | [Prometheus Config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/){:target=_blank} |
 | **Promtail Service**    | Collects logs and sends them to Loki. | [Promtail Config](https://grafana.com/docs/loki/v2.8.x/clients/promtail/configuration/){:target=_blank} |
