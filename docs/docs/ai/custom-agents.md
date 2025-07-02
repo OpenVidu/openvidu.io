@@ -210,7 +210,7 @@ You can control when to dispatch your agent in your agent's code. By default age
 
 !!! note "Property `agent_name` must match the value `AGENT_NAME` in the file <code>agent-<strong>AGENT_NAME</strong>.yaml</code> created [here](#2-add-an-agent-agent_nameyaml-file)."
 
-Then you can manually dispatch your agent using the [Dispatch API](http://localhost:8000/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-api) or via a [Participant connection](http://localhost:8000/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-a-participant-connection).
+Then you can manually dispatch your agent using the [Dispatch API](./openvidu-agents/agent-dispatch.md#dispatch-via-api) or via a [Participant connection](./openvidu-agents/agent-dispatch.md#dispatch-via-a-participant-connection).
 
 <!-- ### Env vars available for your custom agent
 
