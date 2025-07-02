@@ -38,18 +38,10 @@ room.registerTextStreamHandler("lk.transcription", async (reader, participantInf
     const message = await reader.readAll();
     const isFinal = reader.info.attributes["lk.transcription_final"] === "true";
     const trackId = reader.info.attributes["lk.transcribed_track_id"];
-
-    let participant;
-    if (localParticipant.audioTrackPublications.has(trackId)) {
-      participant = room.localParticipant;
-    } else {
-      participant = room.remoteParticipants.values().find(p => p.audioTrackPublications.has(trackId));
-    }
-
     if (isFinal) {
-      console.log(`Participant ${participant.identity} and track ${trackId} said: ${message}`);
+      console.log(`Participant ${participantInfo.identity} and track ${trackId} said: ${message}`);
     } else {
-      console.log(`Participant ${participant.identity} and track ${trackId} is saying: ${message}`);
+      console.log(`Participant ${participantInfo.identity} and track ${trackId} is saying: ${message}`);
     }
   }
 );
@@ -60,13 +52,6 @@ room.registerTextStreamHandler("lk.transcription", async (reader, participantInf
     Refer to [LiveKit documentation](https://docs.livekit.io/agents/voice-agent/transcriptions/#frontend-integration){:target="\_blank"} to see how to handle transcription events in other frontend platforms.
 
 - From the `participantInfo` object of the text stream handler you can get the participant's `identity` that originated the transcription event.
-
-    !!! Bug
-
-        Due to a [bug in LiveKit Server](https://github.com/livekit/agents/issues/2554){:target="\_blank"}, the `participantInfo.identity` property may be empty. You can still get the participant owning the transcribed audio track using the `lk.transcribed_track_id` attribute of the message (see the [snippet](#live-captions-js) above).
-        
-        This will be fixed in a future release of OpenVidu.
-
 - From the `reader.info.attributes` you can get the following properties:
 
     - `lk.transcription_final`: string that is `"true"` if the transcription is final or `"false"` if it is an interim. See [Final vs Interim transcriptions](#final-vs-interim-transcriptions) section for more details.
