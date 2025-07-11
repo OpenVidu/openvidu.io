@@ -53,10 +53,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed if you want to allow WebRTC over TCP. |
-        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP protocol. |
         | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
-        | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
+        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
+        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
+        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
 
         **Outbound Rules**
 
@@ -214,9 +215,10 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed if you want to allow WebRTC over TCP. |
-        | UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
-        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | WebRTC Media traffic. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
+        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
+        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
+        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
         | TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
         | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
