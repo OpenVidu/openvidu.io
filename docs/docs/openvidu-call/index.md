@@ -4,6 +4,8 @@ description: The videoconference application built on top of OpenVidu. It offers
 hide:
   - toc
   - footer
+tags:
+  - setupwowjs
 ---
 
 

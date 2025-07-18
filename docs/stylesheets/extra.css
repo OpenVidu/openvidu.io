@@ -429,6 +429,10 @@ img.svg-img {
   }
 }
 
+.wow {
+  visibility: hidden;
+}
+
 .animated {
   animation-duration: 0.5s;
   animation-fill-mode: both;
@@ -590,8 +594,12 @@ a#account-btn .user-name {
   margin-left: 10px;
 }
 
+nav .md-tabs__item {
+  font-weight: 500;
+}
+
 .md-banner {
-  background-color: #0088aa;
+  background-color: var(--md-primary-fg-color);
 }
 
 .md-banner #announce a {
@@ -685,29 +693,29 @@ div[data-md-component="outdated"] aside {
   margin: auto;
 }
 
-@import url('https://fonts.cdnfonts.com/css/amazon-ember');
+@import url("https://fonts.cdnfonts.com/css/amazon-ember");
 
 .deploy-button.deploy-to-aws-btn {
-  background-color: #FF9900;
+  background-color: #ff9900;
   border: none;
   border-radius: 5px;
-  color: #252F3E !important;
+  color: #252f3e !important;
   padding: 8px 24px;
   font-size: 1.2em;
-  font-family: 'Amazon Ember', sans-serif;
-  transition: all .125s ease;
+  font-family: "Amazon Ember", sans-serif;
+  transition: all 0.125s ease;
   margin-top: 2em;
   margin-bottom: 2em;
 }
 
 .deploy-button.deploy-to-aws-btn:hover {
-  background-color: #FF9900 !important;
+  background-color: #ff9900 !important;
   filter: saturate(50%) brightness(130%);
 }
 
 .deploy-to-azure-btn img {
   min-width: 250px;
-  transition: all .125s ease;
+  transition: all 0.125s ease;
 }
 
 .deploy-to-azure-btn img:hover {
@@ -727,4 +735,25 @@ div[data-md-component="outdated"] aside {
 .ai-provider-icon {
   width: 24px;
   height: 24px;
+}
+
+.not-selectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+h1.logo-header {
+  text-align: center;
+  margin-bottom: 0.6em;
+}
+
+h2.meetplatform-slogan {
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 0;
+  margin-bottom: 1.6em;
 }

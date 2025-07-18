@@ -15,6 +15,8 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 - Delete a recording.
 - List all available recordings.
 
+For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob Storage container**.
+
 ## Running this tutorial
 
 #### 1. Run OpenVidu Server

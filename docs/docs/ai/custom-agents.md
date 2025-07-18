@@ -251,8 +251,14 @@ It can be very useful to access your agent's YAML configuration file from within
     console.log(config);
     ```
 
-## Custom agents vs OpenVidu agents
 
-Take into account that [OpenVidu agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents) have an advantage over a regular LiveKit agent when running in an multi-node OpenVidu deployment ([OpenVidu Elastic](../self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](../self-hosting/deployment-types.md#openvidu-high-availability)): OpenVidu agents are designed to **allow graceful shutdowns** when scaling down Media Nodes.
+## Elasticity and graceful shutdowns
 
-This means that a Media Node flagged for termination will wait for all its OpenVidu agents to finish processing their assigned Rooms before allowing the Media Node to be stopped, while at the same time rejecting new job requests. This ensures a smooth experience for your users, avoiding downtimes when your cluster is scaled down.
+Custom agents in multi-node OpenVidu deployments ([OpenVidu Elastic](../self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](../self-hosting/deployment-types.md#openvidu-high-availability)) support automatic graceful shutdowns when Media Nodes are scaled down.
+
+When a Media Node hosting custom agents is being removed from the OpenVidu cluster:
+
+1. **Existing jobs complete**: Custom agents are allowed to finish processing their current jobs before stopping.
+2. **New jobs rejected**: Custom agents reject new job requests, which will be redirected to other Media Nodes in the cluster.
+
+This ensures no interruptions in the services provided by your custom agents when your OpenVidu cluster scales down.

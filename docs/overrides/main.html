@@ -1,12 +1,16 @@
 <!-- Elements added to main will be displayed on all pages -->
-{% extends "base.html" %} {% block announce %}
+{% extends "base.html" %}
+
+{% block announce %}
 <div id="announce">
   Coming from OpenVidu 2? Find out all you need to know
   <a href="https://docs.openvidu.io/en/stable/openvidu3/" target="_blank">
     on this page</a
   >
 </div>
-{% endblock %} {% block libs %} {{ super() }}
+{% endblock %}
+
+{% block libs %}
 
 <!-- GLightbox -->
 <script>
@@ -47,31 +51,33 @@
     });
     console.debug("Gallery setup");
   };
-  //# sourceURL=setupgallery.js
 </script>
 
-<!-- wow -->
+<!-- wow.js -->
 <script>
-  window.setupWow = function () {
-    if (!document.getElementById("wowjs")) {
-      const jsScript = document.createElement("script");
-      jsScript.src = "javascripts/wow.min.js";
-      jsScript.id = "wowjs";
-      jsScript.addEventListener("load", () => {
-        new WOW().init();
-        console.debug("wow loaded");
-      });
-      document.head.appendChild(jsScript);
-    }
+  window.setupWowJs = function () {
+    new WOW().init();
+    console.debug("WOW.js initialized");
   };
+</script>
+
+<!-- Card glow effect -->
+<script>
   window.setupCardGlow = function () {
-    console.debug("card glow setup");
+    console.debug("starting card glow setup");
     const cards = document.querySelectorAll(
       ".feature-cards .grid.cards > ul > li"
     );
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
+    const maxRetries = 10;
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      retryCount++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
     function handleMouseMove(e) {
       const rect = this.getBoundingClientRect();
       const mouseX = e.clientX - rect.left - rect.width / 2;
@@ -80,27 +86,57 @@
       angle = (angle + 360) % 360;
       this.style.setProperty("--start", angle + 60);
     }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
   };
 </script>
 
-{% endblock %} {% block outdated %}
+{{ super() }}
+
+{% endblock %}
+
+{% block outdated %}
 <span class="outdated-warning-text"
   >Warning: You are reading docs for an old version<br
 /></span>
 <a href="{{ '/latest/docs/getting-started/' }}">
   <strong>GO TO LATEST VERSION</strong>
 </a>
-{% endblock %} {% block extrahead %}
+{% endblock %}
+
+{% block extrahead %}
 <!-- Add head tags that need to be applied before here -->
 {{ super() }}
 <!-- Add head tags that need to be applied afterwards here -->
-{% endblock %} {% block scripts %}
+{% endblock %}
+
+{% block scripts %}
 <!-- Add scripts that need to run before here -->
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<script src="/javascripts/wow.min.js"></script>
+<script>
+  window.setupWowJs();
+</script>
+{% endif %} {% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
+<script>
+  window.setupCardGlow();
+</script>
+{% endif %}
+
 {{ super() }}
+
 <!-- Add scripts that need to run afterwards here -->
+
 {% endblock %}
 
 {% block styles %}
+
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/animate.min.css' }}" />
+{% endif %}
+
 <style>
   @font-face {
     font-family: "Amazon Ember";
@@ -110,41 +146,48 @@
       url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
   }
 </style>
+
 {{ super() }}
-{% if page.meta %} 
-  {% if page.meta.hide %}
-    {% if "footer-prev" in page.meta.hide %}
-    <style>
-      .md-footer__link--prev {
-        display: none;
-      }
-    </style>
-    {% endif %}
-    {% if "footer-next" in page.meta.hide %}
-    <style>
-      .md-footer__link--next {
-        display: none;
-      }
-    </style>
-    {% endif %}
-    {% if "search-bar" in page.meta.hide %}
-    <style>
-      div.md-search {
-        display: none;
-      }
-    </style>
-    {% endif %}
-    {% if "version-selector" in page.meta.hide %}
-    <style>
-      div.md-version {
-        display: none;
-      }
-    </style>
-    {% endif %}
-  {% endif %}
-  {% if page.meta.tags and "Meet" in page.meta.tags %}
-  <!-- Import file stylesheets/meet.css -->
-  <link rel="stylesheet" href="{{ '/stylesheets/meet.css' }}" />
-  {% endif %}
+
+{% if page.meta %}
+{% if page.meta.hide %}
+{% if "footer-prev" in page.meta.hide %}
+<style>
+  .md-footer__link--prev {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "footer-next" in page.meta.hide %}
+<style>
+  .md-footer__link--next {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "search-bar" in page.meta.hide %}
+<style>
+  div.md-search {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "version-selector" in page.meta.hide %}
+  <style>
+    div.md-version {
+      display: none;
+    }
+  </style>
+{% endif %}
+{% endif %}
+
+{% if page.meta.tags and "Platform" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/platform.css' }}" />
+{% endif %}
+
+{% if page.meta.tags and "Meet" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/meet.css' }}" />
+{% endif %}
+
 {% endif %}
 {% endblock %}

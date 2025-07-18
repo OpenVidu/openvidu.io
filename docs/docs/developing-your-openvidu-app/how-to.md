@@ -34,7 +34,7 @@ const room = new Room();
 await room.connect(wsUrl, token);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#connecting-to-a-room){target="\_blank"}
 
 ---
 
@@ -44,7 +44,7 @@ await room.connect(wsUrl, token);
 await room.disconnect();
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#Leaving-a-Room){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#disconnection){target="\_blank"}
 
 ---
 

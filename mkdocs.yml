@@ -7,7 +7,7 @@ repo_url: https://github.com/openvidu/openvidu
 nav:
   - Home: index.md
   - OpenVidu Meet:
-      - Home: meet/home.md
+      - meet/index.md
       - Features:
           - Rooms and meetings: meet/features/rooms-and-meetings.md
           - Users and permissions: meet/features/users-and-permissions.md
@@ -20,17 +20,18 @@ nav:
           - Try OpenVidu locally: meet/deployment/local.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
           - Basic deployment: meet/deployment/basic.md
           - Advanced deployments: meet/deployment/advanced.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
-      - OpenVidu Meet integrations:
+      - Embedded:
           - Introduction: meet/integrations/intro.md # Basic concepts...
           - Quickstart: meet/integrations/quickstart.md # Gettings started: step 1 (curl), step 2(embed html), ...
           - Tutorials:
-              - Room tutorial: meet/integrations/tutorials/meet-room-tutorial.md
-              - Recording tutorial: meet/integrations/tutorials/meet-recording-tutorial.md
+              - Tutorial 1: meet/integrations/tutorials/tutorial1.md
+              - Tutorial 2: meet/integrations/tutorials/tutorial2.md
           - Reference:
-              - REST API: meet/integrations/reference/rest-api.md
               - Webcomponent: meet/integrations/reference/webcomponent.md
+              - REST API: meet/integrations/reference/rest.md
+              - Webhooks: meet/integrations/reference/webhooks.md
   - OpenVidu Platform:
-      - Getting started: docs/getting-started.md
+      - docs/index.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
       - Developing your OpenVidu app:
           - docs/developing-your-openvidu-app/index.md
@@ -241,7 +242,6 @@ plugins:
   - glightbox:
       touchNavigation: true
       loop: false
-      autoplayVideos: true
       effect: zoom
       slide_effect: slide
       width: 100%

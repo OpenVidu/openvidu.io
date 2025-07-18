@@ -14,6 +14,8 @@ This tutorial improves the [basic recording tutorial](./recording-basic-azure.md
 -   **Recording deletion notification**: Implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
 -   **Direct access to recording files**: Add an additional method to allow access to recording files directly from the Azure Container by creating a presigned URL.
 
+For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob Storage container**.
+
 ## Running this tutorial
 
 #### 1. Run OpenVidu Server
