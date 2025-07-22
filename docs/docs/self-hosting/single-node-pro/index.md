@@ -9,7 +9,7 @@ OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu
 
 !!! info
 
-    Scalability and fault tolerance require a multi-node setup. If you need them, consider using [OpenVidu Elastic](../elastic) or [OpenVidu High Availability](../ha/).
+    Scalability and fault tolerance require a multi-node setup. If you need them, consider using [OpenVidu Elastic](../elastic/index.md) or [OpenVidu High Availability](../ha/index.md).
 
 Install OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> in your preferred environment:
 
