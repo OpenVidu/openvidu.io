@@ -26,6 +26,7 @@ nav:
           - Tutorials:
               - meet/integrations/tutorials/index.md
               - JavaScript: meet/integrations/tutorials/javascript.md
+              - Recordings: meet/integrations/tutorials/recordings.md
           - Reference:
               - Webcomponent: meet/integrations/reference/webcomponent.md
               - REST API: meet/integrations/reference/rest.md

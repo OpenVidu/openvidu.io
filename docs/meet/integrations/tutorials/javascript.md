@@ -564,7 +564,7 @@ The `createRoom()` function performs the following actions:
 
 #### Deleting a room
 
-When the user clicks the `Delete Room` button, the `deleteRoom()` function is called:
+When the user clicks the delete room button, the `deleteRoom()` function is called:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/public/js/app.js#L115-L125' target='_blank'>app.js</a>" linenums="115"
 async function deleteRoom(roomName) {

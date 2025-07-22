@@ -43,3 +43,13 @@ Every tutorial below shares the same core functionality:
 <!-- [:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](./ios.md){ .md-button .md-button--primary .tutorial-link} -->
 
 </div>
+
+## Advanced Features Tutorials
+
+Explore more advanced features of OpenVidu Meet! For now, we have implemented a basic tutorial for managing **recordings**.
+
+<div class="tutorials-container" markdown>
+
+[:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link .no-width }
+
+</div> 
