@@ -17,7 +17,7 @@ nav:
           # - Translations: meet-translations.md
           # - Summaries: meet-summaries.md
       - Deployment:
-          - Try OpenVidu locally: meet/deployment/local.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
+          - Try OpenVidu Meet locally: meet/deployment/local.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
           - Basic deployment: meet/deployment/basic.md
           - Advanced deployments: meet/deployment/advanced.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
       - Embedded:

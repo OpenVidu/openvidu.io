@@ -625,6 +625,28 @@ nav .md-tabs__item {
   display: none;
 }
 
+.hide-without-display {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  display: inline-block !important;
+}
+
+.hide-without-display * {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  display: inline-block !important;
+}
+
 .large-icon {
   --md-icon-size: 1.5em !important;
 }

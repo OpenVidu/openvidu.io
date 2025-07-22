@@ -49,8 +49,8 @@ OpenVidu developers are hard at work with integrating _mediasoup_ as a WebRTC en
 
 Currently there are two [client SDK events](https://docs.livekit.io/home/client/events/#Events){target="\_blank"} that are not triggered when using mediasoup:
 
-- No `ConnectionQualityChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#ConnectionQualityChanged){target="\_blank"}).
-- No `TrackStreamStateChanged` event ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html#TrackStreamStateChanged){target="\_blank"}).
+- No `ConnectionQualityChanged` event ([LiveKit JS reference](https://docs.livekit.io/reference/client-sdk-js/enums/RoomEvent.html#connectionqualitychanged){target="\_blank"}).
+- No `TrackStreamStateChanged` event ([LiveKit JS reference](https://docs.livekit.io/reference/client-sdk-js/enums/RoomEvent.html#trackstreamstatechanged){target="\_blank"}).
 
 Also, there are other limitations that must be taken into account:
 

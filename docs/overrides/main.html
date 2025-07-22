@@ -113,16 +113,24 @@
 {% endblock %}
 
 {% block scripts %}
+
 <!-- Add scripts that need to run before here -->
+
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
 <script src="/javascripts/wow.min.js"></script>
 <script>
   window.setupWowJs();
 </script>
-{% endif %} {% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
 <script>
   window.setupCardGlow();
 </script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<script src="/javascripts/flickity.pkgd.min.js"></script>
 {% endif %}
 
 {{ super() }}
@@ -135,6 +143,10 @@
 
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
 <link rel="stylesheet" href="{{ '/stylesheets/animate.min.css' }}" />
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/flickity.min.css' }}" />
 {% endif %}
 
 <style>

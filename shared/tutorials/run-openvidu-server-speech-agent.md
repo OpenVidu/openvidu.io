@@ -8,4 +8,4 @@
 
     !!! info "Enable the Live Captions service"
 
-        Once your deployment is up and running, enable the Live Captions service following the [official instructions](../../../ai/live-captions/#how-to-enable-live-captions-service-in-your-openvidu-deployment).
+        Once your deployment is up and running, enable the Live Captions service following the [official instructions](../../ai/live-captions.md#how-to-enable-live-captions-service-in-your-openvidu-deployment).
