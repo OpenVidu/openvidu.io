@@ -24,8 +24,8 @@ nav:
           - Introduction: meet/integrations/intro.md # Basic concepts...
           - Quickstart: meet/integrations/quickstart.md # Gettings started: step 1 (curl), step 2(embed html), ...
           - Tutorials:
-              - Tutorial 1: meet/integrations/tutorials/tutorial1.md
-              - Tutorial 2: meet/integrations/tutorials/tutorial2.md
+              - meet/integrations/tutorials/index.md
+              - JavaScript: meet/integrations/tutorials/javascript.md
           - Reference:
               - Webcomponent: meet/integrations/reference/webcomponent.md
               - REST API: meet/integrations/reference/rest.md
