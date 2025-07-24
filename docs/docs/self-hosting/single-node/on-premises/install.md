@@ -27,7 +27,7 @@ All services are deployed on a single machine, which includes:
 - **Redis** as a shared database for OpenVidu Server and Ingress/Egress services.
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates.
-- **[OpenVidu Meet](/meet)**, an optional high-quality video calling service.
+- **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 ## Prerequisites
@@ -83,7 +83,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
-    - [_OpenVidu Meet_](/meet): A high-quality video calling service based on OpenVidu.
+    - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
@@ -248,7 +248,7 @@ You can run that command in a CI/CD pipeline or in a script to automate the inst
 Some notes about the command:
 
 - The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
-- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](/meet) and `observability` (Grafana stack).
+- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md) and `observability` (Grafana stack).
 - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media.
 
 To start OpenVidu, remember to run:

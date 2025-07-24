@@ -45,7 +45,7 @@ For the Master Node, the following services are configured:
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as an internal reverse proxy for all services.
 - **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **[OpenVidu Meet](/meet)**, an optional high-quality video calling service.
+- **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 For the Media Nodes, the following services are configured:
@@ -155,7 +155,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
-    - [_OpenVidu Meet_](/meet): A high-quality video calling service based on OpenVidu.
+    - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
     - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
@@ -491,7 +491,7 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 Some general notes about all the Master Node commands:
 
 - The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
-- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](/meet), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
+- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:
 
