@@ -1,4 +1,5 @@
 ---
+title: OpenVidu Platform
 description: Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, AI, live streaming and robotics.
 ---
 

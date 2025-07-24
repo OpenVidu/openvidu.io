@@ -7,6 +7,8 @@ hide:
   - footer
   - search-bar
   - version-selector
+tags:
+  - setupwowjs
 ---
 
 <style>

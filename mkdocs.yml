@@ -8,6 +8,8 @@ nav:
   - Home: index.md
   - OpenVidu Meet:
       - meet/index.md
+      - Getting started:
+          - meet/getting-started/index.md
       - Features:
           - Rooms and meetings: meet/features/rooms-and-meetings.md
           - Users and permissions: meet/features/users-and-permissions.md
@@ -203,7 +205,7 @@ theme:
     - content.code.annotate
     - content.tooltips
     - navigation.tabs
-    # - navigation.tabs.sticky
+    - navigation.tabs.sticky
     - navigation.tracking
     - navigation.footer
     # - navigation.expand
@@ -236,10 +238,13 @@ theme:
         icon: material/brightness-7
         name: Switch to dark mode
   favicon: assets/images/logo.png
-  logo: assets/images/openvidu_globe_bg_transp_cropped.png
+  logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
 
 plugins:
   - search
+  - blog
+  - meta
+  - privacy
   - glightbox:
       touchNavigation: true
       loop: false
@@ -255,8 +260,6 @@ plugins:
       caption_position: bottom
       background: none
       shadow: false
-  - blog
-  - meta
 
 markdown_extensions:
   - admonition

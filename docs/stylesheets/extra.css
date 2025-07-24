@@ -311,6 +311,10 @@ img.svg-img {
   line-height: 1;
 }
 
+.md-header__title {
+  line-height: 2.6rem;
+}
+
 @media (min-width: 1220px) {
   #home-markdown hr {
     margin: 4em -4em !important;
@@ -778,4 +782,31 @@ h2.meetplatform-slogan {
   font-size: 1.6em;
   margin-top: 0;
   margin-bottom: 1.6em;
+}
+
+.md-header__button.md-logo {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-header__button.md-logo:has(> img.custom-logo) {
+  margin-left: .6rem !important;
+}
+
+.md-header__button.md-logo > img {
+  height: 1.7rem !important;
+}
+
+.md-header__button.md-logo > img.custom-logo {
+  height: 1.6rem !important;
+  background-color: #ffffff38;
+  border-radius: 5px;
+}
+
+.md-tabs__item {
+  height: 2rem !important;
+}
+
+.md-tabs__link {
+  margin-top: 0.4rem !important;
 }

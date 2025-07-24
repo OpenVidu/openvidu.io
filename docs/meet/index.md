@@ -246,7 +246,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow ov-call-commercial-feature-cards" markdown>
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners}
+![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
@@ -287,7 +287,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 -	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features to enhance the learning experience.
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners}
+![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
 
 </div>
 
@@ -324,7 +324,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow ov-call-commercial-feature-cards" markdown>
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners}
+![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
 
 -	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption.
 
@@ -365,7 +365,7 @@ Build trust with instant, reliable support through embedded video calls that per
 
 -	Connecting your **remote assistance** team with your **customers** has never been so easy. OpenVidu Meet provides all the necessary tools for effective communication and collaboration, ensuring a seamless support experience.
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners}
+![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
 
 </div>
 

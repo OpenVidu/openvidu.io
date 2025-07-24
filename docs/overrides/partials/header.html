@@ -1,7 +1,7 @@
 <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html -->
 
 <!--
-  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -73,7 +73,14 @@
       aria-label="{{ config.site_name }}"
       data-md-component="logo"
     >
-      {% include "partials/logo.html" %}
+      {% set page_path = page.file.src_path if page.file else "" %}
+      {% if page_path.startswith("meet/") %}
+        <img src="{{ base_url }}/assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo"/>
+      {% elif page_path.startswith("docs/") %}
+        <img src="{{ base_url }}/assets/images/logos/platform_whiteallfont_transback_cropped.png" alt="OpenVidu Platform" class="custom-logo"/>
+      {% else %}
+        {% include "partials/logo.html" %}
+      {% endif %}
     </a>
 
     <!-- Button to open drawer -->
@@ -87,15 +94,25 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            {{ config.site_name }}
+
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             {% if page.meta and page.meta.title %}
-              {{ page.meta.title }}
+              {% if page.meta.title == "openVidu" %}
+              {% elif page.meta.title == "OpenVidu Meet" %}
+                Index
+              {% elif page.meta.title == "OpenVidu Platform" %}
+                Index
+              {% else %}
+                {{ page.meta.title }}
+              {% endif %}
             {% else %}
-              {{ page.title }}
+              {% if page.title == "openVidu" %}
+              {% else %}
+                {{ page.title }}
+              {% endif %}
             {% endif %}
           </span>
         </div>
@@ -121,13 +138,18 @@
 
     <!-- Button to open search modal -->
     {% if "material/search" in config.plugins %}
-      <label class="md-header__button md-icon" for="__search">
-        {% set icon = config.theme.icon.search or "material/magnify" %}
-        {% include ".icons/" ~ icon ~ ".svg" %}
-      </label>
+      {% set search = config.plugins["material/search"] | attr("config") %}
 
-      <!-- Search interface -->
-      {% include "partials/search.html" %}
+      <!-- Check if search is actually enabled - see https://t.ly/DT_0V -->
+      {% if search.enabled %}
+        <label class="md-header__button md-icon" for="__search">
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+
+        <!-- Search interface -->
+        {% include "partials/search.html" %}
+      {% endif %}
     {% endif %}
 
     <!-- Repository information -->
@@ -142,7 +164,6 @@
     </div>
 
   </nav>
-
 
   <!-- Navigation tabs (sticky) -->
   {% if "navigation.tabs.sticky" in features %}
