@@ -91,7 +91,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     SSH to the instance and navigate to the config folder `/opt/openvidu/config`. Files with the deployment outputs are:
 
     - `openvidu.env`
-    - `app.env`
+    - `meet.env`
 
 ## Configure your application to use the deployment 
 

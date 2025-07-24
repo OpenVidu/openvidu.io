@@ -155,7 +155,7 @@ By visiting [http://localhost:7880](http://localhost:7880){:target="\_blank"} yo
 - **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="\_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
 - **OpenVidu Dashboard** ([http://localhost:7880/dashboard](http://localhost:7880/dashboard){:target="\_blank"}): a web application interface to visualize your Rooms, Ingress and Egress services.
 - **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="\_blank"}): as an S3 storage service for recordings.
-- **OpenVidu Call (Default Application)** ([http://localhost:7880/openvidu-call](http://localhost:7880/openvidu-call){:target="\_blank"}): an optional ready-to-use videoconferencing application.
+- **OpenVidu Meet** ([http://localhost:9080](http://localhost:9080){:target="\_blank"}): a high-quality video calling service based on OpenVidu.
 
 You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](../tutorials/application-client/index.md){:target="\_blank"} if you want a step-by-step guide to develop your first application using OpenVidu.
 

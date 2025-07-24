@@ -135,7 +135,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     SSH to the Master Node instance and navigate to the config folder `/opt/openvidu/config/cluster`. Files with the access credentials outputs are:
 
     - `openvidu.env`
-    - `master_node/app.env`
+    - `master_node/meet.env`
 
 ## Configure your application to use the deployment
 

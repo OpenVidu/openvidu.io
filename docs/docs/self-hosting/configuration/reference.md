@@ -32,28 +32,44 @@ This file defines global configuration parameters used by other services. Such a
 | **`OPENVIDU_PRO_LICENSE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Pro license key. Get an OpenVidu Pro License [here](/account/){:target="_blank"}. |
 | **`OPENVIDU_RTC_ENGINE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> The WebRTC engine to use. Can be `pion` or `mediasoup`. |
 
-## `app.env`:
+## `meet.env`:
 
-This file defines the configuration parameters for the OpenVidu Call application.
+This file defines the configuration parameters for the OpenVidu Meet service.
 
 | Parameter | Description |
 | --------- | ----------- |
-| **`SERVER_PORT`** | Port where the OpenVidu Call application will be running. |
-| **`LIVEKIT_URL`** | The public URL of the LiveKit server which external clients will use to connect to the OpenVidu Call application. |
-| **`LIVEKIT_URL_PRIVATE`** | The private URL of the LiveKit server which OpenVidu Call backend will use to connect to the LiveKit Server internally. |
-| **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Call application to connect to the LiveKit server. |
-| **`CALL_PRIVATE_ACCESS`** | If `true`, only authenticated users can access the OpenVidu Call application. |
-| **`CALL_USER`** | Username for the OpenVidu Call application. |
-| **`CALL_SECRET`** | Password for the OpenVidu Call application. |
-| **`CALL_ADMIN_USER`** | Admin username for the OpenVidu Call application. |
-| **`CALL_ADMIN_SECRET`** | Admin password for the OpenVidu Call application. |
-| **`CALL_S3_BUCKET`** | S3 bucket name for OpenVidu Call application. It is used to store recordings. |
-| **`CALL_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for OpenVidu Call application. |
-| **`CALL_S3_ACCESS_KEY`** | S3 access key for OpenVidu Call application. |
-| **`CALL_S3_SECRET_KEY`** | S3 secret key for OpenVidu Call application. |
-| **`CALL_AWS_REGION`** | AWS region of the S3 Bucket application. |
-| **`CALL_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
-| **`CALL_LOG_LEVEL`** | Log level for OpenVidu Call application. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
+| **`SERVER_PORT`** | Port where the OpenVidu Meet service will be running. |
+| **`SERVER_CORS_ORIGIN`** | CORS origin for the OpenVidu Meet service. It is `*` by default, allowing all origins. |
+| **`LIVEKIT_URL`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server. |
+| **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
+| **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
+| **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
+| **`MEET_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. |
+| **`MEET_ADMIN_SECRET`** | Password for the Admin user of the OpenVidu Meet service. |
+| **`MEET_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. |
+| **`MEET_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
+| **`MEET_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. |
+| **`MEET_PREFERENCES_STORAGE_MODE`** | Storage mode for user preferences in OpenVidu Meet. Valid values are: `s3` (S3 bucket) and `abs` (Azure Blob Storage). |
+| **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
+| **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for OpenVidu Meet service. |
+| **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
+| **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
+| **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
+| **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
+| **`MEET_AZURE_SUBCONATAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
+| **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. |
+| **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |
+| **`MEET_REDIS_PORT`** | Redis port used by the OpenVidu Meet service to connect to the Redis server. |
+| **`MEET_REDIS_USERNAME`** | Redis username used by the OpenVidu Meet service to connect to the Redis server. |
+| **`MEET_REDIS_PASSWORD`** | Redis password used by the OpenVidu Meet service to connect to the Redis server. |
+| **`MEET_REDIS_DB`** | Redis database used by the OpenVidu Meet service. Default value is `0`. |
+| **`MEET_REDIS_SENTINEL_HOST_LIST`** | Redis Sentinel host list used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
+| **`MEET_REDIS_SENTINEL_PASSWORD`** | Redis Sentinel password used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
+| **`MEET_REDIS_SENTINEL_MASTER_NAME`{.no-break}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
+| **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
 
 ## <span class="openvidu-tag openvidu-pro-tag">PRO</span> `v2compatibility.env`
 

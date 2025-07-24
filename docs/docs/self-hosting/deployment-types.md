@@ -82,8 +82,8 @@ OpenVidu is composed of several services that work together to provide a complet
 
 | SERVICE                | DESCRIPTION |
 | :--------------------- | :---------- |
+| **[OpenVidu Meet](/meet)**      | A high-quality video calling service based on OpenVidu. |
 | **OpenVidu Dashboard** | Web application interface for managing your cluster and visualizing your Rooms. |
-| **Default Application (OpenVidu Call)**      | A fully fledged videoconference web application ready to be used out-of-the-box. |
 | **OpenVidu Operator**  | Module that supervises the high availability services and updates the loadbalancing configuration dynamically. |
 | **Redis**              | Database used to share transient information between Media Nodes and coordinate them. In [OpenVidu High Availability](#openvidu-high-availability) this is an instance of a [Redis Cluster](https://redis.io/docs/management/scaling/){:target=_blank}. |
 | **MongoDB**            | Database used to store analytics and monitoring persistent data. In [OpenVidu High Availability](#openvidu-high-availability) this is an instance of a [MongoDB Replica Set](https://www.mongodb.com/docs/manual/replication/){:target=_blank}. |

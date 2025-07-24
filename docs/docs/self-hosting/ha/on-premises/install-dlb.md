@@ -44,7 +44,7 @@ For the Master Node, the following services are configured:
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as an internal reverse proxy for all services.
 - **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **OpenVidu Call (Default Application module)**, an optional ready-to-use videoconferencing application.
+- **[OpenVidu Meet](/meet)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 For the Media Nodes, the following services are configured:
@@ -85,7 +85,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | Protocol | <div style="width:8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 80          | 0.0.0.0/0, ::/0           | Redirect HTTP to HTTPS and Let's Encrypt validation.                                              |
-| TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
+| TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
 | TCP      | 1935        | 0.0.0.0/0, ::/0           | Needed if you want to ingest RTMP streams using Ingress service.                                      |
 | TCP      | 9000        | 0.0.0.0/0, ::/0           | Needed if you want to expose MinIO publicly.                                                              |
 | TCP      | 3000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana.                         |
@@ -96,7 +96,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP      | 3100        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Loki service.                                                       |
 | TCP      | 9009        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service.                                                      |
 | TCP      | 4443        | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service.                                                 |
-| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'Default App'_ module is used (`app` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Call (Default Application).                                               |
+| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
 | TCP      | 7000-7001   | Master Nodes, Media Nodes | For internal Redis communication                                                                  |
 | TCP      | 9100        | Master Nodes, Media Nodes | For internal MinIO communication                                                                  |
 | TCP      | 20000       | Master Nodes, Media Nodes | For internal Mongo communication                                                                  |
@@ -162,8 +162,8 @@ A wizard will guide you through the installation process. You will be asked for 
 - **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** or **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
+    - [_OpenVidu Meet_](/meet): A high-quality video calling service based on OpenVidu.
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
-    - _Default App_: OpenVidu Call, a ready-to-use videoconferencing application.
     - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
@@ -233,7 +233,7 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Call (Default Application): [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
+- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
 - OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
@@ -280,7 +280,7 @@ Each installation command for each type of node looks like this:
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
-            --enabled-modules='observability,v2compatibility,app' \
+            --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
@@ -295,10 +295,9 @@ Each installation command for each type of node looks like this:
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --certificate-type='letsencrypt' \
             --letsencrypt-email='example@example.io'
         ```
@@ -322,7 +321,7 @@ Each installation command for each type of node looks like this:
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
-            --enabled-modules='observability,v2compatibility,app' \
+            --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
@@ -337,10 +336,9 @@ Each installation command for each type of node looks like this:
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --certificate-type='selfsigned'
         ```
 
@@ -368,7 +366,7 @@ Each installation command for each type of node looks like this:
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
-            --enabled-modules='observability,v2compatibility,app' \
+            --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
             --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
@@ -383,10 +381,9 @@ Each installation command for each type of node looks like this:
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --certificate-type='owncert' \
             --owncert-private-key="$CERT_PRIVATE_KEY" \
             --owncert-public-key="$CERT_PUBLIC_KEY" \
@@ -425,7 +422,7 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 Some general notes about all the Master Node commands:
 
 - The argument `--turn-domain-name` is optional. Define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
-- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack), `app` (Default App - OpenVidu Call), and `v2compatibility` (OpenVidu v2 compatibility API).
+- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack), `openviduMeet` (OpenVidu Meet), and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:
 

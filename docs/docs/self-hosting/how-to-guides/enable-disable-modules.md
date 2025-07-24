@@ -6,7 +6,7 @@ description: Learn how to enable or disable OpenVidu modules to customize your d
 
 OpenVidu allows you to enable or disable modules to customize your deployment. These modules are:
 
-- **`app`**: The OpenVidu Default App (OpenVidu Call)
+- **`openviduMeet`**: The OpenVidu Meet service.
 - **`observability`**: Grafana, Loki, Mimir, and Promtail observability services.
 - **`v2compatibility`**: OpenVidu V2 Compatibility. (Only available in OpenVidu Pro)
 
@@ -46,7 +46,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu Default App which is necessary.
+        With this configuration, the Livekit service will send webhooks to the OpenVidu Meet service which is necessary.
 
     === "Elastic"
 
@@ -59,7 +59,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://master-node:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu Default App which is necessary.
+        With this configuration, the Livekit service will send webhooks to the OpenVidu Meet service which is necessary.
 
     === "High Availability"
 
@@ -72,7 +72,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu Default App which is necessary.
+        With this configuration, the Livekit service will send webhooks to the OpenVidu Meet service which is necessary.
 
 === "v2compatibility"
 

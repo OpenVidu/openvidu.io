@@ -36,7 +36,7 @@ EXTERNAL_S3_BUCKET_CLUSTER_DATA=<YOUR_CLUSTER_DATA_BUCKET>
 - `EXTERNAL_S3_SECRET_KEY`: Secret key for your S3 provider.
 - `EXTERNAL_S3_REGION`: Region of your S3 provider.
 - `EXTERNAL_S3_PATH_STYLE_ACCESS`: Use path-style access for the S3 bucket (`true` or `false` based on provider requirements).
-- `EXTERNAL_S3_BUCKET_APP_DATA`: Bucket for storing OpenVidu recordings and data related to the Default Application (OpenVidu Call).
+- `EXTERNAL_S3_BUCKET_APP_DATA`: Bucket for storing OpenVidu recordings and data related to the OpenVidu Meet service.
 - `EXTERNAL_S3_BUCKET_CLUSTER_DATA` (High Availability only): Bucket for storing observability data and other data specific to a High Availability deployment.
 
 After updating the `openvidu.env` file, restart the Master Node or your Single Node deployment:

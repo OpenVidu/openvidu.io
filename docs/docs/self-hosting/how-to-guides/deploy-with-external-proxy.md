@@ -49,7 +49,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-        | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
@@ -85,7 +85,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --no-tty --install \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,app' \
+            --enabled-modules='observability,openviduMeet' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -98,10 +98,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --external-proxy
         ```
 
@@ -113,7 +112,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,app,v2compatibility' \
+            --enabled-modules='observability,openviduMeet,v2compatibility' \
             --rtc-engine='pion' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -127,10 +126,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --external-proxy
         ```
 
@@ -193,11 +191,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         | Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-        | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 1935           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP         | 6080           | Media Nodes     | Needed when _'Default App'_  module is used (`app` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
+        | TCP         | 6080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
         | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
         | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
         | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
@@ -251,7 +249,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,v2compatibility,app' \
+            --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -265,10 +263,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --private-ip='<MASTER_NODE_PRIVATE_IP>' \
             --external-proxy
         ```
