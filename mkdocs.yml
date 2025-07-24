@@ -23,16 +23,16 @@ nav:
           - Basic deployment: meet/deployment/basic.md
           - Advanced deployments: meet/deployment/advanced.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
       - Embedded:
-          - Introduction: meet/integrations/intro.md # Basic concepts...
-          - Quickstart: meet/integrations/quickstart.md # Gettings started: step 1 (curl), step 2(embed html), ...
+          - Introduction: meet/embedded/intro.md # Basic concepts...
+          - Quickstart: meet/embedded/quickstart.md # Gettings started: step 1 (curl), step 2(embed html), ...
           - Tutorials:
-              - meet/integrations/tutorials/index.md
-              - JavaScript: meet/integrations/tutorials/javascript.md
-              - Recordings: meet/integrations/tutorials/recordings.md
+              - meet/embedded/tutorials/index.md
+              - JavaScript: meet/embedded/tutorials/javascript.md
+              - Recordings: meet/embedded/tutorials/recordings.md
           - Reference:
-              - Webcomponent: meet/integrations/reference/webcomponent.md
-              - REST API: meet/integrations/reference/rest.md
-              - Webhooks: meet/integrations/reference/webhooks.md
+              - Webcomponent: meet/embedded/reference/webcomponent.md
+              - REST API: meet/embedded/reference/rest.md
+              - Webhooks: meet/embedded/reference/webhooks.md
   - OpenVidu Platform:
       - docs/index.md
       - Comparing OpenVidu: docs/comparing-openvidu.md

@@ -14,7 +14,7 @@
   --md-primary-fg-color--dark: var(--meet-primary-color) !important;
   --md-primary-bg-color: rgb(255, 255, 255) !important;
   --md-primary-bg-color--dark: var(--meet-primary-color) !important;
-  --md-accent-fg-color: var(--meet-primary-color) !important;
+  --md-accent-fg-color: rgba(var(--meet-primary-color-rgb), 0.8) !important;
   --md-accent-fg-color--transparent: rgb(129, 129, 129) !important;
   --md-accent-bg-color: rgb(255, 255, 255) !important;
   --md-accent-bg-color--light: rgb(255, 255, 255) !important;
@@ -284,8 +284,7 @@ body[data-md-color-scheme="default"] {
 
 /* position dots at top */
 ol.flickity-page-dots {
-  top: -60px;
-  z-index: -1000;
+  bottom: -50px;
 }
 
 /* dots are lines */
@@ -303,6 +302,14 @@ ol.flickity-page-dots li.dot {
     auto-fit,
     minmax(min(100%, 10rem), 1fr)
   ) !important;
+}
+
+.grid.cards.use-cases-cards ul li {
+  border-color: transparent !important;
+}
+
+.grid.cards.use-cases-cards ul li:hover {
+  box-shadow: none !important;
 }
 
 .grid.cards.use-cases-cards ul li p {
