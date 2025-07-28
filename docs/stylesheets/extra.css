@@ -803,10 +803,8 @@ h2.meetplatform-slogan {
   border-radius: 5px;
 }
 
-.md-tabs__item {
-  height: 2rem !important;
-}
-
-.md-tabs__link {
-  margin-top: 0.4rem !important;
+.nav-open-new-tab {
+  float: right !important;
+  font-size: 0.8rem !important;
+  margin-left: 0.7rem !important;
 }

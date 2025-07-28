@@ -8,7 +8,7 @@
 
 You can access to the REST API reference documentation at the following link:
 
-[OpenVidu Meet REST API Reference](https://docs.openvidu.io/en/stable/meet/reference/rest/)
+[OpenVidu Meet REST API Reference](../../../assets/htmls/public.html){target="_blank"}
 
 or directly in the OpenVidu Meet deployment:
 
