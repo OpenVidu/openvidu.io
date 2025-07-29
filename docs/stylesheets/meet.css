@@ -36,6 +36,21 @@
   --meet-body-color-dark: #f5f5f5;
 }
 
+/* START: MkDocs Material custom admonition styles */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: var(--meet-primary-color);
+}
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(var(--meet-primary-color-rgb), 0.1);
+}
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before {
+  background-color: var(--meet-primary-color);
+}
+/* END: MkDocs Material custom admonition styles */
+
 .grid.cards {
   margin: 3em 0 !important;
 }

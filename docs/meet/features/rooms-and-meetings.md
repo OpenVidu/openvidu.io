@@ -22,7 +22,8 @@ Rooms are configurable in multiple ways:
 3. Change its appearance.
 4. ...
 
-!!! note "You can also programmatically create rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}"
+!!! info
+    You can also programmatically create rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}.
 
 Available rooms are all listed in the "Rooms" page. From there administrators can:
 
@@ -40,6 +41,9 @@ Rooms can be created with an **auto-deletion date**. This helps keeping OpenVidu
 
 ![Room auto-deletion](../../../assets/images/meet/rooms-and-meetings/room-auto-deletion.png)
 
+!!! info
+    You can set an auto-deletion date using parameter `autoDeletionDate` when creating a room programmatically through [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/createRoom#request-body){:target="_blank"}.
+
 ### Editing a room
 
 You can edit the settings of an existing room at any time in the "Rooms" page. The same options available when creating a room are also available when editing it:
@@ -51,13 +55,17 @@ You can edit the settings of an existing room at any time in the "Rooms" page. T
 
 ![Edit room](../../../assets/images/meet/rooms-and-meetings/edit-room.png)
 
+!!! info
+    You can also programmatically edit rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/updateRoom){:target="_blank"}.
+
 ### Deleting a room
 
 Rooms can be deleted at any time from the "Rooms" page. This will remove the room and all its associated data.
 
 ![Delete room](../../../assets/images/meet/rooms-and-meetings/delete-room.png)
 
-!!! note "You can also programmatically delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/deleteRoom){:target="_blank"}"
+!!! info
+    You can also programmatically delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/deleteRoom){:target="_blank"}.
 
 ### Bulk deleting rooms
 
@@ -65,7 +73,8 @@ Use the multi-select checkbox to delete multiple rooms at once.
 
 <video class="round-corners" src="../../../assets/videos/meet/bulk-delete-rooms.mp4" defer muted playsinline autoplay loop async></video>
 
-!!! note "You can also programmatically bulk delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"}"
+!!! info
+    You can also programmatically bulk delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"}.
 
 ## Meetings
 
@@ -97,11 +106,11 @@ This view allows participants tuning their microphone and camera before joining 
 
 ![Device view](../../../assets/images/meet/rooms-and-meetings/device-view.png)
 
-#### Room view
+#### Meeting view
 
 This is the main view of the meeting, where participants can interact with each other.
 
-![Room view](../../../assets/images/meet/rooms-and-meetings/room-view.png)
+![Meeting view](../../../assets/images/meet/rooms-and-meetings/room-view.png)
 
 #### Recording view
 
@@ -109,7 +118,7 @@ This view allows to manage the recording of the meeting while it is active. Part
 
 ![Recording view](../../../assets/images/meet/rooms-and-meetings/recording-view.png)
 
-!!! note
+!!! info
     Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [Managing recordings](./recordings.md#managing-recordings).
 
 #### End view

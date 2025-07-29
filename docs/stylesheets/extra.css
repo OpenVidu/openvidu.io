@@ -808,3 +808,7 @@ h2.meetplatform-slogan {
   font-size: 0.8rem !important;
   margin-left: 0.7rem !important;
 }
+
+.control-height {
+  max-height: 50vh;
+}
