@@ -2,6 +2,9 @@
 
 OpenVidu Meet offers two different layers of user management and permissions:
 
+- [Authentication when accessing OpenVidu Meet](#authentication-when-accessing-openvidu-meet): how users authenticate to access the OpenVidu Meet application.
+- [Authentication when joining a meeting](#authentication-when-joining-a-meeting): how users authenticate to join a specific meeting.
+
 ## Authentication when accessing OpenVidu Meet
 
 First of all, OpenVidu Meet is by default protected with a **username and password** randomly generated after the first installation. Only users with valid credentials can access the application:
