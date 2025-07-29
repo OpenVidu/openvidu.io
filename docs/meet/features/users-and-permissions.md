@@ -26,13 +26,13 @@ These are the available options to authenticate users when accessing OpenVidu Me
 
 ## Authentication when joining a meeting
 
-Meetings are always accessed through **room links**. There are different types of room links, each granting different permissions to the participants (see [User permissions in a meeting](#user-permissions-in-a-meeting)).
+Meetings are always accessed through **room links**. There are different types of room links, each granting different permissions to the participants (see [Participant permissions in a meeting](#participant-permissions-in-a-meeting)).
 
 - Administrators can share links for a room from the "Rooms" page.
 
 <video class="round-corners" src="../../../assets/videos/meet/share-room-link-from-console.mp4" defer muted playsinline autoplay loop async></video>
 
-- Participants with role "Moderator" can share links for ongoing meetings directly from the meeting itself (see [User permissions in a meeting](#user-permissions-in-a-meeting)).
+- Participants with role "Moderator" can share links for ongoing meetings directly from the meeting itself (see [Participant permissions in a meeting](#participant-permissions-in-a-meeting)).
 
 <video class="round-corners" src="../../../assets/videos/meet/meet-share-link.mp4" defer muted playsinline autoplay loop async style="margin-top: 1em"></video>
 

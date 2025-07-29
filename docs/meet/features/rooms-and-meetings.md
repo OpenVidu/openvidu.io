@@ -7,9 +7,11 @@ It is important to understand these core concepts of OpenVidu Meet:
 
 One room can host just one meeting at a time, but it can be reused for multiple meetings over time.
 
-## Creating a room
+## Rooms
 
-You can create a new room directly from the "Rooms" view in OpenVidu Meet.
+### Creating a room
+
+As an administrator, you can create a new room directly from the "Rooms" page in OpenVidu Meet.
 
 <video class="round-corners" src="../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video>
 
@@ -20,9 +22,9 @@ Rooms are configurable in multiple ways:
 3. Change its appearance.
 4. ...
 
-!!! note "You can also programmatically create rooms using [OpenVidu Meet REST API](../embedded/reference/rest.md)"
+!!! note "You can also programmatically create rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}"
 
-Available rooms are all listed in the "Rooms" view. From there you can:
+Available rooms are all listed in the "Rooms" page. From there administrators can:
 
 - Start a meeting in a room.
 - Edit the room settings.
@@ -32,21 +34,50 @@ Available rooms are all listed in the "Rooms" view. From there you can:
 
 <video class="round-corners" src="../../../assets/videos/meet/room-actions.mp4" defer muted playsinline autoplay loop async></video>
 
-### Room auto-deletion
+#### Room auto-deletion
 
 Rooms can be created with an **auto-deletion date**. This helps keeping OpenVidu Meet clean and organized, avoiding clutter from old rooms that are no longer needed.
 
 ![Room auto-deletion](../../../assets/images/meet/rooms-and-meetings/room-auto-deletion.png)
 
-## Starting a meeting
+### Editing a room
 
-A meeting will start as soon as a participant enters the room using a valid **link**.
+You can edit the settings of an existing room at any time in the "Rooms" page. The same options available when creating a room are also available when editing it:
 
-You can join a meeting directly from the "Rooms" view in OpenVidu Meet:
+1. Name them.
+2. Set up recording.
+3. Change its appearance.
+4. ...
+
+![Edit room](../../../assets/images/meet/rooms-and-meetings/edit-room.png)
+
+### Deleting a room
+
+Rooms can be deleted at any time from the "Rooms" page. This will remove the room and all its associated data.
+
+![Delete room](../../../assets/images/meet/rooms-and-meetings/delete-room.png)
+
+!!! note "You can also programmatically delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/deleteRoom){:target="_blank"}"
+
+### Bulk deleting rooms
+
+Use the multi-select checkbox to delete multiple rooms at once.
+
+<video class="round-corners" src="../../../assets/videos/meet/bulk-delete-rooms.mp4" defer muted playsinline autoplay loop async></video>
+
+!!! note "You can also programmatically bulk delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"}"
+
+## Meetings
+
+### Starting a meeting
+
+A meeting will start as soon as a participant enters the room using a valid **room link**.
+
+Administrators can join any meeting directly from the "Rooms" page in OpenVidu Meet:
 
 <video class="round-corners" src="../../../assets/videos/meet/join-meeting.mp4" defer muted playsinline autoplay loop async></video>
 
-Or you can copy the room link and share it with other participants. There are multiple room links, each granting different permissions to the participants (for more information, see [User permissions in a meeting](users-and-permissions.md#user-permissions-in-a-meeting)):
+Administrator can also copy the room link and share it with other participants. There are multiple room links, each granting different permissions to the participants (for more information, see [Participant permissions in a meeting](users-and-permissions.md#participant-permissions-in-a-meeting)):
 
 <video class="round-corners" src="../../../assets/videos/meet/share-room-link.mp4" defer muted playsinline autoplay loop async></video>
 
@@ -77,6 +108,9 @@ This is the main view of the meeting, where participants can interact with each 
 This view allows to manage the recording of the meeting while it is active. Participants with the required permissions can review, play, download, delete, and share the recording via a link.
 
 ![Recording view](../../../assets/images/meet/rooms-and-meetings/recording-view.png)
+
+!!! note
+    Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [Managing recordings](./recordings.md#managing-recordings).
 
 #### End view
 
