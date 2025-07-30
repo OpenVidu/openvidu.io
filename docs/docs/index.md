@@ -111,9 +111,7 @@ The future lies in the integration of cameras and sensors in all kinds of device
 
 ## OpenVidu application architecture
 
-<figure markdown>
-  ![OpenVidu app architecture](../assets/images/getting-started/openvidu-app-architecture.drawio.svg)
-</figure>
+![OpenVidu app architecture](../assets/images/getting-started/openvidu-app-architecture.drawio.svg)
 
 Every OpenVidu application consists of 3 main components:
 

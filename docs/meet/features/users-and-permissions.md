@@ -1,3 +1,9 @@
+---
+title: Users and permissions
+tags:
+  - setupcustomgallery
+---
+
 # Users and permissions
 
 OpenVidu Meet offers two different layers of user management and permissions:
@@ -9,7 +15,7 @@ OpenVidu Meet offers two different layers of user management and permissions:
 
 First of all, OpenVidu Meet is by default protected with a **username and password** randomly generated after the first installation. Only users with valid credentials can access the application:
 
-![Authentication](../../../assets/images/meet/users-and-permissions/login.png)
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login.png" loading="lazy"/></a>
 
 !!! note
     We will refer as an **administrator** to any user that has access to OpenVidu Meet with valid credentials. Once logged in, users can manage rooms, meetings, recordings and any other OpenVidu Meet feature.
@@ -18,7 +24,7 @@ First of all, OpenVidu Meet is by default protected with a **username and passwo
 
 Once logged in, you can modify the authentication method to access OpenVidu Meet from the "User & Permissions" view:
 
-![Change authentication](../../../assets/images/meet/users-and-permissions/change-authentication.png)
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/change-authentication.png" data-type="image" data-desc-position="bottom" data-gallery="gallery2"><img src="../../../assets/images/meet/users-and-permissions/change-authentication.png" loading="lazy"/></a>
 
 These are the available options to authenticate users when accessing OpenVidu Meet:
 
@@ -33,11 +39,11 @@ Meetings are always accessed through **room links**. There are different types o
 
 - Administrators can share links for a room from the "Rooms" page.
 
-<video class="round-corners" src="../../../assets/videos/meet/share-room-link-from-console.mp4" defer muted playsinline autoplay loop async></video>
+<a class="glightbox" href="../../../assets/videos/meet/share-room-link-from-console.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery3"><video class="round-corners" src="../../../assets/videos/meet/share-room-link-from-console.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 - Participants with role "Moderator" can share links for ongoing meetings directly from the meeting itself (see [Participant permissions in a meeting](#participant-permissions-in-a-meeting)).
 
-<video class="round-corners" src="../../../assets/videos/meet/meet-share-link.mp4" defer muted playsinline autoplay loop async style="margin-top: 1em"></video>
+<a class="glightbox" href="../../../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 Further authentication can be enforced for users trying to join a meeting using a valid room link. From the "User & Permissions" page, administrators can configure which users must authenticate before joining a meeting:
 
@@ -45,7 +51,7 @@ Further authentication can be enforced for users trying to join a meeting using 
 - **Only moderators**: users joining the meeting through a room link with "Moderator" role must authenticate first.
 - **Everybody**: all users joining the meeting must authenticate first.
 
-![Authentication when joining a meeting](../../../assets/images/meet/users-and-permissions/authentication-to-join-meeting.png)
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/authentication-to-join-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/users-and-permissions/authentication-to-join-meeting.png" loading="lazy"/></a>
 
 ## Participant permissions in a meeting
 

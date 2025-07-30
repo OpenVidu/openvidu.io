@@ -182,7 +182,7 @@ If you leave them empty and app is launched in a mobile device, the user will be
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
 </div>
 

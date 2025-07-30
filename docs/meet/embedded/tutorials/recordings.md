@@ -53,9 +53,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-recordings.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-recordings.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/list-recordings.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/list-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/list-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/list-recordings.png" loading="lazy"/></a></p></div>
 
 </div>
 

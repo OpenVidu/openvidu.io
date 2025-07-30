@@ -42,9 +42,9 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class=
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/metrics1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/metrics1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/metrics1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/metrics1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/metrics2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/metrics2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/metrics2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/metrics2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -82,9 +82,9 @@ another panel to **filter** logs by **room_id** and **participant_id**,
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/single_node_logs3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/single_node_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/single_node_logs3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/single_node_logs3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/single_node_logs4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/single_node_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/single_node_logs4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/single_node_logs4.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -120,17 +120,17 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs2.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs3.png" loading="lazy"/></a></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs4.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs5.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs5.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs5.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -140,9 +140,9 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs6.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs6.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs6.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs7.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs7.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs7.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -162,9 +162,9 @@ First of all, there is a panel to **filter** logs by **room_id** and **participa
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/services_logs3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/services_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/services_logs3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/services_logs3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/services_logs4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/services_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/services_logs4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/services_logs4.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -185,5 +185,3 @@ For now, in [**OpenVidu High Availability deployments**](../../deployment-types.
 There are 4 instances of Grafana in an OpenVidu High Availability deployment, one for each Master Node, but they are not synchronized between them. Therefore, if you make any change (change your admin password, create a new dashboard...) in one Grafana instance and the Master Node suddenly goes down, you will be redirected to another Grafana instance where the changes will not be reflected. That is the reason why we disable user signups and saving dashboard or datasource modifications in Grafana.
 
 However, all metrics and logs from all nodes are available in all Grafana instances, so you can monitor your OpenVidu cluster without any problem.
-
-<script>window.setupGallery()</script>

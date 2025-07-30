@@ -4,6 +4,7 @@ tags:
   - setupwowjs
   - setupcardglow
   - setupcarousel
+  - setupcustomgallery
 ---
 
 ## Intro { .hide-without-display }
@@ -20,7 +21,7 @@ Host and customize your own high-quality video calling service in minutes
 </h2>
 
 <div class="ov-call-commercial-img wow animated animatedFadeInUp fadeInUp">
-<img src="../../assets/images/openvidu-call/openvidu-call.jpg" class=" round-corners mkdocs-img">
+<a class="glightbox" href="../../assets/images/openvidu-call/openvidu-call.jpg" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/openvidu-call.jpg" loading="lazy" class="round-corners mkdocs-img"/></a>
 </div>
 
 <div class="feature-cards" markdown>
@@ -71,7 +72,7 @@ __Multi-Party smart layout__{ .ov-meet-commercial-card-title .wow .animated .ani
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
-![OpenVidu Meet Multiparty](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners}
+<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
 
 </div>
 
@@ -81,11 +82,13 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
     Allow your users to setup their video/audio devices, language and other preferences before entering the room.
 
-    ![OpenVidu Meet Prejoin](../../assets/images/meet/prejoin.png){.round-corners}
+    <a class="glightbox" href="../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/prejoin.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
 - __Background filters__{ .ov-meet-commercial-card-title }
 
-    Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.<video class="round-corners" src="../assets/videos/ov-call-vb.mp4" defer muted playsinline autoplay loop async style="margin-top: 1em"></video>
+    Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
+
+    <a class="glightbox" href="../assets/videos/ov-call-vb.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/ov-call-vb.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 </div>
 
@@ -97,8 +100,7 @@ Create and customize the behavior of your rooms in a few clicks: user permission
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <video class="round-corners" src="../assets/videos/meet/meet-rooms-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video>
-    <video class="round-corners" src="../assets/videos/meet/meet-rooms-light.mp4#only-light" defer muted playsinline autoplay loop async></video>
+    <a class="glightbox" href="../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-rooms-dark.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 </div>
@@ -107,14 +109,15 @@ Create and customize the behavior of your rooms in a few clicks: user permission
 
 - __Share room links__{ .ov-meet-commercial-card-title }
 
-    Unique secure links give access to your rooms with different permission levels<video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" defer muted playsinline autoplay loop async style="margin-top: 1em"></video>
+    Unique secure links give access to your rooms with different permission levels.
+    
+    <a class="glightbox" href="../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 - __Embed OpenVidu Meet in your app__{ .ov-meet-commercial-card-title }
 
     Use OpenVidu Meet Embedded API to integrate OpenVidu Meet in your existing application.
 
-    ![OpenVidu Meet Embedded](../../assets/images/meet/meet-embedded-dark.png#only-dark){.round-corners}
-    ![OpenVidu Meet Embedded](../../assets/images/meet/meet-embedded-light.png#only-light){.round-corners}
+    <a class="glightbox" href="../../assets/images/meet/meet-embedded-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/meet-embedded-dark.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded"/></a>
 
 </div>
 
@@ -126,8 +129,7 @@ Record meetings with different layouts. Generate shareable links and manage acce
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <video class="round-corners" src="../assets/videos/meet/meet-recording-share-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video>
-    <video class="round-corners" src="../assets/videos/meet/meet-recording-share-light.mp4#only-light" defer muted playsinline autoplay loop async></video>
+    <a class="glightbox" href="../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-recording-share-dark.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 </div>

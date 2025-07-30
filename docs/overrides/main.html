@@ -15,7 +15,6 @@
 <!-- GLightbox -->
 <script>
   window.setupGallery = function () {
-    const gallery = "gallery";
     var lightbox = GLightbox({
       touchNavigation: true,
       loop: false,
@@ -23,29 +22,25 @@
       zoomable: false,
       draggable: true,
       preload: true,
-      width: "50%",
+      videosWidth: "1300px",
+      height: "auto",
       closeEffect: "fade",
       plyr: {
         config: {
-          controls: [],
+          controls: ["play", "play-large", "progress", "fullscreen"],
+          settings: [],
           autoplay: true,
           playsinline: true,
           muted: true,
           volume: 0,
+          seekTime: 1,
           hideControls: true,
           loop: { active: true },
-          clickToPlay: false,
+          clickToPlay: true,
           disableContextMenu: true,
           resetOnEnd: true,
           keyboard: { focused: false, global: false },
-          tooltips: { controls: false, seek: false },
-          displayDuration: false,
-          fullscreen: {
-            enabled: false,
-            fallback: false,
-            iosNative: false,
-            container: null,
-          },
+          displayDuration: false
         },
       },
     });
@@ -133,6 +128,12 @@
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
 <script src="/javascripts/flickity.pkgd.min.js"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
+<script>
+  window.setupGallery();
+</script>
 {% endif %}
 
 {{ super() }}

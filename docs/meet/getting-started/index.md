@@ -9,11 +9,13 @@ Either way, OpenVidu Meet provides a rich set of features and a great degree of 
 
 You can give a try to our public OpenVidu Meet demo:
 
-[OpenVidu Meet Demo](https://meet.openvidu.io){target="_blank" .md-button .md-button--primary }
+[Try OpenVidu Meet Demo](https://meet.openvidu.io){target="\_blank" .md-button .md-button--primary }
 
 ## Run OpenVidu Meet
 
-Visit [Try OpenVidu Meet locally](../deployment/local.md) to quickly run OpenVidu Meet in your local machine.
+Follow this instructions to quickly run OpenVidu Meet in your local machine:
+
+[Run OpenVidu Meet locally](../deployment/local.md){ .md-button .md-button--primary }
 
 ## Embed OpenVidu Meet into your app
 

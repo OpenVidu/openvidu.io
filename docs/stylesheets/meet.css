@@ -26,6 +26,8 @@
     var(--md-primary-fg-color--light) 61%,
     var(--md-primary-fg-color--light) 99%
   ) !important;
+
+  --plyr-color-main: var(--meet-primary-color-light);
 }
 
 [data-md-color-scheme="slate"] {

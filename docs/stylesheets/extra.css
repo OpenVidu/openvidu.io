@@ -198,6 +198,14 @@ img.svg-img {
   background: transparent !important;
 }
 
+.gslide-image {
+  max-width: 1500px;
+}
+
+p:has(> a.glightbox) {
+  text-align: center;
+}
+
 /* GLightbox animations */
 
 .gzoomIn {

@@ -8,7 +8,7 @@ The application will initiate as a native Android program. Once the application 
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-android.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-android.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-android.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
 </div>
 
@@ -22,8 +22,8 @@ Once you have configured the URLs, you can join a video call room by providing a
 
 <div class="grid-container">
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-android.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-android.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-android.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-android.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-android.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-android.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-android.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-android.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
 </div>
