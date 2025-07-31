@@ -399,3 +399,10 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 
 </div>
+
+<hr style="margin: 5em 0 2em 0">
+
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
+Need total control and advanced SDKs to build your custom real-time application?
+Checkout <a href="../docs"><strong>OpenVidu Platform</strong></a>
+</h2>

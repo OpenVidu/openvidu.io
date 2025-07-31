@@ -57,7 +57,7 @@ Users with sufficient permissions can generate a link to a recording. This link 
 1. From the "Recordings" page, click on the "More Actions" button ( :material-dots-vertical: ) and "Share link" action ( :material-share-variant: ).
 2. Choose the access type:
       - **Public Access**: anyone with the link can see the recording.
-      - **Private Access**: only users authenticated in OpenVidu Meet can see the recording.
+      - **Private Access**: only users [authenticated in OpenVidu Meet](./users-and-permissions.md#authentication-when-accessing-openvidu-meet) can see the recording.
 3. Click "Generate Shareable Link" to create the link and share it.
 
 <a class="glightbox" href="../../../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../assets/videos/meet/meet-recording-share-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video></a>
