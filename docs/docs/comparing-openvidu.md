@@ -4,6 +4,21 @@ description: Compare OpenVidu with LiveKit, SaaS solutions, SFUs and more to und
 
 This section compares OpenVidu to other videoconference/streaming solutions, to better understand what it is, what it is not, and what advantages and disadvantages it may have over them.
 
+## OpenVidu Meet vs OpenVidu Platform
+
+OpenVidu offers two different products:
+
+- **OpenVidu Meet**: a complete, high-quality video calling service designed to be self-hosted. Ideal for teams, businesses and organizations that need a reliable, secure and customizable video conferencing solution running on their servers.
+- **OpenVidu Platform**: a solution comprised of a self-hosted deployment and a set of SDKs and APIs that greatly simplifies the development of any type of real-time application.
+
+<a class="glightbox" href="../../assets/images/comparing-openvidu/meet-vs-platform-light.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/comparing-openvidu/meet-vs-platform-light.svg#only-light" loading="lazy" class="mkdocs-img"/></a>
+<a class="glightbox" href="../../assets/images/comparing-openvidu/meet-vs-platform-dark.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/comparing-openvidu/meet-vs-platform-dark.svg#only-dark" loading="lazy" class="mkdocs-img"/></a>
+
+Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance, scalability, fault-tolerance and observability**. What product should you choose?
+
+- Give [**OpenVidu Meet**](../meet/index.md) a try if your use case falls under the category of "video conferencing application": e-learning, telehealth, team collaboration, customer support, etc. (see OpenVidu Meet [Use cases](../meet/index.md#use-cases)).
+- Choose [**OpenVidu Platform**](..) if you really need total control and flexibility to build your own custom real-time app, either from scratch or integrating OpenVidu Platform into your existing app. OpenVidu Platform provides low-level APIs and SDKs for any language, and features like audio/video/data streaming, media ingestion, telephony and AI integrations.
+
 ## OpenVidu vs LiveKit
 
 First of all, and perhaps the most obvious question, how does OpenVidu differ from LiveKit, and what kind of relationship is there between them? This can be answer with four simple points:
