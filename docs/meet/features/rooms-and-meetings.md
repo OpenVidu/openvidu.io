@@ -19,7 +19,8 @@ One room can host just one meeting at a time, but it can be reused for multiple 
 
 As an administrator, you can create a new room directly from the "Rooms" page in OpenVidu Meet.
 
-<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-dark.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 Rooms are configurable in multiple ways:
 
@@ -59,7 +60,7 @@ You can edit the settings of an existing room at any time in the "Rooms" page. T
 3. Change its appearance.
 4. ...
 
-<a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/edit-room.png" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/images/meet/rooms-and-meetings/edit-room.png" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/edit-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/edit-room.png" loading="lazy" class="control-height"/></a>
 
 !!! info
     You can also programmatically edit rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/updateRoom){:target="_blank"}.

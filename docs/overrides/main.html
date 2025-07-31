@@ -12,42 +12,6 @@
 
 {% block libs %}
 
-<!-- GLightbox -->
-<script>
-  window.setupGallery = function () {
-    var lightbox = GLightbox({
-      touchNavigation: true,
-      loop: false,
-      autoplayVideos: true,
-      zoomable: false,
-      draggable: true,
-      preload: true,
-      videosWidth: "1300px",
-      height: "auto",
-      closeEffect: "fade",
-      plyr: {
-        config: {
-          controls: ["play", "play-large", "progress", "fullscreen"],
-          settings: [],
-          autoplay: true,
-          playsinline: true,
-          muted: true,
-          volume: 0,
-          seekTime: 1,
-          hideControls: true,
-          loop: { active: true },
-          clickToPlay: true,
-          disableContextMenu: true,
-          resetOnEnd: true,
-          keyboard: { focused: false, global: false },
-          displayDuration: false
-        },
-      },
-    });
-    console.debug("Gallery setup");
-  };
-</script>
-
 <!-- wow.js -->
 <script>
   window.setupWowJs = function () {
@@ -131,9 +95,7 @@
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
-<script>
-  window.setupGallery();
-</script>
+<script src="/javascripts/glightbox-custom-gallery.js"></script>
 {% endif %}
 
 {{ super() }}

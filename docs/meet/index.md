@@ -100,7 +100,8 @@ Create and customize the behavior of your rooms in a few clicks: user permission
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <a class="glightbox" href="../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-rooms-dark.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-rooms-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meet-rooms-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-rooms-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 </div>
@@ -117,7 +118,8 @@ Create and customize the behavior of your rooms in a few clicks: user permission
 
     Use OpenVidu Meet Embedded API to integrate OpenVidu Meet in your existing application.
 
-    <a class="glightbox" href="../../assets/images/meet/meet-embedded-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/meet-embedded-dark.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded"/></a>
+    <a class="glightbox" href="../../assets/images/meet/meet-embedded-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/meet-embedded-dark.png#only-dark" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded"/></a>
+    <a class="glightbox" href="../../assets/images/meet/meet-embedded-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/meet-embedded-light.png#only-light" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded"/></a>
 
 </div>
 
@@ -129,7 +131,8 @@ Record meetings with different layouts. Generate shareable links and manage acce
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <a class="glightbox" href="../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-recording-share-dark.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-recording-share-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meet-recording-share-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-recording-share-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 </div>
@@ -238,7 +241,7 @@ With all the features you need to fine-tune your perfect video calling service
 
 ## Use cases
 
-<div class="carousel js-flickity wow animated animatedFadeInUp fadeInUp" data-flickity='{ "wrapAround": true, "adaptiveHeight": true, "hash": true }' markdown>
+<div class="carousel wow animated animatedFadeInUp fadeInUp" data-flickity='{ "wrapAround": true, "adaptiveHeight": true, "hash": true }' markdown>
 <div class="carousel-cell" markdown>
 <div class="carousel-cell-content" markdown>
 Team meetings
