@@ -24,7 +24,7 @@ The application includes all the features from the basic tutorial, plus:
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meeting-tutorials.git -b main
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b main
 ```
 
 ### 3. Run the application
