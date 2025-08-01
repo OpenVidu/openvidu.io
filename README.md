@@ -109,7 +109,9 @@ When creating a new shared snippet, follow these steps:
 > The path is relative to the root of the repository.
 
 > [!IMPORTANT]
-> If the new snippet contains links to other pages, the same rules as for pages apply. However, keep in mind that links will be relative to the page where the snippet is included. Therefore, ensure all referencing files are at the same level in the hierarchy.
+> If the new snippet contains links to other pages, the same rules as for pages apply. Since the release of Mkdocs 1.6, it is possible to use absolute links to other pages, and Mkdocs will make them relative to the `docs_dir` root folder thanks to [this configuration options in `mkdocs.yml`](https://github.com/OpenVidu/openvidu.io/blob/e1d6bb08d7f6e222bf9a0c420bd79b552fb0a25c/mkdocs.yml#L194-L195). So, now any document (e.g. "dir1/foo.md") can link to the document "dir2/bar.md" as `[link](/dir2/bar.md)`, in addition to the previously only correct way `[link](../dir2/bar.md)`.
+> 
+> **This allows to use local links in shared snippets that are embedded in pages with different hierarchy!**.
 
 ### Mkdocs Material tag system
 
