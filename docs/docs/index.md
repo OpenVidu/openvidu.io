@@ -5,8 +5,8 @@ description: Learn how to get started with OpenVidu, a powerful platform for bui
 
 <div>
 <h1 class="logo-header platform-header">
-<img src="../../assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../../assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
 </h1>
 </div>
 

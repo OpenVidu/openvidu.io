@@ -11,8 +11,8 @@ tags:
 
 <div>
 <h1 class="logo-header meet-header">
-<img src="../../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
 </h1>
 </div>
 
