@@ -22,3 +22,7 @@ Follow this instructions to quickly run OpenVidu Meet in your local machine:
 You can integrate a complete videocall solution into your application with just a few lines of code using <span class="no-break">**OpenVidu Meet Embedded**</span>. You can also customize its look and feel to match your application's design, branding colors and styles.
 
 [Embed OpenVidu Meet into your app](../embedded/intro.md){ .md-button .md-button--primary }
+
+## Should I use OpenVidu Platform instead?
+
+--8<-- "shared/meet/meet-vs-platform.md"

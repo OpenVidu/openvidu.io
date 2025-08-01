@@ -1,3 +1,9 @@
+
+:root:root {
+  --primary-color-of-meet: rgb(0, 147, 73);
+  --primary-color-of-platform: rgb(0, 136, 170);
+}
+
 .openvidu-tag {
   pointer-events: none;
   display: inline-block;
@@ -819,4 +825,28 @@ h2.meetplatform-slogan {
 
 .control-height {
   max-height: 50vh;
+}
+
+.compare-table-logo {
+  max-height: 60px;
+}
+
+.compare-table-icon-yes {
+  color: rgb(6, 211, 98);
+  --md-icon-size: 1.525em !important;
+}
+
+.compare-table-icon-no {
+  color: rgb(255, 0, 0);
+  --md-icon-size: 1.525em !important;
+}
+
+.platform-primary-color {
+  background-color: var(--primary-color-of-platform) !important;
+  border-color: var(--primary-color-of-platform) !important;
+}
+
+.meet-primary-color {
+  background-color: var(--primary-color-of-meet) !important;
+  border-color: var(--primary-color-of-meet) !important;
 }

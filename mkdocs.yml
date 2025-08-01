@@ -191,6 +191,8 @@ nav:
       - pricing.md
 
 validation:
+  links:
+    absolute_links: relative_to_docs
   omitted_files: warn
   absolute_links: warn
   unrecognized_links: warn
