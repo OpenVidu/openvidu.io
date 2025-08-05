@@ -24,7 +24,29 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+=== "Run OpenVidu locally"
+
+    --8<-- "shared/tutorials/run-openvidu-locally.md"
+
+=== "Deploy OpenVidu"
+
+    1. Deploy OpenVidu Single Node in AWS following these instructions [to deploy in AWS](../../self-hosting/single-node/aws/install.md).
+
+        !!! info "CPUs to be able to record"
+
+            Make sure you deploy with at least 4 CPUs in the Virtual Machine of AWS.
+
+    2. Point the tutorial to your AWS deployment:
+          - Modify file [`.env`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/.env){target="\_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).   
+          - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/public/app.js#L3) to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
+
+    !!! warning
+
+        If you are using self-signed certificate you will need to add this line in the first line after the imports on the [`index.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/src/index.js) ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable TLS verification for local testing```
+
+    !!! info "Configure Webhooks"
+
+        All [application servers](../application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
