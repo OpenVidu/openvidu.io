@@ -11,7 +11,11 @@ It is important to understand these core concepts of OpenVidu Meet:
 - A **room** is a persistent virtual space used to host one or more meetings. Its real-world counterpart is a physical conference room in a building: you can name it, lock it, change its appearance, etc.
 - A **meeting** is a temporary session that occurs within a room, where participants can join and interact in real-time. Its real-world counterpart is a scheduled event that takes place in a specific room, where authorized people meet, talk and share information.
 
-One room can host just one meeting at a time, but it can be reused for multiple meetings over time.
+Rooms host meetings following these principles:
+
+- First you create a room. Then you can host a meeting in the room.
+- One room can host just one meeting at a time, but it can be reused for multiple meetings over time.
+- Every room has a **room link**. A user connecting to a room link will either start a new meeting (if no meeting is currently active in the room) or join the existing meeting (if there is one).
 
 ## Rooms
 
@@ -83,17 +87,45 @@ Use the multi-select checkbox to delete multiple rooms at once.
 !!! info
     You can also programmatically bulk delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"}.
 
+### Room links
+
+Rooms have predefined **room links** that grant access to them. Users connecting to a room link will start a new meeting (if no meeting is currently active in the room) or join the existing meeting (if there is one).
+
+Each room has different room links, each one granting access to the room with a specific participant role. See [Participant roles in a meeting](users-and-permissions.md#participant-roles-in-a-meeting) for more information.
+
+#### Get a room link from the "Rooms" page
+
+Every room item allows sharing the room link for every participant role.
+
+<a class="glightbox" href="../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+
+#### Get a room link from an active meeting
+
+Participants with the `Moderator` role can share room links from the active meeting view.
+
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/users-and-permissions/share-room-link.png" loading="lazy" class="round-corners"/></a>
+
+!!! info
+    Links copied from the meeting view will always grant access to the room with `Speaker` role. If necessary, users with role `Moderator` can upgrade other user's roles during the meeting. See [Changing participant roles during a meeting](users-and-permissions.md#changing-participant-roles-during-a-meeting) for more information.
+
+#### Get a room link from the REST API
+
+Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}.
+
 ## Meetings
 
 ### Starting a meeting
 
-A meeting will start as soon as a participant enters the room using a valid **room link**.
+A meeting will start as soon as a participant enters an empty room using a valid **room link**. You can learn everything about room links [here](#room-links).
 
-Administrators can join any meeting directly from the "Rooms" page in OpenVidu Meet:
+Users with access to OpenVidu Meet can join a meeting directly from the "Rooms" page:
 
 <a class="glightbox" href="../../../assets/videos/meet/join-meeting.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../assets/videos/meet/join-meeting.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-Administrator can also copy the room link and share it with other participants. There are multiple room links, each granting different permissions to the participants (for more information, see [Participant permissions in a meeting](users-and-permissions.md#participant-permissions-in-a-meeting)):
+!!! info
+    Doing this simply opens a new tab with a `Moderator` room link.
+
+Users with access to OpenVidu Meet can also copy a room link and share it with external participants:
 
 <a class="glightbox" href="../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 

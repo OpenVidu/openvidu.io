@@ -6,65 +6,78 @@ tags:
 
 # Users and permissions
 
-OpenVidu Meet offers two different layers of user management and permissions:
+## OpenVidu Meet authentication
 
-- [Authentication when accessing OpenVidu Meet](#authentication-when-accessing-openvidu-meet): how users authenticate to access the OpenVidu Meet application.
-- [Authentication when joining a meeting](#authentication-when-joining-a-meeting): how users authenticate to join a specific meeting.
+!! ATENCION !!
 
-## Authentication when accessing OpenVidu Meet
+PENDIENTE DE IMPLEMENTAR
 
-First of all, OpenVidu Meet is by default protected with a **username and password** randomly generated after the first installation. Only users with valid credentials can access the application:
+!! ATENCION !!
 
-<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login.png" loading="lazy"/></a>
+OpenVidu Meet is by default protected with a **username and password** randomly generated after the installation. Users will be required those credentials when connecting to OpenVidu Meet.
 
-!!! note
-    We will refer as an **administrator** to any user that has access to OpenVidu Meet with valid credentials. Once logged in, users can manage rooms, meetings, recordings and any other OpenVidu Meet feature.
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login-dark.png#only-dark" loading="lazy" class="control-height"/></a>
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login-light.png#only-light" loading="lazy" class="control-height"/></a>
 
-### Changing OpenVidu Meet authentication
+The location of the credentials depends on the environment of the deployment:
 
-Once logged in, you can modify the authentication method to access OpenVidu Meet from the "User & Permissions" view:
+=== "Local (development)"
+
+=== "On Premises"
+
+=== "AWS"
+
+=== "Azure"
+
+### Modify OpenVidu Meet authentication
+
+!! ATENCION !!
+
+PENDIENTE DE MEJORAR: qué es el concepto de "admin" user? El cambio de contraseña maestra debería ser más seguro.
+
+!! ATENCION !!
+
+Once logged in, you can modify the authentication method to access OpenVidu Meet from the **"User & Permissions"** view:
 
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/change-authentication.png" data-type="image" data-desc-position="bottom" data-gallery="gallery2"><img src="../../../assets/images/meet/users-and-permissions/change-authentication.png" loading="lazy"/></a>
 
-These are the available options to authenticate users when accessing OpenVidu Meet:
+!!! info
+    The only authentication method currently offered by OpenVidu Meet is a single **username and password**, but we are working on adding support for multi-user credentials and OAuth.
 
-- **Single user**: the default option, not recommended for production environments.
-- **Multi user**: allows creating multiple username-password pairs.
-- **Oauth**: allows authenticating users through an external OAuth provider.
-- ...
+## User authentication when joining a meeting
 
-## Authentication when joining a meeting
+Meetings are always accessed through a **room link**. Room links are unique URLs with random segments difficult to decipher, ensuring a first layer of security: only users that know the link can access the meeting.
 
-Meetings are always accessed through **room links**. There are different types of room links, each granting different permissions to the participants (see [Participant permissions in a meeting](#participant-permissions-in-a-meeting)).
+!!! info 
+    Learn how to obtain room links to be shared here: [Room links](./rooms-and-meetings.md#room-links).
 
-- Administrators can share links for a room from the "Rooms" page.
-
-<a class="glightbox" href="../../../assets/videos/meet/share-room-link-from-console.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery3"><video class="round-corners" src="../../../assets/videos/meet/share-room-link-from-console.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-
-- Participants with role "Moderator" can share links for ongoing meetings directly from the meeting itself (see [Participant permissions in a meeting](#participant-permissions-in-a-meeting)).
-
-<a class="glightbox" href="../../../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-
-Further authentication can be enforced for users trying to join a meeting using a valid room link. From the "User & Permissions" page, administrators can configure which users must authenticate before joining a meeting:
+Room links provide a reasonable level of security, but it might not be enough for certain use cases. For this  reason, further authentication can be enforced for users trying to join a meeting using a valid room link. From the **"User & Permissions"** page in OpenVidu Meet, you can configure it:
 
 - **Nobody**: no authentication is required. Anyone with a valid room link can join the meeting.
-- **Only moderators**: users joining the meeting through a room link with "Moderator" role must authenticate first.
+- **Only moderators**: users joining the meeting through a `Moderator` room link with must authenticate first.
 - **Everybody**: all users joining the meeting must authenticate first.
 
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/authentication-to-join-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/users-and-permissions/authentication-to-join-meeting.png" loading="lazy"/></a>
 
-## Participant permissions in a meeting
+!!! info
+    The only authentication method currently available to enforce when joining a meeting is the OpenVidu Meet **username and password**. Other authentication methods are on the way, including multi-user credentials and OAuth.
 
-Participants in a meeting can have different permissions. These permissions are defined by the **role** assigned to each participant, which is determined by the room link used to join the meeting.
+## Participant roles in a meeting
+
+Participants in a meeting can have different roles, which grant different permissions. The role of a participant is determined by the room link used to join the meeting. See [Room links](./rooms-and-meetings.md#room-links) for more information.
 
 Available roles are:
 
-- **Moderator**: can end the meeting, start/stop recordings, share room links and manage participants.
-- **Speaker**: can share their camera, microphone and screen.
+- **Moderator**: grants permissions to end the meeting, start/stop recordings, share room links and manage participants. Also grants permissions of `Speaker` and `Viewer` roles.
+- **Speaker**: grants permissions to share their camera, microphone and screen. Also grants permissions of `Viewer` role.
 - **Viewer** **:hammer:`(COMING SOON)`:hammer:**: can only watch the meeting without participating.
 
-### Fine-grained participant permissions **:hammer:`(COMING SOON)`:hammer:**
+### Changing participant roles during a meeting
 
-Predefined participant roles provide a coarse-grained permission model, which is enough for most use cases. However, OpenVidu Meet also allows creating room links with fine-grained permissions. This way, you can give specific permissions to specific participants (such as the ability to share the screen, to use the chat...)
+Participants with `Moderator` role can upgrade or downgrade other participants' roles during the meeting from the "Participants" side panel:
 
-...
+<a class="glightbox" href="../../../assets/images/meet/users-and-permissions/upgrade-role.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/users-and-permissions/upgrade-role.png" loading="lazy"/></a>
+
+### Fine-grained participant permissions **:hammer: [COMING SOON] :hammer:**
+
+Predefined participant roles such as `Moderator`, `Speaker` or `Viewer` provide a coarse-grained permission model, which is enough for most use cases. However, OpenVidu Meet will also allow creating room links with fine-grained permissions. This way, you can give specific permissions to specific participants (such as the ability to share the screen, to use the chat...). Stay tuned for future updates!

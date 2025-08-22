@@ -224,7 +224,7 @@ function getRoomListItemTemplate(room) {
                     class="btn btn-primary btn-sm"
                     onclick="joinRoom(
                         '${room.name}', 
-                        '${room.moderatorRoomUrl}', 
+                        '${room.moderatorUrl}', 
                         'moderator'
                     );"
                 >
