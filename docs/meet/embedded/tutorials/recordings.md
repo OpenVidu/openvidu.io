@@ -81,7 +81,7 @@ Let's see the code of each new endpoint:
 
 The `GET /recordings` endpoint retrieves the list of recordings, with optional room filtering:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L102-L137' target='_blank'>index.js</a>" linenums="102"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L99-L134' target='_blank'>index.js</a>" linenums="102"
 // List all recordings
 app.get('/recordings', async (req, res) => {
     const { room: roomName } = req.query; // (1)!
@@ -114,7 +114,7 @@ app.get('/recordings', async (req, res) => {
 
         res.status(200).json({ recordings }); // (5)!
     } catch (error) {
-        console.error('Error fetching recordings:', error);
+        console.error('Error while fetching recordings:', error);
         res.status(500).json({ message: 'Error fetching recordings' }); // (6)!
     }
 });
@@ -139,7 +139,7 @@ This endpoint does the following:
 
 The `DELETE /recordings/:recordingId` endpoint deletes the specified recording:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L139-L151' target='_blank'>index.js</a>" linenums="139"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L136-L148' target='_blank'>index.js</a>" linenums="139"
 // Delete a recording
 app.delete('/recordings/:recordingId', async (req, res) => {
     const { recordingId } = req.params; // (1)!
@@ -147,10 +147,10 @@ app.delete('/recordings/:recordingId', async (req, res) => {
     try {
         // Delete the recording using OpenVidu Meet API
         await httpRequest('DELETE', `recordings/${recordingId}`); // (2)!
-        res.status(200).json({ message: 'Recording deleted successfully' }); // (3)!
+        res.status(200).json({ message: `Recording '${recordingId}' deleted successfully` }); // (3)!
     } catch (error) {
-        console.error('Error deleting recording:', error);
-        res.status(500).json({ message: 'Error deleting recording' }); // (4)!
+        console.error(`Error while deleting recording '${recordingId}':`, error);
+        res.status(500).json({ message: `Error deleting recording '${recordingId}'` }); // (4)!
     }
 });
 ```
@@ -168,7 +168,7 @@ This endpoint simply deletes the specified recording using the OpenVidu Meet API
 
 A new `GET /recordings/:recordingId/url` endpoint retrieves the recording URL for playback:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L102-L137' target='_blank'>index.js</a>" linenums="102"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L150-L162' target='_blank'>index.js</a>" linenums="150"
 // Get recording URL
 app.get('/recordings/:recordingId/url', async (req, res) => {
     const { recordingId } = req.params; // (1)!
@@ -178,8 +178,8 @@ app.get('/recordings/:recordingId/url', async (req, res) => {
         const { url } = await httpRequest('GET', `recordings/${recordingId}/url`); // (2)!
         res.status(200).json({ url }); // (3)!
     } catch (error) {
-        console.error('Error fetching recording URL:', error);
-        res.status(500).json({ message: 'Error fetching recording URL' }); // (4)!
+        console.error(`Error while fetching recording URL for '${recordingId}':`, error);
+        res.status(500).json({ message: `Error fetching recording URL for '${recordingId}'` }); // (4)!
     }
 });
 ```
@@ -218,12 +218,12 @@ The room list template is updated to include a `View Recordings` button for each
 function getRoomListItemTemplate(room) {
     return `
         <li class="list-group-item">
-            <span>${room.name}</span>
+            <span>${room.roomName}</span>
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
                     onclick="joinRoom(
-                        '${room.name}', 
+                        '${room.roomName}', 
                         '${room.moderatorUrl}', 
                         'moderator'
                     );"
@@ -233,15 +233,15 @@ function getRoomListItemTemplate(room) {
                 <button
                     class="btn btn-secondary btn-sm"
                     onclick="joinRoom(
-                        '${room.name}', 
-                        '${room.publisherRoomUrl}', 
-                        'publisher'
+                        '${room.roomName}', 
+                        '${room.speakerUrl}', 
+                        'speaker'
                     );"
                 >
-                    Join as Publisher
+                    Join as Speaker
                 </button>
-                <button class="btn btn-success btn-sm" onclick="listRecordingsByRoom('${room.name}');">View Recordings</button>
-                <button title="Delete room" class="icon-button delete-button" onclick="deleteRoom('${room.name}');">
+                <button class="btn btn-success btn-sm" onclick="listRecordingsByRoom('${room.roomName}');">View Recordings</button>
+                <button title="Delete room" class="icon-button delete-button" onclick="deleteRoom('${room.roomName}');">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>

@@ -13,7 +13,7 @@ Every tutorial below shares the same core functionality:
 
 -   Users can create rooms.
 -   Users can delete rooms.
--   Users can join a room as moderator or publisher.
+-   Users can join a room as moderator or speaker.
 -   Users can chat with other participants.
 -   Moderators can record the meeting.
 -   Users may leave the room at any time.
