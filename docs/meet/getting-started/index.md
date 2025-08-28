@@ -3,7 +3,7 @@ title: Getting started with OpenVidu Meet
 ---
 
 OpenVidu Meet is a fully fledged video call solution built on top of OpenVidu. You can use it out of the box or you can embed it in your own application.
-Either way, OpenVidu Meet provides a rich set of features and a great degree of customization, so you can tailor it to your needs.
+Either way, OpenVidu Meet provides a rich set of features and a great degree of customization, so you can tailor it to your needs and match your branding.
 
 ## Try OpenVidu Meet public demo
 
@@ -25,4 +25,4 @@ You can integrate a complete videocall solution into your application with just 
 
 ## Should I use OpenVidu Platform instead?
 
---8<-- "shared/meet/meet-vs-platform.md"
+Find out which is the best OpenVidu solution for you here: [OpenVidu Meet vs OpenVidu Platform](../../openvidu-meet-vs-openvidu-platform.md).

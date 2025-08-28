@@ -153,7 +153,8 @@
   font-size: 2em !important;
   padding: 0.5rem !important;
   border-radius: 50% !important;
-  height: auto !important;
+  width: 3rem;
+  height: 3rem !important;
 }
 
 .ov-meet-commercial-icon svg {

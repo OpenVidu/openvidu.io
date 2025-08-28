@@ -16,6 +16,8 @@ Here's a high-level overview of the steps involved in building an OpenVidu appli
 
 The quickest way is to use [OpenVidu local deployment](../self-hosting/local.md).
 
+If you feel like it, you can directly launch a production-ready deployment on **AWS**, **Azure** or **your own servers**. Check out the different options at [Deployment types](../self-hosting/deployment-types/).
+
 ## 2. Use LiveKit Server SDK in your application server
 
 OpenVidu is fully compatibly with LiveKit APIs. This means that any LiveKit Server SDK can be used in your application server.

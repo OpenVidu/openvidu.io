@@ -8,7 +8,7 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 
 ## OpenVidu Meet vs OpenVidu Platform
 
---8<-- "shared/meet/meet-vs-platform.md"
+OpenVidu offers two different solutions suitable for different use cases. Find out which is the best for you here: [OpenVidu Meet vs OpenVidu Platform](../openvidu-meet-vs-openvidu-platform.md).
 
 ## OpenVidu vs LiveKit
 

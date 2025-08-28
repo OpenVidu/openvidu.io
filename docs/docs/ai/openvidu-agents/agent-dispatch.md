@@ -38,7 +38,7 @@ AI_SERVICE:
 
     ```yaml
     live_captions:
-        processing: automatic
+        processing: manual
     ```
 
 Agents configured with `processing: manual` in their AI services will not join any Room automatically. Instead, the agent must be explicitly dispatched to the required Room at the required time.

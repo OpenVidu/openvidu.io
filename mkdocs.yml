@@ -1,6 +1,6 @@
 site_name: openVidu
 site_url: https://openvidu.io/
-site_description: A powerful platform to develop WebRTC real-time applications. Self-hosted, performant, fault tolerant, scalable and observable.
+site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
@@ -12,8 +12,8 @@ nav:
           - meet/getting-started/index.md
       - Features:
           - Rooms and meetings: meet/features/rooms-and-meetings.md
-          - Users and permissions: meet/features/users-and-permissions.md
           - Recordings: meet/features/recordings.md
+          - Users and permissions: meet/features/users-and-permissions.md
           # - Live Captions: meet/features/live-captions.md
           # - Transcriptions: meet-transcriptions.md
           # - Translations: meet-translations.md
@@ -32,7 +32,7 @@ nav:
           - Reference:
               - Webcomponent: meet/embedded/reference/webcomponent.md
               - REST API<span class="material-symbols-outlined external-link nav-open-new-tab">open_in_new</span>: assets/htmls/rest-api.html
-              - Webhooks<span class="material-symbols-outlined external-link nav-open-new-tab">open_in_new</span>: assets/htmls/webhooks.html
+              - Webhooks: meet/embedded/reference/webhooks.md
   - OpenVidu Platform:
       - docs/index.md
       - Comparing OpenVidu: docs/comparing-openvidu.md

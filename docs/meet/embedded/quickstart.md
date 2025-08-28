@@ -18,7 +18,7 @@ You can create a room from the **"Rooms"** page in OpenVidu Meet:
 ### Automating room creation
 
 You can automate the room creation process by using the OpenVidu Meet REST API. This allows you to create rooms programmatically from your application's backend,  without manual intervention.
-F
+
 #### 1. Generate an API key
 
 1. Connect to OpenVidu Meet at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/`.
@@ -309,16 +309,19 @@ Once you got the desired room URL, there are 3 alternatives to embed the OpenVid
 This is the simplest way to embed the OpenVidu Meet room into your application. Just link to the room URL from any element in your frontend. For example, with a simple `<a>` tag:
 
 ```html
-<a href="{{ room-url }}" target="_blank">Join Room</a>
+<a href="{{ your-room-url }}" target="_blank">Join Room</a>
 ```
 
 After clicking on the element, the user will be redirected to OpenVidu Meet, ready to join the room.
 
 <a class="glightbox" href="../../../assets/videos/meet/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-### Use the web component
+### Use the Web Component
 
-Include a `<script>` tag to load the OpenVidu Meet web component definition from your OpenVidu deployment. Then, you can use the `<openvidu-meet>` custom element in your HTML, setting the `room-url` attribute.
+Include a `<script>` tag to load the OpenVidu Meet Web Component definition from your OpenVidu deployment. Then, you can use the `<openvidu-meet>` custom element in your HTML, setting the `room-url` attribute.
+
+!!! info
+    Check out the [Web Component reference](./reference/webcomponent.md) for the complete list of attributes, commands and events offered by it.
 
 ```html
 <html>
@@ -328,7 +331,7 @@ Include a `<script>` tag to load the OpenVidu Meet web component definition from
     </head>
     <body>
         <div>
-            <openvidu-meet room-url="{{ room-url }}"></openvidu-meet>
+            <openvidu-meet room-url="{{ your-room-url }}"></openvidu-meet>
         </div>
     </body>
 </html>
@@ -348,7 +351,7 @@ This method allows you to embed the OpenVidu Meet room directly into your applic
     <body>
         <div>
             <iframe
-                src="{{ room-url }}"
+                src="{{ your-room-url }}"
                 allow="camera; microphone; display-capture; fullscreen; autoplay; compute-pressure;"
                 width="100%" height="100%">
             </iframe>

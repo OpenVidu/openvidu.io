@@ -24,11 +24,11 @@
 }
 
 .openvidu-community-tag {
-  background-color: rgb(6 211 98 / 80%);
+  background-color: #868686;
 }
 
 .openvidu-pro-tag {
-  background-color: rgb(0 136 170 / 80%);
+  background-color: #9c27b0;
 }
 
 .openvidu-tag-nav {
@@ -569,7 +569,7 @@ a#account-btn .user-name {
 
 #pricing-table[name="big-pricing-table"] {
   width: auto;
-  margin: 0 6vw;
+  margin: 2vw 6vw;
 }
 
 #pricing-table th:first-child,
