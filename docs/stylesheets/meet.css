@@ -161,6 +161,26 @@
   max-width: none !important;
 }
 
+.bare-metal-icon {
+  background-color: #868686;
+}
+
+.aws-icon {
+  background-color: #ff9900;
+}
+
+.aws-icon svg {
+  color: #252F3E;
+}
+
+.azure-icon {
+  background-color: #0072c6;
+}
+
+.gcp-icon {
+  background-color: #EA4335;
+}
+
 .ov-meet-footer-btn-container p {
   text-align: center;
 }
@@ -344,4 +364,59 @@ ol.flickity-page-dots li.dot {
 
 .grid.cards.use-cases-inner-cards li {
   text-align: justify;
+}
+
+/* Coming Soon Overlay */
+li:has(.coming-soon-overlay) {
+  position: relative;
+  overflow: hidden;
+}
+
+li:has(.coming-soon-overlay)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 2;
+  pointer-events: none;
+}
+
+[data-md-color-scheme="slate"] li:has(.coming-soon-overlay)::before {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+li:has(.coming-soon-overlay)::after {
+  content: 'COMING SOON!';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  background: rgba(var(--meet-primary-color-rgb), 0.8);
+  color: white;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  min-width: fit-content;
+  width: auto;
+}
+
+/* Hover effect to make content more visible temporarily */
+li:has(.coming-soon-overlay):hover::before{
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+li:has(.coming-soon-overlay):hover::after {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
 }

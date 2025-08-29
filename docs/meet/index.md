@@ -27,33 +27,33 @@ Host and customize your own high-quality video calling service in minutes
 <div class="feature-cards" markdown>
 <div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0" markdown>
 
--   :material-server:{ .more-padding-icon .ov-meet-commercial-icon } __Host on your servers__{ .feature-name }
+-   :material-video-box:{ .more-padding-icon .ov-meet-commercial-icon } __Feature-rich for videoconferencing__{ .feature-name }
 
     ---
 
-    OpenVidu Meet is designed from the ground up to be [**self-hosted**](docs/self-hosting/production-ready/index.md){.no-break} on your own servers. AWS and Azure templates are also available.
+    OpenVidu Meet brings all the **features** you expect from a professional video calling solution: HD video, HiFi audio, recording, broadcasting, screen sharing, chat, virtual backgrounds, and more.
 
--   :material-timer-sand:{ .padding-icon .ov-meet-commercial-icon } __Easy to deploy__{ .feature-name }
+-   :material-code-tags:{ .more-padding-icon .ov-meet-commercial-icon } __Integrate right into your app__{ .feature-name }
 
     ---
 
-    OpenVidu Meet is easy to deploy, protect, mantain and scale. No advanced DevOps skills are required to run it in production.
+    OpenVidu Meet can be used out-of-the-box via web, but it also offers everything you need to **embed it into your existing application**: a web component, a REST API and webhooks.
 
 </div>
 
 <div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-security:{ .more-padding-icon .ov-meet-commercial-icon } __Private and secure__{ .feature-name }
+-   :material-server:{ .more-padding-icon .ov-meet-commercial-icon } __Secure, self-hosted deployments__{ .feature-name }
 
     ---
 
-    With OpenVidu Meet you can comply with the highest safety standards. <span style="white-space: nowrap">No data</span> flows through third-party servers.
+    OpenVidu Meet is designed from the ground up to be **self-hosted** on your own servers (AWS and Azure templates also available). It provides the highest level of **privacy and security** for your video calls.
 
--   :material-format-paint:{ .padding-icon .ov-meet-commercial-icon } __Quick integration and customization__{ .feature-name }
+-   :fontawesome-solid-user-md:{ .more-padding-icon .ov-meet-commercial-icon } __Designed for most common use cases__{ .feature-name }
 
     ---
 
-    OpenVidu Meet can be used out-of-the-box and customized view web. Or embed OpenVidu Meet in your existing web or mobile app using the [**REST API**]().
+    OpenVidu Meet perfectly fits most common videoconferencing use cases: **e-learning, telehealth, remote collaboration, customer support**... And you can customize its **branding** to match your organization’s identity.
 
 </div>
 </div>
@@ -63,7 +63,7 @@ Built for all purposes.<br>
 Customizable for your particular use case.
 </h2>
 
-## Gallery { .hide-without-display }
+## Features
 
 <div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
 
@@ -80,13 +80,13 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
-    Allow your users to setup their video/audio devices, language and other preferences before entering the room.
+    Your users can setup their video/audio devices, virtual background and language before entering the room.
 
     <a class="glightbox" href="../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/prejoin.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
 - __Background filters__{ .ov-meet-commercial-card-title }
 
-    Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
+    Allow your users to easily replace their video background with a blur effect or an image.
 
     <a class="glightbox" href="../assets/videos/ov-call-vb.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/ov-call-vb.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -94,19 +94,24 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 <div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
 
-__Pre-configure your rooms __{ .ov-meet-commercial-card-title .wow .animated .animatedFadeInUp .fadeInUp }
+__Record and share__{ .ov-meet-commercial-card-title .wow .animated .animatedFadeInUp .fadeInUp }
 
-Create and customize the behavior of your rooms in a few clicks: user permissions, recording, chat and more.
+OpenVidu Meet offers high-quality recordings and greatly simplifies their storage and access control.
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <a class="glightbox" href="../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-rooms-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-    <a class="glightbox" href="../assets/videos/meet/meet-rooms-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-rooms-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/share-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/share-recording.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 </div>
 
 <div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+
+- __Pre-configure your rooms__{ .ov-meet-commercial-card-title }
+
+    Create and customize the behavior of your rooms in a few clicks: look-and-feel, user permissions, recording, chat and more.
+
+    <a class="glightbox" href="../assets/videos/meet/preconfigure-room.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/preconfigure-room.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 - __Share room links__{ .ov-meet-commercial-card-title }
 
@@ -114,16 +119,9 @@ Create and customize the behavior of your rooms in a few clicks: user permission
     
     <a class="glightbox" href="../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-- __Embed OpenVidu Meet in your app__{ .ov-meet-commercial-card-title }
-
-    Use OpenVidu Meet Embedded API to integrate OpenVidu Meet in your existing application.
-
-    <a class="glightbox" href="../../assets/images/meet/meet-embedded-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/meet-embedded-dark.png#only-dark" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded"/></a>
-    <a class="glightbox" href="../../assets/images/meet/meet-embedded-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/meet-embedded-light.png#only-light" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded"/></a>
-
 </div>
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
+<!-- <div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
 
 __Recording management__{ .ov-meet-commercial-card-title .wow .animated .animatedFadeInUp .fadeInUp }
 
@@ -137,11 +135,10 @@ Record meetings with different layouts. Generate shareable links and manage acce
 
 </div>
 
-<div style="margin-bottom: 6em"></div>
+<div style="margin-bottom: 6em"></div> -->
 
 ---
 
-## List of features { .hide-without-display }
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
 With all the features you need to fine-tune your perfect video calling service
 </h2>
@@ -235,6 +232,68 @@ With all the features you need to fine-tune your perfect video calling service
 
 </div>
 
+</div>
+
+<hr style="margin: 4em 0">
+
+## Integrations
+
+OpenVidu Meet can be easily integrated with your existing applications and workflows:
+
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+
+__Pre-built web component__{ .ov-meet-commercial-card-title }
+
+Embed the OpenVidu Meet UI right into your app.
+
+<a class="glightbox" href="../assets/videos/meet/embed-html.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/embed-html.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+
+</div>
+
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+
+__REST API and webhooks__{ .ov-meet-commercial-card-title }
+
+Control your meetings from your backend.
+
+<a class="glightbox" href="../assets/images/meet/embedded/embedded-config.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/embedded/embedded-config.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded Config"/></a>
+
+</div>
+
+<hr style="margin: 4em 0">
+
+## Deployments
+
+Self-host OpenVidu Meet on your own infrastructure for maximum security and cost-effectiveness. It is easy to deploy, protect, maintain, and scale. No advanced DevOps skills are required to run it in production.
+
+<div class="feature-cards" markdown>
+<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0" markdown>
+
+-   :material-server:{ .more-padding-icon .ov-meet-commercial-icon .bare-metal-icon } __On Premises__{ .feature-name }
+
+    ---
+
+    Deploy on your own bare-metal servers
+
+-   :material-aws:{ .more-padding-icon .ov-meet-commercial-icon .aws-icon } __AWS__{ .feature-name }
+
+    ---
+
+    Deploy with AWS CloudFormation
+
+-   :material-microsoft-azure:{ .more-padding-icon .ov-meet-commercial-icon .azure-icon } __Azure__{ .feature-name }
+
+    ---
+
+    Deploy with Azure Resource Manager
+
+-   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon .coming-soon-overlay } __GCP__{ .feature-name }
+
+    ---
+
+    Deploy in GCP with Terraform
+
+</div>
 </div>
 
 <hr style="margin: 4em 0">
