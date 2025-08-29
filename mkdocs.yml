@@ -31,7 +31,7 @@ nav:
               - Recordings: meet/embedded/tutorials/recordings.md
           - Reference:
               - Webcomponent: meet/embedded/reference/webcomponent.md
-              - REST API<span class="material-symbols-outlined external-link nav-open-new-tab">open_in_new</span>: assets/htmls/rest-api.html
+              - REST API: meet/embedded/reference/rest-api.md
               - Webhooks: meet/embedded/reference/webhooks.md
   - OpenVidu Platform:
       - docs/index.md

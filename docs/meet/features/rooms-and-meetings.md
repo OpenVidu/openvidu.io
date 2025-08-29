@@ -33,9 +33,6 @@ Rooms are configurable in multiple ways:
 3. Change its appearance.
 4. ...
 
-!!! info
-    You can also programmatically create rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}.
-
 Available rooms are all listed in the "Rooms" page. From there administrators can:
 
 - Start a meeting in a room.
@@ -52,9 +49,6 @@ Rooms can be created with an **auto-deletion date**. This helps keeping OpenVidu
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/room-auto-deletion.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/room-auto-deletion.png" loading="lazy" class="control-height"/></a>
 
-!!! info
-    You can set an auto-deletion date using parameter `autoDeletionDate` when creating a room programmatically through [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/createRoom#request-body){:target="_blank"}.
-
 ### Editing a room
 
 You can edit the settings of an existing room at any time in the "Rooms" page. The same options available when creating a room are also available when editing it:
@@ -66,26 +60,17 @@ You can edit the settings of an existing room at any time in the "Rooms" page. T
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/edit-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/edit-room.png" loading="lazy" class="control-height"/></a>
 
-!!! info
-    You can also programmatically edit rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/updateRoom){:target="_blank"}.
-
 ### Deleting a room
 
 Rooms can be deleted at any time from the "Rooms" page. This will remove the room and all its associated data.
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/delete-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/rooms-and-meetings/delete-room.png" loading="lazy"/></a>
 
-!!! info
-    You can also programmatically delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/deleteRoom){:target="_blank"}.
-
 ### Bulk deleting rooms
 
 Use the multi-select checkbox to delete multiple rooms at once.
 
 <a class="glightbox" href="../../../assets/videos/meet/bulk-delete-rooms.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery6"><video class="round-corners" src="../../../assets/videos/meet/bulk-delete-rooms.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-
-!!! info
-    You can also programmatically bulk delete rooms using [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"}.
 
 ### Room links
 
@@ -111,6 +96,20 @@ Participants with the `Moderator` role can share room links from the active meet
 #### Get a room link from the REST API
 
 Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}.
+
+### Room REST API
+
+Every possible action against a room can be done through [OpenVidu Meet REST API](../embedded/reference/rest-api.md):
+
+| Operation | HTTP Method | Reference |
+|-----------|-------------|-----------|
+| Create a room | POST | [Reference](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"} |
+| Get a room | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRoom){:target="_blank"} |
+| Get all rooms | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRooms){:target="_blank"} |
+| Delete a room | DELETE | [Reference](../../assets/htmls/rest-api.html#/operations/deleteRoom){:target="_blank"} |
+| Bulk delete rooms | DELETE | [Reference](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"} |
+| Get room preferences | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRoomPreferences){:target="_blank"} |
+| Update room preferences | PUT | [Reference](../../assets/htmls/rest-api.html#/operations/updateRoomPreferences){:target="_blank"} |
 
 ## Meetings
 
@@ -165,3 +164,15 @@ This view allows to manage the recording of the meeting while it is active. Part
 This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (an administrator ended it, the participant was evicted from the meeting, etc.).
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/end-view.png" data-type="image" data-desc-position="bottom" data-gallery="gallery13"><img src="../../../assets/images/meet/rooms-and-meetings/end-view.png" loading="lazy"/></a>
+
+### Meeting features
+
+#### Device management
+
+#### Virtual backgrounds
+
+#### Screen sharing
+
+#### Chat
+
+#### Recording
