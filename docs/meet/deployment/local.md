@@ -4,24 +4,29 @@ description: Deploy OpenVidu Meet on your local machine for development and test
 ---
 # Try OpenVidu Meet Locally
 
-You can easily deploy **OpenVidu Meet** on your local machine to start developing or exploring its features right away.
+You can easily deploy **OpenVidu Meet** on your local machine to explore its features right away.
 
-This simplified local deployment is intended for **development and testing purposes only**. It enables you to launch **OpenVidu Meet** with a single command using **Docker**.
+You can simulate **several users** joining to the **same room** using diferent tabs of your preferred browser.
+
+This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../../embedded/intro).
+
+!!! warn
+    Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](../../deployment/basic/) or [Advanced deployments](../../advanced/basic/).
 
 ## Prerequisites
 
 - A computer with **Windows**, **macOS**, or **Linux** installed.
 - 4 CPU cores and 8 GB of RAM (16 GB recommended for better performance).
-- At least 50 GB of free disk space. (OpenVidu only takes around 5.2 GB, but additional space may be needed for Docker Desktop.)
-
-- Docker Desktop installed (see instructions below).
-- Estimated download time: ~3–5 minutes on a 100 Mbps connection.
+- At least 10 GB of free disk space.
+- [Docker Desktop](https://docs.docker.com/desktop/) (see installation instructions below).
 
 ## Installing Docker Desktop
 
-Docker is a popular platform for running containers, which are portable packages that include everything needed to run an application.
+[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology the simplifies the installation of applications in **Windows**, **macOS**, and **Linux**. 
 
-OpenVidu Meet uses containers to simplify the deployment. Docker Desktop provides an easy interface for managing containers and is available for **Windows**, **macOS**, and **Linux** which makes it a great choice for local development.
+In the Docker terminology, an application is downloaded as a one or several **docker images**. When the application is executed, it is composed of one or several **docker containers**.
+
+Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the software needed to execute Docker containers):
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
@@ -35,10 +40,8 @@ OpenVidu Meet uses containers to simplify the deployment. Docker Desktop provide
 
     - Install [Docker Desktop](https://docs.docker.com/desktop/install/linux-install/){:target="\_blank"}
 
-    Alternatively, you can install **Docker Engine** and **Docker Compose** instead of Docker Desktop:
-
-    - Install [Docker](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"}
-    - Install [Docker Compose](https://docs.docker.com/compose/install/linux/){:target="\_blank"}
+    !!! info 
+        This guide is based on Docker Desktop, but the commands can also be used in a linux machine with [Docker Engine](https://docs.docker.com/engine/install/#supported-platforms) and [Docker Compose](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed.
 
 ## Running OpenVidu Meet Locally
 
@@ -46,7 +49,17 @@ OpenVidu Meet uses containers to simplify the deployment. Docker Desktop provide
 
     ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local-meet/open_terminal.png)
 
-2. Copy and paste the following command into the terminal, depending on whether you want to deploy the **Community** or **Pro** edition:
+2. Copy and paste the following command into the terminal:
+    
+    ```bash
+    docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+    ```
+
+    ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
+
+    If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
+
+<!-- 2. Copy and paste the following command into the terminal, depending on whether you want to deploy the **Community** or **Pro** edition:
 
     === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
 
@@ -56,108 +69,104 @@ OpenVidu Meet uses containers to simplify the deployment. Docker Desktop provide
         docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
         ```
 
-        If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
-
         ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
+
+        If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
 
     === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
 
-        Execute this command for the **Pro Edition**:
+        Execute this command for a demo of the **Pro Edition**:
 
         ```bash
         docker compose -p openvidu-meet-pro -f oci://openvidu/local-meet-pro:latest up -y openvidu-meet-init
         ```
-
-        If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
-
+        
         ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_pro.png)
 
-3. After pasting the command, press **Enter** to execute it.
+        If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).-->
 
-This will start the deployment process, which may take a few minutes as it downloads the necessary Docker images and sets up the services.
+3. After pasting the command, press **Enter** to execute the command.
 
-The terminal will display logs showing the progress and show this message when it’s ready:
+    The terminal will show how OpenVidu Meet is downloaded and executed.
 
-```
-openvidu-meet-init-1  | Waiting for OpenVidu to start...
-...
-openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
-...
-openvidu-meet-init-1  |
-openvidu-meet-init-1  | ====================================================
-openvidu-meet-init-1  | 🎉 OpenVidu Meet main is ready! 🎉
-openvidu-meet-init-1  | ====================================================
-openvidu-meet-init-1  |
-openvidu-meet-init-1  | This version is only for local development purposes.
-openvidu-meet-init-1  | DO NOT USE IT IN PRODUCTION!
-openvidu-meet-init-1  |
-openvidu-meet-init-1  | ------------------OpenVidu Meet---------------------
-openvidu-meet-init-1  | > NOTE: Below are the default initial login credentials
-openvidu-meet-init-1  | > for OpenVidu Meet. If you update them after deployment,
-openvidu-meet-init-1  | > this message will not reflect those changes.
-openvidu-meet-init-1  | ----------------------------------------------------
-openvidu-meet-init-1  | 	- Access from this machine:
-openvidu-meet-init-1  | 		- http://localhost:9080
-openvidu-meet-init-1  | 	- Credentials:
-openvidu-meet-init-1  | 		- Username: admin
-openvidu-meet-init-1  | 		- Password: admin
-openvidu-meet-init-1  | 		- API Key: meet-api-key
-openvidu-meet-init-1  | ----------------------------------------------------
-```
+    First of all, OpenVidu Meet components (docker images) are downloaded (only the first time). It will take ~5 minutes on a 100 Mbps Internet connection.
+    
+    Then, OpenVidu Meet components (docker containers) are executed.
+    
+    Finally, the terminal will show when OpenVidu Meet is ready to be used:
 
-Now, you can access **OpenVidu Meet** by opening your web browser and navigating to [http://localhost:9080](http://localhost:9080) with the credentials provided in the logs.
+    ```
+    openvidu-meet-init-1  | Waiting for OpenVidu to start...    
+    openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
+    openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
+    openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
+    openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
+    openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
+    openvidu-meet-init-1  | Starting OpenVidu... Please be patient...
+    ...
+    openvidu-meet-init-1  |
+    openvidu-meet-init-1  | ====================================================
+    openvidu-meet-init-1  | 🎉 OpenVidu Meet main is ready! 🎉
+    openvidu-meet-init-1  | ====================================================
+    openvidu-meet-init-1  |
+    openvidu-meet-init-1  | This version is only for local development purposes.
+    openvidu-meet-init-1  | DO NOT USE IT IN PRODUCTION!
+    openvidu-meet-init-1  |
+    openvidu-meet-init-1  | ------------------OpenVidu Meet---------------------
+    openvidu-meet-init-1  | > NOTE: Below are the default initial login credentials
+    openvidu-meet-init-1  | > for OpenVidu Meet. If you update them after deployment,
+    openvidu-meet-init-1  | > this message will not reflect those changes.
+    openvidu-meet-init-1  | ----------------------------------------------------
+    openvidu-meet-init-1  | 	- Access from this machine:
+    openvidu-meet-init-1  | 		- http://localhost:9080
+    openvidu-meet-init-1  | 	- Credentials:
+    openvidu-meet-init-1  | 		- Username: admin
+    openvidu-meet-init-1  | 		- Password: admin
+    openvidu-meet-init-1  | 		- API Key: meet-api-key
+    openvidu-meet-init-1  | ----------------------------------------------------
+    ```
 
-=== "Access and Credentials"
-    As this is a deployment for local development, these are the default credentials.
+## Accessing OpenVidu Meet
 
-    - URL: [http://localhost:9080](http://localhost:9080)
-        - Username: `admin`
-        - Password: `admin`
-        - API Key: `meet-api-key`
+You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080) in your web browser with credentials:
 
-    You can change them later from the [OpenVidu Meet Users And Permissions](../../features/users-and-permissions/#modify-openvidu-meet-authentication).
+- Username: `admin`
+- Password: `admin`
 
-Once installed, you will have a Container Group named **`openvidu-meet`** or **`openvidu-meet-pro`**. You can check it in **Docker Desktop → Containers**.
+You can use the [REST API](../../embedded/reference/rest-api/) to [embedd OpenVidu Meet](../../embedded/intro) using:
 
-![Docker Desktop - Containers](../../assets/images/meet/deployment/local-meet/containers.png)
+- API Key: `meet-api-key` 
+
+You can change them later from the [OpenVidu Meet Users And Permissions](../../features/users-and-permissions/#modify-openvidu-meet-authentication).
+
 
 ## Managing the deployment
 
-You can manage the deployment directly from the **Docker Desktop interface**:
+Once installed and executed, **`openvidu-meet`** will appear in **Docker Desktop → Containers** section.
 
-=== "Start"
+![Docker Desktop - Containers](../../assets/images/meet/deployment/local-meet/containers.png)
 
-    1. Go to **Docker Desktop → Containers** and find the container group named **`openvidu-meet`** or **`openvidu-meet-pro`** depending on the edition you deployed.
-    3. Click the **Start** button to start the container group.
-
-    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local-meet/start.png)
+You can manage OpenVidu Meet execution interactively:
 
 === "Stop"
 
-    1. Go to **Docker Desktop → Containers** and find the container group named **`openvidu-meet`** or **`openvidu-meet-pro`** depending on the edition you deployed.
-    3. Click the **Stop** button to stop the container group.
+    3. Click the **Stop** button.
 
     ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local-meet/stop.png)
 
-=== "Review Logs"
+=== "Start"
 
-    1. Go to **Docker Desktop → Containers** and find the container group named **`openvidu-meet`** or **`openvidu-meet-pro`** depending on the edition you deployed.
-    2. Click on the container group to open its details. The logs will be shown after clicking on the container group.
+    3. Click the **Start** button.
 
-    <div class="grid cards no-border no-shadow" markdown>
-
-    - ![Select container group](../../assets/images/meet/deployment/local-meet/select_containers.png)
-    - ![Check logs](../../assets/images/meet/deployment/local-meet/logs.png)
-
-    </div>
+    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local-meet/start.png)
 
 === "Remove"
 
-    If you want to completely remove the deployment and all its data:
+    !!! warn 
+    
+        It will remove rooms and recordings.
 
-    1. Go to **Docker Desktop → Containers** and find the container group named **`openvidu-meet`** or **`openvidu-meet-pro`** depending on the edition you deployed.
-    2. Click the **Delete** button to remove the container group.
-
+    2. Click the **Delete** button. 
         ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local-meet/remove.png)
 
     3. Go to **Docker Desktop → Images**.
@@ -170,81 +179,85 @@ You can manage the deployment directly from the **Docker Desktop interface**:
 
         ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local-meet/remove_volumes.png)
 
-## Testing from Other Devices (LAN Access)
+=== "View logs"
 
-To test OpenVidu Meet from other devices (e.g., smartphones or tablets) within your local network, you need to start the deployment setting up the `LAN_PRIVATE_IP` environment variable with your machine's private IP address.
+    2. Click on the container group to open its details. The logs will be shown after clicking on the container group.
 
+    ![Select container group](../../assets/images/meet/deployment/local-meet/select_containers.png)
+    ![Check logs](../../assets/images/meet/deployment/local-meet/logs.png)
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+## Accessing OpenVidu Meet from other computers or phones
 
-    1. Find your private IP address (e.g., `192.168.1.100`).
-    2. Set the environment variable `LAN_PRIVATE_IP` to your IP and run the local deployment command.
+You can connect to OpenVidu Meet from other computers or phones. It it very useful to join several people to the same room and try the communication features.
 
-    === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
+Follow this steps:
 
-        PowerShell command:
+1. Be sure that other computers or phones are connected to the same wifi or local network (LAN) where OpenVidu Meet is installed.
 
-        ```powershell
-        $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'
-        docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-        ```
+2. Stop OpenVidu Meet if it is alredy started.
 
-    === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
+3. Start it again with a new command.
 
-        Bash command:
+=== ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-        ```bash
-        LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'
-        docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-        ```
+    1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
 
-    === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
+    2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
-        Bash command:
+    ```powershell
+    $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+    ```
+=== ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-        ```bash
-        LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'
-        docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-        ```
+    1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
 
+    2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+    ```bash
+    LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+    ```
 
-    1. Find your private IP address (e.g., `192.168.1.100`).
-    2. Set the environment variable `LAN_PRIVATE_IP` to your IP and run the local deployment command.
+=== ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
-    === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
+    1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.ionos.com/digitalguide/hosting/technical-matters/get-linux-ip-address/){:target="\_blank"}. It typically is similar to `192.168.1.100`.
 
-        PowerShell command:
+    2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
-        ```powershell
-        $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'
-        docker compose -p openvidu-meet-pro -f oci://openvidu/local-meet-pro:latest up -y openvidu-meet-init
-        ```
+    ```bash
+    LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+    ```
 
-    === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
+4. Access to OpenVidu Meet with a different URL:
 
-        Bash command:
+   When OpenVidu Meet is ready to be used the terminal will show the URL where it is accessible.
 
-        ```bash
-        LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'
-        docker compose -p openvidu-meet-pro -f oci://openvidu/local-meet-pro:latest up -y openvidu-meet-init
-        ```
+   For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.no-break}.
+   
+   You will see the following instrutions in the terminal when OpenVidu Meet is ready:
 
-    === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
+    ```
+    openvidu-meet-init-1  |
+    openvidu-meet-init-1  | ====================================================
+    openvidu-meet-init-1  | 🎉 OpenVidu Meet main is ready! 🎉
+    openvidu-meet-init-1  | ====================================================
+    openvidu-meet-init-1  |
+    openvidu-meet-init-1  | This version is only for local development purposes.
+    openvidu-meet-init-1  | DO NOT USE IT IN PRODUCTION!
+    openvidu-meet-init-1  |
+    openvidu-meet-init-1  | ------------------OpenVidu Meet---------------------
+    openvidu-meet-init-1  | > NOTE: Below are the default initial login credentials
+    openvidu-meet-init-1  | > for OpenVidu Meet. If you update them after deployment,
+    openvidu-meet-init-1  | > this message will not reflect those changes.
+    openvidu-meet-init-1  | ----------------------------------------------------
+    openvidu-meet-init-1  | 	- Access from this machine:
+    openvidu-meet-init-1  | 		- https://192-168-1-100.openvidu-local.dev:9443
+    openvidu-meet-init-1  | 	- Credentials:
+    openvidu-meet-init-1  | 		- Username: admin
+    openvidu-meet-init-1  | 		- Password: admin
+    openvidu-meet-init-1  | 		- API Key: meet-api-key
+    openvidu-meet-init-1  | ----------------------------------------------------
+    ```
 
-        Bash command:
-
-        ```bash
-        LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'
-        docker compose -p openvidu-meet-pro -f oci://openvidu/local-meet-pro:latest up -y openvidu-meet-init
-        ```
-
-For example, if your private IP is `192.168.1.100` you can access the OpenVidu Meet local deployment at
- `https://192-168-1-100.openvidu-local.dev:9443`{.no-break} from other devices in your local network.
-
-!!! info
-    The deployment includes a special certificate for the `*.openvidu-local.dev`{.no-break} which simplifies WebRTC development in LAN networks, but this certificate should not be used in production environments. For more information check [About openvidu-local.dev domain and SSL certificates](../../../docs/self-hosting/local/#about-openvidu-localdev-domain-and-ssl-certificates).
 
 ## Advanced Local Deployment
 
