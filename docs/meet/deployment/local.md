@@ -50,7 +50,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
     ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local-meet/open_terminal.png)
 
 2. Copy and paste the following command into the terminal:
-    
+
     ```bash
     docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
     ```
@@ -59,40 +59,14 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
     If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
 
-<!-- 2. Copy and paste the following command into the terminal, depending on whether you want to deploy the **Community** or **Pro** edition:
-
-    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
-
-        Execute this command for the **Community Edition**:
-
-        ```bash
-        docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-        ```
-
-        ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
-
-        If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
-
-    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
-
-        Execute this command for a demo of the **Pro Edition**:
-
-        ```bash
-        docker compose -p openvidu-meet-pro -f oci://openvidu/local-meet-pro:latest up -y openvidu-meet-init
-        ```
-        
-        ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_pro.png)
-
-        If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).-->
-
 3. After pasting the command, press **Enter** to execute the command.
 
     The terminal will show how OpenVidu Meet is downloaded and executed.
 
     First of all, OpenVidu Meet components (docker images) are downloaded (only the first time). It will take ~5 minutes on a 100 Mbps Internet connection.
-    
+
     Then, OpenVidu Meet components (docker containers) are executed.
-    
+
     Finally, the terminal will show when OpenVidu Meet is ready to be used:
 
     ```
@@ -162,20 +136,21 @@ You can manage OpenVidu Meet execution interactively:
 
 === "Remove"
 
-    !!! warn 
-    
+    !!! warn
+
         It will remove rooms and recordings.
 
-    2. Click the **Delete** button. 
+    1. Click the **Delete** button.
+
         ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local-meet/remove.png)
 
-    3. Go to **Docker Desktop → Images**.
-    4. Remove the images related to **OpenVidu Meet**.
+    2. Go to **Docker Desktop → Images**.
+    3. Remove the images related to **OpenVidu Meet**.
 
         ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local-meet/remove_images.png)
 
-    5. Go to **Docker Desktop → Volumes**.
-    6. Remove the volumes related to **OpenVidu Meet**.
+    4. Go to **Docker Desktop → Volumes**.
+    5. Remove the volumes related to **OpenVidu Meet**.
 
         ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local-meet/remove_volumes.png)
 
@@ -198,41 +173,41 @@ Follow this steps:
 
 3. Start it again with a new command.
 
-=== ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
+    === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-    1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
+        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
 
-    2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
+        2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
-    ```powershell
-    $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-    ```
-=== ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
+        ```powershell
+        $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+        ```
+    === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-    1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
+        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
 
-    2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
+        2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
-    ```bash
-    LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-    ```
+        ```bash
+        LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+        ```
 
-=== ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
+    === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
-    1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.ionos.com/digitalguide/hosting/technical-matters/get-linux-ip-address/){:target="\_blank"}. It typically is similar to `192.168.1.100`.
+        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide](https://www.ionos.com/digitalguide/hosting/technical-matters/get-linux-ip-address/){:target="\_blank"}. It typically is similar to `192.168.1.100`.
 
-    2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
+        2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
-    ```bash
-    LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
-    ```
+        ```bash
+        LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+        ```
 
 4. Access to OpenVidu Meet with a different URL:
 
    When OpenVidu Meet is ready to be used the terminal will show the URL where it is accessible.
 
    For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.no-break}.
-   
+
    You will see the following instrutions in the terminal when OpenVidu Meet is ready:
 
     ```
