@@ -1,16 +1,29 @@
 # Webhooks
 
-## Overview
+OpenVidu Meet sends webhooks to inform about important events happening in a room. You can receive them in your application's backend and react accordingly with your own business logic.
 
-Webhooks allow your application to receive real-time notifications when events occur in OpenVidu Meet. Instead of continuously polling the API, webhooks push event data to your specified endpoint when something happens.
+## Configuration
 
+You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There you can:
 
-You can access to the Webhooks reference documentation at the following link:
+- Enable/Disable sending webhooks
+- Set up a valid webhook URL
+- Test the current webhook configuration with a fake event
 
-[OpenVidu Meet Webhooks Reference](https://docs.openvidu.io/en/stable/meet/reference/rest/)
+![Webhooks Configuration](../../../assets/images/meet/embedded/webhook.png)
 
-or directly in the OpenVidu Meet deployment:
+## Validate events
 
- https://{{your-openvidu-deployment-domain}}/api/v1/docs/
+It is important to validate all webhook events received by your endpoint. This way you can ensure that the events are coming from a trusted source and have not been tampered with.
+
+PENDING...
+
+## Failures and retries
+
+PENDING...
+
+## Reference
+
+Visit [OpenVidu Meet Webhooks](../../../assets/htmls/webhooks.html){target="_blank"} reference documentation for a complete list of all available webhook events.
 
 

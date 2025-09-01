@@ -6,59 +6,93 @@ tags:
 
 # Recordings
 
-## Room recording settings
-
-Rooms can be configured with different recording settings. You can setup these settings when [creating a new room](./rooms-and-meetings.md#creating-a-room) or [editing an existing room](./rooms-and-meetings.md#editing-a-room).
-
-- **Allow Recording / No recording**: whether to allow recording the room or not.
-- **Recording Access Control**: who can access the recordings of the room. See section below [Access permissions for recordings](#access-permissions-for-recordings).
-
-<a class="glightbox" href="../../../assets/images/meet/recordings/room-recording-settings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/recordings/room-recording-settings.png" loading="lazy" class="control-height"/></a>
-
 ## Recording a meeting
 
-Recordings must be started by a participant with role "Moderator" in the meeting view. All participants in the meeting will see a recording indicator.
+Recordings must be started by a participant with role "Moderator" in the meeting view (see [Participant roles in a room](./users-and-permissions.md#participant-roles-in-a-room)).
 
-<a class="glightbox" href="../../../assets/videos/meet/start-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery2"><video class="round-corners" src="../../../assets/videos/meet/start-recording.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/start-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-recording.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+
+While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
+
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-indicator.png" data-type="image" data-desc-position="bottom" data-gallery="gallery2"><img src="../../../assets/images/meet/recordings/recording-indicator.png" loading="lazy"/></a>
 
 To stop the recording, a participant with role "Moderator" must simply click the "Stop recording" button. The recording will be automatically saved in the OpenVidu Meet server.
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/stop-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/recordings/stop-recording.png" loading="lazy"/></a>
 
-## Managing recordings
+## Viewing recordings
 
-You can manage all recordings from the "Recordings" page in OpenVidu Meet. Here you can see all recordings, play them, download them, delete them, and share them via a link:
+By default recordings share the same access permissions as their rooms. Whenever a user uses a room link to join a meeting, they will also have the possibility of accessing the list of its previous recordings (if any):
 
-<a class="glightbox" href="../../../assets/images/meet/recordings/recording-page.png" data-type="image" data-desc-position="bottom" data-gallery="gallery4"><img src="../../../assets/images/meet/recordings/recording-page.png" loading="lazy"/></a>
+<a class="glightbox" href="../../../assets/images/meet/recordings/join-view-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery10"><img src="../../../assets/images/meet/recordings/join-view-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/recordings/join-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery10"><img src="../../../assets/images/meet/recordings/join-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
-Participants with the requried permissions can also open in a new tab the "Recording" page directly from the meeting view:
+The recording list shows every recording of that particular room:
 
-<a class="glightbox" href="../../../assets/videos/meet/recording-while-meeting.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery5"><video class="round-corners" src="../../../assets/videos/meet/recording-while-meeting.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery11"><img src="../../../assets/images/meet/recordings/recording-list-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery11"><img src="../../../assets/images/meet/recordings/recording-list-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
-!!! info
-    Recordings can also be managed programmatically via the [OpenVidu Meet REST API](../../assets/htmls/rest-api.html#/operations/getRecordings){:target="_blank"}.
+Participants can also open the list of recordings for that room directly from the meeting view:
 
-## Access permissions for recordings
+<a class="glightbox" href="../../../assets/videos/meet/recording-while-meeting.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery6"><video class="round-corners" src="../../../assets/videos/meet/recording-while-meeting.mp4" defer muted playsinline autoplay loop async></video></a>
 
-You can set specific access permissions for recordings **at room level**. Whether [creating a new room](./rooms-and-meetings.md#creating-a-room) or [editing the settings of an existing room](./rooms-and-meetings.md#editing-a-room), you can configure who may access its recordings:
+The recording view allows playing the video, downloading it or creating a [shareable link](#sharing-recordings-via-link):
 
-<a class="glightbox" href="../../../assets/images/meet/recordings/recording-access-control.png" data-type="image" data-desc-position="bottom" data-gallery="gallery6"><img src="../../../assets/images/meet/recordings/recording-access-control.png" loading="lazy"/></a>
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-detail.png" data-type="image" data-desc-position="bottom" data-gallery="gallery7"><img src="../../../assets/images/meet/recordings/recording-detail.png" loading="lazy" class="round-corners"/></a>
+
+### Access permissions for viewing recordings
+
+Administrators can set specific access permissions for recordings **at room level**. Whether [creating a new room](./rooms-and-meetings.md#creating-a-room) or [editing the settings of an existing room](./rooms-and-meetings.md#editing-a-room), you can configure who may access its recordings:
+
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-access-control.png" data-type="image" data-desc-position="bottom" data-gallery="gallery8"><img src="../../../assets/images/meet/recordings/recording-access-control.png" loading="lazy" class="round-corners"/></a>
 
 Available options are:
 
 - **Only admin**: only administrators of OpenVidu Meet will have access to the recordings of this room. Administrators can always access recordings of any room.
 - **Admin and moderators**: administrators and any participant of the meeting with "Moderator" role will have access to the recordings of this room.
-- **Admin, moderators and speakers**: administrators and any participant of the meeting with "Moderator" or "Speaker" role will have access to the recordings of this room.
+- **Admin, moderators and speakers**: this is the default value. Administrators and any participant of the meeting with "Moderator" or "Speaker" role will have access to the recordings of this room.
 
 ### Sharing recordings via link
 
-Users with sufficient permissions can generate a link to a recording. This link can be made public or require authentication:
+Specific recordings can be shared through a link:
 
-1. From the "Recordings" page, click on the "More Actions" button ( :material-dots-vertical: ) and "Share link" action ( :material-share-variant: ).
-2. Choose the access type:
-      - **Public Access**: anyone with the link can see the recording.
-      - **Private Access**: only users [authenticated in OpenVidu Meet](./users-and-permissions.md#authentication-when-accessing-openvidu-meet) can see the recording.
-3. Click "Generate Shareable Link" to create the link and share it.
+- Users can generate a shareable link from the recording list.
 
-<a class="glightbox" href="../../../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../assets/videos/meet/meet-recording-share-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../assets/videos/meet/meet-recording-share-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../assets/videos/meet/meet-recording-share-light.mp4#only-light" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../../../assets/videos/meet/share-recording-from-recording-list.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery6"><video class="round-corners" src="../../../assets/videos/meet/share-recording-from-recording-list.mp4" defer muted playsinline autoplay loop async></video></a>
+
+- Users can generate a shareable link from the recording view.
+
+    <a class="glightbox" href="../../../assets/videos/meet/share-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../assets/videos/meet/share-recording.mp4" defer muted playsinline autoplay loop async></video></a>
+
+- Administrators can generate shareable links for any recording from OpenVidu Meet console.
+
+    <a class="glightbox" href="../../../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../assets/videos/meet/meet-recording-share-dark.mp4" defer muted playsinline autoplay loop async></video></a>
+
+## Room recording settings
+
+Rooms can be configured with different recording settings. You can setup these settings when [creating a new room](./rooms-and-meetings.md#creating-a-room) or [editing an existing room](./rooms-and-meetings.md#editing-a-room).
+
+- **Allow Recording / No recording**: whether to allow recording the room or not.
+- **Recording Access Control**: who can access the recordings of the room. See [Access permissions for viewing recordings](#access-permissions-for-viewing-recordings).
+
+<a class="glightbox" href="../../../assets/images/meet/recordings/room-recording-settings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery4"><img src="../../../assets/images/meet/recordings/room-recording-settings.png" loading="lazy" class="control-height"/></a>
+
+## Managing recordings
+
+Administrators can manage all recordings from the "Recordings" page in OpenVidu Meet console. It is possible to see all recordings, play them, download them, delete them, and share them via a link:
+
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-page.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/recordings/recording-page.png" loading="lazy" class="round-corners"/></a>
+
+## Recording REST API
+
+Recordings can be managed via the [OpenVidu Meet REST API](../embedded/reference/rest-api.md):
+
+| Operation | HTTP Method | Reference |
+|-----------|-------------|-----------|
+| Get recording | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRecording){:target="_blank"} |
+| Get all recordings | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRecordings){:target="_blank"} |
+| Delete recording | DELETE | [Reference](../../assets/htmls/rest-api.html#/operations/deleteRecording){:target="_blank"} |
+| Bulk delete recordings | DELETE | [Reference](../../assets/htmls/rest-api.html#/operations/bulkDeleteRecordings){:target="_blank"} |
+| Download recordings | GET | [Reference](../../assets/htmls/rest-api.html#/operations/downloadRecordings){:target="_blank"} |
+| Get recording media | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRecordingMedia){:target="_blank"} |
+| Get recording URL | GET | [Reference](../../assets/htmls/rest-api.html#/operations/getRecordingUrl){:target="_blank"} |

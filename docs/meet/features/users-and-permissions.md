@@ -31,7 +31,7 @@ OpenVidu Meet is by default protected with an administrator **username and passw
 The administrator credentials are:
 
 - **Username**: **`admin`**
-- **Password**: generated on installation time
+- **Password**: specified on installation time
 
 The value of the password will be asked on installation. If left empty, a random password  will be generated.
 The location of the administration password depends on the environment of the deployment:

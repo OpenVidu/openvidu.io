@@ -10,7 +10,7 @@ You can simulate **several users** joining to the **same room** using diferent t
 
 This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../../embedded/intro).
 
-!!! warn
+!!! warning
     Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](../../deployment/basic/) or [Advanced deployments](../../advanced/basic/).
 
 ## Prerequisites
@@ -136,7 +136,7 @@ You can manage OpenVidu Meet execution interactively:
 
 === "Remove"
 
-    !!! warn
+    !!! warning
 
         It will remove rooms and recordings.
 
