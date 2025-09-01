@@ -40,9 +40,9 @@ The recording view allows playing the video, downloading it or creating a [share
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/recording-detail.png" data-type="image" data-desc-position="bottom" data-gallery="gallery7"><img src="../../../assets/images/meet/recordings/recording-detail.png" loading="lazy" class="round-corners"/></a>
 
-### Access permissions for viewing recordings
+### Access permissions for recordings
 
-Administrators can set specific access permissions for recordings **at room level**. Whether [creating a new room](./rooms-and-meetings.md#creating-a-room) or [editing the settings of an existing room](./rooms-and-meetings.md#editing-a-room), you can configure who may access its recordings:
+When [creating a new room](./rooms-and-meetings.md#creating-a-room) you can configure who may access its recordings:
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/recording-access-control.png" data-type="image" data-desc-position="bottom" data-gallery="gallery8"><img src="../../../assets/images/meet/recordings/recording-access-control.png" loading="lazy" class="round-corners"/></a>
 
@@ -51,6 +51,9 @@ Available options are:
 - **Only admin**: only administrators of OpenVidu Meet will have access to the recordings of this room. Administrators can always access recordings of any room.
 - **Admin and moderators**: administrators and any participant of the meeting with "Moderator" role will have access to the recordings of this room.
 - **Admin, moderators and speakers**: this is the default value. Administrators and any participant of the meeting with "Moderator" or "Speaker" role will have access to the recordings of this room.
+
+!!! info
+    Participants with role "Speaker" may only **play** recordings. Administrators and participants with role "Moderator" can also **delete** them.
 
 ### Sharing recordings via link
 
