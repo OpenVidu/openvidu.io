@@ -180,7 +180,7 @@ Follow this steps:
         2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
         ```powershell
-        $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+        $env:LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>'; docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
         ```
     === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
