@@ -850,3 +850,9 @@ h2.meetplatform-slogan {
   background-color: var(--primary-color-of-meet) !important;
   border-color: var(--primary-color-of-meet) !important;
 }
+
+.accent-code {
+  color: var(--md-accent-bg-color) !important;
+  font-weight: bold;
+  background-color: var(--md-primary-fg-color);
+}
