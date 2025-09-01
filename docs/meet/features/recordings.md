@@ -67,7 +67,7 @@ Specific recordings can be shared through a link:
 
     <a class="glightbox" href="../../../assets/videos/meet/share-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../assets/videos/meet/share-recording.mp4" defer muted playsinline autoplay loop async></video></a>
 
-- Administrators can generate shareable links for any recording from OpenVidu Meet console.
+- From OpenVidu Meet console it is possible to generate shareable links for any recording.
 
     <a class="glightbox" href="../../../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../assets/videos/meet/meet-recording-share-dark.mp4" defer muted playsinline autoplay loop async></video></a>
 
@@ -82,7 +82,7 @@ Rooms can be configured with different recording settings. You can setup these s
 
 ## Managing recordings
 
-Administrators can manage all recordings from the "Recordings" page in OpenVidu Meet console. It is possible to see all recordings, play them, download them, delete them, and share them via a link:
+OpenVidu Meet console can be used to manage all recordings from the "Recordings" page. It is possible to see all recordings, play them, download them, delete them, and share them via a link:
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/recording-page.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/recordings/recording-page.png" loading="lazy" class="round-corners"/></a>
 
