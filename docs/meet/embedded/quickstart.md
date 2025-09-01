@@ -17,19 +17,9 @@ You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
 ### Automating room creation
 
-You can automate the room creation process by using the OpenVidu Meet REST API. This allows you to create rooms programmatically from your application's backend,  without manual intervention.
+You can automate the room creation process by using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). This allows you to create rooms programmatically from your application's backend, without manual intervention.
 
-#### 1. Generate an API key
-
-1. Connect to OpenVidu Meet at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/`.
-2. Navigate to the **"Embedded"** page.
-3. Click on **":material-key: Generate API Key"** button.
-
-<a class="glightbox" href="../../../assets/videos/meet/generate-api-key.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery2"><video class="round-corners" style="margin-bottom: 2em" src="../../../assets/videos/meet/generate-api-key.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-
-#### 2. Create a room using OpenVidu Meet REST API
-
-Check out the [API reference](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}. Below you have copy-paste snippets for most common languages.
+Check out the [API reference for creating rooms](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}. Below you have copy-paste snippets for most common languages.
 
 !!! info
     Remember to replace **`YOUR_OPENVIDU_DEPLOYMENT_DOMAIN`** and **`YOUR_API_KEY`** in the snippets below.
@@ -288,35 +278,46 @@ The response to this request will be a JSON object as below. The required proper
 }
 ```
 
-## 3. Embed the room into your application
+## 3. Get the room URL
 
-To embed a room into your application's frontend you need the room URL:
+To embed a room into your application's frontend you need the **room URL**. You can copy the room URL for each participant role from the "Rooms" page in OpenVidu Meet console:
 
-=== "Get room URL from OpenVidu Meet console"
+<a class="glightbox" href="../../../assets/images/meet/embedded/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/share-room-link.png" loading="lazy" class="round-corners"/></a>
 
-    In the **"Rooms"** page you can copy the room URL for each participant role.
+### Automating room URL retrieval
 
-    <a class="glightbox" href="../../../assets/images/meet/embedded/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/share-room-link.png" loading="lazy" class="round-corners"/></a>
+You can can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
 
-=== "Get room URL programatically"
+- [Create a room](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}
+- [Get a room](../../assets/htmls/rest-api.html#/operations/getRoom){:target="_blank"}
+- [Get all rooms](../../assets/htmls/rest-api.html#/operations/getRooms){:target="_blank"}
 
-    Properties `moderatorUrl` and `speakerUrl` of object [MeetRoom](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}. You can find these properties in the JSON response of the previous step [Create a room using OpenVidu Meet REST API](#2-create-a-room-using-openvidu-meet-rest-api).
+## 4. Embed the room into your application
 
 Once you got the desired room URL, there are 3 alternatives to embed the OpenVidu Meet room into your application's interface:
 
-### Use a link
+### Use a direct link
 
-This is the simplest way to embed the OpenVidu Meet room into your application. Just link to the room URL from any element in your frontend. For example, with a simple `<a>` tag:
+This is the simplest and easiest way to embed an OpenVidu Meet room into your application. It's a perfect fit if your frontend is a web application and you don't need any custom elements in the video meeting UI: the polished UI of OpenVidu Meet will be displayed in its own browser tab.
+
+Just link to the room URL from any element in your frontend. For example, with a simple `<a>` tag:
 
 ```html
-<a href="{{ your-room-url }}" target="_blank">Join Room</a>
+<a href="{{ your-room-url }}">Join Room</a>
 ```
 
 After clicking on the element, the user will be redirected to OpenVidu Meet, ready to join the room.
 
 <a class="glightbox" href="../../../assets/videos/meet/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
+!!! info
+    You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after the user leaves the room by appending this query param: <code class="no-break">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
+
+    See [Using attributes when embedding with a direct link or iframe](./reference/webcomponent.md#using-attributes-when-embedding-with-a-direct-link-or-iframe) for more information.
+
 ### Use the Web Component
+
+The OpenVidu Meet Web Component is the best option if you want to integrate the OpenVidu Meet UI along your own custom UI. OpenVidu Meet will simply become another component of your UI, blending seamlessly with your application's design and logic.
 
 Include a `<script>` tag to load the OpenVidu Meet Web Component definition from your OpenVidu deployment. Then, you can use the `<openvidu-meet>` custom element in your HTML, setting the `room-url` attribute.
 
@@ -341,7 +342,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 
 ### Use an iframe
 
-This method allows you to embed the OpenVidu Meet room directly into your application's interface using an iframe.
+Some applications may not allow including a Web Component. For these cases OpenVidu Meet can be embedded using a traditional iframe.
 
 ```html
 <html>
@@ -370,3 +371,23 @@ The required iframe attributes are:
     - `fullscreen`: allow fullscreen mode.
     - `autoplay`: allow autoplay of media.
     - `compute-pressure`: allow access to the device's compute pressure API.
+
+!!! info
+    The same **attributes**, **commands** and **events** available for the Web Component may also be used in an iframe. Check out these sections to learn how:
+
+    - [Pass attributes to an OpenVidu Meet iframe](./reference/webcomponent.md#attributes)
+    - [Send commands to an OpenVidu Meet iframe](./reference/webcomponent.md#commands)
+    - [Receive events from an OpenVidu Meet iframe](./reference/webcomponent.md#events)
+
+### Embed recordings
+
+You can embed the recording view of any room by passing attribute **`show-only-recordings`** to the embedding element, whether it is a direct link, the web component or an iframe.
+
+Checkout the Web Component's [attributes](./reference/webcomponent.md#attributes) section for more information.
+
+## 5. REST API and Webhooks
+
+Up to this point everything has been focused on the client-side integration of OpenVidu Meet. To integrate OpenVidu Meet into your application's backend you have available:
+
+- [REST API](./reference/rest-api.md): manage rooms and recordings programmatically.
+- [Webhooks](./reference/webhooks.md): listen to events happening in real time.
