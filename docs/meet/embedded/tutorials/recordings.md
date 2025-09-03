@@ -81,7 +81,7 @@ Let's see the code of each new endpoint:
 
 The `GET /recordings` endpoint retrieves the list of recordings, with optional room filtering:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L99-L134' target='_blank'>index.js</a>" linenums="102"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L99-L134' target='_blank'>index.js</a>" linenums="99"
 // List all recordings
 app.get('/recordings', async (req, res) => {
     const { room: roomName } = req.query; // (1)!
@@ -139,7 +139,7 @@ This endpoint does the following:
 
 The `DELETE /recordings/:recordingId` endpoint deletes the specified recording:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L136-L148' target='_blank'>index.js</a>" linenums="139"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L136-L148' target='_blank'>index.js</a>" linenums="136"
 // Delete a recording
 app.delete('/recordings/:recordingId', async (req, res) => {
     const { recordingId } = req.params; // (1)!

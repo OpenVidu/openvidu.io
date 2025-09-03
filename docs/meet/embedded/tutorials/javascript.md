@@ -213,7 +213,7 @@ This endpoint does the following:
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/src/index.js#L104-L128' target='_blank'>index.js</a>" linenums="107"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/src/index.js#L104-L123' target='_blank'>index.js</a>" linenums="104"
     // Function to make HTTP requests to OpenVidu Meet API
     const httpRequest = async (method, path, body) => {
         // (1)!
@@ -226,28 +226,22 @@ This endpoint does the following:
             body: body ? JSON.stringify(body) : undefined // (2)!
         });
 
-        // Check if the response status is 204 (No Content)
-        if (response.status === 204) {
-            return; // (3)!
-        }
-
-        const responseBody = await response.json(); // (4)!
+        const responseBody = await response.json(); // (3)!
 
         if (!response.ok) {
             console.error('Error while performing request to OpenVidu Meet API:', responseBody);
-            throw new Error('Failed to perform request to OpenVidu Meet API'); // (5)!
+            throw new Error('Failed to perform request to OpenVidu Meet API'); // (4)!
         }
 
-        return responseBody; // (6)!
+        return responseBody; // (5)!
     };
     ```
 
     1. Perform an HTTP request to the OpenVidu Meet API in the specified method and path.
     2. Include the body in the request if provided.
-    3. If the response status is `204 No Content`, does not return anything.
-    4. Parse the response body as JSON.
-    5. If the response is not OK, throw an error with the message from the response.
-    6. Return the response body.
+    3. Parse the response body as JSON.
+    4. If the response is not OK, throw an error with the message from the response.
+    5. Return the response body.
 
     This function makes HTTP requests to the OpenVidu Meet API using the `fetch` function. It receives the HTTP method, path and body as parameters. The API key is included in the request headers for authentication.
 
@@ -262,7 +256,7 @@ This endpoint does the following:
 
 The `GET /rooms` endpoint retrieves the list of rooms created in the application:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/src/index.js#L70-L74' target='_blank'>index.js</a>" linenums="73"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/src/index.js#L70-L74' target='_blank'>index.js</a>" linenums="70"
 // List all rooms
 app.get('/rooms', (_req, res) => {
     const roomsArray = Array.from(rooms.values()); // (1)!
@@ -281,7 +275,7 @@ This endpoint retrieves the list of rooms by converting the values of the `rooms
 
 The `DELETE /room/:roomName` endpoint deletes the specified room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/src/index.js#L76-L97' target='_blank'>index.js</a>" linenums="79"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node/src/index.js#L76-L97' target='_blank'>index.js</a>" linenums="76"
 app.delete('/rooms/:roomName', async (req, res) => {
     const { roomName } = req.params; // (1)!
 
