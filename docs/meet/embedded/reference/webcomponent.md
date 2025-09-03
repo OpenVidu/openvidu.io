@@ -39,15 +39,15 @@ Declare attributes in the component to customize the meeting for your user. For 
 
 --8<-- "shared/meet/webcomponent-attributes.md"
 
-#### Using attributes when embedding with a direct link or iframe
+#### Passing attributes to a direct link or iframe
 
 If you are using a direct link or an iframe to embed OpenVidu Meet instead of using the web component, you can pass the [same attributes](#attributes) as query parameters in the room URL. For example, if your room URL is ...
 
-`http://my.domain.com/room/MyRoom-abcdef?secret=12345` 
+`http://my.domain.com/room/MyRoom-abcdef?secret=12345`{.code-margin-left}
 
 ... to pass attribute `participant-name` ...
 
-<code>http://my.domain.com/room/MyRoom-abcdef?secret=12345<strong class="accent-code">&participant-name=Alice</strong></code>
+<code class="code-margin-left">http://my.domain.com/room/MyRoom-abcdef?secret=12345<strong class="accent-code">&participant-name=Alice</strong></code>
 
 This is what it would look like when using a URL or an iframe:
 
@@ -78,7 +78,7 @@ openviduMeet.leaveRoom();
 
 --8<-- "shared/meet/webcomponent-commands.md"
 
-#### Sending commands when embedding with an iframe
+#### Sending commands to an iframe
 
 If you are using an iframe to embed OpenVidu Meet, you can still use the same commands by accessing the iframe's content window. For example:
 
@@ -115,27 +115,18 @@ openviduMeet.once('LEFT', (event) => {
 
 --8<-- "shared/meet/webcomponent-events.md"
 
-#### Receiving events when embedding with an iframe
+#### Receiving events from an iframe
 
 If you are using an iframe to embed OpenVidu Meet, you can still listen for events by accessing the iframe's content window. For example:
 
 ```javascript
 const iframe = document.querySelector('iframe');
-iframe.contentWindow.addEventListener('message', (event) => {
-	if (event.data.type === 'JOINED') {
-		console.log('The local participant has joined the room!', event.data);
+iframe.contentWindow.addEventListener('message', (message) => {
+	if (message.event === 'JOINED') {
+		console.log('The local participant has joined the room!', message.payload);
 	}
-	if (event.data.type === 'LEFT') {
-		console.log('The local participant has left the room!', event.data);
+	if (message.event === 'LEFT') {
+		console.log('The local participant has left the room!', message.payload);
 	}
 });
 ```
-
-## Examples
-
-TODO: INCLUDE EXAMPLES HERE
-
-- Basic Example
-- Advanced Example with Customization
-- Listen for events and handle them accordingly.
-- Sending commands to the component.

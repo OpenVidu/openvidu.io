@@ -248,6 +248,8 @@ Embed the OpenVidu Meet UI right into your app.
 
 <a class="glightbox" href="../assets/videos/meet/embed-html.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/embed-html.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
+<a class="glightbox" href="../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners" alt="OpenVidu Meet embedded meeting"/></a>
+
 </div>
 
 <div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
@@ -308,9 +310,9 @@ Team meetings
 
 Empower collaboration across your organization with customizable, secure, high-quality video meetings.
 
-<div class="grid cards use-cases-inner-cards no-border no-shadow ov-call-commercial-feature-cards" markdown>
+<div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
+<a class="glightbox" href="../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
@@ -347,11 +349,11 @@ e-Learning
 
 Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or e-learning portal using **OpenVidu Meet Embedded**.
 
-<div class="grid cards use-cases-inner-cards no-border no-shadow ov-call-commercial-feature-cards" markdown>
+<div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
 -	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features to enhance the learning experience.
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
+<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
 
 </div>
 
@@ -386,9 +388,9 @@ Telehealth
 
 The most secure videoconference platform is the one you host on your own servers.
 
-<div class="grid cards use-cases-inner-cards no-border no-shadow ov-call-commercial-feature-cards" markdown>
+<div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
+<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
 
 -	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption.
 
@@ -425,11 +427,11 @@ Customer support
 
 Build trust with instant, reliable support through embedded video calls that persist. Right where your clients need it.
 
-<div class="grid cards use-cases-inner-cards no-border no-shadow ov-call-commercial-feature-cards" markdown>
+<div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
 -	Connecting your **remote assistance** team with your **customers** has never been so easy. OpenVidu Meet provides all the necessary tools for effective communication and collaboration, ensuring a seamless support experience.
 
-![OpenVidu Meet Embedded](../../assets/images/openvidu-call/ov-call-multiparty.png){.round-corners .do-not-include-in-gallery .not-selectable}
+<a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners" alt="Use case Customer support"/></a>
 
 </div>
 
@@ -447,11 +449,11 @@ Build trust with instant, reliable support through embedded video calls that per
 
     Record your customer support meetings and generate transcriptions for future reference.
 
--   __Communication and clarity__{ .feature-name }
+-   __Custom branding__{ .feature-name }
 
     ---
 
-    Up to 4K and HiFi audio for clear for clear communication between practitioners and patients. File sharing for medical documents and images.
+    Customize the look and feel of your support rooms to match your brand identity.
 
 </div>
 </div>

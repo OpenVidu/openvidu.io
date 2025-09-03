@@ -856,3 +856,11 @@ h2.meetplatform-slogan {
   font-weight: bold;
   background-color: var(--md-primary-fg-color);
 }
+
+.code-margin-left {
+  margin-left: 2em;
+}
+
+.external-link-icon {
+  font-size: 0.75em;
+}

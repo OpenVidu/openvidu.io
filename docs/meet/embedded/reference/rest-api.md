@@ -27,8 +27,8 @@ X-API-KEY: your-openvidu-meet-api-key
 
 You can access the REST API reference documentation at:
 
-- Link [OpenVidu Meet REST API Reference](../../../assets/htmls/rest-api.html){target="_blank"}
-- Your own OpenVidu Meet deployment serves the documentation at **`https://{{your-openvidu-deployment-domain}}/api/v1/docs/`**
+- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html){target="_blank"}
+- **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/api/v1/docs/`**{.no-break}
 
 ### Code snippets
 
@@ -44,6 +44,8 @@ The reference documentation provides code snippets for each REST API method. You
 
 ### Testing API Endpoints
 
-When accessing the REST API documentation from your own OpenVidu Meet deployment at `https://{{your-openvidu-deployment-domain}}/api/v1/docs/`{.no-break}, you can test every endpoint directly from the browser. Just configure a valid API key in the `X-API-KEY` header input.
+When accessing the REST API documentation from your own OpenVidu Meet deployment at **`https://{{ your-openvidu-deployment-domain }}/api/v1/docs/`**{.no-break}, you can test every endpoint directly from the browser. This is a great way to explore the API's body requests and responses.
+
+Just configure a valid API key in the `X-API-KEY` header input.
 
 <a class="glightbox" href="../../../../assets/videos/meet/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/rest-api-test.mp4" defer muted playsinline autoplay loop async></video></a>

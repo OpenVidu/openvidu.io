@@ -28,12 +28,12 @@ OpenVidu Meet is by default protected with an administrator **username and passw
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
-The administrator credentials are:
+The initial administrator credentials are:
 
 - **Username**: **`admin`**
 - **Password**: specified on installation time
 
-The value of the password will be asked on installation. If left empty, a random password  will be generated.
+The value of the password will be asked on installation. If left empty, a random password will be generated.
 The location of the administration password depends on the environment of the deployment:
 
 === "Local (Demo)"
@@ -44,7 +44,7 @@ The location of the administration password depends on the environment of the de
 
     Credentials will be logged at the end of the installation process:
 
-    ```
+    ``` //ACTUALIZR AL VALOR REAL
     OpenVidu Meet administration credentials:
     - Username: admin
     - Password: xxxxxxxx
@@ -54,15 +54,12 @@ The location of the administration password depends on the environment of the de
 
     In the Secrets Manager of the CloudFormation stack, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
-    !!! warning
-        If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
-
 === "Azure"
 
     In the Azure Key Vault, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
-    !!! warning
-        If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
+!!! warning
+    If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
 
 ### Modify OpenVidu Meet authentication
 

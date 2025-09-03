@@ -1,5 +1,5 @@
 ---
-title: Quickstart
+title: Step by step guide
 tags:
   - setupcustomgallery
 ---
@@ -32,7 +32,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
         --header 'Accept: application/json' \
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
-        --data '{"roomIdPrefix": "quickstart-room"}'
+        --data '{"roomIdPrefix": "my-room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -64,7 +64,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
     });
 
     req.write(JSON.stringify({
-        roomIdPrefix: 'quickstart-room',
+        roomIdPrefix: 'my-room',
     }));
 
     req.end();
@@ -86,7 +86,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
 
         url := "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms"
 
-        payload := strings.NewReader("{\"roomIdPrefix\":\"quickstart-room\"}")
+        payload := strings.NewReader("{\"roomIdPrefix\":\"my-room\"}")
 
         req, _ := http.NewRequest("POST", url, payload)
 
@@ -121,7 +121,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
     request["Content-Type"] = 'application/json'
     request["Accept"] = 'application/json'
     request["X-API-KEY"] = 'YOUR_API_KEY'
-    request.body = "{\"roomIdPrefix\": \"quickstart-room\"}"
+    request.body = "{\"roomIdPrefix\": \"my-room\"}"
 
     response = http.request(request)
     puts response.read_body
@@ -135,7 +135,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
         .header("Content-Type", "application/json")
         .header("Accept", "application/json")
         .header("X-API-KEY", "YOUR_API_KEY")
-        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomIdPrefix\": \"quickstart-room\"}"))
+        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomIdPrefix\": \"my-room\"}"))
         .build();
     HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     System.out.println(response.body());
@@ -148,7 +148,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
 
     conn = http.client.HTTPSConnection("YOUR_OPENVIDU_DEPLOYMENT_DOMAIN")
 
-    payload = "{\"roomIdPrefix\": \"quickstart-room\"}"
+    payload = "{\"roomIdPrefix\": \"my-room\"}"
 
     headers = {
         'Content-Type': "application/json",
@@ -176,7 +176,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
     fn main() -> Result<(), Box<dyn std::error::Error>> {
         let client = Client::new();
         let url = "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms";
-        let payload = r#"{"roomIdPrefix": "quickstart-room"}"#;
+        let payload = r#"{"roomIdPrefix": "my-room"}"#;
 
         let resp = client
             .post(url)
@@ -203,7 +203,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
         CURLOPT_URL => "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(['roomIdPrefix' => 'quickstart-room']),
+        CURLOPT_POSTFIELDS => json_encode(['roomIdPrefix' => 'my-room']),
         CURLOPT_HTTPHEADER => [
             "Accept: application/json",
             "Content-Type: application/json",
@@ -237,7 +237,7 @@ Check out the [API reference for creating rooms](../../assets/htmls/rest-api.htm
             { "Accept", "application/json" },
             { "X-API-KEY", "YOUR_API_KEY" },
         },
-        Content = new StringContent("{\"roomIdPrefix\": \"quickstart-room\"}")
+        Content = new StringContent("{\"roomIdPrefix\": \"my-room\"}")
         {
             Headers =
             {
@@ -257,8 +257,8 @@ The response to this request will be a JSON object as below. The required proper
 
 ```json hl_lines="18-19"
 {
-    "roomId": "quickstart-room-123",
-    "roomIdPrefix": "quickstart-room",
+    "roomId": "my-room-123",
+    "roomIdPrefix": "my-room",
     "creationDate": 1620000000000,
     "autoDeletionDate": 1900000000000,
     "preferences": {
@@ -273,8 +273,8 @@ The response to this request will be a JSON object as below. The required proper
             "enabled": true
         }
     },
-    "moderatorUrl": "http://localhost:6080/room/quickstart-room-123?secret=123456",
-    "publisherUrl": "http://localhost:6080/room/quickstart-room-123?secret=654321"
+    "moderatorUrl": "http://localhost:6080/room/my-room-123?secret=123456",
+    "publisherUrl": "http://localhost:6080/room/my-room-123?secret=654321"
 }
 ```
 
@@ -313,7 +313,7 @@ After clicking on the element, the user will be redirected to OpenVidu Meet, rea
 !!! info
     You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after the user leaves the room by appending this query param: <code class="no-break">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
 
-    See [Using attributes when embedding with a direct link or iframe](./reference/webcomponent.md#using-attributes-when-embedding-with-a-direct-link-or-iframe) for more information.
+    See [Passing attributes to a direct link or iframe](./reference/webcomponent.md#passing-attributes-to-a-direct-link-or-iframe) for more information.
 
 ### Use the Web Component
 
@@ -338,7 +338,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 </html>
 ```
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/embed-iframe.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/embedded/embed-iframe.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners"/></a>
 
 ### Use an iframe
 
@@ -379,13 +379,44 @@ The required iframe attributes are:
     - [Send commands to an OpenVidu Meet iframe](./reference/webcomponent.md#commands)
     - [Receive events from an OpenVidu Meet iframe](./reference/webcomponent.md#events)
 
-### Embed recordings
+## 5. Embed recordings into your application
 
-You can embed the recording view of any room by passing attribute **`show-only-recordings`** to the embedding element, whether it is a direct link, the web component or an iframe.
+If your use case includes recording your rooms, you can also embed them right into your app. You can embed the list of recordings of a room or directly show the player for a specific recording.
 
-Checkout the Web Component's [attributes](./reference/webcomponent.md#attributes) section for more information.
+### Embed the list of recordings of a room
 
-## 5. REST API and Webhooks
+To show the list of recordings of a room, declare attribute **`show-recordings`** in the embedding element:
+
+```html
+<openvidu-meet room-url="{{ your-room-url }}" show-only-recordings="true"></openvidu-meet>
+```
+
+!!! info
+    Checkout the Web Component's [attributes](./reference/webcomponent.md#attributes) section for more information.
+
+This will show the list of recordings for the specified room:
+
+<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-recording-list.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/webcomponent-recording-list.png" loading="lazy" class="round-corners"/></a>
+
+### Embed the player for a specific recording
+
+To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
+
+- [OpenVidu Meet console](../../features/recordings/#sharing-recordings-via-link)
+- [Programmatically via REST API](../../assets/htmls/rest-api.html#/operations/getRecordingUrl){:target="_blank"}
+
+```html
+<openvidu-meet recording-url="{{ your-recording-url }}"></openvidu-meet>
+```
+
+!!! info
+    Checkout the Web Component's [attributes](./reference/webcomponent.md#attributes) section for more information.
+
+This will show the player for the specified recording:
+
+<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-recording-player.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/webcomponent-recording-player.png" loading="lazy" class="round-corners"/></a>
+
+## 6. REST API and Webhooks
 
 Up to this point everything has been focused on the client-side integration of OpenVidu Meet. To integrate OpenVidu Meet into your application's backend you have available:
 
