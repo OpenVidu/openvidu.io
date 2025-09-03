@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built with **React** that allow
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 

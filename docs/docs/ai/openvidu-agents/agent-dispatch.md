@@ -51,7 +51,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
 
     ```javascript
     import { AgentDispatchClient } from 'livekit-server-sdk';
@@ -70,7 +70,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    Using [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
 
     ```go
     import (
@@ -99,7 +99,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    Using [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
 
     ```ruby
     require 'livekit'
@@ -126,7 +126,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    Using [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
 
     ```java
     import io.livekit.server.AgentDispatchServiceClient;
@@ -151,7 +151,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 
-    Using [LiveKit Python SDK](https://github.com/livekit/python-sdks){target="\_blank"}
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){target="\_blank"}
 
     ```python
     from livekit.api import LiveKitAPI, CreateAgentDispatchRequest
@@ -176,7 +176,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    Using [LiveKit .NET SDK](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
 
     ```csharp
     using Livekit.Server.Sdk.Dotnet;
@@ -213,11 +213,11 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
              -d '{"agent_name": "AGENT_NAME", "room": "my-room"}'
         ```
 
-        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. Visit LiveKit docs: [Creating a token](https://docs.livekit.io/home/get-started/authentication/#creating-a-token){target="\_blank"}
+        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. Visit LiveKit docs: [Creating a token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#creating-a-token){target="\_blank"}
 
         <br>
 
-    2. Use the [livekit-cli](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
 
         ```bash
         export LIVEKIT_URL=https://my-openvidu-host
@@ -238,4 +238,4 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 You can configure a Participant's token to trigger the dispatch of an agent right at the moment that Participant connects to a Room. This is very useful to dispatch an agent to a specific Room only when a specific Participant joins.
 
-To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. Visit [LiveKit docs](https://docs.livekit.io/home/get-started/authentication/#room-configuration){target="\_blank"} to learn how.
+To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. Visit [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#room-configuration){target="\_blank"} to learn how.

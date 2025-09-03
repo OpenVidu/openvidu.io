@@ -5,7 +5,7 @@ description: Learn how to perform administrative tasks on an AWS OpenVidu Elasti
 
 # OpenVidu Elastic administration: AWS
 
-The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
+The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
 
 ## Cluster Shutdown and Startup
 
@@ -15,7 +15,7 @@ The Master Node is an EC2 instance, while the Media Nodes are part of an Auto Sc
 
     To shut down the cluster, you need to stop the Media Nodes first and then stop the Master Node. This way, any ongoing session will not be interrupted.
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`**, and click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
         <figure markdown>
@@ -51,7 +51,7 @@ The Master Node is an EC2 instance, while the Media Nodes are part of an Auto Sc
 
     To start the cluster, we recommend starting the Master Node first and then the Media Nodes.
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
     3. Locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
         <figure markdown>
@@ -108,7 +108,7 @@ It is possible to change the instance type of both the Master Node and the Media
 
 === "Media Nodes"
 
-    1. Go to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Go to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
     3. Locate the resource with the logical ID: **`OpenViduMediaNodeLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Media Nodes selected.
         <figure markdown>
@@ -152,7 +152,7 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
 
 === "Media Nodes Autoscaling Configuration"
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
         <figure markdown>
@@ -173,7 +173,7 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
 
         !!! info
             
-            OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU utilization, however, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [AWS Auto Scaling documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html){:target=_blank}.
+            OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU utilization, however, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [AWS Auto Scaling documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html){:target=_blank}.
 
 ## Fixed Number of Media Nodes
 
@@ -181,7 +181,7 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
 
 === "Set Fixed Number of Media Nodes"
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
     3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
         <figure markdown>
@@ -211,7 +211,7 @@ In addition to these, an AWS deployment provides the capability to manage global
 
 === "Changing Configuration through AWS Secrets"
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
     3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Elastic Deployment.
         <figure markdown>

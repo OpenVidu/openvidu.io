@@ -1,6 +1,6 @@
 # How to deploy and configure OpenVidu with an existing external proxy
 
-By default, OpenVidu is deployed with an internal [Caddy server](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
+By default, OpenVidu is deployed with an internal [Caddy server :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
 
 - You wish to manage SSL certificates manually.
 - A specific proxy server is required for enhanced security.
@@ -143,7 +143,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    We will use [Nginx](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
+    We will use [Nginx :fontawesome-solid-external-link:{.external-link-icon}](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
 
     --8<-- "shared/self-hosting/proxy-nginx-turn-tls.md"
 
@@ -299,7 +299,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    We will use [Nginx](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
+    We will use [Nginx :fontawesome-solid-external-link:{.external-link-icon}](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
 
     --8<-- "shared/self-hosting/proxy-nginx-turn-tls.md"
 

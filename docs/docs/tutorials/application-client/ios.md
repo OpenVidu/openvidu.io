@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built for **iOS**, using **Swif
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Swift SDK](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 

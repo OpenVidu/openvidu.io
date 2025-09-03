@@ -71,7 +71,7 @@ EXTERNAL_S3_BUCKET_CLUSTER_DATA=my-openvidu-cluster-bucket
 
 ## About the Path-Style parameter
 
-The `EXTERNAL_S3_PATH_STYLE_ACCESS` parameter is used to specify whether to use path-style access if `true` or virtual-hosted-style access if `false`. Check this documentation for more information: [Amazon S3 Path Style Access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html){:target="_blank"}
+The `EXTERNAL_S3_PATH_STYLE_ACCESS` parameter is used to specify whether to use path-style access if `true` or virtual-hosted-style access if `false`. Check this documentation for more information: [Amazon S3 Path Style Access :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html){:target="_blank"}
 
  This parameter requires a specific value depending on the S3 provider. Here is a table with some examples:
 

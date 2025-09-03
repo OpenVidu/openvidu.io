@@ -29,7 +29,7 @@ git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b main
 
 ### 3. Run the application
 
-To run this application, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} (≥ 18) installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} (≥ 18) installed on your device.
 
 1. Navigate into the application directory
 

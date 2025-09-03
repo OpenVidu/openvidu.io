@@ -118,7 +118,7 @@ tags:
 
     ---
 
-    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit**](https://livekit.io/){target="\_blank"} and [**mediasoup**](https://mediasoup.org/){target="\_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
+    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){target="\_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
 
 -   :material-chart-timeline-variant-shimmer:{ .feature-icon .padding-icon } __Scalable__{ .feature-name }
 
@@ -156,7 +156,7 @@ tags:
 
     ---
 
-    Achieve ultra-low latency in your videoconference or live streaming app thanks to [WebRTC](https://webrtc.org/){target="\_blank"}.
+    Achieve ultra-low latency in your videoconference or live streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
 
 <!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
 

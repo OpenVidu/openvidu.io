@@ -48,7 +48,7 @@ If you are using the V2 Compatibility module, you can also enable webhooks for t
 
     Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
 
-    Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv){:target=\_blank} all the webhook events that you can receive setting up the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
+    Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv) all the webhook events that you can receive setting up the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
 
 ## Send Webhooks to a Local Application Server
 
@@ -72,6 +72,6 @@ The following images illustrate the difference between an unreachable and a reac
 
 </div>
 
-Exposing your local application server to the internet is a common practice when developing applications locally. Tools like [Ngrok](https://ngrok.com/){target="\_blank"}, [LocalTunnel](https://localtunnel.github.io/www/){target="\_blank"}, [LocalXpose](https://localxpose.io/){target="\_blank"} and [Zrok](https://zrok.io/){target="\_blank"} can help you achieve this.
+Exposing your local application server to the internet is a common practice when developing applications locally. Tools like [Ngrok :fontawesome-solid-external-link:{.external-link-icon}](https://ngrok.com/){target="\_blank"}, [LocalTunnel :fontawesome-solid-external-link:{.external-link-icon}](https://localtunnel.github.io/www/){target="\_blank"}, [LocalXpose :fontawesome-solid-external-link:{.external-link-icon}](https://localxpose.io/){target="\_blank"} and [Zrok :fontawesome-solid-external-link:{.external-link-icon}](https://zrok.io/){target="\_blank"} can help you achieve this.
 
 These tools provide you with a public URL that forwards requests to your local application server. You can use this URL to receive webhooks from OpenVidu, configuring it in the OpenVidu Server as explained in the [previous section](#openvidu-server-configuration).

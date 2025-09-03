@@ -32,7 +32,7 @@ The videoconference application built on top of OpenVidu
     Experience all the **features you need** only with a click: multiparty videoconferences, screen sharing, chat, and more
 
 
-	[Try it](https://demos.openvidu.io/openvidu-call/){target="_blank" .md-button .ov-call-to-action-btn}
+	[Try it :fontawesome-solid-external-link:{.external-link-icon}](https://demos.openvidu.io/openvidu-call/){target="_blank" .md-button .ov-call-to-action-btn}
 
 
 -   :material-brush:{ .ov-call-commercial-icon .middle } __Fully Customizable__{ .ov-call-commercial-card-title }
@@ -223,7 +223,7 @@ The videoconference application built on top of OpenVidu
 
 <div class="grid ov-call-footer-btn-container" markdown>
 
-[Try it](https://demos.openvidu.io/openvidu-call/){target="_blank" .md-button .ov-call-to-action-btn }
+[Try it :fontawesome-solid-external-link:{.external-link-icon}](https://demos.openvidu.io/openvidu-call/){target="_blank" .md-button .ov-call-to-action-btn }
 
 [Customize it](./docs.md){ .md-button .ov-call-to-action-btn }
 

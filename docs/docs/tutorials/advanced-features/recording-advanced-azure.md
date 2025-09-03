@@ -7,7 +7,7 @@ description: Learn how to improve the basic recording tutorial by adding complet
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/advanced-features/openvidu-recording-advanced-node-azure){ .md-button target=\_blank }
 
-This tutorial improves the [basic recording tutorial](./recording-basic-azure.md){target="\_blank"} by doing the following:
+This tutorial improves the [basic recording tutorial](./recording-basic-azure.md) by doing the following:
 
 -   **Complete recording metadata**: Listen to webhook events and save all necessary metadata in a separate file.
 -   **Real time recording status notification**: Implement a custom notification system to inform participants about the recording status by listening to webhook events and updating room metadata.
@@ -33,7 +33,7 @@ For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob 
             Make sure you deploy with at least 4 CPUs in the Virtual Machine of Azure.
 
     2. Point the tutorial to your Azure deployment:
-          - Modify file [`.env`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node-azure/.env){target="\_blank"} to update the LiveKit and Azure configuration to the values of your Azure deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Check deployment outputs in Azure Key Vault](../../self-hosting/single-node/azure/install.md#check-deployment-outputs-in-azure-key-vault) section. You can get the values of `AZURE_ACCOUNT_NAME`, `AZURE_ACCOUNT_KEY` and `AZURE_CONTAINER_NAME` from the `openvidu.env` file of your deployment (see [Azure SSH Outputs](../../self-hosting/single-node/azure/install.md#check-deployment-outputs-in-the-instance)).
+          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node-azure/.env){target="\_blank"} to update the LiveKit and Azure configuration to the values of your Azure deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Check deployment outputs in Azure Key Vault](../../self-hosting/single-node/azure/install.md#check-deployment-outputs-in-azure-key-vault) section. You can get the values of `AZURE_ACCOUNT_NAME`, `AZURE_ACCOUNT_KEY` and `AZURE_CONTAINER_NAME` from the `openvidu.env` file of your deployment (see [Azure SSH Outputs](../../self-hosting/single-node/azure/install.md#check-deployment-outputs-in-the-instance)).
           - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node-azure/public/app.js#L3) to update the value of `LIVEKIT_URL` to `wss://your.azure.deployment.domain`
 
     !!! warning
@@ -52,7 +52,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -428,7 +428,7 @@ This method does the following:
 
     !!! info "Getting recording metadata"
 
-        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the Azure Container, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic-azure.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
+        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the Azure Container, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic-azure.md), we are now storing additional details such as the **recording name**, **duration** and **size**.
 
 2.  Gets the metadata key from the recordings path and the recordings metadata path, both defined in the `config.js` file, and the recording name replacing the `.mp4` extension with `.json`:
 

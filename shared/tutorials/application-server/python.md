@@ -1,4 +1,4 @@
-To run this server application, you need [Python 3](https://www.python.org/downloads/){:target="\_blank"} installed on your device.
+To run this server application, you need [Python 3 :fontawesome-solid-external-link:{.external-link-icon}](https://www.python.org/downloads/){:target="\_blank"} installed on your device.
 
 1.  Navigate into the server directory
 

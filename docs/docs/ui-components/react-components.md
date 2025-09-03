@@ -87,8 +87,8 @@ React Components provides a set of hooks that you can use to interact with the c
 
 ## Applications
 
-A practical example showcases the potential of React Components is the production-ready flagship application, [**LiveKit Meet**](https://meet.livekit.io/){:target="_blank"}. This application is built using React Components and demonstrates the power and flexibility of the library.
+A practical example showcases the potential of React Components is the production-ready flagship application, [**LiveKit Meet** :fontawesome-solid-external-link:{.external-link-icon}](https://meet.livekit.io/){:target="_blank"}. This application is built using React Components and demonstrates the power and flexibility of the library.
 
 ## References
 
-- [React Components](https://docs.livekit.io/reference/components/react/){:target="_blank"}
+- [React Components :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/){:target="_blank"}

@@ -1,4 +1,4 @@
-To run this server application, you need [Go](https://go.dev/doc/install){:target="\_blank"} installed on your device.
+To run this server application, you need [Go :fontawesome-solid-external-link:{.external-link-icon}](https://go.dev/doc/install){:target="\_blank"} installed on your device.
 
 1. Navigate into the server directory
 ```bash

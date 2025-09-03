@@ -34,7 +34,7 @@ Configuration files can be divided into three types:
     ${openvidu.DOMAIN_NAME}
     ```
 
-    You can check the [OpenVidu Configuration In depth](./in-depth.md){:target="_blank"} section to learn more about how the configuration system works.
+    You can check the [OpenVidu Configuration In depth](./in-depth.md) section to learn more about how the configuration system works.
 
 ## Config files
 

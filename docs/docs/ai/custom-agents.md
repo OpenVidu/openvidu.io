@@ -1,6 +1,6 @@
 # Custom agents
 
-OpenVidu provides a [set of built-in agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework](https://docs.livekit.io/agents/){target="\_blank"}.
+OpenVidu provides a [set of built-in agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){target="\_blank"}.
 
 ## 1. Implement your custom agent using the LiveKit Agents framework
 
@@ -8,10 +8,10 @@ LiveKit Agents consists of a **Python** or **Node** program that connects to Liv
 
 The agent actually behaves as any other regular Participant of the Room, but thanks to its connection to **Speech-to-Text** services, **LLMs** and **Text-to-Speech** service, it can transcribe audio tracks, analyze video tracks, generate speech, etc... and publish the results back to the Room. This allows building any kind of flow interaction between your users and the AI service, all in realtime.
 
-An incredible set of [plugins](https://github.com/livekit/agents/tree/main/livekit-plugins){target="\_blank"} make it very easy to integrate your agent code with the most popular AI providers. You have further information in the [LiveKit Agents integrations](https://docs.livekit.io/agents/integrations/){target="\_blank"} documentation.
+An incredible set of [plugins :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/tree/main/livekit-plugins){target="\_blank"} make it very easy to integrate your agent code with the most popular AI providers. You have further information in the [LiveKit Agents integrations :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/integrations/){target="\_blank"} documentation.
 
 !!! tip
-    To start building your own custom agent, the best way is to follow the LiveKit's [Voice AI quickstart](https://docs.livekit.io/agents/start/voice-ai/){target="\_blank"} guide. You can customize it to your needs once you grasp the basics of the Agents framework. You also have a great collection of [recipes](https://docs.livekit.io/recipes/){target="\_blank"} to inspire you.
+    To start building your own custom agent, the best way is to follow the LiveKit's [Voice AI quickstart :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/start/voice-ai/){target="\_blank"} guide. You can customize it to your needs once you grasp the basics of the Agents framework. You also have a great collection of [recipes :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/recipes/){target="\_blank"} to inspire you.
 
 ## 2. Dockerize your custom agent
 

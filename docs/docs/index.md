@@ -20,7 +20,7 @@ OpenVidu Platform enables you to build real-time applications. You can build you
 
 OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live streaming events, management and processing of drones and camera feeds...
 
-OpenVidu is built on the best open source technologies: [LiveKit](https://livekit.io){target="\_blank"}, from which it inherits all its amazing SDKs to integrate it into your front-end and back-end applications, and [mediasoup](https://mediasoup.org){target="\_blank"}, from which it inherits the best performance and optimization for media routing.
+OpenVidu is built on the best open source technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io){target="\_blank"}, from which it inherits all its amazing SDKs to integrate it into your front-end and back-end applications, and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org){target="\_blank"}, from which it inherits the best performance and optimization for media routing.
 
 <figure markdown>
   ![OpenVidu vs LiveKit](../assets/images/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .do-not-include-in-gallery }

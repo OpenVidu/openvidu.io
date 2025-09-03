@@ -1,4 +1,4 @@
-To run the client application tutorial, you need an HTTP web server installed on your development computer. A great option is [http-server](https://github.com/http-party/http-server){:target="\_blank"}. You can install it via [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm){:target="\_blank"}:
+To run the client application tutorial, you need an HTTP web server installed on your development computer. A great option is [http-server :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/http-party/http-server){:target="\_blank"}. You can install it via [NPM :fontawesome-solid-external-link:{.external-link-icon}](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm){:target="\_blank"}:
 
 ```bash
 npm install -g http-server
