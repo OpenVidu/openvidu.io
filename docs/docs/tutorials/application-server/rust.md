@@ -28,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 
 ### 3. Run the server application
 
---8<-- "shared/tutorials/application-server/ruby.md"
+--8<-- "shared/tutorials/application-server/rust.md"
 
 ### 4. Run a client application to test against this server
 
