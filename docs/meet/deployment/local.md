@@ -6,12 +6,13 @@ description: Deploy OpenVidu Meet on your local machine for development and test
 
 You can easily deploy **OpenVidu Meet** on your local machine to explore its features right away.
 
-You can simulate **several users** joining to the **same room** using diferent tabs of your preferred browser.
+You can simulate **several users** joining to the **same room** using different tabs of your preferred browser.
 
 This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../../embedded/intro).
 
 !!! warning
     Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](../../deployment/basic/) or [Advanced deployments](../../advanced/basic/).
+
 
 ## Prerequisites
 
@@ -22,7 +23,7 @@ This local deployment is the ideal choice to develop the [embedding of OpenVidu 
 
 ## Installing Docker Desktop
 
-[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology the simplifies the installation of applications in **Windows**, **macOS**, and **Linux**. 
+[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology the simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
 
 In the Docker terminology, an application is downloaded as a one or several **docker images**. When the application is executed, it is composed of one or several **docker containers**.
 
@@ -45,7 +46,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 ## Running OpenVidu Meet Locally
 
-1. Open **Docker Desktop** and click on the **"Terminal"** button at the bottom right corner.
+1. Open **Docker Desktop** and click on the **"Terminal"** button in the bottom right corner.
 
     ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local-meet/open_terminal.png)
 
@@ -63,7 +64,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
     The terminal will show how OpenVidu Meet is downloaded and executed.
 
-    First of all, OpenVidu Meet components (docker images) are downloaded (only the first time). It will take ~5 minutes on a 100 Mbps Internet connection.
+    Firstly, OpenVidu Meet components (docker images) are downloaded (only the first time). It will take ~5 minutes on a 100 Mbps Internet connection.
 
     Then, OpenVidu Meet components (docker containers) are executed.
 
@@ -165,11 +166,11 @@ You can manage OpenVidu Meet execution interactively:
 
 You can connect to OpenVidu Meet from other computers or phones. It it very useful to join several people to the same room and try the communication features.
 
-Follow this steps:
+Follow these steps:
 
 1. Be sure that other computers or phones are connected to the same wifi or local network (LAN) where OpenVidu Meet is installed.
 
-2. Stop OpenVidu Meet if it is alredy started.
+2. Stop OpenVidu Meet if it is already started.
 
 3. Start it again with a new command.
 
@@ -208,7 +209,7 @@ Follow this steps:
 
     For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.no-break}.
 
-    You will see the following instrutions in the terminal when OpenVidu Meet is ready:
+    You will see the following instructions in the terminal when OpenVidu Meet is ready:
 
     ```
     openvidu-meet-init-1  |
