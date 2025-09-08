@@ -17,7 +17,7 @@ X-API-KEY: your-openvidu-meet-api-key
 
 ### Generate an API key
 
-1. Connect to OpenVidu Meet at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/`.
+1. Connect to OpenVidu Meet console at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/`.
 2. Navigate to the **"Embedded"** page.
 3. Click on **":material-key: Generate API Key"** button.
 
