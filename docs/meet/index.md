@@ -252,13 +252,20 @@ Embed the OpenVidu Meet UI right into your app.
 
 </div>
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp commercial-code-blocks" markdown>
 
 __REST API and webhooks__{ .ov-meet-commercial-card-title }
 
 Control your meetings from your backend.
 
-<a class="glightbox" href="../assets/images/meet/embedded/embedded-config.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/embedded/embedded-config.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded Config"/></a>
+```bash
+curl --request POST \
+    --url https://YOUR_DOMAIN/api/v1/rooms \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json' \
+    --header 'X-API-KEY: YOUR_API_KEY' \
+    --data '{"roomIdPrefix": "my-room"}'
+```
 
 </div>
 
@@ -390,7 +397,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
+<a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-telehealth.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-telehealth.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
 
 -	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption.
 
