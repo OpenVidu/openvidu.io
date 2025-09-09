@@ -167,16 +167,16 @@ app.post('/rooms', async (req, res) => {
         // Create a new OpenVidu Meet room using the API
         const room = await httpRequest('POST', 'rooms', {
             roomName, // (4)!
-            preferences: {
+            config: {
                 // (5)!
-                chatPreferences: {
+                chatConfig: {
                     enabled: true // Enable chat for this room
                 },
-                recordingPreferences: {
+                recordingConfig: {
                     enabled: true, // Enable recording for this room
-                    allowAccessTo: 'admin-moderator-speaker' // Allow access to recordings for admin, moderator and speaker roles
+                    allowAccessTo: 'admin_moderator_speaker' // Allow access to recordings for admin, moderator and speaker roles
                 },
-                virtualBackgroundPreferences: {
+                virtualBackgroundConfig: {
                     enabled: true // Enable virtual background for this room
                 }
             }
@@ -196,7 +196,7 @@ app.post('/rooms', async (req, res) => {
 2. If the `roomName` is not provided, the server returns a `400 Bad Request` response.
 3. If there is already a room with the same name, the server returns a `400 Bad Request` response.
 4. Specify the name of the room.
-5. Set the preferences for the room, enabling chat, recording and virtual background.
+5. Set the configuration for the room, enabling chat, recording and virtual background.
 6. The room is stored in the `rooms` map.
 7. The server returns a `201 Created` response with the room object.
 8. If an error occurs during room creation, the server returns a `500 Internal Server Error` response.
@@ -205,11 +205,11 @@ This endpoint does the following:
 
 1. The `roomName` parameter is obtained from the request body. If it is not provided, the server returns a `400 Bad Request` response.
 2. The server checks if the room name already exists in the `rooms` map. If it does, a `400 Bad Request` response is returned with an appropriate error message.
-3. A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint. The request includes the room name and additional preferences:
+3. A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint. The request includes the room name and additional configuration options:
 
-    - **Chat Preferences**: Enables chat functionality for the room.
-    - **Recording Preferences**: Enables recording for the room and allows access to recordings for the roles `admin`, `moderator` and `speaker`.
-    - **Virtual Background Preferences**: Enables virtual background functionality for the room.
+    - **Chat Configuration**: Enables chat functionality for the room.
+    - **Recording Configuration**: Enables recording for the room and allows access to recordings for the roles `admin`, `moderator` and `speaker`.
+    - **Virtual Background Configuration**: Enables virtual background functionality for the room.
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
@@ -610,7 +610,7 @@ function joinRoom(roomName, roomUrl, role) {
     const meet = document.querySelector('openvidu-meet');
 
     // Event listener for when the local participant joins the room
-    meet.once('JOINED', () => {
+    meet.once('joined', () => {
         // (5)!
         console.log('Local participant joined the room');
 
@@ -637,7 +637,7 @@ function joinRoom(roomName, roomUrl, role) {
     });
 
     // Event listener for when the local participant leaves the room
-    meet.once('LEFT', (event) => {
+    meet.once('left', (event) => {
         // (9)!
         console.log('Local participant left the room. Reason:', event.reason);
 
@@ -646,7 +646,7 @@ function joinRoom(roomName, roomUrl, role) {
     });
 
     // Event listener for when the OpenVidu Meet component is closed
-    meet.once('CLOSED', () => {
+    meet.once('closed', () => {
         // (10)!
         console.log('OpenVidu Meet component closed');
 
@@ -661,12 +661,12 @@ function joinRoom(roomName, roomUrl, role) {
 2. Show the room screen.
 3. Hide the room header until the local participant joins.
 4. Inject the OpenVidu Meet WebComponent into the meeting container with the specified room URL.
-5. Add an event listener for the `JOINED` event, which is triggered when the local participant joins the room.
+5. Add an event listener for the `joined` event, which is triggered when the local participant joins the room.
 6. Set the room name in the header.
 7. Show the end meeting button if the user is a moderator.
 8. Call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting when the moderator clicks the `End Meeting` button.
-9. Add an event listener for the `LEFT` event, which is triggered when the local participant leaves the room.
-10. Add an event listener for the `CLOSED` event, which is triggered when the OpenVidu Meet component is closed.
+9. Add an event listener for the `left` event, which is triggered when the local participant leaves the room.
+10. Add an event listener for the `closed` event, which is triggered when the OpenVidu Meet component is closed.
 
 The `joinRoom()` function performs the following actions:
 
@@ -675,6 +675,6 @@ The `joinRoom()` function performs the following actions:
 3. Injects the OpenVidu Meet WebComponent into the meeting container with the specified room URL.
 4. Configures event listeners for the OpenVidu Meet WebComponent to handle different events:
 
-    - **`JOINED`**: This event is triggered when the local participant joins the room. It shows the room header with the room name and displays the `End Meeting` button if the user is a moderator. It also adds an event listener for the `End Meeting` button to call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting. This method disconnects all participants and ends the meeting for everyone.
-    - **`LEFT`**: This event is triggered when the local participant leaves the room. It hides the room header.
-    - **`CLOSED`**: This event is triggered when the OpenVidu Meet component is closed. It hides the room screen and shows the home screen.
+    - **`joined`**: This event is triggered when the local participant joins the room. It shows the room header with the room name and displays the `End Meeting` button if the user is a moderator. It also adds an event listener for the `End Meeting` button to call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting. This method disconnects all participants and ends the meeting for everyone.
+    - **`left`**: This event is triggered when the local participant leaves the room. It hides the room header.
+    - **`closed`**: This event is triggered when the OpenVidu Meet component is closed. It hides the room screen and shows the home screen.

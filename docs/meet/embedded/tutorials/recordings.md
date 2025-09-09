@@ -309,7 +309,7 @@ async function listRecordings() {
 }
 
 function filterCompletedRecordings(recordingList) {
-    return recordingList.filter((recording) => recording.status === 'COMPLETE'); // (7)!
+    return recordingList.filter((recording) => recording.status === 'complete'); // (7)!
 }
 ```
 
@@ -319,13 +319,13 @@ function filterCompletedRecordings(recordingList) {
 4. Call the `filterCompletedRecordings()` function to filter out recordings not completed.
 5. For each recording in the filtered list, add it to the `recordings` map indexed by recording ID.
 6. Call the `renderRecordings()` function to display the list of recordings in the UI.
-7. Filter recordings to include only those with 'COMPLETE' status.
+7. Filter recordings to include only those with 'complete' status.
 
 The listRecordings() function performs the following actions:
 
 1. Gets the room name from the search input field to optionally filter recordings by room.
 2. Makes a `GET` request to the `/recordings` endpoint to fetch the list of recordings, including the room filter parameter if specified.
-3. Filters the recordings to show only those with `COMPLETE` status using the `filterCompletedRecordings()` function.
+3. Filters the recordings to show only those with `complete` status using the `filterCompletedRecordings()` function.
 4. For each recording in the filtered list, it adds the recording to the `recordings` map. This map is used to store the recordings indexed by their recording IDs to make it easier to access them later.
 5. Calls the `renderRecordings()` function to display the list of recordings.
 6. If an error occurs during the request, it logs the error and displays an appropriate error message.
