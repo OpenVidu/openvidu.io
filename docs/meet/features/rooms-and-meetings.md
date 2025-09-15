@@ -31,7 +31,9 @@ Rooms are configurable in multiple ways:
 1. Name them.
 2. Set up recording.
 3. Change its appearance.
+<!-- START CHECK BEFORE RELEASE -->
 4. ...
+<!-- END CHECK BEFORE RELEASE -->
 
 Available rooms are all listed in the "Rooms" page. From there administrators can:
 
@@ -56,7 +58,9 @@ You can edit the settings of an existing room at any time in the "Rooms" page. T
 1. Name them.
 2. Set up recording.
 3. Change its appearance.
+<!-- START CHECK BEFORE RELEASE -->
 4. ...
+<!-- END CHECK BEFORE RELEASE -->
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/edit-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/edit-room.png" loading="lazy" class="control-height"/></a>
 
@@ -165,14 +169,22 @@ This view is shown to a participant when the meeting ends, at least for that par
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/end-view.png" data-type="image" data-desc-position="bottom" data-gallery="gallery13"><img src="../../../assets/images/meet/rooms-and-meetings/end-view.png" loading="lazy"/></a>
 
-### Meeting features
+<!-- ### Meeting features
 
 #### Device management
 
+Participants can set up and change their audio and video devices at any time during the meeting.
+
+<a class="glightbox" href="../../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery13"><img src="../../../assets/images/meet/prejoin.png" loading="lazy"/></a>
+
 #### Virtual backgrounds
+
+<a class="glightbox" href="../../../assets/videos/ov-call-vb.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/ov-call-vb.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 #### Screen sharing
 
+
+
 #### Chat
 
-#### Recording
+#### Recording -->

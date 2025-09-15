@@ -296,11 +296,17 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 
     Deploy with Azure Resource Manager
 
+<!-- START CHECK BEFORE RELEASE -->
+
+<!-- Remove coming soon banner if available -->
+
 -   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon .coming-soon-overlay } __GCP__{ .feature-name }
 
     ---
 
     Deploy in GCP with Terraform
+
+<!-- END CHECK BEFORE RELEASE -->
 
 </div>
 </div>

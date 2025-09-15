@@ -6,7 +6,13 @@ tags:
 
 ## 1. Run OpenVidu Meet
 
+<!-- START CHECK BEFORE RELEASE -->
+
+<!-- Real running instructions for OpenVidu Meet, not OpenVidu Platform -->
+
 --8<-- "shared/tutorials/run-openvidu-server.md"
+
+<!-- END CHECK BEFORE RELEASE -->
 
 ## 2. Create a room
 

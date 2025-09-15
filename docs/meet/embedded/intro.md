@@ -39,7 +39,7 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
     curl --request GET \
       --url https://YOUR_DOMAIN/api/v1/recordings \
       --header 'Accept: application/json' \
-      --header 'X-API-KEY: meet-api-key'
+      --header 'X-API-KEY: YOUR_API_KEY'
     ```
 
 </div>

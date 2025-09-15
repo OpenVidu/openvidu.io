@@ -19,8 +19,7 @@ nav:
           # - Translations: meet-translations.md
           # - Summaries: meet-summaries.md
       - Deployment:
-          - Deployment types: meet/deployment/deployment-types.md
-          - Production ready: meet/deployment/production-ready.md
+          - Overview: meet/deployment/overview.md
           - Try OpenVidu Meet locally: meet/deployment/local.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
           - Basic deployment: meet/deployment/basic.md
           - Advanced deployments: meet/deployment/advanced.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
@@ -29,6 +28,7 @@ nav:
           - Step by step guide: meet/embedded/step-by-step-guide.md
           - Tutorials:
               - meet/embedded/tutorials/index.md
+              - Direct Link: meet/embedded/tutorials/direct-link.md
               - JavaScript: meet/embedded/tutorials/javascript.md
               - Recordings: meet/embedded/tutorials/recordings.md
           - Reference:
@@ -181,9 +181,6 @@ nav:
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md
-      - OpenVidu Call:
-          - docs/openvidu-call/index.md
-          - Docs: docs/openvidu-call/docs.md
       - Releases: docs/releases.md
   # - Blog:
   #     - blog/index.md

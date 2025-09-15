@@ -8,11 +8,10 @@ You can easily deploy **OpenVidu Meet** on your local machine to explore its fea
 
 You can simulate **several users** joining to the **same room** using different tabs of your preferred browser.
 
-This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../../embedded/intro).
+This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../embedded/intro.md).
 
 !!! warning
-    Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](../../deployment/basic/) or [Advanced deployments](../../advanced/basic/).
-
+    Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](./basic.md) or [Advanced deployments](./advanced.md).
 
 ## Prerequisites
 
@@ -42,7 +41,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
     - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/linux-install/){:target="\_blank"}
 
     !!! info 
-        This guide is based on Docker Desktop, but the commands can also be used in a linux machine with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms) and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed.
+        This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed.
 
 ## Running OpenVidu Meet Locally
 
@@ -237,4 +236,4 @@ Follow these steps:
 
 ## Advanced Local Deployment
 
-If you want to modify some configurations or to have more control over the local deployment, you can deploy the [OpenVidu Platform Local deployment](../../docs/self-hosting/local.md) which includes **OpenVidu Meet** as one of its services.
+If you want to modify some configurations or have more control over the local deployment, you can deploy the [OpenVidu Platform Local deployment](../../docs/self-hosting/local.md) which by default includes **OpenVidu Meet** as one of its services.

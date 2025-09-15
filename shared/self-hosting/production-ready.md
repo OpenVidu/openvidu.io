@@ -3,9 +3,9 @@ OpenVidu is designed to be **self-hosted**, whether it is on premises or in a cl
 - **Privacy**: you can't afford to let your client's data get out of your reach. OpenVidu allows you to meet all your privacy and regulatory requirements: no data at all is sent to any third-party server. Everything is self-contained on your own servers.
 - **Leverage your resources**: your organization has access to its own infrastructure that can be used to host these services. SaaS solutions generally offer complete freedom from infrastructure management, but this comes with generally high prices that cover both the provider's infrastructure and their service surcharge. OpenVidu allows taking full advantage of your own infrastructure, reducing costs and increasing performance.
 
-It is important to mention that when we talk about self-hosting OpenVidu, we don't just mean installing it in bare-metal servers or private VPCs. OpenVidu also supports deployments in the most popular cloud providers, using their native services when possible. AWS is now supported, and others are coming soon. You can learn more about the different options to deploy OpenVidu in the [deployment types](/docs/self-hosting/deployment-types.md) section.
+It is important to mention that when we talk about self-hosting OpenVidu, we don't just mean installing it in bare-metal servers or private VPCs. OpenVidu also supports deployments in the most popular cloud providers, using their native services when possible. **AWS** and **Azure** are currently supported, and others are coming soon. You can learn more about the different options to deploy OpenVidu in the [deployment types](/docs/self-hosting/deployment-types.md) section.
 
-One of OpenVidu's main goals is offering a self-hosted, production-ready live-video platform with all the advanced capabilities typically reserved for SaaS solutions. This includes outstanding performance, scalability, fault tolerance and observability:
+One of OpenVidu's main goals is offering a self-hosted, production-ready live-video platform with all the advanced capabilities typically reserved for SaaS solutions. This includes outstanding **performance**, **scalability**, **fault tolerance** and **observability**:
 
 <div class="grid cards" markdown>
 
