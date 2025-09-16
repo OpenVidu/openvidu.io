@@ -2,6 +2,23 @@
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
 ---
 
+## 3.4.0
+
+!!! info "For the Release Notes of OpenVidu Meet, please visit here: [OpenVidu Meet 3.4.0](../meet/releases.md#340)"
+
+### Changelog
+
+- **LiveKit stack updated to v1.9.0**: OpenVidu is now based on LiveKit v1.9.0, which includes several improvements and bug fixes. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/releases/tag/v1.9.0){:target="\_blank"}.
+- **Egress updated to v1.10.0**: the Egress service has been updated to v1.10.0, which includes several improvements and bug fixes when exporting media from rooms. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/releases/tag/v1.10.0){:target="\_blank"}.
+- **Custom AI agents now natively support [graceful shutdown](./ai/custom-agents.md#elasticity-and-graceful-shutdowns)**, ensuring no interruptions in the services provided by your custom agents when your OpenVidu cluster scales down.
+- **No need for a domain name to deploy OpenVidu in production**: thanks to *sslip.io* integration, you can now deploy OpenVidu in production with a valid SSL certificate without owning a custom domain name. Just deploy OpenVidu 3.4.0 and skip the domain name configuration during the installation process: OpenVidu will automatically detect your public IP and provide a secure domain name using sslip.io.
+- **OpenVidu Dashboard optimizations**: the addition of several new search indexes to the database has significantly improved the response time of the [OpenVidu Dashboard](./self-hosting/production-ready/observability/openvidu-dashboard.md) when loading historical data.
+- Fixed bug that caused empty `participantInfo` object when receiving [transcription events](./ai/live-captions.md#how-to-receive-live-captions-in-your-frontend-application). This fix was also contributed to LiveKit open source ([PR 3735 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/3735){:target="\_blank"}).
+
+### Version table
+
+
+
 ## 3.3.0
 
 ### Changelog

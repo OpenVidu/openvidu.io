@@ -35,6 +35,7 @@ nav:
               - Webcomponent: meet/embedded/reference/webcomponent.md
               - REST API: meet/embedded/reference/rest-api.md
               - Webhooks: meet/embedded/reference/webhooks.md
+      - Releases: meet/releases.md
   - OpenVidu Platform:
       - docs/index.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
