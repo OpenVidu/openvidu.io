@@ -1,13 +1,13 @@
 ---
-title: OpenVidu Meet WebComponent Tutorials
-description: Learn how to build a video conferencing application by easily integrating OpenVidu Meet WebComponent into your web application.
+title: OpenVidu Meet Tutorials
+description: Learn how to build a video conferencing application by easily integrating OpenVidu Meet into your web application.
 ---
 
-# OpenVidu Meet WebComponent Tutorials
+# OpenVidu Meet Tutorials
 
-OpenVidu Meet WebComponent is a powerful and flexible solution for building video conferencing applications. It allows you to create a fully functional video conferencing application with just a few lines of code.
+OpenVidu Meet is a powerful and flexible solution for building video conferencing applications. It allows you to create a fully functional video conferencing application with just a few lines of code.
 
-Learn how to build a video conferencing application by easily integrating OpenVidu Meet WebComponent into your web application. The tutorials below will guide you through the process of creating a simple video conferencing application using OpenVidu Meet WebComponent.
+Learn how to build a video conferencing application by easily integrating OpenVidu Meet into your web application. The tutorials below will guide you through the process of creating a simple video conferencing application using OpenVidu Meet directly or by embedding its Web Component.
 
 Every tutorial below shares the same core functionality:
 
@@ -22,34 +22,16 @@ Every tutorial below shares the same core functionality:
 
 <div class="tutorials-container" markdown>
 
-[:simple-javascript:{.icon .lg-icon .tab-icon} **JavaScript**](./javascript.md){ .md-button .md-button--primary .tutorial-link}
+[:material-link:{.icon .lg-icon .tab-icon} **Direct Link**](./direct-link.md){ .md-button .md-button--primary .tutorial-link }
 
-<!-- [:simple-react:{.icon .lg-icon .tab-icon} **React**](./react.md){ .md-button .md-button--primary .tutorial-link} -->
+[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link }
 
-<!-- [:simple-angular:{.icon .lg-icon .tab-icon} **Angular**](./angular.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-vuedotjs:{.icon .lg-icon .tab-icon} **Vue**](./vue.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-electron:{.icon .lg-icon .tab-icon} **Electron**](./electron.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-ionic:{.icon .lg-icon .tab-icon} **Ionic**](./ionic.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-react:{.icon .lg-icon .tab-icon} **React Native**](./react.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-flutter:{.icon .lg-icon .tab-icon} **Flutter**](./flutter.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-android:{.icon .lg-icon .tab-icon} **Android**](./android.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-apple:{.icon .lg-icon .tab-icon} **iOS**](./ios.md){ .md-button .md-button--primary .tutorial-link} -->
-
-</div>
-
-## Advanced Features Tutorials
-
-Explore more advanced features of OpenVidu Meet! For now, we have implemented a basic tutorial for managing **recordings**.
-
-<div class="tutorials-container" markdown>
+[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link }
 
 [:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link .no-width }
 
-</div> 
+<!-- [:material-webhooks:{.icon .lg-icon .tab-icon} **Webhooks**](./webhooks.md){ .md-button .md-button--primary .tutorial-link .no-width } -->
+
+<!-- [:material-nextjs:{.icon .lg-icon .tab-icon} **Next.js**](./nextjs.md){ .md-button .md-button--primary .tutorial-link .no-width } -->
+
+</div>

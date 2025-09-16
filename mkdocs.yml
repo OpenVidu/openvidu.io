@@ -29,8 +29,11 @@ nav:
           - Tutorials:
               - meet/embedded/tutorials/index.md
               - Direct Link: meet/embedded/tutorials/direct-link.md
-              - JavaScript: meet/embedded/tutorials/javascript.md
+              - WebComponent: meet/embedded/tutorials/webcomponent.md
+              - WebComponent Commands & Events: meet/embedded/tutorials/webcomponent-advanced.md
               - Recordings: meet/embedded/tutorials/recordings.md
+              # - Webhooks: meet/embedded/tutorials/webhooks.md
+              # - Next.js: meet/embedded/tutorials/nextjs.md
           - Reference:
               - Webcomponent: meet/embedded/reference/webcomponent.md
               - REST API: meet/embedded/reference/rest-api.md
