@@ -13,7 +13,7 @@ description: Learn how to deploy OpenVidu Single Node on Google Cloud Platform u
 
 This section contains the instructions of how to deploy a production-ready OpenVidu Single Node deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
-To deploy OpenVidu into Google Cloud Platform you just need to log into your [infrastructure manager](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
+To deploy OpenVidu into Google Cloud Platform you just need to log into your [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
 
 === "Architecture overview"
 
@@ -65,7 +65,7 @@ In Google Cloud Platform there is no such thing like template with parameters, y
 | turnOwnPublicCertificate  | Yes      | No default       | (Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.                               |
 | turnOwnPrivateCertificate | Yes      | No default       | (Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.                               |   
 
-For more detail you can check the [variables.tf](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf) file to see more information about the inputs.   
+For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf) file to see more information about the inputs.   
 
 !!! warning
     It's important that you put the input variables with the same name as they appear in the table like in the next image.
@@ -86,11 +86,11 @@ Whenever you are satisfied with your input values, just click on _"Continue"_ an
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/single-node/gcp/gcp-cloud-build-logs.png){ .svg-img .dark-img }
     </figure>
 
-When everything is ready, you can check the secrets on the [Secret Manager](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instance:
+When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instance:
 
 === "Check deployment outputs in Google Cloud Platform Secret Manager"
 
-    1. Go to the [Secret Manager](https://console.cloud.google.com/security/secret-manager).
+    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager).
 
     2. Once you are in the Secret Manager you will see all the secrets by their name.
 
@@ -111,12 +111,12 @@ When everything is ready, you can check the secrets on the [Secret Manager](http
     - `openvidu.env`
     - `meet.env`
 
-    To find out the command go to [Compute Engine Instances](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
+    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
     <figure markdown>
     ![Google Cloud Platform gcloud command](../../../../assets/images/self-hosting/shared/gcp-gcloud-command.png){ .svg-img .dark-img }
     </figure>   
 
-    To install gcloud in your shell follow the [instructions](https://cloud.google.com/sdk/docs/install?hl=en#linux)
+    To install gcloud in your shell follow the [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install?hl=en#linux)
 
 
 ## Configure your application to use the deployment 
