@@ -1,4 +1,4 @@
-This section contains the instructions to deploy a production-ready OpenVidu Meet deployment in a single server.
+This section contains the instructions to deploy a production-ready deployment of OpenVidu Meet in a single server.
 
 !!! info
     This guide shows a single-node installation in a Linux machine. To see other deployment options, such as deploying in cloud providers like AWS, Azure, or GCP, or deploying in a multi-node architecture, check the [Other deployment options](#other-deployment-options) section at the end of this page.
@@ -105,9 +105,13 @@ OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refe
 
 ## Other deployment options
 
-This guide has covered a single-node deployment of OpenVidu Meet in a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:
+This guide has covered the manual installation of OpenVidu Meet as a single-node deployment in a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:
 
+- **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation) guide for OpenVidu Platform.
 - **Deploy OpenVidu Meet single-node in AWS**: using our CloudFormation template, you can deploy OpenVidu Meet using native AWS resources. Follow the [AWS deployment](../../docs/self-hosting/single-node/aws/install.md) guide for OpenVidu Platform.
 - **Deploy OpenVidu Meet single-node in Azure**: using our ARM template, you can deploy OpenVidu Meet using native Azure resources. Follow the [Azure deployment](../../docs/self-hosting/single-node/azure/install.md) guide for OpenVidu Platform.
+<!-- START CHECK BEFORE RELEASE -->
+<!-- Check GPC path -->
 - **Deploy OpenVidu Meet single-node in GCP**: using our Terraform template, you can deploy OpenVidu Meet using native GCP resources. Follow the [GCP deployment](../../docs/self-hosting/single-node/gcp/install.md) guide for OpenVidu Platform.
+<!-- END CHECK BEFORE RELEASE -->
 - **Deploy OpenVidu Meet in a multi-node architecture**: there are multi-node deployment options available to make your OpenVidu Meet installation scalable and fault-tolerant. Check out the [Advanced deployments](./advanced.md) section for more information.
