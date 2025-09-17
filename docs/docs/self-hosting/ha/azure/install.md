@@ -5,9 +5,6 @@ description: Learn how to deploy OpenVidu High Availability on Azure using Templ
 
 # OpenVidu High Availability installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
 
 !!! info
     

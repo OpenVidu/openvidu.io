@@ -5,10 +5,6 @@ description: Learn how to deploy OpenVidu Elastic on Azure using Template specs 
 
 # OpenVidu Elastic installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
-
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.

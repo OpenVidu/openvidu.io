@@ -5,9 +5,6 @@ description: Learn how to deploy OpenVidu Single Node on Azure using Template sp
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
 
 --8<-- "shared/self-hosting/single-node/v2compat-warning.md"
 
