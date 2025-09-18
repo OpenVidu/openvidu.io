@@ -111,14 +111,14 @@ app.post('/rooms', async (req, res) => {
             config: {
                 // (5)!
                 // Default room configuration
-                chatConfig: {
+                chat: {
                     enabled: true // Enable chat for this room
                 },
-                recordingConfig: {
+                recording: {
                     enabled: true, // Enable recording for this room
                     allowAccessTo: 'admin_moderator_speaker' // Allow access to recordings for admin, moderator and speaker roles
                 },
-                virtualBackgroundConfig: {
+                virtualBackground: {
                     enabled: true // Enable virtual background for this room
                 }
             }
