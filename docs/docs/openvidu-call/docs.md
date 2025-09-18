@@ -283,9 +283,9 @@ The process to build a Docker image of OpenVidu call is really easy, you just ne
 
 ### Package bundle
 
-To build the OpenVidu Call application without using Docker, you can follow the instructions:
+To build the OpenVidu Call application without using Docker, you can follow these instructions:
 
-1. Build the frontend application:
+1. Build the frontend application
 
 	```bash
 	cd frontend
@@ -293,7 +293,7 @@ To build the OpenVidu Call application without using Docker, you can follow the 
     cd ..
 	```
 
-2. Build the backend application:
+2. Build the backend application
 
 	```bash
 	cd backend
@@ -301,7 +301,7 @@ To build the OpenVidu Call application without using Docker, you can follow the 
 	npm run build
 	```
 
-3. Start the backend application:
+3. Start the backend application
 
 	```bash
 	node dist/src/server.js
