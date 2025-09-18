@@ -42,5 +42,7 @@ jobs:
 
       - name: Run selected script
         working-directory: ./custom-versioning
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
           ./${{ github.event.inputs.script }}.sh ${{ github.event.inputs.version }}
