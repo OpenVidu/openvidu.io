@@ -22,7 +22,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Ela
     </figure>
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
-    - The Master Node has its own Caddy server acting as a Layer 4 (For TURN with TLS and RTMPS) and Layer 7 (For OpenVidu Dashboard, OpenVidu Call, etc., APIs) reverse proxy.
+    - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
 
 For the Master Node, the following services are configured:

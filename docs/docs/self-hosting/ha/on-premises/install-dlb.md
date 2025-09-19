@@ -33,7 +33,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
     </figure>
 
     - The Master Nodes act as Load Balancers, managing the traffic and distributing it among the other Master Nodes and Media Nodes.
-    - Each Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (For OpenVidu Dashboard, OpenVidu Call, etc., APIs) reverse proxy.
+    - Each Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
 
 For the Master Node, the following services are configured:
