@@ -2,6 +2,8 @@
 :root:root {
   --primary-color-of-meet: rgb(0, 147, 73);
   --primary-color-of-platform: rgb(0, 136, 170);
+  --accent-color-of-meet: rgb(6, 211, 98);
+  --accent-color-of-platform: rgb(0, 200, 247);
 }
 
 .openvidu-tag {
@@ -849,6 +851,14 @@ h2.meetplatform-slogan {
 .meet-primary-color {
   background-color: var(--primary-color-of-meet) !important;
   border-color: var(--primary-color-of-meet) !important;
+}
+
+.meet-link-color {
+  color: var(--accent-color-of-meet) !important;
+}
+
+.platform-link-color {
+  color: var(--accent-color-of-platform) !important;
 }
 
 .accent-code {

@@ -1,6 +1,6 @@
 ## 3.4.0
 
-!!! info "For the Release Notes of OpenVidu Platform, please visit here: [OpenVidu Platform 3.4.0](../docs/releases.md#340)"
+!!! info "For the Release Notes of OpenVidu Platform 3.4.0, please visit here: [OpenVidu Platform 3.4.0](../docs/releases.md#340){.platform-link-color}"
 
 ### Introducing OpenVidu Meet
 
@@ -39,7 +39,6 @@ If your use case requires a high degree of customization, or if you need to buil
 
 - Mobile platforms embedding (iOS and Android).
 - More branding and customization options.
-- Breakout rooms.
 - Locked rooms.
 - E2E encryption.
 - Live captions.
