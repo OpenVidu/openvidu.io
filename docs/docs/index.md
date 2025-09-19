@@ -153,6 +153,14 @@ With these three concepts you can build any kind of real-time application you ca
 
 </div>
 
+### Other concepts
+
+Apart from these basic building blocks, there are other concepts that will be tipically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
+
+- **Egress**: a process that exports media out of a Room. It is a special type of Participant that only subscribes to Tracks. It allows recording tracks to a file or streaming them to an external destination (via HLS or RTMP).
+- **Ingress**: a process that imports media into a Room. It is a special type of Participant that only publishes Tracks. It allows bringing external media sources into a Room, such as an MP4 file, an IP camera or a RTMP stream.
+- **Agents**: a process that performs AI-driven operations to the media of a Room. It is a special type of Participant that can both subscribe and publish Tracks, analyzing and/or modifying them in between. It allows implementing any AI task you can imagine: real-time subtitles, translations, object detection, AI voice bots, etc.
+
 ## OpenVidu Editions
 
 OpenVidu is available in two editions:
