@@ -2,12 +2,12 @@
 title: Getting started with OpenVidu Meet
 ---
 
-OpenVidu Meet is a fully fledged video call solution built on top of OpenVidu. You can use it out of the box or you can embed it in your own application.
+OpenVidu Meet is a fully fledged video call solution built on top of OpenVidu. You can use it out of the box, or you can embed it in your own application.
 Either way, OpenVidu Meet provides a rich set of features and a great degree of customization, so you can tailor it to your needs and match your branding.
 
 ## Run OpenVidu Meet
 
-Follow this instructions to quickly run OpenVidu Meet in your local machine:
+Follow these instructions to quickly run OpenVidu Meet in your local machine:
 
 [Run OpenVidu Meet locally](../deployment/local.md){ .md-button .md-button--primary }
 
@@ -40,10 +40,10 @@ Using your administrator credentials (find out where to get them [here](../featu
 
 ## Embed OpenVidu Meet into your app
 
-You can integrate a complete videocall solution into your application with just a few lines of code using <span class="no-break">**OpenVidu Meet Embedded**</span>. You can also customize its look and feel to match your application's design, branding colors and styles.
+You can integrate a complete video call solution into your application with just a few lines of code using <span class="no-break">**OpenVidu Meet Embedded**</span>. You can also customize its look and feel to match your application's design, branding colors and styles.
 
 [Embed OpenVidu Meet into your app](../embedded/intro.md){ .md-button .md-button--primary }
 
 ## Should I use OpenVidu Platform instead?
 
-If your use case requires other features or a more specific integration, you may want to consider using **OpenVidu Platform**. It supports low-level SDKs to build any type of real-time experience. You can find a comparisson between both OpenVidu solutions here: [OpenVidu Meet vs OpenVidu Platform](../../openvidu-meet-vs-openvidu-platform.md).
+If your use case requires other features or a more specific integration, you may want to consider using **OpenVidu Platform**. It supports low-level SDKs to build any type of real-time experience. You can find a comparison between both OpenVidu solutions here: [OpenVidu Meet vs OpenVidu Platform](../../openvidu-meet-vs-openvidu-platform.md).

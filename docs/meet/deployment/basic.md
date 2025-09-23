@@ -7,8 +7,8 @@ This section contains the instructions to deploy a production-ready deployment o
 
 Before starting the installation process, make sure you have the following prerequisites:
 
-- **A machine with at least 4GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**.
-- **Generous disk space (100GB recommended)**, especially if you plan to record your meetings.
+- **A machine with at least 4 GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**.
+- **Generous disk space (100 GB recommended)**, especially if you plan to record your meetings.
 - The machine **must have a public IP**.
 
 ## Port rules
@@ -60,7 +60,7 @@ Follow the instructions of the installation wizard. They are self-explanatory, b
 
     ![All modules enabled](../../assets/images/meet/deployment/basic/wizard-4.png)
 
-5. You can leave all passswords to be generated automatically, by clicking **Enter** repeatedly:
+5. You can leave all passwords to be generated automatically, by clicking **Enter** repeatedly:
 
     ![Passwords generated automatically](../../assets/images/meet/deployment/basic/wizard-5.png)
 

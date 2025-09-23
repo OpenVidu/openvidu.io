@@ -17,7 +17,7 @@ Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-i
 You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There you can:
 
 - Enable/Disable sending webhooks
-- Set up your webhoook endpoint URL
+- Set up your webhook endpoint URL
 - Test the current webhook configuration with a fake event
 
 ![Webhooks Configuration](../../../assets/images/meet/embedded/webhook.png)
@@ -37,7 +37,7 @@ The steps to validate a webhook event in your backend are the following, given t
 2. Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="\_blank"}.
 3. Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
 4. Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
-5. Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="\_blank"}. If they match, the request is valid.
+5. Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparison to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="\_blank"}. If they match, the request is valid.
 
 Below there are code snippets in different languages, showing the exact implementation of the above steps.
 

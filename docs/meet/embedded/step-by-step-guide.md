@@ -292,7 +292,7 @@ To embed a room into your application's frontend you need the **room URL**. You 
 
 ### Automating room URL retrieval
 
-You can can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
+You can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
 
 - [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}
 - [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRoom){:target="_blank"}
@@ -304,7 +304,7 @@ Once you got the desired room URL, there are 3 alternatives to embed the OpenVid
 
 ### Use a direct link
 
-This is the simplest and easiest way to embed an OpenVidu Meet room into your application. It's a perfect fit if your frontend is a web application and you don't need any custom elements in the video meeting UI: the polished UI of OpenVidu Meet will be displayed in its own browser tab.
+This is the simplest and easiest way to embed an OpenVidu Meet room into your application. It's a perfect fit if your frontend is a web application, and you don't need any custom elements in the video meeting UI: the polished UI of OpenVidu Meet will be displayed in its own browser tab.
 
 Just link to the room URL from any element in your frontend. For example, with a simple `<a>` tag:
 
@@ -374,7 +374,7 @@ The required iframe attributes are:
     - `camera`: allow access to the camera.
     - `microphone`: allow access to the microphone.
     - `display-capture`: allow screen sharing.
-    - `fullscreen`: allow fullscreen mode.
+    - `fullscreen`: allow full screen mode.
     - `autoplay`: allow autoplay of media.
     - `compute-pressure`: allow access to the device's compute pressure API.
 

@@ -11,7 +11,7 @@ You can simulate **several users** joining to the **same room** using different 
 This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../embedded/intro.md).
 
 !!! warning
-    Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](./basic.md) or [Advanced deployments](./advanced.md).
+    Remember that this deployment is designed for **demo** and **development** purposes. For production follow the [Basic deployment](./basic.md) or [Advanced deployments](./advanced.md).
 
 ## Prerequisites
 
@@ -107,7 +107,7 @@ You can access **OpenVidu Meet** by opening [http://localhost:9080](http://local
 - Username: `admin`
 - Password: `admin`
 
-You can use the [REST API](../../embedded/reference/rest-api/) to [embedd OpenVidu Meet](../../embedded/intro) using:
+You can use the [REST API](../../embedded/reference/rest-api/) to [embed OpenVidu Meet](../../embedded/intro) using:
 
 - API Key: `meet-api-key` 
 
@@ -163,11 +163,11 @@ You can manage OpenVidu Meet execution interactively:
 
 ## Accessing OpenVidu Meet from other computers or phones
 
-You can connect to OpenVidu Meet from other computers or phones. It it very useful to join several people to the same room and try the communication features.
+You can connect to OpenVidu Meet from other computers or phones. It is very useful to join several people to the same room and try the communication features.
 
 Follow these steps:
 
-1. Be sure that other computers or phones are connected to the same wifi or local network (LAN) where OpenVidu Meet is installed.
+1. Be sure that other computers or phones are connected to the same Wi-Fi or local network (LAN) where OpenVidu Meet is installed.
 
 2. Stop OpenVidu Meet if it is already started.
 

@@ -131,7 +131,7 @@ The `index.js` file imports the required dependencies and loads the necessary en
 -   `OV_MEET_SERVER_URL`: The OpenVidu Meet server URL.
 -   `OV_MEET_API_KEY`: The OpenVidu Meet API key.
 
-Then the `express` application is initialized. CORS is allowed, JSON body parsing is enabled and static files are served from the `public` directory.
+Then the `express` application is initialized. CORS is allowed, JSON body parsing is enabled, and static files are served from the `public` directory.
 
 Now let's see the code of each endpoint:
 

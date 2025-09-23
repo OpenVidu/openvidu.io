@@ -23,8 +23,8 @@ To run OpenVidu in your local machine, this is the quickest option. It is a Dock
 
 It comes in two flavors:
 
- - <strong>OpenVidu Local <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>, fine tuned for local development.
- - <strong>OpenVidu Local <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>, fine tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
+ - <strong>OpenVidu Local <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>, fine-tuned for local development.
+ - <strong>OpenVidu Local <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>, fine-tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
 
 <figure markdown>
   ![OpenVidu Single Node](../../assets/images/openvidu-local-architecture.svg){ .svg-img .dark-img }
@@ -33,7 +33,7 @@ It comes in two flavors:
 
 ### OpenVidu Single Node
 
-!!! info "You can install OpenVidu Meet as a Single Node deployment by following the [basic deployment guide](./basic.md). You can also checkout the [OpenVidu Platform documentation](../../docs/self-hosting/single-node/index.md) for more detailed installation options."
+!!! info "You can install OpenVidu Meet as a Single Node deployment by following the [basic deployment guide](./basic.md). You can also check out the [OpenVidu Platform documentation](../../docs/self-hosting/single-node/index.md) for more detailed installation options."
 
 This is the simplest production-ready OpenVidu deployment available. It provides all the features you need, but lacks scalability and fault tolerance. But make no mistake about it: it is perfectly suitable for medium-scale production deployments. For most projects OpenVidu Single Node will be enough, at least until your user load gets serious. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community on a sufficiently powerful server!
 
@@ -72,7 +72,7 @@ This is the most complete OpenVidu deployment. It provides **scalability** for y
 It is composed of two different types of nodes running on two separate clusters:
 
 - **A cluster of Media Nodes** hosting all the media-related services. Your video rooms scale up and down thanks to this cluster. The minimum number of nodes in this cluster is **1**, and it is designed to scale up and down dynamically according to workload.
-- **A cluster of Master Nodes** hosting all the support services in their high availability format. Your deployment is fault tolerant thanks to this cluster. The minimum number of nodes in this cluster is **4**, and it is designed to have a fixed number of nodes at all times.
+- **A cluster of Master Nodes** hosting all the support services in their high availability format. Your deployment is fault-tolerant thanks to this cluster. The minimum number of nodes in this cluster is **4**, and it is designed to have a fixed number of nodes at all times.
 
 <figure markdown>
   ![OpenVidu High Availability cluster](../../assets/images/openvidu-ha-architecture.svg){ .svg-img .dark-img }

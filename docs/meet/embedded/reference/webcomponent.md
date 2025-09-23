@@ -51,7 +51,7 @@ If you are using a direct link or an iframe to embed OpenVidu Meet instead of us
 
 This is what it would look like when using a URL or an iframe:
 
-=== "Using an URL"
+=== "Using a URL"
 
 	```html
 	<a href="http://my.domain.com/room/MyRoom-abcdef?secret=12345&participant-name=Alice">Join Room</a>

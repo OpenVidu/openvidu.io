@@ -64,7 +64,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
 
 ### Changelog
 
-- **OpenVidu Single Node PRO**: OpenVidu Single Node PRO is a new type of OpenVidu deployment targeting users that want to deploy OpenVidu as a single-node setup but that still want the [2x performance boost](self-hosting/production-ready/performance.md) and the [advanced observability](self-hosting/production-ready/observability/index.md) provided by multi-node OpenVidu PRO deployments.
+- **OpenVidu Single Node PRO**: OpenVidu Single Node PRO is a new type of OpenVidu deployment targeting users that want to deploy OpenVidu as a single-node setup, but that still want the [2x performance boost](self-hosting/production-ready/performance.md) and the [advanced observability](self-hosting/production-ready/observability/index.md) provided by multi-node OpenVidu PRO deployments.
 - **Azure deployments (Beta)**: OpenVidu now supports native deployments in Microsoft Azure. You can now deploy [OpenVidu Single Node COMMUNITY](self-hosting/single-node/azure/install.md), [OpenVidu Single Node PRO](self-hosting/single-node-pro/azure/install.md), [OpenVidu Elastic](self-hosting/elastic/azure/install.md) and [OpenVidu High Availability](self-hosting/ha/azure/install.md) in Azure using ARM templates. _During version 3.2.0, Azure deployments will be considered in Beta_.
 - **New Azure recording tutorials**: OpenVidu deployments in Azure use Azure Blob Storage to store recordings (instead of S3). For this reason, we have extended our recording tutorials with Azure Blob Storage compatible examples. You can find them in the following links:
     - [Recording Basic Azure](tutorials/advanced-features/recording-basic-azure.md).
@@ -230,7 +230,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
     - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/home/egress/room-composite/){:target="\_blank"}) support when using mediasoup.
     - WebHooks ([LiveKit reference](https://docs.livekit.io/home/server/webhooks/){:target="\_blank"}) supported against a local [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally).
 - Production deployments have a better private IP discovery process when there are multiple valid private IPs in the same host. This will make more deployments work out-of-the-box without the need of manual intervention.
-- [OpenVidu PRO Evaluation Mode](self-hosting/local.md#openvidu-pro) improved. Before, a maximum a 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
+- [OpenVidu PRO Evaluation Mode](self-hosting/local.md#openvidu-pro) improved. Before, a maximum of 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example, you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
 - Minor bug fixes related to [OpenVidu Call](openvidu-call/index.md).
 
 ### Known limitations

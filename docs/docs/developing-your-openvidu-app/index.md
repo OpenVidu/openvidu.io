@@ -26,7 +26,7 @@ The only mandatory task to perform in your application server is:
 
 - **Creating access tokens**. Your Participants will only be able to connect to your Rooms by using a valid access token. Visit the official documentation about [Authentication :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/){target="\_blank"} to learn how to generate access tokens and which permissions you can assign to them.
 
-There are also other optional tasks that you can perform from your application server, depending on your requirements:
+There are other optional tasks that you can perform from your application server, depending on your requirements:
 
 - **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. This is the official LiveKit documentation with all the available methods of the **[`RoomServiceClient` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}** exposed by the Server API. These methods are also available in all LiveKit Server SDKs.
 - **Manage Egress and Ingress**: if your application needs some kind of recording, broadcasting or media ingestion, this operations must all be performed by your application server.
@@ -114,7 +114,7 @@ Whatever strategy you choose to build the UI of your application, most common st
 - **Subscribe to Tracks from other Participants**: the application client may receive the Tracks published by other Participants in the Room. It is possible to perform selective subscription, so the client can choose which Tracks to specifically subscribe to.
 - **Mute and unmute Tracks**: the application client may mute and unmute its own Tracks, and also may disable the reception of any Track published by other Participants.
 
-Of course, depending on the use case, this may not be necessary for all users, or other additional steps may need to be taken. For example, in a live streaming application, only presenters will publish Tracks, while all other viewers will only subscribe to them. Or it is possible that users may need exchange messages through a chat. Each specific application will need to refine its use of the UI Components or client SDKs to meet its requirements.
+Of course, depending on the use case, this may not be necessary for all users, or other additional steps may need to be taken. For example, in a live-streaming application, only presenters will publish Tracks, while all other viewers will only subscribe to them. Or it is possible that users may need exchange messages through a chat. Each specific application will need to refine its use of the UI Components or client SDKs to meet its requirements.
 
 Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){target="\_blank"}. Below is a list of application client tutorials, which are perfect starting points for your client application.
 

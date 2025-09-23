@@ -80,7 +80,7 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
-    Your users can setup their video/audio devices, virtual background and language before entering the room.
+    Your users can set up their video/audio devices, virtual background and language before entering the room.
 
     <a class="glightbox" href="../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/prejoin.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
@@ -216,7 +216,7 @@ With all the features you need to fine-tune your perfect video calling service
 
     ---
 
-    Avoid man-in-th-middle attacks: only your final users can decrypt the audio, video and chat messages.
+    Avoid man-in-the-middle attacks: only your final users can decrypt the audio, video and chat messages.
 
 -   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name }
 
@@ -427,7 +427,7 @@ The most secure videoconference platform is the one you host on your own servers
 
     ---
 
-    Up to 4K and HiFi audio for clear for clear communication between practitioners and patients. File sharing for medical documents and images.
+    Up to 4K and HiFi audio for clear communication between practitioners and patients. File sharing for medical documents and images.
 
 </div>
 </div>

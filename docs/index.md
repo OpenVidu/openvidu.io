@@ -156,7 +156,7 @@ tags:
 
     ---
 
-    Achieve ultra-low latency in your videoconference or live streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
+    Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
 
 <!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
 
@@ -174,7 +174,7 @@ tags:
 
     ---
 
-    Chrome, Firefox, Safari, Android, iOS, Unity, Windows, MacOS, Linux... OpenVidu is compatible with all of them.
+    Chrome, Firefox, Safari, Android, iOS, Unity, Windows, macOS, Linux... OpenVidu is compatible with all of them.
 
 -   :material-video-4k-box:{ .feature-icon .padding-icon } __Up to 4K video and HQ audio__{ .feature-name }
 
@@ -186,7 +186,7 @@ tags:
 
     ---
 
-    Record your videocalls with complete freedom. You can use predefined layouts or easily build your own.
+    Record your video calls with complete freedom. You can use predefined layouts or easily build your own.
 
 -   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcast to YouTube/Twitch__{ .feature-name }
 

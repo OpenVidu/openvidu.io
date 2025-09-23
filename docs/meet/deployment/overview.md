@@ -26,5 +26,5 @@ The table below summarizes the main characteristics of each deployment type:
 | **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
 | **Suitability**               | Suitable to test and develop | Suitable for production applications with medium user load | Suitable for production applications with dynamic user load and need for high availability |
 | **Features**               | Try out all OpenVidu Meet features in your laptop | All OpenVidu Meet features, ready for production | All OpenVidu Meet features ready for production, plus **2x performance**, **advanced observability**, **scalability** and **fault tolerance** |
-| **Number of servers**         | Your laptop | 1 server | Multipe servers |
+| **Number of servers**         | Your laptop | 1 server | Multiple servers |
 | **Installation instructions** | [Try](./local.md){ .md-button } | [Install](./basic.md){ .md-button } | [Install](./advanced.md){ .md-button } |
