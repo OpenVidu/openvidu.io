@@ -41,29 +41,27 @@ The room allocation strategy can be configured in the [**`livekit.yaml`** config
 
 ```yml title="livekit.yaml"
 node_selector:
-    kind: any # [any, cpuload, sysload, regionaware]
+    kind: any # [any, cpuload, sysload]
     sort_by: sysload # [random, sysload, cpuload, rooms, clients, tracks, bytespersec]
     cpu_load_limit: 0.9 # used with kind cpuload
-    sysload_limit: 0.9 # used with kind sysload and regionaware
+    sysload_limit: 0.9 # used with kind sysload
 ```
 
 First, property `kind` acts as a filter to remove non-eligible nodes:
 
 | `kind`       | Description                                                                                  |
 |--------------|----------------------------------------------------------------------------------------------|
-| any          | All nodes are eligible. This is the **default** option.                                          |
-| cpuload      | Only nodes with CPU load below `cpu_load_limit` are eligible. cpuload states the current CPU load of the node. |
+| any          | All nodes are eligible.                                          |
+| cpuload      | Only nodes with CPU load below `cpu_load_limit` are eligible. cpuload states the current CPU load of the node. This is the **default** option. |
 | sysload      | Only nodes with system load below `sysload_limit` are eligible. sysload smooths CPU spikes in comparison to cpuload, as it takes the average load of the system in the last minute. |
-| regionaware  | For advanced deployments with multi-region support.                                          |
-
 
 Then, property `sort_by` defines how to sort the eligible nodes. The first node in the sorted list will be chosen to host the new Room:
 
 | `sort_by`    | Description                                                                                  |
 |--------------|----------------------------------------------------------------------------------------------|
 | random       | A random node will be selected.                                                              |
-| sysload      | The node with the lowest system load will be selected. This is the **default** option.       |
-| cpuload      | The node with the lowest CPU load will be selected.                                          |
+| cpuload      | The node with the lowest CPU load will be selected. This is the **default** option.          |
+| sysload      | The node with the lowest system load will be selected.                                       |
 | rooms        | The node with the lowest total number of Rooms hosted will be selected.                      |
 | clients      | The node with the lowest total number of clients connected will be selected.                 |
 | tracks       | The node with the lowest total number of media tracks being processed will be selected.      |
@@ -86,7 +84,8 @@ The Egress allocation strategy is fixed and cannot be changed. Upon a new Egress
         track_cpu_cost: 1.0
     ```
 
-2. Chooses a **random** Media Node among the eligible ones. If no Media Node is eligible, the Egress request fails.
+2. Orders the eligible Media Nodes, giving **high priority to nodes already hosting at least one Egress**, and **low priority to nodes free of Egresses**. The idea is to pack as many Egresses as possible in the same Media Nodes before assigning new Egresses to new Media Nodes.
+3. Chooses the first Media Node in the ordered list. If no Media Node is eligible, the Egress request fails.
 
 ### Ingress
 
@@ -153,7 +152,7 @@ For AI agents the allocation strategy varies depending if the Agent is an [**Ope
 
 **OpenVidu Elastic** and **OpenVidu High Availability** have multiple Media Nodes to handle the load.
 
-- Rooms, Egress, Ingress and Agent are distributed across the Media Nodes according to different allocation strategies. Some strategies are configurable, others are fixed, but all of them have sane defaults  (see [Load distribution strategies across Media Nodes](#load-distribution-strategies-across-media-nodes)).
+- Rooms, Egress, Ingress and Agents are distributed across the Media Nodes according to different allocation strategies. Some strategies are configurable, others are fixed, but all of them have sane defaults  (see [Load distribution strategies across Media Nodes](#load-distribution-strategies-across-media-nodes)).
 - It is possible to dynamically add new Media Nodes to the cluster when the load increases. New nodes will automatically start accepting new jobs according to the allocation strategies.
 - It is possible to dynamically remove Media Nodes from the cluster when the load decreases. If the Media Node is hosting ongoing jobs (Rooms, Egresses, Ingresses or Agents), it will enter in a draining state in which it will not accept new jobs, but will continue processing the ongoing ones until they finish. At that point, the Media Node will be removed from the cluster.
 
@@ -161,11 +160,38 @@ The deployment environment determines how the autoscaling is managed:
 
 ### Autoscaling in cloud providers
 
-When deploying in a supported **cloud provider** using our official templates, OpenVidu will automatically add and remove Media Nodes according to load:
+When deploying in a supported **cloud provider** using our official templates, OpenVidu will automatically add and remove Media Nodes according to load. Depending on the cloud provider:
 
-- **AWS**: when deploying using our CloudFormation template ([OpenVidu Elastic in AWS](../elastic/aws/install.md) or [OpenVidu High Availability in AWS](../ha/aws/install.md)), the OpenVidu cluster scales automatically thanks to [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}.
-- **Azure**: when deploying using our ARM template ([OpenVidu Elastic in Azure](../elastic/azure/install.md) or [OpenVidu High Availability in Azure](../ha/azure/install.md)), the OpenVidu cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target=_blank}.
-<!-- - **GCP**: deploy using our Terraform template ([OpenVidu Elastic in GCP](../elastic/gcp/install.md) or [OpenVidu High Availability in GCP](../ha/gcp/install.md)). Autoscale thanks to the [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target=_blank}. -->
+=== ":fontawesome-brands-aws:{.icon .lg-icon .tab-icon} AWS"
+
+    Deploy OpenVidu using our official **CloudFormation** template:
+
+    - [OpenVidu Elastic in AWS](../elastic/aws/install.md)
+    - [OpenVidu High Availability in AWS](../ha/aws/install.md)
+
+    The cluster scales automatically thanks to [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
+
+    --8<-- "shared/self-hosting/media-nodes-aws-asg-config.md"
+  
+=== ":material-microsoft-azure:{.icon .lg-icon .tab-icon} Azure"
+
+    Deploy OpenVidu using our official **ARM** template:
+
+    - [OpenVidu Elastic in Azure](../elastic/azure/install.md)
+    - [OpenVidu High Availability in Azure](../ha/azure/install.md)
+  
+    The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target=_blank}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Scaling Set Configuration**.
+
+    --8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
+
+<!-- === ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
+
+    Deploy OpenVidu using our official **Terraform** template:
+
+    - [OpenVidu Elastic in GCP](../elastic/gcp/install.md)
+    - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
+
+    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target=_blank}. -->
 
 ### Autoscaling On Premises
 

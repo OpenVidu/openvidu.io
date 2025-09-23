@@ -111,15 +111,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
 The number of Media Nodes can scale up or down based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up or down.
 
-=== "Media Nodes Autoscaling Group Configuration"
-
-    Parameters in this section look like this:
-
-    ![Media Nodes Autoscaling Group Configuration](../../../../assets/images/self-hosting/ha/aws/media-nodes-asg-config.png)
-
-    The **InitialNumberOfMediaNodes** parameter specifies the initial number of Media Nodes to deploy. The **MinNumberOfMediaNodes** and **MaxNumberOfMediaNodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
-
-    The **ScaleTargetCPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html){:target="_blank"}.
+--8<-- "shared/self-hosting/media-nodes-aws-asg-config.md"
 
 ### S3 bucket for application data, cluster data and recordings
 
