@@ -42,6 +42,8 @@ Depending on your needs, you need to fill the following CloudFormation parameter
 
 --8<-- "shared/self-hosting/aws-ssl-domain.md"
 
+--8<-- "shared/self-hosting/aws-meet.md"
+
 ### EC2 Instance Configuration
 
 You need to specify some properties for the EC2 instance that will be created.
@@ -57,6 +59,8 @@ You need to specify some properties for the EC2 instance that will be created.
     By default, the parameter **AmiId** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
 --8<-- "shared/self-hosting/aws-single-elastic-s3.md"
+
+--8<-- "shared/self-hosting/aws-additional-flags.md"
 
 --8<-- "shared/self-hosting/aws-turn-domain.md"
 
@@ -84,15 +88,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 </div>
 
-To point your applications to your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object.
+To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
-Your authentication credentials and URL to point your applications would be:
-
-- **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in the AWS Secret of `LIVEKIT_API_KEY`
-- **API Secret**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
-
-
+--8<-- "shared/self-hosting/aws-credentials-general.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 

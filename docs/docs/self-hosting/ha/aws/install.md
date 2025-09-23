@@ -91,6 +91,8 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
+--8<-- "shared/self-hosting/aws-meet.md"
+
 ### EC2 Instance Configuration
 
 You need to specify some properties for the EC2 instances that will be created.
@@ -152,6 +154,20 @@ In this section, you need to specify the VPC and Subnet configuration for the de
         - It is recommended to deploy in a region with at least 4 availability zones and deploy the Master Nodes in 4 subnets, one in each availability zone. This is to ensure high availability.
         - You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
 
+## Volumes Configuration
+
+In this section, you need to specify the configuration for the EBS volumes that will be created for the Master Nodes. Master Nodes will host all the recordings and metrics data replicated across all of them. The disk size of the EBS volumes is the same for all Master Nodes.
+
+=== "Volumes Configuration"
+
+    Parameters in this section look like this:
+
+    ![Volumes Configuration](../../../../assets/images/self-hosting/ha/aws/volumes-config.png)
+
+    The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
+
+--8<-- "shared/self-hosting/aws-additional-flags.md"
+
 ### (Optional) TURN server configuration with TLS
 
 This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic.
@@ -165,18 +181,6 @@ This section is optional. It is useful when your users are behind a restrictive 
     Set the **TurnDomainName** parameter to the domain name you intend to use for your TURN server. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
     For the **TurnCertificateARN** parameter, specify the ARN of the SSL certificate you wish to use. This certificate should be created in the AWS Certificate Manager and configured for the domain specified in **TurnDomainName**.
-
-## Volumes Configuration
-
-In this section, you need to specify the configuration for the EBS volumes that will be created for the Master Nodes. Master Nodes will host all the recordings and metrics data replicated across all of them. The disk size of the EBS volumes is the same for all Master Nodes.
-
-=== "Volumes Configuration"
-
-    Parameters in this section look like this:
-
-    ![Volumes Configuration](../../../../assets/images/self-hosting/ha/aws/volumes-config.png)
-
-    The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
 ## Deploying the stack
 
@@ -202,19 +206,10 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 </div>
 
-To point your applications to your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object.
+To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
-Your authentication credentials and URL to point your applications would be:
-
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in the AWS Secret of `LIVEKIT_API_KEY`
-    - **API Secret**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
-
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. For example, `https://openvidu.example.io/`
-    - **Username**: `OPENVIDUAPP`
-    - **Password**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
+--8<-- "shared/self-hosting/aws-credentials-general.md"
+--8<-- "shared/self-hosting/aws-credentials-v2compatibility.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 

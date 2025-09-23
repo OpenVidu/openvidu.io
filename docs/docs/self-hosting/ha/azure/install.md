@@ -58,6 +58,8 @@ To deploy the template you need to fill the following parameters.
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
+--8<-- "shared/self-hosting/azure-meet.md"
+
 ### OpenVidu HA Configuration
 
 In this section, you need to specify some properties needed for the OpenVidu HA deployment.
@@ -107,6 +109,8 @@ The number of Media Nodes can scale up based on the system load. You can configu
 --8<-- "shared/self-hosting/azure-scale-in-config.md"
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
+
+--8<-- "shared/self-hosting/azure-additional-flags.md"
 
 ### (Optional) TURN server configuration with TLS
 
@@ -193,16 +197,9 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and URL to point your applications would be:
 
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in the Key Vault Secret of `LIVEKIT-API-KEY` or in the instance in `openvidu.env`.
-    - **API Secret**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/azure-credentials-general.md"
+--8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
 
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. For example, `https://openvidu.example.io/`.
-    - **Username**: `OPENVIDUAPP`.
-    - **Password**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
- 
 ## Troubleshooting initial Azure stack creation
 
 !!! info
