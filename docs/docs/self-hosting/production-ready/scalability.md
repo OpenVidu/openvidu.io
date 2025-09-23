@@ -47,25 +47,29 @@ node_selector:
     sysload_limit: 0.9 # used with kind sysload
 ```
 
-First, property `kind` acts as a filter to remove non-eligible nodes:
+Upon a new Room creation request:
 
-| `kind`       | Description                                                                                  |
-|--------------|----------------------------------------------------------------------------------------------|
-| any          | All nodes are eligible.                                          |
-| cpuload      | Only nodes with CPU load below `cpu_load_limit` are eligible. cpuload states the current CPU load of the node. This is the **default** option. |
-| sysload      | Only nodes with system load below `sysload_limit` are eligible. sysload smooths CPU spikes in comparison to cpuload, as it takes the average load of the system in the last minute. |
+1. First, property `kind` acts as a filter to remove non-eligible nodes:
 
-Then, property `sort_by` defines how to sort the eligible nodes. The first node in the sorted list will be chosen to host the new Room:
+    | `kind`       | Description                                                                                  |
+    |--------------|----------------------------------------------------------------------------------------------|
+    | any          | All nodes are eligible.                                          |
+    | cpuload      | Only nodes with CPU load below `cpu_load_limit` are eligible. cpuload states the current CPU load of the node. This is the **default** option. |
+    | sysload      | Only nodes with system load below `sysload_limit` are eligible. sysload smooths CPU spikes in comparison to cpuload, as it takes the average load of the system in the last minute. |
 
-| `sort_by`    | Description                                                                                  |
-|--------------|----------------------------------------------------------------------------------------------|
-| random       | A random node will be selected.                                                              |
-| cpuload      | The node with the lowest CPU load will be selected. This is the **default** option.          |
-| sysload      | The node with the lowest system load will be selected.                                       |
-| rooms        | The node with the lowest total number of Rooms hosted will be selected.                      |
-| clients      | The node with the lowest total number of clients connected will be selected.                 |
-| tracks       | The node with the lowest total number of media tracks being processed will be selected.      |
-| bytespersec  | The node with the lowest bandwidth will be selected.                                         |
+2. Then, property `sort_by` defines how to sort the eligible nodes. The first node in the sorted list will be chosen to host the new Room:
+
+    | `sort_by`    | Description                                                                                  |
+    |--------------|----------------------------------------------------------------------------------------------|
+    | random       | A random node will be selected.                                                              |
+    | cpuload      | The node with the lowest CPU load will be selected. This is the **default** option.          |
+    | sysload      | The node with the lowest system load will be selected.                                       |
+    | rooms        | The node with the lowest total number of Rooms hosted will be selected.                      |
+    | clients      | The node with the lowest total number of clients connected will be selected.                 |
+    | tracks       | The node with the lowest total number of media tracks being processed will be selected.      |
+    | bytespersec  | The node with the lowest bandwidth will be selected.                                         |
+
+    Room allocation never fails, as long as there is at least one Media Node connected to the cluster. Limits `cpu_load_limit` and `sysload_limit` will simply be ignored if no node is eligible.
 
 ### Egress
 
@@ -85,7 +89,7 @@ The Egress allocation strategy is fixed and cannot be changed. Upon a new Egress
     ```
 
 2. Orders the eligible Media Nodes, giving **high priority to nodes already hosting at least one Egress**, and **low priority to nodes free of Egresses**. The idea is to pack as many Egresses as possible in the same Media Nodes before assigning new Egresses to new Media Nodes.
-3. Chooses the first Media Node in the ordered list. If no Media Node is eligible, the Egress request fails.
+3. Chooses the first Media Node in the ordered list. If no Media Node is eligible, the Egress request fails with a **`503 Service Unavailable`** error.
 
 ### Ingress
 
@@ -105,7 +109,7 @@ The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingre
         min_idle_ratio: 0.3
     ```
 
-2. Chooses a **random** Media Node among the eligible ones. If no Media Node is eligible, the Ingress request fails.
+2. Chooses a **random** Media Node among the eligible ones. If no Media Node is eligible, the Ingress request fails with a **`503 Service Unavailable`** error.
 
 ### Agents
 
