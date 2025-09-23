@@ -103,7 +103,7 @@ CPU load of the server is also shown with a black marked plot (from 0 to 1, repr
 
 ### Benchmarking technical details
 
-- Each participant sending video and audio to the media server uses the following video in loop: [Video](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview_480p_30fps.y4m). The video is in `YUV4MPEG2` format and with a `640x480` resolution. The audio is in WAV format: [Audio](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview.wav).
+- Each participant sending video and audio to the media server uses the following video in loop: [Video :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview_480p_30fps.y4m){target="\_blank"}. The video is in `YUV4MPEG2` format and with a `640x480` resolution. The audio is in WAV format: [Audio :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview.wav){target="\_blank"}.
 - All tests were done using AWS EC2 instances. The media server runs with a `m6in.xlarge` instance type, an instance type with 4 vCPUs and better network capabilities compared to other instance types.
 - The workers running the browsers that act as participants ran in `c5.xlarge` instances, an instance type with 4 vCPUs with better computing capabilities.
 
@@ -118,4 +118,4 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 ### About OpenVidu LoadTest
 
-Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"} simulate participants directly using WebRTC SDKs, but we found out that browsers add significant more load that these kind of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"} give results that are closer to real-world scenarios, as it uses real browsers. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kind of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
