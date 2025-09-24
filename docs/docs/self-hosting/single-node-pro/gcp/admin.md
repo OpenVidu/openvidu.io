@@ -3,7 +3,7 @@ title: OpenVidu Single Node administration on Google Cloud Platform
 description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Single Node deployment
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Google Cloud Platform
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Google Cloud Platform
 
 Google Cloud Platform OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform from Google Cloud Platform.
 

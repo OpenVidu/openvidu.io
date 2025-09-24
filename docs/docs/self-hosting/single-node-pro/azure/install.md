@@ -43,7 +43,7 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
     Parameters of this section look like this:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/single-node/azure/single-node-pro-config.png)
+    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/self-hosting/single-node/azure/single-node-pro-config.png)
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 

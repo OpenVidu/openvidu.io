@@ -3,15 +3,12 @@ title: OpenVidu Single Node installation on Google Cloud Platform
 description: Learn how to deploy OpenVidu Single Node on Google Cloud Platform using Google Cloud Platform Console
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
-
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Google Cloud Platform
 !!! warning
 
     Google Cloud Platform deployments are considered in Beta in version 3.3.0 of OpenVidu.
 
---8<-- "shared/self-hosting/single-node/v2compat-warning.md"
-
-This section contains the instructions of how to deploy a production-ready OpenVidu Single Node deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
+This section contains the instructions of how to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
 To deploy OpenVidu into Google Cloud Platform you just need to log into your [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
 
@@ -64,7 +61,7 @@ Fill **Deployment ID** with any name that you desire like openvidu-singlenode-de
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
 
-For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/community/singlenode/gcp` and then click on continue.
+For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/pro/singlenode/gcp` and then click on continue.
 
 ## Input Values
 
@@ -84,6 +81,10 @@ In Google Cloud Platform there is no such thing like template with parameters, y
       <tr>
         <td>stackName</td>
         <td>Stack name for OpenVidu deployment.</td>
+      </tr>
+      <tr>
+        <td>openviduLicense</td>
+        <td>Visit https://openvidu.io/account</td>
       </tr>
     </table>
 </div>
@@ -117,7 +118,6 @@ In Google Cloud Platform there is no such thing like template with parameters, y
           </ul>
               </td>    </tr>
       <tr>
-      <tr>
         <td>publicIpAddress</td>
         <td>(none)</td>
         <td>Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP.</td>
@@ -146,6 +146,11 @@ In Google Cloud Platform there is no such thing like template with parameters, y
         <td>initialMeetApiKey</td>
         <td>(none)</td>
         <td>Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.</td>
+      </tr>
+      <tr>
+        <td>RTCEngine</td>
+        <td>"pion"</td>
+        <td>RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'.</td>
       </tr>
       <tr>
         <td>instanceType</td>
@@ -180,7 +185,7 @@ In Google Cloud Platform there is no such thing like template with parameters, y
     </table>
 </div>
 
-For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf) file to see more information about the inputs.   
+For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/singlenode/gcp/variables.tf) file to see more information about the inputs.   
 
 !!! warning
     It's important that you put the input variables with the same name as they appear in the table like in the next image.
