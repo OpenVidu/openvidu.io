@@ -118,6 +118,10 @@ nav:
                   - Install: docs/self-hosting/single-node/azure/install.md
                   - Administration: docs/self-hosting/single-node/azure/admin.md
                   - Upgrade: docs/self-hosting/single-node/azure/upgrade.md
+              - GCP:
+                  - Install: docs/self-hosting/single-node/gcp/install.md
+                  - Administration: docs/self-hosting/single-node/gcp/admin.md
+                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md 
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
@@ -132,6 +136,10 @@ nav:
                   - Install: docs/self-hosting/single-node-pro/azure/install.md
                   - Administration: docs/self-hosting/single-node-pro/azure/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/azure/upgrade.md
+              - GCP:
+                  - Install: docs/self-hosting/single-node-pro/gcp/install.md
+                  - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
+                  - Upgrade: docs/self-hosting/single-node-pro/gcp/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
