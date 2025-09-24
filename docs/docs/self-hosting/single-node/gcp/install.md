@@ -43,9 +43,26 @@ Once you click the button you will see this window.
 
 Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 
-<figure markdown>
-![Google Cloud Platform create new Service Account](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account.png){ .svg-img .dark-img }
-</figure>
+=== "New Service Account Steps" 
+    <figure markdown>
+    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account-1.png){ .svg-img .dark-img }
+    <figcaption>Step 1: Create Service Account</figcaption>
+    </figure>
+    
+    <figure markdown>
+    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account-2.png){ .svg-img .dark-img }
+    <figcaption>Step 2: Service Account Details</figcaption>
+    </figure>
+    
+    <figure markdown>
+    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account-3.png){ .svg-img .dark-img }
+    <figcaption>Step 3: Grant Permissions</figcaption>
+    </figure>
+    
+    <figure markdown>
+    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account-4.png){ .svg-img .dark-img }
+    <figcaption>Step 4: Complete Setup</figcaption>
+    </figure>
 
 For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/community/singlenode/gcp` and then click on continue.
 
@@ -53,27 +70,115 @@ For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.g
 
 In Google Cloud Platform there is no such thing like template with parameters, you will need to introduce by yourself in the console the parameters that are declared in our terraform files, so there is a detailed table of all the optional and non-optional parameters.
 
-HACER DOS TABLAS EN HTML UNA CON LOS PARAMETROS MANDATORY Y OTRA CON LOS OPCIONALES, LOS QUE SON QUE NO PUEDEN SER VACIOS PERO TIENEN DEFAULTVALUE SON OPCIONALES
+### Mandatory Parameters
+<div style="text-align: center;">
+    <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+      <tr>
+        <th>Input Value</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>projectId</td>
+        <td>GCP project id where the resources will be created.</td>
+      </tr>
+      <tr>
+        <td>stackName</td>
+        <td>Stack name for OpenVidu deployment.</td>
+      </tr>
+    </table>
+</div>
 
-| Input                     | Optional | Default Value    | Description                                                                                                                                          |
-| ------------------------- | -------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| projectId                 | No       | No default       | GCP project id where the resourw es will be created.                                                                                                 |
-| region                    | Yes      | "europe-west1"   | GCP region where resources will be created.                                                                                                          |
-| zone                      | Yes      | "europe-west1-b" | GCP zone that some resources will use.                                                                                                               |
-| stackName                 | No       | No default       | Stack name for OpenVidu deployment.                                                                                                                  |
-| certificateType           | No       | "letsEncrypt"    | [selfsigned] Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option. [owncert] Valid for production environments. Use your own certificate. You need a FQDN to use this option. [letsencrypt] Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, a random sslip.io domain will be used).                                            |
-| publicIpAddress           | Yes      | No default       | Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP.                                                   |
-| domainName                | Yes      | No default       | Domain name for the OpenVidu Deployment.                                                                                                             |
-| ownPublicCertificate      | Yes      | No default       | If certificate type is 'owncert', this parameter will be used to specify the public certificate                                                      |
-| ownPrivateCertificate     | Yes      | No default       | If certificate type is 'owncert', this parameter will be used to specify the private certificate                                                     |
-| initialMeetAdminPassword  | Yes      | No default       | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated.                                        |
-| initialMeetApiKey         | Yes      | No default       | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.                          |
-| instanceType              | No       | "e2-standard-8"  | Specifies the GCE machine type for your OpenVidu instance                                                                                            |
-| bucketName                | Yes      | No default       | Name of the S3 bucket to store data and recordings. If empty, a bucket will be created                                                               |
-| additionalInstallFlags    | Yes      | No default       | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g.,'--flag1=value, --flag2').                                        |
-| turnDomainName            | Yes      | No default       | (Optional) Domain name for the TURN server with TLS. Only needed if your users are behind restrictive firewalls                                      |
-| turnOwnPublicCertificate  | Yes      | No default       | (Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.                               |
-| turnOwnPrivateCertificate | Yes      | No default       | (Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.                               |   
+### Optional Parameters
+<div style="text-align: center;">
+    <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+      <tr>
+        <th>Input Value</th>
+        <th>Default Value</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>region</td>
+        <td>"europe-west1"</td>
+        <td>GCP region where resources will be created.</td>
+      </tr>
+      <tr>
+        <td>zone</td>
+        <td>"europe-west1-b"</td>
+        <td>GCP zone that some resources will use.</td>
+      </tr>
+      <tr>
+        <td>certificateType</td>
+        <td>"letsEncrypt"</td>
+        <td>Certificate type for OpenVidu deployment. Options:
+          <ul>
+            <li><strong>[selfsigned]</strong> Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li>
+            <li><strong>[owncert]</strong> Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li>
+            <li><strong>[letsencrypt]</strong> Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, a random sslip.io domain will be used).</li>
+          </ul>
+              </td>    </tr>
+      <tr>
+      <tr>
+        <td>publicIpAddress</td>
+        <td>(none)</td>
+        <td>Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP.</td>
+      </tr>
+      <tr>
+        <td>domainName</td>
+        <td>(none)</td>
+        <td>Domain name for the OpenVidu Deployment.</td>
+      </tr>
+      <tr>
+        <td>ownPublicCertificate</td>
+        <td>(none)</td>
+        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate.</td>
+      </tr>
+      <tr>
+        <td>ownPrivateCertificate</td>
+        <td>(none)</td>
+        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate.</td>
+      </tr>
+      <tr>
+        <td>initialMeetAdminPassword</td>
+        <td>(none)</td>
+        <td>Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated.</td>
+      </tr>
+      <tr>
+        <td>initialMeetApiKey</td>
+        <td>(none)</td>
+        <td>Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.</td>
+      </tr>
+      <tr>
+        <td>instanceType</td>
+        <td>"e2-standard-8"</td>
+        <td>Specifies the GCE machine type for your OpenVidu instance.</td>
+      </tr>
+      <tr>
+        <td>bucketName</td>
+        <td>(none)</td>
+        <td>Name of the S3 bucket to store data and recordings. If empty, a bucket will be created.</td>
+      </tr>
+      <tr>
+        <td>additionalInstallFlags</td>
+        <td>(none)</td>
+        <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
+      </tr>
+      <tr>
+        <td>turnDomainName</td>
+        <td>(none)</td>
+        <td>(Optional) Domain name for the TURN server with TLS. Only needed if your users are behind restrictive firewalls.</td>
+      </tr>
+      <tr>
+        <td>turnOwnPublicCertificate</td>
+        <td>(none)</td>
+        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.</td>
+      </tr>
+      <tr>
+        <td>turnOwnPrivateCertificate</td>
+        <td>(none)</td>
+        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.</td>
+      </tr>
+    </table>
+</div>
 
 For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf) file to see more information about the inputs.   
 
