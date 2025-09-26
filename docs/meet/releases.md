@@ -4,16 +4,16 @@
 
 ### Introducing OpenVidu Meet
 
-We are excited to announce a new product of the OpenVidu family: **OpenVidu Meet**.
+We are excited to announce a new product in the OpenVidu family: **OpenVidu Meet**.
 
 ### What is OpenVidu Meet?
 
-OpenVidu Meet is a fully-featured video calling service built on top of OpenVidu, designed to provide an easy-to-use, self-hosted solution for virtual meetings. Its design principles are:
+OpenVidu Meet is a fully featured video calling service built on top of OpenVidu, designed to provide an easy-to-use, self-hosted solution for virtual meetings. Its design principles are:
 
-- **Simplicity**: OpenVidu Meet is built on the same concepts as OpenVidu, but wraps them in a higher-level API, ideal for virtual meeting use cases. Simply manage rooms, meetings and recordings.
+- **Simplicity**: OpenVidu Meet is built on the same concepts as OpenVidu, but wraps them in a higher-level API, ideal for virtual meeting use cases. Simply manage rooms, meetings, and recordings.
 - **Feature-rich**: OpenVidu Meet includes all the features you would expect from a modern video conferencing solution: HQ audio/video, screen sharing, chat, recording, and more. We will be continuously adding more features, taking advantage of all the advanced capabilities of OpenVidu: live-captions, AI integrations, streaming to large audiences, breakout rooms...
 - **Refined UI/UX**: OpenVidu Meet user interface boasts a modern and intuitive design. Years of experience in the video conferencing space have been distilled into a polished user experience that feels familiar and gets out of the way. Perfect for all kinds of use cases, from e-learning to telehealth, collaboration and customer support.
-- **Self-hosted and secure by design**: OpenVidu Meet is self-hosted, allowing you to retain full control over your data and compliance, and at the same time leverage your infrastructure. It can be easily deployed on-premises or in the cloud, with native integrations available for AWS, Azure and GCP.
+- **Self-hosted and secure by design**: OpenVidu Meet is self-hosted, allowing you to retain full control over your data and compliance, and at the same time leverage your infrastructure. It can be easily deployed on-premises or in the cloud, with native integrations available for AWS, Azure, and GCP.
 - **Embed-first integration**: OpenVidu Meet can act as a final application, but it is also designed to be embedded into your own web app with minimal effort. It provides a Web Component, REST API and Webhooks to integrate rooms, automate lifecycles, and connect to your business logic.
 
 ### Why a separate OpenVidu product?
