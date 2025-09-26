@@ -31,15 +31,15 @@ For big videoconferences with many participants (in the order of 100- or even 10
 - **Distributing participants of one Room in multiple servers**: By connecting multiple media servers between them, OpenVidu will be able to manage Rooms with unlimited number of participants and live streams with unlimited number of viewers.
 - **Only show last speakers**: A browser or mobile app is able to show a limited number of participants. A powerful computer can visualize up to 10 simultaneous videoconference participants at the same time with high video quality. To allow big videoconferences, OpenVidu will provide features on its frontend SDKs to show only last speakers in the videoconference.
 
-## Load distribution strategies across Media Nodes
+## Load balancing strategies across Media Nodes
 
 In **OpenVidu Elastic** and **OpenVidu High Availability**, work is distributed across multiple Media Nodes. The distribution strategy varies depending on the type of job.
 
 ### Rooms
 
-The room allocation strategy can be configured in the [**`livekit.yaml`** configuration file](../configuration/changing-config.md#config-files). Specifically, property `node_selector` defines the strategy to select the Media Node where a new Room will be hosted:
+The Room allocation strategy can be configured in the [**`livekit.yaml`** configuration file](../configuration/changing-config.md#config-files). Specifically, property `node_selector` defines the strategy to select the Media Node where a new Room will be hosted:
 
-```yml title="livekit.yaml"
+```yaml title="livekit.yaml"
 node_selector:
     kind: any # [any, cpuload, sysload]
     sort_by: sysload # [random, sysload, cpuload, rooms, clients, tracks, bytespersec]
@@ -76,31 +76,79 @@ Upon a new Room creation request:
 !!! info
     Check out the official Egress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/){target="\_blank"}.
 
-The Egress allocation strategy is fixed and cannot be changed. Upon a new Egress request, the OpenVidu cluster:
+The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). 
 
-1. Filters eligible Media Nodes. A Media Node is eligible to host a new Egress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Egress (room composite egress, web egress, participant egress, track composite egress, track egress). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files):
+```yaml title="egress.yaml"
+cpu_cost:
+    max_cpu_utilization: 0.8
+    room_composite_cpu_cost: 2.0
+    audio_room_composite_cpu_cost: 1.0
+    web_cpu_cost: 2.0
+    audio_web_cpu_cost: 0.5
+    participant_cpu_cost: 1.0
+    track_composite_cpu_cost: 1.0
+    track_cpu_cost: 0.5
 
-    ```yml title="egress.yaml"
+openvidu:
+    allocation_strategy: cpuload # [cpuload, binpack]
+```
+
+Upon a new Egress request:
+
+1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Egress request if:
+      1. Its **CPU load is below a certain threshold** (by default 80%).
+      2. It has enough **free CPUs** to handle the new Egress. The amount of free CPUs required depends on the type of Egress (room composite egress, web egress, participant egress, track composite egress, track egress). 
+
+    Sane defaults are provided by OpenVidu, but you can configure both the CPU load threshold and the amount of free CPUs required for each type of Egress in the `cpu_cost`:
+
+    ```yaml title="egress.yaml"
     cpu_cost:
-        room_composite_cpu_cost: 3.0
-        web_cpu_cost: 3.0
-        track_composite_cpu_cost: 2.0
-        track_cpu_cost: 1.0
+        max_cpu_utilization: 0.8
+        room_composite_cpu_cost: 2.0
+        audio_room_composite_cpu_cost: 1.0
+        web_cpu_cost: 2.0
+        audio_web_cpu_cost: 0.5
+        participant_cpu_cost: 1.0
+        track_composite_cpu_cost: 1.0
+        track_cpu_cost: 0.5
     ```
 
-2. Orders the eligible Media Nodes, giving **high priority to nodes already hosting at least one Egress**, and **low priority to nodes free of Egresses**. The idea is to pack as many Egresses as possible in the same Media Nodes before assigning new Egresses to new Media Nodes.
-3. Chooses the first Media Node in the ordered list. If no Media Node is eligible, the Egress request fails with a **`503 Service Unavailable`** error.
+2. Then, OpenVidu chooses from the pool of eligible nodes the best one according to property `openvidu.allocation_strategy`:
+
+    ```yaml title="egress.yaml"
+    openvidu:
+        allocation_strategy: cpuload # [cpuload, binpack]
+    ```
+
+    | `sort_by`       | Description                                                                                  |
+    |--------------|----------------------------------------------------------------------------------------------|
+    | cpuload      | The node with the lowest CPU load will be selected. This strategy helps distributing the CPU load evenly across all available nodes. This is the **default** option. |
+    | binpack      | Some node already hosting at least one Egress will be selected. If all eligible nodes are idle, a random one will be chosen. This strategy helps filling up nodes before assigning work to new ones. |
+
+3. If no Media Node is eligible, the Egress request fails with a **`503 Service Unavailable`** error.
+
+#### Egress CPU overload killer
+
+By default the Egress service has the ability to **automatically kill active egresses under high CPU load**. If a >95% CPU load is sustained over 10 seconds, the Egress service will automatically terminate the most CPU-intensive active egress.
+
+This helps preventing an egress process from overloading the entire Media Node.
+Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files):
+
+```yaml title="egress.yaml"
+openvidu:
+    disable_cpu_overload_killer: true
+```
 
 ### Ingress
 
 !!! info
     Check out the official Ingress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){target="\_blank"}.
 
-The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request, the OpenVidu cluster:
+The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 
-1. Filters eligible Media Nodes. A Media Node is eligible to host a new Ingress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Ingress (RTMP, WHIP, URL). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`ingress.yaml`** configuration file](../configuration/changing-config.md#config-files):
+1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Ingress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Ingress (RTMP, WHIP, URL). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`ingress.yaml`** configuration file](../configuration/changing-config.md#config-files):
 
-    ```yml title="ingress.yaml"
+    ```yaml title="ingress.yaml"
     cpu_cost:
         rtmp_cpu_cost: 2.0
         whip_cpu_cost: 2.0
@@ -109,15 +157,20 @@ The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingre
         min_idle_ratio: 0.3
     ```
 
-2. Chooses a **random** Media Node among the eligible ones. If no Media Node is eligible, the Ingress request fails with a **`503 Service Unavailable`** error.
+2. Then, OpenVidu chooses a **random** Media Node among the eligible ones. If no Media Node is eligible, the Ingress request fails with a **`503 Service Unavailable`** error.
 
 ### Agents
 
 For AI agents the allocation strategy varies depending if the Agent is an [**OpenVidu agent**](../../ai/openvidu-agents/overview.md) or a [**custom agent**](../../ai/custom-agents.md).
 
-- For [**OpenVidu agent**](../../ai/openvidu-agents/overview.md), the allocation strategy is fixed and cannot be changed. Upon a new Agent request, the OpenVidu cluster will pick a random agent and will try to assign the request to it. If the agent is not available, OpenVidu will try with a different agent, until one is found or no more agents are available (in which case the Agent request fails). The selected agent will be the first one living in a **Media Node with an average CPU load below 70%**.
+- For [**OpenVidu agents**](../../ai/openvidu-agents/overview.md): the agent will be available to process a new request if the CPU load of its Media Node is below a threshold. The default threshold is 70%, but you can change it in the agent's YAML configuration file. For example, for the **Speech Processing Agent**, you can change it in  [**`agent-speech-processing.yaml`**](../../ai/openvidu-agents/speech-processing-agent.md#configuration-reference):
 
-- For [**custom agent**](../../ai/custom-agents.md), the allocation strategy is the same as for OpenVidu agents. By default the metric and threshold are also average CPU and 0.7, but you can customize both in the `WorkerOptions` when developing your agent:
+    ```yaml title="agent-speech-processing.yaml"
+    # Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.
+    load_threshold: 0.7
+    ```
+
+- When developing a [**custom agent**](../../ai/custom-agents.md): the agent will be available to process a new request if its load does not exceed a specific threshold. Both the load metric and its threshold have the same defaults as for OpenVidu agents (average CPU load must be below 70%), but you can customize them in the `WorkerOptions` when developing your agent:
 
     === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 
@@ -130,7 +183,7 @@ For AI agents the allocation strategy varies depending if the Agent is an [**Ope
         worker_options = WorkerOptions(
             ...
             load_fnc=custom_load_function,
-            load_threshold=0.8,  # Maximum load to consider the worker available
+            load_threshold=0.7,  # Maximum load to consider the worker available
             ...
         )
         ```
@@ -147,16 +200,18 @@ For AI agents the allocation strategy varies depending if the Agent is an [**Ope
         const workerOptions = {
             ...
             loadFunc: customLoadFunction,
-            loadThreshold: 0.8,  // Maximum load to consider the worker available
+            loadThreshold: 0.7,  // Maximum load to consider the worker available
             ...
         };
         ```
+
+In both cases, OpenVidu will assign the request to a random available agent. If no agent is available, the request will be ignored. The log of the [OpenVidu Server service](../deployment-types.md#media-node-services) will show an INFO message stating `not dispatching agent job since no worker is available`.
 
 ## Autoscaling
 
 **OpenVidu Elastic** and **OpenVidu High Availability** have multiple Media Nodes to handle the load.
 
-- Rooms, Egress, Ingress and Agents are distributed across the Media Nodes according to different allocation strategies. Some strategies are configurable, others are fixed, but all of them have sane defaults  (see [Load distribution strategies across Media Nodes](#load-distribution-strategies-across-media-nodes)).
+- Rooms, Egress, Ingress and Agents are distributed across the Media Nodes according to different allocation strategies. Some strategies are configurable, others are fixed, but all of them have sane defaults  (see [Load balancing strategies across Media Nodes](#load-balancing-strategies-across-media-nodes)).
 - It is possible to dynamically add new Media Nodes to the cluster when the load increases. New nodes will automatically start accepting new jobs according to the allocation strategies.
 - It is possible to dynamically remove Media Nodes from the cluster when the load decreases. If the Media Node is hosting ongoing jobs (Rooms, Egresses, Ingresses or Agents), it will enter in a draining state in which it will not accept new jobs, but will continue processing the ongoing ones until they finish. At that point, the Media Node will be removed from the cluster.
 
