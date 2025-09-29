@@ -319,7 +319,7 @@ After clicking on the element, the user will be redirected to OpenVidu Meet, rea
 !!! info
     You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after the user leaves the room by appending this query param: <code class="no-break">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
 
-    See [Passing attributes to a direct link or iframe](./reference/webcomponent.md#passing-attributes-to-a-direct-link-or-iframe) for more information.
+    See [Passing attributes to a direct link](./reference/direct-link.md#attributes) for more information.
 
 ### Use the Web Component
 
@@ -381,9 +381,9 @@ The required iframe attributes are:
 !!! info
     The same **attributes**, **commands** and **events** available for the Web Component may also be used in an iframe. Check out these sections to learn how:
 
-    - [Pass attributes to an OpenVidu Meet iframe](./reference/webcomponent.md#attributes)
-    - [Send commands to an OpenVidu Meet iframe](./reference/webcomponent.md#commands)
-    - [Receive events from an OpenVidu Meet iframe](./reference/webcomponent.md#events)
+    - [Pass attributes to an OpenVidu Meet iframe](./reference/iframe.md#attributes)
+    - [Send commands to an OpenVidu Meet iframe](./reference/iframe.md#commands)
+    - [Receive events from an OpenVidu Meet iframe](./reference/iframe.md#events)
 
 ## 5. Embed recordings into your application
 
