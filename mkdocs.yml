@@ -36,6 +36,8 @@ nav:
               # - Next.js: meet/embedded/tutorials/nextjs.md
           - Reference:
               - Webcomponent: meet/embedded/reference/webcomponent.md
+              - Direct Link: meet/embedded/reference/direct-link.md
+              - Iframe: meet/embedded/reference/iframe.md
               - REST API: meet/embedded/reference/rest-api.md
               - Webhooks: meet/embedded/reference/webhooks.md
       - Releases: meet/releases.md
@@ -121,7 +123,7 @@ nav:
               - GCP:
                   - Install: docs/self-hosting/single-node/gcp/install.md
                   - Administration: docs/self-hosting/single-node/gcp/admin.md
-                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md 
+                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
