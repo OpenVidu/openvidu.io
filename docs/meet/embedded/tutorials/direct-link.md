@@ -91,10 +91,10 @@ The server application is a simple Express app with a single file `index.js` tha
 Let's see the code of the `index.js` file:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-direct-link/src/index.js#L1-L23' target='_blank'>index.js</a>" linenums="1"
-import dotenv from 'dotenv';
-import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -139,7 +139,7 @@ Now let's see the code of each endpoint:
 
 #### Create room
 
-The `POST /rooms` endpoint creates a new room. It receives the room name as a parameter and returns the newly created room:
+The `POST /rooms` endpoint creates a new room. It receives the room name as a body parameter and returns the newly created room:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-direct-link/src/index.js#L25-L58' target='_blank'>index.js</a>" linenums="25"
 // Create a new room
@@ -261,8 +261,8 @@ The `GET /rooms` endpoint retrieves the list of all rooms created in OpenVidu Me
 // List all rooms
 app.get('/rooms', (_req, res) => {
     try {
-        // List all OpenVidu Meet rooms using the API
-        const { rooms } = await httpRequest('GET', 'rooms'); // (1)!
+        // List all OpenVidu Meet rooms using the API (100 max)
+        const { rooms } = await httpRequest('GET', 'rooms?maxItems=100'); // (1)!
         res.status(200).json({ rooms }); // (2)!
     } catch (error) {
         handleApiError(res, error, 'Error fetching rooms');
@@ -270,10 +270,10 @@ app.get('/rooms', (_req, res) => {
 });
 ```
 
-1. Make a `GET` request to the `rooms` endpoint of the OpenVidu Meet API to retrieve the list of rooms.
+1. Make a `GET` request to the `rooms` endpoint of the OpenVidu Meet API to retrieve the list of rooms (with a maximum of 100 rooms).
 2. The server returns a `200 OK` response with the list of rooms.
 
-This endpoint retrieves the list of rooms by making a `GET` request to the `rooms` endpoint of the OpenVidu Meet API using the `httpRequest` function. If the request is successful, the server returns a `200 OK` response with the list of rooms. Otherwise, the error is handled by the `handleApiError` function.
+This endpoint retrieves the list of rooms by making a `GET` request to the `rooms` endpoint (with a maximum of 100 rooms by setting the `maxItems` query parameter) of the OpenVidu Meet API using the `httpRequest` function. If the request is successful, the server returns a `200 OK` response with the list of rooms. Otherwise, the error is handled by the `handleApiError` function.
 
 ---
 

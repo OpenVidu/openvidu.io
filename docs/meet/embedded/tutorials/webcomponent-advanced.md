@@ -21,7 +21,7 @@ The application includes all the features from the basic WebComponent tutorial, 
 
 #### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -67,132 +67,21 @@ This tutorial builds upon the [basic WebComponent tutorial](webcomponent.md), ad
 
 ---
 
-### Backend modifications
+### Backend
 
-The main backend changes involve implementing in-memory room tracking with unique room names and enhanced validation.
+The backend is identical to previous tutorials. It provides the same three REST API endpoints:
 
-#### Enhanced room storage
+-   **`POST /rooms`**: Create a new room with the given room name.
+-   **`GET /rooms`**: Get the list of rooms.
+-   **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
 
-The backend now uses room names as unique identifiers by storing rooms in a map indexed by name:
-
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-commands-events/src/index.js#L25-L26' target='_blank'>index.js</a>" linenums="25"
-// OpenVidu Meet rooms indexed by name
-const rooms = new Map(); // (1)!
-```
-
-1. Create a map to store OpenVidu Meet rooms indexed by name.
-
----
-
-#### Enhanced room creation
-
-The room creation endpoint now includes name uniqueness validation:
-
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-commands-events/src/index.js#L28-L67' target='_blank'>index.js</a>" linenums="28" hl_lines="10-14 37"
-// Create a new room
-app.post('/rooms', async (req, res) => {
-    const { roomName } = req.body; // (1)!
-
-    if (!roomName) {
-        res.status(400).json({ message: `'roomName' is required` }); // (2)!
-        return;
-    }
-
-    // Check if the room name already exists
-    if (rooms.has(roomName)) {
-        res.status(400).json({ message: `Room '${roomName}' already exists` }); // (3)!
-        return;
-    }
-
-    try {
-        // Create a new OpenVidu Meet room using the API
-        const room = await httpRequest('POST', 'rooms', {
-            roomName, // (4)!
-            config: {
-                // (5)!
-                // Default room configuration
-                chat: {
-                    enabled: true // Enable chat for this room
-                },
-                recording: {
-                    enabled: true, // Enable recording for this room
-                    allowAccessTo: 'admin_moderator_speaker' // Allow access to recordings for admin, moderator and speaker roles
-                },
-                virtualBackground: {
-                    enabled: true // Enable virtual background for this room
-                }
-            }
-        });
-
-        console.log('Room created:', room);
-        rooms.set(roomName, room); // (6)!
-        res.status(201).json({ message: `Room '${roomName}' created successfully`, room }); // (7)!
-    } catch (error) {
-        handleApiError(res, error, `Error creating room '${roomName}'`);
-    }
-});
-```
-
-1. The `roomName` parameter is obtained from the request body.
-2. If the `roomName` is not provided, the server returns a `400 Bad Request` response.
-3. If there is already a room with the same name, the server returns a `400 Bad Request` response.
-4. Specify the name of the room.
-5. Set the configuration for the room, enabling chat, recording and virtual background.
-6. The room is stored in the `rooms` map.
-7. The server returns a `201 Created` response with the room object.
-
-The key difference from the basic tutorial is the addition of room name uniqueness validation and an in-memory map to track rooms by name.
-
----
-
-#### Enhanced room deletion
-
-The deletion endpoint now recieves the room name as a parameter instead of the room ID, and deletes the room from both the in-memory map and the OpenVidu Meet API:
-
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-commands-events/src/index.js#L76-L96' target='_blank'>index.js</a>" linenums="76"
-// Delete a room
-app.delete('/rooms/:roomName', async (req, res) => {
-    const { roomName } = req.params; // (1)!
-
-    // Check if the room exists
-    const room = rooms.get(roomName); // (2)!
-    if (!room) {
-        res.status(404).json({ message: `Room '${roomName}' not found` }); // (3)!
-        return;
-    }
-
-    try {
-        // Delete the OpenVidu Meet room using the API
-        await httpRequest('DELETE', `rooms/${room.roomId}`); // (4)!
-
-        rooms.delete(roomName); // (5)!
-        res.status(200).json({ message: `Room '${roomName}' deleted successfully` }); // (6)!
-    } catch (error) {
-        handleApiError(res, error, `Error deleting room '${roomName}'`);
-    }
-});
-```
-
-1. The `roomName` parameter is obtained from the request parameters.
-2. Get the room from the `rooms` map.
-3. If the room does not exist, the server returns a `404 Not Found` response.
-4. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint.
-5. The room is removed from the `rooms` map.
-6. The server returns a `200 OK` response with a success message.
-
-This approach ensures data consistency between the in-memory map and the OpenVidu Meet API.
+For detailed backend documentation, please refer to the [Direct Link tutorial backend section](direct-link.md#backend).
 
 ---
 
 ### Frontend modifications
 
 The frontend changes focus on enhanced room management, WebComponent event handling, and role-based UI features.
-
-#### Enhanced state management
-
-The rooms map now uses room names as keys instead of IDs. Therefore, the frontend code has been updated to reflect this change.
-
----
 
 #### Enhanced room template
 
@@ -227,7 +116,7 @@ function getRoomListItemTemplate(room) {
                 <button 
                     title="Delete room"
                     class="icon-button delete-button"
-                    onclick="deleteRoom('${room.roomName}');"
+                    onclick="deleteRoom('${room.roomId}');"
                 >
                     <i class="fa-solid fa-trash"></i>
                 </button>
@@ -245,7 +134,7 @@ The template now provides the room name and user role to the `joinRoom()` functi
 
 The `joinRoom()` function has been significantly enhanced to handle WebComponent events and commands:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-commands-events/public/js/app.js#L131-198' target='_blank'>app.js</a>" linenums="131"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-commands-events/public/js/app.js#L126-193' target='_blank'>app.js</a>" linenums="126"
 function joinRoom(roomName, roomUrl, role) {
     console.log(`Joining room as ${role}`);
 

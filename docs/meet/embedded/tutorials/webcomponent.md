@@ -26,7 +26,7 @@ The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.m
 
 #### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -150,7 +150,7 @@ The key difference from the Direct Link tutorial is that instead of using anchor
 
 When the user clicks the `Join as Moderator` or `Join as Speaker` button, the `joinRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-basic/public/js/app.js#L127-L144' target='_blank'>app.js</a>" linenums="127"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webcomponent-basic/public/js/app.js#L117-L133' target='_blank'>app.js</a>" linenums="117"
 function joinRoom(roomUrl) {
     // Hide the home screen and show the room screen
     const homeScreen = document.querySelector('#home');
