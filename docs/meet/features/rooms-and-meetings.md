@@ -29,11 +29,9 @@ As an administrator, you can create a new room directly from the "Rooms" page in
 Rooms are configurable in multiple ways:
 
 1. Name them.
-2. Set up recording.
-3. Change its appearance.
-<!-- START CHECK BEFORE RELEASE -->
-4. ...
-<!-- END CHECK BEFORE RELEASE -->
+2. Set up an auto-deletion date.
+3. Set up recording and access control to them.
+4. Enable/disable features like chat or virtual backgrounds.
 
 Available rooms are all listed in the "Rooms" page. From there administrators can:
 
@@ -56,11 +54,9 @@ Rooms can be created with an **auto-deletion date**. This helps keeping OpenVidu
 You can edit the settings of an existing room at any time in the "Rooms" page. The same options available when creating a room are also available when editing it:
 
 1. Name them.
-2. Set up recording.
-3. Change its appearance.
-<!-- START CHECK BEFORE RELEASE -->
-4. ...
-<!-- END CHECK BEFORE RELEASE -->
+2. Set up an auto-deletion date.
+3. Set up recording and access control to them.
+4. Enable/disable features like chat or virtual backgrounds.
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/edit-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/edit-room.png" loading="lazy" class="control-height"/></a>
 
@@ -100,6 +96,14 @@ Participants with the `Moderator` role can share room links from the active meet
 #### Get a room link from the REST API
 
 Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}.
+
+### Room visual customization
+
+Rooms can be customized to fit your branding needs. As for now, you can setup the color scheme of your rooms from the "Configuration" page.
+
+<a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/visual-customization.png" data-type="image" data-desc-position="bottom" data-gallery="gallery4"><img src="../../../assets/images/meet/rooms-and-meetings/visual-customization.png" loading="lazy" class="control-height"/></a>
+
+You can set separately the color of the main background, the buttons, the secondary elements, and the panels & cards. You can also choose between a light and a dark background style, to ensure the displayed text is always readable after applying your color scheme.
 
 ### Room REST API
 
