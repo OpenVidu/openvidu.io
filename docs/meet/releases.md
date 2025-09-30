@@ -50,5 +50,5 @@ If your use case requires a high degree of customization, or if you need to buil
 If you want to learn more about OpenVidu Meet, check out the following resources:
 
 - Compare OpenVidu Meet vs OpenVidu Platform: [OpenVidu Meet vs OpenVidu Platform](../openvidu-meet-vs-openvidu-platform.md)
-- Launch OpenVidu Meet locally in a couple of minutes: [Try OpenVidu Meet Locally](./deployment/local.md)
+- Launch OpenVidu Meet locally in a couple of minutes: [Try OpenVidu Meet locally](./deployment/local.md)
 - Embed OpenVidu Meet into your web app: [OpenVidu Meet Embedded](./embedded/intro.md)

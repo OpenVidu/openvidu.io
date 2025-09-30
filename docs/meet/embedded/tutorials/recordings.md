@@ -17,7 +17,7 @@ The application includes all the features from the basic tutorial, plus:
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+#### 1. Run OpenVidu Meet
 
 --8<-- "shared/tutorials/run-openvidu-server.md"
 

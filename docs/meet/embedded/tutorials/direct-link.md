@@ -24,9 +24,9 @@ The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.m
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+#### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 

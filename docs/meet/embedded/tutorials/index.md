@@ -24,9 +24,9 @@ Every tutorial below shares the same core functionality:
 
 [:material-link:{.icon .lg-icon .tab-icon} **Direct Link**](./direct-link.md){ .md-button .md-button--primary .tutorial-link }
 
-[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link }
+[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link .no-width }
 
-[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link }
+[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
 
 [:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link .no-width }
 

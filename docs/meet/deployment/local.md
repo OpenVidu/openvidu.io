@@ -1,8 +1,8 @@
 ---
-title: Try OpenVidu Meet Locally
+title: Try OpenVidu Meet locally
 description: Deploy OpenVidu Meet on your local machine for development and testing purposes using Docker Desktop.
 ---
-# Try OpenVidu Meet Locally
+# Try OpenVidu Meet locally
 
 You can easily deploy **OpenVidu Meet** on your local machine to explore its features right away.
 
@@ -41,7 +41,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
     - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/linux-install/){:target="\_blank"}
 
     !!! info 
-        This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed.
+        This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed. Make sure they are recent versions: Docker Engine >= **28.4.0** and Docker Compose >= **2.39.4**
 
 ## Running OpenVidu Meet Locally
 
