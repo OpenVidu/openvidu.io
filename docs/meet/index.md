@@ -140,7 +140,7 @@ Record meetings with different layouts. Generate shareable links and manage acce
 ---
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
-With all the features you need to fine-tune your perfect video calling service
+With all the features you need to fine-tune your perfect video calling service.
 </h2>
 
 <div class="feature-cards" markdown>
@@ -296,20 +296,18 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 
     Deploy with Azure Resource Manager
 
-<!-- START CHECK BEFORE RELEASE -->
-
-<!-- Remove coming soon banner if available -->
-
--   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon .coming-soon-overlay } __GCP__{ .feature-name }
+-   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon } __GCP__{ .feature-name }
 
     ---
 
     Deploy in GCP with Terraform
 
-<!-- END CHECK BEFORE RELEASE -->
+</div>
+</div>
 
-</div>
-</div>
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
+Check out the <a href="./deployment/overview"><strong>deployment documentation</strong></a>.
+</h2>
 
 <hr style="margin: 4em 0">
 
@@ -366,7 +364,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 -	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features to enhance the learning experience.
 
-<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
+<a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-elearning.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-elearning.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
 
 </div>
 
