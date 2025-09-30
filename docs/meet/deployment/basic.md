@@ -5,41 +5,36 @@ This section contains the instructions to deploy a production-ready deployment o
 
 ## Prerequisites
 
-Before starting the installation process, make sure you have the following prerequisites:
+### OS
 
-- **A machine with at least 4 GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**.
-- **Generous disk space (100 GB recommended)**, especially if you plan to record your meetings.
-- The machine **must have a public IP**.
+- **Ubuntu** 22.04 or newer.
+- User with **root** permissions (via `sudo`).
 
-## Port rules
+### Recommended hardware
 
-Make sure that all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your machine.
+- At least 4 GB RAM and 4 CPU cores.
+- Generous disk space (100 GB recommended), especially if you plan to record your meetings.
 
-**Inbound port rules**
+### Networking
 
-| Protocol | Ports         | Source          | Requirement               |
-| -------- | ------------- | --------------- | ------------------------- |
-| TCP      | 80            | 0.0.0.0/0, ::/0 | Mandatory                 |
-| TCP      | 443           | 0.0.0.0/0, ::/0 | Mandatory                 |
-| UDP      | 443           | 0.0.0.0/0, ::/0 | Mandatory                 |
-| TCP      | 7881          | 0.0.0.0/0, ::/0 | Optional, but recommended |
-| UDP      | 50000 - 60000 | 0.0.0.0/0, ::/0 | Optional, but recommended |
+- A public IP, that doesn't change between restarts (a static IP).
+- (Recommended) A domain name (FQDN) pointing to the public IP.
+- Port rules: these inbound ports must be open in your firewall and reachable from the internet.
 
-!!! info
-    The mandatory ports ensure that OpenVidu Meet can be used by all users, independently of their network conditions. But for optimal performance, the optional ports are highly recommended. They allow for a more efficient, higher quality video communication.
-
-**Outbound port rules**
-
-Typically, all outbound traffic is allowed.
+    | Protocol | Ports         | Source          | Requirement               |
+    | -------- | ------------- | --------------- | ------------------------- |
+    | TCP      | 80            | 0.0.0.0/0, ::/0 | Mandatory                 |
+    | TCP      | 443           | 0.0.0.0/0, ::/0 | Mandatory                 |
+    | UDP      | 443           | 0.0.0.0/0, ::/0 | Mandatory                 |
+    | TCP      | 7881          | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
+    | UDP      | 50000 - 60000 | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
 
 ## Installation
 
-Before starting the installation process, make sure that your server meets the [prerequisites](#prerequisites) and the [port rules](#port-rules).
-
-Then, connect to your server (typically via SSH) and run this command to start the installation wizard:
+Run this command in your server to start the installation wizard:
 
 ```bash
-sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
+sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install_meet.sh)
 ```
 
 Follow the instructions of the installation wizard. They are self-explanatory, but here is a breakdown:
@@ -48,37 +43,17 @@ Follow the instructions of the installation wizard. They are self-explanatory, b
 
      ![Installation summary](../../assets/images/meet/deployment/basic/wizard-1.png)
 
-2. Leave the domain name blank, by clicking **Enter**:
+2. If you have a domain name, enter it when prompted. If you don't have one, just press **Enter** to continue:
 
     ![Press Enter](../../assets/images/meet/deployment/basic/wizard-2.png)
 
-3. Select **Let's Encrypt Certificate** when prompted for the certificate type to use:
+3. The installer will ask you to confirm if you want to proceed with the installation. Select **Yes** to start the installation. 
 
-    ![Let's Encrypt](../../assets/images/meet/deployment/basic/wizard-3.png)
+    The installation will begin, downloading the software and configuring your server. Once the installation is complete, you will see this message:
 
-4. Leave all modules enabled, by clicking **Enter**:
+    ![Installation complete](../../assets/images/meet/deployment/basic/wizard-3.png)
 
-    ![All modules enabled](../../assets/images/meet/deployment/basic/wizard-4.png)
-
-5. You can leave all passwords to be generated automatically, by clicking **Enter** repeatedly:
-
-    ![Passwords generated automatically](../../assets/images/meet/deployment/basic/wizard-5.png)
-
-6. A summary with the port rules will be shown. Simply select **Yes** when prompted to continue the installation:
-
-    ![Port rules summary](../../assets/images/meet/deployment/basic/wizard-6.png)
-
-The installation will begin, pulling all the necessary Docker images and configuring your server. Once the installation is complete, you will see this message:
-
-![Installation complete](../../assets/images/meet/deployment/basic/wizard-7.png)
-
-At this point OpenVidu Meet will be installed but not running yet. Just as the message indicates, you can start it with this command:
-
-```bash
-systemctl start openvidu
-```
-
-Once running, you can access OpenVidu Meet in your browser using the URL and credentials shown in the installation completion message.
+    You can access OpenVidu Meet in your browser using the URL and credentials shown in the installation completion message.
 
 ## Administration
 
