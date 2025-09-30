@@ -24,14 +24,14 @@ Every tutorial below shares the same core functionality:
 
 [:material-link:{.icon .lg-icon .tab-icon} **Direct Link**](./direct-link.md){ .md-button .md-button--primary .tutorial-link }
 
-[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link .no-width }
+[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link }
 
-[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
+[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-height }
 
-[:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link .no-width }
+[:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link }
 
-<!-- [:material-webhooks:{.icon .lg-icon .tab-icon} **Webhooks**](./webhooks.md){ .md-button .md-button--primary .tutorial-link .no-width } -->
+[:material-webhook:{.icon .lg-icon .tab-icon} **Webhooks**](./webhooks.md){ .md-button .md-button--primary .tutorial-link }
 
-<!-- [:material-nextjs:{.icon .lg-icon .tab-icon} **Next.js**](./nextjs.md){ .md-button .md-button--primary .tutorial-link .no-width } -->
+<!-- [:material-nextjs:{.icon .lg-icon .tab-icon} **Next.js**](./nextjs.md){ .md-button .md-button--primary .tutorial-link } -->
 
 </div>

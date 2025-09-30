@@ -32,7 +32,7 @@ nav:
               - WebComponent: meet/embedded/tutorials/webcomponent.md
               - WebComponent Commands & Events: meet/embedded/tutorials/webcomponent-advanced.md
               - Recordings: meet/embedded/tutorials/recordings.md
-              # - Webhooks: meet/embedded/tutorials/webhooks.md
+              - Webhooks: meet/embedded/tutorials/webhooks.md
               # - Next.js: meet/embedded/tutorials/nextjs.md
           - Reference:
               - Webcomponent: meet/embedded/reference/webcomponent.md
