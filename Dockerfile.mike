@@ -1,5 +1,5 @@
-FROM squidfunk/mkdocs-material:latest
-RUN pip install mkdocs-glightbox
+FROM squidfunk/mkdocs-material:9.6.20
+RUN pip install mkdocs-glightbox mkdocs-llmstxt
 RUN pip install mike
 RUN mike deploy
 ENTRYPOINT ["/sbin/tini", "--", "mike"]
