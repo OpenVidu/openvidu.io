@@ -99,11 +99,11 @@ To use the OpenVidu Meet WebComponent in your application, you need to include i
 
 !!! warning "Configure the `src` URL"
 
-    When [running OpenVidu locally](#run-openvidu-locally), the `src` URL shown above will work if you access the application from the same device where OpenVidu Meet and OpenVidu are running. However, if you access the application from a different device, you need to replace `http://localhost:9080` with `https://xxx-yyy-zzz-www.openvidu-local.dev:9443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.).
+    When [running OpenVidu locally](#run-openvidu-locally), the `src` URL shown above will work if you access the application from the same device where OpenVidu Meet is running. However, if you access the application from a different device, you need to replace `http://localhost:9080` with `https://xxx-yyy-zzz-www.openvidu-local.dev:9443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.).
 
-    _This is one advantage of [running OpenVidu locally](#run-openvidu-locally), that you can test your application client with other devices in your local network very easily without worrying about SSL certificates. For more information, see section [Accessing your local deployment from other devices on your network](../../../docs/self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network)._
+    _This is one advantage of [running OpenVidu locally](#run-openvidu-meet-locally), that you can test your application client with other devices in your local network very easily without worrying about SSL certificates. For more information, see [Accessing OpenVidu Meet from other computers or phones](../../deployment/local.md#accessing-openvidu-meet-from-other-computers-or-phones)._
 
-    On the other hand, when using another [OpenVidu deployment type](#deploy-openvidu), you should configure the domain part of the `src` URL with the correct URL depending on your deployment.
+    If you are using a [production OpenVidu deployment](#deploy-openvidu-meet), you should configure the domain part of the `src` URL with the correct URL depending on your deployment.
 
 ---
 
