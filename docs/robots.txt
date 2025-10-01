@@ -4,5 +4,6 @@ Disallow: /conditions/*
 Disallow: /3*
 Disallow: kurento.openvidu.io
 Allow: /latest/*
+Allow: /
 
 Sitemap: https://openvidu.io/sitemap_index.xml
