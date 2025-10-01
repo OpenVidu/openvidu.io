@@ -15,7 +15,7 @@ const resetGlightbox = () => {
     zoomable: false,
     draggable: true,
     preload: true,
-    videosWidth: "1300px",
+    videosWidth: "1400px",
     height: "auto",
     closeEffect: "fade",
     plyr: {
