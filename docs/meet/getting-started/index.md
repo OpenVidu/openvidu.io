@@ -1,5 +1,7 @@
 ---
 title: Getting started with OpenVidu Meet
+tags:
+  - setupcustomgallery
 ---
 
 OpenVidu Meet is a fully fledged video call solution built on top of OpenVidu. You can use it out of the box, or you can embed it in your own application.
@@ -24,19 +26,23 @@ Using your administrator credentials (find out where to get them [here](../featu
 
 ### 2. Create your first room
 
-<a class="glightbox" href="../../../assets/videos/meet/create-room.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/create-room.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/create-room-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/create-room-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/create-room-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/create-room-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### 3. Join a meeting and invite someone
 
-<a class="glightbox" href="../../../assets/videos/meet/start-meeting.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-meeting.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/start-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-meeting-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/start-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-meeting-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### 4. Record your meeting
 
-<a class="glightbox" href="../../../assets/videos/meet/start-recording-2.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-recording-2.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/start-recording-2-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-recording-2-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/start-recording-2-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-recording-2-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### 5. View and share the recording
 
-<a class="glightbox" href="../../../assets/videos/meet/view-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/view-recording.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/view-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/view-recording-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/view-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/view-recording-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ## Embed OpenVidu Meet into your app
 

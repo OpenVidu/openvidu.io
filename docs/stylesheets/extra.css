@@ -843,6 +843,11 @@ h2.meetplatform-slogan {
   --md-icon-size: 1.525em !important;
 }
 
+.compare-table-icon-progress {
+  color: #00a2ca;
+  --md-icon-size: 1.525em !important;
+}
+
 .platform-primary-color {
   background-color: var(--primary-color-of-platform) !important;
   border-color: var(--primary-color-of-platform) !important;

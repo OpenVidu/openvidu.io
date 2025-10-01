@@ -36,7 +36,7 @@ tags:
         </p>
         <ul class="product-features">
           <li>Multi-party HQ video conferencing</li>
-          <li>Customize with your logo and corporate colors</li>
+          <li>Customize with your branding and corporate colors</li>
           <li>Feature rich: screen sharing, chat, virtual background, recording...</li>
           <li>Ready to use AI integrations</li>
           <li>Embed right into your app with pre-built components</li>
@@ -168,7 +168,7 @@ tags:
 
     ---
 
-    E2E encryption, fine-grained access control and highly secure deployments for the most demanding security requirements.
+    Fine-grained access control and highly secure deployments for the most demanding security requirements. **E2E encryption coming soon!**
 
 -   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 

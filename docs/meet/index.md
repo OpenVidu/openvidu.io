@@ -174,11 +174,11 @@ With all the features you need to fine-tune your perfect video calling service.
 
     Record your video calls with different layouts. Manage recording permissions and access with ease.
 
--   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name }
+-   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
 
     ---
 
-    OpenVidu Meet allows you to broadcast your video calls to platforms such as YouTube or Twitch.
+    Screen sharing with the best quality.
 
 -   :material-face-man-shimmer-outline:{ .feature-icon .padding-icon } __Background effects__{ .feature-name }
 
@@ -190,19 +190,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
-
-    ---
-
-    Screen sharing with the best quality.
-
 -   :material-chat-outline:{ .feature-icon .padding-icon } __Advanced chat__{ .feature-name }
 
     ---
 
     OpenVidu Meet integrates an advanced chat with support of rich messages, emojis, reactions and more.
 
--   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name }
+-   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
+
+    ---
+
+    OpenVidu Meet allows you to broadcast your video calls to platforms such as YouTube or Twitch.
+
+-   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name .coming-soon-overlay }
 
     ---
 
@@ -212,19 +212,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name }
+-   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name .coming-soon-overlay }
 
     ---
 
     Avoid man-in-the-middle attacks: only your final users can decrypt the audio, video and chat messages.
 
--   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name }
+-   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay }
 
     ---
 
     Prevent unwanted guests and require administrator approval to join.
 
--   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name }
+-   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay }
 
     ---
 
@@ -374,7 +374,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
     ---
 
-    Up to 4K video and HiFi audio for crystal-clear lessons. Stable experience across all kind of network thanks to simulcast, SVC, dynacast and adaptive streaming.
+    Up to **4K** video and **HiFi** audio for crystal-clear lessons. Stable experience across all kind of network thanks to **simulcast**, **SVC**, **dynacast** and **adaptive streaming**.
 
 -   __Accessibility__{ .feature-name }
 

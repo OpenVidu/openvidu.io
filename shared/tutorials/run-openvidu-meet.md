@@ -13,8 +13,6 @@
 
 === "Deploy OpenVidu Meet"
     
-    Follow the instructions to [deploy OpenVidu Meet in a single server](../../deployment/basic.md).
+    Follow the instructions to [deploy OpenVidu Meet in a single server :fontawesome-solid-external-link:{.external-link-icon}](/meet/deployment/basic.md){:target="\_blank"}.
 
-    You can also explore more advanced deployment options in section [Advanced deployments](../../deployment/advanced.md).
-
-
+    You can also explore more advanced deployment options in section [Advanced deployments :fontawesome-solid-external-link:{.external-link-icon}](/meet/deployment/advanced.md){:target="\_blank"}.
