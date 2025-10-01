@@ -6,7 +6,7 @@ repo_url: https://github.com/openvidu/openvidu
 
 nav:
   - Home: index.md
-  - OpenVidu Meet:
+  - OpenVidu Meet [BETA]:
       - meet/index.md
       - Getting started:
           - meet/getting-started/index.md
@@ -283,10 +283,9 @@ plugins:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
         - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
         - openvidu-meet-vs-openvidu-platform.md: What to choose, OpenVidu Meet or OpenVidu Platform?
-        OpenVidu Meet:
+        OpenVidu Meet [BETA]:
         - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
         - meet/getting-started/index.md: OpenVidu Meet - Getting started
-#        - meet/features/live-captions.md: Live Captions
         - meet/features/rooms-and-meetings.md: OpenVidu Meet Features - How to use rooms and meetings
         - meet/features/recordings.md: OpenVidu Meet Features - Managing recordings
         - meet/features/users-and-permissions.md: OpenVidu Meet Features - How to manage users and permissions
@@ -320,7 +319,7 @@ plugins:
         - docs/self-hosting/elastic/index.md: Elastic deployment options for OpenVidu Platform, either on-premises, on AWS, or on Azure.
         - docs/self-hosting/ha/index.md: High Availability deployment options for OpenVidu Platform, either on-premises (with DNS or network load balancers), on AWS, or on Azure.
         - docs/self-hosting/production-ready/index.md: Main advantages of self-hosting videoconferencing and live-streaming solutions with OpenVidu Platform, which are privacy, leverage your resources, performant, scalable, fault tolerant, and observable.
-        -  docs/self-hosting/production-ready/performance.md: OpenVidu Platform 2x performance by using mediasoup to replace the original Pion LiveKit WebRTC engine while maintaining the LiveKit API.
+        - docs/self-hosting/production-ready/performance.md: OpenVidu Platform 2x performance by using mediasoup to replace the original Pion LiveKit WebRTC engine while maintaining the LiveKit API.
         - docs/self-hosting/production-ready/scalability.md: OpenVidu Platform scalability numbers and Elastic and High Availability deployments. 
         - docs/self-hosting/production-ready/fault-tolerance.md: OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.
         - docs/self-hosting/production-ready/observability/index.md: A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting on OpenVidu Dashboard and a Grafana stack. 
@@ -331,7 +330,7 @@ plugins:
         - docs/ai/openvidu-agents/overview.md: A description of how to use and configure OpenVidu Agents, pre-configured and ready-to-use AI modules. 
         - docs/ai/openvidu-agents/speech-processing-agent.md: Instructions on how to configure the Speech Processing OpenVidu agent which transcribes audio speech to text in real time. 
         - docs/ui-components/angular-components.md: OpenVidu Angular Components simplify the creation of videoconferencing apps, offering customizable and powerful components for rapid development and easy maintenance. This is a how-to guide on using this angular library.
-        - docs/ui-components/react-components.md: the simplest way to create real-time audio/video applications with React. 
+        - docs/ui-components/react-components.md: the simplest way to create real-time audio/video applications with React.
 
 markdown_extensions:
   - admonition

@@ -1,3 +1,6 @@
+!!! warning
+    OpenVidu Meet is currently considered in **BETA**. There may be bugs and its APIs are subject to change.
+
 ## Deployment types
 
 OpenVidu Meet can be easily deployed in a single server (follow the [basic deployment guide](./basic.md)). However, a single server won't be enough for environments that require scalability and high-availability. For such cases, it is necessary a multi-node deployment.

@@ -11,8 +11,8 @@ tags:
 
 <div>
 <h1 class="logo-header meet-header">
-<img src="../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_greyfont_transback_beta.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_whitefont_transback_beta.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
 </h1>
 </div>
 
@@ -471,6 +471,12 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 
 </div>
+
+<hr style="margin: 5em 0 2em 0">
+
+## What does it mean that OpenVidu Meet is in BETA?
+
+OpenVidu Meet (v3.4.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support.md) with any comments or suggestions.
 
 <hr style="margin: 5em 0 2em 0">
 

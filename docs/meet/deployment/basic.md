@@ -1,3 +1,6 @@
+!!! warning
+    OpenVidu Meet is currently considered in **BETA**. There may be bugs and its APIs are subject to change.
+
 This section contains the instructions to deploy a production-ready deployment of OpenVidu Meet in a single server.
 
 !!! info
