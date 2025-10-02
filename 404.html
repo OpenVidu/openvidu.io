@@ -7,7 +7,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A powerful platform to develop WebRTC real-time applications. Self-hosted, performant, fault tolerant, scalable and observable.">
+        <meta name="description" content="A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.">
       
       
       
@@ -15,7 +15,7 @@
       
       
       <link rel="icon" href="/assets/images/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
       
@@ -23,6 +23,11 @@
       
     
     
+
+
+
+
+
 <style>
   @font-face {
     font-family: "Amazon Ember";
@@ -33,7 +38,8 @@
   }
 </style>
 
-      <link rel="stylesheet" href="/assets/stylesheets/main.e53b48f4.min.css">
+
+      <link rel="stylesheet" href="/assets/stylesheets/main.2a3383ac.min.css">
       
         
         <link rel="stylesheet" href="/assets/stylesheets/palette.06af60db.min.css">
@@ -41,75 +47,37 @@
       
 
 
-      
-     
-      
     
 
-<!-- GLightbox -->
+
+
+    
+
+<!-- wow.js -->
 <script>
-  window.setupGallery = function () {
-    const gallery = "gallery";
-    var lightbox = GLightbox({
-      touchNavigation: true,
-      loop: false,
-      autoplayVideos: true,
-      zoomable: false,
-      draggable: true,
-      preload: true,
-      width: "50%",
-      closeEffect: "fade",
-      plyr: {
-        config: {
-          controls: [],
-          autoplay: true,
-          playsinline: true,
-          muted: true,
-          volume: 0,
-          hideControls: true,
-          loop: { active: true },
-          clickToPlay: false,
-          disableContextMenu: true,
-          resetOnEnd: true,
-          keyboard: { focused: false, global: false },
-          tooltips: { controls: false, seek: false },
-          displayDuration: false,
-          fullscreen: {
-            enabled: false,
-            fallback: false,
-            iosNative: false,
-            container: null,
-          },
-        },
-      },
-    });
-    console.debug("Gallery setup");
+  window.setupWowJs = function () {
+    new WOW().init();
+    console.debug("WOW.js initialized");
   };
-  //# sourceURL=setupgallery.js
 </script>
 
-<!-- wow -->
+<!-- Card glow effect -->
 <script>
-  window.setupWow = function () {
-    if (!document.getElementById("wowjs")) {
-      const jsScript = document.createElement("script");
-      jsScript.src = "javascripts/wow.min.js";
-      jsScript.id = "wowjs";
-      jsScript.addEventListener("load", () => {
-        new WOW().init();
-        console.debug("wow loaded");
-      });
-      document.head.appendChild(jsScript);
-    }
-  };
   window.setupCardGlow = function () {
-    console.debug("card glow setup");
+    console.debug("starting card glow setup");
     const cards = document.querySelectorAll(
       ".feature-cards .grid.cards > ul > li"
     );
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
+    const maxRetries = 10;
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      retryCount++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
     function handleMouseMove(e) {
       const rect = this.getBoundingClientRect();
       const mouseX = e.clientX - rect.left - rect.width / 2;
@@ -118,16 +86,24 @@
       angle = (angle + 360) % 360;
       this.style.setProperty("--start", angle + 60);
     }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
   };
 </script>
+
+
+      
+    
 
 
     
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tomorrow:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="/assets/external/fonts.googleapis.com/css.9a0008fb.css">
         <style>:root{--md-text-font:"Tomorrow";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -236,7 +212,7 @@
       <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html -->
 
 <!--
-  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -261,32 +237,14 @@
 
 
 
-<link
-    rel="preload"
-    href="https://fonts.googleapis.com/css?family=Tomorrow:100,200,300,400,500,600"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-/>
+<link rel="preload" href="/assets/external/fonts.googleapis.com/css.55a6ed21.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-    <link
-        href="https://fonts.googleapis.com/css?family=Tomorrow:100,200,300,400,500,600"
-        rel="stylesheet"
-        type="text/css"
-    />
+    <link href="/assets/external/fonts.googleapis.com/css.55a6ed21.css" rel="stylesheet" type="text/css">
 </noscript>
 
-<link
-    rel="preload"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-/>
+<link rel="preload" href="/assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        rel="stylesheet"
-        type="text/css"
-    />
+    <link href="/assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" rel="stylesheet" type="text/css">
 </noscript>
 
 <!-- Header -->
@@ -305,8 +263,11 @@
       data-md-component="logo"
     >
       
-  <img src="/assets/images/openvidu_globe_bg_transp_cropped.png" alt="logo">
+      
+        
+  <img src="/assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
+      
     </a>
 
     <!-- Button to open drawer -->
@@ -320,12 +281,14 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            openVidu
+
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
+              
+                
               
             
           </span>
@@ -372,13 +335,17 @@
 
     <!-- Button to open search modal -->
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
+      
 
-      <!-- Search interface -->
-      <div class="md-search" data-md-component="search" role="dialog">
+      <!-- Check if search is actually enabled - see https://t.ly/DT_0V -->
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -412,6 +379,7 @@
     </div>
   </div>
 </div>
+      
     
 
     <!-- Repository information -->
@@ -420,7 +388,7 @@
         <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     openvidu/openvidu
@@ -434,7 +402,6 @@
     </div>
 
   </nav>
-
 
   <!-- Navigation tabs (sticky) -->
   
@@ -482,13 +449,35 @@
     
     
       <li class="md-tabs__item">
-        <a href="/latest/docs/getting-started/" class="md-tabs__link">
+        <a href="/latest/meet/" class="md-tabs__link">
           
   
   
     
   
-  Docs
+  OpenVidu Meet [BETA]
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="/latest/docs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  OpenVidu Platform
 
         </a>
       </li>
@@ -564,7 +553,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="/." title="openVidu" class="md-nav__button md-logo" aria-label="openVidu" data-md-component="logo">
       
-  <img src="/assets/images/openvidu_globe_bg_transp_cropped.png" alt="logo">
+  <img src="/assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     openVidu
@@ -574,7 +563,7 @@
       <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     openvidu/openvidu
@@ -616,7 +605,909 @@
     
       
         
+          
+        
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/meet/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Meet [BETA]
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu Meet [BETA]
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/meet/getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/rooms-and-meetings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rooms and meetings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/recordings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recordings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/users-and-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Users and permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/deployment/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/deployment/local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Try OpenVidu Meet locally
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/deployment/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/deployment/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced deployments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Embedded
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Embedded
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/step-by-step-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Step by step guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/meet/embedded/tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/direct-link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Direct Link
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/webcomponent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebComponent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/webcomponent-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebComponent Commands & Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/recordings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recordings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/reference/webcomponent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webcomponent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/reference/direct-link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Direct Link
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/reference/iframe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iframe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/reference/rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/reference/webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
         
       
         
@@ -644,50 +1535,36 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
-    Docs
+    OpenVidu Platform
     
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Docs
+            OpenVidu Platform
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/latest/docs/getting-started/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Getting started
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -739,7 +1616,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -756,14 +1633,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             Developing your OpenVidu app
           </label>
@@ -832,10 +1709,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -848,8 +1725,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Tutorials
           </label>
@@ -895,7 +1772,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_1" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -912,14 +1789,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_4_1" id="__nav_2_4_1_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_4_1" id="__nav_3_4_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_1">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_1">
             <span class="md-nav__icon md-icon"></span>
             Application Server
           </label>
@@ -1159,7 +2036,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1176,14 +2053,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
             <span class="md-nav__icon md-icon"></span>
             Application Client
           </label>
@@ -1415,7 +2292,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_3" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1432,14 +2309,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_4_3" id="__nav_2_4_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_4_3" id="__nav_3_4_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_3">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3">
             <span class="md-nav__icon md-icon"></span>
             Advanced Features
           </label>
@@ -1601,7 +2478,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_4" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1618,14 +2495,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_4_4" id="__nav_2_4_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_4_4" id="__nav_3_4_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_4">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_4">
             <span class="md-nav__icon md-icon"></span>
             Angular Components
           </label>
@@ -2012,7 +2889,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_5" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2029,14 +2906,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_4_5" id="__nav_2_4_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_4_5" id="__nav_3_4_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_5">
             <span class="md-nav__icon md-icon"></span>
             AI Services
           </label>
@@ -2121,10 +2998,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
             
   
   
@@ -2137,8 +3014,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
             <span class="md-nav__icon md-icon"></span>
             Self-hosting
           </label>
@@ -2199,7 +3076,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2216,14 +3093,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_2" id="__nav_2_5_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_2" id="__nav_3_5_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2">
             <span class="md-nav__icon md-icon"></span>
             Production ready
           </label>
@@ -2328,7 +3205,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2_5" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2345,14 +3222,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_2_5" id="__nav_2_5_2_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_2_5" id="__nav_3_5_2_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_2_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_2_5">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2_5">
             <span class="md-nav__icon md-icon"></span>
             Observable
           </label>
@@ -2464,6 +3341,8 @@
       
         
       
+        
+      
     
     
     
@@ -2475,7 +3354,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2492,14 +3371,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_4" id="__nav_3_5_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_4">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4">
             <span class="md-nav__icon md-icon"></span>
             <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node
           </label>
@@ -2533,10 +3412,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_4_2" id="__nav_2_5_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_4_2" id="__nav_3_5_4_2_label" tabindex="0">
             
   
   
@@ -2549,8 +3428,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_4_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_2">
             <span class="md-nav__icon md-icon"></span>
             On Premises
           </label>
@@ -2659,10 +3538,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_4_3" id="__nav_2_5_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_4_3" id="__nav_3_5_4_3_label" tabindex="0">
             
   
   
@@ -2675,8 +3554,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_4_3">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_3">
             <span class="md-nav__icon md-icon"></span>
             AWS
           </label>
@@ -2785,10 +3664,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_4_4" id="__nav_2_5_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_4_4" id="__nav_3_5_4_4_label" tabindex="0">
             
   
   
@@ -2801,8 +3680,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_4_4">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_4">
             <span class="md-nav__icon md-icon"></span>
             Azure
           </label>
@@ -2885,6 +3764,132 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_5" id="__nav_3_5_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    GCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            GCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2912,6 +3917,8 @@
       
         
       
+        
+      
     
     
     
@@ -2923,7 +3930,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2940,14 +3947,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_5" id="__nav_2_5_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_5" id="__nav_3_5_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5">
             <span class="md-nav__icon md-icon"></span>
             <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node
           </label>
@@ -2981,10 +3988,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_5_2" id="__nav_2_5_5_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_5_2" id="__nav_3_5_5_2_label" tabindex="0">
             
   
   
@@ -2997,8 +4004,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_5_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_2">
             <span class="md-nav__icon md-icon"></span>
             On Premises
           </label>
@@ -3107,10 +4114,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_5_3" id="__nav_2_5_5_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_5_3" id="__nav_3_5_5_3_label" tabindex="0">
             
   
   
@@ -3123,8 +4130,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_5_3">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_3">
             <span class="md-nav__icon md-icon"></span>
             AWS
           </label>
@@ -3233,10 +4240,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_5_4" id="__nav_2_5_5_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_5_4" id="__nav_3_5_5_4_label" tabindex="0">
             
   
   
@@ -3249,8 +4256,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_5_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_5_4">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_4">
             <span class="md-nav__icon md-icon"></span>
             Azure
           </label>
@@ -3333,6 +4340,132 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_5" id="__nav_3_5_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    GCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            GCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3371,7 +4504,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -3388,14 +4521,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_6" id="__nav_2_5_6_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_6" id="__nav_3_5_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_6">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6">
             <span class="md-nav__icon md-icon"></span>
             <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic
           </label>
@@ -3429,10 +4562,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_6_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_6_2" id="__nav_2_5_6_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_6_2" id="__nav_3_5_6_2_label" tabindex="0">
             
   
   
@@ -3445,8 +4578,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_6_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_2">
             <span class="md-nav__icon md-icon"></span>
             On Premises
           </label>
@@ -3555,10 +4688,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_6_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_6_3" id="__nav_2_5_6_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_6_3" id="__nav_3_5_6_3_label" tabindex="0">
             
   
   
@@ -3571,8 +4704,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_6_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_6_3">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_3">
             <span class="md-nav__icon md-icon"></span>
             AWS
           </label>
@@ -3681,10 +4814,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_6_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_6_4" id="__nav_2_5_6_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_6_4" id="__nav_3_5_6_4_label" tabindex="0">
             
   
   
@@ -3697,8 +4830,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_6_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_6_4">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_4">
             <span class="md-nav__icon md-icon"></span>
             Azure
           </label>
@@ -3819,7 +4952,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -3836,14 +4969,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_7" id="__nav_2_5_7_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_7" id="__nav_3_5_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_7">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7">
             <span class="md-nav__icon md-icon"></span>
             <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability
           </label>
@@ -3879,10 +5012,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_7_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_7_2" id="__nav_2_5_7_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_7_2" id="__nav_3_5_7_2_label" tabindex="0">
             
   
   
@@ -3895,8 +5028,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_7_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_2">
             <span class="md-nav__icon md-icon"></span>
             On Premises
           </label>
@@ -4028,10 +5161,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_7_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_7_3" id="__nav_2_5_7_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_7_3" id="__nav_3_5_7_3_label" tabindex="0">
             
   
   
@@ -4044,8 +5177,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_7_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_7_3">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_3">
             <span class="md-nav__icon md-icon"></span>
             AWS
           </label>
@@ -4154,10 +5287,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_7_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_7_4" id="__nav_2_5_7_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_7_4" id="__nav_3_5_7_4_label" tabindex="0">
             
   
   
@@ -4170,8 +5303,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_7_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_7_4">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_4">
             <span class="md-nav__icon md-icon"></span>
             Azure
           </label>
@@ -4288,10 +5421,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_8" >
         
           
-          <label class="md-nav__link" for="__nav_2_5_8" id="__nav_2_5_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_8" id="__nav_3_5_8_label" tabindex="0">
             
   
   
@@ -4304,8 +5437,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_8">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_8">
             <span class="md-nav__icon md-icon"></span>
             Configuration
           </label>
@@ -4424,7 +5557,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_9" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -4441,14 +5574,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_9" id="__nav_2_5_9_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_5_9" id="__nav_3_5_9_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_9">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_9">
             <span class="md-nav__icon md-icon"></span>
             How To Guides
           </label>
@@ -4638,10 +5771,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
         
           
-          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
             
   
   
@@ -4654,8 +5787,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
             <span class="md-nav__icon md-icon"></span>
             AI Services
           </label>
@@ -4733,10 +5866,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_6_3" id="__nav_2_6_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_6_3" id="__nav_3_6_3_label" tabindex="0">
             
   
   
@@ -4749,8 +5882,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_6_3">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_3">
             <span class="md-nav__icon md-icon"></span>
             OpenVidu agents
           </label>
@@ -4888,10 +6021,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
         
           
-          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
             
   
   
@@ -4904,8 +6037,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_7">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
             <span class="md-nav__icon md-icon"></span>
             UI Components
           </label>
@@ -4947,95 +6080,6 @@
   
   <span class="md-ellipsis">
     React Components
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="/latest/docs/openvidu-call/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    OpenVidu Call
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_8">
-            <span class="md-nav__icon md-icon"></span>
-            OpenVidu Call
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/latest/docs/openvidu-call/docs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Docs
     
   </span>
   
@@ -5106,10 +6150,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -5122,8 +6166,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Support
           </label>
@@ -5181,10 +6225,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -5197,8 +6241,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Pricing
           </label>
@@ -5295,7 +6339,7 @@
         <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/footer.html -->
 
 <!--
-  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -5410,7 +6454,6 @@
 
     </div>
   </div>
-
 </footer>
       
     </div>
@@ -5502,14 +6545,28 @@
       <script id="__config" type="application/json">{"base": "/", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "content.tooltips", "navigation.tabs", "navigation.tracking", "navigation.footer", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "announce.dismiss"], "search": "/assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
     
     
+
 <!-- Add scripts that need to run before here -->
+
+<script src="/javascripts/target-blank.js"></script>
+
+
+
+
+
+
+
+
+
 
       <script src="/assets/javascripts/bundle.f55a23d4.min.js"></script>
       
         <script src="/javascripts/openvidu-register/openvidu-register.js"></script>
       
     
+
 <!-- Add scripts that need to run afterwards here -->
+
 
   </body>
 </html>

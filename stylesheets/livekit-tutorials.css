@@ -31,6 +31,10 @@
 	width: inherit;
 }
 
+.no-height {
+	height: inherit;
+}
+
 .responsive-card {
 	flex: 0 32%;
 }
