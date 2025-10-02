@@ -110,7 +110,7 @@ Participants with the `Moderator` role can share room links from the active meet
 
 #### Get a room link from the REST API
 
-Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}.
+Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}.
 
 ### Room visual customization
 
@@ -135,13 +135,13 @@ Every possible action against a room can be done through [OpenVidu Meet REST API
 
 | Operation | HTTP Method | Reference |
 |-----------|-------------|-----------|
-| Create a room | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"} |
-| Get a room | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRoom){:target="_blank"} |
-| Get all rooms | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRooms){:target="_blank"} |
-| Delete a room | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/deleteRoom){:target="_blank"} |
-| Bulk delete rooms | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/bulkDeleteRooms){:target="_blank"} |
-| Get room preferences | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRoomPreferences){:target="_blank"} |
-| Update room preferences | PUT | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/updateRoomPreferences){:target="_blank"} |
+| Create a room | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"} |
+| Get a room | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"} |
+| Get all rooms | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="_blank"} |
+| Delete a room | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoom){:target="_blank"} |
+| Bulk delete rooms | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRooms){:target="_blank"} |
+| Get room config | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="_blank"} |
+| Update room config | PUT | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="_blank"} |
 
 ## Meetings
 

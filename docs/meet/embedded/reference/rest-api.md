@@ -27,7 +27,7 @@ X-API-KEY: your-openvidu-meet-api-key
 
 You can access the REST API reference documentation at:
 
-- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html){target="_blank"}
+- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](./api.html){target="_blank"}
 - **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/api/v1/docs/`**{.no-break}
 
 ### Code snippets

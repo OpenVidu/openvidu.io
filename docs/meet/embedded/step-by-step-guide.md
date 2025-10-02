@@ -19,7 +19,7 @@ You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
 You can automate the room creation process by using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). This allows you to create rooms programmatically from your application's backend, without manual intervention.
 
-Check out the [API reference for creating rooms :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}. Below you have copy-paste snippets for most common languages.
+Check out the [API reference for creating rooms :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. Below you have copy-paste snippets for most common languages.
 
 !!! info
     Remember to replace **`YOUR_OPENVIDU_DEPLOYMENT_DOMAIN`** and **`YOUR_API_KEY`** in the snippets below.
@@ -32,7 +32,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         --header 'Accept: application/json' \
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
-        --data '{"roomIdPrefix": "my-room"}'
+        --data '{"roomName": "my-room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -64,7 +64,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     });
 
     req.write(JSON.stringify({
-        roomIdPrefix: 'my-room',
+        roomName: 'my-room',
     }));
 
     req.end();
@@ -86,7 +86,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
         url := "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms"
 
-        payload := strings.NewReader("{\"roomIdPrefix\":\"my-room\"}")
+        payload := strings.NewReader("{\"roomName\":\"my-room\"}")
 
         req, _ := http.NewRequest("POST", url, payload)
 
@@ -121,7 +121,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     request["Content-Type"] = 'application/json'
     request["Accept"] = 'application/json'
     request["X-API-KEY"] = 'YOUR_API_KEY'
-    request.body = "{\"roomIdPrefix\": \"my-room\"}"
+    request.body = "{\"roomName\": \"my-room\"}"
 
     response = http.request(request)
     puts response.read_body
@@ -135,7 +135,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         .header("Content-Type", "application/json")
         .header("Accept", "application/json")
         .header("X-API-KEY", "YOUR_API_KEY")
-        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomIdPrefix\": \"my-room\"}"))
+        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomName\": \"my-room\"}"))
         .build();
     HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     System.out.println(response.body());
@@ -148,7 +148,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
     conn = http.client.HTTPSConnection("YOUR_OPENVIDU_DEPLOYMENT_DOMAIN")
 
-    payload = "{\"roomIdPrefix\": \"my-room\"}"
+    payload = "{\"roomName\": \"my-room\"}"
 
     headers = {
         'Content-Type': "application/json",
@@ -176,7 +176,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     fn main() -> Result<(), Box<dyn std::error::Error>> {
         let client = Client::new();
         let url = "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms";
-        let payload = r#"{"roomIdPrefix": "my-room"}"#;
+        let payload = r#"{"roomName": "my-room"}"#;
 
         let resp = client
             .post(url)
@@ -203,7 +203,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         CURLOPT_URL => "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(['roomIdPrefix' => 'my-room']),
+        CURLOPT_POSTFIELDS => json_encode(['roomName' => 'my-room']),
         CURLOPT_HTTPHEADER => [
             "Accept: application/json",
             "Content-Type: application/json",
@@ -237,7 +237,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
             { "Accept", "application/json" },
             { "X-API-KEY", "YOUR_API_KEY" },
         },
-        Content = new StringContent("{\"roomIdPrefix\": \"my-room\"}")
+        Content = new StringContent("{\"roomName\": \"my-room\"}")
         {
             Headers =
             {
@@ -255,26 +255,32 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
 The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `publisherUrl`, needed to embed the room into your application as explained in step 3.
 
-```json hl_lines="18-19"
+```json hl_lines="22-23"
 {
-    "roomId": "my-room-123",
-    "roomIdPrefix": "my-room",
-    "creationDate": 1620000000000,
-    "autoDeletionDate": 1900000000000,
-    "preferences": {
-        "chatPreferences": {
-            "enabled": true
-        },
-        "recordingPreferences": {
-            "enabled": true,
-            "allowAccessTo": "admin-moderator-publisher"
-        },
-        "virtualBackgroundPreferences": {
-            "enabled": true
-        }
+  "roomId": "room-123",
+  "roomName": "My Room",
+  "creationDate": 1620000000000,
+  "autoDeletionDate": 1900000000000,
+  "autoDeletionPolicy": {
+    "withMeeting": "when_meeting_ends",
+    "withRecordings": "close"
+  },
+  "config": {
+    "chat": {
+      "enabled": true
     },
-    "moderatorUrl": "http://localhost:6080/room/my-room-123?secret=123456",
-    "publisherUrl": "http://localhost:6080/room/my-room-123?secret=654321"
+    "recording": {
+      "enabled": true,
+      "allowAccessTo": "admin_moderator_speaker"
+    },
+    "virtualBackground": {
+      "enabled": true
+    }
+  },
+  "moderatorUrl": "http://localhost:6080/room/room-123?secret=123456",
+  "speakerUrl": "http://localhost:6080/room/room-123?secret=654321",
+  "status": "open",
+  "meetingEndAction": "none"
 }
 ```
 
@@ -286,11 +292,11 @@ To embed a room into your application's frontend you need the **room URL**. You 
 
 ### Automating room URL retrieval
 
-You can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
+You can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
 
-- [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/createRoom){:target="_blank"}
-- [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRoom){:target="_blank"}
-- [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRooms){:target="_blank"}
+- [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}
+- [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"}
+- [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="_blank"}
 
 ## 4. Embed the room into your application
 
@@ -403,7 +409,7 @@ This will show the list of recordings for the specified room:
 To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
 
 - [OpenVidu Meet console](../../features/recordings/#sharing-recordings-via-link)
-- [Programmatically via REST API :fontawesome-solid-external-link:{.external-link-icon}](../../assets/htmls/rest-api.html#/operations/getRecordingUrl){:target="_blank"}
+- [Programmatically via REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingUrl){:target="_blank"}
 
 ```html
 <openvidu-meet recording-url="{{ your-recording-url }}"></openvidu-meet>

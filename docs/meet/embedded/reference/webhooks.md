@@ -4,13 +4,13 @@ OpenVidu Meet sends webhooks to inform about important events happening in a roo
 
 ## Reference
 
-Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/webhooks/recordingStartedWebhook){target="\_blank"} reference documentation for a complete list of all available webhook events. They include:
+Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingStartedWebhook){target="\_blank"} reference documentation for a complete list of all available webhook events. They include:
 
-- [`meetingStarted` :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/webhooks/meetingStartedWebhook){target="\_blank"}
-- [`meetingEnded` :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/webhooks/meetingEndedWebhook){target="\_blank"}
-- [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/webhooks/recordingStartedWebhook){target="\_blank"}
-- [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/webhooks/recordingUpdatedWebhook){target="\_blank"}
-- [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/webhooks/recordingEndedWebhook){target="\_blank"}
+- [`meetingStarted` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/meetingStartedWebhook){target="\_blank"}
+- [`meetingEnded` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/meetingEndedWebhook){target="\_blank"}
+- [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingStartedWebhook){target="\_blank"}
+- [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingUpdatedWebhook){target="\_blank"}
+- [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingEndedWebhook){target="\_blank"}
 
 ## Configuration
 
