@@ -264,7 +264,7 @@ curl --request POST \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
     --header 'X-API-KEY: YOUR_API_KEY' \
-    --data '{"roomIdPrefix": "my-room"}'
+    --data '{"roomName": "my-room"}'
 ```
 
 </div>

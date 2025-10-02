@@ -32,7 +32,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         --header 'Accept: application/json' \
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
-        --data '{"roomIdPrefix": "my-room"}'
+        --data '{"roomName": "my-room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -86,7 +86,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
         url := "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms"
 
-        payload := strings.NewReader("{\"roomIdPrefix\":\"my-room\"}")
+        payload := strings.NewReader("{\"roomName\":\"my-room\"}")
 
         req, _ := http.NewRequest("POST", url, payload)
 
@@ -121,7 +121,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     request["Content-Type"] = 'application/json'
     request["Accept"] = 'application/json'
     request["X-API-KEY"] = 'YOUR_API_KEY'
-    request.body = "{\"roomIdPrefix\": \"my-room\"}"
+    request.body = "{\"roomName\": \"my-room\"}"
 
     response = http.request(request)
     puts response.read_body
@@ -135,7 +135,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         .header("Content-Type", "application/json")
         .header("Accept", "application/json")
         .header("X-API-KEY", "YOUR_API_KEY")
-        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomIdPrefix\": \"my-room\"}"))
+        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomName\": \"my-room\"}"))
         .build();
     HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     System.out.println(response.body());
@@ -148,7 +148,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
     conn = http.client.HTTPSConnection("YOUR_OPENVIDU_DEPLOYMENT_DOMAIN")
 
-    payload = "{\"roomIdPrefix\": \"my-room\"}"
+    payload = "{\"roomName\": \"my-room\"}"
 
     headers = {
         'Content-Type': "application/json",
@@ -176,7 +176,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     fn main() -> Result<(), Box<dyn std::error::Error>> {
         let client = Client::new();
         let url = "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms";
-        let payload = r#"{"roomIdPrefix": "my-room"}"#;
+        let payload = r#"{"roomName": "my-room"}"#;
 
         let resp = client
             .post(url)
@@ -203,7 +203,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         CURLOPT_URL => "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(['roomIdPrefix' => 'my-room']),
+        CURLOPT_POSTFIELDS => json_encode(['roomName' => 'my-room']),
         CURLOPT_HTTPHEADER => [
             "Accept: application/json",
             "Content-Type: application/json",
@@ -237,7 +237,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
             { "Accept", "application/json" },
             { "X-API-KEY", "YOUR_API_KEY" },
         },
-        Content = new StringContent("{\"roomIdPrefix\": \"my-room\"}")
+        Content = new StringContent("{\"roomName\": \"my-room\"}")
         {
             Headers =
             {
@@ -253,28 +253,30 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     }
     ```
 
-The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `publisherUrl`, needed to embed the room into your application as explained in step 3.
+The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `speakerUrl`, needed to embed the room into your application as explained in step 3.
 
 ```json hl_lines="18-19"
 {
     "roomId": "my-room-123",
-    "roomIdPrefix": "my-room",
+    "roomName": "my-room",
     "creationDate": 1620000000000,
     "autoDeletionDate": 1900000000000,
-    "preferences": {
-        "chatPreferences": {
+    "config": {
+        "chat": {
             "enabled": true
         },
-        "recordingPreferences": {
+        "recording": {
             "enabled": true,
-            "allowAccessTo": "admin-moderator-publisher"
+            "allowAccessTo": "admin_moderator_speaker",
         },
-        "virtualBackgroundPreferences": {
+        "virtualBackground": {
             "enabled": true
         }
     },
     "moderatorUrl": "http://localhost:6080/room/my-room-123?secret=123456",
-    "publisherUrl": "http://localhost:6080/room/my-room-123?secret=654321"
+    "speakerUrl": "http://localhost:6080/room/my-room-123?secret=654321",
+    "status": "open",
+    "meetingEndAction": "none"
 }
 ```
 
