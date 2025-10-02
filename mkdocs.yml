@@ -299,6 +299,8 @@ plugins:
         - meet/embedded/tutorials/webcomponent.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent-advanced.md: An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
         - meet/embedded/tutorials/recordings.md: How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings. 
+        - meet/embedded/tutorials/webhooks.md: Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
+        - meet/embedded/reference/*.md: OpenVidu Meet - Reference documentation
         OpenVidu Platform:
         - docs/index.md: OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
         - docs/getting-started.md: OpenVidu Platform - Getting started
@@ -306,7 +308,6 @@ plugins:
         - docs/developing-your-openvidu-app/index.md: OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
         - docs/developing-your-openvidu-app/how-to.md: OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.
         - docs/reference-docs/*.md: OpenVidu Platform - Reference documentation
-          OpenVidu Platform tutorials:
         - docs/tutorials/advanced-features/index.md: Explore more advanced features of LiveKit with our tutorials on recording, S3, Azure, and more.
         - docs/tutorials/ai-services/index.md: Learn how to integrate AI services in your OpenVidu applications.
         - docs/tutorials/angular-components/index.md: Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
