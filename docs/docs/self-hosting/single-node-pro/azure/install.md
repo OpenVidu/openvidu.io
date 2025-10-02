@@ -5,10 +5,6 @@ description: Learn how to deploy OpenVidu Single Node PRO on Azure using Templat
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
-
 This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in Azure. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with Template Spec of ARM.
 
 To use the Azure template you just need to click the button below (you will be redirected to Azure).
@@ -34,6 +30,8 @@ To deploy the template you need to fill the following parameters.
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
+--8<-- "shared/self-hosting/azure-meet.md"
+
 
 ### OpenVidu Single Node PRO configuration
 
@@ -43,11 +41,11 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
     Parameters of this section look like this:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/self-hosting/single-node/azure/single-node-pro-config.png)
+    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/self-hosting/single-node/azure/single-node-pro-config.png)
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 
-    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../../production-ready/performance/).
+    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
 ### Azure Instance Configuration
 
@@ -65,6 +63,8 @@ Specify properties for the Azure instance that will host Openvidu.
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
 
+--8<-- "shared/self-hosting/azure-additional-flags.md"
+
 --8<-- "shared/self-hosting/azure-turn-domain.md"
 
 ## Deploying the stack
@@ -73,13 +73,13 @@ Whenever you are satisfied with your Template paremeters, just click on _"Next"_
 
 !!! warning
 
-    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
 When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
 
 === "Check deployment outputs in Azure Key Vault"
 
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
+    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
 
     2. Once you are in the Key Vault on the left panel click on _"Objects"_ 🡒 _"Secrets"_.
 
@@ -104,7 +104,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     SSH to the instance and navigate to the config folder `/opt/openvidu/config`. Files with the deployment outputs are:
 
     - `openvidu.env`
-    - `app.env`
+    - `meet.env`
 
 ## Configure your application to use the deployment 
 
@@ -112,9 +112,9 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and URL to point your applications would be:
 
-- **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in the Key Vault Secret of `LIVEKIT-API-KEY` or in the instance in `openvidu.env`.
-- **API Secret**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/azure-credentials-general.md"
+--8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
+
 
 ## Troubleshooting initial Azure stack creation
 

@@ -24,6 +24,13 @@
 	padding: 0 25px !important;
 	text-align: center !important;
 }
+
+.ov-call-commercial-feature-cards > ul > li {
+	display: flex !important;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
 .ov-call-commercial-title {
 	text-align: center !important;
 	font-size: 3em !important;

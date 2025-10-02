@@ -7,4 +7,4 @@ description: How to upgrade OpenVidu Single Node PRO in Azure.
 
 In Azure, we recommend upgrading by redeploying [OpenVidu Single Node Azure](../azure/install.md) with the latest version.
 
-However, if you prefer to upgrade the OpenVidu Single Node without redeploying, you can follow the steps outlined in the [Upgrade OpenVidu Single Node - On Premises](../on-premises/upgrade-pro.md) section.
+However, if you prefer to upgrade the OpenVidu Single Node without redeploying, you can follow the steps outlined in the [Upgrade OpenVidu Single Node - On Premises](../on-premises/upgrade.md) section.

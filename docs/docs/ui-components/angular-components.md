@@ -121,7 +121,7 @@ You can check out all component events in the [Angular Components API Reference]
 
 ## Applications
 
-A practical example showcases the potential of Angular Components is our production-ready flagship application, [**OpenVidu Call**](../openvidu-call/index.md). This application is built using Angular Components and demonstrates the power and flexibility of the library.
+A practical example showcases the potential of Angular Components is our production-ready flagship application, [**OpenVidu Meet**](../../meet/index.md). This application is built using Angular Components and demonstrates the power and flexibility of the library.
 
 ## References
 

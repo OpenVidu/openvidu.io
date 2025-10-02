@@ -2,24 +2,27 @@
 
 # openvidu-docs
 
-- [openvidu-docs](#openvidu-docs)
-  - [Development](#development)
-  - [Docs writing guidelines](#docs-writing-guidelines)
-    - [Adding a new page](#adding-a-new-page)
-    - [Adding a new shared snippet](#adding-a-new-shared-snippet)
-  - [Versioning](#versioning)
-  - [Versioning with GitHub Actions](#versioning-with-github-actions)
-    - [Publishing a new version](#publishing-a-new-version)
-    - [Overwriting the latest version](#overwriting-the-latest-version)
-    - [Overwriting a past version](#overwriting-a-past-version)
-  - [Versioning locally](#versioning-locally)
-    - [Prerequisites](#prerequisites)
-    - [Publishing a new version](#publishing-a-new-version-1)
-    - [Overwriting the latest version](#overwriting-the-latest-version-1)
-    - [Overwriting a past version](#overwriting-a-past-version-1)
-    - [Understanding the versioning script](#understanding-the-versioning-script)
-  - [Testing versioning locally](#testing-versioning-locally)
-  - [Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_](#sync-changes-between-openviduio-and-livekit-tutorialsopenviduio)
+- [Development](#development)
+- [Docs writing guidelines](#docs-writing-guidelines)
+  - [Branches](#branches)
+  - [Adding a new page](#adding-a-new-page)
+  - [Adding a new shared snippet](#adding-a-new-shared-snippet)
+  - [Mkdocs Material tag system](#mkdocs-material-tag-system)
+    - [Theme-dependent images/videos](#theme-dependent-imagesvideos)
+- [Versioning](#versioning)
+- [Versioning with GitHub Actions](#versioning-with-github-actions)
+  - [Publishing a new version](#publishing-a-new-version)
+  - [Overwriting the latest version](#overwriting-the-latest-version)
+  - [Overwriting a past version](#overwriting-a-past-version)
+- [Versioning locally](#versioning-locally)
+  - [Prerequisites](#prerequisites)
+  - [Publishing a new version](#publishing-a-new-version-1)
+  - [Overwriting the latest version](#overwriting-the-latest-version-1)
+  - [Overwriting a past version](#overwriting-a-past-version-1)
+  - [Understanding the versioning script](#understanding-the-versioning-script)
+- [Testing versioning locally](#testing-versioning-locally)
+- [Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_](#sync-changes-between-openviduio-and-livekit-tutorialsopenviduio)
+
 
 ## Development
 
@@ -71,7 +74,21 @@ When creating a new page, follow these steps:
    ```
 
 3. **Reference in `mkdocs.yml`**:  
-   Add the new page to the `nav` section in [`mkdocs.yml`](mkdocs.yml) (if you want to include it in the navigation) and set the title.
+   Two changes must be made:
+
+   
+   - Add the new page to the `nav` section in [`mkdocs.yml`](mkdocs.yml) (if you want to include it in the navigation) and set the title.
+
+   - Include the page (relative to the docs folder) in mkdocs.yml in the mkdocs-llmstxt plugin configuration, under the corresponding section (OpenVidu for non-versioned generic pages, OpenVidu Meet or Platform for versioned pages specific to the corresponding technology):
+
+      ```yaml
+      plugins:
+        - llmstxt:
+            markdown_description: Self-hosted videoconference solution and SDK
+            sections:
+              OpenVidu Meet:
+              - meet/newpage.md: Brief description # copy here the description from the metadata of the .md file.
+      ```
 
 4. **Update custom versioning scripts (if needed)**:
    - **Non-versioned pages**: If the new page is not versioned, add it to the `NON_VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
@@ -106,7 +123,87 @@ When creating a new shared snippet, follow these steps:
 > The path is relative to the root of the repository.
 
 > [!IMPORTANT]
-> If the new snippet contains links to other pages, the same rules as for pages apply. However, keep in mind that links will be relative to the page where the snippet is included. Therefore, ensure all referencing files are at the same level in the hierarchy.
+> If the new snippet contains links to other pages, the same rules as for pages apply. Since the release of Mkdocs 1.6, it is possible to use absolute links to other pages, and Mkdocs will make them relative to the `docs_dir` root folder thanks to [this configuration options in `mkdocs.yml`](https://github.com/OpenVidu/openvidu.io/blob/e1d6bb08d7f6e222bf9a0c420bd79b552fb0a25c/mkdocs.yml#L194-L195). So, now any document (e.g. "dir1/foo.md") can link to the document "dir2/bar.md" as `[link](/dir2/bar.md)`, in addition to the previously only correct way `[link](../dir2/bar.md)`.
+> 
+> **This allows to use local links in shared snippets that are embedded in pages with different hierarchy!**.
+
+### Mkdocs Material tag system
+
+We use a tag system to determine which JS scripts should be included and run for each page:
+
+```markdown
+---
+title: My page
+tags:
+  - tag1
+  - tag2
+  - ...
+---
+```
+
+These are the tags currently used:
+
+- `setupwowjs`: add this tag to the page if there are [wow.js](https://wowjs.uk/) animations in it (elements with class `wow`):
+
+  ```html
+  <div class="wow animated animatedFadeInUp fadeInUp">
+    ...
+  </div>
+  ```
+
+- `setupcardglow`: add this tag to the page if there are cards with glow effect in it. The HTML structure of these cards must comply with:
+
+  ```html
+  <div class="feature-cards">
+    <div class="grid cards">
+      ...
+    </div>
+  </div>
+  ```
+
+- `setupcarousel`: add this tag to the page if there are [Flickity carousels](https://flickity.metafizzy.co/) in it. The HTML structure of these carousels must comply with:
+
+  ```html
+  <div class="carousel">
+    <div class="carousel-cell">
+      ...
+    </div>
+    ...
+  </div>
+  ```
+
+- `setupcustomgallery`: add this tag to the page if there are custom [GLightbox](https://biati-digital.github.io/glightbox/) elements in it. This means that if a Markdown page only contains Markdown images (e.g. `![Image description](image-url.jpg)`), this tag is **not necessary** (the default behavior of the plugin mkdocs-glightbox will be used to automatically create the gallery). But if the page contains HTML images or videos marked with the glightbox class, this tag **is required**. The HTML structure of these elements is like this:
+
+    For images:
+
+    ```html
+    <a class="glightbox" href="image.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="image.png" loading="lazy" class="control-height"/></a>
+    ```
+
+    For videos:
+
+    ```html
+    <a class="glightbox" href="video.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="video.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    ```
+
+#### Theme-dependent images/videos
+
+For images using the default Mkdocs Material syntax (using the `#only-dark` and `#only-light` suffixes):
+
+```markdown
+![Image description](image-dark.png#only-dark)
+![Image description](image-light.png#only-light)
+```
+
+For images/videos using the custom GLightbox syntax, apart from having tag `setupcustomgallery` in its page, this must be the HTML structure:
+
+```html
+<a class="glightbox" href="image-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="image-dark.png#only-dark" loading="lazy" class="round-corners" alt="Image description"/></a>
+<a class="glightbox" href="image-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="image-light.png#only-light" loading="lazy" class="round-corners" alt="Image description"/></a>
+```
+
+  > - The `#only-dark` and `#only-light` suffixes must be present in the `src` attribute of the `<img>` or `<video>` elements, but **NOT** in the `href` attribute of the `<a>` parent element.
+  > - It is important that each HTML `<a>` element is a **one-liner**. There are some strange behaviors when they are not.
 
 ## Versioning
 

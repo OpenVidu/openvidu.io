@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built for **iOS**, using **Swif
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Swift SDK](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -133,7 +133,7 @@ If these URLs are left empty, the user will be prompted to enter them when the a
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ios.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
 </div>
 
@@ -167,7 +167,7 @@ Before joining a room, the `ConnectView.swift` defines the view for the connecti
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ios.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ios.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
 </div>
 

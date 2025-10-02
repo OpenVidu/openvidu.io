@@ -9,7 +9,7 @@ GH_BRANCH="gh-pages"
 
 ASSETS=("assets" "javascripts" "stylesheets" "search")
 NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog") # And root index.html and 404.html
-VERSIONED_PAGES=("docs")
+VERSIONED_PAGES=("docs" "meet")
 
 validateArgs() {
     # If there is no version passed to the script as an argument, exit

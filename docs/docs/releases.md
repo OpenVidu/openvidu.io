@@ -2,6 +2,42 @@
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
 ---
 
+## 3.4.0
+
+!!! info "For the Release Notes of OpenVidu Meet 3.4.0, please visit here: [OpenVidu Meet 3.4.0](../meet/releases.md#340){.meet-link-color}"
+
+### Changelog
+
+- **LiveKit stack updated to v1.9.0**: OpenVidu is now based on LiveKit v1.9.0, which includes several improvements and bug fixes. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/releases/tag/v1.9.0){:target="\_blank"}.
+- **Egress updated to v1.10.0**: the Egress service has been updated to v1.10.0, which includes several improvements and bug fixes when exporting media from rooms. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/releases/tag/v1.10.0){:target="\_blank"}.
+- **OpenVidu Single Node native deployment in Google Cloud Platform (GCP)**: you can now deploy OpenVidu Single Node in GCP using its native resources thanks to our new Terraform template. Follow the [GCP deployment guide](./self-hosting/single-node/gcp/install.md). Templates for OpenVidu Elastic and OpenVidu High Availability in GCP are coming soon.
+- **No need for a domain name to deploy OpenVidu in production**: thanks to [sslip.io :fontawesome-solid-external-link:{.external-link-icon}](https://sslip.io/){:target="\_blank"} integration, you can now deploy OpenVidu in production with a valid SSL certificate without owning a custom domain name. Just deploy OpenVidu 3.4.0 and skip the domain name configuration during the installation process: OpenVidu will automatically detect your public IP and provide a secure domain name using sslip.io.
+- **OpenVidu agents new configurations**: configure a custom CPU threshold to accept new jobs, and modify the agent's log level. See [Change CPU load threshold](./ai/openvidu-agents/speech-processing-agent.md#change-cpu-load-threshold) and [Log level](./ai/openvidu-agents/speech-processing-agent.md#log-level).
+- **Custom AI agents now natively support [graceful shutdown](./ai/custom-agents.md#elasticity-and-graceful-shutdowns)**, ensuring no interruptions in the services provided by your custom agents when your OpenVidu cluster scales down.
+- **OpenVidu Dashboard optimizations**: the addition of several new search indexes to the database has significantly improved the response time of the [OpenVidu Dashboard](./self-hosting/production-ready/observability/openvidu-dashboard.md) when loading historical data.
+- Fixed bug that caused empty `participantInfo` object when receiving [transcription events](./ai/live-captions.md#how-to-receive-live-captions-in-your-frontend-application) using the Speech Processing agent. This fix was also contributed to LiveKit open source ([PR 3735 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/3735){:target="\_blank"}).
+- **New load balancing strategy for Egress**: egresses were previously distributed across Media Nodes using a "binpack" strategy (trying to fill up one node before using the next one). This could lead to unbalanced CPU usage across nodes in certain scenarios. There is now a new load balancing strategy called "cpuload" that prioritizes nodes with lower CPU usage, leading to a more balanced cluster in terms of CPU utilization. This is now the default strategy. Learn how to configure it [here](./self-hosting/production-ready/scalability.md#egress).
+- **Egress ability to auto kill processes under high CPU load can be disabled**: by default, if an egress detects a high CPU load (>95%) during a sustained period of time (10 seconds), the parent process automatically kills the most consuming egress. This helps preventing it from affecting the performance of other processes in the same Media Node. This default behavior can be now disabled if necessary. Learn how to do so [here](./self-hosting/production-ready/scalability.md#egress-cpu-overload-killer).
+- **Extended scalability documentation**: we have improved our [scalability documentation](./self-hosting/production-ready/scalability.md) explaining in detail how OpenVidu handles Room, Egress, Ingress and Agent allocation in multi-node deployments. All load balancing strategies and how to configure them are now explained in depth.
+
+### Version table
+
+| Artifact               | Version | Info | Link         |
+| ---------------------- | ------- | ---- | ---------- |
+| livekit/livekit-server | v1.9.0  | :material-information-outline:{ title="Version of livekit-server in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/livekit/livekit/releases/tag/v1.9.0){:target="\_blank"} |
+| mediasoup              | 3.12.16 | :material-information-outline:{ title="Version of mediasoup in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/versatica/mediasoup/releases/tag/3.12.16){:target="\_blank"} |
+| livekit/egress         | v1.10.0  | :material-information-outline:{ title="Egress version used by OpenVidu deployments. Used to export media from a Room (for example, recordings or RTMP broadcasting)" } | [:octicons-link-24:](https://github.com/livekit/egress/releases/tag/v1.10.0){:target="\_blank"} |
+| livekit/ingress        | v1.4.3  | :material-information-outline:{ title="Ingress version used by OpenVidu deployments. Used to import media into a Room (for example, an MP4 video or an RTSP stream)" } | [:octicons-link-24:](https://github.com/livekit/ingress/releases/tag/v1.4.3){:target="\_blank"} |
+| livekit/agents        | v1.2.6  | :material-information-outline:{ title="LiveKit Agents framework version. Used to add AI capabilities to your Rooms" } | [:octicons-link-24:](https://github.com/livekit/agents/releases/tag/livekit-agents%401.2.6){:target="\_blank"} |
+| MinIO | 2025.5.24 | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/minio/minio/releases/tag/RELEASE.2025-05-24T17-08-30Z){:target="\_blank"} |
+| Caddy | 2.10.0 | :material-information-outline:{ title="Version of Caddy used by OpenVidu deployments. It is a reverse proxy used as a load balancer to distribute client connections across your nodes and automatically manage your TLS certificate" } |  [:octicons-link-24:](https://github.com/caddyserver/caddy/releases/tag/v2.10.0){:target="\_blank"}|
+| MongoDB | 8.0.9 | :material-information-outline:{ title="Version of MongoDB used by OpenVidu deployments. Used to store analytics and monitoring persistent data. In <i>OpenVidu High Availability</i> this is an instance of a <i>MongoDB Replica Set</i>" } | [:octicons-link-24:](https://www.mongodb.com/docs/manual/release-notes/8.0/#8.0.9---may-1--2025){:target="\_blank"} |
+| Redis | 7.4.4 | :material-information-outline:{ title="Version of Redis used by OpenVidu deployments. Used to share transient information between Media Nodes and coordinate them. In <i>OpenVidu High Availability</i> this is an instance of a <i>Redis Cluster</i>" } | [:octicons-link-24:](https://github.com/redis/redis/releases/tag/7.4.4){:target="\_blank"} |
+| Grafana | 11.6.2 | :material-information-outline:{ title="Version of Grafana used by OpenVidu deployments. Observability module used to query and visualize logs and metrics in dashboards" } | [:octicons-link-24:](https://github.com/grafana/grafana/releases/tag/v11.6.2){:target="\_blank"} |
+| Prometheus | 3.4.0 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Observability module from Grafana stack, used to collect metrics from Media Nodes and send them to Mimir" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.4.0){:target="\_blank"} |
+| Promtail / Loki | 3.5.1 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.1){:target="\_blank"} |
+| Mimir | 2.16.0 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-2.16.0){:target="\_blank"} |
+
 ## 3.3.0
 
 ### Changelog
@@ -47,7 +83,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
 
 ### Changelog
 
-- **OpenVidu Single Node PRO**: OpenVidu Single Node PRO is a new type of OpenVidu deployment targeting users that want to deploy OpenVidu as a single-node setup but that still want the [2x performance boost](self-hosting/production-ready/performance.md) and the [advanced observability](self-hosting/production-ready/observability/index.md) provided by multi-node OpenVidu PRO deployments.
+- **OpenVidu Single Node PRO**: OpenVidu Single Node PRO is a new type of OpenVidu deployment targeting users that want to deploy OpenVidu as a single-node setup, but that still want the [2x performance boost](self-hosting/production-ready/performance.md) and the [advanced observability](self-hosting/production-ready/observability/index.md) provided by multi-node OpenVidu PRO deployments.
 - **Azure deployments (Beta)**: OpenVidu now supports native deployments in Microsoft Azure. You can now deploy [OpenVidu Single Node COMMUNITY](self-hosting/single-node/azure/install.md), [OpenVidu Single Node PRO](self-hosting/single-node-pro/azure/install.md), [OpenVidu Elastic](self-hosting/elastic/azure/install.md) and [OpenVidu High Availability](self-hosting/ha/azure/install.md) in Azure using ARM templates. _During version 3.2.0, Azure deployments will be considered in Beta_.
 - **New Azure recording tutorials**: OpenVidu deployments in Azure use Azure Blob Storage to store recordings (instead of S3). For this reason, we have extended our recording tutorials with Azure Blob Storage compatible examples. You can find them in the following links:
     - [Recording Basic Azure](tutorials/advanced-features/recording-basic-azure.md).
@@ -213,7 +249,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
     - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/home/egress/room-composite/){:target="\_blank"}) support when using mediasoup.
     - WebHooks ([LiveKit reference](https://docs.livekit.io/home/server/webhooks/){:target="\_blank"}) supported against a local [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally).
 - Production deployments have a better private IP discovery process when there are multiple valid private IPs in the same host. This will make more deployments work out-of-the-box without the need of manual intervention.
-- [OpenVidu PRO Evaluation Mode](self-hosting/local.md#openvidu-pro) improved. Before, a maximum a 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
+- [OpenVidu PRO Evaluation Mode](self-hosting/local.md#openvidu-pro) improved. Before, a maximum of 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example, you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
 - Minor bug fixes related to [OpenVidu Call](openvidu-call/index.md).
 
 ### Known limitations

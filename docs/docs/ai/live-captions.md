@@ -31,25 +31,17 @@ live_captions:
 
 ## How to receive Live Captions in your frontend application
 
-Live Captions are received in your frontend application using the [Text Stream API](https://docs.livekit.io/home/client/data/text-streams/#handling-incoming-streams){:target="\_blank"} of LiveKit client SDKs. You must specifically subscribe to the Room topic **`lk.transcription`** to automatically receive transcription events. For example, in JavaScript:
+Live Captions are received in your frontend application using the [Text Stream API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/data/text-streams/#handling-incoming-streams){:target="\_blank"} of LiveKit client SDKs. You must specifically subscribe to the Room topic **`lk.transcription`** to automatically receive transcription events. For example, in JavaScript:
 
 ```javascript {#live-captions-js}
 room.registerTextStreamHandler("lk.transcription", async (reader, participantInfo) => {
     const message = await reader.readAll();
     const isFinal = reader.info.attributes["lk.transcription_final"] === "true";
     const trackId = reader.info.attributes["lk.transcribed_track_id"];
-
-    let participant;
-    if (localParticipant.audioTrackPublications.has(trackId)) {
-      participant = room.localParticipant;
-    } else {
-      participant = room.remoteParticipants.values().find(p => p.audioTrackPublications.has(trackId));
-    }
-
     if (isFinal) {
-      console.log(`Participant ${participant.identity} and track ${trackId} said: ${message}`);
+      console.log(`Participant ${participantInfo.identity} and track ${trackId} said: ${message}`);
     } else {
-      console.log(`Participant ${participant.identity} and track ${trackId} is saying: ${message}`);
+      console.log(`Participant ${participantInfo.identity} and track ${trackId} is saying: ${message}`);
     }
   }
 );
@@ -57,16 +49,9 @@ room.registerTextStreamHandler("lk.transcription", async (reader, participantInf
 
 !!! info
 
-    Refer to [LiveKit documentation](https://docs.livekit.io/agents/voice-agent/transcriptions/#frontend-integration){:target="\_blank"} to see how to handle transcription events in other frontend platforms.
+    Refer to [LiveKit documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/voice-agent/transcriptions/#frontend-integration){:target="\_blank"} to see how to handle transcription events in other frontend platforms.
 
 - From the `participantInfo` object of the text stream handler you can get the participant's `identity` that originated the transcription event.
-
-    !!! Bug
-
-        Due to a [bug in LiveKit Server](https://github.com/livekit/agents/issues/2554){:target="\_blank"}, the `participantInfo.identity` property may be empty. You can still get the participant owning the transcribed audio track using the `lk.transcribed_track_id` attribute of the message (see the [snippet](#live-captions-js) above).
-        
-        This will be fixed in a future release of OpenVidu.
-
 - From the `reader.info.attributes` you can get the following properties:
 
     - `lk.transcription_final`: string that is `"true"` if the transcription is final or `"false"` if it is an interim. See [Final vs Interim transcriptions](#final-vs-interim-transcriptions) section for more details.
@@ -90,19 +75,19 @@ Below is the list of cloud providers that can handle the Live Captions service.
 
 | AI provider                                                                           | YAML property  | Service description                                                                                                                                                                      | Interim results  |
 | ------------------------------------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | Uses [Amazon Transcribe](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
-| ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | Uses [Azure Speech service](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
-| ![Azure OpenAI](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}        | `azure_openai` | Uses [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service/){:target="\_blank"}                                                                           | :material-close: |
-| ![Google Cloud](../../assets/images/ai-providers/google.svg){.ai-provider-icon}       | `google`       | Uses [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text){:target="\_blank"}                                                                                           | :material-close: |
-| ![OpenAI](../../assets/images/ai-providers/openai.svg){.ai-provider-icon}             | `openai`       | Uses [OpenAI Speech to text](https://platform.openai.com/docs/guides/speech-to-text){:target="\_blank"}                                                                                  | :material-close: |
-| ![Groq](../../assets/images/ai-providers/groq.svg){.ai-provider-icon}                 | `groq`         | Uses [Groq Speech](https://console.groq.com/docs/speech-to-text){:target="\_blank"}                                                                                                      | :material-close: |
-| ![Deepgram](../../assets/images/ai-providers/deepgram.svg){.ai-provider-icon}         | `deepgram`     | Uses [Deepgram Speech-to-Text API](https://deepgram.com/product/speech-to-text){:target="\_blank"}                                                                                       | :material-check: |
-| ![AssemblyAI](../../assets/images/ai-providers/assemblyai.svg){.ai-provider-icon}     | `assemblyai`   | Uses [AssemblyAI Speech-to-Text API](https://www.assemblyai.com/products/speech-to-text){:target="\_blank"}                                                                              | :material-check: |
-| ![Fal](../../assets/images/ai-providers/fal.svg){.ai-provider-icon}                   | `fal`          | Uses [Fal Speech-to-Text API](https://docs.fal.ai/guides/convert-speech-to-text/){:target="\_blank"}                                                                                     | :material-close: |
-| ![Clova](../../assets/images/ai-providers/clova.svg){.ai-provider-icon}               | `clova`        | Uses [Naver Clova Speech Recognition](https://api.ncloud-docs.com/docs/en/ai-naver-clovaspeechrecognition-stt){:target="\_blank"}. Specialized in Japanese, Korean and Chinese languages | :material-close: |
-| ![Speechmatics](../../assets/images/ai-providers/speechmatics.svg){.ai-provider-icon} | `speechmatics` | Uses [Speechmatics Real-Time API](https://docs.speechmatics.com/introduction/rt-guide){:target="\_blank"}                                                                                | :material-close: |
-| ![Gladia](../../assets/images/ai-providers/gladia.svg){.ai-provider-icon}             | `gladia`       | Uses [Gladia Speech-to-Text API](https://www.gladia.io/product/async-transcription){:target="\_blank"}                                                                                   | :material-close: |
-| ![Sarvam](../../assets/images/ai-providers/sarvam.svg){.ai-provider-icon}             | `sarvam`       | Uses [Sarvam Speech-to-Text API](https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe){:target="\_blank"}. Optimized for Indian languages                                 | :material-close: |
+| ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | Uses [Amazon Transcribe :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
+| ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | Uses [Azure Speech service :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
+| ![Azure OpenAI](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}        | `azure_openai` | Uses [Azure OpenAI :fontawesome-solid-external-link:{.external-link-icon}](https://azure.microsoft.com/en-us/products/ai-services/openai-service/){:target="\_blank"}                                                                           | :material-close: |
+| ![Google Cloud](../../assets/images/ai-providers/google.svg){.ai-provider-icon}       | `google`       | Uses [Google Cloud Speech-to-Text :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/speech-to-text){:target="\_blank"}                                                                                           | :material-close: |
+| ![OpenAI](../../assets/images/ai-providers/openai.svg){.ai-provider-icon}             | `openai`       | Uses [OpenAI Speech to text :fontawesome-solid-external-link:{.external-link-icon}](https://platform.openai.com/docs/guides/speech-to-text){:target="\_blank"}                                                                                  | :material-close: |
+| ![Groq](../../assets/images/ai-providers/groq.svg){.ai-provider-icon}                 | `groq`         | Uses [Groq Speech :fontawesome-solid-external-link:{.external-link-icon}](https://console.groq.com/docs/speech-to-text){:target="\_blank"}                                                                                                      | :material-close: |
+| ![Deepgram](../../assets/images/ai-providers/deepgram.svg){.ai-provider-icon}         | `deepgram`     | Uses [Deepgram Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://deepgram.com/product/speech-to-text){:target="\_blank"}                                                                                       | :material-check: |
+| ![AssemblyAI](../../assets/images/ai-providers/assemblyai.svg){.ai-provider-icon}     | `assemblyai`   | Uses [AssemblyAI Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.assemblyai.com/products/speech-to-text){:target="\_blank"}                                                                              | :material-check: |
+| ![Fal](../../assets/images/ai-providers/fal.svg){.ai-provider-icon}                   | `fal`          | Uses [Fal Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.fal.ai/guides/convert-speech-to-text/){:target="\_blank"}                                                                                     | :material-close: |
+| ![Clova](../../assets/images/ai-providers/clova.svg){.ai-provider-icon}               | `clova`        | Uses [Naver Clova Speech Recognition :fontawesome-solid-external-link:{.external-link-icon}](https://api.ncloud-docs.com/docs/en/ai-naver-clovaspeechrecognition-stt){:target="\_blank"}. Specialized in Japanese, Korean and Chinese languages | :material-close: |
+| ![Speechmatics](../../assets/images/ai-providers/speechmatics.svg){.ai-provider-icon} | `speechmatics` | Uses [Speechmatics Real-Time API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.speechmatics.com/introduction/rt-guide){:target="\_blank"}                                                                                | :material-close: |
+| ![Gladia](../../assets/images/ai-providers/gladia.svg){.ai-provider-icon}             | `gladia`       | Uses [Gladia Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.gladia.io/product/async-transcription){:target="\_blank"}                                                                                   | :material-close: |
+| ![Sarvam](../../assets/images/ai-providers/sarvam.svg){.ai-provider-icon}             | `sarvam`       | Uses [Sarvam Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe){:target="\_blank"}. Optimized for Indian languages                                 | :material-close: |
 
 This is the description of the columns in the table above:
 

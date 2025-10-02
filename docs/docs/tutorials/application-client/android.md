@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built for **Android**, using **
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Android Kotlin SDK](https://docs.livekit.io/client-sdk-android/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -48,7 +48,7 @@ This Android project has been generated with Android Studio. You may come across
 
 The activity layout files are located in the `app/src/main/res/layout` directory.
 
-To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK](https://docs.livekit.io/client-sdk-android/){:target="\_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
+To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="\_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
 
 ```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-android/app/build.gradle.kts#L43' target='_blank'>build.gradle.kts</a>"
 dependencies {
@@ -138,7 +138,7 @@ If these URLs are left empty, the user will be prompted to enter the URLs when t
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-android.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-android.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-android.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
 </div>
 
@@ -385,7 +385,7 @@ The `connectToRoom()` method performs the following actions:
     }
     ```
 
-    This method sends a POST request using [Ktor Client](https://ktor.io/docs/client-create-and-configure.html){:target="\_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
+    This method sends a POST request using [Ktor Client :fontawesome-solid-external-link:{.external-link-icon}](https://ktor.io/docs/client-create-and-configure.html){:target="\_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
 
 5.  It connects to the room using the LiveKit URL and the token.
 6.  It publishes the camera and microphone tracks to the room using `setMicrophoneEnabled()` and `setCameraEnabled()` methods from `room.localParticipant`.

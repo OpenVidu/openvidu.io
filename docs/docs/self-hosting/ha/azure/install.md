@@ -5,9 +5,6 @@ description: Learn how to deploy OpenVidu High Availability on Azure using Templ
 
 # OpenVidu High Availability installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
 
 !!! info
     
@@ -61,6 +58,8 @@ To deploy the template you need to fill the following parameters.
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
+--8<-- "shared/self-hosting/azure-meet.md"
+
 ### OpenVidu HA Configuration
 
 In this section, you need to specify some properties needed for the OpenVidu HA deployment.
@@ -75,7 +74,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 
-    For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../../production-ready/performance/).
+    For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
 ### Azure Instance Configuration
 
@@ -95,21 +94,13 @@ You need to specify some properties for the Azure instances that will be created
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
-=== "Media Nodes Scaling Set Configuration"
-
-    Parameters in this section look like this:
-
-    <figure markdown>
-    ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/ha/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
-    </figure>
-
-    The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
-
-    The **Scale Target CPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy](https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling){:target=_blank}.
+--8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
 
 --8<-- "shared/self-hosting/azure-scale-in-config.md"
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
+
+--8<-- "shared/self-hosting/azure-additional-flags.md"
 
 ### (Optional) TURN server configuration with TLS
 
@@ -131,7 +122,7 @@ Whenever you are satisfied with your Template paremeters, just click on _"Next"_
 
 !!! warning
 
-    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
     In case that the error is related to a conflict in the creation of a network interface, just redeploy in another resource group with a different **Stack Name**.
 
@@ -139,7 +130,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
 === "Check deployment outputs in Azure Key Vault"
 
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
+    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
 
     2. Once you are in the Key Vault on the left panel click on _"Objects"_ 🡒 _"Secrets"_.
 
@@ -184,7 +175,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     Once inside the Master Node, navigate to the config folder `/opt/openvidu/config/cluster`. Files with the access credentials outputs are:
 
     - `openvidu.env`
-    - `master_node/app.env`
+    - `master_node/meet.env`
 
     !!! warning
 
@@ -196,16 +187,9 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and URL to point your applications would be:
 
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in the Key Vault Secret of `LIVEKIT-API-KEY` or in the instance in `openvidu.env`.
-    - **API Secret**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/azure-credentials-general.md"
+--8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
 
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. For example, `https://openvidu.example.io/`.
-    - **Username**: `OPENVIDUAPP`.
-    - **Password**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
- 
 ## Troubleshooting initial Azure stack creation
 
 !!! info

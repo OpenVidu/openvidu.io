@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mike mkdocs-material mkdocs-glightbox
+          pip install mike mkdocs-material mkdocs-glightbox mkdocs-llmstxt
 
       - name: Configure Git Credentials
         run: |

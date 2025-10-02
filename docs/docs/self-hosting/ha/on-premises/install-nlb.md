@@ -45,7 +45,7 @@ For the Master Node, the following services are configured:
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as an internal reverse proxy for all services.
 - **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **OpenVidu Call (Default Application module)**, an optional ready-to-use videoconferencing application.
+- **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 For the Media Nodes, the following services are configured:
@@ -88,7 +88,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 1945        | Load Balancer             | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP      | 5349        | Load Balancer             | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
-| TCP      | 7880        | Load Balancer             | Allows access to the following to the Load Balancer: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |>
+| TCP      | 7880        | Load Balancer             | Allows access to the following to the Load Balancer: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |>
 | TCP      | 3000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana.                         |
 | TCP      | 5000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard.                                                |
 | TCP      | 9101        | Master Nodes              | Needed to load balance requests to MinIO Console.                                                     |
@@ -97,7 +97,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP      | 3100        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Loki service.                                                       |
 | TCP      | 9009        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service.                                                      |
 | TCP      | 4443        | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service.                                                 |
-| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'Default App'_ module is used (`app` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Call (Default Application).                                               |
+| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
 | TCP      | 7000-7001   | Master Nodes, Media Nodes | For internal Redis communication                                                                  |
 | TCP      | 9100        | Master Nodes, Media Nodes | For internal MinIO communication                                                                  |
 | TCP      | 20000       | Master Nodes, Media Nodes | For internal Mongo communication                                                                  |
@@ -115,9 +115,10 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed if you want to allow WebRTC over TCP. |
+| TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
 | UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
-| UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | WebRTC Media traffic. |
+| UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over UDP. |
+| TCP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Mediasoup. |
 | TCP         | 1935           | Master Nodes      | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP         | 5349           | Master Nodes     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS. (TURNS)  |
 | TCP         | 7880           | Master Nodes     | LiveKit API. Master Nodes need access to load balance LiveKit API and expose it through HTTPS. |
@@ -151,10 +152,10 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **(Optional) TURN domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the Load Balancer you will use and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../../production-ready/performance/).
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
-    - _Default App_: OpenVidu Call, a ready-to-use videoconferencing application.
+    - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
     - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
@@ -224,7 +225,7 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Call (Default Application): [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
+- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
 - OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target=_blank}
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
@@ -407,19 +408,15 @@ Below is an example using NGINX as a Load Balancer:
 
 ## Configure your application to use the deployment
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/config/cluster/.env` of any Master Node. All access credentials of all services are defined in this file.
+To point your applications to your OpenVidu deployment, check the following files:
 
-Your authentication credentials and URL to point your applications would be:
+- `/opt/openvidu/config/cluster/master_node/meet.env`: Contains the OpenVidu Meet parameters.
+- `/opt/openvidu/config/cluster/openvidu.env`: Contains all the credentials of services deployed with OpenVidu Platform.
 
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_KEY`
-    - **API Secret**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_SECRET`
+The most relevant parameters are:
 
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. For example, `https://openvidu.example.io/`
-    - **Username**: `OPENVIDUAPP`
-    - **Password**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_SECRET`
+--8<-- "shared/self-hosting/credentials-general.md"
+--8<-- "shared/self-hosting/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -438,7 +435,7 @@ Each installation command for each type of node looks like this:
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
         --openvidu-pro-license='xxxxx' \
         --domain-name='openvidu.example.io' \
-        --enabled-modules='observability,v2compatibility,app' \
+        --enabled-modules='observability,v2compatibility,openviduMeet' \
         --rtc-engine='pion' \
         --turn-domain-name='turn.example.io' \
         --livekit-api-key='xxxxx' \
@@ -453,10 +450,9 @@ Each installation command for each type of node looks like this:
         --mongo-replica-set-key='xxxxx' \
         --grafana-admin-user='xxxxx' \
         --grafana-admin-password='xxxxx' \
-        --default-app-user='xxxxx' \
-        --default-app-password='xxxxx' \
-        --default-app-admin-user='xxxxx' \
-        --default-app-admin-password='xxxxx' \
+        --meet-admin-user='xxxxx' \
+        --meet-admin-password='xxxxx' \
+        --meet-api-key='xxxxx' \
         --external-load-balancer
     ```
 
@@ -491,7 +487,7 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 Some general notes about all the Master Node commands:
 
 - The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
-- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack), `app` (Default App - OpenVidu Call), and `v2compatibility` (OpenVidu v2 compatibility API).
+- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:
 

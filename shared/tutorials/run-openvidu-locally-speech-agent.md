@@ -29,7 +29,7 @@
 
 3. Enable the Speech Processing agent
 
-    Modify file [`openvidu-local-deployment/community/agent-speech-processing.yaml`](https://github.com/OpenVidu/openvidu-local-deployment/blob/3.3.0/community/agent-speech-processing.yaml) to enable the Speech Processing agent. At least you need to set the following properties:
+    Modify file [`openvidu-local-deployment/community/agent-speech-processing.yaml` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-local-deployment/blob/3.3.0/community/agent-speech-processing.yaml){:target=_blank} to enable the Speech Processing agent. At least you need to set the following properties:
 
     ```yaml
     enabled: true

@@ -15,7 +15,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 === "Stop OpenVidu Single Node"
 
-    1. Go to [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
+    1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**. Click on it.
     3. In the section of the Virtual Machine click on stop button to stop the Virtual Mache (and therefore OpenVidu).
 
@@ -25,7 +25,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 === "Start OpenVidu Single Node"
 
-    1. Go to [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
+    1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**.  Click on it.
     3. In the section of the Virtual Machine click on start button to start the Virtual Mache (and therefore OpenVidu).
 
@@ -37,9 +37,9 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 You can change the instance type of the OpenVidu Single Node instance to adapt it to your needs. To do this, follow these steps:
 
-1. Go to [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
+1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
 2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**. Click on it.
-3. In the left pannel click on _"Availability + scale"_ 🡒 _"Size"_.
+3. In the left pannel click on _"Availability + scale"_ -> _"Size"_.
 
     === "Change instance type"
 
@@ -59,9 +59,9 @@ In addition to these, an Azure deployment provides the capability to manage glob
 
 === "Changing configuration through Key Vault secrets"
 
-    1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
+    1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed your OpenVidu Single Node Stack.
-    3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ 🡒 _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu deployment.
+    3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu deployment.
         <figure markdown>
         ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>

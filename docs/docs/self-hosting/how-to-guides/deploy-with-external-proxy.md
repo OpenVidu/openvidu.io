@@ -1,6 +1,6 @@
 # How to deploy and configure OpenVidu with an existing external proxy
 
-By default, OpenVidu is deployed with an internal [Caddy server](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
+By default, OpenVidu is deployed with an internal [Caddy server :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
 
 - You wish to manage SSL certificates manually.
 - A specific proxy server is required for enhanced security.
@@ -49,14 +49,15 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-        | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 7880            | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed if you want to allow WebRTC over TCP. |
-        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP protocol. |
         | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
-        | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
+        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
+        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
+        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
 
         **Outbound Rules**
 
@@ -84,7 +85,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --no-tty --install \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,app' \
+            --enabled-modules='observability,openviduMeet' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -97,10 +98,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --external-proxy
         ```
 
@@ -112,7 +112,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,app,v2compatibility' \
+            --enabled-modules='observability,openviduMeet,v2compatibility' \
             --rtc-engine='pion' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -126,10 +126,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --external-proxy
         ```
 
@@ -144,7 +143,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    We will use [Nginx](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
+    We will use [Nginx :fontawesome-solid-external-link:{.external-link-icon}](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
 
     --8<-- "shared/self-hosting/proxy-nginx-turn-tls.md"
 
@@ -192,11 +191,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         | Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-        | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Call (Default Application).</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 7880            | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 1935           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP         | 6080           | Media Nodes     | Needed when _'Default App'_  module is used (`app` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Call (Default Application). |
+        | TCP         | 6080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
         | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
         | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
         | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
@@ -214,9 +213,10 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed if you want to allow WebRTC over TCP. |
-        | UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
-        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | WebRTC Media traffic. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
+        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
+        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
+        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
         | TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
         | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
@@ -249,7 +249,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,v2compatibility,app' \
+            --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
@@ -263,10 +263,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --default-app-user='xxxxx' \
-            --default-app-password='xxxxx' \
-            --default-app-admin-user='xxxxx' \
-            --default-app-admin-password='xxxxx' \
+            --meet-admin-user='xxxxx' \
+            --meet-admin-password='xxxxx' \
+            --meet-api-key='xxxxx' \
             --private-ip='<MASTER_NODE_PRIVATE_IP>' \
             --external-proxy
         ```
@@ -300,7 +299,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    We will use [Nginx](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
+    We will use [Nginx :fontawesome-solid-external-link:{.external-link-icon}](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers. The configuration for the proxy server is as follows:
 
     --8<-- "shared/self-hosting/proxy-nginx-turn-tls.md"
 

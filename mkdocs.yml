@@ -1,13 +1,48 @@
 site_name: openVidu
 site_url: https://openvidu.io/
-site_description: A powerful platform to develop WebRTC real-time applications. Self-hosted, performant, fault tolerant, scalable and observable.
+site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
 nav:
   - Home: index.md
-  - Docs:
-      - Getting started: docs/getting-started.md
+  - OpenVidu Meet [BETA]:
+      - meet/index.md
+      - Getting started:
+          - meet/getting-started/index.md
+      - Features:
+          - Rooms and meetings: meet/features/rooms-and-meetings.md
+          - Recordings: meet/features/recordings.md
+          - Users and permissions: meet/features/users-and-permissions.md
+          # - Live Captions: meet/features/live-captions.md
+          # - Transcriptions: meet-transcriptions.md
+          # - Translations: meet-translations.md
+          # - Summaries: meet-summaries.md
+      - Deployment:
+          - Overview: meet/deployment/overview.md
+          - Try OpenVidu Meet locally: meet/deployment/local.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
+          - Basic deployment: meet/deployment/basic.md
+          - Advanced deployments: meet/deployment/advanced.md # Describe the limitations about the basic deployment: lacks scalability and fault tolerance. Link to the OpenVidu Platform
+      - Embedded:
+          - Introduction: meet/embedded/intro.md
+          - Step by step guide: meet/embedded/step-by-step-guide.md
+          - Tutorials:
+              - meet/embedded/tutorials/index.md
+              - Direct Link: meet/embedded/tutorials/direct-link.md
+              - WebComponent: meet/embedded/tutorials/webcomponent.md
+              - WebComponent Commands & Events: meet/embedded/tutorials/webcomponent-advanced.md
+              - Recordings: meet/embedded/tutorials/recordings.md
+              - Webhooks: meet/embedded/tutorials/webhooks.md
+              # - Next.js: meet/embedded/tutorials/nextjs.md
+          - Reference:
+              - Webcomponent: meet/embedded/reference/webcomponent.md
+              - Direct Link: meet/embedded/reference/direct-link.md
+              - Iframe: meet/embedded/reference/iframe.md
+              - REST API: meet/embedded/reference/rest-api.md
+              - Webhooks: meet/embedded/reference/webhooks.md
+      - Releases: meet/releases.md
+  - OpenVidu Platform:
+      - docs/index.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
       - Developing your OpenVidu app:
           - docs/developing-your-openvidu-app/index.md
@@ -85,6 +120,10 @@ nav:
                   - Install: docs/self-hosting/single-node/azure/install.md
                   - Administration: docs/self-hosting/single-node/azure/admin.md
                   - Upgrade: docs/self-hosting/single-node/azure/upgrade.md
+              - GCP:
+                  - Install: docs/self-hosting/single-node/gcp/install.md
+                  - Administration: docs/self-hosting/single-node/gcp/admin.md
+                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
@@ -99,6 +138,10 @@ nav:
                   - Install: docs/self-hosting/single-node-pro/azure/install.md
                   - Administration: docs/self-hosting/single-node-pro/azure/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/azure/upgrade.md
+              - GCP:
+                  - Install: docs/self-hosting/single-node-pro/gcp/install.md
+                  - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
+                  - Upgrade: docs/self-hosting/single-node-pro/gcp/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
@@ -145,16 +188,13 @@ nav:
           - Overview: docs/ai/overview.md
           - Live captions: docs/ai/live-captions.md
           - OpenVidu agents:
-            - Overview: docs/ai/openvidu-agents/overview.md
-            - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
-            - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
+              - Overview: docs/ai/openvidu-agents/overview.md
+              - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
+              - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
           - Custom agents: docs/ai/custom-agents.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md
-      - OpenVidu Call:
-          - docs/openvidu-call/index.md
-          - Docs: docs/openvidu-call/docs.md
       - Releases: docs/releases.md
   # - Blog:
   #     - blog/index.md
@@ -164,6 +204,8 @@ nav:
       - pricing.md
 
 validation:
+  links:
+    absolute_links: relative_to_docs
   omitted_files: warn
   absolute_links: warn
   unrecognized_links: warn
@@ -211,14 +253,16 @@ theme:
         icon: material/brightness-7
         name: Switch to dark mode
   favicon: assets/images/logo.png
-  logo: assets/images/openvidu_globe_bg_transp_cropped.png
+  logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
 
 plugins:
   - search
+  - blog
+  - meta
+  - privacy
   - glightbox:
       touchNavigation: true
       loop: false
-      autoplayVideos: true
       effect: zoom
       slide_effect: slide
       width: 100%
@@ -231,7 +275,62 @@ plugins:
       caption_position: bottom
       background: none
       shadow: false
-  - blog
+  - llmstxt:
+      markdown_description: Self-hosted videoconference solution and SDK
+      full_output: llms-full.txt
+      sections:
+        OpenVidu:
+        - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
+        - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
+        - openvidu-meet-vs-openvidu-platform.md: What to choose, OpenVidu Meet or OpenVidu Platform?
+        OpenVidu Meet [BETA]:
+        - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
+        - meet/getting-started/index.md: OpenVidu Meet - Getting started
+        - meet/features/rooms-and-meetings.md: OpenVidu Meet Features - How to use rooms and meetings
+        - meet/features/recordings.md: OpenVidu Meet Features - Managing recordings
+        - meet/features/users-and-permissions.md: OpenVidu Meet Features - How to manage users and permissions
+        - meet/deployment/overview.md: A comparison of different deployment models for OpenVidu Meet
+        - meet/deployment/local.md: How to deploy OpenVidu Meet locally for testing and development purposes
+        - meet/deployment/basic.md: How to deploy OpenVidu Meet on-premises within a single server for production use
+        - meet/deployment/advanced.md: How to deploy OpenVidu Meet on multiple servers with scalability and fault-tolerance for production use
+        - meet/embedded/intro.md: How to embed OpenVidu Meet in my own application with a single line of HTML
+        - meet/embedded/step-by-step-guide.md: A step by step guide on how to embed OpenVidu Meet on your own applications
+        - meet/embedded/tutorials/direct-link.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+        - meet/embedded/tutorials/webcomponent.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+        - meet/embedded/tutorials/webcomponent-advanced.md: An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
+        - meet/embedded/tutorials/recordings.md: How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings. 
+        OpenVidu Platform:
+        - docs/index.md: OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
+        - docs/getting-started.md: OpenVidu Platform - Getting started
+        - docs/comparing-openvidu.md: OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
+        - docs/developing-your-openvidu-app/index.md: OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
+        - docs/developing-your-openvidu-app/how-to.md: OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.
+        - docs/reference-docs/*.md: OpenVidu Platform - Reference documentation
+          OpenVidu Platform tutorials:
+        - docs/tutorials/advanced-features/index.md: Explore more advanced features of LiveKit with our tutorials on recording, S3, Azure, and more.
+        - docs/tutorials/ai-services/index.md: Learn how to integrate AI services in your OpenVidu applications.
+        - docs/tutorials/angular-components/index.md: Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
+        - docs/tutorials/application-client/index.md: Learn how to build a LiveKit application client to connect to a room, publish media and subscribe to media from other participants.
+        - docs/tutorials/application-server/index.md: Learn how to build an application server that generates LiveKit tokens and receives webhook events.
+        - docs/self-hosting/deployment-types.md: Description of the different OpenVidu Platform user-friendly installers that facilitate quick on-premises deployments, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
+        - docs/self-hosting/local.md: Easy local install deployment instructions for testing and development purposes.
+        - docs/self-hosting/single-node/index.md: Different options for a single node deployment, be it on-premises or on any of the most popular cloud providers such as AWS, Azure or GCP.
+        - docs/self-hosting/single-node-pro/index.md: The features of Single Node OpenVidu with a 2x performance and advanced observability.
+        - docs/self-hosting/elastic/index.md: Elastic deployment options for OpenVidu Platform, either on-premises, on AWS, or on Azure.
+        - docs/self-hosting/ha/index.md: High Availability deployment options for OpenVidu Platform, either on-premises (with DNS or network load balancers), on AWS, or on Azure.
+        - docs/self-hosting/production-ready/index.md: Main advantages of self-hosting videoconferencing and live-streaming solutions with OpenVidu Platform, which are privacy, leverage your resources, performant, scalable, fault tolerant, and observable.
+        - docs/self-hosting/production-ready/performance.md: OpenVidu Platform 2x performance by using mediasoup to replace the original Pion LiveKit WebRTC engine while maintaining the LiveKit API.
+        - docs/self-hosting/production-ready/scalability.md: OpenVidu Platform scalability numbers and Elastic and High Availability deployments. 
+        - docs/self-hosting/production-ready/fault-tolerance.md: OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.
+        - docs/self-hosting/production-ready/observability/index.md: A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting on OpenVidu Dashboard and a Grafana stack. 
+        - docs/self-hosting/production-ready/observability/openvidu-dashboard.md: How to access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses. 
+        - docs/self-hosting/production-ready/observability/grafana-stack.md: How to use OpenVidu's built-in Grafana dashboards to monitor different metrics from OpenVidu Platform and logs from your cluster.
+        - docs/self-hosting/how-to-guides/index.md: Explore step-by-step guides to customize your OpenVidu deployment for specific use cases.
+        - docs/ai/overview.md: OpenVidu offers a catalog of AI services that can be easily integrated into your application to enhance the user experience and add advanced features. These services are provided by OpenVidu agents, a set of pre-configured and ready-to-use AI modules.
+        - docs/ai/openvidu-agents/overview.md: A description of how to use and configure OpenVidu Agents, pre-configured and ready-to-use AI modules. 
+        - docs/ai/openvidu-agents/speech-processing-agent.md: Instructions on how to configure the Speech Processing OpenVidu agent which transcribes audio speech to text in real time. 
+        - docs/ui-components/angular-components.md: OpenVidu Angular Components simplify the creation of videoconferencing apps, offering customizable and powerful components for rapid development and easy maintenance. This is a how-to guide on using this angular library.
+        - docs/ui-components/react-components.md: the simplest way to create real-time audio/video applications with React.
 
 markdown_extensions:
   - admonition
@@ -258,6 +357,7 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.blocks.caption
 
 extra:
   analytics:

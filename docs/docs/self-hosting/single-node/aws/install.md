@@ -5,15 +5,13 @@ description: Learn how to deploy OpenVidu Single Node on AWS using CloudFormatio
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: AWS
 
---8<-- "shared/self-hosting/single-node/v2compat-warning.md"
-
 This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment in AWS. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
 [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
-...or access your [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target=_blank} and manually set this S3 URL in the `Specify template` section:
+...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target=_blank} and manually set this S3 URL in the `Specify template` section:
 
 ```
 https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml
@@ -42,6 +40,8 @@ Depending on your needs, you need to fill the following CloudFormation parameter
 
 --8<-- "shared/self-hosting/aws-ssl-domain.md"
 
+--8<-- "shared/self-hosting/aws-meet.md"
+
 ### EC2 Instance Configuration
 
 You need to specify some properties for the EC2 instance that will be created.
@@ -57,6 +57,8 @@ You need to specify some properties for the EC2 instance that will be created.
     By default, the parameter **AmiId** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
 --8<-- "shared/self-hosting/aws-single-elastic-s3.md"
+
+--8<-- "shared/self-hosting/aws-additional-flags.md"
 
 --8<-- "shared/self-hosting/aws-turn-domain.md"
 
@@ -78,21 +80,15 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/single-node/aws/2-secrets.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/single-node/aws/2-secrets.png" loading="lazy"/></a></p></div>
 
 </div>
 
-To point your applications to your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object.
+To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
-Your authentication credentials and URL to point your applications would be:
-
-- **URL**: The value in the AWS Secret of `DOMAIN_NAME` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-- **API Key**: The value in the AWS Secret of `LIVEKIT_API_KEY`
-- **API Secret**: The value in the AWS Secret of `LIVEKIT_API_SECRET`
-
-
+--8<-- "shared/self-hosting/aws-credentials-general.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 

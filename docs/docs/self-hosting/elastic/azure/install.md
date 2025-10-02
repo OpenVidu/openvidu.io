@@ -5,10 +5,6 @@ description: Learn how to deploy OpenVidu Elastic on Azure using Template specs 
 
 # OpenVidu Elastic installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
-
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
@@ -32,7 +28,7 @@ To import the template into Azure you just need to click the button below and yo
     </figure>
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
-    - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Call, etc., APIs) reverse proxy.
+    - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
@@ -45,6 +41,8 @@ To deploy the template you need to fill the following parameters.
 --8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
+
+--8<-- "shared/self-hosting/azure-meet.md"
 
 ### OpenVidu Elastic Configuration
 
@@ -60,7 +58,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
 
-    For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../../production-ready/performance/).
+    For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
 ### Azure Instance Configuration
 
@@ -80,21 +78,13 @@ You need to specify some properties for the Azure instances that will be created
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
-=== "Media Nodes Scaling Set Configuration"
-
-    Parameters in this section look like this:
-
-    <figure markdown>
-    ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/elastic/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
-    </figure>
-
-    The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
-
-    The **Scale Target CPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy](https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling){:target=_blank}.
+--8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
 
 --8<-- "shared/self-hosting/azure-scale-in-config.md"
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
+
+--8<-- "shared/self-hosting/azure-additional-flags.md"
 
 --8<-- "shared/self-hosting/azure-turn-domain.md"
 
@@ -104,13 +94,13 @@ Whenever you are satisfied with your Template paremeters, just click on _"Next"_
 
 !!! warning
 
-    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
 When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
 
 === "Check deployment outputs in Azure Key Vault"
 
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard](https://portal.azure.com/#home){:target="_blank"}.
+    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
 
     2. Once you are in the Key Vault on the left panel click on _"Objects"_ 🡒 _"Secrets"_.
 
@@ -135,7 +125,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     SSH to the Master Node instance and navigate to the config folder `/opt/openvidu/config/cluster`. Files with the access credentials outputs are:
 
     - `openvidu.env`
-    - `master_node/app.env`
+    - `master_node/meet.env`
 
 ## Configure your application to use the deployment
 
@@ -143,15 +133,8 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and URL to point your applications would be:
 
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in the Key Vault Secret of `LIVEKIT-API-KEY` or in the instance in `openvidu.env`.
-    - **API Secret**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
-
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. For example, `https://openvidu.example.io/`.
-    - **Username**: `OPENVIDUAPP`.
-    - **Password**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/azure-credentials-general.md"
+--8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
  
 ## Troubleshooting initial Azure stack creation
 

@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built with **Ionic**, using **A
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -182,7 +182,7 @@ If you leave them empty and app is launched in a mobile device, the user will be
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
 </div>
 
@@ -298,7 +298,7 @@ The `joinRoom()` method performs the following actions:
     }
     ```
 
-    This function sends a POST request using [HttpClient](https://angular.dev/api/common/http/HttpClient){:target="\_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
+    This function sends a POST request using [HttpClient :fontawesome-solid-external-link:{.external-link-icon}](https://angular.dev/api/common/http/HttpClient){:target="\_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
 
 5.  It connects to the room using the LiveKit URL and the token.
 6.  It publishes the camera and microphone tracks to the room using `room.localParticipant.enableCameraAndMicrophone()`, which asks the user for permission to access their camera and microphone at the same time. The local video track is then stored in the `localTrack` variable.

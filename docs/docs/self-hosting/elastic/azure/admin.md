@@ -5,7 +5,7 @@ description: Learn how to perform administrative tasks on an Azure OpenVidu Elas
 
 # OpenVidu Elastic administration: Azure
 
-The deployment of OpenVidu Elastic on Azure is automated using Azure Resource Manager Templates, with Media Nodes managed within a [Virtual Machine Scale Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
+The deployment of OpenVidu Elastic on Azure is automated using Azure Resource Manager Templates, with Media Nodes managed within a [Virtual Machine Scale Set :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
 
 Internally, the Azure Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account:
 
@@ -22,7 +22,7 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
         There is currently a limitation with Media Nodes that prevents them from stopping gracefully. Please exercise caution when stopping Media Nodes, as they will terminate immediately without waiting for active Rooms to complete. You may want to wait for your active Rooms to finish before stopping the cluster.<br><br>
         We are working to implement the same graceful shutdown behavior offered by AWS and On Premises deployments. In the meantime, Media Nodes include a script that allows for a graceful shutdown. To use it, SSH to the Media Node you want to stop and execute script **`./usr/local/bin/stop_media_node.sh`**
 
-    1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu Elastic.
+    1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu Elastic.
     2. Then click into the Virtual Machine Scale Set resource called `<STACK_NAME>-mediaNodeScaleSet` and click _"Availability + scale"_ on the left panel, here click on _"Scaling"_ option.
         <figure markdown>
         ![Selecting scaling menu Scale Set](../../../../assets/images/self-hosting/elastic/azure/azure-elastic-admin-scaling-tab.png){ .svg-img .dark-img }
@@ -44,7 +44,7 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
 
     To start the cluster, first start the Master Node and then the Media Nodes.
 
-    1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu Elastic.
+    1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu Elastic.
     2. In the resource group click on the resource called _"stackName-VM-MasterNode"_, here click on start to start the Master Node.
         <figure markdown>
         ![Start Master Node](../../../../assets/images/self-hosting/elastic/azure/azure-elastic-admin-start-master.png){ .svg-img .dark-img }
@@ -91,7 +91,7 @@ It is possible to change the instance type of both the Master Node and the Media
 
         This will forcely restart the Media Nodes. If you want to stop them gracefully to avoid the disruption of active Rooms, check the [Shutting downd the cluster](#shutting-down-the-cluster) tab.
 
-    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
+    1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_. Click on it to navigate to the Virtual Machine Scale Set.
     4. On the left panel click on _"Availability + scale"_ tab, then on _"Size"_.
@@ -106,7 +106,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
 === "Media Nodes Autoscaling Configuration"
 
-    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
+    1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Scaling"_ option.
@@ -139,7 +139,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
     !!! info
 
-        OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU usage. However, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [Azure Scaling Set documentation](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-portal){:target=_blank}.
+        OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU usage. However, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [Azure Scaling Set documentation :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-portal){:target=_blank}.
 
 ## Fixed Number of Media Nodes
 
@@ -147,7 +147,7 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
 
 === "Set Fixed Number of Media Nodes"
 
-    1. Go to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
+    1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic, locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it
     3. On the left panel click on _"Availability + scale"_ and then in _"Scaling"_ tab.
         <figure markdown>
@@ -172,9 +172,9 @@ In addition to these, an Azure deployment provides the capability to manage glob
 
 === "Changing configuration through Key Vault secrets"
 
-    1. Navigate to the [Azure Portal Dashboard](https://portal.azure.com/#home){:target=_blank} on Azure.
+    1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic.
-    3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ 🡒 _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu Elastic deployment.
+    3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu Elastic deployment.
         <figure markdown>
         ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>

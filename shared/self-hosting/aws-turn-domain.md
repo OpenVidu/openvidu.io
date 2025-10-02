@@ -3,6 +3,8 @@
 
 This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic. This parameter will only work if you are using `letsencrypt` or `owncert` as the **CertificateType** parameter.
 
+Note that if you are not using any Domain Name in the [Domain and SSL Certificate Configuration](#domain-and-ssl-certificate-configuration) section, this section will be ignored and a generated domain based on the public IP and [sslip.io](https://sslip.io/){:target="_blank"} will be used instead.
+
 === "TURN server configuration with TLS"
 
     Parameters in this section look like this:

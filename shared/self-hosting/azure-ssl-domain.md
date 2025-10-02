@@ -2,14 +2,22 @@
 
 There are three possible scenarios for this section:
 
-=== "Let's Encrypt Certificate (recommended)"
+=== "Let's Encrypt Without Domain Name"
+
+    If you don't have a Domain Name and want to quickly test OpenVidu on Azure, you can use this option, simply selecting the **Certificate Type** as _letsencrypt_ and keep the rest of parameters empty.
+
+    It will deploy OpenVidu with a Let's Encrypt certificate generated using [sslip.io](https://sslip.io/){:target="_blank"} based on the public IP created for the deployment.
+
+    ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt-nodomain.png)
+
+=== "Let's Encrypt With Domain Name (recommended)"
 
     For a production-ready setup, this scenario is ideal when you have an **FQDN (Fully Qualified Domain Name)** and a **Public IP** at your disposal. It leverages the services of Let's Encrypt to automatically generate valid certificates.
 
     First, you need to have the FQDN pointing to the Public IP you are going to use.
 
     Then, you need to fill in the following parameters:
-    
+
     <figure markdown>
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt.png){ .svg-img .dark-img }
     </figure>

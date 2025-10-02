@@ -34,7 +34,7 @@ Configuration files can be divided into three types:
     ${openvidu.DOMAIN_NAME}
     ```
 
-    You can check the [OpenVidu Configuration In depth](./in-depth.md){:target="_blank"} section to learn more about how the configuration system works.
+    You can check the [OpenVidu Configuration In depth](./in-depth.md) section to learn more about how the configuration system works.
 
 ## Config files
 
@@ -58,7 +58,7 @@ These are the configuration files for each kind of deployment:
         |-- loki.yaml
         |-- prometheus.yaml
         |-- promtail.yaml
-        |-- app.env
+        |-- meet.env
         |-- agent-speech-processing.yaml
         `-- grafana/
     ```
@@ -77,7 +77,7 @@ These are the configuration files for each kind of deployment:
         |   |-- openvidu.env
         |   |-- master_node/
         |   |   |-- grafana/
-        |   |   |-- app.env
+        |   |   |-- meet.env
         |   |   |-- caddy.yaml
         |   |   |-- dashboard.env
         |   |   |-- loki.yaml
@@ -124,7 +124,7 @@ These are the configuration files for each kind of deployment:
         |   |-- openvidu.env
         |   |-- master_node/
         |   |   |-- grafana/
-        |   |   |-- app.env
+        |   |   |-- meet.env
         |   |   |-- caddy.yaml
         |   |   |-- dashboard.env
         |   |   |-- loki.yaml

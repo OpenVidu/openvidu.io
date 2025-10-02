@@ -7,18 +7,46 @@ description: Learn how to improve the basic recording tutorial by adding complet
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/advanced-features/openvidu-recording-advanced-node){ .md-button target=\_blank }
 
-This tutorial improves the [basic recording tutorial](./recording-basic.md){target="\_blank"} by doing the following:
+This tutorial improves the [basic recording tutorial](./recording-basic-s3.md) by doing the following:
 
 -   **Complete recording metadata**: Listen to webhook events and save all necessary metadata in a separate file.
 -   **Real time recording status notification**: Implement a custom notification system to inform participants about the recording status by listening to webhook events and updating room metadata.
 -   **Recording deletion notification**: Implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
 -   **Direct access to recording files**: Add an additional method to allow access to recording files directly from the S3 bucket by creating a presigned URL.
 
+Recordings are always persisted in some kind of storage system. This type of storage depends on your OpenVidu deployment:
+
+- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 Minio bucket**.
+- When running OpenVidu in **AWS**, recordings are stored in an **AWS S3 bucket**.
+- When running OpenVidu in **Azure**, recordings are stored in an **Azure Blob Storage container**. If this is your case, follow the [Recording Advanced Azure tutorial](./recording-advanced-azure.md) instead.
+
 ## Running this tutorial
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+=== "Run OpenVidu locally"
+
+    --8<-- "shared/tutorials/run-openvidu-locally.md"
+
+=== "Deploy OpenVidu"
+
+    1. Deploy OpenVidu Single Node in AWS following these instructions [to deploy in AWS](../../self-hosting/single-node/aws/install.md).
+
+        !!! info "CPUs to be able to record"
+
+            Make sure you deploy with at least 4 CPUs in the Virtual Machine of AWS.
+
+    2. Point the tutorial to your AWS deployment:
+          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/.env){target="\_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).   
+          - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/public/app.js#L3) to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
+
+    !!! warning
+
+        If you are using self-signed certificate you will need to add this line in the first line after the imports on the [`index.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/src/index.js) ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable TLS verification for local testing```
+
+    !!! info "Configure Webhooks"
+
+        All [application servers](../application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
@@ -28,7 +56,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -52,9 +80,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -405,7 +433,7 @@ This method does the following:
 
     !!! info "Getting recording metadata"
 
-        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic.md){:target="\_blank"}, we are now storing additional details such as the **recording name**, **duration** and **size**.
+        In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](./recording-basic-s3.md), we are now storing additional details such as the **recording name**, **duration** and **size**.
 
 2.  Gets the metadata key from the recordings path and the recordings metadata path, both defined in the `config.js` file, and the recording name replacing the `.mp4` extension with `.json`:
 
@@ -553,7 +581,7 @@ This endpoint does the following:
     }
     ```
 
-    This method creates a presigned URL to access the object in the S3 bucket by calling the `getSignedUrl` function from the [@aws-sdk/s3-request-presigner](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-s3-request-presigner/){target="\_blank"} package, indicating the `S3Client`, `GetObjectCommand` and the expiration time in seconds as parameters. In this case, the expiration time is set to 24 hours.
+    This method creates a presigned URL to access the object in the S3 bucket by calling the `getSignedUrl` function from the [@aws-sdk/s3-request-presigner :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-s3-request-presigner/){target="\_blank"} package, indicating the `S3Client`, `GetObjectCommand` and the expiration time in seconds as parameters. In this case, the expiration time is set to 24 hours.
 
     !!! info "Presigned URLs"
 

@@ -1,4 +1,4 @@
-To run the client application tutorial, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 
@@ -30,9 +30,9 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
 
             To show the app with a mobile device appearance, open the dev tools in your browser and find the button to adapt the viewport to a mobile device aspect ratio. You may also choose predefined types of devices to see the behavior of your app in different resolutions.
 
-        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-web.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-web.png" loading="lazy"/></a></p></div>
 
-        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-web.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
 
         --8<-- "shared/tutorials/testing-other-devices.md"
 
@@ -68,7 +68,7 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
 
         === ":fontawesome-brands-apple:{.icon .lg-icon .tab-icon} iOS device"
 
-            You will need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){target="_blank"} and [Cocoapods](https://guides.cocoapods.org/using/getting-started.html){target="_blank"} installed in your computer.
+            You will need [Ruby :fontawesome-solid-external-link:{.external-link-icon}](https://www.ruby-lang.org/en/documentation/installation/){target="_blank"} and [Cocoapods :fontawesome-solid-external-link:{.external-link-icon}](https://guides.cocoapods.org/using/getting-started.html){target="_blank"} installed in your computer.
 
             The app must be signed with a development team. To do so, open the project in **Xcode** and select a development team in the **Signing & Capabilities** editor.
 
@@ -82,7 +82,7 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
 
         <div class="grid-container">
 
-        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
+        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
         </div>
 
@@ -92,8 +92,8 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
 
         <div class="grid-container">
 
-        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
-        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
         </div>

@@ -7,6 +7,8 @@ hide:
   - footer
   - search-bar
   - version-selector
+tags:
+  - setupwowjs
 ---
 
 <style>
@@ -65,6 +67,17 @@ hide:
   </tr>
 </table>
 
+<div markdown="1" style="font-size: 20px" markdown>
+
+OpenVidu offers two editions:
+
+- <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
+
+</div>
+
 ## How is OpenVidu Pro priced?
 
 OpenVidu Pro follows a simple pricing model based on the number of cores used by the OpenVidu Pro cluster:
@@ -105,7 +118,7 @@ Users must create an [OpenVidu account](/account/) and get an OpenVidu License. 
 
 When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a **15-day free trial period** during which you will not be charged at all.
 
-After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](/account/) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe](https://stripe.com/){:target=_blank}.
+After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](/account/) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe :fontawesome-solid-external-link:{.external-link-icon}](https://stripe.com/){:target=_blank}.
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
 

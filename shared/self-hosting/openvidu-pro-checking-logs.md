@@ -27,7 +27,7 @@ Or use journalctl:
 journalctl -f -u openvidu
 ```
 
-You can also review your logs using the Grafana dashboard provided with OpenVidu. To access it, go to [https://<your-domain.com\>/grafana](https://<your-domain.com>/grafana){:target=\_blank} and use the credentials located in `/opt/openvidu/.env` to log in. Once inside, navigate to the _"Home"_ section, select _"Dashboard"_, and then click on:
+You can also review your logs using the Grafana dashboard provided with OpenVidu. To access it, go to [https://<your-domain.com\>/grafana](){:target=\_blank} and use the credentials located in `/opt/openvidu/.env` to log in. Once inside, navigate to the _"Home"_ section, select _"Dashboard"_, and then click on:
 
 - _"OpenVidu > OpenVidu Cluster Nodes Logs"_: To check the logs of the OpenVidu services organized per node.
 - _"OpenVidu > OpenVidu Cluster Services Logs"_: To check the logs of the OpenVidu services organized per service.

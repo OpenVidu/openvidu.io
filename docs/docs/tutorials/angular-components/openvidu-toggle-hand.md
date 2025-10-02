@@ -37,7 +37,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.3.0
 
 #### 4. Run the openvidu-toggle-hand tutorial
 
-To run the client application tutorial, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 

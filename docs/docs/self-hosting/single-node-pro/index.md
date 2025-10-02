@@ -9,22 +9,26 @@ OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu
 
 !!! info
 
-    Scalability and fault tolerance require a multi-node setup. If you need them, consider using [OpenVidu Elastic](../elastic) or [OpenVidu High Availability](../ha/).
+    Scalability and fault tolerance require a multi-node setup. If you need them, consider using [OpenVidu Elastic](../elastic/index.md) or [OpenVidu High Availability](../ha/index.md).
 
 Install OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> in your preferred environment:
 
 - [**On-premises installation**](./on-premises/install.md): set up on your own servers.
 - [**AWS installation**](./aws/install.md): deploy to Amazon Web Services.
 - [**Azure installation**](./azure/install.md): deploy to Microsoft Azure.
+- [**Google Cloud Platform installation**](./gcp/install.md): deploy to Google Cloud Platform.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
 - [**On-premises: configuration and administration**](./on-premises/admin.md)
 - [**AWS: configuration and administration**](./aws/admin.md)
 - [**Azure: configuration and administration**](./azure/admin.md)
+- [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
 
 If you want to upgrade your OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> installation, refer to this section:
 
-- [**On-premises: upgrade OpenVidu Single Node Community**](./on-premises/upgrade.md)
-- [**AWS: upgrade OpenVidu Single Node Community**](./aws/upgrade.md)
-- [**Azure: upgrade OpenVidu Single Node Community**](./azure/upgrade.md)
+- [**On-premises: upgrade OpenVidu Single Node PRO**](./on-premises/upgrade.md)
+- [**AWS: upgrade OpenVidu Single Node PRO**](./aws/upgrade.md)
+- [**Azure: upgrade OpenVidu Single Node PRO**](./azure/upgrade.md)
+- [**Google Cloud Platform: upgrade OpenVidu Single Node PRO**](./gcp/upgrade.md)
+

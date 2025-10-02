@@ -7,30 +7,88 @@ hide:
   - footer
   - search-bar
   - version-selector
+tags:
+  - setupwowjs
+  - setupcardglow
 ---
 
 # Home { .hide }
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
-    Create your real-time video and audio application with ease
+    Choose the ideal OpenVidu solution for your real-time needs
+  </h2>
+</div>
+
+<div class="products-section wow animated animatedFadeInUp fadeInUp">
+  <div class="products-container">
+    <div class="product-card openvidu-meet">
+      <div class="product-header">
+        <h3 class="product-title">
+          <img src="./assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
+          <img src="./assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
+        </h3>
+        <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
+      </div>
+      <div class="product-content">
+        <p class="product-description">
+          For teams, businesses and organizations that need a reliable and secure video conferencing solution running on their servers.
+        </p>
+        <ul class="product-features">
+          <li>Multi-party HQ video conferencing</li>
+          <li>Customize with your branding and corporate colors</li>
+          <li>Feature rich: screen sharing, chat, virtual background, recording...</li>
+          <li>Ready to use AI integrations</li>
+          <li>Embed right into your app with pre-built components</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <a href="/meet/" class="product-button md-button md-button--primary primary">Get Started</a>
+      </div>
+    </div>
+    <div class="product-card openvidu-platform">
+      <div class="product-header">
+        <h3 class="product-title">
+          <img src="./assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
+          <img src="./assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
+        </h3>
+        <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
+      </div>
+      <div class="product-content">
+        <p class="product-description">
+          For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
+        </p>
+        <ul class="product-features">
+          <li>Programmable client and server SDKs for all languages compatible with <a href="https://docs.livekit.io/reference/" target="_blank">LiveKit</a></li>
+          <li>Build your custom UI from scratch with total freedom</li>
+          <li>Low level control of real time media: codecs, protocols, bitrates...</li>
+          <li>Precise control of recording and streaming with custom layouts</li>
+          <li>Advanced telephony and AI integrations</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <a href="/docs/" class="product-button md-button md-button--primary primary">Get Started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wow animated animatedFadeInUp fadeInUp" style="text-align: center" markdown>
+--8<-- "shared/meet/meet-vs-platform-table.md"
+
+*[Learn more about OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)*
+</div>
+
+<hr style="margin: 7em 0;">
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp">
+  <h2 id="get-started">
+    Self-host a production-ready live-video platform with advanced capabilities typically reserved for pricy SaaS solutions
   </h2>
 </div>
 
 <div class="feature-cards" markdown>
 <div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown>
-
--   :material-message-fast:{ .feature-icon } __Ready to use app__{ .feature-name }
-
-    ---
-
-    You get [**OpenVidu Call**](docs/openvidu-call/index.md) with every OpenVidu installation.<br>A fully-fledged videoconference application with all the features you expect: multiparty, device selection, screen share, chat, recording, virtual background and more!
-
--   :material-code-braces-box:{ .feature-icon } __All is customizable__{ .feature-name }
-
-    ---
-
-    If you want to integrate OpenVidu into your own application, there are **UI Components** that are quickly to setup but also highly customizable. If you want total control, you can use **SDKs** to fine-tune the integration of OpenVidu in your app. Learn more at **[Developing your OpenVidu app](docs/developing-your-openvidu-app/index.md)**.
 
 -   :material-server:{ .feature-icon .padding-icon } __Self-hosted__{ .feature-name }
 
@@ -42,62 +100,48 @@ hide:
 
     ---
 
-    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](/support/) now.
-
-</div>
-</div>
-
-<hr style="margin: 5.5em 0;">
-
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
-    Self-host a production-ready live-video platform with advanced capabilities typically reserved for SaaS solutions
-  </h2>
-</div>
-
-<div class="feature-cards" markdown>
-<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown>
+    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](support.md) now.
 
 -   :material-progress-check:{ .feature-icon .padding-icon } __Easy to deploy__{ .feature-name }
 
     ---
 
-    What could take a whole DevOps team days of work, with OpenVidu you can have it ready in minutes: an easy installation, configuration and administration experience to your self-hosted, production grade, real-time solution. [Install now](docs/self-hosting/deployment-types.md).
+    What could take a whole DevOps team days of work, with OpenVidu you can have it ready in minutes: an easy installation, configuration and administration experience to your self-hosted, production grade, real-time solution. [**Install now**](docs/self-hosting/deployment-types.md).
 
 -   :fontawesome-solid-sack-dollar:{ .feature-icon .more-padding-icon } __Cost effective__{ .feature-name }
 
     ---
 
-    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [Pricing](/pricing/).
+    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](/pricing/).
 
 -   :material-lightning-bolt:{ .feature-icon .padding-icon } __Performant__{ .feature-name }
 
     ---
 
-    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [LiveKit](https://livekit.io/){target="\_blank"} and [mediasoup](https://mediasoup.org/){target="\_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [performance](docs/self-hosting/production-ready/performance.md).
+    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){target="\_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
 
 -   :material-chart-timeline-variant-shimmer:{ .feature-icon .padding-icon } __Scalable__{ .feature-name }
 
     ---
 
-    OpenVidu has been designed from the outset with [scalability](docs/self-hosting/production-ready/scalability.md) in mind. Host videoconference rooms and large live streams with hundreds of participants. Autoscale your cluster to adapt to the demand and optimize your resources.
+    OpenVidu has been designed from the outset with [**scalability**](docs/self-hosting/production-ready/scalability.md) in mind. Host videoconference rooms and large live streams with hundreds of participants. Autoscale your cluster to adapt to the demand and optimize your resources.
 
 -   :material-shield-refresh:{ .feature-icon .padding-icon } __Fault tolerant__{ .feature-name }
 
     ---
 
-    OpenVidu offers [fault tolerance](docs/self-hosting/production-ready/fault-tolerance.md) in all its components. Deploy a reliable cluster knowing that if one of your node goes down, others will be able to continue working with no downtime.
+    OpenVidu offers [**fault tolerance**](docs/self-hosting/production-ready/fault-tolerance.md) in all its components. Deploy a reliable cluster knowing that if one of your node goes down, others will be able to continue working with no downtime.
 
 -   :material-microscope:{ .feature-icon .padding-icon } __Observable__{ .feature-name }
 
     ---
 
-    OpenVidu brings everything necessary to monitor the status, health, load and history of your deployment. It automatically collects events, metrics and logs and provides [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md) and a [Grafana stack](docs/self-hosting/production-ready/observability/grafana-stack.md) to navigate them.
+    OpenVidu brings everything necessary to monitor the status, health, load and history of your deployment. It automatically collects events, metrics and logs and provides [**OpenVidu Dashboard**](docs/self-hosting/production-ready/observability/openvidu-dashboard.md) and a [**Grafana stack**](docs/self-hosting/production-ready/observability/grafana-stack.md) to navigate them.
 
 </div>
 </div>
 
-<hr style="margin: 5.5em;">
+<hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
@@ -112,7 +156,7 @@ hide:
 
     ---
 
-    Achieve ultra-low latency in your videoconference or live streaming app thanks to [WebRTC](https://webrtc.org/){target="\_blank"}.
+    Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
 
 <!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
 
@@ -124,13 +168,13 @@ hide:
 
     ---
 
-    E2E encryption, fine-grained access control and highly secure deployments for the most demanding security requirements.
+    Fine-grained access control and highly secure deployments for the most demanding security requirements. **E2E encryption coming soon!**
 
 -   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 
     ---
 
-    Chrome, Firefox, Safari, Android, iOS, Unity, Windows, MacOS, Linux... OpenVidu is compatible with all of them.
+    Chrome, Firefox, Safari, Android, iOS, Unity, Windows, macOS, Linux... OpenVidu is compatible with all of them.
 
 -   :material-video-4k-box:{ .feature-icon .padding-icon } __Up to 4K video and HQ audio__{ .feature-name }
 
@@ -142,7 +186,7 @@ hide:
 
     ---
 
-    Record your videocalls with complete freedom. You can use predefined layouts or easily build your own.
+    Record your video calls with complete freedom. You can use predefined layouts or easily build your own.
 
 -   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcast to YouTube/Twitch__{ .feature-name }
 
@@ -171,7 +215,7 @@ hide:
 </div>
 </div>
 
-<hr style="margin: 5.5em 0 1.5em 0;">
+<hr style="margin: 7em 0 3.5em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Contact us if you need it : we are here to help!</h2>

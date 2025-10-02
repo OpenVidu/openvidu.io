@@ -24,7 +24,7 @@ The services are operating correctly if you see an output similar to the followi
 
 ```bash
 NAME         IMAGE                                        COMMAND                  SERVICE      CREATED          STATUS
-app          docker.io/openvidu/openvidu-call             "docker-entrypoint.s…"   app          19 seconds ago   Up 16 seconds
+meet         docker.io/openvidu/openvidu-meet             "docker-entrypoint.s…"   meet         19 seconds ago   Up 16 seconds
 caddy        docker.io/openvidu/openvidu-caddy            "/bin/caddy run --co…"   caddy        19 seconds ago   Up 16 seconds
 dashboard    docker.io/openvidu/openvidu-dashboard        "./openvidu-dashboard"   dashboard    19 seconds ago   Up 16 seconds
 egress       docker.io/livekit/egress                     "/entrypoint.sh"         egress       18 seconds ago   Up 14 seconds

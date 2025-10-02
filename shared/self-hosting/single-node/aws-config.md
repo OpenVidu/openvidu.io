@@ -2,7 +2,7 @@ In addition to these, an AWS deployment provides the capability to manage global
 
 === "Changing Configuration through AWS Secrets"
 
-    1. Navigate to the [CloudFormation Dashboard](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
+    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target=_blank} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Single Node.
     3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Single Node deployment.
         <figure markdown>

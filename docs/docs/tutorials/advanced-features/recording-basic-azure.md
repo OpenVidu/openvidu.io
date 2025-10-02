@@ -7,7 +7,7 @@ description: Learn how to record a room and manage recordings by extending a sim
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/advanced-features/openvidu-recording-basic-node-azure){ .md-button target=\_blank }
 
-This tutorial is a simple video-call application, built upon [Node.js server](../application-server/node.md){:target="\_blank"} and [JavaScript client](../application-client/javascript.md){:target="\_blank"} tutorials, and extends them by adding recording capabilities:
+This tutorial is a simple video-call application, built upon [Node.js server](../application-server/node.md) and [JavaScript client](../application-client/javascript.md) tutorials, and extends them by adding recording capabilities:
 
 - Start and stop recording a room.
 - List all recordings in a room.
@@ -15,11 +15,35 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 - Delete a recording.
 - List all available recordings.
 
+For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob Storage container**.
+
 ## Running this tutorial
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server-azure.md"
+=== "Run OpenVidu locally"
+
+    --8<-- "shared/tutorials/run-openvidu-locally-azure.md"
+
+=== "Deploy OpenVidu in Azure"
+
+    1. Deploy OpenVidu Single Node in Azure following these instructions [to deploy in Azure](../../self-hosting/single-node/azure/install.md).
+
+        !!! info "CPUs to be able to record"
+
+            Make sure you deploy with at least 4 CPUs in the Virtual Machine of Azure.
+
+    2. Point the tutorial to your Azure deployment:
+          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-basic-node-azure/.env){target="\_blank"} to update the LiveKit and Azure configuration to the values of your Azure deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Check deployment outputs in Azure Key Vault](../../self-hosting/single-node/azure/install.md#check-deployment-outputs-in-azure-key-vault) section. You can get the values of `AZURE_ACCOUNT_NAME`, `AZURE_ACCOUNT_KEY` and `AZURE_CONTAINER_NAME` from the `openvidu.env` file of your deployment (see [Azure SSH Outputs](../../self-hosting/single-node/azure/install.md#check-deployment-outputs-in-the-instance)).
+          - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L3) to update the value of `LIVEKIT_URL` to `wss://your.azure.deployment.domain`
+
+    !!! warning
+
+        If you are using self-signed certificate you will need to accept the certificate in the browser before using the tutorial.
+
+    !!! info "Configure Webhooks"
+
+        All [application servers](../application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
@@ -29,7 +53,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js](https://nodejs.org/en/download){:target="\_blank"} (≥ 18) installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -53,9 +77,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -83,7 +107,7 @@ And the following essential frontend files under the `public` directory:
 
 ### Backend
 
-The server application extends the [Node.js server tutorial](../application-server/node.md){:target="\_blank"} by adding the following REST API endpoints:
+The server application extends the [Node.js server tutorial](../application-server/node.md) by adding the following REST API endpoints:
 
 - **`POST /recordings/start`**: Starts the recording of a room.
 - **`POST /recordings/stop`**: Stops the recording of a room.
@@ -124,7 +148,7 @@ There are two new environment variables:
 
 Besides, the `index.js` file configures the server to serve static files from the `public` directory.
 
-It also initializes the `EgressClient`, which will help interacting with [Egress API](https://docs.livekit.io/home/egress/api/){:target="\_blank"} to manage recordings, and the `AzureBlobStorageService`, which will help interacting with the Blob Container:
+It also initializes the `EgressClient`, which will help interacting with [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/api/){:target="\_blank"} to manage recordings, and the `AzureBlobStorageService`, which will help interacting with the Blob Container:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L33-L38' target='_blank'>index.js</a>" linenums="33"
 const egressClient = new EgressClient(
@@ -214,7 +238,7 @@ app.post("/recordings/start", async (req, res) => {
 2. If there is already an active recording for the room, the server returns a `409 Conflict` status code.
 3. Use the `EncodedFileOutput` class to export the recording to an external file.
 4. Define the file type as `MP4`.
-5. Define the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](https://docs.livekit.io/home/egress/outputs/#filename-templating){:target="\_blank"}.
+5. Define the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/outputs/#filename-templating){:target="\_blank"}.
 6. Start a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with the `roomName` and `fileOutput` as parameters.
 7. Extract the recording name from the `fileResults` array.
 8. Return the recording metadata to the client.
@@ -240,7 +264,7 @@ This endpoint does the following:
     };
     ```
 
-3.  Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](https://docs.livekit.io/home/egress/outputs/#filename-templating){:target="\_blank"}.
+3.  Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/outputs/#filename-templating){:target="\_blank"}.
 4.  Starts a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with `roomName` and `fileOutput` as parameters.
 5.  Extracts the recording name from the `fileResults` array.
 6.  Returns the recording metadata to the client.
@@ -591,7 +615,7 @@ Then, it defines the `AzureBlobService` class as a singleton, which initializes 
 
 ### Frontend
 
-The client application extends the [JavaScript client tutorial](../application-client/javascript.md){:target="\_blank"} by adding recording features, introducing new buttons to facilitate actions such as starting and stopping recording a room, as well as listing, playing and deleting recordings. When these newly introduced buttons are interacted with, the client triggers requests to the REST API endpoints of the server application.
+The client application extends the [JavaScript client tutorial](../application-client/javascript.md) by adding recording features, introducing new buttons to facilitate actions such as starting and stopping recording a room, as well as listing, playing and deleting recordings. When these newly introduced buttons are interacted with, the client triggers requests to the REST API endpoints of the server application.
 
 In order to update the user interface of all participants in the room according to the recording status, the client application subscribes to the `RoomEvent.RecordingStatusChanged` event, which is triggered when the room changes from being recorded to not being recorded, and vice versa. When this event is triggered, the `updateRecordingInfo` function is called to update the recording information of the room displayed on the screen. This function is also called when a participant joins the room, using the current value of the `room.recording` property at that moment. This is done in the `joinRoom` function of the `app.js` file:
 
@@ -599,7 +623,7 @@ In order to update the user interface of all participants in the room according 
 
     By using the `RoomEvent.RecordingStatusChanged` event, we can only detect when the recording has started or stopped, but not other states like `starting`, `stopping` or `failed`. Additionally, when the recording stops, the event is not triggered until the recorder participant leaves the room, causing a delay of 20 seconds approximately between the stop and when participants are notified.
 
-    To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
+    To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced-azure.md), where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
 async function joinRoom() {
@@ -719,7 +743,7 @@ The `showRecordingList` function creates a new `div` element for each recording 
 
     When a recording is deleted, it is removed from the recording list, but only for the user who initiated the deletion. Other users will continue to see the recording in their list until it is refreshed.
 
-    In the [advanced recording tutorial](./recording-advanced.md){:target="\_blank"}, we show how to implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
+    In the [advanced recording tutorial](./recording-advanced-azure.md), we show how to implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
 
 When the user clicks the play button, the `displayRecording` function is called to play the recording. This function opens a dialog window with an embedded video element and sets the source of the video to the [get recording endpoint](#get-recording) of the server application:
 
@@ -751,8 +775,8 @@ The `recordings.html` file defines the HTML for the general recording page. This
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording3.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording4.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording4.png" loading="lazy"/></a></p></div>
 
 </div>

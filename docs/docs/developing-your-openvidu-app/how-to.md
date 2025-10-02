@@ -13,7 +13,7 @@ This page is a collection of the most common operations you may want to perform 
 
 You can use this page as a cheat sheet to know at a glance how to do something, and you have links to the LiveKit reference documentation of each operation for a more detailed explanation.
 
-> All client side operations are exemplified using the [LiveKit JS Client SDK](https://docs.livekit.io/client-sdk-js/modules.html){target="\_blank"}. For other client SDKs, refer to the corresponding LiveKit reference documentation.
+> All client side operations are exemplified using the [LiveKit JS Client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/modules.html){target="\_blank"}. For other client SDKs, refer to the corresponding LiveKit reference documentation.
 
 ### Generate access tokens
 
@@ -34,7 +34,7 @@ const room = new Room();
 await room.connect(wsUrl, token);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#connecting-to-a-room){target="\_blank"}
 
 ---
 
@@ -44,7 +44,7 @@ await room.connect(wsUrl, token);
 await room.disconnect();
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#Leaving-a-Room){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#disconnection){target="\_blank"}
 
 ---
 
@@ -132,13 +132,13 @@ The second boolean parameter indicates if the local Track should be stopped. Thi
 
 You can share information between Participants of a Room in different ways.
 
-First of all, you can set Room metadata that will be available for all clients in the `Room` object. You do so in your application server when calling the [`CreateRoom` API](https://docs.livekit.io/reference/server/server-apis/#CreateRoom){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The Room metadata will be available in the client side like this:
+First of all, you can set Room metadata that will be available for all clients in the `Room` object. You do so in your application server when calling the [`CreateRoom` API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#CreateRoom){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The Room metadata will be available in the client side like this:
 
 ```typescript
 console.log(room.metadata);
 ```
 
-You can update the Room metadata at any time from your application server with the [`UpdateRoomMetadata` API](https://docs.livekit.io/reference/server/server-apis/#UpdateRoomMetadata){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The client side will be notified of the change with the `roomMetadataChanged` event of the `Room` object:
+You can update the Room metadata at any time from your application server with the [`UpdateRoomMetadata` API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#UpdateRoomMetadata){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The client side will be notified of the change with the `roomMetadataChanged` event of the `Room` object:
 
 ```typescript
 room.on("roomMetadataChanged", (metadata) => {
@@ -146,9 +146,9 @@ room.on("roomMetadataChanged", (metadata) => {
 });
 ```
 
-Secondly, you can also set Participant metadata. You do so when creating an [access token](https://docs.livekit.io/home/get-started/authentication/){target="\_blank"} in your application server, setting `metadata` field of the JWT.
+Secondly, you can also set Participant metadata. You do so when creating an [access token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/){target="\_blank"} in your application server, setting `metadata` field of the JWT.
 
-Participants can also update their own metadata from the client side, if their access token was created with [grant `canUpdateOwnMetadata`](https://docs.livekit.io/home/get-started/authentication/#Video-grant){target="\_blank"}.
+Participants can also update their own metadata from the client side, if their access token was created with [grant `canUpdateOwnMetadata` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){target="\_blank"}.
 
 ```typescript
 room.localParticipant.setMetadata("new metadata");
@@ -182,7 +182,7 @@ participant.on(
 );
 ```
 
-Finally, you can send messages to Participants in the Room using the [`LocalParticipant.publishData`](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#publishData){target="\_blank"} method:
+Finally, you can send messages to Participants in the Room using the [`LocalParticipant.publishData` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#publishData){target="\_blank"} method:
 
 ```typescript
 const data: Uint8Array = new TextEncoder().encode(JSON.stringify(""));
@@ -193,7 +193,7 @@ room.localParticipant.publishData(data, {
 });
 ```
 
-The [`DataPublishOptions`](https://docs.livekit.io/client-sdk-js/types/DataPublishOptions.html){target="\_blank"} allow setting the reliability of the message (depending on the nature of the message it can be sent as a reliable or lossy message), a topic to easily filter messages, and the participants that will receive the message.
+The [`DataPublishOptions` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/types/DataPublishOptions.html){target="\_blank"} allow setting the reliability of the message (depending on the nature of the message it can be sent as a reliable or lossy message), a topic to easily filter messages, and the participants that will receive the message.
 
 The client side will be notified of the message with the `dataReceived` event of the `Room` and/or `Participant` object:
 
@@ -237,9 +237,9 @@ These operations are only available in the server SDKs, and not in the client SD
 
 You have here the complete list of the server-side operations, documented for the HTTP Server API. All the LiveKit Server SDKs have the same operations.
 
-- [**RoomService**](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}: to manage Rooms and Participants.
-- [**Egress**](https://docs.livekit.io/home/egress/overview/#API){target="\_blank"}: to manage egress operations.
-- [**Ingress**](https://docs.livekit.io/home/ingress/overview/#API){target="\_blank"}: to manage ingress operations.
+- [**RoomService** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}: to manage Rooms and Participants.
+- [**Egress** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/#API){target="\_blank"}: to manage egress operations.
+- [**Ingress** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/#API){target="\_blank"}: to manage ingress operations.
 
 ### Screen Sharing
 
@@ -249,7 +249,7 @@ To quickly publish a screen sharing Track:
 await room.localParticipant.setScreenShareEnabled(true);
 ```
 
-You can also create custom screen tracks, for example capturing the audio of the screen and fine-tuning the video capture options (checkout the [ScreenTrackOptions](https://docs.livekit.io/client-sdk-js/interfaces/ScreenShareCaptureOptions.html){target="\_blank"} interface for detailed information):
+You can also create custom screen tracks, for example capturing the audio of the screen and fine-tuning the video capture options (checkout the [ScreenTrackOptions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/interfaces/ScreenShareCaptureOptions.html){target="\_blank"} interface for detailed information):
 
 ```typescript
 const screenTracks = await room.localParticipant.createScreenTracks({
@@ -317,9 +317,9 @@ Visit the LiveKit reference documentation for a detailed explanation of Egress:
 You can ingest media streams into your Rooms using the Ingress module. It supports different sources, including:
 
 - **RTMP**: the Ingress module exposes an RTMP endpoint to which your user can stream their content. The ingress module will transcode and publish the stream to the Room, making it available to all participants.
-- **WHIP**: the Ingress module exposes a WHIP endpoint to which your user can stream their content directly via WebRTC. You can choose whether the Ingress module should transcode the stream or directly relay it to the Room. Avoiding transcodification is the best option to minimize latency when ingesting media to a Room.
+- **WHIP**: the Ingress module exposes a WHIP endpoint to which your user can stream their content directly via WebRTC. You can choose whether the Ingress module should transcode the stream or directly relay it to the Room. Avoiding transcoding is the best option to minimize latency when ingesting media to a Room.
 - **Media files serve by an HTTP server**: the Ingress module will fetch a media file, transcode it and publish it to the Room.
-- **Media served by a SRT server**: the Ingress module will pull the media from an SRT server, transcode it and publish it to the Room.
+- **Media served by an SRT server**: the Ingress module will pull the media from an SRT server, transcode it and publish it to the Room.
 
 Visit the LiveKit reference documentation for a detailed explanation of Ingress:
 
@@ -327,11 +327,11 @@ Visit the LiveKit reference documentation for a detailed explanation of Ingress:
 
 ### IP Cameras
 
-With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply use the [Ingress API](https://docs.livekit.io/home/ingress/overview/){target="\_blank"} to create and ingress of input type `URL`, providing the IP camera RTSP URL as value:
+With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply use the [Ingress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){target="\_blank"} to create and ingress of input type `URL`, providing the IP camera RTSP URL as value:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
 
     ```javascript
     import { IngressClient, IngressInfo, IngressInput } from 'livekit-server-sdk';
@@ -351,7 +351,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    Using [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
 
     ```go
     import (
@@ -379,7 +379,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    Using [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
 
     ```ruby
     require 'livekit'
@@ -403,7 +403,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    Using [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
 
     ```java
     import io.livekit.server.IngressServiceClient;
@@ -425,7 +425,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 
-    Using [LiveKit Python SDK](https://github.com/livekit/python-sdks){target="\_blank"}
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){target="\_blank"}
 
     ```python
     from livekit.api import LiveKitAPI
@@ -446,7 +446,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
-    Using [LiveKit Rust SDK](https://github.com/livekit/rust-sdks){target="\_blank"}
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){target="\_blank"}
 
     ```rust
     use livekit_api::services::ingress::*;
@@ -471,7 +471,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
-    Using [LiveKit PHP SDK](https://github.com/agence104/livekit-server-sdk-php){target="\_blank"}
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){target="\_blank"}
 
     ```php
     <?php
@@ -492,7 +492,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    Using [LiveKit .NET SDK](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
 
     ```csharp
     using Livekit.Server.Sdk.Dotnet;
@@ -519,7 +519,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
     1. Consume the Ingress API directly: [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/home/ingress/overview/#api){target="\_blank"}
 
-    2. Use the [livekit-cli](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
 
         Create a file at `ingress.json` with the following content:
 
@@ -544,7 +544,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
         lk ingress create ingress.json
         ```
 
-Many different audio and video codecs are supported for ingesting IP cameras:
+Many audio and video codecs are supported for ingesting IP cameras:
 
 For video:
 

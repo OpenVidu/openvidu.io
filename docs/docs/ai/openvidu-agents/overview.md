@@ -2,7 +2,7 @@
 
 ## Basic concepts
 
-The modules that provide AI services in OpenVidu are called **OpenVidu agents**. They are **pre-configured and ready-to-use AI modules**. OpenVidu agents interact with your Rooms in real time using the powerful [LiveKit Agents framework](https://docs.livekit.io/agents/){target="\_blank"}.
+The modules that provide AI services in OpenVidu are called **OpenVidu agents**. They are **pre-configured and ready-to-use AI modules**. OpenVidu agents interact with your Rooms in real time using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){target="\_blank"}.
 
 All OpenVidu agents follow the following general principles:
 
@@ -22,7 +22,7 @@ All OpenVidu agents follow the following general principles:
 - **Speech Processing agent**: provides all the AI services related to transcribing audio speech to text and processing the results in various ways.
 
 [:octicons-arrow-right-24: List of provided AI services](../overview.md#speech-processing-agent){.ai-agent-link}
-[:octicons-arrow-right-24: Enable the agent](../speech-processing/enabling-agent.md){.ai-agent-link}
+[:octicons-arrow-right-24: Enable the agent](./speech-processing-agent.md){.ai-agent-link}
 
 ## Troubleshooting OpenVidu agents
 

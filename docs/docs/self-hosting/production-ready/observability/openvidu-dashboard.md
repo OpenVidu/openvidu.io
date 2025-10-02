@@ -20,17 +20,17 @@ Display **graphical analytics** for client SDKs, connection types, bandwidth usa
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics2.png" loading="lazy"/></a></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics4.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -50,11 +50,11 @@ Retrieve in-depth information about a specific **room**, including its duration,
 
 <div class="grid-container">
 
-<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room_active.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room_active.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room_active.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room_active.png" loading="lazy"/></a></p></div>
 
-<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room1.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room2.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -66,9 +66,9 @@ Obtain detailed insights into each **participant**, covering their duration, ban
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/participant1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/participant1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/participant1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/participant1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/participant2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/participant2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/participant2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/participant2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -94,9 +94,9 @@ Access comprehensive details about a specific **egress**, including its duration
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/egress1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/egress1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/egress1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/egress1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/egress2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/egress2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/egress2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/egress2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -109,5 +109,3 @@ Explore detailed information about a specific **ingress**, including its total d
 <figure markdown>
   ![OpenVidu Dashboard ingress](../../../../assets/images/dashboard/ingress.png){ .mkdocs-img }
 </figure>
-
-<script>window.setupGallery()</script>

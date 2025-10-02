@@ -34,7 +34,7 @@ sudo systemctl stop openvidu
 
 ## Removing Media Nodes Forcefully
 
-To remove a Media Node forcefully, without considering the rooms, ingress, and egress processes running in the node, you can simply stop the OpenVidu service in the Media Node and delete the VM.
+To remove a Media Node forcefully, without considering the rooms, ingress, egress and agents hosted by the node, you can simply stop the OpenVidu service in the Media Node and delete the VM.
 
 ```bash
 sudo systemctl stop openvidu

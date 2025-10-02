@@ -1,17 +1,17 @@
 # Custom agents
 
-OpenVidu provides a [set of built-in agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework](https://docs.livekit.io/agents/){target="\_blank"}.
+OpenVidu provides a [set of built-in agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){target="\_blank"}.
 
 ## 1. Implement your custom agent using the LiveKit Agents framework
 
 LiveKit Agents consists of a **Python** or **Node** program that connects to LiveKit Rooms to perform some kind of AI pipeline over the media tracks published to the Room by regular Participants.
 
-The agent actually behaves as any other regular Participant of the Room, but thanks to its connection to **Speech-to-Text** services, **LLMs** and **Text-to-Speech** service, it can transcribe audio tracks, analyze video tracks, generate speech, etc... and publish the results back to the Room. This allows building any kind of flow interaction between your users and the AI service, all in realtime.
+The agent actually behaves as any other regular Participant of the Room, but thanks to its connection to **Speech-to-Text** services, **LLMs** and **Text-to-Speech** service, it can transcribe audio tracks, analyze video tracks, generate speech, etc... and publish the results back to the Room. This allows building any kind of flow interaction between your users and the AI service, all in real-time.
 
-An incredible set of [plugins](https://github.com/livekit/agents/tree/main/livekit-plugins){target="\_blank"} make it very easy to integrate your agent code with the most popular AI providers. You have further information in the [LiveKit Agents integrations](https://docs.livekit.io/agents/integrations/){target="\_blank"} documentation.
+An incredible set of [plugins :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/tree/main/livekit-plugins){target="\_blank"} make it very easy to integrate your agent code with the most popular AI providers. You have further information in the [LiveKit Agents integrations :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/integrations/){target="\_blank"} documentation.
 
 !!! tip
-    To start building your own custom agent, the best way is to follow the LiveKit's [Voice AI quickstart](https://docs.livekit.io/agents/start/voice-ai/){target="\_blank"} guide. You can customize it to your needs once you grasp the basics of the Agents framework. You also have a great collection of [recipes](https://docs.livekit.io/recipes/){target="\_blank"} to inspire you.
+    To start building your own custom agent, the best way is to follow the LiveKit's [Voice AI quickstart :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/start/voice-ai/){target="\_blank"} guide. You can customize it to your needs once you grasp the basics of the Agents framework. You also have a great collection of [recipes :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/recipes/){target="\_blank"} to inspire you.
 
 ## 2. Dockerize your custom agent
 
@@ -120,7 +120,7 @@ Depending on your [OpenVidu deployment type](../self-hosting/deployment-types.md
     cd /opt/openvidu/config/cluster/media_node
     ```
 
-### 2. Add an `agent-AGENT_NAME.yaml` file
+### 2. Add a `agent-AGENT_NAME.yaml` file
 
 Located in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node, create a file named `agent-AGENT_NAME.yaml`, where `AGENT_NAME` must be a unique name for your agent. The minimal content of this file is:
 
@@ -188,7 +188,7 @@ When developing your custom agent using the Python or Node SDKs, there are some 
 
 ### Dispatching your custom agent
 
-You can control when to dispatch your agent in your agent's code. By default agents will dispatch (connect) automatically to new Rooms. If you want to manually control when to dispatch your agent, simply add property `agent_name` to your `WorkerOptions` when creating the agent:
+You can control when to dispatch your agent in your agent's code. By default, agents will dispatch (connect) automatically to new Rooms. If you want to manually control when to dispatch your agent, simply add property `agent_name` to your `WorkerOptions` when creating the agent:
 
 === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 
@@ -251,8 +251,14 @@ It can be very useful to access your agent's YAML configuration file from within
     console.log(config);
     ```
 
-## Custom agents vs OpenVidu agents
 
-Take into account that [OpenVidu agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents) have an advantage over a regular LiveKit agent when running in an multi-node OpenVidu deployment ([OpenVidu Elastic](../self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](../self-hosting/deployment-types.md#openvidu-high-availability)): OpenVidu agents are designed to **allow graceful shutdowns** when scaling down Media Nodes.
+## Elasticity and graceful shutdowns
 
-This means that a Media Node flagged for termination will wait for all its OpenVidu agents to finish processing their assigned Rooms before allowing the Media Node to be stopped, while at the same time rejecting new job requests. This ensures a smooth experience for your users, avoiding downtimes when your cluster is scaled down.
+Custom agents in multi-node OpenVidu deployments ([OpenVidu Elastic](../self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](../self-hosting/deployment-types.md#openvidu-high-availability)) support automatic graceful shutdowns when Media Nodes are scaled down.
+
+When a Media Node hosting custom agents is being removed from the OpenVidu cluster:
+
+1. **Existing jobs complete**: Custom agents are allowed to finish processing their current jobs before stopping.
+2. **New jobs rejected**: Custom agents reject new job requests, which will be redirected to other Media Nodes in the cluster.
+
+This ensures no interruptions in the services provided by your custom agents when your OpenVidu cluster scales down.

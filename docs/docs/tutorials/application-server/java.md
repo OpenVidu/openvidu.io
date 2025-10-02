@@ -7,12 +7,12 @@ description: Learn how to build a minimal Java application server with Spring Bo
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-server/java){ .md-button target=\_blank }
 
-This is a minimal server application built for Java with [Spring Boot](https://spring.io/){:target="\_blank"} that allows:
+This is a minimal server application built for Java with [Spring Boot :fontawesome-solid-external-link:{.external-link-icon}](https://spring.io/){:target="\_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
+-   Receiving LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 
-It internally uses [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}.
+It internally uses [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}.
 
 ## Running this tutorial
 
@@ -70,8 +70,8 @@ Starting by the top, the `Controller` class has the following annotations:
 
 Going deeper, the `Controller` class has the following fields:
 
--   `LIVEKIT_API_KEY`: the API key of LiveKit Server. It is injected from the property `livekit.api.key` defined in [`application.properties`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/java/src/main/resources/application.properties#L6){:target="\_blank"} using the `@Value("${livekit.api.key}")` annotation.
--   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server. It is injected from the the property `livekit.api.secret` defined in [`application.properties`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/java/src/main/resources/application.properties#L7){:target="\_blank"} using the `@Value("${livekit.api.secret}")` annotation.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server. It is injected from the property `livekit.api.key` defined in [`application.properties` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/java/src/main/resources/application.properties#L6){:target="\_blank"} using the `@Value("${livekit.api.key}")` annotation.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server. It is injected from the the property `livekit.api.secret` defined in [`application.properties` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/java/src/main/resources/application.properties#L7){:target="\_blank"} using the `@Value("${livekit.api.secret}")` annotation.
 
 ---
 
@@ -103,23 +103,23 @@ public ResponseEntity<Map<String, String>> createToken(@RequestBody Map<String, 
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's name and identity in the AccessToken.
-3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
+3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 4. Finally, the token is sent back to the client.
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's name and identity in the AccessToken.
-3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
+3. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
 4. Finally, the token is sent back to the client.
 
 ---
 
 #### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
 ```java title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/java/src/main/java/io/openvidu/basic/java/Controller.java#L50-L60' target='_blank'>Controller.java</a>" linenums="50"
 @PostMapping(value = "/livekit/webhook", consumes = "application/webhook+json")
@@ -136,7 +136,7 @@ public ResponseEntity<String> receiveWebhook(@RequestHeader("Authorization") Str
 ```
 
 1. We need the 'Authorization' header and the raw body of the HTTP request.
-2. Initialize the WebhookReceiver using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
+2. Initialize the WebhookReceiver using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
 3. Obtain the `WebhookEvent` object using the `WebhookReceiver#receive` method. It takes the raw body as a String and the Authorization header of the request.
 4. Consume the event as you whish.
 
