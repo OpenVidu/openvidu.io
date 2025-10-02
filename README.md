@@ -74,7 +74,21 @@ When creating a new page, follow these steps:
    ```
 
 3. **Reference in `mkdocs.yml`**:  
-   Add the new page to the `nav` section in [`mkdocs.yml`](mkdocs.yml) (if you want to include it in the navigation) and set the title.
+   Two changes must be made:
+
+   
+   - Add the new page to the `nav` section in [`mkdocs.yml`](mkdocs.yml) (if you want to include it in the navigation) and set the title.
+
+   - Include the page (relative to the docs folder) in mkdocs.yml in the mkdocs-llmstxt plugin configuration, under the corresponding section (OpenVidu for non-versioned generic pages, OpenVidu Meet or Platform for versioned pages specific to the corresponding technology):
+
+      ```yaml
+      plugins:
+        - llmstxt:
+            markdown_description: Self-hosted videoconference solution and SDK
+            sections:
+              OpenVidu Meet:
+              - meet/newpage.md: Brief description # copy here the description from the metadata of the .md file.
+      ```
 
 4. **Update custom versioning scripts (if needed)**:
    - **Non-versioned pages**: If the new page is not versioned, add it to the `NON_VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
