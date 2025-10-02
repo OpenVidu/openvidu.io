@@ -5,7 +5,7 @@ description: Learn how to replace the default layout with your own using OpenVid
 
 # Custom layout using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.3.0/openvidu-components-angular/openvidu-custom-layout){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.4.0/openvidu-components-angular/openvidu-custom-layout){ .md-button target=\_blank }
 
 The **openvidu-custom-layout** tutorial demonstrates how to replace the default layout of the OpenVidu Components Angular library with a custom layout.
 
@@ -25,8 +25,8 @@ Replacing the default layout is made simple with the **LayoutDirective**, which 
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.0
 ```
 
 #### 3. Run a server application

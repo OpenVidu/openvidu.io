@@ -5,7 +5,7 @@ description: Learn how to replace the default participants panel with your own u
 
 # Custom participants panel using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.3.0/openvidu-components-angular/openvidu-custom-participants-panel){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.4.0/openvidu-components-angular/openvidu-custom-participants-panel){ .md-button target=\_blank }
 
 The **openvidu-custom-participants-panel** tutorial demonstrates how to customize the participants panel, providing a more tailored user experience.
 
@@ -25,8 +25,8 @@ Replacing the default participants panel is made simple with the **ParticipantsP
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.0
 ```
 
 #### 3. Run a server application

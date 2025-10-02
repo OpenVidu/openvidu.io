@@ -5,7 +5,7 @@ description: Learn how to replace the default toolbar with your own using OpenVi
 
 # Custom toolbar using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.3.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.4.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
 
 The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default toolbar with a custom one, providing a more tailored user experience.
 
@@ -25,8 +25,8 @@ Customizing the toolbar is made simple with the **ToolbarDirective**, which offe
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.0
 ```
 
 #### 3. Run a server application

@@ -5,7 +5,7 @@ description: Learn how to build a minimal Node.js server with Express to generat
 
 # Node.js Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-server/node){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.4.0/application-server/node){ .md-button target=\_blank }
 
 This is a minimal server application built for Node.js with [Express :fontawesome-solid-external-link:{.external-link-icon}](https://expressjs.com/){:target="\_blank"} that allows:
 
@@ -23,7 +23,7 @@ It internally uses [LiveKit JS SDK :fontawesome-solid-external-link:{.external-l
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
 ```
 
 ### 3. Run the server application
@@ -43,7 +43,7 @@ The application is a simple Express app with a single file `index.js` that expor
 
 Let's see the code of the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/node/index.js#L1-L14' target='_blank'>index.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-server/node/index.js#L1-L14' target='_blank'>index.js</a>" linenums="1"
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -88,7 +88,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 -   `roomName`: the name of the Room where the user wants to connect.
 -   `participantName`: the name of the participant that wants to connect to the Room.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/node/index.js#L16-L31' target='_blank'>index.js</a>" linenums="16"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-server/node/index.js#L16-L31' target='_blank'>index.js</a>" linenums="16"
 app.post("/token", async (req, res) => {
   const roomName = req.body.roomName;
   const participantName = req.body.participantName;
@@ -127,7 +127,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/node/index.js#L33-L49' target='_blank'>index.js</a>" linenums="33"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-server/node/index.js#L33-L49' target='_blank'>index.js</a>" linenums="33"
 const webhookReceiver = new WebhookReceiver( // (1)!
   LIVEKIT_API_KEY,
   LIVEKIT_API_SECRET

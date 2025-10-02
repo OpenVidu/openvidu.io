@@ -24,10 +24,10 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 !!! info
     
-    If you want to deploy a specific version of OpenVidu High Availability, replace `latest` with the version you want to deploy. For example, to deploy version `3.3.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu High Availability, replace `latest` with the version you want to deploy. For example, to deploy version `3.4.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.3.0/aws/cf-openvidu-elastic.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.4.0/aws/cf-openvidu-elastic.yaml
     ```
 
 === "Architecture overview"

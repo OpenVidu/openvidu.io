@@ -7,7 +7,7 @@ description: Learn how to deploy OpenVidu Single Node on Google Cloud Platform u
 
 !!! warning
 
-    Google Cloud Platform deployments are considered in Beta in version 3.3.0 of OpenVidu.
+    Google Cloud Platform deployments are considered in Beta in version 3.4.0 of OpenVidu.
 
 This section contains the instructions of how to deploy a production-ready OpenVidu Single Node deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
