@@ -8,7 +8,7 @@ BASE_URL="https://openvidu.io"
 GH_BRANCH="gh-pages"
 
 ASSETS=("assets" "javascripts" "stylesheets" "search")
-NON_VERSIONED_PAGES=("account" "pricing" "support" "openvidu-meet-vs-openvidu-platform" "conditions" "blog") # And root index.html, 404.html, llms.txt and llms-full.txt
+NON_VERSIONED_PAGES=("account" "pricing" "support" "openvidu-meet-vs-openvidu-platform" "conditions" "blog") # And root index.html, 404.html, robots.txt, llms.txt and llms-full.txt
 VERSIONED_PAGES=("docs" "meet")
 
 validateArgs() {
@@ -127,7 +127,10 @@ updateSitemap() {
     local SITEMAP_FILE="sitemap.xml"
     
     # Copy sitemap from version folder to root, replacing any existing one
-    cp "$VERSION/$SITEMAP_FILE" .
+    mv "$VERSION/$SITEMAP_FILE" .
+
+    # Remove sitemap.xml.gz
+    rm "$VERSION/$SITEMAP_FILE.gz"
     
     echo "Updating sitemap URLs..."
     
@@ -180,6 +183,7 @@ copyFilesFromVersionToRoot() {
     mv "$VERSION/index.html" . # Home page
     mv "$VERSION/index.md" . # Home page
     mv "$VERSION/404.html" . # 404 page
+    mv "$VERSION/robots.txt" . # robots.txt
     mv "$VERSION/llms.txt" . # LLMs list
     mv "$VERSION/llms-full.txt" . # Full LLMs list
 
@@ -234,6 +238,7 @@ updateWebsite() {
         rm -rf "${NON_VERSIONED_PAGES[@]/#/$VERSION/}"
         rm "$VERSION/404.html"
         rm "$VERSION/index.md" || true
+        rm "$VERSION/robots.txt" || true
         rm "$VERSION/llms.txt" || true
         rm "$VERSION/llms-full.txt" || true
 
