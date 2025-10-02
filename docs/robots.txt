@@ -6,4 +6,4 @@ Disallow: kurento.openvidu.io
 Allow: /latest/*
 Allow: /
 
-Sitemap: https://openvidu.io/sitemap_index.xml
+Sitemap: https://openvidu.io/sitemap.xml

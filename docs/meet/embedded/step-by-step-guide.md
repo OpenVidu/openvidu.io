@@ -33,6 +33,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
         --data '{"roomName": "my-room"}'
+        --data '{"roomName": "my-room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -253,7 +254,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     }
     ```
 
-The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `publisherUrl`, needed to embed the room into your application as explained in step 3.
+The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `speakerUrl`, needed to embed the room into your application as explained in step 3.
 
 ```json hl_lines="22-23"
 {

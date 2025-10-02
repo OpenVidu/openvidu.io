@@ -8,7 +8,7 @@ BASE_URL="https://openvidu.io"
 GH_BRANCH="gh-pages"
 
 ASSETS=("assets" "javascripts" "stylesheets" "search")
-NON_VERSIONED_PAGES=("account" "pricing" "support" "conditions" "blog") # And root index.html and 404.html
+NON_VERSIONED_PAGES=("account" "pricing" "support" "openvidu-meet-vs-openvidu-platform" "conditions" "blog") # And root index.html, 404.html, llms.txt and llms-full.txt
 VERSIONED_PAGES=("docs" "meet")
 
 validateArgs() {
@@ -123,85 +123,31 @@ changeNonVersionedPagesLinks() {
     grep -Erl "$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|$VERSION/||g" || true
 }
 
-updateIndexSitemap() {
-    local SITEMAP_INDEX="sitemap_index.xml"
-    local SITEMAP=$1
-    local LASTMOD=$(date +%Y-%m-%d) # Current date
-
-    # Create sitemap_index.xml if it doesn't exist
-    if [[ ! -f "$SITEMAP_INDEX" ]]; then
-        echo "Index sitemap not found, creating new one..."
-        cat <<EOF > "$SITEMAP_INDEX"
-<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-</sitemapindex>
-EOF
-    fi
-
-    # Check if the sitemap is already included in sitemap_index.xml
-    if grep -q "<loc>$SITEMAP</loc>" "$SITEMAP_INDEX"; then
-        echo "Sitemap '$SITEMAP' already exists in $SITEMAP_INDEX. Updating lastmod..."
-        # Update lastmod of the sitemap in sitemap_index.xml
-        sed -i "\|<loc>$SITEMAP</loc>|!b;n;c\        <lastmod>$LASTMOD</lastmod>" "$SITEMAP_INDEX"
-    else
-        echo "Adding sitemap '$SITEMAP' to $SITEMAP_INDEX..."
-
-        # If the sitemap include version, add it as the first sitemap. Otherwise, add it as the last one
-        if [[ $SITEMAP == *"$VERSION"* ]]; then
-            sed -i "2a \    <sitemap>\n        <loc>$SITEMAP</loc>\n        <lastmod>$LASTMOD</lastmod>\n    </sitemap>" "$SITEMAP_INDEX"
-        else
-            sed -i "\|</sitemapindex>|i \    <sitemap>\n        <loc>$SITEMAP</loc>\n        <lastmod>$LASTMOD</lastmod>\n    </sitemap>" "$SITEMAP_INDEX"
-        fi
-    fi
-}
-
-updateVersionSitemap() {
+updateSitemap() {
     local SITEMAP_FILE="sitemap.xml"
-
-    # Remove NVP in sitemap.xml
-    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
-        sed -i "\|<url>|{ :Loop N; \|</url>|! b Loop; \|$VERSION/$NVP|d }" "$VERSION/$SITEMAP_FILE"
+    
+    # Copy sitemap from version folder to root, replacing any existing one
+    cp "$VERSION/$SITEMAP_FILE" .
+    
+    echo "Updating sitemap URLs..."
+    
+    # Replace version with 'latest' for versioned pages
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        sed -i "s|/$VERSION/$VP/|/latest/$VP/|g" "$SITEMAP_FILE"
     done
-
-    # Regenerate sitemap.xml.gz
-    gzip -k -f "$VERSION/$SITEMAP_FILE"
-
-    # Update sitemap_index.xml
-    updateIndexSitemap "$BASE_URL/$VERSION/$SITEMAP_FILE.gz"
-}
-
-createRootSitemap() {
-    local SITEMAP_FILE="sitemap.xml"
-    local LASTMOD=$(date +%Y-%m-%d) # Current date
-
-    # Create header of the sitemap.xml
-    cat <<EOF > $SITEMAP_FILE
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>$BASE_URL/</loc>
-        <lastmod>$LASTMOD</lastmod>
-    </url>
-EOF
-
-    # Add NVP to the sitemap.xml
+    
+    # Remove version from non-versioned pages
     for NVP in "${NON_VERSIONED_PAGES[@]}"; do
-        cat <<EOF >> $SITEMAP_FILE
-    <url>
-        <loc>$BASE_URL/$NVP/</loc>
-        <lastmod>$LASTMOD</lastmod>
-    </url>
-EOF
+        sed -i "s|/$VERSION/$NVP/|/$NVP/|g" "$SITEMAP_FILE"
     done
-
-    # Close sitemap.xml
-    echo "</urlset>" >> $SITEMAP_FILE
-
-    # Generate sitemap.xml.gz
+    
+    # Remove version from root URL
+    sed -i "s|<loc>$BASE_URL/$VERSION/</loc>|<loc>$BASE_URL/</loc>|g" "$SITEMAP_FILE"
+    
+    # Generate compressed sitemap
     gzip -k -f "$SITEMAP_FILE"
-
-    # Update sitemap_index.xml
-    updateIndexSitemap "$BASE_URL/$SITEMAP_FILE.gz"
+    
+    echo "Sitemap updated successfully"
 }
 
 changeSearchIndexLinks() {
@@ -232,7 +178,10 @@ copyFilesFromVersionToRoot() {
 
     # Move NVP to root
     mv "$VERSION/index.html" . # Home page
+    mv "$VERSION/index.md" . # Home page
     mv "$VERSION/404.html" . # 404 page
+    mv "$VERSION/llms.txt" . # LLMs list
+    mv "$VERSION/llms-full.txt" . # Full LLMs list
 
     for NVP in "${NON_VERSIONED_PAGES[@]}"; do # Other NVP
         # Delete previous root version of the page
@@ -278,15 +227,15 @@ updateWebsite() {
     # Change links in search_index.json to use absolute links in the new version
     changeSearchIndexLinks
 
-    # Update sitemap.xml in the new version
-    updateVersionSitemap
-
     if [ "$UPDATE_LATEST" = false ]; then
         echo "The latest version will not be updated"
 
         # Remove NVP from new version
         rm -rf "${NON_VERSIONED_PAGES[@]/#/$VERSION/}"
         rm "$VERSION/404.html"
+        rm "$VERSION/index.md" || true
+        rm "$VERSION/llms.txt" || true
+        rm "$VERSION/llms-full.txt" || true
 
         # Move redirection file to the new version
         mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
@@ -306,8 +255,8 @@ updateWebsite() {
         # Move redirection file to the new version
         mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
 
-        # Create root sitemap.xml
-        createRootSitemap
+        # Update sitemap.xml
+        updateSitemap
 
         # Commit changes
         git add .
