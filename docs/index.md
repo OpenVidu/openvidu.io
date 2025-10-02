@@ -43,7 +43,7 @@ tags:
         </ul>
       </div>
       <div class="product-footer">
-        <a href="/meet/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="meet/" class="product-button md-button md-button--primary primary">Get Started</a>
       </div>
     </div>
     <div class="product-card openvidu-platform">
@@ -67,7 +67,7 @@ tags:
         </ul>
       </div>
       <div class="product-footer">
-        <a href="/docs/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="docs/" class="product-button md-button md-button--primary primary">Get Started</a>
       </div>
     </div>
   </div>

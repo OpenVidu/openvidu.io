@@ -5,7 +5,7 @@ description: Learn how to build a real-time video conferencing application using
 
 # OpenVidu Meet Webhooks Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/main/meet-webhooks){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-webhooks){ .md-button target=\_blank }
 
 This tutorial extends the [recordings tutorial](recordings.md) to add **real-time updates** through webhooks and Server-Sent Events (SSE). It demonstrates how to receive and process OpenVidu Meet webhooks to provide live status updates for rooms and recordings.
 
@@ -26,7 +26,7 @@ The application includes all the features from the recordings tutorial, plus:
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b main
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
 ```
 
 ### 3. Run the application
@@ -75,7 +75,7 @@ The main backend changes involve implementing webhook processing, SSE communicat
 
 The backend now includes SSE support for real-time client notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/src/index.js#L1-L29' target='_blank'>index.js</a>" linenums="1" hl_lines="6 18-19"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/src/index.js#L1-L29' target='_blank'>index.js</a>" linenums="1" hl_lines="6 18-19"
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import crypto from 'crypto';
@@ -108,7 +108,7 @@ This code sets up the backend to support Server-Sent Events (SSE), enabling the 
 
 A new endpoint allows clients to subscribe to real-time notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/src/index.js#L135-L136' target='_blank'>index.js</a>" linenums="135"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/src/index.js#L135-L136' target='_blank'>index.js</a>" linenums="135"
 // SSE endpoint for real-time notifications
 app.get('/events', sse.init); // (1)!
 ```
@@ -123,7 +123,7 @@ This endpoint enables clients to establish a persistent connection for receiving
 
 A new endpoint handles incoming webhooks from OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/src/index.js#L138-L154' target='_blank'>index.js</a>" linenums="138"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/src/index.js#L138-L154' target='_blank'>index.js</a>" linenums="138"
 // Webhook endpoint to receive events from OpenVidu Meet
 app.post('/webhook', (req, res) => {
     const body = req.body;
@@ -155,7 +155,7 @@ This endpoint receives webhook events from OpenVidu Meet, validates their authen
 
 A security function validates webhook authenticity:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/src/index.js#L193-L213' target='_blank'>index.js</a>" linenums="193"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/src/index.js#L193-L213' target='_blank'>index.js</a>" linenums="193"
 // Helper function to validate webhook event signature
 const isWebhookEventValid = (body, headers) => {
     const signature = headers['x-signature']; // (1)!
@@ -199,7 +199,7 @@ The frontend has been enhanced with real-time update capabilities and improved v
 
 The application now establishes an SSE connection on page load:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/public/js/app.js#L4-L8' target='_blank'>app.js</a>" linenums="4" hl_lines="4"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/public/js/app.js#L4-L8' target='_blank'>app.js</a>" linenums="4" hl_lines="4"
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchRooms();
     // Start listening for webhook notifications
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 A new function establishes and manages the SSE connection:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/public/js/app.js#L359-L380' target='_blank'>app.js</a>" linenums="359"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/public/js/app.js#L359-L380' target='_blank'>app.js</a>" linenums="359"
 // Function to start listening for webhook events via Server-Sent Events
 function startWebhookNotifications() {
     const eventSource = new EventSource('/events'); // (1)!
@@ -254,7 +254,7 @@ This function creates a persistent connection to receive real-time webhook notif
 
 A new function processes incoming webhook notifications and updates the UI accordingly:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/public/js/app.js#L382-L410' target='_blank'>app.js</a>" linenums="382"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/public/js/app.js#L382-L410' target='_blank'>app.js</a>" linenums="382"
 // Function to handle webhook notifications and update UI
 function handleWebhookNotification(webhookData) {
     const { event, data } = webhookData; // (1)!
@@ -301,7 +301,7 @@ This function processes different webhook event types and updates the appropriat
 
 In order to determine the current screen context, new utility functions have been introduced:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/public/js/app.js#L455-L471' target='_blank'>app.js</a>" linenums="455"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/public/js/app.js#L455-L471' target='_blank'>app.js</a>" linenums="455"
 // Helper functions to detect current screen
 function isOnHomeScreen() {
     const homeScreen = document.querySelector('#home');
@@ -336,7 +336,7 @@ These helper functions ensure that UI updates are only applied when users are vi
 
 The room template has been updated to include visual status indicators:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-webhooks/public/js/app.js#L51-99' target='_blank'>app.js</a>" linenums="51"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webhooks/public/js/app.js#L51-99' target='_blank'>app.js</a>" linenums="51"
 function getRoomListItemTemplate(room) {
     const roomStatus = room.status === 'active_meeting' ? 'ACTIVE' : room.status === 'open' ? 'OPEN' : 'CLOSED'; // (1)!
     const roomStatusBadgeClass =

@@ -3,7 +3,7 @@ You need **Docker Desktop** (you can install it on [Windows :fontawesome-solid-e
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
 ```
 
 !!! info
