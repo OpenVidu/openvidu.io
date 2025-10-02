@@ -55,9 +55,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-js.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webcomponent-advanced-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webcomponent-advanced-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/room-js.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/room-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webcomponent-advanced-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webcomponent-advanced-room.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -229,3 +229,11 @@ The enhanced `joinRoom()` function now performs the following actions:
     - **`joined`**: This event is triggered when the local participant joins the room. It shows the room header with the room name and displays the `End Meeting` button if the user is a moderator. It also adds an event listener for the `End Meeting` button to call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting. This method disconnects all participants and ends the meeting for everyone.
     - **`left`**: This event is triggered when the local participant leaves the room. It hides the room header.
     - **`closed`**: This event is triggered when the OpenVidu Meet component is closed. It hides the room screen and shows the home screen.
+
+## Accessing this tutorial from other computers or phones
+
+--8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+--8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"

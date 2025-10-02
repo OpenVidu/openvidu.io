@@ -53,9 +53,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/recordings-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/recordings-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/list-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/list-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/recordings-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/recordings-recordings.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -472,3 +472,11 @@ async function deleteRecording(recordingId) {
 3. Call the `renderRecordings()` function to update the list of recordings.
 
 The `deleteRecording()` function simply makes a `DELETE` request to the `/recordings/:recordingId` endpoint to delete the specified recording. If the recording is successfully deleted, it removes the recording from the `recordings` map and calls the `renderRecordings()` function to update the list of recordings. If an error occurs during recording deletion, it logs the error to the console.
+
+## Accessing this tutorial from other computers or phones
+
+--8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+--8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"

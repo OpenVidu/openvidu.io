@@ -14,11 +14,11 @@ At the end of this tutorial, you will have a fully functional simple video-call 
 -   Users can create rooms.
 -   Users can delete rooms.
 -   Users can join a room as moderator or speaker.
--   Users can chat with other participants.
--   Moderators can record the meeting.
+-   Users can chat with other users.
 -   Users may leave the room at any time.
--   Moderators may end the meeting at any time, disconnecting all participants.
 -   Users can view the recordings of the meeting.
+-   Moderators can record the meeting.
+-   Moderators may end the meeting at any time, disconnecting all users.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
 
@@ -60,9 +60,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-js.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/direct-link-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/direct-link-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/room-js.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/room-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/direct-link-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/direct-link-room.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -188,12 +188,16 @@ app.post('/rooms', async (req, res) => {
 
 This endpoint does the following:
 
-1. The `roomName` parameter is obtained from the request body. If it is not provided, the server returns a `400 Bad Request` response.
-2. A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint. The request includes the room name and additional configuration options (with default values):
+1.  The `roomName` parameter is obtained from the request body. If it is not provided, the server returns a `400 Bad Request` response.
+2.  A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint. The request includes the room name and additional configuration options (with default values):
 
-    - **Chat Configuration**: Enables chat functionality for the room.
-    - **Recording Configuration**: Enables recording for the room and allows access to recordings for the roles `admin`, `moderator` and `speaker`.
-    - **Virtual Background Configuration**: Enables virtual background functionality for the room.
+    -   **Chat Configuration**: Enables chat functionality for the room.
+    -   **Recording Configuration**: Enables recording for the room and allows access to recordings for the roles `admin`, `moderator` and `speaker`.
+    -   **Virtual Background Configuration**: Enables virtual background functionality for the room.
+
+    !!! info
+
+        The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/operations/createRoom){target="_blank"}.
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
@@ -234,7 +238,7 @@ This endpoint does the following:
 
     It parses the response body as JSON and checks if the response is OK. If not, it throws an error with the message and status code from the response.
 
-3. If the room is successfully created, the server returns a `201 Created` response with the room object. Otherwise, the error is handled by the `handleApiError` function, which logs the error and returns an appropriate HTTP response:
+3.  If the room is successfully created, the server returns a `201 Created` response with the room object. Otherwise, the error is handled by the `handleApiError` function, which logs the error and returns an appropriate HTTP response:
 
     ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-direct-link/src/index.js#L113-L119' target='_blank'>index.js</a>" linenums="113"
     // Helper function to handle API errors consistently
@@ -542,3 +546,56 @@ async function deleteRoom(roomId) {
 3. Call the `renderRooms()` function to update the list of rooms.
 
 The `deleteRoom()` function simply makes a `DELETE` request to the `/rooms/:roomId` endpoint to delete the specified room. If the room is successfully deleted, it removes the room from the `rooms` map and calls the `renderRooms()` function to update the list of rooms. If an error occurs during room deletion, it logs the error to the console.
+
+## Accessing this tutorial from other computers or phones
+
+To access this tutorial from other computers or phones, follow these steps:
+
+1.  **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
+
+2.  **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones :fontawesome-solid-external-link:{.external-link-icon}](../../deployment/local.md#accessing-openvidu-meet-from-other-computers-or-phones){:target="\_blank"} section.
+
+3.  **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
+
+    ```text
+    # Example for IP address 192.168.1.100
+    OV_MEET_SERVER_URL=https://192-168-1-100.openvidu-local.dev:9443
+    ```
+
+4.  **Restart the tutorial** to apply the changes:
+
+    ```bash
+    npm start
+    ```
+
+5.  **Access the tutorial**: Open your browser and navigate to `https://192-168-1-100.openvidu-local.dev:6443` (replacing `192-168-1-100` with your actual private IP) on the computer where you started the tutorial or any device in the same network.
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps :fontawesome-solid-external-link:{.external-link-icon}](../../deployment/basic.md){:target="\_blank"}), you can connect this tutorial to it by following these steps:
+
+1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
+
+    ```text
+    # Example for a production deployment
+    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com
+    ```
+
+2. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key :fontawesome-solid-external-link:{.external-link-icon}](../reference/rest-api.md#generate-an-api-key){:target="\_blank"} section to learn how to obtain it.
+
+    ```text
+    OV_MEET_API_KEY=your-production-api-key
+    ```
+
+3. **Restart the tutorial** to apply the changes:
+
+    ```bash
+    npm start
+    ```
+
+!!! warning "Make this tutorial accessible from other computers or phones"
+
+    By default, this tutorial runs on `http://localhost:6080` and is only accessible from the local machine. If you want to access it from other computers or phones, you have the following options:
+
+    - **Use tunneling tools**: Configure tools like [VS Code port forwarding :fontawesome-solid-external-link:{.external-link-icon}](https://code.visualstudio.com/docs/debugtest/port-forwarding){:target="_blank"}, [ngrok :fontawesome-solid-external-link:{.external-link-icon}](https://ngrok.com/){:target="_blank"}, [localtunnel :fontawesome-solid-external-link:{.external-link-icon}](https://localtunnel.github.io/www/){:target="_blank"}, or similar services to expose this tutorial to the internet. You can use http or https URLs.
+    - **Deploy to a server**: Upload this tutorial to a web server. You can use http or https URLs.

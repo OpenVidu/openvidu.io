@@ -9,16 +9,16 @@ description: Learn how to build a video conferencing application using Node.js a
 
 This tutorial extends the [Direct Link tutorial](direct-link.md) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
-At the end of this tutorial, you will have a fully functional video-call application with the following features:
+At the end of this tutorial, you will have a fully functional simple video-call application with the following features:
 
 -   Users can create rooms.
 -   Users can delete rooms.
 -   Users can join a room as moderator or speaker.
--   Users can chat with other participants.
--   Moderators can record the meeting.
+-   Users can chat with other users.
 -   Users may leave the room at any time.
--   Moderators may end the meeting at any time, disconnecting all participants.
 -   Users can view the recordings of the meeting.
+-   Moderators can record the meeting.
+-   Moderators may end the meeting at any time, disconnecting all users.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to create and delete rooms, and the [OpenVidu Meet WebComponent](../../embedded/reference/webcomponent.md) to embed the video call interface directly into the application.
 
@@ -60,9 +60,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-js.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webcomponent-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webcomponent-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/room-js.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/room-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webcomponent-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webcomponent-room.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -96,14 +96,6 @@ To use the OpenVidu Meet WebComponent in your application, you need to include i
 <!-- OpenVidu Meet WebComponent bundle -->
 <script src="http://localhost:9080/v1/openvidu-meet.js"></script>
 ```
-
-!!! warning "Configure the `src` URL"
-
-    When [running OpenVidu locally](#run-openvidu-locally), the `src` URL shown above will work if you access the application from the same device where OpenVidu Meet is running. However, if you access the application from a different device, you need to replace `http://localhost:9080` with `https://xxx-yyy-zzz-www.openvidu-local.dev:9443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.).
-
-    _This is one advantage of [running OpenVidu locally](#run-openvidu-meet-locally), that you can test your application client with other devices in your local network very easily without worrying about SSL certificates. For more information, see [Accessing OpenVidu Meet from other computers or phones](../../deployment/local.md#accessing-openvidu-meet-from-other-computers-or-phones)._
-
-    If you are using a [production OpenVidu deployment](#deploy-openvidu-meet), you should configure the domain part of the `src` URL with the correct URL depending on your deployment.
 
 ---
 
@@ -177,3 +169,11 @@ function joinRoom(roomUrl) {
 The `joinRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return users to the home screen when they leave the meeting.
 
 This approach provides a seamless user experience by keeping users within the same application while providing full video conferencing functionality through the embedded WebComponent.
+
+## Accessing this tutorial from other computers or phones
+
+--8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+--8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"

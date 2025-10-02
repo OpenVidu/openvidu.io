@@ -5,20 +5,20 @@ description: Learn how to build a video conferencing application by easily integ
 
 # OpenVidu Meet Tutorials
 
-OpenVidu Meet is a powerful and flexible solution for building video conferencing applications. It allows you to create a fully functional video conferencing application with just a few lines of code.
+OpenVidu Meet offers a robust and adaptable way to add video conferencing features to your projects. With minimal effort, you can integrate a complete video conferencing experience into your web application.
 
-Learn how to build a video conferencing application by easily integrating OpenVidu Meet into your web application. The tutorials below will guide you through the process of creating a simple video conferencing application using OpenVidu Meet directly or by embedding its Web Component.
+The following tutorials will walk you through embedding OpenVidu Meet, either directly or via its Web Component, to quickly set up interactive video sessions.
 
 Every tutorial below shares the same core functionality:
 
 -   Users can create rooms.
 -   Users can delete rooms.
 -   Users can join a room as moderator or speaker.
--   Users can chat with other participants.
--   Moderators can record the meeting.
+-   Users can chat with other users.
 -   Users may leave the room at any time.
--   Moderators may end the meeting at any time, disconnecting all participants.
 -   Users can view the recordings of the meeting.
+-   Moderators can record the meeting.
+-   Moderators may end the meeting at any time, disconnecting all users.
 
 <div class="tutorials-container" markdown>
 
@@ -26,7 +26,11 @@ Every tutorial below shares the same core functionality:
 
 [:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link }
 
-[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-height }
+</div>
+
+<div class="tutorials-container" markdown>
+
+[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
 
 [:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link }
 
