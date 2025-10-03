@@ -450,9 +450,8 @@ Each installation command for each type of node looks like this:
         --mongo-replica-set-key='xxxxx' \
         --grafana-admin-user='xxxxx' \
         --grafana-admin-password='xxxxx' \
-        --meet-admin-user='xxxxx' \
-        --meet-admin-password='xxxxx' \
-        --meet-api-key='xxxxx' \
+        --meet-initial-admin-password='xxxxx' \
+        --meet-initial-api-key='xxxxx' \
         --external-load-balancer
     ```
 

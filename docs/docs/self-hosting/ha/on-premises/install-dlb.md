@@ -291,11 +291,9 @@ Each installation command for each type of node looks like this:
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --meet-admin-user='xxxxx' \
-            --meet-admin-password='xxxxx' \
-            --meet-api-key='xxxxx' \
-            --certificate-type='letsencrypt' \
-            --letsencrypt-email='example@example.io'
+            --meet-initial-admin-password='xxxxx' \
+            --meet-initial-api-key='xxxxx' \
+            --certificate-type='letsencrypt'
         ```
 
         --8<-- "shared/self-hosting/install-version.md"
@@ -332,9 +330,8 @@ Each installation command for each type of node looks like this:
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --meet-admin-user='xxxxx' \
-            --meet-admin-password='xxxxx' \
-            --meet-api-key='xxxxx' \
+            --meet-initial-admin-password='xxxxx' \
+            --meet-initial-api-key='xxxxx' \
             --certificate-type='selfsigned'
         ```
 
@@ -377,9 +374,8 @@ Each installation command for each type of node looks like this:
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --meet-admin-user='xxxxx' \
-            --meet-admin-password='xxxxx' \
-            --meet-api-key='xxxxx' \
+            --meet-initial-admin-password='xxxxx' \
+            --meet-initial-api-key='xxxxx' \
             --certificate-type='owncert' \
             --owncert-private-key="$CERT_PRIVATE_KEY" \
             --owncert-public-key="$CERT_PUBLIC_KEY" \
