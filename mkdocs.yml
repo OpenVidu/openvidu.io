@@ -1,6 +1,6 @@
-site_name: openVidu
+site_name: OpenVidu
 site_url: https://openvidu.io/
-site_description: A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.
+site_description: From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
