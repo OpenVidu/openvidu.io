@@ -91,6 +91,7 @@ nav:
               - Custom Participant Panel Item Element: docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element.md
               - Toggle Hand: docs/tutorials/angular-components/openvidu-toggle-hand.md
               - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
+              - Demo App: docs/tutorials/angular-components/openvidu-components-demo.md
           - AI Services:
               - docs/tutorials/ai-services/index.md
               - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
@@ -300,7 +301,7 @@ plugins:
         - meet/embedded/tutorials/direct-link.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent-advanced.md: An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
-        - meet/embedded/tutorials/recordings.md: How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings. 
+        - meet/embedded/tutorials/recordings.md: How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings.
         - meet/embedded/tutorials/webhooks.md: Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
         - meet/embedded/reference/*.md: OpenVidu Meet - Reference documentation
         OpenVidu Platform:
@@ -323,15 +324,15 @@ plugins:
         - docs/self-hosting/ha/index.md: High Availability deployment options for OpenVidu Platform, either on-premises (with DNS or network load balancers), on AWS, or on Azure.
         - docs/self-hosting/production-ready/index.md: Main advantages of self-hosting videoconferencing and live-streaming solutions with OpenVidu Platform, which are privacy, leverage your resources, performant, scalable, fault tolerant, and observable.
         - docs/self-hosting/production-ready/performance.md: OpenVidu Platform 2x performance by using mediasoup to replace the original Pion LiveKit WebRTC engine while maintaining the LiveKit API.
-        - docs/self-hosting/production-ready/scalability.md: OpenVidu Platform scalability numbers and Elastic and High Availability deployments. 
+        - docs/self-hosting/production-ready/scalability.md: OpenVidu Platform scalability numbers and Elastic and High Availability deployments.
         - docs/self-hosting/production-ready/fault-tolerance.md: OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.
-        - docs/self-hosting/production-ready/observability/index.md: A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting on OpenVidu Dashboard and a Grafana stack. 
-        - docs/self-hosting/production-ready/observability/openvidu-dashboard.md: How to access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses. 
+        - docs/self-hosting/production-ready/observability/index.md: A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting on OpenVidu Dashboard and a Grafana stack.
+        - docs/self-hosting/production-ready/observability/openvidu-dashboard.md: How to access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses.
         - docs/self-hosting/production-ready/observability/grafana-stack.md: How to use OpenVidu's built-in Grafana dashboards to monitor different metrics from OpenVidu Platform and logs from your cluster.
         - docs/self-hosting/how-to-guides/index.md: Explore step-by-step guides to customize your OpenVidu deployment for specific use cases.
         - docs/ai/overview.md: OpenVidu offers a catalog of AI services that can be easily integrated into your application to enhance the user experience and add advanced features. These services are provided by OpenVidu agents, a set of pre-configured and ready-to-use AI modules.
-        - docs/ai/openvidu-agents/overview.md: A description of how to use and configure OpenVidu Agents, pre-configured and ready-to-use AI modules. 
-        - docs/ai/openvidu-agents/speech-processing-agent.md: Instructions on how to configure the Speech Processing OpenVidu agent which transcribes audio speech to text in real time. 
+        - docs/ai/openvidu-agents/overview.md: A description of how to use and configure OpenVidu Agents, pre-configured and ready-to-use AI modules.
+        - docs/ai/openvidu-agents/speech-processing-agent.md: Instructions on how to configure the Speech Processing OpenVidu agent which transcribes audio speech to text in real time.
         - docs/ui-components/angular-components.md: OpenVidu Angular Components simplify the creation of videoconferencing apps, offering customizable and powerful components for rapid development and easy maintenance. This is a how-to guide on using this angular library.
         - docs/ui-components/react-components.md: the simplest way to create real-time audio/video applications with React.
 
