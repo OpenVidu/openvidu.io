@@ -1,0 +1,7124 @@
+<!-- Elements added to main will be displayed on all pages --><!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.">
+      
+      
+      
+        <link rel="canonical" href="https://openvidu.io/3.4.0/meet/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="getting-started/">
+      
+      
+      <link rel="icon" href="../assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>OpenVidu Meet - openVidu</title>
+      
+    
+    
+
+
+<link rel="stylesheet" href="/stylesheets/animate.min.css">
+
+
+
+<link rel="stylesheet" href="/stylesheets/flickity.min.css">
+
+
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
+  }
+</style>
+
+
+      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/stylesheets/meet.css">
+
+
+
+
+    
+
+<!-- wow.js -->
+<script>
+  window.setupWowJs = function () {
+    new WOW().init();
+    console.debug("WOW.js initialized");
+  };
+</script>
+
+<!-- Card glow effect -->
+<script>
+  window.setupCardGlow = function () {
+    console.debug("starting card glow setup");
+    const cards = document.querySelectorAll(
+      ".feature-cards .grid.cards > ul > li"
+    );
+    const maxRetries = 10;
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      retryCount++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
+    function handleMouseMove(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+      angle = (angle + 360) % 360;
+      this.style.setProperty("--start", angle + 60);
+    }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
+  };
+</script>
+
+
+      
+    
+
+
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.9a0008fb.css">
+        <style>:root{--md-text-font:"Tomorrow";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/colors.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/unsemantic-grid.css">
+    
+      <link rel="stylesheet" href="../stylesheets/livekit-tutorials.css">
+    
+      <link rel="stylesheet" href="../stylesheets/amplify.css">
+    
+      <link rel="stylesheet" href="../stylesheets/home.css">
+    
+      <link rel="stylesheet" href="../stylesheets/openvidu-call.css">
+    
+      <link rel="stylesheet" href="../javascripts/openvidu-register/openvidu-register.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-VPX0VSKK58"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-VPX0VSKK58",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-VPX0VSKK58",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+<!-- Add head tags that need to be applied before here -->
+
+<!-- Add head tags that need to be applied afterwards here -->
+
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: none; }
+            .glightbox-clean .gslide-media { -webkit-box-shadow: none; box-shadow: none; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intro" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+              </button>
+            
+            
+<div id="announce">
+  Coming from OpenVidu 2? Find out all you need to know
+  <a href="https://docs.openvidu.io/en/stable/openvidu3/" target="_blank">
+    on this page</a>
+</div>
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+<span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
+<a href="/latest/docs/getting-started/">
+  <strong>GO TO LATEST VERSION</strong>
+</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL(".."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html -->
+
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+
+<link rel="preload" href="../assets/external/fonts.googleapis.com/css.55a6ed21.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link href="../assets/external/fonts.googleapis.com/css.55a6ed21.css" rel="stylesheet" type="text/css">
+</noscript>
+
+<link rel="preload" href="../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link href="../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" rel="stylesheet" type="text/css">
+</noscript>
+
+<!-- Header -->
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a href=".." title="openVidu" class="md-header__button md-logo" aria-label="openVidu" data-md-component="logo">
+      
+      
+        <img src="../assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo">
+      
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              
+                Index
+              
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+      
+
+      <!-- Check if search is actually enabled - see https://t.ly/DT_0V -->
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    openvidu/openvidu
+  </div>
+</a>
+      </div>
+    
+
+    <div class="md-typeset log-in-div">
+      <div id="login-loader" class="lds-ripple"><div></div><div></div></div>
+    </div>
+
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+</header>
+
+<!-- We need this component here to check if user is logged in any page -->
+
+<openvidu-register style="display: none"></openvidu-register>
+
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  OpenVidu Meet [BETA]
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../docs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  OpenVidu Platform
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../support/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Support
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../pricing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Pricing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="openVidu" class="md-nav__button md-logo" aria-label="openVidu" data-md-component="logo">
+      
+  <img src="../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+
+    </a>
+    openVidu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    openvidu/openvidu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Meet [BETA]
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu Meet [BETA]
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/rooms-and-meetings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rooms and meetings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/recordings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recordings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/users-and-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Users and permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deployment/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deployment/local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Try OpenVidu Meet locally
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deployment/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deployment/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced deployments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Embedded
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Embedded
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/step-by-step-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Step by step guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="embedded/tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/tutorials/direct-link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Direct Link
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/tutorials/webcomponent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebComponent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/tutorials/webcomponent-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebComponent Commands &amp; Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/tutorials/recordings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recordings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/tutorials/webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/reference/webcomponent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webcomponent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/reference/direct-link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Direct Link
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/reference/iframe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iframe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/reference/rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="embedded/reference/webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Platform
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu Platform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/comparing-openvidu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparing OpenVidu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/developing-your-openvidu-app/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Developing your OpenVidu app
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Developing your OpenVidu app
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/developing-your-openvidu-app/how-to/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How to
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_1">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/tutorials/application-server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Application Server
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_1" id="__nav_3_4_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Application Server
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Node.js
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/go/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Go
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/ruby/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ruby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/php/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PHP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-server/dotnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    .NET
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/tutorials/application-client/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Application Client
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Application Client
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/javascript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/react/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    React
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/angular/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Angular
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/electron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Electron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/ionic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ionic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Android
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/application-client/ios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    iOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/tutorials/advanced-features/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Advanced Features
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_3" id="__nav_3_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/advanced-features/recording-basic-s3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Basic S3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/advanced-features/recording-advanced-s3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Advanced S3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/advanced-features/recording-basic-azure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Basic Azure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/advanced-features/recording-advanced-azure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Advanced Azure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_4">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/tutorials/angular-components/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Angular Components
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_4" id="__nav_3_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Angular Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-toolbar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Toolbar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-toolbar-buttons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toolbar Buttons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-toolbar-panel-buttons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toolbar Panel Buttons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Layout
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-stream/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Stream
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-panels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Panels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-additional-panels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Additional Panels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-chat-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Chat Panel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-activities-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Activities Panel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-participants-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Participants Panel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-participant-panel-item/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Participant Panel Item
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Participant Panel Item Element
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-toggle-hand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toggle Hand
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/angular-components/openvidu-admin-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Admin Dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/tutorials/ai-services/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    AI Services
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_5" id="__nav_3_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            AI Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/tutorials/ai-services/openvidu-live-captions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Live Captions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Self-hosting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Self-hosting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/deployment-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/production-ready/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Production ready
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_2" id="__nav_3_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Production ready
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/production-ready/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/production-ready/scalability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scalable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/production-ready/fault-tolerance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fault Tolerant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/production-ready/observability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Observable
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_2_5" id="__nav_3_5_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Observable
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/production-ready/observability/openvidu-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/production-ready/observability/grafana-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grafana Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Local (Development)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/single-node/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4" id="__nav_3_5_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_2" id="__nav_3_5_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/on-premises/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_3" id="__nav_3_5_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_4" id="__nav_3_5_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_5" id="__nav_3_5_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    GCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            GCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/single-node-pro/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5" id="__nav_3_5_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_2" id="__nav_3_5_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/on-premises/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_3" id="__nav_3_5_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_4" id="__nav_3_5_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_5" id="__nav_3_5_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    GCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            GCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/single-node-pro/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/elastic/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6" id="__nav_3_5_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_2" id="__nav_3_5_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/on-premises/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_3" id="__nav_3_5_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_4" id="__nav_3_5_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/elastic/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/ha/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7" id="__nav_3_5_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_2" id="__nav_3_5_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/on-premises/install-dlb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install with DNS Load Balancing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/on-premises/install-nlb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install with Network Load Balancer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_3" id="__nav_3_5_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_4" id="__nav_3_5_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/ha/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_8">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_8" id="__nav_3_5_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_8">
+            <span class="md-nav__icon md-icon"></span>
+            Configuration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/configuration/changing-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changing config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/configuration/in-depth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Config system in depth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/configuration/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Config reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_9">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../docs/self-hosting/how-to-guides/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    How To Guides
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_9" id="__nav_3_5_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            How To Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/how-to-guides/external-s3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure external S3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/how-to-guides/force-443-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Force traffic to 443 TLS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/how-to-guides/enable-webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Enable webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/how-to-guides/enable-disable-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Enable and disable modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/how-to-guides/deploy-with-external-proxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy and configure with an external proxy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/self-hosting/how-to-guides/create-configure-AWS-certificate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create AWS certificate for HA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6">
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AI Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            AI Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ai/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ai/live-captions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Live captions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_3" id="__nav_3_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu agents
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu agents
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ai/openvidu-agents/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ai/openvidu-agents/speech-processing-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Speech Processing agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ai/openvidu-agents/agent-dispatch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent dispatch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ai/custom-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7">
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    UI Components
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            UI Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ui-components/angular-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Angular Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/ui-components/react-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    React Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Support
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pricing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Pricing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pricing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use cases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-does-it-mean-that-openvidu-meet-is-in-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      What does it mean that OpenVidu Meet is in BETA?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h2 class="hide-without-display" id="intro">Intro<a class="headerlink" href="#intro" title="Anchor link to this section for reference">#</a></h2>
+<div>
+<h1 class="logo-header meet-header">
+<img src="../assets/images/logos/meet_greyfont_transback_beta.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_whitefont_transback_beta.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
+</h1>
+</div>
+
+<h2 class="meetplatform-slogan">
+Host and customize your own high-quality video calling service in minutes
+</h2>
+
+<div class="ov-call-commercial-img wow animated animatedFadeInUp fadeInUp">
+<a class="glightbox" href="../../assets/images/openvidu-call/openvidu-call.jpg" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/openvidu-call.jpg" loading="lazy" class="round-corners mkdocs-img"></a>
+</div>
+
+<div class="feature-cards">
+<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0">
+<ul>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18 16-4-3.2V16H6V8h8v3.2L18 8m2-4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"></path></svg></span> <strong class="feature-name">Feature-rich for videoconferencing</strong></p>
+<hr>
+<p>OpenVidu Meet brings all the <strong>features</strong> you expect from a professional video calling solution: HD video, HiFi audio, recording, broadcasting, screen sharing, chat, virtual backgrounds, and more.</p>
+</li>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.6 16.6 4.6-4.6-4.6-4.6L16 6l6 6-6 6zm-5.2 0L4.8 12l4.6-4.6L8 6l-6 6 6 6z"></path></svg></span> <strong class="feature-name">Integrate right into your app</strong></p>
+<hr>
+<p>OpenVidu Meet can be used out-of-the-box via web, but it also offers everything you need to <strong>embed it into your existing application</strong>: a web component, a REST API and webhooks.</p>
+</li>
+</ul>
+</div>
+<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;">
+<ul>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"></path></svg></span> <strong class="feature-name">Secure, self-hosted deployments</strong></p>
+<hr>
+<p>OpenVidu Meet is designed from the ground up to be <strong>self-hosted</strong> on your own servers (AWS and Azure templates also available). It provides the highest level of <strong>privacy and security</strong> for your video calls.</p>
+</li>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224 8a120 120 0 1 0 0 240 120 120 0 1 0 0-240m60 312.8c-5.4-.5-11-.8-16.6-.8h-86.9c-5.6 0-11.1.3-16.6.8v67.5c16.5 7.6 28 24.3 28 43.6 0 26.5-21.5 48-48 48s-48-21.5-48-48c0-19.4 11.5-36.1 28-43.6v-58.4C61 353 16 413.6 16 484.6c0 15.1 12.3 27.4 27.4 27.4h361.1c15.1 0 27.4-12.3 27.4-27.4 0-71-45-131.5-108-154.6v37.4c23.3 8.2 40 30.5 40 56.6v32c0 11-9 20-20 20s-20-9-20-20v-32c0-11-9-20-20-20s-20 9-20 20v32c0 11-9 20-20 20s-20-9-20-20v-32c0-26.1 16.7-48.3 40-56.6v-46.6z"></path></svg></span> <strong class="feature-name">Designed for most common use cases</strong></p>
+<hr>
+<p>OpenVidu Meet perfectly fits most common videoconferencing use cases: <strong>e-learning, telehealth, remote collaboration, customer support</strong>... And you can customize its <strong>branding</strong> to match your organization’s identity.</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0">
+Built for all purposes.<br>
+Customizable for your particular use case.
+</h2>
+
+<h2 id="features">Features<a class="headerlink" href="#features" title="Anchor link to this section for reference">#</a></h2>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards">
+<p><strong class="ov-meet-commercial-card-title wow animated animatedFadeInUp fadeInUp">Multi-Party smart layout</strong></p>
+<p class="wow animated animatedFadeInUp fadeInUp">Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.</p>
+<p><a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"></a></p>
+</div>
+<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp">
+<ul>
+<li>
+<p><strong class="ov-meet-commercial-card-title">Pre-join view</strong></p>
+<p>Your users can set up their video/audio devices, virtual background and language before entering the room.</p>
+<p><a class="glightbox" href="../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/prejoin.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"></a></p>
+</li>
+<li>
+<p><strong class="ov-meet-commercial-card-title">Background filters</strong></p>
+<p>Allow your users to easily replace their video background with a blur effect or an image.</p>
+<p><a class="glightbox" href="../assets/videos/ov-call-vb.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/ov-call-vb.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a></p>
+</li>
+</ul>
+</div>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards">
+<p><strong class="ov-meet-commercial-card-title wow animated animatedFadeInUp fadeInUp">Record and share</strong></p>
+<p class="wow animated animatedFadeInUp fadeInUp">OpenVidu Meet offers high-quality recordings and greatly simplifies their storage and access control.</p>
+<div class="wow animated animatedFadeInUp fadeInUp">
+    <a class="glightbox" href="../assets/videos/meet/share-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/share-recording.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+</div>
+</div>
+<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp">
+<ul>
+<li>
+<p><strong class="ov-meet-commercial-card-title">Pre-configure your rooms</strong></p>
+<p>Create and customize the behavior of your rooms in a few clicks: look-and-feel, user permissions, recording, chat and more.</p>
+<p><a class="glightbox" href="../assets/videos/meet/preconfigure-room.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/preconfigure-room.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a></p>
+</li>
+<li>
+<p><strong class="ov-meet-commercial-card-title">Share room links</strong></p>
+<p>Unique secure links give access to your rooms with different permission levels.</p>
+<p><a class="glightbox" href="../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a></p>
+</li>
+</ul>
+</div>
+<!-- <div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
+
+__Recording management__{ .ov-meet-commercial-card-title .wow .animated .animatedFadeInUp .fadeInUp }
+
+Record meetings with different layouts. Generate shareable links and manage access permissions.
+{.wow .animated .animatedFadeInUp .fadeInUp}
+
+<div class="wow animated animatedFadeInUp fadeInUp">
+    <a class="glightbox" href="../assets/videos/meet/meet-recording-share-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-recording-share-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meet-recording-share-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-recording-share-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+</div>
+
+</div>
+
+<div style="margin-bottom: 6em"></div> -->
+
+<hr>
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
+With all the features you need to fine-tune your perfect video calling service.
+</h2>
+
+<div class="feature-cards">
+<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em; margin-bottom: 0">
+<ul>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.76 8.69a.76.76 0 0 0-.76.76V20.9c0 .42.34.76.76.76.19 0 .35-.06.48-.16l1.91-1.55 1.66 3.62c.13.27.4.43.69.43.11 0 .22 0 .33-.08l2.76-1.28c.38-.18.56-.64.36-1.01L17.28 18l2.41-.45a.9.9 0 0 0 .43-.26c.27-.32.23-.79-.12-1.08l-8.74-7.35-.01.01a.76.76 0 0 0-.49-.18M15 10V8h5v2zm-1.17-5.24 2.83-2.83 1.41 1.41-2.83 2.83zM10 0h2v5h-2zM3.93 14.66l2.83-2.83 1.41 1.41-2.83 2.83zm0-11.32 1.41-1.41 2.83 2.83-1.41 1.41zM7 10H2V8h5z"></path></svg></span> <strong class="feature-name">One-click video calls</strong></p>
+<hr>
+<p>Share links to allow users to join video calls. Compatible with any web browser. No installations required.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m.25-6.73h-1.44v3.23H9V7.71h3.26q1.545 0 2.4.69c.56.47.84 1.1.84 1.96q0 .9-.39 1.5c-.26.4-.65.72-1.18.95l1.9 3.59v.1h-1.94zm-1.44-1.46h1.46c.45 0 .8-.12 1.05-.35s.37-.55.37-.96-.11-.73-.35-.97c-.23-.24-.59-.35-1.08-.35h-1.45z"></path></svg></span> <strong class="feature-name">Your own branding</strong></p>
+<hr>
+<p>Deliver a professional experience by customizing OpenVidu Meet with your own domain, branding colors and logo.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-7 10.5h-1V15H9.5v-1.5h-3V9H8v3h1.5V9H11v3h1zm6 1.5h-1.8l-1.8-2.2V15H13V9h1.5v2.2L16.2 9H18l-2.2 3z"></path></svg></span> <strong class="feature-name">Up to 4K video and HiFi audio</strong></p>
+<hr>
+<p>Up to 4K video resolution, and crisp audio quality with noise cancellation and echo suppression.</p>
+</li>
+</ul>
+</div>
+<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0; margin-bottom: 0">
+<ul>
+<li>
+<p><span class="twemoji feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.5 5A7.5 7.5 0 0 0 5 12.5a7.5 7.5 0 0 0 7.5 7.5 7.5 7.5 0 0 0 7.5-7.5A7.5 7.5 0 0 0 12.5 5M7 10h2a1 1 0 0 1 1 1v1c0 .5-.38.9-.86.97L10.31 15H9.15L8 13v2H7m5-5h2v1h-2v1h2v1h-2v1h2v1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m4 0h2v1h-2v3h2v1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m-8 1v1h1v-1"></path></svg></span> <strong class="feature-name">Recording</strong></p>
+<hr>
+<p>Record your video calls with different layouts. Manage recording permissions and access with ease.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 4v12c0 1.11-.89 2-2 2h-6v-2h6V4H3v12h6v2H3a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2h18a2 2 0 0 1 2 2m-10 9h3l-4-4-4 4h3v7H8v2h8v-2h-3z"></path></svg></span> <strong class="feature-name">Screen Sharing</strong></p>
+<hr>
+<p>Screen sharing with the best quality.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.5 1-1.09 2.41L16 4.5l2.41 1.09L19.5 8l1.1-2.41L23 4.5l-2.4-1.09zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10c0-1.47-.33-2.87-.9-4.13l-1.24 2.7c.09.47.14.93.14 1.43 0 4.43-3.57 8-8 8s-8-3.57-8-8v-.14a10 10 0 0 0 5.74-5.55 10 10 0 0 0 9.09 3.6L17.96 8h-.46c-2.82 0-5.4-1.5-6.84-3.88.44-.07.88-.12 1.34-.12.5 0 .96.05 1.42.13l2.71-1.22A9.9 9.9 0 0 0 12 2M8.09 5a8 8 0 0 1-3.68 4.5C5.04 7.57 6.37 6 8.09 5M9 11.75A1.25 1.25 0 0 0 7.75 13 1.25 1.25 0 0 0 9 14.25 1.25 1.25 0 0 0 10.25 13 1.25 1.25 0 0 0 9 11.75m6 0A1.25 1.25 0 0 0 13.75 13 1.25 1.25 0 0 0 15 14.25 1.25 1.25 0 0 0 16.25 13 1.25 1.25 0 0 0 15 11.75"></path></svg></span> <strong class="feature-name">Background effects</strong></p>
+<hr>
+<p>Apply effects to your videos, blurring the background or replacing it with an image.</p>
+</li>
+</ul>
+</div>
+<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;">
+<ul>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.58 2 11a7.22 7.22 0 0 0 2.75 5.5c0 .6-.42 2.17-2.75 4.5 2.37-.11 4.64-1 6.47-2.5 1.14.33 2.34.5 3.53.5 5.5 0 10-3.58 10-8s-4.5-8-10-8m0 14c-4.42 0-8-2.69-8-6s3.58-6 8-6 8 2.69 8 6-3.58 6-8 6"></path></svg></span> <strong class="feature-name">Advanced chat</strong></p>
+<hr>
+<p>OpenVidu Meet integrates an advanced chat with support of rich messages, emojis, reactions and more.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.485 2.515a.75.75 0 0 0-1.06 1.06A10.47 10.47 0 0 1 22.5 11c0 2.9-1.174 5.523-3.075 7.424a.75.75 0 0 0 1.06 1.061A11.97 11.97 0 0 0 24 11c0-3.314-1.344-6.315-3.515-8.485m-15.91 1.06a.75.75 0 0 0-1.06-1.06A11.97 11.97 0 0 0 0 11c0 3.313 1.344 6.314 3.515 8.485a.75.75 0 0 0 1.06-1.06A10.47 10.47 0 0 1 1.5 11c0-2.9 1.174-5.524 3.075-7.425M8.11 7.11a.75.75 0 0 0-1.06-1.06A6.98 6.98 0 0 0 5 11a6.98 6.98 0 0 0 2.05 4.95.75.75 0 0 0 1.06-1.061 5.48 5.48 0 0 1-1.61-3.89 5.48 5.48 0 0 1 1.61-3.888Zm8.84-1.06a.75.75 0 1 0-1.06 1.06A5.48 5.48 0 0 1 17.5 11a5.48 5.48 0 0 1-1.61 3.889.75.75 0 1 0 1.06 1.06A6.98 6.98 0 0 0 19 11a6.98 6.98 0 0 0-2.05-4.949ZM14 11a2 2 0 0 1-1.25 1.855v8.395a.75.75 0 0 1-1.5 0v-8.395A2 2 0 1 1 14 11"></path></svg></span> <strong class="feature-name coming-soon-overlay">Broadcasting</strong></p>
+<hr>
+<p>OpenVidu Meet allows you to broadcast your video calls to platforms such as YouTube or Twitch.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 14V6H4v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-8z"></path></svg></span> <strong class="feature-name coming-soon-overlay">Live Captions</strong></p>
+<hr>
+<p>Support for a vast number of speech-to-text providers.</p>
+</li>
+</ul>
+</div>
+<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;">
+<ul>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 6C8.62 6 5.5 7.12 3 9L1.2 6.6C4.21 4.34 7.95 3 12 3s7.79 1.34 10.8 3.6L21 9c-2.5-1.88-5.62-3-9-3m5.4 4.29A11.98 11.98 0 0 0 4.8 11.4l1.8 2.4C8.1 12.67 9.97 12 12 12c.97 0 1.9.16 2.78.44.56-.99 1.49-1.76 2.62-2.15m-9 5.91L12 21l1-1.33V17.2c0-.7.27-1.39.7-1.94A6 6 0 0 0 12 15c-1.35 0-2.6.45-3.6 1.2M23 17.3v3.5c0 .6-.6 1.2-1.3 1.2h-5.5c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2v-1.5c0-1.4 1.4-2.5 2.8-2.5s2.8 1.1 2.8 2.5V16c.6 0 1.2.6 1.2 1.3m-2.5-2.8c0-.8-.7-1.3-1.5-1.3s-1.5.5-1.5 1.3V16h3z"></path></svg></span> <strong class="feature-name coming-soon-overlay">E2E Encryption</strong></p>
+<hr>
+<p>Avoid man-in-the-middle attacks: only your final users can decrypt the audio, video and chat messages.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.8 17v-1.5c0-1.4-1.4-2.5-2.8-2.5s-2.8 1.1-2.8 2.5V17c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3v-1.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3zM13 11h2v2h-2zm-4 2H7v-2h2zm4 6h-1V5h5v6.44c.61-.27 1.29-.44 2-.44V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14H2v2h11zm-3 0H5V5h5z"></path></svg></span> <strong class="feature-name coming-soon-overlay">Locked rooms</strong></p>
+<hr>
+<p>Prevent unwanted guests and require administrator approval to join.</p>
+</li>
+<li>
+<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.11 0-2 .89-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1.46 17.37v-2h-4v-1.99h4v-2l3 3zM13 9V3.5L18.5 9z"></path></svg></span> <strong class="feature-name coming-soon-overlay">File sharing</strong></p>
+<hr>
+<p>Allow participants to share files during calls with a simple drag and drop.</p>
+</li>
+</ul>
+</div>
+</div>
+<hr style="margin: 4em 0">
+
+<h2 id="integrations">Integrations<a class="headerlink" href="#integrations" title="Anchor link to this section for reference">#</a></h2>
+<p>OpenVidu Meet can be easily integrated with your existing applications and workflows:</p>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp">
+<p><strong class="ov-meet-commercial-card-title">Pre-built web component</strong></p>
+<p>Embed the OpenVidu Meet UI right into your app.</p>
+<p><a class="glightbox" href="../assets/videos/meet/embed-html.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/embed-html.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a></p>
+<p><a class="glightbox" href="../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners" alt="OpenVidu Meet embedded meeting"></a></p>
+</div>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp commercial-code-blocks">
+<p><strong class="ov-meet-commercial-card-title">REST API and webhooks</strong></p>
+<p>Control your meetings from your backend.</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>--request<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>--url<span class="w"> </span>https://YOUR_DOMAIN/api/v1/rooms<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>--header<span class="w"> </span><span class="s1">'Accept: application/json'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>--header<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span>--header<span class="w"> </span><span class="s1">'X-API-KEY: YOUR_API_KEY'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span>--data<span class="w"> </span><span class="s1">'{"roomName": "my-room"}'</span>
+</code></pre></div>
+</div>
+<hr style="margin: 4em 0">
+
+<h2 id="deployments">Deployments<a class="headerlink" href="#deployments" title="Anchor link to this section for reference">#</a></h2>
+<p>Self-host OpenVidu Meet on your own infrastructure for maximum security and cost-effectiveness. It is easy to deploy, protect, maintain, and scale. No advanced DevOps skills are required to run it in production.</p>
+<div class="feature-cards">
+<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0">
+<ul>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon bare-metal-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"></path></svg></span> <strong class="feature-name">On Premises</strong></p>
+<hr>
+<p>Deploy on your own bare-metal servers</p>
+</li>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon aws-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.64 10.38c0 .25.02.45.07.62.05.12.12.28.21.46.04.04.05.1.05.15 0 .07-.04.13-.13.2l-.42.28c-.06.04-.12.06-.17.06-.07 0-.13-.04-.2-.1-.09-.1-.17-.2-.24-.31-.06-.11-.13-.24-.2-.39-.52.61-1.17.92-1.96.92-.56 0-1-.16-1.33-.48-.32-.32-.49-.75-.49-1.29 0-.55.2-1 .6-1.36.41-.34.95-.52 1.63-.52.23 0 .44.02.71.06.23.03.5.08.76.14v-.48c0-.51-.1-.84-.31-1.07-.22-.21-.57-.3-1.08-.3-.24 0-.48.03-.72.08-.25.06-.49.13-.72.23-.11.04-.2.07-.23.08-.05.02-.08.02-.11.02-.09 0-.14-.06-.14-.2v-.33c0-.1.01-.18.05-.23q.045-.075.18-.12c.24-.14.51-.24.84-.32a4 4 0 0 1 1.04-.13q1.185 0 1.74.54c.37.36.55.91.55 1.64v2.15zm-2.7 1.02c.22 0 .44-.04.68-.12s.45-.23.63-.43c.11-.13.19-.27.25-.43 0-.16.05-.35.05-.58v-.27c-.2-.07-.4-.07-.62-.12a7 7 0 0 0-.62-.04c-.45 0-.77.09-.99.27s-.32.43-.32.76c0 .32.07.56.24.71.16.17.39.25.7.25m5.34.71a.6.6 0 0 1-.28-.06c-.03-.05-.08-.14-.12-.26L8.32 6.65c-.04-.15-.06-.22-.06-.27 0-.11.05-.17.16-.17h.65c.13 0 .22.02.26.07.06.04.1.13.14.26l1.11 4.4 1.04-4.4c.03-.13.07-.22.13-.26.05-.04.14-.07.25-.07h.55c.12 0 .21.02.26.07.05.04.1.13.13.26L14 11l1.14-4.46c.04-.13.09-.22.13-.26.06-.04.14-.07.26-.07h.62c.11 0 .17.06.17.17 0 .03-.01.07-.02.12 0 0-.02.08-.04.15l-1.61 5.14c-.04.14-.08.21-.15.26-.04.04-.13.07-.24.07h-.57c-.13 0-.19-.02-.27-.07a.45.45 0 0 1-.12-.26L12.27 7.5l-1.03 4.28q-.045.195-.12.27a.5.5 0 0 1-.27.06zm8.55.18c-.33 0-.7-.04-1.03-.12s-.59-.17-.76-.26a.5.5 0 0 1-.21-.19.4.4 0 0 1-.04-.18v-.34c0-.14.05-.2.15-.2h.12c.04 0 .1.05.17.08.22.1.47.18.73.23.27.05.54.08.79.08.42 0 .75-.07.97-.22.23-.17.35-.36.35-.63 0-.19-.07-.34-.18-.47-.12-.12-.35-.24-.67-.34l-.97-.3c-.48-.16-.84-.38-1.06-.68a1.58 1.58 0 0 1-.33-.97c0-.28.06-.52.18-.73.12-.22.28-.4.46-.55.22-.15.44-.26.71-.34q.39-.12.84-.12.21 0 .45.03c.14.02.28.05.42.07.14.04.26.07.38.11s.2.08.28.12c.09.05.16.1.2.16s.06.13.06.22v.32q0 .21-.15.21c-.05 0-.14-.03-.26-.08-.37-.17-.8-.26-1.27-.26-.38 0-.66.06-.89.19-.2.12-.31.32-.31.59 0 .19.07.35.2.47.13.13.38.25.73.37l.95.3c.48.14.82.36 1.03.64q.3.405.3.93c0 .28-.06.54-.17.77-.12.22-.28.42-.5.58-.19.17-.44.29-.72.38s-.62.13-.95.13m1.25 3.24C17.89 17.14 14.71 18 12 18c-3.85 0-7.3-1.42-9.91-3.77-.21-.19-.02-.44.23-.29 2.82 1.63 6.29 2.62 9.89 2.62 2.43 0 5.1-.5 7.55-1.56.37-.15.68.26.32.53M21 14.5c-.29-.37-1.86-.18-2.57-.1-.21.03-.24-.16-.05-.3 1.25-.87 3.31-.6 3.54-.33.24.3-.06 2.36-1.23 3.34-.19.15-.36.07-.28-.11.27-.68.86-2.16.59-2.5"></path></svg></span> <strong class="feature-name">AWS</strong></p>
+<hr>
+<p>Deploy with AWS CloudFormation</p>
+</li>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon azure-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.05 4.24 6.56 18.05 2 18l5.09-8.76zm.7 1.09L22 19.76H6.74l9.3-1.66-4.87-5.79z"></path></svg></span> <strong class="feature-name">Azure</strong></p>
+<hr>
+<p>Deploy with Azure Resource Manager</p>
+</li>
+<li>
+<p><span class="twemoji more-padding-icon ov-meet-commercial-icon gcp-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span> <strong class="feature-name">GCP</strong></p>
+<hr>
+<p>Deploy in GCP with Terraform</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
+Check out the <a href="./deployment/overview"><strong>deployment documentation</strong></a>.
+</h2>
+
+<hr style="margin: 4em 0">
+
+<h2 id="use-cases">Use cases<a class="headerlink" href="#use-cases" title="Anchor link to this section for reference">#</a></h2>
+<div class="carousel wow animated animatedFadeInUp fadeInUp" data-flickity="{ &quot;wrapAround&quot;: true, &quot;adaptiveHeight&quot;: true, &quot;hash&quot;: true }">
+<div class="carousel-cell">
+<div class="carousel-cell-content">
+<p class="fake-title">Team meetings</p>
+<p>Empower collaboration across your organization with customizable, secure, high-quality video meetings.</p>
+<div class="grid cards use-cases-inner-cards no-border no-shadow">
+<p><a class="glightbox" href="../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"></a></p>
+<ul>
+<li>OpenVidu Meet is the perfect tool for <strong>collaborative work</strong>. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.</li>
+</ul>
+</div>
+<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0">
+<ul>
+<li>
+<p><strong class="feature-name">Collaboration tools</strong></p>
+<hr>
+<p>Screen sharing with top-tier quality, advanced chat with rich features, file sharing and more.</p>
+</li>
+<li>
+<p><strong class="feature-name">Quick access and flexibility</strong></p>
+<hr>
+<p>One-click join via secure room links. No installation required, full support for any web browser.</p>
+</li>
+<li>
+<p><strong class="feature-name">Custom branding</strong></p>
+<hr>
+<p>Achieve a professional look and feel with customizable domain, colors and logo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="carousel-cell">
+<div class="carousel-cell-content">
+<p class="fake-title">e-Learning</p>
+<p>Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or e-learning portal using <strong>OpenVidu Meet Embedded</strong>.</p>
+<div class="grid cards use-cases-inner-cards no-border no-shadow">
+<ul>
+<li>With OpenVidu Meet <strong>instructors</strong> can engage with <strong>students</strong> through high quality video &amp; audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features to enhance the learning experience.</li>
+</ul>
+<p><a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-elearning.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-elearning.png" loading="lazy" class="round-corners" alt="Use case e-learning"></a></p>
+</div>
+<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0">
+<ul>
+<li>
+<p><strong class="feature-name">High quality media</strong></p>
+<hr>
+<p>Up to <strong>4K</strong> video and <strong>HiFi</strong> audio for crystal-clear lessons. Stable experience across all kind of network thanks to <strong>simulcast</strong>, <strong>SVC</strong>, <strong>dynacast</strong> and <strong>adaptive streaming</strong>.</p>
+</li>
+<li>
+<p><strong class="feature-name">Accessibility</strong></p>
+<hr>
+<p>Live captions and real-time transcriptions. OpenVidu Meet is localized in multiple languages.</p>
+</li>
+<li>
+<p><strong class="feature-name">Persistence and continuity</strong></p>
+<hr>
+<p>Record and share lessons with multiple layouts. Manage recordings and share via secure links.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="carousel-cell">
+<div class="carousel-cell-content">
+<p class="fake-title">Telehealth</p>
+<p>The most secure videoconference platform is the one you host on your own servers.</p>
+<div class="grid cards use-cases-inner-cards no-border no-shadow">
+<p><a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-telehealth.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-telehealth.png" loading="lazy" class="round-corners" alt="Use case Telehealth"></a></p>
+<ul>
+<li>OpenVidu Meet is the ideal solution for telehealth services. <strong>Practitioners</strong> can conduct remote consultations, share medical documents, and ensure <strong>patient</strong> privacy with end-to-end encryption.</li>
+</ul>
+</div>
+<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0">
+<ul>
+<li>
+<p><strong class="feature-name">Security and privacy</strong></p>
+<hr>
+<p>End-to-end encryption for audio, video, and chat. Locked rooms and administrator-controlled access. No third-party data routing.</p>
+</li>
+<li>
+<p><strong class="feature-name">Accessibility and trust</strong></p>
+<hr>
+<p>Browser-based with no installation needed. Live Captions and real-time transcriptions with specific support for medical language models.</p>
+</li>
+<li>
+<p><strong class="feature-name">Communication and clarity</strong></p>
+<hr>
+<p>Up to 4K and HiFi audio for clear communication between practitioners and patients. File sharing for medical documents and images.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="carousel-cell">
+<div class="carousel-cell-content">
+<p class="fake-title">Customer support</p>
+<p>Build trust with instant, reliable support through embedded video calls that persist. Right where your clients need it.</p>
+<div class="grid cards use-cases-inner-cards no-border no-shadow">
+<ul>
+<li>Connecting your <strong>remote assistance</strong> team with your <strong>customers</strong> has never been so easy. OpenVidu Meet provides all the necessary tools for effective communication and collaboration, ensuring a seamless support experience.</li>
+</ul>
+<p><a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners" alt="Use case Customer support"></a></p>
+</div>
+<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0">
+<ul>
+<li>
+<p><strong class="feature-name">Ease of access</strong></p>
+<hr>
+<p>Simple, one-click access via web: embed support rooms directly into your platform.</p>
+</li>
+<li>
+<p><strong class="feature-name">Record assistance</strong></p>
+<hr>
+<p>Record your customer support meetings and generate transcriptions for future reference.</p>
+</li>
+<li>
+<p><strong class="feature-name">Custom branding</strong></p>
+<hr>
+<p>Customize the look and feel of your support rooms to match your brand identity.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<hr style="margin: 5em 0 2em 0">
+
+<h2 id="what-does-it-mean-that-openvidu-meet-is-in-beta">What does it mean that OpenVidu Meet is in BETA?<a class="headerlink" href="#what-does-it-mean-that-openvidu-meet-is-in-beta" title="Anchor link to this section for reference">#</a></h2>
+<p>OpenVidu Meet (v3.4.0) is considered in <strong>BETA</strong>. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to <a href="../support/">reach out</a> with any comments or suggestions.</p>
+<hr style="margin: 5em 0 2em 0">
+
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
+Need total control and advanced SDKs to build your custom real-time application?
+Checkout <a href="../docs"><strong>OpenVidu Platform</strong></a>
+</h2>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/footer.html -->
+
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+
+        <!-- Link to previous page -->
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          
+          <a href="getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Getting started with OpenVidu Meet">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Getting started with OpenVidu Meet
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <div class="grid-container footer-grid">
+
+        <div class="grid-33 push-66">
+          
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/OpenVidu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/openvidu" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://openvidu.medium.com/" target="_blank" rel="noopener" title="openvidu.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.21 0A4.2 4.2 0 0 0 0 4.21v15.58A4.2 4.2 0 0 0 4.21 24h15.58A4.2 4.2 0 0 0 24 19.79v-1.093a5 5 0 0 1-.422.02c-2.577 0-4.027-2.146-4.09-4.832a8 8 0 0 1 .022-.708c.093-1.186.475-2.241 1.105-3.022a3.9 3.9 0 0 1 1.395-1.1c.468-.237 1.127-.367 1.664-.367h.023q.151 0 .303.01V4.211A4.2 4.2 0 0 0 19.79 0Zm.198 5.583h4.165l3.588 8.435 3.59-8.435h3.864v.146l-.019.004c-.705.16-1.063.397-1.063 1.254h-.003l.003 10.274c.06.676.424.885 1.063 1.03l.02.004v.145h-4.923v-.145l.019-.005c.639-.144.994-.353 1.054-1.03V7.267l-4.745 11.15h-.261L6.15 7.569v9.445c0 .857.358 1.094 1.063 1.253l.02.004v.147H4.405v-.147l.019-.004c.705-.16 1.065-.397 1.065-1.253V6.987c0-.857-.358-1.094-1.064-1.254l-.018-.004zm19.25 3.668c-1.086.023-1.733 1.323-1.813 3.124H24V9.298a1.4 1.4 0 0 0-.342-.047m-1.862 3.632c-.1 1.756.86 3.239 2.204 3.634v-3.634z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@openvidu" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg>
+    </a>
+  
+</div>
+        </div>
+
+        <div class="grid-33 pull-33 tablet-grid-50">
+          <div class="grid-container footer-conditions-list">
+            <div class="grid-33 tablet-grid-33 mobile-grid-33">
+              <a href="/conditions/privacy-policy/">Privacy policy</a>
+            </div>
+            <div class="grid-33 tablet-grid-33 mobile-grid-33">
+              <a href="/conditions/cookie-policy/">Cookie policy</a>
+            </div>
+            <div class="grid-33 tablet-grid-33 mobile-grid-33">
+              <a href="/conditions/terms-of-service/">Terms of service</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-33 pull-33 tablet-grid-50">
+          <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2025 © OpenVidu – <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>This website uses cookies to ensure you get the best experience on our website. <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
+</p>
+<input class="md-toggle" type="checkbox" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "content.tooltips", "navigation.tabs", "navigation.tracking", "navigation.footer", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "announce.dismiss"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
+    
+    
+
+<!-- Add scripts that need to run before here -->
+
+<script src="/javascripts/target-blank.js"></script>
+
+
+<script src="/javascripts/wow.min.js"></script>
+<script>
+  window.setupWowJs();
+</script>
+
+
+
+<script>
+  window.setupCardGlow();
+</script>
+
+
+
+<script src="/javascripts/flickity.pkgd.min.js"></script>
+
+
+
+<script src="/javascripts/glightbox-custom-gallery.js"></script>
+
+
+
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../javascripts/openvidu-register/openvidu-register.js"></script>
+      
+    
+
+<!-- Add scripts that need to run afterwards here -->
+
+
+  
+<script id="init-glightbox">document.querySelectorAll('.glightbox').forEach(function(element) {
+    try {
+        var img = element.querySelector('img');
+        if (img && img.src) {
+            element.setAttribute('href', img.src);
+        } else {
+            console.log('No img element with src attribute found');
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+});
+const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
