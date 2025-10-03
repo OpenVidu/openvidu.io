@@ -1,5 +1,3 @@
-OpenVidu is designed to be **self-hosted**, whether it is on premises or in a cloud provider. It brings to your own managed service advanced capabilities usually reserved only for SaaS solutions. There are two main reasons why you may need to self-host the real-time solution yourself:
-
 - **Privacy**: you can't afford to let your client's data get out of your reach. OpenVidu allows you to meet all your privacy and regulatory requirements: no data at all is sent to any third-party server. Everything is self-contained on your own servers.
 - **Leverage your resources**: your organization has access to its own infrastructure that can be used to host these services. SaaS solutions generally offer complete freedom from infrastructure management, but this comes with generally high prices that cover both the provider's infrastructure and their service surcharge. OpenVidu allows taking full advantage of your own infrastructure, reducing costs and increasing performance.
 

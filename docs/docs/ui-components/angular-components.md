@@ -121,7 +121,11 @@ You can check out all component events in the [Angular Components API Reference]
 
 ## Applications
 
-A practical example showcases the potential of Angular Components is our production-ready flagship application, [**OpenVidu Meet**](../../meet/index.md). This application is built using Angular Components and demonstrates the power and flexibility of the library.
+The [OpenVidu Components Demo App](../tutorials/angular-components/openvidu-components-demo.md) is a hands‑on example that shows how to build a complete videoconferencing UI with Angular Components. The demo walks you through running the app and inspecting how components, directives, events, and styles are composed and customized. It’s ideal for learning practical patterns such as custom toolbars, panel layouts and stream handling.
+
+For a production‑grade reference, explore [**OpenVidu Meet**](../../meet/index.md). Built with the same Angular Components.
+It demonstrates real‑world concerns like theming, scalability, authentication, multi‑room management, and much more.
+
 
 ## References
 

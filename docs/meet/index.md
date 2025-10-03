@@ -116,7 +116,7 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 - __Share room links__{ .ov-meet-commercial-card-title }
 
     Unique secure links give access to your rooms with different permission levels.
-    
+
     <a class="glightbox" href="../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 </div>
@@ -323,7 +323,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-<a class="glightbox" href="../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
+<a class="glightbox" href="../assets/images/meet/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
@@ -474,6 +474,28 @@ Build trust with instant, reliable support through embedded video calls that per
 
 <hr style="margin: 5em 0 2em 0">
 
+## Free open-source edition vs Commercial edition
+
+OpenVidu Meet is available in two editions:
+
+### OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.9em; vertical-align: top">COMMUNITY</span>
+
+It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, advanced chat, virtual backgrounds, and more.
+
+OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
+
+### OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.9em; vertical-align: top">PRO</span>
+
+It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
+
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
+You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview">deploying OpenVidu Meet</a>.
+</h2>
+
+<hr style="margin: 5em 0 2em 0">
+
 ## What does it mean that OpenVidu Meet is in BETA?
 
 OpenVidu Meet (v3.4.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support.md) with any comments or suggestions.
@@ -482,5 +504,5 @@ OpenVidu Meet (v3.4.0) is considered in **BETA**. There may be bugs and its APIs
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
 Need total control and advanced SDKs to build your custom real-time application?
-Checkout <a href="../docs"><strong>OpenVidu Platform</strong></a>
+Checkout <a href="../docs" target="_blank"><strong>OpenVidu Platform</strong></a>
 </h2>

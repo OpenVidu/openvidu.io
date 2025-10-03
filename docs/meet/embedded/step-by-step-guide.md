@@ -392,7 +392,7 @@ If your use case includes recording your rooms, you can also embed them right in
 
 ### Embed the list of recordings of a room
 
-To show the list of recordings of a room, declare attribute **`show-recordings`** in the embedding element:
+To show the list of recordings of a room, declare attribute **`show-only-recordings`** in the embedding element:
 
 ```html
 <openvidu-meet room-url="{{ your-room-url }}" show-only-recordings="true"></openvidu-meet>

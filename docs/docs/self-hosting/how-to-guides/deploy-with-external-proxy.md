@@ -98,9 +98,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --meet-admin-user='xxxxx' \
-            --meet-admin-password='xxxxx' \
-            --meet-api-key='xxxxx' \
+            --meet-initial-admin-password='xxxxx' \
+            --meet-initial-api-key='xxxxx' \
             --external-proxy
         ```
 
@@ -126,9 +125,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --meet-admin-user='xxxxx' \
-            --meet-admin-password='xxxxx' \
-            --meet-api-key='xxxxx' \
+            --meet-initial-admin-password='xxxxx' \
+            --meet-initial-api-key='xxxxx' \
             --external-proxy
         ```
 
@@ -263,9 +261,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --mongo-replica-set-key='xxxxx' \
             --grafana-admin-user='xxxxx' \
             --grafana-admin-password='xxxxx' \
-            --meet-admin-user='xxxxx' \
-            --meet-admin-password='xxxxx' \
-            --meet-api-key='xxxxx' \
+            --meet-initial-admin-password='xxxxx' \
+            --meet-initial-api-key='xxxxx' \
             --private-ip='<MASTER_NODE_PRIVATE_IP>' \
             --external-proxy
         ```

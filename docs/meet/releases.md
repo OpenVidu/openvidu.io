@@ -1,6 +1,6 @@
 ## 3.4.0
 
-!!! info "For the Release Notes of OpenVidu Platform 3.4.0, please visit here: [OpenVidu Platform 3.4.0](../docs/releases.md#340){.platform-link-color}"
+!!! info "For the Release Notes of OpenVidu Platform 3.4.0, please visit here: [OpenVidu Platform 3.4.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#340){:target="_blank" .platform-link-color}"
 
 ### Introducing OpenVidu Meet
 

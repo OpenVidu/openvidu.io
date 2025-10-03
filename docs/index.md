@@ -1,5 +1,5 @@
 ---
-title: openVidu
+title: "Self-hosted videoconferencing and custom WebRTC solutions"
 template: home.html
 hide:
   - navigation
