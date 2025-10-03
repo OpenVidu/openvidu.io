@@ -1,6 +1,6 @@
-# openVidu
+# OpenVidu
 
-> A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.
+> From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
 
 Self-hosted videoconference solution and SDK
 
@@ -631,6 +631,26 @@ Build trust with instant, reliable support through embedded video calls that per
 
 ______________________________________________________________________
 
+## Free open-source edition vs Commercial edition
+
+OpenVidu Meet is available in two editions:
+
+### OpenVidu COMMUNITY
+
+It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, advanced chat, virtual backgrounds, and more.
+
+OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
+
+### OpenVidu PRO
+
+It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
+
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+
+## You can choose the OpenVidu edition that best fits your needs when [deploying OpenVidu Meet](./deployment/overview).
+
+______________________________________________________________________
+
 ## What does it mean that OpenVidu Meet is in BETA?
 
 OpenVidu Meet (v3.4.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support/) with any comments or suggestions.
@@ -961,12 +981,24 @@ Credentials are always username **`admin`** and password **`admin`**.
 
 Credentials will be logged at the end of the installation process:
 
-\`//ACTUALIZR AL VALOR REAL OpenVidu Meet administration credentials:
+```text
+OpenVidu Meet is available at:
 
-- Username: admin
-- Password: xxxxxxxx\`
+    URL: https://<YOUR_DOMAIN>
+    Credentials:
+      - User: admin
+      - Password: XXXXXXX
+```
+
+Warning
+
+If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
 
 In the Secrets Manager of the CloudFormation stack, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
+
+Warning
+
+If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
 
 In the Azure Key Vault, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
@@ -982,7 +1014,7 @@ Administrator credentials can be modified from the **"User & Permissions"** view
 
 ## Production ready
 
-OpenVidu is designed to be **self-hosted**, whether it is on premises or in a cloud provider. It brings to your own managed service advanced capabilities usually reserved only for SaaS solutions. There are two main reasons why you may need to self-host the real-time solution yourself:
+OpenVidu Meet is designed to be **self-hosted**, whether it is on premises or in a cloud provider. It brings to your own managed service advanced capabilities usually reserved only for SaaS solutions. There are two main reasons why you may need to self-host the real-time solution yourself:
 
 - **Privacy**: you can't afford to let your client's data get out of your reach. OpenVidu allows you to meet all your privacy and regulatory requirements: no data at all is sent to any third-party server. Everything is self-contained on your own servers.
 - **Leverage your resources**: your organization has access to its own infrastructure that can be used to host these services. SaaS solutions generally offer complete freedom from infrastructure management, but this comes with generally high prices that cover both the provider's infrastructure and their service surcharge. OpenVidu allows taking full advantage of your own infrastructure, reducing costs and increasing performance.
@@ -1023,6 +1055,26 @@ One of OpenVidu's main goals is offering a self-hosted, production-ready live-vi
 
   [Learn more about observability](../../../docs/self-hosting/production-ready/observability/)
 
+## OpenVidu Meet editions
+
+OpenVidu Meet is available in two editions:
+
+### OpenVidu COMMUNITY
+
+It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](../../#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, advanced chat, virtual backgrounds, and more.
+
+OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
+
+### OpenVidu PRO
+
+It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
+
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+
+Info
+
+Different OpenVidu [deployment types](#deployment-types) support different editions.
+
 ## Deployment types
 
 OpenVidu Meet offers **user-friendly installers** that facilitate quick **on-premises deployments**, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
@@ -1033,11 +1085,11 @@ The following documentation pages focus on three different deployments:
 - [Basic deployment](../basic/), a production installation requiring a single server.
 - [Advanced deployments](../advanced/), a production installation requiring multiple servers for scalability and high-availability.
 
-The table below summarizes the main characteristics of each deployment type:
+The table below summarizes the main characteristics of each deployment type.
 
 | Type of deployment            | **OpenVidu Meet: Local deployment**               | **OpenVidu Meet: Basic deployment**                        | **OpenVidu Meet: Advanced deployment**                                                                                                        |
 | ----------------------------- | ------------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **OpenVidu Edition**          | COMMUNITY                                         | COMMUNITY PRO                                              | PRO                                                                                                                                           |
+| **OpenVidu Edition**          | COMMUNITY                                         | COMMUNITY                                                  | PRO                                                                                                                                           |
 | **Suitability**               | Suitable to test and develop                      | Suitable for production applications with medium user load | Suitable for production applications with dynamic user load and need for high availability                                                    |
 | **Features**                  | Try out all OpenVidu Meet features in your laptop | All OpenVidu Meet features, ready for production           | All OpenVidu Meet features ready for production, plus **2x performance**, **advanced observability**, **scalability** and **fault tolerance** |
 | **Number of servers**         | Your laptop                                       | 1 server                                                   | Multiple servers                                                                                                                              |
@@ -1090,7 +1142,13 @@ This guide is based on Docker Desktop, but the commands can also be used directl
    docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
    ```
 
-   If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
+   Info
+
+   If you want to deploy a specific version, replace `latest` with the desired version tag. E.g., to deploy version `3.4.0` use:
+
+   ```text
+   docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+   ```
 
 1. After pasting the command, press **Enter** to execute the command.
 
@@ -1338,32 +1396,31 @@ Warning
 
 OpenVidu Meet is currently considered in **BETA**. There may be bugs and its APIs are subject to change.
 
+Info
+
+**OpenVidu Meet** is under the hood an **OpenVidu Platform** deployment with a module on top of it. Therefore, all deployment documentation for OpenVidu Platform applies to OpenVidu Meet as well. The information in this page is a summary of the different deployment options and the links to their corresponding OpenVidu Platform documentation.
+
 ## Deployment types
 
 OpenVidu Meet can be easily deployed in a single server (follow the [basic deployment guide](../basic/)). However, a single server won't be enough for environments that require scalability and high-availability. For such cases, it is necessary a multi-node deployment.
 
-Info
-
-OpenVidu Meet is under the hood an OpenVidu Platform deployment with a module on top of it. Therefore, all deployment documentation for OpenVidu Platform applies to OpenVidu Meet as well. The information in this page is a summary of the different deployment options and the links to their corresponding OpenVidu Platform documentation.
-
 | Type of deployment            | [**OpenVidu Local (development)**](#openvidu-local-development)                                                                                                       | [**OpenVidu Single Node**](#openvidu-single-node)                                                                                                                                | [**OpenVidu Elastic**](#openvidu-elastic)                                                                     | [**OpenVidu High Availability**](#openvidu-high-availability)            |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| **OpenVidu Edition**          | COMMUNITY PRO                                                                                                                                                         | COMMUNITY PRO                                                                                                                                                                    | PRO                                                                                                           | PRO                                                                      |
+| **OpenVidu Edition**          | COMMUNITY                                                                                                                                                             | COMMUNITY PRO                                                                                                                                                                    | PRO                                                                                                           | PRO                                                                      |
 | **Suitability**               | For local development in your laptop                                                                                                                                  | For applications with medium user load                                                                                                                                           | For applications with dynamic user load that require scalability                                              | For applications where both scalability and fault tolerance are critical |
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | COMMUNITY Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability. PRO Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance**               |
 | **Number of servers**         | Your laptop                                                                                                                                                           | 1 Node                                                                                                                                                                           | 1 Master Node + N Media Nodes                                                                                 | 4 Master Nodes + N Media Nodes                                           |
 | **Installation instructions** | [Try](../local/)                                                                                                                                                      | [Install](../basic/)                                                                                                                                                             | [Install](../../../docs/self-hosting/elastic/)                                                                | [Install](../../../docs/self-hosting/ha/)                                |
+
+Info
+
+You can learn more about the **OpenVidu**COMMUNITY and **OpenVidu**PRO editions [here](../overview/#openvidu-meet-editions).
 
 ### OpenVidu Local (development)
 
 Run the OpenVidu Local deployment in your machine by following [this guide](../local/).
 
 To run OpenVidu in your local machine, this is the quickest option. It is a Docker Compose setup that includes all the necessary services to run OpenVidu in your LAN, including automated SSL certificates that will be valid across all devices in your network.
-
-It comes in two flavors:
-
-- **OpenVidu Local COMMUNITY**: mirrors the experience of **OpenVidu Single Node COMMUNITY**, fine-tuned for local development.
-- **OpenVidu Local PRO**: mirrors the experience of **OpenVidu Single Node PRO**, fine-tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
 
 OpenVidu Local (development)
 
@@ -1446,7 +1503,7 @@ ______________________________________________________________________
 
 ## 1. Run OpenVidu Meet
 
-You need **Docker Desktop** (you can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) ).
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
 
 Run this command in Docker Desktop's terminal:
 
@@ -1823,7 +1880,7 @@ If your use case includes recording your rooms, you can also embed them right in
 
 ### Embed the list of recordings of a room
 
-To show the list of recordings of a room, declare attribute **`show-recordings`** in the embedding element:
+To show the list of recordings of a room, declare attribute **`show-only-recordings`** in the embedding element:
 
 ```html
 <openvidu-meet room-url="{{ your-room-url }}" show-only-recordings="true"></openvidu-meet>
@@ -1882,7 +1939,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api/) to creat
 
 #### 1. Run OpenVidu Meet
 
-You need **Docker Desktop** (you can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) ).
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
 
 Run this command in Docker Desktop's terminal:
 
@@ -2484,7 +2541,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api/) to creat
 
 #### 1. Run OpenVidu Meet
 
-You need **Docker Desktop** (you can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) ).
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
 
 Run this command in Docker Desktop's terminal:
 
@@ -2713,7 +2770,7 @@ The application includes all the features from the basic WebComponent tutorial, 
 
 #### 1. Run OpenVidu Meet
 
-You need **Docker Desktop** (you can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) ).
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
 
 Run this command in Docker Desktop's terminal:
 
@@ -3008,7 +3065,7 @@ The application includes all the features from the basic tutorial, plus:
 
 #### 1. Run OpenVidu Meet
 
-You need **Docker Desktop** (you can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) ).
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
 
 Run this command in Docker Desktop's terminal:
 
@@ -3547,7 +3604,7 @@ The application includes all the features from the recordings tutorial, plus:
 
 #### 1. Run OpenVidu Meet
 
-You need **Docker Desktop** (you can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) ).
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
 
 Run this command in Docker Desktop's terminal:
 
@@ -5608,6 +5665,10 @@ In the following tutorials you can learn how to use each one of the available [A
 - [**Toggle hand**](openvidu-toggle-hand/): learn how to add extra features to the videoconference.
 - [**Admin dashboard**](openvidu-admin-dashboard/): learn how to add an admin dashboard to the videoconference.
 
+Also you can check the complete demo application that uses Angular Components:
+
+- [**OpenVidu Components Demo App**](openvidu-components-demo/): try the complete demo application that uses Angular Components.
+
 # Application Client Tutorials
 
 Every application client below shares the same core functionality:
@@ -7319,7 +7380,9 @@ You can check out all component events in the [Angular Components API Reference]
 
 ## Applications
 
-A practical example showcases the potential of Angular Components is our production-ready flagship application, [**OpenVidu Meet**](../../../meet/). This application is built using Angular Components and demonstrates the power and flexibility of the library.
+The [OpenVidu Components Demo App](../../tutorials/angular-components/openvidu-components-demo/) is a hands‑on example that shows how to build a complete videoconferencing UI with Angular Components. The demo walks you through running the app and inspecting how components, directives, events, and styles are composed and customized. It’s ideal for learning practical patterns such as custom toolbars, panel layouts and stream handling.
+
+For a production‑grade reference, explore [**OpenVidu Meet**](../../../meet/). Built with the same Angular Components. It demonstrates real‑world concerns like theming, scalability, authentication, multi‑room management, and much more.
 
 ## References
 

@@ -1,6 +1,6 @@
-# openVidu
+# OpenVidu
 
-> A powerful platform to develop WebRTC real-time applications.<br>Self-hosted, performant, fault tolerant, scalable and observable.
+> From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
 
 Self-hosted videoconference solution and SDK
 
