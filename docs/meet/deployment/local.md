@@ -55,9 +55,16 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
     docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
     ```
 
+    !!! info
+    
+        If you want to deploy a specific version, replace `latest` with the desired version tag. E.g., to deploy version `3.4.0` use:
+
+        ```
+        docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+        ```
+
     ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
 
-    If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
 
 3. After pasting the command, press **Enter** to execute the command.
 

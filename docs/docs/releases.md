@@ -4,7 +4,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
 
 ## 3.4.0
 
-!!! info "For the Release Notes of OpenVidu Meet 3.4.0, please visit here: [OpenVidu Meet 3.4.0](../meet/releases.md#340){.meet-link-color}"
+!!! info "For the Release Notes of OpenVidu Meet 3.4.0, please visit here: [OpenVidu Meet 3.4.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#340){:target="_blank" .meet-link-color}"
 
 ### Changelog
 

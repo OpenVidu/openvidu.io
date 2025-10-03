@@ -44,22 +44,31 @@ The location of the administration password depends on the environment of the de
 
     Credentials will be logged at the end of the installation process:
 
-    ``` //ACTUALIZR AL VALOR REAL
-    OpenVidu Meet administration credentials:
-    - Username: admin
-    - Password: xxxxxxxx
     ```
+    OpenVidu Meet is available at:
+
+        URL: https://<YOUR_DOMAIN>
+        Credentials:
+          - User: admin
+          - Password: XXXXXXX
+    ```
+
+    !!! warning
+        If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
 
 === "AWS"
 
     In the Secrets Manager of the CloudFormation stack, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
+    !!! warning
+        If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
+
 === "Azure"
 
     In the Azure Key Vault, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
-!!! warning
-    If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
+    !!! warning
+        If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
 
 ### Modify OpenVidu Meet authentication
 
