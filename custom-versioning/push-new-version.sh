@@ -4,7 +4,6 @@ set -e
 # This script builds and pushes a new version of the documentation
 # It updates the non-versioned pages of the documentation
 
-BASE_URL="https://openvidu.io"
 GH_BRANCH="gh-pages"
 
 ASSETS=("assets" "javascripts" "stylesheets" "search")
@@ -121,6 +120,37 @@ changeNonVersionedPagesLinks() {
 
     # Remove version in the canonical tag of NVP
     grep -Erl "$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|$VERSION/||g" || true
+
+    # Update llms.txt links
+    # Replace version with 'latest' for versioned pages
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        sed -i "s|/$VERSION/$VP/|/latest/$VP/|g" "$VERSION/llms.txt"
+    done
+    
+    # Remove version from non-versioned pages
+    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+        sed -i "s|/$VERSION/$NVP/|/$NVP/|g" "$VERSION/llms.txt"
+    done
+    
+    # Remove version from root URL
+    sed -i "s|/$VERSION/index.md|/index.md|g" "$VERSION/llms.txt"
+}
+
+changeSearchIndexLinks() {
+    local SEARCH_INDEX="$VERSION/search/search_index.json"
+
+    # Change all links to VP to use absolute links including the version ("/X.Y.Z/VP/")
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        sed -i "s|\"location\":\"$VP/|\"location\":\"/$VERSION/$VP/|g" "$SEARCH_INDEX"
+    done
+
+    # Change all links to NVP to use absolute links ("/NVP/")
+    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+        sed -i "s|\"location\":\"$NVP/|\"location\":\"/$NVP/|g" "$SEARCH_INDEX"
+    done
+
+    # Change all links to root to use absolute links ("/")
+    sed -i "s|\"location\":\"\"|\"location\":\"/\"|g" "$SEARCH_INDEX"
 }
 
 updateSitemap() {
@@ -145,29 +175,12 @@ updateSitemap() {
     done
     
     # Remove version from root URL
-    sed -i "s|<loc>$BASE_URL/$VERSION/</loc>|<loc>$BASE_URL/</loc>|g" "$SITEMAP_FILE"
+    sed -i "s|/$VERSION/</loc>|/</loc>|g" "$SITEMAP_FILE"
     
     # Generate compressed sitemap
     gzip -k -f "$SITEMAP_FILE"
     
     echo "Sitemap updated successfully"
-}
-
-changeSearchIndexLinks() {
-    local SEARCH_INDEX="$VERSION/search/search_index.json"
-
-    # Change all links to VP to use absolute links including the version ("/X.Y.Z/VP/")
-    for VP in "${VERSIONED_PAGES[@]}"; do
-        sed -i "s|\"location\":\"$VP/|\"location\":\"/$VERSION/$VP/|g" "$SEARCH_INDEX"
-    done
-
-    # Change all links to NVP to use absolute links ("/NVP/")
-    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
-        sed -i "s|\"location\":\"$NVP/|\"location\":\"/$NVP/|g" "$SEARCH_INDEX"
-    done
-
-    # Change all links to root to use absolute links ("/")
-    sed -i "s|\"location\":\"\"|\"location\":\"/\"|g" "$SEARCH_INDEX"
 }
 
 copyFilesFromVersionToRoot() {
