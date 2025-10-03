@@ -1,0 +1,173 @@
+<!-- Elements added to main will be displayed on all pages -->
+{% extends "base.html" %}
+
+<!-- {% block announce %}
+<div id="announce">
+  Coming from OpenVidu 2? Find out all you need to know
+  <a href="https://docs.openvidu.io/en/stable/openvidu3/" target="_blank">
+    on this page</a
+  >
+</div>
+{% endblock %} -->
+
+{% block libs %}
+
+<!-- wow.js -->
+<script>
+  window.setupWowJs = function () {
+    new WOW().init();
+    console.debug("WOW.js initialized");
+  };
+</script>
+
+<!-- Card glow effect -->
+<script>
+  window.setupCardGlow = function () {
+    console.debug("starting card glow setup");
+    const cards = document.querySelectorAll(
+      ".feature-cards .grid.cards > ul > li"
+    );
+    const maxRetries = 10;
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      retryCount++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
+    function handleMouseMove(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+      angle = (angle + 360) % 360;
+      this.style.setProperty("--start", angle + 60);
+    }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
+  };
+</script>
+
+{{ super() }}
+
+{% endblock %}
+
+{% block outdated %}
+<span class="outdated-warning-text"
+  >Warning: You are reading docs for an old version<br
+/></span>
+<a href="{{ '/latest/docs/getting-started/' }}">
+  <strong>GO TO LATEST VERSION</strong>
+</a>
+{% endblock %}
+
+{% block extrahead %}
+<!-- Add head tags that need to be applied before here -->
+{{ super() }}
+<!-- Add head tags that need to be applied afterwards here -->
+{% endblock %}
+
+{% block scripts %}
+
+<!-- Add scripts that need to run before here -->
+
+<script src="/javascripts/target-blank.js"></script>
+
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<script src="/javascripts/wow.min.js"></script>
+<script>
+  window.setupWowJs();
+</script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
+<script>
+  window.setupCardGlow();
+</script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<script src="/javascripts/flickity.pkgd.min.js"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
+<script src="/javascripts/glightbox-custom-gallery.js"></script>
+{% endif %}
+
+{{ super() }}
+
+<!-- Add scripts that need to run afterwards here -->
+
+{% endblock %}
+
+{% block styles %}
+
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/animate.min.css' }}" />
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/flickity.min.css' }}" />
+{% endif %}
+
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
+  }
+</style>
+
+{{ super() }}
+
+{% if page.meta %}
+{% if page.meta.hide %}
+{% if "footer-prev" in page.meta.hide %}
+<style>
+  .md-footer__link--prev {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "footer-next" in page.meta.hide %}
+<style>
+  .md-footer__link--next {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "search-bar" in page.meta.hide %}
+<style>
+  div.md-search {
+    display: none;
+  }
+  label.md-header__button.md-icon[for="__search"] {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "version-selector" in page.meta.hide %}
+  <style>
+    div.md-version {
+      display: none;
+    }
+  </style>
+{% endif %}
+{% endif %}
+
+{% if page.meta.tags and "Platform" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/platform.css' }}" />
+{% endif %}
+
+{% if page.meta.tags and "Meet" in page.meta.tags %}
+<link rel="stylesheet" href="{{ '/stylesheets/meet.css' }}" />
+{% endif %}
+
+{% endif %}
+{% endblock %}
