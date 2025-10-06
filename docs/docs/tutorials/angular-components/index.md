@@ -27,7 +27,3 @@ In the following tutorials you can learn how to use each one of the available [A
 - [**Custom participant panel item element**](./openvidu-custom-participant-panel-item-element.md): learn how to replace the default participant panel item element with your own.
 - [**Toggle hand**](./openvidu-toggle-hand.md): learn how to add extra features to the videoconference.
 - [**Admin dashboard**](./openvidu-admin-dashboard.md): learn how to add an admin dashboard to the videoconference.
-
-Also you can check the complete demo application that uses Angular Components:
-
-- [**OpenVidu Components Demo App**](./openvidu-components-demo.md): try the complete demo application that uses Angular Components.
