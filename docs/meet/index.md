@@ -122,7 +122,7 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 - __Share room links__{ .ov-meet-commercial-card-title }
 
     Unique secure links give access to your rooms with different permission levels.
-
+    
     <a class="glightbox" href="../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 </div>
@@ -331,7 +331,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-<a class="glightbox" href="../assets/images/meet/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
+<a class="glightbox" href="../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
