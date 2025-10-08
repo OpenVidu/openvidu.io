@@ -5,7 +5,7 @@ description: Learn how to customize the UI, changing colors, shapes and add your
 
 # Custom UI using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.3.0/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.4.0/openvidu-components-angular/openvidu-custom-ui){ .md-button target=\_blank }
 
 Creating a unique and intuitive user interface (UI) is essential for ensuring a great user experience. **OpenVidu Components Angular** allows for flexibility in UI customization to fit your application's design requirements.
 
@@ -23,8 +23,8 @@ Creating a unique and intuitive user interface (UI) is essential for ensuring a 
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.0
 ```
 
 #### 3. Run a server application

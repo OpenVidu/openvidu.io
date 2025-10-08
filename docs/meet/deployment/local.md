@@ -1,18 +1,17 @@
 ---
-title: Try OpenVidu Meet Locally
+title: Try OpenVidu Meet locally
 description: Deploy OpenVidu Meet on your local machine for development and testing purposes using Docker Desktop.
 ---
-# Try OpenVidu Meet Locally
+# Try OpenVidu Meet locally
 
 You can easily deploy **OpenVidu Meet** on your local machine to explore its features right away.
 
 You can simulate **several users** joining to the **same room** using different tabs of your preferred browser.
 
-This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../../embedded/intro).
+This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](../embedded/intro.md).
 
 !!! warning
-    Remember that this deployment is designed for **demo** and **development** propurposes. For production follow the [Basic deployment](../../deployment/basic/) or [Advanced deployments](../../advanced/basic/).
-
+    Remember that this deployment is designed for **demo** and **development** purposes. For production follow the [Basic deployment](./basic.md) or [Advanced deployments](./advanced.md).
 
 ## Prerequisites
 
@@ -42,7 +41,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
     - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/linux-install/){:target="\_blank"}
 
     !!! info 
-        This guide is based on Docker Desktop, but the commands can also be used in a linux machine with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms) and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed.
+        This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed. Make sure they are recent versions: Docker Engine >= **28.4.0** and Docker Compose >= **2.39.4**
 
 ## Running OpenVidu Meet Locally
 
@@ -56,9 +55,16 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
     docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
     ```
 
+    !!! info
+    
+        If you want to deploy a specific version, replace `latest` with the desired version tag. E.g., to deploy version `3.4.0` use:
+
+        ```
+        docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+        ```
+
     ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
 
-    If you want to deploy a specific version, replace `latest` with the desired version tag (e.g., `3.4.0`).
 
 3. After pasting the command, press **Enter** to execute the command.
 
@@ -108,7 +114,7 @@ You can access **OpenVidu Meet** by opening [http://localhost:9080](http://local
 - Username: `admin`
 - Password: `admin`
 
-You can use the [REST API](../../embedded/reference/rest-api/) to [embedd OpenVidu Meet](../../embedded/intro) using:
+You can use the [REST API](../../embedded/reference/rest-api/) to [embed OpenVidu Meet](../../embedded/intro) using:
 
 - API Key: `meet-api-key` 
 
@@ -164,11 +170,11 @@ You can manage OpenVidu Meet execution interactively:
 
 ## Accessing OpenVidu Meet from other computers or phones
 
-You can connect to OpenVidu Meet from other computers or phones. It it very useful to join several people to the same room and try the communication features.
+You can connect to OpenVidu Meet from other computers or phones. It is very useful to join several people to the same room and try the communication features.
 
 Follow these steps:
 
-1. Be sure that other computers or phones are connected to the same wifi or local network (LAN) where OpenVidu Meet is installed.
+1. Be sure that other computers or phones are connected to the same Wi-Fi or local network (LAN) where OpenVidu Meet is installed.
 
 2. Stop OpenVidu Meet if it is already started.
 
@@ -237,4 +243,4 @@ Follow these steps:
 
 ## Advanced Local Deployment
 
-If you want to modify some configurations or to have more control over the local deployment, you can deploy the [OpenVidu Platform Local deployment](../../docs/self-hosting/local.md) which includes **OpenVidu Meet** as one of its services.
+If you want to modify some configurations or have more control over the local deployment, you can deploy the [OpenVidu Platform Local deployment](../../docs/self-hosting/local.md) which by default includes **OpenVidu Meet** as one of its services.

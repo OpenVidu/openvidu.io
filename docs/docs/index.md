@@ -18,7 +18,7 @@ Build your real-time application with complete freedom using SDKs
 
 OpenVidu Platform enables you to build real-time applications. You can build your new OpenVidu application from scratch, but it is also very easy to integrate OpenVidu in your already existing application.
 
-OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live streaming events, management and processing of drones and camera feeds...
+OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live-streaming events, management and processing of drones and camera feeds...
 
 OpenVidu is built on the best open source technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io){target="\_blank"}, from which it inherits all its amazing SDKs to integrate it into your front-end and back-end applications, and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org){target="\_blank"}, from which it inherits the best performance and optimization for media routing.
 
@@ -51,14 +51,17 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 </div>
 
-### Live streaming
+!!! info
+    If your use case actually fits into the video conferencing category, [**OpenVidu Meet** :fontawesome-solid-external-link:{.external-link-icon}](../meet/index.md){:target="_blank" .meet-link-color} may be the perfect solution for you. Give it a try!
+
+### Live-streaming
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-65 tablet-grid-65" markdown>
 Live streaming applications allow one publisher to broadcast video to many viewers. It can be a single video feed, multiple video feeds (webcam and screen share) or there could be even multiple publishers. The general rule is that the ratio of viewers to publishers is very high, in the order of thousands.
 
-Ultra-low latency live streaming (below 300ms) allows for actual real-time interaction between the viewers and the publishers. This differs from traditional live streaming platforms where the latency is usually in the order of seconds. In this way you can build applications like:
+Ultra-low latency live-streaming (below 300ms) allows for actual real-time interaction between the viewers and the publishers. This differs from traditional live-streaming platforms where the latency is usually in the order of seconds. In this way you can build applications like:
 
 - A **TEDx-like application**, where a speaker can give a talk to a massive audience of thousands of viewers, who may communicate through a chat. Real time subtitles and translations can be added to the stream.
 - An application to **stream sport events**, where viewers can switch between different cameras to watch the game from different angles to increase fan engagement.
@@ -85,7 +88,7 @@ AI has changed the world, forever. OpenVidu can be used to integrate any kind of
 - Implement **real-time subtitles, translations, word-detection, sentiment analysis, profanity filter**, etc. in your video conferences.
 - Add a **summary generator** to your video conference app, that can extract the most important parts of the conversation to be shared with the participants.
 - Build a 1-to-1 **virtual assistant** that can speak naturally with your users, using the latest Text-To-Speech AI models.
-- Implement **object detection** in your live streaming app, to detect and track objects in real-time in the video feed.
+- Implement **object detection** in your live-streaming app, to detect and track objects in real-time in the video feed.
 
 </div>
 
@@ -115,7 +118,7 @@ The future lies in the integration of cameras and sensors in all kinds of device
 
 Every OpenVidu application consists of 3 main components:
 
-- **Your OpenVidu deployment**: provides all the necessary infrastructure for streaming real-time audio and video. It is built upon **LiveKit server** and **mediasoup server**. It can usually be treated as a black box where its internal aspects are not important: you just deploy it and connect your application to it. It can be a single server or a cluster, deployed on premises or in your cloud provider.
+- **Your OpenVidu deployment**: provides all the necessary infrastructure for streaming real-time audio and video. It is built upon **LiveKit server** and **mediasoup server**, but it can usually be treated as a black box where its internal aspects are not important: you just deploy it and connect your application to it. It can be a single server or a cluster, deployed on premises or in your cloud provider.
 - **Your Application client**: runs in your user devices and interacts with the OpenVidu server through any **LiveKit client SDK**. As OpenVidu server is 100% compatible with LiveKit protocol, you can integrate any LiveKit client SDK in your Application client. Your users will join rooms as participants to send and receive real-time audio and video tracks. It needs a token generated by the Application server to join a room.
 - **Your Application server**: interacts with the OpenVidu deployment through any **LiveKit server SDK**. As OpenVidu server is 100% compatible with LiveKit protocol, you can integrate any LiveKit server SDK in your application server. At a minimum, it is responsible for the generation of tokens for the Application client to join a room. But you can implement your own business logic managing rooms, participants and tracks from the safety of your Application server.
 
@@ -152,6 +155,14 @@ With these three concepts you can build any kind of real-time application you ca
 </div>
 
 </div>
+
+### Other concepts
+
+Apart from these basic building blocks, there are other concepts that will be tipically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
+
+- **Egress**: a process that exports media out of a Room. It is a special type of Participant that only subscribes to Tracks. It allows recording tracks to a file or streaming them to an external destination (via HLS or RTMP).
+- **Ingress**: a process that imports media into a Room. It is a special type of Participant that only publishes Tracks. It allows bringing external media sources into a Room, such as an MP4 file, an IP camera or a RTMP stream.
+- **Agents**: a process that performs AI-driven operations to the media of a Room. It is a special type of Participant that can both subscribe and publish Tracks, analyzing and/or modifying them in between. It allows implementing any AI task you can imagine: real-time subtitles, translations, object detection, AI voice bots, etc.
 
 ## OpenVidu Editions
 

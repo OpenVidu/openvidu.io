@@ -5,7 +5,7 @@ description: Learn how to add an admin dashboard to the videoconference using Op
 
 # Create admin dashboard using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.3.0/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.4.0/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target=\_blank }
 
 The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin dashboard to manage the recordings of a videoconference using the OpenVidu Components Angular library.
 
@@ -32,8 +32,8 @@ The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin da
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.0
 ```
 
 #### 3. Run a server application

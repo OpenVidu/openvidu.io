@@ -106,16 +106,40 @@ After restarting OpenVidu your agent will be up and running, ready to process ne
 
     If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
 
+## Change CPU load threshold
+
+By default, the agent will only accept new jobs if the average CPU load of its Media Node is below 70%. You can change this threshold in [**`agent-speech-processing.yaml`**](#configuration-reference):
+
+```yaml title="agent-speech-processing.yaml"
+# Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.
+load_threshold: 0.7
+```
+
+## Log level
+
+You can change the log level of the agent in [**`agent-speech-processing.yaml`**](#configuration-reference):
+
+```yaml title="agent-speech-processing.yaml"
+# Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+log_level: INFO
+```
+
 ## Configuration reference
 
 Below is the full list of configuration properties available for the Speech Processing agent.
 
-```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.3.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.4.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing:3.3.0
+docker_image: docker.io/openvidu/agent-speech-processing:3.4.0
 
 # Whether to run the agent or not.
 enabled: false
+
+# Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.
+load_threshold: 0.7
+
+# Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+log_level: INFO
 
 live_captions:
   # How this agent will connect to Rooms [automatic, manual]

@@ -1,13 +1,13 @@
 ---
-title: OpenVidu Meet Node.js Recordings Tutorial
-description: Learn how to manage recordings in a video conferencing application using Node.js and JavaScript by extending the basic OpenVidu Meet tutorial.
+title: OpenVidu Meet Recordings Tutorial
+description: Learn how to manage recordings in a video conferencing application using Node.js and JavaScript by extending the advanced OpenVidu Meet WebComponent tutorial.
 ---
 
-# Node.js Recordings Tutorial
+# OpenVidu Meet Recordings Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/main/meet-node-recordings){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-recordings){ .md-button target=\_blank }
 
-This tutorial extends the [basic Node.js and JavaScript tutorial](./javascript.md) to add **recording management capabilities**. It demonstrates how to list, view, and delete recordings from your OpenVidu Meet meetings.
+This tutorial extends the [advanced OpenVidu Meet WebComponent tutorial](./webcomponent-advanced.md) to add **recording management capabilities**. It demonstrates how to list, view, and delete recordings from your OpenVidu Meet meetings.
 
 The application includes all the features from the basic tutorial, plus:
 
@@ -17,14 +17,14 @@ The application includes all the features from the basic tutorial, plus:
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+#### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b main
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
 ```
 
 ### 3. Run the application
@@ -34,7 +34,7 @@ To run this application, you need [Node.js :fontawesome-solid-external-link:{.ex
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-meet-tutorials/meet-node-recordings
+cd openvidu-meet-tutorials/meet-recordings
 ```
 
 2. Install dependencies
@@ -53,15 +53,15 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/home-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/home-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/recordings-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/recordings-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/list-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/list-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/recordings-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/recordings-recordings.png" loading="lazy"/></a></p></div>
 
 </div>
 
 ## Understanding the code
 
-This tutorial builds upon the [basic Node.js tutorial](./javascript.md), adding recording management functionality. We'll focus on the new features and modifications related to recordings.
+This tutorial builds upon the [advanced OpenVidu Meet WebComponent tutorial](./webcomponent-advanced.md), adding recording management functionality. We'll focus on the new features and modifications related to recordings.
 
 ---
 
@@ -81,57 +81,39 @@ Let's see the code of each new endpoint:
 
 The `GET /recordings` endpoint retrieves the list of recordings, with optional room filtering:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L99-L134' target='_blank'>index.js</a>" linenums="99"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/src/index.js#L84-L101' target='_blank'>index.js</a>" linenums="84"
 // List all recordings
 app.get('/recordings', async (req, res) => {
-    const { room: roomName } = req.query; // (1)!
-    const roomsArray = [];
+    // Create the base path for recordings, including maxItems parameter
+    let recordingsPath = `recordings?maxItems=100`; // (1)!
 
+    const { room: roomName } = req.query; // (2)!
     if (roomName) {
         // If a room is specified, filter recordings by room
-        // Check if the room exists
-        const room = rooms.get(roomName);
-        if (!room) {
-            res.status(404).json({ message: 'Room not found' }); // (2)!
-            return;
-        }
-
-        roomsArray.push(room);
-    } else {
-        // If no room is specified, fetch recordings from all rooms
-        roomsArray.push(...Array.from(rooms.values())); // (3)!
+        recordingsPath += `&roomId=${roomName}`; // (3)!
     }
 
-    const recordings = [];
-
     try {
-        // Fetch recordings for each room
-        for (const room of roomsArray) {
-            const recordingsUrl = `recordings?maxItems=100&roomId=${room.roomId}`; // (4)!
-            const { recordings: roomRecordings } = await httpRequest('GET', recordingsUrl);
-            recordings.push(...roomRecordings);
-        }
-
+        const { recordings } = await httpRequest('GET', recordingsPath); // (4)!
         res.status(200).json({ recordings }); // (5)!
     } catch (error) {
-        console.error('Error while fetching recordings:', error);
-        res.status(500).json({ message: 'Error fetching recordings' }); // (6)!
+        handleApiError(res, error, 'Error fetching recordings');
     }
 });
 ```
 
-1. Extract optional room name from query parameters for filtering.
-2. If the specified room doesn't exist, the server returns a `404 Not Found` response.
-3. If no room filter is specified, get recordings from all rooms.
-4. Fetch recordings for each room using the OpenVidu Meet API with a maximum of 100 items per room.
-5. Return the combined recordings list.
-6. If an error occurs while fetching recordings, the server returns a `500 Internal Server Error` response.
+1. Create the base path for fetching recordings, including a `maxItems` parameter to limit the number of recordings returned to 100.
+2. Extract optional room name from query parameters for filtering.
+3. If a room name is provided, it appends the `roomId` parameter to the recordings path to filter recordings by that room.
+4. Fetch recordings using the OpenVidu Meet API by sending a `GET` request to the constructed `recordingsPath`.
+5. The server returns a `200 OK` response with the list of recordings in JSON format.
 
 This endpoint does the following:
 
-1. Checks if a room name is provided in the query parameters. If so, it verifies that the room exists, otherwise returns a `404 Not Found` response. If no room name is provided, it fetches recordings from all rooms.
-2. For each room, it retrieves its recordings using the OpenVidu Meet API by sending a `GET` request to the `recordings` endpoint, adding the room ID as a query parameter to filter recordings by room and limiting the results to 100 items.
-3. If no errors occur, it combines all recordings from the specified rooms and returns them in the response. Otherwise, it returns a `500 Internal Server Error` response with an appropriate error message.
+1. Creates the base path for fetching recordings, including a `maxItems` parameter to limit the number of recordings returned to 100.
+2. Extracts an optional room name from the query parameters for filtering. If a room name is provided, it appends the `roomId` parameter to the recordings path to filter recordings by that room.
+3. Fetches recordings using the OpenVidu Meet API by sending a `GET` request to the constructed `recordingsPath`.
+4. If successful, it returns a `200 OK` response with the list of recordings in JSON format. Otherwise, the error is handled by the `handleApiError` function.
 
 ---
 
@@ -139,7 +121,7 @@ This endpoint does the following:
 
 The `DELETE /recordings/:recordingId` endpoint deletes the specified recording:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L136-L148' target='_blank'>index.js</a>" linenums="136"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/src/index.js#L103-L114' target='_blank'>index.js</a>" linenums="103"
 // Delete a recording
 app.delete('/recordings/:recordingId', async (req, res) => {
     const { recordingId } = req.params; // (1)!
@@ -149,8 +131,7 @@ app.delete('/recordings/:recordingId', async (req, res) => {
         await httpRequest('DELETE', `recordings/${recordingId}`); // (2)!
         res.status(200).json({ message: `Recording '${recordingId}' deleted successfully` }); // (3)!
     } catch (error) {
-        console.error(`Error while deleting recording '${recordingId}':`, error);
-        res.status(500).json({ message: `Error deleting recording '${recordingId}'` }); // (4)!
+        handleApiError(res, error, `Error deleting recording '${recordingId}'`);
     }
 });
 ```
@@ -158,9 +139,8 @@ app.delete('/recordings/:recordingId', async (req, res) => {
 1. The `recordingId` parameter is obtained from the request parameters.
 2. The recording is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `recordings/:recordingId` endpoint.
 3. The server returns a `200 OK` response with a success message.
-4. If an error occurs during recording deletion, the server returns a `500 Internal Server Error` response with an appropriate error message.
 
-This endpoint simply deletes the specified recording using the OpenVidu Meet API by sending a `DELETE` request to the `recordings/:recordingId` endpoint. If the deletion is successful, it returns a `200 OK` response with a success message. Otherwise, it returns a `500 Internal Server Error` response with an appropriate error message.
+This endpoint simply deletes the specified recording using the OpenVidu Meet API by sending a `DELETE` request to the `recordings/:recordingId` endpoint. If the deletion is successful, it returns a `200 OK` response with a success message. Otherwise, the error is handled by the `handleApiError` function.
 
 ---
 
@@ -168,7 +148,7 @@ This endpoint simply deletes the specified recording using the OpenVidu Meet API
 
 A new `GET /recordings/:recordingId/url` endpoint retrieves the recording URL for playback:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/src/index.js#L150-L162' target='_blank'>index.js</a>" linenums="150"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/src/index.js#L146-L157' target='_blank'>index.js</a>" linenums="150"
 // Get recording URL
 app.get('/recordings/:recordingId/url', async (req, res) => {
     const { recordingId } = req.params; // (1)!
@@ -178,8 +158,7 @@ app.get('/recordings/:recordingId/url', async (req, res) => {
         const { url } = await httpRequest('GET', `recordings/${recordingId}/url`); // (2)!
         res.status(200).json({ url }); // (3)!
     } catch (error) {
-        console.error(`Error while fetching recording URL for '${recordingId}':`, error);
-        res.status(500).json({ message: `Error fetching recording URL for '${recordingId}'` }); // (4)!
+        handleApiError(res, error, `Error fetching URL for recording '${recordingId}'`);
     }
 });
 ```
@@ -187,9 +166,8 @@ app.get('/recordings/:recordingId/url', async (req, res) => {
 1. The `recordingId` parameter is obtained from the request parameters.
 2. Fetch the recording URL from the OpenVidu Meet API by sending a `GET` request to the `recordings/:recordingId/url` endpoint.
 3. The server returns a `200 OK` response with the recording URL.
-4. If an error occurs while fetching the recording URL, the server returns a `500 Internal Server Error` response with an appropriate error message.
 
-This endpoint retrieves the playback URL for a specific recording by sending a `GET` request to the `recordings/:recordingId/url` endpoint. If successful, it returns a `200 OK` response with the recording URL. Otherwise, it returns a `500 Internal Server Error` response with an appropriate error message.
+This endpoint retrieves the playback URL for a specific recording by sending a `GET` request to the `recordings/:recordingId/url` endpoint. If successful, it returns a `200 OK` response with the recording URL. Otherwise, the error is handled by the `handleApiError` function.
 
 ---
 
@@ -201,7 +179,7 @@ The frontend has been enhanced to include recording management functionality. Th
 
 A new `Map` is created to store recordings indexed by their recording ID:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L1-L2' target='_blank'>app.js</a>" linenums="1" hl_lines="2"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L1-L2' target='_blank'>app.js</a>" linenums="1" hl_lines="2"
 const rooms = new Map();
 const recordings = new Map(); // (1)!
 ```
@@ -214,7 +192,7 @@ const recordings = new Map(); // (1)!
 
 The room list template is updated to include a `View Recordings` button for each room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L49-L81' target='_blank'>app.js</a>" linenums="49" hl_lines="26"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L49-L90' target='_blank'>app.js</a>" linenums="49" hl_lines="26-31"
 function getRoomListItemTemplate(room) {
     return `
         <li class="list-group-item">
@@ -240,8 +218,17 @@ function getRoomListItemTemplate(room) {
                 >
                     Join as Speaker
                 </button>
-                <button class="btn btn-success btn-sm" onclick="listRecordingsByRoom('${room.roomName}');">View Recordings</button>
-                <button title="Delete room" class="icon-button delete-button" onclick="deleteRoom('${room.roomName}');">
+                <button 
+                    class="btn btn-success btn-sm" 
+                    onclick="listRecordingsByRoom('${room.roomName}');"
+                >
+                    View Recordings
+                </button>
+                <button 
+                    title="Delete room"
+                    class="icon-button delete-button"
+                    onclick="deleteRoom('${room.roomId}');"
+                >
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
@@ -252,7 +239,7 @@ function getRoomListItemTemplate(room) {
 
 This button calls the `listRecordingsByRoom()` function when clicked, passing the room name as an argument. This allows users to view recordings for that specific room.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L198-L210' target='_blank'>app.js</a>" linenums="198"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L202-L214' target='_blank'>app.js</a>" linenums="202"
 async function listRecordingsByRoom(roomName) {
     // Hide the home screen and show the recordings screen
     const homeScreen = document.querySelector('#home');
@@ -281,7 +268,7 @@ This function sets up the recordings view by hiding the home screen, showing the
 
 The `listRecordings()` function fetches and displays recordings, optionally filtering by room name:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L212-L240' target='_blank'>app.js</a>" linenums="212"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L216-L244' target='_blank'>app.js</a>" linenums="216"
 async function listRecordings() {
     // Filter recordings by room name if provided
     const roomName = document.querySelector('#recordings-room-search').value; // (1)!
@@ -299,7 +286,7 @@ async function listRecordings() {
         });
         renderRecordings(); // (6)!
     } catch (error) {
-        console.error('Error listing recordings:', error);
+        console.error('Error listing recordings:', error.message);
 
         // Show error message
         const recordingsErrorElement = document.querySelector('#no-recordings-or-error');
@@ -309,7 +296,7 @@ async function listRecordings() {
 }
 
 function filterCompletedRecordings(recordingList) {
-    return recordingList.filter((recording) => recording.status === 'COMPLETE'); // (7)!
+    return recordingList.filter((recording) => recording.status === 'complete'); // (7)!
 }
 ```
 
@@ -319,20 +306,20 @@ function filterCompletedRecordings(recordingList) {
 4. Call the `filterCompletedRecordings()` function to filter out recordings not completed.
 5. For each recording in the filtered list, add it to the `recordings` map indexed by recording ID.
 6. Call the `renderRecordings()` function to display the list of recordings in the UI.
-7. Filter recordings to include only those with 'COMPLETE' status.
+7. Filter recordings to include only those with 'complete' status.
 
 The listRecordings() function performs the following actions:
 
 1. Gets the room name from the search input field to optionally filter recordings by room.
 2. Makes a `GET` request to the `/recordings` endpoint to fetch the list of recordings, including the room filter parameter if specified.
-3. Filters the recordings to show only those with `COMPLETE` status using the `filterCompletedRecordings()` function.
+3. Filters the recordings to show only those with `complete` status using the `filterCompletedRecordings()` function.
 4. For each recording in the filtered list, it adds the recording to the `recordings` map. This map is used to store the recordings indexed by their recording IDs to make it easier to access them later.
 5. Calls the `renderRecordings()` function to display the list of recordings.
 6. If an error occurs during the request, it logs the error and displays an appropriate error message.
 
 The `renderRecordings()` function is responsible for updating the UI with the list of recordings:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L242-L267' target='_blank'>app.js</a>" linenums="242"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L246-L271' target='_blank'>app.js</a>" linenums="246"
 function renderRecordings() {
     // Clear the previous list of recordings
     const recordingsList = document.querySelector('#recordings-list ul'); // (1)!
@@ -377,22 +364,20 @@ The `renderRecordings()` function performs the following actions:
 
 The `getRecordingListItemTemplate()` function generates the HTML template for each recording list item:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L277-L305' target='_blank'>app.js</a>" linenums="277"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L281-L307' target='_blank'>app.js</a>" linenums="281"
 function getRecordingListItemTemplate(recording) {
     const recordingId = recording.recordingId; // (1)!
-    const name = recording.filename; // (2)!
+    const roomName = recording.roomName; // (2)!
     const startDate = recording.startDate ? new Date(recording.startDate).toLocaleString() : '-'; // (3)!
-    const endDate = recording.endDate ? new Date(recording.endDate).toLocaleString() : '-'; // (4)!
-    const duration = recording.duration ? secondsToHms(recording.duration) : '-'; // (5)!
-    const size = recording.size ? formatBytes(recording.size ?? 0) : '-'; // (6)!
+    const duration = recording.duration ? secondsToHms(recording.duration) : '-'; // (4)!
+    const size = recording.size ? formatBytes(recording.size ?? 0) : '-'; // (5)!
 
     return `
         <li class="recording-container">
             <i class="fa-solid fa-file-video"></i>
             <div class="recording-info">
-                <p class="recording-name">${name}</p>
+                <p class="recording-name">${roomName}</p>
                 <p><span class="recording-info-tag">Start date: </span><span class="recording-info-value">${startDate}</span></p>
-                <p><span class="recording-info-tag">End date: </span><span class="recording-info-value">${endDate}</span></p>
                 <p><span class="recording-info-tag">Duration: </span><span class="recording-info-value">${duration}</span></p>
                 <p><span class="recording-info-tag">Size: </span><span class="recording-info-value">${size}</span></p>
             </div>
@@ -410,13 +395,12 @@ function getRecordingListItemTemplate(recording) {
 ```
 
 1. Retrieve the recording ID.
-2. Retrieve the recording filename.
+2. Retrieve the room name associated with the recording.
 3. Format the start date for display.
-4. Format the end date for display.
-5. Convert the duration from seconds to a human-readable format using the `secondsToHms()` helper function.
-6. Format the file size using the `formatBytes()` helper function.
+4. Convert the duration from seconds to a human-readable format using the `secondsToHms()` helper function.
+5. Format the file size using the `formatBytes()` helper function.
 
-This function creates an HTML list item containing the recording's metadata, including the recording filename, start date, end date, duration, and file size, along with buttons to play and delete the recording. The buttons call the `displayRecording()` and `deleteRecording()` functions respectively, passing the recording ID as an argument. The recording information is formatted using helper functions like `secondsToHms()` for duration and `formatBytes()` for file size to provide a user-friendly display.
+This function creates an HTML list item containing the recording's metadata, including the room name associated with the recording, start date, duration, and file size, along with buttons to play and delete the recording. The buttons call the `displayRecording()` and `deleteRecording()` functions respectively, passing the recording ID as an argument. The recording information is formatted using helper functions like `secondsToHms()` for duration and `formatBytes()` for file size to provide a user-friendly display.
 
 ---
 
@@ -424,7 +408,7 @@ This function creates an HTML list item containing the recording's metadata, inc
 
 When the user clicks the play button for a recording, the `displayRecording()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L307-L334' target='_blank'>app.js</a>" linenums="307"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L309-L336' target='_blank'>app.js</a>" linenums="309"
 async function displayRecording(recordingId) {
     // Hide the recordings screen and show the display recording screen
     const recordingsScreen = document.querySelector('#recordings');
@@ -449,7 +433,7 @@ async function getRecordingUrl(recordingId) {
         const { url } = await httpRequest('GET', `/recordings/${recordingId}/url`); // (5)!
         return url;
     } catch (error) {
-        console.error('Error fetching recording URL:', error);
+        console.error('Error fetching recording URL:', error.message);
         return null;
     }
 }
@@ -469,7 +453,7 @@ The `displayRecording()` function handles the playback of a specific recording b
 
 When the user clicks the delete recording button, the `deleteRecording()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/main/meet-node-recordings/public/js/app.js#L336-L346' target='_blank'>app.js</a>" linenums="336"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-recordings/public/js/app.js#L338-L348' target='_blank'>app.js</a>" linenums="338"
 async function deleteRecording(recordingId) {
     try {
         await httpRequest('DELETE', `/recordings/${recordingId}`); // (1)!
@@ -478,7 +462,7 @@ async function deleteRecording(recordingId) {
         recordings.delete(recordingId); // (2)!
         renderRecordings(); // (3)!
     } catch (error) {
-        console.error('Error deleting recording:', error);
+        console.error('Error deleting recording:', error.message);
     }
 }
 ```
@@ -488,3 +472,11 @@ async function deleteRecording(recordingId) {
 3. Call the `renderRecordings()` function to update the list of recordings.
 
 The `deleteRecording()` function simply makes a `DELETE` request to the `/recordings/:recordingId` endpoint to delete the specified recording. If the recording is successfully deleted, it removes the recording from the `recordings` map and calls the `renderRecordings()` function to update the list of recordings. If an error occurs during recording deletion, it logs the error to the console.
+
+## Accessing this tutorial from other computers or phones
+
+--8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+--8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"

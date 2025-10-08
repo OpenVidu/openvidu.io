@@ -5,7 +5,7 @@ description: Learn how to build a minimal Python application server with Flask t
 
 # Python Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-server/python){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.4.0/application-server/python){ .md-button target=\_blank }
 
 This is a minimal server application built for Python with [Flask :fontawesome-solid-external-link:{.external-link-icon}](https://flask.palletsprojects.com/en/stable/){:target="\_blank"} that allows:
 
@@ -23,7 +23,7 @@ It internally uses [LiveKit Python SDK :fontawesome-solid-external-link:{.extern
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
 ```
 
 ### 3. Run the server application
@@ -43,7 +43,7 @@ The application is a simple Flask app with a single file `app.py` that exports t
 
 Let's see the code of the `app.py` file:
 
-```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/python/app.py#L1-L15' target='_blank'>app.py</a>" linenums="1"
+```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-server/python/app.py#L1-L15' target='_blank'>app.py</a>" linenums="1"
 import os
 from flask import Flask, request
 from flask_cors import CORS
@@ -86,7 +86,7 @@ The endpoint `/token` accepts `POST` requests with a payload of type `applicatio
 -   `roomName`: the name of the Room where the user wants to connect.
 -   `participantName`: the name of the participant that wants to connect to the Room.
 
-```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/python/app.py#L18-L31' target='_blank'>app.py</a>" linenums="18"
+```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-server/python/app.py#L18-L31' target='_blank'>app.py</a>" linenums="18"
 @app.post("/token")
 def create_token():
     room_name = request.json.get("roomName")
@@ -123,7 +123,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
 
-```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-server/python/app.py#L34-L51' target='_blank'>app.py</a>" linenums="34"
+```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-server/python/app.py#L34-L51' target='_blank'>app.py</a>" linenums="34"
 token_verifier = TokenVerifier(LIVEKIT_API_KEY, LIVEKIT_API_SECRET) # (1)!
 webhook_receiver = WebhookReceiver(token_verifier) # (2)!
 

@@ -6,7 +6,7 @@ OpenVidu provides a [set of built-in agents](./openvidu-agents/overview.md#list-
 
 LiveKit Agents consists of a **Python** or **Node** program that connects to LiveKit Rooms to perform some kind of AI pipeline over the media tracks published to the Room by regular Participants.
 
-The agent actually behaves as any other regular Participant of the Room, but thanks to its connection to **Speech-to-Text** services, **LLMs** and **Text-to-Speech** service, it can transcribe audio tracks, analyze video tracks, generate speech, etc... and publish the results back to the Room. This allows building any kind of flow interaction between your users and the AI service, all in realtime.
+The agent actually behaves as any other regular Participant of the Room, but thanks to its connection to **Speech-to-Text** services, **LLMs** and **Text-to-Speech** service, it can transcribe audio tracks, analyze video tracks, generate speech, etc... and publish the results back to the Room. This allows building any kind of flow interaction between your users and the AI service, all in real-time.
 
 An incredible set of [plugins :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/tree/main/livekit-plugins){target="\_blank"} make it very easy to integrate your agent code with the most popular AI providers. You have further information in the [LiveKit Agents integrations :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/integrations/){target="\_blank"} documentation.
 
@@ -120,7 +120,7 @@ Depending on your [OpenVidu deployment type](../self-hosting/deployment-types.md
     cd /opt/openvidu/config/cluster/media_node
     ```
 
-### 2. Add an `agent-AGENT_NAME.yaml` file
+### 2. Add a `agent-AGENT_NAME.yaml` file
 
 Located in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node, create a file named `agent-AGENT_NAME.yaml`, where `AGENT_NAME` must be a unique name for your agent. The minimal content of this file is:
 
@@ -188,7 +188,7 @@ When developing your custom agent using the Python or Node SDKs, there are some 
 
 ### Dispatching your custom agent
 
-You can control when to dispatch your agent in your agent's code. By default agents will dispatch (connect) automatically to new Rooms. If you want to manually control when to dispatch your agent, simply add property `agent_name` to your `WorkerOptions` when creating the agent:
+You can control when to dispatch your agent in your agent's code. By default, agents will dispatch (connect) automatically to new Rooms. If you want to manually control when to dispatch your agent, simply add property `agent_name` to your `WorkerOptions` when creating the agent:
 
 === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 

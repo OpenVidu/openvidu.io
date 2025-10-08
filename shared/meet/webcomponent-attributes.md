@@ -3,7 +3,7 @@
 
 | Attribute | Description | Required |
 |-----------|-------------|----------|
-| `room-url` | The OpenVidu Meet room URL to connect to (moderator or publisher url) | Yes (This attribute is required unless `recording-url` is provided.) |
+| `room-url` | The OpenVidu Meet room URL to connect to (moderator or speaker url) | Yes (This attribute is required unless `recording-url` is provided.) |
 | `recording-url` | The URL of a recording to view. | Yes (This attribute is required unless `room-url` is provided.) |
 | `participant-name` | Display name for the local participant. | No |
 | `leave-redirect-url` | URL to redirect to when leaving the meeting. Redirection occurs after the **`CLOSED` event** fires. | No |

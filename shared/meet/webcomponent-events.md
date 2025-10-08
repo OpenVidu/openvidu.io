@@ -3,6 +3,6 @@
 
 | Event | Description | Payload |
 |-------|-------------|------------|
-| `JOINED` | Event emitted when the local participant joins the room. | <pre><code>{ <br>&nbsp;&nbsp;&nbsp;&nbsp;"roomId": "string",<br>&nbsp;&nbsp;&nbsp;&nbsp;"participantName": "string"<br>}</code></pre> |
-| `LEFT` | Event emitted when the local participant leaves the room. | <pre><code>{ <br>&nbsp;&nbsp;&nbsp;&nbsp;"roomId": "string",<br>&nbsp;&nbsp;&nbsp;&nbsp;"participantName": "string",<br>&nbsp;&nbsp;&nbsp;&nbsp;"reason": "LeftEventReason"<br>}</code></pre> |
-| `CLOSED` | Event emitted when the application is closed. | - |
+| `joined` | Event emitted when the local participant joins the room. | <pre><code>{ <br>&nbsp;&nbsp;&nbsp;&nbsp;"roomId": "string",<br>&nbsp;&nbsp;&nbsp;&nbsp;"participantIdentity": "string"<br>}</code></pre> |
+| `left` | Event emitted when the local participant leaves the room. | <pre><code>{ <br>&nbsp;&nbsp;&nbsp;&nbsp;"roomId": "string",<br>&nbsp;&nbsp;&nbsp;&nbsp;"participantIdentity": "string",<br>&nbsp;&nbsp;&nbsp;&nbsp;"reason": "LeftEventReason"<br>}</code></pre> |
+| `closed` | Event emitted when the application is closed. | - |

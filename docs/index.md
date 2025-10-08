@@ -1,5 +1,5 @@
 ---
-title: openVidu
+title: "Self-hosted videoconferencing and custom WebRTC solutions"
 template: home.html
 hide:
   - navigation
@@ -36,14 +36,14 @@ tags:
         </p>
         <ul class="product-features">
           <li>Multi-party HQ video conferencing</li>
-          <li>Customize with your logo and corporate colors</li>
+          <li>Customize with your branding and corporate colors</li>
           <li>Feature rich: screen sharing, chat, virtual background, recording...</li>
           <li>Ready to use AI integrations</li>
           <li>Embed right into your app with pre-built components</li>
         </ul>
       </div>
       <div class="product-footer">
-        <a href="/meet/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="meet/" class="product-button md-button md-button--primary primary">Get Started</a>
       </div>
     </div>
     <div class="product-card openvidu-platform">
@@ -67,7 +67,7 @@ tags:
         </ul>
       </div>
       <div class="product-footer">
-        <a href="/docs/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="docs/" class="product-button md-button md-button--primary primary">Get Started</a>
       </div>
     </div>
   </div>
@@ -156,7 +156,7 @@ tags:
 
     ---
 
-    Achieve ultra-low latency in your videoconference or live streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
+    Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
 
 <!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
 
@@ -168,13 +168,13 @@ tags:
 
     ---
 
-    E2E encryption, fine-grained access control and highly secure deployments for the most demanding security requirements.
+    Fine-grained access control and highly secure deployments for the most demanding security requirements. **E2E encryption coming soon!**
 
 -   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 
     ---
 
-    Chrome, Firefox, Safari, Android, iOS, Unity, Windows, MacOS, Linux... OpenVidu is compatible with all of them.
+    Chrome, Firefox, Safari, Android, iOS, Unity, Windows, macOS, Linux... OpenVidu is compatible with all of them.
 
 -   :material-video-4k-box:{ .feature-icon .padding-icon } __Up to 4K video and HQ audio__{ .feature-name }
 
@@ -186,7 +186,7 @@ tags:
 
     ---
 
-    Record your videocalls with complete freedom. You can use predefined layouts or easily build your own.
+    Record your video calls with complete freedom. You can use predefined layouts or easily build your own.
 
 -   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcast to YouTube/Twitch__{ .feature-name }
 

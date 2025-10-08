@@ -48,7 +48,7 @@ Depending on the node type, you will see different services running.
 
     ```bash
     NAME                       IMAGE                                              COMMAND                  SERVICE                    CREATED          STATUS
-    app                        docker.io/openvidu/openvidu-call                   "docker-entrypoint.s…"   app                        12 seconds ago   Up 10 seconds
+    openvidu-meet              docker.io/openvidu/openvidu-call                   "docker-entrypoint.s…"   openvidu-meet              12 seconds ago   Up 10 seconds
     caddy                      docker.io/openvidu/openvidu-pro-caddy              "/bin/caddy run --co…"   caddy                      12 seconds ago   Up 10 seconds
     dashboard                  docker.io/openvidu/openvidu-pro-dashboard          "./openvidu-dashboard"   dashboard                  12 seconds ago   Up 10 seconds
     grafana                    docker.io/grafana/grafana                          "/run.sh"                grafana                    11 seconds ago   Up 8 seconds

@@ -317,9 +317,9 @@ Visit the LiveKit reference documentation for a detailed explanation of Egress:
 You can ingest media streams into your Rooms using the Ingress module. It supports different sources, including:
 
 - **RTMP**: the Ingress module exposes an RTMP endpoint to which your user can stream their content. The ingress module will transcode and publish the stream to the Room, making it available to all participants.
-- **WHIP**: the Ingress module exposes a WHIP endpoint to which your user can stream their content directly via WebRTC. You can choose whether the Ingress module should transcode the stream or directly relay it to the Room. Avoiding transcodification is the best option to minimize latency when ingesting media to a Room.
+- **WHIP**: the Ingress module exposes a WHIP endpoint to which your user can stream their content directly via WebRTC. You can choose whether the Ingress module should transcode the stream or directly relay it to the Room. Avoiding transcoding is the best option to minimize latency when ingesting media to a Room.
 - **Media files serve by an HTTP server**: the Ingress module will fetch a media file, transcode it and publish it to the Room.
-- **Media served by a SRT server**: the Ingress module will pull the media from an SRT server, transcode it and publish it to the Room.
+- **Media served by an SRT server**: the Ingress module will pull the media from an SRT server, transcode it and publish it to the Room.
 
 Visit the LiveKit reference documentation for a detailed explanation of Ingress:
 
@@ -544,7 +544,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
         lk ingress create ingress.json
         ```
 
-Many different audio and video codecs are supported for ingesting IP cameras:
+Many audio and video codecs are supported for ingesting IP cameras:
 
 For video:
 

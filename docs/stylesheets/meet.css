@@ -420,3 +420,7 @@ li:has(.coming-soon-overlay):hover::after {
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
+
+.commercial-code-blocks code {
+  text-align: left !important;
+}

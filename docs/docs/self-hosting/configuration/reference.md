@@ -44,9 +44,9 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. |
-| **`MEET_ADMIN_SECRET`** | Password for the Admin user of the OpenVidu Meet service. |
-| **`MEET_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. |
+| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. |
 | **`MEET_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
 | **`MEET_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. |
 | **`MEET_PREFERENCES_STORAGE_MODE`** | Storage mode for user preferences in OpenVidu Meet. Valid values are: `s3` (S3 bucket) and `abs` (Azure Blob Storage). |

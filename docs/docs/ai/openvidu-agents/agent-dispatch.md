@@ -20,7 +20,7 @@ AI_SERVICE:
     ```
     
 
-Agents configured with `processing: automatic` in one of their AI services will immediately join new Rooms and will start processing media tracks as soon as possible. This _"as soon as possible"_ moment can vary depending on the type of agent, the AI service that is is providing, and its configuration.
+Agents configured with `processing: automatic` in one of their AI services will immediately join new Rooms and will start processing media tracks as soon as possible. This _"as soon as possible"_ moment can vary depending on the type of agent, the AI service that is providing, and its configuration.
 
 !!! info "Automatic dispatch is useful when the same AI service needs to be present in all Rooms, at all times."
 

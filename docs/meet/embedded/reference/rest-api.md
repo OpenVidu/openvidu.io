@@ -17,7 +17,7 @@ X-API-KEY: your-openvidu-meet-api-key
 
 ### Generate an API key
 
-1. Connect to OpenVidu Meet at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/`.
+1. Connect to OpenVidu Meet console at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/`.
 2. Navigate to the **"Embedded"** page.
 3. Click on **":material-key: Generate API Key"** button.
 
@@ -27,7 +27,7 @@ X-API-KEY: your-openvidu-meet-api-key
 
 You can access the REST API reference documentation at:
 
-- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html){target="_blank"}
+- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](./api.html){target="_blank"}
 - **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/api/v1/docs/`**{.no-break}
 
 ### Code snippets

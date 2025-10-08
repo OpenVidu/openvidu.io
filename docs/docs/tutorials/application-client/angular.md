@@ -5,7 +5,7 @@ description: Learn how to build a simple video-call app using Angular with LiveK
 
 # Angular Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.3.0/application-client/openvidu-angular){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.4.0/application-client/openvidu-angular){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built with **Angular** that allows:
 
@@ -25,7 +25,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.3.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
 ```
 
 ### 3. Run a server application
@@ -54,7 +54,7 @@ npm install livekit-client
 
 Now let's see the code of the `app.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/app.component.ts#L16-L65' target='_blank'>app.component.ts</a>" linenums="16"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/app.component.ts#L16-L65' target='_blank'>app.component.ts</a>" linenums="16"
 type TrackInfo = { // (1)!
     trackPublication: RemoteTrackPublication;
     participantIdentity: string;
@@ -133,7 +133,7 @@ The `app.component.ts` file defines the following variables:
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` method is called:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/app.component.ts#L67-L116' target='_blank'>app.component.ts</a>" linenums="67"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/app.component.ts#L67-L116' target='_blank'>app.component.ts</a>" linenums="67"
 async joinRoom() {
     // Initialize a new Room object
     const room = new Room();
@@ -217,7 +217,7 @@ The `joinRoom()` method performs the following actions:
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 
-    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/app.component.ts#L134-L152' target='_blank'>app.component.ts</a>" linenums="134"
+    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/app.component.ts#L134-L152' target='_blank'>app.component.ts</a>" linenums="134"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -250,7 +250,7 @@ The `joinRoom()` method performs the following actions:
 
 In order to display participants' video and audio tracks, the `app.component.html` file integrates the `VideoComponent` and `AudioComponent`.
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/app.component.html#L24-L42' target='_blank'>app.component.html</a>" linenums="24"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/app.component.html#L24-L42' target='_blank'>app.component.html</a>" linenums="24"
 <div id="layout-container">
     @if (localTrack()) {
     <video-component
@@ -284,7 +284,7 @@ This code snippet does the following:
 
 Let's see now the code of the `video.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/video/video.component.ts#L4-L27' target='_blank'>video.component.ts</a>" linenums="3"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/video/video.component.ts#L4-L27' target='_blank'>video.component.ts</a>" linenums="3"
 // (1)!
 @Component({
     selector: "video-component",
@@ -334,7 +334,7 @@ The `VideoComponent` does the following:
 
 Finally, let's see the code of the `audio.component.ts` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/audio/audio.component.ts#L4-L25' target='_blank'>audio.component.ts</a>" linenums="3"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/audio/audio.component.ts#L4-L25' target='_blank'>audio.component.ts</a>" linenums="3"
 // (1)!
 @Component({
     selector: "audio-component",
@@ -374,7 +374,7 @@ The `AudioComponent` class is similar to the `VideoComponent` class, but it is u
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` method:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.3.0/application-client/openvidu-angular/src/app/app.component.ts#L118-L132' target='_blank'>app.component.ts</a>" linenums="118"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/application-client/openvidu-angular/src/app/app.component.ts#L118-L132' target='_blank'>app.component.ts</a>" linenums="118"
 async leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await this.room()?.disconnect(); // (1)!

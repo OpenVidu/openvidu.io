@@ -408,19 +408,15 @@ Below is an example using NGINX as a Load Balancer:
 
 ## Configure your application to use the deployment
 
-To point your applications to your OpenVidu deployment, check the file at `/opt/openvidu/config/cluster/.env` of any Master Node. All access credentials of all services are defined in this file.
+To point your applications to your OpenVidu deployment, check the following files:
 
-Your authentication credentials and URL to point your applications would be:
+- `/opt/openvidu/config/cluster/master_node/meet.env`: Contains the OpenVidu Meet parameters.
+- `/opt/openvidu/config/cluster/openvidu.env`: Contains all the credentials of services deployed with OpenVidu Platform.
 
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_KEY`
-    - **API Secret**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_SECRET`
+The most relevant parameters are:
 
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `DOMAIN_OR_PUBLIC_IP` as a URL. For example, `https://openvidu.example.io/`
-    - **Username**: `OPENVIDUAPP`
-    - **Password**: The value in `/opt/openvidu/config/cluster/openvidu.env` of `LIVEKIT_API_SECRET`
+--8<-- "shared/self-hosting/credentials-general.md"
+--8<-- "shared/self-hosting/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -454,9 +450,8 @@ Each installation command for each type of node looks like this:
         --mongo-replica-set-key='xxxxx' \
         --grafana-admin-user='xxxxx' \
         --grafana-admin-password='xxxxx' \
-        --meet-admin-user='xxxxx' \
-        --meet-admin-password='xxxxx' \
-        --meet-api-key='xxxxx' \
+        --meet-initial-admin-password='xxxxx' \
+        --meet-initial-api-key='xxxxx' \
         --external-load-balancer
     ```
 

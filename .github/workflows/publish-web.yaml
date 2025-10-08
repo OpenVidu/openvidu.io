@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mike mkdocs-material mkdocs-glightbox
+          pip install mike mkdocs-material mkdocs-glightbox mkdocs-llmstxt
 
       - name: Configure Git Credentials
         run: |
@@ -42,5 +42,7 @@ jobs:
 
       - name: Run selected script
         working-directory: ./custom-versioning
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
           ./${{ github.event.inputs.script }}.sh ${{ github.event.inputs.version }}

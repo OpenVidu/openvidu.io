@@ -6,7 +6,7 @@ description: Learn how to deploy OpenVidu Single Node on Google Cloud Platform u
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Google Cloud Platform
 !!! warning
 
-    Google Cloud Platform deployments are considered in Beta in version 3.3.0 of OpenVidu.
+    Google Cloud Platform deployments are considered in Beta in version 3.4.0 of OpenVidu.
 
 This section contains the instructions of how to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
@@ -40,6 +40,8 @@ Once you click the button you will see this window.
 
 Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 
+For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/pro/singlenode/gcp` and for the **Git ref** put `3.4.0` corresponding to the version then click on continue.   
+
 === "New Service Account Steps" 
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account-1.png){ .svg-img .dark-img }
@@ -60,8 +62,6 @@ Fill **Deployment ID** with any name that you desire like openvidu-singlenode-de
     ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/self-hosting/single-node/gcp/gcp-create-service-account-4.png){ .svg-img .dark-img }
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
-
-For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/pro/singlenode/gcp` and then click on continue.
 
 ## Input Values
 

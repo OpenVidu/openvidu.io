@@ -5,9 +5,6 @@ description: Learn how to deploy OpenVidu High Availability on Azure using Templ
 
 # OpenVidu High Availability installation: Azure
 
-!!! warning
-
-    Azure deployments are considered in Beta in version 3.3.0 of OpenVidu.
 
 !!! info
     
@@ -19,7 +16,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Hig
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.3.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.3.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.4.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.4.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
 This is how the architecture of the deployment looks like:
@@ -61,6 +58,8 @@ To deploy the template you need to fill the following parameters.
 
 --8<-- "shared/self-hosting/azure-ssl-domain.md"
 
+--8<-- "shared/self-hosting/azure-meet.md"
+
 ### OpenVidu HA Configuration
 
 In this section, you need to specify some properties needed for the OpenVidu HA deployment.
@@ -95,21 +94,13 @@ You need to specify some properties for the Azure instances that will be created
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
-=== "Media Nodes Scaling Set Configuration"
-
-    Parameters in this section look like this:
-
-    <figure markdown>
-    ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/ha/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
-    </figure>
-
-    The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
-
-    The **Scale Target CPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling){:target=_blank}.
+--8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
 
 --8<-- "shared/self-hosting/azure-scale-in-config.md"
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
+
+--8<-- "shared/self-hosting/azure-additional-flags.md"
 
 ### (Optional) TURN server configuration with TLS
 
@@ -196,16 +187,9 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and URL to point your applications would be:
 
-- Applications developed with LiveKit SDK:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. It could be `wss://openvidu.example.io/` or `https://openvidu.example.io/` depending on the SDK you are using.
-    - **API Key**: The value in the Key Vault Secret of `LIVEKIT-API-KEY` or in the instance in `openvidu.env`.
-    - **API Secret**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/azure-credentials-general.md"
+--8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
 
-- Applications developed with OpenVidu v2:
-    - **URL**: The value in the Key Vault Secret of `DOMAIN-NAME` or in the instance in `openvidu.env` as a URL. For example, `https://openvidu.example.io/`.
-    - **Username**: `OPENVIDUAPP`.
-    - **Password**: The value in the Key Vault Secret of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
- 
 ## Troubleshooting initial Azure stack creation
 
 !!! info

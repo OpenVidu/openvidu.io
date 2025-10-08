@@ -11,8 +11,8 @@ tags:
 
 <div>
 <h1 class="logo-header meet-header">
-<img src="../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_greyfont_transback_beta.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_whitefont_transback_beta.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
 </h1>
 </div>
 
@@ -80,7 +80,7 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
-    Your users can setup their video/audio devices, virtual background and language before entering the room.
+    Your users can set up their video/audio devices, virtual background and language before entering the room.
 
     <a class="glightbox" href="../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/prejoin.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
@@ -116,7 +116,7 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 - __Share room links__{ .ov-meet-commercial-card-title }
 
     Unique secure links give access to your rooms with different permission levels.
-    
+
     <a class="glightbox" href="../assets/videos/meet/meet-share-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-share-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 </div>
@@ -140,7 +140,7 @@ Record meetings with different layouts. Generate shareable links and manage acce
 ---
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
-With all the features you need to fine-tune your perfect video calling service
+With all the features you need to fine-tune your perfect video calling service.
 </h2>
 
 <div class="feature-cards" markdown>
@@ -174,11 +174,11 @@ With all the features you need to fine-tune your perfect video calling service
 
     Record your video calls with different layouts. Manage recording permissions and access with ease.
 
--   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name }
+-   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
 
     ---
 
-    OpenVidu Meet allows you to broadcast your video calls to platforms such as YouTube or Twitch.
+    Screen sharing with the best quality.
 
 -   :material-face-man-shimmer-outline:{ .feature-icon .padding-icon } __Background effects__{ .feature-name }
 
@@ -190,19 +190,19 @@ With all the features you need to fine-tune your perfect video calling service
 
 <div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
-
-    ---
-
-    Screen sharing with the best quality.
-
 -   :material-chat-outline:{ .feature-icon .padding-icon } __Advanced chat__{ .feature-name }
 
     ---
 
     OpenVidu Meet integrates an advanced chat with support of rich messages, emojis, reactions and more.
 
--   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name }
+-   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
+
+    ---
+
+    OpenVidu Meet allows you to broadcast your video calls to platforms such as YouTube or Twitch.
+
+-   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name .coming-soon-overlay }
 
     ---
 
@@ -212,19 +212,19 @@ With all the features you need to fine-tune your perfect video calling service
 
 <div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name }
+-   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name .coming-soon-overlay }
 
     ---
 
-    Avoid man-in-th-middle attacks: only your final users can decrypt the audio, video and chat messages.
+    Avoid man-in-the-middle attacks: only your final users can decrypt the audio, video and chat messages.
 
--   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name }
+-   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay }
 
     ---
 
     Prevent unwanted guests and require administrator approval to join.
 
--   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name }
+-   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay }
 
     ---
 
@@ -252,13 +252,20 @@ Embed the OpenVidu Meet UI right into your app.
 
 </div>
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp commercial-code-blocks" markdown>
 
 __REST API and webhooks__{ .ov-meet-commercial-card-title }
 
 Control your meetings from your backend.
 
-<a class="glightbox" href="../assets/images/meet/embedded/embedded-config.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/embedded/embedded-config.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Embedded Config"/></a>
+```bash
+curl --request POST \
+    --url https://YOUR_DOMAIN/api/v1/rooms \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json' \
+    --header 'X-API-KEY: YOUR_API_KEY' \
+    --data '{"roomName": "my-room"}'
+```
 
 </div>
 
@@ -289,7 +296,7 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 
     Deploy with Azure Resource Manager
 
--   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon .coming-soon-overlay } __GCP__{ .feature-name }
+-   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon } __GCP__{ .feature-name }
 
     ---
 
@@ -297,6 +304,10 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 
 </div>
 </div>
+
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
+Check out the <a href="./deployment/overview"><strong>deployment documentation</strong></a>.
+</h2>
 
 <hr style="margin: 4em 0">
 
@@ -312,7 +323,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-<a class="glightbox" href="../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
+<a class="glightbox" href="../assets/images/meet/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
@@ -353,7 +364,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 -	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features to enhance the learning experience.
 
-<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
+<a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-elearning.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-elearning.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
 
 </div>
 
@@ -363,7 +374,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
     ---
 
-    Up to 4K video and HiFi audio for crystal-clear lessons. Stable experience across all kind of network thanks to simulcast, SVC, dynacast and adaptive streaming.
+    Up to **4K** video and **HiFi** audio for crystal-clear lessons. Stable experience across all kind of network thanks to **simulcast**, **SVC**, **dynacast** and **adaptive streaming**.
 
 -   __Accessibility__{ .feature-name }
 
@@ -390,7 +401,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
+<a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-telehealth.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-telehealth.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
 
 -	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption.
 
@@ -414,7 +425,7 @@ The most secure videoconference platform is the one you host on your own servers
 
     ---
 
-    Up to 4K and HiFi audio for clear for clear communication between practitioners and patients. File sharing for medical documents and images.
+    Up to 4K and HiFi audio for clear communication between practitioners and patients. File sharing for medical documents and images.
 
 </div>
 </div>
@@ -463,7 +474,35 @@ Build trust with instant, reliable support through embedded video calls that per
 
 <hr style="margin: 5em 0 2em 0">
 
+## Free open-source edition vs Commercial edition
+
+OpenVidu Meet is available in two editions:
+
+### OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.9em; vertical-align: top">COMMUNITY</span>
+
+It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, advanced chat, virtual backgrounds, and more.
+
+OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
+
+### OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.9em; vertical-align: top">PRO</span>
+
+It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
+
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
+You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview">deploying OpenVidu Meet</a>.
+</h2>
+
+<hr style="margin: 5em 0 2em 0">
+
+## What does it mean that OpenVidu Meet is in BETA?
+
+OpenVidu Meet (v3.4.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support.md) with any comments or suggestions.
+
+<hr style="margin: 5em 0 2em 0">
+
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
 Need total control and advanced SDKs to build your custom real-time application?
-Checkout <a href="../docs"><strong>OpenVidu Platform</strong></a>
+Checkout <a href="../docs" target="_blank"><strong>OpenVidu Platform</strong></a>
 </h2>

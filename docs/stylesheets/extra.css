@@ -2,6 +2,8 @@
 :root:root {
   --primary-color-of-meet: rgb(0, 147, 73);
   --primary-color-of-platform: rgb(0, 136, 170);
+  --accent-color-of-meet: rgb(6, 211, 98);
+  --accent-color-of-platform: rgb(0, 200, 247);
 }
 
 .openvidu-tag {
@@ -251,7 +253,7 @@ p:has(> a.glightbox) {
 
 .slogan {
   margin-bottom: 0.6em !important;
-  font-size: 2.5em !important;
+  font-size: 2.2em !important;
   text-align: center;
 }
 
@@ -841,6 +843,11 @@ h2.meetplatform-slogan {
   --md-icon-size: 1.525em !important;
 }
 
+.compare-table-icon-progress {
+  color: #00a2ca;
+  --md-icon-size: 1.525em !important;
+}
+
 .platform-primary-color {
   background-color: var(--primary-color-of-platform) !important;
   border-color: var(--primary-color-of-platform) !important;
@@ -849,6 +856,14 @@ h2.meetplatform-slogan {
 .meet-primary-color {
   background-color: var(--primary-color-of-meet) !important;
   border-color: var(--primary-color-of-meet) !important;
+}
+
+.meet-link-color {
+  color: var(--accent-color-of-meet) !important;
+}
+
+.platform-link-color {
+  color: var(--accent-color-of-platform) !important;
 }
 
 .accent-code {
