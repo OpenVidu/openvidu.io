@@ -45,7 +45,7 @@ Upgrade OpenVidu Single Node is very simple. These are the steps you need to fol
       No
     ```
 
-4. Answer `Yes` to the question and your OpenVidu Single Node will be upgraded to asked version. For each version the system will ask you to confirm the upgrade.
+4. Answer `Yes` to the question and your OpenVidu Single Node will be upgraded to asked version.
 5. A `diff` will be shown with the changes made in the configuration files. You can review the changes and decide if you want to apply them or not. If you want to apply the changes, answer `Yes` to the question. If you want to discard the changes and stop the upgrading process, simply answer `No`.
 6. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
 7. Start OpenVidu with the following command:
