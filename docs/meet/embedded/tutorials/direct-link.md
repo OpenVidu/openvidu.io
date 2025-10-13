@@ -597,5 +597,5 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
 
     By default, this tutorial runs on `http://localhost:6080` and is only accessible from the local machine. If you want to access it from other computers or phones, you have the following options:
 
-    - **Use tunneling tools**: Configure tools like [VS Code port forwarding :fontawesome-solid-external-link:{.external-link-icon}](https://code.visualstudio.com/docs/debugtest/port-forwarding){:target="_blank"}, [ngrok :fontawesome-solid-external-link:{.external-link-icon}](https://ngrok.com/){:target="_blank"}, [localtunnel :fontawesome-solid-external-link:{.external-link-icon}](https://localtunnel.github.io/www/){:target="_blank"}, or similar services to expose this tutorial to the internet. You can use http or https URLs.
-    - **Deploy to a server**: Upload this tutorial to a web server. You can use http or https URLs.
+    - **Use tunneling tools**: Configure tools like [VS Code port forwarding :fontawesome-solid-external-link:{.external-link-icon}](https://code.visualstudio.com/docs/debugtest/port-forwarding){:target="_blank"}, [ngrok :fontawesome-solid-external-link:{.external-link-icon}](https://ngrok.com/){:target="_blank"}, [localtunnel :fontawesome-solid-external-link:{.external-link-icon}](https://localtunnel.github.io/www/){:target="_blank"}, or similar services to expose this tutorial to the internet. You can use HTTP or HTTPS URLs.
+    - **Deploy to a server**: Upload this tutorial to a web server. You can use HTTP or HTTPS URLs.

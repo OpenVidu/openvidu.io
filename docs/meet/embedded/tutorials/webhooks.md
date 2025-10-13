@@ -189,6 +189,10 @@ const isWebhookEventValid = (body, headers) => {
 
 This function implements webhook security by validating both the cryptographic signature and the timestamp to ensure webhooks are authentic and recent.
 
+!!! info "Verifying webhooks in other languages"
+
+    You can find examples of how to verify OpenVidu Meet webhooks in other programming languages in the [Validate events :fontawesome-solid-external-link:{.external-link-icon}](../reference/webhooks.md#validate-events){:target="\_blank"} section of the Webhooks reference.
+
 ---
 
 ### Frontend modifications
@@ -407,4 +411,4 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
 
 6. **Configure webhooks in OpenVidu Meet**: Set up webhooks in your OpenVidu Meet production deployment to point to this tutorial. Follow the instructions in the [Webhooks configuration :fontawesome-solid-external-link:{.external-link-icon}](../reference/webhooks.md#configuration){:target="\_blank"} section to learn how to configure a webhook URL. Use the public URL of this tutorial followed by `/webhook` (e.g., `https://your-tutorial-domain.com:XXXX/webhook`).
 
-7. **Access the tutorial**: Access the tutorial in your web browser using its public URL (e.g., `https://your-tutorial-domain.com:XXXX`).
+7. **Access the tutorial**: Access the tutorial from any device connected to the internet using its public URL (e.g., `https://your-tutorial-domain.com:XXXX`).
