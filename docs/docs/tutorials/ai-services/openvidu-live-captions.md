@@ -5,7 +5,7 @@ description: Learn how to transcribe in real time a simple JavaScript video-call
 
 # Live Captions tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.4.0/ai-services/openvidu-live-captions){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.4.1/ai-services/openvidu-live-captions){ .md-button target=\_blank }
 
 This tutorial is a simple variation of the [JavaScript client](../application-client/javascript.md) tutorial, adding **live captions** thanks to the use of OpenVidu [Live Captions service](../../ai/live-captions.md).
 
@@ -18,7 +18,7 @@ This tutorial is a simple variation of the [JavaScript client](../application-cl
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run a server application
@@ -62,7 +62,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 You can first take a look at the [JavaScript client tutorial](../application-client/javascript.md), as this application shares the same codebase. The only thing added by this tutorial is a new handler for the [`Room` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/classes/Room.html){:target="\_blank"} object to receive transcription messages and display them as live captions in the HTML:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.0/ai-services/openvidu-live-captions/src/app.js#L60-L74' target='_blank'>app.js</a>" linenums="60"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/ai-services/openvidu-live-captions/src/app.js#L60-L74' target='_blank'>app.js</a>" linenums="60"
 room.registerTextStreamHandler("lk.transcription", async (reader, participantInfo) => { // (1)!
     const message = await reader.readAll(); // (2)!
     const isFinal = reader.info.attributes["lk.transcription_final"] === "true"; // (3)!
