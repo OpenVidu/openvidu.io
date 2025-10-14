@@ -653,7 +653,7 @@ ______________________________________________________________________
 
 ## What does it mean that OpenVidu Meet is in BETA?
 
-OpenVidu Meet (v3.4.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support/) with any comments or suggestions.
+OpenVidu Meet (v3.4.1) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support/) with any comments or suggestions.
 
 ______________________________________________________________________
 
@@ -1144,10 +1144,10 @@ This guide is based on Docker Desktop, but the commands can also be used directl
 
    Info
 
-   If you want to deploy a specific version, replace `latest` with the desired version tag. E.g., to deploy version `3.4.0` use:
+   If you want to deploy a specific version, replace `latest` with the desired version tag. E.g., to deploy version `3.4.1` use:
 
    ```text
-   docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+   docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
    ```
 
 1. After pasting the command, press **Enter** to execute the command.
@@ -1508,7 +1508,7 @@ You need **Docker Desktop**. You can install it on [Windows](https://docs.docker
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
 ```
 
 Info
@@ -1918,7 +1918,7 @@ Up to this point everything has been focused on the client-side integration of O
 
 # OpenVidu Meet Direct Link Tutorial
 
-[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-direct-link)
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.1/meet-direct-link)
 
 This tutorial is a simple example of how to integrate **OpenVidu Meet** into a **Node.js** application by easily using a direct link. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -1944,7 +1944,7 @@ You need **Docker Desktop**. You can install it on [Windows](https://docs.docker
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
 ```
 
 Info
@@ -1954,7 +1954,7 @@ For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Me
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run the application
@@ -2515,12 +2515,12 @@ Make this tutorial accessible from other computers or phones
 
 By default, this tutorial runs on `http://localhost:6080` and is only accessible from the local machine. If you want to access it from other computers or phones, you have the following options:
 
-- **Use tunneling tools**: Configure tools like [VS Code port forwarding](https://code.visualstudio.com/docs/debugtest/port-forwarding) , [ngrok](https://ngrok.com/) , [localtunnel](https://localtunnel.github.io/www/) , or similar services to expose this tutorial to the internet. You can use http or https URLs.
-- **Deploy to a server**: Upload this tutorial to a web server. You can use http or https URLs.
+- **Use tunneling tools**: Configure tools like [VS Code port forwarding](https://code.visualstudio.com/docs/debugtest/port-forwarding) , [ngrok](https://ngrok.com/) , [localtunnel](https://localtunnel.github.io/www/) , or similar services to expose this tutorial to the internet. You can use HTTP or HTTPS URLs.
+- **Deploy to a server**: Upload this tutorial to a web server. You can use HTTP or HTTPS URLs.
 
 # OpenVidu Meet WebComponent Tutorial
 
-[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-webcomponent-basic)
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.1/meet-webcomponent-basic)
 
 This tutorial extends the [Direct Link tutorial](../direct-link/) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -2546,7 +2546,7 @@ You need **Docker Desktop**. You can install it on [Windows](https://docs.docker
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
 ```
 
 Info
@@ -2556,7 +2556,7 @@ For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Me
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run the application
@@ -2754,7 +2754,7 @@ By default, this tutorial runs on `http://localhost:6080` and is only accessible
 
 # OpenVidu Meet WebComponent Commands & Events Tutorial
 
-[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-webcomponent-commands-events)
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.1/meet-webcomponent-commands-events)
 
 This tutorial extends the [basic WebComponent tutorial](../webcomponent/) to add **advanced WebComponent functionality** through commands and event handling. It demonstrates how to interact with the OpenVidu Meet WebComponent programmatically and respond to meeting events.
 
@@ -2775,7 +2775,7 @@ You need **Docker Desktop**. You can install it on [Windows](https://docs.docker
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
 ```
 
 Info
@@ -2785,7 +2785,7 @@ For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Me
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run the application
@@ -3051,7 +3051,7 @@ By default, this tutorial runs on `http://localhost:6080` and is only accessible
 
 # OpenVidu Meet Recordings Tutorial
 
-[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-recordings)
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.1/meet-recordings)
 
 This tutorial extends the [advanced OpenVidu Meet WebComponent tutorial](../webcomponent-advanced/) to add **recording management capabilities**. It demonstrates how to list, view, and delete recordings from your OpenVidu Meet meetings.
 
@@ -3070,7 +3070,7 @@ You need **Docker Desktop**. You can install it on [Windows](https://docs.docker
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
 ```
 
 Info
@@ -3080,7 +3080,7 @@ For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Me
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run the application
@@ -3588,7 +3588,7 @@ By default, this tutorial runs on `http://localhost:6080` and is only accessible
 
 # OpenVidu Meet Webhooks Tutorial
 
-[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-webhooks)
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.1/meet-webhooks)
 
 This tutorial extends the [recordings tutorial](../recordings/) to add **real-time updates** through webhooks and Server-Sent Events (SSE). It demonstrates how to receive and process OpenVidu Meet webhooks to provide live status updates for rooms and recordings.
 
@@ -3609,7 +3609,7 @@ You need **Docker Desktop**. You can install it on [Windows](https://docs.docker
 Run this command in Docker Desktop's terminal:
 
 ```bash
-docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.0 up -y openvidu-meet-init
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.4.1 up -y openvidu-meet-init
 ```
 
 Info
@@ -3619,7 +3619,7 @@ For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Me
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run the application
@@ -3773,6 +3773,10 @@ const isWebhookEventValid = (body, headers) => {
 1. Use timing-safe comparison to validate the signature against the expected value.
 
 This function implements webhook security by validating both the cryptographic signature and the timestamp to ensure webhooks are authentic and recent.
+
+Verifying webhooks in other languages
+
+You can find examples of how to verify OpenVidu Meet webhooks in other programming languages in the [Validate events](../../reference/webhooks/#validate-events) section of the Webhooks reference.
 
 ______________________________________________________________________
 
@@ -4017,7 +4021,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
 
 1. **Configure webhooks in OpenVidu Meet**: Set up webhooks in your OpenVidu Meet production deployment to point to this tutorial. Follow the instructions in the [Webhooks configuration](../../reference/webhooks/#configuration) section to learn how to configure a webhook URL. Use the public URL of this tutorial followed by `/webhook` (e.g., `https://your-tutorial-domain.com:XXXX/webhook`).
 
-1. **Access the tutorial**: Access the tutorial in your web browser using its public URL (e.g., `https://your-tutorial-domain.com:XXXX`).
+1. **Access the tutorial**: Access the tutorial from any device connected to the internet using its public URL (e.g., `https://your-tutorial-domain.com:XXXX`).
 
 # Direct Link
 
@@ -5838,7 +5842,7 @@ To install OpenVidu locally, follow these steps:
 1. Clone the following repository:
 
    ```bash
-   git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.4.0
+   git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.4.1
    ```
 
    Info
@@ -5871,7 +5875,7 @@ To install OpenVidu locally, follow these steps:
 1. Clone the following repository:
 
    ```bash
-   git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.4.0
+   git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.4.1
    ```
 
    Info
@@ -7015,11 +7019,11 @@ log_level: INFO
 
 Below is the full list of configuration properties available for the Speech Processing agent.
 
-[agent-speech-processing.yaml](https://github.com/OpenVidu/openvidu-agents/blob/3.4.0/speech-processing/agent-speech-processing.yaml)
+[agent-speech-processing.yaml](https://github.com/OpenVidu/openvidu-agents/blob/3.4.1/speech-processing/agent-speech-processing.yaml)
 
 ```yaml
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing:3.4.0
+docker_image: docker.io/openvidu/agent-speech-processing:3.4.1
 
 # Whether to run the agent or not.
 enabled: false
