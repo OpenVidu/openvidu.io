@@ -39,6 +39,13 @@ description: Explore the latest OpenVidu releases, including new features, updat
 | Promtail / Loki | 3.5.1 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.1){:target="\_blank"} |
 | Mimir | 2.16.0 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-2.16.0){:target="\_blank"} |
 
+### Patch releases
+
+#### 3.4.1
+
+- **OpenVidu Meet**: update authentication methods to use header-based tokens instead of cookies. When [embedding OpenVidu Meet](../meet/embedded/intro.md), the strategy (`SameSite=Strict`) was causing issues when loading the application and the embedable component from different domains. Using the most permissive cookie policy available (`SameSite=None`) still caused issues in some browsers that block third-party cookies by default. Now OpenVidu Meet avoids cookies and instead uses header-based tokens for authentication, which is more reliable and secure. See [commit 4e80b5a :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/commit/4e80b5a060c1ae0f8942527dbdc6ee221992caab){:target="\_blank"}.
+- **OpenVidu Elastic & High Availability deployments**: Egress/Ingress/Agents services in Media Nodes were not able to reach the LiveKit API when the local OpenVidu server was down or unresponsive. Now all of these services are properly configured to reach any Media Node in the cluster, ensuring fault tolerance upon OpenVidu server failures.
+
 ## 3.3.0
 
 ### Changelog
