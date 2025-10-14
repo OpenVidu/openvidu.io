@@ -52,3 +52,9 @@ If you want to learn more about OpenVidu Meet, check out the following resources
 - Compare OpenVidu Meet vs OpenVidu Platform: [OpenVidu Meet vs OpenVidu Platform](../openvidu-meet-vs-openvidu-platform.md)
 - Launch OpenVidu Meet locally in a couple of minutes: [Try OpenVidu Meet locally](./deployment/local.md)
 - Embed OpenVidu Meet into your web app: [OpenVidu Meet Embedded](./embedded/intro.md)
+
+### Patch releases
+
+#### 3.4.1
+
+- **Update authentication methods to use header-based tokens instead of cookies**: when [embedding OpenVidu Meet](../meet/embedded/intro.md), the strategy (`SameSite=Strict`) was causing issues when loading the application and the embedable component from different domains. Using the most permissive cookie policy available (`SameSite=None`) still caused issues in some browsers that block third-party cookies by default. Now OpenVidu Meet avoids cookies and instead uses header-based tokens for authentication, which is more reliable and secure. See [commit 4e80b5a :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/commit/4e80b5a060c1ae0f8942527dbdc6ee221992caab){:target="\_blank"}.

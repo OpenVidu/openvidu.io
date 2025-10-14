@@ -10,7 +10,7 @@ Live Captions service is provided by the **Speech Processing agent**:
 
 You configure the Live Captions service by setting up the following properties when [modifying file `agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#2-modify-file-agent-speech-processingyaml):
 
-```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.4.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.4.1/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 live_captions:
   # How this agent will connect to Rooms [automatic, manual]
   # - automatic: the agent will automatically connect to new Rooms.
