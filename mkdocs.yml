@@ -286,6 +286,10 @@ extra:
       analytics:
         name: Google Analytics
         checked: true
+    actions:
+      - accept
+      - reject
+      - manage
 
 extra_css:
   - stylesheets/colors.css
