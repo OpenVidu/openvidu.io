@@ -77,7 +77,7 @@
 
 {% block outdated %}
 <span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
-<a href="{{ '/latest/docs/getting-started/' }}">
+<a href="{{ page.canonical_url | replace(config.site_url, '') | replace(version.version + '/', 'latest/') }}">
   <strong>GO TO LATEST VERSION</strong>
 </a>
 {% endblock %}
