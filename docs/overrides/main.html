@@ -77,9 +77,19 @@
 
 {% block outdated %}
 <span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
-<a href="{{ page.canonical_url | replace(config.site_url, '') | replace(version.version + '/', 'latest/') }}">
+<a href="#" id="latest-version-link">
   <strong>GO TO LATEST VERSION</strong>
 </a>
+<script>
+  (function() {
+    const link = document.getElementById('latest-version-link');
+    if (link) {
+      const currentPath = window.location.pathname;
+      const latestPath = currentPath.replace(/^\/[^\/]+\//, '/latest/');
+      link.href = latestPath;
+    }
+  })();
+</script>
 {% endblock %}
 
 {% block extrahead %}
