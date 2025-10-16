@@ -291,17 +291,16 @@ cd custom-versioning
 Script `push-new-version.sh` performs the following steps:
 
 1. Deploy a new version of the documentation with `mike`.
-2. Change links in versioned HTML files (docs) from new version that point to non-versioned files (home, support, pricing...) accessible from "/" to use absolute paths (e.g. `/pricing/`).
+2. Change links in versioned HTML files (docs and meet) from new version that point to non-versioned files (home, support, pricing...) accessible from "/" to use absolute paths (e.g. `/pricing/`).
 3. Change links in non-versioned HTML files from new version that point to versioned files to use absolute paths to the latest version (e.g. `/latest/docs/`).
 4. Remove version from links that point to non-versioned files in the new version.
-5. Remove non-versioned pages from the sitemap.xml file of the new version.
-6. Update the sitemap_index.xml file to include the new version sitemap.
-7. Regenerate the root sitemap.xml file that includes non-versioned pages.
-8. Move non-versioned files from the new version to root. This keeps the global pages served on "/" always updated to the latest published version.
-9. Add a redirection HTML file to the root of the new version to redirect to the getting started page (`docs/getting-started/`).
+5. Update `llms.txt` file: replace version with 'latest' for versioned pages and remove version from non-versioned pages.
+6. Move non-versioned files from the new version to root. This keeps the global pages served on "/" always updated to the latest published version.
+7. Update `sitemap.xml`: copy it from the version folder to root, replace version with 'latest' for versioned pages, remove version from non-versioned pages, and generate the compressed `sitemap.xml.gz` file.
+8. Add a redirection HTML file to the root of the new version to redirect to the docs index page (`docs/`).
 
 > [!NOTE]
-> The overwriting of the non-versioned files located at root of `gh-pages` branch (points 3, 4, 7 and 8) is done by default. To avoid overriding these files, call the script adding `false` as second argument: `./push-new-version.sh 3.0.0 false`. Script `overwrite-past-version.sh` does this to only overwrite the files of that specific past version without affecting the root non-versioned files.
+> The overwriting of the non-versioned files located at root of `gh-pages` branch (points 3, 4, 5, 6 and 7) is done by default. To avoid overriding these files, call the script adding `false` as second argument: `./push-new-version.sh 3.0.0 false`. Script `overwrite-past-version.sh` does this to only overwrite the files of that specific past version without affecting the root non-versioned files.
 
 ## Testing versioning locally
 
