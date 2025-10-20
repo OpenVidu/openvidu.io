@@ -20,8 +20,8 @@ tags:
 Host and customize your own high-quality video calling service in minutes
 </h2>
 
-<div class="ov-call-commercial-img wow animated animatedFadeInUp fadeInUp">
-<a class="glightbox" href="../../assets/images/openvidu-call/openvidu-call.jpg" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/openvidu-call.jpg" loading="lazy" class="round-corners mkdocs-img"/></a>
+<div class="wow animated animatedFadeInUp fadeInUp">
+    <a class="glightbox" href="../assets/videos/meet/meet-demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-demo.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 <div class="feature-cards" markdown>
