@@ -336,6 +336,8 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 ## Host and customize your own high-quality video calling service in minutes
 
+\[[](../assets/videos/meet/meet-demo.mp4)\](../assets/videos/meet/meet-demo.mp4)
+
 - **Feature-rich for videoconferencing**
 
   ______________________________________________________________________
