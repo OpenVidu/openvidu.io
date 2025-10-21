@@ -364,6 +364,8 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 ## Built for all purposes. Customizable for your particular use case.
 
+[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+
 ## Features
 
 **Multi-Party smart layout**
@@ -6689,9 +6691,7 @@ Explore detailed information about a specific **ingress**, including its total d
 
 OpenVidu also provides different **Grafana dashboards** to monitor **metrics** from **OpenVidu Server** and **logs** from your **cluster**.
 
-\[
-
-\](../../../../../assets/videos/grafana_trailer.mp4)
+\[[](../../../../../assets/videos/grafana_trailer.mp4)\](../../../../../assets/videos/grafana_trailer.mp4)
 
 Grafana is available at https://your.domain/grafana/ and can be accessed using your **Grafana admin credentials**.
 
