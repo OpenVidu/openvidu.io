@@ -58,10 +58,16 @@ Host and customize your own high-quality video calling service in minutes
 </div>
 </div>
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0">
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0">
 Built for all purposes.<br>
 Customizable for your particular use case.
 </h2>
+
+<div style="text-align: center; margin: 3em 0;" markdown>
+
+[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button .md-button--primary target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
+
+</div>
 
 ## Features
 
