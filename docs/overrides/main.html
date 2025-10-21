@@ -1,6 +1,13 @@
 <!-- Elements added to main will be displayed on all pages -->
 {% extends "base.html" %}
 
+{% block site_meta %}
+{{ super() }}
+<!-- Security headers -->
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+{% endblock %}
+
 {% block libs %}
 
 <!-- wow.js -->
