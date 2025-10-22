@@ -24,6 +24,12 @@ Host and customize your own high-quality video calling service in minutes
     <a class="glightbox" href="../assets/videos/meet/meet-demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meet-demo.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
+<div style="text-align: center; margin: 3em 0;" markdown>
+
+[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button .md-button--primary target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
+
+</div>
+
 <div class="feature-cards" markdown>
 <div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0" markdown>
 
@@ -58,16 +64,10 @@ Host and customize your own high-quality video calling service in minutes
 </div>
 </div>
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0">
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0">
 Built for all purposes.<br>
 Customizable for your particular use case.
 </h2>
-
-<div style="text-align: center; margin: 3em 0;" markdown>
-
-[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button .md-button--primary target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
-
-</div>
 
 ## Features
 
