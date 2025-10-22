@@ -338,6 +338,8 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 \[[](../assets/videos/meet/meet-demo.mp4)\](../assets/videos/meet/meet-demo.mp4)
 
+[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+
 - **Feature-rich for videoconferencing**
 
   ______________________________________________________________________
@@ -363,8 +365,6 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
   OpenVidu Meet perfectly fits most common videoconferencing use cases: **e-learning, telehealth, remote collaboration, customer support**... And you can customize its **branding** to match your organization’s identity.
 
 ## Built for all purposes. Customizable for your particular use case.
-
-[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
 
 ## Features
 
