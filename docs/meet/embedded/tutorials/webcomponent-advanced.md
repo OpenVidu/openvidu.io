@@ -5,7 +5,7 @@ description: Learn how to build a video conferencing application using Node.js a
 
 # OpenVidu Meet WebComponent Commands & Events Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.0/meet-webcomponent-commands-events){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.4.1/meet-webcomponent-commands-events){ .md-button target=\_blank }
 
 This tutorial extends the [basic WebComponent tutorial](webcomponent.md) to add **advanced WebComponent functionality** through commands and event handling. It demonstrates how to interact with the OpenVidu Meet WebComponent programmatically and respond to meeting events.
 
@@ -26,7 +26,7 @@ The application includes all the features from the basic WebComponent tutorial, 
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.4.1
 ```
 
 ### 3. Run the application
@@ -87,7 +87,7 @@ The frontend changes focus on enhanced room management, WebComponent event handl
 
 The room template now passes additional parameters including role information:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webcomponent-commands-events/public/js/app.js#L48-83' target='_blank'>app.js</a>" linenums="48" hl_lines="6-25"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.1/meet-webcomponent-commands-events/public/js/app.js#L48-83' target='_blank'>app.js</a>" linenums="48" hl_lines="6-25"
 function getRoomListItemTemplate(room) {
     return `
         <li class="list-group-item">
@@ -134,7 +134,7 @@ The template now provides the room name and user role to the `joinRoom()` functi
 
 The `joinRoom()` function has been significantly enhanced to handle WebComponent events and commands:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.0/meet-webcomponent-commands-events/public/js/app.js#L126-193' target='_blank'>app.js</a>" linenums="126"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.4.1/meet-webcomponent-commands-events/public/js/app.js#L126-193' target='_blank'>app.js</a>" linenums="126"
 function joinRoom(roomName, roomUrl, role) {
     console.log(`Joining room as ${role}`);
 
