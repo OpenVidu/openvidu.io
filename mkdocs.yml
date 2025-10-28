@@ -124,7 +124,7 @@ nav:
               - GCP:
                   - Install: docs/self-hosting/single-node/gcp/install.md
                   - Administration: docs/self-hosting/single-node/gcp/admin.md
-                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md
+                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md 
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
