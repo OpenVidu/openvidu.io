@@ -10,15 +10,18 @@ OpenVidu Elastic is part of the <span style="font-size: 12px;" class="openvidu-t
 - [**On-premises installation**](./on-premises/install.md): Set up OpenVidu Elastic on your own servers.
 - [**AWS installation**](./aws/install.md): Deploy OpenVidu Elastic on Amazon Web Services.
 - [**Azure installation**](./azure/install.md): Deploy OpenVidu Elastic on Microsoft Azure.
+- [**GCP installation**](./gcp/install.md): Deploy OpenVidu Elastic on Google Cloud Platform.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
 - [**On-premises: configuration and administration**](./on-premises/admin.md)
 - [**AWS: configuration and administration**](./aws/admin.md)
 - [**Azure: configuration and administration**](./azure/admin.md)
+- [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
 
 If you want to upgrade your OpenVidu Elastic installation, refer to this section:
 
 - [**Upgrade OpenVidu Elastic On-premises**](./on-premises/upgrade.md)
 - [**Upgrade OpenVidu Elastic AWS**](./aws/upgrade.md)
 - [**Upgrade OpenVidu Elastic Azure**](./azure/upgrade.md)
+- [**Google Cloud Platform: upgrade OpenVidu Single Node PRO**](./gcp/upgrade.md)

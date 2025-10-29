@@ -1,15 +1,16 @@
 ---
-title: OpenVidu Single Node installation on Google Cloud Platform
-description: Learn how to deploy OpenVidu Single Node on Google Cloud Platform using Google Cloud Platform Console
+title: OpenVidu Elastic installation on Google Cloud Platform
+description: Learn how to deploy OpenVidu Elastic on Google Cloud Platform using Google Cloud Platform Console
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
+# OpenVidu Elastic installation: Google Cloud Platform
 
-!!! warning
+!!! info
+    
+    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    There's a 15-day free trial waiting for you!
 
-    Google Cloud Platform deployments are considered in Beta in version 3.4.X of OpenVidu.
-
-This section contains the instructions of how to deploy a production-ready OpenVidu Single Node deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
+This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Elastic installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
 To deploy OpenVidu into Google Cloud Platform you just need to log into your [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
 
@@ -18,9 +19,16 @@ To deploy OpenVidu into Google Cloud Platform you just need to log into your [In
     This is how the architecture of the deployment looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/self-hosting/single-node/gcp/single-node-gcp-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node Google Cloud Platform Architecture</figcaption>
+    ![OpenVidu Elastic Google Cloud Platform Architecture](../../../../assets/images/self-hosting/elastic/gcp/elastic-gcp-architecture.svg){ .svg-img .dark-img }
+    <figcaption>OpenVidu Elastic Google Cloud Platform Architecture</figcaption>
     </figure>
+
+    - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
+    - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
+    - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
+    - A Managed Instace Group of Media Nodes is created to scale the number of Media Nodes based on the system load.
+
+--8<-- "shared/self-hosting/gcp-custom-scale-in.md"
 
 ## Deployment details
 
@@ -41,7 +49,7 @@ Once you click the button you will see this window.
 
 Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 
-For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/community/singlenode/gcp` and for the **Git ref** put `3.4.1` corresponding to the version then click on continue.   
+For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/pro/elastic/gcp` and for the **Git ref** put `3.4.1` corresponding to the version then click on continue.   
 
 === "New Service Account Steps" 
     <figure markdown>
@@ -70,20 +78,26 @@ In Google Cloud Platform there is no such thing like template with parameters, y
 
 ### Mandatory Parameters
 <div style="text-align: center;">
-    <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-      <tr>
-        <th>Input Value</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td>projectId</td>
-        <td>GCP project id where the resources will be created.</td>
-      </tr>
-      <tr>
-        <td>stackName</td>
-        <td>Stack name for OpenVidu deployment.</td>
-      </tr>
-    </table>
+    <div style="text-align: center;">
+        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+            <tr>
+                <th>Input Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>projectId</td>
+                <td>GCP project id where the resources will be created.</td>
+            </tr>
+            <tr>
+                <td>stackName</td>
+                <td>Stack name for OpenVidu deployment.</td>
+            </tr>
+            <tr>
+                <td>openviduLicense</td>
+                <td>Your OpenVidu License, get one <a href="https://openvidu.io/account" target="_blank" rel="noopener">here</a> if you dont have one.</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 ### Optional Parameters
@@ -115,7 +129,6 @@ In Google Cloud Platform there is no such thing like template with parameters, y
           </ul>
               </td>    </tr>
       <tr>
-      <tr>
         <td>publicIpAddress</td>
         <td>(none)</td>
         <td>Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP.</td>
@@ -146,14 +159,44 @@ In Google Cloud Platform there is no such thing like template with parameters, y
         <td>Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.</td>
       </tr>
       <tr>
-        <td>instanceType</td>
+        <td>masterNodeInstanceType</td>
         <td>"e2-standard-2"</td>
-        <td>Specifies the GCE machine type for your OpenVidu instance.</td>
+        <td>Specifies the GCE machine type for your OpenVidu Master Node.</td>
+      </tr>
+      <tr>
+        <td>mediaNodeInstanceType</td>
+        <td>"e2-standard-2"</td>
+        <td>Specifies the GCE machine type for your OpenVidu Media Nodes.</td>
+      </tr>
+      <tr>
+        <td>initialNumberOfMediaNodes</td>
+        <td>1</td>
+        <td>Number of initial media nodes to deploy.</td>
+      </tr>
+      <tr>
+        <td>minNumberOfMediaNodes</td>
+        <td>1</td>
+        <td>Minimum number of media nodes to deploy.</td>
+      </tr>
+      <tr>
+        <td>maxNumberOfMediaNodes</td>
+        <td>5</td>
+        <td>Maximum number of media nodes to deploy.</td>
+      </tr>
+      <tr>
+        <td>scaleTargetCPU</td>
+        <td>50</td>
+        <td>Target CPU percentage to scale out or in.</td>
       </tr>
       <tr>
         <td>bucketName</td>
         <td>(none)</td>
         <td>Name of the GCS bucket to store data and recordings. If empty, a bucket will be created.</td>
+      </tr>
+      <tr>
+        <td>RTCEngine</td>
+        <td>"pion"</td>
+        <td>RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'.</td>
       </tr>
       <tr>
         <td>additionalInstallFlags</td>
@@ -178,7 +221,7 @@ In Google Cloud Platform there is no such thing like template with parameters, y
     </table>
 </div>
 
-For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf) file to see more information about the inputs.   
+For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/elastic/gcp/variables.tf) file to see more information about the inputs.   
 
 !!! warning
     It's important that you put the input variables with the same name as they appear in the table like in the next image.
@@ -187,9 +230,12 @@ For more detail you can check the [variables.tf :fontawesome-solid-external-link
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/shared/gcp-input-variables.png){ .svg-img .dark-img }
     </figure>
 
+
 ## Deploying the stack
 
 --8<-- "shared/self-hosting/gcp-deploying-stack.md"
+
+--8<-- "shared/self-hosting/gcp-scale-in-config.md"
 
 ## Configure your application to use the deployment 
 
