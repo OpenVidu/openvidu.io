@@ -1,6 +1,14 @@
 <!-- Elements added to main will be displayed on all pages -->
 {% extends "base.html" %}
 
+{% block announce %}
+<div id="announce">
+  We would love to hear your feedback about OpenVidu. Please take a moment to fill out
+  <a href="" target="_blank">this survey</a>
+  and help us improve it. Thank you!
+</div>
+{% endblock %}
+
 {% block site_meta %}
 {{ super() }}
 <!-- Security headers -->
