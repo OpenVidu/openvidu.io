@@ -92,27 +92,47 @@
 
       <div class="grid-container footer-grid">
 
-        <div class="grid-33 push-66">
+        <div class="footer-column grid-30 tablet-grid-40 mobile-grid-100">
+          <h4>SOCIAL</h4>
           {% include "partials/social.html" %}
         </div>
 
-        <div class="grid-33 pull-33 tablet-grid-50">
-          <div class="grid-container footer-conditions-list">
-            <div class="grid-33 tablet-grid-33 mobile-grid-33">
-              <a href="/conditions/privacy-policy/">Privacy policy</a>
+        <div class="footer-column grid-35 tablet-grid-60 mobile-grid-100">
+
+          <div class="subscription">
+            <h4>NEWSLETTER</h4>
+            <div class="md-copyright__highlight" style="font-size: .64rem">Keep up with OpenVidu news. Enter your e-mail and subscribe to our newsletter!</div>
+            <!-- Begin MailChimp Signup Form -->
+            <div style="width:100%; padding-top: .4rem;">
+                <div id="mc_embed_signup">
+                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post"
+                      id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                      <div class="form-validation alert"></div>
+                      <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: nowrap; gap: 10px;">
+                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required>
+                          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
+                          <div class="md-typeset"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
+                      </div>
+                    </form>
+                </div>
             </div>
-            <div class="grid-33 tablet-grid-33 mobile-grid-33">
-              <a href="/conditions/cookie-policy/">Cookie policy</a>
-            </div>
-            <div class="grid-33 tablet-grid-33 mobile-grid-33">
-              <a href="/conditions/terms-of-service/">Terms of service</a>
-            </div>
+          </div>
+          
+        </div>
+
+        <div class="footer-column grid-35 tablet-grid-100 mobile-grid-100">
+          <h4>LEGAL</h4>
+          {% include "partials/copyright.html" %}
+          <div class="footer-conditions-list">
+            <a href="/conditions/privacy-policy/">Privacy policy</a>
+            <div class="legal-separator">|</div>
+            <a href="/conditions/cookie-policy/">Cookie policy</a>
+            <div class="legal-separator">|</div>
+            <a href="/conditions/terms-of-service/">Terms of service</a>
           </div>
         </div>
 
-        <div class="grid-33 pull-33 tablet-grid-50">
-          {% include "partials/copyright.html" %}
-        </div>
       </div>
 
     </div>
