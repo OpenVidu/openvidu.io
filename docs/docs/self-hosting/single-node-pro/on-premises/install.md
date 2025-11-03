@@ -5,6 +5,11 @@ description: Learn how to deploy OpenVidu Single Node PRO on-premises
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: On-premises
 
+!!! info
+    
+    OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    There's a 15-day free trial waiting for you!
+
 This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
 
 === "Architecture overview"

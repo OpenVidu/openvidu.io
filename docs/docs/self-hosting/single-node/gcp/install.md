@@ -1,6 +1,8 @@
 ---
 title: OpenVidu Single Node installation on Google Cloud Platform
 description: Learn how to deploy OpenVidu Single Node on Google Cloud Platform using Google Cloud Platform Console
+tags:
+  - copyclipboard
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
@@ -25,7 +27,7 @@ To deploy OpenVidu into Google Cloud Platform you just need to log into your [In
 ## Deployment details
 
 !!! info
-    We recommend to create a new project to deploy OpenVidu there, avoiding possible conflicts.
+    We recommend to create a new project to deploy OpenVidu there, avoiding possible conflicts. Enable [Secrets Manager Api]() first in that project and the deploy the stack. 
 
 To deploy OpenVidu, first you need to create a new deployment in the top left button as you can see in the image.
 
@@ -41,28 +43,33 @@ Once you click the button you will see this window.
 
 Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 
-For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/community/singlenode/gcp` and for the **Git ref** put `3.4.1` corresponding to the version then click on continue.   
+??? details "New Service Account Steps"
 
-=== "New Service Account Steps" 
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/self-hosting/shared/gcp-create-service-account-1.png){ .svg-img .dark-img }
     <figcaption>Step 1: Create Service Account</figcaption>
     </figure>
-    
+
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/self-hosting/shared/gcp-create-service-account-2.png){ .svg-img .dark-img }
     <figcaption>Step 2: Service Account Details</figcaption>
     </figure>
-    
+
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/self-hosting/shared/gcp-create-service-account-3.png){ .svg-img .dark-img }
     <figcaption>Step 3: Grant Permissions</figcaption>
     </figure>
-    
+
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/self-hosting/shared/gcp-create-service-account-4.png){ .svg-img .dark-img }
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
+
+* Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> that corresponds to our git repository where are allocated the terraform files to deploy openvidu. 
+* Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/community/singlenode/gcp"><code>openvidu-deployment/community/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
+* For the **Git ref** use <span class="copy-inline" data-copy="3.4.1"><code>3.4.1</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> corresponding to the version 
+
+Finally click on continue.
 
 ## Input Values
 
@@ -193,13 +200,12 @@ For more detail you can check the [variables.tf :fontawesome-solid-external-link
 
 ## Configure your application to use the deployment 
 
-You need your Google Cloud Platform secret outputs to configure your OpenVidu application. You can check these secrets by searching in the Secrets Manager with any of these two ways ([Check deployment outputs in Google Cloud Platform Secret Manager](#check-deployment-outputs-in-google-cloud-platform-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
+You need your Google Cloud Platform secret outputs to configure your OpenVidu application. You can check these secrets by searching in the Secrets Manager with any of these two ways ([Check deployment outputs in GCP Secret Manager](#check-deployment-outputs-in-gcp-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
 Your authentication credentials and URL to point your applications would be:
 
-- **URL**: The value in the Secret Manager of `OPENVIDU_URL`. In the instance in `openvidu.env` find `DOMAIN_NAME` and build it into a URL. The URL would be `https://your.domain.name/`. If you want the `LIVEKIT_URL` find the value in the Secret Manager of `LIVEKIT_URL` or build the URL with the `DOMAIN_NAME`as `wss://your.domain.name/`.
-- **API Key**: The value in the Secret Manager of `LIVEKIT_API_KEY` or in the instance in `openvidu.env`.
-- **API Secret**: The value in the Secret Manager of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/gcp-credentials-general.md"
+--8<-- "shared/self-hosting/gcp-credentials-v2compatibility.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 

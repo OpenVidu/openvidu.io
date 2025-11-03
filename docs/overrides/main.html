@@ -55,9 +55,7 @@
 {% endblock %}
 
 {% block outdated %}
-<span class="outdated-warning-text"
-  >Warning: You are reading docs for an old version<br
-/></span>
+<span class="outdated-warning-text">Warning: You are reading docs for an old version<br /></span>
 <a href="{{ '/latest/docs/getting-started/' }}">
   <strong>GO TO LATEST VERSION</strong>
 </a>
@@ -94,6 +92,10 @@
 
 {% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
 <script src="/javascripts/glightbox-custom-gallery.js"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "copyclipboard" in page.meta.tags %}
+<script src="/javascripts/copy-clipboard.js"></script>
 {% endif %}
 
 {{ super() }}
@@ -145,17 +147,18 @@
   div.md-search {
     display: none;
   }
+
   label.md-header__button.md-icon[for="__search"] {
     display: none;
   }
 </style>
 {% endif %}
 {% if "version-selector" in page.meta.hide %}
-  <style>
-    div.md-version {
-      display: none;
-    }
-  </style>
+<style>
+  div.md-version {
+    display: none;
+  }
+</style>
 {% endif %}
 {% endif %}
 

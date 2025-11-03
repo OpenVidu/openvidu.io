@@ -5,7 +5,7 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 # OpenVidu Elastic administration: Google Cloud Platform
 
-The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infra Structure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=es){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
+The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infra Structure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
 
 Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:
 
@@ -85,11 +85,28 @@ It is possible to change the instance type of both the Master Node and the Media
 
     !!! info
 
-        This will forcely restart the Media Nodes. If you want to stop them gracefully to avoid the disruption of active Rooms, check the [Shutting downd the cluster](#shutting-down-the-cluster) tab.
+        This will make you delete the Media Nodes. If you want to stop them gracefully to avoid the disruption of active Rooms, check the [Shutting down the cluster](#shutting-down-the-cluster) tab.
 
-    1. [Shutdown the cluster](#shutting-down-the-cluster), the master node is not needed.
-    2. Go to the _"Instance Group"_ tab and select the resource called `<STACK_NAME>-media-node-group`
-    3. ???
+    1. Go to the _"Instance Group"_ tab and select the resource called `<STACK_NAME>-media-node-group` and click on the _"Template"_.
+        <figure markdown>
+        ![Select Template MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-template.png){ .svg-img .dark-img }
+        </figure>
+    2. To change the size click on _"Create similar"_ and create a new one with the desired size.
+        <figure markdown>
+        ![Create Similar Template](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-create-similar.png){ .svg-img .dark-img }
+        </figure>
+    3. Go back to the _"Instace Group"_ and click on _"Edit"_
+        <figure markdown>
+        ![Edit Button Location MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-edit-tab.png){ .svg-img .dark-img }
+        </figure>
+    4. In _"Instace template & overrides"_ change the template for the one you've created previously and then _"Save"_.
+        <figure markdown>
+        ![Change Template MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-change-template.png){ .svg-img .dark-img }
+        </figure>
+    5. Delete the old sized instances.
+        <figure markdown>
+        ![Delete old sized instances MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-delete-old-instances.png){ .svg-img .dark-img }
+        </figure>
 
 ## Media Nodes Autoscaling Configuration
 
@@ -133,6 +150,16 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
         ![Fixed Number Media Nodes](../../../../assets/images/self-hosting/elastic/gcp/gcp-fixed-media-nodes.png){ .svg-img .dark-img }
         </figure>
 
+### Deactivate Scale In
+If you want a fixed number of Media Nodes you probably want to deactivate the Cloud Run Function that controls scale in actions. Follow these steps to do it:
+
+=== "Deactivate Cloud Run Function"
+
+    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler) and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
+        <figure markdown>
+        ![Deactivate Scale In](../../../../assets/images/self-hosting/elastic/gcp/gcp-scalein-deactivate.png){ .svg-img .dark-img }
+        </figure>
+
 ## Administration and configuration
 
 Regarding the administration of your deployment, you can follow the instructions in section [On Premises Elastic Administration](../on-premises/admin.md).
@@ -152,6 +179,6 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
         </figure>
-    4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
+    4. Go to the Master Node resource and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu Elastic deployment.
 
     Changes will be applied automatically.

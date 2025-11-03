@@ -1,9 +1,15 @@
 ---
 title: OpenVidu Elastic installation on Google Cloud Platform
 description: Learn how to deploy OpenVidu Elastic on Google Cloud Platform using Google Cloud Platform Console
+tags:
+  - copyclipboard
 ---
 
 # OpenVidu Elastic installation: Google Cloud Platform
+
+!!! warning
+
+    Google Cloud Platform deployments are considered in Beta in version 3.4.X of OpenVidu.
 
 !!! info
     
@@ -47,30 +53,35 @@ Once you click the button you will see this window.
 ![Google Cloud Platform create new deployment window](../../../../assets/images/self-hosting/shared/gcp-create-deployment-window.png){ .svg-img .dark-img }
 </figure>
 
-Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
+Fill **Deployment ID** with any name that you desire like openvidu-elastic-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 
-For the **Git repository** put this link `https://github.com/OpenVidu/openvidu.git` that corresponds to our git repository where are allocated the terraform files to deploy openvidu. In the **Git directory** introduce the following path `openvidu-deployment/pro/elastic/gcp` and for the **Git ref** put `3.4.1` corresponding to the version then click on continue.   
+??? details "New Service Account Steps"
 
-=== "New Service Account Steps" 
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/self-hosting/shared/gcp-create-service-account-1.png){ .svg-img .dark-img }
     <figcaption>Step 1: Create Service Account</figcaption>
     </figure>
-    
+
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/self-hosting/shared/gcp-create-service-account-2.png){ .svg-img .dark-img }
     <figcaption>Step 2: Service Account Details</figcaption>
     </figure>
-    
+
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/self-hosting/shared/gcp-create-service-account-3.png){ .svg-img .dark-img }
     <figcaption>Step 3: Grant Permissions</figcaption>
     </figure>
-    
+
     <figure markdown>
     ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/self-hosting/shared/gcp-create-service-account-4.png){ .svg-img .dark-img }
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
+
+* Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> that corresponds to our git repository where are allocated the terraform files to deploy openvidu. 
+* Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/pro/elastic/gcp"><code>openvidu-deployment/pro/elastic/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
+* For the **Git ref** use <span class="copy-inline" data-copy="3.4.1"><code>3.4.1</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> corresponding to the version 
+
+Finally click on continue.
 
 ## Input Values
 
@@ -230,22 +241,58 @@ For more detail you can check the [variables.tf :fontawesome-solid-external-link
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/shared/gcp-input-variables.png){ .svg-img .dark-img }
     </figure>
 
-
 ## Deploying the stack
 
---8<-- "shared/self-hosting/gcp-deploying-stack.md"
+Whenever you are satisfied with your input values, just click on _"Continue"_ and then in _"Create deployment"_. Now it will validate the deployment and create all the resources. Wait about 7 to 12 minutes to let all the nodes to install OpenVidu.
 
---8<-- "shared/self-hosting/gcp-scale-in-config.md"
+!!! warning
+
+    In case of failure, check the cloud build logs that appears on the top of the screen and redeploy with the changes that are causing the deployment to fail, if it is something about some API delete the deployment and deploy another one, it should work now. If it keeps failing contact us.
+    
+    <figure markdown>
+    ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/elastic/gcp/gcp-cloud-build-logs.png){ .svg-img .dark-img }
+    </figure>
+
+When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instances:
+
+=== "Check deployment outputs in GCP Secret Manager"
+
+    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager).
+
+    2. Once you are in the Secret Manager you will see all the secrets by their name.
+
+        <figure markdown>
+        ![Google Cloud Platform Secrets location](../../../../assets/images/self-hosting/shared/gcp-secrets-manager.png){ .svg-img .dark-img }
+        </figure>
+
+    3. Here click on the secret of your choice, choose the last version and then click on the _"3 dots"_ -> _"View secret value"_ to retrieve that secret.
+
+        <figure markdown>
+        ![Google Cloud Platform Secrets version](../../../../assets/images/self-hosting/shared/gcp-secrets-version.png){ .svg-img .dark-img }
+        </figure>
+
+=== "Check deployment outputs in the instance"
+
+    SSH to the Master Node by gcloud command generated in the web console and navigate to the config folder `/opt/openvidu/config/cluster`. Files with the deployment outputs are:
+
+    - `openvidu.env`
+    - `master_node/meet.env`
+
+    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
+    <figure markdown>
+    ![Google Cloud Platform gcloud command](../../../../assets/images/self-hosting/elastic/gcp/gcp-gcloud-command.png){ .svg-img .dark-img }
+    </figure>   
+
+    To install gcloud in your shell follow the official [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install?hl=en#linux).
 
 ## Configure your application to use the deployment 
 
-You need your Google Cloud Platform secret outputs to configure your OpenVidu application. You can check these secrets by searching in the Secrets Manager with any of these two ways ([Check deployment outputs in Google Cloud Platform Secret Manager](#check-deployment-outputs-in-google-cloud-platform-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
+You need your Google Cloud Platform secret outputs to configure your OpenVidu application. You can check these secrets by searching in the Secrets Manager with any of these two ways ([Check deployment outputs in GCP Secret Manager](#check-deployment-outputs-in-gcp-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
 Your authentication credentials and URL to point your applications would be:
 
-- **URL**: The value in the Secret Manager of `OPENVIDU_URL`. In the instance in `openvidu.env` find `DOMAIN_NAME` and build it into a URL. The URL would be `https://your.domain.name/`. If you want the `LIVEKIT_URL` find the value in the Secret Manager of `LIVEKIT_URL` or build the URL with the `DOMAIN_NAME`as `wss://your.domain.name/`.
-- **API Key**: The value in the Secret Manager of `LIVEKIT_API_KEY` or in the instance in `openvidu.env`.
-- **API Secret**: The value in the Secret Manager of `LIVEKIT-API-SECRET` or in the instance in `openvidu.env`.
+--8<-- "shared/self-hosting/gcp-credentials-general.md"
+--8<-- "shared/self-hosting/gcp-credentials-v2compatibility.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
@@ -255,4 +302,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu as we mentioned before. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all the resources have been created. You will need to wait about 7 to 12 minutes to let the instances install OpenVidu as we mentioned before. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.

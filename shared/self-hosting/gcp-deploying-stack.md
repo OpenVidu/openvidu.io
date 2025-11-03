@@ -2,7 +2,7 @@ Whenever you are satisfied with your input values, just click on _"Continue"_ an
 
 !!! warning
 
-    In case of failure, check the cloud build logs that appears on the top of the screen and redeploy with the changes that are causing the deployment to fail, if it keeps failing contact us.
+    In case of failure, check the cloud build logs that appears on the top of the screen and redeploy with the changes that are causing the deployment to fail, if it is something about some API delete the deployment and deploy another one, it should work now. If it keeps failing contact us.
     
     <figure markdown>
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/shared/gcp-cloud-build-logs.png){ .svg-img .dark-img }
@@ -10,7 +10,7 @@ Whenever you are satisfied with your input values, just click on _"Continue"_ an
 
 When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instance:
 
-=== "Check deployment outputs in Google Cloud Platform Secret Manager"
+=== "Check deployment outputs in GCP Secret Manager"
 
     1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager).
 
@@ -20,7 +20,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
         ![Google Cloud Platform Secrets location](../../../../assets/images/self-hosting/shared/gcp-secrets-manager.png){ .svg-img .dark-img }
         </figure>
 
-    3. Here click on the secret of your choice or whatever you need to check and click again in the last version of that secret.
+    3. Here click on the secret of your choice, choose the last version and then click on the _"3 dots"_ -> _"View secret value"_ to retrieve that secret.
 
         <figure markdown>
         ![Google Cloud Platform Secrets version](../../../../assets/images/self-hosting/shared/gcp-secrets-version.png){ .svg-img .dark-img }
