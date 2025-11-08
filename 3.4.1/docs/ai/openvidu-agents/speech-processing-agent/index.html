@@ -1,0 +1,7197 @@
+<!-- Elements added to main will be displayed on all pages --><!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="From ready-to-use video conferencing apps&lt;br&gt;to custom-made WebRTC solutions.&lt;br&gt;Self-hosted. Performant. Scalable. Fault tolerant. Observable.">
+      
+      
+      
+        <link rel="canonical" href="https://openvidu.io/3.4.1/docs/ai/openvidu-agents/speech-processing-agent/">
+      
+      
+        <link rel="prev" href="../overview/">
+      
+      
+        <link rel="next" href="../agent-dispatch/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+<!-- Security headers -->
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+    
+      
+        <title>Speech Processing agent - OpenVidu</title>
+      
+    
+    
+
+
+
+
+
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
+  }
+</style>
+
+
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+
+
+
+
+
+<link rel="stylesheet" href="/stylesheets/platform.css">
+
+
+
+
+
+
+    
+
+<!-- wow.js -->
+<script>
+  window.setupWowJs = function () {
+    new WOW().init();
+    console.debug("WOW.js initialized");
+  };
+</script>
+
+<!-- Card glow effect -->
+<script>
+  window.setupCardGlow = function () {
+    console.debug("starting card glow setup");
+    const cards = document.querySelectorAll(
+      ".feature-cards .grid.cards > ul > li"
+    );
+    const maxRetries = 10;
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      retryCount++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
+    function handleMouseMove(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+      angle = (angle + 360) % 360;
+      this.style.setProperty("--start", angle + 60);
+    }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
+  };
+</script>
+
+
+      
+    
+
+
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../../../../assets/external/fonts.googleapis.com/css.9a0008fb.css">
+        <style>:root{--md-text-font:"Tomorrow";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/colors.css">
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../../stylesheets/unsemantic-grid.css">
+    
+      <link rel="stylesheet" href="../../../../stylesheets/livekit-tutorials.css">
+    
+      <link rel="stylesheet" href="../../../../stylesheets/amplify.css">
+    
+      <link rel="stylesheet" href="../../../../stylesheets/home.css">
+    
+      <link rel="stylesheet" href="../../../../stylesheets/openvidu-call.css">
+    
+      <link rel="stylesheet" href="../../../../javascripts/openvidu-register/openvidu-register.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-VPX0VSKK58"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-VPX0VSKK58",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-VPX0VSKK58",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+<!-- Add head tags that need to be applied before here -->
+
+<!-- Add head tags that need to be applied afterwards here -->
+
+  <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: none; }
+            .glightbox-clean .gslide-media { -webkit-box-shadow: none; box-shadow: none; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#speech-processing-agent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+              </button>
+            
+            
+<div id="announce">
+  We would love to hear your feedback about OpenVidu. Please take a moment to fill out
+  <a href="https://forms.gle/a2HuPSWPCnwsCMf98" target="_blank">this survey</a>
+  and help us improve it. Thank you!
+</div>
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+<span class="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
+<a href="#" id="latest-version-link">
+  <strong>GO TO LATEST VERSION</strong>
+</a>
+<script>
+  (function() {
+    const link = document.getElementById('latest-version-link');
+    if (link) {
+      const currentPath = window.location.pathname;
+      const latestPath = currentPath.replace(/^\/[^\/]+\//, '/latest/');
+      link.href = latestPath;
+    }
+  })();
+</script>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../../../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html -->
+
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+
+<link rel="preload" href="../../../../assets/external/fonts.googleapis.com/css.55a6ed21.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link href="../../../../assets/external/fonts.googleapis.com/css.55a6ed21.css" rel="stylesheet" type="text/css">
+</noscript>
+
+<link rel="preload" href="../../../../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link href="../../../../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" rel="stylesheet" type="text/css">
+</noscript>
+
+<!-- Header -->
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a href="../../../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
+      
+      
+        <img src="../../../../assets/images/logos/platform_whiteallfont_transback_cropped.png" alt="OpenVidu Platform" class="custom-logo">
+      
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              
+                Speech Processing agent
+              
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+      
+
+      <!-- Check if search is actually enabled - see https://t.ly/DT_0V -->
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    openvidu/openvidu
+  </div>
+</a>
+      </div>
+    
+
+    <div class="md-typeset log-in-div">
+      <div id="login-loader" class="lds-ripple"><div></div><div></div></div>
+    </div>
+
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+</header>
+
+<!-- We need this component here to check if user is logged in any page -->
+
+<openvidu-register style="display: none"></openvidu-register>
+
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../meet/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  OpenVidu Meet [BETA]
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  OpenVidu Platform
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../support/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Support
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../pricing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Pricing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
+      
+  <img src="../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+
+    </a>
+    OpenVidu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    openvidu/openvidu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../meet/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Meet [BETA]
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu Meet [BETA]
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../meet/getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/features/rooms-and-meetings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rooms and meetings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/features/recordings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recordings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/features/users-and-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Users and permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/deployment/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/deployment/local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Try OpenVidu Meet locally
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/deployment/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/deployment/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced deployments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Embedded
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Embedded
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/step-by-step-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Step by step guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../meet/embedded/tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/tutorials/direct-link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Direct Link
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/tutorials/webcomponent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebComponent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/tutorials/webcomponent-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebComponent Commands &amp; Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/tutorials/recordings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recordings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/tutorials/webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/reference/webcomponent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webcomponent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/reference/direct-link/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Direct Link
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/reference/iframe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iframe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/reference/rest-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/embedded/reference/webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../meet/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Platform
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu Platform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../comparing-openvidu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparing OpenVidu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../developing-your-openvidu-app/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Developing your OpenVidu app
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Developing your OpenVidu app
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developing-your-openvidu-app/how-to/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How to
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_1">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/application-server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Application Server
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_1" id="__nav_3_4_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Application Server
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Node.js
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/go/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Go
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/ruby/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ruby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/php/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PHP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-server/dotnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    .NET
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/application-client/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Application Client
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Application Client
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/javascript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/react/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    React
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/angular/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Angular
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/electron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Electron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/ionic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ionic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Android
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/application-client/ios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    iOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/advanced-features/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Advanced Features
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_3" id="__nav_3_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/advanced-features/recording-basic-s3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Basic S3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/advanced-features/recording-advanced-s3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Advanced S3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/advanced-features/recording-basic-azure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Basic Azure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/advanced-features/recording-advanced-azure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recording Advanced Azure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_4">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/angular-components/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Angular Components
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_4" id="__nav_3_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Angular Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-toolbar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Toolbar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-toolbar-buttons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toolbar Buttons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-toolbar-panel-buttons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toolbar Panel Buttons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Layout
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-stream/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Stream
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-panels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Panels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-additional-panels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Additional Panels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-chat-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Chat Panel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-activities-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Activities Panel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-participants-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Participants Panel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-participant-panel-item/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Participant Panel Item
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-custom-participant-panel-item-element/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Participant Panel Item Element
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-toggle-hand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toggle Hand
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/angular-components/openvidu-admin-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Admin Dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/ai-services/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    AI Services
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_5" id="__nav_3_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            AI Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/ai-services/openvidu-live-captions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Live Captions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Self-hosting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Self-hosting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/deployment-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/production-ready/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Production ready
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_2" id="__nav_3_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Production ready
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/production-ready/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/production-ready/scalability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scalable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/production-ready/fault-tolerance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fault Tolerant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/production-ready/observability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Observable
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_2_5" id="__nav_3_5_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Observable
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/production-ready/observability/openvidu-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu Dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/production-ready/observability/grafana-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grafana Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Local (Development)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/single-node/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4" id="__nav_3_5_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_2" id="__nav_3_5_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/on-premises/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_3" id="__nav_3_5_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_4" id="__nav_3_5_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_4_5" id="__nav_3_5_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    GCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            GCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/single-node-pro/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5" id="__nav_3_5_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_2" id="__nav_3_5_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/on-premises/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_3" id="__nav_3_5_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_4" id="__nav_3_5_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/single-node-pro/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/elastic/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6" id="__nav_3_5_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_2" id="__nav_3_5_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/on-premises/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_3" id="__nav_3_5_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_4" id="__nav_3_5_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/elastic/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/ha/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7" id="__nav_3_5_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_2" id="__nav_3_5_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    On Premises
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            On Premises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/on-premises/install-dlb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install with DNS Load Balancing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/on-premises/install-nlb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install with Network Load Balancer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/on-premises/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/on-premises/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_3" id="__nav_3_5_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AWS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/aws/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/aws/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/aws/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_4" id="__nav_3_5_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Azure
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            Azure
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/azure/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/azure/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/ha/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_8">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_8" id="__nav_3_5_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_8">
+            <span class="md-nav__icon md-icon"></span>
+            Configuration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/configuration/changing-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changing config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/configuration/in-depth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Config system in depth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/configuration/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Config reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_9">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../self-hosting/how-to-guides/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    How To Guides
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_9" id="__nav_3_5_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            How To Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/how-to-guides/external-s3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure external S3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/how-to-guides/force-443-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Force traffic to 443 TLS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/how-to-guides/enable-webhooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Enable webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/how-to-guides/enable-disable-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Enable and disable modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/how-to-guides/deploy-with-external-proxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy and configure with an external proxy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../self-hosting/how-to-guides/create-configure-AWS-certificate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create AWS certificate for HA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AI Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            AI Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../live-captions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Live captions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_3" id="__nav_3_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OpenVidu agents
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenVidu agents
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Speech Processing agent
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Speech Processing agent
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list-of-provided-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of provided AI services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-the-agent-and-configure-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable the agent and configure AI services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enable the agent and configure AI services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. SSH into an OpenVidu Node and go to configuration folder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modify-file-agent-speech-processingyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Modify file agent-speech-processing.yaml
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Modify file agent-speech-processing.yaml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable the agent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-desired-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure the desired AI services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-restart-openvidu" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Restart OpenVidu
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-cpu-load-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change CPU load threshold
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log level
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-dispatch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent dispatch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custom-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7">
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    UI Components
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            UI Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ui-components/angular-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Angular Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ui-components/react-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    React Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Support
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pricing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Pricing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pricing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list-of-provided-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of provided AI services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-the-agent-and-configure-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable the agent and configure AI services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enable the agent and configure AI services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. SSH into an OpenVidu Node and go to configuration folder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modify-file-agent-speech-processingyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Modify file agent-speech-processing.yaml
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Modify file agent-speech-processing.yaml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable the agent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-desired-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure the desired AI services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-restart-openvidu" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Restart OpenVidu
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-cpu-load-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change CPU load threshold
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log level
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="speech-processing-agent">Speech Processing agent<a class="headerlink" href="#speech-processing-agent" title="Anchor link to this section for reference">#</a></h1>
+<p>The Speech Processing agent provides all the AI services related to transcribing audio speech to text and processing the results in various ways.</p>
+<h2 id="list-of-provided-ai-services">List of provided AI services<a class="headerlink" href="#list-of-provided-ai-services" title="Anchor link to this section for reference">#</a></h2>
+<ul>
+<li><a href="../../live-captions/"><strong>Live Captions</strong></a>: transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.</li>
+</ul>
+<h2 id="enable-the-agent-and-configure-ai-services">Enable the agent and configure AI services<a class="headerlink" href="#enable-the-agent-and-configure-ai-services" title="Anchor link to this section for reference">#</a></h2>
+<h3 id="1-ssh-into-an-openvidu-node-and-go-to-configuration-folder">1. SSH into an OpenVidu Node and go to configuration folder<a class="headerlink" href="#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder" title="Anchor link to this section for reference">#</a></h3>
+<p>Depending on your <a href="../../../self-hosting/deployment-types/">OpenVidu deployment type</a>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="openvidu-local-development" name="__tabbed_1" type="radio"><input id="openvidu-single-node" name="__tabbed_1" type="radio"><input id="openvidu-elastic" name="__tabbed_1" type="radio"><input id="openvidu-high-availability" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="openvidu-local-development">OpenVidu Local (Development)</label><label for="openvidu-single-node">OpenVidu Single Node</label><label for="openvidu-elastic">OpenVidu Elastic</label><label for="openvidu-high-availability">OpenVidu High Availability</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>If you are using <a href="../../../self-hosting/deployment-types/#openvidu-local-development">OpenVidu Local (Development)</a>, simply navigate to the configuration folder of the project:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># For OpenVidu Local COMMUNITY</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>openvidu-local-deployment/community
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># For OpenVidu Local PRO</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">cd</span><span class="w"> </span>openvidu-local-deployment/pro
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>If you are using <a href="../../../self-hosting/deployment-types/#openvidu-single-node">OpenVidu Single Node</a>, SSH into the only OpenVidu node and navigate to:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/openvidu/config
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>If you are using <a href="../../../self-hosting/deployment-types/#openvidu-elastic">OpenVidu Elastic</a>, SSH into the only Master Node and navigate to:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/openvidu/config/cluster/media_node
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>If you are using <a href="../../../self-hosting/deployment-types/#openvidu-high-availability">OpenVidu High Availability</a>, SSH into any of your Master Nodes (doesn't matter which one) and navigate to:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/openvidu/config/cluster/media_node
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="2-modify-file-agent-speech-processingyaml">2. Modify file <code>agent-speech-processing.yaml</code><a class="headerlink" href="#2-modify-file-agent-speech-processingyaml" title="Anchor link to this section for reference">#</a></h3>
+<p>Locate file <code>agent-speech-processing.yaml</code> in the <a href="#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder">configuration folder</a> of your OpenVidu node. Modify this file to enable the agent and configure the desired AI services.</p>
+<h4 id="enable-the-agent">Enable the agent<a class="headerlink" href="#enable-the-agent" title="Anchor link to this section for reference">#</a></h4>
+<div class="language-yaml highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<h4 id="configure-the-desired-ai-services">Configure the desired AI services<a class="headerlink" href="#configure-the-desired-ai-services" title="Anchor link to this section for reference">#</a></h4>
+<p>You can set up the following AI services in this agent:</p>
+<ul>
+<li><strong>Live Captions</strong>: see <a href="../../live-captions/#how-to-enable-live-captions-service-in-your-openvidu-deployment">Live Captions service</a>.</li>
+</ul>
+<h3 id="3-restart-openvidu">3. Restart OpenVidu<a class="headerlink" href="#3-restart-openvidu" title="Anchor link to this section for reference">#</a></h3>
+<p>Depending on your <a href="../../../self-hosting/deployment-types/">OpenVidu deployment type</a>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="openvidu-local-development_1" name="__tabbed_2" type="radio"><input id="openvidu-single-node_1" name="__tabbed_2" type="radio"><input id="openvidu-elastic_1" name="__tabbed_2" type="radio"><input id="openvidu-high-availability_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="openvidu-local-development_1">OpenVidu Local (Development)</label><label for="openvidu-single-node_1">OpenVidu Single Node</label><label for="openvidu-elastic_1">OpenVidu Elastic</label><label for="openvidu-high-availability_1">OpenVidu High Availability</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Run where <code>docker-compose.yaml</code> is located:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>restart
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Run this command in your node:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>openvidu
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Run this command in your Master Node:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>openvidu
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Run this command in one of your Master Nodes:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>openvidu
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>After restarting OpenVidu your agent will be up and running, ready to process new Rooms.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.</p>
+</div>
+<h2 id="change-cpu-load-threshold">Change CPU load threshold<a class="headerlink" href="#change-cpu-load-threshold" title="Anchor link to this section for reference">#</a></h2>
+<p>By default, the agent will only accept new jobs if the average CPU load of its Media Node is below 70%. You can change this threshold in <a href="#configuration-reference"><strong><code>agent-speech-processing.yaml</code></strong></a>:</p>
+<div class="language-yaml highlight"><span class="filename">agent-speech-processing.yaml</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">load_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span>
+</code></pre></div>
+<h2 id="log-level">Log level<a class="headerlink" href="#log-level" title="Anchor link to this section for reference">#</a></h2>
+<p>You can change the log level of the agent in <a href="#configuration-reference"><strong><code>agent-speech-processing.yaml</code></strong></a>:</p>
+<div class="language-yaml highlight"><span class="filename">agent-speech-processing.yaml</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span>
+</code></pre></div>
+<h2 id="configuration-reference">Configuration reference<a class="headerlink" href="#configuration-reference" title="Anchor link to this section for reference">#</a></h2>
+<p>Below is the full list of configuration properties available for the Speech Processing agent.</p>
+<div class="language-yaml highlight"><span class="filename"><a href="https://github.com/OpenVidu/openvidu-agents/blob/3.4.1/speech-processing/agent-speech-processing.yaml" target="_blank">agent-speech-processing.yaml</a></span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Docker image of the agent.</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">docker_image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/openvidu/agent-speech-processing:3.4.1</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Whether to run the agent or not.</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nt">load_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="nt">live_captions</span><span class="p">:</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">  </span><span class="c1"># How this agent will connect to Rooms [automatic, manual]</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">  </span><span class="c1"># - automatic: the agent will automatically connect to new Rooms.</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">  </span><span class="c1"># - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">  </span><span class="nt">processing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">automatic</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">  </span><span class="c1"># Which speech-to-text AI provider to use [aws, azure, google, openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam]</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">  </span><span class="c1"># The custom configuration for the selected provider must be set below</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">  </span><span class="nt">provider</span><span class="p">:</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">  </span><span class="nt">aws</span><span class="p">:</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">    </span><span class="c1"># Credentials for AWS Transcribe. See https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">    </span><span class="nt">aws_access_key_id</span><span class="p">:</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">    </span><span class="nt">aws_secret_access_key</span><span class="p">:</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="w">    </span><span class="nt">aws_default_region</span><span class="p">:</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">    </span><span class="c1"># The name of the custom vocabulary you want to use.</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="w">    </span><span class="nt">vocabulary_name</span><span class="p">:</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="w">    </span><span class="c1"># The name of the custom language model you want to use.</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models-using.html</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="w">    </span><span class="nt">language_model_name</span><span class="p">:</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="w">    </span><span class="c1"># Whether or not to enable partial result stabilization. Partial result stabilization can reduce latency in your output, but may impact accuracy.</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="w">    </span><span class="nt">enable_partial_results_stabilization</span><span class="p">:</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="w">    </span><span class="c1"># Specify the level of stability to use when you enable partial results stabilization (enable_partial_results_stabilization: true). Valid values: high | medium | low</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a><span class="w">    </span><span class="nt">partial_results_stability</span><span class="p">:</span>
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a><span class="w">    </span><span class="c1"># The name of the custom vocabulary filter you want to use to mask or remove words.</span>
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html</span>
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="w">    </span><span class="nt">vocab_filter_name</span><span class="p">:</span>
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="w">    </span><span class="c1"># The method used to filter the vocabulary. Valid values: mask | remove | tag</span>
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="w">    </span><span class="c1"># See https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html</span>
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="w">    </span><span class="nt">vocab_filter_method</span><span class="p">:</span>
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="w">  </span><span class="nt">azure</span><span class="p">:</span>
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a><span class="w">    </span><span class="c1"># Credentials for Azure Speech Service.</span>
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="w">    </span><span class="c1"># One of these combinations must be set:</span>
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="w">    </span><span class="c1">#  - speech_host</span>
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="w">    </span><span class="c1">#  - speech_key + speech_region</span>
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="w">    </span><span class="c1">#  - speech_auth_token + speech_region</span>
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="w">    </span><span class="c1"># See https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-speech-to-text?tabs=macos%2Cterminal&amp;pivots=programming-language-python#prerequisites</span>
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="w">    </span><span class="nt">speech_host</span><span class="p">:</span>
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="w">    </span><span class="nt">speech_key</span><span class="p">:</span>
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="w">    </span><span class="nt">speech_auth_token</span><span class="p">:</span>
+<a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="w">    </span><span class="nt">speech_region</span><span class="p">:</span>
+<a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a><span class="w">    </span><span class="c1"># Azure handles multiple languages and can auto-detect the language used. It requires the candidate set to be set. E.g. ["en-US", "es-ES"]</span>
+<a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a><span class="w">    </span><span class="c1"># See https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt#supported-languages</span>
+<a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="w">    </span><span class="c1"># Removes profanity (swearing), or replaces letters of profane words with stars. Valid values: Masked | Removed | Raw</span>
+<a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a><span class="w">    </span><span class="c1"># See https://learn.microsoft.com/en-us/azure/ai-services/translator/profanity-filtering</span>
+<a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a><span class="w">    </span><span class="nt">profanity</span><span class="p">:</span>
+<a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>
+<a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a><span class="w">  </span><span class="nt">azure_openai</span><span class="p">:</span>
+<a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a><span class="w">    </span><span class="c1"># Credentials for Azure OpenAI APIs. See https://learn.microsoft.com/en-us/azure/api-management/api-management-authenticate-authorize-azure-openai</span>
+<a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a><span class="w">    </span><span class="c1"># Azure OpenAI API key</span>
+<a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a><span class="w">    </span><span class="nt">azure_api_key</span><span class="p">:</span>
+<a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a><span class="w">    </span><span class="c1"># Azure Active Directory token</span>
+<a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a><span class="w">    </span><span class="nt">azure_ad_token</span><span class="p">:</span>
+<a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a><span class="w">    </span><span class="c1"># Azure OpenAI endpoint in the following format: https://{your-resource-name}.openai.azure.com. Mandatory value.</span>
+<a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a><span class="w">    </span><span class="nt">azure_endpoint</span><span class="p">:</span>
+<a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a><span class="w">    </span><span class="c1"># Name of your model deployment. If given with `azure_endpoint`, sets the base client URL to include `/deployments/{azure_deployment}`.</span>
+<a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a><span class="w">    </span><span class="nt">azure_deployment</span><span class="p">:</span>
+<a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a><span class="w">    </span><span class="c1"># OpenAI REST API version used for the request. Mandatory value.</span>
+<a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a><span class="w">    </span><span class="nt">api_version</span><span class="p">:</span>
+<a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a><span class="w">    </span><span class="c1"># OpenAI organization ID.</span>
+<a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a><span class="w">    </span><span class="nt">organization</span><span class="p">:</span>
+<a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a><span class="w">    </span><span class="c1"># OpenAI project ID.</span>
+<a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a><span class="w">    </span><span class="nt">project</span><span class="p">:</span>
+<a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a><span class="w">    </span><span class="c1"># The language code to use for transcription (e.g., "en" for English).</span>
+<a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a><span class="w">    </span><span class="c1"># ID of the model to use for speech-to-text.</span>
+<a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+<a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a><span class="w">    </span><span class="c1"># Initial prompt to guide the transcription.</span>
+<a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span>
+<a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a>
+<a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a><span class="w">  </span><span class="nt">google</span><span class="p">:</span>
+<a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a><span class="w">    </span><span class="c1"># Credentials for Google Cloud. This is the content of a Google Cloud credential JSON file.</span>
+<a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a><span class="w">    </span><span class="c1"># Below is a dummy example for a credential type of "Service Account" (https://cloud.google.com/iam/docs/service-account-creds#key-types)</span>
+<a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a><span class="w">    </span><span class="nt">credentials_info</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a><span class="w">      </span><span class="no">{</span>
+<a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a><span class="w">        </span><span class="no">"type": "service_account",</span>
+<a id="__codelineno-11-96" name="__codelineno-11-96" href="#__codelineno-11-96"></a><span class="w">        </span><span class="no">"project_id": "my-project",</span>
+<a id="__codelineno-11-97" name="__codelineno-11-97" href="#__codelineno-11-97"></a><span class="w">        </span><span class="no">"private_key_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",</span>
+<a id="__codelineno-11-98" name="__codelineno-11-98" href="#__codelineno-11-98"></a><span class="w">        </span><span class="no">"private_key": "-----BEGIN PRIVATE KEY-----\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n-----END PRIVATE KEY-----\n",</span>
+<a id="__codelineno-11-99" name="__codelineno-11-99" href="#__codelineno-11-99"></a><span class="w">        </span><span class="no">"client_email": "my-email@my-project.iam.gserviceaccount.com",</span>
+<a id="__codelineno-11-100" name="__codelineno-11-100" href="#__codelineno-11-100"></a><span class="w">        </span><span class="no">"client_id": "xxxxxxxxxxxxxxxxxxxxx",</span>
+<a id="__codelineno-11-101" name="__codelineno-11-101" href="#__codelineno-11-101"></a><span class="w">        </span><span class="no">"auth_uri": "https://accounts.google.com/o/oauth2/auth",</span>
+<a id="__codelineno-11-102" name="__codelineno-11-102" href="#__codelineno-11-102"></a><span class="w">        </span><span class="no">"token_uri": "https://oauth2.googleapis.com/token",</span>
+<a id="__codelineno-11-103" name="__codelineno-11-103" href="#__codelineno-11-103"></a><span class="w">        </span><span class="no">"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",</span>
+<a id="__codelineno-11-104" name="__codelineno-11-104" href="#__codelineno-11-104"></a><span class="w">        </span><span class="no">"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/my-email%40my-project.iam.gserviceaccount.com",</span>
+<a id="__codelineno-11-105" name="__codelineno-11-105" href="#__codelineno-11-105"></a><span class="w">        </span><span class="no">"universe_domain": "googleapis.com"</span>
+<a id="__codelineno-11-106" name="__codelineno-11-106" href="#__codelineno-11-106"></a><span class="w">      </span><span class="no">}</span>
+<a id="__codelineno-11-107" name="__codelineno-11-107" href="#__codelineno-11-107"></a><span class="w">    </span><span class="c1"># Which model to use for recognition. If not set, uses the default model for the selected language.</span>
+<a id="__codelineno-11-108" name="__codelineno-11-108" href="#__codelineno-11-108"></a><span class="w">    </span><span class="c1"># See https://cloud.google.com/speech-to-text/docs/transcription-model</span>
+<a id="__codelineno-11-109" name="__codelineno-11-109" href="#__codelineno-11-109"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+<a id="__codelineno-11-110" name="__codelineno-11-110" href="#__codelineno-11-110"></a><span class="w">    </span><span class="c1"># The location to use for recognition. Default is "us-central1". Latency will be best if the location is close to your users.</span>
+<a id="__codelineno-11-111" name="__codelineno-11-111" href="#__codelineno-11-111"></a><span class="w">    </span><span class="c1"># Check supported languages and locations at https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages</span>
+<a id="__codelineno-11-112" name="__codelineno-11-112" href="#__codelineno-11-112"></a><span class="w">    </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-11-113" name="__codelineno-11-113" href="#__codelineno-11-113"></a><span class="w">    </span><span class="c1"># List of language codes to recognize. Default is ["en-US"].</span>
+<a id="__codelineno-11-114" name="__codelineno-11-114" href="#__codelineno-11-114"></a><span class="w">    </span><span class="c1"># See https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages</span>
+<a id="__codelineno-11-115" name="__codelineno-11-115" href="#__codelineno-11-115"></a><span class="w">    </span><span class="nt">languages</span><span class="p">:</span>
+<a id="__codelineno-11-116" name="__codelineno-11-116" href="#__codelineno-11-116"></a><span class="w">    </span><span class="c1"># Whether to detect the language of the audio. Default is true.</span>
+<a id="__codelineno-11-117" name="__codelineno-11-117" href="#__codelineno-11-117"></a><span class="w">    </span><span class="nt">detect_language</span><span class="p">:</span>
+<a id="__codelineno-11-118" name="__codelineno-11-118" href="#__codelineno-11-118"></a><span class="w">    </span><span class="c1"># If 'true', adds punctuation to recognition result hypotheses. This feature is only available in select languages. Setting this</span>
+<a id="__codelineno-11-119" name="__codelineno-11-119" href="#__codelineno-11-119"></a><span class="w">    </span><span class="c1"># for requests in other languages has no effect at all. The default 'false' value does not add punctuation to result hypotheses.</span>
+<a id="__codelineno-11-120" name="__codelineno-11-120" href="#__codelineno-11-120"></a><span class="w">    </span><span class="c1"># See https://cloud.google.com/speech-to-text/docs/automatic-punctuation</span>
+<a id="__codelineno-11-121" name="__codelineno-11-121" href="#__codelineno-11-121"></a><span class="w">    </span><span class="nt">punctuate</span><span class="p">:</span>
+<a id="__codelineno-11-122" name="__codelineno-11-122" href="#__codelineno-11-122"></a><span class="w">    </span><span class="c1"># The spoken punctuation behavior for the call. If not set, uses default behavior based on model of choice.</span>
+<a id="__codelineno-11-123" name="__codelineno-11-123" href="#__codelineno-11-123"></a><span class="w">    </span><span class="c1"># e.g. command_and_search will enable spoken punctuation by default. If 'true', replaces spoken punctuation</span>
+<a id="__codelineno-11-124" name="__codelineno-11-124" href="#__codelineno-11-124"></a><span class="w">    </span><span class="c1"># with the corresponding symbols in the request. For example, "how are you question mark" becomes "how are you?".</span>
+<a id="__codelineno-11-125" name="__codelineno-11-125" href="#__codelineno-11-125"></a><span class="w">    </span><span class="c1"># See https://cloud.google.com/speech-to-text/docs/spoken-punctuation for support. If 'false', spoken punctuation is not replaced.</span>
+<a id="__codelineno-11-126" name="__codelineno-11-126" href="#__codelineno-11-126"></a><span class="w">    </span><span class="nt">spoken_punctuation</span><span class="p">:</span>
+<a id="__codelineno-11-127" name="__codelineno-11-127" href="#__codelineno-11-127"></a><span class="w">    </span><span class="c1"># Whether to return interim (non-final) transcription results. Defaults to true.</span>
+<a id="__codelineno-11-128" name="__codelineno-11-128" href="#__codelineno-11-128"></a><span class="w">    </span><span class="nt">interim_results</span><span class="p">:</span>
+<a id="__codelineno-11-129" name="__codelineno-11-129" href="#__codelineno-11-129"></a>
+<a id="__codelineno-11-130" name="__codelineno-11-130" href="#__codelineno-11-130"></a><span class="w">  </span><span class="nt">openai</span><span class="p">:</span>
+<a id="__codelineno-11-131" name="__codelineno-11-131" href="#__codelineno-11-131"></a><span class="w">    </span><span class="c1"># API key for OpenAI. See https://platform.openai.com/api-keys</span>
+<a id="__codelineno-11-132" name="__codelineno-11-132" href="#__codelineno-11-132"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-133" name="__codelineno-11-133" href="#__codelineno-11-133"></a><span class="w">    </span><span class="c1"># The OpenAI model to use for transcription. See https://platform.openai.com/docs/guides/speech-to-text</span>
+<a id="__codelineno-11-134" name="__codelineno-11-134" href="#__codelineno-11-134"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+<a id="__codelineno-11-135" name="__codelineno-11-135" href="#__codelineno-11-135"></a><span class="w">    </span><span class="c1"># The language of the input audio. Supplying the input language in ISO-639-1 format</span>
+<a id="__codelineno-11-136" name="__codelineno-11-136" href="#__codelineno-11-136"></a><span class="w">    </span><span class="c1"># (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) will improve accuracy and latency.</span>
+<a id="__codelineno-11-137" name="__codelineno-11-137" href="#__codelineno-11-137"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-138" name="__codelineno-11-138" href="#__codelineno-11-138"></a><span class="w">    </span><span class="c1"># Optional text prompt to guide the transcription. Only supported for whisper-1.</span>
+<a id="__codelineno-11-139" name="__codelineno-11-139" href="#__codelineno-11-139"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span>
+<a id="__codelineno-11-140" name="__codelineno-11-140" href="#__codelineno-11-140"></a>
+<a id="__codelineno-11-141" name="__codelineno-11-141" href="#__codelineno-11-141"></a><span class="w">  </span><span class="nt">groq</span><span class="p">:</span>
+<a id="__codelineno-11-142" name="__codelineno-11-142" href="#__codelineno-11-142"></a><span class="w">    </span><span class="c1"># API key for Groq. See https://console.groq.com/keys</span>
+<a id="__codelineno-11-143" name="__codelineno-11-143" href="#__codelineno-11-143"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-144" name="__codelineno-11-144" href="#__codelineno-11-144"></a><span class="w">    </span><span class="c1"># See https://console.groq.com/docs/speech-to-text</span>
+<a id="__codelineno-11-145" name="__codelineno-11-145" href="#__codelineno-11-145"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+<a id="__codelineno-11-146" name="__codelineno-11-146" href="#__codelineno-11-146"></a><span class="w">    </span><span class="c1"># The language of the input audio. Supplying the input language in ISO-639-1 format</span>
+<a id="__codelineno-11-147" name="__codelineno-11-147" href="#__codelineno-11-147"></a><span class="w">    </span><span class="c1"># (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) will improve accuracy and latency.</span>
+<a id="__codelineno-11-148" name="__codelineno-11-148" href="#__codelineno-11-148"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-149" name="__codelineno-11-149" href="#__codelineno-11-149"></a><span class="w">    </span><span class="c1"># Prompt to guide the model's style or specify how to spell unfamiliar words. 224 tokens max.</span>
+<a id="__codelineno-11-150" name="__codelineno-11-150" href="#__codelineno-11-150"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span>
+<a id="__codelineno-11-151" name="__codelineno-11-151" href="#__codelineno-11-151"></a>
+<a id="__codelineno-11-152" name="__codelineno-11-152" href="#__codelineno-11-152"></a><span class="w">  </span><span class="nt">deepgram</span><span class="p">:</span>
+<a id="__codelineno-11-153" name="__codelineno-11-153" href="#__codelineno-11-153"></a><span class="w">    </span><span class="c1"># See https://console.deepgram.com/</span>
+<a id="__codelineno-11-154" name="__codelineno-11-154" href="#__codelineno-11-154"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-155" name="__codelineno-11-155" href="#__codelineno-11-155"></a><span class="w">    </span><span class="c1"># See https://developers.deepgram.com/reference/speech-to-text-api/listen-streaming#request.query.model</span>
+<a id="__codelineno-11-156" name="__codelineno-11-156" href="#__codelineno-11-156"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+<a id="__codelineno-11-157" name="__codelineno-11-157" href="#__codelineno-11-157"></a><span class="w">    </span><span class="c1"># See https://developers.deepgram.com/reference/speech-to-text-api/listen-streaming#request.query.language</span>
+<a id="__codelineno-11-158" name="__codelineno-11-158" href="#__codelineno-11-158"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-159" name="__codelineno-11-159" href="#__codelineno-11-159"></a><span class="w">    </span><span class="c1"># Whether to enable automatic language detection. Defaults to false. See https://developers.deepgram.com/docs/language-detection</span>
+<a id="__codelineno-11-160" name="__codelineno-11-160" href="#__codelineno-11-160"></a><span class="w">    </span><span class="nt">detect_language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-11-161" name="__codelineno-11-161" href="#__codelineno-11-161"></a><span class="w">    </span><span class="c1"># Whether to return interim (non-final) transcription results. Defaults to true. See https://developers.deepgram.com/docs/interim-results</span>
+<a id="__codelineno-11-162" name="__codelineno-11-162" href="#__codelineno-11-162"></a><span class="w">    </span><span class="nt">interim_results</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-163" name="__codelineno-11-163" href="#__codelineno-11-163"></a><span class="w">    </span><span class="c1"># Whether to apply smart formatting to numbers, dates, etc. Defaults to true. See https://developers.deepgram.com/docs/smart-format</span>
+<a id="__codelineno-11-164" name="__codelineno-11-164" href="#__codelineno-11-164"></a><span class="w">    </span><span class="nt">smart_format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-165" name="__codelineno-11-165" href="#__codelineno-11-165"></a><span class="w">    </span><span class="c1"># When smart_format is used, ensures it does not wait for sequence to be complete before returning results. Defaults to true. See https://developers.deepgram.com/docs/smart-format#using-no-delay</span>
+<a id="__codelineno-11-166" name="__codelineno-11-166" href="#__codelineno-11-166"></a><span class="w">    </span><span class="nt">no_delay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-167" name="__codelineno-11-167" href="#__codelineno-11-167"></a><span class="w">    </span><span class="c1"># Whether to add punctuations to the transcription. Defaults to true. Turn detector will work better with punctuations. See https://developers.deepgram.com/docs/punctuation</span>
+<a id="__codelineno-11-168" name="__codelineno-11-168" href="#__codelineno-11-168"></a><span class="w">    </span><span class="nt">punctuate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-169" name="__codelineno-11-169" href="#__codelineno-11-169"></a><span class="w">    </span><span class="c1"># Whether to include filler words (um, uh, etc.) in transcription. Defaults to true. See https://developers.deepgram.com/docs/filler-words</span>
+<a id="__codelineno-11-170" name="__codelineno-11-170" href="#__codelineno-11-170"></a><span class="w">    </span><span class="nt">filler_words</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-171" name="__codelineno-11-171" href="#__codelineno-11-171"></a><span class="w">    </span><span class="c1"># Whether to filter profanity from the transcription. Defaults to false. See https://developers.deepgram.com/docs/profanity-filter</span>
+<a id="__codelineno-11-172" name="__codelineno-11-172" href="#__codelineno-11-172"></a><span class="w">    </span><span class="nt">profanity_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-11-173" name="__codelineno-11-173" href="#__codelineno-11-173"></a><span class="w">    </span><span class="c1"># List of tuples containing keywords and their boost values for improved recognition. Each tuple should be (keyword: str, boost: float). Defaults to None. keywords does not work with Nova-3 models. Use keyterms instead.</span>
+<a id="__codelineno-11-174" name="__codelineno-11-174" href="#__codelineno-11-174"></a><span class="w">    </span><span class="c1"># keywords:</span>
+<a id="__codelineno-11-175" name="__codelineno-11-175" href="#__codelineno-11-175"></a><span class="w">    </span><span class="c1">#   - [OpenVidu, 1.5]</span>
+<a id="__codelineno-11-176" name="__codelineno-11-176" href="#__codelineno-11-176"></a><span class="w">    </span><span class="c1">#   - [WebRTC, 1]</span>
+<a id="__codelineno-11-177" name="__codelineno-11-177" href="#__codelineno-11-177"></a><span class="w">    </span><span class="c1"># List of key terms to improve recognition accuracy. Defaults to None. keyterms is supported by Nova-3 models.</span>
+<a id="__codelineno-11-178" name="__codelineno-11-178" href="#__codelineno-11-178"></a><span class="w">    </span><span class="c1"># Commented below is an example</span>
+<a id="__codelineno-11-179" name="__codelineno-11-179" href="#__codelineno-11-179"></a><span class="w">    </span><span class="nt">keyterms</span><span class="p">:</span>
+<a id="__codelineno-11-180" name="__codelineno-11-180" href="#__codelineno-11-180"></a><span class="w">      </span><span class="c1"># - "OpenVidu"</span>
+<a id="__codelineno-11-181" name="__codelineno-11-181" href="#__codelineno-11-181"></a><span class="w">      </span><span class="c1"># - "WebRTC"</span>
+<a id="__codelineno-11-182" name="__codelineno-11-182" href="#__codelineno-11-182"></a>
+<a id="__codelineno-11-183" name="__codelineno-11-183" href="#__codelineno-11-183"></a><span class="w">  </span><span class="nt">assemblyai</span><span class="p">:</span>
+<a id="__codelineno-11-184" name="__codelineno-11-184" href="#__codelineno-11-184"></a><span class="w">    </span><span class="c1"># API key for AssemblyAI. See https://www.assemblyai.com/dashboard/api-keys</span>
+<a id="__codelineno-11-185" name="__codelineno-11-185" href="#__codelineno-11-185"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-186" name="__codelineno-11-186" href="#__codelineno-11-186"></a><span class="w">    </span><span class="c1"># Whether to return formatted final transcripts (proper punctuation, letter casing...). If enabled, formatted final transcripts are emitted shortly following an end-of-turn detection.</span>
+<a id="__codelineno-11-187" name="__codelineno-11-187" href="#__codelineno-11-187"></a><span class="w">    </span><span class="nt">format_turns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-188" name="__codelineno-11-188" href="#__codelineno-11-188"></a>
+<a id="__codelineno-11-189" name="__codelineno-11-189" href="#__codelineno-11-189"></a><span class="w">  </span><span class="nt">fal</span><span class="p">:</span>
+<a id="__codelineno-11-190" name="__codelineno-11-190" href="#__codelineno-11-190"></a><span class="w">    </span><span class="c1"># API key for fal. See https://fal.ai/dashboard/keys</span>
+<a id="__codelineno-11-191" name="__codelineno-11-191" href="#__codelineno-11-191"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-192" name="__codelineno-11-192" href="#__codelineno-11-192"></a><span class="w">    </span><span class="c1"># See https://fal.ai/models/fal-ai/wizper/api#schema</span>
+<a id="__codelineno-11-193" name="__codelineno-11-193" href="#__codelineno-11-193"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-194" name="__codelineno-11-194" href="#__codelineno-11-194"></a>
+<a id="__codelineno-11-195" name="__codelineno-11-195" href="#__codelineno-11-195"></a><span class="w">  </span><span class="nt">clova</span><span class="p">:</span>
+<a id="__codelineno-11-196" name="__codelineno-11-196" href="#__codelineno-11-196"></a><span class="w">    </span><span class="c1"># Secret key issued when registering the app</span>
+<a id="__codelineno-11-197" name="__codelineno-11-197" href="#__codelineno-11-197"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-198" name="__codelineno-11-198" href="#__codelineno-11-198"></a><span class="w">    </span><span class="c1"># API Gateway's unique invoke URL created in CLOVA Speech Domain.</span>
+<a id="__codelineno-11-199" name="__codelineno-11-199" href="#__codelineno-11-199"></a><span class="w">    </span><span class="c1"># See https://guide.ncloud-docs.com/docs/en/clovaspeech-domain#create-domain</span>
+<a id="__codelineno-11-200" name="__codelineno-11-200" href="#__codelineno-11-200"></a><span class="w">    </span><span class="nt">invoke_url</span><span class="p">:</span>
+<a id="__codelineno-11-201" name="__codelineno-11-201" href="#__codelineno-11-201"></a><span class="w">    </span><span class="c1"># See https://api.ncloud-docs.com/docs/en/ai-application-service-clovaspeech-longsentence</span>
+<a id="__codelineno-11-202" name="__codelineno-11-202" href="#__codelineno-11-202"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-203" name="__codelineno-11-203" href="#__codelineno-11-203"></a><span class="w">    </span><span class="c1"># Value between 0 and 1 indicating the threshold for the confidence score of the transcribed text. Default is 0.5.</span>
+<a id="__codelineno-11-204" name="__codelineno-11-204" href="#__codelineno-11-204"></a><span class="w">    </span><span class="c1"># If the confidence score is lower than the threshold, the transcription event is not sent to the client.</span>
+<a id="__codelineno-11-205" name="__codelineno-11-205" href="#__codelineno-11-205"></a><span class="w">    </span><span class="c1"># For a definition of the confidence score see https://api.ncloud-docs.com/docs/en/ai-application-service-clovaspeech-grpc</span>
+<a id="__codelineno-11-206" name="__codelineno-11-206" href="#__codelineno-11-206"></a><span class="w">    </span><span class="nt">threshold</span><span class="p">:</span>
+<a id="__codelineno-11-207" name="__codelineno-11-207" href="#__codelineno-11-207"></a>
+<a id="__codelineno-11-208" name="__codelineno-11-208" href="#__codelineno-11-208"></a><span class="w">  </span><span class="nt">speechmatics</span><span class="p">:</span>
+<a id="__codelineno-11-209" name="__codelineno-11-209" href="#__codelineno-11-209"></a><span class="w">    </span><span class="c1"># API key for Speechmatics. See https://portal.speechmatics.com/manage-access/</span>
+<a id="__codelineno-11-210" name="__codelineno-11-210" href="#__codelineno-11-210"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-211" name="__codelineno-11-211" href="#__codelineno-11-211"></a><span class="w">    </span><span class="c1"># ISO 639-1 language code. All languages are global and can understand different dialects/accents. To see the list of all supported languages, see https://docs.speechmatics.com/introduction/supported-languages</span>
+<a id="__codelineno-11-212" name="__codelineno-11-212" href="#__codelineno-11-212"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-213" name="__codelineno-11-213" href="#__codelineno-11-213"></a><span class="w">    </span><span class="c1"># Operating point to use for the transcription per required accuracy &amp; complexity. To learn more, see https://docs.speechmatics.com/features/accuracy-language-packs#accuracy</span>
+<a id="__codelineno-11-214" name="__codelineno-11-214" href="#__codelineno-11-214"></a><span class="w">    </span><span class="nt">operating_point</span><span class="p">:</span>
+<a id="__codelineno-11-215" name="__codelineno-11-215" href="#__codelineno-11-215"></a><span class="w">    </span><span class="c1"># Partial transcripts allow you to receive preliminary transcriptions and update as more context is available until the higher-accuracy final transcript is returned. Partials are returned faster but without any post-processing such as formatting. See https://docs.speechmatics.com/features/realtime-latency#partial-transcripts</span>
+<a id="__codelineno-11-216" name="__codelineno-11-216" href="#__codelineno-11-216"></a><span class="w">    </span><span class="nt">enable_partials</span><span class="p">:</span>
+<a id="__codelineno-11-217" name="__codelineno-11-217" href="#__codelineno-11-217"></a><span class="w">    </span><span class="c1"># RFC-5646 language code to make spelling rules more consistent in the transcription output. See https://docs.speechmatics.com/features/word-tagging#output-locale</span>
+<a id="__codelineno-11-218" name="__codelineno-11-218" href="#__codelineno-11-218"></a><span class="w">    </span><span class="nt">output_locale</span><span class="p">:</span>
+<a id="__codelineno-11-219" name="__codelineno-11-219" href="#__codelineno-11-219"></a><span class="w">    </span><span class="c1"># The delay in seconds between the end of a spoken word and returning the final transcript results. See https://docs.speechmatics.com/features/realtime-latency#configuration-example</span>
+<a id="__codelineno-11-220" name="__codelineno-11-220" href="#__codelineno-11-220"></a><span class="w">    </span><span class="nt">max_delay</span><span class="p">:</span>
+<a id="__codelineno-11-221" name="__codelineno-11-221" href="#__codelineno-11-221"></a><span class="w">    </span><span class="c1"># See https://docs.speechmatics.com/features/realtime-latency#configuration-example</span>
+<a id="__codelineno-11-222" name="__codelineno-11-222" href="#__codelineno-11-222"></a><span class="w">    </span><span class="nt">max_delay_mode</span><span class="p">:</span>
+<a id="__codelineno-11-223" name="__codelineno-11-223" href="#__codelineno-11-223"></a><span class="w">    </span><span class="c1"># Configuration for speaker diarization. See https://docs.speechmatics.com/features/diarization</span>
+<a id="__codelineno-11-224" name="__codelineno-11-224" href="#__codelineno-11-224"></a><span class="w">    </span><span class="nt">speaker_diarization_config</span><span class="p">:</span>
+<a id="__codelineno-11-225" name="__codelineno-11-225" href="#__codelineno-11-225"></a><span class="w">      </span><span class="c1"># See https://docs.speechmatics.com/features/diarization#max-speakers</span>
+<a id="__codelineno-11-226" name="__codelineno-11-226" href="#__codelineno-11-226"></a><span class="w">      </span><span class="nt">max_speakers</span><span class="p">:</span>
+<a id="__codelineno-11-227" name="__codelineno-11-227" href="#__codelineno-11-227"></a><span class="w">      </span><span class="c1"># See https://docs.speechmatics.com/features/diarization#speaker-sensitivity</span>
+<a id="__codelineno-11-228" name="__codelineno-11-228" href="#__codelineno-11-228"></a><span class="w">      </span><span class="nt">speaker_sensitivity</span><span class="p">:</span>
+<a id="__codelineno-11-229" name="__codelineno-11-229" href="#__codelineno-11-229"></a><span class="w">      </span><span class="c1"># See https://docs.speechmatics.com/features/diarization#prefer-current-speaker</span>
+<a id="__codelineno-11-230" name="__codelineno-11-230" href="#__codelineno-11-230"></a><span class="w">      </span><span class="nt">prefer_current_speaker</span><span class="p">:</span>
+<a id="__codelineno-11-231" name="__codelineno-11-231" href="#__codelineno-11-231"></a><span class="w">    </span><span class="c1"># Permitted punctuation marks for advanced punctuation. See https://docs.speechmatics.com/features/punctuation-settings</span>
+<a id="__codelineno-11-232" name="__codelineno-11-232" href="#__codelineno-11-232"></a><span class="w">    </span><span class="c1"># Commented is an example of punctuation settings</span>
+<a id="__codelineno-11-233" name="__codelineno-11-233" href="#__codelineno-11-233"></a><span class="w">    </span><span class="nt">punctuation_overrides</span><span class="p">:</span>
+<a id="__codelineno-11-234" name="__codelineno-11-234" href="#__codelineno-11-234"></a><span class="w">      </span><span class="c1"># permitted_marks: [ ".", "," ]</span>
+<a id="__codelineno-11-235" name="__codelineno-11-235" href="#__codelineno-11-235"></a><span class="w">      </span><span class="c1"># sensitivity: 0.4</span>
+<a id="__codelineno-11-236" name="__codelineno-11-236" href="#__codelineno-11-236"></a><span class="w">    </span><span class="c1"># See https://docs.speechmatics.com/features/custom-dictionary</span>
+<a id="__codelineno-11-237" name="__codelineno-11-237" href="#__codelineno-11-237"></a><span class="w">    </span><span class="c1"># Commented below is an example of a custom dictionary</span>
+<a id="__codelineno-11-238" name="__codelineno-11-238" href="#__codelineno-11-238"></a><span class="w">    </span><span class="nt">additional_vocab</span><span class="p">:</span>
+<a id="__codelineno-11-239" name="__codelineno-11-239" href="#__codelineno-11-239"></a><span class="w">      </span><span class="c1"># - content: financial crisis</span>
+<a id="__codelineno-11-240" name="__codelineno-11-240" href="#__codelineno-11-240"></a><span class="w">      </span><span class="c1"># - content: gnocchi</span>
+<a id="__codelineno-11-241" name="__codelineno-11-241" href="#__codelineno-11-241"></a><span class="w">      </span><span class="c1">#   sounds_like:</span>
+<a id="__codelineno-11-242" name="__codelineno-11-242" href="#__codelineno-11-242"></a><span class="w">      </span><span class="c1">#     - nyohki</span>
+<a id="__codelineno-11-243" name="__codelineno-11-243" href="#__codelineno-11-243"></a><span class="w">      </span><span class="c1">#     - nokey</span>
+<a id="__codelineno-11-244" name="__codelineno-11-244" href="#__codelineno-11-244"></a><span class="w">      </span><span class="c1">#     - nochi</span>
+<a id="__codelineno-11-245" name="__codelineno-11-245" href="#__codelineno-11-245"></a><span class="w">      </span><span class="c1"># - content: CEO</span>
+<a id="__codelineno-11-246" name="__codelineno-11-246" href="#__codelineno-11-246"></a><span class="w">      </span><span class="c1">#   sounds_like:</span>
+<a id="__codelineno-11-247" name="__codelineno-11-247" href="#__codelineno-11-247"></a><span class="w">      </span><span class="c1">#     - C.E.O.</span>
+<a id="__codelineno-11-248" name="__codelineno-11-248" href="#__codelineno-11-248"></a>
+<a id="__codelineno-11-249" name="__codelineno-11-249" href="#__codelineno-11-249"></a><span class="w">  </span><span class="nt">gladia</span><span class="p">:</span>
+<a id="__codelineno-11-250" name="__codelineno-11-250" href="#__codelineno-11-250"></a><span class="w">    </span><span class="c1"># API key for Gladia. See https://app.gladia.io/account</span>
+<a id="__codelineno-11-251" name="__codelineno-11-251" href="#__codelineno-11-251"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-252" name="__codelineno-11-252" href="#__codelineno-11-252"></a><span class="w">    </span><span class="c1"># Whether to return interim (non-final) transcription results. Defaults to True</span>
+<a id="__codelineno-11-253" name="__codelineno-11-253" href="#__codelineno-11-253"></a><span class="w">    </span><span class="nt">interim_results</span><span class="p">:</span>
+<a id="__codelineno-11-254" name="__codelineno-11-254" href="#__codelineno-11-254"></a><span class="w">    </span><span class="c1"># List of language codes to use for recognition. Defaults to None (auto-detect). See https://docs.gladia.io/chapters/limits-and-specifications/languages</span>
+<a id="__codelineno-11-255" name="__codelineno-11-255" href="#__codelineno-11-255"></a><span class="w">    </span><span class="nt">languages</span><span class="p">:</span>
+<a id="__codelineno-11-256" name="__codelineno-11-256" href="#__codelineno-11-256"></a><span class="w">    </span><span class="c1"># Whether to allow switching between languages during recognition. Defaults to True</span>
+<a id="__codelineno-11-257" name="__codelineno-11-257" href="#__codelineno-11-257"></a><span class="w">    </span><span class="nt">code_switching</span><span class="p">:</span>
+<a id="__codelineno-11-258" name="__codelineno-11-258" href="#__codelineno-11-258"></a>
+<a id="__codelineno-11-259" name="__codelineno-11-259" href="#__codelineno-11-259"></a><span class="w">  </span><span class="nt">sarvam</span><span class="p">:</span>
+<a id="__codelineno-11-260" name="__codelineno-11-260" href="#__codelineno-11-260"></a><span class="w">    </span><span class="c1"># API key for Sarvam. See https://dashboard.sarvam.ai/key-management</span>
+<a id="__codelineno-11-261" name="__codelineno-11-261" href="#__codelineno-11-261"></a><span class="w">    </span><span class="nt">api_key</span><span class="p">:</span>
+<a id="__codelineno-11-262" name="__codelineno-11-262" href="#__codelineno-11-262"></a><span class="w">    </span><span class="c1"># BCP-47 language code for supported Indian languages. See https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe#request.body.language_code.language_code</span>
+<a id="__codelineno-11-263" name="__codelineno-11-263" href="#__codelineno-11-263"></a><span class="w">    </span><span class="nt">language</span><span class="p">:</span>
+<a id="__codelineno-11-264" name="__codelineno-11-264" href="#__codelineno-11-264"></a><span class="w">    </span><span class="c1"># The Sarvam STT model to use. See https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe#request.body.model.model</span>
+<a id="__codelineno-11-265" name="__codelineno-11-265" href="#__codelineno-11-265"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/footer.html -->
+
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+
+        <!-- Link to previous page -->
+        
+          
+          <a href="../overview/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          
+          <a href="../agent-dispatch/" class="md-footer__link md-footer__link--next" aria-label="Next: Agent dispatch">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Agent dispatch
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <div class="grid-container footer-grid">
+
+        <div class="footer-column grid-25 tablet-grid-50 mobile-grid-100">
+          <h4>SOCIAL</h4>
+          
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/OpenVidu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/openvidu" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://openvidu.medium.com/" target="_blank" rel="noopener" title="openvidu.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.21 0A4.2 4.2 0 0 0 0 4.21v15.58A4.2 4.2 0 0 0 4.21 24h15.58A4.2 4.2 0 0 0 24 19.79v-1.093a5 5 0 0 1-.422.02c-2.577 0-4.027-2.146-4.09-4.832a8 8 0 0 1 .022-.708c.093-1.186.475-2.241 1.105-3.022a3.9 3.9 0 0 1 1.395-1.1c.468-.237 1.127-.367 1.664-.367h.023q.151 0 .303.01V4.211A4.2 4.2 0 0 0 19.79 0Zm.198 5.583h4.165l3.588 8.435 3.59-8.435h3.864v.146l-.019.004c-.705.16-1.063.397-1.063 1.254h-.003l.003 10.274c.06.676.424.885 1.063 1.03l.02.004v.145h-4.923v-.145l.019-.005c.639-.144.994-.353 1.054-1.03V7.267l-4.745 11.15h-.261L6.15 7.569v9.445c0 .857.358 1.094 1.063 1.253l.02.004v.147H4.405v-.147l.019-.004c.705-.16 1.065-.397 1.065-1.253V6.987c0-.857-.358-1.094-1.064-1.254l-.018-.004zm19.25 3.668c-1.086.023-1.733 1.323-1.813 3.124H24V9.298a1.4 1.4 0 0 0-.342-.047m-1.862 3.632c-.1 1.756.86 3.239 2.204 3.634v-3.634z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@openvidu" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg>
+    </a>
+  
+</div>
+        </div>
+
+        <div class="footer-column grid-35 tablet-grid-50 mobile-grid-100">
+
+          <div class="subscription">
+            <h4>NEWSLETTER</h4>
+            <div class="md-copyright__highlight" style="font-size: .64rem">Keep up with OpenVidu news. Enter your e-mail and subscribe to our newsletter!</div>
+            <!-- Begin MailChimp Signup Form -->
+            <div style="width:100%; padding-top: .4rem;">
+                <div id="mc_embed_signup">
+                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                      <div class="form-validation alert"></div>
+                      <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: nowrap; gap: 10px;">
+                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required>
+                          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
+                          <div class="md-typeset"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>LEGAL</h4>
+          <div>
+            <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
+              <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2025 © OpenVidu<br> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+            </div>
+            <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
+              <div class="footer-conditions-list">
+                <a href="/conditions/privacy-policy/">Privacy policy</a>
+                <a href="/conditions/cookie-policy/">Cookie policy</a>
+                <a href="/conditions/terms-of-service/">Terms of service</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>ACKNOWLEDGMENTS</h4>
+          <a href="/acknowledgments" style="display: flex; gap: 8px;">
+            <img class="acknowledgments-footer" style="max-width: 260px;" src="/assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+
+<h4>Cookie consent</h4>
+<p>This website uses cookies to ensure you get the best experience on our website. <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
+</p>
+<input class="md-toggle" type="checkbox" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+      <button type="reset" class="md-button md-button--primary">Reject</button>
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "content.tooltips", "navigation.tabs", "navigation.tracking", "navigation.footer", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
+    
+    
+
+<!-- Add scripts that need to run before here -->
+
+<script src="/javascripts/target-blank.js"></script>
+
+
+
+
+
+
+
+
+
+
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../../../javascripts/openvidu-register/openvidu-register.js"></script>
+      
+    
+
+<!-- Add scripts that need to run afterwards here -->
+
+
+  
+<script id="init-glightbox">document.querySelectorAll('.glightbox').forEach(function(element) {
+    try {
+        var img = element.querySelector('img');
+        if (img && img.src) {
+            element.setAttribute('href', img.src);
+        } else {
+            console.log('No img element with src attribute found');
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+});
+const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
