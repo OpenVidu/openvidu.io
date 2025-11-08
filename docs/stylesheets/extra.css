@@ -121,8 +121,7 @@ span:has(> a > .openvidu-tag) {
 
 .footer-conditions-list {
   font-size: 0.64rem;
-  display: inline-block;
-  vertical-align: top;
+  display: grid;
 }
 
 .register-container {
@@ -604,16 +603,11 @@ nav .md-tabs__item {
 }
 
 .md-banner {
-  background-color: var(--md-primary-fg-color);
+  background-color: var(--slate-md-default-bg-color);
 }
 
 .md-banner #announce a {
-  color: #ffcc00;
   font-weight: 500;
-}
-
-.md-banner #announce a:hover {
-  color: #ffe477;
 }
 
 #home-markdown {
@@ -881,12 +875,6 @@ h2.meetplatform-slogan {
   vertical-align: top;
 }
 
-.md-footer-meta .legal-separator {
-  display: inline-block;
-  margin: 0 5px;
-  color: var(--md-footer-fg-color--light);
-}
-
 #mc-embedded-subscribe {
   background-color: inherit;
   color: var(--slate-md-typeset-color);
@@ -895,8 +883,8 @@ h2.meetplatform-slogan {
 
 #mc-embedded-subscribe:hover {
   color: var(--md-accent-bg-color);
-  background-color: hsla(var(--md-hue),18%,86%,0.82);
-  border-color: hsla(var(--md-hue),18%,86%,0.82);
+  background-color: hsla(var(--md-hue), 18%, 86%, 0.82);
+  border-color: hsla(var(--md-hue), 18%, 86%, 0.82);
 }
 
 #mce-EMAIL {
@@ -907,4 +895,8 @@ h2.meetplatform-slogan {
 
 #mce-EMAIL::placeholder {
   color: rgba(0, 0, 0, 0.75);
+}
+
+.acknowledgments-footer {
+  filter: saturate(0.8) contrast(0.92) brightness(0.96);
 }
