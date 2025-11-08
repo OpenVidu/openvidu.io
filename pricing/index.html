@@ -1,5 +1,6 @@
 <!-- Elements added to main will be displayed on all pages --><!DOCTYPE html><html lang="en" class="no-js"><head>
     
+
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
@@ -15,8 +16,12 @@
       
       
       <link rel="icon" href="../assets/images/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
     
+<!-- Security headers -->
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
     
       
         <title>Pricing - OpenVidu</title>
@@ -210,6 +215,27 @@
       
     </div>
     <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+              </button>
+            
+            
+<div id="announce">
+  We would love to hear your feedback about OpenVidu. Please take a moment to fill out
+  <a href="https://forms.gle/a2HuPSWPCnwsCMf98" target="_blank">this survey</a>
+  and help us improve it. Thank you!
+</div>
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
       
     </div>
     
@@ -6808,7 +6834,8 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 
       <div class="grid-container footer-grid">
 
-        <div class="grid-33 push-66">
+        <div class="footer-column grid-25 tablet-grid-50 mobile-grid-100">
+          <h4>SOCIAL</h4>
           
 <div class="md-social">
   
@@ -6859,31 +6886,60 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 </div>
         </div>
 
-        <div class="grid-33 pull-33 tablet-grid-50">
-          <div class="grid-container footer-conditions-list">
-            <div class="grid-33 tablet-grid-33 mobile-grid-33">
-              <a href="/conditions/privacy-policy/">Privacy policy</a>
-            </div>
-            <div class="grid-33 tablet-grid-33 mobile-grid-33">
-              <a href="/conditions/cookie-policy/">Cookie policy</a>
-            </div>
-            <div class="grid-33 tablet-grid-33 mobile-grid-33">
-              <a href="/conditions/terms-of-service/">Terms of service</a>
+        <div class="footer-column grid-35 tablet-grid-50 mobile-grid-100">
+
+          <div class="subscription">
+            <h4>NEWSLETTER</h4>
+            <div class="md-copyright__highlight" style="font-size: .64rem">Keep up with OpenVidu news. Enter your e-mail and subscribe to our newsletter!</div>
+            <!-- Begin MailChimp Signup Form -->
+            <div style="width:100%; padding-top: .4rem;">
+                <div id="mc_embed_signup">
+                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                      <div class="form-validation alert"></div>
+                      <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: nowrap; gap: 10px;">
+                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required>
+                          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
+                          <div class="md-typeset"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
+                      </div>
+                    </form>
+                </div>
             </div>
           </div>
+          
         </div>
 
-        <div class="grid-33 pull-33 tablet-grid-50">
-          <div class="md-copyright">
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>LEGAL</h4>
+          <div>
+            <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
+              <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      2025 © OpenVidu – <a href="#__consent">Change cookie settings</a>
+      2025 © OpenVidu<br> <a href="#__consent">Change cookie settings</a>
 
     </div>
   
   
 </div>
+            </div>
+            <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
+              <div class="footer-conditions-list">
+                <a href="/conditions/privacy-policy/">Privacy policy</a>
+                <a href="/conditions/cookie-policy/">Cookie policy</a>
+                <a href="/conditions/terms-of-service/">Terms of service</a>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>ACKNOWLEDGMENTS</h4>
+          <a href="/acknowledgments" style="display: flex; gap: 8px;">
+            <img class="acknowledgments-footer" style="max-width: 260px;" src="/assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
+          </a>
+        </div>
+
       </div>
 
     </div>
