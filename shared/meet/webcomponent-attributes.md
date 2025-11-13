@@ -6,5 +6,6 @@
 | `room-url` | The OpenVidu Meet room URL to connect to (moderator or speaker url) | Yes (This attribute is required unless `recording-url` is provided.) |
 | `recording-url` | The URL of a recording to view. | Yes (This attribute is required unless `room-url` is provided.) |
 | `participant-name` | Display name for the local participant. | No |
+| `e2ee-key` | Secret key for end-to-end encryption (E2EE). If provided, the participant will join the meeting using E2EE key. | No |
 | `leave-redirect-url` | URL to redirect to when leaving the meeting. Redirection occurs after the **`CLOSED` event** fires. | No |
 | `show-only-recordings` | Whether to show only recordings instead of live meetings. | No |
