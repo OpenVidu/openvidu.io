@@ -30,7 +30,7 @@ I'm a software engineer, and earned a Ph.D. in computer science in 2008. I was a
 
 In the private sector, I have also participated in, directed, and collaborated with various private and projects, including Kurento, either as a consultor or as a technical lead. 
 
-My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review worldwide. 
+My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](/research).
 
 <div class="md-social">
     <a href="https://github.com/micaelgallego" target="_blank" rel="noopener" title="github.com" class="md-social__link">
@@ -60,7 +60,7 @@ I'm a software engineer, and I hold a PhD on Computer Science, earned in 2007. I
 
 I've been involved in many projects in the private sector, mainly related to cloud computing, engineering and testing, including Kurento. 
 
-My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. 
+My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](/research).
 
 <div class="md-social">
     <a href="https://github.com/gortazar" target="_blank" rel="noopener" title="github.com" class="md-social__link">
@@ -188,7 +188,7 @@ I have professional experience mainly with Node.js, TypeScript, and Angular, as 
 
 I hold a computer engineer degree from Universidad Rey Juan Carlos.
 
-I have experience working with the most common public clouds and with their Cloud Formation Languages such as Terraform for GCP and Bicep for Azure. 
+My experience includes working with the most common public clouds and with their Cloud Formation Languages such as Terraform for GCP and Bicep for Azure. 
 
 <div class="md-social">
     <a href="https://github.com/Piwccle" target="_blank" rel="noopener" title="github.com" class="md-social__link">
@@ -209,8 +209,8 @@ I have experience working with the most common public clouds and with their Clou
 ---
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">We work hard to make the best experience for you!</h2>
+  <h2 style="margin-bottom: 1em">Some of us are researchers, and push OpenVidu forward by advancing the state-of-the-art on the field with our passion for science and technology!</h2>
   <div class="home-buttons">
-    <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
+    <a href="/research/" class="md-button home-secondary-button">Have a look at our research works</a>
   </div>
 </div>
