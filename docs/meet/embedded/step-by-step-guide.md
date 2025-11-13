@@ -256,7 +256,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
 The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `speakerUrl`, needed to embed the room into your application as explained in step 3.
 
-```json hl_lines="22-23"
+```json hl_lines="25-26"
 {
   "roomId": "room-123",
   "roomName": "My Room",
@@ -276,6 +276,9 @@ The response to this request will be a JSON object as below. The required proper
     },
     "virtualBackground": {
       "enabled": true
+    },
+    "e2ee": {
+      "enabled": false
     }
   },
   "moderatorUrl": "http://localhost:6080/room/room-123?secret=123456",

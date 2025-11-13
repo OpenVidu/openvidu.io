@@ -156,19 +156,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
     ---
 
-    Share links to allow users to join video calls. Compatible with any web browser. No installations required.
+    Share meeting links so anyone can instantly join your video calls from any browser — no downloads or setup needed.
 
 -   :material-registered-trademark:{ .feature-icon .padding-icon } __Your own branding__{ .feature-name }
 
     ---
 
-    Deliver a professional experience by customizing OpenVidu Meet with your own domain, branding colors and logo.
+    Create a professional look by branding OpenVidu Meet with your own domain, custom colors, and company logo.
 
 -   :material-video-4k-box:{ .feature-icon .padding-icon } __Up to 4K video and HiFi audio__{ .feature-name }
 
     ---
 
-    Up to 4K video resolution, and crisp audio quality with noise cancellation and echo suppression.
+    Enjoy up to 4K video quality and crystal-clear audio enhanced with noise cancellation and echo suppression.
 
 </div>
 
@@ -178,19 +178,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
     ---
 
-    Record your video calls with different layouts. Manage recording permissions and access with ease.
+    Record your video calls in multiple layouts and easily control who can access or manage each recording.
 
 -   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
 
     ---
 
-    Screen sharing with the best quality.
+    Share your screen in stunning quality for flawless presentations and smooth collaboration every time.
 
 -   :material-face-man-shimmer-outline:{ .feature-icon .padding-icon } __Background effects__{ .feature-name }
 
     ---
 
-    Apply effects to your videos, blurring the background or replacing it with an image.
+    Enhance your videos by blurring backgrounds or replacing them with custom images and effects.
 
 </div>
 
@@ -200,41 +200,43 @@ With all the features you need to fine-tune your perfect video calling service.
 
     ---
 
-    OpenVidu Meet integrates an advanced chat with support of rich messages, emojis, reactions and more.
+    OpenVidu Meet features an advanced chat with rich messages, emojis, reactions, and interactive engagement.
+
+-   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name }
+
+    ---
+
+    Protect your calls from man-in-the-middle attacks, ensuring only your users can decrypt audio, video, and chat.
+
 
 -   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
 
     ---
 
-    OpenVidu Meet allows you to broadcast your video calls to platforms such as YouTube or Twitch.
+    Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name .coming-soon-overlay }
-
-    ---
-
-    Support for a vast number of speech-to-text providers.
 
 </div>
 
 <div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name .coming-soon-overlay }
+-   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name .coming-soon-overlay }
 
     ---
 
-    Avoid man-in-the-middle attacks: only your final users can decrypt the audio, video and chat messages.
+    Access a wide range of speech-to-text providers for accurate and flexible real-time transcription.
 
 -   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay }
 
     ---
 
-    Prevent unwanted guests and require administrator approval to join.
+    Keep your meetings secure by blocking unwanted guests and requiring admin approval to join.
 
 -   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay }
 
     ---
 
-    Allow participants to share files during calls with a simple drag and drop.
+    Enable participants to share files easily during calls with a simple drag-and-drop feature.
 
 </div>
 
