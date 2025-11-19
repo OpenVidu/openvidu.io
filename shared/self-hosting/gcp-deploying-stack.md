@@ -1,4 +1,4 @@
-Whenever you are satisfied with your input values, just click on _"Continue"_ and then in _"Create deployment"_. Now it will validate the deployment and create all the resources. Wait about 5 to 10 minutes to let the instance install OpenVidu.
+Whenever you are satisfied with your input values, just click on _"Continue"_ and then in _"Create deployment"_. Now it will validate the deployment and create all the resources. Wait around 5 to 10 minutes for the instance to install OpenVidu.
 
 !!! warning
 

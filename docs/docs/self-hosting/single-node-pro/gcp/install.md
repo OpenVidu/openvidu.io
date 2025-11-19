@@ -30,8 +30,7 @@ To deploy OpenVidu into Google Cloud Platform you just need to log into your [In
 
 ## Deployment details
 
-!!! info
-    We recommend to create a new project to deploy OpenVidu there, avoiding possible conflicts.
+--8<-- "shared/self-hosting/gcp-info-deployment.md"
 
 To deploy OpenVidu, first you need to create a new deployment in the top left button as you can see in the image.
 
@@ -226,4 +225,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu as we mentioned before. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all the resources have been created. You will need to wait around 5 to 10 minutes for the instance to install OpenVidu as we mentioned before. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.

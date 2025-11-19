@@ -38,8 +38,7 @@ To deploy OpenVidu into Google Cloud Platform you just need to log into your [In
 
 ## Deployment details
 
-!!! info
-    We recommend to create a new project to deploy OpenVidu there, avoiding possible conflicts.
+--8<-- "shared/self-hosting/gcp-info-deployment.md"
 
 To deploy OpenVidu, first you need to create a new deployment in the top left button as you can see in the image.
 
@@ -243,7 +242,7 @@ For more detail you can check the [variables.tf :fontawesome-solid-external-link
 
 ## Deploying the stack
 
-Whenever you are satisfied with your input values, just click on _"Continue"_ and then in _"Create deployment"_. Now it will validate the deployment and create all the resources. Wait about 7 to 12 minutes to let all the nodes to install OpenVidu.
+Whenever you are satisfied with your input values, just click on _"Continue"_ and then in _"Create deployment"_. Now it will validate the deployment and create all the resources. Wait around 7 to 12 minutes for the nodes to install openvidu.
 
 !!! warning
 

@@ -24,11 +24,11 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
         </figure>
     3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimun"_ and _"Maximum"_ number of instances to 0.
         <figure markdown>
-        ![Edit MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-instances-0.png){ .svg-img .dark-img }
+        ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-0.png){ .svg-img .dark-img }
         </figure>
     4. Click on save and wait, it needs the lambda function to run until is completed, you can check how is going in the _"VM instances"_ tab.
         <figure markdown>
-        ![Save Edits MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-save.png){ .svg-img .dark-img }
+        ![Save Edits MIG](../../../../assets/images/self-hosting/shared/gcp-mig-save.png){ .svg-img .dark-img }
         </figure>
     5. After confirming that all Media Node instances are terminated, in _"VM instances"_ tab select the instance called `<STACK_NAME>-master-node`. Click on it to go to the Master Node instance. There, click on "Stop" to stop the instance.
         <figure markdown>
@@ -52,11 +52,11 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
         </figure>
     5. Go to **Group Size & autoscaling** tab and change the _"Minimun"_ and _"Maximum"_ number of instances to your desired ones.
         <figure markdown>
-        ![Edit MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-instances-1.png){ .svg-img .dark-img }
+        ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-1.png){ .svg-img .dark-img }
         </figure>
     6. Click on save and wait until is completed. You can check the progress in the _"Instances"_ tab.
         <figure markdown>
-        ![Save Edits MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-save.png){ .svg-img .dark-img }
+        ![Save Edits MIG](../../../../assets/images/self-hosting/shared/gcp-mig-save.png){ .svg-img .dark-img }
         </figure>
 
 ## Change the instance type
@@ -77,7 +77,7 @@ It is possible to change the instance type of both the Master Node and the Media
     2. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview) and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click on _"Edit"_ and inside change the _"Machine Type"_. Then select the size you desire and click on _"Save"_
         <figure markdown>
-        ![Change instance type master](../../../../assets/images/self-hosting/elastic/gcp/gcp-change-master-node-size.png){ .svg-img .dark-img }
+        ![Change instance type master](../../../../assets/images/self-hosting/shared/gcp-change-master-node-size.png){ .svg-img .dark-img }
         </figure>
     4. [Start the cluster](#starting-up-the-cluster).
 
@@ -85,7 +85,7 @@ It is possible to change the instance type of both the Master Node and the Media
 
     !!! info
 
-        This will make you delete the Media Nodes. If you want to stop them gracefully to avoid the disruption of active Rooms, check the [Shutting down the cluster](#shutting-down-the-cluster) tab.
+        This will delete the media nodes without the graceful delete option, if you want to stop them gracefully check the [Shutdown the Cluster](#shutting-down-the-cluster) tab
 
     1. Go to the _"Instance Group"_ tab and select the resource called `<STACK_NAME>-media-node-group` and click on the _"Template"_.
         <figure markdown>
@@ -122,7 +122,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
     3. On this tab, go to _"Group size & autoscaling"_ and change the tab called _"Autoscaling signals"_
     4. In this tab you will find the signal that is actually using. Here you can add new signals or modify existing ones.
         <figure markdown>
-        ![Signals MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-signals.png){ .svg-img .dark-img }
+        ![Signals MIG](../../../../assets/images/self-hosting/shared/gcp-signals.png){ .svg-img .dark-img }
         </figure>
 
     !!! info
@@ -136,10 +136,6 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
 
 === "Set Fixed Number of Media Nodes"
 
-    !!! info
-
-        This will forcely restart the Media Nodes. If you want to stop them gracefully to avoid the disruption of active Rooms, check the [Shutting downd the cluster](#shutting-down-the-cluster) tab.
-
     1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target=_blank}.
     2. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
         <figure markdown>
@@ -147,8 +143,12 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
         </figure>
     3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the value of fixed number of Media Nodes you want. In this case is set to 3. Click on save next and wait to be applied
         <figure markdown>
-        ![Fixed Number Media Nodes](../../../../assets/images/self-hosting/elastic/gcp/gcp-fixed-media-nodes.png){ .svg-img .dark-img }
+        ![Fixed Number Media Nodes](../../../../assets/images/self-hosting/shared/gcp-fixed-media-nodes.png){ .svg-img .dark-img }
         </figure>
+
+    !!! info
+
+        This will delete the media nodes if you have set them to less than the number of media nodes that existed, if you want to stop them gracefully check the [Shutdown the Cluster](#shutting-down-the-cluster) tab.
 
 ### Deactivate Scale In
 If you want a fixed number of Media Nodes you probably want to deactivate the Cloud Run Function that controls scale in actions. Follow these steps to do it:
