@@ -99,3 +99,7 @@ rm -rf /opt/openvidu/
 rm /etc/systemd/system/openvidu.service
 rm /etc/sysctl.d/50-openvidu.conf
 ```
+
+## Backup and Restore
+
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

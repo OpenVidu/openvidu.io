@@ -72,3 +72,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
     4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
 
     Changes will be applied automatically.
+
+## Backup and Restore
+
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
