@@ -26,7 +26,7 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
     - `compute-pressure`: Device performance monitoring
 
 !!! info
-    You can get room URLs programmatically from your backend using the [REST API](./api.html#/schemas/MeetRoom){:target="\_blank"} properties `moderatorUrl` or `speakerUrl`.
+	You can get a room's URL programmatically from your application's backend: properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"}. You can also use a **room member URL** for personalized access with custom permissions - see [Room members](../../features/users-and-permissions.md#room-members).
 
 ## API Reference
 

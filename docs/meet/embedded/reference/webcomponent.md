@@ -21,7 +21,7 @@ Add the `<openvidu-meet>` tag to your HTML. This will embed OpenVidu Meet interf
 The only required attribute is **`room-url`**, which determines the room to join. Different instances of the web component using the same room URL will access the same meeting.
 
 !!! info
-	You can get a room's URL programmatically from your application's backend: properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"}.
+	You can get a room's URL programmatically from your application's backend: properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"}. You can also use a **room member URL** for personalized access with custom permissions - see [Room members](../../features/users-and-permissions.md#room-members).
 
 ## API Reference
 

@@ -49,8 +49,6 @@ Available rooms can be managed from the **Rooms** page, where administrators can
 ### Editing a room
 Modify room settings anytime from the **Rooms** page if no meeting is active. You can:
 
-- Rename the room.
-- Set or update an [auto-deletion date](#room-auto-deletion).
 - Configure recording and access control.
 - Enable or disable features like chat, virtual backgrounds, and E2EE.
 
@@ -86,17 +84,24 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
 
 ### Room links
 
-Rooms have predefined **room links** that grant access to them. Users connecting to a room link will start a new meeting (if no meeting is currently active in the room) or join the existing meeting (if there is one).
+Rooms have **room links** that grant access to them. Users connecting to a room link will start a new meeting (if no meeting is currently active in the room) or join the existing meeting (if there is one).
 
-Each room has different room links, each one granting access to the room with a specific participant role. See [Participant roles in a meeting](users-and-permissions.md#participant-roles-in-a-meeting) for more information.
+There are two types of room links:
 
-#### Get a room link from the "Rooms" page
+- **General room links**: Two predefined URLs (Moderator and Speaker) that can be shared with any user.
+- **Member-specific room links**: Custom URLs created for specific individuals with personalized permissions.
 
-Every room item allows sharing the room link for every participant role.
+See [Users and permissions](users-and-permissions.md) for detailed information about roles, permissions, and how to create room members.
+
+#### Getting room links
+
+##### From the "Rooms" page
+
+Every room item allows sharing the room link for each participant role.
 
 <a class="glightbox" href="../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-#### Get a room link from an active meeting
+##### From an active meeting
 
 Participants with the `Moderator` role can share room links from the active meeting view.
 
@@ -105,9 +110,9 @@ Participants with the `Moderator` role can share room links from the active meet
 !!! info
     Links copied from the meeting view will always grant access to the room with `Speaker` role. If necessary, users with role `Moderator` can upgrade other user's roles during the meeting. See [Changing participant roles during a meeting](users-and-permissions.md#changing-participant-roles-during-a-meeting) for more information.
 
-#### Get a room link from the REST API
+##### From the REST API
 
-Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}.
+Room links are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}. For member-specific room links, see [Creating room members](users-and-permissions.md#creating-room-members).
 
 ### Room visual customization
 
@@ -139,6 +144,9 @@ Every possible action against a room can be done through [OpenVidu Meet REST API
 | Bulk delete rooms | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRooms){:target="_blank"} |
 | Get room config | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="_blank"} |
 | Update room config | PUT | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="_blank"} |
+| Add a member to a room | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="_blank"} |
+| Get a room member | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="_blank"} |
+| Delete a room member | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="_blank"} |
 
 ## Meetings
 

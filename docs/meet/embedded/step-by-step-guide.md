@@ -33,7 +33,6 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
         --data '{"roomName": "my-room"}'
-        --data '{"roomName": "my-room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -283,6 +282,7 @@ The response to this request will be a JSON object as below. The required proper
   },
   "moderatorUrl": "http://localhost:6080/room/room-123?secret=123456",
   "speakerUrl": "http://localhost:6080/room/room-123?secret=654321",
+  "members": [],
   "status": "open",
   "meetingEndAction": "none"
 }
@@ -301,6 +301,9 @@ You can get the room URLs programmatically using the [OpenVidu Meet REST API](..
 - [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}
 - [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"}
 - [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="_blank"}
+
+!!! info
+    You can also use a **room member URL** instead of the general room URLs. Room members provide personalized access with custom permissions and fixed participant names. See [Room members](../features/users-and-permissions.md#room-members) for more information.
 
 ## 4. Embed the room into your application
 

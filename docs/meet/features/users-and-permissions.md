@@ -8,18 +8,96 @@ tags:
 
 ## Participant roles in a room
 
-Participants in a room can have different roles, which grant different permissions. The role of a participant is determined by the room link used to join. See [Room links](./rooms-and-meetings.md#room-links) for more information.
+Participants in a room can have different roles, which grant different permissions. There are two ways to define a participant's role:
 
-Available roles are:
+1. **Through general room links**: By using the general `Moderator` or `Speaker` room link. See [General room links](./rooms-and-meetings.md#general-room-links) for more information.
+2. **Through room members**: By creating a specific member with custom permissions. See [Room members](#room-members) for more information.
 
-- **Moderator**: grants permissions to end the meeting, start/stop recordings, share room links and manage participants. Also grants permissions of `Speaker` role.
-- **Speaker**: grants permissions to share their camera, microphone and screen.
+### Standard roles
+
+When accessing a room through general room links, participants are assigned one of these standard roles:
+
+#### Moderator
+
+Grants full permissions including:
+
+- Meeting management: end the meeting for all participants
+- Recording control: start/stop recordings, retrieve and delete recordings
+- Participant management: share room links, promote other participants, kick participants
+- Media publishing: publish video, audio, and share screen
+- Communication: send chat messages, change virtual background
+
+#### Speaker
+
+Grants basic participation permissions:
+
+- Media publishing: publish video, audio, and share screen
+- Communication: send chat messages, change virtual background
+
+### Custom role for room members
+
+When accessing a room through a member-specific URL, the participant is assigned a **Custom** role with a personalized set of permissions. These permissions are defined when the room member is created and can be different from the standard `Moderator` and `Speaker` roles.
 
 ### Changing participant roles during a meeting
 
 Participants with `Moderator` role can upgrade or downgrade other participants' roles during the meeting from the "Participants" side panel:
 
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/upgrade-role.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/users-and-permissions/upgrade-role.png" loading="lazy"/></a>
+
+## Room members
+
+Room members are specific individuals with personalized access to a room. Each member has:
+
+- A **fixed participant name** that cannot be changed when joining.
+- A **unique access URL** that should not be shared with others.
+- **Custom permissions** tailored to their needs, which can be different from standard `Moderator` or `Speaker` roles.
+
+Room members are ideal for scenarios where you need:
+
+- Fine-grained access control for specific users.
+- Pre-defined participant names for identification.
+- The ability to revoke access to specific individuals without affecting others.
+
+### Creating room members
+
+Room members can only be created via the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="_blank"}. When creating a member, you specify:
+
+- **Participant name**: The fixed name that will be displayed in the meeting.
+- **Base role**: Either `moderator` or `speaker`, which defines the initial set of permissions.
+- **Custom permissions**: Optional overrides to grant or restrict specific capabilities beyond the base role.
+
+The API returns a member object containing the unique access URL and member ID.
+
+### Managing room members
+
+Room members can be managed through the REST API:
+
+- **Retrieve member information**: [GET /rooms/:roomId/members/:memberId :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="_blank"}
+- **Delete a member**: [DELETE /rooms/:roomId/members/:memberId :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="_blank"}
+
+!!! warning
+    When a room member is deleted, their access is immediately revoked. If they are currently in an active meeting, they will be expelled from it.
+
+### Available permissions
+
+Room members can have any combination of the following permissions:
+
+| Permission | Description |
+|------------|-------------|
+| `canRecord` | Can start/stop recording the meeting |
+| `canRetrieveRecordings` | Can list and play recordings |
+| `canDeleteRecordings` | Can delete recordings |
+| `canShareAccessLinks` | Can share access links to invite others |
+| `canMakeModerator` | Can promote other participants to moderator role |
+| `canKickParticipants` | Can remove other participants from the meeting |
+| `canEndMeeting` | Can end the meeting for all participants |
+| `canPublishVideo` | Can publish video in the meeting |
+| `canPublishAudio` | Can publish audio in the meeting |
+| `canShareScreen` | Can share screen in the meeting |
+| `canChat` | Can send chat messages in the meeting |
+| `canChangeVirtualBackground` | Can change the virtual background |
+
+When creating a member, you start with a base role (`moderator` or `speaker`) and then override specific permissions as needed. For example, you could create a member with `speaker` base role but grant them `canRecord` permission.
 
 ## OpenVidu Meet authentication
 
