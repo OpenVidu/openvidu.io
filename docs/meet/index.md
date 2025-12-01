@@ -37,7 +37,7 @@ Host and customize your own high-quality video calling service in minutes
 
     ---
 
-    OpenVidu Meet brings all the **features** you expect from a professional video calling solution: HD video, HiFi audio, recording, broadcasting, screen sharing, chat, virtual backgrounds, and more.
+    OpenVidu Meet brings all the **features** you expect from a professional video calling solution: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 -   :material-code-tags:{ .more-padding-icon .ov-meet-commercial-icon } __Integrate right into your app__{ .feature-name }
 
@@ -78,7 +78,7 @@ __Multi-Party smart layout__{ .ov-meet-commercial-card-title .wow .animated .ani
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
-<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
+<a class="glightbox" href="../../assets/images/meet/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
 
 </div>
 
@@ -162,7 +162,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
     ---
 
-    Create a professional look by branding OpenVidu Meet with your own domain, custom colors, and company logo.
+    Create a professional look by branding OpenVidu Meet with your own domain, and custom colors.
 
 -   :material-video-4k-box:{ .feature-icon .padding-icon } __Up to 4K video and HiFi audio__{ .feature-name }
 
@@ -196,14 +196,13 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
--   :material-chat-outline:{ .feature-icon .padding-icon } __Advanced chat__{ .feature-name }
+-   :material-chat-outline:{ .feature-icon .padding-icon } __Chat__{ .feature-name }
 
     ---
 
-    OpenVidu Meet features an advanced chat with rich messages, emojis, reactions, and interactive engagement.
+    Send and receive text messages during your calls for clear communication.
 
 -   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name }
-
     ---
 
     Protect your calls from man-in-the-middle attacks, ensuring only your users can decrypt audio, video, and chat.
@@ -230,7 +229,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
     ---
 
-    Keep your meetings secure by blocking unwanted guests and requiring admin approval to join.
+    Keep your meetings secure by blocking unwanted guests and requiring moderator approval to join.
 
 -   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay }
 
@@ -343,7 +342,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
     ---
 
-    Screen sharing with top-tier quality, advanced chat with rich features, file sharing and more.
+    Screen sharing with top-tier quality, virtual backgrounds, chat, recording, and more.
 
 -   __Quick access and flexibility__{ .feature-name }
 
@@ -355,7 +354,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
     ---
 
-    Achieve a professional look and feel with customizable domain, colors and logo.
+    Achieve a professional look and feel with customizable domain and colors.
 
 </div>
 </div>
@@ -370,7 +369,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
--	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features to enhance the learning experience.
+-	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features comming soon to enhance the learning experience.
 
 <a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-elearning.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-elearning.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
 
@@ -388,7 +387,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
     ---
 
-    Live captions and real-time transcriptions. OpenVidu Meet is localized in multiple languages.
+    OpenVidu Meet is localized in multiple languages. Live captions and real-time transcriptions comming soon. 
 
 -   __Persistence and continuity__{ .feature-name }
 
@@ -427,13 +426,13 @@ The most secure videoconference platform is the one you host on your own servers
 
     ---
 
-    Browser-based with no installation needed. Live Captions and real-time transcriptions with specific support for medical language models.
+    Browser-based with no installation needed. Live Captions and real-time transcriptions with specific support for medical language models coming soon.
 
 -   __Communication and clarity__{ .feature-name }
 
     ---
 
-    Up to 4K and HiFi audio for clear communication between practitioners and patients. File sharing for medical documents and images.
+    Up to 4K and HiFi audio for clear communication between practitioners and patients. File sharing for medical documents and images coming soon.
 
 </div>
 </div>
@@ -488,7 +487,7 @@ OpenVidu Meet is available in two editions:
 
 ### OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.9em; vertical-align: top">COMMUNITY</span>
 
-It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, advanced chat, virtual backgrounds, and more.
+It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
 
