@@ -373,7 +373,7 @@ p:has(> a.glightbox) {
   }
 
   .log-in-div {
-    width: 5rem !important;
+    width: 7rem !important;
     font-size: 0.7rem !important;
     margin-left: 1em !important;
     margin-right: 0.7em !important;
@@ -464,7 +464,7 @@ video::-internal-media-controls-overlay-cast-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 7rem;
+  width: 10rem;
 }
 
 .log-in-div:has(a#account-btn) {
@@ -499,51 +499,6 @@ a#account-btn .user-name {
   white-space: nowrap;
   margin-right: 0.3em;
 }
-
-/* Log in spinner */
-.lds-ripple {
-  display: inline-block;
-  position: relative;
-  width: 40px;
-  height: 40px;
-  margin-top: 7px;
-}
-
-.lds-ripple div {
-  position: absolute;
-  border: 4px solid #fff;
-  opacity: 1;
-  border-radius: 50%;
-  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-
-.lds-ripple div:nth-child(2) {
-  animation-delay: -0.5s;
-}
-
-.navbar-small .lds-ripple div {
-  border-color: #1c1c1c;
-}
-
-@keyframes lds-ripple {
-  0% {
-    top: 20px;
-    left: 20px;
-    width: 0;
-    height: 0;
-    opacity: 1;
-  }
-
-  100% {
-    top: 0px;
-    left: 0px;
-    width: 40px;
-    height: 40px;
-    opacity: 0;
-  }
-}
-
-/* Log in spinner */
 
 #pricing-table th,
 #pricing-table td {
