@@ -20,27 +20,6 @@ tags:
 
 # OpenVidu research works
 
-## Article overview
-
-- [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](#quality-of-experience-under-huge-load-for-webrtc-applications-a-case-study-of-three-media-servers)
-- [Cost-effective load testing of WebRTC applications](#cost-effective-load-testing-of-webrtc-applications)
-- [Quality-of-Experience driven configuration of WebRTC services through automated testing](#quality-of-experience-driven-configuration-of-webrtc-services-through-automated-testing)
-- [A Survey of the Selenium Ecosystem](#a-survey-of-the-selenium-ecosystem)
-- [Assessment of QoE for Video and Audio in WebRTC Applications Using Full-Reference Models](#assessment-of-qoe-for-video-and-audio-in-webrtc-applications-using-full-reference-models)
-- [Understanding and estimating quality of experience in WebRTC applications](#understanding-and-estimating-quality-of-experience-in-webrtc-applications)
-- [Practical Evaluation of VMAF Perceptual Video Quality for WebRTC Applications](#practical-evaluation-of-vmaf-perceptual-video-quality-for-webrtc-applications)
-- [NUBOMEDIA: The First Open Source WebRTC PaaS](#nubomedia-the-first-open-source-webrtc-paas)
-- [Kurento: The Swiss Army Knife of WebRTC Media Servers](#kurento-the-swiss-army-knife-of-webrtc-media-servers)
-- [WebRTC Testing: Challenges and Practical Solutions](#webrtc-testing-challenges-and-practical-solutions)
-- [Designing and evaluating the usability of an API for real-time multimedia services in the Internet](#designing-and-evaluating-the-usability-of-an-api-for-real-time-multimedia-services-in-the-internet)
-- [WebRTC Testing: State of the Art](#webrtc-testing-state-of-the-art)
-- [Analysis of Video Quality and End-to-End Latency in WebRTC](#analysis-of-video-quality-and-end-to-end-latency-in-webrtc)
-- [Kurento: The WebRTC Modular Media Server](#kurento-the-webrtc-modular-media-server)
-- [Testing Framework for WebRTC Services](#testing-framework-for-webrtc-services)
-- [NUBOMEDIA: An Elastic PaaS Enabling the Convergence of Real-Time and Big Data Multimedia](#nubomedia-an-elastic-paas-enabling-the-convergence-of-real-time-and-big-data-multimedia)
-- [Design and Implementation of a High Performant PaaS Platform for Creating Novel Real-Time Communication Paradigms](#design-and-implementation-of-a-high-performant-paas-platform-for-creating-novel-real-time-communication-paradigms)
-- [Authentication, Authorization, and Accounting in WebRTC PaaS Infrastructures: The Case of Kurento](#authentication-authorization-and-accounting-in-webrtc-paas-infrastructures-the-case-of-kurento)
-
 ## Index
 
 - [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](#quality-of-experience-under-huge-load-for-webrtc-applications-a-case-study-of-three-media-servers)
