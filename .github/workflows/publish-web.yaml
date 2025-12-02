@@ -29,11 +29,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: 3.x
 
       - name: Install dependencies
         run: |
           pip install mike mkdocs-material mkdocs-glightbox mkdocs-llmstxt
+          sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+          sudo apt-get install -y pngquant
 
       - name: Configure Git Credentials
         run: |
