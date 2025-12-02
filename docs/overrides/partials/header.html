@@ -160,7 +160,11 @@
     {% endif %}
 
     <div class="md-typeset log-in-div">
+      {% if page.title != "Account" %}
+      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">Your OpenVidu Account</a>
+      {% else %}
       <div id="login-loader" class="lds-ripple"><div></div><div></div></div>
+      {% endif %}
     </div>
 
   </nav>
@@ -172,8 +176,3 @@
     {% endif %}
   {% endif %}
 </header>
-
-<!-- We need this component here to check if user is logged in any page -->
-{% if page.title != "Account" %}
-<openvidu-register style="display: none"></openvidu-register>
-{% endif %}
