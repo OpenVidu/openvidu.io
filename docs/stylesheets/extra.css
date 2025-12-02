@@ -906,6 +906,12 @@ h2.meetplatform-slogan {
   color: var(--md-primary-bg-color); /* Use accent color on hover */
 }
 
+.md-tabs__dropdown-link--active {
+  opacity: 1;
+  color: var(--md-primary-bg-color);
+  font-weight: 700;
+}
+
 /* Adjust caret */
 .md-tabs__link .dropdown-caret {
   margin-left: 5px;

@@ -49,8 +49,14 @@
       {% for nav_item in nav.items %}
         {% if nav_item in ns.dropdown_items %}
             {% if nav_item == ns.dropdown_items[0] %}
-                <li class="md-tabs__item md-tabs__item--dropdown">
-                    <a href="#" class="md-tabs__link">
+                {% set ns.company_active = false %}
+                {% for drop_item in ns.dropdown_items %}
+                    {% if drop_item.active %}
+                        {% set ns.company_active = true %}
+                    {% endif %}
+                {% endfor %}
+                <li class="md-tabs__item md-tabs__item--dropdown{% if ns.company_active %} md-tabs__item--active{% endif %}">
+                    <a href="#" class="md-tabs__link{% if ns.company_active %} md-tabs__link--active{% endif %}">
                         Company
                         <span class="dropdown-caret"></span>
                     </a>

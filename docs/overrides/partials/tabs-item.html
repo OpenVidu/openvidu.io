@@ -79,7 +79,7 @@
   {% if not url and nav_item.children %}
     {% set url = nav_item.children[0].url %}
   {% endif %}
-  <a href="{{ url | url }}" class="md-tabs__dropdown-link">
+  <a href="{{ url | url }}" class="md-tabs__dropdown-link{% if nav_item.active %} md-tabs__dropdown-link--active{% endif %}">
     {{ render_content(nav_item) }}
   </a>
 {% endmacro %}
