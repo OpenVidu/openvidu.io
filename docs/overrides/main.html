@@ -10,10 +10,18 @@
 {% endblock %}
 
 {% block site_meta %}
+<style id="antiClickjack">body{display:none !important;}</style>
+<script>
+  if (self === top) {
+    var antiClickjack = document.getElementById("antiClickjack");
+    antiClickjack.parentNode.removeChild(antiClickjack);
+  } else {
+    top.location = self.location;
+  }
+</script>
+
 {{ super() }}
-<!-- Security headers -->
-<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
 {% endblock %}
 
 {% block libs %}
