@@ -1,6 +1,21 @@
 <!-- Elements added to main will be displayed on all pages -->
 {% extends "base.html" %}
 
+{% block site_meta %}
+<style id="antiClickjack">body{display:none !important;}</style>
+<script>
+  if (self === top) {
+    var antiClickjack = document.getElementById("antiClickjack");
+    antiClickjack.parentNode.removeChild(antiClickjack);
+  } else {
+    top.location = self.location;
+  }
+</script>
+
+{{ super() }}
+
+{% endblock %}
+
 {% block libs %}
 
 {{ super() }}
