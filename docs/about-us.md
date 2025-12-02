@@ -1,5 +1,5 @@
 ---
-title: About us
+title: About Us
 description: Discover the people behind OpenVidu.
 hide:
   - navigation
@@ -8,6 +8,7 @@ hide:
   - search-bar
   - version-selector
 tags:
+  - dropdown
   - setupwowjs
 ---
 
@@ -17,7 +18,7 @@ tags:
   }
 </style>
 
-# OpenVidu Team
+# About Us
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
@@ -211,6 +212,6 @@ My experience includes working with the most common public clouds and with their
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 1em">Some of us are researchers, and push OpenVidu forward by advancing the state-of-the-art on the field with our passion for science and technology!</h2>
   <div class="home-buttons">
-    <a href="/research/" class="md-button home-secondary-button">Have a look at our research works</a>
+    <a href="/research" class="md-button home-secondary-button">Have a look at our research works</a>
   </div>
 </div>

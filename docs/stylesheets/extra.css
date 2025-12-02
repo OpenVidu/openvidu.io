@@ -900,3 +900,82 @@ h2.meetplatform-slogan {
 .acknowledgments-footer {
   filter: saturate(0.8) contrast(0.92) brightness(0.96);
 }
+
+/* Dropdown Menu */
+.md-tabs,
+.md-tabs__list {
+  overflow: visible !important;
+  contain: none !important;
+}
+
+.md-tabs__item--dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.md-tabs__dropdown {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  background-color: var(--md-primary-fg-color);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  top: 100%;
+  left: 0;
+  padding: 5px 0;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.md-tabs__item--dropdown:hover .md-tabs__dropdown {
+  visibility: visible;
+  opacity: 1;
+}
+
+.md-tabs__dropdown-link {
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.7rem; /* Match tab font size roughly */
+  white-space: nowrap;
+  opacity: 0.7;
+  transition: opacity 0.25s;
+}
+
+.md-tabs__dropdown-link:hover {
+  opacity: 1;
+  color: var(--md-primary-bg-color); /* Use accent color on hover */
+}
+
+/* Adjust caret */
+.md-tabs__link .dropdown-caret {
+  margin-left: 5px;
+  width: .9rem;
+  height: .9rem;
+  font-size: .7rem;
+  line-height: 1.3;
+  vertical-align: middle;
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.13, 0.82, 0.49, 1);
+  transform: rotate(90deg);
+  background-color: currentColor;
+  -webkit-mask-image: var(--md-nav-icon--next);
+  mask-image: var(--md-nav-icon--next);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.md-tabs__item--dropdown:hover .dropdown-caret {
+  transform: rotate(270deg);
+}
+
+/* Keep parent link highlighted when hovering dropdown */
+.md-tabs__item--dropdown:hover .md-tabs__link {
+  opacity: 1;
+}
