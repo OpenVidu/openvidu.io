@@ -46,7 +46,7 @@ My main research activities are related to software engineering, software testin
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorMG.png" />
+<img class="dark-img svg-img about-us-img" src="../assets/images/about-us/authorMG.jpg" />
 </figure>
 </div>
 
@@ -73,7 +73,7 @@ My main research activities are related to software testing and real-time commun
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorFG.png" />
+<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorFG.jpg" />
 </figure>
 </div>
 
@@ -98,7 +98,7 @@ My academic background consists of a Double Degree in Computer Science and Softw
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorPF.png" />
+<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorPF.jpg" />
 </figure>
 </div>
 
@@ -123,7 +123,7 @@ My experience centers on Node.js, TypeScript, and Angular, complemented by stron
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorCS.png" />
+<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorCS.jpg" />
 </figure>
 </div>
 
@@ -151,14 +151,14 @@ My expertise spans backend development (Java, Node.js, Golang), frontend develop
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorCR.png" />
+<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorCR.jpg" />
 </figure>
 </div>
 
 ---
 
 <div class="grid-50 tablet-grid-50" markdown>
-## Juan Carlos
+## Juan Carlos Moreno
 
 **I'm currently working as a Full-Stack Software Engineer, contributing to the design, development, and deployment of tools that enhance the OpenVidu platform.**
 
@@ -176,7 +176,7 @@ I have professional experience mainly with Node.js, TypeScript, and Angular, as 
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorJC.png" />
+<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorJCM.jpg" />
 </figure>
 </div>
 
@@ -201,7 +201,7 @@ My experience includes working with the most common public clouds and with their
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/about-us/authorS.png" />
+<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorSF.jpg" />
 </figure>
 </div>
 
