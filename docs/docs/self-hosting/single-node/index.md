@@ -28,3 +28,7 @@ If you want to upgrade your OpenVidu Single Node <span style="font-size: 12px;" 
 - [**Azure: upgrade OpenVidu Single Node Community**](./azure/upgrade.md)
 - [**Google Cloud Platform: upgrade OpenVidu Single Node Community**](./gcp/upgrade.md)
 
+We also offer installation tutorials for other Cloud Providers:
+
+- [**Oracle Cloud Infrastructure**](./oracle/install-tutorial.md)
+

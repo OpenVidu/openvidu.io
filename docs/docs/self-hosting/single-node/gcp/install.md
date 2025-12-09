@@ -26,7 +26,7 @@ To deploy OpenVidu into Google Cloud Platform you just need to log into your [In
 
 ## Deployment details
 
---8<-- "shared/self-hosting/gcp-info-deployment.md" 
+--8<-- "shared/self-hosting/gcp-info-deployment.md"
 
 To deploy OpenVidu, first you need to create a new deployment in the top left button as you can see in the image.
 
