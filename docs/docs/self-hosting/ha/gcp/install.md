@@ -7,10 +7,6 @@ tags:
 
 # OpenVidu High Availability installation: Google Cloud Platform
 
-!!! warning
-
-    Google Cloud Platform deployments are considered in Beta in version 3.4.X of OpenVidu.
-
 !!! info
     
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
@@ -68,6 +64,9 @@ Once you click the button you will see this window.
 </figure>
 
 Fill **Deployment ID** with any name that you desire like openvidu-High Availability-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
+
+!!! warning
+    If you change the region in the previous step, don't forget to change the region and [zone](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en) in the terraform values.
 
 ??? details "New Service Account Steps"
 

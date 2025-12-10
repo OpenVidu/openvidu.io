@@ -7,10 +7,6 @@ tags:
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
 
-!!! warning
-
-    Google Cloud Platform deployments are considered in Beta in version 3.4.X of OpenVidu.
-
 This section contains the instructions of how to deploy a production-ready OpenVidu Single Node deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
 To deploy OpenVidu into Google Cloud Platform you just need to log into your [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
@@ -41,6 +37,9 @@ Once you click the button you will see this window.
 </figure>
 
 Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
+
+!!! warning
+    If you change the region in the previous step, don't forget to change the region and [zone](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en) in the terraform values.
 
 ??? details "New Service Account Steps"
 
