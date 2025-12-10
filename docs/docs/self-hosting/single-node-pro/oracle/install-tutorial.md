@@ -21,13 +21,17 @@ This page documents creating a VM in Oracle Cloud Infrastructure (OCI) and updat
     ![OCI create instance](../../../../assets/images/self-hosting/single-node/oracle/create-instance.png){ .svg-img .dark-img }
     </figure>
 3. Change the name of the instance (e.g., openvidu-singlenode) or leave it as it was, as you prefer.
-4. Change the image to Ubuntu _"Canonical Ubuntu 24.04"_.
+4. Change the image to Ubuntu _"Canonical Ubuntu 24.04"_ or to .
     <figure markdown>
     ![Instance select image](../../../../assets/images/self-hosting/single-node/oracle/select-image.png){ .svg-img .dark-img }
     </figure>
 5. Change the shape for the shape you want in your openvidu server, we recommend to use **1 OCPU or more and at least 4 GB of RAM** for OpenVidu to work correctly, then click on _"Next"_.
+
+    !!! note
+        You can use ARM instances, OpenVidu supports ARM and there is a [**Always Free-elegible**](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm) Tier that includes an ARM instance for free.
+
 6. Don't touch anything in the **Security** tab, just click on _"Next"_.
-7. Create a new ´VNIC´ with a new ´virtual cloud network´ and new ´public subnet´.
+7. Create a new `VNIC` with a new `virtual cloud network` and new `public subnet`.
     <figure markdown>
     ![Network configuration](../../../../assets/images/self-hosting/single-node/oracle/network-config.png){ .svg-img .dark-img }
     </figure>

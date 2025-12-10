@@ -27,7 +27,7 @@ This page documents creating a VM in Oracle Cloud Infrastructure (OCI) and updat
     </figure>
 5. Change the shape for the shape you want in your openvidu server, we recommend to use **1 OCPU or more and at least 4 GB of RAM** for OpenVidu to work correctly, then click on _"Next"_.
 6. Don't touch anything in the **Security** tab, just click on _"Next"_.
-7. Create a new ´VNIC´ with a new ´virtual cloud network´ and new ´public subnet´.
+7. Create a new `VNIC` with a new `virtual cloud network` and new `public subnet`.
     <figure markdown>
     ![Network configuration](../../../../assets/images/self-hosting/single-node/oracle/network-config.png){ .svg-img .dark-img }
     </figure>
