@@ -144,6 +144,7 @@ nav:
                   - Install: docs/self-hosting/single-node-pro/gcp/install.md
                   - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/gcp/upgrade.md
+              - Oracle: docs/self-hosting/single-node-pro/oracle/install-tutorial.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
