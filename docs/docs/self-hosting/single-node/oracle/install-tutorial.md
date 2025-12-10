@@ -101,9 +101,12 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) will 
 ---
 
 ## 4. SSH to instance, OpenVidu installation and firewall rules.
+!!! warning 
+    Open ports before installing OpenVidu so you don't have any conflict.
+    
 1. SSH into the instance:
 ```
-ssh ubuntu@PUBLIC_IP
+ssh -i private_key_downloaded.key ubuntu@PUBLIC_IP
 sudo apt update && sudo apt upgrade -y
 ```
 2. Now add firewall rules in the instance just like before with the security rules. First you need to install firewall-cmd and start it, you can do it with this commands:
@@ -112,7 +115,14 @@ sudo apt install firewalld -y
 systemctl enable firewalld
 systemctl start firewalld
 ```
-3. The firewall rules are the following:
+3. Then clean the iptables rules, accept all inputs, deactivate iptables at start and restart network service:
+```
+sudo iptables -F
+sudo iptables -P INPUT ACCEPT
+sudo systemctl disable netfilter-persistent
+
+```
+4. The firewall rules are the following:
 ```
 firewall-cmd --add-port=80/tcp
 firewall-cmd --permanent --add-port=80/tcp
@@ -154,14 +164,17 @@ firewall-cmd --permanent --add-port=50000-60000/udp
 
 ```
 
-Finish it with the next command to apply the rules and to check if the rules are correct
+Finish it with the next command to apply the rules and to check if the rules are correct:
 ```
 firewall-cmd --reload
+firewall-cmd --runtime-to-permanent
+
 ```
 ```
 firewall-cmd --list-all
+
 ```
-4. Follow the [Install instructions](../on-premises/install.md) for the On-Premises deployment to install OpenVidu in the instance.
+5. Follow the [Install instructions](../on-premises/install.md) for the On-Premises deployment to install OpenVidu in the instance.
 
 
 ---
