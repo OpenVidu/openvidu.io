@@ -44,7 +44,7 @@ Once you click the button you will see this window.
 Fill **Deployment ID** with any name that you desire like openvidu-singlenodepro-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 
 !!! warning
-    If you change the region in the previous step, don't forget to change the region and [zone](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en) in the terraform values.
+    If you change the region in the previous step, don't forget to change the [region and zone](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en) in the terraform values.
 
 ??? details "New Service Account Steps"
 
@@ -109,12 +109,12 @@ In Google Cloud Platform there is no such thing like template with parameters, y
       </tr>
       <tr>
         <td>region</td>
-        <td>"europe-west1"</td>
+        <td>"europe-west2"</td>
         <td>GCP region where resources will be created.</td>
       </tr>
       <tr>
         <td>zone</td>
-        <td>"europe-west1-b"</td>
+        <td>"europe-west2-b"</td>
         <td>GCP zone that some resources will use.</td>
       </tr>
       <tr>
