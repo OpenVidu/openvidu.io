@@ -388,11 +388,10 @@ About the exported variables:
         ```
 
         !!! warning
-            Store savelly your current Meet Admin user and password, you will need them to access OpenVidu Meet after the restore.
+            Store safelly your current Meet Admin user and password, you will need them to access OpenVidu Meet after the restore.
 
         !!! warning
             Take into account that admin database users and roles are not backed up with this method. If you need to back them up, remove the last `rm -rf` command, but ensure your new installation has the same admin user for the restore to work.
-
 
     4. Mirror S3 buckets to the staging directory:
 
