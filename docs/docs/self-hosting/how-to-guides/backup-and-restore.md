@@ -310,8 +310,13 @@ export OV_BACKUP_DIR="$HOME/openvidu-backups"
 export OPENVIDU_NODE_IP="<OPENVIDU_NODE_IP>"
 export MONGO_ADMIN_USER="<MONGO_ADMIN_USER>"
 export MONGO_ADMIN_PASSWORD="<MONGO_ADMIN_PASSWORD>"
+# The following are only needed if you are using the default MinIO instance
+# that comes with OpenVidu deployments. If you are using AWS S3
+# or any other external S3-compatible service, skip these two variables.
 export MINIO_ADMIN_USER="<MINIO_ADMIN_USER>"
 export MINIO_ADMIN_PASSWORD="<MINIO_ADMIN_PASSWORD>"
+# If you are using AWS S3, use the appropriate endpoint, e.g.:
+# export RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/<bucket>"
 export RESTIC_REPOSITORY="s3:https://backup.example.com/openvidu-data"
 export RESTIC_PASSWORD="<RESTIC_PASSWORD>"
 export RESTIC_HOST_TAG="openvidu-data-backups"
@@ -326,7 +331,7 @@ About the exported variables:
 
 - `<OPENVIDU_NODE_IP>`: IP address used to reach the OpenVidu node from the backup machine. In Single Node deployments this is the node’s own IP; in Elastic/HA deployments use the IP of any master node.
 - `<MONGO_ADMIN_USER>` and `<MONGO_ADMIN_PASSWORD>`: MongoDB admin credentials (`MONGO_ADMIN_USERNAME`, `MONGO_ADMIN_PASSWORD`).
-- `<MINIO_ADMIN_USER>` and `<MINIO_ADMIN_PASSWORD>`: MinIO credentials (`MINIO_ADMIN_USERNAME`, `MINIO_ADMIN_PASSWORD`).
+- `<MINIO_ADMIN_USER>` and `<MINIO_ADMIN_PASSWORD>`: MinIO credentials (`MINIO_ADMIN_USERNAME`, `MINIO_ADMIN_PASSWORD`). Use them only if you are using the default MinIO instance that comes with OpenVidu deployments. If you are using AWS S3 or any other external S3-compatible service, skip these two variables.
 - `RESTIC_REPOSITORY`: S3 endpoint where the encrypted restic backup repository will live (for example, `s3:https://s3.amazonaws.com/<bucket>` or `s3:http://minio-backup.local:9000/<bucket>`).
 - `RESTIC_PASSWORD`: Strong password that encrypts the restic backup repository. Keep it safe; you need it for every restore.
 - `RESTIC_HOST_TAG`: Label that identifies the host in restic snapshots. Adjust it if you manage several OpenVidu environments from the same backup machine.
@@ -339,7 +344,7 @@ About the exported variables:
     1. Prepare the staging directories (first run only):
 
         ```bash
-        mkdir -p "$OV_BACKUP_DIR/backup/minio" "$OV_BACKUP_DIR/backup/mongodb"
+        mkdir -p "$OV_BACKUP_DIR/backup/s3" "$OV_BACKUP_DIR/backup/mongodb"
         ```
 
     2. Initialize the remote restic backup repository the first time you run the backup:
@@ -359,10 +364,16 @@ About the exported variables:
     3. Dump MongoDB data into the staging directory:
 
         ```bash
-        rm -rf "$OV_BACKUP_DIR/backup/mongodb/dump"
-        docker run --rm \
+        # Remove previous dumps
+        sudo rm -rf "$OV_BACKUP_DIR/backup/mongodb/dump"
+
+        # Create dump directory with correct permissions
+        mkdir -p "$OV_BACKUP_DIR/backup/mongodb"
+        sudo chown 999:999 "$OV_BACKUP_DIR/backup/mongodb"
+
+        # Dump all databases with oplog for point-in-time recovery
+        sudo docker run --rm \
             --network host \
-            --user "$(id -u):$(id -g)" \
             -v "$OV_BACKUP_DIR/backup/mongodb":/backup \
             mongo:latest mongodump \
                 --host "${OPENVIDU_NODE_IP}" \
@@ -371,30 +382,86 @@ About the exported variables:
                 --password "${MONGO_ADMIN_PASSWORD}" \
                 --out /backup/dump \
                 --oplog
+
+        # Remove admin database dump to avoid restoring users/roles
+        sudo rm -rf "$OV_BACKUP_DIR/backup/mongodb/dump/admin"
         ```
 
-    4. Mirror MinIO buckets to the staging directory:
+        !!! warning
+            Store savelly your current Meet Admin user and password, you will need them to access OpenVidu Meet after the restore.
 
-        ```bash
-        docker run --rm \
-            --network host \
-            --user "$(id -u):$(id -g)" \
-            -e MC_CONFIG_DIR="/tmp/.mc" \
-            -v "$OV_BACKUP_DIR/backup/minio":/backup \
-            --entrypoint sh \
-            minio/mc:latest -c "\
-                mc alias set openvidu http://${OPENVIDU_NODE_IP}:9100 ${MINIO_ADMIN_USER} ${MINIO_ADMIN_PASSWORD} && \
-                mc ls openvidu | while IFS= read -r line; do \
-                    bucket=\${line##* } && bucket=\${bucket%/} && [ -n \"\${bucket}\" ] && \
-                    mc mirror --overwrite openvidu/\${bucket} /backup/\${bucket}; \
-                done \
-            "
-        ```
+        !!! warning
+            Take into account that admin database users and roles are not backed up with this method. If you need to back them up, remove the last `rm -rf` command, but ensure your new installation has the same admin user for the restore to work.
+
+
+    4. Mirror S3 buckets to the staging directory:
+
+        === "MinIO"
+
+            If you are the default MinIO instance that comes with OpenVidu deployments, run:
+
+            ```bash
+            sudo docker run --rm \
+                --network host \
+                --user "$(id -u):$(id -g)" \
+                -e MC_CONFIG_DIR="/tmp/.mc" \
+                -v "$OV_BACKUP_DIR/backup/s3":/backup \
+                --entrypoint sh \
+                minio/mc:latest -c "\
+                    mc alias set openvidu http://${OPENVIDU_NODE_IP}:9100 ${MINIO_ADMIN_USER} ${MINIO_ADMIN_PASSWORD} && \
+                    mc ls openvidu | while IFS= read -r line; do \
+                        bucket=\${line##* } && bucket=\${bucket%/} && [ -n \"\${bucket}\" ] && \
+                        mc mirror --overwrite openvidu/\${bucket} /backup/\${bucket}; \
+                    done \
+                "
+            ```
+
+        === "AWS/External S3"
+
+            If you are using AWS S3 or any S3-compatible service (other than MinIO), run:
+
+            ```bash
+            # Export OpenVidu S3 credentials and region
+            export OPENVIDU_AWS_ACCESS_KEY_ID=<YOUR_S3_ACCESS_KEY>
+            export OPENVIDU_AWS_SECRET_ACCESS_KEY=<YOUR_S3_SECRET_KEY>
+            export OPENVIDU_AWS_DEFAULT_REGION=<YOUR_S3_REGION>
+            export OPENVIDU_S3_ENDPOINT="https://s3.${OPENVIDU_AWS_DEFAULT_REGION}.amazonaws.com"
+
+            # The name of these buckets can be found in the openvidu.env file as
+            # EXTERNAL_S3_BUCKET_APP_DATA and EXTERNAL_S3_BUCKET_CLUSTER_DATA
+            export EXTERNAL_S3_BUCKET_APP_DATA="openvidu-appdata-xxxxx"
+
+            # (Optional) EXTERNAL_S3_BUCKET_CLUSTER_DATA is only needed for High Availability deployments
+            # and usually can be skipped because it only contains internal metrics cluster data.
+            export EXTERNAL_S3_BUCKET_CLUSTER_DATA="openvidu-clusterdata-xxxxx"
+
+            # Backup application data bucket
+            sudo docker run --rm \
+                --user "$(id -u):$(id -g)" \
+                -v "$OV_BACKUP_DIR/backup/s3":/backup \
+                -e AWS_ACCESS_KEY_ID="$OPENVIDU_AWS_ACCESS_KEY_ID" \
+                -e AWS_SECRET_ACCESS_KEY="$OPENVIDU_AWS_SECRET_ACCESS_KEY" \
+                -e AWS_DEFAULT_REGION="$OPENVIDU_AWS_DEFAULT_REGION" \
+                amazon/aws-cli s3 sync \
+                    --endpoint-url "$OPENVIDU_S3_ENDPOINT" \
+                    "s3://${EXTERNAL_S3_BUCKET_APP_DATA}" "/backup/openvidu-appdata"
+
+            # Optional: Cluster data bucket for HA deployments
+            sudo docker run --rm \
+                --user "$(id -u):$(id -g)" \
+                -v "$OV_BACKUP_DIR/backup/s3":/backup \
+                -e AWS_ACCESS_KEY_ID="$OPENVIDU_AWS_ACCESS_KEY_ID" \
+                -e AWS_SECRET_ACCESS_KEY="$OPENVIDU_AWS_SECRET_ACCESS_KEY" \
+                -e AWS_DEFAULT_REGION="$OPENVIDU_AWS_DEFAULT_REGION" \
+                amazon/aws-cli s3 sync \
+                    --endpoint-url "$OPENVIDU_S3_ENDPOINT" \
+                    "s3://${EXTERNAL_S3_BUCKET_CLUSTER_DATA}" "/backup/openvidu-clusterdata"
+            ```
 
     5. Create a restic snapshot of the staged data and push it to S3:
 
         ```bash
-        docker run --rm \
+        sudo docker run --rm \
             --hostname "$RESTIC_HOST_TAG" \
             -v "$OV_BACKUP_DIR/backup":/backup:ro \
             -e RESTIC_REPOSITORY="$RESTIC_REPOSITORY" \
@@ -413,7 +480,7 @@ About the exported variables:
     6. Verify the snapshot and capture the ID for future restores:
 
         ```bash
-        docker run --rm \
+        sudo docker run --rm \
             -e RESTIC_REPOSITORY="$RESTIC_REPOSITORY" \
             -e RESTIC_PASSWORD="$RESTIC_PASSWORD" \
             -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
@@ -429,7 +496,7 @@ About the exported variables:
     2. List the available snapshots and pick the one you want to recover:
 
         ```bash
-        docker run --rm \
+        sudo docker run --rm \
             -e RESTIC_REPOSITORY="$RESTIC_REPOSITORY" \
             -e RESTIC_PASSWORD="$RESTIC_PASSWORD" \
             -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
@@ -441,10 +508,16 @@ About the exported variables:
     3. Restore the snapshot contents into a local staging directory (replace `<SNAPSHOT_ID>` with the ID selected above):
 
         ```bash
-        rm -rf "$OV_BACKUP_DIR/restore"
+        # Clean previous restore data
+        sudo rm -rf "$OV_BACKUP_DIR/restore"
+        # Create fresh restore directory
         mkdir -p "$OV_BACKUP_DIR/restore"
+
+        # Export the snapshot ID to restore
         export SNAPSHOT_ID="<SNAPSHOT_ID>"
-        docker run --rm \
+
+        # Restore snapshot
+        sudo docker run --rm \
             -v "$OV_BACKUP_DIR/restore":/restore \
             -e RESTIC_REPOSITORY="$RESTIC_REPOSITORY" \
             -e RESTIC_PASSWORD="$RESTIC_PASSWORD" \
@@ -460,9 +533,8 @@ About the exported variables:
     4. Restore MongoDB from the extracted dump:
 
         ```bash
-        docker run --rm \
+        sudo docker run --rm \
             --network host \
-            --user "$(id -u):$(id -g)" \
             -v "$OV_BACKUP_DIR/restore/backup/mongodb":/backup \
             mongo:latest mongorestore \
                 --host "${OPENVIDU_NODE_IP}" \
@@ -484,29 +556,71 @@ About the exported variables:
             ```
             ... Try to execute it with a different `OPENVIDU_NODE_IP` that points to another master node in HA deployments until it succeeds.
 
-    5. Restore MinIO objects by mirroring the buckets back into OpenVidu:
+    5. Restore s3 objects by mirroring the buckets back into OpenVidu:
 
-        ```bash
-        docker run --rm \
-            --network host \
-            --user "$(id -u):$(id -g)" \
-            -e MC_CONFIG_DIR="/tmp/.mc" \
-            -v "$OV_BACKUP_DIR/restore/backup/minio":/backup \
-            --entrypoint sh \
-            minio/mc:latest -c "
-                set -e
-                mc alias set openvidu http://${OPENVIDU_NODE_IP}:9100 ${MINIO_ADMIN_USER} ${MINIO_ADMIN_PASSWORD}
-                for bucket in /backup/*; do
-                    [ -d \"\$bucket\" ] || continue
-                    mc mirror --overwrite \"\$bucket\" \"openvidu/\${bucket##*/}\"
-                done
-            "
-        ```
+        === "MinIO"
+
+            ```bash
+            docker run --rm \
+                --network host \
+                --user "$(id -u):$(id -g)" \
+                -e MC_CONFIG_DIR="/tmp/.mc" \
+                -v "$OV_BACKUP_DIR/restore/backup/s3":/backup \
+                --entrypoint sh \
+                minio/mc:latest -c "
+                    set -e
+                    mc alias set openvidu http://${OPENVIDU_NODE_IP}:9100 ${MINIO_ADMIN_USER} ${MINIO_ADMIN_PASSWORD}
+                    for bucket in /backup/*; do
+                        [ -d \"\$bucket\" ] || continue
+                        mc mirror --overwrite \"\$bucket\" \"openvidu/\${bucket##*/}\"
+                    done
+                "
+            ```
+
+        === "AWS/External S3"
+
+            ```bash
+            # Export OpenVidu S3 credentials and region
+            export OPENVIDU_AWS_ACCESS_KEY_ID=<YOUR_S3_ACCESS_KEY>
+            export OPENVIDU_AWS_SECRET_ACCESS_KEY=<YOUR_S3_SECRET_KEY>
+            export OPENVIDU_AWS_DEFAULT_REGION=<YOUR_S3_REGION>
+            export OPENVIDU_S3_ENDPOINT="https://s3.${OPENVIDU_AWS_DEFAULT_REGION}.amazonaws.com"
+
+            # The name of these buckets can be found in the openvidu.env file as
+            # EXTERNAL_S3_BUCKET_APP_DATA and EXTERNAL_S3_BUCKET_CLUSTER_DATA
+            export EXTERNAL_S3_BUCKET_APP_DATA="openvidu-appdata-xxxxx"
+            # (Optional) EXTERNAL_S3_BUCKET_CLUSTER_DATA is only needed for High Availability deployments
+            # and usually can be skipped because it only contains internal metrics cluster data.
+            export EXTERNAL_S3_BUCKET_CLUSTER_DATA="openvidu-clusterdata-xxxxx"
+
+            # Backup application data bucket
+            sudo docker run --rm \
+                --user "$(id -u):$(id -g)" \
+                -v "$OV_BACKUP_DIR/restore/backup/s3":/backup \
+                -e AWS_ACCESS_KEY_ID="$OPENVIDU_AWS_ACCESS_KEY_ID" \
+                -e AWS_SECRET_ACCESS_KEY="$OPENVIDU_AWS_SECRET_ACCESS_KEY" \
+                -e AWS_DEFAULT_REGION="$OPENVIDU_AWS_DEFAULT_REGION" \
+                amazon/aws-cli s3 sync \
+                    --endpoint-url "$OPENVIDU_S3_ENDPOINT" \
+                    "/backup/openvidu-appdata" "s3://${EXTERNAL_S3_BUCKET_APP_DATA}"
+
+            # Optional: Cluster data bucket for HA deployments
+            sudo docker run --rm \
+                --user "$(id -u):$(id -g)" \
+                -v "$OV_BACKUP_DIR/restore/backup/s3":/backup \
+                -e AWS_ACCESS_KEY_ID="$OPENVIDU_AWS_ACCESS_KEY_ID" \
+                -e AWS_SECRET_ACCESS_KEY="$OPENVIDU_AWS_SECRET_ACCESS_KEY" \
+                -e AWS_DEFAULT_REGION="$OPENVIDU_AWS_DEFAULT_REGION" \
+                amazon/aws-cli s3 sync \
+                    --endpoint-url "$OPENVIDU_S3_ENDPOINT" \
+                    "/backup/openvidu-clusterdata" "s3://${EXTERNAL_S3_BUCKET_CLUSTER_DATA}"
+            ```
+
 
     6. (Optional) Clean the staging directories once you confirm the restore:
 
         ```bash
-        rm -rf "$OV_BACKUP_DIR/restore"
+        sudo rm -rf "$OV_BACKUP_DIR/restore"
         ```
 
 !!! info
