@@ -140,12 +140,12 @@ In Google Cloud Platform there is no such thing like template with parameters, y
       <tr>
         <td>ownPublicCertificate</td>
         <td>(none)</td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate.</td>
+        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format.</td>
       </tr>
       <tr>
         <td>ownPrivateCertificate</td>
         <td>(none)</td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate.</td>
+        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format.</td>
       </tr>
       <tr>
         <td>initialMeetAdminPassword</td>
@@ -185,12 +185,12 @@ In Google Cloud Platform there is no such thing like template with parameters, y
       <tr>
         <td>turnOwnPublicCertificate</td>
         <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.</td>
+        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified. Specify the certificate in base64 format.</td>
       </tr>
       <tr>
         <td>turnOwnPrivateCertificate</td>
         <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.</td>
+        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified. Specify the certificate in base64 format.</td>
       </tr>
     </table>
 </div>

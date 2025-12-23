@@ -133,12 +133,12 @@ In Google Cloud Platform there is no such thing like template with parameters, y
       <tr>
         <td>ownPublicCertificate</td>
         <td>(none)</td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate.</td>
+        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format.</td>
       </tr>
       <tr>
         <td>ownPrivateCertificate</td>
         <td>(none)</td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate.</td>
+        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format.</td>
       </tr>
       <tr>
         <td>initialMeetAdminPassword</td>
