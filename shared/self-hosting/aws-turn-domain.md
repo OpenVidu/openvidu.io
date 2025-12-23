@@ -13,4 +13,4 @@ Note that if you are not using any Domain Name in the [Domain and SSL Certificat
 
     Set the **TurnDomainName** parameter to the domain name you intend to use for your TURN server. It should be pointing to the `PublicElasticIP` specified in the previous section.
 
-    If you are using `letsencrypt` as the **CertificateType** parameter, you can leave the **TurnOwnPublicCertificate** and **TurnOwnPrivateCertificate** parameters empty. If you are using `owncert`, you need to specify the URLs where the public and private certificates are hosted.
+    If you are using `letsencrypt` as the **CertificateType** parameter, you can leave the **TurnOwnPublicCertificate** and **TurnOwnPrivateCertificate** parameters empty. If you are using `owncert`, you need to specify the base64 encoded certificates for the TURN server in these parameters.
