@@ -33,6 +33,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
         --data '{"roomName": "my-room"}'
+        --data '{"roomName": "my-room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -253,13 +254,12 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     }
     ```
 
-The response to this request will be a JSON object as below.
+The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `speakerUrl`, needed to embed the room into your application as explained in step 3.
 
-```json
+```json hl_lines="25-26"
 {
   "roomId": "room-123",
   "roomName": "My Room",
-  "owner": "admin",
   "creationDate": 1620000000000,
   "autoDeletionDate": 1900000000000,
   "autoDeletionPolicy": {
@@ -267,11 +267,12 @@ The response to this request will be a JSON object as below.
     "withRecordings": "close"
   },
   "config": {
-    "recording": {
-      "enabled": true
-    },
     "chat": {
       "enabled": true
+    },
+    "recording": {
+      "enabled": true,
+      "allowAccessTo": "admin_moderator_speaker"
     },
     "virtualBackground": {
       "enabled": true
@@ -280,55 +281,8 @@ The response to this request will be a JSON object as below.
       "enabled": false
     }
   },
-  "roles": {
-    "moderator": {
-      "permissions": {
-        "canRecord": true,
-        "canRetrieveRecordings": true,
-        "canDeleteRecordings": true,
-        "canJoinMeeting": true,
-        "canShareAccessLinks": true,
-        "canMakeModerator": true,
-        "canKickParticipants": true,
-        "canEndMeeting": true,
-        "canPublishVideo": true,
-        "canPublishAudio": true,
-        "canShareScreen": true,
-        "canReadChat": true,
-        "canWriteChat": true,
-        "canChangeVirtualBackground": true
-      }
-    },
-    "speaker": {
-      "permissions": {
-        "canRecord": false,
-        "canRetrieveRecordings": true,
-        "canDeleteRecordings": false,
-        "canJoinMeeting": true,
-        "canShareAccessLinks": false,
-        "canMakeModerator": false,
-        "canKickParticipants": false,
-        "canEndMeeting": false,
-        "canPublishVideo": true,
-        "canPublishAudio": true,
-        "canShareScreen": true,
-        "canReadChat": true,
-        "canWriteChat": true,
-        "canChangeVirtualBackground": true
-      }
-    }
-  },
-  "anonymous": {
-    "moderator": {
-      "enabled": true,
-      "accessUrl": "http://localhost:6080/room/room-123?secret=123456"
-    },
-    "speaker": {
-      "enabled": true,
-      "accessUrl": "http://localhost:6080/room/room-123?secret=654321"
-    }
-  },
-  "accessUrl": "http://localhost:6080/room/room-123",
+  "moderatorUrl": "http://localhost:6080/room/room-123?secret=123456",
+  "speakerUrl": "http://localhost:6080/room/room-123?secret=654321",
   "status": "open",
   "meetingEndAction": "none"
 }
@@ -336,22 +290,17 @@ The response to this request will be a JSON object as below.
 
 ## 3. Get the room URL
 
-To embed a room into your application's frontend you need a valid **room access link**. You can copy the anonymous room access link for each role from the "Rooms" page in OpenVidu Meet console:
+To embed a room into your application's frontend you need the **room URL**. You can copy the room URL for each participant role from the "Rooms" page in OpenVidu Meet console:
 
 <a class="glightbox" href="../../../assets/images/meet/embedded/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/share-room-link.png" loading="lazy" class="round-corners"/></a>
 
 ### Automating room URL retrieval
 
-You can get the room URL programmatically using the [OpenVidu Meet REST API](./reference/rest-api.md). Anonymous room access links (for unidentified users) are available in properties `anonymous.moderator.accessUrl` and `anonymous.speaker.accessUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../reference/api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
+You can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
 
-- [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../reference/api.html#/operations/createRoom){:target="_blank"}
-- [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../reference/api.html#/operations/getRoom){:target="_blank"}
-- [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](../reference/api.html#/operations/getRooms){:target="_blank"}
-
-!!! warning
-    Anonymous access can be disabled for specific roles or completely. By default, both moderator and speaker anonymous access are enabled. Check the `anonymous.moderator.enabled` and `anonymous.speaker.enabled` properties in the room response to verify availability.
-
-    If anonymous access is not available for your use case, you must use a **room member URL** instead. Room members provide identified access with custom permissions and fixed participant names. See [Room members](../features/users-and-permissions.md#room-members) for more information on how to create and use member URLs.
+- [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}
+- [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"}
+- [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="_blank"}
 
 ## 4. Embed the room into your application
 

@@ -8,7 +8,7 @@ tags:
 
 ## Recording a meeting
 
-Recordings must be started by a participant with `canRecord` permission in the meeting view (see [Participant roles in a room](./users-and-permissions.md#participant-roles-in-a-room)).
+Recordings must be started by a participant with role "Moderator" in the meeting view (see [Participant roles in a room](./users-and-permissions.md#participant-roles-in-a-room)).
 
 <a class="glightbox" href="../../../assets/videos/meet/start-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/start-recording.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -16,7 +16,7 @@ While the recording is active, all participants in the meeting will see an indic
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/recording-indicator.png" data-type="image" data-desc-position="bottom" data-gallery="gallery2"><img src="../../../assets/images/meet/recordings/recording-indicator.png" loading="lazy"/></a>
 
-To stop the recording, a participant with `canRecord` permission must simply click the "Stop recording" button. The recording will be automatically saved in the OpenVidu Meet server.
+To stop the recording, a participant with role "Moderator" must simply click the "Stop recording" button. The recording will be automatically saved in the OpenVidu Meet server.
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/stop-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/recordings/stop-recording.png" loading="lazy"/></a>
 

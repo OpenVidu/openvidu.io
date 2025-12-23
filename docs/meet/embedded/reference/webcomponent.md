@@ -21,7 +21,7 @@ Add the `<openvidu-meet>` tag to your HTML. This will embed OpenVidu Meet interf
 The only required attribute is **`room-url`**, which determines the room to join. Different instances of the web component using the same room URL will access the same meeting.
 
 !!! info
-	See [Getting room access links](../../features/rooms-and-meetings.md#getting-room-access-links) for different ways to obtain a room URL.
+	You can get a room's URL programmatically from your application's backend: properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"}.
 
 ## API Reference
 
@@ -70,7 +70,7 @@ Listen to events using JavaScript event listeners:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.addEventListener('joined', (event) => {
+openviduMeet.addEventListener('JOINED', (event) => {
 	console.log('The local participant has joined the room!', event);
 });
 ```
@@ -80,11 +80,11 @@ You can also use the API `on` | `once` | `off`:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.on('joined', (event) => {
+openviduMeet.on('JOINED', (event) => {
 	console.log('The local participant has joined the room!', event);
 });
 
-openviduMeet.once('left', (event) => {
+openviduMeet.once('LEFT', (event) => {
 	console.log('The local participant has left the room!', event);
 });
 ```

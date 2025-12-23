@@ -13,7 +13,7 @@ Create a direct link to an OpenVidu Meet room using a simple HTML anchor tag:
 When users click the link, they'll be redirected to OpenVidu Meet in their browser, ready to join the room.
 
 !!! info
-    See [Getting room access links](../../features/rooms-and-meetings.md#getting-room-access-links) for different ways to obtain a room URL.
+    You can get room URLs programmatically from your backend using the [REST API](./api.html#/schemas/MeetRoom){:target="\_blank"} properties `moderatorUrl` or `speakerUrl`.
 
 ## API Reference
 
