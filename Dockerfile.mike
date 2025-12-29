@@ -1,4 +1,4 @@
-FROM squidfunk/mkdocs-material:9.6.20
+FROM squidfunk/mkdocs-material:9.7.0
 RUN pip install mkdocs-glightbox mkdocs-llmstxt
 RUN pip install mike
 RUN mike deploy

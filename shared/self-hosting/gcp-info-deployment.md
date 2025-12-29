@@ -1,0 +1,2 @@
+!!! info
+    We recommend to create a new project to deploy OpenVidu there, avoiding possible conflicts between resources. Enable [Secrets Manager Api](https://console.cloud.google.com/security/secret-manager) first in that project and then deploy the stack. You might need to deploy multiple times to let the APIs activate.

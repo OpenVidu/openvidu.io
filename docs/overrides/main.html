@@ -10,10 +10,18 @@
 {% endblock %}
 
 {% block site_meta %}
+<style id="antiClickjack">body{display:none !important;}</style>
+<script>
+  if (self === top) {
+    var antiClickjack = document.getElementById("antiClickjack");
+    antiClickjack.parentNode.removeChild(antiClickjack);
+  } else {
+    top.location = self.location;
+  }
+</script>
+
 {{ super() }}
-<!-- Security headers -->
-<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
 {% endblock %}
 
 {% block libs %}
@@ -63,14 +71,12 @@
 {% endblock %}
 
 {% block outdated %}
-<span class="outdated-warning-text"
-  >Warning: You are reading docs for an old version<br
-/></span>
+<span class="outdated-warning-text">Warning: You are reading docs for an old version<br /></span>
 <a href="#" id="latest-version-link">
   <strong>GO TO LATEST VERSION</strong>
 </a>
 <script>
-  (function() {
+  (function () {
     const link = document.getElementById('latest-version-link');
     if (link) {
       const currentPath = window.location.pathname;
@@ -91,10 +97,10 @@
 
 <!-- Add scripts that need to run before here -->
 
-<script src="/javascripts/target-blank.js"></script>
+<script src="{{ 'javascripts/target-blank.js' | url }}"></script>
 
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
-<script src="/javascripts/wow.min.js"></script>
+<script src="{{ 'javascripts/wow.min.js' | url }}"></script>
 <script>
   window.setupWowJs();
 </script>
@@ -107,11 +113,15 @@
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
-<script src="/javascripts/flickity.pkgd.min.js"></script>
+<script src="{{ 'javascripts/flickity.pkgd.min.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
-<script src="/javascripts/glightbox-custom-gallery.js"></script>
+<script src="{{ 'javascripts/glightbox-custom-gallery.js' | url }}"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "copyclipboard" in page.meta.tags %}
+<script src="/javascripts/copy-clipboard.js"></script>
 {% endif %}
 
 {{ super() }}
@@ -123,11 +133,11 @@
 {% block styles %}
 
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/animate.min.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/animate.min.css' | url }}" />
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/flickity.min.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
 {% endif %}
 
 <style>
@@ -163,26 +173,27 @@
   div.md-search {
     display: none;
   }
+
   label.md-header__button.md-icon[for="__search"] {
     display: none;
   }
 </style>
 {% endif %}
 {% if "version-selector" in page.meta.hide %}
-  <style>
-    div.md-version {
-      display: none;
-    }
-  </style>
+<style>
+  div.md-version {
+    display: none;
+  }
+</style>
 {% endif %}
 {% endif %}
 
 {% if page.meta.tags and "Platform" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/platform.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/platform.css' | url }}" />
 {% endif %}
 
 {% if page.meta.tags and "Meet" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/meet.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
 {% endif %}

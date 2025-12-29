@@ -1,62 +1,64 @@
 ---
-title: Rooms and meetings
+title: Rooms and meetings in OpenVidu Meet
+description: Understand the difference between rooms and meetings in OpenVidu Meet, and learn how to
 tags:
   - setupcustomgallery
 ---
 
+# Rooms and meetings in OpenVidu Meet
+
+Understanding **Rooms** and **Meetings** is essential to getting the most out of OpenVidu Meet. These core concepts define how participants interact and how video calls are organized.
+
+
 ## Room vs meeting
 
-It is important to understand these core concepts of OpenVidu Meet:
+- **Room**: A persistent virtual space designed to host one or more meetings. Think of it as a physical conference room—customizable with a name, appearance, and security settings.
+- **Meeting**: A temporary session within a room where participants join in real-time to communicate, share content, and collaborate. It's like a scheduled event in a conference room.
 
-- A **room** is a persistent virtual space used to host one or more meetings. Its real-world counterpart is a physical conference room in a building: you can name it, lock it, change its appearance, etc.
-- A **meeting** is a temporary session that occurs within a room, where participants can join and interact in real-time. Its real-world counterpart is a scheduled event that takes place in a specific room, where authorized people meet, talk and share information.
 
-Rooms host meetings following these principles:
+### Key principles
 
-- First you create a room. Then you can host a meeting in the room.
+- Create a room first, then start meetings within it.
 - One room can host just one meeting at a time, but it can be reused for multiple meetings over time.
-- Every room has a **room link**. A user connecting to a room link will either start a new meeting (if no meeting is currently active in the room) or join the existing meeting (if there is one).
+- Every room has a **room link**. Users connecting to this link will either start a new meeting (if none is active) or join the ongoing meeting.
 
 ## Rooms
 
 ### Creating a room
 
-As an administrator, you can create a new room directly from the "Rooms" page in OpenVidu Meet.
-
-Rooms require a name. Additionally, they can be customized with the following options by clicking on "Advanced Setup":
+As an administrator, you can create a new room directly from the "Rooms" page in OpenVidu Meet. Each room requires a name and can be customized with Advanced Setup options:
 
 - Set up an [auto-deletion date](#room-auto-deletion).
-- Set up recording and access control to them.
-- Enable/disable features like chat or virtual backgrounds.
+- Set up recording settings and access control.
+- Enable/disable features like chat, virtual backgrounds, and E2EE (end-to-end encryption).
 
 <a class="glightbox" href="../../../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 <a class="glightbox" href="../../../assets/videos/meet/meet-rooms-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-Available rooms are all listed in the "Rooms" page. From there administrators can:
+Available rooms can be managed from the **Rooms** page, where administrators can:
 
 - Start a meeting in a room.
-- Edit the room settings.
-- Delete the room.
-- Access the room's recordings.
+- Edit room settings anytime (if no meeting is active).
+- Delete rooms individually or in bulk.
+- Access recordings.
 - Share room links with different permissions (see [Users and permissions](users-and-permissions.md)).
 
 <a class="glightbox" href="../../../assets/videos/meet/room-actions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/room-actions-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 <a class="glightbox" href="../../../assets/videos/meet/room-actions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/room-actions-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### Editing a room
+Modify room settings anytime from the **Rooms** page if no meeting is active. You can:
 
-You can edit the settings of an existing room at any time in the "Rooms" page. The same options available when creating a room are also available when editing it:
-
-1. Name them.
-2. Set up an [auto-deletion date](#room-auto-deletion).
-3. Set up recording and access control to them.
-4. Enable/disable features like chat or virtual backgrounds.
+- Rename the room.
+- Set or update an [auto-deletion date](#room-auto-deletion).
+- Configure recording and access control.
+- Enable or disable features like chat, virtual backgrounds, and E2EE.
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/edit-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/edit-room.png" loading="lazy" class="control-height round-corners"/></a>
 
 ### Deleting a room
 
-Rooms can be deleted at any time from the "Rooms" page. This will remove the room and all its associated data.
+Rooms can be deleted individually or in bulk from the **Rooms** page. Deleting a room removes it and all associated data.
 
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/delete-room.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/rooms-and-meetings/delete-room.png" loading="lazy" class="round-corners"/></a>
 
@@ -81,11 +83,6 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
-### Bulk deleting rooms
-
-Use the multi-select checkbox to delete multiple rooms at once.
-
-<a class="glightbox" href="../../../assets/videos/meet/bulk-delete-rooms.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery6"><video class="round-corners" src="../../../assets/videos/meet/bulk-delete-rooms.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### Room links
 
@@ -160,7 +157,7 @@ Users with access to OpenVidu Meet can also copy a room link and share it with e
 
 <a class="glightbox" href="../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-### Lifecycle of a meeting
+### Meeting Lifecycle
 
 Meetings consist of different views:
 

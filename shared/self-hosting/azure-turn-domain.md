@@ -13,4 +13,4 @@ This section is optional. It is useful when your users are behind a restrictive 
 
     Set the **Turn Domain Name** parameter to the domain name you intend to use for your TURN server. It should be pointing to the `Public Ip Address` specified in the previous section.
 
-    If you are using `letsencrypt` as the **Certificate Type** parameter, you can leave the **Turn Own Public Certificate** and **Turn Own Private Certificate** parameters empty. If you are using `owncert`, you need to specify the URLs where the public and private certificates are hosted.
+    If you are using `letsencrypt` as the **Certificate Type** parameter, you can leave the **Turn Own Public Certificate** and **Turn Own Private Certificate** parameters empty. If you are using `owncert`, you need to specify the base64 encoded certificates for the TURN server in these parameters.

@@ -228,3 +228,7 @@ In addition to these, an AWS deployment provides the capability to manage global
         </figure>
 
     Changes will be applied automatically in all the nodes of your OpenVidu Elastic deployment.
+
+## Backup and Restore
+
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

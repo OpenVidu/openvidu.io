@@ -11,15 +11,18 @@ OpenVidu High Availability is part of the <span style="font-size: 12px;" class="
 - [**On-premises installation (Network Load Balancer)**](./on-premises/install-nlb.md): Set up OpenVidu High Availability on your own servers with a Network Load Balancer.
 - [**AWS installation**](./aws/install.md): Deploy OpenVidu High availability on Amazon Web Services.
 - [**Azure installation**](./azure/install.md): Deploy OpenVidu High Availability on Microsoft Azure.
+- [**Google Cloud Platform installation**](./gcp/install.md): Deploy OpenVidu Elastic on Google Cloud Platform.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
 - [**On-premises: configuration and administration**](./on-premises/admin.md)
 - [**AWS: configuration and administration**](./aws/admin.md)
 - [**Azure: configuration and administration**](./azure/admin.md)
+- [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
 
 If you want to upgrade your OpenVidu High Availability installation, refer to this section:
 
 - [**Upgrade OpenVidu High Availability On-premises**](./on-premises/upgrade.md)
 - [**Upgrade OpenVidu High Availability AWS**](./aws/upgrade.md)
 - [**Upgrade OpenVidu High Availability Azure**](./azure/upgrade.md)
+- [**Upgrade OpenVidu High Availability Google Cloud Platform**](./gcp/upgrade.md)

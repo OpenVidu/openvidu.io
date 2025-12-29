@@ -46,3 +46,7 @@ redis                      docker.io/redis:7.4.2-alpine                       "/
 --8<-- "shared/self-hosting/single-node/admin-change-config.md"
 
 --8<-- "shared/self-hosting/single-node/admin-uninstall.md"
+
+## Backup and Restore
+
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

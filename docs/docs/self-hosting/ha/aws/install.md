@@ -103,9 +103,9 @@ You need to specify some properties for the EC2 instances that will be created.
 
     ![EC2 Instance configuration](../../../../assets/images/self-hosting/ha/aws/ec2-instance-config.png)
 
-    Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Amazon Image ID (AMI) to use at **AmiId**.
+    Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
-    By default, the parameter **AmiId** is configured to use the latest Amazon Linux AMI, so ideally you don’t need to modify this.
+    By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
 ### Media Nodes Autoscaling Group Configuration
 

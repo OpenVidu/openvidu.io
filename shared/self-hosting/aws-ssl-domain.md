@@ -32,9 +32,14 @@ There are three possible scenarios for this section:
 
     ![Custom certificates](../../../../assets/images/self-hosting/shared/aws-owncert.png)
 
-    You need to specify at **OwnPublicCertificate** and **OwnPrivateCertificate** the URLs where the public and private certificates are hosted, respectively. The **DomainName** and **PublicElasticIP** are mandatory parameters.
+    You need to specify at **OwnPublicCertificate** and **OwnPrivateCertificate** the certificates files in base64. The **DomainName** and **PublicElasticIP** are mandatory parameters.
 
-    Certificates need to be in PEM format and the URLs must be accessible from the instance.
+    Certificates need to be in PEM format and base64 encoded. You can encode them using the following command in a terminal where `fullchain.pem` is your public certificate and `privkey.pem` is your private certificate:
+
+    ```bash
+    base64 -w 0 fullchain.pem # OwnPublicCertificate
+    base64 -w 0 privkey.pem # OwnPrivateCertificate
+    ```
 
 === "Self-Signed Certificate"
 

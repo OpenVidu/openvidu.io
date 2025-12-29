@@ -7,7 +7,7 @@ set -e
 GH_BRANCH="gh-pages"
 
 ASSETS=("assets" "javascripts" "stylesheets" "search")
-NON_VERSIONED_PAGES=("account" "pricing" "support" "openvidu-meet-vs-openvidu-platform" "conditions" "blog") # And root index.html, 404.html, robots.txt, llms.txt and llms-full.txt
+NON_VERSIONED_PAGES=("account" "pricing" "support" "openvidu-meet-vs-openvidu-platform" "conditions" "blog" "about-us" "research") # And root index.html, 404.html, robots.txt, llms.txt and llms-full.txt
 VERSIONED_PAGES=("docs" "meet")
 
 validateArgs() {

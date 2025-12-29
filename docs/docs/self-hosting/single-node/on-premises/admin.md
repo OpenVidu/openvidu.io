@@ -44,3 +44,7 @@ redis        docker.io/redis                              "docker-entrypoint.sâ€
 --8<-- "shared/self-hosting/single-node/admin-change-config.md"
 
 --8<-- "shared/self-hosting/single-node/admin-uninstall.md"
+
+## Backup and Restore
+
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
