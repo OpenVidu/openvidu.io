@@ -215,6 +215,11 @@ nav:
       - support.md
   - Pricing:
       - pricing.md
+  - About Us:
+      - about-us.md
+  - Research:
+      - research.md
+
 
 validation:
   links:
@@ -273,6 +278,8 @@ plugins:
   - blog
   - meta
   - privacy
+  - optimize:
+      enabled: !ENV [CI, false]
   - glightbox:
       touchNavigation: true
       loop: false
@@ -295,6 +302,8 @@ plugins:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
         - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
+        - about-us.md: The people behind OpenVidu
+        - research.md: Research publications on real-time communications in peer-reviewed journals
         - openvidu-meet-vs-openvidu-platform.md: What to choose, OpenVidu Meet or OpenVidu Platform?
         OpenVidu Meet [BETA]:
         - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
