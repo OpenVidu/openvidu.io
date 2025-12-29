@@ -5,7 +5,7 @@ description: Learn how to build a simple video-call app using React with LiveKit
 
 # React Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.4.1/application-client/openvidu-react){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.5.0/application-client/openvidu-react){ .md-button target=\_blank }
 
 This tutorial is a simple video-call application built with **React** that allows:
 
@@ -25,7 +25,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.1
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.5.0
 ```
 
 ### 3. Run a server application
@@ -53,7 +53,7 @@ npm install livekit-client
 
 Now let's see the code of the `App.tsx` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/App.tsx#L14-L51' target='_blank'>App.tsx</a>" linenums="14"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/App.tsx#L14-L51' target='_blank'>App.tsx</a>" linenums="14"
 type TrackInfo = { // (1)!
     trackPublication: RemoteTrackPublication;
     participantIdentity: string;
@@ -121,7 +121,7 @@ The `App.tsx` file defines the following variables:
 
 After the user specifies their participant name and the name of the room they want to join, when they click the `Join` button, the `joinRoom()` function is called:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/App.tsx#L53-L89' target='_blank'>App.tsx</a>" linenums="53"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/App.tsx#L53-L89' target='_blank'>App.tsx</a>" linenums="53"
 async function joinRoom() {
     // Initialize a new Room object
     const room = new Room(); // (1)!
@@ -192,7 +192,7 @@ The `joinRoom()` function performs the following actions:
 
 3.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:
 
-    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/App.tsx#L101-L133' target='_blank'>App.tsx</a>" linenums="101"
+    ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/App.tsx#L101-L133' target='_blank'>App.tsx</a>" linenums="101"
     /**
      * --------------------------------------------
      * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -239,7 +239,7 @@ The `joinRoom()` function performs the following actions:
 
 In order to display participants' video and audio tracks, the main component integrates the `VideoComponent` and `AudioComponent`.
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/App.tsx#L187-L205' target='_blank'>App.tsx</a>" linenums="187"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/App.tsx#L187-L205' target='_blank'>App.tsx</a>" linenums="187"
 <div id="layout-container">
     {localTrack && (
         <VideoComponent track={localTrack} participantIdentity={participantName} local={true} />
@@ -273,7 +273,7 @@ This code snippet does the following:
 
 Let's see now the code of the `VideoComponent.txs` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/components/VideoComponent.tsx#L5-L32' target='_blank'>VideoComponent.tsx</a>" linenums="5"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/components/VideoComponent.tsx#L5-L32' target='_blank'>VideoComponent.tsx</a>" linenums="5"
 interface VideoComponentProps {
     track: LocalVideoTrack | RemoteVideoTrack; // (1)!
     participantIdentity: string; // (2)!
@@ -325,7 +325,7 @@ The `VideoComponent` does the following:
 
 Finally, let's see the code of the `AudioComponent.tsx` file:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/components/AudioComponent.tsx#L4-L22' target='_blank'>AudioComponent.tsx</a>" linenums="5"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/components/AudioComponent.tsx#L4-L22' target='_blank'>AudioComponent.tsx</a>" linenums="5"
 interface AudioComponentProps {
     track: LocalAudioTrack | RemoteAudioTrack; // (1)!
 }
@@ -360,7 +360,7 @@ The `AudioComponent` is similar to the `VideoComponent` but is used to display a
 
 When the user wants to leave the room, they can click the `Leave Room` button. This action calls the `leaveRoom()` function:
 
-```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.4.1/application-client/openvidu-react/src/App.tsx#L91-L99' target='_blank'>App.tsx</a>" linenums="91"
+```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.5.0/application-client/openvidu-react/src/App.tsx#L91-L99' target='_blank'>App.tsx</a>" linenums="91"
 async function leaveRoom() {
     // Leave the room by calling 'disconnect' method over the Room object
     await room?.disconnect(); // (1)!

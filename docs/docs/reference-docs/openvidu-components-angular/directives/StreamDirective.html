@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content directive">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -227,7 +245,7 @@ export class AppComponent {
 }
 </code></pre></div><!--ovStream-end-tutorial-->
 
-<p>For a detailed tutorial on customizing the stream component, please visit <a href="https://openvidu.io/3.4.1/docs/tutorials/angular-components/openvidu-custom-stream/">this link</a>.</p>
+<p>For a detailed tutorial on customizing the stream component, please visit <a href="https://openvidu.io/3.5.0/docs/tutorials/angular-components/openvidu-custom-stream/">this link</a>.</p>
 
             </p>
 

@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content directive">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -210,7 +228,7 @@ export class AppComponent {
 </code></pre></div><!--ovActivitiesPanel-end-tutorial-->
 
 <p>For a step-by-step tutorial on how to replace the activities template with just a few lines of code,
-check out our comprehensive guide: <a href="https://openvidu.io/3.4.1/docs/tutorials/angular-components/openvidu-custom-activities-panel/">Customizing the Activities Panel</a>.</p>
+check out our comprehensive guide: <a href="https://openvidu.io/3.5.0/docs/tutorials/angular-components/openvidu-custom-activities-panel/">Customizing the Activities Panel</a>.</p>
 
             </p>
 

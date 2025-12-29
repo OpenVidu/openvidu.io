@@ -23,16 +23,18 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                 <li class="chapter">
                     <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>
                     <ul class="links">
-                        <li class="link">
-                            <a href="overview.html" data-type="chapter-link">
-                                <span class="icon ion-ios-keypad"></span>Overview
-                            </a>
-                        </li>
-                        <li class="link">
-                            <a href="index.html" data-type="chapter-link">
-                                <span class="icon ion-ios-paper"></span>README
-                            </a>
-                        </li>
+                                <li class="link">
+                                    <a href="overview.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-keypad"></span>Overview
+                                    </a>
+                                </li>
+
+                            <li class="link">
+                                <a href="index.html" data-type="chapter-link">
+                                    <span class="icon ion-ios-paper"></span>
+                                        README
+                                </a>
+                            </li>
                         <li class="link">
                             <a href="license.html"  data-type="chapter-link">
                                 <span class="icon ion-ios-paper"></span>LICENSE
@@ -43,6 +45,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         <span class="icon ion-ios-apps"></span>Properties
                                     </a>
                                 </li>
+
                     </ul>
                 </li>
                     <li class="chapter modules">
@@ -59,13 +62,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApiDirectiveModule.html" data-type="entity-link" >ApiDirectiveModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
-                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-249618dd3d486ca2a53276374a8ec33c00a22502c93039b2cfafaf7a09767abb3924c43aec90c403f4fc4115887718cd77cf0806dcfa14c0fc2d0da31e3e1559"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-249618dd3d486ca2a53276374a8ec33c00a22502c93039b2cfafaf7a09767abb3924c43aec90c403f4fc4115887718cd77cf0806dcfa14c0fc2d0da31e3e1559"' }>
+                                        'data-bs-target="#directives-links-module-ApiDirectiveModule-ac0edf63304bd0aacb86cb2f9ebeb42d4b3161143de731cf951e09f6cee52730f6629e9bdd791e671710a5c589a442788dc15d48a985a49115232b83e2c4d797"' : 'data-bs-target="#xs-directives-links-module-ApiDirectiveModule-ac0edf63304bd0aacb86cb2f9ebeb42d4b3161143de731cf951e09f6cee52730f6629e9bdd791e671710a5c589a442788dc15d48a985a49115232b83e2c4d797"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-249618dd3d486ca2a53276374a8ec33c00a22502c93039b2cfafaf7a09767abb3924c43aec90c403f4fc4115887718cd77cf0806dcfa14c0fc2d0da31e3e1559"' :
-                                        'id="xs-directives-links-module-ApiDirectiveModule-249618dd3d486ca2a53276374a8ec33c00a22502c93039b2cfafaf7a09767abb3924c43aec90c403f4fc4115887718cd77cf0806dcfa14c0fc2d0da31e3e1559"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ApiDirectiveModule-ac0edf63304bd0aacb86cb2f9ebeb42d4b3161143de731cf951e09f6cee52730f6629e9bdd791e671710a5c589a442788dc15d48a985a49115232b83e2c4d797"' :
+                                        'id="xs-directives-links-module-ApiDirectiveModule-ac0edf63304bd0aacb86cb2f9ebeb42d4b3161143de731cf951e09f6cee52730f6629e9bdd791e671710a5c589a442788dc15d48a985a49115232b83e2c4d797"' }>
                                         <li class="link">
                                             <a href="directives/ActivitiesPanelBroadcastingActivityDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelBroadcastingActivityDirective</a>
                                         </li>
@@ -184,13 +187,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/OpenViduComponentsDirectiveModule.html" data-type="entity-link" >OpenViduComponentsDirectiveModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
-                                        'data-bs-target="#directives-links-module-OpenViduComponentsDirectiveModule-18e53be5ac1b1af0bad18237eb7c179143dc8c0ac8129dca98ed77afc873ab29fd4c374abacde826e9e0951c078e2f7f459869a2fe7e8ca9baf1f40b6a4ea9c2"' : 'data-bs-target="#xs-directives-links-module-OpenViduComponentsDirectiveModule-18e53be5ac1b1af0bad18237eb7c179143dc8c0ac8129dca98ed77afc873ab29fd4c374abacde826e9e0951c078e2f7f459869a2fe7e8ca9baf1f40b6a4ea9c2"' }>
+                                        'data-bs-target="#directives-links-module-OpenViduComponentsDirectiveModule-45cf5803e8551f3edebf966d99065c6f534a9c016029e83e83efb636495bb5dc5f9e4e0a7d8207ffcba263c40823d94920c9b523c39bbad96fe17a4946419959"' : 'data-bs-target="#xs-directives-links-module-OpenViduComponentsDirectiveModule-45cf5803e8551f3edebf966d99065c6f534a9c016029e83e83efb636495bb5dc5f9e4e0a7d8207ffcba263c40823d94920c9b523c39bbad96fe17a4946419959"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-OpenViduComponentsDirectiveModule-18e53be5ac1b1af0bad18237eb7c179143dc8c0ac8129dca98ed77afc873ab29fd4c374abacde826e9e0951c078e2f7f459869a2fe7e8ca9baf1f40b6a4ea9c2"' :
-                                        'id="xs-directives-links-module-OpenViduComponentsDirectiveModule-18e53be5ac1b1af0bad18237eb7c179143dc8c0ac8129dca98ed77afc873ab29fd4c374abacde826e9e0951c078e2f7f459869a2fe7e8ca9baf1f40b6a4ea9c2"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-OpenViduComponentsDirectiveModule-45cf5803e8551f3edebf966d99065c6f534a9c016029e83e83efb636495bb5dc5f9e4e0a7d8207ffcba263c40823d94920c9b523c39bbad96fe17a4946419959"' :
+                                        'id="xs-directives-links-module-OpenViduComponentsDirectiveModule-45cf5803e8551f3edebf966d99065c6f534a9c016029e83e83efb636495bb5dc5f9e4e0a7d8207ffcba263c40823d94920c9b523c39bbad96fe17a4946419959"' }>
                                         <li class="link">
                                             <a href="directives/ActivitiesPanelDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ActivitiesPanelDirective</a>
                                         </li>
@@ -300,6 +303,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="components/VideoconferenceComponent.html" data-type="entity-link" >VideoconferenceComponent</a>
                             </li>
+                            <li class="link">
+                                <a href="components/VideoPosterComponent.html" data-type="entity-link" >VideoPosterComponent</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="chapter">
@@ -325,6 +331,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
                                     <a href="injectables/BroadcastingService.html" data-type="entity-link" >BroadcastingService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/E2eeService.html" data-type="entity-link" >E2eeService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/OpenViduService.html" data-type="entity-link" >OpenViduService</a>
@@ -388,6 +397,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ElementDimensions.html" data-type="entity-link" >ElementDimensions</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ElementPosition.html" data-type="entity-link" >ElementPosition</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/ExtendedLayoutOptions.html" data-type="entity-link" >ExtendedLayoutOptions</a>
                             </li>
                             <li class="link">
@@ -403,7 +415,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/LayoutArea.html" data-type="entity-link" >LayoutArea</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/LayoutAreas.html" data-type="entity-link" >LayoutAreas</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/LayoutBox.html" data-type="entity-link" >LayoutBox</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/LayoutCalculationResult.html" data-type="entity-link" >LayoutCalculationResult</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/LayoutRow.html" data-type="entity-link" >LayoutRow</a>

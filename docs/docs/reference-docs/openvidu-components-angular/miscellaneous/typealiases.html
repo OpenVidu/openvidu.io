@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -99,6 +113,10 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Miscellaneous</li>
   <li class="breadcrumb-item">Type aliases</li>
@@ -118,7 +136,10 @@
                             <a href="#AvailableLangs" title="projects/openvidu-components-angular/src/lib/models/lang.model.ts" ><b>AvailableLangs</b>&nbsp;&nbsp;&nbsp;(projects/.../lang.model.ts)</a>
                         </li>
                         <li>
-                            <a href="#BigFirstOption" title="projects/openvidu-components-angular/src/lib/models/layout.model.ts" ><b>BigFirstOption</b>&nbsp;&nbsp;&nbsp;(projects/.../layout.model.ts)</a>
+                            <a href="#BackgroundProcessorWrapper" title="projects/openvidu-components-angular/src/lib/services/openvidu/openvidu.service.ts" ><b>BackgroundProcessorWrapper</b>&nbsp;&nbsp;&nbsp;(projects/.../openvidu.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BigFirstOption" title="projects/openvidu-components-angular/src/lib/models/layout/layout-types.model.ts" ><b>BigFirstOption</b>&nbsp;&nbsp;&nbsp;(projects/.../layout-types.model.ts)</a>
                         </li>
                         <li>
                             <a href="#OpenViduLangs" title="projects/openvidu-components-angular/src/lib/models/lang.model.ts" ><b>OpenViduLangs</b>&nbsp;&nbsp;&nbsp;(projects/.../lang.model.ts)</a>
@@ -180,7 +201,25 @@
             </tr>
         </tbody>
     </table>
-</section>    <h3>projects/openvidu-components-angular/src/lib/models/layout.model.ts</h3>
+</section>    <h3>projects/openvidu-components-angular/src/lib/services/openvidu/openvidu.service.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BackgroundProcessorWrapper"></a>
+                    <span class="name "><b>BackgroundProcessorWrapper</b><a href="#BackgroundProcessorWrapper"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>ReturnType&lt;unknown&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>projects/openvidu-components-angular/src/lib/models/layout/layout-types.model.ts</h3>
     <section data-compodoc="block-typealias">
     <table class="table table-sm table-bordered">
         <tbody>

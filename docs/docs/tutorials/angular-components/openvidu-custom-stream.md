@@ -5,7 +5,7 @@ description: Learn how to replace the default stream with your own using OpenVid
 
 # Custom stream using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.4.1/openvidu-components-angular/openvidu-custom-stream){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.5.0/openvidu-components-angular/openvidu-custom-stream){ .md-button target=\_blank }
 
 The **openvidu-custom-stream** tutorial demonstrates how to replace the default video stream with a custom one, providing a more tailored user experience.
 
@@ -25,8 +25,8 @@ Customizing the video stream component is made simple with the **StreamDirective
 #### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.4.1
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.1
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.5.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.5.0
 ```
 
 #### 3. Run a server application

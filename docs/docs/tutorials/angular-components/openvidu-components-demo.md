@@ -35,7 +35,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 #### 2. Download the demo code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.4.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.5.0
 ```
 
 #### 3. Run the Components Demo App backend
