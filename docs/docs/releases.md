@@ -2,6 +2,47 @@
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
 ---
 
+## 3.5.0
+
+!!! info "For the Release Notes of OpenVidu Meet 3.5.0, please visit here: [OpenVidu Meet 3.5.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#350){:target="_blank" .meet-link-color}"
+
+### Changelog
+
+- **ARM support**: OpenVidu can now be deployed in ARM-based systems. This broadens the range of instances in which OpenVidu can be deployed, offering new opportunities and alternatives that may be more cost-effective. To deploy OpenVidu in ARM architecture, you don't have to do anything special: just follow the default installation instructions for your desired OpenVidu deployment type. The installer will automatically detect the architecture and set up the appropriate services.
+- **Google Cloud Platform support for all OpenVidu deployments**: we continue to expand our cloud-native deployment options. Now you can deploy [OpenVidu Single Node PRO](./self-hosting/single-node-pro/gcp/install.md), [OpenVidu Elastic](./self-hosting/elastic/gcp/install.md) and [OpenVidu High Availability](./self-hosting/ha/gcp/install.md) in Google Cloud Platform using Terraform templates.
+- **LiveKit stack updated to v1.9.8**: OpenVidu is now based on LiveKit v1.9.8, bringing all bug fixes and improvements since version v1.9.0. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/releases/tag/v1.9.8){:target="\_blank"}.
+    - Particularly relevant is the fix for [issue #3858](https://github.com/livekit/livekit/issues/3858){:target="\_blank"}, which fixes a fatal problem in the connection of the services with the Redis Cluster.
+- **Egress updated to v1.12.0**: the Egress service has been updated to v1.12.0, which includes several improvements and bug fixes when exporting media from rooms. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/releases/tag/v1.12.0){:target="\_blank"}.
+    - Particularly relevant is the change of the `unhealthyShutdownWatchdogDelay` value from 20 seconds to 10 minutes (see [commit e86593c](https://github.com/OpenVidu/egress/commit/e86593c25ab20e02d8e6d4a2edc4ac4b03fd2dbc){:target="\_blank"}), preventing premature termination of egress processes under high CPU load or poor network conditions.
+- **Live Captions**:
+    - Fixed critical bug that caused slow response when transcribing 3 or more simultaneous participants in the same Room using AWS Transcribe provider. See related issue in the official LiveKit Agents repository ([#3739](https://github.com/livekit/agents/issues/3739){:target="\_blank"}) and PR fixing it ([PR 4111](https://github.com/livekit/agents/pull/4111){:target="\_blank"}).
+    - Added [Cartesia](https://cartesia.ai/sonic){:target="\_blank"} and [Soniox](https://soniox.com/){:target="\_blank"} to the list of [supported AI providers](./ai/live-captions.md#supported-ai-providers).
+    - [Interim transcriptions](./ai/live-captions.md#final-vs-interim-transcriptions) now available for existing [AI providers](./ai/live-captions.md#supported-ai-providers) Speechmatics and Gladia.
+- **MongoDB**: OpenVidu now allows [configuring an external MongoDB](./self-hosting/how-to-guides/external-mongodb.md) instead of using the bundled one, or you can choose to completely [disable the use of MongoDB](./self-hosting/how-to-guides/enable-disable-mongodb.md) if your use case can do without services that require a database.
+- **New backup and restore documentation for OpenVidu deployments**: we have carefully crafted a new [how-to guide](./self-hosting/how-to-guides/backup-and-restore.md) explaining how to migrate your existing persistent data (recordings, analytics, monitoring data, etc.) when upgrading or changing your OpenVidu deployment. This process mainly affects the MongoDB and S3 services, responsible for persisting data in OpenVidu deployments.
+- **OpenVidu Angular Components updated to support Angular v20**: the [OpenVidu Angular Components library](./ui-components/angular-components.md) can now be used in applications built with Angular v20.
+- **Time Zone fix**: OpenVidu deployments now honor their host time zone by default. Previously OpenVidu always used UTC. This proved a challenge when integrating OpenVidu with a custom app using local time zone. You can revert to UTC by providing the additional installation flag `--forceUTCTimezone`.
+- **Oracle (OCI) Single Node and Single Node PRO installation tutorials**: we have created detailed step-by-step guides to help you deploy [OpenVidu Single Node COMMUNITY](./self-hosting/single-node/oci/install.md) and [OpenVidu Single Node PRO](./self-hosting/single-node-pro/oci/install.md) in Oracle Cloud Infrastructure using its native resources.
+
+
+### Version table
+
+| Artifact               | Version | Info | Link         |
+| ---------------------- | ------- | ---- | ---------- |
+| livekit/livekit-server | v1.9.0  | :material-information-outline:{ title="Version of livekit-server in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/livekit/livekit/releases/tag/v1.9.0){:target="\_blank"} |
+| mediasoup              | 3.12.16 | :material-information-outline:{ title="Version of mediasoup in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/versatica/mediasoup/releases/tag/3.12.16){:target="\_blank"} |
+| livekit/egress         | v1.10.0  | :material-information-outline:{ title="Egress version used by OpenVidu deployments. Used to export media from a Room (for example, recordings or RTMP broadcasting)" } | [:octicons-link-24:](https://github.com/livekit/egress/releases/tag/v1.10.0){:target="\_blank"} |
+| livekit/ingress        | v1.4.3  | :material-information-outline:{ title="Ingress version used by OpenVidu deployments. Used to import media into a Room (for example, an MP4 video or an RTSP stream)" } | [:octicons-link-24:](https://github.com/livekit/ingress/releases/tag/v1.4.3){:target="\_blank"} |
+| livekit/agents        | v1.2.6  | :material-information-outline:{ title="LiveKit Agents framework version. Used to add AI capabilities to your Rooms" } | [:octicons-link-24:](https://github.com/livekit/agents/releases/tag/livekit-agents%401.2.6){:target="\_blank"} |
+| MinIO | 2025.5.24 | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/minio/minio/releases/tag/RELEASE.2025-05-24T17-08-30Z){:target="\_blank"} |
+| Caddy | 2.10.0 | :material-information-outline:{ title="Version of Caddy used by OpenVidu deployments. It is a reverse proxy used as a load balancer to distribute client connections across your nodes and automatically manage your TLS certificate" } |  [:octicons-link-24:](https://github.com/caddyserver/caddy/releases/tag/v2.10.0){:target="\_blank"}|
+| MongoDB | 8.0.9 | :material-information-outline:{ title="Version of MongoDB used by OpenVidu deployments. Used to store analytics and monitoring persistent data. In <i>OpenVidu High Availability</i> this is an instance of a <i>MongoDB Replica Set</i>" } | [:octicons-link-24:](https://www.mongodb.com/docs/manual/release-notes/8.0/#8.0.9---may-1--2025){:target="\_blank"} |
+| Redis | 7.4.4 | :material-information-outline:{ title="Version of Redis used by OpenVidu deployments. Used to share transient information between Media Nodes and coordinate them. In <i>OpenVidu High Availability</i> this is an instance of a <i>Redis Cluster</i>" } | [:octicons-link-24:](https://github.com/redis/redis/releases/tag/7.4.4){:target="\_blank"} |
+| Grafana | 11.6.2 | :material-information-outline:{ title="Version of Grafana used by OpenVidu deployments. Observability module used to query and visualize logs and metrics in dashboards" } | [:octicons-link-24:](https://github.com/grafana/grafana/releases/tag/v11.6.2){:target="\_blank"} |
+| Prometheus | 3.4.0 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Observability module from Grafana stack, used to collect metrics from Media Nodes and send them to Mimir" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.4.0){:target="\_blank"} |
+| Promtail / Loki | 3.5.1 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.1){:target="\_blank"} |
+| Mimir | 2.16.0 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-2.16.0){:target="\_blank"} |
+
 ## 3.4.0
 
 !!! info "For the Release Notes of OpenVidu Meet 3.4.0, please visit here: [OpenVidu Meet 3.4.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#340){:target="_blank" .meet-link-color}"
