@@ -268,7 +268,8 @@ plugins:
   - blog
   - meta
   - privacy
-  - optimize
+  - optimize:
+      enabled: !ENV [CI, false]
   - glightbox:
       touchNavigation: true
       loop: false

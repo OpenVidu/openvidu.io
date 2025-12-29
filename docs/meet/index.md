@@ -72,7 +72,7 @@ __Multi-Party smart layout__{ .ov-meet-commercial-card-title .wow .animated .ani
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
-<a class="glightbox" href="../../assets/images/openvidu-call/ov-call-multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/openvidu-call/ov-call-multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
+<a class="glightbox" href="../../assets/images/meet/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
 
 </div>
 

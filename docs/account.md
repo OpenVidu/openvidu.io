@@ -13,7 +13,7 @@ hide:
     display: none;
   }
 </style>
-<link rel="stylesheet" type="text/css" href="/javascripts/openvidu-register/openvidu-register.css">
+<link rel="stylesheet" type="text/css" href="../javascripts/openvidu-register/openvidu-register.css">
 <script>
 window.amplifyActive = true;
 </script>

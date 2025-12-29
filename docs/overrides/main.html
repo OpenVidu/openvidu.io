@@ -89,10 +89,10 @@
 
 <!-- Add scripts that need to run before here -->
 
-<script src="/javascripts/target-blank.js"></script>
+<script src="{{ 'javascripts/target-blank.js' | url }}"></script>
 
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
-<script src="/javascripts/wow.min.js"></script>
+<script src="{{ 'javascripts/wow.min.js' | url }}"></script>
 <script>
   window.setupWowJs();
 </script>
@@ -105,11 +105,11 @@
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
-<script src="/javascripts/flickity.pkgd.min.js"></script>
+<script src="{{ 'javascripts/flickity.pkgd.min.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
-<script src="/javascripts/glightbox-custom-gallery.js"></script>
+<script src="{{ 'javascripts/glightbox-custom-gallery.js' | url }}"></script>
 {% endif %}
 
 {{ super() }}
@@ -121,11 +121,11 @@
 {% block styles %}
 
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/animate.min.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/animate.min.css' | url }}" />
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/flickity.min.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
 {% endif %}
 
 <style>
@@ -176,11 +176,11 @@
 {% endif %}
 
 {% if page.meta.tags and "Platform" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/platform.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/platform.css' | url }}" />
 {% endif %}
 
 {% if page.meta.tags and "Meet" in page.meta.tags %}
-<link rel="stylesheet" href="{{ '/stylesheets/meet.css' }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
 {% endif %}
