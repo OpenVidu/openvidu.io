@@ -5,6 +5,8 @@ description: Learn how to safeguard OpenVidu recordings, observability metrics, 
 
 # Backup and restore OpenVidu deployments
 
+## Overview
+
 Keeping reliable backups of your OpenVidu data guarantees that recordings, observability metrics, operational statistics and OpenVidu Meet data survive unexpected update failures or planned migrations. The **most critical data to protect** in any OpenVidu deployment is located inside the node of your installation: in the single node of a Single Node deployment, or in any master node of Elastic and High Availability deployments. Specifically:
 
 - **OpenVidu deployment files** (`/opt/openvidu/`). You may want to back them up to preserve specific configurations. Specifically:
