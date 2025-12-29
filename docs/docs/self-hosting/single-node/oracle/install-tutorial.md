@@ -10,11 +10,13 @@ tags:
 This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
 
 ## Overview / prerequisites
+
 - OCI account with permission to create compute instances and networking resources.
 
 ---
 
 ## 1. Create the VM (compute instance)
+
 1. Log in to your [**Oracle Cloud Infrastructure** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/) account.
 2. Search for **Instances** and open it, then click _"Create instance"_.
     <figure markdown>
@@ -44,6 +46,7 @@ This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), conf
 ---
 
 ## 2. Attach a public IP address to the instance
+
 1. Open the instance details and go to the **VNIC** resource, then to the _"Networking"_ tab.
     <figure markdown>
     ![VNIC location](../../../../assets/images/self-hosting/single-node/oracle/vnic-location.png){ .svg-img .dark-img }
@@ -60,6 +63,7 @@ This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), conf
 ---
 
 ## 3. Port rules in the network security lists
+
 OpenVidu and WebRTC require specific inbound rules on the instance network security (OCI NSG or subnet security list) and on the instance firewall (configured later).
 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the NSG rules.
@@ -103,6 +107,7 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 ---
 
 ## 4. SSH access, OpenVidu installation, and firewall rules
+
 !!! warning
     Open the required ports before installing OpenVidu to avoid connectivity issues.
 
@@ -171,5 +176,6 @@ firewall-cmd --list-all
 ---
 
 ## 5. Administration and upgrade
+
 - For administration of this OpenVidu Single Node deployment, see the [On-Premises administration section](../on-premises/admin.md).
 - To upgrade OpenVidu, see the [On-Premises upgrade section](../on-premises/upgrade.md).
