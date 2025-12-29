@@ -5,15 +5,15 @@ description: Learn how to safeguard OpenVidu recordings, observability metrics, 
 
 # Backup and restore OpenVidu deployments
 
-Keeping reliable backups of your OpenVidu data guarantees that recordings, observability metrics, operational statistics and OpenVidu Meet data survive unexpected update failures or planned migrations. The **most critical data to protect** in any OpenVidu deployment are in the single node or master nodes of Elastic and High Availability deployments and include:
+Keeping reliable backups of your OpenVidu data guarantees that recordings, observability metrics, operational statistics and OpenVidu Meet data survive unexpected update failures or planned migrations. The **most critical data to protect** in any OpenVidu deployment is located inside the node of your installation: in the single node of a Single Node deployment, or in any master node of Elastic and High Availability deployments. Specifically:
 
 - **OpenVidu deployment files** (`/opt/openvidu/`). You may want to back them up to preserve specific configurations. Specifically:
     - `/opt/openvidu/config/`: main configuration files for OpenVidu Platform and OpenVidu Meet.
-    - `/opt/openvidu/docker-compose.yaml` and `/opt/openvidu/docker-compose.override.yaml`: Docker Compose files that define the services and Docker Compose files.
+    - `/opt/openvidu/docker-compose.yaml` and `/opt/openvidu/docker-compose.override.yaml`: Docker Compose files that define the services.
 
     They can be regenerated in new installations, but you lose any custom settings on every reinstallation.
 
-- **OpenVidu data** (`/opt/openvidu/data/`): persistent data stored by OpenVidu services. The most relevant data are:
+- **OpenVidu data** (`/opt/openvidu/data/`): persistent data stored by OpenVidu services. The most relevant data is:
 
     - **OpenVidu Platform Data**
         - S3: egress outputs such as recordings.
@@ -22,14 +22,14 @@ Keeping reliable backups of your OpenVidu data guarantees that recordings, obser
         - S3-compatible storage: meeting recordings.
         - MongoDB: rooms, users, permissions, and recording links.
 
-You can back up and restore following four different methods:
+You can back up and restore OpenVidu deployments using one of the following four methods, depending on your infrastructure capabilities and backup requirements:
 
 1. Direct snapshots of OpenVidu nodes via your infrastructure provider.
 2. File-level snapshots of `/opt/openvidu/` on master nodes.
 3. Only backup data from MinIO/S3 and MongoDB.
 4. Only Snapshots data offered by external services used for S3 or MongoDB.
 
-## How can I know which method to use?
+## Which backup method should I use?
 
 First, identify where your S3 and MongoDB services run. SSH to your OpenVidu deployment node (or any master node) and inspect these environment variables:
 
@@ -41,7 +41,7 @@ Find both variables in the OpenVidu configuration files:
 - **Single Node**: `/opt/openvidu/config/openvidu.env`
 - **Elastic & High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
 
-With that information, pick the backup approach that fits your scenario:
+With that information, pick the backup approach that best fits your scenario:
 
 | <div style="width:35em">Scenario & use cases</div> | Recommended method |
 | --- | --- |
@@ -705,4 +705,4 @@ To ensure everything works correctly after restoring data, follow these steps:
 
 ## About restic
 
-Methods [2](#method-2-file-level-snapshots-of-optopenvidu-on-master-nodes) and [3](#method-3-only-backup-data-from-minios3-and-mongodb) use [restic](https://restic.net/){:target="_blank" rel="noopener"}, an open-source CLI that creates encrypted, deduplicated backups to a wide range of storage backends such as S3, local disks, and SFTP servers. In this guide we call the official Docker image and use S3-compatible storage as the backend for ease of use, but you can install restic natively on your Linux distribution by following the [official installation instructions](https://restic.readthedocs.io/en/stable/020_installation.html){:target="_blank" rel="noopener"} and use any supported backend.
+[Method 2](#method-2-file-level-snapshots-of-optopenvidu-on-master-nodes) and [Method 3](#method-3-only-backup-data-from-minios3-and-mongodb) use [restic](https://restic.net/){:target="_blank" rel="noopener"}, an open-source CLI that creates encrypted, deduplicated backups to a wide range of storage backends such as S3, local disks, and SFTP servers. In this guide we call the official Docker image and use S3-compatible storage as the backend for ease of use, but you can install restic natively on your Linux distribution by following the [official installation instructions](https://restic.readthedocs.io/en/stable/020_installation.html){:target="_blank" rel="noopener"} and use any supported backend.
