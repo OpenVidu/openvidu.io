@@ -99,7 +99,7 @@ changeVersionedPagesLinks() {
     grep -Erl "href=\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*\.\.\"|href=\"/\"|g" || true
 
     # Change base URL to root in order to prevent asking for cookies consent in each version
-    # grep -Erl "URL\(\"(\.\./)*\.\.\"" $ALL_PREFIXED_VP | xargs sed -i "s|URL(\"\(\.\./\)*\.\.\"|URL(\"/\"|g" || true
+    grep -Erl "URL\(\"(\.\./)*\.\.\",location\)" $ALL_PREFIXED_VP | xargs sed -i "s|URL(\"\(\.\./\)*\.\.\",location)|URL(\"/\",location)|g" || true
 }
 
 changeNonVersionedPagesLinks() {
@@ -157,10 +157,7 @@ updateSitemap() {
     local SITEMAP_FILE="sitemap.xml"
     
     # Copy sitemap from version folder to root, replacing any existing one
-    mv "$VERSION/$SITEMAP_FILE" .
-
-    # Remove sitemap.xml.gz
-    rm "$VERSION/$SITEMAP_FILE.gz"
+    cp "$VERSION/$SITEMAP_FILE" .
     
     echo "Updating sitemap URLs..."
     
@@ -181,6 +178,18 @@ updateSitemap() {
     gzip -k -f "$SITEMAP_FILE"
     
     echo "Sitemap updated successfully"
+}
+
+updateVersionSitemap() {
+    local SITEMAP_FILE="sitemap.xml"
+
+    # Remove NVP in sitemap.xml
+    for NVP in "${NON_VERSIONED_PAGES[@]}"; do
+        sed -i "\|<url>|{ :Loop N; \|</url>|! b Loop; \|$VERSION/$NVP|d }" "$VERSION/$SITEMAP_FILE"
+    done
+
+    # Regenerate sitemap.xml.gz
+    gzip -k -f "$VERSION/$SITEMAP_FILE"
 }
 
 copyFilesFromVersionToRoot() {
@@ -227,9 +236,17 @@ updateWebsite() {
     # Delete overrides folder in the new version
     rm -rf "$VERSION/overrides"
 
-    # Copy necessary file from main branch to gh-pages branch
-    git restore --source main custom-versioning/redirect-from-version-to-getting-started.html || {
-        echo 'Failure copying file from main branch'
+    # Copy necessary file from appropriate branch to gh-pages branch
+    if [ "$UPDATE_LATEST" = true ]; then
+        # Get file from main branch for latest version
+        SOURCE_BRANCH="main"
+    else
+        # Get file from version branch for past version updates
+        SOURCE_BRANCH="$VERSION"
+    fi
+    
+    git restore --source "$SOURCE_BRANCH" custom-versioning/redirect-from-version-to-getting-started.html || {
+        echo "Failure copying file from $SOURCE_BRANCH branch"
         exit 1
     }
 
@@ -258,6 +275,9 @@ updateWebsite() {
         # Move redirection file to the new version
         mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
 
+        # Update sitemap in the new version removing NVP
+        updateVersionSitemap
+
         # Commit the updated version folder
         git add .
         git commit -am "Version $VERSION updated. Non-versioned pages untouched"
@@ -275,6 +295,9 @@ updateWebsite() {
 
         # Update sitemap.xml
         updateSitemap
+
+        # Update sitemap in the new version removing NVP
+        updateVersionSitemap
 
         # Commit changes
         git add .

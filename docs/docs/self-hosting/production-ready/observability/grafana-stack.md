@@ -6,9 +6,9 @@ description: Monitor OpenVidu Server metrics and cluster logs with Grafana's pow
 
 OpenVidu also provides different **Grafana dashboards** to monitor **metrics** from **OpenVidu Server** and **logs** from your **cluster**.
 
-<video autoplay muted>
-  <source src="../../../../../assets/videos/grafana_trailer.mp4" type="video/mp4">
-</video>
+<div>
+<a class="glightbox" href="../../../../../assets/videos/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../../assets/videos/grafana_trailer.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+</div>
 
 Grafana is available at [https://your.domain/grafana/]() and can be accessed using your **Grafana admin credentials**.
 

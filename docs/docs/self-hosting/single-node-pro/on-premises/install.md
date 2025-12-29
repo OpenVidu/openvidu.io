@@ -5,6 +5,11 @@ description: Learn how to deploy OpenVidu Single Node PRO on-premises
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: On-premises
 
+!!! info
+    
+    OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    There's a 15-day free trial waiting for you!
+
 This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
 
 === "Architecture overview"
@@ -54,6 +59,80 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
 | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
 | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
+
+??? warning "Make sure the proper ports are opened in the internal linux firewall!"
+
+    In linux machine has a internal firewall installed, make sure you open the proper ports. For ubuntu you can follow these instructions:
+
+    1. Execute the following commands to install firewall-cmd and start it in the machine.
+    ```
+    sudo apt install firewalld -y
+    systemctl enable firewalld
+    systemctl start firewalld
+
+    ```
+    2. Execute the following commands to clean the iptables rules, accept all inputs and deactivate iptables at start:
+    ```
+    sudo iptables -F
+    sudo iptables -P INPUT ACCEPT
+
+    ```
+    3. Execute the following commands to add firewall rules are the following:
+    ```
+    firewall-cmd --add-port=80/tcp
+    firewall-cmd --permanent --add-port=80/tcp
+
+    ```
+    ```
+    firewall-cmd --add-port=443/tcp
+    firewall-cmd --permanent --add-port=443/tcp
+
+    ```
+    ```
+    firewall-cmd --add-port=443/udp
+    firewall-cmd --permanent --add-port=443/udp
+
+    ```
+    ```
+    firewall-cmd --add-port=1935/tcp
+    firewall-cmd --permanent --add-port=1935/tcp
+
+    ```
+    ```
+    firewall-cmd --add-port=9000/tcp
+    firewall-cmd --permanent --add-port=9000/tcp
+
+    ```
+    ```
+    firewall-cmd --add-port=7881/tcp
+    firewall-cmd --permanent --add-port=7881/tcp
+
+    ```
+    ```
+    firewall-cmd --add-port=7885/udp
+    firewall-cmd --permanent --add-port=7885/udp
+
+    ```
+    ```
+    firewall-cmd --add-port=50000-60000/udp
+    firewall-cmd --permanent --add-port=50000-60000/udp
+
+    ```
+    ```
+    firewall-cmd --add-port=50000-60000/tcp
+    firewall-cmd --permanent --add-port=50000-60000/tcp
+
+    ```
+    Finish it with the next command to apply the rules and to check if the rules are correct:
+    ```
+    firewall-cmd --reload
+    firewall-cmd --runtime-to-permanent
+
+    ```
+    ```
+    firewall-cmd --list-all
+
+    ```
 
 **Outbound port rules**:
 

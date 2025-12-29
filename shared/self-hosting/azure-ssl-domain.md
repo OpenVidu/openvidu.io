@@ -26,11 +26,9 @@ There are three possible scenarios for this section:
 
 === "Custom Certificates"
 
-    To deploy OpenVidu in Azure under your Fully Qualified Domain Name (FQDN) using **already existing certificates**, follow this method.
+    Opt for this method if you possess **your own certificate for an existing FQDN**. It enables you to deploy OpenVidu on Azure using your certificates.
 
     You need to have your FQDN pointing to a previously created Public Ip.
-
-    Also, you need a **temporary HTTP server** hosting your private and public certificate under a specific URL. These URLs are needed for the instance to be able to securely download and install your certificates.
 
     The configured parameters would look like this:
     
@@ -39,9 +37,14 @@ There are three possible scenarios for this section:
     </figure>
 
     
-    You need to specify at **Own Public Certificate** and **Own Private Certificate** the URLs where the public and private certificates are hosted, respectively. The **Domain Name**, **Public Ip Address** are mandatory parameters.
+    You need to specify at **Own Public Certificate** and **Own Private Certificate** the certificates files in base64. The **Domain Name**, **Public Ip Address** are mandatory parameters.
 
-    Certificates need to be in PEM format and the URLs must be accessible from the instance.
+    Certificates need to be in PEM format and base64 encoded. You can encode them using the following command in a terminal where `fullchain.pem` is your public certificate and `privkey.pem` is your private certificate:
+
+    ```bash
+    base64 -w 0 fullchain.pem # OwnPublicCertificate
+    base64 -w 0 privkey.pem # OwnPrivateCertificate
+    ```
 
 === "Self-Signed Certificate"
 

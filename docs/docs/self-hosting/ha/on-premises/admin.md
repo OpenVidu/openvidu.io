@@ -90,3 +90,7 @@ To add a new Media Node, simply spin up a new VM and run the OpenVidu installer 
 You can check how to change the configuration in the [Changing Configuration](../../configuration/changing-config.md) section. Also, there are multiple guides in the [How to Guides](../../how-to-guides/index.md) section that can help you with specific configuration changes.
 
 --8<-- "shared/self-hosting/openvidu-pro-uninstall.md"
+
+## Backup and Restore
+
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

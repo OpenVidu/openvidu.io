@@ -243,14 +243,43 @@ When deploying in a supported **cloud provider** using our official templates, O
 
     --8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
 
-<!-- === ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
+=== ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
 
     Deploy OpenVidu using our official **Terraform** template:
 
     - [OpenVidu Elastic in GCP](../elastic/gcp/install.md)
     - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
 
-    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target=_blank}. -->
+    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target=_blank}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
+    <div style="text-align: center;">
+        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+            <tr>
+              <th>Input Value</th>
+              <th>Default Value</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+                <td>initialNumberOfMediaNodes</td>
+                <td>1</td>
+                <td>Number of initial media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>minNumberOfMediaNodes</td>
+                <td>1</td>
+                <td>Minimum number of media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>maxNumberOfMediaNodes</td>
+                <td>5</td>
+                <td>Maximum number of media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>scaleTargetCPU</td>
+                <td>50</td>
+                <td>Target CPU percentage to scale out or in.</td>
+            </tr>
+        </table>
+    </div>
 
 ### Autoscaling On Premises
 
