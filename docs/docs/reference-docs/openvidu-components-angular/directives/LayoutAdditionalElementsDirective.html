@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content directive">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -119,13 +137,27 @@
                 <p>The *<strong>ovLayoutAdditionalElements</strong> directive allows you to inject custom HTML or Angular templates
 as additional layout elements within the videoconference UI.
 This enables you to extend the layout with extra controls, banners, or any custom UI.</p>
-<p>Usage example:</p>
+<p>You can specify a slot to control where the element is positioned:</p>
+<ul>
+<li>&#39;top&#39;: Position at the top of the layout (after local participant, before remote participants)</li>
+<li>&#39;bottom&#39;: Position at the bottom of the layout (after all participants)</li>
+<li>&#39;default&#39; or no slot: Position after local participant (default behavior)</li>
+</ul>
+<p>Usage examples:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-videoconference&gt;
+  &lt;!-- Default position (after local participant) --&gt;
   &lt;ng-container *ovLayoutAdditionalElements&gt;
-    &lt;div class=&quot;my-custom-layout-element&quot;&gt;
-      &lt;!-- Your custom HTML here --&gt;
-      &lt;span&gt;Extra layout element&lt;/span&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;my-banner&quot;&gt;Banner&lt;/div&gt;
+  &lt;/ng-container&gt;
+
+  &lt;!-- Top position --&gt;
+  &lt;ng-container *ovLayoutAdditionalElements=&quot;&#39;top&#39;&quot;&gt;
+    &lt;div class=&quot;top-bar&quot;&gt;Top Bar&lt;/div&gt;
+  &lt;/ng-container&gt;
+
+  &lt;!-- Bottom position --&gt;
+  &lt;ng-container *ovLayoutAdditionalElements=&quot;&#39;bottom&#39;&quot;&gt;
+    &lt;div class=&quot;bottom-info&quot;&gt;Footer Info&lt;/div&gt;
   &lt;/ng-container&gt;
 &lt;/ov-videoconference&gt;</code></pre></div>
             </p>
@@ -165,6 +197,9 @@ This enables you to extend the layout with extra controls, banners, or any custo
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#container" >container</a>
+                            </li>
+                            <li>
+                                <a href="#slot" >slot</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -268,6 +303,38 @@ This enables you to extend the layout with extra controls, banners, or any custo
                     </td>
                 </tr>
 
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="slot"></a>
+                    <span class="name">
+                        <span ><b>slot</b></span>
+                        <a href="#slot"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;top&quot; | &quot;bottom&quot; | &quot;default&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;default&#x27;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Slot position: &#39;top&#39;, &#39;bottom&#39;, or &#39;default&#39;</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

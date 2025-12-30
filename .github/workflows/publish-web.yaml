@@ -33,9 +33,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mike mkdocs-material mkdocs-glightbox mkdocs-llmstxt
-          sudo apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
-          sudo apt-get install -y pngquant
+          sudo apt-get update
+          pip install mike "mkdocs-material[imaging]" mkdocs-glightbox mkdocs-llmstxt
+          sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+          sudo apt-get install -y --fix-missing pngquant
 
       - name: Configure Git Credentials
         run: |

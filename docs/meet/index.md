@@ -505,7 +505,7 @@ You can choose the OpenVidu edition that best fits your needs when <a href="./de
 
 ## What does it mean that OpenVidu Meet is in BETA?
 
-OpenVidu Meet (v3.4.1) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support.md) with any comments or suggestions.
+OpenVidu Meet (v3.5.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support.md) with any comments or suggestions.
 
 <hr style="margin: 5em 0 2em 0">
 

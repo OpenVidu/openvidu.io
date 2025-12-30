@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -718,7 +736,7 @@ This service centralizes all template setup logic, making the main component cle
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>setupToolbarTemplates(externalAdditionalButtons?: <a href="../directives/ToolbarAdditionalButtonsDirective.html" target="_self">ToolbarAdditionalButtonsDirective</a>, externalAdditionalPanelButtons?: <a href="../directives/ToolbarAdditionalPanelButtonsDirective.html" target="_self">ToolbarAdditionalPanelButtonsDirective</a>, externalLeaveButton?: <a href="../directives/LeaveButtonDirective.html" target="_self">LeaveButtonDirective</a>)</code>
+<code>setupToolbarTemplates(externalAdditionalButtons?: <a href="../directives/ToolbarAdditionalButtonsDirective.html" target="_self">ToolbarAdditionalButtonsDirective</a>, externalAdditionalPanelButtons?: <a href="../directives/ToolbarAdditionalPanelButtonsDirective.html" target="_self">ToolbarAdditionalPanelButtonsDirective</a>, externalLeaveButton?: <a href="../directives/LeaveButtonDirective.html" target="_self">LeaveButtonDirective</a>, externalMoreOptionsAdditionalMenuItems?: ToolbarMoreOptionsAdditionalMenuItemsDirective)</code>
                 </td>
             </tr>
 
@@ -770,6 +788,18 @@ This service centralizes all template setup logic, making the main component cle
                                                 <td>externalLeaveButton</td>
                                             <td>
                                                             <code><a href="../directives/LeaveButtonDirective.html" target="_self" >LeaveButtonDirective</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>externalMoreOptionsAdditionalMenuItems</td>
+                                            <td>
+                                                        <code>ToolbarMoreOptionsAdditionalMenuItemsDirective</code>
                                             </td>
 
                                             <td>

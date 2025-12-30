@@ -16,7 +16,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Hig
 To import the template into Azure you just need to click the button below and you will be redirected to azure.   
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.4.1%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.4.1%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
 This is how the architecture of the deployment looks like:
