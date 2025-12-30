@@ -1,4 +1,10 @@
-# Acknowledgments
+---
+title: Acknowledgments
+description: Projects and funding that have supported OpenVidu development.
+hide:
+  - search-bar
+  - version-selector
+---
 
 OpenVidu has been supported under project LERNIM (RTC-2016-4674-7), co-funded by the Ministry of Economy, Finance and Competitiveness of Spain, as well as by the European Regional Development Fund, whose main goal is to promote technological development, innovation and high-quality research.
 
