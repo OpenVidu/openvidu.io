@@ -8,6 +8,8 @@ Self-hosted videoconference solution and SDK
 
 - [Home](https://openvidu.io/index.md): OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
 - [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu Meet and OpenVidu Platform
+- [About Us](https://openvidu.io/about-us/index.md): The people behind OpenVidu
+- [Research](https://openvidu.io/research/index.md): Research publications on real-time communications in peer-reviewed journals
 - [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md): What to choose, OpenVidu Meet or OpenVidu Platform?
 
 ## OpenVidu Meet [BETA]

@@ -1,5 +1,15 @@
 <!-- Elements added to main will be displayed on all pages --><!DOCTYPE html><html lang="en" class="no-js"><head>
     
+<style id="antiClickjack">body{display:none !important;}</style>
+<script>
+  if (self === top) {
+    var antiClickjack = document.getElementById("antiClickjack");
+    antiClickjack.parentNode.removeChild(antiClickjack);
+  } else {
+    top.location = self.location;
+  }
+</script>
+
 
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,11 +27,9 @@
       
       
       <link rel="icon" href="../../assets/images/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
-<!-- Security headers -->
-<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
 
     
       
@@ -45,7 +53,7 @@
 </style>
 
 
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -64,17 +72,18 @@
   div.md-search {
     display: none;
   }
+
   label.md-header__button.md-icon[for="__search"] {
     display: none;
   }
 </style>
 
 
-  <style>
-    div.md-version {
-      display: none;
-    }
-  </style>
+<style>
+  div.md-version {
+    display: none;
+  }
+</style>
 
 
 
@@ -247,7 +256,7 @@
   <strong>GO TO LATEST VERSION</strong>
 </a>
 <script>
-  (function() {
+  (function () {
     const link = document.getElementById('latest-version-link');
     if (link) {
       const currentPath = window.location.pathname;
@@ -444,7 +453,9 @@
     
 
     <div class="md-typeset log-in-div">
-      <div id="login-loader" class="lds-ripple"><div></div><div></div></div>
+      
+      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
+      
     </div>
 
   </nav>
@@ -452,128 +463,325 @@
   <!-- Navigation tabs (sticky) -->
   
 </header>
-
-<!-- We need this component here to check if user is logged in any page -->
-
-<openvidu-register style="display: none"></openvidu-register>
-
     
     <div class="md-container" data-md-component="container">
       
       
         
           
-            
+            <!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/tabs.html -->
+
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+
+
+<!-- Navigation tabs -->
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
+      
         
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+            
+        
+
+        
+            
+        
+      
+        
+        
+            
+        
+
+        
+            
+        
+      
+
+      
+        
+            
+  
+
+  <!-- Determine classes -->
   
   
-  
+
+  <!-- Navigation item with nested items -->
   
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
   
+
+  <!-- Navigation link icon -->
   
     
   
+
+  <!-- Navigation link title -->
   Home
 
       </a>
     </li>
   
 
+        
       
         
+            
+  
+
+  <!-- Determine classes -->
   
   
-  
+
+  <!-- Navigation item with nested items -->
   
     
+
+    <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
         <a href="/latest/meet/" class="md-tabs__link">
           
   
+
+  <!-- Navigation link icon -->
   
     
   
+
+  <!-- Navigation link title -->
   OpenVidu Meet [BETA]
 
         </a>
       </li>
     
+
+  <!-- Navigation item -->
   
 
+        
       
         
+            
+  
+
+  <!-- Determine classes -->
   
   
-  
+
+  <!-- Navigation item with nested items -->
   
     
+
+    <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
         <a href="/latest/docs/" class="md-tabs__link">
           
   
+
+  <!-- Navigation link icon -->
   
     
   
+
+  <!-- Navigation link title -->
   OpenVidu Platform
 
         </a>
       </li>
     
+
+  <!-- Navigation item -->
   
 
+        
       
         
+            
+  
+
+  <!-- Determine classes -->
   
   
-  
+
+  <!-- Navigation item with nested items -->
   
     
+
+    <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
         <a href="../../support/" class="md-tabs__link">
           
   
+
+  <!-- Navigation link icon -->
   
     
   
+
+  <!-- Navigation link title -->
   Support
 
         </a>
       </li>
     
+
+  <!-- Navigation item -->
   
 
+        
       
         
+            
+  
+
+  <!-- Determine classes -->
   
   
-  
+
+  <!-- Navigation item with nested items -->
   
     
+
+    <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
         <a href="../../pricing/" class="md-tabs__link">
           
   
+
+  <!-- Navigation link icon -->
   
     
   
+
+  <!-- Navigation link title -->
   Pricing
 
         </a>
       </li>
     
+
+  <!-- Navigation item -->
   
 
+        
+      
+        
+            
+                
+                
+                    
+                
+                    
+                
+                <li class="md-tabs__item md-tabs__item--dropdown">
+                    <a href="#" class="md-tabs__link">
+                        Team
+                        <span class="dropdown-caret"></span>
+                    </a>
+                    <div class="md-tabs__dropdown">
+                        
+                            
+  
+  
+    
+  
+  <a href="../../about-us/" class="md-tabs__dropdown-link">
+    
+  
+
+  <!-- Navigation link icon -->
+  
+    
+  
+
+  <!-- Navigation link title -->
+  About Us
+
+  </a>
+
+                        
+                            
+  
+  
+    
+  
+  <a href="../../research/" class="md-tabs__dropdown-link">
+    
+  
+
+  <!-- Navigation link icon -->
+  
+    
+  
+
+  <!-- Navigation link title -->
+  Research
+
+  </a>
+
+                        
+                    </div>
+                </li>
+            
+        
+      
+        
+            
+        
       
     </ul>
   </div>
@@ -2847,6 +3055,8 @@
       
         
       
+        
+      
     
     
     
@@ -3306,6 +3516,34 @@
     
   
     Admin Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-components-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demo App
   
 
     
@@ -3873,6 +4111,8 @@
       
         
           
+        
+      
         
       
         
@@ -4535,6 +4775,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/oracle/install-tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4554,6 +4822,10 @@
       
         
           
+        
+      
+        
+      
         
       
         
@@ -5064,6 +5336,184 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_5_5" id="__nav_3_5_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/oracle/install-tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5083,6 +5533,8 @@
       
         
           
+        
+      
         
       
         
@@ -5593,6 +6045,156 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_6_5" id="__nav_3_5_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5612,6 +6214,8 @@
       
         
           
+        
+      
         
       
         
@@ -6152,6 +6756,156 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_7_5" id="__nav_3_5_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6335,6 +7089,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -6385,6 +7145,34 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/backup-and-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup and restore OpenVidu deployments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -6486,6 +7274,62 @@
     
   
     Enable and disable modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/enable-disable-mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable and disable MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/external-mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure external MongoDB
   
 
     
@@ -7206,6 +8050,184 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Us
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About Us
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Us
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -7472,9 +8494,9 @@
             </div>
             <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
               <div class="footer-conditions-list">
-                <a href="/conditions/privacy-policy/">Privacy policy</a>
-                <a href="/conditions/cookie-policy/">Cookie policy</a>
-                <a href="/conditions/terms-of-service/">Terms of service</a>
+                <a href="../../conditions/privacy-policy/">Privacy policy</a>
+                <a href="../../conditions/cookie-policy/">Cookie policy</a>
+                <a href="../../conditions/terms-of-service/">Terms of service</a>
               </div>
             </div>
           </div>
@@ -7482,8 +8504,8 @@
 
         <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
           <h4>ACKNOWLEDGMENTS</h4>
-          <a href="/acknowledgments" style="display: flex; gap: 8px;">
-            <img class="acknowledgments-footer" style="max-width: 260px;" src="/assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
+          <a href="../../acknowledgments" style="display: flex; gap: 8px;">
+            <img class="acknowledgments-footer" style="max-width: 260px;" src="../../assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
           </a>
         </div>
 
@@ -7584,13 +8606,13 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "content.tooltips", "navigation.tabs", "navigation.tracking", "navigation.footer", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "content.tooltips", "navigation.tabs", "navigation.tracking", "navigation.footer", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
     
     
 
 <!-- Add scripts that need to run before here -->
 
-<script src="/javascripts/target-blank.js"></script>
+<script src="../../javascripts/target-blank.js"></script>
 
 
 
@@ -7601,7 +8623,9 @@
 
 
 
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+
+
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="../../javascripts/openvidu-register/openvidu-register.js"></script>
       
