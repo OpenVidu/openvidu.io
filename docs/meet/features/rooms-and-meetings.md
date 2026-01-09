@@ -177,9 +177,13 @@ This view allows participants tuning their microphone and camera before joining 
 
 #### Meeting view
 
-This is the main view of the meeting, where participants can interact with each other.
+The Meeting View is the central interface where all participants can see, hear, and interact with each other in real time. It features a smart, dynamic layout that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.
 
-<a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/room-view.png" data-type="image" data-desc-position="bottom" data-gallery="gallery11"><img src="../../../assets/images/meet/rooms-and-meetings/room-view.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/rooms-and-meetings/meeting-view.png" data-type="image" data-desc-position="bottom" data-gallery="gallery11"><img src="../../../assets/images/meet/rooms-and-meetings/meeting-view.png" loading="lazy" class="round-corners"/></a>
+
+Users can customize the layout to suit their preferences or meeting requirements. When the number of participants exceeds the maximum visible capacity of the selected layout, a visual badge appears to indicate how many additional participants are currently hidden. This ensures a clean, organized interface while keeping users informed of all attendees.
+
+This intelligent meeting layout enhances collaboration, improves usability, and supports seamless communication in both small and large meetings.
 
 #### Recording view
 
