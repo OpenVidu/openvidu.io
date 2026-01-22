@@ -29,6 +29,17 @@ live_captions:
 
     You must set up a specific `provider` from the list of [supported providers](#supported-ai-providers). Each provider has its own **custom configuration**. Some of them provide advanced features such as integrated profanity filters or translation. Check out the [configuration reference](#configuration-reference) below for more details.
 
+### Automatic vs Manual processing
+
+You can decide when the Speech Processing agent will connect to Rooms to provide Live Captions service:
+
+- **Automatic processing**: the agent will automatically connect to new Rooms as soon as they are created. All your Rooms will be transcribed without any additional action from your application.
+  Set YAML property `live_captions.processing` to `automatic` in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment).
+- **Manual processing**: the agent will connect to new Rooms only when your application dictates it with [explicit agent dispatch](./openvidu-agents/agent-dispatch.md#explicit-agent-dispatch). This allows you to toggle Live Captions service on demand for specific Rooms.
+  Set YAML property `live_captions.processing` to `manual` in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment).
+
+Learn more about [Automatic vs Manual processing](./openvidu-agents/agent-dispatch.md).
+
 ## How to receive Live Captions in your frontend application
 
 Live Captions are received in your frontend application using the [Text Stream API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/data/text-streams/#handling-incoming-streams){:target="\_blank"} of LiveKit client SDKs. You must specifically subscribe to the Room topic **`lk.transcription`** to automatically receive transcription events. For example, in JavaScript:
@@ -71,36 +82,130 @@ The difference between interim and final transcriptions is important: interim re
 
 ## Supported AI providers
 
-Below is the list of cloud providers that can handle the Live Captions service.
+OpenVidu Live Captions service supports multiple AI providers for speech-to-text transcription. They are grouped into two categories:
 
-| AI provider                                                                           | YAML property  | Service description                                                                                                                                                                                                                             | Interim results  |
-| ------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | Uses [Amazon Transcribe :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
-| ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | Uses [Azure Speech service :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
-| ![Azure OpenAI](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}        | `azure_openai` | Uses [Azure OpenAI :fontawesome-solid-external-link:{.external-link-icon}](https://azure.microsoft.com/en-us/products/ai-services/openai-service/){:target="\_blank"}                                                                           | :material-close: |
-| ![Google Cloud](../../assets/images/ai-providers/google.svg){.ai-provider-icon}       | `google`       | Uses [Google Cloud Speech-to-Text :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/speech-to-text){:target="\_blank"}                                                                                           | :material-close: |
-| ![OpenAI](../../assets/images/ai-providers/openai.svg){.ai-provider-icon}             | `openai`       | Uses [OpenAI Speech to text :fontawesome-solid-external-link:{.external-link-icon}](https://platform.openai.com/docs/guides/speech-to-text){:target="\_blank"}                                                                                  | :material-close: |
-| ![Groq](../../assets/images/ai-providers/groq.svg){.ai-provider-icon}                 | `groq`         | Uses [Groq Speech :fontawesome-solid-external-link:{.external-link-icon}](https://console.groq.com/docs/speech-to-text){:target="\_blank"}                                                                                                      | :material-close: |
-| ![Deepgram](../../assets/images/ai-providers/deepgram.svg){.ai-provider-icon}         | `deepgram`     | Uses [Deepgram Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://deepgram.com/product/speech-to-text){:target="\_blank"}                                                                                       | :material-check: |
-| ![AssemblyAI](../../assets/images/ai-providers/assemblyai.svg){.ai-provider-icon}     | `assemblyai`   | Uses [AssemblyAI Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.assemblyai.com/products/speech-to-text){:target="\_blank"}                                                                              | :material-check: |
-| ![Fal](../../assets/images/ai-providers/fal.svg){.ai-provider-icon}                   | `fal`          | Uses [Fal Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.fal.ai/guides/convert-speech-to-text/){:target="\_blank"}                                                                                     | :material-close: |
-| ![Clova](../../assets/images/ai-providers/clova.svg){.ai-provider-icon}               | `clova`        | Uses [Naver Clova Speech Recognition :fontawesome-solid-external-link:{.external-link-icon}](https://api.ncloud-docs.com/docs/en/ai-naver-clovaspeechrecognition-stt){:target="\_blank"}. Specialized in Japanese, Korean and Chinese languages | :material-close: |
-| ![Speechmatics](../../assets/images/ai-providers/speechmatics.svg){.ai-provider-icon} | `speechmatics` | Uses [Speechmatics Real-Time API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.speechmatics.com/introduction/rt-guide){:target="\_blank"}                                                                                | :material-check: |
-| ![Gladia](../../assets/images/ai-providers/gladia.svg){.ai-provider-icon}             | `gladia`       | Uses [Gladia Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.gladia.io/product/async-transcription){:target="\_blank"}                                                                                   | :material-check: |
-| ![Sarvam](../../assets/images/ai-providers/sarvam.svg){.ai-provider-icon}             | `sarvam`       | Uses [Sarvam Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe){:target="\_blank"}. Optimized for Indian languages                                 | :material-close: |
-| ![MistralAI](../../assets/images/ai-providers/mistralai.svg){.ai-provider-icon}       | `mistralai`    | Uses [Voxtral :fontawesome-solid-external-link:{.external-link-icon}](https://mistral.ai/news/voxtral){:target="\_blank"}                                                                                                                       | :material-close: |
-| ![Cartesia](../../assets/images/ai-providers/cartesia.svg){.ai-provider-icon}         | `cartesia`     | Uses [Cartesia Ink-Whisper :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/ink){:target="\_blank"}                                                                                                                  | :material-close: |
-| ![Soniox](../../assets/images/ai-providers/soniox.svg){.ai-provider-icon}             | `soniox`       | Uses [Soniox Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/speech-to-text){:target="\_blank"}                                                                                                   | :material-check: |
+- [Cloud providers](#cloud-providers): third-party providers that offer their services through cloud APIs. They provide easy setup, scalability and a wide range of features, but may have higher latency and costs depending on usage.
+- [Local providers](#local-providers): these providers can be deployed on-premises along with your OpenVidu deployment. They offer lower latency, data privacy and third-party cost control, but they will require generous infrastructure resources (CPU and memory).
 
-This is the description of the columns in the table above:
+### Cloud providers
 
-- **YAML property**: set this value as the `provider` property in the [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) file to use that provider.
+Third-party AI providers that offer their services through cloud APIs. They provide easy setup, scalability and a wide range of features, but may have higher latency and costs depending on usage.
+
+The table below lists the cloud providers that can handle the Live Captions service. The columns in the table are described as follows:
+
+- **YAML `provider` property**: the value to set in `live_captions.provider` property of [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) file to use that provider.
+- **YAML `docker_image` property**: the value to set in `docker_image` property of [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) file to use that provider.
 - **Interim results**: whether the provider supports interim (non-final) transcription results. See [Final vs Interim transcriptions](#final-vs-interim-transcriptions) for more details.
+
+| AI provider   | YAML `provider` property | YAML `docker_image` property | Service description | Interim results  |
+| ------------------------------------------------------------------------------------- | -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Amazon Transcribe :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
+| ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Azure Speech service :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
+| ![Azure OpenAI](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}        | `azure_openai` | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Azure OpenAI :fontawesome-solid-external-link:{.external-link-icon}](https://azure.microsoft.com/en-us/products/ai-services/openai-service/){:target="\_blank"}                                                                           | :material-close: |
+| ![Google Cloud](../../assets/images/ai-providers/google.svg){.ai-provider-icon}       | `google`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Google Cloud Speech-to-Text :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/speech-to-text){:target="\_blank"}                                                                                           | :material-close: |
+| ![OpenAI](../../assets/images/ai-providers/openai.svg){.ai-provider-icon}             | `openai`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [OpenAI Speech to text :fontawesome-solid-external-link:{.external-link-icon}](https://platform.openai.com/docs/guides/speech-to-text){:target="\_blank"}                                                                                  | :material-close: |
+| ![Groq](../../assets/images/ai-providers/groq.svg){.ai-provider-icon}                 | `groq`         | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Groq Speech :fontawesome-solid-external-link:{.external-link-icon}](https://console.groq.com/docs/speech-to-text){:target="\_blank"}                                                                                                      | :material-close: |
+| ![Deepgram](../../assets/images/ai-providers/deepgram.svg){.ai-provider-icon}         | `deepgram`     | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Deepgram Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://deepgram.com/product/speech-to-text){:target="\_blank"}                                                                                       | :material-check: |
+| ![AssemblyAI](../../assets/images/ai-providers/assemblyai.svg){.ai-provider-icon}     | `assemblyai`   | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [AssemblyAI Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.assemblyai.com/products/speech-to-text){:target="\_blank"}                                                                              | :material-check: |
+| ![Fal](../../assets/images/ai-providers/fal.svg){.ai-provider-icon}                   | `fal`          | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Fal Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.fal.ai/guides/convert-speech-to-text/){:target="\_blank"}                                                                                     | :material-close: |
+| ![Clova](../../assets/images/ai-providers/clova.svg){.ai-provider-icon}               | `clova`        | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Naver Clova Speech Recognition :fontawesome-solid-external-link:{.external-link-icon}](https://api.ncloud-docs.com/docs/en/ai-naver-clovaspeechrecognition-stt){:target="\_blank"}. Specialized in Japanese, Korean and Chinese languages | :material-close: |
+| ![Speechmatics](../../assets/images/ai-providers/speechmatics.svg){.ai-provider-icon} | `speechmatics` | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Speechmatics Real-Time API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.speechmatics.com/introduction/rt-guide){:target="\_blank"}                                                                                | :material-check: |
+| ![Gladia](../../assets/images/ai-providers/gladia.svg){.ai-provider-icon}             | `gladia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Gladia Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.gladia.io/product/async-transcription){:target="\_blank"}                                                                                   | :material-check: |
+| ![Sarvam](../../assets/images/ai-providers/sarvam.svg){.ai-provider-icon}             | `sarvam`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Sarvam Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe){:target="\_blank"}. Optimized for Indian languages                                 | :material-close: |
+| ![MistralAI](../../assets/images/ai-providers/mistralai.svg){.ai-provider-icon}       | `mistralai`    | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Voxtral :fontawesome-solid-external-link:{.external-link-icon}](https://mistral.ai/news/voxtral){:target="\_blank"}                                                                                                                       | :material-close: |
+| ![Cartesia](../../assets/images/ai-providers/cartesia.svg){.ai-provider-icon}         | `cartesia`     | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Cartesia Ink-Whisper :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/ink){:target="\_blank"}                                                                                                                  | :material-close: |
+| ![Soniox](../../assets/images/ai-providers/soniox.svg){.ai-provider-icon}             | `soniox`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Soniox Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/speech-to-text){:target="\_blank"}                                                                                                   | :material-check: |
+| ![Nvidia](../../assets/images/ai-providers/nvidia.svg){.ai-provider-icon}             | `nvidia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [NVIDIA Riva ASR :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/asr/asr-overview.html){:target="\_blank"}  | :material-check: |
 
 !!! info
 
     - You will need an account in the provider's platform to get the necessary **credentials**.
     - Each provider has its own **custom configuration**. Some of them provide advanced features such as integrated profanity filters or translation. Check out the [configuration reference](#configuration-reference) below for more details.
+
+### Local providers
+
+These AI providers can be deployed on-premises along with your OpenVidu deployment. They offer lower latency, data privacy and third-party cost control, but they will require generous infrastructure resources (CPU and memory).
+
+#### Vosk
+
+[Vosk :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/){:target="_blank"} is an open-source offline speech recognition toolkit. It supports multiple languages and can run on modest hardware. OpenVidu offers a dedicated Docker image that includes Vosk with some small-sized models for multiple languages, but you can also build your own images with larger models.
+
+##### Enabling Vosk provider
+
+To enable Live Captions service using Vosk:
+
+1. In file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) set properties `docker_image` and `live_captions.provider` as follows:
+
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
+    live_captions:
+      provider: vosk
+    ```
+
+2. Configure additional Vosk settings under `live_captions.vosk`. Especially important is property `model` to select the desired language model.
+
+    ```yaml
+    live_captions:
+    vosk:
+      # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
+      # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
+      # - vosk-model-en-us-0.22-lgraph (English US)
+      # - vosk-model-small-cn-0.22 (Chinese)
+      # - vosk-model-small-de-0.15 (German)
+      # - vosk-model-small-en-in-0.4 (English India)
+      # - vosk-model-small-es-0.42 (Spanish)
+      # - vosk-model-small-fr-0.22 (French)
+      # - vosk-model-small-hi-0.22 (Hindi)
+      # - vosk-model-small-it-0.22 (Italian)
+      # - vosk-model-small-ja-0.22 (Japanese)
+      # - vosk-model-small-nl-0.22 (Dutch)
+      # - vosk-model-small-pt-0.3 (Portuguese)
+      # - vosk-model-small-ru-0.22 (Russian)
+      model: vosk-model-en-us-0.22-lgraph
+      # Language code for reference. It has no effect other than observability purposes.
+      # If a pre-installed "model" is declared, this will be set automatically if empty.
+      language:
+      # Audio sample rate in Hz. Default is 16000.
+      sample_rate:
+      # Whether to return interim/partial results during recognition. Default is true.
+      partial_results:
+    ```
+
+##### Build a custom Vosk image
+
+The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.5.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([https://alphacephei.com/vosk/models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"}). To do so, follow these steps:
+
+```bash
+# Clone repository
+git clone git@github.com:OpenVidu/openvidu-agents.git
+cd openvidu-agents/speech-processing
+
+# Empty existing models folder
+rm -rf vosk-models/*
+
+# Download and unzip desired model into "vosk-models" folder
+# See available models at https://alphacephei.com/vosk/models
+cd vosk-models
+wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+unzip vosk-model-en-us-0.22.zip
+rm vosk-model-en-us-0.22.zip
+cd ..
+
+# Build your custom Docker image
+docker build -f Dockerfile.base -t <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-base:main .
+docker build -f Dockerfile.vosk -t <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG .
+```
+
+The resulting Docker image `<YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG` can be pushed to your remote Docker repository and be used in your OpenVidu deployment by setting property `docker_image` in file 
+[`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment):
+
+```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:CUSTOM_TAG
+live_captions:
+  provider: vosk
+  vosk:
+    model: vosk-model-en-us-0.22 # Or any other model available in your custom image
+```
 
 ## Tutorial
 
@@ -111,13 +216,16 @@ Check out the [Live Captions tutorial](../tutorials/ai-services/openvidu-live-ca
 Below are the properties related to the Live Captions service available in the `agent-speech-processing.yaml` file.
 
 ```yaml
+# Docker image of the agent.
+docker_image: docker.io/openvidu/agent-speech-processing-cloud:3.5.0
+
 live_captions:
   # How this agent will connect to Rooms [automatic, manual]
   # - automatic: the agent will automatically connect to new Rooms.
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
   processing: automatic
 
-  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox]
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, vosk]
   # The custom configuration for the selected provider must be set below
   provider:
 
@@ -167,7 +275,7 @@ live_captions:
     # List of words or phrases to boost recognition accuracy. Azure will give higher priority to these phrases during recognition.
     phrase_list:
     # Controls punctuation behavior. If True, enables explicit punctuation mode where punctuation marks are added explicitly. If False (default), uses Azure's default punctuation behavior.
-    explicit_punctuation: 
+    explicit_punctuation:
 
   azure_openai:
     # Credentials for Azure OpenAI APIs. See https://learn.microsoft.com/en-us/azure/api-management/api-management-authenticate-authorize-azure-openai
@@ -420,4 +528,50 @@ live_captions:
       # - "es"
     # Set context to improve recognition of difficult and rare words. Context is a string and can include words, phrases, sentences, or summaries (limit: 10K chars). See https://soniox.com/docs/stt/concepts/context
     context:
+
+  nvidia:
+    # API key for NVIDIA. See https://build.nvidia.com/explore/speech?integrate_nim=true&hosted_api=true&modal=integrate-nim
+    # Required when using NVIDIA's cloud services. To use a self-hosted NVIDIA Riva server setup "server" and "use_ssl" instead.
+    api_key:
+    # The NVIDIA Riva ASR model to use. Default is "parakeet-1.1b-en-US-asr-streaming-silero-vad-sortformer"
+    # See available models: https://build.nvidia.com/search/models?filters=usecase%3Ausecase_speech_to_text
+    model:
+    # The NVIDIA function ID for the model. Default is "1598d209-5e27-4d3c-8079-4751568b1081"
+    function_id:
+    # Whether to add punctuation to transcription results. Default is true.
+    punctuate:
+    # The language code for transcription. Default is "en-US"
+    language_code:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # The NVIDIA Riva server address. Default is "grpc.nvcf.nvidia.com:443"
+    # For self-hosted NIM, use your server address (e.g., "localhost:50051")
+    server:
+    # Whether to use SSL for the connection. Default is true.
+    # Set to false for locally hosted Riva NIM services without SSL.
+    use_ssl:
+
+  vosk:
+    # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
+    # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
+    # - vosk-model-en-us-0.22-lgraph (English US)
+    # - vosk-model-small-cn-0.22 (Chinese)
+    # - vosk-model-small-de-0.15 (German)
+    # - vosk-model-small-en-in-0.4 (English India)
+    # - vosk-model-small-es-0.42 (Spanish)
+    # - vosk-model-small-fr-0.22 (French)
+    # - vosk-model-small-hi-0.22 (Hindi)
+    # - vosk-model-small-it-0.22 (Italian)
+    # - vosk-model-small-ja-0.22 (Japanese)
+    # - vosk-model-small-nl-0.22 (Dutch)
+    # - vosk-model-small-pt-0.3 (Portuguese)
+    # - vosk-model-small-ru-0.22 (Russian)
+    model: vosk-model-en-us-0.22-lgraph
+    # Language code for reference. It has no effect other than observability purposes.
+    # If a pre-installed "model" is declared, this will be set automatically if empty.
+    language:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
 ```

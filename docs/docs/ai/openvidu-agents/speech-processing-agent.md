@@ -130,7 +130,7 @@ Below is the full list of configuration properties available for the Speech Proc
 
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing:3.5.0
+docker_image: docker.io/openvidu/agent-speech-processing-cloud:3.5.0
 
 # Whether to run the agent or not.
 enabled: false
@@ -147,7 +147,7 @@ live_captions:
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
   processing: automatic
 
-  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox]
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, vosk]
   # The custom configuration for the selected provider must be set below
   provider:
 
@@ -197,7 +197,7 @@ live_captions:
     # List of words or phrases to boost recognition accuracy. Azure will give higher priority to these phrases during recognition.
     phrase_list:
     # Controls punctuation behavior. If True, enables explicit punctuation mode where punctuation marks are added explicitly. If False (default), uses Azure's default punctuation behavior.
-    explicit_punctuation: 
+    explicit_punctuation:
 
   azure_openai:
     # Credentials for Azure OpenAI APIs. See https://learn.microsoft.com/en-us/azure/api-management/api-management-authenticate-authorize-azure-openai
@@ -450,5 +450,51 @@ live_captions:
       # - "es"
     # Set context to improve recognition of difficult and rare words. Context is a string and can include words, phrases, sentences, or summaries (limit: 10K chars). See https://soniox.com/docs/stt/concepts/context
     context:
+
+  nvidia:
+    # API key for NVIDIA. See https://build.nvidia.com/explore/speech?integrate_nim=true&hosted_api=true&modal=integrate-nim
+    # Required when using NVIDIA's cloud services. To use a self-hosted NVIDIA Riva server setup "server" and "use_ssl" instead.
+    api_key:
+    # The NVIDIA Riva ASR model to use. Default is "parakeet-1.1b-en-US-asr-streaming-silero-vad-sortformer"
+    # See available models: https://build.nvidia.com/search/models?filters=usecase%3Ausecase_speech_to_text
+    model:
+    # The NVIDIA function ID for the model. Default is "1598d209-5e27-4d3c-8079-4751568b1081"
+    function_id:
+    # Whether to add punctuation to transcription results. Default is true.
+    punctuate:
+    # The language code for transcription. Default is "en-US"
+    language_code:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # The NVIDIA Riva server address. Default is "grpc.nvcf.nvidia.com:443"
+    # For self-hosted NIM, use your server address (e.g., "localhost:50051")
+    server:
+    # Whether to use SSL for the connection. Default is true.
+    # Set to false for locally hosted Riva NIM services without SSL.
+    use_ssl:
+
+  vosk:
+    # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
+    # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
+    # - vosk-model-en-us-0.22-lgraph (English US)
+    # - vosk-model-small-cn-0.22 (Chinese)
+    # - vosk-model-small-de-0.15 (German)
+    # - vosk-model-small-en-in-0.4 (English India)
+    # - vosk-model-small-es-0.42 (Spanish)
+    # - vosk-model-small-fr-0.22 (French)
+    # - vosk-model-small-hi-0.22 (Hindi)
+    # - vosk-model-small-it-0.22 (Italian)
+    # - vosk-model-small-ja-0.22 (Japanese)
+    # - vosk-model-small-nl-0.22 (Dutch)
+    # - vosk-model-small-pt-0.3 (Portuguese)
+    # - vosk-model-small-ru-0.22 (Russian)
+    model: vosk-model-en-us-0.22-lgraph
+    # Language code for reference. It has no effect other than observability purposes.
+    # If a pre-installed "model" is declared, this will be set automatically if empty.
+    language:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
 ```
 
