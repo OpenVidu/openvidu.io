@@ -14,7 +14,7 @@ nav:
           - Rooms and meetings: meet/features/rooms-and-meetings.md
           - Recordings: meet/features/recordings.md
           - Users and permissions: meet/features/users-and-permissions.md
-          # - Live Captions: meet/features/live-captions.md
+          - Live Captions: meet/features/live-captions.md
           # - Transcriptions: meet-transcriptions.md
           # - Translations: meet-translations.md
           # - Summaries: meet-summaries.md

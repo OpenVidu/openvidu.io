@@ -203,9 +203,21 @@ With all the features you need to fine-tune your perfect video calling service.
     Send and receive text messages during your calls for clear communication.
 
 -   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name }
+
     ---
 
     Protect your calls from man-in-the-middle attacks, ensuring only your users can decrypt audio, video, and chat.
+
+
+-   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name }
+
+    ---
+
+    Access a wide range of speech-to-text providers for accurate and flexible real-time transcription.
+
+</div>
+
+<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
 
 
 -   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
@@ -213,17 +225,6 @@ With all the features you need to fine-tune your perfect video calling service.
     ---
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
-
-
-</div>
-
-<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
-
--   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name .coming-soon-overlay }
-
-    ---
-
-    Access a wide range of speech-to-text providers for accurate and flexible real-time transcription.
 
 -   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay }
 
@@ -387,7 +388,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
     ---
 
-    OpenVidu Meet is localized in multiple languages. Live captions and real-time transcriptions comming soon. 
+    OpenVidu Meet is localized in multiple languages. Live captions and real-time transcriptions improve accessibility for hearing-impaired users and non-native speakers.
 
 -   __Persistence and continuity__{ .feature-name }
 

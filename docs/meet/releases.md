@@ -63,8 +63,6 @@ If your use case requires a high degree of customization, or if you need to buil
 - Mobile platforms embedding (iOS and Android).
 - More branding and customization options.
 - Locked rooms.
-- E2E encryption.
-- Live captions.
 - AI meeting summaries.
 - And much more...
 
