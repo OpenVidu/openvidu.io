@@ -168,7 +168,7 @@ tags:
 
     ---
 
-    Fine-grained access control and highly secure deployments for the most demanding security requirements. **E2E encryption coming soon!**
+    Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
 -   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 
