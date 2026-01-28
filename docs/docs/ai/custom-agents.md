@@ -106,45 +106,13 @@ CUSTOM_CONFIGURATION: ...
 
 ### 3. Restart OpenVidu
 
-Depending on your [OpenVidu deployment type](../self-hosting/deployment-types.md):
-
-=== "OpenVidu Local (Development)"
-
-    Run where `docker-compose.yaml` is located:
-
-    ```bash
-    docker compose restart
-    ```
-
-=== "OpenVidu Single Node"
-
-    Run this command in your node:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-=== "OpenVidu Elastic"
-
-    Run this command in your Master Node:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-=== "OpenVidu High Availability"
-
-    Run this command in one of your Master Nodes:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
+--8<-- "shared/self-hosting/restart-openvidu-deployment.md"
 
 After restarting OpenVidu your agent will be up and running, ready to process new Rooms.
 
 !!! warning
 
-    If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
+	If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
 
 ## Tips when coding your custom agent
 
