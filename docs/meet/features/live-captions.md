@@ -8,42 +8,57 @@ keywords: OpenVidu Meet, live captions, speech to text, real-time transcription,
 
 OpenVidu Meet includes a built-in **Live Captions** feature that turns speech into text in real-time. This is a powerful tool for making your meetings more accessible to hearing-impaired users, helping participants in noisy environments, and assisting non-native speakers.
 
-By following this guide, you will learn how to set up the **Speech Processing Agent** and activate captions for your video calls.
+## How to Enable Live Captions in OpenVidu Meet
 
----
+### 1. Enable Live Captions Service in OpenVidu
 
-## How to Enable Live Captions
+--8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
 
-### Step 1: Deploy OpenVidu with Caption Support
 
-Live captions require a specific deployment configuration. You must deploy OpenVidu with the specialized [Speech Processing Agent](../../docs/ai/openvidu-agents/speech-processing-agent.md) configuration.
+Modify file `agent-speech-processing.yaml` to enable the Live Captions Service with `processing: manual`:
 
-### 1. Deploy with Speech Support
+```yaml
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
 
-To use captions, you must deploy OpenVidu with the specialized [Speech Processing Agent](../../docs/ai/openvidu-agents/speech-processing-agent.md) configuration.
-!!!warning
-	OpenVidu Meet requires that the Speech Processing Agent is deployed in `manual` mode.
+enabled: true # (1)!
 
-### 2. Activate the Meet Caption Variable
+live_captions:
+  processing: manual # (2)!
 
-After the Speech Processing Agent is configured, you need to turn the feature "On" in the OpenVidu Meet settings.
+```
 
-- **Action:** Set the following environment variable in your configuration:
-  `MEET_CAPTIONS_ENABLED=true`
+1. Set `enabled` to `true` to activate the Speech Processing Agent.
+2. Set **processing** to `manual`; `automatic` processing is not supported for OpenVidu Meet.
 
-### 3. Restart OpenVidu Meet
 
-Apply your changes by restarting the OpenVidu Meet service. This ensures the system recognizes the new live captioning capabilities.
+!!!info
+	The Speech Processing Agent **uses a local Vosk model** for speech-to-text transcription by default. For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](../../docs/ai/live-captions.md#cloud-providers) for more details.
 
-### 4. Enable Captions for Specific Rooms
+### 2. Enable Captions in OpenVidu Meet configuration
 
-You have total control over which meetings use captions. You can enable them in two ways:
+1. SSH into an OpenVidu Node and navigate to the OpenVidu configuration directory.
 
-- **Via the Interface:** When creating a room in the **OpenVidu Meet UI**, simply toggle the "Captions" switch to **ON**.
+	--8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
 
-[Photo of the Room Creation Interface with Captions Toggle]
+2. Depending on your deployment type, edit **one** of the following files:
+	- For **OpenVidu Local (Development)** deployments, edit `docker-compose.yml`.
+	- For other deployment types, edit `meet.env`.
 
-- **Via the API:** If you are an advanced user, set the `captions` property to `true` when using the [OpenVidu REST API](../embedded/reference/api.html#/operations/createRoom).
+3. Ensure the following configuration variable is set:
+	```
+	MEET_CAPTIONS_ENABLED=true
+	```
+
+### 3. Restart OpenVidu
+
+Apply your changes by restarting the OpenVidu. This ensures the system recognizes the new live captioning capabilities.
+
+--8<-- "shared/self-hosting/restart-openvidu-deployment.md"
+
+### 4. Enable/Disable Captions for specific Rooms
+
+Captions are enabled by default when a room is created, whether through the UI or the [REST API](../embedded/reference/api.html#/operations/createRoom). This behavior can be overridden to enable or disable captions on a per-room basis.
+
 
 ---
 
