@@ -10,10 +10,16 @@ OpenVidu Meet includes a built-in **Live Captions** feature that turns speech in
 
 ## How to Enable Live Captions in OpenVidu Meet
 
-### 1. Enable Live Captions Service in OpenVidu
+!!!warning "Local Meet Deployment Limitation"
+	Live Captions are **not available** in local Meet deployments. You must use either the [OpenVidu Local deployment](../..//docs/self-hosting/local.md) or a [OpenVidu production deployment](../../docs/self-hosting/deployment-types.md) to enable this feature.
+
+### 1. Connect to your OpenVidu deployment
+
+SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
 
 --8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
 
+### 2. Enable the Speech Processing Agent
 
 Modify file `agent-speech-processing.yaml` to enable the Live Captions Service with `processing: manual`:
 
@@ -28,34 +34,32 @@ live_captions:
 ```
 
 1. Set `enabled` to `true` to activate the Speech Processing Agent.
-2. Set **processing** to `manual`; `automatic` processing is not supported for OpenVidu Meet.
+2. Set **processing** to `manual`; participants will activate captions on demand via a toolbar button.
 
 
 !!!info
-	The Speech Processing Agent **uses a local Vosk model** for speech-to-text transcription by default. For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](../../docs/ai/live-captions.md#cloud-providers) for more details.
+	By default, the Speech Processing Agent uses a local Vosk model for speech-to-text transcription.
 
-### 2. Enable Captions in OpenVidu Meet configuration
+	For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](../../docs/ai/live-captions.md#cloud-providers) for more information.
 
-1. SSH into an OpenVidu Node and navigate to the OpenVidu configuration directory.
+!!!warning "Default language is English"
+	The Speech Processing Agent uses **English** for speech-to-text transcription by default. To use a different language, you must configure a different Vosk model. See [Vosk models configuration](../..//docs/ai/live-captions.md/#vosk) for details on changing the language model.
 
-	--8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
+### 3. Enable Captions in OpenVidu Meet configuration
 
-2. Depending on your deployment type, edit **one** of the following files:
-	- For **OpenVidu Local (Development)** deployments, edit `docker-compose.yml`.
-	- For other deployment types, edit `meet.env`.
+Edit the `meet.env` file and ensure the following configuration variable is set:
 
-3. Ensure the following configuration variable is set:
-	```
-	MEET_CAPTIONS_ENABLED=true
-	```
+```
+MEET_CAPTIONS_ENABLED=true
+```
 
-### 3. Restart OpenVidu
+### 4. Restart OpenVidu
 
-Apply your changes by restarting the OpenVidu. This ensures the system recognizes the new live captioning capabilities.
+Apply your changes by restarting OpenVidu. This ensures the system recognizes the new live captioning capabilities.
 
 --8<-- "shared/self-hosting/restart-openvidu-deployment.md"
 
-### 4. Enable/Disable Captions for specific Rooms
+### 5. Enable/Disable Captions for specific Rooms
 
 Captions are enabled by default when a room is created, whether through the UI or the [REST API](../embedded/reference/api.html#/operations/createRoom). This behavior can be overridden to enable or disable captions on a per-room basis.
 
@@ -64,11 +68,11 @@ Captions are enabled by default when a room is created, whether through the UI o
 
 ## 🎙️ Using Live Captions in a Meeting
 
-Once the meeting starts, the experience is seamless:
+Once live captions are enabled for a room, participants can activate them during the meeting:
 
-- **Automatic Transcription:** Captions appear instantly at the bottom of the screen as participants speak.
-- **User Friendly:** No extra clicks are needed from the participants—the text appears automatically if the room was configured for captions.
-- **Clear Visibility:** The interface is designed to be easy to read without blocking the video feed.
+1. **Activate Captions:** Click the **captions button** in the toolbar to enable live captions.
+2. **Real-time Transcription:** Once activated, captions appear instantly at the bottom of the screen as participants speak—no additional configuration is required.
+3. **Clear Visibility:** The interface is designed to be easy to read without blocking the video feed.
 
 [Screenshot of Live Captions in Action]
 
