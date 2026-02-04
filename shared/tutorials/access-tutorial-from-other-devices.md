@@ -8,13 +8,13 @@ To access this tutorial from other computers or phones, follow these steps:
 
     ```text
     # Example for IP address 192.168.1.100
-    OV_MEET_SERVER_URL=https://192-168-1-100.openvidu-local.dev:9443
+    OV_MEET_SERVER_URL=https://192-168-1-100.openvidu-local.dev:9443/meet
     ```
 
 4.  **Update the OpenVidu Meet WebComponent script URL**: In the `public/index.html` file, update the `<script>` tag that includes the OpenVidu Meet WebComponent to use the same base URL as above.
 
     ```html
-    <script src="http://192-168-1-100.openvidu-local.dev:9443/v1/openvidu-meet.js"></script>
+    <script src="http://192-168-1-100.openvidu-local.dev:9443/meet/v1/openvidu-meet.js"></script>
     ```
 
 5.  **Restart the tutorial** to apply the changes:

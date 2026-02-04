@@ -94,7 +94,7 @@ To use the OpenVidu Meet WebComponent in your application, you need to include i
 
 ```html title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.5.0/meet-webcomponent-basic/public/index.html#L66-L67' target='_blank'>index.html</a>" linenums="66"
 <!-- OpenVidu Meet WebComponent bundle -->
-<script src="http://localhost:9080/v1/openvidu-meet.js"></script>
+<script src="http://localhost:9080/meet/v1/openvidu-meet.js"></script>
 ```
 
 ---
@@ -121,7 +121,7 @@ function getRoomListItemTemplate(room) {
                 >
                     Join as Speaker
                 </button>
-                <button 
+                <button
                     title="Delete room"
                     class="icon-button delete-button"
                     onclick="deleteRoom('${room.roomId}');"
@@ -153,7 +153,7 @@ function joinRoom(roomUrl) {
     // Inject the OpenVidu Meet component into the meeting container specifying the room URL
     const meetingContainer = document.querySelector('#meeting-container');
     meetingContainer.innerHTML = `
-        <openvidu-meet 
+        <openvidu-meet
             room-url="${roomUrl}"
             leave-redirect-url="/"
         >
