@@ -97,7 +97,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP      | 9009        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service.                                                      |
 | TCP      | 7880     | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
 | TCP      | 4443        | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service.                                                 |
-| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
+| TCP      | 9080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
 | TCP      | 7000-7001   | Master Nodes, Media Nodes | For internal Redis communication                                                                  |
 | TCP      | 9100        | Master Nodes, Media Nodes | For internal MinIO communication                                                                  |
 | TCP      | 20000       | Master Nodes, Media Nodes | For internal Mongo communication                                                                  |

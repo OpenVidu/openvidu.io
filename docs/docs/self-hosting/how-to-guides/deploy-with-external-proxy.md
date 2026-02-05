@@ -193,7 +193,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 1935           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP         | 5349           | External proxy | Optional and needed only if you have a domain for TURN and you want to use TURN with TLS |
         | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP         | 6080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
+        | TCP         | 9080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
         | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
         | TCP         | 7880           | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
         | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
