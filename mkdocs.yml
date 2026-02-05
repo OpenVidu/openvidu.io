@@ -197,6 +197,7 @@ nav:
               - Enable and disable MongoDB: docs/self-hosting/how-to-guides/enable-disable-mongodb.md
               - Configure external MongoDB: docs/self-hosting/how-to-guides/external-mongodb.md
               - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
+              - Customize OpenVidu Meet base path: docs/self-hosting/how-to-guides/customize-meet-base-path.md
               - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
       - AI Services:
           - Overview: docs/ai/overview.md

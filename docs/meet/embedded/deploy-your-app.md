@@ -11,6 +11,9 @@ There are two options:
 - [**Deploy alongside OpenVidu**](#deploy-alongside-openvidu): Run your application on the same server(s) as your OpenVidu deployment. OpenVidu will automatically proxy requests to your application.
 - [**Deploy in a separate environment**](#deploy-in-a-separate-environment): Run your application on its own infrastructure and connect it to your OpenVidu deployment remotely.
 
+!!! info
+    All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](/docs/self-hosting/how-to-guides/customize-meet-base-path/) how-to guide for more details.
+
 ---
 
 ## Deploy alongside OpenVidu

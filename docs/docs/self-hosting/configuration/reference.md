@@ -31,6 +31,7 @@ This file defines global configuration parameters used by other services. Such a
 | **`GRAFANA_ADMIN_PASSWORD`** | Admin password for Grafana |
 | **`OPENVIDU_PRO_LICENSE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Pro license key. Get an OpenVidu Pro License [here](/account/){:target="_blank"}. |
 | **`OPENVIDU_RTC_ENGINE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> The WebRTC engine to use. Can be `pion` or `mediasoup`. |
+| **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
 ## `meet.env`:
 
@@ -69,6 +70,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REDIS_SENTINEL_HOST_LIST`** | Redis Sentinel host list used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_REDIS_SENTINEL_PASSWORD`** | Redis Sentinel password used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_REDIS_SENTINEL_MASTER_NAME`{.no-break}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
+| **`MEET_BASE_PATH`** | Base path where the OpenVidu Meet application is served. Default is `/meet`. |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
 
 ## <span class="openvidu-tag openvidu-pro-tag">PRO</span> `v2compatibility.env`
