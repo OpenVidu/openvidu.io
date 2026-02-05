@@ -45,20 +45,6 @@ This is how the architecture of the deployment looks like.
     - 4 fixed EC2 Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
-=== "Architecture overview with TURN over TLS"
-
-    <figure markdown>
-    ![OpenVidu High Availability AWS Architecture with TURN over TLS](../../../../assets/images/self-hosting/ha/aws/ha-aws-architecture-turn.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability AWS Architecture with TURN over TLS</figcaption>
-    </figure>
-
-    - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
-    - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - An additional Load Balancer is created to route TURN over TLS traffic to the TURN server running on the Media Nodes. It is used to allow users behind restrictive firewalls to connect to the Media Nodes.
-    - 4 fixed EC2 Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
-    - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
-
 ## CloudFormation Parameters
 
 Depending on your needs, you need to fill the following CloudFormation parameters:
@@ -159,20 +145,6 @@ In this section, you need to specify the configuration for the EBS volumes that 
     The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
 --8<-- "shared/self-hosting/aws-additional-flags.md"
-
-### (Optional) TURN server configuration with TLS
-
-This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic.
-
-=== "TURN server configuration with TLS"
-
-    Parameters in this section look like this:
-
-    ![TURN server configuration with TLS](../../../../assets/images/self-hosting/ha/aws/turn-config.png)
-
-    Set the **TurnDomainName** parameter to the domain name you intend to use for your TURN server. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
-
-    For the **TurnCertificateARN** parameter, specify the ARN of the SSL certificate you wish to use. This certificate should be created in the AWS Certificate Manager and configured for the domain specified in **TurnDomainName**.
 
 ## Deploying the stack
 

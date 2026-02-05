@@ -650,11 +650,11 @@ To ensure everything works correctly after restoring data, follow these steps:
     If you are restoring a system with new private and public IPs or domain names, ensure that the configuration files reflect the new values after the restore.
     === "Single Node"
 
-        - The `DOMAIN_NAME` and `LIVEKIT_TURN_DOMAIN_NAME` (if configured) in `/opt/openvidu/config/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate node.
+        - The `DOMAIN_NAME` in `/opt/openvidu/config/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate node.
 
     === "Elastic"
 
-        - The `DOMAIN_NAME` and `LIVEKIT_TURN_DOMAIN_NAME` (if configured) in `/opt/openvidu/config/cluster/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate master nodes.
+        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate master nodes.
         - Ensure that the master node has the correct private IP configured in `/opt/openvidu/config/node/master-node.env` for the `MASTER_NODE_PRIVATE_IP` variable:
 
             ```
@@ -672,7 +672,7 @@ To ensure everything works correctly after restoring data, follow these steps:
 
     === "High Availability"
 
-        - The `DOMAIN_NAME` and `LIVEKIT_TURN_DOMAIN_NAME` (if configured) in `/opt/openvidu/config/cluster/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate master nodes.
+        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate master nodes.
         - Ensure that all master nodes have the correct private IP configured in `/opt/openvidu/config/node/master-node.env` for the `MASTER_NODE_X_IP` variables:
 
             ```

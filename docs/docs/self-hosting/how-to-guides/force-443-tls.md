@@ -5,13 +5,11 @@ description: Learn how to force all OpenVidu traffic, including WebRTC, through 
 
 # Force all traffic including WebRTC to go through 443 with TLS
 
-In certain scenarios, users may be behind restrictive firewalls or network policies that only permit traffic through port 443 using TLS. By default, OpenVidu is configured to allow traffic through port 443 with TLS if a TURN domain name is specified during the installation process. However, users in less restrictive environments can still utilize other ports to establish WebRTC connections.
+In certain scenarios, users may be behind restrictive firewalls or network policies that only permit traffic through port 443 using TLS. By default, OpenVidu is configured to support TURN with TLS using the main domain name. This allows users behind restrictive firewalls to connect through port 443.
 
 In some cases, it is necessary to ensure that all traffic, including WebRTC, is routed through port 443 with TLS due to network policies, security requirements, or other considerations.
 
-To enforce this configuration, OpenVidu must be installed with a TURN domain name, which is an optional step in the installation process. If this was not done initially, you will need to reinstall OpenVidu with a TURN domain name.
-
-Once OpenVidu is installed with a TURN domain name, ensure that the following ports are not open or are explicitly closed:
+To enforce this configuration, ensure that the following ports are not open or are explicitly closed:
 
 
 **Single Node closed Ports**
@@ -28,7 +26,7 @@ OpenVidu Server|50000-60000|UDP
 Media Node|443|UDP
 Media Node|50000-60000|UDP
 
-In this way, all the traffic will go through port 443 with TLS using the TURN domain name configured in the installation process.
+In this way, all the traffic will go through port 443 with TLS using the main domain name.
 
 ## Considerations
 

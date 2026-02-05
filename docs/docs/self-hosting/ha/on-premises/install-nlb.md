@@ -152,7 +152,6 @@ A wizard will guide you through the installation process. You will be asked for 
     If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target=_blank}.
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **(Optional) TURN domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the Load Balancer you will use and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
@@ -438,7 +437,6 @@ Each installation command for each type of node looks like this:
         --domain-name='openvidu.example.io' \
         --enabled-modules='observability,v2compatibility,openviduMeet' \
         --rtc-engine='pion' \
-        --turn-domain-name='turn.example.io' \
         --livekit-api-key='xxxxx' \
         --livekit-api-secret='xxxxx' \
         --dashboard-admin-user='xxxxx' \
@@ -486,7 +484,6 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 
 Some general notes about all the Master Node commands:
 
-- The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
 - At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:

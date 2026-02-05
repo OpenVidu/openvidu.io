@@ -60,8 +60,6 @@ You need to specify some properties for the EC2 instance that will be created.
 
 --8<-- "shared/self-hosting/aws-additional-flags.md"
 
---8<-- "shared/self-hosting/aws-turn-domain.md"
-
 ## Deploying the stack
 
 When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.

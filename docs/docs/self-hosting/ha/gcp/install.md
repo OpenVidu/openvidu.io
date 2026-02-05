@@ -31,20 +31,6 @@ This is how the architecture of the deployment looks like:
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Managed Instace Group of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
-=== "Architecture overview with TURN over TLS"
-
-    <figure markdown>
-    ![OpenVidu High Availability Google Cloud Platform Architecture with TURN over TLS](../../../../assets/images/self-hosting/ha/gcp/ha-gcp-architecture-turn.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability Google Cloud Platform Architecture with TURN over TLS</figcaption>
-    </figure>
-
-    - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge.
-    - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - An additional Load Balancer is created to route TURN over TLS traffic to the TURN server running on the Media Nodes. It is used to allow users behind restrictive firewalls to connect to the Media Nodes.
-    - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
-    - A Managed Instace Group of Media Nodes is created to scale the number of Media Nodes based on the system load.
-
 --8<-- "shared/self-hosting/gcp-custom-scale-in.md"
 
 ## Deployment details
@@ -237,21 +223,6 @@ In Google Cloud Platform there is no such thing like template with parameters, y
         <td>additionalInstallFlags</td>
         <td>(none)</td>
         <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
-      </tr>
-      <tr>
-        <td>turnDomainName</td>
-        <td>(none)</td>
-        <td>(Optional) Domain name for the TURN server with TLS. Only needed if your users are behind restrictive firewalls.</td>
-      </tr>
-      <tr>
-        <td>turnOwnPublicCertificate</td>
-        <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified. Specify the certificate in base64 format.</td>
-      </tr>
-      <tr>
-        <td>turnOwnPrivateCertificate</td>
-        <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified. Specify the certificate in base64 format.</td>
       </tr>
     </table>
 </div>

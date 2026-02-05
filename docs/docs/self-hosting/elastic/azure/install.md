@@ -86,8 +86,6 @@ The number of Media Nodes can scale up based on the system load. You can configu
 
 --8<-- "shared/self-hosting/azure-additional-flags.md"
 
---8<-- "shared/self-hosting/azure-turn-domain.md"
-
 ## Deploying the stack
 
 Whenever you are satisfied with your Template paremeters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 7 to 12 minutes).

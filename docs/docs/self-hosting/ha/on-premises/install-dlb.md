@@ -160,7 +160,6 @@ A wizard will guide you through the installation process. You will be asked for 
         If you want to manage the certificate in your proxy own proxy server instead of relaying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **(Optional) Turn domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the machine where you are deploying OpenVidu and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** or **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
@@ -279,7 +278,6 @@ Each installation command for each type of node looks like this:
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
-            --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -318,7 +316,6 @@ Each installation command for each type of node looks like this:
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
-            --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -350,10 +347,6 @@ Each installation command for each type of node looks like this:
         CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
         CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
 
-        # Optional, only if you want to enable TURN with TLS
-        CERT_TURN_PRIVATE_KEY=$(cat turn-privkey.pem | base64 -w 0)
-        CERT_TURN_PUBLIC_KEY=$(cat turn-fullchain.pem | base64 -w 0)
-
         sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
@@ -362,7 +355,6 @@ Each installation command for each type of node looks like this:
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
             --rtc-engine='pion' \
-            --turn-domain-name='turn.example.io' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -379,9 +371,7 @@ Each installation command for each type of node looks like this:
             --meet-initial-api-key='xxxxx' \
             --certificate-type='owncert' \
             --owncert-private-key="$CERT_PRIVATE_KEY" \
-            --owncert-public-key="$CERT_PUBLIC_KEY" \
-            --turn-owncert-private-key="$CERT_TURN_PRIVATE_KEY" \
-            --turn-owncert-public-key="$CERT_TURN_PUBLIC_KEY"
+            --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
         --8<-- "shared/self-hosting/install-version.md"
@@ -390,7 +380,6 @@ Each installation command for each type of node looks like this:
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
-        - `--turn-owncert-private-key` and `--turn-owncert-public-key` are optional. You only need to pass them if you want to enable TURN with TLS.
 
 === "Media Node"
 
@@ -414,7 +403,6 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 
 Some general notes about all the Master Node commands:
 
-- The argument `--turn-domain-name` is optional. Define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
 - In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `observability` (Grafana stack), `openviduMeet` (OpenVidu Meet), and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:

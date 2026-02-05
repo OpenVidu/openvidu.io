@@ -212,21 +212,6 @@ In Google Cloud Platform there is no such thing like template with parameters, y
         <td>(none)</td>
         <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
       </tr>
-      <tr>
-        <td>turnDomainName</td>
-        <td>(none)</td>
-        <td>(Optional) Domain name for the TURN server with TLS. Only needed if your users are behind restrictive firewalls.</td>
-      </tr>
-      <tr>
-        <td>turnOwnPublicCertificate</td>
-        <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified. Specify the certificate in base64 format.</td>
-      </tr>
-      <tr>
-        <td>turnOwnPrivateCertificate</td>
-        <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified. Specify the certificate in base64 format.</td>
-      </tr>
     </table>
 </div>
 

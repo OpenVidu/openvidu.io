@@ -34,20 +34,6 @@ This is how the architecture of the deployment looks like:
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
-=== "Architecture overview with TURN over TLS"
-
-    <figure markdown>
-    ![OpenVidu High Availability Azure Architecture with TURN over TLS](../../../../assets/images/self-hosting/ha/azure/ha-azure-architecture-turn.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability Azure Architecture with TURN over TLS</figcaption>
-    </figure>
-
-    - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge, because it exists a limitation in Azure.
-    - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - An additional Load Balancer is created to route TURN over TLS traffic to the TURN server running on the Media Nodes. It is used to allow users behind restrictive firewalls to connect to the Media Nodes.
-    - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
-    - An Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
-
 --8<-- "shared/self-hosting/azure-custom-scale-in.md"
 
 ## Template Parameters
@@ -101,20 +87,6 @@ The number of Media Nodes can scale up based on the system load. You can configu
 --8<-- "shared/self-hosting/azure-storageaccount.md"
 
 --8<-- "shared/self-hosting/azure-additional-flags.md"
-
-### (Optional) TURN server configuration with TLS
-
-This section is optional. It is useful when your users are behind a restrictive firewall that blocks UDP traffic.
-
-=== "TURN server configuration with TLS"
-
-    Parameters in this section look like this:
-
-    <figure markdown>
-    ![TURN server configuration with TLS](../../../../assets/images/self-hosting/ha/azure/turn-config.png){ .svg-img .dark-img }
-    </figure>
-
-    Set the **Turn Domain Name** parameter to the domain name you intend to use for your TURN server. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
 ## Deploying the stack
 
