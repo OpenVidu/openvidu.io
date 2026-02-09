@@ -156,8 +156,8 @@ nav:
           - docs/openvidu-call/index.md
           - Docs: docs/openvidu-call/docs.md
       - Releases: docs/releases.md
-  # - Blog:
-  #     - blog/index.md
+  - Blog:
+      - blog/index.md
   - Support:
       - support.md
   - Pricing:
