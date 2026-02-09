@@ -71,6 +71,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REDIS_SENTINEL_PASSWORD`** | Redis Sentinel password used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_REDIS_SENTINEL_MASTER_NAME`{.no-break}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_BASE_PATH`** | Base path where the OpenVidu Meet application is served. Default is `/meet`. |
+| **`MEET_CAPTIONS_ENABLED`** | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](../../../meet/features/live-captions.md). |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
 
 ## <span class="openvidu-tag openvidu-pro-tag">PRO</span> `v2compatibility.env`
