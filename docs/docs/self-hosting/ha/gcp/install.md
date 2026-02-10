@@ -49,11 +49,13 @@ Once you click the button you will see this window.
 ![Google Cloud Platform create new deployment window](../../../../assets/images/self-hosting/shared/gcp-create-deployment-window.png){ .svg-img .dark-img }
 </figure>
 
-Fill **Deployment ID** with any name that you desire like openvidu-High Availability-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
-
+* Fill **Deployment ID** with any name that you desire (for example openvidu-ha-deployment).   
+* Change the **Region** for the one that you prefer.
 !!! warning
-    If you change the region in the previous step, don't forget to change the [region and zone](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en) in the terraform values.
+    If you change the region in the previous step, don't forget to change the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target=_blank} in the terraform values.
 
+* Leave **Terraform version** in the 1.5.7.   
+* For **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
 ??? details "New Service Account Steps"
 
     <figure markdown>
