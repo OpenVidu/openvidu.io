@@ -8,11 +8,11 @@ Whenever you are satisfied with your input values, just click on _"Continue"_ an
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/shared/gcp-cloud-build-logs.png){ .svg-img .dark-img }
     </figure>
 
-When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instance:
+When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target=_blank} or by connecting through SSH to the instance:
 
 === "Check deployment outputs in GCP Secret Manager"
 
-    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager).
+    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target=_blank}.
 
     2. Once you are in the Secret Manager you will see all the secrets by their name.
 
@@ -33,7 +33,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
     - `openvidu.env`
     - `meet.env`
 
-    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
+    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){target="\_blank"} and click on the arrow close to the SSH letters and then _"View gcloud command"_.
     <figure markdown>
     ![Google Cloud Platform gcloud command](../../../../assets/images/self-hosting/shared/gcp-gcloud-command.png){ .svg-img .dark-img }
     </figure>   
