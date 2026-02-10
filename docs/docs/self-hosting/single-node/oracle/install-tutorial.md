@@ -1,5 +1,5 @@
 ---
-title: OpenVidu Single Node installation on Oracle Cloud Infrastructure
+title: OpenVidu Single Node installation tutorial on Oracle Cloud Infrastructure
 description: Learn how to deploy OpenVidu Single Node on Oracle Cloud Infrastructure using the Oracle Cloud Console
 tags:
   - copyclipboard
@@ -7,7 +7,7 @@ tags:
 
 # OpenVidu Single Node on Oracle Cloud Infrastructure — Step-by-step Guide
 
-This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
+This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administrating, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
 
 ## Overview / prerequisites
 
@@ -171,7 +171,7 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
     firewall-cmd --list-all
     ```
 
-6. Follow the [On-Premises install instructions](../on-premises/install.md) to install OpenVidu on the instance.
+6. Follow the [On-Premises install instructions](../on-premises/install.md/#guided-installation) to install OpenVidu on the instance.
 
 ---
 
