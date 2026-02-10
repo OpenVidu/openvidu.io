@@ -190,7 +190,6 @@ You need your Google Cloud Platform secret outputs to configure your OpenVidu ap
 Your authentication credentials and URL to point your applications would be:
 
 --8<-- "shared/self-hosting/gcp-credentials-general.md"
---8<-- "shared/self-hosting/gcp-credentials-v2compatibility.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
