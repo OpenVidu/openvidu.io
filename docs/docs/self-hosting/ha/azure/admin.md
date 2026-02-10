@@ -183,7 +183,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
         <figure markdown>
         ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/shared/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
         </figure>
-    5. Enter the new secret value on _"Secret Value"_ filed and click on _"Create"_.
+    5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
         <figure markdown>
         ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
         </figure>

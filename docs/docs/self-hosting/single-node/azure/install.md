@@ -52,7 +52,7 @@ Specify properties for the Azure instance that will host Openvidu.
 
 ## Deploying the stack
 
-Whenever you are satisfied with your Template paremeters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 10 minutes).
+Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 10 minutes).
 
 !!! warning
 

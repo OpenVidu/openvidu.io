@@ -2,9 +2,9 @@
 title: Upgrade OpenVidu High Availability - Google Cloud Platform
 description: How to upgrade OpenVidu High Availability on Google Cloud Platform deployments.
 ---
-# Upgrade OpenVidu High Availability - GCP
+# Upgrade OpenVidu High Availability - Google Cloud Platform
 
-In Google Cloud Platform environments, we recommend upgrading by redeploying [OpenVidu High Availability Google Cloud Platform](../gcp/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Google Cloud Platform terrafrom files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+In Google Cloud Platform environments, we recommend upgrading by redeploying [OpenVidu High Availability Google Cloud Platform](../gcp/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Google Cloud Platform terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu High Availability in place. The following steps outline how to perform an in-place upgrade of your OpenVidu High Availability deployment on Google Cloud Platform:
 

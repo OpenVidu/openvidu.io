@@ -146,7 +146,7 @@ A wizard will guide you through the installation process. You will be asked for 
     - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them. **Note**: This option is only available when providing an FQDN (Fully Qualified Domain Name).
 
     !!! Note
-        If you want to manage the certificate in your proxy own proxy server instead of relaying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
+        If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
 
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.

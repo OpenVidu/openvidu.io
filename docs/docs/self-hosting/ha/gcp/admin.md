@@ -5,7 +5,7 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 # OpenVidu High Availability administration: Google Cloud Platform
 
-The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infra Structure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
+The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:
 
@@ -22,7 +22,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimun"_ and _"Maximum"_ number of instances to 0.
+    3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
         <figure markdown>
         ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-0.png){ .svg-img .dark-img }
         </figure>
@@ -179,7 +179,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/self-hosting/shared/gcp-secrets-new-version.png){ .svg-img .dark-img }
         </figure>
-    3. Enter the new secret value on _"Secret Value"_ filed and click on _"Add new version"_.
+    3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
         </figure>

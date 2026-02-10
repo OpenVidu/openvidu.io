@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on-premises with DNS Load Balancing
-description: Learn how to deploy OpenVidu Elastic on-premises with DNS Load Balancing
+title: OpenVidu High Availability installation on-premises with DNS Load Balancing
+description: Learn how to deploy OpenVidu High Availability on-premises with DNS Load Balancing
 ---
 
 # OpenVidu High Availability installation: On-premises with DNS Load Balancing
@@ -157,7 +157,7 @@ A wizard will guide you through the installation process. You will be asked for 
     - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them.
 
     !!! Note
-        If you want to manage the certificate in your proxy own proxy server instead of relaying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
+        If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** or **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).

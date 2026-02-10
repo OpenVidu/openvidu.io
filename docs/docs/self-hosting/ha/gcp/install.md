@@ -12,7 +12,7 @@ tags:
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in Google Cloud Platform. Deployed services are the same as the [On Premises High Availability installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
+This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in Google Cloud Platform. Deployed services are the same as the [On Premises High Availability installation](../on-premises/install-nlb.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
 To deploy OpenVidu into Google Cloud Platform you just need to log into your [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
 

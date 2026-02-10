@@ -17,7 +17,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**. Click on it.
-    3. In the section of the Virtual Machine click on stop button to stop the Virtual Mache (and therefore OpenVidu).
+    3. In the section of the Virtual Machine click on stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop instance](../../../../assets/images/self-hosting/single-node/azure/stop-instance.png){ .svg-img .dark-img }
@@ -39,7 +39,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
 1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
 2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**. Click on it.
-3. In the left pannel click on _"Availability + scale"_ -> _"Size"_.
+3. In the left panel click on _"Availability + scale"_ -> _"Size"_.
 
     === "Change instance type"
 
@@ -69,7 +69,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
         <figure markdown>
         ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/shared/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
         </figure>
-    5. Enter the new secret value on _"Secret Value"_ filed and click on _"Create"_.
+    5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
         <figure markdown>
         ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
         </figure>

@@ -80,7 +80,7 @@ Where `<DATE>` and `<VERSION>` are the date and version of the backup you want t
 cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 ```
 
-You need to do this in all the nodes of your OpenVidu Elastic deployment to restore to the previous version.
+You need to do this in all the nodes of your OpenVidu High Availability deployment to restore to the previous version.
 
 ## Recommendations
 
