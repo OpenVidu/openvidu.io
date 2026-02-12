@@ -8,6 +8,10 @@ There are three possible scenarios for this section:
 
     It will deploy OpenVidu with a Let's Encrypt certificate generated using [sslip.io](https://sslip.io/){:target="_blank"} based on the public IP created for the deployment.
 
+    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
+    !!! warning "sslip.io rate limiting"
+        **sslip.io** is currently experiencing **Let's Encrypt rate limiting issues**, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check [this community thread](https://openvidu.discourse.group/t/deployment-without-domain/5474){:target="_blank"} for troubleshooting and updates.
+
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt-nodomain.png)
 
 === "Let's Encrypt With Domain Name (recommended)"

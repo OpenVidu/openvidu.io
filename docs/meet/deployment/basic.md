@@ -48,6 +48,10 @@ Follow the instructions of the installation wizard. They are self-explanatory, b
 
 2. If you have a domain name, enter it when prompted. If you don't have one, just press **Enter** to continue:
 
+    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
+    !!! warning "sslip.io rate limiting"
+        **sslip.io** is currently experiencing **Let's Encrypt rate limiting issues**, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check [this community thread](https://openvidu.discourse.group/t/deployment-without-domain/5474){:target="_blank"} for troubleshooting and updates.
+
     ![Press Enter](../../assets/images/meet/deployment/basic/wizard-2.png)
 
 3. The installer will ask you to confirm if you want to proceed with the installation. Select **Yes** to start the installation. 
