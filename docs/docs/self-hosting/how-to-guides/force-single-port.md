@@ -288,6 +288,65 @@ OpenVidu includes built-in security layers in its TURN server implementation to 
 - **Port range enforcement**: Every relayed packet is validated against the configured RTC port range at the packet level. Traffic destined to ports outside this range is rejected.
 - **TCP relay denial**: TCP relay allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"}) are explicitly denied, limiting TURN to its intended use for UDP media relay.
 
+## Troubleshooting: media not flowing
+
+If media is not flowing after applying the port rules above, check the following:
+
+### 1. Verify internal port rules
+
+Ensure that the internal UDP port range used by TURN for relay is open between your nodes:
+
+- **Outgoing**: UDP ports 40000-50000 from the TURN server.
+- **Incoming**: UDP ports 50000-60000 to the Media Server.
+
+Both ranges must be reachable within the internal network between Media Nodes (or to the node itself in Single Node deployments).
+
+### 2. Verify the relay IP
+
+By default, OpenVidu automatically detects the best possible private IP of each node to use as the TURN relay address, and in most cases no manual configuration is needed. You can check which address is being used by looking at the OpenVidu logs:
+
+```bash
+docker logs openvidu 2>&1 | grep "TURN relay address"
+```
+
+You should see a log entry like:
+
+```
+INFO    openvidu    service/turn.go:204    Using first local IP as TURN relay address    {"relayAddress": "192.168.1.10", "preferredInterface": ""}
+```
+
+If the `relayAddress` does not match the node's private IP used to communicate with other cluster nodes (e.g., the node has multiple network interfaces), media relay will fail because traffic will be sent to an unreachable address.
+
+To fix this, explicitly set the network interface that TURN should use for relay:
+
+=== "Single Node"
+
+    Edit `/opt/openvidu/config/livekit.yaml` and set:
+
+    ```yaml
+    turn:
+      # ... other properties ...
+      relay_preferred_interface: <interface-name>
+    ```
+
+=== "Elastic / High Availability"
+
+    Edit `/opt/openvidu/config/cluster/media_node/livekit.yaml` and set:
+
+    ```yaml
+    turn:
+      # ... other properties ...
+      relay_preferred_interface: <interface-name>
+    ```
+
+Where `<interface-name>` is the network interface used by the node to communicate with other nodes in the cluster (e.g., `eth0`, `ens5`). For Single Node deployments, it should be the main network interface of the machine.
+
+After making changes, restart the service:
+
+```bash
+systemctl restart openvidu
+```
+
 ## Considerations
 
 - Media over UDP using WebRTC does not mean that the media is not encrypted. WebRTC encrypts the media using SRTP and DTLS. WebRTC is designed to be encrypted by default.
