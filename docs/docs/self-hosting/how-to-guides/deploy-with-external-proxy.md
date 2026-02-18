@@ -148,7 +148,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     - Replace `<SINGLE_NODE_PRIVATE_IP>` with the private IP of the OpenVidu server.
     - You can also have a proxy in the same machine as OpenVidu, simply replace `<SINGLE_NODE_PRIVATE_IP>` with `127.0.0.1`.
 
-    If you want to force all traffic including WebRTC to go through the external proxy, check the [Force all traffic through 443 with TLS](force-443-tls.md) guide.
+    If you want to force all traffic including WebRTC to go through the external proxy, check the [Force media traffic through port 443](force-single-port.md) guide.
 
 === "Elastic"
 
@@ -300,7 +300,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
     - You can also have a proxy in the same machine as the Master Node, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
 
-    If you want to force all traffic including WebRTC to go through the external proxy, check the [Force all traffic through 443 with TLS](force-443-tls.md) guide.
+    If you want to force all traffic including WebRTC to go through the external proxy, check the [Force media traffic through port 443](force-single-port.md) guide.
 
 === "High Availability"
 

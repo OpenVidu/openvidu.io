@@ -364,7 +364,7 @@ Notes:
 !!! info "Customizable HTTP block"
     The `http` block gives you full control over HTTP-level routing. You can add custom `location` blocks, rate limiting, access control, or additional headers to suit your infrastructure needs.
 
-If you want to force all traffic including WebRTC to go through the Load Balancer, check the [Force all traffic through 443 with TLS](../../how-to-guides/force-443-tls.md) guide.
+If you want to force all traffic including WebRTC to go through the Load Balancer, check the [Force media traffic through port 443](../../how-to-guides/force-single-port.md) guide.
 
 ## Configure your application to use the deployment
 
