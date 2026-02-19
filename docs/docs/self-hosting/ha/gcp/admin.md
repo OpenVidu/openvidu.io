@@ -185,7 +185,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         </figure>
     4. Go to the Master Node resource you've want to change the secrets on and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu High Availability deployment.
 
-    Changes will be applied automatically.
+    Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.
 
 ## Backup and Restore
 
