@@ -12,6 +12,7 @@ OpenVidu High Availability is part of the <span style="font-size: 12px;" class="
 - [**AWS installation**](./aws/install.md): Deploy OpenVidu High Availability on Amazon Web Services.
 - [**Azure installation**](./azure/install.md): Deploy OpenVidu High Availability on Microsoft Azure.
 - [**Google Cloud Platform installation**](./gcp/install.md): Deploy OpenVidu High Availability on Google Cloud Platform.
+- [**Digital Ocean installation**](./digitalocean/install.md): Deploy OpenVidu High Availability on Digital Ocean.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
@@ -19,6 +20,7 @@ Once your deployment is complete, refer to the following sections for configurat
 - [**AWS: configuration and administration**](./aws/admin.md)
 - [**Azure: configuration and administration**](./azure/admin.md)
 - [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
+- [**Digital Ocean: configuration and administration**](./digitalocean/admin.md)
 
 If you want to upgrade your OpenVidu High Availability installation, refer to this section:
 
@@ -26,3 +28,4 @@ If you want to upgrade your OpenVidu High Availability installation, refer to th
 - [**Upgrade OpenVidu High Availability AWS**](./aws/upgrade.md)
 - [**Upgrade OpenVidu High Availability Azure**](./azure/upgrade.md)
 - [**Upgrade OpenVidu High Availability Google Cloud Platform**](./gcp/upgrade.md)
+- [**Upgrade OpenVidu High Availability Digital Ocean**](./digitalocean/upgrade.md)

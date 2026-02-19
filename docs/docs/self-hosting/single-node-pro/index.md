@@ -17,6 +17,7 @@ Install OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag 
 - [**AWS installation**](./aws/install.md): deploy to Amazon Web Services.
 - [**Azure installation**](./azure/install.md): deploy to Microsoft Azure.
 - [**Google Cloud Platform installation**](./gcp/install.md): deploy to Google Cloud Platform.
+- [**Digital Ocean installation**](./digitalocean/install.md): deploy to Digital Ocean.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
@@ -24,6 +25,7 @@ Once your deployment is complete, refer to the following sections for configurat
 - [**AWS: configuration and administration**](./aws/admin.md)
 - [**Azure: configuration and administration**](./azure/admin.md)
 - [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
+- [**Digital Ocean: configuration and administration**](./digitalocean/admin.md)
 
 If you want to upgrade your OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> installation, refer to this section:
 
@@ -31,7 +33,9 @@ If you want to upgrade your OpenVidu Single Node <span style="font-size: 12px;" 
 - [**AWS: upgrade OpenVidu Single Node PRO**](./aws/upgrade.md)
 - [**Azure: upgrade OpenVidu Single Node PRO**](./azure/upgrade.md)
 - [**Google Cloud Platform: upgrade OpenVidu Single Node PRO**](./gcp/upgrade.md)
+- [**Digital Ocean: upgrade OpenVidu Single Node Community**](./digitalocean/upgrade.md)
 
 We also offer installation tutorials for other Cloud Providers:
 
+- [**Digital Ocean**](./digitalocean/install.md)
 - [**Oracle Cloud Infrastructure**](./oracle/install-tutorial.md)
