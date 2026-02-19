@@ -72,7 +72,7 @@ It is possible to change the instance type of both the Master Node and the Media
         This procedure requires downtime, as it involves stopping the Master Node.
 
     1. [Shutdown the cluster](#shutting-down-the-cluster).
-    2. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview) and locate the resource with the name `<STACK_NAME>-master-node-1` and click on it.
+    2. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node-1` and click on it.
     3. Click on _"Edit"_ and inside change the _"Machine Type"_. Then select the size you desire and click on _"Save"_
         <figure markdown>
         ![Change instance type master](../../../../assets/images/self-hosting/shared/gcp-change-master-node-size.png){ .svg-img .dark-img }
@@ -159,7 +159,7 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 
 === "Deactivate Cloud Run Function"
 
-    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler) and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
+    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
         <figure markdown>
         ![Deactivate Scale In](../../../../assets/images/self-hosting/ha/gcp/gcp-scalein-deactivate.png){ .svg-img .dark-img }
         </figure>
