@@ -12,7 +12,10 @@ tags:
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Digital Ocean. Deployed services are the same as the [On Premises Elastic installation](../on-premises/install.md) but they will be resources in Digital Ocean and you can automate the process with Terraform CLI.
+This section describes how to deploy a production-ready OpenVidu Elastic instance on Digital Ocean. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Digital Ocean resources and can be automated using Terraform CLI.
+
+- Digital Ocean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings.
+- Media Node **scalability is not supported** in this deployment. The number of Media Nodes is fixed and must be defined before deployment.
 
 ## Prerequisites
 
