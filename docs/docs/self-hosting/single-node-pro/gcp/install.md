@@ -70,7 +70,7 @@ Fill **Deployment ID** with any name that you desire like openvidu-singlenodepro
 
 * Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> that corresponds to our git repository where are allocated the terraform files to deploy openvidu. 
 * Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/pro/singlenode/gcp"><code>openvidu-deployment/pro/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
-* For the **Git ref** use <span class="copy-inline" data-copy="3.5.0"><code>3.5.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> corresponding to the version 
+* For the **Git ref** use <span class="copy-inline" data-copy="v3.5.0"><code>v3.5.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> corresponding to the version 
 
 Finally click on continue.
 ## Input Values
