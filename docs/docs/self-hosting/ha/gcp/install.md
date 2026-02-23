@@ -218,7 +218,7 @@ In Google Cloud Platform there is no such thing like template with parameters, y
         <td>Name of the GCS bucket to store cluster data. If empty, a bucket will be created</td>
       </tr>
       <tr>
-        <td>RTCEngine</td>
+        <td>rtcEngine</td>
         <td>"pion"</td>
         <td>RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'.</td>
       </tr>
