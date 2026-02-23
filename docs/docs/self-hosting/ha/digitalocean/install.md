@@ -42,7 +42,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 --8<-- "shared/self-hosting/do-custom-scale-in.md"
 
 ## Deployment details
-1. To deploy OpenVidu, first you need clone the repository that lodges the terraform files. You can do that with the following command in a terminal:
+1. To deploy OpenVidu, first you need clone the repository that has the terraform files. You can do that with the following command in a terminal:
     ```
     git clone https://github.com/OpenVidu/openvidu-digitalocean.git \
     && cd openvidu-digitalocean/pro/ha
@@ -123,7 +123,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     <tr>
     <td style="white-space: nowrap;"><code>domainName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Domain name for the OpenVidu Deployment.</td>
+    <td>Domain name for the OpenVidu Deployment. Not mandatory; if not provided, a sslip.io domain will be used instead.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
@@ -168,7 +168,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     <tr>
     <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
+    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and Digital Ocean Droplets already default to UTC, so this flag is not usually necessary.</td>
     </tr>
     </tbody>
     </table>
@@ -179,14 +179,17 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
   ```
   terraform init && terraform apply
   ```
-4. Wait until in the Space Object Storage bucket that you've configurated appears the SSH Key.
+4. Wait until the SSH Key appears in the [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} bucket you configured.
 
     !!! warning
         Once you've downloaded that SSH Key please **DELETE IT** from the bucket. This SSH Key is the private key used to connect to the droplet so if someone gets it, they could be capable of entering the instance.
+    <figure markdown>
+    ![SSH Key in Bucket](../../../../assets/images/self-hosting/ha/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
+    </figure>
 
 5. Go to where you downloaded your SSH Key and run the following command:
   ```
-  chmod 600 your_private_key.pem
+  chmod 600 openvidu_ssh_key_ha.pem
   ```
 
 ## Checking credentials
@@ -197,7 +200,7 @@ After waiting about 5 to 10 minutes to let the droplet run the installation of O
 
     SSH to the instance by running this command in the path where you have the SSH Key:
     ```
-    ssh -i your_private_key.pem root@PUBLIC_DROPLET_IP
+    ssh -i openvidu_ssh_key_ha.pem root@PUBLIC_DROPLET_IP
     ```
 
     Then navigate to /opt/openvidu/ and you will find all credentials needed in the `secrets.env`

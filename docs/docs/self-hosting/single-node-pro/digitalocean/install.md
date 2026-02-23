@@ -8,8 +8,8 @@ tags:
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Digital Ocean
 This section describes two ways of installing OpenVidu Single Node PRO in Digital Ocean:
 
-* **Web Console**: More friendly option but with some differences. You will have MinIO s3 storage by default. 
-* **Terraform**: More controled option but you need Terraform CLI. You will have Digital Ocean s3 storage by default.
+* [**Web Console**](#web-console): Can be deployed without installing anything in your machine, but it requires more manual steps and has some limitations. For example, recordings are stored in the machine (instead of Digital Ocean s3 storage). 
+* [**Terraform**](#terraform): More powerfull and automated, but it requires to install Terraform CLI on your machine.
 
 
 ## **Web Console**
@@ -60,16 +60,13 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
     !!! warning
         It is important that you make sure the protocol is the one that is shown in the image.
 
-3. Put it a name on the top and then go to the bottom and search for the name of the droplet. Then add it to apply the firewall rules to it.
+3. Name the firewall, then scroll to the bottom and search for your Droplet by name. Select it to apply the firewall rules to it.
     <figure markdown>
     ![Firewall apply to droplet](../../../../assets/images/self-hosting/single-node/digitalocean/install-tutorial/firewall-to-droplet.png){ .svg-img .dark-img }
     </figure>
 ---
 
 ### 3. SSH access and OpenVidu installation
-
-!!! warning
-    Open the required ports before installing OpenVidu to avoid connectivity issues.
 
 1. SSH into the instance:
 
@@ -89,7 +86,7 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
 ## **Terraform**
 
-This section contains the instructions of how to deploy a production-ready OpenVidu Single Node PRO deployment in Digital Ocean. Deployed services are almost the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Digital Ocean and you can automate the process with the Terraform CLI.
+This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in Digital Ocean. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with Terraform CLI. Additionally, Digital Ocean Spaces (S3-compatible storage) is used for storing recordings and other persistent data.
 
 ### Prerequisites
 * You need to have a Digital Ocean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
@@ -107,7 +104,7 @@ This section contains the instructions of how to deploy a production-ready OpenV
 
 ### Deployment details
 
-1. To deploy OpenVidu, first you need clone the repository that lodges the terraform files. You can do that with the following command in a terminal:
+1. To deploy OpenVidu, first you need clone the repository that has the terraform files. You can do that with the following command in a terminal:
     ```
     git clone https://github.com/OpenVidu/openvidu-digitalocean.git \
     && cd openvidu-digitalocean/pro/singlenode
@@ -173,7 +170,7 @@ This section contains the instructions of how to deploy a production-ready OpenV
     <tr>
     <td style="white-space: nowrap;"><code>domainName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Domain name for the OpenVidu Deployment.</td>
+    <td>Domain name for the OpenVidu Deployment. Not mandatory; if not provided, a sslip.io domain will be used instead.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
@@ -203,7 +200,7 @@ This section contains the instructions of how to deploy a production-ready OpenV
     <tr>
     <td style="white-space: nowrap;"><code>spaceName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Name for the DigitalOcean Space (S3-compatible bucket). If not provided, no Space will be created.</td>
+    <td>Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>spaceRegion</code></td>
@@ -213,7 +210,7 @@ This section contains the instructions of how to deploy a production-ready OpenV
     <tr>
     <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
+    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and Digital Ocean Droplets already default to UTC, so this flag is not usually necessary.</td>
     </tr>
     </tbody>
     </table>
@@ -224,14 +221,17 @@ This section contains the instructions of how to deploy a production-ready OpenV
   ```
   terraform init && terraform apply
   ```
-4. Wait until in the Space Object Storage bucket that you've configurated appears the SSH Key.
+4. Wait until the SSH Key appears in the [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} bucket you configured.
 
     !!! warning
         Once you've downloaded that SSH Key please **DELETE IT** from the bucket. This SSH Key is the private key used to connect to the droplet so if someone gets it, they could be capable of entering the instance.
+    <figure markdown>
+    ![SSH Key in Bucket](../../../../assets/images/self-hosting/single-node/digitalocean/bucket-ssh-key-pro.png){ .svg-img .dark-img }
+    </figure>
 
 5. Go to where you downloaded your SSH Key and run the following command:
   ```
-  chmod 600 your_private_key.pem
+  chmod 600 openvidu_ssh_key_snpro.pem
   ```
 
 ### Checking credentials
@@ -242,7 +242,7 @@ After waiting about 5 to 10 minutes to let the droplet run the installation of O
 
     SSH to the instance by running this command in the path where you have the SSH Key:
     ```
-    ssh -i your_private_key.pem root@PUBLIC_DROPLET_IP
+    ssh -i openvidu_ssh_key_snpro.pem root@PUBLIC_DROPLET_IP
     ```
 
     Then navigate to /opt/openvidu/ and you will find all credentials needed in the `secrets.env`
