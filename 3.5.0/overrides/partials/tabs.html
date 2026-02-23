@@ -1,0 +1,76 @@
+<!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/tabs.html -->
+
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+{% import "partials/tabs-item.html" as item with context %}
+
+<!-- Navigation tabs -->
+<nav
+  class="md-tabs"
+  aria-label="{{ lang.t('tabs') }}"
+  data-md-component="tabs"
+>
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      {% set ns = namespace(dropdown_items=[]) %}
+      {% for nav_item in nav.items %}
+        {% set is_dropdown = false %}
+        {% if nav_item.meta and nav_item.meta.tags and "dropdown" in nav_item.meta.tags %}
+            {% set is_dropdown = true %}
+        {% elif nav_item.children and nav_item.children[0].meta and nav_item.children[0].meta.tags and "dropdown" in nav_item.children[0].meta.tags %}
+            {% set is_dropdown = true %}
+        {% endif %}
+
+        {% if is_dropdown %}
+            {% set ns.dropdown_items = ns.dropdown_items + [nav_item] %}
+        {% endif %}
+      {% endfor %}
+
+      {% for nav_item in nav.items %}
+        {% if nav_item in ns.dropdown_items %}
+            {% if nav_item == ns.dropdown_items[0] %}
+                {% set ns.team_active = false %}
+                {% for drop_item in ns.dropdown_items %}
+                    {% if drop_item.active %}
+                        {% set ns.team_active = true %}
+                    {% endif %}
+                {% endfor %}
+                <li class="md-tabs__item md-tabs__item--dropdown{% if ns.team_active %} md-tabs__item--active{% endif %}">
+                    <a href="#" class="md-tabs__link{% if ns.team_active %} md-tabs__link--active{% endif %}">
+                        Team
+                        <span class="dropdown-caret"></span>
+                    </a>
+                    <div class="md-tabs__dropdown">
+                        {% for drop_item in ns.dropdown_items %}
+                            {{ item.render_dropdown_link(drop_item) }}
+                        {% endfor %}
+                    </div>
+                </li>
+            {% endif %}
+        {% else %}
+            {{ item.render(nav_item) }}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
