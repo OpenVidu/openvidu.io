@@ -173,6 +173,10 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
 6. Follow the [On-Premises install instructions](../on-premises/install.md/#guided-installation) to install OpenVidu on the instance.
 
+    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
+    !!! warning "sslip.io rate limiting"
+        **sslip.io** is currently experiencing **Let's Encrypt rate limiting issues**, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check [this community thread](https://openvidu.discourse.group/t/deployment-without-domain/5474){:target="_blank"} for troubleshooting and updates.
+
 ---
 
 ## 5. Administration and upgrade
