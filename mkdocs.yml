@@ -126,7 +126,7 @@ nav:
                   - Install: docs/self-hosting/single-node/gcp/install.md
                   - Administration: docs/self-hosting/single-node/gcp/admin.md
                   - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md 
-              - Digital Ocean:
+              - DigitalOcean:
                   - Install: docs/self-hosting/single-node/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/single-node/digitalocean/upgrade.md
@@ -149,7 +149,7 @@ nav:
                   - Install: docs/self-hosting/single-node-pro/gcp/install.md
                   - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/gcp/upgrade.md
-              - Digital Ocean:
+              - DigitalOcean:
                   - Install: docs/self-hosting/single-node-pro/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node-pro/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/digitalocean/upgrade.md
@@ -172,7 +172,7 @@ nav:
                   - Install: docs/self-hosting/elastic/gcp/install.md
                   - Administration: docs/self-hosting/elastic/gcp/admin.md
                   - Upgrade: docs/self-hosting/elastic/gcp/upgrade.md
-              - Digital Ocean:
+              - DigitalOcean:
                   - Install: docs/self-hosting/elastic/digitalocean/install.md
                   - Administration: docs/self-hosting/elastic/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/elastic/digitalocean/upgrade.md
@@ -195,7 +195,7 @@ nav:
                   - Install: docs/self-hosting/ha/gcp/install.md
                   - Administration: docs/self-hosting/ha/gcp/admin.md
                   - Upgrade: docs/self-hosting/ha/gcp/upgrade.md
-              - Digital Ocean:
+              - DigitalOcean:
                   - Install: docs/self-hosting/ha/digitalocean/install.md
                   - Administration: docs/self-hosting/ha/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/ha/digitalocean/upgrade.md
@@ -363,7 +363,7 @@ plugins:
         - docs/self-hosting/production-ready/performance.md: OpenVidu Platform 2x performance by using mediasoup to replace the original Pion LiveKit WebRTC engine while maintaining the LiveKit API.
         - docs/self-hosting/production-ready/scalability.md: OpenVidu Platform scalability numbers and Elastic and High Availability deployments.
         - docs/self-hosting/production-ready/fault-tolerance.md: OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.
-        - docs/self-hosting/production-ready/observability/index.md: A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting on OpenVidu Dashboard and a Grafana stack.
+        - docs/self-hosting/production-ready/observability/index.md: A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting of OpenVidu Dashboard and a Grafana stack.
         - docs/self-hosting/production-ready/observability/openvidu-dashboard.md: How to access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses.
         - docs/self-hosting/production-ready/observability/grafana-stack.md: How to use OpenVidu's built-in Grafana dashboards to monitor different metrics from OpenVidu Platform and logs from your cluster.
         - docs/self-hosting/how-to-guides/index.md: Explore step-by-step guides to customize your OpenVidu deployment for specific use cases.
