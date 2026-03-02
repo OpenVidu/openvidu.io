@@ -4,7 +4,7 @@ There are three possible scenarios for this section:
 
 === "Let's Encrypt Without Domain Name"
 
-    If you don't have a Domain Name and want to quickly test OpenVidu on Azure, you can use this option, simply selecting the **Certificate Type** as _letsencrypt_ and keep the rest of parameters empty.
+    If you don't have a Domain Name and want to quickly test OpenVidu on Azure, you can use this option by selecting **Certificate Type** as _letsencrypt_ and keeping the rest of the parameters empty.
 
     It will deploy OpenVidu with a Let's Encrypt certificate generated using [sslip.io](https://sslip.io/){:target="_blank"} based on the public IP created for the deployment.
 
@@ -18,21 +18,21 @@ There are three possible scenarios for this section:
 
     For a production-ready setup, this scenario is ideal when you have an **FQDN (Fully Qualified Domain Name)** and a **Public IP** at your disposal. It leverages the services of Let's Encrypt to automatically generate valid certificates.
 
-    First, you need to have the FQDN pointing to the Public IP you are going to use.
+    First, make sure your FQDN points to the Public IP you are going to use.
 
-    Then, you need to fill in the following parameters:
+    Then, fill in the following parameters:
 
     <figure markdown>
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt.png){ .svg-img .dark-img }
     </figure>
 
-    As you can see, you need to specify the **Public Ip Address** with the Public IP that the domain points to, the **Domain Name** with your FQDN, and the **Lets Encrypt Email** with your email address for Let’s Encrypt notifications. These parameters are mandatory.
+    As you can see, specify **Public IP Address** with the Public IP that the domain points to, **Domain Name** with your FQDN, and **Lets Encrypt Email** with your email address for Let’s Encrypt notifications. These parameters are mandatory.
 
 === "Custom Certificates"
 
     Opt for this method if you possess **your own certificate for an existing FQDN**. It enables you to deploy OpenVidu on Azure using your certificates.
 
-    You need to have your FQDN pointing to a previously created Public Ip.
+    Ensure your FQDN points to a previously created Public IP.
 
     The configured parameters would look like this:
     
@@ -41,7 +41,7 @@ There are three possible scenarios for this section:
     </figure>
 
     
-    You need to specify at **Own Public Certificate** and **Own Private Certificate** the certificates files in base64. The **Domain Name**, **Public Ip Address** are mandatory parameters.
+    Specify the certificate files in base64 in **Own Public Certificate** and **Own Private Certificate**. The **Domain Name** and **Public IP Address** parameters are mandatory.
 
     Certificates need to be in PEM format and base64 encoded. You can encode them using the following command in a terminal where `fullchain.pem` is your public certificate and `privkey.pem` is your private certificate:
 

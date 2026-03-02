@@ -10,7 +10,7 @@ description: Learn how to deploy OpenVidu Single Node PRO on AWS using CloudForm
     OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in AWS. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on AWS. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -32,7 +32,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Single Node AWS Architecture](../../../../assets/images/self-hosting/single-node/aws/single-node-aws-architecture.svg){ .svg-img .dark-img }

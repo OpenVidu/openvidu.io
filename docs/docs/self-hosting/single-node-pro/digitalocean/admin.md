@@ -1,21 +1,21 @@
 ---
-title: OpenVidu Single Node PRO administration on Digital Ocean
-description: Learn how to perform administrative tasks on an Digital Ocean OpenVidu Single Node PRO deployment
+title: OpenVidu Single Node PRO administration on DigitalOcean
+description: Learn how to perform administrative tasks on an DigitalOcean OpenVidu Single Node PRO deployment
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Digital Ocean
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: DigitalOcean
 
-Digital Ocean OpenVidu Single Node PRO deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node PRO](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform.
+DigitalOcean OpenVidu Single Node PRO deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node PRO](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform.
 
 However, there are certain things worth mentioning:
 
-## Start and stop OpenVidu through Digital Ocean web
+## Start and stop OpenVidu through DigitalOcean web
 
-You can start and stop all services as explained in the [On Premises Single Node PRO](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Droplet directly from Digital Ocean web. This will stop all services running in the droplet and reduce Digital Ocean costs.
+You can start and stop all services as explained in the [On Premises Single Node PRO](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Droplet directly from DigitalOcean web. This will stop all services running in the droplet and reduce DigitalOcean costs.
 
 === "Stop OpenVidu Single Node PRO"
 
-    1. Go to [Digital Ocean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
+    1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
     3. In the section of the Droplet click on _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
@@ -25,7 +25,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 === "Start OpenVidu Single Node PRO"
 
-    1. Go to [Digital Ocean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
+    1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
     3. In the section of the Droplet click on _"Power"_ and the _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
@@ -37,7 +37,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 You can change the droplet size of the OpenVidu Single Node PRO to adapt it to your needs. To do this, follow these steps:
 
-1. Go to [Digital Ocean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
+1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
 2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
 3. [Stop](#stop-openvidu-single-node) the droplet if is not stopped.
 4. Click on _"Upsize Droplet"_ and change the size, then click on _"Resize"_.

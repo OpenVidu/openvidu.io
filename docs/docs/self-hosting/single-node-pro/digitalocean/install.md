@@ -1,40 +1,40 @@
 ---
-title: OpenVidu Single Node installation on Digital Ocean
-description: Learn how to deploy OpenVidu Single Node PRO on Digital Ocean by two ways
+title: OpenVidu Single Node installation on DigitalOcean
+description: Learn how to deploy OpenVidu Single Node PRO on DigitalOcean in two ways
 tags:
   - copyclipboard
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Digital Ocean
-This section describes two ways of installing OpenVidu Single Node PRO in Digital Ocean:
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: DigitalOcean
+This section describes two ways to install OpenVidu Single Node PRO on DigitalOcean:
 
-* [**Web Console**](#web-console): Can be deployed without installing anything in your machine, but it requires more manual steps and has some limitations. For example, recordings are stored in the machine (instead of Digital Ocean s3 storage). 
-* [**Terraform**](#terraform): More powerfull and automated, but it requires to install Terraform CLI on your machine.
+* [**Web Console**](#web-console): You can deploy without installing anything on your machine, but it requires more manual steps and has some limitations. For example, recordings are stored on the instance (instead of DigitalOcean S3-compatible storage).
+* [**Terraform**](#terraform): More powerful and automated, but it requires installing Terraform CLI on your machine.
 
 
 ## **Web Console**
 
-This page explains how to create a Droplet (VM) in Digital Ocean, configure networking, and prepare it for OpenVidu Single Node PRO On Premises. Installing, administrating, and upgrading OpenVidu Single Node PRO itself is covered in the On-Premises documentation.
+This page explains how to create a Droplet (VM) in DigitalOcean, configure networking, and prepare it for OpenVidu Single Node PRO On Premises. Installing, administrating, and upgrading OpenVidu Single Node PRO itself is covered in the On-Premises documentation.
 
 ### Prerequisites
 
-- Digital Ocean account with permission to create Droplets and networking resources.
+- DigitalOcean account with permission to create Droplets and networking resources.
 
 ---
 
 ### 1. Create the Droplet
 
-1. Log in to your [**Digital Ocean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/) account.
-2. Search for **Droplets** and click it, then click _"Create Droplet"_.
+1. Log in to your [**DigitalOcean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/) account.
+2. Search for **Droplets**, click it, and then click _"Create Droplet"_.
     <figure markdown>
     ![Create Droplet](../../../../assets/images/self-hosting/single-node/digitalocean/install-tutorial/create-droplet.png){ .svg-img .dark-img }
     </figure>
-3. Choose a region and then change the image to Ubuntu _"24.04 (LTS) x64"_ in case that is not selected yet.
+3. Choose a region and then change the image to Ubuntu _"24.04 (LTS) x64"_ if it is not selected yet.
     <figure markdown>
     ![OS Selection](../../../../assets/images/self-hosting/single-node/digitalocean/install-tutorial/os-version-selection.png){ .svg-img .dark-img }
     </figure>
 4. Select the size for your OpenVidu server. We recommend **4 CPUs or more and at least 4 GB of RAM** for OpenVidu to run correctly.
-5. Go down to the Authentication Method and choose the one you prefer. This will be used to connect via Terminal to the instance. If you want to use SSH Key follow the instructions that appear when clicking New SSH Key.
+5. Scroll down to Authentication Method and choose the one you prefer. This will be used to connect to the instance via terminal. If you want to use an SSH key, follow the instructions shown when you click New SSH Key.
     <figure markdown>
     ![Create New SSH Key](../../../../assets/images/self-hosting/single-node/digitalocean/install-tutorial/new-ssh-key.png){ .svg-img .dark-img }
     </figure>
@@ -86,20 +86,20 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
 ## **Terraform**
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment in Digital Ocean. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with Terraform CLI. Additionally, Digital Ocean Spaces (S3-compatible storage) is used for storing recordings and other persistent data.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on DigitalOcean. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
 
 ### Prerequisites
-* You need to have a Digital Ocean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
+* You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
 * You need to have installed [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target=_blank}.
 * You need to have installed Git.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node PRO Digital Ocean Architecture](../../../../assets/images/self-hosting/single-node/digitalocean/single-node-do-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node PRO Digital Ocean Architecture</figcaption>
+    ![OpenVidu Single Node PRO DigitalOcean Architecture](../../../../assets/images/self-hosting/single-node/digitalocean/single-node-do-architecture.svg){ .svg-img .dark-img }
+    <figcaption>OpenVidu Single Node PRO DigitalOcean Architecture</figcaption>
     </figure>
 
 ### Deployment details
@@ -126,7 +126,7 @@ This section contains the instructions to deploy a production-ready OpenVidu Sin
     <tbody>
     <tr>
     <td style="white-space: nowrap;"><code>do_token</code></td>
-    <td>Digital Ocean Personal Access Token for API authentication.</td>
+    <td>DigitalOcean Personal Access Token for API authentication.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>stackName</code></td>
@@ -155,12 +155,12 @@ This section contains the instructions to deploy a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>region</code></td>
     <td style="white-space: nowrap;"><code>"ams3"</code></td>
-    <td>Digital Ocean region where resources will be created.</td>
+    <td>DigitalOcean region where resources will be created.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>instanceType</code></td>
     <td style="white-space: nowrap;"><code>"s-2vcpu-4gb"</code></td>
-    <td>Specifies the Digital Ocean Droplet size for your OpenVidu instance.</td>
+    <td>Specifies the DigitalOcean Droplet size for your OpenVidu instance.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>certificateType</code></td>
@@ -208,12 +208,12 @@ This section contains the instructions to deploy a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>spaceRegion</code></td>
     <td style="white-space: nowrap;"><code>"ams3"</code></td>
-    <td>Digital Ocean Spaces region where the bucket will be created.</td>
+    <td>DigitalOcean Spaces region where the bucket will be created.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and Digital Ocean Droplets already default to UTC, so this flag is not usually necessary.</td>
+    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary.</td>
     </tr>
     </tbody>
     </table>
@@ -243,23 +243,23 @@ After waiting about 5 to 10 minutes to let the droplet run the installation of O
 
 === "Check deployment outputs in the instance"
 
-    SSH to the instance by running this command in the path where you have the SSH Key:
+    SSH to the instance by running this command from the directory where your SSH key is located:
     ```
     ssh -i openvidu_ssh_key_snpro.pem root@PUBLIC_DROPLET_IP
     ```
 
-    Then navigate to /opt/openvidu/ and you will find all credentials needed in the `secrets.env`
+    Then navigate to /opt/openvidu/ and you will find all required credentials in `secrets.env`.
 
 
 ### Configure your application to use the deployment 
 
-You may need your Digital Ocean credentials to configure your OpenVidu application. You can check these secrets following these steps ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
+You may need your DigitalOcean credentials to configure your OpenVidu application. You can check these secrets using the following method: ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
-Your authentication credentials and URL to point your applications would be:
+Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "shared/self-hosting/do-credentials-general.md"
 
-### Troubleshooting initial Digital Ocean deployment creation
+### Troubleshooting initial DigitalOcean deployment creation
 
 --8<-- "shared/self-hosting/do-troubleshooting.md"
 

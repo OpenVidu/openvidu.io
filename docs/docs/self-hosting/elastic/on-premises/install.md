@@ -10,11 +10,11 @@ description: Learn how to deploy OpenVidu Elastic on-premises
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to the workload.
+This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to workload.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Elastic On Premises](../../../../assets/images/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img }
@@ -237,7 +237,7 @@ The most relevant parameters are:
 
 ## Non-interactive installation
 
-To automate the installation process, you just need to execute the specified command in the [Guided installation](#guided-installation) section and execute the generated commands.
+To automate the installation process, run the command specified in the [Guided installation](#guided-installation) section, and then run the generated commands.
 
 Each installation command for each type of node looks like this:
 
@@ -432,7 +432,7 @@ Each installation command for each type of node looks like this:
 
         --8<-- "shared/self-hosting/install-version.md"
 
-        - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
+        - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.

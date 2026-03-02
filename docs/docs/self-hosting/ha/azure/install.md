@@ -11,15 +11,15 @@ description: Learn how to deploy OpenVidu High Availability on Azure using Templ
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu High Availability setup on Azure. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but provisioned as Azure resources and automated using an ARM Template Spec.
+This section describes how to deploy a production-ready OpenVidu High Availability setup on Azure. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Azure resources and automated through an ARM Template Spec.
 
-To import the template into Azure you just need to click the button below and you will be redirected to azure.   
+To import the template into Azure, click the button below and you will be redirected to Azure.   
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
-This is how the architecture of the deployment looks like:
+This is what the deployment architecture looks like:
 
 === "Architecture overview"
 
@@ -29,7 +29,7 @@ This is how the architecture of the deployment looks like:
     </figure>
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge, because it exists a limitation in Azure.
+    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge due to a limitation on Azure.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
@@ -38,7 +38,7 @@ This is how the architecture of the deployment looks like:
 
 ## Template Parameters
 
-To deploy the template you need to fill the following parameters.
+To deploy the template, you need to fill in the following parameters.
 
 --8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
 
@@ -74,7 +74,7 @@ You need to specify some properties for the Azure instances that will be created
     ![Azure Instance configuration](../../../../assets/images/self-hosting/ha/azure/azure-instance-config.png){ .svg-img .dark-img }
     </figure>
 
-    Simply select the type of instance you want for your Master Nodes at **Master Node Instance Type** and select the type of instance you want for your Media Nodes at **Media Node Instance Type**. Fill in the parameter **Admin Username** that will be set as admin username in the instance. Select the SSH key you've created previously in **SSH public key source** (or create a new one in the same drop down) to allow you to SSH into the instances.
+    Simply select the type of instance you want for your Master Nodes in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
 
 ### Media Nodes Scaling Set Configuration
 
@@ -94,9 +94,9 @@ Whenever you are satisfied with your Template parameters, just click on _"Next"_
 
 !!! warning
 
-    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    In case of failure, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
-    In case that the error is related to a conflict in the creation of a network interface, just redeploy in another resource group with a different **Stack Name**.
+    If the error is related to a conflict when creating a network interface, redeploy in another resource group with a different **Stack Name**.
 
 When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
 
@@ -104,19 +104,19 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
 
-    2. Once you are in the Key Vault on the left panel click on _"Objects"_ 🡒 _"Secrets"_.
+    2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
         <figure markdown>
         ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
 
-    3. Here click on the secret of your choice or whatever you need to check and click again in the current version of that secret
+    3. Click the secret you want to inspect, then click the current version of that secret.
 
         <figure markdown>
         ![Azure Key Vault Secret Version](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-version.png){ .svg-img .dark-img }
         </figure>
 
-    4. Now you will see a lot of properties but the one you are searching for is located at the bottom and it will be revealed by clicking in _"Show Secret Value"_.
+    4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
         <figure markdown>
         ![Check deployment outputs in Azure Key Vault](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
@@ -124,9 +124,9 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
 === "Check deployment outputs in the instance"
 
-    You must connect through SSH to any of the Master Nodes. It is not an regular SSH process, because Master Nodes do not have a public IP address. The easiest way is by connecting through a **Bastion** resource:
+    You must connect through SSH to any of the Master Nodes. This is not a regular SSH process, because Master Nodes do not have a public IP address. The easiest way is to connect through a **Bastion** resource:
 
-    1. Go to the resource group where you deployed OpenVidu High Availability and click on one (any) of the Master Nodes Virtual Machines.
+    1. Go to the resource group where you deployed OpenVidu High Availability and click one of the Master Node virtual machines.
     2. Inside the Virtual Machine resource, click on _"Connect"_ 🡒 _"Connect via Bastion"_.
         <figure markdown>
             ![Connect via bastion](../../../../assets/images/self-hosting/ha/azure/azure-connect-bastion.png){ .svg-img .dark-img }
@@ -157,7 +157,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
 You need your Azure deployment outputs to configure your OpenVidu application. If you have permissions to access the Key Vault you will be able to check there all the outputs ([Check deployment outputs in Azure Key Vault](#check-deployment-outputs-in-azure-key-vault)). If you don't have permissions to access the Key Vault you can still check the outputs directly in the instance through SSH ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
-Your authentication credentials and URL to point your applications would be:
+Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "shared/self-hosting/azure-credentials-general.md"
 --8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
@@ -174,4 +174,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Azure stack reaches the **`Succeeded`** status, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 5 to 10 minutes for the instance to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.

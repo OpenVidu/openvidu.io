@@ -10,11 +10,11 @@ description: Learn how to deploy OpenVidu Single Node PRO on-premises
     OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on-premises. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
@@ -48,7 +48,7 @@ Before starting the installation process, make sure you have the following prere
 
 ## Port rules
 
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your machine.
+Ensure all these rules are configured in your firewall, security group, or any network configuration on your machine.
 
 **Inbound port rules**:
 
@@ -391,7 +391,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
         --8<-- "shared/self-hosting/install-version.md"
 
-        - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
+        - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 

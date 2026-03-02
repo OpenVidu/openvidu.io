@@ -281,14 +281,14 @@ When deploying in a supported **cloud provider** using our official templates, O
         </table>
     </div>
 
-=== ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} Digital Ocean"
+=== ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
 
     Deploy OpenVidu using our official **Terraform** template:
 
-    - [OpenVidu Elastic in Digital Ocean](../elastic/digitalocean/install.md)
-    - [OpenVidu High Availability in Digital Ocean](../ha/digitalocean/install.md)
+    - [OpenVidu Elastic in DigitalOcean](../elastic/digitalocean/install.md)
+    - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
-    Right now, there is no autoscaling in Digital Ocean, but you can configure the average number of nodes you want. To find out how, follow the steps of [Configurate Number of Fixed Media Nodes OpenVidu Elastic](../elastic/digitalocean/admin.md#change-fixed-number-of-media-nodes) or [Configurate Number of Fixed Media Nodes OpenVidu High Availability](../ha/digitalocean/admin.md#change-fixed-number-of-media-nodes) depending on your deployment.
+    Right now, there is no autoscaling in DigitalOcean, but you can configure the average number of nodes you want. To find out how, follow the steps of [Configurate Number of Fixed Media Nodes OpenVidu Elastic](../elastic/digitalocean/admin.md#change-fixed-number-of-media-nodes) or [Configurate Number of Fixed Media Nodes OpenVidu High Availability](../ha/digitalocean/admin.md#change-fixed-number-of-media-nodes) depending on your deployment.
 
 ### Autoscaling On Premises
 

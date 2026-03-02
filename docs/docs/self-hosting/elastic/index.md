@@ -11,7 +11,7 @@ OpenVidu Elastic is part of the <span style="font-size: 12px;" class="openvidu-t
 - [**AWS installation**](./aws/install.md): Deploy OpenVidu Elastic on Amazon Web Services.
 - [**Azure installation**](./azure/install.md): Deploy OpenVidu Elastic on Microsoft Azure.
 - [**Google Cloud Platform installation**](./gcp/install.md): Deploy OpenVidu Elastic on Google Cloud Platform.
-- [**Digital Ocean installation**](./digitalocean/install.md): Deploy OpenVidu Elastic on Digital Ocean.
+- [**DigitalOcean installation**](./digitalocean/install.md): Deploy OpenVidu Elastic on DigitalOcean.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
@@ -19,7 +19,7 @@ Once your deployment is complete, refer to the following sections for configurat
 - [**AWS: configuration and administration**](./aws/admin.md)
 - [**Azure: configuration and administration**](./azure/admin.md)
 - [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
-- [**Digital Ocean: configuration and administration**](./digitalocean/admin.md)
+- [**DigitalOcean: configuration and administration**](./digitalocean/admin.md)
 
 If you want to upgrade your OpenVidu Elastic installation, refer to this section:
 
@@ -27,4 +27,4 @@ If you want to upgrade your OpenVidu Elastic installation, refer to this section
 - [**Upgrade OpenVidu Elastic AWS**](./aws/upgrade.md)
 - [**Upgrade OpenVidu Elastic Azure**](./azure/upgrade.md)
 - [**Upgrade OpenVidu Elastic Google Cloud Platform**](./gcp/upgrade.md)
-- [**Upgrade OpenVidu Elastic Digital Ocean**](./digitalocean/upgrade.md)
+- [**Upgrade OpenVidu Elastic DigitalOcean**](./digitalocean/upgrade.md)

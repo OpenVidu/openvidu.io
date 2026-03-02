@@ -5,7 +5,7 @@ description: Learn how to deploy OpenVidu Single Node on AWS using CloudFormatio
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: AWS
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment in AWS. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on AWS. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -27,7 +27,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Single Node AWS Architecture](../../../../assets/images/self-hosting/single-node/aws/single-node-aws-architecture.svg){ .svg-img .dark-img }

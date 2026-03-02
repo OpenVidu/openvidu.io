@@ -1,35 +1,35 @@
 ---
-title: OpenVidu Elastic installation on Digital Ocean
-description: Learn how to deploy OpenVidu Elastic on Digital Ocean
+title: OpenVidu Elastic installation on DigitalOcean
+description: Learn how to deploy OpenVidu Elastic on DigitalOcean
 tags:
   - copyclipboard
 ---
 
-# OpenVidu Elastic installation: Digital Ocean
+# OpenVidu Elastic installation: DigitalOcean
 
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu Elastic instance on Digital Ocean. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Digital Ocean resources and can be automated using Terraform CLI.
+This section describes how to deploy a production-ready OpenVidu Elastic instance on DigitalOcean. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as DigitalOcean resources and can be automated using Terraform CLI.
 
-- Digital Ocean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings.
+- DigitalOcean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings.
 - Media Node **scalability is not supported** in this deployment. The number of Media Nodes is fixed and must be defined before deployment.
 
 ## Prerequisites
 
-* You need to have a Digital Ocean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
+* You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
 * You need to have installed [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target=_blank}.
 * You need to have installed Git.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Elastic Digital Ocean Architecture](../../../../assets/images/self-hosting/elastic/digitalocean/elastic-do-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Elastic Digital Ocean Architecture</figcaption>
+    ![OpenVidu Elastic DigitalOcean Architecture](../../../../assets/images/self-hosting/elastic/digitalocean/elastic-do-architecture.svg){ .svg-img .dark-img }
+    <figcaption>OpenVidu Elastic DigitalOcean Architecture</figcaption>
     </figure>
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
@@ -61,7 +61,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     <tbody>
     <tr>
     <td style="white-space: nowrap;"><code>do_token</code></td>
-    <td>Digital Ocean Personal Access Token for API authentication.</td>
+    <td>DigitalOcean Personal Access Token for API authentication.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>stackName</code></td>
@@ -90,17 +90,17 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     <tr>
     <td style="white-space: nowrap;"><code>region</code></td>
     <td style="white-space: nowrap;"><code>"ams3"</code></td>
-    <td>Digital Ocean region where resources will be created.</td>
+    <td>DigitalOcean region where resources will be created.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>masterNodeInstanceType</code></td>
     <td style="white-space: nowrap;"><code>"s-4vcpu-8gb"</code></td>
-    <td>Specifies the Digital Ocean Droplet size for your Master Node.</td>
+    <td>Specifies the DigitalOcean Droplet size for your Master Node.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>mediaNodeInstanceType</code></td>
     <td style="white-space: nowrap;"><code>"s-4vcpu-8gb"</code></td>
-    <td>Specifies the Digital Ocean Droplet size for your Media Nodes.</td>
+    <td>Specifies the DigitalOcean Droplet size for your Media Nodes.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>fixedNumberOfMediaNodes</code></td>
@@ -153,12 +153,12 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     <tr>
     <td style="white-space: nowrap;"><code>spaceRegion</code></td>
     <td style="white-space: nowrap;"><code>"ams3"</code></td>
-    <td>Digital Ocean Spaces region where the bucket will be created.</td>
+    <td>DigitalOcean Spaces region where the bucket will be created.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and Digital Ocean Droplets already default to UTC, so this flag is not usually necessary.</td>
+    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary.</td>
     </tr>
     </tbody>
     </table>
@@ -188,27 +188,27 @@ After waiting about 5 to 10 minutes to let the droplet run the installation of O
 
 === "Check deployment outputs in the instance"
 
-    SSH to the instance by running this command in the path where you have the SSH Key:
+    SSH to the instance by running this command from the directory where your SSH key is located:
     ```
     ssh -i openvidu_ssh_key_elastic.pem root@PUBLIC_DROPLET_IP
     ```
 
-    Then navigate to /opt/openvidu/ and you will find all credentials needed in the `secrets.env`
+    Then navigate to /opt/openvidu/ and you will find all required credentials in `secrets.env`.
 
 === "Check deployment outputs in the Web"
 
-    - Go to the Space Object Storage bucket that you've configurated and download the `secrets.env` file.
+    - Go to the Space Object Storage bucket you configured and download the `secrets.env` file.
 
 ## Configure your application to use the deployment 
 
-You may need your Digital Ocean credentials to configure your OpenVidu application. You can check these secrets following these steps ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)) or by ([Check deployment outputs in the web](#check-deployment-outputs-in-the-web)).
+You may need your DigitalOcean credentials to configure your OpenVidu application. You can check these secrets using either of these methods: ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)) or ([Check deployment outputs in the web](#check-deployment-outputs-in-the-web)).
 
-Your authentication credentials and URL to point your applications would be:
+Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "shared/self-hosting/do-credentials-general.md"
 --8<-- "shared/self-hosting/do-credentials-v2compatibility.md"
 
-### Troubleshooting initial Digital Ocean deployment creation
+### Troubleshooting initial DigitalOcean deployment creation
 
 --8<-- "shared/self-hosting/do-troubleshooting.md"
 

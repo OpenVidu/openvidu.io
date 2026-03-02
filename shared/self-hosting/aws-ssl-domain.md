@@ -4,7 +4,7 @@ There are three possible scenarios for this section:
 
 === "Let's Encrypt Without Domain Name"
 
-    If you don't have a Domain Name and want to quickly test OpenVidu on AWS, you can use this option, simply selecting the **CertificateType** as _letsencrypt_ and keep the rest of parameters empty.
+    If you don't have a Domain Name and want to quickly test OpenVidu on AWS, you can use this option by selecting **CertificateType** as _letsencrypt_ and keeping the rest of the parameters empty.
 
     It will deploy OpenVidu with a Let's Encrypt certificate generated using [sslip.io](https://sslip.io/){:target="_blank"} based on the public IP created for the deployment.
 
@@ -18,7 +18,7 @@ There are three possible scenarios for this section:
 
     For a production environment, it is highly recommended to use this option. It allows you to deploy OpenVidu on AWS with a valid Let's Encrypt certificate for your Fully Qualified Domain Name (FQDN).
 
-    You need to previously create an Elastic IP and have a Domain Name pointing to that Elastic IP.
+    Create an Elastic IP beforehand and ensure your Domain Name points to it.
 
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/aws-letsencrypt.png)
 
@@ -28,15 +28,15 @@ There are three possible scenarios for this section:
 
     Opt for this method if you possess **your own certificate for an existing FQDN**. It enables you to deploy OpenVidu on AWS using your certificates.
 
-    You need to have a Fully Qualified Domain Name (FQDN) pointing to a previously created Elastic IP.
+    Ensure you have a Fully Qualified Domain Name (FQDN) pointing to a previously created Elastic IP.
 
-    Also, you need a **temporary HTTP server** hosting your private and public certificate under a specific URL. These URLs are needed for the instance to be able to download and install your certificates.
+    You also need a **temporary HTTP server** hosting your private and public certificate under a specific URL. These URLs are required so the instance can download and install your certificates.
 
     The configured parameters would look like this:
 
     ![Custom certificates](../../../../assets/images/self-hosting/shared/aws-owncert.png)
 
-    You need to specify at **OwnPublicCertificate** and **OwnPrivateCertificate** the certificates files in base64. The **DomainName** and **PublicElasticIP** are mandatory parameters.
+    Specify the certificate files in base64 in **OwnPublicCertificate** and **OwnPrivateCertificate**. The **DomainName** and **PublicElasticIP** parameters are mandatory.
 
     Certificates need to be in PEM format and base64 encoded. You can encode them using the following command in a terminal where `fullchain.pem` is your public certificate and `privkey.pem` is your private certificate:
 

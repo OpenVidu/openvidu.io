@@ -5,11 +5,11 @@ description: Learn how to deploy OpenVidu Single Node on-premises
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: On-premises
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on-premises. It is a deployment based on Docker and Docker Compose, which will automatically configure all the necessary services for OpenVidu to work properly.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on-premises. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
@@ -42,7 +42,7 @@ Before starting the installation process, make sure you have the following prere
 
 ## Port rules
 
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your machine.
+Ensure all these rules are configured in your firewall, security group, or any network configuration on your machine.
 
 **Inbound port rules**:
 
@@ -353,7 +353,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
         --8<-- "shared/self-hosting/install-version.md"
 
-        - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
+        - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
 
 You can run that command in a CI/CD pipeline or in a script to automate the installation process.
 

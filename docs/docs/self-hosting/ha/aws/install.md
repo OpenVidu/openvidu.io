@@ -10,7 +10,7 @@ description: Learn how to deploy OpenVidu High Availability on AWS using CloudFo
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in AWS. Deployed services are the same as the [On Premises High Availability installation](../on-premises/install-nlb.md) but automate the process with AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu High Availability deployment on AWS. The deployed services are the same as in the [On Premises High Availability installation](../on-premises/install-nlb.md), but the process is automated through AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -30,7 +30,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu
     https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.5.0/aws/cf-openvidu-ha.yaml
     ```
 
-This is how the architecture of the deployment looks like.
+This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
