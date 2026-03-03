@@ -8,8 +8,8 @@ tags:
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: DigitalOcean
 This section describes two ways to install OpenVidu Single Node on DigitalOcean:
 
-* [**Web Console**](#web-console): You can deploy without installing anything on your machine, but it requires more manual steps and has some limitations. For example, recordings are stored on the instance (instead of DigitalOcean S3-compatible storage).
-* [**Terraform**](#terraform): More powerful and automated, but it requires installing Terraform CLI on your machine.
+* [**Web Console**](#web-console): Can be deployed without installing anything in your machine, but it requires more manual steps and has some limitations. For example, recordings are stored in the machine (instead of Digital Ocean Spaces Object Storage). 
+* [**Terraform**](#terraform): More powerfull and automated, but it requires to install Terraform CLI on your machine.
 
 
 ## **Web Console**
@@ -215,7 +215,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
   ```
   terraform init && terraform apply
   ```
-4. Wait until the SSH Key appears in the [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} bucket you configured.
+4. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} and wait for the ssh key to appear in the bucket you have configured.   
 
     !!! warning
         Once you've downloaded that SSH Key please **DELETE IT** from the bucket. This SSH Key is the private key used to connect to the droplet so if someone gets it, they could be capable of entering the instance.
@@ -223,28 +223,45 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     ![SSH Key in Bucket](../../../../assets/images/self-hosting/single-node/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
     </figure>
 
-5. Go to where you downloaded your SSH Key and run the following command:
-  ```
-  chmod 600 openvidu_ssh_key_sn.pem
-  ```
+5. Give the SSH Key the necessary permissions for it to work.
 
-### Checking credentials
+    === "Linux"
+        Command in linux:
+        ```
+        chmod 600 <PATH_TO_THE_KEY>/openvidu_ssh_key_sn.pem
+        ```
+    === "Powershell"
+        Command in powershell:
+        ```
+        $KeyPath = "<PATH_TO_THE_KEY>" &&
+        icacls $KeyPath /inheritance:r &&
+        icacls $KeyPath /grant:r "$($env:USERNAME):(R)"
+        ```
 
-After waiting about 5 to 10 minutes to let the droplet run the installation of OpenVidu you can check the credentials in the instance.
+### Access OpenVidu
 
-=== "Check deployment outputs in the instance"
+To verify that your OpenVidu deployment works correctly wait for the `secrets.env` to appear in the bucket that you've configured and open it to view the credentials of OpenVidu.
+
+=== "View OpenVidu credentials in the Web"
+    - Go to the Space Object Storage bucket that you've configurated and download the `secrets.env` file.
+    <figure markdown>
+    ![Secrets.env in Bucket](../../../../assets/images/self-hosting/single-node/digitalocean/secrets-env.png){ .svg-img .dark-img }
+    </figure>
+
+=== "View OpenVidu credentials in the instance"
 
     SSH to the instance by running this command from the directory where your SSH key is located:
     ```
     ssh -i openvidu_ssh_key_sn.pem root@PUBLIC_DROPLET_IP
     ```
 
-    Then navigate to /opt/openvidu/ and you will find all required credentials in `secrets.env`.
-
+    Then navigate to /opt/openvidu/ and you will find all credentials needed in the `secrets.env`.
+    
+Then open **OPENVIDU_URL** and you will see the OpenVidu Meet interface. Log in with **MEET_INITIAL_ADMIN_PASSWORD** and you will be able to enjoy the features of OpenVidu Meet.
 
 ### Configure your application to use the deployment 
 
-You may need your DigitalOcean credentials to configure your OpenVidu application. You can check these secrets using the following method: ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
+You may need your Digital Ocean credentials to configure your OpenVidu application. You can check these secrets following these steps ([View OpenVidu credentials in the Web](#view-openvidu-credentials-in-the-web)) or ([View OpenVidu credentials in the instance](#view-openvidu-credentials-in-the-instance)).
 
 Your authentication credentials and the URL to point your applications to are:
 
