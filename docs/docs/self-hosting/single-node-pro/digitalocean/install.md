@@ -6,6 +6,13 @@ tags:
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: DigitalOcean
+
+<div class="provider-chip" markdown>
+
+:material-digital-ocean:{ .provider-chip-icon } DigitalOcean
+
+</div>
+
 This section describes two ways to install OpenVidu Single Node PRO on DigitalOcean:
 
 * [**Web Console**](#web-console): Can be deployed without installing anything in your machine, but it requires more manual steps and has some limitations. For example, recordings are stored in the machine (instead of Digital Ocean Spaces Object Storage). 

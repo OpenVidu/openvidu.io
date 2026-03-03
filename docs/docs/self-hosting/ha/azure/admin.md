@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an Azure OpenVidu High
 
 # OpenVidu High Availability administration: Azure
 
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
+
 The deployment of OpenVidu High Availability on Azure is automated using Azure Resource Manager Templates, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Virtual Machine Scale Set :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. The Virtual Machine Scale Set of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Azure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account:

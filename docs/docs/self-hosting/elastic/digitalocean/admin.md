@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on a DigitalOcean OpenVid
 
 # OpenVidu Elastic administration: DigitalOcean
 
+<div class="provider-chip" markdown>
+
+:material-digital-ocean:{ .provider-chip-icon } DigitalOcean
+
+</div>
+
+
 The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI to deploy on DigitalOcean, where Media Nodes are in a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/autoscale/){:target=\_blank}.
 
 Internally, the DigitalOcean Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth taking into account:

@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 # OpenVidu Elastic administration: Google Cloud Platform
 
+<div class="provider-chip" markdown>
+
+:material-google-cloud:{ .provider-chip-icon } Google Cloud Platform
+
+</div>
+
+
 The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
 
 Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:

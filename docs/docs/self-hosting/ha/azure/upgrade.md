@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu High Availability - Azure
+title: Upgrade OpenVidu High Availability on Azure
 description: How to upgrade OpenVidu High Availability on Azure deployments.
 ---
 
-# Upgrade OpenVidu High Availability - Azure
+# Upgrade OpenVidu High Availability: Azure
+
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
 
 In Azure environments, we recommend upgrading by redeploying [OpenVidu High Availability Azure](../azure/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Azure templates and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 

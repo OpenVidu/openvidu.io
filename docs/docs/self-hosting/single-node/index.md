@@ -1,37 +1,26 @@
 ---
 title: OpenVidu Single Node Community
-description: Learn how to install, configure and administer OpenVidu Single Node Community On Premises, AWS or Azure.
+description: Learn how to install, configure, administer and upgrade OpenVidu Single Node Community across On-Premises and cloud providers.
 ---
 
-# OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> installation
+# OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span>
 
 OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> is a production-ready deployment option that provides all the necessary features for running real-time applications with medium user load.
 
-Install OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> in your preferred environment:
+Choose your provider:
 
-- [**On-premises installation**](./on-premises/install.md): set up on your own servers.
-- [**AWS installation**](./aws/install.md): deploy to Amazon Web Services.
-- [**Azure installation**](./azure/install.md): deploy to Microsoft Azure.
-- [**Google Cloud Platform installation**](./gcp/install.md): deploy to Google Cloud Platform.
-- [**DigitalOcean installation**](./digitalocean/install.md): deploy to DigitalOcean.
+<div class="provider-buttons" markdown>
 
-Once your deployment is complete, refer to the following sections for configuration and management:
+[:material-server:{.icon .lg-icon .provider-icon} **On-premises**](./on-premises/index.md){ .md-button .md-button--primary .provider-link }
 
-- [**On-premises: configuration and administration**](./on-premises/admin.md)
-- [**AWS: configuration and administration**](./aws/admin.md)
-- [**Azure: configuration and administration**](./azure/admin.md)
-- [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
-- [**DigitalOcean: configuration and administration**](./digitalocean/admin.md)
+[:material-aws:{.icon .lg-icon .provider-icon} **AWS**](./aws/index.md){ .md-button .md-button--primary .provider-link }
 
-If you want to upgrade your OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> installation, refer to this section:
+[:material-microsoft-azure:{.icon .lg-icon .provider-icon} **Azure**](./azure/index.md){ .md-button .md-button--primary .provider-link }
 
-- [**On-premises: upgrade OpenVidu Single Node Community**](./on-premises/upgrade.md)
-- [**AWS: upgrade OpenVidu Single Node Community**](./aws/upgrade.md)
-- [**Azure: upgrade OpenVidu Single Node Community**](./azure/upgrade.md)
-- [**Google Cloud Platform: upgrade OpenVidu Single Node Community**](./gcp/upgrade.md)
-- [**DigitalOcean: upgrade OpenVidu Single Node Community**](./digitalocean/upgrade.md)
+[:material-google-cloud:{.icon .lg-icon .provider-icon} **GCP**](./gcp/index.md){ .md-button .md-button--primary .provider-link }
 
-We also offer installation tutorials for other Cloud Providers:
+[:material-digital-ocean:{.icon .lg-icon .provider-icon} **DigitalOcean**](./digitalocean/index.md){ .md-button .md-button--primary .provider-link }
 
-- [**DigitalOcean**](./digitalocean/install.md)
-- [**Oracle Cloud Infrastructure**](./oracle/install-tutorial.md)
+[:custom-oracle-cloud-infrastructure:{.icon .lg-icon .provider-icon} **OCI**](./oracle/install-tutorial.md){ .md-button .md-button--primary .provider-link }
+
+</div>

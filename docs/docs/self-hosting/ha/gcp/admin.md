@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 # OpenVidu High Availability administration: Google Cloud Platform
 
+<div class="provider-chip" markdown>
+
+:material-google-cloud:{ .provider-chip-icon } Google Cloud Platform
+
+</div>
+
+
 The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:

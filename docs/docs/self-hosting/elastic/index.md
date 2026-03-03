@@ -3,28 +3,22 @@ title: OpenVidu Elastic
 description: Learn how to install OpenVidu Elastic on-premises or on AWS, with configuration and management guides for each deployment option.
 ---
 
-# OpenVidu Elastic installation
+# OpenVidu Elastic
 
 OpenVidu Elastic is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> edition of OpenVidu. You have the following deployment options:
 
-- [**On-premises installation**](./on-premises/install.md): Set up OpenVidu Elastic on your own servers.
-- [**AWS installation**](./aws/install.md): Deploy OpenVidu Elastic on Amazon Web Services.
-- [**Azure installation**](./azure/install.md): Deploy OpenVidu Elastic on Microsoft Azure.
-- [**Google Cloud Platform installation**](./gcp/install.md): Deploy OpenVidu Elastic on Google Cloud Platform.
-- [**DigitalOcean installation**](./digitalocean/install.md): Deploy OpenVidu Elastic on DigitalOcean.
+Choose your provider:
 
-Once your deployment is complete, refer to the following sections for configuration and management:
+<div class="provider-buttons" markdown>
 
-- [**On-premises: configuration and administration**](./on-premises/admin.md)
-- [**AWS: configuration and administration**](./aws/admin.md)
-- [**Azure: configuration and administration**](./azure/admin.md)
-- [**Google Cloud Platform: configuration and administration**](./gcp/admin.md)
-- [**DigitalOcean: configuration and administration**](./digitalocean/admin.md)
+[:material-server:{.icon .lg-icon .provider-icon} **On-premises**](./on-premises/index.md){ .md-button .md-button--primary .provider-link }
 
-If you want to upgrade your OpenVidu Elastic installation, refer to this section:
+[:material-aws:{.icon .lg-icon .provider-icon} **AWS**](./aws/index.md){ .md-button .md-button--primary .provider-link }
 
-- [**Upgrade OpenVidu Elastic On-premises**](./on-premises/upgrade.md)
-- [**Upgrade OpenVidu Elastic AWS**](./aws/upgrade.md)
-- [**Upgrade OpenVidu Elastic Azure**](./azure/upgrade.md)
-- [**Upgrade OpenVidu Elastic Google Cloud Platform**](./gcp/upgrade.md)
-- [**Upgrade OpenVidu Elastic DigitalOcean**](./digitalocean/upgrade.md)
+[:material-microsoft-azure:{.icon .lg-icon .provider-icon} **Azure**](./azure/index.md){ .md-button .md-button--primary .provider-link }
+
+[:material-google-cloud:{.icon .lg-icon .provider-icon} **GCP**](./gcp/index.md){ .md-button .md-button--primary .provider-link }
+
+[:material-digital-ocean:{.icon .lg-icon .provider-icon} **DigitalOcean**](./digitalocean/index.md){ .md-button .md-button--primary .provider-link }
+
+</div>

@@ -7,6 +7,13 @@ tags:
 
 # OpenVidu Elastic installation: DigitalOcean
 
+<div class="provider-chip" markdown>
+
+:material-digital-ocean:{ .provider-chip-icon } DigitalOcean
+
+</div>
+
+
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.

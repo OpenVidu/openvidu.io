@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an DigitalOcean OpenVi
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: DigitalOcean
 
+<div class="provider-chip" markdown>
+
+:material-digital-ocean:{ .provider-chip-icon } DigitalOcean
+
+</div>
+
+
 DigitalOcean OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform.
 
 However, there are certain things worth mentioning:

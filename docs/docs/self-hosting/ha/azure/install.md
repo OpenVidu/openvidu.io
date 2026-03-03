@@ -5,6 +5,13 @@ description: Learn how to deploy OpenVidu High Availability on Azure using Templ
 
 # OpenVidu High Availability installation: Azure
 
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
+
 
 !!! info
     

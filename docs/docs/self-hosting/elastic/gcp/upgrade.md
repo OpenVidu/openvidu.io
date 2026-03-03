@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu Elastic - Google Cloud Platform
-description: How to upgrade OpenVidu Elastic on Google Cloud Platform deployments
+title: Upgrade OpenVidu Elastic on Google Cloud Platform
+description: How to upgrade OpenVidu Elastic on Google Cloud Platform deployments.
 ---
 
-# Upgrade OpenVidu Elastic - Google Cloud Platform
+# Upgrade OpenVidu Elastic: Google Cloud Platform
+
+<div class="provider-chip" markdown>
+
+:material-google-cloud:{ .provider-chip-icon } Google Cloud Platform
+
+</div>
+
 
 In Google Cloud Platform environments, we recommend upgrading by redeploying [OpenVidu Elastic Google Cloud Platform](../gcp/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Google Cloud Platform terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 

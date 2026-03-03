@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu Elastic - DigitalOcean
-description: How to upgrade OpenVidu Elastic on DigitalOcean deployments
+title: Upgrade OpenVidu Elastic on DigitalOcean
+description: How to upgrade OpenVidu Elastic on DigitalOcean deployments.
 ---
 
-# Upgrade OpenVidu Elastic - DigitalOcean
+# Upgrade OpenVidu Elastic: DigitalOcean
+
+<div class="provider-chip" markdown>
+
+:material-digital-ocean:{ .provider-chip-icon } DigitalOcean
+
+</div>
+
 
 In DigitalOcean environments, we recommend upgrading by redeploying [OpenVidu Elastic DigitalOcean](../digitalocean/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as DigitalOcean terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 

@@ -111,22 +111,27 @@ nav:
           - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node:
               - docs/self-hosting/single-node/index.md
               - On Premises:
+                  - docs/self-hosting/single-node/on-premises/index.md
                   - Install: docs/self-hosting/single-node/on-premises/install.md
                   - Administration: docs/self-hosting/single-node/on-premises/admin.md
                   - Upgrade: docs/self-hosting/single-node/on-premises/upgrade.md
               - AWS:
+                  - docs/self-hosting/single-node/aws/index.md
                   - Install: docs/self-hosting/single-node/aws/install.md
                   - Administration: docs/self-hosting/single-node/aws/admin.md
                   - Upgrade: docs/self-hosting/single-node/aws/upgrade.md
               - Azure:
+                  - docs/self-hosting/single-node/azure/index.md
                   - Install: docs/self-hosting/single-node/azure/install.md
                   - Administration: docs/self-hosting/single-node/azure/admin.md
                   - Upgrade: docs/self-hosting/single-node/azure/upgrade.md
               - GCP:
+                  - docs/self-hosting/single-node/gcp/index.md
                   - Install: docs/self-hosting/single-node/gcp/install.md
                   - Administration: docs/self-hosting/single-node/gcp/admin.md
                   - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md 
               - DigitalOcean:
+                  - docs/self-hosting/single-node/digitalocean/index.md
                   - Install: docs/self-hosting/single-node/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/single-node/digitalocean/upgrade.md
@@ -134,22 +139,27 @@ nav:
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
+                  - docs/self-hosting/single-node-pro/on-premises/index.md
                   - Install: docs/self-hosting/single-node-pro/on-premises/install.md
                   - Administration: docs/self-hosting/single-node-pro/on-premises/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/on-premises/upgrade.md
               - AWS:
+                  - docs/self-hosting/single-node-pro/aws/index.md
                   - Install: docs/self-hosting/single-node-pro/aws/install.md
                   - Administration: docs/self-hosting/single-node-pro/aws/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/aws/upgrade.md
               - Azure:
+                  - docs/self-hosting/single-node-pro/azure/index.md
                   - Install: docs/self-hosting/single-node-pro/azure/install.md
                   - Administration: docs/self-hosting/single-node-pro/azure/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/azure/upgrade.md
               - GCP:
+                  - docs/self-hosting/single-node-pro/gcp/index.md
                   - Install: docs/self-hosting/single-node-pro/gcp/install.md
                   - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/gcp/upgrade.md
               - DigitalOcean:
+                  - docs/self-hosting/single-node-pro/digitalocean/index.md
                   - Install: docs/self-hosting/single-node-pro/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node-pro/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/digitalocean/upgrade.md
@@ -157,45 +167,55 @@ nav:
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
+                  - docs/self-hosting/elastic/on-premises/index.md
                   - Install: docs/self-hosting/elastic/on-premises/install.md
                   - Administration: docs/self-hosting/elastic/on-premises/admin.md
                   - Upgrade: docs/self-hosting/elastic/on-premises/upgrade.md
               - AWS:
+                  - docs/self-hosting/elastic/aws/index.md
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Administration: docs/self-hosting/elastic/aws/admin.md
                   - Upgrade: docs/self-hosting/elastic/aws/upgrade.md
               - Azure:
+                  - docs/self-hosting/elastic/azure/index.md
                   - Install: docs/self-hosting/elastic/azure/install.md
                   - Administration: docs/self-hosting/elastic/azure/admin.md
                   - Upgrade: docs/self-hosting/elastic/azure/upgrade.md
               - GCP:
+                  - docs/self-hosting/elastic/gcp/index.md
                   - Install: docs/self-hosting/elastic/gcp/install.md
                   - Administration: docs/self-hosting/elastic/gcp/admin.md
                   - Upgrade: docs/self-hosting/elastic/gcp/upgrade.md
               - DigitalOcean:
+                  - docs/self-hosting/elastic/digitalocean/index.md
                   - Install: docs/self-hosting/elastic/digitalocean/install.md
                   - Administration: docs/self-hosting/elastic/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/elastic/digitalocean/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
+                  - docs/self-hosting/ha/on-premises/index.md
                   - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
                   - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
                   - Administration: docs/self-hosting/ha/on-premises/admin.md
                   - Upgrade: docs/self-hosting/ha/on-premises/upgrade.md
               - AWS:
+                  - docs/self-hosting/ha/aws/index.md
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
                   - Upgrade: docs/self-hosting/ha/aws/upgrade.md
               - Azure:
+                  - docs/self-hosting/ha/azure/index.md
                   - Install: docs/self-hosting/ha/azure/install.md
                   - Administration: docs/self-hosting/ha/azure/admin.md
                   - Upgrade: docs/self-hosting/ha/azure/upgrade.md
               - GCP:
+                  - docs/self-hosting/ha/gcp/index.md
                   - Install: docs/self-hosting/ha/gcp/install.md
                   - Administration: docs/self-hosting/ha/gcp/admin.md
                   - Upgrade: docs/self-hosting/ha/gcp/upgrade.md
               - DigitalOcean:
+                  - docs/self-hosting/ha/digitalocean/index.md
                   - Install: docs/self-hosting/ha/digitalocean/install.md
                   - Administration: docs/self-hosting/ha/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/ha/digitalocean/upgrade.md
@@ -398,6 +418,9 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - docs/overrides/.icons
   - pymdownx.blocks.caption
 
 extra:

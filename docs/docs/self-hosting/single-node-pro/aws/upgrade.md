@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu Single Node PRO - AWS
-description: How to upgrade OpenVidu Single Node PRO in AWS.
+title: Upgrade OpenVidu Single Node PRO on AWS
+description: How to upgrade OpenVidu Single Node PRO on AWS deployments.
 ---
 
-# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> - AWS
+# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span>: AWS
+
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
 
 In AWS, we recommend upgrading by redeploying the [OpenVidu Single Node CloudFormation](../aws/install.md) with the latest version.
 

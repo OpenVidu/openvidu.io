@@ -5,6 +5,13 @@ description: Learn how to deploy OpenVidu High Availability on AWS using CloudFo
 
 # OpenVidu High Availability installation: AWS
 
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
+
 !!! info
     
     OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.

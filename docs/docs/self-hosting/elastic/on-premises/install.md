@@ -5,6 +5,13 @@ description: Learn how to deploy OpenVidu Elastic on-premises
 
 # OpenVidu Elastic installation: On-premises
 
+<div class="provider-chip" markdown>
+
+:material-server:{ .provider-chip-icon } On-premises
+
+</div>
+
+
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.

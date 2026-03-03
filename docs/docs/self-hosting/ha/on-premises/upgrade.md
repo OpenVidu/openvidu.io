@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu High Availability - On premises
-description: How to upgrade OpenVidu High Availability on premises deployments
+title: Upgrade OpenVidu High Availability on-premises
+description: How to upgrade OpenVidu High Availability on-premises deployments.
 ---
 
-# Upgrade OpenVidu High Availability - On premises
+# Upgrade OpenVidu High Availability: On-premises
+
+<div class="provider-chip" markdown>
+
+:material-server:{ .provider-chip-icon } On-premises
+
+</div>
+
 
 OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
 
