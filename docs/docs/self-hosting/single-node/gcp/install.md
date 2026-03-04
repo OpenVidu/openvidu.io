@@ -46,6 +46,7 @@ Once you click the button, you will see this window.
 * Fill **Deployment ID** with any name you prefer (for example, openvidu-singlenode-deployment).   
 * Change the **Region** to the one you prefer.
 !!! warning
+
     If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target=_blank} in the Terraform values.
 
 * Leave **Terraform version** as 1.5.7.   
