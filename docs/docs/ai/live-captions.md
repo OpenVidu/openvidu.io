@@ -12,12 +12,12 @@ You configure the Live Captions service by setting up the following properties w
 
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 live_captions:
-  # How this agent will connect to Rooms [automatic, manual]
-  # - automatic: the agent will automatically connect to new Rooms.
+  # How this agent will connect to Rooms [manual, automatic]
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
-  processing: automatic
+  # - automatic: the agent will automatically connect to new Rooms.
+  processing: manual
 
-  # Which speech-to-text AI provider to use [aws, azure, google, opeanai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam]
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, elevenlabs, simplismart, vosk, sherpa]
   # The custom configuration for the selected provider must be set below
   provider: YOUR_PROVIDER
 
@@ -97,7 +97,7 @@ The table below lists the cloud providers that can handle the Live Captions serv
 - **YAML `docker_image` property**: the value to set in `docker_image` property of [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) file to use that provider.
 - **Interim results**: whether the provider supports interim (non-final) transcription results. See [Final vs Interim transcriptions](#final-vs-interim-transcriptions) for more details.
 
-| AI provider   | YAML `provider` property | YAML `docker_image` property | Service description | Interim results  |
+| AI provider   | YAML `provider` property :material-information-outline:{ title="Value to set in live_captions.provider property of file agent-speech-processing.yaml" } | YAML `docker_image` property :material-information-outline:{ title="Value to set in docker_image property of file agent-speech-processing.yaml" } | Service description | Interim results :material-information-outline:{ title="Whether the provider supports interim (non-final) transcription results" } |
 | ------------------------------------------------------------------------------------- | -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Amazon Transcribe :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
 | ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Azure Speech service :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
@@ -116,6 +116,9 @@ The table below lists the cloud providers that can handle the Live Captions serv
 | ![Cartesia](../../assets/images/ai-providers/cartesia.svg){.ai-provider-icon}         | `cartesia`     | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Cartesia Ink-Whisper :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/ink){:target="\_blank"}                                                                                                                  | :material-close: |
 | ![Soniox](../../assets/images/ai-providers/soniox.svg){.ai-provider-icon}             | `soniox`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Soniox Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/speech-to-text){:target="\_blank"}                                                                                                   | :material-check: |
 | ![Nvidia](../../assets/images/ai-providers/nvidia.svg){.ai-provider-icon}             | `nvidia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [NVIDIA Riva ASR :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/asr/asr-overview.html){:target="\_blank"}  | :material-check: |
+| ![Spitch](../../assets/images/ai-providers/spitch.svg){.ai-provider-icon}             | `spitch`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Spitch Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.spitch.app/api/speech/stt){:target="\_blank"}. Specialized in African languages  | :material-close: |
+| ![ElevenLabs](../../assets/images/ai-providers/elevenlabs.svg){.ai-provider-icon}             | `elevenlabs`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [ElevenLabs Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://elevenlabs.io/speech-to-text){:target="\_blank"} | :material-close: |
+| ![Simplismart](../../assets/images/ai-providers/simplismart.svg){.ai-provider-icon}             | `simplismart`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Simplismart :fontawesome-solid-external-link:{.external-link-icon}](https://simplismart.ai/){:target="\_blank"}  | :material-close: |
 
 !!! info
 
@@ -146,65 +149,259 @@ To enable Live Captions service using Vosk:
 
     ```yaml
     live_captions:
-    vosk:
-      # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
-      # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
-      # - vosk-model-en-us-0.22-lgraph (English US)
-      # - vosk-model-small-cn-0.22 (Chinese)
-      # - vosk-model-small-de-0.15 (German)
-      # - vosk-model-small-en-in-0.4 (English India)
-      # - vosk-model-small-es-0.42 (Spanish)
-      # - vosk-model-small-fr-0.22 (French)
-      # - vosk-model-small-hi-0.22 (Hindi)
-      # - vosk-model-small-it-0.22 (Italian)
-      # - vosk-model-small-ja-0.22 (Japanese)
-      # - vosk-model-small-nl-0.22 (Dutch)
-      # - vosk-model-small-pt-0.3 (Portuguese)
-      # - vosk-model-small-ru-0.22 (Russian)
-      model: vosk-model-en-us-0.22-lgraph
-      # Language code for reference. It has no effect other than observability purposes.
-      # If a pre-installed "model" is declared, this will be set automatically if empty.
-      language:
-      # Audio sample rate in Hz. Default is 16000.
-      sample_rate:
-      # Whether to return interim/partial results during recognition. Default is true.
-      partial_results:
+      vosk:
+        # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
+        # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
+        # - vosk-model-en-us-0.22-lgraph (English US)
+        # - vosk-model-small-cn-0.22 (Chinese)
+        # - vosk-model-small-de-0.15 (German)
+        # - vosk-model-small-en-in-0.4 (English India)
+        # - vosk-model-small-es-0.42 (Spanish)
+        # - vosk-model-small-fr-0.22 (French)
+        # - vosk-model-small-hi-0.22 (Hindi)
+        # - vosk-model-small-it-0.22 (Italian)
+        # - vosk-model-small-ja-0.22 (Japanese)
+        # - vosk-model-small-nl-0.22 (Dutch)
+        # - vosk-model-small-pt-0.3 (Portuguese)
+        # - vosk-model-small-ru-0.22 (Russian)
+        model: vosk-model-en-us-0.22-lgraph
+        # Language code for reference. It has no effect other than observability purposes.
+        # If a pre-installed "model" is declared, this will be set automatically if empty.
+        language:
+        # Audio sample rate in Hz. Default is 16000.
+        sample_rate:
+        # Whether to return interim/partial results during recognition. Default is true.
+        partial_results:
     ```
 
 ##### Build a custom Vosk image
 
-The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.5.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([https://alphacephei.com/vosk/models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"}). To do so, follow these steps:
+The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.5.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([https://alphacephei.com/vosk/models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"}).
 
-```bash
-# Clone repository
-git clone git@github.com:OpenVidu/openvidu-agents.git
-cd openvidu-agents/speech-processing
+1. Create this two-line Dockerfile:
 
-# Empty existing models folder
-rm -rf vosk-models/*
+    ```Dockerfile
+    FROM docker.io/openvidu/agent-speech-processing-vosk-base:3.5.0
+    COPY --chown=appuser:appuser vosk-models /app/vosk-models
+    ```
 
-# Download and unzip desired model into "vosk-models" folder
-# See available models at https://alphacephei.com/vosk/models
-cd vosk-models
-wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
-unzip vosk-model-en-us-0.22.zip
-rm vosk-model-en-us-0.22.zip
-cd ..
+2. Download and unzip the [desired Vosk models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"} into a local folder `vosk-models`. The folder structure should be like this:
 
-# Build your custom Docker image
-docker build -f Dockerfile.base -t <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-base:main .
-docker build -f Dockerfile.vosk -t <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG .
-```
+    ```
+    ├── Dockerfile
+    └── vosk-models
+        ├── vosk-model-small-en-us-0.15
+        │   ├── am
+        │   ├── conf
+        │   ├── graph
+        │   └── ...
+        ├── vosk-model-small-cn-0.22
+        │   ├── am
+        │   ├── conf
+        │   ├── graph
+        │   └── ...
+        │   
+        └── ...
+    ```
 
-The resulting Docker image `<YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG` can be pushed to your remote Docker repository and be used in your OpenVidu deployment by setting property `docker_image` in file 
+3. Build the Docker image and push it to your remote Docker repository:
+
+    ```bash
+    docker build -f Dockerfile -t <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG .
+    ```
+
+4. Update your OpenVidu deployment by setting property `docker_image` in file 
 [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment):
 
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    docker_image: <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG
+    live_captions:
+      provider: vosk
+      vosk:
+        model: vosk-model-en-us-0.22 # Or any other model you added in your custom image
+    ```
+
+#### Sherpa
+
+[sherpa-onnx :fontawesome-solid-external-link:{.external-link-icon}](https://k2-fsa.github.io/sherpa/onnx/index.html){:target="_blank"} is an offline, cutting-edge speech recognition toolkit that offers competitive accuracy and performance.
+
+!!! info
+    
+    Sherpa live captions provider is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    There's a 15-day free trial waiting for you!
+
+##### Sherpa vs Vosk
+
+Sherpa offers multiple advantages compared to Vosk:
+
+- It offers a wider, more modern, more maintained selection of pre-trained language models. You can fine-tune the sherpa agent with the exact model that best fit your use case.
+- It offers superior performance, allowing for more concurrent transcriptions with the same hardware resources.
+- It offers [GPU acceleration support](#gpu-acceleration-for-sherpa-provider). For nodes with NVIDIA GPUs, it will further improve performance and reduce latency.
+
+##### Enabling Sherpa provider
+
+To enable Live Captions service using Sherpa:
+
+1. In file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) set properties `docker_image` and `live_captions.provider` as follows:
+
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    docker_image: docker.io/openvidu/agent-speech-processing-sherpa:3.5.0
+    live_captions:
+      provider: sherpa
+    ```
+
+2. Configure additional Sherpa settings under `live_captions.sherpa`. Especially important is property `model` to select the desired language model.
+
+    ```yaml
+    live_captions:
+      sherpa:
+        # sherpa streaming model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-sherpa"
+        # Below is the list of pre-installed models in the container (available at https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models):
+        # - sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 (English)
+        # - sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06 (Spanish)
+        # - sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06 (German)
+        # - sherpa-onnx-streaming-zipformer-fr-kroko-2025-08-06 (French)
+        # - sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10 (Multilingual: Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese, Chinese)
+        model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
+        # Language code for reference. Auto-detected from model name if not set.
+        language:
+        # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
+        # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+        provider:
+        # Audio sample rate in Hz. Default is 16000.
+        sample_rate:
+        # Whether to return interim/partial results during recognition. Default is true.
+        partial_results:
+        # Number of threads for ONNX Runtime. Default is 2.
+        num_threads:
+        # Recognizer type ("transducer", "paraformer", "zipformer_ctc", "nemo_ctc", "t_one_ctc"). Auto-detected from model name if not set.
+        recognizer_type:
+        # Decoding method ("greedy_search", "modified_beam_search"). Default is "greedy_search".
+        decoding_method:
+        # Whether to override sherpa's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+        use_silero_vad: false
+    ```
+
+##### Build a custom Sherpa image
+
+The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.5.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([sherpa-onnx ASR models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"}).
+
+1. Create this two-line Dockerfile:
+
+    ```Dockerfile
+    FROM docker.io/openvidu/agent-speech-processing-sherpa-base:3.5.0
+    COPY --chown=appuser:appuser sherpa-models /app/sherpa-models
+    ```
+
+    !!! info
+
+        To build a custom Sherpa image [with GPU acceleration](#gpu-support-for-sherpa-provider), just change the FROM line to:
+        
+          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda11-base:3.5.0` if your GPU is compatible only with CUDA 11.
+          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.5.0` if your GPU is compatible with CUDA 12 or higher.
+
+2. Download and unzip the [desired sherpa-onnx streaming models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"} into a local folder `sherpa-onnx-streaming-models`. The folder structure should be like this:
+
+    ```
+    ├── Dockerfile
+    └── sherpa-onnx-streaming-models
+        ├── sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
+        │   ├── encoder.onnx
+        │   ├── decoder.onnx
+        │   ├── joiner.onnx
+        │   └── ...
+        ├── sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06
+        │   ├── encoder.onnx
+        │   ├── decoder.onnx
+        │   ├── joiner.onnx
+        │   └── ...
+        │   
+        └── ...
+    ```
+
+    !!! warning
+
+        Look for the particle **`-streaming-`** in the name of the language models, as only those are able to produce real-time transcriptions.
+
+3. Build the Docker image and push it to your remote Docker repository:
+
+    ```bash
+    docker build -f Dockerfile -t <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-sherpa:CUSTOM_TAG .
+    ```
+
+4. Update your OpenVidu deployment by setting property `docker_image` in file 
+[`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment):
+
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    docker_image: <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-sherpa:CUSTOM_TAG
+    live_captions:
+      provider: sherpa
+      sherpa:
+        model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 # Or any other model you added in your custom image
+    ```
+
+##### GPU acceleration for Sherpa provider
+
+Sherpa provider supports GPU acceleration for faster, more efficient transcriptions.
+
+**Prerequisites**
+
+- The OpenVidu node running the Speech Processing agent must have a compatible **NVIDIA GPU (>= CUDA 11.0)**{.no-break} with the appropriate [NVIDIA Container Toolkit :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html){:target="_blank" .no-break} installed.
+- The OpenVidu node must have enough disk and memory to handle the large Docker containers with GPU support (+4GB).
+
+    !!! info
+        - Check your Nvidia GPU compatibility by running the following command, which must show a table with GPU info: `nvidia-smi`{.no-break}
+        - Check your NVIDIA Container Toolkit installation with command: `nvidia-ctk --version`
+        - You can run a smoke test to confirm that containers will have access to the GPU:
+            - For CUDA >= 12: `docker run --rm --gpus all nvidia/cuda:12.9.1-base-ubuntu24.04 nvidia-smi`
+            - For CUDA == 11: `docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi`
+
+**Enable GPU acceleration**
+
+Set the following properties in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) to enable GPU acceleration for Sherpa provider:
+
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
-docker_image: docker.io/openvidu/agent-speech-processing-vosk:CUSTOM_TAG
+docker_image: docker.io/openvidu/agent-speech-processing-sherpa-cuda12:3.5.0 #(1)!
+
+enabled: true #(2)!
+
+docker_options: #(3)!
+    gpus: all
+
 live_captions:
-  provider: vosk
-  vosk:
-    model: vosk-model-en-us-0.22 # Or any other model available in your custom image
+  provider: sherpa
+  sherpa:
+    model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 # Or any other model you want to use
+    provider: cuda  #(4)!
+```
+
+1. **agent-speech-processing-sherpa-cuda12** image is compatible with NVIDIA GPUs with CUDA 12.0 or higher. **agent-speech-processing-sherpa-cuda11** image is compatible with NVIDIA GPUs with CUDA 11.x.
+2. This property is necessary for the agent container to launch.
+3. These Docker options are necessary to enable GPU access for the agent container.
+4. This property is necessary to tell the agent to use the GPU-enabled runtime of Sherpa ONNX instead of CPU.
+
+After setting those YAML properties restart your OpenVidu deployment:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+The agent Docker image will be pulled if not already present in the node (it may take some time, as GPU-compatible images are +4GB). Once the agent is up and running, confirm that it is using the GPU by checking its startup logs, which should show:
+
+```log
+...
+INFO:openvidu_unified.sherpa:Sherpa STT execution provider: 'cuda' (normalized: 'cuda') — running GPU readiness checks
+INFO:openvidu_unified.sherpa:Host NVIDIA driver max CUDA version: 13.0
+INFO:openvidu_unified.sherpa:NVIDIA GPU: 0, NVIDIA A10G, 23028 MiB, 0 MiB, 580.126.09
+INFO:openvidu_unified.sherpa:Container CUDA toolkit version: 12.9.1
+INFO:openvidu_unified.sherpa:CUDA compatibility OK: host driver supports up to CUDA 13.0 >= container toolkit 12.9.1
+INFO:openvidu_unified.sherpa:CUDA runtime libraries found: cudart, cublas, cudnn (3/3)
+INFO:openvidu_unified.sherpa:sherpa-onnx version: 1.12.27+cuda12.cudnn9
+INFO:openvidu_unified.sherpa:sherpa-onnx CUDA wheel detected — GPU inference is available
+INFO:openvidu_unified.sherpa:sherpa-onnx CUDA provider libraries found: ['libonnxruntime_providers_cuda.so', 'libonnxruntime_providers_tensorrt.so']
+INFO:openvidu_unified.sherpa:sherpa-onnx CUDA generation matches container: cuda12
+INFO:openvidu_unified.sherpa:All GPU readiness checks passed ✓
+...
 ```
 
 ## Tutorial
@@ -217,17 +414,17 @@ Below are the properties related to the Live Captions service available in the `
 
 ```yaml
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing-cloud:3.5.0
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
 
 live_captions:
-  # How this agent will connect to Rooms [automatic, manual]
-  # - automatic: the agent will automatically connect to new Rooms.
+  # How this agent will connect to Rooms [manual, automatic]
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
-  processing: automatic
+  # - automatic: the agent will automatically connect to new Rooms.
+  processing: manual
 
-  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, vosk]
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, elevenlabs, simplismart, vosk, sherpa]
   # The custom configuration for the selected provider must be set below
-  provider:
+  provider: vosk
 
   aws:
     # Credentials for AWS Transcribe. See https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html
@@ -551,6 +748,47 @@ live_captions:
     # Set to false for locally hosted Riva NIM services without SSL.
     use_ssl:
 
+  spitch:
+    # API key for Spitch. See https://docs.spitch.app/keys
+    api_key:
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/concepts/languages
+    language:
+
+  elevenlabs:
+    # API key for ElevenLabs. See https://elevenlabs.io/app/settings/api-keys
+    api_key:
+    # The ElevenLabs STT model to use. Valid values are ["scribe_v1", "scribe_v2", "scribe_v2_realtime"]. See https://elevenlabs.io/docs/overview/models#models-overview
+    model_id:
+    # An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically
+    language_code:
+    # Custom base URL for the API. Optional.
+    base_url:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to tag audio events like (laughter), (footsteps), etc. in the transcription. Only supported for Scribe v1 model. Default is True
+    tag_audio_events:
+    # Whether to include word-level timestamps in the transcription. Default is false.
+    include_timestamps:
+
+  simplismart:
+    # API key for SimpliSmart. See https://docs.simplismart.ai/model-suite/settings/api-keys
+    api_key:
+    # Model identifier for the backend STT model. One of ["openai/whisper-large-v2", "openai/whisper-large-v3", "openai/whisper-large-v3-turbo"]
+    # Default is "openai/whisper-large-v3-turbo"
+    model:
+    # Language code for transcription (default: "en"). See https://docs.simplismart.ai/get-started/playground/transcription-models#supported-languages-with-their-codes
+    language:
+    # Operation to perform. "transcribe" converts speech to text in the original language, "translate" translates into English. Default is "transcribe".
+    task:
+    # If true, disables timestamp generation in transcripts. Default is true
+    without_timestamps:
+    # Minimum duration (ms) for a valid speech segment. Default is 0
+    min_speech_duration_ms:
+    # Decoding temperature (affects randomness). Default is 0.0
+    temperature:
+    # Whether to permit multilingual recognition. Default is false
+    multilingual:
+
   vosk:
     # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
     # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
@@ -574,4 +812,33 @@ live_captions:
     sample_rate:
     # Whether to return interim/partial results during recognition. Default is true.
     partial_results:
+    # Whether to override Vosk's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
+
+  sherpa:
+    # sherpa streaming model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-sherpa"
+    # Below is the list of pre-installed models in the container (available at https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models):
+    # - sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 (English)
+    # - sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06 (Spanish)
+    # - sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06 (German)
+    # - sherpa-onnx-streaming-zipformer-fr-kroko-2025-08-06 (French)
+    # - sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10 (Multilingual: Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese, Chinese)
+    model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
+    # Language code for reference. Auto-detected from model name if not set.
+    language:
+    # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
+    # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+    provider:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
+    # Number of threads for ONNX Runtime. Default is 2.
+    num_threads:
+    # Recognizer type ("transducer", "paraformer", "zipformer_ctc", "nemo_ctc", "t_one_ctc"). Auto-detected from model name if not set.
+    recognizer_type:
+    # Decoding method ("greedy_search", "modified_beam_search"). Default is "greedy_search".
+    decoding_method:
+    # Whether to override sherpa's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
 ```

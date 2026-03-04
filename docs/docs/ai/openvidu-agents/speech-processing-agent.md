@@ -62,7 +62,7 @@ Below is the full list of configuration properties available for the Speech Proc
 
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing-cloud:3.5.0
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
 
 # Whether to run the agent or not.
 enabled: false
@@ -74,14 +74,14 @@ load_threshold: 0.7
 log_level: INFO
 
 live_captions:
-  # How this agent will connect to Rooms [automatic, manual]
-  # - automatic: the agent will automatically connect to new Rooms.
+  # How this agent will connect to Rooms [manual, automatic]
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
-  processing: automatic
+  # - automatic: the agent will automatically connect to new Rooms.
+  processing: manual
 
-  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, vosk]
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, elevenlabs, simplismart, vosk, sherpa]
   # The custom configuration for the selected provider must be set below
-  provider:
+  provider: vosk
 
   aws:
     # Credentials for AWS Transcribe. See https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html
@@ -405,6 +405,47 @@ live_captions:
     # Set to false for locally hosted Riva NIM services without SSL.
     use_ssl:
 
+  spitch:
+    # API key for Spitch. See https://docs.spitch.app/keys
+    api_key:
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/concepts/languages
+    language:
+
+  elevenlabs:
+    # API key for ElevenLabs. See https://elevenlabs.io/app/settings/api-keys
+    api_key:
+    # The ElevenLabs STT model to use. Valid values are ["scribe_v1", "scribe_v2", "scribe_v2_realtime"]. See https://elevenlabs.io/docs/overview/models#models-overview
+    model_id:
+    # An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically
+    language_code:
+    # Custom base URL for the API. Optional.
+    base_url:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to tag audio events like (laughter), (footsteps), etc. in the transcription. Only supported for Scribe v1 model. Default is True
+    tag_audio_events:
+    # Whether to include word-level timestamps in the transcription. Default is false.
+    include_timestamps:
+
+  simplismart:
+    # API key for SimpliSmart. See https://docs.simplismart.ai/model-suite/settings/api-keys
+    api_key:
+    # Model identifier for the backend STT model. One of ["openai/whisper-large-v2", "openai/whisper-large-v3", "openai/whisper-large-v3-turbo"]
+    # Default is "openai/whisper-large-v3-turbo"
+    model:
+    # Language code for transcription (default: "en"). See https://docs.simplismart.ai/get-started/playground/transcription-models#supported-languages-with-their-codes
+    language:
+    # Operation to perform. "transcribe" converts speech to text in the original language, "translate" translates into English. Default is "transcribe".
+    task:
+    # If true, disables timestamp generation in transcripts. Default is true
+    without_timestamps:
+    # Minimum duration (ms) for a valid speech segment. Default is 0
+    min_speech_duration_ms:
+    # Decoding temperature (affects randomness). Default is 0.0
+    temperature:
+    # Whether to permit multilingual recognition. Default is false
+    multilingual:
+
   vosk:
     # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
     # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
@@ -428,5 +469,34 @@ live_captions:
     sample_rate:
     # Whether to return interim/partial results during recognition. Default is true.
     partial_results:
+    # Whether to override Vosk's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
+
+  sherpa:
+    # sherpa streaming model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-sherpa"
+    # Below is the list of pre-installed models in the container (available at https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models):
+    # - sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 (English)
+    # - sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06 (Spanish)
+    # - sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06 (German)
+    # - sherpa-onnx-streaming-zipformer-fr-kroko-2025-08-06 (French)
+    # - sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10 (Multilingual: Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese, Chinese)
+    model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
+    # Language code for reference. Auto-detected from model name if not set.
+    language:
+    # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
+    # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+    provider:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
+    # Number of threads for ONNX Runtime. Default is 2.
+    num_threads:
+    # Recognizer type ("transducer", "paraformer", "zipformer_ctc", "nemo_ctc", "t_one_ctc"). Auto-detected from model name if not set.
+    recognizer_type:
+    # Decoding method ("greedy_search", "modified_beam_search"). Default is "greedy_search".
+    decoding_method:
+    # Whether to override sherpa's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
 ```
 
