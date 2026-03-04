@@ -70,7 +70,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     </thead>
     <tbody>
     <tr>
-    <td style="white-space: nowrap;"><code>do_token</code></td>
+    <td style="white-space: nowrap;"><code>doToken</code></td>
     <td>DigitalOcean Personal Access Token for API authentication.</td>
     </tr>
     <tr>
@@ -174,6 +174,16 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     <td style="white-space: nowrap;"><code>spaceRegion</code></td>
     <td style="white-space: nowrap;"><code>"ams3"</code></td>
     <td>DigitalOcean Spaces region where the bucket will be created.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>spacesAccessId</code></td>
+    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td>Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is provided.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>spacesSecretKey</code></td>
+    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td>Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is provided.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>

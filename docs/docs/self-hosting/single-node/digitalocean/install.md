@@ -132,7 +132,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     </thead>
     <tbody>
     <tr>
-    <td style="white-space: nowrap;"><code>do_token</code></td>
+    <td style="white-space: nowrap;"><code>doToken</code></td>
     <td>DigitalOcean Personal Access Token for API authentication.</td>
     </tr>
     <tr>
@@ -202,6 +202,16 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <td style="white-space: nowrap;"><code>spaceName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
     <td>Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>spacesAccessId</code></td>
+    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td>Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is provided.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>spacesSecretKey</code></td>
+    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td>Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is provided.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>spaceRegion</code></td>
