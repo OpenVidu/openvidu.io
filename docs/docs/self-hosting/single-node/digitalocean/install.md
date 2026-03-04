@@ -228,6 +228,10 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     </div>
 
     </details>
+    !!! warning
+
+        In Digital Ocean, you need to have [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target=_blank} to be able to create a bucket, so if you leave the **spaceName** variable empty, you will need to add these keys with full access to be able to create a new bucket [here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target=_blank}.
+        
 3. Use the following commands to deploy with terraform.
   ```
   terraform init && terraform apply
