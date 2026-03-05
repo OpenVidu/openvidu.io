@@ -310,6 +310,18 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 
     Deploy in GCP with Terraform
 
+-   :material-digital-ocean:{ .more-padding-icon .ov-meet-commercial-icon .digitalocean-icon } __DigitalOcean__{ .feature-name }
+
+    ---
+
+    Deploy in DigitalOcean through the web console or with Terraform CLI
+
+-   :custom-oracle-cloud-infrastructure:{ .more-padding-icon .ov-meet-commercial-icon .oracle-icon } __Oracle Cloud Infrastructure__{ .feature-name }
+
+    ---
+
+    Deploy in Oracle Cloud Infrastructure through the web console
+
 </div>
 </div>
 
