@@ -173,7 +173,7 @@ OpenVidu is available in two editions:
 
 <br>
 
-| Type of deployment        | <a href="#openvidu-local-development"><strong>OpenVidu<br><span class="no-break">Local (development)</span></strong>         | <div style="width:10em"><a href="#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node</span></strong></a></div> | <a href="#openvidu-elastic"><strong>OpenVidu<br><span class="no-break">Elastic</span></strong></a> | <a href="#openvidu-high-availability"><strong>OpenVidu<br><span class="no-break">High Availability</span></strong></a> |
+| Type of deployment        | <strong>OpenVidu<br><span class="no-break">Local (development)</span></strong>         | <div style="width:10em"><strong>OpenVidu<br><span class="no-break">Single Node</span></strong></div> | <strong>OpenVidu<br><span class="no-break">Elastic</span></strong> | <strong>OpenVidu<br><span class="no-break">High Availability</span></strong> |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
 | **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
