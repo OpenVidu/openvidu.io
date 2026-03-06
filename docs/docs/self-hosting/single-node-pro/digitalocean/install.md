@@ -111,12 +111,12 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
 ### Deployment details
 
-1. To deploy OpenVidu, first you need clone the repository that has the terraform files. You can do that with the following command in a terminal:
+1. Clone the OpenVidu repository with the terraform files:
     ```
-    git clone https://github.com/OpenVidu/openvidu-digitalocean.git \
-    && cd openvidu-digitalocean/pro/singlenode
+    git clone https://github.com/OpenVidu/openvidu-digitalocean.git
+    cd openvidu-digitalocean/pro/singlenode
     ```
-2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults, then proceed to the next step.
+2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
   <details>
     <summary>Information about parameters</summary>
 
@@ -239,21 +239,22 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     </details>
     !!! warning
 
-        In Digital Ocean, you need to have [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target=_blank} to be able to create a bucket, so if you leave the **spaceName** variable empty, you will need to add these keys with full access to be able to create a new bucket [here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target=_blank}.
+        In DigitalOcean, you need [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target=_blank} to create a bucket. If you leave the **spaceName** variable empty, you must configure these keys with full access so a new bucket can be created. [Here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target=_blank}.
         
-3. Use the following commands to deploy with terraform.
+1. Use the following commands to deploy with terraform.
+  ```bash
+  terraform init
+  terraform apply
   ```
-  terraform init && terraform apply
-  ```
-4. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} and wait for the ssh key to appear in the bucket you have configured.   
+1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} and wait for the ssh key to appear in the bucket you have configured.   
 
     !!! warning
-        Once you've downloaded that SSH Key please **DELETE IT** from the bucket. This SSH Key is the private key used to connect to the droplet so if someone gets it, they could be capable of entering the instance.
+        After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
     <figure markdown>
     ![SSH Key in Bucket](../../../../assets/images/self-hosting/single-node/digitalocean/bucket-ssh-key-pro.png){ .svg-img .dark-img }
     </figure>
 
-5. Give the SSH Key the necessary permissions for it to work.
+2. Give the SSH Key the necessary permissions for it to work.
 
     === "Linux"
         Command in linux:
