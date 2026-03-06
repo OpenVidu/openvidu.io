@@ -333,9 +333,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/BroadcastingService.html" data-type="entity-link" >BroadcastingService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/E2eeService.html" data-type="entity-link" >E2eeService</a>
-                                </li>
-                                <li class="link">
                                     <a href="injectables/OpenViduService.html" data-type="entity-link" >OpenViduService</a>
                                 </li>
                                 <li class="link">
@@ -392,6 +389,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/DefaultTemplates.html" data-type="entity-link" >DefaultTemplates</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DeviceAvailabilityState.html" data-type="entity-link" >DeviceAvailabilityState</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ElementDimensions.html" data-type="entity-link" >ElementDimensions</a>

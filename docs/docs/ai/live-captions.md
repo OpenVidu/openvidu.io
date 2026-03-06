@@ -10,7 +10,7 @@ Live Captions service is provided by the **Speech Processing agent**:
 
 You configure the Live Captions service by setting up the following properties when [modifying file `agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#2-modify-file-agent-speech-processingyaml):
 
-```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 live_captions:
   # How this agent will connect to Rooms [manual, automatic]
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
@@ -99,26 +99,26 @@ The table below lists the cloud providers that can handle the Live Captions serv
 
 | AI provider   | YAML `provider` property :material-information-outline:{ title="Value to set in live_captions.provider property of file agent-speech-processing.yaml" } | YAML `docker_image` property :material-information-outline:{ title="Value to set in docker_image property of file agent-speech-processing.yaml" } | Service description | Interim results :material-information-outline:{ title="Whether the provider supports interim (non-final) transcription results" } |
 | ------------------------------------------------------------------------------------- | -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Amazon Transcribe :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
-| ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Azure Speech service :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
-| ![Azure OpenAI](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}        | `azure_openai` | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Azure OpenAI :fontawesome-solid-external-link:{.external-link-icon}](https://azure.microsoft.com/en-us/products/ai-services/openai-service/){:target="\_blank"}                                                                           | :material-close: |
-| ![Google Cloud](../../assets/images/ai-providers/google.svg){.ai-provider-icon}       | `google`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Google Cloud Speech-to-Text :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/speech-to-text){:target="\_blank"}                                                                                           | :material-close: |
-| ![OpenAI](../../assets/images/ai-providers/openai.svg){.ai-provider-icon}             | `openai`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [OpenAI Speech to text :fontawesome-solid-external-link:{.external-link-icon}](https://platform.openai.com/docs/guides/speech-to-text){:target="\_blank"}                                                                                  | :material-close: |
-| ![Groq](../../assets/images/ai-providers/groq.svg){.ai-provider-icon}                 | `groq`         | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Groq Speech :fontawesome-solid-external-link:{.external-link-icon}](https://console.groq.com/docs/speech-to-text){:target="\_blank"}                                                                                                      | :material-close: |
-| ![Deepgram](../../assets/images/ai-providers/deepgram.svg){.ai-provider-icon}         | `deepgram`     | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Deepgram Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://deepgram.com/product/speech-to-text){:target="\_blank"}                                                                                       | :material-check: |
-| ![AssemblyAI](../../assets/images/ai-providers/assemblyai.svg){.ai-provider-icon}     | `assemblyai`   | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [AssemblyAI Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.assemblyai.com/products/speech-to-text){:target="\_blank"}                                                                              | :material-check: |
-| ![Fal](../../assets/images/ai-providers/fal.svg){.ai-provider-icon}                   | `fal`          | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Fal Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.fal.ai/guides/convert-speech-to-text/){:target="\_blank"}                                                                                     | :material-close: |
-| ![Clova](../../assets/images/ai-providers/clova.svg){.ai-provider-icon}               | `clova`        | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Naver Clova Speech Recognition :fontawesome-solid-external-link:{.external-link-icon}](https://api.ncloud-docs.com/docs/en/ai-naver-clovaspeechrecognition-stt){:target="\_blank"}. Specialized in Japanese, Korean and Chinese languages | :material-close: |
-| ![Speechmatics](../../assets/images/ai-providers/speechmatics.svg){.ai-provider-icon} | `speechmatics` | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Speechmatics Real-Time API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.speechmatics.com/introduction/rt-guide){:target="\_blank"}                                                                                | :material-check: |
-| ![Gladia](../../assets/images/ai-providers/gladia.svg){.ai-provider-icon}             | `gladia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Gladia Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.gladia.io/product/async-transcription){:target="\_blank"}                                                                                   | :material-check: |
-| ![Sarvam](../../assets/images/ai-providers/sarvam.svg){.ai-provider-icon}             | `sarvam`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Sarvam Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe){:target="\_blank"}. Optimized for Indian languages                                 | :material-close: |
-| ![MistralAI](../../assets/images/ai-providers/mistralai.svg){.ai-provider-icon}       | `mistralai`    | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Voxtral :fontawesome-solid-external-link:{.external-link-icon}](https://mistral.ai/news/voxtral){:target="\_blank"}                                                                                                                       | :material-close: |
-| ![Cartesia](../../assets/images/ai-providers/cartesia.svg){.ai-provider-icon}         | `cartesia`     | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Cartesia Ink-Whisper :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/ink){:target="\_blank"}                                                                                                                  | :material-close: |
-| ![Soniox](../../assets/images/ai-providers/soniox.svg){.ai-provider-icon}             | `soniox`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Soniox Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/speech-to-text){:target="\_blank"}                                                                                                   | :material-check: |
-| ![Nvidia](../../assets/images/ai-providers/nvidia.svg){.ai-provider-icon}             | `nvidia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [NVIDIA Riva ASR :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/asr/asr-overview.html){:target="\_blank"}  | :material-check: |
-| ![Spitch](../../assets/images/ai-providers/spitch.svg){.ai-provider-icon}             | `spitch`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Spitch Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.spitch.app/api/speech/stt){:target="\_blank"}. Specialized in African languages  | :material-close: |
-| ![ElevenLabs](../../assets/images/ai-providers/elevenlabs.svg){.ai-provider-icon}             | `elevenlabs`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [ElevenLabs Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://elevenlabs.io/speech-to-text){:target="\_blank"} | :material-close: |
-| ![Simplismart](../../assets/images/ai-providers/simplismart.svg){.ai-provider-icon}             | `simplismart`       | `docker.io/openvidu/agent-speech-processing-cloud:3.5.0` | Uses [Simplismart :fontawesome-solid-external-link:{.external-link-icon}](https://simplismart.ai/){:target="\_blank"}  | :material-close: |
+| ![AWS](../../assets/images/ai-providers/aws.svg){.ai-provider-icon}                   | `aws`          | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Amazon Transcribe :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/transcribe/){:target="\_blank"}                                                                                                          | :material-check: |
+| ![Azure](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}               | `azure`        | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Azure Speech service :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/ai-services/speech-service/index-speech-to-text){:target="\_blank"}                                                        | :material-check: |
+| ![Azure OpenAI](../../assets/images/ai-providers/azure.svg){.ai-provider-icon}        | `azure_openai` | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Azure OpenAI :fontawesome-solid-external-link:{.external-link-icon}](https://azure.microsoft.com/en-us/products/ai-services/openai-service/){:target="\_blank"}                                                                           | :material-close: |
+| ![Google Cloud](../../assets/images/ai-providers/google.svg){.ai-provider-icon}       | `google`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Google Cloud Speech-to-Text :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/speech-to-text){:target="\_blank"}                                                                                           | :material-close: |
+| ![OpenAI](../../assets/images/ai-providers/openai.svg){.ai-provider-icon}             | `openai`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [OpenAI Speech to text :fontawesome-solid-external-link:{.external-link-icon}](https://platform.openai.com/docs/guides/speech-to-text){:target="\_blank"}                                                                                  | :material-close: |
+| ![Groq](../../assets/images/ai-providers/groq.svg){.ai-provider-icon}                 | `groq`         | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Groq Speech :fontawesome-solid-external-link:{.external-link-icon}](https://console.groq.com/docs/speech-to-text){:target="\_blank"}                                                                                                      | :material-close: |
+| ![Deepgram](../../assets/images/ai-providers/deepgram.svg){.ai-provider-icon}         | `deepgram`     | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Deepgram Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://deepgram.com/product/speech-to-text){:target="\_blank"}                                                                                       | :material-check: |
+| ![AssemblyAI](../../assets/images/ai-providers/assemblyai.svg){.ai-provider-icon}     | `assemblyai`   | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [AssemblyAI Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.assemblyai.com/products/speech-to-text){:target="\_blank"}                                                                              | :material-check: |
+| ![Fal](../../assets/images/ai-providers/fal.svg){.ai-provider-icon}                   | `fal`          | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Fal Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.fal.ai/guides/convert-speech-to-text/){:target="\_blank"}                                                                                     | :material-close: |
+| ![Clova](../../assets/images/ai-providers/clova.svg){.ai-provider-icon}               | `clova`        | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Naver Clova Speech Recognition :fontawesome-solid-external-link:{.external-link-icon}](https://api.ncloud-docs.com/docs/en/ai-naver-clovaspeechrecognition-stt){:target="\_blank"}. Specialized in Japanese, Korean and Chinese languages | :material-close: |
+| ![Speechmatics](../../assets/images/ai-providers/speechmatics.svg){.ai-provider-icon} | `speechmatics` | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Speechmatics Real-Time API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.speechmatics.com/introduction/rt-guide){:target="\_blank"}                                                                                | :material-check: |
+| ![Gladia](../../assets/images/ai-providers/gladia.svg){.ai-provider-icon}             | `gladia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Gladia Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://www.gladia.io/product/async-transcription){:target="\_blank"}                                                                                   | :material-check: |
+| ![Sarvam](../../assets/images/ai-providers/sarvam.svg){.ai-provider-icon}             | `sarvam`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Sarvam Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe){:target="\_blank"}. Optimized for Indian languages                                 | :material-close: |
+| ![MistralAI](../../assets/images/ai-providers/mistralai.svg){.ai-provider-icon}       | `mistralai`    | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Voxtral :fontawesome-solid-external-link:{.external-link-icon}](https://mistral.ai/news/voxtral){:target="\_blank"}                                                                                                                       | :material-close: |
+| ![Cartesia](../../assets/images/ai-providers/cartesia.svg){.ai-provider-icon}         | `cartesia`     | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Cartesia Ink-Whisper :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/ink){:target="\_blank"}                                                                                                                  | :material-close: |
+| ![Soniox](../../assets/images/ai-providers/soniox.svg){.ai-provider-icon}             | `soniox`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Soniox Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/speech-to-text){:target="\_blank"}                                                                                                   | :material-check: |
+| ![Nvidia](../../assets/images/ai-providers/nvidia.svg){.ai-provider-icon}             | `nvidia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [NVIDIA Riva ASR :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/asr/asr-overview.html){:target="\_blank"}  | :material-check: |
+| ![Spitch](../../assets/images/ai-providers/spitch.svg){.ai-provider-icon}             | `spitch`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Spitch Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.spitch.app/api/speech/stt){:target="\_blank"}. Specialized in African languages  | :material-close: |
+| ![ElevenLabs](../../assets/images/ai-providers/elevenlabs.svg){.ai-provider-icon}             | `elevenlabs`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [ElevenLabs Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://elevenlabs.io/speech-to-text){:target="\_blank"} | :material-close: |
+| ![Simplismart](../../assets/images/ai-providers/simplismart.svg){.ai-provider-icon}             | `simplismart`       | `docker.io/openvidu/agent-speech-processing-cloud:3.6.0` | Uses [Simplismart :fontawesome-solid-external-link:{.external-link-icon}](https://simplismart.ai/){:target="\_blank"}  | :material-close: |
 
 !!! info
 
@@ -139,8 +139,8 @@ To enable Live Captions service using Vosk:
 
 1. In file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) set properties `docker_image` and `live_captions.provider` as follows:
 
-    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
-    docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.6.0
     live_captions:
       provider: vosk
     ```
@@ -176,12 +176,12 @@ To enable Live Captions service using Vosk:
 
 ##### Build a custom Vosk image
 
-The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.5.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([https://alphacephei.com/vosk/models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"}).
+The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.6.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([https://alphacephei.com/vosk/models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"}).
 
 1. Create this two-line Dockerfile:
 
     ```Dockerfile
-    FROM docker.io/openvidu/agent-speech-processing-vosk-base:3.5.0
+    FROM docker.io/openvidu/agent-speech-processing-vosk-base:3.6.0
     COPY --chown=appuser:appuser vosk-models /app/vosk-models
     ```
 
@@ -213,7 +213,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.5.0`
 4. Update your OpenVidu deployment by setting property `docker_image` in file 
 [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment):
 
-    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
     docker_image: <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-vosk:CUSTOM_TAG
     live_captions:
       provider: vosk
@@ -244,8 +244,8 @@ To enable Live Captions service using Sherpa:
 
 1. In file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) set properties `docker_image` and `live_captions.provider` as follows:
 
-    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
-    docker_image: docker.io/openvidu/agent-speech-processing-sherpa:3.5.0
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    docker_image: docker.io/openvidu/agent-speech-processing-sherpa:3.6.0
     live_captions:
       provider: sherpa
     ```
@@ -284,12 +284,12 @@ To enable Live Captions service using Sherpa:
 
 ##### Build a custom Sherpa image
 
-The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.5.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([sherpa-onnx ASR models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"}).
+The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.6.0` comes with small-sized models for multiple languages pre-installed. You can build your own Docker image with exactly the models you need ([sherpa-onnx ASR models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"}).
 
 1. Create this two-line Dockerfile:
 
     ```Dockerfile
-    FROM docker.io/openvidu/agent-speech-processing-sherpa-base:3.5.0
+    FROM docker.io/openvidu/agent-speech-processing-sherpa-base:3.6.0
     COPY --chown=appuser:appuser sherpa-models /app/sherpa-models
     ```
 
@@ -297,8 +297,8 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.5.
 
         To build a custom Sherpa image [with GPU acceleration](#gpu-support-for-sherpa-provider), just change the FROM line to:
         
-          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda11-base:3.5.0` if your GPU is compatible only with CUDA 11.
-          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.5.0` if your GPU is compatible with CUDA 12 or higher.
+          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda11-base:3.6.0` if your GPU is compatible only with CUDA 11.
+          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.6.0` if your GPU is compatible with CUDA 12 or higher.
 
 2. Download and unzip the [desired sherpa-onnx streaming models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"} into a local folder `sherpa-onnx-streaming-models`. The folder structure should be like this:
 
@@ -332,7 +332,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.5.
 4. Update your OpenVidu deployment by setting property `docker_image` in file 
 [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment):
 
-    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+    ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
     docker_image: <YOUR_DOCKERHUB_ACCOUNT>/agent-speech-processing-sherpa:CUSTOM_TAG
     live_captions:
       provider: sherpa
@@ -360,8 +360,8 @@ Sherpa provider supports GPU acceleration for faster, more efficient transcripti
 
 Set the following properties in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment) to enable GPU acceleration for Sherpa provider:
 
-```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
-docker_image: docker.io/openvidu/agent-speech-processing-sherpa-cuda12:3.5.0 #(1)!
+```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+docker_image: docker.io/openvidu/agent-speech-processing-sherpa-cuda12:3.6.0 #(1)!
 
 enabled: true #(2)!
 
@@ -414,7 +414,7 @@ Below are the properties related to the Live Captions service available in the `
 
 ```yaml
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.6.0
 
 live_captions:
   # How this agent will connect to Rooms [manual, automatic]
