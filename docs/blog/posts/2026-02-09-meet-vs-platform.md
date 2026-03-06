@@ -1,8 +1,10 @@
 ---
 draft: true
 date: 2026-02-09
+cover_image: 2026-02-09-meet-vs-platform-3.png
 categories:
-  - Features Meet Platform
+  - OpenVidu Meet features
+  - OpenVidu Platform features
 authors:
   - patxi
 hide:
@@ -12,6 +14,8 @@ hide:
 ---
 
 # Levels of Abstraction in Real-Time Video: Choosing the Right Self-Hosted Solution in 2026
+
+![OpenVidu Meet vs OpenVidu Platform](2026-02-09-meet-vs-platform-3.png)
 
 ## Why Abstraction Matters
 
