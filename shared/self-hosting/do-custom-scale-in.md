@@ -1,6 +1,9 @@
 ## Custom scale-in strategy
-- Currently we don't have implemented a custom scale in strategy, Elastic and HA Media Nodes Autoscale Pool are fixed in number.
 
+Currently DigitalOcean does not support autoscaling. OpenVidu Elastic and OpenVidu High Availability Autoscale Pool of Media Nodes is fixed in number.
+
+!!! info
+    Autoscaling of Media Nodes in DigitalOcean is a work in progress and will be available in a future release.
 
 <!-- We use a custom scale-in strategy to allow the graceful shutdown of Media Nodes. In this way we ensure no disruption of active Rooms when the cluster tries to remove a Media Node.
 
