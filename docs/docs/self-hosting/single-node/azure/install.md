@@ -5,9 +5,16 @@ description: Learn how to deploy OpenVidu Single Node on Azure using Template sp
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Azure
 
-This section contains the instructions to deploy a production-ready OpenVidu Single Node deployment in Azure. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
+<div class="provider-chip" markdown>
 
-To import the template into Azure you just need to click the button below (you will be redirected to Azure).
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
+
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Azure. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through ARM Template Specs.
+
+To import the template into Azure, click the button below (you will be redirected to Azure).
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target=_blank}
@@ -15,7 +22,7 @@ To import the template into Azure you just need to click the button below (you w
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Single Node Azure Architecture](../../../../assets/images/self-hosting/single-node/azure/single-node-azure-architecture.svg){ .svg-img .dark-img }
@@ -24,7 +31,7 @@ To import the template into Azure you just need to click the button below (you w
 
 ## Template Parameters
 
-To deploy the template you need to fill the following parameters.
+To deploy the template, you need to fill in the following parameters.
 
 --8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
 
@@ -44,21 +51,19 @@ Specify properties for the Azure instance that will host Openvidu.
     ![Azure Instance configuration](../../../../assets/images/self-hosting/single-node/azure/azure-instance-config.png){ .svg-img .dark-img }
     </figure>
 
-    Simply select the type of instance you want to deploy at **Type of Instance**. Fill in the parameter **Admin Username** that will be set as admin username in the instance. Select the SSH key you've created previously in **SSH public key source** (or you can create a new one in the drop down) to allow you to SSH into the instance.
+    Simply select the type of instance you want to deploy in **Type of Instance**. Fill in **Admin Username**, which will be set as the admin username on the instance. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instance.
 
 --8<-- "shared/self-hosting/azure-storageaccount.md"
 
 --8<-- "shared/self-hosting/azure-additional-flags.md"
 
---8<-- "shared/self-hosting/azure-turn-domain.md"
-
 ## Deploying the stack
 
-Whenever you are satisfied with your Template paremeters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 10 minutes).
+Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 10 minutes).
 
 !!! warning
 
-    In case of failure, it might be that some role failed to create. In this case redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    In case of failure, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
 When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
 
@@ -66,19 +71,19 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
 
-    2. Once you are in the Key Vault on the left panel click on _"Objects"_ 🡒 _"Secrets"_.
+    2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
         <figure markdown>
         ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
 
-    3. Here click on the secret of your choice or whatever you need to check and click again in the current version of that secret
+    3. Click the secret you want to inspect, then click the current version of that secret.
 
         <figure markdown>
         ![Azure Key Vault Secret Version](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-version.png){ .svg-img .dark-img }
         </figure>
 
-    4. Now you will see a lot of properties but the one you are searching for is located at the bottom and it will be revealed by clicking in _"Show Secret Value"_.
+    4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
         <figure markdown>
         ![Check deployment outputs in Azure Key Vault](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
@@ -95,7 +100,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
 You need your Azure deployment outputs to configure your OpenVidu application. If you have permissions to access the Key Vault you will be able to check there all the outputs ([Check deployment outputs in Azure Key Vault](#check-deployment-outputs-in-azure-key-vault)). If you don't have permissions to access the Key Vault you can still check the outputs directly in the instance through SSH ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
-Your authentication credentials and URL to point your applications would be:
+Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "shared/self-hosting/azure-credentials-general.md"
 
@@ -107,4 +112,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Azure stack reaches the **`Succeeded`** status, it means that all the resources have been created. You will need to wait about 5 to 10 minutes to let the instance install OpenVidu as we mentioned before. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 5 to 10 minutes for the instance to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.

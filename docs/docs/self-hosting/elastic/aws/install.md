@@ -5,12 +5,19 @@ description: Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
 
 # OpenVidu Elastic installation: AWS
 
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
+
 !!! info
     
     OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in AWS. Deployed services are the same as the [On Premises Elastic installation](../on-premises/install.md) but automate the process with AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on AWS. The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
 First of all, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -24,7 +31,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 !!! info
     
-    If you want to deploy a specific version of OpenVidu High Availability, replace `latest` with the version you want to deploy. For example, to deploy version `3.5.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.5.0`, use the following URL:
 
     ```
     https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.5.0/aws/cf-openvidu-elastic.yaml
@@ -105,8 +112,6 @@ In this section, you need to specify the VPC and Subnet configuration for the de
     !!! warning
         
         You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
-
---8<-- "shared/self-hosting/aws-turn-domain.md"
 
 ## Deploying the stack
 

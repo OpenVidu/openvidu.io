@@ -4,7 +4,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
 
     ```text
     # Example for a production deployment
-    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com
+    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com/meet
     ```
 
 2. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key :fontawesome-solid-external-link:{.external-link-icon}](/meet/embedded/reference/rest-api.md#generate-an-api-key){:target="\_blank"} section to learn how to obtain it.
@@ -16,7 +16,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
 3. **Update the OpenVidu Meet WebComponent script URL**: In the `public/index.html` file, update the `<script>` tag that includes the OpenVidu Meet WebComponent to use the same base URL as above.
 
     ```html
-    <script src="https://your-openvidu-meet-domain.com/v1/openvidu-meet.js"></script>
+    <script src="https://your-openvidu-meet-domain.com/meet/v1/openvidu-meet.js"></script>
     ```
 
 4. **Restart the tutorial** to apply the changes:

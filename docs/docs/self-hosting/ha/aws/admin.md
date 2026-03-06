@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an AWS OpenVidu High A
 
 # OpenVidu High Availability administration: AWS
 
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
+
 The deployment of OpenVidu High Availability on AWS is automated using AWS CloudFormation, with 4 EC2 Instances as Master Nodes and any number of Media Nodes managed within an [Auto Scaling Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. The Auto Scaling Group of Media Nodes is configured to scale based on the target average CPU utilization.
 
 Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.

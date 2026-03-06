@@ -10,43 +10,7 @@ The Speech Processing agent provides all the AI services related to transcribing
 
 ### 1. SSH into an OpenVidu Node and go to configuration folder
 
-Depending on your [OpenVidu deployment type](../../self-hosting/deployment-types.md):
-
-=== "OpenVidu Local (Development)"
-
-    If you are using [OpenVidu Local (Development)](../../self-hosting/deployment-types.md#openvidu-local-development), simply navigate to the configuration folder of the project:
-
-    ```bash
-    # For OpenVidu Local COMMUNITY
-    cd openvidu-local-deployment/community
-
-    # For OpenVidu Local PRO
-    cd openvidu-local-deployment/pro
-    ```
-
-=== "OpenVidu Single Node"
-
-    If you are using [OpenVidu Single Node](../../self-hosting/deployment-types.md#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
-
-    ```bash
-    cd /opt/openvidu/config
-    ```
-
-=== "OpenVidu Elastic"
-
-    If you are using [OpenVidu Elastic](../../self-hosting/deployment-types.md#openvidu-elastic), SSH into the only Master Node and navigate to:
-
-    ```bash
-    cd /opt/openvidu/config/cluster/media_node
-    ```
-
-=== "OpenVidu High Availability"
-
-    If you are using [OpenVidu High Availability](../../self-hosting/deployment-types.md#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
-
-    ```bash
-    cd /opt/openvidu/config/cluster/media_node
-    ```
+--8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
 
 ### 2. Modify file `agent-speech-processing.yaml`
 
@@ -66,45 +30,13 @@ You can set up the following AI services in this agent:
 
 ### 3. Restart OpenVidu
 
-Depending on your [OpenVidu deployment type](../../self-hosting/deployment-types.md):
-
-=== "OpenVidu Local (Development)"
-
-    Run where `docker-compose.yaml` is located:
-
-    ```bash
-    docker compose restart
-    ```
-
-=== "OpenVidu Single Node"
-
-    Run this command in your node:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-=== "OpenVidu Elastic"
-
-    Run this command in your Master Node:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-=== "OpenVidu High Availability"
-
-    Run this command in one of your Master Nodes:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
+--8<-- "shared/self-hosting/restart-openvidu-deployment.md"
 
 After restarting OpenVidu your agent will be up and running, ready to process new Rooms.
 
 !!! warning
 
-    If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
+	If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
 
 ## Change CPU load threshold
 
@@ -130,7 +62,7 @@ Below is the full list of configuration properties available for the Speech Proc
 
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.5.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
 # Docker image of the agent.
-docker_image: docker.io/openvidu/agent-speech-processing:3.5.0
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
 
 # Whether to run the agent or not.
 enabled: false
@@ -142,14 +74,14 @@ load_threshold: 0.7
 log_level: INFO
 
 live_captions:
-  # How this agent will connect to Rooms [automatic, manual]
-  # - automatic: the agent will automatically connect to new Rooms.
+  # How this agent will connect to Rooms [manual, automatic]
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
-  processing: automatic
+  # - automatic: the agent will automatically connect to new Rooms.
+  processing: manual
 
-  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox]
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, elevenlabs, simplismart, vosk, sherpa]
   # The custom configuration for the selected provider must be set below
-  provider:
+  provider: vosk
 
   aws:
     # Credentials for AWS Transcribe. See https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html
@@ -197,7 +129,7 @@ live_captions:
     # List of words or phrases to boost recognition accuracy. Azure will give higher priority to these phrases during recognition.
     phrase_list:
     # Controls punctuation behavior. If True, enables explicit punctuation mode where punctuation marks are added explicitly. If False (default), uses Azure's default punctuation behavior.
-    explicit_punctuation: 
+    explicit_punctuation:
 
   azure_openai:
     # Credentials for Azure OpenAI APIs. See https://learn.microsoft.com/en-us/azure/api-management/api-management-authenticate-authorize-azure-openai
@@ -450,5 +382,121 @@ live_captions:
       # - "es"
     # Set context to improve recognition of difficult and rare words. Context is a string and can include words, phrases, sentences, or summaries (limit: 10K chars). See https://soniox.com/docs/stt/concepts/context
     context:
+
+  nvidia:
+    # API key for NVIDIA. See https://build.nvidia.com/explore/speech?integrate_nim=true&hosted_api=true&modal=integrate-nim
+    # Required when using NVIDIA's cloud services. To use a self-hosted NVIDIA Riva server setup "server" and "use_ssl" instead.
+    api_key:
+    # The NVIDIA Riva ASR model to use. Default is "parakeet-1.1b-en-US-asr-streaming-silero-vad-sortformer"
+    # See available models: https://build.nvidia.com/search/models?filters=usecase%3Ausecase_speech_to_text
+    model:
+    # The NVIDIA function ID for the model. Default is "1598d209-5e27-4d3c-8079-4751568b1081"
+    function_id:
+    # Whether to add punctuation to transcription results. Default is true.
+    punctuate:
+    # The language code for transcription. Default is "en-US"
+    language_code:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # The NVIDIA Riva server address. Default is "grpc.nvcf.nvidia.com:443"
+    # For self-hosted NIM, use your server address (e.g., "localhost:50051")
+    server:
+    # Whether to use SSL for the connection. Default is true.
+    # Set to false for locally hosted Riva NIM services without SSL.
+    use_ssl:
+
+  spitch:
+    # API key for Spitch. See https://docs.spitch.app/keys
+    api_key:
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/concepts/languages
+    language:
+
+  elevenlabs:
+    # API key for ElevenLabs. See https://elevenlabs.io/app/settings/api-keys
+    api_key:
+    # The ElevenLabs STT model to use. Valid values are ["scribe_v1", "scribe_v2", "scribe_v2_realtime"]. See https://elevenlabs.io/docs/overview/models#models-overview
+    model_id:
+    # An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically
+    language_code:
+    # Custom base URL for the API. Optional.
+    base_url:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to tag audio events like (laughter), (footsteps), etc. in the transcription. Only supported for Scribe v1 model. Default is True
+    tag_audio_events:
+    # Whether to include word-level timestamps in the transcription. Default is false.
+    include_timestamps:
+
+  simplismart:
+    # API key for SimpliSmart. See https://docs.simplismart.ai/model-suite/settings/api-keys
+    api_key:
+    # Model identifier for the backend STT model. One of ["openai/whisper-large-v2", "openai/whisper-large-v3", "openai/whisper-large-v3-turbo"]
+    # Default is "openai/whisper-large-v3-turbo"
+    model:
+    # Language code for transcription (default: "en"). See https://docs.simplismart.ai/get-started/playground/transcription-models#supported-languages-with-their-codes
+    language:
+    # Operation to perform. "transcribe" converts speech to text in the original language, "translate" translates into English. Default is "transcribe".
+    task:
+    # If true, disables timestamp generation in transcripts. Default is true
+    without_timestamps:
+    # Minimum duration (ms) for a valid speech segment. Default is 0
+    min_speech_duration_ms:
+    # Decoding temperature (affects randomness). Default is 0.0
+    temperature:
+    # Whether to permit multilingual recognition. Default is false
+    multilingual:
+
+  vosk:
+    # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
+    # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
+    # - vosk-model-en-us-0.22-lgraph (English US)
+    # - vosk-model-small-cn-0.22 (Chinese)
+    # - vosk-model-small-de-0.15 (German)
+    # - vosk-model-small-en-in-0.4 (English India)
+    # - vosk-model-small-es-0.42 (Spanish)
+    # - vosk-model-small-fr-0.22 (French)
+    # - vosk-model-small-hi-0.22 (Hindi)
+    # - vosk-model-small-it-0.22 (Italian)
+    # - vosk-model-small-ja-0.22 (Japanese)
+    # - vosk-model-small-nl-0.22 (Dutch)
+    # - vosk-model-small-pt-0.3 (Portuguese)
+    # - vosk-model-small-ru-0.22 (Russian)
+    model: vosk-model-en-us-0.22-lgraph
+    # Language code for reference. It has no effect other than observability purposes.
+    # If a pre-installed "model" is declared, this will be set automatically if empty.
+    language:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
+    # Whether to override Vosk's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
+
+  sherpa:
+    # sherpa streaming model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-sherpa"
+    # Below is the list of pre-installed models in the container (available at https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models):
+    # - sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 (English)
+    # - sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06 (Spanish)
+    # - sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06 (German)
+    # - sherpa-onnx-streaming-zipformer-fr-kroko-2025-08-06 (French)
+    # - sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10 (Multilingual: Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese, Chinese)
+    model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
+    # Language code for reference. Auto-detected from model name if not set.
+    language:
+    # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
+    # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+    provider:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
+    # Number of threads for ONNX Runtime. Default is 2.
+    num_threads:
+    # Recognizer type ("transducer", "paraformer", "zipformer_ctc", "nemo_ctc", "t_one_ctc"). Auto-detected from model name if not set.
+    recognizer_type:
+    # Decoding method ("greedy_search", "modified_beam_search"). Default is "greedy_search".
+    decoding_method:
+    # Whether to override sherpa's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
 ```
 

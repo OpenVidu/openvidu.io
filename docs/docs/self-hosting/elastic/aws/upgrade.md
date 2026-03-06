@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu Elastic - AWS
-description: How to upgrade OpenVidu Elastic on AWS deployments
+title: Upgrade OpenVidu Elastic on AWS
+description: How to upgrade OpenVidu Elastic on AWS deployments.
 ---
 
-# Upgrade OpenVidu Elastic - AWS
+# Upgrade OpenVidu Elastic: AWS
+
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
 
 In AWS environments, we recommend upgrading by redeploying the [OpenVidu Elastic CloudFormation](../aws/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as CloudFormation templates and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 

@@ -5,7 +5,14 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 # OpenVidu High Availability administration: Google Cloud Platform
 
-The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infra Structure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
+<div class="provider-chip" markdown>
+
+:material-google-cloud:{ .provider-chip-icon } Google Cloud Platform
+
+</div>
+
+
+The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:
 
@@ -22,7 +29,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimun"_ and _"Maximum"_ number of instances to 0.
+    3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
         <figure markdown>
         ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-0.png){ .svg-img .dark-img }
         </figure>
@@ -72,7 +79,7 @@ It is possible to change the instance type of both the Master Node and the Media
         This procedure requires downtime, as it involves stopping the Master Node.
 
     1. [Shutdown the cluster](#shutting-down-the-cluster).
-    2. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview) and locate the resource with the name `<STACK_NAME>-master-node-1` and click on it.
+    2. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node-1` and click on it.
     3. Click on _"Edit"_ and inside change the _"Machine Type"_. Then select the size you desire and click on _"Save"_
         <figure markdown>
         ![Change instance type master](../../../../assets/images/self-hosting/shared/gcp-change-master-node-size.png){ .svg-img .dark-img }
@@ -159,7 +166,7 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 
 === "Deactivate Cloud Run Function"
 
-    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler) and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
+    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
         <figure markdown>
         ![Deactivate Scale In](../../../../assets/images/self-hosting/ha/gcp/gcp-scalein-deactivate.png){ .svg-img .dark-img }
         </figure>
@@ -179,13 +186,13 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/self-hosting/shared/gcp-secrets-new-version.png){ .svg-img .dark-img }
         </figure>
-    3. Enter the new secret value on _"Secret Value"_ filed and click on _"Add new version"_.
+    3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
         </figure>
     4. Go to the Master Node resource you've want to change the secrets on and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu High Availability deployment.
 
-    Changes will be applied automatically.
+    Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.
 
 ## Backup and Restore
 

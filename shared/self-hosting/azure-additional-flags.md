@@ -8,4 +8,4 @@ Additional optional flags to pass to the OpenVidu installer (comma-separated, e.
 
     ![OpenVidu Meet credentials](../../../../assets/images/self-hosting/shared/azure-additional-flags.png)
 
-    For example, you can use `--experimental-turn-tls-with-main-domain` to use the same domain as the main one for the TURN server with TLS, instead of specifying a different one in the [TURN server configuration with TLS](#optional-turn-server-configuration-with-tls) section.
+    For example (optional), you can use `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured on the host machine where it is installed. In general, UTC is recommended, and [Azure VMs already default to UTC](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/time-sync){:target="\_blank"}, so this flag is not usually necessary.

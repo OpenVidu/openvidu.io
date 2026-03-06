@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu Single Node COMMUNITY - Azure
-description: How to upgrade OpenVidu Single Node COMMUNITY in Azure.
+title: Upgrade OpenVidu Single Node COMMUNITY on Azure
+description: How to upgrade OpenVidu Single Node COMMUNITY on Azure deployments.
 ---
 
-# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> - Azure
+# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span>: Azure
+
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
 
 In Azure, we recommend upgrading by redeploying [OpenVidu Single Node Azure](../azure/install.md) with the latest version.
 

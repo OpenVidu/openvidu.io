@@ -82,43 +82,7 @@ CMD ["python", "agent.py", "start"]
 
 ### 1. SSH into an OpenVidu Node and go to configuration folder
 
-Depending on your [OpenVidu deployment type](../self-hosting/deployment-types.md):
-
-=== "OpenVidu Local (Development)"
-
-    If you are using [OpenVidu Local (Development)](../self-hosting/deployment-types.md#openvidu-local-development), simply navigate to the configuration folder of the project:
-
-    ```bash
-    # For OpenVidu Local COMMUNITY
-    cd openvidu-local-deployment/community
-
-    # For OpenVidu Local PRO
-    cd openvidu-local-deployment/pro
-    ```
-
-=== "OpenVidu Single Node"
-
-    If you are using [OpenVidu Single Node](../self-hosting/deployment-types.md#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
-
-    ```bash
-    cd /opt/openvidu/config
-    ```
-
-=== "OpenVidu Elastic"
-
-    If you are using [OpenVidu Elastic](../self-hosting/deployment-types.md#openvidu-elastic), SSH into the only Master Node and navigate to:
-
-    ```bash
-    cd /opt/openvidu/config/cluster/media_node
-    ```
-
-=== "OpenVidu High Availability"
-
-    If you are using [OpenVidu High Availability](../self-hosting/deployment-types.md#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
-
-    ```bash
-    cd /opt/openvidu/config/cluster/media_node
-    ```
+--8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
 
 ### 2. Add a `agent-AGENT_NAME.yaml` file
 
@@ -142,45 +106,13 @@ CUSTOM_CONFIGURATION: ...
 
 ### 3. Restart OpenVidu
 
-Depending on your [OpenVidu deployment type](../self-hosting/deployment-types.md):
-
-=== "OpenVidu Local (Development)"
-
-    Run where `docker-compose.yaml` is located:
-
-    ```bash
-    docker compose restart
-    ```
-
-=== "OpenVidu Single Node"
-
-    Run this command in your node:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-=== "OpenVidu Elastic"
-
-    Run this command in your Master Node:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
-
-=== "OpenVidu High Availability"
-
-    Run this command in one of your Master Nodes:
-
-    ```bash
-    sudo systemctl restart openvidu
-    ```
+--8<-- "shared/self-hosting/restart-openvidu-deployment.md"
 
 After restarting OpenVidu your agent will be up and running, ready to process new Rooms.
 
 !!! warning
 
-    If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
+	If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
 
 ## Tips when coding your custom agent
 

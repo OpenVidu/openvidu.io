@@ -1,9 +1,16 @@
 ---
-title: OpenVidu Elastic installation on-premises with Network Load Balancer
-description: Learn how to deploy OpenVidu Elastic on-premises with Network Load Balancer
+title: OpenVidu High Availability installation on-premises with Network Load Balancer
+description: Learn how to deploy OpenVidu High Availability on-premises with Network Load Balancer
 ---
 
 # OpenVidu High Availability installation: On-premises with Network Load Balancer
+
+<div class="provider-chip" markdown>
+
+:material-server:{ .provider-chip-icon } On-premises
+
+</div>
+
 
 !!! info
 
@@ -65,7 +72,8 @@ For the Media Nodes, the following services are configured:
 - Significant disk space in all the **Master Nodes**, with 100GB recommended, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
 - **Media Nodes must have a public IP**. This is required because Media traffic is sent directly to these nodes. Master Nodes can have private IPs and will be accessed through the Load Balancer.
 - **A Load Balancer** that supports TCP and UDP traffic. You can use a hardware load balancer or a software load balancer like HAProxy, Nginx, or AWS Network Load Balancer.
-- **A Fully Qualified Domain Name (FQDN)** pointing to the Load Balancer. This domain name will be used to access the OpenVidu services.
+- **A Fully Qualified Domain Name (FQDN)** pointing to the Load Balancer. This domain name will be used to access the OpenVidu services. In this guide, we will use `openvidu.example.io`.
+- **A domain name for the TURN server** pointing to the Load Balancer. In this guide, we will use `turn.example.io`.
 - **All machines must have access to the following addresses and ports**:
 
     | Host                     | Port    |
@@ -98,7 +106,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP      | 9009        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service.                                                      |
 | TCP      | 7880        | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
 | TCP      | 4443        | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service.                                                 |
-| TCP      | 6080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
+| TCP      | 9080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
 | TCP      | 7000-7001   | Master Nodes, Media Nodes | For internal Redis communication                                                                  |
 | TCP      | 9100        | Master Nodes, Media Nodes | For internal MinIO communication                                                                  |
 | TCP      | 20000       | Master Nodes, Media Nodes | For internal Mongo communication                                                                  |
@@ -152,7 +160,6 @@ A wizard will guide you through the installation process. You will be asked for 
     If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target=_blank}.
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **(Optional) TURN domain name**: The domain name for your TURN server with TLS. It must be an FQDN pointing to the Load Balancer you will use and must be different from the OpenVidu domain name. Recommended if users who are going to connect to your OpenVidu deployment are behind restrictive firewalls.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
@@ -238,174 +245,133 @@ OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 
 ## Load Balancer Configuration
 
-To configure the Load Balancer, you must create a new TCP listener for each port that the Master Nodes use. The Load Balancer should be set up to distribute traffic evenly across all Master Nodes, targeting their private IP addresses. Additionally, optional features like RTMP and TURN with TLS should be directed to use the private IP addresses of the Media Nodes. This ensures that traffic for these services is properly routed to the Media Nodes.
+To configure the Load Balancer, you must create a new TCP listener for each port that the Master Nodes use. The Load Balancer should be set up to distribute traffic evenly across all Master Nodes, targeting their private IP addresses. Additionally, RTMP and TURN with TLS traffic should be directed to use the private IP addresses of the Master Nodes. This ensures that traffic for these services is properly routed.
+
+The Load Balancer uses **SNI-based Layer 4 routing** to separate API and TURN traffic on port `443`. The API domain is routed to a local HTTP reverse-proxy server on port `7880`, which then forwards requests to the Master Nodes. The TURN domain is forwarded directly to port `5349` on the Master Nodes. This gives you an `http` block where you can add custom routing, rate limiting, access control, or additional headers.
 
 Below is an example using NGINX as a Load Balancer:
 
-=== "NGINX Load Balancer Configuration"
+```nginx
+events {
+    worker_connections 10240;
+}
 
-    Example configuration for NGINX Load Balancer:
+stream {
 
-    ```nginx
-    events {
-        worker_connections 10240;
+    upstream api_backend {
+        server 127.0.0.1:7880;
     }
 
-    # Redirect HTTP to HTTPS
-    http {
-        server {
-            listen 80;
-            listen [::]:80;
-            return 301 https://$host$request_uri;
-        }
+    upstream turn_backend {
+        server <MASTER_NODE_IP_1>:5349;
+        server <MASTER_NODE_IP_2>:5349;
+        server <MASTER_NODE_IP_3>:5349;
+        server <MASTER_NODE_IP_4>:5349;
     }
 
-    stream {
-
-        upstream api_backend {
-            server <MASTER_NODE_IP_1>:7880;
-            server <MASTER_NODE_IP_2>:7880;
-            server <MASTER_NODE_IP_3>:7880;
-            server <MASTER_NODE_IP_4>:7880;
-        }
-
-        upstream rtmp_backend {
-            server <MASTER_NODE_IP_1>:1945;
-            server <MASTER_NODE_IP_2>:1945;
-            server <MASTER_NODE_IP_3>:1945;
-            server <MASTER_NODE_IP_4>:1945;
-        }
-
-        # Proxy for API and TURN
-        server {
-            listen 443 ssl;
-            listen [::]:443 ssl;
-            ssl_protocols TLSv1.2 TLSv1.3;
-
-            proxy_connect_timeout 10s;
-            proxy_timeout 30s;
-
-            ssl_certificate /etc/nginx/ssl/openvidu-cert.pem;
-            ssl_certificate_key /etc/nginx/ssl/openvidu-key.pem;
-
-            proxy_pass api_backend;
-        }
-
-        # RTMP
-        server {
-            listen 1935 ssl;
-            listen [::]:1935 ssl;
-            ssl_protocols TLSv1.2 TLSv1.3;
-
-            proxy_connect_timeout 10s;
-            proxy_timeout 30s;
-
-            ssl_certificate /etc/nginx/ssl/openvidu-cert.pem;
-            ssl_certificate_key /etc/nginx/ssl/openvidu-key.pem;
-
-            proxy_pass rtmp_backend;
-        }
+    upstream rtmp_backend {
+        server <MASTER_NODE_IP_1>:1945;
+        server <MASTER_NODE_IP_2>:1945;
+        server <MASTER_NODE_IP_3>:1945;
+        server <MASTER_NODE_IP_4>:1945;
     }
 
-    ```
-
-    - Notice that `openvidu-cert.pem` and `openvidu-key.pem` must be valid SSL certificates for your domain. 
-    - The domain name should be pointing to the NGINX Load Balancer.
-    - Replace `<MASTER_NODE_IP_X>` with the private IP addresses of your Master Nodes and `<MEDIA_NODE_IP_X>` with the private IP addresses of your Media Nodes.
-
-=== "NGINX Load Balancer Configuration (With TLS for TURN)"
-
-    Example configuration for NGINX Load Balancer:
-
-    ```nginx
-    events {
-        worker_connections 10240;
+    # Use SNI to determine which upstream server to proxy to
+    map $ssl_server_name $upstream {
+        openvidu.example.io api_backend;
+        turn.example.io turn_backend;
     }
 
-    # Redirect HTTP to HTTPS
-    http {
-        server {
-            listen 80;
-            listen [::]:80;
-            return 301 https://$host$request_uri;
-        }
+    # Use SNI to determine which certificate to use
+    map $ssl_server_name $certificate {
+        openvidu.example.io /etc/nginx/ssl/openvidu-cert.pem;
+        turn.example.io /etc/nginx/ssl/turn-cert.pem;
     }
 
-    stream {
+    # Use SNI to determine which private key to use
+    map $ssl_server_name $private_key {
+        openvidu.example.io /etc/nginx/ssl/openvidu-privkey.pem;
+        turn.example.io /etc/nginx/ssl/turn-privkey.pem;
+    }
 
-        upstream api_backend {
-            server <MASTER_NODE_IP_1>:7880;
-            server <MASTER_NODE_IP_2>:7880;
-            server <MASTER_NODE_IP_3>:7880;
-            server <MASTER_NODE_IP_4>:7880;
-        }
+    # Proxy for API and TURN
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        ssl_protocols TLSv1.2 TLSv1.3;
 
-        upstream turn_backend {
-            server <MASTER_NODE_IP_1>:5349;
-            server <MASTER_NODE_IP_2>:5349;
-            server <MASTER_NODE_IP_3>:5349;
-            server <MASTER_NODE_IP_4>:5349;
-        }
+        proxy_connect_timeout 10s;
+        proxy_timeout 30s;
 
-        upstream rtmp_backend {
-            server <MASTER_NODE_IP_1>:1945;
-            server <MASTER_NODE_IP_2>:1945;
-            server <MASTER_NODE_IP_3>:1945;
-            server <MASTER_NODE_IP_4>:1945;
-        }
+        ssl_certificate $certificate;
+        ssl_certificate_key $private_key;
 
-        # Use SNI to determine which upstream server to proxy to
-        map $ssl_server_name $upstream {
-            openvidu.example.com api_backend;
-            turn.example.com turn_backend;
-        }
+        proxy_pass $upstream;
+    }
 
-        # Use SNI to determine which certificate to use
-        map $ssl_server_name $certificate {
-            openvidu.example.com /etc/nginx/ssl/openvidu-cert.pem;
-            turn.example.com /etc/nginx/ssl/turn-cert.pem;
-        }
+    # RTMP
+    server {
+        listen 1935 ssl;
+        listen [::]:1935 ssl;
+        ssl_protocols TLSv1.2 TLSv1.3;
 
-        # Use SNI to determine which private key to use
-        map $ssl_server_name $private_key {
-            openvidu.example.com /etc/nginx/ssl/openvidu-key.pem;
-            turn.example.com /etc/nginx/ssl/turn-key.pem;
-        }
+        proxy_connect_timeout 10s;
+        proxy_timeout 30s;
 
-        # Proxy for API and TURN
-        server {
-            listen 443 ssl;
-            listen [::]:443 ssl;
-            ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_certificate /etc/nginx/ssl/openvidu-cert.pem;
+        ssl_certificate_key /etc/nginx/ssl/openvidu-privkey.pem;
 
-            proxy_connect_timeout 10s;
-            proxy_timeout 30s;
+        proxy_pass rtmp_backend;
+    }
+}
 
-            ssl_certificate $certificate;
-            ssl_certificate_key $private_key;
+# Redirect HTTP to HTTPS and reverse proxy API traffic
+http {
+    server {
+        listen 80;
+        listen [::]:80;
+        return 301 https://$host$request_uri;
+    }
 
-            proxy_pass $upstream;
-        }
+    upstream api_http_backend {
+        server <MASTER_NODE_IP_1>:7880;
+        server <MASTER_NODE_IP_2>:7880;
+        server <MASTER_NODE_IP_3>:7880;
+        server <MASTER_NODE_IP_4>:7880;
+    }
 
-        # RTMP
-        server {
-            listen 1935 ssl;
-            listen [::]:1935 ssl;
-            ssl_protocols TLSv1.2 TLSv1.3;
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+    }
 
-            proxy_connect_timeout 10s;
-            proxy_timeout 30s;
+    server {
+        listen 7880;
 
-            ssl_certificate /certs/domain_fullchain.pem;
-            ssl_certificate_key /certs/domain_privkey.pem;
-
-            proxy_pass rtmp_backend;
+        location / {
+            proxy_pass http://api_http_backend;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto https;
         }
     }
-    ```
+}
+```
 
-    - Notice that `openvidu.example.com` is the domain name you have chosen for your OpenVidu deployment and `turn.example.com` is the domain name you have chosen for your TURN with TLS. Both domains should be configured in your DNS to point to the Load Balancer. Also, the `openvidu-cert.pem`, `openvidu-key.pem`, `turn-cert.pem`, and `turn-key.pem` must be valid SSL certificates for your domains.
-    - Replace `<MASTER_NODE_IP_X>` with the private IP addresses of your Master Nodes and `<MEDIA_NODE_IP_X>` with the private IP addresses of your Media Nodes.
+Notes:
+
+- Replace `openvidu.example.io` and `turn.example.io` with your domain names. Both domains should be configured in your DNS to point to the Load Balancer.
+- The SSL certificates (`openvidu-cert.pem`, `openvidu-privkey.pem`, `turn-cert.pem`, `turn-privkey.pem`) must be valid for their respective domains.
+- Replace `<MASTER_NODE_IP_X>` with the private IP addresses of your Master Nodes.
+
+!!! info "Customizable HTTP block"
+    The `http` block gives you full control over HTTP-level routing. You can add custom `location` blocks, rate limiting, access control, or additional headers to suit your infrastructure needs.
+
+If you want to force all traffic including WebRTC to go through the Load Balancer, check the [Force media traffic through port 443](../../how-to-guides/force-single-port.md) guide.
 
 ## Configure your application to use the deployment
 
@@ -436,9 +402,9 @@ Each installation command for each type of node looks like this:
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
         --openvidu-pro-license='xxxxx' \
         --domain-name='openvidu.example.io' \
+        --turn-domain-name='turn.example.io' \
         --enabled-modules='observability,v2compatibility,openviduMeet' \
         --rtc-engine='pion' \
-        --turn-domain-name='turn.example.io' \
         --livekit-api-key='xxxxx' \
         --livekit-api-secret='xxxxx' \
         --dashboard-admin-user='xxxxx' \
@@ -461,6 +427,8 @@ Each installation command for each type of node looks like this:
     Notes:
 
     - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target=_blank}.
+    - Replace `openvidu.example.io` with your FQDN.
+    - Replace `turn.example.io` with your TURN server FQDN.
     - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
     - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change, and Media Nodes should be able to reach all Master Nodes using these IPs.
 
@@ -486,7 +454,6 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 
 Some general notes about all the Master Node commands:
 
-- The argument `--turn-domain-name` is optional. You define it only if you want to enable TURN with TLS in case users are behind restrictive firewalls.
 - At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:

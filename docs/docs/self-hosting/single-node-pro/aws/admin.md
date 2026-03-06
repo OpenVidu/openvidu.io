@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an AWS OpenVidu Single
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: AWS
 
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
+
 AWS deployment of OpenVidu Single Node is internally identical to the on-premises deployment, so you can follow the same instructions from the [On Premises Single Node](../on-premises/admin.md) for administration and configuration. The only difference is that the deployment is automated with AWS CloudFormation.
 
 However, there are certain things worth mentioning:

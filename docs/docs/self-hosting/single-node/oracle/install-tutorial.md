@@ -1,5 +1,5 @@
 ---
-title: OpenVidu Single Node installation on Oracle Cloud Infrastructure
+title: OpenVidu Single Node installation tutorial on Oracle Cloud Infrastructure
 description: Learn how to deploy OpenVidu Single Node on Oracle Cloud Infrastructure using the Oracle Cloud Console
 tags:
   - copyclipboard
@@ -7,7 +7,7 @@ tags:
 
 # OpenVidu Single Node on Oracle Cloud Infrastructure — Step-by-step Guide
 
-This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
+This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administrating, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
 
 ## Overview / prerequisites
 
@@ -113,65 +113,69 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
 1. SSH into the instance:
 
-```bash
-ssh -i private_key_downloaded.key ubuntu@PUBLIC_IP
-sudo apt update && sudo apt upgrade -y
-```
+    ```bash
+    ssh -i private_key_downloaded.key ubuntu@PUBLIC_IP
+    sudo apt update && sudo apt upgrade -y
+    ```
 
 2. Install and start the `firewall-cmd` tool:
 
-```bash
-sudo apt install firewalld -y
-sudo systemctl enable firewalld
-sudo systemctl start firewalld
-```
+    ```bash
+    sudo apt install firewalld -y
+    sudo systemctl enable firewalld
+    sudo systemctl start firewalld
+    ```
 
 3. Clean the existing `iptables` rules, accept all inputs, disable `iptables` persistence at startup, and restart the network service if required:
 
-```bash
-sudo iptables -F
-sudo iptables -P INPUT ACCEPT
-sudo systemctl disable netfilter-persistent
-```
+    ```bash
+    sudo iptables -F
+    sudo iptables -P INPUT ACCEPT
+    sudo systemctl disable netfilter-persistent
+    ```
 
 4. Add the required firewall rules:
 
-```bash
-firewall-cmd --add-port=80/tcp
-firewall-cmd --permanent --add-port=80/tcp
+    ```bash
+    firewall-cmd --add-port=80/tcp
+    firewall-cmd --permanent --add-port=80/tcp
 
-firewall-cmd --add-port=443/tcp
-firewall-cmd --permanent --add-port=443/tcp
+    firewall-cmd --add-port=443/tcp
+    firewall-cmd --permanent --add-port=443/tcp
 
-firewall-cmd --add-port=443/udp
-firewall-cmd --permanent --add-port=443/udp
+    firewall-cmd --add-port=443/udp
+    firewall-cmd --permanent --add-port=443/udp
 
-firewall-cmd --add-port=1935/tcp
-firewall-cmd --permanent --add-port=1935/tcp
+    firewall-cmd --add-port=1935/tcp
+    firewall-cmd --permanent --add-port=1935/tcp
 
-firewall-cmd --add-port=7881/tcp
-firewall-cmd --permanent --add-port=7881/tcp
+    firewall-cmd --add-port=7881/tcp
+    firewall-cmd --permanent --add-port=7881/tcp
 
-firewall-cmd --add-port=7885/udp
-firewall-cmd --permanent --add-port=7885/udp
+    firewall-cmd --add-port=7885/udp
+    firewall-cmd --permanent --add-port=7885/udp
 
-firewall-cmd --add-port=9000/tcp
-firewall-cmd --permanent --add-port=9000/tcp
+    firewall-cmd --add-port=9000/tcp
+    firewall-cmd --permanent --add-port=9000/tcp
 
-firewall-cmd --add-port=50000-60000/udp
-firewall-cmd --permanent --add-port=50000-60000/udp
-```
+    firewall-cmd --add-port=50000-60000/udp
+    firewall-cmd --permanent --add-port=50000-60000/udp
+    ```
 
 5. Apply the rules and verify that they are correctly configured:
 
-```bash
-firewall-cmd --reload
-firewall-cmd --runtime-to-permanent
+    ```bash
+    firewall-cmd --reload
+    firewall-cmd --runtime-to-permanent
 
-firewall-cmd --list-all
-```
+    firewall-cmd --list-all
+    ```
 
-6. Follow the [On-Premises install instructions](../on-premises/install.md) to install OpenVidu on the instance.
+6. Follow the [On-Premises install instructions](../on-premises/install.md/#guided-installation) to install OpenVidu on the instance.
+
+    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
+    !!! warning "sslip.io rate limiting"
+        **sslip.io** is currently experiencing **Let's Encrypt rate limiting issues**, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check [this community thread](https://openvidu.discourse.group/t/deployment-without-domain/5474){:target="_blank"} for troubleshooting and updates.
 
 ---
 

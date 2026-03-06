@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an Azure OpenVidu High
 
 # OpenVidu High Availability administration: Azure
 
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
+
 The deployment of OpenVidu High Availability on Azure is automated using Azure Resource Manager Templates, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Virtual Machine Scale Set :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. The Virtual Machine Scale Set of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Azure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account:
@@ -183,7 +190,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
         <figure markdown>
         ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/shared/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
         </figure>
-    5. Enter the new secret value on _"Secret Value"_ filed and click on _"Create"_.
+    5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
         <figure markdown>
         ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
         </figure>
@@ -192,7 +199,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
         ![Reboot Instance](../../../../assets/images/self-hosting/ha/azure/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
-    Changes will be applied automatically.
+    Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.
 
 ## Backup and Restore
 

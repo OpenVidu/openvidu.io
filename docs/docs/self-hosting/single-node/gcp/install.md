@@ -7,13 +7,20 @@ tags:
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
 
-This section contains the instructions of how to deploy a production-ready OpenVidu Single Node deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](../on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
+<div class="provider-chip" markdown>
 
-To deploy OpenVidu into Google Cloud Platform you just need to log into your [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP console. Then follow the next steps to fill the parameters of your choice.
+:material-google-cloud:{ .provider-chip-icon } Google Cloud Platform
+
+</div>
+
+
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
+
+To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target=_blank} in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks like:
+    This is what the deployment architecture looks like:
 
     <figure markdown>
     ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/self-hosting/single-node/gcp/single-node-gcp-architecture.svg){ .svg-img .dark-img }
@@ -24,23 +31,26 @@ To deploy OpenVidu into Google Cloud Platform you just need to log into your [In
 
 --8<-- "shared/self-hosting/gcp-info-deployment.md"
 
-To deploy OpenVidu, first you need to create a new deployment in the top left button as you can see in the image.
+To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
 <figure markdown>
 ![Google Cloud Platform create new deployment](../../../../assets/images/self-hosting/shared/gcp-create-deployment.png){ .svg-img .dark-img }
 </figure>
 
-Once you click the button you will see this window.
+Once you click the button, you will see this window.
 
 <figure markdown>
 ![Google Cloud Platform create new deployment window](../../../../assets/images/self-hosting/shared/gcp-create-deployment-window.png){ .svg-img .dark-img }
 </figure>
 
-Fill **Deployment ID** with any name that you desire like openvidu-singlenode-deployment, next choose the **Region** that you prefer, leave **Terraform version** in the 1.5.7 and for **Service Account** you will need to create a new one with _"Owner"_ permissions, in order to do that click on _"Service Account"_ label and then into _"New Service Account"_, choose your service account name click on _"Create and Continue"_ and then select the _"Owner"_ role, click on _"Continue"_ and the in _"Done"_.   
-
+* Fill **Deployment ID** with any name you prefer (for example, openvidu-singlenode-deployment).   
+* Change the **Region** to the one you prefer.
 !!! warning
-    If you change the region in the previous step, don't forget to change the [region and zone](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en) in the terraform values.
 
+    If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target=_blank} in the Terraform values.
+
+* Leave **Terraform version** as 1.5.7.   
+* For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   
 ??? details "New Service Account Steps"
 
     <figure markdown>
@@ -63,15 +73,15 @@ Fill **Deployment ID** with any name that you desire like openvidu-singlenode-de
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
 
-* Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> that corresponds to our git repository where are allocated the terraform files to deploy openvidu. 
+* Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
 * Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/community/singlenode/gcp"><code>openvidu-deployment/community/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
-* For the **Git ref** use <span class="copy-inline" data-copy="v3.5.0"><code>v3.5.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> corresponding to the version 
+* For the **Git ref**, use <span class="copy-inline" data-copy="v3.5.0"><code>v3.5.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
 
-Finally click on continue.
+Finally, click Continue.
 
 ## Input Values
 
-In Google Cloud Platform there is no such thing like template with parameters, you will need to introduce by yourself in the console the parameters that are declared in our terraform files, so there is a detailed table of all the optional and non-optional parameters.
+In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter in the console the parameters declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
 <div style="text-align: center;">
@@ -167,28 +177,13 @@ In Google Cloud Platform there is no such thing like template with parameters, y
         <td>(none)</td>
         <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
       </tr>
-      <tr>
-        <td>turnDomainName</td>
-        <td>(none)</td>
-        <td>(Optional) Domain name for the TURN server with TLS. Only needed if your users are behind restrictive firewalls.</td>
-      </tr>
-      <tr>
-        <td>turnOwnPublicCertificate</td>
-        <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.</td>
-      </tr>
-      <tr>
-        <td>turnOwnPrivateCertificate</td>
-        <td>(none)</td>
-        <td>(Optional) This setting is applicable if the certificate type is set to 'owncert' and the TurnDomainName is specified.</td>
-      </tr>
     </table>
 </div>
 
-For more detail you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf) file to see more information about the inputs.   
+For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf){:target=_blank} file to see additional information about the inputs.   
 
 !!! warning
-    It's important that you put the input variables with the same name as they appear in the table like in the next image.
+    It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
 
     <figure markdown>
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/shared/gcp-input-variables.png){ .svg-img .dark-img }
@@ -200,12 +195,11 @@ For more detail you can check the [variables.tf :fontawesome-solid-external-link
 
 ## Configure your application to use the deployment 
 
-You need your Google Cloud Platform secret outputs to configure your OpenVidu application. You can check these secrets by searching in the Secrets Manager with any of these two ways ([Check deployment outputs in GCP Secret Manager](#check-deployment-outputs-in-gcp-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
+You need the secret outputs from Google Cloud Platform to configure your OpenVidu application. You can check these secrets in Secret Manager using either of these two methods: ([Check deployment outputs in GCP Secret Manager](#check-deployment-outputs-in-gcp-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
 
-Your authentication credentials and URL to point your applications would be:
+Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "shared/self-hosting/gcp-credentials-general.md"
---8<-- "shared/self-hosting/gcp-credentials-v2compatibility.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
@@ -215,4 +209,4 @@ Your authentication credentials and URL to point your applications would be:
 
 ## Configuration and administration
 
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all the resources have been created. You will need to wait around 5 to 10 minutes for the instance to install OpenVidu as we mentioned before. When this time has elapsed, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once finished you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait around 5 to 10 minutes for the instance to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.

@@ -4,6 +4,9 @@ tags:
   - setupcustomgallery
 ---
 
+This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, integration examples, and deployment best practices.
+
+
 ## 1. Run OpenVidu Meet
 
 --8<-- "shared/tutorials/run-openvidu-meet.md"

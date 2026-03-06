@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an Azure OpenVidu Elas
 
 # OpenVidu Elastic administration: Azure
 
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
+
 The deployment of OpenVidu Elastic on Azure is automated using Azure Resource Manager Templates, with Media Nodes managed within a [Virtual Machine Scale Set :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
 
 Internally, the Azure Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account:
@@ -182,7 +189,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
         <figure markdown>
         ![Azure Key Vault New Version Secret](../../../../assets/images/self-hosting/shared/azure-keyvault-new-version-secret.png){ .svg-img .dark-img }
         </figure>
-    5. Enter the new secret value on _"Secret Value"_ filed and click on _"Create"_.
+    5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
         <figure markdown>
         ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
         </figure>

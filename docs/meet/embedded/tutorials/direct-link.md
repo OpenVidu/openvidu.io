@@ -102,7 +102,7 @@ dotenv.config(); // (1)!
 
 // Configuration
 const SERVER_PORT = process.env.SERVER_PORT || 6080; // (2)!
-const OV_MEET_SERVER_URL = process.env.OV_MEET_SERVER_URL || 'http://localhost:9080'; // (3)!
+const OV_MEET_SERVER_URL = process.env.OV_MEET_SERVER_URL || 'http://localhost:9080/meet'; // (3)!
 const OV_MEET_API_KEY = process.env.OV_MEET_API_KEY || 'meet-api-key'; // (4)!
 
 const app = express(); // (5)!
@@ -442,7 +442,7 @@ function getRoomListItemTemplate(room) {
                 >
                     Join as Speaker
                 </a>
-                <button 
+                <button
                     title="Delete room"
                     class="icon-button delete-button"
                     onclick="deleteRoom('${room.roomId}');"

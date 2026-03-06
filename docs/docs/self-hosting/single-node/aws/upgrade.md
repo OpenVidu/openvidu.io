@@ -1,9 +1,16 @@
 ---
-title: Upgrade OpenVidu Single Node COMMUNITY - AWS
-description: How to upgrade OpenVidu Single Node COMMUNITY in AWS.
+title: Upgrade OpenVidu Single Node COMMUNITY on AWS
+description: How to upgrade OpenVidu Single Node COMMUNITY on AWS deployments.
 ---
 
-# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> - AWS
+# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span>: AWS
+
+<div class="provider-chip" markdown>
+
+:material-aws:{ .provider-chip-icon } AWS
+
+</div>
+
 
 In AWS, we recommend upgrading by redeploying the [OpenVidu Single Node CloudFormation](../aws/install.md) with the latest version.
 

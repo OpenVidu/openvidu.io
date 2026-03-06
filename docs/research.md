@@ -18,7 +18,7 @@ tags:
   }
 </style>
 
-# OpenVidu research works
+# OpenVidu research publications
 
 ## Index
 

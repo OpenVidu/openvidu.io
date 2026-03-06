@@ -2,6 +2,61 @@
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
 ---
 
+## 3.6.0
+
+!!! info "For the Release Notes of OpenVidu Meet 3.6.0, please visit here: [OpenVidu Meet 3.6.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#360){:target="_blank" .meet-link-color}"
+
+### Changelog
+
+- **DigitalOcean support**: we continue expanding our cloud-native deployment options. OpenVidu now officially supports deployments in DigitalOcean using its native resources (Droplets, Spaces, Load Balancers...) through our new Terraform templates:
+    - [OpenVidu Single Node COMMUNITY](./self-hosting/single-node/digitalocean/install.md) in DigitalOcean.
+    - [OpenVidu Single Node PRO](./self-hosting/single-node-pro/digitalocean/install.md) in DigitalOcean.
+    - [OpenVidu Elastic](./self-hosting/elastic/digitalocean/install.md) in DigitalOcean.
+    - [OpenVidu High Availability](./self-hosting/ha/digitalocean/install.md) in DigitalOcean.
+
+    !!! info
+        **OpenVidu Elastic** and **OpenVidu High Availability** do not support [autoscaling](./self-hosting/production-ready/scalability.md/#autoscaling) in release 3.6.0. This is a work in progress and will be available in a future release.
+
+- **Plain Docker Compose deployment**: OpenVidu Single Node COMMUNITY can now be deployed using a plain Docker Compose. This is an installer-free, less opinionated deployment option, friendlier with GitOps procedures. See [Plain Docker Compose installation](./self-hosting/single-node/on-premises/install.md/#plain-docker-compose-installation) for more details.
+- **Local providers for Live Captions**: the [Live Captions](./ai/live-captions.md) service now supports [local providers](./ai/live-captions.md/#local-providers) that will run in your own nodes, offline, without the need of configuring and paying a third-party service. This greatly aligns with the self-hosted, private nature of OpenVidu deployments. Currently we support:
+    - [Vosk](https://github.com/alphacep/vosk-api){:target="\_blank"}: available in OpenVidu COMMUNITY deployments, it supports multiple languages and can run on modest hardware.
+    - [Sherpa](https://github.com/k2-fsa/sherpa-onnx){:target="\_blank"}: available in OpenVidu PRO deployments, it offers state-of-the-art accuracy and performance. It also offers GPU acceleration if your Media Nodes are equipped with an NVIDIA GPU.
+- **New cloud providers for Live Captions**: we have also expanded the collection of supported third-party AI [cloud providers](./ai/live-captions.md/#cloud-providers): [MistralAI](https://mistral.ai/){:target="\_blank"}, [NVIDIA Riva](https://www.nvidia.com/en-us/ai-data-science/products/riva/){:target="\_blank"}, [Spitch](https://spitch.app/){:target="\_blank"}, [ElevenLabs](https://elevenlabs.io/){:target="\_blank"}, [Simplismart](https://simplismart.ai/){:target="\_blank"}.
+- **Deployment improvements**
+    - It is now possible to deploy a custom application on the same host as OpenVidu Single Node and serve it directly at the root path `/`. Learn how to do it [here](../meet/embedded/deploy-your-app.md/#deploy-alongside-openvidu).
+    - OpenVidu now supports restricted-network deployments (for example, NAT environments) for both internal and external clients out of the box. Before, clients connecting from the same network where OpenVidu was deployed could experience connection issues. Now, OpenVidu handles these scenarios transparently.
+    - OpenVidu now works out of the box in networks without hairpinning NAT support (where a host cannot reach itself through its public IP).
+    - TURN relay security has been hardened to reduce exposure to SSRF-style abuse. Learn more: [TURN server security threats :fontawesome-solid-external-link:{.external-link-icon}](https://www.enablesecurity.com/blog/turn-server-security-threats/){:target="\_blank"}.
+    - The deployment flows for **Azure** and **GCP** include multiple stability fixes, as well as corrections to minor typos and configuration issues that could affect the installation process.
+- **Egress improvements**
+    - Egress containers now check available disk space before accepting new requests, preventing immediate failures on full disks ([#3478328 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/egress/commit/3478328cae4553b066552c01b37b7761455c990c){:target="\_blank"}).
+    - On crash recovery, egress now preserves backup recordings by copying `/home/egress/tmp/` to `/home/egress/backup_storage/` before cleanup ([#3dbd892 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/egress/commit/3dbd8923d746bc897c3b522de1594582be689292){:target="\_blank"}).
+    - `cpu_cost.max_cpu_utilization` now applies to the first egress request as well ([#f0cef66 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/egress/commit/f0cef66e4d1f5c1654cd83d938bbcd69c7305782){:target="\_blank"}). Before this fix, the first request handled by any egress instance would always be accepted regardless of the current CPU load, potentially leading to overloading an already busy Media Node. This fix improves the stability of egresses in clusters under high load.
+    - CPU monitoring now considers host-wide utilization (not only egress subprocesses), improving egress distribution across nodes ([#387e600 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/egress/commit/387e600c781c931a3e16fd9096472b7117723328){:target="\_blank"}).
+    - Room Composite Egress now works correctly in restricted NAT deployments.
+
+### Breaking changes
+
+- **OpenVidu Meet default path has changed**: the default path for OpenVidu Meet is now `/meet` (previously `/`). You can revert to the previous behavior by following [these instructions](./self-hosting/how-to-guides/customize-meet-base-path.md/#root-path).
+
+### Version table
+
+| Artifact               | Version | Info | Link         |
+| ---------------------- | ------- | ---- | ---------- |
+| livekit/livekit-server | v1.9.8  | :material-information-outline:{ title="Version of livekit-server in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/livekit/livekit/releases/tag/v1.9.8){:target="\_blank"} |
+| mediasoup              | 3.12.16 | :material-information-outline:{ title="Version of mediasoup in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/versatica/mediasoup/releases/tag/3.12.16){:target="\_blank"} |
+| livekit/egress         | v1.12.0 (commit [#ba781b4 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/commit/ba781b4){:target="\_blank"}) | :material-information-outline:{ title="Egress version used by OpenVidu deployments. Used to export media from a Room (for example, recordings or RTMP broadcasting)" } | [:octicons-link-24:](https://github.com/livekit/egress/releases/tag/v1.12.0){:target="\_blank"} |
+| livekit/ingress        | v1.4.3 (commit [#e42b67a :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/commit/e42b67a){:target="\_blank"})  | :material-information-outline:{ title="Ingress version used by OpenVidu deployments. Used to import media into a Room (for example, an MP4 video or an RTSP stream)" } | [:octicons-link-24:](https://github.com/livekit/ingress/releases/tag/v1.4.3){:target="\_blank"} |
+| livekit/agents        | v1.4.4  | :material-information-outline:{ title="LiveKit Agents framework version. Used to add AI capabilities to your Rooms" } | [:octicons-link-24:](https://github.com/livekit/agents/releases/tag/livekit-agents%401.4.4){:target="\_blank"} |
+| MinIO | 2025.10.15 | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/minio/minio/releases/tag/RELEASE.2025-10-15T17-29-55Z){:target="\_blank"} |
+| Caddy | 2.11.1 | :material-information-outline:{ title="Version of Caddy used by OpenVidu deployments. It is a reverse proxy used as a load balancer to distribute client connections across your nodes and automatically manage your TLS certificate" } |  [:octicons-link-24:](https://github.com/caddyserver/caddy/releases/tag/v2.11.1){:target="\_blank"}|
+| MongoDB | 8.0.19 | :material-information-outline:{ title="Version of MongoDB used by OpenVidu deployments. Used to store analytics and monitoring persistent data. In <i>OpenVidu High Availability</i> this is an instance of a <i>MongoDB Replica Set</i>" } | [:octicons-link-24:](https://www.mongodb.com/docs/manual/release-notes/8.0/#8.0.19---feb-10--2026){:target="\_blank"} |
+| Redis | 8.6.1 | :material-information-outline:{ title="Version of Redis used by OpenVidu deployments. Used to share transient information between Media Nodes and coordinate them. In <i>OpenVidu High Availability</i> this is an instance of a <i>Redis Cluster</i>" } | [:octicons-link-24:](https://github.com/redis/redis/releases/tag/8.6.1){:target="\_blank"} |
+| Grafana | 12.3.4 | :material-information-outline:{ title="Version of Grafana used by OpenVidu deployments. Observability module used to query and visualize logs and metrics in dashboards" } | [:octicons-link-24:](https://github.com/grafana/grafana/releases/tag/v12.3.4){:target="\_blank"} |
+| Prometheus | 3.9.1 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Observability module from Grafana stack, used to collect metrics from Media Nodes and send them to Mimir" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.9.1){:target="\_blank"} |
+| Promtail / Loki | 3.5.11 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.11){:target="\_blank"} |
+| Mimir | 3.0.3 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.0.3){:target="\_blank"} |
+
 ## 3.5.0
 
 !!! info "For the Release Notes of OpenVidu Meet 3.5.0, please visit here: [OpenVidu Meet 3.5.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#350){:target="_blank" .meet-link-color}"
@@ -14,7 +69,7 @@ description: Explore the latest OpenVidu releases, including new features, updat
     - Particularly relevant is the fix for [issue #3858](https://github.com/livekit/livekit/issues/3858){:target="\_blank"}, which fixes a fatal problem in the connection of the services with the Redis Cluster.
 - **Egress updated to v1.12.0**: the Egress service has been updated to v1.12.0, which includes several improvements and bug fixes when exporting media from rooms. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/releases/tag/v1.12.0){:target="\_blank"}.
     - Particularly relevant is the change of the `unhealthyShutdownWatchdogDelay` value from 20 seconds to 10 minutes (see [commit e86593c](https://github.com/OpenVidu/egress/commit/e86593c25ab20e02d8e6d4a2edc4ac4b03fd2dbc){:target="\_blank"}), preventing premature termination of egress processes under high CPU load or poor network conditions.
-- **Ingress updated to latest**: the Ingress service has been updated to latest available commit *[#e42b67a](https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2FOpenVidu%2Fingress%2Fcommit%2Fe42b67acf7d2c1ca5b463bb0d8f71bc4f6bf26c5)* with multiple improvements over last official release.
+- **Ingress updated to latest**: the Ingress service has been updated to latest available commit *[#e42b67a :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/ingress/commit/e42b67acf7d2c1ca5b463bb0d8f71bc4f6bf26c5){:target="\_blank"}* with multiple improvements over last official release.
 - **Live Captions**:
     - Fixed critical bug that caused slow response when transcribing 3 or more simultaneous participants in the same Room using AWS Transcribe provider. See related issue in the official LiveKit Agents repository ([#3739](https://github.com/livekit/agents/issues/3739){:target="\_blank"}) and PR fixing it ([PR 4111](https://github.com/livekit/agents/pull/4111){:target="\_blank"}).
     - Added [Cartesia](https://cartesia.ai/sonic){:target="\_blank"} and [Soniox](https://soniox.com/){:target="\_blank"} to the list of [supported AI providers](./ai/live-captions.md#supported-ai-providers).

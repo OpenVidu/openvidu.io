@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Google Cloud Platform
 
+<div class="provider-chip" markdown>
+
+:material-google-cloud:{ .provider-chip-icon } Google Cloud Platform
+
+</div>
+
+
 Google Cloud Platform OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform from Google Cloud Platform.
 
 However, there are certain things worth mentioning:
@@ -17,7 +24,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
-    3. In the section of the Virtual Machine click on stop button to stop the Virtual Mache (and therefore OpenVidu).
+    3. In the section of the Virtual Machine click on stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop instance](../../../../assets/images/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img }
@@ -65,7 +72,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/self-hosting/shared/gcp-secrets-new-version.png){ .svg-img .dark-img }
         </figure>
-    3. Enter the new secret value on _"Secret Value"_ filed and click on _"Add new version"_.
+    3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
         </figure>

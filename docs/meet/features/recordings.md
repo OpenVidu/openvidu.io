@@ -42,18 +42,42 @@ The recording view allows playing the video, downloading it or creating a [share
 
 ### Access permissions for recordings
 
-When [creating a new room](./rooms-and-meetings.md#creating-a-room) you can configure who may access its recordings:
+When [creating a new room](./rooms-and-meetings.md#creating-a-room), you can define who is allowed to access and manage the recordings generated within that room. This access control system helps ensure privacy, security, and proper role-based permissions for recorded meetings.
 
 <a class="glightbox" href="../../../assets/images/meet/recordings/recording-access-control.png" data-type="image" data-desc-position="bottom" data-gallery="gallery8"><img src="../../../assets/images/meet/recordings/recording-access-control.png" loading="lazy" class="round-corners"/></a>
 
-Available options are:
+#### Available access options
 
-- **Only admin**: only administrators of OpenVidu Meet will have access to the recordings of this room. Administrators can always access recordings of any room.
-- **Admin and moderators**: administrators and any participant of the meeting with "Moderator" role will have access to the recordings of this room.
-- **Admin, moderators and speakers**: this is the default value. Administrators and any participant of the meeting with "Moderator" or "Speaker" role will have access to the recordings of this room.
+* **Only admin**
+  Restricts access to recordings exclusively to OpenVidu Meet administrators. This option provides the highest level of security and is ideal for sensitive meetings. Administrators always retain access to recordings from any room.
+
+* **Admin and moderators**
+  Grants recording access to administrators and participants assigned the **Moderator** role. This configuration allows trusted meeting leaders to review or manage recordings while maintaining controlled access.
+
+* **Admin, moderators, and speakers** *(default)*
+  Allows administrators, moderators, and participants with the **Speaker** role to access recordings. This default setting offers a balanced approach, promoting collaboration while still enforcing role-based permissions.
 
 !!! info
     Participants with role "Speaker" may only **play** recordings. Administrators and participants with role "Moderator" can also **delete** them.
+
+### Recording layouts
+
+OpenVidu Meet provides multiple **recording layout options** that can be configured when [creating a new room](./rooms-and-meetings.md#creating-a-room). These layouts determine how participants appear in the meeting recording, allowing you to choose the most suitable format for presentations, webinars, or collaborative sessions.
+
+#### Available recording layouts
+
+* **Grid layout**
+  Displays all participants in an evenly spaced grid. This layout is ideal for team meetings, classrooms, or collaborative discussions where seeing all participants simultaneously is important.
+
+* **Speaker layout**
+  Highlights the active speaker in a larger frame while showing other participants in smaller thumbnails. This layout is perfect for interactive sessions where one participant speaks at a time, keeping the focus on the main speaker.
+
+* **Single Speaker layout**
+  Records only the active speaker, hiding all other participants. This layout is best suited for presentations, lectures, or interviews where the focus should remain entirely on the speaker.
+
+
+<a class="glightbox" href="../../../assets/images/meet/recordings/recording-layouts.png" data-type="image" data-desc-position="bottom" data-gallery="gallery8"><img src="../../../assets/images/meet/recordings/recording-layouts.png" loading="lazy" class="round-corners"/></a>
+
 
 ### Sharing recordings via link
 

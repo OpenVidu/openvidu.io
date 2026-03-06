@@ -5,6 +5,13 @@ description: Learn how to perform administrative tasks on an on-premises OpenVid
 
 # OpenVidu Elastic administration: On-premises
 
+<div class="provider-chip" markdown>
+
+:material-server:{ .provider-chip-icon } On-premises
+
+</div>
+
+
 The OpenVidu installer offers an easy way to deploy OpenVidu Elastic on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
 
 This section provides details on configuration parameters and common administrative tasks for on-premises OpenVidu Elastic deployments.
