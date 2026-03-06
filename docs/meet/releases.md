@@ -1,3 +1,23 @@
+## 3.6.0
+
+!!! info "For the Release Notes of OpenVidu Platform 3.6.0, please visit here: [OpenVidu Platform 3.6.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#360){:target="_blank" .platform-link-color}"
+
+### Changelog
+
+- **Live captions in meetings**: Live captions are now available to make conversations easier to follow in real time. Participants can read what is being said as it happens, improving understanding in noisy environments, supporting people with hearing difficulties, and making meetings more accessible and inclusive. This is also the first step towards more advanced AI-powered features such as meeting transcriptions, summaries, action items extraction, and more.
+- **Recording layout selection**: you can now choose how your meeting recordings are rendered to better match your use case:
+    - **Grid view** to see all participants at once.
+    - **Speaker view** to focus on the active speaker.
+    - **Single speaker view** for more focused presentations and one-person sessions.
+- **Advanced recording video settings**: recording configuration now supports video resolution, frame rate and codec selection.
+- **Recording configuration via UI or API**: recording options can now be configured either from the setup wizard/Room configuration UI or through the REST API.
+- **Firefox performance improvements**: improved video reception in Firefox when the meeting tab is not in focus, delivering a more stable experience for the rest of participants.
+- **Role-change UX improvements**: participants are now clearly informed when someone’s role changes during a session through both a visual notification and a sound alert.
+
+### Breaking changes
+
+- **OpenVidu Meet default path changed**: when deploying OpenVidu, the default path for OpenVidu Meet is now `/meet` (previously `/`). This facilitates the coexistence of OpenVidu Meet and a custom application on the same server. You can change this path to whatever you want (including the previous default `/`) following [these instructions](../docs/self-hosting/how-to-guides/customize-meet-base-path.md).
+
 ## 3.5.0
 
 !!! info "For the Release Notes of OpenVidu Platform 3.5.0, please visit here: [OpenVidu Platform 3.5.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#350){:target="_blank" .platform-link-color}"
