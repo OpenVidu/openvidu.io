@@ -24,7 +24,7 @@ SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
 Modify file `agent-speech-processing.yaml` to enable the Live Captions Service with `processing: manual`:
 
 ```yaml
-docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.5.0
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.6.0
 
 enabled: true # (1)!
 

@@ -26,10 +26,10 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
 !!! info
 
-    If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.5.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.6.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.5.0/aws/cf-openvidu-singlenode.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.6.0/aws/cf-openvidu-singlenode.yaml
     ```
 
 === "Architecture overview"

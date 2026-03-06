@@ -22,7 +22,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 To import the template into Azure, click the button below and you will be redirected to Azure.
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2Fcf-openvidu-elastic.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.5.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.6.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2Fcf-openvidu-elastic.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.6.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
 === "Architecture overview"

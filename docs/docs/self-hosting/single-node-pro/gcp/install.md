@@ -80,7 +80,7 @@ Once you click the button, you will see this window.
 
 * Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
 * Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/pro/singlenode/gcp"><code>openvidu-deployment/pro/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
-* For the **Git ref**, use <span class="copy-inline" data-copy="v3.5.0"><code>v3.5.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
+* For the **Git ref**, use <span class="copy-inline" data-copy="v3.6.0"><code>v3.6.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
 
 Finally, click Continue.
 ## Input Values
