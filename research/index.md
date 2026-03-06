@@ -1,4 +1,4 @@
-# OpenVidu research works
+# OpenVidu research publications
 
 ## Index
 

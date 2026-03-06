@@ -178,7 +178,15 @@
 }
 
 .gcp-icon {
-  background-color: #EA4335;
+  background-color: #34A853;
+}
+
+.digitalocean-icon {
+  background-color: #0080FF;
+}
+
+.oracle-icon {
+  background-color: #C74634;
 }
 
 .ov-meet-footer-btn-container p {
