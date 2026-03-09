@@ -23,7 +23,11 @@ hide:
 ![React video call platforms in 2026 — SaaS vs Self-hosted](/assets/images/blog/five-react-alternatives/poster.png "React video call platforms in 2026")
 
 
+<<<<<<< HEAD
 ## 1. Introduction
+=======
+## **1. Introduction**
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 
 When React developers need to add video calls to their applications, the first question is usually simple:
 
@@ -38,20 +42,33 @@ In practice, that usually means exploring well-known SaaS platforms that promise
 - No infrastructure headaches
 - Familiar turnkey experience
 
+<<<<<<< HEAD
 But there are questions teams often ask too late:
+=======
+But there is a question teams often ask too late:
+
+<!-- more -->
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 
 - What happens when video becomes core to your product?
 - What happens when usage grows faster than expected?
 - Is paying per minute still the smartest choice in 2026?
 
+<<<<<<< HEAD
 <!-- more -->
 
+=======
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 In this article, we explore the top React video call options in 2026. Not only by SDK quality and features, but also by the long-term impact of SaaS vs self-hosted infrastructure.
 
 !!! abstract "TL;DR"
     SaaS platforms is often the fastest start, but self-hosted options have reduced complexity and can offer stronger cost control, ownership, and flexibility as usage scales.
 
+<<<<<<< HEAD
 ## 2. The False Assumption: SaaS = Fast, Self-Hosted = Complex
+=======
+## **2. The False Assumption: SaaS = Fast, Self-Hosted = Complex**
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 
 _“Self-hosted? That sounds like media servers, DevOps overhead, and unnecessary complexity.”_
 
@@ -72,11 +89,19 @@ At that point, the questions shift toward:
 - Who controls recordings, user data, and compliance?
 - How much architectural flexibility do we really have?
 
+<<<<<<< HEAD
 The decision is no longer only technical. It becomes financial, operational, and strategic. Modern self-hosted solutions have quietly closed much of that complexity gap while preserving something SaaS cannot offer: **Ownership.**
 
 And that is where the decision becomes less about convenience and more about long-term control.
 
 ## 3. The 5 React Video Call Platforms to Consider in 2026
+=======
+Tthe decision is no longer only technical. It becomes financial, operational, and strategic. Modern self-hosted solutions have quietly closed much of that complexity gap while preserving something SaaS cannot offer: **Ownership.**
+
+And that is where the decision becomes less about convenience and more about long-term control.
+
+## **3. The 5 React Video Call Platforms to Consider in 2026**
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 
 Several platforms make it possible to add video calls to React applications quickly. Each one offers a different balance between ease of integration, scalability, and control.
 
@@ -327,11 +352,14 @@ Engineering-heavy teams that want ownership and deep customization of real-time 
 
 ### **[OpenVidu Meet](https://openvidu.io/)**
 
+<<<<<<< HEAD
 ![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet")
 ![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet")
 
 
 
+=======
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 Open source video platform built on top of LiveKit, increasing performance, reducing complexity and offering simplicity and scalability.
 
 **Hosting model**: Self-hosted
@@ -373,6 +401,7 @@ export function Meeting({ roomUrl }: { roomUrl: string }) {
 
 Teams that want the benefits of self-hosted infrastructure without the complexity of traditional media servers, especially those building video-first products where cost control, data ownership, and customization are priorities.
 
+<<<<<<< HEAD
 ## 4. Comparison Summary
 
  The best choice depends on your priorities and constraints. Here’s a high-level comparison of the platforms we covered:
@@ -387,6 +416,21 @@ Teams that want the benefits of self-hosted infrastructure without the complexit
 
 
 ## 5. Conclusion
+=======
+## **4. Comparison Summary**
+
+ The best choice depends on your priorities and constraints. Here’s a high-level comparison of the platforms we covered:
+
+| Platform | Integration style | Time to first call | Custom UI freedom | Backend/Auth effort | Ownership/control |
+| --- | --- | --- | --- | --- | --- |
+| **Agora** | React + Web SDK (`agora-rtc-react`) | Medium | High | Medium | Low |
+| **Zoom Video SDK** | Imperative SDK + UI toolkit | Medium | Medium | Medium | Low |
+| **Stream** |React SDK + composable UI components (`@stream-io/video-react-sdk`)  | Fast | Medium | Medium | Low |
+| **LiveKit** | React components (`@livekit/components-react`) with custom UI | Medium | High | High | Medium |
+| **OpenVidu Meet** | Web Component (`<openvidu-meet>`) + REST/Webhooks | Fast | Medium | Medium | High |
+
+## **5. Conclusion**
+>>>>>>> eb7a190a (Add images and blog post on React video call platforms)
 
 There is no universal winner. If your top priority is shipping fast with minimal operational overhead, SaaS options remain compelling, although self-hosted solutions like OpenVidu have significantly closed the complexity gap.
 
