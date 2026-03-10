@@ -129,7 +129,7 @@ Upon a new Egress request:
 
 #### Egress CPU overload killer
 
-By default the Egress service has the ability to **automatically kill active egresses under high CPU load**. If a >95% CPU load is sustained over 10 seconds, the Egress service will automatically terminate the most CPU-intensive active egress.
+By default the Egress service has the ability to **automatically kill active egresses under sustained high CPU load**. If a >95% CPU load is sustained over 10 seconds, the Egress service will automatically terminate the most CPU-intensive active egress.
 
 This helps preventing an egress process from overloading the entire Media Node.
 Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files):

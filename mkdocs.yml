@@ -246,6 +246,8 @@ nav:
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md
+      - Troubleshooting:
+          - Recording: docs/troubleshooting/recording.md
       - Releases: docs/releases.md
   # - Blog:
   #     - blog/index.md
