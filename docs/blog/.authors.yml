@@ -9,3 +9,28 @@ authors:
     description: ""
     avatar: https://avatars.githubusercontent.com/u/10628395?v=4
     url: ../about-us/#carlos-santos
+  carlosRuiz:
+    name: Carlos Ruiz
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorCR.jpg
+    url: https://openvidu.io/about-us/#carlos-ruiz
+  juanCarlos:
+    name: Juan Carlos Moreno
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorJCM.jpg
+    url: https://openvidu.io/about-us/#juan-carlos-moreno
+  sergioFernandez:
+    name: Sergio Fernández
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorSF.jpg
+    url: https://openvidu.io/about-us/#sergio-fernandez
+  mica:
+    name: Micael Gallego
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorMG.jpg
+    url: https://openvidu.io/about-us/#micael-gallego
+  patxi:
+    name: Francisco Gortázar
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorFG.jpg
+    url: https://openvidu.io/about-us/#francisco-gortazar
