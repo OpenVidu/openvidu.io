@@ -1,6 +1,36 @@
 authors:
   pabloFuente:
     name: Pablo Fuente # Author name
-    description: "" # Author description
-    avatar: https://avatars.githubusercontent.com/u/15049534?v=4 # Author avatar
-    url: https://github.com/pabloFuente # Author website URL
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorPF.jpg # Author avatar
+    url: https://openvidu.io/about-us/#pablo-fuente # Author website URL
+  carlosSantos:
+    name: Carlos Santos
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorCS.jpg
+    url: https://openvidu.io/about-us/#carlos-santos
+  carlosRuiz:
+    name: Carlos Ruiz
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorCR.jpg
+    url: https://openvidu.io/about-us/#carlos-ruiz
+  juanCarlos:
+    name: Juan Carlos Moreno
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorJCM.jpg
+    url: https://openvidu.io/about-us/#juan-carlos-moreno
+  sergioFernandez:
+    name: Sergio Fernández
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorSF.jpg
+    url: https://openvidu.io/about-us/#sergio-fernandez
+  mica:
+    name: Micael Gallego
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorMG.jpg
+    url: https://openvidu.io/about-us/#micael-gallego
+  patxi:
+    name: Francisco Gortázar
+    description: ""
+    avatar: https://openvidu.io/assets/images/about-us/authorFG.jpg
+    url: https://openvidu.io/about-us/#francisco-gortazar
