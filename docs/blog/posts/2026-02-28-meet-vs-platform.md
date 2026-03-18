@@ -13,15 +13,17 @@ hide:
   - version-selector
 ---
 
-# Levels of Abstraction in Real-Time Video: Choosing the Right Self-Hosted Solution in 2026
+# Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform
 
 ![OpenVidu Meet vs OpenVidu Platform](2026-02-09-meet-vs-platform-3.png)
 
+People are diverse, and that’s what makes life interesting. This fact implies as well some challenges: everyone needs' are different. In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using OpenVidu WebRTC ecosystem.
+
 ## Why Abstraction Matters
 
-People are diverse, and that’s what makes life interesting. However, in the world of real-time communications (RTC), this diversity means that different users require entirely different levels of abstraction to get the job done.
+In the world of real-time communications (RTC), diversity means that different users require entirely different levels of abstraction to get the job done. 
 
-<!-- more -->
+<!-- More -->
 
 ### The High-Level Consumer (Plug-and-Play)
 
