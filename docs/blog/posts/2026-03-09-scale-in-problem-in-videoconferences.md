@@ -11,7 +11,7 @@ hide:
  - version-selector
 ---
 
-# Scaling Up is easy, hell is Scaling Down: The Scale-In problem in videoconferences.
+# Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.
 
 Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.
 
@@ -29,11 +29,11 @@ The asymmetry runs deeper than just "be careful". Scale-out is a purely additive
 
 ## The "Stateful" Trap: Why Media Servers Aren't Web Servers
 
-The reason scale-in is so dangerous for videoconferencing comes down to one word: **state**.
+The reason scale-in is so dangerous for videoconferencing comes down to one word: **state**. This isn't a new insight — anyone who has operated distributed systems knows that stateful workloads are harder to move and terminate than stateless ones. But the nature of state in WebRTC makes it a particularly unforgiving case.
 
-A web server (or an API gateway, a GraphQL endpoint, a static file server) is fundamentally stateless. Each request arrives, is processed independently, and the response is sent back. If the server handling your HTTP request disappears mid-flight, the client simply retries on another server and nothing is lost. The server holds no lasting obligation to any client.
+With a typical web application, session state can be externalized: store it in Redis, a shared database, or a distributed cache, and any node in your fleet can pick up where another left off. The state isn't _inside_ the server — it's alongside it. A web server (or an API gateway, a GraphQL endpoint, a static file server) is fundamentally stateless. Each request arrives, is processed independently, and the response is sent back. If the server handling your HTTP request disappears mid-flight, the client simply retries on another server and nothing is lost. The server holds no lasting obligation to any client.
 
-A media server is the opposite. When a Room starts, the media server becomes the _anchor_ of that meeting. Each participant's WebRTC connection is established _directly to that specific node_. It manages the routing of hundreds of audio and video tracks. It may be recording the session. It may be running live transcription. The entire communication fabric of the Room hangs off that single machine.
+A media server is fundamentally different. When a Room starts, the media server becomes the _anchor_ of that meeting. Each participant's WebRTC connection is established _directly to that specific node_. It manages the routing of hundreds of audio and video tracks. It may be recording the session. It may be running live transcription. The entire communication fabric of the Room hangs off that single machine.
 
 ### You can't kill a node while people are talking
 
