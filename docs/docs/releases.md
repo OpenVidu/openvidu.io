@@ -57,6 +57,21 @@ description: Explore the latest OpenVidu releases, including new features, updat
 | Promtail / Loki | 3.5.11 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.11){:target="\_blank"} |
 | Mimir | 3.0.3 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.0.3){:target="\_blank"} |
 
+### Patch releases
+
+#### 3.6.1
+
+- **Global cpu monitoring for room allocation**: now OpenVidu will consider host-wide CPU load when deciding where to allocate new Rooms, instead of checking only sub-processes CPU load. This optimizes load distribution across all nodes of your cluster. You can learn more about how Rooms are allocated [here](https://openvidu.io/3.6.1/docs/self-hosting/production-ready/scalability/#rooms).
+- **New Troubleshooting recording documentation**: there is now a dedicated section to guide users on how to debug and solve common problems. Starting with [recordings](https://openvidu.io/3.6.1/docs/troubleshooting/recording/).
+- **Angular Components**: in recent versions of Firefox, it is no longer allowed to create a new screen track if one is already active, which prevents replacing the shared screen without first unpublishing it. As a result, the UI now automatically adapts when Firefox is detected, avoiding the use of screen replacement (replaceTrack) and instead aligning with the constraints imposed by the browser. See [Angular Components](https://openvidu.io/3.6.1/docs/ui-components/angular-components/).
+- **OpenVidu Meet**: optimized lock management by significantly reducing the number of Redis keys, minimizing read and write operations, lowering memory usage, improving TTLs for key deletion, and simplifying the overall system design.
+- **Artifact version updates**:
+
+    | Artifact               | Version | Info | Link         |
+    | ---------------------- | ------- | ---- | ---------- |
+    | MinIO | RELEASE.2026-03-04T16-04-53Z | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/chainguard-forks/minio/releases/tag/RELEASE.2026-03-04T16-04-53Z){:target="\_blank"} |
+    | Mimir | 3.0.4 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.0.4){:target="\_blank"} |
+
 ## 3.5.0
 
 !!! info "For the Release Notes of OpenVidu Meet 3.5.0, please visit here: [OpenVidu Meet 3.5.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#350){:target="_blank" .meet-link-color}"
