@@ -18,6 +18,12 @@
 
 - **OpenVidu Meet default path changed**: when deploying OpenVidu, the default path for OpenVidu Meet is now `/meet` (previously `/`). This facilitates the coexistence of OpenVidu Meet and a custom application on the same server. You can change this path to whatever you want (including the previous default `/`) following [these instructions](../docs/self-hosting/how-to-guides/customize-meet-base-path.md).
 
+### Patch releases
+
+#### 3.6.1
+
+- Optimized lock management by significantly reducing the number of Redis keys, minimizing read and write operations, lowering memory usage, improving TTLs for key deletion, and simplifying the overall system design.
+
 ## 3.5.0
 
 !!! info "For the Release Notes of OpenVidu Platform 3.5.0, please visit here: [OpenVidu Platform 3.5.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#350){:target="_blank" .platform-link-color}"
