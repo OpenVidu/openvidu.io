@@ -15,19 +15,19 @@ hide:
 
 # Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform
 
-![OpenVidu Meet vs OpenVidu Platform](2026-02-09-meet-vs-platform-3.png)
+![OpenVidu Meet vs OpenVidu Platform](/assets/images/blog/meet-vs-platform/meet-vs-platform2.png)
 
-People are diverse, and that’s what makes life interesting. This fact implies as well some challenges: everyone needs' are different. In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using OpenVidu WebRTC ecosystem.
+In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using the OpenVidu WebRTC ecosystem. 
 
 ## Why Abstraction Matters
 
-In the world of real-time communications (RTC), diversity means that different users require entirely different levels of abstraction to get the job done. 
+People are diverse, and that’s what makes life interesting. In the world of real-time communications (RTC), diversity means that different users require entirely different levels of abstraction to get the job done, from a "batteries included" scalable meeting application, to an extremely customizable media processing pipeline with access to low-level media SDKs and APIs. 
 
-<!-- More -->
+<!-- more -->
 
 ### The High-Level Consumer (Plug-and-Play)
 
-Think of your kid’s teacher. They need a videoconferencing system that simply works out of the box. For them, success is a stable connection where media handling, signaling, and device management happen invisibly in the background. At this level, abstraction is at its highest: the complexity is hidden behind a 'Join Meeting' button.
+Think of your kid’s teachers, for instance. They need a videoconferencing system that simply works out of the box. For them, success is a stable connection where media handling, signaling, and device management happen invisibly in the background. At this level, abstraction is at its highest: the complexity is hidden behind a 'Join Meeting' button.
  
 ### The Specialized Producer (Advanced Control)
 
@@ -39,9 +39,9 @@ On the other hand, a broadcaster or a live-event producer operates at a much dee
 
 ## Finding the Sweet Spot: Meet vs. Platform
 
-Choosing the right level of abstraction is a delicate balancing act. If the abstraction is too high, you lose the granular control essential for innovation. If it’s too low, you risk spending months reinventing the wheel—building infrastructure instead of delivering value.
+Choosing the right level of abstraction is a delicate balancing act. If the abstraction is too high, you lose the granular control essential for innovation, but you make your life easier by hiding the complexity of the system. If it’s too low, you risk spending months reinventing the wheel—building infrastructure instead of delivering value, but you are in full control of what happens under-the-hood. 
 
-To solve this dilemma, we’ve evolved. We are splitting the ecosystem into two distinct products, both maintaining the production-ready quality and reliability our community expects from OpenVidu:
+At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu.
 
 ### OpenVidu Meet: The Power of Integration
 
@@ -53,17 +53,21 @@ While it works out of the box, it remains highly flexible on the outside, allowi
 * **Privacy & Tech**: Virtual backgrounds and End-to-End Encryption (E2EE).
 * **Identity**: Full UI white-labeling and branding.
 
+![OpenVidu Meet screenshot](/assets/images/blog/meet-vs-platform/webcomponent-meeting.png)
+
 ### OpenVidu Platform: The Developer’s Canvas
 
-**OpenVidu Platform** is a powerful, self-hosted infrastructure that provides the **APIs and SDKs** necessary to build specialized real-time video experiences. It is designed for developers who need total sovereignty over the media flow.
+**OpenVidu Platform** is a production-ready, powerful, and self-hosted infrastructure that provides the **APIs and SDKs** necessary to build specialized real-time video experiences. It is designed for developers who need total sovereignty over the media flow.
 
-Rather than being limited by "rooms," the Platform gives you the building blocks to manipulate media at its core. It offers:
+Rather than being limited by "rooms", the Platform gives you the building blocks to manipulate media at its core. It offers:
 
-* **Granular Control**: Low-level WebRTC SDKs for any language and full management of audio/video/data tracks.
+* **Granular Control**: Low-level WebRTC SDKs for any language providing developers full management of audio/video/data tracks.
 * **Advanced Routing**: Total control over media ingestion and telephony (PSTN/SIP) integration.
 * **AI-Ready**: Direct hooks for real-time AI processing and media analysis.
 
-**The Key Difference**: > **OpenVidu Meet** is built around the concepts of **Rooms & Meetings**, whereas **OpenVidu Platform** is built around the fundamental concepts of **Audio & Video Tracks**.
+![OpenVidu Platform screenshot](/assets/images/blog/meet-vs-platform/ov-platform.png)
+
+**The Key Difference** > **OpenVidu Meet** is built around the concepts of **Rooms & Meetings**, whereas **OpenVidu Platform** is built around the fundamental concepts of **Audio & Video Tracks**.
 
 ## Conclusion: Strategy over Complexity
 
@@ -71,7 +75,7 @@ The choice between a high-level application and a low-level infrastructure depen
 
 * **Choose OpenVidu Meet** if your goal is to provide a world-class communication experience today, without the overhead of managing complex media pipelines. It allows you to focus on your business logic while we handle the meeting dynamics.
 
-* **Choose OpenVidu Platform** if you are pushing the boundaries of what’s possible with media—whether that’s building the next big broadcasting tool, integrating complex AI workflows, or requiring surgical control over every single data track.
+* **Choose OpenVidu Platform** if you are pushing the boundaries of what’s possible with media and you require total control over every single media track.
 
 At the end of the day, abstraction is about **freedom**: the freedom to choose how much of the 'under-the-hood' complexity you want to own, and how much you want to delegate to a reliable partner.
 
