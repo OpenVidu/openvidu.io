@@ -14,7 +14,8 @@ hide:
 
 # How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform
 
-![Header image suggestion: WebRTC connectivity paths showing UDP, TURN, TCP, TLS]
+![WebRTC connectivity paths](/assets/images/blog/network-config-and-video-quality/webrtc-network-paths-light.png#only-light){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/network-config-and-video-quality/webrtc-network-paths-dark.png#only-dark){ align=left }
 
 Real-time video applications seem fairly simple at first glance. A user clicks "Join", video and audio start flowing, and everyone can see and hear each other.
 
