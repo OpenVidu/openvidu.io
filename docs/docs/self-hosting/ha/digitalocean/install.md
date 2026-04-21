@@ -22,8 +22,7 @@ tags:
 This section describes how to deploy a production-ready OpenVidu High Availability setup on DigitalOcean. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but provisioned as DigitalOcean resources and automated using Terraform CLI.
 
 - DigitalOcean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings, and cluster data.
-- Media Node **scalability is not supported** in this deployment. The number of Media Nodes is fixed and must be defined before deployment.
-
+- Media Node scalability is managed via an **automated process (DigitalOcean Functions)** that scales the number of Media Nodes based on system load, although you can use a fixed number of media nodes.
 
 ## Prerequisites
 
@@ -44,6 +43,8 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Droplets are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
+    - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load.
+
 
 
 --8<-- "shared/self-hosting/do-custom-scale-in.md"
@@ -113,9 +114,29 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     <td>Specifies the DigitalOcean Droplet size for your Media Nodes.</td>
     </tr>
     <tr>
+    <td style="white-space: nowrap;"><code>initialNumberOfMediaNodes</code></td>
+    <td style="white-space: nowrap;"><code>1</code></td>
+    <td>Number of initial media nodes to deploy.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>minNumberOfMediaNodes</code></td>
+    <td style="white-space: nowrap;"><code>1</code></td>
+    <td>Minimum number of media nodes to deploy (for reference, manual scaling required).</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>maxNumberOfMediaNodes</code></td>
+    <td style="white-space: nowrap;"><code>5</code></td>
+    <td>Maximum number of media nodes to deploy (for reference, manual scaling required).</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>scaleTargetCPU</code></td>
+    <td style="white-space: nowrap;"><code>50</code></td>
+    <td>Target CPU percentage to scale up or down.</td>
+    </tr>
+    <tr>
     <td style="white-space: nowrap;"><code>fixedNumberOfMediaNodes</code></td>
-    <td style="white-space: nowrap;"><code>4</code></td>
-    <td>Fixed number of Media Nodes.</td>
+    <td style="white-space: nowrap;"><code>0</code></td>
+    <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>rtcEngine</code></td>
