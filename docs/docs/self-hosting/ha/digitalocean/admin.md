@@ -92,9 +92,30 @@ It is possible to change the instance size of both the Master Node and the Media
         ![Edit Autoscale Pool](../../../../assets/images/self-hosting/shared/do-edit-autoscale-pool.png){ .svg-img .dark-img }
         </figure>
 
+## Media Nodes Autoscaling Configuration
+
+You can modify the autoscaling configuration of the Media Nodes via `terraform.tfvars` file and `terraform apply`:
+
+=== "Media Nodes Autoscaling Configuration"
+
+    1. Go to the `terraform.tfvars` file and change the config related to autoscaling, such as:
+        - **scaleTargetCPU**
+        - **minNumberOfMediaNodes**
+        - **maxNumberOfMediaNodes**
+
+    2. Open a terminal and write the following command once you've changed the value/s.
+    ```
+    terraform apply
+    ```
+    3. Say yes to the modify change that terraform is proposing (the changes are the autoscale function redeploying with the new values), and you will have your changes applied in the 
+        <figure markdown>
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-autoscale-change.png){ .svg-img .dark-img }
+        </figure>
+
+
 ## Change Fixed Number of Media Nodes
 
-You can change the fixed number of Media Node by following these steps:
+You can change the fixed number of Media Nodes **in case you put a number of fixed Media Nodes** by following these steps:
 
 === "Change Fixed Number of Media Nodes"
 
@@ -107,6 +128,42 @@ You can change the fixed number of Media Node by following these steps:
     !!! warning
 
         This will delete the media nodes if you have set them to less than the number of media nodes that existed, you can stop them graceful manually by running the `/usr/local/bin/graceful_shutdown.sh` script and waiting for it to finish. You have to do it in all the media nodes because the autoscale pool deletes all and creates new ones.
+
+### Activate Scale In when Fixed Number of Media Nodes
+
+You can activate or deactivate the scale in when you decide you need autoscale option activated or not.
+
+=== "Activate Scale In"
+
+    1. Go to the `terraform.tfvars` file and change the config related to autoscaling, such as:
+        - **fixedNumberOfMediaNodes need to be set to 0**.
+        - **scaleTargetCPU** if you dont want the default.
+        - **minNumberOfMediaNodes** if you dont want the default.
+        - **maxNumberOfMediaNodes** if you dont want the default.
+
+    2. Open a terminal and write the following command once you've changed the value/s.
+    ```
+    terraform apply
+    ```
+    3. Say yes to the modify change that terraform is proposing (the changes are destroying the fixed number of media nodes and deploying the scale in function), and you will have your changes applied in the 
+        <figure markdown>
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-activate-scalein.png){ .svg-img .dark-img }
+        </figure>
+
+=== "Deactivate Scale In"
+
+    1. Go to the `terraform.tfvars` file and change the config related to autoscaling, such as:
+        - **fixedNumberOfMediaNodes need to be set to the value of your desire**.
+
+    2. Open a terminal and write the following command once you've changed the value/s.
+    ```
+    terraform apply
+    ```
+    3. Say yes to the modify change that terraform is proposing (the changes are destroying the scale in function and all the media nodes and deploying the fixed number of media nodes pool), and you will have your changes applied in the 
+        <figure markdown>
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-deactivate-scalein.png){ .svg-img .dark-img }
+        </figure>
+
 
 ## Administration and configuration
 

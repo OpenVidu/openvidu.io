@@ -60,7 +60,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 5. A `diff` will be shown with the changes made in the configuration files. You can review the changes and decide if you want to apply them or not. If you want to apply the changes, answer `Yes` to the question. If you want to discard the changes and stop the upgrading process, simply answer `No`.
 6. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
 7. **Repeat the steps 1 to 6 in all the Master Nodes of your deployment.** This is important because the Master Nodes need to be running the same version of OpenVidu.
-8. After upgrading all your Master Nodes, **you need to delete the Media Nodes** to apply the changes to run the Media Nodes with the new version. Go to your DigitalOcean web, Droplets tab, select the Media Nodes instances and terminate them. The fixed autoscale pool will automatically launch new Media Nodes with the updated configuration.
+8. After upgrading all your Master Nodes, **you need to delete the Media Nodes** to apply the changes to run the Media Nodes with the new version. Go to your DigitalOcean web, Droplets tab, select the Media Nodes instances and terminate them. The lambda will make new media nodes, or the autoscale pool if you have fixed media nodes.
 
 9. Once the Media Nodes are up and running, execute the following command in every Master Node to start OpenVidu High Availability again:
     ```bash
