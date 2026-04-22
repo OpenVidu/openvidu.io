@@ -17,7 +17,7 @@ Autoscaling is one of the killer features of cloud infrastructure. It promises z
 
 <!-- more -->
 
-This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure and GCP.
+This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.
 
 ## The Scaling Illusion: Why "Turning it Off" is Harder than "Turning it On"
 
@@ -26,6 +26,18 @@ Scaling _out_ is easy. Your CPU climbs past the alarm threshold, your autoscalin
 Scaling _in_ is where the illusion shatters. Your CPU drops, the policy fires in reverse, and the cloud provider picks a node to terminate. If that node is running a web server, this is fine — kill it, redirect traffic, done. If that node is hosting eight simultaneous videoconferences, you have just murdered forty people's calls mid-sentence.
 
 The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.
+
+<figure markdown>
+![Scale Out](../../assets/images/blog/scale-in-problem-in-videoconferences/scale-up.png){ .svg-img .dark-img }
+<figcaption>Scale out situation</figcaption>
+</figure>
+
+---
+
+<figure markdown>
+![Scale In](../../assets/images/blog/scale-in-problem-in-videoconferences/scale-down.png){ .svg-img .dark-img }
+<figcaption>Scale in situation</figcaption>
+</figure>
 
 ## The "Stateful" Trap: Why Media Servers Aren't Web Servers
 
@@ -55,11 +67,20 @@ The idea is straightforward:
 
 The challenge is integrating this logic with the autoscaling mechanisms of each cloud provider, all of which have their own opinions about how termination should work.
 
+<figure markdown>
+![Scale In](../../assets/images/blog/scale-in-problem-in-videoconferences/draining-strategy.png){ .svg-img .dark-img }
+<figcaption>Draining strategy</figcaption>
+</figure>
+
 ## Bringing Scale-In to the Major Clouds
 
 OpenVidu implements the draining strategy on every cloud it supports. The approach differs per provider because each exposes different primitives for intercepting a termination decision.
 
 ### 1. AWS: Intercepting Scale-In with Lifecycle Hooks
+
+<figure markdown>
+![AWS logo](../../assets/images/blog/scale-in-problem-in-videoconferences/aws-logo.png){ .svg-img .dark-img }
+</figure>
 
 [AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"} support a native feature called [**Lifecycle Hooks**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html){:target="_blank"}. When the ASG decides to terminate an instance (because CPU has dropped below the target), instead of killing it immediately it puts the instance in a `Terminating:Wait` state and fires a lifecycle transition event. The instance stays alive in this pending state until something either completes the hook or the wait timeout expires.
 
@@ -75,6 +96,11 @@ Of the three clouds, this is the most direct implementation. The Lifecycle Hook 
 
 ### 2. Azure: Orchestrating Virtual Machine Scale Sets (VMSS)
 
+<figure markdown>
+![Azure logo](../../assets/images/blog/scale-in-problem-in-videoconferences/azure-logo.png){ .svg-img .dark-img }
+</figure>
+
+
 Azure's native scale-in mechanism for [Virtual Machine Scale Sets (VMSS)](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target="_blank"} is a [**termination notification**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-terminate-notification){:target="_blank"}: when a scale-in event fires, Azure notifies the instance and gives it up to **15 minutes** to wrap up — after that, it terminates the VM regardless of what is running inside. Unlike the AWS Lifecycle Hook, this ceiling is hard and cannot be extended. A business meeting can easily last longer than 15 minutes, so relying on this native feature alone would still risk disrupting active sessions.
 
 To work around it, OpenVidu takes a more active stance and bypasses the native scale-in policy altogether:
@@ -88,6 +114,11 @@ The trade-off is a **latency of up to 5 minutes** between the moment an instance
 
 ### 3. Google Cloud (GCP): Precision with Managed Instance Groups (MIGs)
 
+<figure markdown>
+![GCP logo](../../assets/images/blog/scale-in-problem-in-videoconferences/gcp-logo.png){ .svg-img .dark-img }
+</figure>
+
+
 [GCP Managed Instance Groups](https://cloud.google.com/compute/docs/instance-groups){:target="_blank"} don't provide a native "wait for draining" hook at the level of a single instance in the same way AWS does. OpenVidu's approach here is to sidestep the native scale-in mechanism entirely:
 
 1. The MIG is configured for **scale-out only**. GCP autoscaling can add instances but will never directly terminate one.
@@ -96,6 +127,24 @@ The trade-off is a **latency of up to 5 minutes** between the moment an instance
 4. The shutdown script marks the node as draining, waits for all active Rooms and jobs to complete, and then terminates the process — letting GCP reclaim the VM.
 
 This approach gives OpenVidu full control over the termination decision and timeline, at the cost of some added complexity in the coordination layer.
+
+### 4. Digital Ocean (DO): External Orchestration with Functions
+
+<figure markdown>
+![DO logo](../../assets/images/blog/scale-in-problem-in-videoconferences/digitalocean-logo.png){ .svg-img .dark-img }
+</figure>
+
+Unlike AWS, Azure, or GCP, DigitalOcean does not provide a high-level "Auto Scaling Group" abstraction that manages instance lifecycles for you. To achieve elasticity in DO, OpenVidu implements a custom orchestration layer using **DigitalOcean Functions** acting as an external control plane.
+
+Since there is no native mechanism to intercept a termination decision, the responsibility of both scaling and safety moves entirely to our serverless logic and node-level monitoring:
+
+1.  **The Orchestrator (DO Function):** A scheduled function periodically evaluates the cluster's demand by querying the media nodes.
+2.  **Scaling Out:** If demand is high, the function uses the DigitalOcean API to provision new Droplets and adds them to the pool.
+3.  **Scaling In (The Draining Flow):** When the function determines a node is no longer needed:
+    *   It flags the specific Droplet as "draining" (via metadata or an external signal).
+4.  **Node-side Detection:** Each Media Node runs a **cron job every two minutes** that checks for this draining state. If it detects the tag, it triggers its internal **graceful shutdown script**, stopping the node from accepting new Rooms and waiting for active sessions to end then deleting itself.
+
+This approach effectively turns a simple "server provisioning" API into a sophisticated, state-aware autoscaling system, ensuring that even without provider-level hooks, no meeting is ever interrupted.
 
 ## Conclusion: If you aren't scaling down, you aren't truly in the Cloud.
 
@@ -108,8 +157,7 @@ Scale-in for media servers isn't a flag you flip. It requires understanding that
 | :material-aws: [**AWS**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"} | ASG Lifecycle Hooks | Native first-class support. No need to protect instances or run external runbooks. Configurable timeout. | — |
 | :material-microsoft-azure: [**Azure**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target="_blank"} | VMSS instance protection + Automation Account runbook + Run Command | No hard ceiling on session duration. Node drives its own removal. | Up to 5 min latency before graceful shutdown begins. More moving parts to deploy. |
 | :material-google-cloud: [**GCP**](https://cloud.google.com/compute/docs/instance-groups){:target="_blank"} | Scale-out-only MIG + Cloud Run Function + per-node cron job | Full control over which instance is selected and when. No dependency on provider-level termination hooks. | Polling-based coordination (1-min cron). Slightly higher complexity in the coordination layer. |
-| <span style="white-space:nowrap">:material-digital-ocean: [**DigitalOcean**](https://docs.digitalocean.com/products/droplets/){:target="_blank"}</span> | _(Autoscaling not yet supported)_ | Fixed-size pool; simple to reason about. | No automatic scale-in. Pool size must be managed manually. |
-| :custom-oracle-cloud-infrastructure: [**OCI**](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} | _(Coming soon)_ | — | — |
+| <span style="white-space:nowrap">:material-digital-ocean: [**DigitalOcean**](https://docs.digitalocean.com/products/droplets/){:target="_blank"}</span> | DO Functions | High flexibility; allows implementation of custom draining logic | Requires external scheduling (e.g., cron) and manual coordination of the "draining" state. |
 
 Ask yourself: does your current videoconferencing infrastructure actually scale down? If the answer is "I'm not sure" or "we just set the minimum to something safe", you are paying for idle nodes every single night, every weekend, every off-peak hour.
 
