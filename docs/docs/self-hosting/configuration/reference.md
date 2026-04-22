@@ -23,6 +23,9 @@ This file defines global configuration parameters used by other services. Such a
 | **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | If `true`, use path-style access for the external S3 service if used. |
 | **`EXTERNAL_S3_BUCKET_APP_DATA`** | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
 | **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | External S3 bucket used in High Availability to store Observability data. |
+| **`EXTERNAL_S3_SSE_TYPE`** | Server-side encryption algorithm for the external S3 service. Supported values: `SSE-S3` (S3-managed AES256) or `SSE-KMS` (AWS KMS-managed). Leave empty to disable SSE. |
+| **`EXTERNAL_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. |
 | **`MONGO_ADMIN_USERNAME`** | MongoDB admin username. |
 | **`MONGO_ADMIN_PASSWORD`** | MongoDB admin password. |
 | **`DASHBOARD_ADMIN_USERNAME`** | Admin username for OpenVidu Dashboard |
@@ -58,6 +61,9 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
 | **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
 | **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm for the OpenVidu Meet S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
+| **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_AZURE_SUBCONATAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
@@ -111,6 +117,9 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY`** | Access key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_SECRET_KEY`** | Secret key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_REGION`** | AWS region of the recordings S3 bucket |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_TYPE`** | Server-side encryption algorithm for the recordings S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption for the recordings bucket. **Required** when `V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the recordings bucket. **Only used with `SSE-KMS`**. |
 | **`V2COMPAT_OPENVIDU_WEBHOOK`** | If `true`, the OpenVidu V2 Compatibility Server will send webhooks to `V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT` |
 | **`V2COMPAT_OPENVIDU_WEBHOOK_HEADERS`** | JSON Array list of headers to send in the OpenVidu V2 Webhook events. For example: <br>`["Content-Type: application/json"]` |
 | **`V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`** | Comma-separated list of OpenVidu V2 Webhook events to send. All available events are: <ul><li>sessionCreated</li><li>sessionDestroyed</li><li>participantJoined</li><li>participantLeft</li><li>webrtcConnectionCreated</li><li>webrtcConnectionDestroyed</li><li>recordingStatusChanged</li><li>signalSent</li></ul> |
