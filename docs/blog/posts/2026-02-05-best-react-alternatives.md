@@ -2,7 +2,11 @@
 draft: false
 date: 2026-02-05
 categories:
-  - Development
+  - Vertical
+  - React
+  - Video
+  - SaaS
+  - Self-hosted
 authors:
   - csantosm
 hide:
