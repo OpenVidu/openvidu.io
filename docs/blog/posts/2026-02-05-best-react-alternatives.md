@@ -17,7 +17,7 @@ hide:
 ![React video call platforms in 2026 — SaaS vs Self-hosted](/assets/images/blog/five-react-alternatives/poster.png "React video call platforms in 2026")
 
 
-## **1. Introduction**
+## 1. Introduction
 
 When React developers need to add video calls to their applications, the first question is usually simple:
 
@@ -45,7 +45,7 @@ In this article, we explore the top React video call options in 2026. Not only b
 !!! abstract "TL;DR"
     SaaS platforms is often the fastest start, but self-hosted options have reduced complexity and can offer stronger cost control, ownership, and flexibility as usage scales.
 
-## **2. The False Assumption: SaaS = Fast, Self-Hosted = Complex**
+## 2. The False Assumption: SaaS = Fast, Self-Hosted = Complex
 
 _“Self-hosted? That sounds like media servers, DevOps overhead, and unnecessary complexity.”_
 
@@ -70,7 +70,7 @@ Tthe decision is no longer only technical. It becomes financial, operational, an
 
 And that is where the decision becomes less about convenience and more about long-term control.
 
-## **3. The 5 React Video Call Platforms to Consider in 2026**
+## 3. The 5 React Video Call Platforms to Consider in 2026
 
 Several platforms make it possible to add video calls to React applications quickly. Each one offers a different balance between ease of integration, scalability, and control.
 
@@ -362,7 +362,7 @@ export function Meeting({ roomUrl }: { roomUrl: string }) {
 
 Teams that want the benefits of self-hosted infrastructure without the complexity of traditional media servers, especially those building video-first products where cost control, data ownership, and customization are priorities.
 
-## **4. Comparison Summary**
+## 4. Comparison Summary
 
  The best choice depends on your priorities and constraints. Here’s a high-level comparison of the platforms we covered:
 
@@ -374,7 +374,7 @@ Teams that want the benefits of self-hosted infrastructure without the complexit
 | **LiveKit** | React components (`@livekit/components-react`) with custom UI | Medium | High | High | Medium |
 | **OpenVidu Meet** | Web Component (`<openvidu-meet>`) + REST/Webhooks | Fast | Medium | Medium | High |
 
-## **5. Conclusion**
+## 5. Conclusion
 
 There is no universal winner. If your top priority is shipping fast with minimal operational overhead, SaaS options remain compelling, although self-hosted solutions like OpenVidu have significantly closed the complexity gap.
 
