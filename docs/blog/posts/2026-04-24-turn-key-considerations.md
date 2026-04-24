@@ -15,7 +15,6 @@ authors:
   - carlosRuiz
 hide:
   - navigation
-  - toc
   - search-bar
   - version-selector
 ---
