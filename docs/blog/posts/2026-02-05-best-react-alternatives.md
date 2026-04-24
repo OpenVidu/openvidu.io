@@ -3,10 +3,10 @@ draft: false
 date: 2026-02-05
 categories:
   - Vertical
+tags:
   - React
-  - Video
-  - SaaS
-  - Self-hosted
+  - Development
+  - webRTC
 authors:
   - csantosm
 hide:
