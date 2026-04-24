@@ -948,3 +948,36 @@ h2.meetplatform-slogan {
 .about-us-img {
   max-height: 500px;
 }
+
+
+/* BEGIN TODO: REMOVE WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM */
+.md-tabs__link:has(.md-tabs__new-badge) {
+  opacity: 1;
+}
+
+.md-tabs__link-text {
+  opacity: 0.7;
+}
+
+.md-tabs__item--active .md-tabs__link-text,
+.md-tabs__link:hover .md-tabs__link-text {
+  opacity: 1;
+}
+
+.md-tabs__new-badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0px 5px;
+  font-size: 0.58em;
+  font-weight: 800;
+  line-height: 2em;
+  color: black;
+  background-color: #ffcc00;
+  border-radius: 3px;
+  vertical-align: middle;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* END TODO */
