@@ -1,8 +1,12 @@
 ---
-draft: true
+draft: false
 date: 2026-03-09
 categories:
- - No OV - Tecnología; WebRTC / MoQ / RTMP / …
+ - Technology
+tags:
+ - DevOps
+ - Cloud Infrastructure
+ - Autoscaling
 authors:
  - sergio
 hide:
@@ -14,6 +18,11 @@ hide:
 # Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.
 
 Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.
+
+<figure markdown>
+![Scale In](../../assets/images/blog/scale-in-problem-in-videoconferences/scale-down.png){ .svg-img .dark-img }
+<figcaption>Scale in situation</figcaption>
+</figure>
 
 <!-- more -->
 
@@ -30,13 +39,6 @@ The asymmetry runs deeper than just "be careful". Scale-out is a purely additive
 <figure markdown>
 ![Scale Out](../../assets/images/blog/scale-in-problem-in-videoconferences/scale-up.png){ .svg-img .dark-img }
 <figcaption>Scale out situation</figcaption>
-</figure>
-
----
-
-<figure markdown>
-![Scale In](../../assets/images/blog/scale-in-problem-in-videoconferences/scale-down.png){ .svg-img .dark-img }
-<figcaption>Scale in situation</figcaption>
 </figure>
 
 ## The "Stateful" Trap: Why Media Servers Aren't Web Servers
