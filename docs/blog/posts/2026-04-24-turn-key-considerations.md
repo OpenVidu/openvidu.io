@@ -22,7 +22,7 @@ hide:
 
 # Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN
 
-![Sloth watching a spinner waiting to connect to the Daily Meeting](/assets/images/blog/turn-key-considerations/vsc.png "Sloth watching a spinner waiting to connect to the Daily Meeting"){ width=50% }
+![Sloth watching a spinner waiting to connect to the Daily Meeting](/assets/images/blog/2026-04-24-turn-key-considerations/vsc.png "Sloth watching a spinner waiting to connect to the Daily Meeting"){ width=50% }
 
 There's a clear gap between a WebRTC demo and something you can actually run in production, and it usually sits at the TURN layer. Your demo might work fine on a clean network, but once real users show up behind NATs, corporate firewalls, and mobile gateways, the calls simply die without it.
 
@@ -34,8 +34,8 @@ To understand why TURN is important, a little context is necessary: WebRTC enabl
 
 How many people end up needing that plan B? More than you'd think. A small study by Philipp Hancke shows that up to 17.7%[^1] of sessions go through a TURN relay. And that data is from 2017: with the rise of CGNAT (large-scale NAT used by mobile carriers to share a single public IP among thousands of users) in mobile networks and increasingly restrictive corporate firewalls, it's reasonable to think that today, in 2026, the figure is even higher.
 
-![WebRTC traffic distribution](/assets/images/blog/turn-key-considerations/turn-usage-light.png#only-light "WebRTC traffic distribution"){ width=70% }
-![WebRTC traffic distribution](/assets/images/blog/turn-key-considerations/turn-usage-dark.png#only-dark "WebRTC traffic distribution"){ width=70% }
+![WebRTC traffic distribution](/assets/images/blog/2026-04-24-turn-key-considerations/turn-usage-light.png#only-light "WebRTC traffic distribution"){ width=70% }
+![WebRTC traffic distribution](/assets/images/blog/2026-04-24-turn-key-considerations/turn-usage-dark.png#only-dark "WebRTC traffic distribution"){ width=70% }
 
 The TURN layer is one of those silent but essential pieces of WebRTC: it wrestles daily with firewall policies, is powerful enough to become an attack vector if misconfigured, and drags along so many operational decisions that it ends up being an infrastructure project with its own operations team. This post covers why TURN is inevitable, why operating it well costs more than it seems, and how OpenVidu turns it into part of the platform instead of that classic server no one touches and everyone says "That service is not my problem, mate!"
 
@@ -117,7 +117,7 @@ At OpenVidu we've applied hardening recommendations while always keeping platfor
 3. **Restricting the relay port range.** In cases where OpenVidu is deployed in a NAT environment, the relay port range is restricted to the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.
 4. **Credentials rotate every 24 hours by default**, and are generated using HMAC-SHA256, making them unpredictable and difficult to guess.
 
-![OpenVidu TURN architecture](/assets/images/blog/turn-key-considerations/turn_openvidu.png "OpenVidu TURN architecture"){ width=80% }
+![OpenVidu TURN architecture](/assets/images/blog/2026-04-24-turn-key-considerations/turn_openvidu.png "OpenVidu TURN architecture"){ width=80% }
 
 ## Conclusion
 
