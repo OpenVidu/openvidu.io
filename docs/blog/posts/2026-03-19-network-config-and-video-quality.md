@@ -1,9 +1,11 @@
 ---
-draft: true
-date: 2026-03-19
+draft: false
+date: 2026-04-28
 categories:
-  - OpenVidu Features
+  - Technology
+tags:
   - WebRTC
+  - Networking
 authors:
   - pabloFuente
 hide:
