@@ -2,11 +2,15 @@
 draft: false
 date: 2026-04-24
 categories:
-  - OpenVidu Features
+  - OpenVidu Platform
+  - Technology
+tags:
+  - TURN
   - WebRTC
   - Infrastructure
   - Security
-  - Self-hosted
+  - Connectivity
+  - NAT traversal
 authors:
   - carlosRuiz
 hide:
