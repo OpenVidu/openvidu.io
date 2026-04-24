@@ -67,7 +67,7 @@ services:
             - --user=<USERNAME>:<PASSWORD>
 ```
 
-You might think that's enough—that you've configured your TURN server and your clients should be able to use it with a username and password… Well, NOPE. Several things worth pointing out:
+You might think that's enough, that you've configured your TURN server and your clients should be able to use it with a username and password… Well, NOPE. Several things worth pointing out:
 
 1. **The user is fixed.** Credentials have to reach the client somehow, and if they're static, any user who captures those keys while loading your video conferencing web app can use them in the future to employ your TURN server as a proxy, and even attempt to reach internal services in your infrastructure.
 2. **Port 3478 isn't always allowed.** Although it's the default and recommended port, sometimes it's better to deploy TURN on port 443 TCP, which is the HTTPS port and, over UDP, the default QUIC port, because it's the port most likely to be open on any firewall.
