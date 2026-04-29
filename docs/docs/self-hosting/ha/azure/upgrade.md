@@ -89,7 +89,7 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 /usr/local/bin/store_secret.sh save OPENVIDU_VERSION "3.0.0"
 ```
 
-Notice the `store_secret.sh` command at the end. This command is necessary to update the `OPENVIDU_VERSION` secret in the Key Vault, which is used by the Azure deployment to know which version of OpenVidu should be running in Media Nodes. You need to do this in the Master Node only.
+Notice the `store_secret.sh` command at the end. This command is necessary to update the `OPENVIDU_VERSION` secret in the Azure Key Vault, which is used by the Azure deployment to know which version of OpenVidu should be running in Media Nodes. You need to do this in the Master Node only.
 
 Remember to **terminate the Media Nodes** after rolling back to the previous version so the Scale Set can launch new Media Nodes with the restored configuration. You can do this by going to your Azure Instances Panel, selecting the Media Nodes instances, and terminating them.
 
