@@ -62,7 +62,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
         Any missing images will be pulled automatically when you run `systemctl start openvidu`.
 
 
-5. After the last intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to your DigitalOcean web, Droplets tab, select the Media Nodes instances and terminate them. The DigitalOcean Autoscale Pool will make new media nodes, or the fixed pool if you have fixed media nodes.
+5. After the last intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to your DigitalOcean web, Droplets tab, select the Media Nodes instances and terminate them. The Digital Ocean Function will make new media nodes, or the Fixed Autoscale Pool if you have fixed media nodes.
 6. Once the Media Nodes are up and running, start OpenVidu Elastic again by executing the following command in the Master Node:
 
     ```bash
