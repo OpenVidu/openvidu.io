@@ -12,15 +12,15 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 </div>
 
 
-Google Cloud Platform OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform from Google Cloud Platform.
+Google Cloud Platform OpenVidu Single Node PRO deployments are internally identical to On Premises Single Node PRO deployments, so you can follow the same instructions from [On Premises Single Node PRO](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform from Google Cloud Platform.
 
 However, there are certain things worth mentioning:
 
 ## Start and stop OpenVidu through Google Cloud Platform Console
 
-You can start and stop all services as explained in the [On Premises Single Node](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Virtual Machine instance directly from Google Cloud Platform Console. This will stop all services running in the instance and reduce Google Cloud Platform costs.
+You can start and stop all services as explained in the [On Premises Single Node PRO](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Virtual Machine instance directly from Google Cloud Platform Console. This will stop all services running in the instance and reduce Google Cloud Platform costs.
 
-=== "Stop OpenVidu Single Node"
+=== "Stop OpenVidu Single Node PRO"
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-pro`. Click on it.
@@ -30,7 +30,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     ![Stop instance](../../../../assets/images/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img }
     </figure>
 
-=== "Start OpenVidu Single Node"
+=== "Start OpenVidu Single Node PRO"
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-pro`.  Click on it.
@@ -42,7 +42,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 ## Change the instance type
 
-You can change the instance type of the OpenVidu Single Node instance to adapt it to your needs. To do this, follow these steps:
+You can change the instance type of the OpenVidu Single Node PRO instance to adapt it to your needs. To do this, follow these steps:
 
 1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
 2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-pro`. Click on it.
@@ -59,7 +59,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
 ## Administration and configuration
 
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node Administration](../on-premises/admin.md).
+Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node PRO Administration](../on-premises/admin.md).
 
 Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
@@ -76,7 +76,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
         </figure>
-    4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
+    4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node-pro) -> [_Start_](#start-openvidu-single-node-pro) to apply the changes to the OpenVidu Single Node PRO deployment.
 
     Changes will be applied automatically.
 
