@@ -7,7 +7,7 @@ description: Learn how to perform administrative tasks on an Oracle Cloud Infras
 
 <div class="provider-chip" markdown>
 
-:material-cloud:{ .provider-chip-icon } Oracle Cloud Infrastructure
+:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
 
 </div>
 

@@ -7,7 +7,7 @@ description: How to upgrade OpenVidu Single Node PRO on Oracle Cloud Infrastruct
 
 <div class="provider-chip" markdown>
 
-:material-cloud:{ .provider-chip-icon } Oracle Cloud Infrastructure
+:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
 
 </div>
 
