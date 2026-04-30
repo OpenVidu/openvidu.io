@@ -7,7 +7,7 @@ description: OpenVidu Single Node COMMUNITY deployment on Oracle Cloud Infrastru
 
 <div class="provider-chip" markdown>
 
-:material-cloud:{ .provider-chip-icon } Oracle Cloud Infrastructure
+:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
 
 </div>
 
