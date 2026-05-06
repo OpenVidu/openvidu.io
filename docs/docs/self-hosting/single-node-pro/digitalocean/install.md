@@ -114,6 +114,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 1. Clone the OpenVidu repository with the terraform files:
     ```
     git clone https://github.com/OpenVidu/openvidu-digitalocean.git
+    git -C openvidu-digitalocean checkout 3.6.1
     cd openvidu-digitalocean/pro/singlenode
     ```
 2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
