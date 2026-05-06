@@ -51,7 +51,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 1. Clone the OpenVidu repository with the terraform files:
     ```bash
     git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-    git -C openvidu-digitalocean checkout 3.6.1
+    git -C openvidu-digitalocean checkout 3.7.0
     cd openvidu-digitalocean/pro/elastic
     ```
 2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.

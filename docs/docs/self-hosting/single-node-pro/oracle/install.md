@@ -224,6 +224,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 1. Clone the OpenVidu repository with the Terraform files:
     ```bash
     git clone https://github.com/OpenVidu/openvidu-oracle.git
+    git -C openvidu-oracle checkout 3.7.0
     cd openvidu-oracle/pro/singlenode
     ```
 2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
