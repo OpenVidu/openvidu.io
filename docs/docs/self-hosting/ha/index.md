@@ -21,4 +21,6 @@ Choose your provider:
 
 [:material-digital-ocean:{.icon .lg-icon .provider-icon} **DigitalOcean**](./digitalocean/index.md){ .md-button .md-button--primary .provider-link }
 
+[:custom-oracle-cloud-infrastructure:{.icon .lg-icon .provider-icon} **OCI <span class="provider-coming-soon">Coming soon!</span>**](){ .md-button .md-button--primary .provider-link .provider-link-coming-soon }
+
 </div>

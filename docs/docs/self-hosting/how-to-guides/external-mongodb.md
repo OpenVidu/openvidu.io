@@ -6,7 +6,7 @@ description: Configure OpenVidu to use an external MongoDB deployment instead of
 
 You can connect OpenVidu to a managed or self-hosted MongoDB deployment if you prefer to run the database outside of the OpenVidu deployment. This is useful when you already operate a production-ready MongoDB cluster or want to use a cloud-hosted service such as MongoDB Atlas.
 
-When you supply an external connection string, the internal MongoDB service will be disabled automatically to avoid running two instances simultaneously. 
+When you supply an external connection string, the internal MongoDB service will be disabled automatically to avoid running two instances simultaneously.
 
 ## Standard MongoDB deployments
 
@@ -28,7 +28,7 @@ You can also use `mongodb+srv://` URIs for Atlas or DNS SRV-based clusters.
     - **Single Node**: `/opt/openvidu/config/openvidu.env`
     - **Elastic / High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
 
-3. Provide the external connection string at `EXTERNAL_MONGO_URI` and let `MONGO_ENABLED` set to `true`:
+3. Provide the external connection string in `EXTERNAL_MONGO_URI` and leave `MONGO_ENABLED` set to `true`:
 
     ```bash
     MONGO_ENABLED=true
@@ -45,7 +45,7 @@ Restart the node so the new database configuration is applied across the deploym
 systemctl restart openvidu
 ```
 
-After the restart, verify that OpenVidu services can reach the external cluster. If all services function correctly, the configuration is complete. If not, double-check the connection string and ensure that the MongoDB instance is accessible from the OpenVidu nodes.
+After the restart, verify that OpenVidu services can reach the external cluster. If all services are functioning correctly, the configuration is complete. If not, double-check the connection string and ensure that the MongoDB instance is accessible from the OpenVidu nodes.
 
 ## Amazon DocumentDB
 
@@ -57,7 +57,6 @@ Amazon DocumentDB is protocol-compatible with MongoDB and can be used as the ext
 ### 1. Download the AWS trust store
 
 SSH into the Single Node deployment or one of the Master Nodes in an Elastic / High Availability cluster and download the AWS trust store bundle, so the services can validate the TLS certificate presented by DocumentDB:
-
 
 ```bash
 wget -O mongodb_tls_ca.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem

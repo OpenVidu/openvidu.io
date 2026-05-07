@@ -11,14 +11,13 @@ description: How to upgrade OpenVidu High Availability on-premises deployments.
 
 </div>
 
-
 OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
 
 ## Upgrading OpenVidu High Availability
 
-Upgrade OpenVidu High Availability is very simple. These are the steps you need to follow:
+Upgrading OpenVidu High Availability is very simple. These are the steps you need to follow:
 
-1. First, ensure to shut down OpenVidu High Availability. SSH into all the nodes and execute the following command:
+1. First, ensure you shut down OpenVidu High Availability. SSH into all the nodes and execute the following command:
 
     ```bash
     systemctl stop openvidu
@@ -30,14 +29,7 @@ Upgrade OpenVidu High Availability is very simple. These are the steps you need 
     sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
     ```
 
-    !!! info
-        If instead of upgrading to the latest version you want to upgrade to a specific version, you can execute the following command:
-
-        ```bash
-        sh <(curl -fsSL http://get.openvidu.io/update/<VERSION>/update.sh)
-        ```
-
-        Where `<VERSION>` is the version you want to upgrade to.
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
 3. In all the nodes, you will see the following output:
 
@@ -61,10 +53,19 @@ Upgrade OpenVidu High Availability is very simple. These are the steps you need 
       No
     ```
 
-4. Answer `Yes` to the question and your OpenVidu will be upgraded to the asked version.
-5. A `diff` will be shown with the changes made in the configuration files. You can review the changes and decide if you want to apply them or not. If you want to apply the changes, answer `Yes` to the question. If you want to discard the changes and stop the upgrading process, simply answer `No`.
-6. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
-7. Execute the following command in all the nodes:
+4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
+
+    For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
+
+    !!! warning
+        The updater will flag any deployment breaking changes if they are present. Pay special attention to these, as they may require you to update firewall rules, open or close specific ports, or perform other manual configuration changes.
+
+    !!! info "Pulling Docker images"
+        When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
+
+        Any missing images will be pulled automatically when you run `systemctl start openvidu`.
+
+5. After the last intermediate upgrade completes, execute the following command in all the nodes:
 
 ```bash
 systemctl start openvidu && journalctl -f -u openvidu
@@ -91,13 +92,13 @@ You need to do this in all the nodes of your OpenVidu High Availability deployme
 
 ## Recommendations
 
-- Always upgrade all the nodes of your OpenVidu High Availability deployment. Otherwise, you may face compatibility issues between the different versions of OpenVidu running in your deployment.
-- On any upgrade problem, a redeployment is always recommended for a clean installation.
-- Keep your Docker and Docker Compose versions updated.
-- Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
+- Always upgrade all nodes in your OpenVidu High Availability deployment. Running mismatched versions across nodes may cause compatibility issues.
+- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
+- Keep your Docker and Docker Compose versions up to date.
+- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
 
-    ```bash
-    docker image prune -a
-    ```
+  ```bash
+  docker image prune -a
+  ```
 
-    This command will remove all the images that are not being used by any container.
+  This command removes all images that are not currently in use by any container.

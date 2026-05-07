@@ -14,7 +14,7 @@ description: Learn how to perform administrative tasks on a DigitalOcean OpenVid
 
 The OpenVidu High Availability deployment on DigitalOcean is fully automated using the Terraform CLI. It provisions 4 Droplets for the Master Nodes, while Media Nodes are managed through a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/autoscale/){:target=\_blank}.
 
-Internally, the DigitalOcean High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth taking into account:
+Internally, the DigitalOcean High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth keeping in mind:
 
 ## Cluster shutdown and startup
 
@@ -30,7 +30,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         ![Edit Button Location Autoscale Pool](../../../../assets/images/self-hosting/ha/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
         </figure>
     3. Drop down the **Number of Droplets** to 0, click _"Save"_ and wait for it to apply the changes.
-    4. After confirming that all Media Node instances are terminated, in the _"Droplets"_ tab select the droplet called `<STACK_NAME>-master-node-1`. Click on it to go to the Master Node 1 instance, there click on _"Power"_ and then _"Turn off"_ the droplet.
+    4. After confirming that all Media Node instances are terminated, in the _"Droplets"_ tab select the droplet called `<STACK_NAME>-master-node-1`. Click on it to go to the Master Node 1 instance, then click _"Power"_ and then _"Turn off"_ the droplet.
         <figure markdown>
         ![Turn Off Master Node 1](../../../../assets/images/self-hosting/ha/digitalocean/turn-off-master-node-1.png){ .svg-img .dark-img }
         </figure>    
@@ -48,11 +48,11 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         </figure>
     3. Wait until the instance is running.
     4. Repeat steps 2 and 3 until all Master Nodes are up and running.
-    5. Go back to the _"Autoscale Pools"_ tab, and there click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool` go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
+    5. Go back to the _"Autoscale Pools"_ tab, then click the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
         <figure markdown>
         ![Edit Button Location Autoscale Pool](../../../../assets/images/self-hosting/ha/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
         </figure>
-    6. Change the number to the number of media nodes you want and click on save, now wait for it to apply the change.
+    6. Change the number to the number of media nodes you want and click _"Save"_, then wait for the change to be applied.
 
 ## Change the instance size
 
@@ -80,21 +80,42 @@ It is possible to change the instance size of both the Master Node and the Media
 === "Media Nodes"
 
     !!! warning
-        This will delete the media nodes without the graceful delete option, you can stop them graceful manually by running the `/usr/local/bin/graceful_shutdown.sh` script and waiting for it to finish. You have to do it in all the media nodes because the autoscale pool will delete all media nodes and create new ones.
+        This will delete the media nodes without the graceful delete option. You can stop them gracefully by manually running the `/usr/local/bin/graceful_shutdown.sh` script and waiting for it to finish. You have to do it in all the media nodes because the autoscale pool will delete all media nodes and create new ones.
 
     1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Droplet Configuration**.
         <figure markdown>
         ![Edit Droplet Configuration Location Autoscale Pool](../../../../assets/images/self-hosting/ha/digitalocean/edit-configuration-media-node.png){ .svg-img .dark-img }
         </figure>
-    3. Go down into the **Choose a Droplet Plan** section and change the size to the one you prefer, then click on _"Edit Autoscale Pool"_ and wait for the changes to apply.
+    3. Scroll down to the **Choose a Droplet Plan** section and change the size to the one you prefer, then click on _"Edit Autoscale Pool"_ and wait for the changes to apply.
         <figure markdown>
         ![Edit Autoscale Pool](../../../../assets/images/self-hosting/shared/do-edit-autoscale-pool.png){ .svg-img .dark-img }
         </figure>
 
+## Media Nodes Autoscaling Configuration
+
+You can modify the autoscaling configuration of the Media Nodes via `terraform.tfvars` file and `terraform apply`:
+
+=== "Media Nodes Autoscaling Configuration"
+
+    1. Go to the `terraform.tfvars` file and change the config related to autoscaling, such as:
+        - **scaleTargetCPU**
+        - **minNumberOfMediaNodes**
+        - **maxNumberOfMediaNodes**
+
+    2. Open a terminal and write the following command once you've changed the value/s.
+    ```
+    terraform apply
+    ```
+    3. Say yes to the proposed change that Terraform is suggesting (the changes are the autoscale function redeploying with the new values), and your changes will be applied.
+        <figure markdown>
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-autoscale-change.png){ .svg-img .dark-img }
+        </figure>
+
+
 ## Change Fixed Number of Media Nodes
 
-You can change the fixed number of Media Node by following these steps:
+You can change the fixed number of Media Nodes **in case you put a number of fixed Media Nodes** by following these steps:
 
 === "Change Fixed Number of Media Nodes"
 
@@ -103,10 +124,46 @@ You can change the fixed number of Media Node by following these steps:
         <figure markdown>
         ![Edit Button Location Autoscale Pool](../../../../assets/images/self-hosting/ha/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
         </figure>
-    3. Change the number to the desired one and click on _"Save"_, then wait to the Autoscale Pool to apply the changes.
+    3. Change the number to the desired value and click _"Save"_, then wait for the Autoscale Pool to apply the changes.
     !!! warning
 
-        This will delete the media nodes if you have set them to less than the number of media nodes that existed, you can stop them graceful manually by running the `/usr/local/bin/graceful_shutdown.sh` script and waiting for it to finish. You have to do it in all the media nodes because the autoscale pool deletes all and creates new ones.
+        This will delete the media nodes if you have set them to less than the number of media nodes that existed. You can stop them gracefully by manually running the `/usr/local/bin/graceful_shutdown.sh` script and waiting for it to finish. You have to do it in all the media nodes because the autoscale pool deletes all and creates new ones.
+
+### Activate Scale In when Fixed Number of Media Nodes
+
+You can activate or deactivate the scale in when you decide you need autoscale option activated or not.
+
+=== "Activate Scale In"
+
+    1. Go to the `terraform.tfvars` file and change the config related to autoscaling, such as:
+        - **fixedNumberOfMediaNodes needs to be set to 0**.
+        - **scaleTargetCPU** if you don't want the default.
+        - **minNumberOfMediaNodes** if you don't want the default.
+        - **maxNumberOfMediaNodes** if you don't want the default.
+
+    2. Open a terminal and write the following command once you've changed the value/s.
+    ```
+    terraform apply
+    ```
+    3. Say yes to the proposed change that Terraform is suggesting (the changes are destroying the fixed number of media nodes and deploying the scale-in function), and your changes will be applied.
+        <figure markdown>
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-activate-scalein.png){ .svg-img .dark-img }
+        </figure>
+
+=== "Deactivate Scale In"
+
+    1. Go to the `terraform.tfvars` file and change the config related to autoscaling, such as:
+        - **fixedNumberOfMediaNodes needs to be set to your desired value**.
+
+    2. Open a terminal and write the following command once you've changed the value/s.
+    ```
+    terraform apply
+    ```
+    3. Say yes to the proposed change that Terraform is suggesting (the changes are destroying the scale-in function and all the media nodes and deploying the fixed number of media nodes pool), and your changes will be applied.
+        <figure markdown>
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-deactivate-scalein.png){ .svg-img .dark-img }
+        </figure>
+
 
 ## Administration and configuration
 
@@ -123,7 +180,7 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
         <figure markdown>
         ![Secrets.env download](../../../../assets/images/self-hosting/ha/digitalocean/download-secrets-env.png){ .svg-img .dark-img }
         </figure>
-    3. Open it and edit the values of the credental of your choice.
+    3. Open it and edit the credential values of your choice.
     4. Upload the edited `secrets.env` to the bucket, select private file and replace it.
         <figure markdown>
         ![Secrets.env upload](../../../../assets/images/self-hosting/ha/digitalocean/upload-secrets-env.png){ .svg-img .dark-img }
