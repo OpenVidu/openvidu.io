@@ -15,7 +15,7 @@ tags:
 
 This section describes two ways to install OpenVidu Single Node PRO on DigitalOcean:
 
-* [**Web Console**](#web-console): Can be deployed without installing anything in your machine, but it requires more manual steps and has some limitations. For example, recordings are stored in the machine (instead of Digital Ocean Spaces Object Storage). 
+* [**Web Console**](#web-console): Can be deployed without installing anything on your machine, but it requires more manual steps and has some limitations. For example, recordings are stored on the machine (instead of Digital Ocean Spaces Object Storage). 
 * [**Terraform**](#terraform): More powerful and automated, but it requires installing the Terraform CLI on your machine.
 
 
