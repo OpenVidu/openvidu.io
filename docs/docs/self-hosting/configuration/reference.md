@@ -194,7 +194,7 @@ openvidu:
 OpenVidu comes with other services configured to work in the deployment. These are the configuration files for each service.
 
 !!! info
-    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.6.1). To see the version number of each service, refer to the *"Version table"* of release 3.6.1 on the [Releases](../../releases.md) page.
+    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.7.0). To see the version number of each service, refer to the *"Version table"* of release 3.7.0 on the [Releases](../../releases.md) page.
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
