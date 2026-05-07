@@ -12,7 +12,7 @@ description: Learn how to perform administrative tasks on an DigitalOcean OpenVi
 </div>
 
 
-DigitalOcean OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform.
+DigitalOcean OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with Terraform.
 
 However, there are certain things worth mentioning:
 
@@ -24,7 +24,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
-    3. In the section of the Droplet click on _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
+    3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop droplet](../../../../assets/images/self-hosting/single-node/digitalocean/stop-droplet.png){ .svg-img .dark-img }
@@ -34,7 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
-    3. In the section of the Droplet click on _"Power"_ and the _"Turn On"_ to start the Droplet (and therefore OpenVidu).
+    3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
     <figure markdown>
     ![Start droplet](../../../../assets/images/self-hosting/single-node/digitalocean/start-droplet.png){ .svg-img .dark-img }
@@ -46,7 +46,7 @@ You can change the droplet size of the OpenVidu Single Node to adapt it to your 
 
 1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
 2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
-3. [Stop](#stop-openvidu-single-node) the droplet if is not stopped.
+3. [Stop](#stop-openvidu-single-node) the droplet if it is not stopped.
 4. Click on _"Upsize Droplet"_ and change the size, then click on _"Resize"_.
 
     === "Change droplet size"

@@ -34,12 +34,12 @@ It comes in two flavors:
 
 ## OpenVidu Single Node
 
-This is the simplest production-ready OpenVidu deployment available. It provides all the features you need, but lacks scalability and fault tolerance. But make no mistake about it: it is perfectly suitable for medium-scale production deployments. For most projects OpenVidu Single Node will be enough, at least until your user load gets serious. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community on a sufficiently powerful server!
+This is the simplest production-ready OpenVidu deployment available. It provides all the features you need, but lacks scalability and fault tolerance. But make no mistake about it: it is perfectly suitable for medium-scale production deployments. For most projects, OpenVidu Single Node will be enough, at least until your user load gets serious. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community on a sufficiently powerful server!
 
 It is composed of a single OpenVidu Node hosting all the necessary services in a monolithic setup. It comes in two flavors:
 
  - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: all the features you need to build your real-time application.
- - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: for those users that want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
+ - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: for users who want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
 
 <figure markdown>
   ![OpenVidu Single Node](../../assets/images/openvidu-single-node-architecture.svg){ .svg-img .dark-img }

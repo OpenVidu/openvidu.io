@@ -27,7 +27,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...
@@ -62,7 +62,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
         Any missing images will be pulled automatically when you run `systemctl start openvidu`.
 
 
-5. After the last intermediate upgrade completes, **you need to delete the Media Nodes** to apply the changes. Go to your Google Cloud Platform Console, Compute Engine instances, selecting the Media Nodes instances, and deleting them. The MIG will automatically launch new Media Nodes with the updated configuration.
+5. After the last intermediate upgrade completes, **you need to delete the Media Nodes** to apply the changes. Go to your Google Cloud Platform Console, navigate to Compute Engine instances, select the Media Nodes, and delete them. The MIG will automatically launch new Media Nodes with the updated configuration.
 6. Once the Media Nodes are up and running, start OpenVidu Elastic again by executing the following command in the Master Node:
 
     ```bash
@@ -90,7 +90,7 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 
 Notice the `store_secret.sh` command at the end. This command is necessary to update the `OPENVIDU_VERSION` secret in GCP Secret Manager, which is used by the Google Cloud Platform deployment to know which version of OpenVidu should be running in Media Nodes. You need to do this in the Master Node only.
 
-Remember to **delete the Media Nodes** after rolling back to the previous version so the MIG can launch new Media Nodes with the restored configuration. You can do this by going to your Google Cloud Platform Console, Compute Engine instances, selecting the Media Nodes instances, and deleting them.
+Remember to **delete the Media Nodes** after rolling back to the previous version so the MIG can launch new Media Nodes with the restored configuration. You can do this from the Google Cloud Platform Console by navigating to Compute Engine instances, selecting the Media Nodes, and deleting them.
 
 ## Recommendations
 

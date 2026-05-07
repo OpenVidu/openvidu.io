@@ -16,9 +16,9 @@ OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment i
 
 ## Upgrading OpenVidu Elastic
 
-Upgrade OpenVidu Elastic is very simple. These are the steps you need to follow:
+Upgrading OpenVidu Elastic is very simple. These are the steps you need to follow:
 
-1. First, ensure to shut down OpenVidu Elastic. SSH into all the nodes and execute the following command:
+1. First, make sure to shut down OpenVidu Elastic. SSH into all the nodes and execute the following command:
 
     ```bash
     systemctl stop openvidu

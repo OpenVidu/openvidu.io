@@ -27,7 +27,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...

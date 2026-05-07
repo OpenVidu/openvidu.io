@@ -14,14 +14,14 @@ To understand how variable interpolation works in OpenVidu, it is important to c
 1. **Global Configuration Files**:
 
     - Global parameters are defined in the global configuration files such as `openvidu.env`, `master_node.env`, and `media_node.env`.
-    - These files contain key-value pairs that define parameters than can be used in service configuration files.
+    - These files contain key-value pairs that define parameters that can be used in service configuration files.
 
 2. **Service Configuration Files**:
 
     - Each service configuration file can reference these global parameters using a specific syntax.
     - The syntax `${openvidu.ENV_VAR}` is used to access and interpolate those values from the global configuration files.
-    - If you are configuring a service of the Master Node which needs a specific variable of the Master Node, you can use `${master_node.ENV_VAR}`.
-    - If you are configuring a service of the Media Node which needs a specific variable of the Media Node, you can use `${media_node.ENV_VAR}`.
+    - If you are configuring a service on the Master Node that needs a specific variable from the Master Node, you can use `${master_node.ENV_VAR}`.
+    - If you are configuring a service on the Media Node that needs a specific variable from the Media Node, you can use `${media_node.ENV_VAR}`.
 
 3. **Interpolation Rules**:
 

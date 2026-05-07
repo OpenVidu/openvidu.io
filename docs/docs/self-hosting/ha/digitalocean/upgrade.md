@@ -12,13 +12,13 @@ description: How to upgrade OpenVidu High Availability on DigitalOcean deploymen
 </div>
 
 
-In DigitalOcean environments, we recommend upgrading by redeploying [OpenVidu High Availability DigitalOcean](../digitalocean/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as DigitalOcean terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+In DigitalOcean environments, we recommend upgrading by redeploying the [OpenVidu High Availability DigitalOcean](../digitalocean/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as DigitalOcean terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu High Availability in place. The following steps outline how to perform an in-place upgrade of your OpenVidu High Availability deployment on DigitalOcean:
 
 ## Upgrading OpenVidu High Availability on DigitalOcean
 
-1. SSH into one of your Master Node server.
+1. SSH into one of your Master Node servers.
 2. Execute the following command in the Master Node:
 
     ```
@@ -27,7 +27,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...
@@ -63,7 +63,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
 
 5. **Repeat the steps 1 to 4 in all the Master Nodes of your deployment.** This is important because the Master Nodes need to be running the same version of OpenVidu.
-6. After upgrading all your Master Nodes, **you need to delete the Media Nodes** to apply the changes. Go to your DigitalOcean web, Droplets tab, select the Media Nodes instances and terminate them. The  Digital Ocean Function will make new media nodes, or the Fixed Autoscale Pool if you have fixed media nodes.
+6. After upgrading all your Master Nodes, **you need to delete the Media Nodes** to apply the changes. Go to your DigitalOcean web console, open the Droplets tab, select the Media Node instances, and terminate them. The DigitalOcean Function will create new Media Nodes, or the Fixed Autoscale Pool will if you have fixed Media Nodes.
 
 7. Once the Media Nodes are up and running, execute the following command in every Master Node to start OpenVidu High Availability again:
     ```bash

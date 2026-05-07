@@ -110,13 +110,13 @@ You can also filter logs containing a specific **text** by using the **filter se
 
 In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
 
-First of all, there is a panel showing **all containers** logs from all nodes.
+First, there is a panel showing **all containers'** logs from all nodes.
 
 <figure markdown>
   ![Cluster logs](../../../../assets/images/grafana/nodes_logs1.png){ .mkdocs-img }
 </figure>
 
-Then, there is a row for each selected **node**, containing **all logs**, **warnings** and **errors** from that node. Besides, each row contains a panel for each selected container, showing all its logs.
+Then, there is a row for each selected **node**, containing **all logs**, **warnings** and **errors** from that node. Additionally, each row contains a panel for each selected container, showing all its logs.
 
 <div class="grid-container">
 
@@ -158,7 +158,7 @@ You can also filter logs containing a specific **text** by using the **filter se
 
 In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
 
-First of all, there is a panel to **filter** logs by **room_id** and **participant_id**.
+First, there is a panel to **filter** logs by **room_id** and **participant_id**.
 
 <div class="grid-container">
 
@@ -182,6 +182,6 @@ Then, there is a row for each selected **service**, containing **all logs**, **w
 
 For now, in [**OpenVidu High Availability deployments**](../../deployment-types.md#openvidu-high-availability), we have decided to **not** implement Grafana in High Availability (HA) mode. This decision is based on the fact that Grafana needs a configured HA MySQL or PostgreSQL database to work in HA mode, and we want to keep the deployment as simple as possible.
 
-There are 4 instances of Grafana in an OpenVidu High Availability deployment, one for each Master Node, but they are not synchronized between them. Therefore, if you make any change (change your admin password, create a new dashboard...) in one Grafana instance and the Master Node suddenly goes down, you will be redirected to another Grafana instance where the changes will not be reflected. That is the reason why we disable user signups and saving dashboard or datasource modifications in Grafana.
+There are 4 instances of Grafana in an OpenVidu High Availability deployment, one for each Master Node, but they are not synchronized with each other. Therefore, if you make any change (change your admin password, create a new dashboard...) in one Grafana instance and the Master Node suddenly goes down, you will be redirected to another Grafana instance where the changes will not be reflected. That is why we disable user signups and saving dashboard or datasource modifications in Grafana.
 
 However, all metrics and logs from all nodes are available in all Grafana instances, so you can monitor your OpenVidu cluster without any problem.

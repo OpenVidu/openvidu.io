@@ -24,7 +24,7 @@ If you need to integrate OpenVidu with other services, you can use webhooks to s
     - **Single Node**: `/opt/openvidu/config/livekit.yaml`
     - **Elastic / High Availability**: `/opt/openvidu/config/cluster/media_node/livekit.yaml`
 
-    Make sure the `webhook` section exists in the file, and if it doesn't, add it as stated in the previous snippet. Then, add the URL where you want to receive the webhook notifications. In this example, `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
+    Make sure the `webhook` section exists in the file; if it doesn't, add it as shown in the snippet above. Then, add the URL where you want to receive the webhook notifications. In this example, `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
 
 3. Restart the Master Node (or Single Node) to apply the changes:
 
@@ -32,7 +32,7 @@ If you need to integrate OpenVidu with other services, you can use webhooks to s
     systemctl restart openvidu
     ```
 
-    This command will restart the services which changed their configuration files in your entire OpenVidu deployment.
+    This command will restart the services whose configuration files changed across your entire OpenVidu deployment.
 
 ## <span class="openvidu-tag openvidu-pro-tag">PRO</span> V2 Compatibility Configuration
 
@@ -48,11 +48,11 @@ If you are using the V2 Compatibility module, you can also enable webhooks for t
 
     Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
 
-    Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv) all the webhook events that you can receive setting up the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
+    Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv) all the webhook events you can receive by setting the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
 
 ## Send Webhooks to a Local Application Server
 
-When developing locally pointing to a production deployment and webhooks events are required by your application, you will face issues because OpenVidu cannot access your local application server.
+When developing locally against a production deployment and webhook events are required by your application, you will face issues because OpenVidu cannot access your local application server.
 
 To receive webhooks from OpenVidu on your local machine, you need to expose your local application server to the internet. This exposure allows OpenVidu to send webhooks directly to your application server.
 

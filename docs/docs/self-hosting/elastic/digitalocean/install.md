@@ -225,7 +225,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 2. Give the SSH Key the necessary permissions for it to work.
 
     === "Linux"
-        Command in linux:
+        Command in Linux:
         ```
         chmod 600 <PATH_TO_THE_KEY>/openvidu_ssh_key_elastic.pem
         ```
@@ -242,7 +242,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 To verify that your OpenVidu deployment works correctly wait for the `secrets.env` to appear in the bucket that you've configured and open it to view the credentials of OpenVidu.
 
 === "View OpenVidu credentials in the Web"
-    - Go to the Space Object Storage bucket that you've configurated and download the `secrets.env` file.
+    Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
     <figure markdown>
     ![Secrets.env in Bucket](../../../../assets/images/self-hosting/elastic/digitalocean/secrets-env.png){ .svg-img .dark-img }
     </figure>

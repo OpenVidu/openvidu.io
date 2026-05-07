@@ -16,12 +16,12 @@ tags:
 This section describes two ways to install OpenVidu Single Node PRO on DigitalOcean:
 
 * [**Web Console**](#web-console): Can be deployed without installing anything in your machine, but it requires more manual steps and has some limitations. For example, recordings are stored in the machine (instead of Digital Ocean Spaces Object Storage). 
-* [**Terraform**](#terraform): More powerfull and automated, but it requires to install Terraform CLI on your machine.
+* [**Terraform**](#terraform): More powerful and automated, but it requires installing the Terraform CLI on your machine.
 
 
 ## **Web Console**
 
-This page explains how to create a Droplet (VM) in DigitalOcean, configure networking, and prepare it for OpenVidu Single Node PRO On Premises. Installing, administrating, and upgrading OpenVidu Single Node PRO itself is covered in the On-Premises documentation.
+This page explains how to create a Droplet (VM) in DigitalOcean, configure networking, and prepare it for OpenVidu Single Node PRO On Premises. Installing, administering, and upgrading OpenVidu Single Node PRO itself is covered in the On-Premises documentation.
 
 ### Prerequisites
 
@@ -55,7 +55,7 @@ OpenVidu and WebRTC require specific inbound rules on the Firewall network secur
 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the Firewall rules.
 
-1. Click the droplet, then go to _"Networking"_, go down and click on _"Edit"_ in **Firewall** section.
+1. Click the droplet, then go to _"Networking"_, scroll down and click on _"Edit"_ in **Firewall** section.
     <figure markdown>
     ![Edit Firewall Rules](../../../../assets/images/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .svg-img .dark-img }
     </figure>
@@ -275,7 +275,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 To verify that your OpenVidu deployment works correctly wait for the `secrets.env` to appear in the bucket that you've configured and open it to view the credentials of OpenVidu.
 
 === "View OpenVidu credentials in the Web"
-    - Go to the Space Object Storage bucket that you've configurated and download the `secrets.env` file.
+    - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
     <figure markdown>
     ![Secrets.env in Bucket](../../../../assets/images/self-hosting/single-node/digitalocean/secrets-env-pro.png){ .svg-img .dark-img }
     </figure>

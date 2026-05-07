@@ -18,7 +18,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
 ## Upgrading OpenVidu High Availability on AWS
 
-1. SSH into one of your Master Node server.
+1. SSH into one of your Master Node servers.
 2. Execute the following command in the Master Node:
 
     ```
@@ -27,7 +27,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...
