@@ -94,13 +94,13 @@ Remember to **delete the Media Nodes** after rolling back to the previous versio
 
 ## Recommendations
 
-- Always upgrade all the nodes of your OpenVidu High Availability deployment. Otherwise, you may face compatibility issues between the different versions of OpenVidu running in your deployment.
-- On any upgrade problem, a redeployment is always recommended for a clean installation.
-- Keep your Docker and Docker Compose versions updated.
-- Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
+- Always upgrade all nodes in your OpenVidu High Availability deployment. Running mismatched versions across nodes may cause compatibility issues.
+- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
+- Keep your Docker and Docker Compose versions up to date.
+- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
 
     ```bash
     docker image prune -a
     ```
 
-    This command will remove all the images that are not being used by any container.
+    This command removes all images that are not currently in use by any container.
