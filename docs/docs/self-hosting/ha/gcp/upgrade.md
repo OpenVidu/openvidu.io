@@ -11,13 +11,13 @@ description: How to upgrade OpenVidu High Availability on Google Cloud Platform 
 </div>
 
 
-In Google Cloud Platform environments, we recommend upgrading by redeploying [OpenVidu High Availability Google Cloud Platform](../gcp/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Google Cloud Platform terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+In Google Cloud Platform environments, we recommend upgrading by redeploying the [OpenVidu High Availability Google Cloud Platform](../gcp/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Google Cloud Platform terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu High Availability in place. The following steps outline how to perform an in-place upgrade of your OpenVidu High Availability deployment on Google Cloud Platform:
 
 ## Upgrading OpenVidu High Availability on Google Cloud Platform
 
-1. SSH into one of your Master Node server.
+1. SSH into one of your Master Node servers.
 2. Execute the following command in the Master Node:
 
     ```
@@ -26,7 +26,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...

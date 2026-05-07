@@ -15,9 +15,9 @@ OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment i
 
 ## Upgrading OpenVidu High Availability
 
-Upgrade OpenVidu High Availability is very simple. These are the steps you need to follow:
+Upgrading OpenVidu High Availability is very simple. These are the steps you need to follow:
 
-1. First, ensure to shut down OpenVidu High Availability. SSH into all the nodes and execute the following command:
+1. First, ensure you shut down OpenVidu High Availability. SSH into all the nodes and execute the following command:
 
     ```bash
     systemctl stop openvidu

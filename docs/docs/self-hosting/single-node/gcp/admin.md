@@ -12,7 +12,7 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 </div>
 
 
-Google Cloud Platform OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with terraform from Google Cloud Platform.
+Google Cloud Platform OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with Terraform from Google Cloud Platform.
 
 However, there are certain things worth mentioning:
 
@@ -24,7 +24,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
-    3. In the section of the Virtual Machine click on stop button to stop the Virtual Machine (and therefore OpenVidu).
+    3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop instance](../../../../assets/images/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img }
@@ -34,7 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.  Click on it.
-    3. In the section of the Virtual Machine click on start button to start the Virtual Mache (and therefore OpenVidu).
+    3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Start instance](../../../../assets/images/self-hosting/single-node/gcp/start-instance.png){ .svg-img .dark-img }
@@ -46,8 +46,8 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
 1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
 2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
-3. Stop the instance if is not stopped. Wait for it to stop.
-4. Click on _"Edit"_, go down and change the **Machine Type**.
+3. Stop the instance if it is not stopped. Wait for it to stop.
+4. Click on _"Edit"_, scroll down and change the **Machine Type**.
 
     === "Change instance type"
 

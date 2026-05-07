@@ -5,7 +5,7 @@ description: Learn how to install, configure and administer OpenVidu Single Node
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-pro-tag">PRO</span>
 
-OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> brings all the features of OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> plus [**2x performance**](../production-ready/performance.md) and [**advanced observability**](../production-ready/observability/index.md). It is aimed to users that want a single-node setup but still want OpenVidu PRO features.
+OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> brings all the features of OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> plus [**2x performance**](../production-ready/performance.md) and [**advanced observability**](../production-ready/observability/index.md). It is aimed at users who want a single-node setup but still want OpenVidu PRO features.
 
 !!! info
 

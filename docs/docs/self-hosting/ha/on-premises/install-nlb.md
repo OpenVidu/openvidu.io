@@ -225,7 +225,7 @@ This command will output the following instructions, which you should follow:
     > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
     ```
 
-    The Media Node in each machine will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
+    The Media Node on each machine will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
 
     ```bash
     systemctl start openvidu

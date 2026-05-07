@@ -101,7 +101,7 @@ Whenever you are satisfied with your Template parameters, just click on _"Next"_
 
 !!! warning
 
-    In case of failure, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    If deployment fails, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
     If the error is related to a conflict when creating a network interface, redeploy in another resource group with a different **Stack Name**.
 
@@ -158,7 +158,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     !!! warning
 
-        We recommend to delete the **Bastion** resource once you no longer require SSH access to your Master Node, as it will incur in additional costs in your Azure account.
+        We recommend deleting the **Bastion** resource once you no longer require SSH access to your Master Node, as it will incur additional costs in your Azure account.
 
 ## Configure your application to use the deployment
 

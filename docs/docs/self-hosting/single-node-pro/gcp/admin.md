@@ -1,6 +1,6 @@
 ---
 title: OpenVidu Single Node PRO administration on Google Cloud Platform
-description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Single Node PRO deployment
+description: Learn how to perform administrative tasks on a Google Cloud Platform OpenVidu Single Node PRO deployment
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Google Cloud Platform
@@ -24,7 +24,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-pro`. Click on it.
-    3. In the section of the Virtual Machine click on stop button to stop the Virtual Machine (and therefore OpenVidu).
+    3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop instance](../../../../assets/images/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img }
@@ -34,7 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-pro`.  Click on it.
-    3. In the section of the Virtual Machine click on start button to start the Virtual Mache (and therefore OpenVidu).
+    3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Start instance](../../../../assets/images/self-hosting/single-node/gcp/start-instance.png){ .svg-img .dark-img }
@@ -46,8 +46,8 @@ You can change the instance type of the OpenVidu Single Node PRO instance to ada
 
 1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
 2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-pro`. Click on it.
-3. Stop the instance if is not stopped. Wait for it to stop.
-4. Click on _"Edit"_, go down and change the **Machine Type**.
+3. Stop the instance if it is not stopped. Wait for it to stop.
+4. Click on _"Edit"_, scroll down and change the **Machine Type**.
 
     === "Change instance type"
 

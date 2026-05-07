@@ -68,7 +68,7 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
 
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click on the desired secret you want to change.
-    3. Go down to _"Versions"_ and click on _"Create secret version"_ to add a new version with the updated value.
+    3. Scroll down to _"Versions"_ and click on _"Create secret version"_ to add a new version with the updated value.
             <figure markdown>
             ![Create Secret Version](../../../../assets/images/self-hosting/single-node/oracle/create-secret-version.png){ .svg-img .dark-img }
             </figure>

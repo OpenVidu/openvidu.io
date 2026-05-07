@@ -14,7 +14,7 @@ description: Learn how to perform administrative tasks on an AWS OpenVidu High A
 
 The deployment of OpenVidu High Availability on AWS is automated using AWS CloudFormation, with 4 EC2 Instances as Master Nodes and any number of Media Nodes managed within an [Auto Scaling Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target=_blank}. The Auto Scaling Group of Media Nodes is configured to scale based on the target average CPU utilization.
 
-Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth taking into account.
+Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth keeping in mind.
 
 ## Cluster Shutdown and Startup
 
@@ -147,7 +147,7 @@ It is possible to change the instance type of both the Master Node and the Media
         <figure markdown>
         ![Edit Auto Scaling Group](../../../../assets/images/self-hosting/ha/aws/aws-ha-admin-edit-media-asg.png){ .svg-img .dark-img }
         </figure>
-    8. In the Launch Template section, select the new version of the launch template we just created at step 5 which is the highest version number.
+    8. In the Launch Template section, select the new version of the launch template we just created at step 5, which is the highest version number.
 
         Then, click on _"Update"_.
 
