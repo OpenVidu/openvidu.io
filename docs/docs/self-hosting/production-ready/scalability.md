@@ -239,7 +239,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu Elastic in Azure](../elastic/azure/install.md)
     - [OpenVidu High Availability in Azure](../ha/azure/install.md)
   
-    The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target=_blank}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Scaling Set Configuration**.
+    The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target=_blank}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
     --8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
 
