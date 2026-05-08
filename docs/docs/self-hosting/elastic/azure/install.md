@@ -37,7 +37,7 @@ To import the template into Azure, click the button below and you will be redire
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
+    - A Virtual Machine Scale Set (VMSS) of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
 --8<-- "shared/self-hosting/azure-custom-scale-in.md"
 
@@ -81,7 +81,7 @@ You need to specify some properties for the Azure instances that will be created
 
     Simply select the type of instance you want for your Master Node in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
  
-### Media Nodes Scaling Set Configuration
+### Media Nodes Virtual Machine Scale Set (VMSS) Configuration
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
