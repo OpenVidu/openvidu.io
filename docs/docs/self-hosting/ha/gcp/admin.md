@@ -166,7 +166,7 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 
 === "Deactivate Cloud Run Function"
 
-    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
+    1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target=_blank} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
         <figure markdown>
         ![Deactivate Scale In](../../../../assets/images/self-hosting/ha/gcp/gcp-scalein-deactivate.png){ .svg-img .dark-img }
         </figure>
