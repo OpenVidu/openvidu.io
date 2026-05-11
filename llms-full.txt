@@ -6846,7 +6846,7 @@ Deploy OpenVidu using our official **ARM** template:
 - [OpenVidu Elastic in Azure](https://openvidu.io/3.7.0/docs/self-hosting/elastic/azure/install/index.md)
 - [OpenVidu High Availability in Azure](https://openvidu.io/3.7.0/docs/self-hosting/ha/azure/install/index.md)
 
-The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/) . You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Scaling Set Configuration**.
+The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/) . You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
 Parameters in this section look like this:
 
