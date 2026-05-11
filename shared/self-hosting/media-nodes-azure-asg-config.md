@@ -1,9 +1,9 @@
-=== "Media Nodes Scaling Set Configuration"
+=== "Media Nodes Virtual Machine Scale Set (VMSS) Configuration"
 
     Parameters in this section look like this:
 
     <figure markdown>
-    ![Media Nodes Scaling Set Configuration](../../../../assets/images/self-hosting/elastic/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
+    ![Media Nodes Virtual Machine Scale Set (VMSS) Configuration](../../../../assets/images/self-hosting/elastic/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
     </figure>
 
     The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
