@@ -7355,7 +7355,7 @@ log_level: INFO
 
 Below is the full list of configuration properties available for the Speech Processing agent.
 
-<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.7.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>
+[agent-speech-processing.yaml](https://github.com/OpenVidu/openvidu-agents/blob/3.7.0/speech-processing/agent-speech-processing.yaml)
 
 ```yaml
 # Docker image of the agent.
