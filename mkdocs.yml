@@ -196,8 +196,8 @@ nav:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md
       - Releases: docs/releases.md
-  # - Blog:
-  #     - blog/index.md
+  - Blog:
+      - blog/index.md
   - Support:
       - support.md
   - Pricing:
