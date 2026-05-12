@@ -1,0 +1,17 @@
+.amplify-container {
+    padding-bottom: 0 !important;
+}
+
+.amplify-container .amplify-form-body {
+    padding-bottom: 1.5em !important;
+}
+
+.amplify-container .amplify-input-label {
+    color: var(--color-primary-accent);
+    font-family: 'Tomorrow';
+    font-weight: 400;
+}
+
+amplify-auth-sign-up-core .amplify-container .amplify-form-row {
+    margin-top: 0.5em;
+}
