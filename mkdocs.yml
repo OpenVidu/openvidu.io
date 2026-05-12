@@ -327,7 +327,26 @@ theme:
 
 plugins:
   - search
-  - blog
+  - blog:
+      post_excerpt: required
+      draft: false
+      draft_if_future_date: true
+      categories_allowed:
+        - Comparison
+        - How-to
+        - Research       
+        - Livekit
+        - Technology
+        - Vertical
+        - Success story
+        - Implementation
+        - OpenVidu How-to
+        - OpenVidu Meet
+        - Openvidu Implementation
+        - OpenVidu
+        - OpenVidu comparison
+        - OpenVidu Platform
+        - Release
   - meta
   - privacy
   - optimize:
