@@ -162,6 +162,12 @@ nav:
       - support.md
   - Pricing:
       - pricing.md
+  - Pricing:
+      - pricing.md
+  - About Us:
+      - about-us.md
+  - Research:
+      - research.md
 
 validation:
   omitted_files: warn
