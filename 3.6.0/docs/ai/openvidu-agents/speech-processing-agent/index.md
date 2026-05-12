@@ -1,0 +1,559 @@
+# Speech Processing agent
+
+The Speech Processing agent provides all the AI services related to transcribing audio speech to text and processing the results in various ways.
+
+## List of provided AI services
+
+- [**Live Captions**](https://openvidu.io/3.6.0/docs/ai/live-captions/index.md): transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.
+
+## Enable the agent and configure AI services
+
+### 1. SSH into an OpenVidu Node and go to configuration folder
+
+Depending on your [OpenVidu deployment type](https://openvidu.io/3.6.0/docs/ai/docs/self-hosting/deployment-types.md):
+
+If you are using [OpenVidu Local (Development)](https://openvidu.io/3.6.0/docs/ai/docs/self-hosting/deployment-types.md#openvidu-local-development), simply navigate to the configuration folder of the project:
+
+```bash
+# For OpenVidu Local COMMUNITY
+cd openvidu-local-deployment/community
+
+# For OpenVidu Local PRO
+cd openvidu-local-deployment/pro
+```
+
+If you are using [OpenVidu Single Node](https://openvidu.io/3.6.0/docs/ai/docs/self-hosting/deployment-types.md#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
+
+```bash
+cd /opt/openvidu/config
+```
+
+If you are using [OpenVidu Elastic](https://openvidu.io/3.6.0/docs/ai/docs/self-hosting/deployment-types.md#openvidu-elastic), SSH into the only Master Node and navigate to:
+
+```bash
+cd /opt/openvidu/config/cluster/media_node
+```
+
+If you are using [OpenVidu High Availability](https://openvidu.io/3.6.0/docs/ai/docs/self-hosting/deployment-types.md#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
+
+```bash
+cd /opt/openvidu/config/cluster/media_node
+```
+
+### 2. Modify file `agent-speech-processing.yaml`
+
+Locate file `agent-speech-processing.yaml` in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node. Modify this file to enable the agent and configure the desired AI services.
+
+#### Enable the agent
+
+```yaml
+enabled: true
+```
+
+#### Configure the desired AI services
+
+You can set up the following AI services in this agent:
+
+- **Live Captions**: see [Live Captions service](https://openvidu.io/3.6.0/docs/ai/live-captions/#how-to-enable-live-captions-service-in-your-openvidu-deployment).
+
+### 3. Restart OpenVidu
+
+Depending on your [OpenVidu deployment type](https://openvidu.io/3.6.0/docs/ai/docs/self-hosting/deployment-types.md):
+
+Run where `docker-compose.yaml` is located:
+
+```bash
+docker compose restart
+```
+
+Run this command in your node:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+Run this command in your Master Node:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+Run this command in one of your Master Nodes:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+After restarting OpenVidu your agent will be up and running, ready to process new Rooms.
+
+Warning
+
+If your agent container keeps restarting, there might be an error in your configuration. Check its logs to find out what is wrong.
+
+## Change CPU load threshold
+
+By default, the agent will only accept new jobs if the average CPU load of its Media Node is below 70%. You can change this threshold in [**`agent-speech-processing.yaml`**](#configuration-reference):
+
+agent-speech-processing.yaml
+
+```yaml
+# Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.
+load_threshold: 0.7
+```
+
+## Log level
+
+You can change the log level of the agent in [**`agent-speech-processing.yaml`**](#configuration-reference):
+
+agent-speech-processing.yaml
+
+```yaml
+# Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+log_level: INFO
+```
+
+## Configuration reference
+
+Below is the full list of configuration properties available for the Speech Processing agent.
+
+[agent-speech-processing.yaml](https://github.com/OpenVidu/openvidu-agents/blob/3.6.0/speech-processing/agent-speech-processing.yaml)
+
+```yaml
+# Docker image of the agent.
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.6.0
+
+# Whether to run the agent or not.
+enabled: false
+
+# Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.
+load_threshold: 0.7
+
+# Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+log_level: INFO
+
+live_captions:
+  # How this agent will connect to Rooms [manual, automatic]
+  # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
+  # - automatic: the agent will automatically connect to new Rooms.
+  processing: manual
+
+  # Which speech-to-text AI provider to use [aws, azure, google, openai, azure_openai, groq, deepgram, assemblyai, fal, clova, speechmatics, gladia, sarvam, mistralai, cartesia, soniox, nvidia, elevenlabs, simplismart, vosk, sherpa]
+  # The custom configuration for the selected provider must be set below
+  provider: vosk
+
+  aws:
+    # Credentials for AWS Transcribe. See https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html
+    aws_access_key_id:
+    aws_secret_access_key:
+    aws_default_region:
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    language:
+    # The name of the custom vocabulary you want to use.
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    vocabulary_name:
+    # The name of the custom language model you want to use.
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models-using.html
+    language_model_name:
+    # Whether or not to enable partial result stabilization. Partial result stabilization can reduce latency in your output, but may impact accuracy.
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization
+    enable_partial_results_stabilization:
+    # Specify the level of stability to use when you enable partial results stabilization (enable_partial_results_stabilization: true). Valid values: high | medium | low
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization
+    partial_results_stability:
+    # The name of the custom vocabulary filter you want to use to mask or remove words.
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
+    vocab_filter_name:
+    # The method used to filter the vocabulary. Valid values: mask | remove | tag
+    # See https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
+    vocab_filter_method:
+
+  azure:
+    # Credentials for Azure Speech Service.
+    # One of these combinations must be set:
+    #  - speech_host
+    #  - speech_key + speech_region
+    #  - speech_auth_token + speech_region
+    # See https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-speech-to-text?tabs=macos%2Cterminal&pivots=programming-language-python#prerequisites
+    speech_host:
+    speech_key:
+    speech_auth_token:
+    speech_region:
+    # Azure handles multiple languages and can auto-detect the language used. It requires the candidate set to be set. E.g. ["en-US", "es-ES"]
+    # See https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt#supported-languages
+    language:
+    # Removes profanity (swearing), or replaces letters of profane words with stars. Valid values: Masked | Removed | Raw
+    # See https://learn.microsoft.com/en-us/azure/ai-services/translator/profanity-filtering
+    profanity:
+    # List of words or phrases to boost recognition accuracy. Azure will give higher priority to these phrases during recognition.
+    phrase_list:
+    # Controls punctuation behavior. If True, enables explicit punctuation mode where punctuation marks are added explicitly. If False (default), uses Azure's default punctuation behavior.
+    explicit_punctuation:
+
+  azure_openai:
+    # Credentials for Azure OpenAI APIs. See https://learn.microsoft.com/en-us/azure/api-management/api-management-authenticate-authorize-azure-openai
+    # Azure OpenAI API key
+    azure_api_key:
+    # Azure Active Directory token
+    azure_ad_token:
+    # Azure OpenAI endpoint in the following format: https://{your-resource-name}.openai.azure.com. Mandatory value.
+    azure_endpoint:
+    # Name of your model deployment. If given with `azure_endpoint`, sets the base client URL to include `/deployments/{azure_deployment}`.
+    azure_deployment:
+    # OpenAI REST API version used for the request. Mandatory value.
+    api_version:
+    # OpenAI organization ID.
+    organization:
+    # OpenAI project ID.
+    project:
+    # The language code to use for transcription (e.g., "en" for English).
+    language:
+    # Whether to automatically detect the language.
+    detect_language:
+    # ID of the model to use for speech-to-text.
+    model:
+    # Initial prompt to guide the transcription.
+    prompt:
+
+  google:
+    # Credentials for Google Cloud. This is the content of a Google Cloud credential JSON file.
+    # Below is a dummy example for a credential type of "Service Account" (https://cloud.google.com/iam/docs/service-account-creds#key-types)
+    credentials_info: |
+      {
+        "type": "service_account",
+        "project_id": "my-project",
+        "private_key_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n-----END PRIVATE KEY-----\n",
+        "client_email": "my-email@my-project.iam.gserviceaccount.com",
+        "client_id": "xxxxxxxxxxxxxxxxxxxxx",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/my-email%40my-project.iam.gserviceaccount.com",
+        "universe_domain": "googleapis.com"
+      }
+    # Which model to use for recognition. If not set, uses the default model for the selected language.
+    # See https://cloud.google.com/speech-to-text/docs/transcription-model
+    model:
+    # The location to use for recognition. Default is "us-central1". Latency will be best if the location is close to your users.
+    # Check supported languages and locations at https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages
+    location:
+    # List of language codes to recognize. Default is ["en-US"].
+    # See https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages
+    languages:
+    # Whether to detect the language of the audio. Default is true.
+    detect_language:
+    # If 'true', adds punctuation to recognition result hypotheses. This feature is only available in select languages. Setting this
+    # for requests in other languages has no effect at all. The default 'false' value does not add punctuation to result hypotheses.
+    # See https://cloud.google.com/speech-to-text/docs/automatic-punctuation
+    punctuate:
+    # The spoken punctuation behavior for the call. If not set, uses default behavior based on model of choice.
+    # e.g. command_and_search will enable spoken punctuation by default. If 'true', replaces spoken punctuation
+    # with the corresponding symbols in the request. For example, "how are you question mark" becomes "how are you?".
+    # See https://cloud.google.com/speech-to-text/docs/spoken-punctuation for support. If 'false', spoken punctuation is not replaced.
+    spoken_punctuation:
+    # Whether to return interim (non-final) transcription results. Defaults to true.
+    interim_results:
+
+  openai:
+    # API key for OpenAI. See https://platform.openai.com/api-keys
+    api_key:
+    # The OpenAI model to use for transcription. See https://platform.openai.com/docs/guides/speech-to-text
+    model:
+    # The language of the input audio. Supplying the input language in ISO-639-1 format
+    # (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) will improve accuracy and latency.
+    language:
+    # Whether to automatically detect the language.
+    detect_language:
+    # Optional text prompt to guide the transcription. Only supported for whisper-1.
+    prompt:
+
+  groq:
+    # API key for Groq. See https://console.groq.com/keys
+    api_key:
+    # See https://console.groq.com/docs/speech-to-text
+    model:
+    # The language of the input audio. Supplying the input language in ISO-639-1 format
+    # (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) will improve accuracy and latency.
+    language:
+    # Whether to automatically detect the language.
+    detect_language:
+    # Prompt to guide the model's style or specify how to spell unfamiliar words. 224 tokens max.
+    prompt:
+    # Base URL for the Groq API. By default "https://api.groq.com/openai/v1"
+    base_url:
+
+  deepgram:
+    # See https://console.deepgram.com/
+    api_key:
+    # See https://developers.deepgram.com/reference/speech-to-text-api/listen-streaming#request.query.model
+    model:
+    # See https://developers.deepgram.com/reference/speech-to-text-api/listen-streaming#request.query.language
+    language:
+    # Whether to enable automatic language detection. See https://developers.deepgram.com/docs/language-detection
+    detect_language: false
+    # Whether to return interim (non-final) transcription results. See https://developers.deepgram.com/docs/interim-results
+    interim_results: true
+    # Whether to apply smart formatting to numbers, dates, etc. See https://developers.deepgram.com/docs/smart-format
+    smart_format: false
+    # When smart_format is used, ensures it does not wait for sequence to be complete before returning results. See https://developers.deepgram.com/docs/smart-format#using-no-delay
+    no_delay: true
+    # Whether to add punctuations to the transcription. Turn detector will work better with punctuations. See https://developers.deepgram.com/docs/punctuation
+    punctuate: true
+    # Whether to include filler words (um, uh, etc.) in transcription. See https://developers.deepgram.com/docs/filler-words
+    filler_words: true
+    # Whether to filter profanity from the transcription. See https://developers.deepgram.com/docs/profanity-filter
+    profanity_filter: false
+    # Whether to transcribe numbers as numerals. See https://developers.deepgram.com/docs/numerals
+    numerals: false
+    # List of tuples containing keywords and their boost values for improved recognition. Each tuple should be (keyword: str, boost: float). keywords does not work with Nova-3 models. Use keyterms instead.
+    # keywords:
+    #   - [OpenVidu, 1.5]
+    #   - [WebRTC, 1]
+    # List of key terms to improve recognition accuracy. keyterms is supported by Nova-3 models.
+    # Commented below is an example
+    keyterms:
+      # - "OpenVidu"
+      # - "WebRTC"
+
+  assemblyai:
+    # API key for AssemblyAI. See https://www.assemblyai.com/dashboard/api-keys
+    api_key:
+    # The confidence threshold (0.0 to 1.0) to use when determining if the end of a turn has been reached.
+    end_of_turn_confidence_threshold:
+    # The minimum amount of silence in milliseconds required to detect end of turn when confident.
+    min_end_of_turn_silence_when_confident:
+    # The maximum amount of silence in milliseconds allowed in a turn before end of turn is triggered.
+    max_turn_silence:
+    # Whether to return formatted final transcripts (proper punctuation, letter casing...). If enabled, formatted final transcripts are emitted shortly following an end-of-turn detection.
+    format_turns: true
+    # List of keyterms to improve recognition accuracy for specific words and phrases.
+    keyterms_prompt:
+      # - "OpenVidu"
+      # - "WebRTC"
+
+  fal:
+    # API key for fal. See https://fal.ai/dashboard/keys
+    api_key:
+    # See https://fal.ai/models/fal-ai/wizper/api#schema
+    language:
+
+  clova:
+    # Secret key issued when registering the app
+    api_key:
+    # API Gateway's unique invoke URL created in CLOVA Speech Domain.
+    # See https://guide.ncloud-docs.com/docs/en/clovaspeech-domain#create-domain
+    invoke_url:
+    # See https://api.ncloud-docs.com/docs/en/ai-application-service-clovaspeech-longsentence
+    language:
+    # Value between 0 and 1 indicating the threshold for the confidence score of the transcribed text. Default is 0.5.
+    # If the confidence score is lower than the threshold, the transcription event is not sent to the client.
+    # For a definition of the confidence score see https://api.ncloud-docs.com/docs/en/ai-application-service-clovaspeech-grpc
+    threshold:
+
+  speechmatics:
+    # API key for Speechmatics. See https://portal.speechmatics.com/manage-access/
+    api_key:
+    # ISO 639-1 language code. All languages are global and can understand different dialects/accents. To see the list of all supported languages, see https://docs.speechmatics.com/speech-to-text/languages#transcription-languages
+    language:
+    # Operating point to use for the transcription per required accuracy & complexity. To learn more, see https://docs.speechmatics.com/speech-to-text/languages#operating-points
+    operating_point:
+    # Partial transcripts allow you to receive preliminary transcriptions and update as more context is available until the higher-accuracy final transcript is returned. Partials are returned faster but without any post-processing such as formatting. See https://docs.speechmatics.com/speech-to-text/realtime/output#partial-transcripts
+    enable_partials:
+    # Enable speaker diarization. When enabled, the STT engine will determine and attribute words to unique speakers. The speaker_sensitivity parameter can be used to adjust the sensitivity of diarization
+    enable_diarization:
+    # RFC-5646 language code to make spelling rules more consistent in the transcription output. See https://docs.speechmatics.com/features/word-tagging#output-locale
+    output_locale:
+    # The delay in seconds between the end of a spoken word and returning the final transcript results. See https://docs.speechmatics.com/features/realtime-latency#configuration-example
+    max_delay:
+    # See https://docs.speechmatics.com/features/realtime-latency#configuration-example
+    max_delay_mode:
+    # Configuration for speaker diarization. See https://docs.speechmatics.com/features/diarization
+    speaker_diarization_config:
+      # See https://docs.speechmatics.com/features/diarization#max-speakers
+      max_speakers:
+      # See https://docs.speechmatics.com/features/diarization#speaker-sensitivity
+      speaker_sensitivity:
+      # See https://docs.speechmatics.com/features/diarization#prefer-current-speaker
+      prefer_current_speaker:
+    # Permitted punctuation marks for advanced punctuation. See https://docs.speechmatics.com/features/punctuation-settings
+    # Commented is an example of punctuation settings
+    punctuation_overrides:
+      # permitted_marks: [ ".", "," ]
+      # sensitivity: 0.4
+    # See https://docs.speechmatics.com/features/custom-dictionary
+    # Commented below is an example of a custom dictionary
+    additional_vocab:
+      # - content: financial crisis
+      # - content: gnocchi
+      #   sounds_like:
+      #     - nyohki
+      #     - nokey
+      #     - nochi
+      # - content: CEO
+      #   sounds_like:
+      #     - C.E.O.
+
+  gladia:
+    # API key for Gladia. See https://app.gladia.io/account
+    api_key:
+    # Whether to return interim (non-final) transcription results. Defaults to True
+    interim_results:
+    # List of language codes to use for recognition. Defaults to None (auto-detect). See https://docs.gladia.io/chapters/limits-and-specifications/languages
+    languages:
+    # Whether to allow switching between languages during recognition. Defaults to True
+    code_switching:
+    # https://docs.gladia.io/api-reference/v2/live/init#body-pre-processing-audio-enhancer
+    pre_processing_audio_enhancer:
+    # https://docs.gladia.io/api-reference/v2/live/init#body-pre-processing-speech-threshold
+    pre_processing_speech_threshold:
+
+  sarvam:
+    # API key for Sarvam. See https://dashboard.sarvam.ai/key-management
+    api_key:
+    # BCP-47 language code for supported Indian languages. See https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe#request.body.language_code.language_code
+    language:
+    # The Sarvam STT model to use. See https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe#request.body.model.model
+    model:
+
+  mistralai:
+    # API key for Mistral AI. See https://console.mistral.ai/api-keys
+    api_key:
+    # Name of the Voxtral STT model to use. Default to voxtral-mini-latest. See https://docs.mistral.ai/capabilities/audio/
+    model:
+    # The language code to use for transcription (e.g., "en" for English)
+    language:
+
+  cartesia:
+    # API key for Cartesia. See https://play.cartesia.ai/keys
+    api_key:
+    # The Cartesia STT model to use
+    model:
+    # The language code to use for transcription (e.g., "en" for English)
+    language:
+
+  soniox:
+    # API key for Soniox. See https://console.soniox.com/
+    api_key:
+    # Set language hints when possible to significantly improve accuracy. See: https://soniox.com/docs/stt/concepts/language-hints
+    language_hints:
+      # - "en"
+      # - "es"
+    # Set context to improve recognition of difficult and rare words. Context is a string and can include words, phrases, sentences, or summaries (limit: 10K chars). See https://soniox.com/docs/stt/concepts/context
+    context:
+
+  nvidia:
+    # API key for NVIDIA. See https://build.nvidia.com/explore/speech?integrate_nim=true&hosted_api=true&modal=integrate-nim
+    # Required when using NVIDIA's cloud services. To use a self-hosted NVIDIA Riva server setup "server" and "use_ssl" instead.
+    api_key:
+    # The NVIDIA Riva ASR model to use. Default is "parakeet-1.1b-en-US-asr-streaming-silero-vad-sortformer"
+    # See available models: https://build.nvidia.com/search/models?filters=usecase%3Ausecase_speech_to_text
+    model:
+    # The NVIDIA function ID for the model. Default is "1598d209-5e27-4d3c-8079-4751568b1081"
+    function_id:
+    # Whether to add punctuation to transcription results. Default is true.
+    punctuate:
+    # The language code for transcription. Default is "en-US"
+    language_code:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # The NVIDIA Riva server address. Default is "grpc.nvcf.nvidia.com:443"
+    # For self-hosted NIM, use your server address (e.g., "localhost:50051")
+    server:
+    # Whether to use SSL for the connection. Default is true.
+    # Set to false for locally hosted Riva NIM services without SSL.
+    use_ssl:
+
+  spitch:
+    # API key for Spitch. See https://docs.spitch.app/keys
+    api_key:
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/concepts/languages
+    language:
+
+  elevenlabs:
+    # API key for ElevenLabs. See https://elevenlabs.io/app/settings/api-keys
+    api_key:
+    # The ElevenLabs STT model to use. Valid values are ["scribe_v1", "scribe_v2", "scribe_v2_realtime"]. See https://elevenlabs.io/docs/overview/models#models-overview
+    model_id:
+    # An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically
+    language_code:
+    # Custom base URL for the API. Optional.
+    base_url:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to tag audio events like (laughter), (footsteps), etc. in the transcription. Only supported for Scribe v1 model. Default is True
+    tag_audio_events:
+    # Whether to include word-level timestamps in the transcription. Default is false.
+    include_timestamps:
+
+  simplismart:
+    # API key for SimpliSmart. See https://docs.simplismart.ai/model-suite/settings/api-keys
+    api_key:
+    # Model identifier for the backend STT model. One of ["openai/whisper-large-v2", "openai/whisper-large-v3", "openai/whisper-large-v3-turbo"]
+    # Default is "openai/whisper-large-v3-turbo"
+    model:
+    # Language code for transcription (default: "en"). See https://docs.simplismart.ai/get-started/playground/transcription-models#supported-languages-with-their-codes
+    language:
+    # Operation to perform. "transcribe" converts speech to text in the original language, "translate" translates into English. Default is "transcribe".
+    task:
+    # If true, disables timestamp generation in transcripts. Default is true
+    without_timestamps:
+    # Minimum duration (ms) for a valid speech segment. Default is 0
+    min_speech_duration_ms:
+    # Decoding temperature (affects randomness). Default is 0.0
+    temperature:
+    # Whether to permit multilingual recognition. Default is false
+    multilingual:
+
+  vosk:
+    # Vosk language model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-vosk"
+    # Below is the list of pre-installed models in the container (available at https://alphacephei.com/vosk/models):
+    # - vosk-model-en-us-0.22-lgraph (English US)
+    # - vosk-model-small-cn-0.22 (Chinese)
+    # - vosk-model-small-de-0.15 (German)
+    # - vosk-model-small-en-in-0.4 (English India)
+    # - vosk-model-small-es-0.42 (Spanish)
+    # - vosk-model-small-fr-0.22 (French)
+    # - vosk-model-small-hi-0.22 (Hindi)
+    # - vosk-model-small-it-0.22 (Italian)
+    # - vosk-model-small-ja-0.22 (Japanese)
+    # - vosk-model-small-nl-0.22 (Dutch)
+    # - vosk-model-small-pt-0.3 (Portuguese)
+    # - vosk-model-small-ru-0.22 (Russian)
+    model: vosk-model-en-us-0.22-lgraph
+    # Language code for reference. It has no effect other than observability purposes.
+    # If a pre-installed "model" is declared, this will be set automatically if empty.
+    language:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
+    # Whether to override Vosk's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
+
+  sherpa:
+    # sherpa streaming model. This provider requires docker_image "docker.io/openvidu/agent-speech-processing-sherpa"
+    # Below is the list of pre-installed models in the container (available at https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models):
+    # - sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 (English)
+    # - sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06 (Spanish)
+    # - sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06 (German)
+    # - sherpa-onnx-streaming-zipformer-fr-kroko-2025-08-06 (French)
+    # - sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10 (Multilingual: Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese, Chinese)
+    model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
+    # Language code for reference. Auto-detected from model name if not set.
+    language:
+    # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
+    # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+    provider:
+    # Audio sample rate in Hz. Default is 16000.
+    sample_rate:
+    # Whether to return interim/partial results during recognition. Default is true.
+    partial_results:
+    # Number of threads for ONNX Runtime. Default is 2.
+    num_threads:
+    # Recognizer type ("transducer", "paraformer", "zipformer_ctc", "nemo_ctc", "t_one_ctc"). Auto-detected from model name if not set.
+    recognizer_type:
+    # Decoding method ("greedy_search", "modified_beam_search"). Default is "greedy_search".
+    decoding_method:
+    # Whether to override sherpa's built-in Voice Activity Detection (VAD) with Silero's VAD. Default is false.
+    use_silero_vad: false
+```
