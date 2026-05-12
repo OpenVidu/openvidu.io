@@ -249,8 +249,8 @@ nav:
       - Troubleshooting:
           - Recording: docs/troubleshooting/recording.md
       - Releases: docs/releases.md
-  # - Blog:
-  #     - blog/index.md
+  - Blog:
+      - blog/index.md
   - Support:
       - support.md
   - Pricing:
