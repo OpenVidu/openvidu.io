@@ -1,6 +1,7 @@
 ---
 draft: false
-date: 2026-04-28
+date: 2026-04-30
+slug: how-client-networks-affect-qoe-and-costs
 categories:
   - Technology
 tags:
