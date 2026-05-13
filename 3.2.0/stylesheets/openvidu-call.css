@@ -1,0 +1,123 @@
+.openvidu-call-features-cards > ul {
+	display: block !important;
+}
+
+.ov-call-docs-icon {
+	font-size: 1.5em;
+}
+
+.ov-call-commercial-img {
+	max-width: 100% !important; /* Default for small screens */
+	width: auto;
+	height: auto;
+	margin: auto;
+	text-align: center;
+}
+
+.ov-call-commercial-main-cards li {
+	text-align: center !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+.ov-call-commercial-feature-cards {
+	padding: 0 25px !important;
+	text-align: center !important;
+}
+.ov-call-commercial-title {
+	text-align: center !important;
+	font-size: 3em !important;
+	font-weight: bold !important;
+	margin: 0 !important;
+}
+
+.ov-call-commercial-features-title {
+	text-align: center !important;
+	font-size: 2em !important;
+	font-weight: bold !important;
+	/* margin: 0 0 2rem 0 !important; */
+}
+
+.ov-call-commercial-subtitle {
+	text-align: center !important;
+	font-size: large !important;
+	margin: 0 0 2rem 0 !important;
+}
+
+.ov-call-commercial-card-title {
+	font-size: 1.2em !important;
+	font-weight: bold !important;
+	vertical-align: middle;
+}
+
+.ov-call-commercial-main-cards li p:has(> .ov-call-to-action-btn) {
+	margin-top: auto !important;
+}
+
+.ov-call-commercial-icon {
+	font-size: 1.5em;
+	padding: 0.4rem;
+	border-radius: 50%;
+	height: auto !important;
+}
+
+.ov-call-footer-btn-container p {
+	text-align: center;
+}
+
+/* Dark mode */
+body[data-md-color-scheme='slate'] .ov-call-commercial-icon {
+	background-color: hsla(var(--md-hue), 70%, 30%, 1);
+	color: white;
+}
+
+/* Light mode */
+body[data-md-color-scheme='default'] .ov-call-commercial-icon {
+	background-color: #4d4d4d;
+	color: white;
+}
+
+.no-border li {
+	border: none !important;
+}
+.no-shadow li {
+	box-shadow: none !important;
+}
+.round-corners {
+	border-radius: 10px;
+}
+.three-cols {
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(min(100%, 12rem), 1fr)
+	) !important;
+}
+@media (min-width: 576px) {
+	.ov-call-commercial-img {
+		max-width: 80vw !important; /* Small devices (landscape phones, 576px and up) */
+	}
+}
+
+@media (min-width: 768px) {
+	.ov-call-commercial-img {
+		max-width: 70vw !important; /* Medium devices (tablets, 768px and up) */
+	}
+}
+
+@media (min-width: 992px) {
+	.ov-call-commercial-img {
+		max-width: 60vw !important; /* Large devices (desktops, 992px and up) */
+	}
+}
+
+@media (min-width: 1200px) {
+	.ov-call-commercial-img {
+		max-width: 50vw !important; /* Extra large devices (large desktops, 1200px and up) */
+	}
+}
+
+@media (min-width: 1400px) {
+	.ov-call-commercial-img {
+		max-width: 48vw !important; /* XX-Large devices (very large desktops, 1400px and up) */
+	}
+}
