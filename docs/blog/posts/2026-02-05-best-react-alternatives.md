@@ -1,6 +1,7 @@
 ---
 draft: false
-date: 2026-02-05
+date: 2026-05-19
+slug: 5-react-video-call-platforms
 categories:
   - Vertical
 tags:
