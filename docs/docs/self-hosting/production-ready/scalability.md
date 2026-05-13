@@ -288,7 +288,41 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu Elastic in DigitalOcean](../elastic/digitalocean/install.md)
     - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
-    Right now, there is no autoscaling in DigitalOcean, but you can configure the average number of nodes you want. To find out how, follow the steps of [Configurate Number of Fixed Media Nodes OpenVidu Elastic](../elastic/digitalocean/admin.md#change-fixed-number-of-media-nodes) or [Configurate Number of Fixed Media Nodes OpenVidu High Availability](../ha/digitalocean/admin.md#change-fixed-number-of-media-nodes) depending on your deployment.
+    The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target=_blank} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+    <div style="text-align: center;">
+        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+            <tr>
+              <th>Input Value</th>
+              <th>Default Value</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+                <td>initialNumberOfMediaNodes</td>
+                <td>1</td>
+                <td>Number of initial media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>minNumberOfMediaNodes</td>
+                <td>1</td>
+                <td>Minimum number of media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>maxNumberOfMediaNodes</td>
+                <td>5</td>
+                <td>Maximum number of media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>scaleTargetCPU</td>
+                <td>50</td>
+                <td>Target CPU percentage to scale up or down.</td>
+            </tr>
+            <tr>
+                <td>fixedNumberOfMediaNodes</td>
+                <td>0</td>
+                <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
+            </tr>
+        </table>
+    </div>
 
 ### Autoscaling On Premises
 
