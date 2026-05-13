@@ -6873,7 +6873,15 @@ Deploy OpenVidu using our official **Terraform** template:
 - [OpenVidu Elastic in DigitalOcean](https://openvidu.io/3.7.0/docs/self-hosting/elastic/digitalocean/install/index.md)
 - [OpenVidu High Availability in DigitalOcean](https://openvidu.io/3.7.0/docs/self-hosting/ha/digitalocean/install/index.md)
 
-Right now, there is no autoscaling in DigitalOcean, but you can configure the average number of nodes you want. To find out how, follow the steps of [Configurate Number of Fixed Media Nodes OpenVidu Elastic](https://openvidu.io/3.7.0/docs/self-hosting/elastic/digitalocean/admin/#change-fixed-number-of-media-nodes) or [Configurate Number of Fixed Media Nodes OpenVidu High Availability](https://openvidu.io/3.7.0/docs/self-hosting/ha/digitalocean/admin/#change-fixed-number-of-media-nodes) depending on your deployment.
+The cluster scales automatically thanks to an automated process using [DigitalOcean Functions](https://docs.digitalocean.com/products/functions/) (see [Custom scale-in strategy in Digital Ocean](https://openvidu.io/3.7.0/docs/self-hosting/elastic/digitalocean/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+
+| Input Value               | Default Value | Description                                                  |
+| ------------------------- | ------------- | ------------------------------------------------------------ |
+| initialNumberOfMediaNodes | 1             | Number of initial media nodes to deploy.                     |
+| minNumberOfMediaNodes     | 1             | Minimum number of media nodes to deploy.                     |
+| maxNumberOfMediaNodes     | 5             | Maximum number of media nodes to deploy.                     |
+| scaleTargetCPU            | 50            | Target CPU percentage to scale up or down.                   |
+| fixedNumberOfMediaNodes   | 0             | Fixed number of media nodes to create (0 = use autoscaling). |
 
 ### Autoscaling On Premises
 
