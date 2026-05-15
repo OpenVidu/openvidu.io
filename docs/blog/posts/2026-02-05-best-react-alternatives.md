@@ -38,7 +38,7 @@ In practice, that usually means exploring well-known SaaS platforms that promise
 - No infrastructure headaches
 - Familiar turnkey experience
 
-But there is a question teams often ask too late:
+But there are questions teams often ask too late:
 
 - What happens when video becomes core to your product?
 - What happens when usage grows faster than expected?
