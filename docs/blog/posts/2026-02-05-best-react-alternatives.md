@@ -327,6 +327,11 @@ Engineering-heavy teams that want ownership and deep customization of real-time 
 
 ### **[OpenVidu Meet](https://openvidu.io/)**
 
+![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet")
+![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet")
+
+
+
 Open source video platform built on top of LiveKit, increasing performance, reducing complexity and offering simplicity and scalability.
 
 **Hosting model**: Self-hosted
@@ -372,13 +377,14 @@ Teams that want the benefits of self-hosted infrastructure without the complexit
 
  The best choice depends on your priorities and constraints. Here’s a high-level comparison of the platforms we covered:
 
-| Platform | Integration style | Time to first call | Custom UI freedom | Backend/Auth effort | Ownership/control |
-| --- | --- | --- | --- | --- | --- |
-| **Agora** | React + Web SDK (`agora-rtc-react`) | Medium | High | Medium | Low |
-| **Zoom Video SDK** | Imperative SDK + UI toolkit | Medium | Medium | Medium | Low |
-| **Stream** |React SDK + composable UI components (`@stream-io/video-react-sdk`)  | Fast | Medium | Medium | Low |
-| **LiveKit** | React components (`@livekit/components-react`) with custom UI | Medium | High | High | Medium |
-| **OpenVidu Meet** | Web Component (`<openvidu-meet>`) + REST/Webhooks | Fast | Medium | Medium | High |
+| Platform           | Integration approach | UI flexibility | Infrastructure control | Backend complexity | Best fit                                                  |
+| ------------------ | ----------------- | -------------- | ---------------------- | ------------------ | --------------------------------------------------------- |
+| **Agora**          | React + Web SDK (`agora-rtc-react`)             | High           | Low                    | Medium             | Custom video products without managing RTC infrastructure |
+| **Zoom Video SDK** | Imperative SDK + UI toolkit             | Medium         | Low                    | Medium             | Zoom-like meeting experiences                             |
+| **Stream**         | React SDK + composable UI components (`@stream-io/video-react-sdk`)              | Medium         | Low                    | Medium         | Fast MVPs with polished UI                                |
+| **LiveKit**        | React components (`@livekit/components-react`) with custom UI            | High      | High                   | High               | Deeply customized real-time applications                  |
+| **OpenVidu Meet**  | Web Component (`<openvidu-meet>`) + REST/Webhooks         | Medium     | High                   | Low             | Ready-to-use meetings with self-hosting control           |
+
 
 ## 5. Conclusion
 
