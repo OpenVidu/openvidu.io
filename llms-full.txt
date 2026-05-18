@@ -6400,7 +6400,7 @@ Choose your provider:
 
 [**DigitalOcean**](https://openvidu.io/3.7.0/docs/self-hosting/single-node/digitalocean/index.md)
 
-[**OCI**](https://openvidu.io/3.7.0/docs/self-hosting/single-node/oracle/install-tutorial/index.md)
+[**OCI**](https://openvidu.io/3.7.0/docs/self-hosting/single-node/oracle/index.md)
 
 # OpenVidu Single Node PRO
 
@@ -6422,7 +6422,7 @@ Choose your provider:
 
 [**DigitalOcean**](https://openvidu.io/3.7.0/docs/self-hosting/single-node-pro/digitalocean/index.md)
 
-[**OCI**](https://openvidu.io/3.7.0/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.md)
+[**OCI**](https://openvidu.io/3.7.0/docs/self-hosting/single-node-pro/oracle/index.md)
 
 # OpenVidu Elastic
 
