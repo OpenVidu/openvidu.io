@@ -4,11 +4,11 @@ authors:
     description: ""
     avatar: https://openvidu.io/assets/images/about-us/authorPF.jpg # Author avatar
     url: https://openvidu.io/about-us/#pablo-fuente # Author website URL
-  carlosSantos:
+  csantosm:
     name: Carlos Santos
     description: ""
     avatar: https://openvidu.io/assets/images/about-us/authorCS.jpg
-    url: https://openvidu.io/about-us/#carlos-santos
+    url: ../about-us/#carlos-santos
   carlosRuiz:
     name: Carlos Ruiz
     description: ""
