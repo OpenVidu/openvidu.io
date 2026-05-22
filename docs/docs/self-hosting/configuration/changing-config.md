@@ -5,13 +5,13 @@ description: Learn how to modify OpenVidu configuration files across different d
 
 # How to change OpenVidu configuration
 
-The following steps are valid to change any configuration file in any deployment type. Simply just go to one of your Master Nodes, or the only Node in your deployment, and follow these steps:
+The following steps are valid to change any configuration file in any deployment type. Simply go to one of your Master Nodes, or the only Node in your deployment, and follow these steps:
 
 === "Steps to change OpenVidu configuration"
 
     1. Go to one of your Master Nodes (or the only node in your deployment).
     2. Go to `/opt/openvidu/config` directory.
-    3. Find and change the configuration parameter you want to modify, it could be any file: `openvidu.env`, `master_node.env`, `livekit.yaml`, `egress.yaml`, etc.
+    3. Find and change the configuration parameter you want to modify. It could be in any file: `openvidu.env`, `master_node.env`, `livekit.yaml`, `egress.yaml`, etc.
     4. Restart OpenVidu just by executing:
 
         ```
@@ -25,7 +25,7 @@ Notice that you only need to restart OpenVidu in one of the Master Nodes (or the
 Configuration files can be divided into three types:
 
 1. **`openvidu.env`**: This file defines configuration parameters used by other services. Such as the domain name, credentials, etc.
-2. **`master_node.env`** and **`media_node.env`** *(Only in Elastic and High Availability)*: These files define specific configuration parameters of the node they are placed in. It is very useful when you want to have different parameter values in different nodes.
+2. **`master_node.env`** and **`media_node.env`** *(Only in Elastic and High Availability)*: These files define specific configuration parameters of the node they are placed in. This is useful when you want to have different parameter values on different nodes.
 3. **`<service>.yaml`** or **`<service>.env`**: These files define the configuration of each service. For example, `livekit.yaml` defines the configuration of the OpenVidu Server, `egress.yaml` defines the configuration of the Egress Service, etc. 
 
     These files make use of the parameters defined in the `openvidu.env`, `master_node.env`, and `media_node.env` files. For example, any service configuration file can access the `DOMAIN_NAME` parameter defined in the `openvidu.env` file by using this syntax:
@@ -207,7 +207,7 @@ After changing the configuration and restarting, you need to make sure that the 
       line 17: cannot unmarshal !!str `trueee` into bool
     ```
 
-    As you can see, the log informs you about which Media Node is failing and the error that is causing the failure, so in this way you can fix the file which is causing the error. Once fixed, restart OpenVidu again:
+    As you can see, the log tells you which Media Node is failing and what error is causing the failure, so you can fix the file responsible for the error. Once fixed, restart OpenVidu again:
 
     ```bash
     systemctl restart openvidu

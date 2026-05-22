@@ -81,7 +81,7 @@ Finally, click Continue.
 
 ## Input Values
 
-In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter in the console the parameters declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
+In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters declared in our Terraform files into the console, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
 <div style="text-align: center;">

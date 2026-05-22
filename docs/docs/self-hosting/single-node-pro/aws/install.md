@@ -1,5 +1,5 @@
 ---
-title: OpenVidu Single Node installation on AWS
+title: OpenVidu Single Node PRO installation on AWS
 description: Learn how to deploy OpenVidu Single Node PRO on AWS using CloudFormation
 ---
 
@@ -17,9 +17,9 @@ description: Learn how to deploy OpenVidu Single Node PRO on AWS using CloudForm
     OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on AWS. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on AWS. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
-First of all, import the template in the AWS CloudFormation console. You can click the following button...
+First, import the template in the AWS CloudFormation console. You can click the following button...
 
 [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
@@ -31,10 +31,10 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-
 
 !!! info
 
-    If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.6.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.7.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.6.0/aws/cf-openvidu-singlenode.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.7.0/aws/cf-openvidu-singlenode.yaml
     ```
 
 === "Architecture overview"
@@ -125,4 +125,4 @@ To use your OpenVidu deployment, check the values of the JSON secret. All access
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node PRO deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your deployment.

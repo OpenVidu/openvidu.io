@@ -19,7 +19,7 @@ description: Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on AWS. The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
-First of all, import the template in the AWS CloudFormation console. You can click the following button...
+First, import the template in the AWS CloudFormation console. You can click the following button...
 
 [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduElastic&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-openvidu-elastic.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
@@ -31,10 +31,10 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 !!! info
     
-    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.6.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.7.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.6.0/aws/cf-openvidu-elastic.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.7.0/aws/cf-openvidu-elastic.yaml
     ```
 
 === "Architecture overview"
@@ -83,7 +83,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     ![EC2 Instance configuration](../../../../assets/images/self-hosting/elastic/aws/ec2-instance-config.png)
 
-    Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and and the Ubuntu distribution you want to use at **OperatingSystem**.
+    Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
     By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 

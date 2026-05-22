@@ -14,7 +14,7 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. This group dynamically adjusts the number of instances based on a target average CPU usage.
 
-Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:
+Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
 
 ## Cluster shutdown and startup
 
@@ -29,11 +29,11 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
+    3. On this tab, go to the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
         <figure markdown>
         ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-0.png){ .svg-img .dark-img }
         </figure>
-    4. Click on save and wait, it needs the lambda function to run until is completed, you can check how is going in the _"VM instances"_ tab.
+    4. Click _"Save"_ and wait for it to complete. You can check the progress in the _"VM instances"_ tab.
         <figure markdown>
         ![Save Edits MIG](../../../../assets/images/self-hosting/shared/gcp-mig-save.png){ .svg-img .dark-img }
         </figure>
@@ -48,7 +48,7 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
     To start the cluster, first start the Master Node and then the Media Nodes.
 
     1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target=_blank}.
-    2. In _"VM instances"_ tab select the instance called `<STACK_NAME>-master-node`, here click on start to start the Master Node.
+    2. In _"VM instances"_ tab select the instance called `<STACK_NAME>-master-node`, then click _"Start"_ to start the Master Node.
         <figure markdown>
         ![Start Master Node](../../../../assets/images/self-hosting/elastic/gcp/gcp-start-master-node.png){ .svg-img .dark-img }
         </figure>
@@ -57,11 +57,11 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    5. Go to **Group Size & autoscaling** tab and change the _"Minimun"_ and _"Maximum"_ number of instances to your desired ones.
+    5. Go to the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to your desired values.
         <figure markdown>
         ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-1.png){ .svg-img .dark-img }
         </figure>
-    6. Click on save and wait until is completed. You can check the progress in the _"Instances"_ tab.
+    6. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
         <figure markdown>
         ![Save Edits MIG](../../../../assets/images/self-hosting/shared/gcp-mig-save.png){ .svg-img .dark-img }
         </figure>
@@ -92,7 +92,7 @@ It is possible to change the instance type of both the Master Node and the Media
 
     !!! info
 
-        This will delete the media nodes without the graceful delete option, if you want to stop them gracefully check the [Shutdown the Cluster](#shutting-down-the-cluster) tab
+        This will delete the media nodes without the graceful delete option. If you want to stop them gracefully, check the [Shutdown the Cluster](#shutting-down-the-cluster) tab.
 
     1. Go to the _"Instance Group"_ tab and select the resource called `<STACK_NAME>-media-node-group` and click on the _"Template"_.
         <figure markdown>
@@ -102,15 +102,15 @@ It is possible to change the instance type of both the Master Node and the Media
         <figure markdown>
         ![Create Similar Template](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-create-similar.png){ .svg-img .dark-img }
         </figure>
-    3. Go back to the _"Instace Group"_ and click on _"Edit"_
+    3. Go back to the _"Instance Group"_ and click on _"Edit"_.
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    4. In _"Instace template & overrides"_ change the template for the one you've created previously and then _"Save"_.
+    4. In _"Instance template & overrides"_, change the template to the one you created previously, and then click _"Save"_.
         <figure markdown>
         ![Change Template MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-change-template.png){ .svg-img .dark-img }
         </figure>
-    5. Delete the old sized instances.
+    5. Delete the old instances.
         <figure markdown>
         ![Delete old sized instances MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-delete-old-instances.png){ .svg-img .dark-img }
         </figure>
@@ -127,7 +127,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
     3. On this tab, go to _"Group size & autoscaling"_ and change the tab called _"Autoscaling signals"_
-    4. In this tab you will find the signal that is actually using. Here you can add new signals or modify existing ones.
+    4. In this tab you will find the signal currently in use. Here you can add new signals or modify existing ones.
         <figure markdown>
         ![Signals MIG](../../../../assets/images/self-hosting/shared/gcp-signals.png){ .svg-img .dark-img }
         </figure>
@@ -148,21 +148,21 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/elastic/gcp/gcp-elastic-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the value of fixed number of Media Nodes you want. In this case is set to 3. Click on save next and wait to be applied
+    3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the value of fixed number of Media Nodes you want. In this case it is set to 3. Click _"Save"_ and wait for the changes to be applied.
         <figure markdown>
         ![Fixed Number Media Nodes](../../../../assets/images/self-hosting/shared/gcp-fixed-media-nodes.png){ .svg-img .dark-img }
         </figure>
 
     !!! info
 
-        This will delete the media nodes if you have set them to less than the number of media nodes that existed, if you want to stop them gracefully check the [Shutdown the Cluster](#shutting-down-the-cluster) tab.
+        This will delete the media nodes if you have set the count lower than the existing number. If you want to stop them gracefully, check the [Shutdown the Cluster](#shutting-down-the-cluster) tab.
 
 ### Deactivate Scale In
 If you want a fixed number of Media Nodes you probably want to deactivate the Cloud Run Function that controls scale in actions. Follow these steps to do it:
 
 === "Deactivate Cloud Run Function"
 
-    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
+    1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target=_blank} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
         <figure markdown>
         ![Deactivate Scale In](../../../../assets/images/self-hosting/elastic/gcp/gcp-scalein-deactivate.png){ .svg-img .dark-img }
         </figure>

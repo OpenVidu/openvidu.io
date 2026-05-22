@@ -14,7 +14,7 @@ description: Learn how to perform administrative tasks on an Azure OpenVidu High
 
 The deployment of OpenVidu High Availability on Azure is automated using Azure Resource Manager Templates, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Virtual Machine Scale Set :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target=_blank}. The Virtual Machine Scale Set of Media Nodes is configured to scale based on the target average CPU usage.
 
-Internally, the Azure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth taking into account:
+Internally, the Azure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Azure environment that are worth keeping in mind:
 
 ## Cluster Shutdown and Startup
 
@@ -38,7 +38,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         <figure markdown>
         ![Edit Scaling Set Group](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-edit-media-ss-to-stop.png){ .svg-img .dark-img }
         </figure>
-    4. Click on save and wait until it is completed. You can check the progress in the _"Instances"_ tab.
+    4. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
         <figure markdown>
         ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
@@ -59,15 +59,15 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         </figure>
     3. Wait until the instance is running.
     4. Repeat step 2 and 3 for all the Master Nodes until they are all up and running.
-    5. Go back to the Resource Group, and there click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, here click on _"Scaling"_ option.
+    5. Go back to the Resource Group, and there click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, then click the _"Scaling"_ option.
         <figure markdown>
         ![Selecting scaling menu Scale Set](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-scaling-tab.png){ .svg-img .dark-img }
         </figure>
-    6. On this tab, modify the _"Instance Limits"_ to your desired ones.
+    6. On this tab, modify the _"Instance Limits"_ to your desired values.
         <figure markdown>
         ![Edit Scaling Set Group](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-edit-media-ss-to-start.png){ .svg-img .dark-img }
         </figure>
-    7. Click on save and wait until is completed. You can check the progress in the _"Instances"_ tab.
+    7. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
         <figure markdown>
         ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
@@ -114,7 +114,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 === "Media Nodes Autoscaling Configuration"
 
     1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
-    2. Select the Resource Group where you deployed OpenVidu High Availavility.
+    2. Select the Resource Group where you deployed OpenVidu High Availability.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Scaling"_ option.
         <figure markdown>
@@ -124,7 +124,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
         
         !!! warning
 
-            Currently there is only one rule to scale out. We are actively working in providing a graceful scale in process for Media Nodes to avoid active Rooms disruption.
+            Currently there is only one rule to scale out. We are actively working on providing a graceful scale-in process for Media Nodes to avoid active Rooms disruption.
 
         <figure markdown>
         ![Rules section](../../../../assets/images/self-hosting/ha/azure/azure-rules-section-ss.png){ .svg-img .dark-img }
@@ -160,11 +160,11 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
         <figure markdown>
         ![Selecting scaling menu Scale Set](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-scaling-tab.png){ .svg-img .dark-img }
         </figure>
-    4. On this tab, go at the very bottom and modify the _"Instance Limits"_ to the value of fixed number of media nodes you want. In this case is set to 2.
+    4. On this tab, go to the very bottom and modify the _"Instance Limits"_ to the fixed number of Media Nodes you want. In this case, it is set to 2.
         <figure markdown>
         ![Edit Scaling Set Group](../../../../assets/images/self-hosting/ha/azure/azure-ha-admin-edit-media-ss-fixed.png){ .svg-img .dark-img }
         </figure>
-    5. Click on save and wait until is completed, you can check how is going in the _"Instances"_ tab.
+    5. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
         <figure markdown>
         ![Location Instance Tab](../../../../assets/images/self-hosting/ha/azure/azure-admin-instance-tab.png){ .svg-img .dark-img }
         </figure>
@@ -172,7 +172,7 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
 
 ## Administration and configuration
 
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises High Availability Administration](../on-premises/admin.md) section.
+Regarding the administration of your deployment, you can follow the instructions in the [On Premises High Availability Administration](../on-premises/admin.md) section.
 
 Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
@@ -194,7 +194,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
         <figure markdown>
         ![Azure Key Vault New Version Secret Create](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-create.png){ .svg-img .dark-img }
         </figure>
-    6. Go to the Master Node resource you've want to change the secrets on and click on _"Restart"_ to apply the changes to the OpenVidu HA deployment.
+    6. Go to the Master Node resource whose secrets you want to change and click on _"Restart"_ to apply the changes to the OpenVidu HA deployment.
         <figure markdown>
         ![Reboot Instance](../../../../assets/images/self-hosting/ha/azure/reboot-instance.png){ .svg-img .dark-img }
         </figure>

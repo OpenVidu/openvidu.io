@@ -1,6 +1,7 @@
 ---
 draft: false
-date: 2026-03-09
+date: 2026-05-26
+slug: scale-in-problem-in-videoconferences
 categories:
  - Technology
 tags:

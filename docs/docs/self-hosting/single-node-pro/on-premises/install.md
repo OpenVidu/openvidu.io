@@ -73,7 +73,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 
 ??? warning "Make sure the proper ports are opened in the internal linux firewall!"
 
-    In linux machine has a internal firewall installed, make sure you open the proper ports. For ubuntu you can follow these instructions:
+    If a Linux machine has an internal firewall installed, make sure you open the proper ports. For Ubuntu, you can follow these instructions:
 
     1. Execute the following commands to install firewall-cmd and start it in the machine.
     ```
@@ -82,13 +82,13 @@ Ensure all these rules are configured in your firewall, security group, or any n
     systemctl start firewalld
 
     ```
-    2. Execute the following commands to clean the iptables rules, accept all inputs and deactivate iptables at start:
+    2. Execute the following commands to clear the iptables rules, accept all input, and deactivate iptables at startup:
     ```
     sudo iptables -F
     sudo iptables -P INPUT ACCEPT
 
     ```
-    3. Execute the following commands to add firewall rules are the following:
+    3. Execute the following commands to add the firewall rules:
     ```
     firewall-cmd --add-port=80/tcp
     firewall-cmd --permanent --add-port=80/tcp
@@ -134,7 +134,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
     firewall-cmd --permanent --add-port=50000-60000/tcp
 
     ```
-    Finish it with the next command to apply the rules and to check if the rules are correct:
+    Finish with the following commands to apply the rules and verify they are correct:
     ```
     firewall-cmd --reload
     firewall-cmd --runtime-to-permanent

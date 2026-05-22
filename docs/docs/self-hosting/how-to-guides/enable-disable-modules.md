@@ -15,7 +15,7 @@ These modules are configured in the parameter `ENABLED_MODULES`.
 - **Single Node**: `/opt/openvidu/config/openvidu.env`
 - **Elastic / High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
 
-The environment variable `ENABLED_MODULES` will all the modules enabled would look like this:
+The environment variable `ENABLED_MODULES` with all the modules enabled would look like this:
 
 ```bash
 ENABLED_MODULES=app,observability,v2compatibility
@@ -29,7 +29,7 @@ systemctl restart openvidu
 
 ## About modules configuration
 
-If you've installed OpenVidu with all modules enabled, you may not need to change these configurations. But in case you've installed openvidu with some modules disabled, you may need to configure some parameters when enabling them.
+If you've installed OpenVidu with all modules enabled, you may not need to change these configurations. But in case you've installed OpenVidu with some modules disabled, you may need to configure some parameters when enabling them.
 
 === "app"
 
@@ -46,7 +46,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu Meet service which is necessary.
+        With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
 
     === "Elastic"
 
@@ -59,7 +59,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://master-node:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu Meet service which is necessary.
+        With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
 
     === "High Availability"
 
@@ -72,7 +72,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu Meet service which is necessary.
+        With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
 
 === "v2compatibility"
 
@@ -89,7 +89,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://master-node:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu V2 Compatibility service which is necessary.
+        With this configuration, the LiveKit service will send webhooks to the OpenVidu V2 Compatibility service, which is necessary.
 
     === "High Availability"
 
@@ -102,7 +102,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
                 - http://localhost:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
-        With this configuration, the Livekit service will send webhooks to the OpenVidu V2 Compatibility service which is necessary.
+        With this configuration, the LiveKit service will send webhooks to the OpenVidu V2 Compatibility service, which is necessary.
 
 === "observability"
 
@@ -149,7 +149,7 @@ These configurations should be valid just by copying and pasting them into the `
 On any problem, check these sections:
 
 - [Config Troubleshooting](../configuration/changing-config.md#troubleshooting-configuration)
-- Status and Checking Logs sections of Administration sections of each deployment type:
+- The Status and Checking Logs sections under Administration for each deployment type:
     - [Single Node](../single-node/on-premises/admin.md#checking-the-status-of-services)
     - [Elastic](../elastic/on-premises/admin.md#checking-the-status-of-services)
     - [High Availability](../ha/on-premises/admin.md#checking-the-status-of-services)

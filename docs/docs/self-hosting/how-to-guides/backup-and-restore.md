@@ -7,7 +7,7 @@ description: Learn how to safeguard OpenVidu recordings, observability metrics, 
 
 ## Overview
 
-Keeping reliable backups of your OpenVidu data guarantees that recordings, observability metrics, operational statistics and OpenVidu Meet data survive unexpected update failures or planned migrations. The **most critical data to protect** in any OpenVidu deployment is located inside the node of your installation: in the single node of a Single Node deployment, or in any master node of Elastic and High Availability deployments. Specifically:
+Keeping reliable backups of your OpenVidu data guarantees that recordings, observability metrics, operational statistics, and OpenVidu Meet data survive unexpected update failures or planned migrations. The **most critical data to protect** in any OpenVidu deployment is located on the node of your installation: on the single node of a Single Node deployment, or on any master node of Elastic and High Availability deployments. Specifically:
 
 - **OpenVidu deployment files** (`/opt/openvidu/`). You may want to back them up to preserve specific configurations. Specifically:
     - `/opt/openvidu/config/`: main configuration files for OpenVidu Platform and OpenVidu Meet.
@@ -29,14 +29,14 @@ You can back up and restore OpenVidu deployments using one of the following four
 1. Direct snapshots of OpenVidu nodes via your infrastructure provider.
 2. File-level snapshots of `/opt/openvidu/` on master nodes.
 3. Only backup data from MinIO/S3 and MongoDB.
-4. Only Snapshots data offered by external services used for S3 or MongoDB.
+4. Only snapshots provided by external services used for S3 or MongoDB.
 
 ## Which backup method should I use?
 
 First, identify where your S3 and MongoDB services run. SSH to your OpenVidu deployment node (or any master node) and inspect these environment variables:
 
-- `EXTERNAL_S3_ENDPOINT`: blank when MinIO runs internally in the deployment.
-- `EXTERNAL_MONGO_URI`: blank when MongoDB runs internally in the deployment.
+- `EXTERNAL_S3_ENDPOINT`: blank when MinIO runs internally within the deployment.
+- `EXTERNAL_MONGO_URI`: blank when MongoDB runs internally within the deployment.
 
 Find both variables in the OpenVidu configuration files:
 
@@ -49,8 +49,8 @@ With that information, pick the backup approach that best fits your scenario:
 | --- | --- |
 | <ul><li>You are using S3 (MinIO) and MongoDB internally with your deployment.</li><li>Your infrastructure provider allows VM snapshots.</li><li>You need a fast copy of the entire machine with all deployment data.</li><li>Ideal for quick rollbacks after failed upgrades or OS patching.</li><li>Great when compliance requires full-system images on a schedule.</li></ul> | [Method 1: Direct snapshots of OpenVidu nodes via your infrastructure provider](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider) |
 | <ul><li>You are using S3 (MinIO) and MongoDB internally with your deployment.</li><li>Your infrastructure provider or hypervisor does not allow VM snapshots.</li><li>You only want to save the OpenVidu deployment config and data, not the full VM.</li></ul> | [Method 2: File-level snapshots of `/opt/openvidu/` on master nodes](#method-2-file-level-snapshots-of-optopenvidu-on-master-nodes) |
-| <ul><li>You are using S3 (MinIO) and MongoDB internally with your deployment.</li><li>You just want to backup OpenVidu Platform and OpenVidu Meet data.</li><li>You want to move your S3/MinIO and MongoDB data a new OpenVidu installation</li></ul> | [Method 3: Only backup data from MinIO/S3 and MongoDB](#method-3-only-backup-data-from-minios3-and-mongodb) |
-| <ul><li>You are using external S3 and MongoDB services in your deployment.</li><li>You just want to backup OpenVidu Platform and OpenVidu Meet data.</li><li>You want to reduce operational overhead by delegating data backups.</li></ul> | [Method 4: Only Snapshots data offered by external services used for S3 or MongoDB](#method-4-only-snapshots-data-offered-by-external-services-used-for-s3-or-mongodb) |
+| <ul><li>You are using S3 (MinIO) and MongoDB internally with your deployment.</li><li>You just want to back up OpenVidu Platform and OpenVidu Meet data.</li><li>You want to move your S3/MinIO and MongoDB data to a new OpenVidu installation.</li></ul> | [Method 3: Only backup data from MinIO/S3 and MongoDB](#method-3-only-backup-data-from-minios3-and-mongodb) |
+| <ul><li>You are using external S3 and MongoDB services in your deployment.</li><li>You just want to back up OpenVidu Platform and OpenVidu Meet data.</li><li>You want to reduce operational overhead by delegating data backups.</li></ul> | [Method 4: Only snapshots provided by external services used for S3 or MongoDB](#method-4-only-snapshots-data-offered-by-external-services-used-for-s3-or-mongodb) |
 
 ## Method 1: Direct snapshots of OpenVidu nodes via your infrastructure provider
 
@@ -64,7 +64,7 @@ If you deploy OpenVidu on a cloud provider **without externalizing S3 or MongoDB
     - Azure: Check [VM backups from VM settings](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-first-look-arm){:target="_blank" rel="noopener"}.
     - Google Cloud: Check [Backup and DR Service for Compute Engine instances and disks](https://docs.cloud.google.com/backup-disaster-recovery/docs/concepts/backupdr-for-compute-engine?hl=en){:target="_blank" rel="noopener"}.
 3. Automate snapshots using your provider's scheduler (AWS Backup, Azure Automation, Cloud Scheduler) for consistent recovery points.
-4. Restore by cloning a new node from the snapshot/AMI, updating DNS or load balancer targets.
+4. Restore by cloning a new node from the snapshot/AMI and updating DNS or load balancer targets.
 5. Check the [After restore](#after-restore) section to verify everything works correctly.
 
 
@@ -86,7 +86,7 @@ Run the following procedure on **each master node** in Single Node or Elastic/HA
 
 In this example, we use an [S3-compatible object storage](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html#amazon-s3){:target="_blank" rel="noopener"} service as the restic backend. You can adapt the commands if you prefer another supported backend.
 
-Firstly, export reusable variables once per shell session on each master node. Adjust the repository URL, credentials, and cache paths to match your environment:
+First, export reusable variables once per shell session on each master node. Adjust the repository URL, credentials, and cache paths to match your environment:
 
 ```bash
 export RESTIC_REPOSITORY="s3:https://backup.example.com/openvidu-backups"
@@ -297,7 +297,7 @@ Generate portable snapshots using [restic](https://restic.net/){:target="_blank"
 
 ### Prerequisites
 
-- A separated machine with network access to OpenVidu. Ports 9100 TCP (MinIO) and 20000 TCP (MongoDB) must be reachable from the backup machine to the OpenVidu deployment node or master nodes.
+- A separate machine with network access to OpenVidu. Ports 9100 TCP (MinIO) and 20000 TCP (MongoDB) must be reachable from the backup machine to the OpenVidu deployment node or master nodes.
 
     !!! info
         You can run the backup commands from any OpenVidu node or master node, but it is **not recommended** because it adds load to production services and it requires extra disk space on those nodes to stage the backup data.
@@ -390,16 +390,16 @@ About the exported variables:
         ```
 
         !!! warning
-            Store safelly your current Meet Admin user and password, you will need them to access OpenVidu Meet after the restore.
+            Store your current Meet Admin user and password safely; you will need them to access OpenVidu Meet after the restore.
 
         !!! warning
-            Take into account that admin database users and roles are not backed up with this method. If you need to back them up, remove the last `rm -rf` command, but ensure your new installation has the same admin user for the restore to work.
+            Note that admin database users and roles are not backed up with this method. If you need to back them up, remove the last `rm -rf` command, but ensure your new installation has the same admin user for the restore to work.
 
     4. Mirror S3 buckets to the staging directory:
 
         === "MinIO"
 
-            If you are the default MinIO instance that comes with OpenVidu deployments, run:
+            If you are using the default MinIO instance that comes with OpenVidu deployments, run:
 
             ```bash
             sudo docker run --rm \
@@ -550,14 +550,14 @@ About the exported variables:
         The `--drop` flag removes existing collections before importing the backup, guaranteeing an exact rollback to the selected snapshot.
 
         !!! warning
-            If the command fails with the follwing error in HA deployments...
+            If the command fails with the following error in HA deployments...
 
             ```
             Failed: openvidu.events: error dropping collection: (NotWritablePrimary) not primary
             ```
-            ... Try to execute it with a different `OPENVIDU_NODE_IP` that points to another master node in HA deployments until it succeeds.
+            ... try executing it with a different `OPENVIDU_NODE_IP` that points to another master node in HA deployments until it succeeds.
 
-    5. Restore s3 objects by mirroring the buckets back into OpenVidu:
+    5. Restore S3 objects by mirroring the buckets back into OpenVidu:
 
         === "MinIO"
 
@@ -627,7 +627,7 @@ About the exported variables:
 !!! info
     If any of the MongoDB or MinIO restore commands fail, check the version compatibility between the Docker images used in the backup/restore process and the versions running in your OpenVidu deployment. You can check the versions in the [Release Notes](../../releases.md){:target="_blank" rel="noopener"} and adjust the image tags in the `docker run` commands to match your environment.
 
-## Method 4: Only Snapshots data offered by external services used for S3 or MongoDB.
+## Method 4: Only snapshots provided by external services used for S3 or MongoDB
 
 When you use **managed S3-compatible services or managed MongoDB providers**, rely on their built-in snapshot and backup capabilities.
 
@@ -650,11 +650,11 @@ To ensure everything works correctly after restoring data, follow these steps:
     If you are restoring a system with new private and public IPs or domain names, ensure that the configuration files reflect the new values after the restore.
     === "Single Node"
 
-        - The `DOMAIN_NAME` in `/opt/openvidu/config/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate node.
+        - The `DOMAIN_NAME` in `/opt/openvidu/config/openvidu.env` reflects the correct domain name for your deployment, and the domain DNS records or load balancer point to the appropriate node.
 
     === "Elastic"
 
-        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate master nodes.
+        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflects the correct domain name for your deployment, and the domain DNS records or load balancer point to the appropriate master nodes.
         - Ensure that the master node has the correct private IP configured in `/opt/openvidu/config/node/master-node.env` for the `MASTER_NODE_PRIVATE_IP` variable:
 
             ```
@@ -672,7 +672,7 @@ To ensure everything works correctly after restoring data, follow these steps:
 
     === "High Availability"
 
-        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflect the correct domain names for your deployment are set and the domain DNS records or load balancer point to the appropriate master nodes.
+        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflects the correct domain name for your deployment, and the domain DNS records or load balancer point to the appropriate master nodes.
         - Ensure that all master nodes have the correct private IP configured in `/opt/openvidu/config/node/master-node.env` for the `MASTER_NODE_X_IP` variables:
 
             ```
@@ -703,7 +703,7 @@ To ensure everything works correctly after restoring data, follow these steps:
 
 3. **Verify Data Integrity**: Check that recordings, observability metrics, and operational data are intact and accessible.
 
-4. **In AWS, Azure, or GCP deployments**: Ensure if you followed [Method 1](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider) that the restored VMs have the correct security groups, IAM roles, and network configurations.
+4. **In AWS, Azure, or GCP deployments**: If you followed [Method 1](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider), ensure that the restored VMs have the correct security groups, IAM roles, and network configurations.
 
 ## About restic
 

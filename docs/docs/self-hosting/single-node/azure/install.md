@@ -41,7 +41,7 @@ To deploy the template, you need to fill in the following parameters.
 
 ### Azure Instance Configuration
 
-Specify properties for the Azure instance that will host Openvidu.
+Specify properties for the Azure instance that will host OpenVidu.
 
 === "Azure Instance configuration"
 

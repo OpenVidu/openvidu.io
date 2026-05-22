@@ -17,9 +17,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Single Node"
 
     !!! note
-        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 10px">COMMUNITY</span> Deployment](../single-node/on-premises/install.md) and the [Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span> Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend you to read the installation guides before proceeding with this guide to have a better understanding of the deployment.
+        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 10px">COMMUNITY</span> Deployment](../single-node/on-premises/install.md) and the [Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span> Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the installation guides before proceeding with this guide for a better understanding of the deployment.
 
-    This is how the architecture of the deployment looks like:
+    This is what the architecture of the deployment looks like:
 
     <figure markdown>
     ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .svg-img .dark-img }
@@ -153,9 +153,9 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Elastic"
 
     !!! note
-        The Elastic deployment with an external proxy is based on the same instructions as the [Elastic Deployment](../elastic/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend you to read the [Elastic Deployment](../elastic/on-premises/install.md) guide before proceeding with this guide to have a better understanding of the deployment.
+        The Elastic deployment with an external proxy is based on the same instructions as the [Elastic Deployment](../elastic/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the [Elastic Deployment](../elastic/on-premises/install.md) guide before proceeding with this guide for a better understanding of the deployment.
 
-    This is how the architecture of the deployment looks like:
+    This is what the architecture of the deployment looks like:
 
     <figure markdown>
     ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .svg-img .dark-img }
@@ -304,4 +304,4 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
 === "High Availability"
 
-    The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained  [in this section](../ha/on-premises/install-nlb.md).
+    The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained [in this section](../ha/on-premises/install-nlb.md).

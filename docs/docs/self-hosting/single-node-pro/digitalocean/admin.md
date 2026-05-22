@@ -1,6 +1,6 @@
 ---
 title: OpenVidu Single Node PRO administration on DigitalOcean
-description: Learn how to perform administrative tasks on an DigitalOcean OpenVidu Single Node PRO deployment
+description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu Single Node PRO deployment
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: DigitalOcean
@@ -24,7 +24,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
-    3. In the section of the Droplet click on _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
+    3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop droplet](../../../../assets/images/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .svg-img .dark-img }
@@ -34,7 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
-    3. In the section of the Droplet click on _"Power"_ and the _"Turn On"_ to start the Droplet (and therefore OpenVidu).
+    3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
     <figure markdown>
     ![Start droplet](../../../../assets/images/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .svg-img .dark-img }
@@ -46,7 +46,7 @@ You can change the droplet size of the OpenVidu Single Node PRO to adapt it to y
 
 1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
 2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
-3. [Stop](#stop-openvidu-single-node) the droplet if is not stopped.
+3. [Stop](#stop-openvidu-single-node) the droplet if it is not stopped.
 4. Click on _"Upsize Droplet"_ and change the size, then click on _"Resize"_.
 
     === "Change droplet size"

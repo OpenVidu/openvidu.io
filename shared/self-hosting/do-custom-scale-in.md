@@ -1,15 +1,8 @@
 ## Custom scale-in strategy
 
-Currently DigitalOcean does not support autoscaling. OpenVidu Elastic and OpenVidu High Availability Autoscale Pool of Media Nodes is fixed in number.
-
-!!! info
-    Autoscaling of Media Nodes in DigitalOcean is a work in progress and will be available in a future release.
-
-<!-- We use a custom scale-in strategy to allow the graceful shutdown of Media Nodes. In this way we ensure no disruption of active Rooms when the cluster tries to remove a Media Node.
+We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes, ensuring that active Rooms are never disrupted when the cluster removes a Media Node.
 
 === "Custom scale-in strategy"
 
-    - The Managed Instance Group (MIG) is set to Scale OUT only.
-    - We use a lambda function to check if the MIG current size is more than the recommended size that it targets.
-    - If the current size is more than the recommended size we calculate the number of instances that should scale in and we remove them from the MIG.
-    - The instances have a cron job that checks every minute if they are out of the MIG and runs the graceful shutdown script if they are out of the MIG. -->
+    - A Lambda function is deployed on a four-minute schedule to manage the scaling of Media Nodes. It does this by checking the **`minNumberOfMediaNodes`** and **`maxNumberOfMediaNodes`** variables, polling the average CPU usage, and comparing it against **`scaleTargetCPU`**. Once a scale-in decision is made, the main tag is removed from the target Media Node and a "draining" tag is applied to mark it as ready for shutdown.
+    - Each instance runs a cron job that checks every two minutes whether the "draining" tag is present. If it is, the graceful shutdown script is triggered, which waits for all active rooms on that node to conclude before shutting down.

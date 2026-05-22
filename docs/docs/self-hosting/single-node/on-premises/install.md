@@ -64,9 +64,9 @@ Ensure all these rules are configured in your firewall, security group, or any n
 | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
 | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
 
-??? warning "Make sure the proper ports are opened in the internal linux firewall!"
+??? warning "Make sure the proper ports are opened in the internal Linux firewall!"
 
-    In linux machine has a internal firewall installed, make sure you open the proper ports. For ubuntu you can follow these instructions:
+    If a Linux machine has an internal firewall installed, make sure you open the proper ports. For Ubuntu you can follow these instructions:
 
     1. Execute the following commands to install firewall-cmd and start it in the machine.
     ```
@@ -81,7 +81,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
     sudo iptables -P INPUT ACCEPT
 
     ```
-    3. Execute the following commands to add firewall rules are the following:
+    3. Execute the following commands to add the required firewall rules:
     ```
     firewall-cmd --add-port=80/tcp
     firewall-cmd --permanent --add-port=80/tcp
@@ -122,7 +122,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
     firewall-cmd --permanent --add-port=50000-60000/udp
 
     ```
-    Finish it with the next command to apply the rules and to check if the rules are correct:
+    Finish with the following commands to apply the rules and verify they are correct:
     ```
     firewall-cmd --reload
     firewall-cmd --runtime-to-permanent

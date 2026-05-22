@@ -5,11 +5,11 @@ description: Learn how to configure OpenVidu with an external S3 provider for re
 
 # Configuring external S3 for OpenVidu recordings
 
-OpenVidu, by default, utilizes MinIO for recording storage, but it can be configured to use an external S3 provider instead. This guide provides the necessary steps to configure OpenVidu with an external S3 provider for your deployment.
+OpenVidu, by default, uses MinIO for recording storage, but it can be configured to use an external S3 provider instead. This guide provides the steps necessary to configure OpenVidu with an external S3 provider for your deployment.
 
 !!! info
-    
-    If you are deploying using AWS CloudFormation, the S3 bucket is configured automatically to use the AWS S3 service. **In this case there is no need to follow this guide**.
+
+    If you are deploying using AWS CloudFormation, the S3 bucket is configured automatically to use the AWS S3 service. **In this case, there is no need to follow this guide**.
 
 ## Configuration
 
@@ -47,7 +47,7 @@ systemctl restart openvidu
 
 !!! info
 
-    Take into account that when using an external S3 bucket, the MinIO service will not be started, and will appear as `Exited (0)` when checking the status of the services.
+    Note that when using an external S3 bucket, the MinIO service will not be started and will appear as `Exited (0)` when checking the status of the services.
 
 ## Example with AWS S3
 
@@ -81,14 +81,58 @@ The `EXTERNAL_S3_PATH_STYLE_ACCESS` parameter is used to specify whether to use 
 | MinIO | `false` |
 | DigitalOcean Spaces | `false` |
 
-Usually the value `false` is compatible with all S3 providers, but some providers may require `true`, so check the documentation of your S3 provider to confirm the correct value.
+Usually the value `false` is compatible with all S3 providers, but some providers may require `true`. Check the documentation of your S3 provider to confirm the correct value.
+
+## Server-Side Encryption
+
+When using an external S3 provider, you can optionally enable **Server-Side Encryption (SSE)** for data at rest. This applies to both the application data bucket (`EXTERNAL_S3_BUCKET_APP_DATA`) and, in High Availability deployments, the cluster data bucket (`EXTERNAL_S3_BUCKET_CLUSTER_DATA`).
+
+Add the following parameters to your `openvidu.env` file:
+
+```bash
+EXTERNAL_S3_SSE_TYPE=<YOUR_SSE_TYPE>
+EXTERNAL_S3_SSE_KMS_KEY_ID=<YOUR_KMS_KEY_ID>
+EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=<YOUR_KMS_ENCRYPTION_CONTEXT>
+```
+
+**Parameter Details:**
+
+- `EXTERNAL_S3_SSE_TYPE`: The server-side encryption algorithm to use. Supported values are:
+    - `SSE-S3`: Server-side encryption with S3 managed keys (AES256).
+    - `SSE-KMS`: Server-side encryption with AWS KMS managed keys.
+- `EXTERNAL_S3_SSE_KMS_KEY_ID`: The AWS KMS key ID to use for encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is set to `SSE-KMS`.
+- `EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`: An optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. If set, it must be a valid JSON object.
+
+!!! info
+
+    AWS S3 enables [server-side encryption by default](https://aws.amazon.com/blogs/aws/amazon-s3-encrypts-new-objects-by-default/){:target="_blank"} for new objects, but other S3 providers may not. The OpenVidu SSE settings allow you to **explicitly enforce** encryption regardless of the provider's default behavior, ensuring consistent data protection across all deployments.
+
+### SSE-S3 Example
+
+To use SSE-S3 (AES256 encryption managed by S3):
+
+```bash
+EXTERNAL_S3_SSE_TYPE=SSE-S3
+EXTERNAL_S3_SSE_KMS_KEY_ID=
+EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=
+```
+
+### SSE-KMS Example
+
+To use SSE-KMS with a specific AWS KMS key and an optional encryption context:
+
+```bash
+EXTERNAL_S3_SSE_TYPE=SSE-KMS
+EXTERNAL_S3_SSE_KMS_KEY_ID=arn:aws:kms:eu-west-1:123456789012:key/12345678-1234-1234-1234-123456789012
+EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT={"department":"engineering","project":"openvidu"}
+```
 
 ## Troubleshooting
 
 On any problem, check these sections:
 
 - [Config Troubleshooting](../configuration/changing-config.md#troubleshooting-configuration)
-- Status and Checking Logs sections of Administration sections of each deployment type:
+- The Status and Checking Logs sections under Administration for each deployment type:
     - [Single Node](../single-node/on-premises/admin.md#checking-the-status-of-services)
     - [Elastic](../elastic/on-premises/admin.md#checking-the-status-of-services)
     - [High Availability](../ha/on-premises/admin.md#checking-the-status-of-services)

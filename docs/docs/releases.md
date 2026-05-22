@@ -2,6 +2,53 @@
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
 ---
 
+## 3.7.0
+
+!!! info "For the Release Notes of OpenVidu Meet 3.7.0, please visit here: [OpenVidu Meet 3.7.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#370){:target="_blank" .meet-link-color}"
+
+### Changelog
+
+- **Scale in for Digital Ocean deployments**: OpenVidu Elastic and OpenVidu High Availability in Digital Ocean now support graceful scale-in operations, allowing you to reduce the number of Media Nodes when they are not needed. You can learn more about our scale-in strategies here:
+    - [Custom scale-in strategy for Digital Ocean in OpenVidu Elastic](./self-hosting/elastic/digitalocean/install.md#custom-scale-in-strategy).
+    - [Custom scale-in strategy for Digital Ocean in OpenVidu High Availability](./self-hosting/ha/digitalocean/install.md#custom-scale-in-strategy).
+- **Oracle Cloud Infrastructure support**: OpenVidu can now be deployed in Oracle Cloud Infrastructure (OCI) using our new Terraform templates. For now we only support Single Node deployments in OCI, but planning to support Elastic and High Availability deployments soon.
+    - [OpenVidu Single Node COMMUNITY](./self-hosting/single-node/oracle/install.md) in OCI.
+    - [OpenVidu Single Node PRO](./self-hosting/single-node-pro/oracle/install.md) in OCI.
+- **LiveKit stack updated to v1.9.12**: OpenVidu is now based on LiveKit v1.9.12, which includes multiple improvements and bug fixes in the core media processing engine. For more details, check the [LiveKit v1.9.12 release notes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/releases/tag/v1.9.12){:target="\_blank"}.
+- **Ingress updated to latest**: the Ingress service has been updated to recent commit [#cfbaa74 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/commit/cfbaa74){:target="\_blank"} with multiple improvements and bug fixes over last official release.
+- **mediasoup upgrade to latest**: mediasoup has been upgraded to recent version [**3.19.19** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/releases/tag/3.19.19){:target="\_blank"}. OpenVidu PRO has been stuck in mediasoup 3.12.16 since 2023 due to some compatibility issues within our middlewares. We have now overcome those limitations and we are able to upgrade to a recent mediasoup version, which includes almost 3 years of improvements and bug fixes. You can learn more about mediasoup integration in OpenVidu here: [About mediasoup integration](./self-hosting/production-ready/performance.md#about-mediasoup-integration).
+- **S3 Server-Side Encryption for external S3 buckets**: all OpenVidu deployments rely on S3 storage to store recordings and configurations. Every OpenVidu deployment comes with an embedded S3 storage based on Minio, but you can also configure an external S3 bucket if you prefer. Now OpenVidu supports Server-Side Encryption (SSE) for these external S3 storages, which means that all your data stored in S3 can be encrypted at rest. Learn how to enable it here: [Server-side encryption](./self-hosting/how-to-guides/external-s3.md#server-side-encryption).
+- **Support for chained version upgrades**: OpenVidu now supports chained version upgrades, which means that you can upgrade from any previous version to 3.7.0 directly in a single command, without having to upgrade to intermediate versions first. This also applies to any future versions of OpenVidu. Check out the Upgrade documentation for your specific deployment:
+    - [OpenVidu Single Node COMMUNITY](./self-hosting/single-node/index.md)
+    - [OpenVidu Single Node PRO](./self-hosting/single-node-pro/index.md)
+    - [OpenVidu Elastic](./self-hosting/elastic/index.md)
+    - [OpenVidu High Availability](./self-hosting/ha/index.md)
+- **Updated chainguard MinIO fork fixing recent CVEs**: 
+    - MinIO is Vulnerable to SSE Metadata Injection via Replication Headers: [CVE-2026-34204 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/advisories/GHSA-3rh2-v3gr-35p9){:target="\_blank"}
+    - MinIO affected a DoS via Unbounded Memory Allocation in S3 Select CSV Parsing: [CVE-2026-39414 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/advisories/GHSA-h749-fxx7-pwpg){:target="\_blank"}
+    - MinIO LDAP login brute-force via user enumeration and missing rate limit: [CVE-2026-33419 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/advisories/GHSA-jv87-32hw-hh99){:target="\_blank"}
+- **Bug fixes in v2compatibility module**:
+    - A wrong S3 directory was being used.
+    - Track leak when using method [`replaceTrack` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-browser/classes/Publisher.html#replacetrack){:target="\_blank"}: fixed an issue where this method did not stop the previous existing track, causing resource leaks. This could lead to media resource exhaustion on mobile devices and trigger unexpected mute events.
+
+### Version table
+
+| Artifact               | Version | Info | Link         |
+| ---------------------- | ------- | ---- | ---------- |
+| livekit/livekit-server | v1.9.12  | :material-information-outline:{ title="Version of livekit-server in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/livekit/livekit/releases/tag/v1.9.12){:target="\_blank"} |
+| mediasoup              | 3.19.19 | :material-information-outline:{ title="Version of mediasoup in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/versatica/mediasoup/releases/tag/3.19.19){:target="\_blank"} |
+| livekit/egress         | v1.12.0 (commit [#ba781b4 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/commit/ba781b4){:target="\_blank"}) | :material-information-outline:{ title="Egress version used by OpenVidu deployments. Used to export media from a Room (for example, recordings or RTMP broadcasting)" } | [:octicons-link-24:](https://github.com/livekit/egress/releases/tag/v1.12.0){:target="\_blank"} |
+| livekit/ingress        | v1.4.3 (commit [#cfbaa74 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/commit/cfbaa74){:target="\_blank"})  | :material-information-outline:{ title="Ingress version used by OpenVidu deployments. Used to import media into a Room (for example, an MP4 video or an RTSP stream)" } | [:octicons-link-24:](https://github.com/livekit/ingress/releases/tag/v1.4.3){:target="\_blank"} |
+| livekit/agents        | v1.4.4  | :material-information-outline:{ title="LiveKit Agents framework version. Used to add AI capabilities to your Rooms" } | [:octicons-link-24:](https://github.com/livekit/agents/releases/tag/livekit-agents%401.4.4){:target="\_blank"} |
+| MinIO | 2026-05-04T00-27-21Z | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/chainguard-forks/minio/releases/tag/RELEASE.2026-05-04T00-27-21Z){:target="\_blank"} |
+| Caddy | 2.11.2 | :material-information-outline:{ title="Version of Caddy used by OpenVidu deployments. It is a reverse proxy used as a load balancer to distribute client connections across your nodes and automatically manage your TLS certificate" } | [:octicons-link-24:](https://github.com/caddyserver/caddy/releases/tag/v2.11.2){:target="\_blank"}|
+| MongoDB | 8.0.21 | :material-information-outline:{ title="Version of MongoDB used by OpenVidu deployments. Used to store analytics and monitoring persistent data. In <i>OpenVidu High Availability</i> this is an instance of a <i>MongoDB Replica Set</i>" } | [:octicons-link-24:](https://www.mongodb.com/docs/manual/release-notes/8.0/#8.0.21---apr-29--2026){:target="\_blank"} |
+| Redis | 8.6.2 | :material-information-outline:{ title="Version of Redis used by OpenVidu deployments. Used to share transient information between Media Nodes and coordinate them. In <i>OpenVidu High Availability</i> this is an instance of a <i>Redis Cluster</i>" } | [:octicons-link-24:](https://github.com/redis/redis/releases/tag/8.6.2){:target="\_blank"} |
+| Grafana | 12.3.6 | :material-information-outline:{ title="Version of Grafana used by OpenVidu deployments. Observability module used to query and visualize logs and metrics in dashboards" } | [:octicons-link-24:](https://github.com/grafana/grafana/releases/tag/v12.3.6){:target="\_blank"} |
+| Prometheus | 3.11.3 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Observability module from Grafana stack, used to collect metrics from Media Nodes and send them to Mimir" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.11.3){:target="\_blank"} |
+| Promtail / Loki | 3.5.12 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.12){:target="\_blank"} |
+| Mimir | 3.0.6 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.0.6){:target="\_blank"} |
+
 ## 3.6.0
 
 !!! info "For the Release Notes of OpenVidu Meet 3.6.0, please visit here: [OpenVidu Meet 3.6.0 :fontawesome-solid-external-link:{.external-link-icon}](../meet/releases.md#360){:target="_blank" .meet-link-color}"
@@ -56,6 +103,21 @@ description: Explore the latest OpenVidu releases, including new features, updat
 | Prometheus | 3.9.1 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Observability module from Grafana stack, used to collect metrics from Media Nodes and send them to Mimir" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.9.1){:target="\_blank"} |
 | Promtail / Loki | 3.5.11 | :material-information-outline:{ title="Version of loki and promtail used by OpenVidu deployments. Observability modules from Grafana stack, used to collect logs from all services (Promtail) and stored them (Loki)" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.5.11){:target="\_blank"} |
 | Mimir | 3.0.3 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.0.3){:target="\_blank"} |
+
+### Patch releases
+
+#### 3.6.1
+
+- **Global cpu monitoring for room allocation**: now OpenVidu will consider host-wide CPU load when deciding where to allocate new Rooms, instead of checking only sub-processes CPU load. This optimizes load distribution across all nodes of your cluster. You can learn more about how Rooms are allocated [here](https://openvidu.io/3.6.1/docs/self-hosting/production-ready/scalability/#rooms).
+- **New Troubleshooting recording documentation**: there is now a dedicated section to guide users on how to debug and solve common problems. Starting with [recordings](https://openvidu.io/3.6.1/docs/troubleshooting/recording/).
+- **Angular Components**: in recent versions of Firefox, it is no longer allowed to create a new screen track if one is already active, which prevents replacing the shared screen without first unpublishing it. As a result, the UI now automatically adapts when Firefox is detected, avoiding the use of screen replacement (replaceTrack) and instead aligning with the constraints imposed by the browser. See [Angular Components](https://openvidu.io/3.6.1/docs/ui-components/angular-components/).
+- **OpenVidu Meet**: optimized lock management by significantly reducing the number of Redis keys, minimizing read and write operations, lowering memory usage, improving TTLs for key deletion, and simplifying the overall system design.
+- **Artifact version updates**:
+
+    | Artifact               | Version | Info | Link         |
+    | ---------------------- | ------- | ---- | ---------- |
+    | MinIO | RELEASE.2026-03-04T16-04-53Z | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In <i>OpenVidu High Availability</i> this is an instance of a <i>Minio Multi-Node</i>" } | [:octicons-link-24:](https://github.com/chainguard-forks/minio/releases/tag/RELEASE.2026-03-04T16-04-53Z){:target="\_blank"} |
+    | Mimir | 3.0.4 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Observability module from Grafana stack, used to store metrics from Prometheus" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.0.4){:target="\_blank"} |
 
 ## 3.5.0
 

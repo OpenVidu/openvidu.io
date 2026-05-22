@@ -25,16 +25,9 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
     sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
     ```
 
-    !!! info
-        If instead of upgrading to the latest version you want to upgrade to a specific version, you can execute the following command:
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-        ```bash
-        sh <(curl -fsSL http://get.openvidu.io/update/<VERSION>/update.sh)
-        ```
-
-        Where `<VERSION>` is the version you want to upgrade to.
-
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...
@@ -56,11 +49,21 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
       No
     ```
 
-4. Answer `Yes` to the question and your OpenVidu Elastic will be upgraded to the asked version. For each version, the system will ask you to confirm the upgrade.
-5. A `diff` will be shown with the changes made in the configuration files. You can review the changes and decide if you want to apply them or not. If you want to apply the changes, answer `Yes` to the question. If you want to discard the changes and stop the upgrading process, simply answer `No`.
-6. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
-7. After the upgrade, **you need to terminate the Media Nodes** to apply the changes to run the Media Nodes with the new version. Go to your EC2 Panel, select the Media Nodes instances, and terminate them. The Auto Scaling Group will automatically launch new Media Nodes with the updated configuration.
-8. Once the Media Nodes are up and running, you can start OpenVidu Elastic again by executing the following command in the Master Node:
+4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
+
+    For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
+
+    !!! warning
+        The updater will flag any deployment breaking changes if they are present. Pay special attention to these, as they may require you to update firewall rules, open or close specific ports, or perform other manual configuration changes.
+
+    !!! info "Pulling Docker images"
+        When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
+
+        Any missing images will be pulled automatically when you run `systemctl start openvidu`.
+
+
+5. After the last intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to your EC2 Panel, select the Media Nodes instances, and terminate them. The Auto Scaling Group will automatically launch new Media Nodes with the updated configuration.
+6. Once the Media Nodes are up and running, start OpenVidu Elastic again by executing the following command in the Master Node:
 
     ```bash
     systemctl start openvidu && journalctl -f -u openvidu
@@ -91,13 +94,13 @@ Remember to **terminate the Media Nodes** after rolling back to the previous ver
 
 ## Recommendations
 
-- Always upgrade all the nodes of your OpenVidu Elastic deployment. Otherwise, you may face compatibility issues between the different versions of OpenVidu running in your deployment.
-- On any upgrade problem, a redeployment is always recommended for a clean installation.
-- Keep your Docker and Docker Compose versions updated.
-- Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
+- Always upgrade all nodes in your OpenVidu Elastic deployment. Running mismatched versions across nodes may cause compatibility issues.
+- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
+- Keep your Docker and Docker Compose versions up to date.
+- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
 
     ```bash
     docker image prune -a
     ```
 
-    This command will remove all the images that are not being used by any container.
+    This command removes all images that are not currently in use by any container.
