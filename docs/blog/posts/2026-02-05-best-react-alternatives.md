@@ -13,7 +13,6 @@ authors:
   - csantosm
 hide:
   - navigation
-  - toc
   - search-bar
   - version-selector
 ---
