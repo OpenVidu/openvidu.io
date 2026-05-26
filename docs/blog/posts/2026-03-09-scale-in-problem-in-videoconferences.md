@@ -8,6 +8,7 @@ tags:
  - DevOps
  - Cloud Infrastructure
  - Autoscaling
+ - Scale-In
 authors:
  - sergio
 hide:
@@ -25,9 +26,9 @@ Autoscaling is one of the killer features of cloud infrastructure. It promises z
 <figcaption>Scale in situation</figcaption>
 </figure>
 
-<!-- more -->
-
 This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.
+
+<!-- more -->
 
 ## The Scaling Illusion: Why "Turning it Off" is Harder than "Turning it On"
 
