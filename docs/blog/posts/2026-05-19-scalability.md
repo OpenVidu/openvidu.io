@@ -1,6 +1,7 @@
 ---
 draft: false
-date: 2026-05-19
+date: 2026-06-02
+slug: scalability-in-videoconferencing-systems
 categories:
     - Technology
 tags:
@@ -82,13 +83,11 @@ An SFU (Selective Forwarding Unit) centralizes that work on the server. Each cli
 Don't wait for an incident to answer this question. Set objective thresholds before launch:
 
 - CPU above 70% during peak windows
-- Sustained egress approaching your NIC's practical ceiling
+- Sustained outbound traffic approaching your NIC's practical ceiling
 - Rising packet loss during join spikes
 - Increasing session setup times under load
 
 When these signals appear consistently, throwing a bigger machine at the problem only delays the real conversation. You need horizontal scale.
-
----
 
 ## Phase 2: Horizontal Scalability and Elasticity (The Media Plane)
 
@@ -136,7 +135,7 @@ Horizontal scale without elasticity is just a bigger fixed cluster — it still 
 Autoscaling works best when driven by signals that actually reflect media load, not just CPU percentages:
 
 - Worker CPU usage
-- Network throughput (ingress and egress)
+- Network throughput (inbound and outbound)
 - Active publishers and subscribers
 - Media packet processing queue pressure
 - New room admission latency
@@ -150,7 +149,8 @@ A robust autoscaling loop looks something like this:
 5. Direct new rooms to the healthiest nodes with the most headroom.
 
 !!! tip "The key insight on elasticity"
-React before you're full, not after. By the time your metrics show saturation, users are already experiencing degraded quality. Proactive scaling — triggered at 65–70% capacity — keeps you ahead of demand.
+
+    React before you're full, not after. By the time your metrics show saturation, users are already experiencing degraded quality. Proactive scaling — triggered at 65–70% capacity — keeps you ahead of demand.
 
 ### Admission Control Matters More Than Raw Node Count
 
@@ -165,7 +165,8 @@ Practical admission rules to put in place:
 - Region and latency affinity for room placement, so participants are routed to the geographically closest node.
 
 !!! tip "The key insight on admission control"
-Node count protects you from running out of infrastructure. Admission rules protect call quality within the infrastructure you have. You need both.
+
+    Node count protects you from running out of infrastructure. Admission rules protect call quality within the infrastructure you have. You need both.
 
 ### The Hidden Hard Part: Scale-In
 
@@ -180,11 +181,9 @@ A proper graceful scale-in strategy goes like this:
 - Let existing rooms finish naturally, or migrate sessions explicitly if the drain timeout is exceeded.
 - Terminate the node only after it reaches a safe empty state.
 
-This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](./change-me.md).
+This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](./2026-03-09-scale-in-problem-in-videoconferences.md).
 
 With Phase 2 in place, you have elastic media capacity. But there's still one major vulnerability left: your control plane.
-
----
 
 ## Phase 3: High Availability (The Control Plane)
 
@@ -239,8 +238,6 @@ Not all of this needs to be equally consistent. Strong consistency matters for d
 
 One more thing worth building in from the start: idempotent operations. In distributed systems, retries are routine — failover, timeout, retry. If your operations aren't idempotent, you'll get duplicate side effects at the worst possible moment.
 
----
-
 ## The Challenges of Real-Time Distribution
 
 By Phase 3, you're running a serious distributed real-time system. The hard question isn't "Can it run?" anymore. It's "Can it stay stable when traffic is unpredictable and nodes fail?"
@@ -256,7 +253,7 @@ A room with 50 participants and high-resolution video streams can consume 10x th
 Resource-aware placement looks at the signals that actually matter:
 
 - Current CPU usage and its recent trend (is it climbing?)
-- Current ingress and egress bitrate
+- Current inbound and outbound bitrate
 - Active publisher count per node
 - Packet loss and jitter trends
 - Geographic proximity to the joining participants
@@ -277,8 +274,6 @@ For that, you need media-layer signals:
 - Audio continuity metrics
 
 When you correlate these with signaling events and infrastructure telemetry, support tickets change character. Instead of "the audio broke at around 2pm," you can look at the timeline, find the retransmission spike, trace it to a specific node under load, and know exactly what happened — and why.
-
----
 
 ## Conclusion: Scale by Design, Not by Accident
 
