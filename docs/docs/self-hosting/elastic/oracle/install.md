@@ -20,7 +20,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
 - **OCI Object Storage** (S3-compatible via Customer Secret Keys) is used for storing application data and recordings.
 - **OCI Vault** is used to securely store deployment secrets.
-- Media Node scalability is managed through an **OCI Function** that scales the number of Media Nodes based on system load, although you can also use a fixed number of Media Nodes.
+- Media Node scale-out is handled automatically by the **OCI Instance Pool autoscaling configuration** based on system load, and scale-in is delegated to an **OCI Function** that performs a graceful drain before terminating the instance. You can also use a fixed number of Media Nodes.
 
 ## Prerequisites
 
@@ -40,16 +40,55 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     - The Master Node acts as a Load Balancer, managing traffic and distributing it among the Media Nodes and the services running on the Master Node itself.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - An OCI Function handles the scale-in and scale-out of Media Nodes based on system load.
+    - Scale-out is performed automatically by the OCI Instance Pool autoscaling configuration based on the average CPU of the pool. Scale-in is delegated to an OCI Function that gracefully drains the target Media Node before terminating it.
 
 ## Custom scale-in strategy
 
-We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes, ensuring that active Rooms are never disrupted when the cluster removes a Media Node.
+Scale-out is handled natively by the OCI Instance Pool autoscaling configuration, which adds Media Nodes when the pool's average CPU exceeds **`scaleTargetCPU`**. Scale-in, however, uses a custom strategy to enable the graceful shutdown of Media Nodes, ensuring that active Rooms are never disrupted when the cluster removes a Media Node.
 
 === "Custom scale-in strategy"
 
-    - An **OCI Function** is deployed and triggered on a regular schedule to manage the scaling of Media Nodes. It checks the **`minNumberOfMediaNodes`** and **`maxNumberOfMediaNodes`** variables, polls the average CPU usage of the Instance Pool, and compares it against **`scaleTargetCPU`**. When a scale-in decision is made, the target Media Node is flagged as "draining" so it stops accepting new Rooms.
-    - Each Media Node runs a `systemd` daemon (with an OS-level shutdown service as fallback) that periodically checks whether the instance has been marked as "draining". If so, the graceful shutdown script is triggered, which waits for all active Rooms on that node to end before shutting the instance down.
+    - An **OCI Function** is deployed and triggered on a regular schedule. It polls the average CPU of the Instance Pool against **`scaleTargetCPU`** while respecting **`minNumberOfMediaNodes`** and **`maxNumberOfMediaNodes`**, and when a scale-in decision is made, the target Media Node is flagged as "draining" so it stops accepting new Rooms.
+    - Each Media Node runs a `systemd` daemon that periodically checks whether the instance has been marked as "draining". If so, the graceful shutdown script is triggered, which waits for all active Rooms on that node to end before shutting the instance down.
+
+## Using your own scale-in function image
+
+By default, the OCI Function pulls the scale-in image published by OpenVidu in the Madrid OCIR (`mad.ocir.io`). If you prefer to host the image in your own OCI Registry — for example, to avoid cross-region pulls, comply with internal policies, or pin a customised build — you can build and push it yourself, then point the `scale_in_function_image` variable to your image.
+
+1. From the cloned `openvidu-oracle` repository, navigate to the scale-in function source directory:
+
+    ```bash
+    cd openvidu-oracle/pro/scalein-function
+    ```
+
+2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
+
+    ```bash
+    docker login <region-key>.ocir.io -u '<tenancy-namespace>/<username>' -p '<auth-token>'
+    ```
+
+    Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
+
+3. Build and tag the image. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
+
+    ```bash
+    docker build -t <region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag> .
+    ```
+
+4. Push the image to OCIR:
+
+    ```bash
+    docker push <region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag>
+    ```
+
+5. Update `terraform.tfvars` with the new image reference:
+
+    ```hcl
+    scale_in_function_image = "<region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag>"
+    ```
+
+!!! info
+    Make sure the OCI Function's compartment has the IAM policies needed to pull from the target repository. If the repository is private, follow the [OCIR pull authentication guide :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionspullingimagesfromocir.htm){:target=_blank}.
 
 ## Deployment details
 
@@ -95,10 +134,6 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     <tr>
     <td style="white-space: nowrap;"><code>openviduLicense</code></td>
     <td>OpenVidu PRO license key. Visit <a href="https://openvidu.io/account" target="_blank">https://openvidu.io/account</a> to obtain your license.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
-    <td>OCIR image URL of the scale-in OCI Function published by OpenVidu. This image is consumed by the OCI Function that handles Media Node autoscaling.</td>
     </tr>
     </tbody>
     </table>
@@ -167,24 +202,34 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     <td>Boot disk size in GB for the Media Nodes.</td>
     </tr>
     <tr>
+    <td style="white-space: nowrap;"><code>fixedNumberOfMediaNodes</code></td>
+    <td style="white-space: nowrap;"><code>0</code></td>
+    <td>If <code>&gt; 0</code>, deploys a fixed number of Media Nodes with no autoscaling and no scale-in OCI Function (<code>initialNumberOfMediaNodes</code>, <code>minNumberOfMediaNodes</code>, <code>maxNumberOfMediaNodes</code>, <code>scaleTargetCPU</code> and <code>scale_in_function_image</code> are ignored). If <code>0</code> (default), the deployment is elastic and autoscaling is enabled.</td>
+    </tr>
+    <tr>
     <td style="white-space: nowrap;"><code>initialNumberOfMediaNodes</code></td>
     <td style="white-space: nowrap;"><code>1</code></td>
-    <td>Initial number of Media Nodes to deploy.</td>
+    <td>Initial number of Media Nodes to deploy. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>minNumberOfMediaNodes</code></td>
     <td style="white-space: nowrap;"><code>1</code></td>
-    <td>Minimum number of Media Nodes the autoscaling Instance Pool will keep running.</td>
+    <td>Minimum number of Media Nodes the autoscaling Instance Pool will keep running. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>maxNumberOfMediaNodes</code></td>
     <td style="white-space: nowrap;"><code>5</code></td>
-    <td>Maximum number of Media Nodes the autoscaling Instance Pool can launch.</td>
+    <td>Maximum number of Media Nodes the autoscaling Instance Pool can launch. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>scaleTargetCPU</code></td>
     <td style="white-space: nowrap;"><code>50</code></td>
-    <td>Target CPU percentage that triggers scale-in/scale-out actions.</td>
+    <td>Target CPU percentage. The Instance Pool autoscaling triggers scale-out above this threshold; the OCI Function triggers graceful scale-in when usage falls below it. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
+    <td style="white-space: nowrap;"><code>mad.ocir.io/axp2ice0s7el/openvidu-scalein:main</code></td>
+    <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. Defaults to the image published by OpenVidu in the Madrid OCIR. See <a href="#using-your-own-scale-in-function-image">Using your own scale-in function image</a> if you want to host it in your own registry. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>certificateType</code></td>
@@ -274,7 +319,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
     === "Linux"
         ```bash
-        chmod 600 <PATH_TO_THE_KEY>/openvidu_ssh_key_elastic.pem
+        chmod 600 <PATH_TO_THE_KEY>/<STACK_NAME>-private-key.pem
         ```
     === "Powershell"
         ```powershell
@@ -302,7 +347,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
 
     SSH into the Master Node by running the following command from the directory where your SSH key is located:
     ```bash
-    ssh -i openvidu_ssh_key_elastic.pem ubuntu@PUBLIC_INSTANCE_IP
+    ssh -i <STACK_NAME>-private-key.pem ubuntu@PUBLIC_INSTANCE_IP
     ```
 
     Then navigate to `/opt/openvidu/config/` where you will find all credentials in the following files:

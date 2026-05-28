@@ -61,7 +61,7 @@ If you would prefer not to redeploy, an in-place upgrade is also possible. The s
         Any missing images will be pulled automatically when you run `systemctl start openvidu`.
 
 
-5. After the final intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the OCI Console, navigate to the **Compute → Instance Pools** section, open `<STACK_NAME>-media-node-pool`, and terminate the existing Media Node instances. The Instance Pool will automatically launch new Media Nodes with the updated configuration.
+5. After the final intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the OCI Console, navigate to the **Compute → Instance Pools** section, open `<STACK_NAME>-media-pool`, and terminate the existing Media Node instances. The Instance Pool will automatically launch new Media Nodes with the updated configuration.
 6. Once the Media Nodes are up and running, restart OpenVidu Elastic by running the following command on the Master Node:
 
     ```bash
@@ -92,7 +92,7 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 
 Note the `store_secret.sh` command at the end. This is required to update the `OPENVIDU_VERSION` secret in the OCI Vault, which the Oracle Cloud Infrastructure deployment uses to determine which version of OpenVidu should be running on the Media Nodes. This only needs to be run on the Master Node.
 
-Remember to **terminate the Media Nodes** after rolling back so that the Instance Pool can launch new Media Nodes with the restored configuration. You can do this from the OCI Console by navigating to the **Compute → Instance Pools** section, opening `<STACK_NAME>-media-node-pool`, and terminating the existing Media Node instances.
+Remember to **terminate the Media Nodes** after rolling back so that the Instance Pool can launch new Media Nodes with the restored configuration. You can do this from the OCI Console by navigating to the **Compute → Instance Pools** section, opening `<STACK_NAME>-media-pool`, and terminating the existing Media Node instances.
 
 ## Recommendations
 
