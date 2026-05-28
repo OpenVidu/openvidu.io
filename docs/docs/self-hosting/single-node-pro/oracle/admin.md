@@ -5,11 +5,7 @@ description: Learn how to perform administrative tasks on an Oracle Cloud Infras
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
-
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
-
-</div>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
 Oracle Cloud Infrastructure OpenVidu Single Node PRO deployments are internally identical to On Premises Single Node PRO deployments, so you can follow the same instructions from [On Premises Single Node PRO](../on-premises/admin.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
 

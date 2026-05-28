@@ -1,9 +1,11 @@
 .icon {
   margin: 5px;
 }
+
 .lg-icon {
   font-size: 1.5rem;
 }
+
 .xl-icon {
   font-size: 2.5rem;
 }
@@ -194,6 +196,7 @@ a.provider-link-coming-soon {
   .provider-buttons {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .responsive-card {
     flex: 0 100% !important;
   }
@@ -203,6 +206,7 @@ a.provider-link-coming-soon {
   .provider-buttons {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
   .responsive-card {
     flex: 0 100% !important;
   }
