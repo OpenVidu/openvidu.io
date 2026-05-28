@@ -118,7 +118,7 @@ You can use the [REST API](../../embedded/reference/rest-api/) to [embed OpenVid
 
 - API Key: `meet-api-key` 
 
-You can change them later from the [OpenVidu Meet Users And Permissions](../../features/users-and-permissions/#modify-openvidu-meet-authentication).
+You can change them later from the [OpenVidu Meet console](../../features/rooms/access.md#changing-credentials).
 
 
 ## Managing the deployment

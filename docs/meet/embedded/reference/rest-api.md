@@ -4,8 +4,8 @@ OpenVidu Meet provides a REST API for managing **rooms** and **recordings** prog
 
 There are two endpoints:
 
-- `/api/v1/rooms`: manage [rooms](../../features/rooms-and-meetings.md).
-- `/api/v1/recordings`: manage [recordings](../../features/recordings.md).
+- `/api/v1/rooms`: manage [rooms](../../features/rooms/overview.md).
+- `/api/v1/recordings`: manage [recordings](../../features/recordings/overview.md).
 
 ## Authentication
 
