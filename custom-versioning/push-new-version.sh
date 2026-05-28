@@ -209,6 +209,11 @@ copyFilesFromVersionToRoot() {
     mv "$VERSION/llms.txt" . # LLMs list
     mv "$VERSION/llms-full.txt" . # Full LLMs list
     mv "$VERSION/feed_rss_created.xml" . # RSS feed
+    mv "$VERSION/feed_rss_updated.xml" . # RSS feed
+    mv "$VERSION/feed_json_created.json" . # RSS feed
+    mv "$VERSION/feed_json_updated.json" . # RSS feed
+    mv "$VERSION/rss.xsl" . # RSS feed
+
 
     for NVP in "${NON_VERSIONED_PAGES[@]}"; do # Other NVP
         # Delete previous root version of the page
