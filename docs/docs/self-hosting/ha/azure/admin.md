@@ -26,8 +26,9 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     !!! warning "Gracefully stopping Media Nodes"
 
-        There is currently a limitation with Media Nodes that prevents them from stopping gracefully. Please exercise caution when stopping Media Nodes, as they will terminate immediately without waiting for active Rooms to complete. You may want to wait for your active Rooms to finish before stopping the cluster.<br><br>
-        We are working to implement the same graceful shutdown behavior offered by AWS and On Premises deployments. In the meantime, Media Nodes include a script that allows for a graceful shutdown. To use it, SSH to the Media Node you want to stop and execute script **`./usr/local/bin/stop_media_node.sh`**
+        There is currently a limitation with Media Nodes that prevents them from stopping gracefully on a manual shutdown — they will terminate immediately without waiting for active Rooms to complete.
+
+        Wait for your active Rooms to finish before stopping the cluster, or SSH into each Media Node and run **`/usr/local/bin/stop_media_node.sh`** to drain it manually before stopping.
 
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} and go to the Resource Group where you deployed OpenVidu HA.
     2. Click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, then click on _"Scaling"_ option.
