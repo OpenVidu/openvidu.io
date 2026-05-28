@@ -390,6 +390,7 @@ plugins:
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
+      image: assets/images/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
         - tags
