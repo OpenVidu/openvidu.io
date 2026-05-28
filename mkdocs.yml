@@ -226,6 +226,9 @@ nav:
                   - Upgrade: docs/self-hosting/elastic/digitalocean/upgrade.md
               - Oracle:
                   - docs/self-hosting/elastic/oracle/index.md
+                  - Install: docs/self-hosting/elastic/oracle/install.md
+                  - Administration: docs/self-hosting/elastic/oracle/admin.md
+                  - Upgrade: docs/self-hosting/elastic/oracle/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
