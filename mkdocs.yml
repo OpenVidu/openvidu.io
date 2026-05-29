@@ -346,11 +346,13 @@ theme:
   logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
 
 plugins:
+  - meta
   - search
   - blog:
       post_excerpt: required
       draft: false
       draft_if_future_date: true
+      archive_date_format: MMMM yyyy
       categories_allowed:
         - Comparison
         - How-to
@@ -367,7 +369,6 @@ plugins:
         - OpenVidu comparison
         - OpenVidu Platform
         - Release
-  - meta
   - privacy
   - optimize:
       enabled: !ENV [CI, false]
@@ -400,6 +401,7 @@ plugins:
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
+        - blog/index.md: OpenVidu Blog
         - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
         - about-us.md: The people behind OpenVidu
         - research.md: Research publications on real-time communications in peer-reviewed journals
