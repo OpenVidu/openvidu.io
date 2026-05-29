@@ -1,3 +1,8 @@
+---
+title: OpenVidu High Availability deployment on Oracle Cloud Infrastructure
+description: OpenVidu High Availability deployment on Oracle Cloud Infrastructure
+---
+
 # OpenVidu High Availability deployment on Oracle Cloud Infrastructure
 
 <div class="provider-chip" markdown>
@@ -6,4 +11,8 @@
 
 </div>
 
-Coming soon! :tools:
+In this section you can install, administer and upgrade OpenVidu High Availability on Oracle Cloud Infrastructure.
+
+- [**Install**](./install.md): set up a new Oracle Cloud Infrastructure deployment.
+- [**Admin**](./admin.md): configure and manage your Oracle Cloud Infrastructure deployment.
+- [**Upgrade**](./upgrade.md): update an existing Oracle Cloud Infrastructure deployment to the latest version.
