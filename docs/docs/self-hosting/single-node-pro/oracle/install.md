@@ -135,11 +135,6 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     </td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>publicIpAddress</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>A previously created Reserved Public IP address for the OpenVidu deployment. Leave blank to generate a new public IP.</td>
-    </tr>
-    <tr>
     <td style="white-space: nowrap;"><code>domainName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
     <td>Domain name for the OpenVidu deployment. Optional — if not provided, a sslip.io domain will be used instead.</td>

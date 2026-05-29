@@ -23,7 +23,7 @@
 5. Select the shape for your OpenVidu server. We recommend **at least 1 OCPU and 4 GB of RAM** for OpenVidu to run correctly. Then click _"Next"_.
 
     !!! note
-        ARM-based instances are also supported. OpenVidu supports ARM, and the [**Always Free-eligible**](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm){:target="_blank"} tier includes an ARM instance at no cost.
+        ARM-based instances are also supported. OpenVidu supports ARM, and the [**Always Free-eligible** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm){:target="_blank"} tier includes an ARM instance at no cost.
 
 6. In the **Security** tab, keep the default options and click _"Next"_.
 7. Create a new `VNIC` with a new `virtual cloud network` and a new `public subnet`.

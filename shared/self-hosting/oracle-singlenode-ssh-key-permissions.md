@@ -1,6 +1,6 @@
     === "Linux"
         ```bash
-        chmod 600 <PATH_TO_THE_KEY>/openvidu_ssh_key_sn.pem
+        chmod 600 <PATH_TO_THE_KEY>/openvidu_private_ssh_key_<STACK_NAME>.pem
         ```
     === "Powershell"
         ```powershell

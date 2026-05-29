@@ -17,7 +17,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
 
     SSH into the instance by running the following command from the directory where your SSH key is located:
     ```bash
-    ssh -i openvidu_ssh_key_sn.pem ubuntu@PUBLIC_INSTANCE_IP
+    ssh -i openvidu_private_ssh_key_<STACK_NAME>.pem ubuntu@PUBLIC_INSTANCE_IP
     ```
 
     Then navigate to `/opt/openvidu/config/` where you will find all credentials in the following files:
@@ -25,4 +25,6 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     - `openvidu.env`
     - `meet.env`
 
-Open **OPENVIDU_URL** and you will see the OpenVidu Meet interface. Log in with **MEET_INITIAL_ADMIN_PASSWORD** to start using OpenVidu Meet.
+Open **OPENVIDU_URL** and you will see the OpenVidu Meet interface.
+
+Log in with **MEET_INITIAL_ADMIN_PASSWORD** to start using OpenVidu Meet.
