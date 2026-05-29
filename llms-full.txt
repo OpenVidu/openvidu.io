@@ -172,6 +172,8 @@ ______________________________________________________________________
 
 [Talk to an expert](/support/)
 
+# Blog
+
 # Pricing
 
 |                           | **OpenVidu COMMUNITY**                                                                                                  | **OpenVidu PRO**                                                                                                   |                                                                                                        |                                                                                                                            |
