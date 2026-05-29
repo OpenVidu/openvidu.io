@@ -24,6 +24,12 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
 
     To shut down the cluster, you need to stop the Media Nodes and then stop the Master Node.
 
+    !!! warning "Gracefully stopping Media Nodes"
+
+        Setting the Instance Pool size to 0 terminates the Media Nodes immediately without waiting for active Rooms to complete. The graceful drain that the scale-in OCI Function performs is **not** invoked on a manual pool resize.
+
+        Wait for your active Rooms to finish before stopping the cluster, or SSH into each Media Node and run `/usr/local/bin/graceful_shutdown.sh` to drain it before saving the change.
+
     1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank}.
     2. Click into the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
         <figure markdown>
@@ -33,7 +39,7 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
         <figure markdown>
         ![Set instances to 0](../../../../assets/images/self-hosting/elastic/oracle/instances-to-0.png){ .svg-img .dark-img }
         </figure>
-    4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} and click the instance called `<STACK_NAME>-master-node`. There, click _"Stop"_ to stop the Master Node.
+    4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click the instance called `<STACK_NAME>-master-node`. There, click *"Stop"* to stop the Master Node.
         <figure markdown>
         ![Stop Master Node](../../../../assets/images/self-hosting/elastic/oracle/stop-master-node.png){ .svg-img .dark-img }
         </figure>
@@ -49,11 +55,15 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
         ![Start Master Node](../../../../assets/images/self-hosting/elastic/oracle/start-master-node.png){ .svg-img .dark-img }
         </figure>
     3. Wait until the instance is running.
-    4. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
+    4. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
         <figure markdown>
         ![Edit Instance Pool](../../../../assets/images/self-hosting/elastic/oracle/edit-instance-pool.png){ .svg-img .dark-img }
         </figure>
     5. Set the **Number of instances** to your desired value and click _"Save changes"_, then wait for the Instance Pool to apply the changes.
+
+        !!! warning
+
+            This **Number of instances** is just an initial set — it does **not** become a fixed size and does **not** raise `minNumberOfMediaNodes`. If you set it above `minNumberOfMediaNodes`, the scale-in OCI Function may terminate the extra Media Nodes back down to the minimum as soon as it detects low CPU usage.
 
 ## Change the instance shape
 
@@ -70,7 +80,7 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
         !!! info
 
             You can stop only the Master Node instance to change its shape, but it is recommended to stop the whole cluster to avoid any issues.
-    2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
+    2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click _"Edit"_ next to the **Shape** field, select the new shape (or adjust OCPUs/Memory for Flex shapes) and click _"Save changes"_.
         <figure markdown>
         ![Change Master Node shape](../../../../assets/images/self-hosting/elastic/oracle/change-shape-master.png){ .svg-img .dark-img }
@@ -83,16 +93,26 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
         This will replace the running Media Nodes without graceful shutdown. If you want to drain them gracefully, run `/usr/local/bin/graceful_shutdown.sh` on each Media Node and wait for it to finish before changing the Instance Configuration, since the Instance Pool will terminate existing instances and launch new ones with the updated configuration.
 
     1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target=_blank}.
-    2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it and select _"Create new instance configuration"_ (or edit if your workflow allows it) with the new shape, OCPUs and memory.
+    2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it, open the *"Actions"* menu and select *"Create duplicate"*. The form opens pre-filled with the current configuration — adjust the shape (or OCPUs/Memory for Flex shapes) and create the new Instance Configuration.
         <figure markdown>
         ![Create Instance Configuration](../../../../assets/images/self-hosting/elastic/oracle/create-instance-configuration.png){ .svg-img .dark-img }
         </figure>
-    3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank}, open `<STACK_NAME>-media-pool`, click _"Edit"_, and change the **Instance Configuration** to the one you just created. Click _"Save changes"_ and wait for the Instance Pool to roll out the new configuration.
+
+        !!! warning
+
+            **Only change the shape** (or OCPUs/Memory for Flex shapes). Do **not** modify any other field — the rest of the configuration must remain identical to the original so the Instance Pool keeps working as expected.
+
+    3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
         <figure markdown>
         ![Change Instance Configuration in Pool](../../../../assets/images/self-hosting/elastic/oracle/change-instance-configuration.png){ .svg-img .dark-img }
         </figure>
+    4. Terminate the existing Media Nodes from the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} page so the Instance Pool replaces them with new ones launched from the updated Instance Configuration. Old Media Nodes are **not** replaced automatically when the Instance Configuration changes — only newly launched instances use the new shape.
 
 ## Media Nodes Autoscaling Configuration
+
+!!! warning
+
+    If you previously [changed the Media Node shape](#change-the-instance-shape) by creating a duplicated Instance Configuration manually from the OCI Console, Terraform is unaware of it. Running `terraform apply` will point the Instance Pool back to its own Instance Configuration (the original one, recreated by Terraform), and the manually duplicated Instance Configuration will be orphaned.
 
 You can modify the autoscaling configuration of the Media Nodes via the `terraform.tfvars` file and `terraform apply`:
 
@@ -107,78 +127,51 @@ You can modify the autoscaling configuration of the Media Nodes via the `terrafo
     ```
     terraform apply
     ```
-    3. Confirm the change that Terraform proposes (it will update the Instance Pool autoscaling configuration and redeploy the OCI Function with the new values), and the changes will take effect.
+    3. Confirm the change that Terraform proposes (it will update the Media Node Instance Pool and the OCI Function with the new values, and redeploy the Instance Configuration), and the changes will take effect.
         <figure markdown>
         ![Terraform output autoscale change](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-autoscale-change.png){ .svg-img .dark-img }
         </figure>
 
-## Switching between elastic and fixed mode
+## Fixed Number of Media Nodes
 
-You can switch between **elastic mode** (autoscaling Instance Pool + scale-in OCI Function + graceful drain on every Media Node) and **fixed mode** (a static number of Media Nodes with no scale-in infrastructure) at any time by changing the **`fixedNumberOfMediaNodes`** variable and running `terraform apply`. Both transitions replace the Master Node and recreate the Media Node `instance_configuration` — read the relevant tab carefully before applying.
+You can switch between **elastic mode** (autoscaling Instance Pool + scale-in OCI Function) and **fixed mode** (a static number of Media Nodes with no autoscaling) by changing the **`fixedNumberOfMediaNodes`** variable and running `terraform apply`.
 
-=== "Switch from elastic to fixed mode"
+!!! warning
 
-    Set `fixedNumberOfMediaNodes = N` (with `N > 0`) in `terraform.tfvars` and run `terraform apply`.
+    Any Media Nodes terminated during these transitions are killed immediately without running the graceful shutdown — active Rooms on those nodes are cut.
 
-    Terraform will:
+=== "Activate Fixed Number of Media Nodes"
 
-    1. Destroy the 7 scale-in resources: the autoscaling configuration, the OCI Function, its Function Application, Log Group, Log and the scale-in IAM Dynamic Group + Policy.
-    2. Resize the Instance Pool from `initialNumberOfMediaNodes` (typically `1`) to `N`. If `N > 1`, OCI launches the additional Media Nodes.
-    3. Replace the Media Node `instance_configuration`. The new user-data omits the pre-drain daemon and the graceful-shutdown service. The Instance Pool updates its pointer; **existing Media Nodes keep running with the old user-data** — `openvidu-pre-drain.service` is installed on them but stays idle, since the OCI Function it watches for has been destroyed.
-    4. Replace the Master Node — its user-data changes (the `invoke_scalein.sh` cron is removed), which forces a recreation. **Expect ~3–5 min of control-plane downtime** (Dashboard, Meet, signaling, recordings) while the new Master Node boots, pulls every secret from the OCI Vault and reinstalls OpenVidu.
+    1. Go to the `terraform.tfvars` file and set:
+        - **`fixedNumberOfMediaNodes`** to the desired number of Media Nodes (must be greater than 0).
 
-    !!! info "What does not break"
-
-        - Existing Media Nodes are never terminated by this switch — the pool resize only **adds** nodes, never removes. Active Rooms on existing Media Nodes keep running through the transition.
-        - All OCI Vault secrets persist, so the new Master Node rejoins the same deployment without re-generating credentials.
-
-    !!! warning "Mixed fleet on disk"
-
-        Media Nodes that existed before the switch keep the elastic-mode user-data (pre-drain installed but inert); Media Nodes launched after the switch use the fixed-mode user-data. Both are functionally equivalent in fixed mode — only what is on disk differs.
-
-=== "Switch from fixed back to elastic mode"
-
-    Set `fixedNumberOfMediaNodes = 0` in `terraform.tfvars` and run `terraform apply`.
-
-    Terraform will:
-
-    1. Recreate the 7 scale-in resources. The OCI Function image is pulled from OCIR and takes ~30–60 s to be ready. IAM propagation takes another ~60–120 s after that; during the first ~60–120 s after `apply` finishes the Function exists but its Dynamic Group may not yet have propagated, so the **first** scheduled invocation (cron `*/5 * * * *`) can fail with `NotAuthorized`. The next one succeeds.
-    2. Resize the Instance Pool from `N` to `initialNumberOfMediaNodes` (default `1`). **If `N > initialNumberOfMediaNodes`, OCI terminates `N - initialNumberOfMediaNodes` Media Nodes.** Because those Media Nodes were launched in fixed mode they do **not** have the pre-drain daemon, so OCI falls back to an ACPI shutdown with the hypervisor's ~15 min cap. Active Rooms on the terminating nodes are cut when that cap expires.
-
-        !!! warning "Avoid mid-call disruption"
-
-            Before applying the switch, set `initialNumberOfMediaNodes` (and `minNumberOfMediaNodes`) to the current `fixedNumberOfMediaNodes` value so the pool target does not drop. Alternatively, wait for the existing Media Nodes to drain naturally before switching.
-
-    3. Replace the Media Node `instance_configuration` with one whose user-data includes the pre-drain daemon and the graceful-shutdown service. The Instance Pool updates its pointer; Media Nodes that survived the resize keep the old user-data **without** pre-drain. Only Media Nodes launched **after** this point (typically by the new autoscaling configuration) will include pre-drain.
-    4. Replace the Master Node (same recreation as the reverse direction → **~3–5 min of control-plane downtime**). The new Master Node reinstalls the `invoke_scalein.sh` cron.
-    5. Attach the autoscaling configuration to the Instance Pool. From this point OCI owns the pool size, scaling between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` according to `scaleTargetCPU`.
-
-    !!! warning "Legacy Media Nodes have no pre-drain"
-
-        Media Nodes that survived from fixed mode lack the pre-drain daemon. The first time the OCI Function decides to scale-in one of them, it will detach it from the Instance Pool normally — but the node will not detect the detach and will not self-terminate. It stays running indefinitely as an **orphan** until either:
-
-        - `cleanup_orphaned_media_nodes` sweeps it on the next `terraform destroy`, or
-        - You terminate it manually from the OCI Console.
-
-        **Recommended after the switch:** rotate the legacy Media Nodes — terminate them one by one from the OCI Console so the Instance Pool replaces them with new Media Nodes that include pre-drain. Alternatively, destroy and recreate the entire pool.
-
-### Deactivate scale-in without switching to fixed mode
-
-The scale-in OCI Function is invoked every 5 minutes by a cron job on the Master Node (`*/5 * * * * /usr/local/bin/invoke_scalein.sh`). If you want to keep the autoscaling configuration but temporarily stop scale-in actions without recreating the function, disable that cron entry on the Master:
-
-=== "Pause scale-in invocations on the Master"
-
-    1. SSH into the Master Node as `ubuntu`.
-    2. Open the root crontab:
-        ```bash
-        sudo crontab -e
+    2. Open a terminal and run:
         ```
-    3. Comment out (prepend `#`) the line that runs `/usr/local/bin/invoke_scalein.sh` and save. The function will stop being invoked but stays deployed.
-    4. To re-enable scale-in, uncomment the line again.
+        terraform apply
+        ```
 
-    !!! info
+    3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and resize the Instance Pool to the fixed number of Media Nodes.
+        <figure markdown>
+        ![Terraform output activate fixed media nodes](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-activate-fixed.png){ .svg-img .dark-img }
+        </figure>
 
-        For a permanent change, use `fixedNumberOfMediaNodes > 0` instead — it removes the function entirely, so you don't pay for an idle OCI Function.
+=== "Activate Scale In"
+
+    1. Go to the `terraform.tfvars` file and set:
+        - **`fixedNumberOfMediaNodes`** to `0`.
+        - **`scaleTargetCPU`** if you don't want the default.
+        - **`minNumberOfMediaNodes`** if you don't want the default.
+        - **`maxNumberOfMediaNodes`** if you don't want the default.
+
+    2. Open a terminal and run:
+        ```
+        terraform apply
+        ```
+
+    3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function and re-attach the autoscaling configuration to the Instance Pool.
+        <figure markdown>
+        ![Terraform output activate scale in](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-activate-scalein.png){ .svg-img .dark-img }
+        </figure>
 
 ## Administration and configuration
 

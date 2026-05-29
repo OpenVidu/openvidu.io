@@ -69,6 +69,8 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
 
     Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
 
+    Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target=_blank} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
+
 3. Build and tag the image. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
 
     ```bash
@@ -88,7 +90,7 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
     ```
 
 !!! info
-    Make sure the OCI Function's compartment has the IAM policies needed to pull from the target repository. If the repository is private, follow the [OCIR pull authentication guide :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionspullingimagesfromocir.htm){:target=_blank}.
+    Make sure the OCI Function's compartment has the IAM policies needed to pull from the target repository. If the repository lives in a different tenancy from the OCI Function, see [Pulling Images from Repositories in other Tenancies :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionspullingimagescrosstenancy.htm){:target=_blank} for the required Endorse/Admit/Define policy statements.
 
 ## Deployment details
 
@@ -240,11 +242,6 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
     </td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>publicIpAddress</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>A previously created Reserved Public IP address for the OpenVidu Master Node. Leave blank to generate a new public IP.</td>
-    </tr>
-    <tr>
     <td style="white-space: nowrap;"><code>domainName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
     <td>Domain name for the OpenVidu deployment. Optional — if not provided, a sslip.io domain will be used instead.</td>
@@ -319,7 +316,7 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
 
     === "Linux"
         ```bash
-        chmod 600 <PATH_TO_THE_KEY>/<STACK_NAME>-private-key.pem
+        chmod 600 <PATH_TO_THE_KEY>/openvidu_private_ssh_key_<STACK_NAME>.pem
         ```
     === "Powershell"
         ```powershell
@@ -347,7 +344,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
 
     SSH into the Master Node by running the following command from the directory where your SSH key is located:
     ```bash
-    ssh -i <STACK_NAME>-private-key.pem ubuntu@PUBLIC_INSTANCE_IP
+    ssh -i openvidu_private_ssh_key_<STACK_NAME>.pem ubuntu@PUBLIC_INSTANCE_IP
     ```
 
     Then navigate to `/opt/openvidu/config/` where you will find all credentials in the following files:
@@ -355,7 +352,9 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     - `openvidu.env`
     - `meet.env`
 
-Open **OPENVIDU_URL** and you will see the OpenVidu Meet interface. Log in with **MEET_INITIAL_ADMIN_PASSWORD** to start using OpenVidu Meet.
+Open **OPENVIDU_URL** and you will see the OpenVidu Meet interface.
+
+Log in with **MEET_INITIAL_ADMIN_PASSWORD** to start using OpenVidu Meet.
 
 ## Configure your application to use the deployment
 

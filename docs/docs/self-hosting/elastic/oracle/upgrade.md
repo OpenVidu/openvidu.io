@@ -11,22 +11,23 @@ description: How to upgrade OpenVidu Elastic on Oracle Cloud Infrastructure depl
 
 </div>
 
-For Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying the [OpenVidu Elastic Oracle Cloud Infrastructure](../oracle/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, since Oracle Cloud Infrastructure Terraform files and related configurations may differ between releases. Redeploying guarantees that all necessary changes are properly applied.
 
-If you would prefer not to redeploy, an in-place upgrade is also possible. The steps below describe how to perform an in-place upgrade of your OpenVidu Elastic deployment on Oracle Cloud Infrastructure.
+In Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying [OpenVidu Elastic Oracle Cloud Infrastructure](../oracle/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Oracle Cloud Infrastructure terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+
+However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu Elastic in place. The following steps outline how to perform an in-place upgrade of your OpenVidu Elastic deployment on Oracle Cloud Infrastructure:
 
 ## Upgrading OpenVidu Elastic on Oracle Cloud Infrastructure
 
-1. SSH into your Master Node.
+1. SSH into your Master Node server.
 2. Execute the following command in the Master Node:
 
     ```
     sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
     ```
 
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.7.0`).
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
-3. This will run an update script that guides you from your currently installed version to the target one. The output will begin with the following:
+3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
     ```
     Stopping OpenVidu service...
@@ -48,12 +49,12 @@ If you would prefer not to redeploy, an in-place upgrade is also possible. The s
       No
     ```
 
-4. **Confirm each version upgrade.** You can jump straight to the latest release regardless of how far behind you are — the updater will automatically apply every intermediate upgrade in sequence.
+4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
 
-    For each intermediate version, the updater will prompt you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
+    For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
 
     !!! warning
-        The updater will flag any breaking changes if they are present. Pay close attention to these, as they may require you to update firewall rules, open or close specific ports, or make other manual configuration changes.
+        The updater will flag any deployment breaking changes if they are present. Pay special attention to these, as they may require you to update firewall rules, open or close specific ports, or perform other manual configuration changes.
 
     !!! info "Pulling Docker images"
         When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
@@ -61,8 +62,8 @@ If you would prefer not to redeploy, an in-place upgrade is also possible. The s
         Any missing images will be pulled automatically when you run `systemctl start openvidu`.
 
 
-5. After the final intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the OCI Console, navigate to the **Compute → Instance Pools** section, open `<STACK_NAME>-media-pool`, and terminate the existing Media Node instances. The Instance Pool will automatically launch new Media Nodes with the updated configuration.
-6. Once the Media Nodes are up and running, restart OpenVidu Elastic by running the following command on the Master Node:
+5. After the last intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the OCI Console, navigate to Compute Instances, select the Media Nodes, and terminate them. The Instance Pool will automatically launch new Media Nodes with the updated configuration.
+6. Once the Media Nodes are up and running, start OpenVidu Elastic again by executing the following command in the Master Node:
 
     ```bash
     systemctl start openvidu && journalctl -f -u openvidu
@@ -72,14 +73,12 @@ If you would prefer not to redeploy, an in-place upgrade is also possible. The s
 
 ## Backups and Rollback
 
-Once the upgrade is complete, a backup of the previous version will be available in the `/opt/openvidu/backups` directory. The backup contains only the configuration files that were changed during the upgrade.
-
-To roll back to the previous version, copy the files from the backup back to the OpenVidu directory using the following command:
+When you finish the upgrade process, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. The backup only contains the previous configuration files that have changed in the upgrade process.
+To roll back to the previous version, you have to copy the files from the backup to the OpenVidu directory. You can do it with the following command:
 
 ```bash
 cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu
 /usr/local/bin/store_secret.sh save OPENVIDU_VERSION "<VERSION>"
-/usr/local/bin/store_secret.sh fullsave
 ```
 
 Where `<DATE>` and `<VERSION>` are the date and version of the backup you want to restore. For example:
@@ -87,12 +86,11 @@ Where `<DATE>` and `<VERSION>` are the date and version of the backup you want t
 ```
 cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 /usr/local/bin/store_secret.sh save OPENVIDU_VERSION "3.0.0"
-/usr/local/bin/store_secret.sh fullsave
 ```
 
-Note the `store_secret.sh` command at the end. This is required to update the `OPENVIDU_VERSION` secret in the OCI Vault, which the Oracle Cloud Infrastructure deployment uses to determine which version of OpenVidu should be running on the Media Nodes. This only needs to be run on the Master Node.
+Notice the `store_secret.sh` command at the end. This command is necessary to update the `OPENVIDU_VERSION` secret in OCI Vault, which is used by the Oracle Cloud Infrastructure deployment to know which version of OpenVidu should be running in Media Nodes. You need to do this in the Master Node only.
 
-Remember to **terminate the Media Nodes** after rolling back so that the Instance Pool can launch new Media Nodes with the restored configuration. You can do this from the OCI Console by navigating to the **Compute → Instance Pools** section, opening `<STACK_NAME>-media-pool`, and terminating the existing Media Node instances.
+Remember to **terminate the Media Nodes** after rolling back to the previous version so the Instance Pool can launch new Media Nodes with the restored configuration. You can do this from the OCI Console by navigating to Compute Instances, selecting the Media Nodes, and terminating them.
 
 ## Recommendations
 
@@ -105,4 +103,4 @@ Remember to **terminate the Media Nodes** after rolling back so that the Instanc
     docker image prune -a
     ```
 
-    This command will remove all the images that are not being used by any container.
+    This command removes all images that are not currently in use by any container.
