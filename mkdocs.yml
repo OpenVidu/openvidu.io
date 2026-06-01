@@ -401,7 +401,7 @@ plugins:
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
-        - blog/index.md: OpenVidu Blog
+        - blog/*.md: OpenVidu Blog
         - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
         - about-us.md: The people behind OpenVidu
         - research.md: Research publications on real-time communications in peer-reviewed journals
