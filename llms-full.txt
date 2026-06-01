@@ -174,6 +174,670 @@ ______________________________________________________________________
 
 # Blog
 
+# 5 React video call platforms in 2026: Is SaaS still the right choice?
+
+## 1. Introduction
+
+When React developers need to add video calls to their applications, the first question is usually simple:
+
+*"What is the fastest way to get it working?"*
+
+Most teams start by looking for a video API with a React SDK they can integrate quickly, without dealing directly with WebRTC complexity.
+
+In practice, that usually means exploring well-known SaaS platforms that promise quick setup and minimal infrastructure work. That choice makes sense at the beginning:
+
+- Fast to integrate
+- No infrastructure headaches
+- Familiar turnkey experience
+
+But there are questions teams often ask too late:
+
+- What happens when video becomes core to your product?
+- What happens when usage grows faster than expected?
+- Is paying per minute still the smartest choice in 2026?
+
+In this article, we explore the top React video call options in 2026. Not only by SDK quality and features, but also by the long-term impact of SaaS vs self-hosted infrastructure.
+
+TL;DR
+
+SaaS platforms is often the fastest start, but self-hosted options have reduced complexity and can offer stronger cost control, ownership, and flexibility as usage scales.
+
+## 2. The False Assumption: SaaS = Fast, Self-Hosted = Complex
+
+*“Self-hosted? That sounds like media servers, DevOps overhead, and unnecessary complexity.”*
+
+That used to be true.
+
+In 2026, the distinction is no longer mainly about setup speed. Both SaaS platforms and modern self-hosted solutions can:
+
+- Power a quick React prototype.
+- Support rapid MVP validation.
+- Offer developer-friendly SDKs.
+- Be deployed in minutes.
+
+The starting line is closer than ever. But the real difference appears once your product begins to grow. When usage is low, SaaS usually feels simple, predictable, and low risk. However, when video becomes central to your product, the per-minute pricing model starts to change the conversation.
+
+At that point, the questions shift toward:
+
+- How do costs evolve as usage scales?
+- Who controls recordings, user data, and compliance?
+- How much architectural flexibility do we really have?
+
+The decision is no longer only technical. It becomes financial, operational, and strategic. Modern self-hosted solutions have quietly closed much of that complexity gap while preserving something SaaS cannot offer: **Ownership.**
+
+And that is where the decision becomes less about convenience and more about long-term control.
+
+## 3. The 5 React Video Call Platforms to Consider in 2026
+
+Several platforms make it possible to add video calls to React applications quickly. Each one offers a different balance between ease of integration, scalability, and control.
+
+Here are five solutions developers commonly evaluate in 2026.
+
+### **[Agora.io](https://www.agora.io/en/)**
+
+Cloud-based video API with a globally distributed low-latency network and advanced real-time engagement features.
+
+**Hosting model**: SaaS (fully managed via Agora’s global SD-RTN™ infrastructure)
+
+**Docs**:
+
+- [Agora Docs](https://docs.agora.io/)
+- [React SDK (`agora-rtc-react`)](https://www.npmjs.com/package/agora-rtc-react)
+
+**Quick React integration (minimal example)**
+
+*Minimal example only. Token generation, backend auth, error handling, and production UI state are intentionally omitted.*
+
+```tsx
+import AgoraRTC from 'agora-rtc-sdk-ng';
+import { AgoraRTCProvider } from 'agora-rtc-react';
+
+const Client = ({ children }) => {
+    return (
+        <AgoraRTCProvider
+            client={AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' })}
+        >
+            {children}
+        </AgoraRTCProvider>
+    );
+};
+const root = createRoot(document.getElementById('container'));
+root.render(<Client />);
+```
+
+It offers a highly optimized global network designed to minimize latency and handle large-scale interactive use cases.
+
+If your priority is reliability without managing infrastructure, it’s a strong contender.
+
+**Strengths**
+
+- Very low latency and reliable global delivery.
+- Mature SDKs across platforms.
+- Built-in features such as noise suppression, virtual backgrounds, and real-time effects.
+- Enterprise-focused compliance options (HIPAA-ready environments).
+- Proven scalability for large live and interactive events.
+
+**Trade-offs**
+
+- Fully proprietary platform (no access to underlying infrastructure)
+- Pricing is usage-based, which can increase significantly at scale
+
+**Best for**
+
+Product teams that want a fully managed, globally distributed video layer and are comfortable with a pay-per-use model — especially in:
+
+- EdTech.
+- Live events.
+- Marketplaces.
+- Telehealth platforms.
+
+______________________________________________________________________
+
+### **[Zoom](https://www.zoom.com/)**
+
+Zoom’s Video SDK allows developers to build custom video applications using Zoom’s underlying infrastructure, but with full control over the user interface and experience.
+
+**Hosting model**: SaaS (Zoom-managed infrastructure)
+
+**Docs**:
+
+- [Zoom Video SDK Docs](https://developers.zoom.us/docs/video-sdk/)
+- [Web SDK](https://developers.zoom.us/docs/video-sdk/web/)
+
+**Quick React integration (minimal example)**
+
+*Minimal example only. Token generation, backend auth, error handling, and production UI state are intentionally omitted.*
+
+```tsx
+import {
+    useSession,
+    useSessionUsers,
+    VideoPlayerComponent,
+    VideoPlayerContainerComponent,
+} from '@zoom/videosdk-react';
+
+function VideoChat() {
+    const { isInSession, isLoading, isError } = useSession(
+        'session123',
+        'your_jwt_token',
+        'username',
+    );
+
+    const participants = useSessionUsers();
+
+    if (isLoading) return <div>Joining session...</div>;
+    if (isError) return <div>Error joining session</div>;
+
+    return (
+        <div>
+            {isInSession && (
+                <VideoPlayerContainerComponent>
+                    {participants.map((participant) => (
+                        <VideoPlayerComponent key={participant.userId} user={participant} />
+                    ))}
+                </VideoPlayerContainerComponent>
+            )}
+        </div>
+    );
+}
+```
+
+**Strengths**
+
+- Excellent call quality, reliability, and global performance inherited from Zoom Meetings.
+- Built-in features like recording, screen share, and analytics via Zoom platform.
+- Familiar user expectations and strong brand trust with enterprises.
+
+**Trade-offs**
+
+- Less flexible for deep customization than some developer‑native platforms.
+- Pricing can be higher and less granular, especially at scale, with limited volume discounts vs competitors.
+- Closed ecosystem and strong vendor lock‑in.
+
+**Best for**
+
+Enterprise or B2B apps that want Zoom-grade reliability and compliance while embedding video into existing workflows.
+
+______________________________________________________________________
+
+### **[Stream](https://getstream.io/video/)**
+
+Developer-focused video API designed to integrate real-time video and collaboration features directly into modern web and mobile applications.
+
+**Hosting model**: SaaS (managed cloud infrastructure)
+
+**Docs**:
+
+- [Stream Video Docs](https://getstream.io/video/docs/)
+
+**Quick React integration (minimal example)**
+
+*Minimal example only. Token generation, backend auth, error handling, and production UI state are intentionally omitted.*
+
+```tsx
+import { StreamVideoClient, StreamVideo } from "@stream-io/video-react-sdk";
+import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
+
+const client = new StreamVideoClient({
+  apiKey: "STREAM_API_KEY",
+  user: { id: "user-id" },
+  token: "USER_TOKEN",
+});
+const call = client.call('default', 'demo-call');
+await call.join({ create: true });
+
+export default function App() {
+  return (
+    <StreamVideo client={client}>
+      <StreamCall call={call}>
+        {/* your video UI */}
+      </StreamCall>
+    </StreamVideo>
+  );
+}
+```
+
+**Strengths**
+
+- Modern React-first SDK with ready-to-use UI components.
+- Built on top of Stream’s real-time infrastructure used for chat and activity feeds.
+- Good developer experience with composable components and flexible UI customization.
+- Integrated ecosystem for chat, notifications, and collaboration features.
+
+**Trade-offs**
+
+- Fully managed SaaS platform with no infrastructure control.
+- Pricing is usage-based and may grow as video usage increases.
+- Ecosystem is newer in video compared to long-standing providers like Zoom or Agora.
+
+**Best for**
+
+Product teams building collaborative applications that combine **chat, notifications, and video** — such as social platforms, creator tools, marketplaces, or productivity apps — and want a cohesive real-time developer platform.
+
+______________________________________________________________________
+
+### **[LiveKit](https://livekit.io/)**
+
+Open source WebRTC stack with self-host or cloud options for highly customizable real-time video applications.
+
+**Hosting model**: Self-hosted (open source) or SaaS (LiveKit Cloud)
+
+**Docs**:
+
+- [LiveKit Docs](https://docs.livekit.io/)
+- [React Components](https://docs.livekit.io/reference/components/react/)
+
+**Quick React integration (minimal example)**
+
+*Minimal example only. Token generation, backend auth, error handling, and production UI state are intentionally omitted.*
+
+```tsx
+import { LiveKitRoom, VideoConference } from '@livekit/components-react';
+
+export default function App() {
+    return (
+        <LiveKitRoom
+            serverUrl="wss://your-livekit-server"
+            token="TOKEN"
+            connect={true}
+        >
+            <VideoConference />
+        </LiveKitRoom>
+    );
+}
+```
+
+**Strengths**
+
+- Open source with permissive MIT license, giving full control over the codebase and deployment.
+- Fine-grained control over scaling, routing, and deployment (Kubernetes, own cloud, etc.)
+- Modern React SDK with a focus on developer experience and flexibility.
+- Active community and growing ecosystem of tools and integrations.
+
+**Trade-offs**
+
+- Requires more in-house WebRTC knowledge to tune performance and features.
+- Higher DevOps and SRE burden compared with fully managed SaaS.
+- Cloud option is more expensive than some SaaS competitors, but offers more control and flexibility.
+
+**Best for**
+
+Engineering-heavy teams that want ownership and deep customization of real-time infrastructure, or need strict data residency/control.
+
+______________________________________________________________________
+
+### **[OpenVidu Meet](https://openvidu.io/)**
+
+Open source video platform built on top of LiveKit, increasing performance, reducing complexity and offering simplicity and scalability.
+
+**Hosting model**: Self-hosted
+
+**Docs**:
+
+- [OpenVidu Meet Embedded](https://openvidu.io/latest/meet/embedded/intro/)
+- [Web Component Reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/)
+- [GitHub](https://github.com/OpenVidu)
+
+**Quick React integration (minimal example)**
+
+*Minimal example only. Token generation, backend auth, error handling, and production UI state are intentionally omitted.*
+
+```tsx
+// Load once in your app shell (for example, in index.html)
+// <script src="https://<your-openvidu-domain>/v1/openvidu-meet.js"></script>
+
+export function Meeting({ roomUrl }: { roomUrl: string }) {
+    return <openvidu-meet room-url={roomUrl} leave-redirect-url="/" />;
+}
+```
+
+**Strengths**
+
+- Open source with a strong focus on ease of use and developer experience using Docker.
+- Easy on premises deployment with minimal WebRTC expertise required.
+- Flexible architecture that can be deployed on any cloud (AWS, Azure, GCP, Digital Ocean, Oracle) or on-premises infrastructure.
+- Embed-first approach in OpenVidu Meet with Web Component (`<openvidu-meet>`), REST API, and webhooks.
+- Built on top of LiveKit, improving performance and reducing deployment complexity.
+- Free Community edition with generous limits, and a Pro edition with predictable pricing based on cores used.
+
+**Trade-offs**
+
+- Self-hosting requires more operational overhead than SaaS, especially at scale.
+- Less turnkey than SaaS for teams without video experience, but much easier than traditional media servers.
+
+**Best for**
+
+Teams that want the benefits of self-hosted infrastructure without the complexity of traditional media servers, especially those building video-first products where cost control, data ownership, and customization are priorities.
+
+## 4. Comparison Summary
+
+The best choice depends on your priorities and constraints. Here’s a high-level comparison of the platforms we covered:
+
+| Platform           | Integration approach                                                | UI flexibility | Infrastructure control | Backend complexity | Best fit                                                  |
+| ------------------ | ------------------------------------------------------------------- | -------------- | ---------------------- | ------------------ | --------------------------------------------------------- |
+| **Agora**          | React + Web SDK (`agora-rtc-react`)                                 | High           | Low                    | Medium             | Custom video products without managing RTC infrastructure |
+| **Zoom Video SDK** | Imperative SDK + UI toolkit                                         | Medium         | Low                    | Medium             | Zoom-like meeting experiences                             |
+| **Stream**         | React SDK + composable UI components (`@stream-io/video-react-sdk`) | Medium         | Low                    | Medium             | Fast MVPs with polished UI                                |
+| **LiveKit**        | React components (`@livekit/components-react`) with custom UI       | High           | High                   | High               | Deeply customized real-time applications                  |
+| **OpenVidu Meet**  | Web Component (`<openvidu-meet>`) + REST/Webhooks                   | Medium         | High                   | Low                | Ready-to-use meetings with self-hosting control           |
+
+## 5. Conclusion
+
+There is no universal winner. If your top priority is shipping fast with minimal operational overhead, SaaS options remain compelling, although self-hosted solutions like OpenVidu have significantly closed the complexity gap.
+
+If video is becoming a core capability in your product, self-hosted alternatives are now practical enough to consider early, especially when cost predictability, data ownership, and long-term control matter.
+
+The best decision is not only about how fast you can launch, but how well your architecture and pricing model will hold up when your usage grows. If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
+
+______________________________________________________________________
+
+# Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.
+
+Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.
+
+Scale in situation
+
+This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.
+
+## The Scaling Illusion: Why "Turning it Off" is Harder than "Turning it On"
+
+Scaling *out* is easy. Your CPU climbs past the alarm threshold, your autoscaling policy fires, a new VM boots, and within a couple of minutes it joins the pool and starts sharing the load. The system designer gets to feel clever.
+
+Scaling *in* is where the illusion shatters. Your CPU drops, the policy fires in reverse, and the cloud provider picks a node to terminate. If that node is running a web server, this is fine — kill it, redirect traffic, done. If that node is hosting eight simultaneous videoconferences, you have just murdered forty people's calls mid-sentence.
+
+The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.
+
+Scale out situation
+
+## The "Stateful" Trap: Why Media Servers Aren't Web Servers
+
+The reason scale-in is so dangerous for videoconferencing comes down to one word: **state**. This isn't a new insight — anyone who has operated distributed systems knows that stateful workloads are harder to move and terminate than stateless ones. But the nature of state in WebRTC makes it a particularly unforgiving case.
+
+With a typical web application, session state can be externalized: store it in Redis, a shared database, or a distributed cache, and any node in your fleet can pick up where another left off. The state isn't *inside* the server — it's alongside it. A web server (or an API gateway, a GraphQL endpoint, a static file server) is fundamentally stateless. Each request arrives, is processed independently, and the response is sent back. If the server handling your HTTP request disappears mid-flight, the client simply retries on another server and nothing is lost. The server holds no lasting obligation to any client.
+
+A media server is fundamentally different. When a Room starts, the media server becomes the *anchor* of that meeting. Each participant's WebRTC connection is established *directly to that specific node*. It manages the routing of hundreds of audio and video tracks. It may be recording the session. It may be running live transcription. The entire communication fabric of the Room hangs off that single machine.
+
+### You can't kill a node while people are talking
+
+This is the hard constraint. When participants join a videoconference, their devices negotiate a WebRTC connection with the media server and exchange ICE candidates, DTLS certificates and SRTP keys specific to that server. There is no transparent "session migration" in WebRTC — you cannot pick up an existing connection and silently hand it to a different server the way a TCP load balancer can reassign a connection after a reconnect.
+
+If the media server node disappears, every participant in every Room hosted on that node gets disconnected simultaneously. From a user's perspective there is no graceful degradation: the call simply ends without warning.
+
+This is the constraint that makes scale-in in videoconferencing non-trivial. You can't kill the node. You have to wait for it to become empty first.
+
+## The "Draining" Strategy: Architecture for a Graceful Exit
+
+The solution that the industry has converged on is called **draining** (sometimes "graceful shutdown" or "cordon-and-drain", borrowing Kubernetes vocabulary).
+
+The idea is straightforward:
+
+1. **Mark the node as draining.** This signals to the rest of the cluster that this node should not receive any new work: no new Rooms, no new Egress recordings, no new Ingress ingest jobs.
+1. **Let existing work finish naturally.** Active Rooms and jobs continue uninterrupted. Participants don't notice anything.
+1. **Terminate the node once it is empty.** When the last Room ends and the last job completes, the node has zero active load and can be safely shut down.
+
+The challenge is integrating this logic with the autoscaling mechanisms of each cloud provider, all of which have their own opinions about how termination should work.
+
+Draining strategy
+
+## Bringing Scale-In to the Major Clouds
+
+OpenVidu implements the draining strategy on every cloud it supports. The approach differs per provider because each exposes different primitives for intercepting a termination decision.
+
+### 1. AWS: Intercepting Scale-In with Lifecycle Hooks
+
+[AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) support a native feature called [**Lifecycle Hooks**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html). When the ASG decides to terminate an instance (because CPU has dropped below the target), instead of killing it immediately it puts the instance in a `Terminating:Wait` state and fires a lifecycle transition event. The instance stays alive in this pending state until something either completes the hook or the wait timeout expires.
+
+OpenVidu uses this hook as its scale-in interception point:
+
+1. The ASG signals termination → instance enters `Terminating:Wait`.
+1. OpenVidu's internal logic receives the event and **stops the node from accepting new Rooms, Egress and Ingress**.
+1. The node continues serving its existing sessions normally.
+1. When the last active job finishes, OpenVidu programmatically completes the lifecycle hook.
+1. The ASG moves the instance to `Terminating:Proceed` and terminates it cleanly.
+
+Of the three clouds, this is the most direct implementation. The Lifecycle Hook mechanism was purpose-built for exactly this kind of scenario, so AWS introduces the least friction: there is no need to protect instances manually or coordinate a separate runbook. AWS gives you a configurable timeout (set generously enough to outlast even long meetings) and OpenVidu simply completes the hook when the node is ready.
+
+### 2. Azure: Orchestrating Virtual Machine Scale Sets (VMSS)
+
+Azure's native scale-in mechanism for [Virtual Machine Scale Sets (VMSS)](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview) is a [**termination notification**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-terminate-notification): when a scale-in event fires, Azure notifies the instance and gives it up to **15 minutes** to wrap up — after that, it terminates the VM regardless of what is running inside. Unlike the AWS Lifecycle Hook, this ceiling is hard and cannot be extended. A business meeting can easily last longer than 15 minutes, so relying on this native feature alone would still risk disrupting active sessions.
+
+To work around it, OpenVidu takes a more active stance and bypasses the native scale-in policy altogether:
+
+1. **All Media Node instances are protected from automatic termination** by default. Azure VMSS cannot kill them unilaterally.
+1. A custom [**Automation Account runbook**](https://learn.microsoft.com/en-us/azure/automation/automation-runbook-types) is used instead of relying on the native scale-in policy. When the system determines a node should be removed, the runbook is triggered, determines the target instance, and sends a [**Run Command**](https://learn.microsoft.com/en-us/azure/virtual-machines/run-command-overview) to execute the graceful shutdown script directly on that node. At this point the runbook's job is done and it exits.
+1. The **graceful shutdown script, now running on the node itself**, stops it from accepting any new Rooms, Egress or Ingress jobs, and then waits for all active work to finish.
+1. Once the node is empty, the shutdown script **deletes the instance from the VMSS**, taking care of its own removal without any further coordination from the runbook.
+
+The trade-off is a **latency of up to 5 minutes** between the moment an instance is flagged and the moment the graceful shutdown actually begins (an Azure platform constraint). But there is no hard ceiling on how long a session can run — a 2-hour board meeting will complete without disruption.
+
+### 3. Google Cloud (GCP): Precision with Managed Instance Groups (MIGs)
+
+[GCP Managed Instance Groups](https://cloud.google.com/compute/docs/instance-groups) don't provide a native "wait for draining" hook at the level of a single instance in the same way AWS does. OpenVidu's approach here is to sidestep the native scale-in mechanism entirely:
+
+1. The MIG is configured for **scale-out only**. GCP autoscaling can add instances but will never directly terminate one.
+1. A [**Cloud Run Function**](https://cloud.google.com/functions), triggered on a schedule by [Cloud Scheduler](https://cloud.google.com/scheduler/docs), periodically compares the current MIG size with the current recommended size (i.e., how many nodes the autoscaler *would* request given load). If the current count exceeds the target, it calculates the excess instances and removes them from the MIG.
+1. Removed instances don't die immediately. Each Media Node runs a **cron job every minute** that checks whether it is still registered in the MIG. If it detects that it has been removed, it invokes the graceful shutdown script.
+1. The shutdown script marks the node as draining, waits for all active Rooms and jobs to complete, and then terminates the process — letting GCP reclaim the VM.
+
+This approach gives OpenVidu full control over the termination decision and timeline, at the cost of some added complexity in the coordination layer.
+
+### 4. Digital Ocean (DO): External Orchestration with Functions
+
+Unlike AWS, Azure, or GCP, DigitalOcean does not provide a high-level "Auto Scaling Group" abstraction that manages instance lifecycles for you. To achieve elasticity in DO, OpenVidu implements a custom orchestration layer using **DigitalOcean Functions** acting as an external control plane.
+
+Since there is no native mechanism to intercept a termination decision, the responsibility of both scaling and safety moves entirely to our serverless logic and node-level monitoring:
+
+1. **The Orchestrator (DO Function):** A scheduled function periodically evaluates the cluster's demand by querying the media nodes.
+1. **Scaling Out:** If demand is high, the function uses the DigitalOcean API to provision new Droplets and adds them to the pool.
+1. **Scaling In (The Draining Flow):** When the function determines a node is no longer needed:
+   - It flags the specific Droplet as "draining" (via metadata or an external signal).
+1. **Node-side Detection:** Each Media Node runs a **cron job every two minutes** that checks for this draining state. If it detects the tag, it triggers its internal **graceful shutdown script**, stopping the node from accepting new Rooms and waiting for active sessions to end then deleting itself.
+
+This approach effectively turns a simple "server provisioning" API into a sophisticated, state-aware autoscaling system, ensuring that even without provider-level hooks, no meeting is ever interrupted.
+
+## Conclusion: If you aren't scaling down, you aren't truly in the Cloud.
+
+Cloud elasticity is only half-useful if you can only scale in one direction. A cluster that grows under load but can never shrink is just an expensive fixed-size deployment with a complicated launch ceremony. And for a real-time media platform, the cost of getting it wrong isn't a slow API or a retried request — it's forty people staring at a frozen screen wondering what just happened.
+
+Scale-in for media servers isn't a flag you flip. It requires understanding that your nodes are stateful, that WebRTC sessions cannot be migrated transparently, and that the only safe termination is a node that has been fully drained. Each cloud provider exposes different primitives for intercepting a termination decision, which means each solution comes with its own trade-offs:
+
+| Cloud                                                                                     | Mechanism                                                           | Pros                                                                                                      | Cons                                                                                           |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [**AWS**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) | ASG Lifecycle Hooks                                                 | Native first-class support. No need to protect instances or run external runbooks. Configurable timeout.  | —                                                                                              |
+| [**Azure**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview)  | VMSS instance protection + Automation Account runbook + Run Command | No hard ceiling on session duration. Node drives its own removal.                                         | Up to 5 min latency before graceful shutdown begins. More moving parts to deploy.              |
+| [**GCP**](https://cloud.google.com/compute/docs/instance-groups)                          | Scale-out-only MIG + Cloud Run Function + per-node cron job         | Full control over which instance is selected and when. No dependency on provider-level termination hooks. | Polling-based coordination (1-min cron). Slightly higher complexity in the coordination layer. |
+| [**DigitalOcean**](https://docs.digitalocean.com/products/droplets/)                      | DO Functions                                                        | High flexibility; allows implementation of custom draining logic                                          | Requires external scheduling (e.g., cron) and manual coordination of the "draining" state.     |
+
+Ask yourself: does your current videoconferencing infrastructure actually scale down? If the answer is "I'm not sure" or "we just set the minimum to something safe", you are paying for idle nodes every single night, every weekend, every off-peak hour.
+
+In OpenVidu, graceful scale-in is solved out of the box. Whether you deploy on AWS, Azure or GCP, the autoscaling configuration ships with a strategy that guarantees no active Room is ever disrupted by a scale-down event. Your cloud bill shrinks during quiet hours. Your users never notice a thing.
+
+**Ready to deploy a videoconferencing infrastructure that actually scales in both directions?** Check out the [OpenVidu self-hosting docs](https://openvidu.io/3.7.0/docs/self-hosting/deployment-types/index.md) and see how far you can go.
+
+# How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform
+
+Real-time video applications seem fairly simple at first glance. A user clicks "Join", video and audio start flowing, and everyone can see and hear each other.
+
+But under the hood, WebRTC is making a series of complex networking decisions that determine **how media actually travels across the internet**. Which ultimately impacts both the final users and your server infrastructure. Including:
+
+- Video quality and latency in your video sessions, and therefore **user experience**.
+- Server resource consumption, and therefore **infrastructure cost**.
+
+So: not all WebRTC connections between a client and a media server are equal. There are 3 factors to consider: the **WebRTC media server** that you deploy, how you configure your **server's network**, and the strictness of your **client's firewalls**.
+
+Over the first two factors you usually have full control: the WebRTC media server you deploy should support the most modern connectivity mechanisms, and the network where you deploy it should be properly configured to allow optimal connections. The third factor — the client's network — may be under your control if you're deploying an internal solution for a company, but for example in consumer-facing applications with users connecting from their home networks or mobile carriers, you have no control at all.
+
+For these reasons it is crucial to understand how modern WebRTC connectivity works, and the impact of different network conditions in your users' experience and your server infrastructure costs.
+
+## Optimal WebRTC Connection Conditions
+
+Real-time media over the internet has a clear optimal path when connecting a client and a media server. It wants **UDP protocol**, and **a wide range of available ports**. An optimal WebRTC connection typically looks like this:
+
+```text
+[Alice]:A <---UDP---> B:[MediaServer]:C <---UDP---> D:[Bob]
+```
+
+- A being a random port on Alice's firewall.
+- B and C being two different random ports over a well-defined wide range (e.g., 50000–60000) on the media server's firewall.
+- D being a random port on Bob's firewall.
+
+### Why UDP?
+
+TCP is a reliable, ordered, and connection-oriented protocol. Which in principle sounds good for almost any application... but not for real-time media. TCP's reliability mechanism works by retransmitting lost packets and ensuring they arrive in order. For a live video call, that's totally counterproductive. If a packet carrying 20ms of audio gets lost and retransmitted, by the time it arrives it's already too late — that audio should have played 100ms ago. Delivering it now just causes a glitch worse than if it had been dropped.
+
+UDP, on the other hand, doesn't look back. It just sends packets without waiting for acknowledgments. If one is lost, it's gone — but the rest of the stream continues without interruption. The result is smoother, more natural communication, even on imperfect networks.
+
+TLDR 1
+
+WebRTC prefers UDP over TCP because a UDP packet loss produces brief, barely-perceptible glitches. TCP packet loss produces freezing, stuttering, and audio-video desynchronization.
+
+### Why a wide range of ports?
+
+Simply because establishing a direct, dedicated connection between each client and the media server will always be the optimal path for WebRTC. Forcing a single port introduces (always) multiplexing and (sometimes) relay intermediaries.
+
+TLDR 2
+
+The optimal WebRTC connection will always be a direct UDP connection between the client and the media server, over a dedicated random port. This usually means opening a wide range of UDP ports (50000–60000) on the media server's and client's firewalls.
+
+## The Reality: Most Users Are Behind Restrictive Firewalls
+
+The problem is that most users are behind:
+
+- NAT routers
+- Corporate firewalls
+- Mobile carrier networks
+- VPNs
+
+All of these systems impose restrictions on connectivity, and precisely the most common restrictions tend to be blocking the UDP protocol and not allowing connections to a wide range of ports. The exact conditions that WebRTC needs for optimal connectivity!
+
+So what happens when the ideal path isn't available? This is where WebRTC's connectivity stack comes into play.
+
+______________________________________________________________________
+
+## ICE, STUN, and TURN: How WebRTC Finds a Path
+
+WebRTC doesn't give up when the ideal UDP connection isn't possible. Instead, it uses a set of standard protocols to probe the network and find the best path that actually works — even in restrictive environments.
+
+**ICE (Interactive Connectivity Establishment)** is a protocol that tries multiple connection candidates for a WebRTC connection — direct addresses, public addresses, and relay addresses — ranks them by quality, and selects the best one that succeeds. Think of it as a fallback ladder: ICE always starts at the top, and only steps down when forced to.
+
+To gather those candidates, ICE uses two additional protocols to work:
+
+- **STUN** is a protocol that helps a client discover its own public IP address and port, as seen from the internet. It's a lightweight, one-time lookup — no media ever flows through it.
+
+  Note
+
+  In our scenario where clients connect to a known media server, STUN can help keeping the client's port open to allow direct connections (**UDP hole punching**).
+
+- **TURN** is a protocol that acts as a relay. It was first designed to relay media directly between two peers, coming into play when a direct connection is impossible due to client firewalls.
+
+  Note
+
+  In our scenario where clients connect to a known media server, TURN is still necessary to support the most restrictive client networks ([**TURN relay over TLS**](#4-turn-relay-over-tls-last-resort)).
+
+The end result of ICE, STUN and TURN is one of four possible connection types, each representing a different trade-off between quality and network permissiveness.
+
+______________________________________________________________________
+
+## The Four Connection Types, Ranked
+
+Assuming that your WebRTC deployment internally supports all connection types, properly implements ICE, STUN and TURN, and that your server's network is configured correctly, this is the strict priority order that WebRTC will attempt:
+
+### 1. 🟢 Direct connection over UDP (Best)
+
+This is the ideal scenario. After STUN discovers the client's public address, ICE performs **UDP hole punching**: both the client and the media server send UDP packets to each other simultaneously, convincing their respective firewalls to allow the traffic through.
+
+**Result:** Media flows directly between client and server with no intermediate hops and no port multiplexing. Lowest latency, highest quality, zero extra infrastructure load.
+
+**Requirements:** The client firewall must allow outgoing and incoming UDP traffic on the wide port range used by the media server (tipically something like 50000–60000).
+
+### 2. 🟡 TURN relay over UDP (Good)
+
+If the client's firewall blocks the high UDP port range or prevents UDP hole punching (this is the case in symmetric NATs), WebRTC can fall back to using TURN over UDP on a specific known port.
+
+**Result:** Media still travels over UDP — fast and low-latency — but through a relay. The extra hop adds a small amount of latency and slightly increases server load, but the experience is still good.
+
+**Requirements:** The client network must allow outgoing UDP traffic to the TURN server's UDP port (tipically 3478).
+
+### 3. 🟠 Direct connection over TCP (Acceptable)
+
+Some networks block UDP entirely — this is very common in strict corporate environments and certain VPNs. In this case, WebRTC can fall back to a direct TCP connection on a specific port of your media server.
+
+**Result:** The video call works, but TCP is not designed for real-time media. A delayed packet causes everything behind it to wait, which in a video calls translates to increased latency and occasional stuttering — rather than the brief, barely-perceptible glitch you'd get with UDP. Better than no connection at all, though!
+
+**Requirements:** The client network must allow outgoing TCP traffic to the media server's TCP port, which of course must be properly configured to allow direct TCP connections over a specfic port.
+
+### 4. 🔴 TURN relay over TLS (Last Resort)
+
+The final fallback is TURN over TLS — media relayed through the TURN server, all on port 443, encrypted with TLS. This passes through even the most locked-down firewalls, since it's indistinguishable from regular HTTPS traffic. **If this doesn't work, the client can't access the internet at all.**
+
+**Result:** The video call functions, but this combination — relay overhead, plus TLS encryption, plus TCP's retransmission behavior — produces the highest latency and the greatest server resource consumption of all options. If a significant share of your users are hitting this path, it's worth contacting their IT teams to see if firewall rules can be relaxed.
+
+**Requirements:** The client network must allow outgoing TCP to port 443. Universally available: any network that allows general internet access will allow this.
+
+How OpenVidu facilitates all of this
+
+If you use OpenVidu as your WebRTC platform, everything is optimized out-of-the-box to allow all kind of client connections, and to automatically select the best possible path for each user. OpenVidu implements ICE, STUN and TURN and optimizes the port configuration for the best results:
+
+1. For direct connection over UDP: OpenVidu nodes support direct UDP connections on the high port range (50000–60000).
+1. For TURN relay over UDP: OpenVidu relays TURN over UDP on port 443.
+1. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/performance/#about-mediasoup-integration).
+1. For TURN relay over TLS: OpenVidu relays TURN over TLS on port 443.
+
+______________________________________________________________________
+
+## A Real-World Scenario: The Cost of Restrictive Client Firewalls
+
+Let's make all of this information something concrete with a scenario.
+
+Imagine you're deploying a video conferencing platform for a company. A significant portion of their employees connect from a corporate network that blocks all UDP traffic. Without UDP, paths 1 and 2 are immediately ruled out. WebRTC falls back to **path 3: a direct TCP connection** to the media server.
+
+Here's what that means in practice:
+
+- Media flows directly to the media node, but over TCP instead of UDP.
+- Latency is higher, and TCP's behavior under packet loss translates to occasional stuttering rather than brief glitches.
+- However, no relay is involved — your TURN server is not under any additional load, and bandwidth costs remain the same.
+
+Now imagine the corporate firewall is even stricter, and also blocks TCP traffic to the media server's port. Now paths 1, 2, and 3 are all unavailable. WebRTC falls back to **path 4: TURN relay over TLS on port 443**:
+
+- Each user's media stream passes *through* your TURN server instead of flowing directly to the media node.
+- Your TURN server now carries the full bandwidth of every relayed session: video, audio, raw data.
+- Increased latency, TLS overhead, and TCP's retransmission behavior all combining.
+- Server infrastructure costs go up.
+
+Now flip both scenarios: the same company opens UDP ports 50000–60000 on their firewall to your node IPs. Suddenly, all those users establish direct UDP connections (path 1). Your TURN server is idle. Latency drops, server CPU usage decreases, video quality improves. More video sessions can be supported, and server infrastructure costs go down.
+
+**Network configuration is not just a user experience concern — it's a cost optimization lever for your server infrastructure.**
+
+That said, this is always a trade-off. Many companies — especially in regulated industries — prioritize firewall strictness over optimal WebRTC performance, and that's a perfectly valid choice. The goal of this negotiation is not to convince IT teams to compromise their security policies, but to help them understand the concrete impact of each rule so they can make an informed decision.
+
+______________________________________________________________________
+
+## How OpenVidu Handles All of This Automatically
+
+Here's the good news: you don't have to manage any of this manually.
+
+OpenVidu handles the entire ICE negotiation process automatically, for every client, on every connection. When a user joins a session, OpenVidu's signaling layer orchestrates the exchange of ICE candidates between the client and the Media Node, tries each path in priority order, and selects the best one that works — transparently, in real time, with no configuration required on your part or theirs.
+
+OpenVidu is specifically optimized to support [all four connection types](#the-four-connection-types-ranked) out of the box: direct UDP over the full high port range, TURN relay over UDP 443, direct TCP, and TURN relay over TLS 443. The initial session handshake is always established via TCP 443 to the load balancer — allowed in virtually every network — and from there, everything else is negotiated automatically.
+
+In practice, this means: if a user is on an open home network, they get a direct UDP connection. If they're behind a strict corporate firewall that blocks all UDP, they get TURN over TLS. And the many cases in between are handled just as gracefully.
+
+______________________________________________________________________
+
+## Conclusions
+
+WebRTC connectivity is not magic — it's a well-defined priority system that adapts to whatever the network allows. Understanding it helps you make better decisions about server infrastructure, troubleshoot quality issues faster, and communicate clearly with IT teams about what firewall rules actually matter.
+
+To summarize the key takeaways:
+
+- The **optimal WebRTC connection** is always direct UDP over a wide port range — lowest latency, highest quality, no relay overhead.
+- Most users are behind firewalls that **partially or fully restrict** those ideal conditions, forcing WebRTC to fall back to less optimal paths.
+- **ICE** is the protocol that navigates this reality, using **STUN** for address discovery and **TURN** for relaying when a direct connection is impossible.
+- The four resulting connection types — direct UDP, TURN/UDP, direct TCP, TURN/TLS — represent a clear trade-off between quality and how permissive the client's network is.
+- Restrictive client firewalls don't just degrade user experience — they **shift real load and cost** onto your server relay infrastructure.
+
+OpenVidu abstracts all of this complexity away, and all of our [official self-hosted deployments](https://openvidu.io/3.7.0/docs/self-hosting/deployment-types/index.md) include the necessary components and configurations to ensure the best possible connectivity for every user. But now that you understand what's happening under the hood, you're in a much better position to have informed conversations with your users and their IT teams — and to know exactly which firewall rules to ask them to relax first.
+
 # Pricing
 
 |                           | **OpenVidu COMMUNITY**                                                                                                  | **OpenVidu PRO**                                                                                                   |                                                                                                        |                                                                                                                            |

@@ -119,4 +119,4 @@ Ask yourself: does your current videoconferencing infrastructure actually scale 
 
 In OpenVidu, graceful scale-in is solved out of the box. Whether you deploy on AWS, Azure or GCP, the autoscaling configuration ships with a strategy that guarantees no active Room is ever disrupted by a scale-down event. Your cloud bill shrinks during quiet hours. Your users never notice a thing.
 
-**Ready to deploy a videoconferencing infrastructure that actually scales in both directions?** Check out the [OpenVidu self-hosting docs](https://openvidu.io/3.7.0/docs/self-hosting/deployment-types/index.md) and see how far you can go.
+**Ready to deploy a videoconferencing infrastructure that actually scales in both directions?** Check out the [OpenVidu self-hosting docs](https://openvidu.io/docs/self-hosting/deployment-types/index.md) and see how far you can go.

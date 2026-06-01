@@ -124,7 +124,7 @@ If you use OpenVidu as your WebRTC platform, everything is optimized out-of-the-
 
 1. For direct connection over UDP: OpenVidu nodes support direct UDP connections on the high port range (50000–60000).
 1. For TURN relay over UDP: OpenVidu relays TURN over UDP on port 443.
-1. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/performance/#about-mediasoup-integration).
+1. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](https://openvidu.io/docs/self-hosting/production-ready/performance/#about-mediasoup-integration).
 1. For TURN relay over TLS: OpenVidu relays TURN over TLS on port 443.
 
 ______________________________________________________________________
@@ -180,4 +180,4 @@ To summarize the key takeaways:
 - The four resulting connection types — direct UDP, TURN/UDP, direct TCP, TURN/TLS — represent a clear trade-off between quality and how permissive the client's network is.
 - Restrictive client firewalls don't just degrade user experience — they **shift real load and cost** onto your server relay infrastructure.
 
-OpenVidu abstracts all of this complexity away, and all of our [official self-hosted deployments](https://openvidu.io/3.7.0/docs/self-hosting/deployment-types/index.md) include the necessary components and configurations to ensure the best possible connectivity for every user. But now that you understand what's happening under the hood, you're in a much better position to have informed conversations with your users and their IT teams — and to know exactly which firewall rules to ask them to relax first.
+OpenVidu abstracts all of this complexity away, and all of our [official self-hosted deployments](https://openvidu.io/docs/self-hosting/deployment-types/index.md) include the necessary components and configurations to ensure the best possible connectivity for every user. But now that you understand what's happening under the hood, you're in a much better position to have informed conversations with your users and their IT teams — and to know exactly which firewall rules to ask them to relax first.
