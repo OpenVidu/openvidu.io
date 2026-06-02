@@ -91,9 +91,9 @@ First, we should keep in mind that OpenVidu is a video conferencing platform, wh
 
 OpenVidu v3 uses Pion TURN server embedded in each Media Node, so every Media Node includes a TURN relay. Let's go through each of the features we'd need for a robust TURN deployment, and how OpenVidu implements them.
 
-> 1) A system for generating ephemeral credentials, distributed through signaling and expiring every 24 hours by default.
+> 1) A system for generating ephemeral credentials, distributed through signaling and expiring with the session.
 
-OpenVidu generates a short-lived username/password pair tied to each LiveKit token, distributed through signaling and expiring after 24 hours by default.
+OpenVidu generates a short-lived username/password pair for each participant when they join a room, and hands it to the client through signaling alongside the TURN server URLs. By default these credentials are valid for **5 minutes** (a 300-second TTL).
 
 > 2) Transport support on port 443, both TCP/TLS and UDP.
 
@@ -112,9 +112,9 @@ OpenVidu automatically scales TURN along with its Media Nodes. Since each Media 
 At OpenVidu we've applied hardening recommendations while always keeping platform usability in mind. From Enable Security's recommendations[^2], we've applied the following:
 
 1. **Allow-list of IPs known by the cluster:** peer connections can only be made to IPs known by the cluster. If nodes have public IPs and are directly reachable from the internet, TURN servers will only be able to make peer connections to IPs within the cluster. If nodes are behind NAT, peer traffic is restricted to the cluster's private IPs.
-2. **To prevent the TCP-to-peer abuse vector**, peer traffic is restricted to UDP-only relay. By preventing the TURN server from establishing outgoing TCP connections to peers, the door is closed to an attacker using the relay as a TCP proxy toward internal services. This doesn't entirely prevent an attacker with valid credentials from abusing the infrastructure, but it drastically reduces the attack vector.
+2. **To prevent the TCP-to-peer abuse vector**, peer traffic is restricted to UDP-only relay: TCP allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062)) are disabled by default, though they can be enabled via configuration. By preventing the TURN server from establishing outgoing TCP connections to peers, the door is closed to an attacker using the relay as a TCP proxy toward internal services. This doesn't entirely prevent an attacker with valid credentials from abusing the infrastructure, but it drastically reduces the attack vector.
 3. **Restricting the relay port range.** In cases where OpenVidu is deployed in a NAT environment, the relay only forwards traffic to destination ports within the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.
-4. **Credentials are short-lived, with a 24-hour TTL by default**, and are generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.
+4. **Credentials are short-lived** (see the TTL above) and generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.
 
 ![OpenVidu TURN architecture](/assets/images/blog/2026-04-24-turn-key-considerations/turn_openvidu.png "OpenVidu TURN architecture"){ width=80% }
 
