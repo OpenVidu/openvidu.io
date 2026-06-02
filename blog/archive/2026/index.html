@@ -40,7 +40,7 @@
 
     
       
-        <title>May 2026 - OpenVidu</title>
+        <title>June 2026 - OpenVidu</title>
       
     
     
@@ -202,7 +202,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#may-2026" class="md-skip">
+        <a href="#june-2026" class="md-skip">
           Skip to content
         </a>
       
@@ -329,7 +329,7 @@
           <span class="md-ellipsis">
             
               
-                May 2026
+                June 2026
               
             
           </span>
@@ -9565,7 +9565,7 @@
   <span class="md-ellipsis">
     
   
-    May 2026
+    June 2026
   
 
     
@@ -10105,8 +10105,68 @@
   <div class="md-content" data-md-component="content">
     <div class="md-content__inner">
       <header class="md-typeset">
-        <h1 id="may-2026">May 2026<a class="headerlink" href="#may-2026" title="Anchor link to this section for reference">#</a></h1>
+        <h1 id="june-2026">June 2026<a class="headerlink" href="#june-2026" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorJCM.jpg" alt="Juan Carlos Moreno">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-02 00:00:00+00:00">June 2, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/technology/" class="md-meta__link">Technology</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="the-architecture-of-scale-how-to-scale-video-conferencing-from-a-single-server-to-a-high-availability-system"><a class="toclink" href="../../2026/06/02/scalability-in-videoconferencing-systems/">The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System</a></h2>
+<p><img align="left" alt="WebRTC connectivity paths" src="/assets/images/blog/scalability/poster.png"></p>
+<h3 id="introduction-the-success-trap"><a class="toclink" href="../../2026/06/02/scalability-in-videoconferencing-systems/#introduction-the-success-trap">Introduction: The Success Trap</a></h3>
+<p>Launch week often feels perfect. You ship an MVP, users join calls quickly, and early feedback is strong. Then growth arrives faster than expected.</p>
+<p>One customer schedules a company-wide meeting. Hundreds of people join. Your best demo becomes your first major incident: CPU climbs, bandwidth saturates, audio breaks, video freezes. The product didn't fail because the team lacked talent. It failed because real-time media scales very differently from traditional web applications.</p>
+<p>Stateless APIs can usually absorb demand with more replicas and a load balancer. Video conferencing can't. Each participant holds a long-lived, stateful connection, and every audio and video packet has to be encrypted and routed with very low latency. A database query can afford to wait 200 ms. A conversation can't — your users notice jitter, gaps, and packet loss the instant they happen.</p>
+<p>That's what makes scaling video a genuinely hard problem. It's not a hardware question you solve by adding RAM. You need an architecture that grows with you. This guide walks through a three-phase roadmap:</p>
+<ol>
+<li><strong>Single Node</strong> — where almost every successful product starts.</li>
+<li><strong>Horizontal Elastic Media Plane</strong> — how to scale the part of the system that actually processes calls.</li>
+<li><strong>High-Availability Control Plane</strong> — how to stop a single failure from taking down the entire platform.</li>
+</ol>
+<p>Along the way, you'll also learn how to build an autoscaling loop that reacts before saturation hits, and how admission rules can protect call quality even when traffic bursts unexpectedly.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../2026/06/02/scalability-in-videoconferencing-systems/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
