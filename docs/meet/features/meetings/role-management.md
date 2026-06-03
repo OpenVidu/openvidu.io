@@ -29,7 +29,7 @@ Grants basic participation permissions by default:
 - **Communication**: send chat messages, change virtual background
 
 !!! info
-    The default permissions for `Moderator` and `Speaker` roles can be customized per room when [creating](../rooms/create.md) or [editing](../rooms/edit.md) it. For the complete list of available permissions, see the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"}.
+    The default permissions for `Moderator` and `Speaker` roles can be customized per room when [creating](../rooms/creation-management.md#create-rooms) or [editing](../rooms/creation-management.md#edit-rooms) it. For the complete list of available permissions, see the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"}.
 
 ## Promoting participants to moderator { #promoting-participants-to-moderator }
 

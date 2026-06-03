@@ -37,7 +37,7 @@ This view allows to manage the recording of the meeting while it is active. Part
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/recording-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery12"><img src="../../../../assets/images/meet/rooms-and-meetings/recording-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 !!! info
-    Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [List Recordings](../recordings/list.md).
+    Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [List Recordings](../recordings/creation-management.md#list-recordings).
 
 ## End view
 
