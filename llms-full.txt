@@ -1886,7 +1886,7 @@ ______________________________________________________________________
 
 ## What does it mean that OpenVidu Meet is in BETA?
 
-OpenVidu Meet (v3.6.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](https://openvidu.io/3.7.0/support/index.md) with any comments or suggestions.
+OpenVidu Meet (v3.7.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](https://openvidu.io/3.7.0/support/index.md) with any comments or suggestions.
 
 ______________________________________________________________________
 
