@@ -9,7 +9,7 @@ tags:
 
 Participants can replace their camera background with a blur effect or a custom image, either before joining the meeting (from the [Device view](lifecycle.md#device-view)) or once already in the [Meeting view](lifecycle.md#meeting-view).
 
-Virtual backgrounds can be enabled or disabled on a per-room basis when [creating](../rooms/create.md) or [editing a room](../rooms/edit.md).
+Virtual backgrounds can be enabled or disabled on a per-room basis when [creating](../rooms/creation-management.md#create-rooms) or [editing a room](../rooms/creation-management.md#edit-rooms).
 
 !!! info "Documentation coming soon"
     Detailed documentation about Virtual Background options and recommendations is on the way.

@@ -415,7 +415,7 @@ This will show the list of recordings for the specified room:
 
 To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
 
-- [OpenVidu Meet console](../../features/recordings/share-download.md)
+- [OpenVidu Meet console](../../features/recordings/creation-management.md#share-download)
 - [Programmatically via REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingUrl){:target="_blank"}
 
 ```html

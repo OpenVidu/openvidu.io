@@ -16,25 +16,25 @@ Recordings are always associated with the [room](../rooms/overview.md) where the
 ### Key principles
 
 - Recordings can only be started by a participant with `Moderator` role.
-- A room must have recording enabled in its [configuration](../rooms/create.md) to allow starting recordings.
+- A room must have recording enabled in its [configuration](../rooms/creation-management.md#create-rooms) to allow starting recordings.
 - Recordings persist after the meeting ends and can be managed independently from the "Recordings" page.
-- Each recording inherits the [access permissions](list.md#access-permissions-for-recordings) defined in its room.
+- Each recording inherits the [access permissions](creation-management.md#access-permissions-for-recordings) defined in its room.
 
 ## Creation & Management
 
 Moderators start and stop recordings during a live meeting. Afterwards, anyone with the right permissions can browse, share, download or delete them.
 
-- [Start / Stop recording](start-stop.md) — how a Moderator starts and stops a recording during a meeting.
-- [List Recordings](list.md) — browse all recordings from the console or from the room's join view, including access permission rules.
-- [Share & Download](share-download.md) — generate shareable links or download recording files.
-- [Delete Recordings](delete.md) — remove recordings individually or in bulk.
+- [Start / Stop recording](creation-management.md#start-stop-recording) — how a Moderator starts and stops a recording during a meeting.
+- [List Recordings](creation-management.md#list-recordings) — browse all recordings from the console or from the room's join view, including access permission rules.
+- [Share & Download](creation-management.md#share-download) — generate shareable links or download recording files.
+- [Delete Recordings](creation-management.md#delete-recordings) — remove recordings individually or in bulk.
 
 ## Recording configuration
 
 Recording behaviour can be tuned per room at creation time or when editing a room.
 
-- [Recording layouts](layouts.md) — choose between Grid, Speaker and Single Speaker layouts.
-- [Recording resolution](resolution.md) — configure the resolution to balance quality and storage.
+- [Recording layouts](configuration.md#recording-layouts) — choose between Grid, Speaker and Single Speaker layouts.
+- [Recording resolution](configuration.md#recording-resolution) — configure the resolution to balance quality and storage.
 
 ## Recording REST API
 

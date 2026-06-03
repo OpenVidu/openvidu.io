@@ -23,10 +23,10 @@ Rooms are the entry point to OpenVidu Meet. Every video call happens inside a ro
 
 Administrators can create, edit, list and delete rooms from the **Rooms** page in OpenVidu Meet.
 
-- [Create Rooms](create.md) — set a name and configure recording, access control and features at creation time.
-- [Edit Rooms](edit.md) — modify any room setting while no meeting is active.
-- [List Rooms](list.md) — browse all rooms, start meetings, access recordings and share links.
-- [Delete Rooms](delete.md) — remove rooms manually or schedule automatic deletion.
+- [Create Rooms](creation-management.md#create-rooms) — set a name and configure recording, access control and features at creation time.
+- [Edit Rooms](creation-management.md#edit-rooms) — modify any room setting while no meeting is active.
+- [List Rooms](creation-management.md#list-rooms) — browse all rooms, start meetings, access recordings and share links.
+- [Delete Rooms](creation-management.md#delete-rooms) — remove rooms manually or schedule automatic deletion.
 
 ## Room Configuration
 
