@@ -11,30 +11,22 @@ description: How to upgrade OpenVidu Elastic on DigitalOcean deployments.
 
 </div>
 
+For DigitalOcean environments, we recommend upgrading by redeploying the [OpenVidu Elastic DigitalOcean](../digitalocean/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, since DigitalOcean Terraform files and related configurations may differ between releases. Redeploying guarantees that all necessary changes are properly applied.
 
-In DigitalOcean environments, we recommend upgrading by redeploying [OpenVidu Elastic DigitalOcean](../digitalocean/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as DigitalOcean terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
-
-However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu Elastic in place. The following steps outline how to perform an in-place upgrade of your OpenVidu Elastic deployment on DigitalOcean:
+If you would prefer not to redeploy, an in-place upgrade is also possible. The steps below describe how to perform an in-place upgrade of your OpenVidu Elastic deployment on DigitalOcean.
 
 ## Upgrading OpenVidu Elastic on DigitalOcean
 
-1. SSH into your Master Node server.
+1. SSH into your Master Node.
 2. Execute the following command in the Master Node:
 
     ```
     sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
     ```
 
-    !!! info
-        If instead of upgrading to the latest version you want to upgrade to a specific version, you can execute the following command:
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.7.0`).
 
-        ```bash
-        sh <(curl -fsSL http://get.openvidu.io/update/<VERSION>/update.sh)
-        ```
-
-        Where `<VERSION>` is the version you want to upgrade to.
-
-3. This will execute an update script which will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
+3. This will run an update script that guides you from your currently installed version to the target one. The output will begin with the following:
 
     ```
     Stopping OpenVidu service...
@@ -56,11 +48,21 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
       No
     ```
 
-4. Answer `Yes` to the question and your OpenVidu Elastic will be upgraded to the asked version. For each version, the system will ask you to confirm the upgrade.
-5. A `diff` will be shown with the changes made in the configuration files. You can review the changes and decide if you want to apply them or not. If you want to apply the changes, answer `Yes` to the question. If you want to discard the changes and stop the upgrading process, simply answer `No`.
-6. Once the upgrade is finished, it will ask you to pull the images of the services. Answer `Yes` if you want to do it.
-7. After the upgrade, **you need to terminate the Media Nodes** to apply the changes to run the Media Nodes with the new version. Go to your DigitalOcean web, Droplets tab, select the Media Nodes instances and terminate them. The lambda will make new media nodes, or the autoscale pool if you have fixed media nodes.
-8. Once the Media Nodes are up and running, you can start OpenVidu Elastic again by executing the following command in the Master Node:
+4. **Confirm each version upgrade.** You can jump straight to the latest release regardless of how far behind you are — the updater will automatically apply every intermediate upgrade in sequence.
+
+    For each intermediate version, the updater will prompt you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
+
+    !!! warning
+        The updater will flag any breaking changes if they are present. Pay close attention to these, as they may require you to update firewall rules, open or close specific ports, or make other manual configuration changes.
+
+    !!! info "Pulling Docker images"
+        When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
+
+        Any missing images will be pulled automatically when you run `systemctl start openvidu`.
+
+
+5. After the final intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the DigitalOcean web console, navigate to the Droplets tab, select your Media Node instances, and terminate them. The DigitalOcean Function will provision new Media Nodes automatically, or the Fixed Autoscale Pool will do so if you have configured fixed Media Nodes.
+6. Once the Media Nodes are up and running, restart OpenVidu Elastic by running the following command on the Master Node:
 
     ```bash
     systemctl start openvidu && journalctl -f -u openvidu
@@ -70,8 +72,9 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 
 ## Backups and Rollback
 
-When you finish the upgrade process, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. The backup only contains the previous configuration files that have changed in the upgrade process.
-To roll back to the previous version, you have to copy the files from the backup to the OpenVidu directory. You can do it with the following command:
+Once the upgrade is complete, a backup of the previous version will be available in the `/opt/openvidu/backups` directory. The backup contains only the configuration files that were changed during the upgrade.
+
+To roll back to the previous version, copy the files from the backup back to the OpenVidu directory using the following command:
 
 ```bash
 cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu
@@ -87,16 +90,16 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 /usr/local/bin/store_secret.sh fullsave
 ```
 
-Notice the `store_secret.sh` command at the end. This command is necessary to update the `OPENVIDU_VERSION` secret in DigitalOcean secret.env, which is used by the DigitalOcean deployment to know which version of OpenVidu should be running in Media Nodes. You need to do this in the Master Node only.
+Note the `store_secret.sh` command at the end. This is required to update the `OPENVIDU_VERSION` secret in the DigitalOcean `secret.env` file, which the DigitalOcean deployment uses to determine which version of OpenVidu should be running on the Media Nodes. This only needs to be run on the Master Node.
 
-Remember to **terminate the Media Nodes** after rolling back to the previous version so the fixed autoscaling can launch new Media Nodes with the restored configuration. You can do this by going to your DigitalOcean web to the Droplets tab, selecting the Media Nodes instances, and terminating them.
+Remember to **terminate the Media Nodes** after rolling back so that the Autoscale Pool can launch new Media Nodes with the restored configuration. You can do this from the DigitalOcean web console by navigating to the Droplets tab, selecting the Media Node instances, and terminating them.
 
 ## Recommendations
 
-- Always upgrade all the nodes of your OpenVidu Elastic deployment. Otherwise, you may face compatibility issues between the different versions of OpenVidu running in your deployment.
-- On any upgrade problem, a redeployment is always recommended for a clean installation.
-- Keep your Docker and Docker Compose versions updated.
-- Remove non-used images and containers to free up disk space. For example, after the upgrade, when OpenVidu is running, you can remove the old images with the following command:
+- Always upgrade all nodes in your OpenVidu Elastic deployment. Running mismatched versions across nodes may cause compatibility issues.
+- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
+- Keep your Docker and Docker Compose versions up to date.
+- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
 
     ```bash
     docker image prune -a

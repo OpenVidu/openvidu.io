@@ -22,7 +22,7 @@ tags:
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
 
 
-To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow the next steps and fill in your preferred parameters.
+To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow these steps and fill in your preferred parameters.
 
 This is what the deployment architecture looks like:
 
@@ -34,7 +34,7 @@ This is what the deployment architecture looks like:
     </figure>
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge.
+    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Managed Instance Group of Media Nodes is created to scale the number of Media Nodes based on system load.
@@ -89,13 +89,13 @@ Once you click the button, you will see this window.
 
 * Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
 * Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/pro/ha/gcp"><code>openvidu-deployment/pro/ha/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
-* For the **Git ref**, use <span class="copy-inline" data-copy="v3.6.0"><code>v3.6.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
+* For the **Git ref**, use <span class="copy-inline" data-copy="v3.7.0"><code>v3.7.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
 
 Finally, click Continue.
 
 ## Input Values
 
-In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter in the console the parameters declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
+In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
 <div style="text-align: center;">
@@ -255,7 +255,7 @@ When you are satisfied with your input values, click _"Continue"_ and then _"Cre
 
 !!! warning
 
-    In case of failure, check the Cloud Build logs shown at the top of the screen and redeploy after applying the required changes. If the failure is related to an API, delete the deployment and create a new one. If it keeps failing, contact us.
+    If deployment fails, check the Cloud Build logs shown at the top of the screen and redeploy after applying the required changes. If the failure is related to an API, delete the deployment and create a new one. If it keeps failing, contact us.
     
     <figure markdown>
     ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/ha/gcp/gcp-cloud-build-logs.png){ .svg-img .dark-img }

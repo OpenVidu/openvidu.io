@@ -10,7 +10,7 @@ The key element of any WebRTC server solution is the ability to exchange media b
 
 The key points of how this works are:
 
-- On the surface, OpenVidu is the same than LiveKit, and for the most part features work equally, such as connection establishment, participant management, and SDK support.
+- On the surface, OpenVidu is the same as LiveKit, and for the most part features work the same way, such as connection establishment, participant management, and SDK support.
 - Internally however, **mediasoup** is used to replace the original WebRTC engine implementation of LiveKit. _mediasoup_ is built with the most efficient technologies and has outstanding low-level optimizations, which translates in a **2x** improvement with respect to the original LiveKit Open Source performance.
 
 ## About mediasoup integration
@@ -37,7 +37,7 @@ In terms of the signaling protocol, API and SDKs, OpenVidu maintains the origina
 
 Both LiveKit and Pion are written in the [Go programming language :fontawesome-solid-external-link:{.external-link-icon}](https://go.dev/){target="\_blank"}, and this has some implications for speed and efficiency. While Go is popular for its simplicity, readability, and approach to concurrency, when it comes to performance other alternatives rank higher in common benchmarks.
 
-First and foremost, the two most defining limitations of Go is that it requires a quite heavy runtime that is able to handle all of the low-level features of the language, such as _goroutines_ and memory allocations. Also, speaking of memory management, Go requires a Garbage Collector, which knowledgeable readers will recognize as a hindrance for performance-critical applications.
+First and foremost, the two most defining limitations of Go are that it requires quite a heavy runtime that is able to handle all of the low-level features of the language, such as _goroutines_ and memory allocations. Also, speaking of memory management, Go requires a Garbage Collector, which knowledgeable readers will recognize as a hindrance for performance-critical applications.
 
 _mediasoup_, on the other hand, focuses all of its efforts on maximum efficiency. It is written in [C++ :fontawesome-solid-external-link:{.external-link-icon}](https://isocpp.org/){target="\_blank"}, and it is ultra-optimized for the specific task of routing media packets. C++ is a language that provides fully manual management of all resources, and direct access to the hardware, with the benefit of software that is as fast as it can be on any machine.
 
@@ -66,7 +66,7 @@ We have compared OpenVidu using the original **Pion** WebRTC engine (this is the
 
 ### Results: Conference rooms
 
-This tests increasingly adds Rooms of 8 Participants each, every one sending 1 video Track and 1 audio Track, and subscribing to all remote Tracks.
+This test increasingly adds Rooms of 8 Participants each, every one sending 1 video Track and 1 audio Track, and subscribing to all remote Tracks.
 
 The following plot shows the number of Participants that can be added to a Room in OpenVidu using Pion and using mediasoup as WebRTC engines:
 
@@ -76,13 +76,13 @@ The following plot shows the number of Participants that can be added to a Room 
 
 The conclusion is that for multiple Rooms, mediasoup performs much better than Pion, almost doubling the total number of Participants (and Tracks) that fit in the server.
 
-Below there is the deatiled connection progression for each Participant in each test.
+Below is the detailed connection progression for each Participant in each test.
 
 The X axis reflects the point of time in seconds. For each Participant there is a bar indicating its connection status:
 
 - An orange bar indicates that the browser is up, but the connection to the media server is still in progress.
 - A green bar indicates that the connection is up and running.
-- A red bar indicates that the connection has failed, indicating the time that it's down.
+- A red bar indicates that the connection has failed, indicating the time during which it was down.
 
 CPU load of the server is also shown with a black marked plot (from 0 to 1, representing 0% to 100% CPU load).
 
@@ -118,4 +118,4 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 ### About OpenVidu LoadTest
 
-Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kind of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.

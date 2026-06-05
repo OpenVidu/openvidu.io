@@ -7,7 +7,7 @@ tags:
 
 # OpenVidu Single Node on Oracle Cloud Infrastructure — Step-by-step Guide
 
-This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administrating, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
+This page explains how to create a VM in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for OpenVidu Single Node. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
 
 ## Overview / prerequisites
 

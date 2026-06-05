@@ -23,7 +23,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 To import the template into Azure, click the button below and you will be redirected to Azure.   
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.6.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.6.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.7.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.7.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
 </div>
 
 This is what the deployment architecture looks like:
@@ -39,7 +39,7 @@ This is what the deployment architecture looks like:
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge due to a limitation on Azure.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
-    - A Scaling Set of Media Nodes is created to scale the number of Media Nodes based on the system load.
+    - A Virtual Machine Scale Set (VMSS) of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
 --8<-- "shared/self-hosting/azure-custom-scale-in.md"
 
@@ -83,7 +83,7 @@ You need to specify some properties for the Azure instances that will be created
 
     Simply select the type of instance you want for your Master Nodes in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
 
-### Media Nodes Scaling Set Configuration
+### Media Nodes Virtual Machine Scale Set (VMSS) Configuration
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
@@ -101,7 +101,7 @@ Whenever you are satisfied with your Template parameters, just click on _"Next"_
 
 !!! warning
 
-    In case of failure, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
+    If deployment fails, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
 
     If the error is related to a conflict when creating a network interface, redeploy in another resource group with a different **Stack Name**.
 
@@ -158,7 +158,7 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     !!! warning
 
-        We recommend to delete the **Bastion** resource once you no longer require SSH access to your Master Node, as it will incur in additional costs in your Azure account.
+        We recommend deleting the **Bastion** resource once you no longer require SSH access to your Master Node, as it will incur additional costs in your Azure account.
 
 ## Configure your application to use the deployment
 

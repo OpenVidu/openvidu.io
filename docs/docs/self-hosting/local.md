@@ -5,7 +5,7 @@ description: Learn how to install OpenVidu locally for development with Docker C
 
 # OpenVidu Local installation (Development)
 
-For development purposes, we provide an [easy to install local deployment :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-local-deployment){:target="\_blank"} based on Docker Compose which will automatically configure all the necessary services for OpenVidu to develop and test your applications seamlessly.
+For development purposes, we provide an [easy-to-install local deployment :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-local-deployment){:target="\_blank"} based on Docker Compose that automatically configures all the necessary services for OpenVidu, allowing you to develop and test your applications seamlessly.
 
 ## Installation instructions
 
@@ -33,7 +33,7 @@ To install OpenVidu locally, follow these steps:
     1.  Clone the following repository:
 
         ```bash
-        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.6.1
+        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.7.0
         ```
 
         !!! info
@@ -74,7 +74,7 @@ To install OpenVidu locally, follow these steps:
     1.  Clone the following repository:
 
         ```bash
-        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.6.1
+        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.7.0
         ```
 
         !!! info
@@ -150,20 +150,20 @@ The deployment is ready when you see the following message:
  =========================================
 ```
 
-By visiting [http://localhost:7880](http://localhost:7880){:target="\_blank"} you have the OpenVidu Developer UI available with a summary of the services and passwords deployed. You can access the following services:
+By visiting [http://localhost:7880](http://localhost:7880){:target="\_blank"} you have the OpenVidu Developer UI available, with a summary of the deployed services and passwords. You can access the following services:
 
 - **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="\_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
 - **OpenVidu Dashboard** ([http://localhost:7880/dashboard](http://localhost:7880/dashboard){:target="\_blank"}): a web application interface to visualize your Rooms, Ingress and Egress services.
-- **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="\_blank"}): as an S3 storage service for recordings.
+- **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="\_blank"}): an S3 storage service for recordings.
 - **OpenVidu Meet** ([http://localhost:9080](http://localhost:9080){:target="\_blank"}): a high-quality video calling service based on OpenVidu.
 
-You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](../tutorials/application-client/index.md) if you want a step-by-step guide to develop your first application using OpenVidu.
+You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](../tutorials/application-client/index.md) for a step-by-step guide to developing your first application using OpenVidu.
 
 ## Configuration
 
 ### Configure your Application to use the Local Deployment
 
-To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880){:target="\_blank"} or simply check the `.env` file. All access credentials of all services are defined in this file.
+To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880){:target="\_blank"} or simply check the `.env` file. All access credentials for all services are defined in this file.
 
 === "OpenVidu <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
 
@@ -192,7 +192,7 @@ If you want to use the OpenVidu Local deployment from other devices on your netw
 
 ### Configuring webhooks
 
-To configure webhooks in your local deployment, simply go to the file `livekit.yaml` and add to the `webhooks` section the URL where you want to receive the events:
+To configure webhooks in your local deployment, simply open the `livekit.yaml` file and add the URL where you want to receive the events to the `webhooks` section:
 
 ```yaml
 webhook:
@@ -201,7 +201,7 @@ webhook:
         - <YOUR_WEBHOOK_URL>
 ```
 
-In case you are using the _v2compatibility_ and you want to receive webhooks for OpenVidu v2 applications, you can configure the webhooks in the `.env` file. For example:
+If you are using _v2compatibility_ and want to receive webhooks for OpenVidu v2 applications, you can configure the webhooks in the `.env` file. For example:
 
 ```yaml
 V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=<YOUR_WEBHOOK_URL>
@@ -264,8 +264,8 @@ if (window.location.hostname === "localhost") {
 
 ## About `openvidu-local.dev` domain and SSL certificates
 
-This setup simplifies the configuration of local OpenVidu deployments with SSL, making it easier to develop and test your applications securely on your local network by using the `openvidu-local.dev` domain and a wildcard SSL certificate valid for `*.openvidu-local.dev`. However, it’s important to note that these certificates are publicly available and do not provide an SSL certificate for production use.
+This setup simplifies the configuration of local OpenVidu deployments with SSL, making it easier to develop and test your applications securely on your local network by using the `openvidu-local.dev` domain and a wildcard SSL certificate valid for `*.openvidu-local.dev`. However, it's important to note that these certificates are publicly available and are not suitable for production use.
 
-The HTTPS offered by `openvidu-local.dev` is intended for development or testing purposes with the only goal of making your local devices trust your application (which is mandatory in WebRTC applications). For any other use case, it should be treated with the same security considerations as plain HTTP.
+The HTTPS offered by `openvidu-local.dev` is intended for development or testing purposes with the sole goal of making your local devices trust your application (which is mandatory in WebRTC applications). For any other use case, it should be treated with the same security considerations as plain HTTP.
 
 For production, you should consider deploying a [production-grade OpenVidu deployment](deployment-types.md#openvidu-single-node).

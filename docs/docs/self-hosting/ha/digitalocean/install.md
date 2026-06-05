@@ -40,7 +40,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     </figure>
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
-    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes that they act as a bridge.
+    - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Droplets are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load.
@@ -53,6 +53,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 1. Clone the OpenVidu repository with the terraform files:
     ```bash
     git clone https://github.com/OpenVidu/openvidu-digitalocean.git
+    git -C openvidu-digitalocean checkout 3.7.0
     cd openvidu-digitalocean/pro/ha
     ```
 2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
@@ -253,7 +254,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 To verify that your OpenVidu deployment works correctly wait for the `secrets.env` to appear in the bucket that you've configured and open it to view the credentials of OpenVidu.
 
 === "View OpenVidu credentials in the Web"
-    - Go to the Space Object Storage bucket that you've configurated and download the `secrets.env` file.
+    - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
     <figure markdown>
     ![Secrets.env in Bucket](../../../../assets/images/self-hosting/ha/digitalocean/secrets-env.png){ .svg-img .dark-img }
     </figure>

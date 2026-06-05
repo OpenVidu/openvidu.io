@@ -134,6 +134,12 @@ changeNonVersionedPagesLinks() {
     
     # Remove version from root URL
     sed -i "s|/$VERSION/index.md|/index.md|g" "$VERSION/llms.txt"
+
+    RSS_FILES=("feed_rss_created.xml" "feed_rss_updated.xml" "feed_json_created.json" "feed_json_updated.json")
+    for RSS_FILE in "${RSS_FILES[@]}"; do
+        # Remove version in RSS feed xmls
+        sed -i "s|/$VERSION/|/|g" "$VERSION/$RSS_FILE"
+    done
 }
 
 changeSearchIndexLinks() {
@@ -208,6 +214,12 @@ copyFilesFromVersionToRoot() {
     mv "$VERSION/robots.txt" . # robots.txt
     mv "$VERSION/llms.txt" . # LLMs list
     mv "$VERSION/llms-full.txt" . # Full LLMs list
+    mv "$VERSION/feed_rss_created.xml" . # RSS feed
+    mv "$VERSION/feed_rss_updated.xml" . # RSS feed
+    mv "$VERSION/feed_json_created.json" . # RSS feed
+    mv "$VERSION/feed_json_updated.json" . # RSS feed
+    mv "$VERSION/rss.xsl" . # RSS feed
+
 
     for NVP in "${NON_VERSIONED_PAGES[@]}"; do # Other NVP
         # Delete previous root version of the page
@@ -271,6 +283,11 @@ updateWebsite() {
         rm "$VERSION/robots.txt" || true
         rm "$VERSION/llms.txt" || true
         rm "$VERSION/llms-full.txt" || true
+        rm "$VERSION/feed_rss_created.xml" . || true # RSS feed
+        rm "$VERSION/feed_rss_updated.xml" . || true # RSS feed
+        rm "$VERSION/feed_json_created.json" . || true # RSS feed
+        rm "$VERSION/feed_json_updated.json" . || true # RSS feed
+        rm "$VERSION/rss.xsl" . || true # RSS feed
 
         # Move redirection file to the new version
         mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"

@@ -30,11 +30,14 @@ jobs:
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: 3.x
+      - name: Install safe-chain
+        uses: OpenVidu/actions/install-safe-chain@040cbfd01320475801d7b12e33769e0d55a737a8 # v1.0.21
 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          pip install mike "mkdocs-material[imaging]" mkdocs-glightbox mkdocs-llmstxt
+          # We pin the version of pygments to avoid breaking <a> elements as code block titles
+          pip install mike "mkdocs-material[imaging]==9.7.6" "pygments<2.20" mkdocs-glightbox mkdocs-llmstxt mkdocs-rss-plugin
           sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
           sudo apt-get install -y --fix-missing pngquant
 

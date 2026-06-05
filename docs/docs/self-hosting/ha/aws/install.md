@@ -19,7 +19,7 @@ description: Learn how to deploy OpenVidu High Availability on AWS using CloudFo
 
 This section contains instructions for deploying a production-ready OpenVidu High Availability deployment on AWS. The deployed services are the same as in the [On Premises High Availability installation](../on-premises/install-nlb.md), but the process is automated through AWS CloudFormation.
 
-First of all, import the template in the AWS CloudFormation console. You can click the following button...
+First, import the template in the AWS CloudFormation console. You can click the following button...
 
 [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduHA&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu-ha.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
@@ -31,10 +31,10 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/latest/aws/cf-openvidu
 
 !!! info
     
-    If you want to deploy a specific version of OpenVidu HA, replace `latest` with the version you want to deploy. For example, to deploy version `3.6.1`, use the following URL:
+    If you want to deploy a specific version of OpenVidu HA, replace `latest` with the version you want to deploy. For example, to deploy version `3.7.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.6.1/aws/cf-openvidu-ha.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/ha/3.7.0/aws/cf-openvidu-ha.yaml
     ```
 
 This is what the deployment architecture looks like.

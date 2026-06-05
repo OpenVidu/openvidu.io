@@ -19,7 +19,7 @@ tags:
     OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
+This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
 
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 
@@ -80,12 +80,12 @@ Once you click the button, you will see this window.
 
 * Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
 * Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/pro/singlenode/gcp"><code>openvidu-deployment/pro/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
-* For the **Git ref**, use <span class="copy-inline" data-copy="v3.6.0"><code>v3.6.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
+* For the **Git ref**, use <span class="copy-inline" data-copy="v3.7.0"><code>v3.7.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
 
 Finally, click Continue.
 ## Input Values
 
-In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter in the console the parameters declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
+In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
 <div style="text-align: center;">

@@ -24,7 +24,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**. Click on it.
-    3. In the section of the Virtual Machine click on stop button to stop the Virtual Machine (and therefore OpenVidu).
+    3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Stop instance](../../../../assets/images/self-hosting/single-node/azure/stop-instance.png){ .svg-img .dark-img }
@@ -34,7 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 
     1. Go to [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} of Azure and enter into the resource group where you deployed OpenVidu Single Node.
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**.  Click on it.
-    3. In the section of the Virtual Machine click on start button to start the Virtual Mache (and therefore OpenVidu).
+    3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
     ![Start instance](../../../../assets/images/self-hosting/single-node/azure/start-instance.png){ .svg-img .dark-img }

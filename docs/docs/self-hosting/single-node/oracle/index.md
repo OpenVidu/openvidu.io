@@ -1,0 +1,18 @@
+---
+title: OpenVidu Single Node COMMUNITY deployment on Oracle Cloud Infrastructure
+description: OpenVidu Single Node COMMUNITY deployment on Oracle Cloud Infrastructure
+---
+
+# OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> deployment on Oracle Cloud Infrastructure
+
+<div class="provider-chip" markdown>
+
+:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
+
+</div>
+
+In this section you can install, administer and upgrade OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> on Oracle Cloud Infrastructure.
+
+- [**Install**](./install.md): set up a new Oracle Cloud Infrastructure deployment.
+- [**Admin**](./admin.md): configure and manage your Oracle Cloud Infrastructure deployment.
+- [**Upgrade**](./upgrade.md): update an existing Oracle Cloud Infrastructure deployment to the latest version.
