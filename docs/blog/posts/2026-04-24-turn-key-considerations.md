@@ -1,6 +1,7 @@
 ---
 draft: false
-date: 2026-04-24
+date: 2026-06-09
+slug: turn-key-considerations
 categories:
   - OpenVidu Platform
   - Technology
@@ -9,7 +10,6 @@ tags:
   - WebRTC
   - Infrastructure
   - Security
-  - Connectivity
   - NAT traversal
 authors:
   - carlosRuiz
@@ -31,7 +31,7 @@ There's a clear gap between a WebRTC demo and something you can actually run in 
 
 To understand why TURN is important, a little context is necessary: WebRTC enables media transmission between two endpoints. These endpoints can be two users communicating directly (P2P), or a user connecting to a media server, which is the norm on platforms like OpenVidu, Google Meet, or Zoom, where the server receives video from each participant and redistributes it to the rest. In either case, most of these endpoints sit behind a router with NAT that hides their real IP, and that's where STUN and TURN come in. STUN allows an endpoint to discover its public IP address as seen from the outside, so the two endpoints can find each other and attempt a direct connection. TURN is the plan B when that direct connection isn't possible: an intermediate server that receives traffic from one endpoint and relays it to the other, acting as a bridge when NAT or firewall block the direct path. In reality, there are quite a few more nuances (ICE, which is the framework that orchestrates connection attempts; candidate types, SDP negotiation…), but this is enough to understand the rest of the post.
 
-How many people end up needing that plan B? More than you'd think. A small study by Philipp Hancke shows that up to 17.7%[^1] of sessions go through a TURN relay. And that data is from 2017: with the rise of CGNAT (large-scale NAT used by mobile carriers to share a single public IP among thousands of users) in mobile networks and increasingly restrictive corporate firewalls, it's reasonable to think that today, in 2026, the figure is even higher.
+How many people end up needing that plan B? More than you'd think. [A small study by Philipp Hancke](https://medium.com/@fippo/what-kind-of-turn-server-is-being-used-d67dbfc2ff5d) shows that up to 17.7% of sessions go through a TURN relay. And that data is from 2017: with the rise of CGNAT (large-scale NAT used by mobile carriers to share a single public IP among thousands of users) in mobile networks and increasingly restrictive corporate firewalls, it's reasonable to think that today, in 2026, the figure is even higher.
 
 ![WebRTC traffic distribution](/assets/images/blog/2026-04-24-turn-key-considerations/turn-usage-light.png#only-light "WebRTC traffic distribution"){ width=70% }
 ![WebRTC traffic distribution](/assets/images/blog/2026-04-24-turn-key-considerations/turn-usage-dark.png#only-dark "WebRTC traffic distribution"){ width=70% }
@@ -109,7 +109,7 @@ OpenVidu automatically scales TURN along with its Media Nodes. Since each Media 
 
 > 5) Security hardening by default, with UDP-only relay to peers, an allow-list of peer IPs to master and Media Node IPs, and restricting the relay port range to the configured media port range.
 
-At OpenVidu we've applied hardening recommendations while always keeping platform usability in mind. From Enable Security's recommendations[^2], we've applied the following:
+At OpenVidu we've applied hardening recommendations while always keeping platform usability in mind. From [Enable Security's recommendations](https://www.enablesecurity.com/blog/coturn-security-configuration-guide/), we've applied the following:
 
 1. **Allow-list of IPs known by the cluster:** peer connections can only be made to IPs known by the cluster. If nodes have public IPs and are directly reachable from the internet, TURN servers will only be able to make peer connections to IPs within the cluster. If nodes are behind NAT, peer traffic is restricted to the cluster's private IPs.
 2. **To prevent the TCP-to-peer abuse vector**, peer traffic is restricted to UDP-only relay: TCP allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062)) are disabled by default, though they can be enabled via configuration. By preventing the TURN server from establishing outgoing TCP connections to peers, the door is closed to an attacker using the relay as a TCP proxy toward internal services. This doesn't entirely prevent an attacker with valid credentials from abusing the infrastructure, but it drastically reduces the attack vector.
@@ -127,5 +127,3 @@ The right abstraction, and the one OpenVidu uses, is to treat TURN not as a comp
 - WebRTC abstraction and high-level API (like OpenVidu Meet) so you don't have to worry about signaling or media negotiation.
 - Integrated, auto-scaled, hardened-by-default TURN, so you don't have to worry about your users' connectivity.
 
-[^1]: [What kind of TURN server is being used](https://medium.com/@fippo/what-kind-of-turn-server-is-being-used-d67dbfc2ff5d)
-[^2]: [Coturn Security Configuration Guide](https://www.enablesecurity.com/blog/coturn-security-configuration-guide/)
