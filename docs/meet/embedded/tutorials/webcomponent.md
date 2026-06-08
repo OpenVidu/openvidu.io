@@ -11,14 +11,14 @@ This tutorial extends the [Direct Link tutorial](direct-link.md) by integrating 
 
 At the end of this tutorial, you will have a fully functional simple video-call application with the following features:
 
--   Users can create rooms.
--   Users can delete rooms.
--   Users can join a room as moderator or speaker.
--   Users can chat with other users.
--   Users may leave the room at any time.
--   Users can view the recordings of the meeting.
--   Moderators can record the meeting.
--   Moderators may end the meeting at any time, disconnecting all users.
+- Users can create rooms.
+- Users can delete rooms.
+- Users can join a room as moderator or speaker.
+- Users can chat with other users.
+- Users may leave the room at any time.
+- Users can view the recordings of the meeting.
+- Moderators can record the meeting.
+- Moderators may end the meeting at any time, disconnecting all users.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to create and delete rooms, and the [OpenVidu Meet WebComponent](../../embedded/reference/webcomponent.md) to embed the video call interface directly into the application.
 
@@ -76,9 +76,9 @@ This tutorial builds upon the [Direct Link tutorial](direct-link.md), replacing 
 
 The backend is identical to the [Direct Link tutorial](direct-link.md). It provides the same three REST API endpoints:
 
--   **`POST /rooms`**: Create a new room with the given room name.
--   **`GET /rooms`**: Get the list of rooms.
--   **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
+- **`POST /rooms`**: Create a new room with the given room name.
+- **`GET /rooms`**: Get the list of rooms.
+- **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
 
 For detailed backend documentation, please refer to the [Direct Link tutorial backend section](direct-link.md#backend).
 
@@ -105,19 +105,19 @@ The room list template has been modified to use buttons instead of direct links,
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-basic/public/js/app.js#L48-L75' target='_blank'>app.js</a>" linenums="48" hl_lines="6-17"
 function getRoomListItemTemplate(room) {
-    return `
+	return `
         <li class="list-group-item">
             <span>${room.roomName}</span>
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
-                    onclick="joinRoom('${room.moderatorUrl}');"
+                    onclick="joinRoom('${room.access.anonymous.moderator.url}');"
                 >
                     Join as Moderator
                 </button>
                 <button
                     class="btn btn-secondary btn-sm"
-                    onclick="joinRoom('${room.speakerUrl}');"
+                    onclick="joinRoom('${room.access.anonymous.speaker.url}');"
                 >
                     Join as Speaker
                 </button>
@@ -142,17 +142,17 @@ The key difference from the Direct Link tutorial is that instead of using anchor
 
 When the user clicks the `Join as Moderator` or `Join as Speaker` button, the `joinRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-basic/public/js/app.js#L117-L133' target='_blank'>app.js</a>" linenums="117"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-basic/public/js/app.js#L120-L136' target='_blank'>app.js</a>" linenums="120"
 function joinRoom(roomUrl) {
-    // Hide the home screen and show the room screen
-    const homeScreen = document.querySelector('#home');
-    homeScreen.hidden = true; // (1)!
-    const roomScreen = document.querySelector('#room');
-    roomScreen.hidden = false; // (2)!
+	// Hide the home screen and show the room screen
+	const homeScreen = document.querySelector('#home');
+	homeScreen.hidden = true; // (1)!
+	const roomScreen = document.querySelector('#room');
+	roomScreen.hidden = false; // (2)!
 
-    // Inject the OpenVidu Meet component into the meeting container specifying the room URL
-    const meetingContainer = document.querySelector('#meeting-container');
-    meetingContainer.innerHTML = `
+	// Inject the OpenVidu Meet component into the meeting container specifying the room URL
+	const meetingContainer = document.querySelector('#meeting-container');
+	meetingContainer.innerHTML = `
         <openvidu-meet
             room-url="${roomUrl}"
             leave-redirect-url="/"

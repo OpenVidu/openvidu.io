@@ -11,14 +11,14 @@ This tutorial is a simple example of how to integrate **OpenVidu Meet** into a *
 
 At the end of this tutorial, you will have a fully functional simple video-call application with the following features:
 
--   Users can create rooms.
--   Users can delete rooms.
--   Users can join a room as moderator or speaker.
--   Users can chat with other users.
--   Users may leave the room at any time.
--   Users can view the recordings of the meeting.
--   Moderators can record the meeting.
--   Moderators may end the meeting at any time, disconnecting all users.
+- Users can create rooms.
+- Users can delete rooms.
+- Users can join a room as moderator or speaker.
+- Users can chat with other users.
+- Users may leave the room at any time.
+- Users can view the recordings of the meeting.
+- Moderators can record the meeting.
+- Moderators may end the meeting at any time, disconnecting all users.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
 
@@ -70,13 +70,13 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 This application is designed to be beginner-friendly and consists of one essential backend file under the `src` directory:
 
--   `index.js`: This file holds the server application and defines the REST API endpoints.
+- `index.js`: This file holds the server application and defines the REST API endpoints.
 
 And the following essential frontend files under the `public` directory:
 
--   `index.html`: This is the client application's main HTML file.
--   `app.js`: This is the main JavaScript file that interacts with the server application and handles the client application's logic and functionality.
--   `style.css`: This file contains the client application's styling.
+- `index.html`: This is the client application's main HTML file.
+- `app.js`: This is the main JavaScript file that interacts with the server application and handles the client application's logic and functionality.
+- `style.css`: This file contains the client application's styling.
 
 ---
 
@@ -84,9 +84,9 @@ And the following essential frontend files under the `public` directory:
 
 The server application is a simple Express app with a single file `index.js` that exports three endpoints:
 
--   **`POST /rooms`**: Create a new room with the given room name.
--   **`GET /rooms`**: Get the list of rooms.
--   **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
+- **`POST /rooms`**: Create a new room with the given room name.
+- **`GET /rooms`**: Get the list of rooms.
+- **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
 
 Let's see the code of the `index.js` file:
 
@@ -127,9 +127,9 @@ app.use(express.static(path.join(__dirname, '../public'))); // (8)!
 
 The `index.js` file imports the required dependencies and loads the necessary environment variables:
 
--   `SERVER_PORT`: The port where the application will be listening.
--   `OV_MEET_SERVER_URL`: The OpenVidu Meet server URL.
--   `OV_MEET_API_KEY`: The OpenVidu Meet API key.
+- `SERVER_PORT`: The port where the application will be listening.
+- `OV_MEET_SERVER_URL`: The OpenVidu Meet server URL.
+- `OV_MEET_API_KEY`: The OpenVidu Meet API key.
 
 Then the `express` application is initialized. CORS is allowed, JSON body parsing is enabled, and static files are served from the `public` directory.
 
@@ -141,90 +141,71 @@ Now let's see the code of each endpoint:
 
 The `POST /rooms` endpoint creates a new room. It receives the room name as a body parameter and returns the newly created room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L25-L58' target='_blank'>index.js</a>" linenums="25"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L25-L45' target='_blank'>index.js</a>" linenums="25"
 // Create a new room
 app.post('/rooms', async (req, res) => {
-    const { roomName } = req.body; // (1)!
+	const { roomName } = req.body; // (1)!
 
-    if (!roomName) {
-        res.status(400).json({ message: `'roomName' is required` }); // (2)!
-        return;
-    }
+	if (!roomName) {
+		res.status(400).json({ message: `'roomName' is required` }); // (2)!
+		return;
+	}
 
-    try {
-        // Create a new OpenVidu Meet room using the API
-        const room = await httpRequest('POST', 'rooms', {
-            roomName, // (3)!
-            config: {
-                // (4)!
-                // Default room configuration
-                chat: {
-                    enabled: true // Enable chat for this room
-                },
-                recording: {
-                    enabled: true, // Enable recording for this room
-                    allowAccessTo: 'admin_moderator_speaker' // Allow access to recordings for admin, moderator and speaker roles
-                },
-                virtualBackground: {
-                    enabled: true // Enable virtual background for this room
-                }
-            }
-        });
+	try {
+		// Create a new OpenVidu Meet room using the API
+		const room = await httpRequest('POST', 'rooms', {
+			roomName // (3)!
+		});
 
-        console.log('Room created:', room);
-        res.status(201).json({ message: `Room '${roomName}' created successfully`, room }); // (5)!
-    } catch (error) {
-        handleApiError(res, error, `Error creating room '${roomName}'`); // (6)!
-    }
+		console.log('Room created:', room);
+		res.status(201).json({ message: `Room '${roomName}' created successfully`, room }); // (4)!
+	} catch (error) {
+		handleApiError(res, error, `Error creating room '${roomName}'`); // (5)!
+	}
 });
 ```
 
 1. The `roomName` parameter is obtained from the request body.
 2. If the `roomName` is not provided, the server returns a `400 Bad Request` response.
 3. Specify the name of the room.
-4. Set the configuration for the room, enabling chat, recording and virtual background.
-5. The server returns a `201 Created` response with the room object.
-6. If an error occurs during room creation, it is handled by the `handleApiError` function.
+4. The server returns a `201 Created` response with the room object.
+5. If an error occurs during room creation, it is handled by the `handleApiError` function.
 
 This endpoint does the following:
 
 1.  The `roomName` parameter is obtained from the request body. If it is not provided, the server returns a `400 Bad Request` response.
-2.  A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint. The request includes the room name and additional configuration options (with default values):
-
-    -   **Chat Configuration**: Enables chat functionality for the room.
-    -   **Recording Configuration**: Enables recording for the room and allows access to recordings for the roles `admin`, `moderator` and `speaker`.
-    -   **Virtual Background Configuration**: Enables virtual background functionality for the room.
+2.  A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint, including the room name. The room is created with its default configuration.
 
     !!! info
 
-        The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/operations/createRoom){target="_blank"}.
+        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/operations/createRoom){target="_blank"}.
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L89-L111' target='_blank'>index.js</a>" linenums="89"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L77-L99' target='_blank'>index.js</a>" linenums="77"
     // Function to make HTTP requests to OpenVidu Meet API
     const httpRequest = async (method, path, body) => {
-        // (1)!
-        const response = await fetch(`${OV_MEET_SERVER_URL}/api/v1/${path}`, {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-KEY': OV_MEET_API_KEY // Include the API key in the header for authentication
-            },
-            body: body ? JSON.stringify(body) : undefined // (2)!
-        });
+    	// (1)!
+    	const response = await fetch(`${OV_MEET_SERVER_URL}/api/v1/${path}`, {
+    		method,
+    		headers: {
+    			'Content-Type': 'application/json',
+    			'X-API-KEY': OV_MEET_API_KEY // Include the API key in the header for authentication
+    		},
+    		body: body ? JSON.stringify(body) : undefined // (2)!
+    	});
 
-        const responseBody = await response.json(); // (3)!
+    	const responseBody = await response.json(); // (3)!
 
-        if (!response.ok) {
-            console.error('Error while performing request to OpenVidu Meet API:', responseBody);
-            // Create an error object that includes the HTTP status code from the API
-            const error = new Error(responseBody.message || 'Failed to perform request to OpenVidu Meet API');
-            error.statusCode = response.status;
-            throw error; // (4)!
-        }
+    	if (!response.ok) {
+    		console.error('Error while performing request to OpenVidu Meet API:', responseBody);
+    		// Create an error object that includes the HTTP status code from the API
+    		const error = new Error(responseBody.message || 'Failed to perform request to OpenVidu Meet API');
+    		error.statusCode = response.status;
+    		throw error; // (4)!
+    	}
 
-        return responseBody; // (5)!
+    	return responseBody; // (5)!
     };
     ```
 
@@ -240,13 +221,13 @@ This endpoint does the following:
 
 3.  If the room is successfully created, the server returns a `201 Created` response with the room object. Otherwise, the error is handled by the `handleApiError` function, which logs the error and returns an appropriate HTTP response:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L113-L119' target='_blank'>index.js</a>" linenums="113"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L101-L107' target='_blank'>index.js</a>" linenums="101"
     // Helper function to handle API errors consistently
     const handleApiError = (res, error, message) => {
-        console.error(`${message}: ${error.message}`); // (1)!
-        const statusCode = error.statusCode || 500; // (2)!
-        const errorMessage = error.statusCode ? error.message : message; // (3)!
-        res.status(statusCode).json({ message: errorMessage }); // (4)!
+    	console.error(`${message}: ${error.message}`); // (1)!
+    	const statusCode = error.statusCode || 500; // (2)!
+    	const errorMessage = error.statusCode ? error.message : message; // (3)!
+    	res.status(statusCode).json({ message: errorMessage }); // (4)!
     };
     ```
 
@@ -261,9 +242,9 @@ This endpoint does the following:
 
 The `GET /rooms` endpoint retrieves the list of all rooms created in OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L60-L69' target='_blank'>index.js</a>" linenums="60"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L47-L56' target='_blank'>index.js</a>" linenums="47"
 // List all rooms
-app.get('/rooms', (_req, res) => {
+app.get('/rooms', async (_req, res) => {
     try {
         // List all OpenVidu Meet rooms using the API (100 max)
         const { rooms } = await httpRequest('GET', 'rooms?maxItems=100'); // (1)!
@@ -285,28 +266,29 @@ This endpoint retrieves the list of rooms by making a `GET` request to the `room
 
 The `DELETE /room/:roomId` endpoint deletes the specified room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L71-L82' target='_blank'>index.js</a>" linenums="71"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L59-L70' target='_blank'>index.js</a>" linenums="59"
 app.delete('/rooms/:roomId', async (req, res) => {
-    const { roomId } = req.params; // (1)!
+	const { roomId } = req.params; // (1)!
 
-    try {
-        // Delete the OpenVidu Meet room using the API
-        await httpRequest('DELETE', `rooms/${roomId}`); // (2)!
-        res.status(200).json({ message: `Room '${roomId}' deleted successfully` }); // (3)!
-    } catch (error) {
-        handleApiError(res, error, `Error deleting room '${roomId}'`);
-    }
+	try {
+		// Delete the OpenVidu Meet room using the API
+		// We use the 'force' parameters to ensure that the room is deleted even if there are active meetings or recordings
+		await httpRequest('DELETE', `rooms/${roomId}?withMeeting=force&withRecordings=force`); // (2)!
+		res.status(200).json({ message: `Room '${roomId}' deleted successfully` }); // (3)!
+	} catch (error) {
+		handleApiError(res, error, `Error deleting room '${roomId}'`);
+	}
 });
 ```
 
 1. The `roomId` parameter is obtained from the request parameters.
-2. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint.
+2. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint. The `withMeeting=force` and `withRecordings=force` query parameters ensure the room is deleted even if it has an active meeting or associated recordings.
 3. The server returns a `200 OK` response with a success message.
 
 This endpoint does the following:
 
 1. The `roomId` parameter is obtained from the request parameters.
-2. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint.
+2. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint. The `withMeeting=force` and `withRecordings=force` query parameters are included to ensure the room is deleted even if it has an active meeting or associated recordings.
 3. If the room is successfully deleted, the server returns a `200 OK` response with a success message. Otherwise, the error is handled by the `handleApiError` function.
 
 ---
@@ -315,9 +297,9 @@ This endpoint does the following:
 
 The client application consists of only three essential files that are located in the `public` directory:
 
--   `app.js`: This is the main JavaScript file for the sample application. It contains the logic for listing, creating, joining and deleting rooms.
--   `index.html`: This HTML file is responsible for creating the user interface. It contains the list of created rooms, and a form to create a new room.
--   `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
+- `app.js`: This is the main JavaScript file for the sample application. It contains the logic for listing, creating, joining and deleting rooms.
+- `index.html`: This HTML file is responsible for creating the user interface. It contains the list of created rooms, and a form to create a new room.
+- `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
 
 Now let's see the code of the `app.js` file grouped by sections:
 
@@ -331,25 +313,25 @@ The list of rooms is displayed in the `index.html` file as soon as the page load
 const rooms = new Map(); // (1)!
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await fetchRooms(); // (2)!
+	await fetchRooms(); // (2)!
 });
 
 async function fetchRooms() {
-    try {
-        const { rooms: roomsList } = await httpRequest('GET', '/rooms'); // (3)!
+	try {
+		const { rooms: roomsList } = await httpRequest('GET', '/rooms'); // (3)!
 
-        roomsList.forEach((room) => {
-            rooms.set(room.roomId, room); // (4)!
-        });
-        renderRooms(); // (5)!
-    } catch (error) {
-        console.error('Error fetching rooms:', error.message);
+		roomsList.forEach((room) => {
+			rooms.set(room.roomId, room); // (4)!
+		});
+		renderRooms(); // (5)!
+	} catch (error) {
+		console.error('Error fetching rooms:', error.message);
 
-        // Show error message
-        const roomsErrorElement = document.querySelector('#no-rooms-or-error');
-        roomsErrorElement.textContent = 'Error loading rooms';
-        roomsErrorElement.hidden = false;
-    }
+		// Show error message
+		const roomsErrorElement = document.querySelector('#no-rooms-or-error');
+		roomsErrorElement.textContent = 'Error loading rooms';
+		roomsErrorElement.hidden = false;
+	}
 }
 ```
 
@@ -365,25 +347,25 @@ The `fetchRooms()` function performs the following actions:
 
     To send requests to the backend, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L117-L134' target='_blank'>app.js</a>" linenums="117"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L120-L137' target='_blank'>app.js</a>" linenums="120"
     // Function to make HTTP requests to the backend
     async function httpRequest(method, path, body) {
-        // (1)!
-        const response = await fetch(path, {
-            method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: body ? JSON.stringify(body) : undefined // (2)!
-        });
+    	// (1)!
+    	const response = await fetch(path, {
+    		method,
+    		headers: {
+    			'Content-Type': 'application/json'
+    		},
+    		body: body ? JSON.stringify(body) : undefined // (2)!
+    	});
 
-        const responseBody = await response.json(); // (3)!
+    	const responseBody = await response.json(); // (3)!
 
-        if (!response.ok) {
-            throw new Error(responseBody.message || 'Failed to perform request to backend'); // (4)!
-        }
+    	if (!response.ok) {
+    		throw new Error(responseBody.message || 'Failed to perform request to backend'); // (4)!
+    	}
 
-        return responseBody; // (5)!
+    	return responseBody; // (5)!
     }
     ```
 
@@ -403,42 +385,42 @@ The `renderRooms()` function is responsible for updating the UI with the list of
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L25-L75' target='_blank'>app.js</a>" linenums="25"
 function renderRooms() {
-    // Clear the previous list of rooms
-    const roomsList = document.querySelector('#rooms-list ul'); // (1)!
-    roomsList.innerHTML = ''; // (2)!
+	// Clear the previous list of rooms
+	const roomsList = document.querySelector('#rooms-list ul'); // (1)!
+	roomsList.innerHTML = ''; // (2)!
 
-    // Show or remove the "No rooms found" message
-    const noRoomsElement = document.querySelector('#no-rooms-or-error');
-    if (rooms.size === 0) {
-        noRoomsElement.textContent = 'No rooms found. Please create a new room.';
-        noRoomsElement.hidden = false;
-        return;
-    } else {
-        noRoomsElement.textContent = '';
-        noRoomsElement.hidden = true;
-    }
+	// Show or remove the "No rooms found" message
+	const noRoomsElement = document.querySelector('#no-rooms-or-error');
+	if (rooms.size === 0) {
+		noRoomsElement.textContent = 'No rooms found. Please create a new room.';
+		noRoomsElement.hidden = false;
+		return;
+	} else {
+		noRoomsElement.textContent = '';
+		noRoomsElement.hidden = true;
+	}
 
-    // Add rooms to the list element
-    Array.from(rooms.values()).forEach((room) => {
-        const roomItem = getRoomListItemTemplate(room); // (3)!
-        roomsList.innerHTML += roomItem; // (4)!
-    });
+	// Add rooms to the list element
+	Array.from(rooms.values()).forEach((room) => {
+		const roomItem = getRoomListItemTemplate(room); // (3)!
+		roomsList.innerHTML += roomItem; // (4)!
+	});
 }
 
 function getRoomListItemTemplate(room) {
-    return `
+	return `
         <li class="list-group-item">
             <span>${room.roomName}</span>
             <div class="room-actions">
                 <a
                     class="btn btn-primary btn-sm"
-                    href="${room.moderatorUrl}"
+                    href="${room.access.anonymous.moderator.url}"
                 >
                     Join as Moderator
                 </a>
                 <a
                     class="btn btn-secondary btn-sm"
-                    href="${room.speakerUrl}"
+                    href="${room.access.anonymous.speaker.url}"
                 >
                     Join as Speaker
                 </a>
@@ -467,7 +449,7 @@ The `renderRooms()` function performs the following actions:
 3. For each room in the `rooms` map, it calls the `getRoomListItemTemplate()` function to get the HTML template for the room list item.
 4. Appends the room item to the list element.
 
-The `getRoomListItemTemplate()` function generates the HTML template for each room list item. It includes anchor links to join the room as a moderator or speaker using direct URLs, and a button to delete the room. The anchor links use the `moderatorUrl` and `speakerUrl` properties from the room object to redirect users directly to the OpenVidu Meet interface, while the delete button calls the `deleteRoom()` function passing the room ID to remove the room from the server.
+The `getRoomListItemTemplate()` function generates the HTML template for each room list item. It includes anchor links to join the room as a moderator or speaker using direct URLs, and a button to delete the room. The anchor links use the `room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url` properties from the room object to redirect users directly to the OpenVidu Meet interface, while the delete button calls the `deleteRoom()` function passing the room ID to remove the room from the server.
 
 ---
 
@@ -475,51 +457,55 @@ The `getRoomListItemTemplate()` function generates the HTML template for each ro
 
 After the user specifies the room name and clicks the `Create Room` button, the `createRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L77-L103' target='_blank'>app.js</a>" linenums="77"
-async function createRoom() {
-    // Clear previous error message
-    const errorDiv = document.querySelector('#create-room-error');
-    errorDiv.textContent = '';
-    errorDiv.hidden = true;
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L77-L106' target='_blank'>app.js</a>" linenums="77"
+async function createRoom(e) {
+	// Prevent the default form submission
+	e.preventDefault(); // (1)!
 
-    try {
-        const roomName = document.querySelector('#room-name').value; // (1)!
+	// Clear previous error message
+	const errorDiv = document.querySelector('#create-room-error');
+	errorDiv.textContent = '';
+	errorDiv.hidden = true;
 
-        const { room } = await httpRequest('POST', '/rooms', {
-            roomName
-        }); // (2)!
+	try {
+		const roomName = document.querySelector('#room-name').value; // (2)!
+		const { room } = await httpRequest('POST', '/rooms', {
+			roomName
+		}); // (3)!
 
-        // Add new room to the list
-        rooms.set(room.roomId, room); // (3)!
-        renderRooms(); // (4)!
+		// Add new room to the list
+		rooms.set(room.roomId, room); // (4)!
+		renderRooms(); // (5)!
 
-        // Reset the form
-        const createRoomForm = document.querySelector('#create-room form');
-        createRoomForm.reset(); // (5)!
-    } catch (error) {
-        console.error('Error creating room:', error.message);
+		// Reset the form
+		const createRoomForm = document.querySelector('#create-room form');
+		createRoomForm.reset(); // (6)!
+	} catch (error) {
+		console.error('Error creating room:', error.message);
 
-        // Show error message
-        errorDiv.textContent = 'Error creating room';
-        errorDiv.hidden = false;
-    }
+		// Show error message
+		errorDiv.textContent = 'Error creating room';
+		errorDiv.hidden = false;
+	}
 }
 ```
 
-1. Get the room name from the input field.
-2. Make a `POST` request to the `/rooms` endpoint to create a new room with the specified name.
-3. Add the new room to the `rooms` map.
-4. Call the `renderRooms()` function to update the list of rooms.
-5. Reset the form to clear the input field.
+1. Prevent the default form submission so the page is not reloaded.
+2. Get the room name from the input field.
+3. Make a `POST` request to the `/rooms` endpoint to create a new room with the specified name.
+4. Add the new room to the `rooms` map.
+5. Call the `renderRooms()` function to update the list of rooms.
+6. Reset the form to clear the input field.
 
 The `createRoom()` function performs the following actions:
 
-1. Clears any previous error messages.
-2. Gets the room name from the input field.
-3. Makes a `POST` request to the `/rooms` endpoint to create a new room with the specified name.
-4. If the room is successfully created, it adds the new room to the `rooms` map and calls the `renderRooms()` function to update the list of rooms.
-5. Resets the form to clear the input field.
-6. If an error occurs during room creation, it logs the error and displays an appropriate error message.
+1. Prevents the default form submission, as it is invoked as the `submit` handler of the create room form.
+2. Clears any previous error messages.
+3. Gets the room name from the input field.
+4. Makes a `POST` request to the `/rooms` endpoint to create a new room with the specified name.
+5. If the room is successfully created, it adds the new room to the `rooms` map and calls the `renderRooms()` function to update the list of rooms.
+6. Resets the form to clear the input field.
+7. If an error occurs during room creation, it logs the error and displays an appropriate error message.
 
 ---
 
@@ -527,17 +513,17 @@ The `createRoom()` function performs the following actions:
 
 When the user clicks the delete room button, the `deleteRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L105-L115' target='_blank'>app.js</a>" linenums="105"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L108-L118' target='_blank'>app.js</a>" linenums="108"
 async function deleteRoom(roomId) {
-    try {
-        await httpRequest('DELETE', `/rooms/${roomId}`); // (1)!
+	try {
+		await httpRequest('DELETE', `/rooms/${roomId}`); // (1)!
 
-        // Remove the room from the list
-        rooms.delete(roomId); // (2)!
-        renderRooms(); // (3)!
-    } catch (error) {
-        console.error('Error deleting room:', error.message);
-    }
+		// Remove the room from the list
+		rooms.delete(roomId); // (2)!
+		renderRooms(); // (3)!
+	} catch (error) {
+		console.error('Error deleting room:', error.message);
+	}
 }
 ```
 
