@@ -11,14 +11,14 @@ The following tutorials will walk you through embedding OpenVidu Meet, either di
 
 Every tutorial below shares the same core functionality:
 
--   Users can create rooms.
--   Users can delete rooms.
--   Users can join a room as moderator or speaker.
--   Users can chat with other users.
--   Users may leave the room at any time.
--   Users can view the recordings of the meeting.
--   Moderators can record the meeting.
--   Moderators may end the meeting at any time, disconnecting all users.
+- Users can create rooms.
+- Users can delete rooms.
+- Users can join a room as moderator or speaker.
+- Users can chat with other users.
+- Users may leave the room at any time.
+- Users can view the recordings of the meeting.
+- Moderators can record the meeting.
+- Moderators may end the meeting at any time, disconnecting all users.
 
 <div class="tutorials-container" markdown>
 
