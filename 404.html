@@ -9568,6 +9568,8 @@
       
         
       
+        
+      
     
     
     
@@ -9610,6 +9612,36 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/openvidu-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenVidu Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -10076,11 +10108,19 @@
     // Get the current URL
     const path = window.location.pathname;
 
-    // Check if the URL starts with "/docs/"
-    if (path.startsWith('/docs/')) {
-        // Redirect to "/latest/docs/" preserving the rest of the path
-        const newPath = path.replace('/docs/', '/latest/docs/');
-        window.location.replace(newPath);
+    // Versioned sections that must redirect to their latest version.
+    // Keep this list in sync with VERSIONED_PAGES in custom-versioning/push-new-version.sh
+    const versionedPages = ['docs', 'meet'];
+
+    // If the URL points to a versioned section without a version prefix,
+    // redirect to "/latest/<section>/" preserving the rest of the path
+    for (const page of versionedPages) {
+        const prefix = '/' + page + '/';
+        if (path.startsWith(prefix)) {
+            const newPath = path.replace(prefix, '/latest' + prefix);
+            window.location.replace(newPath);
+            break;
+        }
     }
   </script>
 
