@@ -24,13 +24,17 @@ Every tutorial below shares the same core functionality:
 
 [:material-link:{.icon .lg-icon .tab-icon} **Direct Link**](./direct-link.md){ .md-button .md-button--primary .tutorial-link }
 
-[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link }
+[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link .no-height }
+
+[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
 
 </div>
 
 <div class="tutorials-container" markdown>
 
-[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
+[:material-ticket-account:{.icon .lg-icon .tab-icon} **External Members**](./external-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
+
+[:material-account-key:{.icon .lg-icon .tab-icon} **Registered Members**](./registered-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
 
 [:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link }
 

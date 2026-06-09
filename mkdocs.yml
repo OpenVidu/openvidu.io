@@ -45,6 +45,8 @@ nav:
               - Direct Link: meet/embedded/tutorials/direct-link.md
               - WebComponent: meet/embedded/tutorials/webcomponent.md
               - WebComponent Commands & Events: meet/embedded/tutorials/webcomponent-advanced.md
+              - External Members: meet/embedded/tutorials/external-members.md
+              - Registered Members: meet/embedded/tutorials/registered-members.md
               - Recordings: meet/embedded/tutorials/recordings.md
               - Webhooks: meet/embedded/tutorials/webhooks.md
               # - Next.js: meet/embedded/tutorials/nextjs.md
@@ -432,6 +434,8 @@ plugins:
         - meet/embedded/tutorials/direct-link.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent-advanced.md: An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
+        - meet/embedded/tutorials/external-members.md: An OpenVidu Meet tutorial showing how to add external members with a fixed name and a unique access link to a room. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+        - meet/embedded/tutorials/registered-members.md: An OpenVidu Meet tutorial showing how to create users with the Users API and grant them access to a room as registered members. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/recordings.md: How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings.
         - meet/embedded/tutorials/webhooks.md: Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
         - meet/embedded/reference/*.md: OpenVidu Meet - Reference documentation
