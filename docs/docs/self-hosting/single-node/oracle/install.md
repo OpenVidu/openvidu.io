@@ -138,22 +138,22 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate URL.</td>
+    <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate in base64 format.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPrivateCertificate</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate URL.</td>
+    <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate in base64 format.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetAdminPassword</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters only (A-Z, a-z, 0-9). If not provided, a random password will be generated.</td>
+    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetApiKey</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial API key for OpenVidu Meet. Alphanumeric characters only (A-Z, a-z, 0-9). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
+    <td>Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>bucketName</code></td>

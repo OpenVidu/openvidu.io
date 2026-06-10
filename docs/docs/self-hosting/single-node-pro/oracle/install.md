@@ -54,40 +54,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
   <details>
     <summary>Information about parameters</summary>
 
-    <h4>Mandatory Parameters</h4>
-
-    <div align="center">
-    <table>
-    <thead>
-    <tr>
-    <th>Input Value</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="white-space: nowrap;"><code>tenancy_ocid</code></td>
-    <td>OCI Tenancy OCID. Required for the Object Storage namespace.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>compartment_ocid</code></td>
-    <td>OCI Compartment OCID where resources will be created.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>user_ocid</code></td>
-    <td>OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>stackName</code></td>
-    <td>Stack name for the OpenVidu deployment.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>openviduLicense</code></td>
-    <td>OpenVidu PRO license key. Visit <a href="https://openvidu.io/account" target="_blank">https://openvidu.io/account</a> to obtain your license.</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+--8<-- "shared/self-hosting/oracle-mandatory-params-pro.md"
 
     <h4>Optional Parameters</h4>
 
@@ -142,22 +109,22 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate URL.</td>
+    <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate in base64 format.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPrivateCertificate</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate URL.</td>
+    <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate in base64 format.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetAdminPassword</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters only (A-Z, a-z, 0-9). If not provided, a random password will be generated.</td>
+    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetApiKey</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial API key for OpenVidu Meet. Alphanumeric characters only (A-Z, a-z, 0-9). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
+    <td>Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>bucketName</code></td>

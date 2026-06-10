@@ -7,11 +7,7 @@ tags:
 
 # OpenVidu Elastic installation: Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
-
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
-
-</div>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
 
 --8<-- "shared/self-hosting/elastic-license-intro.md"
@@ -48,49 +44,10 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
 
 === "Custom scale-in strategy"
 
-    - An **OCI Function** is deployed and triggered on a regular schedule. It polls the average CPU of the Instance Pool against **`scaleTargetCPU`** while respecting **`minNumberOfMediaNodes`** and **`maxNumberOfMediaNodes`**, and when a scale-in decision is made, the target Media Node is flagged as "draining" so it stops accepting new Rooms.
+    - An **OCI Function** is deployed and triggered on a regular schedule. It polls the average CPU of the Instance Pool against **`scaleTargetCPU`** and never scales the pool below **`minNumberOfMediaNodes`**, and when a scale-in decision is made, the target Media Node is flagged as "draining" so it stops accepting new Rooms.
     - Each Media Node runs a `systemd` daemon that periodically checks whether the instance has been marked as "draining". If so, the graceful shutdown script is triggered, which waits for all active Rooms on that node to end before shutting the instance down.
 
-## Using your own scale-in function image
-
-By default, the OCI Function pulls the scale-in image published by OpenVidu in the Madrid OCIR (`mad.ocir.io`). If you prefer to host the image in your own OCI Registry — for example, to avoid cross-region pulls, comply with internal policies, or pin a customised build — you can build and push it yourself, then point the `scale_in_function_image` variable to your image.
-
-1. From the cloned `openvidu-oracle` repository, navigate to the scale-in function source directory:
-
-    ```bash
-    cd openvidu-oracle/pro/scalein-function
-    ```
-
-2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
-
-    ```bash
-    docker login <region-key>.ocir.io -u '<tenancy-namespace>/<username>' -p '<auth-token>'
-    ```
-
-    Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
-
-    Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target=_blank} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
-
-3. Build and tag the image. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
-
-    ```bash
-    docker build -t <region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag> .
-    ```
-
-4. Push the image to OCIR:
-
-    ```bash
-    docker push <region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag>
-    ```
-
-5. Update `terraform.tfvars` with the new image reference:
-
-    ```hcl
-    scale_in_function_image = "<region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag>"
-    ```
-
-!!! info
-    Make sure the OCI Function's compartment has the IAM policies needed to pull from the target repository. If the repository lives in a different tenancy from the OCI Function, see [Pulling Images from Repositories in other Tenancies :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionspullingimagescrosstenancy.htm){:target=_blank} for the required Endorse/Admit/Define policy statements.
+--8<-- "shared/self-hosting/oracle-scalein-function-image.md"
 
 ## Deployment details
 
@@ -106,40 +63,7 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
   <details>
     <summary>Information about parameters</summary>
 
-    <h4>Mandatory Parameters</h4>
-
-    <div align="center">
-    <table>
-    <thead>
-    <tr>
-    <th>Input Value</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="white-space: nowrap;"><code>tenancy_ocid</code></td>
-    <td>OCI Tenancy OCID. Required for the Object Storage namespace.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>compartment_ocid</code></td>
-    <td>OCI Compartment OCID where resources will be created.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>user_ocid</code></td>
-    <td>OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>stackName</code></td>
-    <td>Stack name for the OpenVidu deployment.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>openviduLicense</code></td>
-    <td>OpenVidu PRO license key. Visit <a href="https://openvidu.io/account" target="_blank">https://openvidu.io/account</a> to obtain your license.</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+--8<-- "shared/self-hosting/oracle-mandatory-params-pro.md"
 
     <h4>Optional Parameters</h4>
 
@@ -259,12 +183,12 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetAdminPassword</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters only (A-Z, a-z, 0-9). If not provided, a random password will be generated.</td>
+    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetApiKey</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial API key for OpenVidu Meet. Alphanumeric characters only (A-Z, a-z, 0-9). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
+    <td>Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>bucketName</code></td>
@@ -314,16 +238,7 @@ By default, the OCI Function pulls the scale-in image published by OpenVidu in t
 
 5. Set the correct permissions on the SSH key so it can be used.
 
-    === "Linux"
-        ```bash
-        chmod 600 <PATH_TO_THE_KEY>/openvidu_private_ssh_key_<STACK_NAME>.pem
-        ```
-    === "Powershell"
-        ```powershell
-        $KeyPath = "<PATH_TO_THE_KEY>" &&
-        icacls $KeyPath /inheritance:r &&
-        icacls $KeyPath /grant:r "$($env:USERNAME):(R)"
-        ```
+--8<-- "shared/self-hosting/oracle-singlenode-ssh-key-permissions.md"
 
 ### Access OpenVidu
 
@@ -334,7 +249,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     2. Click the secret you want to view.
     3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
         <figure markdown>
-        ![View Secret](../../../../assets/images/self-hosting/elastic/oracle/view-secret.png){ .svg-img .dark-img }
+        ![View Secret](../../../../assets/images/self-hosting/shared/oracle-view-secret.png){ .svg-img .dark-img }
         </figure>
 
         !!! warning

@@ -5,11 +5,7 @@ description: How to upgrade OpenVidu High Availability on Oracle Cloud Infrastru
 
 # Upgrade OpenVidu High Availability: Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
-
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
-
-</div>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
 For Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying the [OpenVidu High Availability Oracle Cloud Infrastructure](../oracle/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, since Oracle Cloud Infrastructure Terraform files and related configurations may differ between releases. Redeploying guarantees that all necessary changes are properly applied.
 
@@ -82,7 +78,6 @@ To roll back to the previous version, copy the files from the backup back to the
 ```bash
 cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu
 /usr/local/bin/store_secret.sh save OPENVIDU_VERSION "<VERSION>"
-/usr/local/bin/store_secret.sh fullsave
 ```
 
 Where `<DATE>` and `<VERSION>` are the date and version of the backup you want to restore. For example:
@@ -90,7 +85,6 @@ Where `<DATE>` and `<VERSION>` are the date and version of the backup you want t
 ```
 cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 /usr/local/bin/store_secret.sh save OPENVIDU_VERSION "3.0.0"
-/usr/local/bin/store_secret.sh fullsave
 ```
 
 Note the `store_secret.sh` command at the end. This is required to update the `OPENVIDU_VERSION` secret in the OCI Vault, which the Oracle Cloud Infrastructure deployment uses to determine which version of OpenVidu should be running on the Media Nodes. The `store_secret.sh` command only needs to be run once from any Master Node, but the `cp` step must be repeated on every Master Node to restore its configuration files.

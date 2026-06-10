@@ -5,11 +5,7 @@ description: Learn how to perform administrative tasks on an Oracle Cloud Infras
 
 # OpenVidu Elastic administration: Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
-
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
-
-</div>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
 
 The deployment of OpenVidu Elastic on Oracle Cloud Infrastructure is automated using the Terraform CLI, where Media Nodes are part of an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target=\_blank}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
@@ -127,14 +123,16 @@ You can modify the autoscaling configuration of the Media Nodes via the `terrafo
     ```
     terraform apply
     ```
-    3. Confirm the change that Terraform proposes (it will update the Media Node Instance Pool and the OCI Function with the new values, and redeploy the Instance Configuration), and the changes will take effect.
+    3. Confirm the change that Terraform proposes (it will update the autoscaling configuration, and the scale-in OCI Function when `scaleTargetCPU` or `minNumberOfMediaNodes` change), and the changes will take effect.
         <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-autoscale-change.png){ .svg-img .dark-img }
+        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/oracle-terraform-output-autoscale-change.png){ .svg-img .dark-img }
         </figure>
 
 ## Fixed Number of Media Nodes
 
-You can switch between **elastic mode** (autoscaling Instance Pool + scale-in OCI Function) and **fixed mode** (a static number of Media Nodes with no autoscaling) by changing the **`fixedNumberOfMediaNodes`** variable and running `terraform apply`.
+You can switch between **autoscaling mode** (autoscaling Instance Pool + scale-in OCI Function) and **fixed mode** (a static number of Media Nodes with no autoscaling) by changing the **`fixedNumberOfMediaNodes`** variable and running `terraform apply`.
+
+Switching modes does **not** recreate the Master Node. It carries a `scale-in-mode` freeform tag that Terraform flips in place (`elastic` ⇄ `fixed`), and the scale-in scripts on every node read this tag at runtime. The Master Node and the Media Node Instance Configuration are therefore left untouched — only the scale-in OCI Function and the autoscaling configuration are created or destroyed, and the Instance Pool is resized.
 
 !!! warning
 
@@ -150,10 +148,14 @@ You can switch between **elastic mode** (autoscaling Instance Pool + scale-in OC
         terraform apply
         ```
 
-    3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and resize the Instance Pool to the fixed number of Media Nodes.
+    3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and the autoscaling configuration, flip the Master Node's `scale-in-mode` tag to `fixed`, and resize the Instance Pool to the fixed number of Media Nodes.
         <figure markdown>
         ![Terraform output activate fixed media nodes](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-activate-fixed.png){ .svg-img .dark-img }
         </figure>
+
+## Activate Scale In
+
+Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automatic Media Node scaling and the scale-in OCI Function.
 
 === "Activate Scale In"
 
@@ -168,7 +170,7 @@ You can switch between **elastic mode** (autoscaling Instance Pool + scale-in OC
         terraform apply
         ```
 
-    3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function and re-attach the autoscaling configuration to the Instance Pool.
+    3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function, re-attach the autoscaling configuration to the Instance Pool, and flip the Master Node's `scale-in-mode` tag back to `elastic`.
         <figure markdown>
         ![Terraform output activate scale in](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-activate-scalein.png){ .svg-img .dark-img }
         </figure>
@@ -187,16 +189,14 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     2. Click the secret you want to change.
     3. Scroll down to _"Versions"_ and click _"Create secret version"_ to add a new version with the updated value.
             <figure markdown>
-            ![Create Secret Version](../../../../assets/images/self-hosting/elastic/oracle/create-secret-version.png){ .svg-img .dark-img }
+            ![Create Secret Version](../../../../assets/images/self-hosting/shared/oracle-create-secret-version.png){ .svg-img .dark-img }
             </figure>
     4. Enter the new secret value and click _"Create secret version"_.
             <figure markdown>
-            ![New Secret Version](../../../../assets/images/self-hosting/elastic/oracle/new-secret-version.png){ .svg-img .dark-img }
+            ![New Secret Version](../../../../assets/images/self-hosting/shared/oracle-new-secret-version.png){ .svg-img .dark-img }
             </figure>
     5. [Shut down](#shutting-down-the-cluster) and [start up](#starting-up-the-cluster) the cluster to apply the changes to the OpenVidu Elastic deployment.
 
-    Changes will be applied automatically.
+    Changes will be applied automatically on all nodes of your OpenVidu Elastic deployment.
 
-## Backup and Restore
-
-Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
+--8<-- "shared/self-hosting/oracle-backup-and-restore.md"

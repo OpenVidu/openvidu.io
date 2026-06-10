@@ -5,11 +5,7 @@ description: How to upgrade OpenVidu Elastic on Oracle Cloud Infrastructure depl
 
 # Upgrade OpenVidu Elastic: Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
-
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
-
-</div>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
 
 In Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying [OpenVidu Elastic Oracle Cloud Infrastructure](../oracle/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Oracle Cloud Infrastructure terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.

@@ -7,7 +7,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     2. Click the secret you want to view.
     3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
         <figure markdown>
-        ![View Secret](../../../../assets/images/self-hosting/single-node/oracle/view-secret.png){ .svg-img .dark-img }
+        ![View Secret](../../../../assets/images/self-hosting/shared/oracle-view-secret.png){ .svg-img .dark-img }
         </figure>
 
         !!! warning

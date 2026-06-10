@@ -76,6 +76,4 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
 
     Changes will be applied automatically.
 
-## Backup and Restore
-
-Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
+--8<-- "shared/self-hosting/oracle-backup-and-restore.md"
