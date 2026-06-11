@@ -185,12 +185,12 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     <tr>
     <td style="white-space: nowrap;"><code>spacesAccessId</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is provided.</td>
+    <td>Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>spacesSecretKey</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is provided.</td>
+    <td>Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
