@@ -9,6 +9,7 @@ Self-hosted videoconference solution and SDK
 - [Home](https://openvidu.io/index.md): OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
 - [Blog](https://openvidu.io/blog/index.md): OpenVidu Blog
 - [5 React video call platforms in 2026: Is SaaS still the right choice?](https://openvidu.io/blog/2026/05/19/5-react-video-call-platforms/index.md): OpenVidu Blog
+- [Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/blog/2026/06/16/meet-vs-platform/index.md): OpenVidu Blog
 - [Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.](https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md): OpenVidu Blog
 - [How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform](https://openvidu.io/blog/2026/04/30/how-client-networks-affect-qoe-and-costs/index.md): OpenVidu Blog
 - [Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN](https://openvidu.io/blog/2026/06/09/turn-key-considerations/index.md): OpenVidu Blog
