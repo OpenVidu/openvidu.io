@@ -15,7 +15,7 @@ With **OpenVidu Meet Embedded**, you can integrate the best video calling experi
 __Add video calling capabilities to your app with a single line of HTML__{ .ov-meet-commercial-card-title }
 
 ```html
-<openvidu-meet room-url="https://YOUR_DOMAIN/room/your-room?secret=1234567"></openvidu-meet>
+<openvidu-meet room-url="https://YOUR_DOMAIN/meet/room/your-room?secret=1234567"></openvidu-meet>
 ```
 
 </div>
@@ -26,18 +26,18 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
 
     ```bash
     curl --request POST \
-      --url https://YOUR_DOMAIN/api/v1/rooms \
+      --url https://YOUR_DOMAIN/meet/api/v1/rooms \
       --header 'Accept: application/json' \
       --header 'Content-Type: application/json' \
       --header 'X-API-KEY: YOUR_API_KEY' \
-      --data '{"roomName": "my-room"}'
+      --data '{"roomName": "My Room"}'
     ```
 
 - __Manage recordings through REST API__{ .ov-meet-commercial-card-title }
 
     ```bash
     curl --request GET \
-      --url https://YOUR_DOMAIN/api/v1/recordings \
+      --url https://YOUR_DOMAIN/meet/api/v1/recordings \
       --header 'Accept: application/json' \
       --header 'X-API-KEY: YOUR_API_KEY'
     ```

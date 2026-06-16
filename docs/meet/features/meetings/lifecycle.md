@@ -2,16 +2,16 @@
 title: Meeting lifecycle in OpenVidu Meet
 description: The different views a participant goes through during an OpenVidu Meet meeting, from Join view to End view.
 tags:
-  - setupcustomgallery
+    - setupcustomgallery
 ---
 
 # Meeting lifecycle
 
-Meetings consist of different views, shown to participants in sequence from the moment they open a room link until the meeting ends.
+Meetings consist of different views, shown to participants in sequence from the moment they open a room access link until the meeting ends.
 
-## Join view
+## Lobby view
 
-This is the first view participants see when accessing a room link. It allows setting a nickname before joining the meeting. If the participant has the required permissions, they can also access the [Recording view](#recording-view) of this room from here.
+This is the first view participants see when accessing a room. It allows setting a nickname before joining the meeting. If the participant has the required permissions, they can also access the [Recording view](#recording-view) of this room from here.
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/join-view-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery9"><img src="../../../../assets/images/meet/rooms-and-meetings/join-view-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/join-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery9"><img src="../../../../assets/images/meet/rooms-and-meetings/join-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
@@ -31,17 +31,18 @@ The Meeting View is the central interface where all participants can see, hear, 
 
 ## Recording view
 
-This view allows to manage the recording of the meeting while it is active. Participants with the required permissions can review, play, download, delete, and share the recording via a link.
+This view allows to manage all recordings of the room (from the current or past meetings). Participants with the required permissions can review, play, download, and delete them, as well as share recordings via a link.
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/recording-view-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery12"><img src="../../../../assets/images/meet/rooms-and-meetings/recording-view-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/recording-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery12"><img src="../../../../assets/images/meet/rooms-and-meetings/recording-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 !!! info
-    Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [List Recordings](../recordings/creation-management.md#list-recordings).
+
+    Recordings can also be accessed from the "Recordings" page in OpenVidu Meet. See [Managing recordings](../recordings/management.md#managing-recordings).
 
 ## End view
 
-This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (an administrator ended it, the participant was evicted from the meeting, etc.).
+This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (a moderator ended it, the participant was kicked from the meeting, etc.).
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/end-view-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery13"><img src="../../../../assets/images/meet/rooms-and-meetings/end-view-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/end-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery13"><img src="../../../../assets/images/meet/rooms-and-meetings/end-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>

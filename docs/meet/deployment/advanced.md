@@ -1,6 +1,3 @@
-!!! warning
-    OpenVidu Meet is currently considered in **BETA**. There may be bugs and its APIs are subject to change.
-
 !!! info
     **OpenVidu Meet** is under the hood an **OpenVidu Platform** deployment with a module on top of it. Therefore, all deployment documentation for OpenVidu Platform applies to OpenVidu Meet as well. The information in this page is a summary of the different deployment options and the links to their corresponding OpenVidu Platform documentation.
 

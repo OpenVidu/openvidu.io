@@ -1,4 +1,4 @@
-Depending on your [OpenVidu deployment type](../../docs/self-hosting/deployment-types.md):
+Depending on your [OpenVidu deployment type](/docs/self-hosting/deployment-types.md):
 
 === "OpenVidu Local (Development)"
 

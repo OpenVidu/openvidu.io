@@ -18,8 +18,7 @@ Here’s a simple overview of a typical video call workflow using OpenVidu Meet:
 
 ### 1. Log in to OpenVidu Meet
 
-Access OpenVidu Meet with your administrator credentials.
-(Learn where to get them [here](../features/rooms/access.md#root-administrator)).
+Access OpenVidu Meet with your user credentials. If no users exist yet, sign in using the root administrator credentials (learn where to get them [here](../features/users/overview.md#root-administrator)).
 
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
 <a class="glightbox" href="../../../assets/images/meet/users-and-permissions/login-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/users-and-permissions/login-light.png#only-light" loading="lazy" class="round-corners"/></a>

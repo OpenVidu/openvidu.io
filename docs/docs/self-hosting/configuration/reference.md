@@ -44,16 +44,22 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | --------- | ----------- |
 | **`SERVER_PORT`** | Port where the OpenVidu Meet service will be running. |
 | **`SERVER_CORS_ORIGIN`** | CORS origin for the OpenVidu Meet service. It is `*` by default, allowing all origins. |
+| **`SERVER_TRUST_PROXY`** | Configures whether the OpenVidu Meet service trusts the `X-Forwarded-*` headers from reverse proxies. This is essential for proper rate limiting and obtaining the real client IP address. Supported values: `true` (trust all proxies), `false` (disable), or a number (number of hops to trust). This is required when OpenVidu Meet is behind a reverse proxy. Default is `true`. |
 | **`LIVEKIT_URL`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. |
-| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. |
-| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. |
-| **`MEET_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
-| **`MEET_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. |
-| **`MEET_PREFERENCES_STORAGE_MODE`** | Storage mode for user preferences in OpenVidu Meet. Valid values are: `s3` (S3 bucket) and `abs` (Azure Blob Storage). |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Only used the first time OpenVidu Meet runs. |
+| **`MEET_ACCESS_TOKEN_EXPIRATION`** | Expiration time for access tokens issued by OpenVidu Meet. Default is `2h`. |
+| **`MEET_REFRESH_TOKEN_EXPIRATION`** | Expiration time for refresh tokens issued by OpenVidu Meet. Default is `1d`. |
+| **`MEET_ROOM_MEMBER_TOKEN_EXPIRATION`** | Expiration time for room member tokens issued by OpenVidu Meet. Default is `2h`. |
+| **`MEET_PASSWORD_CHANGE_TOKEN_EXPIRATION`** | Expiration time for password change tokens issued by OpenVidu Meet. Default is `15m`. |
+| **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. Only used the first time OpenVidu Meet runs. |
+| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for OpenVidu Meet service. |

@@ -9,43 +9,34 @@ tags:
 
 OpenVidu Meet can record [meetings](../meetings/overview.md) and store them on the server so they can be played back, shared and downloaded at any time — even after the meeting has ended.
 
-## Overview
+## How recordings work
 
-Recordings are always associated with the [room](../rooms/overview.md) where they were generated. They inherit the room's access permissions by default and are accessible both from within the room and from the global "Recordings" page of the OpenVidu Meet console.
+Recordings are always associated with the [room](../rooms/overview.md) where they were generated. Who can retrieve and delete them is governed by [room member permissions](#access-permissions-for-recordings), and they can be opened both from within the room and from the global "Recordings" page of the OpenVidu Meet app.
 
 ### Key principles
 
-- Recordings can only be started by a participant with `Moderator` role.
-- A room must have recording enabled in its [configuration](../rooms/creation-management.md#create-rooms) to allow starting recordings.
-- Recordings persist after the meeting ends and can be managed independently from the "Recordings" page.
-- Each recording inherits the [access permissions](creation-management.md#access-permissions-for-recordings) defined in its room.
+- Recordings are started during an **active meeting** by a participant with the `canRecord` permission — from the app or the [REST API](management.md#start-stop-recording).
+- A room must have recording enabled in its [configuration](configuration.md#enabling-recordings) to allow starting recordings.
+- Recordings persist even after the meeting ends and can be managed independently from the "Recordings" page.
+- Access to a recording (retrieve and delete) is governed by [room member permissions](#access-permissions-for-recordings).
 
-## Creation & Management
+## Access permissions for recordings { #access-permissions-for-recordings }
 
-Moderators start and stop recordings during a live meeting. Afterwards, anyone with the right permissions can browse, share, download or delete them.
+Who can retrieve and delete a room's recordings is governed by **[room member permissions](../room-members/overview.md)**, not by a room-wide setting:
 
-- [Start / Stop recording](creation-management.md#start-stop-recording) — how a Moderator starts and stops a recording during a meeting.
-- [List Recordings](creation-management.md#list-recordings) — browse all recordings from the console or from the room's join view, including access permission rules.
-- [Share & Download](creation-management.md#share-download) — generate shareable links or download recording files.
-- [Delete Recordings](creation-management.md#delete-recordings) — remove recordings individually or in bulk.
+- **`canRetrieveRecordings`** — list, play and download the room's recordings.
+- **`canDeleteRecordings`** — delete the room's recordings.
 
-## Recording configuration
+By default, these permissions are assigned per role as follows:
 
-Recording behaviour can be tuned per room at creation time or when editing a room.
+| Role | Retrieve recordings | Delete recordings |
+|------|:---:|:---:|
+| **Moderator** | ✔ | ✔ |
+| **Speaker** | ✔ | ✘ |
 
-- [Recording layouts](configuration.md#recording-layouts) — choose between Grid, Speaker and Single Speaker layouts.
-- [Recording resolution](configuration.md#recording-resolution) — configure the resolution to balance quality and storage.
+You can change these defaults per room (when [creating or editing](../rooms/management.md#create-rooms) it) or per member (with [custom permissions](../room-members/management.md#add-a-member)). In addition, **admins** can retrieve and delete the recordings of **any** room, and a **room owner** always has full access to the recordings of their own rooms.
 
-## Recording REST API
+## In this section
 
-Recordings can be managed via the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md):
-
-| Operation | HTTP Method | Reference |
-|-----------|-------------|-----------|
-| Get recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecording){:target="_blank"} |
-| Get all recordings | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordings){:target="_blank"} |
-| Delete recording | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRecording){:target="_blank"} |
-| Bulk delete recordings | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRecordings){:target="_blank"} |
-| Download recordings | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/downloadRecordings){:target="_blank"} |
-| Get recording media | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingMedia){:target="_blank"} |
-| Get recording URL | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingUrl){:target="_blank"} |
+- [Creation & Management](management.md) — start and stop recordings during a meeting, browse, play, share, download and delete them, and the equivalent REST API operations.
+- [Recording configuration](configuration.md) — enable recording per room and choose its layout, encoding and anonymous sharing.

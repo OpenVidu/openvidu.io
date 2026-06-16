@@ -22,7 +22,7 @@ This local deployment is the ideal choice to develop the [embedding of OpenVidu 
 
 ## Installing Docker Desktop
 
-[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology the simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
+[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology that simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
 
 In the Docker terminology, an application is downloaded as a one or several **docker images**. When the application is executed, it is composed of one or several **docker containers**.
 
@@ -111,14 +111,14 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080) in your web browser with credentials:
 
-- Username: `admin`
+- User ID: `admin`
 - Password: `admin`
 
 You can use the [REST API](../../embedded/reference/rest-api/) to [embed OpenVidu Meet](../../embedded/intro) using:
 
 - API Key: `meet-api-key` 
 
-You can change them later from the [OpenVidu Meet console](../../features/rooms/access.md#changing-credentials).
+You can change them later from the [OpenVidu Meet app](../features/users/management.md#changing-credentials).
 
 
 ## Managing the deployment

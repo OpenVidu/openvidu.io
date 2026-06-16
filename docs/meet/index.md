@@ -11,8 +11,8 @@ tags:
 
 <div>
 <h1 class="logo-header meet-header">
-<img src="../assets/images/logos/meet_greyfont_transback_beta.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../assets/images/logos/meet_whitefont_transback_beta.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
+<img src="../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
 </h1>
 </div>
 
@@ -53,7 +53,7 @@ Host and customize your own high-quality video calling service in minutes
 
     ---
 
-    OpenVidu Meet is designed from the ground up to be **self-hosted** on your own servers (AWS and Azure templates also available). It provides the highest level of **privacy and security** for your video calls.
+    OpenVidu Meet is designed from the ground up to be **self-hosted** on your own servers (AWS, Azure, GCP and other cloud templates also available). It provides the highest level of **privacy and security** for your video calls.
 
 -   :fontawesome-solid-user-md:{ .more-padding-icon .ov-meet-commercial-icon } __Designed for most common use cases__{ .feature-name }
 
@@ -115,7 +115,7 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 
 - __Pre-configure your rooms__{ .ov-meet-commercial-card-title }
 
-    Create and customize the behavior of your rooms in a few clicks: look-and-feel, user permissions, recording, chat and more.
+    Create and customize the behavior of your rooms in a few clicks: look-and-feel, access and permissions, recording, chat and more.
 
     <a class="glightbox" href="../assets/videos/meet/preconfigure-room.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/preconfigure-room.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -268,11 +268,11 @@ Control your meetings from your backend.
 
 ```bash
 curl --request POST \
-    --url https://YOUR_DOMAIN/api/v1/rooms \
+    --url https://YOUR_DOMAIN/meet/api/v1/rooms \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
     --header 'X-API-KEY: YOUR_API_KEY' \
-    --data '{"roomName": "my-room"}'
+    --data '{"roomName": "My Room"}'
 ```
 
 </div>
@@ -361,7 +361,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
     ---
 
-    One-click join via secure room links. No installation required, full support for any web browser.
+    One-click join via secure room access links. No installation required, full support for any web browser.
 
 -   __Custom branding__{ .feature-name }
 
@@ -382,7 +382,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
--	With OpenVidu Meet **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features comming soon to enhance the learning experience.
+-	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features comming soon to enhance the learning experience.
 
 <a class="glightbox" href="../../assets/images/meet/embedded/webcomponent-elearning.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/webcomponent-elearning.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
 
@@ -513,12 +513,6 @@ OpenVidu PRO follows a simple pricing model based on the size of your deployment
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
 You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview">deploying OpenVidu Meet</a>.
 </h2>
-
-<hr style="margin: 5em 0 2em 0">
-
-## What does it mean that OpenVidu Meet is in BETA?
-
-OpenVidu Meet (v3.7.0) is considered in **BETA**. There may be bugs and its APIs are subject to change. We are actively working on adding new features, improving existing ones, and fixing any issues that arise. Your feedback is invaluable to us during this phase, so please don't hesitate to [reach out](../support.md) with any comments or suggestions.
 
 <hr style="margin: 5em 0 2em 0">
 

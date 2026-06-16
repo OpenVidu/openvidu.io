@@ -32,9 +32,9 @@ Every tutorial below shares the same core functionality:
 
 <div class="tutorials-container" markdown>
 
-[:material-ticket-account:{.icon .lg-icon .tab-icon} **External Members**](./external-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
+[:material-ticket-account:{.icon .lg-icon .tab-icon} **Identified Guest Members**](./external-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
 
-[:material-account-key:{.icon .lg-icon .tab-icon} **Registered Members**](./registered-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
+[:material-account-key:{.icon .lg-icon .tab-icon} **User Members**](./registered-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
 
 [:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link }
 

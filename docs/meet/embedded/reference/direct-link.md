@@ -7,13 +7,15 @@ Redirect users to OpenVidu Meet using simple HTML links. This is the simplest wa
 Create a direct link to an OpenVidu Meet room using a simple HTML anchor tag:
 
 ```html
-<a href="https://your-meet-domain.com/room/MyRoom-abcdef?secret=12345">Join Room</a>
+<a href="https://your-domain.com/meet/room/my_room-abcdef?secret=12345">Join Room</a>
 ```
 
 When users click the link, they'll be redirected to OpenVidu Meet in their browser, ready to join the room.
 
-!!! info
-    You can get room URLs programmatically from your backend using the [REST API](./api.html#/schemas/MeetRoom){:target="\_blank"} properties `moderatorUrl` or `speakerUrl`.
+!!! info "A room URL is a room access link"
+    The room URL is a [room access link](../../features/rooms/access.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for all of them.
+
+    You can get them programmatically from your backend with the [REST API](./api.html#/schemas/MeetRoom){:target="\_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 
@@ -25,7 +27,7 @@ When users click the link, they'll be redirected to OpenVidu Meet in their brows
 Customize the meeting by passing attributes as query parameters in the room URL:
 
 ```html
-<a href="https://your-meet-domain.com/room/MyRoom-abcdef?secret=12345&participant-name=John&leave-redirect-url=https://meeting.end.url/">
+<a href="https://your-domain.com/meet/room/my_room-abcdef?secret=12345&participant-name=John&leave-redirect-url=https://meeting.end.url/">
     Join Room as John
 </a>
 ```
@@ -33,7 +35,7 @@ Customize the meeting by passing attributes as query parameters in the room URL:
 
 ### Commands
 
-Direct links do not support programmatic commands since the meeting opens in a separate browser tab/window. If you need to control the meeting programmatically, consider using the [Web Component](./webcomponent.md) or [Iframe](./iframe.md) approaches instead.
+Direct links do not support programmatic commands since the meeting runs in a separate browser context. If you need to control the meeting programmatically, consider using the [Web Component](./webcomponent.md) or [Iframe](./iframe.md) approaches instead.
 
 ### Events
 

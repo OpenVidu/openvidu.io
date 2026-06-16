@@ -1,44 +1,38 @@
 ---
 title: Role Management in OpenVidu Meet
-description: Participant roles and permissions in an OpenVidu Meet meeting, and how to promote participants on the fly.
+description: Promote participants to Moderator during an OpenVidu Meet meeting to grant them full moderator permissions, and demote them back to their original permissions.
 tags:
-  - setupcustomgallery
+    - setupcustomgallery
 ---
 
 # Role Management
 
-Participants in a meeting are assigned a role that determines their default set of permissions. The role is determined by the [room access link](../rooms/access.md#getting-room-access-links) used to join.
+Every participant enters a meeting with a set of permissions inherited from their [room member](../room-members/overview.md):
 
-## Predefined roles
+- **Users** and **identified guests** start with the permissions of their **base role** (`Moderator` or `Speaker`), which can be fine-tuned **independently for each member** with [custom permissions](../room-members/management.md#add-a-member).
+- **Anonymous guests** can only join through the [shared `Moderator` or `Speaker` link](../rooms/access.md#anonymous-access), so they always have the **default permissions of that role** and cannot be customized.
 
-### Moderator
-
-Grants full meeting permissions by default:
-
-- **Meeting management**: end the meeting for all participants
-- **Recording control** (`canRecord`): start/stop recordings, retrieve and delete recordings
-- **Participant management** (`canMakeModerator`): promote other participants to moderator; (`canShareAccessLinks`): share room access links; kick participants
-- **Media publishing**: publish video, audio, and share screen
-- **Communication**: send chat messages, change virtual background
-
-### Speaker
-
-Grants basic participation permissions by default:
-
-- **Media publishing**: publish video, audio, and share screen
-- **Communication**: send chat messages, change virtual background
+During a live meeting these permissions are not fixed. Participants with the `canMakeModerator` permission can **promote** other participants to moderator and **demote** them back, all from the **"Participants"** side panel.
 
 !!! info
-    The default permissions for `Moderator` and `Speaker` roles can be customized per room when [creating](../rooms/creation-management.md#create-rooms) or [editing](../rooms/creation-management.md#edit-rooms) it. For the complete list of available permissions, see the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"}.
+    `canMakeModerator` is one of the permissions the `Moderator` [predefined role](../rooms/access.md#predefined-roles) grants by default. For the complete list of permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="\_blank"} schema.
 
 ## Promoting participants to moderator { #promoting-participants-to-moderator }
 
-During an active meeting, participants with the `canMakeModerator` permission can promote or demote other participants from the **"Participants"** side panel:
+A participant with the `canMakeModerator` permission can promote any other participant whose permissions are **lower than the full set of moderator permissions**. The promotion grants that participant **all the moderator permissions they were missing**.
 
 <a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/upgrade-role.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../../assets/images/meet/users-and-permissions/upgrade-role.png" loading="lazy"/></a>
 
-When a participant is promoted to moderator:
+The promotion is **temporary** and scoped to the ongoing meeting:
 
-- They receive all permissions associated with the `Moderator` role.
-- The promotion applies only to the current session and does not modify their configured permissions.
-- The promotion can be undone by demoting the participant back to their original role.
+- It does **not** modify the member's configured base role or custom permissions.
+- As soon as the promoted participant leaves the meeting — **including refreshing the browser** — the extra permissions are dropped and they return to their **original permissions**.
+
+## Demoting participants { #demoting-participants }
+
+A participant with the `canMakeModerator` permission can also **demote** a promoted participant at any time, reverting them to the **original permissions** they joined the meeting with.
+
+Because demoting only undoes a previous promotion, it has no effect on participants who already held the full set of moderator permissions when they joined.
+
+!!! warning
+    A **promoted** moderator cannot demote an **original** moderator — a participant who already had moderator permissions when they joined, rather than being promoted during the meeting. This prevents temporarily-promoted moderators from stripping permissions from the participants who were moderators from the start.

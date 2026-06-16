@@ -8,7 +8,7 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
 
 ```html
 <iframe
-	src="https://your-meet-domain.com/room/MyRoom-abcdef?secret=12345"
+	src="https://your-domain.com/meet/room/my_room-abcdef?secret=12345"
 	allow="camera; microphone; display-capture; fullscreen; autoplay; compute-pressure;"
 	width="100%" height="100%">
 </iframe>
@@ -25,8 +25,10 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
     - `autoplay`: Media autoplay
     - `compute-pressure`: Device performance monitoring
 
-!!! info
-    You can get room URLs programmatically from your backend using the [REST API](./api.html#/schemas/MeetRoom){:target="\_blank"} properties `moderatorUrl` or `speakerUrl`.
+!!! info "A room URL is a room access link"
+    The room URL is a [room access link](../../features/rooms/access.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for all of them.
+
+    You can get them programmatically from your backend with the [REST API](./api.html#/schemas/MeetRoom){:target="\_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 
@@ -42,7 +44,7 @@ Customize the **participant name** and meeting redirect by adding attributes as 
 
 ```html
 <iframe
-	src="https://your-meet-domain.com/room/MyRoom-abcdef?secret=12345&participant-name=John&leave-redirect-url=https://meeting.end.url/"
+	src="https://your-domain.com/meet/room/my_room-abcdef?secret=12345&participant-name=John&leave-redirect-url=https://meeting.end.url/"
 	allow="camera; microphone; display-capture; fullscreen; autoplay; compute-pressure;"
 	width="100%" height="100%">
 </iframe>
@@ -74,7 +76,7 @@ const iframe = document.querySelector('iframe');
 
 window.addEventListener('message', (event) => {
 	// Verify the event origin for security
-	if (event.origin !== 'https://your-meet-domain.com') return;
+	if (event.origin !== 'https://your-domain.com') return;
 
 	const message = event.data;
 

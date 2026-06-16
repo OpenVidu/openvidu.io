@@ -1,28 +1,28 @@
 ---
-title: OpenVidu Meet External Members Tutorial
-description: Learn how to add external members with a fixed name and a unique access link to an OpenVidu Meet room using Node.js and JavaScript.
+title: OpenVidu Meet Identified Guest Members Tutorial
+description: Learn how to add identified guest members with a fixed name and a unique access link to an OpenVidu Meet room using Node.js and JavaScript.
 ---
 
-# OpenVidu Meet External Members Tutorial
+# OpenVidu Meet Identified Guest Members Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-external-members){ .md-button target=\_blank }
 
-This tutorial extends the [basic OpenVidu Meet WebComponent tutorial](./webcomponent.md) to show how to add **external members** to an OpenVidu Meet room.
+This tutorial extends the [basic OpenVidu Meet WebComponent tutorial](./webcomponent.md) to show how to add **identified guest members** to an OpenVidu Meet room.
 
-An external member is a participant with a **fixed name** and a **unique access link** that grants access to the room without any login. Each link is meant to be delivered privately to a single person and can be revoked individually.
+An identified guest is a room member with a **fixed name** and a **unique access link** that grants access to the room without any login. Each link is meant to be delivered privately to a single person and can be revoked individually.
 
 Building on the basic tutorial, it adds the following features:
 
-- Users can add an external member to a room by name, with a base role (`moderator` or `speaker`).
-- Each external member gets a unique access link that can be copied and shared.
-- Users can list and remove the members of a room, revoking their access.
+- Add an identified guest to a room by name, with a base role (`moderator` or `speaker`).
+- Each identified guest gets a unique access link that can be copied and shared.
+- List and remove the members of a room, revoking their access.
 - Anyone can join the meeting through a member's unique link, with no login required.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](../reference/webcomponent.md) to embed the meeting.
 
-!!! info "Registered vs. external members"
+!!! info "Users vs. identified guests"
 
-    Room members can be either **registered members** (real OpenVidu Meet users, covered in the [Registered Members tutorial](./registered-members.md)) or **external members**. Registered members share the room's authenticated access URL and log in with their credentials; external members instead receive a **unique** access link that requires no authentication. See [Room Access :fontawesome-solid-external-link:{.external-link-icon}](../../features/rooms/access.md#room-members){:target="\_blank"} for the full picture.
+    Room members can be either **users** (real OpenVidu Meet accounts, covered in the [User Members tutorial](./registered-members.md)) or **identified guests**. Users share the room's authenticated access URL and log in with their credentials; identified guests instead receive a **unique** access link that requires no authentication. See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../features/room-members/overview.md){:target="\_blank"} feature for the full picture.
 
 ## Running this tutorial
 
@@ -70,23 +70,23 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-This tutorial builds upon the [basic OpenVidu Meet WebComponent tutorial](./webcomponent.md), adding external member management. We'll focus on the new features and modifications related to external members.
+This tutorial builds upon the [basic OpenVidu Meet WebComponent tutorial](./webcomponent.md), adding identified guest management. We'll focus on the new features and modifications related to identified guests.
 
 ---
 
 ### Backend modifications
 
-Besides the usual room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:roomId`), the server exposes endpoints to manage external members:
+Besides the usual room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:roomId`), the server exposes endpoints to manage identified guests:
 
-- **`POST /rooms/:roomId/members`**: Add an external member to a room.
-- **`GET /rooms/:roomId/members`**: List the external members of a room.
-- **`DELETE /rooms/:roomId/members/:memberId`**: Remove an external member from a room.
+- **`POST /rooms/:roomId/members`**: Add an identified guest to a room.
+- **`GET /rooms/:roomId/members`**: List the identified guests of a room.
+- **`DELETE /rooms/:roomId/members/:memberId`**: Remove an identified guest from a room.
 
 ---
 
-#### Add external member
+#### Add an identified guest
 
-The `POST /rooms/:roomId/members` endpoint adds an external member to a room:
+The `POST /rooms/:roomId/members` endpoint adds an identified guest to a room:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-external-members/src/index.js#L77-L101' target='_blank'>index.js</a>" linenums="77"
 // Add an external member to a room
@@ -118,11 +118,11 @@ app.post('/rooms/:roomId/members', async (req, res) => {
 ```
 
 1. The `roomId` is obtained from the request parameters.
-2. The `name` of the external member and the `baseRole` are obtained from the request body.
+2. The `name` of the identified guest and the `baseRole` are obtained from the request body.
 3. The `name` is the fixed display name the participant will have in the meeting. Providing `name` (and **not** `userId`) is what tells the API to create a member of type `external`.
 4. The `baseRole` (`moderator` or `speaker`) defines the default set of permissions for the member.
 
-This endpoint adds the external member by sending a `POST` request to the `rooms/:roomId/members` endpoint. The API responds with the created member, which includes a generated `memberId` (in the form `ext-XXXX`) and a unique `accessUrl` such as `http://localhost:9080/meet/room/<roomId>?secret=ext-XXXX`. That URL is unique to this member and grants access to the room with no login required.
+This endpoint adds the identified guest by sending a `POST` request to the `rooms/:roomId/members` endpoint. The API responds with the created member, which includes a generated `memberId` (in the form `ext-XXXX`) and a unique `accessUrl` such as `http://localhost:9080/meet/room/<roomId>?secret=ext-XXXX`. That URL is unique to this member and grants access to the room with no login required.
 
 !!! info
 
@@ -130,9 +130,9 @@ This endpoint adds the external member by sending a `POST` request to the `rooms
 
 ---
 
-#### List external members
+#### List identified guests
 
-The `GET /rooms/:roomId/members` endpoint lists the external members of a room:
+The `GET /rooms/:roomId/members` endpoint lists the identified guests of a room:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-external-members/src/index.js#L104-L114' target='_blank'>index.js</a>" linenums="104"
 // List the external members of a room
@@ -149,13 +149,13 @@ app.get('/rooms/:roomId/members', async (req, res) => {
 });
 ```
 
-1. List the room members by sending a `GET` request to the `rooms/:roomId/members` endpoint, filtering by `type=external` to retrieve only the external members.
+1. List the room members by sending a `GET` request to the `rooms/:roomId/members` endpoint, filtering by `type=external` to retrieve only the identified guests.
 
 ---
 
-#### Remove external member
+#### Remove an identified guest
 
-The `DELETE /rooms/:roomId/members/:memberId` endpoint removes an external member, revoking their unique link:
+The `DELETE /rooms/:roomId/members/:memberId` endpoint removes an identified guest, revoking their unique link:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-external-members/src/index.js#L117-L128' target='_blank'>index.js</a>" linenums="117"
 // Remove an external member from a room
@@ -179,7 +179,7 @@ app.delete('/rooms/:roomId/members/:memberId', async (req, res) => {
 
 ### Frontend modifications
 
-The client application now manages rooms from the home view and manages the external members of a room from a dedicated members view, where each member shows its unique access link. The main changes introduced in the frontend are in the `public/js/app.js` file, which now includes functions to render the members list, add a member, copy the access link and join the meeting through that link.
+The client application now manages rooms from the home view and manages the identified guests of a room from a dedicated members view, where each member shows its unique access link. The main changes introduced in the frontend are in the `public/js/app.js` file, which now includes functions to render the members list, add a member, copy the access link and join the meeting through that link.
 
 ---
 
@@ -232,9 +232,9 @@ Each item displays the member's fixed `name`, a badge with its `baseRole`, and i
 
 ---
 
-#### Adding an external member
+#### Adding an identified guest
 
-When the "Add member" form is submitted, the `addMember()` function creates the external member with the provided name and role:
+When the "Add member" form is submitted, the `addMember()` function creates the identified guest with the provided name and role:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-external-members/public/js/app.js#L226-L257' target='_blank'>app.js</a>" linenums="226"
 async function addMember(e) {
@@ -272,7 +272,7 @@ async function addMember(e) {
 ```
 
 1. Get the member's `name` and the chosen `baseRole` from the form.
-2. Make a `POST` request to the `/rooms/:roomId/members` endpoint to add the external member to the current room.
+2. Make a `POST` request to the `/rooms/:roomId/members` endpoint to add the identified guest to the current room.
 3. Add the returned member (including its generated `memberId` and unique `accessUrl`) to the local `members` map and re-render the list.
 
 ---
@@ -359,7 +359,7 @@ function joinRoom(memberId) {
 
 !!! info "Embedding vs. sharing the link"
 
-    This tutorial embeds the meeting in the app for convenience while testing, but the main purpose of an external member is its **unique access link**. In a real application you would typically deliver each member's `accessUrl` privately (by email, message, etc.) instead of opening it yourself, and the participant would join directly through that link.
+    This tutorial embeds the meeting in the app for convenience while testing, but the main purpose of an identified guest is its **unique access link**. In a real application you would typically deliver each member's `accessUrl` privately (by email, message, etc.) instead of opening it yourself, and the participant would join directly through that link.
 
 ## Accessing this tutorial from other computers or phones
 
