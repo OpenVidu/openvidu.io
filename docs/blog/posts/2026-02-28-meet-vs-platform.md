@@ -1,10 +1,14 @@
 ---
-draft: true
-date: 2026-02-09
+draft: false
+slug: meet-vs-platform
+date: 2026-06-16
 cover_image: 2026-02-09-meet-vs-platform-3.png
 categories:
-  - OpenVidu Meet features
-  - OpenVidu Platform features
+  - OpenVidu Meet
+  - OpenVidu Platform
+tags:
+  - self-hosted
+  - low-code
 authors:
   - patxi
 hide:
