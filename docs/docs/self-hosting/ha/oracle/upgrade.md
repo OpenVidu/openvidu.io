@@ -20,7 +20,7 @@ If you would prefer not to redeploy, an in-place upgrade is also possible. The s
     sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
     ```
 
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.7.0`).
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
 
 3. This will run an update script that guides you from your currently installed version to the target one. The output will begin with the following:
 

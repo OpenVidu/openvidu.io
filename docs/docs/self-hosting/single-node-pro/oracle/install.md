@@ -55,6 +55,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <summary>Information about parameters</summary>
 
 --8<-- "shared/self-hosting/oracle-mandatory-params-pro.md"
+--8<-- "shared/self-hosting/oracle-mandatory-params-pro-end.md"
 
     <h4>Optional Parameters</h4>
 

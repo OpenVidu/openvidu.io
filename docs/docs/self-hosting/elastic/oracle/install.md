@@ -64,6 +64,11 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     <summary>Information about parameters</summary>
 
 --8<-- "shared/self-hosting/oracle-mandatory-params-pro.md"
+    <tr>
+    <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
+    <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See <a href="#publishing-the-scale-in-function-image">Publishing the scale-in function image</a>. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
+    </tr>
+--8<-- "shared/self-hosting/oracle-mandatory-params-pro-end.md"
 
     <h4>Optional Parameters</h4>
 
@@ -151,11 +156,6 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     <td style="white-space: nowrap;"><code>scaleTargetCPU</code></td>
     <td style="white-space: nowrap;"><code>50</code></td>
     <td>Target CPU percentage. The Instance Pool autoscaling triggers scale-out above this threshold; the OCI Function triggers graceful scale-in when usage falls below it. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
-    <td style="white-space: nowrap;"><code>mad.ocir.io/axp2ice0s7el/openvidu-scalein:main</code></td>
-    <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. Defaults to the image published by OpenVidu in the Madrid OCIR. See <a href="#using-your-own-scale-in-function-image">Using your own scale-in function image</a> if you want to host it in your own registry. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>certificateType</code></td>
