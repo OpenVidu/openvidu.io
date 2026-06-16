@@ -16,7 +16,7 @@ The extent of fault tolerance depends on the [OpenVidu deployment type](../deplo
 
 ### Master Node
 
-An OpenVidu Elastic deployment has a single Master Node, so a failure on this node is fatal and any ongoing video Rooms will be interrupted. The service won't be restored until the Master Node is recovered.
+An OpenVidu Elastic deployment has a single Master Node, so a failure of this node is fatal and any ongoing video Rooms will be interrupted. The service won't be restored until the Master Node is recovered.
 
 ### Media Nodes
 
@@ -26,13 +26,13 @@ In the event of a Media Node failure, there are [3 services](../deployment-types
 
 - Active [Rooms :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/api-primitives/){:target=_blank} hosted by the failed Media Node will suffer a temporary interruption of about 5 seconds (this is the time the clients take to realize the Media Node has crashed). After that time has elapsed, the Room will be automatically reconstructed in a healthy Media Node. Every participant and track will be recreated and the Room will be fully operational again.
 - Active [Egress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. If the node's disk is still accessible, egress output files can still be recovered. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
-- Active [Ingress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events](https://docs.livekit.io/home/client/events/#Events){:target=_blank} indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some famous tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
+- Active [Ingress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target=_blank} hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events](https://docs.livekit.io/home/client/events/#Events){:target=_blank} indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some popular tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
 
 ## Fault tolerance in OpenVidu High Availability
 
 OpenVidu High Availability delivers the highest possible degree of fault tolerance. This is achieved by running all of the [services in the Master Nodes and the Media Nodes](../deployment-types.md#node-services) in their **High Availability** flavour.
 
-An OpenVidu High Availability deployment runs Master Nodes and Media Nodes in separated groups. Let's see the extent of fault tolerance for each node group:
+An OpenVidu High Availability deployment runs Master Nodes and Media Nodes in separate groups. Let's see the extent of fault tolerance for each node group:
 
 ### Master Nodes
 

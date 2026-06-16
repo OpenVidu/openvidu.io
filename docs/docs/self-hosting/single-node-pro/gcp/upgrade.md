@@ -12,6 +12,6 @@ description: How to upgrade OpenVidu Single Node PRO on Google Cloud Platform de
 </div>
 
 
-In Google Cloud Platform, we recommend upgrading by redeploying [OpenVidu Single Node Google Cloud Platform](../gcp/install.md) with the latest version.
+In Google Cloud Platform, we recommend upgrading by redeploying [OpenVidu Single Node PRO Google Cloud Platform](../gcp/install.md) with the latest version.
 
-However, if you prefer to upgrade the OpenVidu Single Node without redeploying, you can follow the steps outlined in the [Upgrade OpenVidu Single Node - On Premises](../on-premises/upgrade.md) section.
+However, if you prefer to upgrade the OpenVidu Single Node PRO without redeploying, you can follow the steps outlined in the [Upgrade OpenVidu Single Node PRO - On Premises](../on-premises/upgrade.md) section.

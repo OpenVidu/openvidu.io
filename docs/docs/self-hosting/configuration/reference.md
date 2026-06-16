@@ -7,11 +7,11 @@ description: Reference for the configuration files used in all different OpenVid
 
 ## `openvidu.env`:
 
-This file defines global configuration parameters used by other services. Such as the domain name, credentials, etc.
+This file defines global configuration parameters used by other services, such as the domain name, credentials, etc.
 
 | <div style="width: 17em;">Parameter</div> | Description |
 | --------- | ----------- |
-| **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access. OpenVidu APIs and services. |
+| **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access OpenVidu APIs and services. |
 | **`LIVEKIT_API_KEY`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
 | **`LIVEKIT_API_SECRET`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
 | **`MINIO_ACCESS_KEY`** | Access key for MinIO. |
@@ -23,6 +23,9 @@ This file defines global configuration parameters used by other services. Such a
 | **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | If `true`, use path-style access for the external S3 service if used. |
 | **`EXTERNAL_S3_BUCKET_APP_DATA`** | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
 | **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | External S3 bucket used in High Availability to store Observability data. |
+| **`EXTERNAL_S3_SSE_TYPE`** | Server-side encryption algorithm for the external S3 service. Supported values: `SSE-S3` (S3-managed AES256) or `SSE-KMS` (AWS KMS-managed). Leave empty to disable SSE. |
+| **`EXTERNAL_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. |
 | **`MONGO_ADMIN_USERNAME`** | MongoDB admin username. |
 | **`MONGO_ADMIN_PASSWORD`** | MongoDB admin password. |
 | **`DASHBOARD_ADMIN_USERNAME`** | Admin username for OpenVidu Dashboard |
@@ -58,6 +61,9 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
 | **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
 | **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm for the OpenVidu Meet S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
+| **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_AZURE_SUBCONATAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
@@ -81,14 +87,14 @@ This file defines the configuration parameters for the OpenVidu Meet service.
     OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target=_blank}, adding prefix `V2COMPAT_` to the parameter name.
+This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target=_blank}, adding the prefix `V2COMPAT_` to the parameter name.
 
 | Parameter | Description |
 | --------- | ----------- |
 | **`OPENVIDU_PRO_LICENSE`** |  OpenVidu Pro license key. Get an OpenVidu Pro License [here](/account/){:target="_blank"}. |
-| **`V2COMPAT_OPENVIDU_SHIM_PORT`** | Port where the OpenVidu V2 Compatibility will be running. By default is `4443` |
-| **`V2COMPAT_OPENVIDU_SHIM_URL`** | Public URL used for openvidu v2 applications used by external clients to connect to the OpenVidu V2 Compatibility Server. |
-| **`V2COMPAT_OPENVIDU_SECRET`** | OpenVidu Secret used by openvidu v2 applications to connect to the OpenVidu deployment. |
+| **`V2COMPAT_OPENVIDU_SHIM_PORT`** | Port where the OpenVidu V2 Compatibility will be running. Defaults to `4443`. |
+| **`V2COMPAT_OPENVIDU_SHIM_URL`** | Public URL for OpenVidu v2 applications, used by external clients to connect to the OpenVidu V2 Compatibility Server. |
+| **`V2COMPAT_OPENVIDU_SECRET`** | OpenVidu Secret used by OpenVidu v2 applications to connect to the OpenVidu deployment. |
 | **`V2COMPAT_LIVEKIT_URL`** | LiveKit URL used by external clients to connect to the OpenVidu V2 Compatibility Server using the LiveKit protocol. |
 | **`V2COMPAT_LIVEKIT_URL_PRIVATE`** | LiveKit URL used by the OpenVidu V2 Compatibility Server to connect to the LiveKit Server internally. |
 | **`V2COMPAT_LIVEKIT_API_KEY`** | LiveKit API Key used by the OpenVidu V2 Compatibility Server to interact with the LiveKit Server. |
@@ -111,6 +117,9 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY`** | Access key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_SECRET_KEY`** | Secret key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_REGION`** | AWS region of the recordings S3 bucket |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_TYPE`** | Server-side encryption algorithm for the recordings S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption for the recordings bucket. **Required** when `V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the recordings bucket. **Only used with `SSE-KMS`**. |
 | **`V2COMPAT_OPENVIDU_WEBHOOK`** | If `true`, the OpenVidu V2 Compatibility Server will send webhooks to `V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT` |
 | **`V2COMPAT_OPENVIDU_WEBHOOK_HEADERS`** | JSON Array list of headers to send in the OpenVidu V2 Webhook events. For example: <br>`["Content-Type: application/json"]` |
 | **`V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`** | Comma-separated list of OpenVidu V2 Webhook events to send. All available events are: <ul><li>sessionCreated</li><li>sessionDestroyed</li><li>participantJoined</li><li>participantLeft</li><li>webrtcConnectionCreated</li><li>webrtcConnectionDestroyed</li><li>recordingStatusChanged</li><li>signalSent</li></ul> |
@@ -185,16 +194,16 @@ openvidu:
 OpenVidu comes with other services configured to work in the deployment. These are the configuration files for each service.
 
 !!! info
-    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.6.1). To see the version number of each service, refer to the *"Version table"* of release 3.6.1 on the [Releases](../../releases.md) page.
+    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.7.0). To see the version number of each service, refer to the *"Version table"* of release 3.7.0 on the [Releases](../../releases.md) page.
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
-| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.9.8/config-sample.yaml){:target=_blank}</li></ul>
-| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/blob/v1.12.0/README.md#config){:target=_blank} |
-| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/blob/v1.4.3/README.md#config){:target=_blank} |
+| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.9.12/config-sample.yaml){:target=_blank}</li></ul>
+| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/ba781b4f6a602718fbd377780f4c157a142869b5#config){:target=_blank} |
+| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/cfbaa740b7ffd3c4478eb0621ad77f40493eff49#config){:target=_blank} |
 | **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json/){:target=_blank} |
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/latest/administration/configuration/){:target=_blank} |
-| **Mimir Service** | Service for long-term prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.0.x/configure/about-configurations/){:target=_blank} |
+| **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.0.x/configure/about-configurations/){:target=_blank} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.5.x/configuration/){:target=_blank} |
-| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.9/configuration/configuration/){:target=_blank} |
+| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.11/configuration/configuration/){:target=_blank} |
 | **Promtail Service**    | Collects logs and sends them to Loki. | [Promtail Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.5.x/clients/promtail/configuration/){:target=_blank} |

@@ -1,3 +1,7 @@
+## 3.7.0
+
+Nothing was added in this release in OpenVidu Meet. You can learn more about the core internal improvements introduced by the OpenVidu Platform here: [OpenVidu Platform 3.7.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#370){:target="_blank" .platform-link-color}
+
 ## 3.6.0
 
 !!! info "For the Release Notes of OpenVidu Platform 3.6.0, please visit here: [OpenVidu Platform 3.6.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#360){:target="_blank" .platform-link-color}"

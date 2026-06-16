@@ -14,7 +14,7 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 
 The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
 
-Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth taking into account:
+Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
 
 ## Cluster shutdown and startup
 
@@ -29,11 +29,11 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    3. On this tab, go at the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
+    3. On this tab, go to the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
         <figure markdown>
         ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-0.png){ .svg-img .dark-img }
         </figure>
-    4. Click on save and wait, it needs the lambda function to run until is completed, you can check how is going in the _"VM instances"_ tab.
+    4. Click _"Save"_ and wait for the operation to complete. You can check the progress in the _"VM instances"_ tab.
         <figure markdown>
         ![Save Edits MIG](../../../../assets/images/self-hosting/shared/gcp-mig-save.png){ .svg-img .dark-img }
         </figure>
@@ -59,11 +59,11 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    5. Go to **Group Size & autoscaling** tab and change the _"Minimun"_ and _"Maximum"_ number of instances to your desired ones.
+    5. Go to **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to your desired values.
         <figure markdown>
         ![Edit MIG](../../../../assets/images/self-hosting/shared/gcp-mig-instances-1.png){ .svg-img .dark-img }
         </figure>
-    6. Click on save and wait until is completed. You can check the progress in the _"Instances"_ tab.
+    6. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
         <figure markdown>
         ![Save Edits MIG](../../../../assets/images/self-hosting/shared/gcp-mig-save.png){ .svg-img .dark-img }
         </figure>
@@ -101,11 +101,11 @@ It is possible to change the instance type of both the Master Node and the Media
         <figure markdown>
         ![Create Similar Template](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-create-similar.png){ .svg-img .dark-img }
         </figure>
-    3. Go back to the _"Instace Group"_ and click on _"Edit"_
+    3. Go back to the _"Instance Group"_ and click on _"Edit"_
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    4. In _"Instace template & overrides"_ change the template for the one you've created previously and then _"Save"_.
+    4. In _"Instance template & overrides"_ change the template for the one you've created previously and then _"Save"_.
         <figure markdown>
         ![Change Template MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-change-template.png){ .svg-img .dark-img }
         </figure>
@@ -130,7 +130,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
         
         !!! warning
 
-            Currently there is only one rule to scale out. We are actively working in providing a graceful scale in process for Media Nodes to avoid active Rooms disruption.
+            Currently there is only one rule to scale out. We are actively working on providing a graceful scale-in process for Media Nodes to avoid active Rooms disruption.
 
         <figure markdown>
         ![Signals MIG](../../../../assets/images/self-hosting/shared/gcp-signals.png){ .svg-img .dark-img }
@@ -152,7 +152,7 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/self-hosting/ha/gcp/gcp-ha-mig-edit-tab.png){ .svg-img .dark-img }
         </figure>
-    3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the value of fixed number of Media Nodes you want. In this case is set to 3. Click on save next and wait to be applied
+    3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the fixed number of Media Nodes you want. In this case, it is set to 3. Click _"Save"_ and wait for it to be applied.
         <figure markdown>
         ![Fixed Number Media Nodes](../../../../assets/images/self-hosting/shared/gcp-fixed-media-nodes.png){ .svg-img .dark-img }
         </figure>
@@ -166,14 +166,14 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 
 === "Deactivate Cloud Run Function"
 
-    1. Go to the [Cloud Scheduler Jobs](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on _"Pause"_ and it will not execute more until you click on _"Resume"_ whenever you want to make the cluster scale in again.
+    1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target=_blank} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
         <figure markdown>
         ![Deactivate Scale In](../../../../assets/images/self-hosting/ha/gcp/gcp-scalein-deactivate.png){ .svg-img .dark-img }
         </figure>
 
 ## Administration and configuration
 
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises High Availability Administration](../on-premises/admin.md) section.
+Regarding the administration of your deployment, you can follow the instructions in the [On Premises High Availability Administration](../on-premises/admin.md) section.
 
 Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
@@ -190,7 +190,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
         </figure>
-    4. Go to the Master Node resource you've want to change the secrets on and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu High Availability deployment.
+    4. Go to the Master Node resource whose secrets you want to change and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu High Availability deployment.
 
     Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.
 

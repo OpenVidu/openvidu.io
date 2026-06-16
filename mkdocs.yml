@@ -135,7 +135,11 @@ nav:
                   - Install: docs/self-hosting/single-node/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/single-node/digitalocean/upgrade.md
-              - Oracle: docs/self-hosting/single-node/oracle/install-tutorial.md
+              - Oracle:
+                  - docs/self-hosting/single-node/oracle/index.md
+                  - Install: docs/self-hosting/single-node/oracle/install.md
+                  - Administration: docs/self-hosting/single-node/oracle/admin.md
+                  - Upgrade: docs/self-hosting/single-node/oracle/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
@@ -163,7 +167,11 @@ nav:
                   - Install: docs/self-hosting/single-node-pro/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node-pro/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/single-node-pro/digitalocean/upgrade.md
-              - Oracle: docs/self-hosting/single-node-pro/oracle/install-tutorial.md
+              - Oracle:
+                  - docs/self-hosting/single-node-pro/oracle/index.md
+                  - Install: docs/self-hosting/single-node-pro/oracle/install.md
+                  - Administration: docs/self-hosting/single-node-pro/oracle/admin.md
+                  - Upgrade: docs/self-hosting/single-node-pro/oracle/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
@@ -191,6 +199,8 @@ nav:
                   - Install: docs/self-hosting/elastic/digitalocean/install.md
                   - Administration: docs/self-hosting/elastic/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/elastic/digitalocean/upgrade.md
+              - Oracle:
+                  - docs/self-hosting/elastic/oracle/index.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
@@ -219,6 +229,8 @@ nav:
                   - Install: docs/self-hosting/ha/digitalocean/install.md
                   - Administration: docs/self-hosting/ha/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/ha/digitalocean/upgrade.md
+              - Oracle:
+                  - docs/self-hosting/ha/oracle/index.md
           - Configuration:
               - Changing config: docs/self-hosting/configuration/changing-config.md
               - Config system in depth: docs/self-hosting/configuration/in-depth.md
@@ -249,8 +261,8 @@ nav:
       - Troubleshooting:
           - Recording: docs/troubleshooting/recording.md
       - Releases: docs/releases.md
-  # - Blog:
-  #     - blog/index.md
+  - Blog:
+      - blog/index.md
   - Support:
       - support.md
   - Pricing:
@@ -314,9 +326,29 @@ theme:
   logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
 
 plugins:
-  - search
-  - blog
   - meta
+  - search
+  - blog:
+      post_excerpt: required
+      draft: false
+      draft_if_future_date: true
+      archive_date_format: MMMM yyyy
+      categories_allowed:
+        - Comparison
+        - How-to
+        - Research       
+        - Livekit
+        - Technology
+        - Vertical
+        - Success story
+        - Implementation
+        - OpenVidu How-to
+        - OpenVidu Meet
+        - Openvidu Implementation
+        - OpenVidu
+        - OpenVidu comparison
+        - OpenVidu Platform
+        - Release
   - privacy
   - optimize:
       enabled: !ENV [CI, false]
@@ -335,12 +367,21 @@ plugins:
       caption_position: bottom
       background: none
       shadow: false
+  - rss:
+      match_path: blog/posts/.* 
+      date_from_meta:
+        as_creation: date
+      image: assets/images/openvidu_vert_white_bg_trans_cropped2.png
+      categories:
+        - categories
+        - tags 
   - llmstxt:
       markdown_description: Self-hosted videoconference solution and SDK
       full_output: llms-full.txt
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
+        - blog/*.md: OpenVidu Blog
         - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
         - about-us.md: The people behind OpenVidu
         - research.md: Research publications on real-time communications in peer-reviewed journals
@@ -403,6 +444,7 @@ markdown_extensions:
   - toc:
       permalink: "#"
       permalink_title: Anchor link to this section for reference
+  - footnotes
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true

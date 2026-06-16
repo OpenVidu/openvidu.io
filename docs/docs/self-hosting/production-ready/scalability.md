@@ -14,13 +14,13 @@ OpenVidu offers scalability out-of-the-box for typical **videoconferencing** use
 
 OpenVidu allows you to host multiple small and medium videoconferences (up to 10 participants). The number of simultaneous rooms depends on the deployment used and the power of machines.
 
-- **Single Node deployment** (OpenVidu Community): In this deployment, OpenVidu can manage up to **50** simultaneous videoconferences of 8 participants in a 4 CPU server. If you need more videoconferences at the same time, you can use more powerful server. This is known as **vertical scalability**. The limit here is usually the maximum computational power available for a single server and the maximum network bandwidth for it. You can read more about this benchmark scenario in the [Performance benchmarks](./performance.md#benchmarking) page.
+- **Single Node deployment** (OpenVidu Community): In this deployment, OpenVidu can manage up to **50** simultaneous videoconferences of 8 participants in a 4 CPU server. If you need more videoconferences at the same time, you can use a more powerful server. This is known as **vertical scalability**. The limit here is usually the maximum computational power available for a single server and the maximum network bandwidth for it. You can read more about this benchmark scenario in the [Performance benchmarks](./performance.md#benchmarking) page.
 
-- **Elastic and High Availability deployments** (OpenVidu Pro): In these deployments, OpenVidu is able to distribute the videoconferences in multiple media servers. This is known as **horizontal scalability**. In this case, the maximum number of simultaneous videoconferences depends on the number of media server used and the computational power of each of them. Also, other services used to coordinate and monitor the media servers (caches, data bases, proxies) can themselves become bottlenecks and limit the capacity of the system. In High Availability deployments, these services are distributed in 4 master nodes, so it is able to handle more load than in the Elastic deployment (with only 1 master node).
+- **Elastic and High Availability deployments** (OpenVidu Pro): In these deployments, OpenVidu is able to distribute the videoconferences across multiple media servers. This is known as **horizontal scalability**. In this case, the maximum number of simultaneous videoconferences depends on the number of media servers used and the computational power of each of them. Also, other services used to coordinate and monitor the media servers (caches, databases, proxies) can themselves become bottlenecks and limit the capacity of the system. In High Availability deployments, these services are distributed across 4 master nodes, so it is able to handle more load than the Elastic deployment (with only 1 master node).
 
 ### Big live streams
 
-Live streaming is different from a video conference. In a videoconference, usually all participants can publish audio and video. Instead, in a live stream, only one participant can publish audio and video (known as the publisher) and others can view it (known as viewers).
+Live streaming is different from a video conference. In a videoconference, usually all participants can publish audio and video. In contrast, in a live stream, only one participant can publish audio and video (known as the publisher) and others can view it (known as viewers).
 
 OpenVidu is able to manage live streams with up to **1000** viewers (1 publisher and **1000** subscribers) in a single Room hosted in a server with 4 CPUs. To manage more than one live stream simultaneously, an Elastic or High Availability deployment is needed with several media servers.
 
@@ -28,8 +28,8 @@ OpenVidu is able to manage live streams with up to **1000** viewers (1 publisher
 
 For big videoconferences with many participants (in the order of 100- or even 1000-) and massive live streams with few publishers and thousands of viewers, OpenVidu will offer in the near future two distinct strategies:
 
-- **Distributing participants of one Room in multiple servers**: By connecting multiple media servers between them, OpenVidu will be able to manage Rooms with unlimited number of participants and live streams with unlimited number of viewers.
-- **Only show last speakers**: A browser or mobile app is able to show a limited number of participants. A powerful computer can visualize up to 10 simultaneous videoconference participants at the same time with high video quality. To allow big videoconferences, OpenVidu will provide features on its frontend SDKs to show only last speakers in the videoconference.
+- **Distributing participants of one Room in multiple servers**: By connecting multiple media servers between them, OpenVidu will be able to manage Rooms with an unlimited number of participants and live streams with an unlimited number of viewers.
+- **Only show the last speakers**: A browser or mobile app is able to show a limited number of participants. A powerful computer can visualize up to 10 simultaneous videoconference participants at the same time with high video quality. To allow big videoconferences, OpenVidu will provide features on its frontend SDKs to show only the last speakers in the videoconference.
 
 ## Load balancing strategies across Media Nodes
 
@@ -131,7 +131,7 @@ Upon a new Egress request:
 
 By default the Egress service has the ability to **automatically kill active egresses under sustained high CPU load**. If a >95% CPU load is sustained over 10 seconds, the Egress service will automatically terminate the most CPU-intensive active egress.
 
-This helps preventing an egress process from overloading the entire Media Node.
+This helps prevent an egress process from overloading the entire Media Node.
 Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files):
 
 ```yaml title="egress.yaml"
@@ -239,7 +239,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu Elastic in Azure](../elastic/azure/install.md)
     - [OpenVidu High Availability in Azure](../ha/azure/install.md)
   
-    The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target=_blank}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Scaling Set Configuration**.
+    The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target=_blank}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
     --8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
 
@@ -288,11 +288,45 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu Elastic in DigitalOcean](../elastic/digitalocean/install.md)
     - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
-    Right now, there is no autoscaling in DigitalOcean, but you can configure the average number of nodes you want. To find out how, follow the steps of [Configurate Number of Fixed Media Nodes OpenVidu Elastic](../elastic/digitalocean/admin.md#change-fixed-number-of-media-nodes) or [Configurate Number of Fixed Media Nodes OpenVidu High Availability](../ha/digitalocean/admin.md#change-fixed-number-of-media-nodes) depending on your deployment.
+    The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target=_blank} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+    <div style="text-align: center;">
+        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+            <tr>
+              <th>Input Value</th>
+              <th>Default Value</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+                <td>initialNumberOfMediaNodes</td>
+                <td>1</td>
+                <td>Number of initial media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>minNumberOfMediaNodes</td>
+                <td>1</td>
+                <td>Minimum number of media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>maxNumberOfMediaNodes</td>
+                <td>5</td>
+                <td>Maximum number of media nodes to deploy.</td>
+            </tr>
+            <tr>
+                <td>scaleTargetCPU</td>
+                <td>50</td>
+                <td>Target CPU percentage to scale up or down.</td>
+            </tr>
+            <tr>
+                <td>fixedNumberOfMediaNodes</td>
+                <td>0</td>
+                <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
+            </tr>
+        </table>
+    </div>
 
 ### Autoscaling On Premises
 
-When deploying an OpenVidu cluster **On Premises** you are responsible of monitoring the load of your Media Nodes and triggering the addition of new Media Nodes or removal of existing Media Nodes. Depending on your OpenVidu deployment type, you can do so like this:
+When deploying an OpenVidu cluster **On Premises** you are responsible for monitoring the load of your Media Nodes and triggering the addition of new Media Nodes or removal of existing Media Nodes. Depending on your OpenVidu deployment type, you can do so like this:
 
 - For **OpenVidu Elastic On Premises**:
     - [Add a new Media Node](../elastic/on-premises/admin.md#adding-media-nodes)

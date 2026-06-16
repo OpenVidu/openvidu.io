@@ -11,7 +11,7 @@ OpenVidu stores application data in MongoDB for these services:
 
 The bundled MongoDB service runs automatically, but you can control it with the `MONGO_ENABLED` setting in `openvidu.env`.
 
-You may want to disable the bundled MongoDB service to just use OpenVidu Core Platform services, but these would imply that the mentioned services will be disabled as they cannot operate without a MongoDB service.
+You may want to disable the bundled MongoDB service to use only OpenVidu Core Platform services, but this would mean that the mentioned services will be disabled, as they cannot operate without a MongoDB service.
 
 ## Update `openvidu.env`
 
