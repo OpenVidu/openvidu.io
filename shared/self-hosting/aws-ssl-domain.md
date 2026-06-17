@@ -30,8 +30,6 @@ There are three possible scenarios for this section:
 
     Ensure you have a Fully Qualified Domain Name (FQDN) pointing to a previously created Elastic IP.
 
-    You also need a **temporary HTTP server** hosting your private and public certificate under a specific URL. These URLs are required so the instance can download and install your certificates.
-
     The configured parameters would look like this:
 
     ![Custom certificates](../../../../assets/images/self-hosting/shared/aws-owncert.png)

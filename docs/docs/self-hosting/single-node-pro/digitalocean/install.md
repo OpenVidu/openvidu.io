@@ -186,12 +186,12 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If certificate type is 'owncert', this parameter will be used to specify your public certificate in base64.</td>
+    <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPrivateCertificate</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If certificate type is 'owncert', this parameter will be used to specify your private certificate in base64.</td>
+    <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>initialMeetAdminPassword</code></td>
