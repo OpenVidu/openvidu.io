@@ -1,9 +1,9 @@
 ---
-title: OpenVidu Meet Recordings Tutorial
+title: Recordings Tutorial
 description: Learn how to manage recordings in a video conferencing application using Node.js and JavaScript by extending the advanced OpenVidu Meet WebComponent tutorial.
 ---
 
-# OpenVidu Meet Recordings Tutorial
+# Recordings Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-recordings){ .md-button target=\_blank }
 

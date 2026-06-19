@@ -1,9 +1,9 @@
 ---
-title: OpenVidu Meet WebComponent Tutorial
+title: WebComponent Tutorial
 description: Learn how to build a video conferencing application using Node.js and JavaScript by easily integrating OpenVidu Meet WebComponent.
 ---
 
-# OpenVidu Meet WebComponent Tutorial
+# WebComponent Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-webcomponent-basic){ .md-button target=\_blank }
 

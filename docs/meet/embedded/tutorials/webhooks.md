@@ -1,9 +1,9 @@
 ---
-title: OpenVidu Meet Webhooks Tutorial
+title: Webhooks Tutorial
 description: Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
 ---
 
-# OpenVidu Meet Webhooks Tutorial
+# Webhooks Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-webhooks){ .md-button target=\_blank }
 

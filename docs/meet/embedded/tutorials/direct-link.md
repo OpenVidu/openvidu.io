@@ -1,9 +1,9 @@
 ---
-title: OpenVidu Meet Direct Link Tutorial
+title: Direct Link Tutorial
 description: Learn how to build a video conferencing application using Node.js and JavaScript by easily using a direct link to OpenVidu Meet.
 ---
 
-# OpenVidu Meet Direct Link Tutorial
+# Direct Link Tutorial
 
 [Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-direct-link){ .md-button target=\_blank }
 
