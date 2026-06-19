@@ -3,7 +3,7 @@
 The OCI Function that performs graceful Media Node scale-in runs from a container image that must be hosted in an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target=_blank} in the **same region** as the Function. Because of this regional constraint, the **`scale_in_function_image`** parameter is mandatory: you must make the scale-in image available in an OCIR in your deployment's region and point the parameter to it.
 
 !!! info
-    If you are deploying in the **Madrid** region (`mad.ocir.io`), you can skip this section entirely. OpenVidu already publishes the scale-in image in the Madrid OCIR, so you only need to set `scale_in_function_image = "mad.ocir.io/axp2ice0s7el/openvidu-scalein:main"` (the value that was previously used as the default). The steps below are only required when deploying in any other region.
+    If you are deploying in the **Madrid** region (`mad.ocir.io`), you can skip this section entirely. OpenVidu already publishes the scale-in image in the Madrid OCIR, so you only need to set `scale_in_function_image = "mad.ocir.io/axp2ice0s7el/openvidu-oci-scalein:3.7.0"` (the value that was previously used as the default). The steps below are only required when deploying in any other region.
 
 OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two ways to get it into your OCIR. Pick the one that best fits your needs:
 
