@@ -5,7 +5,7 @@ description: Learn how to build a video conferencing application using Node.js a
 
 # Direct Link Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-direct-link){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/integration/meet-direct-link){ .md-button target=\_blank }
 
 This tutorial is a simple example of how to integrate **OpenVidu Meet** into a **Node.js** application by easily using a direct link. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -20,7 +20,7 @@ At the end of this tutorial, you will have a fully functional simple video-call 
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
-The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
+The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-api.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
 
 ## Running this tutorial
 
@@ -60,9 +60,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/direct-link-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/direct-link-home.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/direct-link-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/direct-link-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/direct-link-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/direct-link-room.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/direct-link-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/direct-link-room.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -90,7 +90,7 @@ The server application is a simple Express app with a single file `index.js` tha
 
 Let's see the code of the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L1-L23' target='_blank'>index.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/src/index.js#L1-L23' target='_blank'>index.js</a>" linenums="1"
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -141,7 +141,7 @@ Now let's see the code of each endpoint:
 
 The `POST /rooms` endpoint creates a new room. It receives the room name as a body parameter and returns the newly created room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L25-L45' target='_blank'>index.js</a>" linenums="25"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/src/index.js#L25-L45' target='_blank'>index.js</a>" linenums="25"
 // Create a new room
 app.post('/rooms', async (req, res) => {
 	const { roomName } = req.body; // (1)!
@@ -178,11 +178,11 @@ This endpoint does the following:
 
     !!! info
 
-        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../../assets/htmls/rest-api.html#/operations/createRoom){target="_blank"}.
+        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../../../assets/htmls/rest-api.html#/operations/createRoom){target="_blank"}.
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L77-L99' target='_blank'>index.js</a>" linenums="77"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/src/index.js#L77-L99' target='_blank'>index.js</a>" linenums="77"
     // Function to make HTTP requests to OpenVidu Meet API
     const httpRequest = async (method, path, body) => {
     	// (1)!
@@ -221,7 +221,7 @@ This endpoint does the following:
 
 3.  If the room is successfully created, the server returns a `201 Created` response with the room object. Otherwise, the error is handled by the `handleApiError` function, which logs the error and returns an appropriate HTTP response:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L101-L107' target='_blank'>index.js</a>" linenums="101"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/src/index.js#L101-L107' target='_blank'>index.js</a>" linenums="101"
     // Helper function to handle API errors consistently
     const handleApiError = (res, error, message) => {
     	console.error(`${message}: ${error.message}`); // (1)!
@@ -242,7 +242,7 @@ This endpoint does the following:
 
 The `GET /rooms` endpoint retrieves the list of all rooms created in OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L47-L56' target='_blank'>index.js</a>" linenums="47"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/src/index.js#L47-L56' target='_blank'>index.js</a>" linenums="47"
 // List all rooms
 app.get('/rooms', async (_req, res) => {
     try {
@@ -266,7 +266,7 @@ This endpoint retrieves the list of rooms by making a `GET` request to the `room
 
 The `DELETE /room/:roomId` endpoint deletes the specified room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/src/index.js#L59-L70' target='_blank'>index.js</a>" linenums="59"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/src/index.js#L59-L70' target='_blank'>index.js</a>" linenums="59"
 app.delete('/rooms/:roomId', async (req, res) => {
 	const { roomId } = req.params; // (1)!
 
@@ -309,7 +309,7 @@ Now let's see the code of the `app.js` file grouped by sections:
 
 The list of rooms is displayed in the `index.html` file as soon as the page loads. This is done by calling the `fetchRooms()` function, which fetches the list of rooms from the server and updates the UI accordingly.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L1-L23' target='_blank'>app.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/public/js/app.js#L1-L23' target='_blank'>app.js</a>" linenums="1"
 const rooms = new Map(); // (1)!
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -347,7 +347,7 @@ The `fetchRooms()` function performs the following actions:
 
     To send requests to the backend, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L120-L137' target='_blank'>app.js</a>" linenums="120"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/public/js/app.js#L120-L137' target='_blank'>app.js</a>" linenums="120"
     // Function to make HTTP requests to the backend
     async function httpRequest(method, path, body) {
     	// (1)!
@@ -383,7 +383,7 @@ The `fetchRooms()` function performs the following actions:
 
 The `renderRooms()` function is responsible for updating the UI with the list of rooms:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L25-L75' target='_blank'>app.js</a>" linenums="25"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/public/js/app.js#L25-L75' target='_blank'>app.js</a>" linenums="25"
 function renderRooms() {
 	// Clear the previous list of rooms
 	const roomsList = document.querySelector('#rooms-list ul'); // (1)!
@@ -457,7 +457,7 @@ The `getRoomListItemTemplate()` function generates the HTML template for each ro
 
 After the user specifies the room name and clicks the `Create Room` button, the `createRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L77-L106' target='_blank'>app.js</a>" linenums="77"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/public/js/app.js#L77-L106' target='_blank'>app.js</a>" linenums="77"
 async function createRoom(e) {
 	// Prevent the default form submission
 	e.preventDefault(); // (1)!
@@ -513,7 +513,7 @@ The `createRoom()` function performs the following actions:
 
 When the user clicks the delete room button, the `deleteRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-direct-link/public/js/app.js#L108-L118' target='_blank'>app.js</a>" linenums="108"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-direct-link/public/js/app.js#L108-L118' target='_blank'>app.js</a>" linenums="108"
 async function deleteRoom(roomId) {
 	try {
 		await httpRequest('DELETE', `/rooms/${roomId}`); // (1)!
@@ -539,7 +539,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 1.  **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
 
-2.  **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones :fontawesome-solid-external-link:{.external-link-icon}](../../deployment/local.md#accessing-openvidu-meet-from-other-computers-or-phones){:target="\_blank"} section.
+2.  **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones :fontawesome-solid-external-link:{.external-link-icon}](../../../deployment/local.md#accessing-openvidu-meet-from-other-computers-or-phones){:target="\_blank"} section.
 
 3.  **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
 
@@ -558,7 +558,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
-If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps :fontawesome-solid-external-link:{.external-link-icon}](../../deployment/basic.md){:target="\_blank"}), you can connect this tutorial to it by following these steps:
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps :fontawesome-solid-external-link:{.external-link-icon}](../../../deployment/basic.md){:target="\_blank"}), you can connect this tutorial to it by following these steps:
 
 1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
 
@@ -567,7 +567,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
     OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com
     ```
 
-2. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key :fontawesome-solid-external-link:{.external-link-icon}](../reference/rest-api.md#generate-an-api-key){:target="\_blank"} section to learn how to obtain it.
+2. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key :fontawesome-solid-external-link:{.external-link-icon}](../../reference/rest-api.md#generate-an-api-key){:target="\_blank"} section to learn how to obtain it.
 
     ```text
     OV_MEET_API_KEY=your-production-api-key

@@ -5,7 +5,7 @@ description: Learn how to build a real-time video conferencing application using
 
 # Webhooks Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-webhooks){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/advanced-features/meet-webhooks){ .md-button target=\_blank }
 
 This tutorial extends the [recordings tutorial](recordings.md) to add **real-time updates** through webhooks and Server-Sent Events (SSE). It demonstrates how to receive and process OpenVidu Meet webhooks to provide live status updates for rooms and recordings.
 
@@ -55,9 +55,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webhooks-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webhooks-home.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/webhooks-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/webhooks-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webhooks-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webhooks-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/webhooks-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/webhooks-recordings.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -75,7 +75,7 @@ The main backend changes involve implementing webhook processing, SSE communicat
 
 The backend now includes SSE support for real-time client notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/src/index.js#L1-L29' target='_blank'>index.js</a>" linenums="1" hl_lines="6 18-19"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L1-L29' target='_blank'>index.js</a>" linenums="1" hl_lines="6 18-19"
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import crypto from 'crypto';
@@ -108,7 +108,7 @@ This code sets up the backend to support Server-Sent Events (SSE), enabling the 
 
 A new endpoint allows clients to subscribe to real-time notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/src/index.js#L123-L124' target='_blank'>index.js</a>" linenums="123"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L123-L124' target='_blank'>index.js</a>" linenums="123"
 // SSE endpoint for real-time notifications
 app.get('/events', sse.init); // (1)!
 ```
@@ -123,7 +123,7 @@ This endpoint enables clients to establish a persistent connection for receiving
 
 A new endpoint handles incoming webhooks from OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/src/index.js#L126-L142' target='_blank'>index.js</a>" linenums="126"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L126-L142' target='_blank'>index.js</a>" linenums="126"
 // Webhook endpoint to receive events from OpenVidu Meet
 app.post('/webhook', (req, res) => {
 	const body = req.body;
@@ -155,7 +155,7 @@ This endpoint receives webhook events from OpenVidu Meet, validates their authen
 
 A security function validates webhook authenticity:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/src/index.js#L181-L201' target='_blank'>index.js</a>" linenums="181"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L181-L201' target='_blank'>index.js</a>" linenums="181"
 // Helper function to validate webhook event signature
 const isWebhookEventValid = (body, headers) => {
 	const signature = headers['x-signature']; // (1)!
@@ -191,7 +191,7 @@ This function implements webhook security by validating both the cryptographic s
 
 !!! info "Verifying webhooks in other languages"
 
-    You can find examples of how to verify OpenVidu Meet webhooks in other programming languages in the [Validate events :fontawesome-solid-external-link:{.external-link-icon}](../reference/webhooks.md#validate-events){:target="\_blank"} section of the Webhooks reference.
+    You can find examples of how to verify OpenVidu Meet webhooks in other programming languages in the [Validate events :fontawesome-solid-external-link:{.external-link-icon}](../../reference/webhooks.md#validate-events){:target="\_blank"} section of the Webhooks reference.
 
 ---
 
@@ -203,7 +203,7 @@ The frontend has been enhanced with real-time update capabilities and improved v
 
 The application now establishes an SSE connection on page load:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/public/js/app.js#L4-L8' target='_blank'>app.js</a>" linenums="4" hl_lines="4"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L4-L8' target='_blank'>app.js</a>" linenums="4" hl_lines="4"
 document.addEventListener('DOMContentLoaded', async () => {
 	await fetchRooms();
 	// Start listening for webhook notifications
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 A new function establishes and manages the SSE connection:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/public/js/app.js#L376-L397' target='_blank'>app.js</a>" linenums="376"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L376-L397' target='_blank'>app.js</a>" linenums="376"
 // Function to start listening for webhook events via Server-Sent Events
 function startWebhookNotifications() {
 	const eventSource = new EventSource('/events'); // (1)!
@@ -258,7 +258,7 @@ This function creates a persistent connection to receive real-time webhook notif
 
 A new function processes incoming webhook notifications and updates the UI accordingly:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/public/js/app.js#L399-L427' target='_blank'>app.js</a>" linenums="399"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L399-L427' target='_blank'>app.js</a>" linenums="399"
 // Function to handle webhook notifications and update UI
 function handleWebhookNotification(webhookData) {
 	const { event, data } = webhookData; // (1)!
@@ -305,7 +305,7 @@ This function processes different webhook event types and updates the appropriat
 
 In order to determine the current screen context, new utility functions have been introduced:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/public/js/app.js#L472-L488' target='_blank'>app.js</a>" linenums="472"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L472-L488' target='_blank'>app.js</a>" linenums="472"
 // Helper functions to detect current screen
 function isOnHomeScreen() {
 	const homeScreen = document.querySelector('#home');
@@ -340,7 +340,7 @@ These helper functions ensure that UI updates are only applied when the relevant
 
 The room template has been updated to include visual status indicators:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webhooks/public/js/app.js#L51-L99' target='_blank'>app.js</a>" linenums="51"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L51-L99' target='_blank'>app.js</a>" linenums="51"
 function getRoomListItemTemplate(room) {
 	const roomStatus = room.status === 'active_meeting' ? 'ACTIVE' : room.status === 'open' ? 'OPEN' : 'CLOSED'; // (1)!
 	const roomStatusBadgeClass =
@@ -375,7 +375,7 @@ The room template now includes status badges that provide immediate visual feedb
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
-If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps :fontawesome-solid-external-link:{.external-link-icon}](../../deployment/basic.md){:target="\_blank"}), you can connect this tutorial to it by following these steps:
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps :fontawesome-solid-external-link:{.external-link-icon}](../../../deployment/basic.md){:target="\_blank"}), you can connect this tutorial to it by following these steps:
 
 1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
 
@@ -384,7 +384,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
     OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com
     ```
 
-2. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key :fontawesome-solid-external-link:{.external-link-icon}](../reference/rest-api.md#generate-an-api-key){:target="\_blank"} section to learn how to obtain it.
+2. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key :fontawesome-solid-external-link:{.external-link-icon}](../../reference/rest-api.md#generate-an-api-key){:target="\_blank"} section to learn how to obtain it.
 
     ```text
     OV_MEET_API_KEY=your-production-api-key
@@ -408,6 +408,6 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
 
     A the end, you should have a public URL (e.g., `https://your-tutorial-domain.com:XXXX`) that points to this tutorial.
 
-6. **Configure webhooks in OpenVidu Meet**: Set up webhooks in your OpenVidu Meet production deployment to point to this tutorial. Follow the instructions in the [Webhooks configuration :fontawesome-solid-external-link:{.external-link-icon}](../reference/webhooks.md#configuration){:target="\_blank"} section to learn how to configure a webhook URL. Use the public URL of this tutorial followed by `/webhook` (e.g., `https://your-tutorial-domain.com:XXXX/webhook`).
+6. **Configure webhooks in OpenVidu Meet**: Set up webhooks in your OpenVidu Meet production deployment to point to this tutorial. Follow the instructions in the [Webhooks configuration :fontawesome-solid-external-link:{.external-link-icon}](../../reference/webhooks.md#configuration){:target="\_blank"} section to learn how to configure a webhook URL. Use the public URL of this tutorial followed by `/webhook` (e.g., `https://your-tutorial-domain.com:XXXX/webhook`).
 
 7. **Access the tutorial**: Access the tutorial from any device connected to the internet using its public URL (e.g., `https://your-tutorial-domain.com:XXXX`).

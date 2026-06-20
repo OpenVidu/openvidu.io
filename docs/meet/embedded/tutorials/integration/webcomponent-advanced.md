@@ -5,7 +5,7 @@ description: Learn how to build a video conferencing application using Node.js a
 
 # WebComponent Commands & Events Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-webcomponent-commands-events){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/integration/meet-webcomponent-commands-events){ .md-button target=\_blank }
 
 This tutorial extends the [basic WebComponent tutorial](webcomponent.md) to add **advanced WebComponent functionality** through commands and event handling. It demonstrates how to interact with the OpenVidu Meet WebComponent programmatically and respond to meeting events.
 
@@ -55,9 +55,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webcomponent-advanced-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webcomponent-advanced-home.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/webcomponent-advanced-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/webcomponent-advanced-home.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/meet/tutorials/webcomponent-advanced-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/meet/tutorials/webcomponent-advanced-room.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/webcomponent-advanced-room.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/webcomponent-advanced-room.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -87,7 +87,7 @@ The frontend changes focus on enhanced room management, WebComponent event handl
 
 The room template now passes additional parameters including role information:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-commands-events/public/js/app.js#L48-L83' target='_blank'>app.js</a>" linenums="48" hl_lines="6-25"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-webcomponent-commands-events/public/js/app.js#L48-L83' target='_blank'>app.js</a>" linenums="48" hl_lines="6-25"
 function getRoomListItemTemplate(room) {
 	return `
         <li class="list-group-item">
@@ -134,7 +134,7 @@ The template now provides the room name and user role to the `accessRoom()` func
 
 The `accessRoom()` function has been significantly enhanced to handle WebComponent events and commands:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-commands-events/public/js/app.js#L129-L196' target='_blank'>app.js</a>" linenums="129"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-webcomponent-commands-events/public/js/app.js#L129-L196' target='_blank'>app.js</a>" linenums="129"
 function accessRoom(roomName, roomUrl, role) {
 	console.log(`Accessing room as ${role}`);
 
