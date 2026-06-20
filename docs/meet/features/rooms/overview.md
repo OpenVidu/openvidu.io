@@ -20,4 +20,4 @@ Rooms are the entry point to OpenVidu Meet: every video call happens inside a ro
 ## In this section
 
 - [Creation & Management](management.md) — create, edit, list and delete rooms from the OpenVidu Meet app, configure their features and appearance, and the equivalent REST API operations.
-- [Room Access](access.md) — how individuals join a room as [room members](../room-members/overview.md) (anonymous, user and identified-guest access links) and the predefined roles (`Moderator` and `Speaker`).
+- [Room Access](access.md) — how individuals access a room as [room members](../room-members/overview.md) (anonymous, user and identified-guest access links) and the predefined roles (`Moderator` and `Speaker`).

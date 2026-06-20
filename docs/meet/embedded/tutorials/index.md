@@ -27,9 +27,9 @@ Different ways to integrate (embed) OpenVidu Meet into your own application:
 
 Different ways individuals can access a room:
 
-- **[Anonymous Access](./anonymous-access.md)**: shared `moderator` or `speaker` links that anyone can use to join a room without identifying themselves.
+- **[Anonymous Access](./anonymous-access.md)**: shared `moderator` or `speaker` links that anyone can use to access a room without identifying themselves.
 - **[Identified Guests](./identified-guests.md)**: room members with a fixed name and a unique, revocable access link, with no account required.
-- **[Users](./users.md)**: registered OpenVidu Meet accounts added to a room as members, who join by logging in with their own credentials.
+- **[Users](./users.md)**: OpenVidu Meet accounts added to a room as members, who access the room by logging in with their own credentials.
 
 ## Advanced features
 

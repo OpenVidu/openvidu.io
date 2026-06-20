@@ -329,7 +329,7 @@ function isOnRecordingsScreen(roomName) {
 2. Return false if the recordings screen is not visible.
 3. Check if the room name matches the current filter to determine if recording updates are relevant.
 
-These helper functions ensure that UI updates are only applied when users are viewing the relevant sections, optimizing performance and preventing unnecessary re-renders:
+These helper functions ensure that UI updates are only applied when the relevant sections are being viewed, optimizing performance and preventing unnecessary re-renders:
 
 - `isOnHomeScreen()`: Checks if the home screen is currently visible.
 - `isOnRecordingsScreen(roomName)`: Checks if the recordings screen is visible and if the room name matches the current filter.
@@ -366,8 +366,8 @@ function getRoomListItemTemplate(room) {
 The room template now includes status badges that provide immediate visual feedback about room state:
 
 - **ACTIVE** (blue badge): Meeting is currently in progress
-- **OPEN** (green badge): Room is available for joining
-- **CLOSED** (yellow badge): Room is closed and cannot be joined
+- **OPEN** (green badge): Room is available for access
+- **CLOSED** (yellow badge): Room is closed and cannot be accessed
 
 ## Accessing this tutorial from other computers or phones
 

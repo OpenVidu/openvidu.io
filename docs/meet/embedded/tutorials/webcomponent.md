@@ -11,12 +11,12 @@ This tutorial extends the [Direct Link tutorial](direct-link.md) by integrating 
 
 At the end of this tutorial, you will have a fully functional simple video-call application with the following features:
 
-- Users can create rooms.
-- Users can delete rooms.
-- Users can join a room as moderator or speaker.
-- Users can chat with other users.
-- Users may leave the room at any time.
-- Users can view the recordings of the meeting.
+- You can create rooms.
+- You can delete rooms.
+- Participants can access a room as moderator or speaker.
+- Participants can chat with each other.
+- Participants can leave the meeting at any time.
+- You can view the recordings of the meeting.
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
@@ -111,15 +111,15 @@ function getRoomListItemTemplate(room) {
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
-                    onclick="joinRoom('${room.access.anonymous.moderator.url}');"
+                    onclick="accessRoom('${room.access.anonymous.moderator.url}');"
                 >
-                    Join as Moderator
+                    Access as Moderator
                 </button>
                 <button
                     class="btn btn-secondary btn-sm"
-                    onclick="joinRoom('${room.access.anonymous.speaker.url}');"
+                    onclick="accessRoom('${room.access.anonymous.speaker.url}');"
                 >
-                    Join as Speaker
+                    Access as Speaker
                 </button>
                 <button
                     title="Delete room"
@@ -134,16 +134,16 @@ function getRoomListItemTemplate(room) {
 }
 ```
 
-The key difference from the Direct Link tutorial is that instead of using anchor tags (`<a>`) with `href` attributes pointing to external URLs, this template uses buttons that call the `joinRoom()` function with the appropriate room URL.
+The key difference from the Direct Link tutorial is that instead of using anchor tags (`<a>`) with `href` attributes pointing to external URLs, this template uses buttons that call the `accessRoom()` function with the appropriate room URL.
 
 ---
 
-#### Joining a room with WebComponent
+#### Accessing a room with the WebComponent
 
-When the user clicks the `Join as Moderator` or `Join as Speaker` button, the `joinRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
+When the user clicks the `Access as Moderator` or `Access as Speaker` button, the `accessRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-basic/public/js/app.js#L120-L136' target='_blank'>app.js</a>" linenums="120"
-function joinRoom(roomUrl) {
+function accessRoom(roomUrl) {
 	// Hide the home screen and show the room screen
 	const homeScreen = document.querySelector('#home');
 	homeScreen.hidden = true; // (1)!
@@ -166,7 +166,7 @@ function joinRoom(roomUrl) {
 2. Show the room screen where the WebComponent will be embedded.
 3. Inject the OpenVidu Meet WebComponent into the meeting container with the specified room URL and a leave redirect URL.
 
-The `joinRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return users to the home screen when they leave the meeting.
+The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen when they leave the meeting.
 
 This approach provides a seamless user experience by keeping users within the same application while providing full video conferencing functionality through the embedded WebComponent.
 

@@ -11,12 +11,12 @@ This tutorial is a simple example of how to integrate **OpenVidu Meet** into a *
 
 At the end of this tutorial, you will have a fully functional simple video-call application with the following features:
 
-- Users can create rooms.
-- Users can delete rooms.
-- Users can join a room as moderator or speaker.
-- Users can chat with other users.
-- Users may leave the room at any time.
-- Users can view the recordings of the meeting.
+- You can create rooms.
+- You can delete rooms.
+- Participants can access a room as moderator or speaker.
+- Participants can chat with each other.
+- Participants can leave the meeting at any time.
+- You can view the recordings of the meeting.
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
@@ -297,7 +297,7 @@ This endpoint does the following:
 
 The client application consists of only three essential files that are located in the `public` directory:
 
-- `app.js`: This is the main JavaScript file for the sample application. It contains the logic for listing, creating, joining and deleting rooms.
+- `app.js`: This is the main JavaScript file for the sample application. It contains the logic for listing, creating, accessing and deleting rooms.
 - `index.html`: This HTML file is responsible for creating the user interface. It contains the list of created rooms, and a form to create a new room.
 - `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
 
@@ -416,13 +416,13 @@ function getRoomListItemTemplate(room) {
                     class="btn btn-primary btn-sm"
                     href="${room.access.anonymous.moderator.url}"
                 >
-                    Join as Moderator
+                    Access as Moderator
                 </a>
                 <a
                     class="btn btn-secondary btn-sm"
                     href="${room.access.anonymous.speaker.url}"
                 >
-                    Join as Speaker
+                    Access as Speaker
                 </a>
                 <button
                     title="Delete room"
@@ -449,7 +449,7 @@ The `renderRooms()` function performs the following actions:
 3. For each room in the `rooms` map, it calls the `getRoomListItemTemplate()` function to get the HTML template for the room list item.
 4. Appends the room item to the list element.
 
-The `getRoomListItemTemplate()` function generates the HTML template for each room list item. It includes anchor links to join the room as a moderator or speaker using direct URLs, and a button to delete the room. The anchor links use the `room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url` properties from the room object to redirect users directly to the OpenVidu Meet interface, while the delete button calls the `deleteRoom()` function passing the room ID to remove the room from the server.
+The `getRoomListItemTemplate()` function generates the HTML template for each room list item. It includes anchor links to access the room as a moderator or speaker using direct URLs, and a button to delete the room. The anchor links use the `room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url` properties from the room object to redirect participants directly to the OpenVidu Meet interface, while the delete button calls the `deleteRoom()` function passing the room ID to remove the room from the server.
 
 ---
 

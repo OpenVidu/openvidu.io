@@ -200,23 +200,23 @@ function getRoomListItemTemplate(room) {
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
-                    onclick="joinRoom(
+                    onclick="accessRoom(
                         '${room.roomName}', 
                         '${room.access.anonymous.moderator.url}', 
                         'moderator'
                     );"
                 >
-                    Join as Moderator
+                    Access as Moderator
                 </button>
                 <button
                     class="btn btn-secondary btn-sm"
-                    onclick="joinRoom(
+                    onclick="accessRoom(
                         '${room.roomName}', 
                         '${room.access.anonymous.speaker.url}', 
                         'speaker'
                     );"
                 >
-                    Join as Speaker
+                    Access as Speaker
                 </button>
                 <button 
                     class="btn btn-success btn-sm" 
@@ -237,7 +237,7 @@ function getRoomListItemTemplate(room) {
 }
 ```
 
-This button calls the `listRecordingsByRoom()` function when clicked, passing the room name as an argument. This allows users to view recordings for that specific room.
+This button calls the `listRecordingsByRoom()` function when clicked, passing the room name as an argument. This allows you to view recordings for that specific room.
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-recordings/public/js/app.js#L205-L217' target='_blank'>app.js</a>" linenums="205"
 async function listRecordingsByRoom(roomName) {

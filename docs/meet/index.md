@@ -86,13 +86,13 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
-    Your users can set up their video/audio devices, virtual background and language before entering the room.
+    Participants can set up their video/audio devices, virtual background and language before joining the meeting.
 
     <a class="glightbox" href="../../assets/images/meet/prejoin.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/prejoin.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
 - __Background filters__{ .ov-meet-commercial-card-title }
 
-    Allow your users to easily replace their video background with a blur effect or an image.
+    Allow participants to easily replace their video background with a blur effect or an image.
 
     <a class="glightbox" href="../assets/videos/ov-call-vb.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/ov-call-vb.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -206,7 +206,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
     ---
 
-    Protect your calls from man-in-the-middle attacks, ensuring only your users can decrypt audio, video, and chat.
+    Protect your calls from man-in-the-middle attacks, ensuring only meeting participants can decrypt audio, video, and chat.
 
 
 -   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name }

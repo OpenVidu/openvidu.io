@@ -11,12 +11,12 @@ This tutorial extends the [Anonymous Access tutorial](./anonymous-access.md) to 
 
 An identified guest is a room member with a **fixed name** and a **unique access link** that grants access to the room without any login. Each link is meant to be delivered privately to a single person and can be revoked individually.
 
-Building on the Anonymous Access tutorial, it keeps the shared anonymous access links (join as `moderator` or `speaker`) and adds the following features:
+Building on the Anonymous Access tutorial, it keeps the shared anonymous access links (access as `moderator` or `speaker`) and adds the following features:
 
 - Add an identified guest to a room by name, with a base role (`moderator` or `speaker`).
 - Each identified guest gets a unique access link that can be copied and shared.
 - List and remove the members of a room, revoking their access.
-- Join the meeting through a guest's unique link, with no login required.
+- Access the room through a guest's unique link, with no login required.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](../reference/webcomponent.md) to embed the meeting.
 
@@ -179,13 +179,13 @@ app.delete('/rooms/:roomId/members/:memberId', async (req, res) => {
 
 ### Frontend modifications
 
-The home view keeps the shared anonymous access (join as moderator or speaker) and adds a **Members** button per room, which opens a dedicated members view to manage the room's identified guests.
+The home view keeps the shared anonymous access (access as moderator or speaker) and adds a **Members** button per room, which opens a dedicated members view to manage the room's identified guests.
 
 ---
 
 #### The room list
 
-The `getRoomListItemTemplate()` function renders each room with the inherited anonymous join buttons plus a new **Members** button:
+The `getRoomListItemTemplate()` function renders each room with the inherited anonymous access buttons plus a new **Members** button:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-identified-guests/public/js/app.js#L55-L88' target='_blank'>app.js</a>" linenums="55"
 function getRoomListItemTemplate(room) {
@@ -195,15 +195,15 @@ function getRoomListItemTemplate(room) {
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
-                    onclick="joinRoom('${room.access.anonymous.moderator.url}', '#home');"
+                    onclick="accessRoom('${room.access.anonymous.moderator.url}', '#home');"
                 >
-                    Join as Moderator
+                    Access as Moderator
                 </button>
                 <button
                     class="btn btn-secondary btn-sm"
-                    onclick="joinRoom('${room.access.anonymous.speaker.url}', '#home');"
+                    onclick="accessRoom('${room.access.anonymous.speaker.url}', '#home');"
                 >
-                    Join as Speaker
+                    Access as Speaker
                 </button>
                 <button
 					class="btn btn-success btn-sm"
@@ -224,18 +224,18 @@ function getRoomListItemTemplate(room) {
 }
 ```
 
-The **Join as Moderator** and **Join as Speaker** buttons use the room's shared anonymous links (`room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url`) and are inherited from the Anonymous Access tutorial. The new **Members** button calls `manageMembers()`, which opens the members view for that room.
+The **Access as Moderator** and **Access as Speaker** buttons use the room's shared anonymous links (`room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url`) and are inherited from the Anonymous Access tutorial. The new **Members** button calls `manageMembers()`, which opens the members view for that room.
 
 ---
 
 #### Rendering the members list
 
-The `getMemberListItemTemplate()` function builds each member item, showing the name, the base role, the unique access link, and buttons to copy the link, join the meeting and remove the member:
+The `getMemberListItemTemplate()` function builds each member item, showing the name, the base role, the unique access link, and buttons to copy the link, access the room and remove the member:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-identified-guests/public/js/app.js#L198-L237' target='_blank'>app.js</a>" linenums="198"
 function getMemberListItemTemplate(member) {
 	// In this tutorial every member is an identified guest, so each one has a unique
-	// access link and buttons to copy it, join through it and remove the member.
+	// access link and buttons to copy it, access the room through it and remove the member.
 	return `
         <li class="member-container">
             <div class="member-info">
@@ -256,9 +256,9 @@ function getMemberListItemTemplate(member) {
                     <i class="fa-solid fa-copy"></i>
                 </button>
                 <button 
-					title="Join as ${member.name}"
+					title="Access as ${member.name}"
 					class="icon-button"
-					onclick="joinRoom('${member.accessUrl}', '#members')"
+					onclick="accessRoom('${member.accessUrl}', '#members')"
 				>
                     <i class="fa-solid fa-right-to-bracket"></i>
                 </button>
@@ -275,7 +275,7 @@ function getMemberListItemTemplate(member) {
 }
 ```
 
-Each item displays the member's fixed `name`, a badge with its `baseRole`, and its unique `accessUrl`. The three buttons call `copyAccessUrl()` to copy the link to the clipboard, `joinRoom()` to open the meeting in the app through that link, and `removeMember()` to revoke the member.
+Each item displays the member's fixed `name`, a badge with its `baseRole`, and its unique `accessUrl`. The three buttons call `copyAccessUrl()` to copy the link to the clipboard, `accessRoom()` to access the room in the app through that link, and `removeMember()` to revoke the member.
 
 ---
 
@@ -357,15 +357,15 @@ async function copyAccessUrl(memberId, button) {
 
 ---
 
-#### Joining the room
+#### Accessing the room
 
-The `joinRoom()` function embeds the OpenVidu Meet WebComponent for a given room URL. It is shared by the anonymous join buttons and the per-guest join button:
+The `accessRoom()` function embeds the OpenVidu Meet WebComponent for a given room URL. It is shared by the anonymous access buttons and the per-guest access button:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-identified-guests/public/js/app.js#L308-L337' target='_blank'>app.js</a>" linenums="308"
 // Embed the OpenVidu Meet component for the given room URL.
 // 'returnViewId' is the view to show again when the meeting is closed
 // (the home screen for anonymous access, the members screen for an identified guest).
-function joinRoom(roomUrl, returnViewId) {
+function accessRoom(roomUrl, returnViewId) {
 	// Hide the home and members screens and show the room screen
 	document.querySelector('#home').hidden = true;
 	document.querySelector('#members').hidden = true;
@@ -400,7 +400,7 @@ function joinRoom(roomUrl, returnViewId) {
 
 !!! info "Embedding vs. sharing the link"
 
-    This tutorial embeds the meeting in the app for convenience while testing, but the main purpose of an identified guest is its **unique access link**. In a real application you would typically deliver each member's `accessUrl` privately (by email, message, etc.) instead of opening it yourself, and the participant would join directly through that link.
+    This tutorial embeds the meeting in the app for convenience while testing, but the main purpose of an identified guest is its **unique access link**. In a real application you would typically deliver each member's `accessUrl` privately (by email, message, etc.) instead of opening it yourself, and the participant would access the room directly through that link.
 
 ## Accessing this tutorial from other computers or phones
 

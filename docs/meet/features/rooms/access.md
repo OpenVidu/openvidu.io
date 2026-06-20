@@ -7,9 +7,9 @@ tags:
 
 # Room Access
 
-Every individual who joins a room does so as a **room member**, and becomes a **participant** of the meeting taking place in it. There are three kinds of room member — **users**, **identified guests** and **anonymous guests** — described in detail in the [Room Members](../room-members/overview.md) feature.
+Only **room members** can access a room — to view its recordings or to join a meeting in it, becoming a participant. Room members can be **users**, **identified guests** or **anonymous guests**, all described in detail in the [Room Members](../room-members/overview.md) feature.
 
-This page explains the **access links** each kind of member uses to reach a room, and the **predefined roles** that determine their permissions inside the meeting.
+Each kind of member reaches the room through a different kind of **access link** and joins the meeting with a **predefined role** that determines their permissions. These permissions can also be customized for individual members.
 
 ## Anonymous guest access { #anonymous-access }
 
@@ -18,7 +18,7 @@ Anonymous guests join through **shared access links** that require no OpenVidu M
 - The **`Moderator`** link grants the moderator role.
 - The **`Speaker`** link grants the speaker role.
 
-These links can be shared freely with anyone, unless anonymous access for that role has been disabled for the room. You can enable or disable anonymous access per role when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) a room. Before entering the meeting, each anonymous guest is asked to **provide a name**.
+These links can be shared freely with anyone, unless anonymous access for that role has been disabled for the room. You can enable or disable anonymous access per role when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) a room. Before joining the meeting, each anonymous guest is asked to **choose a name**.
 
 ### Sharing the anonymous links
 
@@ -46,13 +46,13 @@ The anonymous access links are available in the properties `access.anonymous.mod
 
 Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](../room-members/management.md#rest-api-reference). They reach the room through different links:
 
-- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"}). <!-- TODO(api-name): `access.user.url` inferred (was `access.registered.url`); confirm against the updated spec --> They must **log in** with their OpenVidu Meet credentials, which is how they are identified.
+- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"}). They must **log in** with their OpenVidu Meet credentials.
 - **Identified guests** each receive a **unique personal access link** (property `accessUrl` of their member object) that grants access with **no login** and should be delivered privately to that person.
 
-In addition to explicitly added users, two rules always apply:
+In addition to users added explicitly as room members, other users can also access the room:
 
-- **Admins** and the **room owner** always have access to the room, with all permissions granted.
-- If a room is configured to be **accessible to all users**, any user can join — even without being an explicit member — with `Speaker` permissions.
+- **Admins** and the **room owner** (the user who created the room) always have access to the room, with all permissions granted.
+- If a room is [configured](management.md#create-rooms) to be **accessible to all users**, any user can access — even without being an explicit member — with `Speaker` permissions.
 
 See the [Room Members](../room-members/overview.md) feature to add and manage users and identified guests, and the [Users](../users/overview.md) feature to manage the accounts themselves.
 

@@ -9,19 +9,19 @@ description: Learn how to create OpenVidu Meet users with the Users API and add 
 
 This tutorial extends the [Identified Guests tutorial](./identified-guests.md) to show how to create **OpenVidu Meet users** with the Users API and add them to a room as **members**.
 
-A user is a real OpenVidu Meet account. Whereas an identified guest joins through a unique link without an account, all user members share the room's user access URL and prove their identity by logging in with their own OpenVidu Meet credentials. A room can therefore admit both users and identified guests as members, in addition to the anonymous access kept from the previous tutorials.
+A user is a real OpenVidu Meet account. Whereas an identified guest accesses the room through a unique link without an account, all user members share the room's user access URL and prove their identity by logging in with their own OpenVidu Meet credentials. A room can therefore admit both users and identified guests as members, in addition to the anonymous access kept from the previous tutorials.
 
 Building on the Identified Guests tutorial, it adds the following:
 
 - Create, list and delete OpenVidu Meet users.
 - Add a **user** (in addition to identified guests) as a member of a room.
-- A user member joins the room by logging in with their OpenVidu Meet credentials.
+- A user member accesses the room by logging in with their OpenVidu Meet credentials.
 
 The application uses the [OpenVidu Meet API](../../embedded/reference/rest-api.md) to manage users, rooms and room members, and the [OpenVidu Meet WebComponent](../reference/webcomponent.md) to embed the meeting.
 
 !!! info "Users, identified guests and anonymous guests"
 
-    A room member can be a **user** (a real OpenVidu Meet account that authenticates with its credentials) or an **identified guest** (no account, joins through a unique link). On top of explicit members, a room also accepts **anonymous guests** through the shared moderator/speaker links. See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../features/room-members/overview.md){:target="\_blank"} feature for the full picture.
+    A room member can be a **user** (a real OpenVidu Meet account that authenticates with its credentials) or an **identified guest** (no account, accesses the room through a unique link). On top of explicit members, a room also accepts **anonymous guests** through the shared moderator/speaker links. See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../features/room-members/overview.md){:target="\_blank"} feature for the full picture.
 
 ## Running this tutorial
 
@@ -237,7 +237,7 @@ Removing a member (`DELETE /rooms/:roomId/members/:memberId`) is exactly the sam
 
 ### Frontend modifications
 
-The frontend adds a panel to manage users, lets the members view add **either a user or an identified guest**, and adds a **Join as user** action. The rooms management (including the anonymous join), the identified-guest handling and the shared helpers are unchanged from the Identified Guests tutorial.
+The frontend adds a panel to manage users, lets the members view add **either a user or an identified guest**, and adds a **Access as user** action. The rooms management (including the anonymous access), the identified-guest handling and the shared helpers are unchanged from the Identified Guests tutorial.
 
 ---
 
@@ -358,18 +358,18 @@ async function addUser(e) {
 
 #### Rendering members of both types
 
-The `getMemberListItemTemplate()` function now distinguishes the two member types: identified guests keep their unique link and copy/join buttons, while users only show a remove button (they join through the room's **Join as user** action):
+The `getMemberListItemTemplate()` function now distinguishes the two member types: identified guests keep their unique link and copy/access buttons, while users only show a remove button (they access through the room's **Access as user** action):
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-users/public/js/app.js#L324-L375' target='_blank'>app.js</a>" linenums="324"
 function getMemberListItemTemplate(member) {
-	// A member can be a user (joins by logging in) or an identified guest (joins through a unique link)
+	// A member can be a user (accesses the room by logging in) or an identified guest (accesses the room through a unique link)
 	const isGuest = member.type === 'identified_guest'; // (1)!
 	const typeLabel = isGuest ? 'Guest' : 'User';
 	// For guests we show their unique access link; for users we show their member id (their user ID)
 	const subtitle = isGuest ? member.accessUrl : member.memberId;
 
-	// Guests have buttons to copy their unique link and to join through it.
-	// Users join through the room's "Join as user" button instead, so they only have a remove button.
+	// Guests have buttons to copy their unique link and to access the room through it.
+	// Users access through the room's "Access as user" button instead, so they only have a remove button.
 	const guestActions = isGuest // (2)!
 		? `
                 <button
@@ -380,9 +380,9 @@ function getMemberListItemTemplate(member) {
                     <i class="fa-solid fa-copy"></i>
                 </button>
                 <button
-					title="Join as ${member.name}"
+					title="Access as ${member.name}"
 					class="icon-button"
-					onclick="joinRoom('${member.accessUrl}', '#members')"
+					onclick="accessRoom('${member.accessUrl}', '#members')"
 				>
                     <i class="fa-solid fa-right-to-bracket"></i>
                 </button>`
@@ -416,27 +416,27 @@ function getMemberListItemTemplate(member) {
 ```
 
 1. Detect the member type. `member.type` is `'identified_guest'` or `'user'`.
-2. Only identified guests get the copy-link and join buttons (their access is the unique link). Users get just the remove button, plus a `User`/`Guest` badge so both types are easy to tell apart in the list.
+2. Only identified guests get the copy-link and access buttons (their access is the unique link). Users get just the remove button, plus a `User`/`Guest` badge so both types are easy to tell apart in the list.
 
 ---
 
-#### Joining the room as a user
+#### Accessing the room as a user
 
-All user members of a room share the same user access URL, available in the `access.user.url` property of the room object. The `joinAsUser()` function embeds the meeting through that URL, reusing the shared `joinRoom()` function from the previous tutorial:
+All user members of a room share the same user access URL, available in the `access.user.url` property of the room object. The `accessAsUser()` function accesses the room through that URL, reusing the shared `accessRoom()` function from the previous tutorial:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-users/public/js/app.js#L477-L481' target='_blank'>app.js</a>" linenums="477"
-// Join the room as a user: all users share the same authenticated access URL.
+// Access the room as a user: all users share the same authenticated access URL.
 // OpenVidu Meet shows its own login form inside the component until the user logs in.
-function joinAsUser() {
-	joinRoom(currentRoom.access.user.url, '#members');
+function accessAsUser() {
+	accessRoom(currentRoom.access.user.url, '#members');
 }
 ```
 
-`joinRoom()` is unchanged from the Identified Guests tutorial: it embeds the OpenVidu Meet WebComponent for the given URL and returns to the members view when the meeting is closed.
+`accessRoom()` is unchanged from the Identified Guests tutorial: it embeds the OpenVidu Meet WebComponent for the given URL and returns to the members view when the meeting is closed.
 
 !!! info "User members log in inside the meeting"
 
-    The authenticated access URL (`access.user.url`) does not carry any secret. When the WebComponent loads it, OpenVidu Meet renders its **own login form inside the component**, and the user logs in with their OpenVidu Meet credentials (the `userId` and password created earlier). After logging in, OpenVidu Meet verifies that the user is a member of the room and lets them join with the permissions of their base role. Your application never handles the user's password: identity is proven through OpenVidu Meet's login, while membership and permissions are managed through the Room Members API.
+    The authenticated access URL (`access.user.url`) does not carry any secret. When the WebComponent loads it, OpenVidu Meet renders its **own login form inside the component**, and the user logs in with their OpenVidu Meet credentials (the `userId` and password created earlier). After logging in, OpenVidu Meet verifies that the user is a member of the room and lets them access the room with the permissions of their base role. Your application never handles the user's password: identity is proven through OpenVidu Meet's login, while membership and permissions are managed through the Room Members API.
 
 ## Accessing this tutorial from other computers or phones
 

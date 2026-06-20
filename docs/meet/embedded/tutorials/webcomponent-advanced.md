@@ -95,23 +95,23 @@ function getRoomListItemTemplate(room) {
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
-                    onclick="joinRoom(
+                    onclick="accessRoom(
                         '${room.roomName}', 
                         '${room.access.anonymous.moderator.url}', 
                         'moderator'
                     );"
                 >
-                    Join as Moderator
+                    Access as Moderator
                 </button>
                 <button
                     class="btn btn-secondary btn-sm"
-                    onclick="joinRoom(
+                    onclick="accessRoom(
                         '${room.roomName}', 
                         '${room.access.anonymous.speaker.url}', 
                         'speaker'
                     );"
                 >
-                    Join as Speaker
+                    Access as Speaker
                 </button>
                 <button 
                     title="Delete room"
@@ -126,17 +126,17 @@ function getRoomListItemTemplate(room) {
 }
 ```
 
-The template now provides the room name and user role to the `joinRoom()` function, enabling role-based functionality and proper room identification.
+The template now provides the room name and user role to the `accessRoom()` function, enabling role-based functionality and proper room identification.
 
 ---
 
-#### Advanced room joining with commands and events
+#### Advanced room access with commands and events
 
-The `joinRoom()` function has been significantly enhanced to handle WebComponent events and commands:
+The `accessRoom()` function has been significantly enhanced to handle WebComponent events and commands:
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/meet-webcomponent-commands-events/public/js/app.js#L129-L196' target='_blank'>app.js</a>" linenums="129"
-function joinRoom(roomName, roomUrl, role) {
-	console.log(`Joining room as ${role}`);
+function accessRoom(roomName, roomUrl, role) {
+	console.log(`Accessing room as ${role}`);
 
 	// Hide the home screen and show the room screen
 	const homeScreen = document.querySelector('#home');
@@ -144,7 +144,7 @@ function joinRoom(roomName, roomUrl, role) {
 	const roomScreen = document.querySelector('#room');
 	roomScreen.hidden = false; // (2)!
 
-	// Hide the room header until the local participant joins
+	// Hide the room header until the local participant joins the meeting
 	const roomHeader = document.querySelector('#room-header');
 	roomHeader.hidden = true; // (3)!
 
@@ -160,10 +160,10 @@ function joinRoom(roomName, roomUrl, role) {
 	// Add event listeners for the OpenVidu Meet component
 	const meet = document.querySelector('openvidu-meet');
 
-	// Event listener for when the local participant joins the room
+	// Event listener for when the local participant joins the meeting
 	meet.once('joined', () => {
 		// (5)!
-		console.log('Local participant joined the room');
+		console.log('Local participant joined the meeting');
 
 		// Show the room header with the room name
 		roomHeader.hidden = false;
@@ -210,22 +210,22 @@ function joinRoom(roomName, roomUrl, role) {
 
 1. Hide the home screen.
 2. Show the room screen.
-3. Hide the room header until the local participant joins.
+3. Hide the room header until the local participant joins the meeting.
 4. Inject the OpenVidu Meet WebComponent into the meeting container with the specified room URL.
-5. Add an event listener for the `joined` event, which is triggered when the local participant joins the room.
+5. Add an event listener for the `joined` event, which is triggered when the local participant joins the meeting.
 6. Set the room name in the header.
 7. Show the end meeting button if the user is a moderator.
 8. Call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting when the moderator clicks the `End Meeting` button.
 9. Add an event listener for the `left` event, which is triggered when the local participant leaves the room.
 10. Add an event listener for the `closed` event, which is triggered when the OpenVidu Meet component is closed.
 
-The enhanced `joinRoom()` function now performs the following actions:
+The enhanced `accessRoom()` function now performs the following actions:
 
 1. Hides the home screen and shows the room screen.
-2. Hides the room header until the local participant joins.
+2. Hides the room header until the local participant joins the meeting.
 3. Injects the OpenVidu Meet WebComponent into the meeting container with the specified room URL.
 4. Configures event listeners for the OpenVidu Meet WebComponent to handle different events:
-    - **`joined`**: This event is triggered when the local participant joins the room. It shows the room header with the room name and displays the `End Meeting` button if the user is a moderator. It also adds an event listener for the `End Meeting` button to call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting. This method disconnects all participants and ends the meeting for everyone.
+    - **`joined`**: This event is triggered when the local participant joins the meeting. It shows the room header with the room name and displays the `End Meeting` button if the user is a moderator. It also adds an event listener for the `End Meeting` button to call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting. This method disconnects all participants and ends the meeting for everyone.
     - **`left`**: This event is triggered when the local participant leaves the room. It hides the room header.
     - **`closed`**: This event is triggered when the OpenVidu Meet component is closed. It hides the room screen and shows the home screen.
 

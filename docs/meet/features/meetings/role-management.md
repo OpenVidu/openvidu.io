@@ -7,12 +7,12 @@ tags:
 
 # Role Management
 
-Every participant enters a meeting with a set of permissions inherited from their [room member](../room-members/overview.md):
+Every participant joins a meeting with a different set of permissions:
 
-- **Users** and **identified guests** start with the permissions of their **base role** (`Moderator` or `Speaker`), which can be fine-tuned **independently for each member** with [custom permissions](../room-members/management.md#add-a-member).
+- **Users** and **identified guests** have by default the permissions of their **base role** (`Moderator` or `Speaker`), which can be fine-tuned **independently for each member** with [custom permissions](../room-members/management.md#add-a-member).
 - **Anonymous guests** can only join through the [shared `Moderator` or `Speaker` link](../rooms/access.md#anonymous-access), so they always have the **default permissions of that role** and cannot be customized.
 
-During a live meeting these permissions are not fixed. Participants with the `canMakeModerator` permission can **promote** other participants to moderator and **demote** them back, all from the **"Participants"** side panel.
+During a meeting these permissions are not fixed. Participants with the `canMakeModerator` permission can **promote** other participants to moderator and **demote** them back.
 
 !!! info
     `canMakeModerator` is one of the permissions the `Moderator` [predefined role](../rooms/access.md#predefined-roles) grants by default. For the complete list of permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="\_blank"} schema.

@@ -53,11 +53,11 @@ OpenVidu Meet is organized around a few core concepts. Understanding how they re
 
 ## How it all fits together
 
-- You start by creating a **Room**. Each room carries its own configuration: visual [appearance](rooms/management.md#room-appearance), enabled features, recording settings and [access control](rooms/access.md).
-- When someone opens a valid room access link and presses the join button, a **Meeting** starts (or they join the ongoing one). Meetings are where the real-time communication happens.
+- You start by creating a **room**. Each room carries its own configuration: visual [appearance](rooms/management.md#room-appearance), enabled features, recording settings and [access control](rooms/access.md).
+- When someone opens a valid room access link and presses the join button, a **meeting** starts (or they join the ongoing one). Meetings are where the real-time communication happens.
 - Access to a room is granted to its **room members**, of which there are three kinds (see [Room Members](room-members/overview.md)): **users** (accounts that log in), **identified guests** (a personal link, no login) and **anonymous guests** (a shared link, no login). The links and roles involved are described in [Room Access](rooms/access.md).
-- **Users** are the account system. **Room Members** bind users — or guests — to a specific room with a base role and optional custom permissions. Every member becomes a **participant** of the meetings held in the room.
-- During a meeting, moderators can start **Recordings**, which remain available afterwards and inherit the room's access permissions.
+- **Users** are OpenVidu Meet accounts. **Room Members** bind users — or guests — to a specific room with a base role and optional custom permissions. Every member becomes a participant of the meetings held in the room.
+- During a meeting, participants with appropriate permissions can start **recordings**, which remain available afterwards and inherit the room's access permissions.
 
 !!! info "New to OpenVidu Meet?"
 

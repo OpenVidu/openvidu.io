@@ -16,7 +16,7 @@ There are three kinds of room member:
 - **Anonymous guests** — individuals without an account who access the room through a [**shared** access link](../rooms/access.md#anonymous-access), providing a name before entering the meeting.
 
 !!! info
-    **Users** and **identified guests** are *explicitly added* to a room, so they can be listed and managed individually. **Anonymous guests** are not: anyone holding a shared link can join, so they cannot be added, listed or revoked one by one — they only exist once they join a meeting.
+    **Users** and **identified guests** are *explicitly added* to a room, so they can be listed and managed individually. **Anonymous guests** are not: anyone holding a shared link can access the room, so they cannot be added, listed or revoked one by one — they only exist once they join a meeting.
 
 ## Explicit members vs. anonymous guests
 

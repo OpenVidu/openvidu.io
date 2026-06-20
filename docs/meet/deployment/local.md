@@ -219,7 +219,7 @@ Follow these steps:
         LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
         ```
 
-4. Access to OpenVidu Meet with a different URL:
+4. Access OpenVidu Meet with a different URL:
 
     When OpenVidu Meet is ready to be used the terminal will show the URL where it is accessible.
 
