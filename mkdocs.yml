@@ -271,6 +271,7 @@ nav:
               - Backup and restore OpenVidu deployments: docs/self-hosting/how-to-guides/backup-and-restore.md
               - Configure external S3: docs/self-hosting/how-to-guides/external-s3.md
               - Force media traffic through port 443: docs/self-hosting/how-to-guides/force-single-port.md
+              - TURN server security: docs/self-hosting/how-to-guides/turn-security.md
               - Enable webhooks: docs/self-hosting/how-to-guides/enable-webhooks.md
               - Enable and disable modules: docs/self-hosting/how-to-guides/enable-disable-modules.md
               - Enable and disable MongoDB: docs/self-hosting/how-to-guides/enable-disable-mongodb.md

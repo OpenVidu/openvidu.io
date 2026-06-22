@@ -10,6 +10,7 @@ OpenVidu deployments are installed with sane defaults, but you may want to custo
 - [Backup and restore OpenVidu deployments](./backup-and-restore.md)
 - [How to configure an external S3 bucket for recordings instead of the default MinIO](./external-s3.md)
 - [Force media traffic through port 443](./force-single-port.md)
+- [TURN server security: peer allowlist, port restriction and disabled TCP relays](./turn-security.md)
 - [Enable webhooks](./enable-webhooks.md)
 - [Enable and disable modules](./enable-disable-modules.md)
 - [Enable and disable MongoDB](./enable-disable-mongodb.md)
