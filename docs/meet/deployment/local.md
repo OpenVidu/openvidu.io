@@ -63,6 +63,16 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
         docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.7.0 up -y openvidu-meet-init
         ```
 
+    !!! warning "Command failing on Windows with a `dockerHttpProxy` error"
+
+        The latest versions of **Docker Desktop for Windows** have a known bug that prevents Docker Compose from downloading Compose files distributed as OCI artifacts (`oci://`). When affected, the command above fails with an error similar to:
+
+        ```
+        fetch failed error="failed to do request: Head \"https://registry-1.docker.io/v2/openvidu/local-meet/manifests/latest\": proxyconnect tcp: open ./pipe/dockerHttpProxy: The system cannot find the path specified."
+        ```
+
+        This is a known Docker Desktop bug that **has not been fixed yet**. Until it is resolved in an upcoming release, use the [Advanced Local Deployment](#advanced-local-deployment), which relies directly on docker compose files instead of OCI artifacts, to deploy OpenVidu Meet locally on Windows.
+
     ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
 
 
