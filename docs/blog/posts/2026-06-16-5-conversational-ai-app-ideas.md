@@ -67,8 +67,6 @@ And voice agents are only the beginning.
 Let's look at a few more ways WebRTC and conversational AI can be combined to create products people genuinely want to use.
 
 
----
-
 ## 1. The AI running coach in your ear
 
 ![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/five-conversational-ai-ideas/runner-coach-light.webp#only-light "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time")
@@ -117,7 +115,6 @@ Start with a mobile web app, access to the phone camera, a vision-capable model,
 
 If you can point the camera at a monument and hear a useful explanation a second later, you've already built the core experience.
 
----
 
 ## 3. The AI chef on your kitchen counter
 
@@ -148,7 +145,6 @@ Then cook dinner with it.
 
 If it can reliably tell you when the pan is too hot or when the onions are ready, you've already built something surprisingly useful.
 
----
 
 ## 4. The AI sales copilot on your call
 
@@ -190,7 +186,7 @@ Then add one rule: detect objections and surface a suggested response.
 Only after that layer in pricing strategies, concessions, and negotiation playbooks.
 
 The goal isn't a perfect copilot.
----
+
 
 ## 5. The AI that argues the other side
 
@@ -227,8 +223,6 @@ Speak your argument. Let it push back.
 
 Once that works, upgrade to full-duplex so it can interrupt you mid-thought — just like a real opponent would.
 
-
----
 
 ## What every one of these has in common
 
