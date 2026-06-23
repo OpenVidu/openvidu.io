@@ -381,6 +381,7 @@ plugins:
         - OpenVidu comparison
         - OpenVidu Platform
         - Release
+        - AI
   - privacy
   - optimize:
       enabled: !ENV [CI, false]
