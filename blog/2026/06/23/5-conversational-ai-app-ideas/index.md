@@ -184,6 +184,6 @@ The hard part was never the AI. It's making the whole loop happen fast enough to
 
 Start with the smallest possible loop — one sensor reading, one camera frame, one spoken reply — and get it talking back to you in under a second. Once that loop feels alive, everything else is just iteration.
 
-And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](https://openvidu.io/latest/ai/custom-agents/) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
+And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](https://openvidu.io/latest/docs/ai/custom-agents/) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
 
 Now go build one of them. We'd love to see what you ship.
