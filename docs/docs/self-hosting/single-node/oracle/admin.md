@@ -5,11 +5,7 @@ description: Learn how to perform administrative tasks on an Oracle Cloud Infras
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
-
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
-
-</div>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
 Oracle Cloud Infrastructure OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
 
@@ -80,6 +76,4 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
 
     Changes will be applied automatically.
 
-## Backup and Restore
-
-Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
+--8<-- "shared/self-hosting/oracle-backup-and-restore.md"

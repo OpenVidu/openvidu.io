@@ -12,10 +12,7 @@ description: Learn how to deploy OpenVidu High Availability on AWS using CloudFo
 </div>
 
 
-!!! info
-    
-    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
-    There's a 15-day free trial waiting for you!
+--8<-- "shared/self-hosting/ha-license-intro.md"
 
 This section contains instructions for deploying a production-ready OpenVidu High Availability deployment on AWS. The deployed services are the same as in the [On Premises High Availability installation](../on-premises/install-nlb.md), but the process is automated through AWS CloudFormation.
 

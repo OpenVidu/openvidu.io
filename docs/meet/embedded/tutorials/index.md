@@ -11,26 +11,30 @@ The following tutorials will walk you through embedding OpenVidu Meet, either di
 
 Every tutorial below shares the same core functionality:
 
--   Users can create rooms.
--   Users can delete rooms.
--   Users can join a room as moderator or speaker.
--   Users can chat with other users.
--   Users may leave the room at any time.
--   Users can view the recordings of the meeting.
--   Moderators can record the meeting.
--   Moderators may end the meeting at any time, disconnecting all users.
+- Users can create rooms.
+- Users can delete rooms.
+- Users can join a room as moderator or speaker.
+- Users can chat with other users.
+- Users may leave the room at any time.
+- Users can view the recordings of the meeting.
+- Moderators can record the meeting.
+- Moderators may end the meeting at any time, disconnecting all users.
 
 <div class="tutorials-container" markdown>
 
 [:material-link:{.icon .lg-icon .tab-icon} **Direct Link**](./direct-link.md){ .md-button .md-button--primary .tutorial-link }
 
-[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link }
+[:simple-webcomponentsdotorg:{.icon .lg-icon .tab-icon} **Web Component**](./webcomponent.md){ .md-button .md-button--primary .tutorial-link .no-height }
+
+[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
 
 </div>
 
 <div class="tutorials-container" markdown>
 
-[:octicons-command-palette-16:{.icon .lg-icon .tab-icon} **Web Component<br>Commands & Events**](./webcomponent-advanced.md){ .md-button .md-button--primary .tutorial-link .no-width .no-height }
+[:material-ticket-account:{.icon .lg-icon .tab-icon} **External Members**](./external-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
+
+[:material-account-key:{.icon .lg-icon .tab-icon} **Registered Members**](./registered-members.md){ .md-button .md-button--primary .tutorial-link .no-height }
 
 [:material-record-rec:{.icon .lg-icon .tab-icon} **Recordings**](./recordings.md){ .md-button .md-button--primary .tutorial-link }
 

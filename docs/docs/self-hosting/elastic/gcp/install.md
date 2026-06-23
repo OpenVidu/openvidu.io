@@ -14,10 +14,7 @@ tags:
 </div>
 
 
-!!! info
-    
-    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
-    There's a 15-day free trial waiting for you!
+--8<-- "shared/self-hosting/elastic-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on Google Cloud Platform. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Google Cloud Platform resources and can be automated through the Google Cloud Console.
 

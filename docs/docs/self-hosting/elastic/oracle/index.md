@@ -1,9 +1,14 @@
+---
+title: OpenVidu Elastic deployment on Oracle Cloud Infrastructure
+description: OpenVidu Elastic deployment on Oracle Cloud Infrastructure
+---
+
 # OpenVidu Elastic deployment on Oracle Cloud Infrastructure
 
-<div class="provider-chip" markdown>
+--8<-- "shared/self-hosting/oracle-provider-chip.md"
 
-:custom-oracle-cloud-infrastructure:{ .provider-chip-icon } Oracle Cloud Infrastructure
+In this section you can install, administer and upgrade OpenVidu Elastic on Oracle Cloud Infrastructure.
 
-</div>
-
-Coming soon! :tools:
+- [**Install**](./install.md): set up a new Oracle Cloud Infrastructure deployment.
+- [**Admin**](./admin.md): configure and manage your Oracle Cloud Infrastructure deployment.
+- [**Upgrade**](./upgrade.md): update an existing Oracle Cloud Infrastructure deployment to the latest version.

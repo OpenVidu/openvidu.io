@@ -11,10 +11,24 @@ nav:
       - Getting started:
           - meet/getting-started/index.md
       - Features:
-          - Rooms and meetings: meet/features/rooms-and-meetings.md
-          - Recordings: meet/features/recordings.md
-          - Users and permissions: meet/features/users-and-permissions.md
-          - Live Captions: meet/features/live-captions.md
+          - Rooms:
+              - Overview: meet/features/rooms/overview.md
+              - Creation & Management: meet/features/rooms/creation-management.md
+              - Room Configuration:
+                  - Room Appearance: meet/features/rooms/appearance.md
+                  - Room Access: meet/features/rooms/access.md
+          - Meetings:
+              - Overview: meet/features/meetings/overview.md
+              - Meeting lifecycle: meet/features/meetings/lifecycle.md
+              - Live Captions: meet/features/meetings/live-captions.md
+              - Smart Layout: meet/features/meetings/smart-layout.md
+              - Role Management: meet/features/meetings/role-management.md
+              - E2E Encryption: meet/features/meetings/e2e-encryption.md
+              - Virtual Background: meet/features/meetings/virtual-background.md
+          - Recordings:
+              - Overview: meet/features/recordings/overview.md
+              - Creation & Management: meet/features/recordings/creation-management.md
+              - Recording configuration: meet/features/recordings/configuration.md
           # - Transcriptions: meet-transcriptions.md
           # - Translations: meet-translations.md
           # - Summaries: meet-summaries.md
@@ -31,6 +45,8 @@ nav:
               - Direct Link: meet/embedded/tutorials/direct-link.md
               - WebComponent: meet/embedded/tutorials/webcomponent.md
               - WebComponent Commands & Events: meet/embedded/tutorials/webcomponent-advanced.md
+              - External Members: meet/embedded/tutorials/external-members.md
+              - Registered Members: meet/embedded/tutorials/registered-members.md
               - Recordings: meet/embedded/tutorials/recordings.md
               - Webhooks: meet/embedded/tutorials/webhooks.md
               # - Next.js: meet/embedded/tutorials/nextjs.md
@@ -129,7 +145,7 @@ nav:
                   - docs/self-hosting/single-node/gcp/index.md
                   - Install: docs/self-hosting/single-node/gcp/install.md
                   - Administration: docs/self-hosting/single-node/gcp/admin.md
-                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md 
+                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md
               - DigitalOcean:
                   - docs/self-hosting/single-node/digitalocean/index.md
                   - Install: docs/self-hosting/single-node/digitalocean/install.md
@@ -201,6 +217,9 @@ nav:
                   - Upgrade: docs/self-hosting/elastic/digitalocean/upgrade.md
               - Oracle:
                   - docs/self-hosting/elastic/oracle/index.md
+                  - Install: docs/self-hosting/elastic/oracle/install.md
+                  - Administration: docs/self-hosting/elastic/oracle/admin.md
+                  - Upgrade: docs/self-hosting/elastic/oracle/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> High Availability:
               - docs/self-hosting/ha/index.md
               - On Premises:
@@ -231,6 +250,9 @@ nav:
                   - Upgrade: docs/self-hosting/ha/digitalocean/upgrade.md
               - Oracle:
                   - docs/self-hosting/ha/oracle/index.md
+                  - Install: docs/self-hosting/ha/oracle/install.md
+                  - Administration: docs/self-hosting/ha/oracle/admin.md
+                  - Upgrade: docs/self-hosting/ha/oracle/upgrade.md
           - Configuration:
               - Changing config: docs/self-hosting/configuration/changing-config.md
               - Config system in depth: docs/self-hosting/configuration/in-depth.md
@@ -336,7 +358,7 @@ plugins:
       categories_allowed:
         - Comparison
         - How-to
-        - Research       
+        - Research
         - Livekit
         - Technology
         - Vertical
@@ -349,6 +371,7 @@ plugins:
         - OpenVidu comparison
         - OpenVidu Platform
         - Release
+        - AI
   - privacy
   - optimize:
       enabled: !ENV [CI, false]
@@ -368,13 +391,13 @@ plugins:
       background: none
       shadow: false
   - rss:
-      match_path: blog/posts/.* 
+      match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
       image: assets/images/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
-        - tags 
+        - tags
   - llmstxt:
       markdown_description: Self-hosted videoconference solution and SDK
       full_output: llms-full.txt
@@ -389,9 +412,20 @@ plugins:
         OpenVidu Meet [BETA]:
         - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
         - meet/getting-started/index.md: OpenVidu Meet - Getting started
-        - meet/features/rooms-and-meetings.md: OpenVidu Meet Features - How to use rooms and meetings
-        - meet/features/recordings.md: OpenVidu Meet Features - Managing recordings
-        - meet/features/users-and-permissions.md: OpenVidu Meet Features - How to manage users and permissions
+        - meet/features/rooms/overview.md: OpenVidu Meet Features - What a room is and its key principles
+        - meet/features/rooms/creation-management.md: OpenVidu Meet Features - Create, edit, list and delete rooms, and configure auto-deletion
+        - meet/features/rooms/appearance.md: OpenVidu Meet Features - Customize the visual appearance of rooms
+        - meet/features/rooms/access.md: OpenVidu Meet Features - Room links and administrator authentication
+        - meet/features/meetings/overview.md: OpenVidu Meet Features - What a meeting is and how to join
+        - meet/features/meetings/lifecycle.md: OpenVidu Meet Features - Meeting lifecycle (Join, Device, Meeting, Recording and End views)
+        - meet/features/meetings/live-captions.md: OpenVidu Meet Features - Enable and use live captions in a meeting
+        - meet/features/meetings/smart-layout.md: OpenVidu Meet Features - Smart adaptive layout in meetings
+        - meet/features/meetings/role-management.md: OpenVidu Meet Features - Participant roles and how to change them
+        - meet/features/meetings/e2e-encryption.md: OpenVidu Meet Features - End-to-end encryption for meetings
+        - meet/features/meetings/virtual-background.md: OpenVidu Meet Features - Virtual background for participants
+        - meet/features/recordings/overview.md: OpenVidu Meet Features - Overview of recordings
+        - meet/features/recordings/creation-management.md: OpenVidu Meet Features - Start, list, share, download and delete recordings
+        - meet/features/recordings/configuration.md: OpenVidu Meet Features - Recording layouts and resolution
         - meet/deployment/overview.md: A comparison of different deployment models for OpenVidu Meet
         - meet/deployment/local.md: How to deploy OpenVidu Meet locally for testing and development purposes
         - meet/deployment/basic.md: How to deploy OpenVidu Meet on-premises within a single server for production use
@@ -401,6 +435,8 @@ plugins:
         - meet/embedded/tutorials/direct-link.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent.md: An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/webcomponent-advanced.md: An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
+        - meet/embedded/tutorials/external-members.md: An OpenVidu Meet tutorial showing how to add external members with a fixed name and a unique access link to a room. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+        - meet/embedded/tutorials/registered-members.md: An OpenVidu Meet tutorial showing how to create users with the Users API and grant them access to a room as registered members. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
         - meet/embedded/tutorials/recordings.md: How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings.
         - meet/embedded/tutorials/webhooks.md: Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
         - meet/embedded/reference/*.md: OpenVidu Meet - Reference documentation
