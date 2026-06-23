@@ -45,18 +45,9 @@ We believe that by combining the best of the LiveKit stack with a top-notch WebR
 
 ## Limitations
 
-OpenVidu developers are hard at work with integrating _mediasoup_ as a WebRTC engine within LiveKit, aiming to provide feature parity with the original Pion engine.
+When choosing mediasoup as the WebRTC engine, these are the only differences with respect to pion:
 
-Currently there are two [client SDK events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){target="\_blank"} that are not triggered when using mediasoup:
-
-- No `ConnectionQualityChanged` event ([LiveKit JS reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/enums/RoomEvent.html#connectionqualitychanged){target="\_blank"}).
-- No `TrackStreamStateChanged` event ([LiveKit JS reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/enums/RoomEvent.html#trackstreamstatechanged){target="\_blank"}).
-
-Also, there are other limitations that must be taken into account:
-
-- All clients will use VP8 video codec.
-- Ingress will force VP8 video codec and will disable simulcast.
-- Screen sharing with simulcast may result in low-resolution video. It is recommended to disable simulcast for screen sharing video tracks to ensure good quality.
+- Audio codec `red` is not supported. REDundant Encoding is available when using pion (see [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/advanced/#audio-red){target="\_blank"}), but mediasoup simply does not implement it yet ([#481 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/issues/481){target="\_blank"}).
 
 ## Benchmarking
 
