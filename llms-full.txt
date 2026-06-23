@@ -1266,6 +1266,196 @@ Start with Single Node, validate your traffic profile, and then move to Elastic 
 
 Your architecture should grow with you — not hold you back.
 
+# 5 conversational AI app ideas you can build this weekend
+
+AI is moving faster than any of us can comfortably keep up with. Every week brings a new model, a new demo, or a viral thread claiming that everything has changed again. Keeping up feels almost impossible.
+
+As AI becomes mainstream, the noise grows even louder. Social feeds are packed with promises of overnight success: build a startup with vibe coding, replace entire teams with a handful of prompts, make money while you sleep.
+
+**This post isn't another one of those promises.**
+
+Instead, you'll find five conversational AI app ideas you can realistically build over a weekend. Some are practical, some are a little unconventional, but all of them will teach you something valuable about how modern AI systems actually work.
+
+More importantly, these aren't just toy projects. They can help you develop real AI skills, build a portfolio, test business ideas, and maybe even create something people are willing to pay for.
+
+## Why real-time is the whole point
+
+The breakout product in this category already has a name: the **AI voice agent**.
+
+Today, these systems are answering business phone lines, handling appointment requests, qualifying leads, resolving common questions, and routing callers to the right person when needed.
+
+Thanks to platforms like [Vapi](https://vapi.ai/) and real-time infrastructure providers such as [LiveKit](https://livekit.io/) or [OpenVidu](https://openvidu.io/), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
+
+But voice agents aren't interesting because they can talk.
+
+They're interesting because they can respond instantly.
+
+A delay of two or three seconds might seem insignificant on paper, but in a conversation it feels broken. People interrupt each other, repeat themselves, wonder if the system heard them, and eventually give up.
+
+That's why real-time matters.
+
+The difference between a natural conversation and a frustrating experience often comes down to latency. The faster the system can listen, process, and respond, the more human the interaction feels.
+
+This is exactly where WebRTC shines. Its low-latency, full-duplex audio and video capabilities make it ideal for conversational AI applications, enabling interactions that feel fluid rather than transactional.
+
+And voice agents are only the beginning.
+
+Let's look at a few more ways WebRTC and conversational AI can be combined to create products people genuinely want to use.
+
+## 1. The AI running coach in your ear
+
+**The idea.** Imagine having a running coach who never falls behind.
+
+This voice assistant runs with you, reads your pace and heart rate from your watch, listens to your breathing, and adapts the workout in real time. You can interrupt whenever you want.
+
+"Slow down.", "Can I push harder?", "This hill is killing me."
+
+Instead of following a fixed training plan, the coach reacts to what's happening right now. When the run ends, it can explain what happened, where you struggled, and what to improve next time.
+
+**What makes it possible now.** A few years ago, this would have required multiple specialised systems stitched together with noticeable delays.
+
+Today, wearable biometrics are widely available, speech models sound natural enough to motivate rather than annoy, and real-time AI pipelines can respond in under a second. The interesting challenge is combining live sensor data with conversational context while keeping responses fast enough to matter.
+
+**Build it this weekend.** The MVP is surprisingly small: a mobile app, Bluetooth headphones, a real-time voice agent, and access to Apple Health or Garmin Connect.
+
+Don't start by building a complete coach.
+
+Start with a single rule: when heart rate crosses a threshold, generate a spoken recommendation. Once that loop works, everything else becomes an iteration.
+
+## 2. The AI tour guide on your smart glasses
+
+**The idea.** Imagine walking through a city and never wondering what you're looking at.
+
+You glance at a monument, a building, a painting, or a restaurant, and an AI guide instantly tells you what makes it interesting. Not as a wall of text, but as a short conversation you can interrupt at any moment.
+
+Tourists are the obvious audience, but locals may be even more interesting. Imagine walking through your own city and discovering the stories behind buildings you've passed hundreds of times, learning about a restaurant before stepping inside, or getting context about an artwork the moment it catches your attention.
+
+**What makes it possible now.** Vision models have become fast enough and conversational enough to turn visual recognition into a real-time experience.
+
+A few years ago, identifying a landmark meant taking a photo, uploading it, and waiting for results. Today, devices such as Meta Ray-Ban glasses can analyse what you're seeing and speak back while you're still looking at it.
+
+**Build it this weekend.** Don't start with smart glasses.
+
+Start with a mobile web app, access to the phone camera, a vision-capable model, and a curated list of landmarks for a single city.
+
+If you can point the camera at a monument and hear a useful explanation a second later, you've already built the core experience.
+
+## 3. The AI chef on your kitchen counter
+
+**The idea.** Prop your phone against the backsplash and start cooking.
+
+The AI watches the pan, listens to what's happening, and guides you through the recipe step by step. Not from a static list of instructions, but from what it can actually see.
+
+"Turn the heat down.", "Add the garlic now.", "The onions need another minute.", "Don't worry about the lumps. Add a splash of water and keep stirring."
+
+You never need to touch the screen with flour-covered or greasy hands. The recipe becomes a conversation.
+
+**What makes it possible now.** For years, cooking apps could only tell you what should happen next.
+
+Now they can see what is happening right now.
+
+Modern vision models can analyse live video, voice systems can maintain a natural conversation, and mobile devices are finally powerful enough to support both at the same time.
+
+The interesting challenge is teaching the system to react to change. A pan that was fine ten seconds ago may be smoking now. The model needs to continuously observe, not just answer a single question about a frozen image.
+
+That's what makes it feel like a chef standing beside you instead of a recipe on a screen.
+
+**Build it this weekend.** Keep the first version simple: a progressive web app, access to the camera, a vision-capable model, and a small collection of carefully tuned recipes.
+
+Then cook dinner with it.
+
+If it can reliably tell you when the pan is too hot or when the onions are ready, you've already built something surprisingly useful.
+
+## 4. The AI sales copilot on your call
+
+**The idea.** You're on a live sales or negotiation call.
+
+The conversation is moving fast. A price is on the table. Objections appear without warning. You don't have time to think — only to respond.
+
+Now imagine having a quiet assistant in your ear, or a small panel on your screen, listening to both sides of the call in real time.
+
+It doesn't take over the conversation.
+
+It sharpens it.
+
+"Budget concern detected — anchor higher."
+
+"They hesitated twice on pricing — offer the annual discount now."
+
+"Counter this objection with the implementation timeline."
+
+You stay in control of the call. The AI simply helps you avoid missed opportunities in the moment they happen.
+
+**What makes it possible now.** For a long time, sales tools could only analyse conversations after they ended.
+
+By then, the deal was already lost or won.
+
+Now models are fast enough to track live speech from both sides of a call, maintain a rolling understanding of intent, and surface actionable suggestions within seconds.
+
+The key challenge isn't understanding language. It's timing. Advice that arrives even slightly too late is no longer useful.
+
+This turns the system into something fundamentally different from analytics: a real-time negotiation partner.
+
+**Build it this weekend.** Start with a single browser-based call listener that transcribes both sides in real time.
+
+Then add one rule: detect objections and surface a suggested response.
+
+Only after that layer in pricing strategies, concessions, and negotiation playbooks.
+
+The goal isn't a perfect copilot.
+
+## 5. The AI that argues the other side
+
+**The idea.** Imagine having a sparring partner that never agrees with you too easily.
+
+You’re preparing for a debate, a tough interview, a salary negotiation, or a sales pitch. Instead of rehearsing alone, you speak your argument out loud — and the AI immediately takes the opposing side.
+
+Not politely. Not neutrally. Properly.
+
+"You said remote work increases productivity — but 2024 collaboration data suggests the opposite. How do you respond to that?"
+
+"You claim this product is differentiated — but what about X competitor?"
+
+Every statement you make is tested in real time. Weak points are exposed immediately, not after the fact.
+
+The goal isn’t to help you speak better.
+
+It’s to help you think sharper under pressure.
+
+**What makes it possible now.** Most AI systems today collapse disagreement into summaries or balanced answers.
+
+But reasoning models are now fast enough to maintain two active perspectives at once — yours and the opposing stance — and generate live counterarguments without losing coherence.
+
+The key challenge is persistence: keeping the AI locked into a position that actively resists you, instead of drifting toward agreement.
+
+Done well, it becomes something closer to a debate partner than a chatbot.
+
+**Build it this weekend.** Start simple: a web app with push-to-talk and an agent instructed to hold a fixed opposing stance.
+
+Speak your argument. Let it push back.
+
+Once that works, upgrade to full-duplex so it can interrupt you mid-thought — just like a real opponent would.
+
+## What every one of these has in common
+
+All of these ideas use conversational AI, and some of them also require equipping the AI with vision or sensor data. But the thing they all share is that they need to be live. The user is talking, the model is responding, and the conversation flows back and forth in real time.
+
+Technically, all of them share the same pipeline:
+
+**Speech-to-text (STT) → Large language model (LLM) → Text-to-speech (TTS)**
+
+The model listens, the model thinks, the model speaks. Add vision or sensor data when the idea calls for it, and the structure barely changes.
+
+The hard part was never the AI. It's making the whole loop happen fast enough to feel like a conversation. That's the transport layer, and it's exactly where most weekend projects quietly fall apart: the demo works on your laptop, then collapses the moment two people, a flaky network, or real latency get involved.
+
+## Pick one and build it this weekend
+
+Start with the smallest possible loop — one sensor reading, one camera frame, one spoken reply — and get it talking back to you in under a second. Once that loop feels alive, everything else is just iteration.
+
+And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](https://openvidu.io/latest/ai/custom-agents/) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
+
+Now go build one of them. We'd love to see what you ship.
+
 # Pricing
 
 |                           | **OpenVidu COMMUNITY**                                                                                                  | **OpenVidu PRO**                                                                                                   |                                                                                                        |                                                                                                                            |
@@ -2066,7 +2256,7 @@ Here’s a simple overview of a typical video call workflow using OpenVidu Meet:
 
 ### 1. Log in to OpenVidu Meet
 
-Access OpenVidu Meet with your administrator credentials. (Learn where to get them [here](https://openvidu.io/3.7.0/meet/features/users-and-permissions/#openvidu-meet-authentication)).
+Access OpenVidu Meet with your administrator credentials. (Learn where to get them [here](https://openvidu.io/3.7.0/meet/features/rooms/access/#root-administrator)).
 
 ### 2. Create your first room
 
@@ -2102,14 +2292,13 @@ Integrate a complete, fully-featured video call solution into your web or mobile
 
 If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](https://openvidu.io/3.7.0/docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.7.0/openvidu-meet-vs-openvidu-platform/index.md).
 
-# Rooms and meetings in OpenVidu Meet
+# Rooms
 
-Understanding **Rooms** and **Meetings** is essential to getting the most out of OpenVidu Meet. These core concepts define how participants interact and how video calls are organized.
+A **Room** is a persistent virtual space designed to host one or more [meetings](https://openvidu.io/3.7.0/meet/features/meetings/overview/index.md) in OpenVidu Meet. Think of it as a physical conference room — customizable with a name, appearance, and security settings.
 
-## Room vs meeting
+## What is a Room
 
-- **Room**: A persistent virtual space designed to host one or more meetings. Think of it as a physical conference room—customizable with a name, appearance, and security settings.
-- **Meeting**: A temporary session within a room where participants join in real-time to communicate, share content, and collaborate. It's like a scheduled event in a conference room.
+Rooms are the entry point to OpenVidu Meet. Every video call happens inside a room, and every room provides the configuration and access controls that govern the meetings that take place in it.
 
 ### Key principles
 
@@ -2117,46 +2306,84 @@ Understanding **Rooms** and **Meetings** is essential to getting the most out of
 - One room can host just one meeting at a time, but it can be reused for multiple meetings over time.
 - Every room has a **room link**. Users connecting to this link will either start a new meeting (if none is active) or join the ongoing meeting.
 
-## Rooms
+## Creation & Management
 
-### Creating a room
+Administrators can create, edit, list and delete rooms from the **Rooms** page in OpenVidu Meet.
 
-As an administrator, you can create a new room directly from the "Rooms" page in OpenVidu Meet. Each room requires a name and can be customized with Advanced Setup options:
+- [Create Rooms](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms) — set a name and configure recording, access control and features at creation time.
+- [Edit Rooms](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#edit-rooms) — modify any room setting while no meeting is active.
+- [List Rooms](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#list-rooms) — browse all rooms, start meetings, access recordings and share links.
+- [Delete Rooms](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#delete-rooms) — remove rooms manually or schedule automatic deletion.
 
-- Set up an [auto-deletion date](#room-auto-deletion).
-- Set up recording settings and access control.
-- Enable/disable features like chat, virtual backgrounds, and E2EE (end-to-end encryption).
+## Room Configuration
 
-\[[](../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark)\](https://openvidu.io/3.7.0/assets/videos/meet/meet-rooms-dark.mp4) \[[](../../../assets/videos/meet/meet-rooms-light.mp4#only-light)\](https://openvidu.io/3.7.0/assets/videos/meet/meet-rooms-light.mp4)
+Each room can be configured independently to match your branding and access requirements.
 
-Available rooms can be managed from the **Rooms** page, where administrators can:
+- [Room Appearance](https://openvidu.io/3.7.0/meet/features/rooms/appearance/index.md) — customise the color scheme of the meeting view.
+- [Room Access](https://openvidu.io/3.7.0/meet/features/rooms/access/index.md) — manage room links per participant role and administrator credentials.
+
+## Room REST API
+
+Every possible action against a room can be done through the [OpenVidu Meet REST API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md):
+
+| Operation          | HTTP Method | Reference                                                                                            |
+| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
+| Create a room      | POST        | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/createRoom)       |
+| Get a room         | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRoom)          |
+| Get all rooms      | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRooms)         |
+| Delete a room      | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/deleteRoom)       |
+| Bulk delete rooms  | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/bulkDeleteRooms)  |
+| Get room config    | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRoomConfig)    |
+| Update room config | PUT         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/updateRoomConfig) |
+
+# Creation & Management
+
+## Create Rooms
+
+OpenVidu Meet internal users with permissions to create and manage rooms can create a new room directly from the **"Rooms"** page in the OpenVidu Meet console. Each room requires a name and can be customized with Advanced Setup options:
+
+- Set up an [auto-deletion date](#room-auto-deletion) and configure [auto-deletion policies](#room-auto-deletion-policies).
+- Enable/disable features like recording, chat, virtual backgrounds, and E2EE (end-to-end encryption).
+- Configure default permissions for each role (`Moderator` and `Speaker`).
+- Enable/disable anonymous access for each role.
+
+\[[](../../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark)\](https://openvidu.io/3.7.0/assets/videos/meet/meet-rooms-dark.mp4) \[[](../../../../assets/videos/meet/meet-rooms-light.mp4#only-light)\](https://openvidu.io/3.7.0/assets/videos/meet/meet-rooms-light.mp4)
+
+Info
+
+Learn more about OpenVidu Meet internal users and their permissions in [OpenVidu Meet internal users](https://openvidu.io/3.7.0/meet/features/rooms/access/#openvidu-meet-internal-users).
+
+## Edit Rooms
+
+Modify room settings anytime from the **Rooms** page, as long as no meeting is currently active. You can update:
+
+- The room name.
+- The [auto-deletion date](#room-auto-deletion) and [auto-deletion policies](#room-auto-deletion-policies).
+- Enable/disable features like recording, chat, virtual backgrounds, and E2EE (end-to-end encryption).
+- Default permissions for each role (`Moderator` and `Speaker`).
+- Anonymous access settings for each role.
+
+## List Rooms
+
+The **Rooms** page lists every available room and lets administrators:
 
 - Start a meeting in a room.
-- Edit room settings anytime (if no meeting is active).
-- Delete rooms individually or in bulk.
+- [Edit room settings](#edit-rooms) anytime (if no meeting is active).
+- [Delete rooms](#delete-rooms) individually or in bulk.
 - Access recordings.
-- Share room links with different permissions (see [Users and permissions](https://openvidu.io/3.7.0/meet/features/users-and-permissions/index.md)).
+- Share [room links](https://openvidu.io/3.7.0/meet/features/rooms/access/#room-links) with different permissions.
 
-\[[](../../../assets/videos/meet/room-actions-dark.mp4#only-dark)\](https://openvidu.io/3.7.0/assets/videos/meet/room-actions-dark.mp4) \[[](../../../assets/videos/meet/room-actions-light.mp4#only-light)\](https://openvidu.io/3.7.0/assets/videos/meet/room-actions-light.mp4)
+\[[](../../../../assets/videos/meet/room-actions-dark.mp4#only-dark)\](https://openvidu.io/3.7.0/assets/videos/meet/room-actions-dark.mp4) \[[](../../../../assets/videos/meet/room-actions-light.mp4#only-light)\](https://openvidu.io/3.7.0/assets/videos/meet/room-actions-light.mp4)
 
-### Editing a room
-
-Modify room settings anytime from the **Rooms** page if no meeting is active. You can:
-
-- Rename the room.
-- Set or update an [auto-deletion date](#room-auto-deletion).
-- Configure recording and access control.
-- Enable or disable features like chat, virtual backgrounds, and E2EE.
-
-### Deleting a room
+## Delete Rooms
 
 Rooms can be deleted individually or in bulk from the **Rooms** page. Deleting a room removes it and all associated data.
 
-#### Room auto-deletion
+### Room auto-deletion
 
-Rooms can be configured with an **auto-deletion date**. You can set this date when [creating](#creating-a-room) or [editing a room](#editing-a-room). This helps keeping OpenVidu Meet clean and organized, avoiding clutter from old rooms that are no longer needed.
+Rooms can be configured with an **auto-deletion date**. You can set this date when [creating](#create-rooms) or [editing a room](#edit-rooms). This helps keeping OpenVidu Meet clean and organized, avoiding clutter from old rooms that are no longer needed.
 
-#### Room auto-deletion policies
+### Room auto-deletion policies
 
 When the auto-deletion date is reached, the room will be deleted. The **Auto-deletion policies** determine how to handle active meetings and stored recordings when attempting to delete the room:
 
@@ -2167,31 +2394,7 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
   - `Force`: the room and all its recordings will be deleted.
   - `Close`: the room will be closed instead of deleted, maintaining its recordings.
 
-### Room links
-
-Rooms have predefined **room links** that grant access to them. Users connecting to a room link will start a new meeting (if no meeting is currently active in the room) or join the existing meeting (if there is one).
-
-Each room has different room links, each one granting access to the room with a specific participant role. See [Participant roles in a meeting](https://openvidu.io/3.7.0/meet/features/users-and-permissions/#participant-roles-in-a-meeting) for more information.
-
-#### Get a room link from the "Rooms" page
-
-Every room item allows sharing the room link for every participant role.
-
-\[[](../../../assets/videos/meet/share-room-link.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-room-link.mp4)
-
-#### Get a room link from an active meeting
-
-Participants with the `Moderator` role can share room links from the active meeting view.
-
-Info
-
-Links copied from the meeting view will always grant access to the room with `Speaker` role. If necessary, users with role `Moderator` can upgrade other user's roles during the meeting. See [Changing participant roles during a meeting](https://openvidu.io/3.7.0/meet/features/users-and-permissions/#changing-participant-roles-during-a-meeting) for more information.
-
-#### Get a room link from the REST API
-
-Available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/schemas/MeetRoom) .
-
-### Room visual customization
+# Room Appearance
 
 Rooms can be customized to fit your branding needs. As for now, you can setup the color scheme of your rooms from the "Configuration" page.
 
@@ -2205,186 +2408,56 @@ You can set separately the color of:
 
 You can also choose between a light and a dark background style, to ensure the displayed text is always readable after applying your color scheme.
 
-### Room REST API
+# Room Access
 
-Every possible action against a room can be done through [OpenVidu Meet REST API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md):
+Access to a room is determined by two complementary mechanisms:
 
-| Operation          | HTTP Method | Reference                                                                                            |
-| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
-| Create a room      | POST        | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/createRoom)       |
-| Get a room         | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRoom)          |
-| Get all rooms      | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRooms)         |
-| Delete a room      | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/deleteRoom)       |
-| Bulk delete rooms  | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/bulkDeleteRooms)  |
-| Get room config    | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRoomConfig)    |
-| Update room config | PUT         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/updateRoomConfig) |
+1. **Room access links**: URLs that grant access to the room with specific permissions.
+1. **OpenVidu Meet internal users**: the console user management system, which controls who can manage rooms and recordings.
 
-## Meetings
+## Room access links
 
-### Starting a meeting
+There are two types of **room access links** that grant access to a room:
 
-A meeting will start as soon as a participant enters an empty room using a valid **room link**. You can learn everything about room links [here](#room-links).
+- **Anonymous access links**: Predefined URLs that allow users to access a room without identification. Permissions are tied to a specific role (`Moderator` or `Speaker`). These links can be shared freely with any user, unless anonymous access for that role has been explicitly disabled for the room.
+- **Room member links**: Custom URLs associated with a specific user and their personalized permissions. For external users, each member has a unique URL that should only be delivered to them. For OpenVidu Meet internal users, the URL is the same for all members of the room, and membership is determined by their authenticated user account.
 
-Users with access to OpenVidu Meet can join a meeting directly from the "Rooms" page:
+See [Room Members](#room-members) for details on creating and managing room member links.
 
-\[[](../../../assets/videos/meet/join-meeting.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/join-meeting.mp4)
+### From the "Rooms" page
 
-Info
+OpenVidu Meet internal users with permissions to manage rooms can share anonymous room access links for each role from the **"Rooms"** page.
 
-Doing this simply opens a new tab with a `Moderator` room link.
+\[[](../../../../assets/videos/meet/share-room-link.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-room-link.mp4)
 
-Users with access to OpenVidu Meet can also copy a room link and share it with external participants:
+### From an active meeting
 
-\[[](../../../assets/videos/meet/share-room-link.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-room-link.mp4)
-
-### Meeting Lifecycle
-
-Meetings consist of different views:
-
-#### Join view
-
-This is the first view participants see when accessing a room link. It allows setting a nickname before joining the meeting. If the participant has the required permissions, they can also access the [Recording view](#recording-view) of this room from here.
-
-#### Device view
-
-This view allows participants tuning their microphone and camera before joining the meeting, as well as setting a virtual background.
-
-\[[](../../../assets/videos/meet/device-view-dark.mp4#only-dark)\](https://openvidu.io/3.7.0/assets/videos/meet/device-view-dark.mp4) \[[](../../../assets/videos/meet/device-view-light.mp4#only-light)\](https://openvidu.io/3.7.0/assets/videos/meet/device-view-light.mp4)
-
-#### Meeting view
-
-The Meeting View is the central interface where all participants can see, hear, and interact with each other in real time. It features a smart, dynamic layout that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.
-
-Users can customize the layout to suit their preferences or meeting requirements. When the number of participants exceeds the maximum visible capacity of the selected layout, a visual badge appears to indicate how many additional participants are currently hidden. This ensures a clean, organized interface while keeping users informed of all attendees.
-
-This intelligent meeting layout enhances collaboration, improves usability, and supports seamless communication in both small and large meetings.
-
-#### Recording view
-
-This view allows to manage the recording of the meeting while it is active. Participants with the required permissions can review, play, download, delete, and share the recording via a link.
+Participants with the `canShareAccessLinks` permission can share room access links from the active meeting view.
 
 Info
 
-Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [Managing recordings](https://openvidu.io/3.7.0/meet/features/recordings/#managing-recordings).
+Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `canMakeModerator` permission can promote other participants to `Moderator` during the meeting. See [Role Management](https://openvidu.io/3.7.0/meet/features/meetings/role-management/#promoting-participants-to-moderator) for more information.
 
-#### End view
+### From the REST API
 
-This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (an administrator ended it, the participant was evicted from the meeting, etc.).
+Anonymous access links are available in properties `anonymous.moderator.accessUrl` and `anonymous.speaker.accessUrl` of object [MeetRoom](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/schemas/MeetRoom) .
 
-# Recordings
+The room owner and internal user members can access the room through the general authenticated access URL in property `accessUrl` of [MeetRoom](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/schemas/MeetRoom) . For external user members, each member has their own unique access URL in property `accessUrl` of each [MeetRoomMember](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/schemas/MeetRoomMember) object.
 
-## Recording a meeting
+## OpenVidu Meet internal users
 
-Recordings must be started by a participant with role "Moderator" in the meeting view (see [Participant roles in a room](https://openvidu.io/3.7.0/meet/features/users-and-permissions/#participant-roles-in-a-room)).
+OpenVidu Meet has an internal user management system that controls access to the OpenVidu Meet console and the ability to create and manage rooms. Internal users are identified by a `userId` and can be assigned one of three roles.
 
-\[[](../../../assets/videos/meet/start-recording.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/start-recording.mp4)
+### Root administrator
 
-While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
+The root administrator is a special user with the fixed `userId` **`admin`**. This user has full control over OpenVidu Meet and cannot be deleted. The root administrator password is set during installation:
 
-To stop the recording, a participant with role "Moderator" must simply click the "Stop recording" button. The recording will be automatically saved in the OpenVidu Meet server.
+- In **local deployments**: the password is always **`admin`**.
+- In **production deployments**: the password is specified during installation (or randomly generated if not provided).
 
-## Viewing recordings
+These credentials are required when accessing the OpenVidu Meet console:
 
-By default, recordings share the same access permissions as their rooms. Whenever a user uses a room link to join a meeting, they will also have the possibility of accessing the list of its previous recordings (if any):
-
-The recording list shows every recording of that particular room:
-
-Participants can also open the list of recordings for that room directly from the meeting view:
-
-\[[](../../../assets/videos/meet/recording-while-meeting.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/recording-while-meeting.mp4)
-
-The recording view allows playing the video, downloading it or creating a [shareable link](#sharing-recordings-via-link):
-
-### Access permissions for recordings
-
-When [creating a new room](https://openvidu.io/3.7.0/meet/features/rooms-and-meetings/#creating-a-room), you can define who is allowed to access and manage the recordings generated within that room. This access control system helps ensure privacy, security, and proper role-based permissions for recorded meetings.
-
-#### Available access options
-
-- **Only admin** Restricts access to recordings exclusively to OpenVidu Meet administrators. This option provides the highest level of security and is ideal for sensitive meetings. Administrators always retain access to recordings from any room.
-- **Admin and moderators** Grants recording access to administrators and participants assigned the **Moderator** role. This configuration allows trusted meeting leaders to review or manage recordings while maintaining controlled access.
-- **Admin, moderators, and speakers** *(default)* Allows administrators, moderators, and participants with the **Speaker** role to access recordings. This default setting offers a balanced approach, promoting collaboration while still enforcing role-based permissions.
-
-Info
-
-Participants with role "Speaker" may only **play** recordings. Administrators and participants with role "Moderator" can also **delete** them.
-
-### Recording layouts
-
-OpenVidu Meet provides multiple **recording layout options** that can be configured when [creating a new room](https://openvidu.io/3.7.0/meet/features/rooms-and-meetings/#creating-a-room). These layouts determine how participants appear in the meeting recording, allowing you to choose the most suitable format for presentations, webinars, or collaborative sessions.
-
-#### Available recording layouts
-
-- **Grid layout** Displays all participants in an evenly spaced grid. This layout is ideal for team meetings, classrooms, or collaborative discussions where seeing all participants simultaneously is important.
-- **Speaker layout** Highlights the active speaker in a larger frame while showing other participants in smaller thumbnails. This layout is perfect for interactive sessions where one participant speaks at a time, keeping the focus on the main speaker.
-- **Single Speaker layout** Records only the active speaker, hiding all other participants. This layout is best suited for presentations, lectures, or interviews where the focus should remain entirely on the speaker.
-
-### Sharing recordings via link
-
-Specific recordings can be shared through a link:
-
-- Users can generate a shareable link from the recording list.
-
-  \[[](../../../assets/videos/meet/share-recording-from-recording-list.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-recording-from-recording-list.mp4)
-
-- Users can generate a shareable link from the recording view.
-
-  \[[](../../../assets/videos/meet/share-recording.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-recording.mp4)
-
-- From OpenVidu Meet console it is possible to generate shareable links for any recording.
-
-  \[[](../../../assets/videos/meet/meet-recording-share-dark.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/meet-recording-share-dark.mp4)
-
-## Room recording settings
-
-Rooms can be configured with different recording settings. You can set up these settings when [creating a new room](https://openvidu.io/3.7.0/meet/features/rooms-and-meetings/#creating-a-room) or [editing an existing room](https://openvidu.io/3.7.0/meet/features/rooms-and-meetings/#editing-a-room).
-
-- **Allow Recording / No recording**: whether to allow recording the room or not.
-- **Recording Access Control**: who can access the recordings of the room. See [Access permissions for viewing recordings](#access-permissions-for-viewing-recordings).
-
-## Managing recordings
-
-OpenVidu Meet console can be used to manage all recordings from the "Recordings" page. It is possible to see all recordings, play them, download them, delete them, and share them via a link:
-
-## Recording REST API
-
-Recordings can be managed via the [OpenVidu Meet REST API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md):
-
-| Operation              | HTTP Method | Reference                                                                                                |
-| ---------------------- | ----------- | -------------------------------------------------------------------------------------------------------- |
-| Get recording          | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecording)         |
-| Get all recordings     | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordings)        |
-| Delete recording       | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/deleteRecording)      |
-| Bulk delete recordings | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/bulkDeleteRecordings) |
-| Download recordings    | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/downloadRecordings)   |
-| Get recording media    | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordingMedia)    |
-| Get recording URL      | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordingUrl)      |
-
-# Users and permissions
-
-## Participant roles in a room
-
-Participants in a room can have different roles, which grant different permissions. The role of a participant is determined by the room link used to join. See [Room links](https://openvidu.io/3.7.0/meet/features/rooms-and-meetings/#room-links) for more information.
-
-Available roles are:
-
-- **Moderator**: grants permissions to end the meeting, start/stop recordings, share room links and manage participants. Also grants permissions of `Speaker` role.
-- **Speaker**: grants permissions to share their camera, microphone and screen.
-
-### Changing participant roles during a meeting
-
-Participants with `Moderator` role can upgrade or downgrade other participants' roles during the meeting from the "Participants" side panel:
-
-## OpenVidu Meet authentication
-
-OpenVidu Meet is by default protected with an administrator **username and password**. These credentials will be required when accessing OpenVidu Meet console:
-
-The initial administrator credentials are:
-
-- **Username**: **`admin`**
-- **Password**: specified on installation time
-
-The value of the password will be asked on installation. If left empty, a random password will be generated. The location of the administration password depends on the environment of the deployment:
+The location of the initial administrator password depends on the deployment environment:
 
 Credentials are always username **`admin`** and password **`admin`**.
 
@@ -2401,23 +2474,478 @@ OpenVidu Meet is available at:
 
 Warning
 
-If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
+If you [modify the administrator password](#changing-credentials), this value will no longer be valid.
 
 In the Secrets Manager of the CloudFormation stack, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
 Warning
 
-If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
+If you [modify the administrator password](#changing-credentials), this value will no longer be valid.
 
 In the Azure Key Vault, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
 
 Warning
 
-If you [modify the initial administrator password](#modify-openvidu-meet-authentication), this value will no longer be valid.
+If you [modify the administrator password](#changing-credentials), this value will no longer be valid.
 
-### Modify OpenVidu Meet authentication
+### Internal user roles
 
-Administrator credentials can be modified from the **"User & Permissions"** view:
+Internal users can have one of the following roles:
+
+| Role            | Description      | Permissions                                                                                                                      |
+| --------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **admin**       | Administrator    | Full control over OpenVidu Meet, including user management, room creation and management for all rooms, and system configuration |
+| **user**        | Regular user     | Can create and manage their own rooms, assign room members, and configure room settings                                          |
+| **room_member** | Room member only | Can only access rooms where they have been explicitly added as a member; cannot create or manage rooms                           |
+
+### Managing internal users
+
+Internal users with the **admin** role can manage other internal users from the OpenVidu Meet console in the **"Users & Permissions"** view. From there, administrators can:
+
+- **Create new users**: Add new internal users with a `userId`, name, password, and role.
+- **Delete users**: Remove internal users from the system.
+
+Info
+
+The root administrator (**`admin`**) cannot be deleted, but its password can be changed.
+
+### Changing credentials
+
+User credentials can be modified from the **"Users & Permissions"** view:
+
+## Room members
+
+Room members are specific individuals (internal users or external users) with personalized access to a room. There are two ways users can access a room: as **anonymous users** using anonymous room access links, or as **explicit room members** with customized permissions.
+
+### Anonymous access vs. explicit room members
+
+| Access Type               | How it works                                                                                                                                                                                                                           | Use case                                                                                                             |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Anonymous access**      | Any user can access by using the predefined anonymous `Moderator` or `Speaker` room access links. Users are assigned standard role permissions. Anonymous access can be enabled or disabled per role when creating or updating a room. | Quick meetings, public rooms, or scenarios where you don't need to track specific individuals.                       |
+| **Explicit room members** | Specific individuals are added as room members with personalized URLs and custom permissions. Each member has a fixed name and tailored access.                                                                                        | Controlled access, pre-defined names, custom permissions, and the ability to revoke access for specific individuals. |
+
+### Internal users vs. external users
+
+When creating a room member, you can designate them as either an **internal user** (someone with an OpenVidu Meet `userId`) or an **external user** (someone without an OpenVidu Meet account):
+
+| Aspect             | Internal users                                                                                                     | External users                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| **Identification** | Identified by their OpenVidu Meet `userId`                                                                         | Identified by a generated `ext-XXX` ID                                       |
+| **Access URL**     | All internal user room members share the same access URL for the room. They are identified through authentication. | Each external user receives a unique access URL that must not be shared      |
+| **Authentication** | Must authenticate with their OpenVidu Meet credentials when accessing the room                                     | No authentication required; access is granted via the unique URL             |
+| **Use case**       | For team members, employees, or regular collaborators with OpenVidu Meet accounts                                  | For guests, clients, or one-time participants without OpenVidu Meet accounts |
+
+### Creating room members
+
+Room members can be created via the [REST API](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/addRoomMember) . When creating a member, you specify:
+
+- **User type**: Whether the member is an internal user (provide `userId`) or an external user (provide `name`).
+- **Base role**: Either `moderator` or `speaker`, which defines the initial set of permissions.
+- **Custom permissions**: Optional overrides to grant or restrict specific capabilities beyond the base role.
+
+The API returns a member object containing:
+
+- **Member ID**: The unique identifier for this room member.
+- **Name**: The fixed name that will be displayed in the meeting.
+- **Access URL**: The URL to access the room (shared for internal users, unique for external users).
+- **Permissions**: The final set of permissions assigned to the member.
+
+### Managing room members
+
+Room members can be managed through the REST API:
+
+- **List all members**: [GET /rooms/:roomId/members](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRoomMembers)
+- **Retrieve member information**: [GET /rooms/:roomId/members/:memberId](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRoomMember)
+- **Update member permissions**: [PATCH /rooms/:roomId/members/:memberId](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/updateRoomMember)
+- **Delete a member**: [DELETE /rooms/:roomId/members/:memberId](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/deleteRoomMember)
+
+Warning
+
+When a room member is deleted, their access is immediately revoked. If they are currently in an active meeting, they will be expelled from it.
+
+# Meetings
+
+A **Meeting** is a temporary session within a [room](https://openvidu.io/3.7.0/meet/features/rooms/overview/index.md) where participants join in real-time to communicate, share content, and collaborate. It starts when the first participant connects and ends when the last one leaves — or when a moderator explicitly closes it.
+
+## What is a Meeting
+
+Every meeting takes place inside a room. Unlike rooms (which are persistent), a meeting only exists while at least one participant is connected. The same room can host many meetings over time, one at a time.
+
+## How to join a meeting
+
+A meeting starts as soon as a participant opens a valid **room link** into an empty room. You can learn everything about room links [here](https://openvidu.io/3.7.0/meet/features/rooms/access/#room-links).
+
+Users with access to OpenVidu Meet can join a meeting directly from the "Rooms" page:
+
+\[[](../../../../assets/videos/meet/join-meeting.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/join-meeting.mp4)
+
+Info
+
+Doing this simply opens a new tab with a `Moderator` room link.
+
+Users can also copy a room link and share it with external participants:
+
+\[[](../../../../assets/videos/meet/share-room-link.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-room-link.mp4)
+
+## Meeting lifecycle
+
+From the moment a participant opens a room link until the meeting ends, they move through a series of views. See [Meeting lifecycle](https://openvidu.io/3.7.0/meet/features/meetings/lifecycle/index.md) for a full description of the Join, Device, Meeting, Recording and End views.
+
+## Meeting features
+
+OpenVidu Meet provides a set of built-in features that enhance accessibility and collaboration during a live session:
+
+- [Live Captions](https://openvidu.io/3.7.0/meet/features/meetings/live-captions/index.md) — real-time speech-to-text transcription powered by the OpenVidu Speech Processing Agent.
+- [Smart Layout](https://openvidu.io/3.7.0/meet/features/meetings/smart-layout/index.md) — dynamic layout that adapts automatically to the number of active participants.
+- [Role Management](https://openvidu.io/3.7.0/meet/features/meetings/role-management/index.md) — Moderator and Speaker roles with per-room assignment via room links, and runtime role changes.
+- [E2E Encryption](https://openvidu.io/3.7.0/meet/features/meetings/e2e-encryption/index.md) — end-to-end encrypted audio, video and chat so only participants can decrypt the content.
+- [Virtual Background](https://openvidu.io/3.7.0/meet/features/meetings/virtual-background/index.md) — blur or replace the camera background before or during a meeting.
+
+# Meeting lifecycle
+
+Meetings consist of different views, shown to participants in sequence from the moment they open a room link until the meeting ends.
+
+## Join view
+
+This is the first view participants see when accessing a room link. It allows setting a nickname before joining the meeting. If the participant has the required permissions, they can also access the [Recording view](#recording-view) of this room from here.
+
+## Device view
+
+This view allows participants tuning their microphone and camera before joining the meeting, as well as setting a [virtual background](https://openvidu.io/3.7.0/meet/features/meetings/virtual-background/index.md).
+
+\[[](../../../../assets/videos/meet/device-view-dark.mp4#only-dark)\](https://openvidu.io/3.7.0/assets/videos/meet/device-view-dark.mp4) \[[](../../../../assets/videos/meet/device-view-light.mp4#only-light)\](https://openvidu.io/3.7.0/assets/videos/meet/device-view-light.mp4)
+
+## Meeting view
+
+The Meeting View is the central interface where all participants can see, hear, and interact with each other in real time. It features a [smart, dynamic layout](https://openvidu.io/3.7.0/meet/features/meetings/smart-layout/index.md) that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.
+
+## Recording view
+
+This view allows to manage the recording of the meeting while it is active. Participants with the required permissions can review, play, download, delete, and share the recording via a link.
+
+Info
+
+Recordings can also be accessed from the "Recordings" page in OpenVidu Meet, even after the meeting has ended. See [List Recordings](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/#list-recordings).
+
+## End view
+
+This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (an administrator ended it, the participant was evicted from the meeting, etc.).
+
+# Live Captions
+
+OpenVidu Meet includes a built-in **Live Captions** feature that turns speech into text in real-time. This is a powerful tool for making your meetings more accessible to hearing-impaired users, helping participants in noisy environments, and assisting non-native speakers.
+
+## How to Enable Live Captions in OpenVidu Meet
+
+Local Meet Deployment Limitation
+
+Live Captions are **not available** in local Meet deployments. You must use either the [OpenVidu Local deployment](https://openvidu.io/3.7.0/docs/self-hosting/local/index.md) or a [OpenVidu production deployment](https://openvidu.io/3.7.0/docs/self-hosting/deployment-types/index.md) to enable this feature.
+
+### 1. Connect to your OpenVidu deployment
+
+SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
+
+Depending on your [OpenVidu deployment type](https://openvidu.io/3.7.0/meet/features/docs/self-hosting/deployment-types.md):
+
+If you are using [OpenVidu Local (Development)](https://openvidu.io/3.7.0/meet/features/docs/self-hosting/deployment-types.md#openvidu-local-development), simply navigate to the configuration folder of the project:
+
+```bash
+# For OpenVidu Local COMMUNITY
+cd openvidu-local-deployment/community
+
+# For OpenVidu Local PRO
+cd openvidu-local-deployment/pro
+```
+
+If you are using [OpenVidu Single Node](https://openvidu.io/3.7.0/meet/features/docs/self-hosting/deployment-types.md#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
+
+```bash
+cd /opt/openvidu/config
+```
+
+If you are using [OpenVidu Elastic](https://openvidu.io/3.7.0/meet/features/docs/self-hosting/deployment-types.md#openvidu-elastic), SSH into the only Master Node and navigate to:
+
+```bash
+cd /opt/openvidu/config/cluster/media_node
+```
+
+If you are using [OpenVidu High Availability](https://openvidu.io/3.7.0/meet/features/docs/self-hosting/deployment-types.md#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
+
+```bash
+cd /opt/openvidu/config/cluster/media_node
+```
+
+### 2. Enable the Speech Processing Agent
+
+Modify file `agent-speech-processing.yaml` to enable the Live Captions Service with `processing: manual`:
+
+```yaml
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.7.0
+
+enabled: true # (1)!
+
+live_captions:
+  processing: manual # (2)!
+```
+
+1. Set `enabled` to `true` to activate the Speech Processing Agent.
+1. Set **processing** to `manual`; participants will activate captions on demand via a toolbar button.
+
+Info
+
+By default, the Speech Processing Agent uses a local Vosk model for speech-to-text transcription.
+
+For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](https://openvidu.io/3.7.0/docs/ai/live-captions/#cloud-providers) for more information.
+
+Default language is English
+
+The Speech Processing Agent uses **English** for speech-to-text transcription by default. To use a different language, you must configure a different Vosk model. See [Vosk models configuration](https://openvidu.io/3.7.0/docs/ai/live-captions/#vosk) for details on changing the language model.
+
+### 3. Enable Captions in OpenVidu Meet configuration
+
+Edit the `meet.env` file and ensure the following configuration variable is set:
+
+```text
+MEET_CAPTIONS_ENABLED=true
+```
+
+### 4. Restart OpenVidu
+
+Apply your changes by restarting OpenVidu. This ensures the system recognizes the new live captioning capabilities.
+
+Depending on your [OpenVidu deployment type](https://openvidu.io/3.7.0/meet/features/docs/self-hosting/deployment-types.md):
+
+Run where `docker-compose.yaml` is located:
+
+```bash
+docker compose restart
+```
+
+Run this command in your node:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+Run this command in your Master Node:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+Run this command in one of your Master Nodes:
+
+```bash
+sudo systemctl restart openvidu
+```
+
+### 5. Enable/Disable Captions for specific Rooms
+
+Captions are enabled by default when a room is created, whether through the UI or the [REST API](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/createRoom). This behavior can be overridden to enable or disable captions on a per-room basis.
+
+## Using Live Captions in a Meeting
+
+Once live captions are enabled for a room, participants can activate them during the meeting:
+
+1. **Activate Captions:** Click the **captions button** in the toolbar to enable live captions.
+1. **Real-time Transcription:** Once activated, captions appear instantly at the bottom of the screen as participants speak—no additional configuration is required.
+1. **Clear Visibility:** The interface is designed to be easy to read without blocking the video feed.
+
+# Smart Layout
+
+The Meeting View features a smart, dynamic layout that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.
+
+Users can customize the layout to suit their preferences or meeting requirements. When the number of participants exceeds the maximum visible capacity of the selected layout, a visual badge appears to indicate how many additional participants are currently hidden. This ensures a clean, organized interface while keeping users informed of all attendees.
+
+This intelligent meeting layout enhances collaboration, improves usability, and supports seamless communication in both small and large meetings.
+
+# Role Management
+
+Participants in a meeting are assigned a role that determines their default set of permissions. The role is determined by the [room access link](https://openvidu.io/3.7.0/meet/features/rooms/access/#getting-room-access-links) used to join.
+
+## Predefined roles
+
+### Moderator
+
+Grants full meeting permissions by default:
+
+- **Meeting management**: end the meeting for all participants
+- **Recording control** (`canRecord`): start/stop recordings, retrieve and delete recordings
+- **Participant management** (`canMakeModerator`): promote other participants to moderator; (`canShareAccessLinks`): share room access links; kick participants
+- **Media publishing**: publish video, audio, and share screen
+- **Communication**: send chat messages, change virtual background
+
+### Speaker
+
+Grants basic participation permissions by default:
+
+- **Media publishing**: publish video, audio, and share screen
+- **Communication**: send chat messages, change virtual background
+
+Info
+
+The default permissions for `Moderator` and `Speaker` roles can be customized per room when [creating](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms) or [editing](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#edit-rooms) it. For the complete list of available permissions, see the [REST API](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/schemas/MeetPermissions) .
+
+## Promoting participants to moderator
+
+During an active meeting, participants with the `canMakeModerator` permission can promote or demote other participants from the **"Participants"** side panel:
+
+When a participant is promoted to moderator:
+
+- They receive all permissions associated with the `Moderator` role.
+- The promotion applies only to the current session and does not modify their configured permissions.
+- The promotion can be undone by demoting the participant back to their original role.
+
+# E2E Encryption
+
+OpenVidu Meet supports **end-to-end encryption (E2EE)** for audio, video, and chat. When enabled, only the participants in the meeting can decrypt the media — not even the OpenVidu Meet server can access the content.
+
+E2EE can be enabled on a per-room basis when [creating](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms) or [editing a room](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#edit-rooms).
+
+Documentation coming soon
+
+Detailed documentation about E2E Encryption configuration and limitations is on the way.
+
+# Virtual Background
+
+Participants can replace their camera background with a blur effect or a custom image, either before joining the meeting (from the [Device view](https://openvidu.io/3.7.0/meet/features/meetings/lifecycle/#device-view)) or once already in the [Meeting view](https://openvidu.io/3.7.0/meet/features/meetings/lifecycle/#meeting-view).
+
+Virtual backgrounds can be enabled or disabled on a per-room basis when [creating](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms) or [editing a room](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#edit-rooms).
+
+Documentation coming soon
+
+Detailed documentation about Virtual Background options and recommendations is on the way.
+
+# Recordings
+
+OpenVidu Meet can record [meetings](https://openvidu.io/3.7.0/meet/features/meetings/overview/index.md) and store them on the server so they can be played back, shared and downloaded at any time — even after the meeting has ended.
+
+## Overview
+
+Recordings are always associated with the [room](https://openvidu.io/3.7.0/meet/features/rooms/overview/index.md) where they were generated. They inherit the room's access permissions by default and are accessible both from within the room and from the global "Recordings" page of the OpenVidu Meet console.
+
+### Key principles
+
+- Recordings can only be started by a participant with `Moderator` role.
+- A room must have recording enabled in its [configuration](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms) to allow starting recordings.
+- Recordings persist after the meeting ends and can be managed independently from the "Recordings" page.
+- Each recording inherits the [access permissions](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/#access-permissions-for-recordings) defined in its room.
+
+## Creation & Management
+
+Moderators start and stop recordings during a live meeting. Afterwards, anyone with the right permissions can browse, share, download or delete them.
+
+- [Start / Stop recording](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/#start-stop-recording) — how a Moderator starts and stops a recording during a meeting.
+- [List Recordings](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/#list-recordings) — browse all recordings from the console or from the room's join view, including access permission rules.
+- [Share & Download](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/#share-download) — generate shareable links or download recording files.
+- [Delete Recordings](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/#delete-recordings) — remove recordings individually or in bulk.
+
+## Recording configuration
+
+Recording behaviour can be tuned per room at creation time or when editing a room.
+
+- [Recording layouts](https://openvidu.io/3.7.0/meet/features/recordings/configuration/#recording-layouts) — choose between Grid, Speaker and Single Speaker layouts.
+- [Recording resolution](https://openvidu.io/3.7.0/meet/features/recordings/configuration/#recording-resolution) — configure the resolution to balance quality and storage.
+
+## Recording REST API
+
+Recordings can be managed via the [OpenVidu Meet REST API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md):
+
+| Operation              | HTTP Method | Reference                                                                                                |
+| ---------------------- | ----------- | -------------------------------------------------------------------------------------------------------- |
+| Get recording          | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecording)         |
+| Get all recordings     | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordings)        |
+| Delete recording       | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/deleteRecording)      |
+| Bulk delete recordings | DELETE      | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/bulkDeleteRecordings) |
+| Download recordings    | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/downloadRecordings)   |
+| Get recording media    | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordingMedia)    |
+| Get recording URL      | GET         | [Reference](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordingUrl)      |
+
+# Creation & Management
+
+## Start / Stop recording
+
+Recordings must be started by a participant with the `canRecord` permission in the meeting view (see [Role Management](https://openvidu.io/3.7.0/meet/features/meetings/role-management/index.md)).
+
+\[[](../../../../assets/videos/meet/start-recording.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/start-recording.mp4)
+
+While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
+
+To stop the recording, a participant with the `canRecord` permission must simply click the **"Stop recording"** button. The recording will be automatically saved in the OpenVidu Meet server.
+
+## List Recordings
+
+OpenVidu Meet console can be used to manage all recordings from the "Recordings" page. It is possible to see all recordings, play them, download them, delete them, and share them via a link:
+
+By default, recordings share the same access permissions as their rooms. Whenever a user uses a room link to join a meeting, they will also have the possibility of accessing the list of its previous recordings (if any):
+
+The recording list shows every recording of that particular room:
+
+Participants can also open the list of recordings for that room directly from the meeting view:
+
+\[[](../../../../assets/videos/meet/recording-while-meeting.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/recording-while-meeting.mp4)
+
+The recording view allows playing the video, downloading it or creating a [shareable link](#share-download):
+
+### Access permissions for recordings
+
+When [creating a new room](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms), you can define who is allowed to access and manage the recordings generated within that room. This access control system helps ensure privacy, security, and proper role-based permissions for recorded meetings.
+
+#### Available access options
+
+- **Only admin** Restricts access to recordings exclusively to OpenVidu Meet administrators. This option provides the highest level of security and is ideal for sensitive meetings. Administrators always retain access to recordings from any room.
+- **Admin and moderators** Grants recording access to administrators and participants assigned the **Moderator** role. This configuration allows trusted meeting leaders to review or manage recordings while maintaining controlled access.
+- **Admin, moderators, and speakers** *(default)* Allows administrators, moderators, and participants with the **Speaker** role to access recordings. This default setting offers a balanced approach, promoting collaboration while still enforcing role-based permissions.
+
+Info
+
+Participants with role "Speaker" may only **play** recordings. Administrators and participants with role "Moderator" can also **delete** them.
+
+## Share & Download
+
+Specific recordings can be shared through a link:
+
+- Users can generate a shareable link from the recording list.
+
+  \[[](../../../../assets/videos/meet/share-recording-from-recording-list.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-recording-from-recording-list.mp4)
+
+- Users can generate a shareable link from the recording view.
+
+  \[[](../../../../assets/videos/meet/share-recording.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/share-recording.mp4)
+
+- From OpenVidu Meet console it is possible to generate shareable links for any recording.
+
+  \[[](../../../../assets/videos/meet/meet-recording-share-dark.mp4)\](https://openvidu.io/3.7.0/assets/videos/meet/meet-recording-share-dark.mp4)
+
+Recordings can also be **downloaded** from the recording view and from the "Recordings" page, as well as from the [REST API](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/index.md#recording-rest-api).
+
+## Delete Recordings
+
+Recordings can be deleted individually or in bulk from the "Recordings" page in OpenVidu Meet console, as well as from the recording view (if the user has the required permissions). Recordings can also be deleted through the [REST API](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/index.md#recording-rest-api).
+
+Info
+
+Only administrators and participants with role "Moderator" can delete recordings. See [Access permissions for recordings](#access-permissions-for-recordings).
+
+# Recording configuration
+
+## Recording layouts
+
+OpenVidu Meet provides multiple **recording layout options** that can be configured when [creating a new room](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/#create-rooms). These layouts determine how participants appear in the meeting recording, allowing you to choose the most suitable format for presentations, webinars, or collaborative sessions.
+
+### Available recording layouts
+
+- **Grid layout** Displays all participants in an evenly spaced grid. This layout is ideal for team meetings, classrooms, or collaborative discussions where seeing all participants simultaneously is important.
+- **Speaker layout** Highlights the active speaker in a larger frame while showing other participants in smaller thumbnails. This layout is perfect for interactive sessions where one participant speaks at a time, keeping the focus on the main speaker.
+- **Single Speaker layout** Records only the active speaker, hiding all other participants. This layout is best suited for presentations, lectures, or interviews where the focus should remain entirely on the speaker.
+
+## Recording resolution
+
+OpenVidu Meet records meetings at a configurable resolution that balances quality and storage size.
+
+Documentation coming soon
+
+Detailed documentation about supported recording resolutions and how to configure them per room is on the way.
 
 # OpenVidu Meet deployment overview
 
@@ -2611,7 +3139,7 @@ You can use the [REST API](https://openvidu.io/3.7.0/meet/embedded/reference/res
 
 - API Key: `meet-api-key`
 
-You can change them later from the [OpenVidu Meet Users And Permissions](https://openvidu.io/3.7.0/meet/features/users-and-permissions/#modify-openvidu-meet-authentication).
+You can change them later from the [OpenVidu Meet console](https://openvidu.io/3.7.0/meet/features/rooms/access.md#changing-credentials).
 
 ## Managing the deployment
 
@@ -3314,7 +3842,7 @@ This will show the list of recordings for the specified room:
 
 To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
 
-- [OpenVidu Meet console](https://openvidu.io/3.7.0/meet/features/recordings/#sharing-recordings-via-link)
+- [OpenVidu Meet console](https://openvidu.io/3.7.0/meet/features/recordings/creation-management.md#share-download)
 - [Programmatically via REST API](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/getRecordingUrl)
 
 ```html
@@ -3487,27 +4015,13 @@ app.post('/rooms', async (req, res) => {
     try {
         // Create a new OpenVidu Meet room using the API
         const room = await httpRequest('POST', 'rooms', {
-            roomName, // (3)!
-            config: {
-                // (4)!
-                // Default room configuration
-                chat: {
-                    enabled: true // Enable chat for this room
-                },
-                recording: {
-                    enabled: true, // Enable recording for this room
-                    allowAccessTo: 'admin_moderator_speaker' // Allow access to recordings for admin, moderator and speaker roles
-                },
-                virtualBackground: {
-                    enabled: true // Enable virtual background for this room
-                }
-            }
+            roomName // (3)!
         });
 
         console.log('Room created:', room);
-        res.status(201).json({ message: `Room '${roomName}' created successfully`, room }); // (5)!
+        res.status(201).json({ message: `Room '${roomName}' created successfully`, room }); // (4)!
     } catch (error) {
-        handleApiError(res, error, `Error creating room '${roomName}'`); // (6)!
+        handleApiError(res, error, `Error creating room '${roomName}'`); // (5)!
     }
 });
 ```
@@ -3515,7 +4029,6 @@ app.post('/rooms', async (req, res) => {
 1. The `roomName` parameter is obtained from the request body.
 1. If the `roomName` is not provided, the server returns a `400 Bad Request` response.
 1. Specify the name of the room.
-1. Set the configuration for the room, enabling chat, recording and virtual background.
 1. The server returns a `201 Created` response with the room object.
 1. If an error occurs during room creation, it is handled by the `handleApiError` function.
 
@@ -3523,15 +4036,11 @@ This endpoint does the following:
 
 1. The `roomName` parameter is obtained from the request body. If it is not provided, the server returns a `400 Bad Request` response.
 
-1. A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint. The request includes the room name and additional configuration options (with default values):
-
-   - **Chat Configuration**: Enables chat functionality for the room.
-   - **Recording Configuration**: Enables recording for the room and allows access to recordings for the roles `admin`, `moderator` and `speaker`.
-   - **Virtual Background Configuration**: Enables virtual background functionality for the room.
+1. A new room is created using the OpenVidu Meet API by sending a `POST` request to the `rooms` endpoint, including the room name. The room is created with its default configuration.
 
    Info
 
-   The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference](https://openvidu.io/3.7.0/meet/assets/htmls/rest-api.html#/operations/createRoom) .
+   You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference](https://openvidu.io/3.7.0/meet/assets/htmls/rest-api.html#/operations/createRoom) .
 
    To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
@@ -3597,7 +4106,7 @@ The `GET /rooms` endpoint retrieves the list of all rooms created in OpenVidu Me
 
 ```javascript
 // List all rooms
-app.get('/rooms', (_req, res) => {
+app.get('/rooms', async (_req, res) => {
     try {
         // List all OpenVidu Meet rooms using the API (100 max)
         const { rooms } = await httpRequest('GET', 'rooms?maxItems=100'); // (1)!
@@ -3625,7 +4134,8 @@ app.delete('/rooms/:roomId', async (req, res) => {
 
     try {
         // Delete the OpenVidu Meet room using the API
-        await httpRequest('DELETE', `rooms/${roomId}`); // (2)!
+        // We use the 'force' parameters to ensure that the room is deleted even if there are active meetings or recordings
+        await httpRequest('DELETE', `rooms/${roomId}?withMeeting=force&withRecordings=force`); // (2)!
         res.status(200).json({ message: `Room '${roomId}' deleted successfully` }); // (3)!
     } catch (error) {
         handleApiError(res, error, `Error deleting room '${roomId}'`);
@@ -3634,13 +4144,13 @@ app.delete('/rooms/:roomId', async (req, res) => {
 ```
 
 1. The `roomId` parameter is obtained from the request parameters.
-1. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint.
+1. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint. The `withMeeting=force` and `withRecordings=force` query parameters ensure the room is deleted even if it has an active meeting or associated recordings.
 1. The server returns a `200 OK` response with a success message.
 
 This endpoint does the following:
 
 1. The `roomId` parameter is obtained from the request parameters.
-1. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint.
+1. The room is deleted using the OpenVidu Meet API by sending a `DELETE` request to the `rooms/:roomId` endpoint. The `withMeeting=force` and `withRecordings=force` query parameters are included to ensure the room is deleted even if it has an active meeting or associated recordings.
 1. If the room is successfully deleted, the server returns a `200 OK` response with a success message. Otherwise, the error is handled by the `handleApiError` function.
 
 ______________________________________________________________________
@@ -3768,13 +4278,13 @@ function getRoomListItemTemplate(room) {
             <div class="room-actions">
                 <a
                     class="btn btn-primary btn-sm"
-                    href="${room.moderatorUrl}"
+                    href="${room.access.anonymous.moderator.url}"
                 >
                     Join as Moderator
                 </a>
                 <a
                     class="btn btn-secondary btn-sm"
-                    href="${room.speakerUrl}"
+                    href="${room.access.anonymous.speaker.url}"
                 >
                     Join as Speaker
                 </a>
@@ -3803,7 +4313,7 @@ The `renderRooms()` function performs the following actions:
 1. For each room in the `rooms` map, it calls the `getRoomListItemTemplate()` function to get the HTML template for the room list item.
 1. Appends the room item to the list element.
 
-The `getRoomListItemTemplate()` function generates the HTML template for each room list item. It includes anchor links to join the room as a moderator or speaker using direct URLs, and a button to delete the room. The anchor links use the `moderatorUrl` and `speakerUrl` properties from the room object to redirect users directly to the OpenVidu Meet interface, while the delete button calls the `deleteRoom()` function passing the room ID to remove the room from the server.
+The `getRoomListItemTemplate()` function generates the HTML template for each room list item. It includes anchor links to join the room as a moderator or speaker using direct URLs, and a button to delete the room. The anchor links use the `room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url` properties from the room object to redirect users directly to the OpenVidu Meet interface, while the delete button calls the `deleteRoom()` function passing the room ID to remove the room from the server.
 
 ______________________________________________________________________
 
@@ -3812,26 +4322,28 @@ ______________________________________________________________________
 After the user specifies the room name and clicks the `Create Room` button, the `createRoom()` function is called:
 
 ```javascript
-async function createRoom() {
+async function createRoom(e) {
+    // Prevent the default form submission
+    e.preventDefault(); // (1)!
+
     // Clear previous error message
     const errorDiv = document.querySelector('#create-room-error');
     errorDiv.textContent = '';
     errorDiv.hidden = true;
 
     try {
-        const roomName = document.querySelector('#room-name').value; // (1)!
-
+        const roomName = document.querySelector('#room-name').value; // (2)!
         const { room } = await httpRequest('POST', '/rooms', {
             roomName
-        }); // (2)!
+        }); // (3)!
 
         // Add new room to the list
-        rooms.set(room.roomId, room); // (3)!
-        renderRooms(); // (4)!
+        rooms.set(room.roomId, room); // (4)!
+        renderRooms(); // (5)!
 
         // Reset the form
         const createRoomForm = document.querySelector('#create-room form');
-        createRoomForm.reset(); // (5)!
+        createRoomForm.reset(); // (6)!
     } catch (error) {
         console.error('Error creating room:', error.message);
 
@@ -3842,6 +4354,7 @@ async function createRoom() {
 }
 ```
 
+1. Prevent the default form submission so the page is not reloaded.
 1. Get the room name from the input field.
 1. Make a `POST` request to the `/rooms` endpoint to create a new room with the specified name.
 1. Add the new room to the `rooms` map.
@@ -3850,6 +4363,7 @@ async function createRoom() {
 
 The `createRoom()` function performs the following actions:
 
+1. Prevents the default form submission, as it is invoked as the `submit` handler of the create room form.
 1. Clears any previous error messages.
 1. Gets the room name from the input field.
 1. Makes a `POST` request to the `/rooms` endpoint to create a new room with the specified name.
@@ -4046,13 +4560,13 @@ function getRoomListItemTemplate(room) {
             <div class="room-actions">
                 <button
                     class="btn btn-primary btn-sm"
-                    onclick="joinRoom('${room.moderatorUrl}');"
+                    onclick="joinRoom('${room.access.anonymous.moderator.url}');"
                 >
                     Join as Moderator
                 </button>
                 <button
                     class="btn btn-secondary btn-sm"
-                    onclick="joinRoom('${room.speakerUrl}');"
+                    onclick="joinRoom('${room.access.anonymous.speaker.url}');"
                 >
                     Join as Speaker
                 </button>
@@ -4266,7 +4780,7 @@ function getRoomListItemTemplate(room) {
                     class="btn btn-primary btn-sm"
                     onclick="joinRoom(
                         '${room.roomName}', 
-                        '${room.moderatorUrl}', 
+                        '${room.access.anonymous.moderator.url}', 
                         'moderator'
                     );"
                 >
@@ -4276,7 +4790,7 @@ function getRoomListItemTemplate(room) {
                     class="btn btn-secondary btn-sm"
                     onclick="joinRoom(
                         '${room.roomName}', 
-                        '${room.speakerUrl}', 
+                        '${room.access.anonymous.speaker.url}', 
                         'speaker'
                     );"
                 >
@@ -4391,16 +4905,914 @@ function joinRoom(roomName, roomUrl, role) {
 The enhanced `joinRoom()` function now performs the following actions:
 
 1. Hides the home screen and shows the room screen.
-
 1. Hides the room header until the local participant joins.
-
 1. Injects the OpenVidu Meet WebComponent into the meeting container with the specified room URL.
-
 1. Configures event listeners for the OpenVidu Meet WebComponent to handle different events:
-
    - **`joined`**: This event is triggered when the local participant joins the room. It shows the room header with the room name and displays the `End Meeting` button if the user is a moderator. It also adds an event listener for the `End Meeting` button to call the `endMeeting()` method of the OpenVidu Meet WebComponent to end the meeting. This method disconnects all participants and ends the meeting for everyone.
    - **`left`**: This event is triggered when the local participant leaves the room. It hides the room header.
    - **`closed`**: This event is triggered when the OpenVidu Meet component is closed. It hides the room screen and shows the home screen.
+
+## Accessing this tutorial from other computers or phones
+
+To access this tutorial from other computers or phones, follow these steps:
+
+1. **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
+
+1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/3.7.0/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
+
+1. **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
+
+   ```text
+   # Example for IP address 192.168.1.100
+   OV_MEET_SERVER_URL=https://192-168-1-100.openvidu-local.dev:9443/meet
+   ```
+
+1. **Update the OpenVidu Meet WebComponent script URL**: In the `public/index.html` file, update the `<script>` tag that includes the OpenVidu Meet WebComponent to use the same base URL as above.
+
+   ```html
+   <script src="http://192-168-1-100.openvidu-local.dev:9443/meet/v1/openvidu-meet.js"></script>
+   ```
+
+1. **Restart the tutorial** to apply the changes:
+
+   ```bash
+   npm start
+   ```
+
+1. **Access the tutorial**: Open your browser and navigate to `https://192-168-1-100.openvidu-local.dev:6443` (replacing `192-168-1-100` with your actual private IP) on the computer where you started the tutorial or any device in the same network.
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/3.7.0/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
+
+1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
+
+   ```text
+   # Example for a production deployment
+   OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com/meet
+   ```
+
+1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
+
+   ```text
+   OV_MEET_API_KEY=your-production-api-key
+   ```
+
+1. **Update the OpenVidu Meet WebComponent script URL**: In the `public/index.html` file, update the `<script>` tag that includes the OpenVidu Meet WebComponent to use the same base URL as above.
+
+   ```html
+   <script src="https://your-openvidu-meet-domain.com/meet/v1/openvidu-meet.js"></script>
+   ```
+
+1. **Restart the tutorial** to apply the changes:
+
+   ```bash
+   npm start
+   ```
+
+Make this tutorial accessible from other computers or phones
+
+By default, this tutorial runs on `http://localhost:6080` and is only accessible from the local machine. If you want to access it from other computers or phones, you have the following options:
+
+- **Use tunneling tools**: Configure tools like [VS Code port forwarding](https://code.visualstudio.com/docs/debugtest/port-forwarding) , [ngrok](https://ngrok.com/) , [localtunnel](https://localtunnel.github.io/www/) , or similar services to expose this tutorial to the internet with a secure (HTTPS) public URL.
+- **Deploy to a server**: Upload this tutorial to a web server and configure it to be accessible with a secure (HTTPS) public URL. This can be done by updating the source code to manage SSL certificates or configuring a reverse proxy (e.g., Nginx, Apache) to serve it.
+
+# OpenVidu Meet External Members Tutorial
+
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-external-members)
+
+This tutorial extends the [basic OpenVidu Meet WebComponent tutorial](https://openvidu.io/3.7.0/meet/embedded/tutorials/webcomponent/index.md) to show how to add **external members** to an OpenVidu Meet room.
+
+An external member is a participant with a **fixed name** and a **unique access link** that grants access to the room without any login. Each link is meant to be delivered privately to a single person and can be revoked individually.
+
+Building on the basic tutorial, it adds the following features:
+
+- Users can add an external member to a room by name, with a base role (`moderator` or `speaker`).
+- Each external member gets a unique access link that can be copied and shared.
+- Users can list and remove the members of a room, revoking their access.
+- Anyone can join the meeting through a member's unique link, with no login required.
+
+The application uses the [OpenVidu Meet API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](https://openvidu.io/3.7.0/meet/embedded/reference/webcomponent/index.md) to embed the meeting.
+
+Registered vs. external members
+
+Room members can be either **registered members** (real OpenVidu Meet users, covered in the [Registered Members tutorial](https://openvidu.io/3.7.0/meet/embedded/tutorials/registered-members/index.md)) or **external members**. Registered members share the room's authenticated access URL and log in with their credentials; external members instead receive a **unique** access link that requires no authentication. See [Room Access](https://openvidu.io/3.7.0/meet/features/rooms/access/#room-members) for the full picture.
+
+## Running this tutorial
+
+#### 1. Run OpenVidu Meet
+
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
+
+Run this command in Docker Desktop's terminal:
+
+```bash
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.7.0 up -y openvidu-meet-init
+```
+
+Info
+
+For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.7.0/meet/deployment/local/index.md) .
+
+### 2. Download the tutorial code
+
+```bash
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.7.0
+```
+
+### 3. Run the application
+
+To run this application, you need [Node.js](https://nodejs.org/en/download) (≥ 18) installed on your device.
+
+1. Navigate into the application directory
+
+```bash
+cd openvidu-meet-tutorials/meet-external-members
+```
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+1. Run the application
+
+```bash
+npm start
+```
+
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080). You should see a screen like this:
+
+## Understanding the code
+
+This tutorial builds upon the [basic OpenVidu Meet WebComponent tutorial](https://openvidu.io/3.7.0/meet/embedded/tutorials/webcomponent/index.md), adding external member management. We'll focus on the new features and modifications related to external members.
+
+______________________________________________________________________
+
+### Backend modifications
+
+Besides the usual room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:roomId`), the server exposes endpoints to manage external members:
+
+- **`POST /rooms/:roomId/members`**: Add an external member to a room.
+- **`GET /rooms/:roomId/members`**: List the external members of a room.
+- **`DELETE /rooms/:roomId/members/:memberId`**: Remove an external member from a room.
+
+______________________________________________________________________
+
+#### Add external member
+
+The `POST /rooms/:roomId/members` endpoint adds an external member to a room:
+
+```javascript
+// Add an external member to a room
+app.post('/rooms/:roomId/members', async (req, res) => {
+    const { roomId } = req.params; // (1)!
+    const { name, baseRole } = req.body; // (2)!
+
+    if (!name || !baseRole) {
+        res.status(400).json({ message: `'name' and 'baseRole' are required` });
+        return;
+    }
+
+    try {
+        // Add an external member to the room.
+        // Providing 'name' (and no 'userId') creates a member of type 'external':
+        // the API generates a unique 'memberId' (ext-XXXX) and a unique 'accessUrl'
+        // that grants access without any authentication.
+        const member = await httpRequest('POST', `rooms/${roomId}/members`, {
+            name, // (3)!
+            baseRole // (4)!
+        });
+
+        console.log('External member added:', member);
+        res.status(201).json({ message: `External member '${name}' added to room '${roomId}'`, member });
+    } catch (error) {
+        handleApiError(res, error, `Error adding external member '${name}' to room '${roomId}'`);
+    }
+});
+```
+
+1. The `roomId` is obtained from the request parameters.
+1. The `name` of the external member and the `baseRole` are obtained from the request body.
+1. The `name` is the fixed display name the participant will have in the meeting. Providing `name` (and **not** `userId`) is what tells the API to create a member of type `external`.
+1. The `baseRole` (`moderator` or `speaker`) defines the default set of permissions for the member.
+
+This endpoint adds the external member by sending a `POST` request to the `rooms/:roomId/members` endpoint. The API responds with the created member, which includes a generated `memberId` (in the form `ext-XXXX`) and a unique `accessUrl` such as `http://localhost:9080/meet/room/<roomId>?secret=ext-XXXX`. That URL is unique to this member and grants access to the room with no login required.
+
+Info
+
+You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/addRoomMember) in the REST API reference for the full list of permissions.
+
+______________________________________________________________________
+
+#### List external members
+
+The `GET /rooms/:roomId/members` endpoint lists the external members of a room:
+
+```javascript
+// List the external members of a room
+app.get('/rooms/:roomId/members', async (req, res) => {
+    const { roomId } = req.params;
+
+    try {
+        // List the external members of the room using the API (100 max)
+        const { members } = await httpRequest('GET', `rooms/${roomId}/members?type=external&maxItems=100`); // (1)!
+        res.status(200).json({ members });
+    } catch (error) {
+        handleApiError(res, error, `Error fetching members of room '${roomId}'`);
+    }
+});
+```
+
+1. List the room members by sending a `GET` request to the `rooms/:roomId/members` endpoint, filtering by `type=external` to retrieve only the external members.
+
+______________________________________________________________________
+
+#### Remove external member
+
+The `DELETE /rooms/:roomId/members/:memberId` endpoint removes an external member, revoking their unique link:
+
+```javascript
+// Remove an external member from a room
+app.delete('/rooms/:roomId/members/:memberId', async (req, res) => {
+    const { roomId, memberId } = req.params;
+
+    try {
+        // Removing a member revokes their unique access link immediately
+        // (they are expelled if currently in a meeting)
+        await httpRequest('DELETE', `rooms/${roomId}/members/${memberId}`); // (1)!
+        res.status(200).json({ message: `Member '${memberId}' removed from room '${roomId}'` });
+    } catch (error) {
+        handleApiError(res, error, `Error removing member '${memberId}' from room '${roomId}'`);
+    }
+});
+```
+
+1. Remove the member by sending a `DELETE` request to the `rooms/:roomId/members/:memberId` endpoint. The member's unique link stops working immediately; if they are currently in the meeting, they are expelled from it.
+
+______________________________________________________________________
+
+### Frontend modifications
+
+The client application now manages rooms from the home view and manages the external members of a room from a dedicated members view, where each member shows its unique access link. The main changes introduced in the frontend are in the `public/js/app.js` file, which now includes functions to render the members list, add a member, copy the access link and join the meeting through that link.
+
+______________________________________________________________________
+
+#### Rendering the members list
+
+The `getMemberListItemTemplate()` function builds each member item, showing the name, the base role, the unique access link, and buttons to copy the link, join the meeting and remove the member:
+
+```javascript
+function getMemberListItemTemplate(member) {
+    return `
+        <li class="member-container">
+            <div class="member-info">
+                <p class="member-name">
+                    ${member.name}
+                    <span class="badge ${member.baseRole === 'moderator' ? 'bg-primary' : 'bg-secondary'}">
+                        ${member.baseRole}
+                    </span>
+                </p>
+                <p class="member-url" title="${member.accessUrl}">${member.accessUrl}</p>
+            </div>
+            <div class="member-actions">
+                <button 
+                    title="Copy access link" 
+                    class="icon-button" 
+                    onclick="copyAccessUrl('${member.memberId}', this)"
+                >
+                    <i class="fa-solid fa-copy"></i>
+                </button>
+                <button 
+                    title="Join" 
+                    class="icon-button" 
+                    onclick="joinRoom('${member.memberId}')"
+                >
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                </button>
+                <button 
+                    title="Remove member" 
+                    class="icon-button delete-button" 
+                    onclick="removeMember('${member.memberId}')"
+                >
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        </li>
+    `;
+}
+```
+
+Each item displays the member's fixed `name`, a badge with its `baseRole`, and its unique `accessUrl`. The three buttons call `copyAccessUrl()` to copy the link to the clipboard, `joinRoom()` to open the meeting in the app, and `removeMember()` to revoke the member.
+
+______________________________________________________________________
+
+#### Adding an external member
+
+When the "Add member" form is submitted, the `addMember()` function creates the external member with the provided name and role:
+
+```javascript
+async function addMember(e) {
+    // Prevent the default form submission
+    e.preventDefault();
+
+    // Clear previous error message
+    const errorDiv = document.querySelector('#add-member-error');
+    errorDiv.textContent = '';
+    errorDiv.hidden = true;
+
+    try {
+        const name = document.querySelector('#member-name').value; // (1)!
+        const baseRole = document.querySelector('#member-role').value;
+
+        const { member } = await httpRequest('POST', `/rooms/${currentRoom.roomId}/members`, {
+            name,
+            baseRole
+        }); // (2)!
+
+        // Add new member to the list
+        members.set(member.memberId, member); // (3)!
+        renderMembers();
+
+        // Reset the form
+        e.target.reset();
+    } catch (error) {
+        console.error('Error adding member:', error.message);
+
+        // Show error message
+        errorDiv.textContent = error.message || 'Error adding member';
+        errorDiv.hidden = false;
+    }
+}
+```
+
+1. Get the member's `name` and the chosen `baseRole` from the form.
+1. Make a `POST` request to the `/rooms/:roomId/members` endpoint to add the external member to the current room.
+1. Add the returned member (including its generated `memberId` and unique `accessUrl`) to the local `members` map and re-render the list.
+
+______________________________________________________________________
+
+#### Copying the access link
+
+The `copyAccessUrl()` function copies the member's unique link to the clipboard and briefly shows a confirmation:
+
+```javascript
+async function copyAccessUrl(memberId, button) {
+    const member = members.get(memberId);
+    if (!member) {
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(member.accessUrl); // (1)!
+
+        // Briefly show a confirmation icon
+        const icon = button.querySelector('i');
+        const previousClass = icon.className;
+        icon.className = 'fa-solid fa-check'; // (2)!
+        setTimeout(() => {
+            icon.className = previousClass;
+        }, 1500);
+    } catch (error) {
+        console.error('Error copying access link:', error.message);
+    }
+}
+```
+
+1. Copy the member's unique `accessUrl` to the clipboard using the Clipboard API.
+1. Temporarily swap the copy icon for a check icon to confirm the link was copied. This unique link is what you would deliver privately to the intended participant.
+
+______________________________________________________________________
+
+#### Joining the room through a unique link
+
+The `joinRoom()` function embeds the OpenVidu Meet WebComponent pointing to the member's unique `accessUrl`:
+
+```javascript
+function joinRoom(memberId) {
+    const member = members.get(memberId);
+    if (!member) {
+        return;
+    }
+
+    // Each external member has its own unique access URL. Opening it grants access
+    // to the meeting as that member, with the fixed name and no login required.
+    const roomUrl = member.accessUrl; // (1)!
+
+    // Hide the members screen and show the room screen
+    const membersScreen = document.querySelector('#members');
+    membersScreen.hidden = true;
+    const roomScreen = document.querySelector('#room');
+    roomScreen.hidden = false;
+
+    // Inject the OpenVidu Meet component into the meeting container specifying the member's unique URL
+    const meetingContainer = document.querySelector('#meeting-container');
+    meetingContainer.innerHTML = `
+        <openvidu-meet
+            room-url="${roomUrl}"
+        >
+        </openvidu-meet>
+    `; // (2)!
+
+    // Add event listener for when the OpenVidu Meet component is closed
+    const meet = document.querySelector('openvidu-meet');
+    meet.once('closed', () => {
+        // (3)!
+        console.log('OpenVidu Meet component closed');
+
+        // Clear the component and go back to the members screen
+        meetingContainer.innerHTML = '';
+        roomScreen.hidden = true;
+        membersScreen.hidden = false;
+    });
+}
+```
+
+1. Get the member's unique `accessUrl`.
+1. Inject the OpenVidu Meet WebComponent with the `room-url` attribute set to that URL. Because the URL already carries the member's secret, the participant enters the meeting directly with the fixed name and no login.
+1. Add a listener for the `closed` event so that, when the component is closed, the meeting is cleared and the members view is shown again.
+
+Embedding vs. sharing the link
+
+This tutorial embeds the meeting in the app for convenience while testing, but the main purpose of an external member is its **unique access link**. In a real application you would typically deliver each member's `accessUrl` privately (by email, message, etc.) instead of opening it yourself, and the participant would join directly through that link.
+
+## Accessing this tutorial from other computers or phones
+
+To access this tutorial from other computers or phones, follow these steps:
+
+1. **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
+
+1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/3.7.0/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
+
+1. **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
+
+   ```text
+   # Example for IP address 192.168.1.100
+   OV_MEET_SERVER_URL=https://192-168-1-100.openvidu-local.dev:9443/meet
+   ```
+
+1. **Update the OpenVidu Meet WebComponent script URL**: In the `public/index.html` file, update the `<script>` tag that includes the OpenVidu Meet WebComponent to use the same base URL as above.
+
+   ```html
+   <script src="http://192-168-1-100.openvidu-local.dev:9443/meet/v1/openvidu-meet.js"></script>
+   ```
+
+1. **Restart the tutorial** to apply the changes:
+
+   ```bash
+   npm start
+   ```
+
+1. **Access the tutorial**: Open your browser and navigate to `https://192-168-1-100.openvidu-local.dev:6443` (replacing `192-168-1-100` with your actual private IP) on the computer where you started the tutorial or any device in the same network.
+
+## Connecting this tutorial to an OpenVidu Meet production deployment
+
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/3.7.0/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
+
+1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
+
+   ```text
+   # Example for a production deployment
+   OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com/meet
+   ```
+
+1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
+
+   ```text
+   OV_MEET_API_KEY=your-production-api-key
+   ```
+
+1. **Update the OpenVidu Meet WebComponent script URL**: In the `public/index.html` file, update the `<script>` tag that includes the OpenVidu Meet WebComponent to use the same base URL as above.
+
+   ```html
+   <script src="https://your-openvidu-meet-domain.com/meet/v1/openvidu-meet.js"></script>
+   ```
+
+1. **Restart the tutorial** to apply the changes:
+
+   ```bash
+   npm start
+   ```
+
+Make this tutorial accessible from other computers or phones
+
+By default, this tutorial runs on `http://localhost:6080` and is only accessible from the local machine. If you want to access it from other computers or phones, you have the following options:
+
+- **Use tunneling tools**: Configure tools like [VS Code port forwarding](https://code.visualstudio.com/docs/debugtest/port-forwarding) , [ngrok](https://ngrok.com/) , [localtunnel](https://localtunnel.github.io/www/) , or similar services to expose this tutorial to the internet with a secure (HTTPS) public URL.
+- **Deploy to a server**: Upload this tutorial to a web server and configure it to be accessible with a secure (HTTPS) public URL. This can be done by updating the source code to manage SSL certificates or configuring a reverse proxy (e.g., Nginx, Apache) to serve it.
+
+# OpenVidu Meet Registered Members Tutorial
+
+[Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/meet-registered-members)
+
+This tutorial extends the [External Members tutorial](https://openvidu.io/3.7.0/meet/embedded/tutorials/external-members/index.md) to show how to create **OpenVidu Meet users** with the Users API and grant them access to a room as **registered members**.
+
+Whereas an external member is an anonymous participant who joins through a unique link, a registered member is a real OpenVidu Meet user added to a specific room: all registered members share the room's authenticated access URL and prove their identity by logging in with their own OpenVidu Meet credentials.
+
+Building on the External Members tutorial, it adds the following:
+
+- Users can create, list and delete OpenVidu Meet users.
+- Users can add a **registered** user (instead of an external one) as a member of a room.
+- A registered member joins the room by logging in with their OpenVidu Meet credentials.
+
+The application uses the [OpenVidu Meet API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md) to manage users, rooms and room members, and the [OpenVidu Meet WebComponent](https://openvidu.io/3.7.0/meet/embedded/reference/webcomponent/index.md) to embed the meeting.
+
+Anonymous access vs. room members
+
+OpenVidu Meet rooms can be accessed either through **anonymous access links** (used by the other tutorials) or by adding **room members** with personalized access and permissions. Registered members are one of the two kinds of room members (the other being [external members](https://openvidu.io/3.7.0/meet/embedded/tutorials/external-members/index.md)). See [Room Access](https://openvidu.io/3.7.0/meet/features/rooms/access/#room-members) for the full picture.
+
+## Running this tutorial
+
+#### 1. Run OpenVidu Meet
+
+You need **Docker Desktop**. You can install it on [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) , [Mac](https://docs.docker.com/desktop/setup/install/mac-install/) or [Linux](http://docs.docker.com/desktop/setup/install/linux/) .
+
+Run this command in Docker Desktop's terminal:
+
+```bash
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.7.0 up -y openvidu-meet-init
+```
+
+Info
+
+For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.7.0/meet/deployment/local/index.md) .
+
+### 2. Download the tutorial code
+
+```bash
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.7.0
+```
+
+### 3. Run the application
+
+To run this application, you need [Node.js](https://nodejs.org/en/download) (≥ 18) installed on your device.
+
+1. Navigate into the application directory
+
+```bash
+cd openvidu-meet-tutorials/meet-registered-members
+```
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+1. Run the application
+
+```bash
+npm start
+```
+
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080). You should see a screen like this:
+
+## Understanding the code
+
+This tutorial builds upon the [External Members tutorial](https://openvidu.io/3.7.0/meet/embedded/tutorials/external-members/index.md): the room and member management, the application views and the shared helper functions are the same. Here we focus only on what is new — the **Users API** — and on the **small changes** needed to manage **registered** members instead of external ones.
+
+______________________________________________________________________
+
+### Backend modifications
+
+This tutorial adds three endpoints to manage users, and slightly changes two of the existing member endpoints:
+
+- **`POST /users`**: Create a new OpenVidu Meet user. *(new)*
+- **`GET /users`**: List the available users. *(new)*
+- **`DELETE /users/:userId`**: Delete a user. *(new)*
+- **`POST /rooms/:roomId/members`**: now adds a **registered** member, identified by `userId` instead of `name`.
+- **`GET /rooms/:roomId/members`**: now filters by `type=registered`.
+
+The room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:roomId`) and the `DELETE /rooms/:roomId/members/:memberId` endpoint are identical to the [External Members tutorial](https://openvidu.io/3.7.0/meet/embedded/tutorials/external-members/index.md).
+
+______________________________________________________________________
+
+#### Create user
+
+The `POST /users` endpoint creates a new OpenVidu Meet user:
+
+```javascript
+// Create a new user
+app.post('/users', async (req, res) => {
+    const { userId, name, password } = req.body; // (1)!
+
+    if (!userId || !name || !password) {
+        res.status(400).json({ message: `'userId', 'name' and 'password' are required` }); // (2)!
+        return;
+    }
+
+    try {
+        // Create a new OpenVidu Meet user using the API.
+        // The 'room_member' role lets the user access only the rooms where they are added as a member;
+        // they cannot create or manage rooms.
+        const user = await httpRequest('POST', 'users', {
+            userId,
+            name,
+            password,
+            role: 'room_member' // (3)!
+        });
+
+        console.log('User created:', user);
+        res.status(201).json({ message: `User '${userId}' created successfully`, user }); // (4)!
+    } catch (error) {
+        handleApiError(res, error, `Error creating user '${userId}'`);
+    }
+});
+```
+
+1. The `userId`, `name` and `password` are obtained from the request body.
+1. If any of them is missing, the server returns a `400 Bad Request` response.
+1. The user is created with the `room_member` role. Among the available roles (`admin`, `user` and `room_member`), `room_member` is the most restricted: it can only access the rooms where it has been explicitly added as a member, and cannot create or manage rooms.
+1. The server returns a `201 Created` response with the created user object.
+
+This endpoint creates a user with the OpenVidu Meet API by sending a `POST` request to the `users` endpoint, including the `userId`, `name`, `password` and `role`. The `userId` must be between 5 and 20 characters and contain only lowercase letters, numbers and underscores (this is validated in the frontend form). The `role` is set to `room_member`. Among the available roles (`admin`, `user` and `room_member`), `room_member` is the most restricted: it can only access the rooms where it has been explicitly added as a member, and cannot create or manage rooms.
+
+______________________________________________________________________
+
+#### List users
+
+The `GET /users` endpoint retrieves the list of users:
+
+```javascript
+// List users
+app.get('/users', async (_req, res) => {
+    try {
+        // List OpenVidu Meet users using the API (100 max).
+        // We only list 'room_member' users, because they are the ones this tutorial creates
+        const { users } = await httpRequest('GET', 'users?role=room_member&maxItems=100'); // (1)!
+        res.status(200).json({ users });
+    } catch (error) {
+        handleApiError(res, error, 'Error fetching users');
+    }
+});
+```
+
+1. Fetch the users by sending a `GET` request to the `users` endpoint, filtering by the `room_member` role (with a maximum of 100 users).
+
+This endpoint lists only the `room_member` users. This keeps the tutorial focused on the users it creates and, in particular, excludes the root `admin` user, which cannot be deleted nor added as a room member.
+
+______________________________________________________________________
+
+#### Delete user
+
+The `DELETE /users/:userId` endpoint deletes a user:
+
+```javascript
+// Delete a user
+app.delete('/users/:userId', async (req, res) => {
+    const { userId } = req.params; // (1)!
+
+    try {
+        await httpRequest('DELETE', `users/${userId}`); // (2)!
+        res.status(200).json({ message: `User '${userId}' deleted successfully` });
+    } catch (error) {
+        handleApiError(res, error, `Error deleting user '${userId}'`);
+    }
+});
+```
+
+1. The `userId` is obtained from the request parameters.
+1. Delete the user by sending a `DELETE` request to the `users/:userId` endpoint.
+
+Deleting a user removes their account from OpenVidu Meet. Note that this will automatically remove the user from rooms where they are a member
+
+______________________________________________________________________
+
+#### Adapting the member endpoints
+
+Adding a member uses the **same** `POST /rooms/:roomId/members` endpoint as the External Members tutorial, but provides a `userId` instead of a `name`. This is the only difference, and it is what tells the API to create a member of type `registered` (linked to a user account) instead of `external`:
+
+```javascript
+// Add a registered user as a member of a room
+app.post('/rooms/:roomId/members', async (req, res) => {
+    const { roomId } = req.params;
+    const { userId, baseRole } = req.body; // (1)!
+
+    if (!userId || !baseRole) {
+        res.status(400).json({ message: `'userId' and 'baseRole' are required` });
+        return;
+    }
+
+    try {
+        // Add the registered user as a member of the room.
+        // Providing 'userId' (and no 'name') creates a member of type 'registered':
+        // the member is linked to the user account and identified through authentication.
+        const member = await httpRequest('POST', `rooms/${roomId}/members`, {
+            userId, // (2)!
+            baseRole
+        });
+
+        console.log('Member added:', member);
+        res.status(201).json({ message: `User '${userId}' added to room '${roomId}'`, member });
+    } catch (error) {
+        handleApiError(res, error, `Error adding user '${userId}' to room '${roomId}'`);
+    }
+});
+```
+
+1. The request body now carries a `userId` (the registered user to add) instead of a `name`.
+1. Providing `userId` (and **not** `name`) is what tells the API to create a member of type `registered`. The member is linked to the user account, identified through authentication, and shares the same authenticated room access URL with the rest of the registered members.
+
+Info
+
+As in the External Members tutorial, you can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation](https://openvidu.io/3.7.0/meet/embedded/reference/api.html#/operations/addRoomMember) in the REST API reference for the full list of permissions.
+
+Listing members works the same way, but filters by `type=registered` instead of `type=external`:
+
+```javascript
+// List the members of a room (only registered members)
+app.get('/rooms/:roomId/members', async (req, res) => {
+    const { roomId } = req.params;
+
+    try {
+        // List the registered members of the room using the API (100 max)
+        const { members } = await httpRequest('GET', `rooms/${roomId}/members?type=registered&maxItems=100`); // (1)!
+        res.status(200).json({ members });
+    } catch (error) {
+        handleApiError(res, error, `Error fetching members of room '${roomId}'`);
+    }
+});
+```
+
+1. The only change from the External Members tutorial is the `type=registered` filter, which retrieves the registered members instead of the external ones.
+
+Removing a member (`DELETE /rooms/:roomId/members/:memberId`) is exactly the same as in the External Members tutorial: it revokes the member's access immediately and expels them if they are currently in the meeting.
+
+______________________________________________________________________
+
+### Frontend modifications
+
+The frontend adds a panel to manage users and adapts the members view to add **existing users** as members. The `joinRoom()` function also changes to join through the room's authenticated URL. The rest (rooms management, view switching and the `httpRequest()` wrapper) is unchanged from the External Members tutorial.
+
+______________________________________________________________________
+
+#### Managing users
+
+When the "Create User" form is submitted, the `createUser()` function is called:
+
+```javascript
+async function createUser(e) {
+    // Prevent the default form submission
+    e.preventDefault(); // (1)!
+
+    // Clear previous error message
+    const errorDiv = document.querySelector('#create-user-error');
+    errorDiv.textContent = '';
+    errorDiv.hidden = true;
+
+    try {
+        const userId = document.querySelector('#user-id').value; // (2)!
+        const name = document.querySelector('#user-name').value;
+        const password = document.querySelector('#user-password').value;
+
+        const { user } = await httpRequest('POST', '/users', {
+            userId,
+            name,
+            password
+        }); // (3)!
+
+        // Add new user to the list
+        users.set(user.userId, user); // (4)!
+        renderUsers();
+
+        // Reset the form
+        e.target.reset();
+    } catch (error) {
+        console.error('Error creating user:', error.message);
+
+        // Show error message
+        errorDiv.textContent = error.message || 'Error creating user'; // (5)!
+        errorDiv.hidden = false;
+    }
+}
+```
+
+1. Prevent the default form submission so the page is not reloaded.
+1. Get the `userId`, `name` and `password` from the form inputs. The `user-id` input enforces the format constraints (5-20 characters, lowercase letters, numbers and underscores) through HTML validation attributes.
+1. Make a `POST` request to the `/users` endpoint to create the user.
+1. Add the new user to the local `users` map and re-render the list.
+1. If the request fails (for example, a duplicated `userId`), the error message returned by the API is shown in the form.
+
+The `renderUsers()` and `deleteUser()` functions follow the same pattern as their room counterparts in the External Members tutorial (`renderRooms()` and `deleteRoom()`): one renders the list of users from the `users` map, and the other calls `DELETE /users/:userId` and removes the user from the list.
+
+______________________________________________________________________
+
+#### Adapting the members view
+
+In the External Members tutorial you typed a free-text name to add a member. Here you instead pick one of the existing users from a dropdown, which is populated with the users that are not yet members of the room:
+
+```javascript
+// Populate the "add member" select with the users that are not already members of the room
+function renderMemberUserOptions() {
+    const select = document.querySelector('#member-user');
+    const availableUsers = Array.from(users.values()).filter((user) => !members.has(user.userId)); // (1)!
+
+    if (availableUsers.length === 0) {
+        select.innerHTML = `<option value="" disabled selected>No users available</option>`;
+        return;
+    }
+
+    select.innerHTML =
+        `<option value="" disabled selected>Select a user</option>` +
+        availableUsers.map((user) => `<option value="${user.userId}">${user.userId} · ${user.name}</option>`).join(''); // (2)!
+}
+```
+
+1. Filter out the users that are already members of the room (a registered member's `memberId` equals the user's `userId`).
+1. Build one `<option>` per available user, using the `userId` as the option value.
+
+When the form is submitted, the `addMember()` function sends the selected `userId` (instead of a `name`) to the backend:
+
+```javascript
+async function addMember(e) {
+    // Prevent the default form submission
+    e.preventDefault();
+
+    // Clear previous error message
+    const errorDiv = document.querySelector('#add-member-error');
+    errorDiv.textContent = '';
+    errorDiv.hidden = true;
+
+    try {
+        const userId = document.querySelector('#member-user').value; // (1)!
+        const baseRole = document.querySelector('#member-role').value;
+
+        const { member } = await httpRequest('POST', `/rooms/${currentRoom.roomId}/members`, {
+            userId,
+            baseRole
+        }); // (2)!
+
+        // Add new member to the list
+        members.set(member.memberId, member); // (3)!
+        renderMembers();
+    } catch (error) {
+        console.error('Error adding member:', error.message);
+
+        // Show error message
+        errorDiv.textContent = error.message || 'Error adding member';
+        errorDiv.hidden = false;
+    }
+}
+```
+
+1. Get the selected `userId` from the dropdown and the chosen `baseRole`.
+1. Make a `POST` request to the `/rooms/:roomId/members` endpoint to add the member to the current room (`currentRoom` is the room whose members are being managed).
+1. Add the returned member to the local `members` map and re-render the list.
+
+The way each member is rendered also changes slightly: since registered members do not have an individual access link, the `getMemberListItemTemplate()` function shows the member's id (its `userId`) and a single button to remove them — there is no copy-link or per-member join button like in the External Members tutorial. Instead, joining is done once per room, as shown next.
+
+______________________________________________________________________
+
+#### Joining the room as a registered member
+
+All registered members of a room share the same authenticated access URL, available in the `access.registered.url` property of the room object. The `joinRoom()` function embeds the OpenVidu Meet WebComponent pointing to that URL:
+
+```javascript
+function joinRoom() {
+    // All registered members share the same authenticated access URL for the room.
+    // Each member proves their identity by logging in with their OpenVidu Meet credentials.
+    const roomUrl = currentRoom.access.registered.url; // (1)!
+    console.log(`Joining room through URL: ${roomUrl}`);
+
+    // Hide the members screen and show the room screen
+    const membersScreen = document.querySelector('#members');
+    membersScreen.hidden = true;
+    const roomScreen = document.querySelector('#room');
+    roomScreen.hidden = false;
+
+    // Inject the OpenVidu Meet component into the meeting container specifying the room URL.
+    // Since this URL requires authentication, OpenVidu Meet will show its own login form
+    // inside the component until the member logs in.
+    const meetingContainer = document.querySelector('#meeting-container');
+    meetingContainer.innerHTML = `
+        <openvidu-meet
+            room-url="${roomUrl}"
+        >
+        </openvidu-meet>
+    `; // (2)!
+
+    // Add event listener for when the OpenVidu Meet component is closed
+    const meet = document.querySelector('openvidu-meet');
+    meet.once('closed', () => {
+        // (3)!
+        console.log('OpenVidu Meet component closed');
+
+        // Clear the component and go back to the members screen
+        meetingContainer.innerHTML = '';
+        roomScreen.hidden = true;
+        membersScreen.hidden = false;
+    });
+}
+```
+
+1. Get the room's authenticated access URL from the `access.registered.url` property. Unlike the External Members tutorial (where each member had its own unique URL), this URL is the same for all registered members.
+1. Inject the OpenVidu Meet WebComponent with the `room-url` attribute set to that URL.
+1. Add a listener for the `closed` event so that, when the component is closed, the meeting is cleared and the members view is shown again.
+
+Registered members log in inside the meeting
+
+The authenticated access URL does not carry any secret. When the WebComponent loads it, OpenVidu Meet renders its **own login form inside the component**, and the member logs in with their OpenVidu Meet credentials (the `userId` and password created earlier). After logging in, OpenVidu Meet verifies that the user is a member of the room and lets them join with the permissions of their base role. Your application never handles the member's password: identity is proven through OpenVidu Meet's login, while membership and permissions are managed through the Room Members API.
 
 ## Accessing this tutorial from other computers or phones
 
@@ -4555,8 +5967,8 @@ app.get('/recordings', async (req, res) => {
 
     const { room: roomName } = req.query; // (2)!
     if (roomName) {
-        // If a room is specified, filter recordings by room
-        recordingsPath += `&roomId=${roomName}`; // (3)!
+        // If a room is specified, filter recordings by room name
+        recordingsPath += `&roomName=${roomName}`; // (3)!
     }
 
     try {
@@ -4570,14 +5982,14 @@ app.get('/recordings', async (req, res) => {
 
 1. Create the base path for fetching recordings, including a `maxItems` parameter to limit the number of recordings returned to 100.
 1. Extract optional room name from query parameters for filtering.
-1. If a room name is provided, it appends the `roomId` parameter to the recordings path to filter recordings by that room.
+1. If a room name is provided, it appends the `roomName` parameter to the recordings path to filter recordings by that room.
 1. Fetch recordings using the OpenVidu Meet API by sending a `GET` request to the constructed `recordingsPath`.
 1. The server returns a `200 OK` response with the list of recordings in JSON format.
 
 This endpoint does the following:
 
 1. Creates the base path for fetching recordings, including a `maxItems` parameter to limit the number of recordings returned to 100.
-1. Extracts an optional room name from the query parameters for filtering. If a room name is provided, it appends the `roomId` parameter to the recordings path to filter recordings by that room.
+1. Extracts an optional room name from the query parameters for filtering. If a room name is provided, it appends the `roomName` parameter to the recordings path to filter recordings by that room.
 1. Fetches recordings using the OpenVidu Meet API by sending a `GET` request to the constructed `recordingsPath`.
 1. If successful, it returns a `200 OK` response with the list of recordings in JSON format. Otherwise, the error is handled by the `handleApiError` function.
 
@@ -4668,7 +6080,7 @@ function getRoomListItemTemplate(room) {
                     class="btn btn-primary btn-sm"
                     onclick="joinRoom(
                         '${room.roomName}', 
-                        '${room.moderatorUrl}', 
+                        '${room.access.anonymous.moderator.url}', 
                         'moderator'
                     );"
                 >
@@ -4678,7 +6090,7 @@ function getRoomListItemTemplate(room) {
                     class="btn btn-secondary btn-sm"
                     onclick="joinRoom(
                         '${room.roomName}', 
-                        '${room.speakerUrl}', 
+                        '${room.access.anonymous.speaker.url}', 
                         'speaker'
                     );"
                 >
@@ -4735,22 +6147,27 @@ ______________________________________________________________________
 The `listRecordings()` function fetches and displays recordings, optionally filtering by room name:
 
 ```javascript
-async function listRecordings() {
+async function listRecordings(e) {
+    if (e) {
+        // Prevent the default form submission
+        e.preventDefault(); // (1)!
+    }
+
     // Filter recordings by room name if provided
-    const roomName = document.querySelector('#recordings-room-search').value; // (1)!
-    const recordingsUrl = '/recordings' + (roomName ? `?room=${roomName}` : ''); // (2)!
+    const roomName = document.querySelector('#recordings-room-search').value; // (2)!
+    const recordingsUrl = '/recordings' + (roomName ? `?room=${roomName}` : ''); // (3)!
 
     try {
-        let { recordings: recordingsList } = await httpRequest('GET', recordingsUrl); // (3)!
+        let { recordings: recordingsList } = await httpRequest('GET', recordingsUrl); // (4)!
         // Filter completed recordings
-        recordingsList = filterCompletedRecordings(recordingsList); // (4)!
+        recordingsList = filterCompletedRecordings(recordingsList); // (5)!
 
         // Clear the previous recordings and populate the new ones
         recordings.clear();
         recordingsList.forEach((recording) => {
-            recordings.set(recording.recordingId, recording); // (5)!
+            recordings.set(recording.recordingId, recording); // (6)!
         });
-        renderRecordings(); // (6)!
+        renderRecordings(); // (7)!
     } catch (error) {
         console.error('Error listing recordings:', error.message);
 
@@ -4762,10 +6179,11 @@ async function listRecordings() {
 }
 
 function filterCompletedRecordings(recordingList) {
-    return recordingList.filter((recording) => recording.status === 'complete'); // (7)!
+    return recordingList.filter((recording) => recording.status === 'complete'); // (8)!
 }
 ```
 
+1. Prevent the default form submission when invoked as the `submit` handler of the recordings search form.
 1. Get the room name from the search input for filtering.
 1. Build the API URL with optional room filter parameter.
 1. Make a `GET` request to the `/recordings` endpoint to fetch the list of recordings.
@@ -4776,6 +6194,7 @@ function filterCompletedRecordings(recordingList) {
 
 The listRecordings() function performs the following actions:
 
+1. Prevents the default form submission when it is invoked as the `submit` handler of the recordings search form (in which case it receives the event object).
 1. Gets the room name from the search input field to optionally filter recordings by room.
 1. Makes a `GET` request to the `/recordings` endpoint to fetch the list of recordings, including the room filter parameter if specified.
 1. Filters the recordings to show only those with `complete` status using the `filterCompletedRecordings()` function.
@@ -4892,11 +6311,21 @@ async function displayRecording(recordingId) {
         >
         </openvidu-meet>
     `; // (4)!
+
+    // Add event listener for when the OpenVidu Meet component is closed
+    const meet = document.querySelector('openvidu-meet');
+    meet.once('closed', () => {
+        // (5)!
+        // Hide the display recording screen and show the home screen
+        displayRecordingScreen.hidden = true;
+        const homeScreen = document.querySelector('#home');
+        homeScreen.hidden = false;
+    });
 }
 
 async function getRecordingUrl(recordingId) {
     try {
-        const { url } = await httpRequest('GET', `/recordings/${recordingId}/url`); // (5)!
+        const { url } = await httpRequest('GET', `/recordings/${recordingId}/url`); // (6)!
         return url;
     } catch (error) {
         console.error('Error fetching recording URL:', error.message);
@@ -4909,9 +6338,10 @@ async function getRecordingUrl(recordingId) {
 1. Show the recording playback screen.
 1. Fetch the recording URL from the backend using the `getRecordingUrl()` function.
 1. Inject the OpenVidu Meet WebComponent with the `recording-url` attribute for playback.
+1. Add an event listener for the `closed` event, which is triggered when the recording playback view is closed. It hides the playback screen and shows the home screen again.
 1. Make a `GET` request to the `/recordings/:recordingId/url` endpoint to retrieve the recording URL.
 
-The `displayRecording()` function handles the playback of a specific recording by first hiding the recordings list screen and showing the display recording screen. It then fetches the recording URL from the backend using the `getRecordingUrl()` helper function, which makes a `GET` request to the `/recordings/:recordingId/url` endpoint. Finally, it injects the OpenVidu Meet WebComponent into the display container with the `recording-url` attribute set to the fetched URL, enabling the recording to be played directly in the browser. If an error occurs during URL fetching, it logs the error to the console and returns null.
+The `displayRecording()` function handles the playback of a specific recording by first hiding the recordings list screen and showing the display recording screen. It then fetches the recording URL from the backend using the `getRecordingUrl()` helper function, which makes a `GET` request to the `/recordings/:recordingId/url` endpoint. Next, it injects the OpenVidu Meet WebComponent into the display container with the `recording-url` attribute set to the fetched URL, enabling the recording to be played directly in the browser. Finally, it registers a listener for the `closed` event of the WebComponent, so that when the user closes the recording playback view the playback screen is hidden and the home screen is shown again. If an error occurs during URL fetching, it logs the error to the console and returns null.
 
 ______________________________________________________________________
 
@@ -5577,8 +7007,8 @@ OpenVidu Meet provides a REST API for managing **rooms** and **recordings** prog
 
 There are two endpoints:
 
-- `/api/v1/rooms`: manage [rooms](https://openvidu.io/3.7.0/meet/features/rooms-and-meetings/index.md).
-- `/api/v1/recordings`: manage [recordings](https://openvidu.io/3.7.0/meet/features/recordings/index.md).
+- `/api/v1/rooms`: manage [rooms](https://openvidu.io/3.7.0/meet/features/rooms/overview/index.md).
+- `/api/v1/recordings`: manage [recordings](https://openvidu.io/3.7.0/meet/features/recordings/overview/index.md).
 
 ## Authentication
 
@@ -7534,7 +8964,7 @@ Choose your provider:
 
 [**DigitalOcean**](https://openvidu.io/3.7.0/docs/self-hosting/elastic/digitalocean/index.md)
 
-**OCI Coming soon!**
+[**OCI**](https://openvidu.io/3.7.0/docs/self-hosting/elastic/oracle/index.md)
 
 # OpenVidu High Availability
 
@@ -7552,7 +8982,7 @@ Choose your provider:
 
 [**DigitalOcean**](https://openvidu.io/3.7.0/docs/self-hosting/ha/digitalocean/index.md)
 
-**OCI Coming soon!**
+[**OCI**](https://openvidu.io/3.7.0/docs/self-hosting/ha/oracle/index.md)
 
 # Production ready
 
@@ -7968,6 +9398,21 @@ Deploy OpenVidu using our official **Terraform** template:
 - [OpenVidu High Availability in DigitalOcean](https://openvidu.io/3.7.0/docs/self-hosting/ha/digitalocean/install/index.md)
 
 The cluster scales automatically thanks to an automated process using [DigitalOcean Functions](https://docs.digitalocean.com/products/functions/) (see [Custom scale-in strategy in Digital Ocean](https://openvidu.io/3.7.0/docs/self-hosting/elastic/digitalocean/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+
+| Input Value               | Default Value | Description                                                  |
+| ------------------------- | ------------- | ------------------------------------------------------------ |
+| initialNumberOfMediaNodes | 1             | Number of initial media nodes to deploy.                     |
+| minNumberOfMediaNodes     | 1             | Minimum number of media nodes to deploy.                     |
+| maxNumberOfMediaNodes     | 5             | Maximum number of media nodes to deploy.                     |
+| scaleTargetCPU            | 50            | Target CPU percentage to scale up or down.                   |
+| fixedNumberOfMediaNodes   | 0             | Fixed number of media nodes to create (0 = use autoscaling). |
+
+Deploy OpenVidu using our official **Terraform** template:
+
+- [OpenVidu Elastic in Oracle Cloud Infrastructure](https://openvidu.io/3.7.0/docs/self-hosting/elastic/oracle/install/index.md)
+- [OpenVidu High Availability in Oracle Cloud Infrastructure](https://openvidu.io/3.7.0/docs/self-hosting/ha/oracle/install/index.md)
+
+The cluster scales automatically thanks to an [OCI Instance Pool](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm) for scale-out, combined with an [OCI Function](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm) that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](https://openvidu.io/3.7.0/docs/self-hosting/elastic/oracle/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
 
 | Input Value               | Default Value | Description                                                  |
 | ------------------------- | ------------- | ------------------------------------------------------------ |
