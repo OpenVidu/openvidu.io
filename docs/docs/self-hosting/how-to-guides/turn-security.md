@@ -125,6 +125,103 @@ Independently, the **relay port restriction** and the **RFC 6062** check are alw
 !!! danger "Don't lock out your own nodes"
     The allow/deny CIDR checks run **before** the built-in local/cluster allowlist. If you set `allow_restricted_peer_cidrs` to a range that does **not** include your nodes' private subnets, the relay will deny traffic to your own Media Servers and **media will stop flowing**. When you use an allow list, always include the local/cluster ranges. Likewise, a `deny_peer_cidrs` entry that covers a cluster node's IP will block media to that node.
 
+## Example configurations
+
+The snippets below cover the most common hardening scenarios. They go under the `turn:` section of the LiveKit configuration file [shown above](#configuration-values). After editing, restart the service with `systemctl restart openvidu`.
+
+### Block the cloud metadata endpoint
+
+The cloud metadata endpoint (`169.254.169.254` on AWS, GCP, Azure, …) is a classic target for relay abuse. OpenVidu's default allowlist already blocks it — it is neither a local interface nor a cluster node — but an explicit deny documents the intent and keeps it blocked even if you later widen the allowlist:
+
+```yaml
+turn:
+    deny_peer_cidrs:
+        - 169.254.0.0/16   # link-local — includes 169.254.169.254 (cloud metadata)
+```
+
+This is safe on **every** deployment: OpenVidu never relays media to link-local addresses.
+
+### Forbid relaying to all private networks
+
+If **every node is publicly reachable** and reaches its Media Servers over **public IPs**, the relay never needs to forward to a private address. You can then deny every private and internal range, as defense-in-depth on top of the default allowlist: no relayed packet can ever reach a private host, even one belonging to a local interface or a misconfigured cluster node.
+
+```yaml
+turn:
+    deny_peer_cidrs:
+        - 10.0.0.0/8       # RFC 1918 private
+        - 172.16.0.0/12    # RFC 1918 private
+        - 192.168.0.0/16   # RFC 1918 private
+        - 100.64.0.0/10    # carrier-grade NAT (RFC 6598)
+        - 169.254.0.0/16   # link-local (incl. cloud metadata)
+        - 127.0.0.0/8      # loopback
+        # IPv6 equivalents (harmless to keep on IPv4-only deployments):
+        - fc00::/7         # unique local
+        - fe80::/10        # link-local
+        - ::1/128          # loopback
+```
+
+!!! danger "Only for fully public deployments"
+    Because `deny_peer_cidrs` overrides the local/cluster allowlist, this configuration **will block media to your own Media Servers** if any node is *not* publicly reachable (behind NAT, behind a proxy, or relaying over a private/Docker IP). Before applying it, confirm that every node picked a **public** relay address:
+    ```bash
+    docker logs openvidu 2>&1 | grep "TURN relay address"
+    ```
+    If you see a private IP (e.g. `192.168.x.x`, `10.x.x.x`, `172.x.x.x`), do **not** use this snippet — the node relies on the relay forwarding to a private address. See [Why the relay needs protecting](#why-the-relay-needs-protecting).
+
+### Allow only specific peer ranges
+
+Use `allow_restricted_peer_cidrs` when you want the relay to forward to a specific set of internal ranges and nothing else. Setting an allow list does two things at once: it **permits** the listed ranges, and it **denies every other restricted IP** (private, loopback, link-local, multicast, unspecified) that is not listed. Public peer IPs are unaffected and still follow the default cluster/local allowlist.
+
+Because the allow list is evaluated **before** the built-in local/cluster allowlist, you must list **every internal range OpenVidu legitimately relays to** — your cluster nodes' / Media Servers' subnet *and* each node's local interfaces (for example the Docker bridge, often `172.17.0.0/16`). Otherwise you lock out your own media:
+
+```yaml
+turn:
+    allow_restricted_peer_cidrs:
+        - 10.10.0.0/16     # cluster nodes / Media Servers subnet
+        - 172.17.0.0/16    # Docker bridge (local interface) — required in Docker deployments
+```
+
+With the above, the relay forwards to those two ranges and to any public peer, and denies every other restricted range (other internal subnets, the metadata endpoint, loopback, …).
+
+!!! tip "Combine allow and deny"
+    The two lists work together, and `deny_peer_cidrs` always wins. A common pattern is a broad allow list for your internal subnets plus a narrow deny list carving out ranges that must never be reached, even when they fall inside an allowed range:
+    ```yaml
+    turn:
+        allow_restricted_peer_cidrs:
+            - 10.0.0.0/8       # allow the whole private range...
+        deny_peer_cidrs:
+            - 10.99.0.0/16     # ...except this sensitive subnet
+            - 169.254.0.0/16   # ...and never the metadata endpoint
+    ```
+    `10.99.0.0/16` is blocked even though it sits inside the allowed `10.0.0.0/8`, because deny is evaluated first.
+
+### Set a specific relay address
+
+On nodes that are **not** publicly reachable, OpenVidu auto-discovers the relay candidate by taking the **first local IP** it finds (see [Why the relay needs protecting](#why-the-relay-needs-protecting)). On a host with several interfaces — a Docker bridge (`172.17.0.1`), a VPN tunnel (`wg0`, `tailscale0`), a secondary NIC — that first IP can be the wrong one, and clients then receive a relay candidate they cannot reach. Two settings let you override the auto-discovery.
+
+**Pin the relay IP directly** with `relay_address`. Use this when you know exactly which address the media path must use. It takes effect regardless of node reachability and skips auto-discovery entirely:
+
+```yaml
+turn:
+    relay_address: 192.168.1.50
+```
+
+**Or select the interface** with `relay_preferred_interface`, letting OpenVidu pick the IP but only from that interface. Use this when the interface name is stable but its IP is assigned dynamically (DHCP):
+
+```yaml
+turn:
+    relay_preferred_interface: eth1
+```
+
+Keep in mind:
+
+- The relay address must be an IP at which **the node is actually reachable** on the media port range — in practice one of its own local interface IPs (or a 1-to-1 NAT public IP that forwards to it). The TURN server advertises this address to clients as the relayed media candidate; an address the node does not own will break relaying.
+- You do **not** need to add the relay address to `allow_restricted_peer_cidrs`: OpenVidu registers its own relay address in the peer allowlist automatically (and propagates it to the other cluster nodes).
+- `relay_preferred_interface` is ignored when `relay_address` is set, and also when the node is publicly reachable (a publicly reachable node advertises its public IP, not a local interface IP).
+- After restarting, confirm the address the node actually picked:
+  ```bash
+  docker logs openvidu 2>&1 | grep "TURN relay address"
+  ```
+
 ## Considerations
 
 - These mechanisms protect the relay; they do not change how media is encrypted. WebRTC media is always encrypted (SRTP/DTLS), whether relayed or not.
