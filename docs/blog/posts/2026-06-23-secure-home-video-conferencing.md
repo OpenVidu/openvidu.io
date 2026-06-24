@@ -158,25 +158,29 @@ Open `https://openvidu-meet-home.duckdns.org/` in your browser. You'll land on y
 !!! note "Use your own domain"
     Throughout this guide, `openvidu-meet-home.duckdns.org` is just an example. Everywhere you see it, use the DuckDNS subdomain you created in Step 1.
 
-![Your OpenVidu Meet dashboard](/assets/images/blog/secure-home-video-conferencing/meet-home.png)
+![Your OpenVidu Meet dashboard](/assets/images/blog/secure-home-video-conferencing/meet-home-light.png#only-light)
+![Your OpenVidu Meet dashboard](/assets/images/blog/secure-home-video-conferencing/meet-home-dark.png#only-dark)
 
 Click **Create Room**, give it a name, and you get a room with its own shareable link.
 
-![A room with its shareable invite link](/assets/images/blog/secure-home-video-conferencing/meet-lobby.png)
+![A room with its shareable invite link](/assets/images/blog/secure-home-video-conferencing/meet-lobby-light.png#only-light)
+![A room with its shareable invite link](/assets/images/blog/secure-home-video-conferencing/meet-lobby-dark.png#only-dark)
 
 Now send that link to your family and friends however you like: WhatsApp, email, a text. When they open it they just type their name and join, with **no account and no app to install**, straight from the browser, on a phone, tablet or computer.
 
 !!! tip "Share the link from the copy button, not the address bar"
     Use the **copy button** next to *"Invite others with this meeting link"*. That link carries a secret token that lets people in. The plain URL from your browser's address bar won't grant access.
 
-![A call with family and friends, running on your own server](/assets/images/blog/secure-home-video-conferencing/meet-call.jpg)
+![A call with family and friends, running on your own server](/assets/images/blog/secure-home-video-conferencing/meet-call-light.jpg#only-light)
+![A call with family and friends, running on your own server](/assets/images/blog/secure-home-video-conferencing/meet-call-dark.jpg#only-dark)
 
 Inside the call you get exactly what you'd expect from a modern app: HD video, crisp audio, screen sharing and chat, except this time it's all running on the little box in your home.
 
 !!! tip "It works great on phones"
     There's nothing to download. Your family taps the link, allows camera and microphone, and they're in. Below is the same call joined from a phone's browser.
 
-    ![Joining the call from a phone](/assets/images/blog/secure-home-video-conferencing/meet-mobile.png){ width=45% }
+    ![Joining the call from a phone](/assets/images/blog/secure-home-video-conferencing/meet-mobile-light.png#only-light){ width=45% }
+    ![Joining the call from a phone](/assets/images/blog/secure-home-video-conferencing/meet-mobile-dark.png#only-dark){ width=45% }
 
 ## Keep it secure
 
