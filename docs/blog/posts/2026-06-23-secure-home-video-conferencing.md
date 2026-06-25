@@ -25,11 +25,11 @@ hide:
 
 ![A secure family video call running on your own home server](/assets/images/blog/secure-home-video-conferencing/poster.jpg){ align=right width=60% }
 
-We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their hands on their head thinking about how complicated it must be.
+We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their head in their hands thinking about how complicated it must be.
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-So what if that place was actually yours? With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in four simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/){:target="_blank"}.
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/){:target="_blank"}.
 <!-- more -->
 
 ## Why self-host your video calls?
@@ -39,7 +39,7 @@ If tinkering is your idea of a fun weekend, you probably don't need convincing ð
 - **Privacy and ownership.** Your video and audio never leave your own server. Conversations stay on hardware you can physically touch, in your own home, with no ads and nothing to sign up for. It's a calmer, more personal way to keep in touch.
 - **No artificial limits.** No 40-minute cutoff, no "upgrade to invite more than 3 people". The only limit is your hardware, and it's more generous than you'd think. A single small machine comfortably handles a family gathering.
 - **Free and open source.** OpenVidu Community is free and fully open source. You pay for electricity and your internet bill.
-- **A second life for old hardware.** A **Raspberry Pi 5** sips just a few watts and costs less than many other services. That retired laptop or mini-PC in your closet works just as well. It's greener and cheaper than yet another SaaS account.
+- **A second life for old hardware.** A **Raspberry Pi 5** sips just a few watts and costs less than a year of most subscription plans. That retired laptop or mini-PC in your closet works just as well. It's greener and cheaper than yet another SaaS account.
 
 Is this setup valid for everyone? If you need five-nines uptime for a business, run it properly in the cloud (OpenVidu does that too; see the [end of this post](#need-more-than-this)). But for keeping in touch with the people you love, a box at home is perfect, private, and yours.
 
@@ -55,7 +55,9 @@ Is this setup valid for everyone? If you need five-nines uptime for a business, 
 
 ## Prerequisites & Connectivity Checks
 
-Before you start, make sure your network setup is ready for hosting a server.
+Before you start, make sure your network setup is ready for hosting a server. Both checks below require access to your router's admin page: open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
+
+![Router label with credentials](/assets/images/blog/secure-home-video-conferencing/router-label.png){ width=80% }
 
 ### 1. Are you behind a CGNAT?
 Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **CGNAT**), and that prevents people from reaching your server.
@@ -63,25 +65,21 @@ Many internet providers no longer give each home a unique public IP. They share 
 Quick check: look at the "Internet" / "WAN" IP your **router** reports, then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
 
 - If **they match**, you have a public IP.
-- If **they differ**, or your router's WAN IP starts with `100.64`-`100.127`, you're behind CGNAT. **Contact your ISP** and ask for a public IP (often free, sometimes a small monthly fee).
+- If **they differ**, or your router's WAN IP starts with `100.64.x.x` to `100.127.x.x`, you're behind CGNAT. **Contact your ISP** and ask for a public IP (often free, sometimes a small monthly fee).
 - If they refuse, you can still run OpenVidu Meet, but **only on your local network** (no one outside can reach it) or in a cloud server (see [the end of this post](#need-more-than-this)).
 
 ### 2. Are ports 80 and 443 reachable?
-Some ISPs block inbound ports 80 and 443 to prevent home servers. If this is the case, you might need an **advanced setup** using the [OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md) (instead of the Meet one) to use a custom certificate via the DNS-01 challenge, which doesn't require open ports.
+Some ISPs block inbound ports 80 and 443 to prevent home servers. Run the connectivity test below to check; if either port is blocked, follow the [alternative setup](#if-your-isp-blocks-ports-80-and-443) instead of the main steps.
 
 #### Configure your router
 
-Go to your router's admin page by entering its IP address in a browser. The most common ones are `192.168.0.1` and `192.168.1.1`. If neither works, check the label underneath the router, which usually also shows the admin username and password.
-
-![Router label with credentials](/assets/images/blog/secure-home-video-conferencing/router-label.png){ width=80% }
-
-In your router's admin page, find **Port forwarding** (usually under *Advanced > NAT*, *Security > Firewall*, or *Network > WAN*). First, get your server's private IP:
+First, get your server's private IP:
 
 ```bash
 ip -4 -oneline route get 1 | grep -Po 'src \K([\d.]+)'
 ```
 
-Then forward these ports to **that IP address**:
+Then, in your router's admin page, find **Port forwarding** (usually under *Advanced > NAT*, *Security > Firewall*, or *Network > WAN*) and forward these ports to **that IP address**:
 
 <div style="text-align: center" markdown>
 
@@ -94,13 +92,15 @@ Then forward these ports to **that IP address**:
 
 ![Port forwarding rules in a router admin panel](/assets/images/blog/secure-home-video-conferencing/router-admin.png){ width=80% }
 
-For better performance, see the [OpenVidu port rules](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the full list of recommended ports.
+For better performance, see the [OpenVidu port rules](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the full list of recommended ports. If your server's Linux firewall is active, open the same ports there too; the port rules page includes the exact `firewalld` commands. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
 
 #### Quick Connectivity Test
 
 To verify that ports 80 and 443 are open from the internet:
 
 1. **Start a listener.** On your server, run these commands:
+
+    For port 80:
 
     ```bash
     sudo nc -lk -p 80
@@ -114,9 +114,24 @@ To verify that ports 80 and 443 are open from the internet:
 
     > This keeps the port open and waiting for connections, nothing else.
 
-2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener.
+2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener. If either port shows an error, continue to the next section.
 
-## Step 1: Get a free address with DuckDNS
+#### If your ISP blocks ports 80 and 443 { #if-your-isp-blocks-ports-80-and-443 }
+
+Some home internet providers block inbound ports 80 and 443 to discourage home servers. If yours does, automatic Let's Encrypt won't work because validating a certificate needs one of those ports reachable from the internet.
+
+The fix is to install with the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+
+- via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
+- any **certificate you already own**, however it was issued.
+
+You'll also serve the app on a non-standard port. Set `CADDY_HTTPS_PUBLIC_PORT=8443` in `/opt/openvidu/config/openvidu.env`, then run `sudo systemctl restart openvidu`. Your server will be reachable at `https://<your-subdomain>.duckdns.org:8443/`.
+
+## Setting up OpenVidu Meet
+
+If all the prerequisites above are good, you're all set. OpenVidu Meet is just three steps away.
+
+### Step 1: Get a free address with DuckDNS
 
 Your home IP usually changes from time to time. [DuckDNS](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `<your-subdomain>.duckdns.org`) that automatically follows it, for free.
 
@@ -132,14 +147,7 @@ Now make your address always point to your home. On the server, add a small task
 
 Leaving `ip=` empty tells DuckDNS to detect your current public IP automatically, so even when your ISP changes it, `<your-subdomain>.duckdns.org` keeps pointing home.
 
-## Step 2: Forward the same ports again (if needed)
-
-If you already configured port forwarding during the prerequisites connectivity check, skip to Step 3. Otherwise, in your router's admin page find **Port forwarding** and forward **80 (TCP)** and **443 (TCP/UDP)** to your server's local IP (get it with `ipaddr`). We recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules don't break when it reboots.
-
-If your server's Linux firewall is active, open the same ports there too. See the [port rules in the OpenVidu docs](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the exact `firewalld` commands and the full list of recommended ports.
-
-
-## Step 3: Install OpenVidu Meet (one command, three questions)
+### Step 2: Install OpenVidu Meet (one command, three questions)
 
 This is the easy part. On your server, run:
 
@@ -170,9 +178,9 @@ sudo systemctl restart openvidu   # restart
 ```
 
 ??? info "Want more control? Use the full installer"
-    `install_meet.sh` is the quick path. If you'd like to enable extra modules (such as the observability dashboards) or automate the install non-interactively, you can use the full OpenVidu Platform installer instead. See [Single Node installation](../../docs/self-hosting/single-node/on-premises/install.md) and its [non-interactive section](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation).
+    `install_meet.sh` is the quick path. If you'd like to disable certain modules, enable only specific ones, or automate the install non-interactively, you can use the full OpenVidu Platform installer instead. See [Single Node installation](../../docs/self-hosting/single-node/on-premises/install.md) and its [non-interactive section](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation).
 
-## Step 4: Make your first call
+### Step 3: Make your first call
 
 Open `https://<your-subdomain>.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
 
@@ -195,41 +203,23 @@ Now send that link to your family and friends however you like: WhatsApp, email,
 
 Inside the call you get exactly what you'd expect from a modern app: HD video, crisp audio, screen sharing and chat, except this time it's all running on the little box in your home.
 
-!!! tip "It works great on phones"
-    There's nothing to download. Your family taps the link, allows camera and microphone, and they're in. Below is the same call joined from a phone's browser.
-
-    ![Joining the call from a phone](/assets/images/blog/secure-home-video-conferencing/meet-mobile-light.png#only-light){ width=45% }
-    ![Joining the call from a phone](/assets/images/blog/secure-home-video-conferencing/meet-mobile-dark.png#only-dark){ width=45% }
-
 ## Keep it secure
 
 You've just put a server on the internet, so a few minutes of good habits go a long way:
 
 - **Use strong passwords.** The installer generates random ones for you; keep them safe. They live in `/opt/openvidu/config/openvidu.env` if you need to look them up.
-- **Only open the ports you actually use.** Port 80 TCP and 443 TCP/UDP are enough for calls; don't forward anything you don't need.
+- **Only open the ports you actually use.** Ports 80 and 443 TCP are enough for calls; don't forward anything you don't need.
 - **Keep it updated.** Update your operating system regularly, and upgrade OpenVidu when new versions ship.
 - **Remember it's exposed.** A home server reachable from the internet is convenient and powerful, so treat it with the same care you'd give any device that's online 24/7.
 
 !!! tip "Go further: end-to-end encryption"
     For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](../../meet/features/meetings/e2e-encryption.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
 
-## If your ISP blocks ports 80 and 443
-
-Some home internet providers block inbound ports 80 and 443 to discourage home servers. If yours does, automatic Let's Encrypt won't work, because validating a certificate needs one of those ports reachable from the internet.
-
-The fix is to install with the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
-
-- via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
-- any **certificate you already own**, however it was issued.
-
-You'll also serve the app on a non-standard port: set `CADDY_HTTPS_PUBLIC_PORT` (and, if needed, `CADDY_HTTP_PUBLIC_PORT`) in `/opt/openvidu/config/openvidu.env`, then run `sudo systemctl restart openvidu`.
-
 ## Need more than this? { #need-more-than-this }
 
-This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or you're finding some corner cases, check the other [deployment types](../../docs/self-hosting/deployment-types.md):
+This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](../../docs/self-hosting/deployment-types.md):
 
-- **[OpenVidu Single Node](../../docs/self-hosting/single-node/index.md)**: what we built here; everything on one machine, production-ready. 
-- **[OpenVidu Single Node PRO](../../docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance and advanced observability. 
+- **[OpenVidu Single Node PRO](../../docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability. 
 - **[OpenVidu Elastic](../../docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
 - **[OpenVidu High Availability](../../docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
 - **[OpenVidu Local](../../docs/self-hosting/local.md)**: a development setup for your own laptop. 
@@ -241,4 +231,4 @@ And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on
 
 ![A family video call running on your own home server](/assets/images/blog/secure-home-video-conferencing/meeting.png){ align=right width=60% }
 
-That's all it takes. For the price of a tiny computer and a funny weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!
+That's all it takes. For the price of a tiny computer and a fun weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!
