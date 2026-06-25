@@ -30,10 +30,74 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
 So what if that place was actually yours? With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in four simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/){:target="_blank"}.
-
 <!-- more -->
 
+## Prerequisites & Connectivity Checks
+
+Before you start, make sure your network setup is ready for hosting a server.
+
+### 1. Are you behind a CGNAT?
+Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **CGNAT**), and that prevents people from reaching your server.
+
+Quick check: look at the "Internet" / "WAN" IP your **router** reports, then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
+
+- If **they match**, you have a public IP.
+- If **they differ**, or your router's WAN IP starts with `100.64`-`100.127`, you're behind CGNAT. **Contact your ISP** and ask for a public IP (often free, sometimes a small monthly fee).
+- If they refuse, you can still run OpenVidu Meet, but **only on your local network** (no one outside can reach it) or in a cloud server (see [the end of this post](#need-more-than-this)).
+
+### 2. Are ports 80 and 443 reachable?
+Some ISPs block inbound ports 80 and 443 to prevent home servers. If this is the case, you might need an **advanced setup** using the [OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md) (instead of the Meet one) to use a custom certificate via the DNS-01 challenge, which doesn't require open ports.
+
+#### Configure your router
+
+Go to your router's admin page by entering its IP address in a browser. The most common ones are `192.168.0.1` and `192.168.1.1`. If neither works, check the label underneath the router, which usually also shows the admin username and password.
+
+![Router label with credentials](/assets/images/blog/secure-home-video-conferencing/router-label.png){ width=80% }
+
+In your router's admin page, find **Port forwarding** (usually under *Advanced > NAT*, *Security > Firewall*, or *Network > WAN*). First, get your server's private IP:
+
+```bash
+ip -4 -oneline route get 1 | grep -Po 'src \K([\d.]+)'
+```
+
+Then forward these ports to **that IP address**:
+
+<div style="text-align: center" markdown>
+
+| Port | Protocol | Forward to | What it's for |
+| ---- | -------- | ---------- | ------------- |
+| `80` | TCP | `<SERVER_IP>` | Redirects to HTTPS and validates your SSL certificate |
+| `443` | TCP | `<SERVER_IP>` | The video app, the secure connection and media TURN relay |
+
+</div>
+
+![Port forwarding rules in a router admin panel](/assets/images/blog/secure-home-video-conferencing/router-admin.png){ width=80% }
+
+For better performance, see the [OpenVidu port rules](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the full list of recommended ports.
+
+#### Quick Connectivity Test
+
+To verify that ports 80 and 443 are open from the internet:
+
+1. **Start a listener.** On your server, run these commands:
+
+    ```bash
+    sudo nc -lk -p 80
+    ```
+
+    For port 443:
+
+    ```bash
+    sudo nc -lk -p 443
+    ```
+
+    > This keeps the port open and waiting for connections, nothing else.
+
+2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener.
+
+
 ## Why self-host your video calls?
+
 
 If tinkering is your idea of a fun weekend, you probably don't need convincing 😉. Just in case, here are the benefits:
 
@@ -50,73 +114,32 @@ Is this setup valid for everyone? If you need five-nines uptime for a business, 
 ## What you'll need
 
 - **A computer to run it on.** A **Raspberry Pi 5 (4 GB or more) is the recommended option**: quiet, cheap and low-power. Any idle PC or laptop works too, as long as it has **at least 4 GB of RAM and 4 CPU cores** and runs **Linux (Ubuntu is recommended)**.
-- **A home internet connection with a real public IP** (see the warning note below).
+- **A home internet connection with a real public IP.**
 - **A free [DuckDNS](https://www.duckdns.org){:target="_blank"} account**. This gives your home OpenVidu Meet server an easy-to-remember web address that keeps working even when your IP changes.
 - **Access to your router's admin page**, to forward a few ports.
 
-!!! warning "First, make sure you're not behind CGNAT"
-    Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **CGNAT**), and that prevents people from reaching your server.
-
-    Quick check: look at the "Internet" / "WAN" IP your **router** reports, then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
-
-    - If **they match**, you have a public IP.
-    - If **they differ**, or your router's WAN IP starts with `100.64`-`100.127`, you're behind CGNAT. Call your ISP and ask for a public IP (often free, sometimes a small monthly fee). 
-    - If they refuse, you can still run OpenVidu Meet, but only on your local network (no one outside can reach it) or in a cloud server (see the [end of this post](#need-more-than-this)).
-
 ## Step 1: Get a free address with DuckDNS
 
-Your home IP usually changes from time to time. [DuckDNS](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `openvidu-meet-home.duckdns.org`) that automatically follows it, for free.
+Your home IP usually changes from time to time. [DuckDNS](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `<your-subdomain>.duckdns.org`) that automatically follows it, for free.
 
 1. Go to [duckdns.org](https://www.duckdns.org){:target="_blank"} and sign in (with Google, GitHub, etc.).
-2. In the **sub domain** box, type a name (e.g. `openvidu-meet-home`) and click **add domain**.
+2. In the **sub domain** box, type the name you want for your subdomain (e.g. `my-home-video`) and click **add domain**. This will be your `<your-subdomain>` throughout this guide.
 3. Copy your **token** from the top of the page. You'll need it in a moment.
 
-Now make your address always point to your home. On the server, add a small task that updates DuckDNS every few minutes. Run `crontab -e` and add this line (replace `openvidu-meet-home` and `your-token` with your actual subdomain and token respectively):
+Now make your address always point to your home. On the server, add a small task that updates DuckDNS every few minutes. Run `crontab -e` and add this line (replace `<your-subdomain>` and `<your-token>` with your actual subdomain and token):
 
 ```bash
-*/5 * * * * curl -fsS "https://www.duckdns.org/update?domains=openvidu-meet-home&token=your-token&ip=" >/dev/null 2>&1
+*/5 * * * * curl -fsS "https://www.duckdns.org/update?domains=<your-subdomain>&token=<your-token>&ip=" >/dev/null 2>&1
 ```
 
-Leaving `ip=` empty tells DuckDNS to detect your current public IP automatically, so even when your ISP changes it, `openvidu-meet-home.duckdns.org` keeps pointing home.
+Leaving `ip=` empty tells DuckDNS to detect your current public IP automatically, so even when your ISP changes it, `<your-subdomain>.duckdns.org` keeps pointing home.
 
-## Step 2: Open a few ports on your router
+## Step 2: Forward the same ports again (if needed)
 
-Your server is inside your home network, so you need to tell your router to forward incoming connections to it. In your router's admin page, find **Port forwarding** and forward these to your server's local IP address. To get that, run `ip addr` on the server and look for the `inet` address of your main network interface (usually `eth0` or `wlan0`). In the tables below we use `192.168.1.50` as an example local IP, so replace it with your server's actual one.
+If you already configured port forwarding during the prerequisites connectivity check, skip to Step 3. Otherwise, in your router's admin page find **Port forwarding** and forward **80 (TCP)** and **443 (TCP/UDP)** to your server's local IP (get it with `ipaddr`). We recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules don't break when it reboots.
 
-**Minimal Mandatory** (nothing works without these):
+If your server's Linux firewall is active, open the same ports there too. See the [port rules in the OpenVidu docs](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the exact `firewalld` commands and the full list of recommended ports.
 
-| Protocol | Port | Forward to (local IP) | What it's for |
-| -------- | ---- | --------------------- | ------------- |
-| TCP | 80 | 192.168.1.50 | Redirects to HTTPS and validates your SSL certificate |
-| TCP | 443 | 192.168.1.50 | The video app, the secure connection and media TURN relay |
-
-With just these two, OpenVidu Meet works, but the media quality may not be optimal because it goes through TLS and passes through three processes (Proxy, TURN and Media Server). If you can open 443 UDP, take a look at the next table for better performance.
-
-**Best Mandatory** (for better quality and performance):
-
-| Protocol | Port | Forward to (local IP) | What it's for |
-| -------- | ---- | --------------------- | ------------- |
-| TCP | 80 | 192.168.1.50 | Redirects to HTTPS and validates your SSL certificate |
-| TCP | 443 | 192.168.1.50 | The video app, the secure connection and media TURN relay |
-| UDP | 443 | 192.168.1.50 | Real-time media relay over UDP. |
-
-**Optimal** (for best quality and performance across all networks):
-
-| Protocol | Port | Forward to (local IP) | What it's for |
-| -------- | ---- | --------------------- | ------------- |
-| TCP | 80 | 192.168.1.50 | Redirects to HTTPS and validates your SSL certificate |
-| TCP | 443 | 192.168.1.50 | The video app, the secure connection and media TURN relay |
-| UDP | 443 | 192.168.1.50 | Real-time media relay over UDP. |
-| TCP | 7881 | 192.168.1.50 | WebRTC media over TCP |
-| UDP | 50000-60000 | 192.168.1.50 | Direct WebRTC media |
-
-!!! tip "Keep it simple: the option **Best Mandatory** is enough for most home setups"
-    If forwarding a 10,000-port range sounds scary, skip it. When those ports aren't open, OpenVidu automatically relays the media through port **443** instead. Calls still work perfectly; there's just a little extra load on the server. Start with the **Best Mandatory** ports and add the rest later if you want to squeeze out the best quality.
-
-Two practical tips:
-
-- Give your server a **fixed local IP** (a "DHCP reservation" in your router) so the forwarding rules don't break when it reboots.
-- If your server's Linux firewall is active, open the same ports there too. See the [port rules in the OpenVidu docs](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the exact `firewalld` commands.
 
 ## Step 3: Install OpenVidu Meet (one command, three questions)
 
@@ -132,7 +155,7 @@ The installer takes care of everything (it even installs Docker for you) and ask
 
 ![The OpenVidu Meet installer asks you to confirm](/assets/images/blog/secure-home-video-conferencing/wizard-1.png)
 
-**2. Enter your domain.** Type the DuckDNS address you created, e.g. `openvidu-meet-home.duckdns.org`, and press Enter. OpenVidu automatically requests a free, valid SSL certificate from Let's Encrypt for it, with no extra steps.
+**2. Enter your domain.** Type the DuckDNS address you created, e.g. `<your-subdomain>.duckdns.org`, and press Enter. OpenVidu automatically requests a free, valid SSL certificate from Let's Encrypt for it, with no extra steps.
 
 ![Enter your DuckDNS domain name](/assets/images/blog/secure-home-video-conferencing/wizard-2.png)
 
@@ -153,10 +176,8 @@ sudo systemctl restart openvidu   # restart
 
 ## Step 4: Make your first call
 
-Open `https://openvidu-meet-home.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
+Open `https://<your-subdomain>.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
 
-!!! note "Use your own domain"
-    Throughout this guide, `openvidu-meet-home.duckdns.org` is just an example. Everywhere you see it, use the DuckDNS subdomain you created in Step 1.
 
 ![Your OpenVidu Meet dashboard](/assets/images/blog/secure-home-video-conferencing/meet-home-light.png#only-light)
 ![Your OpenVidu Meet dashboard](/assets/images/blog/secure-home-video-conferencing/meet-home-dark.png#only-dark)
@@ -198,7 +219,7 @@ You've just put a server on the internet, so a few minutes of good habits go a l
 
 Some home internet providers block inbound ports 80 and 443 to discourage home servers. If yours does, automatic Let's Encrypt won't work, because validating a certificate needs one of those ports reachable from the internet.
 
-The fix is to install with the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md)** (instead of the simple Meet one) and its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+The fix is to install with the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.
@@ -219,5 +240,7 @@ This guide deploys **OpenVidu Single Node Community**, which is perfect for fami
 And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](../../meet/deployment/basic.md#other-deployment-options).
 
 ---
+
+![A family video call running on your own home server](/assets/images/blog/secure-home-video-conferencing/meeting.png){ align=right width=60% }
 
 That's all it takes. For the price of a tiny computer and a funny weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!
