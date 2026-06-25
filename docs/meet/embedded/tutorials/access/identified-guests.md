@@ -43,7 +43,7 @@ To run this application, you need [Node.js :fontawesome-solid-external-link:{.ex
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-meet-tutorials/meet-identified-guests
+cd openvidu-meet-tutorials/access/meet-identified-guests
 ```
 
 2. Install dependencies
@@ -88,7 +88,7 @@ Besides the usual room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:r
 
 The `POST /rooms/:roomId/members` endpoint adds an identified guest to a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/src/index.js#L76-L101' target='_blank'>index.js</a>" linenums="76"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/src/index.js#L74-L97' target='_blank'>index.js</a>" linenums="74"
 // Add an identified guest to a room
 app.post('/rooms/:roomId/members', async (req, res) => {
 	const { roomId } = req.params; // (1)!
@@ -101,9 +101,7 @@ app.post('/rooms/:roomId/members', async (req, res) => {
 
 	try {
 		// Add an identified guest to the room.
-		// Providing 'name' (and no 'userId') creates a member of type 'identified_guest':
-		// the API generates a unique 'memberId' (guest-XXXX) and a unique 'accessUrl'
-		// that grants access to the room without any authentication.
+		// Providing 'name' (and no 'userId') creates a member of type 'identified_guest'
 		const member = await httpRequest('POST', `rooms/${roomId}/members`, {
 			name, // (3)!
 			baseRole // (4)!
@@ -134,7 +132,7 @@ This endpoint adds the identified guest by sending a `POST` request to the `room
 
 The `GET /rooms/:roomId/members` endpoint lists the identified guests of a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/src/index.js#L103-L114' target='_blank'>index.js</a>" linenums="103"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/src/index.js#L99-L110' target='_blank'>index.js</a>" linenums="99"
 // List the identified guests of a room
 app.get('/rooms/:roomId/members', async (req, res) => {
 	const { roomId } = req.params;
@@ -157,7 +155,7 @@ app.get('/rooms/:roomId/members', async (req, res) => {
 
 The `DELETE /rooms/:roomId/members/:memberId` endpoint removes a member, revoking their unique link:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/src/index.js#L116-L128' target='_blank'>index.js</a>" linenums="116"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/src/index.js#L112-L124' target='_blank'>index.js</a>" linenums="112"
 // Remove a member from a room
 app.delete('/rooms/:roomId/members/:memberId', async (req, res) => {
 	const { roomId, memberId } = req.params;
@@ -187,36 +185,45 @@ The home view keeps the shared anonymous access (access as moderator or speaker)
 
 The `getRoomListItemTemplate()` function renders each room with the inherited anonymous access buttons plus a new **Members** button:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L55-L88' target='_blank'>app.js</a>" linenums="55"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L54-L96' target='_blank'>app.js</a>" linenums="54"
 function getRoomListItemTemplate(room) {
 	return `
-        <li class="list-group-item">
-            <span>${room.roomName}</span>
-            <div class="room-actions">
+        <li class="ov-list-item">
+            <span class="ov-list-item__name">${room.roomName}</span>
+            <div class="ov-list-item__actions">
                 <button
-                    class="btn btn-primary btn-sm"
+                    type="button"
+                    title="Access as moderator"
+                    class="ov-btn ov-btn--primary ov-btn--sm"
                     onclick="accessRoom('${room.access.anonymous.moderator.url}', '#home');"
                 >
-                    Access as Moderator
+                    <span class="material-symbols-outlined">shield_person</span>
+                    Moderator
                 </button>
                 <button
-                    class="btn btn-secondary btn-sm"
+                    type="button"
+                    title="Access as speaker"
+                    class="ov-btn ov-btn--secondary ov-btn--sm"
                     onclick="accessRoom('${room.access.anonymous.speaker.url}', '#home');"
                 >
-                    Access as Speaker
+                    <span class="material-symbols-outlined">record_voice_over</span>
+                    Speaker
                 </button>
                 <button
-					class="btn btn-success btn-sm"
-					onclick="manageMembers('${room.roomId}');"
-				>
+                    type="button"
+                    class="ov-btn ov-btn--users ov-btn--sm"
+                    onclick="manageMembers('${room.roomId}');"
+                >
+                    <span class="material-symbols-outlined">group</span>
                     Members
                 </button>
                 <button
+                    type="button"
                     title="Delete room"
-                    class="icon-button delete-button"
+                    class="ov-icon-btn ov-icon-btn--danger"
                     onclick="deleteRoom('${room.roomId}');"
                 >
-                    <i class="fa-solid fa-trash"></i>
+                    <span class="material-symbols-outlined">delete</span>
                 </button>
             </div>
         </li>
@@ -224,7 +231,7 @@ function getRoomListItemTemplate(room) {
 }
 ```
 
-The **Access as Moderator** and **Access as Speaker** buttons use the room's shared anonymous links (`room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url`) and are inherited from the Anonymous Access tutorial. The new **Members** button calls `manageMembers()`, which opens the members view for that room.
+The **Moderator** and **Speaker** buttons use the room's shared anonymous links (`room.access.anonymous.moderator.url` and `room.access.anonymous.speaker.url`) and are inherited from the Anonymous Access tutorial. The new **Members** button calls `manageMembers()`, which opens the members view for that room.
 
 ---
 
@@ -232,42 +239,46 @@ The **Access as Moderator** and **Access as Speaker** buttons use the room's sha
 
 The `getMemberListItemTemplate()` function builds each member item, showing the name, the base role, the unique access link, and buttons to copy the link, access the room and remove the member:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L198-L237' target='_blank'>app.js</a>" linenums="198"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L210-L253' target='_blank'>app.js</a>" linenums="210"
 function getMemberListItemTemplate(member) {
 	// In this tutorial every member is an identified guest, so each one has a unique
 	// access link and buttons to copy it, access the room through it and remove the member.
 	return `
-        <li class="member-container">
-            <div class="member-info">
-                <p class="member-name">
+        <li class="ov-member">
+            <div class="ov-member__info">
+                <p class="ov-member__name">
                     ${member.name}
-                    <span class="badge ${member.baseRole === 'moderator' ? 'bg-primary' : 'bg-secondary'}">
+                    <span class="ov-badge ov-badge--${member.baseRole === 'moderator' ? 'moderator' : 'speaker'}">
+                        <span class="material-symbols-outlined">${member.baseRole === 'moderator' ? 'shield_person' : 'record_voice_over'}</span>
                         ${member.baseRole}
                     </span>
                 </p>
-                <p class="member-url" title="${member.accessUrl}">${member.accessUrl}</p>
+                <p class="ov-member__url" title="${member.accessUrl}">${member.accessUrl}</p>
             </div>
-            <div class="member-actions">
-                <button 
+            <div class="ov-member__actions">
+                <button
+					type="button"
 					title="Copy access link"
-					class="icon-button"
+					class="ov-icon-btn"
 					onclick="copyAccessUrl('${member.memberId}', this)"
 				>
-                    <i class="fa-solid fa-copy"></i>
-                </button>
-                <button 
-					title="Access as ${member.name}"
-					class="icon-button"
-					onclick="accessRoom('${member.accessUrl}', '#members')"
-				>
-                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span class="material-symbols-outlined">content_copy</span>
                 </button>
                 <button
+					type="button"
+					title="Access as ${member.name}"
+					class="ov-icon-btn"
+					onclick="accessRoom('${member.accessUrl}', '#members')"
+				>
+                    <span class="material-symbols-outlined">login</span>
+                </button>
+                <button
+					type="button"
 					title="Remove member"
-					class="icon-button delete-button"
+					class="ov-icon-btn ov-icon-btn--danger"
 					onclick="removeMember('${member.memberId}')"
 				>
-                    <i class="fa-solid fa-trash"></i>
+                    <span class="material-symbols-outlined">delete</span>
                 </button>
             </div>
         </li>
@@ -283,7 +294,7 @@ Each item displays the member's fixed `name`, a badge with its `baseRole`, and i
 
 When the "Add guest" form is submitted, the `addGuest()` function creates the identified guest with the provided name and role:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L239-L271' target='_blank'>app.js</a>" linenums="239"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L255-L287' target='_blank'>app.js</a>" linenums="255"
 async function addGuest(e) {
 	// Prevent the default form submission
 	e.preventDefault();
@@ -303,8 +314,8 @@ async function addGuest(e) {
 			baseRole
 		}); // (2)!
 
-		// Add new member to the list
-		members.set(member.memberId, member); // (3)!
+		// Add the new member to the start (the API returns members newest first)
+		prependToMap(members, member.memberId, member); // (3)!
 		renderMembers();
 
 		// Reset the form
@@ -321,7 +332,7 @@ async function addGuest(e) {
 
 1. Get the guest's `name` and the chosen `baseRole` from the form.
 2. Make a `POST` request to the `/rooms/:roomId/members` endpoint to add the identified guest to the current room.
-3. Add the returned member (including its generated `memberId` and unique `accessUrl`) to the local `members` map and re-render the list.
+3. Add the returned member (including its generated `memberId` and unique `accessUrl`) to the start of the local `members` map with `prependToMap()` (so it appears first, matching the API order) and re-render the list.
 
 ---
 
@@ -329,7 +340,7 @@ async function addGuest(e) {
 
 The `copyAccessUrl()` function copies the member's unique link to the clipboard and briefly shows a confirmation:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L285-L304' target='_blank'>app.js</a>" linenums="285"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L301-L319' target='_blank'>app.js</a>" linenums="301"
 async function copyAccessUrl(memberId, button) {
 	const member = members.get(memberId);
 	if (!member) {
@@ -340,11 +351,10 @@ async function copyAccessUrl(memberId, button) {
 		await navigator.clipboard.writeText(member.accessUrl); // (1)!
 
 		// Briefly show a confirmation icon
-		const icon = button.querySelector('i');
-		const previousClass = icon.className;
-		icon.className = 'fa-solid fa-check'; // (2)!
+		const icon = button.querySelector('.material-symbols-outlined');
+		icon.textContent = 'check'; // (2)!
 		setTimeout(() => {
-			icon.className = previousClass;
+			icon.textContent = 'content_copy';
 		}, 1500);
 	} catch (error) {
 		console.error('Error copying access link:', error.message);
@@ -361,20 +371,22 @@ async function copyAccessUrl(memberId, button) {
 
 The `accessRoom()` function embeds the OpenVidu Meet WebComponent for a given room URL. It is shared by the anonymous access buttons and the per-guest access button:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L308-L337' target='_blank'>app.js</a>" linenums="308"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-identified-guests/public/js/app.js#L323-L355' target='_blank'>app.js</a>" linenums="323"
 // Embed the OpenVidu Meet component for the given room URL.
 // 'returnViewId' is the view to show again when the meeting is closed
 // (the home screen for anonymous access, the members screen for an identified guest).
 function accessRoom(roomUrl, returnViewId) {
 	// Hide the home and members screens and show the room screen
-	document.querySelector('#home').hidden = true;
-	document.querySelector('#members').hidden = true;
+	const homeScreen = document.querySelector('#home');
+	homeScreen.hidden = true;
+	const membersScreen = document.querySelector('#members');
+	membersScreen.hidden = true;
 	const roomScreen = document.querySelector('#room');
 	roomScreen.hidden = false;
 
-	// Inject the OpenVidu Meet component into the meeting container specifying the room URL
-	const meetingContainer = document.querySelector('#meeting-container');
-	meetingContainer.innerHTML = `
+	// Inject the OpenVidu Meet component into the meet container specifying the room URL
+	const meetContainer = document.querySelector('#meet-container');
+	meetContainer.innerHTML = `
         <openvidu-meet
             room-url="${roomUrl}"
         >
@@ -388,9 +400,10 @@ function accessRoom(roomUrl, returnViewId) {
 		console.log('OpenVidu Meet component closed');
 
 		// Clear the component and go back to the view we came from
-		meetingContainer.innerHTML = '';
+		meetContainer.innerHTML = '';
 		roomScreen.hidden = true;
-		document.querySelector(returnViewId).hidden = false;
+		const returnView = document.querySelector(returnViewId);
+		returnView.hidden = false;
 	});
 }
 ```

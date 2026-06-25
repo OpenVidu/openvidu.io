@@ -42,7 +42,7 @@ To run this application, you need [Node.js :fontawesome-solid-external-link:{.ex
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-meet-tutorials/meet-users
+cd openvidu-meet-tutorials/access/meet-users
 ```
 
 2. Install dependencies
@@ -91,7 +91,7 @@ The room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:roomId`) and th
 
 The `POST /users` endpoint creates a new OpenVidu Meet user:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L27-L52' target='_blank'>index.js</a>" linenums="27"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L25-L50' target='_blank'>index.js</a>" linenums="25"
 // Create a new user
 app.post('/users', async (req, res) => {
 	const { userId, name, password } = req.body; // (1)!
@@ -133,7 +133,7 @@ This endpoint creates a user with the OpenVidu Meet API by sending a `POST` requ
 
 The `GET /users` endpoint retrieves the list of users:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L54-L64' target='_blank'>index.js</a>" linenums="54"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L52-L62' target='_blank'>index.js</a>" linenums="52"
 // List users
 app.get('/users', async (_req, res) => {
 	try {
@@ -157,12 +157,13 @@ This endpoint lists only the `room_member` users. This keeps the tutorial focuse
 
 The `DELETE /users/:userId` endpoint deletes a user:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L66-L76' target='_blank'>index.js</a>" linenums="66"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L64-L75' target='_blank'>index.js</a>" linenums="64"
 // Delete a user
 app.delete('/users/:userId', async (req, res) => {
 	const { userId } = req.params; // (1)!
 
 	try {
+		// Delete the OpenVidu Meet user using the API.
 		await httpRequest('DELETE', `users/${userId}`); // (2)!
 		res.status(200).json({ message: `User '${userId}' deleted successfully` });
 	} catch (error) {
@@ -180,7 +181,7 @@ app.delete('/users/:userId', async (req, res) => {
 
 Adding a member uses the **same** `POST /rooms/:roomId/members` endpoint as the Identified Guests tutorial, but now accepts a `userId` (to add a user) in addition to a `name` (to add an identified guest). The field provided selects the member type:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L129-L153' target='_blank'>index.js</a>" linenums="129"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L128-L152' target='_blank'>index.js</a>" linenums="128"
 // Add a member to a room (either a user or an identified guest)
 app.post('/rooms/:roomId/members', async (req, res) => {
 	const { roomId } = req.params;
@@ -213,14 +214,13 @@ app.post('/rooms/:roomId/members', async (req, res) => {
 
 Listing members no longer filters by type, so both users and identified guests are returned:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L155-L167' target='_blank'>index.js</a>" linenums="155"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/src/index.js#L154-L165' target='_blank'>index.js</a>" linenums="154"
 // List the members of a room (both users and identified guests)
 app.get('/rooms/:roomId/members', async (req, res) => {
 	const { roomId } = req.params;
 
 	try {
-		// List all the members of the room using the API (100 max).
-		// We do not filter by type, so both users and identified guests are returned.
+		// List all the members of the room using the API (100 max)
 		const { members } = await httpRequest('GET', `rooms/${roomId}/members?maxItems=100`); // (1)!
 		res.status(200).json({ members });
 	} catch (error) {
@@ -245,7 +245,7 @@ The frontend adds a panel to manage users, lets the members view add **either a 
 
 When the "Create User" form is submitted, the `createUser()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L71-L104' target='_blank'>app.js</a>" linenums="71"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L87-L120' target='_blank'>app.js</a>" linenums="87"
 async function createUser(e) {
 	// Prevent the default form submission
 	e.preventDefault(); // (1)!
@@ -266,8 +266,8 @@ async function createUser(e) {
 			password
 		}); // (3)!
 
-		// Add new user to the list
-		users.set(user.userId, user); // (4)!
+		// Add the new user to the start (the API returns users newest first)
+		prependToMap(users, user.userId, user); // (4)!
 		renderUsers();
 
 		// Reset the form
@@ -285,7 +285,7 @@ async function createUser(e) {
 1. Prevent the default form submission so the page is not reloaded.
 2. Get the `userId`, `name` and `password` from the form inputs. The `user-id` input enforces the format constraints (5-20 characters, lowercase letters, numbers and underscores) through HTML validation attributes.
 3. Make a `POST` request to the `/users` endpoint to create the user.
-4. Add the new user to the local `users` map and re-render the list.
+4. Add the new user to the start of the local `users` map (with the `prependToMap` helper, so newly created users appear first) and re-render the list.
 5. If the request fails (for example, a duplicated `userId`), the error message returned by the API is shown in the form.
 
 The `renderUsers()` and `deleteUser()` functions follow the same pattern as their room counterparts (`renderRooms()` and `deleteRoom()`): one renders the list of users from the `users` map, and the other calls `DELETE /users/:userId` and removes the user from the list.
@@ -296,7 +296,7 @@ The `renderUsers()` and `deleteUser()` functions follow the same pattern as thei
 
 The members view now has two add forms. The identified-guest form (and its `addGuest()` handler) is inherited from the previous tutorial. The new user form is populated from a dropdown of the users that are not already members of the room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L309-L322' target='_blank'>app.js</a>" linenums="309"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L337-L350' target='_blank'>app.js</a>" linenums="337"
 // Populate the "add user" select with the users that are not already members of the room
 function renderMemberUserOptions() {
 	const select = document.querySelector('#member-user');
@@ -309,7 +309,7 @@ function renderMemberUserOptions() {
 
 	select.innerHTML =
 		`<option value="" disabled selected>Select a user</option>` +
-		availableUsers.map((user) => `<option value="${user.userId}">${user.userId} · ${user.name}</option>`).join(''); // (2)!
+		availableUsers.map((user) => `<option value="${user.userId}">${user.name} (${user.userId})</option>`).join(''); // (2)!
 }
 ```
 
@@ -318,7 +318,7 @@ function renderMemberUserOptions() {
 
 When the user form is submitted, the `addUser()` function adds the selected user as a member:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L377-L406' target='_blank'>app.js</a>" linenums="377"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L412-L444' target='_blank'>app.js</a>" linenums="412"
 async function addUser(e) {
 	// Prevent the default form submission
 	e.preventDefault();
@@ -338,9 +338,12 @@ async function addUser(e) {
 			baseRole
 		}); // (2)!
 
-		// Add new member to the list
-		members.set(member.memberId, member);
+		// Add the new member to the start (the API returns members newest first)
+		prependToMap(members, member.memberId, member);
 		renderMembers();
+
+		// Reset the form
+		e.target.reset();
 	} catch (error) {
 		console.error('Error adding user:', error.message);
 
@@ -360,7 +363,7 @@ async function addUser(e) {
 
 The `getMemberListItemTemplate()` function now distinguishes the two member types: identified guests keep their unique link and copy/access buttons, while users only show a remove button (they access through the room's **Access as user** action):
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L324-L375' target='_blank'>app.js</a>" linenums="324"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L352-L410' target='_blank'>app.js</a>" linenums="352"
 function getMemberListItemTemplate(member) {
 	// A member can be a user (accesses the room by logging in) or an identified guest (accesses the room through a unique link)
 	const isGuest = member.type === 'identified_guest'; // (1)!
@@ -373,41 +376,48 @@ function getMemberListItemTemplate(member) {
 	const guestActions = isGuest // (2)!
 		? `
                 <button
+					type="button"
 					title="Copy access link"
-					class="icon-button"
+					class="ov-icon-btn"
 					onclick="copyAccessUrl('${member.memberId}', this)"
 				>
-                    <i class="fa-solid fa-copy"></i>
+                    <span class="material-symbols-outlined">content_copy</span>
                 </button>
                 <button
+					type="button"
 					title="Access as ${member.name}"
-					class="icon-button"
+					class="ov-icon-btn"
 					onclick="accessRoom('${member.accessUrl}', '#members')"
 				>
-                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span class="material-symbols-outlined">login</span>
                 </button>`
 		: '';
 
 	return `
-        <li class="member-container">
-            <div class="member-info">
-                <p class="member-name">
+        <li class="ov-member">
+            <div class="ov-member__info">
+                <p class="ov-member__name">
                     ${member.name}
-                    <span class="badge ${isGuest ? 'bg-info' : 'bg-dark'}">${typeLabel}</span>
-                    <span class="badge ${member.baseRole === 'moderator' ? 'bg-primary' : 'bg-secondary'}">
+                    <span class="ov-badge ov-badge--${isGuest ? 'guest' : 'user'}">
+                        <span class="material-symbols-outlined">${isGuest ? 'person' : 'verified_user'}</span>
+                        ${typeLabel}
+                    </span>
+                    <span class="ov-badge ov-badge--${member.baseRole === 'moderator' ? 'moderator' : 'speaker'}">
+                        <span class="material-symbols-outlined">${member.baseRole === 'moderator' ? 'shield_person' : 'record_voice_over'}</span>
                         ${member.baseRole}
                     </span>
                 </p>
-                <p class="member-url" title="${subtitle}">${subtitle}</p>
+                <p class="ov-member__url" title="${subtitle}">${subtitle}</p>
             </div>
-            <div class="member-actions">
+            <div class="ov-member__actions">
                 ${guestActions}
                 <button
+					type="button"
 					title="Remove member"
-					class="icon-button delete-button"
+					class="ov-icon-btn ov-icon-btn--danger"
 					onclick="removeMember('${member.memberId}')"
 				>
-                    <i class="fa-solid fa-trash"></i>
+                    <span class="material-symbols-outlined">delete</span>
                 </button>
             </div>
         </li>
@@ -424,7 +434,7 @@ function getMemberListItemTemplate(member) {
 
 All user members of a room share the same user access URL, available in the `access.user.url` property of the room object. The `accessAsUser()` function accesses the room through that URL, reusing the shared `accessRoom()` function from the previous tutorial:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L477-L481' target='_blank'>app.js</a>" linenums="477"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/access/meet-users/public/js/app.js#L514-L518' target='_blank'>app.js</a>" linenums="514"
 // Access the room as a user: all users share the same authenticated access URL.
 // OpenVidu Meet shows its own login form inside the component until the user logs in.
 function accessAsUser() {

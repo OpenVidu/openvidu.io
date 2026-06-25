@@ -11,13 +11,13 @@ OpenVidu Meet offers a robust and adaptable way to add video conferencing to you
 
     The tutorials are **progressive**: each one builds on the previous tutorial, adding a new capability on top of the same application. If you are getting started with OpenVidu Meet, we recommend following them in order, from top to bottom.
 
-## Integration
+## Embedding options
 
-Different ways to integrate OpenVidu Meet into your own application:
+Different ways to embed OpenVidu Meet into your own application:
 
-- **[Direct Link](./integration/direct-link.md)**: redirect your users to the OpenVidu Meet interface through a direct URL. The simplest integration, with no embedding.
-- **[WebComponent](./integration/webcomponent.md)**: embed the meeting directly inside your application with the `<openvidu-meet>` WebComponent.
-- **[WebComponent Commands & Events](./integration/webcomponent-advanced.md)**: drive the embedded WebComponent programmatically through commands and react to meeting events.
+- **[Direct Link](./embedding-options/direct-link.md)**: redirect your users to the OpenVidu Meet interface through a direct URL. The simplest integration, with no embedding.
+- **[WebComponent](./embedding-options/webcomponent.md)**: embed the meeting directly inside your application with the `<openvidu-meet>` WebComponent.
+- **[WebComponent Commands & Events](./embedding-options/webcomponent-advanced.md)**: drive the embedded WebComponent programmatically through commands and react to meeting events.
 
 !!! info "What about the iframe?"
 

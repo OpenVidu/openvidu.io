@@ -36,7 +36,7 @@ To run this application, you need [Node.js :fontawesome-solid-external-link:{.ex
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-meet-tutorials/meet-webhooks
+cd openvidu-meet-tutorials/advanced-features/meet-webhooks
 ```
 
 2. Install dependencies
@@ -75,8 +75,7 @@ The main backend changes involve implementing webhook processing, SSE communicat
 
 The backend now includes SSE support for real-time client notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L1-L29' target='_blank'>index.js</a>" linenums="1" hl_lines="6 18-19"
-import bodyParser from 'body-parser';
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L1-L27' target='_blank'>index.js</a>" linenums="1" hl_lines="5 26-27"
 import cors from 'cors';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
@@ -91,7 +90,16 @@ dotenv.config();
 const SERVER_PORT = process.env.SERVER_PORT || 6080;
 const OV_MEET_SERVER_URL = process.env.OV_MEET_SERVER_URL || 'http://localhost:9080/meet';
 const OV_MEET_API_KEY = process.env.OV_MEET_API_KEY || 'meet-api-key';
-const MAX_WEBHOOK_AGE = 120 * 1000; // 2 minutes in milliseconds
+const MAX_WEBHOOK_AGE = 120 * 1000; // Reject webhook events older than 2 minutes (replay-attack protection)
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Create SSE instance for real-time notifications
 const sse = new SSE(); // (2)!
@@ -108,7 +116,7 @@ This code sets up the backend to support Server-Sent Events (SSE), enabling the 
 
 A new endpoint allows clients to subscribe to real-time notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L123-L124' target='_blank'>index.js</a>" linenums="123"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L128-L129' target='_blank'>index.js</a>" linenums="128"
 // SSE endpoint for real-time notifications
 app.get('/events', sse.init); // (1)!
 ```
@@ -123,7 +131,7 @@ This endpoint enables clients to establish a persistent connection for receiving
 
 A new endpoint handles incoming webhooks from OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L126-L142' target='_blank'>index.js</a>" linenums="126"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L131-L147' target='_blank'>index.js</a>" linenums="131"
 // Webhook endpoint to receive events from OpenVidu Meet
 app.post('/webhook', (req, res) => {
 	const body = req.body;
@@ -155,26 +163,33 @@ This endpoint receives webhook events from OpenVidu Meet, validates their authen
 
 A security function validates webhook authenticity:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L181-L201' target='_blank'>index.js</a>" linenums="181"
-// Helper function to validate webhook event signature
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/src/index.js#L186-L213' target='_blank'>index.js</a>" linenums="186"
+// Helper function to validate the signature of a webhook event.
+// OpenVidu Meet signs every webhook so the receiver can verify it is genuine and was not tampered with.
+// Each request carries two headers: 'x-signature' (the signature) and 'x-timestamp' (when it was sent).
 const isWebhookEventValid = (body, headers) => {
 	const signature = headers['x-signature']; // (1)!
 	const timestamp = parseInt(headers['x-timestamp'], 10); // (2)!
 
+	// Reject the event if either security header is missing or invalid
 	if (!signature || !timestamp || isNaN(timestamp)) {
 		return false; // (3)!
 	}
 
+	// Reject events older than MAX_WEBHOOK_AGE to prevent replay attacks
+	// (an attacker resending a request that was valid in the past)
 	const current = Date.now();
 	const diffTime = current - timestamp;
 	if (diffTime >= MAX_WEBHOOK_AGE) {
-		// Webhook event too old
 		return false; // (4)!
 	}
 
+	// Recreate the signature locally: HMAC-SHA256 of "<timestamp>.<body>" using the API key as the secret.
+	// If our result matches the received signature, the event really came from OpenVidu Meet.
 	const signedPayload = `${timestamp}.${JSON.stringify(body)}`; // (5)!
 	const expectedSignature = crypto.createHmac('sha256', OV_MEET_API_KEY).update(signedPayload, 'utf8').digest('hex'); // (6)!
 
+	// Compare with timingSafeEqual (not ===) so the comparison takes constant time and does not leak the expected value
 	return crypto.timingSafeEqual(Buffer.from(expectedSignature, 'hex'), Buffer.from(signature, 'hex')); // (7)!
 };
 ```
@@ -219,7 +234,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 A new function establishes and manages the SSE connection:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L376-L397' target='_blank'>app.js</a>" linenums="376"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L387-L408' target='_blank'>app.js</a>" linenums="387"
 // Function to start listening for webhook events via Server-Sent Events
 function startWebhookNotifications() {
 	const eventSource = new EventSource('/events'); // (1)!
@@ -258,7 +273,7 @@ This function creates a persistent connection to receive real-time webhook notif
 
 A new function processes incoming webhook notifications and updates the UI accordingly:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L399-L427' target='_blank'>app.js</a>" linenums="399"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L410-L431' target='_blank'>app.js</a>" linenums="410"
 // Function to handle webhook notifications and update UI
 function handleWebhookNotification(webhookData) {
 	const { event, data } = webhookData; // (1)!
@@ -266,26 +281,18 @@ function handleWebhookNotification(webhookData) {
 
 	switch (event) {
 		case 'meetingStarted':
-			// Update rooms map with updated room info and re-render if on home screen
-			if (isOnHomeScreen()) {
-				// (2)!
-				rooms.set(data.roomId, data);
-				renderRooms(); // (3)!
-			}
-			break;
 		case 'meetingEnded':
-			// Update rooms map with updated room info and re-render if on home screen
-			if (isOnHomeScreen()) {
-				rooms.set(data.roomId, data);
-				renderRooms();
-			}
+			// Update the room in the map and refresh the list,
+			// so the home view shows the current status
+			rooms.set(data.roomId, data); // (2)!
+			renderRooms();
 			break;
 		case 'recordingEnded':
 			// Add recording to list and re-render if on recordings screen
 			if (isOnRecordingsScreen(data.roomName)) {
-				// (4)!
-				recordings.set(data.recordingId, data);
-				renderRecordings(); // (5)!
+				// (3)!
+				prependToMap(recordings, data.recordingId, data); // (4)!
+				renderRecordings();
 			}
 			break;
 	}
@@ -293,46 +300,38 @@ function handleWebhookNotification(webhookData) {
 ```
 
 1. Extract the event type and data from the webhook payload.
-2. Check if the user is currently on the home screen before updating room status.
-3. Update the rooms map and re-render the room list with new status information.
-4. Check if the user is viewing recordings for the relevant room before adding new recordings.
-5. Update the recordings map and re-render the recordings list with new recording data.
+2. Update the rooms map with the new room info and re-render the room list with the updated status.
+3. Check if the user is viewing recordings for the relevant room before adding new recordings.
+4. Prepend the new recording to the recordings map and re-render the recordings list so it appears first.
 
-This function processes different webhook event types and updates the appropriate UI elements only when the user is viewing the relevant screen:
+This function processes different webhook event types and updates the appropriate UI elements:
 
-- For `meetingStarted` and `meetingEnded` events, it updates the room status and re-renders the room list if the user is on the home screen.
-- For `recordingEnded` events, it adds the new recording to the list and re-renders the recordings list if the user is viewing recordings for the relevant room.
+- For `meetingStarted` and `meetingEnded` events, it updates the room status in the `rooms` map and re-renders the room list, so the home view always reflects the current status.
+- For `recordingEnded` events, it adds the new recording to the list and re-renders the recordings list, but only if the user is currently viewing recordings for the relevant room.
 
-In order to determine the current screen context, new utility functions have been introduced:
+The `prependToMap()` helper used here adds an entry to the start of a `Map` so newly created items appear first, matching the order returned by the OpenVidu Meet API. It is inherited from the previous tutorials in this series.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L472-L488' target='_blank'>app.js</a>" linenums="472"
-// Helper functions to detect current screen
-function isOnHomeScreen() {
-	const homeScreen = document.querySelector('#home');
-	return homeScreen && !homeScreen.hidden; // (1)!
-}
+The `recordingEnded` case relies on a helper that checks the current screen context:
 
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L486-L497' target='_blank'>app.js</a>" linenums="486"
+// Helper to detect whether the recordings view is currently shown
 function isOnRecordingsScreen(roomName) {
 	const recordingsScreen = document.querySelector('#recordings');
 	if (!recordingsScreen || recordingsScreen.hidden) {
-		return false; // (2)!
+		return false; // (1)!
 	}
 
 	// Check if the room filter matches room name
 	const roomSearchInput = document.querySelector('#recordings-room-search');
 	const roomFilter = roomSearchInput ? roomSearchInput.value.trim() : '';
-	return !roomFilter || roomName.startsWith(roomFilter); // (3)!
+	return !roomFilter || roomName === roomFilter; // (2)!
 }
 ```
 
-1. Check if the home screen is currently visible to determine if room updates should be applied.
-2. Return false if the recordings screen is not visible.
-3. Check if the room name matches the current filter to determine if recording updates are relevant.
+1. Return false if the recordings screen is not visible.
+2. Return true only when there is no room filter, or the room name matches the current filter, so recording updates are applied only when relevant.
 
-These helper functions ensure that UI updates are only applied when the relevant sections are being viewed, optimizing performance and preventing unnecessary re-renders:
-
-- `isOnHomeScreen()`: Checks if the home screen is currently visible.
-- `isOnRecordingsScreen(roomName)`: Checks if the recordings screen is visible and if the room name matches the current filter.
+This helper ensures that UI updates are only applied when the recordings view is being shown and the incoming recording matches the room currently being filtered, avoiding unnecessary re-renders.
 
 ---
 
@@ -340,34 +339,86 @@ These helper functions ensure that UI updates are only applied when the relevant
 
 The room template has been updated to include visual status indicators:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L51-L99' target='_blank'>app.js</a>" linenums="51"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L53-L121' target='_blank'>app.js</a>" linenums="53" hl_lines="2-13 17-20"
 function getRoomListItemTemplate(room) {
-	const roomStatus = room.status === 'active_meeting' ? 'ACTIVE' : room.status === 'open' ? 'OPEN' : 'CLOSED'; // (1)!
-	const roomStatusBadgeClass =
-		room.status === 'active_meeting' ? 'bg-primary' : room.status === 'open' ? 'bg-success' : 'bg-warning'; // (2)!
+	// Map each room status to its label, badge color and icon
+	const STATUS = {
+		active_meeting: { label: 'ACTIVE MEETING', badgeClass: 'ov-badge--active', icon: 'videocam' },
+		open: { label: 'OPEN', badgeClass: 'ov-badge--open', icon: 'meeting_room' },
+		closed: { label: 'CLOSED', badgeClass: 'ov-badge--closed', icon: 'lock' }
+	}; // (1)!
+	const {
+		label: roomStatus,
+		badgeClass: roomStatusBadgeClass,
+		icon: roomStatusIcon
+	} = STATUS[room.status] ?? STATUS.closed; // (2)!
 
 	return `
-        <li class="list-group-item">
-            <div class="room-info">
-                <span>${room.roomName}</span>
-                <span class="badge ${roomStatusBadgeClass}">${roomStatus}</span>
+        <li class="ov-list-item">
+            <div class="ov-list-item__meta">
+                <span class="ov-list-item__name">${room.roomName}</span>
+                <span class="ov-badge ${roomStatusBadgeClass}">
+                    <span class="material-symbols-outlined">${roomStatusIcon}</span>
+                    ${roomStatus}
+                </span>
             </div>
-            <div class="room-actions">
-                <!-- buttons remain the same -->
+            <div class="ov-list-item__actions">
+                <button
+                    type="button"
+                    title="Access as moderator"
+                    class="ov-btn ov-btn--primary ov-btn--sm"
+                    onclick="accessRoom(
+                        '${room.roomName}',
+                        '${room.access.anonymous.moderator.url}',
+                        'moderator'
+                    );"
+                >
+                    <span class="material-symbols-outlined">shield_person</span>
+                    Moderator
+                </button>
+                <button
+                    type="button"
+                    title="Access as speaker"
+                    class="ov-btn ov-btn--secondary ov-btn--sm"
+                    onclick="accessRoom(
+                        '${room.roomName}',
+                        '${room.access.anonymous.speaker.url}',
+                        'speaker'
+                    );"
+                >
+                    <span class="material-symbols-outlined">record_voice_over</span>
+                    Speaker
+                </button>
+                <button
+                    type="button"
+                    class="ov-btn ov-btn--recordings ov-btn--sm"
+                    onclick="listRecordingsByRoom('${room.roomName}');"
+                >
+                    <span class="material-symbols-outlined">video_library</span>
+                    View Recordings
+                </button>
+                <button
+                    type="button"
+                    title="Delete room"
+                    class="ov-icon-btn ov-icon-btn--danger"
+                    onclick="deleteRoom('${room.roomId}');"
+                >
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
             </div>
         </li>
     `;
 }
 ```
 
-1. Map room status values to user-friendly display text.
-2. Assign appropriate CSS classes for visual styling based on room status.
+1. Define a `STATUS` lookup object that maps each room status value to its display label, badge CSS class and Material Symbols icon.
+2. Destructure the entry for the room's current status, falling back to the `closed` entry for any unknown status.
 
-The room template now includes status badges that provide immediate visual feedback about room state:
+The room template now includes status badges that provide immediate visual feedback about room state. The badge label, color (through the `ov-badge--*` design-system class) and icon are all resolved from the `STATUS` lookup object:
 
-- **ACTIVE** (blue badge): Meeting is currently in progress
-- **OPEN** (green badge): Room is available for access
-- **CLOSED** (yellow badge): Room is closed and cannot be accessed
+- **ACTIVE MEETING** (`videocam` icon, `ov-badge--active`): A meeting is currently in progress.
+- **OPEN** (`meeting_room` icon, `ov-badge--open`): The room is available for access.
+- **CLOSED** (`lock` icon, `ov-badge--closed`): The room is closed and cannot be accessed.
 
 ## Accessing this tutorial from other computers or phones
 

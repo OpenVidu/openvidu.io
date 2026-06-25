@@ -5,7 +5,7 @@ description: Learn how to build a video conferencing application using Node.js a
 
 # WebComponent Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/integration/meet-webcomponent-basic){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/embedding-options/meet-webcomponent-basic){ .md-button target=\_blank }
 
 This tutorial extends the [Direct Link tutorial](direct-link.md) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -41,7 +41,7 @@ To run this application, you need [Node.js :fontawesome-solid-external-link:{.ex
 1. Navigate into the application directory
 
 ```bash
-cd openvidu-meet-tutorials/meet-webcomponent-basic
+cd openvidu-meet-tutorials/embedding-options/meet-webcomponent-basic
 ```
 
 2. Install dependencies
@@ -92,9 +92,9 @@ The main changes in the frontend involve replacing direct links with embedded We
 
 To use the OpenVidu Meet WebComponent in your application, you need to include it in your HTML file by adding a script tag to the end of the `<body>` section:
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-webcomponent-basic/public/index.html#L66-L67' target='_blank'>index.html</a>" linenums="66"
-<!-- OpenVidu Meet WebComponent bundle -->
-<script src="http://localhost:9080/meet/v1/openvidu-meet.js"></script>
+```html title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-basic/public/index.html#L80-L81' target='_blank'>index.html</a>" linenums="80"
+		<!-- OpenVidu Meet WebComponent bundle -->
+		<script src="http://localhost:9080/meet/v1/openvidu-meet.js"></script>
 ```
 
 ---
@@ -103,30 +103,37 @@ To use the OpenVidu Meet WebComponent in your application, you need to include i
 
 The room list template has been modified to use buttons instead of direct links, enabling WebComponent integration:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-webcomponent-basic/public/js/app.js#L48-L75' target='_blank'>app.js</a>" linenums="48" hl_lines="6-17"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L50-L84' target='_blank'>app.js</a>" linenums="50" hl_lines="6-23"
 function getRoomListItemTemplate(room) {
 	return `
-        <li class="list-group-item">
-            <span>${room.roomName}</span>
-            <div class="room-actions">
+        <li class="ov-list-item">
+            <span class="ov-list-item__name">${room.roomName}</span>
+            <div class="ov-list-item__actions">
                 <button
-                    class="btn btn-primary btn-sm"
+                    type="button"
+                    title="Access as moderator"
+                    class="ov-btn ov-btn--primary ov-btn--sm"
                     onclick="accessRoom('${room.access.anonymous.moderator.url}');"
                 >
-                    Access as Moderator
+                    <span class="material-symbols-outlined">shield_person</span>
+                    Moderator
                 </button>
                 <button
-                    class="btn btn-secondary btn-sm"
+                    type="button"
+                    title="Access as speaker"
+                    class="ov-btn ov-btn--secondary ov-btn--sm"
                     onclick="accessRoom('${room.access.anonymous.speaker.url}');"
                 >
-                    Access as Speaker
+                    <span class="material-symbols-outlined">record_voice_over</span>
+                    Speaker
                 </button>
                 <button
+                    type="button"
                     title="Delete room"
-                    class="icon-button delete-button"
+                    class="ov-icon-btn ov-icon-btn--danger"
                     onclick="deleteRoom('${room.roomId}');"
                 >
-                    <i class="fa-solid fa-trash"></i>
+                    <span class="material-symbols-outlined">delete</span>
                 </button>
             </div>
         </li>
@@ -140,9 +147,9 @@ The key difference from the Direct Link tutorial is that instead of using anchor
 
 #### Accessing a room with the WebComponent
 
-When the user clicks the `Access as Moderator` or `Access as Speaker` button, the `accessRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
+When the user clicks the `Moderator` or `Speaker` button, the `accessRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/integration/meet-webcomponent-basic/public/js/app.js#L120-L136' target='_blank'>app.js</a>" linenums="120"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L131-L147' target='_blank'>app.js</a>" linenums="131"
 function accessRoom(roomUrl) {
 	// Hide the home screen and show the room screen
 	const homeScreen = document.querySelector('#home');
@@ -150,9 +157,9 @@ function accessRoom(roomUrl) {
 	const roomScreen = document.querySelector('#room');
 	roomScreen.hidden = false; // (2)!
 
-	// Inject the OpenVidu Meet component into the meeting container specifying the room URL
-	const meetingContainer = document.querySelector('#meeting-container');
-	meetingContainer.innerHTML = `
+	// Inject the OpenVidu Meet component into the meet container specifying the room URL
+	const meetContainer = document.querySelector('#meet-container');
+	meetContainer.innerHTML = `
         <openvidu-meet
             room-url="${roomUrl}"
             leave-redirect-url="/"
