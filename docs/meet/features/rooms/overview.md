@@ -15,7 +15,7 @@ Rooms are the entry point to OpenVidu Meet: every video call happens inside a ro
 
 - Create a room first, then start meetings within it.
 - One room can host just one meeting at a time, but it can be reused for multiple meetings over time.
-- Every room has different **access links**. Anyone connecting to these links will either start a new meeting (if none is active) or join the ongoing meeting.
+- Every room has different **access links**. Anyone connecting to these links and pressing the join button will either start a new meeting (if none is active) or join the ongoing meeting.
 
 ## In this section
 

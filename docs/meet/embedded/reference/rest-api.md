@@ -21,7 +21,7 @@ X-API-KEY: your-api-key
 
 1. Connect to OpenVidu Meet app at `https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/meet`.
 2. Navigate to the **"Embedded"** page.
-3. Click on **":material-key: Generate API Key"** button.
+3. Click on **"Generate API Key"** button.
 
 <a class="glightbox" href="../../../../assets/videos/meet/generate-api-key.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery2"><video class="round-corners" style="margin-bottom: 2em" src="../../../../assets/videos/meet/generate-api-key.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 

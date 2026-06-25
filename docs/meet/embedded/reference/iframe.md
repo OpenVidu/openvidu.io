@@ -59,7 +59,7 @@ Control the meeting programmatically by sending commands via `postMessage` to th
 
 ```javascript
 const iframe = document.querySelector('iframe');
-const targetOrigin = '*'; // Replace with your actual domain
+const targetOrigin = '*'; // Replace with your actual OpenVidu deployment domain
 iframe.contentWindow.postMessage({ command: 'leaveRoom' }, targetOrigin);
 ```
 

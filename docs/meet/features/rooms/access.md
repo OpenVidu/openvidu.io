@@ -9,22 +9,25 @@ tags:
 
 Only **room members** can access a room — to view its recordings or to join a meeting in it, becoming a participant. Room members can be **users**, **identified guests** or **anonymous guests**, all described in detail in the [Room Members](../room-members/overview.md) feature.
 
-Each kind of member reaches the room through a different kind of **access link** and joins the meeting with a **predefined role** that determines their permissions. These permissions can also be customized for individual members.
+Each kind of member reaches the room through a different kind of **access link**, and gets a set of permissions determined by a role:
+
+- **Anonymous guests** access the room through a shared anonymous access link tied to a [predefined role](#predefined-roles) — `Moderator` or `Speaker` — and always get that role's permissions.
+- **Users** and **identified guests** are added to the room explicitly with a **base role** that sets their default permissions, which can then be **customized** individually for each member.
 
 ## Anonymous guest access { #anonymous-access }
 
-Anonymous guests join through **shared access links** that require no OpenVidu Meet account. There is one link per role:
+Anonymous guests access the room through **shared anonymous access links** that require no OpenVidu Meet account. There is one link per role:
 
-- The **`Moderator`** link grants the moderator role.
-- The **`Speaker`** link grants the speaker role.
+- The **`Moderator`** link, which grants the moderator role.
+- The **`Speaker`** link, which grants the speaker role.
 
 These links can be shared freely with anyone, unless anonymous access for that role has been disabled for the room. You can enable or disable anonymous access per role when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) a room. Before joining the meeting, each anonymous guest is asked to **choose a name**.
 
 ### Sharing the anonymous links
 
-#### From the "Rooms" page
+#### From the OpenVidu Meet app
 
-Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** page.
+Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
 
 <a class="glightbox" href="../../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -44,7 +47,7 @@ The anonymous access links are available in the properties `access.anonymous.mod
 
 ## User and identified guest access { #member-access-links }
 
-Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](../room-members/management.md#rest-api-reference). They reach the room through different links:
+Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](../room-members/management.md#rest-api-reference). They access the room through different links:
 
 - **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"}). They must **log in** with their OpenVidu Meet credentials.
 - **Identified guests** each receive a **unique personal access link** (property `accessUrl` of their member object) that grants access with **no login** and should be delivered privately to that person.
@@ -58,7 +61,7 @@ See the [Room Members](../room-members/overview.md) feature to add and manage us
 
 ## Predefined roles { #predefined-roles }
 
-Every participant joins a meeting with a role that determines their default set of permissions. The role comes from the link used (for anonymous guests) or the base role assigned to the member (for users and identified guests).
+Every room member has a role that determines their default set of permissions. The role comes from the link used (for anonymous guests) or from the base role assigned to the member (for users and identified guests).
 
 ### Moderator
 

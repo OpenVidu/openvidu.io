@@ -62,12 +62,8 @@ Apply your changes by restarting OpenVidu. This ensures the system recognizes th
 
 ### 5. Enable/Disable Captions for specific Rooms
 
-Captions are enabled by default when a room is created, whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="\_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis.
+Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="\_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis.
 
 ## Using Live Captions in a Meeting
 
-Once live captions are enabled for a room, participants can activate them during the meeting:
-
-1. **Activate Captions:** Click the **captions button** in the toolbar to enable live captions.
-2. **Real-time Transcription:** Once activated, captions appear instantly at the bottom of the screen as participants speak — no additional configuration is required.
-3. **Clear Visibility:** The interface is designed to be easy to read without blocking the video feed.
+Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.

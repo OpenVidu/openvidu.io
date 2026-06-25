@@ -37,13 +37,18 @@ The **"Users"** page lists every user with their role and registration date. You
 <a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/users-list-page-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery41"><img src="../../../../assets/images/meet/users-and-permissions/users-list-page-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/users-list-page-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery41"><img src="../../../../assets/images/meet/users-and-permissions/users-list-page-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
+Clicking a user opens their **profile page**, which shows the user's details together with buttons for every action you can perform on them: [update their role](#update-a-users-role), [reset their password](#reset-a-users-password) and [delete the user](#delete-users).
+
 ## Delete users
 
-Users can be deleted individually or in bulk from the **"Users"** page. The root administrator cannot be deleted. Deleting a user removes their account and automatically removes them from any room where they were a [member](../room-members/overview.md).
+Users can be deleted individually or in bulk from the **"Users"** page. The root administrator cannot be deleted, and you cannot delete your own account. Deleting a user removes their account and automatically removes them from any room where they were a [member](../room-members/overview.md). In addition:
+
+- If the user **owns rooms**, ownership of those rooms is transferred to the [root administrator](overview.md#root-administrator).
+- If the user is **currently in a meeting**, they are kicked from it immediately.
 
 ## Changing your password { #changing-credentials }
 
-Any user can change their own password from their **Profile** page. New users are also prompted to change their temporary password the first time they log in.
+Any user can change their own password from their **Profile** page. You are asked to enter your **current password** and then type the **new password twice** to confirm it. Once changed, the new password is required the next time you log in.
 
 <a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/change-password-profile-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery42"><img src="../../../../assets/images/meet/users-and-permissions/change-password-profile-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/change-password-profile-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery42"><img src="../../../../assets/images/meet/users-and-permissions/change-password-profile-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>

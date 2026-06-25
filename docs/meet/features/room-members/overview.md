@@ -13,10 +13,10 @@ There are three kinds of room member:
 
 - **Users** — individuals with an OpenVidu Meet [account](../users/overview.md). They access the room through its shared user access link, logging in with their credentials.
 - **Identified guests** — individuals without an account, added to the room with a fixed name. Each one accesses the room through their own **unique** personal access link, with no login required.
-- **Anonymous guests** — individuals without an account who access the room through a [**shared** access link](../rooms/access.md#anonymous-access), providing a name before entering the meeting.
+- **Anonymous guests** — individuals without an account who access the room through a [shared anonymous access link](../rooms/access.md#anonymous-access), providing a name before joining the meeting.
 
 !!! info
-    **Users** and **identified guests** are *explicitly added* to a room, so they can be listed and managed individually. **Anonymous guests** are not: anyone holding a shared link can access the room, so they cannot be added, listed or revoked one by one — they only exist once they join a meeting.
+    **Users** and **identified guests** are *explicitly added* to a room, so they can be listed and managed individually. **Anonymous guests** are not: anyone holding a shared anonymous access link can access the room, so they cannot be added, listed or revoked one by one — they only exist once they join a meeting.
 
 ## Explicit members vs. anonymous guests
 
@@ -25,7 +25,7 @@ Add **users** or **identified guests** when you need controlled, personalized ac
 | Access approach | How it works | When to use |
 |-----------------|--------------|-------------|
 | **Users & identified guests** | Specific individuals are added to the room, each with a fixed identity, a base role and optional custom permissions. Their access can be revoked individually at any time. | Controlled access with predefined identities and per-person permissions. |
-| **Anonymous guests** | Anyone with the room's `Moderator` or `Speaker` [shared link](../rooms/access.md#anonymous-access) can join with that role's standard permissions. Shared access can be enabled or disabled per role when creating or editing the room. | Quick or public meetings where you don't need to track who joins. |
+| **Anonymous guests** | Anyone with the room's `Moderator` or `Speaker` [shared anonymous access link](../rooms/access.md#anonymous-access) can join with that predefined role's permissions. Anonymous access can be enabled or disabled per role when creating or editing the room. | Quick or public meetings where you don't need to track who joins. |
 
 ## Users vs Identified guests
 
@@ -43,7 +43,7 @@ Both are explicitly added to the room, but they differ in how they are identifie
 
 Every room member has a set of permissions derived from a base role:
 
-- **Anonymous guests** get the role of the [shared link](../rooms/access.md#anonymous-access) they use — `Moderator` or `Speaker` — with that role's [default permissions](../rooms/access.md#predefined-roles).
+- **Anonymous guests** get the role of the [shared anonymous access link](../rooms/access.md#anonymous-access) they use — `Moderator` or `Speaker` — with that [predefined role's permissions](../rooms/access.md#predefined-roles).
 - **Users and identified guests** are assigned a base role (`Moderator` or `Speaker`) when added to the room, which can be fine-tuned with [custom permissions](management.md#add-a-member).
 
 ## In this section

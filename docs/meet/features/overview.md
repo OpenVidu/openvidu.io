@@ -56,7 +56,7 @@ OpenVidu Meet is organized around a few core concepts. Understanding how they re
 - You start by creating a **room**. Each room carries its own configuration: visual [appearance](rooms/management.md#room-appearance), enabled features, recording settings and [access control](rooms/access.md).
 - When someone opens a valid room access link and presses the join button, a **meeting** starts (or they join the ongoing one). Meetings are where the real-time communication happens.
 - Access to a room is granted to its **room members**, of which there are three kinds (see [Room Members](room-members/overview.md)): **users** (accounts that log in), **identified guests** (a personal link, no login) and **anonymous guests** (a shared link, no login). The links and roles involved are described in [Room Access](rooms/access.md).
-- **Users** are OpenVidu Meet accounts. **Room Members** bind users — or guests — to a specific room with a base role and optional custom permissions. Every member becomes a participant of the meetings held in the room.
+- **Users** are OpenVidu Meet accounts. **Room Members** bind users — or guests — to a specific room with a base role and optional custom permissions. Every member becomes a participant once they join a meeting held in the room.
 - During a meeting, participants with appropriate permissions can start **recordings**, which remain available afterwards and inherit the room's access permissions.
 
 !!! info "New to OpenVidu Meet?"

@@ -7,7 +7,7 @@ tags:
 
 # Users
 
-OpenVidu Meet has a built-in user management system that controls access to the OpenVidu Meet app. **Users** are accounts identified by a `userId` and protected by a password. Each user is assigned a role that determines what they can do.
+OpenVidu Meet has a built-in user management system that controls access to the OpenVidu Meet app. **Users** are accounts identified by a `userId` and protected by a password. Each user is assigned a **role** that determines what they can do.
 
 ## User roles
 
@@ -17,11 +17,11 @@ Every user has one of the following roles:
 | --- | --- | --- |
 | **admin** | Administrator | Full control over OpenVidu Meet: create and manage **all** [users](management.md), [rooms](../rooms/overview.md), [room members](../room-members/overview.md) and [recordings](../recordings/overview.md). Can also change the system configuration — [room appearance](../rooms/management.md#room-appearance), [webhook configuration](../../embedded/reference/webhooks.md) and [API key](../../embedded/reference/rest-api.md#generate-an-api-key). |
 | **room_manager** | Room manager | Can create and manage **their own** rooms, including their configuration, members and recordings. Can also access rooms — and their recordings, depending on their [member permissions](../room-members/overview.md#permissions) — where they are a member, or that are [open to all users](../rooms/access.md#member-access-links). |
-| **room_member** | Room member | Can only access rooms — and their recordings, depending on their [member permissions](../room-members/overview.md#permissions) — where they are a member, or that are [open to all users](../rooms/access.md#member-access-links). Cannot create or manage rooms. |
+| **room_member** | Room member | Can only access rooms — and their recordings, depending on their [member permissions](../room-members/overview.md#permissions) — where they are a member, or that are open to all users. Cannot create or manage rooms. |
 
 !!! info
 
-    Roles control what a user can do in OpenVidu Meet as an account. The permissions a participant has **inside a meeting** are a separate concept, determined by the [room access](../rooms/access.md) used to join.
+    Roles control what a user can do in OpenVidu Meet as an account. The permissions a member has in a room are a separate concept. See [Room Members](../room-members/overview.md) for more information on how member permissions work.
 
 ## Root administrator { #root-administrator }
 
@@ -76,7 +76,7 @@ The location of the initial administrator password depends on the deployment env
 Users do not get access to a room just by having an account. Access works as follows:
 
 - **Admins** and the **room owner** always have full access to a room, with all permissions granted.
-- A user added as a [member](../room-members/overview.md) of a room can access it through the room's user access link, logging in with their credentials.
+- A user added as a [member](../room-members/overview.md) of a room can access it through the **room's user access link**, logging in with their credentials.
 - If a room is configured to be **accessible to all users**, any user can join — even without being an explicit member — with `Speaker` permissions.
 
 See [Room Access](../rooms/access.md) for the complete picture of how access to a room is granted.

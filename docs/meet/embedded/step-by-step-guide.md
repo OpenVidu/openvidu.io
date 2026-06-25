@@ -4,7 +4,7 @@ tags:
   - setupcustomgallery
 ---
 
-This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, integration examples, and deployment best practices.
+This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, embedding options, and deployment best practices.
 
 
 ## 1. Run OpenVidu Meet
@@ -301,7 +301,7 @@ To embed a room into your application's frontend you need a **room URL**, which 
 <a class="glightbox" href="../../../assets/images/meet/embedded/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/share-room-link.png" loading="lazy" class="round-corners"/></a>
 
 !!! info "Which room access link should I use?"
-    This guide uses the room's **anonymous** moderator and speaker links, which let anyone join without logging in. A room also offers **user** and **identified-guest** access links for controlled, per-person access. See [Room Access](../features/rooms/access.md) to learn about all of them and choose the right one for your use case.
+    This guide uses the room's **anonymous** moderator and speaker links, which let anyone access without logging in. A room also offers **user** and **identified-guest** access links for controlled, per-person access. See [Room Access](../features/rooms/access.md) to learn about all of them and choose the right one for your use case.
 
 ### Automating room URL retrieval
 
@@ -325,7 +325,7 @@ Just link to the room URL from any element in your frontend. For example, with a
 <a href="{{ your-room-url }}">Join Room</a>
 ```
 
-After clicking on the element, the individual will be redirected to OpenVidu Meet, ready to join the meeting.
+After clicking on the element, the individual will be redirected to the OpenVidu Meet room, ready to join the meeting.
 
 <a class="glightbox" href="../../../assets/videos/meet/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -400,7 +400,7 @@ The required iframe attributes are:
 
 ## 5. Embed recordings into your application
 
-If your use case includes recording your rooms, you can also embed them right into your app. You can embed the list of recordings of a room or directly show the player for a specific recording.
+If your use case includes recording your meetings, you can also embed them right into your app. You can embed the list of recordings of a room or directly show the player for a specific recording.
 
 ### Embed the list of recordings of a room
 

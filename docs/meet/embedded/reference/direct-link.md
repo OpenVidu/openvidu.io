@@ -7,10 +7,10 @@ Redirect individuals to OpenVidu Meet using simple HTML links. This is the simpl
 Create a direct link to an OpenVidu Meet room using a simple HTML anchor tag:
 
 ```html
-<a href="https://your-domain.com/meet/room/my_room-abcdef?secret=12345">Join Room</a>
+<a href="https://your-domain.com/meet/room/my_room-abcdef?secret=12345">Access room</a>
 ```
 
-When someone clicks the link, they'll be redirected to OpenVidu Meet in their browser, ready to join the meeting.
+When someone clicks the link, they'll be redirected to the OpenVidu Meet room in their browser, ready to join the meeting.
 
 !!! info "A room URL is a room access link"
     The room URL is a [room access link](../../features/rooms/access.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for all of them.
@@ -28,7 +28,7 @@ Customize the meeting by passing attributes as query parameters in the room URL:
 
 ```html
 <a href="https://your-domain.com/meet/room/my_room-abcdef?secret=12345&participant-name=John&leave-redirect-url=https://meeting.end.url/">
-    Join Room as John
+    Access room as John
 </a>
 ```
 

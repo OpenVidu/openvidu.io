@@ -7,11 +7,11 @@ tags:
 
 # Recording configuration
 
-Recording behaviour is configured **per room**, when [creating or editing](../rooms/management.md#create-rooms) it. The following aspects can be configured:
+Recording behaviour is configured **per room**, when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) it. The following aspects can be configured:
 
 - [Enabling recordings](#enabling-recordings) in the room.
 - The [recording layout](#recording-layouts).
-- The [recording encoding](#recording-encoding) — **only available through the REST API**.
+- The [recording encoding](#recording-encoding) — only available through the REST API.
 - [Anonymous recording sharing](#anonymous-recording-sharing).
 
 ## Enabling recordings { #enabling-recordings }
@@ -71,7 +71,7 @@ The available presets and the full encoding options object (all video and audio 
 
 A recording's [shareable link](management.md#sharing-recordings) can be created with one of two scopes:
 
-- **OpenVidu Meet users**: any logged-in OpenVidu Meet user can open the recording through the link — even if they have no recording permissions in that room, or no access to the room at all.
-- **Anyone**: any individual with the link can open the recording without logging in.
+- **OpenVidu Meet users**: any logged-in OpenVidu Meet user can access the recording through the link — even if they have no recording permissions in that room, or no access to the room at all.
+- **Anyone**: any individual with the link can view the recording without logging in.
 
-**Anonymous recording sharing is enabled by default**, so both scopes are available. You can disable it per room to restrict sharing to OpenVidu Meet users only — the "anyone" scope is then no longer offered. It is configured in the **Recording Settings** step of the room wizard ("Anonymous Recording Access"), or with the `access.anonymous.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
+Anonymous recording sharing is **enabled by default**, so both scopes are available. You can disable it per room to restrict sharing to OpenVidu Meet users only — the "anyone" scope is then no longer offered. It is configured in the **Recording Settings** step of the room wizard ("Anonymous Recording Access"), or with the `access.anonymous.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).

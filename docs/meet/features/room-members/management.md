@@ -9,7 +9,7 @@ tags:
 
 Room members are managed from the **"Room Members"** tab of the [room details page](../rooms/management.md#room-details), or programmatically through the [REST API](#rest-api-reference).
 
-Only two kinds of member are managed here: [users](overview.md#users-vs-identified-guests) and [identified guests](overview.md#users-vs-identified-guests). [Anonymous guests](../rooms/access.md#anonymous-access) cannot be added or listed, since their identity is only known once they join.
+Only two kinds of member are managed here: [users](overview.md#users-vs-identified-guests) and [identified guests](overview.md#users-vs-identified-guests). [Anonymous guests](../rooms/access.md#anonymous-access) cannot be added or listed, since their identity is only known once they join a meeting.
 
 ## Add a member
 

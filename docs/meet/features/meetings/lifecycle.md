@@ -7,18 +7,18 @@ tags:
 
 # Meeting lifecycle
 
-Meetings consist of different views, shown to participants in sequence from the moment they open a room access link until the meeting ends.
+Meetings consist of different views, shown to room members in sequence from the moment they open a room access link until the meeting ends.
 
 ## Lobby view
 
-This is the first view participants see when accessing a room. It allows setting a nickname before joining the meeting. If the participant has the required permissions, they can also access the [Recording view](#recording-view) of this room from here.
+This is the first view members see when accessing a room. It allows setting a nickname before joining the meeting. If the member has the required permissions, they can also access the [Recording view](#recording-view) of this room from here.
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/join-view-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery9"><img src="../../../../assets/images/meet/rooms-and-meetings/join-view-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/join-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery9"><img src="../../../../assets/images/meet/rooms-and-meetings/join-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 ## Device view
 
-This view allows participants tuning their microphone and camera before joining the meeting, as well as setting a [virtual background](virtual-background.md).
+This view allows members to tune their microphone and camera before joining the meeting, as well as setting a [virtual background](virtual-background.md).
 
 <a class="glightbox" href="../../../../assets/videos/meet/device-view-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery10"><video class="round-corners" src="../../../../assets/videos/meet/device-view-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 <a class="glightbox" href="../../../../assets/videos/meet/device-view-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery10"><video class="round-corners" src="../../../../assets/videos/meet/device-view-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
@@ -31,7 +31,7 @@ The Meeting View is the central interface where all participants can see, hear, 
 
 ## Recording view
 
-This view allows to manage all recordings of the room (from the current or past meetings). Participants with the required permissions can review, play, download, and delete them, as well as share recordings via a link.
+This view allows to manage all recordings of the room (from the current or past meetings). Members with the required permissions can review, play, download, and delete them, as well as share recordings via a link.
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/recording-view-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery12"><img src="../../../../assets/images/meet/rooms-and-meetings/recording-view-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/recording-view-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery12"><img src="../../../../assets/images/meet/rooms-and-meetings/recording-view-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>

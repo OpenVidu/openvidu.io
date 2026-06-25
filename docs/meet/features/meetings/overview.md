@@ -13,17 +13,19 @@ A **Meeting** is a temporary session within a [room](../rooms/overview.md) where
 
 A meeting starts as soon as a member opens a valid **room access link** and presses the join button into an empty room. You can learn everything about how access to a room is granted in [Room Access](../rooms/access.md).
 
-Users with access to OpenVidu Meet can join a meeting directly from the "Rooms" page:
+OpenVidu Meet users can access a room to join a meeting directly from the "Rooms" page:
 
 <a class="glightbox" href="../../../../assets/videos/meet/join-meeting.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery7"><video class="round-corners" src="../../../../assets/videos/meet/join-meeting.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-Users can also copy a room access link and share it with guests:
+Users can also copy a room access link and share it with other members:
 
 <a class="glightbox" href="../../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
+The access link for an [identified guest](../room-members/overview.md) is unique and personal. It can be copied from the **"Room Members"** tab of the [room details page](../rooms/management.md#room-details) and delivered privately to that individual.
+
 ## In this section
 
-- [Meeting lifecycle](lifecycle.md) — the series of views a participant moves through, from opening a room access link until the meeting ends: Lobby, Device, Meeting, Recording and End.
+- [Meeting lifecycle](lifecycle.md) — the series of views a room member moves through, from opening a room access link until the meeting ends: Lobby, Device, Meeting, Recording and End.
 - [Live Captions](live-captions.md) — real-time speech-to-text transcription powered by the OpenVidu Speech Processing Agent.
 - [Smart Layout](smart-layout.md) — dynamic layout that adapts automatically to the number of active participants.
 - [Role Management](role-management.md) — promote participants to moderator during a meeting to give them special permissions, or demote them back to their original permissions.

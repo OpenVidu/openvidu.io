@@ -9,6 +9,10 @@ tags:
 
 Users with permissions to create and manage rooms (admins and room managers) can create, configure, browse and delete rooms from the **"Rooms"** page of the OpenVidu Meet app. Every operation described below can also be performed through the [REST API](#rest-api-reference).
 
+!!! info
+
+    Room member users can only access the rooms that are available to them, as they do not have room management permissions. See
+
 ## Create a room { #create-rooms }
 
 Create a new room from the **"Rooms"** page with the **"Create Room"** button. There are two ways to create it:
@@ -50,7 +54,7 @@ Reopen the configuration wizard for an existing room from the **"Rooms"** page o
 
 Every room has a status that controls whether it can host meetings:
 
-- **Open**: the room is available; opening one of its [access links](access.md) starts a new meeting or joins the ongoing one.
+- **Open**: the room is available; opening one of its [access links](access.md) and pressing the join button starts a new meeting or joins the ongoing one.
 - **Active meeting**: a meeting is currently in progress in the room.
 - **Closed**: the room no longer accepts new meetings, but it is kept (along with its recordings).
 
@@ -61,7 +65,7 @@ Managers can **close** or **reopen** a room at any time from the **"Rooms"** pag
 The **"Rooms"** page lists every room available to you, with its owner, status, creation date and auto-deletion date. From here you can:
 
 - **Search and filter** rooms by name, status, owner, membership or whether they are open to all OpenVidu Meet users.
-- **Start or join** a meeting in a room.
+- **Access** a room, to join the meeting.
 - Open the [room details page](#room-details).
 - [Edit a room](#edit-rooms) (if no meeting is active) or [change its status](#room-status).
 - [Delete rooms](#delete-rooms) individually or in bulk.
@@ -72,9 +76,9 @@ The **"Rooms"** page lists every room available to you, with its owner, status, 
 
 ## Room details { #room-details }
 
-Clicking a room opens its **details page**, which shows the room information and lets managers **Join**, **Share** the access links, **Edit**, **close/reopen** or **Delete** the room. It also organizes the room's content in two tabs:
+Clicking a room opens its **details page**, which shows the room information and available actions such as accessing the room, sharing the access links, editing, closing/reopening, or deleting it. It also organizes the room's content in two tabs:
 
-- **Recordings**: the [recordings](../recordings/overview.md) generated in this room, with play, download, share and delete actions (subject to the recording [access permissions](../recordings/overview.md#access-permissions-for-recordings)).
+- **Recordings**: the [recordings](../recordings/overview.md) generated in this room, with play, download, share and delete actions (subject to [recording permissions](../recordings/overview.md#recording-permissions)).
 - **Room Members**: the [users and identified guests](../room-members/overview.md) explicitly added to the room. See [Room Members › Creation & Management](../room-members/management.md).
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/room-detail-page-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery22"><img src="../../../../assets/images/meet/rooms-and-meetings/room-detail-page-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
@@ -89,7 +93,7 @@ Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting
 !!! warning
 
     If the room has an **active meeting** or associated **recordings**, the deletion will not proceed immediately. Instead, a dialog will ask you to choose a **deletion policy** to specify how OpenVidu Meet should handle these:
-    
+
     - For active meetings: whether to force-end the meeting and delete the room, or wait for the meeting to naturally end.
     - For recordings: whether to delete them along with the room, or close the room instead (keeping the recordings).
 
@@ -104,7 +108,7 @@ Rooms can be configured with an **auto-deletion date**. You can set this date wh
 
 ### Room auto-deletion policies
 
-When the auto-deletion date is reached, the room will be deleted. The **Auto-deletion policies** determine how to handle active meetings and stored recordings when attempting to delete the room:
+When the auto-deletion date is reached, the room will be deleted. The **Auto-deletion policies** determine how to handle active meetings and stored recordings when the room is being processed for deletion due to its auto-deletion date. You can set these policies when [creating a room](#create-rooms):
 
 - **Active meetings policy**
     - `Force`: the meeting will be immediately ended without waiting for participants to leave, and the room will be deleted.
@@ -113,16 +117,16 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
     - `Force`: the room and all its recordings will be deleted.
     - `Close`: the room will be closed (no more meetings will be allowed in it) instead of deleted, maintaining its recordings.
 
-!!! info
-
-    The same policies apply when **manually deleting** rooms that have active meetings or recordings.
-
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../../assets/images/meet/rooms-and-meetings/room-auto-deletion-policies-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 ## Room Appearance { #room-appearance }
 
 The visual appearance of your rooms (the color scheme of the meeting view) is configured **globally** for the whole app from the **"Configuration"** page of the OpenVidu Meet app — not per room. The color scheme you set there applies to every room.
+
+!!! info
+
+    Room appearance can only be changed by **admin** users from the **"Configuration"** page. Unlike the rest of the room settings, it **cannot** be modified through the REST API.
 
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/visual-customization-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery14"><img src="../../../../assets/images/meet/rooms-and-meetings/visual-customization-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/rooms-and-meetings/visual-customization-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery14"><img src="../../../../assets/images/meet/rooms-and-meetings/visual-customization-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
@@ -139,7 +143,7 @@ You can also choose between a `light` and a `dark` background style, to ensure t
 
 ## REST API reference { #rest-api-reference }
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="\_blank"} for the full list of available endpoints.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="\_blank"} for the full list of available endpoints, request bodies and response schemas.
 
 | Operation                           | HTTP Method | Reference                                                                                                                                             |
 | ----------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |

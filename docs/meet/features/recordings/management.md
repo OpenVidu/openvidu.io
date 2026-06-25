@@ -9,7 +9,7 @@ tags:
 
 ## Start / Stop recording
 
-Recordings are started from the meeting view by a participant with the `canRecord` permission (see [Predefined roles](../rooms/access.md#predefined-roles)). The room must have recording [enabled in its configuration](configuration.md).
+Recordings are started from the meeting view by a participant with the `canRecord` permission (see [Predefined roles](../rooms/access.md#predefined-roles)). The room must have recording [enabled in its configuration](configuration.md#enabling-recordings).
 
 <a class="glightbox" href="../../../../assets/videos/meet/start-recording.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/start-recording.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
@@ -22,15 +22,15 @@ To stop the recording, a participant with the `canRecord` permission must simply
 <a class="glightbox" href="../../../../assets/images/meet/recordings/stop-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../../assets/images/meet/recordings/stop-recording.png" loading="lazy"/></a>
 
 !!! info "Starting and stopping recordings via REST API"
-    Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout and encoding](configuration.md#recording-layouts) for that specific recording.
+    Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that specific recording.
 
 ## Managing recordings { #managing-recordings }
 
-A saved recording can be **listed**, **played**, **shared**, **downloaded** and **deleted** (individually or in bulk). All of these actions are available — subject to your [recording permissions](overview.md#access-permissions-for-recordings) — from any of the places where recordings appear in the app:
+A saved recording can be **listed**, **played**, **shared**, **downloaded** and **deleted** (individually or in bulk). All of these actions are available — subject to your [recording permissions](overview.md#recording-permissions) — from any of the places where recordings appear in the app:
 
 - The general **"Recordings"** page, which lists every recording you can access.
 - The **"Recordings"** tab of a [room's detail page](../rooms/management.md#room-details), listing that single room's recordings.
-- The **room recordings view**, reachable from within a meeting (and from the lobby view before entering).
+- The [**room recordings view**](../meetings/lifecycle.md#recording-view), reachable from within a meeting (and from the lobby view before joining).
 - The **single recording view**, which plays a recording and offers its download and share actions.
 
 <a class="glightbox" href="../../../../assets/images/meet/recordings/recording-page.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../../assets/images/meet/recordings/recording-page.png" loading="lazy" class="round-corners"/></a>
@@ -44,10 +44,10 @@ A saved recording can be **listed**, **played**, **shared**, **downloaded** and 
 
 ### Sharing recordings { #sharing-recordings }
 
-When you create a shareable link for a recording, you choose **who can open it**:
+When you create a shareable link for a recording, you choose **who can access it**:
 
-- **OpenVidu Meet users**: any logged-in OpenVidu Meet user can open the recording — even if they have no recording permissions in that room, or no access to the room at all.
-- **Anyone**: any individual with the link can open it without logging in. This option is available only when the room has [anonymous recording sharing](configuration.md#anonymous-recording-sharing) enabled.
+- **OpenVidu Meet users**: any logged-in OpenVidu Meet user can view the recording — even if they have no recording permissions in that room, or no access to the room at all.
+- **Anyone**: any individual with the link can view it without logging in. This option is available only when the room has [anonymous recording sharing](configuration.md#anonymous-recording-sharing) enabled.
 
 <a class="glightbox" href="../../../../assets/videos/meet/share-recording-from-recording-list.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../../assets/videos/meet/share-recording-from-recording-list.mp4" defer muted playsinline autoplay loop async></video></a>
 
@@ -55,7 +55,7 @@ When you create a shareable link for a recording, you choose **who can open it**
 
 ## REST API reference { #rest-api-reference }
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="_blank"} for the full list of available endpoints.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="_blank"} for the full list of available endpoints, request bodies and response schemas.
 
 | Operation | HTTP Method | Reference |
 |-----------|-------------|-----------|
