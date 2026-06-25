@@ -32,6 +32,27 @@ In reality, it's much easier than you might think. At OpenVidu we've worked hard
 So what if that place was actually yours? With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in four simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/){:target="_blank"}.
 <!-- more -->
 
+## Why self-host your video calls?
+
+If tinkering is your idea of a fun weekend, you probably don't need convincing 😉. Just in case, here are the benefits:
+
+- **Privacy and ownership.** Your video and audio never leave your own server. Conversations stay on hardware you can physically touch, in your own home, with no ads and nothing to sign up for. It's a calmer, more personal way to keep in touch.
+- **No artificial limits.** No 40-minute cutoff, no "upgrade to invite more than 3 people". The only limit is your hardware, and it's more generous than you'd think. A single small machine comfortably handles a family gathering.
+- **Free and open source.** OpenVidu Community is free and fully open source. You pay for electricity and your internet bill.
+- **A second life for old hardware.** A **Raspberry Pi 5** sips just a few watts and costs less than many other services. That retired laptop or mini-PC in your closet works just as well. It's greener and cheaper than yet another SaaS account.
+
+Is this setup valid for everyone? If you need five-nines uptime for a business, run it properly in the cloud (OpenVidu does that too; see the [end of this post](#need-more-than-this)). But for keeping in touch with the people you love, a box at home is perfect, private, and yours.
+
+!!! abstract "What you'll build"
+    A production-ready video conferencing server running **[OpenVidu Meet](../../meet/index.md)** at your home, reachable from anywhere through a secure `https://` address, with automatic SSL certificates. Your family and friends join from any browser (phone, tablet or laptop) with a single link. No account, no app to install.
+
+## What you'll need
+
+- **A computer to run it on.** A **Raspberry Pi 5 (4 GB or more) is the recommended option**: quiet, cheap and low-power. Any idle PC or laptop works too, as long as it has **at least 4 GB of RAM and 4 CPU cores** and runs **Linux (Ubuntu is recommended)**.
+- **A home internet connection with a real public IP.**
+- **A free [DuckDNS](https://www.duckdns.org){:target="_blank"} account**. This gives your home OpenVidu Meet server an easy-to-remember web address that keeps working even when your IP changes.
+- **Access to your router's admin page**, to forward a few ports.
+
 ## Prerequisites & Connectivity Checks
 
 Before you start, make sure your network setup is ready for hosting a server.
@@ -94,29 +115,6 @@ To verify that ports 80 and 443 are open from the internet:
     > This keeps the port open and waiting for connections, nothing else.
 
 2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener.
-
-
-## Why self-host your video calls?
-
-
-If tinkering is your idea of a fun weekend, you probably don't need convincing 😉. Just in case, here are the benefits:
-
-- **Privacy and ownership.** Your video and audio never leave your own server. Conversations stay on hardware you can physically touch, in your own home, with no ads and nothing to sign up for. It's a calmer, more personal way to keep in touch.
-- **No artificial limits.** No 40-minute cutoff, no "upgrade to invite more than 3 people". The only limit is your hardware, and it's more generous than you'd think. A single small machine comfortably handles a family gathering.
-- **Free and open source.** OpenVidu Community is free and fully open source. You pay for electricity and your internet bill.
-- **A second life for old hardware.** A **Raspberry Pi 5** sips just a few watts and costs less than many other services. That retired laptop or mini-PC in your closet works just as well. It's greener and cheaper than yet another SaaS account.
-
-Is this setup valid for everyone? If you need five-nines uptime for a business, run it properly in the cloud (OpenVidu does that too; see the [end of this post](#need-more-than-this)). But for keeping in touch with the people you love, a box at home is perfect, private, and yours.
-
-!!! abstract "What you'll build"
-    A production-ready video conferencing server running **[OpenVidu Meet](../../meet/index.md)** at your home, reachable from anywhere through a secure `https://` address, with automatic SSL certificates. Your family and friends join from any browser (phone, tablet or laptop) with a single link. No account, no app to install.
-
-## What you'll need
-
-- **A computer to run it on.** A **Raspberry Pi 5 (4 GB or more) is the recommended option**: quiet, cheap and low-power. Any idle PC or laptop works too, as long as it has **at least 4 GB of RAM and 4 CPU cores** and runs **Linux (Ubuntu is recommended)**.
-- **A home internet connection with a real public IP.**
-- **A free [DuckDNS](https://www.duckdns.org){:target="_blank"} account**. This gives your home OpenVidu Meet server an easy-to-remember web address that keeps working even when your IP changes.
-- **Access to your router's admin page**, to forward a few ports.
 
 ## Step 1: Get a free address with DuckDNS
 
