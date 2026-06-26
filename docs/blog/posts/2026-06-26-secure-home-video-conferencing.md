@@ -1,6 +1,6 @@
 ---
 draft: false
-date: 2026-06-23
+date: 2026-06-26
 slug: secure-home-video-conferencing
 cover_image: poster.jpg
 categories:
@@ -55,25 +55,44 @@ Is this setup valid for everyone? If you need five-nines uptime for a business, 
 
 ## Prerequisites & Connectivity Checks
 
-Before you start, make sure your network setup is ready for hosting a server. Both checks below require access to your router's admin page: open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
+Before you start, make sure your network setup is ready for hosting a server.
+
+### 1. Are you behind a CGNAT?
+Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **[CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT){:target="_blank"}**), and that prevents people from reaching your server.
+
+Quick check: look at the "Internet" / "WAN" IP your **router** reports. Open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
 
 ![Router label with credentials](/assets/images/blog/secure-home-video-conferencing/router-label.png){ width=80% }
 
-### 1. Are you behind a CGNAT?
-Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **CGNAT**), and that prevents people from reaching your server.
-
-Quick check: look at the "Internet" / "WAN" IP your **router** reports, then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
+Then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
 
 - If **they match**, you have a public IP.
 - If **they differ**, or your router's WAN IP starts with `100.64.x.x` to `100.127.x.x`, you're behind CGNAT. **Contact your ISP** and ask for a public IP (often free, sometimes a small monthly fee).
 - If they refuse, you can still run OpenVidu Meet, but **only on your local network** (no one outside can reach it) or in a cloud server (see [the end of this post](#need-more-than-this)).
 
-### 2. Are ports 80 and 443 reachable?
-Some ISPs block inbound ports 80 and 443 to prevent home servers. Run the connectivity test below to check; if either port is blocked, follow the [alternative setup](#if-your-isp-blocks-ports-80-and-443) instead of the main steps.
+## Setting up OpenVidu Meet
 
-#### Configure your router
+If all the prerequisites above are good, you're all set. OpenVidu Meet is just four steps away.
 
-First, get your server's private IP:
+### Step 1: Get a free address with DuckDNS
+
+Your home IP usually changes from time to time. [DuckDNS](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `<your-subdomain>.duckdns.org`) that automatically follows it, for free.
+
+1. Go to [duckdns.org](https://www.duckdns.org){:target="_blank"} and sign in (with Google, GitHub, etc.).
+2. In the **sub domain** box, type the name you want for your subdomain (e.g. `my-home-video`) and click **add domain**. This will be your `<your-subdomain>` throughout this guide.
+3. Copy your **token** from the top of the page. You'll need it in a moment.
+
+Now make your address always point to your home. On the server, add a small task that updates DuckDNS every few minutes. Run `crontab -e` and add this line (replace `<your-subdomain>` and `<your-token>` with your actual subdomain and token):
+
+```bash
+*/5 * * * * curl -fsS "https://www.duckdns.org/update?domains=<your-subdomain>&token=<your-token>&ip=" >/dev/null 2>&1
+```
+
+Leaving `ip=` empty tells DuckDNS to detect your current public IP automatically, so even when your ISP changes it, `<your-subdomain>.duckdns.org` keeps pointing home.
+
+### Step 2: Forward ports 80 and 443
+
+OpenVidu needs two ports accessible from the internet. First, get your server's private IP:
 
 ```bash
 ip -4 -oneline route get 1 | grep -Po 'src \K([\d.]+)'
@@ -94,9 +113,9 @@ Then, in your router's admin page, find **Port forwarding** (usually under *Adva
 
 For better performance, see the [OpenVidu port rules](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the full list of recommended ports. If your server's Linux firewall is active, open the same ports there too; the port rules page includes the exact `firewalld` commands. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
 
-#### Quick Connectivity Test
+#### Verify the ports are reachable
 
-To verify that ports 80 and 443 are open from the internet:
+To confirm that ports 80 and 443 are open from the internet:
 
 1. **Start a listener.** On your server, run these commands:
 
@@ -114,40 +133,22 @@ To verify that ports 80 and 443 are open from the internet:
 
     > This keeps the port open and waiting for connections, nothing else.
 
-2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener. If either port shows an error, continue to the next section.
+2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener.
+
+If both ports show "Success", proceed to Step 3.
 
 #### If your ISP blocks ports 80 and 443 { #if-your-isp-blocks-ports-80-and-443 }
 
-Some home internet providers block inbound ports 80 and 443 to discourage home servers. If yours does, automatic Let's Encrypt won't work because validating a certificate needs one of those ports reachable from the internet.
+If either port fails, your ISP is blocking inbound connections on it. Automatic Let's Encrypt won't work in that case, because validating a certificate requires one of those ports to be reachable from the internet. You won't be able to follow Step 3 as written; use this alternative instead.
 
-The fix is to install with the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+Install the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.
 
-You'll also serve the app on a non-standard port. Set `CADDY_HTTPS_PUBLIC_PORT=8443` in `/opt/openvidu/config/openvidu.env`, then run `sudo systemctl restart openvidu`. Your server will be reachable at `https://<your-subdomain>.duckdns.org:8443/`.
+You'll also serve the app on a non-standard port. In your router, **forward port `8443` (TCP) to your server's IP**, exactly as you did for ports 80 and 443 above. Then set `CADDY_HTTPS_PUBLIC_PORT=8443` in `/opt/openvidu/config/openvidu.env` and run `sudo systemctl restart openvidu`. Your server will be reachable at `https://<your-subdomain>.duckdns.org:8443/` (note the `:8443` in the URL).
 
-## Setting up OpenVidu Meet
-
-If all the prerequisites above are good, you're all set. OpenVidu Meet is just three steps away.
-
-### Step 1: Get a free address with DuckDNS
-
-Your home IP usually changes from time to time. [DuckDNS](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `<your-subdomain>.duckdns.org`) that automatically follows it, for free.
-
-1. Go to [duckdns.org](https://www.duckdns.org){:target="_blank"} and sign in (with Google, GitHub, etc.).
-2. In the **sub domain** box, type the name you want for your subdomain (e.g. `my-home-video`) and click **add domain**. This will be your `<your-subdomain>` throughout this guide.
-3. Copy your **token** from the top of the page. You'll need it in a moment.
-
-Now make your address always point to your home. On the server, add a small task that updates DuckDNS every few minutes. Run `crontab -e` and add this line (replace `<your-subdomain>` and `<your-token>` with your actual subdomain and token):
-
-```bash
-*/5 * * * * curl -fsS "https://www.duckdns.org/update?domains=<your-subdomain>&token=<your-token>&ip=" >/dev/null 2>&1
-```
-
-Leaving `ip=` empty tells DuckDNS to detect your current public IP automatically, so even when your ISP changes it, `<your-subdomain>.duckdns.org` keeps pointing home.
-
-### Step 2: Install OpenVidu Meet (one command, three questions)
+### Step 3: Install OpenVidu Meet (one command, three questions)
 
 This is the easy part. On your server, run:
 
@@ -180,7 +181,7 @@ sudo systemctl restart openvidu   # restart
 ??? info "Want more control? Use the full installer"
     `install_meet.sh` is the quick path. If you'd like to disable certain modules, enable only specific ones, or automate the install non-interactively, you can use the full OpenVidu Platform installer instead. See [Single Node installation](../../docs/self-hosting/single-node/on-premises/install.md) and its [non-interactive section](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation).
 
-### Step 3: Make your first call
+### Step 4: Make your first call
 
 Open `https://<your-subdomain>.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
 
