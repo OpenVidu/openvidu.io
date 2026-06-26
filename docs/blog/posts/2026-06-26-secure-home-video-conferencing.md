@@ -111,7 +111,7 @@ Then, in your router's admin page, find **Port forwarding** (usually under *Adva
 
 ![Port forwarding rules in a router admin panel](/assets/images/blog/secure-home-video-conferencing/router-admin.png){ width=80% }
 
-For better performance, see the [OpenVidu port rules](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) for the full list of recommended ports. If your server's Linux firewall is active, open the same ports there too; the port rules page includes the exact `firewalld` commands. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
+If your server's Linux firewall is active, open ports 80 and 443 there too. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
 
 #### Verify the ports are reachable
 
@@ -178,9 +178,6 @@ sudo systemctl stop openvidu      # stop
 sudo systemctl restart openvidu   # restart
 ```
 
-??? info "Want more control? Use the full installer"
-    `install_meet.sh` is the quick path. If you'd like to disable certain modules, enable only specific ones, or automate the install non-interactively, you can use the full OpenVidu Platform installer instead. See [Single Node installation](../../docs/self-hosting/single-node/on-premises/install.md) and its [non-interactive section](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation).
-
 ### Step 4: Make your first call
 
 Open `https://<your-subdomain>.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
@@ -215,6 +212,13 @@ You've just put a server on the internet, so a few minutes of good habits go a l
 
 !!! tip "Go further: end-to-end encryption"
     For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](../../meet/features/meetings/e2e-encryption.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
+
+## What to do next?
+
+Once your server is up and running, there are a few things you can do to get more out of it. OpenVidu exposes additional ports that improve media quality and reduce latency, and opening them is worth it if you want the best possible call experience. And if the one-command installer felt too opinionated, the full OpenVidu Platform installer gives you fine-grained control over which modules to enable, how to configure them, and how to automate the whole process.
+
+- **[Full port list](../../docs/self-hosting/single-node/on-premises/install.md#port-rules)**: open additional ports for better media performance or to match your Linux firewall rules.
+- **[Non-interactive install](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
 
 ## Need more than this? { #need-more-than-this }
 
