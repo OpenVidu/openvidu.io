@@ -1,6 +1,6 @@
 ---
 draft: false
-date: 2026-06-26
+date: 2026-06-30
 slug: secure-home-video-conferencing
 cover_image: poster.jpg
 categories:
