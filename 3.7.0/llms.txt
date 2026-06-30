@@ -1,0 +1,92 @@
+# OpenVidu
+
+> From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
+
+Self-hosted videoconference solution and SDK
+
+## OpenVidu
+
+- [Home](https://openvidu.io/3.7.0/index.md): OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
+- [Blog](https://openvidu.io/3.7.0/blog/index.md): OpenVidu Blog
+- [5 React video call platforms in 2026: Is SaaS still the right choice?](https://openvidu.io/3.7.0/blog/2026/05/19/5-react-video-call-platforms/index.md): OpenVidu Blog
+- [Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.7.0/blog/2026/06/16/meet-vs-platform/index.md): OpenVidu Blog
+- [Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.](https://openvidu.io/3.7.0/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md): OpenVidu Blog
+- [How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform](https://openvidu.io/3.7.0/blog/2026/04/30/how-client-networks-affect-qoe-and-costs/index.md): OpenVidu Blog
+- [Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN](https://openvidu.io/3.7.0/blog/2026/06/09/turn-key-considerations/index.md): OpenVidu Blog
+- [The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System](https://openvidu.io/3.7.0/blog/2026/06/02/scalability-in-videoconferencing-systems/index.md): OpenVidu Blog
+- [5 conversational AI app ideas you can build this weekend](https://openvidu.io/3.7.0/blog/2026/06/23/5-conversational-ai-app-ideas/index.md): OpenVidu Blog
+- [Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends](https://openvidu.io/3.7.0/blog/2026/06/30/secure-home-video-conferencing/index.md): OpenVidu Blog
+- [Pricing](https://openvidu.io/3.7.0/pricing/index.md): Pricing models for OpenVidu Meet and OpenVidu Platform
+- [About Us](https://openvidu.io/3.7.0/about-us/index.md): The people behind OpenVidu
+- [Research](https://openvidu.io/3.7.0/research/index.md): Research publications on real-time communications in peer-reviewed journals
+- [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.7.0/openvidu-meet-vs-openvidu-platform/index.md): What to choose, OpenVidu Meet or OpenVidu Platform?
+
+## OpenVidu Meet [BETA]
+
+- [OpenVidu Meet](https://openvidu.io/3.7.0/meet/index.md): OpenVidu Meet - Ready to use videoconferencing solution
+- [Getting started with OpenVidu Meet](https://openvidu.io/3.7.0/meet/getting-started/index.md): OpenVidu Meet - Getting started
+- [Overview](https://openvidu.io/3.7.0/meet/features/rooms/overview/index.md): OpenVidu Meet Features - What a room is and its key principles
+- [Creation & Management](https://openvidu.io/3.7.0/meet/features/rooms/creation-management/index.md): OpenVidu Meet Features - Create, edit, list and delete rooms, and configure auto-deletion
+- [Room Appearance](https://openvidu.io/3.7.0/meet/features/rooms/appearance/index.md): OpenVidu Meet Features - Customize the visual appearance of rooms
+- [Room Access](https://openvidu.io/3.7.0/meet/features/rooms/access/index.md): OpenVidu Meet Features - Room links and administrator authentication
+- [Overview](https://openvidu.io/3.7.0/meet/features/meetings/overview/index.md): OpenVidu Meet Features - What a meeting is and how to join
+- [Meeting lifecycle](https://openvidu.io/3.7.0/meet/features/meetings/lifecycle/index.md): OpenVidu Meet Features - Meeting lifecycle (Join, Device, Meeting, Recording and End views)
+- [Live Captions](https://openvidu.io/3.7.0/meet/features/meetings/live-captions/index.md): OpenVidu Meet Features - Enable and use live captions in a meeting
+- [Smart Layout](https://openvidu.io/3.7.0/meet/features/meetings/smart-layout/index.md): OpenVidu Meet Features - Smart adaptive layout in meetings
+- [Role Management](https://openvidu.io/3.7.0/meet/features/meetings/role-management/index.md): OpenVidu Meet Features - Participant roles and how to change them
+- [E2E Encryption](https://openvidu.io/3.7.0/meet/features/meetings/e2e-encryption/index.md): OpenVidu Meet Features - End-to-end encryption for meetings
+- [Virtual Background](https://openvidu.io/3.7.0/meet/features/meetings/virtual-background/index.md): OpenVidu Meet Features - Virtual background for participants
+- [Overview](https://openvidu.io/3.7.0/meet/features/recordings/overview/index.md): OpenVidu Meet Features - Overview of recordings
+- [Creation & Management](https://openvidu.io/3.7.0/meet/features/recordings/creation-management/index.md): OpenVidu Meet Features - Start, list, share, download and delete recordings
+- [Recording configuration](https://openvidu.io/3.7.0/meet/features/recordings/configuration/index.md): OpenVidu Meet Features - Recording layouts and resolution
+- [Overview](https://openvidu.io/3.7.0/meet/deployment/overview/index.md): A comparison of different deployment models for OpenVidu Meet
+- [Try OpenVidu Meet locally](https://openvidu.io/3.7.0/meet/deployment/local/index.md): How to deploy OpenVidu Meet locally for testing and development purposes
+- [Basic deployment](https://openvidu.io/3.7.0/meet/deployment/basic/index.md): How to deploy OpenVidu Meet on-premises within a single server for production use
+- [Advanced deployments](https://openvidu.io/3.7.0/meet/deployment/advanced/index.md): How to deploy OpenVidu Meet on multiple servers with scalability and fault-tolerance for production use
+- [Introduction](https://openvidu.io/3.7.0/meet/embedded/intro/index.md): How to embed OpenVidu Meet in my own application with a single line of HTML
+- [Step by step guide](https://openvidu.io/3.7.0/meet/embedded/step-by-step-guide/index.md): A step by step guide on how to embed OpenVidu Meet on your own applications
+- [Direct Link](https://openvidu.io/3.7.0/meet/embedded/tutorials/direct-link/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [WebComponent](https://openvidu.io/3.7.0/meet/embedded/tutorials/webcomponent/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [WebComponent Commands & Events](https://openvidu.io/3.7.0/meet/embedded/tutorials/webcomponent-advanced/index.md): An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
+- [External Members](https://openvidu.io/3.7.0/meet/embedded/tutorials/external-members/index.md): An OpenVidu Meet tutorial showing how to add external members with a fixed name and a unique access link to a room. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [Registered Members](https://openvidu.io/3.7.0/meet/embedded/tutorials/registered-members/index.md): An OpenVidu Meet tutorial showing how to create users with the Users API and grant them access to a room as registered members. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [Recordings](https://openvidu.io/3.7.0/meet/embedded/tutorials/recordings/index.md): How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings.
+- [Webhooks](https://openvidu.io/3.7.0/meet/embedded/tutorials/webhooks/index.md): Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
+- [Direct Link](https://openvidu.io/3.7.0/meet/embedded/reference/direct-link/index.md): OpenVidu Meet - Reference documentation
+- [Iframe](https://openvidu.io/3.7.0/meet/embedded/reference/iframe/index.md): OpenVidu Meet - Reference documentation
+- [REST API](https://openvidu.io/3.7.0/meet/embedded/reference/rest-api/index.md): OpenVidu Meet - Reference documentation
+- [Webcomponent](https://openvidu.io/3.7.0/meet/embedded/reference/webcomponent/index.md): OpenVidu Meet - Reference documentation
+- [Webhooks](https://openvidu.io/3.7.0/meet/embedded/reference/webhooks/index.md): OpenVidu Meet - Reference documentation
+
+## OpenVidu Platform
+
+- [OpenVidu Platform](https://openvidu.io/3.7.0/docs/index.md): OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
+- [Getting started](https://openvidu.io/3.7.0/docs/getting-started/index.md): OpenVidu Platform - Getting started
+- [Comparing OpenVidu](https://openvidu.io/3.7.0/docs/comparing-openvidu/index.md): OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
+- [Developing your OpenVidu app](https://openvidu.io/3.7.0/docs/developing-your-openvidu-app/index.md): OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
+- [How to](https://openvidu.io/3.7.0/docs/developing-your-openvidu-app/how-to/index.md): OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.
+- [Advanced Features Tutorials](https://openvidu.io/3.7.0/docs/tutorials/advanced-features/index.md): Explore more advanced features of LiveKit with our tutorials on recording, S3, Azure, and more.
+- [AI Services Tutorials](https://openvidu.io/3.7.0/docs/tutorials/ai-services/index.md): Learn how to integrate AI services in your OpenVidu applications.
+- [Angular Components Tutorials](https://openvidu.io/3.7.0/docs/tutorials/angular-components/index.md): Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
+- [Application Client Tutorials](https://openvidu.io/3.7.0/docs/tutorials/application-client/index.md): Learn how to build a LiveKit application client to connect to a room, publish media and subscribe to media from other participants.
+- [Application Server Tutorials](https://openvidu.io/3.7.0/docs/tutorials/application-server/index.md): Learn how to build an application server that generates LiveKit tokens and receives webhook events.
+- [Deployment types](https://openvidu.io/3.7.0/docs/self-hosting/deployment-types/index.md): Description of the different OpenVidu Platform user-friendly installers that facilitate quick on-premises deployments, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
+- [Local (Development)](https://openvidu.io/3.7.0/docs/self-hosting/local/index.md): Easy local install deployment instructions for testing and development purposes.
+- [OpenVidu Single Node Community](https://openvidu.io/3.7.0/docs/self-hosting/single-node/index.md): Different options for a single node deployment, be it on-premises or on any of the most popular cloud providers such as AWS, Azure or GCP.
+- [OpenVidu Single Node Pro](https://openvidu.io/3.7.0/docs/self-hosting/single-node-pro/index.md): The features of Single Node OpenVidu with a 2x performance and advanced observability.
+- [OpenVidu Elastic](https://openvidu.io/3.7.0/docs/self-hosting/elastic/index.md): Elastic deployment options for OpenVidu Platform, either on-premises, on AWS, or on Azure.
+- [OpenVidu High Availability](https://openvidu.io/3.7.0/docs/self-hosting/ha/index.md): High Availability deployment options for OpenVidu Platform, either on-premises (with DNS or network load balancers), on AWS, or on Azure.
+- [Production ready](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/index.md): Main advantages of self-hosting videoconferencing and live-streaming solutions with OpenVidu Platform, which are privacy, leverage your resources, performant, scalable, fault tolerant, and observable.
+- [Performant](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/performance/index.md): OpenVidu Platform 2x performance by using mediasoup to replace the original Pion LiveKit WebRTC engine while maintaining the LiveKit API.
+- [Scalable](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/scalability/index.md): OpenVidu Platform scalability numbers and Elastic and High Availability deployments.
+- [Fault Tolerant](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/fault-tolerance/index.md): OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.
+- [Observability](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/observability/index.md): A description of OpenVidu's observability toolset to monitor and analyze your deployment in real-time, consisting of OpenVidu Dashboard and a Grafana stack.
+- [OpenVidu Dashboard](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md): How to access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses.
+- [Grafana Stack](https://openvidu.io/3.7.0/docs/self-hosting/production-ready/observability/grafana-stack/index.md): How to use OpenVidu's built-in Grafana dashboards to monitor different metrics from OpenVidu Platform and logs from your cluster.
+- [How To Guides](https://openvidu.io/3.7.0/docs/self-hosting/how-to-guides/index.md): Explore step-by-step guides to customize your OpenVidu deployment for specific use cases.
+- [Overview](https://openvidu.io/3.7.0/docs/ai/overview/index.md): OpenVidu offers a catalog of AI services that can be easily integrated into your application to enhance the user experience and add advanced features. These services are provided by OpenVidu agents, a set of pre-configured and ready-to-use AI modules.
+- [Overview](https://openvidu.io/3.7.0/docs/ai/openvidu-agents/overview/index.md): A description of how to use and configure OpenVidu Agents, pre-configured and ready-to-use AI modules.
+- [Speech Processing agent](https://openvidu.io/3.7.0/docs/ai/openvidu-agents/speech-processing-agent/index.md): Instructions on how to configure the Speech Processing OpenVidu agent which transcribes audio speech to text in real time.
+- [Angular Components](https://openvidu.io/3.7.0/docs/ui-components/angular-components/index.md): OpenVidu Angular Components simplify the creation of videoconferencing apps, offering customizable and powerful components for rapid development and easy maintenance. This is a how-to guide on using this angular library.
+- [React Components](https://openvidu.io/3.7.0/docs/ui-components/react-components/index.md): the simplest way to create real-time audio/video applications with React.
+
