@@ -15,6 +15,7 @@ Self-hosted videoconference solution and SDK
 - [Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN](https://openvidu.io/blog/2026/06/09/turn-key-considerations/index.md): OpenVidu Blog
 - [The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System](https://openvidu.io/blog/2026/06/02/scalability-in-videoconferencing-systems/index.md): OpenVidu Blog
 - [5 conversational AI app ideas you can build this weekend](https://openvidu.io/blog/2026/06/23/5-conversational-ai-app-ideas/index.md): OpenVidu Blog
+- [Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends](https://openvidu.io/blog/2026/06/30/secure-home-video-conferencing/index.md): OpenVidu Blog
 - [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu Meet and OpenVidu Platform
 - [About Us](https://openvidu.io/about-us/index.md): The people behind OpenVidu
 - [Research](https://openvidu.io/research/index.md): Research publications on real-time communications in peer-reviewed journals
