@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="100%" style="max-width:900px;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<text x="64" y="30" font-size="21" font-weight="700" fill="#0b0b0b">Time to a working deployment</text>
+<text x="64" y="52" font-size="13.5" fill="#52514e">Deploy + wait-ready, by cloud and topology · lower is faster</text>
+<rect x="64" y="63" width="11" height="11" rx="2.5" fill="#2a78d6"/>
+<text x="80" y="72" font-size="12.5" fill="#52514e">AWS</text>
+<rect x="123.0" y="63" width="11" height="11" rx="2.5" fill="#1baf7a"/>
+<text x="139.0" y="72" font-size="12.5" fill="#52514e">Azure</text>
+<rect x="196.0" y="63" width="11" height="11" rx="2.5" fill="#eda100"/>
+<text x="212.0" y="72" font-size="12.5" fill="#52514e">GCP</text>
+<rect x="255.0" y="63" width="11" height="11" rx="2.5" fill="#008300"/>
+<text x="271.0" y="72" font-size="12.5" fill="#52514e">Oracle</text>
+<rect x="335.0" y="63" width="11" height="11" rx="2.5" fill="#4a3aa7"/>
+<text x="351.0" y="72" font-size="12.5" fill="#52514e">DigitalOcean</text>
+<line x1="64" y1="406.0" x2="878" y2="406.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="410.0" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">0</text>
+<line x1="64" y1="354.3" x2="878" y2="354.3" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="358.3" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">5</text>
+<line x1="64" y1="302.7" x2="878" y2="302.7" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="306.7" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">10</text>
+<line x1="64" y1="251.0" x2="878" y2="251.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="255.0" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">15</text>
+<line x1="64" y1="199.3" x2="878" y2="199.3" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="203.3" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">20</text>
+<line x1="64" y1="147.7" x2="878" y2="147.7" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="151.7" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">25</text>
+<line x1="64" y1="96.0" x2="878" y2="96.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="55" y="100.0" text-anchor="end" font-size="11.5" fill="#898781" style="font-variant-numeric:tabular-nums">30</text>
+<text x="55" y="88.0" text-anchor="end" font-size="11" fill="#898781">minutes</text>
+<rect x="100.7" y="328.5" width="38.0" height="77.5" rx="3" fill="#2a78d6"/>
+<text x="119.7" y="322.5" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">7.5</text>
+<rect x="140.7" y="328.2" width="38.0" height="77.8" rx="3" fill="#1baf7a"/>
+<text x="159.7" y="322.2" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">7.5</text>
+<rect x="180.7" y="339.4" width="38.0" height="66.7" rx="3" fill="#eda100"/>
+<text x="199.7" y="333.4" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">6.5</text>
+<rect x="220.7" y="280.3" width="38.0" height="125.7" rx="3" fill="#008300"/>
+<text x="239.7" y="274.3" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">12.2</text>
+<rect x="260.7" y="364.1" width="38.0" height="41.9" rx="3" fill="#4a3aa7"/>
+<text x="279.7" y="358.1" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">4.0</text>
+<text x="199.7" y="428.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0b0b0b">Single node</text>
+<rect x="372.0" y="338.8" width="38.0" height="67.2" rx="3" fill="#2a78d6"/>
+<text x="391.0" y="332.8" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">6.5</text>
+<rect x="412.0" y="315.6" width="38.0" height="90.4" rx="3" fill="#1baf7a"/>
+<text x="431.0" y="309.6" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">8.8</text>
+<rect x="452.0" y="352.6" width="38.0" height="53.4" rx="3" fill="#eda100"/>
+<text x="471.0" y="346.6" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">5.2</text>
+<rect x="492.0" y="307.5" width="38.0" height="98.5" rx="3" fill="#008300"/>
+<text x="511.0" y="301.5" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">9.5</text>
+<rect x="532.0" y="310.8" width="38.0" height="95.2" rx="3" fill="#4a3aa7"/>
+<text x="551.0" y="304.8" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">9.2</text>
+<text x="471.0" y="428.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0b0b0b">Elastic</text>
+<rect x="643.3" y="121.0" width="38.0" height="285.0" rx="3" fill="#2a78d6"/>
+<text x="662.3" y="115.0" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">27.6</text>
+<rect x="683.3" y="181.2" width="38.0" height="224.8" rx="3" fill="#1baf7a"/>
+<text x="702.3" y="175.2" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">21.8</text>
+<rect x="723.3" y="339.0" width="38.0" height="67.0" rx="3" fill="#eda100"/>
+<text x="742.3" y="333.0" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">6.5</text>
+<rect x="763.3" y="272.4" width="38.0" height="133.6" rx="3" fill="#008300"/>
+<text x="782.3" y="266.4" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">12.9</text>
+<rect x="803.3" y="312.7" width="38.0" height="93.3" rx="3" fill="#4a3aa7"/>
+<text x="822.3" y="306.7" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0b0b0b" style="font-variant-numeric:tabular-nums">9.0</text>
+<text x="742.3" y="428.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0b0b0b">High availability</text>
+<line x1="64" y1="406" x2="878" y2="406" stroke="#c3c2b7" stroke-width="1.5"/>
+</svg>
