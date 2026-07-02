@@ -4,5 +4,5 @@
 | Method | Command | Description | Parameters | Access Level |
 |--------|---------|-------------|------------|-------------|
 | `endMeeting()` | `endMeeting` | Ends the current meeting for all participants. | - | Moderator |
-| `leaveRoom()` | `leaveRoom` | Disconnects the local participant from the current room. | - | All |
+| `leaveRoom()` | `leaveRoom` | Disconnects the local participant from the current meeting. | - | All |
 | `kickParticipant(participantIdentity)` | `kickParticipant` | Kicks a participant from the meeting. | • `participantIdentity`: string | Moderator |

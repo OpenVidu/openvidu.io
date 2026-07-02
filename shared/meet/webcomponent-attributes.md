@@ -3,10 +3,10 @@
 
 | Attribute | Description | Required |
 |-----------|-------------|----------|
-| `room-url` | The OpenVidu Meet room URL to connect to. | Yes (This attribute is required unless `recording-url` is provided.) |
+| `room-url` | The OpenVidu Meet room URL to access to. | Yes (This attribute is required unless `recording-url` is provided.) |
 | `recording-url` | The URL of a recording to view. | Yes (This attribute is required unless `room-url` is provided.) |
 | `participant-name` | Display name for the local participant. | No |
 | `e2ee-key` | Secret key for end-to-end encryption (E2EE). If provided, the participant will join the meeting using E2EE key. | No |
-| `leave-redirect-url` | URL to redirect to when leaving the meeting. Redirection occurs after the **`CLOSED` event** fires. | No |
+| `leave-redirect-url` | URL to redirect to when leaving OpenVidu Meet. Redirection occurs after the **`CLOSED` event** fires. | No |
 | `show-only-recordings` | Whether to show only recordings instead of live meetings. | No |
-| `show-recording` | Recording identifier to open directly. When provided, the app redirects to `/recording/:recordingId`. | No |
+| `show-recording` | Identifier of the recording to display. When provided along with `room-url`, the app redirects to the recording view. | No |

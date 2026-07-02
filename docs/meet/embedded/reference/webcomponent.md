@@ -73,7 +73,7 @@ Listen to events using JavaScript event listeners:
 const openviduMeet = document.querySelector('openvidu-meet');
 
 openviduMeet.addEventListener('joined', (event) => {
-	console.log('The local participant has joined the meeting!', event);
+	console.log('The local participant has joined the meeting', event.detail);
 });
 ```
 
@@ -83,12 +83,18 @@ You can also use the API `on` | `once` | `off`:
 const openviduMeet = document.querySelector('openvidu-meet');
 
 openviduMeet.on('joined', (event) => {
-	console.log('The local participant has joined the meeting!', event);
+	console.log('The local participant has joined the meeting', event);
 });
 
 openviduMeet.once('left', (event) => {
-	console.log('The local participant has left the meeting!', event);
+	console.log('The local participant has left the meeting', event);
 });
 ```
+
+!!! info "Accessing the event payload"
+	The way you access the event payload depends on the method you use to listen:
+
+	- With the native **`addEventListener`** method, the callback receives a standard [`CustomEvent` :fontawesome-solid-external-link:{.external-link-icon}](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent){:target="_blank"}, so the payload is available in its **`detail`** property (e.g. `event.detail`).
+	- With the **`on`** | **`once`** | **`off`** API, the callback receives the payload **directly** as its argument (e.g. `event`), without needing to access any `detail` property.
 
 
