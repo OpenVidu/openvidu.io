@@ -169,15 +169,13 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>certificateType</code></td>
     <td style="white-space: nowrap;"><code>"letsencrypt"</code></td>
-    <td>Certificate type for OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li><code>owncert</code> - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li><code>letsencrypt</code> - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, a random sslip.io domain will be used).</li></ul>
-    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
-    <p><strong>Warning:</strong> sslip.io is currently experiencing Let's Encrypt rate limiting issues, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check <a href="https://openvidu.discourse.group/t/deployment-without-domain/5474" target="_blank">this community thread</a> for troubleshooting and updates.</p>
+    <td>Certificate type for OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li><code>owncert</code> - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li><code>letsencrypt</code> - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
     </td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>domainName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Domain name for the OpenVidu Deployment. Not mandatory; if not provided, a sslip.io domain will be used instead.</td>
+    <td>Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>

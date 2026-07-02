@@ -6,11 +6,7 @@ There are three possible scenarios for this section:
 
     If you don't have a Domain Name and want to quickly test OpenVidu on Azure, you can use this option by selecting **Certificate Type** as _letsencrypt_ and keeping the rest of the parameters empty.
 
-    It will deploy OpenVidu with a Let's Encrypt certificate generated using [sslip.io](https://sslip.io/){:target="_blank"} based on the public IP created for the deployment.
-
-    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
-    !!! warning "sslip.io rate limiting"
-        **sslip.io** is currently experiencing **Let's Encrypt rate limiting issues**, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check [this community thread](https://openvidu.discourse.group/t/deployment-without-domain/5474){:target="_blank"} for troubleshooting and updates.
+    It will deploy OpenVidu with a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate issued for the public IP created for the deployment.
 
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/azure-letsencrypt-nodomain.png)
 
