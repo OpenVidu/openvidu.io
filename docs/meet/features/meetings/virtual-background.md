@@ -9,11 +9,11 @@ tags:
 
 Virtual backgrounds help participants present a cleaner, more professional video appearance without needing to change their physical environment.
 
-With a single click, users can replace distracting surroundings with a **blur effect** or a **custom background image**, making meetings more comfortable, consistent, and privacy-friendly.
+With a single click, individuals can replace distracting surroundings with a **blur effect** or a **custom background image**, making meetings more comfortable, consistent, and privacy-friendly.
 
-This feature works both before joining a meeting and while already inside one, giving users full flexibility at any moment.
+This feature works both before joining a meeting and while already inside one, giving participants full flexibility at any moment.
 
-Virtual backgrounds can be enabled or disabled per room when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing administrator to decide when and where the feature is available.
+Virtual backgrounds can be enabled or disabled per room when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing room managers to decide when and where the feature is available.
 
 ## Key Benefits
 

@@ -49,7 +49,7 @@ When E2EE is active, everything participants share is encrypted on their device 
 
     ---
 
-    Display names are encrypted too, revealing nothing about who is in the room.
+    Display names are encrypted too, revealing nothing about who is in the meeting.
 
 </div>
 
@@ -57,14 +57,14 @@ When E2EE is active, everything participants share is encrypted on their device 
 
 Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device and never sent to the server.
 
-When a participant opens the access link, the [Lobby view](lifecycle.md#lobby-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
+When a member accesses a E2E-encrypted room, the [Lobby view](lifecycle.md#lobby-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 
 <a class="glightbox" href="../../../../assets/images/meet/e2e-encryption/lobby-e2ee-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/e2e-encryption/lobby-e2ee-dark.webp#only-dark" loading="lazy" class="control-height round-corners"/></a>
 <a class="glightbox" href="../../../../assets/images/meet/e2e-encryption/lobby-e2ee-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/e2e-encryption/lobby-e2ee-light.webp#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 !!! warning "Share the passphrase through a trusted channel"
 
-    OpenVidu Meet does not distribute the passphrase for you. Send it to participants through a separate, trusted channel. Anyone with the passphrase can decrypt the meeting; anyone without it cannot.
+    OpenVidu Meet does not distribute the passphrase for you. Send it to room members through a separate, trusted channel. Anyone with the passphrase can decrypt the meeting content; anyone without it cannot.
 
 ## Joining with a wrong passphrase
 
