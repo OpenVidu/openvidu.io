@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" width="100%" style="max-width:760px;font-family:'Tomorrow', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<text x="380.0" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#e2e8e9">Monthly bill for one media node &#8212; a realistic month</text>
+<text x="380.0" y="56" text-anchor="middle" font-size="13.5" fill="#9aa5ab">~4.5&#160;TB of egress (&#8776; 8h/day of meetings on weekdays) + the server</text>
+<rect x="150" y="110" width="520" height="30" rx="4" fill="#232b2d"/>
+<rect x="150" y="110" width="41.3" height="30" rx="4" fill="#06d362"/>
+<text x="136" y="130" text-anchor="end" font-size="14.5" font-weight="600" fill="#e2e8e9">DigitalOcean</text>
+<text x="201.3" y="130" font-size="14.5" font-weight="700" fill="#e2e8e9">$48/mo</text>
+<rect x="150" y="164" width="520" height="30" rx="4" fill="#232b2d"/>
+<rect x="150" y="164" width="67.9" height="30" rx="4" fill="#06d362"/>
+<text x="136" y="184" text-anchor="end" font-size="14.5" font-weight="600" fill="#e2e8e9">Oracle</text>
+<text x="227.9" y="184" font-size="14.5" font-weight="700" fill="#e2e8e9">$79/mo</text>
+<rect x="150" y="218" width="520" height="30" rx="4" fill="#232b2d"/>
+<rect x="150" y="218" width="440.9" height="30" rx="4" fill="#ff9900"/>
+<text x="136" y="238" text-anchor="end" font-size="14.5" font-weight="600" fill="#e2e8e9">Azure</text>
+<text x="600.9" y="238" font-size="14.5" font-weight="700" fill="#e2e8e9">$513/mo</text>
+<rect x="150" y="272" width="520" height="30" rx="4" fill="#232b2d"/>
+<rect x="150" y="272" width="469.3" height="30" rx="4" fill="#ff9900"/>
+<text x="136" y="292" text-anchor="end" font-size="14.5" font-weight="600" fill="#e2e8e9">AWS</text>
+<text x="629.3" y="292" font-size="14.5" font-weight="700" fill="#e2e8e9">$546/mo</text>
+<rect x="150" y="326" width="520" height="30" rx="4" fill="#232b2d"/>
+<rect x="150" y="326" width="520.0" height="30" rx="4" fill="#ff5252"/>
+<text x="136" y="346" text-anchor="end" font-size="14.5" font-weight="600" fill="#e2e8e9">GCP</text>
+<text x="680.0" y="346" font-size="14.5" font-weight="700" fill="#e2e8e9">$605/mo</text>
+<text x="40" y="392" font-size="12.5" fill="#9aa5ab">At everyday usage, Oracle and DigitalOcean pay $0 for bandwidth: the bill is just the server.</text>
+<text x="40" y="412" font-size="12.5" fill="#9aa5ab">The others already pay hundreds, purely for data leaving the network.</text>
+</svg>

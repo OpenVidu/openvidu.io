@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" width="100%" style="max-width:760px;font-family:'Tomorrow', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<text x="380.0" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#e2e8e9">Cost to send 1&#160;GB of video out to the internet</text>
+<text x="380.0" y="56" text-anchor="middle" font-size="13.5" fill="#9aa5ab">First&#8209;tier internet egress price, US/EU regions &#183; 2026</text>
+<line x1="70" y1="300.0" x2="730" y2="300.0" stroke="#333b3d" stroke-width="1"/>
+<text x="60" y="304.0" text-anchor="end" font-size="12" fill="#9aa5ab">$0.00</text>
+<line x1="70" y1="245.0" x2="730" y2="245.0" stroke="#333b3d" stroke-width="1"/>
+<text x="60" y="249.0" text-anchor="end" font-size="12" fill="#9aa5ab">$0.03</text>
+<line x1="70" y1="190.0" x2="730" y2="190.0" stroke="#333b3d" stroke-width="1"/>
+<text x="60" y="194.0" text-anchor="end" font-size="12" fill="#9aa5ab">$0.06</text>
+<line x1="70" y1="135.0" x2="730" y2="135.0" stroke="#333b3d" stroke-width="1"/>
+<text x="60" y="139.0" text-anchor="end" font-size="12" fill="#9aa5ab">$0.09</text>
+<line x1="70" y1="80.0" x2="730" y2="80.0" stroke="#333b3d" stroke-width="1"/>
+<text x="60" y="84.0" text-anchor="end" font-size="12" fill="#9aa5ab">$0.12</text>
+<rect x="110" y="284.4" width="74" height="15.6" rx="4" fill="#06d362"/>
+<text x="147.0" y="275.4" text-anchor="middle" font-size="14.5" font-weight="700" fill="#e2e8e9">$0.0085</text>
+<text x="147.0" y="322.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#e2e8e9">Oracle</text>
+<rect x="242" y="281.7" width="74" height="18.3" rx="4" fill="#06d362"/>
+<text x="279.0" y="272.7" text-anchor="middle" font-size="14.5" font-weight="700" fill="#e2e8e9">$0.01</text>
+<text x="279.0" y="322.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#e2e8e9">DigitalOcean</text>
+<rect x="374" y="140.5" width="74" height="159.5" rx="4" fill="#ff9900"/>
+<text x="411.0" y="131.5" text-anchor="middle" font-size="14.5" font-weight="700" fill="#e2e8e9">$0.087</text>
+<text x="411.0" y="322.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#e2e8e9">Azure</text>
+<rect x="506" y="135.0" width="74" height="165.0" rx="4" fill="#ff9900"/>
+<text x="543.0" y="126.0" text-anchor="middle" font-size="14.5" font-weight="700" fill="#e2e8e9">$0.09</text>
+<text x="543.0" y="322.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#e2e8e9">AWS</text>
+<rect x="638" y="80.0" width="74" height="220.0" rx="4" fill="#ff5252"/>
+<text x="675.0" y="71.0" text-anchor="middle" font-size="14.5" font-weight="700" fill="#e2e8e9">$0.12</text>
+<text x="675.0" y="322.0" text-anchor="middle" font-size="13.5" font-weight="600" fill="#e2e8e9">GCP</text>
+<line x1="70" y1="300" x2="730" y2="300" stroke="#6b7679" stroke-width="1.5"/>
+<text x="40" y="392" font-size="12.5" fill="#9aa5ab">Oracle and DigitalOcean charge roughly 10&#215; less per GB than AWS, Azure or GCP.</text>
+<text x="40" y="412" font-size="12.5" fill="#9aa5ab">Each cloud also gives some traffic away for free first &#8212; see the article.</text>
+</svg>
