@@ -2,15 +2,15 @@
 draft: false
 date: 2026-07-04
 slug: deploy-and-scale-in-times-across-clouds
-description: A follow-up to our scale-in post — real measured deploy times across AWS, Azure, GCP, Oracle Cloud and DigitalOcean, and what it really takes to safely scale a self-hosted WebRTC video platform back down.
+description: We deployed the same self-hosted WebRTC video platform on AWS, Azure, GCP, Oracle Cloud and DigitalOcean — in single-node, elastic and HA, over and over — and measured how long each takes to stand up. DigitalOcean is fastest, Oracle does the most, and looking at every individual run shows which clouds are actually predictable.
 categories:
   - Technology
   - Research
 tags:
   - DevOps
   - Cloud Infrastructure
+  - Deployment
   - Autoscaling
-  - Scale-In
   - Benchmarks
 authors:
   - sergio
@@ -20,130 +20,122 @@ hide:
   - version-selector
 ---
 
-# Scaling up is fast, scaling down is slow: we timed five clouds — one took 14 minutes just to decide, another never did
+# We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason
 
-![Time to a working deployment, by cloud and deployment type](/assets/images/blog/scale-in-times/deploy-times-light.svg#only-light)
-![Time to a working deployment, by cloud and deployment type](/assets/images/blog/scale-in-times/deploy-times-dark.svg#only-dark)
+![Mean time to a working deployment, by cloud and topology](/assets/images/blog/scale-in-times/deploy-times-light.svg#only-light)
+![Mean time to a working deployment, by cloud and topology](/assets/images/blog/scale-in-times/deploy-times-dark.svg#only-dark)
 
-A few weeks ago we argued that [scaling *up* is easy and scaling *down* is the real hard part](/blog/2026/05/26/scale-in-problem-in-videoconferences/) of running a real-time video platform. You can't just kill a media node that has live meetings on it — you have to *drain* it first, and each cloud gives you a different, awkward set of primitives to do that safely.
+"How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.
 
-That post made the argument. This one brings the receipts.
-
-We built a tool, **ov-cloud-tester**, that deploys the same self-hosted video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in every topology (single node, elastic, high-availability), drives real WebRTC load at it, and puts a stopwatch on every phase: how long to stand up, how long to add a node under load, and — the interesting one — how long to *safely take a node away* again. The numbers confirm the thesis and then some: standing up is fast and boringly predictable, while scaling back down is slow, wildly cloud-dependent, and on one cloud it didn't happen at all within our window.
+We built a tool, **ov-cloud-tester**, that deploys the *same* self-hosted WebRTC video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in three topologies (single node, elastic, and high-availability), tears it down cleanly, and times the whole thing. We ran it many times per cloud and looked at both the averages *and* every individual run. The headline: standing up a working deployment ranges from about **5 minutes to 20**, DigitalOcean is consistently the fastest and Oracle the heaviest — and the *why*, plus which clouds are actually *predictable*, turns out to be more interesting than the ranking.
 
 <!-- more -->
 
 !!! abstract "TL;DR"
-    - **Deploying is fast:** a single node is ready in **4–12 minutes** across all five clouds; DigitalOcean is quickest (~4 min), Oracle slowest (~12 min).
-    - **A full HA cluster is where clouds diverge hard:** GCP is ready in **~6.5 min**, while AWS takes **~27.5 min** — a 4× spread, most of it DNS propagation baked into readiness.
-    - **Scaling in is dominated by one thing: how long the cloud takes to even *decide* to remove a node.** We measured **up to ~14.5 minutes** just for that decision on GCP.
-    - **AWS didn't scale in at all** within our 10-minute window — CPU well under target, the cluster plainly over-provisioned, and the Auto Scaling Group simply hadn't acted. With default cooldowns, "elastic" can quietly mean "fixed-size, but still paying."
-    - **GCP and DigitalOcean are mirror images:** GCP scales out fast (~3.5–4 min) but marks nodes for removal slowly; DigitalOcean scales out slowly (~9–10.5 min) but marks them fast (~2.5–3.5 min).
-    - **Actually removing a drained node is trivial** — ~35 seconds once it's empty. The cost of scaling in is the *decision* plus the *deliberate* graceful drain, never the teardown.
+    - **A single node is ready in ~5–10 minutes on every cloud.** DigitalOcean is quickest (~5.5 min), Oracle slowest (~10 min).
+    - **DigitalOcean wins because it builds almost nothing first** — a stock droplet, a firewall, an IP. No VPC, IAM, DNS zones or TLS certificates to provision before your server can exist.
+    - **Oracle does the most** — its elastic and HA deployments stand up a real autoscaler, a load balancer, and a coordinated multi-node cluster before anything is ready. That's a feature, not a bug; it just costs setup time.
+    - **HA is where clouds diverge hard:** GCP and DigitalOcean are ready in ~6 min, Azure and Oracle in ~11, and AWS averages ~18.
+    - **But the average lies — look at every run.** AWS HA isn't "18 minutes": it's *either* ~12–13 min *or* ~27, with nothing in between. GCP, by contrast, lands within seconds of itself every time. Predictability is its own metric.
+    - **"Time to ready" is not "time to provision."** The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.
+    - **Scaling back *down* is a different problem** — and we're still measuring it. More on that (and why single node doesn't have it) at the end.
 
-## The claim we're testing
+## What we measured, and how
 
-Quick recap, because this is a direct sequel. A media node is **stateful** in the most unforgiving way: every participant holds a live WebRTC connection pinned to that specific machine, with its own ICE candidates, DTLS keys and SRTP state. There is no transparent session migration. Kill a node anyway and you get the forty-people-mid-sentence problem from last time — every live call on it drops at once, with no retry and no rewind. So when the autoscaler decides the cluster is over-provisioned and wants to remove a node, you cannot just terminate it — you have to mark it as *draining*, stop sending it new rooms, wait for the meetings already on it to end, and only *then* let the cloud reclaim the machine.
+Each test is one full **deploy → wait-ready → destroy** cycle, and we time each phase separately from the tool's own logs, so these are wall-clock numbers an operator actually experiences:
 
-Every cloud implements the interception differently (AWS lifecycle hooks, Azure runbooks, GCP scale-out-only MIGs plus a scheduled function, DigitalOcean external functions). We covered the *mechanisms* in the [previous post](/blog/2026/05/26/scale-in-problem-in-videoconferences/). What we never had were the *timings*. Now we do.
+- **deploy** — the provisioning step: everything the cloud has to create (via Terraform / CloudFormation / ARM) before the machines exist.
+- **wait-ready** — from "the machines exist" to "the deployment's real endpoint answers over HTTP": software boot, install, DNS, certificates, cluster formation.
+- **destroy** — tearing it all down again (we run it, but it's not our focus here).
 
-## How we measured it
+The number that matters is **time to ready = deploy + wait-ready**, and we report the *sum*, because the clouds split that work differently. AWS folds the software install into the deploy step (its CloudFormation stack blocks until the instance signals it's done), while others finish provisioning in seconds and then spend minutes booting before the endpoint responds. Only the sum is a fair comparison.
 
-Every run is a real deployment — real Terraform / CloudFormation / ARM, real VMs, real OpenVidu — torn down cleanly afterwards. The tool records the duration of each atomic phase from its own logs, so the numbers are wall-clock times a real operator would experience, not estimates.
+We ran **each configuration 4–5 times** and averaged — with two honest exceptions: **Oracle's elastic and HA, which we've only completed once each so far** (they're the slowest and priciest to spin up repeatedly), so treat those two cells as provisional. Every number below is real and measured; none is estimated.
 
-Two things worth defining up front, because they're where the interesting numbers live:
+The three topologies are genuinely different amounts of infrastructure: a **single node** runs everything on one server; **elastic** adds an autoscaling pool of media nodes; and **high availability (HA)** adds a fault-tolerant cluster of masters behind a load balancer. So it's no surprise HA takes longer — what's interesting is *how much* longer, and how differently each cloud gets there.
 
-- **Time to ready** = `deploy` (all cloud resources created) **+** `wait-ready` (the deployment's real endpoint starts answering over HTTP). We report the *sum*, because the clouds split the work differently — AWS folds the software install into the deploy step, while others finish provisioning quickly and then spend minutes booting and installing before the endpoint answers. Only the sum is a fair comparison.
-- **Scale-in phases.** Under a fixed synthetic load (5 rooms with 15 publishers and 80 subscribers, generated with the LiveKit `lk` CLI) we push a media node past a **50% CPU** autoscaling threshold and then measure three distinct, cloud-comparable phases:
+## The numbers
 
-    1. **Scale-out** — from a node crossing `>50%` CPU to a *new* node being registered and ready.
-    2. **Mark latency** — from CPU dropping back `<50%` to the autoscaler actually *marking* a node for removal.
-    3. **Drain-death** — from the marked node having no rooms left to it actually being removed.
+Mean time to a working deployment, with the number of runs behind each figure:
 
-    Between phases 2 and 3 there's a deliberate **graceful-drain hold** (default 20 minutes) where the marked node keeps serving its last meeting. That hold is a *policy choice*, not a cloud limitation, so we exclude it from the three phases above — which makes those three directly comparable across providers.
-
-One honest caveat before the numbers: we have complete, live scale-in measurements for **GCP and DigitalOcean** (elastic and HA). AWS we'll get to — it produced a genuinely interesting result. Azure and Oracle scale-in timings aren't measured live yet, so we won't invent them; where they appear it's the mechanism, not a stopwatch.
-
-## Scaling up: fast and boringly predictable
-
-Here's how long it took to go from "go" to a deployment answering requests, per cloud and topology:
-
-| Topology | AWS | Azure | GCP | Oracle | DigitalOcean |
+| Topology | DigitalOcean | GCP | Azure | AWS | Oracle |
 |---|---|---|---|---|---|
-| **Single node** | 7m30s | 7m32s | 6m27s | 12m10s | **4m03s** ⚡ |
-| **Elastic** | 6m30s | 8m45s | **5m10s** ⚡ | 9m32s | 9m13s |
-| **High availability** | **27m35s** 🔴 | 21m45s | **6m29s** ⚡ | 12m56s | 9m02s |
+| **Single node** | **5m31s** (4) | 6m07s (5) | 6m10s (5) | 7m24s (5) | 9m46s (4) |
+| **Elastic** | **4m21s** (4) | 5m17s (5) | 5m47s (5) | 6m56s (5) | 5m48s (1)\* |
+| **High availability** | 6m03s (4) | **6m02s** (4) | 10m35s (5) | 18m34s (5) | 11m46s (1)\* |
 
-The single-node story is unremarkable in the best way: every cloud gets you a working server in single-digit-to-low-double-digit minutes. DigitalOcean is the sprinter (~4 min and it also tears down in seconds); Oracle is the tortoise (~12 min — its VMs provision in about 40 seconds, but the software then takes 11+ minutes to come up healthy). Nothing here will surprise or hurt you.
+<small>\* Single run so far — provisional.</small>
 
-**High availability is where the clouds stop agreeing.** GCP stands up a full HA cluster in ~6.5 minutes — faster than it took some clouds to deploy a *single node*. AWS, at the other extreme, took ~27.5 minutes. Most of that AWS penalty isn't compute: it's the Route 53 alias to the load balancer taking ~15 minutes to propagate, so the endpoint returns NXDOMAIN until DNS catches up, and readiness has to wait it out. It's a real delay a real operator hits on first deploy — but it's a DNS artifact, not GCP being "4× better at servers."
+For a **single node**, everyone lands in a tight 5–10 minute band; nothing here will hurt you. DigitalOcean is the sprinter, Oracle takes about twice as long. **DigitalOcean is fastest in every topology** (or tied with GCP). The *slowest* changes with the topology: Oracle for a single node, AWS for HA — and those two are slow for very different reasons, which we'll get to.
 
-!!! tip "Takeaway 1"
-    Deployment time is a solved problem — but "time to *ready*" is not the same as "time to provision." The gap between them (software boot, DNS propagation, health checks) is where the minutes hide, and it varies more by cloud than the raw infrastructure does.
+But before the "why," there's a "how reliably" — and it matters just as much.
 
-## Scaling down: where the minutes actually go
+## Every run, not just the average
 
-Now the part the previous post was really about. When load drops and the cluster wants to shrink, how long does it take — and where does the time go?
+Averages are comforting and occasionally dishonest. Here's every individual run:
 
-![Where the minutes go when scaling in: scale-out vs mark-for-removal vs drain-death](/assets/images/blog/scale-in-times/scale-in-phases-light.svg#only-light)
-![Where the minutes go when scaling in: scale-out vs mark-for-removal vs drain-death](/assets/images/blog/scale-in-times/scale-in-phases-dark.svg#only-dark)
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/scale-in-times/deploy-variability-light.svg#only-light)
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/scale-in-times/deploy-variability-dark.svg#only-dark)
 
-| Cloud · topology | Scale-out<br>(add a node) | Mark latency<br>(decide to remove) | Drain-death<br>(remove empty node) |
-|---|---|---|---|
-| **GCP** · elastic | 3m32s | **6m44s** | 38s |
-| **GCP** · HA | 4m12s | **12m02s** | 40s |
-| **DigitalOcean** · elastic | **9m08s** | 2m32s | 33s |
-| **DigitalOcean** · HA | **10m25s** | 3m34s | 33s |
+Three things this shows that the table can't:
 
-Three things jump out.
+- **AWS HA is bimodal, and its average is a lie.** It isn't "18 minutes" — it's *either* ~12–13 minutes *or* ~27, in two tight clusters with nothing between them. The mean (that vertical tick) lands in the empty gap where **no run actually happened**. If you provision AWS HA, you'll likely get one of two very different experiences, and the headline number predicts neither.
+- **GCP is the most predictable cloud by a wide margin.** Its elastic runs land within ~13 seconds of each other, its HA runs within ~26. When GCP says ~6 minutes, it means ~6 minutes, every time. For anything that deploys on a schedule — CI, blue-green rollouts, disaster-recovery drills — that consistency is worth as much as raw speed.
+- **One slow run can drag a whole average.** Oracle's single node is usually ~8m50s, but one run out of four hit 12m34s and pulled the reported mean up to ~9m46s. DigitalOcean, by contrast, is both fast *and* tight — its dots cluster hard on the left in every panel.
 
-**First: removing a drained node is trivial — about 35 seconds, on both clouds, in every topology.** Once a node is empty, tearing it down is a non-event. So when people worry that "scaling in is slow," the teardown is never the culprit.
+The takeaway: when you benchmark deploys, don't trust a single average. A cloud that's fast on paper but swings by 15 minutes run-to-run is a cloud you can't build automation around.
 
-**Second: the expensive phase is the *decision* — the mark latency.** This is the time between "load has clearly dropped" and "the autoscaler has committed to removing a node." On GCP it ran from **6m44s up to 12m02s** depending on topology, and across repeated runs we saw it swing as high as **14m36s**. That's a quarter of an hour where you're knowingly over-provisioned, paying for a node the system already agrees it doesn't need, before any graceful drain even begins.
+## Why DigitalOcean is the fastest
 
-**Third: GCP and DigitalOcean are near-perfect mirror images.**
+DigitalOcean wins by asking the cloud to do almost nothing before your server exists. A single-node deploy is essentially **one stock Ubuntu droplet, one firewall, a floating IP, and an object-storage bucket** — and that's it. There's no VPC to carve out, no subnets or gateways or route tables, no IAM roles, no DNS zone, no TLS certificate to issue and validate before the box can come up. That scaffolding is exactly what makes the hyperscalers slower, and DigitalOcean simply doesn't have most of it.
 
-- **GCP** scales *out* fast (~3.5–4 min — its Managed Instance Group reacts quickly) but is *slow to mark* a node for removal.
-- **DigitalOcean** is the exact opposite: *slow to scale out* (~9–10.5 min — it has no native autoscaling group, so it provisions droplets from scratch) but *fast to mark* (~2.5–3.5 min).
+Three details do the heavy lifting:
 
-Neither cloud is "fast at scaling." Each is fast at one direction and slow at the other. If your traffic is bursty and you care about reacting quickly to *drops* (to save money), DigitalOcean's decision loop wins; if you care about reacting quickly to *spikes* (to protect quality), GCP's does. There is no free lunch, and the shape of that trade-off is a property of the cloud's autoscaler, not of your software.
+- **Stock droplets boot in seconds.** Every node is a plain Ubuntu image with the install driven by cloud-init — no custom image-baking pipeline to wait on.
+- **It names itself, so there's no DNS to wait for.** With no custom domain, the box derives its own hostname from its public IP via [sslip.io](https://sslip.io){:target="_blank"} — which resolves instantly, so there's no DNS-propagation delay before the endpoint answers.
+- **Terraform doesn't sit and wait.** The DigitalOcean config has no blocking "wait for the app to finish installing" gate, so provisioning returns as soon as the droplets are booted. (AWS CloudFormation, by contrast, literally pauses the stack on a *wait condition* until the instance signals it's ready — and the HA template has four of them.)
 
-!!! tip "Takeaway 2"
-    Scaling in is almost entirely *mark latency* + a *deliberate* drain hold. The teardown is instant; the drain is a safety policy you choose. The number that actually varies between clouds — and that you can't control — is how long the provider takes to *decide*.
+Even the bigger topologies stay lean: elastic scales with a small serverless function instead of a managed autoscaling group, and HA uses a plain layer-4 network load balancer that just forwards packets — so there's no certificate for the balancer to validate before traffic can flow.
 
-## The AWS surprise: it didn't scale in at all
+!!! note "The honest caveat"
+    DigitalOcean doesn't make the actual OpenVidu install any faster — pulling the Docker images takes the same time on every cloud. What it does is minimize *everything around* the install: the provisioning, the networking, the DNS, the certificates. That's the whole trick.
 
-AWS deserves its own paragraph, because it produced the most instructive result of the whole campaign. Scaling *out* worked exactly as expected: under load, a second node registered in about 3m42s, rooms seeded onto it, all good. But when we dropped the load and waited for the Auto Scaling Group to mark a node for removal… it didn't. Not within our 10-minute observation window. CPU was well under the 50% target, the cluster was plainly over-provisioned, and the ASG simply hadn't acted yet.
+## Why Oracle does the most
 
-We're deliberately not turning this into "AWS can't scale in." The [previous post](/blog/2026/05/26/scale-in-problem-in-videoconferences/) explains why AWS's lifecycle-hook mechanism is actually the *cleanest* of the four once it does fire. This is about **latency**: ASG scale-in is governed by cooldowns and alarm-evaluation periods that, with conservative defaults, can easily exceed ten minutes before a termination decision is even made. It's the same lesson GCP's 14-minute mark latency teaches, in a more extreme form — the *decision* to scale in is slow and provider-controlled, and if you don't tune it, "elastic" quietly becomes "fixed-size, but you're still paying for the extra node."
+Oracle is the mirror image, and it's worth being fair here: it isn't slow because it's inefficient, it's slow because it genuinely builds *more*.
 
-## Why the clouds differ this much
+Even a **single node** starts from further back. Before Oracle launches that one VM, it provisions a whole private network — a VCN, internet gateway, route table, security list, subnet, and a network security group with its rules — plus a dynamic group and IAM policy and a KMS vault for secrets. Then every Oracle machine pays a boot-time tax the others don't: it installs the full Oracle command-line tool at startup and then *waits* for two Oracle-specific delays — IAM permission propagation, and the secret-vault's DNS actually becoming resolvable (Oracle reports both "ready" before they truly are). That's why Oracle's single node provisions in under a minute but takes ~10 to answer: the VM is up fast, the plumbing around it isn't.
 
-None of this is random. Scale-out is a simple additive operation, so every cloud does it in minutes. Scale-in is a *destructive* operation against a live system, so every cloud wraps it in caution — and each expresses that caution through a different control loop:
+**Elastic** adds real machinery: an instance-pool template, the pool itself, an autoscaler, and an entire serverless Function stack — with its own permissions and logging — that exists specifically to handle scaling *in*. **HA** goes furthest: instead of one master it launches **four**, behind a **network load balancer**, and those four masters have to *find each other and boot as a coordinated cluster* (a MongoDB replica set with Redis failover) before any of them is ready. Each master waits for the others; the media nodes wait for all the masters.
 
-- **GCP** — a scheduled Cloud Function (`*/5`) compares actual vs recommended MIG size and removes the excess; per-node cron then triggers the graceful shutdown. Fast to grow, slow and spiky to decide to shrink.
-- **DigitalOcean** — an external function polls demand on a `*/2–*/4` cron and flags droplets to drain. Slow to grow, fast to decide to shrink.
-- **AWS** — native ASG lifecycle hooks: the cleanest interception once triggered, but gated behind cooldowns and alarm periods that make the *decision* slow by default.
-- **Azure** — VMSS instance protection plus an Automation Account runbook; the previous post cited Azure's documented up-to-5-minute latency before the graceful shutdown even begins.
-- **Oracle** — instance-pool detach driven by the same threshold logic.
+That's a lot of moving parts, and it's exactly why we've only managed one complete elastic and one complete HA run on Oracle so far — they take the longest and cost the most to stand up repeatedly. What we can say firmly is structural: Oracle's heavier topologies do strictly more work than anyone else's, and its one HA run (~11m46s) sits among the slowest. You're not waiting on slow servers — you're waiting on a genuinely bigger system assembling itself.
 
-The pattern underneath all of them: **the graceful drain is under your control and is uniform (~35s teardown, plus whatever hold you configure), but the mark-for-removal decision belongs to the cloud, and that's where the double-digit-minute surprises live.**
+## Why AWS HA swings so wildly
 
-## What to actually do about it
+AWS single node and elastic are middle-of-the-pack and consistent. HA is the outlier — and the reason isn't the network, it's the *order* in which the cluster comes up.
 
-A few practical conclusions we'd stand behind:
+HA is the only topology with more than one master, and AWS brings its four masters up **in sequence, not in parallel**. Master 2 doesn't start until master 1 is fully healthy — booted, with OpenVidu installed and answering — then master 3 waits on master 2, and master 4 on master 3. There's no parallel bring-up with the already-created nodes coordinating as they go; it's a serial chain, each link gated on the previous one reporting healthy. So instead of installs running side by side, you pay for **four of them end to end**.
 
-- **Budget for scale-in latency, and measure it on *your* cloud.** "The autoscaler will handle it" hides a 2-to-15-minute decision delay that differs several-fold between providers. That delay is money — every minute a marked-but-not-removed node lives is a minute you're paying for capacity you don't need.
-- **Don't assume symmetric scaling.** The cloud that adds nodes fastest is often the slowest to remove them. Pick based on whether spikes or lulls dominate your traffic.
-- **Tune the decision, not the drain.** The graceful-drain hold is a safety feature — keep it generous enough to outlast a real meeting. The lever worth tuning for cost is the provider's scale-in cooldown / cron / evaluation period, which is what actually gates the decision.
-- **"Time to ready" ≠ "time to provision."** Especially for HA, plan around DNS propagation and health-check windows, not just VM boot time.
+That serial chain explains both halves of AWS HA's behaviour. It's slow, because four full installs in a row simply take a while. And it's *unpredictable*, because a chain is only as fast as its slowest link — if any single master drags on its install, every master behind it waits. That's the ~12-or-~27 split from the chart above: a clean run threads all four masters in about 12–13 minutes, and a run where one of them stalls pulls the whole line out toward 27.
 
-## Conclusion: the asymmetry is real, and now it has numbers
+!!! tip "The transferable lesson"
+    "Time to ready" is not "time to provision." On DigitalOcean the VM exists in seconds and the wait is the software install; on Oracle single node the VM is instant but the vault plumbing is slow; on AWS HA the masters install one after another instead of together. If you only benchmark "how fast does the VM launch," you'll be surprised by your own deploys — measure the whole thing, several times.
 
-Our earlier claim was that scaling down is the hard direction. The stopwatch agrees. Standing up a deployment is fast and predictable everywhere (minutes, single node; a bit more for HA). Adding a node under load is fast too. But *removing* one safely is slow, and almost all of that slowness is the cloud taking its time to *decide* — up to ~14.5 minutes on GCP, and beyond our window entirely on AWS with default settings — while the actual graceful teardown is a uniform ~35 seconds.
+## What about scaling back *down*?
 
-The good news for anyone running a real-time platform: none of these delays have to translate into a broken meeting or a runaway bill. The drain itself is safe by construction, and the decision latency is tunable once you know it's there. In [OpenVidu](https://openvidu.io/), graceful scale-in ships configured out of the box on every supported cloud, so a scale-down event never interrupts a live room — the numbers in this post came from exercising exactly that machinery, on all five clouds, over and over.
+Everything above is about *getting a deployment up*. The harder direction — which we [wrote about previously](/blog/2026/05/26/scale-in-problem-in-videoconferences/) — is scaling back *down*. You can't just kill a media node that has live meetings on it; you have to *drain* it first, letting its calls finish, and only then let the cloud reclaim it.
 
-If you want to see it on your own infrastructure — or just run your own stopwatch — start with the [self-hosting deployment guides](../../docs/self-hosting/deployment-types.md) and pick the topology that fits your traffic.
+Two things are worth stating up front:
 
-The cloud is happy to scale you up in a hurry. Scaling you back down is the part worth measuring.
+- **A single node doesn't scale in at all.** There's nothing to remove — it's one server. Scale-in only exists for the **elastic** and **HA** topologies, which have an autoscaling media tier.
+- **Elastic and HA should scale in the same way.** The thing being removed is a media node, and a media node drains identically whether there's one master or four in front of it. The topology changes how you *deploy*, but not how a node *drains* — so we'd expect their scale-in timings to match.
+
+We're in the middle of measuring the granular scale-in timings — how long each cloud takes to *decide* a node should go, and how long the graceful drain then takes — across all five providers. We'll add them right here as soon as the full set is in; we're not going to publish half-measured figures. **Check back for the numbers.**
+
+## Conclusion
+
+Deploying a self-hosted video platform is a solved problem on every major cloud — but "solved" doesn't mean "identical," and it doesn't even mean "consistent." A single node is a 5-to-10-minute affair anywhere. Reach for high availability and the spread widens dramatically, and the reasons are legible if you look at what each cloud actually builds: DigitalOcean stays fast (and remarkably steady) by provisioning almost nothing around the server, Oracle takes its time because its elastic and HA deployments stand up a real autoscaler, load balancer and coordinated cluster, and AWS's HA clock swings between ~12 and ~27 minutes because it brings its four masters up one after another, each waiting for the previous to be fully healthy.
+
+The practical takeaway is two-fold: **benchmark the topology you'll actually run, on the cloud you'll actually use — and run it more than once**, because time-to-provision and time-to-ready are different numbers, and the average of a handful of runs can hide a cloud that's quietly unpredictable.
+
+All of these deployments — single node, elastic and HA, on all five clouds — ship as ready-made infrastructure with [OpenVidu](https://openvidu.io/){:target="_blank"}; the numbers here came from deploying exactly those, over and over. If you want to run your own stopwatch, the [self-hosting deployment guides](../../docs/self-hosting/deployment-types.md) are the place to start — pick the topology that fits your traffic, and now you know roughly how long to expect the coffee break to be.
