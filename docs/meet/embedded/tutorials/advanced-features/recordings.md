@@ -249,7 +249,7 @@ function getRoomListItemTemplate(room) {
 
 The highlighted `View Recordings` button calls the `listRecordingsByRoom()` function when clicked, passing the room name as an argument. This allows you to view recordings for that specific room.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L215-L227' target='_blank'>app.js</a>" linenums="215"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L216-L228' target='_blank'>app.js</a>" linenums="216"
 async function listRecordingsByRoom(roomName) {
 	// Hide the home screen and show the recordings screen
 	const homeScreen = document.querySelector('#home');
@@ -278,7 +278,7 @@ This function sets up the recordings view by hiding the home screen, showing the
 
 The `listRecordings()` function fetches and displays recordings, optionally filtering by room name:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L237-L264' target='_blank'>app.js</a>" linenums="237"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L238-L265' target='_blank'>app.js</a>" linenums="238"
 async function listRecordings(e) {
 	if (e) {
 		// Prevent the default form submission
@@ -327,7 +327,7 @@ The listRecordings() function performs the following actions:
 
 The `renderRecordings()` function is responsible for updating the UI with the list of recordings:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L266-L286' target='_blank'>app.js</a>" linenums="266"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L267-L287' target='_blank'>app.js</a>" linenums="267"
 function renderRecordings() {
 	// Clear the previous list of recordings
 	const recordingsList = document.querySelector('#recordings-list ul'); // (1)!
@@ -363,7 +363,7 @@ The `renderRecordings()` function performs the following actions:
 
 The `getRecordingListItemTemplate()` function generates the HTML template for each recording list item:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L288-L314' target='_blank'>app.js</a>" linenums="288"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L289-L315' target='_blank'>app.js</a>" linenums="289"
 function getRecordingListItemTemplate(recording) {
 	const recordingId = recording.recordingId; // (1)!
 	const roomName = recording.roomName; // (2)!
@@ -407,7 +407,7 @@ This function creates an HTML list item containing the recording's metadata, inc
 
 When the user clicks the play button for a recording, the `displayRecording()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L316-L351' target='_blank'>app.js</a>" linenums="316"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L317-L353' target='_blank'>app.js</a>" linenums="317"
 async function displayRecording(recordingId) {
 	// Hide the recordings screen and show the display recording screen
 	const recordingsScreen = document.querySelector('#recordings');
@@ -430,7 +430,8 @@ async function displayRecording(recordingId) {
 	const meet = document.querySelector('openvidu-meet');
 	meet.once('closed', () => {
 		// (5)!
-		// Hide the display recording screen and show the recordings screen
+		// Clear the OpenVidu Meet component and go back to the recordings screen
+		displayRecordingScreen.innerHTML = '';
 		displayRecordingScreen.hidden = true;
 		recordingsScreen.hidden = false;
 	});
@@ -462,7 +463,7 @@ The `displayRecording()` function handles the playback of a specific recording b
 
 When the user clicks the delete recording button, the `deleteRecording()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L353-L363' target='_blank'>app.js</a>" linenums="353"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-recordings/public/js/app.js#L355-L365' target='_blank'>app.js</a>" linenums="355"
 async function deleteRecording(recordingId) {
 	try {
 		await httpRequest('DELETE', `/recordings/${recordingId}`); // (1)!

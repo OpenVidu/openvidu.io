@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 A new function establishes and manages the SSE connection:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L387-L408' target='_blank'>app.js</a>" linenums="387"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L389-L410' target='_blank'>app.js</a>" linenums="389"
 // Function to start listening for webhook events via Server-Sent Events
 function startWebhookNotifications() {
 	const eventSource = new EventSource('/events'); // (1)!
@@ -273,7 +273,7 @@ This function creates a persistent connection to receive real-time webhook notif
 
 A new function processes incoming webhook notifications and updates the UI accordingly:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L410-L431' target='_blank'>app.js</a>" linenums="410"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L412-L433' target='_blank'>app.js</a>" linenums="412"
 // Function to handle webhook notifications and update UI
 function handleWebhookNotification(webhookData) {
 	const { event, data } = webhookData; // (1)!
@@ -313,7 +313,7 @@ The `prependToMap()` helper used here adds an entry to the start of a `Map` so n
 
 The `recordingEnded` case relies on a helper that checks the current screen context:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L486-L497' target='_blank'>app.js</a>" linenums="486"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/advanced-features/meet-webhooks/public/js/app.js#L488-L499' target='_blank'>app.js</a>" linenums="488"
 // Helper to detect whether the recordings view is currently shown
 function isOnRecordingsScreen(roomName) {
 	const recordingsScreen = document.querySelector('#recordings');

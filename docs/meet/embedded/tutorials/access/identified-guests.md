@@ -399,7 +399,7 @@ function accessRoom(roomUrl, returnViewId) {
 		// (2)!
 		console.log('OpenVidu Meet component closed');
 
-		// Clear the component and go back to the view we came from
+		// Clear the OpenVidu Meet component and go back to the view we came from
 		meetContainer.innerHTML = '';
 		roomScreen.hidden = true;
 		const returnView = document.querySelector(returnViewId);

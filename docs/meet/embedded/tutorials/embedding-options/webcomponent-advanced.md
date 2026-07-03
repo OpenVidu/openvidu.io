@@ -141,7 +141,7 @@ The template now provides the room name and user role to the `accessRoom()` func
 
 The `accessRoom()` function has been significantly enhanced to handle WebComponent events and commands:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-commands-events/public/js/app.js#L138-L202' target='_blank'>app.js</a>" linenums="138"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-commands-events/public/js/app.js#L138-L203' target='_blank'>app.js</a>" linenums="138"
 // Embed the OpenVidu Meet component and react to its events. 'roomName' and 'role' fill the
 // custom room header shown once the local participant joins the meeting.
 function accessRoom(roomName, roomUrl, role) {
@@ -205,7 +205,8 @@ function accessRoom(roomName, roomUrl, role) {
 		// (11)!
 		console.log('OpenVidu Meet component closed');
 
-		// Hide the room screen and show the home screen
+		// Clear the OpenVidu Meet component and go back to the home screen
+		meetContainer.innerHTML = '';
 		roomScreen.hidden = true;
 		homeScreen.hidden = false;
 	});
@@ -232,7 +233,7 @@ The enhanced `accessRoom()` function now performs the following actions:
 4. Configures event listeners for the OpenVidu Meet WebComponent to handle different events:
     - **`joined`**: This event is triggered when the local participant joins the meeting. It shows the room header with the room name and a badge indicating the participant's role. It also displays the `End meeting` button only for moderators and wires it to the `endMeeting()` method of the OpenVidu Meet WebComponent. This method disconnects all participants and ends the meeting for everyone.
     - **`left`**: This event is triggered when the local participant leaves the room. It hides the room header.
-    - **`closed`**: This event is triggered when the OpenVidu Meet component is closed. It hides the room screen and shows the home screen.
+    - **`closed`**: This event is triggered when the OpenVidu Meet component is closed. It removes the component from the DOM (by clearing the container's inner HTML) and shows the home screen again.
 
 ## Accessing this tutorial from other computers or phones
 
