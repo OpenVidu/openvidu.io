@@ -21,7 +21,7 @@
         <link rel="canonical" href="https://openvidu.io/blog/category/technology/">
       
       
-        <link rel="prev" href="../openvidu-platform/">
+        <link rel="prev" href="../research/">
       
       
         <link rel="next" href="../vertical/">
@@ -10350,7 +10350,7 @@
   <span class="md-ellipsis">
     
   
-    June 2026
+    July 2026
   
 
     
@@ -10382,6 +10382,8 @@
   
     
     
+      
+        
       
         
       
@@ -10513,6 +10515,36 @@
     
   
     OpenVidu Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
   
 
     
@@ -11008,6 +11040,59 @@
       <nav class="md-post__authors md-typeset">
         
           <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorSF.jpg" alt="Sergio Fernández">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-04 00:00:00+00:00">July 4, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">Technology</a>, 
+              <a href="../research/" class="md-meta__link">Research</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              10 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="we-deployed-the-same-video-platform-on-five-clouds-and-timed-it-5-minutes-to-20-and-the-slow-ones-are-slow-for-a-reason"><a class="toclink" href="../../2026/07/04/deploy-and-scale-in-times-across-clouds/">We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason</a></h2>
+<p><img alt="Mean time to a working deployment, by cloud and topology" src="/assets/images/blog/scale-in-times/deploy-times-light.svg#only-light">
+<img alt="Mean time to a working deployment, by cloud and topology" src="/assets/images/blog/scale-in-times/deploy-times-dark.svg#only-dark"></p>
+<p>"How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.</p>
+<p>We built a tool, <strong>ov-cloud-tester</strong>, that deploys the <em>same</em> self-hosted WebRTC video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in three topologies (single node, elastic, and high-availability), tears it down cleanly, and times the whole thing. We ran it many times per cloud and looked at both the averages <em>and</em> every individual run. The headline: standing up a working deployment ranges from about <strong>5 minutes to 20</strong>, DigitalOcean is consistently the fastest and Oracle the heaviest — and the <em>why</em>, plus which clouds are actually <em>predictable</em>, turns out to be more interesting than the ranking.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../2026/07/04/deploy-and-scale-in-times-across-clouds/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
             <img src="https://openvidu.io/assets/images/about-us/authorCR.jpg" alt="Carlos Ruiz">
           </span>
         
@@ -11343,7 +11428,7 @@
         <!-- Link to previous page -->
         
           
-          <a href="../openvidu-platform/" class="md-footer__link md-footer__link--prev" aria-label="Previous: OpenVidu Platform">
+          <a href="../research/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Research">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
@@ -11353,7 +11438,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                OpenVidu Platform
+                Research
               </div>
             </div>
           </a>
