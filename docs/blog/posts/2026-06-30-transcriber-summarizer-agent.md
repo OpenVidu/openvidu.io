@@ -45,14 +45,7 @@ Three moving parts:
 
 The data flows like this:
 
-```text
-   Participant audio  ──▶  Audio room  ──▶  Transcriber agent
-                                                      │
-                                 ┌────────────────────┼────────────────────┐
-                                 ▼                    ▼                    ▼
-                         transcript.txt        Live transcripts      LLM catch-up
-                           (on disk)           (back to the UI)     (to latecomers)
-```
+![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/transcriber-summarizer-agent/data-flow.png)
 
 ## Running the demo
 
