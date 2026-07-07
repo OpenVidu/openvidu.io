@@ -38,7 +38,7 @@ We built a tool, **ov-cloud-tester**, that deploys the *same* self-hosted WebRTC
     - **HA is where clouds diverge hard:** GCP and DigitalOcean are ready in ~6 min, Azure and Oracle in ~11, and AWS averages ~18.
     - **But the average lies — look at every run.** AWS HA isn't "18 minutes": it's *either* ~12–13 min *or* ~27, with nothing in between. GCP, by contrast, lands within seconds of itself every time. Predictability is its own metric.
     - **"Time to ready" is not "time to provision."** The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.
-    - **Scaling back *down* is a different problem** — and we're still measuring it. More on that (and why single node doesn't have it) at the end.
+    - **Scaling back *down* is the hard direction** — a single node can't do it at all, and elastic/HA have to gracefully *drain* nodes, not kill them. More on why at the end.
 
 ## What we measured, and how
 
@@ -123,14 +123,14 @@ That serial chain explains both halves of AWS HA's behaviour. It's slow, because
 
 ## What about scaling back *down*?
 
-Everything above is about *getting a deployment up*. The harder direction — which we [wrote about previously](/blog/2026/05/26/scale-in-problem-in-videoconferences/) — is scaling back *down*. You can't just kill a media node that has live meetings on it; you have to *drain* it first, letting its calls finish, and only then let the cloud reclaim it.
+Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](/blog/2026/05/26/scale-in-problem-in-videoconferences/). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
 
-Two things are worth stating up front:
+Two things are worth knowing before you get there:
 
-- **A single node doesn't scale in at all.** There's nothing to remove — it's one server. Scale-in only exists for the **elastic** and **HA** topologies, which have an autoscaling media tier.
-- **Elastic and HA should scale in the same way.** The thing being removed is a media node, and a media node drains identically whether there's one master or four in front of it. The topology changes how you *deploy*, but not how a node *drains* — so we'd expect their scale-in timings to match.
+- **A single node doesn't scale in at all.** There's nothing to remove — it's one server. Scaling in only applies to the **elastic** and **HA** topologies, the ones with an autoscaling media tier.
+- **The topology changes how you deploy, not how a node drains.** Whether there's one master or four in front of it, the media node being removed drains in exactly the same way — so scaling in behaves identically in elastic and HA.
 
-We're in the middle of measuring the granular scale-in timings — how long each cloud takes to *decide* a node should go, and how long the graceful drain then takes — across all five providers. We'll add them right here as soon as the full set is in; we're not going to publish half-measured figures. **Check back for the numbers.**
+Deploying, it turns out, is the easy half. Taking a cluster back down *without anyone noticing* is the part worth losing sleep over.
 
 ## Conclusion
 
