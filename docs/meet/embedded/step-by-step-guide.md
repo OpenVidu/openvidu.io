@@ -15,8 +15,8 @@ This step-by-step guide explains how to embed OpenVidu Meet into your web applic
 
 You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
-<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### Automating room creation
 
@@ -298,7 +298,8 @@ The response to this request will be a JSON object as below. The properties need
 
 To embed a room into your application's frontend you need a **room URL**, which is simply a [room access link](../features/rooms/access.md): the URL an individual opens to access the room. You can copy the room URL from the "Rooms" page in OpenVidu Meet app:
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/share-room-link.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/access/share-link-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 !!! info "Which room access link should I use?"
     This guide uses the room's **anonymous** moderator and speaker links, which let anyone access without logging in. A room also offers **user** and **identified-guest** access links for controlled, per-person access. See [Room Access](../features/rooms/access.md) to learn about all of them and choose the right one for your use case.
@@ -327,7 +328,7 @@ Just link to the room URL from any element in your frontend. For example, with a
 
 After clicking on the element, the individual will be redirected to the OpenVidu Meet room, ready to join the meeting.
 
-<a class="glightbox" href="../../../assets/videos/meet/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/embedded/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/embedded/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 !!! info
     You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after a participant leaves the meeting by appending this query param: <code class="no-break">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
@@ -357,7 +358,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 </html>
 ```
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners"/></a>
 
 ### Use an iframe
 
@@ -415,7 +416,7 @@ To show the list of recordings of a room, declare attribute **`show-only-recordi
 
 This will show the list of recordings for the specified room:
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-recording-list.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/webcomponent-recording-list.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-room-recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-room-recordings.png" loading="lazy" class="round-corners"/></a>
 
 ### Embed the player for a specific recording
 
@@ -433,7 +434,7 @@ To show the player for a specific recording, replace attribute `room-url` with *
 
 This will show the player for the specified recording:
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-recording-player.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/webcomponent-recording-player.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-display-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-display-recording.png" loading="lazy" class="round-corners"/></a>
 
 ## 6. REST API and Webhooks
 

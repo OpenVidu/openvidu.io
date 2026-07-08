@@ -1,3 +1,8 @@
+---
+tags:
+    - setupcustomgallery
+---
+
 # Webhooks
 
 OpenVidu Meet sends webhooks to inform about important events happening in a room. You can receive them in your application's backend and react accordingly with your own business logic.
@@ -20,7 +25,8 @@ You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There yo
 - Set up your webhook endpoint URL
 - Test the current webhook configuration with a fake event
 
-![Webhooks Configuration](../../../assets/images/meet/embedded/webhook.png)
+<a class="glightbox" href="../../../../assets/images/meet/embedded/reference/webhook-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="../../../../assets/images/meet/embedded/reference/webhook-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/embedded/reference/webhook-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 ## Validate events
 

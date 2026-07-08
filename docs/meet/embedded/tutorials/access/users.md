@@ -1,6 +1,8 @@
 ---
 title: Users Tutorial
 description: Learn how to create OpenVidu Meet users with the Users API and add them to a room as members using Node.js and JavaScript.
+tags:
+    - setupcustomgallery
 ---
 
 # Users Tutorial
@@ -61,9 +63,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/users-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/users-home.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/users/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/users/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/users-members.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/users-members.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/users/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/users/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 

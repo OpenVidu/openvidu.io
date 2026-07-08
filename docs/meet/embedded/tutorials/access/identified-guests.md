@@ -1,6 +1,8 @@
 ---
 title: Identified Guests Tutorial
 description: Learn how to add identified guests with a fixed name and a unique access link to an OpenVidu Meet room using Node.js and JavaScript.
+tags:
+    - setupcustomgallery
 ---
 
 # Identified Guests Tutorial
@@ -62,9 +64,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/identified-guests-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/identified-guests-home.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/identified-guests/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/identified-guests/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/identified-guests-members.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/identified-guests-members.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/identified-guests/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/identified-guests/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 

@@ -1,6 +1,8 @@
 ---
 title: Recordings Tutorial
 description: Learn how to manage recordings in a video conferencing application using Node.js and JavaScript by extending the advanced OpenVidu Meet WebComponent tutorial.
+tags:
+    - setupcustomgallery
 ---
 
 # Recordings Tutorial
@@ -53,9 +55,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/recordings-home.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/recordings-home.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/recordings/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/recordings/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/tutorials/recordings-recordings.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/meet/tutorials/recordings-recordings.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/recordings/recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/recordings/recordings.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 

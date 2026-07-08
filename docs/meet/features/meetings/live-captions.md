@@ -2,6 +2,8 @@
 title: How to Enable Live Captions in OpenVidu Meet | Real-time Transcription Guide
 description: Learn how to enable and use live captions in OpenVidu Meet to improve meeting accessibility with real-time speech-to-text transcriptions.
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
+tags:
+    - setupcustomgallery
 ---
 
 # Live Captions
@@ -62,8 +64,14 @@ Apply your changes by restarting OpenVidu. This ensures the system recognizes th
 
 ### 5. Enable/Disable Captions for specific Rooms
 
-Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="\_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis.
+Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="\_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Room Features** step of the room configuration wizard, using the **Captions** toggle.
+
+<a class="glightbox" href="../../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light" loading="lazy" class="round-corners"/></a>
 
 ## Using Live Captions in a Meeting
 
 Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.
+
+<a class="glightbox" href="../../../../assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../../assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
