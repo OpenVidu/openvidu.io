@@ -365,6 +365,7 @@ plugins:
       draft: false
       draft_if_future_date: true
       archive_date_format: MMMM yyyy
+      archive_url_date_format: yyyy/MM
       categories_allowed:
         - Comparison
         - How-to
