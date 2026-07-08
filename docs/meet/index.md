@@ -78,8 +78,8 @@ __Multi-Party smart layout__{ .ov-meet-commercial-card-title .wow .animated .ani
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
-<a class="glightbox" href="../../assets/images/meet/home/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/home/multiparty.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
-
+<a class="glightbox" href="../../assets/images/meet/home/multiparty-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/home/multiparty-light.png#only-light" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
+<a class="glightbox" href="../../assets/images/meet/home/multiparty-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/home/multiparty-dark.png#only-dark" loading="lazy" class="round-corners" alt="OpenVidu Meet Multiparty"/></a>
 </div>
 
 <div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
@@ -332,7 +332,8 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-<a class="glightbox" href="../assets/images/meet/home/multiparty.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/home/multiparty.png" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
+<a class="glightbox" href="../assets/images/meet/home/multiparty-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/home/multiparty-light.png#only-light" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
+<a class="glightbox" href="../assets/images/meet/home/multiparty-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/home/multiparty-dark.png#only-dark" loading="lazy" class="round-corners" alt="Use case Team meeting"/></a>
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
