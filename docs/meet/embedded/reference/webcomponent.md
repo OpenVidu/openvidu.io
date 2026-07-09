@@ -7,7 +7,7 @@ OpenVidu Meet's Web Component allows embedding the refined, well-crafted OpenVid
 Include the following script in your HTML:
 
 ```html
-<script src="https://{{ your-openvidu-deployment-domain }}/v1/openvidu-meet.js"></script>
+<script src="https://{{ your-domain }}/meet/v1/openvidu-meet.js"></script>
 ```
 
 ## Usage
@@ -18,10 +18,12 @@ Add the `<openvidu-meet>` tag to your HTML. This will embed OpenVidu Meet interf
 <openvidu-meet room-url="{{ my-room-url }}"></openvidu-meet>
 ```
 
-The only required attribute is **`room-url`**, which determines the room to join. Different instances of the web component using the same room URL will access the same meeting.
+The only required attribute is **`room-url`**, which determines the room to access. Different instances of the web component using the same room URL will join the same meeting.
 
-!!! info
-	You can get a room's URL programmatically from your application's backend: properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"}.
+!!! info "A room URL is a room access link"
+	The **room URL** is simply a [room access link](../../features/rooms/access.md): the URL an individual opens to access a room. The role and identity a participant gets depend on **which** access link you use. This guide and most examples use the **anonymous** moderator/speaker links for simplicity, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for the full picture.
+
+	You can obtain a room's access links programmatically from your backend with the [REST API](./rest-api.md): the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"} object, or the unique `accessUrl` of an [identified-guest member](../../features/room-members/overview.md#users-vs-identified-guests).
 
 ## API Reference
 
@@ -70,8 +72,8 @@ Listen to events using JavaScript event listeners:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.addEventListener('JOINED', (event) => {
-	console.log('The local participant has joined the room!', event);
+openviduMeet.addEventListener('joined', (event) => {
+	console.log('The local participant has joined the meeting', event.detail);
 });
 ```
 
@@ -80,13 +82,19 @@ You can also use the API `on` | `once` | `off`:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.on('JOINED', (event) => {
-	console.log('The local participant has joined the room!', event);
+openviduMeet.on('joined', (event) => {
+	console.log('The local participant has joined the meeting', event);
 });
 
-openviduMeet.once('LEFT', (event) => {
-	console.log('The local participant has left the room!', event);
+openviduMeet.once('left', (event) => {
+	console.log('The local participant has left the meeting', event);
 });
 ```
+
+!!! info "Accessing the event payload"
+	The way you access the event payload depends on the method you use to listen:
+
+	- With the native **`addEventListener`** method, the callback receives a standard [`CustomEvent` :fontawesome-solid-external-link:{.external-link-icon}](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent){:target="_blank"}, so the payload is available in its **`detail`** property (e.g. `event.detail`).
+	- With the **`on`** | **`once`** | **`off`** API, the callback receives the payload **directly** as its argument (e.g. `event`), without needing to access any `detail` property.
 
 

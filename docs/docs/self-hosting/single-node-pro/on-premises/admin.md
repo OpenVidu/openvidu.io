@@ -44,7 +44,7 @@ openvidu                   docker.io/openvidu/openvidu-server-pro:main        "/
 openvidu-v2compatibility   docker.io/openvidu/openvidu-v2compatibility:main   "/bin/entrypoint.sh"      openvidu-v2compatibility   18 seconds ago   Up 6 seconds
 operator                   docker.io/openvidu/openvidu-operator:main          "/bin/operator"           operator                   18 seconds ago   Up 5 seconds
 prometheus                 docker.io/prom/prometheus:v3.1.0                   "/bin/sh -c '\n  if !…"   prometheus                 17 seconds ago   Up 5 seconds
-promtail                   docker.io/grafana/promtail:3.3.2                   "/bin/sh -c '\n  if !…"   promtail                   18 seconds ago   Up 5 seconds
+alloy                      docker.io/grafana/alloy:v1.17.0                    "/bin/sh -c '\n  if !…"   alloy                      18 seconds ago   Up 5 seconds
 redis                      docker.io/redis:7.4.2-alpine                       "/bin/sh -c '\n  . /c…"   redis                      18 seconds ago   Up 6 seconds
 ```
 

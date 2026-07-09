@@ -42,7 +42,7 @@ minio        docker.io/bitnami/minio                      "/opt/bitnami/script�
 mongo        docker.io/mongo                              "docker-entrypoint.s…"   mongo        18 seconds ago   Up 15 seconds
 openvidu     docker.io/openvidu/openvidu-server           "/livekit-server --c…"   openvidu     19 seconds ago   Up 14 seconds
 prometheus   docker.io/prom/prometheus                    "/bin/prometheus --c…"   prometheus   18 seconds ago   Up 14 seconds
-promtail     docker.io/grafana/promtail                   "/usr/bin/promtail -…"   promtail     18 seconds ago   Up 14 seconds
+alloy        docker.io/grafana/alloy                      "/usr/bin/alloy -…"      alloy        18 seconds ago   Up 14 seconds
 redis        docker.io/redis                              "docker-entrypoint.s…"   redis        19 seconds ago   Up 15 seconds
 ```
 

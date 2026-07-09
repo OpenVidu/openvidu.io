@@ -67,6 +67,11 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     <summary>Information about parameters</summary>
 
 --8<-- "shared/self-hosting/oracle-mandatory-params-pro.md"
+    <tr>
+    <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
+    <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See <a href="#publishing-the-scale-in-function-image">Publishing the scale-in function image</a>. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
+    </tr>
+--8<-- "shared/self-hosting/oracle-mandatory-params-pro-end.md"
 
     <h4>Optional Parameters</h4>
 
@@ -156,16 +161,9 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     <td>Target CPU percentage that triggers scale-in/scale-out actions. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
-    <td style="white-space: nowrap;"><code>mad.ocir.io/axp2ice0s7el/openvidu-scalein:main</code></td>
-    <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. Defaults to the image published by OpenVidu in the Madrid OCIR. See <a href="#using-your-own-scale-in-function-image">Using your own scale-in function image</a> if you want to host it in your own registry. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
-    </tr>
-    <tr>
     <td style="white-space: nowrap;"><code>certificateType</code></td>
     <td style="white-space: nowrap;"><code>"letsencrypt"</code></td>
-    <td>Certificate type for the OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li><code>owncert</code> - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li><code>letsencrypt</code> - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, a random sslip.io domain will be used).</li></ul>
-    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
-    <p><strong>Warning:</strong> sslip.io is currently experiencing Let's Encrypt rate limiting issues, which may prevent SSL certificates from being issued. It is recommended to use your own domain name. Check <a href="https://openvidu.discourse.group/t/deployment-without-domain/5474" target="_blank">this community thread</a> for troubleshooting and updates.</p>
+    <td>Certificate type for the OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li><code>owncert</code> - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li><code>letsencrypt</code> - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
     </td>
     </tr>
     <tr>
@@ -176,7 +174,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     <tr>
     <td style="white-space: nowrap;"><code>domainName</code></td>
     <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Domain name for the OpenVidu deployment. Optional — if not provided, a sslip.io domain will be used instead, derived from the NLB public IP.</td>
+    <td>Domain name for the OpenVidu deployment. Optional — if not provided, the NLB public IP is used as the domain name.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>

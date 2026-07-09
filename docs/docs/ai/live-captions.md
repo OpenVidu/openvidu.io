@@ -11,6 +11,14 @@ Live Captions service is provided by the **Speech Processing agent**:
 You configure the Live Captions service by setting up the following properties when [modifying file `agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#2-modify-file-agent-speech-processingyaml):
 
 ```yaml title="<a href='https://github.com/OpenVidu/openvidu-agents/blob/3.7.0/speech-processing/agent-speech-processing.yaml' target='_blank'>agent-speech-processing.yaml</a>"
+# Docker image to use for the Speech Processing agent. It must be compatible with the selected provider:
+# - docker.io/openvidu/agent-speech-processing-cloud
+# - docker.io/openvidu/agent-speech-processing-vosk
+# - docker.io/openvidu/agent-speech-processing-sherpa
+# - docker.io/openvidu/agent-speech-processing-sherpa-cuda12
+# - ... or a custom image
+docker_image: DOCKER_IMAGE
+
 live_captions:
   # How this agent will connect to Rooms [manual, automatic]
   # - manual: the agent will connect to new Rooms only when your application dictates it by using the Agent Dispatch API.
@@ -27,7 +35,10 @@ live_captions:
 
 !!! info "Choosing a provider"
 
-    You must set up a specific `provider` from the list of [supported providers](#supported-ai-providers). Each provider has its own **custom configuration**. Some of them provide advanced features such as integrated profanity filters or translation. Check out the [configuration reference](#configuration-reference) below for more details.
+    You must set up a specific `provider` from the list of [supported providers](#supported-ai-providers). Take into account that:
+
+    - Different providers require different **Docker images** that you must configure in the `docker_image` property. See [Supported AI providers](#supported-ai-providers) to check which Docker image is compatible with each provider.
+    - Each provider has its own **custom configuration**. Some of them provide advanced features such as integrated profanity filters or translation. Check out the [configuration reference](#configuration-reference) below for more details.
 
 ### Automatic vs Manual processing
 

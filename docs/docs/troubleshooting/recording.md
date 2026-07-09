@@ -24,7 +24,7 @@ Recordings can be started **on-demand** or **automatically**:
 
 !!! warning
 
-    It is important to distinguish between **on-demand recordings** and **automatic recordings** for a simple reason: your application is able to catch and handle errors when starting on-demand recordings, while automatic recordings will fail silently.
+    It is important to distinguish between **on-demand recordings** and **automatic recordings** for a simple reason: your application is able to catch and handle errors when starting on-demand recordings, while automatic recordings will fail silently. In that case, [enabling webhooks](../self-hosting/how-to-guides/enable-webhooks.md) (or inspecting the service logs) is the only way to be notified of these failures.
 
 ## List of possible recording issues
 
@@ -240,3 +240,89 @@ By default, OpenVidu will kill active egresses under sustained high CPU load (se
 
 - You can disable the Egress CPU overload killer by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../self-hosting/configuration/changing-config.md#config-files). This must be done with caution and care, as it could lead to overloading the entire Media Node and affecting the performance of other processes.
 - In the end this is just an under-provisioning issue: consider scaling out your OpenVidu deployment. Deploy it in nodes with more CPU cores or add more Media Nodes to your cluster.
+
+### Track disappears before the recorder attaches (`track not found`)
+
+**Description**
+
+When recording individual tracks with [Track Egress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/track/){:target="\_blank"} (on-demand via `StartTrackEgress`, or with per-track auto-egress), OpenVidu launches **one egress per published track, shortly after the track is published**. The recorder then needs a moment to connect to the room and subscribe to the track: usually well under a second, occasionally a little longer. If the track is unpublished during that window, the recorder never finds it, and the egress fails after waiting up to 30 seconds.
+
+The most common trigger is **participant reconnection**: when a client reconnects, its camera and microphone are republished with new track IDs, so the egress that was launched for the old track ID is orphaned. Other triggers are very short-lived publishes and quick unpublishes. This is a startup race tied to the track lifecycle, **not a capacity problem**.
+
+In almost all cases **no established recording is lost**: the participant's stream keeps being recorded under the new track ID, with at most a small gap at the instant of the reconnection.
+
+**Symptoms**
+
+- Log lines displaying `egress_failed` in service "egress", with an `error` of the form `track TR_... not found`, a `code` of `404` and `details` `End reason: Failure`:
+
+    ```{ .log .no-copy }
+    2026-05-14T10:00:30.600Z	INFO	egress	info/io.go:273	egress_failed
+    {"nodeID": "NE_p9q8R7s6T5u4", "clusterID": "", "egressID": "EG_x7y8Z9w0V1u2",
+    "requestType": "track", "outputType": "file", "error": "track TR_a1b2C3d4E5f6g7 not found",
+    "code": 404, "details": "End reason: Failure"}
+    ```
+
+- Webhook event `egress_ended` with status `EGRESS_FAILED` and the same `track ... not found` error:
+
+    ```{ .log .no-copy }
+    {"event": "egress_ended", "egressID": "EG_x7y8Z9w0V1u2", "status": "EGRESS_FAILED",
+    "error": "track TR_a1b2C3d4E5f6g7 not found", ...}
+    ```
+
+- The failure occurs around 30 seconds after the egress was requested (the recorder's wait timeout).
+- The pattern is associated with participants that reconnect frequently.
+
+To confirm it is a track-lifecycle race, reconstruct the track's lifecycle across the "openvidu" and "egress" services. A textbook sequence (the track is published and unpublished less than half a second later, before the recorder could attach):
+
+```{ .log .no-copy }
+10:00:00.100  openvidu  mediaTrack published   trackID TR_a1b2C3d4E5f6g7 (audio, MICROPHONE)
+10:00:00.540  openvidu  track_unpublished      TR_a1b2C3d4E5f6g7  (the track lived ~0.44 s)
+10:00:00.600  egress    request validated      egressID EG_x7y8Z9w0V1u2, track_id TR_a1b2C3d4E5f6g7
+10:00:30.600  egress    egress_failed          "track TR_a1b2C3d4E5f6g7 not found"  (+30 s)
+```
+
+Then look for a new `mediaTrack published` from the same participant identity in the same room shortly afterwards: that is the reconnected track, which continues to be recorded under its new ID.
+
+**Solutions**
+
+- In most deployments this is expected and benign; no action is needed beyond confirming that the participant's stream is captured under another track ID.
+- It is not caused by egress capacity limits, a specific node, or storage.
+
+### The recorder attaches but no media arrives (`Source closed`)
+
+**Description**
+
+The recorder connects and subscribes to the track successfully, but the recording pipeline never starts because no media ever arrives from the publisher. When the track finally closes, the egress aborts having recorded nothing.
+
+This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](../developing-your-openvidu-app/how-to.md#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
+
+It is **not** a network, egress-node or capacity problem. The same peer connection's other tracks (for example the microphone) typically record fine at the same time, which proves the media path works; there is simply no video being sent.
+
+**Symptoms**
+
+- Log lines displaying `egress_aborted` in service "egress", with `error` `Stop called before pipeline could start`, a `code` of `412` and `details` `End reason: Source closed`:
+
+    ```{ .log .no-copy }
+    2026-05-14T10:12:45.320Z	INFO	egress	info/io.go:273	egress_aborted
+    {"nodeID": "NE_m2n3B4v5C6x7", "clusterID": "", "egressID": "EG_k3j4H5g6F7d8",
+    "requestType": "track", "outputType": "file", "error": "Stop called before pipeline could start",
+    "code": 412, "details": "End reason: Source closed"}
+    ```
+
+- Webhook event `egress_ended` with status `EGRESS_ABORTED`:
+
+    ```{ .log .no-copy }
+    {"event": "egress_ended", "egressID": "EG_k3j4H5g6F7d8", "status": "EGRESS_ABORTED",
+    "error": "Stop called before pipeline could start", ...}
+    ```
+
+- In the egress logs the recording reaches `pipeline paused` (and the "openvidu" service logs `starting with dummy forwarding` for the egress subscriber), but it never reaches `starting track synchronizer`, `pipeline playing` or `egress_active`, the markers that the first media packet arrived. A healthy recording reaches all of them within a fraction of a second of subscribing.
+- It predominantly affects video/camera tracks.
+
+To confirm the camera simply was not sending video, check whether the same participant's audio track recorded successfully during the same session. It usually did, on the same connection.
+
+**Solutions**
+
+- Benign in most cases: a camera published while off has nothing to record, and reconnection orphans are recorded under the replacement track.
+- If recordings you expect are genuinely missing, verify on the client side that video tracks are only published when the camera is actually active (or handle mute / camera-off state appropriately), and reduce client reconnections.
+- As with `track not found`, it is not an egress capacity or node issue.

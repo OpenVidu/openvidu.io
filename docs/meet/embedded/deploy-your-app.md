@@ -12,7 +12,7 @@ There are two options:
 - [**Deploy in a separate environment**](#deploy-in-a-separate-environment): Run your application on its own infrastructure and connect it to your OpenVidu deployment remotely.
 
 !!! info
-    All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](/docs/self-hosting/how-to-guides/customize-meet-base-path/) how-to guide for more details.
+    All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](../../docs/self-hosting/how-to-guides/customize-meet-base-path.md) how-to guide for more details.
 
 ---
 
@@ -20,7 +20,7 @@ There are two options:
 
 You can deploy your application directly on the same node(s) as OpenVidu. When OpenVidu detects an application listening on port **6080**, it will automatically proxy all requests to the root path `/` of your domain (e.g. `https://example.openvidu.io/`) to your application.
 
-This means your application will be served at `https://your-domain/`, while the OpenVidu Meet console will remain accessible at `https://your-domain/meet`.
+This means your application will be served at `https://your-domain/`, while the OpenVidu Meet app will remain accessible at `https://your-domain/meet`.
 
 ### 1. Point your application to OpenVidu Meet
 
@@ -54,7 +54,7 @@ Deploy your application so that it listens on port **6080**. The specific node w
 
 ### 3. Configure the API key
 
-Your application needs an API key to authenticate requests to the OpenVidu Meet REST API. You can obtain it from the OpenVidu Meet console:
+Your application needs an API key to authenticate requests to the OpenVidu Meet REST API. You can obtain it from the OpenVidu Meet app:
 
 1. Navigate to `https://your-domain/meet`.
 2. Go to the **"Embedded"** page.
@@ -112,9 +112,9 @@ See the [REST API reference](./reference/rest-api.md) for the full list of avail
 
 ### 2. Configure the API key
 
-Generate an API key from the OpenVidu Meet console and configure it in your application:
+Generate an API key from the OpenVidu Meet app and configure it in your application:
 
-1. Navigate to your OpenVidu Meet console at `https://your-openvidu-domain/meet`.
+1. Navigate to your OpenVidu Meet app at `https://your-openvidu-domain/meet`.
 2. Go to the **"Embedded"** page.
 3. Click on **":material-key: Generate API Key"** if you haven't generated one already.
 4. Configure the API key in your application. This key must be included in every request as the `X-API-KEY` header.
@@ -133,7 +133,7 @@ If your application uses the [OpenVidu Meet Web Component](./reference/webcompon
 
 If your application uses [OpenVidu Meet webhooks](./reference/webhooks.md), configure the webhook URL to point to your application's **publicly accessible** webhook endpoint:
 
-1. Navigate to your OpenVidu Meet console at `https://your-openvidu-domain/meet`.
+1. Navigate to your OpenVidu Meet app at `https://your-openvidu-domain/meet`.
 2. Go to the **"Embedded"** page.
 3. Enable webhooks and set the webhook URL to your application's public endpoint:
 
@@ -155,7 +155,7 @@ If your application uses [OpenVidu Meet webhooks](./reference/webhooks.md), conf
 
 ### Configuring API key and webhooks via `meet.env`
 
-As an alternative to using the OpenVidu Meet console, you can configure the initial API key and webhook settings directly in the `meet.env` configuration file:
+As an alternative to using the OpenVidu Meet app, you can configure the initial API key and webhook settings directly in the `meet.env` configuration file:
 
 === "Single Node"
 
@@ -174,13 +174,10 @@ The relevant parameters are:
 | Parameter | Description |
 | --------- | ----------- |
 | **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. Used by applications developed with OpenVidu Meet. |
-| **`MEET_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
-| **`MEET_WEBHOOK_URL`** | The URL where the OpenVidu Meet webhooks will be sent. |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
+| **`MEET_INITIAL_WEBHOOK_URL`** | The URL where the OpenVidu Meet webhooks will be sent. |
 
-After modifying the file, restart OpenVidu to apply the changes:
+!!! warning
+    The `MEET_INITIAL_*` parameters are only used the first time OpenVidu Meet runs. After that first run, use the OpenVidu Meet app to modify their values.
 
-```bash
-systemctl restart openvidu
-```
-
-See the [Configuration Reference](/docs/self-hosting/configuration/reference.md#meetenv) for all available `meet.env` parameters and the [Changing Configuration](/docs/self-hosting/configuration/changing-config.md) section for more details on how to modify configuration files.
+See the [Configuration Reference](../../docs/self-hosting/configuration/reference.md#meetenv) for all available `meet.env` parameters and the [Changing Configuration](../../docs/self-hosting/configuration/changing-config.md) section for more details on how to modify configuration files.

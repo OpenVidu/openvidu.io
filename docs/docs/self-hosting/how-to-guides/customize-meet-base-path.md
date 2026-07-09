@@ -44,5 +44,4 @@ If you have an application built with [OpenVidu Meet Embedded](/meet/embedded/in
     <script src="https://your-domain/<MEET_BASE_PATH>/v1/openvidu-meet.js"></script>
     ```
 
-- **OpenVidu Meet console URL**: the console will be accessible at `https://your-domain/<MEET_BASE_PATH>` instead of `https://your-domain/meet`.
-- **Webhook configuration**: if you configured webhooks from the console, navigate to the console at the new path to manage them.
+- **OpenVidu Meet app URL**: the app will be accessible at `https://your-domain/<MEET_BASE_PATH>` instead of `https://your-domain/meet`.

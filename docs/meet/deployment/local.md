@@ -22,7 +22,7 @@ This local deployment is the ideal choice to develop the [embedding of OpenVidu 
 
 ## Installing Docker Desktop
 
-[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology the simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
+[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology that simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
 
 In the Docker terminology, an application is downloaded as a one or several **docker images**. When the application is executed, it is composed of one or several **docker containers**.
 
@@ -47,7 +47,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 1. Open **Docker Desktop** and click on the **"Terminal"** button in the bottom right corner.
 
-    ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local-meet/open_terminal.png)
+    ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local/open-terminal.png)
 
 2. Copy and paste the following command into the terminal:
 
@@ -73,7 +73,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
         This is a known Docker Desktop bug that **has not been fixed yet**. Until it is resolved in an upcoming release, use the [Advanced Local Deployment](#advanced-local-deployment), which relies directly on docker compose files instead of OCI artifacts, to deploy OpenVidu Meet locally on Windows.
 
-    ![Docker Desktop - Run Command Community](../../assets/images/meet/deployment/local-meet/command_community.png)
+    ![Docker Desktop - Run Command](../../assets/images/meet/deployment/local/command.png)
 
 
 3. After pasting the command, press **Enter** to execute the command.
@@ -121,21 +121,21 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080) in your web browser with credentials:
 
-- Username: `admin`
+- User ID: `admin`
 - Password: `admin`
 
 You can use the [REST API](../../embedded/reference/rest-api/) to [embed OpenVidu Meet](../../embedded/intro) using:
 
 - API Key: `meet-api-key` 
 
-You can change them later from the [OpenVidu Meet console](../../features/rooms/access.md#changing-credentials).
+You can change them later from the [OpenVidu Meet app](../features/users/management.md#changing-credentials).
 
 
 ## Managing the deployment
 
 Once installed and executed, **`openvidu-meet`** will appear in **Docker Desktop → Containers** section.
 
-![Docker Desktop - Containers](../../assets/images/meet/deployment/local-meet/containers.png)
+![Docker Desktop - Containers](../../assets/images/meet/deployment/local/containers.png)
 
 You can manage OpenVidu Meet execution interactively:
 
@@ -143,13 +143,13 @@ You can manage OpenVidu Meet execution interactively:
 
     3. Click the **Stop** button.
 
-    ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local-meet/stop.png)
+    ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local/stop.png)
 
 === "Start"
 
     3. Click the **Start** button.
 
-    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local-meet/start.png)
+    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local/start.png)
 
 === "Remove"
 
@@ -159,24 +159,24 @@ You can manage OpenVidu Meet execution interactively:
 
     1. Click the **Delete** button.
 
-        ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local-meet/remove.png)
+        ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local/remove.png)
 
     2. Go to **Docker Desktop → Images**.
     3. Remove the images related to **OpenVidu Meet**.
 
-        ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local-meet/remove_images.png)
+        ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local/remove-images.png)
 
     4. Go to **Docker Desktop → Volumes**.
     5. Remove the volumes related to **OpenVidu Meet**.
 
-        ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local-meet/remove_volumes.png)
+        ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local/remove-volumes.png)
 
 === "View logs"
 
     2. Click on the container group to open its details. The logs will be shown after clicking on the container group.
 
-    ![Select container group](../../assets/images/meet/deployment/local-meet/select_containers.png)
-    ![Check logs](../../assets/images/meet/deployment/local-meet/logs.png)
+    ![Select container group](../../assets/images/meet/deployment/local/select-containers.png)
+    ![Check logs](../../assets/images/meet/deployment/local/logs.png)
 
 ## Accessing OpenVidu Meet from other computers or phones
 
@@ -219,7 +219,7 @@ Follow these steps:
         LAN_PRIVATE_IP='<YOUR_PRIVATE_IP>' docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
         ```
 
-4. Access to OpenVidu Meet with a different URL:
+4. Access OpenVidu Meet with a different URL:
 
     When OpenVidu Meet is ready to be used the terminal will show the URL where it is accessible.
 

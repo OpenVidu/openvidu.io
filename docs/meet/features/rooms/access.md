@@ -1,170 +1,88 @@
 ---
 title: Room Access in OpenVidu Meet
-description: Configure who can access an OpenVidu Meet room via room access links, internal users, and room members.
+description: How individuals access an OpenVidu Meet room - shared anonymous links, user and identified-guest access links - and the predefined roles.
 tags:
-  - setupcustomgallery
+    - setupcustomgallery
 ---
 
 # Room Access
 
-Access to a room is determined by two complementary mechanisms:
+Only **room members** can access a room — to view its recordings or to join a meeting in it, becoming a participant. Room members can be **users**, **identified guests** or **anonymous guests**, all described in detail in the [Room Members](../room-members/overview.md) feature.
 
-1. **Room access links**: URLs that grant access to the room with specific permissions.
-2. **OpenVidu Meet internal users**: the console user management system, which controls who can manage rooms and recordings.
+Each kind of member reaches the room through a different kind of **access link**, and gets a set of permissions determined by a role:
 
-## Room access links { #getting-room-access-links }
+- **Anonymous guests** access the room through a shared anonymous access link tied to a [predefined role](#predefined-roles) — `Moderator` or `Speaker` — and always get that role's permissions.
+- **Users** and **identified guests** are added to the room explicitly with a **base role** that sets their default permissions, which can then be **customized** individually for each member.
 
-There are two types of **room access links** that grant access to a room:
+## Anonymous guest access { #anonymous-access }
 
-- **Anonymous access links**: Predefined URLs that allow users to access a room without identification. Permissions are tied to a specific role (`Moderator` or `Speaker`). These links can be shared freely with any user, unless anonymous access for that role has been explicitly disabled for the room.
-- **Room member links**: Custom URLs associated with a specific user and their personalized permissions. For external users, each member has a unique URL that should only be delivered to them. For OpenVidu Meet internal users, the URL is the same for all members of the room, and membership is determined by their authenticated user account.
+Anonymous guests access the room through **shared anonymous access links** that require no OpenVidu Meet account. There is one link per role:
 
-See [Room Members](#room-members) for details on creating and managing room member links.
+- The **`Moderator`** link, which grants the moderator role.
+- The **`Speaker`** link, which grants the speaker role.
 
-### From the "Rooms" page
+These links can be shared freely with anyone, unless anonymous access for that role has been disabled for the room. You can enable or disable anonymous access per role when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) a room. Before joining the meeting, each anonymous guest is asked to **choose a name**.
 
-OpenVidu Meet internal users with permissions to manage rooms can share anonymous room access links for each role from the **"Rooms"** page.
+### Sharing the anonymous links
 
-<a class="glightbox" href="../../../../assets/videos/meet/share-room-link.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery8"><video class="round-corners" src="../../../../assets/videos/meet/share-room-link.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+#### From the OpenVidu Meet app
 
-### From an active meeting
+Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
 
-Participants with the `canShareAccessLinks` permission can share room access links from the active meeting view.
+<a class="glightbox" href="../../../../assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../../assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/rooms/access/share-link-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
-<a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../../assets/images/meet/users-and-permissions/share-room-link.png" loading="lazy" class="round-corners"/></a>
+#### From an active meeting
 
-!!! info
-    Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `canMakeModerator` permission can promote other participants to `Moderator` during the meeting. See [Role Management](../meetings/role-management.md#promoting-participants-to-moderator) for more information.
+Participants with the `canShareAccessLinks` permission can share the room access link from the active meeting view.
 
-### From the REST API
-
-Anonymous access links are available in properties `anonymous.moderator.accessUrl` and `anonymous.speaker.accessUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}.
-
-The room owner and internal user members can access the room through the general authenticated access URL in property `accessUrl` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}. For external user members, each member has their own unique access URL in property `accessUrl` of each [MeetRoomMember :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoomMember){:target="_blank"} object.
-
-## OpenVidu Meet internal users { #openvidu-meet-internal-users }
-
-OpenVidu Meet has an internal user management system that controls access to the OpenVidu Meet console and the ability to create and manage rooms. Internal users are identified by a `userId` and can be assigned one of three roles.
-
-### Root administrator { #root-administrator }
-
-The root administrator is a special user with the fixed `userId` **`admin`**. This user has full control over OpenVidu Meet and cannot be deleted. The root administrator password is set during installation:
-
-- In **local deployments**: the password is always **`admin`**.
-- In **production deployments**: the password is specified during installation (or randomly generated if not provided).
-
-These credentials are required when accessing the OpenVidu Meet console:
-
-<a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/login-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/users-and-permissions/login-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/login-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/users-and-permissions/login-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
-
-The location of the initial administrator password depends on the deployment environment:
-
-=== "Local (Demo)"
-
-    Credentials are always username **`admin`** and password **`admin`**.
-
-=== "On Premises"
-
-    Credentials will be logged at the end of the installation process:
-
-    ```
-    OpenVidu Meet is available at:
-
-        URL: https://<YOUR_DOMAIN>
-        Credentials:
-          - User: admin
-          - Password: XXXXXXX
-    ```
-
-    !!! warning
-        If you [modify the administrator password](#changing-credentials), this value will no longer be valid.
-
-=== "AWS"
-
-    In the Secrets Manager of the CloudFormation stack, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
-
-    !!! warning
-        If you [modify the administrator password](#changing-credentials), this value will no longer be valid.
-
-=== "Azure"
-
-    In the Azure Key Vault, in secret **`MEET_INITIAL_ADMIN_PASSWORD`**
-
-    !!! warning
-        If you [modify the administrator password](#changing-credentials), this value will no longer be valid.
-
-### Internal user roles
-
-Internal users can have one of the following roles:
-
-| Role | Description | Permissions |
-|------|-------------|-------------|
-| **admin** | Administrator | Full control over OpenVidu Meet, including user management, room creation and management for all rooms, and system configuration |
-| **user** | Regular user | Can create and manage their own rooms, assign room members, and configure room settings |
-| **room_member** | Room member only | Can only access rooms where they have been explicitly added as a member; cannot create or manage rooms |
-
-### Managing internal users
-
-Internal users with the **admin** role can manage other internal users from the OpenVidu Meet console in the **"Users & Permissions"** view. From there, administrators can:
-
-- **Create new users**: Add new internal users with a `userId`, name, password, and role.
-- **Delete users**: Remove internal users from the system.
+<a class="glightbox" href="../../../../assets/images/meet/rooms/access/meeting-share-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../../assets/images/meet/rooms/access/meeting-share-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/rooms/access/meeting-share-link-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
 !!! info
-    The root administrator (**`admin`**) cannot be deleted, but its password can be changed.
 
-### Changing credentials { #changing-credentials }
+    Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `canMakeModerator` permission can promote others to `Moderator` during the meeting. See [Role Management](../meetings/role-management.md#promoting-participants-to-moderator).
 
-User credentials can be modified from the **"Users & Permissions"** view:
+#### From the REST API
 
-<a class="glightbox" href="../../../../assets/images/meet/users-and-permissions/change-authentication.png" data-type="image" data-desc-position="bottom" data-gallery="gallery2"><img src="../../../../assets/images/meet/users-and-permissions/change-authentication.png" loading="lazy"/></a>
+The anonymous access links are available in the properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"} object.
 
-## Room members { #room-members }
+## User and identified guest access { #member-access-links }
 
-Room members are specific individuals (internal users or external users) with personalized access to a room. There are two ways users can access a room: as **anonymous users** using anonymous room access links, or as **explicit room members** with customized permissions.
+Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](../room-members/management.md#rest-api-reference). They access the room through different links:
 
-### Anonymous access vs. explicit room members
+- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"}). They must **log in** with their OpenVidu Meet credentials.
+- **Identified guests** each receive a **unique personal access link** (property `accessUrl` of their member object) that grants access with **no login** and should be delivered privately to that person.
 
-| Access Type | How it works | Use case |
-|-------------|--------------|----------|
-| **Anonymous access** | Any user can access by using the predefined anonymous `Moderator` or `Speaker` room access links. Users are assigned standard role permissions. Anonymous access can be enabled or disabled per role when creating or updating a room. | Quick meetings, public rooms, or scenarios where you don't need to track specific individuals. |
-| **Explicit room members** | Specific individuals are added as room members with personalized URLs and custom permissions. Each member has a fixed name and tailored access. | Controlled access, pre-defined names, custom permissions, and the ability to revoke access for specific individuals. |
+In addition to users added explicitly as room members, other users can also access the room:
 
-### Internal users vs. external users
+- **Admins** and the **room owner** (the user who created the room) always have access to the room, with all permissions granted.
+- If a room is [configured](management.md#create-rooms) to be **accessible to all users**, any user can access — even without being an explicit member — with `Speaker` permissions.
 
-When creating a room member, you can designate them as either an **internal user** (someone with an OpenVidu Meet `userId`) or an **external user** (someone without an OpenVidu Meet account):
+See the [Room Members](../room-members/overview.md) feature to add and manage users and identified guests, and the [Users](../users/overview.md) feature to manage the accounts themselves.
 
-| Aspect | Internal users | External users |
-|--------|----------------|----------------|
-| **Identification** | Identified by their OpenVidu Meet `userId` | Identified by a generated `ext-XXX` ID |
-| **Access URL** | All internal user room members share the same access URL for the room. They are identified through authentication. | Each external user receives a unique access URL that must not be shared |
-| **Authentication** | Must authenticate with their OpenVidu Meet credentials when accessing the room | No authentication required; access is granted via the unique URL |
-| **Use case** | For team members, employees, or regular collaborators with OpenVidu Meet accounts | For guests, clients, or one-time participants without OpenVidu Meet accounts |
+## Predefined roles { #predefined-roles }
 
-### Creating room members
+Every room member has a role that determines their default set of permissions. The role comes from the link used (for anonymous guests) or from the base role assigned to the member (for users and identified guests).
 
-Room members can be created via the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="_blank"}. When creating a member, you specify:
+### Moderator
 
-- **User type**: Whether the member is an internal user (provide `userId`) or an external user (provide `name`).
-- **Base role**: Either `moderator` or `speaker`, which defines the initial set of permissions.
-- **Custom permissions**: Optional overrides to grant or restrict specific capabilities beyond the base role.
+Grants full meeting permissions by default:
 
-The API returns a member object containing:
+- **Meeting management**: end the meeting for all participants .
+- **Recording control**: start/stop, retrieve and delete recordings.
+- **Participant management**: promote other participants to moderator, share room access links, and kick participants.
+- **Media publishing**: publish video, audio, and share screen.
+- **Communication**: send chat messages, change virtual background.
 
-- **Member ID**: The unique identifier for this room member.
-- **Name**: The fixed name that will be displayed in the meeting.
-- **Access URL**: The URL to access the room (shared for internal users, unique for external users).
-- **Permissions**: The final set of permissions assigned to the member.
+### Speaker
 
-### Managing room members
+Grants basic participation permissions by default:
 
-Room members can be managed through the REST API:
+- **Recording access**: retrieve (list, play and download) the room's recordings — but not start, stop or delete them.
+- **Media publishing**: publish video, audio, and share screen.
+- **Communication**: send chat messages, change virtual background.
 
-- **List all members**: [GET /rooms/:roomId/members :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMembers){:target="_blank"}
-- **Retrieve member information**: [GET /rooms/:roomId/members/:memberId :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="_blank"}
-- **Update member permissions**: [PATCH /rooms/:roomId/members/:memberId :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomMember){:target="_blank"}
-- **Delete a member**: [DELETE /rooms/:roomId/members/:memberId :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="_blank"}
+!!! info
 
-!!! warning
-    When a room member is deleted, their access is immediately revoked. If they are currently in an active meeting, they will be expelled from it.
+    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="\_blank"} schema.

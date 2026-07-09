@@ -15,7 +15,7 @@ With **OpenVidu Meet Embedded**, you can integrate the best video calling experi
 __Add video calling capabilities to your app with a single line of HTML__{ .ov-meet-commercial-card-title }
 
 ```html
-<openvidu-meet room-url="https://YOUR_DOMAIN/room/your-room?secret=1234567"></openvidu-meet>
+<openvidu-meet room-url="https://YOUR_DOMAIN/meet/room/your-room?secret=1234567"></openvidu-meet>
 ```
 
 </div>
@@ -26,18 +26,18 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
 
     ```bash
     curl --request POST \
-      --url https://YOUR_DOMAIN/api/v1/rooms \
+      --url https://YOUR_DOMAIN/meet/api/v1/rooms \
       --header 'Accept: application/json' \
       --header 'Content-Type: application/json' \
       --header 'X-API-KEY: YOUR_API_KEY' \
-      --data '{"roomName": "my-room"}'
+      --data '{"roomName": "My Room"}'
     ```
 
 - __Manage recordings through REST API__{ .ov-meet-commercial-card-title }
 
     ```bash
     curl --request GET \
-      --url https://YOUR_DOMAIN/api/v1/recordings \
+      --url https://YOUR_DOMAIN/meet/api/v1/recordings \
       --header 'Accept: application/json' \
       --header 'X-API-KEY: YOUR_API_KEY'
     ```
@@ -48,9 +48,9 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
 
 __Integrate OpenVidu Meet into your own UI and business logic__{ .ov-meet-commercial-card-title }
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners" alt="Use case Education"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners" alt="Use case Education"/></a>
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-telehealth.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/webcomponent-telehealth.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/telehealth.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/telehealth.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
 
 </div>
 

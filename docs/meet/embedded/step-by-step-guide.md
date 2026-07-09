@@ -4,7 +4,7 @@ tags:
   - setupcustomgallery
 ---
 
-This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, integration examples, and deployment best practices.
+This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, embedding options, and deployment best practices.
 
 
 ## 1. Run OpenVidu Meet
@@ -15,8 +15,8 @@ This step-by-step guide explains how to embed OpenVidu Meet into your web applic
 
 You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
-<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../assets/videos/meet/meet-rooms-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/meet-rooms-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ### Automating room creation
 
@@ -25,18 +25,17 @@ You can automate the room creation process by using the [OpenVidu Meet REST API]
 Check out the [API reference for creating rooms :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. Below you have copy-paste snippets for most common languages.
 
 !!! info
-    Remember to replace **`YOUR_OPENVIDU_DEPLOYMENT_DOMAIN`** and **`YOUR_API_KEY`** in the snippets below.
+    Remember to replace **`YOUR_DOMAIN`** and **`YOUR_API_KEY`** in the snippets below.
 
 === ":material-bash:{.icon .lg-icon .tab-icon} curl"
 
     ```bash
     curl --request POST \
-        --url https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms \
+        --url https://YOUR_DOMAIN/meet/api/v1/rooms \
         --header 'Accept: application/json' \
         --header 'Content-Type: application/json' \
         --header 'X-API-KEY: YOUR_API_KEY' \
-        --data '{"roomName": "my-room"}'
-        --data '{"roomName": "my-room"}'
+        --data '{"roomName": "My Room"}'
     ```
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
@@ -46,9 +45,9 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
     const options = {
         method: 'POST',
-        hostname: 'YOUR_OPENVIDU_DEPLOYMENT_DOMAIN',
+        hostname: 'YOUR_DOMAIN',
         port: 443,
-        path: '/api/v1/rooms',
+        path: '/meet/api/v1/rooms',
         headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
@@ -68,7 +67,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     });
 
     req.write(JSON.stringify({
-        roomName: 'my-room',
+        roomName: 'My Room',
     }));
 
     req.end();
@@ -88,9 +87,9 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
     func main() {
 
-        url := "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms"
+        url := "https://YOUR_DOMAIN/meet/api/v1/rooms"
 
-        payload := strings.NewReader("{\"roomName\":\"my-room\"}")
+        payload := strings.NewReader("{\"roomName\":\"My Room\"}")
 
         req, _ := http.NewRequest("POST", url, payload)
 
@@ -116,7 +115,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     require 'net/http'
     require 'openssl'
 
-    url = URI("https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms")
+    url = URI("https://YOUR_DOMAIN/meet/api/v1/rooms")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -125,7 +124,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     request["Content-Type"] = 'application/json'
     request["Accept"] = 'application/json'
     request["X-API-KEY"] = 'YOUR_API_KEY'
-    request.body = "{\"roomName\": \"my-room\"}"
+    request.body = "{\"roomName\": \"My Room\"}"
 
     response = http.request(request)
     puts response.read_body
@@ -135,11 +134,11 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
     ```java
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms"))
+        .uri(URI.create("https://YOUR_DOMAIN/meet/api/v1/rooms"))
         .header("Content-Type", "application/json")
         .header("Accept", "application/json")
         .header("X-API-KEY", "YOUR_API_KEY")
-        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomName\": \"my-room\"}"))
+        .method("POST", HttpRequest.BodyPublishers.ofString("{\"roomName\": \"My Room\"}"))
         .build();
     HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     System.out.println(response.body());
@@ -150,9 +149,9 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     ```python
     import http.client
 
-    conn = http.client.HTTPSConnection("YOUR_OPENVIDU_DEPLOYMENT_DOMAIN")
+    conn = http.client.HTTPSConnection("YOUR_DOMAIN")
 
-    payload = "{\"roomName\": \"my-room\"}"
+    payload = "{\"roomName\": \"My Room\"}"
 
     headers = {
         'Content-Type': "application/json",
@@ -160,7 +159,7 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
         'X-API-KEY': "YOUR_API_KEY"
     }
 
-    conn.request("POST", "/api/v1/rooms", payload, headers)
+    conn.request("POST", "/meet/api/v1/rooms", payload, headers)
 
     res = conn.getresponse()
     data = res.read()
@@ -179,8 +178,8 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
 
     fn main() -> Result<(), Box<dyn std::error::Error>> {
         let client = Client::new();
-        let url = "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms";
-        let payload = r#"{"roomName": "my-room"}"#;
+        let url = "https://YOUR_DOMAIN/meet/api/v1/rooms";
+        let payload = r#"{"roomName": "My Room"}"#;
 
         let resp = client
             .post(url)
@@ -204,10 +203,10 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => "https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms",
+        CURLOPT_URL => "https://YOUR_DOMAIN/meet/api/v1/rooms",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(['roomName' => 'my-room']),
+        CURLOPT_POSTFIELDS => json_encode(['roomName' => 'My Room']),
         CURLOPT_HTTPHEADER => [
             "Accept: application/json",
             "Content-Type: application/json",
@@ -235,13 +234,13 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     var request = new HttpRequestMessage
     {
         Method = HttpMethod.Post,
-        RequestUri = new Uri("https://YOUR_OPENVIDU_DEPLOYMENT_DOMAIN/api/v1/rooms"),
+        RequestUri = new Uri("https://YOUR_DOMAIN/meet/api/v1/rooms"),
         Headers =
         {
             { "Accept", "application/json" },
             { "X-API-KEY", "YOUR_API_KEY" },
         },
-        Content = new StringContent("{\"roomName\": \"my-room\"}")
+        Content = new StringContent("{\"roomName\": \"My Room\"}")
         {
             Headers =
             {
@@ -257,49 +256,57 @@ Check out the [API reference for creating rooms :fontawesome-solid-external-link
     }
     ```
 
-The response to this request will be a JSON object as below. The required properties for the next step are `moderatorUrl` and `speakerUrl`, needed to embed the room into your application as explained in step 3.
+The response to this request will be a JSON object as below. The properties needed for the next step are the room's anonymous access links (`access.anonymous.moderator.url` and `access.anonymous.speaker.url`), used to embed the room into your application as explained in step 3.
 
-```json hl_lines="25-26"
+```json hl_lines="10 14"
 {
   "roomId": "room-123",
   "roomName": "My Room",
+  "owner": "admin",
   "creationDate": 1620000000000,
-  "autoDeletionDate": 1900000000000,
-  "autoDeletionPolicy": {
-    "withMeeting": "when_meeting_ends",
-    "withRecordings": "close"
-  },
-  "config": {
-    "chat": {
-      "enabled": true
+  "access": {
+    "anonymous": {
+      "moderator": {
+        "enabled": true,
+        "url": "https://YOUR_DOMAIN/meet/room/room-123?secret=123456"
+      },
+      "speaker": {
+        "enabled": true,
+        "url": "https://YOUR_DOMAIN/meet/room/room-123?secret=654321"
+      },
+      "recording": {
+        "enabled": true,
+        "url": "https://YOUR_DOMAIN/meet/room/room-123/recordings?secret=987654"
+      }
     },
-    "recording": {
-      "enabled": true,
-      "allowAccessTo": "admin_moderator_speaker"
-    },
-    "virtualBackground": {
-      "enabled": true
-    },
-    "e2ee": {
-      "enabled": false
+    "user": {
+      "enabled": false,
+      "url": "https://YOUR_DOMAIN/meet/room/room-123"
     }
   },
-  "moderatorUrl": "http://localhost:6080/room/room-123?secret=123456",
-  "speakerUrl": "http://localhost:6080/room/room-123?secret=654321",
   "status": "open",
-  "meetingEndAction": "none"
+  "rolesUpdatedAt": 1620000000000,
+  "meetingEndAction": "none",
+  "_extraFields": [
+    "config",
+    "roles"
+  ]
 }
 ```
 
 ## 3. Get the room URL
 
-To embed a room into your application's frontend you need the **room URL**. You can copy the room URL for each participant role from the "Rooms" page in OpenVidu Meet console:
+To embed a room into your application's frontend you need a **room URL**, which is simply a [room access link](../features/rooms/access.md): the URL an individual opens to access the room. You can copy the room URL from the "Rooms" page in OpenVidu Meet app:
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/share-room-link.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/share-room-link.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/rooms/access/share-link-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+
+!!! info "Which room access link should I use?"
+    This guide uses the room's **anonymous** moderator and speaker links, which let anyone access without logging in. A room also offers **user** and **identified-guest** access links for controlled, per-person access. See [Room Access](../features/rooms/access.md) to learn about all of them and choose the right one for your use case.
 
 ### Automating room URL retrieval
 
-You can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). They are available in properties `moderatorUrl` and `speakerUrl` of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
+You can get the room URLs programmatically using the [OpenVidu Meet REST API](../embedded/reference/rest-api.md). The anonymous links are available in properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` — and the user access link in `access.user.url` — of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
 
 - [Create a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}
 - [Get a room :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"}
@@ -319,12 +326,12 @@ Just link to the room URL from any element in your frontend. For example, with a
 <a href="{{ your-room-url }}">Join Room</a>
 ```
 
-After clicking on the element, the user will be redirected to OpenVidu Meet, ready to join the room.
+After clicking on the element, the individual will be redirected to the OpenVidu Meet room, ready to join the meeting.
 
-<a class="glightbox" href="../../../assets/videos/meet/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery4"><video class="round-corners" src="../../../assets/videos/meet/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../../../assets/videos/meet/embedded/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../assets/videos/meet/embedded/embed-url.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 !!! info
-    You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after the user leaves the room by appending this query param: <code class="no-break">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
+    You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after a participant leaves the meeting by appending this query param: <code class="no-break">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
 
     See [Passing attributes to a direct link](./reference/direct-link.md#attributes) for more information.
 
@@ -341,7 +348,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 <html>
     <head>
         <title>My meeting</title>
-        <script src="https://{{ your-openvidu-deployment-domain }}/v1/openvidu-meet.js"></script>
+        <script src="https://{{ your-domain }}/meet/v1/openvidu-meet.js"></script>
     </head>
     <body>
         <div>
@@ -351,7 +358,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 </html>
 ```
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../../assets/images/meet/embedded/webcomponent-meeting.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners"/></a>
 
 ### Use an iframe
 
@@ -394,7 +401,7 @@ The required iframe attributes are:
 
 ## 5. Embed recordings into your application
 
-If your use case includes recording your rooms, you can also embed them right into your app. You can embed the list of recordings of a room or directly show the player for a specific recording.
+If your use case includes recording your meetings, you can also embed them right into your app. You can embed the list of recordings of a room or directly show the player for a specific recording.
 
 ### Embed the list of recordings of a room
 
@@ -409,13 +416,13 @@ To show the list of recordings of a room, declare attribute **`show-only-recordi
 
 This will show the list of recordings for the specified room:
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-recording-list.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/webcomponent-recording-list.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-room-recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-room-recordings.png" loading="lazy" class="round-corners"/></a>
 
 ### Embed the player for a specific recording
 
 To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
 
-- [OpenVidu Meet console](../../features/recordings/creation-management.md#share-download)
+- [OpenVidu Meet app](../features/recordings/management.md#sharing-recordings)
 - [Programmatically via REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingUrl){:target="_blank"}
 
 ```html
@@ -427,11 +434,11 @@ To show the player for a specific recording, replace attribute `room-url` with *
 
 This will show the player for the specified recording:
 
-<a class="glightbox" href="../../../assets/images/meet/embedded/webcomponent-recording-player.png" data-type="image" data-desc-position="bottom" data-gallery="gallery3"><img src="../../../assets/images/meet/embedded/webcomponent-recording-player.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="../../../assets/images/meet/embedded/use-cases/support-display-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../assets/images/meet/embedded/use-cases/support-display-recording.png" loading="lazy" class="round-corners"/></a>
 
 ## 6. REST API and Webhooks
 
 Up to this point everything has been focused on the client-side integration of OpenVidu Meet. To integrate OpenVidu Meet into your application's backend you have available:
 
-- [REST API](./reference/rest-api.md): manage rooms and recordings programmatically.
+- [REST API](./reference/rest-api.md): manage rooms, room members, recordings and users programmatically.
 - [Webhooks](./reference/webhooks.md): listen to events happening in real time.

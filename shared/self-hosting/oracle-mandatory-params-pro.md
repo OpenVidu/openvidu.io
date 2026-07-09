@@ -29,6 +29,3 @@
     <td style="white-space: nowrap;"><code>openviduLicense</code></td>
     <td>OpenVidu PRO license key. Visit <a href="https://openvidu.io/account" target="_blank">https://openvidu.io/account</a> to obtain your license.</td>
     </tr>
-    </tbody>
-    </table>
-    </div>

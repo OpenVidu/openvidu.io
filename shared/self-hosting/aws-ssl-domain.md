@@ -6,11 +6,7 @@ There are three possible scenarios for this section:
 
     If you don't have a Domain Name and want to quickly test OpenVidu on AWS, you can use this option by selecting **CertificateType** as _letsencrypt_ and keeping the rest of the parameters empty.
 
-    It will deploy OpenVidu with a Let's Encrypt certificate generated using [sslip.io](https://sslip.io/){:target="_blank"} based on the public IP created for the deployment.
-
-    <!-- TODO: Remove this warning when sslip.io rate limiting issue is resolved. Track at https://openvidu.discourse.group/t/deployment-without-domain/5474 -->
-    !!! warning "sslip.io rate limiting"
-        **sslip.io** is currently experiencing **Let's Encrypt rate limiting issues**, which may prevent SSL certificates from being generated. It is recommended to use your own domain name. Check [this community thread](https://openvidu.discourse.group/t/deployment-without-domain/5474){:target="_blank"} for troubleshooting and updates.
+    It will deploy OpenVidu with a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate issued for the public IP created for the deployment.
 
     ![Let's Encrypt certificates](../../../../assets/images/self-hosting/shared/aws-letsencrypt-nodomain.png)
 
@@ -29,8 +25,6 @@ There are three possible scenarios for this section:
     Opt for this method if you possess **your own certificate for an existing FQDN**. It enables you to deploy OpenVidu on AWS using your certificates.
 
     Ensure you have a Fully Qualified Domain Name (FQDN) pointing to a previously created Elastic IP.
-
-    You also need a **temporary HTTP server** hosting your private and public certificate under a specific URL. These URLs are required so the instance can download and install your certificates.
 
     The configured parameters would look like this:
 
@@ -55,4 +49,4 @@ There are three possible scenarios for this section:
 
     ![Self-signed certificates](../../../../assets/images/self-hosting/shared/aws-selfsigned.png)
 
-    You can optionally specify a **DomainName**. If no domain name is provided, [sslip.io](https://sslip.io/){:target="_blank"} will be used to generate a domain based on the public IP. Just select the **CertificateType** as _self-signed_.
+    You can optionally specify a **DomainName**. If no domain name is provided, the public IP is used as the domain name. You can select the **CertificateType** as _letsencrypt_ or _selfsigned_.

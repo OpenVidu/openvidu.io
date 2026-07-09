@@ -53,7 +53,7 @@ LiveKit Cloud is the official SaaS solution for LiveKit. They manage the infrast
 
 Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims to deliver the same advanced benefits as LiveKit Cloud, but as a self-hosted solution**. We intend to provide a performant, fault-tolerant, scalable and observable cluster that is easy to deploy, configure and administrate in your own infrastructure. For now, OpenVidu Pro brings:
 
-- OpenVidu Pro provides a complete observability stack with Grafana, Loki, Promtail and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](./self-hosting/production-ready/observability/index.md).
+- OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](./self-hosting/production-ready/observability/index.md).
 - We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](./self-hosting/production-ready/scalability.md#big-videoconferences-and-massive-live-streams-working-on-it).
 
 ## OpenVidu vs SaaS solutions
