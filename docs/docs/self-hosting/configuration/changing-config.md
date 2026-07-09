@@ -57,7 +57,7 @@ These are the configuration files for each kind of deployment:
         |-- dashboard.env
         |-- loki.yaml
         |-- prometheus.yaml
-        |-- promtail.yaml
+        |-- config.alloy
         |-- meet.env
         |-- agent-speech-processing.yaml
         `-- grafana/
@@ -85,7 +85,7 @@ These are the configuration files for each kind of deployment:
         |   |   |-- minio.env
         |   |   |-- mongo.env
         |   |   |-- operator.env
-        |   |   |-- promtail.yaml
+        |   |   |-- config.alloy
         |   |   |-- redis.env
         |   |   `-- v2compatibility.env
         |   `-- media_node/
@@ -93,7 +93,7 @@ These are the configuration files for each kind of deployment:
         |       |-- ingress.yaml
         |       |-- livekit.yaml
         |       |-- prometheus.yaml
-        |       |-- promtail.yaml
+        |       |-- config.alloy
         |       `-- agent-speech-processing.yaml
         `-- node/
         `-- master_node.env
@@ -132,7 +132,7 @@ These are the configuration files for each kind of deployment:
         |   |   |-- minio.env
         |   |   |-- mongo.env
         |   |   |-- operator.env
-        |   |   |-- promtail.yaml
+        |   |   |-- config.alloy
         |   |   |-- redis.env
         |   |   `-- v2compatibility.env
         |   `-- media_node/
@@ -141,7 +141,7 @@ These are the configuration files for each kind of deployment:
         |       |-- ingress.yaml
         |       |-- livekit.yaml
         |       |-- prometheus.yaml
-        |       |-- promtail.yaml
+        |       |-- config.alloy
         |       `-- agent-speech-processing.yaml
         `-- node/
         `-- master_node.env

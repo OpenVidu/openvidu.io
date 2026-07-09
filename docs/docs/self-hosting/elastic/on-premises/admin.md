@@ -66,7 +66,7 @@ Depending on the node type, you will see different services running.
     mongo                      docker.io/mongo                                    "docker-entrypoint.s…"   mongo                      11 seconds ago   Up 9 seconds
     openvidu-v2compatibility   docker.io/openvidu/openvidu-v2compatibility        "/bin/server"            openvidu-v2compatibility   12 seconds ago   Up 10 seconds
     operator                   docker.io/openvidu/openvidu-operator               "/bin/operator"          operator                   12 seconds ago   Up 10 seconds
-    promtail                   docker.io/grafana/promtail                         "/usr/bin/promtail -…"   promtail                   11 seconds ago   Up 9 seconds
+    alloy                      docker.io/grafana/alloy                            "/usr/bin/alloy -…"      alloy                      11 seconds ago   Up 9 seconds
     redis                      docker.io/redis                                    "docker-entrypoint.s…"   redis                      12 seconds ago   Up 10 seconds
     ```
 
@@ -80,7 +80,7 @@ Depending on the node type, you will see different services running.
     ingress      docker.io/livekit/ingress                      "ingress"                ingress      53 seconds ago   Up 52 seconds
     openvidu     docker.io/openvidu/openvidu-server-pro         "/livekit-server --c…"   openvidu     53 seconds ago   Up 52 seconds
     prometheus   docker.io/prom/prometheus                      "/bin/prometheus --c…"   prometheus   53 seconds ago   Up 51 seconds
-    promtail     docker.io/grafana/promtail                     "/usr/bin/promtail -…"   promtail     53 seconds ago   Up 52 seconds
+    alloy        docker.io/grafana/alloy                        "/usr/bin/alloy -…"      alloy        53 seconds ago   Up 52 seconds
     ```
 
 --8<-- "shared/self-hosting/openvidu-pro-checking-logs.md"

@@ -7,7 +7,7 @@ tags:
 
 # Recordings
 
-OpenVidu Meet can record [meetings](../meetings/overview.md) and store them on the server so they can be played back, shared and downloaded at any time — even after the meeting has ended.
+OpenVidu Meet can record [meetings](../meetings/overview.md) and store them on the server so they can be played back, shared and downloaded at any time.
 
 ## How recordings work
 
