@@ -7,7 +7,7 @@ tags:
 
 # Direct Link Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/embedding-options/meet-direct-link){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-direct-link){ .md-button target=\_blank }
 
 This tutorial is a simple example of how to integrate **OpenVidu Meet** into a **Node.js** application by easily using a direct link. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -33,7 +33,7 @@ The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-ap
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.7.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 ```
 
 ### 3. Run the application
@@ -93,7 +93,7 @@ The server application is a simple Express app with a single file `index.js` tha
 
 Let's see the code of the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/src/index.js#L1-L21' target='_blank'>index.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/src/index.js#L1-L21' target='_blank'>index.js</a>" linenums="1"
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -142,7 +142,7 @@ Now let's see the code of each endpoint:
 
 The `POST /rooms` endpoint creates a new room. It receives the room name as a body parameter and returns the newly created room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/src/index.js#L25-L45' target='_blank'>index.js</a>" linenums="25"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/src/index.js#L25-L45' target='_blank'>index.js</a>" linenums="25"
 // Create a new room
 app.post('/rooms', async (req, res) => {
 	const { roomName } = req.body; // (1)!
@@ -183,7 +183,7 @@ This endpoint does the following:
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/src/index.js#L77-L99' target='_blank'>index.js</a>" linenums="77"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/src/index.js#L77-L99' target='_blank'>index.js</a>" linenums="77"
     // Function to make HTTP requests to OpenVidu Meet API
     const httpRequest = async (method, path, body) => {
     	// (1)!
@@ -222,7 +222,7 @@ This endpoint does the following:
 
 3.  If the room is successfully created, the server returns a `201 Created` response with the room object. Otherwise, the error is handled by the `handleApiError` function, which logs the error and returns an appropriate HTTP response:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/src/index.js#L101-L107' target='_blank'>index.js</a>" linenums="101"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/src/index.js#L101-L107' target='_blank'>index.js</a>" linenums="101"
     // Helper function to handle API errors consistently
     const handleApiError = (res, error, message) => {
     	console.error(`${message}: ${error.message}`); // (1)!
@@ -243,7 +243,7 @@ This endpoint does the following:
 
 The `GET /rooms` endpoint retrieves the list of all rooms created in OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/src/index.js#L47-L56' target='_blank'>index.js</a>" linenums="47"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/src/index.js#L47-L56' target='_blank'>index.js</a>" linenums="47"
 // List all rooms
 app.get('/rooms', async (_req, res) => {
 	try {
@@ -267,7 +267,7 @@ This endpoint retrieves the list of rooms by making a `GET` request to the `room
 
 The `DELETE /room/:roomId` endpoint deletes the specified room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/src/index.js#L59-L70' target='_blank'>index.js</a>" linenums="59"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/src/index.js#L59-L70' target='_blank'>index.js</a>" linenums="59"
 app.delete('/rooms/:roomId', async (req, res) => {
 	const { roomId } = req.params; // (1)!
 
@@ -310,7 +310,7 @@ Now let's see the code of the `app.js` file grouped by sections:
 
 The list of rooms is displayed in the `index.html` file as soon as the page loads. This is done by calling the `fetchRooms()` function, which fetches the list of rooms from the server and updates the UI accordingly.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/public/js/app.js#L1-L26' target='_blank'>app.js</a>" linenums="1"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/public/js/app.js#L1-L26' target='_blank'>app.js</a>" linenums="1"
 const rooms = new Map(); // (1)!
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -352,7 +352,7 @@ The `fetchRooms()` function performs the following actions:
 
     To send requests to the backend, we use the `httpRequest` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/public/js/app.js#L134-L151' target='_blank'>app.js</a>" linenums="134"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/public/js/app.js#L134-L151' target='_blank'>app.js</a>" linenums="134"
     // Function to make HTTP requests to the backend
     async function httpRequest(method, path, body) {
     	// (1)!
@@ -388,7 +388,7 @@ The `fetchRooms()` function performs the following actions:
 
 The `renderRooms()` function is responsible for updating the UI with the list of rooms:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/public/js/app.js#L28-L82' target='_blank'>app.js</a>" linenums="28"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/public/js/app.js#L28-L82' target='_blank'>app.js</a>" linenums="28"
 function renderRooms() {
 	// Clear the previous list of rooms
 	const roomsList = document.querySelector('#rooms-list ul'); // (1)!
@@ -465,7 +465,7 @@ The `getRoomListItemTemplate()` function generates the HTML template for each ro
 
 After the user specifies the room name and clicks the `Create Room` button, the `createRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/public/js/app.js#L84-L112' target='_blank'>app.js</a>" linenums="84"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/public/js/app.js#L84-L112' target='_blank'>app.js</a>" linenums="84"
 async function createRoom(e) {
 	// Prevent the default form submission
 	e.preventDefault(); // (1)!
@@ -516,7 +516,7 @@ The `createRoom()` function performs the following actions:
 
 The `prependToMap()` function adds an entry to the start of a `Map`, ensuring that newly created rooms appear first in the list:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/public/js/app.js#L126-L132' target='_blank'>app.js</a>" linenums="126"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/public/js/app.js#L126-L132' target='_blank'>app.js</a>" linenums="126"
 // Adds an entry to the start of a Map so newly created items appear first,
 // matching the OpenVidu Meet API order (items are returned newest first)
 function prependToMap(map, key, value) {
@@ -536,7 +536,7 @@ function prependToMap(map, key, value) {
 
 When the user clicks the delete room button, the `deleteRoom()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-direct-link/public/js/app.js#L114-L124' target='_blank'>app.js</a>" linenums="114"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-direct-link/public/js/app.js#L114-L124' target='_blank'>app.js</a>" linenums="114"
 async function deleteRoom(roomId) {
 	try {
 		await httpRequest('DELETE', `/rooms/${roomId}`); // (1)!

@@ -7,7 +7,7 @@ tags:
 
 # WebComponent Commands & Events Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/embedding-options/meet-webcomponent-commands-events){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-commands-events){ .md-button target=\_blank }
 
 This tutorial extends the [basic WebComponent tutorial](webcomponent.md) to add **advanced WebComponent functionality** through commands and event handling. It demonstrates how to interact with the OpenVidu Meet WebComponent programmatically and respond to meeting events.
 
@@ -28,7 +28,7 @@ The application includes all the features from the basic WebComponent tutorial, 
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.7.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 ```
 
 ### 3. Run the application
@@ -90,7 +90,7 @@ The frontend changes focus on enhanced room management, WebComponent event handl
 
 The room template now passes additional parameters including role information:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-commands-events/public/js/app.js#L50-L92' target='_blank'>app.js</a>" linenums="50" hl_lines="6-39"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-commands-events/public/js/app.js#L50-L92' target='_blank'>app.js</a>" linenums="50" hl_lines="6-39"
 function getRoomListItemTemplate(room) {
 	return `
         <li class="ov-list-item">
@@ -144,7 +144,7 @@ The template now provides the room name and user role to the `accessRoom()` func
 
 The `accessRoom()` function has been significantly enhanced to handle WebComponent events and commands:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-commands-events/public/js/app.js#L138-L203' target='_blank'>app.js</a>" linenums="138"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-commands-events/public/js/app.js#L138-L203' target='_blank'>app.js</a>" linenums="138"
 // Embed the OpenVidu Meet component and react to its events. 'roomName' and 'role' fill the
 // custom room header shown once the local participant joins the meeting.
 function accessRoom(roomName, roomUrl, role) {

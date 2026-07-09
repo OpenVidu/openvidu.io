@@ -134,11 +134,12 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>The <strong>displayParticipantName</strong> directive allows show/hide the participants name in stream component.</p>
+                <p>The <strong>streamDisplayParticipantName</strong> directive allows show/hide the participants name in all stream components
+from the parent <a href="../components/VideoconferenceComponent.html">VideoconferenceComponent</a>.</p>
 <p>Default: <code>true</code></p>
-<p>It can be used in the parent element <a href="../components/VideoconferenceComponent.html">VideoconferenceComponent</a> specifying the name of the <code>stream</code> component:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-videoconference [streamDisplayParticipantName]=&quot;false&quot;&gt;&lt;/ov-videoconference&gt;</code></pre></div><p><br>And it also can be used in the <a href="../components/StreamComponent.html">StreamComponent</a>.</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-stream [displayParticipantName]=&quot;false&quot;&gt;&lt;/ov-stream&gt;</code></pre></div>
+<p>To control visibility per individual stream use <code>[displayParticipantName]</code> directly on <a href="../components/StreamComponent.html">StreamComponent</a>:
+<code>&lt;ov-stream [displayParticipantName]=&quot;false&quot;&gt;&lt;/ov-stream&gt;</code></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ov-videoconference [streamDisplayParticipantName]=&quot;false&quot;&gt;&lt;/ov-videoconference&gt;</code></pre></div>
             </p>
 
 
@@ -158,7 +159,7 @@
 
                     <tr>
                         <td class="col-md-3">Selector</td>
-                        <td class="col-md-9"><code>ov-videoconference[streamDisplayParticipantName], ov-stream[displayParticipantName]</code></td>
+                        <td class="col-md-9"><code>ov-videoconference[streamDisplayParticipantName]</code></td>
                     </tr>
 
 
@@ -218,9 +219,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#displayParticipantName" >displayParticipantName</a>
-                            </li>
-                            <li>
                                 <a href="#streamDisplayParticipantName" >streamDisplayParticipantName</a>
                             </li>
                         </ul>
@@ -240,9 +238,6 @@
                             <ul class="index-list">
                                 <li>
                                     <a href="#streamDisplayParticipantName" >streamDisplayParticipantName</a>
-                                </li>
-                                <li>
-                                    <a href="#displayParticipantName" >displayParticipantName</a>
                                 </li>
                             </ul>
                         </td>
@@ -309,22 +304,6 @@
 
             <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="displayParticipantName"></a>
-                        <b>displayParticipantName</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -510,58 +489,6 @@
                 <tr>
                     <td class="col-md-4">
                         <span class="accessor"><b>set</b><code>streamDisplayParticipantName(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-
-                                <div class="io-description">
-                                        <b>Parameters :</b>
-                                        <table class="params">
-                                            <thead>
-                                                <tr>
-                                                    <td>Name</td>
-                                                        <td>Type</td>
-                                                    <td>Optional</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                            <td>value</td>
-                                                    
-                                                            <td>
-                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                            </td>
-                                                    
-                                                        <td>
-                                                                No
-                                                        </td>
-                                                        
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                                </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="displayParticipantName"></a>
-                        <span class="name"><b>displayParticipantName</b><a href="#displayParticipantName"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>displayParticipantName(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
                     </td>
                 </tr>
                     <tr>
