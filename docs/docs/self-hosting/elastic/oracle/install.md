@@ -55,7 +55,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
 
     ```bash
     git clone https://github.com/OpenVidu/openvidu-oracle.git
-    git -C openvidu-oracle checkout 3.7.0
+    git -C openvidu-oracle checkout 3.8.0
     cd openvidu-oracle/pro/elastic
     ```
 

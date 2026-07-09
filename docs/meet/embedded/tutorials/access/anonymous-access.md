@@ -7,7 +7,7 @@ tags:
 
 # Anonymous Access Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.7.0/embedding-options/meet-webcomponent-basic){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-basic){ .md-button target=\_blank }
 
 This tutorial shows how individuals can access an OpenVidu Meet room through **anonymous access links**. An anonymous access link is a predefined, shareable URL that lets anyone access a room **without identifying themselves**, with a role fixed by the link: `moderator` or `speaker`. These links can be shared freely with any participant.
 
@@ -28,7 +28,7 @@ The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-ap
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.7.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 ```
 
 ### 3. Run the application
@@ -89,7 +89,7 @@ These URLs already carry a secret that identifies the role, so anyone who opens 
 
 The room list template exposes the two anonymous access links as **Moderator** and **Speaker** buttons:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L50-L84' target='_blank'>app.js</a>" linenums="50" hl_lines="6-23"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L50-L84' target='_blank'>app.js</a>" linenums="50" hl_lines="6-23"
 function getRoomListItemTemplate(room) {
 	return `
         <li class="ov-list-item">
@@ -135,7 +135,7 @@ Each button passes the corresponding anonymous access link (`room.access.anonymo
 
 The `accessRoom()` function receives the chosen anonymous access link and embeds the OpenVidu Meet WebComponent pointing to it:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.7.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L130-L147' target='_blank'>app.js</a>" linenums="130"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L130-L147' target='_blank'>app.js</a>" linenums="130"
 // Embed the OpenVidu Meet component for the given room URL.
 function accessRoom(roomUrl) {
 	// Hide the home screen and show the room screen

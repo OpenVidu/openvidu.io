@@ -3,7 +3,7 @@
 The OCI Function that performs graceful Media Node scale-in runs from a container image that must be hosted in an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target=_blank} in the **same region** as the Function. Because of this regional constraint, the **`scale_in_function_image`** parameter is mandatory: you must make the scale-in image available in an OCIR in your deployment's region and point the parameter to it.
 
 !!! info
-    If you are deploying in the **Madrid** region (`mad.ocir.io`), you can skip this section entirely. OpenVidu already publishes the scale-in image in the Madrid OCIR, so you only need to set `scale_in_function_image = "mad.ocir.io/axp2ice0s7el/openvidu-oci-scalein:3.7.0"` (the value that was previously used as the default). The steps below are only required when deploying in any other region.
+    If you are deploying in the **Madrid** region (`mad.ocir.io`), you can skip this section entirely. OpenVidu already publishes the scale-in image in the Madrid OCIR, so you only need to set `scale_in_function_image = "mad.ocir.io/axp2ice0s7el/openvidu-oci-scalein:3.8.0"` (the value that was previously used as the default). The steps below are only required when deploying in any other region.
 
 OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two ways to get it into your OCIR. Pick the one that best fits your needs:
 
@@ -14,7 +14,7 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
     1. Pull the image from Docker Hub:
 
         ```bash
-        docker pull docker.io/openvidu/openvidu-oci-scalein:3.7.0
+        docker pull docker.io/openvidu/openvidu-oci-scalein:3.8.0
         ```
 
     2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
@@ -30,19 +30,19 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
     3. Tag the pulled image for your OCIR. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
 
         ```bash
-        docker tag docker.io/openvidu/openvidu-oci-scalein:3.7.0 <region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.7.0
+        docker tag docker.io/openvidu/openvidu-oci-scalein:3.8.0 <region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.8.0
         ```
 
     4. Push the image to your OCIR:
 
         ```bash
-        docker push <region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.7.0
+        docker push <region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.8.0
         ```
 
     5. Set `scale_in_function_image` in `terraform.tfvars` to the image reference you just pushed:
 
         ```hcl
-        scale_in_function_image = "<region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.7.0"
+        scale_in_function_image = "<region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.8.0"
         ```
 
 === "Option 2: Build the image from source"
