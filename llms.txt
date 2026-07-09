@@ -17,28 +17,33 @@ Self-hosted videoconference solution and SDK
 - [5 conversational AI app ideas you can build this weekend](https://openvidu.io/blog/2026/06/23/5-conversational-ai-app-ideas/index.md): OpenVidu Blog
 - [Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends](https://openvidu.io/blog/2026/06/30/secure-home-video-conferencing/index.md): OpenVidu Blog
 - [We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason](https://openvidu.io/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/index.md): OpenVidu Blog
+- [OpenVidu 3.8.0 is now available](https://openvidu.io/blog/2026/07/09/release-3.8.0/index.md): OpenVidu Blog
 - [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu Meet and OpenVidu Platform
 - [About Us](https://openvidu.io/about-us/index.md): The people behind OpenVidu
 - [Research](https://openvidu.io/research/index.md): Research publications on real-time communications in peer-reviewed journals
 - [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md): What to choose, OpenVidu Meet or OpenVidu Platform?
 
-## OpenVidu Meet [BETA]
+## OpenVidu Meet
 
 - [OpenVidu Meet](https://openvidu.io/latest/meet/index.md): OpenVidu Meet - Ready to use videoconferencing solution
 - [Getting started with OpenVidu Meet](https://openvidu.io/latest/meet/getting-started/index.md): OpenVidu Meet - Getting started
+- [Overview](https://openvidu.io/latest/meet/features/overview/index.md): OpenVidu Meet Features - A global picture of all OpenVidu Meet features
 - [Overview](https://openvidu.io/latest/meet/features/rooms/overview/index.md): OpenVidu Meet Features - What a room is and its key principles
-- [Creation & Management](https://openvidu.io/latest/meet/features/rooms/creation-management/index.md): OpenVidu Meet Features - Create, edit, list and delete rooms, and configure auto-deletion
-- [Room Appearance](https://openvidu.io/latest/meet/features/rooms/appearance/index.md): OpenVidu Meet Features - Customize the visual appearance of rooms
-- [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md): OpenVidu Meet Features - Room links and administrator authentication
+- [Creation & Management](https://openvidu.io/latest/meet/features/rooms/management/index.md): OpenVidu Meet Features - Create, edit, list and delete rooms, configure auto-deletion and room appearance
+- [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md): OpenVidu Meet Features - Anonymous access, external members, registered members and predefined roles
 - [Overview](https://openvidu.io/latest/meet/features/meetings/overview/index.md): OpenVidu Meet Features - What a meeting is and how to join
 - [Meeting lifecycle](https://openvidu.io/latest/meet/features/meetings/lifecycle/index.md): OpenVidu Meet Features - Meeting lifecycle (Join, Device, Meeting, Recording and End views)
 - [Live Captions](https://openvidu.io/latest/meet/features/meetings/live-captions/index.md): OpenVidu Meet Features - Enable and use live captions in a meeting
 - [Smart Layout](https://openvidu.io/latest/meet/features/meetings/smart-layout/index.md): OpenVidu Meet Features - Smart adaptive layout in meetings
-- [Role Management](https://openvidu.io/latest/meet/features/meetings/role-management/index.md): OpenVidu Meet Features - Participant roles and how to change them
+- [Role Management](https://openvidu.io/latest/meet/features/meetings/role-management/index.md): OpenVidu Meet Features - Promote and demote participants between Moderator and Speaker during a meeting
 - [E2E Encryption](https://openvidu.io/latest/meet/features/meetings/e2e-encryption/index.md): OpenVidu Meet Features - End-to-end encryption for meetings
 - [Virtual Background](https://openvidu.io/latest/meet/features/meetings/virtual-background/index.md): OpenVidu Meet Features - Virtual background for participants
+- [Overview](https://openvidu.io/latest/meet/features/users/overview/index.md): OpenVidu Meet Features - Registered users, roles and the root administrator
+- [Creation & Management](https://openvidu.io/latest/meet/features/users/management/index.md): OpenVidu Meet Features - Create, list and delete users with the Users API and change credentials
+- [Overview](https://openvidu.io/latest/meet/features/room-members/overview/index.md): OpenVidu Meet Features - External and registered room members
+- [Creation & Management](https://openvidu.io/latest/meet/features/room-members/management/index.md): OpenVidu Meet Features - Add, list, update and remove room members with the Room Members API
 - [Overview](https://openvidu.io/latest/meet/features/recordings/overview/index.md): OpenVidu Meet Features - Overview of recordings
-- [Creation & Management](https://openvidu.io/latest/meet/features/recordings/creation-management/index.md): OpenVidu Meet Features - Start, list, share, download and delete recordings
+- [Creation & Management](https://openvidu.io/latest/meet/features/recordings/management/index.md): OpenVidu Meet Features - Start, list, share, download and delete recordings
 - [Recording configuration](https://openvidu.io/latest/meet/features/recordings/configuration/index.md): OpenVidu Meet Features - Recording layouts and resolution
 - [Overview](https://openvidu.io/latest/meet/deployment/overview/index.md): A comparison of different deployment models for OpenVidu Meet
 - [Try OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md): How to deploy OpenVidu Meet locally for testing and development purposes
@@ -46,13 +51,14 @@ Self-hosted videoconference solution and SDK
 - [Advanced deployments](https://openvidu.io/latest/meet/deployment/advanced/index.md): How to deploy OpenVidu Meet on multiple servers with scalability and fault-tolerance for production use
 - [Introduction](https://openvidu.io/latest/meet/embedded/intro/index.md): How to embed OpenVidu Meet in my own application with a single line of HTML
 - [Step by step guide](https://openvidu.io/latest/meet/embedded/step-by-step-guide/index.md): A step by step guide on how to embed OpenVidu Meet on your own applications
-- [Direct Link](https://openvidu.io/latest/meet/embedded/tutorials/direct-link/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
-- [WebComponent](https://openvidu.io/latest/meet/embedded/tutorials/webcomponent/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
-- [WebComponent Commands & Events](https://openvidu.io/latest/meet/embedded/tutorials/webcomponent-advanced/index.md): An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
-- [External Members](https://openvidu.io/latest/meet/embedded/tutorials/external-members/index.md): An OpenVidu Meet tutorial showing how to add external members with a fixed name and a unique access link to a room. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
-- [Registered Members](https://openvidu.io/latest/meet/embedded/tutorials/registered-members/index.md): An OpenVidu Meet tutorial showing how to create users with the Users API and grant them access to a room as registered members. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
-- [Recordings](https://openvidu.io/latest/meet/embedded/tutorials/recordings/index.md): How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings.
-- [Webhooks](https://openvidu.io/latest/meet/embedded/tutorials/webhooks/index.md): Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
+- [Direct Link](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [WebComponent](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/webcomponent/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet using the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [WebComponent Commands & Events](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/webcomponent-advanced/index.md): An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
+- [Anonymous Access](https://openvidu.io/latest/meet/embedded/tutorials/access/anonymous-access/index.md): An OpenVidu Meet tutorial showing how individuals can join a room through anonymous access links (moderator or speaker). It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [Identified Guests](https://openvidu.io/latest/meet/embedded/tutorials/access/identified-guests/index.md): An OpenVidu Meet tutorial showing how to add identified guests with a fixed name and a unique access link to a room. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [Users](https://openvidu.io/latest/meet/embedded/tutorials/access/users/index.md): An OpenVidu Meet tutorial showing how to create users with the Users API and add them to a room as members. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
+- [Recordings](https://openvidu.io/latest/meet/embedded/tutorials/advanced-features/recordings/index.md): How to add recording management capabilities to an OpenVidu Meet WebComponent application. It includes listing recordings, viewing recordings and deleting recordings.
+- [Webhooks](https://openvidu.io/latest/meet/embedded/tutorials/advanced-features/webhooks/index.md): Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
 - [Direct Link](https://openvidu.io/latest/meet/embedded/reference/direct-link/index.md): OpenVidu Meet - Reference documentation
 - [Iframe](https://openvidu.io/latest/meet/embedded/reference/iframe/index.md): OpenVidu Meet - Reference documentation
 - [REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md): OpenVidu Meet - Reference documentation
