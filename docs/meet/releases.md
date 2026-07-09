@@ -2,6 +2,8 @@
 
 !!! info "For the Release Notes of OpenVidu Platform 3.8.0, please visit here: [OpenVidu Platform 3.8.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#380){:target="_blank" .platform-link-color}"
 
+OpenVidu Meet 3.8.0 is considered the first General Availability (GA) release of the product, leaving the beta stage and entering a stable production-ready state.
+
 ### Changelog
 
 - **Users and role-based accounts**: OpenVidu Meet now lets you register multiple users and assign each one a role that controls what they can do in the application. There are three roles — `admin` (full control over all users, rooms, members, recordings and system configuration), `room_manager` (can create and manage their own rooms) and `room_member` (can only access rooms where they are a member). Learn more in the [Users](./features/users/overview.md) feature.

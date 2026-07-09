@@ -5,7 +5,7 @@ description: Reference for the configuration files used in all different OpenVid
 
 # Configuration reference
 
-## `openvidu.env`:
+## `openvidu.env`
 
 This file defines global configuration parameters used by other services, such as the domain name, credentials, etc.
 
@@ -36,7 +36,7 @@ This file defines global configuration parameters used by other services, such a
 | **`OPENVIDU_RTC_ENGINE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> The WebRTC engine to use. Can be `pion` or `mediasoup`. |
 | **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
-## `meet.env`:
+## `meet.env`
 
 This file defines the configuration parameters for the OpenVidu Meet service.
 
@@ -204,12 +204,12 @@ OpenVidu comes with other services configured to work in the deployment. These a
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
-| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.9.12/config-sample.yaml){:target=_blank}</li></ul>
-| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/ba781b4f6a602718fbd377780f4c157a142869b5#config){:target=_blank} |
-| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/cfbaa740b7ffd3c4478eb0621ad77f40493eff49#config){:target=_blank} |
+| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.12.0/config-sample.yaml){:target=_blank}</li></ul>
+| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/783a287#config){:target=_blank} |
+| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/2ce1b32#config){:target=_blank} |
 | **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json/){:target=_blank} |
-| **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/latest/administration/configuration/){:target=_blank} |
-| **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.0.x/configure/about-configurations/){:target=_blank} |
-| **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.5.x/configuration/){:target=_blank} |
-| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.11/configuration/configuration/){:target=_blank} |
-| **Promtail Service**    | Collects logs and sends them to Loki. | [Promtail Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.5.x/clients/promtail/configuration/){:target=_blank} |
+| **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/v12.4/setup-grafana/configure-grafana/){:target=_blank} |
+| **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.1.x/configure/){:target=_blank} |
+| **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.7.x/configure/){:target=_blank} |
+| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.12/configuration/configuration/){:target=_blank} |
+| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/alloy/v1.17/configure/){:target=_blank} |
