@@ -50,6 +50,17 @@
 
   --md-typeset-a-color: var(--md-primary-fg-color--dark);
   --card-glow-intensity: 0.25;
+  /* Light-mode hero gradient: the TOP stop stays at the nav-bar gray
+     (--md-primary-fg-color: #4d4d4d) so it blends seamlessly with the header
+     (no hard boundary), and it lightens toward the bottom — a lighter version
+     of the dark-mode gradient. Kept dark enough for the light slogan and
+     description text to stay readable (the hero stays dark on purpose). */
+  --top-home-section-color: linear-gradient(
+    0deg,
+    rgb(80, 90, 94) 0%,
+    rgb(80, 90, 94) 39%,
+    #4d4d4d 100%
+  );
   .md-button--primary {
     background-color: var(--md-accent-fg-color--transparent);
     border-color: var(--md-accent-fg-color--transparent);
@@ -77,14 +88,16 @@
   figure img.dark-img {
     background-color: var(--slate-md-default-bg-color);
   }
+  /* Fully opaque white for the hero text so it stays maximally readable over
+     the light-mode gradient (WCAG AAA, >=7:1, even at the lightest bottom). */
   .slogan {
-    color: var(--slate-md-default-fg-color--light);
+    color: #ffffff;
   }
   .home-description {
-    color: var(--slate-md-typeset-color);
+    color: #ffffff;
   }
   #home-secondary-button {
-    color: var(--slate-md-typeset-color);
+    color: #ffffff;
   }
   #home-secondary-button:hover {
     color: #ffffff;
