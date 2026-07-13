@@ -5,6 +5,9 @@
     - Homepage (index.md): Organization + WebSite + the two products (@graph)
     - OpenVidu Meet product page (meet/index.md): SoftwareApplication
     - OpenVidu Platform product page (docs/index.md): SoftwareApplication
+    - Any page with a `publications:` list in its frontmatter (research.md):
+      one ScholarlyArticle/Thesis per publication, with authors (ORCID),
+      venue, DOI, images and abstract
     - Blog index (blog/index.md): Blog with the list of posts in the view
     - Blog posts (blog/posts/*): BlogPosting with authors, dates and publisher
     - Any other page: nothing
@@ -124,6 +127,84 @@
   "@graph": [
 {{ organization() }},
 {{ platform_app() }}
+  ]
+}
+</script>
+{%- elif page and page.meta and page.meta.publications %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+{{ organization() }}
+    {%- for pub in page.meta.publications %},
+    {
+      "@type": {{ '"Thesis"' if pub.kind == "phdthesis" else '"ScholarlyArticle"' }},
+      "@id": {{ (page.canonical_url ~ "#" ~ pub.anchor) | tojson }},
+      "headline": {{ pub.title | tojson }},
+      "url": {{ pub.url | tojson }},
+      "mainEntityOfPage": {{ page.canonical_url | tojson }},
+      "datePublished": {{ pub.year | string | tojson }},
+      "inLanguage": "en",
+      {%- if pub.doi %}
+      "sameAs": {{ ("https://doi.org/" ~ pub.doi) | tojson }},
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "DOI",
+        "value": {{ pub.doi | tojson }}
+      },
+      {%- endif %}
+      {%- if pub.venue %}
+      {%- if pub.kind == "phdthesis" %}
+      "sourceOrganization": {
+        "@type": "CollegeOrUniversity",
+        "name": {{ pub.venue | tojson }}
+      },
+      {%- elif pub.kind == "journal" %}
+      "isPartOf": {
+        "@type": "Periodical",
+        "name": {{ pub.venue | tojson }}
+      },
+      {%- else %}
+      "isPartOf": {
+        "@type": "CreativeWork",
+        "name": {{ pub.venue | tojson }}
+      },
+      {%- endif %}
+      {%- endif %}
+      {%- if pub.images %}
+      "image": [
+        {%- for img in pub.images %}
+        {{ ("https://openvidu.io" ~ img) | tojson }}{{ "," if not loop.last }}
+        {%- endfor %}
+      ],
+      {%- endif %}
+      {%- if pub.abstract %}
+      "abstract": {{ pub.abstract | tojson }},
+      {%- endif %}
+      "author": [
+        {%- for author in pub.authors %}
+        {
+          "@type": "Person",
+          "name": {{ author.name | tojson }}{% if author.orcid %},
+          "@id": {{ author.orcid | tojson }},
+          "sameAs": {{ author.orcid | tojson }}{% endif %}
+        }{{ "," if not loop.last }}
+        {%- endfor %}
+      ]
+      {%- if pub.contributors %},
+      "contributor": [
+        {%- for author in pub.contributors %}
+        {
+          "@type": "Person",
+          "name": {{ author.name | tojson }}{% if author.orcid %},
+          "@id": {{ author.orcid | tojson }},
+          "sameAs": {{ author.orcid | tojson }}{% endif %}
+        }{{ "," if not loop.last }}
+        {%- endfor %}
+      ]
+      {%- endif %}
+    }
+    {%- endfor %}
   ]
 }
 </script>
