@@ -5,6 +5,7 @@
     - Homepage (index.md): Organization + WebSite + the two products (@graph)
     - OpenVidu Meet product page (meet/index.md): SoftwareApplication
     - OpenVidu Platform product page (docs/index.md): SoftwareApplication
+    - Blog index (blog/index.md): Blog with the list of posts in the view
     - Blog posts (blog/posts/*): BlogPosting with authors, dates and publisher
     - Any other page: nothing
 
@@ -123,6 +124,38 @@
   "@graph": [
 {{ organization() }},
 {{ platform_app() }}
+  ]
+}
+</script>
+{%- elif page and page.file and page.file.src_uri == "blog/index.md" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+{{ organization() }},
+    {
+      "@type": "Blog",
+      "@id": "https://openvidu.io/blog/#blog",
+      "name": "OpenVidu Blog",
+      "url": "https://openvidu.io/blog/",
+      "description": "Articles on self-hosted videoconferencing, WebRTC development, benchmarks and OpenVidu product news, written by the OpenVidu team.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://openvidu.io/#organization" }
+      {%- if page.posts %},
+      "blogPost": [
+        {%- for post in page.posts %}
+        {
+          "@type": "BlogPosting",
+          "headline": {{ post.title | string | tojson }},
+          "url": {{ post.canonical_url | tojson }}
+          {%- if post.config and post.config.date and post.config.date.created %},
+          "datePublished": {{ post.config.date.created.strftime("%Y-%m-%d") | tojson }}
+          {%- endif %}
+        }{{ "," if not loop.last }}
+        {%- endfor %}
+      ]
+      {%- endif %}
+    }
   ]
 }
 </script>
