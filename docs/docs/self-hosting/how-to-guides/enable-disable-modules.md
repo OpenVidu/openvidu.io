@@ -18,7 +18,7 @@ These modules are configured in the parameter `ENABLED_MODULES`.
 The environment variable `ENABLED_MODULES` with all the modules enabled would look like this:
 
 ```bash
-ENABLED_MODULES=app,observability,v2compatibility
+ENABLED_MODULES=openviduMeet,observability,v2compatibility
 ```
 
 Simply go to one of your Master Nodes or the only node in a Single Node deployment, edit the `openvidu.env` file, modify the `ENABLED_MODULES` and restart the Master Node or the Single Node deployment with:
@@ -31,9 +31,9 @@ systemctl restart openvidu
 
 If you've installed OpenVidu with all modules enabled, you may not need to change these configurations. But in case you've installed OpenVidu with some modules disabled, you may need to configure some parameters when enabling them.
 
-=== "app"
+=== "openviduMeet"
 
-    You need to configure the Livekit configuration to send webhooks to the OpenVidu V2 Compatibility service.
+    You need to configure the Livekit configuration to send webhooks to the OpenVidu Meet service.
 
     === "Single Node"
 
@@ -43,7 +43,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
         webhook:
             api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
             urls:
-                - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
+                - http://127.0.0.1:${openvidu.MEET_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
         With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
@@ -56,7 +56,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
         webhook:
             api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
             urls:
-                - http://master-node:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
+                - http://master-node:${openvidu.MEET_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
         With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
@@ -69,7 +69,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
         webhook:
             api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
             urls:
-                - http://localhost:${openvidu.DEFAULT_APP_INTERNAL_PORT:?mandatory}/livekit/webhook
+                - http://127.0.0.1:${openvidu.MEET_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
         With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
@@ -99,7 +99,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
         webhook:
             api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
             urls:
-                - http://localhost:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
+                - http://127.0.0.1:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
         ```
 
         With this configuration, the LiveKit service will send webhooks to the OpenVidu V2 Compatibility service, which is necessary.
