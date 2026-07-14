@@ -1,6 +1,6 @@
 ---
 draft: false
-date: '2026-07-14'
+date: 2026-07-14
 slug: video-conferencing-permissions
 description: >-
   Compare the three access models for managing permissions in video conferencing
