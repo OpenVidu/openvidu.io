@@ -1,25 +1,28 @@
 ---
 draft: false
-date: 2026-07-10
+date: '2026-07-14'
 slug: video-conferencing-permissions
-description: Compare the three access models for managing permissions in video conferencing apps — anonymous role links, identified guests and users — with pros, cons and when to use each.
+description: >-
+  Compare the three access models for managing permissions in video conferencing
+  apps — anonymous role links, identified guests and users — with pros, cons and
+  when to use each.
 cover_image: poster.png
 categories:
-    - OpenVidu Meet
-    - Technology
+  - OpenVidu Meet
+  - Technology
 tags:
-    - WebRTC
-    - Access Control
-    - Permissions
-    - Security
-    - RBAC
-    - Video Conferencing
+  - WebRTC
+  - Access Control
+  - Permissions
+  - Security
+  - RBAC
+  - Video Conferencing
 authors:
-    - juanCarlos
+  - juanCarlos
 hide:
-    - navigation
-    - search-bar
-    - version-selector
+  - navigation
+  - search-bar
+  - version-selector
 ---
 
 # Managing Permissions in Video Conferencing Apps: 3 Access Models
