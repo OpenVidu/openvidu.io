@@ -21,7 +21,7 @@ validateArgs() {
     UPDATE_LATEST=${2:-true}
 
     # Check if second argument is a boolean if provided
-    if [ "$UPDATE_LATEST" != true && "$UPDATE_LATEST" != false ]; then
+    if [ "$UPDATE_LATEST" != true ] && [ "$UPDATE_LATEST" != false ]; then
         echo "Second argument must be a boolean if provided: $0 X.Y.Z false"
         exit 1
     fi  
