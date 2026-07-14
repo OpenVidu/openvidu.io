@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+
+{{ super() }}
+
+<script defer>
+  window.openviduPreviousUrl = "";
+  if (!window.openviduObserver) {
+    window.openviduObserver = new MutationObserver(function (mutations) {
+      if (location.pathname !== window.openviduPreviousUrl) {
+        window.openviduPreviousUrl = location.pathname;
+      }
+    });
+    window.openviduObserver.observe(document, {
+      subtree: true,
+      childList: true,
+    });
+  }
+</script>
+
+<section class="top-home-section md-grid md-typeset">
+  <div class="center-align">
+    <img
+      class="top-home-img"
+      src="assets/images/openvidu_white_bg_transp.png"
+      draggable="false"
+    />
+  </div>
+  <h1 class="slogan">{{config.site_description}}</h1>
+  <p class="home-description">
+    OpenVidu allows you to implement <strong>ultra-low latency</strong> video
+    and audio applications with ease: one-to-one calls, videoconference rooms,
+    massive live streamings with thousands of viewers... It is built on the best
+    open source <strong>WebRTC stacks</strong> and packed with features:
+    multi-platform, recording, broadcasting, screen sharing, AI Agents and more.
+    From an operations perspective we aim to make it easy to
+    <strong>self-host</strong> a performant, fault-tolerant, scalable and
+    observable cluster, reducing DevOps efforts to a minimum.
+  </p>
+  <div class="home-buttons">
+    <a
+      title="Get started"
+      id="home-secondary-button"
+      class="md-button home-secondary-button"
+      onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
+    >
+      Start a tour
+    </a>
+  </div>
+</section>
+
+{% endblock %}
