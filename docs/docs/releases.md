@@ -1,5 +1,7 @@
 ---
 description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
+tags:
+  - scrolltoversion
 ---
 
 ## 3.8.0
