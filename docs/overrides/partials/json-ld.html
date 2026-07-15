@@ -5,6 +5,8 @@
     - Homepage (index.md): Organization + WebSite + the two products (@graph)
     - OpenVidu Meet product page (meet/index.md): SoftwareApplication
     - OpenVidu Platform product page (docs/index.md): SoftwareApplication
+    - Any page with a `faq:` list in its frontmatter (pricing.md): FAQPage
+      with one Question/Answer per entry
     - Any page with a `publications:` list in its frontmatter (research.md):
       one ScholarlyArticle/Thesis per publication, with authors (ORCID),
       venue, DOI, images and abstract
@@ -127,6 +129,34 @@
   "@graph": [
 {{ organization() }},
 {{ platform_app() }}
+  ]
+}
+</script>
+{%- elif page and page.meta and page.meta.faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+{{ organization() }},
+    {
+      "@type": "FAQPage",
+      "@id": {{ (page.canonical_url ~ "#faq") | tojson }},
+      "mainEntity": [
+        {%- for item in page.meta.faq %}
+        {
+          "@type": "Question",
+          "name": {{ item.question | tojson }},
+          {%- if item.anchor %}
+          "url": {{ (page.canonical_url ~ "#" ~ item.anchor) | tojson }},
+          {%- endif %}
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.answer | tojson }}
+          }
+        }{{ "," if not loop.last }}
+        {%- endfor %}
+      ]
+    }
   ]
 }
 </script>

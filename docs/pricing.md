@@ -1,6 +1,23 @@
 ---
 title: Pricing
 description: Discover OpenVidu's transparent pricing for Community (free) and Pro editions.
+# Structured Q&A metadata for this page's FAQ sections. It feeds the JSON-LD
+# (schema.org FAQPage) emitted by overrides/partials/json-ld.html. Keep in
+# sync with the page content below: 'anchor' must match the heading id, and
+# each answer must summarize the visible content of its section.
+faq:
+  - anchor: how-is-openvidu-pro-priced
+    question: "How is OpenVidu Pro priced?"
+    answer: >-
+      OpenVidu Pro follows a simple pay-per-use model based on the number of cores available to your OpenVidu Pro cluster: $0.0006 per core per minute. You only pay while the cluster is running (usage is registered from cluster start to shutdown, including idle time), and you pay for every available core at any given time — Master Nodes and Media Nodes have the same core-per-minute price. If your cluster grows, that hour costs more; if it shrinks, the next hour is cheaper. OpenVidu COMMUNITY is completely open source and free to use.
+  - anchor: why-is-openvidu-pro-priced-like-this
+    question: "Why is OpenVidu Pro priced like this?"
+    answer: >-
+      A platform specifically designed to be self-hosted should have a pricing model as close to hardware as possible: the total number of cores available to the cluster over time. This model is simple, transparent and easy to predict — you pay only for the time the cluster is running and always according to its size. The cost is directly proportional to the size of your cluster, and elasticity is encouraged: adjust the size of your cluster according to the load at any given time to minimize costs.
+  - anchor: when-and-how-are-you-charged
+    question: "When and how are you charged?"
+    answer: >-
+      You need an OpenVidu account and an OpenVidu License to deploy an OpenVidu Pro cluster (OpenVidu Elastic or OpenVidu High Availability). When purchasing a license you indicate your billing address and a credit card, and you receive a 15-day free trial period during which you are not charged at all. After the trial, a monthly billing cycle charges your expenses to your credit card and you receive an invoice each month. The entire billing process is securely done via Stripe and no credit card data is stored. OpenVidu Pro clusters automatically report their usage, which requires outbound access to accounts.openvidu.io on port 443.
 hide:
   - navigation
   - toc
