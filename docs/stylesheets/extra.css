@@ -283,6 +283,21 @@ p:has(> a.glightbox) {
   margin-left: 0.25em;
 }
 
+.home-under-cta {
+  text-align: center;
+  font-size: 0.75rem;
+  margin-top: 0.8em;
+}
+
+.home-under-cta a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.home-under-cta-sep {
+  margin: 0 0.5em;
+}
+
 .features-list:after {
   clear: both;
   content: "";

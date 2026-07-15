@@ -27,7 +27,7 @@
       draggable="false"
     />
   </div>
-  <h1 class="slogan">{{config.site_description}}</h1>
+  <h1 class="slogan">Ship video conferencing into your app,<br>self-hosted and production-ready in minutes.</h1>
   <p class="home-description">
     OpenVidu allows you to implement <strong>ultra-low latency</strong> video
     and audio applications with ease: one-to-one calls, videoconference rooms,
@@ -40,14 +40,33 @@
   </p>
   <div class="home-buttons">
     <a
-      title="Get started"
+      title="Get started with OpenVidu Meet"
+      id="home-primary-button"
+      class="md-button md-button--primary"
+      href="meet/"
+    >
+      Get started with Meet — it's free
+    </a>
+    <a
+      title="Build with OpenVidu Platform SDKs"
       id="home-secondary-button"
       class="md-button home-secondary-button"
+      href="docs/"
+    >
+      Build with Platform SDKs
+    </a>
+  </div>
+  <p class="home-under-cta">
+    Not sure which fits?
+    <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+    <span class="home-under-cta-sep">·</span>
+    <a
+      title="Start a tour"
       onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
     >
       Start a tour
     </a>
-  </div>
+  </p>
 </section>
 
 {% endblock %}

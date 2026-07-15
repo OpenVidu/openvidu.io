@@ -96,6 +96,10 @@
   .home-description {
     color: #ffffff;
   }
+  .home-under-cta,
+  .home-under-cta a {
+    color: #ffffff;
+  }
   #home-secondary-button {
     color: #ffffff;
   }
@@ -121,4 +125,19 @@
 
 .green-color {
   color: #2b9b46;
+}
+
+/* Hero primary CTA: brand accent in both themes so the main conversion
+   action stands out over the dark hero gradient (the grey .md-button--primary
+   background would blend into it). */
+#home-primary-button {
+  background-color: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+  color: #ffffff;
+}
+#home-primary-button:hover {
+  background-color: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+  color: #ffffff;
+  filter: brightness(1.2);
 }
