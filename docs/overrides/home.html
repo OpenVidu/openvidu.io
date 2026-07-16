@@ -63,6 +63,10 @@
       Start a tour
     </a>
   </p>
+  <!-- Single wrapper: the hero is a space-around flex column, so as separate
+       flex items these two lines would get leftover viewport height
+       distributed between them regardless of their margins. -->
+  <div class="home-trust-block">
   <p class="home-trust-line">
     ⭐ Free &amp; open source<span class="home-sep">·</span>Apache 2.0<span
       id="github-stars-segment"
@@ -88,6 +92,7 @@
       >·</span
     >🛠 Upstream contributors to LiveKit, mediasoup &amp; Kurento
   </p>
+  </div>
   <script>
     // Live counters for the hero trust line (GitHub stars, Docker Hub pulls).
     // Each value is cached per session, and its segment stays hidden if the

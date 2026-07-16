@@ -302,8 +302,8 @@ p:has(> a.glightbox) {
 
 .home-trust-line {
   text-align: center;
-  font-size: 0.9rem;
-  margin-top: 1.2em;
+  font-size: 0.8rem;
+  margin: 0;
 }
 
 .home-trust-line a {
