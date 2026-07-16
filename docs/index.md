@@ -215,6 +215,14 @@ tags:
 </div>
 </div>
 
+<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;">
+  <a title="Get started with OpenVidu Meet" class="md-button md-button--primary home-meet-button" href="meet/">Deploy Meet in minutes</a>
+  <a title="Build with OpenVidu Platform SDKs" class="md-button home-platform-button" href="docs/">Start building with the SDKs</a>
+</div>
+<p class="home-under-cta">
+  Not sure which fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+</p>
+
 <hr style="margin: 7em 0 3.5em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
