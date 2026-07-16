@@ -72,17 +72,38 @@
 {% endblock %}
 
 {% block outdated %}
-<span class="outdated-warning-text">Warning: You are reading docs for an old version<br /></span>
+<span class="outdated-warning-text" id="outdated-warning-text">Warning: You are reading docs for an old version<br /></span>
 <a href="#" id="latest-version-link">
   <strong>GO TO LATEST VERSION</strong>
 </a>
 <script>
   (function () {
+    const currentPath = window.location.pathname;
+    const version = currentPath.split('/')[1];
+
+    // Point the "go to latest" link at the same page under /latest/
     const link = document.getElementById('latest-version-link');
     if (link) {
-      const currentPath = window.location.pathname;
-      const latestPath = currentPath.replace(/^\/[^\/]+\//, '/latest/');
-      link.href = latestPath;
+      link.href = currentPath.replace(/^\/[^\/]+\//, '/latest/');
+    }
+
+    // If the user landed on this older version by following a link from a release notes
+    // page, explain why they were moved here instead of showing the generic warning.
+    let fromReleaseNotes = false;
+    try {
+      if (document.referrer) {
+        const referrer = new URL(document.referrer);
+        fromReleaseNotes =
+          referrer.origin === window.location.origin &&
+          /\/(meet|docs)\/releases\/?$/.test(referrer.pathname);
+      }
+    } catch (e) {}
+
+    const warning = document.getElementById('outdated-warning-text');
+    if (warning && fromReleaseNotes && version && version !== 'latest') {
+      warning.innerHTML =
+        'You are viewing the <strong>' + version + '</strong> version of the docs ' +
+        'because you followed a link from the ' + version + ' release notes.<br />';
     }
   })();
 </script>
