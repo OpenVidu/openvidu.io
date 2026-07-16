@@ -13,7 +13,7 @@ VERSIONED_PAGES=("docs" "meet")
 validateArgs() {
     # If there is no version passed to the script as an argument, exit
     if [ $# -lt 1 ]; then
-        echo "Usage: $0 X.Y.Z"
+        echo "Usage: $0 X.Y"
         exit 1
     fi
 
@@ -22,7 +22,7 @@ validateArgs() {
 
     # Check if second argument is a boolean if provided
     if [ "$UPDATE_LATEST" != true ] && [ "$UPDATE_LATEST" != false ]; then
-        echo "Second argument must be a boolean if provided: $0 X.Y.Z false"
+        echo "Second argument must be a boolean if provided: $0 X.Y false"
         exit 1
     fi  
 }
@@ -145,7 +145,7 @@ changeNonVersionedPagesLinks() {
 changeSearchIndexLinks() {
     local SEARCH_INDEX="$VERSION/search/search_index.json"
 
-    # Change all links to VP to use absolute links including the version ("/X.Y.Z/VP/")
+    # Change all links to VP to use absolute links including the version ("/X.Y/VP/")
     for VP in "${VERSIONED_PAGES[@]}"; do
         sed -i "s|\"location\":\"$VP/|\"location\":\"/$VERSION/$VP/|g" "$SEARCH_INDEX"
     done
@@ -347,18 +347,20 @@ updateWebsite() {
     if [ "$UPDATE_LATEST" = false ]; then
         echo "The latest version will not be updated"
 
-        # Remove NVP from new version
+        # Remove NVP from new version. All removals are tolerant ("|| true") because old
+        # version branches may not generate some of these files at all (e.g. llms.txt and
+        # the RSS feeds require plugins that older mkdocs.yml configurations do not have)
         rm -rf "${NON_VERSIONED_PAGES[@]/#/$VERSION/}"
-        rm "$VERSION/404.html"
+        rm "$VERSION/404.html" || true
         rm "$VERSION/index.md" || true
         rm "$VERSION/robots.txt" || true
         rm "$VERSION/llms.txt" || true
         rm "$VERSION/llms-full.txt" || true
-        rm "$VERSION/feed_rss_created.xml" . || true # RSS feed
-        rm "$VERSION/feed_rss_updated.xml" . || true # RSS feed
-        rm "$VERSION/feed_json_created.json" . || true # RSS feed
-        rm "$VERSION/feed_json_updated.json" . || true # RSS feed
-        rm "$VERSION/rss.xsl" . || true # RSS feed
+        rm "$VERSION/feed_rss_created.xml" || true # RSS feed
+        rm "$VERSION/feed_rss_updated.xml" || true # RSS feed
+        rm "$VERSION/feed_json_created.json" || true # RSS feed
+        rm "$VERSION/feed_json_updated.json" || true # RSS feed
+        rm "$VERSION/rss.xsl" || true # RSS feed
 
         # Move redirection file to the new version
         mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
