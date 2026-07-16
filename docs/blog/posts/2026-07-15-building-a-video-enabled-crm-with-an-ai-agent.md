@@ -24,7 +24,7 @@ hide:
     - version-selector
 ---
 
-# We asked an AI agent to build a CRM with video meetings. Here is what happened
+# Building a video-enabled CRM with an AI agent and OpenVidu Meet
 
 ![OpenVidu Meet embedded in an AI-generated CRM](/assets/images/blog/crm-meet/poster.png "A video meeting, right inside the CRM")
 
@@ -82,6 +82,10 @@ We pointed it at three documentation pages: the [WebComponent reference](https:/
 
 - **Deployment**: a `deploy/` folder whose script merges the CRM container into the official `oci://openvidu/local-meet` Docker Compose artifact, so `./up.sh` brings up OpenVidu and the CRM together as one project.
 
+This is how the three pieces fit together — your app server drives the Meet REST API, and the webcomponent turns each member's personal link into the meeting UI:
+
+![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/crm-meet/architecture.svg "How the CRM, the browser and OpenVidu Meet fit together"){ .svg-img }
+
 ![An issue with its planned and past meetings](/assets/images/blog/crm-meet/issue-meetings.png "Each issue tracks its meetings — with a Join button that opens the meeting in-app")
 
 ### Where reality pushed back
@@ -122,6 +126,6 @@ The complete application — CRM, integration, tests, deployment scripts and pro
 
 If there is one thing this experiment proves, it is that **embedding real videoconferencing into an existing app is no longer a project — it's a feature**. One REST API to create rooms and members, one webcomponent to render the meeting, one compose file to run everything self-hosted. Whether the code is written by you or by your favorite AI agent, the path is the same.
 
-Ready to try it with your own app?
+Ready to add meetings to *your* app this afternoon?
 
 [**Get started with OpenVidu Meet Embedded** :fontawesome-solid-arrow-right:](https://openvidu.io/latest/meet/embedded/intro/){ .md-button .md-button--primary }
