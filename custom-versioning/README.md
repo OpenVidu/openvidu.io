@@ -125,11 +125,12 @@ in two complementary parts:
 
 Two consequences worth keeping in mind:
 
-- **Links are rewritten to `/latest/`.** The copied page keeps relative links to other
-  versioned pages and to hashed asset files, which would break inside an older version
-  folder (the newer pages may not exist there, and asset hashes differ across builds). They
-  are rewritten to absolute `/latest/…` links so they always resolve. See the
-  [link-rewriting reference](#link-rewriting-reference).
+- **Theme links are rewritten to `/latest/`.** The release notes' own links are authored as
+  absolute, version-pinned URLs, so they need no rewriting. What stays relative in the built
+  page is theme-generated chrome — the navigation menu and the hashed CSS/JS/image assets.
+  Those would break inside an older version folder (asset hashes differ across builds, and
+  the latest nav points at pages the older folder never had), so they are rewritten to
+  absolute `/latest/…` links. See the [link-rewriting reference](#link-rewriting-reference).
 - **The canonical tag is left untouched.** Each copy already declares the latest version as
   its `<link rel="canonical">`, so all copies consolidate onto a single URL for SEO — no
   duplicate-content penalty.
@@ -307,11 +308,15 @@ They run inside `updateWebsite`, on the `gh-pages` branch, just before the commi
     - Skips it if either side lacks that releases page (e.g. Meet did not exist before
       `3.4.0`), and never copies a version onto itself.
     - Copies `SRC/<vp>/releases/index.html` over `DST/<vp>/releases/index.html` and rewrites
-      the copy's relative `href`/`src` links to absolute `/latest/…` links: the page sits
-      two levels deep (`<vp>/releases/`), so `../../` (version root) → `/latest/` and `../`
-      (the `<vp>` root) → `/latest/<vp>/`. Only `href`/`src` attributes are touched, so
-      Material's runtime JS (its `base` and search-index paths) keeps operating per version
-      folder. The `<link rel="canonical">` tag is deliberately left as-is.
+      the remaining relative `href`/`src` links to absolute `/latest/…` links. The release
+      notes' own links are authored as absolute version-pinned URLs, so what gets rewritten
+      is only theme chrome (the navigation menu and hashed CSS/JS/image assets). The page
+      sits two levels deep (`<vp>/releases/`), so `../../` (version root) → `/latest/` and
+      `../` (the `<vp>` root) → `/latest/<vp>/`. This keeps the copy loading the latest
+      assets (hashes differ per build) and its nav from 404-ing against pages an older folder
+      never had. Only `href`/`src` attributes are touched, so Material's runtime JS (its
+      `base` and search-index paths) keeps working per version folder; `<link rel="canonical">`
+      is left as-is.
     - Also copies the LLM Markdown companion `SRC/<vp>/releases/index.md` **when it exists**.
       The [`mkdocs-llmstxt`](https://github.com/pawamoy/mkdocs-llmstxt) plugin generates this
       `.md` for pages listed in its `sections` in `mkdocs.yml`; **both** releases pages
@@ -404,9 +409,10 @@ Summary of the final link conventions produced by the scripts:
 | Search index → non-versioned page   | `pricing/`         | `/pricing/`                       |
 | Root sitemap → versioned page       | `/3.0.0/docs/`     | `/latest/docs/`                   |
 | Root sitemap → non-versioned page   | `/3.0.0/pricing/`  | `/pricing/`                       |
-| Copied releases page → version root | `../../docs/`      | `/latest/docs/`                   |
-| Copied releases page → `<vp>` root  | `../features/`     | `/latest/meet/features/`          |
+| Copied releases page nav → other docs | `../../docs/`    | `/latest/docs/`                   |
+| Copied releases page nav → `<vp>` page | `../features/`  | `/latest/meet/features/`          |
 | Copied releases page → assets       | `../../assets/`    | `/latest/assets/`                 |
+| Copied releases page content links  | _(authored absolute)_ | _(left as-is, not rewritten)_  |
 | Canonical on copied releases page   | `…/3.7.0/…`        | `…/3.7.0/…` (unchanged)           |
 
 ---

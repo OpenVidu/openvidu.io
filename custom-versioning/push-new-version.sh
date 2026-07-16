@@ -234,11 +234,13 @@ copyReleasesFromTo() {
     # DESTINATION version folder, so the destination shows the full, most-recent release
     # notes regardless of the documentation version being browsed.
     #
-    # The source page keeps only relative links to other versioned pages and to assets.
-    # Those are rewritten in the copy to absolute "/latest/" links, because an older
-    # destination folder may not contain the newer pages nor the same hashed asset files.
-    # The canonical tag is intentionally left untouched: the copy already declares the
-    # source (latest) version as canonical, which consolidates every copy onto a single URL.
+    # The release notes' own links are authored as absolute, version-pinned URLs, so the
+    # only relative links left in the built page are theme chrome (navigation menu and
+    # hashed assets). Those are rewritten in the copy to absolute "/latest/" links, because
+    # an older destination folder does not contain the same hashed asset files nor every
+    # page the latest nav points at. The canonical tag is intentionally left untouched: the
+    # copy already declares the source (latest) version as canonical, which consolidates
+    # every copy onto a single URL.
     local SRC="$1" # source version folder (holds the most recent release notes)
     local DST="$2" # destination version folder
 
@@ -256,11 +258,16 @@ copyReleasesFromTo() {
         [ -f "$SRC_DIR/index.html" ] || continue
         [ -d "$DST_DIR" ] || continue
 
-        # HTML version (always generated). The page lives two levels deep (<vp>/releases/),
-        # so in its links "../../" points at the version root and "../" at the <vp> root.
-        # Rewrite them to absolute "/latest/" links (longer pattern first). Only href/src
-        # attributes are touched, so Material's runtime JS config (base, search path) keeps
-        # working per version folder. The <link rel="canonical"> tag is left as-is.
+        # HTML version (always generated). The release notes' own links are authored as
+        # absolute, version-pinned URLs, so the only relative links left in the built page
+        # are theme-generated: the navigation menu and the hashed CSS/JS/image assets. They
+        # still must be rewritten to "/latest/" (the page sits two levels deep, so "../../"
+        # is the version root and "../" the <vp> root; longer pattern first), because the
+        # assets carry per-build content hashes and the nav reflects the latest structure,
+        # so left relative they would break styling or 404 against pages an older folder
+        # never had. Only href/src attributes are touched, so Material's runtime JS config
+        # (base, search path) keeps working per version folder; <link rel="canonical"> is
+        # left as-is.
         cp "$SRC_DIR/index.html" "$DST_DIR/index.html"
         sed -i -E "s#(href|src)=\"\.\./\.\./#\1=\"/latest/#g" "$DST_DIR/index.html"
         sed -i -E "s#(href|src)=\"\.\./#\1=\"/latest/$VP/#g" "$DST_DIR/index.html"
