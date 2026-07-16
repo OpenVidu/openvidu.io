@@ -311,8 +311,14 @@ p:has(> a.glightbox) {
   text-decoration: underline;
 }
 
+/* Claim separator: slightly smaller gap than the comparison/tour line's
+   .home-under-cta-sep (whose surrounding whitespace adds to its margins). */
+.home-trust-line .home-sep {
+  margin: 0 0.45em;
+}
+
 .home-credentials-line {
-  margin-top: 0.4em;
+  margin-top: 0.15em;
 }
 
 .features-list:after {
