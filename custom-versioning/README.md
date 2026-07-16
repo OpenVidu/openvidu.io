@@ -10,6 +10,27 @@ The site is built with **MkDocs Material** and versioned with
 non‑versioned pages** (pricing, blog, support…) served once at the site root while the
 **versioned documentation** lives under version‑aliased paths.
 
+### Minor-grouped versioning (`X.Y`)
+
+Documentation versions are grouped by **minor** release and named `X.Y` (e.g. `3.8`):
+one git branch, one `gh-pages` folder and one version-selector entry per minor. The
+content of each `X.Y` version always reflects the **newest patch** of that minor —
+patch releases do **not** create new documentation versions:
+
+| Event                                     | Action                                                                                                    |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| New minor release (e.g. `3.9.0`)          | `push-new-version.sh 3.9` — creates branch `3.9` from `main`, deploys, moves `latest`                     |
+| Patch for the current minor (e.g. `3.8.1`) | Merge docs to `main` → `overwrite-latest-version.sh 3.8`. Add the patch's section to the releases pages   |
+| Patch for an old minor (e.g. `3.7.2`)     | Commit to branch `3.7` → `overwrite-past-version.sh 3.7`                                                  |
+
+Two supporting behaviors:
+
+- **Tolerant `mike delete`**: the overwrite scripts do not fail when the version does
+  not exist on `gh-pages` yet (first publish under a new name).
+- **Legacy URL redirects**: exact-patch URLs from the old scheme (`/3.4.1/…`,
+  `/3.0.0-beta2/…`) are redirected to their minor folder (`/3.4/…`, `/3.0/…`) by the
+  404 page (`docs/overrides/404.html`) — GitHub Pages has no server-side redirects.
+
 ---
 
 ## Table of contents
@@ -45,12 +66,12 @@ extra:
         alias: true
 ```
 
-So after publishing version `3.0.0` as `latest`, `gh-pages` contains something like:
+So after publishing version `3.0` as `latest`, `gh-pages` contains something like:
 
 ```
 gh-pages/
-├── 3.0.0/          # the built site for version 3.0.0
-├── latest/         # alias → 3.0.0
+├── 3.0/            # the built site for version 3.0
+├── latest/         # alias → 3.0
 ├── versions.json   # mike's version index (drives the version selector)
 └── ...
 ```
@@ -62,7 +83,7 @@ The scripts classify every page into one of two groups, declared as arrays at th
 
 | Group                 | Value                                                                                                                                  | Meaning                                                                                                           |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `VERSIONED_PAGES`     | `docs`, `meet`                                                                                                                         | Documentation tied to a specific release. Served under `/latest/docs/`, `/latest/meet/`, and `/X.Y.Z/docs/`, etc. |
+| `VERSIONED_PAGES`     | `docs`, `meet`                                                                                                                         | Documentation tied to a specific release. Served under `/latest/docs/`, `/latest/meet/`, and `/X.Y/docs/`, etc. |
 | `NON_VERSIONED_PAGES` | `account`, `pricing`, `support`, `openvidu-meet-vs-openvidu-platform`, `conditions`, `blog`, `about-us`, `research`, `acknowledgments` | Global pages shared across all versions. Served **once** at the site root (e.g. `/pricing/`).                     |
 | `ASSETS`              | `assets`, `javascripts`, `stylesheets`, `search`                                                                                       | Static asset folders that also live at the root.                                                                  |
 
@@ -76,7 +97,7 @@ non-versioned: `index.html`, `index.md`, `404.html`, `robots.txt`, `llms.txt`,
 ## The core problem these scripts solve
 
 `mike` builds the **entire** MkDocs site — versioned _and_ non-versioned pages — into
-each version folder (`3.0.0/`). Two things follow from that:
+each version folder (`3.0/`). Two things follow from that:
 
 1. **Duplication.** The pricing page, blog, etc. would be published once per version.
    We instead want a single canonical copy served at the root (`/pricing/`), always
@@ -92,7 +113,7 @@ The scripts therefore **post-process mike's output** on the `gh-pages` branch to
   root.
 - Fix auxiliary files: the search index, `sitemap.xml`, `llms.txt`, RSS feeds and the
   `404.html`.
-- Drop a small redirect page at each version root so `/X.Y.Z/` and `/latest/` land on
+- Drop a small redirect page at each version root so `/X.Y/` and `/latest/` land on
   the docs.
 
 ---
@@ -109,7 +130,7 @@ We want every version to serve the **full, most-recent** release notes. This is 
 in two complementary parts:
 
 1. **Copy at publish time (this folder).** On every publish, the latest releases pages are
-   copied into **every other version folder**, so each `/X.Y.Z/…/releases/` serves the same
+   copied into **every other version folder**, so each `/X.Y/…/releases/` serves the same
    complete changelog as `/latest/…/releases/`. See
    [`copyReleasesToAllOtherVersions` / `copyReleasesFromTo`](#the-releases-page-copy-helpers).
 
@@ -136,7 +157,7 @@ Two consequences worth keeping in mind:
   duplicate-content penalty.
 - **The LLM Markdown companion travels too.** Pages listed in the `mkdocs-llmstxt` plugin's
   `sections` also get an `index.md` next to their `index.html` (both releases pages are
-  listed). The copy step propagates it as well, so `/X.Y.Z/<vp>/releases/index.md` stays in
+  listed). The copy step propagates it as well, so `/X.Y/<vp>/releases/index.md` stays in
   sync. Unlike the HTML, its links are already absolute, so it is copied verbatim.
 
 ---
@@ -155,10 +176,10 @@ Two consequences worth keeping in mind:
 ## `push-new-version.sh` — the core script
 
 ```bash
-./push-new-version.sh X.Y.Z [update_latest]
+./push-new-version.sh X.Y [update_latest]
 ```
 
-- **`X.Y.Z`** (required): the version to publish.
+- **`X.Y`** (required): the version to publish.
 - **`update_latest`** (optional, default `true`):
     - `true` → publish the version, point the `latest` alias at it, **and** refresh all
       the root non-versioned pages from this version.
@@ -199,7 +220,7 @@ Prepares two branches:
 - **`gh-pages`**: if it exists on the remote, it is checked out and pulled so the local
   copy is up to date, then control returns to `main`. If it does not exist, this is
   treated as the very first deployment.
-- **The version branch** (named exactly after the version, e.g. `3.0.0`):
+- **The version branch** (named exactly after the version, e.g. `3.0`):
     - If it exists remotely, it is checked out and pulled. When `UPDATE_LATEST=true`,
       control returns to `main`.
     - If it does **not** exist:
@@ -236,7 +257,7 @@ The post-processing stage, run on the `gh-pages` branch:
 3. Run `changeVersionedPagesLinks` and `changeSearchIndexLinks` (always).
 4. Branch on `UPDATE_LATEST`:
     - **`false`** — remove the non-versioned pages, root files and feeds from the version
-      folder (they must not appear inside `/X.Y.Z/`), install the redirect as
+      folder (they must not appear inside `/X.Y/`), install the redirect as
       `"$VERSION"/index.html`, prune the version sitemap (`updateVersionSitemap`), copy the
       **current latest** releases pages into this version so it does not revert to stale
       notes (`copyReleasesFromTo` via the `latest` symlink), and commit with _"Non-versioned
@@ -273,7 +294,7 @@ sed -i …` to rewrite links in place.
     - The empty root location → `/`.
 
 > Note the asymmetry: the search index keeps the explicit version for versioned pages
-> (so searching inside `3.0.0` links to `3.0.0` docs), while page links use the
+> (so searching inside `3.0` links to `3.0` docs), while page links use the
 > `latest` alias.
 
 ### The sitemap helpers
@@ -338,7 +359,7 @@ to its stale, version-local notes.
 ## `overwrite-latest-version.sh`
 
 ```bash
-./overwrite-latest-version.sh X.Y.Z
+./overwrite-latest-version.sh X.Y
 ```
 
 Completely rebuilds the **current latest** version, including the root pages. Steps:
@@ -348,7 +369,8 @@ Completely rebuilds the **current latest** version, including the root pages. St
 3. `git fetch origin gh-pages` and `git fetch origin "$VERSION"` so `mike` and the
    branch operations work.
 4. `mike delete --push "$VERSION"` — remove the existing version from `gh-pages` so it
-   can be rebuilt cleanly.
+   can be rebuilt cleanly. **Tolerant of a missing version**: on the first publish of a
+   version under a new name there is nothing to delete, and the script continues.
 5. `source ./push-new-version.sh "$VERSION"` — re-run the core script with the default
    `UPDATE_LATEST=true`, republishing the version and refreshing the root pages.
 6. Rebase the version branch onto `main` and force-push it, so the version branch stays
@@ -362,7 +384,7 @@ current release in place (same version number).
 ## `overwrite-past-version.sh`
 
 ```bash
-./overwrite-past-version.sh X.Y.Z
+./overwrite-past-version.sh X.Y
 ```
 
 Rebuilds a **specific older** version **without** touching the root pages. Steps 1–4 are
@@ -387,10 +409,10 @@ const version = window.location.pathname.split('/')[1];
 window.location.href = `/${version}/docs/`;
 ```
 
-It reads the first path segment (the version or alias, e.g. `3.0.0` or `latest`) and
+It reads the first path segment (the version or alias, e.g. `3.0` or `latest`) and
 redirects to that version's docs landing page. `push-new-version.sh` installs it as each
-version's `index.html`, so visiting `/latest/` or `/3.0.0/` sends the user straight to
-`/latest/docs/` or `/3.0.0/docs/`.
+version's `index.html`, so visiting `/latest/` or `/3.0/` sends the user straight to
+`/latest/docs/` or `/3.0/docs/`.
 
 ---
 
@@ -404,11 +426,11 @@ Summary of the final link conventions produced by the scripts:
 | Versioned page → home               | `../..`            | `/`                               |
 | Non-versioned page → versioned page | `../docs/`         | `/latest/docs/`                   |
 | `404.html` → versioned page         | `/docs/`           | `/latest/docs/`                   |
-| Canonical tag on non-versioned page | `…/3.0.0/…`        | `…/…` (version removed)           |
-| Search index → versioned page       | `docs/`            | `/3.0.0/docs/` (explicit version) |
+| Canonical tag on non-versioned page | `…/3.0/…`        | `…/…` (version removed)           |
+| Search index → versioned page       | `docs/`            | `/3.0/docs/` (explicit version) |
 | Search index → non-versioned page   | `pricing/`         | `/pricing/`                       |
-| Root sitemap → versioned page       | `/3.0.0/docs/`     | `/latest/docs/`                   |
-| Root sitemap → non-versioned page   | `/3.0.0/pricing/`  | `/pricing/`                       |
+| Root sitemap → versioned page       | `/3.0/docs/`     | `/latest/docs/`                   |
+| Root sitemap → non-versioned page   | `/3.0/pricing/`  | `/pricing/`                       |
 | Copied releases page nav → other docs | `../../docs/`    | `/latest/docs/`                   |
 | Copied releases page nav → `<vp>` page | `../features/`  | `/latest/meet/features/`          |
 | Copied releases page → assets       | `../../assets/`    | `/latest/assets/`                 |
@@ -425,7 +447,7 @@ manual `workflow_dispatch` with two inputs:
 
 - **`script`**: one of `push-new-version`, `overwrite-latest-version`,
   `overwrite-past-version`.
-- **`version`**: the version string, e.g. `3.0.0`.
+- **`version`**: the version string, e.g. `3.0`.
 
 The job checks out the repo with full history (`fetch-depth: 0`), installs Python plus
 `mike` and the MkDocs plugins (`mkdocs-material[imaging]`, `mkdocs-glightbox`,
@@ -443,11 +465,11 @@ workflow).
 
 ### Which script do I run?
 
-| Goal                                             | Script                              | Root pages updated? | Version branch                            |
-| ------------------------------------------------ | ----------------------------------- | ------------------- | ----------------------------------------- |
-| Publish a brand-new release and make it `latest` | `push-new-version.sh X.Y.Z`         | Yes                 | Created from `main`                       |
-| Replace the current release in place             | `overwrite-latest-version.sh X.Y.Z` | Yes                 | Rebased onto `main`                       |
-| Fix an older release                             | `overwrite-past-version.sh X.Y.Z`   | No                  | Must already exist; edits committed there |
+| Goal                                                          | Script                            | Root pages updated? | Version branch                            |
+| ------------------------------------------------------------- | --------------------------------- | ------------------- | ----------------------------------------- |
+| Publish a brand-new **minor** release and make it `latest`    | `push-new-version.sh X.Y`         | Yes                 | Created from `main`                       |
+| Update the latest version (content fix or **patch release**)  | `overwrite-latest-version.sh X.Y` | Yes                 | Rebased onto `main`                       |
+| Update an old minor (content fix or **patch release**)        | `overwrite-past-version.sh X.Y`   | No                  | Must already exist; edits committed there |
 
 ---
 
@@ -474,3 +496,7 @@ workflow).
   `index.html`, but each version's `search/search_index.json` still holds that version's
   original releases text. The page a visitor sees is current; in-version search results for
   the releases page may lag until that version is rebuilt.
+- **Old branches do not generate `llms.txt` or the RSS feeds.** Their `mkdocs.yml`
+  predates those plugins. The `UPDATE_LATEST=false` cleanup is therefore tolerant
+  (`|| true`) of every root file it removes from the version folder — do not turn those
+  into hard failures.

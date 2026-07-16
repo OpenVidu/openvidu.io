@@ -56,15 +56,17 @@ This repo is the source of https://openvidu.io/, built with **MkDocs Material** 
 
 The two products' docs are **versioned**; everything else is not. URL scheme is version-first: `https://openvidu.io/{version}/meet/...` and `/{version}/docs/...`, with `latest` aliasing the newest release. Non-versioned pages live at the root (`/pricing/`, `/blog/`, ...).
 
+**Versions are grouped by minor release and named `X.Y`** (e.g. `3.8`): one git branch, one `gh-pages` folder, one version-selector entry per minor. Each `X.Y` version's content reflects the **newest patch** of that minor — patch releases do not create new documentation versions (they update the existing `X.Y` in place, adding their section to the releases pages). Legacy exact-patch URLs (`/3.4.1/...`) redirect to the minor folder (`/3.4/...`) via the 404 page.
+
 The source tree has no version in paths: `mike` builds the site into a version folder on `gh-pages`, then `custom-versioning/push-new-version.sh` rewrites links/canonicals/`llms.txt`/`sitemap.xml` and moves the non-versioned pages to root (the README's "Understanding the versioning script" section details all 8 steps).
 
 **Publishing is done via the [Publish Web GitHub Action](https://github.com/OpenVidu/openvidu.io/actions/workflows/publish-web.yaml)** (or locally with `mike` + the scripts — see README):
 
-- `push-new-version.sh X.Y.Z` — new release: deploys the version, points `latest` at it, refreshes root non-versioned pages, and creates an `X.Y.Z` git branch for future fixes to that version.
-- `overwrite-latest-version.sh X.Y.Z` — re-publish current `main` over the latest version (also rebases the version branch). This is how content fixes go live.
-- `overwrite-past-version.sh X.Y.Z` — fix an old version: commit changes to the `X.Y.Z` branch first; root pages are untouched.
+- `push-new-version.sh X.Y` — new **minor** release: deploys the version, points `latest` at it, refreshes root non-versioned pages, and creates an `X.Y` git branch for future fixes to that version.
+- `overwrite-latest-version.sh X.Y` — re-publish current `main` over the latest version (also rebases the version branch). This is how content fixes **and patch releases of the current minor** go live.
+- `overwrite-past-version.sh X.Y` — fix an old minor (content fix or patch release): commit changes to the `X.Y` branch first; root pages are untouched.
 
-Consequences when editing: changes to `docs/meet/` and `docs/docs/` are **not live until one of these runs**; past versions are edited on their `X.Y.Z` branches, not `main`.
+Consequences when editing: changes to `docs/meet/` and `docs/docs/` are **not live until one of these runs**; past versions are edited on their `X.Y` branches, not `main`.
 
 ## Sync with livekit-tutorials.openvidu.io
 

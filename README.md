@@ -209,6 +209,15 @@ For images/videos using the custom GLightbox syntax, apart from having tag `setu
 
 MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for versioning. mike uses GitHub pages to host the documentation, and builds each version on branch `gh-pages`.
 
+> [!IMPORTANT]
+> Documentation versions are grouped by **minor** release and named `X.Y` (e.g. `3.8`): one git branch, one `gh-pages` folder and one version-selector entry per minor version. The content of each `X.Y` version always reflects the **newest patch** of that minor. Patch releases do **not** create new documentation versions:
+>
+> - **New minor release** (e.g. `3.9.0`) → publish a new version `3.9` (`push-new-version.sh 3.9`).
+> - **Patch for the current minor** (e.g. `3.8.1`) → merge the docs to `main` and overwrite the latest version (`overwrite-latest-version.sh 3.8`). Add the patch's section to the releases pages; the version selector does not change.
+> - **Patch for an old minor** (e.g. `3.7.2`) → commit to branch `3.7` and overwrite that past version (`overwrite-past-version.sh 3.7`).
+>
+> Legacy exact-patch URLs (`/3.4.1/...`) are redirected to their minor folder (`/3.4/...`) by the 404 page.
+
 The repository must be using MkDocs Material and must be properly setup like explained [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-versioning/). This proper setup includes the following points:
 
 - Adding `extra.version.provider: mike` to mkdocs.yml.
@@ -225,17 +234,17 @@ Run action [Publish Web](https://github.com/OpenVidu/openvidu.io/actions/workflo
 ### Publishing a new version
 
 - **Select the script to execute**: `push-new-version.sh`
-- **Version to publish**: `3.0.0`
+- **Version to publish**: `3.0`
 
 ### Overwriting the latest version
 
 - **Select the script to execute**: `overwrite-latest-version.sh`
-- **Version to publish**: `3.0.0`
+- **Version to publish**: `3.0`
 
 ### Overwriting a past version
 
 - **Select the script to execute**: `overwrite-past-version.sh`
-- **Version to publish**: `3.0.0`
+- **Version to publish**: `3.0`
 
 ## Versioning locally
 
@@ -257,11 +266,11 @@ Run action [Publish Web](https://github.com/OpenVidu/openvidu.io/actions/workflo
 
 This script publishes a new version, updates alias "latest" to point to this new version, and updates the non-versioned files at root.
 
-It also creates a new branch from main named after the version (e.g. `3.0.0`) and pushes it to the repository. This allows modifying past versions if required later.
+It also creates a new branch from main named after the minor version (e.g. `3.0`) and pushes it to the repository. This allows modifying past versions if required later.
 
 ```bash
 cd custom-versioning
-./push-new-version.sh 3.0.0
+./push-new-version.sh 3.0
 ```
 
 ### Overwriting the latest version
@@ -272,7 +281,7 @@ It also updates the version branch with any new commits available in main branch
 
 ```bash
 cd custom-versioning
-./overwrite-latest-version.sh 3.0.0
+./overwrite-latest-version.sh 3.0
 ```
 
 ### Overwriting a past version
@@ -283,7 +292,7 @@ In this case, all the changes to be published must be already commited into the 
 
 ```bash
 cd custom-versioning
-./overwrite-past-version.sh 3.0.0
+./overwrite-past-version.sh 3.0
 ```
 
 ### Understanding the versioning script
@@ -300,7 +309,7 @@ Script `push-new-version.sh` performs the following steps:
 8. Add a redirection HTML file to the root of the new version to redirect to the docs index page (`docs/`).
 
 > [!NOTE]
-> The overwriting of the non-versioned files located at root of `gh-pages` branch (points 3, 4, 5, 6 and 7) is done by default. To avoid overriding these files, call the script adding `false` as second argument: `./push-new-version.sh 3.0.0 false`. Script `overwrite-past-version.sh` does this to only overwrite the files of that specific past version without affecting the root non-versioned files.
+> The overwriting of the non-versioned files located at root of `gh-pages` branch (points 3, 4, 5, 6 and 7) is done by default. To avoid overriding these files, call the script adding `false` as second argument: `./push-new-version.sh 3.0 false`. Script `overwrite-past-version.sh` does this to only overwrite the files of that specific past version without affecting the root non-versioned files.
 
 ## Testing versioning locally
 
@@ -313,7 +322,7 @@ mike serve
 To build a new version without pushing to GitHub:
 
 ```bash
-mike deploy 3.0.0
+mike deploy 3.0
 ```
 
 ## Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_
