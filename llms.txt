@@ -19,6 +19,7 @@ Self-hosted videoconference solution and SDK
 - [We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason](https://openvidu.io/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/index.md): OpenVidu Blog
 - [OpenVidu 3.8.0 is now available](https://openvidu.io/blog/2026/07/09/release-380/index.md): OpenVidu Blog
 - [Managing Permissions in Video Conferencing Apps: 3 Access Models](https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/index.md): OpenVidu Blog
+- [Support](https://openvidu.io/support/index.md): Support options for OpenVidu Meet and OpenVidu Platform
 - [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu Meet and OpenVidu Platform
 - [About Us](https://openvidu.io/about-us/index.md): The people behind OpenVidu
 - [Research](https://openvidu.io/research/index.md): Research publications on real-time communications in peer-reviewed journals
@@ -27,6 +28,7 @@ Self-hosted videoconference solution and SDK
 ## OpenVidu Meet
 
 - [OpenVidu Meet](https://openvidu.io/latest/meet/index.md): OpenVidu Meet - Ready to use videoconferencing solution
+- [Releases](https://openvidu.io/latest/meet/releases/index.md): OpenVidu Meet - Release notes
 - [Getting started with OpenVidu Meet](https://openvidu.io/latest/meet/getting-started/index.md): OpenVidu Meet - Getting started
 - [Overview](https://openvidu.io/latest/meet/features/overview/index.md): OpenVidu Meet Features - A global picture of all OpenVidu Meet features
 - [Overview](https://openvidu.io/latest/meet/features/rooms/overview/index.md): OpenVidu Meet Features - What a room is and its key principles
@@ -52,6 +54,8 @@ Self-hosted videoconference solution and SDK
 - [Advanced deployments](https://openvidu.io/latest/meet/deployment/advanced/index.md): How to deploy OpenVidu Meet on multiple servers with scalability and fault-tolerance for production use
 - [Introduction](https://openvidu.io/latest/meet/embedded/intro/index.md): How to embed OpenVidu Meet in my own application with a single line of HTML
 - [Step by step guide](https://openvidu.io/latest/meet/embedded/step-by-step-guide/index.md): A step by step guide on how to embed OpenVidu Meet on your own applications
+- [Deploy your application](https://openvidu.io/latest/meet/embedded/deploy-your-app/index.md): How to deploy your own application that embeds OpenVidu Meet
+- [OpenVidu Meet Tutorials](https://openvidu.io/latest/meet/embedded/tutorials/index.md): A list of tutorials for embedding OpenVidu Meet in your own applications
 - [Direct Link](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet on a Node.js applications using a direct link. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
 - [WebComponent](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/webcomponent/index.md): An OpenVidu Meet tutorial for embedding OpenVidu Meet using the OpenVidu Meet WebComponent. It uses Node.js and Express for the backend and plain HTML/CSS/JavaScript for the frontend.
 - [WebComponent Commands & Events](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/webcomponent-advanced/index.md): An OpenVidu Meet WebComponent tutorial demonstrating how to use the OpenVidu Meet Component programmatically and respond to meeting events. It includes usage of features of OpenVidu Meet such as WebComponent commands, event handling, role-based UI, meeting header, and enhanced room management.
@@ -69,6 +73,7 @@ Self-hosted videoconference solution and SDK
 ## OpenVidu Platform
 
 - [OpenVidu Platform](https://openvidu.io/latest/docs/index.md): OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
+- [Releases](https://openvidu.io/latest/docs/releases/index.md): OpenVidu Platform - Release notes
 - [Getting started](https://openvidu.io/latest/docs/getting-started/index.md): OpenVidu Platform - Getting started
 - [Comparing OpenVidu](https://openvidu.io/latest/docs/comparing-openvidu/index.md): OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
 - [Developing your OpenVidu app](https://openvidu.io/latest/docs/developing-your-openvidu-app/index.md): OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
