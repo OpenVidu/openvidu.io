@@ -18,19 +18,22 @@
       
       
       
-        <link rel="canonical" href="https://openvidu.io/3.4/meet/releases/">
+        <link rel="canonical" href="https://openvidu.io/3.8/meet/releases/">
       
       
-        <link rel="prev" href="../embedded/reference/webhooks/">
+        <link rel="prev" href="/latest/meet/embedded/deploy-your-app/">
       
       
-        <link rel="next" href="../../docs/">
+        <link rel="next" href="/latest/docs/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/logo.png">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="/latest/feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="/latest/feed_rss_updated.xml">
+      
+      <link rel="icon" href="/latest/assets/images/logo.png">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
     
 
@@ -57,10 +60,10 @@
 </style>
 
 
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="/latest/assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="/latest/assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -68,12 +71,23 @@
     
 
 
+<style>
+  /* Release notes pages show every version's notes regardless of the version being
+     browsed, so the "old version" banner is meaningless there — hide it. This style is
+     baked into the built releases page and travels with it when copied to other versions. */
+  [data-md-component="outdated"] {
+    display: none !important;
+  }
+</style>
 
 
 
 
 
-<link rel="stylesheet" href="/stylesheets/meet.css">
+
+
+
+<link rel="stylesheet" href="/latest/stylesheets/meet.css">
 
 
 
@@ -130,28 +144,28 @@
         
         
         
-        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.9a0008fb.css">
+        <link rel="stylesheet" href="/latest/assets/external/fonts.googleapis.com/css.9a0008fb.css">
         <style>:root{--md-text-font:"Tomorrow";--md-code-font:"Roboto Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/colors.css">
+      <link rel="stylesheet" href="/latest/stylesheets/colors.css">
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="/latest/stylesheets/extra.css">
     
-      <link rel="stylesheet" href="../../stylesheets/unsemantic-grid.css">
+      <link rel="stylesheet" href="/latest/stylesheets/unsemantic-grid.css">
     
-      <link rel="stylesheet" href="../../stylesheets/livekit-tutorials.css">
+      <link rel="stylesheet" href="/latest/stylesheets/livekit-tutorials.css">
     
-      <link rel="stylesheet" href="../../stylesheets/amplify.css">
+      <link rel="stylesheet" href="/latest/stylesheets/amplify.css">
     
-      <link rel="stylesheet" href="../../stylesheets/home.css">
+      <link rel="stylesheet" href="/latest/stylesheets/home.css">
     
-      <link rel="stylesheet" href="../../stylesheets/openvidu-call.css">
+      <link rel="stylesheet" href="/latest/stylesheets/openvidu-call.css">
     
-      <link rel="stylesheet" href="../../javascripts/openvidu-register/openvidu-register.css">
+      <link rel="stylesheet" href="/latest/javascripts/openvidu-register/openvidu-register.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -169,9 +183,22 @@
     
 <!-- Add head tags that need to be applied before here -->
 
+
+<meta property="og:site_name" content="OpenVidu">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Releases">
+<meta property="og:description" content="From ready-to-use video conferencing apps to custom-made WebRTC solutions. Self-hosted. Performant. Scalable. Fault tolerant. Observable.">
+<meta property="og:url" content="https://openvidu.io/3.8/meet/releases/">
+<meta property="og:image" content="https://openvidu.io/assets/images/openvidu_white_bg_transp.png">
+<meta property="og:image:width" content="1497">
+<meta property="og:image:height" content="807">
+<meta property="og:image:alt" content="OpenVidu — self-hosted video conferencing and custom WebRTC solutions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@openvidu">
+
 <!-- Add head tags that need to be applied afterwards here -->
 
-  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+  <link href="/latest/assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="/latest/assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -201,33 +228,12 @@
     <div data-md-component="skip">
       
         
-        <a href="#340" class="md-skip">
+        <a href="#380" class="md-skip">
           Skip to content
         </a>
       
     </div>
     <div data-md-component="announce">
-      
-        <aside class="md-banner">
-          <div class="md-banner__inner md-grid md-typeset">
-            
-              <button class="md-banner__button md-icon" aria-label="Don't show this again">
-                
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-              </button>
-            
-            
-<div id="announce">
-  We would love to hear your feedback about OpenVidu. Please take a moment to fill out
-  <a href="https://forms.gle/a2HuPSWPCnwsCMf98" target="_blank" rel="noopener">this survey</a>
-  and help us improve it. Thank you!
-</div>
-
-          </div>
-          
-            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
-          
-        </aside>
       
     </div>
     
@@ -307,14 +313,14 @@
 
 
 
-<link rel="preload" href="../../assets/external/fonts.googleapis.com/css.55a6ed21.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/latest/assets/external/fonts.googleapis.com/css.55a6ed21.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-    <link href="../../assets/external/fonts.googleapis.com/css.55a6ed21.css" rel="stylesheet" type="text/css">
+    <link href="/latest/assets/external/fonts.googleapis.com/css.55a6ed21.css" rel="stylesheet" type="text/css">
 </noscript>
 
-<link rel="preload" href="../../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/latest/assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-    <link href="../../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" rel="stylesheet" type="text/css">
+    <link href="/latest/assets/external/fonts.googleapis.com/css2.8e8c6e8f.css" rel="stylesheet" type="text/css">
 </noscript>
 
 <!-- Header -->
@@ -322,10 +328,10 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
 
     <!-- Link to home -->
-    <a href="../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
+    <a href="/" title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        <img src="../../assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo">
+        <img src="/latest/assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo">
       
     </a>
 
@@ -566,7 +572,7 @@
   <!-- Navigation item with nested items -->
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="/" class="md-tabs__link">
         
   
 
@@ -576,7 +582,13 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    Home
+  
+  <!-- ... WITH ...
   Home
+   ... END TODO -->
 
       </a>
     </li>
@@ -601,7 +613,7 @@
     <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="/latest/meet/" class="md-tabs__link">
           
   
 
@@ -611,7 +623,13 @@
   
 
   <!-- Navigation link title -->
-  OpenVidu Meet [BETA]
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    OpenVidu Meet
+  
+  <!-- ... WITH ...
+  OpenVidu Meet
+   ... END TODO -->
 
         </a>
       </li>
@@ -637,7 +655,7 @@
     <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
-        <a href="../../docs/" class="md-tabs__link">
+        <a href="/latest/docs/" class="md-tabs__link">
           
   
 
@@ -647,7 +665,13 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    OpenVidu Platform
+  
+  <!-- ... WITH ...
   OpenVidu Platform
+   ... END TODO -->
 
         </a>
       </li>
@@ -673,7 +697,7 @@
     <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
-        <a href="../../blog/" class="md-tabs__link">
+        <a href="/blog/" class="md-tabs__link">
           
   
 
@@ -683,7 +707,14 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    <span class="md-tabs__link-text">Blog</span>
+    <span class="md-tabs__new-badge">NEW</span>
+  
+  <!-- ... WITH ...
   Blog
+   ... END TODO -->
 
         </a>
       </li>
@@ -709,7 +740,7 @@
     <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
-        <a href="../../support/" class="md-tabs__link">
+        <a href="/support/" class="md-tabs__link">
           
   
 
@@ -719,7 +750,13 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    Support
+  
+  <!-- ... WITH ...
   Support
+   ... END TODO -->
 
         </a>
       </li>
@@ -745,7 +782,7 @@
     <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-tabs__item">
-        <a href="../../pricing/" class="md-tabs__link">
+        <a href="/pricing/" class="md-tabs__link">
           
   
 
@@ -755,7 +792,13 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    Pricing
+  
+  <!-- ... WITH ...
   Pricing
+   ... END TODO -->
 
         </a>
       </li>
@@ -786,7 +829,7 @@
   
     
   
-  <a href="../../about-us/" class="md-tabs__dropdown-link">
+  <a href="/about-us/" class="md-tabs__dropdown-link">
     
   
 
@@ -796,7 +839,13 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    About Us
+  
+  <!-- ... WITH ...
   About Us
+   ... END TODO -->
 
   </a>
 
@@ -806,7 +855,7 @@
   
     
   
-  <a href="../../research/" class="md-tabs__dropdown-link">
+  <a href="/research/" class="md-tabs__dropdown-link">
     
   
 
@@ -816,7 +865,13 @@
   
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  
+    Research
+  
+  <!-- ... WITH ...
   Research
+   ... END TODO -->
 
   </a>
 
@@ -852,9 +907,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
+    <a href="/" title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
-  <img src="../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="/latest/assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     OpenVidu
@@ -881,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="/" class="md-nav__link">
         
   
   
@@ -944,14 +999,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="/latest/meet/" class="md-nav__link ">
               
   
   
   <span class="md-ellipsis">
     
   
-    OpenVidu Meet [BETA]
+    OpenVidu Meet
   
 
     
@@ -973,7 +1028,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    OpenVidu Meet [BETA]
+    OpenVidu Meet
   
 
           </label>
@@ -1009,7 +1064,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../getting-started/" class="md-nav__link ">
+            <a href="/latest/meet/getting-started/" class="md-nav__link ">
               
   
   
@@ -1057,6 +1112,12 @@
   
     
     
+      
+        
+      
+        
+      
+        
       
         
       
@@ -1114,14 +1175,100 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/rooms-and-meetings/" class="md-nav__link">
+      <a href="/latest/meet/features/overview/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Rooms and meetings
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rooms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rooms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/rooms/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
   
 
     
@@ -1142,8 +1289,604 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/recordings/" class="md-nav__link">
+      <a href="/latest/meet/features/rooms/management/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creation &amp; Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/rooms/access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Room Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meetings
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Meetings
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meeting lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/live-captions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Live Captions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/smart-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Smart Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/role-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Role Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/e2e-encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E2E Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/meetings/virtual-background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_4" id="__nav_2_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Users
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Users
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/users/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/users/management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creation &amp; Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_5" id="__nav_2_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Room Members
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Room Members
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/room-members/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/room-members/management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creation &amp; Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_6">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_6" id="__nav_2_3_6_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -1157,6 +1900,42 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Recordings
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/recordings/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -1170,14 +1949,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/users-and-permissions/" class="md-nav__link">
+      <a href="/latest/meet/features/recordings/management/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Users and permissions
+    Creation &amp; Management
   
 
     
@@ -1186,6 +1965,42 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/features/recordings/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recording configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1266,7 +2081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deployment/overview/" class="md-nav__link">
+      <a href="/latest/meet/deployment/overview/" class="md-nav__link">
         
   
   
@@ -1294,7 +2109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deployment/local/" class="md-nav__link">
+      <a href="/latest/meet/deployment/local/" class="md-nav__link">
         
   
   
@@ -1322,7 +2137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deployment/basic/" class="md-nav__link">
+      <a href="/latest/meet/deployment/basic/" class="md-nav__link">
         
   
   
@@ -1350,7 +2165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deployment/advanced/" class="md-nav__link">
+      <a href="/latest/meet/deployment/advanced/" class="md-nav__link">
         
   
   
@@ -1387,6 +2202,8 @@
   
     
     
+      
+        
       
         
       
@@ -1446,7 +2263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/intro/" class="md-nav__link">
+      <a href="/latest/meet/embedded/intro/" class="md-nav__link">
         
   
   
@@ -1474,7 +2291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/step-by-step-guide/" class="md-nav__link">
+      <a href="/latest/meet/embedded/step-by-step-guide/" class="md-nav__link">
         
   
   
@@ -1514,10 +2331,6 @@
       
         
       
-        
-      
-        
-      
     
     
     
@@ -1533,7 +2346,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../embedded/tutorials/" class="md-nav__link ">
+            <a href="/latest/meet/embedded/tutorials/" class="md-nav__link ">
               
   
   
@@ -1576,8 +2389,66 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_3_2" id="__nav_2_5_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedding Options
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Embedding Options
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../embedded/tutorials/direct-link/" class="md-nav__link">
+      <a href="/latest/meet/embedded/tutorials/embedding-options/direct-link/" class="md-nav__link">
         
   
   
@@ -1605,7 +2476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/tutorials/webcomponent/" class="md-nav__link">
+      <a href="/latest/meet/embedded/tutorials/embedding-options/webcomponent/" class="md-nav__link">
         
   
   
@@ -1633,7 +2504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/tutorials/webcomponent-advanced/" class="md-nav__link">
+      <a href="/latest/meet/embedded/tutorials/embedding-options/webcomponent-advanced/" class="md-nav__link">
         
   
   
@@ -1654,6 +2525,72 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_3_3" id="__nav_2_5_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Access
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
               
                 
   
@@ -1661,7 +2598,155 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/tutorials/recordings/" class="md-nav__link">
+      <a href="/latest/meet/embedded/tutorials/access/anonymous-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anonymous Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/access/identified-guests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identified Guests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/access/users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Users
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_3_4" id="__nav_2_5_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advanced features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/tutorials/advanced-features/recordings/" class="md-nav__link">
         
   
   
@@ -1689,7 +2774,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/tutorials/webhooks/" class="md-nav__link">
+      <a href="/latest/meet/embedded/tutorials/advanced-features/webhooks/" class="md-nav__link">
         
   
   
@@ -1705,6 +2790,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1787,7 +2880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/reference/webcomponent/" class="md-nav__link">
+      <a href="/latest/meet/embedded/reference/webcomponent/" class="md-nav__link">
         
   
   
@@ -1815,7 +2908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/reference/direct-link/" class="md-nav__link">
+      <a href="/latest/meet/embedded/reference/direct-link/" class="md-nav__link">
         
   
   
@@ -1843,7 +2936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/reference/iframe/" class="md-nav__link">
+      <a href="/latest/meet/embedded/reference/iframe/" class="md-nav__link">
         
   
   
@@ -1871,7 +2964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/reference/rest-api/" class="md-nav__link">
+      <a href="/latest/meet/embedded/reference/rest-api/" class="md-nav__link">
         
   
   
@@ -1899,7 +2992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embedded/reference/webhooks/" class="md-nav__link">
+      <a href="/latest/meet/embedded/reference/webhooks/" class="md-nav__link">
         
   
   
@@ -1923,6 +3016,34 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/meet/embedded/deploy-your-app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy your application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1997,6 +3118,162 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#380" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#370" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#360" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changelog_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patch releases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Patch releases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#350" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changelog_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#340" class="md-nav__link">
@@ -2077,7 +3354,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#patch-releases" class="md-nav__link">
+  <a href="#patch-releases_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Patch releases
@@ -2152,6 +3429,8 @@
       
         
       
+        
+      
     
     
     
@@ -2167,7 +3446,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/" class="md-nav__link ">
+            <a href="/latest/docs/" class="md-nav__link ">
               
   
   
@@ -2211,7 +3490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/comparing-openvidu/" class="md-nav__link">
+      <a href="/latest/docs/comparing-openvidu/" class="md-nav__link">
         
   
   
@@ -2262,7 +3541,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/developing-your-openvidu-app/" class="md-nav__link ">
+            <a href="/latest/docs/developing-your-openvidu-app/" class="md-nav__link ">
               
   
   
@@ -2306,7 +3585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/developing-your-openvidu-app/how-to/" class="md-nav__link">
+      <a href="/latest/docs/developing-your-openvidu-app/how-to/" class="md-nav__link">
         
   
   
@@ -2441,7 +3720,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/tutorials/application-server/" class="md-nav__link ">
+            <a href="/latest/docs/tutorials/application-server/" class="md-nav__link ">
               
   
   
@@ -2485,7 +3764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/node/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/node/" class="md-nav__link">
         
   
   
@@ -2513,7 +3792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/go/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/go/" class="md-nav__link">
         
   
   
@@ -2541,7 +3820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/ruby/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/ruby/" class="md-nav__link">
         
   
   
@@ -2569,7 +3848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/java/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/java/" class="md-nav__link">
         
   
   
@@ -2597,7 +3876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/python/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/python/" class="md-nav__link">
         
   
   
@@ -2625,7 +3904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/rust/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/rust/" class="md-nav__link">
         
   
   
@@ -2653,7 +3932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/php/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/php/" class="md-nav__link">
         
   
   
@@ -2681,7 +3960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-server/dotnet/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-server/dotnet/" class="md-nav__link">
         
   
   
@@ -2754,7 +4033,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/tutorials/application-client/" class="md-nav__link ">
+            <a href="/latest/docs/tutorials/application-client/" class="md-nav__link ">
               
   
   
@@ -2798,7 +4077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/javascript/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/javascript/" class="md-nav__link">
         
   
   
@@ -2826,7 +4105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/react/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/react/" class="md-nav__link">
         
   
   
@@ -2854,7 +4133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/angular/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/angular/" class="md-nav__link">
         
   
   
@@ -2882,7 +4161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/vue/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/vue/" class="md-nav__link">
         
   
   
@@ -2910,7 +4189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/electron/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/electron/" class="md-nav__link">
         
   
   
@@ -2938,7 +4217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/ionic/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/ionic/" class="md-nav__link">
         
   
   
@@ -2966,7 +4245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/android/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/android/" class="md-nav__link">
         
   
   
@@ -2994,7 +4273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/application-client/ios/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/application-client/ios/" class="md-nav__link">
         
   
   
@@ -3059,7 +4338,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/tutorials/advanced-features/" class="md-nav__link ">
+            <a href="/latest/docs/tutorials/advanced-features/" class="md-nav__link ">
               
   
   
@@ -3103,7 +4382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/advanced-features/recording-basic-s3/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/advanced-features/recording-basic-s3/" class="md-nav__link">
         
   
   
@@ -3131,7 +4410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/advanced-features/recording-advanced-s3/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/advanced-features/recording-advanced-s3/" class="md-nav__link">
         
   
   
@@ -3159,7 +4438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/advanced-features/recording-basic-azure/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/advanced-features/recording-basic-azure/" class="md-nav__link">
         
   
   
@@ -3187,7 +4466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/advanced-features/recording-advanced-azure/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/advanced-features/recording-advanced-azure/" class="md-nav__link">
         
   
   
@@ -3259,6 +4538,8 @@
       
         
       
+        
+      
     
     
     
@@ -3274,7 +4555,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/tutorials/angular-components/" class="md-nav__link ">
+            <a href="/latest/docs/tutorials/angular-components/" class="md-nav__link ">
               
   
   
@@ -3318,7 +4599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-ui/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-ui/" class="md-nav__link">
         
   
   
@@ -3346,7 +4627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-toolbar/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-toolbar/" class="md-nav__link">
         
   
   
@@ -3374,7 +4655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-toolbar-buttons/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-toolbar-buttons/" class="md-nav__link">
         
   
   
@@ -3402,7 +4683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-toolbar-panel-buttons/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-toolbar-panel-buttons/" class="md-nav__link">
         
   
   
@@ -3430,7 +4711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-layout/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-layout/" class="md-nav__link">
         
   
   
@@ -3458,7 +4739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-stream/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-stream/" class="md-nav__link">
         
   
   
@@ -3486,7 +4767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-panels/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-panels/" class="md-nav__link">
         
   
   
@@ -3514,7 +4795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-additional-panels/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-additional-panels/" class="md-nav__link">
         
   
   
@@ -3542,7 +4823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-chat-panel/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-chat-panel/" class="md-nav__link">
         
   
   
@@ -3570,7 +4851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-activities-panel/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-activities-panel/" class="md-nav__link">
         
   
   
@@ -3598,7 +4879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-participants-panel/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-participants-panel/" class="md-nav__link">
         
   
   
@@ -3626,7 +4907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-participant-panel-item/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-participant-panel-item/" class="md-nav__link">
         
   
   
@@ -3654,7 +4935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element/" class="md-nav__link">
         
   
   
@@ -3682,7 +4963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-toggle-hand/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-toggle-hand/" class="md-nav__link">
         
   
   
@@ -3710,7 +4991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/angular-components/openvidu-admin-dashboard/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-admin-dashboard/" class="md-nav__link">
         
   
   
@@ -3718,6 +4999,34 @@
     
   
     Admin Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/tutorials/angular-components/openvidu-components-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demo App
   
 
     
@@ -3769,7 +5078,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/tutorials/ai-services/" class="md-nav__link ">
+            <a href="/latest/docs/tutorials/ai-services/" class="md-nav__link ">
               
   
   
@@ -3813,7 +5122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/tutorials/ai-services/openvidu-live-captions/" class="md-nav__link">
+      <a href="/latest/docs/tutorials/ai-services/openvidu-live-captions/" class="md-nav__link">
         
   
   
@@ -3927,7 +5236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/deployment-types/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/deployment-types/" class="md-nav__link">
         
   
   
@@ -3984,7 +5293,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/production-ready/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/production-ready/" class="md-nav__link ">
               
   
   
@@ -4028,7 +5337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/production-ready/performance/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/production-ready/performance/" class="md-nav__link">
         
   
   
@@ -4056,7 +5365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/production-ready/scalability/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/production-ready/scalability/" class="md-nav__link">
         
   
   
@@ -4084,7 +5393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/production-ready/fault-tolerance/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/production-ready/fault-tolerance/" class="md-nav__link">
         
   
   
@@ -4137,7 +5446,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/production-ready/observability/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/production-ready/observability/" class="md-nav__link ">
               
   
   
@@ -4181,7 +5490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/production-ready/observability/openvidu-dashboard/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/" class="md-nav__link">
         
   
   
@@ -4209,7 +5518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/production-ready/observability/grafana-stack/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/production-ready/observability/grafana-stack/" class="md-nav__link">
         
   
   
@@ -4253,7 +5562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/local/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/local/" class="md-nav__link">
         
   
   
@@ -4295,6 +5604,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -4310,7 +5623,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/single-node/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/single-node/" class="md-nav__link ">
               
   
   
@@ -4357,6 +5670,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -4376,8 +5693,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_2">
         
           
-          <label class="md-nav__link" for="__nav_3_5_4_2" id="__nav_3_5_4_2_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node/on-premises/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -4391,8 +5709,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4_2" id="__nav_3_5_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_4_2">
@@ -4406,13 +5730,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/on-premises/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/on-premises/install/" class="md-nav__link">
         
   
   
@@ -4440,7 +5766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/on-premises/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/on-premises/admin/" class="md-nav__link">
         
   
   
@@ -4468,7 +5794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/on-premises/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/on-premises/upgrade/" class="md-nav__link">
         
   
   
@@ -4505,6 +5831,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -4526,8 +5856,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_3">
         
           
-          <label class="md-nav__link" for="__nav_3_5_4_3" id="__nav_3_5_4_3_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node/aws/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -4541,8 +5872,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4_3" id="__nav_3_5_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_4_3">
@@ -4556,13 +5893,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/aws/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/aws/install/" class="md-nav__link">
         
   
   
@@ -4590,7 +5929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/aws/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/aws/admin/" class="md-nav__link">
         
   
   
@@ -4618,7 +5957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/aws/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/aws/upgrade/" class="md-nav__link">
         
   
   
@@ -4655,6 +5994,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -4676,8 +6019,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_4">
         
           
-          <label class="md-nav__link" for="__nav_3_5_4_4" id="__nav_3_5_4_4_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node/azure/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -4691,8 +6035,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4_4" id="__nav_3_5_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_4_4">
@@ -4706,13 +6056,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/azure/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/azure/install/" class="md-nav__link">
         
   
   
@@ -4740,7 +6092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/azure/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/azure/admin/" class="md-nav__link">
         
   
   
@@ -4768,7 +6120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/azure/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/azure/upgrade/" class="md-nav__link">
         
   
   
@@ -4805,6 +6157,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -4826,8 +6182,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_5">
         
           
-          <label class="md-nav__link" for="__nav_3_5_4_5" id="__nav_3_5_4_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node/gcp/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -4841,8 +6198,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4_5" id="__nav_3_5_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_4_5">
@@ -4856,13 +6219,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/gcp/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/gcp/install/" class="md-nav__link">
         
   
   
@@ -4890,7 +6255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/gcp/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/gcp/admin/" class="md-nav__link">
         
   
   
@@ -4918,7 +6283,333 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node/gcp/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node/digitalocean/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DigitalOcean
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4_6" id="__nav_3_5_4_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DigitalOcean
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/digitalocean/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/digitalocean/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/digitalocean/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4_7">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node/oracle/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_4_7" id="__nav_3_5_4_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Oracle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/oracle/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/oracle/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node/oracle/upgrade/" class="md-nav__link">
         
   
   
@@ -4966,6 +6657,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -4989,7 +6686,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/single-node-pro/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/single-node-pro/" class="md-nav__link ">
               
   
   
@@ -5036,6 +6733,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -5055,8 +6756,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_2">
         
           
-          <label class="md-nav__link" for="__nav_3_5_5_2" id="__nav_3_5_5_2_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node-pro/on-premises/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -5070,8 +6772,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5_2" id="__nav_3_5_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_5_2">
@@ -5085,13 +6793,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/on-premises/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/on-premises/install/" class="md-nav__link">
         
   
   
@@ -5119,7 +6829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/on-premises/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/on-premises/admin/" class="md-nav__link">
         
   
   
@@ -5147,7 +6857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/on-premises/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/on-premises/upgrade/" class="md-nav__link">
         
   
   
@@ -5184,6 +6894,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -5205,8 +6919,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_3">
         
           
-          <label class="md-nav__link" for="__nav_3_5_5_3" id="__nav_3_5_5_3_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node-pro/aws/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -5220,8 +6935,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5_3" id="__nav_3_5_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_5_3">
@@ -5235,13 +6956,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/aws/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/aws/install/" class="md-nav__link">
         
   
   
@@ -5269,7 +6992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/aws/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/aws/admin/" class="md-nav__link">
         
   
   
@@ -5297,7 +7020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/aws/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/aws/upgrade/" class="md-nav__link">
         
   
   
@@ -5334,6 +7057,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -5355,8 +7082,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_4">
         
           
-          <label class="md-nav__link" for="__nav_3_5_5_4" id="__nav_3_5_5_4_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node-pro/azure/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -5370,8 +7098,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5_4" id="__nav_3_5_5_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_5_4">
@@ -5385,13 +7119,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/azure/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/azure/install/" class="md-nav__link">
         
   
   
@@ -5419,7 +7155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/azure/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/azure/admin/" class="md-nav__link">
         
   
   
@@ -5447,7 +7183,496 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/single-node-pro/azure/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/single-node-pro/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node-pro/gcp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCP
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5_5" id="__nav_3_5_5_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node-pro/digitalocean/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DigitalOcean
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5_6" id="__nav_3_5_5_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DigitalOcean
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/digitalocean/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/digitalocean/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/digitalocean/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_5_7">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/single-node-pro/oracle/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_5_7" id="__nav_3_5_5_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Oracle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/oracle/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/oracle/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/single-node-pro/oracle/upgrade/" class="md-nav__link">
         
   
   
@@ -5495,6 +7720,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -5518,7 +7749,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/elastic/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/elastic/" class="md-nav__link ">
               
   
   
@@ -5565,6 +7796,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -5584,8 +7819,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_2">
         
           
-          <label class="md-nav__link" for="__nav_3_5_6_2" id="__nav_3_5_6_2_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/elastic/on-premises/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -5599,8 +7835,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6_2" id="__nav_3_5_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_6_2">
@@ -5614,13 +7856,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/on-premises/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/on-premises/install/" class="md-nav__link">
         
   
   
@@ -5648,7 +7892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/on-premises/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/on-premises/admin/" class="md-nav__link">
         
   
   
@@ -5676,7 +7920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/on-premises/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/on-premises/upgrade/" class="md-nav__link">
         
   
   
@@ -5713,6 +7957,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -5734,8 +7982,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_3">
         
           
-          <label class="md-nav__link" for="__nav_3_5_6_3" id="__nav_3_5_6_3_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/elastic/aws/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -5749,8 +7998,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6_3" id="__nav_3_5_6_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_6_3">
@@ -5764,13 +8019,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/aws/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/aws/install/" class="md-nav__link">
         
   
   
@@ -5798,7 +8055,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/aws/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/aws/admin/" class="md-nav__link">
         
   
   
@@ -5826,7 +8083,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/aws/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/aws/upgrade/" class="md-nav__link">
         
   
   
@@ -5863,6 +8120,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -5884,8 +8145,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_4">
         
           
-          <label class="md-nav__link" for="__nav_3_5_6_4" id="__nav_3_5_6_4_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/elastic/azure/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -5899,8 +8161,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6_4" id="__nav_3_5_6_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_6_4">
@@ -5914,13 +8182,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/azure/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/azure/install/" class="md-nav__link">
         
   
   
@@ -5948,7 +8218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/azure/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/azure/admin/" class="md-nav__link">
         
   
   
@@ -5976,7 +8246,496 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/elastic/azure/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/elastic/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/elastic/gcp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCP
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6_5" id="__nav_3_5_6_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/elastic/digitalocean/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DigitalOcean
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6_6" id="__nav_3_5_6_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DigitalOcean
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/digitalocean/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/digitalocean/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/digitalocean/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_6_7">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/elastic/oracle/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_6_7" id="__nav_3_5_6_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Oracle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/oracle/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/oracle/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/elastic/oracle/upgrade/" class="md-nav__link">
         
   
   
@@ -6024,6 +8783,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -6047,7 +8812,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/ha/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/ha/" class="md-nav__link ">
               
   
   
@@ -6094,6 +8859,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -6115,8 +8884,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_2">
         
           
-          <label class="md-nav__link" for="__nav_3_5_7_2" id="__nav_3_5_7_2_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/ha/on-premises/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -6130,8 +8900,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7_2" id="__nav_3_5_7_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_7_2">
@@ -6145,13 +8921,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/on-premises/install-dlb/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/on-premises/install-dlb/" class="md-nav__link">
         
   
   
@@ -6179,7 +8957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/on-premises/install-nlb/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/on-premises/install-nlb/" class="md-nav__link">
         
   
   
@@ -6207,7 +8985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/on-premises/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/on-premises/admin/" class="md-nav__link">
         
   
   
@@ -6235,7 +9013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/on-premises/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/on-premises/upgrade/" class="md-nav__link">
         
   
   
@@ -6272,6 +9050,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -6293,8 +9075,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_3">
         
           
-          <label class="md-nav__link" for="__nav_3_5_7_3" id="__nav_3_5_7_3_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/ha/aws/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -6308,8 +9091,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7_3" id="__nav_3_5_7_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_7_3">
@@ -6323,13 +9112,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/aws/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/aws/install/" class="md-nav__link">
         
   
   
@@ -6357,7 +9148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/aws/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/aws/admin/" class="md-nav__link">
         
   
   
@@ -6385,7 +9176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/aws/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/aws/upgrade/" class="md-nav__link">
         
   
   
@@ -6424,6 +9215,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -6443,8 +9238,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_4">
         
           
-          <label class="md-nav__link" for="__nav_3_5_7_4" id="__nav_3_5_7_4_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/ha/azure/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -6458,8 +9254,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7_4" id="__nav_3_5_7_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5_7_4">
@@ -6473,13 +9275,15 @@
           <ul class="md-nav__list" data-md-scrollfix="">
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/azure/install/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/azure/install/" class="md-nav__link">
         
   
   
@@ -6507,7 +9311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/azure/admin/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/azure/admin/" class="md-nav__link">
         
   
   
@@ -6535,7 +9339,496 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/ha/azure/upgrade/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/ha/azure/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/ha/gcp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCP
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7_5" id="__nav_3_5_7_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/gcp/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/gcp/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/gcp/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/ha/digitalocean/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DigitalOcean
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7_6" id="__nav_3_5_7_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DigitalOcean
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/digitalocean/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/digitalocean/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/digitalocean/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7_7">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="/latest/docs/self-hosting/ha/oracle/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5_7_7" id="__nav_3_5_7_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_5_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Oracle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/oracle/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/oracle/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/ha/oracle/upgrade/" class="md-nav__link">
         
   
   
@@ -6637,7 +9930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/configuration/changing-config/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/configuration/changing-config/" class="md-nav__link">
         
   
   
@@ -6665,7 +9958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/configuration/in-depth/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/configuration/in-depth/" class="md-nav__link">
         
   
   
@@ -6693,7 +9986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/configuration/reference/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/configuration/reference/" class="md-nav__link">
         
   
   
@@ -6747,6 +10040,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -6762,7 +10065,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../docs/self-hosting/how-to-guides/" class="md-nav__link ">
+            <a href="/latest/docs/self-hosting/how-to-guides/" class="md-nav__link ">
               
   
   
@@ -6806,7 +10109,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/how-to-guides/external-s3/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/how-to-guides/backup-and-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup and restore OpenVidu deployments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/external-s3/" class="md-nav__link">
         
   
   
@@ -6834,14 +10165,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/how-to-guides/force-443-tls/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/how-to-guides/force-single-port/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Force traffic to 443 TLS
+    Force media traffic through port 443
   
 
     
@@ -6862,7 +10193,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/how-to-guides/enable-webhooks/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/how-to-guides/turn-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TURN server security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/enable-webhooks/" class="md-nav__link">
         
   
   
@@ -6890,7 +10249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/how-to-guides/enable-disable-modules/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/how-to-guides/enable-disable-modules/" class="md-nav__link">
         
   
   
@@ -6918,7 +10277,63 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/how-to-guides/deploy-with-external-proxy/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/how-to-guides/enable-disable-mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable and disable MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/external-mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure external MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/deploy-with-external-proxy/" class="md-nav__link">
         
   
   
@@ -6946,7 +10361,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/self-hosting/how-to-guides/create-configure-AWS-certificate/" class="md-nav__link">
+      <a href="/latest/docs/self-hosting/how-to-guides/customize-meet-base-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customize OpenVidu Meet base path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/self-hosting/how-to-guides/create-configure-AWS-certificate/" class="md-nav__link">
         
   
   
@@ -7050,7 +10493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ai/overview/" class="md-nav__link">
+      <a href="/latest/docs/ai/overview/" class="md-nav__link">
         
   
   
@@ -7078,7 +10521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ai/live-captions/" class="md-nav__link">
+      <a href="/latest/docs/ai/live-captions/" class="md-nav__link">
         
   
   
@@ -7164,7 +10607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ai/openvidu-agents/overview/" class="md-nav__link">
+      <a href="/latest/docs/ai/openvidu-agents/overview/" class="md-nav__link">
         
   
   
@@ -7192,7 +10635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ai/openvidu-agents/speech-processing-agent/" class="md-nav__link">
+      <a href="/latest/docs/ai/openvidu-agents/speech-processing-agent/" class="md-nav__link">
         
   
   
@@ -7220,7 +10663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ai/openvidu-agents/agent-dispatch/" class="md-nav__link">
+      <a href="/latest/docs/ai/openvidu-agents/agent-dispatch/" class="md-nav__link">
         
   
   
@@ -7256,7 +10699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ai/custom-agents/" class="md-nav__link">
+      <a href="/latest/docs/ai/custom-agents/" class="md-nav__link">
         
   
   
@@ -7348,7 +10791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ui-components/angular-components/" class="md-nav__link">
+      <a href="/latest/docs/ui-components/angular-components/" class="md-nav__link">
         
   
   
@@ -7376,7 +10819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/ui-components/react-components/" class="md-nav__link">
+      <a href="/latest/docs/ui-components/react-components/" class="md-nav__link">
         
   
   
@@ -7411,8 +10854,98 @@
   
   
   
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8">
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../docs/releases/" class="md-nav__link">
+      <a href="/latest/docs/troubleshooting/recording/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recording
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/latest/docs/releases/" class="md-nav__link">
         
   
   
@@ -7455,6 +10988,8 @@
       
         
       
+        
+      
     
     
     
@@ -7470,7 +11005,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../blog/" class="md-nav__link ">
+            <a href="/blog/" class="md-nav__link ">
               
   
   
@@ -7513,9 +11048,33 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+    
+    
+      
         
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -7529,7 +11088,427 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/archive/2026/07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    July 2026
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/archive/2026/06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    June 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/archive/2026/05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    May 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/archive/2026/04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    April 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/openvidu-meet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenVidu Meet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/openvidu-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenVidu Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/technology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="/blog/category/vertical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vertical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -7603,7 +11582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../support/" class="md-nav__link">
+      <a href="/support/" class="md-nav__link">
         
   
   
@@ -7692,7 +11671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../pricing/" class="md-nav__link">
+      <a href="/pricing/" class="md-nav__link">
         
   
   
@@ -7781,7 +11760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../about-us/" class="md-nav__link">
+      <a href="/about-us/" class="md-nav__link">
         
   
   
@@ -7870,7 +11849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../research/" class="md-nav__link">
+      <a href="/research/" class="md-nav__link">
         
   
   
@@ -7921,6 +11900,162 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#380" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#370" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#360" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changelog_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patch releases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Patch releases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#350" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changelog_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#340" class="md-nav__link">
@@ -8001,7 +12136,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#patch-releases" class="md-nav__link">
+  <a href="#patch-releases_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Patch releases
@@ -8055,9 +12190,102 @@
 
   <h1>Releases</h1>
 
+<h2 id="380">3.8.0<a class="headerlink" href="#380" title="Anchor link to this section for reference">#</a></h2>
+<div class="admonition info">
+<p class="admonition-title">For the Release Notes of OpenVidu Platform 3.8.0, please visit here: <a class="platform-link-color" href="https://openvidu.io/3.8/docs/releases/#380" target="_blank" rel="noopener">OpenVidu Platform 3.8.0 <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></p>
+</div>
+<p>OpenVidu Meet 3.8.0 is considered the first General Availability (GA) release of the product, leaving the beta stage and entering a stable production-ready state.</p>
+<h3 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Anchor link to this section for reference">#</a></h3>
+<ul>
+<li><strong>Users and role-based accounts</strong>: OpenVidu Meet now lets you register multiple users and assign each one a role that controls what they can do in the application. There are three roles — <code>admin</code> (full control over all users, rooms, members, recordings and system configuration), <code>room_manager</code> (can create and manage their own rooms) and <code>room_member</code> (can only access rooms where they are a member). Learn more in the <a href="https://openvidu.io/3.8/meet/features/users/overview/">Users</a> feature.</li>
+<li><strong>Room members with fine-grained access</strong>: you can now grant access to a room to specific individuals — either registered <a href="https://openvidu.io/3.8/meet/features/users/overview/">users</a> or <a href="https://openvidu.io/3.8/meet/features/room-members/overview/">identified guests</a> (people without an account who each receive a unique personal access link). Every member is added with a base role (<code>Moderator</code> or <code>Speaker</code>) whose default permissions can be customized individually, per member. See the <a href="https://openvidu.io/3.8/meet/features/room-members/overview/">Room Members</a> feature for the complete picture.</li>
+<li><strong>Customizable default role permissions per room</strong>: the default permissions of the <code>Moderator</code> and <code>Speaker</code> roles can now be customized when <a href="https://openvidu.io/3.8/meet/features/rooms/management/#create-rooms">creating</a> or <a href="https://openvidu.io/3.8/meet/features/rooms/management/#edit-rooms">editing</a> a room, letting you tailor what each role can do on a per-room basis.</li>
+<li><strong>Per-room anonymous access control</strong>: anonymous access can now be disabled per role for individual rooms. You can independently enable or disable the <code>Moderator</code> and <code>Speaker</code> <a href="https://openvidu.io/3.8/meet/features/rooms/access/#anonymous-access">shared anonymous access links</a> when creating or editing a room.</li>
+<li><strong>Improved room creation wizard</strong>: the room wizard has been redesigned to guide you through the full room setup, including access configuration, role permissions and room members, all in one place.</li>
+<li><strong>Redesigned OpenVidu Meet app</strong>: the application has been expanded with new pages and forms to manage everything from the UI — a user list, a user profile page, a room details page (showing the room's recordings and members), a recording details page, and dedicated forms for creating users and adding members.</li>
+<li><strong>Full internationalization (i18n)</strong>: OpenVidu Meet is now fully translated, with support for 10 languages: Chinese, English, German, Spanish, French, Hindi, Italian, Japanese, Dutch and Portuguese. The interface automatically adapts to the user's language.</li>
+<li><strong>New filters for rooms and recordings</strong>: additional filtering options have been added to the rooms and recordings lists, making it easier to find what you are looking for.</li>
+<li><strong>New <code>show-recording</code> WebComponent attribute</strong>: the <a href="https://openvidu.io/3.8/meet/embedded/reference/webcomponent/">OpenVidu Meet WebComponent</a> now accepts a <code>show-recording</code> attribute to embed the recording playback view. Unlike the existing <code>recording-url</code> attribute, <code>show-recording</code> takes a recording identifier alongside the room <code>room-url</code> and inherits the permissions from the room URL, offering a simpler alternative to display a specific recording.</li>
+<li><strong>Meeting experience improvements</strong>: several enhancements to the in-meeting experience:<ul>
+<li><strong>Network quality indicator</strong>: a network quality indicator is now displayed for each participant, both on the participant's video tile and in the Participants panel, giving a clear view of individual connection quality at a glance.</li>
+<li><strong>New status indicators in the Participants panel</strong>: the Participants panel now shows a set of per-participant status indicators — a <strong>speaking</strong> indicator that highlights who is currently talking, plus indicators for participants who have their <strong>microphone muted</strong>, their <strong>camera turned off</strong>, or are <strong>sharing their screen</strong>.</li>
+<li><strong>Flexible self-view</strong>: the self-view video (your own camera preview) can now be resized independently to better fit your preferences, and it stays independent from the meeting layout as more participants join, so it no longer gets rearranged with everyone else.</li>
+<li><strong>Manual zoom for screen sharing</strong>: when viewing a shared screen, participants can now manually zoom in and out to customize the view and focus on the details that matter to them.</li>
+<li><strong>Categorized virtual backgrounds</strong>: the <a href="https://openvidu.io/3.8/meet/features/meetings/virtual-background/">virtual backgrounds</a> have been updated and are now organized into categories (such as <em>Professional</em>, <em>Home Office</em> and <em>Creative</em>), making it easier to browse and pick the right background.</li>
+<li><strong>Improved live captions performance</strong>: the live captions agent has been optimized, delivering faster and more reliable real-time captions during meetings. Learn more about <a href="https://openvidu.io/3.8/meet/features/meetings/live-captions/">Live captions</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="breaking-changes">Breaking changes<a class="headerlink" href="#breaking-changes" title="Anchor link to this section for reference">#</a></h3>
+<p>All breaking changes in this release are related to the <a href="https://openvidu.io/3.8/meet/embedded/reference/rest-api/">REST API</a>:</p>
+<ul>
+<li><strong>Anonymous access links moved in the room object</strong>: the <code>moderatorUrl</code> and <code>speakerUrl</code> properties of the room response have been moved to <code>access.anonymous.moderator.url</code> and <code>access.anonymous.speaker.url</code> respectively. Update any integration that reads the anonymous access links from the <a href="https://openvidu.io/3.8/meet/embedded/reference/api.html#/schemas/MeetRoom" target="_blank" rel="noopener">MeetRoom <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> object accordingly.</li>
+<li><strong>Recording access replaced by per-member permissions</strong>: the room configuration property <code>config.recording.allowAccessTo</code> has been removed. Access to a room's recordings is now governed by fine-grained <a href="https://openvidu.io/3.8/meet/features/recordings/overview/#recording-permissions">room member permissions</a>: <code>canRetrieveRecordings</code> (list, play and download recordings) and <code>canDeleteRecordings</code> (delete recordings). <strong>Admins</strong> always retain full access to any recording (retrieve and delete), regardless of these permissions. By default, the <code>Moderator</code> role has both permissions and the <code>Speaker</code> role has only <code>canRetrieveRecordings</code>. To reproduce the behavior of the removed property, adjust the default permissions of the <code>Moderator</code> and <code>Speaker</code> roles when <a href="https://openvidu.io/3.8/meet/features/rooms/management/#create-rooms">creating</a> or <a href="https://openvidu.io/3.8/meet/features/rooms/management/#edit-rooms">editing</a> the room:<ul>
+<li><strong><code>admin</code></strong> (previously only admins could retrieve and delete recordings): disable both <code>canRetrieveRecordings</code> and <code>canDeleteRecordings</code> for the <code>Moderator</code> and <code>Speaker</code> roles. Admins keep full access regardless.</li>
+<li><strong><code>admin_moderator</code></strong> (previously only admins and moderators could retrieve and delete recordings): keep <code>canRetrieveRecordings</code> and <code>canDeleteRecordings</code> enabled for <code>Moderator</code>, and disable both for <code>Speaker</code>.</li>
+<li><strong><code>admin_moderator_speaker</code></strong> (previously everyone could retrieve recordings, but only admins and moderators could delete them): this is exactly the new default, so no change is needed — <code>Moderator</code> keeps both permissions and <code>Speaker</code> keeps only <code>canRetrieveRecordings</code>.</li>
+</ul>
+</li>
+<li><strong>Rooms API no longer returns <code>config</code> by default</strong>: endpoints that return a room object (or an array of rooms) no longer include the <code>config</code> property in the response by default. To include it, request it explicitly using the <code>extraFields=config</code> query parameter or the <code>X-ExtraFields</code> HTTP header.</li>
+</ul>
+<h2 id="370">3.7.0<a class="headerlink" href="#370" title="Anchor link to this section for reference">#</a></h2>
+<p>Nothing was added in this release in OpenVidu Meet. You can learn more about the core internal improvements introduced by the OpenVidu Platform here: <a class="platform-link-color" href="https://openvidu.io/3.7/docs/releases/#370" target="_blank" rel="noopener">OpenVidu Platform 3.7.0 <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></p>
+<h2 id="360">3.6.0<a class="headerlink" href="#360" title="Anchor link to this section for reference">#</a></h2>
+<div class="admonition info">
+<p class="admonition-title">For the Release Notes of OpenVidu Platform 3.6.0, please visit here: <a class="platform-link-color" href="https://openvidu.io/3.6/docs/releases/#360" target="_blank" rel="noopener">OpenVidu Platform 3.6.0 <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></p>
+</div>
+<h3 id="changelog_1">Changelog<a class="headerlink" href="#changelog_1" title="Anchor link to this section for reference">#</a></h3>
+<ul>
+<li><strong>Live captions in meetings</strong>: Live captions are now available to make conversations easier to follow in real time. Participants can read what is being said as it happens, improving understanding in noisy environments, supporting people with hearing difficulties, and making meetings more accessible and inclusive. This is also the first step towards more advanced AI-powered features such as meeting transcriptions, summaries, action items extraction, and more.</li>
+<li><strong>Recording layout selection</strong>: you can now choose how your meeting recordings are rendered to better match your use case:<ul>
+<li><strong>Grid view</strong> to see all participants at once.</li>
+<li><strong>Speaker view</strong> to focus on the active speaker.</li>
+<li><strong>Single speaker view</strong> for more focused presentations and one-person sessions.</li>
+</ul>
+</li>
+<li><strong>Advanced recording video settings</strong>: recording configuration now supports video resolution, frame rate and codec selection.</li>
+<li><strong>Recording configuration via UI or API</strong>: recording options can now be configured either from the setup wizard/Room configuration UI or through the REST API.</li>
+<li><strong>Firefox performance improvements</strong>: improved video reception in Firefox when the meeting tab is not in focus, delivering a more stable experience for the rest of participants.</li>
+<li><strong>Role-change UX improvements</strong>: participants are now clearly informed when someone’s role changes during a session through both a visual notification and a sound alert.</li>
+</ul>
+<h3 id="breaking-changes_1">Breaking changes<a class="headerlink" href="#breaking-changes_1" title="Anchor link to this section for reference">#</a></h3>
+<ul>
+<li><strong>OpenVidu Meet default path changed</strong>: when deploying OpenVidu, the default path for OpenVidu Meet is now <code>/meet</code> (previously <code>/</code>). This facilitates the coexistence of OpenVidu Meet and a custom application on the same server. You can change this path to whatever you want (including the previous default <code>/</code>) following <a href="https://openvidu.io/3.6/docs/self-hosting/how-to-guides/customize-meet-base-path/">these instructions</a>.</li>
+</ul>
+<h3 id="patch-releases">Patch releases<a class="headerlink" href="#patch-releases" title="Anchor link to this section for reference">#</a></h3>
+<h4 id="361">3.6.1<a class="headerlink" href="#361" title="Anchor link to this section for reference">#</a></h4>
+<ul>
+<li>Optimized lock management by significantly reducing the number of Redis keys, minimizing read and write operations, lowering memory usage, improving TTLs for key deletion, and simplifying the overall system design.</li>
+</ul>
+<h2 id="350">3.5.0<a class="headerlink" href="#350" title="Anchor link to this section for reference">#</a></h2>
+<div class="admonition info">
+<p class="admonition-title">For the Release Notes of OpenVidu Platform 3.5.0, please visit here: <a class="platform-link-color" href="https://openvidu.io/3.5/docs/releases/#350" target="_blank" rel="noopener">OpenVidu Platform 3.5.0 <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></p>
+</div>
+<h3 id="changelog_2">Changelog<a class="headerlink" href="#changelog_2" title="Anchor link to this section for reference">#</a></h3>
+<ul>
+<li><strong>End-to-End encryption in rooms</strong>: End-to-End Encryption (E2EE) can now be enabled in rooms to protect all sensitive data such as audio, video, chat messages, and participant names. With E2EE enabled, content is encrypted on the sender’s device and can only be decrypted by authorized participants on their own devices using a secret shared key, ensuring that no intermediate server (including the OpenVidu Meet deployment itself) can access the data. When creating a room, E2EE can be enabled, and participants must join the meeting using the same shared secret. Audio and video streams are fully encrypted end to end. Chat messages and participant names are also encrypted and automatically decrypted on reception.</li>
+<li><strong>Improved meeting layout with Last N Speakers support</strong>: the meeting layout has been enhanced with a new <em>Last N Speakers</em> mode, designed to improve visual clarity and client-side performance in meetings with a large number of participants. This layout prioritizes the local user and up to N remote participants based on recent voice activity, where N is configurable (from 1 to 6). The layout is intelligent, applying stable replacement policies to avoid excessive or distracting participant reordering, only updating when meaningful changes in voice activity are detected. Audio remains continuously active even when participants are not visible, preventing any loss of spoken content while significantly reducing hardware usage on the client side.</li>
+<li><strong>Room names and participant names can now include any character</strong>: the restriction to only allow alphanumeric characters, hyphens, and underscores has been removed. Room names and participant names can now include any character, supporting better internationalization and customization.</li>
+<li><strong>OpenVidu Meet persistent data is now stored in MongoDB instead of S3</strong>: OpenVidu Meet now uses MongoDB as the primary database to store all Meet-related data (with the exception of recording files, which continue to be stored in S3). This change addresses the limitations of the S3 API when performing advanced search and query operations. When upgrading from a previous version OpenVidu Meet 3.5.0 will automatically perform a migration of the existing data from S3 to MongoDB.</li>
+<li><strong>Better room and recording filter and sorting capabilities</strong>: as a result of persistent data migration to MongoDB, new filtering options have been added to the room and recording search functionality based on their status. In addition, search results can now be sorted by multiple fields, both in ascending and descending order, providing more flexible and powerful querying capabilities. Rooms and recordings are now sorted by creation date by default, instead of being ordered alphabetically by room ID.</li>
+<li><strong>Fixed authentication and recording state inconsistencies caused by edge cases</strong>: resolved an issue that prevented users from joining rooms when an expired access token was present (for example, when accessing a room directly without going through the console), ensuring seamless access regardless of token expiration. Additionally, fixed a potential inconsistent recording state after a server crash by introducing a periodic scheduler that detects and reconciles recordings left in an active state when the corresponding webhook event was not received.</li>
+<li><strong>Fixed a potential inconsistent room state after a server crash</strong>: this issue occurred when a room was in an active meeting state (<code>active_meeting</code>) and the meeting was ended, but the expected webhook event (<code>room_finished</code>) was not received, typically due to a server failure. In these cases, the room state was never updated correctly. A new scheduler has been introduced to periodically (every 15 minutes) detect rooms in this situation and automatically reconcile their state.</li>
+<li><strong>Fixed an issue with duplicate participant name suffixes</strong>: participant names could end up with repeated "_1" suffixes when joining a meeting with the same name as an existing participant. This is now fixed.</li>
+<li>
+<p>Rooms cannot be updated while a meeting is active.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The migration process of OpenVidu Meet persistent data from S3 to MongoDB is expected to run transparently and without any issues. However, as a precaution measure, it is strongly recommended to create a backup of the existing data in S3 before upgrading OpenVidu to version 3.5.0.</p>
+</div>
+</li>
+</ul>
+<h3 id="breaking-changes_2">Breaking changes<a class="headerlink" href="#breaking-changes_2" title="Anchor link to this section for reference">#</a></h3>
+<ul>
+<li><strong>Rooms can no longer be updated while a meeting is active</strong>: updating a room is now restricted when there is an active meeting associated with it, preventing state inconsistencies and unexpected behavior during ongoing sessions.</li>
+</ul>
 <h2 id="340">3.4.0<a class="headerlink" href="#340" title="Anchor link to this section for reference">#</a></h2>
 <div class="admonition info">
-<p class="admonition-title">For the Release Notes of OpenVidu Platform 3.4.0, please visit here: <a class="platform-link-color" href="../../docs/releases/#340" target="_blank">OpenVidu Platform 3.4.0 <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></p>
+<p class="admonition-title">For the Release Notes of OpenVidu Platform 3.4.0, please visit here: <a class="platform-link-color" href="https://openvidu.io/3.4/docs/releases/#340" target="_blank" rel="noopener">OpenVidu Platform 3.4.0 <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></p>
 </div>
 <h3 id="introducing-openvidu-meet">Introducing OpenVidu Meet<a class="headerlink" href="#introducing-openvidu-meet" title="Anchor link to this section for reference">#</a></h3>
 <p>We are excited to announce a new product in the OpenVidu family: <strong>OpenVidu Meet</strong>.</p>
@@ -8077,7 +12305,7 @@
 <li><strong>OpenVidu Meet</strong> is a response to the growing demand for specialized video conferencing solutions that cater to the unique needs of virtual meetings. While OpenVidu Platform provides a powerful foundation for real-time communication, OpenVidu Meet builds on that foundation to deliver a more focused set of features and a simplified integration process.</li>
 </ul>
 <p>By separating the product lines, we keep the developer‑first power of OpenVidu Platform while offering a refined, ready‑to‑use solution for common videoconferencing use cases (e‑learning, telehealth, collaboration, customer support...). This clarity helps teams choose low‑level control with OpenVidu Platform, or the fastest path to value-off‑the‑shelf with OpenVidu Meet. In short, many use cases that fall under the category of "video conferencing applications" can be satisfied with OpenVidu Meet, saving development time and resources.</p>
-<p>You can read more about the differences between both OpenVidu products here: <a href="../../openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a>.</p>
+<p>You can read more about the differences between both OpenVidu products here: <a href="https://openvidu.io/openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a>.</p>
 <h3 id="am-i-the-right-fit-for-openvidu-meet">Am I the right fit for OpenVidu Meet?<a class="headerlink" href="#am-i-the-right-fit-for-openvidu-meet" title="Anchor link to this section for reference">#</a></h3>
 <p><strong>If you are new to OpenVidu</strong>, you may find that OpenVidu Meet is ideal for teams, businesses, and organizations that need a reliable and secure video conferencing solution running on their servers. It is perfect for any use case that falls under the category of "video conferencing application", without the need for extensive custom development. OpenVidu Meet is currently built for the web, with mobile support coming soon.</p>
 <p>If your use case requires a high degree of customization, or if you need to build a unique real-time experience that goes beyond the typical video conferencing features, OpenVidu Platform is likely a better fit. It also supports a wider range of platforms, including native mobile and desktop applications.</p>
@@ -8087,22 +12315,20 @@
 <li>Mobile platforms embedding (iOS and Android).</li>
 <li>More branding and customization options.</li>
 <li>Locked rooms.</li>
-<li>E2E encryption.</li>
-<li>Live captions.</li>
 <li>AI meeting summaries.</li>
 <li>And much more...</li>
 </ul>
 <h3 id="get-started-with-openvidu-meet">Get started with OpenVidu Meet<a class="headerlink" href="#get-started-with-openvidu-meet" title="Anchor link to this section for reference">#</a></h3>
 <p>If you want to learn more about OpenVidu Meet, check out the following resources:</p>
 <ul>
-<li>Compare OpenVidu Meet vs OpenVidu Platform: <a href="../../openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a></li>
-<li>Launch OpenVidu Meet locally in a couple of minutes: <a href="../deployment/local/">Try OpenVidu Meet locally</a></li>
-<li>Embed OpenVidu Meet into your web app: <a href="../embedded/intro/">OpenVidu Meet Embedded</a></li>
+<li>Compare OpenVidu Meet vs OpenVidu Platform: <a href="https://openvidu.io/openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a></li>
+<li>Launch OpenVidu Meet locally in a couple of minutes: <a href="https://openvidu.io/3.4/meet/deployment/local/">Try OpenVidu Meet locally</a></li>
+<li>Embed OpenVidu Meet into your web app: <a href="https://openvidu.io/3.4/meet/embedded/intro/">OpenVidu Meet Embedded</a></li>
 </ul>
-<h3 id="patch-releases">Patch releases<a class="headerlink" href="#patch-releases" title="Anchor link to this section for reference">#</a></h3>
+<h3 id="patch-releases_1">Patch releases<a class="headerlink" href="#patch-releases_1" title="Anchor link to this section for reference">#</a></h3>
 <h4 id="341">3.4.1<a class="headerlink" href="#341" title="Anchor link to this section for reference">#</a></h4>
 <ul>
-<li><strong>Update authentication methods to use header-based tokens instead of cookies</strong>: when <a href="../embedded/intro/">embedding OpenVidu Meet</a>, the strategy (<code>SameSite=Strict</code>) was causing issues when loading the application and the embedable component from different domains. Using the most permissive cookie policy available (<code>SameSite=None</code>) still caused issues in some browsers that block third-party cookies by default. Now OpenVidu Meet avoids cookies and instead uses header-based tokens for authentication, which is more reliable and secure. See <a href="https://github.com/OpenVidu/openvidu-meet/commit/4e80b5a060c1ae0f8942527dbdc6ee221992caab" target="_blank" rel="noopener">commit 4e80b5a <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</li>
+<li><strong>Update authentication methods to use header-based tokens instead of cookies</strong>: when <a href="https://openvidu.io/3.4/meet/embedded/intro/">embedding OpenVidu Meet</a>, the strategy (<code>SameSite=Strict</code>) was causing issues when loading the application and the embedable component from different domains. Using the most permissive cookie policy available (<code>SameSite=None</code>) still caused issues in some browsers that block third-party cookies by default. Now OpenVidu Meet avoids cookies and instead uses header-based tokens for authentication, which is more reliable and secure. See <a href="https://github.com/OpenVidu/openvidu-meet/commit/4e80b5a060c1ae0f8942527dbdc6ee221992caab" target="_blank" rel="noopener">commit 4e80b5a <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</li>
 </ul>
 
 
@@ -8175,7 +12401,7 @@
         <!-- Link to previous page -->
         
           
-          <a href="../embedded/reference/webhooks/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Webhooks">
+          <a href="/latest/meet/embedded/deploy-your-app/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deploy your application">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
@@ -8185,7 +12411,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Webhooks
+                Deploy your application
               </div>
             </div>
           </a>
@@ -8194,7 +12420,7 @@
         <!-- Link to next page -->
         
           
-          <a href="../../docs/" class="md-footer__link md-footer__link--next" aria-label="Next: OpenVidu Platform">
+          <a href="/latest/docs/" class="md-footer__link md-footer__link--next" aria-label="Next: OpenVidu Platform">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
@@ -8320,8 +12546,8 @@
 
         <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
           <h4>ACKNOWLEDGMENTS</h4>
-          <a href="/acknowledgments" style="display: flex; gap: 8px;">
-            <img class="acknowledgments-footer" style="max-width: 260px;" src="/assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
+          <a href="/acknowledgments/" style="display: flex; gap: 8px;">
+            <img class="acknowledgments-footer" style="max-width: 260px;" src="/latest/assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
           </a>
         </div>
 
@@ -8428,7 +12654,7 @@
 
 <!-- Add scripts that need to run before here -->
 
-<script src="/javascripts/target-blank.js"></script>
+<script src="/latest/javascripts/target-blank.js"></script>
 
 
 
@@ -8439,9 +12665,15 @@
 
 
 
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+
+
+<script src="/javascripts/releases-scroll-to-version.js"></script>
+
+
+
+      <script src="/latest/assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/openvidu-register/openvidu-register.js"></script>
+        <script src="/latest/javascripts/openvidu-register/openvidu-register.js"></script>
       
     
 
