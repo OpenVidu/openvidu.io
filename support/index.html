@@ -75,6 +75,8 @@
 
 
 
+
+
 <style>
   div.md-search {
     display: none;
@@ -250,7 +252,7 @@
           <aside class="md-banner md-banner--warning">
             <div class="md-banner__inner md-grid md-typeset">
               
-<span class="outdated-warning-text" id="outdated-warning-text">Warning: You are reading docs for an old version<br></span>
+<span class="outdated-warning-text" id="outdated-warning-text"><strong>Warning:</strong> You are reading docs for an old version<br></span>
 <a href="#" id="latest-version-link">
   <strong>GO TO LATEST VERSION</strong>
 </a>
@@ -280,8 +282,8 @@
     const warning = document.getElementById('outdated-warning-text');
     if (warning && fromReleaseNotes && version && version !== 'latest') {
       warning.innerHTML =
-        'You are viewing the <strong>' + version + '</strong> version of the docs ' +
-        'because you followed a link from the ' + version + ' release notes.<br />';
+        '<strong>Warning:</strong> You are viewing the <strong>' + version + '</strong> version of the docs<br />' +
+        'because you followed a link from the ' + version + ' release notes<br />';
     }
   })();
 </script>
