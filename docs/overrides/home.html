@@ -69,39 +69,89 @@
       <a href="https://github.com/OpenVidu/openvidu" target="_blank"
         >★ <span id="github-stars-count"></span> on GitHub</a
       ></span
+    ><span id="dockerhub-pulls-segment" hidden>
+      ·
+      <a
+        href="https://hub.docker.com/r/openvidu/openvidu-server"
+        target="_blank"
+        >🐳 <span id="dockerhub-pulls-count"></span> Docker pulls</a
+      ></span
     >
   </p>
   <script>
-    // Live GitHub star count for the hero trust line. Cached per session;
-    // the segment stays hidden if the API is unavailable (rate limit,
-    // offline), so the line gracefully shortens to "Open source · Apache 2.0".
+    // Live counters for the hero trust line (GitHub stars, Docker Hub pulls).
+    // Each value is cached per session, and its segment stays hidden if the
+    // source is unavailable (rate limit, offline), so the line gracefully
+    // shortens to "Open source · Apache 2.0".
     (function () {
-      var countEl = document.getElementById("github-stars-count");
-      var segmentEl = document.getElementById("github-stars-segment");
-      if (!countEl || !segmentEl) return;
-      function render(stars) {
-        var n = parseInt(stars, 10);
-        if (!n) return;
-        countEl.textContent =
-          n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : n;
-        segmentEl.hidden = false;
+      function setupCounter(countId, segmentId, cacheKey, fetchValue) {
+        var countEl = document.getElementById(countId);
+        var segmentEl = document.getElementById(segmentId);
+        if (!countEl || !segmentEl) return;
+        function render(value) {
+          if (!value) return;
+          countEl.textContent = value;
+          segmentEl.hidden = false;
+        }
+        var cached = sessionStorage.getItem(cacheKey);
+        if (cached) {
+          render(cached);
+          return;
+        }
+        fetchValue()
+          .then(function (value) {
+            if (value) {
+              sessionStorage.setItem(cacheKey, value);
+              render(value);
+            }
+          })
+          .catch(function () {});
       }
-      var cached = sessionStorage.getItem("ov-github-stars");
-      if (cached) {
-        render(cached);
-        return;
+
+      function formatCount(n) {
+        n = parseInt(n, 10);
+        if (!n) return null;
+        return n >= 1000
+          ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k"
+          : String(n);
       }
-      fetch("https://api.github.com/repos/OpenVidu/openvidu")
-        .then(function (res) {
-          return res.ok ? res.json() : null;
-        })
-        .then(function (data) {
-          if (data && data.stargazers_count) {
-            sessionStorage.setItem("ov-github-stars", data.stargazers_count);
-            render(data.stargazers_count);
-          }
-        })
-        .catch(function () {});
+
+      setupCounter(
+        "github-stars-count",
+        "github-stars-segment",
+        "ov-github-stars",
+        function () {
+          return fetch("https://api.github.com/repos/OpenVidu/openvidu")
+            .then(function (res) {
+              return res.ok ? res.json() : null;
+            })
+            .then(function (data) {
+              return data ? formatCount(data.stargazers_count) : null;
+            });
+        }
+      );
+
+      // hub.docker.com's API sends no CORS headers, so the pull count is
+      // read from the shields.io badge for the repository (CORS-enabled,
+      // returns the count pre-formatted, e.g. "966k").
+      setupCounter(
+        "dockerhub-pulls-count",
+        "dockerhub-pulls-segment",
+        "ov-dockerhub-pulls",
+        function () {
+          return fetch(
+            "https://img.shields.io/docker/pulls/openvidu/openvidu-server"
+          )
+            .then(function (res) {
+              return res.ok ? res.text() : null;
+            })
+            .then(function (svg) {
+              var match =
+                svg && svg.match(/docker pulls:?\s*([\d.,]+\s?[kMB]?)/i);
+              return match ? match[1].trim() : null;
+            });
+        }
+      );
     })();
   </script>
 </section>
