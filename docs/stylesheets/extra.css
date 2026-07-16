@@ -318,7 +318,7 @@ p:has(> a.glightbox) {
 }
 
 .home-credentials-line {
-  margin-top: 0.15em;
+  margin-top: 0.5em;
 }
 
 .features-list:after {
