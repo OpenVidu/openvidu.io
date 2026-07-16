@@ -458,6 +458,7 @@ plugins:
         - meet/embedded/reference/*.md: OpenVidu Meet - Reference documentation
         OpenVidu Platform:
         - docs/index.md: OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
+        - docs/releases.md: OpenVidu Platform - Release notes
         - docs/getting-started.md: OpenVidu Platform - Getting started
         - docs/comparing-openvidu.md: OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
         - docs/developing-your-openvidu-app/index.md: OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.

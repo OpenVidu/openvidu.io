@@ -229,6 +229,70 @@ copyFilesFromVersionToRoot() {
     done
 }
 
+copyReleasesFromTo() {
+    # Copy the releases pages (Meet and Platform) from a SOURCE version folder into a
+    # DESTINATION version folder, so the destination shows the full, most-recent release
+    # notes regardless of the documentation version being browsed.
+    #
+    # The source page keeps only relative links to other versioned pages and to assets.
+    # Those are rewritten in the copy to absolute "/latest/" links, because an older
+    # destination folder may not contain the newer pages nor the same hashed asset files.
+    # The canonical tag is intentionally left untouched: the copy already declares the
+    # source (latest) version as canonical, which consolidates every copy onto a single URL.
+    local SRC="$1" # source version folder (holds the most recent release notes)
+    local DST="$2" # destination version folder
+
+    # Never copy a version onto itself (it would rewrite the canonical page's own links)
+    if [ "$SRC" = "$DST" ]; then
+        return 0
+    fi
+
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        local SRC_DIR="$SRC/$VP/releases"
+        local DST_DIR="$DST/$VP/releases"
+
+        # Only copy when both sides have this versioned releases page
+        # (e.g. Meet documentation did not exist before 3.4.0)
+        [ -f "$SRC_DIR/index.html" ] || continue
+        [ -d "$DST_DIR" ] || continue
+
+        # HTML version (always generated). The page lives two levels deep (<vp>/releases/),
+        # so in its links "../../" points at the version root and "../" at the <vp> root.
+        # Rewrite them to absolute "/latest/" links (longer pattern first). Only href/src
+        # attributes are touched, so Material's runtime JS config (base, search path) keeps
+        # working per version folder. The <link rel="canonical"> tag is left as-is.
+        cp "$SRC_DIR/index.html" "$DST_DIR/index.html"
+        sed -i -E "s#(href|src)=\"\.\./\.\./#\1=\"/latest/#g" "$DST_DIR/index.html"
+        sed -i -E "s#(href|src)=\"\.\./#\1=\"/latest/$VP/#g" "$DST_DIR/index.html"
+        echo "Copied releases page into '$DST_DIR/index.html' (internal links pointing to /latest/)"
+
+        # Markdown version for LLMs. The mkdocs-llmstxt plugin generates it for pages listed
+        # in its 'sections' (both releases pages are). It may still be absent for versions
+        # built before the page was added there, so its presence is checked. Its internal
+        # links are already absolute URLs emitted by the plugin, so it is copied verbatim
+        # with no rewriting.
+        if [ -f "$SRC_DIR/index.md" ]; then
+            cp "$SRC_DIR/index.md" "$DST_DIR/index.md"
+            echo "Copied releases Markdown (llms) into '$DST_DIR/index.md'"
+        fi
+    done
+}
+
+copyReleasesToAllOtherVersions() {
+    # Copy the just-published latest release notes into every other published version folder.
+    if [ ! -f versions.json ]; then
+        echo "versions.json not found; skipping copy of releases to other versions"
+        return 0
+    fi
+
+    local ALL_VERSIONS
+    ALL_VERSIONS=$(grep -oE "\"version\"[[:space:]]*:[[:space:]]*\"[^\"]+\"" versions.json | sed -E "s/.*\"([^\"]+)\"$/\1/")
+
+    for V in $ALL_VERSIONS; do
+        copyReleasesFromTo "$VERSION" "$V"
+    done
+}
+
 updateWebsite() {
     # Checkout to gh-pages branch
     git checkout "$GH_BRANCH" || {
@@ -295,6 +359,15 @@ updateWebsite() {
         # Update sitemap in the new version removing NVP
         updateVersionSitemap
 
+        # This is a past version: overwrite its just-rebuilt releases pages with the current
+        # latest ones, so it still shows the full, most-recent release notes
+        LATEST_VERSION=$(readlink latest 2>/dev/null || true)
+        if [ -n "$LATEST_VERSION" ]; then
+            copyReleasesFromTo "$LATEST_VERSION" "$VERSION"
+        else
+            echo "Could not resolve the 'latest' symlink; releases pages left as built"
+        fi
+
         # Commit the updated version folder
         git add .
         git commit -am "Version $VERSION updated. Non-versioned pages untouched"
@@ -315,6 +388,10 @@ updateWebsite() {
 
         # Update sitemap in the new version removing NVP
         updateVersionSitemap
+
+        # Copy the newly published latest release notes into every other version folder, so
+        # a user browsing any documentation version sees the full, most-recent release notes
+        copyReleasesToAllOtherVersions
 
         # Commit changes
         git add .

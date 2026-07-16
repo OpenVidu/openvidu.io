@@ -16,6 +16,7 @@ non‑versioned pages** (pricing, blog, support…) served once at the site root
 
 - [Background concepts](#background-concepts)
 - [The core problem these scripts solve](#the-core-problem-these-scripts-solve)
+- [Keeping the releases pages always up to date](#keeping-the-releases-pages-always-up-to-date)
 - [Files in this folder](#files-in-this-folder)
 - [`push-new-version.sh` — the core script](#push-new-versionsh--the-core-script)
 - [`overwrite-latest-version.sh`](#overwrite-latest-versionsh)
@@ -93,6 +94,49 @@ The scripts therefore **post-process mike's output** on the `gh-pages` branch to
   `404.html`.
 - Drop a small redirect page at each version root so `/X.Y.Z/` and `/latest/` land on
   the docs.
+
+---
+
+## Keeping the releases pages always up to date
+
+There are two releases pages — OpenVidu Meet (`meet/releases/`) and OpenVidu Platform
+(`docs/releases/`) — and both are **versioned** pages. Left untouched, an old version's
+releases page would only list the notes up to that version: a visitor browsing `3.5.0`
+would never see the notes for `3.6.0`, `3.7.0`, … even though release notes are inherently
+global information.
+
+We want every version to serve the **full, most-recent** release notes. This is achieved
+in two complementary parts:
+
+1. **Copy at publish time (this folder).** On every publish, the latest releases pages are
+   copied into **every other version folder**, so each `/X.Y.Z/…/releases/` serves the same
+   complete changelog as `/latest/…/releases/`. See
+   [`copyReleasesToAllOtherVersions` / `copyReleasesFromTo`](#the-releases-page-copy-helpers).
+
+2. **Jump to the viewed version (front-end).** Because the page is now identical across
+   versions, a small client-side script scrolls the visitor to the section matching the
+   version they are browsing — e.g. opening `/3.5.0/meet/releases/` jumps to the `## 3.5.0`
+   section (anchor `#350`). The script lives outside this folder in
+   [`docs/javascripts/releases-scroll-to-version.js`](../docs/javascripts/releases-scroll-to-version.js)
+   and is loaded only on the releases pages, via the `scrolltoversion` tag in their front
+   matter (wired in [`docs/overrides/main.html`](../docs/overrides/main.html)). It is a
+   no-op when the URL already has an anchor (so cross-page `#380` links are respected) or
+   when there is no matching section (the `latest` alias stays at the top, newest first).
+
+Two consequences worth keeping in mind:
+
+- **Links are rewritten to `/latest/`.** The copied page keeps relative links to other
+  versioned pages and to hashed asset files, which would break inside an older version
+  folder (the newer pages may not exist there, and asset hashes differ across builds). They
+  are rewritten to absolute `/latest/…` links so they always resolve. See the
+  [link-rewriting reference](#link-rewriting-reference).
+- **The canonical tag is left untouched.** Each copy already declares the latest version as
+  its `<link rel="canonical">`, so all copies consolidate onto a single URL for SEO — no
+  duplicate-content penalty.
+- **The LLM Markdown companion travels too.** Pages listed in the `mkdocs-llmstxt` plugin's
+  `sections` also get an `index.md` next to their `index.html` (both releases pages are
+  listed). The copy step propagates it as well, so `/X.Y.Z/<vp>/releases/index.md` stays in
+  sync. Unlike the HTML, its links are already absolute, so it is copied verbatim.
 
 ---
 
@@ -192,13 +236,16 @@ The post-processing stage, run on the `gh-pages` branch:
 4. Branch on `UPDATE_LATEST`:
     - **`false`** — remove the non-versioned pages, root files and feeds from the version
       folder (they must not appear inside `/X.Y.Z/`), install the redirect as
-      `"$VERSION"/index.html`, prune the version sitemap (`updateVersionSitemap`), and
-      commit with _"Non-versioned pages untouched"_.
+      `"$VERSION"/index.html`, prune the version sitemap (`updateVersionSitemap`), copy the
+      **current latest** releases pages into this version so it does not revert to stale
+      notes (`copyReleasesFromTo` via the `latest` symlink), and commit with _"Non-versioned
+      pages untouched"_.
     - **`true`** — run `changeNonVersionedPagesLinks`, then `copyFilesFromVersionToRoot`
       to promote the version's global pages/assets to the root, install the redirect as
       `"$VERSION"/index.html`, update both the root sitemap (`updateSitemap`) and the
-      version sitemap (`updateVersionSitemap`), and commit with _"Non-versioned pages
-      updated"_.
+      version sitemap (`updateVersionSitemap`), copy the **new latest** releases pages into
+      every other version (`copyReleasesToAllOtherVersions`), and commit with _"Non-versioned
+      pages updated"_.
 5. Push `gh-pages` and check out `main`.
 
 ### The link-rewriting helpers
@@ -249,6 +296,37 @@ Promotes the newly built version's global content to the site root:
 
 This is what keeps `/pricing/`, `/blog/`, etc. always in sync with the most recent
 release.
+
+### The releases-page copy helpers
+
+These implement the [always-up-to-date releases pages](#keeping-the-releases-pages-always-up-to-date).
+They run inside `updateWebsite`, on the `gh-pages` branch, just before the commit.
+
+- **`copyReleasesFromTo SRC DST`** — copies the releases pages from a source version folder
+  into a destination version folder. For each versioned page (`docs`, `meet`):
+    - Skips it if either side lacks that releases page (e.g. Meet did not exist before
+      `3.4.0`), and never copies a version onto itself.
+    - Copies `SRC/<vp>/releases/index.html` over `DST/<vp>/releases/index.html` and rewrites
+      the copy's relative `href`/`src` links to absolute `/latest/…` links: the page sits
+      two levels deep (`<vp>/releases/`), so `../../` (version root) → `/latest/` and `../`
+      (the `<vp>` root) → `/latest/<vp>/`. Only `href`/`src` attributes are touched, so
+      Material's runtime JS (its `base` and search-index paths) keeps operating per version
+      folder. The `<link rel="canonical">` tag is deliberately left as-is.
+    - Also copies the LLM Markdown companion `SRC/<vp>/releases/index.md` **when it exists**.
+      The [`mkdocs-llmstxt`](https://github.com/pawamoy/mkdocs-llmstxt) plugin generates this
+      `.md` for pages listed in its `sections` in `mkdocs.yml`; **both** releases pages
+      (`meet/releases.md` and `docs/releases.md`) are listed. The existence check still
+      matters for versions built before a page was added there. Its internal links are
+      already **absolute** URLs emitted by the plugin (e.g. `https://openvidu.io/3.7.0/docs/…`),
+      so it is copied **verbatim**, with no rewriting.
+- **`copyReleasesToAllOtherVersions`** — reads the version list from `versions.json` and
+  calls `copyReleasesFromTo "$VERSION" <each other version>`. Used on the latest-publish
+  path, where `"$VERSION"` is the freshly built latest.
+
+On the past-version path (`UPDATE_LATEST=false`), the direction is reversed: the script
+resolves the current latest via the `latest` symlink (`readlink latest`) and calls
+`copyReleasesFromTo "$LATEST_VERSION" "$VERSION"`, so a rebuilt old version does not revert
+to its stale, version-local notes.
 
 ---
 
@@ -326,6 +404,10 @@ Summary of the final link conventions produced by the scripts:
 | Search index → non-versioned page   | `pricing/`         | `/pricing/`                       |
 | Root sitemap → versioned page       | `/3.0.0/docs/`     | `/latest/docs/`                   |
 | Root sitemap → non-versioned page   | `/3.0.0/pricing/`  | `/pricing/`                       |
+| Copied releases page → version root | `../../docs/`      | `/latest/docs/`                   |
+| Copied releases page → `<vp>` root  | `../features/`     | `/latest/meet/features/`          |
+| Copied releases page → assets       | `../../assets/`    | `/latest/assets/`                 |
+| Canonical on copied releases page   | `…/3.7.0/…`        | `…/3.7.0/…` (unchanged)           |
 
 ---
 
@@ -376,3 +458,13 @@ workflow).
   `NON_VERSIONED_PAGES`; if you add a new versioned section, add it to `VERSIONED_PAGES`
   in [`push-new-version.sh`](push-new-version.sh). Otherwise its links will not be
   rewritten and it will not be relocated correctly.
+- **Releases-page canonical tracks the latest version.** Because the copied releases pages
+  inherit the source's canonical, the single consolidated URL follows the newest version
+  number (`…/3.7.0/…` → `…/3.8.0/…` on the next release). This is valid — search engines
+  simply re-consolidate — but the canonical URL is not stable across releases. If a stable
+  target is preferred, rewrite the canonical to `/latest/…/releases/` in both the copies
+  and the source page.
+- **Per-version search index is not updated by the copy.** The copy overwrites the rendered
+  `index.html`, but each version's `search/search_index.json` still holds that version's
+  original releases text. The page a visitor sees is current; in-version search results for
+  the releases page may lag until that version is rebuilt.
