@@ -91,6 +91,7 @@
 {% block extrahead %}
 <!-- Add head tags that need to be applied before here -->
 {{ super() }}
+{% include "partials/og.html" %}
 <!-- Add head tags that need to be applied afterwards here -->
 {% endblock %}
 
