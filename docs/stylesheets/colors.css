@@ -101,14 +101,6 @@
   .home-trust-line {
     color: #ffffff;
   }
-  #home-secondary-button {
-    color: #ffffff;
-  }
-  #home-secondary-button:hover {
-    color: #ffffff;
-    background-color: var(--slate-md-typeset-color);
-    border-color: var(--slate-md-typeset-color);
-  }
   a#account-btn {
     color: var(--slate-md-typeset-color);
   }
@@ -139,5 +131,19 @@
 #home-primary-button:hover {
   background-color: #05b855;
   border-color: #05b855;
+  color: #ffffff;
+}
+
+/* Hero secondary CTA: OpenVidu Platform blue (same as the Platform product
+   card's Get Started button), so the two hero buttons mirror the product
+   cards' color identities. */
+#home-secondary-button {
+  background-color: #0088aa;
+  border-color: #0088aa;
+  color: #ffffff;
+}
+#home-secondary-button:hover {
+  background-color: #007394;
+  border-color: #007394;
   color: #ffffff;
 }
