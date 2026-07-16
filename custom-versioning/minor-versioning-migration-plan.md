@@ -1,5 +1,9 @@
 # Migration plan: minor-grouped documentation versions (`3.Y`)
 
+> **STATUS: EXECUTED on 2026-07-16.** All phases completed and verified except the manual
+> external tasks in Phase 6 (Medium links, Search Console resubmit) and the post-soak
+> deletion of the `gh-pages-backup-pre-minor` backup branch.
+
 **Goal:** stop publishing one documentation version per patch release. Each **minor** release
 gets a single documentation version named `3.Y` (branch + `gh-pages` folder + dropdown
 entry), whose content always reflects the **newest patch** of that minor. The version
