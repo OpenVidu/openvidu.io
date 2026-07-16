@@ -13,7 +13,7 @@ VERSIONED_PAGES=("docs" "meet")
 validateArgs() {
     # If there is no version passed to the script as an argument, exit
     if [ $# -lt 1 ]; then
-        echo "Usage: $0 X.Y.Z"
+        echo "Usage: $0 X.Y"
         exit 1
     fi
 
@@ -21,8 +21,8 @@ validateArgs() {
     UPDATE_LATEST=${2:-true}
 
     # Check if second argument is a boolean if provided
-    if [ "$UPDATE_LATEST" != true && "$UPDATE_LATEST" != false ]; then
-        echo "Second argument must be a boolean if provided: $0 X.Y.Z false"
+    if [ "$UPDATE_LATEST" != true ] && [ "$UPDATE_LATEST" != false ]; then
+        echo "Second argument must be a boolean if provided: $0 X.Y false"
         exit 1
     fi  
 }
@@ -145,7 +145,7 @@ changeNonVersionedPagesLinks() {
 changeSearchIndexLinks() {
     local SEARCH_INDEX="$VERSION/search/search_index.json"
 
-    # Change all links to VP to use absolute links including the version ("/X.Y.Z/VP/")
+    # Change all links to VP to use absolute links including the version ("/X.Y/VP/")
     for VP in "${VERSIONED_PAGES[@]}"; do
         sed -i "s|\"location\":\"$VP/|\"location\":\"/$VERSION/$VP/|g" "$SEARCH_INDEX"
     done
@@ -229,6 +229,77 @@ copyFilesFromVersionToRoot() {
     done
 }
 
+copyReleasesFromTo() {
+    # Copy the releases pages (Meet and Platform) from a SOURCE version folder into a
+    # DESTINATION version folder, so the destination shows the full, most-recent release
+    # notes regardless of the documentation version being browsed.
+    #
+    # The release notes' own links are authored as absolute, version-pinned URLs, so the
+    # only relative links left in the built page are theme chrome (navigation menu and
+    # hashed assets). Those are rewritten in the copy to absolute "/latest/" links, because
+    # an older destination folder does not contain the same hashed asset files nor every
+    # page the latest nav points at. The canonical tag is intentionally left untouched: the
+    # copy already declares the source (latest) version as canonical, which consolidates
+    # every copy onto a single URL.
+    local SRC="$1" # source version folder (holds the most recent release notes)
+    local DST="$2" # destination version folder
+
+    # Never copy a version onto itself (it would rewrite the canonical page's own links)
+    if [ "$SRC" = "$DST" ]; then
+        return 0
+    fi
+
+    for VP in "${VERSIONED_PAGES[@]}"; do
+        local SRC_DIR="$SRC/$VP/releases"
+        local DST_DIR="$DST/$VP/releases"
+
+        # Only copy when both sides have this versioned releases page
+        # (e.g. Meet documentation did not exist before 3.4.0)
+        [ -f "$SRC_DIR/index.html" ] || continue
+        [ -d "$DST_DIR" ] || continue
+
+        # HTML version (always generated). The release notes' own links are authored as
+        # absolute, version-pinned URLs, so the only relative links left in the built page
+        # are theme-generated: the navigation menu and the hashed CSS/JS/image assets. They
+        # still must be rewritten to "/latest/" (the page sits two levels deep, so "../../"
+        # is the version root and "../" the <vp> root; longer pattern first), because the
+        # assets carry per-build content hashes and the nav reflects the latest structure,
+        # so left relative they would break styling or 404 against pages an older folder
+        # never had. Only href/src attributes are touched, so Material's runtime JS config
+        # (base, search path) keeps working per version folder; <link rel="canonical"> is
+        # left as-is.
+        cp "$SRC_DIR/index.html" "$DST_DIR/index.html"
+        sed -i -E "s#(href|src)=\"\.\./\.\./#\1=\"/latest/#g" "$DST_DIR/index.html"
+        sed -i -E "s#(href|src)=\"\.\./#\1=\"/latest/$VP/#g" "$DST_DIR/index.html"
+        echo "Copied releases page into '$DST_DIR/index.html' (internal links pointing to /latest/)"
+
+        # Markdown version for LLMs. The mkdocs-llmstxt plugin generates it for pages listed
+        # in its 'sections' (both releases pages are). It may still be absent for versions
+        # built before the page was added there, so its presence is checked. Its internal
+        # links are already absolute URLs emitted by the plugin, so it is copied verbatim
+        # with no rewriting.
+        if [ -f "$SRC_DIR/index.md" ]; then
+            cp "$SRC_DIR/index.md" "$DST_DIR/index.md"
+            echo "Copied releases Markdown (llms) into '$DST_DIR/index.md'"
+        fi
+    done
+}
+
+copyReleasesToAllOtherVersions() {
+    # Copy the just-published latest release notes into every other published version folder.
+    if [ ! -f versions.json ]; then
+        echo "versions.json not found; skipping copy of releases to other versions"
+        return 0
+    fi
+
+    local ALL_VERSIONS
+    ALL_VERSIONS=$(grep -oE "\"version\"[[:space:]]*:[[:space:]]*\"[^\"]+\"" versions.json | sed -E "s/.*\"([^\"]+)\"$/\1/")
+
+    for V in $ALL_VERSIONS; do
+        copyReleasesFromTo "$VERSION" "$V"
+    done
+}
+
 updateWebsite() {
     # Checkout to gh-pages branch
     git checkout "$GH_BRANCH" || {
@@ -276,24 +347,35 @@ updateWebsite() {
     if [ "$UPDATE_LATEST" = false ]; then
         echo "The latest version will not be updated"
 
-        # Remove NVP from new version
+        # Remove NVP from new version. All removals are tolerant ("|| true") because old
+        # version branches may not generate some of these files at all (e.g. llms.txt and
+        # the RSS feeds require plugins that older mkdocs.yml configurations do not have)
         rm -rf "${NON_VERSIONED_PAGES[@]/#/$VERSION/}"
-        rm "$VERSION/404.html"
+        rm "$VERSION/404.html" || true
         rm "$VERSION/index.md" || true
         rm "$VERSION/robots.txt" || true
         rm "$VERSION/llms.txt" || true
         rm "$VERSION/llms-full.txt" || true
-        rm "$VERSION/feed_rss_created.xml" . || true # RSS feed
-        rm "$VERSION/feed_rss_updated.xml" . || true # RSS feed
-        rm "$VERSION/feed_json_created.json" . || true # RSS feed
-        rm "$VERSION/feed_json_updated.json" . || true # RSS feed
-        rm "$VERSION/rss.xsl" . || true # RSS feed
+        rm "$VERSION/feed_rss_created.xml" || true # RSS feed
+        rm "$VERSION/feed_rss_updated.xml" || true # RSS feed
+        rm "$VERSION/feed_json_created.json" || true # RSS feed
+        rm "$VERSION/feed_json_updated.json" || true # RSS feed
+        rm "$VERSION/rss.xsl" || true # RSS feed
 
         # Move redirection file to the new version
         mv custom-versioning/redirect-from-version-to-getting-started.html "$VERSION/index.html"
 
         # Update sitemap in the new version removing NVP
         updateVersionSitemap
+
+        # This is a past version: overwrite its just-rebuilt releases pages with the current
+        # latest ones, so it still shows the full, most-recent release notes
+        LATEST_VERSION=$(readlink latest 2>/dev/null || true)
+        if [ -n "$LATEST_VERSION" ]; then
+            copyReleasesFromTo "$LATEST_VERSION" "$VERSION"
+        else
+            echo "Could not resolve the 'latest' symlink; releases pages left as built"
+        fi
 
         # Commit the updated version folder
         git add .
@@ -315,6 +397,10 @@ updateWebsite() {
 
         # Update sitemap in the new version removing NVP
         updateVersionSitemap
+
+        # Copy the newly published latest release notes into every other version folder, so
+        # a user browsing any documentation version sees the full, most-recent release notes
+        copyReleasesToAllOtherVersions
 
         # Commit changes
         git add .

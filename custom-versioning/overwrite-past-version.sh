@@ -12,7 +12,7 @@ command -v mike >/dev/null 2>&1 || {
 
 # If there is no version passed to the script as an argument, exit
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 X.Y.Z"
+    echo "Usage: $0 X.Y"
     exit 1
 else
     VERSION=$1
@@ -26,11 +26,10 @@ cd ..
 git fetch origin gh-pages
 git fetch origin "$VERSION"
 
-# Delete the version in gh-pages branch
-mike delete --push "$VERSION" || {
-    echo "Failure deleting version with mike"
-    exit 1
-}
+# Delete the version in gh-pages branch. Tolerant of a missing version: the first
+# publish of a version under a new name (e.g. after the X.Y.Z -> X.Y renaming) has
+# nothing to delete yet
+mike delete --push "$VERSION" || echo "Version $VERSION not present yet; first deployment under this name"
 
 # Publish again
 echo "Overwriting past version $VERSION"
