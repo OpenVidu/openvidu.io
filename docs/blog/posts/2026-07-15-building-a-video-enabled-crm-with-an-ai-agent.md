@@ -3,7 +3,7 @@ draft: false
 date: 2026-07-15
 slug: building-a-video-enabled-crm-with-an-ai-agent
 description: How a complete CRM with embedded video meetings was built with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained, per-guest room permissions, in seven prompts total.
-cover_image: poster.png
+cover_image: poster-light.png
 categories:
     - OpenVidu Meet
     - AI
@@ -26,7 +26,8 @@ hide:
 
 # Building a video-enabled CRM with an AI agent and OpenVidu Meet
 
-![OpenVidu Meet embedded in an AI-generated CRM](/assets/images/blog/crm-meet/poster.png "A video meeting, right inside the CRM")
+![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/crm-meet/poster-light.png#only-light "A video meeting, right inside the CRM")
+![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/crm-meet/poster-dark.png#only-dark "A video meeting, right inside the CRM")
 
 What does it take today to go from an empty folder to a working business app with **video meetings embedded in it**? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and **seven prompts**.
 
