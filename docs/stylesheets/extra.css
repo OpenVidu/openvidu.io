@@ -298,6 +298,17 @@ p:has(> a.glightbox) {
   margin: 0 0.5em;
 }
 
+.home-trust-line {
+  text-align: center;
+  font-size: 0.7rem;
+  margin-top: 1.2em;
+}
+
+.home-trust-line a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .features-list:after {
   clear: both;
   content: "";

@@ -97,7 +97,8 @@
     color: #ffffff;
   }
   .home-under-cta,
-  .home-under-cta a {
+  .home-under-cta a,
+  .home-trust-line {
     color: #ffffff;
   }
   #home-secondary-button {
