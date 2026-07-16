@@ -311,6 +311,10 @@ p:has(> a.glightbox) {
   text-decoration: underline;
 }
 
+.home-credentials-line {
+  margin-top: 0.4em;
+}
+
 .features-list:after {
   clear: both;
   content: "";
