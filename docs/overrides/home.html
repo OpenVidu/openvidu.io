@@ -114,12 +114,19 @@
           .catch(function () {});
       }
 
+      // Approximate a count, always rounding DOWN so the shown number is
+      // never higher than reality. Keeps two significant digits:
+      // 2115 -> "2.1k", 966155 -> "960k", 1134000 -> "1.1M".
       function formatCount(n) {
         n = parseInt(n, 10);
-        if (!n) return null;
-        return n >= 1000
-          ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k"
-          : String(n);
+        if (!n || n < 0) return null;
+        if (n >= 10) {
+          var magnitude = Math.pow(10, Math.floor(Math.log10(n)) - 1);
+          n = Math.floor(n / magnitude) * magnitude;
+        }
+        if (n >= 1000000) return parseFloat((n / 1000000).toFixed(1)) + "M";
+        if (n >= 1000) return parseFloat((n / 1000).toFixed(1)) + "k";
+        return String(n);
       }
 
       setupCounter(
@@ -137,24 +144,25 @@
         }
       );
 
-      // hub.docker.com's API sends no CORS headers, so the pull count is
-      // read from the shields.io badge for the repository (CORS-enabled,
-      // returns the count pre-formatted, e.g. "966k").
+      // hub.docker.com's API sends no CORS headers, so the RAW pull count is
+      // relayed through a shields.io dynamic-JSON badge (CORS-enabled) and
+      // then approximated client-side with formatCount, like the stars.
+      // (The standard shields docker/pulls badge pre-rounds the number, which
+      // would prevent our own floor-to-two-significant-digits rounding.)
       setupCounter(
         "dockerhub-pulls-count",
         "dockerhub-pulls-segment",
         "ov-dockerhub-pulls",
         function () {
           return fetch(
-            "https://img.shields.io/docker/pulls/openvidu/openvidu-server"
+            "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhub.docker.com%2Fv2%2Frepositories%2Fopenvidu%2Fopenvidu-server&query=%24.pull_count&label=pulls"
           )
             .then(function (res) {
               return res.ok ? res.text() : null;
             })
             .then(function (svg) {
-              var match =
-                svg && svg.match(/docker pulls:?\s*([\d.,]+\s?[kMB]?)/i);
-              return match ? match[1].trim() : null;
+              var match = svg && svg.match(/pulls:?\s*(\d+)\b/i);
+              return match ? formatCount(match[1]) : null;
             });
         }
       );
