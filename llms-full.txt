@@ -2802,13 +2802,11 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 ## Intro
 
-# 
+# OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
-## Host and customize your own high-quality video calling service in minutes
+\[[![](../assets/videos/meet/home/demo-poster.jpg)](../assets/videos/meet/home/demo-preview.mp4)\](https://openvidu.io/3.8/assets/videos/meet/home/demo.mp4)
 
-\[[](../assets/videos/meet/home/demo.mp4)\](https://openvidu.io/3.8/assets/videos/meet/home/demo.mp4)
-
-[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+[Deploy Meet in minutes](https://openvidu.io/3.8/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
 
 - **Feature-rich for videoconferencing**
 
@@ -2946,6 +2944,8 @@ ______________________________________________________________________
 
   Enable participants to share files easily during calls with a simple drag-and-drop feature.
 
+[Deploy Meet in minutes](https://openvidu.io/3.8/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+
 ______________________________________________________________________
 
 ## Integrations
@@ -2970,6 +2970,8 @@ curl --request POST \
     --header 'X-API-KEY: YOUR_API_KEY' \
     --data '{"roomName": "My Room"}'
 ```
+
+## Explore [**OpenVidu Meet Embedded**](https://openvidu.io/3.8/meet/embedded/intro) to integrate video calls into your application.
 
 ______________________________________________________________________
 
@@ -3047,7 +3049,7 @@ e-Learning
 
 Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or e-learning portal using **OpenVidu Meet Embedded**.
 
-- With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features comming soon to enhance the learning experience.
+- With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features coming soon to enhance the learning experience.
 
 - **High quality media**
 
@@ -3115,6 +3117,8 @@ Build trust with instant, reliable support through embedded video calls that per
 
   Customize the look and feel of your support rooms to match your brand identity.
 
+[Deploy Meet in minutes](https://openvidu.io/3.8/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+
 ______________________________________________________________________
 
 ## Free open-source edition vs Commercial edition
@@ -3131,13 +3135,13 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](/pricing/) for more details.
 
 ## You can choose the OpenVidu edition that best fits your needs when [deploying OpenVidu Meet](https://openvidu.io/3.8/meet/deployment/overview).
 
 ______________________________________________________________________
 
-## Need total control and advanced SDKs to build your custom real-time application? Checkout [**OpenVidu Platform**](https://openvidu.io/3.8/docs)
+## Need total control and advanced SDKs to build your custom real-time application? Check out [**OpenVidu Platform**](https://openvidu.io/3.8/docs). Not sure which one fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/).
 
 ## 3.8.0
 
@@ -9673,9 +9677,7 @@ Info
 Your server must respond with a **2xx HTTP status code** to acknowledge that you have received the webhook event. The timeout granted by OpenVidu Meet to do so is **5 seconds**. If your server takes longer than that to respond, or if it sends any status code other than 2xx, OpenVidu Meet will consider it a failure and trigger a retry.
 # OpenVidu Platform
 
-# 
-
-## Build your real-time application with complete freedom using SDKs
+# OpenVidu Platform: self-hosted WebRTC SDKs for real-time apps
 
 ## What is OpenVidu Platform?
 
@@ -9683,9 +9685,31 @@ OpenVidu Platform enables you to build real-time applications. You can build you
 
 OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live-streaming events, management and processing of drones and camera feeds...
 
-OpenVidu is built on the best open source technologies: [LiveKit](https://livekit.io) , from which it inherits all its amazing SDKs to integrate it into your front-end and back-end applications, and [mediasoup](https://mediasoup.org) , from which it inherits the best performance and optimization for media routing.
+OpenVidu gives you **LiveKit-compatible client and server SDKs** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.
+
+## Your first lines of code
+
+Real-time video in your app takes a few lines with the LiveKit-compatible SDKs:
+
+```javascript
+import { Room } from "livekit-client";
+
+const room = new Room();
+await room.connect("wss://your-openvidu-deployment", token);
+await room.localParticipant.enableCameraAndMicrophone();
+```
+
+```javascript
+import { AccessToken } from "livekit-server-sdk";
+
+const token = new AccessToken(API_KEY, API_SECRET, { identity: "user-1" });
+token.addGrant({ roomJoin: true, room: "my-room" });
+return await token.toJwt();
+```
+
+[Start with a tutorial](https://openvidu.io/3.8/docs/tutorials/application-server/index.md) [How to develop your OpenVidu app](https://openvidu.io/3.8/docs/developing-your-openvidu-app/index.md)
 
 ## Use cases
 
@@ -9716,7 +9740,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 
 ### AI Agents
 
-AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your in application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
+AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
 
 - Implement **real-time subtitles, translations, word-detection, sentiment analysis, profanity filter**, etc. in your video conferences.
 - Add a **summary generator** to your video conference app, that can extract the most important parts of the conversation to be shared with the participants.
@@ -9761,7 +9785,7 @@ Room "Remote support" has 3 Participants: Participant "Dan" is not publishing an
 
 ### Other concepts
 
-Apart from these basic building blocks, there are other concepts that will be tipically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
+Apart from these basic building blocks, there are other concepts that will be typically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
 
 - **Egress**: a process that exports media out of a Room. It is a special type of Participant that only subscribes to Tracks. It allows recording tracks to a file or streaming them to an external destination (via HLS or RTMP).
 - **Ingress**: a process that imports media into a Room. It is a special type of Participant that only publishes Tracks. It allows bringing external media sources into a Room, such as an MP4 file, an IP camera or a RTMP stream.
@@ -9781,6 +9805,8 @@ OpenVidu is available in two editions:
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | COMMUNITY Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability. PRO Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance**               |
 | **Number of servers**         | Your laptop                                                                                                                                                           | 1 Node                                                                                                                                                                           | 1 Master Node + N Media Nodes                                                                                 | 4 Master Nodes + N Media Nodes                                           |
 | **Installation instructions** | [Install](https://openvidu.io/3.8/docs/self-hosting/local/index.md)                                                                                                   | [Install](https://openvidu.io/3.8/docs/self-hosting/single-node/index.md)                                                                                                        | [Install](https://openvidu.io/3.8/docs/self-hosting/elastic/index.md)                                         | [Install](https://openvidu.io/3.8/docs/self-hosting/ha/index.md)         |
+
+[Build your first app — tutorials in 8 languages](https://openvidu.io/3.8/docs/tutorials/application-server/index.md) [Run OpenVidu locally](https://openvidu.io/3.8/docs/self-hosting/local/index.md)
 
 ## 3.8.0
 
