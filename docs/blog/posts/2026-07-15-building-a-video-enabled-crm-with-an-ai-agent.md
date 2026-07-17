@@ -44,7 +44,8 @@ There is a healthy ecosystem to choose from:
 - [**Claude Code** :fontawesome-solid-external-link:{.external-link-icon}](https://claude.com/claude-code){:target="\_blank"} (Anthropic) — the terminal-based agent we used for this experiment.
 - [**OpenAI Codex** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openai/codex){:target="\_blank"} — OpenAI's take on the same idea.
 - [**Antigravity** :fontawesome-solid-external-link:{.external-link-icon}](https://antigravity.google/){:target="\_blank"} (Google) — Google's agentic development platform, formerly known as Gemini CLI.
-- [**Cursor** :fontawesome-solid-external-link:{.external-link-icon}](https://cursor.com){:target="\_blank"} and [**Windsurf** :fontawesome-solid-external-link:{.external-link-icon}](https://windsurf.com){:target="\_blank"} — full IDEs with agentic capabilities built in.
+- [**Cursor** :fontawesome-solid-external-link:{.external-link-icon}](https://cursor.com){:target="\_blank"} — a full IDE with agentic capabilities built in.
+- [**Devin** :fontawesome-solid-external-link:{.external-link-icon}](https://devin.ai){:target="\_blank"} (Cognition) — an autonomous software engineer, now incorporating Windsurf.
 - [**GitHub Copilot** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/features/copilot){:target="\_blank"} — its agent mode brings similar loops to VS Code and github.com.
 - [**Aider** :fontawesome-solid-external-link:{.external-link-icon}](https://aider.chat){:target="\_blank"} — a popular open-source, model-agnostic alternative.
 
