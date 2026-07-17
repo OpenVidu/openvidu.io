@@ -218,6 +218,15 @@ MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for vers
 >
 > Legacy exact-patch URLs (`/3.4.1/...`) are redirected to their minor folder (`/3.4/...`) by the 404 page.
 
+> [!IMPORTANT]
+> **Releases pages** (`docs/meet/releases.md` and `docs/docs/releases.md`) follow two conventions, because a single copy of each is served across **every** documentation version (on publish, the latest page is copied into all version folders, so any version's releases page shows the full, most-recent notes):
+>
+> - **Patch notes go in a subsection under their minor's first-patch section.** Each minor has a top-level `## X.Y.0` section (e.g. `## 3.4.0`); the notes for later patches of that minor go **below it**, under a `### Patch releases` heading as `#### 3.4.1`, `#### 3.4.2`, ... — never in a new top-level section. The auto-scroll (`releases-scroll-to-version.js`, enabled by the `scrolltoversion` frontmatter tag) jumps to the `## X.Y.0` heading, so viewing `/3.4/docs/releases/` lands on the 3.4 notes with every 3.4.x patch below.
+> - **Links are always absolute and pinned to their own version.** Every link inside a release-notes section must be an absolute URL pointing to **the version that section documents** (links in the `3.4.0`/`3.4.x` sections point to `/3.4/docs/...`, never `/latest/...` nor relative). A link followed from an old release note then lands on the matching version of that page, and the outdated-version banner explains the jump. This is the one place where hardcoding a version in a link is required.
+
+> [!WARNING]
+> Each `X.Y` version always serves the docs of its **newest patch**, so the documentation of **older patches is not reachable** — only the latest patch of every minor is ever published. Be careful with changes: if a page or anchor that an older patch's release notes link to is removed or renamed in a later patch, that link breaks with no older-patch page to fall back to. Prefer additive changes, and when a linked page must move, update the affected release-notes links too.
+
 The repository must be using MkDocs Material and must be properly setup like explained [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-versioning/). This proper setup includes the following points:
 
 - Adding `extra.version.provider: mike` to mkdocs.yml.

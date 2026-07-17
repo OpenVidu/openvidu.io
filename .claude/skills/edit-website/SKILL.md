@@ -38,6 +38,7 @@ This repo is the source of https://openvidu.io/, built with **MkDocs Material** 
 - **HTML links** (inside raw HTML blocks): relative paths to the **built folder**. `performance.md` builds to `performance/index.html`, so add one extra `../` compared to the markdown path — unless linking *from* an `index.md`.
 - **Links to non-versioned pages must be absolute** (e.g. `/pricing/`). The local server will warn about these — that's the only acceptable warning category.
 - **Never hardcode a pinned version** (`/3.8.0/...`) anywhere. From non-versioned/marketing content, versioned docs are reached as `/latest/meet/` or `/latest/docs/` (the deploy script rewrites source-relative links this way; absolute URLs you emit yourself, e.g. in templates or structured data, must already use `latest` — see `overrides/partials/json-ld.html`).
+- **The releases pages are the one exception.** In `docs/meet/releases.md` and `docs/docs/releases.md`, every link inside a version's release-notes section must be an **absolute, version-pinned** URL to **that same version** (links in the `3.4.0`/`3.4.x` sections → `/3.4/docs/...`). These pages are copied verbatim into every version folder on publish, so relative or `/latest/` links would be wrong for most copies; version-pinning keeps each note pointing at the docs it describes, and the outdated-version banner explains the version jump. The deploy script shields these `/X.Y/docs/`, `/X.Y/meet/` links from the version-stripping applied to other non-versioned pages.
 
 ## How pages are composed
 
@@ -67,6 +68,10 @@ The source tree has no version in paths: `mike` builds the site into a version f
 - `overwrite-past-version.sh X.Y` — fix an old minor (content fix or patch release): commit changes to the `X.Y` branch first; root pages are untouched.
 
 Consequences when editing: changes to `docs/meet/` and `docs/docs/` are **not live until one of these runs**; past versions are edited on their `X.Y` branches, not `main`.
+
+**Releases pages** (`docs/meet/releases.md`, `docs/docs/releases.md`) have their own conventions: each minor gets a top-level `## X.Y.0` section, and later patches of that minor go in a subsection beneath it (under `### Patch releases`, as `#### X.Y.Z`) — never a new top-level section. The `scrolltoversion` frontmatter tag auto-jumps to the viewed minor's `## X.Y.0` heading. Their links must be absolute and version-pinned (see Link rules), and the latest copy of each is served across all version folders.
+
+**Reachability caveat**: since each `X.Y` folder always serves its **newest patch**, older patches' docs are never published and are unreachable. If you remove or rename a page or anchor that an older patch's release notes link to, that link breaks with nothing to fall back to — prefer additive changes, and fix affected release-notes links when a target moves.
 
 ## Sync with livekit-tutorials.openvidu.io
 
