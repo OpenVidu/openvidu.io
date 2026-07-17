@@ -39,7 +39,7 @@ We recently ran this experiment: build a small CRM — clients, support issues, 
   <source src="/assets/images/blog/crm-meet/crm-meet-demo.mp4" type="video/mp4">
 </video>
 
-*The result in 10 seconds: sign in, open the client's issue, hit **Join** — and the meeting happens right inside the CRM. Real capture of the app; both participants' cameras are synthetically generated.*
+*The result in 10 seconds: sign in, open the client's issue, hit **Join** — and the meeting happens right inside the CRM. Real capture of the running app (participant video is stock footage).*
 
 ## What is an AI coding agent, anyway?
 
