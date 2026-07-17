@@ -254,13 +254,13 @@ You don't have to build all of this yourself.
 
 At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool](https://github.com/OpenVidu/openvidu-loadtest). **OpenVidu** gives you a production-ready path for every phase of this roadmap:
 
-- [**Single Node**](https://openvidu.io/docs/self-hosting/single-node/index.md) to launch quickly.
-- [**Elastic**](https://openvidu.io/docs/self-hosting/elastic/index.md) to scale media capacity dynamically.
-- [**High Availability**](https://openvidu.io/docs/self-hosting/ha/index.md) to meet strict enterprise resilience requirements.
+- [**Single Node**](https://openvidu.io/3.8/docs/self-hosting/single-node/index.md) to launch quickly.
+- [**Elastic**](https://openvidu.io/3.8/docs/self-hosting/elastic/index.md) to scale media capacity dynamically.
+- [**High Availability**](https://openvidu.io/3.8/docs/self-hosting/ha/index.md) to meet strict enterprise resilience requirements.
 
 You can deploy on-premises or on the major cloud providers — **AWS**, **Azure**, **GCP**, **DigitalOcean**, and **OCI** — with the same operational model across all of them.
 
-If you're ready to move from MVP to production-grade infrastructure, the [OpenVidu documentation](https://openvidu.io/docs/index.md) is the place to start.
+If you're ready to move from MVP to production-grade infrastructure, the [OpenVidu documentation](https://openvidu.io/3.8/docs/index.md) is the place to start.
 
 Start with Single Node, validate your traffic profile, and then move to Elastic and High Availability when the signals tell you it's time.
 

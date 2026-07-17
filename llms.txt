@@ -1,6 +1,6 @@
 # OpenVidu
 
-> From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
+> Self-hosted video conferencing and custom WebRTC solutions: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs. Open source and scalable.
 
 Self-hosted videoconference solution and SDK
 

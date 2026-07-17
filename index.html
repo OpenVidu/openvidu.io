@@ -14,7 +14,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="From ready-to-use video conferencing apps&lt;br&gt;to custom-made WebRTC solutions.&lt;br&gt;Self-hosted. Performant. Scalable. Fault tolerant. Observable.">
+        <meta name="description" content="Self-hosted video conferencing and custom WebRTC solutions: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs. Open source and scalable.">
       
       
       
@@ -197,7 +197,7 @@
 <meta property="og:site_name" content="OpenVidu">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Self-hosted videoconferencing and custom WebRTC solutions">
-<meta property="og:description" content="From ready-to-use video conferencing apps to custom-made WebRTC solutions. Self-hosted. Performant. Scalable. Fault tolerant. Observable.">
+<meta property="og:description" content="Self-hosted video conferencing and custom WebRTC solutions: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs. Open source and scalable.">
 <meta property="og:url" content="https://openvidu.io/">
 <meta property="og:image" content="https://openvidu.io/assets/images/openvidu_white_bg_transp.png">
 <meta property="og:image:width" content="1497">
@@ -355,8 +355,8 @@
     const warning = document.getElementById('outdated-warning-text');
     if (warning && fromReleaseNotes && version && version !== 'latest') {
       warning.innerHTML =
-        '<strong>Warning:</strong> You are viewing the <strong>' + version + '</strong> version of the docs<br />' +
-        'because you followed a link from the ' + version + ' release notes<br />';
+        `<strong>Warning:</strong> You are viewing the <strong>${version}</strong> version of the docs<br />` +
+        `because you followed a link from the ${version}.x release notes<br />`;
     }
   })();
 </script>
@@ -998,22 +998,125 @@
   <div class="center-align">
     <img class="top-home-img" src="assets/images/openvidu_white_bg_transp.png" draggable="false">
   </div>
-  <h1 class="slogan">From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.</h1>
+  <h1 class="slogan">Ship video conferencing into your app,<br>self-hosted and production-ready in minutes.</h1>
   <p class="home-description">
-    OpenVidu allows you to implement <strong>ultra-low latency</strong> video
-    and audio applications with ease: one-to-one calls, videoconference rooms,
-    massive live streamings with thousands of viewers... It is built on the best
-    open source <strong>WebRTC stacks</strong> and packed with features:
-    multi-platform, recording, broadcasting, screen sharing, AI Agents and more.
-    From an operations perspective we aim to make it easy to
-    <strong>self-host</strong> a performant, fault-tolerant, scalable and
-    observable cluster, reducing DevOps efforts to a minimum.
+    Launch <strong>OpenVidu Meet</strong> on your own servers in minutes — or
+    build any real-time app with <strong>OpenVidu Platform</strong>'s WebRTC
+    SDKs.<br>Open source, ultra-low latency, and scalable to thousands of
+    participants, with your users' data on your infrastructure.
   </p>
   <div class="home-buttons">
-    <a title="Get started" id="home-secondary-button" class="md-button home-secondary-button" onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })">
-      Start a tour
+    <a title="Get started with OpenVidu Meet" id="home-primary-button" class="md-button md-button--primary home-meet-button" href="/latest/meet/">
+      Get started with Meet
+    </a>
+    <a title="Build with OpenVidu Platform SDKs" id="home-secondary-button" class="md-button home-platform-button" href="/latest/docs/">
+      Build with Platform SDKs
     </a>
   </div>
+  <p class="home-under-cta">
+    Not sure which fits?
+    <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+    <span class="home-under-cta-sep">·</span>
+    <a title="Start a tour" onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })">
+      Start a tour
+    </a>
+  </p>
+  <!-- Single wrapper: the hero is a space-around flex column, so as separate
+       flex items these two lines would get leftover viewport height
+       distributed between them regardless of their margins. -->
+  <div class="home-trust-block">
+  <p class="home-trust-line">
+    ⭐ Free &amp; open source<span class="home-sep">·</span>Apache 2.0<span id="github-stars-segment" hidden=""><span class="home-sep">·</span><a href="https://github.com/OpenVidu/openvidu" target="_blank" rel="noopener">★ <span id="github-stars-count"></span> on GitHub</a></span><span id="dockerhub-pulls-segment" hidden=""><span class="home-sep">·</span><a href="https://hub.docker.com/r/openvidu/openvidu-server" target="_blank" rel="noopener">🐳 <span id="dockerhub-pulls-count"></span> Docker pulls</a></span>
+  </p>
+  <p class="home-trust-line home-credentials-line">
+    🔬
+    <a href="/research/">19 peer-reviewed publications · 500+ citations</a><span class="home-sep">·</span>🌐 12+ years building WebRTC<span class="home-sep">·</span>🛠 Upstream contributors to LiveKit, mediasoup &amp; Kurento
+  </p>
+  </div>
+  <script>
+    // Live counters for the hero trust line (GitHub stars, Docker Hub pulls).
+    // Each value is cached per session, and its segment stays hidden if the
+    // source is unavailable (rate limit, offline), so the line gracefully
+    // shortens to "Open source · Apache 2.0".
+    (function () {
+      function setupCounter(countId, segmentId, cacheKey, fetchValue) {
+        var countEl = document.getElementById(countId);
+        var segmentEl = document.getElementById(segmentId);
+        if (!countEl || !segmentEl) return;
+        function render(value) {
+          if (!value) return;
+          countEl.textContent = value;
+          segmentEl.hidden = false;
+        }
+        var cached = sessionStorage.getItem(cacheKey);
+        if (cached) {
+          render(cached);
+          return;
+        }
+        fetchValue()
+          .then(function (value) {
+            if (value) {
+              sessionStorage.setItem(cacheKey, value);
+              render(value);
+            }
+          })
+          .catch(function () {});
+      }
+
+      // Approximate a count, always rounding DOWN so the shown number is
+      // never higher than reality. Keeps two significant digits:
+      // 2115 -> "2.1k", 966155 -> "960k", 1134000 -> "1.1M".
+      function formatCount(n) {
+        n = parseInt(n, 10);
+        if (!n || n < 0) return null;
+        if (n >= 10) {
+          var magnitude = Math.pow(10, Math.floor(Math.log10(n)) - 1);
+          n = Math.floor(n / magnitude) * magnitude;
+        }
+        if (n >= 1000000) return parseFloat((n / 1000000).toFixed(1)) + "M";
+        if (n >= 1000) return parseFloat((n / 1000).toFixed(1)) + "k";
+        return String(n);
+      }
+
+      setupCounter(
+        "github-stars-count",
+        "github-stars-segment",
+        "ov-github-stars",
+        function () {
+          return fetch("https://api.github.com/repos/OpenVidu/openvidu")
+            .then(function (res) {
+              return res.ok ? res.json() : null;
+            })
+            .then(function (data) {
+              return data ? formatCount(data.stargazers_count) : null;
+            });
+        }
+      );
+
+      // hub.docker.com's API sends no CORS headers, so the RAW pull count is
+      // relayed through a shields.io dynamic-JSON badge (CORS-enabled) and
+      // then approximated client-side with formatCount, like the stars.
+      // (The standard shields docker/pulls badge pre-rounds the number, which
+      // would prevent our own floor-to-two-significant-digits rounding.)
+      setupCounter(
+        "dockerhub-pulls-count",
+        "dockerhub-pulls-segment",
+        "ov-dockerhub-pulls",
+        function () {
+          return fetch(
+            "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhub.docker.com%2Fv2%2Frepositories%2Fopenvidu%2Fopenvidu-server&query=%24.pull_count&label=pulls"
+          )
+            .then(function (res) {
+              return res.ok ? res.text() : null;
+            })
+            .then(function (svg) {
+              var match = svg && svg.match(/pulls:?\s*(\d+)\b/i);
+              return match ? formatCount(match[1]) : null;
+            });
+        }
+      );
+    })();
+  </script>
 </section>
 
 
@@ -11772,7 +11875,7 @@
         </ul>
       </div>
       <div class="product-footer">
-        <a href="/latest/meet/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="/latest/meet/" class="product-button md-button md-button--primary primary">Deploy Meet in minutes</a>
       </div>
     </div>
     <div class="product-card openvidu-platform">
@@ -11788,7 +11891,7 @@
           For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
         </p>
         <ul class="product-features">
-          <li>Programmable client and server SDKs for all languages compatible with <a href="https://docs.livekit.io/reference/" target="_blank" rel="noopener">LiveKit</a></li>
+          <li>Programmable client and server SDKs for all languages, LiveKit-compatible</li>
           <li>Build your custom UI from scratch with total freedom</li>
           <li>Low level control of real time media: codecs, protocols, bitrates...</li>
           <li>Precise control of recording and streaming with custom layouts</li>
@@ -11796,7 +11899,7 @@
         </ul>
       </div>
       <div class="product-footer">
-        <a href="/latest/docs/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="/latest/docs/" class="product-button md-button md-button--primary primary">Start building with the SDKs</a>
       </div>
     </div>
   </div>
@@ -11885,7 +11988,7 @@
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
-    Self-host a production-ready live-video platform with advanced capabilities typically reserved for pricy SaaS solutions
+    Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
   </h2>
 </div>
 
@@ -12001,10 +12104,18 @@
 </ul>
 </div>
 </div>
+<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;">
+  <a title="Get started with OpenVidu Meet" class="md-button md-button--primary home-meet-button" href="/latest/meet/">Deploy Meet in minutes</a>
+  <a title="Build with OpenVidu Platform SDKs" class="md-button home-platform-button" href="/latest/docs/">Start building with the SDKs</a>
+</div>
+<p class="home-under-cta">
+  Not sure which fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+</p>
+
 <hr style="margin: 7em 0 3.5em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Contact us if you need it : we are here to help!</h2>
+  <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
   <div class="home-buttons">
     <a href="/support/" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

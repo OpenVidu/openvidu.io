@@ -1244,8 +1244,8 @@
     const warning = document.getElementById('outdated-warning-text');
     if (warning && fromReleaseNotes && version && version !== 'latest') {
       warning.innerHTML =
-        '<strong>Warning:</strong> You are viewing the <strong>' + version + '</strong> version of the docs<br />' +
-        'because you followed a link from the ' + version + ' release notes<br />';
+        `<strong>Warning:</strong> You are viewing the <strong>${version}</strong> version of the docs<br />` +
+        `because you followed a link from the ${version}.x release notes<br />`;
     }
   })();
 </script>

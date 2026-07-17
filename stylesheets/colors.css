@@ -96,13 +96,10 @@
   .home-description {
     color: #ffffff;
   }
-  #home-secondary-button {
+  .top-home-section .home-under-cta,
+  .top-home-section .home-under-cta a,
+  .top-home-section .home-trust-line {
     color: #ffffff;
-  }
-  #home-secondary-button:hover {
-    color: #ffffff;
-    background-color: var(--slate-md-typeset-color);
-    border-color: var(--slate-md-typeset-color);
   }
   a#account-btn {
     color: var(--slate-md-typeset-color);
@@ -121,4 +118,29 @@
 
 .green-color {
   color: #2b9b46;
+}
+
+/* Audience-routed CTA buttons (hero and end of features grid): each product's
+   identity color (same as its product card's Get Started button) in both
+   themes, so green=Meet / blue=Platform routing is consistent page-wide. */
+.md-typeset .home-buttons .md-button.home-meet-button {
+  background-color: #06d362;
+  border-color: #06d362;
+  color: #ffffff;
+}
+.md-typeset .home-buttons .md-button.home-meet-button:hover {
+  background-color: #05b855;
+  border-color: #05b855;
+  color: #ffffff;
+}
+
+.md-typeset .home-buttons .md-button.home-platform-button {
+  background-color: #0088aa;
+  border-color: #0088aa;
+  color: #ffffff;
+}
+.md-typeset .home-buttons .md-button.home-platform-button:hover {
+  background-color: #007394;
+  border-color: #007394;
+  color: #ffffff;
 }

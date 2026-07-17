@@ -14,7 +14,7 @@ For teams, businesses and organizations that need a reliable and secure video co
 - Ready to use AI integrations
 - Embed right into your app with pre-built components
 
-[Get Started](https://openvidu.io/3.8/meet/index.md)
+[Deploy Meet in minutes](https://openvidu.io/3.8/meet/index.md)
 
 ### 
 
@@ -22,13 +22,13 @@ Developer-oriented SDKs for custom apps
 
 For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
 
-- Programmable client and server SDKs for all languages compatible with [LiveKit](https://docs.livekit.io/reference/)
+- Programmable client and server SDKs for all languages, LiveKit-compatible
 - Build your custom UI from scratch with total freedom
 - Low level control of real time media: codecs, protocols, bitrates...
 - Precise control of recording and streaming with custom layouts
 - Advanced telephony and AI integrations
 
-[Get Started](https://openvidu.io/3.8/docs/index.md)
+[Start building with the SDKs](https://openvidu.io/3.8/docs/index.md)
 
 |                                                   |                                                        |                                                            |
 | ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
@@ -50,7 +50,7 @@ For developers that need complete freedom to build their real-time application u
 
 ______________________________________________________________________
 
-## Self-host a production-ready live-video platform with advanced capabilities typically reserved for pricy SaaS solutions
+## Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
 
 - **Self-hosted**
 
@@ -158,8 +158,12 @@ ______________________________________________________________________
 
   For the most advanced use cases: you can add pipelines to process video and audio streams in real time in your servers.
 
+[Deploy Meet in minutes](https://openvidu.io/3.8/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/3.8/docs/index.md "Build with OpenVidu Platform SDKs")
+
+Not sure which fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/)
+
 ______________________________________________________________________
 
-## Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Contact us if you need it : we are here to help!
+## Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.
 
 [Talk to an expert](/support/)
