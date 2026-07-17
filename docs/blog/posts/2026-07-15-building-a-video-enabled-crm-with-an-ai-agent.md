@@ -35,6 +35,12 @@ We recently ran this experiment: build a small CRM — clients, support issues, 
 
 <!-- more -->
 
+<video autoplay muted loop playsinline width="100%" style="border-radius: 10px; margin: 0.5em 0 1em 0;">
+  <source src="/assets/images/blog/crm-meet/crm-meet-demo.mp4" type="video/mp4">
+</video>
+
+*The result in 10 seconds: sign in, open the client's issue, hit **Join** — and the meeting happens right inside the CRM. Real capture of the app; both participants' cameras are synthetically generated.*
+
 ## What is an AI coding agent, anyway?
 
 A quick level-set before the story. An **AI coding agent** is more than a chat window that writes snippets: it is a large language model wrapped in a loop with **tools** — it can read and write files in your repository, run shell commands, execute your test suite, browse documentation, and use the output of each step to decide the next one. You give it a goal; it plans, edits, runs, observes and iterates until the goal is met (or it comes back with questions).
