@@ -21,7 +21,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 </h1>
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <a class="glightbox" href="../assets/videos/meet/home/demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/home/demo.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/home/demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/home/demo-preview.mp4" poster="../assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
 <div style="text-align: center; margin: 3em 0;" markdown>
@@ -96,8 +96,8 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
     Allow participants to easily replace their video background with a blur effect or an image.
 
-    <a class="glightbox" href="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-    <a class="glightbox" href="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" muted playsinline autoplay loop></video></a>
+    <a class="glightbox" href="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" muted playsinline autoplay loop></video></a>
 
 </div>
 
@@ -109,8 +109,8 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
 <div class="wow animated animatedFadeInUp fadeInUp">
-    <a class="glightbox" href="../assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-    <a class="glightbox" href="../assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" muted playsinline autoplay loop></video></a>
+    <a class="glightbox" href="../assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" muted playsinline autoplay loop></video></a>
 </div>
 
 </div>
@@ -121,15 +121,15 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 
     Create and customize the behavior of your rooms in a few clicks: look-and-feel, access and permissions, recording, chat and more.
 
-    <a class="glightbox" href="../assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-    <a class="glightbox" href="../assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" muted playsinline autoplay loop></video></a>
+    <a class="glightbox" href="../assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" muted playsinline autoplay loop></video></a>
 
 - __Share room links__{ .ov-meet-commercial-card-title }
 
     Unique secure links give access to your rooms with different permission levels.
 
-    <a class="glightbox" href="../assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-    <a class="glightbox" href="../assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/access/share-link-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+    <a class="glightbox" href="../assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" muted playsinline autoplay loop></video></a>
+    <a class="glightbox" href="../assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/rooms/access/share-link-light.mp4#only-light" muted playsinline autoplay loop></video></a>
 
 </div>
 
@@ -251,7 +251,7 @@ __Pre-built web component__{ .ov-meet-commercial-card-title }
 
 Embed the OpenVidu Meet UI right into your app.
 
-<a class="glightbox" href="../assets/videos/meet/home/embed-html.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/home/embed-html.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="../assets/videos/meet/home/embed-html.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/home/embed-html.mp4" muted playsinline autoplay loop></video></a>
 
 <a class="glightbox" href="../assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners" alt="OpenVidu Meet embedded meeting"/></a>
 
