@@ -20,13 +20,44 @@ OpenVidu Platform enables you to build real-time applications. You can build you
 
 OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live-streaming events, management and processing of drones and camera feeds...
 
-OpenVidu is built on the best open source technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io){target="\_blank"}, from which it inherits all its amazing SDKs to integrate it into your front-end and back-end applications, and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org){target="\_blank"}, from which it inherits the best performance and optimization for media routing.
+OpenVidu gives you **LiveKit-compatible client and server SDKs** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
 <figure markdown>
   ![OpenVidu vs LiveKit](../assets/images/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .do-not-include-in-gallery }
   ![OpenVidu vs LiveKit](../assets/images/openvidu-stack-light.svg#only-light){ .mkdocs-img .do-not-include-in-gallery }
   <figcaption style="max-width: 27rem">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</figcaption>
 </figure>
+
+## Your first lines of code
+
+Real-time video in your app takes a few lines with the LiveKit-compatible SDKs:
+
+=== "Application client (browser)"
+
+    ```javascript
+    import { Room } from "livekit-client";
+
+    const room = new Room();
+    await room.connect("wss://your-openvidu-deployment", token);
+    await room.localParticipant.enableCameraAndMicrophone();
+    ```
+
+=== "Application server (Node)"
+
+    ```javascript
+    import { AccessToken } from "livekit-server-sdk";
+
+    const token = new AccessToken(API_KEY, API_SECRET, { identity: "user-1" });
+    token.addGrant({ roomJoin: true, room: "my-room" });
+    return await token.toJwt();
+    ```
+
+<div style="text-align: center; margin: 2em 0;" markdown>
+
+[Start with a tutorial](./tutorials/application-server/index.md){ .md-button .md-button--primary }
+[How to develop your OpenVidu app](./developing-your-openvidu-app/index.md){ .md-button }
+
+</div>
 
 ## Use cases
 
@@ -52,7 +83,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 </div>
 
 !!! info
-    If your use case actually fits into the video conferencing category, [**OpenVidu Meet** :fontawesome-solid-external-link:{.external-link-icon}](../meet/index.md){:target="_blank" .meet-link-color} may be the perfect solution for you. Give it a try!
+    If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](../meet/index.md){.meet-link-color} may be the perfect solution for you. Give it a try!
 
 ### Live-streaming
 
@@ -83,7 +114,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
-AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your in application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
+AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
 
 - Implement **real-time subtitles, translations, word-detection, sentiment analysis, profanity filter**, etc. in your video conferences.
 - Add a **summary generator** to your video conference app, that can extract the most important parts of the conversation to be shared with the participants.
@@ -158,7 +189,7 @@ With these three concepts you can build any kind of real-time application you ca
 
 ### Other concepts
 
-Apart from these basic building blocks, there are other concepts that will be tipically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
+Apart from these basic building blocks, there are other concepts that will be typically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
 
 - **Egress**: a process that exports media out of a Room. It is a special type of Participant that only subscribes to Tracks. It allows recording tracks to a file or streaming them to an external destination (via HLS or RTMP).
 - **Ingress**: a process that imports media into a Room. It is a special type of Participant that only publishes Tracks. It allows bringing external media sources into a Room, such as an MP4 file, an IP camera or a RTMP stream.
@@ -180,3 +211,10 @@ OpenVidu is available in two editions:
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br><span class="openvidu-tag openvidu-pro-tag">PRO</span> Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
 | **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="no-break">N Media Nodes</span> | 4 Master Nodes +<br><span class="no-break">N Media Nodes</span> |
 | **Installation instructions** | [Install](./self-hosting/local.md){ .md-button } | [Install](./self-hosting/single-node/index.md){ .md-button } | [Install](./self-hosting/elastic/index.md){ .md-button } | [Install](./self-hosting/ha/index.md){ .md-button } |
+
+<div style="text-align: center; margin: 3em 0;" markdown>
+
+[Build your first app — tutorials in 8 languages](./tutorials/application-server/index.md){ .md-button .md-button--primary }
+[Run OpenVidu locally](./self-hosting/local.md){ .md-button }
+
+</div>

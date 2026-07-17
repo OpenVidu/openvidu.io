@@ -26,7 +26,8 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
 <div style="text-align: center; margin: 3em 0;" markdown>
 
-[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button .md-button--primary target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
+[Deploy Meet in minutes](./getting-started/index.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
+[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
 
 </div>
 
@@ -231,6 +232,13 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
+<div style="text-align: center; margin: 3em 0;" markdown>
+
+[Deploy Meet in minutes](./getting-started/index.md){ .md-button .md-button--primary }
+[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
+
+</div>
+
 <hr style="margin: 4em 0">
 
 ## Integrations
@@ -265,6 +273,10 @@ curl --request POST \
 ```
 
 </div>
+
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0">
+Explore <a href="./embedded/intro"><strong>OpenVidu Meet Embedded</strong></a> to integrate video calls into your application.
+</h2>
 
 <hr style="margin: 4em 0">
 
@@ -372,7 +384,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
--	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features comming soon to enhance the learning experience.
+-	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features coming soon to enhance the learning experience.
 
 <a class="glightbox" href="../../assets/images/meet/embedded/use-cases/elearning.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../assets/images/meet/embedded/use-cases/elearning.png" loading="lazy" class="round-corners" alt="Use case e-learning"/></a>
 
@@ -482,6 +494,13 @@ Build trust with instant, reliable support through embedded video calls that per
 
 </div>
 
+<div style="text-align: center; margin: 3em 0;" markdown>
+
+[Deploy Meet in minutes](./getting-started/index.md){ .md-button .md-button--primary }
+[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
+
+</div>
+
 <hr style="margin: 5em 0 2em 0">
 
 ## Free open-source edition vs Commercial edition
@@ -498,7 +517,7 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](/pricing/) for more details.
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
 You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview">deploying OpenVidu Meet</a>.
@@ -508,5 +527,6 @@ You can choose the OpenVidu edition that best fits your needs when <a href="./de
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
 Need total control and advanced SDKs to build your custom real-time application?
-Checkout <a href="../docs" target="_blank"><strong>OpenVidu Platform</strong></a>
+Check out <a href="../docs"><strong>OpenVidu Platform</strong></a>.<br>
+Not sure which one fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>.
 </h2>
