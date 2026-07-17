@@ -41,12 +41,12 @@ A quick level-set before the story. An **AI coding agent** is more than a chat w
 
 There is a healthy ecosystem to choose from:
 
-- **Claude Code** (Anthropic) — the terminal-based agent we used for this experiment.
-- **OpenAI Codex CLI** — OpenAI's take on the same idea.
-- **Gemini CLI** (Google) — an open-source terminal agent backed by Gemini models.
-- **Cursor** and **Windsurf** — full IDEs with agentic capabilities built in.
-- **GitHub Copilot** — its agent mode brings similar loops to VS Code and github.com.
-- **Aider** — a popular open-source, model-agnostic alternative.
+- [**Claude Code** :fontawesome-solid-external-link:{.external-link-icon}](https://claude.com/claude-code){:target="\_blank"} (Anthropic) — the terminal-based agent we used for this experiment.
+- [**OpenAI Codex** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openai/codex){:target="\_blank"} — OpenAI's take on the same idea.
+- [**Antigravity** :fontawesome-solid-external-link:{.external-link-icon}](https://antigravity.google/){:target="\_blank"} (Google) — Google's agentic development platform, formerly known as Gemini CLI.
+- [**Cursor** :fontawesome-solid-external-link:{.external-link-icon}](https://cursor.com){:target="\_blank"} and [**Windsurf** :fontawesome-solid-external-link:{.external-link-icon}](https://windsurf.com){:target="\_blank"} — full IDEs with agentic capabilities built in.
+- [**GitHub Copilot** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/features/copilot){:target="\_blank"} — its agent mode brings similar loops to VS Code and github.com.
+- [**Aider** :fontawesome-solid-external-link:{.external-link-icon}](https://aider.chat){:target="\_blank"} — a popular open-source, model-agnostic alternative.
 
 They differ in ergonomics and models, but the workflow shown below applies to any of them: **describe the outcome, let the agent do the legwork, verify against a real deployment**.
 
@@ -130,3 +130,5 @@ If there is one thing this experiment proves, it is that **embedding real videoc
 Ready to add meetings to *your* app this afternoon?
 
 [**Get started with OpenVidu Meet Embedded** :fontawesome-solid-arrow-right:](https://openvidu.io/latest/meet/embedded/intro/){ .md-button .md-button--primary }
+
+*And one more thing: we are working on agentic AI support for OpenVidu — stay tuned!*
