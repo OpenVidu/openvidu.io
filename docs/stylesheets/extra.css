@@ -726,16 +726,22 @@ div[data-md-component="outdated"] aside {
   user-select: none;
 }
 
-h1.logo-header {
+.logo-header {
   text-align: center;
   margin-bottom: 0.6em;
 }
 
+h1.meetplatform-slogan,
 h2.meetplatform-slogan {
   text-align: center;
   font-size: 1.6em;
   margin-top: 0;
   margin-bottom: 1.6em;
+}
+
+/* Match the h2 slogans' look: Material gives h1 a lighter color by default */
+h1.meetplatform-slogan {
+  color: var(--md-default-fg-color);
 }
 
 .md-header__button.md-logo {

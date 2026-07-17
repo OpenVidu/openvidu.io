@@ -4,15 +4,15 @@ description: Learn how to get started with OpenVidu, a powerful platform for bui
 ---
 
 <div>
-<h1 class="logo-header platform-header">
-<img src="../assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
-</h1>
+<div class="logo-header platform-header">
+<img src="../assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable" alt="">
+<img src="../assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable" alt="">
+</div>
 </div>
 
-<h2 class="meetplatform-slogan">
-Build your real-time application with complete freedom using SDKs
-</h2>
+<h1 class="meetplatform-slogan">
+OpenVidu Platform: self-hosted WebRTC SDKs for real-time apps
+</h1>
 
 ## What is OpenVidu Platform?
 

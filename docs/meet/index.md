@@ -10,15 +10,15 @@ tags:
 ## Intro { .hide-without-display }
 
 <div>
-<h1 class="logo-header meet-header">
-<img src="../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
-</h1>
+<div class="logo-header meet-header">
+<img src="../assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable" alt="">
+<img src="../assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable" alt="">
+</div>
 </div>
 
-<h2 class="meetplatform-slogan">
-Host and customize your own high-quality video calling service in minutes
-</h2>
+<h1 class="meetplatform-slogan">
+OpenVidu Meet: self-hosted video conferencing, ready in minutes
+</h1>
 
 <div class="wow animated animatedFadeInUp fadeInUp">
     <a class="glightbox" href="../assets/videos/meet/home/demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../assets/videos/meet/home/demo.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
