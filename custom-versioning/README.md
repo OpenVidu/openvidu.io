@@ -285,7 +285,10 @@ sed -i …` to rewrite links in place.
     - Fixes `404.html`: strips `/$VERSION/`, and rewrites links to versioned pages to
       `/latest/VP/`.
     - Rewrites links from global pages to versioned pages → `/latest/VP/`.
-    - Removes the version from the `<link rel="canonical">` tags.
+    - Removes the version prefix from each page's self-referencing URLs (`<link rel="canonical">`,
+      `og:url`, JSON-LD `@id`/`url`/`mainEntityOfPage`), since these pages are served from the
+      root. Author-written version-pinned links to versioned pages (`/X.Y/docs/`, `/X.Y/meet/`,
+      e.g. release-notes links in blog posts) are shielded and preserved.
     - Updates `llms.txt` (versioned → `/latest/…`, non-versioned → `/…`, root index).
     - Removes the version prefix from the RSS/JSON feeds.
 - **`changeSearchIndexLinks`** — rewrites `"$VERSION"/search/search_index.json`:

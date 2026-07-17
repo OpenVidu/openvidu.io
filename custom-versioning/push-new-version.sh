@@ -118,8 +118,22 @@ changeNonVersionedPagesLinks() {
         grep -Erl "href=\"(\.\./)*$VP/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|href=\"\(\.\./\)*$VP/|href=\"/latest/$VP/|g" || true
     done
 
-    # Remove version in the canonical tag of NVP
-    grep -Erl "$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" | xargs sed -i "s|$VERSION/||g" || true
+    # Remove the version prefix from the self-referencing URLs the theme generates for each
+    # non-versioned page (the <link rel="canonical">, the og:url meta and the JSON-LD
+    # @id/url/mainEntityOfPage): these pages are built under the version folder but served
+    # from the site root, so their own URL must not carry the version.
+    #
+    # Author-written, version-pinned links to versioned pages (/X.Y/docs/, /X.Y/meet/) — used
+    # e.g. by release-notes links in blog posts — MUST be preserved. A plain "s|$VERSION/||g"
+    # would strip the version out of them too, silently breaking those links. So the versioned
+    # links are shielded with a sentinel while the version is stripped, then restored.
+    for FILE in $(grep -Erl "/$VERSION/" $ALL_PREFIXED_NVP "$VERSION/index.html" || true); do
+        for VP in "${VERSIONED_PAGES[@]}"; do
+            sed -i "s|/$VERSION/$VP/|/@@KEEPVERSION@@/$VP/|g" "$FILE"
+        done
+        sed -i "s|/$VERSION/|/|g" "$FILE"
+        sed -i "s|/@@KEEPVERSION@@/|/$VERSION/|g" "$FILE"
+    done
 
     # Update llms.txt links
     # Replace version with 'latest' for versioned pages
