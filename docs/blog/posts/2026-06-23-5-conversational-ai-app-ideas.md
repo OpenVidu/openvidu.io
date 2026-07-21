@@ -3,6 +3,7 @@ draft: false
 date: 2026-06-23
 slug: 5-conversational-ai-app-ideas
 description: 5 conversational AI app ideas you can build this weekend — real-time voice and vision agent experiments, the STT-LLM-TTS pipeline, and the tech behind them.
+cover_image: poster-light.webp
 categories:
  - Vertical
  - AI

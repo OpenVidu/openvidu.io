@@ -2,7 +2,7 @@
 draft: false
 slug: meet-vs-platform
 date: 2026-06-16
-cover_image: 2026-02-09-meet-vs-platform-3.png
+cover_image: meet-vs-platform.png
 categories:
   - OpenVidu Meet
   - OpenVidu Platform

@@ -2,6 +2,7 @@
 draft: false
 date: 2026-04-30
 slug: how-client-networks-affect-qoe-and-costs
+cover_image: webrtc-network-paths-light.png
 categories:
   - Technology
 tags:

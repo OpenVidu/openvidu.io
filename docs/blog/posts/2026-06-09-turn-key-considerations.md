@@ -2,6 +2,7 @@
 draft: false
 date: 2026-06-09
 slug: turn-key-considerations
+cover_image: vsc.png
 categories:
   - OpenVidu Platform
   - Technology

@@ -2,6 +2,7 @@
 draft: false
 date: 2026-05-19
 slug: 5-react-video-call-platforms
+cover_image: poster.png
 categories:
   - Vertical
 tags:

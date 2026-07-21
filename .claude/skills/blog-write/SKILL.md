@@ -27,7 +27,7 @@ draft: false
 date: 2026-07-04
 slug: your-post-slug
 description: One-sentence SEO summary (optional but recommended for search snippets).
-cover_image: poster.jpg   # optional; a file inside this post's image folder
+cover_image: poster.jpg   # recommended; the social/link-preview image (og:image + JSON-LD). A raster file (png/jpg/webp — NOT svg) inside this post's image folder. Omit to fall back to the site-wide branded card.
 categories:
     - OpenVidu Meet        # MUST be from categories_allowed in mkdocs.yml
 tags:

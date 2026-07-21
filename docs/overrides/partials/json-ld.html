@@ -285,8 +285,16 @@
       {%- if page.meta.description %}
       "description": {{ page.meta.description | tojson }},
       {%- endif %}
-      {%- if page.meta.image %}
-      "image": {{ (page.meta.image if page.meta.image.startswith("http") else "https://openvidu.io" ~ page.meta.image) | tojson }},
+      {#- Same cover_image resolution as partials/og.html: bare filename ->
+          the post's image folder; "/..." -> site-absolute; "http..." -> as-is. -#}
+      {%- if page.meta.cover_image %}
+      {%- if page.meta.cover_image.startswith("http") %}
+      "image": {{ page.meta.cover_image | tojson }},
+      {%- elif page.meta.cover_image.startswith("/") %}
+      "image": {{ ("https://openvidu.io" ~ page.meta.cover_image) | tojson }},
+      {%- else %}
+      "image": {{ ("https://openvidu.io/assets/images/blog/" ~ page.file.src_uri.split("/")[-1][:-3] ~ "/" ~ page.meta.cover_image) | tojson }},
+      {%- endif %}
       {%- endif %}
       {%- if page.config and page.config.date and page.config.date.created %}
       "datePublished": {{ page.config.date.created.strftime("%Y-%m-%d") | tojson }},

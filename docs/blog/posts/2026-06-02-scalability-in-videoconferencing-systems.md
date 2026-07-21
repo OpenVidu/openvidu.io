@@ -2,6 +2,7 @@
 draft: false
 date: 2026-06-02
 slug: scalability-in-videoconferencing-systems
+cover_image: poster.png
 categories:
     - Technology
 tags:
