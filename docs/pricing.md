@@ -131,11 +131,11 @@ There are deliberate reasons for this pricing model in OpenVidu Pro:
 
 ## When and how are you charged?
 
-Users must create an [OpenVidu account](/account/) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](docs/self-hosting/ha/index.md)).
+Users must create an [OpenVidu account](account.md) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](docs/self-hosting/ha/index.md)).
 
 When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a **15-day free trial period** during which you will not be charged at all.
 
-After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](/account/) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe :fontawesome-solid-external-link:{.external-link-icon}](https://stripe.com/){:target=_blank}.
+After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](account.md) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe :fontawesome-solid-external-link:{.external-link-icon}](https://stripe.com/){:target=_blank}.
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
 
@@ -165,7 +165,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/pricing/elastic.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" />
 </figure>
 </div>
 
@@ -188,7 +188,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/pricing/elastic-big.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" />
 </figure>
 </div>
 
@@ -211,7 +211,7 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/pricing/ha.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" />
 </figure>
 </div>
 
@@ -238,7 +238,7 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="../assets/images/pricing/elastic-variable.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" />
 </figure>
 </div>
 

@@ -50,7 +50,7 @@ You can change the shape (instance type) of the OpenVidu Single Node PRO instanc
         ![Change OCI instance shape](../../../../assets/images/self-hosting/single-node/oracle/change-shape-pro.png){ .svg-img .dark-img }
         </figure>
 
-5. Confirm the new shape and [start](#start-openvidu-single-node) the instance again.
+5. Confirm the new shape and [start](#start-openvidu-single-node-pro) the instance again.
 
 ## Administration and configuration
 

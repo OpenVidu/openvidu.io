@@ -7,7 +7,7 @@ description: Monitor OpenVidu Server metrics and cluster logs with Grafana's pow
 OpenVidu also provides different **Grafana dashboards** to monitor **metrics** from **OpenVidu Server** and **logs** from your **cluster**.
 
 <div>
-<a class="glightbox" href="../../../../../assets/videos/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../../assets/videos/grafana_trailer.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/grafana_trailer.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 </div>
 
 Grafana is available at [https://your.domain/grafana/]() and can be accessed using your **Grafana admin credentials**.
@@ -42,9 +42,9 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class=
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/metrics1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/metrics1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/metrics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/metrics1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/metrics2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/metrics2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/metrics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/metrics2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -82,9 +82,9 @@ another panel to **filter** logs by **room_id** and **participant_id**,
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/single_node_logs3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/single_node_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/single_node_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/single_node_logs3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/single_node_logs4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/single_node_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/single_node_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/single_node_logs4.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -120,17 +120,17 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/nodes_logs2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/nodes_logs2.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/nodes_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/nodes_logs3.png" loading="lazy"/></a></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/nodes_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/nodes_logs4.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs5.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs5.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/nodes_logs5.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/nodes_logs5.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -140,9 +140,9 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs6.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs6.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/nodes_logs6.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/nodes_logs6.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/nodes_logs7.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/nodes_logs7.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/nodes_logs7.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/nodes_logs7.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -162,9 +162,9 @@ First, there is a panel to **filter** logs by **room_id** and **participant_id**
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/services_logs3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/services_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/services_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/services_logs3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/grafana/services_logs4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/grafana/services_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/grafana/services_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/grafana/services_logs4.png" loading="lazy"/></a></p></div>
 
 </div>
 

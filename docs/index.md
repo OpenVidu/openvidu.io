@@ -25,8 +25,8 @@ tags:
     <div class="product-card openvidu-meet">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="./assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
-          <img src="./assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
         </h3>
         <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
       </div>
@@ -49,8 +49,8 @@ tags:
     <div class="product-card openvidu-platform">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="./assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
-          <img src="./assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
         </h3>
         <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
       </div>
@@ -112,7 +112,7 @@ tags:
 
     ---
 
-    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](/pricing/).
+    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](pricing.md).
 
 -   :material-lightning-bolt:{ .feature-icon .padding-icon } __Performant__{ .feature-name }
 
@@ -170,7 +170,7 @@ tags:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 
     ---
 

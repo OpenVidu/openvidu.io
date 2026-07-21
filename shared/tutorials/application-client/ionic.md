@@ -30,9 +30,9 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
             To show the app with a mobile device appearance, open the dev tools in your browser and find the button to adapt the viewport to a mobile device aspect ratio. You may also choose predefined types of devices to see the behavior of your app in different resolutions.
 
-        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-web.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/join-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/join-ionic-web.png" loading="lazy"/></a></p></div>
 
-        <div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/room-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/room-ionic-web.png" loading="lazy"/></a></p></div>
 
         --8<-- "shared/tutorials/testing-other-devices.md"
 
@@ -52,7 +52,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
             The WebRTC API demands a secure connection for functionality outside of localhost, necessitating the serving of the application over HTTPS.
 
-        If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
+        If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your local deployment from other devices on your network](/docs/self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
 
         Now, let's explore how to run the application on a mobile device:
 
@@ -82,7 +82,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         <div class="grid-container">
 
-        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
+        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/application-clients/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/configure-urls-ionic.png" loading="lazy" style="width: 25%;"/></a></p></div>
 
         </div>
 
@@ -92,8 +92,8 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         <div class="grid-container">
 
-        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/join-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/join-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/application-clients/join-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/join-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
-        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="../../../../assets/images/application-clients/room-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/application-clients/room-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/application-clients/room-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/room-ionic-device.png" loading="lazy" style="width: 50%;"/></a></p></div>
 
         </div>

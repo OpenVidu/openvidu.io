@@ -90,6 +90,19 @@ deployVersion() {
 changeVersionedPagesLinks() {
     local ALL_PREFIXED_VP="${VERSIONED_PAGES[@]/#/$VERSION/}"
 
+    # Pin raw-HTML asset references in versioned pages to this version's own asset folders.
+    # Authors write root-absolute asset refs in raw HTML blocks (src="/assets/...", see the
+    # README "Link rules": MkDocs does not process raw HTML, so a relative path would need a
+    # fragile per-page "../" depth, impossible to get right in shared snippets). At runtime,
+    # the root /assets/ folder always holds the LATEST publish's assets (they are copied to
+    # root by copyFilesFromVersionToRoot), so a versioned page must reference /X.Y/assets/
+    # instead: its assets may change or disappear in later versions. Markdown asset links
+    # need no pinning: MkDocs already rewrites them at build time into relative URLs that
+    # stay inside the version folder.
+    for ASSET_DIR in "assets" "javascripts" "stylesheets"; do
+        grep -Erl "(src|href)=\"/$ASSET_DIR/" $ALL_PREFIXED_VP | xargs sed -i -E "s#(src|href)=\"/$ASSET_DIR/#\1=\"/$VERSION/$ASSET_DIR/#g" || true
+    done
+
     # Change all links in VP that point to NVP to use absolute links ("/NVP/")
     for NVP in "${NON_VERSIONED_PAGES[@]}"; do
         grep -Erl "href=\"(\.\./)*$NVP/" $ALL_PREFIXED_VP | xargs sed -i "s|href=\"\(\.\./\)*$NVP/|href=\"/$NVP/|g" || true

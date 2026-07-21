@@ -77,7 +77,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     ![OpenVidu HA Configuration](../../../../assets/images/self-hosting/ha/aws/openvidu-ha-config.png)
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/){:target="_blank"}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
@@ -168,9 +168,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/ha/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/ha/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/self-hosting/ha/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/self-hosting/ha/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/self-hosting/ha/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/self-hosting/ha/aws/2-secrets.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/self-hosting/ha/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/self-hosting/ha/aws/2-secrets.png" loading="lazy"/></a></p></div>
 
 </div>
 

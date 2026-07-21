@@ -238,7 +238,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.8.0`
 
 !!! info
     
-    Sherpa live captions provider is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target=_blank} to get your license key.
+    Sherpa live captions provider is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../account.md){:target=_blank} to get your license key.
     There's a 15-day free trial waiting for you!
 
 ##### Sherpa vs Vosk
@@ -306,7 +306,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.8.
 
     !!! info
 
-        To build a custom Sherpa image [with GPU acceleration](#gpu-support-for-sherpa-provider), just change the FROM line to:
+        To build a custom Sherpa image [with GPU acceleration](#gpu-acceleration-for-sherpa-provider), just change the FROM line to:
         
           - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda11-base:3.8.0` if your GPU is compatible only with CUDA 11.
           - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.8.0` if your GPU is compatible with CUDA 12 or higher.

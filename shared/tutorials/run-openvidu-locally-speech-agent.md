@@ -45,7 +45,7 @@
 
     !!! info
         The default `provider` property is set to **`vosk`**, which is a local, open-source, and free-to-use option.<br>
-        Visit [**Supported AI providers**](../../ai/live-captions.md#supported-ai-providers) to see the full list of available AI providers, both local and cloud-based.
+        Visit [**Supported AI providers**](/docs/ai/live-captions.md#supported-ai-providers) to see the full list of available AI providers, both local and cloud-based.
 
 4.  Run OpenVidu:
 

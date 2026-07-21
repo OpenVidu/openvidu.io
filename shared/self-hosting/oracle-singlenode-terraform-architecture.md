@@ -8,6 +8,6 @@
     The deployment architecture is as follows:
 
     <figure markdown>
-    ![OpenVidu Single Node Oracle Cloud Infrastructure Architecture](../../../../assets/images/self-hosting/single-node/oracle/single-node-oracle-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node Oracle Cloud Infrastructure Architecture](/assets/images/self-hosting/single-node/oracle/single-node-oracle-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node Oracle Cloud Infrastructure Architecture</figcaption>
     </figure>

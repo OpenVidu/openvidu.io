@@ -31,7 +31,7 @@ Configure your application to use the OpenVidu Meet REST API. Since your applica
 
 Both options work the same way. For example, your application can make API requests to `http://localhost:9080/meet/api/v1/rooms` or `https://your-domain/meet/api/v1/rooms`.
 
-See the [REST API reference](./reference/rest-api.md) for the full list of available endpoints.
+See the [REST API reference](reference/rest-api.md) for the full list of available endpoints.
 
 ### 2. Deploy your application on the OpenVidu node
 
@@ -60,7 +60,7 @@ Your application needs an API key to authenticate requests to the OpenVidu Meet 
 2. Go to the **"Embedded"** page.
 3. Click on **":material-key: Generate API Key"** if you haven't generated one already.
 
-Use this API key in your application to authenticate REST API requests via the `X-API-KEY` header. See the [REST API authentication](./reference/rest-api.md#authentication) section for more details.
+Use this API key in your application to authenticate REST API requests via the `X-API-KEY` header. See the [REST API authentication](reference/rest-api.md#authentication) section for more details.
 
 ### 4. Configure the Web Component URL (if applicable)
 
@@ -108,7 +108,7 @@ https://<YOUR_OPENVIDU_DOMAIN>/meet
 
 For example, if your OpenVidu deployment is at `https://example.openvidu.io`, your application should make API requests to `https://example.openvidu.io/meet/api/v1/rooms`, `https://example.openvidu.io/meet/api/v1/recordings`, etc.
 
-See the [REST API reference](./reference/rest-api.md) for the full list of available endpoints.
+See the [REST API reference](reference/rest-api.md) for the full list of available endpoints.
 
 ### 2. Configure the API key
 
@@ -119,7 +119,7 @@ Generate an API key from the OpenVidu Meet app and configure it in your applicat
 3. Click on **":material-key: Generate API Key"** if you haven't generated one already.
 4. Configure the API key in your application. This key must be included in every request as the `X-API-KEY` header.
 
-See the [REST API authentication](./reference/rest-api.md#authentication) section for more details.
+See the [REST API authentication](reference/rest-api.md#authentication) section for more details.
 
 ### 3. Configure the Web Component URL (if applicable)
 

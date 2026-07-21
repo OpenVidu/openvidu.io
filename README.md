@@ -94,16 +94,60 @@ When creating a new page, follow these steps:
    - **Non-versioned pages**: If the new page is not versioned, add it to the `NON_VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
    - **Versioned pages**: If the new page is part of a new set of versioned pages, add it to the `VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
 
-If the new page contains links to other pages, take into account the following:
+If the new page contains links, follow the site-wide **link rules** below.
 
-- **Markdown links**: Use relative paths pointing to the Markdown file (including the `.md` extension).
-- **HTML links**: Use relative paths pointing to the folder containing the HTML file. Keep in mind that, after building the documentation, the HTML files will be placed in a folder with the same name as the Markdown file (except `index.md` files, which will be placed in its parent folder as `index.html`). For example, if you have a Markdown file `performance.md`, it will be built to `performance/index.html`. Therefore, you must add an extra `../` to the path to point to the correct folder unless the markdown file from which you are linking is named `index.md`.
+#### Link rules
 
-> [!IMPORTANT]
-> Links to non-versioned pages must be absolute paths (e.g. `/pricing/`).
+There is **one convention for Markdown links** and a separate one for raw HTML. The goal is a **zero-warning build**: every link is validated by MkDocs, and `mkdocs build --strict` (run in CI) fails the build on any broken link.
+
+**1. Markdown links and images (in regular pages) → relative, including the `.md` extension.**
+
+Write internal links and images as paths relative to the current file:
+
+```markdown
+[Local deployment](../../self-hosting/local.md)
+[Anchor on another page](../rooms/access.md#predefined-roles)
+[Pricing](../../pricing.md)          <!-- non-versioned page: also relative .md, NOT /pricing/ -->
+![Diagram](../../assets/images/self-hosting/diagram.png#only-dark)
+```
+
+Relative `.md`/asset links are validated by MkDocs, **navigable in the editor** (Ctrl+click / preview works, which root-absolute forms break, since editors resolve `/` against the repo root instead of `docs/`), and version-safe: the built URLs stay inside the version folder, and the deploy script rewrites the built relative links that point to non-versioned pages into absolute URLs (`/pricing/`) at publish time.
 
 > [!NOTE]
-> When serving the site locally using `mkdocs-material`, there should be no warnings about links except for using absolute paths to non-versioned pages. 
+> Non-versioned pages are linked **relatively too** (`../../pricing.md`). The old bare-URL form (`/pricing/`) was a pre-MkDocs-1.6 workaround: it isn't validated and used to produce a build warning — don't use it in Markdown anymore.
+
+**2. Markdown links and images in shared snippets → root-absolute, resolved against `docs/`.**
+
+A snippet is embedded in pages at different hierarchy levels, so relative paths would break. Write them as an absolute path from the `docs/` root:
+
+```markdown
+[Deployment guide](/docs/self-hosting/deployment-types.md)
+![Diagram](/assets/images/self-hosting/diagram.png#only-dark)
+```
+
+MkDocs resolves and validates these against `docs/` thanks to `validation.links.absolute_links: relative_to_docs` in `mkdocs.yml`, and rewrites them into correct **relative** URLs at build time — so they end up identical to hand-written relative links (validated, version-safe), just hierarchy-independent. The trade-off is that they are not editor-navigable, which is why they are reserved for snippets. (See "Adding a new shared snippet" for the deployment-type-parametric exception where a snippet link must stay relative.)
+
+**3. Raw HTML links and images (inside HTML blocks) → absolute URL form.**
+
+MkDocs does **not** process links inside raw HTML (`<a href>`, `<img src>`), so they are neither validated nor rewritten at build time. Relative paths would need a fragile per-page `../` depth (relative to the **built** folder, not the source file) and are impossible to get right in shared snippets — so use absolute URLs:
+
+```html
+<a href="/pricing/">Pricing</a>                      <!-- non-versioned page: trailing-slash URL -->
+<img src="/assets/images/home/feature.svg#only-dark" />
+<a class="glightbox" href="/assets/images/foo.png">...</a>
+```
+
+**Assets referenced this way stay version-correct thanks to the deploy script**: `push-new-version.sh` (`changeVersionedPagesLinks`) rewrites `src|href="/assets/`, `/javascripts/`, `/stylesheets/` into `"/X.Y/assets/`... in every **versioned** page at publish time, so each version keeps referencing its own assets even after later versions change them. Non-versioned pages keep the root form (root assets are always the latest publish's — correct for them). Locally the dev server serves assets at the root, so `/assets/...` just works.
+
+Links from HTML to **versioned** pages (rare) still use relative-to-built-folder paths: a page `performance.md` builds to `performance/index.html`, so add one extra `../` compared to the Markdown path (unless linking from an `index.md`).
+
+**4. Releases pages are the one exception.** In `docs/meet/releases.md` and `docs/docs/releases.md`, every link inside a version's release-notes section must be an **absolute, version-pinned** URL to that same version (e.g. `/3.4/docs/...`). See the [Versioning](#versioning) section.
+
+> [!IMPORTANT]
+> **Anchors:** links to a `pymdownx.tabbed` tab label (`=== "Run OpenVidu locally"` → `#run-openvidu-locally`) work at runtime but MkDocs's anchor validator can't see tab-generated ids, so it logs a **false-positive `INFO` "no such anchor"**. This is expected. Anchor validation is therefore kept at `info` (not `warn`) in `mkdocs.yml`, so it never fails `--strict`. Real broken anchors still appear in the log as `INFO` — scan for them when you touch headings.
+
+> [!NOTE]
+> When serving/building the site locally there should be **no `WARNING` messages at all**. `INFO` messages about anchors are expected (see above). If you add a page that is intentionally not in the nav, add it to `not_in_nav` in `mkdocs.yml` so it doesn't warn.
 
 ### Adding a new shared snippet
 
@@ -123,9 +167,9 @@ When creating a new shared snippet, follow these steps:
 > The path is relative to the root of the repository.
 
 > [!IMPORTANT]
-> If the new snippet contains links to other pages, the same rules as for pages apply. Since the release of Mkdocs 1.6, it is possible to use absolute links to other pages, and Mkdocs will make them relative to the `docs_dir` root folder thanks to [this configuration options in `mkdocs.yml`](https://github.com/OpenVidu/openvidu.io/blob/e1d6bb08d7f6e222bf9a0c420bd79b552fb0a25c/mkdocs.yml#L194-L195). So, now any document (e.g. "dir1/foo.md") can link to the document "dir2/bar.md" as `[link](/dir2/bar.md)`, in addition to the previously only correct way `[link](../dir2/bar.md)`.
-> 
-> **This allows to use local links in shared snippets that are embedded in pages with different hierarchy!**.
+> **Links in shared snippets must be root-absolute** (Markdown `[x](/docs/.../bar.md)`, `![x](/assets/...)`; HTML `src="/assets/..."`). A snippet is embedded in pages at **different hierarchy levels**, so a relative path that is correct in one host page is broken in another. The root-absolute form resolves against `docs/` regardless of where the snippet is included (see [Link rules](#link-rules)). This is why every asset and internal link in `shared/` uses the absolute form.
+>
+> **Exception — deployment-type-parametric snippets.** A few `shared/self-hosting/**` snippets are included in **parallel deployment-type trees** (e.g. the same snippet is used in both `single-node/oracle/` and `single-node-pro/oracle/`) and link to a *sibling* page that must differ per tree, such as `[Admin](../on-premises/admin.md)` or `[Admin](./admin.md)`. These are intentionally **relative** so they resolve to the correct deployment type at each inclusion point — keep them relative. Only links to *fixed* targets (anything under `self-hosting/configuration/`, `self-hosting/how-to-guides/`, `ai/`, `tutorials/`, etc.) become absolute.
 
 ### Mkdocs Material tag system
 
@@ -309,7 +353,7 @@ cd custom-versioning
 Script `push-new-version.sh` performs the following steps:
 
 1. Deploy a new version of the documentation with `mike`.
-2. Change links in versioned HTML files (docs and meet) from new version that point to non-versioned files (home, support, pricing...) accessible from "/" to use absolute paths (e.g. `/pricing/`).
+2. Change links in versioned HTML files (docs and meet) from new version that point to non-versioned files (home, support, pricing...) accessible from "/" to use absolute paths (e.g. `/pricing/`). This step also **version-pins raw-HTML asset references** (`src`/`href` to `/assets/`, `/javascripts/`, `/stylesheets/`) to the version's own folder (e.g. `/3.9/assets/`), so each version keeps referencing its own assets even after later versions change them (Markdown asset links are already handled by MkDocs at build time and need no pinning).
 3. Change links in non-versioned HTML files from new version that point to versioned files to use absolute paths to the latest version (e.g. `/latest/docs/`).
 4. Remove version from links that point to non-versioned files in the new version.
 5. Update `llms.txt` file: replace version with 'latest' for versioned pages and remove version from non-versioned pages.

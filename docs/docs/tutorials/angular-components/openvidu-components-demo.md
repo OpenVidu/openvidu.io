@@ -25,11 +25,11 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 === "Deploy OpenVidu"
 
-    To use a production-ready OpenVidu deployment, visit the official [deployment guide](../self-hosting/deployment-types.md).
+    To use a production-ready OpenVidu deployment, visit the official [deployment guide](../../self-hosting/deployment-types.md).
 
     !!! info "Configure Webhooks"
 
-        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="\_blank"} section for more information.
+        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="\_blank"} section for more information.
 
 
 #### 2. Download the demo code

@@ -22,7 +22,7 @@ At the end of this tutorial, you will have a fully functional simple video-call 
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
-The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-api.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
+The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
 
 ## Running this tutorial
 
@@ -62,10 +62,10 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/direct-link/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/direct-link/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 
@@ -179,7 +179,7 @@ This endpoint does the following:
 
     !!! info
 
-        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../../../assets/htmls/rest-api.html#/operations/createRoom){target="_blank"}.
+        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/createRoom){target="_blank"}.
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 

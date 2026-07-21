@@ -10,14 +10,14 @@
 2. Search for **Instances**, open it, and click _"Create instance"_.
 
     <figure markdown>
-    ![OCI create instance](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/create-instance.png){ .svg-img .dark-img }
+    ![OCI create instance](/assets/images/self-hosting/single-node/oracle/install-tutorial/create-instance.png){ .svg-img .dark-img }
     </figure>
 
 3. Set a name for the instance (for example, `openvidu-singlenode`), or keep the default.
 4. Change the image to _"Canonical Ubuntu 24.04"_.
 
     <figure markdown>
-    ![Instance select image](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/select-image.png){ .svg-img .dark-img }
+    ![Instance select image](/assets/images/self-hosting/single-node/oracle/install-tutorial/select-image.png){ .svg-img .dark-img }
     </figure>
 
 5. Select the shape for your OpenVidu server. We recommend **at least 1 OCPU and 4 GB of RAM** for OpenVidu to run correctly. Then click _"Next"_.
@@ -29,19 +29,19 @@
 7. Create a new `VNIC` with a new `virtual cloud network` and a new `public subnet`.
 
     <figure markdown>
-    ![Network configuration](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/network-config.png){ .svg-img .dark-img }
+    ![Network configuration](/assets/images/self-hosting/single-node/oracle/install-tutorial/network-config.png){ .svg-img .dark-img }
     </figure>
 
 8. Scroll down and download the private key for the instance so you can connect via SSH. Then click _"Next"_.
 
     <figure markdown>
-    ![Download SSH key](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/download-ssh-key.png){ .svg-img .dark-img }
+    ![Download SSH key](/assets/images/self-hosting/single-node/oracle/install-tutorial/download-ssh-key.png){ .svg-img .dark-img }
     </figure>
 
 9.  In the **Storage** tab, select _"Specify a custom boot volume size"_ and set it to **100 GB** instead of the default 50 GB. You can keep 50 GB, but OpenVidu may fail due to insufficient disk space. Then click _"Next"_.
 
     <figure markdown>
-    ![Volume size configuration](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/volume-size-config.png){ .svg-img .dark-img }
+    ![Volume size configuration](/assets/images/self-hosting/single-node/oracle/install-tutorial/volume-size-config.png){ .svg-img .dark-img }
     </figure>
 
 10. Review the configuration and click _"Create"_.
@@ -53,19 +53,19 @@
 1. Open the instance details, navigate to the **VNIC** resource, and go to the _"Networking"_ tab.
 
     <figure markdown>
-    ![VNIC location](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/vnic-location.png){ .svg-img .dark-img }
+    ![VNIC location](/assets/images/self-hosting/single-node/oracle/install-tutorial/vnic-location.png){ .svg-img .dark-img }
     </figure>
 
 2. Open the _"IP administration"_ tab. In the row of the existing IPv4 address, click the three-dots menu and select _"Edit"_.
 
     <figure markdown>
-    ![Edit IPv4](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/edit-ipv4.png){ .svg-img .dark-img }
+    ![Edit IPv4](/assets/images/self-hosting/single-node/oracle/install-tutorial/edit-ipv4.png){ .svg-img .dark-img }
     </figure>
 
 3. Select _"Ephemeral public IP"_ and click _"Update"_.
 
     <figure markdown>
-    ![Create Ephemeral Public IPv4](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ipv4-ephemeral-public-address.png){ .svg-img .dark-img }
+    ![Create Ephemeral Public IPv4](/assets/images/self-hosting/single-node/oracle/install-tutorial/ipv4-ephemeral-public-address.png){ .svg-img .dark-img }
     </figure>
 
 ---
@@ -79,41 +79,41 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 1. From the instance _"Details"_ page, click the _"Virtual cloud network"_ resource.
 
     <figure markdown>
-    ![VCN location](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/vcn-location.png){ .svg-img .dark-img }
+    ![VCN location](/assets/images/self-hosting/single-node/oracle/install-tutorial/vcn-location.png){ .svg-img .dark-img }
     </figure>
 
 2. Go to the _"Security"_ tab and click the default security list.
 
     <figure markdown>
-    ![Security tab](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/security-tab.png){ .svg-img .dark-img }
+    ![Security tab](/assets/images/self-hosting/single-node/oracle/install-tutorial/security-tab.png){ .svg-img .dark-img }
     </figure>
 
 3. In the _"Security Rules"_ tab, add the following **Ingress rules**.
 
 ??? "Ingress Rules"
     <figure markdown>
-    ![Ingress rule 1](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule1.png){ .svg-img .dark-img }
+    ![Ingress rule 1](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule1.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 2](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule2.png){ .svg-img .dark-img }
+    ![Ingress rule 2](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule2.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 3](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule3.png){ .svg-img .dark-img }
+    ![Ingress rule 3](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule3.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 4](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule4.png){ .svg-img .dark-img }
+    ![Ingress rule 4](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule4.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 5](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule5.png){ .svg-img .dark-img }
+    ![Ingress rule 5](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule5.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 6](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule6.png){ .svg-img .dark-img }
+    ![Ingress rule 6](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule6.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 7](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule7.png){ .svg-img .dark-img }
+    ![Ingress rule 7](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule7.png){ .svg-img .dark-img }
     </figure>
     <figure markdown>
-    ![Ingress rule 8](../../../../assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule8.png){ .svg-img .dark-img }
+    ![Ingress rule 8](/assets/images/self-hosting/single-node/oracle/install-tutorial/ingress-rule8.png){ .svg-img .dark-img }
     </figure>
 
 ---

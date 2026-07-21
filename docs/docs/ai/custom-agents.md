@@ -84,7 +84,7 @@ CMD ["python", "agent.py", "start"]
 
 --8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
 
-### 2. Add a `agent-AGENT_NAME.yaml` file
+### 2. Add an `agent-AGENT_NAME.yaml` file
 
 Located in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node, create a file named `agent-AGENT_NAME.yaml`, where `AGENT_NAME` must be a unique name for your agent. The minimal content of this file is:
 

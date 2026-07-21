@@ -18,7 +18,7 @@ hide:
 
 # The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System
 
-![WebRTC connectivity paths](/assets/images/blog/scalability/poster.png){ align=left }
+![WebRTC connectivity paths](../../assets/images/blog/scalability/poster.png){ align=left }
 
 ## Introduction: The Success Trap
 
@@ -42,8 +42,8 @@ Along the way, you'll also learn how to build an autoscaling loop that reacts be
 
 Most successful platforms start with a single machine. In a single-node deployment, one server runs signaling, media processing, persistence, and API logic together. For many teams, that's the right call — it maximizes speed of learning and minimizes operational overhead while you figure out whether the product has legs.
 
-![Single-node architecture](/assets/images/blog/scalability/single-node-light.svg#only-light)
-![Single-node architecture](/assets/images/blog/scalability/single-node-dark.svg#only-dark)
+![Single-node architecture](../../assets/images/blog/scalability/single-node-light.svg#only-light)
+![Single-node architecture](../../assets/images/blog/scalability/single-node-dark.svg#only-dark)
 
 ### Why the Single Node Works Early
 
@@ -93,8 +93,8 @@ When these signals appear consistently, throwing a bigger machine at the problem
 
 At this point, larger machines cost more and help less. What you actually need is a role-based architecture where media execution and orchestration scale independently.
 
-![Elastic media plane architecture](/assets/images/blog/scalability/elastic-light.svg#only-light)
-![Elastic media plane architecture](/assets/images/blog/scalability/elastic-dark.svg#only-dark)
+![Elastic media plane architecture](../../assets/images/blog/scalability/elastic-light.svg#only-light)
+![Elastic media plane architecture](../../assets/images/blog/scalability/elastic-dark.svg#only-dark)
 
 The split looks like this:
 
@@ -181,7 +181,7 @@ A proper graceful scale-in strategy goes like this:
 - Let existing rooms finish naturally, or migrate sessions explicitly if the drain timeout is exceeded.
 - Terminate the node only after it reaches a safe empty state.
 
-This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](/blog/2026/05/26/scale-in-problem-in-videoconferences/).
+This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](2026-03-09-scale-in-problem-in-videoconferences.md).
 
 With Phase 2 in place, you have elastic media capacity. But there's still one major vulnerability left: your control plane.
 
@@ -191,8 +191,8 @@ You can run 100 media nodes and still fail like a prototype if your orchestratio
 
 When orchestration goes down, new joins fail, placement stops, and recovery becomes a manual process. Phase 2 hardened the media plane. Phase 3 is about making sure the rest of the system can survive a failure too — because HA at this stage means hardening the support cluster, not adding more media nodes.
 
-![High-availability architecture](/assets/images/blog/scalability/ha-light.svg#only-light)
-![High-availability architecture](/assets/images/blog/scalability/ha-dark.svg#only-dark)
+![High-availability architecture](../../assets/images/blog/scalability/ha-light.svg#only-light)
+![High-availability architecture](../../assets/images/blog/scalability/ha-dark.svg#only-dark)
 
 ### Remove Single Points of Failure
 

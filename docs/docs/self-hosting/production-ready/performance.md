@@ -31,7 +31,7 @@ OpenVidu is built by a team of expert WebRTC developers who know all the ins and
 
 This means that applications built on top of LiveKit will continue to work exactly the same, while the internal WebRTC engine inside the server can be swapped at will and applications can benefit from that change, without having to be rebuilt.
 
-In terms of the signaling protocol, API and SDKs, OpenVidu maintains the original LiveKit implementation. LiveKit's API is very well designed, with a simple but powerful [set of concepts](../../getting-started.md#basic-concepts), and the amount of SDKs available is very large.
+In terms of the signaling protocol, API and SDKs, OpenVidu maintains the original LiveKit implementation. LiveKit's API is very well designed, with a simple but powerful [set of concepts](../../index.md#basic-concepts), and the amount of SDKs available is very large.
 
 ### Choice of technology
 

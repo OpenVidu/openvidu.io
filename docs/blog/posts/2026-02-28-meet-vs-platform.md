@@ -19,7 +19,7 @@ hide:
 
 # Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform
 
-![OpenVidu Meet vs OpenVidu Platform](/assets/images/blog/meet-vs-platform/meet-vs-platform2.png)
+![OpenVidu Meet vs OpenVidu Platform](../../assets/images/blog/meet-vs-platform/meet-vs-platform2.png)
 
 In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using the OpenVidu WebRTC ecosystem. 
 
@@ -57,7 +57,7 @@ While it works out of the box, it remains highly flexible on the outside, allowi
 * **Privacy & Tech**: Virtual backgrounds and End-to-End Encryption (E2EE).
 * **Identity**: Full UI white-labeling and branding.
 
-![OpenVidu Meet screenshot](/assets/images/blog/meet-vs-platform/webcomponent-meeting.png)
+![OpenVidu Meet screenshot](../../assets/images/blog/meet-vs-platform/webcomponent-meeting.png)
 
 ### OpenVidu Platform: The Developer’s Canvas
 
@@ -69,7 +69,7 @@ Rather than being limited by "rooms", the Platform gives you the building blocks
 * **Advanced Routing**: Total control over media ingestion and telephony (PSTN/SIP) integration.
 * **AI-Ready**: Direct hooks for real-time AI processing and media analysis.
 
-![OpenVidu Platform screenshot](/assets/images/blog/meet-vs-platform/ov-platform.png)
+![OpenVidu Platform screenshot](../../assets/images/blog/meet-vs-platform/ov-platform.png)
 
 **The Key Difference** > **OpenVidu Meet** is built around the concepts of **Rooms & Meetings**, whereas **OpenVidu Platform** is built around the fundamental concepts of **Audio & Video Tracks**.
 

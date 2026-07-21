@@ -124,7 +124,7 @@ You can access **OpenVidu Meet** by opening [http://localhost:9080](http://local
 - User ID: `admin`
 - Password: `admin`
 
-You can use the [REST API](../../embedded/reference/rest-api/) to [embed OpenVidu Meet](../../embedded/intro) using:
+You can use the [REST API](../embedded/reference/rest-api.md) to [embed OpenVidu Meet](../embedded/intro.md) using:
 
 - API Key: `meet-api-key` 
 

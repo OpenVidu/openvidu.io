@@ -32,13 +32,17 @@ This repo is the source of https://openvidu.io/, built with **MkDocs Material** 
 2. In `mkdocs.yml`: add it to `nav`, **and** to the `llmstxt` plugin `sections` (under `OpenVidu` for non-versioned pages, `OpenVidu Meet`/`OpenVidu Platform` for versioned ones), copying the page description.
 3. If the page starts a new non-versioned or versioned area, add it to the `NON_VERSIONED_PAGES` or `VERSIONED_PAGES` array in `custom-versioning/push-new-version.sh`.
 
-## Link rules (strict — deploy scripts depend on them)
+## Link rules (strict — the build is zero-warning and CI runs `mkdocs build --strict`)
 
-- **Markdown links**: relative paths to the target **`.md` file including the extension** (e.g. `[link](../dir2/bar.md)`). Since MkDocs 1.6 an absolute form relative to `docs/` also works (`[link](/dir2/bar.md)`) — this is the way to link from **shared snippets**, which are embedded in pages at different hierarchy levels.
-- **HTML links** (inside raw HTML blocks): relative paths to the **built folder**. `performance.md` builds to `performance/index.html`, so add one extra `../` compared to the markdown path — unless linking *from* an `index.md`.
-- **Links to non-versioned pages must be absolute** (e.g. `/pricing/`). The local server will warn about these — that's the only acceptable warning category.
+One convention for Markdown, a separate one for raw HTML. Full detail in the README "Link rules" section.
+
+- **Markdown links & images in regular pages → relative, including the `.md` extension**: `[x](../../self-hosting/local.md)`, `![x](../assets/images/foo.png#only-dark)`. Validated by MkDocs, navigable in the editor (root-absolute forms are not — editors resolve `/` against the repo root, not `docs/`), and version-safe. **Non-versioned pages are linked relatively too** (`[Pricing](../../pricing.md)`, **not** `/pricing/` — the bare-URL form was a pre-1.6 workaround that produced a build warning; the deploy script converts the built relative links to `/pricing/` at publish).
+- **Markdown links & images in shared snippets → root-absolute against `docs/`**: `[x](/docs/self-hosting/deployment-types.md)`, `![x](/assets/images/foo.png)`. Snippets render at different depths, so relative would break; `validation.links.absolute_links: relative_to_docs` validates these and rewrites them to relative at build time (same output as hand-written relative). **One exception:** snippets included in **parallel deployment-type trees** (`single-node/oracle/` *and* `single-node-pro/oracle/`, etc.) that link a *sibling* page differing per tree (`../on-premises/admin.md`, `./admin.md`) stay **relative** on purpose. Only their *fixed*-target links are absolute.
+- **Raw HTML links & images** (inside HTML blocks): MkDocs does **not** validate or rewrite these. Use the **absolute URL** form: `href="/pricing/"` for non-versioned pages, `src="/assets/images/foo.png"` for assets (also in snippets). Versioned pages stay version-correct because `push-new-version.sh` rewrites `src|href="/assets/`, `/javascripts/`, `/stylesheets/` → `"/X.Y/...` in versioned pages at publish time; non-versioned pages keep the root form. HTML links to versioned pages (rare) use relative-to-built-folder: `performance.md` builds to `performance/index.html`, so add one extra `../` vs the Markdown path (unless linking *from* an `index.md`).
+- **Anchors:** `pymdownx.tabbed` tab labels (`=== "Foo"` → `#foo`) work at runtime but MkDocs's validator can't see the generated ids, so it logs a **false-positive `INFO` "no such anchor"**. Expected. `validation.links.anchors` is kept at `info` (not `warn`) so it never fails `--strict`; real broken anchors still show as `INFO`.
 - **Never hardcode a pinned version** (`/3.8.0/...`) anywhere. From non-versioned/marketing content, versioned docs are reached as `/latest/meet/` or `/latest/docs/` (the deploy script rewrites source-relative links this way; absolute URLs you emit yourself, e.g. in templates or structured data, must already use `latest` — see `overrides/partials/json-ld.html`).
 - **The releases pages are the one exception.** In `docs/meet/releases.md` and `docs/docs/releases.md`, every link inside a version's release-notes section must be an **absolute, version-pinned** URL to **that same version** (links in the `3.4.0`/`3.4.x` sections → `/3.4/docs/...`). These pages are copied verbatim into every version folder on publish, so relative or `/latest/` links would be wrong for most copies; version-pinning keeps each note pointing at the docs it describes, and the outdated-version banner explains the version jump. The deploy script shields these `/X.Y/docs/`, `/X.Y/meet/` links from the version-stripping applied to other non-versioned pages.
+- **Intentionally-non-nav pages** must be listed in `not_in_nav` in `mkdocs.yml`, or the build warns.
 
 ## How pages are composed
 
@@ -92,15 +96,15 @@ Notes:
 
 - Run from the repo root. When running non-interactively (scripts, agents), drop `-it`.
 - If host port 9000 is taken (it often is on dev machines), map another one, e.g. `-p 9100:8000` — do not stop whatever holds 9000.
-- Watch the console: broken links appear as **warnings**, not failures. The only acceptable link warnings are absolute paths to non-versioned pages (`/pricing/` etc.).
+- Watch the console: the build must be **zero `WARNING`s**. Broken links appear as warnings (and CI's `mkdocs build --strict` turns them into hard failures). `INFO` messages about anchors are expected — most are `pymdownx.tabbed` tab-anchor false positives (see Link rules); still scan them for a genuinely renamed/removed heading when you touch headings.
 - The dev server serves a **single unversioned site at the root** (`/meet/`, not `/latest/meet/`) and overrides `site_url`, so canonicals and JSON-LD show `http://0.0.0.0:8000/...` locally. Both are expected; version handling happens at deploy time. To preview the real versioned layout, use `mike serve` against `gh-pages` (see README "Testing versioning locally").
 
 ## Checklist before finishing
 
 1. Working on the right branch (`next` for in-development docs, `main` for fixes to published content).
 2. Page renders correctly locally (both light and dark themes if you touched styling or theme-dependent images).
-3. No new warnings in the mkdocs console beyond absolute-path-to-non-versioned-page warnings.
-4. New pages: `nav` + `llmstxt` sections updated; `NON_VERSIONED_PAGES`/`VERSIONED_PAGES` arrays updated if a new area was created.
-5. Links follow the rules above (markdown → `.md` relative; HTML → built-folder relative; non-versioned → absolute; no pinned versions).
+3. **Zero `WARNING`s** in the mkdocs console (`mkdocs build --strict` must pass — CI enforces it). Anchor `INFO`s are expected (tab-anchor false positives).
+4. New pages: `nav` + `llmstxt` sections updated; `NON_VERSIONED_PAGES`/`VERSIONED_PAGES` arrays updated if a new area was created; intentionally-non-nav pages added to `not_in_nav`.
+5. Links follow the rules above (Markdown in pages → relative `.md`/asset paths; Markdown in snippets → root-absolute; raw HTML → absolute URL (`/pricing/`, `/assets/…`), built-folder-relative only for HTML→versioned-page links; no pinned versions outside releases pages).
 6. If you touched a section backed by frontmatter data (`faq`, `publications`) or a shared snippet, its counterparts are updated too.
 7. Tutorials touched? Remind the user to sync livekit-tutorials-docs.

@@ -1,0 +1,56 @@
+name: Validate Web
+
+# Fast feedback guard: build the docs with --strict on every PR and on pushes to the
+# main/next branches. --strict turns every MkDocs WARNING (broken relative link, absolute
+# link that can't be resolved against docs_dir, page missing from nav, unrecognized link,
+# etc.) into an error, so broken links are caught before they reach the publish workflow.
+# Anchor issues stay at INFO level (see mkdocs.yml validation.links.anchors) and do not fail
+# the build, because pymdownx.tabbed generates tab anchors that MkDocs's validator can't see.
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "shared/**"
+      - "mkdocs.yml"
+      - ".github/workflows/validate-web.yaml"
+  push:
+    branches:
+      - main
+      - next
+    paths:
+      - "docs/**"
+      - "shared/**"
+      - "mkdocs.yml"
+      - ".github/workflows/validate-web.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: 3.x
+
+      - name: Install safe-chain
+        uses: OpenVidu/actions/install-safe-chain@040cbfd01320475801d7b12e33769e0d55a737a8 # v1.0.21
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          # Same pins as the publish workflow so validation matches what gets deployed.
+          pip install "mkdocs-material[imaging]==9.7.6" "pygments<2.20" mkdocs-glightbox mkdocs-llmstxt mkdocs-rss-plugin
+          sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+          sudo apt-get install -y --fix-missing pngquant
+
+      - name: Build documentation (strict)
+        env:
+          GOOGLE_ANALYTICS_KEY: G-XXXXXXXX
+        run: mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation

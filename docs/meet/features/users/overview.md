@@ -32,8 +32,8 @@ The root administrator is a special user with the fixed `userId` **`admin`**. Th
 
 These credentials are required to access the OpenVidu Meet app, at least for the first time, to create other users and manage the system:
 
-<a class="glightbox" href="../../../../assets/videos/meet/users/overview/login-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/users/overview/login-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../../assets/videos/meet/users/overview/login-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/users/overview/login-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/overview/login-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/users/overview/login-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/overview/login-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/users/overview/login-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 The location of the initial administrator password depends on the deployment environment:
 

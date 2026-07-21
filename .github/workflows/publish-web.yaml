@@ -46,6 +46,17 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
+      # Fail fast before publishing if the docs have broken links or any other build
+      # warning. --strict turns every MkDocs WARNING (broken relative link, absolute link
+      # that can't be resolved against docs_dir, page missing from nav, etc.) into an error.
+      # Anchor issues are logged at INFO level (see mkdocs.yml validation.links.anchors) and
+      # do not fail the build, because pymdownx.tabbed generates tab anchors that MkDocs's
+      # validator cannot see.
+      - name: Validate documentation build (strict)
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        run: mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation
+
       - name: Run selected script
         working-directory: ./custom-versioning
         env:

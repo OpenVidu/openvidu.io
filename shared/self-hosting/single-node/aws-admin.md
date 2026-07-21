@@ -11,6 +11,6 @@ You can start and stop all services as explained in the [On Premises Single Node
 
 For administration, you can follow the instructions from the [On Premises Single Node Administration](../on-premises/admin.md) section.
 
-Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](/docs/self-hosting/configuration/changing-config.md) section. Additionally, the [How to Guides](/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
 --8<-- "shared/self-hosting/single-node/aws-config.md"

@@ -276,6 +276,18 @@ These functions are the heart of the post-processing. They use `grep -Erl … | 
 sed -i …` to rewrite links in place.
 
 - **`changeVersionedPagesLinks`** — operates on `"$VERSION"/docs` and `"$VERSION"/meet`:
+    - **Raw-HTML asset references** (`src|href="/assets/…"`, `/javascripts/…`, `/stylesheets/…`)
+      → version-pinned `src|href="/$VERSION/assets/…"`, etc. Authors write asset paths in **raw
+      HTML blocks** (`<img src="/assets/…">`, glightbox `<a href="/assets/…">`) as root-absolute,
+      because MkDocs does **not** process raw HTML — a relative path would need a fragile per-page
+      depth relative to the _built_ folder and could never be correct inside a shared snippet
+      included at different levels. At runtime the root `/assets/` folder always holds the
+      **latest** publish's assets (they are promoted to the root by `copyFilesFromVersionToRoot`),
+      so a versioned page must reference its **own** `/$VERSION/assets/…` instead: its assets may
+      change or disappear in later releases, which would silently break the older page. Markdown
+      asset links (and Markdown links in general) need **no** pinning — MkDocs already rewrites
+      them into version-local relative URLs at build time. `/search/` is not pinned here (the
+      search index is handled by `changeSearchIndexLinks`).
     - Links pointing at a non-versioned page (`href="(../)*NVP/"`) → absolute `href="/NVP/"`.
     - Links to the home page (`href="(../)*.."`) → `href="/"`.
     - The cookie-consent base URL `URL("(../)*..",location)` → `URL("/",location)`, so the
@@ -425,6 +437,8 @@ Summary of the final link conventions produced by the scripts:
 
 | Context                             | From (mike output) | To (final)                        |
 | ----------------------------------- | ------------------ | --------------------------------- |
+| Versioned page → asset (raw HTML)   | `src="/assets/…"`  | `src="/3.0/assets/…"` (version-pinned) |
+| Versioned page → asset (Markdown)   | `../../assets/…`   | _(left relative by mike; stays version-local)_ |
 | Versioned page → non-versioned page | `../../pricing/`   | `/pricing/`                       |
 | Versioned page → home               | `../..`            | `/`                               |
 | Non-versioned page → versioned page | `../docs/`         | `/latest/docs/`                   |

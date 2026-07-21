@@ -3,11 +3,9 @@ title: OpenVidu Platform
 description: Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, AI, live streaming and robotics.
 ---
 
-<div>
 <div class="logo-header platform-header">
-<img src="../assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable" alt="">
-<img src="../assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable" alt="">
-</div>
+<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable" alt="">
+<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable" alt="">
 </div>
 
 <h1 class="meetplatform-slogan">
@@ -68,7 +66,7 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu videoconference use case" src="../../assets/images/getting-started/videoconference.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/getting-started/videoconference.svg" />
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -100,7 +98,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="../../assets/images/getting-started/livestream.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/getting-started/livestream.svg" />
 </div>
 
 </div>
@@ -110,7 +108,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-40 tablet-grid-40">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="../../assets/images/getting-started/ai-agents.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/getting-started/ai-agents.svg" />
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
@@ -138,7 +136,7 @@ The future lies in the integration of cameras and sensors in all kinds of device
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="../../assets/images/getting-started/robotics.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/getting-started/robotics.svg" />
 </div>
 
 </div>

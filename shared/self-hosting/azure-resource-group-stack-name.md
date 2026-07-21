@@ -3,7 +3,7 @@
 Select your **Subscription** and the **Resource Group** where you want to deploy OpenVidu.
 
 <figure markdown>
-![Azure Instance configuration](../../../../assets/images/self-hosting/shared/azure-stack-resource-group.png){ .svg-img .dark-img }
+![Azure Instance configuration](/assets/images/self-hosting/shared/azure-stack-resource-group.png){ .svg-img .dark-img }
 </figure>
 
 !!! warning
@@ -13,5 +13,5 @@ Select your **Subscription** and the **Resource Group** where you want to deploy
 Select the **Region** and choose a descriptive **Stack Name**. It will be used as a prefix in the name of all the resources created by the template.
 
 <figure markdown>
-![Azure Instance configuration](../../../../assets/images/self-hosting/shared/azure-stack-name-region.png){ .svg-img .dark-img }
+![Azure Instance configuration](/assets/images/self-hosting/shared/azure-stack-name-region.png){ .svg-img .dark-img }
 </figure>

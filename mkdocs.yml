@@ -301,12 +301,37 @@ nav:
       - research.md
 
 
+# Pages intentionally excluded from the nav (reached via direct links, not browsable
+# through the navigation). Listed here so validation.nav.omitted_files can stay at "warn"
+# and still flag genuinely-forgotten pages, while these known ones produce no warning.
+not_in_nav: |
+  /account.md
+  /acknowledgments.md
+  /openvidu-meet-vs-openvidu-platform.md
+  /conditions/
+  /docs/getting-started.md
+
 validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: warn
   links:
+    not_found: warn
+    # Absolute Markdown links (starting with "/") are resolved relative to docs_dir,
+    # validated, and rewritten to relative URLs at build time. This form is what shared
+    # snippets use for their links and images: snippets are included in pages at different
+    # hierarchy levels, so relative paths would break. Regular pages use relative links
+    # (editor-navigable); see README "Link rules".
     absolute_links: relative_to_docs
-  omitted_files: warn
-  absolute_links: warn
-  unrecognized_links: warn
+    unrecognized_links: warn
+    # Kept at "info" (NOT "warn") on purpose. pymdownx.tabbed generates id anchors for tab
+    # labels via its slugify option, but MkDocs's anchor validator runs before that extension
+    # and cannot see those ids, so every link to a tab anchor is reported as a false-positive
+    # "no such anchor" message. Raising this to "warn" would emit ~110+ false warnings and
+    # break `mkdocs build --strict`. INFO messages do not fail --strict, so real broken
+    # anchors still surface in the log without blocking the build.
+    anchors: info
 
 theme:
   name: material
