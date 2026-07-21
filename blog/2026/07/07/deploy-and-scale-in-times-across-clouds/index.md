@@ -96,7 +96,7 @@ The transferable lesson
 
 ## What about scaling back *down*?
 
-Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](/blog/2026/05/26/scale-in-problem-in-videoconferences/). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
+Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
 
 Two things are worth knowing before you get there:
 

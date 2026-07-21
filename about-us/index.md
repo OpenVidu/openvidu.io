@@ -8,7 +8,7 @@ I'm a software engineer, and earned a Ph.D. in computer science in 2008. I was a
 
 In the private sector, I have also participated in, directed, and collaborated with various private and projects, including Kurento, either as a consultor or as a technical lead.
 
-My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](/research).
+My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](https://openvidu.io/research/index.md).
 
 ______________________________________________________________________
 
@@ -20,7 +20,7 @@ I'm a software engineer, and I hold a PhD on Computer Science, earned in 2007. I
 
 I've been involved in many projects in the private sector, mainly related to cloud computing, engineering and testing, including Kurento.
 
-My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](/research).
+My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](https://openvidu.io/research/index.md).
 
 ______________________________________________________________________
 

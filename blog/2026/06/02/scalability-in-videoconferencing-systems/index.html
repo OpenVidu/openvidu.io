@@ -12132,7 +12132,7 @@
 <li>Let existing rooms finish naturally, or migrate sessions explicitly if the drain timeout is exceeded.</li>
 <li>Terminate the node only after it reaches a safe empty state.</li>
 </ul>
-<p>This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our <a href="/blog/2026/05/26/scale-in-problem-in-videoconferences/">dedicated post on graceful scale-in strategies</a>.</p>
+<p>This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our <a href="../../../05/26/scale-in-problem-in-videoconferences/">dedicated post on graceful scale-in strategies</a>.</p>
 <p>With Phase 2 in place, you have elastic media capacity. But there's still one major vulnerability left: your control plane.</p>
 <h2 id="phase-3-high-availability-the-control-plane">Phase 3: High Availability (The Control Plane)<a class="headerlink" href="#phase-3-high-availability-the-control-plane" title="Anchor link to this section for reference">#</a></h2>
 <p>You can run 100 media nodes and still fail like a prototype if your orchestration layer is a single instance.</p>

@@ -153,7 +153,7 @@ A proper graceful scale-in strategy goes like this:
 - Let existing rooms finish naturally, or migrate sessions explicitly if the drain timeout is exceeded.
 - Terminate the node only after it reaches a safe empty state.
 
-This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](/blog/2026/05/26/scale-in-problem-in-videoconferences/).
+This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md).
 
 With Phase 2 in place, you have elastic media capacity. But there's still one major vulnerability left: your control plane.
 

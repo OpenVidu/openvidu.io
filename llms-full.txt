@@ -82,7 +82,7 @@ ______________________________________________________________________
 
   ______________________________________________________________________
 
-  OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](/pricing/).
+  OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](https://openvidu.io/3.8/pricing/index.md).
 
 - **Performant**
 
@@ -478,8 +478,8 @@ Open source video platform built on top of LiveKit, increasing performance, redu
 
 **Docs**:
 
-- [OpenVidu Meet Embedded](https://openvidu.io/latest/meet/embedded/intro/)
-- [Web Component Reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/)
+- [OpenVidu Meet Embedded](https://openvidu.io/3.8/meet/embedded/intro/index.md)
+- [Web Component Reference](https://openvidu.io/3.8/meet/embedded/reference/webcomponent/index.md)
 - [GitHub](https://github.com/OpenVidu)
 
 **Quick React integration (minimal example)**
@@ -531,7 +531,7 @@ There is no universal winner. If your top priority is shipping fast with minimal
 
 If video is becoming a core capability in your product, self-hosted alternatives are now practical enough to consider early, especially when cost predictability, data ownership, and long-term control matter.
 
-The best decision is not only about how fast you can launch, but how well your architecture and pricing model will hold up when your usage grows. If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
+The best decision is not only about how fast you can launch, but how well your architecture and pricing model will hold up when your usage grows. If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](https://openvidu.io/3.8/meet/embedded/intro/index.md) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
 
 ______________________________________________________________________
 
@@ -1157,7 +1157,7 @@ A proper graceful scale-in strategy goes like this:
 - Let existing rooms finish naturally, or migrate sessions explicitly if the drain timeout is exceeded.
 - Terminate the node only after it reaches a safe empty state.
 
-This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](/blog/2026/05/26/scale-in-problem-in-videoconferences/).
+This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](https://openvidu.io/3.8/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md).
 
 With Phase 2 in place, you have elastic media capacity. But there's still one major vulnerability left: your control plane.
 
@@ -1456,7 +1456,7 @@ The hard part was never the AI. It's making the whole loop happen fast enough to
 
 Start with the smallest possible loop — one sensor reading, one camera frame, one spoken reply — and get it talking back to you in under a second. Once that loop feels alive, everything else is just iteration.
 
-And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](https://openvidu.io/latest/docs/ai/custom-agents/) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
+And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](https://openvidu.io/3.8/docs/ai/custom-agents/index.md) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
 
 Now go build one of them. We'd love to see what you ship.
 
@@ -1466,7 +1466,7 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/).
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/3.8/meet/index.md).
 
 ## Why self-host your video calls?
 
@@ -1750,7 +1750,7 @@ The transferable lesson
 
 ## What about scaling back *down*?
 
-Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](/blog/2026/05/26/scale-in-problem-in-videoconferences/). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
+Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](https://openvidu.io/3.8/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
 
 Two things are worth knowing before you get there:
 
@@ -2120,11 +2120,11 @@ There are deliberate reasons for this pricing model in OpenVidu Pro:
 
 ## When and how are you charged?
 
-Users must create an [OpenVidu account](/account/) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](https://openvidu.io/3.8/docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](https://openvidu.io/3.8/docs/self-hosting/ha/index.md)).
+Users must create an [OpenVidu account](https://openvidu.io/3.8/account/index.md) and get an OpenVidu License. This license will be required to deploy an OpenVidu Pro cluster ([OpenVidu Elastic](https://openvidu.io/3.8/docs/self-hosting/elastic/index.md) or [OpenVidu High Availability](https://openvidu.io/3.8/docs/self-hosting/ha/index.md)).
 
 When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a **15-day free trial period** during which you will not be charged at all.
 
-After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](/account/) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe](https://stripe.com/) .
+After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](https://openvidu.io/3.8/account/index.md) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe](https://stripe.com/) .
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io).
 
@@ -2209,7 +2209,7 @@ I'm a software engineer, and earned a Ph.D. in computer science in 2008. I was a
 
 In the private sector, I have also participated in, directed, and collaborated with various private and projects, including Kurento, either as a consultor or as a technical lead.
 
-My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](/research).
+My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](https://openvidu.io/3.8/research/index.md).
 
 ______________________________________________________________________
 
@@ -2221,7 +2221,7 @@ I'm a software engineer, and I hold a PhD on Computer Science, earned in 2007. I
 
 I've been involved in many projects in the private sector, mainly related to cloud computing, engineering and testing, including Kurento.
 
-My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](/research).
+My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](https://openvidu.io/3.8/research/index.md).
 
 ______________________________________________________________________
 
@@ -2804,7 +2804,7 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 # OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
-\[[![](../assets/videos/meet/home/demo-poster.jpg)](../assets/videos/meet/home/demo-preview.mp4)\](https://openvidu.io/3.8/assets/videos/meet/home/demo.mp4)
+\[[![](/assets/videos/meet/home/demo-poster.jpg)](/assets/videos/meet/home/demo-preview.mp4)\](/assets/videos/meet/home/demo.mp4)
 
 [Deploy Meet in minutes](https://openvidu.io/3.8/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
 
@@ -2848,25 +2848,25 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
   Allow participants to easily replace their video background with a blur effect or an image.
 
-  \[[](../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4) \[[](../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4)
+  \[[](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark)\](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4) \[[](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light)\](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4)
 
 **Record and share**
 
 OpenVidu Meet offers high-quality recordings and greatly simplifies their storage and access control.
 
-\[[](../assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/recordings/management/share-recording-dark.mp4) \[[](../assets/videos/meet/recordings/management/share-recording-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/recordings/management/share-recording-light.mp4)
+\[[](/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark)\](/assets/videos/meet/recordings/management/share-recording-dark.mp4) \[[](/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light)\](/assets/videos/meet/recordings/management/share-recording-light.mp4)
 
 - **Pre-configure your rooms**
 
   Create and customize the behavior of your rooms in a few clicks: look-and-feel, access and permissions, recording, chat and more.
 
-  \[[](../assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4) \[[](../assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-wizard-light.mp4)
+  \[[](/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4) \[[](/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light)\](/assets/videos/meet/rooms/management/create-room-wizard-light.mp4)
 
 - **Share room links**
 
   Unique secure links give access to your rooms with different permission levels.
 
-  \[[](../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](../assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-light.mp4)
+  \[[](/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](/assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](/assets/videos/meet/rooms/access/share-link-light.mp4)
 
 ______________________________________________________________________
 
@@ -2956,7 +2956,7 @@ OpenVidu Meet can be easily integrated with your existing applications and workf
 
 Embed the OpenVidu Meet UI right into your app.
 
-\[[](../assets/videos/meet/home/embed-html.mp4)\](https://openvidu.io/3.8/assets/videos/meet/home/embed-html.mp4)
+\[[](/assets/videos/meet/home/embed-html.mp4)\](/assets/videos/meet/home/embed-html.mp4)
 
 **REST API and webhooks**
 
@@ -3135,13 +3135,13 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](/pricing/) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/3.8/pricing/index.md) for more details.
 
 ## You can choose the OpenVidu edition that best fits your needs when [deploying OpenVidu Meet](https://openvidu.io/3.8/meet/deployment/overview).
 
 ______________________________________________________________________
 
-## Need total control and advanced SDKs to build your custom real-time application? Check out [**OpenVidu Platform**](https://openvidu.io/3.8/docs). Not sure which one fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/).
+## Need total control and advanced SDKs to build your custom real-time application? Check out [**OpenVidu Platform**](https://openvidu.io/3.8/docs/index.md). Not sure which one fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/).
 
 ## 3.8.0
 
@@ -3316,31 +3316,31 @@ Here’s a simple overview of a typical video call workflow using OpenVidu Meet:
 
 Access OpenVidu Meet with your user credentials. If no users exist yet, sign in using the root administrator credentials (learn where to get them [here](https://openvidu.io/3.8/meet/features/users/overview/#root-administrator)).
 
-\[[](../../../assets/videos/meet/users/overview/login-dark.mp4#only-dark)\](https://openvidu.io/assets/videos/meet/users/overview/login-dark.mp4) \[[](../../../assets/videos/meet/users/overview/login-light.mp4#only-light)\](https://openvidu.io/assets/videos/meet/users/overview/login-light.mp4)
+\[[](/assets/videos/meet/users/overview/login-dark.mp4#only-dark)\](/assets/videos/meet/users/overview/login-dark.mp4) \[[](/assets/videos/meet/users/overview/login-light.mp4#only-light)\](/assets/videos/meet/users/overview/login-light.mp4)
 
 ### 2. Create your first room
 
 Set up a new meeting room quickly and customize it as needed.
 
-\[[](../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark)\](https://openvidu.io/assets/videos/meet/rooms/management/create-room-basic-dark.mp4) \[[](../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light)\](https://openvidu.io/assets/videos/meet/rooms/management/create-room-basic-light.mp4)
+\[[](/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/create-room-basic-dark.mp4) \[[](/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light)\](/assets/videos/meet/rooms/management/create-room-basic-light.mp4)
 
 ### 3. Join a meeting and invite participants
 
 Start your meeting and invite colleagues, friends, or clients with a single click.
 
-\[[](../../../assets/videos/meet/getting-started/join-meeting-dark.mp4#only-dark)\](https://openvidu.io/assets/videos/meet/getting-started/join-meeting-dark.mp4) \[[](../../../assets/videos/meet/getting-started/join-meeting-light.mp4#only-light)\](https://openvidu.io/assets/videos/meet/getting-started/join-meeting-light.mp4)
+\[[](/assets/videos/meet/getting-started/join-meeting-dark.mp4#only-dark)\](/assets/videos/meet/getting-started/join-meeting-dark.mp4) \[[](/assets/videos/meet/getting-started/join-meeting-light.mp4#only-light)\](/assets/videos/meet/getting-started/join-meeting-light.mp4)
 
 ### 4. Record your meeting
 
 Capture your meetings with multiple layout options and full control over recording permissions.
 
-\[[](../../../assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark)\](https://openvidu.io/assets/videos/meet/recordings/management/start-recording-dark.mp4) \[[](../../../assets/videos/meet/recordings/management/start-recording-light.mp4#only-light)\](https://openvidu.io/assets/videos/meet/recordings/management/start-recording-light.mp4)
+\[[](/assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark)\](/assets/videos/meet/recordings/management/start-recording-dark.mp4) \[[](/assets/videos/meet/recordings/management/start-recording-light.mp4#only-light)\](/assets/videos/meet/recordings/management/start-recording-light.mp4)
 
 ### 5. View and share the recording
 
 Easily access, review, and share your recorded meeting with your team or audience.
 
-\[[](../../../assets/videos/meet/getting-started/view-recording-dark.mp4#only-dark)\](https://openvidu.io/assets/videos/meet/getting-started/view-recording-dark.mp4) \[[](../../../assets/videos/meet/getting-started/view-recording-light.mp4#only-light)\](https://openvidu.io/assets/videos/meet/getting-started/view-recording-light.mp4)
+\[[](/assets/videos/meet/getting-started/view-recording-dark.mp4#only-dark)\](/assets/videos/meet/getting-started/view-recording-dark.mp4) \[[](/assets/videos/meet/getting-started/view-recording-light.mp4#only-light)\](/assets/videos/meet/getting-started/view-recording-light.mp4)
 
 ## Embed OpenVidu Meet in your app
 
@@ -3440,7 +3440,7 @@ Create a new room from the **"Rooms"** page with the **"Create Room"** button. T
 - **Basic creation**: just give the room a name and create it immediately with default settings.
 - **Advanced creation**: open the configuration **wizard** to fine-tune the room before creating it.
 
-\[[](../../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-basic-dark.mp4) \[[](../../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-basic-light.mp4)
+\[[](/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/create-room-basic-dark.mp4) \[[](/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light)\](/assets/videos/meet/rooms/management/create-room-basic-light.mp4)
 
 The advanced wizard guides you through the following steps:
 
@@ -3452,7 +3452,7 @@ The advanced wizard guides you through the following steps:
 | **Recording Settings** | Enable recording and choose whether to enable anonymous access to individual recordings.                                                                                                                                                               |
 | **Recording Layout**   | The visual [layout](https://openvidu.io/3.8/meet/features/recordings/configuration/#recording-layouts) of the recordings.                                                                                                                              |
 
-\[[](../../../../assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4) \[[](../../../../assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-wizard-light.mp4)
+\[[](/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4) \[[](/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light)\](/assets/videos/meet/rooms/management/create-room-wizard-light.mp4)
 
 Info
 
@@ -3476,7 +3476,7 @@ Every room has a status that controls whether it can host meetings:
 
 Managers can **close** or **reopen** a room at any time from the **"Rooms"** page or the [room details page](#room-details).
 
-\[[](../../../../assets/videos/meet/rooms/management/update-room-status-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/update-room-status-dark.mp4) \[[](../../../../assets/videos/meet/rooms/management/update-room-status-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/update-room-status-light.mp4)
+\[[](/assets/videos/meet/rooms/management/update-room-status-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/update-room-status-dark.mp4) \[[](/assets/videos/meet/rooms/management/update-room-status-light.mp4#only-light)\](/assets/videos/meet/rooms/management/update-room-status-light.mp4)
 
 ## List & filter rooms
 
@@ -3500,7 +3500,7 @@ Clicking a room opens its **details page**, which shows the room information and
 
 Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting a room removes it and all associated data (meetings, members and recordings).
 
-\[[](../../../../assets/videos/meet/rooms/management/delete-room-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/delete-room-dark.mp4) \[[](../../../../assets/videos/meet/rooms/management/delete-room-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/delete-room-light.mp4)
+\[[](/assets/videos/meet/rooms/management/delete-room-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/delete-room-dark.mp4) \[[](/assets/videos/meet/rooms/management/delete-room-light.mp4#only-light)\](/assets/videos/meet/rooms/management/delete-room-light.mp4)
 
 Warning
 
@@ -3585,7 +3585,7 @@ These links can be shared freely with anyone, unless anonymous access for that r
 
 Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
 
-\[[](../../../../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](../../../../assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-light.mp4)
+\[[](/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](/assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](/assets/videos/meet/rooms/access/share-link-light.mp4)
 
 #### From an active meeting
 
@@ -3649,11 +3649,11 @@ A meeting starts as soon as a member opens a valid **room access link** and pres
 
 OpenVidu Meet users can access a room to join a meeting directly from the "Rooms" page:
 
-\[[](../../../../assets/videos/meet/meetings/overview/access-room-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/meetings/overview/access-room-dark.mp4) \[[](../../../../assets/videos/meet/meetings/overview/access-room-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/meetings/overview/access-room-light.mp4)
+\[[](/assets/videos/meet/meetings/overview/access-room-dark.mp4#only-dark)\](/assets/videos/meet/meetings/overview/access-room-dark.mp4) \[[](/assets/videos/meet/meetings/overview/access-room-light.mp4#only-light)\](/assets/videos/meet/meetings/overview/access-room-light.mp4)
 
 Users can also copy a room access link and share it with other members:
 
-\[[](../../../../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](../../../../assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-light.mp4)
+\[[](/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](/assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](/assets/videos/meet/rooms/access/share-link-light.mp4)
 
 The access link for an [identified guest](https://openvidu.io/3.8/meet/features/room-members/overview/index.md) is unique and personal. It can be copied from the **"Room Members"** tab of the [room details page](https://openvidu.io/3.8/meet/features/rooms/management/#room-details) and delivered privately to that individual.
 
@@ -3810,7 +3810,7 @@ Captions are enabled by default when a room is [created](https://openvidu.io/3.8
 
 Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.
 
-\[[](../../../../assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4) \[[](../../../../assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4)
+\[[](/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark)\](/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4) \[[](/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light)\](/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4)
 
 # Smart Layout
 
@@ -3969,7 +3969,7 @@ Replace your environment with a ready-to-use image selected to match different m
 1. Select **Virtual Background**
 1. Choose an effect to apply it instantly
 
-\[[](../../../../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4) \[[](../../../../assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4)
+\[[](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark)\](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4) \[[](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light)\](/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4)
 
 The background options will be disabled when the camera is turned off.
 
@@ -4000,7 +4000,7 @@ The root administrator is a special user with the fixed `userId` **`admin`**. Th
 
 These credentials are required to access the OpenVidu Meet app, at least for the first time, to create other users and manage the system:
 
-\[[](../../../../assets/videos/meet/users/overview/login-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/users/overview/login-dark.mp4) \[[](../../../../assets/videos/meet/users/overview/login-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/users/overview/login-light.mp4)
+\[[](/assets/videos/meet/users/overview/login-dark.mp4#only-dark)\](/assets/videos/meet/users/overview/login-dark.mp4) \[[](/assets/videos/meet/users/overview/login-light.mp4#only-light)\](/assets/videos/meet/users/overview/login-light.mp4)
 
 The location of the initial administrator password depends on the deployment environment:
 
@@ -4059,7 +4059,7 @@ Info
 
 The `userId` must be between 5 and 20 characters and contain only lowercase letters, numbers and underscores.
 
-\[[](../../../../assets/videos/meet/users/management/create-user-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/users/management/create-user-dark.mp4) \[[](../../../../assets/videos/meet/users/management/create-user-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/users/management/create-user-light.mp4)
+\[[](/assets/videos/meet/users/management/create-user-dark.mp4#only-dark)\](/assets/videos/meet/users/management/create-user-dark.mp4) \[[](/assets/videos/meet/users/management/create-user-light.mp4#only-light)\](/assets/videos/meet/users/management/create-user-light.mp4)
 
 Send the credentials to the user. On their **first login** they are required to change the temporary password before they can use OpenVidu Meet.
 
@@ -4067,13 +4067,13 @@ Send the credentials to the user. On their **first login** they are required to 
 
 Change a user's [role](https://openvidu.io/3.8/meet/features/users/overview/#user-roles) from the user list at any time. The [root administrator](https://openvidu.io/3.8/meet/features/users/overview/#root-administrator) (**`admin`**) and your own account cannot be modified.
 
-\[[](../../../../assets/videos/meet/users/management/update-user-role-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/users/management/update-user-role-dark.mp4) \[[](../../../../assets/videos/meet/users/management/update-user-role-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/users/management/update-user-role-light.mp4)
+\[[](/assets/videos/meet/users/management/update-user-role-dark.mp4#only-dark)\](/assets/videos/meet/users/management/update-user-role-dark.mp4) \[[](/assets/videos/meet/users/management/update-user-role-light.mp4#only-light)\](/assets/videos/meet/users/management/update-user-role-light.mp4)
 
 ## Reset a user's password
 
 Generate a new temporary password for a user from the user list (for example, if they forgot theirs). As with creation, the user must set a new password on their next login.
 
-\[[](../../../../assets/videos/meet/users/management/reset-user-password-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/users/management/reset-user-password-dark.mp4) \[[](../../../../assets/videos/meet/users/management/reset-user-password-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/users/management/reset-user-password-light.mp4)
+\[[](/assets/videos/meet/users/management/reset-user-password-dark.mp4#only-dark)\](/assets/videos/meet/users/management/reset-user-password-dark.mp4) \[[](/assets/videos/meet/users/management/reset-user-password-light.mp4#only-light)\](/assets/videos/meet/users/management/reset-user-password-light.mp4)
 
 ## List & filter users
 
@@ -4088,7 +4088,7 @@ Users can be deleted individually or in bulk from the **"Users"** page. The root
 - If the user **owns rooms**, ownership of those rooms is transferred to the [root administrator](https://openvidu.io/3.8/meet/features/users/overview/#root-administrator).
 - If the user is **currently in a meeting**, they are kicked from it immediately.
 
-\[[](../../../../assets/videos/meet/users/management/delete-user-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/users/management/delete-user-dark.mp4) \[[](../../../../assets/videos/meet/users/management/delete-user-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/users/management/delete-user-light.mp4)
+\[[](/assets/videos/meet/users/management/delete-user-dark.mp4#only-dark)\](/assets/videos/meet/users/management/delete-user-dark.mp4) \[[](/assets/videos/meet/users/management/delete-user-light.mp4#only-light)\](/assets/videos/meet/users/management/delete-user-light.mp4)
 
 ## Changing your password
 
@@ -4174,7 +4174,7 @@ From the room's **"Room Members"** tab, click **"Add Member"** and choose the me
 
 Then choose a **base role** (`Moderator` or `Speaker`) that sets the default [permissions](https://openvidu.io/3.8/meet/features/rooms/access/#predefined-roles), and optionally fine-tune them with **custom permissions**.
 
-\[[](../../../../assets/videos/meet/room-members/management/add-member-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/room-members/management/add-member-dark.mp4) \[[](../../../../assets/videos/meet/room-members/management/add-member-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/room-members/management/add-member-light.mp4)
+\[[](/assets/videos/meet/room-members/management/add-member-dark.mp4#only-dark)\](/assets/videos/meet/room-members/management/add-member-dark.mp4) \[[](/assets/videos/meet/room-members/management/add-member-light.mp4#only-light)\](/assets/videos/meet/room-members/management/add-member-light.mp4)
 
 ## List & filter members
 
@@ -4195,7 +4195,7 @@ Every member's access link can be copied from the member list:
 
 Members can be removed individually or in bulk from the **"Room Members"** tab.
 
-\[[](../../../../assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/room-members/management/remove-member-dark.mp4) \[[](../../../../assets/videos/meet/room-members/management/remove-member-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/room-members/management/remove-member-light.mp4)
+\[[](/assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark)\](/assets/videos/meet/room-members/management/remove-member-dark.mp4) \[[](/assets/videos/meet/room-members/management/remove-member-light.mp4#only-light)\](/assets/videos/meet/room-members/management/remove-member-light.mp4)
 
 Warning
 
@@ -4256,7 +4256,7 @@ You can change these defaults per room (when [creating](https://openvidu.io/3.8/
 
 Recordings are started from the meeting view by a participant with the `canRecord` permission (see [Predefined roles](https://openvidu.io/3.8/meet/features/rooms/access/#predefined-roles)). The room must have recording [enabled in its configuration](https://openvidu.io/3.8/meet/features/recordings/configuration/#enabling-recordings).
 
-\[[](../../../../assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/recordings/management/start-recording-dark.mp4) \[[](../../../../assets/videos/meet/recordings/management/start-recording-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/recordings/management/start-recording-light.mp4)
+\[[](/assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark)\](/assets/videos/meet/recordings/management/start-recording-dark.mp4) \[[](/assets/videos/meet/recordings/management/start-recording-light.mp4#only-light)\](/assets/videos/meet/recordings/management/start-recording-light.mp4)
 
 While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
 
@@ -4287,7 +4287,7 @@ When you create a shareable link for a recording, you choose **who can access it
 - **OpenVidu Meet users**: any logged-in OpenVidu Meet user can view the recording — even if they have no recording permissions in that room, or no access to the room at all.
 - **Anyone**: any individual with the link can view it without logging in. This option is available only when the room has [anonymous recording sharing](https://openvidu.io/3.8/meet/features/recordings/configuration/#anonymous-recording-sharing) enabled.
 
-\[[](../../../../assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/recordings/management/share-recording-dark.mp4) \[[](../../../../assets/videos/meet/recordings/management/share-recording-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/recordings/management/share-recording-light.mp4)
+\[[](/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark)\](/assets/videos/meet/recordings/management/share-recording-dark.mp4) \[[](/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light)\](/assets/videos/meet/recordings/management/share-recording-light.mp4)
 
 ## REST API reference
 
@@ -4433,7 +4433,7 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/3.8/pricing/index.md) for more details.
 
 Info
 
@@ -4572,7 +4572,7 @@ You can access **OpenVidu Meet** by opening <http://localhost:9080> in your web 
 - User ID: `admin`
 - Password: `admin`
 
-You can use the [REST API](https://openvidu.io/3.8/meet/embedded/reference/rest-api/index.md) to [embed OpenVidu Meet](https://openvidu.io/3.8/meet/embedded/intro) using:
+You can use the [REST API](https://openvidu.io/3.8/meet/embedded/reference/rest-api/index.md) to [embed OpenVidu Meet](https://openvidu.io/3.8/meet/embedded/intro/index.md) using:
 
 - API Key: `meet-api-key`
 
@@ -4889,7 +4889,7 @@ For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Me
 
 You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
-\[[](../../../assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-basic-dark.mp4) \[[](../../../assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/management/create-room-basic-light.mp4)
+\[[](/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark)\](/assets/videos/meet/rooms/management/create-room-basic-dark.mp4) \[[](/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light)\](/assets/videos/meet/rooms/management/create-room-basic-light.mp4)
 
 ### Automating room creation
 
@@ -5154,7 +5154,7 @@ The response to this request will be a JSON object as below. The properties need
 
 To embed a room into your application's frontend you need a **room URL**, which is simply a [room access link](https://openvidu.io/3.8/meet/features/rooms/access/index.md): the URL an individual opens to access the room. You can copy the room URL from the "Rooms" page in OpenVidu Meet app:
 
-\[[](../../../assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](../../../assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/rooms/access/share-link-light.mp4)
+\[[](/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark)\](/assets/videos/meet/rooms/access/share-link-dark.mp4) \[[](/assets/videos/meet/rooms/access/share-link-light.mp4#only-light)\](/assets/videos/meet/rooms/access/share-link-light.mp4)
 
 Which room access link should I use?
 
@@ -5184,7 +5184,7 @@ Just link to the room URL from any element in your frontend. For example, with a
 
 After clicking on the element, the individual will be redirected to the OpenVidu Meet room, ready to join the meeting.
 
-\[[](../../../assets/videos/meet/embedded/embed-url.mp4)\](https://openvidu.io/3.8/assets/videos/meet/embedded/embed-url.mp4)
+\[[](/assets/videos/meet/embedded/embed-url.mp4)\](/assets/videos/meet/embedded/embed-url.mp4)
 
 Info
 
@@ -5688,7 +5688,7 @@ This endpoint does the following:
 
    Info
 
-   You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference](https://openvidu.io/3.8/meet/assets/htmls/rest-api.html#/operations/createRoom) .
+   You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/createRoom) .
 
    To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
@@ -9066,7 +9066,7 @@ X-API-KEY: your-api-key
 1. Navigate to the **"Embedded"** page.
 1. Click on **"Generate API Key"** button.
 
-\[[](../../../../assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark)\](https://openvidu.io/3.8/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4) \[[](../../../../assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light)\](https://openvidu.io/3.8/assets/videos/meet/embedded/reference/generate-api-key-light.mp4)
+\[[](/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark)\](/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4) \[[](/assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light)\](/assets/videos/meet/embedded/reference/generate-api-key-light.mp4)
 
 ## Reference
 
@@ -9085,7 +9085,7 @@ When accessing the REST API documentation from your own OpenVidu Meet deployment
 
 Just configure a valid API key in the `X-API-KEY` header input.
 
-\[[](../../../../assets/videos/meet/embedded/reference/rest-api-test.mp4)\](https://openvidu.io/3.8/assets/videos/meet/embedded/reference/rest-api-test.mp4)
+\[[](/assets/videos/meet/embedded/reference/rest-api-test.mp4)\](/assets/videos/meet/embedded/reference/rest-api-test.mp4)
 
 # Web Component
 
@@ -10419,7 +10419,7 @@ OpenVidu uses mediasoup internally to transmit media streams. We have embedded m
 
 All these well-known video conferencing tools are final applications that provide little to no customization at all. They are proprietary, closed-source apps designed to be used as-is, and they are not intended to be integrated into other systems.
 
-OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](https://openvidu.io/3.8/docs/getting-started/#use-cases) for some examples of what you can build with OpenVidu.
+OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](https://openvidu.io/3.8/docs/#use-cases) for some examples of what you can build with OpenVidu.
 
 # Developing your OpenVidu application
 
@@ -11370,7 +11370,7 @@ Info
 - Maximum 8 Participants across all Rooms
 - Maximum 5 minutes duration per Room
 
-For a production environment, you need to [create an OpenVidu account](/account/) to get a license key. There's a 15 day free trial waiting for you!
+For a production environment, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get a license key. There's a 15 day free trial waiting for you!
 
 The deployment is ready when you see the following message:
 
@@ -11653,7 +11653,7 @@ OpenVidu is built by a team of expert WebRTC developers who know all the ins and
 
 This means that applications built on top of LiveKit will continue to work exactly the same, while the internal WebRTC engine inside the server can be swapped at will and applications can benefit from that change, without having to be rebuilt.
 
-In terms of the signaling protocol, API and SDKs, OpenVidu maintains the original LiveKit implementation. LiveKit's API is very well designed, with a simple but powerful [set of concepts](https://openvidu.io/3.8/docs/getting-started/#basic-concepts), and the amount of SDKs available is very large.
+In terms of the signaling protocol, API and SDKs, OpenVidu maintains the original LiveKit implementation. LiveKit's API is very well designed, with a simple but powerful [set of concepts](https://openvidu.io/3.8/docs/#basic-concepts), and the amount of SDKs available is very large.
 
 ### Choice of technology
 
@@ -12164,7 +12164,7 @@ Explore detailed information about a specific **ingress**, including its total d
 
 OpenVidu also provides different **Grafana dashboards** to monitor **metrics** from **OpenVidu Server** and **logs** from your **cluster**.
 
-\[[](../../../../../assets/videos/grafana_trailer.mp4)\](https://openvidu.io/3.8/assets/videos/grafana_trailer.mp4)
+\[[](/assets/videos/grafana_trailer.mp4)\](/assets/videos/grafana_trailer.mp4)
 
 Grafana is available at https://your.domain/grafana/ and can be accessed using your **Grafana admin credentials**.
 
