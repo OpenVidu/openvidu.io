@@ -404,7 +404,17 @@ plugins:
         - OpenVidu Platform
         - Release
         - AI
-  - privacy
+  # The CI env var selects the build profile via three states:
+  #   • unset   -> local `mkdocs serve` / `build`
+  #   • "false" -> lightweight link-validation build (validate-web.yaml sets this)
+  #   • "true"  -> real publish build (GitHub Actions sets CI=true automatically)
+  #
+  # privacy (self-hosts external assets): runs locally AND in publish; skipped only in the
+  # validation build. Default true, so it is on unless CI is explicitly "false".
+  # optimize (image compression, needs the imaging stack): runs ONLY in publish. Default
+  # false, so it is off both locally and in validation, on only when CI is "true".
+  - privacy:
+      enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
   - glightbox:

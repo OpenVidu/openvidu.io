@@ -6,6 +6,11 @@ name: Validate Web
 # etc.) into an error, so broken links are caught before they reach the publish workflow.
 # Anchor issues stay at INFO level (see mkdocs.yml validation.links.anchors) and do not fail
 # the build, because pymdownx.tabbed generates tab anchors that MkDocs's validator can't see.
+#
+# This is NOT the real deployed build: the production-only optimize (image compression) and
+# privacy (external-asset self-hosting) plugins are disabled via CI=false, so it runs fast
+# and doesn't depend on external hosts. The full build with those plugins runs in
+# publish-web.yaml.
 
 on:
   pull_request:
@@ -44,13 +49,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          # Same pins as the publish workflow so validation matches what gets deployed.
-          pip install "mkdocs-material[imaging]==9.7.6" "pygments<2.20" mkdocs-glightbox mkdocs-llmstxt mkdocs-rss-plugin
-          sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
-          sudo apt-get install -y --fix-missing pngquant
+          # Lightweight: this is a link/warning check, not the real deployed build, so the
+          # production-only optimize + privacy plugins are disabled (CI=false in the build
+          # step). That means the imaging stack (mkdocs-material[imaging], cairo, pngquant)
+          # is not needed here — only the pins that affect link resolution and rendering.
+          pip install "mkdocs-material==9.7.6" "pygments<2.20" mkdocs-glightbox mkdocs-llmstxt mkdocs-rss-plugin
 
       - name: Build documentation (strict)
         env:
           GOOGLE_ANALYTICS_KEY: G-XXXXXXXX
+          # Override GitHub's default CI=true so the optimize (image compression) and privacy
+          # (external-asset fetching/caching) plugins stay OFF (they are gated on CI in
+          # mkdocs.yml). This keeps validation fast and free of flaky external fetches — the
+          # real production build runs them in publish-web.yaml.
+          CI: "false"
         run: mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation
