@@ -243,6 +243,12 @@
       "blogPost": [
         {
           "@type": "BlogPosting",
+          "headline": "Building a video-enabled CRM with an AI agent and OpenVidu Meet",
+          "url": "https://openvidu.io/blog/2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/",
+          "datePublished": "2026-07-21"
+        },
+        {
+          "@type": "BlogPosting",
           "headline": "Managing Permissions in Video Conferencing Apps: 3 Access Models",
           "url": "https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/",
           "datePublished": "2026-07-14"
@@ -11728,6 +11734,59 @@
       <nav class="md-post__authors md-typeset">
         
           <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorFG.jpg" alt="Francisco Gortázar">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-21 00:00:00+00:00">July 21, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/openvidu-meet/" class="md-meta__link">OpenVidu Meet</a>, 
+              <a href="category/ai/" class="md-meta__link">AI</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              7 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="building-a-video-enabled-crm-with-an-ai-agent-and-openvidu-meet"><a class="toclink" href="2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/">Building a video-enabled CRM with an AI agent and OpenVidu Meet</a></h2>
+<p><img alt="OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM" src="/assets/images/blog/crm-meet/poster-light.png#only-light" title="A video meeting, right inside the CRM">
+<img alt="OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM" src="/assets/images/blog/crm-meet/poster-dark.png#only-dark" title="A video meeting, right inside the CRM"></p>
+<p>What does it take today to go from an empty folder to a working business app with <strong>video meetings embedded in it</strong>? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and <strong>seven prompts</strong>.</p>
+<p>We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate <a href="https://openvidu.io/latest/meet/embedded/intro/">OpenVidu Meet</a> so that meetings happen <em>inside</em> the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
             <img src="https://openvidu.io/assets/images/about-us/authorJCM.jpg" alt="Juan Carlos Moreno">
           </span>
         
@@ -11759,7 +11818,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="managing-permissions-in-video-conferencing-apps-3-access-models"><a class="toclink" href="2026/07/14/video-conferencing-permissions/">Managing Permissions in Video Conferencing Apps: 3 Access Models</a></h2>
-<p><img alt="Three access models for video conferencing permissions" src="../../assets/images/blog/video-conferencing-permissions/poster.png" title="Managing permissions in video conferencing apps"></p>
+<p><img alt="Three access models for video conferencing permissions" src="../../assets/images/blog/2026-07-14-video-conferencing-permissions/poster.png" title="Managing permissions in video conferencing apps"></p>
 <p>Everyone benchmarks video conferencing on the things you can see: resolution, latency, how many people fit in a grid. But the failures that actually hurt in production are rarely about a dropped frame — they're about the wrong person joining a room they shouldn't be in, or a private recording ending up somewhere public. <strong>Permissions are the invisible half of a video app</strong>, and they're the half most teams underestimate until something goes wrong.</p>
 
     
@@ -11862,8 +11921,8 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="we-deployed-the-same-video-platform-on-five-clouds-and-timed-it-5-minutes-to-20-and-the-slow-ones-are-slow-for-a-reason"><a class="toclink" href="2026/07/07/deploy-and-scale-in-times-across-clouds/">We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason</a></h2>
-<p><img alt="Mean time to a working deployment, by cloud and topology" src="../assets/images/blog/scale-in-times/deploy-times-light.svg#only-light">
-<img alt="Mean time to a working deployment, by cloud and topology" src="../assets/images/blog/scale-in-times/deploy-times-dark.svg#only-dark"></p>
+<p><img alt="Mean time to a working deployment, by cloud and topology" src="../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-times-light.svg#only-light">
+<img alt="Mean time to a working deployment, by cloud and topology" src="../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-times-dark.svg#only-dark"></p>
 <p>"How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.</p>
 <p>We built a tool, <strong>ov-cloud-tester</strong>, that deploys the <em>same</em> self-hosted WebRTC video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in three topologies (single node, elastic, and high-availability), tears it down cleanly, and times the whole thing. We ran it many times per cloud and looked at both the averages <em>and</em> every individual run. The headline: standing up a working deployment ranges from about <strong>5 minutes to 20</strong>, DigitalOcean is consistently the fastest and Oracle the heaviest — and the <em>why</em>, plus which clouds are actually <em>predictable</em>, turns out to be more interesting than the ranking.</p>
 
@@ -11915,7 +11974,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="host-your-own-secure-video-calls-at-home-a-private-server-for-family-and-friends"><a class="toclink" href="2026/06/30/secure-home-video-conferencing/">Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends</a></h2>
-<p><img align="right" alt="A secure family video call running on your own home server" src="../../assets/images/blog/secure-home-video-conferencing/poster.jpg" width="60%"></p>
+<p><img align="right" alt="A secure family video call running on your own home server" src="../../assets/images/blog/2026-06-30-secure-home-video-conferencing/poster.jpg" width="60%"></p>
 <p>We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their head in their hands thinking about how complicated it must be.</p>
 <p>In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.</p>
 <p>With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/latest/meet/" target="_blank">OpenVidu Meet</a>.</p>
@@ -11968,8 +12027,8 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="5-conversational-ai-app-ideas-you-can-build-this-weekend"><a class="toclink" href="2026/06/23/5-conversational-ai-app-ideas/">5 conversational AI app ideas you can build this weekend</a></h2>
-<p><img alt="Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend" src="../assets/images/blog/five-conversational-ai-ideas/poster-light.webp#only-light" title="5 conversational AI apps you can build this weekend">
-<img alt="Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend" src="../assets/images/blog/five-conversational-ai-ideas/poster-dark.webp#only-dark" title="5 conversational AI apps you can build this weekend"></p>
+<p><img alt="Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend" src="../assets/images/blog/2026-06-23-5-conversational-ai-app-ideas/poster-light.webp#only-light" title="5 conversational AI apps you can build this weekend">
+<img alt="Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend" src="../assets/images/blog/2026-06-23-5-conversational-ai-app-ideas/poster-dark.webp#only-dark" title="5 conversational AI apps you can build this weekend"></p>
 <p>AI is moving faster than any of us can comfortably keep up with. Every week brings a new model, a new demo, or a viral thread claiming that everything has changed again. Keeping up feels almost impossible.</p>
 <p>As AI becomes mainstream, the noise grows even louder. Social feeds are packed with promises of overnight success: build a startup with vibe coding, replace entire teams with a handful of prompts, make money while you sleep.</p>
 <p><strong>This post isn't another one of those promises.</strong></p>
@@ -12024,7 +12083,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="choosing-the-right-level-of-abstraction-in-self-hosted-webrtc-solutions-in-2026-openvidu-meet-vs-openvidu-platform"><a class="toclink" href="2026/06/16/meet-vs-platform/">Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform</a></h2>
-<p><img alt="OpenVidu Meet vs OpenVidu Platform" src="../../assets/images/blog/meet-vs-platform/meet-vs-platform2.png"></p>
+<p><img alt="OpenVidu Meet vs OpenVidu Platform" src="../../assets/images/blog/2026-06-16-meet-vs-platform/meet-vs-platform.png"></p>
 <p>In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using the OpenVidu WebRTC ecosystem. </p>
 <h3 id="why-abstraction-matters"><a class="toclink" href="2026/06/16/meet-vs-platform/#why-abstraction-matters">Why Abstraction Matters</a></h3>
 <p>People are diverse, and that’s what makes life interesting. In the world of real-time communications (RTC), diversity means that different users require entirely different levels of abstraction to get the job done, from a "batteries included" scalable meeting application, to an extremely customizable media processing pipeline with access to low-level media SDKs and APIs. </p>
@@ -12077,7 +12136,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="connectivity-resilience-and-security-in-webrtc-deployments-key-considerations-on-turn"><a class="toclink" href="2026/06/09/turn-key-considerations/">Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN</a></h2>
-<p><img alt="Sloth watching a spinner waiting to connect to the Daily Meeting" src="../../assets/images/blog/2026-04-24-turn-key-considerations/vsc.png" title="Sloth watching a spinner waiting to connect to the Daily Meeting" width="50%"></p>
+<p><img alt="Sloth watching a spinner waiting to connect to the Daily Meeting" src="../../assets/images/blog/2026-06-09-turn-key-considerations/vsc.png" title="Sloth watching a spinner waiting to connect to the Daily Meeting" width="50%"></p>
 <p>There's a clear gap between a WebRTC demo and something you can actually run in production, and it usually sits at the TURN layer. Your demo might work fine on a clean network, but once real users show up behind NATs, corporate firewalls, and mobile gateways, the calls simply die without it.</p>
 
     
@@ -12127,7 +12186,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="the-architecture-of-scale-how-to-scale-video-conferencing-from-a-single-server-to-a-high-availability-system"><a class="toclink" href="2026/06/02/scalability-in-videoconferencing-systems/">The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System</a></h2>
-<p><img align="left" alt="WebRTC connectivity paths" src="../../assets/images/blog/scalability/poster.png"></p>
+<p><img align="left" alt="WebRTC connectivity paths" src="../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/poster.png"></p>
 <h3 id="introduction-the-success-trap"><a class="toclink" href="2026/06/02/scalability-in-videoconferencing-systems/#introduction-the-success-trap">Introduction: The Success Trap</a></h3>
 <p>Launch week often feels perfect. You ship an MVP, users join calls quickly, and early feedback is strong. Then growth arrives faster than expected.</p>
 <p>One customer schedules a company-wide meeting. Hundreds of people join. Your best demo becomes your first major incident: CPU climbs, bandwidth saturates, audio breaks, video freezes. The product didn't fail because the team lacked talent. It failed because real-time media scales very differently from traditional web applications.</p>
@@ -12189,7 +12248,7 @@
     <h2 id="scaling-up-is-easy-the-challenge-is-scaling-down-the-scale-in-problem-in-videoconferences"><a class="toclink" href="2026/05/26/scale-in-problem-in-videoconferences/">Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.</a></h2>
 <p>Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.</p>
 <figure>
-<p><img alt="Scale In" class="svg-img dark-img" src="../../assets/images/blog/scale-in-problem-in-videoconferences/scale-down.png"></p>
+<p><img alt="Scale In" class="svg-img dark-img" src="../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/scale-down.png"></p>
 <figcaption>Scale in situation</figcaption>
 </figure>
 <p>This post dives into the <strong>scale-in problem</strong>: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.</p>
@@ -12197,71 +12256,6 @@
     
       <nav class="md-post__action">
         <a href="2026/05/26/scale-in-problem-in-videoconferences/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorCS.jpg" alt="Carlos Santos">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-05-19 00:00:00+00:00">May 19, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/vertical/" class="md-meta__link">Vertical</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              8 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="5-react-video-call-platforms-in-2026-is-saas-still-the-right-choice"><a class="toclink" href="2026/05/19/5-react-video-call-platforms/">5 React video call platforms in 2026: Is SaaS still the right choice?</a></h2>
-<p><img alt="React video call platforms in 2026 — SaaS vs Self-hosted" src="../../assets/images/blog/five-react-alternatives/poster.png" title="React video call platforms in 2026"></p>
-<h3 id="1-introduction"><a class="toclink" href="2026/05/19/5-react-video-call-platforms/#1-introduction">1. Introduction</a></h3>
-<p>When React developers need to add video calls to their applications, the first question is usually simple:</p>
-<p><em>"What is the fastest way to get it working?"</em></p>
-<p>Most teams start by looking for a video API with a React SDK they can integrate quickly, without dealing directly with WebRTC complexity.</p>
-<p>In practice, that usually means exploring well-known SaaS platforms that promise quick setup and minimal infrastructure work. That choice makes sense at the beginning:</p>
-<ul>
-<li>Fast to integrate</li>
-<li>No infrastructure headaches</li>
-<li>Familiar turnkey experience</li>
-</ul>
-<p>But there are questions teams often ask too late:</p>
-<ul>
-<li>What happens when video becomes core to your product?</li>
-<li>What happens when usage grows faster than expected?</li>
-<li>Is paying per minute still the smartest choice in 2026?</li>
-</ul>
-
-    
-      <nav class="md-post__action">
-        <a href="2026/05/19/5-react-video-call-platforms/">
           Continue reading
         </a>
       </nav>

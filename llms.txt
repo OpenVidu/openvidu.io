@@ -7,23 +7,23 @@ Self-hosted videoconference solution and SDK
 ## OpenVidu
 
 - [Home](https://openvidu.io/index.md): OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
-- [Blog](https://openvidu.io/blog/index.md): OpenVidu Blog
-- [5 React video call platforms in 2026: Is SaaS still the right choice?](https://openvidu.io/blog/2026/05/19/5-react-video-call-platforms/index.md): OpenVidu Blog
-- [Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/blog/2026/06/16/meet-vs-platform/index.md): OpenVidu Blog
-- [Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.](https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md): OpenVidu Blog
-- [How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform](https://openvidu.io/blog/2026/04/30/how-client-networks-affect-qoe-and-costs/index.md): OpenVidu Blog
-- [Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN](https://openvidu.io/blog/2026/06/09/turn-key-considerations/index.md): OpenVidu Blog
-- [The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System](https://openvidu.io/blog/2026/06/02/scalability-in-videoconferencing-systems/index.md): OpenVidu Blog
-- [5 conversational AI app ideas you can build this weekend](https://openvidu.io/blog/2026/06/23/5-conversational-ai-app-ideas/index.md): OpenVidu Blog
-- [Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends](https://openvidu.io/blog/2026/06/30/secure-home-video-conferencing/index.md): OpenVidu Blog
-- [We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason](https://openvidu.io/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/index.md): OpenVidu Blog
-- [OpenVidu 3.8.0 is now available](https://openvidu.io/blog/2026/07/09/release-380/index.md): OpenVidu Blog
-- [Managing Permissions in Video Conferencing Apps: 3 Access Models](https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/index.md): OpenVidu Blog
-- [Support](https://openvidu.io/support/index.md): Support options for OpenVidu Meet and OpenVidu Platform
-- [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu Meet and OpenVidu Platform
+- [Support](https://openvidu.io/support/index.md): Support options for OpenVidu
+- [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu
 - [About Us](https://openvidu.io/about-us/index.md): The people behind OpenVidu
 - [Research](https://openvidu.io/research/index.md): Research publications on real-time communications in peer-reviewed journals
 - [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md): What to choose, OpenVidu Meet or OpenVidu Platform?
+- [Blog](https://openvidu.io/blog/index.md): OpenVidu Blog — articles on self-hosted videoconferencing, WebRTC development, benchmarks and product news
+- [How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform](https://openvidu.io/blog/2026/04/30/how-client-networks-affect-qoe-and-costs/index.md): How client networks affect WebRTC quality of experience and server infrastructure costs
+- [5 React video call platforms in 2026: Is SaaS still the right choice?](https://openvidu.io/blog/2026/05/19/5-react-video-call-platforms/index.md): 5 React video call platforms in 2026 compared — SaaS vs self-hosted
+- [Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.](https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md): The scale-in problem in videoconferencing — safely draining media servers with active meetings
+- [The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System](https://openvidu.io/blog/2026/06/02/scalability-in-videoconferencing-systems/index.md): Scaling video conferencing from a single node to an elastic media plane and high-availability control plane
+- [Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN](https://openvidu.io/blog/2026/06/09/turn-key-considerations/index.md): TURN in production WebRTC — connectivity resilience and security considerations
+- [Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/blog/2026/06/16/meet-vs-platform/index.md): OpenVidu Meet vs OpenVidu Platform — choosing the right level of abstraction for self-hosted WebRTC
+- [5 conversational AI app ideas you can build this weekend](https://openvidu.io/blog/2026/06/23/5-conversational-ai-app-ideas/index.md): 5 conversational AI app ideas and the real-time voice and vision pipeline behind them
+- [Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends](https://openvidu.io/blog/2026/06/30/secure-home-video-conferencing/index.md): Host your own private video conferencing server at home with OpenVidu Meet
+- [We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason](https://openvidu.io/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/index.md): Deployment time benchmarks for a self-hosted WebRTC platform across AWS, Azure, GCP, Oracle and DigitalOcean
+- [OpenVidu 3.8.0 is now available](https://openvidu.io/blog/2026/07/09/release-380/index.md): OpenVidu 3.8.0 release notes — user accounts, RBAC, mediasoup overhaul and TURN security
+- [Managing Permissions in Video Conferencing Apps: 3 Access Models](https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/index.md): Managing permissions in video conferencing apps — anonymous, identified guest and user access models
 
 ## OpenVidu Meet
 

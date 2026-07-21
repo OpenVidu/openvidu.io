@@ -24,6 +24,8 @@
         <link rel="prev" href="../../09/release-380/">
       
       
+        <link rel="next" href="../../21/building-a-video-enabled-crm-with-an-ai-agent/">
+      
       
         
       
@@ -197,10 +199,8 @@
 <meta property="og:title" content="Managing Permissions in Video Conferencing Apps: 3 Access Models">
 <meta property="og:description" content="Compare the three access models for managing permissions in video conferencing apps — anonymous role links, identified guests and users — with pros, cons and when to use each.">
 <meta property="og:url" content="https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/">
-<meta property="og:image" content="https://openvidu.io/assets/images/og/openvidu-card.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="OpenVidu — Self-hosted video conferencing. Ready to use or fully custom. Open source.">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026-07-14-video-conferencing-permissions/poster.png">
+<meta property="og:image:alt" content="Managing Permissions in Video Conferencing Apps: 3 Access Models">
 <meta property="article:published_time" content="2026-07-14">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@openvidu">
@@ -238,6 +238,7 @@
       "url": "https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/",
       "headline": "Managing Permissions in Video Conferencing Apps: 3 Access Models",
       "description": "Compare the three access models for managing permissions in video conferencing apps \u2014 anonymous role links, identified guests and users \u2014 with pros, cons and when to use each.",
+      "image": "https://openvidu.io/assets/images/blog/2026-07-14-video-conferencing-permissions/poster.png",
       "datePublished": "2026-07-14",
       "dateModified": "2026-07-14",
       "inLanguage": "en",
@@ -11873,7 +11874,7 @@
 
 
 <h1 id="managing-permissions-in-video-conferencing-apps-3-access-models">Managing Permissions in Video Conferencing Apps: 3 Access Models<a class="headerlink" href="#managing-permissions-in-video-conferencing-apps-3-access-models" title="Anchor link to this section for reference">#</a></h1>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Three access models for video conferencing permissions" src="../../../../../assets/images/blog/video-conferencing-permissions/poster.png" title="Managing permissions in video conferencing apps"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Three access models for video conferencing permissions" src="../../../../../assets/images/blog/2026-07-14-video-conferencing-permissions/poster.png" title="Managing permissions in video conferencing apps"></a></p>
 <p>Everyone benchmarks video conferencing on the things you can see: resolution, latency, how many people fit in a grid. But the failures that actually hurt in production are rarely about a dropped frame — they're about the wrong person joining a room they shouldn't be in, or a private recording ending up somewhere public. <strong>Permissions are the invisible half of a video app</strong>, and they're the half most teams underestimate until something goes wrong.</p>
 <!-- more -->
 
@@ -11903,9 +11904,9 @@
 <ul>
 <li><strong>Participant.</strong> Anyone actually present in a meeting, whatever route they took to get there.</li>
 <li><strong>Room member.</strong> Any individual granted access to a specific room. There are three kinds, distinguished by <em>how</em> they prove who they are.<ul>
-<li><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="User icon" src="../../../../../assets/images/blog/video-conferencing-permissions/icon-user.png" style="vertical-align:middle;margin-right:6px" width="22"></a> <strong>User.</strong> A room member with a <strong>registered account</strong> in the system. They log in to get in.</li>
-<li><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Identified guest icon" src="../../../../../assets/images/blog/video-conferencing-permissions/icon-identified-guest.png" style="vertical-align:middle;margin-right:6px" width="22"></a> <strong>Identified guest.</strong> A room member <em>without</em> an account, added ahead of time under a fixed name. They receive their own private link and never log in.</li>
-<li><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Anonymous guest icon" src="../../../../../assets/images/blog/video-conferencing-permissions/icon-anonymous-guest.png" style="vertical-align:middle;margin-right:6px" width="22"></a> <strong>Anonymous guest.</strong> Someone without an account who accesses through a shared link and just types a display name before joining.</li>
+<li><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="User icon" src="../../../../../assets/images/blog/2026-07-14-video-conferencing-permissions/icon-user.png" style="vertical-align:middle;margin-right:6px" width="22"></a> <strong>User.</strong> A room member with a <strong>registered account</strong> in the system. They log in to get in.</li>
+<li><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Identified guest icon" src="../../../../../assets/images/blog/2026-07-14-video-conferencing-permissions/icon-identified-guest.png" style="vertical-align:middle;margin-right:6px" width="22"></a> <strong>Identified guest.</strong> A room member <em>without</em> an account, added ahead of time under a fixed name. They receive their own private link and never log in.</li>
+<li><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Anonymous guest icon" src="../../../../../assets/images/blog/2026-07-14-video-conferencing-permissions/icon-anonymous-guest.png" style="vertical-align:middle;margin-right:6px" width="22"></a> <strong>Anonymous guest.</strong> Someone without an account who accesses through a shared link and just types a display name before joining.</li>
 </ul>
 </li>
 <li><strong>Role and permissions.</strong> A <strong>role</strong> (like <em>Moderator</em> or <em>Speaker</em>) is a named bundle of <strong>permissions</strong> — the individual capabilities that decide what someone can do once inside.</li>
@@ -11993,7 +11994,7 @@
 <p>See <a href="/latest/meet/features/users/overview/">Users</a>.</p>
 </div>
 <p>That completes the three models. Here they are side by side — three member types, each entering through its own kind of access link, all landing in the same room:</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The three access-link types — one shared anonymous link for anonymous guests, a unique link per identified guest, and a shared user link with login for users — all joining the same OpenVidu Meet room" src="../../../../../assets/images/blog/video-conferencing-permissions/three-ways-in.png" title="One room, three ways in"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The three access-link types — one shared anonymous link for anonymous guests, a unique link per identified guest, and a shared user link with login for users — all joining the same OpenVidu Meet room" src="../../../../../assets/images/blog/2026-07-14-video-conferencing-permissions/three-ways-in.png" title="One room, three ways in"></a></p>
 <h2 id="beyond-access-fine-grained-per-person-permissions">Beyond access: fine-grained, per-person permissions<a class="headerlink" href="#beyond-access-fine-grained-per-person-permissions" title="Anchor link to this section for reference">#</a></h2>
 <p>Notice that all three models answer "how do you get <em>in</em>." A separate question is "what can you <em>do</em> once you're in" — and that layer is <strong>orthogonal</strong>. You can attach the same fine-grained permission set to an anonymous guest, an identified guest, or a user.</p>
 <p>Predefined roles cover maybe 80% of cases out of the box. Fine-grained permissions handle the exceptions: a speaker who's allowed to record this one session, or a moderator who can run the meeting but <em>not</em> delete recordings.</p>
@@ -12005,7 +12006,7 @@
 <li><strong>Recording:</strong> <code>canRecord</code>, <code>canRetrieveRecordings</code>, <code>canDeleteRecordings</code></li>
 </ul>
 <p>Each role — <code>Moderator</code> and <code>Speaker</code> — ships with sensible defaults, and you can flip any individual permission for any member. The highlighted cells below show two such overrides: a Speaker granted <code>canRecord</code>, and a Moderator whose <code>canDeleteRecordings</code> was turned off.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Permissions matrix: the 14 OpenVidu Meet permissions grouped into Media, Communication, Meeting management and Recording, with on/off toggles for the Moderator and Speaker roles and two cells customized from their role defaults" src="../../../../../assets/images/blog/video-conferencing-permissions/fine-grained-permissions.png" title="Start from a role, tune it per person"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Permissions matrix: the 14 OpenVidu Meet permissions grouped into Media, Communication, Meeting management and Recording, with on/off toggles for the Moderator and Speaker roles and two cells customized from their role defaults" src="../../../../../assets/images/blog/2026-07-14-video-conferencing-permissions/fine-grained-permissions.png" title="Start from a role, tune it per person"></a></p>
 <p>A member's effective permissions start from their base role and get overridden individually:</p>
 <div class="language-json highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">"baseRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"speaker"</span><span class="p">,</span>
@@ -12150,6 +12151,22 @@
         
 
         <!-- Link to next page -->
+        
+          
+          <a href="../../21/building-a-video-enabled-crm-with-an-ai-agent/" class="md-footer__link md-footer__link--next" aria-label="Next: Building a video-enabled CRM with an AI agent and OpenVidu Meet">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Building a video-enabled CRM with an AI agent and OpenVidu Meet
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
         
       </nav>
     

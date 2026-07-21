@@ -11642,8 +11642,8 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="we-deployed-the-same-video-platform-on-five-clouds-and-timed-it-5-minutes-to-20-and-the-slow-ones-are-slow-for-a-reason"><a class="toclink" href="../../2026/07/07/deploy-and-scale-in-times-across-clouds/">We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason</a></h2>
-<p><img alt="Mean time to a working deployment, by cloud and topology" src="../../../assets/images/blog/scale-in-times/deploy-times-light.svg#only-light">
-<img alt="Mean time to a working deployment, by cloud and topology" src="../../../assets/images/blog/scale-in-times/deploy-times-dark.svg#only-dark"></p>
+<p><img alt="Mean time to a working deployment, by cloud and topology" src="../../../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-times-light.svg#only-light">
+<img alt="Mean time to a working deployment, by cloud and topology" src="../../../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-times-dark.svg#only-dark"></p>
 <p>"How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.</p>
 <p>We built a tool, <strong>ov-cloud-tester</strong>, that deploys the <em>same</em> self-hosted WebRTC video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in three topologies (single node, elastic, and high-availability), tears it down cleanly, and times the whole thing. We ran it many times per cloud and looked at both the averages <em>and</em> every individual run. The headline: standing up a working deployment ranges from about <strong>5 minutes to 20</strong>, DigitalOcean is consistently the fastest and Oracle the heaviest — and the <em>why</em>, plus which clouds are actually <em>predictable</em>, turns out to be more interesting than the ranking.</p>
 
