@@ -12,7 +12,7 @@ description: Learn how to deploy OpenVidu Elastic on Azure using Template specs 
 </div>
 
 
---8<-- "shared/self-hosting/elastic-license-intro.md"
+--8<-- "shared/self-hosting/common/elastic-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on Azure. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Azure resources and can be automated through an ARM Template Spec.
 
@@ -36,17 +36,17 @@ To import the template into Azure, click the button below and you will be redire
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - A Virtual Machine Scale Set (VMSS) of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
---8<-- "shared/self-hosting/azure-custom-scale-in.md"
+--8<-- "shared/self-hosting/azure/custom-scale-in.md"
 
 ## Template Parameters
 
 To deploy the template, you need to fill in the following parameters.
 
---8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
+--8<-- "shared/self-hosting/azure/resource-group-stack-name.md"
 
---8<-- "shared/self-hosting/azure-ssl-domain.md"
+--8<-- "shared/self-hosting/azure/ssl-domain.md"
 
---8<-- "shared/self-hosting/azure-meet.md"
+--8<-- "shared/self-hosting/azure/meet.md"
 
 ### OpenVidu Elastic Configuration
 
@@ -82,13 +82,13 @@ You need to specify some properties for the Azure instances that will be created
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
---8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
+--8<-- "shared/self-hosting/azure/media-nodes-asg-config.md"
 
---8<-- "shared/self-hosting/azure-scale-in-config.md"
+--8<-- "shared/self-hosting/azure/scale-in-config.md"
 
---8<-- "shared/self-hosting/azure-storageaccount.md"
+--8<-- "shared/self-hosting/azure/storage-account.md"
 
---8<-- "shared/self-hosting/azure-additional-flags.md"
+--8<-- "shared/self-hosting/azure/additional-flags.md"
 
 ## Deploying the stack
 
@@ -135,12 +135,12 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/azure-credentials-general.md"
---8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/azure/credentials-general.md"
+--8<-- "shared/self-hosting/azure/credentials-v2compatibility.md"
  
 ## Troubleshooting initial Azure stack creation
 
---8<-- "shared/self-hosting/azure-troubleshooting.md"
+--8<-- "shared/self-hosting/azure/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

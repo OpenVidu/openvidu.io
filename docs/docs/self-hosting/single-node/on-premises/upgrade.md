@@ -12,4 +12,4 @@ description: How to upgrade OpenVidu Single Node COMMUNITY deployments on-premis
 </div>
 
 
---8<-- "shared/self-hosting/single-node/upgrade.md"
+--8<-- "shared/self-hosting/on-premises/single-node/upgrade.md"

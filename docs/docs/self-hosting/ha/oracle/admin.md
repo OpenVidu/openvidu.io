@@ -5,7 +5,7 @@ description: Learn how to perform administrative tasks on an Oracle Cloud Infras
 
 # OpenVidu High Availability administration: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle-provider-chip.md"
+--8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 
 The deployment of OpenVidu High Availability on Oracle Cloud Infrastructure is automated using the Terraform CLI, with 4 Compute instances as Master Nodes behind an [OCI Network Load Balancer :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/home.htm){:target=_blank}, and any number of Media Nodes managed within an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target=_blank}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
@@ -204,4 +204,4 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
 
     Changes will be applied automatically on all nodes of your OpenVidu High Availability deployment.
 
---8<-- "shared/self-hosting/oracle-backup-and-restore.md"
+--8<-- "shared/self-hosting/oracle/backup-and-restore.md"

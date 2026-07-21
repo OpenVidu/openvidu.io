@@ -65,15 +65,15 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
---8<-- "shared/tutorials/openvidu-components-files.md"
+--8<-- "shared/tutorials/openvidu-components/files.md"
 
 ---
 
---8<-- "shared/tutorials/openvidu-components-install.md"
+--8<-- "shared/tutorials/openvidu-components/install.md"
 
 === "main.ts"
 
-    --8<-- "shared/tutorials/openvidu-components-import.md"
+    --8<-- "shared/tutorials/openvidu-components/import.md"
 
 === "app.component.ts"
 
@@ -223,7 +223,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 === "styles.scss"
 
-    --8<-- "shared/tutorials/openvidu-components-styles.md"
+    --8<-- "shared/tutorials/openvidu-components/styles.md"
 
 ### Adding new panels
 

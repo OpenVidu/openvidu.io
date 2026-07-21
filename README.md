@@ -154,7 +154,7 @@ Links from HTML to **versioned** pages (rare) still use relative-to-built-folder
 When creating a new shared snippet, follow these steps:
 
 1. **Create the Markdown file**:  
-   Place a `.md` file in the [`shared`](shared) directory.
+   Place a `.md` file in the [`shared`](shared) directory, in the folder matching the docs area (and, for self-hosting, the cloud provider) it belongs to — see [`shared/README.md`](shared/README.md) for the folder conventions.
 
 2. **Reference in a page**:
    Use the following syntax to include the snippet in other snippets or pages:

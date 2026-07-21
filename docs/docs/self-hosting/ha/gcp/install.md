@@ -14,7 +14,7 @@ tags:
 </div>
 
 
---8<-- "shared/self-hosting/ha-license-intro.md"
+--8<-- "shared/self-hosting/common/ha-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
 
@@ -36,11 +36,11 @@ This is what the deployment architecture looks like:
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Managed Instance Group of Media Nodes is created to scale the number of Media Nodes based on system load.
 
---8<-- "shared/self-hosting/gcp-custom-scale-in.md"
+--8<-- "shared/self-hosting/gcp/custom-scale-in.md"
 
 ## Deployment details
 
---8<-- "shared/self-hosting/gcp-info-deployment.md"
+--8<-- "shared/self-hosting/gcp/info-deployment.md"
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
@@ -294,12 +294,12 @@ You need the secret outputs from Google Cloud Platform to configure your OpenVid
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/gcp-credentials-general.md"
---8<-- "shared/self-hosting/gcp-credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/gcp/credentials-general.md"
+--8<-- "shared/self-hosting/gcp/credentials-v2compatibility.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
---8<-- "shared/self-hosting/gcp-troubleshooting.md"
+--8<-- "shared/self-hosting/gcp/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

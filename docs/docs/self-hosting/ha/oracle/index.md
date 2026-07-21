@@ -5,7 +5,7 @@ description: OpenVidu High Availability deployment on Oracle Cloud Infrastructur
 
 # OpenVidu High Availability deployment on Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle-provider-chip.md"
+--8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 In this section you can install, administer and upgrade OpenVidu High Availability on Oracle Cloud Infrastructure.
 

@@ -12,7 +12,7 @@ description: Learn how to deploy OpenVidu Single Node PRO on Azure using Templat
 </div>
 
 
---8<-- "shared/self-hosting/singlenode-pro-license-intro.md"
+--8<-- "shared/self-hosting/common/single-node-pro-license-intro.md"
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on Azure. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through ARM Template Specs.
 
@@ -35,11 +35,11 @@ To use the Azure template, click the button below (you will be redirected to Azu
 
 To deploy the template, you need to fill in the following parameters.
 
---8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
+--8<-- "shared/self-hosting/azure/resource-group-stack-name.md"
 
---8<-- "shared/self-hosting/azure-ssl-domain.md"
+--8<-- "shared/self-hosting/azure/ssl-domain.md"
 
---8<-- "shared/self-hosting/azure-meet.md"
+--8<-- "shared/self-hosting/azure/meet.md"
 
 
 ### OpenVidu Single Node PRO configuration
@@ -70,9 +70,9 @@ Specify properties for the Azure instance that will host Openvidu.
 
     Simply select the type of instance you want to deploy in **Type of Instance**. Fill in **Admin Username**, which will be set as the admin username on the instance. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instance.
 
---8<-- "shared/self-hosting/azure-storageaccount.md"
+--8<-- "shared/self-hosting/azure/storage-account.md"
 
---8<-- "shared/self-hosting/azure-additional-flags.md"
+--8<-- "shared/self-hosting/azure/additional-flags.md"
 
 ## Deploying the stack
 
@@ -119,13 +119,13 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/azure-credentials-general.md"
---8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/azure/credentials-general.md"
+--8<-- "shared/self-hosting/azure/credentials-v2compatibility.md"
 
 
 ## Troubleshooting initial Azure stack creation
 
---8<-- "shared/self-hosting/azure-troubleshooting.md"
+--8<-- "shared/self-hosting/azure/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

@@ -14,7 +14,7 @@ tags:
 </div>
 
 
---8<-- "shared/self-hosting/elastic-license-intro.md"
+--8<-- "shared/self-hosting/common/elastic-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on DigitalOcean. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as DigitalOcean resources and can be automated using Terraform CLI.
 
@@ -41,7 +41,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load.
 
---8<-- "shared/self-hosting/do-custom-scale-in.md"
+--8<-- "shared/self-hosting/digitalocean/custom-scale-in.md"
 
 ## Deployment details
 
@@ -260,12 +260,12 @@ You may need your Digital Ocean credentials to configure your OpenVidu applicati
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/do-credentials-general.md"
---8<-- "shared/self-hosting/do-credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/digitalocean/credentials-general.md"
+--8<-- "shared/self-hosting/digitalocean/credentials-v2compatibility.md"
 
 ### Troubleshooting initial DigitalOcean deployment creation
 
---8<-- "shared/self-hosting/do-troubleshooting.md"
+--8<-- "shared/self-hosting/digitalocean/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 
