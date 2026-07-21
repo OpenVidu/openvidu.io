@@ -2,6 +2,7 @@
 draft: false
 slug: meet-vs-platform
 date: 2026-06-16
+description: Choosing the right level of abstraction for self-hosted WebRTC in 2026 — how OpenVidu Meet and OpenVidu Platform compare, and which one fits your use case.
 cover_image: meet-vs-platform.png
 categories:
   - OpenVidu Meet

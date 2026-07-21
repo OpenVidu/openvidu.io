@@ -446,12 +446,23 @@ plugins:
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
-        - blog/*.md: OpenVidu Blog
-        - support.md: Support options for OpenVidu Meet and OpenVidu Platform
-        - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
+        - support.md: Support options for OpenVidu
+        - pricing.md: Pricing models for OpenVidu
         - about-us.md: The people behind OpenVidu
         - research.md: Research publications on real-time communications in peer-reviewed journals
         - openvidu-meet-vs-openvidu-platform.md: What to choose, OpenVidu Meet or OpenVidu Platform?
+        - blog/index.md: OpenVidu Blog — articles on self-hosted videoconferencing, WebRTC development, benchmarks and product news
+        - blog/posts/2026-04-30-how-client-networks-affect-qoe-and-costs.md: How client networks affect WebRTC quality of experience and server infrastructure costs
+        - blog/posts/2026-05-19-5-react-video-call-platforms.md: 5 React video call platforms in 2026 compared — SaaS vs self-hosted
+        - blog/posts/2026-05-26-scale-in-problem-in-videoconferences.md: The scale-in problem in videoconferencing — safely draining media servers with active meetings
+        - blog/posts/2026-06-02-scalability-in-videoconferencing-systems.md: Scaling video conferencing from a single node to an elastic media plane and high-availability control plane
+        - blog/posts/2026-06-09-turn-key-considerations.md: TURN in production WebRTC — connectivity resilience and security considerations
+        - blog/posts/2026-06-16-meet-vs-platform.md: OpenVidu Meet vs OpenVidu Platform — choosing the right level of abstraction for self-hosted WebRTC
+        - blog/posts/2026-06-23-5-conversational-ai-app-ideas.md: 5 conversational AI app ideas and the real-time voice and vision pipeline behind them
+        - blog/posts/2026-06-30-secure-home-video-conferencing.md: Host your own private video conferencing server at home with OpenVidu Meet
+        - blog/posts/2026-07-07-deploy-and-scale-in-times-across-clouds.md: Deployment time benchmarks for a self-hosted WebRTC platform across AWS, Azure, GCP, Oracle and DigitalOcean
+        - blog/posts/2026-07-09-release-380.md: OpenVidu 3.8.0 release notes — user accounts, RBAC, mediasoup overhaul and TURN security
+        - blog/posts/2026-07-14-video-conferencing-permissions.md: Managing permissions in video conferencing apps — anonymous, identified guest and user access models
         OpenVidu Meet:
         - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
         - meet/releases.md: OpenVidu Meet - Release notes

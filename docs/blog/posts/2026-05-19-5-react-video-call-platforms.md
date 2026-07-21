@@ -2,6 +2,7 @@
 draft: false
 date: 2026-05-19
 slug: 5-react-video-call-platforms
+description: A 2026 comparison of 5 React video call platforms — Agora, Zoom, Stream, LiveKit and OpenVidu — weighing SaaS convenience against cost, scalability, data control and vendor lock-in.
 cover_image: poster.png
 categories:
   - Vertical

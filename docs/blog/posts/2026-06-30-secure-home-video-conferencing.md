@@ -2,6 +2,7 @@
 draft: false
 date: 2026-06-30
 slug: secure-home-video-conferencing
+description: Host your own private, free video conferencing server at home on a Raspberry Pi, old laptop or mini-PC — no accounts, no time limits — in three simple steps with OpenVidu Meet.
 cover_image: poster.jpg
 categories:
     - OpenVidu Meet

@@ -2,6 +2,7 @@
 draft: false
 date: 2026-05-26
 slug: scale-in-problem-in-videoconferences
+description: Why you can't just terminate a media server with active meetings — the scale-in problem in videoconferencing, how node draining works, and how OpenVidu solves it on AWS, Azure, GCP and DigitalOcean.
 cover_image: scale-down.png
 categories:
  - Technology
