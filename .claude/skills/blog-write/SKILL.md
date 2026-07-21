@@ -12,10 +12,20 @@ Write a high-quality technical blog post from a provided outline. Draft in the o
 
 If no outline exists yet, use the `blog-plan` skill first.
 
-## Where the post goes
+## File, assets, and registration
 
-- File: `docs/blog/posts/YYYY-MM-DD-<slug>.md` (the date is the intended publish date).
-- Images: `docs/assets/images/blog/<slug-or-topic-folder>/`, referenced from the post as `/assets/images/blog/<folder>/<file>`.
+**Naming — the filename, the asset folder, and the frontmatter `date`/`slug` must all agree:**
+
+- **Post file:** `docs/blog/posts/YYYY-MM-DD-<slug>.md`. `YYYY-MM-DD` MUST equal the frontmatter `date` (the intended publish date) and `<slug>` MUST equal the frontmatter `slug`.
+- **Asset folder:** `docs/assets/images/blog/YYYY-MM-DD-<slug>/` — its name MUST be **identical to the post's filename basename**. All of the post's images live here and are referenced with **relative** paths: `../../assets/images/blog/YYYY-MM-DD-<slug>/<file>`.
+
+**Register the post in `mkdocs.yml`:** add one line for it to the `llmstxt` plugin's `sections`, under the `OpenVidu:` group, alongside the other `blog/posts/...` entries:
+
+```yaml
+- blog/posts/YYYY-MM-DD-<slug>.md: <one-line description of the post>
+```
+
+Every post is listed **individually** there (not via a glob), so a new post that isn't added won't get its own entry in `llms.txt`.
 
 **Before drafting, read one or two recent posts** in `docs/blog/posts/` to match voice, depth, and formatting.
 
@@ -26,7 +36,7 @@ If no outline exists yet, use the `blog-plan` skill first.
 draft: false
 date: 2026-07-04
 slug: your-post-slug
-description: One-sentence SEO summary (optional but recommended for search snippets).
+description: One-sentence SEO summary. REQUIRED on every post — feeds search snippets, og:description and JSON-LD. Phrase it to avoid a ": " (colon-space) so it stays valid as unquoted YAML.
 cover_image: poster.jpg   # recommended; the social/link-preview image (og:image + JSON-LD). A raster file (png/jpg/webp — NOT svg) inside this post's image folder. Omit to fall back to the site-wide branded card.
 categories:
     - OpenVidu Meet        # MUST be from categories_allowed in mkdocs.yml
@@ -48,12 +58,12 @@ hide:
 ## Post body structure
 
 1. **H1 title** (`# ...`) — matches the outline's title.
-2. **Poster image** immediately after the H1. Use light/dark variants when available:
+2. **Poster image** immediately after the H1, using **relative** asset paths. Use light/dark variants when available:
    ```markdown
-   ![Descriptive alt text](/assets/images/blog/<folder>/poster-light.webp#only-light "title")
-   ![Descriptive alt text](/assets/images/blog/<folder>/poster-dark.webp#only-dark "title")
+   ![Descriptive alt text](../../assets/images/blog/YYYY-MM-DD-<slug>/poster-light.webp#only-light "title")
+   ![Descriptive alt text](../../assets/images/blog/YYYY-MM-DD-<slug>/poster-dark.webp#only-dark "title")
    ```
-   A single image can use `{ align=right width=60% }` sizing attributes.
+   A single image can use `{ align=right width=60% }` sizing attributes. Point `cover_image` at this poster too (a raster `-light` variant).
 3. **Intro** — first paragraph opens with a **hook** (a question or a clear benefit). It may run a little longer than body paragraphs.
 4. **`<!-- more -->`** on its own line immediately after the intro. This is **mandatory** — the blog plugin sets `post_excerpt: required`, so a missing tag breaks the build.
 5. **H2/H3 sections** following the outline, fundamentals → advanced.
@@ -80,9 +90,11 @@ hide:
   ```
   Common ones here: `!!! tip`, `!!! abstract "What you'll build"`, `!!! note`.
 
-**Links**
-- Internal docs: relative `.md` links, e.g. `[OpenVidu Meet](../../meet/index.md)`.
-- External links: add `{:target="_blank"}`, e.g. `[DuckDNS](https://www.duckdns.org){:target="_blank"}`.
+**Links** (the build runs `mkdocs build --strict` — a bad link fails CI)
+- **Internal links → relative, including the `.md` extension**, e.g. `[OpenVidu Meet](../../meet/index.md)`, `[Pricing](../../pricing.md)`. Never root-absolute (`/meet/`) or a bare pretty-URL — MkDocs validates only the relative form, and the deploy script rewrites it to `/latest/...` at publish.
+- **Images/assets → relative too**, e.g. `../../assets/images/blog/YYYY-MM-DD-<slug>/<file>`. Never root-absolute.
+- **External links → append `{:target="_blank"}`**, e.g. `[DuckDNS](https://www.duckdns.org){:target="_blank"}`.
+- **Release posts are the exception** (`Release` category — an `X.Y.Z` announcement): links to versioned docs must be **absolute, version-pinned URLs including the domain** — `https://openvidu.io/X.Y/docs/...` and `https://openvidu.io/X.Y/meet/...`, pinned to the version being announced (**not** `latest`). A release note should keep pointing at that release's docs forever.
 
 **Technical content**
 - Every command must be **copy-pasteable** and correct.
@@ -105,3 +117,7 @@ Then add a short **Final checks** note confirming:
 - Intro hook + `<!-- more -->` present (when the intro is included).
 - Active/conversational voice held throughout.
 - All commands copy-pasteable; all image placements annotated.
+- Frontmatter has a `description` (required); `cover_image` set when a raster poster exists in the asset folder.
+- Filename, asset-folder name, and frontmatter `date`/`slug` all agree (`YYYY-MM-DD-<slug>`).
+- Post added to the `llmstxt` `sections` in `mkdocs.yml`.
+- Links follow the rules above (relative internal/assets; `{:target="_blank"}` external; absolute version-pinned for release posts).
