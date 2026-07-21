@@ -1,27 +1,30 @@
 ---
 draft: false
-date: 2026-07-15
+date: 2026-07-21
 slug: building-a-video-enabled-crm-with-an-ai-agent
-description: How a complete CRM with embedded video meetings was built with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained, per-guest room permissions, in seven prompts total.
+description: >-
+  How a complete CRM with embedded video meetings was built with an AI coding
+  agent and OpenVidu Meet — from a single prompt to fine-grained, per-guest room
+  permissions, in seven prompts total.
 cover_image: poster-light.png
 categories:
-    - OpenVidu Meet
-    - AI
+  - OpenVidu Meet
+  - AI
 tags:
-    - AI agents
-    - Claude Code
-    - OpenVidu Meet
-    - Embedded video
-    - WebComponent
-    - WebRTC
-    - Video Conferencing
-    - CRM
+  - AI agents
+  - Claude Code
+  - OpenVidu Meet
+  - Embedded video
+  - WebComponent
+  - WebRTC
+  - Video Conferencing
+  - CRM
 authors:
-    - patxi
+  - patxi
 hide:
-    - navigation
-    - search-bar
-    - version-selector
+  - navigation
+  - search-bar
+  - version-selector
 ---
 
 # Building a video-enabled CRM with an AI agent and OpenVidu Meet
