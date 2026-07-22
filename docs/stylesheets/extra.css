@@ -123,6 +123,13 @@ span:has(> a > .openvidu-tag) {
   max-width: none;
 }
 
+@media (min-width: 1220px) {
+  .grid-20.footer-products-gap {
+    margin-left: 1.2rem;
+    width: calc(20% - 1.2rem);
+  }
+}
+
 .footer-conditions-list {
   font-size: 0.64rem;
   display: grid;
