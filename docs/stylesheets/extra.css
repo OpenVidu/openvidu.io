@@ -104,13 +104,13 @@ span:has(> a > .openvidu-tag) {
 }
 
 .md-social__link {
-  height: 2.8rem;
-  width: 2.8rem;
-  line-height: 2.8;
+  height: 2.2rem;
+  width: 2.2rem;
+  line-height: 2.2;
 }
 
 .md-social__link svg {
-  max-height: 1.4rem;
+  max-height: 1.1rem;
 }
 
 .footer-grid {
