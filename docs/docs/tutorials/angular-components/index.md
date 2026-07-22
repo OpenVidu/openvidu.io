@@ -6,7 +6,7 @@ description: Learn how to customize your application UI with Angular Components 
 # Angular Components Tutorials
 
 <figure markdown>
-  ![Angular Components Angular](../../../assets/images/components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![Angular Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>Angular Components</figcaption>
 </figure>
 

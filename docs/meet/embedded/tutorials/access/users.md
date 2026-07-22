@@ -19,7 +19,7 @@ Building on the Identified Guests tutorial, it adds the following:
 - Add a **user** (in addition to identified guests) as a member of a room.
 - A user member accesses the room by logging in with their OpenVidu Meet credentials.
 
-The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-api.md) to manage users, rooms and room members, and the [OpenVidu Meet WebComponent](../../reference/webcomponent.md) to embed the meeting.
+The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to manage users, rooms and room members, and the [OpenVidu Meet WebComponent](../../reference/webcomponent.md) to embed the meeting.
 
 !!! info "Users, identified guests and anonymous guests"
 
@@ -63,9 +63,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/users/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/users/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/users/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/users/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/users/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/users/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/users/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/users/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 

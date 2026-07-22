@@ -13,7 +13,7 @@ This tutorial shows how individuals can access an OpenVidu Meet room through **a
 
 It uses the same application as the [WebComponent tutorial](../embedding-options/webcomponent.md) (built with **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend), but here we focus on **how the anonymous access links are obtained and used** to let participants into a room.
 
-The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-api.md) to create and delete rooms (which is where the anonymous access links come from), and the [OpenVidu Meet WebComponent](../../../embedded/reference/webcomponent.md) to embed the video call.
+The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to create and delete rooms (which is where the anonymous access links come from), and the [OpenVidu Meet WebComponent](../../../embedded/reference/webcomponent.md) to embed the video call.
 
 !!! info "Anonymous access vs. explicit members"
 
@@ -57,10 +57,10 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 

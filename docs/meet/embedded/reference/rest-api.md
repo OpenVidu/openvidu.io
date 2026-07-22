@@ -28,14 +28,14 @@ X-API-KEY: your-api-key
 2. Navigate to the **"Embedded"** page.
 3. Click on **"Generate API Key"** button.
 
-<a class="glightbox" href="../../../../assets/videos/meet/embedded/reference/generate-api-key-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="../../../../assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../../assets/videos/meet/embedded/reference/generate-api-key-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="../../../../assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ## Reference
 
 You can access the REST API reference documentation at:
 
-- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](./api.html){target="_blank"}
+- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](api.html){target="_blank"}
 - **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/meet/api/v1/docs/`**{.no-break}
 
 ### Code snippets
@@ -44,9 +44,9 @@ The reference documentation provides code snippets for each REST API method. You
 
 <div class="grid cards no-border no-shadow two-columns" markdown>
 
-<a class="glightbox" href="../../../../assets/images/meet/embedded/reference/rest-snippets-1.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/embedded/reference/rest-snippets-1.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/reference/rest-snippets-1.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/rest-snippets-1.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
-<a class="glightbox" href="../../../../assets/images/meet/embedded/reference/rest-snippets-2.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/embedded/reference/rest-snippets-2.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/reference/rest-snippets-2.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/rest-snippets-2.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
 </div>
 
@@ -56,4 +56,4 @@ When accessing the REST API documentation from your own OpenVidu Meet deployment
 
 Just configure a valid API key in the `X-API-KEY` header input.
 
-<a class="glightbox" href="../../../../assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/embedded/reference/rest-api-test.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" defer muted playsinline autoplay loop async></video></a>

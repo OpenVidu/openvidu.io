@@ -1,5 +1,5 @@
 ---
-title: "Self-hosted videoconferencing and custom WebRTC solutions"
+title: "Self-hosted video conferencing & custom WebRTC"
 template: home.html
 hide:
   - navigation
@@ -25,8 +25,8 @@ tags:
     <div class="product-card openvidu-meet">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="./assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
-          <img src="./assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
         </h3>
         <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
       </div>
@@ -43,14 +43,14 @@ tags:
         </ul>
       </div>
       <div class="product-footer">
-        <a href="meet/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="meet/" class="product-button md-button md-button--primary primary">Deploy Meet in minutes</a>
       </div>
     </div>
     <div class="product-card openvidu-platform">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="./assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
-          <img src="./assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
         </h3>
         <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
       </div>
@@ -59,7 +59,7 @@ tags:
           For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
         </p>
         <ul class="product-features">
-          <li>Programmable client and server SDKs for all languages compatible with <a href="https://docs.livekit.io/reference/" target="_blank">LiveKit</a></li>
+          <li>Programmable client and server SDKs for all languages, LiveKit-compatible</li>
           <li>Build your custom UI from scratch with total freedom</li>
           <li>Low level control of real time media: codecs, protocols, bitrates...</li>
           <li>Precise control of recording and streaming with custom layouts</li>
@@ -67,7 +67,7 @@ tags:
         </ul>
       </div>
       <div class="product-footer">
-        <a href="docs/" class="product-button md-button md-button--primary primary">Get Started</a>
+        <a href="docs/" class="product-button md-button md-button--primary primary">Start building with the SDKs</a>
       </div>
     </div>
   </div>
@@ -83,7 +83,7 @@ tags:
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
-    Self-host a production-ready live-video platform with advanced capabilities typically reserved for pricy SaaS solutions
+    Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
   </h2>
 </div>
 
@@ -112,7 +112,7 @@ tags:
 
     ---
 
-    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](/pricing/).
+    OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](pricing.md).
 
 -   :material-lightning-bolt:{ .feature-icon .padding-icon } __Performant__{ .feature-name }
 
@@ -170,7 +170,7 @@ tags:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="./assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
 
     ---
 
@@ -215,10 +215,18 @@ tags:
 </div>
 </div>
 
+<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;">
+  <a title="Get started with OpenVidu Meet" class="md-button md-button--primary home-meet-button" href="meet/">Deploy Meet in minutes</a>
+  <a title="Build with OpenVidu Platform SDKs" class="md-button home-platform-button" href="docs/">Start building with the SDKs</a>
+</div>
+<p class="home-under-cta">
+  Not sure which fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+</p>
+
 <hr style="margin: 7em 0 3.5em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Contact us if you need it : we are here to help!</h2>
+  <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
   <div class="home-buttons">
     <a href="/support/" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

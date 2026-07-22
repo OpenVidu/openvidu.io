@@ -12,7 +12,7 @@ The **openvidu-custom-stream** tutorial demonstrates how to replace the default 
 Customizing the video stream component is made simple with the **StreamDirective**, which offers a straightforward way to replace and adapt the **StreamComponent** to your needs.
 
 <figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-stream.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-stream.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>OpenVidu Components - Custom Stream</figcaption>
 </figure>
 
@@ -57,21 +57,21 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
 
-<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/components/custom-toolbar.png){ loading=lazy } -->
+<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
 --8<-- "shared/tutorials/testing-other-devices.md"
 
 ## Understanding the code
 
---8<-- "shared/tutorials/openvidu-components-files.md"
+--8<-- "shared/tutorials/openvidu-components/files.md"
 
 ---
 
---8<-- "shared/tutorials/openvidu-components-install.md"
+--8<-- "shared/tutorials/openvidu-components/install.md"
 
 === "main.ts"
 
-    --8<-- "shared/tutorials/openvidu-components-import.md"
+    --8<-- "shared/tutorials/openvidu-components/import.md"
 
 === "app.component.ts"
 
@@ -174,7 +174,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 === "styles.scss"
 
-    --8<-- "shared/tutorials/openvidu-components-styles.md"
+    --8<-- "shared/tutorials/openvidu-components/styles.md"
 
 ### Customizing the video stream
 

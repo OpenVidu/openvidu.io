@@ -9,7 +9,7 @@ It is a web application designed to provide **OpenVidu administrators** with a c
 To access **OpenVidu Dashboard**, go to [https://your.domain/dashboard/]() and **log in** using your **admin credentials**.
 
 <figure markdown>
-  ![OpenVidu Dashboard login](../../../../assets/images/dashboard/login.png){ .mkdocs-img }
+  ![OpenVidu Dashboard login](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login.png){ .mkdocs-img }
 </figure>
 
 ### Views
@@ -20,17 +20,17 @@ Display **graphical analytics** for client SDKs, connection types, bandwidth usa
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" loading="lazy"/></a></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics3.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/analytics4.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/analytics4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -39,7 +39,7 @@ Display **graphical analytics** for client SDKs, connection types, bandwidth usa
 Review the total count of **active rooms** and **active participants**, along with a roster of currently active rooms and a history of **closed rooms** within the last 28 days. Detailed information on each room is accessible by clicking on the respective row.
 
 <figure markdown>
-  ![OpenVidu Dashboard rooms](../../../../assets/images/dashboard/rooms.png){ .mkdocs-img }
+  ![OpenVidu Dashboard rooms](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms.png){ .mkdocs-img }
 </figure>
 
 #### Room Details
@@ -50,11 +50,11 @@ Retrieve in-depth information about a specific **room**, including its duration,
 
 <div class="grid-container">
 
-<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room_active.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room_active.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" loading="lazy"/></a></p></div>
 
-<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room1.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-33"><p><a class="glightbox" href="../../../../../assets/images/dashboard/room2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/room2.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -66,16 +66,16 @@ Obtain detailed insights into each **participant**, covering their duration, ban
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/participant1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/participant1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/participant2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/participant2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" loading="lazy"/></a></p></div>
 
 </div>
 
 A participant may **connect** and **disconnect** from a room multiple times while it remains open. Each instance of connection using the same **participant identity** is referred to as a **`participant session`**. If multiple sessions occur, we will aggregate all participant sessions together and organize them into a timeline at the top of the participant details view. You can easily switch between participant sessions by clicking on each corresponding row:
 
 <figure markdown>
-  ![OpenVidu Dashboard participant sessions](../../../../assets/images/dashboard/participant3.png){ .mkdocs-img }
+  ![OpenVidu Dashboard participant sessions](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant3.png){ .mkdocs-img }
 </figure>
 
 #### Egress-Ingress
@@ -83,7 +83,7 @@ A participant may **connect** and **disconnect** from a room multiple times whil
 Review an overview of all **egresses** and **ingresses**, including their duration and status. Detailed information for each egress or ingress can be accessed by clicking on the respective row.
 
 <figure markdown>
-  ![OpenVidu Dashboard egress-ingress](../../../../assets/images/dashboard/egress-ingress.png){ .mkdocs-img }
+  ![OpenVidu Dashboard egress-ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-ingress.png){ .mkdocs-img }
 </figure>
 
 #### Egress Details
@@ -94,9 +94,9 @@ Access comprehensive details about a specific **egress**, including its duration
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/egress1.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/egress1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/dashboard/egress2.png" data-type="image" data-desc-position="bottom"><img src="../../../../../assets/images/dashboard/egress2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" loading="lazy"/></a></p></div>
 
 </div>
 
@@ -107,5 +107,5 @@ Access comprehensive details about a specific **egress**, including its duration
 Explore detailed information about a specific **ingress**, including its total duration, status and a list of all associated rooms.
 
 <figure markdown>
-  ![OpenVidu Dashboard ingress](../../../../assets/images/dashboard/ingress.png){ .mkdocs-img }
+  ![OpenVidu Dashboard ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress.png){ .mkdocs-img }
 </figure>

@@ -61,12 +61,12 @@ The following images illustrate the difference between an unreachable and a reac
 <div class="grid cards" markdown>
 
 <figure markdown>
-  ![Unreachable local server](../../../assets/images/webhook-fail.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>Unreachable local application server</figcaption>
 </figure>
 
 <figure markdown>
-  ![Reachable local server](../../../assets/images/webhook-success.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>Reachable local application server</figcaption>
 </figure>
 

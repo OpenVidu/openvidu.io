@@ -14,7 +14,7 @@ description: Learn how to deploy OpenVidu High Availability on-premises with DNS
 
 !!! info
     
-    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing DNS for load balancing traffic. DNS allows multiple records, even of the same kind, to be registered, enabling the listing of multiple hosts under the same domain name. Such a mechanism allows for the distribution of traffic among the Master Nodes, offering an alternative to Network Load Balancers.
@@ -35,7 +35,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability Architecture with DNS Load Balancing</figcaption>
     </figure>
 
@@ -147,7 +147,7 @@ docker run --pull always --rm -it \
     --deployment-type=ha
 ```
 
---8<-- "shared/self-hosting/install-version.md"
+--8<-- "shared/self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -155,7 +155,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 !!! info
 
-    If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+    If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
 - **Do you want to use an external load balancer?**: Select _**No**_. It means that you are going to use DNS Load Balancing.
 - **Select which certificate type to use**:
     - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
@@ -188,7 +188,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -220,7 +220,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -259,8 +259,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/credentials-general.md"
---8<-- "shared/self-hosting/credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/on-premises/credentials-general.md"
+--8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -302,11 +302,11 @@ Each installation command for each type of node looks like this:
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         Notes:
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
@@ -340,9 +340,9 @@ Each installation command for each type of node looks like this:
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
@@ -381,10 +381,10 @@ Each installation command for each type of node looks like this:
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
@@ -400,7 +400,7 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
     - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.

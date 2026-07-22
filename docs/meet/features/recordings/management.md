@@ -11,18 +11,18 @@ tags:
 
 Recordings are started from the meeting view by a participant with the `canRecord` permission (see [Predefined roles](../rooms/access.md#predefined-roles)). The room must have recording [enabled in its configuration](configuration.md#enabling-recordings).
 
-<a class="glightbox" href="../../../../assets/videos/meet/recordings/management/start-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../../assets/videos/meet/recordings/management/start-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/recordings/management/start-recording-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/recordings/management/start-recording-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
 
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-indicator-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark" loading="lazy"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-indicator-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-indicator-light.png#only-light" loading="lazy"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-indicator-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark" loading="lazy"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-indicator-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-indicator-light.png#only-light" loading="lazy"/></a>
 
 To stop the recording, a participant with the `canRecord` permission must simply click the **"Stop recording"** button. The recording is then automatically saved on the OpenVidu Meet server.
 
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/stop-recording-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark" loading="lazy"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/stop-recording-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light" loading="lazy"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/stop-recording-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/stop-recording-dark.png#only-dark" loading="lazy"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/stop-recording-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/stop-recording-light.png#only-light" loading="lazy"/></a>
 
 !!! info "Starting and stopping recordings via REST API"
     Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that specific recording.
@@ -33,28 +33,28 @@ A saved recording can be **listed**, **played**, **shared**, **downloaded** and 
 
 - The general **"Recordings"** page, which lists every recording you can access.
 
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-list-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-list-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-list-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-list-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
 - The **detail recording page** — accessed from the general "Recordings" page when clicking a recording — which shows the recording's metadata and a player displaying it.
 
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-detail-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-detail-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-detail-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-detail-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-detail-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-detail-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-detail-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-detail-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
 - The **"Recordings"** tab of a [room's detail page](../rooms/management.md#room-details), listing that single room's recordings.
 
-<a class="glightbox" href="../../../../assets/images/meet/rooms/management/room-details-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/rooms/management/room-details-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/rooms/management/room-details-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/rooms/management/room-details-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
 - The [**room recordings view**](../meetings/lifecycle.md#recordings-view), reachable from within a meeting (and from the lobby view before joining).
 
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/room-recordings-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/room-recordings-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/room-recordings-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/room-recordings-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/room-recordings-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/room-recordings-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/room-recordings-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/room-recordings-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
 - The **display recording view** — accessed when clicking the play button for a recording — which displays the recording.
 
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-display-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-display-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/recordings/management/recording-display-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/recordings/management/recording-display-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-display-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-display-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/management/recording-display-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/management/recording-display-light.png#only-light" loading="lazy" class="round-corners"/></a>
 
 ### Sharing recordings { #sharing-recordings }
 
@@ -63,8 +63,8 @@ When you create a shareable link for a recording, you choose **who can access it
 - **OpenVidu Meet users**: any logged-in OpenVidu Meet user can view the recording — even if they have no recording permissions in that room, or no access to the room at all.
 - **Anyone**: any individual with the link can view it without logging in. This option is available only when the room has [anonymous recording sharing](configuration.md#anonymous-recording-sharing) enabled.
 
-<a class="glightbox" href="../../../../assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="../../../../assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="../../../../assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" defer muted playsinline autoplay loop async></video></a>
 
 ## REST API reference { #rest-api-reference }
 

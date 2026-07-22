@@ -82,9 +82,9 @@ CMD ["python", "agent.py", "start"]
 
 ### 1. SSH into an OpenVidu Node and go to configuration folder
 
---8<-- "shared/self-hosting/ssh-openvidu-deployment.md"
+--8<-- "shared/self-hosting/common/ssh-openvidu-deployment.md"
 
-### 2. Add a `agent-AGENT_NAME.yaml` file
+### 2. Add an `agent-AGENT_NAME.yaml` file
 
 Located in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node, create a file named `agent-AGENT_NAME.yaml`, where `AGENT_NAME` must be a unique name for your agent. The minimal content of this file is:
 
@@ -106,7 +106,7 @@ CUSTOM_CONFIGURATION: ...
 
 ### 3. Restart OpenVidu
 
---8<-- "shared/self-hosting/restart-openvidu-deployment.md"
+--8<-- "shared/self-hosting/common/restart-openvidu-deployment.md"
 
 After restarting OpenVidu your agent will be up and running, ready to process new Rooms.
 

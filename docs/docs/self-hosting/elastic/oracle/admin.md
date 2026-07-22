@@ -5,7 +5,7 @@ description: Learn how to perform administrative tasks on an Oracle Cloud Infras
 
 # OpenVidu Elastic administration: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle-provider-chip.md"
+--8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 
 The deployment of OpenVidu Elastic on Oracle Cloud Infrastructure is automated using the Terraform CLI, where Media Nodes are part of an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target=\_blank}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
@@ -29,15 +29,15 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
     1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank}.
     2. Click into the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
         <figure markdown>
-        ![Edit Instance Pool](../../../../assets/images/self-hosting/elastic/oracle/edit-instance-pool.png){ .svg-img .dark-img }
+        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/elastic/oracle/edit-instance-pool.png){ .svg-img .dark-img }
         </figure>
     3. Set the **Number of instances** to 0, then click _"Save changes"_ and wait for the change to be applied.
         <figure markdown>
-        ![Set instances to 0](../../../../assets/images/self-hosting/elastic/oracle/instances-to-0.png){ .svg-img .dark-img }
+        ![Set instances to 0](../../../../assets/images/platform/self-hosting/elastic/oracle/instances-to-0.png){ .svg-img .dark-img }
         </figure>
     4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click the instance called `<STACK_NAME>-master-node`. There, click *"Stop"* to stop the Master Node.
         <figure markdown>
-        ![Stop Master Node](../../../../assets/images/self-hosting/elastic/oracle/stop-master-node.png){ .svg-img .dark-img }
+        ![Stop Master Node](../../../../assets/images/platform/self-hosting/elastic/oracle/stop-master-node.png){ .svg-img .dark-img }
         </figure>
 
 
@@ -48,12 +48,12 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
     1. Navigate to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank}.
     2. Select the instance named `<STACK_NAME>-master-node`, then click _"Start"_ to start the Master Node.
         <figure markdown>
-        ![Start Master Node](../../../../assets/images/self-hosting/elastic/oracle/start-master-node.png){ .svg-img .dark-img }
+        ![Start Master Node](../../../../assets/images/platform/self-hosting/elastic/oracle/start-master-node.png){ .svg-img .dark-img }
         </figure>
     3. Wait until the instance is running.
     4. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
         <figure markdown>
-        ![Edit Instance Pool](../../../../assets/images/self-hosting/elastic/oracle/edit-instance-pool.png){ .svg-img .dark-img }
+        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/elastic/oracle/edit-instance-pool.png){ .svg-img .dark-img }
         </figure>
     5. Set the **Number of instances** to your desired value and click _"Save changes"_, then wait for the Instance Pool to apply the changes.
 
@@ -79,7 +79,7 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
     2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click _"Edit"_ next to the **Shape** field, select the new shape (or adjust OCPUs/Memory for Flex shapes) and click _"Save changes"_.
         <figure markdown>
-        ![Change Master Node shape](../../../../assets/images/self-hosting/elastic/oracle/change-shape-master.png){ .svg-img .dark-img }
+        ![Change Master Node shape](../../../../assets/images/platform/self-hosting/elastic/oracle/change-shape-master.png){ .svg-img .dark-img }
         </figure>
     4. [Start the cluster](#starting-up-the-cluster).
 
@@ -91,7 +91,7 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
     1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target=_blank}.
     2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it, open the *"Actions"* menu and select *"Create duplicate"*. The form opens pre-filled with the current configuration — adjust the shape (or OCPUs/Memory for Flex shapes) and create the new Instance Configuration.
         <figure markdown>
-        ![Create Instance Configuration](../../../../assets/images/self-hosting/elastic/oracle/create-instance-configuration.png){ .svg-img .dark-img }
+        ![Create Instance Configuration](../../../../assets/images/platform/self-hosting/elastic/oracle/create-instance-configuration.png){ .svg-img .dark-img }
         </figure>
 
         !!! warning
@@ -100,7 +100,7 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
 
     3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
         <figure markdown>
-        ![Change Instance Configuration in Pool](../../../../assets/images/self-hosting/elastic/oracle/change-instance-configuration.png){ .svg-img .dark-img }
+        ![Change Instance Configuration in Pool](../../../../assets/images/platform/self-hosting/elastic/oracle/change-instance-configuration.png){ .svg-img .dark-img }
         </figure>
     4. Terminate the existing Media Nodes from the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} page so the Instance Pool replaces them with new ones launched from the updated Instance Configuration. Old Media Nodes are **not** replaced automatically when the Instance Configuration changes — only newly launched instances use the new shape.
 
@@ -125,7 +125,7 @@ You can modify the autoscaling configuration of the Media Nodes via the `terrafo
     ```
     3. Confirm the change that Terraform proposes (it will update the autoscaling configuration, and the scale-in OCI Function when `scaleTargetCPU` or `minNumberOfMediaNodes` change), and the changes will take effect.
         <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/oracle-terraform-output-autoscale-change.png){ .svg-img .dark-img }
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/oracle/terraform-output-autoscale-change.png){ .svg-img .dark-img }
         </figure>
 
 ## Fixed Number of Media Nodes
@@ -150,7 +150,7 @@ Switching modes does **not** recreate the Master Node. It carries a `scale-in-mo
 
     3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and the autoscaling configuration, flip the Master Node's `scale-in-mode` tag to `fixed`, and resize the Instance Pool to the fixed number of Media Nodes.
         <figure markdown>
-        ![Terraform output activate fixed media nodes](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-activate-fixed.png){ .svg-img .dark-img }
+        ![Terraform output activate fixed media nodes](../../../../assets/images/platform/self-hosting/elastic/oracle/terraform-output-activate-fixed.png){ .svg-img .dark-img }
         </figure>
 
 ## Activate Scale In
@@ -172,7 +172,7 @@ Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automat
 
     3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function, re-attach the autoscaling configuration to the Instance Pool, and flip the Master Node's `scale-in-mode` tag back to `elastic`.
         <figure markdown>
-        ![Terraform output activate scale in](../../../../assets/images/self-hosting/elastic/oracle/terraform-output-activate-scalein.png){ .svg-img .dark-img }
+        ![Terraform output activate scale in](../../../../assets/images/platform/self-hosting/elastic/oracle/terraform-output-activate-scalein.png){ .svg-img .dark-img }
         </figure>
 
 ## Administration and configuration
@@ -189,14 +189,14 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     2. Click the secret you want to change.
     3. Scroll down to _"Versions"_ and click _"Create secret version"_ to add a new version with the updated value.
             <figure markdown>
-            ![Create Secret Version](../../../../assets/images/self-hosting/shared/oracle-create-secret-version.png){ .svg-img .dark-img }
+            ![Create Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/create-secret-version.png){ .svg-img .dark-img }
             </figure>
     4. Enter the new secret value and click _"Create secret version"_.
             <figure markdown>
-            ![New Secret Version](../../../../assets/images/self-hosting/shared/oracle-new-secret-version.png){ .svg-img .dark-img }
+            ![New Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/new-secret-version.png){ .svg-img .dark-img }
             </figure>
     5. [Shut down](#shutting-down-the-cluster) and [start up](#starting-up-the-cluster) the cluster to apply the changes to the OpenVidu Elastic deployment.
 
     Changes will be applied automatically on all nodes of your OpenVidu Elastic deployment.
 
---8<-- "shared/self-hosting/oracle-backup-and-restore.md"
+--8<-- "shared/self-hosting/oracle/backup-and-restore.md"

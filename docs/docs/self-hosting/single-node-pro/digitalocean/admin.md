@@ -27,7 +27,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
     <figure markdown>
-    ![Stop droplet](../../../../assets/images/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .svg-img .dark-img }
+    ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .svg-img .dark-img }
     </figure>
 
 === "Start OpenVidu Single Node PRO"
@@ -37,7 +37,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
     <figure markdown>
-    ![Start droplet](../../../../assets/images/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .svg-img .dark-img }
+    ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .svg-img .dark-img }
     </figure>
 
 ## Change the droplet size
@@ -46,13 +46,13 @@ You can change the droplet size of the OpenVidu Single Node PRO to adapt it to y
 
 1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
 2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
-3. [Stop](#stop-openvidu-single-node) the droplet if it is not stopped.
+3. [Stop](#stop-openvidu-single-node-pro) the droplet if it is not stopped.
 4. Click on _"Upsize Droplet"_ and change the size, then click on _"Resize"_.
 
     === "Change droplet size"
 
         <figure markdown>
-        ![Change droplet size](../../../../assets/images/self-hosting/single-node/digitalocean/resize-droplet-pro.png){ .svg-img .dark-img }
+        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet-pro.png){ .svg-img .dark-img }
         </figure>
 
 ## Administration and configuration

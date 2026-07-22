@@ -267,9 +267,11 @@ p:has(> a.glightbox) {
 }
 
 .home-description {
-  font-size: 18px;
-  text-align: justify;
+  font-size: 1rem;
+  text-align: center;
   max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .home-buttons {
@@ -281,6 +283,42 @@ p:has(> a.glightbox) {
 .home-buttons a {
   margin: 0.5em 0.25em 0 0.25em;
   margin-left: 0.25em;
+}
+
+.home-under-cta {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.8em;
+}
+
+.home-under-cta a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.home-under-cta-sep {
+  margin: 0 0.5em;
+}
+
+.home-trust-line {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.home-trust-line a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Claim separator: slightly smaller gap than the comparison/tour line's
+   .home-under-cta-sep (whose surrounding whitespace adds to its margins). */
+.home-trust-line .home-sep {
+  margin: 0 0.45em;
+}
+
+.home-credentials-line {
+  margin-top: 0.5em;
 }
 
 .features-list:after {
@@ -371,7 +409,7 @@ p:has(> a.glightbox) {
   }
 
   .home-description {
-    font-size: 16px !important;
+    font-size: 0.9rem !important;
   }
 
   img.mkdocs-img {
@@ -726,16 +764,22 @@ div[data-md-component="outdated"] aside {
   user-select: none;
 }
 
-h1.logo-header {
+.logo-header {
   text-align: center;
   margin-bottom: 0.6em;
 }
 
+h1.meetplatform-slogan,
 h2.meetplatform-slogan {
   text-align: center;
   font-size: 1.6em;
   margin-top: 0;
   margin-bottom: 1.6em;
+}
+
+/* Match the h2 slogans' look: Material gives h1 a lighter color by default */
+h1.meetplatform-slogan {
+  color: var(--md-default-fg-color);
 }
 
 .md-header__button.md-logo {

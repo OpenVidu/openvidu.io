@@ -7,10 +7,10 @@ tags:
 
 # OpenVidu Elastic installation: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle-provider-chip.md"
+--8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 
---8<-- "shared/self-hosting/elastic-license-intro.md"
+--8<-- "shared/self-hosting/common/elastic-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
@@ -29,7 +29,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     The deployment architecture is as follows:
 
     <figure markdown>
-    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/self-hosting/elastic/oracle/elastic-oracle-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic Oracle Cloud Infrastructure Architecture</figcaption>
     </figure>
 
@@ -47,7 +47,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     - An **OCI Function** is deployed and triggered on a regular schedule. It polls the average CPU of the Instance Pool against **`scaleTargetCPU`** and never scales the pool below **`minNumberOfMediaNodes`**, and when a scale-in decision is made, the target Media Node is flagged as "draining" so it stops accepting new Rooms.
     - Each Media Node runs a `systemd` daemon that periodically checks whether the instance has been marked as "draining". If so, the graceful shutdown script is triggered, which waits for all active Rooms on that node to end before shutting the instance down.
 
---8<-- "shared/self-hosting/oracle-scalein-function-image.md"
+--8<-- "shared/self-hosting/oracle/scalein-function-image.md"
 
 ## Deployment details
 
@@ -63,12 +63,12 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
   <details>
     <summary>Information about parameters</summary>
 
---8<-- "shared/self-hosting/oracle-mandatory-params-pro.md"
+--8<-- "shared/self-hosting/oracle/mandatory-params-pro.md"
     <tr>
     <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
     <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See <a href="#publishing-the-scale-in-function-image">Publishing the scale-in function image</a>. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
---8<-- "shared/self-hosting/oracle-mandatory-params-pro-end.md"
+--8<-- "shared/self-hosting/oracle/mandatory-params-pro-end.md"
 
     <h4>Optional Parameters</h4>
 
@@ -231,12 +231,12 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the Master Node — if exposed, unauthorized users could gain access.
     <figure markdown>
-    ![SSH Key in bucket](../../../../assets/images/self-hosting/elastic/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
+    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/elastic/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
     </figure>
 
 5. Set the correct permissions on the SSH key so it can be used.
 
---8<-- "shared/self-hosting/oracle-singlenode-ssh-key-permissions.md"
+--8<-- "shared/self-hosting/oracle/ssh-key-permissions.md"
 
 ### Access OpenVidu
 
@@ -247,7 +247,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     2. Click the secret you want to view.
     3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
         <figure markdown>
-        ![View Secret](../../../../assets/images/self-hosting/shared/oracle-view-secret.png){ .svg-img .dark-img }
+        ![View Secret](../../../../assets/images/platform/self-hosting/shared/oracle/view-secret.png){ .svg-img .dark-img }
         </figure>
 
         !!! warning
@@ -275,11 +275,11 @@ To configure your OpenVidu application, you will need your OCI credentials. You 
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/oracle-credentials-general.md"
+--8<-- "shared/self-hosting/oracle/credentials-general.md"
 
 ### Troubleshooting initial Oracle Cloud Infrastructure deployment
 
---8<-- "shared/self-hosting/oracle-troubleshooting.md"
+--8<-- "shared/self-hosting/oracle/troubleshooting.md"
 
 3. If everything appears to be in order, check the [status](../on-premises/admin.md#checking-the-status-of-services) and [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services on the Master Node and Media Nodes.
 

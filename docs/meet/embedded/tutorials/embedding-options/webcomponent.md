@@ -22,7 +22,7 @@ At the end of this tutorial, you will have a fully functional simple video-call 
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
-The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-api.md) to create and delete rooms, and the [OpenVidu Meet WebComponent](../../../embedded/reference/webcomponent.md) to embed the video call interface directly into the application.
+The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to create and delete rooms, and the [OpenVidu Meet WebComponent](../../../embedded/reference/webcomponent.md) to embed the video call interface directly into the application.
 
 ## Running this tutorial
 
@@ -62,10 +62,10 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 

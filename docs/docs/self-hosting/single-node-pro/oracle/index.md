@@ -5,7 +5,7 @@ description: OpenVidu Single Node PRO deployment on Oracle Cloud Infrastructure
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-pro-tag">PRO</span> deployment on Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle-provider-chip.md"
+--8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 In this section you can install, administer and upgrade OpenVidu Single Node <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> on Oracle Cloud Infrastructure.
 

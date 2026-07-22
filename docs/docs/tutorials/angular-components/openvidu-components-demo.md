@@ -11,7 +11,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 
 <figure markdown>
-  ![OpenVidu Components Demo App](../../../assets/images/components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
+  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
   <figcaption>OpenVidu Components Demo App</figcaption>
 </figure>
 
@@ -25,11 +25,11 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 === "Deploy OpenVidu"
 
-    To use a production-ready OpenVidu deployment, visit the official [deployment guide](../self-hosting/deployment-types.md).
+    To use a production-ready OpenVidu deployment, visit the official [deployment guide](../../self-hosting/deployment-types.md).
 
     !!! info "Configure Webhooks"
 
-        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="\_blank"} section for more information.
+        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="\_blank"} section for more information.
 
 
 #### 2. Download the demo code
@@ -92,7 +92,7 @@ The OpenVidu Components Demo App architecture is divided into two main component
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
 <figure markdown>
-  ![OpenVidu Components Demo App Architecture](../../../assets/images/components/openvidu-demo-app-architecture.png){ loading=lazy .svg-img .mkdocs-img}
+  ![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy .svg-img .mkdocs-img}
   <figcaption>OpenVidu Components Demo App Architecture</figcaption>
 </figure>
 

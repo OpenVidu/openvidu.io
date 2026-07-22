@@ -76,9 +76,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../assets/images/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="../../../../assets/images/advanced-features/recording2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy"/></a></p></div>
 
 </div>
 

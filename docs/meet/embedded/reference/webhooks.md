@@ -9,13 +9,13 @@ OpenVidu Meet sends webhooks to inform about important events happening in a roo
 
 ## Reference
 
-Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingStartedWebhook){target="\_blank"} reference documentation for a complete list of all available webhook events. They include:
+Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){target="\_blank"} reference documentation for a complete list of all available webhook events. They include:
 
-- [`meetingStarted` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/meetingStartedWebhook){target="\_blank"}
-- [`meetingEnded` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/meetingEndedWebhook){target="\_blank"}
-- [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingStartedWebhook){target="\_blank"}
-- [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingUpdatedWebhook){target="\_blank"}
-- [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/webhooks/recordingEndedWebhook){target="\_blank"}
+- [`meetingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/meetingStartedWebhook){target="\_blank"}
+- [`meetingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/meetingEndedWebhook){target="\_blank"}
+- [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){target="\_blank"}
+- [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingUpdatedWebhook){target="\_blank"}
+- [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingEndedWebhook){target="\_blank"}
 
 ## Configuration
 
@@ -25,12 +25,12 @@ You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There yo
 - Set up your webhook endpoint URL
 - Test the current webhook configuration with a fake event
 
-<a class="glightbox" href="../../../../assets/images/meet/embedded/reference/webhook-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="../../../../assets/images/meet/embedded/reference/webhook-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../assets/images/meet/embedded/reference/webhook-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/reference/webhook-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/webhook-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/reference/webhook-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/webhook-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
 
 ## Validate events
 
-OpenVidu Meet signs all webhook events with [your API key](./rest-api.md#generate-an-api-key), so you can verify their authenticity. This way you can ensure that the events received by your application's backend are coming from your actual OpenVidu Meet deployment and have not been tampered with.
+OpenVidu Meet signs all webhook events with [your API key](rest-api.md#generate-an-api-key), so you can verify their authenticity. This way you can ensure that the events received by your application's backend are coming from your actual OpenVidu Meet deployment and have not been tampered with.
 
 Each webhook event includes two headers that you should use to validate the request:
 

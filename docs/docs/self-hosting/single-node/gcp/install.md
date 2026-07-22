@@ -23,24 +23,24 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/self-hosting/single-node/gcp/single-node-gcp-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node Google Cloud Platform Architecture</figcaption>
     </figure>
 
 ## Deployment details
 
---8<-- "shared/self-hosting/gcp-info-deployment.md"
+--8<-- "shared/self-hosting/gcp/info-deployment.md"
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
 <figure markdown>
-![Google Cloud Platform create new deployment](../../../../assets/images/self-hosting/shared/gcp-create-deployment.png){ .svg-img .dark-img }
+![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .svg-img .dark-img }
 </figure>
 
 Once you click the button, you will see this window.
 
 <figure markdown>
-![Google Cloud Platform create new deployment window](../../../../assets/images/self-hosting/shared/gcp-create-deployment-window.png){ .svg-img .dark-img }
+![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .svg-img .dark-img }
 </figure>
 
 * Fill **Deployment ID** with any name you prefer (for example, openvidu-singlenode-deployment).   
@@ -54,22 +54,22 @@ Once you click the button, you will see this window.
 ??? details "New Service Account Steps"
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/self-hosting/shared/gcp-create-service-account-1.png){ .svg-img .dark-img }
+    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .svg-img .dark-img }
     <figcaption>Step 1: Create Service Account</figcaption>
     </figure>
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/self-hosting/shared/gcp-create-service-account-2.png){ .svg-img .dark-img }
+    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .svg-img .dark-img }
     <figcaption>Step 2: Service Account Details</figcaption>
     </figure>
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/self-hosting/shared/gcp-create-service-account-3.png){ .svg-img .dark-img }
+    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .svg-img .dark-img }
     <figcaption>Step 3: Grant Permissions</figcaption>
     </figure>
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/self-hosting/shared/gcp-create-service-account-4.png){ .svg-img .dark-img }
+    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .svg-img .dark-img }
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
 
@@ -184,12 +184,12 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
 
     <figure markdown>
-    ![Google Cloud Platform input variables](../../../../assets/images/self-hosting/shared/gcp-input-variables.png){ .svg-img .dark-img }
+    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .svg-img .dark-img }
     </figure>
 
 ## Deploying the stack
 
---8<-- "shared/self-hosting/gcp-deploying-stack.md"
+--8<-- "shared/self-hosting/gcp/deploying-stack.md"
 
 ## Configure your application to use the deployment 
 
@@ -197,11 +197,11 @@ You need the secret outputs from Google Cloud Platform to configure your OpenVid
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/gcp-credentials-general.md"
+--8<-- "shared/self-hosting/gcp/credentials-general.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
---8<-- "shared/self-hosting/gcp-troubleshooting.md"
+--8<-- "shared/self-hosting/gcp/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

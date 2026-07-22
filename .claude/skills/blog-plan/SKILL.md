@@ -25,9 +25,10 @@ Extract these from the user's request. If any are missing, infer them and **stat
 
 ## Repo conventions this outline must respect
 
-Posts live in `docs/blog/posts/` as `YYYY-MM-DD-slug.md`. The outline should already choose:
+Posts live in `docs/blog/posts/<year>/<month>/<slug>.md`, matching their frontmatter `date`, with an asset folder `docs/assets/images/blog/<year>/<month>/<slug>/` mirroring that location. **Drafts** use the identical layout with the **literal placeholder `YYYY/MM`** as the year/month directories (plus a temporary creation date in the frontmatter) until publish. The outline should already choose:
 
-- **A slug** (kebab-case, keyword-bearing, e.g. `secure-home-video-conferencing`).
+- **A slug** (kebab-case, keyword-bearing, e.g. `secure-home-video-conferencing`) — it becomes the filename (`<slug>.md`), the asset-folder name, and the URL slug.
+- **A `description`** — a one-sentence, keyword-bearing SEO summary. It is **required** on every post (search snippets, `og:description`, JSON-LD), so propose it here.
 - **Categories** — MUST come from the allowed list in `mkdocs.yml` (`categories_allowed`): `Comparison`, `How-to`, `Research`, `Livekit`, `Technology`, `Vertical`, `Success story`, `Implementation`, `OpenVidu How-to`, `OpenVidu Meet`, `Openvidu Implementation`, `OpenVidu`, `OpenVidu comparison`, `OpenVidu Platform`, `Release`, `AI`. Pick 1–2.
 - **Tags** — free-form, 4–8, technical (e.g. `WebRTC`, `self-hosted`, `Security`, `TURN`, `React`).
 
@@ -72,7 +73,7 @@ Return exactly these sections, in order:
 1. **SEO Brief** — primary keyword, secondary keywords, search intent, target audience.
 2. **Article Type** — selected type + why it fits.
 3. **Title** — H1 (with char count), style used (standard/question/bracket), which optional recommendations were applied.
-4. **Frontmatter proposal** — proposed `slug`, `categories` (from the allowed list), `tags`, suggested `author` key.
+4. **Frontmatter proposal** — proposed `slug`, `description` (required, one sentence), `categories` (from the allowed list), `tags`, suggested `author` key.
 5. **Intro Plan** — hook angle, problem statement, promise of value; note where `<!-- more -->` goes.
 6. **Outline & Section Guide** — each H2 with its purpose + 3–5 talking points; H3s where useful; in logical order.
 7. **CTA** — stage, goal, exact CTA text, why it matches.

@@ -12,4 +12,4 @@ description: How to upgrade OpenVidu Single Node PRO deployments on-premises.
 </div>
 
 
---8<-- "shared/self-hosting/single-node/upgrade.md"
+--8<-- "shared/self-hosting/on-premises/single-node/upgrade.md"

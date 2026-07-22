@@ -23,7 +23,7 @@ The only required attribute is **`room-url`**, which determines the room to acce
 !!! info "A room URL is a room access link"
 	The **room URL** is simply a [room access link](../../features/rooms/access.md): the URL an individual opens to access a room. The role and identity a participant gets depend on **which** access link you use. This guide and most examples use the **anonymous** moderator/speaker links for simplicity, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for the full picture.
 
-	You can obtain a room's access links programmatically from your backend with the [REST API](./rest-api.md): the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](./api.html#/schemas/MeetRoom){:target="_blank"} object, or the unique `accessUrl` of an [identified-guest member](../../features/room-members/overview.md#users-vs-identified-guests).
+	You can obtain a room's access links programmatically from your backend with the [REST API](rest-api.md): the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](api.html#/schemas/MeetRoom){:target="_blank"} object, or the unique `accessUrl` of an [identified-guest member](../../features/room-members/overview.md#users-vs-identified-guests).
 
 ## API Reference
 
@@ -31,7 +31,7 @@ The only required attribute is **`room-url`**, which determines the room to acce
 
 Declare attributes in the component to customize the meeting for your user.
 
---8<-- "shared/meet/webcomponent-attributes.md"
+--8<-- "shared/meet/webcomponent/attributes.md"
 
 Example:
 
@@ -49,7 +49,7 @@ Example:
 
 The OpenVidu Meet component exposes a set of commands that allow you to control the room from your application's logic.
 
---8<-- "shared/meet/webcomponent-commands.md"
+--8<-- "shared/meet/webcomponent/commands.md"
 
 Invoke commands using JavaScript:
 
@@ -64,7 +64,7 @@ openviduMeet.leaveRoom();
 
 The OpenVidu Meet component emits events that you can listen to in your application.
 
---8<-- "shared/meet/webcomponent-events.md"
+--8<-- "shared/meet/webcomponent/events.md"
 
 
 Listen to events using JavaScript event listeners:

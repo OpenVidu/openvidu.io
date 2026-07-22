@@ -14,7 +14,7 @@ tags:
 </div>
 
 
---8<-- "shared/self-hosting/ha-license-intro.md"
+--8<-- "shared/self-hosting/common/ha-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on DigitalOcean. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but provisioned as DigitalOcean resources and automated using Terraform CLI.
 
@@ -32,7 +32,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/self-hosting/ha/digitalocean/ha-do-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability DigitalOcean Architecture</figcaption>
     </figure>
 
@@ -44,7 +44,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
 
 
---8<-- "shared/self-hosting/do-custom-scale-in.md"
+--8<-- "shared/self-hosting/digitalocean/custom-scale-in.md"
 
 ## Deployment details
 1. Clone the OpenVidu repository with the terraform files:
@@ -226,7 +226,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
     <figure markdown>
-    ![SSH Key in Bucket](../../../../assets/images/self-hosting/ha/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
+    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/ha/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
     </figure>
 
 2. Give the SSH Key the necessary permissions for it to work.
@@ -251,7 +251,7 @@ To verify that your OpenVidu deployment works correctly wait for the `secrets.en
 === "View OpenVidu credentials in the Web"
     - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
     <figure markdown>
-    ![Secrets.env in Bucket](../../../../assets/images/self-hosting/ha/digitalocean/secrets-env.png){ .svg-img .dark-img }
+    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/ha/digitalocean/secrets-env.png){ .svg-img .dark-img }
     </figure>
 
 
@@ -272,12 +272,12 @@ You may need your Digital Ocean credentials to configure your OpenVidu applicati
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/do-credentials-general.md"
---8<-- "shared/self-hosting/do-credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/digitalocean/credentials-general.md"
+--8<-- "shared/self-hosting/digitalocean/credentials-v2compatibility.md"
 
 ### Troubleshooting initial DigitalOcean deployment creation
 
---8<-- "shared/self-hosting/do-troubleshooting.md"
+--8<-- "shared/self-hosting/digitalocean/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

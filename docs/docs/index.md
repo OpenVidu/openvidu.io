@@ -3,16 +3,14 @@ title: OpenVidu Platform
 description: Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, AI, live streaming and robotics.
 ---
 
-<div>
-<h1 class="logo-header platform-header">
-<img src="../assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable">
-<img src="../assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable">
-</h1>
+<div class="logo-header platform-header">
+<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable" alt="">
+<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable" alt="">
 </div>
 
-<h2 class="meetplatform-slogan">
-Build your real-time application with complete freedom using SDKs
-</h2>
+<h1 class="meetplatform-slogan">
+OpenVidu Platform: self-hosted WebRTC SDKs for real-time apps
+</h1>
 
 ## What is OpenVidu Platform?
 
@@ -20,13 +18,44 @@ OpenVidu Platform enables you to build real-time applications. You can build you
 
 OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live-streaming events, management and processing of drones and camera feeds...
 
-OpenVidu is built on the best open source technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io){target="\_blank"}, from which it inherits all its amazing SDKs to integrate it into your front-end and back-end applications, and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org){target="\_blank"}, from which it inherits the best performance and optimization for media routing.
+OpenVidu gives you **LiveKit-compatible client and server SDKs** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
 <figure markdown>
-  ![OpenVidu vs LiveKit](../assets/images/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .do-not-include-in-gallery }
-  ![OpenVidu vs LiveKit](../assets/images/openvidu-stack-light.svg#only-light){ .mkdocs-img .do-not-include-in-gallery }
+  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .do-not-include-in-gallery }
+  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .do-not-include-in-gallery }
   <figcaption style="max-width: 27rem">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</figcaption>
 </figure>
+
+## Your first lines of code
+
+Real-time video in your app takes a few lines with the LiveKit-compatible SDKs:
+
+=== "Application client (browser)"
+
+    ```javascript
+    import { Room } from "livekit-client";
+
+    const room = new Room();
+    await room.connect("wss://your-openvidu-deployment", token);
+    await room.localParticipant.enableCameraAndMicrophone();
+    ```
+
+=== "Application server (Node)"
+
+    ```javascript
+    import { AccessToken } from "livekit-server-sdk";
+
+    const token = new AccessToken(API_KEY, API_SECRET, { identity: "user-1" });
+    token.addGrant({ roomJoin: true, room: "my-room" });
+    return await token.toJwt();
+    ```
+
+<div style="text-align: center; margin: 2em 0;" markdown>
+
+[Start with a tutorial](./tutorials/application-server/index.md){ .md-button .md-button--primary }
+[How to develop your OpenVidu app](./developing-your-openvidu-app/index.md){ .md-button }
+
+</div>
 
 ## Use cases
 
@@ -37,7 +66,7 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu videoconference use case" src="../../assets/images/getting-started/videoconference.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" />
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -52,7 +81,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 </div>
 
 !!! info
-    If your use case actually fits into the video conferencing category, [**OpenVidu Meet** :fontawesome-solid-external-link:{.external-link-icon}](../meet/index.md){:target="_blank" .meet-link-color} may be the perfect solution for you. Give it a try!
+    If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](../meet/index.md){.meet-link-color} may be the perfect solution for you. Give it a try!
 
 ### Live-streaming
 
@@ -69,7 +98,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="../../assets/images/getting-started/livestream.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" />
 </div>
 
 </div>
@@ -79,11 +108,11 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-40 tablet-grid-40">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="../../assets/images/getting-started/ai-agents.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" />
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
-AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your in application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
+AI has changed the world, forever. OpenVidu can be used to integrate any kind of AI agent in your application, using real-time audio/video/data tracks as inputs for LLMs or any other kind of AI model. With these capabilities, you can expand your application to new horizons:
 
 - Implement **real-time subtitles, translations, word-detection, sentiment analysis, profanity filter**, etc. in your video conferences.
 - Add a **summary generator** to your video conference app, that can extract the most important parts of the conversation to be shared with the participants.
@@ -107,14 +136,14 @@ The future lies in the integration of cameras and sensors in all kinds of device
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="../../assets/images/getting-started/robotics.svg" />
+<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" />
 </div>
 
 </div>
 
 ## OpenVidu application architecture
 
-![OpenVidu app architecture](../assets/images/getting-started/openvidu-app-architecture.drawio.svg)
+![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg)
 
 Every OpenVidu application consists of 3 main components:
 
@@ -142,14 +171,14 @@ With these three concepts you can build any kind of real-time application you ca
 
 <div class="grid-45 tablet-grid-45" markdown>
 <figure markdown>
-  ![Basic concepts](../assets/images/getting-started/basic-concepts-1.svg){.basic-concepts-img-1}
+  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){.basic-concepts-img-1}
   <figcaption style="margin-top: 3em">Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" and "Mic" and is receiving Track "Screen" from "Bob". "Bob" is publishing Track "Screen" and receiving Tracks "Webcam" and "Mic" from "Alice".</figcaption>
 </figure>
 </div>
 
 <div class="grid-55 tablet-grid-55" markdown>
 <figure markdown>
-  ![Basic concepts](../assets/images/getting-started/basic-concepts-2.svg){.basic-concepts-img-2}
+  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){.basic-concepts-img-2}
    <figcaption>Room "Remote support" has 3 Participants: Participant "Dan" is not publishing any Track, but receiving all Tracks in the Room. Participant "Erin" is only receiving Track "Mic" from Participant "Carol", but not Track "Screen".</figcaption>
 </figure>
 </div>
@@ -158,7 +187,7 @@ With these three concepts you can build any kind of real-time application you ca
 
 ### Other concepts
 
-Apart from these basic building blocks, there are other concepts that will be tipically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
+Apart from these basic building blocks, there are other concepts that will be typically used in your OpenVidu application. All of them are just special types of [Participants](#participant) that connect to Rooms to perform specific tasks:
 
 - **Egress**: a process that exports media out of a Room. It is a special type of Participant that only subscribes to Tracks. It allows recording tracks to a file or streaming them to an external destination (via HLS or RTMP).
 - **Ingress**: a process that imports media into a Room. It is a special type of Participant that only publishes Tracks. It allows bringing external media sources into a Room, such as an MP4 file, an IP camera or a RTMP stream.
@@ -180,3 +209,10 @@ OpenVidu is available in two editions:
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br><span class="openvidu-tag openvidu-pro-tag">PRO</span> Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
 | **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="no-break">N Media Nodes</span> | 4 Master Nodes +<br><span class="no-break">N Media Nodes</span> |
 | **Installation instructions** | [Install](./self-hosting/local.md){ .md-button } | [Install](./self-hosting/single-node/index.md){ .md-button } | [Install](./self-hosting/elastic/index.md){ .md-button } | [Install](./self-hosting/ha/index.md){ .md-button } |
+
+<div style="text-align: center; margin: 3em 0;" markdown>
+
+[Build your first app — tutorials in 8 languages](./tutorials/application-server/index.md){ .md-button .md-button--primary }
+[Run OpenVidu locally](./self-hosting/local.md){ .md-button }
+
+</div>

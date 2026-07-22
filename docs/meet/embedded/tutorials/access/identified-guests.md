@@ -20,7 +20,7 @@ Building on the Anonymous Access tutorial, it keeps the shared anonymous access 
 - List and remove the members of a room, revoking their access.
 - Access the room through a guest's unique link, with no login required.
 
-The application uses the [OpenVidu Meet API](../../../embedded/reference/rest-api.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](../../reference/webcomponent.md) to embed the meeting.
+The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](../../reference/webcomponent.md) to embed the meeting.
 
 !!! info "Anonymous guests vs. explicit members"
 
@@ -64,9 +64,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/identified-guests/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/identified-guests/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/identified-guests/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/identified-guests/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="../../../../../assets/images/meet/embedded/tutorials/identified-guests/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="../../../../../assets/images/meet/embedded/tutorials/identified-guests/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/identified-guests/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/identified-guests/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
 
 </div>
 
@@ -126,7 +126,7 @@ This endpoint adds the identified guest by sending a `POST` request to the `room
 
 !!! info
 
-    You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation :fontawesome-solid-external-link:{.external-link-icon}](../../../embedded/reference/api.html#/operations/addRoomMember){:target="\_blank"} in the REST API reference for the full list of permissions.
+    You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/addRoomMember){:target="\_blank"} in the REST API reference for the full list of permissions.
 
 ---
 

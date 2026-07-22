@@ -22,7 +22,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     This is what the architecture of the deployment looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node On Premises Architecture with External Proxy</figcaption>
     </figure>
 
@@ -129,18 +129,18 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Notes:
 
     - Replace `openvidu.example.io` with your FQDN.
     - Replace `turn.example.io` with your TURN server FQDN.
-    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](/account/){:target="_blank"}.
+    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](../../../account.md){:target="_blank"}.
     - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     **4. Configure the external proxy**
 
-    --8<-- "shared/self-hosting/proxy-nginx-advanced.md"
+    --8<-- "shared/self-hosting/common/proxy-nginx-advanced.md"
 
     Notes:
 
@@ -158,7 +158,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     This is what the architecture of the deployment looks like:
 
     <figure markdown>
-    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic On Premises Architecture with External Proxy</figcaption>
     </figure>
 
@@ -263,11 +263,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         Notes:
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../account.md){:target="_blank"}.
         - Replace `openvidu.example.io` with your FQDN.
         - Replace `turn.example.io` with your TURN server FQDN.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
@@ -285,14 +285,14 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --redis-password='xxxxx'
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         - The `--master-node-private-ip` is the private IP of the Master Node. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
         - The `--redis-password` is the password used to connect to the Redis service. Replace `xxxxx` with the same password used in the Master Node installation.
 
     **4. Configure the external proxy**
 
-    --8<-- "shared/self-hosting/proxy-nginx-advanced-elastic.md"
+    --8<-- "shared/self-hosting/common/proxy-nginx-advanced-elastic.md"
 
     Notes:
 

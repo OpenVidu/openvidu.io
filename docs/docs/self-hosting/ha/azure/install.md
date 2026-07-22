@@ -13,7 +13,7 @@ description: Learn how to deploy OpenVidu High Availability on Azure using Templ
 
 
 
---8<-- "shared/self-hosting/ha-license-intro.md"
+--8<-- "shared/self-hosting/common/ha-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Azure. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Azure resources and automated through an ARM Template Spec.
 
@@ -28,7 +28,7 @@ This is what the deployment architecture looks like:
 === "Architecture overview"
 
     <figure markdown>
-    ![OpenVidu High Availability Azure Architecture](../../../../assets/images/self-hosting/ha/azure/ha-azure-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability Azure Architecture](../../../../assets/images/platform/self-hosting/ha/azure/ha-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability Azure Architecture</figcaption>
     </figure>
 
@@ -38,17 +38,17 @@ This is what the deployment architecture looks like:
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Virtual Machine Scale Set (VMSS) of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
---8<-- "shared/self-hosting/azure-custom-scale-in.md"
+--8<-- "shared/self-hosting/azure/custom-scale-in.md"
 
 ## Template Parameters
 
 To deploy the template, you need to fill in the following parameters.
 
---8<-- "shared/self-hosting/azure-resource-group-stack-name.md"
+--8<-- "shared/self-hosting/azure/resource-group-stack-name.md"
 
---8<-- "shared/self-hosting/azure-ssl-domain.md"
+--8<-- "shared/self-hosting/azure/ssl-domain.md"
 
---8<-- "shared/self-hosting/azure-meet.md"
+--8<-- "shared/self-hosting/azure/meet.md"
 
 ### OpenVidu HA Configuration
 
@@ -59,10 +59,10 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
     Parameters of this section look like this:
 
     <figure markdown>
-    ![OpenVidu HA Configuration](../../../../assets/images/self-hosting/ha/azure/openvidu-ha-config.png){ .svg-img .dark-img }
+    ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/azure/openvidu-ha-config.png){ .svg-img .dark-img }
     </figure>
 
-    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](/account/){:target=_blank}.
+    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target=_blank}.
 
     For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
@@ -75,7 +75,7 @@ You need to specify some properties for the Azure instances that will be created
     Parameters in this section look like this:
 
     <figure markdown>
-    ![Azure Instance configuration](../../../../assets/images/self-hosting/ha/azure/azure-instance-config.png){ .svg-img .dark-img }
+    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/ha/azure/instance-config.png){ .svg-img .dark-img }
     </figure>
 
     Simply select the type of instance you want for your Master Nodes in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
@@ -84,13 +84,13 @@ You need to specify some properties for the Azure instances that will be created
 
 The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
 
---8<-- "shared/self-hosting/media-nodes-azure-asg-config.md"
+--8<-- "shared/self-hosting/azure/media-nodes-asg-config.md"
 
---8<-- "shared/self-hosting/azure-scale-in-config.md"
+--8<-- "shared/self-hosting/azure/scale-in-config.md"
 
---8<-- "shared/self-hosting/azure-storageaccount.md"
+--8<-- "shared/self-hosting/azure/storage-account.md"
 
---8<-- "shared/self-hosting/azure-additional-flags.md"
+--8<-- "shared/self-hosting/azure/additional-flags.md"
 
 ## Deploying the stack
 
@@ -111,19 +111,19 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
         <figure markdown>
-        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
 
     3. Click the secret you want to inspect, then click the current version of that secret.
 
         <figure markdown>
-        ![Azure Key Vault Secret Version](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-version.png){ .svg-img .dark-img }
+        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .svg-img .dark-img }
         </figure>
 
     4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
         <figure markdown>
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
+        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .svg-img .dark-img }
         </figure>
 
 === "Check deployment outputs in the instance"
@@ -133,17 +133,17 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     1. Go to the resource group where you deployed OpenVidu High Availability and click one of the Master Node virtual machines.
     2. Inside the Virtual Machine resource, click on _"Connect"_ 🡒 _"Connect via Bastion"_.
         <figure markdown>
-            ![Connect via bastion](../../../../assets/images/self-hosting/ha/azure/azure-connect-bastion.png){ .svg-img .dark-img }
+            ![Connect via bastion](../../../../assets/images/platform/self-hosting/ha/azure/connect-bastion.png){ .svg-img .dark-img }
         </figure>
 
     3. Click on _"Deploy Bastion"_ button.
         <figure markdown>
-            ![Deploy bastion](../../../../assets/images/self-hosting/ha/azure/azure-bastion-deploy.png){ .svg-img .dark-img }
+            ![Deploy bastion](../../../../assets/images/platform/self-hosting/ha/azure/bastion-deploy.png){ .svg-img .dark-img }
         </figure>
 
     4. Change **Authentication Type** to _"SSH Private Key from Local File"_, set the same username used when you deployed OpenVidu, and select the local file corresponding to the SSH Private Key of the SSH Key used when deploying.
         <figure markdown>
-            ![Bastion parameters](../../../../assets/images/self-hosting/ha/azure/azure-bastion-parameters.png){ .svg-img .dark-img }
+            ![Bastion parameters](../../../../assets/images/platform/self-hosting/ha/azure/bastion-parameters.png){ .svg-img .dark-img }
         </figure>
 
     5. Click on connect and you will be inside the Virtual Machine of the Master Node. This process works the same way for any of the Master Nodes.
@@ -163,8 +163,8 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/azure-credentials-general.md"
---8<-- "shared/self-hosting/azure-credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/azure/credentials-general.md"
+--8<-- "shared/self-hosting/azure/credentials-v2compatibility.md"
 
 ## Troubleshooting initial Azure stack creation
 
@@ -172,7 +172,7 @@ Your authentication credentials and the URL to point your applications to are:
 
     If you need to connect through SSH to a Master Node check [Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance).
 
---8<-- "shared/self-hosting/azure-troubleshooting.md"
+--8<-- "shared/self-hosting/azure/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

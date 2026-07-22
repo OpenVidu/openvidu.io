@@ -19,7 +19,7 @@ First of all, and perhaps the most obvious question, how does OpenVidu differ fr
 - OpenVidu is a **production-ready self-hosted solution**. It offers an easy deployment process to self-host a high performance, fault-tolerant, scalable and observable cluster. OpenVidu provides an interactive installer that manages all the complexities, so you can quickly host a production deployment that would otherwise require advanced DevOps/SRE expertise.
 - OpenVidu is a **support team** for self-hosted deployments. The OpenVidu team is made up of real-time experts with over a decade of experience in the field. We specialize in customer support and are always ready to help you bring your ideas to life.
 
-<a class="glightbox" href="../../assets/images/openvidu-vs-livekit.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="../../assets/images/openvidu-vs-livekit.svg" loading="lazy" class="mkdocs-img"/></a>
+<a class="glightbox" href="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" loading="lazy" class="mkdocs-img"/></a>
 /// caption
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your cluster.
 ///
@@ -86,4 +86,4 @@ OpenVidu uses mediasoup internally to transmit media streams. We have embedded m
 
 All these well-known video conferencing tools are final applications that provide little to no customization at all. They are proprietary, closed-source apps designed to be used as-is, and they are not intended to be integrated into other systems.
 
-OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](getting-started.md#use-cases) for some examples of what you can build with OpenVidu.
+OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](index.md#use-cases) for some examples of what you can build with OpenVidu.

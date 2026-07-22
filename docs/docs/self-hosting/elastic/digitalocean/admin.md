@@ -27,12 +27,12 @@ The Master Node is a Droplet instance, while the Media Nodes are part of a Dropl
     1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
         <figure markdown>
-        ![Edit Button Location Autoscale Pool](../../../../assets/images/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
+        ![Edit Button Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
         </figure>
     3. Drop down the **Number of Droplets** to 0, click _"Save"_ and wait for it to apply the changes.
     4. After confirming that all Media Node instances are terminated, in the _"Droplets"_ tab select the droplet called `<STACK_NAME>-master-node`. Click on it to go to the Master Node instance, there click on _"Power"_ and then _"Turn off"_ the droplet.
         <figure markdown>
-        ![Turn Off Master Node](../../../../assets/images/self-hosting/elastic/digitalocean/turn-off-master-node.png){ .svg-img .dark-img }
+        ![Turn Off Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-off-master-node.png){ .svg-img .dark-img }
         </figure>    
 
 
@@ -43,12 +43,12 @@ The Master Node is a Droplet instance, while the Media Nodes are part of a Dropl
     1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank}.
     2. Select the droplet named `<STACK_NAME>-master-node`, then go to _"Power"_ and then _"Turn on"_ the droplet.
         <figure markdown>
-        ![Turn on Master Node](../../../../assets/images/self-hosting/elastic/digitalocean/turn-on-master-node.png){ .svg-img .dark-img }
+        ![Turn on Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-on-master-node.png){ .svg-img .dark-img }
         </figure>
     3. Wait until the instance is running.
     4. Go back to the _"Autoscale Pools"_ tab, and there click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool` go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
         <figure markdown>
-        ![Edit Button Location Autoscale Pool](../../../../assets/images/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
+        ![Edit Button Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
         </figure>
     5. Change the number to the number of media nodes you want and click _"Save"_, then wait for the change to be applied.
 
@@ -70,7 +70,7 @@ It is possible to change the instance size of both the Master Node and the Media
     2. Go to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click on _"Upsize"_ and select the Droplet size you desire and click on _"Resize"_
         <figure markdown>
-        ![Change droplet size master](../../../../assets/images/self-hosting/elastic/digitalocean/resize-master-node.png){ .svg-img .dark-img }
+        ![Change droplet size master](../../../../assets/images/platform/self-hosting/elastic/digitalocean/resize-master-node.png){ .svg-img .dark-img }
         </figure>
     4. [Start the cluster](#starting-up-the-cluster).
 
@@ -82,11 +82,11 @@ It is possible to change the instance size of both the Master Node and the Media
     1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Droplet Configuration**.
         <figure markdown>
-        ![Edit Droplet Configuration Location Autoscale Pool](../../../../assets/images/self-hosting/elastic/digitalocean/edit-configuration-media-node.png){ .svg-img .dark-img }
+        ![Edit Droplet Configuration Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-configuration-media-node.png){ .svg-img .dark-img }
         </figure>
     3. Scroll down to the **Choose a Droplet Plan** section and change the size to the one you prefer, then click on _"Edit Autoscale Pool"_ and wait for the changes to apply.
         <figure markdown>
-        ![Edit Autoscale Pool](../../../../assets/images/self-hosting/shared/do-edit-autoscale-pool.png){ .svg-img .dark-img }
+        ![Edit Autoscale Pool](../../../../assets/images/platform/self-hosting/shared/digitalocean/edit-autoscale-pool.png){ .svg-img .dark-img }
         </figure>
 
 ## Media Nodes Autoscaling Configuration
@@ -106,7 +106,7 @@ You can modify the autoscaling configuration of the Media Nodes via `terraform.t
     ```
     3. Confirm the change that Terraform proposes (it will redeploy the autoscale function with the new values), and the changes will take effect.
         <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-autoscale-change.png){ .svg-img .dark-img }
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-autoscale-change.png){ .svg-img .dark-img }
         </figure>
 
 ## Change Fixed Number of Media Nodes
@@ -118,7 +118,7 @@ You can change the fixed number of Media Nodes **in case you put a number of fix
     1. Go to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
         <figure markdown>
-        ![Edit Button Location Autoscale Pool](../../../../assets/images/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
+        ![Edit Button Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
         </figure>
     3. Change the number to the desired value and click _"Save"_, then wait for the Autoscale Pool to apply the changes.
     !!! warning
@@ -143,7 +143,7 @@ You can activate or deactivate the scale in when you decide you need autoscale o
     ```
     3. Confirm the change that Terraform proposes (it will destroy the fixed media nodes and deploy the scale-in function), and the changes will take effect.
         <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-activate-scalein.png){ .svg-img .dark-img }
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-activate-scalein.png){ .svg-img .dark-img }
         </figure>
 
 === "Deactivate Scale In"
@@ -157,7 +157,7 @@ You can activate or deactivate the scale in when you decide you need autoscale o
     ```
     3. Confirm the change that Terraform proposes (it will destroy the scale-in function and all media nodes, then deploy the fixed media nodes pool), and the changes will take effect.
         <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/self-hosting/shared/do-terraform-output-deactivate-scalein.png){ .svg-img .dark-img }
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-deactivate-scalein.png){ .svg-img .dark-img }
         </figure>
 
 ## Administration and configuration
@@ -173,15 +173,15 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
     1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target=_blank} and click on the bucket that you are using for the deployment.
     2. Download the `secrets.env` file that is in the bucket.
         <figure markdown>
-        ![Secrets.env download](../../../../assets/images/self-hosting/elastic/digitalocean/download-secrets-env.png){ .svg-img .dark-img }
+        ![Secrets.env download](../../../../assets/images/platform/self-hosting/elastic/digitalocean/download-secrets-env.png){ .svg-img .dark-img }
         </figure>
     3. Open it and edit the values of the credential of your choice.
     4. Upload the edited `secrets.env` to the bucket, select private file and replace it.
         <figure markdown>
-        ![Secrets.env upload](../../../../assets/images/self-hosting/elastic/digitalocean/upload-secrets-env.png){ .svg-img .dark-img }
+        ![Secrets.env upload](../../../../assets/images/platform/self-hosting/elastic/digitalocean/upload-secrets-env.png){ .svg-img .dark-img }
         </figure>
         <figure markdown>
-        ![Secrets.env replace](../../../../assets/images/self-hosting/elastic/digitalocean/replace-secrets-env.png){ .svg-img .dark-img }
+        ![Secrets.env replace](../../../../assets/images/platform/self-hosting/elastic/digitalocean/replace-secrets-env.png){ .svg-img .dark-img }
         </figure>
     5. Restart Master Node by shutting it down and then starting it again. Changes will be applied automatically.
 

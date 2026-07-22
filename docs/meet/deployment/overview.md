@@ -9,7 +9,7 @@ description: OpenVidu offers a self-hosted, production-ready live-video platform
 
 OpenVidu Meet is designed to be **self-hosted**, whether it is on premises or in a cloud provider. It brings to your own managed service advanced capabilities usually reserved only for SaaS solutions. There are two main reasons why you may need to self-host the real-time solution yourself:
 
---8<-- "shared/self-hosting/production-ready.md"
+--8<-- "shared/self-hosting/common/production-ready.md"
 
 ## OpenVidu Meet editions
 
@@ -25,7 +25,7 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](../../pricing.md) for more details.
 
 !!! info
     Different OpenVidu [deployment types](#deployment-types) support different editions.

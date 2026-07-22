@@ -14,7 +14,7 @@ description: Learn how to deploy OpenVidu Elastic on-premises
 
 !!! info
     
-    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](/account/){:target="_blank"} to get your license key.
+    OpenVidu Elastic is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to workload.
@@ -24,7 +24,7 @@ This section contains instructions for deploying a production-ready OpenVidu Ela
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Elastic On Premises](../../../../assets/images/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic On Premises</figcaption>
     </figure>
 
@@ -126,7 +126,7 @@ docker run --pull always --rm -it \
     --deployment-type=elastic
 ```
 
---8<-- "shared/self-hosting/install-version.md"
+--8<-- "shared/self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -134,7 +134,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 !!! info
     
-    If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+    If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
 - **Domain name** (Optional): The domain name for your deployment. If left empty, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it. For production environments, it's recommended to provide your own FQDN.
 - **Select which certificate type to use**:
     - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
@@ -166,7 +166,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command in your Master Node to install it. When the installation process finishes, you will see the following output:
 
@@ -196,7 +196,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -235,8 +235,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/credentials-general.md"
---8<-- "shared/self-hosting/credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/on-premises/credentials-general.md"
+--8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -279,9 +279,9 @@ Each installation command for each type of node looks like this:
                 --certificate-type='letsencrypt'
             ```
 
-            --8<-- "shared/self-hosting/install-version.md"
+            --8<-- "shared/self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
             - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -314,9 +314,9 @@ Each installation command for each type of node looks like this:
                 --certificate-type='selfsigned'
             ```
 
-            --8<-- "shared/self-hosting/install-version.md"
+            --8<-- "shared/self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
             - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -354,11 +354,11 @@ Each installation command for each type of node looks like this:
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         Notes:
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -392,9 +392,9 @@ Each installation command for each type of node looks like this:
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -433,10 +433,10 @@ Each installation command for each type of node looks like this:
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "shared/self-hosting/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -452,7 +452,7 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "shared/self-hosting/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     - The `--master-node-private-ip` is the private IP of the Master Node. Media Nodes should be able to reach the Master Node using this IP.
     - The `--redis-password` is the password defined in the Master Node installation. It is used to connect to the Redis service in the Master Node and register itself as a Media Node in the cluster.

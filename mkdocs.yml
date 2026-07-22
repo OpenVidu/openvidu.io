@@ -1,6 +1,6 @@
 site_name: OpenVidu
 site_url: https://openvidu.io/
-site_description: From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
+site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
@@ -301,12 +301,37 @@ nav:
       - research.md
 
 
+# Pages intentionally excluded from the nav (reached via direct links, not browsable
+# through the navigation). Listed here so validation.nav.omitted_files can stay at "warn"
+# and still flag genuinely-forgotten pages, while these known ones produce no warning.
+not_in_nav: |
+  /account.md
+  /acknowledgments.md
+  /openvidu-meet-vs-openvidu-platform.md
+  /conditions/
+  /docs/getting-started.md
+
 validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: warn
   links:
+    not_found: warn
+    # Absolute Markdown links (starting with "/") are resolved relative to docs_dir,
+    # validated, and rewritten to relative URLs at build time. This form is what shared
+    # snippets use for their links and images: snippets are included in pages at different
+    # hierarchy levels, so relative paths would break. Regular pages use relative links
+    # (editor-navigable); see README "Link rules".
     absolute_links: relative_to_docs
-  omitted_files: warn
-  absolute_links: warn
-  unrecognized_links: warn
+    unrecognized_links: warn
+    # Kept at "info" (NOT "warn") on purpose. pymdownx.tabbed generates id anchors for tab
+    # labels via its slugify option, but MkDocs's anchor validator runs before that extension
+    # and cannot see those ids, so every link to a tab anchor is reported as a false-positive
+    # "no such anchor" message. Raising this to "warn" would emit ~110+ false warnings and
+    # break `mkdocs build --strict`. INFO messages do not fail --strict, so real broken
+    # anchors still surface in the log without blocking the build.
+    anchors: info
 
 theme:
   name: material
@@ -350,8 +375,8 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-  favicon: assets/images/logo.png
-  logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
+  favicon: assets/images/logos/logo.png
+  logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
 plugins:
   - meta
@@ -379,7 +404,17 @@ plugins:
         - OpenVidu Platform
         - Release
         - AI
-  - privacy
+  # The CI env var selects the build profile via three states:
+  #   • unset   -> local `mkdocs serve` / `build`
+  #   • "false" -> lightweight link-validation build (validate-web.yaml sets this)
+  #   • "true"  -> real publish build (GitHub Actions sets CI=true automatically)
+  #
+  # privacy (self-hosts external assets): runs locally AND in publish; skipped only in the
+  # validation build. Default true, so it is on unless CI is explicitly "false".
+  # optimize (image compression, needs the imaging stack): runs ONLY in publish. Default
+  # false, so it is off both locally and in validation, on only when CI is "true".
+  - privacy:
+      enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
   - glightbox:
@@ -401,7 +436,7 @@ plugins:
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
-      image: assets/images/openvidu_vert_white_bg_trans_cropped2.png
+      image: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
         - tags
@@ -411,12 +446,24 @@ plugins:
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
-        - blog/*.md: OpenVidu Blog
-        - support.md: Support options for OpenVidu Meet and OpenVidu Platform
-        - pricing.md: Pricing models for OpenVidu Meet and OpenVidu Platform
+        - support.md: Support options for OpenVidu
+        - pricing.md: Pricing models for OpenVidu
         - about-us.md: The people behind OpenVidu
         - research.md: Research publications on real-time communications in peer-reviewed journals
         - openvidu-meet-vs-openvidu-platform.md: What to choose, OpenVidu Meet or OpenVidu Platform?
+        - blog/index.md: OpenVidu Blog — articles on self-hosted videoconferencing, WebRTC development, benchmarks and product news
+        - blog/posts/2026/04/how-client-networks-affect-qoe-and-costs.md: How client networks affect WebRTC quality of experience and server infrastructure costs
+        - blog/posts/2026/05/5-react-video-call-platforms.md: 5 React video call platforms in 2026 compared — SaaS vs self-hosted
+        - blog/posts/2026/05/scale-in-problem-in-videoconferences.md: The scale-in problem in videoconferencing — safely draining media servers with active meetings
+        - blog/posts/2026/06/scalability-in-videoconferencing-systems.md: Scaling video conferencing from a single node to an elastic media plane and high-availability control plane
+        - blog/posts/2026/06/turn-key-considerations.md: TURN in production WebRTC — connectivity resilience and security considerations
+        - blog/posts/2026/06/meet-vs-platform.md: OpenVidu Meet vs OpenVidu Platform — choosing the right level of abstraction for self-hosted WebRTC
+        - blog/posts/2026/06/5-conversational-ai-app-ideas.md: 5 conversational AI app ideas and the real-time voice and vision pipeline behind them
+        - blog/posts/2026/06/secure-home-video-conferencing.md: Host your own private video conferencing server at home with OpenVidu Meet
+        - blog/posts/2026/07/deploy-and-scale-in-times-across-clouds.md: Deployment time benchmarks for a self-hosted WebRTC platform across AWS, Azure, GCP, Oracle and DigitalOcean
+        - blog/posts/2026/07/release-380.md: OpenVidu 3.8.0 release notes — user accounts, RBAC, mediasoup overhaul and TURN security
+        - blog/posts/2026/07/video-conferencing-permissions.md: Managing permissions in video conferencing apps — anonymous, identified guest and user access models
+        - blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md: Building a video-enabled CRM with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained per-guest room permissions
         OpenVidu Meet:
         - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
         - meet/releases.md: OpenVidu Meet - Release notes

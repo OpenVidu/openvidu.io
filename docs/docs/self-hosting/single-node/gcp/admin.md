@@ -27,7 +27,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
-    ![Stop instance](../../../../assets/images/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img }
+    ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img }
     </figure>
 
 === "Start OpenVidu Single Node"
@@ -37,7 +37,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
     <figure markdown>
-    ![Start instance](../../../../assets/images/self-hosting/single-node/gcp/start-instance.png){ .svg-img .dark-img }
+    ![Start instance](../../../../assets/images/platform/self-hosting/single-node/gcp/start-instance.png){ .svg-img .dark-img }
     </figure>
 
 ## Change the instance type
@@ -52,7 +52,7 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
     === "Change instance type"
 
         <figure markdown>
-        ![Change instance type](../../../../assets/images/self-hosting/single-node/gcp/gcp-instance-type.png){ .svg-img .dark-img }
+        ![Change instance type](../../../../assets/images/platform/self-hosting/single-node/gcp/instance-type.png){ .svg-img .dark-img }
         </figure>
 
 5. Select the new instance type and click on _"Save"_.
@@ -70,11 +70,11 @@ In addition to these, a Google Cloud Platform deployment provides the capability
     1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target=_blank} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
         <figure markdown>
-        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/self-hosting/shared/gcp-secrets-new-version.png){ .svg-img .dark-img }
+        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .svg-img .dark-img }
         </figure>
     3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
         <figure markdown>
-        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/self-hosting/shared/gcp-secrets-create-version.png){ .svg-img .dark-img }
+        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .svg-img .dark-img }
         </figure>
     4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
 

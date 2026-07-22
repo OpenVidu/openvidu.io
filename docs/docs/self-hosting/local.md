@@ -118,7 +118,7 @@ To install OpenVidu locally, follow these steps:
         - Maximum 8 Participants across all Rooms
         - Maximum 5 minutes duration per Room
 
-        For a production environment, you need to [create an OpenVidu account](/account/){:target="_blank"} to get a license key.
+        For a production environment, you need to [create an OpenVidu account](../../account.md){:target="_blank"} to get a license key.
         There's a 15 day free trial waiting for you!
 
 The deployment is ready when you see the following message:
@@ -214,7 +214,7 @@ Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the events.
 Testing WebRTC applications can be challenging because devices require a secure context (HTTPS) to access the camera and microphone. When using LiveKit Open Source, this isn't an issue if you access your app from the same computer where the LiveKit Server is running, as `localhost` is considered a secure context even over plain HTTP. Consider the following architecture:
 
 <figure markdown="span">
-  ![Image title](../../assets/images/comparing-openvidu/livekit-architecture.svg){ width="450" style="border-radius: 8px" }
+  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture.svg){ width="450" style="border-radius: 8px" }
 </figure>
 
 The simplest way to test your application is:

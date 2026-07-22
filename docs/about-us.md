@@ -31,7 +31,7 @@ I'm a software engineer, and earned a Ph.D. in computer science in 2008. I was a
 
 In the private sector, I have also participated in, directed, and collaborated with various private and projects, including Kurento, either as a consultor or as a technical lead. 
 
-My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](/research).
+My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](research.md).
 
 <div class="md-social">
     <a href="https://github.com/micaelgallego" target="_blank" rel="noopener" title="github.com" class="md-social__link">
@@ -46,7 +46,7 @@ My main research activities are related to software engineering, software testin
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img" src="../assets/images/about-us/authorMG.jpg" />
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorMG.jpg" />
 </figure>
 </div>
 
@@ -61,7 +61,7 @@ I'm a software engineer, and I hold a PhD on Computer Science, earned in 2007. I
 
 I've been involved in many projects in the private sector, mainly related to cloud computing, engineering and testing, including Kurento. 
 
-My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](/research).
+My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](research.md).
 
 <div class="md-social">
     <a href="https://github.com/gortazar" target="_blank" rel="noopener" title="github.com" class="md-social__link">
@@ -73,7 +73,7 @@ My main research activities are related to software testing and real-time commun
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorFG.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorFG.jpg" />
 </figure>
 </div>
 
@@ -98,7 +98,7 @@ My academic background consists of a Double Degree in Computer Science and Softw
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorPF.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorPF.jpg" />
 </figure>
 </div>
 
@@ -123,7 +123,7 @@ My experience centers on Node.js, TypeScript, and Angular, complemented by stron
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorCS.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCS.jpg" />
 </figure>
 </div>
 
@@ -151,7 +151,7 @@ My expertise spans backend development (Java, Node.js, Golang), frontend develop
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorCR.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCR.jpg" />
 </figure>
 </div>
 
@@ -176,7 +176,7 @@ I have professional experience mainly with Node.js, TypeScript, and Angular, as 
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorJCM.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorJCM.jpg" />
 </figure>
 </div>
 
@@ -201,7 +201,7 @@ My experience includes working with the most common public clouds and with their
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="../assets/images/about-us/authorSF.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorSF.jpg" />
 </figure>
 </div>
 
