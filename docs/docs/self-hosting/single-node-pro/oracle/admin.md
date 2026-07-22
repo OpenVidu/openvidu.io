@@ -22,7 +22,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     3. Click the three-dots action menu next to the instance and select _"Stop"_ to stop the instance (and therefore OpenVidu).
 
     <figure markdown>
-    ![Stop OCI instance](../../../../assets/images/self-hosting/single-node/oracle/stop-instance-pro.png){ .svg-img .dark-img }
+    ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance-pro.png){ .svg-img .dark-img }
     </figure>
 
 === "Start OpenVidu Single Node PRO"
@@ -32,7 +32,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     3. Click the three-dots action menu next to the instance and select _"Start"_ to start the instance (and therefore OpenVidu).
 
     <figure markdown>
-    ![Start OCI instance](../../../../assets/images/self-hosting/single-node/oracle/start-instance-pro.png){ .svg-img .dark-img }
+    ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance-pro.png){ .svg-img .dark-img }
     </figure>
 
 ## Change the instance shape
@@ -47,7 +47,7 @@ You can change the shape (instance type) of the OpenVidu Single Node PRO instanc
     === "Change instance shape"
 
         <figure markdown>
-        ![Change OCI instance shape](../../../../assets/images/self-hosting/single-node/oracle/change-shape-pro.png){ .svg-img .dark-img }
+        ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape-pro.png){ .svg-img .dark-img }
         </figure>
 
 5. Confirm the new shape and [start](#start-openvidu-single-node-pro) the instance again.
@@ -66,11 +66,11 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     2. Click on the desired secret you want to change.
     3. Scroll down to _"Versions"_ and click on _"Create secret version"_ to add a new version with the updated value.
             <figure markdown>
-            ![Create Secret Version](../../../../assets/images/self-hosting/single-node/oracle/create-secret-version.png){ .svg-img .dark-img }
+            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/create-secret-version.png){ .svg-img .dark-img }
             </figure>
     4. Enter the new secret value and click on _"Create secret version"_.
             <figure markdown>
-            ![Create Secret Version](../../../../assets/images/self-hosting/single-node/oracle/new-secret-version.png){ .svg-img .dark-img }
+            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/new-secret-version.png){ .svg-img .dark-img }
             </figure>
     5. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} and click on [_Stop_](#stop-openvidu-single-node-pro) → [_Start_](#start-openvidu-single-node-pro) to apply the changes to the OpenVidu Single Node PRO deployment.
 

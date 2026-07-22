@@ -27,7 +27,7 @@ To use the Azure template, click the button below (you will be redirected to Azu
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/self-hosting/single-node/azure/single-node-azure-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Single Node Azure Architecture</figcaption>
     </figure>
 
@@ -50,7 +50,7 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
     Parameters of this section look like this:
 
-    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/self-hosting/single-node/azure/single-node-pro-config.png)
+    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png)
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target=_blank}.
 
@@ -65,7 +65,7 @@ Specify properties for the Azure instance that will host Openvidu.
     Parameters in this section look like this:
 
     <figure markdown>
-    ![Azure Instance configuration](../../../../assets/images/self-hosting/single-node/azure/azure-instance-config.png){ .svg-img .dark-img }
+    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/single-node/azure/instance-config.png){ .svg-img .dark-img }
     </figure>
 
     Simply select the type of instance you want to deploy in **Type of Instance**. Fill in **Admin Username**, which will be set as the admin username on the instance. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instance.
@@ -91,19 +91,19 @@ When everything is ready, you can check the output secrets on the Key Vault or b
     2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
         <figure markdown>
-        ![Azure Key Vault secrets location](../../../../assets/images/self-hosting/shared/azure-keyvault-secrets-location.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
         </figure>
 
     3. Click the secret you want to inspect, then click the current version of that secret.
 
         <figure markdown>
-        ![Azure Key Vault Secret Version](../../../../assets/images/self-hosting/shared/azure-keyvault-secret-version.png){ .svg-img .dark-img }
+        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .svg-img .dark-img }
         </figure>
 
     4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
         <figure markdown>
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/self-hosting/shared/azure-keyvault-output.png){ .svg-img .dark-img }
+        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .svg-img .dark-img }
         </figure>
 
 === "Check deployment outputs in the instance"

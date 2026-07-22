@@ -22,7 +22,7 @@ This repo is the source of https://openvidu.io/, built with **MkDocs Material** 
 | `docs/docs/` | **OpenVidu Platform** docs (versioned, served at `/{version}/docs/`) |
 | `docs/overrides/` | Material theme customization (`custom_dir`): `main.html`, `home.html`, `404.html`, `partials/` |
 | `shared/` | Reusable Markdown snippets, included via `--8<-- "shared/<file>.md"` (path relative to **repo root**). Organized by consuming docs area — `meet/`, `self-hosting/` (one folder per cloud provider + `common/`), `tutorials/` — see `shared/README.md` |
-| `docs/assets/`, `docs/stylesheets/`, `docs/javascripts/` | Images, CSS, JS |
+| `docs/assets/`, `docs/stylesheets/`, `docs/javascripts/` | Images, CSS, JS. Images/videos are organized by consuming page — versioned docs mirror the docs tree under `images/meet/**` and `images/platform/**` (for `docs/docs/**`), root pages get a top-level folder (`home/`, `pricing/`, ...), cross-cutting assets go in `logos/` (brand library), `og/`, `sponsors/`. No files directly at the `images/`/`videos/` root — see README "Organizing assets" |
 | `custom-versioning/` | Versioning/deploy scripts — read `push-new-version.sh` before touching anything URL- or version-related |
 | `.claude/skills/blog-*` | Use those skills for blog posts, not this one |
 

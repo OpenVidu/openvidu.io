@@ -35,7 +35,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
     This is how the architecture of the deployment looks:
 
     <figure markdown>
-    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability Architecture with Network Load Balancer</figcaption>
     </figure>
 

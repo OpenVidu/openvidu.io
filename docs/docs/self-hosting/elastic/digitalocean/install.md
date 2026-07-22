@@ -32,7 +32,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Elastic DigitalOcean Architecture](../../../../assets/images/self-hosting/elastic/digitalocean/elastic-do-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/elastic/digitalocean/elastic-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic DigitalOcean Architecture</figcaption>
     </figure>
 
@@ -214,7 +214,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
     <figure markdown>
-    ![SSH Key in Bucket](../../../../assets/images/self-hosting/elastic/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
+    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/elastic/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
     </figure>
 
 2. Give the SSH Key the necessary permissions for it to work.
@@ -239,7 +239,7 @@ To verify that your OpenVidu deployment works correctly wait for the `secrets.en
 === "View OpenVidu credentials in the Web"
     Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
     <figure markdown>
-    ![Secrets.env in Bucket](../../../../assets/images/self-hosting/elastic/digitalocean/secrets-env.png){ .svg-img .dark-img }
+    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/elastic/digitalocean/secrets-env.png){ .svg-img .dark-img }
     </figure>
 
 

@@ -108,7 +108,7 @@ Write internal links and images as paths relative to the current file:
 [Local deployment](../../self-hosting/local.md)
 [Anchor on another page](../rooms/access.md#predefined-roles)
 [Pricing](../../pricing.md)          <!-- non-versioned page: also relative .md, NOT /pricing/ -->
-![Diagram](../../assets/images/self-hosting/diagram.png#only-dark)
+![Diagram](../../assets/images/platform/self-hosting/diagram.png#only-dark)
 ```
 
 Relative `.md`/asset links are validated by MkDocs, **navigable in the editor** (Ctrl+click / preview works, which root-absolute forms break, since editors resolve `/` against the repo root instead of `docs/`), and version-safe: the built URLs stay inside the version folder, and the deploy script rewrites the built relative links that point to non-versioned pages into absolute URLs (`/pricing/`) at publish time.
@@ -122,7 +122,7 @@ A snippet is embedded in pages at different hierarchy levels, so relative paths 
 
 ```markdown
 [Deployment guide](/docs/self-hosting/deployment-types.md)
-![Diagram](/assets/images/self-hosting/diagram.png#only-dark)
+![Diagram](/assets/images/platform/self-hosting/diagram.png#only-dark)
 ```
 
 MkDocs resolves and validates these against `docs/` thanks to `validation.links.absolute_links: relative_to_docs` in `mkdocs.yml`, and rewrites them into correct **relative** URLs at build time — so they end up identical to hand-written relative links (validated, version-safe), just hierarchy-independent. The trade-off is that they are not editor-navigable, which is why they are reserved for snippets. (See "Adding a new shared snippet" for the deployment-type-parametric exception where a snippet link must stay relative.)
@@ -170,6 +170,16 @@ When creating a new shared snippet, follow these steps:
 > **Links in shared snippets must be root-absolute** (Markdown `[x](/docs/.../bar.md)`, `![x](/assets/...)`; HTML `src="/assets/..."`). A snippet is embedded in pages at **different hierarchy levels**, so a relative path that is correct in one host page is broken in another. The root-absolute form resolves against `docs/` regardless of where the snippet is included (see [Link rules](#link-rules)). This is why every asset and internal link in `shared/` uses the absolute form.
 >
 > **Exception — deployment-type-parametric snippets.** A few `shared/self-hosting/**` snippets are included in **parallel deployment-type trees** (e.g. the same snippet is used in both `single-node/oracle/` and `single-node-pro/oracle/`) and link to a *sibling* page that must differ per tree, such as `[Admin](../on-premises/admin.md)` or `[Admin](./admin.md)`. These are intentionally **relative** so they resolve to the correct deployment type at each inclusion point — keep them relative. Only links to *fixed* targets (anything under `self-hosting/configuration/`, `self-hosting/how-to-guides/`, `ai/`, `tutorials/`, etc.) become absolute.
+
+### Organizing assets
+
+Images live in [`docs/assets/images`](docs/assets/images) and videos in [`docs/assets/videos`](docs/assets/videos), organized so an asset's folder tells you which page uses it. **Never leave files directly at the `images/` or `videos/` root** — place every new asset in the folder matching its page:
+
+- **Versioned docs** mirror the docs tree under a product folder: an image for `docs/meet/meetings/live-captions.md` goes in `images/meet/meetings/live-captions/`, and one for `docs/docs/self-hosting/production-ready/performance.md` goes in `images/platform/self-hosting/production-ready/performance/` (`docs/docs/**` ↔ `images/platform/**`).
+- **Non-versioned root pages** get a top-level folder named after the page: `images/home/` (landing), `images/about-us/`, `images/pricing/`, `images/research/`, `images/openvidu-meet-vs-openvidu-platform/`... Blog post assets follow the blog convention: `images/blog/<post-file-name>/`.
+- **Cross-cutting assets**: `images/logos/` is the brand-asset library (OpenVidu, Meet and Platform logo variants and third-party logos — files here may be kept even while unreferenced), `images/og/` holds social cards and `images/sponsors/` sponsor/funding logos.
+- An asset used by several pages lives in the folder of the page it primarily belongs to, and other pages reference it there (e.g. the deployment architecture diagrams in `images/platform/self-hosting/deployment-types/` are also referenced from OpenVidu Meet's advanced deployment page).
+- **Images reused across deployment types** (referenced from `shared/self-hosting/**` snippets or from several `elastic`/`ha`/`single-node` pages) go in `images/platform/self-hosting/shared/`, in a subfolder per cloud provider (`aws/`, `azure/`, `digitalocean/`, `gcp/`, `oracle/`) mirroring the [`shared/self-hosting`](shared/self-hosting) snippet folders.
 
 ### Mkdocs Material tag system
 

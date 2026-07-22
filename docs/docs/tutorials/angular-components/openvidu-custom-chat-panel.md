@@ -12,7 +12,7 @@ The **openvidu-custom-chat-panel** tutorial demonstrates how to customize the ch
 Replacing the default chat panel is made simple with the **ChatPanelDirective**, which offers a straightforward way to replace and adapt the **ChatPanelComponent** to your needs.
 
 <figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-chat-panel.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-chat-panel.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>OpenVidu Components - Custom Chat Panel</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
 
-<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/components/custom-toolbar.png){ loading=lazy } -->
+<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
 --8<-- "shared/tutorials/testing-other-devices.md"
 

@@ -375,8 +375,8 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-  favicon: assets/images/logo.png
-  logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
+  favicon: assets/images/logos/logo.png
+  logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
 plugins:
   - meta
@@ -436,7 +436,7 @@ plugins:
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
-      image: assets/images/openvidu_vert_white_bg_trans_cropped2.png
+      image: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
         - tags

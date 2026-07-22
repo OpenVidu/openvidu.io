@@ -11,7 +11,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 
 <figure markdown>
-  ![OpenVidu Components Demo App](../../../assets/images/components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
+  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
   <figcaption>OpenVidu Components Demo App</figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ The OpenVidu Components Demo App architecture is divided into two main component
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
 <figure markdown>
-  ![OpenVidu Components Demo App Architecture](../../../assets/images/components/openvidu-demo-app-architecture.png){ loading=lazy .svg-img .mkdocs-img}
+  ![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy .svg-img .mkdocs-img}
   <figcaption>OpenVidu Components Demo App Architecture</figcaption>
 </figure>
 

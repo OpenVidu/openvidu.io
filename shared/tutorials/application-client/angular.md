@@ -22,9 +22,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/join-angular.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/join-angular.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-angular.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-angular.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/room-angular.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/room-angular.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-angular.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-angular.png" loading="lazy"/></a></p></div>
 
 </div>
 

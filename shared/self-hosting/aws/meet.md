@@ -6,7 +6,7 @@ Configure the initial credentials for accessing OpenVidu Meet:
 
     Parameters in this section look like this:
 
-    ![OpenVidu Meet credentials](/assets/images/self-hosting/shared/aws-meet-credentials.png)
+    ![OpenVidu Meet credentials](/assets/images/platform/self-hosting/shared/aws/meet-credentials.png)
 
     - **InitialMeetAdminPassword**: Initial password for the "admin" user in OpenVidu Meet. If not provided, a random password will be generated and stored in the AWS Secret Manager.
     - **InitialMeetApiKey**: Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can configure it later from the Meet Console.

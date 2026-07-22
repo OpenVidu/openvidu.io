@@ -24,7 +24,7 @@ This section contains instructions for deploying a production-ready OpenVidu Ela
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu Elastic On Premises](../../../../assets/images/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic On Premises</figcaption>
     </figure>
 

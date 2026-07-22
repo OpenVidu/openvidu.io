@@ -29,7 +29,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     The deployment architecture is as follows:
 
     <figure markdown>
-    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/self-hosting/elastic/oracle/elastic-oracle-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu Elastic Oracle Cloud Infrastructure Architecture</figcaption>
     </figure>
 
@@ -231,7 +231,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the Master Node — if exposed, unauthorized users could gain access.
     <figure markdown>
-    ![SSH Key in bucket](../../../../assets/images/self-hosting/elastic/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
+    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/elastic/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
     </figure>
 
 5. Set the correct permissions on the SSH key so it can be used.
@@ -247,7 +247,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     2. Click the secret you want to view.
     3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
         <figure markdown>
-        ![View Secret](../../../../assets/images/self-hosting/shared/oracle-view-secret.png){ .svg-img .dark-img }
+        ![View Secret](../../../../assets/images/platform/self-hosting/shared/oracle/view-secret.png){ .svg-img .dark-img }
         </figure>
 
         !!! warning

@@ -10,7 +10,7 @@ description: Learn how to customize the UI, changing colors, shapes and add your
 Creating a unique and intuitive user interface (UI) is essential for ensuring a great user experience. **OpenVidu Components Angular** allows for flexibility in UI customization to fit your application's design requirements.
 
 <figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-ui.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-ui.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>OpenVidu Components - Custom UI</figcaption>
 </figure>
 
@@ -55,7 +55,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
 
-<!-- ![OpenVidu Angular Components - Custom UI](../../../assets/images/components/custom-ui.png){ loading=lazy } -->
+<!-- ![OpenVidu Angular Components - Custom UI](../../../assets/images/platform/tutorials/angular-components/custom-ui.png){ loading=lazy } -->
 
 --8<-- "shared/tutorials/testing-other-devices.md"
 
@@ -183,7 +183,7 @@ The library also allows you to customize **shape of buttons, panels and videos c
 
 #### Replacing the branding logo
 
-You can replace the branding logo with your own. Just modify the `src/assets/images/logo.png` file with your own logo.
+You can replace the branding logo with your own. Just modify the `src/assets/images/logos/logo.png` file with your own logo.
 
 <!-- ## Deploying openvidu-custom-ui
 

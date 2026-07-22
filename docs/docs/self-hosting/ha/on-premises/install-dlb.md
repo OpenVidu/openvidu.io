@@ -35,7 +35,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
     This is what the deployment architecture looks like:
 
     <figure markdown>
-    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img }
     <figcaption>OpenVidu High Availability Architecture with DNS Load Balancing</figcaption>
     </figure>
 

@@ -22,9 +22,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/join-react.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/join-react.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-react.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-react.png" loading="lazy"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/application-clients/room-react.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/application-clients/room-react.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-react.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-react.png" loading="lazy"/></a></p></div>
 
 </div>
 

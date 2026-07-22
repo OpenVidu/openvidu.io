@@ -12,7 +12,7 @@ The **openvidu-toolbar-buttons** tutorial demonstrates how to add custom buttons
 Adding toolbar buttons is made simple with the **ToolbarAdditionalButtonsDirective**, which offers a straightforward way to add custom buttons to the **ToolbarComponent**.
 
 <figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/components/openvidu-components-toolbar-buttons.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-toolbar-buttons.svg){ loading=lazy .svg-img  .mkdocs-img}
   <figcaption>OpenVidu Components - Toolbar Buttons</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
 
-<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/components/custom-toolbar.png){ loading=lazy } -->
+<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
 --8<-- "shared/tutorials/testing-other-devices.md"
 
