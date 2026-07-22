@@ -1,6 +1,6 @@
 site_name: OpenVidu
 site_url: https://openvidu.io/
-site_description: "Self-hosted video conferencing and custom WebRTC solutions: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs. Open source and scalable."
+site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
 
