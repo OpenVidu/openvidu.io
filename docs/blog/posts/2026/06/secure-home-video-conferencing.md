@@ -24,13 +24,13 @@ hide:
 
 # Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends
 
-![A secure family video call running on your own home server](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/poster.jpg){ align=right width=60% }
+![A secure family video call running on your own home server](/assets/images/blog/2026/06/secure-home-video-conferencing/poster.jpg){ align=right width=60% }
 
 We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their head in their hands thinking about how complicated it must be.
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](../../meet/index.md){:target="_blank"}.
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](/meet/index.md){:target="_blank"}.
 <!-- more -->
 
 ## Why self-host your video calls?
@@ -45,7 +45,7 @@ If tinkering is your idea of a fun weekend, you probably don't need convincing ð
 Is this setup valid for everyone? If you need five-nines uptime for a business, run it properly in the cloud (OpenVidu does that too; see the [end of this post](#need-more-than-this)). But for keeping in touch with the people you love, a box at home is perfect, private, and yours.
 
 !!! abstract "What you'll build"
-    A production-ready video conferencing server running **[OpenVidu Meet](../../meet/index.md)** at your home, reachable from anywhere through a secure `https://` address, with automatic SSL certificates. Your family and friends join from any browser (phone, tablet or laptop) with a single link. No account, no app to install.
+    A production-ready video conferencing server running **[OpenVidu Meet](/meet/index.md)** at your home, reachable from anywhere through a secure `https://` address, with automatic SSL certificates. Your family and friends join from any browser (phone, tablet or laptop) with a single link. No account, no app to install.
 
 ## What you'll need
 
@@ -63,7 +63,7 @@ Many internet providers no longer give each home a unique public IP. They share 
 
 Quick check: look at the "Internet" / "WAN" IP your **router** reports. Open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
 
-![Router label with credentials](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/router-label.png){ width=80% }
+![Router label with credentials](/assets/images/blog/2026/06/secure-home-video-conferencing/router-label.png){ width=80% }
 
 Then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
 
@@ -110,7 +110,7 @@ Then, in your router's admin page, find **Port forwarding** (usually under *Adva
 
 </div>
 
-![Port forwarding rules in a router admin panel](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/router-admin.png){ width=80% }
+![Port forwarding rules in a router admin panel](/assets/images/blog/2026/06/secure-home-video-conferencing/router-admin.png){ width=80% }
 
 If your server's Linux firewall is active, open ports 80 and 443 there too. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
 
@@ -142,7 +142,7 @@ If both ports show "Success", proceed to Step 3.
 
 If either port fails, your ISP is blocking inbound connections on it. Automatic Let's Encrypt won't work in that case, because validating a certificate requires one of those ports to be reachable from the internet. You won't be able to follow Step 3 as written; use this alternative instead.
 
-Install the full **[OpenVidu Platform installer](../../docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.
@@ -161,15 +161,15 @@ The installer takes care of everything (it even installs Docker for you) and ask
 
 **1. Confirm you want to continue.** Choose **Yes**.
 
-![The OpenVidu Meet installer asks you to confirm](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/wizard-1.png)
+![The OpenVidu Meet installer asks you to confirm](/assets/images/blog/2026/06/secure-home-video-conferencing/wizard-1.png)
 
 **2. Enter your domain.** Type the DuckDNS address you created, e.g. `<your-subdomain>.duckdns.org`, and press Enter. OpenVidu automatically requests a free, valid SSL certificate from Let's Encrypt for it, with no extra steps.
 
-![Enter your DuckDNS domain name](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/wizard-2.png)
+![Enter your DuckDNS domain name](/assets/images/blog/2026/06/secure-home-video-conferencing/wizard-2.png)
 
 **3. Confirm to proceed**, then wait a few minutes while it downloads and starts. When it's done, you'll see the address of your new video app and the admin password, so **write these down**.
 
-![Installation finished: your URL and admin credentials](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/wizard-3.png)
+![Installation finished: your URL and admin credentials](/assets/images/blog/2026/06/secure-home-video-conferencing/wizard-3.png)
 
 That's it. OpenVidu now starts automatically with your machine. You can manage it any time with:
 
@@ -184,21 +184,21 @@ sudo systemctl restart openvidu   # restart
 Open `https://<your-subdomain>.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
 
 
-![Your OpenVidu Meet dashboard](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-home-light.png#only-light)
-![Your OpenVidu Meet dashboard](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-home-dark.png#only-dark)
+![Your OpenVidu Meet dashboard](/assets/images/blog/2026/06/secure-home-video-conferencing/meet-home-light.png#only-light)
+![Your OpenVidu Meet dashboard](/assets/images/blog/2026/06/secure-home-video-conferencing/meet-home-dark.png#only-dark)
 
 Click **Create Room**, give it a name, and you get a room with its own shareable link.
 
-![A room with its shareable invite link](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-lobby-light.png#only-light)
-![A room with its shareable invite link](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-lobby-dark.png#only-dark)
+![A room with its shareable invite link](/assets/images/blog/2026/06/secure-home-video-conferencing/meet-lobby-light.png#only-light)
+![A room with its shareable invite link](/assets/images/blog/2026/06/secure-home-video-conferencing/meet-lobby-dark.png#only-dark)
 
 Now send that link to your family and friends however you like: WhatsApp, email, a text. When they open it they just type their name and join, with **no account and no app to install**, straight from the browser, on a phone, tablet or computer.
 
 !!! tip "Share the link from the copy button, not the address bar"
     Use the **copy button** next to *"Invite others with this meeting link"*. That link carries a secret token that lets people in. The plain URL from your browser's address bar won't grant access.
 
-![A call with family and friends, running on your own server](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-call-light.jpg#only-light)
-![A call with family and friends, running on your own server](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-call-dark.jpg#only-dark)
+![A call with family and friends, running on your own server](/assets/images/blog/2026/06/secure-home-video-conferencing/meet-call-light.jpg#only-light)
+![A call with family and friends, running on your own server](/assets/images/blog/2026/06/secure-home-video-conferencing/meet-call-dark.jpg#only-dark)
 
 Inside the call you get exactly what you'd expect from a modern app: HD video, crisp audio, screen sharing and chat, except this time it's all running on the little box in your home.
 
@@ -212,29 +212,29 @@ You've just put a server on the internet, so a few minutes of good habits go a l
 - **Remember it's exposed.** A home server reachable from the internet is convenient and powerful, so treat it with the same care you'd give any device that's online 24/7.
 
 !!! tip "Go further: end-to-end encryption"
-    For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](../../meet/features/meetings/e2e-encryption.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
+    For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](/meet/features/meetings/e2e-encryption.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
 
 ## What to do next?
 
 Once your server is up and running, there are a few things you can do to get more out of it. OpenVidu exposes additional ports that improve media quality and reduce latency, and opening them is worth it if you want the best possible call experience. And if the one-command installer felt too opinionated, the full OpenVidu Platform installer gives you fine-grained control over which modules to enable, how to configure them, and how to automate the whole process.
 
-- **[Full port list](../../docs/self-hosting/single-node/on-premises/install.md#port-rules)**: open additional ports for better media performance or to match your Linux firewall rules.
-- **[Non-interactive install](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
+- **[Full port list](/docs/self-hosting/single-node/on-premises/install.md#port-rules)**: open additional ports for better media performance or to match your Linux firewall rules.
+- **[Non-interactive install](/docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
 
 ## Need more than this? { #need-more-than-this }
 
-This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](../../docs/self-hosting/deployment-types.md):
+This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](/docs/self-hosting/deployment-types.md):
 
-- **[OpenVidu Single Node PRO](../../docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability. 
-- **[OpenVidu Elastic](../../docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
-- **[OpenVidu High Availability](../../docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
-- **[OpenVidu Local](../../docs/self-hosting/local.md)**: a development setup for your own laptop. 
-- **[Plain Docker Compose](../../docs/self-hosting/single-node/on-premises/install.md#plain-docker-compose-installation)**: install the same single node from plain config files, less automated and opinionated.
+- **[OpenVidu Single Node PRO](/docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability. 
+- **[OpenVidu Elastic](/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
+- **[OpenVidu High Availability](/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
+- **[OpenVidu Local](/docs/self-hosting/local.md)**: a development setup for your own laptop. 
+- **[Plain Docker Compose](/docs/self-hosting/single-node/on-premises/install.md#plain-docker-compose-installation)**: install the same single node from plain config files, less automated and opinionated.
 
-And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](../../meet/deployment/basic.md#other-deployment-options).
+And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](/meet/deployment/basic.md#other-deployment-options).
 
 ---
 
-![A family video call running on your own home server](../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meeting.png){ align=right width=60% }
+![A family video call running on your own home server](/assets/images/blog/2026/06/secure-home-video-conferencing/meeting.png){ align=right width=60% }
 
 That's all it takes. For the price of a tiny computer and a fun weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!

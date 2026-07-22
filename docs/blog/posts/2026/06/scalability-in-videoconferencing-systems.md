@@ -20,7 +20,7 @@ hide:
 
 # The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System
 
-![WebRTC connectivity paths](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/poster.png){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png){ align=left }
 
 ## Introduction: The Success Trap
 
@@ -44,8 +44,8 @@ Along the way, you'll also learn how to build an autoscaling loop that reacts be
 
 Most successful platforms start with a single machine. In a single-node deployment, one server runs signaling, media processing, persistence, and API logic together. For many teams, that's the right call — it maximizes speed of learning and minimizes operational overhead while you figure out whether the product has legs.
 
-![Single-node architecture](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/single-node-light.svg#only-light)
-![Single-node architecture](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/single-node-dark.svg#only-dark)
+![Single-node architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-light.svg#only-light)
+![Single-node architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-dark.svg#only-dark)
 
 ### Why the Single Node Works Early
 
@@ -95,8 +95,8 @@ When these signals appear consistently, throwing a bigger machine at the problem
 
 At this point, larger machines cost more and help less. What you actually need is a role-based architecture where media execution and orchestration scale independently.
 
-![Elastic media plane architecture](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/elastic-light.svg#only-light)
-![Elastic media plane architecture](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/elastic-dark.svg#only-dark)
+![Elastic media plane architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-light.svg#only-light)
+![Elastic media plane architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-dark.svg#only-dark)
 
 The split looks like this:
 
@@ -183,7 +183,7 @@ A proper graceful scale-in strategy goes like this:
 - Let existing rooms finish naturally, or migrate sessions explicitly if the drain timeout is exceeded.
 - Terminate the node only after it reaches a safe empty state.
 
-This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](2026-05-26-scale-in-problem-in-videoconferences.md).
+This requires orchestration logic, configurable timeouts, and explicit failure handling. It's often the gap between "elastic" written on a whiteboard and elastic that actually works at 3am. For a deeper dive into how to implement this well, read our [dedicated post on graceful scale-in strategies](/blog/posts/2026/05/scale-in-problem-in-videoconferences.md).
 
 With Phase 2 in place, you have elastic media capacity. But there's still one major vulnerability left: your control plane.
 
@@ -193,8 +193,8 @@ You can run 100 media nodes and still fail like a prototype if your orchestratio
 
 When orchestration goes down, new joins fail, placement stops, and recovery becomes a manual process. Phase 2 hardened the media plane. Phase 3 is about making sure the rest of the system can survive a failure too — because HA at this stage means hardening the support cluster, not adding more media nodes.
 
-![High-availability architecture](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/ha-light.svg#only-light)
-![High-availability architecture](../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/ha-dark.svg#only-dark)
+![High-availability architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-light.svg#only-light)
+![High-availability architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-dark.svg#only-dark)
 
 ### Remove Single Points of Failure
 
@@ -287,13 +287,13 @@ You don't have to build all of this yourself.
 
 At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
 
-- [**Single Node**](../../docs/self-hosting/single-node/index.md) to launch quickly.
-- [**Elastic**](../../docs/self-hosting/elastic/index.md) to scale media capacity dynamically.
-- [**High Availability**](../../docs/self-hosting/ha/index.md) to meet strict enterprise resilience requirements.
+- [**Single Node**](/docs/self-hosting/single-node/index.md) to launch quickly.
+- [**Elastic**](/docs/self-hosting/elastic/index.md) to scale media capacity dynamically.
+- [**High Availability**](/docs/self-hosting/ha/index.md) to meet strict enterprise resilience requirements.
 
 You can deploy on-premises or on the major cloud providers — **AWS**, **Azure**, **GCP**, **DigitalOcean**, and **OCI** — with the same operational model across all of them.
 
-If you're ready to move from MVP to production-grade infrastructure, the [OpenVidu documentation](../../docs/index.md) is the place to start.
+If you're ready to move from MVP to production-grade infrastructure, the [OpenVidu documentation](/docs/index.md) is the place to start.
 
 Start with Single Node, validate your traffic profile, and then move to Elastic and High Availability when the signals tell you it's time.
 

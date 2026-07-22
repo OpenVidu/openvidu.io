@@ -19,8 +19,8 @@ hide:
 
 # How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform
 
-![WebRTC connectivity paths](../../assets/images/blog/2026-04-30-how-client-networks-affect-qoe-and-costs/webrtc-network-paths-light.png#only-light){ align=left }
-![WebRTC connectivity paths](../../assets/images/blog/2026-04-30-how-client-networks-affect-qoe-and-costs/webrtc-network-paths-dark.png#only-dark){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/04/how-client-networks-affect-qoe-and-costs/webrtc-network-paths-light.png#only-light){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/04/how-client-networks-affect-qoe-and-costs/webrtc-network-paths-dark.png#only-dark){ align=left }
 
 Real-time video applications seem fairly simple at first glance. A user clicks "Join", video and audio start flowing, and everyone can see and hear each other.
 
@@ -143,7 +143,7 @@ The final fallback is TURN over TLS — media relayed through the TURN server, a
 
       1. For direct connection over UDP: OpenVidu nodes support direct UDP connections on the high port range (50000–60000).
       2. For TURN relay over UDP: OpenVidu relays TURN over UDP on port 443.
-      3. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](../../docs/self-hosting/production-ready/performance.md#about-mediasoup-integration).
+      3. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](/docs/self-hosting/production-ready/performance.md#about-mediasoup-integration).
       4. For TURN relay over TLS: OpenVidu relays TURN over TLS on port 443.
 
 ---
@@ -199,4 +199,4 @@ To summarize the key takeaways:
 - The four resulting connection types — direct UDP, TURN/UDP, direct TCP, TURN/TLS — represent a clear trade-off between quality and how permissive the client's network is.
 - Restrictive client firewalls don't just degrade user experience — they **shift real load and cost** onto your server relay infrastructure.
 
-OpenVidu abstracts all of this complexity away, and all of our [official self-hosted deployments](../../docs/self-hosting/deployment-types.md) include the necessary components and configurations to ensure the best possible connectivity for every user. But now that you understand what's happening under the hood, you're in a much better position to have informed conversations with your users and their IT teams — and to know exactly which firewall rules to ask them to relax first.
+OpenVidu abstracts all of this complexity away, and all of our [official self-hosted deployments](/docs/self-hosting/deployment-types.md) include the necessary components and configurations to ensure the best possible connectivity for every user. But now that you understand what's happening under the hood, you're in a much better position to have informed conversations with your users and their IT teams — and to know exactly which firewall rules to ask them to relax first.

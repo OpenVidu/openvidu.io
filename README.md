@@ -116,7 +116,7 @@ Relative `.md`/asset links are validated by MkDocs, **navigable in the editor** 
 > [!NOTE]
 > Non-versioned pages are linked **relatively too** (`../../pricing.md`). The old bare-URL form (`/pricing/`) was a pre-MkDocs-1.6 workaround: it isn't validated and used to produce a build warning — don't use it in Markdown anymore.
 
-**2. Markdown links and images in shared snippets → root-absolute, resolved against `docs/`.**
+**2. Markdown links and images in shared snippets and blog posts → root-absolute, resolved against `docs/`.**
 
 A snippet is embedded in pages at different hierarchy levels, so relative paths would break. Write them as an absolute path from the `docs/` root:
 
@@ -125,7 +125,9 @@ A snippet is embedded in pages at different hierarchy levels, so relative paths 
 ![Diagram](/assets/images/platform/self-hosting/diagram.png#only-dark)
 ```
 
-MkDocs resolves and validates these against `docs/` thanks to `validation.links.absolute_links: relative_to_docs` in `mkdocs.yml`, and rewrites them into correct **relative** URLs at build time — so they end up identical to hand-written relative links (validated, version-safe), just hierarchy-independent. The trade-off is that they are not editor-navigable, which is why they are reserved for snippets. (See "Adding a new shared snippet" for the deployment-type-parametric exception where a snippet link must stay relative.)
+MkDocs resolves and validates these against `docs/` thanks to `validation.links.absolute_links: relative_to_docs` in `mkdocs.yml`, and rewrites them into correct **relative** URLs at build time — so they end up identical to hand-written relative links (validated, version-safe), just hierarchy-independent. The trade-off is that they are not editor-navigable, which is why they are reserved for snippets and blog posts. (See "Adding a new shared snippet" for the deployment-type-parametric exception where a snippet link must stay relative.)
+
+**Blog posts use the same root-absolute form** because a post's source location changes during its lifecycle: a post lives at `docs/blog/posts/<year>/<month>/<slug>.md` (matching its frontmatter `date`) with its asset folder mirroring that location (`assets/images/blog/<year>/<month>/<slug>/`), and while it is a **draft** the year/month segments are the **literal placeholder `YYYY/MM`** — real directories with those names, in the post path, the asset paths and its `llmstxt` entry, plus a temporary creation date in the frontmatter. Everything resolves against the literal folders, so draft branches build with **zero warnings**; publishing replaces the `YYYY/MM/` string with the real `<year>/<month>/`, sets the real date and `git mv`s the post and asset folder. Hierarchy-independent links (including links to other posts, `[x](/blog/posts/<year>/<month>/<slug>.md)`, and to the post's assets, `![x](/assets/images/blog/YYYY/MM/<slug>/foo.png)`) are what let a post move without touching its content. Note there is no build-level guard against merging a draft early — drafts live on their own branch until ready. The full blog conventions live in the `.claude/skills/blog-*` skills.
 
 **3. Raw HTML links and images (inside HTML blocks) → absolute URL form.**
 
@@ -176,7 +178,7 @@ When creating a new shared snippet, follow these steps:
 Images live in [`docs/assets/images`](docs/assets/images) and videos in [`docs/assets/videos`](docs/assets/videos), organized so an asset's folder tells you which page uses it. **Never leave files directly at the `images/` or `videos/` root** — place every new asset in the folder matching its page:
 
 - **Versioned docs** mirror the docs tree under a product folder: an image for `docs/meet/meetings/live-captions.md` goes in `images/meet/meetings/live-captions/`, and one for `docs/docs/self-hosting/production-ready/performance.md` goes in `images/platform/self-hosting/production-ready/performance/` (`docs/docs/**` ↔ `images/platform/**`).
-- **Non-versioned root pages** get a top-level folder named after the page: `images/home/` (landing), `images/about-us/`, `images/pricing/`, `images/research/`, `images/openvidu-meet-vs-openvidu-platform/`... Blog post assets follow the blog convention: `images/blog/<post-file-name>/`.
+- **Non-versioned root pages** get a top-level folder named after the page: `images/home/` (landing), `images/about-us/`, `images/pricing/`, `images/research/`, `images/openvidu-meet-vs-openvidu-platform/`... Blog post assets follow the blog convention: `images/blog/YYYY/MM/<slug>/`, mirroring the post's own location (`blog/posts/YYYY/MM/<slug>.md`). Drafts use literal `YYYY/MM` placeholder directories, moved together with the post at publish time.
 - **Cross-cutting assets**: `images/logos/` is the brand-asset library (OpenVidu, Meet and Platform logo variants and third-party logos — files here may be kept even while unreferenced), `images/og/` holds social cards and `images/sponsors/` sponsor/funding logos.
 - An asset used by several pages lives in the folder of the page it primarily belongs to, and other pages reference it there (e.g. the deployment architecture diagrams in `images/platform/self-hosting/deployment-types/` are also referenced from OpenVidu Meet's advanced deployment page).
 - **Images reused across deployment types** (referenced from `shared/self-hosting/**` snippets or from several `elastic`/`ha`/`single-node` pages) go in `images/platform/self-hosting/shared/`, in a subfolder per cloud provider (`aws/`, `azure/`, `digitalocean/`, `gcp/`, `oracle/`) mirroring the [`shared/self-hosting`](shared/self-hosting) snippet folders.

@@ -15,10 +15,11 @@
     as a large-image card. The card is generated; see the marketing repo for
     the generator script and design rationale.
       A post's `cover_image` may be a bare filename (resolved against that
-      post's image folder — `assets/images/blog/<post-basename>/`, which by
-      convention matches the source filename), a site-absolute path starting
-      with "/", or a full external URL. Width/height are only emitted for the
-      known-size site card, since per-post covers vary.
+      post's image folder — `assets/images/blog/YYYY/MM/<slug>/`, which by
+      convention mirrors the post's location `blog/posts/YYYY/MM/<slug>.md`),
+      a site-absolute path starting with "/", or a full external URL.
+      Width/height are only emitted for the known-size site card, since
+      per-post covers vary.
   - Blog posts are typed og:type=article with their publication date.
 -#}
 {%- set og_is_post = page and page.file and page.file.src_uri.startswith("blog/posts/") %}
@@ -36,7 +37,8 @@
   {%- elif cover.startswith("/") %}
     {%- set og_image = "https://openvidu.io" ~ cover %}
   {%- else %}
-    {%- set post_folder = page.file.src_uri.split("/")[-1][:-3] %}
+    {#- blog/posts/YYYY/MM/<slug>.md -> YYYY/MM/<slug>, mirrored under assets/images/blog/ -#}
+    {%- set post_folder = (page.file.src_uri | replace("blog/posts/", "", 1))[:-3] %}
     {%- set og_image = "https://openvidu.io/assets/images/blog/" ~ post_folder ~ "/" ~ cover %}
   {%- endif %}
   {%- set og_image_alt = og_title %}

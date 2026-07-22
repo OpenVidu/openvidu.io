@@ -22,8 +22,8 @@ hide:
 
 # We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason
 
-![Mean time to a working deployment, by cloud and topology](../../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-times-light.svg#only-light)
-![Mean time to a working deployment, by cloud and topology](../../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-times-dark.svg#only-dark)
+![Mean time to a working deployment, by cloud and topology](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-times-light.svg#only-light)
+![Mean time to a working deployment, by cloud and topology](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-times-dark.svg#only-dark)
 
 "How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.
 
@@ -74,8 +74,8 @@ But before the "why," there's a "how reliably" — and it matters just as much.
 
 Averages are comforting and occasionally dishonest. Here's every individual run:
 
-![Every individual deployment run, by cloud and topology, showing spread around the mean](../../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-variability-light.svg#only-light)
-![Every individual deployment run, by cloud and topology, showing spread around the mean](../../assets/images/blog/2026-07-07-deploy-and-scale-in-times-across-clouds/deploy-variability-dark.svg#only-dark)
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-light.svg#only-light)
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-dark.svg#only-dark)
 
 Three things this shows that the table can't:
 
@@ -123,7 +123,7 @@ That serial chain explains both halves of AWS HA's behaviour. It's slow, because
 
 ## What about scaling back *down*?
 
-Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](2026-05-26-scale-in-problem-in-videoconferences.md). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
+Deploying is only half the job. The other direction — scaling back *down* when the crowd leaves — is the genuinely hard one, and it already has [a post of its own](/blog/posts/2026/05/scale-in-problem-in-videoconferences.md). The short version: you can't just kill a media node that has live meetings on it. You have to *drain* it — stop sending it new rooms, let the calls already on it finish, and only then let the cloud reclaim the machine. Terminate it early and you drop everyone mid-sentence.
 
 Two things are worth knowing before you get there:
 
@@ -138,4 +138,4 @@ Deploying a self-hosted video platform is a solved problem on every major cloud 
 
 The practical takeaway is two-fold: **benchmark the topology you'll actually run, on the cloud you'll actually use — and run it more than once**, because time-to-provision and time-to-ready are different numbers, and the average of a handful of runs can hide a cloud that's quietly unpredictable.
 
-All of these deployments — single node, elastic and HA, on all five clouds — ship as ready-made infrastructure with [OpenVidu](https://openvidu.io/){:target="_blank"}; the numbers here came from deploying exactly those, over and over. If you want to run your own stopwatch, the [self-hosting deployment guides](../../docs/self-hosting/deployment-types.md) are the place to start — pick the topology that fits your traffic, and now you know roughly how long to expect the coffee break to be.
+All of these deployments — single node, elastic and HA, on all five clouds — ship as ready-made infrastructure with [OpenVidu](https://openvidu.io/){:target="_blank"}; the numbers here came from deploying exactly those, over and over. If you want to run your own stopwatch, the [self-hosting deployment guides](/docs/self-hosting/deployment-types.md) are the place to start — pick the topology that fits your traffic, and now you know roughly how long to expect the coffee break to be.
