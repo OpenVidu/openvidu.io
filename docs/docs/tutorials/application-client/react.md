@@ -1,6 +1,6 @@
 ---
 title: React Tutorial
-description: "Build a video-call app in React with OpenVidu's LiveKit-compatible JS SDK: join a room, publish and subscribe to media."
+description: "Build a video-call app in React with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
 ---
 
 # React Tutorial

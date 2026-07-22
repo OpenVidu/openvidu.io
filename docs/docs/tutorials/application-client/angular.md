@@ -1,6 +1,6 @@
 ---
 title: Angular Tutorial
-description: "Build a video-call app in Angular with OpenVidu's LiveKit-compatible JS SDK: join a room, publish and subscribe to media."
+description: "Build a video-call app in Angular with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
 ---
 
 # Angular Tutorial

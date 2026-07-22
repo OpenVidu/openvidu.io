@@ -1,6 +1,6 @@
 ---
 title: Ionic Tutorial
-description: "Build a video-call app in Ionic and Angular with OpenVidu's LiveKit-compatible JS SDK: join a room, publish and subscribe to media."
+description: "Build a video-call app in Ionic and Angular with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
 ---
 
 # Ionic Tutorial

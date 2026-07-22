@@ -511,11 +511,11 @@ plugins:
         - docs/developing-your-openvidu-app/index.md: OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
         - docs/developing-your-openvidu-app/how-to.md: OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.
         - docs/reference-docs/*.md: OpenVidu Platform - Reference documentation
-        - docs/tutorials/advanced-features/index.md: Explore OpenVidu's advanced features with our LiveKit-compatible tutorials on recording, S3, Azure, and more.
+        - docs/tutorials/advanced-features/index.md: Explore OpenVidu's advanced features, built on our LiveKit fork, with tutorials on recording, S3, Azure, and more.
         - docs/tutorials/ai-services/index.md: Learn how to integrate AI services in your OpenVidu applications.
         - docs/tutorials/angular-components/index.md: Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
-        - docs/tutorials/application-client/index.md: "Learn how to build an OpenVidu application client with our LiveKit-compatible SDKs: connect to a room, publish and subscribe to media."
-        - docs/tutorials/application-server/index.md: "Learn how to build an OpenVidu application server: generate access tokens and receive webhook events with our LiveKit-compatible server SDKs."
+        - docs/tutorials/application-client/index.md: "Learn how to build an OpenVidu application client with our LiveKit fork's SDKs: connect to a room, publish and subscribe to media."
+        - docs/tutorials/application-server/index.md: "Learn how to build an OpenVidu application server: generate access tokens and receive webhook events with our LiveKit fork's server SDKs."
         - docs/self-hosting/deployment-types.md: Description of the different OpenVidu Platform user-friendly installers that facilitate quick on-premises deployments, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
         - docs/self-hosting/local.md: Easy local install deployment instructions for testing and development purposes.
         - docs/self-hosting/single-node/index.md: Different options for a single node deployment, be it on-premises or on any of the most popular cloud providers such as AWS, Azure or GCP.

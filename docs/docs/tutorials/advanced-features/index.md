@@ -1,6 +1,6 @@
 ---
 title: Advanced Features Tutorials
-description: "Explore OpenVidu's advanced features with our LiveKit-compatible tutorials on recording and more."
+description: "Explore OpenVidu's advanced features, built on our LiveKit fork, with tutorials on recording and more."
 ---
 
 # Advanced Features Tutorials

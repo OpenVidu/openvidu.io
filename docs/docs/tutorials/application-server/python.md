@@ -1,6 +1,6 @@
 ---
 title: Python Server Tutorial
-description: "Build a minimal Python application server with Flask using OpenVidu's LiveKit-compatible Python SDK: generate tokens and receive webhook events."
+description: "Build a minimal Python application server with Flask using our LiveKit fork's Python SDK: generate tokens and receive webhook events."
 ---
 
 # Python Server Tutorial

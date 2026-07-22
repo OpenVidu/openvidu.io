@@ -1,6 +1,6 @@
 ---
 title: Go Server Tutorial
-description: "Build a minimal Go application server with Gin using OpenVidu's LiveKit-compatible Go SDK: generate tokens and receive webhook events."
+description: "Build a minimal Go application server with Gin using our LiveKit fork's Go SDK: generate tokens and receive webhook events."
 ---
 
 # Go Server Tutorial

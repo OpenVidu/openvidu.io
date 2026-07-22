@@ -1,6 +1,6 @@
 ---
 title: Application Client Tutorials
-description: "Learn how to build an OpenVidu application client with our LiveKit-compatible SDKs: connect to a room, publish and subscribe to media."
+description: "Learn how to build an OpenVidu application client with our LiveKit fork's SDKs: connect to a room, publish and subscribe to media."
 ---
 
 # Application Client Tutorials

@@ -1,6 +1,6 @@
 ---
 title: .NET Server Tutorial
-description: "Build a minimal .NET application server with ASP.NET using OpenVidu's LiveKit-compatible .NET SDK: generate tokens and receive webhook events."
+description: "Build a minimal .NET application server with ASP.NET using our LiveKit fork's .NET SDK: generate tokens and receive webhook events."
 ---
 
 # .NET Server Tutorial
