@@ -12,8 +12,6 @@ tags:
   - setupcardglow
 ---
 
-# Home { .hide }
-
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
     Choose the ideal OpenVidu solution for your real-time needs
@@ -82,7 +80,7 @@ tags:
 <hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
+  <h2 id="self-host-platform">
     Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
   </h2>
 </div>
@@ -144,7 +142,7 @@ tags:
 <hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
+  <h2 id="all-features">
     All the features you need to quickly build your perfect real-time application
   </h2>
 </div>

@@ -180,3 +180,12 @@
 </section>
 
 {% endblock %}
+
+{# The hero above already provides the page's single <h1> (.slogan). Render the
+   markdown body directly so Material's content.html does NOT auto-inject a
+   second <h1> (page title) when the body has no heading of its own. The landing
+   page hides nav/toc/footer/search, so the edit/feedback/comments partials are
+   intentionally omitted too. #}
+{% block content %}
+  {{ page.content }}
+{% endblock %}
