@@ -321,6 +321,25 @@ p:has(> a.glightbox) {
   margin-top: 0.5em;
 }
 
+/* Shields.io badges: license, GitHub stars, Docker pulls. Rendered as plain
+   <img> tags (shields.io computes and caches the values server-side), so no
+   client-side fetch/formatting logic is needed. */
+.home-badges {
+  text-align: center;
+  margin: 0.5em 0 0;
+  line-height: 0;
+}
+
+.home-badges a {
+  display: inline-block;
+  margin: 4px 5px;
+}
+
+.home-badges img {
+  height: 28px;
+  vertical-align: middle;
+}
+
 .features-list:after {
   clear: both;
   content: "";
