@@ -1,6 +1,6 @@
 ---
 title: Java Server Tutorial
-description: Learn how to build a minimal Java application server with Spring Boot to generate LiveKit tokens and receive webhook events using the LiveKit Kotlin SDK.
+description: "Build a minimal Java application server with Spring Boot using OpenVidu's LiveKit-compatible Kotlin SDK: generate tokens and receive webhook events."
 ---
 
 # Java Server Tutorial

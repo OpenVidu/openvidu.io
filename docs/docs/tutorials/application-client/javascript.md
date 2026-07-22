@@ -1,6 +1,6 @@
 ---
 title: JavaScript Tutorial
-description: Learn how to build a simple video-call app using plain JavaScript, HTML and CSS with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+description: "Build a video-call app in plain JavaScript, HTML and CSS with OpenVidu's LiveKit-compatible JS SDK: join a room, publish and subscribe to media."
 ---
 
 # JavaScript Tutorial

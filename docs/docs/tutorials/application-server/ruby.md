@@ -1,6 +1,6 @@
 ---
 title: Ruby Server Tutorial
-description: Learn how to build a minimal Ruby application server with Sinatra to generate LiveKit tokens and receive webhook events using the LiveKit Ruby SDK.
+description: "Build a minimal Ruby application server with Sinatra using OpenVidu's LiveKit-compatible Ruby SDK: generate tokens and receive webhook events."
 ---
 
 # Ruby Server Tutorial

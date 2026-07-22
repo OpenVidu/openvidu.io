@@ -1,6 +1,6 @@
 ---
 title: iOS Tutorial
-description: Learn how to build a simple video-call app for iOS using Swift with LiveKit Swift SDK. Allow users to join a room, publish and subscribe to media.
+description: "Build a video-call app for iOS in Swift with OpenVidu's LiveKit-compatible Swift SDK: join a room, publish and subscribe to media."
 ---
 
 # iOS Tutorial
