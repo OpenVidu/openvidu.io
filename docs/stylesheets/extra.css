@@ -119,6 +119,10 @@ span:has(> a > .openvidu-tag) {
   padding: 0.8rem 0 1rem 0;
 }
 
+.grid-container.footer-grid {
+  max-width: none;
+}
+
 .footer-conditions-list {
   font-size: 0.64rem;
   display: grid;
@@ -864,6 +868,11 @@ h1.meetplatform-slogan {
 
 .md-footer-meta .footer-column {
   text-align: left;
+}
+
+.md-footer-meta .md-social {
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
 }
 
 .md-footer-meta .footer-column h4 {
