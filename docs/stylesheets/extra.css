@@ -311,23 +311,18 @@ p:has(> a.glightbox) {
   text-decoration: underline;
 }
 
-/* Claim separator: slightly smaller gap than the comparison/tour line's
-   .home-under-cta-sep (whose surrounding whitespace adds to its margins). */
-.home-trust-line .home-sep {
-  margin: 0 0.45em;
-}
-
-.home-credentials-line {
-  margin-top: 0.5em;
-}
-
-/* Shields.io badges: license, GitHub stars, Docker pulls. Rendered as plain
-   <img> tags (shields.io computes and caches the values server-side), so no
-   client-side fetch/formatting logic is needed. */
+/* Shields.io badges: license/stars/docker pulls, and below them publications/
+   citations/experience/OSS affiliations. Rendered as plain <img> tags
+   (shields.io computes and caches the values server-side), so no client-side
+   fetch/formatting logic is needed. */
 .home-badges {
   text-align: center;
   margin: 0.5em 0 0;
   line-height: 0;
+}
+
+.home-credentials-badges {
+  margin-top: 0.7em;
 }
 
 .home-badges a {
