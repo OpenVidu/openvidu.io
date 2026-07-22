@@ -46,7 +46,7 @@ On the other hand, a broadcaster or a live-event producer operates at a much dee
 
 Choosing the right level of abstraction is a delicate balancing act. If the abstraction is too high, you lose the granular control essential for innovation, but you make your life easier by hiding the complexity of the system. If it’s too low, you risk spending months reinventing the wheel—building infrastructure instead of delivering value, but you are in full control of what happens under-the-hood. 
 
-At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu.
+At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu. If you'd rather skip the narrative and go straight to a side-by-side table, our [Meet vs Platform comparison](/openvidu-meet-vs-openvidu-platform/) has it.
 
 ### OpenVidu Meet: The Power of Integration
 
@@ -86,4 +86,4 @@ At the end of the day, abstraction is about **freedom**: the freedom to choose h
 
 The best way to understand these levels of abstraction is to see them in action. Whether you are ready to embed a full-featured meeting room or you want to start routing raw media tracks, our documentation has everything you need to get started.
 
-👉 Explore the [OpenVidu Documentation](https://openvidu.io/)
+👉 Still not sure? [Compare Meet vs Platform side-by-side](/openvidu-meet-vs-openvidu-platform/) — or jump straight to [Get Started with Meet](/latest/meet/) / [Get Started with Platform](/latest/docs/).
