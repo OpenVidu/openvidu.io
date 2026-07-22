@@ -1,5 +1,5 @@
 ---
-title: "Self-hosted videoconferencing and custom WebRTC solutions"
+title: "Self-hosted video conferencing & custom WebRTC"
 template: home.html
 hide:
   - navigation
