@@ -463,6 +463,7 @@ plugins:
         - blog/posts/2026-07-07-deploy-and-scale-in-times-across-clouds.md: Deployment time benchmarks for a self-hosted WebRTC platform across AWS, Azure, GCP, Oracle and DigitalOcean
         - blog/posts/2026-07-09-release-380.md: OpenVidu 3.8.0 release notes — user accounts, RBAC, mediasoup overhaul and TURN security
         - blog/posts/2026-07-14-video-conferencing-permissions.md: Managing permissions in video conferencing apps — anonymous, identified guest and user access models
+        - blog/posts/2026-07-21-building-a-video-enabled-crm-with-an-ai-agent.md: Building a video-enabled CRM with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained per-guest room permissions
         OpenVidu Meet:
         - meet/index.md: OpenVidu Meet - Ready to use videoconferencing solution
         - meet/releases.md: OpenVidu Meet - Release notes
