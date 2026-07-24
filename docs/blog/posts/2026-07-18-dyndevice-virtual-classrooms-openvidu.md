@@ -32,7 +32,7 @@ This post kicks off our series on how engineering teams solve real WebRTC and in
 
 <!-- more -->
 
-## Who is DynDevice?
+## What is DynDevice?
 
 DynDevice is an advanced LMS (Learning Management System) for creating, delivering and managing corporate training, developed by Mega Italia Media, an Italian eLearning company. Live virtual classrooms and webinars are not a nice-to-have in that business — they're the product:
 
