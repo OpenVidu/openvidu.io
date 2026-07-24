@@ -3,6 +3,7 @@ draft: false
 date: 2026-07-18
 slug: dyndevice-virtual-classrooms-openvidu
 description: How DynDevice, the eLearning platform by Mega Italia Media, replaced third-party meeting tools with virtual classrooms built into its LMS using OpenVidu.
+cover_image: poster-light.webp
 categories:
   - Success story
   - Vertical
@@ -23,8 +24,8 @@ hide:
 
 # How DynDevice Built Virtual Classrooms Into Its LMS with OpenVidu
 
-![DynDevice and OpenVidu customer success story](/assets/images/blog/dyndevice-virtual-classrooms/poster-light.png#only-light "DynDevice + OpenVidu")
-![DynDevice and OpenVidu customer success story](/assets/images/blog/dyndevice-virtual-classrooms/poster-dark.png#only-dark "DynDevice + OpenVidu")
+![DynDevice and OpenVidu customer success story](/assets/images/blog/YYYY/MM/dyndevice-virtual-classrooms-openvidu/poster-light.webp#only-light "DynDevice + OpenVidu")
+![DynDevice and OpenVidu customer success story](/assets/images/blog/YYYY/MM/dyndevice-virtual-classrooms-openvidu/poster-dark.webp#only-dark "DynDevice + OpenVidu")
 
 What do you do when your product depends on video meetings that happen somewhere else? For years, the trainers using [DynDevice](https://www.dyndevice.com/){:target="_blank"}, the corporate eLearning platform built by [Mega Italia Media](https://www.megaitaliamedia.com/){:target="_blank"}, had to send their learners out of the LMS and into Zoom, Meet, Teams, WebEx or GoToWebinar links to run a live class. It worked — and it fragmented the learning experience every single day.
 
@@ -74,7 +75,7 @@ We asked Matteo which parts of the architecture his developers value most day to
 
 > "From a development team's perspective, the observability tools and the cost predictability/analysis stand out the most. Having clear insights into system performance and being able to effectively monitor our infrastructure while keeping costs under control are crucial features for our daily operations."
 
-It makes sense once you run video in production. Features demo well; observability is what lets a small team *operate* real-time infrastructure without a dedicated SRE group — and self-hosting is what makes the cost curve predictable in the first place. If you want to see what this looks like in OpenVidu, start with the [production-ready observability](../../docs/self-hosting/production-ready/index.md) documentation.
+It makes sense once you run video in production. Features demo well; observability is what lets a small team *operate* real-time infrastructure without a dedicated SRE group — and self-hosting is what makes the cost curve predictable in the first place. If you want to see what this looks like in OpenVidu, start with the [production-ready observability](/docs/self-hosting/production-ready/index.md) documentation.
 
 ## The results: faster shipping, one-click classrooms
 
@@ -92,7 +93,7 @@ One click from the course dashboard into a branded virtual classroom — that's 
 
 > "Looking ahead, the integration of AI is certainly on our radar. We believe AI will help both our team and our users by making the web-conferencing experience smoother, more accessible, and easier to manage and moderate."
 
-That maps to where OpenVidu is heading too — real-time [AI agents](../../docs/tutorials/ai-services/index.md) that join rooms to caption, translate, summarize or moderate. We suspect this won't be the last conversation we have with the DynDevice team about it.
+That maps to where OpenVidu is heading too — real-time [AI agents](/docs/tutorials/ai-services/index.md) that join rooms to caption, translate, summarize or moderate. We suspect this won't be the last conversation we have with the DynDevice team about it.
 
 ## Matteo's advice for teams in the same spot
 
@@ -110,11 +111,11 @@ We closed by asking what he'd tell an engineering team struggling to add real-ti
 
 ## Bring virtual classrooms to your own platform
 
-If DynDevice's "before" picture looked uncomfortably familiar, the fastest way out is [**OpenVidu Meet Embedded**](../../meet/embedded/intro.md): a full-featured, brandable videoconferencing module you embed into your LMS or SaaS with a web component, a REST API and webhooks — self-hosted on your infrastructure, exactly like DynDevice runs theirs.
+If DynDevice's "before" picture looked uncomfortably familiar, the fastest way out is [**OpenVidu Meet Embedded**](/meet/embedded/intro.md): a full-featured, brandable videoconferencing module you embed into your LMS or SaaS with a web component, a REST API and webhooks — self-hosted on your infrastructure, exactly like DynDevice runs theirs.
 
-Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](../../docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](../../openvidu-meet-vs-openvidu-platform.md) settles it in five minutes.
+Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](/docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](/openvidu-meet-vs-openvidu-platform.md) settles it in five minutes.
 
 !!! tip "Thinking about your own success story?"
-    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](../../support.md) — we'll do the writing, you get the visibility and the backlinks.
+    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support.md) — we'll do the writing, you get the visibility and the backlinks.
 
 *Our thanks to Matteo Resconi and the Mega Italia Media team for sharing their experience.*
