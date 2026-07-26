@@ -292,6 +292,14 @@ sed -i …` to rewrite links in place.
     - Links to the home page (`href="(../)*.."`) → `href="/"`.
     - The cookie-consent base URL `URL("(../)*..",location)` → `URL("/",location)`, so the
       cookie consent is not re-requested on every version.
+    - Rewrites each versioned page's self-referencing SEO URLs — `<link rel="canonical">`
+      and `og:url` — from `/$VERSION/…` to `/latest/…`, so ranking signals consolidate on
+      one evergreen URL instead of churning every release (issue #1). JSON-LD needs no
+      rewriting here: the only JSON-LD emitted on a versioned page (`docs/index.md`,
+      `meet/index.md`) already hardcodes `/latest/…` (see `docs/overrides/partials/json-ld.html`);
+      no other versioned page emits JSON-LD at all. Only these two tags are touched — the
+      `/$VERSION/assets/…` pins above and any author-pinned `/X.Y/…` links elsewhere on the
+      page are left alone.
 - **`changeNonVersionedPagesLinks`** — operates on the version's non-versioned pages and
   `index.html`:
     - Fixes `404.html`: strips `/$VERSION/`, and rewrites links to versioned pages to
