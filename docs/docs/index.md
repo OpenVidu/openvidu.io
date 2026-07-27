@@ -81,7 +81,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 </div>
 
 !!! info
-    If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](../meet/index.md){.meet-link-color} may be the perfect solution for you. Give it a try!
+    If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](../meet/index.md){.meet-link-color} may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](../openvidu-meet-vs-openvidu-platform.md).
 
 ### Live-streaming
 

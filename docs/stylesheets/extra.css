@@ -104,19 +104,30 @@ span:has(> a > .openvidu-tag) {
 }
 
 .md-social__link {
-  height: 2.8rem;
-  width: 2.8rem;
-  line-height: 2.8;
+  height: 2.2rem;
+  width: 2.2rem;
+  line-height: 2.2;
 }
 
 .md-social__link svg {
-  max-height: 1.4rem;
+  max-height: 1.1rem;
 }
 
 .footer-grid {
   width: 100%;
   text-align: center;
   padding: 0.8rem 0 1rem 0;
+}
+
+.grid-container.footer-grid {
+  max-width: none;
+}
+
+@media (min-width: 1220px) {
+  .grid-20.footer-products-gap {
+    margin-left: 1.2rem;
+    width: calc(20% - 1.2rem);
+  }
 }
 
 .footer-conditions-list {
@@ -864,6 +875,11 @@ h1.meetplatform-slogan {
 
 .md-footer-meta .footer-column {
   text-align: left;
+}
+
+.md-footer-meta .md-social {
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
 }
 
 .md-footer-meta .footer-column h4 {
