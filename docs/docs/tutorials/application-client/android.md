@@ -1,6 +1,6 @@
 ---
 title: Android Tutorial
-description: Learn how to build a simple video-call app for Android using Kotlin with LiveKit Android Kotlin SDK. Allow users to join a room, publish and subscribe to media.
+description: "Build a video-call app for Android in Kotlin with our LiveKit fork's Android SDK: join a room, publish and subscribe to media."
 ---
 
 # Android Tutorial

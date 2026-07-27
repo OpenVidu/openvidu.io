@@ -57,7 +57,7 @@ tags:
           For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
         </p>
         <ul class="product-features">
-          <li>Programmable client and server SDKs for all languages, LiveKit-compatible</li>
+          <li>Programmable client and server SDKs for all languages, from our LiveKit fork</li>
           <li>Build your custom UI from scratch with total freedom</li>
           <li>Low level control of real time media: codecs, protocols, bitrates...</li>
           <li>Precise control of recording and streaming with custom layouts</li>

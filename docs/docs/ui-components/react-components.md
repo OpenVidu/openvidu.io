@@ -1,5 +1,5 @@
 ---
-description: LiveKit React Components simplify real-time audio/video app development with ready-to-use components, hooks and contexts for seamless integration.
+description: "OpenVidu apps can use React Components from our LiveKit fork: ready-to-use components, hooks and contexts for real-time audio/video development."
 ---
 
 # React Components

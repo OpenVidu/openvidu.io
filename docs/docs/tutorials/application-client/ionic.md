@@ -1,6 +1,6 @@
 ---
 title: Ionic Tutorial
-description: Learn how to build a simple video-call app using Ionic and Angular with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+description: "Build a video-call app in Ionic and Angular with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
 ---
 
 # Ionic Tutorial
