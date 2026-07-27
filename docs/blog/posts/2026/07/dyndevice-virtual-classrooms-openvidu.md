@@ -1,8 +1,11 @@
 ---
 draft: false
-date: 2026-07-18
+date: 2026-07-28
 slug: dyndevice-virtual-classrooms-openvidu
-description: How DynDevice, the eLearning platform by Mega Italia Media, replaced third-party meeting tools with virtual classrooms built into its LMS using OpenVidu.
+description: >-
+  How DynDevice, the eLearning platform by Mega Italia Media, replaced
+  third-party meeting tools with virtual classrooms built into its LMS using
+  OpenVidu.
 cover_image: poster-light.webp
 categories:
   - Success story
@@ -24,8 +27,8 @@ hide:
 
 # How DynDevice Built Virtual Classrooms Into Its LMS with OpenVidu
 
-![DynDevice and OpenVidu customer success story](/assets/images/blog/YYYY/MM/dyndevice-virtual-classrooms-openvidu/poster-light.webp#only-light "DynDevice + OpenVidu")
-![DynDevice and OpenVidu customer success story](/assets/images/blog/YYYY/MM/dyndevice-virtual-classrooms-openvidu/poster-dark.webp#only-dark "DynDevice + OpenVidu")
+![DynDevice and OpenVidu customer success story](/assets/images/blog/2026/07/dyndevice-virtual-classrooms-openvidu/poster-light.webp#only-light "DynDevice + OpenVidu")
+![DynDevice and OpenVidu customer success story](/assets/images/blog/2026/07/dyndevice-virtual-classrooms-openvidu/poster-dark.webp#only-dark "DynDevice + OpenVidu")
 
 What do you do when your product depends on video meetings that happen somewhere else? For years, the trainers using [DynDevice](https://www.dyndevice.com/){:target="_blank"}, the corporate eLearning platform built by [Mega Italia Media](https://www.megaitaliamedia.com/){:target="_blank"}, had to send their learners out of the LMS and into Zoom, Meet, Teams, WebEx or GoToWebinar links to run a live class. It worked — and it fragmented the learning experience every single day.
 
