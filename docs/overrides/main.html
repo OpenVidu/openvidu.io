@@ -180,17 +180,6 @@
 
 {{ super() }}
 
-{% if page and page.url and (page.url.endswith("meet/releases/") or page.url.endswith("docs/releases/")) %}
-<style>
-  /* Release notes pages show every version's notes regardless of the version being
-     browsed, so the "old version" banner is meaningless there — hide it. This style is
-     baked into the built releases page and travels with it when copied to other versions. */
-  [data-md-component="outdated"] {
-    display: none !important;
-  }
-</style>
-{% endif %}
-
 {% if page.meta %}
 {% if page.meta.hide %}
 {% if "footer-prev" in page.meta.hide %}

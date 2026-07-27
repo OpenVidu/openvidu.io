@@ -33,6 +33,14 @@ checkDependencies() {
         echo >&2 "mike not found. Install it with \"pip install mike\""
         exit 1
     }
+
+    # Check if python3 is available (used by copy-releases-content.py). It always is in
+    # practice, since mkdocs and mike are Python tools, but the failure would otherwise
+    # surface halfway through a publish
+    command -v python3 >/dev/null 2>&1 || {
+        echo >&2 "python3 not found. It is required to copy the releases pages content"
+        exit 1
+    }
 }
 
 checkGitStatus() {
@@ -270,21 +278,25 @@ copyFilesFromVersionToRoot() {
 }
 
 copyReleasesFromTo() {
-    # Copy the releases pages (Meet and Platform) from a SOURCE version folder into a
-    # DESTINATION version folder, so the destination shows the full, most-recent release
-    # notes regardless of the documentation version being browsed.
+    # Copy the *content* of the releases pages (Meet and Platform) from a SOURCE version
+    # folder into a DESTINATION version folder, so the destination shows the full,
+    # most-recent release notes regardless of the documentation version being browsed.
     #
-    # The release notes' own links are authored as absolute, version-pinned URLs, so the
-    # only relative links left in the built page are theme chrome (navigation menu and
-    # hashed assets). Those are rewritten in the copy to absolute "/latest/" links, because
-    # an older destination folder does not contain the same hashed asset files nor every
-    # page the latest nav points at. The canonical tag is intentionally left untouched: the
-    # copy already declares the source (latest) version as canonical, which consolidates
-    # every copy onto a single URL.
+    # Only the release notes body and the table of contents travel. Everything else in the
+    # destination page is left exactly as that version built it: header, tabs, navigation
+    # menu, footer, canonical URL, asset URLs and Material's runtime config all keep
+    # pointing inside the destination version. This is what keeps a visitor who opens
+    # /3.4/docs/releases/ browsing the 3.4 documentation (and what makes the outdated-version
+    # banner show up there, like on any other page of an old version).
+    #
+    # The splice itself is done by copy-releases-content.py: the table of contents nests one
+    # <nav> per heading level, so finding where a region ends needs tag-depth counting, which
+    # sed cannot do. See that script for the regions and the guarantees it checks.
     local SRC="$1" # source version folder (holds the most recent release notes)
     local DST="$2" # destination version folder
+    local STATUS
 
-    # Never copy a version onto itself (it would rewrite the canonical page's own links)
+    # Never copy a version onto itself
     if [ "$SRC" = "$DST" ]; then
         return 0
     fi
@@ -296,31 +308,19 @@ copyReleasesFromTo() {
         # Only copy when both sides have this versioned releases page
         # (e.g. Meet documentation did not exist before 3.4.0)
         [ -f "$SRC_DIR/index.html" ] || continue
-        [ -d "$DST_DIR" ] || continue
+        [ -f "$DST_DIR/index.html" ] || continue
 
-        # HTML version (always generated). The release notes' own links are authored as
-        # absolute, version-pinned URLs, so the only relative links left in the built page
-        # are theme-generated: the navigation menu and the hashed CSS/JS/image assets. They
-        # still must be rewritten to "/latest/" (the page sits two levels deep, so "../../"
-        # is the version root and "../" the <vp> root; longer pattern first), because the
-        # assets carry per-build content hashes and the nav reflects the latest structure,
-        # so left relative they would break styling or 404 against pages an older folder
-        # never had. Only href/src attributes are touched, so Material's runtime JS config
-        # (base, search path) keeps working per version folder; <link rel="canonical"> is
-        # left as-is.
-        cp "$SRC_DIR/index.html" "$DST_DIR/index.html"
-        sed -i -E "s#(href|src)=\"\.\./\.\./#\1=\"/latest/#g" "$DST_DIR/index.html"
-        sed -i -E "s#(href|src)=\"\.\./#\1=\"/latest/$VP/#g" "$DST_DIR/index.html"
-        echo "Copied releases page into '$DST_DIR/index.html' (internal links pointing to /latest/)"
-
-        # Markdown version for LLMs. The mkdocs-llmstxt plugin generates it for pages listed
-        # in its 'sections' (both releases pages are). It may still be absent for versions
-        # built before the page was added there, so its presence is checked. Its internal
-        # links are already absolute URLs emitted by the plugin, so it is copied verbatim
-        # with no rewriting.
-        if [ -f "$SRC_DIR/index.md" ]; then
-            cp "$SRC_DIR/index.md" "$DST_DIR/index.md"
-            echo "Copied releases Markdown (llms) into '$DST_DIR/index.md'"
+        # Exit code 2 means the destination page did not expose the expected regions (an old
+        # version folder may have been built by a different theme version): warn loudly and
+        # leave that page as built, rather than aborting a publish that is already half done.
+        # Any other non-zero exit is a genuine problem with the source page and aborts the
+        # publish through "set -e".
+        STATUS=0
+        python3 "$RELEASES_CONTENT_HELPER" "$SRC_DIR/index.html" "$DST_DIR/index.html" || STATUS=$?
+        if [ "$STATUS" -eq 2 ]; then
+            echo "WARNING: could not splice the releases content into '$DST_DIR/index.html'; left as built"
+        elif [ "$STATUS" -ne 0 ]; then
+            return "$STATUS"
         fi
     done
 }
@@ -452,6 +452,18 @@ updateWebsite() {
     git checkout main
 }
 
+stageReleasesContentHelper() {
+    # copy-releases-content.py is used from updateWebsite, which runs with the gh-pages
+    # branch checked out. This folder does not exist on gh-pages, so by then the file would
+    # be gone from the working tree (this very script only survives because bash keeps its
+    # file descriptor open). Stage a copy outside the working tree while it is still there.
+    # It must not simply be restored into the gh-pages working tree: updateWebsite runs
+    # "git add ." and would publish it as part of the website.
+    RELEASES_CONTENT_HELPER="$(mktemp)"
+    trap 'rm -f "$RELEASES_CONTENT_HELPER"' EXIT
+    cp custom-versioning/copy-releases-content.py "$RELEASES_CONTENT_HELPER"
+}
+
 main() {
     validateArgs $@
     checkDependencies
@@ -462,6 +474,7 @@ main() {
     cd "$(dirname "$0")" || exit
     cd ..
 
+    stageReleasesContentHelper
     checkGitStatus
     prepareGitBranches
     deployVersion

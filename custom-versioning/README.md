@@ -126,17 +126,18 @@ releases page would only list the notes up to that version: a visitor browsing `
 would never see the notes for `3.6.0`, `3.7.0`, … even though release notes are inherently
 global information.
 
-We want every version to serve the **full, most-recent** release notes. This is achieved
-in two complementary parts:
+We want every version to serve the **full, most-recent** release notes, **without** dragging
+the rest of the latest page along with them. This is achieved in two complementary parts:
 
-1. **Copy at publish time (this folder).** On every publish, the latest releases pages are
-   copied into **every other version folder**, so each `/X.Y/…/releases/` serves the same
-   complete changelog as `/latest/…/releases/`. See
+1. **Copy the content at publish time (this folder).** On every publish, the **content** of
+   the latest releases pages — the release notes body and the table of contents, nothing
+   else — is spliced into the releases page of **every other version folder**, so each
+   `/X.Y/…/releases/` lists the same complete changelog as `/latest/…/releases/`. See
    [`copyReleasesToAllOtherVersions` / `copyReleasesFromTo`](#the-releases-page-copy-helpers).
 
-2. **Jump to the viewed version (front-end).** Because the page is now identical across
+2. **Jump to the viewed version (front-end).** Because the notes are now identical across
    versions, a small client-side script scrolls the visitor to the section matching the
-   version they are browsing — e.g. opening `/3.5.0/meet/releases/` jumps to the `## 3.5.0`
+   version they are browsing — e.g. opening `/3.5/meet/releases/` jumps to the `## 3.5.0`
    section (anchor `#350`). The script lives outside this folder in
    [`docs/javascripts/releases-scroll-to-version.js`](../docs/javascripts/releases-scroll-to-version.js)
    and is loaded only on the releases pages, via the `scrolltoversion` tag in their front
@@ -144,21 +145,31 @@ in two complementary parts:
    no-op when the URL already has an anchor (so cross-page `#380` links are respected) or
    when there is no matching section (the `latest` alias stays at the top, newest first).
 
-Two consequences worth keeping in mind:
+Four consequences worth keeping in mind:
 
-- **Theme links are rewritten to `/latest/`.** The release notes' own links are authored as
-  absolute, version-pinned URLs, so they need no rewriting. What stays relative in the built
-  page is theme-generated chrome — the navigation menu and the hashed CSS/JS/image assets.
-  Those would break inside an older version folder (asset hashes differ across builds, and
-  the latest nav points at pages the older folder never had), so they are rewritten to
-  absolute `/latest/…` links. See the [link-rewriting reference](#link-rewriting-reference).
-- **The canonical tag is left untouched.** Each copy already declares the latest version as
-  its `<link rel="canonical">`, so all copies consolidate onto a single URL for SEO — no
-  duplicate-content penalty.
-- **The LLM Markdown companion travels too.** Pages listed in the `mkdocs-llmstxt` plugin's
-  `sections` also get an `index.md` next to their `index.html` (both releases pages are
-  listed). The copy step propagates it as well, so `/X.Y/<vp>/releases/index.md` stays in
-  sync. Unlike the HTML, its links are already absolute, so it is copied verbatim.
+- **Only the content travels; the page stays version-local.** Header, tabs, navigation menu,
+  footer, `<link rel="canonical">`, asset URLs and Material's runtime config are left exactly
+  as the destination version built them, so a visitor who opens `/3.4/docs/releases/` keeps
+  browsing the **3.4** documentation instead of being sent to `/latest/` by every link around
+  the notes. Nothing in the spliced fragments needs rewriting: the release notes' own links
+  are authored as absolute, version-pinned URLs, and the table of contents only holds
+  `#anchor` links. Both are verified before splicing, so a page that breaks the convention is
+  reported instead of published with links resolving against the wrong version folder.
+- **The outdated-version banner shows up there like anywhere else.** The destination page is
+  the destination version's own page, so Material flags it as outdated and the banner from
+  `{% block outdated %}` appears — which is what tells the visitor that the documentation
+  around the notes is old, even though the notes themselves are complete.
+- **The canonical tag is the destination's own.** Every versioned page already has its
+  canonical rewritten to `/latest/…` by
+  [`changeVersionedPagesLinks`](#the-link-rewriting-helpers), so all releases pages
+  consolidate onto `/latest/<vp>/releases/` for SEO — a target that no longer changes with
+  every release.
+- **The LLM Markdown companion does not travel.** Pages listed in the `mkdocs-llmstxt`
+  plugin's `sections` also get an `index.md` next to their `index.html`, but old version
+  folders have no `llms.txt` at all (the `UPDATE_LATEST=false` path removes it, since those
+  branches predate the plugin), so nothing there ever links to that companion. Only
+  `/latest/<vp>/releases/index.md`, the one `llms.txt` references, matters — and it is built,
+  not copied.
 
 ---
 
@@ -169,6 +180,7 @@ Two consequences worth keeping in mind:
 | [`push-new-version.sh`](push-new-version.sh)                                                     | The workhorse. Deploys a version with `mike` and does all the post-processing. The other two scripts delegate to it.       |
 | [`overwrite-latest-version.sh`](overwrite-latest-version.sh)                                     | Deletes and re-publishes the current latest version, refreshing the root pages, then syncs the version branch with `main`. |
 | [`overwrite-past-version.sh`](overwrite-past-version.sh)                                         | Deletes and re-publishes a specific older version **without** touching the root pages.                                     |
+| [`copy-releases-content.py`](copy-releases-content.py)                                           | Splices the release notes body and table of contents of one built releases page into another version's, leaving that version's navigation, canonical and assets alone. Called by `push-new-version.sh`. |
 | [`redirect-from-version-to-getting-started.html`](redirect-from-version-to-getting-started.html) | A tiny client-side redirect used as each version's `index.html`.                                                           |
 
 ---
@@ -206,7 +218,17 @@ Requires at least one argument (the version). Reads the optional second argument
 
 ### `checkDependencies`
 
-Fails early if the `mike` binary is not on `PATH` (`pip install mike`).
+Fails early if the `mike` binary is not on `PATH` (`pip install mike`), or if `python3` is
+missing (needed by [`copy-releases-content.py`](copy-releases-content.py)).
+
+### `stageReleasesContentHelper`
+
+Copies [`copy-releases-content.py`](copy-releases-content.py) to a temporary file (removed by
+an `EXIT` trap) **before** any branch switching. `updateWebsite` runs with `gh-pages` checked
+out, where this folder does not exist, so by then the script would be gone from the working
+tree — `push-new-version.sh` itself only survives because bash keeps its file descriptor open.
+Restoring it into the `gh-pages` working tree instead is not an option: `updateWebsite` runs
+`git add .` and would publish it as part of the website.
 
 ### `checkGitStatus`
 
@@ -347,27 +369,41 @@ release.
 These implement the [always-up-to-date releases pages](#keeping-the-releases-pages-always-up-to-date).
 They run inside `updateWebsite`, on the `gh-pages` branch, just before the commit.
 
-- **`copyReleasesFromTo SRC DST`** — copies the releases pages from a source version folder
-  into a destination version folder. For each versioned page (`docs`, `meet`):
-    - Skips it if either side lacks that releases page (e.g. Meet did not exist before
+- **`copyReleasesFromTo SRC DST`** — copies the releases pages' **content** from a source
+  version folder into a destination version folder. For each versioned page (`docs`, `meet`):
+    - Skips it if either side lacks that built releases page (e.g. Meet did not exist before
       `3.4.0`), and never copies a version onto itself.
-    - Copies `SRC/<vp>/releases/index.html` over `DST/<vp>/releases/index.html` and rewrites
-      the remaining relative `href`/`src` links to absolute `/latest/…` links. The release
-      notes' own links are authored as absolute version-pinned URLs, so what gets rewritten
-      is only theme chrome (the navigation menu and hashed CSS/JS/image assets). The page
-      sits two levels deep (`<vp>/releases/`), so `../../` (version root) → `/latest/` and
-      `../` (the `<vp>` root) → `/latest/<vp>/`. This keeps the copy loading the latest
-      assets (hashes differ per build) and its nav from 404-ing against pages an older folder
-      never had. Only `href`/`src` attributes are touched, so Material's runtime JS (its
-      `base` and search-index paths) keeps working per version folder; `<link rel="canonical">`
-      is left as-is.
-    - Also copies the LLM Markdown companion `SRC/<vp>/releases/index.md` **when it exists**.
-      The [`mkdocs-llmstxt`](https://github.com/pawamoy/mkdocs-llmstxt) plugin generates this
-      `.md` for pages listed in its `sections` in `mkdocs.yml`; **both** releases pages
-      (`meet/releases.md` and `docs/releases.md`) are listed. The existence check still
-      matters for versions built before a page was added there. Its internal links are
-      already **absolute** URLs emitted by the plugin (e.g. `https://openvidu.io/3.7.0/docs/…`),
-      so it is copied **verbatim**, with no rewriting.
+    - Runs [`copy-releases-content.py`](copy-releases-content.py) on
+      `SRC/<vp>/releases/index.html` → `DST/<vp>/releases/index.html`, which replaces only two
+      regions of the destination page and leaves the file otherwise byte-identical:
+
+      | Region | Marker | Occurrences |
+      | --- | --- | --- |
+      | Release notes body | `<article class="md-content__inner md-typeset">` | 1 |
+      | Table of contents | `<nav class="md-nav md-nav--secondary" aria-label="Table of contents">` | 2, identical |
+
+      There are two tables of contents because Material renders one in the right-hand
+      secondary sidebar and embeds another under the active item of the primary navigation
+      (used by the mobile drawer); both are replaced, or the sidebar would keep listing the
+      destination version's own, shorter set of releases. Regions are closed by **tag-depth
+      counting**, not by searching for the first closing tag — the table of contents nests one
+      `<nav>` per heading level, which is why this step is a Python script and not `sed`.
+
+      No link rewriting is applied, and none is needed: every link inside a release-notes
+      section is authored as an absolute, version-pinned URL, and the table of contents only
+      holds `#anchor` links. The script **verifies** this before splicing and fails rather
+      than publishing a fragment whose links would resolve against the wrong version folder.
+
+      Everything else stays the destination's own: `<head>`, `<link rel="canonical">`, the OG
+      tags, `<script id="__config">` (Material's `base`, search-index path and version data),
+      header, tabs, primary navigation, footer and every asset URL.
+    - Exit-code handling: `2` means the destination page did not expose those regions (an old
+      folder built by a different theme version) — a `WARNING` is printed and that page is left
+      as built, rather than aborting a publish that has already pushed a `mike` commit. Any
+      other non-zero exit points at the freshly built **source** page and aborts the publish.
+    - The LLM Markdown companion (`index.md`) is **not** copied: old version folders have no
+      `llms.txt`, so nothing there links to it. See
+      [Keeping the releases pages always up to date](#keeping-the-releases-pages-always-up-to-date).
 - **`copyReleasesToAllOtherVersions`** — reads the version list from `versions.json` and
   calls `copyReleasesFromTo "$VERSION" <each other version>`. Used on the latest-publish
   path, where `"$VERSION"` is the freshly built latest.
@@ -376,6 +412,11 @@ On the past-version path (`UPDATE_LATEST=false`), the direction is reversed: the
 resolves the current latest via the `latest` symlink (`readlink latest`) and calls
 `copyReleasesFromTo "$LATEST_VERSION" "$VERSION"`, so a rebuilt old version does not revert
 to its stale, version-local notes.
+
+Note that a destination page must have been **rebuilt since this content-only scheme was
+introduced** for its navigation to be its own: folders last published under the old
+whole-page copy still carry the latest version's chrome until
+`overwrite-past-version.sh X.Y` rebuilds them.
 
 ---
 
@@ -456,11 +497,12 @@ Summary of the final link conventions produced by the scripts:
 | Search index → non-versioned page   | `pricing/`         | `/pricing/`                       |
 | Root sitemap → versioned page       | `/3.0/docs/`     | `/latest/docs/`                   |
 | Root sitemap → non-versioned page   | `/3.0/pricing/`  | `/pricing/`                       |
-| Copied releases page nav → other docs | `../../docs/`    | `/latest/docs/`                   |
-| Copied releases page nav → `<vp>` page | `../features/`  | `/latest/meet/features/`          |
-| Copied releases page → assets       | `../../assets/`    | `/latest/assets/`                 |
-| Copied releases page content links  | _(authored absolute)_ | _(left as-is, not rewritten)_  |
-| Canonical on copied releases page   | `…/3.7.0/…`        | `…/3.7.0/…` (unchanged)           |
+| Canonical/`og:url` on versioned page | `…/3.0/docs/…`   | `…/latest/docs/…`                 |
+
+The releases pages are **not** in this table any more: only their content is copied into other
+version folders, so every link on the page — navigation, assets, canonical — is the one the
+destination version built for itself and follows the rows above. Nothing inside the copied
+content is rewritten either, because those links are authored absolute and version-pinned.
 
 ---
 
@@ -511,13 +553,13 @@ workflow).
   `NON_VERSIONED_PAGES`; if you add a new versioned section, add it to `VERSIONED_PAGES`
   in [`push-new-version.sh`](push-new-version.sh). Otherwise its links will not be
   rewritten and it will not be relocated correctly.
-- **Releases-page canonical tracks the latest version.** Because the copied releases pages
-  inherit the source's canonical, the single consolidated URL follows the newest version
-  number (`…/3.7.0/…` → `…/3.8.0/…` on the next release). This is valid — search engines
-  simply re-consolidate — but the canonical URL is not stable across releases. If a stable
-  target is preferred, rewrite the canonical to `/latest/…/releases/` in both the copies
-  and the source page.
-- **Per-version search index is not updated by the copy.** The copy overwrites the rendered
+- **The releases-content splice is coupled to two Material markup strings.** A theme upgrade
+  that renames the `md-content__inner` article or the `md-nav--secondary` table-of-contents
+  `aria-label` breaks the splice. It fails loudly rather than silently (non-zero exit from
+  [`copy-releases-content.py`](copy-releases-content.py); the source-side failure aborts the
+  publish), so treat a `WARNING: could not splice the releases content` line in a publish log
+  as something to fix, not noise.
+- **Per-version search index is not updated by the copy.** The splice rewrites the rendered
   `index.html`, but each version's `search/search_index.json` still holds that version's
   original releases text. The page a visitor sees is current; in-version search results for
   the releases page may lag until that version is rebuilt.
