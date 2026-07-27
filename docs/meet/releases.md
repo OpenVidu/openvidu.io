@@ -1,3 +1,8 @@
+---
+tags:
+  - scrolltoversion
+---
+
 ## 3.5.0
 
 !!! info "For the Release Notes of OpenVidu Platform 3.5.0, please visit here: [OpenVidu Platform 3.5.0 :fontawesome-solid-external-link:{.external-link-icon}](../docs/releases.md#350){:target="_blank" .platform-link-color}"
