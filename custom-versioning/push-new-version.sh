@@ -113,6 +113,19 @@ changeVersionedPagesLinks() {
 
     # Change base URL to root in order to prevent asking for cookies consent in each version
     grep -Erl "URL\(\"(\.\./)*\.\.\",location\)" $ALL_PREFIXED_VP | xargs sed -i "s|URL(\"\(\.\./\)*\.\.\",location)|URL(\"/\",location)|g" || true
+
+    # Point each versioned page's self-referencing SEO URLs (canonical, og:url) at the
+    # stable /latest/ alias instead of this version number, so ranking signals consolidate
+    # on one evergreen URL across releases instead of churning every release (issue #1).
+    # These two tags are the only ones that carry page.canonical_url for versioned pages:
+    # the JSON-LD emitted for docs/index.md and meet/index.md already hardcodes /latest/
+    # (see docs/overrides/partials/json-ld.html), and no other versioned page emits JSON-LD
+    # at all. NOTE: only these SEO tags are touched — the /$VERSION/assets/ pins applied
+    # above, and any author-pinned /X.Y/... links elsewhere on the page, are left untouched.
+    for FILE in $(grep -Erl 'rel="canonical"|property="og:url"' $ALL_PREFIXED_VP || true); do
+        sed -i -E "s#(rel=\"canonical\" href=\"https://openvidu.io)/$VERSION/#\1/latest/#g" "$FILE"
+        sed -i -E "s#(property=\"og:url\" content=\"https://openvidu.io)/$VERSION/#\1/latest/#g" "$FILE"
+    done
 }
 
 changeNonVersionedPagesLinks() {
