@@ -31,7 +31,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
         <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/logo.png">
+      <link rel="icon" href="../../../../../assets/images/logos/logo.png">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
     
 
@@ -197,7 +197,7 @@
 <meta property="og:title" content="Building a video-enabled CRM with an AI agent and OpenVidu Meet">
 <meta property="og:description" content="How a complete CRM with embedded video meetings was built with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained, per-guest room permissions, in seven prompts total.">
 <meta property="og:url" content="https://openvidu.io/blog/2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/">
-<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026-07-21-building-a-video-enabled-crm-with-an-ai-agent/poster-light.png">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png">
 <meta property="og:image:alt" content="Building a video-enabled CRM with an AI agent and OpenVidu Meet">
 <meta property="article:published_time" content="2026-07-21">
 <meta name="twitter:card" content="summary_large_image">
@@ -215,7 +215,7 @@
       "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://openvidu.io/assets/images/openvidu_vert_white_bg_trans_cropped2.png"
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
       },
       "sameAs": [
         "https://github.com/OpenVidu",
@@ -236,7 +236,7 @@
       "url": "https://openvidu.io/blog/2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/",
       "headline": "Building a video-enabled CRM with an AI agent and OpenVidu Meet",
       "description": "How a complete CRM with embedded video meetings was built with an AI coding agent and OpenVidu Meet \u2014 from a single prompt to fine-grained, per-guest room permissions, in seven prompts total.",
-      "image": "https://openvidu.io/assets/images/blog/2026-07-21-building-a-video-enabled-crm-with-an-ai-agent/poster-light.png",
+      "image": "https://openvidu.io/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png",
       "datePublished": "2026-07-21",
       "dateModified": "2026-07-21",
       "inLanguage": "en",
@@ -388,7 +388,7 @@
       
       
         
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
       
     </a>
@@ -969,7 +969,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     OpenVidu
@@ -11845,14 +11845,14 @@
 
 
 <h1 id="building-a-video-enabled-crm-with-an-ai-agent-and-openvidu-meet">Building a video-enabled CRM with an AI agent and OpenVidu Meet<a class="headerlink" href="#building-a-video-enabled-crm-with-an-ai-agent-and-openvidu-meet" title="Anchor link to this section for reference">#</a></h1>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM" src="../../../../../assets/images/blog/crm-meet/poster-light.png#only-light" title="A video meeting, right inside the CRM"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM" src="../../../../../assets/images/blog/crm-meet/poster-dark.png#only-dark" title="A video meeting, right inside the CRM"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png#only-light" title="A video meeting, right inside the CRM"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-dark.png#only-dark" title="A video meeting, right inside the CRM"></a></p>
 <p>What does it take today to go from an empty folder to a working business app with <strong>video meetings embedded in it</strong>? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and <strong>seven prompts</strong>.</p>
-<p>We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate <a href="https://openvidu.io/latest/meet/embedded/intro/">OpenVidu Meet</a> so that meetings happen <em>inside</em> the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.</p>
+<p>We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate <a href="/latest/meet/embedded/intro/">OpenVidu Meet</a> so that meetings happen <em>inside</em> the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.</p>
 <!-- more -->
 
 <video autoplay="" muted="" loop="" playsinline="" width="100%" style="border-radius: 10px; margin: 0.5em 0 1em 0;">
-  <source src="/assets/images/blog/crm-meet/crm-meet-demo.mp4" type="video/mp4">
+  <source src="/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" type="video/mp4">
 </video>
 
 <p><em>The result in 10 seconds: sign in, open the client's issue, hit </em><em>Join</em><em> — and the meeting happens right inside the CRM. Real capture of the running app (participant video is stock footage).</em></p>
@@ -11876,16 +11876,16 @@
 </blockquote>
 <p>Note two things. First, we asked for <strong>tests first</strong> — that gives the agent a safety net for every later change. Second, at this point meetings were explicitly <em>external</em> to the app: just a date and a summary. That is exactly the situation most existing business apps are in before embedding video.</p>
 <p>A few minutes later we had a working app: Express backend, in-memory store, session auth with self-registration, and a clean single-page UI with the requested light-purple branding — 27 passing tests, runnable with a single <code>npm start</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The clients page of the generated CRM" src="../../../../../assets/images/blog/crm-meet/clients.png" title="Clients as cards in a grid"></a></p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The meetings calendar of the generated CRM" src="../../../../../assets/images/blog/crm-meet/calendar.png" title="Meetings shown as a monthly calendar"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The clients page of the generated CRM" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/clients.png" title="Clients as cards in a grid"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The meetings calendar of the generated CRM" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/calendar.png" title="Meetings shown as a monthly calendar"></a></p>
 <h2 id="prompt-2-make-meetings-happen-inside-the-app">Prompt 2: "make meetings happen inside the app"<a class="headerlink" href="#prompt-2-make-meetings-happen-inside-the-app" title="Anchor link to this section for reference">#</a></h2>
 <p>Then came the interesting part. Could the agent integrate a videoconferencing service by reading the public documentation, the same way a human developer would?</p>
 <blockquote>
 <p>Your mission is to integrate OpenVidu 3 into this CRM application, using webcomponents. Read the OpenVidu docs in its entirety, and prepare a branch with: a) OpenVidu Meet embedded into the CRM app so that meetings happen inside the app, and not in an external tool; b) a deploy folder containing scripts to prepare a Docker image with the app and a docker compose deploying both OpenVidu and the app. […] When a meeting is scheduled, the app should create a room for this client, if it does not exist yet, adding the user and client as room members.</p>
 </blockquote>
-<p>We pointed it at three documentation pages: the <a href="https://openvidu.io/latest/meet/embedded/reference/webcomponent/">WebComponent reference</a>, the <a href="https://openvidu.io/latest/meet/embedded/tutorials/">embedded tutorials</a> and the <a href="https://openvidu.io/latest/meet/deployment/local/">local deployment guide</a>. The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:</p>
+<p>We pointed it at three documentation pages: the <a href="/latest/meet/embedded/reference/webcomponent/">WebComponent reference</a>, the <a href="/latest/meet/embedded/tutorials/">embedded tutorials</a> and the <a href="/latest/meet/deployment/local/">local deployment guide</a>. The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:</p>
 <ul>
-<li><strong>Server side</strong>: a small service calling the <a href="https://openvidu.io/latest/meet/embedded/reference/rest-api/">OpenVidu Meet REST API</a> — one room per client, created lazily on the first scheduled meeting and reused afterwards.</li>
+<li><strong>Server side</strong>: a small service calling the <a href="/latest/meet/embedded/reference/rest-api/">OpenVidu Meet REST API</a> — one room per client, created lazily on the first scheduled meeting and reused afterwards.</li>
 <li><strong>Client side</strong>: the <code>&lt;openvidu-meet&gt;</code> webcomponent embedded in the CRM's right panel. This is the entire frontend footprint of a video meeting:</li>
 </ul>
 <div class="language-html highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://your-openvidu-deployment/v1/openvidu-meet.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -11896,8 +11896,8 @@
 <li><strong>Deployment</strong>: a <code>deploy/</code> folder whose script merges the CRM container into the official <code>oci://openvidu/local-meet</code> Docker Compose artifact, so <code>./up.sh</code> brings up OpenVidu and the CRM together as one project.</li>
 </ul>
 <p>This is how the three pieces fit together — your app server drives the Meet REST API, and the webcomponent turns each member's personal link into the meeting UI:</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent" class="svg-img" src="../../../../../assets/images/blog/crm-meet/architecture.svg" title="How the CRM, the browser and OpenVidu Meet fit together"></a></p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="An issue with its planned and past meetings" src="../../../../../assets/images/blog/crm-meet/issue-meetings.png" title="Each issue tracks its meetings — with a Join button that opens the meeting in-app"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent" class="svg-img" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture.svg" title="How the CRM, the browser and OpenVidu Meet fit together"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="An issue with its planned and past meetings" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png" title="Each issue tracks its meetings — with a Join button that opens the meeting in-app"></a></p>
 <h3 id="where-reality-pushed-back">Where reality pushed back<a class="headerlink" href="#where-reality-pushed-back" title="Anchor link to this section for reference">#</a></h3>
 <p>The third prompt was simply <em>"Run the full stack"</em> — and this is where the experiment got honest. Live against a real deployment, room creation worked but adding members failed with <code>API path not implemented</code>. The agent inspected the running containers and discovered the room <strong>members API did not exist in the deployed version</strong>: the tutorials' master branch was documenting the <em>next</em> release. After we clarified the versioning, the agent adapted the integration to the released API in minutes — the tests, written first, made the rewrite safe.</p>
 <p>The lesson is one every developer will recognize: <strong>documentation tells you what should work; a running deployment tells you what does</strong>. A good agent uses both.</p>
@@ -11906,27 +11906,27 @@
 <blockquote>
 <p>OpenVidu 3.8.0 has been released, with a more advanced support for user permissions. […] the users of our CRM app should be able to add the client as an invited guest, initially with speaker permissions, but the user should be able to specify more fine-grained permissions in the UI. The user must be itself an invited guest with moderator role, created under the hood when the room for the client is created.</p>
 </blockquote>
-<p>The agent extracted the exact contract from the 3.8.0 sources and rebuilt the integration on the <a href="https://openvidu.io/latest/meet/features/room-members/overview">room members API</a>:</p>
+<p>The agent extracted the exact contract from the 3.8.0 sources and rebuilt the integration on the <a href="/latest/meet/features/room-members/overview/">room members API</a>:</p>
 <ul>
 <li>Every CRM user who joins a meeting becomes an <strong>invited guest with moderator role</strong> — created under the hood, each with a personal access link.</li>
 <li>The client contact is added as an <strong>invited guest with speaker permissions</strong> and a personal, private link the CRM user can copy and send.</li>
 <li>A new panel on the client page edits the guest's base role plus OpenVidu Meet's <strong>14 fine-grained permissions</strong> — camera, microphone, screen share, chat, recording, kick and end-meeting rights — pushed to the Meet API on save.</li>
 </ul>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The client page showing meeting room access" src="../../../../../assets/images/blog/crm-meet/client-meet-access.png" title="The client's guest membership, managed from the CRM"></a></p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The fine-grained permissions editor" src="../../../../../assets/images/blog/crm-meet/permissions-editor.png" title="Base role plus 14 per-member permissions, straight from the CRM UI"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The client page showing meeting room access" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/client-meet-access.png" title="The client's guest membership, managed from the CRM"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The fine-grained permissions editor" src="../../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/permissions-editor.png" title="Base role plus 14 per-member permissions, straight from the CRM UI"></a></p>
 <p>Once more, the final prompt was to run the full stack and verify live — which surfaced one last real-world nugget (a member's <code>effectivePermissions</code> must be requested explicitly via <code>extraFields</code>), fixed and covered by the test suite: 44 tests by the end.</p>
 <h2 id="what-this-experiment-tells-us">What this experiment tells us<a class="headerlink" href="#what-this-experiment-tells-us" title="Anchor link to this section for reference">#</a></h2>
 <p>Three takeaways stand out:</p>
 <ol>
 <li><strong>AI agents make integrations dramatically cheaper</strong> — but only as cheap as the platform allows. The whole OpenVidu Meet integration is a couple hundred lines of server code plus a webcomponent tag. There is very little for the agent (or a human) to get wrong.</li>
-<li><strong>A runnable local deployment is worth a thousand docs pages.</strong> The agent could docker-compose the <a href="https://openvidu.io/latest/meet/deployment/local/">entire OpenVidu stack locally</a> in one command and verify every assumption against it. That feedback loop caught issues no amount of doc-reading would.</li>
+<li><strong>A runnable local deployment is worth a thousand docs pages.</strong> The agent could docker-compose the <a href="/latest/meet/deployment/local/">entire OpenVidu stack locally</a> in one command and verify every assumption against it. That feedback loop caught issues no amount of doc-reading would.</li>
 <li><strong>Prompts are documentation.</strong> The repository keeps every prompt in <a href="https://github.com/openvidu-labs/videoconference-based-crm/blob/main/PROMPTS.md" target="_blank" rel="noopener"><code>PROMPTS.md</code> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> — a seven-entry build log of the whole application, more faithful than most design documents.</li>
 </ol>
 <p>The complete application — CRM, integration, tests, deployment scripts and prompts — is open source: <a href="https://github.com/openvidu-labs/videoconference-based-crm" target="_blank" rel="noopener">openvidu-labs/videoconference-based-crm <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</p>
 <h2 id="add-video-meetings-to-your-app-its-the-easy-part">Add video meetings to your app — it's the easy part<a class="headerlink" href="#add-video-meetings-to-your-app-its-the-easy-part" title="Anchor link to this section for reference">#</a></h2>
 <p>If there is one thing this experiment proves, it is that <strong>embedding real videoconferencing into an existing app is no longer a project — it's a feature</strong>. One REST API to create rooms and members, one webcomponent to render the meeting, one compose file to run everything self-hosted. Whether the code is written by you or by your favorite AI agent, the path is the same.</p>
 <p>Ready to add meetings to <em>your</em> app this afternoon?</p>
-<p><a class="md-button md-button--primary" href="https://openvidu.io/latest/meet/embedded/intro/"><strong>Get started with OpenVidu Meet Embedded</strong> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h370.7L297.3 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></span></a></p>
+<p><a class="md-button md-button--primary" href="/latest/meet/embedded/intro/"><strong>Get started with OpenVidu Meet Embedded</strong> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h370.7L297.3 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></span></a></p>
 <p><em>And one more thing: we are working on agentic AI support for OpenVidu — stay tuned!</em></p>
 
 

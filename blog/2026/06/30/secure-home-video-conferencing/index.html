@@ -33,7 +33,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
         <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/logo.png">
+      <link rel="icon" href="../../../../../assets/images/logos/logo.png">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
     
 
@@ -199,7 +199,7 @@
 <meta property="og:title" content="Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends">
 <meta property="og:description" content="Host your own private, free video conferencing server at home on a Raspberry Pi, old laptop or mini-PC — no accounts, no time limits — in three simple steps with OpenVidu Meet.">
 <meta property="og:url" content="https://openvidu.io/blog/2026/06/30/secure-home-video-conferencing/">
-<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026-06-30-secure-home-video-conferencing/poster.jpg">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026/06/secure-home-video-conferencing/poster.jpg">
 <meta property="og:image:alt" content="Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends">
 <meta property="article:published_time" content="2026-06-30">
 <meta name="twitter:card" content="summary_large_image">
@@ -217,7 +217,7 @@
       "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://openvidu.io/assets/images/openvidu_vert_white_bg_trans_cropped2.png"
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
       },
       "sameAs": [
         "https://github.com/OpenVidu",
@@ -238,7 +238,7 @@
       "url": "https://openvidu.io/blog/2026/06/30/secure-home-video-conferencing/",
       "headline": "Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends",
       "description": "Host your own private, free video conferencing server at home on a Raspberry Pi, old laptop or mini-PC \u2014 no accounts, no time limits \u2014 in three simple steps with OpenVidu Meet.",
-      "image": "https://openvidu.io/assets/images/blog/2026-06-30-secure-home-video-conferencing/poster.jpg",
+      "image": "https://openvidu.io/assets/images/blog/2026/06/secure-home-video-conferencing/poster.jpg",
       "datePublished": "2026-06-30",
       "dateModified": "2026-06-30",
       "inLanguage": "en",
@@ -390,7 +390,7 @@
       
       
         
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
       
     </a>
@@ -971,7 +971,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     OpenVidu
@@ -11936,7 +11936,7 @@
 
 
 <h1 id="host-your-own-secure-video-calls-at-home-a-private-server-for-family-and-friends">Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends<a class="headerlink" href="#host-your-own-secure-video-calls-at-home-a-private-server-for-family-and-friends" title="Anchor link to this section for reference">#</a></h1>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="A secure family video call running on your own home server" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/poster.jpg" width="60%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="A secure family video call running on your own home server" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/poster.jpg" width="60%"></a></p>
 <p>We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their head in their hands thinking about how complicated it must be.</p>
 <p>In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.</p>
 <p>With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/latest/meet/" target="_blank">OpenVidu Meet</a>.</p>
@@ -11967,7 +11967,7 @@
 <h3 id="1-are-you-behind-a-cgnat">1. Are you behind a CGNAT?<a class="headerlink" href="#1-are-you-behind-a-cgnat" title="Anchor link to this section for reference">#</a></h3>
 <p>Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called <strong><a href="https://en.wikipedia.org/wiki/Carrier-grade_NAT" target="_blank" rel="noopener">CGNAT</a></strong>), and that prevents people from reaching your server.</p>
 <p>Quick check: look at the "Internet" / "WAN" IP your <strong>router</strong> reports. Open a browser and go to <code>192.168.0.1</code> or <code>192.168.1.1</code> (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Router label with credentials" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/router-label.png" width="80%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Router label with credentials" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/router-label.png" width="80%"></a></p>
 <p>Then compare it with the IP shown at <a href="https://www.whatismyip.com" target="_blank" rel="noopener">whatismyip.com</a> (or run <code>curl ifconfig.me</code>).</p>
 <ul>
 <li>If <strong>they match</strong>, you have a public IP.</li>
@@ -12018,7 +12018,7 @@
 </tbody>
 </table>
 </div>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Port forwarding rules in a router admin panel" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/router-admin.png" width="80%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Port forwarding rules in a router admin panel" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/router-admin.png" width="80%"></a></p>
 <p>If your server's Linux firewall is active, open ports 80 and 443 there too. We also recommend giving your server a <strong>fixed local IP</strong> (DHCP reservation) in your router so the forwarding rules stay put after a reboot.</p>
 <h4 id="verify-the-ports-are-reachable">Verify the ports are reachable<a class="headerlink" href="#verify-the-ports-are-reachable" title="Anchor link to this section for reference">#</a></h4>
 <p>To confirm that ports 80 and 443 are open from the internet:</p>
@@ -12054,11 +12054,11 @@
 </code></pre></div>
 <p>The installer takes care of everything (it even installs Docker for you) and asks just three things.</p>
 <p><strong>1. Confirm you want to continue.</strong> Choose <strong>Yes</strong>.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The OpenVidu Meet installer asks you to confirm" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/wizard-1.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The OpenVidu Meet installer asks you to confirm" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/wizard-1.png"></a></p>
 <p><strong>2. Enter your domain.</strong> Type the DuckDNS address you created, e.g. <code>&lt;your-subdomain&gt;.duckdns.org</code>, and press Enter. OpenVidu automatically requests a free, valid SSL certificate from Let's Encrypt for it, with no extra steps.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Enter your DuckDNS domain name" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/wizard-2.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Enter your DuckDNS domain name" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/wizard-2.png"></a></p>
 <p><strong>3. Confirm to proceed</strong>, then wait a few minutes while it downloads and starts. When it's done, you'll see the address of your new video app and the admin password, so <strong>write these down</strong>.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Installation finished: your URL and admin credentials" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/wizard-3.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Installation finished: your URL and admin credentials" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/wizard-3.png"></a></p>
 <p>That's it. OpenVidu now starts automatically with your machine. You can manage it any time with:</p>
 <div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>openvidu<span class="w">     </span><span class="c1"># start</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>openvidu<span class="w">      </span><span class="c1"># stop</span>
@@ -12066,18 +12066,18 @@
 </code></pre></div>
 <h3 id="step-4-make-your-first-call">Step 4: Make your first call<a class="headerlink" href="#step-4-make-your-first-call" title="Anchor link to this section for reference">#</a></h3>
 <p>Open <code>https://&lt;your-subdomain&gt;.duckdns.org/</code> in your browser. You'll land on your own OpenVidu Meet. Log in with the <code>admin</code> user and the password from the installer.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Your OpenVidu Meet dashboard" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-home-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Your OpenVidu Meet dashboard" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-home-dark.png#only-dark"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Your OpenVidu Meet dashboard" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meet-home-light.png#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Your OpenVidu Meet dashboard" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meet-home-dark.png#only-dark"></a></p>
 <p>Click <strong>Create Room</strong>, give it a name, and you get a room with its own shareable link.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A room with its shareable invite link" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-lobby-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A room with its shareable invite link" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-lobby-dark.png#only-dark"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A room with its shareable invite link" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meet-lobby-light.png#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A room with its shareable invite link" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meet-lobby-dark.png#only-dark"></a></p>
 <p>Now send that link to your family and friends however you like: WhatsApp, email, a text. When they open it they just type their name and join, with <strong>no account and no app to install</strong>, straight from the browser, on a phone, tablet or computer.</p>
 <div class="admonition tip">
 <p class="admonition-title">Share the link from the copy button, not the address bar</p>
 <p>Use the <strong>copy button</strong> next to <em>"Invite others with this meeting link"</em>. That link carries a secret token that lets people in. The plain URL from your browser's address bar won't grant access.</p>
 </div>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A call with family and friends, running on your own server" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-call-light.jpg#only-light"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A call with family and friends, running on your own server" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meet-call-dark.jpg#only-dark"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A call with family and friends, running on your own server" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meet-call-light.jpg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A call with family and friends, running on your own server" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meet-call-dark.jpg#only-dark"></a></p>
 <p>Inside the call you get exactly what you'd expect from a modern app: HD video, crisp audio, screen sharing and chat, except this time it's all running on the little box in your home.</p>
 <h2 id="keep-it-secure">Keep it secure<a class="headerlink" href="#keep-it-secure" title="Anchor link to this section for reference">#</a></h2>
 <p>You've just put a server on the internet, so a few minutes of good habits go a long way:</p>
@@ -12108,7 +12108,7 @@
 </ul>
 <p>And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on <strong>AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud</strong> with the same ease. See the <a href="/latest/meet/deployment/basic/#other-deployment-options">OpenVidu Meet deployment options</a>.</p>
 <hr>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="A family video call running on your own home server" src="../../../../../assets/images/blog/2026-06-30-secure-home-video-conferencing/meeting.png" width="60%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="A family video call running on your own home server" src="../../../../../assets/images/blog/2026/06/secure-home-video-conferencing/meeting.png" width="60%"></a></p>
 <p>That's all it takes. For the price of a tiny computer and a fun weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!</p>
 
 

@@ -33,7 +33,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
         <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/logo.png">
+      <link rel="icon" href="../../../../../assets/images/logos/logo.png">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
     
 
@@ -199,7 +199,7 @@
 <meta property="og:title" content="Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN">
 <meta property="og:description" content="Why TURN is the difference between a WebRTC demo and a production deployment — key considerations for connectivity resilience and security behind NATs, firewalls and mobile gateways.">
 <meta property="og:url" content="https://openvidu.io/blog/2026/06/09/turn-key-considerations/">
-<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026-06-09-turn-key-considerations/vsc.png">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026/06/turn-key-considerations/vsc.png">
 <meta property="og:image:alt" content="Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN">
 <meta property="article:published_time" content="2026-06-09">
 <meta name="twitter:card" content="summary_large_image">
@@ -217,7 +217,7 @@
       "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://openvidu.io/assets/images/openvidu_vert_white_bg_trans_cropped2.png"
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
       },
       "sameAs": [
         "https://github.com/OpenVidu",
@@ -238,7 +238,7 @@
       "url": "https://openvidu.io/blog/2026/06/09/turn-key-considerations/",
       "headline": "Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN",
       "description": "Why TURN is the difference between a WebRTC demo and a production deployment \u2014 key considerations for connectivity resilience and security behind NATs, firewalls and mobile gateways.",
-      "image": "https://openvidu.io/assets/images/blog/2026-06-09-turn-key-considerations/vsc.png",
+      "image": "https://openvidu.io/assets/images/blog/2026/06/turn-key-considerations/vsc.png",
       "datePublished": "2026-06-09",
       "dateModified": "2026-06-09",
       "inLanguage": "en",
@@ -390,7 +390,7 @@
       
       
         
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
       
     </a>
@@ -971,7 +971,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     OpenVidu
@@ -11808,15 +11808,15 @@
 
 
 <h1 id="connectivity-resilience-and-security-in-webrtc-deployments-key-considerations-on-turn">Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN<a class="headerlink" href="#connectivity-resilience-and-security-in-webrtc-deployments-key-considerations-on-turn" title="Anchor link to this section for reference">#</a></h1>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Sloth watching a spinner waiting to connect to the Daily Meeting" src="../../../../../assets/images/blog/2026-06-09-turn-key-considerations/vsc.png" title="Sloth watching a spinner waiting to connect to the Daily Meeting" width="50%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Sloth watching a spinner waiting to connect to the Daily Meeting" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/vsc.png" title="Sloth watching a spinner waiting to connect to the Daily Meeting" width="50%"></a></p>
 <p>There's a clear gap between a WebRTC demo and something you can actually run in production, and it usually sits at the TURN layer. Your demo might work fine on a clean network, but once real users show up behind NATs, corporate firewalls, and mobile gateways, the calls simply die without it.</p>
 <!-- more -->
 
 <h2 id="why-turn-matters-so-much">Why TURN Matters So Much<a class="headerlink" href="#why-turn-matters-so-much" title="Anchor link to this section for reference">#</a></h2>
 <p>To understand why TURN is important, a little context is necessary: WebRTC enables media transmission between two endpoints. These endpoints can be two users communicating directly (P2P), or a user connecting to a media server, which is the norm on platforms like OpenVidu, Google Meet, or Zoom, where the server receives video from each participant and redistributes it to the rest. In either case, most of these endpoints sit behind a router with NAT that hides their real IP, and that's where STUN and TURN come in. STUN allows an endpoint to discover its public IP address as seen from the outside, so the two endpoints can find each other and attempt a direct connection. TURN is the plan B when that direct connection isn't possible: an intermediate server that receives traffic from one endpoint and relays it to the other, acting as a bridge when NAT or firewall block the direct path. In reality, there are quite a few more nuances (ICE, which is the framework that orchestrates connection attempts; candidate types, SDP negotiation…), but this is enough to understand the rest of the post.</p>
 <p>How many people end up needing that plan B? More than you'd think. <a href="https://medium.com/@fippo/what-kind-of-turn-server-is-being-used-d67dbfc2ff5d">A small study by Philipp Hancke</a> shows that up to 17.7% of sessions go through a TURN relay. And that data is from 2017: with the rise of CGNAT (large-scale NAT used by mobile carriers to share a single public IP among thousands of users) in mobile networks and increasingly restrictive corporate firewalls, it's reasonable to think that today, in 2026, the figure is even higher.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="WebRTC traffic distribution" src="../../../../../assets/images/blog/2026-06-09-turn-key-considerations/turn-usage-light.png#only-light" title="WebRTC traffic distribution" width="70%"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="WebRTC traffic distribution" src="../../../../../assets/images/blog/2026-06-09-turn-key-considerations/turn-usage-dark.png#only-dark" title="WebRTC traffic distribution" width="70%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="WebRTC traffic distribution" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn-usage-light.png#only-light" title="WebRTC traffic distribution" width="70%"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="WebRTC traffic distribution" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn-usage-dark.png#only-dark" title="WebRTC traffic distribution" width="70%"></a></p>
 <p>The TURN layer is one of those silent but essential pieces of WebRTC: it wrestles daily with firewall policies, is powerful enough to become an attack vector if misconfigured, and drags along so many operational decisions that it ends up being an infrastructure project with its own operations team. This post covers why TURN is inevitable, why operating it well costs more than it seems, and how OpenVidu turns it into part of the platform instead of that classic server no one touches and everyone says "That service is not my problem, mate!"</p>
 <h2 id="running-turn-is-easy-running-turn-right-is-not">Running TURN Is Easy. Running TURN Right Is Not.<a class="headerlink" href="#running-turn-is-easy-running-turn-right-is-not" title="Anchor link to this section for reference">#</a></h2>
 <p>Let's talk about how to deploy a simple TURN server, and then we'll see all the things that can go wrong with it.</p>
@@ -11887,7 +11887,7 @@
 <li><strong>Restricting the relay port range.</strong> In cases where OpenVidu is deployed in a NAT environment, the relay only forwards traffic to destination ports within the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.</li>
 <li><strong>Credentials are short-lived</strong> (see the TTL above) and generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.</li>
 </ol>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu TURN architecture" src="../../../../../assets/images/blog/2026-06-09-turn-key-considerations/turn_openvidu.png" title="OpenVidu TURN architecture" width="80%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu TURN architecture" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn_openvidu.png" title="OpenVidu TURN architecture" width="80%"></a></p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Anchor link to this section for reference">#</a></h2>
 <p>TURN seems simple on paper and is complex in practice. The protocol is built with the express purpose of forwarding arbitrary packets to arbitrary destinations; scaling and operations are a problem, and achieving a good security level without breaking usability is complicated.</p>
 <p>The right abstraction, and the one OpenVidu uses, is to treat TURN not as a complementary service but as <strong>another part of each node that handles media</strong>: co-located, auto-scaled, hardened by default, and driven by ephemeral credentials. <a href="/latest/docs/self-hosting/deployment-types/">OpenVidu's deployment topology</a> implements exactly that abstraction across Single Node, Elastic, and HA modes. With <a href="/latest/docs/self-hosting/deployment-types/">OpenVidu Platform</a> and <a href="/latest/meet/deployment/overview/">OpenVidu Meet</a> you're already solving:</p>

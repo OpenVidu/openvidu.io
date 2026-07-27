@@ -33,7 +33,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
         <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/logo.png">
+      <link rel="icon" href="../../../../../assets/images/logos/logo.png">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
     
 
@@ -199,7 +199,7 @@
 <meta property="og:title" content="The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System">
 <meta property="og:description" content="How to scale video conferencing from a single server to a high-availability system — an architecture roadmap covering the elastic media plane, HA control plane, autoscaling and admission control.">
 <meta property="og:url" content="https://openvidu.io/blog/2026/06/02/scalability-in-videoconferencing-systems/">
-<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/poster.png">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png">
 <meta property="og:image:alt" content="The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System">
 <meta property="article:published_time" content="2026-06-02">
 <meta name="twitter:card" content="summary_large_image">
@@ -217,7 +217,7 @@
       "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://openvidu.io/assets/images/openvidu_vert_white_bg_trans_cropped2.png"
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
       },
       "sameAs": [
         "https://github.com/OpenVidu",
@@ -238,7 +238,7 @@
       "url": "https://openvidu.io/blog/2026/06/02/scalability-in-videoconferencing-systems/",
       "headline": "The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System",
       "description": "How to scale video conferencing from a single server to a high-availability system \u2014 an architecture roadmap covering the elastic media plane, HA control plane, autoscaling and admission control.",
-      "image": "https://openvidu.io/assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/poster.png",
+      "image": "https://openvidu.io/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png",
       "datePublished": "2026-06-02",
       "dateModified": "2026-06-02",
       "inLanguage": "en",
@@ -390,7 +390,7 @@
       
       
         
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
       
     </a>
@@ -971,7 +971,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     OpenVidu
@@ -12007,7 +12007,7 @@
 
 
 <h1 id="the-architecture-of-scale-how-to-scale-video-conferencing-from-a-single-server-to-a-high-availability-system">The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System<a class="headerlink" href="#the-architecture-of-scale-how-to-scale-video-conferencing-from-a-single-server-to-a-high-availability-system" title="Anchor link to this section for reference">#</a></h1>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="left" alt="WebRTC connectivity paths" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/poster.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="left" alt="WebRTC connectivity paths" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png"></a></p>
 <h2 id="introduction-the-success-trap">Introduction: The Success Trap<a class="headerlink" href="#introduction-the-success-trap" title="Anchor link to this section for reference">#</a></h2>
 <p>Launch week often feels perfect. You ship an MVP, users join calls quickly, and early feedback is strong. Then growth arrives faster than expected.</p>
 <p>One customer schedules a company-wide meeting. Hundreds of people join. Your best demo becomes your first major incident: CPU climbs, bandwidth saturates, audio breaks, video freezes. The product didn't fail because the team lacked talent. It failed because real-time media scales very differently from traditional web applications.</p>
@@ -12023,8 +12023,8 @@
 
 <h2 id="phase-1-the-single-node-the-monolith-stage">Phase 1: The Single Node (The Monolith Stage)<a class="headerlink" href="#phase-1-the-single-node-the-monolith-stage" title="Anchor link to this section for reference">#</a></h2>
 <p>Most successful platforms start with a single machine. In a single-node deployment, one server runs signaling, media processing, persistence, and API logic together. For many teams, that's the right call — it maximizes speed of learning and minimizes operational overhead while you figure out whether the product has legs.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Single-node architecture" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/single-node-light.svg#only-light"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Single-node architecture" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/single-node-dark.svg#only-dark"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Single-node architecture" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-light.svg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Single-node architecture" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-dark.svg#only-dark"></a></p>
 <h3 id="why-the-single-node-works-early">Why the Single Node Works Early<a class="headerlink" href="#why-the-single-node-works-early" title="Anchor link to this section for reference">#</a></h3>
 <p>Operational simplicity is genuinely valuable when you're still validating your product. A single-node setup gives you:</p>
 <ul>
@@ -12060,8 +12060,8 @@
 <p>When these signals appear consistently, throwing a bigger machine at the problem only delays the real conversation. You need horizontal scale.</p>
 <h2 id="phase-2-horizontal-scalability-and-elasticity-the-media-plane">Phase 2: Horizontal Scalability and Elasticity (The Media Plane)<a class="headerlink" href="#phase-2-horizontal-scalability-and-elasticity-the-media-plane" title="Anchor link to this section for reference">#</a></h2>
 <p>At this point, larger machines cost more and help less. What you actually need is a role-based architecture where media execution and orchestration scale independently.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Elastic media plane architecture" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/elastic-light.svg#only-light"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Elastic media plane architecture" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/elastic-dark.svg#only-dark"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Elastic media plane architecture" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-light.svg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Elastic media plane architecture" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-dark.svg#only-dark"></a></p>
 <p>The split looks like this:</p>
 <ul>
 <li><strong>Orchestrator / Support Cluster</strong>: handles load balancing at the entry point, global coordination, shared state, and database-backed metadata.</li>
@@ -12137,8 +12137,8 @@
 <h2 id="phase-3-high-availability-the-control-plane">Phase 3: High Availability (The Control Plane)<a class="headerlink" href="#phase-3-high-availability-the-control-plane" title="Anchor link to this section for reference">#</a></h2>
 <p>You can run 100 media nodes and still fail like a prototype if your orchestration layer is a single instance.</p>
 <p>When orchestration goes down, new joins fail, placement stops, and recovery becomes a manual process. Phase 2 hardened the media plane. Phase 3 is about making sure the rest of the system can survive a failure too — because HA at this stage means hardening the support cluster, not adding more media nodes.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="High-availability architecture" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/ha-light.svg#only-light"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="High-availability architecture" src="../../../../../assets/images/blog/2026-06-02-scalability-in-videoconferencing-systems/ha-dark.svg#only-dark"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="High-availability architecture" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-light.svg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="High-availability architecture" src="../../../../../assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-dark.svg#only-dark"></a></p>
 <h3 id="remove-single-points-of-failure">Remove Single Points of Failure<a class="headerlink" href="#remove-single-points-of-failure" title="Anchor link to this section for reference">#</a></h3>
 <p>Every critical service in your support cluster needs a replica. Go through the list:</p>
 <ul>

@@ -1,6 +1,6 @@
 # OpenVidu
 
-> Self-hosted video conferencing and custom WebRTC solutions: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs. Open source and scalable.
+> Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs.
 
 Self-hosted videoconference solution and SDK
 
@@ -24,6 +24,7 @@ Self-hosted videoconference solution and SDK
 - [We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason](https://openvidu.io/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/index.md): Deployment time benchmarks for a self-hosted WebRTC platform across AWS, Azure, GCP, Oracle and DigitalOcean
 - [OpenVidu 3.8.0 is now available](https://openvidu.io/blog/2026/07/09/release-380/index.md): OpenVidu 3.8.0 release notes — user accounts, RBAC, mediasoup overhaul and TURN security
 - [Managing Permissions in Video Conferencing Apps: 3 Access Models](https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/index.md): Managing permissions in video conferencing apps — anonymous, identified guest and user access models
+- [Building a video-enabled CRM with an AI agent and OpenVidu Meet](https://openvidu.io/blog/2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/index.md): Building a video-enabled CRM with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained per-guest room permissions
 
 ## OpenVidu Meet
 

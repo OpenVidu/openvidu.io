@@ -33,7 +33,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
         <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/logo.png">
+      <link rel="icon" href="../../../../../assets/images/logos/logo.png">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
     
 
@@ -199,7 +199,7 @@
 <meta property="og:title" content="Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.">
 <meta property="og:description" content="Why you can't just terminate a media server with active meetings — the scale-in problem in videoconferencing, how node draining works, and how OpenVidu solves it on AWS, Azure, GCP and DigitalOcean.">
 <meta property="og:url" content="https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/">
-<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/scale-down.png">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down.png">
 <meta property="og:image:alt" content="Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.">
 <meta property="article:published_time" content="2026-05-26">
 <meta name="twitter:card" content="summary_large_image">
@@ -217,7 +217,7 @@
       "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://openvidu.io/assets/images/openvidu_vert_white_bg_trans_cropped2.png"
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
       },
       "sameAs": [
         "https://github.com/OpenVidu",
@@ -238,7 +238,7 @@
       "url": "https://openvidu.io/blog/2026/05/26/scale-in-problem-in-videoconferences/",
       "headline": "Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.",
       "description": "Why you can\u0027t just terminate a media server with active meetings \u2014 the scale-in problem in videoconferencing, how node draining works, and how OpenVidu solves it on AWS, Azure, GCP and DigitalOcean.",
-      "image": "https://openvidu.io/assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/scale-down.png",
+      "image": "https://openvidu.io/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down.png",
       "datePublished": "2026-05-26",
       "dateModified": "2026-05-26",
       "inLanguage": "en",
@@ -390,7 +390,7 @@
       
       
         
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
       
     </a>
@@ -971,7 +971,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
-  <img src="../../../../../assets/images/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
 
     </a>
     OpenVidu
@@ -11887,7 +11887,7 @@
 <h1 id="scaling-up-is-easy-the-challenge-is-scaling-down-the-scale-in-problem-in-videoconferences">Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.<a class="headerlink" href="#scaling-up-is-easy-the-challenge-is-scaling-down-the-scale-in-problem-in-videoconferences" title="Anchor link to this section for reference">#</a></h1>
 <p>Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.</p>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale In" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/scale-down.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale In" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down.png"></a></p>
 <figcaption>Scale in situation</figcaption>
 </figure>
 <p>This post dives into the <strong>scale-in problem</strong>: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.</p>
@@ -11898,7 +11898,7 @@
 <p>Scaling <em>in</em> is where the illusion shatters. Your CPU drops, the policy fires in reverse, and the cloud provider picks a node to terminate. If that node is running a web server, this is fine — kill it, redirect traffic, done. If that node is hosting eight simultaneous videoconferences, you have just murdered forty people's calls mid-sentence.</p>
 <p>The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.</p>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale Out" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/scale-up.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale Out" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up.png"></a></p>
 <figcaption>Scale out situation</figcaption>
 </figure>
 <h2 id="the-stateful-trap-why-media-servers-arent-web-servers">The "Stateful" Trap: Why Media Servers Aren't Web Servers<a class="headerlink" href="#the-stateful-trap-why-media-servers-arent-web-servers" title="Anchor link to this section for reference">#</a></h2>
@@ -11919,14 +11919,14 @@
 </ol>
 <p>The challenge is integrating this logic with the autoscaling mechanisms of each cloud provider, all of which have their own opinions about how termination should work.</p>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale In" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/draining-strategy.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale In" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy.png"></a></p>
 <figcaption>Draining strategy</figcaption>
 </figure>
 <h2 id="bringing-scale-in-to-the-major-clouds">Bringing Scale-In to the Major Clouds<a class="headerlink" href="#bringing-scale-in-to-the-major-clouds" title="Anchor link to this section for reference">#</a></h2>
 <p>OpenVidu implements the draining strategy on every cloud it supports. The approach differs per provider because each exposes different primitives for intercepting a termination decision.</p>
 <h3 id="1-aws-intercepting-scale-in-with-lifecycle-hooks">1. AWS: Intercepting Scale-In with Lifecycle Hooks<a class="headerlink" href="#1-aws-intercepting-scale-in-with-lifecycle-hooks" title="Anchor link to this section for reference">#</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="AWS logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/aws-logo.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="AWS logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/aws-logo.png"></a></p>
 </figure>
 <p><a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html" target="_blank" rel="noopener">AWS Auto Scaling Groups</a> support a native feature called <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html" target="_blank" rel="noopener"><strong>Lifecycle Hooks</strong></a>. When the ASG decides to terminate an instance (because CPU has dropped below the target), instead of killing it immediately it puts the instance in a <code>Terminating:Wait</code> state and fires a lifecycle transition event. The instance stays alive in this pending state until something either completes the hook or the wait timeout expires.</p>
 <p>OpenVidu uses this hook as its scale-in interception point:</p>
@@ -11940,7 +11940,7 @@
 <p>Of the three clouds, this is the most direct implementation. The Lifecycle Hook mechanism was purpose-built for exactly this kind of scenario, so AWS introduces the least friction: there is no need to protect instances manually or coordinate a separate runbook. AWS gives you a configurable timeout (set generously enough to outlast even long meetings) and OpenVidu simply completes the hook when the node is ready.</p>
 <h3 id="2-azure-orchestrating-virtual-machine-scale-sets-vmss">2. Azure: Orchestrating Virtual Machine Scale Sets (VMSS)<a class="headerlink" href="#2-azure-orchestrating-virtual-machine-scale-sets-vmss" title="Anchor link to this section for reference">#</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Azure logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/azure-logo.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Azure logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/azure-logo.png"></a></p>
 </figure>
 <p>Azure's native scale-in mechanism for <a href="https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview" target="_blank" rel="noopener">Virtual Machine Scale Sets (VMSS)</a> is a <a href="https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-terminate-notification" target="_blank" rel="noopener"><strong>termination notification</strong></a>: when a scale-in event fires, Azure notifies the instance and gives it up to <strong>15 minutes</strong> to wrap up — after that, it terminates the VM regardless of what is running inside. Unlike the AWS Lifecycle Hook, this ceiling is hard and cannot be extended. A business meeting can easily last longer than 15 minutes, so relying on this native feature alone would still risk disrupting active sessions.</p>
 <p>To work around it, OpenVidu takes a more active stance and bypasses the native scale-in policy altogether:</p>
@@ -11953,7 +11953,7 @@
 <p>The trade-off is a <strong>latency of up to 5 minutes</strong> between the moment an instance is flagged and the moment the graceful shutdown actually begins (an Azure platform constraint). But there is no hard ceiling on how long a session can run — a 2-hour board meeting will complete without disruption.</p>
 <h3 id="3-google-cloud-gcp-precision-with-managed-instance-groups-migs">3. Google Cloud (GCP): Precision with Managed Instance Groups (MIGs)<a class="headerlink" href="#3-google-cloud-gcp-precision-with-managed-instance-groups-migs" title="Anchor link to this section for reference">#</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="GCP logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/gcp-logo.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="GCP logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/gcp-logo.png"></a></p>
 </figure>
 <p><a href="https://cloud.google.com/compute/docs/instance-groups" target="_blank" rel="noopener">GCP Managed Instance Groups</a> don't provide a native "wait for draining" hook at the level of a single instance in the same way AWS does. OpenVidu's approach here is to sidestep the native scale-in mechanism entirely:</p>
 <ol>
@@ -11965,7 +11965,7 @@
 <p>This approach gives OpenVidu full control over the termination decision and timeline, at the cost of some added complexity in the coordination layer.</p>
 <h3 id="4-digital-ocean-do-external-orchestration-with-functions">4. Digital Ocean (DO): External Orchestration with Functions<a class="headerlink" href="#4-digital-ocean-do-external-orchestration-with-functions" title="Anchor link to this section for reference">#</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="DO logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026-05-26-scale-in-problem-in-videoconferences/digitalocean-logo.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="DO logo" class="svg-img dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/digitalocean-logo.png"></a></p>
 </figure>
 <p>Unlike AWS, Azure, or GCP, DigitalOcean does not provide a high-level "Auto Scaling Group" abstraction that manages instance lifecycles for you. To achieve elasticity in DO, OpenVidu implements a custom orchestration layer using <strong>DigitalOcean Functions</strong> acting as an external control plane.</p>
 <p>Since there is no native mechanism to intercept a termination decision, the responsibility of both scaling and safety moves entirely to our serverless logic and node-level monitoring:</p>
