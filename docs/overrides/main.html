@@ -143,6 +143,10 @@
 
 {% block scripts %}
 <!-- Add scripts that need to run before here -->
+{% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}
+<script src="/javascripts/releases-scroll-to-version.js"></script>
+{% endif %}
+
 {{ super() }}
 <!-- Add scripts that need to run afterwards here -->
 {% endblock %} 
