@@ -1,0 +1,182 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+
+{{ super() }}
+
+<script defer>
+  window.openviduPreviousUrl = "";
+  if (!window.openviduObserver) {
+    window.openviduObserver = new MutationObserver(function (mutations) {
+      if (location.pathname !== window.openviduPreviousUrl) {
+        window.openviduPreviousUrl = location.pathname;
+      }
+    });
+    window.openviduObserver.observe(document, {
+      subtree: true,
+      childList: true,
+    });
+  }
+</script>
+
+<section class="top-home-section md-grid md-typeset">
+  <div class="center-align">
+    <img
+      class="top-home-img"
+      src="assets/images/logos/openvidu_white_bg_transp.png"
+      draggable="false"
+    />
+  </div>
+  <h1 class="slogan">Ship video conferencing into your app,<br>self-hosted and production-ready in minutes.</h1>
+  <p class="home-description">
+    Launch <strong>OpenVidu Meet</strong> on your own servers in minutes — or
+    build any real-time app with <strong>OpenVidu Platform</strong>'s WebRTC
+    SDKs.<br>Open source, ultra-low latency, and scalable to thousands of
+    participants, with your users' data on your infrastructure.
+  </p>
+  <div class="home-buttons">
+    <a
+      title="Get started with OpenVidu Meet"
+      id="home-primary-button"
+      class="md-button md-button--primary home-meet-button"
+      href="meet/"
+    >
+      Get started with Meet
+    </a>
+    <a
+      title="Build with OpenVidu Platform SDKs"
+      id="home-secondary-button"
+      class="md-button home-platform-button"
+      href="docs/"
+    >
+      Build with Platform SDKs
+    </a>
+  </div>
+  <p class="home-under-cta">
+    Not sure which fits?
+    <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+    <span class="home-under-cta-sep">·</span>
+    <a
+      title="Start a tour"
+      onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
+    >
+      Start a tour
+    </a>
+  </p>
+  <!-- Single wrapper: the hero is a space-around flex column, so as separate
+       flex items these two lines would get leftover viewport height
+       distributed between them regardless of their margins. -->
+  <div class="home-trust-block">
+  <p class="home-trust-line">
+    ⭐ Free &amp; open source<span class="home-sep">·</span>Apache 2.0<span
+      id="github-stars-segment"
+      hidden
+      ><span class="home-sep">·</span
+      ><a href="https://github.com/OpenVidu/openvidu" target="_blank"
+        >★ <span id="github-stars-count"></span> on GitHub</a
+      ></span
+    ><span id="dockerhub-pulls-segment" hidden
+      ><span class="home-sep">·</span
+      ><a
+        href="https://hub.docker.com/r/openvidu/openvidu-server"
+        target="_blank"
+        >🐳 <span id="dockerhub-pulls-count"></span> Docker pulls</a
+      ></span
+    >
+  </p>
+  <p class="home-trust-line home-credentials-line">
+    🔬
+    <a href="/research/">19 peer-reviewed publications · 500+ citations</a
+    ><span class="home-sep">·</span>🌐 12+ years building WebRTC<span
+      class="home-sep"
+      >·</span
+    >🛠 Upstream contributors to LiveKit, mediasoup &amp; Kurento
+  </p>
+  </div>
+  <script>
+    // Live counters for the hero trust line (GitHub stars, Docker Hub pulls).
+    // Each value is cached per session, and its segment stays hidden if the
+    // source is unavailable (rate limit, offline), so the line gracefully
+    // shortens to "Open source · Apache 2.0".
+    (function () {
+      function setupCounter(countId, segmentId, cacheKey, fetchValue) {
+        var countEl = document.getElementById(countId);
+        var segmentEl = document.getElementById(segmentId);
+        if (!countEl || !segmentEl) return;
+        function render(value) {
+          if (!value) return;
+          countEl.textContent = value;
+          segmentEl.hidden = false;
+        }
+        var cached = sessionStorage.getItem(cacheKey);
+        if (cached) {
+          render(cached);
+          return;
+        }
+        fetchValue()
+          .then(function (value) {
+            if (value) {
+              sessionStorage.setItem(cacheKey, value);
+              render(value);
+            }
+          })
+          .catch(function () {});
+      }
+
+      // Approximate a count, always rounding DOWN so the shown number is
+      // never higher than reality. Keeps two significant digits:
+      // 2115 -> "2.1k", 966155 -> "960k", 1134000 -> "1.1M".
+      function formatCount(n) {
+        n = parseInt(n, 10);
+        if (!n || n < 0) return null;
+        if (n >= 10) {
+          var magnitude = Math.pow(10, Math.floor(Math.log10(n)) - 1);
+          n = Math.floor(n / magnitude) * magnitude;
+        }
+        if (n >= 1000000) return parseFloat((n / 1000000).toFixed(1)) + "M";
+        if (n >= 1000) return parseFloat((n / 1000).toFixed(1)) + "k";
+        return String(n);
+      }
+
+      setupCounter(
+        "github-stars-count",
+        "github-stars-segment",
+        "ov-github-stars",
+        function () {
+          return fetch("https://api.github.com/repos/OpenVidu/openvidu")
+            .then(function (res) {
+              return res.ok ? res.json() : null;
+            })
+            .then(function (data) {
+              return data ? formatCount(data.stargazers_count) : null;
+            });
+        }
+      );
+
+      // hub.docker.com's API sends no CORS headers, so the RAW pull count is
+      // relayed through a shields.io dynamic-JSON badge (CORS-enabled) and
+      // then approximated client-side with formatCount, like the stars.
+      // (The standard shields docker/pulls badge pre-rounds the number, which
+      // would prevent our own floor-to-two-significant-digits rounding.)
+      setupCounter(
+        "dockerhub-pulls-count",
+        "dockerhub-pulls-segment",
+        "ov-dockerhub-pulls",
+        function () {
+          return fetch(
+            "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhub.docker.com%2Fv2%2Frepositories%2Fopenvidu%2Fopenvidu-server&query=%24.pull_count&label=pulls"
+          )
+            .then(function (res) {
+              return res.ok ? res.text() : null;
+            })
+            .then(function (svg) {
+              var match = svg && svg.match(/pulls:?\s*(\d+)\b/i);
+              return match ? formatCount(match[1]) : null;
+            });
+        }
+      );
+    })();
+  </script>
+</section>
+
+{% endblock %}
