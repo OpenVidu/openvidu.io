@@ -6,8 +6,6 @@ Self-hosted videoconference solution and SDK
 
 # OpenVidu
 
-# Home
-
 ## Choose the ideal OpenVidu solution for your real-time needs
 
 ### 
@@ -30,7 +28,7 @@ Developer-oriented SDKs for custom apps
 
 For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
 
-- Programmable client and server SDKs for all languages, LiveKit-compatible
+- Programmable client and server SDKs for all languages, from our LiveKit fork
 - Build your custom UI from scratch with total freedom
 - Low level control of real time media: codecs, protocols, bitrates...
 - Precise control of recording and streaming with custom layouts
@@ -1980,7 +1978,7 @@ On the other hand, a broadcaster or a live-event producer operates at a much dee
 
 Choosing the right level of abstraction is a delicate balancing act. If the abstraction is too high, you lose the granular control essential for innovation, but you make your life easier by hiding the complexity of the system. If it’s too low, you risk spending months reinventing the wheel—building infrastructure instead of delivering value, but you are in full control of what happens under-the-hood.
 
-At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu.
+At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu. If you'd rather skip the narrative and go straight to a side-by-side table, our [Meet vs Platform comparison](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md) has it.
 
 ### OpenVidu Meet: The Power of Integration
 
@@ -2015,7 +2013,7 @@ At the end of the day, abstraction is about **freedom**: the freedom to choose h
 
 The best way to understand these levels of abstraction is to see them in action. Whether you are ready to embed a full-featured meeting room or you want to start routing raw media tracks, our documentation has everything you need to get started.
 
-👉 Explore the [OpenVidu Documentation](https://openvidu.io/)
+👉 Still not sure? [Compare Meet vs Platform side-by-side](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md) — or jump straight to [Get Started with Meet](https://openvidu.io/3.8/meet/index.md) / [Get Started with Platform](https://openvidu.io/3.8/docs/index.md).
 
 # 5 conversational AI app ideas you can build this weekend
 
@@ -9784,13 +9782,13 @@ OpenVidu Platform enables you to build real-time applications. You can build you
 
 OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live-streaming events, management and processing of drones and camera feeds...
 
-OpenVidu gives you **LiveKit-compatible client and server SDKs** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
+OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.
 
 ## Your first lines of code
 
-Real-time video in your app takes a few lines with the LiveKit-compatible SDKs:
+Real-time video in your app takes a few lines with our LiveKit fork's SDKs:
 
 ```javascript
 import { Room } from "livekit-client";
@@ -9825,7 +9823,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 Info
 
-If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) may be the perfect solution for you. Give it a try!
+If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
 
 ### Live-streaming
 
@@ -10441,9 +10439,9 @@ For the Release Notes of OpenVidu Meet 3.4.0, please visit here: [OpenVidu Meet 
 
 This section compares OpenVidu to other videoconference/streaming solutions, to better understand what it is, what it is not, and what advantages and disadvantages it may have over them.
 
-## OpenVidu Meet vs OpenVidu Platform
+Comparing OpenVidu Meet and OpenVidu Platform instead?
 
-OpenVidu offers two different solutions suitable for different use cases. Find out which is the best for you here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
 
 ## OpenVidu vs LiveKit
 

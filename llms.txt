@@ -8,7 +8,7 @@ Self-hosted videoconference solution and SDK
 
 - [Home](https://openvidu.io/index.md): OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
 - [Support](https://openvidu.io/support/index.md): Support options for OpenVidu
-- [Pricing](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu
+- [Pricing: Free COMMUNITY & Pay-Per-Core PRO](https://openvidu.io/pricing/index.md): Pricing models for OpenVidu
 - [About Us](https://openvidu.io/about-us/index.md): The people behind OpenVidu
 - [Research](https://openvidu.io/research/index.md): Research publications on real-time communications in peer-reviewed journals
 - [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md): What to choose, OpenVidu Meet or OpenVidu Platform?
@@ -28,7 +28,7 @@ Self-hosted videoconference solution and SDK
 
 ## OpenVidu Meet
 
-- [OpenVidu Meet](https://openvidu.io/latest/meet/index.md): OpenVidu Meet - Ready to use videoconferencing solution
+- [OpenVidu Meet: Self-Hosted Video Conferencing](https://openvidu.io/latest/meet/index.md): OpenVidu Meet - Ready to use videoconferencing solution
 - [Releases](https://openvidu.io/latest/meet/releases/index.md): OpenVidu Meet - Release notes
 - [Getting started with OpenVidu Meet](https://openvidu.io/latest/meet/getting-started/index.md): OpenVidu Meet - Getting started
 - [Overview](https://openvidu.io/latest/meet/features/overview/index.md): OpenVidu Meet Features - A global picture of all OpenVidu Meet features
@@ -73,17 +73,17 @@ Self-hosted videoconference solution and SDK
 
 ## OpenVidu Platform
 
-- [OpenVidu Platform](https://openvidu.io/latest/docs/index.md): OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
+- [OpenVidu Platform: Self-Hosted WebRTC SDKs](https://openvidu.io/latest/docs/index.md): OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
 - [Releases](https://openvidu.io/latest/docs/releases/index.md): OpenVidu Platform - Release notes
 - [Getting started](https://openvidu.io/latest/docs/getting-started/index.md): OpenVidu Platform - Getting started
 - [Comparing OpenVidu](https://openvidu.io/latest/docs/comparing-openvidu/index.md): OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
 - [Developing your OpenVidu app](https://openvidu.io/latest/docs/developing-your-openvidu-app/index.md): OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
 - [How to](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md): OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.
-- [Advanced Features Tutorials](https://openvidu.io/latest/docs/tutorials/advanced-features/index.md): Explore more advanced features of LiveKit with our tutorials on recording, S3, Azure, and more.
+- [Advanced Features Tutorials](https://openvidu.io/latest/docs/tutorials/advanced-features/index.md): Explore OpenVidu's advanced features, built on our LiveKit fork, with tutorials on recording, S3, Azure, and more.
 - [AI Services Tutorials](https://openvidu.io/latest/docs/tutorials/ai-services/index.md): Learn how to integrate AI services in your OpenVidu applications.
 - [Angular Components Tutorials](https://openvidu.io/latest/docs/tutorials/angular-components/index.md): Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
-- [Application Client Tutorials](https://openvidu.io/latest/docs/tutorials/application-client/index.md): Learn how to build a LiveKit application client to connect to a room, publish media and subscribe to media from other participants.
-- [Application Server Tutorials](https://openvidu.io/latest/docs/tutorials/application-server/index.md): Learn how to build an application server that generates LiveKit tokens and receives webhook events.
+- [Application Client Tutorials](https://openvidu.io/latest/docs/tutorials/application-client/index.md): Learn how to build an OpenVidu application client with our LiveKit fork's SDKs: connect to a room, publish and subscribe to media.
+- [Application Server Tutorials](https://openvidu.io/latest/docs/tutorials/application-server/index.md): Learn how to build an OpenVidu application server: generate access tokens and receive webhook events with our LiveKit fork's server SDKs.
 - [Deployment types](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md): Description of the different OpenVidu Platform user-friendly installers that facilitate quick on-premises deployments, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
 - [Local (Development)](https://openvidu.io/latest/docs/self-hosting/local/index.md): Easy local install deployment instructions for testing and development purposes.
 - [OpenVidu Single Node Community](https://openvidu.io/latest/docs/self-hosting/single-node/index.md): Different options for a single node deployment, be it on-premises or on any of the most popular cloud providers such as AWS, Azure or GCP.

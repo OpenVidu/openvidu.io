@@ -310,11 +310,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#home" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -1022,101 +1017,22 @@
     </a>
   </p>
   <!-- Single wrapper: the hero is a space-around flex column, so as separate
-       flex items these two lines would get leftover viewport height
-       distributed between them regardless of their margins. -->
+       flex items these lines would get leftover viewport height distributed
+       between them regardless of their margins. -->
   <div class="home-trust-block">
-  <p class="home-trust-line">
-    ⭐ Free &amp; open source<span class="home-sep">·</span>Apache 2.0<span id="github-stars-segment" hidden=""><span class="home-sep">·</span><a href="https://github.com/OpenVidu/openvidu" target="_blank" rel="noopener">★ <span id="github-stars-count"></span> on GitHub</a></span><span id="dockerhub-pulls-segment" hidden=""><span class="home-sep">·</span><a href="https://hub.docker.com/r/openvidu/openvidu-server" target="_blank" rel="noopener">🐳 <span id="dockerhub-pulls-count"></span> Docker pulls</a></span>
+  <p class="home-trust-line">⭐ Free &amp; open source</p>
+  <p class="home-badges">
+    <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/badge/license-Apache 2.0-orange.2cc72723.svg" alt="License: Apache 2.0" loading="lazy"></a>
+    <a href="https://github.com/OpenVidu/openvidu" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/github/stars/OpenVidu/openvidu.2cc72723.svg" alt="GitHub stars" loading="lazy"></a>
+    <a href="https://hub.docker.com/r/openvidu/openvidu-server" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/docker/pulls/openvidu/openvidu-server.2cc72723.svg" alt="Docker pulls" loading="lazy"></a>
   </p>
-  <p class="home-trust-line home-credentials-line">
-    🔬
-    <a href="/research/">19 peer-reviewed publications · 500+ citations</a><span class="home-sep">·</span>🌐 12+ years building WebRTC<span class="home-sep">·</span>🛠 Upstream contributors to LiveKit, mediasoup &amp; Kurento
+  <p class="home-badges home-credentials-badges">
+    <a href="/research/"><img src="assets/external/img.shields.io/badge/Research publications-19-blue.2cc72723.svg" alt="19 peer-reviewed research publications" loading="lazy"></a>
+    <a href="/research/"><img src="assets/external/img.shields.io/badge/citations-500+-blue.2cc72723.svg" alt="500+ citations" loading="lazy"></a>
+    <a href="/research/"><img src="assets/external/img.shields.io/badge/WebRTC experience-12+ years-blue.2cc72723.svg" alt="12+ years building WebRTC" loading="lazy"></a>
+    <a href="https://github.com/OpenVidu" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/badge/Open source contributors-Kurento, LiveKit &amp; mediasoup-blue.2cc72723.svg" alt="Open source contributors: Kurento, LiveKit and mediasoup" loading="lazy"></a>
   </p>
   </div>
-  <script>
-    // Live counters for the hero trust line (GitHub stars, Docker Hub pulls).
-    // Each value is cached per session, and its segment stays hidden if the
-    // source is unavailable (rate limit, offline), so the line gracefully
-    // shortens to "Open source · Apache 2.0".
-    (function () {
-      function setupCounter(countId, segmentId, cacheKey, fetchValue) {
-        var countEl = document.getElementById(countId);
-        var segmentEl = document.getElementById(segmentId);
-        if (!countEl || !segmentEl) return;
-        function render(value) {
-          if (!value) return;
-          countEl.textContent = value;
-          segmentEl.hidden = false;
-        }
-        var cached = sessionStorage.getItem(cacheKey);
-        if (cached) {
-          render(cached);
-          return;
-        }
-        fetchValue()
-          .then(function (value) {
-            if (value) {
-              sessionStorage.setItem(cacheKey, value);
-              render(value);
-            }
-          })
-          .catch(function () {});
-      }
-
-      // Approximate a count, always rounding DOWN so the shown number is
-      // never higher than reality. Keeps two significant digits:
-      // 2115 -> "2.1k", 966155 -> "960k", 1134000 -> "1.1M".
-      function formatCount(n) {
-        n = parseInt(n, 10);
-        if (!n || n < 0) return null;
-        if (n >= 10) {
-          var magnitude = Math.pow(10, Math.floor(Math.log10(n)) - 1);
-          n = Math.floor(n / magnitude) * magnitude;
-        }
-        if (n >= 1000000) return parseFloat((n / 1000000).toFixed(1)) + "M";
-        if (n >= 1000) return parseFloat((n / 1000).toFixed(1)) + "k";
-        return String(n);
-      }
-
-      setupCounter(
-        "github-stars-count",
-        "github-stars-segment",
-        "ov-github-stars",
-        function () {
-          return fetch("https://api.github.com/repos/OpenVidu/openvidu")
-            .then(function (res) {
-              return res.ok ? res.json() : null;
-            })
-            .then(function (data) {
-              return data ? formatCount(data.stargazers_count) : null;
-            });
-        }
-      );
-
-      // hub.docker.com's API sends no CORS headers, so the RAW pull count is
-      // relayed through a shields.io dynamic-JSON badge (CORS-enabled) and
-      // then approximated client-side with formatCount, like the stars.
-      // (The standard shields docker/pulls badge pre-rounds the number, which
-      // would prevent our own floor-to-two-significant-digits rounding.)
-      setupCounter(
-        "dockerhub-pulls-count",
-        "dockerhub-pulls-segment",
-        "ov-dockerhub-pulls",
-        function () {
-          return fetch(
-            "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhub.docker.com%2Fv2%2Frepositories%2Fopenvidu%2Fopenvidu-server&query=%24.pull_count&label=pulls"
-          )
-            .then(function (res) {
-              return res.ok ? res.text() : null;
-            })
-            .then(function (svg) {
-              var match = svg && svg.match(/pulls:?\s*(\d+)\b/i);
-              return match ? formatCount(match[1]) : null;
-            });
-        }
-      );
-    })();
-  </script>
 </section>
 
 
@@ -1172,8 +1088,6 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
-      
-        
       
       
       <a href="." class="md-nav__link md-nav__link--active">
@@ -11604,7 +11518,7 @@
   <span class="md-ellipsis">
     
   
-    Pricing
+    Pricing: Free COMMUNITY &amp; Pay-Per-Core PRO
   
 
     
@@ -11822,8 +11736,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -11836,17 +11748,7 @@
               
               <article class="md-content__inner md-typeset">
                 
-                  
-  
-
-
-
-  
-  
-
-
-<h1 class="hide" id="home">Home<a class="headerlink" href="#home" title="Anchor link to this section for reference">#</a></h1>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp">
+  <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
     Choose the ideal OpenVidu solution for your real-time needs
   </h2>
@@ -11891,7 +11793,7 @@
           For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
         </p>
         <ul class="product-features">
-          <li>Programmable client and server SDKs for all languages, LiveKit-compatible</li>
+          <li>Programmable client and server SDKs for all languages, from our LiveKit fork</li>
           <li>Build your custom UI from scratch with total freedom</li>
           <li>Low level control of real time media: codecs, protocols, bitrates...</li>
           <li>Precise control of recording and streaming with custom layouts</li>
@@ -11987,7 +11889,7 @@
 <hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
+  <h2 id="self-host-platform">
     Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
   </h2>
 </div>
@@ -12041,7 +11943,7 @@
 <hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
+  <h2 id="all-features">
     All the features you need to quickly build your perfect real-time application
   </h2>
 </div>
@@ -12121,25 +12023,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
-  
-  
-
-
-
-  
-
-
-  
-
-
-
-                
               </article>
             </div>
           
@@ -12198,13 +12081,13 @@
         <!-- Link to next page -->
         
           
-          <a href="/latest/meet/" class="md-footer__link md-footer__link--next" aria-label="Next: OpenVidu Meet">
+          <a href="/latest/meet/" class="md-footer__link md-footer__link--next" aria-label="Next: OpenVidu Meet: Self-Hosted Video Conferencing">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                OpenVidu Meet
+                OpenVidu Meet: Self-Hosted Video Conferencing
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -12223,7 +12106,7 @@
 
       <div class="grid-container footer-grid">
 
-        <div class="footer-column grid-25 tablet-grid-50 mobile-grid-100">
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
           <h4>SOCIAL</h4>
           
 <div class="md-social">
@@ -12275,7 +12158,7 @@
 </div>
         </div>
 
-        <div class="footer-column grid-35 tablet-grid-50 mobile-grid-100">
+        <div class="footer-column grid-25 tablet-grid-50 mobile-grid-100">
 
           <div class="subscription">
             <h4>NEWSLETTER</h4>
@@ -12285,17 +12168,26 @@
                 <div id="mc_embed_signup">
                     <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
                       <div class="form-validation alert"></div>
-                      <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: nowrap; gap: 10px;">
-                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required="">
+                      <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required="" style="flex: 1 1 120px; min-width: 0;">
                           <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
-                          <div class="md-typeset"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
+                          <div class="md-typeset" style="flex-shrink: 0;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
                       </div>
                     </form>
                 </div>
             </div>
           </div>
-          
+
+        </div>
+
+        <div class="footer-column footer-products-gap grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>PRODUCTS</h4>
+          <div class="footer-conditions-list">
+            <a href="./latest/meet/">OpenVidu Meet</a>
+            <a href="./latest/docs/">OpenVidu Platform</a>
+            <a href="./openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+          </div>
         </div>
 
         <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
@@ -12322,10 +12214,10 @@
           </div>
         </div>
 
-        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+        <div class="footer-column grid-15 tablet-grid-50 mobile-grid-100">
           <h4>ACKNOWLEDGMENTS</h4>
           <a href="./acknowledgments/" style="display: flex; gap: 8px;">
-            <img class="acknowledgments-footer" style="max-width: 260px;" src="assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
+            <img class="acknowledgments-footer" style="max-width: 260px; width: 100%;" src="assets/images/sponsors/acknowledgments.png" alt="Acknowledgments">
           </a>
         </div>
 

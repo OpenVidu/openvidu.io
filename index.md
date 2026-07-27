@@ -1,5 +1,3 @@
-# Home
-
 ## Choose the ideal OpenVidu solution for your real-time needs
 
 ### 
@@ -22,7 +20,7 @@ Developer-oriented SDKs for custom apps
 
 For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
 
-- Programmable client and server SDKs for all languages, LiveKit-compatible
+- Programmable client and server SDKs for all languages, from our LiveKit fork
 - Build your custom UI from scratch with total freedom
 - Low level control of real time media: codecs, protocols, bitrates...
 - Precise control of recording and streaming with custom layouts

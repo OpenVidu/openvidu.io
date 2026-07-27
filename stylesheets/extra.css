@@ -104,19 +104,30 @@ span:has(> a > .openvidu-tag) {
 }
 
 .md-social__link {
-  height: 2.8rem;
-  width: 2.8rem;
-  line-height: 2.8;
+  height: 2.2rem;
+  width: 2.2rem;
+  line-height: 2.2;
 }
 
 .md-social__link svg {
-  max-height: 1.4rem;
+  max-height: 1.1rem;
 }
 
 .footer-grid {
   width: 100%;
   text-align: center;
   padding: 0.8rem 0 1rem 0;
+}
+
+.grid-container.footer-grid {
+  max-width: none;
+}
+
+@media (min-width: 1220px) {
+  .grid-20.footer-products-gap {
+    margin-left: 1.2rem;
+    width: calc(20% - 1.2rem);
+  }
 }
 
 .footer-conditions-list {
@@ -311,14 +322,28 @@ p:has(> a.glightbox) {
   text-decoration: underline;
 }
 
-/* Claim separator: slightly smaller gap than the comparison/tour line's
-   .home-under-cta-sep (whose surrounding whitespace adds to its margins). */
-.home-trust-line .home-sep {
-  margin: 0 0.45em;
+/* Shields.io badges: license/stars/docker pulls, and below them publications/
+   citations/experience/OSS affiliations. Rendered as plain <img> tags
+   (shields.io computes and caches the values server-side), so no client-side
+   fetch/formatting logic is needed. */
+.home-badges {
+  text-align: center;
+  margin: 0.5em 0 0;
+  line-height: 0;
 }
 
-.home-credentials-line {
-  margin-top: 0.5em;
+.home-credentials-badges {
+  margin-top: 0.7em;
+}
+
+.home-badges a {
+  display: inline-block;
+  margin: 4px 5px;
+}
+
+.home-badges img {
+  height: 28px;
+  vertical-align: middle;
 }
 
 .features-list:after {
@@ -864,6 +889,11 @@ h1.meetplatform-slogan {
 
 .md-footer-meta .footer-column {
   text-align: left;
+}
+
+.md-footer-meta .md-social {
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
 }
 
 .md-footer-meta .footer-column h4 {
