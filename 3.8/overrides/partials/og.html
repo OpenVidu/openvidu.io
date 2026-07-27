@@ -1,0 +1,64 @@
+{#-
+  Open Graph + Twitter Card meta tags for social/chat link previews.
+
+  Platforms like Facebook, LinkedIn, Slack, WhatsApp, Discord and X read
+  og:*/twitter:* meta tags to render the preview card when a URL is shared.
+  They do NOT read JSON-LD (which serves search engines/AI crawlers), so both
+  are needed.
+
+  - og:title / og:description come from the page frontmatter, falling back to
+    the site defaults (any HTML like <br> in site_description is stripped).
+  - og:url uses the page canonical URL.
+  - og:image: blog posts that declare a `cover_image` in their frontmatter get
+    that image as the preview; everything else falls back to a site-wide
+    1200x630 branded card (dark hero gradient, logo, conversion text) rendered
+    as a large-image card. The card is generated; see the marketing repo for
+    the generator script and design rationale.
+      A post's `cover_image` may be a bare filename (resolved against that
+      post's image folder — `assets/images/blog/YYYY/MM/<slug>/`, which by
+      convention mirrors the post's location `blog/posts/YYYY/MM/<slug>.md`),
+      a site-absolute path starting with "/", or a full external URL.
+      Width/height are only emitted for the known-size site card, since
+      per-post covers vary.
+  - Blog posts are typed og:type=article with their publication date.
+-#}
+{%- set og_is_post = page and page.file and page.file.src_uri.startswith("blog/posts/") %}
+{%- set og_title = page.meta.title if page and page.meta and page.meta.title else (page.title if page and page.title else config.site_name) %}
+{%- set og_description = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
+{%- set og_description = og_description | replace("<br>", " ") | striptags %}
+{#- Resolve the preview image: per-post cover_image, else the site-wide card. -#}
+{%- set og_image = "https://openvidu.io/assets/images/og/openvidu-card.png" %}
+{%- set og_image_alt = "OpenVidu — Self-hosted video conferencing. Ready to use or fully custom. Open source. Get started free." %}
+{%- set og_image_is_card = true %}
+{%- if og_is_post and page.meta and page.meta.cover_image %}
+  {%- set cover = page.meta.cover_image %}
+  {%- if cover.startswith("http") %}
+    {%- set og_image = cover %}
+  {%- elif cover.startswith("/") %}
+    {%- set og_image = "https://openvidu.io" ~ cover %}
+  {%- else %}
+    {#- blog/posts/YYYY/MM/<slug>.md -> YYYY/MM/<slug>, mirrored under assets/images/blog/ -#}
+    {%- set post_folder = (page.file.src_uri | replace("blog/posts/", "", 1))[:-3] %}
+    {%- set og_image = "https://openvidu.io/assets/images/blog/" ~ post_folder ~ "/" ~ cover %}
+  {%- endif %}
+  {%- set og_image_alt = og_title %}
+  {%- set og_image_is_card = false %}
+{%- endif %}
+<meta property="og:site_name" content="OpenVidu" />
+<meta property="og:type" content="{{ 'article' if og_is_post else 'website' }}" />
+<meta property="og:title" content="{{ og_title | e }}" />
+<meta property="og:description" content="{{ og_description | e }}" />
+{%- if page and page.canonical_url %}
+<meta property="og:url" content="{{ page.canonical_url }}" />
+{%- endif %}
+<meta property="og:image" content="{{ og_image | e }}" />
+{%- if og_image_is_card %}
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+{%- endif %}
+<meta property="og:image:alt" content="{{ og_image_alt | e }}" />
+{%- if og_is_post and page.config and page.config.date and page.config.date.created %}
+<meta property="article:published_time" content="{{ page.config.date.created.strftime('%Y-%m-%d') }}" />
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@openvidu" />

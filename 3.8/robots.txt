@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /account/
+Disallow: /conditions/*
+Allow: /latest/*
+Allow: /
+
+Sitemap: https://openvidu.io/sitemap.xml
