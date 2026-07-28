@@ -309,7 +309,6 @@ not_in_nav: |
   /acknowledgments.md
   /openvidu-meet-vs-openvidu-platform.md
   /conditions/
-  /docs/getting-started.md
 
 validation:
   nav:
@@ -377,6 +376,12 @@ theme:
         name: Switch to dark mode
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
+
+# Exposes publish-tool/ovweb.yaml on `config.extra.ovweb`, so the 404 router
+# (docs/overrides/404.html) compiles its redirect patterns from the same configuration the
+# publishing tool uses instead of hardcoding a list that has to be kept in sync by hand.
+hooks:
+  - publish-tool/mkdocs_hook.py
 
 plugins:
   - meta
@@ -507,7 +512,6 @@ plugins:
         OpenVidu Platform:
         - docs/index.md: OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
         - docs/releases.md: OpenVidu Platform - Release notes
-        - docs/getting-started.md: OpenVidu Platform - Getting started
         - docs/comparing-openvidu.md: OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
         - docs/developing-your-openvidu-app/index.md: OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
         - docs/developing-your-openvidu-app/how-to.md: OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.

@@ -90,9 +90,7 @@ When creating a new page, follow these steps:
               - meet/newpage.md: Brief description # copy here the description from the metadata of the .md file.
       ```
 
-4. **Update custom versioning scripts (if needed)**:
-   - **Non-versioned pages**: If the new page is not versioned, add it to the `NON_VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
-   - **Versioned pages**: If the new page is part of a new set of versioned pages, add it to the `VERSIONED_PAGES` array in the [`push-new-version.sh` script](custom-versioning/push-new-version.sh).
+4. **Update the site layout (if needed)**: if the new page starts a **new area**, add its folder to [`publish-tool/ovweb.yaml`](publish-tool/ovweb.yaml) — to `non_versioned_pages` if the page is not versioned, or to `versioned_pages` if it is part of a new set of versioned pages. Otherwise its links will not be rewritten and it will not be relocated correctly at publish time. A page inside an area that is already listed needs no change here.
 
 If the new page contains links, follow the site-wide **link rules** below.
 
@@ -139,7 +137,7 @@ MkDocs does **not** process links inside raw HTML (`<a href>`, `<img src>`), so 
 <a class="glightbox" href="/assets/images/foo.png">...</a>
 ```
 
-**Assets referenced this way stay version-correct thanks to the deploy script**: `push-new-version.sh` (`changeVersionedPagesLinks`) rewrites `src|href="/assets/`, `/javascripts/`, `/stylesheets/` into `"/X.Y/assets/`... in every **versioned** page at publish time, so each version keeps referencing its own assets even after later versions change them. Non-versioned pages keep the root form (root assets are always the latest publish's — correct for them). Locally the dev server serves assets at the root, so `/assets/...` just works.
+**Assets referenced this way stay version-correct thanks to the publishing tool**: `ovweb` rewrites `src|href="/assets/`, `/javascripts/`, `/stylesheets/` into `"/X.Y/assets/`... in every **versioned** page at publish time, so each version keeps referencing its own assets even after later versions change them. Non-versioned pages keep the root form (root assets are always the latest publish's — correct for them). Locally the dev server serves assets at the root, so `/assets/...` just works.
 
 Links from HTML to **versioned** pages (rare) still use relative-to-built-folder paths: a page `performance.md` builds to `performance/index.html`, so add one extra `../` compared to the Markdown path (unless linking from an `index.md`).
 
@@ -268,11 +266,11 @@ MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for vers
 > [!IMPORTANT]
 > Documentation versions are grouped by **minor** release and named `X.Y` (e.g. `3.8`): one git branch, one `gh-pages` folder and one version-selector entry per minor version. The content of each `X.Y` version always reflects the **newest patch** of that minor. Patch releases do **not** create new documentation versions:
 >
-> - **New minor release** (e.g. `3.9.0`) → publish a new version `3.9` (`push-new-version.sh 3.9`).
-> - **Patch for the current minor** (e.g. `3.8.1`) → merge the docs to `main` and overwrite the latest version (`overwrite-latest-version.sh 3.8`). Add the patch's section to the releases pages; the version selector does not change.
-> - **Patch for an old minor** (e.g. `3.7.2`) → commit to branch `3.7` and overwrite that past version (`overwrite-past-version.sh 3.7`).
+> - **New minor release** (e.g. `3.9.0`) → publish a new version `3.9` (`ovweb publish new 3.9`).
+> - **Patch for the current minor** (e.g. `3.8.1`) → merge the docs to `main` and rebuild the latest version in place (`ovweb publish latest 3.8`). Add the patch's section to the releases pages; the version selector does not change.
+> - **Patch for an old minor** (e.g. `3.7.2`) → commit to branch `3.7` and rebuild that past version (`ovweb publish past 3.7`).
 >
-> Legacy exact-patch URLs (`/3.4.1/...`) are redirected to their minor folder (`/3.4/...`) by the 404 page.
+> Legacy exact-patch URLs (`/3.4.1/...`) are redirected to their minor folder (`/3.4/...`) by the 404 page. That rule, and every other redirect on the site, is declared in [`publish-tool/ovweb.yaml`](publish-tool/ovweb.yaml).
 
 > [!IMPORTANT]
 > **Releases pages** (`docs/meet/releases.md` and `docs/docs/releases.md`) follow two conventions, because the same release notes are served across **every** documentation version (on publish, the *content* of the latest page — the notes and their table of contents, nothing else — is spliced into every version folder's releases page, so any version shows the full, most-recent notes while keeping its own navigation, links and outdated-version banner):
@@ -292,102 +290,112 @@ The repository must be using MkDocs Material and must be properly setup like exp
 
 These configurations get the repository ready for versioning.
 
+Publishing is done by **`ovweb`**, the CLI in [`publish-tool/`](publish-tool/). Its
+[README](publish-tool/README.md) is the authoritative reference: what a publish does step by
+step, how the link rewriting works, how redirects are configured, and how the parity gate proves
+a change to the rewriting logic is safe.
+
 ## Versioning with GitHub Actions
 
-Run action [Publish Web](https://github.com/OpenVidu/openvidu.io/actions/workflows/publish-web.yaml):
+Run action [Publish Web](https://github.com/OpenVidu/openvidu.io/actions/workflows/publish-web.yaml)
+and pick the command that matches what you are doing:
 
-### Publishing a new version
+| What you are doing                                    | **command** | **version** |
+| ----------------------------------------------------- | ----------- | ----------- |
+| Publishing a brand-new minor release                  | `new`       | `3.9`       |
+| A content fix, or a patch release of the current minor | `latest`    | `3.8`       |
+| A fix or patch release for an older minor              | `past`      | `3.7`       |
 
-- **Select the script to execute**: `push-new-version.sh`
-- **Version to publish**: `3.0`
+Tick **dry_run** to see the plan first: it resolves everything, prints the ordered steps and the
+redirects it would install, and touches nothing.
 
-### Overwriting the latest version
-
-- **Select the script to execute**: `overwrite-latest-version.sh`
-- **Version to publish**: `3.0`
-
-### Overwriting a past version
-
-- **Select the script to execute**: `overwrite-past-version.sh`
-- **Version to publish**: `3.0`
+**A failed publish cannot break the live site.** `ovweb` builds, post-processes and commits
+`gh-pages` entirely locally, and pushes only once the published tree is correct; a failure
+anywhere before that rolls the local branch back and leaves the remote untouched. So there is no
+backup branch and no force-push recovery path to remember. The workflow runs `ovweb verify`
+afterwards to assert the published layout.
 
 ## Versioning locally
 
 ### Prerequisites
 
-- `mike`:
-
-  ```bash
-  pip install mike
-  ```
-
-- Packages `mkdocs-material` and `mkdocs-glightbox`:
-
-  ```bash
-  pip install mkdocs-material mkdocs-glightbox
-  ```
-
-### Publishing a new version
-
-This script publishes a new version, updates alias "latest" to point to this new version, and updates the non-versioned files at root.
-
-It also creates a new branch from main named after the minor version (e.g. `3.0`) and pushes it to the repository. This allows modifying past versions if required later.
+Install the tool and everything needed to build the site:
 
 ```bash
-cd custom-versioning
-./push-new-version.sh 3.0
+pip install "./publish-tool[build]"
 ```
 
-### Overwriting the latest version
+Install it **non-editable**, as above. Publishing a past version checks out that version's
+branch, which does not contain the tool — from `site-packages` it survives the switch. Run
+`ovweb doctor` to check the dependencies, the version pins, the configuration and the git state
+before publishing.
 
-This script overwrites the content of the latest published version, also updating the non-versioned files at root.
-
-It also updates the version branch with any new commits available in main branch (with a `git rebase`). This keeps the latest version branch up to date with the latest changes in main.
+### Publishing
 
 ```bash
-cd custom-versioning
-./overwrite-latest-version.sh 3.0
+ovweb publish new    3.9   # new minor: deploys 3.9, moves `latest`, refreshes the root pages,
+                           # and creates the 3.9 branch so the version can be fixed later
+ovweb publish latest 3.8   # rebuild the newest version from main in place, refresh the root
+                           # pages, and rebase the 3.8 branch onto main
+ovweb publish past   3.7   # rebuild an older minor from its own branch; the site root and
+                           # `latest` are left alone
 ```
 
-### Overwriting a past version
+Add `--dry-run` to print the plan without building or pushing, or `--no-push` to do everything
+locally and inspect the result before it goes out.
 
-This script overwrites the content of a specific past version without touching the non-versioned files at root.
+### Understanding what a publish does
 
-In this case, all the changes to be published must be already commited into the version branch before calling this script.
+`mike` builds the **whole** site — versioned and non-versioned pages alike — into each version
+folder, with relative links. `ovweb` then post-processes that output on `gh-pages`:
 
-```bash
-cd custom-versioning
-./overwrite-past-version.sh 3.0
-```
-
-### Understanding the versioning script
-
-Script `push-new-version.sh` performs the following steps:
-
-1. Deploy a new version of the documentation with `mike`.
-2. Change links in versioned HTML files (docs and meet) from new version that point to non-versioned files (home, support, pricing...) accessible from "/" to use absolute paths (e.g. `/pricing/`). This step also **version-pins raw-HTML asset references** (`src`/`href` to `/assets/`, `/javascripts/`, `/stylesheets/`) to the version's own folder (e.g. `/3.9/assets/`), so each version keeps referencing its own assets even after later versions change them (Markdown asset links are already handled by MkDocs at build time and need no pinning).
-3. Change links in non-versioned HTML files from new version that point to versioned files to use absolute paths to the latest version (e.g. `/latest/docs/`).
-4. Remove version from links that point to non-versioned files in the new version.
-5. Update `llms.txt` file: replace version with 'latest' for versioned pages and remove version from non-versioned pages.
-6. Move non-versioned files from the new version to root. This keeps the global pages served on "/" always updated to the latest published version.
-7. Update `sitemap.xml`: copy it from the version folder to root, replace version with 'latest' for versioned pages, remove version from non-versioned pages, and generate the compressed `sitemap.xml.gz` file.
-8. Add a redirection HTML file to the root of the new version to redirect to the docs index page (`docs/`).
+1. Deploy the version with `mike`.
+2. In the **versioned** pages (docs and meet), rewrite links that point at pages served from the
+   root (home, support, pricing…) into absolute paths (e.g. `/pricing/`), and **version-pin
+   raw-HTML asset references** (`src`/`href` to `/assets/`, `/javascripts/`, `/stylesheets/`) to
+   the version's own folder (e.g. `/3.9/assets/`), so each version keeps referencing its own
+   assets even after later versions change them. Markdown asset links are already handled by
+   MkDocs at build time and need no pinning. Point each page's `canonical` and `og:url` at
+   `/latest/`, so ranking signals consolidate on one evergreen URL.
+3. In the pages that will be served from the root, rewrite links to versioned pages into
+   `/latest/docs/…`, and strip the version from each page's own URL — while shielding
+   author-pinned `/X.Y/docs/…` links, which must survive.
+4. Make every location in the search index absolute.
+5. Update `llms.txt` and the RSS feeds.
+6. Move the non-versioned pages and root files out to the site root, so the global pages served
+   from `/` always reflect the newest release, and copy the asset folders there.
+7. Copy the version's `sitemap.xml` to the root, rewrite it and regenerate its `.gz`. The root
+   sitemap is the only one published — `robots.txt` names it, and it is a plain `urlset` rather
+   than an index — so the per-version copies are deleted rather than maintained.
+8. Write the [generated redirect pages](publish-tool/README.md#redirects), so `/X.Y/` and
+   `/latest/` land on the documentation.
+9. Splice the newest release notes into every other version folder, so any version shows the full
+   changelog while keeping its own navigation.
+10. Commit and push `gh-pages`.
 
 > [!NOTE]
-> The overwriting of the non-versioned files located at root of `gh-pages` branch (points 3, 4, 5, 6 and 7) is done by default. To avoid overriding these files, call the script adding `false` as second argument: `./push-new-version.sh 3.0 false`. Script `overwrite-past-version.sh` does this to only overwrite the files of that specific past version without affecting the root non-versioned files.
+> Steps 3, 5, 6 and the root half of 7 only run when the version being published becomes
+> `latest`. `ovweb publish past` skips them, so the pages served from the site root are left
+> untouched.
 
 ## Testing versioning locally
 
-This will serve the content of gh-pages branch locally:
+Serve the content of the `gh-pages` branch:
 
 ```bash
 mike serve
 ```
 
-To build a new version without pushing to GitHub:
+Build a version without pushing anything — `mike` commits to the local `gh-pages` only:
 
 ```bash
 mike deploy 3.0
+```
+
+Or run a whole publish locally, post-processing included, and inspect the result:
+
+```bash
+ovweb publish latest 3.8 --no-push --keep-worktree
 ```
 
 ## Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_
