@@ -18,6 +18,11 @@ on:
       - "docs/**"
       - "shared/**"
       - "mkdocs.yml"
+      # The build reads publish-tool/ovweb.yaml through mkdocs_hook.py, and the pin check
+      # below reads pyproject.toml and both Dockerfiles.
+      - "publish-tool/**"
+      - "Dockerfile"
+      - "Dockerfile.mike"
       - ".github/workflows/validate-web.yaml"
   push:
     branches:
@@ -27,6 +32,9 @@ on:
       - "docs/**"
       - "shared/**"
       - "mkdocs.yml"
+      - "publish-tool/**"
+      - "Dockerfile"
+      - "Dockerfile.mike"
       - ".github/workflows/validate-web.yaml"
 
 permissions:
@@ -53,7 +61,19 @@ jobs:
           # production-only optimize + privacy plugins are disabled (CI=false in the build
           # step). That means the imaging stack (mkdocs-material[imaging], cairo, pngquant)
           # is not needed here — only the pins that affect link resolution and rendering.
-          pip install "mkdocs-material==9.7.6" "pygments<2.20" mkdocs-glightbox mkdocs-llmstxt mkdocs-rss-plugin
+          pip install "./publish-tool[validate]"
+
+      - name: Check that the pinned versions agree
+        # mkdocs-material is pinned in pyproject.toml and named again as the base-image tag of
+        # both Dockerfiles. They had drifted to three different values before this check
+        # existed, and a different theme version builds different markup — which the
+        # release-notes splice matches on.
+        run: ovweb doctor --pins
+
+      - name: Validate the redirect configuration
+        # Every version must resolve every redirect rule to exactly one target. An overlapping
+        # version range is an error rather than a silent first-match-wins.
+        run: ovweb redirects check
 
       - name: Build documentation (strict)
         env:

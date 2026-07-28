@@ -1,0 +1,187 @@
+# Layout and redirect configuration for the openvidu.io website.
+#
+# This is the single source of truth for both halves of publishing:
+#
+#   * `ovweb` reads it to know which parts of the built site are versioned, which are
+#     promoted to the root, and which redirects to materialise.
+#   * The MkDocs build reads it through publish-tool/mkdocs_hook.py, so the 404
+#     router (docs/overrides/404.html) compiles its patterns from the same data instead
+#     of hardcoding a list that has to be kept in sync by hand.
+#
+# `ovweb` always reads the copy inside the *installed* package, never the one in the
+# checked-out branch. Publishing an old version checks out its X.Y branch, which carries
+# its own stale copy of this file; reading that would reintroduce exactly the per-branch
+# divergence this file exists to remove.
+
+schema: 1
+
+layout:
+  site_url: https://openvidu.io
+
+  # Served under a version folder: /X.Y/docs/..., /X.Y/meet/... (and /latest/...).
+  versioned_pages:
+    - docs
+    - meet
+
+  # Built inside the version folder but served once from the site root, always
+  # regenerated from the newest publish: /pricing/, /blog/, ...
+  non_versioned_pages:
+    - account
+    - pricing
+    - support
+    - openvidu-meet-vs-openvidu-platform
+    - conditions
+    - blog
+    - about-us
+    - research
+    - acknowledgments
+
+  # Asset folders copied (not moved) from the newest version folder to the root. They stay
+  # in the version folder too, which is what makes `pinned_assets` below work.
+  assets:
+    - assets
+    - javascripts
+    - stylesheets
+    - search
+
+  # Asset folders whose root-absolute references get pinned to the version folder inside
+  # versioned pages, e.g. src="/assets/x.png" -> src="/3.8/assets/x.png".
+  #
+  # MkDocs does not process raw HTML, so authors write root-absolute asset references there
+  # (a relative path would need a per-page "../" depth, impossible to get right in a shared
+  # snippet). The root /assets/ folder always holds the NEWEST publish's assets, so a
+  # versioned page must reference its own copy instead: its assets may change or disappear
+  # in a later release. Asset links written in Markdown need no pinning — MkDocs already
+  # rewrites those into relative URLs that stay inside the version folder.
+  #
+  # `search` is in `assets` but deliberately NOT here: the search index is not referenced by
+  # URL from page markup, and its own locations are rewritten by a different rule.
+  pinned_assets:
+    - assets
+    - javascripts
+    - stylesheets
+
+  # Individual files moved from the newest version folder to the root. On a past-version
+  # publish these are deleted from the version folder instead — except index.html, which
+  # is replaced by the generated version-root redirect.
+  #
+  # sitemap.xml is deliberately absent: it is copied and rewritten, not moved.
+  root_files:
+    - index.html
+    - index.md
+    - 404.html
+    - robots.txt
+    - llms.txt
+    - llms-full.txt
+    - feed_rss_created.xml
+    - feed_rss_updated.xml
+    - feed_json_created.json
+    - feed_json_updated.json
+    - rss.xsl
+
+  # Rewritten wholesale (every /X.Y/ occurrence) when promoted to the root.
+  feeds:
+    - feed_rss_created.xml
+    - feed_rss_updated.xml
+    - feed_json_created.json
+    - feed_json_updated.json
+
+redirects:
+  defaults:
+    lang: en
+    title: "Redirecting… | OpenVidu"
+    robots: "noindex, follow"
+    preserve_query_and_hash: true
+
+    # Targets are emitted RELATIVE to the redirect page, and this must stay true for any
+    # rule installed inside a version folder.
+    #
+    # `latest` is a git symlink to the newest version folder, so ONE file answers at both
+    # /3.8/ and /latest/. An absolute target would have to name a version and would leak
+    # "/3.8/" to visitors of the stable /latest/ URL. A relative target is resolved by the
+    # browser against the document URL, so the same bytes send /latest/ to /latest/docs/
+    # and /3.8/ to /3.8/docs/ — with no JavaScript needed.
+    relative: true
+
+  # Redirects materialised as HTML files in the published tree.
+  #
+  # `at` is either the named location `version-root` or a path template that may use
+  # {version}. `to` is relative to the directory the redirect page lives in. `canonical`
+  # may use {site_url} and {version}.
+  #
+  # `versions` gates the whole rule; `when` entries override fields for a version range.
+  # At most one `when` entry may match a given version — an ambiguous rule is an error,
+  # not a silent first-match.
+  files:
+    - id: version-root
+      description: >
+        Installed as <X.Y>/index.html and therefore also served at /latest/ through mike's
+        symlink alias. Sends a visitor who lands on a bare version root into the OpenVidu
+        Platform documentation.
+      at: version-root
+      to: "docs/"
+      canonical: "{site_url}/latest/docs/"
+      body: "Redirecting to the OpenVidu Platform documentation…"
+      when:
+        # Versions 3.0–3.3 predate the /docs/ landing page: back then the getting started
+        # guide *was* the Platform documentation index.
+        - versions: "<3.4"
+          to: "docs/getting-started/"
+          body: "Redirecting to the OpenVidu Platform getting started guide…"
+
+    - id: platform-getting-started
+      description: >
+        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4. Replaces the hand-written
+        JavaScript stub that used to live in docs/docs/getting-started.md, which was
+        indexable, self-canonical and listed in both sitemap.xml and llms.txt.
+      at: "{version}/docs/getting-started/index.html"
+      to: "../"
+      canonical: "{site_url}/latest/docs/"
+      body: "Redirecting to the OpenVidu Platform documentation…"
+      when:
+        # In 3.0–3.3 this is a real page, not a redirect.
+        - versions: "<3.4"
+          enabled: false
+
+    - id: legacy-docs-index
+      description: >
+        /3.0/docs/ … /3.3/docs/ never existed and are hard 404s that the 404 router cannot
+        rescue (they match neither the legacy-patch pattern nor an unversioned path). Point
+        them at the getting started guide, which was that version's documentation index.
+      at: "{version}/docs/index.html"
+      to: "getting-started/"
+      canonical: "{site_url}/latest/docs/"
+      body: "Redirecting to the OpenVidu Platform getting started guide…"
+      versions: "<3.4"
+
+  # Redirects compiled into the 404 router (docs/overrides/404.html). GitHub Pages has no
+  # server-side redirects, so a pattern — as opposed to a single known path — can only be
+  # handled by the page GitHub serves for an unmatched URL.
+  #
+  # `match` is a JavaScript regular expression tested against location.pathname, and `to`
+  # is its replacement ($1, $2, ... for capture groups). `for_each: versioned_pages`
+  # expands one rule per versioned page, substituting {item}. Patterns are tried in order
+  # and the first match wins.
+  patterns:
+    # Documentation versions used to be published per patch release ("/3.4.1/...",
+    # "/3.0.0-beta2/..."). They are now grouped by minor ("/3.4/..."). A first path segment
+    # with a third component is therefore a legacy URL: current minor folders never have
+    # one.
+    #
+    # Two rules rather than one optional group: a bare "/3.4.1" must land on "/3.4/", and a
+    # replacement of an unmatched group yields "" in JavaScript, not "/".
+    - id: legacy-patch-version-root
+      match: '^/(\d+\.\d+)\.[^/]+$'
+      to: "/$1/"
+
+    - id: legacy-patch-version-path
+      match: '^/(\d+\.\d+)\.[^/]+(/.*)$'
+      to: "/$1$2"
+
+    - id: unversioned-versioned-page
+      description: >
+        A versioned section requested without a version prefix ("/docs/self-hosting/")
+        goes to the newest version.
+      for_each: versioned_pages
+      match: '^/{item}/(.*)$'
+      to: "/latest/{item}/$1"

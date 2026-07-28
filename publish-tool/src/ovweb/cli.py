@@ -1,0 +1,577 @@
+"""The `ovweb` command line.
+
+Thin by design: this module parses flags, builds a plan and hands off. Anything that decides
+something belongs in :mod:`ovweb.plan`, :mod:`ovweb.redirects` or :mod:`ovweb.pipeline`.
+"""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+from typing import Annotated
+
+import typer
+
+from . import __version__, fsops
+from .config import ConfigError, SiteConfig, load_site_config
+from .discovery import known_versions, published_versions, version_branches
+from .doctor import run_checks
+from .gitrepo import Git, GitError, open_repository
+from .mikewrap import MikeError
+from .pipeline.postprocess import PostprocessError, postprocess
+from .pipeline.publish import PublishError, publish
+from .plan import build_plan
+from .redirects import RedirectError, render_redirect, resolve_file_redirects, resolve_patterns
+from .releases import RegionError
+from .report import Reporter
+from .rewrite import RewriteError
+from .verify import verify
+from .versions import VersionError, validate_minor
+
+app = typer.Typer(
+    add_completion=False,
+    no_args_is_help=True,
+    help="Build, version and publish the openvidu.io website.",
+)
+publish_app = typer.Typer(no_args_is_help=True, help="Publish a documentation version.")
+redirects_app = typer.Typer(no_args_is_help=True, help="Inspect the redirect configuration.")
+versions_app = typer.Typer(no_args_is_help=True, help="Inspect the published versions.")
+app.add_typer(publish_app, name="publish")
+app.add_typer(redirects_app, name="redirects")
+app.add_typer(versions_app, name="versions")
+
+# Errors that are the user's problem, not a bug: report the message, not a traceback.
+EXPECTED_ERRORS = (
+    ConfigError,
+    GitError,
+    MikeError,
+    PostprocessError,
+    PublishError,
+    RedirectError,
+    RegionError,
+    RewriteError,
+    VersionError,
+)
+
+VersionArgument = Annotated[str, typer.Argument(help="Minor version to publish, e.g. 3.9.")]
+
+
+# -- shared option handling -----------------------------------------------------------------
+
+
+class Context:
+    """Everything the commands share, resolved once."""
+
+    def __init__(
+        self,
+        *,
+        repo_path: Path | None,
+        layout: Path | None,
+        remote: str,
+        dry_run: bool,
+        verbosity: int,
+        as_json: bool,
+        color: bool,
+    ) -> None:
+        self.report = Reporter(verbosity=verbosity, as_json=as_json, color=color)
+        self.dry_run = dry_run
+        self._layout = layout
+        self._config: SiteConfig | None = None
+        self._repo: Git | None = None
+        self._repo_path = repo_path
+        self._remote = remote
+
+    @property
+    def config(self) -> SiteConfig:
+        if self._config is None:
+            self._config = load_site_config(self._layout)
+        return self._config
+
+    @property
+    def repo(self) -> Git:
+        if self._repo is None:
+            self._repo = open_repository(
+                self._repo_path, remote=self._remote, dry_run=self.dry_run, log=self.report
+            )
+        return self._repo
+
+
+@app.callback(invoke_without_command=True)
+def main_callback(
+    context: typer.Context,
+    repo: Annotated[
+        Path | None, typer.Option(help="Repository to work on. Defaults to the current one.")
+    ] = None,
+    layout: Annotated[
+        Path | None, typer.Option(help="Use this ovweb.yaml instead of the installed one.")
+    ] = None,
+    remote: Annotated[str, typer.Option(help="Git remote to publish to.")] = "origin",
+    dry_run: Annotated[
+        bool,
+        typer.Option(
+            "--dry-run",
+            help="Resolve and print the plan without building, writing or pushing anything.",
+        ),
+    ] = False,
+    verbose: Annotated[
+        int,
+        typer.Option("--verbose", "-v", count=True, help="Repeat for the argv of every command."),
+    ] = 0,
+    as_json: Annotated[
+        bool, typer.Option("--json", help="Emit one JSON object per step instead of prose.")
+    ] = False,
+    color: Annotated[bool, typer.Option("--color/--no-color", help="Colourise the output.")] = True,
+    show_version: Annotated[
+        bool, typer.Option("--version", help="Print the ovweb version and exit.")
+    ] = False,
+) -> None:
+    if show_version:
+        typer.echo(__version__)
+        raise typer.Exit
+    context.obj = Context(
+        repo_path=repo,
+        layout=layout,
+        remote=remote,
+        dry_run=dry_run,
+        verbosity=verbose,
+        as_json=as_json,
+        color=color,
+    )
+    # The group is invokable without a subcommand so that `--version` works on its own; a bare
+    # `ovweb` is already handled by no_args_is_help, so this only catches options with no command.
+    if context.invoked_subcommand is None:
+        typer.echo(context.get_help())
+        raise typer.Exit
+
+
+# -- publish ---------------------------------------------------------------------------------
+
+
+def _run_publish(
+    context: Context,
+    *,
+    version: str,
+    update_latest: bool,
+    delete_first: bool,
+    create_branch: bool,
+    sync_branch: bool,
+    push: bool,
+    keep_worktree: bool,
+    commit: bool,
+    force: bool,
+) -> None:
+    validate_minor(version)
+    plan = build_plan(
+        context.config,
+        version=version,
+        update_latest=update_latest,
+        delete_first=delete_first,
+        create_branch=create_branch,
+        sync_branch=sync_branch,
+        push=push,
+    )
+    if context.dry_run:
+        _print_plan(context, plan)
+    publish(
+        repo=context.repo,
+        config=context.config,
+        plan=plan,
+        report=context.report,
+        keep_worktree=keep_worktree,
+        commit=commit,
+        force=force,
+    )
+
+
+def _print_plan(context: Context, plan) -> None:
+    report = context.report
+    report.heading(f"Plan for {plan.version}")
+    report.info(f"build source branch: {plan.source_branch}")
+    report.info(f"move `latest`:       {'yes' if plan.update_latest else 'no'}")
+    report.info(f"delete first:        {'yes' if plan.delete_first else 'no'}")
+    report.info(f"create branch:       {'yes' if plan.create_branch else 'no'}")
+    report.info(f"rebase branch:       {'yes' if plan.sync_branch else 'no'}")
+    report.info(f"push:                {'yes' if plan.push else 'no'}")
+
+    report.heading("Post-processing steps")
+    for step in plan.steps:
+        report.info(f"{step.name:24} {step.title}")
+        if step.detail:
+            report.detail(f"{'':24} {step.detail}")
+
+    report.heading("Redirects to install")
+    if not plan.redirects:
+        report.info("(none)")
+    for redirect in plan.redirects:
+        report.info(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
+
+    report.heading("Notes")
+    for note in plan.notes:
+        report.info(f"- {note}")
+
+
+_KEEP = typer.Option("--keep-worktree", help="Leave the gh-pages worktree behind for inspection.")
+_NO_PUSH = typer.Option("--push/--no-push", help="Push to the remote, or keep everything local.")
+_FORCE = typer.Option("--force", help="Post-process a tree that has already been post-processed.")
+
+
+@publish_app.command("new")
+def publish_new(
+    context: typer.Context,
+    version: VersionArgument,
+    push: Annotated[bool, _NO_PUSH] = True,
+    keep_worktree: Annotated[bool, _KEEP] = False,
+    force: Annotated[bool, _FORCE] = False,
+) -> None:
+    """Publish a brand-new minor version and move `latest` onto it.
+
+    Creates the `X.Y` branch from main so the version can be fixed later, refreshes the pages
+    served from the site root, and copies the new release notes into every other version.
+    """
+    _run_publish(
+        context.obj,
+        version=version,
+        update_latest=True,
+        delete_first=False,
+        create_branch=True,
+        sync_branch=False,
+        push=push,
+        keep_worktree=keep_worktree,
+        commit=True,
+        force=force,
+    )
+
+
+@publish_app.command("latest")
+def publish_latest(
+    context: typer.Context,
+    version: VersionArgument,
+    push: Annotated[bool, _NO_PUSH] = True,
+    keep_worktree: Annotated[bool, _KEEP] = False,
+    force: Annotated[bool, _FORCE] = False,
+) -> None:
+    """Re-publish the newest version in place, from main.
+
+    This is how a content fix and a patch release of the current minor go live. The version is
+    removed and rebuilt, the root pages are refreshed, and the `X.Y` branch is rebased onto
+    main so it keeps carrying what is published.
+    """
+    _run_publish(
+        context.obj,
+        version=version,
+        update_latest=True,
+        delete_first=True,
+        create_branch=False,
+        sync_branch=True,
+        push=push,
+        keep_worktree=keep_worktree,
+        commit=True,
+        force=force,
+    )
+
+
+@publish_app.command("past")
+def publish_past(
+    context: typer.Context,
+    version: VersionArgument,
+    push: Annotated[bool, _NO_PUSH] = True,
+    keep_worktree: Annotated[bool, _KEEP] = False,
+    force: Annotated[bool, _FORCE] = False,
+) -> None:
+    """Re-publish an older minor version, leaving the site root untouched.
+
+    The content comes from the `X.Y` branch, which must already hold the changes. `latest` does
+    not move, and the version's releases pages are refreshed from the current newest ones.
+    """
+    _run_publish(
+        context.obj,
+        version=version,
+        update_latest=False,
+        delete_first=True,
+        create_branch=False,
+        sync_branch=False,
+        push=push,
+        keep_worktree=keep_worktree,
+        commit=True,
+        force=force,
+    )
+
+
+@app.command()
+def deploy(
+    context: typer.Context,
+    version: VersionArgument,
+    update_latest: Annotated[
+        bool, typer.Option("--update-latest/--no-update-latest", help="Move `latest` onto it.")
+    ] = True,
+    delete_first: Annotated[
+        bool,
+        typer.Option("--delete-first/--no-delete-first", help="`mike delete` before building."),
+    ] = False,
+    create_branch: Annotated[
+        bool, typer.Option("--create-branch/--require-branch", help="Create the X.Y branch.")
+    ] = False,
+    sync_branch: Annotated[
+        bool, typer.Option("--sync-branch/--no-sync-branch", help="Rebase X.Y onto main after.")
+    ] = False,
+    push: Annotated[bool, _NO_PUSH] = True,
+    keep_worktree: Annotated[bool, _KEEP] = False,
+    commit: Annotated[
+        bool, typer.Option("--commit/--no-commit", help="Commit the post-processed gh-pages tree.")
+    ] = True,
+    force: Annotated[bool, _FORCE] = False,
+) -> None:
+    """The primitive the three `publish` presets configure. Use those unless you need this."""
+    _run_publish(
+        context.obj,
+        version=version,
+        update_latest=update_latest,
+        delete_first=delete_first,
+        create_branch=create_branch,
+        sync_branch=sync_branch,
+        push=push,
+        keep_worktree=keep_worktree,
+        commit=commit,
+        force=force,
+    )
+
+
+# -- postprocess -----------------------------------------------------------------------------
+
+
+@app.command("postprocess")
+def postprocess_command(
+    context: typer.Context,
+    version: VersionArgument,
+    tree: Annotated[Path, typer.Option("--tree", help="Directory holding a built gh-pages tree.")],
+    update_latest: Annotated[
+        bool, typer.Option("--update-latest/--no-update-latest", help="Refresh the root pages.")
+    ] = True,
+    force: Annotated[bool, _FORCE] = False,
+) -> None:
+    """Run only the gh-pages post-processing, on a tree, touching no git and no remote.
+
+    This is the debugging entry point and the unit the parity gate compares against the shell
+    implementation: given the same input tree, this must produce the same output tree.
+    """
+    ctx: Context = context.obj
+    validate_minor(version)
+    result = postprocess(
+        tree.resolve(),
+        config=ctx.config,
+        version=version,
+        update_latest=update_latest,
+        report=ctx.report,
+        force=force,
+    )
+    ctx.report.success(
+        f"Post-processed {version} in {tree}"
+        + (f" with {len(result.warnings)} warning(s)" if result.warnings else "")
+    )
+
+
+# -- redirects -------------------------------------------------------------------------------
+
+
+@redirects_app.command("render")
+def redirects_render(
+    context: typer.Context,
+    version: VersionArgument,
+    rule: Annotated[str | None, typer.Option("--rule", help="Render only this rule id.")] = None,
+) -> None:
+    """Print the redirect pages that would be installed for a version."""
+    ctx: Context = context.obj
+    resolved = resolve_file_redirects(ctx.config, version)
+    if rule is not None:
+        resolved = tuple(item for item in resolved if item.rule_id == rule)
+        if not resolved:
+            raise typer.BadParameter(f"no rule {rule!r} applies to version {version}")
+    if not resolved:
+        ctx.report.info(f"No redirect rule applies to version {version}.")
+        return
+    for redirect in resolved:
+        typer.echo(f"===== {redirect.path}   [{redirect.rule_id}]")
+        typer.echo(render_redirect(redirect), nl=False)
+
+
+@redirects_app.command("check")
+def redirects_check(context: typer.Context) -> None:
+    """Validate every redirect rule against every version that exists.
+
+    Fails when a rule is ambiguous for some version, when a target is absolute where it must
+    be relative, or when a canonical URL is not absolute.
+    """
+    ctx: Context = context.obj
+    config = ctx.config
+    try:
+        versions = known_versions(ctx.repo)
+    except GitError:
+        versions = []
+
+    ctx.report.heading(f"Checking {config.source}")
+    if not versions:
+        ctx.report.warn("no versions discovered — checking the rules in isolation only")
+
+    problems = 0
+    for version in versions:
+        try:
+            resolved = resolve_file_redirects(config, version)
+        except RedirectError as error:
+            ctx.report.error(f"{version}: {error}")
+            problems += 1
+            continue
+        rendered = [f"{item.rule_id} -> {item.to}" for item in resolved]
+        ctx.report.info(f"{version:8} {', '.join(rendered) if rendered else '(no redirects)'}")
+
+    patterns = resolve_patterns(config)
+    ctx.report.heading("404 patterns")
+    for pattern in patterns:
+        ctx.report.info(f"{pattern.id:38} {pattern.match}  ->  {pattern.to}")
+
+    if problems:
+        ctx.report.error(f"{problems} version(s) failed to resolve.")
+        raise typer.Exit(1)
+    ctx.report.success("All redirect rules resolve.")
+
+
+@redirects_app.command("apply")
+def redirects_apply(
+    context: typer.Context,
+    tree: Annotated[Path, typer.Option("--tree", help="Directory holding a gh-pages tree.")],
+    only: Annotated[
+        str | None, typer.Option("--version", help="Apply to this version only.")
+    ] = None,
+) -> None:
+    """Write the redirect pages into every version folder of a tree.
+
+    Lets a rule reach versions that are not being rebuilt — which is how the `/3.0/docs/`
+    class of dead end gets fixed without republishing 3.0 from its own branch.
+    """
+    ctx: Context = context.obj
+    root = tree.resolve()
+    versions = [only] if only else _versions_in_tree(root)
+    written = 0
+    for version in versions:
+        for redirect in resolve_file_redirects(ctx.config, version):
+            fsops.write_text(root / redirect.path, render_redirect(redirect))
+            ctx.report.info(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
+            written += 1
+    ctx.report.success(f"Wrote {written} redirect page(s) across {len(versions)} version(s).")
+
+
+def _versions_in_tree(tree: Path) -> list[str]:
+    import re
+
+    return sorted(
+        entry.name
+        for entry in tree.iterdir()
+        if entry.is_dir() and re.fullmatch(r"\d+\.\d+", entry.name)
+    )
+
+
+# -- versions --------------------------------------------------------------------------------
+
+
+@versions_app.command("list")
+def versions_list(context: typer.Context) -> None:
+    """Show what is published and which version branches exist."""
+    ctx: Context = context.obj
+    repo = ctx.repo
+    published = published_versions(repo)
+    branches = version_branches(repo)
+
+    ctx.report.heading("Published (versions.json on gh-pages)")
+    ctx.report.info(", ".join(published) if published else "(none)")
+    ctx.report.heading("Version branches")
+    ctx.report.info(", ".join(branches) if branches else "(none)")
+
+    orphans = sorted(set(published) - set(branches))
+    if orphans:
+        ctx.report.warn(
+            f"published without a branch: {', '.join(orphans)} — they cannot be re-published"
+        )
+
+
+# -- verify ----------------------------------------------------------------------------------
+
+
+@app.command("verify")
+def verify_command(
+    context: typer.Context,
+    tree: Annotated[
+        Path | None,
+        typer.Option("--tree", help="Directory holding a gh-pages tree. Defaults to a worktree."),
+    ] = None,
+    gh_branch: Annotated[
+        str, typer.Option(help="Branch to check out when --tree is absent.")
+    ] = "gh-pages",
+) -> None:
+    """Assert the invariants of a published tree.
+
+    Passes on the live site as it stands, so it is also a check that this tool's model of the
+    published layout is correct.
+    """
+    ctx: Context = context.obj
+    if tree is not None:
+        findings = verify(tree.resolve(), config=ctx.config)
+    else:
+        with ctx.repo.worktree(gh_branch) as worktree:
+            findings = verify(worktree, config=ctx.config)
+
+    if not findings:
+        ctx.report.success("All invariants hold.")
+        return
+    for finding in findings:
+        ctx.report.error(f"[{finding.check}] {finding.where}: {finding.detail}")
+    ctx.report.error(f"{len(findings)} invariant violation(s).")
+    raise typer.Exit(1)
+
+
+# -- doctor ----------------------------------------------------------------------------------
+
+
+@app.command()
+def doctor(
+    context: typer.Context,
+    pins: Annotated[
+        bool, typer.Option("--pins", help="Only check that the pinned versions agree.")
+    ] = False,
+) -> None:
+    """Check dependencies, pins, configuration and git state before publishing."""
+    ctx: Context = context.obj
+    try:
+        repo = ctx.repo
+        repo_root = repo.root
+    except GitError:
+        repo = None
+        repo_root = None
+
+    checks = run_checks(repo=repo, repo_root=repo_root, pins_only=pins)
+    failed = 0
+    for check in checks:
+        if check.ok:
+            ctx.report.info(f"ok      {check.name:16} {check.detail}")
+        elif check.fatal:
+            ctx.report.error(f"{check.name}: {check.detail}")
+            failed += 1
+        else:
+            ctx.report.warn(f"{check.name}: {check.detail}")
+
+    if failed:
+        raise typer.Exit(1)
+    ctx.report.success("Ready to publish.")
+
+
+# -- entry point -----------------------------------------------------------------------------
+
+
+def main() -> None:
+    try:
+        app()
+    except EXPECTED_ERRORS as error:
+        print(f"error: {error}", file=sys.stderr)
+        raise SystemExit(1) from error
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()

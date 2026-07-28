@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ovweb"
+version = "1.0.0"
+description = "Build, version and publish the openvidu.io website"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.12",
+    "PyYAML>=6",
+    "Jinja2>=3.1",
+    "packaging>=23",
+]
+
+[project.optional-dependencies]
+# Everything needed for a real publish build. These mirror exactly what
+# .github/workflows/publish-web.yaml installed before this package existed:
+# mkdocs-material and pygments are pinned, the plugins are not.
+#
+# TODO: pin the plugins too. Doing it right needs a `pip freeze` of a known-good CI
+# run — inventing version numbers here would risk breaking the build for no gain.
+# `ovweb doctor --pins` already guards the pin that matters most (mkdocs-material,
+# which must agree across this file and both Dockerfiles).
+build = [
+    "mike",
+    "mkdocs-material[imaging]==9.7.6",
+    "pygments<2.20",
+    "mkdocs-glightbox",
+    "mkdocs-llmstxt",
+    "mkdocs-rss-plugin",
+]
+# Same, minus the imaging extra: the lightweight link-validation build.
+validate = [
+    "mkdocs-material==9.7.6",
+    "pygments<2.20",
+    "mkdocs-glightbox",
+    "mkdocs-llmstxt",
+    "mkdocs-rss-plugin",
+]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+ovweb = "ovweb.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ovweb"]
+
+# ovweb.yaml is the human-edited config and lives at the top of this folder, but it must
+# also ship inside the wheel: the installed package is the single source of truth at
+# publish time, precisely so that checking out gh-pages (or an old X.Y branch, which has
+# its own stale copy) cannot change the tool's behaviour.
+[tool.hatch.build.targets.wheel.force-include]
+"ovweb.yaml" = "ovweb/data/ovweb.yaml"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
+# RUF001-003 flag "ambiguous" Unicode. They exist to catch homoglyphs in identifiers; here
+# the en dashes, em dashes and ellipses are deliberate typography in prose, matching how the
+# rest of the repository's documentation is written.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

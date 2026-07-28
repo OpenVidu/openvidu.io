@@ -1,0 +1,59 @@
+name: Test Publishing Tool
+
+# Unit tests and lint for `ovweb` (publish-tool/), the tool that publishes the website.
+#
+# What this does NOT cover is the parity gate — the check that ovweb turns a built tree into
+# the same published tree the shell implementation did. That needs a full `mike` build and is
+# run by hand before a change to the rewriting logic:
+#
+#   pip install "./publish-tool[build,dev]"
+#   LEGACY_REF=<a commit from before the migration> \
+#     publish-tool/tests/parity/run_parity.sh 3.99 latest
+#
+# See publish-tool/README.md, "Testing and parity".
+
+on:
+  pull_request:
+    paths:
+      - "publish-tool/**"
+      - ".github/workflows/test-tools.yaml"
+  push:
+    branches:
+      - main
+      - next
+    paths:
+      - "publish-tool/**"
+      - ".github/workflows/test-tools.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: 3.x
+
+      - name: Install safe-chain
+        uses: OpenVidu/actions/install-safe-chain@070fb73fda8fe7a08e28991b1c2d276f12a009ef # v1.0.22
+
+      - name: Install the tool and its test dependencies
+        # Editable here on purpose, unlike the publish workflow: the tests import the package
+        # and read the real ovweb.yaml, and nothing switches branches.
+        run: pip install -e "./publish-tool[dev]"
+
+      - name: Lint
+        working-directory: ./publish-tool
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Test
+        working-directory: ./publish-tool
+        run: pytest
