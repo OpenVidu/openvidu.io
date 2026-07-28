@@ -99,7 +99,7 @@ everything on top of it ready to use:
 | Webhooks | ❌ none | ✅ bundled event set |
 | Admin dashboard | ❌ none | ✅ OpenVidu Dashboard, bundled |
 | Client SDKs | JS + C++ only | 8, including native Android and iOS |
-| Clustering | ❌ your own orchestration | ✅ documented autoscaling across 5 cloud providers |
+| Clustering | ❌ your own orchestration | ✅ one-click automated deployment with autoscaling on 5 cloud providers |
 
 ## When raw mediasoup is still the right call
 
