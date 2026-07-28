@@ -336,12 +336,14 @@ def test_latest_version_pushes_its_release_notes_out(mixed_tree, config, report)
     assert f'<a class="chrome" href="/{OLD_VERSION}/assets/logo.png">{OLD_VERSION}</a>' in page
 
 
-def test_sweeps_the_sitemap_out_of_every_version(mixed_tree, config, report):
-    """One publish converges the whole site instead of leaving a stale file per old version."""
+def test_removes_only_the_published_version_sitemap(mixed_tree, config, report):
+    """A publish's blast radius stays its own folder: other versions keep their sitemap until
+    they are next published."""
     postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
 
-    for version in (VERSION, OLD_VERSION):
-        assert not (mixed_tree / version / "sitemap.xml").exists(), version
+    assert not (mixed_tree / OLD_VERSION / "sitemap.xml").exists()
+    assert not (mixed_tree / OLD_VERSION / "sitemap.xml.gz").exists()
+    assert (mixed_tree / VERSION / "sitemap.xml").exists()
 
 
 def test_only_the_published_version_gets_its_links_rewritten(mixed_tree, config, report):

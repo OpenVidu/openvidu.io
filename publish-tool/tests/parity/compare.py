@@ -60,9 +60,8 @@ def expectations(version: str) -> list[Expected]:
             lambda path: path.startswith((".cache", "site/")),
         ),
         Expected(
-            "the per-version sitemaps are removed rather than pruned: nothing referenced them, "
-            "and the sweep clears every version folder, not only the one being published",
-            lambda path: re.fullmatch(r"\d+\.\d+/sitemap\.xml(\.gz)?", path) is not None,
+            "the published version's sitemap is removed rather than pruned: nothing referenced it",
+            lambda path: path in (f"{version}/sitemap.xml", f"{version}/sitemap.xml.gz"),
         ),
     ]
 

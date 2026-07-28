@@ -364,9 +364,9 @@ folder, with relative links. `ovweb` then post-processes that output on `gh-page
 5. Update `llms.txt` and the RSS feeds.
 6. Move the non-versioned pages and root files out to the site root, so the global pages served
    from `/` always reflect the newest release, and copy the asset folders there.
-7. Copy the version's `sitemap.xml` to the root, rewrite it and regenerate its `.gz`. The root
-   sitemap is the only one published — `robots.txt` names it, and it is a plain `urlset` rather
-   than an index — so the per-version copies are deleted rather than maintained.
+7. Copy the version's `sitemap.xml` to the root, rewrite it and regenerate its `.gz`, then delete
+   the version's own copy. The root sitemap is the only one published — `robots.txt` names it, and
+   it is a plain `urlset` rather than an index — so a per-version copy is advertised to nobody.
 8. Write the [generated redirect pages](publish-tool/README.md#redirects), so `/X.Y/` and
    `/latest/` land on the documentation.
 9. Splice the newest release notes into every other version folder, so any version shows the full

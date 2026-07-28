@@ -320,7 +320,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `strip-non-versioned`  | past   | Delete the root-served pages from the version folder instead. Tolerant: an old version may never have built some.     |
 | `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
-| `remove-version-sitemaps`| always | Delete every per-version sitemap. Nothing referenced them, and the sweep covers all version folders, so one publish converges the whole site. |
+| `remove-version-sitemap`| always | Delete this version's sitemap. Nothing referenced it: only the root sitemap is published. |
 | `sync-releases`        | always | Splice the newest release notes across versions.                                                                      |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
@@ -468,7 +468,7 @@ by construction. The expected differences are:
 | Difference                                                    | Why                                                                                    |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `<X.Y>/index.html`, `<X.Y>/docs/index.html`, `<X.Y>/docs/getting-started/index.html` | The generated redirects replace the hand-written stub and add two the shell could not express. |
-| `<X.Y>/sitemap.xml`, `<X.Y>/sitemap.xml.gz`                   | Removed rather than pruned, for every version folder rather than only the published one. |
+| `<X.Y>/sitemap.xml`, `<X.Y>/sitemap.xml.gz`                   | The published version's sitemap is removed rather than pruned.                           |
 | `.cache/**`, `site/**`                                        | Not in a fresh worktree, so they can no longer be committed by accident.                |
 
 Anything else is a bug. Run the gate before merging a change to the rewriting logic; it is not
@@ -482,10 +482,17 @@ its root with a relative target, no promoted page claims a versioned URL as its 
 folder still carries a sitemap, every search location is absolute, and `versions.json` agrees
 with the folders on disk.
 
-The sitemap check is the one that will report findings before every version has been through a
-publish: the files are harmless, and the finding tells you which versions have not been rebuilt
-yet. Everything else passes on the live site as it stands, which makes `verify` the cheapest
-available check that the tool's model of the published layout is right.
+The sitemap check reports any version folder that still carries a sitemap. A publish only removes
+its own, so versions published before that change keep theirs until they are next published — the
+findings are the to-do list. A one-off cleanup clears them all without rebuilding anything:
+
+```bash
+git worktree add /tmp/ghp gh-pages
+find /tmp/ghp -maxdepth 2 -regextype posix-extended \
+  -regex '.*/[0-9]+\.[0-9]+/sitemap\.xml(\.gz)?' -delete
+git -C /tmp/ghp commit -am "Remove the per-version sitemaps" && git -C /tmp/ghp push origin gh-pages
+git worktree remove /tmp/ghp
+```
 
 ---
 

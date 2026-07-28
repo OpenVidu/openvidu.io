@@ -12,7 +12,7 @@ LATEST_STEPS = [
     "promote-to-root",
     "install-redirects",
     "promote-sitemap",
-    "remove-version-sitemaps",
+    "remove-version-sitemap",
     "sync-releases",
     "commit",
 ]
@@ -23,7 +23,7 @@ PAST_STEPS = [
     "rewrite-search-index",
     "strip-non-versioned",
     "install-redirects",
-    "remove-version-sitemaps",
+    "remove-version-sitemap",
     "sync-releases",
     "commit",
 ]

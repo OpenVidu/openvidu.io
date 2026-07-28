@@ -28,7 +28,7 @@ from ..rewrite import (
     rewrite_search_index,
     rewrite_versioned_file,
 )
-from ..versions import MINOR_VERSION, read_versions_json
+from ..versions import read_versions_json
 
 #: Present in every redirect page ovweb writes. Used to recognise a tree that has already
 #: been post-processed, because running the pipeline twice is not safe (see `_guard`).
@@ -120,7 +120,7 @@ def postprocess(
     # 8/9. Sitemaps.
     if update_latest:
         _promote_sitemap(tree, version=version, config=config, report=report, result=result)
-    _remove_version_sitemaps(tree, report=report, result=result)
+    _remove_version_sitemap(tree, version=version, report=report, result=result)
 
     # 10. The releases pages must show the newest notes in every version.
     _sync_releases(tree, version=version, config=config, report=report, result=result)
@@ -293,8 +293,10 @@ def _promote_sitemap(
     report.result("promote-sitemap", written=1)
 
 
-def _remove_version_sitemaps(tree: Path, *, report: Reporter, result: PostprocessResult) -> None:
-    """Delete every per-version sitemap from the published tree.
+def _remove_version_sitemap(
+    tree: Path, *, version: str, report: Reporter, result: PostprocessResult
+) -> None:
+    """Delete this version's sitemap from the published tree.
 
     The shell pruned the root-served pages out of each version's sitemap so it would not
     advertise URLs that had moved to the root. But nothing ever consumed those files:
@@ -302,23 +304,19 @@ def _remove_version_sitemaps(tree: Path, *, report: Reporter, result: Postproces
     index, and no page links to a version's copy. Maintaining them was work in service of
     nothing, so they are removed instead.
 
-    Every version folder is swept, not just the one being published, so a single publish
-    converges the whole site instead of leaving a stale file behind for each older version.
-    Removing a file nothing references cannot break a URL that ever worked.
+    Only the version being published is touched, in keeping with the rest of the pipeline: a
+    publish's blast radius is its own folder, plus the release-notes splice. Versions published
+    before this change keep their sitemap until they are next published; `ovweb verify` reports
+    them, and a one-off cleanup can remove them without a rebuild.
     """
-    report.step("remove-version-sitemaps", "Remove the per-version sitemaps")
+    report.step("remove-version-sitemap", "Remove this version's sitemap")
 
     removed = 0
-    for version_dir in sorted(tree.iterdir()):
-        if not version_dir.is_dir() or version_dir.is_symlink():
-            continue
-        if not MINOR_VERSION.match(version_dir.name):
-            continue
-        for name in (SITEMAP, f"{SITEMAP}.gz"):
-            removed += fsops.remove(version_dir / name, required=False)
+    for name in (SITEMAP, f"{SITEMAP}.gz"):
+        removed += fsops.remove(tree / version / name, required=False)
 
-    result.counts["remove-version-sitemaps"] = removed
-    report.result("remove-version-sitemaps", removed=removed)
+    result.counts["remove-version-sitemap"] = removed
+    report.result("remove-version-sitemap", removed=removed)
 
 
 def _sync_releases(

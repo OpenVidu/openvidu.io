@@ -44,10 +44,10 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     ("install-redirects", "always", "Write the generated redirect pages", ""),
     ("promote-sitemap", "latest", "Copy the version sitemap to the root and rewrite it", ""),
     (
-        "remove-version-sitemaps",
+        "remove-version-sitemap",
         "always",
-        "Remove the per-version sitemaps",
-        "nothing references them; only the root sitemap is published",
+        "Remove this version's sitemap",
+        "nothing references it; only the root sitemap is published",
     ),
     ("sync-releases", "always", "Splice the newest release notes across versions", ""),
     (
