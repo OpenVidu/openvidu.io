@@ -93,6 +93,7 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.
 | Egress/Ingress | Bundled by default, pre-wired to Redis + S3 | Separate services you deploy yourself, wired to your own Redis (self-hosted); "without additional setup" on Cloud only |
 | Admin dashboard | ✅ OpenVidu Dashboard, bundled | Not bundled |
 | Observability | Bundled Grafana/Loki/Alloy/Mimir stack (PRO) | Prometheus metrics exposed; dashboards are DIY |
+| Clustering (self-hosted) | Documented autoscaling across 5 cloud providers — AWS, Azure, GCP, DigitalOcean, OCI (PRO) | Redis-backed distributed mode with region-aware node selection; autoscaling automation is self-managed |
 | Pricing | Flat **$0.0006/core/minute** (PRO) | Multi-dimensional Cloud pricing (agent-session minutes, concurrent sessions, SIP minutes) |
 
 ## What OpenVidu bundles that self-hosted LiveKit doesn't

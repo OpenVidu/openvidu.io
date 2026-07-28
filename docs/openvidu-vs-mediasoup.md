@@ -39,10 +39,12 @@ tags: []
 
 # OpenVidu vs mediasoup
 
-**mediasoup isn't a competing platform** — it's the low-level media-routing library both LiveKit
-and OpenVidu use internally. If you're evaluating "build directly on mediasoup" against "use
-OpenVidu," this page is for you: here's exactly what mediasoup leaves for you to build yourself,
-and what OpenVidu already built on that same foundation.
+**mediasoup isn't a competing platform** — it's the low-level media-routing library OpenVidu uses
+internally as its media engine (upstream LiveKit uses a different engine, Pion; OpenVidu's fork
+swaps it for mediasoup — see [OpenVidu vs LiveKit](openvidu-vs-livekit.md)). If you're evaluating
+"build directly on mediasoup" against "use OpenVidu," this page is for you: here's exactly what
+mediasoup leaves for you to build yourself, and what OpenVidu already built on that same
+foundation.
 
 <div style="text-align: center; margin: 2em 0;" markdown>
 
@@ -83,8 +85,8 @@ gaps to be filled in a future release:
 
 ## OpenVidu already built all of this — on the same engine
 
-OpenVidu uses mediasoup internally too, for the same performance reasons, and ships everything
-above it ready to use:
+OpenVidu uses mediasoup as its own media engine, for the same performance reasons, and ships
+everything on top of it ready to use:
 
 | | **mediasoup** | **OpenVidu** |
 | --- | --- | --- |
@@ -106,8 +108,8 @@ topologies, non-standard transport needs, or a signaling architecture they can't
 off-the-shelf room model. For those specific cases, building directly on mediasoup is the right
 call, as long as you go in aware that you're also signing up to build and maintain everything in
 the table above yourself. For most teams building a real-time video application, that's a lot of
-platform to rebuild from scratch on top of a library, when both OpenVidu and LiveKit already built
-it on the same engine.
+platform to rebuild from scratch on top of a library, when full platforms like OpenVidu already
+built it — on this exact engine.
 
 ## Frequently asked questions
 
