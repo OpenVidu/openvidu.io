@@ -76,7 +76,6 @@ Self-hosted videoconference solution and SDK
 
 - [OpenVidu Platform: Self-Hosted WebRTC SDKs](https://openvidu.io/latest/docs/index.md): OpenVidu Platform - Self-hosted SDK to build scalable videoconferencing solutions
 - [Releases](https://openvidu.io/latest/docs/releases/index.md): OpenVidu Platform - Release notes
-- [Getting started](https://openvidu.io/latest/docs/getting-started/index.md): OpenVidu Platform - Getting started
 - [Comparing OpenVidu](https://openvidu.io/latest/docs/comparing-openvidu/index.md): OpenVidu Platform - Comparing OpenVidu Meet and OpenVidu Platform with other solutions like LiveKit Cloud and Mediasoup
 - [Developing your OpenVidu app](https://openvidu.io/latest/docs/developing-your-openvidu-app/index.md): OpenVidu Platform - Steps involved in building an OpenVidu videoconferencing application.
 - [How to](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md): OpenVidu Platform - Quick reference of the most common operations you may want to perform in your application while integrating OpenVidu Platform.

@@ -10530,7 +10530,6 @@ For the Release Notes of OpenVidu Meet 3.4.0, please visit here: [OpenVidu Meet 
 | Promtail / Loki        | 2.8.9      |      |      |
 | Mimir                  | 2.11.0     |      |      |
 
-
 This section compares OpenVidu to other videoconference/streaming solutions, to better understand what it is, what it is not, and what advantages and disadvantages it may have over them.
 
 Comparing OpenVidu Meet and OpenVidu Platform instead?
