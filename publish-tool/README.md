@@ -279,7 +279,12 @@ ovweb versions list        What is published, and which version branches exist
 ovweb doctor [--pins]      Dependencies, pins, configuration and git state
 ```
 
-Useful flags:
+Useful flags. `--dry-run`, `--verbose`/`-v`, `--json`, `--color`/`--no-color`, `--repo`, `--layout`
+and `--remote` are **global** — click requires a group's options before the subcommand, so
+`ovweb --dry-run --verbose publish latest 3.8` is the canonical form. Writing them after the
+subcommand works too: `ovweb` moves them to the front rather than failing, because the parse error
+was neither obvious nor useful (`ovweb publish latest 3.8 --verbose` broke the publish workflow the
+first time it ran). Everything else in the table below belongs to a specific command.
 
 | Flag                        | Effect                                                                                                                                                     |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |

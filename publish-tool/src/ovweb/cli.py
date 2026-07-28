@@ -564,10 +564,51 @@ def doctor(
 
 # -- entry point -----------------------------------------------------------------------------
 
+#: Options declared on the app callback rather than on a command. click only accepts a group's
+#: options *before* the subcommand, so `ovweb publish latest 3.8 --verbose` is a parse error —
+#: which is exactly the shape everybody reaches for, and which broke the publish workflow the
+#: first time it ran. :func:`hoist_global_options` moves them to the front instead of failing.
+#:
+#: `tests/unit/test_cli.py` asserts these two sets stay in step with the actual app, and that no
+#: command ever declares a name listed here — which is what makes the rewriting safe.
+GLOBAL_SWITCHES = frozenset({"--dry-run", "--json", "--color", "--no-color", "--verbose", "-v"})
+GLOBAL_OPTIONS_WITH_VALUE = frozenset({"--repo", "--layout", "--remote"})
+
+
+def hoist_global_options(argv: list[str]) -> list[str]:
+    """Move global options ahead of the subcommand so they may be written anywhere.
+
+    Everything after a bare `--` is left alone, and an option already in front simply stays
+    there, so this is idempotent.
+    """
+    leading: list[str] = []
+    rest: list[str] = []
+    index = 0
+
+    while index < len(argv):
+        token = argv[index]
+        if token == "--":
+            rest.extend(argv[index:])
+            break
+        name = token.split("=", 1)[0]
+        if name in GLOBAL_SWITCHES:
+            leading.append(token)
+        elif name in GLOBAL_OPTIONS_WITH_VALUE:
+            leading.append(token)
+            # `--repo=x` carries its value; `--repo x` needs the next token too.
+            if "=" not in token and index + 1 < len(argv):
+                index += 1
+                leading.append(argv[index])
+        else:
+            rest.append(token)
+        index += 1
+
+    return leading + rest
+
 
 def main() -> None:
     try:
-        app()
+        app(args=hoist_global_options(sys.argv[1:]))
     except EXPECTED_ERRORS as error:
         print(f"error: {error}", file=sys.stderr)
         raise SystemExit(1) from error

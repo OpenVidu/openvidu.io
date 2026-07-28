@@ -80,9 +80,12 @@ jobs:
       - name: Publish
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        # --verbose and --dry-run are global options, so they belong before the subcommand.
+        # ovweb also accepts them after it, but keeping the canonical order here keeps the log
+        # readable as something you can paste into a terminal.
         run: |
-          ovweb ${{ inputs.dry_run && '--dry-run' || '' }} \
-            publish ${{ inputs.command }} ${{ inputs.version }} --verbose
+          ovweb --verbose ${{ inputs.dry_run && '--dry-run' || '' }} \
+            publish ${{ inputs.command }} ${{ inputs.version }}
 
       - name: Verify the published tree
         if: ${{ !inputs.dry_run }}
