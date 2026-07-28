@@ -25,6 +25,7 @@ Self-hosted videoconference solution and SDK
 - [OpenVidu 3.8.0 is now available](https://openvidu.io/blog/2026/07/09/release-380/index.md): OpenVidu 3.8.0 release notes — user accounts, RBAC, mediasoup overhaul and TURN security
 - [Managing Permissions in Video Conferencing Apps: 3 Access Models](https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/index.md): Managing permissions in video conferencing apps — anonymous, identified guest and user access models
 - [Building a video-enabled CRM with an AI agent and OpenVidu Meet](https://openvidu.io/blog/2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/index.md): Building a video-enabled CRM with an AI coding agent and OpenVidu Meet — from a single prompt to fine-grained per-guest room permissions
+- [How DynDevice Built Virtual Classrooms Into Its LMS with OpenVidu](https://openvidu.io/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/index.md): How DynDevice, the eLearning platform by Mega Italia Media, built virtual classrooms into its LMS with OpenVidu instead of juggling five third-party meeting tools
 
 ## OpenVidu Meet
 
