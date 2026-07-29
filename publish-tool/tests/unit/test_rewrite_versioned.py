@@ -136,3 +136,39 @@ def test_a_dot_in_the_version_is_not_a_wildcard(layout):
 def test_is_a_no_op_on_a_page_with_nothing_to_rewrite(layout):
     text = "<html><body><p>Nothing to see.</p></body></html>"
     assert rewrite(text, layout) == text
+
+
+# -- links to files promoted to the root -------------------------------------------------
+
+
+@pytest.mark.parametrize("depth", ["", "../", "../../", "../../../"])
+def test_absolutises_rss_feed_links(layout, depth):
+    """The theme puts two of these on every page. The feeds are served from the root and a
+    version folder keeps no copy, so left relative they resolve to a 404."""
+    text = f'<link rel="alternate" type="application/rss+xml" href="{depth}feed_rss_created.xml">'
+    assert rewrite(text, layout) == (
+        '<link rel="alternate" type="application/rss+xml" href="/feed_rss_created.xml">'
+    )
+
+
+def test_absolutises_every_promoted_root_file(layout):
+    for name in layout.root_files:
+        if name.startswith("index."):
+            continue
+        assert rewrite(f'<a href="../../{name}">x</a>', layout) == f'<a href="/{name}">x</a>', name
+
+
+def test_leaves_the_home_page_link_to_the_home_rule(layout):
+    """`index.html` and `index.md` are excluded so `href="../.."` -> `/` stays the only rule
+    that decides what a link to the home page becomes."""
+    assert rewrite('<a href="../..">Home</a>', layout) == '<a href="/">Home</a>'
+    assert rewrite('<a href="../../index.html">Home</a>', layout) == (
+        '<a href="../../index.html">Home</a>'
+    )
+
+
+def test_does_not_absolutise_a_same_named_page_inside_the_version(layout):
+    """Only an exact relative link to the file is rewritten, not a path that merely ends with
+    its name."""
+    text = '<a href="../../notes/llms.txt/">x</a>'
+    assert rewrite(text, layout) == text

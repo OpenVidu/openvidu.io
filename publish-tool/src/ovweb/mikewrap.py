@@ -71,12 +71,11 @@ class Mike:
 
     # Neither of the commands below ever passes `--push`, deliberately.
     #
-    # mike's output is only half a publish: the version folder it writes still contains the
-    # pages that belong at the site root, with relative links that resolve nowhere, and no
-    # redirect at the version root. Letting mike push would put that on the live site and leave
-    # it there if anything in the post-processing then failed. So mike commits locally, and
-    # `pipeline/publish.py` pushes once, at the end, after the tree is actually correct — which
-    # is also what makes rolling back a failure a purely local operation.
+    # mike's output is only half a publish: the version folder it writes still holds the pages
+    # that belong at the site root, their links resolve nowhere, and there is no redirect at the
+    # version root. Pushing that would put it on the live site. mike commits locally instead, and
+    # `pipeline/publish.py` pushes once the tree is correct — which is also what makes rolling
+    # back a failure a purely local operation.
 
     def deploy(self, version: str, *, alias: str | None = None) -> None:
         """Build `version` and commit it to the local gh-pages, optionally moving an alias."""

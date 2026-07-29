@@ -60,6 +60,7 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         f'<img src="/assets/logo.png">'
         f'<a href="../pricing/">Pricing</a>'
         f'<a href="..">Home</a>'
+        f'<link rel="alternate" type="application/rss+xml" href="../feed_rss_created.xml">'
         f'<script>new URL("../..",location)</script>',
         encoding="utf-8",
     )
@@ -169,6 +170,8 @@ def test_rewrites_the_versioned_pages(latest_tree, config, report):
     assert 'href="/"' in page
     assert 'new URL("/",location)' in page
     assert 'href="https://openvidu.io/latest/docs/"' in page
+    # The feeds are promoted to the root, so a version-relative link would 404.
+    assert 'href="/feed_rss_created.xml"' in page
 
 
 def test_does_not_corrupt_a_binary_asset(latest_tree, config, report):
@@ -250,11 +253,18 @@ def test_gzips_the_root_sitemap_from_its_final_content(latest_tree, config, repo
     assert gzip.decompress(path.with_suffix(".xml.gz").read_bytes()) == path.read_bytes()
 
 
-def test_absolutises_the_search_index(latest_tree, config, report):
+def test_root_search_index_points_at_latest_but_the_version_keeps_its_version(
+    latest_tree, config, report
+):
+    """A versioned page loads the index beside it, so in-version search must stay in the version;
+    the root copy is served on the evergreen root pages and should not pin one."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
-    index = json.loads((latest_tree / "search" / "search_index.json").read_text())
-    assert [entry["location"] for entry in index["docs"]] == [
+    root = json.loads((latest_tree / "search" / "search_index.json").read_text())
+    version = json.loads((latest_tree / VERSION / "search" / "search_index.json").read_text())
+
+    assert [entry["location"] for entry in root["docs"]] == ["/", "/latest/docs/", "/pricing/"]
+    assert [entry["location"] for entry in version["docs"]] == [
         "/",
         f"/{VERSION}/docs/",
         "/pricing/",

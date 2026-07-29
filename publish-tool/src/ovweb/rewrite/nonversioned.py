@@ -1,7 +1,7 @@
 """Rewrites applied to the pages that are built under a version but served from the root.
 
-Port of `changeNonVersionedPagesLinks` from push-new-version.sh. Applied only when the
-publish refreshes the root pages, i.e. when `latest` moves to the version being published.
+Applied only when the publish refreshes the root pages, i.e. when `latest` moves to the version
+being published.
 """
 
 from __future__ import annotations

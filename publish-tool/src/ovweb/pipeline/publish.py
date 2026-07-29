@@ -1,17 +1,13 @@
 """Drive a full publish: prepare branches, build with mike, post-process, push.
 
-Port of `main` and `prepareGitBranches`/`deployVersion` from push-new-version.sh, plus the
-`mike delete` and branch-sync steps that used to live in the two `overwrite-*.sh` wrappers.
+**Nothing reaches the remote until the published tree is correct.** mike's output is only half a
+publish: the version folder it writes still holds the pages that belong at the site root, their
+links resolve nowhere, and there is no redirect at the version root. Pushing at that point would
+put exactly that on the live site.
 
-**Nothing reaches the remote until the published tree is correct.** The shell ran
-`mike deploy --push`, which put a half-finished site live before any of the post-processing had
-happened: at that moment the version folder still holds the pages that belong at the site root,
-their links resolve nowhere, and there is no redirect at the version root. A failure after that
-point left exactly that state published, and recovering meant force-pushing a backup branch.
-
-Here every step up to and including the gh-pages commit is local, and a failure rolls the local
-branch back to where it started. The remote is never touched, so there is nothing to undo and no
-backup branch to keep.
+So every step up to and including the gh-pages commit is local, the push happens once at the end,
+and a failure rolls the local branch back to where it started. The remote is never touched, which
+is why there is nothing to restore from and no backup branch to keep.
 """
 
 from __future__ import annotations

@@ -1,12 +1,19 @@
-"""Post-process a built gh-pages tree.
+"""Turn mike's raw output for one version into the published site layout.
 
-Port of `updateWebsite` from push-new-version.sh, with one deliberate structural change: it
-takes the tree to work on as an argument and touches git only in the final step. That is what
-makes `ovweb postprocess --tree <copy> --no-commit` a deterministic unit, and it is how the
-parity gate compares this implementation against the shell one.
+Takes the tree to work on as an argument and touches git only in the final step, which is what
+makes `ovweb postprocess --tree <copy> --no-commit` a deterministic unit — and therefore
+comparable, byte for byte, against a known-good run.
 
-The step order is the shell's, preserved exactly. Where a step's behaviour differs, the
-docstring says so and the parity gate allow-lists it.
+The steps fall into four groups, and the order within them matters:
+
+1. Clean the version folder and rewrite everything that stays inside it.
+2. Either build the site root from this version (when it becomes `latest`), or strip the
+   root-served content out of the version folder (when it does not).
+3. Write the redirects, drop what is not published, and sync the release notes.
+4. Commit.
+
+Group 2 has to precede the redirects, because promoting moves the version's `index.html` out to
+the root and the generated redirect then takes its place.
 """
 
 from __future__ import annotations
@@ -21,6 +28,7 @@ from ..releases import DestinationRegionError, splice_releases
 from ..report import Reporter
 from ..rewrite import (
     promote_root_sitemap,
+    promote_search_index,
     rewrite_404,
     rewrite_feed,
     rewrite_llms_txt,
@@ -103,13 +111,17 @@ def postprocess(
     result.counts["rewrite-search-index"] = changed
     report.result("rewrite-search-index", files_changed=changed)
 
+    # Group 2: build the site root from this version, or strip the root-served content out of it.
     if update_latest:
         _rewrite_promoted_pages(tree, version=version, config=config, report=report, result=result)
         _promote_to_root(tree, version=version, config=config, report=report, result=result)
+        _promote_sitemap(tree, version=version, config=config, report=report, result=result)
+        _promote_search_index(tree, version=version, config=config, report=report, result=result)
     else:
         _strip_promoted_pages(tree, version=version, config=config, report=report, result=result)
 
-    # 7. The generated redirects.
+    # Group 3. The redirects come after promotion, which moves this version's index.html to the
+    # root and leaves the version root free for the generated page.
     report.step("install-redirects", "Write the generated redirect pages")
     for redirect in redirects:
         fsops.write_text(tree / redirect.path, render_redirect(redirect))
@@ -117,12 +129,7 @@ def postprocess(
         report.detail(f"{redirect.path} -> {redirect.to} [{redirect.rule_id}]")
     report.result("install-redirects", written=len(result.redirects_written))
 
-    # 8/9. Sitemaps.
-    if update_latest:
-        _promote_sitemap(tree, version=version, config=config, report=report, result=result)
     _remove_version_sitemap(tree, version=version, report=report, result=result)
-
-    # 10. The releases pages must show the newest notes in every version.
     _sync_releases(tree, version=version, config=config, report=report, result=result)
 
     return result
@@ -291,6 +298,31 @@ def _promote_sitemap(
 
     result.counts["promote-sitemap"] = 1
     report.result("promote-sitemap", written=1)
+
+
+def _promote_search_index(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """Point the root search index's versioned hits at `/latest/`.
+
+    The root index is a copy of this version's, taken by the promotion above, so its versioned
+    locations still name the version they were rewritten for. Every other root-to-versioned
+    reference — page links, the sitemap, llms.txt, the canonicals — uses `/latest/`, and a search
+    result should not be the one exception that hands out a URL which goes stale at the next
+    release. The version's own index keeps its version, so searching inside a version still
+    returns that version's pages.
+    """
+    report.step("promote-search-index", "Point the root search index at /latest/")
+
+    changed = int(
+        fsops.rewrite_single(
+            tree / SEARCH_INDEX,
+            lambda text: promote_search_index(text, version=version, layout=config.layout),
+        )
+    )
+
+    result.counts["promote-search-index"] = changed
+    report.result("promote-search-index", files_changed=changed)
 
 
 def _remove_version_sitemap(

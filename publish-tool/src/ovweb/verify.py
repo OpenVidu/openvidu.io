@@ -42,8 +42,10 @@ def verify(
             continue
         findings += _check_version_root_is_redirect(version_dir, version)
         findings += _check_version_sitemap(tree, version, config)
+        findings += _check_versioned_pages_reach_root_files(tree, version, config)
     findings += _check_root_pages_have_no_version(tree, config, published)
     findings += _check_search_index_absolute(tree, config)
+    findings += _check_root_search_index_uses_latest(tree, config, published)
     return findings
 
 
@@ -85,13 +87,12 @@ def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
 
 
 def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Finding]:
-    """A bare version root must send the visitor into the documentation.
+    """A bare version root must redirect into the documentation.
 
-    Two shapes are accepted, so this check is meaningful both before and after the migration:
-    a page ovweb generated, and the hand-written JavaScript-only stub that predates it. The
-    stricter assertions — a meta refresh for crawlers without JavaScript, and a relative
-    target — apply only to the generated form, which is the only one ovweb is responsible
-    for.
+    The stricter assertions are the interesting ones: a meta refresh, so it works for a client
+    that does not run JavaScript, and a relative target, because `latest` is a symlink to a
+    version folder and the same file answers at both URLs — an absolute target would leak a
+    version number to visitors of the stable one.
     """
     where = f"{version}/index.html"
     index = version_dir / "index.html"
@@ -99,29 +100,20 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
         return [Finding("version-root", where, "missing")]
 
     text = fsops.read_text(index)
-    generated = GENERATED_MARKER in text
-    redirects = (
-        'http-equiv="refresh"' in text or "location.replace" in text or "location.href" in text
-    )
-    if not redirects:
+    if GENERATED_MARKER not in text:
         return [
             Finding(
                 "version-root",
                 where,
-                "does not redirect anywhere — a bare version root must lead into the documentation",
+                "is not a generated redirect; publish this version, or run `ovweb redirects "
+                "apply`, so a bare version root leads into the documentation",
             )
         ]
-    if not generated:
-        return []
 
     findings = []
     if 'http-equiv="refresh"' not in text:
         findings.append(
-            Finding(
-                "version-root",
-                where,
-                "has no meta refresh, so it does not redirect without JavaScript",
-            )
+            Finding("version-root", where, "has no meta refresh, so it needs JavaScript to work")
         )
     absolute = re.search(r'(?:content="0; url=|<a href=")(/[^"\s>]*)', text)
     if absolute:
@@ -129,9 +121,8 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
             Finding(
                 "version-root",
                 where,
-                f"redirect target {absolute.group(1)!r} is site-absolute. `latest` is a symlink "
-                "to this folder, so an absolute target would leak the version number to "
-                "visitors of /latest/",
+                f"redirect target {absolute.group(1)!r} is site-absolute, which would leak the "
+                "version number to visitors of /latest/",
             )
         )
     return findings
@@ -156,6 +147,70 @@ def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list
                     "remove it",
                 )
             )
+    return findings
+
+
+def _check_versioned_pages_reach_root_files(
+    tree: Path, version: str, config: SiteConfig
+) -> list[Finding]:
+    """A versioned page must not link to a root file relative to its own version folder.
+
+    The RSS feeds, `robots.txt` and friends are served from the site root; a version folder does
+    not keep a copy. The theme emits two `<link rel="alternate">` feed references on every page,
+    which resolve inside the version folder unless they are made root-absolute.
+    """
+    names = [name for name in config.layout.root_files if not name.startswith("index.")]
+    if not names:
+        return []
+    pattern = re.compile(r'href="(?:\.\./)*(' + "|".join(re.escape(name) for name in names) + r')"')
+
+    findings = []
+    for page in config.layout.versioned_pages:
+        root = tree / version / page
+        if not root.is_dir():
+            continue
+        for path in root.rglob("*.html"):
+            match = pattern.search(fsops.read_text(path))
+            if match:
+                findings.append(
+                    Finding(
+                        "versioned-root-file-link",
+                        str(path.relative_to(tree)),
+                        f"links to {match.group(1)} relative to the version folder, where it is "
+                        "not published",
+                    )
+                )
+                break  # one report per versioned section is enough to act on
+    return findings
+
+
+def _check_root_search_index_uses_latest(
+    tree: Path, config: SiteConfig, published: list[str]
+) -> list[Finding]:
+    """The root index must not send a searcher to a version-pinned URL.
+
+    It is a copy of the newest version's index, so its versioned hits name that version unless
+    they are repointed. Each version's own index keeps its version on purpose, so that searching
+    inside a version returns that version's pages — only the root copy is checked here.
+    """
+    path = tree / "search" / "search_index.json"
+    if not path.is_file():
+        return []
+    text = fsops.read_text(path)
+    findings = []
+    for page in config.layout.versioned_pages:
+        for version in published:
+            needle = f'"location":"/{version}/{page}/'
+            if needle in text:
+                findings.append(
+                    Finding(
+                        "root-search-index",
+                        "search/search_index.json",
+                        f"holds {needle!r}; a hit on versioned documentation should point at "
+                        "/latest/, which is the canonical URL and does not go stale",
+                    )
+                )
+                break
     return findings
 
 

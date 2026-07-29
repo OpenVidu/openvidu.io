@@ -11,7 +11,7 @@ from .config import SiteConfig
 from .model import PublishPlan, ResolvedRedirect, Step
 from .redirects import resolve_file_redirects
 
-# The post-processing steps, in the order push-new-version.sh applied them. `scope` says
+# The post-processing steps, in execution order. `scope` says
 # whether a step runs always, only when the root pages are refreshed ("latest"), or only when
 # they are left alone ("past").
 POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
@@ -35,6 +35,13 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "Promote assets, root files and non-versioned pages",
         "assets are copied, everything else is moved",
     ),
+    ("promote-sitemap", "latest", "Copy the version sitemap to the root and rewrite it", ""),
+    (
+        "promote-search-index",
+        "latest",
+        "Point the root search index at /latest/",
+        "the version's own index keeps its version, so in-version search stays in the version",
+    ),
     (
         "strip-non-versioned",
         "past",
@@ -42,7 +49,6 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "tolerant: an old version may never have built some of them",
     ),
     ("install-redirects", "always", "Write the generated redirect pages", ""),
-    ("promote-sitemap", "latest", "Copy the version sitemap to the root and rewrite it", ""),
     (
         "remove-version-sitemap",
         "always",

@@ -322,9 +322,10 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
 | `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, `llms.txt`, the feeds. |
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
+| `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
+| `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see below.            |
 | `strip-non-versioned`  | past   | Delete the root-served pages from the version folder instead. Tolerant: an old version may never have built some.     |
 | `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
-| `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
 | `remove-version-sitemap`| always | Delete this version's sitemap. Nothing referenced it: only the root sitemap is published. |
 | `sync-releases`        | always | Splice the newest release notes across versions.                                                                      |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
@@ -415,13 +416,30 @@ The final link conventions, for version `3.9`:
 | Non-versioned page → versioned page  | `../docs/`         | `/latest/docs/`                                |
 | Canonical / `og:url` / JSON-LD on non-versioned page | `…/3.9/…` | `…/…` (version removed)                 |
 | `404.html` → versioned page          | `/docs/`           | `/latest/docs/`                                |
-| Search index → versioned page        | `docs/`            | `/3.9/docs/` (explicit version)                |
+| Versioned page → root file (RSS feed) | `../../feed_rss_created.xml` | `/feed_rss_created.xml`               |
+| Version search index → versioned page | `docs/`           | `/3.9/docs/` (explicit version)                |
+| Root search index → versioned page    | `docs/`           | `/latest/docs/`                                |
 | Search index → non-versioned page    | `pricing/`         | `/pricing/`                                    |
 | Root sitemap → versioned page        | `/3.9/docs/`       | `/latest/docs/`                                |
 | Root sitemap → non-versioned page    | `/3.9/pricing/`    | `/pricing/`                                    |
 
-Note the asymmetry: the **search index keeps the explicit version** for versioned pages, so a
-search inside `3.4` links to `3.4` docs, while page links use the `latest` alias.
+### The two search indexes
+
+There are two, and they say different things, because **a page loads the index that sits beside
+it**: Material records the folder to resolve against in its runtime config (`"base": "../.."`),
+which the publish deliberately leaves relative.
+
+| Index | Loaded by | A hit on versioned docs points at |
+| --- | --- | --- |
+| `<X.Y>/search/search_index.json` | pages under `/X.Y/docs/`, `/X.Y/meet/` | `/X.Y/docs/…` — the same version |
+| `search/search_index.json` | the pages served from the site root | `/latest/docs/…` |
+
+The version's own index has to keep its version, or searching inside the 3.4 documentation would
+return 3.8 pages. The root index is a *copy* of the newest version's, so it inherits that
+version — and it must not keep it: it is served on the evergreen root pages, `/latest/…` is the
+canonical URL of the page being linked, and a pinned URL goes stale at the next release. Every
+other root-to-versioned reference (page links, the sitemap, `llms.txt`, the canonicals) already
+uses `/latest/`; the search index used to be the one exception.
 
 Author-written, version-pinned links to versioned pages (`/3.4/docs/…`, used by the
 release-notes links in blog posts) are **shielded** while the version is stripped from a promoted
@@ -465,7 +483,10 @@ publish-tool/tests/parity/run_parity.sh 3.2  past     # an old minor, older conf
 ```
 
 [`compare.py`](tests/parity/compare.py) compares the two trees and asserts each intentional
-difference individually rather than filtering a text diff by eye. Gzip members are compared
+difference individually rather than filtering a text diff by eye. An expectation that covers more
+than a handful of paths also carries a **reconciler**: a function that transforms the old bytes the
+way the new implementation would and requires the result to be identical, so "223 versioned pages
+differ" is only accepted once each one is shown to differ *solely* by the intended rewrite. Gzip members are compared
 decompressed — the shell's `gzip -k -f` wrote the source mtime into the header, so an unchanged
 sitemap produced a new blob on every publish, and decompressing makes that churn invisible here
 by construction. The expected differences are:
@@ -474,6 +495,8 @@ by construction. The expected differences are:
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `<X.Y>/index.html`, `<X.Y>/docs/index.html`, `<X.Y>/docs/getting-started/index.html` | The generated redirects replace the hand-written stub and add two the shell could not express. |
 | `<X.Y>/sitemap.xml`, `<X.Y>/sitemap.xml.gz`                   | The published version's sitemap is removed rather than pruned.                           |
+| `search/search_index.json`                                    | The root index points versioned hits at `/latest/`.                                      |
+| `<X.Y>/{docs,meet}/**/*.html`                                 | The RSS `rel=alternate` links are made root-absolute, where the feeds are actually published. |
 | `.cache/**`, `site/**`                                        | Not in a fresh worktree, so they can no longer be committed by accident.                |
 
 Anything else is a bug. Run the gate before merging a change to the rewriting logic; it is not

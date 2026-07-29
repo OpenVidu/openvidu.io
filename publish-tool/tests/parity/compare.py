@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """Compare two post-processed trees and report every difference that is not expected.
 
-Used instead of `diff -r` for three reasons: gzip members have to be compared decompressed —
-the shell's `gzip -k -f` wrote the source mtime into the header, so every publish produced a
-new blob even for an unchanged sitemap, and decompressing is what makes that churn invisible
-here by construction — time-dependent fields have to be blanked when the two trees came from
-separate builds, and the handful of intentional differences must be asserted individually
-rather than filtered out of a text diff by eye.
+Used instead of `diff -r` for three reasons: gzip members have to be compared decompressed, since
+gzip writes the source mtime into its header and an unchanged sitemap would otherwise look
+changed; time-dependent fields have to be blanked when the two trees came from separate builds;
+and each intentional difference must be asserted on its own rather than filtered out of a text
+diff by eye.
 
 Exit code 0 means the two trees agree everywhere except in the ways listed below.
 
 Usage:
-    compare.py OLD NEW VERSION
+    compare.py OLD NEW VERSION [--blank-volatile]
 """
 
 from __future__ import annotations
@@ -19,12 +18,13 @@ from __future__ import annotations
 import gzip
 import re
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# Fields whose value is the time of the build. Only relevant to the end-to-end comparison,
-# where the two trees are built separately; the stage-isolated run shares one build and these
-# are already identical.
+# Fields whose value is the time of the build. Only relevant to the end-to-end comparison, where
+# the two trees are built separately; a stage-isolated run shares one build and these already
+# match.
 VOLATILE = (
     re.compile(rb"<lastmod>[^<]*</lastmod>"),
     re.compile(rb"<pubDate>[^<]*</pubDate>"),
@@ -34,25 +34,86 @@ VOLATILE = (
     re.compile(rb'"date_modified":"[^"]*"'),
 )
 
+#: Mirrors `layout.root_files` minus the `index.*` entries: the files a versioned page may link
+#: relatively and that the publish makes root-absolute. If this drifts from ovweb.yaml the gate
+#: reports the difference as unexpected rather than hiding it, which is the safe direction.
+ROOT_FILES = (
+    "404.html",
+    "robots.txt",
+    "llms.txt",
+    "llms-full.txt",
+    "feed_rss_created.xml",
+    "feed_rss_updated.xml",
+    "feed_json_created.json",
+    "feed_json_updated.json",
+    "rss.xsl",
+)
+RELATIVE_ROOT_FILE = re.compile(
+    rb'href="(?:\.\./)*(' + b"|".join(re.escape(name.encode()) for name in ROOT_FILES) + rb')"'
+)
+
 
 @dataclass
 class Expected:
-    """One intentional difference between the two implementations."""
+    """One intentional difference between the two implementations.
+
+    `matches` selects by path. `reconciles`, when given, must additionally show that the *only*
+    difference is the intended one: it transforms the old bytes the way the new implementation
+    would and requires the result to be identical. An expectation selected by path alone waves
+    through any other change to those files, so anything covering more than a handful of paths
+    needs one.
+    """
 
     reason: str
-    matches: object
+    matches: Callable[[str], bool]
+    reconciles: Callable[[bytes, bytes], bool] | None = None
     seen: list[str] = field(default_factory=list)
 
 
+def _root_file_links_reconcile(old: bytes, new: bytes) -> bool:
+    """The difference is exactly `href="../../<root file>"` becoming `href="/<root file>"`."""
+    return RELATIVE_ROOT_FILE.sub(rb'href="/\1"', old) == new
+
+
+def _search_index_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
+    """The difference is exactly the versioned `"location"` values moving to `/latest/`."""
+
+    def reconcile(old: bytes, new: bytes) -> bool:
+        rewritten = old
+        for page in (b"docs", b"meet"):
+            rewritten = rewritten.replace(
+                b'"location":"/' + version.encode() + b"/" + page + b"/",
+                b'"location":"/latest/' + page + b"/",
+            )
+        return rewritten == new
+
+    return reconcile
+
+
+def _redirect_paths(version: str) -> frozenset[str]:
+    """Exactly the paths a redirect is installed at for this version.
+
+    Which ones depends on the version band, so this cannot be a loose pattern: from 3.4 onwards
+    `<version>/docs/index.html` is a real page, and treating it as a redirect would wave through
+    any change to the Platform documentation landing page.
+    """
+    paths = {f"{version}/index.html"}
+    major, _, minor = version.partition(".")
+    if (int(major), int(minor)) >= (3, 4):
+        paths.add(f"{version}/docs/getting-started/index.html")
+    else:
+        paths.add(f"{version}/docs/index.html")
+    return frozenset(paths)
+
+
 def expectations(version: str) -> list[Expected]:
+    redirects = _redirect_paths(version)
+    versioned_prefixes = tuple(f"{version}/{page}/" for page in ("docs", "meet"))
     return [
         Expected(
-            "the generated redirect pages replace the hand-written stub, and add two more "
-            "redirects the shell had no way to express",
-            lambda path: (
-                path == f"{version}/index.html"
-                or re.fullmatch(rf"{re.escape(version)}/docs(/getting-started)?/index\.html", path)
-            ),
+            "the generated redirect pages replace the hand-written stub, and add one the shell "
+            "had no way to express",
+            lambda path: path in redirects,
         ),
         Expected(
             "the build cache is not in a fresh worktree, so it can no longer be committed by "
@@ -62,6 +123,18 @@ def expectations(version: str) -> list[Expected]:
         Expected(
             "the published version's sitemap is removed rather than pruned: nothing referenced it",
             lambda path: path in (f"{version}/sitemap.xml", f"{version}/sitemap.xml.gz"),
+        ),
+        Expected(
+            "the root search index sends a hit on versioned documentation to /latest/ instead of "
+            "pinning the version it was copied from",
+            lambda path: path == "search/search_index.json",
+            _search_index_reconciles(version),
+        ),
+        Expected(
+            "versioned pages link to the root files — the RSS feeds above all — at the site root, "
+            "where they are published, instead of relative to a version folder that keeps no copy",
+            lambda path: path.startswith(versioned_prefixes) and path.endswith(".html"),
+            _root_file_links_reconcile,
         ),
     ]
 
@@ -105,11 +178,19 @@ def main(argv: list[str]) -> int:
     expected = expectations(version)
     unexpected: list[str] = []
 
-    def classify(path: str, problem: str) -> None:
+    def classify(
+        path: str, problem: str, old_bytes: bytes | None = None, new_bytes: bytes | None = None
+    ) -> None:
         for rule in expected:
-            if rule.matches(path):
-                rule.seen.append(f"{path}: {problem}")
-                return
+            if not rule.matches(path):
+                continue
+            if rule.reconciles is not None:
+                if old_bytes is None or new_bytes is None:
+                    continue
+                if not rule.reconciles(old_bytes, new_bytes):
+                    continue
+            rule.seen.append(f"{path}: {problem}")
+            return
         unexpected.append(f"{path}: {problem}")
 
     for path in sorted(set(old) | set(new)):
@@ -131,7 +212,12 @@ def main(argv: list[str]) -> int:
         old_bytes = normalise(read(old_path), blank_volatile=blank_volatile)
         new_bytes = normalise(read(new_path), blank_volatile=blank_volatile)
         if old_bytes != new_bytes:
-            classify(path, f"content differs ({len(old_bytes)} vs {len(new_bytes)} bytes)")
+            classify(
+                path,
+                f"content differs ({len(old_bytes)} vs {len(new_bytes)} bytes)",
+                old_bytes,
+                new_bytes,
+            )
 
     print(f"Compared {len(set(old) | set(new))} paths for version {version}.\n")
 

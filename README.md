@@ -360,6 +360,8 @@ folder, with relative links. `ovweb` then post-processes that output on `gh-page
 3. In the pages that will be served from the root, rewrite links to versioned pages into
    `/latest/docs/…`, and strip the version from each page's own URL — while shielding
    author-pinned `/X.Y/docs/…` links, which must survive.
+   In the versioned pages, point relative links to the promoted root files — the RSS feeds above
+   all — at the root, since a version folder keeps no copy of them.
 4. Make every location in the search index absolute.
 5. Update `llms.txt` and the RSS feeds.
 6. Move the non-versioned pages and root files out to the site root, so the global pages served

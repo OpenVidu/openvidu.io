@@ -21,14 +21,9 @@ MAX_REWRITE_BYTES = 64 * 1024 * 1024
 def iter_rewritable_files(root: Path) -> Iterator[Path]:
     """Yield every file under `root` that link rewriting may touch.
 
-    The shell implementation reached these files through `grep -Erl`, which walks
-    everything and skips whatever it considers binary. This reproduces that: no extension
-    allow-list (the built tree mixes .html, .js, .json, .xml, .txt, .md and .css, and an
-    allow-list would silently stop rewriting a new kind of file), but a file holding a NUL
-    byte is skipped, which is the same test `grep` applies.
-
-    Skipping rather than failing on undecodable input is a strict improvement: a `sed`
-    pattern that happened to match inside a font or an image would have corrupted it.
+    Deliberately no extension allow-list: the built tree mixes .html, .js, .json, .xml, .txt,
+    .md and .css, and an allow-list would silently stop rewriting a new kind of file. Instead a
+    file holding a NUL byte is skipped, so a substitution can never corrupt a font or an image.
     """
     for path in sorted(root.rglob("*")):
         if not path.is_file() or path.is_symlink():
@@ -42,8 +37,7 @@ def rewrite_file(path: Path, transform: Callable[[str], str]) -> bool:
     """Apply `transform` to one file's text. Returns whether anything changed.
 
     Reads and writes bytes around a UTF-8 decode so a file that needs no change is not
-    rewritten at all — which also means a file with no trailing newline keeps not having
-    one, matching `sed -i` and keeping the parity diff clean.
+    rewritten at all, which also means a file with no trailing newline keeps not having one.
 
     Returns `False` for a file that is not UTF-8 text, or that holds a NUL byte.
     """
@@ -92,10 +86,9 @@ def write_text(path: Path, text: str) -> None:
 def write_gzip(path: Path) -> Path:
     """Write `path.gz` beside `path`, deterministically.
 
-    `gzip -k -f` stores the source filename and its modification time in the header, so the
-    shell implementation produced a different `sitemap.xml.gz` blob on every publish even
-    when the sitemap itself had not changed. Zeroing the mtime makes the output a pure
-    function of the input, so an unchanged sitemap stops churning the gh-pages history.
+    gzip stores the source filename and modification time in its header, which would make the
+    output differ on every publish even when the sitemap had not changed. Zeroing the mtime
+    makes it a pure function of the input, so an unchanged sitemap stops churning the history.
     """
     target = path.with_suffix(path.suffix + ".gz")
     data = path.read_bytes()

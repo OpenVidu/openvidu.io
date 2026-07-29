@@ -16,9 +16,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Everything needed for a real publish build. These mirror exactly what
-# .github/workflows/publish-web.yaml installed before this package existed:
-# mkdocs-material and pygments are pinned, the plugins are not.
+# Everything needed for a real publish build. mkdocs-material and pygments are pinned; the
+# plugins are not.
 #
 # TODO: pin the plugins too. Doing it right needs a `pip freeze` of a known-good CI
 # run — inventing version numbers here would risk breaking the build for no gain.

@@ -351,8 +351,8 @@ def postprocess_command(
 ) -> None:
     """Run only the gh-pages post-processing, on a tree, touching no git and no remote.
 
-    This is the debugging entry point and the unit the parity gate compares against the shell
-    implementation: given the same input tree, this must produce the same output tree.
+    This is the debugging entry point, and the unit the parity gate compares: given the same
+    input tree, it must produce the same output tree.
     """
     ctx: Context = context.obj
     validate_minor(version)

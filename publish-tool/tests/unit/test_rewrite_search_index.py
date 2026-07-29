@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from ovweb.rewrite.search_index import rewrite_search_index
+from ovweb.rewrite.search_index import promote_search_index, rewrite_search_index
 
 VERSION = "3.8"
 
@@ -14,12 +14,11 @@ def rewrite(text, layout):
 
 
 def test_versioned_hits_keep_the_explicit_version(layout):
-    """Deliberate asymmetry with the page links, which use `/latest/`.
+    """A versioned page loads the index beside it, so a hit must stay inside that version.
 
-    A search hit describes the page that was indexed. `latest` moves at the next release, so
-    pinning the version is what keeps an indexed hit pointing at what was indexed. Do not
-    "fix" this to `/latest/` without also deciding what happens to the root index, which is
-    a copy of the newest version's.
+    Material's runtime `base` is left relative by the publish, so a page under /3.4/docs/ fetches
+    /3.4/search/search_index.json. Repointing these at /latest/ would make searching inside 3.4
+    return 3.8 pages. The *root* copy is repointed instead — see promote_search_index.
     """
     assert rewrite('{"location":"docs/self-hosting/"}', layout) == (
         '{"location":"/3.8/docs/self-hosting/"}'
@@ -66,3 +65,34 @@ def test_rewrites_a_realistic_index_and_keeps_it_valid_json(layout):
         "/pricing/",
         "/blog/a-post/",
     ]
+
+
+# -- promotion to the root index ---------------------------------------------------------
+
+
+def test_promotion_points_versioned_hits_at_latest(layout):
+    """The root index is served on the evergreen root pages, so a hit should not name a version
+    that goes stale at the next release."""
+    text = '{"location":"/3.8/docs/self-hosting/"},{"location":"/3.8/meet/"}'
+    assert promote_search_index(text, version=VERSION, layout=layout) == (
+        '{"location":"/latest/docs/self-hosting/"},{"location":"/latest/meet/"}'
+    )
+
+
+def test_promotion_leaves_root_page_hits_alone(layout):
+    text = '{"location":"/pricing/"},{"location":"/"}'
+    assert promote_search_index(text, version=VERSION, layout=layout) == text
+
+
+def test_promotion_does_not_touch_indexed_page_text(layout):
+    """A version number in a command sample or a release note is content, not a location."""
+    text = '{"location":"/3.8/docs/","text":"run openvidu 3.8 and see /3.8/docs/ for more"}'
+    assert promote_search_index(text, version=VERSION, layout=layout) == (
+        '{"location":"/latest/docs/","text":"run openvidu 3.8 and see /3.8/docs/ for more"}'
+    )
+
+
+def test_promotion_leaves_another_version_alone(layout):
+    """Only the version being published is repointed."""
+    text = '{"location":"/3.4/docs/"}'
+    assert promote_search_index(text, version=VERSION, layout=layout) == text

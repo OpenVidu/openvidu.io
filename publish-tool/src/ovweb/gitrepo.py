@@ -175,20 +175,17 @@ class Git:
     def worktree(self, branch: str, *, keep: bool = False):
         """Check `branch` out into a throwaway worktree outside the repository.
 
-        This is how the publish reaches gh-pages. Checking it out in the main working tree
-        instead — what the shell did — has three problems this avoids:
+        This is how the publish reaches gh-pages, rather than checking it out in the main
+        working tree, for three reasons:
 
-        * The tool's own files vanish. `.py` sources, the config and the templates are not on
-          gh-pages, so a multi-file tool cannot survive there. (The shell smuggled its Python
-          helper across the switch through a `mktemp` copy; the whole package would need the
-          same trick.)
-        * `.gitignore` is a main-only file, so `site/` and `.cache/` become untracked *and*
-          unignored the moment gh-pages is checked out, and `git add .` publishes them. That
-          is how 729 files of build cache ended up committed on gh-pages.
-        * A failure half-way leaves the user stranded on gh-pages mid-`mv`. Here the main
-          tree never moves.
+        * The tool's own files would vanish. Its sources, config and templates are not on
+          gh-pages, and for a past version they are not on that version's branch either.
+        * `.gitignore` is a main-only file, so `site/` and `.cache/` would become untracked
+          *and* unignored, and `git add --all` would publish them.
+        * A failure half-way would strand the caller on gh-pages mid-move. Here the main tree
+          never leaves the branch it started on.
 
-        The worktree is created after mike has finished, so it sees the commit mike pushed.
+        Created after mike has finished, so it sees mike's commit.
         """
         path = Path(mkdtemp(prefix=f"ovweb-{branch.replace('/', '-')}-"))
         # mkdtemp already created the directory and `git worktree add` wants to create it.

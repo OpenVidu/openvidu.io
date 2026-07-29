@@ -1,14 +1,11 @@
 """Splice the *content* of one built releases page into another version's releases page.
 
-Port of the standalone copy-releases-content.py helper, unchanged in behaviour but exposed
-as a pure function so it can be unit-tested and called in-process.
-
 The releases pages (OpenVidu Meet and OpenVidu Platform) list the notes of every release, so
 every documentation version must serve the same, most-recent list. What must NOT travel
 across versions is the rest of the page: header, tabs, navigation, footer, canonical URL,
 asset URLs and Material's runtime config all belong to the version folder they live in.
-Copying the whole built HTML (what this repository used to do) made an old version's
-releases page navigate the visitor straight out of that version.
+Copying the whole built HTML would make an old version's releases page navigate the visitor
+straight out of that version.
 
 So only two regions are spliced:
 
@@ -107,7 +104,7 @@ def find_region(html: str, marker: str, start: int = 0) -> tuple[int, int]:
 
     The end tag is found by counting nested tags of the same name: the table of contents
     nests a ``<nav>`` per heading level, so a plain search for the first ``</nav>`` would cut
-    it short. This is the reason the splice cannot be done with `sed`.
+    it short.
     """
     open_at = html.find(marker, start)
     if open_at == -1:
