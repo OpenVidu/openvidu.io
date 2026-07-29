@@ -261,8 +261,6 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
         </figure>
     5. Restart the Master Node by shutting it down and then starting it again.
 
-    Restarting the Master Node re-applies the configuration on the Master Node. Media Nodes only read the shared configuration when they start, so to propagate changes that affect Media Nodes you need to remove them: the DigitalOcean Function will automatically create new Media Nodes with the updated configuration.
-
 ## Backup and Restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
