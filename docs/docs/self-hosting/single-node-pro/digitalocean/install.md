@@ -55,6 +55,9 @@ OpenVidu and WebRTC require specific inbound rules on the Firewall network secur
 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the Firewall rules.
 
+!!! info
+    Port `9000` is MinIO's port. This installation runs MinIO as the S3 storage service for recordings, so make sure to open it: you will need it to access the MinIO console (for example, to browse your recordings).
+
 1. Click the droplet, then go to _"Networking"_, scroll down and click on _"Edit"_ in **Firewall** section.
     <figure markdown>
     ![Edit Firewall Rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .svg-img .dark-img }
@@ -94,6 +97,9 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 ## **Terraform**
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on DigitalOcean. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
+
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in DigitalOcean Spaces instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
 
 ### Prerequisites
 * You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
