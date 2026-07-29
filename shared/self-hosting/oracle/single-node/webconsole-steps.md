@@ -77,7 +77,7 @@ OpenVidu and WebRTC require specific inbound rules on both the instance network 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the security list rules.
 
 !!! info
-    Port `9000` is MinIO's port and it is optional in that table: it is only needed if you want to expose MinIO publicly. OpenVidu does not require it, so you can leave it out of the security list rules.
+    Port `9000` is MinIO's port. This installation runs MinIO as the S3 storage service for recordings, so make sure to open it: you will need it to access the MinIO console (for example, to browse your recordings).
 
 1. From the instance _"Details"_ page, click the _"Virtual cloud network"_ resource.
 
@@ -169,6 +169,9 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
     firewall-cmd --add-port=7885/udp
     firewall-cmd --permanent --add-port=7885/udp
+
+    firewall-cmd --add-port=9000/tcp
+    firewall-cmd --permanent --add-port=9000/tcp
 
     firewall-cmd --add-port=50000-60000/udp
     firewall-cmd --permanent --add-port=50000-60000/udp

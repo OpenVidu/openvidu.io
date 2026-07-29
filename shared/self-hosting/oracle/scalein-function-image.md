@@ -20,29 +20,29 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
     2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
 
         ```bash
-        docker login <region-key>.ocir.io -u '<your-tenancy-namespace>/<username>' -p '<auth-token>'
+        docker login <region-key>.ocir.io -u '<tenancy-namespace>/<username>' -p '<auth-token>'
         ```
 
         Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
 
         Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target=_blank} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
 
-    3. Tag the pulled image for your OCIR. The tag must follow the format `<region-key>.ocir.io/<your-tenancy-namespace>/<repo>:<tag>`:
+    3. Tag the pulled image for your OCIR. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
 
         ```bash
-        docker tag docker.io/openvidu/openvidu-oci-scalein:3.8.0 <region-key>.ocir.io/<your-tenancy-namespace>/openvidu-oci-scalein:3.8.0
+        docker tag docker.io/openvidu/openvidu-oci-scalein:3.8.0 <region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.8.0
         ```
 
     4. Push the image to your OCIR:
 
         ```bash
-        docker push <region-key>.ocir.io/<your-tenancy-namespace>/openvidu-oci-scalein:3.8.0
+        docker push <region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.8.0
         ```
 
     5. Set `scale_in_function_image` in `terraform.tfvars` to the image reference you just pushed:
 
         ```hcl
-        scale_in_function_image = "<region-key>.ocir.io/<your-tenancy-namespace>/openvidu-oci-scalein:3.8.0"
+        scale_in_function_image = "<region-key>.ocir.io/<tenancy-namespace>/openvidu-oci-scalein:3.8.0"
         ```
 
 === "Option 2: Build the image from source"
@@ -58,29 +58,29 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
     2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
 
         ```bash
-        docker login <region-key>.ocir.io -u '<your-tenancy-namespace>/<username>' -p '<auth-token>'
+        docker login <region-key>.ocir.io -u '<tenancy-namespace>/<username>' -p '<auth-token>'
         ```
 
         Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
 
         Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target=_blank} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
 
-    3. Build, security-check and push the image with the helper script. Pass the
-       full image reference as its argument; it must follow the format
-       `<region-key>.ocir.io/<your-tenancy-namespace>/openvidu-oci-scalein:<tag>`:
+    3. Build and tag the image. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
 
         ```bash
-        ./build-and-push.sh <region-key>.ocir.io/<your-tenancy-namespace>/openvidu-oci-scalein:main
+        docker build -t <region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag> .
         ```
 
-    4. `build-and-push.sh` builds, scans and pushes in one step, so there is no
-       separate push command. If the security scan fails, the image is **not**
-       pushed — fix the reported issue and re-run.
+    4. Push the image to OCIR:
+
+        ```bash
+        docker push <region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag>
+        ```
 
     5. Set `scale_in_function_image` in `terraform.tfvars` to the image reference you just pushed:
 
         ```hcl
-        scale_in_function_image = "<region-key>.ocir.io/<your-tenancy-namespace>/openvidu-oci-scalein:main"
+        scale_in_function_image = "<region-key>.ocir.io/<tenancy-namespace>/scale-in-function:<tag>"
         ```
 
 !!! info

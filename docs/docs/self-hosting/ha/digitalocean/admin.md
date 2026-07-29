@@ -86,22 +86,11 @@ Media Nodes are removed through the `<STACK_NAME>-draining` tag. Every Media Nod
     3. In the same section, remove the tag `<STACK_NAME>-media-node-tag` so the autoscaler stops counting this droplet as an active Media Node.
     4. Within two minutes the Media Node starts its graceful shutdown. The droplet disappears once its active Rooms have finished.
 
-=== "doctl"
-
-    ```bash
-    # List the Media Nodes of your deployment
-    doctl compute droplet list --tag-name <STACK_NAME>-media-node-tag
-
-    # Drain one of them
-    doctl compute droplet tag <DROPLET_ID> --tag-name <STACK_NAME>-draining
-    doctl compute droplet untag <DROPLET_ID> --tag-name <STACK_NAME>-media-node-tag
-    ```
-
 !!! warning
 
     Do not power off a Media Node to remove it. The autoscaler counts Droplets by tag, so a powered-off Media Node still counts towards `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` while reporting no CPU metrics, and it never runs its graceful shutdown script.
 
-    If you do not need the graceful behavior, destroy the droplet directly (_"Destroy"_ in the console or `doctl compute droplet delete <DROPLET_ID>`). Active Rooms on it are interrupted, and the autoscaler brings the number of Media Nodes back to `minNumberOfMediaNodes` on its next run.
+    If you do not need the graceful behavior, destroy the droplet directly (_"Destroy"_ in the console). Active Rooms on it are interrupted, and the autoscaler brings the number of Media Nodes back to `minNumberOfMediaNodes` on its next run.
 
 !!! info
 

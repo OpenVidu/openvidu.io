@@ -56,7 +56,7 @@ OpenVidu and WebRTC require specific inbound rules on the Firewall network secur
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the Firewall rules.
 
 !!! info
-    Port `9000` is MinIO's port and it is optional in that table: it is only needed if you want to expose MinIO publicly. OpenVidu does not require it, so you can leave it out of the Firewall rules.
+    Port `9000` is MinIO's port. This installation runs MinIO as the S3 storage service for recordings, so make sure to open it: you will need it to access the MinIO console (for example, to browse your recordings).
 
 1. Click the droplet, then go to _"Networking"_, scroll down and click on _"Edit"_ in **Firewall** section.
     <figure markdown>
