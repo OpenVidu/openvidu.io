@@ -199,6 +199,8 @@ In addition to these, an Azure deployment provides the capability to manage glob
         ![Reboot Instance](../../../../assets/images/platform/self-hosting/elastic/azure/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
+    Changes will be applied automatically.
+
 ## Backup and Restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

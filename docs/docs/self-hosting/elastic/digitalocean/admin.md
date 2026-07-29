@@ -259,7 +259,7 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
         <figure markdown>
         ![Secrets.env replace](../../../../assets/images/platform/self-hosting/elastic/digitalocean/replace-secrets-env.png){ .svg-img .dark-img }
         </figure>
-    5. Restart the Master Node by shutting it down and then starting it again.
+    5. Restart the Master Node by shutting it down and then starting it again. Changes will be applied automatically in all the nodes of your OpenVidu Elastic deployment.
 
 ## Backup and Restore
 

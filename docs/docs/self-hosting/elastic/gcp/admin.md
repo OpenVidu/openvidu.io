@@ -188,7 +188,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         </figure>
     4. Go to the Master Node resource and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu Elastic deployment.
 
-    Stopping and starting the Master Node re-applies the configuration on the Master Node. Media Nodes only read the shared configuration when they start, so to propagate changes that affect Media Nodes you need to delete them: the Managed Instance Group will automatically launch new Media Nodes with the updated configuration.
+    Changes will be applied automatically.
 
 ## Backup and Restore
 
