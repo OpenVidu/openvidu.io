@@ -15,3 +15,59 @@
 amplify-auth-sign-up-core .amplify-container .amplify-form-row {
     margin-top: 0.5em;
 }
+
+/*
+ * Error alerts. Amplify appends them as the last child of the auth component
+ * and its own stylesheet places them in absolute position below the form
+ * (position: absolute + margin-top). On the sign up form, which is tall, the
+ * message ends up off screen and the user never learns why the submission
+ * failed. Pin it to the viewport as a toast instead, so it is always visible
+ * regardless of the form height or the current scroll position.
+ */
+.amplify-alert {
+    position: fixed !important;
+    top: 4rem;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, 0);
+    box-sizing: border-box;
+    width: min(460px, calc(100vw - 2rem)) !important;
+    margin: 0 !important;
+    z-index: 1000 !important;
+    /* It now floats over the form, so it needs to read as its own surface */
+    border-left: 4px solid var(--color-danger);
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.35) !important;
+    animation: amplify-alert-in 0.2s ease-out;
+}
+
+.amplify-alert .amplify-alert-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+
+.amplify-alert .amplify-alert-icon,
+.amplify-alert .amplify-alert-close {
+    float: none !important;
+    flex: 0 0 auto;
+}
+
+.amplify-alert .amplify-alert-message {
+    display: block !important;
+    flex: 1 1 auto;
+    max-width: none !important;
+    margin-left: 0 !important;
+}
+
+@keyframes amplify-alert-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
