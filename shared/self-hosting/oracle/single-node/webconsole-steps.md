@@ -76,6 +76,9 @@ OpenVidu and WebRTC require specific inbound rules on both the instance network 
 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the security list rules.
 
+!!! info
+    Port `9000` is MinIO's port and it is optional in that table: it is only needed if you want to expose MinIO publicly. OpenVidu does not require it, so you can leave it out of the security list rules.
+
 1. From the instance _"Details"_ page, click the _"Virtual cloud network"_ resource.
 
     <figure markdown>

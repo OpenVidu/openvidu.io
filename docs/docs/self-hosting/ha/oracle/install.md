@@ -19,6 +19,9 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 - **OCI Vault** is used to securely store deployment secrets shared across the cluster.
 - Media Node scalability is managed through an **OCI Function** that handles scale-in actions, while the OCI Instance Pool itself takes care of scale-out based on system load.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 ## Prerequisites
 
 * An Oracle Cloud Infrastructure account with permissions to create Compute instances, VCNs, Network Load Balancers, Object Storage buckets, Vaults, Functions and IAM resources.

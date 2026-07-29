@@ -34,6 +34,9 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on Oracle Cloud Infrastructure. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 --8<-- "shared/self-hosting/oracle/single-node/terraform-architecture.md"
 
 ### Deployment details

@@ -6,6 +6,9 @@ You need to fill some parameters about the storage account that the deployment w
 
     Recordings are not available in OpenVidu v2 Compatibility mode (v2compat) for OpenVidu Azure deployments.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 === "Azure Storage Account configuration"
     
     Parameters in this section look like this:

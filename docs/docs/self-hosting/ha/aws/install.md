@@ -107,6 +107,9 @@ The number of Media Nodes can scale up or down based on the system load. You can
 
 You can specify two S3 buckets to store the application data, cluster data, and recordings.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Amazon S3 instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 === "S3 bucket for application data and recordings"
 
     Parameters in this section look like this:
