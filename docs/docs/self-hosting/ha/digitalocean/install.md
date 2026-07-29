@@ -40,7 +40,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Droplets are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
-    - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load.
+    - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load. The initial Media Node(s) are provisioned right after the Master Nodes are ready (a bootstrap invocation avoids waiting for the first scheduled tick). A full deployment is typically ready in **5 to 7 minutes**.
 
 
 
@@ -114,17 +114,17 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     <tr>
     <td style="white-space: nowrap;"><code>initialNumberOfMediaNodes</code></td>
     <td style="white-space: nowrap;"><code>1</code></td>
-    <td>Number of initial media nodes to deploy.</td>
+    <td>Number of Media Nodes to create at initial deployment. On its first run the autoscaler brings the cluster straight to <code>max(minNumberOfMediaNodes, initialNumberOfMediaNodes)</code> Media Nodes; afterwards the number stays between <code>minNumberOfMediaNodes</code> and <code>maxNumberOfMediaNodes</code> based on CPU load. Ignored when <code>fixedNumberOfMediaNodes</code> &gt; 0.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>minNumberOfMediaNodes</code></td>
     <td style="white-space: nowrap;"><code>1</code></td>
-    <td>Minimum number of media nodes to deploy (for reference, manual scaling required).</td>
+    <td>Minimum number of media nodes. The autoscaler never scales below this value.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>maxNumberOfMediaNodes</code></td>
     <td style="white-space: nowrap;"><code>5</code></td>
-    <td>Maximum number of media nodes to deploy (for reference, manual scaling required).</td>
+    <td>Maximum number of media nodes. The autoscaler never scales above this value.</td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>scaleTargetCPU</code></td>
@@ -246,7 +246,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
 ### Access OpenVidu
 
-To verify that your OpenVidu deployment works correctly wait for the `secrets.env` to appear in the bucket that you've configured and open it to view the credentials of OpenVidu.
+Wait for the `secrets.env` file to appear in the bucket that you've configured and open it to view the credentials of OpenVidu. This file is uploaded as soon as the first Master Node has generated the secrets, before the installation finishes, so the credentials become available a while before the deployment is actually reachable: **OPENVIDU_URL** responding is the signal that everything is up and running.
 
 === "View OpenVidu credentials in the Web"
     - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.

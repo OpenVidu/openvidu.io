@@ -299,7 +299,7 @@ When deploying in a supported **cloud provider** using our official templates, O
             <tr>
                 <td>initialNumberOfMediaNodes</td>
                 <td>1</td>
-                <td>Number of initial media nodes to deploy.</td>
+                <td>Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes &gt; 0.</td>
             </tr>
             <tr>
                 <td>minNumberOfMediaNodes</td>

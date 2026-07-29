@@ -241,6 +241,9 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
 4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target=_blank} and wait for the SSH key to appear in your configured cluster-data bucket.
 
+    !!! note
+        A full HA deployment (4 Master Nodes + the Media Node pool forming the cluster) typically completes in about **8 to 10 minutes**.
+
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access all 4 Master Nodes — if exposed, unauthorized users could gain access.
 

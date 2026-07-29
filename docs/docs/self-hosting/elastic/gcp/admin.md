@@ -137,6 +137,14 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
         OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU usage. However, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [Google Cloud Platform
         MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target=_blank}.
 
+### Media Node auto-healing
+
+Besides autoscaling, the Managed Instance Group applies an auto-healing policy to the Media Nodes. A TCP health check probes port `7880` on every Media Node, and a node that stops accepting connections is detected as unhealthy after about 2.5 minutes and recreated automatically. Newly created Media Nodes are given a 10-minute initial grace period, so they can finish installing OpenVidu before becoming eligible for the health check.
+
+!!! info
+
+    The health check is intentionally conservative (TCP-only, with generous thresholds) because recreating a Media Node terminates the sessions running on it.
+
 ## Fixed Number of Media Nodes
 
 If you prefer to maintain a fixed number of Media Nodes instead of allowing the Managed Instance Group to perform dynamic scaling:
@@ -188,7 +196,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
         </figure>
     4. Go to the Master Node resource and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu Elastic deployment.
 
-    Changes will be applied automatically.
+    Stopping and starting the Master Node re-applies the configuration on the Master Node. Media Nodes only read the shared configuration when they start, so to propagate changes that affect Media Nodes you need to delete them: the Managed Instance Group will automatically launch new Media Nodes with the updated configuration.
 
 ## Backup and Restore
 

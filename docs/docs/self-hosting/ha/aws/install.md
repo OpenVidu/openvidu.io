@@ -152,7 +152,7 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
 ## Deploying the stack
 
-When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.
+When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_. The stack will take about 5 to 7 minutes to create all resources.
 
 When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation:
 
@@ -187,4 +187,8 @@ To use your OpenVidu deployment, check the values of the JSON secret. All access
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu High Availability deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status (about 5 to 7 minutes), your OpenVidu High Availability deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your deployment.
+
+!!! info
+
+    The deployment may take considerably longer to become reachable through the configured **DomainName** than the stack takes to reach the `CREATE_COMPLETE` status, as this also depends on DNS propagation.

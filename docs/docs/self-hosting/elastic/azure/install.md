@@ -92,7 +92,7 @@ The number of Media Nodes can scale up based on the system load. You can configu
 
 ## Deploying the stack
 
-Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 7 to 12 minutes).
+Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 8 minutes).
 
 !!! warning
 
@@ -146,4 +146,4 @@ Your authentication credentials and the URL to point your applications to are:
 
 ## Configuration and administration
 
-When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 7 to 12 minutes for the instances to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 3 to 6 minutes for the instances to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.

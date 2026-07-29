@@ -228,6 +228,9 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
 
 4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target=_blank} and wait for the SSH key to appear in your configured bucket.
 
+    !!! note
+        A full Elastic deployment (Master Node + the initial Media Nodes joining the cluster) typically completes in about **6 to 9 minutes**.
+
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the Master Node — if exposed, unauthorized users could gain access.
     <figure markdown>
@@ -282,6 +285,13 @@ Your authentication credentials and the URL to point your applications to are:
 --8<-- "shared/self-hosting/oracle/troubleshooting.md"
 
 3. If everything appears to be in order, check the [status](../on-premises/admin.md#checking-the-status-of-services) and [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services on the Master Node and Media Nodes.
+
+!!! info "Startup errors to look for in `cloud-init-output.log`"
+
+    Every wait performed while a node boots is bounded, so a stuck deployment ends with a terminal error message instead of hanging indefinitely. Two of them are worth grepping for:
+
+    - `Timeout waiting for ALL_SECRETS_GENERATED=<token> after 30 min` on a Media Node — it never received the secrets published by the Master Node for this deployment. Check the Master Node's own log first.
+    - `[check_app_ready] OpenVidu health endpoint not ready after 20 min` on the Master Node — the node booted and installed OpenVidu, but the service never became healthy.
 
 ### Configuration and administration
 

@@ -167,9 +167,6 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
     firewall-cmd --add-port=7885/udp
     firewall-cmd --permanent --add-port=7885/udp
 
-    firewall-cmd --add-port=9000/tcp
-    firewall-cmd --permanent --add-port=9000/tcp
-
     firewall-cmd --add-port=50000-60000/udp
     firewall-cmd --permanent --add-port=50000-60000/udp
     ```

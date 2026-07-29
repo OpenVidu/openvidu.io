@@ -234,7 +234,7 @@ In addition to these, an AWS deployment provides the capability to manage global
         ![Reboot Instance](../../../../assets/images/platform/self-hosting/elastic/aws/reboot-instance.png){ .svg-img .dark-img }
         </figure>
 
-    Changes will be applied automatically in all the nodes of your OpenVidu Elastic deployment.
+    Rebooting the Master Node re-applies the configuration on the Master Node. Media Nodes only read the shared configuration when they start, so to propagate changes that affect Media Nodes you need to terminate them: the Auto Scaling Group will automatically launch new Media Nodes with the updated configuration.
 
 ## Backup and Restore
 
