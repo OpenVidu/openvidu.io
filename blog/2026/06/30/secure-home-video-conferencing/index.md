@@ -4,7 +4,7 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/3.8/meet/index.md).
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/index.md).
 
 ## Why self-host your video calls?
 
@@ -19,7 +19,7 @@ Is this setup valid for everyone? If you need five-nines uptime for a business, 
 
 What you'll build
 
-A production-ready video conferencing server running **[OpenVidu Meet](https://openvidu.io/3.8/meet/index.md)** at your home, reachable from anywhere through a secure `https://` address, with automatic SSL certificates. Your family and friends join from any browser (phone, tablet or laptop) with a single link. No account, no app to install.
+A production-ready video conferencing server running **[OpenVidu Meet](https://openvidu.io/latest/meet/index.md)** at your home, reachable from anywhere through a secure `https://` address, with automatic SSL certificates. Your family and friends join from any browser (phone, tablet or laptop) with a single link. No account, no app to install.
 
 ## What you'll need
 
@@ -109,7 +109,7 @@ If both ports show "Success", proceed to Step 3.
 
 If either port fails, your ISP is blocking inbound connections on it. Automatic Let's Encrypt won't work in that case, because validating a certificate requires one of those ports to be reachable from the internet. You won't be able to follow Step 3 as written; use this alternative instead.
 
-Install the full **[OpenVidu Platform installer](https://openvidu.io/3.8/docs/self-hosting/single-node/on-premises/install/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+Install the full **[OpenVidu Platform installer](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh) (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.
@@ -165,26 +165,26 @@ You've just put a server on the internet, so a few minutes of good habits go a l
 
 Go further: end-to-end encryption
 
-For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](https://openvidu.io/3.8/meet/features/meetings/e2e-encryption/index.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
+For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](https://openvidu.io/latest/meet/features/meetings/e2e-encryption/index.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
 
 ## What to do next?
 
 Once your server is up and running, there are a few things you can do to get more out of it. OpenVidu exposes additional ports that improve media quality and reduce latency, and opening them is worth it if you want the best possible call experience. And if the one-command installer felt too opinionated, the full OpenVidu Platform installer gives you fine-grained control over which modules to enable, how to configure them, and how to automate the whole process.
 
-- **[Full port list](https://openvidu.io/3.8/docs/self-hosting/single-node/on-premises/install/#port-rules)**: open additional ports for better media performance or to match your Linux firewall rules.
-- **[Non-interactive install](https://openvidu.io/3.8/docs/self-hosting/single-node/on-premises/install/#non-interactive-installation)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
+- **[Full port list](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#port-rules)**: open additional ports for better media performance or to match your Linux firewall rules.
+- **[Non-interactive install](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#non-interactive-installation)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
 
 ## Need more than this?
 
-This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](https://openvidu.io/3.8/docs/self-hosting/deployment-types/index.md):
+This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
-- **[OpenVidu Single Node PRO](https://openvidu.io/3.8/docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability.
-- **[OpenVidu Elastic](https://openvidu.io/3.8/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
-- **[OpenVidu High Availability](https://openvidu.io/3.8/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
-- **[OpenVidu Local](https://openvidu.io/3.8/docs/self-hosting/local/index.md)**: a development setup for your own laptop.
-- **[Plain Docker Compose](https://openvidu.io/3.8/docs/self-hosting/single-node/on-premises/install/#plain-docker-compose-installation)**: install the same single node from plain config files, less automated and opinionated.
+- **[OpenVidu Single Node PRO](https://openvidu.io/latest/docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability.
+- **[OpenVidu Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
+- **[OpenVidu High Availability](https://openvidu.io/latest/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
+- **[OpenVidu Local](https://openvidu.io/latest/docs/self-hosting/local/index.md)**: a development setup for your own laptop.
+- **[Plain Docker Compose](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#plain-docker-compose-installation)**: install the same single node from plain config files, less automated and opinionated.
 
-And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](https://openvidu.io/3.8/meet/deployment/basic/#other-deployment-options).
+And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](https://openvidu.io/latest/meet/deployment/basic/#other-deployment-options).
 
 ______________________________________________________________________
 

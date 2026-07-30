@@ -298,8 +298,8 @@ Open source video platform built on top of LiveKit, increasing performance, redu
 
 **Docs**:
 
-- [OpenVidu Meet Embedded](https://openvidu.io/3.8/meet/embedded/intro/index.md)
-- [Web Component Reference](https://openvidu.io/3.8/meet/embedded/reference/webcomponent/index.md)
+- [OpenVidu Meet Embedded](https://openvidu.io/latest/meet/embedded/intro/index.md)
+- [Web Component Reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md)
 - [GitHub](https://github.com/OpenVidu)
 
 **Quick React integration (minimal example)**
@@ -351,6 +351,6 @@ There is no universal winner. If your top priority is shipping fast with minimal
 
 If video is becoming a core capability in your product, self-hosted alternatives are now practical enough to consider early, especially when cost predictability, data ownership, and long-term control matter.
 
-The best decision is not only about how fast you can launch, but how well your architecture and pricing model will hold up when your usage grows. If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](https://openvidu.io/3.8/meet/embedded/intro/index.md) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
+The best decision is not only about how fast you can launch, but how well your architecture and pricing model will hold up when your usage grows. If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/index.md) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
 
 ______________________________________________________________________

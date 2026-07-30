@@ -4,7 +4,7 @@ Everyone benchmarks video conferencing on the things you can see: resolution, la
 
 Here's the uncomfortable part. At the media layer that low-level WebRTC SDKs expose, the *only* permissions you get are "can this token publish audio, video or screen." There's no notion of *who* a person is, whether they belong in the room at all, or who's allowed to watch the recording afterwards. That's a media grant, not an access-control system. You either build the missing layer yourself or embed a product that already has it.
 
-This post lays out the three access models the industry keeps converging on — **anonymous role links**, **identified guests** and **users** — with concrete trade-offs and "use this when…" triggers. Then it shows how OpenVidu maps onto them: build-your-own on [**OpenVidu Platform**](https://openvidu.io/3.8/docs/index.md), or the batteries-included model that [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) formalized in its 3.8.0 release.
+This post lays out the three access models the industry keeps converging on — **anonymous role links**, **identified guests** and **users** — with concrete trade-offs and "use this when…" triggers. Then it shows how OpenVidu maps onto them: build-your-own on [**OpenVidu Platform**](https://openvidu.io/latest/docs/index.md), or the batteries-included model that [**OpenVidu Meet**](https://openvidu.io/latest/meet/index.md) formalized in its 3.8.0 release.
 
 ## The two layers of permissions: media control vs access control
 
@@ -67,9 +67,9 @@ How OpenVidu Meet implements it
 Every room exposes two shared anonymous links — one per predefined role — and, new in 3.8.0, you can **enable or disable each role's link per room** (allow anonymous speakers, say, but require an identity to moderate). Each anonymous guest picks a name before joining.
 
 - **In the app:** copy either link from the **"Rooms"** or **"Room Details"** page — or from inside a live meeting if you hold the `canShareAccessLinks` permission — and toggle each role's anonymous access in the room creation/edit wizard.
-- **Over the REST API:** the links come back on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/getRoom), at `access.anonymous.moderator.url` and `access.anonymous.speaker.url`; enable or disable each role with [`PUT /rooms/{roomId}/access`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/updateRoomAccess).
+- **Over the REST API:** the links come back on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom), at `access.anonymous.moderator.url` and `access.anonymous.speaker.url`; enable or disable each role with [`PUT /rooms/{roomId}/access`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomAccess).
 
-See [Room Access](https://openvidu.io/3.8/meet/features/rooms/access/index.md) for the full picture.
+See [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for the full picture.
 
 ## Model 2: Identified guests + custom permissions
 
@@ -96,9 +96,9 @@ How OpenVidu Meet implements it
 You add a member of type `identified_guest` with a display name and a base role (`Moderator` or `Speaker`), optionally overriding individual permissions. Meet generates a unique personal link for them; removing the member **instantly** invalidates it and expels them if they're mid-meeting.
 
 - **In the app:** open the room's **"Room Members"** tab, click **"Add Member"**, choose **Identified guest**, then grab their link later with the **copy access link** button in the member list.
-- **Over the REST API:** create them with [`POST /rooms/{roomId}/members`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/addRoomMember) — the response carries the personal link in the member's `accessUrl` (also retrievable via [`GET /rooms/{roomId}/members/{memberId}`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/getRoomMember)).
+- **Over the REST API:** create them with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) — the response carries the personal link in the member's `accessUrl` (also retrievable via [`GET /rooms/{roomId}/members/{memberId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoomMember)).
 
-See [Room Members](https://openvidu.io/3.8/meet/features/room-members/overview/index.md).
+See [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md).
 
 ## Model 3: Users + custom permissions
 
@@ -132,9 +132,9 @@ How OpenVidu Meet implements it
 Meet ships a built-in user system with three account roles — `admin` (full control), `room_manager` (manages their own rooms) and `room_member` (accesses rooms they belong to). Everyone joins through the same shared **user access link**, which renders a login form and carries no secret, so your app never handles passwords. Admins and room owners are implicit full-access members, and a room can be opened to all users (who then join as `Speaker`).
 
 - **In the app:** create accounts on the **"Users"** page (**"Create User"**, admins only), then add one to a room from its **"Room Members"** tab → **"Add Member"** → **User**. Copy the shared link from that member's row in the member list (all users share one link — they log in to prove who they are).
-- **Over the REST API:** create accounts with [`POST /users`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/createUser), add a user as a member with [`POST /rooms/{roomId}/members`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/addRoomMember), and read the shared link at `access.user.url` on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/3.8/meet/embedded/reference/api.html#/operations/getRoom).
+- **Over the REST API:** create accounts with [`POST /users`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createUser), add a user as a member with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember), and read the shared link at `access.user.url` on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom).
 
-See [Users](https://openvidu.io/3.8/meet/features/users/overview/index.md).
+See [Users](https://openvidu.io/latest/meet/features/users/overview/index.md).
 
 That completes the three models. Here they are side by side — three member types, each entering through its own kind of access link, all landing in the same room:
 
@@ -169,7 +169,7 @@ A member's effective permissions start from their base role and get overridden i
 }
 ```
 
-Permissions aren't even fixed for the duration of a meeting. A participant with `canMakeModerator` can **promote** another participant on the fly — a change that's temporary and scoped to that meeting only, reverting when they leave. It's the difference between a static config and a living session. See [Role Management](https://openvidu.io/3.8/meet/features/meetings/role-management/index.md).
+Permissions aren't even fixed for the duration of a meeting. A participant with `canMakeModerator` can **promote** another participant on the fly — a change that's temporary and scoped to that meeting only, reverting when they leave. It's the difference between a static config and a living session. See [Role Management](https://openvidu.io/latest/meet/features/meetings/role-management/index.md).
 
 Compare this to the low-level SDK token from earlier: there, you'd only ever have the *media* subset, and you'd model everything else — chat rights, who can end the call, recording control — yourself.
 
@@ -186,9 +186,9 @@ Which path you pick maps cleanly onto OpenVidu's two products.
 
 If you've followed along, the OpenVidu split falls out naturally.
 
-- **OpenVidu Platform** is for when you own both the business logic *and* the real-time logic. Tokens carry media permissions only; there is no built-in user or member concept. The three access models above are yours to build on top. That's the right trade when you're constructing a specialized media experience and want total control — see the [application server tutorials](https://openvidu.io/3.8/docs/tutorials/application-server/node/index.md) for how token grants work.
+- **OpenVidu Platform** is for when you own both the business logic *and* the real-time logic. Tokens carry media permissions only; there is no built-in user or member concept. The three access models above are yours to build on top. That's the right trade when you're constructing a specialized media experience and want total control — see the [application server tutorials](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md) for how token grants work.
 - **OpenVidu Meet** gives you all three models, the fine-grained permissions and recording ACLs **out of the box**. Its 3.8.0 release formalized this around three pillars — **users**, **room members**, and **three distinct access-link types** (anonymous, identified-guest, and user links). Those concepts exist precisely so you don't have to reinvent access control on top of raw media grants.
-  - **OpenVidu Meet Embedded** lets you pull that entire access layer *into your own application*, driven by a [REST API](https://openvidu.io/3.8/meet/embedded/reference/rest-api/index.md) and a [Web Component](https://openvidu.io/3.8/meet/embedded/reference/webcomponent/index.md). You provision members and generate links from your backend; Meet enforces the permissions. You get the control of "build your own" without actually building the security-critical parts.
+  - **OpenVidu Meet Embedded** lets you pull that entire access layer *into your own application*, driven by a [REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) and a [Web Component](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md). You provision members and generate links from your backend; Meet enforces the permissions. You get the control of "build your own" without actually building the security-critical parts.
 
 That's the whole justification for the new concepts in one line: **users, room members and typed access links** are the vocabulary you need to answer **"who gets in and what can they do"** — and rebuilding that vocabulary yourself is rarely time well spent.
 
@@ -207,13 +207,13 @@ The good news is you don't have to commit to one for the whole app. A single roo
 
 If you're deciding how to architect permissions right now, the fastest way to feel the trade-offs is to try the model that removes the build-your-own burden:
 
-👉 **See it in action — [spin up a permissioned room with OpenVidu Meet Embedded](https://openvidu.io/3.8/meet/embedded/intro/index.md).**
+👉 **See it in action — [spin up a permissioned room with OpenVidu Meet Embedded](https://openvidu.io/latest/meet/embedded/intro/index.md).**
 
 To go deeper on the concepts covered here:
 
-- [Users](https://openvidu.io/3.8/meet/features/users/overview/index.md) — accounts, roles and org-wide access rules.
-- [Room Members](https://openvidu.io/3.8/meet/features/room-members/overview/index.md) — identified guests vs users.
-- [Room Access](https://openvidu.io/3.8/meet/features/rooms/access/index.md) — the three access-link types.
-- Access tutorials for each model: [anonymous access](https://openvidu.io/3.8/meet/embedded/tutorials/access/anonymous-access/index.md), [identified guests](https://openvidu.io/3.8/meet/embedded/tutorials/access/identified-guests/index.md), and [users](https://openvidu.io/3.8/meet/embedded/tutorials/access/users/index.md).
+- [Users](https://openvidu.io/latest/meet/features/users/overview/index.md) — accounts, roles and org-wide access rules.
+- [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md) — identified guests vs users.
+- [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) — the three access-link types.
+- Access tutorials for each model: [anonymous access](https://openvidu.io/latest/meet/embedded/tutorials/access/anonymous-access/index.md), [identified guests](https://openvidu.io/latest/meet/embedded/tutorials/access/identified-guests/index.md), and [users](https://openvidu.io/latest/meet/embedded/tutorials/access/users/index.md).
 
-And if you need total control over the media pipeline instead, [OpenVidu Platform](https://openvidu.io/3.8/docs/index.md) gives you the low-level SDKs to build your own access layer from the ground up.
+And if you need total control over the media pipeline instead, [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) gives you the low-level SDKs to build your own access layer from the ground up.

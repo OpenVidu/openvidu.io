@@ -2,7 +2,7 @@
 
 What does it take today to go from an empty folder to a working business app with **video meetings embedded in it**? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and **seven prompts**.
 
-We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate [OpenVidu Meet](https://openvidu.io/3.8/meet/embedded/intro/index.md) so that meetings happen *inside* the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.
+We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate [OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/index.md) so that meetings happen *inside* the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.
 
 \[
 
@@ -42,9 +42,9 @@ Then came the interesting part. Could the agent integrate a videoconferencing se
 
 > Your mission is to integrate OpenVidu 3 into this CRM application, using webcomponents. Read the OpenVidu docs in its entirety, and prepare a branch with: a) OpenVidu Meet embedded into the CRM app so that meetings happen inside the app, and not in an external tool; b) a deploy folder containing scripts to prepare a Docker image with the app and a docker compose deploying both OpenVidu and the app. […] When a meeting is scheduled, the app should create a room for this client, if it does not exist yet, adding the user and client as room members.
 
-We pointed it at three documentation pages: the [WebComponent reference](https://openvidu.io/3.8/meet/embedded/reference/webcomponent/index.md), the [embedded tutorials](https://openvidu.io/3.8/meet/embedded/tutorials/index.md) and the [local deployment guide](https://openvidu.io/3.8/meet/deployment/local/index.md). The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
+We pointed it at three documentation pages: the [WebComponent reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md), the [embedded tutorials](https://openvidu.io/latest/meet/embedded/tutorials/index.md) and the [local deployment guide](https://openvidu.io/latest/meet/deployment/local/index.md). The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
 
-- **Server side**: a small service calling the [OpenVidu Meet REST API](https://openvidu.io/3.8/meet/embedded/reference/rest-api/index.md) — one room per client, created lazily on the first scheduled meeting and reused afterwards.
+- **Server side**: a small service calling the [OpenVidu Meet REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) — one room per client, created lazily on the first scheduled meeting and reused afterwards.
 - **Client side**: the `<openvidu-meet>` webcomponent embedded in the CRM's right panel. This is the entire frontend footprint of a video meeting:
 
 ```html
@@ -69,7 +69,7 @@ The missing members API shipped days later in [OpenVidu Meet 3.8.0](https://open
 
 > OpenVidu 3.8.0 has been released, with a more advanced support for user permissions. […] the users of our CRM app should be able to add the client as an invited guest, initially with speaker permissions, but the user should be able to specify more fine-grained permissions in the UI. The user must be itself an invited guest with moderator role, created under the hood when the room for the client is created.
 
-The agent extracted the exact contract from the 3.8.0 sources and rebuilt the integration on the [room members API](https://openvidu.io/3.8/meet/features/room-members/overview/index.md):
+The agent extracted the exact contract from the 3.8.0 sources and rebuilt the integration on the [room members API](https://openvidu.io/latest/meet/features/room-members/overview/index.md):
 
 - Every CRM user who joins a meeting becomes an **invited guest with moderator role** — created under the hood, each with a personal access link.
 - The client contact is added as an **invited guest with speaker permissions** and a personal, private link the CRM user can copy and send.
@@ -82,7 +82,7 @@ Once more, the final prompt was to run the full stack and verify live — which 
 Three takeaways stand out:
 
 1. **AI agents make integrations dramatically cheaper** — but only as cheap as the platform allows. The whole OpenVidu Meet integration is a couple hundred lines of server code plus a webcomponent tag. There is very little for the agent (or a human) to get wrong.
-1. **A runnable local deployment is worth a thousand docs pages.** The agent could docker-compose the [entire OpenVidu stack locally](https://openvidu.io/3.8/meet/deployment/local/index.md) in one command and verify every assumption against it. That feedback loop caught issues no amount of doc-reading would.
+1. **A runnable local deployment is worth a thousand docs pages.** The agent could docker-compose the [entire OpenVidu stack locally](https://openvidu.io/latest/meet/deployment/local/index.md) in one command and verify every assumption against it. That feedback loop caught issues no amount of doc-reading would.
 1. **Prompts are documentation.** The repository keeps every prompt in [`PROMPTS.md`](https://github.com/openvidu-labs/videoconference-based-crm/blob/main/PROMPTS.md) — a seven-entry build log of the whole application, more faithful than most design documents.
 
 The complete application — CRM, integration, tests, deployment scripts and prompts — is open source: [openvidu-labs/videoconference-based-crm](https://github.com/openvidu-labs/videoconference-based-crm) .
@@ -93,6 +93,6 @@ If there is one thing this experiment proves, it is that **embedding real videoc
 
 Ready to add meetings to *your* app this afternoon?
 
-[**Get started with OpenVidu Meet Embedded**](https://openvidu.io/3.8/meet/embedded/intro/index.md)
+[**Get started with OpenVidu Meet Embedded**](https://openvidu.io/latest/meet/embedded/intro/index.md)
 
 *And one more thing: we are working on agentic AI support for OpenVidu — stay tuned!*

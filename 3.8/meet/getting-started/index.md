@@ -48,4 +48,4 @@ Integrate a complete, fully-featured video call solution into your web or mobile
 
 ## OpenVidu Meet vs OpenVidu Platform
 
-If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](https://openvidu.io/3.8/docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](https://openvidu.io/3.8/docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).

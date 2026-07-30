@@ -12,7 +12,7 @@ For teams, businesses and organizations that need a reliable and secure video co
 - Ready to use AI integrations
 - Embed right into your app with pre-built components
 
-[Deploy Meet in minutes](https://openvidu.io/3.8/meet/index.md)
+[Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md)
 
 ### 
 
@@ -26,7 +26,7 @@ For developers that need complete freedom to build their real-time application u
 - Precise control of recording and streaming with custom layouts
 - Advanced telephony and AI integrations
 
-[Start building with the SDKs](https://openvidu.io/3.8/docs/index.md)
+[Start building with the SDKs](https://openvidu.io/latest/docs/index.md)
 
 |                                                   |                                                        |                                                            |
 | ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
@@ -42,9 +42,9 @@ For developers that need complete freedom to build their real-time application u
 | High control over real-time features              |                                                        |                                                            |
 | AI agents                                         |                                                        |                                                            |
 | Models                                            | Rooms & Meetings                                       | Audio tracks & Video tracks                                |
-| Links                                             | [OpenVidu Meet](https://openvidu.io/3.8/meet/index.md) | [OpenVidu Platform](https://openvidu.io/3.8/docs/index.md) |
+| Links                                             | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md) | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
 
-*[Learn more about OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md)*
+*[Learn more about OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)*
 
 ______________________________________________________________________
 
@@ -54,49 +54,49 @@ ______________________________________________________________________
 
   ______________________________________________________________________
 
-  OpenVidu is designed from the ground up to be [**self-hosted**](https://openvidu.io/3.8/docs/self-hosting/production-ready/index.md) in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
+  OpenVidu is designed from the ground up to be [**self-hosted**](https://openvidu.io/latest/docs/self-hosting/production-ready/index.md) in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
 
 - **Professional support**
 
   ______________________________________________________________________
 
-  We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](https://openvidu.io/3.8/support/index.md) now.
+  We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](https://openvidu.io/support/index.md) now.
 
 - **Easy to deploy**
 
   ______________________________________________________________________
 
-  What could take a whole DevOps team days of work, with OpenVidu you can have it ready in minutes: an easy installation, configuration and administration experience to your self-hosted, production grade, real-time solution. [**Install now**](https://openvidu.io/3.8/docs/self-hosting/deployment-types/index.md).
+  What could take a whole DevOps team days of work, with OpenVidu you can have it ready in minutes: an easy installation, configuration and administration experience to your self-hosted, production grade, real-time solution. [**Install now**](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
 
 - **Cost effective**
 
   ______________________________________________________________________
 
-  OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](https://openvidu.io/3.8/pricing/index.md).
+  OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](https://openvidu.io/pricing/index.md).
 
 - **Performant**
 
   ______________________________________________________________________
 
-  OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit**](https://livekit.io/) and [**mediasoup**](https://mediasoup.org/) . By combining the best of both worlds, OpenVidu provides outstanding [**performance**](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md).
+  OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit**](https://livekit.io/) and [**mediasoup**](https://mediasoup.org/) . By combining the best of both worlds, OpenVidu provides outstanding [**performance**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
 
 - **Scalable**
 
   ______________________________________________________________________
 
-  OpenVidu has been designed from the outset with [**scalability**](https://openvidu.io/3.8/docs/self-hosting/production-ready/scalability/index.md) in mind. Host videoconference rooms and large live streams with hundreds of participants. Autoscale your cluster to adapt to the demand and optimize your resources.
+  OpenVidu has been designed from the outset with [**scalability**](https://openvidu.io/latest/docs/self-hosting/production-ready/scalability/index.md) in mind. Host videoconference rooms and large live streams with hundreds of participants. Autoscale your cluster to adapt to the demand and optimize your resources.
 
 - **Fault tolerant**
 
   ______________________________________________________________________
 
-  OpenVidu offers [**fault tolerance**](https://openvidu.io/3.8/docs/self-hosting/production-ready/fault-tolerance/index.md) in all its components. Deploy a reliable cluster knowing that if one of your node goes down, others will be able to continue working with no downtime.
+  OpenVidu offers [**fault tolerance**](https://openvidu.io/latest/docs/self-hosting/production-ready/fault-tolerance/index.md) in all its components. Deploy a reliable cluster knowing that if one of your node goes down, others will be able to continue working with no downtime.
 
 - **Observable**
 
   ______________________________________________________________________
 
-  OpenVidu brings everything necessary to monitor the status, health, load and history of your deployment. It automatically collects events, metrics and logs and provides [**OpenVidu Dashboard**](https://openvidu.io/3.8/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) and a [**Grafana stack**](https://openvidu.io/3.8/docs/self-hosting/production-ready/observability/grafana-stack/index.md) to navigate them.
+  OpenVidu brings everything necessary to monitor the status, health, load and history of your deployment. It automatically collects events, metrics and logs and provides [**OpenVidu Dashboard**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) and a [**Grafana stack**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/index.md) to navigate them.
 
 ______________________________________________________________________
 
@@ -156,7 +156,7 @@ ______________________________________________________________________
 
   For the most advanced use cases: you can add pipelines to process video and audio streams in real time in your servers.
 
-[Deploy Meet in minutes](https://openvidu.io/3.8/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/3.8/docs/index.md "Build with OpenVidu Platform SDKs")
+[Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/latest/docs/index.md "Build with OpenVidu Platform SDKs")
 
 Not sure which fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/)
 

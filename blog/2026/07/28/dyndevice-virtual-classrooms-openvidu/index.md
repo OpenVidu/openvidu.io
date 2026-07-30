@@ -46,7 +46,7 @@ We asked Matteo which parts of the architecture his developers value most day to
 
 > "From a development team's perspective, the observability tools and the cost predictability/analysis stand out the most. Having clear insights into system performance and being able to effectively monitor our infrastructure while keeping costs under control are crucial features for our daily operations."
 
-It makes sense once you run video in production. Features demo well; observability is what lets a small team *operate* real-time infrastructure without a dedicated SRE group — and self-hosting is what makes the cost curve predictable in the first place. If you want to see what this looks like in OpenVidu, start with the [production-ready observability](https://openvidu.io/3.8/docs/self-hosting/production-ready/index.md) documentation.
+It makes sense once you run video in production. Features demo well; observability is what lets a small team *operate* real-time infrastructure without a dedicated SRE group — and self-hosting is what makes the cost curve predictable in the first place. If you want to see what this looks like in OpenVidu, start with the [production-ready observability](https://openvidu.io/latest/docs/self-hosting/production-ready/index.md) documentation.
 
 ## The results: faster shipping, one-click classrooms
 
@@ -64,7 +64,7 @@ One click from the course dashboard into a branded virtual classroom — that's 
 
 > "Looking ahead, the integration of AI is certainly on our radar. We believe AI will help both our team and our users by making the web-conferencing experience smoother, more accessible, and easier to manage and moderate."
 
-That maps to where OpenVidu is heading too — real-time [AI agents](https://openvidu.io/3.8/docs/tutorials/ai-services/index.md) that join rooms to caption, translate, summarize or moderate. We suspect this won't be the last conversation we have with the DynDevice team about it.
+That maps to where OpenVidu is heading too — real-time [AI agents](https://openvidu.io/latest/docs/tutorials/ai-services/index.md) that join rooms to caption, translate, summarize or moderate. We suspect this won't be the last conversation we have with the DynDevice team about it.
 
 ## Matteo's advice for teams in the same spot
 
@@ -82,9 +82,9 @@ We closed by asking what he'd tell an engineering team struggling to add real-ti
 
 ## Bring virtual classrooms to your own platform
 
-If DynDevice's "before" picture looked uncomfortably familiar, the fastest way out is [**OpenVidu Meet Embedded**](https://openvidu.io/3.8/meet/embedded/intro/index.md): a full-featured, brandable videoconferencing module you embed into your LMS or SaaS with a web component, a REST API and webhooks — self-hosted on your infrastructure, exactly like DynDevice runs theirs.
+If DynDevice's "before" picture looked uncomfortably familiar, the fastest way out is [**OpenVidu Meet Embedded**](https://openvidu.io/latest/meet/embedded/intro/index.md): a full-featured, brandable videoconferencing module you embed into your LMS or SaaS with a web component, a REST API and webhooks — self-hosted on your infrastructure, exactly like DynDevice runs theirs.
 
-Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](https://openvidu.io/3.8/docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) settles it in five minutes.
+Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](https://openvidu.io/latest/docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) settles it in five minutes.
 
 Thinking about your own success story?
 

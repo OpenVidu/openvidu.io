@@ -57,4 +57,4 @@ At the end of the day, abstraction is about **freedom**: the freedom to choose h
 
 The best way to understand these levels of abstraction is to see them in action. Whether you are ready to embed a full-featured meeting room or you want to start routing raw media tracks, our documentation has everything you need to get started.
 
-👉 Still not sure? [Compare Meet vs Platform side-by-side](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) — or jump straight to [Get Started with Meet](https://openvidu.io/3.8/meet/index.md) / [Get Started with Platform](https://openvidu.io/3.8/docs/index.md).
+👉 Still not sure? [Compare Meet vs Platform side-by-side](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) — or jump straight to [Get Started with Meet](https://openvidu.io/latest/meet/index.md) / [Get Started with Platform](https://openvidu.io/latest/docs/index.md).

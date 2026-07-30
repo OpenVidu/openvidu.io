@@ -47,7 +47,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 Info
 
-If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ### Live-streaming
 
