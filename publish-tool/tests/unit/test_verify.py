@@ -49,10 +49,10 @@ def test_a_freshly_published_tree_has_no_findings(published, config):
 # -- the AI-facing channel ---------------------------------------------------------------
 
 
-@pytest.mark.parametrize("name", ["llms.txt", "llms-full.txt", "index.md"])
+@pytest.mark.parametrize("name", ["llms.txt", "index.md"])
 def test_reports_a_root_file_that_pins_the_current_version(published, config, name):
-    """The defect this check exists for: `llms-full.txt` and `index.md` were promoted to the
-    root untouched, so every internal link named the version that produced them."""
+    """The defect this check exists for: these were promoted to the root untouched, so every
+    internal link named the version that produced them."""
     (published / name).write_text(
         f"[docs](https://openvidu.io/{VERSION}/docs/)\n", encoding="utf-8"
     )
@@ -70,7 +70,7 @@ def test_reports_a_promoted_export_that_pins_the_current_version(published, conf
 
 def test_a_root_file_may_pin_a_different_version(published, config):
     """That is how a release-notes page links back to the release before it."""
-    (published / "llms-full.txt").write_text(
+    (published / "llms.txt").write_text(
         f"[{OLD_VERSION} notes](https://openvidu.io/{OLD_VERSION}/docs/releases/)\n",
         encoding="utf-8",
     )

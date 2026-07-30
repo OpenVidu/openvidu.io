@@ -1,9 +1,9 @@
 """Rewrites for the Markdown exports published alongside the HTML.
 
-The `llmstxt` plugin writes an `index.md` next to every `index.html`, indexes them all in
-`llms.txt`, and concatenates them into `llms-full.txt`. Together they are the site's AI-facing
-channel, and they carry the same links as the HTML pages they mirror — but as absolute URLs,
-resolved by the plugin against the build's `site_url`.
+The `llmstxt` plugin writes an `index.md` next to every `index.html` and indexes them all in
+`llms.txt`. Together they are the site's AI-facing channel, and they carry the same links as the
+HTML pages they mirror — but as absolute URLs, resolved by the plugin against the build's
+`site_url`.
 
 That absolutisation is what makes these files a separate problem. mike builds each version with
 its own versioned `site_url`, so every internal link in every export comes out pinned to the

@@ -63,7 +63,7 @@ The two products' docs are **versioned**; everything else is not. URL scheme is 
 
 **Versions are grouped by minor release and named `X.Y`** (e.g. `3.8`): one git branch, one `gh-pages` folder, one version-selector entry per minor. Each `X.Y` version's content reflects the **newest patch** of that minor — patch releases do not create new documentation versions (they update the existing `X.Y` in place, adding their section to the releases pages). Legacy exact-patch URLs (`/3.4.1/...`) redirect to the minor folder (`/3.4/...`) via the 404 page, whose rules are generated from `publish-tool/ovweb.yaml`.
 
-The source tree has no version in paths: `mike` builds the site into a version folder on `gh-pages`, then `ovweb` rewrites links/canonicals/`sitemap.xml`/search index, does the same for the Markdown exports and `llms.txt`/`llms-full.txt` (whose links the plugin makes absolute against a versioned `site_url`, so they need their own patterns), moves the non-versioned pages to root, and writes the generated redirect pages (step table in `publish-tool/README.md`, "What a publish does").
+The source tree has no version in paths: `mike` builds the site into a version folder on `gh-pages`, then `ovweb` rewrites links/canonicals/`sitemap.xml`/search index, does the same for the Markdown exports and `llms.txt` (whose links the plugin makes absolute against a versioned `site_url`, so they need their own patterns), moves the non-versioned pages to root, and writes the generated redirect pages (step table in `publish-tool/README.md`, "What a publish does").
 
 **Publishing is done via the [Publish Web GitHub Action](https://github.com/OpenVidu/openvidu.io/actions/workflows/publish-web.yaml)** (or locally after `pip install "./publish-tool[build]"` — see README):
 

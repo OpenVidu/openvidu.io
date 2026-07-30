@@ -133,14 +133,6 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
             f"- [Pricing](https://openvidu.io/{version}/pricing/): p\n",
             encoding="utf-8",
         )
-        # The concatenation of every export above. Same links, plus the root-relative ones that
-        # only resolve while the file is read at a URL — which this one never is.
-        (base / "llms-full.txt").write_text(
-            f"# Docs\n[Docs](https://openvidu.io/{version}/docs/index.md)\n"
-            f"[Pricing](https://openvidu.io/{version}/pricing/index.md)\n"
-            "[PRO](/pricing/#openvidu-pro)\n",
-            encoding="utf-8",
-        )
         for feed in (
             "feed_rss_created.xml",
             "feed_rss_updated.xml",
@@ -175,6 +167,9 @@ def test_promotes_pages_and_files_to_the_root(latest_tree, config, report):
     assert (latest_tree / "blog" / "index.html").is_file()
     assert (latest_tree / "robots.txt").is_file()
     assert (latest_tree / "llms.txt").is_file()
+    # No llms-full.txt: a single concatenation of every export reached 2.8 MB, which no model
+    # can load, and duplicated content the exports already serve.
+    assert not (latest_tree / "llms-full.txt").exists()
     # Moved, so gone from the version folder.
     assert not (latest_tree / VERSION / "pricing").exists()
     assert not (latest_tree / VERSION / "robots.txt").exists()
@@ -256,19 +251,6 @@ def test_rewrites_llms_txt_three_ways(latest_tree, config, report):
     assert "/latest/docs/" in llms
     assert "/pricing/" in llms
     assert f"/{VERSION}/" not in llms
-
-
-def test_rewrites_llms_full_txt_too(latest_tree, config, report):
-    """It was promoted to the root untouched, which is how 764 version-pinned links reached it —
-    including 21 for pages that are served only from the root and so never had a versioned URL."""
-    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
-
-    llms = (latest_tree / "llms-full.txt").read_text()
-    assert "https://openvidu.io/latest/docs/index.md" in llms
-    assert "https://openvidu.io/pricing/index.md" in llms
-    assert f"/{VERSION}/" not in llms
-    # Read detached from the site, so a root-relative target has nothing left to resolve against.
-    assert "[PRO](https://openvidu.io/pricing/#openvidu-pro)" in llms
 
 
 def test_rewrites_the_home_page_markdown_export(latest_tree, config, report):

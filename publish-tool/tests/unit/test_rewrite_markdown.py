@@ -3,7 +3,7 @@
 The links these tests assert on are absolute, because that is the only form the exports use:
 the llmstxt plugin resolves every link against the build's `site_url`, which mike makes
 versioned. The HTML patterns match `href="…"`, so none of them reaches these files — which is
-how 764 version-pinned links reached llms-full.txt while llms.txt held none.
+how 764 version-pinned links reached the exports while llms.txt itself held none.
 """
 
 from __future__ import annotations
@@ -106,7 +106,7 @@ def test_promoted_export_does_not_shield_a_pin_to_the_published_version(layout):
     )
 
 
-# -- llms.txt and llms-full.txt ----------------------------------------------------------
+# -- llms.txt ----------------------------------------------------------
 
 
 def test_llms_file_three_way_mapping(layout):

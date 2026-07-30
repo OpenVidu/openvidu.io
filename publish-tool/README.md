@@ -93,7 +93,7 @@ Every page belongs to one of two groups, declared in [`ovweb.yaml`](ovweb.yaml):
 | `non_versioned_pages` | `account`, `pricing`, `support`, `openvidu-meet-vs-openvidu-platform`, `conditions`, `blog`, `about-us`, `research`, `acknowledgments` | Global pages shared across all versions. Served **once** at the site root (e.g. `/pricing/`).                 |
 | `assets`              | `assets`, `javascripts`, `stylesheets`, `search`                                                                                       | Static asset folders that also live at the root.                                                              |
 | `pinned_assets`       | `assets`, `javascripts`, `stylesheets`                                                                                                 | Of those, the ones whose root-absolute references inside versioned pages get pinned to the version folder.     |
-| `root_files`          | `index.html`, `index.md`, `404.html`, `robots.txt`, `llms.txt`, `llms-full.txt`, the RSS/JSON feeds, `rss.xsl`                          | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
+| `root_files`          | `index.html`, `index.md`, `404.html`, `robots.txt`, `llms.txt`, the RSS/JSON feeds, `rss.xsl`                          | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
 
 `ovweb.yaml` is the single source of truth for both halves of publishing. The MkDocs build reads
 it too, through [`mkdocs_hook.py`](mkdocs_hook.py), so the 404 router compiles its patterns from
@@ -122,7 +122,7 @@ version folder. Two things follow:
 - Rewrite relative links into **absolute** paths that match the final layout.
 - Move the non-versioned pages and root files out of the version folder and into the root.
 - Fix the auxiliary files: the search index, `sitemap.xml`, the RSS feeds, `404.html`, and the
-  AI-facing channel — every page's Markdown export plus `llms.txt` and `llms-full.txt`.
+  AI-facing channel — every page's Markdown export plus `llms.txt`.
 - Write the [generated redirects](#redirects), so `/X.Y/` and `/latest/` land on the docs.
 
 ---
@@ -174,8 +174,8 @@ Four consequences worth keeping in mind:
   publish produced until it is rebuilt.
 - **The Markdown export does not travel.** The releases pages have an `index.md` beside them like
   any other page in the plugin's `sections`, but only the content of the HTML is spliced. The
-  export a reader actually reaches is `/latest/<vp>/releases/index.md` — the one `llms.txt` and
-  `llms-full.txt` reference, and the newest version's own, so it is built rather than copied. An
+  export a reader actually reaches is `/latest/<vp>/releases/index.md` — the one `llms.txt`
+  references, and the newest version's own, so it is built rather than copied. An
   old version folder's export keeps that version's notes; nothing links to it.
 
 ---
@@ -320,7 +320,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `remove-overrides`     | always | Delete the version's `overrides/` theme folder, which is source, not output.                                          |
 | `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns. |
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
-| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds, and the AI-facing channel: the Markdown exports, `llms.txt` and `llms-full.txt`. |
+| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds, and the AI-facing channel: the Markdown exports and `llms.txt`. |
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see below.            |
@@ -386,7 +386,7 @@ lives in the pure layer, which is why that is where the tests are.
 | [`versions.py`](src/ovweb/versions.py)                     | ✔     | `X.Y` names, ordering, specifier matching, `versions.json`.                       |
 | [`rewrite/versioned.py`](src/ovweb/rewrite/versioned.py)   | ✔     | Asset pinning, root links, cookie base URL, `canonical`/`og:url` → `/latest/`.     |
 | [`rewrite/nonversioned.py`](src/ovweb/rewrite/nonversioned.py) | ✔ | Version stripping with the shield, `404.html`, the feeds.                         |
-| [`rewrite/markdown.py`](src/ovweb/rewrite/markdown.py)     | ✔     | The same rules for the Markdown exports, `llms.txt` and `llms-full.txt`.           |
+| [`rewrite/markdown.py`](src/ovweb/rewrite/markdown.py)     | ✔     | The same rules for the Markdown exports and `llms.txt`.                            |
 | [`rewrite/search_index.py`](src/ovweb/rewrite/search_index.py) | ✔ | Absolutise search locations.                                                     |
 | [`rewrite/sitemap.py`](src/ovweb/rewrite/sitemap.py)       | ✔     | Root promotion and `<url>` block pruning.                                         |
 | [`releases.py`](src/ovweb/releases.py)                     | ✔     | Splice release notes between versions.                                            |
@@ -434,15 +434,15 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 | Versioned export → home (`index.md`)   | `…/3.9/index.md`  | `…/index.md`                    |
 | Promoted export → versioned page       | `…/3.9/docs/…`    | `…/latest/docs/…`               |
 | Promoted export → non-versioned page   | `…/3.9/pricing/`  | `…/pricing/`                    |
-| `llms.txt` / `llms-full.txt`           | as promoted       | as promoted                     |
+| `llms.txt`                             | as promoted       | as promoted                     |
 | Any export → a root-relative target    | `](/pricing/)`    | `](https://openvidu.io/pricing/)` |
 | Any export → an export that does not exist | `](…/account/index.md)` | `](…/account/)`            |
 
-### The Markdown exports, `llms.txt` and `llms-full.txt`
+### The Markdown exports and `llms.txt`
 
 Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice: as
 `index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports and
-`llms-full.txt` concatenates them. Together they are the site's AI-facing channel.
+and they are the site's AI-facing channel.
 
 They need their own rewrites for one reason: **the plugin makes every link absolute**, resolved
 against the build's `site_url` — which mike makes versioned. So an export comes out of the build
@@ -451,8 +451,13 @@ reach any of them, because they match `href="…"` and Markdown has no `href`.
 
 Which rule applies depends on where the export is served from, exactly as it does for HTML — and
 so the version-vs-`latest` asymmetry is the same one the two search indexes have, for the same
-reason. `llms-full.txt` takes the *promoted* rules even though most of what it concatenates is
-versioned-page content, because the file itself is only ever fetched from the root.
+reason.
+
+There is deliberately **no `llms-full.txt`**. The plugin can concatenate every export into one
+file, and it used to: at 91 exports that was 881 KB, and once `sections` covered every page it
+reached 2.8 MB — roughly 700k tokens, which nothing can load, duplicating content the individual
+exports already serve. `llms.txt` as an index plus on-demand page fetches is the spec's model and
+the one that works at this size.
 
 Then two rules apply to *every* export, because they are about the form of a link rather than
 its target — and both exist because the plugin is inconsistent in ways only the publish can settle:
@@ -586,7 +591,8 @@ by construction. The expected differences are:
 | `<X.Y>/{docs,meet}/**/*.html`                                 | The RSS `rel=alternate` links are made root-absolute, where the feeds are actually published. |
 | `<X.Y>/{docs,meet}/**/*.md`                                   | A versioned export no longer links to a root-served page under the version — a hard 404. |
 | `**/*.md` outside a version folder                            | A promoted export reaches versioned documentation at `/latest/`, like every other root file. |
-| `llms.txt`, `llms-full.txt`                                   | `llms-full.txt` was promoted with no rewrites at all; both now have absolute link targets. |
+| `llms.txt`                                                    | Absolute link targets, and dead export links repaired.                                   |
+| `llms-full.txt`                                               | No longer generated: one concatenation of every export reached 2.8 MB, duplicating what the exports already serve. |
 | `.cache/**`, `site/**`                                        | Not in a fresh worktree, so they can no longer be committed by accident.                |
 
 Anything else is a bug. Run the gate before merging a change to the rewriting logic; it is not

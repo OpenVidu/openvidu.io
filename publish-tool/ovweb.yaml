@@ -72,7 +72,6 @@ layout:
     - 404.html
     - robots.txt
     - llms.txt
-    - llms-full.txt
     - feed_rss_created.xml
     - feed_rss_updated.xml
     - feed_json_created.json

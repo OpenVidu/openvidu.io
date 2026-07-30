@@ -364,7 +364,7 @@ folder, with relative links. `ovweb` then post-processes that output on `gh-page
    all — at the root, since a version folder keeps no copy of them.
 4. Make every location in the search index absolute.
 5. Fix the AI-facing channel and the RSS feeds. Every page in the `mkdocs-llmstxt` `sections` is
-   also published as an `index.md`, indexed by `llms.txt` and concatenated into `llms-full.txt`,
+   also published as an `index.md` and indexed by `llms.txt`,
    and the plugin resolves every link in them against the build's versioned `site_url` — so the
    rules from steps 2 and 3 are applied again, in the shape Markdown links take.
 6. Move the non-versioned pages and root files out to the site root, so the global pages served

@@ -26,7 +26,7 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     (
         "rewrite-non-versioned",
         "latest",
-        "Rewrite links in pages promoted to the root, plus llms.txt and llms-full.txt",
+        "Rewrite links in pages promoted to the root, plus llms.txt",
         "point versioned links at /latest/, strip the version from self URLs",
     ),
     (

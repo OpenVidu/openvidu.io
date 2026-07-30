@@ -41,7 +41,6 @@ ROOT_FILES = (
     "404.html",
     "robots.txt",
     "llms.txt",
-    "llms-full.txt",
     "feed_rss_created.xml",
     "feed_rss_updated.xml",
     "feed_json_created.json",
@@ -247,9 +246,9 @@ def expectations(version: str) -> list[Expected]:
             _promoted_export_reconciles(version),
         ),
         Expected(
-            "llms.txt and llms-full.txt get the root rewrites — llms-full.txt got none at all, so "
-            "it advertised 764 version-pinned URLs — and their links are made absolute, because "
-            "these two are the only files read away from the site",
+            "llms.txt gets the root rewrites. llms-full.txt appears in neither tree: the build no "
+            "longer generates it, because one concatenation of every export reached 2.8 MB — about "
+            "700k tokens, which nothing can load — duplicating content the exports already serve",
             lambda path: path in ("llms.txt", "llms-full.txt"),
             _llms_file_reconciles(version),
         ),

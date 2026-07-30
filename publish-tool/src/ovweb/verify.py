@@ -13,7 +13,7 @@ from pathlib import Path
 
 from . import fsops
 from .config import SiteConfig
-from .pipeline.postprocess import GENERATED_MARKER, LLMS_FILES
+from .pipeline.postprocess import GENERATED_MARKER, LLMS_TXT
 from .rewrite.markdown import SUFFIX as MARKDOWN
 from .versions import alias_target, read_versions_json
 
@@ -269,8 +269,8 @@ def _check_root_exports_use_latest(
 ) -> list[Finding]:
     """No file served from the root may pin the version `latest` currently points at.
 
-    Covers the site's AI-facing channel: `llms.txt`, the `llms-full.txt` concatenation, and the
-    `index.md` export published beside every root page. They are rebuilt from the newest version
+    Covers the site's AI-facing channel: `llms.txt` and the `index.md` export published beside
+    every root page. They are rebuilt from the newest version
     on every publish, so a URL naming that version is stale the moment the next one ships — and
     for a page served only from the root, it never resolved at all.
 
@@ -280,7 +280,7 @@ def _check_root_exports_use_latest(
     if latest is None:
         return []
 
-    candidates = [tree / name for name in LLMS_FILES]
+    candidates = [tree / LLMS_TXT]
     candidates.append(tree / f"index{MARKDOWN}")
     for page in config.layout.non_versioned_pages:
         root = tree / page
@@ -328,7 +328,7 @@ def _check_export_links_resolve(
             page = f"{latest}/{page[len('latest/') :]}"
         return (tree / page / "index.md").is_file()
 
-    candidates = [tree / f"index{MARKDOWN}", *(tree / name for name in LLMS_FILES)]
+    candidates = [tree / f"index{MARKDOWN}", tree / LLMS_TXT]
     for page in (*config.layout.non_versioned_pages, latest):
         root = tree / page
         if root.is_dir():

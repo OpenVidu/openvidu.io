@@ -447,7 +447,6 @@ plugins:
         - tags
   - llmstxt:
       markdown_description: Self-hosted videoconference solution and SDK
-      full_output: llms-full.txt
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
