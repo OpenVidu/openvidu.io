@@ -75,19 +75,6 @@ def _strip_version_from_self_urls(text: str, *, version: str, layout: SiteLayout
     return text.replace(f"/{KEEPVERSION_SENTINEL}/", f"/{version}/")
 
 
-def rewrite_llms_txt(text: str, *, version: str, layout: SiteLayout) -> str:
-    """Point llms.txt at the URLs the pages are actually served from.
-
-    Versioned pages go to `/latest/` (an LLM should read the newest documentation), the
-    promoted pages lose the version, and the home page's `index.md` moves to the root.
-    """
-    for page in layout.versioned_pages:
-        text = text.replace(f"/{version}/{page}/", f"/latest/{page}/")
-    for page in layout.non_versioned_pages:
-        text = text.replace(f"/{version}/{page}/", f"/{page}/")
-    return text.replace(f"/{version}/index.md", "/index.md")
-
-
 def rewrite_feed(text: str, *, version: str) -> str:
     """Strip the version from an RSS/JSON feed: they are only served from the root."""
     return text.replace(f"/{version}/", "/")

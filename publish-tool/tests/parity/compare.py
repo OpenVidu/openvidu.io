@@ -52,6 +52,26 @@ RELATIVE_ROOT_FILE = re.compile(
     rb'href="(?:\.\./)*(' + b"|".join(re.escape(name.encode()) for name in ROOT_FILES) + rb')"'
 )
 
+#: The rest of `layout`, restated here for the same reason as ROOT_FILES: the reconcilers below
+#: have to say independently what the rewrite should do, or they only restate the code they check.
+VERSIONED_PAGES = ("docs", "meet")
+NON_VERSIONED_PAGES = (
+    "account",
+    "pricing",
+    "support",
+    "openvidu-meet-vs-openvidu-platform",
+    "conditions",
+    "blog",
+    "about-us",
+    "research",
+    "acknowledgments",
+)
+PROMOTED_FILES = ("index.html", "index.md", *ROOT_FILES)
+
+#: Markdown link or image target that is root-relative, excluding protocol-relative URLs.
+ROOT_RELATIVE_TARGET = re.compile(rb"\]\(/(?!/)")
+BASE_URL = b"https://openvidu.io"
+
 
 @dataclass
 class Expected:
@@ -86,6 +106,65 @@ def _search_index_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
                 b'"location":"/latest/' + page + b"/",
             )
         return rewritten == new
+
+    return reconcile
+
+
+def _drop_version_from_root_urls(data: bytes, version: str) -> bytes:
+    """Every URL for something served only from the site root loses the version segment."""
+    pinned = version.encode()
+    for page in NON_VERSIONED_PAGES:
+        data = data.replace(
+            b"/" + pinned + b"/" + page.encode() + b"/", b"/" + page.encode() + b"/"
+        )
+    for name in PROMOTED_FILES:
+        data = data.replace(b"/" + pinned + b"/" + name.encode(), b"/" + name.encode())
+    return data
+
+
+def _point_versioned_urls_at_latest(data: bytes, version: str) -> bytes:
+    for page in VERSIONED_PAGES:
+        data = data.replace(
+            b"/" + version.encode() + b"/" + page.encode() + b"/",
+            b"/latest/" + page.encode() + b"/",
+        )
+    return data
+
+
+def _versioned_export_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
+    """The difference is exactly the root-served URLs losing the version.
+
+    A link into the export's own version stays pinned, so that an in-version reader keeps
+    reading that version — the same asymmetry the search index has.
+    """
+
+    def reconcile(old: bytes, new: bytes) -> bool:
+        return _drop_version_from_root_urls(old, version) == new
+
+    return reconcile
+
+
+def _promoted_export_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
+    """The difference is that, plus the versioned URLs moving to `/latest/`.
+
+    The export has no version of its own, so it reaches versioned documentation the same way
+    every other root file does.
+    """
+
+    def reconcile(old: bytes, new: bytes) -> bool:
+        rewritten = _point_versioned_urls_at_latest(old, version)
+        return _drop_version_from_root_urls(rewritten, version) == new
+
+    return reconcile
+
+
+def _llms_file_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
+    """The promoted-export difference, plus root-relative link targets becoming absolute."""
+
+    def reconcile(old: bytes, new: bytes) -> bool:
+        rewritten = _point_versioned_urls_at_latest(old, version)
+        rewritten = _drop_version_from_root_urls(rewritten, version)
+        return ROOT_RELATIVE_TARGET.sub(b"](" + BASE_URL + b"/", rewritten) == new
 
     return reconcile
 
@@ -135,6 +214,25 @@ def expectations(version: str) -> list[Expected]:
             "where they are published, instead of relative to a version folder that keeps no copy",
             lambda path: path.startswith(versioned_prefixes) and path.endswith(".html"),
             _root_file_links_reconcile,
+        ),
+        Expected(
+            "the Markdown export of a versioned page no longer links to a root-served page under "
+            "the version, which was a hard 404: that page has no versioned URL at all",
+            lambda path: path.startswith(versioned_prefixes) and path.endswith(".md"),
+            _versioned_export_reconciles(version),
+        ),
+        Expected(
+            "the Markdown export of a page promoted to the root reaches versioned documentation "
+            "at /latest/, like every other root file, instead of pinning the published version",
+            lambda path: path.endswith(".md") and not path.startswith(f"{version}/"),
+            _promoted_export_reconciles(version),
+        ),
+        Expected(
+            "llms.txt and llms-full.txt get the root rewrites — llms-full.txt got none at all, so "
+            "it advertised 764 version-pinned URLs — and their links are made absolute, because "
+            "these two are the only files read away from the site",
+            lambda path: path in ("llms.txt", "llms-full.txt"),
+            _llms_file_reconciles(version),
         ),
     ]
 

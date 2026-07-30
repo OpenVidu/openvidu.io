@@ -19,14 +19,14 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     (
         "rewrite-versioned",
         "always",
-        "Rewrite links in versioned pages",
+        "Rewrite links in versioned pages and their Markdown exports",
         "pin assets to the version, absolutise root links, point canonical/og:url at /latest/",
     ),
     ("rewrite-search-index", "always", "Absolutise the search index locations", ""),
     (
         "rewrite-non-versioned",
         "latest",
-        "Rewrite links in pages promoted to the root",
+        "Rewrite links in pages promoted to the root, plus llms.txt and llms-full.txt",
         "point versioned links at /latest/, strip the version from self URLs",
     ),
     (

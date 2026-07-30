@@ -363,7 +363,10 @@ folder, with relative links. `ovweb` then post-processes that output on `gh-page
    In the versioned pages, point relative links to the promoted root files — the RSS feeds above
    all — at the root, since a version folder keeps no copy of them.
 4. Make every location in the search index absolute.
-5. Update `llms.txt` and the RSS feeds.
+5. Fix the AI-facing channel and the RSS feeds. Every page in the `mkdocs-llmstxt` `sections` is
+   also published as an `index.md`, indexed by `llms.txt` and concatenated into `llms-full.txt`,
+   and the plugin resolves every link in them against the build's versioned `site_url` — so the
+   rules from steps 2 and 3 are applied again, in the shape Markdown links take.
 6. Move the non-versioned pages and root files out to the site root, so the global pages served
    from `/` always reflect the newest release, and copy the asset folders there.
 7. Copy the version's `sitemap.xml` to the root, rewrite it and regenerate its `.gz`, then delete

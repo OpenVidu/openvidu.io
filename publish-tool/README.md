@@ -121,8 +121,8 @@ version folder. Two things follow:
 
 - Rewrite relative links into **absolute** paths that match the final layout.
 - Move the non-versioned pages and root files out of the version folder and into the root.
-- Fix the auxiliary files: the search index, `sitemap.xml`, `llms.txt`, the RSS feeds and
-  `404.html`.
+- Fix the auxiliary files: the search index, `sitemap.xml`, the RSS feeds, `404.html`, and the
+  AI-facing channel — every page's Markdown export plus `llms.txt` and `llms-full.txt`.
 - Write the [generated redirects](#redirects), so `/X.Y/` and `/latest/` land on the docs.
 
 ---
@@ -172,11 +172,11 @@ Four consequences worth keeping in mind:
   touches the version being published, so a version's canonical is rewritten to `/latest/…` when
   that version is (re)published, not when another one is. An older folder keeps whatever its last
   publish produced until it is rebuilt.
-- **The LLM Markdown companion does not travel.** Pages listed in the `mkdocs-llmstxt` plugin's
-  `sections` also get an `index.md` next to their `index.html`, but old version folders have no
-  `llms.txt` at all (the past-version path removes it, since those branches predate the plugin),
-  so nothing there ever links to that companion. Only `/latest/<vp>/releases/index.md`, the one
-  `llms.txt` references, matters — and it is built, not copied.
+- **The Markdown export does not travel.** The releases pages have an `index.md` beside them like
+  any other page in the plugin's `sections`, but only the content of the HTML is spliced. The
+  export a reader actually reaches is `/latest/<vp>/releases/index.md` — the one `llms.txt` and
+  `llms-full.txt` reference, and the newest version's own, so it is built rather than copied. An
+  old version folder's export keeps that version's notes; nothing links to it.
 
 ---
 
@@ -318,9 +318,9 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | Step                   | When   | What                                                                                                                  |
 | ---------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | `remove-overrides`     | always | Delete the version's `overrides/` theme folder, which is source, not output.                                          |
-| `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`.                            |
+| `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns. |
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
-| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, `llms.txt`, the feeds. |
+| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds, and the AI-facing channel: the Markdown exports, `llms.txt` and `llms-full.txt`. |
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see below.            |
@@ -384,7 +384,8 @@ lives in the pure layer, which is why that is where the tests are.
 | [`config.py`](src/ovweb/config.py)                         | ✔     | Load and validate `ovweb.yaml`.                                                   |
 | [`versions.py`](src/ovweb/versions.py)                     | ✔     | `X.Y` names, ordering, specifier matching, `versions.json`.                       |
 | [`rewrite/versioned.py`](src/ovweb/rewrite/versioned.py)   | ✔     | Asset pinning, root links, cookie base URL, `canonical`/`og:url` → `/latest/`.     |
-| [`rewrite/nonversioned.py`](src/ovweb/rewrite/nonversioned.py) | ✔ | Version stripping with the shield, `404.html`, `llms.txt`, the feeds.             |
+| [`rewrite/nonversioned.py`](src/ovweb/rewrite/nonversioned.py) | ✔ | Version stripping with the shield, `404.html`, the feeds.                         |
+| [`rewrite/markdown.py`](src/ovweb/rewrite/markdown.py)     | ✔     | The same rules for the Markdown exports, `llms.txt` and `llms-full.txt`.           |
 | [`rewrite/search_index.py`](src/ovweb/rewrite/search_index.py) | ✔ | Absolutise search locations.                                                     |
 | [`rewrite/sitemap.py`](src/ovweb/rewrite/sitemap.py)       | ✔     | Root promotion and `<url>` block pruning.                                         |
 | [`releases.py`](src/ovweb/releases.py)                     | ✔     | Splice release notes between versions.                                            |
@@ -422,6 +423,45 @@ The final link conventions, for version `3.9`:
 | Search index → non-versioned page    | `pricing/`         | `/pricing/`                                    |
 | Root sitemap → versioned page        | `/3.9/docs/`       | `/latest/docs/`                                |
 | Root sitemap → non-versioned page    | `/3.9/pricing/`    | `/pricing/`                                    |
+
+And the same rules again for the Markdown exports, whose links are absolute rather than relative:
+
+| Reference | mike writes | The publish makes it |
+| --- | --- | --- |
+| Versioned export → versioned page      | `…/3.9/docs/…`    | `…/3.9/docs/…` (kept, as above) |
+| Versioned export → non-versioned page  | `…/3.9/pricing/`  | `…/pricing/`                    |
+| Versioned export → home (`index.md`)   | `…/3.9/index.md`  | `…/index.md`                    |
+| Promoted export → versioned page       | `…/3.9/docs/…`    | `…/latest/docs/…`               |
+| Promoted export → non-versioned page   | `…/3.9/pricing/`  | `…/pricing/`                    |
+| `llms.txt` / `llms-full.txt`           | as promoted, plus `](/pricing/)` | as promoted, plus `](https://openvidu.io/pricing/)` |
+
+### The Markdown exports, `llms.txt` and `llms-full.txt`
+
+Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice: as
+`index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports and
+`llms-full.txt` concatenates them. Together they are the site's AI-facing channel.
+
+They need their own rewrites for one reason: **the plugin makes every link absolute**, resolved
+against the build's `site_url` — which mike makes versioned. So an export comes out of the build
+with every internal link pinned to the version that produced it, and the HTML patterns cannot
+reach any of them, because they match `href="…"` and Markdown has no `href`.
+
+Which rule applies depends on where the export is served from, exactly as it does for HTML — and
+so the version-vs-`latest` asymmetry is the same one the two search indexes have, for the same
+reason. `llms-full.txt` takes the *promoted* rules even though most of what it concatenates is
+versioned-page content, because the file itself is only ever fetched from the root.
+
+Two deliberate differences from the HTML:
+
+- **`llms.txt` and `llms-full.txt` get their root-relative link targets made absolute.** They are
+  the only files meant to be read away from the site, so there is no document URL left to resolve
+  `](/pricing/#openvidu-pro)` against. Every other export is read at its own URL, where such a
+  path still resolves, so the rule is not applied to them.
+- **A promoted export does not shield an author's pin to the version being published.** The HTML
+  does (below), but in Markdown a hand-written pin and the plugin's absolutised link are the same
+  bytes, and the plugin wrote almost all of them. A pin to a *different* version — the form a
+  deliberately archival link takes, as when release notes link back to the release before — is
+  untouched either way.
 
 ### The two search indexes
 
@@ -497,6 +537,9 @@ by construction. The expected differences are:
 | `<X.Y>/sitemap.xml`, `<X.Y>/sitemap.xml.gz`                   | The published version's sitemap is removed rather than pruned.                           |
 | `search/search_index.json`                                    | The root index points versioned hits at `/latest/`.                                      |
 | `<X.Y>/{docs,meet}/**/*.html`                                 | The RSS `rel=alternate` links are made root-absolute, where the feeds are actually published. |
+| `<X.Y>/{docs,meet}/**/*.md`                                   | A versioned export no longer links to a root-served page under the version — a hard 404. |
+| `**/*.md` outside a version folder                            | A promoted export reaches versioned documentation at `/latest/`, like every other root file. |
+| `llms.txt`, `llms-full.txt`                                   | `llms-full.txt` was promoted with no rewrites at all; both now have absolute link targets. |
 | `.cache/**`, `site/**`                                        | Not in a fresh worktree, so they can no longer be committed by accident.                |
 
 Anything else is a bug. Run the gate before merging a change to the rewriting logic; it is not
@@ -507,8 +550,13 @@ in CI because it needs a full build (see
 
 `ovweb verify` asserts the invariants of a published tree: every version folder has a redirect at
 its root with a relative target, no promoted page claims a versioned URL as its own, no version
-folder still carries a sitemap, every search location is absolute, and `versions.json` agrees
-with the folders on disk.
+folder still carries a sitemap, every search location is absolute, nothing served from the root
+pins the version `latest` points at, no versioned export links to a root-served page under its
+version, and `versions.json` agrees with the folders on disk.
+
+A tree that has just been post-processed verifies clean, which is asserted by
+[`test_verify.py`](tests/unit/test_verify.py). That makes `verify` a real post-publish signal:
+anything it reports right after a publish is something the pipeline failed to do.
 
 The sitemap check reports any version folder that still carries a sitemap. A publish only removes
 its own, so versions published before that change keep theirs until they are next published — the

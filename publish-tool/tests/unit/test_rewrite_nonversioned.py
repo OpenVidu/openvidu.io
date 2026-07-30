@@ -9,7 +9,6 @@ from ovweb.rewrite.nonversioned import (
     RewriteError,
     rewrite_404,
     rewrite_feed,
-    rewrite_llms_txt,
     rewrite_non_versioned_file,
 )
 
@@ -106,22 +105,6 @@ def test_404_handles_a_version_link_without_a_trailing_slash(layout):
     """The theme emits `href="/3.8"` for the home link on some pages."""
     text = '<a href="/3.8">home</a>'
     assert rewrite_404(text, version=VERSION, layout=layout) == '<a href="/">home</a>'
-
-
-# -- llms.txt ----------------------------------------------------------------------------
-
-
-def test_llms_txt_three_way_mapping(layout):
-    text = (
-        "- [Self-hosting](https://openvidu.io/3.8/docs/self-hosting/): how to\n"
-        "- [Pricing](https://openvidu.io/3.8/pricing/): plans\n"
-        "- [Home](https://openvidu.io/3.8/index.md): landing\n"
-    )
-    assert rewrite_llms_txt(text, version=VERSION, layout=layout) == (
-        "- [Self-hosting](https://openvidu.io/latest/docs/self-hosting/): how to\n"
-        "- [Pricing](https://openvidu.io/pricing/): plans\n"
-        "- [Home](https://openvidu.io/index.md): landing\n"
-    )
 
 
 # -- feeds -------------------------------------------------------------------------------

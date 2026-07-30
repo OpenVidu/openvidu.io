@@ -49,6 +49,13 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
             f'<a href="../docs/">Docs</a>',
             encoding="utf-8",
         )
+        # ...and the Markdown export the llmstxt plugin writes beside it, where the same two
+        # links are already absolute — and therefore version-pinned by the build.
+        (base / page / "index.md").write_text(
+            f"[Docs](https://openvidu.io/{version}/docs/index.md)\n"
+            f"[Support](https://openvidu.io/{version}/support/index.md)\n",
+            encoding="utf-8",
+        )
 
     (base / "overrides" / "main.html").write_text("theme source", encoding="utf-8")
     (base / "assets" / "logo.png").write_bytes(b"\x89PNG\x00binary")
@@ -64,6 +71,15 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         f'<script>new URL("../..",location)</script>',
         encoding="utf-8",
     )
+    # The export beside the page above. Its links are absolute where the HTML's are relative,
+    # so the HTML patterns cannot reach them: a link into its own version stays pinned, a link
+    # to a page served only from the root must lose the version.
+    (base / "docs" / "index.md").write_text(
+        f"[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n"
+        f"[Pricing](https://openvidu.io/{version}/pricing/index.md)\n"
+        f"[Home](https://openvidu.io/{version}/index.md)\n",
+        encoding="utf-8",
+    )
     (base / "docs" / "releases" / "index.html").write_text(
         releases_page(f"{version}.0 notes", version), encoding="utf-8"
     )
@@ -71,7 +87,11 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         f'<link rel="canonical" href="https://openvidu.io/{version}/"><a href="docs/">Docs</a>',
         encoding="utf-8",
     )
-    (base / "index.md").write_text("# Home\n", encoding="utf-8")
+    (base / "index.md").write_text(
+        f"# Home\n[Docs](https://openvidu.io/{version}/docs/index.md)\n"
+        f"[Pricing](https://openvidu.io/{version}/pricing/index.md)\n",
+        encoding="utf-8",
+    )
     (base / "404.html").write_text(
         f'<a href="/{version}/pricing/">p</a><a href="/{version}/docs/">d</a>'
         f'<a href="/{version}">h</a>',
@@ -108,7 +128,14 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
             f"- [Pricing](https://openvidu.io/{version}/pricing/): p\n",
             encoding="utf-8",
         )
-        (base / "llms-full.txt").write_text("everything\n", encoding="utf-8")
+        # The concatenation of every export above. Same links, plus the root-relative ones that
+        # only resolve while the file is read at a URL — which this one never is.
+        (base / "llms-full.txt").write_text(
+            f"# Docs\n[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n"
+            f"[Pricing](https://openvidu.io/{version}/pricing/index.md)\n"
+            "[PRO](/pricing/#openvidu-pro)\n",
+            encoding="utf-8",
+        )
         for feed in (
             "feed_rss_created.xml",
             "feed_rss_updated.xml",
@@ -224,6 +251,49 @@ def test_rewrites_llms_txt_three_ways(latest_tree, config, report):
     assert "/latest/docs/" in llms
     assert "/pricing/" in llms
     assert f"/{VERSION}/" not in llms
+
+
+def test_rewrites_llms_full_txt_too(latest_tree, config, report):
+    """It was promoted to the root untouched, which is how 764 version-pinned links reached it —
+    including 21 for pages that are served only from the root and so never had a versioned URL."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    llms = (latest_tree / "llms-full.txt").read_text()
+    assert "https://openvidu.io/latest/docs/self-hosting/index.md" in llms
+    assert "https://openvidu.io/pricing/index.md" in llms
+    assert f"/{VERSION}/" not in llms
+    # Read detached from the site, so a root-relative target has nothing left to resolve against.
+    assert "[PRO](https://openvidu.io/pricing/#openvidu-pro)" in llms
+
+
+def test_rewrites_the_home_page_markdown_export(latest_tree, config, report):
+    """`index.md` is a root file, so the walk over the promoted page folders misses it."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    home = (latest_tree / "index.md").read_text()
+    assert "https://openvidu.io/latest/docs/index.md" in home
+    assert "https://openvidu.io/pricing/index.md" in home
+    assert f"/{VERSION}/" not in home
+
+
+def test_rewrites_the_exports_of_promoted_pages(latest_tree, config, report):
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    export = (latest_tree / "pricing" / "index.md").read_text()
+    assert "https://openvidu.io/latest/docs/index.md" in export
+    assert "https://openvidu.io/support/index.md" in export
+    assert f"/{VERSION}/" not in export
+
+
+def test_versioned_export_keeps_its_version_but_not_for_root_pages(latest_tree, config, report):
+    """The same asymmetry as the search index: an in-version reader keeps reading that version,
+    while a link to a root-served page has no versioned URL to keep."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    export = (latest_tree / VERSION / "docs" / "index.md").read_text()
+    assert f"https://openvidu.io/{VERSION}/docs/self-hosting/index.md" in export
+    assert "https://openvidu.io/pricing/index.md" in export
+    assert "https://openvidu.io/index.md" in export
 
 
 def test_promotes_the_root_sitemap(latest_tree, config, report):

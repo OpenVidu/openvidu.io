@@ -13,8 +13,9 @@ from pathlib import Path
 
 from . import fsops
 from .config import SiteConfig
-from .pipeline.postprocess import GENERATED_MARKER
-from .versions import read_versions_json
+from .pipeline.postprocess import GENERATED_MARKER, LLMS_FILES
+from .rewrite.markdown import SUFFIX as MARKDOWN
+from .versions import alias_target, read_versions_json
 
 SELF_URL_TAGS = re.compile(r'(?:rel="canonical" href|property="og:url" content)="([^"]+)"')
 RELATIVE_PARENT_HREF = re.compile(r'href="((?:\.\./)+[^"]*)"')
@@ -34,6 +35,7 @@ def verify(
     findings: list[Finding] = []
 
     published = list(versions) if versions else _published_versions(tree)
+    latest = _latest_version(tree)
 
     findings += _check_versions_json(tree, published)
     for version in published:
@@ -43,9 +45,11 @@ def verify(
         findings += _check_version_root_is_redirect(version_dir, version)
         findings += _check_version_sitemap(tree, version, config)
         findings += _check_versioned_pages_reach_root_files(tree, version, config)
+        findings += _check_exports_reach_root_pages(tree, version, config)
     findings += _check_root_pages_have_no_version(tree, config, published)
     findings += _check_search_index_absolute(tree, config)
     findings += _check_root_search_index_uses_latest(tree, config, published)
+    findings += _check_root_exports_use_latest(tree, config, latest)
     return findings
 
 
@@ -58,6 +62,17 @@ def _published_versions(tree: Path) -> list[str]:
             if entry.is_dir() and re.fullmatch(r"\d+\.\d+", entry.name)
         ]
     return [entry.version for entry in read_versions_json(fsops.read_text(path))]
+
+
+def _latest_version(tree: Path) -> str | None:
+    """Which version `latest` points at. mike materialises the alias as a symlink."""
+    alias = tree / "latest"
+    if alias.is_symlink():
+        return Path(alias.readlink()).name
+    versions = tree / "versions.json"
+    if versions.is_file():
+        return alias_target(read_versions_json(fsops.read_text(versions)), "latest")
+    return None
 
 
 def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
@@ -181,6 +196,82 @@ def _check_versioned_pages_reach_root_files(
                     )
                 )
                 break  # one report per versioned section is enough to act on
+    return findings
+
+
+def _check_exports_reach_root_pages(tree: Path, version: str, config: SiteConfig) -> list[Finding]:
+    """A version's Markdown exports must not link to a root page under the version.
+
+    The llmstxt plugin absolutises every link against the build's `site_url`, which mike makes
+    versioned, so a link to a page that is only ever served from the site root comes out as a URL
+    that has never existed. Unlike the stale-version problem this is a hard 404, and it is
+    invisible to a link checker that reads the HTML only.
+    """
+    findings = []
+    for page in config.layout.versioned_pages:
+        root = tree / version / page
+        if not root.is_dir():
+            continue
+        for path in sorted(root.rglob(f"*{MARKDOWN}")):
+            text = fsops.read_text(path)
+            dead = next(
+                (
+                    f"/{version}/{name}/"
+                    for name in config.layout.non_versioned_pages
+                    if f"/{version}/{name}/" in text
+                ),
+                None,
+            )
+            if dead:
+                findings.append(
+                    Finding(
+                        "export-root-page-link",
+                        str(path.relative_to(tree)),
+                        f"links to {dead}, but that page is served only from the site root, so "
+                        "the versioned URL is a 404",
+                    )
+                )
+                break  # one report per versioned section is enough to act on
+    return findings
+
+
+def _check_root_exports_use_latest(
+    tree: Path, config: SiteConfig, latest: str | None
+) -> list[Finding]:
+    """No file served from the root may pin the version `latest` currently points at.
+
+    Covers the site's AI-facing channel: `llms.txt`, the `llms-full.txt` concatenation, and the
+    `index.md` export published beside every root page. They are rebuilt from the newest version
+    on every publish, so a URL naming that version is stale the moment the next one ships — and
+    for a page served only from the root, it never resolved at all.
+
+    A pin to some *other* version is left alone: that is how a release-notes page links back to
+    the release before it, and the point of publishing versioned documentation.
+    """
+    if latest is None:
+        return []
+
+    candidates = [tree / name for name in LLMS_FILES]
+    candidates.append(tree / f"index{MARKDOWN}")
+    for page in config.layout.non_versioned_pages:
+        root = tree / page
+        if root.is_dir():
+            candidates += sorted(root.rglob(f"*{MARKDOWN}"))
+
+    needle = f"/{latest}/"
+    findings = []
+    for path in candidates:
+        if not path.is_file():
+            continue
+        if needle in fsops.read_text(path):
+            findings.append(
+                Finding(
+                    "root-export-version-pin",
+                    str(path.relative_to(tree)),
+                    f"holds {needle!r}; a file served from the root reaches versioned "
+                    "documentation at /latest/, and a root page at its own unversioned URL",
+                )
+            )
     return findings
 
 

@@ -10,6 +10,7 @@ from __future__ import annotations
 import gzip
 import shutil
 from collections.abc import Callable, Iterable, Iterator
+from functools import partial
 from pathlib import Path
 
 #: Files above this size are not candidates for link rewriting. The largest text file the
@@ -59,9 +60,20 @@ def rewrite_file(path: Path, transform: Callable[[str], str]) -> bool:
 
 def rewrite_tree(root: Path, transform: Callable[[str], str]) -> int:
     """Apply `transform` to every rewritable file under `root`. Returns the change count."""
+    return rewrite_tree_per_file(root, lambda _path, text: transform(text))
+
+
+def rewrite_tree_per_file(root: Path, transform: Callable[[Path, str], str]) -> int:
+    """Like :func:`rewrite_tree`, but `transform` also receives each file's path.
+
+    For rewrites that depend on the file's *format* rather than its location. The built tree
+    publishes each page twice — as HTML and as the Markdown export the llmstxt plugin writes
+    beside it — and the same rule needs a different pattern in each, so the transform has to know
+    which one it is looking at.
+    """
     if not root.exists():
         return 0
-    return sum(rewrite_file(path, transform) for path in iter_rewritable_files(root))
+    return sum(rewrite_file(path, partial(transform, path)) for path in iter_rewritable_files(root))
 
 
 def rewrite_single(path: Path, transform: Callable[[str], str], *, required: bool = True) -> bool:
