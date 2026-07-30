@@ -68,6 +68,9 @@ NON_VERSIONED_PAGES = (
 )
 PROMOTED_FILES = ("index.html", "index.md", *ROOT_FILES)
 
+#: A path inside a version folder, e.g. "3.8/docs/index.md".
+VERSION_FOLDER = re.compile(r"\d+\.\d+/")
+
 #: Markdown link or image target that is root-relative, excluding protocol-relative URLs.
 ROOT_RELATIVE_TARGET = re.compile(rb"\]\(/(?!/)")
 BASE_URL = b"https://openvidu.io"
@@ -131,21 +134,39 @@ def _point_versioned_urls_at_latest(data: bytes, version: str) -> bytes:
     return data
 
 
+def _absolutise(data: bytes) -> bytes:
+    """Root-relative Markdown targets become absolute URLs."""
+    return ROOT_RELATIVE_TARGET.sub(b"](" + BASE_URL + b"/", data)
+
+
+def _forget_export_suffix(data: bytes) -> bytes:
+    """Erase the distinction between `…/x/index.md` and `…/x/` on both sides of a comparison.
+
+    The publish repairs a link naming a Markdown export that was never generated, which depends on
+    what the build actually produced and so cannot be recomputed from the old bytes alone. Applying
+    this to both sides leaves the reconciler proving the useful half: that *nothing else* changed.
+    The repair's own correctness is pinned by tests/unit/test_rewrite_markdown.py, and by
+    `ovweb verify`.
+    """
+    return data.replace(b"/index.md", b"/")
+
+
 def _versioned_export_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
-    """The difference is exactly the root-served URLs losing the version.
+    """The root-served URLs lose the version; root-relative targets become absolute.
 
     A link into the export's own version stays pinned, so that an in-version reader keeps
     reading that version — the same asymmetry the search index has.
     """
 
     def reconcile(old: bytes, new: bytes) -> bool:
-        return _drop_version_from_root_urls(old, version) == new
+        rewritten = _absolutise(_drop_version_from_root_urls(old, version))
+        return _forget_export_suffix(rewritten) == _forget_export_suffix(new)
 
     return reconcile
 
 
 def _promoted_export_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
-    """The difference is that, plus the versioned URLs moving to `/latest/`.
+    """The same, plus the versioned URLs moving to `/latest/`.
 
     The export has no version of its own, so it reaches versioned documentation the same way
     every other root file does.
@@ -153,20 +174,14 @@ def _promoted_export_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
 
     def reconcile(old: bytes, new: bytes) -> bool:
         rewritten = _point_versioned_urls_at_latest(old, version)
-        return _drop_version_from_root_urls(rewritten, version) == new
+        rewritten = _absolutise(_drop_version_from_root_urls(rewritten, version))
+        return _forget_export_suffix(rewritten) == _forget_export_suffix(new)
 
     return reconcile
 
 
-def _llms_file_reconciles(version: str) -> Callable[[bytes, bytes], bool]:
-    """The promoted-export difference, plus root-relative link targets becoming absolute."""
-
-    def reconcile(old: bytes, new: bytes) -> bool:
-        rewritten = _point_versioned_urls_at_latest(old, version)
-        rewritten = _drop_version_from_root_urls(rewritten, version)
-        return ROOT_RELATIVE_TARGET.sub(b"](" + BASE_URL + b"/", rewritten) == new
-
-    return reconcile
+#: `llms.txt` is a root-served Markdown file, so the promoted rules apply to it unchanged.
+_llms_file_reconciles = _promoted_export_reconciles
 
 
 def _redirect_paths(version: str) -> frozenset[str]:
@@ -225,7 +240,10 @@ def expectations(version: str) -> list[Expected]:
         Expected(
             "the Markdown export of a page promoted to the root reaches versioned documentation "
             "at /latest/, like every other root file, instead of pinning the published version",
-            lambda path: path.endswith(".md") and not path.startswith(f"{version}/"),
+            # Anchored to "outside any version folder", not merely "outside this one": a publish
+            # must not touch another version's exports, and `not path.startswith(version)` would
+            # have waved that through.
+            lambda path: path.endswith(".md") and not VERSION_FOLDER.match(path),
             _promoted_export_reconciles(version),
         ),
         Expected(

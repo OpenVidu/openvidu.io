@@ -48,6 +48,12 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "Delete the promoted pages from the version folder",
         "tolerant: an old version may never have built some of them",
     ),
+    (
+        "repair-export-links",
+        "always",
+        "Point links at the HTML page where no Markdown export exists",
+        "checked against the tree as finally laid out, not against the MkDocs configuration",
+    ),
     ("install-redirects", "always", "Write the generated redirect pages", ""),
     (
         "prune-version-sitemap",

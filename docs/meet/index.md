@@ -519,7 +519,7 @@ It is OpenVidu's **commercial edition** and requires a license. It is meant for 
 OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](../pricing.md) for more details.
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
-You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview">deploying OpenVidu Meet</a>.
+You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview/">deploying OpenVidu Meet</a>.
 </h2>
 
 <hr style="margin: 5em 0 2em 0">

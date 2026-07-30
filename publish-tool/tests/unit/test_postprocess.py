@@ -53,7 +53,8 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         # links are already absolute — and therefore version-pinned by the build.
         (base / page / "index.md").write_text(
             f"[Docs](https://openvidu.io/{version}/docs/index.md)\n"
-            f"[Support](https://openvidu.io/{version}/support/index.md)\n",
+            f"[Support](https://openvidu.io/{version}/support/index.md)\n"
+            f"[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n",
             encoding="utf-8",
         )
 
@@ -73,13 +74,17 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
     )
     # The export beside the page above. Its links are absolute where the HTML's are relative,
     # so the HTML patterns cannot reach them: a link into its own version stays pinned, a link
-    # to a page served only from the root must lose the version.
+    # to a page served only from the root must lose the version. `releases` is a page this tree
+    # really exports; `self-hosting` deliberately is not, so the repair step has something to fix.
     (base / "docs" / "index.md").write_text(
+        f"[Releases](https://openvidu.io/{version}/docs/releases/index.md)\n"
         f"[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n"
         f"[Pricing](https://openvidu.io/{version}/pricing/index.md)\n"
-        f"[Home](https://openvidu.io/{version}/index.md)\n",
+        f"[Home](https://openvidu.io/{version}/index.md)\n"
+        "[PRO](/pricing/#openvidu-pro)\n",
         encoding="utf-8",
     )
+    (base / "docs" / "releases" / "index.md").write_text("# Releases\n", encoding="utf-8")
     (base / "docs" / "releases" / "index.html").write_text(
         releases_page(f"{version}.0 notes", version), encoding="utf-8"
     )
@@ -131,7 +136,7 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         # The concatenation of every export above. Same links, plus the root-relative ones that
         # only resolve while the file is read at a URL — which this one never is.
         (base / "llms-full.txt").write_text(
-            f"# Docs\n[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n"
+            f"# Docs\n[Docs](https://openvidu.io/{version}/docs/index.md)\n"
             f"[Pricing](https://openvidu.io/{version}/pricing/index.md)\n"
             "[PRO](/pricing/#openvidu-pro)\n",
             encoding="utf-8",
@@ -259,7 +264,7 @@ def test_rewrites_llms_full_txt_too(latest_tree, config, report):
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
     llms = (latest_tree / "llms-full.txt").read_text()
-    assert "https://openvidu.io/latest/docs/self-hosting/index.md" in llms
+    assert "https://openvidu.io/latest/docs/index.md" in llms
     assert "https://openvidu.io/pricing/index.md" in llms
     assert f"/{VERSION}/" not in llms
     # Read detached from the site, so a root-relative target has nothing left to resolve against.
@@ -291,9 +296,37 @@ def test_versioned_export_keeps_its_version_but_not_for_root_pages(latest_tree, 
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
     export = (latest_tree / VERSION / "docs" / "index.md").read_text()
-    assert f"https://openvidu.io/{VERSION}/docs/self-hosting/index.md" in export
+    assert f"https://openvidu.io/{VERSION}/docs/releases/index.md" in export
     assert "https://openvidu.io/pricing/index.md" in export
     assert "https://openvidu.io/index.md" in export
+    # Root-relative targets are made absolute in every export, not just the llms files.
+    assert "[PRO](https://openvidu.io/pricing/#openvidu-pro)" in export
+
+
+def test_repairs_links_to_exports_that_do_not_exist(latest_tree, config, report):
+    """The plugin appends `index.md` to every directory link without checking it exists, so a page
+    outside its `sections` list is advertised at a URL that 404s. Not all of them can be fixed by
+    listing more pages — vendored HTML and JavaScript shells can never have an export — so the
+    link is repaired against the tree instead."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    export = (latest_tree / VERSION / "docs" / "index.md").read_text()
+    # This tree exports no docs/self-hosting page, so the link goes to the page itself.
+    assert f"https://openvidu.io/{VERSION}/docs/self-hosting/)" in export
+    assert "self-hosting/index.md" not in export
+    # ...while an export that does exist is left alone.
+    assert f"https://openvidu.io/{VERSION}/docs/releases/index.md" in export
+
+
+def test_repair_reaches_the_promoted_exports_too(latest_tree, config, report):
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    export = (latest_tree / "pricing" / "index.md").read_text()
+    # Points into the docs, so it went to /latest/ first and was then repaired there.
+    assert "https://openvidu.io/latest/docs/self-hosting/)" in export
+    assert "self-hosting/index.md" not in export
+    # A sibling root page's export does exist in this tree, so it keeps its .md link.
+    assert "https://openvidu.io/support/index.md" in export
 
 
 def test_promotes_the_root_sitemap(latest_tree, config, report):

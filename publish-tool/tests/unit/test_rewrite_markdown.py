@@ -11,7 +11,7 @@ from __future__ import annotations
 import pytest
 
 from ovweb.rewrite.markdown import (
-    rewrite_llms_file,
+    repair_export_links,
     rewrite_promoted_markdown,
     rewrite_versioned_markdown,
 )
@@ -27,8 +27,12 @@ def promoted(text, layout):
     return rewrite_promoted_markdown(text, version=VERSION, layout=layout)
 
 
-def llms(text, layout):
-    return rewrite_llms_file(text, version=VERSION, layout=layout)
+# llms.txt is a root-served Markdown file, so the promoted rules are exactly right for it.
+llms = promoted
+
+
+def repair(text, layout, exports=()):
+    return repair_export_links(text, exports=frozenset(exports), layout=layout)
 
 
 # -- the export of a versioned page ------------------------------------------------------
@@ -143,10 +147,62 @@ def test_llms_file_leaves_an_external_link_alone(layout):
     assert llms(text, layout) == text
 
 
-def test_llms_file_is_the_promoted_rules_plus_absolutising(layout):
-    """Stated as a test so the two cannot drift: llms-full.txt is a root file like any other."""
-    text = "[docs](https://openvidu.io/3.8/docs/) [pricing](/pricing/)"
-    assert llms(text, layout) == (
-        promoted("[docs](https://openvidu.io/3.8/docs/)", layout)
-        + " [pricing](https://openvidu.io/pricing/)"
+def test_every_export_gets_root_relative_targets_absolutised(layout):
+    """Not just the llms files: the plugin absolutises a *relative* link but returns a
+    root-relative one untouched, so which form an export hands out came down to how the author
+    happened to write it."""
+    text = "[pricing](/pricing/#openvidu-pro)"
+    want = "[pricing](https://openvidu.io/pricing/#openvidu-pro)"
+    assert versioned(text, layout) == want
+    assert promoted(text, layout) == want
+
+
+# -- repairing links to exports that were never generated --------------------------------
+
+
+def test_repair_points_a_missing_export_at_its_page(layout):
+    """The plugin appends `index.md` to every directory link without checking it exists."""
+    text = "[account](https://openvidu.io/account/index.md)"
+    assert repair(text, layout) == "[account](https://openvidu.io/account/)"
+
+
+def test_repair_leaves_an_export_that_exists_alone(layout):
+    text = "[pricing](https://openvidu.io/pricing/index.md)"
+    assert repair(text, layout, exports={"pricing/index.md"}) == text
+
+
+def test_repair_keeps_the_fragment(layout):
+    """The heading it pointed at exists on the HTML page too."""
+    text = "[deep](https://openvidu.io/account/index.md#sign-up)"
+    assert repair(text, layout) == "[deep](https://openvidu.io/account/#sign-up)"
+
+
+def test_repair_handles_a_nested_path(layout):
+    text = "[typedoc](https://openvidu.io/latest/docs/reference-docs/openvidu-components-angular/index.md)"
+    assert repair(text, layout) == (
+        "[typedoc](https://openvidu.io/latest/docs/reference-docs/openvidu-components-angular/)"
     )
+
+
+def test_repair_resolves_latest_against_the_alias(layout):
+    """A promoted export links to /latest/, never to the version, so the alias has to be in the
+    set — the pipeline adds it from the symlink."""
+    text = "[docs](https://openvidu.io/latest/docs/index.md)"
+    assert repair(text, layout, exports={"latest/docs/index.md"}) == text
+
+
+def test_repair_leaves_the_home_export_alone(layout):
+    """`/index.md` is the home page's export and always exists."""
+    text = "[home](https://openvidu.io/index.md)"
+    assert repair(text, layout, exports={"index.md"}) == text
+
+
+def test_repair_ignores_another_host(layout):
+    text = "[external](https://docs.livekit.io/home/index.md)"
+    assert repair(text, layout) == text
+
+
+def test_repair_ignores_a_non_export_markdown_link(layout):
+    """Only the `<directory>/index.md` shape the plugin emits is a candidate."""
+    text = "[readme](https://openvidu.io/CONTRIBUTING.md)"
+    assert repair(text, layout) == text

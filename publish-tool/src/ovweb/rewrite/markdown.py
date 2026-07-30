@@ -19,10 +19,13 @@ HTML:
 * :func:`rewrite_versioned_markdown` — the export of a versioned page. Links into the same
   version stay pinned, so a reader who arrived at one version's documentation keeps reading that
   version. Everything served from the root loses the version.
-* :func:`rewrite_promoted_markdown` — the export of a page promoted to the root. It has no
-  version of its own, so links into versioned documentation go to `/latest/`.
-* :func:`rewrite_llms_file` — `llms.txt` and `llms-full.txt`. Root files, so the promoted rules
-  apply, plus one more that only they need.
+* :func:`rewrite_promoted_markdown` — the export of a page promoted to the root, and `llms.txt`,
+  which is a root-served Markdown file like any other. Neither has a version of its own, so links
+  into versioned documentation go to `/latest/`.
+
+Two rules then apply to every export regardless of where it is served from, because they are
+about the *form* of a link rather than its target:
+:func:`absolutise_root_relative_targets` and :func:`repair_export_links`.
 """
 
 from __future__ import annotations
@@ -34,6 +37,11 @@ from ..model import SiteLayout
 #: Markdown link or image target that is root-relative. `](//host/…)` is excluded: a
 #: protocol-relative URL already names a host.
 ROOT_RELATIVE_TARGET = re.compile(r"\]\(/(?!/)")
+
+#: A Markdown link or image target naming a page's Markdown export on this site, with any
+#: fragment. The plugin only ever writes `<directory>/index.md`, so that is the only shape to look
+#: for. Anchored to the site's own base URL, so an external `.md` link is not a candidate.
+_EXPORT_TARGET = r"\]\({base}(?P<page>(?:[^)\s#]*/)?)index\.md(?P<frag>#[^)\s]*)?\)"
 
 #: The suffix of the exports. Used by the pipeline to pick between these rules and the HTML ones.
 SUFFIX = ".md"
@@ -47,7 +55,8 @@ def rewrite_versioned_markdown(text: str, *, version: str, layout: SiteLayout) -
     the version segment they were built with.
     """
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
-    return _drop_version_from_file_urls(text, version=version, files=layout.root_files)
+    text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
+    return absolutise_root_relative_targets(text, layout=layout)
 
 
 def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) -> str:
@@ -67,24 +76,8 @@ def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) ->
     for page in layout.versioned_pages:
         text = text.replace(f"/{version}/{page}/", f"/latest/{page}/")
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
-    return _drop_version_from_file_urls(text, version=version, files=layout.root_files)
-
-
-def rewrite_llms_file(text: str, *, version: str, layout: SiteLayout) -> str:
-    """Rewrite `llms.txt` or `llms-full.txt`.
-
-    Both are served from the site root, so the promoted rules apply to them unchanged: the URLs
-    they hand an assistant have to be the ones the site actually serves, and versioned
-    documentation is reached at `/latest/`.
-
-    `llms-full.txt` needs the promoted rules even though most of what it concatenates is
-    versioned-page content, because the file itself is only ever fetched from the root. That is
-    the same asymmetry the search index has, and for the same reason: each version's own export
-    keeps its version so an in-version reader stays in it, while the root's single copy points
-    at the URL that does not go stale.
-    """
-    text = rewrite_promoted_markdown(text, version=version, layout=layout)
-    return _absolutise_root_relative_targets(text, layout=layout)
+    text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
+    return absolutise_root_relative_targets(text, layout=layout)
 
 
 def _drop_version_from_page_urls(text: str, *, version: str, pages: tuple[str, ...]) -> str:
@@ -111,15 +104,48 @@ def _drop_version_from_file_urls(text: str, *, version: str, files: tuple[str, .
     return text
 
 
-def _absolutise_root_relative_targets(text: str, *, layout: SiteLayout) -> str:
+def absolutise_root_relative_targets(text: str, *, layout: SiteLayout) -> str:
     """`](/pricing/#openvidu-pro)` -> `](https://openvidu.io/pricing/#openvidu-pro)`.
 
-    These two files are the only ones meant to be read away from the site: an assistant fetches
-    them once and works from the text, with no document URL left to resolve a root-relative path
-    against. Every other export is read at its own URL, where such a path still resolves, so this
-    rule is not applied to them.
+    The plugin absolutises a relative link but returns a root-relative one untouched, so whether
+    an export hands out a resolvable URL depends on how the author happened to write the link.
+    This settles it: every internal target in every export is an absolute URL.
+
+    It cannot be done in the build, which is the other obvious place: the plugin resolves against
+    `site_url`, and mike makes that versioned, so absolutising there yields `/3.8/pricing/` — a
+    page that is only served from the root and therefore a 404. Only the publish knows the final
+    layout.
 
     Anchored to Markdown link syntax, so a root-relative path quoted in prose or inside a code
     sample is left alone.
     """
     return ROOT_RELATIVE_TARGET.sub(lambda _match: f"]({layout.base_url}/", text)
+
+
+def repair_export_links(text: str, *, exports: frozenset[str], layout: SiteLayout) -> str:
+    """Point a link at the HTML page when the Markdown export it names does not exist.
+
+    The plugin appends `index.md` to every relative directory link **without checking that the
+    target has an export**, and only pages listed in its `sections` get one. So a page that is
+    absent from that list is not merely missing from `llms.txt`: every export linking to it
+    advertises a URL that 404s.
+
+    Covering more pages shrinks the problem but cannot close it. Some pages can never have an
+    export at all — `docs/reference-docs/` is vendored TypeDoc output, 140 HTML files with no
+    Markdown source, and a JavaScript shell like `/account/` would export as a bare heading.
+    Repairing the link is the general answer, and it needs no list to keep in step: `exports` is
+    read from the tree that was just built, so the check is against what is really published.
+
+    A repaired link points at the page itself, which is the honest fallback — an assistant that
+    follows it gets the HTML rather than nothing.
+    """
+    base = f"{layout.base_url}/"
+    pattern = re.compile(_EXPORT_TARGET.format(base=re.escape(base)))
+
+    def repair(match: re.Match[str]) -> str:
+        page = match.group("page")
+        if f"{page}index.md" in exports:
+            return match.group(0)
+        return f"]({base}{page}{match.group('frag') or ''})"
+
+    return pattern.sub(repair, text)

@@ -14,7 +14,7 @@ holds that second set, and the pipeline picks between them by suffix.
 from __future__ import annotations
 
 from .markdown import (
-    rewrite_llms_file,
+    repair_export_links,
     rewrite_promoted_markdown,
     rewrite_versioned_markdown,
 )
@@ -33,9 +33,9 @@ __all__ = [
     "promote_root_sitemap",
     "promote_search_index",
     "prune_version_sitemap",
+    "repair_export_links",
     "rewrite_404",
     "rewrite_feed",
-    "rewrite_llms_file",
     "rewrite_non_versioned_file",
     "rewrite_promoted_markdown",
     "rewrite_search_index",

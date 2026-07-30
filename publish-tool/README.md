@@ -324,6 +324,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see below.            |
+| `repair-export-links`  | always | Point a link at the HTML page wherever the Markdown export it names does not exist. Checked against the finished tree, not the MkDocs config. |
 | `strip-non-versioned`  | past   | Delete the root-served pages from the version folder instead. Tolerant: an old version may never have built some.     |
 | `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see below. |
@@ -433,7 +434,9 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 | Versioned export → home (`index.md`)   | `…/3.9/index.md`  | `…/index.md`                    |
 | Promoted export → versioned page       | `…/3.9/docs/…`    | `…/latest/docs/…`               |
 | Promoted export → non-versioned page   | `…/3.9/pricing/`  | `…/pricing/`                    |
-| `llms.txt` / `llms-full.txt`           | as promoted, plus `](/pricing/)` | as promoted, plus `](https://openvidu.io/pricing/)` |
+| `llms.txt` / `llms-full.txt`           | as promoted       | as promoted                     |
+| Any export → a root-relative target    | `](/pricing/)`    | `](https://openvidu.io/pricing/)` |
+| Any export → an export that does not exist | `](…/account/index.md)` | `](…/account/)`            |
 
 ### The Markdown exports, `llms.txt` and `llms-full.txt`
 
@@ -451,12 +454,24 @@ so the version-vs-`latest` asymmetry is the same one the two search indexes have
 reason. `llms-full.txt` takes the *promoted* rules even though most of what it concatenates is
 versioned-page content, because the file itself is only ever fetched from the root.
 
-Two deliberate differences from the HTML:
+Then two rules apply to *every* export, because they are about the form of a link rather than
+its target — and both exist because the plugin is inconsistent in ways only the publish can settle:
 
-- **`llms.txt` and `llms-full.txt` get their root-relative link targets made absolute.** They are
-  the only files meant to be read away from the site, so there is no document URL left to resolve
-  `](/pricing/#openvidu-pro)` against. Every other export is read at its own URL, where such a
-  path still resolves, so the rule is not applied to them.
+- **Root-relative targets are made absolute.** The plugin absolutises a *relative* link but
+  returns a root-relative one untouched, so which form an export handed out came down to how the
+  author happened to write it. This cannot be fixed in the build: the plugin resolves against
+  `site_url`, which mike makes versioned, so absolutising there yields `/3.8/pricing/` — a page
+  served only from the root, and therefore a 404.
+- **A link naming an export that does not exist is pointed at the page instead.** The plugin
+  appends `index.md` to every directory link *without checking the target has an export*, and only
+  pages in its `sections` list get one. Listing more pages shrinks the problem but cannot close
+  it: `docs/reference-docs/` is vendored TypeDoc output with no Markdown source, and a JavaScript
+  shell like `/account/` would export as a bare heading. The repair reads the real set of exports
+  off the tree, so it needs no list to keep in step. On a `3.99 latest` publish this took the
+  in-scope dead links from **162 to 0**, and the root-relative targets from **302 to 0**.
+
+And one deliberate difference from the HTML:
+
 - **A promoted export does not shield an author's pin to the version being published.** The HTML
   does (below), but in Markdown a hand-written pin and the plugin's absolutised link are the same
   bytes, and the plugin wrote almost all of them. A pin to a *different* version — the form a
@@ -584,7 +599,8 @@ in CI because it needs a full build (see
 its root with a relative target, no promoted page claims a versioned URL as its own, no version
 folder carries a correctly pruned sitemap, every search location is absolute, nothing served from
 the root pins the version `latest` points at, no versioned export links to a root-served page
-under its version, and `versions.json` agrees with the folders on disk.
+under its version, no export links to another export that does not exist, and `versions.json`
+agrees with the folders on disk.
 
 A tree that has just been post-processed verifies clean, which is asserted by
 [`test_verify.py`](tests/unit/test_verify.py). That makes `verify` a real post-publish signal:

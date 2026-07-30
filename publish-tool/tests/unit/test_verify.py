@@ -151,3 +151,15 @@ def test_reports_a_root_search_index_that_pins_the_version(published, config):
     )
 
     assert findings_by_check(published, config)["root-search-index"] == ["search/search_index.json"]
+
+
+def test_reports_a_link_to_an_export_that_does_not_exist(published, config):
+    """The plugin writes these unconditionally; the publish repairs them. This is the assertion
+    that it did."""
+    (published / VERSION / "docs" / "index.md").write_text(
+        "[gone](https://openvidu.io/latest/docs/no-such-page/index.md)\n", encoding="utf-8"
+    )
+
+    findings = [f for f in verify(published, config=config) if f.check == "export-link"]
+    assert [f.where for f in findings] == [f"{VERSION}/docs/index.md"]
+    assert "no-such-page" in findings[0].detail

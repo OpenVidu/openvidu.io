@@ -50,6 +50,7 @@ def verify(
     findings += _check_search_index_absolute(tree, config)
     findings += _check_root_search_index_uses_latest(tree, config, published)
     findings += _check_root_exports_use_latest(tree, config, latest)
+    findings += _check_export_links_resolve(tree, config, latest)
     return findings
 
 
@@ -298,6 +299,54 @@ def _check_root_exports_use_latest(
                     str(path.relative_to(tree)),
                     f"holds {needle!r}; a file served from the root reaches versioned "
                     "documentation at /latest/, and a root page at its own unversioned URL",
+                )
+            )
+    return findings
+
+
+def _check_export_links_resolve(
+    tree: Path, config: SiteConfig, latest: str | None
+) -> list[Finding]:
+    """No Markdown export may link to another export that does not exist.
+
+    The llmstxt plugin appends `index.md` to every relative directory link without checking that
+    the page has an export, so any page outside its `sections` list is advertised at a URL that
+    404s. The publish repairs those links against the tree; this is the assertion that it did.
+
+    Only the newest version and the site root are checked. Older folders keep whatever their own
+    last publish produced, so reporting them would be reporting work that a publish of that
+    version — not this check — has to do.
+    """
+    if latest is None:
+        return []
+
+    base = f"{config.layout.base_url}/"
+    pattern = re.compile(re.escape(base) + r"(?P<page>(?:[^)\s#\"']*/)?)index\.md")
+
+    def resolves(page: str) -> bool:
+        if page.startswith("latest/"):
+            page = f"{latest}/{page[len('latest/') :]}"
+        return (tree / page / "index.md").is_file()
+
+    candidates = [tree / f"index{MARKDOWN}", *(tree / name for name in LLMS_FILES)]
+    for page in (*config.layout.non_versioned_pages, latest):
+        root = tree / page
+        if root.is_dir():
+            candidates += sorted(root.rglob(f"*{MARKDOWN}"))
+
+    findings = []
+    for path in candidates:
+        if not path.is_file():
+            continue
+        dead = {m.group("page") for m in pattern.finditer(fsops.read_text(path))}
+        broken = sorted(page for page in dead if not resolves(page))
+        if broken:
+            findings.append(
+                Finding(
+                    "export-link",
+                    str(path.relative_to(tree)),
+                    f"links to {len(broken)} Markdown export(s) that do not exist, starting with "
+                    f"{base}{broken[0]}index.md; the link should point at the page instead",
                 )
             )
     return findings

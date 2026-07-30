@@ -34,9 +34,9 @@ from ..rewrite import (
     promote_root_sitemap,
     promote_search_index,
     prune_version_sitemap,
+    repair_export_links,
     rewrite_404,
     rewrite_feed,
-    rewrite_llms_file,
     rewrite_non_versioned_file,
     rewrite_promoted_markdown,
     rewrite_search_index,
@@ -134,6 +134,9 @@ def postprocess(
     else:
         _strip_promoted_pages(tree, version=version, config=config, report=report, result=result)
 
+    # Last of the rewrites, because it checks links against the tree as finally laid out.
+    _repair_export_links(tree, version=version, config=config, report=report, result=result)
+
     # Group 3. The redirects come after promotion, which moves this version's index.html to the
     # root and leaves the version root free for the generated page.
     report.step("install-redirects", "Write the generated redirect pages")
@@ -205,14 +208,10 @@ def _rewrite_promoted_pages(
     changed += int(fsops.rewrite_single(version_dir / "index.html", promote_html))
     changed += int(fsops.rewrite_single(version_dir / "index.md", promote_markdown, required=False))
 
+    # llms.txt and llms-full.txt are root-served Markdown files, so the promoted rules are
+    # exactly right for them.
     for name in LLMS_FILES:
-        changed += int(
-            fsops.rewrite_single(
-                version_dir / name,
-                lambda text: rewrite_llms_file(text, version=version, layout=layout),
-                required=False,
-            )
-        )
+        changed += int(fsops.rewrite_single(version_dir / name, promote_markdown, required=False))
 
     for feed in layout.feeds:
         changed += int(
@@ -348,6 +347,74 @@ def _promote_search_index(
 
     result.counts["promote-search-index"] = changed
     report.result("promote-search-index", files_changed=changed)
+
+
+def _repair_export_links(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """Point every link at a Markdown export that does not exist back at its HTML page.
+
+    Runs after promotion so the tree is in its final shape, which is what makes the check
+    trustworthy: the set of real exports is read off disk rather than inferred from the MkDocs
+    configuration. See :func:`ovweb.rewrite.markdown.repair_export_links` for why the links need
+    repairing at all.
+
+    Scope follows the rest of the pipeline — this version's exports, plus the root's when the root
+    is being rebuilt. Another version's folder is left as its own publish produced it.
+    """
+    report.step("repair-export-links", "Point links at the HTML page where no export exists")
+
+    # Which version `latest` names. On a latest publish that is the version being published,
+    # whether or not mike has materialised the symlink yet; otherwise the symlink is the authority.
+    alias = version if result.update_latest else _resolve_latest(tree, report)
+    if alias is None:
+        # Every promoted export links to `/latest/…`. Without knowing what that resolves to, those
+        # links cannot be checked, and guessing would strip `index.md` from all of them at once.
+        message = "could not resolve the 'latest' alias; export links were left as built"
+        result.warnings.append(message)
+        report.warn(message)
+        result.counts["repair-export-links"] = 0
+        return
+
+    exports = _published_exports(tree, alias=alias)
+
+    def repair(text: str) -> str:
+        return repair_export_links(text, exports=exports, layout=config.layout)
+
+    # Named explicitly rather than walking the tree root: a walk from there descends into every
+    # other version folder, and repairing those would reach outside this publish.
+    directories = [tree / version]
+    files = []
+    if result.update_latest:
+        directories += [tree / page for page in config.layout.non_versioned_pages]
+        files = [tree / f"index{MARKDOWN}", *(tree / name for name in LLMS_FILES)]
+
+    changed = 0
+    for directory in directories:
+        for path in directory.rglob(f"*{MARKDOWN}"):
+            changed += int(fsops.rewrite_file(path, repair))
+    for path in files:
+        changed += int(fsops.rewrite_single(path, repair, required=False))
+
+    result.counts["repair-export-links"] = changed
+    report.result("repair-export-links", files_changed=changed, exports=len(exports))
+
+
+def _published_exports(tree: Path, *, alias: str) -> frozenset[str]:
+    """Every Markdown export in the tree, as a site-root-relative path.
+
+    `latest` is a symlink to a version folder, so that folder's exports are reachable under both
+    names and both have to be in the set: a promoted export links to `/latest/docs/…`, never to
+    the version it happens to resolve to.
+    """
+    paths = {
+        path.relative_to(tree).as_posix()
+        for path in tree.rglob(f"*{MARKDOWN}")
+        if path.is_file() and not path.is_symlink()
+    }
+    return frozenset(
+        paths | {f"latest/{p[len(alias) + 1 :]}" for p in paths if p.startswith(f"{alias}/")}
+    )
 
 
 def _prune_version_sitemap(
