@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+<!-- Content -->
+{% block content %}
+  <h1>404 - Not found</h1>
+  <script>
+    // GitHub Pages has no server-side redirects, so this page is where every pattern-based
+    // redirect on the site is handled: GitHub serves it for any URL that does not match a
+    // file, and the rules below decide where the visitor should have landed.
+    //
+    // The rules are generated from `redirects.patterns` in publish-tool/ovweb.yaml — the
+    // same file ovweb publishes with — so there is no list here to keep in sync by hand. Add
+    // or change a redirect there, not in this template.
+    const patterns = [
+      {%- for pattern in config.extra.ovweb.redirect_patterns %}
+      { id: {{ pattern.id | tojson }}, match: {{ pattern.match | tojson }}, to: {{ pattern.to | tojson }} },
+      {%- endfor %}
+    ];
+
+    // First match wins, so the order in ovweb.yaml is behaviour.
+    const path = window.location.pathname;
+    for (const pattern of patterns) {
+      const expression = new RegExp(pattern.match);
+      if (expression.test(path)) {
+        window.location.replace(path.replace(expression, pattern.to) + window.location.search + window.location.hash);
+        break;
+      }
+    }
+  </script>
+{% endblock %}
