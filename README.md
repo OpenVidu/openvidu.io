@@ -369,9 +369,12 @@ folder, with relative links. `ovweb` then post-processes that output on `gh-page
    rules from steps 2 and 3 are applied again, in the shape Markdown links take.
 6. Move the non-versioned pages and root files out to the site root, so the global pages served
    from `/` always reflect the newest release, and copy the asset folders there.
-7. Copy the version's `sitemap.xml` to the root, rewrite it and regenerate its `.gz`, then delete
-   the version's own copy. The root sitemap is the only one published — `robots.txt` names it, and
-   it is a plain `urlset` rather than an index — so a per-version copy is advertised to nobody.
+7. Copy the version's `sitemap.xml` to the root and rewrite it for the root URL scheme, then prune
+   the root-served pages out of the version's own copy and regenerate both `.gz` files. Only the
+   root sitemap is for crawlers (`robots.txt` names it, and it is a plain `urlset` rather than an
+   index); the version's copy is fetched at runtime by the theme's version selector, which is what
+   keeps a reader on the same page when they switch version — see
+   [the two sitemaps](publish-tool/README.md#the-two-sitemaps-and-the-version-selector).
 8. Write the [generated redirect pages](publish-tool/README.md#redirects), so `/X.Y/` and
    `/latest/` land on the documentation.
 9. Splice the newest release notes into every other version folder, so any version shows the full

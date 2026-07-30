@@ -144,22 +144,50 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
 
 
 def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list[Finding]:
-    """A version folder must not carry a sitemap.
+    """A version folder must carry a correctly pruned sitemap.
 
-    Only the root sitemap is published — `robots.txt` names it, and it is a plain `urlset`
-    rather than an index. A per-version copy is advertised to nobody, so the publish deletes
-    it. Until every version has been through a publish once, this reports the leftovers.
+    Not for crawlers — nothing links to it and `robots.txt` does not name it — but because the
+    theme's version selector fetches it to decide whether the page the reader is on exists in the
+    version they picked. All three assertions below are things that silently turn the feature off
+    and leave every switch dropping the reader on the version root:
+
+    * the file is missing, so the fetch fails;
+    * the version-root entry is absent, so the longest common prefix of the remaining URLs is not
+      itself an entry, which the selector requires before it resolves anything;
+    * a root-served page is still listed, so a reader on `/pricing/` is sent to
+      `/<version>/pricing/`, which is a 404.
     """
-    del config
+    where = f"{version}/sitemap.xml"
+    path = tree / version / "sitemap.xml"
+    if not path.is_file():
+        return [
+            Finding(
+                "version-sitemap",
+                where,
+                "missing, so the version selector cannot tell whether the reader's page exists "
+                "in this version and will drop them on the version root; publish this version",
+            )
+        ]
+
+    text = fsops.read_text(path)
     findings = []
-    for name in ("sitemap.xml", "sitemap.xml.gz"):
-        if (tree / version / name).exists():
+    if f"<loc>{config.layout.base_url}/{version}/</loc>" not in text:
+        findings.append(
+            Finding(
+                "version-sitemap",
+                where,
+                "has no entry for the version root, which the version selector needs as the "
+                "common prefix of every URL before it will resolve one",
+            )
+        )
+    for page in config.layout.non_versioned_pages:
+        if f"/{version}/{page}/" in text:
             findings.append(
                 Finding(
                     "version-sitemap",
-                    f"{version}/{name}",
-                    "per-version sitemaps are no longer published; publish this version to "
-                    "remove it",
+                    where,
+                    f"lists /{version}/{page}/, which is served only from the site root; the "
+                    "version selector would send a reader there and get a 404",
                 )
             )
     return findings

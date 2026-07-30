@@ -326,7 +326,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see below.            |
 | `strip-non-versioned`  | past   | Delete the root-served pages from the version folder instead. Tolerant: an old version may never have built some.     |
 | `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
-| `remove-version-sitemap`| always | Delete this version's sitemap. Nothing referenced it: only the root sitemap is published. |
+| `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see below. |
 | `sync-releases`        | always | Splice the newest release notes across versions.                                                                      |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
@@ -463,6 +463,39 @@ Two deliberate differences from the HTML:
   deliberately archival link takes, as when release notes link back to the release before — is
   untouched either way.
 
+### The two sitemaps, and the version selector
+
+There are two, and only one of them is for search engines.
+
+| Sitemap | Read by | Contains |
+| --- | --- | --- |
+| `sitemap.xml` | crawlers — `robots.txt` names it, and it is a plain `urlset`, not an index | every URL the site serves, versioned pages as `/latest/…` |
+| `<X.Y>/sitemap.xml` | **the theme's version selector, at runtime** | that version's own pages, plus its version root; *not* the root-served pages |
+
+The per-version copy is what makes "switch version and keep reading the same page" work. When a
+reader picks another version, Material's `setupVersionSelector` fetches `sitemap.xml` under the
+selected version, strips the current version prefix off the path they are on, and looks the
+remainder up. Found → they land on the same page in the new version. Not found, or the fetch
+failed → they are dropped on the version root, which our generated redirect then sends to the docs
+index.
+
+Two properties of that file are therefore load-bearing, and **both fail silently**:
+
+- **The version-root entry must be present.** The selector takes the longest common prefix of
+  every URL in the sitemap and requires that prefix to itself be an entry before it resolves
+  anything. With only page entries left, the prefix is still `https://openvidu.io/<X.Y>/` but is
+  no longer in the file, and every switch falls back to the version root.
+- **The root-served pages must be pruned.** mike builds the whole site into the version folder, so
+  the sitemap it writes lists `<X.Y>/pricing/` and friends — URLs that never resolve, because
+  those pages are moved to the root. The selector is shown on root pages too, so a reader on
+  `/pricing/` picking 3.6 would be sent to `/3.6/pricing/`, a 404. Pruned, they fall back to the
+  version root, which is right: that page has no per-version counterpart.
+
+This is documented at length because the file was once deleted as unreferenced. Nothing in the
+built site *links* to it; the reference is a `fetch()` in the theme's JavaScript, which no
+link-checking or grepping finds. `ovweb verify` now asserts all three conditions, and
+[`tests/unit/test_rewrite_sitemap.py`](tests/unit/test_rewrite_sitemap.py) pins them.
+
 ### The two search indexes
 
 There are two, and they say different things, because **a page loads the index that sits beside
@@ -534,7 +567,6 @@ by construction. The expected differences are:
 | Difference                                                    | Why                                                                                    |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `<X.Y>/index.html`, `<X.Y>/docs/index.html`, `<X.Y>/docs/getting-started/index.html` | The generated redirects replace the hand-written stub and add two the shell could not express. |
-| `<X.Y>/sitemap.xml`, `<X.Y>/sitemap.xml.gz`                   | The published version's sitemap is removed rather than pruned.                           |
 | `search/search_index.json`                                    | The root index points versioned hits at `/latest/`.                                      |
 | `<X.Y>/{docs,meet}/**/*.html`                                 | The RSS `rel=alternate` links are made root-absolute, where the feeds are actually published. |
 | `<X.Y>/{docs,meet}/**/*.md`                                   | A versioned export no longer links to a root-served page under the version — a hard 404. |
@@ -550,25 +582,21 @@ in CI because it needs a full build (see
 
 `ovweb verify` asserts the invariants of a published tree: every version folder has a redirect at
 its root with a relative target, no promoted page claims a versioned URL as its own, no version
-folder still carries a sitemap, every search location is absolute, nothing served from the root
-pins the version `latest` points at, no versioned export links to a root-served page under its
-version, and `versions.json` agrees with the folders on disk.
+folder carries a correctly pruned sitemap, every search location is absolute, nothing served from
+the root pins the version `latest` points at, no versioned export links to a root-served page
+under its version, and `versions.json` agrees with the folders on disk.
 
 A tree that has just been post-processed verifies clean, which is asserted by
 [`test_verify.py`](tests/unit/test_verify.py). That makes `verify` a real post-publish signal:
 anything it reports right after a publish is something the pipeline failed to do.
 
-The sitemap check reports any version folder that still carries a sitemap. A publish only removes
-its own, so versions published before that change keep theirs until they are next published — the
-findings are the to-do list. A one-off cleanup clears them all without rebuilding anything:
-
-```bash
-git worktree add /tmp/ghp gh-pages
-find /tmp/ghp -maxdepth 2 -regextype posix-extended \
-  -regex '.*/[0-9]+\.[0-9]+/sitemap\.xml(\.gz)?' -delete
-git -C /tmp/ghp commit -am "Remove the per-version sitemaps" && git -C /tmp/ghp push origin gh-pages
-git worktree remove /tmp/ghp
-```
+The sitemap check is the one worth understanding, because it guards a feature that fails silently.
+It asserts three things about `<X.Y>/sitemap.xml` — that it exists, that it has the version-root
+entry, and that it lists no root-served page — each of which turns the version selector's
+"keep the reader on the same page" behaviour off on its own. `rewrite/sitemap.py` explains why.
+A publish only fixes its own version, so the findings for the others are the to-do list; the fix
+is to publish each version, or to restore the sitemaps from history if they were lost without a
+content change.
 
 ---
 

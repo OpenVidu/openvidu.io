@@ -33,6 +33,7 @@ from ..report import Reporter
 from ..rewrite import (
     promote_root_sitemap,
     promote_search_index,
+    prune_version_sitemap,
     rewrite_404,
     rewrite_feed,
     rewrite_llms_file,
@@ -142,7 +143,7 @@ def postprocess(
         report.detail(f"{redirect.path} -> {redirect.to} [{redirect.rule_id}]")
     report.result("install-redirects", written=len(result.redirects_written))
 
-    _remove_version_sitemap(tree, version=version, report=report, result=result)
+    _prune_version_sitemap(tree, version=version, config=config, report=report, result=result)
     _sync_releases(tree, version=version, config=config, report=report, result=result)
 
     return result
@@ -349,30 +350,29 @@ def _promote_search_index(
     report.result("promote-search-index", files_changed=changed)
 
 
-def _remove_version_sitemap(
-    tree: Path, *, version: str, report: Reporter, result: PostprocessResult
+def _prune_version_sitemap(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
 ) -> None:
-    """Delete this version's sitemap from the published tree.
+    """Drop the root-served pages from this version's sitemap and regenerate its `.gz`.
 
-    The shell pruned the root-served pages out of each version's sitemap so it would not
-    advertise URLs that had moved to the root. But nothing ever consumed those files:
-    `robots.txt` names only the root sitemap, that sitemap is a plain `urlset` rather than an
-    index, and no page links to a version's copy. Maintaining them was work in service of
-    nothing, so they are removed instead.
-
-    Only the version being published is touched, in keeping with the rest of the pipeline: a
-    publish's blast radius is its own folder, plus the release-notes splice. Versions published
-    before this change keep their sitemap until they are next published; `ovweb verify` reports
-    them, and a one-off cleanup can remove them without a rebuild.
+    This file is what makes the version selector keep a reader on the same page across a version
+    switch: the theme fetches it at runtime and resolves the current path against it. See
+    `rewrite/sitemap.py` for the two properties that have to hold, and for the incident that
+    established why it cannot simply be deleted.
     """
-    report.step("remove-version-sitemap", "Remove this version's sitemap")
+    report.step("prune-version-sitemap", "Drop the root-served pages from this version's sitemap")
 
-    removed = 0
-    for name in (SITEMAP, f"{SITEMAP}.gz"):
-        removed += fsops.remove(tree / version / name, required=False)
+    target = tree / version / SITEMAP
+    changed = int(
+        fsops.rewrite_single(
+            target,
+            lambda text: prune_version_sitemap(text, version=version, layout=config.layout),
+        )
+    )
+    fsops.write_gzip(target)
 
-    result.counts["remove-version-sitemap"] = removed
-    report.result("remove-version-sitemap", removed=removed)
+    result.counts["prune-version-sitemap"] = changed
+    report.result("prune-version-sitemap", files_changed=changed)
 
 
 def _sync_releases(

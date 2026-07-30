@@ -106,10 +106,42 @@ def test_reports_a_version_root_that_is_not_a_generated_redirect(published, conf
     assert findings_by_check(published, config)["version-root"] == [f"{VERSION}/index.html"]
 
 
-def test_reports_a_leftover_version_sitemap(published, config):
-    (published / VERSION / "sitemap.xml").write_text("<urlset/>", encoding="utf-8")
+# -- the version selector ----------------------------------------------------------------
+#
+# Each of these silently turns off "switch version, keep reading the same page" and drops the
+# reader on the version root instead. The middle one is how the feature was lost once already.
 
-    assert findings_by_check(published, config)["version-sitemap"] == [f"{VERSION}/sitemap.xml"]
+
+def test_reports_a_missing_version_sitemap(published, config):
+    (published / VERSION / "sitemap.xml").unlink()
+
+    findings = [f for f in verify(published, config=config) if f.check == "version-sitemap"]
+    assert [f.where for f in findings] == [f"{VERSION}/sitemap.xml"]
+    assert "version selector" in findings[0].detail
+
+
+def test_reports_a_version_sitemap_without_the_version_root_entry(published, config):
+    """The selector needs it as the common prefix of every URL before it will resolve one."""
+    (published / VERSION / "sitemap.xml").write_text(
+        f"<urlset>\n  <url><loc>https://openvidu.io/{VERSION}/docs/</loc></url>\n</urlset>\n",
+        encoding="utf-8",
+    )
+
+    findings = [f for f in verify(published, config=config) if f.check == "version-sitemap"]
+    assert len(findings) == 1
+    assert "common prefix" in findings[0].detail
+
+
+def test_reports_a_version_sitemap_still_listing_a_root_served_page(published, config):
+    (published / VERSION / "sitemap.xml").write_text(
+        f"<urlset>\n  <url><loc>https://openvidu.io/{VERSION}/</loc></url>\n"
+        f"  <url><loc>https://openvidu.io/{VERSION}/pricing/</loc></url>\n</urlset>\n",
+        encoding="utf-8",
+    )
+
+    findings = [f for f in verify(published, config=config) if f.check == "version-sitemap"]
+    assert len(findings) == 1
+    assert "404" in findings[0].detail
 
 
 def test_reports_a_root_search_index_that_pins_the_version(published, config):

@@ -305,15 +305,18 @@ def test_promotes_the_root_sitemap(latest_tree, config, report):
     assert f"/{VERSION}/" not in root
 
 
-def test_removes_the_per_version_sitemap(latest_tree, config, report):
-    """Nothing references them: robots.txt names only the root sitemap, which is a plain
-    urlset rather than an index."""
-    assert (latest_tree / VERSION / "sitemap.xml").exists()
-
+def test_prunes_the_per_version_sitemap(latest_tree, config, report):
+    """It stays, because the version selector fetches it to keep a reader on the same page across
+    a version switch — but the pages that moved to the root have to go."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
-    assert not (latest_tree / VERSION / "sitemap.xml").exists()
-    assert not (latest_tree / VERSION / "sitemap.xml.gz").exists()
+    sitemap = (latest_tree / VERSION / "sitemap.xml").read_text()
+    assert f"<loc>https://openvidu.io/{VERSION}/</loc>" in sitemap
+    assert f"/{VERSION}/docs/" in sitemap
+    assert "/pricing/" not in sitemap
+    # The .gz is regenerated from the pruned content, not left stale.
+    gz = (latest_tree / VERSION / "sitemap.xml.gz").read_bytes()
+    assert gzip.decompress(gz).decode() == sitemap
 
 
 def test_gzips_the_root_sitemap_from_its_final_content(latest_tree, config, report):
@@ -416,14 +419,13 @@ def test_latest_version_pushes_its_release_notes_out(mixed_tree, config, report)
     assert f'<a class="chrome" href="/{OLD_VERSION}/assets/logo.png">{OLD_VERSION}</a>' in page
 
 
-def test_removes_only_the_published_version_sitemap(mixed_tree, config, report):
-    """A publish's blast radius stays its own folder: other versions keep their sitemap until
-    they are next published."""
+def test_prunes_only_the_published_version_sitemap(mixed_tree, config, report):
+    """A publish's blast radius stays its own folder: another version's sitemap is left as its
+    own last publish produced it."""
     postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
 
-    assert not (mixed_tree / OLD_VERSION / "sitemap.xml").exists()
-    assert not (mixed_tree / OLD_VERSION / "sitemap.xml.gz").exists()
-    assert (mixed_tree / VERSION / "sitemap.xml").exists()
+    assert "/pricing/" not in (mixed_tree / OLD_VERSION / "sitemap.xml").read_text()
+    assert f"/{VERSION}/pricing/" in (mixed_tree / VERSION / "sitemap.xml").read_text()
 
 
 def test_only_the_published_version_gets_its_links_rewritten(mixed_tree, config, report):

@@ -199,10 +199,11 @@ def expectations(version: str) -> list[Expected]:
             "accident",
             lambda path: path.startswith((".cache", "site/")),
         ),
-        Expected(
-            "the published version's sitemap is removed rather than pruned: nothing referenced it",
-            lambda path: path in (f"{version}/sitemap.xml", f"{version}/sitemap.xml.gz"),
-        ),
+        # No expectation for <X.Y>/sitemap.xml: the pruning is back, so it must match the shell's
+        # output byte for byte. It was briefly deleted instead, which silently turned off the
+        # version selector's "keep the reader on the same page" behaviour — the gate could not
+        # catch that, because an expectation had been written for the deletion. Gzip members are
+        # compared decompressed, so the deterministic .gz header is invisible here.
         Expected(
             "the root search index sends a hit on versioned documentation to /latest/ instead of "
             "pinning the version it was copied from",
