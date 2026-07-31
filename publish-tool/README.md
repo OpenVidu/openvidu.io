@@ -550,7 +550,11 @@ Two deliberate behaviours:
 
 - **A generated page carries no `<lastmod>` at all.** The blog's archive, category and pagination
   views have no source file, so inventing a date for them would be the same lie in miniature; the
-  spec makes the field optional per URL.
+  spec makes the field optional per URL. They do, however, get a **title and description** from the
+  same hook — having no frontmatter left all twelve of them serving `site_description`, and
+  `/blog/page/2/` sharing a byte-identical `<title>` with `/blog/`. Both are derived from the view
+  itself (its own heading, the number of posts it lists, its page number), so a month or category
+  that does not exist yet is described correctly the first time it appears.
 - **Anything that stops git answering falls back to the build date, at INFO level.** A shallow
   clone is the important one — `git log` still succeeds there but reports the fetched commit for
   every path, which is silently wrong rather than absent, so it is detected and skipped.
