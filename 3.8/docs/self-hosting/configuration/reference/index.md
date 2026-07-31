@@ -27,7 +27,7 @@ This file defines global configuration parameters used by other services, such a
 | **`DASHBOARD_ADMIN_PASSWORD`**               | Admin password for OpenVidu Dashboard                                                                                                                                                                         |
 | **`GRAFANA_ADMIN_USERNAME`**                 | Admin username for Grafana                                                                                                                                                                                    |
 | **`GRAFANA_ADMIN_PASSWORD`**                 | Admin password for Grafana                                                                                                                                                                                    |
-| **`OPENVIDU_PRO_LICENSE`**                   | PRO OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/3.8/account/index.md).                                                                                                   |
+| **`OPENVIDU_PRO_LICENSE`**                   | PRO OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/account/).                                                                                                   |
 | **`OPENVIDU_RTC_ENGINE`**                    | PRO The WebRTC engine to use. Can be `pion` or `mediasoup`.                                                                                                                                                   |
 | **`MEET_BASE_PATH`**                         | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
@@ -85,13 +85,13 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 
 Info
 
-OpenVidu V2 Compatibility is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu V2 Compatibility is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2**](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/) , adding the prefix `V2COMPAT_` to the parameter name.
 
 | Parameter                                                     | Description                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`OPENVIDU_PRO_LICENSE`**                                    | OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/3.8/account/index.md).                                                                                                                                                     |
+| **`OPENVIDU_PRO_LICENSE`**                                    | OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/account/).                                                                                                                                                     |
 | **`V2COMPAT_OPENVIDU_SHIM_PORT`**                             | Port where the OpenVidu V2 Compatibility will be running. Defaults to `4443`.                                                                                                                                                                               |
 | **`V2COMPAT_OPENVIDU_SHIM_URL`**                              | Public URL for OpenVidu v2 applications, used by external clients to connect to the OpenVidu V2 Compatibility Server.                                                                                                                                       |
 | **`V2COMPAT_OPENVIDU_SECRET`**                                | OpenVidu Secret used by OpenVidu v2 applications to connect to the OpenVidu deployment.                                                                                                                                                                     |
@@ -149,7 +149,7 @@ openvidu:
 
 Info
 
-Before deploying OpenVidu PRO, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+Before deploying OpenVidu PRO, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ```yaml
 openvidu:
@@ -168,7 +168,7 @@ openvidu:
         log_tags: [info, ice, rtp, rtcp, message] # (11)
 ```
 
-1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](https://openvidu.io/3.8/account/index.md).
+1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](https://openvidu.io/account/).
 1. The cluster ID for the OpenVidu deployment. It is configured by default by OpenVidu Installer with the domain name of the deployment.
 1. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 1. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
