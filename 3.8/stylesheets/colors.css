@@ -1,0 +1,146 @@
+:root {
+  --md-primary-fg-color: #4d4d4d;
+  --md-primary-fg-color--light: #00c8f7;
+  --md-primary-fg-color--dark: #0088aa;
+  --md-primary-bg-color: #fff;
+  --md-primary-bg-color--dark: #0088aa;
+  --md-accent-fg-color: #0088aa;
+  --md-accent-fg-color--transparent: #818181;
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: #ffffff;
+  --md-hue: 190deg;
+  color-scheme: dark;
+  --plyr-video-background: transparent;
+  --top-home-section-color: linear-gradient(
+    0deg,
+    rgb(30, 39, 41) 0%,
+    rgb(30, 39, 41) 39%,
+    #4d4d4d 100%
+  );
+
+  --slate-md-typeset-color: hsla(var(--md-hue), 15%, 90%, 0.82);
+  --slate-md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
+  --slate-md-default-fg-color--light: hsla(var(--md-hue), 15%, 90%, 0.56);
+
+  --gradient: conic-gradient(
+    from 60deg at 50% 50%,
+    rgba(0, 136, 170, 1) 0%,
+    rgba(0, 136, 170, 1) 13%,
+    rgba(0, 136, 170, 1) 61%,
+    rgba(0, 136, 170, 1) 99%
+  );
+}
+
+/* Custom colors for dark mode */
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: var(--md-primary-fg-color--light);
+  --card-glow-intensity: 0.6;
+
+  video[src$="#only-light"] {
+    display: none;
+  }
+}
+
+/* Custom colors for light mode */
+[data-md-color-scheme="default"] {
+
+  video[src$="#only-dark"] {
+    display: none;
+  }
+
+  --md-typeset-a-color: var(--md-primary-fg-color--dark);
+  --card-glow-intensity: 0.25;
+  /* Light-mode hero gradient: the TOP stop stays at the nav-bar gray
+     (--md-primary-fg-color: #4d4d4d) so it blends seamlessly with the header
+     (no hard boundary), and it lightens toward the bottom — a lighter version
+     of the dark-mode gradient. Kept dark enough for the light slogan and
+     description text to stay readable (the hero stays dark on purpose). */
+  --top-home-section-color: linear-gradient(
+    0deg,
+    rgb(80, 90, 94) 0%,
+    rgb(80, 90, 94) 39%,
+    #4d4d4d 100%
+  );
+  .md-button--primary {
+    background-color: var(--md-accent-fg-color--transparent);
+    border-color: var(--md-accent-fg-color--transparent);
+  }
+  hr {
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(202, 202, 202) 25%,
+      rgba(202, 202, 202) 75%,
+      transparent 100%
+    );
+  }
+  svg.home-icon {
+    filter: brightness(33%);
+  }
+  #sign-in-button {
+    color: var(--slate-md-typeset-color);
+  }
+  #sign-in-button:hover {
+    color: #ffffff;
+    background-color: var(--slate-md-typeset-color);
+    border-color: var(--slate-md-typeset-color);
+  }
+  figure img.dark-img {
+    background-color: var(--slate-md-default-bg-color);
+  }
+  /* Fully opaque white for the hero text so it stays maximally readable over
+     the light-mode gradient (WCAG AAA, >=7:1, even at the lightest bottom). */
+  .slogan {
+    color: #ffffff;
+  }
+  .home-description {
+    color: #ffffff;
+  }
+  .top-home-section .home-under-cta,
+  .top-home-section .home-under-cta a,
+  .top-home-section .home-trust-line {
+    color: #ffffff;
+  }
+  a#account-btn {
+    color: var(--slate-md-typeset-color);
+  }
+  .price-cell {
+    color: black;
+  }
+  .ai-provider-icon {
+    filter: brightness(0.4);
+  }
+}
+
+.red-color {
+  color: #ff5252;
+}
+
+.green-color {
+  color: #2b9b46;
+}
+
+/* Audience-routed CTA buttons (hero and end of features grid): each product's
+   identity color (same as its product card's Get Started button) in both
+   themes, so green=Meet / blue=Platform routing is consistent page-wide. */
+.md-typeset .home-buttons .md-button.home-meet-button {
+  background-color: #06d362;
+  border-color: #06d362;
+  color: #ffffff;
+}
+.md-typeset .home-buttons .md-button.home-meet-button:hover {
+  background-color: #05b855;
+  border-color: #05b855;
+  color: #ffffff;
+}
+
+.md-typeset .home-buttons .md-button.home-platform-button {
+  background-color: #0088aa;
+  border-color: #0088aa;
+  color: #ffffff;
+}
+.md-typeset .home-buttons .md-button.home-platform-button:hover {
+  background-color: #007394;
+  border-color: #007394;
+  color: #ffffff;
+}
