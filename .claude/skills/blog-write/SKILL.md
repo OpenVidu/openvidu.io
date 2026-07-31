@@ -22,18 +22,11 @@ If no outline exists yet, use the `blog-plan` skill first.
     - post file: `docs/blog/posts/YYYY/MM/<slug>.md`
     - asset folder on disk: `docs/assets/images/blog/YYYY/MM/<slug>/`
     - asset references in the post: `/assets/images/blog/YYYY/MM/<slug>/<file>`
-    - `llmstxt` entry in `mkdocs.yml` (added **from the beginning**, see below): `- blog/posts/YYYY/MM/<slug>.md: <description>`
     - frontmatter: `date:` holds a **temporary real date — the day the draft was created** (a literal placeholder would abort the build). It only affects the preview URL and is replaced at publish time.
     - There is no build-level guard against publishing a draft early: a merged draft would go live at its temporary date. The guard is the workflow — **each draft lives on its own branch** and is only merged to `main` when ready.
-- **Publishing a draft:** (1) set the frontmatter `date` to the actual publish date (today), (2) replace the string `YYYY/MM/` with the real `<year>/<month>/` of that date everywhere it appears (post body asset refs + the `llmstxt` entry in `mkdocs.yml`), (3) `git mv` the post to `docs/blog/posts/YYYY/MM/<slug>.md` and the asset folder to `docs/assets/images/blog/YYYY/MM/<slug>/`. Nothing else inside the post changes — links are root-absolute and the placeholder was designed to be a pure string replacement.
+- **Publishing a draft:** (1) set the frontmatter `date` to the actual publish date (today), (2) replace the string `YYYY/MM/` with the real `<year>/<month>/` of that date everywhere it appears in the post body's asset refs, (3) `git mv` the post to `docs/blog/posts/YYYY/MM/<slug>.md` and the asset folder to `docs/assets/images/blog/YYYY/MM/<slug>/`. Nothing else inside the post changes — links are root-absolute and the placeholder was designed to be a pure string replacement.
 
-**Register the post in `mkdocs.yml` from the beginning** (with the placeholder path while a draft): add one line for it to the `llmstxt` plugin's `sections`, under the `OpenVidu:` group, alongside the other `blog/posts/...` entries:
-
-```yaml
-- blog/posts/YYYY/MM/<slug>.md: <one-line description of the post>
-```
-
-Every post is listed **individually** there (not via a glob), so a new post that isn't added won't get its own entry in `llms.txt`.
+**No `mkdocs.yml` change is needed for a new post.** The `llmstxt` plugin's `Blog:` section is the glob `blog/posts/*/*/*.md`, which matches the placeholder path too, and the entry's description comes from the post's own `description` frontmatter. A post therefore appears in `llms.txt`, and gets its Markdown export, as soon as the file exists — but the build **fails** if it has no `description`.
 
 **Before drafting, read one or two recent posts** in `docs/blog/posts/` to match voice, depth, and formatting.
 
