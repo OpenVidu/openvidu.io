@@ -8,8 +8,7 @@ nav:
   - Home: index.md
   - OpenVidu Meet:
       - meet/index.md
-      - Getting started:
-          - meet/getting-started/index.md
+      - Getting started: meet/getting-started.md
       - Features:
           - Overview: meet/features/overview.md
           - Rooms:
@@ -497,7 +496,7 @@ plugins:
 
         OpenVidu Meet:
         - meet/index.md
-        - meet/getting-started/index.md
+        - meet/getting-started.md
         - meet/releases.md
 
         OpenVidu Meet features:

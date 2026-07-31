@@ -11,7 +11,7 @@ tags:
 
 Get started quickly with OpenVidu Meet on your local machine:
 
-[Run OpenVidu Meet locally](../deployment/local.md){ .md-button .md-button--primary }
+[Run OpenVidu Meet locally](deployment/local.md){ .md-button .md-button--primary }
 
 ## A quick tour of OpenVidu Meet
 
@@ -19,7 +19,7 @@ Here’s a simple overview of a typical video call workflow using OpenVidu Meet:
 
 ### 1. Log in to OpenVidu Meet
 
-Access OpenVidu Meet with your user credentials. If no users exist yet, sign in using the root administrator credentials (learn where to get them [here](../features/users/overview.md#root-administrator)).
+Access OpenVidu Meet with your user credentials. If no users exist yet, sign in using the root administrator credentials (learn where to get them [here](features/users/overview.md#root-administrator)).
 
 <a class="glightbox" href="/assets/videos/meet/users/overview/login-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/users/overview/login-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 <a class="glightbox" href="/assets/videos/meet/users/overview/login-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/users/overview/login-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
@@ -56,8 +56,8 @@ Easily access, review, and share your recorded meeting with your team or audienc
 
 Integrate a complete, fully-featured video call solution into your web or mobile app with just a few lines of code using <span class="no-break">**OpenVidu Meet Embedded**</span>. Customize the design, colors, and layout to match your brand seamlessly.
 
-[Embed OpenVidu Meet into your app](../embedded/intro.md){ .md-button .md-button--primary }
+[Embed OpenVidu Meet into your app](embedded/intro.md){ .md-button .md-button--primary }
 
 ## OpenVidu Meet vs OpenVidu Platform
 
-If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](../../docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](../../openvidu-meet-vs-openvidu-platform.md).
+If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](../docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](../openvidu-meet-vs-openvidu-platform.md).

@@ -61,4 +61,4 @@ OpenVidu Meet is organized around a few core concepts. Understanding how they re
 
 !!! info "New to OpenVidu Meet?"
 
-    If you haven't deployed it yet, start with the [Getting started](../getting-started/index.md) guide and try it [locally](../deployment/local.md).
+    If you haven't deployed it yet, start with the [Getting started](../getting-started.md) guide and try it [locally](../deployment/local.md).
