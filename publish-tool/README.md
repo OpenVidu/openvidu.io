@@ -444,6 +444,12 @@ Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice
 `index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports and
 and they are the site's AI-facing channel.
 
+The description beside each `llms.txt` entry is **not** written in `mkdocs.yml`: the
+`on_page_content` half of [`mkdocs_hook.py`](mkdocs_hook.py) replaces it with the page's own
+`description` frontmatter. That is what lets a `sections` entry be a glob — the plugin's own
+behaviour is to give every page a glob matches the *same* description — and it fails the build
+when a listed page has no description at all.
+
 They need their own rewrites for one reason: **the plugin makes every link absolute**, resolved
 against the build's `site_url` — which mike makes versioned. So an export comes out of the build
 with every internal link pinned to the version that produced it, and the HTML patterns cannot

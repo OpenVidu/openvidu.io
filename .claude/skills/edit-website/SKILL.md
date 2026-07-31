@@ -28,8 +28,8 @@ This repo is the source of https://openvidu.io/, built with **MkDocs Material** 
 
 ## Adding a new page (README: "Adding a new page")
 
-1. Create the `.md` file under the right `docs/` folder, with frontmatter: `description` (unique, max 160 chars) and `title` (only required if the `nav` title is missing or not unique).
-2. In `mkdocs.yml`: add it to `nav`, **and** to the `llmstxt` plugin `sections` (under `OpenVidu` for non-versioned pages, `OpenVidu Meet`/`OpenVidu Platform` for versioned ones), copying the page description.
+1. Create the `.md` file under the right `docs/` folder. Both frontmatter keys are required on every page: `title` (≤ 57 chars — it is the `<title>`, and Material appends `" - OpenVidu"`) and `description` (a sentence, 100–160 chars, ending in a full stop). Both must be unique site-wide, and both are double-quoted.
+2. In `mkdocs.yml`: add it to `nav`, **and** to the `llmstxt` plugin `sections` — the path alone, with **no** description. `publish-tool/mkdocs_hook.py` takes it from the page's frontmatter, and the build fails if the page has none. Globs are fine and each matched page still describes itself.
 3. If the page starts a new non-versioned or versioned area, add it to `non_versioned_pages` or `versioned_pages` in `publish-tool/ovweb.yaml`.
 
 ## Link rules (strict — the build is zero-warning and CI runs `mkdocs build --strict`)
