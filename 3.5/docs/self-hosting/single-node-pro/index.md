@@ -8,25 +8,25 @@ Scalability and fault tolerance require a multi-node setup. If you need them, co
 
 Install OpenVidu Single Node PRO in your preferred environment:
 
-- [**On-premises installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/install/index.md): set up on your own servers.
-- [**AWS installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/aws/install/index.md): deploy to Amazon Web Services.
-- [**Azure installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/azure/install/index.md): deploy to Microsoft Azure.
-- [**Google Cloud Platform installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/install/index.md): deploy to Google Cloud Platform.
+- [**On-premises installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/install/): set up on your own servers.
+- [**AWS installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/aws/install/): deploy to Amazon Web Services.
+- [**Azure installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/azure/install/): deploy to Microsoft Azure.
+- [**Google Cloud Platform installation**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/install/): deploy to Google Cloud Platform.
 
 Once your deployment is complete, refer to the following sections for configuration and management:
 
-- [**On-premises: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/admin/index.md)
-- [**AWS: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/aws/admin/index.md)
-- [**Azure: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/azure/admin/index.md)
-- [**Google Cloud Platform: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/admin/index.md)
+- [**On-premises: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/admin/)
+- [**AWS: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/aws/admin/)
+- [**Azure: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/azure/admin/)
+- [**Google Cloud Platform: configuration and administration**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/admin/)
 
 If you want to upgrade your OpenVidu Single Node PRO installation, refer to this section:
 
-- [**On-premises: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/upgrade/index.md)
-- [**AWS: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/aws/upgrade/index.md)
-- [**Azure: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/azure/upgrade/index.md)
-- [**Google Cloud Platform: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/upgrade/index.md)
+- [**On-premises: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/upgrade/)
+- [**AWS: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/aws/upgrade/)
+- [**Azure: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/azure/upgrade/)
+- [**Google Cloud Platform: upgrade OpenVidu Single Node PRO**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/upgrade/)
 
 We also offer installation tutorials for other Cloud Providers:
 
-- [**Oracle Cloud Infrastructure**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.md)
+- [**Oracle Cloud Infrastructure**](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/oracle/install-tutorial/)

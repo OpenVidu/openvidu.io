@@ -16,7 +16,7 @@ These are the currently available OpenVidu agents:
 
   Generate live captions for your users' speech with great accuracy and display the results in your frontend.
 
-  [Go to Live Captions](https://openvidu.io/3.5/docs/ai/live-captions/index.md)
+  [Go to Live Captions](https://openvidu.io/3.5/docs/ai/live-captions/)
 
 - **Transcription**
 

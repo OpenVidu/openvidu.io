@@ -4,7 +4,7 @@ The Speech Processing agent provides all the AI services related to transcribing
 
 ## List of provided AI services
 
-- [**Live Captions**](https://openvidu.io/3.5/docs/ai/live-captions/index.md): transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.
+- [**Live Captions**](https://openvidu.io/3.5/docs/ai/live-captions/): transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.
 
 ## Enable the agent and configure AI services
 
