@@ -1,6 +1,6 @@
 ---
-title: "Pricing: free COMMUNITY and pay-per-core PRO"
-description: "OpenVidu pricing: the COMMUNITY edition is free forever, PRO costs from $0.0006 per core per minute, and you only pay for the cores you run."
+title: "Pricing: Free COMMUNITY & Pay-Per-Core PRO"
+description: "OpenVidu pricing: COMMUNITY edition free forever, PRO from $0.0006 per core per minute. Transparent, pay only for what you use."
 # Structured Q&A metadata for this page's FAQ sections. It feeds the JSON-LD
 # (schema.org FAQPage) emitted by overrides/partials/json-ld.html. Keep in
 # sync with the page content below: 'anchor' must match the heading id, and

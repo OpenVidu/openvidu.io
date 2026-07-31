@@ -1,6 +1,6 @@
 ---
-title: "OpenVidu Meet: self-hosted video conferencing"
-description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your own servers in minutes, record meetings and embed video calls in any app."
+title: "OpenVidu Meet: Self-Hosted Video Conferencing"
+description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your servers in minutes, record meetings and embed video calls in any app."
 tags:
   - setupwowjs
   - setupcardglow

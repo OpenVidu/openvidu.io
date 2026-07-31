@@ -1,5 +1,5 @@
 ---
-title: "OpenVidu Platform: self-hosted WebRTC SDKs"
+title: "OpenVidu Platform: Self-Hosted WebRTC SDKs"
 description: "Build real-time video, audio and AI applications on infrastructure you control, with LiveKit-compatible SDKs and a self-hosted media server."
 ---
 
