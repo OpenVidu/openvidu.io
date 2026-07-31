@@ -5,6 +5,8 @@ tags:
     - setupcustomgallery
 ---
 
+# How OpenVidu compares to other solutions
+
 This section compares OpenVidu to other videoconference/streaming solutions, to better understand what it is, what it is not, and what advantages and disadvantages it may have over them.
 
 !!! tip "Comparing OpenVidu Meet and OpenVidu Platform instead?"

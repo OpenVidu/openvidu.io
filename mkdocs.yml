@@ -120,10 +120,10 @@ nav:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
               - docs/self-hosting/production-ready/index.md
-              - Performant: docs/self-hosting/production-ready/performance.md
-              - Scalable: docs/self-hosting/production-ready/scalability.md
-              - Fault Tolerant: docs/self-hosting/production-ready/fault-tolerance.md
-              - Observable:
+              - Performance: docs/self-hosting/production-ready/performance.md
+              - Scalability: docs/self-hosting/production-ready/scalability.md
+              - Fault tolerance: docs/self-hosting/production-ready/fault-tolerance.md
+              - Observability:
                   - docs/self-hosting/production-ready/observability/index.md
                   - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
                   - Grafana Stack: docs/self-hosting/production-ready/observability/grafana-stack.md

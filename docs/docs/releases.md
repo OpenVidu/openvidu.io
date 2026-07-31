@@ -5,6 +5,8 @@ tags:
   - scrolltoversion
 ---
 
+# OpenVidu Platform release notes
+
 ## 3.8.0
 
 !!! info "For the Release Notes of OpenVidu Meet 3.8.0, please visit here: [OpenVidu Meet 3.8.0 :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.8/meet/releases/#380){:target="_blank" .meet-link-color}"
