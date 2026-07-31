@@ -184,7 +184,8 @@ Four consequences worth keeping in mind:
 
 GitHub Pages has no server-side redirects, so every redirect on the site is client-side. They
 are declared in [`ovweb.yaml`](ovweb.yaml) as data — a `from` and a `to`, optionally scoped to a
-range of versions — and split into two kinds by what they can be.
+range of versions — in three kinds, separated by what a rule can be: a **known path**, a **shape**
+of path, and one **mirror** rule that expands into a page per published URL.
 
 ### `redirects.files` — a known path
 
@@ -248,8 +249,50 @@ file. Two families ship today:
   `/3.0.0-beta2/…`) and are now grouped by minor, so a first segment with a third component is a
   legacy URL and goes to the minor folder.
 - **A versioned section without a version.** `/docs/self-hosting/` → `/latest/docs/self-hosting/`.
+  Every *published* page of that shape now also has a real redirect page — see the mirror below —
+  so what this pattern is left to rescue is the remainder: pages that have since been removed, the
+  exported `reference-docs/` pages, and typos.
 
 Patterns are tried in order and the first match wins, so the order in `ovweb.yaml` is behaviour.
+
+### `redirects.mirror` — every page at its unversioned URL
+
+The 404 router rescues **people**, not crawlers. GitHub serves `404.html` with a 404 status, and a
+crawler acts on the status before it runs any JavaScript, so an inbound link to `/docs/…` is
+discarded however well the router works. That was measurable: `/docs/` and `/meet/` — the two URLs
+a human types — answered `HTTP/2 404`, and so did
+`https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider`, a URL **OpenVidu
+itself ships** in a comment in the speech agent's default configuration, where every user reads it
+in their own deployment.
+
+GitHub Pages has no server-side redirect of any kind, so a 200 page carrying a zero-delay meta
+refresh is the only redirect a crawler can be handed. The mirror writes one, for every page:
+
+```yaml
+mirror:
+  for_each: versioned_pages       # /docs/… and /meet/…
+  body: "Redirecting to the current version of this page…"
+```
+
+Two decisions make it maintenance-free:
+
+- **The set comes from the promoted root sitemap**, not from a list and not from the tree. So it is
+  exactly what the site advertises — 223 pages today. The three `index.html` files under
+  `3.8/docs/` that are *not* in the sitemap are skipped, which is what you want: one of them is
+  itself a generated redirect, and mirroring it would publish a chain.
+- **It is deleted and rebuilt in full on every `latest` publish**, never reconciled. A renamed or
+  removed page cannot leave a stub redirecting into a 404 — a state worse than the 404 it replaced —
+  because the stale stub is gone before the new set is written. The step refuses to delete anything
+  under `/docs/` or `/meet/` that is not one of its own pages, so the wipe can never reach content.
+
+`ovweb verify` asserts the result as **set equality** against the same function that generates it:
+a missing stub means an unversioned URL 404s for crawlers again, an extra one means it redirects
+into a 404.
+
+What the mirror deliberately does **not** cover is the legacy per-patch space (`/3.4.1/…`). Fully
+enumerating it would be ~3,000 pages across the 13 patch folders that ever existed, nothing in the
+site links there, and those URLs have pointed their `canonical` at `/latest/` since they were
+published, so Google consolidated them long ago. The router keeps handling them for people.
 
 ### Inspecting them
 
@@ -327,6 +370,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `repair-export-links`  | always | Point a link at the HTML page wherever the Markdown export it names does not exist. Checked against the finished tree, not the MkDocs config. |
 | `strip-non-versioned`  | past   | Delete the root-served pages from the version folder instead. Tolerant: an old version may never have built some.     |
 | `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
+| `mirror-unversioned`   | latest | Delete `/docs/` and `/meet/` and rebuild them as one redirect page per URL in the promoted sitemap — see below.        |
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see below. |
 | `sync-releases`        | always | Splice the newest release notes across versions.                                                                      |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
@@ -689,8 +733,9 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
 its root with a relative target, no promoted page claims a versioned URL as its own, no version
 folder carries a correctly pruned sitemap, every search location is absolute, nothing served from
 the root pins the version `latest` points at, no versioned export links to a root-served page
-under its version, no export links to another export that does not exist, and `versions.json`
-agrees with the folders on disk.
+under its version, no export links to another export that does not exist, every `<lastmod>` in the
+root sitemap is a real date that is not in the future, the unversioned mirror is exactly the set of
+pages the sitemap advertises, and `versions.json` agrees with the folders on disk.
 
 A tree that has just been post-processed verifies clean, which is asserted by
 [`test_verify.py`](tests/unit/test_verify.py). That makes `verify` a real post-publish signal:

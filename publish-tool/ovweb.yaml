@@ -102,6 +102,29 @@ redirects:
     # and /3.8/ to /3.8/docs/ — with no JavaScript needed.
     relative: true
 
+  # One redirect page per published page of every versioned section, at the same path without
+  # the version prefix: /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/.
+  #
+  # The 404 router below already sends these URLs to the right place, but only for people.
+  # GitHub Pages serves 404.html with a 404 status, and a crawler acts on the status before it
+  # runs any JavaScript, so every inbound link to an unversioned URL is discarded. These URLs
+  # are worth keeping: they are what a human types, and what OpenVidu itself publishes — the
+  # speech agent's default configuration ships a comment pointing at
+  # https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider, which
+  # every user reads in their own deployment. GitHub Pages has no server-side redirects, so a
+  # 200 page carrying a zero-delay meta refresh is the only redirect a crawler can be given.
+  #
+  # There is no list to maintain and no reconciliation: the set is read off the promoted root
+  # sitemap, and the whole mirror is deleted and rebuilt on every latest publish. A renamed or
+  # deleted page therefore cannot leave a stub redirecting into a 404.
+  #
+  # `for_each` names a layout list; `body` is the sentence shown to a visitor whose browser
+  # blocks the refresh. The 404 router keeps handling everything the mirror does not cover —
+  # the exported reference-docs pages, pages that have since been removed, and typos.
+  mirror:
+    for_each: versioned_pages
+    body: "Redirecting to the current version of this page…"
+
   # Redirects materialised as HTML files in the published tree.
   #
   # `at` is either the named location `version-root` or a path template that may use

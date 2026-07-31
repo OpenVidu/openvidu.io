@@ -15,6 +15,7 @@ from pathlib import Path
 from . import fsops
 from .config import SiteConfig
 from .pipeline.postprocess import GENERATED_MARKER, LLMS_TXT
+from .redirects import MIRROR_RULE_ID, mirror_redirects
 from .rewrite.markdown import SUFFIX as MARKDOWN
 from .versions import alias_target, read_versions_json
 
@@ -54,6 +55,7 @@ def verify(
     findings += _check_root_exports_use_latest(tree, config, latest)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
+    findings += _check_unversioned_mirror(tree, config)
     return findings
 
 
@@ -339,6 +341,75 @@ def _check_root_sitemap_lastmod(tree: Path) -> list[Finding]:
                     f"{value!r} is in the future, so it describes an edit that has not happened",
                 )
             )
+    return findings
+
+
+def _check_unversioned_mirror(tree: Path, config: SiteConfig) -> list[Finding]:
+    """The unversioned mirror must be exactly the set of pages the sitemap advertises.
+
+    Asserted as set equality against the same pure function the publish generates it with, which
+    catches both halves of the only way this can go wrong. A **missing** stub means an
+    unversioned URL 404s for crawlers again — the defect this mirror exists to fix. An **extra**
+    stub means a page was renamed or removed and its redirect now points into a 404, which is
+    worse than the plain 404 it replaced. The publish deletes and rebuilds the whole mirror to
+    make the second case unreachable; this is the assertion that it did.
+    """
+    rule = config.mirror
+    if rule is None or not rule.enabled:
+        return []
+    sitemap = tree / "sitemap.xml"
+    if not sitemap.is_file():
+        return []
+
+    text = fsops.read_text(sitemap)
+    expected = {redirect.path for redirect in mirror_redirects(text, config=config)}
+    found: set[str] = set()
+    findings: list[Finding] = []
+
+    for section in getattr(config.layout, rule.for_each):
+        root = tree / section
+        if not root.is_dir():
+            continue
+        for path in sorted(root.rglob("*")):
+            if path.is_dir():
+                continue
+            where = path.relative_to(tree).as_posix()
+            head = path.read_bytes()[:512].decode("utf-8", errors="replace")
+            if path.name == "index.html" and GENERATED_MARKER in head and MIRROR_RULE_ID in head:
+                found.add(where)
+                continue
+            # Reported here rather than counted as a stale stub below, because the reason it does
+            # not belong is different: it is not a redirect at all.
+            findings.append(
+                Finding(
+                    "mirror",
+                    where,
+                    "sits on a mirrored path but is not a generated mirror redirect, so the "
+                    "next publish would delete it",
+                )
+            )
+
+    missing = sorted(expected - found)
+    if missing:
+        findings.append(
+            Finding(
+                "mirror",
+                missing[0],
+                f"one of {len(missing)} unversioned URL(s) the sitemap advertises under /latest/ "
+                "with no redirect page: they 404 for a crawler. Publish latest to rebuild the "
+                "mirror",
+            )
+        )
+    stale = sorted(found - expected)
+    if stale:
+        findings.append(
+            Finding(
+                "mirror",
+                stale[0],
+                f"one of {len(stale)} redirect page(s) pointing at a page the sitemap no longer "
+                "lists, so they redirect into a 404. Publish latest to rebuild the mirror",
+            )
+        )
     return findings
 
 
