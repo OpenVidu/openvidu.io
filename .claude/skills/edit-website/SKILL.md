@@ -29,7 +29,7 @@ This repo is the source of https://openvidu.io/, built with **MkDocs Material** 
 ## Adding a new page (README: "Adding a new page")
 
 1. Create the `.md` file under the right `docs/` folder. Both frontmatter keys are required on every page: `title` (≤ 57 chars — it is the `<title>`, and Material appends `" - OpenVidu"`) and `description` (a sentence, 100–160 chars, ending in a full stop). Both must be unique site-wide, and both are double-quoted.
-2. In `mkdocs.yml`: add it to `nav`, **and** to the `llmstxt` plugin `sections` — the path alone, with **no** description. `publish-tool/mkdocs_hook.py` takes it from the page's frontmatter, and the build fails if the page has none. Globs are fine and each matched page still describes itself.
+2. In `mkdocs.yml`: add it to `nav`. The `llmstxt` plugin `sections` usually needs **nothing** — most sections are a glob over a folder, so a page added inside one is picked up automatically. Add a line only if its folder is enumerated (top-level product pages, Meet embedding guides, self-hosting entry pages) or the page starts a new folder; then add **the path alone, with no description** — `publish-tool/mkdocs_hook.py` takes it from the frontmatter, and the build fails if the page has none. Beware that the plugin matches with `fnmatch`, where `*` crosses `/`: `meet/features/*.md` is the whole subtree, and `docs/*.md` would swallow everything under `docs/`.
 3. If the page starts a new non-versioned or versioned area, add it to `non_versioned_pages` or `versioned_pages` in `publish-tool/ovweb.yaml`.
 
 ## Link rules (strict — the build is zero-warning and CI runs `mkdocs build --strict`)
@@ -106,7 +106,7 @@ Notes:
 1. Working on the right branch (`next` for in-development docs, `main` for fixes to published content).
 2. Page renders correctly locally (both light and dark themes if you touched styling or theme-dependent images).
 3. **Zero `WARNING`s** in the mkdocs console (`mkdocs build --strict` must pass — CI enforces it). Anchor `INFO`s are expected (tab-anchor false positives).
-4. New pages: `nav` + `llmstxt` sections updated; `publish-tool/ovweb.yaml` updated if a new area was created; intentionally-non-nav pages added to `not_in_nav`.
+4. New pages: `nav` updated, and `title` + `description` frontmatter present (the build fails without a description on any page an `llmstxt` section selects); `llmstxt` sections only need a line if no glob already covers the folder; `publish-tool/ovweb.yaml` updated if a new area was created; intentionally-non-nav pages added to `not_in_nav`.
 5. Links follow the rules above (Markdown in pages → relative `.md`/asset paths; Markdown in snippets and blog posts → root-absolute; raw HTML → absolute URL (`/pricing/`, `/assets/…`), built-folder-relative only for HTML→versioned-page links; no pinned versions outside releases pages).
 6. If you touched a section backed by frontmatter data (`faq`, `publications`) or a shared snippet, its counterparts are updated too.
 7. Tutorials touched? Remind the user to sync livekit-tutorials-docs.

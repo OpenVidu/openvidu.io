@@ -79,18 +79,19 @@ When creating a new page, follow these steps:
    
    - Add the new page to the `nav` section in [`mkdocs.yml`](mkdocs.yml) (if you want to include it in the navigation) and set the title.
 
-   - Include the page (relative to the docs folder) in mkdocs.yml in the mkdocs-llmstxt plugin configuration, under the section it belongs to. **The path only — no description.** [`publish-tool/mkdocs_hook.py`](publish-tool/mkdocs_hook.py) fills each entry in with the page's own `description` frontmatter, so the sentence is written once; a listed page with no description fails the build.
+   - Check the mkdocs-llmstxt plugin's `sections` in mkdocs.yml. **Most new pages need no change at all**: most sections are a glob over a folder, so a page added inside one is picked up automatically. Only add a line if the page's folder is listed page by page (the top-level product pages, the Meet embedding guides and the self-hosting entry pages) or if it starts a new folder.
+
+      When you do add one, add **the path only — no description.** [`publish-tool/mkdocs_hook.py`](publish-tool/mkdocs_hook.py) fills each entry in with the page's own `description` frontmatter, so the sentence is written once; a listed page with no description fails the build, and a page in no section at all is missing from `llms.txt` *and* linked as a dead `.md`.
 
       ```yaml
       plugins:
         - llmstxt:
-            markdown_description: Self-hosted videoconference solution and SDK
             sections:
               OpenVidu Meet features:
-              - meet/features/newpage.md
+              - meet/features/*.md          # the whole subtree, subfolders included
       ```
 
-      A glob is fine where a whole folder belongs to one section (`docs/self-hosting/elastic/*/*.md`): each matched page still contributes its own description, and a page added later is picked up without an edit here.
+      The plugin matches with `fnmatch`, where **`*` crosses `/`** — so `meet/features/*.md` covers the whole subtree, but `docs/*.md` would swallow every page under `docs/` rather than just the top-level ones. A literal segment is what fences a glob in: `single-node/*/*.md` takes the 24 provider guides but not `single-node/index.md`.
 
 4. **Update the site layout (if needed)**: if the new page starts a **new area**, add its folder to [`publish-tool/ovweb.yaml`](publish-tool/ovweb.yaml) — to `non_versioned_pages` if the page is not versioned, or to `versioned_pages` if it is part of a new set of versioned pages. Otherwise its links will not be rewritten and it will not be relocated correctly at publish time. A page inside an area that is already listed needs no change here.
 
