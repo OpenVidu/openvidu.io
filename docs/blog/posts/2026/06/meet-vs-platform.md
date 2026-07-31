@@ -1,4 +1,5 @@
 ---
+title: "OpenVidu Meet vs OpenVidu Platform in 2026"
 draft: false
 slug: meet-vs-platform
 date: 2026-06-16

@@ -1,4 +1,5 @@
 ---
+title: "The scale-in problem in video conferencing"
 draft: false
 date: 2026-05-26
 slug: scale-in-problem-in-videoconferences

@@ -1,4 +1,5 @@
 ---
+title: "OpenVidu scalability and autoscaling"
 description: Scale effortlessly with OpenVidu's elastic deployments, handling small meetings to massive live streams, with autoscaling and high availability support.
 ---
 

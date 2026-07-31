@@ -1,4 +1,5 @@
 ---
+description: "Run video conferencing on your own servers. Deploy the ready-made OpenVidu Meet app, or build your own real-time video product with OpenVidu Platform."
 title: "Self-hosted video conferencing & custom WebRTC"
 template: home.html
 hide:

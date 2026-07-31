@@ -1,4 +1,5 @@
 ---
+title: "Fault tolerance in OpenVidu deployments"
 description: Ensure seamless real-time media experiences with OpenVidu's fault tolerance. Handle node failures effortlessly with Elastic and High Availability deployments.
 ---
 

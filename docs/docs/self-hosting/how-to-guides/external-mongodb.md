@@ -1,4 +1,5 @@
 ---
+title: "Use an external MongoDB with OpenVidu"
 description: Configure OpenVidu to use an external MongoDB deployment instead of the bundled database instance.
 ---
 

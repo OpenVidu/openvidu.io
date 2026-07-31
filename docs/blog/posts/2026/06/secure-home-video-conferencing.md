@@ -1,4 +1,5 @@
 ---
+title: "Host your own private video calls at home"
 draft: false
 date: 2026-06-30
 slug: secure-home-video-conferencing

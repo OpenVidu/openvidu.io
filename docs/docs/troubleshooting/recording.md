@@ -1,3 +1,8 @@
+---
+title: "Troubleshoot OpenVidu recordings"
+description: "Diagnose recordings that never appear or fail with 503: Egress CPU limits, on-demand versus automatic recordings, storage and webhook checks."
+---
+
 # Troubleshooting recordings
 
 ## Introduction

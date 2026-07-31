@@ -1,4 +1,5 @@
 ---
+description: "Embed OpenVidu Meet in your web app step by step: run the server, create a room, choose an embedding option and deploy your application."
 title: Step by step guide
 tags:
   - setupcustomgallery

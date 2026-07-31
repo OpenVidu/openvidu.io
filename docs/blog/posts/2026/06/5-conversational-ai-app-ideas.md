@@ -1,4 +1,5 @@
 ---
+title: "5 conversational AI app ideas for a weekend build"
 draft: false
 date: 2026-06-23
 slug: 5-conversational-ai-app-ideas

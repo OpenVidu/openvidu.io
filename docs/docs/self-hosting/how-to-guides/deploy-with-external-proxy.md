@@ -1,3 +1,8 @@
+---
+title: "Deploy OpenVidu behind an external proxy"
+description: "Run OpenVidu behind a reverse proxy you already operate instead of its bundled Caddy server, on Single Node, Elastic and High Availability."
+---
+
 # How to deploy and configure OpenVidu with an existing external proxy
 
 By default, OpenVidu is deployed with an internal [Caddy server :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:

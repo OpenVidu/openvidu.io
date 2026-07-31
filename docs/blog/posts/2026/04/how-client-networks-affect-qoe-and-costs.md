@@ -1,4 +1,5 @@
 ---
+title: "How client networks affect WebRTC quality and cost"
 draft: false
 date: 2026-04-30
 slug: how-client-networks-affect-qoe-and-costs

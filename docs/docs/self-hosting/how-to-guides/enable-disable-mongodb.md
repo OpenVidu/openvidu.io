@@ -1,4 +1,5 @@
 ---
+title: "Enable and disable the bundled MongoDB"
 description: Learn how to enable or disable the bundled MongoDB service used by OpenVidu services such as Dashboard, Meet, and analytics storage.
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: "5 React video call platforms compared in 2026"
 draft: false
 date: 2026-05-19
 slug: 5-react-video-call-platforms

@@ -1,4 +1,5 @@
 ---
+title: "Customize the OpenVidu Meet base path"
 description: Learn how to change the base path where OpenVidu Meet is served in your deployment.
 ---
 

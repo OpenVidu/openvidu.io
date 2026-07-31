@@ -1,4 +1,5 @@
 ---
+title: "Building a video-enabled CRM with an AI agent"
 draft: false
 date: 2026-07-21
 slug: building-a-video-enabled-crm-with-an-ai-agent

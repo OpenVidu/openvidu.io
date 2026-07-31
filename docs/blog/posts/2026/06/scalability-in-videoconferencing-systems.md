@@ -1,4 +1,5 @@
 ---
+title: "How to scale video conferencing architecture"
 draft: false
 date: 2026-06-02
 slug: scalability-in-videoconferencing-systems

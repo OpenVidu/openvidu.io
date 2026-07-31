@@ -1,3 +1,8 @@
+---
+title: "Deploy OpenVidu Meet on a single server"
+description: "Production deployment of OpenVidu Meet on one Linux server: prerequisites, ports, domain and TLS certificates, and the installer command."
+---
+
 This section contains the instructions to deploy a production-ready deployment of OpenVidu Meet in a single server.
 
 !!! info

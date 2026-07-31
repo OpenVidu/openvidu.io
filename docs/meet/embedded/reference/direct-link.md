@@ -1,3 +1,8 @@
+---
+title: "Embed OpenVidu Meet with a direct link"
+description: "Send participants to an OpenVidu Meet room with a plain HTML link, and fetch room access URLs from your backend with the REST API."
+---
+
 # Direct Link
 
 Redirect individuals to OpenVidu Meet using simple HTML links. This is the simplest way to integrate OpenVidu Meet into your application - perfect when you want participants to join meetings in a new browser tab or window with the polished OpenVidu Meet interface.

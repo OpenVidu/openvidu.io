@@ -1,3 +1,8 @@
+---
+title: "OpenVidu agents dispatch"
+description: "Control which rooms an OpenVidu agent joins: automatic dispatch into every new room, or explicit dispatch driven by your own application."
+---
+
 # OpenVidu agents dispatch
 
 OpenVidu agents remain idle until they are dispatched to a Room. This **idle state** may consume some resources, but ensures agents are ready to process Rooms immediately. This is done to optimize resource usage and ensure that agents are only active when needed.

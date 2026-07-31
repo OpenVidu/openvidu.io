@@ -1,4 +1,5 @@
 ---
+title: "OpenVidu deployment types compared"
 description: Discover OpenVidu deployment options. Local setup for development, single node for medium load, elastic scalability and high availability clusters.
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: "3 access models for video conferencing apps"
 draft: false
 date: 2026-07-14
 slug: video-conferencing-permissions

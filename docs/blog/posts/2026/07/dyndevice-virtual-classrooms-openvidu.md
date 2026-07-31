@@ -1,4 +1,5 @@
 ---
+title: "DynDevice built virtual classrooms with OpenVidu"
 draft: false
 date: 2026-07-28
 slug: dyndevice-virtual-classrooms-openvidu

@@ -1,4 +1,5 @@
 ---
+title: "OpenVidu 3.8.0 release notes"
 draft: false
 date: 2026-07-09
 slug: release-380

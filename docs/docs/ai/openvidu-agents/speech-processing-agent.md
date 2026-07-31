@@ -1,3 +1,8 @@
+---
+title: "Speech Processing agent"
+description: "Enable and configure the Speech Processing agent to turn room speech into text, and choose the transcription provider for your deployment."
+---
+
 # Speech Processing agent
 
 The Speech Processing agent provides all the AI services related to transcribing audio speech to text and processing the results in various ways.
