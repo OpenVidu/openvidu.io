@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Live Captions tutorial
-description: Learn how to transcribe in real time a simple JavaScript video-call application.
+title: "Live captions tutorial for OpenVidu"
+description: "Transcribe a video call in real time and show the captions in a plain JavaScript frontend, using the OpenVidu Speech Processing agent."
 ---
 
 # Live Captions tutorial

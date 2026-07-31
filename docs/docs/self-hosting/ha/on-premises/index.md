@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability on-premises deployment
-description: OpenVidu High Availability on-premises deployment
+title: "OpenVidu High Availability on-premises"
+description: "OpenVidu High Availability on your own servers: four Master Nodes and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu High Availability on-premises deployment

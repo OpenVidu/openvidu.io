@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node installation on DigitalOcean
-description: Learn how to deploy OpenVidu Single Node on DigitalOcean in two ways
+title: "Install OpenVidu Single Node COMMUNITY on DigitalOcean"
+description: "Deploy OpenVidu Single Node COMMUNITY on DigitalOcean from the web console or with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---

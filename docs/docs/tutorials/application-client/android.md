@@ -1,6 +1,6 @@
 ---
-title: Android Tutorial
-description: "Build a video-call app for Android in Kotlin with our LiveKit fork's Android SDK: join a room, publish and subscribe to media."
+title: "Android video call tutorial"
+description: "Build an Android video-call app on OpenVidu in Kotlin with the LiveKit-compatible Android SDK: join a room, publish your camera and subscribe."
 ---
 
 # Android Tutorial

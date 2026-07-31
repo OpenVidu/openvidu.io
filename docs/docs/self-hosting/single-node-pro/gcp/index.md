@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO Google Cloud Platform deployment
-description: OpenVidu Single Node PRO Google Cloud Platform deployment
+title: "OpenVidu Single Node PRO on Google Cloud"
+description: "OpenVidu Single Node PRO on Google Cloud: 2x media capacity and advanced observability over COMMUNITY. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-pro-tag">PRO</span> Google Cloud Platform deployment

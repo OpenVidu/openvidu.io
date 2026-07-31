@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu performance: 2x with mediasoup"
-description: Discover how OpenVidu boosts performance with mediasoup, doubling media track capacity per server while maintaining seamless LiveKit compatibility.
+description: "OpenVidu replaces LiveKit's Pion WebRTC engine with mediasoup, doubling the media tracks one server handles while keeping the LiveKit API."
 ---
 
 # Performance :material-lightning-bolt:

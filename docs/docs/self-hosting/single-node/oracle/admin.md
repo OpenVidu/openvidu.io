@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on Oracle Cloud Infrastructure
-description: Learn how to perform administrative tasks on an Oracle Cloud Infrastructure OpenVidu Single Node deployment
+title: "Administer OpenVidu Single Node COMMUNITY on Oracle Cloud"
+description: "Administer OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Oracle Cloud Infrastructure

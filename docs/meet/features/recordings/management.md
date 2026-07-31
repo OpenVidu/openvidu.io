@@ -1,6 +1,6 @@
 ---
-title: Recording creation & management in OpenVidu Meet
-description: Start, stop, list, share, download and delete recordings in OpenVidu Meet from the app or the REST API.
+title: "Recording management in OpenVidu Meet"
+description: "Start and stop recordings, then list, play, share, download and delete them, from the OpenVidu Meet application or the Recordings REST API."
 tags:
   - setupcustomgallery
 ---

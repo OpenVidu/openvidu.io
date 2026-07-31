@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic administration on Oracle Cloud Infrastructure
-description: Learn how to perform administrative tasks on an Oracle Cloud Infrastructure OpenVidu Elastic deployment
+title: "Administer OpenVidu Elastic on Oracle Cloud"
+description: "Administer OpenVidu Elastic on Oracle Cloud Infrastructure: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu Elastic administration: Oracle Cloud Infrastructure

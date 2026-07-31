@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO installation on-premises
-description: Learn how to deploy OpenVidu Single Node PRO on-premises
+title: "Install OpenVidu Single Node PRO on-premises"
+description: "Deploy OpenVidu Single Node PRO on your own servers with the guided installer, non-interactively or with plain Docker Compose."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: On-premises

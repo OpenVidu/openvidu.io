@@ -1,6 +1,6 @@
 ---
-title: "OpenVidu Meet Web Component"
-description: "Embed the OpenVidu Meet interface with the openvidu-meet Web Component and drive it from your app with attributes, commands and events."
+title: "OpenVidu Meet Web Component reference"
+description: "Embed the OpenVidu Meet interface with the openvidu-meet Web Component, and drive it from your app with its attributes, commands and events."
 ---
 
 # Web Component

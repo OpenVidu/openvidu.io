@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic administration on Azure
-description: Learn how to perform administrative tasks on an Azure OpenVidu Elastic deployment
+title: "Administer OpenVidu Elastic on Azure"
+description: "Administer OpenVidu Elastic on Azure: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu Elastic administration: Azure

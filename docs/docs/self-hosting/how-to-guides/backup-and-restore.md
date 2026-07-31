@@ -1,6 +1,6 @@
 ---
-title: Backup and restore OpenVidu deployments
-description: Learn how to safeguard OpenVidu recordings, observability metrics, and operational data by backing up and restoring MinIO/S3 storage and MongoDB across all deployment models.
+title: "Back up and restore OpenVidu deployments"
+description: "Back up and restore the recordings, observability metrics and operational data an OpenVidu deployment keeps in MinIO or S3 and in MongoDB."
 ---
 
 # Backup and restore OpenVidu deployments

@@ -1,6 +1,6 @@
 ---
-title: Custom stream using Angular Components
-description: Learn how to replace the default stream with your own using OpenVidu Angular Components.
+title: "Custom stream with Angular Components"
+description: "Replace the default participant stream with a component of your own using OpenVidu Angular Components, and control what each tile shows."
 ---
 
 # Custom stream using Angular Components

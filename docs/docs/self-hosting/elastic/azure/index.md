@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic deployment on Azure
-description: OpenVidu Elastic deployment on Azure
+title: "OpenVidu Elastic on Azure"
+description: "OpenVidu Elastic on Azure: a Master Node and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Elastic deployment on Azure

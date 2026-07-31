@@ -1,6 +1,6 @@
 ---
-title: Custom layout using Angular Components
-description: Learn how to replace the default layout with your own using OpenVidu Angular Components.
+title: "Custom layout with Angular Components"
+description: "Replace the default video layout with a component of your own using OpenVidu Angular Components, and arrange participants however you need."
 ---
 
 # Custom layout using Angular Components

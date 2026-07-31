@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic Google Cloud Platform deployment
-description: OpenVidu Elastic Google Cloud Platform deployment
+title: "OpenVidu Elastic on Google Cloud"
+description: "OpenVidu Elastic on Google Cloud: a Master Node and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Elastic Google Cloud Platform deployment

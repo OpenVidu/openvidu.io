@@ -1,6 +1,6 @@
 ---
-title: Custom activities panel using Angular Components
-description: Learn how to replace the default activities panel with your own using OpenVidu Angular Components.
+title: "Custom activities panel with Angular Components"
+description: "Replace the default activities panel with a component of your own using OpenVidu Angular Components, and put your own activities in it."
 ---
 
 # Custom activities panel using Angular Components

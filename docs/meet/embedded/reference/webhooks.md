@@ -1,5 +1,5 @@
 ---
-title: "OpenVidu Meet webhooks"
+title: "OpenVidu Meet webhooks reference"
 description: "Receive meeting and recording events from OpenVidu Meet in your backend, and verify webhook signatures before acting on them."
 tags:
     - setupcustomgallery

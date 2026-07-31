@@ -1,6 +1,6 @@
 ---
 title: "Enable OpenVidu webhooks"
-description: Learn how to enable webhooks in OpenVidu to integrate with other services and receive event notifications from your deployment.
+description: "Enable webhooks so your backend is notified of room, participant, recording and Egress events as they happen in your deployment."
 ---
 
 # Enable Webhooks

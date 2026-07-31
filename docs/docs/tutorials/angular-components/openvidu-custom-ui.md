@@ -1,6 +1,6 @@
 ---
-title: Custom UI using Angular Components
-description: Learn how to customize the UI, changing colors, shapes and add your branding logo using OpenVidu Angular Components.
+title: "Custom UI with Angular Components"
+description: "Change the colours, shapes and logo of a video conference built with OpenVidu Angular Components so it carries your own branding."
 ---
 
 # Custom UI using Angular Components

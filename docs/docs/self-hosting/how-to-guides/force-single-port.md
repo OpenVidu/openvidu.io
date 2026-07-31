@@ -1,6 +1,6 @@
 ---
-title: Force media traffic through port 443
-description: Learn how to deploy OpenVidu using only port 443 for enhanced security and compatibility with restrictive networks.
+title: "Force media traffic through port 443"
+description: "Run OpenVidu with port 443 as its only open port, so media still reaches users behind corporate firewalls that block everything else."
 ---
 
 # Force media traffic through port 443

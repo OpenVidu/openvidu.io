@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO installation on Google Cloud Platform
-description: Learn how to deploy OpenVidu Single Node PRO on Google Cloud Platform using Google Cloud Platform Console
+title: "Install OpenVidu Single Node PRO on Google Cloud"
+description: "Deploy OpenVidu Single Node PRO on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 tags:
   - copyclipboard
 ---

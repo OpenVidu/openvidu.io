@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu Platform release notes"
-description: Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
+description: "Release notes for every OpenVidu Platform version, with the new features, changes and fixes each one brings, plus its upgrade notes."
 tags:
   - scrolltoversion
 ---

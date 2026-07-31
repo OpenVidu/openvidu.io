@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic administration on DigitalOcean
-description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu Elastic deployment
+title: "Administer OpenVidu Elastic on DigitalOcean"
+description: "Administer OpenVidu Elastic on DigitalOcean: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu Elastic administration: DigitalOcean

@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability deployment on Oracle Cloud Infrastructure
-description: OpenVidu High Availability deployment on Oracle Cloud Infrastructure
+title: "OpenVidu High Availability on Oracle Cloud"
+description: "OpenVidu High Availability on Oracle Cloud Infrastructure: four Master Nodes and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu High Availability deployment on Oracle Cloud Infrastructure

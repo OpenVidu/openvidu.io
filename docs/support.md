@@ -1,6 +1,6 @@
 ---
-title: Support
-description: Discover support for OpenVidu, from commercial consultancy to community-driven solutions.
+title: "OpenVidu support and consultancy"
+description: "Commercial support and consultancy from the OpenVidu team, plus the community channels where COMMUNITY edition users get help with self-hosting."
 hide:
   - navigation
   - toc

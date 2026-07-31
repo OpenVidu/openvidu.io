@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic on-premises deployment
-description: OpenVidu Elastic on-premises deployment
+title: "OpenVidu Elastic on-premises"
+description: "OpenVidu Elastic on your own servers: a Master Node and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Elastic on-premises deployment

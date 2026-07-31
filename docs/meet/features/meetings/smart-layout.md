@@ -1,6 +1,6 @@
 ---
-title: Smart Layout in OpenVidu Meet | Adaptive Video Meeting Grid
-description: The OpenVidu Meet meeting view arranges participants in a responsive grid that adapts to the number of people and lets each user choose how many are shown.
+title: "Smart layout in OpenVidu Meet"
+description: "The OpenVidu Meet meeting view arranges participants in a responsive grid that adapts to how many people are present, and each user can resize it."
 keywords: video meeting layout, adaptive video grid, active speaker, mosaic layout, OpenVidu Meet
 tags:
   - setupcustomgallery

@@ -1,6 +1,6 @@
 ---
-title: Custom toolbar using Angular Components
-description: Learn how to replace the default toolbar with your own using OpenVidu Angular Components.
+title: "Custom toolbar with Angular Components"
+description: "Replace the default meeting toolbar with a component of your own using OpenVidu Angular Components, keeping the controls your users need."
 ---
 
 # Custom toolbar using Angular Components

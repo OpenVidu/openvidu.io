@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability
-description: Learn how to install OpenVidu High Availability on-premises or on AWS, with configuration and management guides for each deployment option.
+title: "OpenVidu High Availability"
+description: "Four Master Nodes with autoscaling Media Nodes. Install, upgrade and administer OpenVidu High Availability on-premises or on any major cloud."
 ---
 
 # OpenVidu High Availability

@@ -1,6 +1,6 @@
 ---
-title: Identified Guests Tutorial
-description: Learn how to add identified guests with a fixed name and a unique access link to an OpenVidu Meet room using Node.js and JavaScript.
+title: "Identified guests tutorial for OpenVidu Meet"
+description: "Give each guest a fixed name and a personal access link to an OpenVidu Meet room, with a Node.js and Express backend and a JavaScript frontend."
 tags:
     - setupcustomgallery
 ---

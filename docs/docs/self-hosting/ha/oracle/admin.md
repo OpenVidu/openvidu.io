@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on Oracle Cloud Infrastructure
-description: Learn how to perform administrative tasks on an Oracle Cloud Infrastructure OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on Oracle Cloud"
+description: "Administer OpenVidu High Availability on Oracle Cloud Infrastructure: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu High Availability administration: Oracle Cloud Infrastructure

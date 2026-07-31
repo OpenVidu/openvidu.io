@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO installation on Azure
-description: Learn how to deploy OpenVidu Single Node PRO on Azure using Template specs of Azure Resource Manager
+title: "Install OpenVidu Single Node PRO on Azure"
+description: "Deploy OpenVidu Single Node PRO on Azure from an Azure Resource Manager template spec, then point your application at the result."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Azure

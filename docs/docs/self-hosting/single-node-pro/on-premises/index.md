@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO on-premises deployment
-description: OpenVidu Single Node PRO on-premises deployment
+title: "OpenVidu Single Node PRO on-premises"
+description: "OpenVidu Single Node PRO on your own servers: 2x media capacity and advanced observability over COMMUNITY. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-pro-tag">PRO</span> on-premises deployment

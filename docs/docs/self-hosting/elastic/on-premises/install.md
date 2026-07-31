@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on-premises
-description: Learn how to deploy OpenVidu Elastic on-premises
+title: "Install OpenVidu Elastic on-premises"
+description: "Deploy OpenVidu Elastic on your own servers with the guided or non-interactive installer, then point your application at the result."
 ---
 
 # OpenVidu Elastic installation: On-premises

@@ -1,6 +1,6 @@
 ---
-title: Virtual Background in OpenVidu Meet
-description: Make meetings more professional and private with one-click background blur or image replacement in OpenVidu Meet.
+title: "Virtual background in OpenVidu Meet"
+description: "Blur the background or replace it with an image in one click, so an OpenVidu Meet participant can join from anywhere without showing the room."
 tags:
     - setupcustomgallery
 ---

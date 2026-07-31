@@ -1,6 +1,6 @@
 ---
-title: Vue Tutorial
-description: "Build a video-call app in Vue with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
+title: "Vue video call tutorial"
+description: "Build a Vue video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
 ---
 
 # Vue Tutorial

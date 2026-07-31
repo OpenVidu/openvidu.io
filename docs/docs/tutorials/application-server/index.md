@@ -1,6 +1,6 @@
 ---
-title: Application Server Tutorials
-description: "Learn how to build an OpenVidu application server: generate access tokens and receive webhook events with our LiveKit fork's server SDKs."
+title: "OpenVidu application server tutorials"
+description: "Build the backend of an OpenVidu app in Node.js, Java, Python, Go, .NET, PHP, Ruby or Rust: issue access tokens and receive webhook events."
 ---
 
 # Application Server Tutorials

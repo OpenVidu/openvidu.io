@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node Community
-description: Learn how to install, configure, administer and upgrade OpenVidu Single Node Community across On-Premises and cloud providers.
+title: "OpenVidu Single Node COMMUNITY"
+description: "Every OpenVidu service on one server. Install, upgrade and administer Single Node COMMUNITY on-premises or on AWS, Azure, Google Cloud, Oracle or DigitalOcean."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span>

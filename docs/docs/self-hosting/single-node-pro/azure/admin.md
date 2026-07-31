@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO administration on Azure
-description: Learn how to perform administrative tasks on an Azure OpenVidu Single Node PRO deployment
+title: "Administer OpenVidu Single Node PRO on Azure"
+description: "Administer OpenVidu Single Node PRO on Azure: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Azure

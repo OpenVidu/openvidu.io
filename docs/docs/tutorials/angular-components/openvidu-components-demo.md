@@ -1,6 +1,6 @@
 ---
-title: Demo App using Angular Components
-description: Learn how to run, deploy and customize OpenVidu Components Demo App, the premier videoconference application built with OpenVidu Angular Components.
+title: "Angular Components demo application"
+description: "Run, deploy and customize the OpenVidu Components Demo App, the reference video conferencing application built with OpenVidu Angular Components."
 ---
 
 # Demo App using Angular Components

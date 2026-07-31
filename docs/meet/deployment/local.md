@@ -1,6 +1,6 @@
 ---
-title: Try OpenVidu Meet locally
-description: Deploy OpenVidu Meet on your local machine for development and testing purposes using Docker Desktop.
+title: "Try OpenVidu Meet locally"
+description: "Run OpenVidu Meet on your own machine with Docker Desktop to develop and test against it, including access from other devices on your network."
 ---
 # Try OpenVidu Meet locally
 

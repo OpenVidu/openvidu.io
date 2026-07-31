@@ -1,6 +1,6 @@
 ---
-title: About Us
-description: Discover the people behind OpenVidu.
+title: "About the OpenVidu team"
+description: "The engineers and researchers behind OpenVidu, and the open-source and scientific work the project has grown out of."
 hide:
   - navigation
   - toc

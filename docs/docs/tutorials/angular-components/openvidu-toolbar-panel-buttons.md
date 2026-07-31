@@ -1,6 +1,6 @@
 ---
-title: Add toolbar panel buttons using Angular Components
-description: Learn how to add custom panel buttons to the toolbar using OpenVidu Angular Components.
+title: "Add toolbar panel buttons with Angular Components"
+description: "Add buttons that open your own panels from the meeting toolbar, using the panel API of OpenVidu Angular Components."
 ---
 
 # Add toolbar panel buttons using Angular Components

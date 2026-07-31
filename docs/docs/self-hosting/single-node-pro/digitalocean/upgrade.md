@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Single Node PRO on DigitalOcean
-description: How to upgrade OpenVidu Single Node PRO on DigitalOcean deployments.
+title: "Upgrade OpenVidu Single Node PRO on DigitalOcean"
+description: "Upgrade an existing OpenVidu Single Node PRO deployment on DigitalOcean to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span>: DigitalOcean

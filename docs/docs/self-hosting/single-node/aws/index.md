@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node COMMUNITY deployment on AWS
-description: OpenVidu Single Node COMMUNITY deployment on AWS
+title: "OpenVidu Single Node COMMUNITY on AWS"
+description: "OpenVidu Single Node COMMUNITY on AWS: all OpenVidu services on a single server. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> deployment on AWS

@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic administration on AWS
-description: Learn how to perform administrative tasks on an AWS OpenVidu Elastic deployment
+title: "Administer OpenVidu Elastic on AWS"
+description: "Administer OpenVidu Elastic on AWS: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu Elastic administration: AWS

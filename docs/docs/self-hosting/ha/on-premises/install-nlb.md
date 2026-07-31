@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on-premises with Network Load Balancer
-description: Learn how to deploy OpenVidu High Availability on-premises with Network Load Balancer
+title: "Install OpenVidu High Availability behind a load balancer"
+description: "Deploy an OpenVidu High Availability cluster on your own servers, behind a network load balancer in front of the four Master Nodes."
 ---
 
 # OpenVidu High Availability installation: On-premises with Network Load Balancer

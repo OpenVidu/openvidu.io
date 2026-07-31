@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu deployment types compared"
-description: Discover OpenVidu deployment options. Local setup for development, single node for medium load, elastic scalability and high availability clusters.
+description: "The four OpenVidu deployment types side by side: local for development, Single Node for steady load, Elastic for scale, High Availability for both."
 ---
 
 # Deployment types

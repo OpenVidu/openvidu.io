@@ -1,6 +1,6 @@
 ---
-title: JavaScript Tutorial
-description: "Build a video-call app in plain JavaScript, HTML and CSS with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
+title: "JavaScript video call tutorial"
+description: "Build a video-call app on OpenVidu in plain JavaScript, HTML and CSS with the LiveKit-compatible JS SDK: join a room and publish media."
 ---
 
 # JavaScript Tutorial

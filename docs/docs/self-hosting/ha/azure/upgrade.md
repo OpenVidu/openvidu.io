@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu High Availability on Azure
-description: How to upgrade OpenVidu High Availability on Azure deployments.
+title: "Upgrade OpenVidu High Availability on Azure"
+description: "Upgrade an existing OpenVidu High Availability deployment on Azure to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu High Availability: Azure

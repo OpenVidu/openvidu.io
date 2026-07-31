@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu scalability and autoscaling"
-description: Scale effortlessly with OpenVidu's elastic deployments, handling small meetings to massive live streams, with autoscaling and high availability support.
+description: "How OpenVidu scales from a small meeting to a large live stream, with autoscaling Media Nodes and a control plane that keeps up with them."
 ---
 
 # Scalability :material-chart-timeline-variant-shimmer:

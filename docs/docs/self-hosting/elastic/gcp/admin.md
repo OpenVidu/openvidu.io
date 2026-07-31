@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic administration on Google Cloud Platform
-description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Elastic deployment
+title: "Administer OpenVidu Elastic on Google Cloud"
+description: "Administer OpenVidu Elastic on Google Cloud: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu Elastic administration: Google Cloud Platform

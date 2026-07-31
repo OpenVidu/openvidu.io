@@ -1,6 +1,6 @@
 ---
-title: How to develop your OpenVidu app
-description: Explore common OpenVidu operations for developing your application, from managing rooms to publishing tracks.
+title: "OpenVidu how-to quick reference"
+description: "A quick reference for the operations you need most while building an OpenVidu app, from creating rooms and tokens to publishing and recording tracks."
 ---
 
 # How to develop your OpenVidu application

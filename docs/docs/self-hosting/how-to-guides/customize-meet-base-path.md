@@ -1,6 +1,6 @@
 ---
 title: "Customize the OpenVidu Meet base path"
-description: Learn how to change the base path where OpenVidu Meet is served in your deployment.
+description: "Serve OpenVidu Meet from a path of your choice instead of the default one, so it sits where the rest of your deployment expects it."
 ---
 
 # Customize OpenVidu Meet base path

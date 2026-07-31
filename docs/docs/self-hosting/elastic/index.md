@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic
-description: Learn how to install OpenVidu Elastic on-premises or on AWS, with configuration and management guides for each deployment option.
+title: "OpenVidu Elastic"
+description: "A Master Node with autoscaling Media Nodes. Install, upgrade and administer OpenVidu Elastic on-premises or on AWS, Azure, Google Cloud, Oracle or DigitalOcean."
 ---
 
 # OpenVidu Elastic

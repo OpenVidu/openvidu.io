@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on AWS
-description: Learn how to perform administrative tasks on an AWS OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on AWS"
+description: "Administer OpenVidu High Availability on AWS: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu High Availability administration: AWS

@@ -1,6 +1,6 @@
 ---
-title: Custom chat panel using Angular Components
-description: Learn how to replace the default chat panel with your own using OpenVidu Angular Components.
+title: "Custom chat panel with Angular Components"
+description: "Replace the default chat panel with a component of your own using OpenVidu Angular Components, and keep control of how messages are shown."
 ---
 
 # Custom chat panel using Angular Components

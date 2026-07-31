@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO installation on Oracle Cloud Infrastructure
-description: Learn how to deploy OpenVidu Single Node on Oracle Cloud Infrastructure in two ways
+title: "Install OpenVidu Single Node PRO on Oracle Cloud"
+description: "Deploy OpenVidu Single Node PRO on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---

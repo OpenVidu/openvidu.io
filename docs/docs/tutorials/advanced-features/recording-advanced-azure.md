@@ -1,6 +1,6 @@
 ---
-title: Advanced Recording Tutorial Azure
-description: Learn how to improve the basic recording tutorial by adding complete recording metadata, real time recording status notification and more.
+title: "Advanced recording tutorial with Azure"
+description: "Extend the basic Azure recording tutorial with complete recording metadata and real-time recording status notifications pushed to the client."
 ---
 
 # Advanced Recording Tutorial Azure

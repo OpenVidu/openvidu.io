@@ -3,10 +3,7 @@ title: "DynDevice built virtual classrooms with OpenVidu"
 draft: false
 date: 2026-07-28
 slug: dyndevice-virtual-classrooms-openvidu
-description: >-
-  How DynDevice, the eLearning platform by Mega Italia Media, replaced
-  third-party meeting tools with virtual classrooms built into its LMS using
-  OpenVidu.
+description: "How DynDevice, the eLearning platform by Mega Italia Media, replaced third-party meeting tools with virtual classrooms built into its LMS using OpenVidu."
 cover_image: poster-light.webp
 categories:
   - Success story

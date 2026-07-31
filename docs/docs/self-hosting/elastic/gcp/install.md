@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on Google Cloud Platform
-description: Learn how to deploy OpenVidu Elastic on Google Cloud Platform using Google Cloud Platform Console
+title: "Install OpenVidu Elastic on Google Cloud"
+description: "Deploy OpenVidu Elastic on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 tags:
   - copyclipboard
 ---

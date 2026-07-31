@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on Google Cloud Platform
-description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Single Node deployment
+title: "Administer OpenVidu Single Node COMMUNITY on Google Cloud"
+description: "Administer OpenVidu Single Node COMMUNITY on Google Cloud: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Google Cloud Platform

@@ -1,6 +1,6 @@
 ---
-title: Anonymous Access Tutorial
-description: Learn how individuals can access an OpenVidu Meet room through anonymous access links (moderator or speaker) using Node.js and JavaScript.
+title: "Anonymous access tutorial for OpenVidu Meet"
+description: "Let anyone join an OpenVidu Meet room through a shared moderator or speaker link, with a Node.js and Express backend and a JavaScript frontend."
 tags:
     - setupcustomgallery
 ---

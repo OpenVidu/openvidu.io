@@ -1,6 +1,6 @@
 ---
-title: PHP Server Tutorial
-description: "Build a minimal PHP server using our LiveKit fork's PHP SDK: generate access tokens and receive webhook events."
+title: "PHP application server tutorial"
+description: "Build a minimal PHP application server for OpenVidu with the LiveKit-compatible PHP SDK: issue access tokens and handle webhook events."
 ---
 
 # PHP Server Tutorial

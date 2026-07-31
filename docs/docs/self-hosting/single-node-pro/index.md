@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node Pro
-description: Learn how to install, configure and administer OpenVidu Single Node Pro On Premises, AWS or Azure.
+title: "OpenVidu Single Node PRO"
+description: "One server with 2x media capacity and advanced observability. Install, upgrade and administer Single Node PRO on-premises or on any major cloud."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-pro-tag">PRO</span>

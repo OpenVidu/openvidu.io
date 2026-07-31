@@ -1,6 +1,6 @@
 ---
-title: Developing your OpenVidu app
-description: Learn how to build and deploy your OpenVidu application.
+title: "Developing your OpenVidu application"
+description: "The pieces of an OpenVidu application and the order to build them in: the application server, the client, and the deployment they both talk to."
 ---
 
 # Developing your OpenVidu application

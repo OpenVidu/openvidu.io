@@ -1,6 +1,6 @@
 ---
-title: WebComponent Commands & Events Tutorial
-description: Learn how to build a video conferencing application using Node.js and JavaScript by integrating OpenVidu Meet WebComponent with advanced commands and event handling.
+title: "Web Component commands and events tutorial"
+description: "Drive the OpenVidu Meet Web Component programmatically and react to meeting events: commands, role-based UI, meeting header and room management."
 tags:
     - setupcustomgallery
 ---

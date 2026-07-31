@@ -1,6 +1,6 @@
 ---
-title: Room Access in OpenVidu Meet
-description: How individuals access an OpenVidu Meet room - shared anonymous links, user and identified-guest access links - and the predefined roles.
+title: "Room access in OpenVidu Meet"
+description: "The four ways into an OpenVidu Meet room: shared anonymous links, registered users and identified guests, each with a Moderator or Speaker role."
 tags:
     - setupcustomgallery
 ---

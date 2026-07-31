@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability deployment on AWS
-description: OpenVidu High Availability deployment on AWS
+title: "OpenVidu High Availability on AWS"
+description: "OpenVidu High Availability on AWS: four Master Nodes and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu High Availability deployment on AWS

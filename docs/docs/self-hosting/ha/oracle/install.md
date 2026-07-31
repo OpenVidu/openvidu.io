@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on Oracle Cloud Infrastructure
-description: Learn how to deploy OpenVidu High Availability on Oracle Cloud Infrastructure
+title: "Install OpenVidu High Availability on Oracle Cloud"
+description: "Deploy OpenVidu High Availability on Oracle Cloud Infrastructure with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---

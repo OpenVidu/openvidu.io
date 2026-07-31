@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node PRO deployment on DigitalOcean
-description: OpenVidu Single Node PRO deployment on DigitalOcean
+title: "OpenVidu Single Node PRO on DigitalOcean"
+description: "OpenVidu Single Node PRO on DigitalOcean: 2x media capacity and advanced observability over COMMUNITY. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-pro-tag">PRO</span> deployment on DigitalOcean

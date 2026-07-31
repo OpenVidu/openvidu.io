@@ -1,6 +1,6 @@
 ---
-title: WebComponent Tutorial
-description: Learn how to build a video conferencing application using Node.js and JavaScript by easily integrating OpenVidu Meet WebComponent.
+title: "Web Component tutorial for OpenVidu Meet"
+description: "Embed the OpenVidu Meet Web Component in a video conferencing app, with a Node.js and Express backend and a plain JavaScript frontend."
 tags:
     - setupcustomgallery
 ---

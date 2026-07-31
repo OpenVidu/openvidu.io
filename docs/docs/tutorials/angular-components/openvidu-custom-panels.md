@@ -1,6 +1,6 @@
 ---
-title: Custom panels using Angular Components
-description: Learn how to replace the default panels with your own using OpenVidu Angular Components.
+title: "Custom panels with Angular Components"
+description: "Replace the default side panels with components of your own using OpenVidu Angular Components, and decide what each one contains."
 ---
 
 # Custom panels using Angular Components

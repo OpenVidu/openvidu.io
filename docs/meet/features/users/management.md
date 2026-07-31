@@ -1,6 +1,6 @@
 ---
-title: User creation & management in OpenVidu Meet
-description: Create users, update roles, reset and change passwords, and delete users in OpenVidu Meet from the app or the Users REST API.
+title: "User creation and management in OpenVidu Meet"
+description: "Create users, change their role, reset or change passwords and delete them, from the OpenVidu Meet application or the Users REST API."
 tags:
     - setupcustomgallery
 ---

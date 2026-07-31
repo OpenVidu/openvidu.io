@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node COMMUNITY on-premises deployment
-description: OpenVidu Single Node COMMUNITY on-premises deployment
+title: "OpenVidu Single Node COMMUNITY on-premises"
+description: "OpenVidu Single Node COMMUNITY on your own servers: all OpenVidu services on a single server. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> on-premises deployment

@@ -1,6 +1,6 @@
 ---
-title: Custom participants panel item using Angular Components
-description: Learn how to replace the default participants panel item with your own using OpenVidu Angular Components.
+title: "Custom participant panel item"
+description: "Replace each row of the participants panel with a component of your own using OpenVidu Angular Components, and show the data you care about."
 ---
 
 # Custom participants panel item using Angular Components

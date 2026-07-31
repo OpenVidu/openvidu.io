@@ -1,6 +1,6 @@
 ---
-title: Rooms in OpenVidu Meet
-description: Understand what a room is in OpenVidu Meet and how it relates to meetings.
+title: "Rooms in OpenVidu Meet"
+description: "What a room is in OpenVidu Meet: a permanent, reusable space with its own access links and settings, and how it relates to the meetings held in it."
 tags:
     - setupcustomgallery
 ---

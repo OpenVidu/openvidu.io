@@ -1,6 +1,6 @@
 ---
-title: Additional panels using Angular Components
-description: Learn how to add a new extra panel besides the default ones using OpenVidu Angular Components.
+title: "Additional panels with Angular Components"
+description: "Add an extra side panel alongside the default ones with OpenVidu Angular Components, for anything your meeting UI needs to show."
 ---
 
 # Additional panels using Angular Components

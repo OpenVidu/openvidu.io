@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on Google Cloud Platform
-description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on Google Cloud"
+description: "Administer OpenVidu High Availability on Google Cloud: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu High Availability administration: Google Cloud Platform

@@ -1,6 +1,6 @@
 ---
-title: Role Management in OpenVidu Meet
-description: Promote participants to Moderator during an OpenVidu Meet meeting to grant them full moderator permissions, and demote them back to their original permissions.
+title: "Role management in OpenVidu Meet"
+description: "Promote a participant to Moderator during an OpenVidu Meet meeting to grant full moderator permissions, and demote them back when you are done."
 tags:
     - setupcustomgallery
 ---

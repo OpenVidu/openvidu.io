@@ -3,7 +3,7 @@ title: "OpenVidu 3.8.0 release notes"
 draft: false
 date: 2026-07-09
 slug: release-380
-description: OpenVidu 3.8.0 is now available. OpenVidu Meet adds user accounts, role-based access and fine-grained room members. OpenVidu Platform delivers a full mediasoup overhaul and tighter TURN security.
+description: "OpenVidu 3.8.0 is out: user accounts, role-based access and fine-grained room members in Meet, plus a mediasoup overhaul and tighter TURN security."
 categories:
     - Release
 tags:

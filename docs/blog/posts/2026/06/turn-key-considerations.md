@@ -3,7 +3,7 @@ title: "TURN in production WebRTC: resilience and security"
 draft: false
 date: 2026-06-09
 slug: turn-key-considerations
-description: Why TURN is the difference between a WebRTC demo and a production deployment — key considerations for connectivity resilience and security behind NATs, firewalls and mobile gateways.
+description: "Why TURN is what separates a WebRTC demo from a production deployment: connectivity resilience and security behind NATs, firewalls and mobile gateways."
 cover_image: vsc.png
 categories:
   - OpenVidu Platform

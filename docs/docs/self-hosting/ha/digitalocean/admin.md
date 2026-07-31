@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on DigitalOcean
-description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on DigitalOcean"
+description: "Administer OpenVidu High Availability on DigitalOcean: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu High Availability administration: DigitalOcean

@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on-premises with DNS Load Balancing
-description: Learn how to deploy OpenVidu High Availability on-premises with DNS Load Balancing
+title: "Install OpenVidu High Availability with DNS balancing"
+description: "Deploy an OpenVidu High Availability cluster on your own servers, using DNS load balancing across the four Master Nodes."
 ---
 
 # OpenVidu High Availability installation: On-premises with DNS Load Balancing

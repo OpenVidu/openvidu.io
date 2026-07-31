@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on DigitalOcean
-description: Learn how to perform administrative tasks on an DigitalOcean OpenVidu Single Node deployment
+title: "Administer OpenVidu Single Node COMMUNITY on DigitalOcean"
+description: "Administer OpenVidu Single Node COMMUNITY on DigitalOcean: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: DigitalOcean

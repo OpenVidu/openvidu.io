@@ -1,6 +1,6 @@
 ---
-title: Configuration reference
-description: Reference for the configuration files used in all different OpenVidu deployments.
+title: "OpenVidu configuration reference"
+description: "Reference for every configuration file an OpenVidu deployment uses, with the meaning and the default value of each setting."
 ---
 
 # Configuration reference

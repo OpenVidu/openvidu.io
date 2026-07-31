@@ -1,6 +1,6 @@
 ---
-title: Add toggle hand feature using Angular Components
-description: Learn how to add extra features, such as toggle hand, to the videoconference using OpenVidu Angular Components.
+title: "Toggle hand feature with Angular Components"
+description: "Add a raise-hand feature to a video conference built with OpenVidu Angular Components, as an example of extending it with your own behaviour."
 ---
 
 # Add toggle hand feature using Angular Components

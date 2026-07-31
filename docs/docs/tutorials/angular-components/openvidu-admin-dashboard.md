@@ -1,6 +1,6 @@
 ---
-title: Create admin dashboard using Angular Components
-description: Learn how to add an admin dashboard to the videoconference using OpenVidu Angular Components.
+title: "Admin dashboard with Angular Components"
+description: "Add an administration dashboard to a video conference built with OpenVidu Angular Components, to review recordings and manage the deployment."
 ---
 
 # Create admin dashboard using Angular Components

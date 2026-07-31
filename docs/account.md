@@ -1,6 +1,6 @@
 ---
-title: Account
-description: Create an account in OpenVidu Pro or log in to your existing account.
+title: "OpenVidu account: sign up or log in"
+description: "Create an OpenVidu PRO account, or log in to the account you already have."
 hide:
   - navigation
   - toc

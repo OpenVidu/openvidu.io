@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu vs LiveKit Cloud, SaaS and SFUs"
-description: Compare OpenVidu with LiveKit, SaaS solutions, SFUs and more to understand its advantages, unique features and benefits over other video conferencing tools.
+description: "How OpenVidu compares with LiveKit Cloud, SaaS video APIs and bare SFUs like mediasoup, on cost, data control, features and operational effort."
 tags:
     - setupcustomgallery
 ---

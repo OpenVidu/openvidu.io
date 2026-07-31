@@ -1,6 +1,6 @@
 ---
-title: Custom participants panel using Angular Components
-description: Learn how to replace the default participants panel with your own using OpenVidu Angular Components.
+title: "Custom participants panel with Angular Components"
+description: "Replace the default participants panel with a component of your own using OpenVidu Angular Components, and decide how the list is rendered."
 ---
 
 # Custom participants panel using Angular Components

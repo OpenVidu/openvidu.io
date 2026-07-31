@@ -1,6 +1,6 @@
 ---
-title: Basic Recording Tutorial S3
-description: Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
+title: "Basic recording tutorial with S3"
+description: "Record a room and manage the recordings in a simple Node.js and JavaScript video-call app, storing the files in S3-compatible storage."
 ---
 
 # Basic Recording Tutorial S3

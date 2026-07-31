@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability deployment on DigitalOcean
-description: OpenVidu High Availability deployment on DigitalOcean
+title: "OpenVidu High Availability on DigitalOcean"
+description: "OpenVidu High Availability on DigitalOcean: four Master Nodes and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu High Availability deployment on DigitalOcean

@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on Azure
-description: Learn how to perform administrative tasks on an Azure OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on Azure"
+description: "Administer OpenVidu High Availability on Azure: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu High Availability administration: Azure

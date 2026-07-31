@@ -1,6 +1,6 @@
 ---
-title: Recordings Tutorial
-description: Learn how to manage recordings in a video conferencing application using Node.js and JavaScript by extending the advanced OpenVidu Meet WebComponent tutorial.
+title: "Recordings tutorial for OpenVidu Meet"
+description: "Add recording management to an OpenVidu Meet Web Component application: list recordings, play them back and delete the ones you no longer need."
 tags:
     - setupcustomgallery
 ---

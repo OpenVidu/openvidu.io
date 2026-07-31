@@ -1,6 +1,6 @@
 ---
-title: Add toolbar buttons using Angular Components
-description: Learn how to add custom buttons to the toolbar using OpenVidu Angular Components.
+title: "Add toolbar buttons with Angular Components"
+description: "Add your own buttons to the meeting toolbar with OpenVidu Angular Components, without giving up the default controls that come with it."
 ---
 
 # Add toolbar buttons using Angular Components

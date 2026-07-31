@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability Google Cloud Platform deployment
-description: OpenVidu High Availability Google Cloud Platform deployment
+title: "OpenVidu High Availability on Google Cloud"
+description: "OpenVidu High Availability on Google Cloud: four Master Nodes and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu High Availability Google Cloud Platform deployment

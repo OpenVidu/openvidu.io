@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability deployment on Azure
-description: OpenVidu High Availability deployment on Azure
+title: "OpenVidu High Availability on Azure"
+description: "OpenVidu High Availability on Azure: four Master Nodes and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu High Availability deployment on Azure

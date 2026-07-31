@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic deployment on DigitalOcean
-description: OpenVidu Elastic deployment on DigitalOcean
+title: "OpenVidu Elastic on DigitalOcean"
+description: "OpenVidu Elastic on DigitalOcean: a Master Node and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Elastic deployment on DigitalOcean

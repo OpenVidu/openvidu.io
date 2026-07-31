@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on DigitalOcean
-description: Learn how to deploy OpenVidu High Availability on DigitalOcean
+title: "Install OpenVidu High Availability on DigitalOcean"
+description: "Deploy OpenVidu High Availability on DigitalOcean with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---

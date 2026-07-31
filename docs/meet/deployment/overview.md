@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Meet deployment overview
-description: OpenVidu offers a self-hosted, production-ready live-video platform with advanced capabilities, including performance, scalability, fault tolerance and observability.
+title: "OpenVidu Meet deployment overview"
+description: "The four ways to run OpenVidu Meet, from a local Docker Compose setup to a fault-tolerant cluster, and how to choose between them."
 ---
 
 # OpenVidu Meet deployment overview

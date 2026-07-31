@@ -1,6 +1,6 @@
 ---
-title: How to Enable Live Captions in OpenVidu Meet | Real-time Transcription Guide
-description: Learn how to enable and use live captions in OpenVidu Meet to improve meeting accessibility with real-time speech-to-text transcriptions.
+title: "Live captions in OpenVidu Meet"
+description: "Turn on real-time speech-to-text captions in an OpenVidu Meet meeting to make it accessible, and choose the language each participant reads."
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
 tags:
     - setupcustomgallery

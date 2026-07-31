@@ -1,6 +1,6 @@
 ---
-title: Room member creation & management in OpenVidu Meet
-description: Add, edit, list and remove users and identified guests of an OpenVidu Meet room from the app or the Room Members REST API.
+title: "Room member management in OpenVidu Meet"
+description: "Add, edit, list and remove the users and identified guests of an OpenVidu Meet room, from the application or the Room Members REST API."
 tags:
     - setupcustomgallery
 ---

@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic deployment on Oracle Cloud Infrastructure
-description: OpenVidu Elastic deployment on Oracle Cloud Infrastructure
+title: "OpenVidu Elastic on Oracle Cloud"
+description: "OpenVidu Elastic on Oracle Cloud Infrastructure: a Master Node and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Elastic deployment on Oracle Cloud Infrastructure

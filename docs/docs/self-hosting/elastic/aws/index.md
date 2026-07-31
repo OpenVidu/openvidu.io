@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic deployment on AWS
-description: OpenVidu Elastic deployment on AWS
+title: "OpenVidu Elastic on AWS"
+description: "OpenVidu Elastic on AWS: a Master Node and autoscaling Media Nodes. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Elastic deployment on AWS

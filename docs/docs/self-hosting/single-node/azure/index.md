@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node COMMUNITY deployment on Azure
-description: OpenVidu Single Node COMMUNITY deployment on Azure
+title: "OpenVidu Single Node COMMUNITY on Azure"
+description: "OpenVidu Single Node COMMUNITY on Azure: all OpenVidu services on a single server. Install, upgrade and administer it here."
 ---
 
 # OpenVidu Single Node <span style="font-size: 22px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span> deployment on Azure

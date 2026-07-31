@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on Oracle Cloud Infrastructure
-description: Learn how to deploy OpenVidu Elastic on Oracle Cloud Infrastructure
+title: "Install OpenVidu Elastic on Oracle Cloud"
+description: "Deploy OpenVidu Elastic on Oracle Cloud Infrastructure with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---

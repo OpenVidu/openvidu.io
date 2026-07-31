@@ -1,6 +1,6 @@
 ---
 title: "Fault tolerance in OpenVidu deployments"
-description: Ensure seamless real-time media experiences with OpenVidu's fault tolerance. Handle node failures effortlessly with Elastic and High Availability deployments.
+description: "How OpenVidu survives losing a node: which services are replicated, what happens to a room in progress, and what Elastic and HA each guarantee."
 ---
 
 # Fault Tolerance :material-shield-refresh:

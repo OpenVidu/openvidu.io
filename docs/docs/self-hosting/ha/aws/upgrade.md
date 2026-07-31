@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu High Availability on AWS
-description: How to upgrade OpenVidu High Availability on AWS deployments.
+title: "Upgrade OpenVidu High Availability on AWS"
+description: "Upgrade an existing OpenVidu High Availability deployment on AWS to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu High Availability: AWS
