@@ -153,9 +153,7 @@ def _view_metadata(page, src_uri: str, shapes: dict[str, str]) -> dict[str, str]
 
     metadata = {}
     if kind == "index":
-        metadata["description"] = _VIEW_DESCRIPTIONS[kind].format(
-            number=number, topic=_VIEW_TOPIC
-        )
+        metadata["description"] = _VIEW_DESCRIPTIONS[kind].format(number=number, topic=_VIEW_TOPIC)
     else:
         count = len(getattr(page, "posts", ()))
         metadata["description"] = _VIEW_DESCRIPTIONS[kind].format(
