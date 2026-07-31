@@ -446,7 +446,17 @@ plugins:
         - categories
         - tags
   - llmstxt:
-      markdown_description: Self-hosted videoconference solution and SDK
+      # Emitted as the free-prose paragraph after the blockquote, which the llms.txt spec
+      # reserves for how to interpret the rest of the file. It used to restate the blockquote
+      # in weaker words; what a reader actually needs is which of the two products a question
+      # belongs to, because that decides the whole answer.
+      markdown_description: >-
+        OpenVidu is self-hosted: it runs on infrastructure you control. Two products share this
+        documentation. OpenVidu Meet is a complete video conferencing application, deployed as
+        it is or embedded in your own app; OpenVidu Platform is the LiveKit-compatible SDK
+        layer you build your own real-time application on. The "Optional" section at the end
+        holds legal and acknowledgment pages, and can be skipped when a shorter context is
+        needed.
       # The plugin's own cleaning runs BEFORE the preprocess hook and deletes every <img> and
       # <svg>, so a hook cannot recover the alt text, the comparison-table icons or the tab
       # labels. publish-tool/llmstxt_preprocess.py reimplements all of autoclean and keeps those
@@ -458,30 +468,27 @@ plugins:
       # glob can select pages that each describe themselves. A listed page with no description
       # fails the build.
       sections:
-        OpenVidu:
+        Product and pricing:
         - index.md
-        - support.md
+        - openvidu-meet-vs-openvidu-platform.md
         - pricing.md
+        - support.md
         - about-us.md
         - research.md
-        - openvidu-meet-vs-openvidu-platform.md
-        - blog/posts/2026/04/how-client-networks-affect-qoe-and-costs.md
-        - blog/posts/2026/05/5-react-video-call-platforms.md
-        - blog/posts/2026/05/scale-in-problem-in-videoconferences.md
-        - blog/posts/2026/06/scalability-in-videoconferencing-systems.md
-        - blog/posts/2026/06/turn-key-considerations.md
-        - blog/posts/2026/06/meet-vs-platform.md
-        - blog/posts/2026/06/5-conversational-ai-app-ideas.md
-        - blog/posts/2026/06/secure-home-video-conferencing.md
-        - blog/posts/2026/07/deploy-and-scale-in-times-across-clouds.md
-        - blog/posts/2026/07/release-380.md
-        - blog/posts/2026/07/video-conferencing-permissions.md
-        - blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md
-        - blog/posts/2026/07/dyndevice-virtual-classrooms-openvidu.md
+
+        Blog:
+        - blog/posts/*/*/*.md
+
         OpenVidu Meet:
         - meet/index.md
-        - meet/releases.md
         - meet/getting-started/index.md
+        - meet/releases.md
+        - meet/deployment/overview.md
+        - meet/deployment/local.md
+        - meet/deployment/basic.md
+        - meet/deployment/advanced.md
+
+        OpenVidu Meet features:
         - meet/features/overview.md
         - meet/features/rooms/overview.md
         - meet/features/rooms/management.md
@@ -500,13 +507,14 @@ plugins:
         - meet/features/recordings/overview.md
         - meet/features/recordings/management.md
         - meet/features/recordings/configuration.md
-        - meet/deployment/overview.md
-        - meet/deployment/local.md
-        - meet/deployment/basic.md
-        - meet/deployment/advanced.md
+
+        OpenVidu Meet embedding and API reference:
         - meet/embedded/intro.md
         - meet/embedded/step-by-step-guide.md
         - meet/embedded/deploy-your-app.md
+        - meet/embedded/reference/*.md
+
+        OpenVidu Meet tutorials:
         - meet/embedded/tutorials/index.md
         - meet/embedded/tutorials/embedding-options/direct-link.md
         - meet/embedded/tutorials/embedding-options/webcomponent.md
@@ -516,18 +524,75 @@ plugins:
         - meet/embedded/tutorials/access/users.md
         - meet/embedded/tutorials/advanced-features/recordings.md
         - meet/embedded/tutorials/advanced-features/webhooks.md
-        - meet/embedded/reference/*.md
+
         OpenVidu Platform:
         - docs/index.md
-        - docs/releases.md
         - docs/comparing-openvidu.md
+        - docs/releases.md
         - docs/developing-your-openvidu-app/index.md
         - docs/developing-your-openvidu-app/how-to.md
-        - docs/tutorials/advanced-features/index.md
-        - docs/tutorials/ai-services/index.md
-        - docs/tutorials/angular-components/index.md
-        - docs/tutorials/application-client/index.md
+        - docs/ui-components/angular-components.md
+        - docs/ui-components/react-components.md
+
+        OpenVidu Platform tutorials — application server:
         - docs/tutorials/application-server/index.md
+        - docs/tutorials/application-server/node.md
+        - docs/tutorials/application-server/java.md
+        - docs/tutorials/application-server/python.md
+        - docs/tutorials/application-server/go.md
+        - docs/tutorials/application-server/dotnet.md
+        - docs/tutorials/application-server/php.md
+        - docs/tutorials/application-server/ruby.md
+        - docs/tutorials/application-server/rust.md
+
+        OpenVidu Platform tutorials — application client:
+        - docs/tutorials/application-client/index.md
+        - docs/tutorials/application-client/javascript.md
+        - docs/tutorials/application-client/react.md
+        - docs/tutorials/application-client/angular.md
+        - docs/tutorials/application-client/vue.md
+        - docs/tutorials/application-client/electron.md
+        - docs/tutorials/application-client/ionic.md
+        - docs/tutorials/application-client/android.md
+        - docs/tutorials/application-client/ios.md
+
+        OpenVidu Platform tutorials — Angular Components:
+        - docs/tutorials/angular-components/index.md
+        - docs/tutorials/angular-components/openvidu-components-demo.md
+        - docs/tutorials/angular-components/openvidu-custom-ui.md
+        - docs/tutorials/angular-components/openvidu-custom-layout.md
+        - docs/tutorials/angular-components/openvidu-custom-stream.md
+        - docs/tutorials/angular-components/openvidu-custom-toolbar.md
+        - docs/tutorials/angular-components/openvidu-toolbar-buttons.md
+        - docs/tutorials/angular-components/openvidu-toolbar-panel-buttons.md
+        - docs/tutorials/angular-components/openvidu-custom-panels.md
+        - docs/tutorials/angular-components/openvidu-additional-panels.md
+        - docs/tutorials/angular-components/openvidu-custom-chat-panel.md
+        - docs/tutorials/angular-components/openvidu-custom-activities-panel.md
+        - docs/tutorials/angular-components/openvidu-custom-participants-panel.md
+        - docs/tutorials/angular-components/openvidu-custom-participant-panel-item.md
+        - docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element.md
+        - docs/tutorials/angular-components/openvidu-admin-dashboard.md
+        - docs/tutorials/angular-components/openvidu-toggle-hand.md
+
+        OpenVidu Platform tutorials — advanced features:
+        - docs/tutorials/advanced-features/index.md
+        - docs/tutorials/advanced-features/recording-basic-s3.md
+        - docs/tutorials/advanced-features/recording-basic-azure.md
+        - docs/tutorials/advanced-features/recording-advanced-s3.md
+        - docs/tutorials/advanced-features/recording-advanced-azure.md
+
+        OpenVidu Platform AI services:
+        - docs/ai/overview.md
+        - docs/ai/live-captions.md
+        - docs/ai/openvidu-agents/overview.md
+        - docs/ai/openvidu-agents/speech-processing-agent.md
+        - docs/ai/openvidu-agents/agent-dispatch.md
+        - docs/ai/custom-agents.md
+        - docs/tutorials/ai-services/index.md
+        - docs/tutorials/ai-services/openvidu-live-captions.md
+
+        OpenVidu Platform self-hosting:
         - docs/self-hosting/deployment-types.md
         - docs/self-hosting/local.md
         - docs/self-hosting/single-node/index.md
@@ -541,18 +606,10 @@ plugins:
         - docs/self-hosting/production-ready/observability/index.md
         - docs/self-hosting/production-ready/observability/openvidu-dashboard.md
         - docs/self-hosting/production-ready/observability/grafana-stack.md
-        - docs/self-hosting/how-to-guides/index.md
-        - docs/ai/overview.md
-        - docs/ai/openvidu-agents/overview.md
-        - docs/ai/openvidu-agents/speech-processing-agent.md
-        - docs/ui-components/angular-components.md
-        - docs/ui-components/react-components.md
-        - docs/ai/custom-agents.md
-        - docs/ai/live-captions.md
-        - docs/ai/openvidu-agents/agent-dispatch.md
         - docs/self-hosting/configuration/changing-config.md
         - docs/self-hosting/configuration/in-depth.md
         - docs/self-hosting/configuration/reference.md
+        - docs/self-hosting/how-to-guides/index.md
         - docs/self-hosting/how-to-guides/backup-and-restore.md
         - docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
         - docs/self-hosting/how-to-guides/customize-meet-base-path.md
@@ -565,49 +622,20 @@ plugins:
         - docs/self-hosting/how-to-guides/force-single-port.md
         - docs/self-hosting/how-to-guides/turn-security.md
         - docs/troubleshooting/recording.md
-        - docs/tutorials/application-server/dotnet.md
-        - docs/tutorials/application-server/go.md
-        - docs/tutorials/application-server/java.md
-        - docs/tutorials/application-server/node.md
-        - docs/tutorials/application-server/php.md
-        - docs/tutorials/application-server/python.md
-        - docs/tutorials/application-server/ruby.md
-        - docs/tutorials/application-server/rust.md
-        - docs/tutorials/application-client/android.md
-        - docs/tutorials/application-client/angular.md
-        - docs/tutorials/application-client/electron.md
-        - docs/tutorials/application-client/ionic.md
-        - docs/tutorials/application-client/ios.md
-        - docs/tutorials/application-client/javascript.md
-        - docs/tutorials/application-client/react.md
-        - docs/tutorials/application-client/vue.md
-        - docs/tutorials/angular-components/openvidu-additional-panels.md
-        - docs/tutorials/angular-components/openvidu-admin-dashboard.md
-        - docs/tutorials/angular-components/openvidu-components-demo.md
-        - docs/tutorials/angular-components/openvidu-custom-activities-panel.md
-        - docs/tutorials/angular-components/openvidu-custom-chat-panel.md
-        - docs/tutorials/angular-components/openvidu-custom-layout.md
-        - docs/tutorials/angular-components/openvidu-custom-panels.md
-        - docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element.md
-        - docs/tutorials/angular-components/openvidu-custom-participant-panel-item.md
-        - docs/tutorials/angular-components/openvidu-custom-participants-panel.md
-        - docs/tutorials/angular-components/openvidu-custom-stream.md
-        - docs/tutorials/angular-components/openvidu-custom-toolbar.md
-        - docs/tutorials/angular-components/openvidu-custom-ui.md
-        - docs/tutorials/angular-components/openvidu-toggle-hand.md
-        - docs/tutorials/angular-components/openvidu-toolbar-buttons.md
-        - docs/tutorials/angular-components/openvidu-toolbar-panel-buttons.md
-        - docs/tutorials/advanced-features/recording-advanced-azure.md
-        - docs/tutorials/advanced-features/recording-advanced-s3.md
-        - docs/tutorials/advanced-features/recording-basic-azure.md
-        - docs/tutorials/advanced-features/recording-basic-s3.md
-        - docs/tutorials/ai-services/openvidu-live-captions.md
+
+        OpenVidu Single Node COMMUNITY deployment guides:
+        - docs/self-hosting/single-node/*/*.md
+
+        OpenVidu Single Node PRO deployment guides:
+        - docs/self-hosting/single-node-pro/*/*.md
+
+        OpenVidu Elastic deployment guides:
+        - docs/self-hosting/elastic/*/*.md
+
+        OpenVidu High Availability deployment guides:
+        - docs/self-hosting/ha/*/*.md
 
         Optional:
-        - docs/self-hosting/single-node/*/*.md
-        - docs/self-hosting/single-node-pro/*/*.md
-        - docs/self-hosting/elastic/*/*.md
-        - docs/self-hosting/ha/*/*.md
         - conditions/cookie-policy.md
         - conditions/privacy-policy.md
         - conditions/terms-of-service.md
