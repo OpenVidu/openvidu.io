@@ -300,6 +300,14 @@ a change to the rewriting logic is safe.
 
 ## Versioning with GitHub Actions
 
+> [!IMPORTANT]
+> **Merging to `main` does not put anything on the live site.** The site is served from the
+> `gh-pages` branch, which only changes when a publish runs, and publishing is deliberately
+> manual — `publish-web.yaml` is `workflow_dispatch` only. A publish rebuilds a whole version
+> folder and rewrites the pages served from the site root, so running it on every commit would
+> mean a full site rebuild per push. Treat the publish run as the last step of any change that is
+> meant to be visible, and check the change against production rather than trusting merge status.
+
 Run action [Publish Web](https://github.com/OpenVidu/openvidu.io/actions/workflows/publish-web.yaml)
 and pick the command that matches what you are doing:
 
