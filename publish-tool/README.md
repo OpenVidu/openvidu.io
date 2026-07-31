@@ -599,6 +599,45 @@ Anything else is a bug. Run the gate before merging a change to the rewriting lo
 in CI because it needs a full build (see
 [`.github/workflows/test-tools.yaml`](../.github/workflows/test-tools.yaml)).
 
+### The export preprocessor
+
+[`llmstxt_preprocess.py`](llmstxt_preprocess.py) replaces the `mkdocs-llmstxt` plugin's own
+`autoclean`, which `mkdocs.yml` turns off. It has to be a replacement rather than an addition,
+because the plugin runs `autoclean` **before** the `preprocess` hook and `autoclean` deletes every
+`<img>` and `<svg>` — so by the time a hook sees the page, the alt text, the comparison-table icons
+and the tab labels are already gone.
+
+Everything `autoclean` did is reimplemented, and four things deliberately differ. They share one
+premise: an assistant cannot see an image or watch a video, so the asset URL is worthless to it
+while the words describing the asset are not.
+
+| Deviation | Why |
+| --- | --- |
+| An `<img>` becomes its `alt` text | 1702 of the site's images carry informative alt text, all of it discarded. Images with no usable alt are still removed, and only one of a Material light/dark pair contributes, or the text appears twice. |
+| A comparison-table icon becomes `Yes` / `No` / `In progress` | The markup already says which — `class="twemoji compare-table-icon-yes"` — so the table exports as data with no change to the content. |
+| A link whose only content is an image or video becomes that asset's alt text, unlinked | `autoclean` removed an `<a>` around an `<img>` but not around a `<video>`, so markdownify wrote an empty link. That is the `\[[](…mp4)\]` noise. |
+| Tab labels are kept, as a bold line before each tab's block | Without them, 449 tabbed blocks are runs of code blocks with nothing saying which is Linux, Windows or macOS — silently ambiguous rather than visibly missing. |
+
+Two layers of checking, because "identical to `autoclean` except on purpose" is the whole promise:
+
+- [`tests/unit/test_llmstxt_preprocess.py`](tests/unit/test_llmstxt_preprocess.py) runs the module
+  and the plugin's real `autoclean` over the same markup and requires **byte-identical** output for
+  every rule that is not a deviation, individually and all at once.
+- A **differential build** proves it over the real site. Build once as configured, once with
+  `autoclean: true` and the `preprocess` line removed, then diff the exports: every difference must
+  be one of the four above.
+
+  ```bash
+  mkdocs build --strict -d /tmp/withhook
+  # then flip autoclean to true, drop the preprocess line, and:
+  mkdocs build --strict -d /tmp/baseline
+  diff -r /tmp/baseline /tmp/withhook
+  ```
+
+  Last run: 246 exports on both sides, none added or missing, 102 byte-identical; every difference
+  attributable to a deviation. Empty Markdown links **65 → 0**, no SVG or tabbed-set markup leaked
+  either way, and 34 KB of previously discarded alt text recovered.
+
 ### `verify`
 
 `ovweb verify` asserts the invariants of a published tree: every version folder has a redirect at

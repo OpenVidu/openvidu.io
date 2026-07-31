@@ -42,6 +42,11 @@ validate = [
 dev = [
     "pytest>=8",
     "ruff>=0.6",
+    # llmstxt_preprocess.py replaces the plugin's own `autoclean`, and its tests assert the two
+    # produce identical output wherever we did not deliberately deviate. That needs both the soup
+    # library the hook is handed and the plugin whose function is the reference.
+    "beautifulsoup4",
+    "mkdocs-llmstxt",
 ]
 
 [project.scripts]

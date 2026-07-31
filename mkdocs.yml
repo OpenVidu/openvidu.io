@@ -447,6 +447,12 @@ plugins:
         - tags
   - llmstxt:
       markdown_description: Self-hosted videoconference solution and SDK
+      # The plugin's own cleaning runs BEFORE the preprocess hook and deletes every <img> and
+      # <svg>, so a hook cannot recover the alt text, the comparison-table icons or the tab
+      # labels. publish-tool/llmstxt_preprocess.py reimplements all of autoclean and keeps those
+      # three, because an assistant cannot see an image — the words describing it are the content.
+      autoclean: false
+      preprocess: publish-tool/llmstxt_preprocess.py
       sections:
         OpenVidu:
         - index.md: OpenVidu - Ready to use self-hosted videoconferencing solutions and SDKs
