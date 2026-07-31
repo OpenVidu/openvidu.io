@@ -49,50 +49,83 @@ def on_config(config, **kwargs):
     return config
 
 
-def on_page_content(html, page, config, **kwargs):
-    """Use the page's own `description` frontmatter as its llms.txt description.
+def _one_line(value) -> str:
+    """A frontmatter value as a single line, so it cannot break llms.txt's one-entry-per-line."""
+    return " ".join(str(value).split())
 
-    `llmstxt` takes the description of each entry from the value written beside the path in
-    mkdocs.yml. That meant maintaining the same sentence twice — once as the page's meta
-    description, once in the plugin config — and a glob entry could only carry *one*
-    description for every page it matched, so the 97 deployment guides all claimed to be the
-    same page. Reading it off the page instead makes the frontmatter the single source, and
-    lets a glob select pages that each describe themselves.
+
+def _required(meta, key: str, src_uri: str) -> str:
+    value = meta.get(key)
+    if not value or not str(value).strip():
+        raise PluginError(
+            f"'{src_uri}' is listed in the llmstxt sections but has no `{key}` in its "
+            f"frontmatter. Every exported page needs a `title` and a `description`: together "
+            f"they are the line that tells an assistant whether to read the page."
+        )
+    return _one_line(value)
+
+
+def on_page_content(html, page, config, **kwargs):
+    """Use the page's own `title` and `description` frontmatter for its llms.txt entry.
+
+    Both halves fix the same class of problem — llms.txt taking its text from somewhere other
+    than the page:
+
+    * **The description** was the value written beside the path in mkdocs.yml, so the same
+      sentence was maintained twice, and a glob entry could only carry *one* description for
+      every page it matched — the 97 deployment guides all claimed to be the same page.
+    * **The title** is `page.title`, which MkDocs resolves as *the nav label first*, falling back
+      to the frontmatter `title` and then the first H1. Since 183 of this site's nav entries are
+      labelled (`- Install: docs/.../install.md`), 180 entries were rendering as `[Install]`,
+      `[Overview]` or `[Releases]` — labels that are perfectly clear next to their parent in a
+      sidebar and say nothing at all in a flat list. The 66 that already looked right were the
+      section-index and non-nav pages, where `page.title` had nothing to fall back *from*.
 
     This is a hook rather than a change to `plugin.config.sections` in `on_config` because by
     the time pages are rendered the plugin has already expanded the globs, and `page.meta` is
-    the description as MkDocs parsed it — including anything the `meta` plugin injected from a
+    the frontmatter as MkDocs parsed it — including anything the `meta` plugin injected from a
     directory-wide `.meta.yml`.
 
     Ordering is guaranteed, not lucky: `hooks` is validated after `plugins` and appended to the
-    same collection, so a hook's handler for an event always runs after the plugins'.
+    same collection, so a hook's handler for an event always runs after the plugins'. That is
+    what lets this overwrite `_md_pages`, which the plugin fills in during *its* own
+    `on_page_content`.
     """
     plugin = config["plugins"].get("llmstxt")
     if plugin is None:
         return None
 
-    # `_sections` is {section title: {src_uri: description}}, built in the plugin's `on_files`
-    # and read in its `on_post_build`. It is private, so assert its shape rather than skipping
-    # quietly: a plugin upgrade that renames it must fail the build, not silently publish an
-    # llms.txt with no descriptions at all.
+    # Both are private, and both are read in the plugin's `on_post_build`:
+    #   `_sections`  {section title: {src_uri: description}}, built in its `on_files`
+    #   `_md_pages`  {src_uri: _MDPageInfo(title, path_md, md_url, content)}, built in its
+    #                `on_page_content`
+    # Assert their shape rather than skipping quietly: a plugin upgrade that renames either must
+    # fail the build, not silently publish an llms.txt full of nav labels and no descriptions.
     sections = getattr(plugin, "_sections", None)
-    if not isinstance(sections, dict):
+    exported = getattr(plugin, "_md_pages", None)
+    if not isinstance(sections, dict) or not isinstance(exported, dict):
         raise PluginError(
-            "mkdocs-llmstxt no longer exposes `_sections`, so descriptions cannot be taken "
-            "from the pages. Update publish-tool/mkdocs_hook.py to the new API."
+            "mkdocs-llmstxt no longer exposes `_sections` and `_md_pages`, so llms.txt entries "
+            "cannot be taken from the pages. Update publish-tool/mkdocs_hook.py to the new API."
         )
 
-    listed = [pages for pages in sections.values() if page.file.src_uri in pages]
+    src_uri = page.file.src_uri
+    listed = [pages for pages in sections.values() if src_uri in pages]
     if not listed:
         return None
 
-    description = (page.meta or {}).get("description")
-    if not description or not str(description).strip():
-        raise PluginError(
-            f"'{page.file.src_uri}' is listed in the llmstxt sections but has no `description` "
-            "in its frontmatter. Every exported page needs one: it is the line that tells an "
-            "assistant whether to read the page."
-        )
+    meta = page.meta or {}
+    title = _required(meta, "title", src_uri)
+    description = _required(meta, "description", src_uri)
+
     for pages in listed:
-        pages[page.file.src_uri] = " ".join(str(description).split())
+        pages[src_uri] = description
+
+    info = exported.get(src_uri)
+    if info is None:  # pragma: no cover - the plugin records every page it selected
+        raise PluginError(
+            f"mkdocs-llmstxt selected '{src_uri}' but did not record it, so its llms.txt title "
+            "would keep the nav label. Update publish-tool/mkdocs_hook.py to the new API."
+        )
+    exported[src_uri] = info._replace(title=title)
     return None

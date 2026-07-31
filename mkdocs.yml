@@ -463,10 +463,14 @@ plugins:
       # three, because an assistant cannot see an image — the words describing it are the content.
       autoclean: false
       preprocess: publish-tool/llmstxt_preprocess.py
-      # Paths only, no descriptions: publish-tool/mkdocs_hook.py fills each entry in with the
-      # `description` frontmatter of the page itself, so the sentence lives in one place and a
-      # glob can select pages that each describe themselves. A listed page with no description
-      # fails the build.
+      # Paths only: publish-tool/mkdocs_hook.py fills each entry in from the page's own
+      # frontmatter — the `title` as the link text and the `description` after it — so both live
+      # in one place and a glob can select pages that each name and describe themselves. A listed
+      # page missing either one fails the build.
+      #
+      # The title override is not cosmetic: the plugin uses `page.title`, which MkDocs resolves as
+      # the *nav label* first, so a labelled nav entry (`- Install: …/install.md`) produced the
+      # entry `[Install]` — 23 of those, telling an assistant nothing.
       #
       # Prefer a glob wherever a whole folder belongs to one section: a page added there is then
       # picked up without an edit here, and a page nobody adds is the one failure mode worth

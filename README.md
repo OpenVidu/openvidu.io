@@ -81,7 +81,7 @@ When creating a new page, follow these steps:
 
    - Check the mkdocs-llmstxt plugin's `sections` in mkdocs.yml. **Most new pages need no change at all**: most sections are a glob over a folder, so a page added inside one is picked up automatically. Only add a line if the page's folder is listed page by page (the top-level product pages, the Meet embedding guides and the self-hosting entry pages) or if it starts a new folder.
 
-      When you do add one, add **the path only — no description.** [`publish-tool/mkdocs_hook.py`](publish-tool/mkdocs_hook.py) fills each entry in with the page's own `description` frontmatter, so the sentence is written once; a listed page with no description fails the build, and a page in no section at all is missing from `llms.txt` *and* linked as a dead `.md`.
+      When you do add one, add **the path only.** [`publish-tool/mkdocs_hook.py`](publish-tool/mkdocs_hook.py) fills each entry in from the page's own frontmatter — the `title` as the link text and the `description` after it — so both are written once; a listed page missing either fails the build, and a page in no section at all is missing from `llms.txt` *and* linked as a dead `.md`.
 
       ```yaml
       plugins:
