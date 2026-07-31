@@ -528,6 +528,35 @@ built site *links* to it; the reference is a `fetch()` in the theme's JavaScript
 link-checking or grepping finds. `ovweb verify` now asserts all three conditions, and
 [`tests/unit/test_rewrite_sitemap.py`](tests/unit/test_rewrite_sitemap.py) pins them.
 
+#### Where `<lastmod>` comes from
+
+MkDocs initialises `Page.update_date` to the build date for every page and its sitemap template
+emits exactly that, so the field used to claim that all 261 URLs changed on every publish — no
+per-page signal, and false often enough to teach a crawler to ignore the field entirely.
+
+The `on_env` half of [`mkdocs_hook.py`](mkdocs_hook.py) sets `update_date` from git instead, using
+[`sources.py`](src/ovweb/sources.py): one `git log --name-only` pass gives the last commit date of
+every file, and a page's date is the **newest across the page and the transitive closure of the
+`--8<--` snippets it includes**. 101 of the 248 pages assemble their content from `shared/`, so
+without the closure a rewritten shared install step would move no date at all on the up to 34 pages
+that display it.
+
+`on_env` is the only hook that can do this: MkDocs renders the theme's static templates —
+`sitemap.xml` among them — *before* it renders the pages, so `on_page_content` runs too late.
+Nothing in the post-processing needs to know: `promote_root_sitemap` only rewrites URL substrings,
+so the values flow into the root sitemap untouched.
+
+Two deliberate behaviours:
+
+- **A generated page carries no `<lastmod>` at all.** The blog's archive, category and pagination
+  views have no source file, so inventing a date for them would be the same lie in miniature; the
+  spec makes the field optional per URL.
+- **Anything that stops git answering falls back to the build date, at INFO level.** A shallow
+  clone is the important one — `git log` still succeeds there but reports the fetched commit for
+  every path, which is silently wrong rather than absent, so it is detected and skipped.
+  `validate-web.yaml` checks out shallow; `publish-web.yaml` sets `fetch-depth: 0`. It must stay
+  INFO because `mkdocs build --strict` fails on a warning.
+
 ### The two search indexes
 
 There are two, and they say different things, because **a page loads the index that sits beside

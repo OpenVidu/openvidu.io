@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 
 from . import fsops
@@ -19,6 +20,7 @@ from .versions import alias_target, read_versions_json
 
 SELF_URL_TAGS = re.compile(r'(?:rel="canonical" href|property="og:url" content)="([^"]+)"')
 RELATIVE_PARENT_HREF = re.compile(r'href="((?:\.\./)+[^"]*)"')
+SITEMAP_LASTMOD = re.compile(r"<lastmod>([^<]*)</lastmod>")
 
 
 @dataclass
@@ -51,6 +53,7 @@ def verify(
     findings += _check_root_search_index_uses_latest(tree, config, published)
     findings += _check_root_exports_use_latest(tree, config, latest)
     findings += _check_export_links_resolve(tree, config, latest)
+    findings += _check_root_sitemap_lastmod(tree)
     return findings
 
 
@@ -299,6 +302,41 @@ def _check_root_exports_use_latest(
                     str(path.relative_to(tree)),
                     f"holds {needle!r}; a file served from the root reaches versioned "
                     "documentation at /latest/, and a root page at its own unversioned URL",
+                )
+            )
+    return findings
+
+
+def _check_root_sitemap_lastmod(tree: Path) -> list[Finding]:
+    """Every `<lastmod>` in the root sitemap must be a real date, and not in the future.
+
+    The values come from each page's last commit (see `ovweb.sources`), which is only useful to a
+    crawler while it stays credible: a malformed value invalidates the entry, and a future one is
+    the signature of a clock or timezone bug rather than of an edit.
+
+    Deliberately *not* asserted: that the values differ from each other. A commit that touches
+    every page — a site-wide frontmatter pass, say — legitimately gives all of them the same date,
+    and a check that failed on that would be a check that fails on the truth.
+    """
+    path = tree / "sitemap.xml"
+    if not path.is_file():
+        return []
+    today = date.today().isoformat()
+    findings: list[Finding] = []
+    for value in SITEMAP_LASTMOD.findall(fsops.read_text(path) or ""):
+        try:
+            parsed = date.fromisoformat(value[:10]).isoformat()
+        except ValueError:
+            findings.append(
+                Finding("sitemap-lastmod", "sitemap.xml", f"{value!r} is not an ISO date")
+            )
+            continue
+        if parsed > today:
+            findings.append(
+                Finding(
+                    "sitemap-lastmod",
+                    "sitemap.xml",
+                    f"{value!r} is in the future, so it describes an edit that has not happened",
                 )
             )
     return findings

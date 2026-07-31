@@ -12,6 +12,8 @@ from contextlib import contextmanager
 from pathlib import Path
 from tempfile import mkdtemp
 
+from .sources import LOG_ARGS as LOG_DATES_ARGS
+
 
 class GitError(Exception):
     """A git command failed, or the repository is not in a usable state."""
@@ -73,6 +75,23 @@ class Git:
 
     def rev_parse(self, ref: str) -> str:
         return self.read("rev-parse", ref)
+
+    def is_shallow(self) -> bool:
+        """Whether the clone has a truncated history.
+
+        Worth asking before reading dates out of the log: in a shallow clone `git log` still
+        succeeds, but every path looks as if it were last touched by the one commit that was
+        fetched. Silently wrong data is worse than a failure, so callers check this first.
+        """
+        return self.read("rev-parse", "--is-shallow-repository") == "true"
+
+    def log_dates_for(self, *paths: str) -> str:
+        """Raw `git log` output pairing each commit's date with the paths it touched.
+
+        One pass over the whole history covers every file under `paths`; see
+        `ovweb.sources.parse_git_log`, which owns the format and the walking.
+        """
+        return self.read(*LOG_DATES_ARGS, "HEAD", "--", *paths)
 
     def is_clean(self, cwd: Path | None = None) -> bool:
         return self._run(("status", "--porcelain"), cwd=cwd).stdout.strip() == ""
