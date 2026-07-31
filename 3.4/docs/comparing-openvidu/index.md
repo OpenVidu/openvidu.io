@@ -2,7 +2,7 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 
 ## OpenVidu Meet vs OpenVidu Platform
 
-OpenVidu offers two different solutions suitable for different use cases. Find out which is the best for you here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.4/openvidu-meet-vs-openvidu-platform/index.md).
+OpenVidu offers two different solutions suitable for different use cases. Find out which is the best for you here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ## OpenVidu vs LiveKit
 

@@ -30,35 +30,35 @@ There are other optional tasks that you can perform from your application server
 
 To get you started, here is a list of all available LiveKit Server SDKs and an application server tutorial using them. These tutorials are all set up to **generate access tokens** and **receive webhook events**, so they are perfect starting points for your application server.
 
-[Node.js Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/node/index.md)
+[Node.js Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/node/)
 
 [Reference Docs](https://docs.livekit.io/server-sdk-js/)
 
-[Go Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/go/index.md)
+[Go Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/go/)
 
 [Reference Docs](https://pkg.go.dev/github.com/livekit/server-sdk-go)
 
-[Ruby Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/ruby/index.md)
+[Ruby Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/ruby/)
 
 [GitHub Repository](https://github.com/livekit/server-sdk-ruby)
 
-[Java Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/java/index.md)
+[Java Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/java/)
 
 [GitHub Repository](https://github.com/livekit/server-sdk-kotlin)
 
-[Python Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/python/index.md)
+[Python Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/python/)
 
 [GitHub Repository](https://github.com/livekit/python-sdks)
 
-[Rust Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/rust/index.md)
+[Rust Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/rust/)
 
 [Reference Docs](https://docs.rs/livekit-api/latest/livekit_api/index.html)
 
-[PHP Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/php/index.md)
+[PHP Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/php/)
 
 [GitHub Repository](https://github.com/agence104/livekit-server-sdk-php)
 
-[.NET Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/dotnet/index.md)
+[.NET Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/dotnet/)
 
 [GitHub Repository](https://github.com/pabloFuente/livekit-server-sdk-dotnet)
 
@@ -94,21 +94,21 @@ Of course, depending on the use case, this may not be necessary for all users, o
 
 Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs](https://docs.livekit.io/reference/) . Below is a list of application client tutorials, which are perfect starting points for your client application.
 
-[**JavaScript**](https://openvidu.io/3.4/docs/tutorials/application-client/javascript/index.md)
+[**JavaScript**](https://openvidu.io/3.4/docs/tutorials/application-client/javascript/)
 
-[**React**](https://openvidu.io/3.4/docs/tutorials/application-client/react/index.md)
+[**React**](https://openvidu.io/3.4/docs/tutorials/application-client/react/)
 
-[**Angular**](https://openvidu.io/3.4/docs/tutorials/application-client/angular/index.md)
+[**Angular**](https://openvidu.io/3.4/docs/tutorials/application-client/angular/)
 
-[**Vue**](https://openvidu.io/3.4/docs/tutorials/application-client/vue/index.md)
+[**Vue**](https://openvidu.io/3.4/docs/tutorials/application-client/vue/)
 
-[**Electron**](https://openvidu.io/3.4/docs/tutorials/application-client/electron/index.md)
+[**Electron**](https://openvidu.io/3.4/docs/tutorials/application-client/electron/)
 
-[**Ionic**](https://openvidu.io/3.4/docs/tutorials/application-client/ionic/index.md)
+[**Ionic**](https://openvidu.io/3.4/docs/tutorials/application-client/ionic/)
 
-[**Android**](https://openvidu.io/3.4/docs/tutorials/application-client/android/index.md)
+[**Android**](https://openvidu.io/3.4/docs/tutorials/application-client/android/)
 
-[**iOS**](https://openvidu.io/3.4/docs/tutorials/application-client/ios/index.md)
+[**iOS**](https://openvidu.io/3.4/docs/tutorials/application-client/ios/)
 
 ## 4. Deploy OpenVidu and your application
 

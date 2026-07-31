@@ -38,4 +38,4 @@ You can integrate a complete video call solution into your application with just
 
 ## Should I use OpenVidu Platform instead?
 
-If your use case requires other features or a more specific integration, you may want to consider using **OpenVidu Platform**. It supports low-level SDKs to build any type of real-time experience. You can find a comparison between both OpenVidu solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.4/openvidu-meet-vs-openvidu-platform/index.md).
+If your use case requires other features or a more specific integration, you may want to consider using **OpenVidu Platform**. It supports low-level SDKs to build any type of real-time experience. You can find a comparison between both OpenVidu solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
