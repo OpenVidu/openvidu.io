@@ -453,8 +453,8 @@ plugins:
         - about-us.md: The people behind OpenVidu
         - research.md: Research publications on real-time communications in peer-reviewed journals
         - openvidu-meet-vs-openvidu-platform.md: What to choose, OpenVidu Meet or OpenVidu Platform?
-        - openvidu-vs-livekit.md: OpenVidu vs LiveKit — how OpenVidu's LiveKit-compatible fork compares to upstream LiveKit, self-hosted and hosted
-        - openvidu-vs-mediasoup.md: OpenVidu vs mediasoup — how a full self-hosted platform compares to building directly on the low-level mediasoup SFU library
+        - openvidu-vs-livekit.md: OpenVidu vs LiveKit — how OpenVidu's self-hosted LiveKit fork compares to upstream LiveKit
+        - openvidu-vs-mediasoup.md: OpenVidu vs mediasoup — a full self-hosted platform compared with building on the low-level mediasoup SFU library
         - blog/index.md: OpenVidu Blog — articles on self-hosted videoconferencing, WebRTC development, benchmarks and product news
         - blog/posts/2026/04/how-client-networks-affect-qoe-and-costs.md: How client networks affect WebRTC quality of experience and server infrastructure costs
         - blog/posts/2026/05/5-react-video-call-platforms.md: 5 React video call platforms in 2026 compared — SaaS vs self-hosted

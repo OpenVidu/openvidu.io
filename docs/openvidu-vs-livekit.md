@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu vs LiveKit: A Self-Hosted LiveKit Fork"
-description: "OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled by default."
+description: "OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled in."
 # Structured Q&A metadata for this page's FAQ section. It feeds the JSON-LD
 # (schema.org FAQPage) emitted by overrides/partials/json-ld.html. Keep in
 # sync with the page content below: 'anchor' must match the heading id, and
