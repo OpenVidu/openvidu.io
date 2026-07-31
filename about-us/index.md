@@ -76,4 +76,4 @@ ______________________________________________________________________
 
 ## Some of us are researchers, and push OpenVidu forward by advancing the state-of-the-art on the field with our passion for science and technology!
 
-[Have a look at our research works](/research)
+[Have a look at our research works](https://openvidu.io/research)

@@ -1,5 +1,7 @@
 # Managing Permissions in Video Conferencing Apps: 3 Access Models
 
+Three access models for video conferencing permissions
+
 Everyone benchmarks video conferencing on the things you can see: resolution, latency, how many people fit in a grid. But the failures that actually hurt in production are rarely about a dropped frame — they're about the wrong person joining a room they shouldn't be in, or a private recording ending up somewhere public. **Permissions are the invisible half of a video app**, and they're the half most teams underestimate until something goes wrong.
 
 Here's the uncomfortable part. At the media layer that low-level WebRTC SDKs expose, the *only* permissions you get are "can this token publish audio, video or screen." There's no notion of *who* a person is, whether they belong in the room at all, or who's allowed to watch the recording afterwards. That's a media grant, not an access-control system. You either build the missing layer yourself or embed a product that already has it.
@@ -37,9 +39,9 @@ Every product names these ideas a little differently. Throughout this post we'll
 
 - **Participant.** Anyone actually present in a meeting, whatever route they took to get there.
 - **Room member.** Any individual granted access to a specific room. There are three kinds, distinguished by *how* they prove who they are.
-  - **User.** A room member with a **registered account** in the system. They log in to get in.
-  - **Identified guest.** A room member *without* an account, added ahead of time under a fixed name. They receive their own private link and never log in.
-  - **Anonymous guest.** Someone without an account who accesses through a shared link and just types a display name before joining.
+  - User icon **User.** A room member with a **registered account** in the system. They log in to get in.
+  - Identified guest icon **Identified guest.** A room member *without* an account, added ahead of time under a fixed name. They receive their own private link and never log in.
+  - Anonymous guest icon **Anonymous guest.** Someone without an account who accesses through a shared link and just types a display name before joining.
 - **Role and permissions.** A **role** (like *Moderator* or *Speaker*) is a named bundle of **permissions** — the individual capabilities that decide what someone can do once inside.
 
 With that shared vocabulary in place, here are the three models. One thing to keep in mind up front: they aren't mutually exclusive — a single room can use all three at once, each person joining through their own kind of link. Most real apps end up mixing them rather than picking just one.
@@ -138,6 +140,8 @@ See [Users](https://openvidu.io/latest/meet/features/users/overview/index.md).
 
 That completes the three models. Here they are side by side — three member types, each entering through its own kind of access link, all landing in the same room:
 
+The three access-link types — one shared anonymous link for anonymous guests, a unique link per identified guest, and a shared user link with login for users — all joining the same OpenVidu Meet room
+
 ## Beyond access: fine-grained, per-person permissions
 
 Notice that all three models answer "how do you get *in*." A separate question is "what can you *do* once you're in" — and that layer is **orthogonal**. You can attach the same fine-grained permission set to an anonymous guest, an identified guest, or a user.
@@ -152,6 +156,8 @@ OpenVidu Meet 3.8.0 introduced 14 boolean permissions for exactly this. Grouped 
 - **Recording:** `canRecord`, `canRetrieveRecordings`, `canDeleteRecordings`
 
 Each role — `Moderator` and `Speaker` — ships with sensible defaults, and you can flip any individual permission for any member. The highlighted cells below show two such overrides: a Speaker granted `canRecord`, and a Moderator whose `canDeleteRecordings` was turned off.
+
+Permissions matrix: the 14 OpenVidu Meet permissions grouped into Media, Communication, Meeting management and Recording, with on/off toggles for the Moderator and Speaker roles and two cells customized from their role defaults
 
 A member's effective permissions start from their base role and get overridden individually:
 

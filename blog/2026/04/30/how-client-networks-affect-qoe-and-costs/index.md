@@ -1,5 +1,7 @@
 # How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform
 
+WebRTC connectivity paths
+
 Real-time video applications seem fairly simple at first glance. A user clicks "Join", video and audio start flowing, and everyone can see and hear each other.
 
 But under the hood, WebRTC is making a series of complex networking decisions that determine **how media actually travels across the internet**. Which ultimately impacts both the final users and your server infrastructure. Including:

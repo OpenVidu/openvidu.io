@@ -1,5 +1,7 @@
 # Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform
 
+OpenVidu Meet vs OpenVidu Platform
+
 In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using the OpenVidu WebRTC ecosystem.
 
 ## Why Abstraction Matters
@@ -34,6 +36,8 @@ While it works out of the box, it remains highly flexible on the outside, allowi
 - **Privacy & Tech**: Virtual backgrounds and End-to-End Encryption (E2EE).
 - **Identity**: Full UI white-labeling and branding.
 
+OpenVidu Meet screenshot
+
 ### OpenVidu Platform: The Developer’s Canvas
 
 **OpenVidu Platform** is a production-ready, powerful, and self-hosted infrastructure that provides the **APIs and SDKs** necessary to build specialized real-time video experiences. It is designed for developers who need total sovereignty over the media flow.
@@ -43,6 +47,8 @@ Rather than being limited by "rooms", the Platform gives you the building blocks
 - **Granular Control**: Low-level WebRTC SDKs for any language providing developers full management of audio/video/data tracks.
 - **Advanced Routing**: Total control over media ingestion and telephony (PSTN/SIP) integration.
 - **AI-Ready**: Direct hooks for real-time AI processing and media analysis.
+
+OpenVidu Platform screenshot
 
 **The Key Difference** > **OpenVidu Meet** is built around the concepts of **Rooms & Meetings**, whereas **OpenVidu Platform** is built around the fundamental concepts of **Audio & Video Tracks**.
 

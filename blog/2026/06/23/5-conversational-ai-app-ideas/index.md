@@ -1,5 +1,7 @@
 # 5 conversational AI app ideas you can build this weekend
 
+Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend
+
 AI is moving faster than any of us can comfortably keep up with. Every week brings a new model, a new demo, or a viral thread claiming that everything has changed again. Keeping up feels almost impossible.
 
 As AI becomes mainstream, the noise grows even louder. Social feeds are packed with promises of overnight success: build a startup with vibe coding, replace entire teams with a handful of prompts, make money while you sleep.
@@ -36,6 +38,8 @@ Let's look at a few more ways WebRTC and conversational AI can be combined to cr
 
 ## 1. The AI running coach in your ear
 
+The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time
+
 **The idea.** Imagine having a running coach who never falls behind.
 
 This voice assistant runs with you, reads your pace and heart rate from your watch, listens to your breathing, and adapts the workout in real time. You can interrupt whenever you want.
@@ -56,6 +60,8 @@ Start with a single rule: when heart rate crosses a threshold, generate a spoken
 
 ## 2. The AI tour guide on your smart glasses
 
+The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time
+
 **The idea.** Imagine walking through a city and never wondering what you're looking at.
 
 You glance at a monument, a building, a painting, or a restaurant, and an AI guide instantly tells you what makes it interesting. Not as a wall of text, but as a short conversation you can interrupt at any moment.
@@ -73,6 +79,8 @@ Start with a mobile web app, access to the phone camera, a vision-capable model,
 If you can point the camera at a monument and hear a useful explanation a second later, you've already built the core experience.
 
 ## 3. The AI chef on your kitchen counter
+
+The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time
 
 **The idea.** Prop your phone against the backsplash and start cooking.
 
@@ -99,6 +107,8 @@ Then cook dinner with it.
 If it can reliably tell you when the pan is too hot or when the onions are ready, you've already built something surprisingly useful.
 
 ## 4. The AI sales copilot on your call
+
+The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice
 
 **The idea.** You're on a live sales or negotiation call.
 
@@ -138,6 +148,8 @@ The goal isn't a perfect copilot.
 
 ## 5. The AI that argues the other side
 
+The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time
+
 **The idea.** Imagine having a sparring partner that never agrees with you too easily.
 
 You’re preparing for a debate, a tough interview, a salary negotiation, or a sales pitch. Instead of rehearsing alone, you speak your argument out loud — and the AI immediately takes the opposing side.
@@ -175,6 +187,8 @@ All of these ideas use conversational AI, and some of them also require equippin
 Technically, all of them share the same pipeline:
 
 **Speech-to-text (STT) → Large language model (LLM) → Text-to-speech (TTS)**
+
+Conversational AI pipeline
 
 The model listens, the model thinks, the model speaks. Add vision or sensor data when the idea calls for it, and the structure barely changes.
 

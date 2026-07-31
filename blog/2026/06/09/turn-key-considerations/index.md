@@ -1,5 +1,7 @@
 # Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN
 
+Sloth watching a spinner waiting to connect to the Daily Meeting
+
 There's a clear gap between a WebRTC demo and something you can actually run in production, and it usually sits at the TURN layer. Your demo might work fine on a clean network, but once real users show up behind NATs, corporate firewalls, and mobile gateways, the calls simply die without it.
 
 ## Why TURN Matters So Much
@@ -7,6 +9,8 @@ There's a clear gap between a WebRTC demo and something you can actually run in 
 To understand why TURN is important, a little context is necessary: WebRTC enables media transmission between two endpoints. These endpoints can be two users communicating directly (P2P), or a user connecting to a media server, which is the norm on platforms like OpenVidu, Google Meet, or Zoom, where the server receives video from each participant and redistributes it to the rest. In either case, most of these endpoints sit behind a router with NAT that hides their real IP, and that's where STUN and TURN come in. STUN allows an endpoint to discover its public IP address as seen from the outside, so the two endpoints can find each other and attempt a direct connection. TURN is the plan B when that direct connection isn't possible: an intermediate server that receives traffic from one endpoint and relays it to the other, acting as a bridge when NAT or firewall block the direct path. In reality, there are quite a few more nuances (ICE, which is the framework that orchestrates connection attempts; candidate types, SDP negotiation…), but this is enough to understand the rest of the post.
 
 How many people end up needing that plan B? More than you'd think. [A small study by Philipp Hancke](https://medium.com/@fippo/what-kind-of-turn-server-is-being-used-d67dbfc2ff5d) shows that up to 17.7% of sessions go through a TURN relay. And that data is from 2017: with the rise of CGNAT (large-scale NAT used by mobile carriers to share a single public IP among thousands of users) in mobile networks and increasingly restrictive corporate firewalls, it's reasonable to think that today, in 2026, the figure is even higher.
+
+WebRTC traffic distribution
 
 The TURN layer is one of those silent but essential pieces of WebRTC: it wrestles daily with firewall policies, is powerful enough to become an attack vector if misconfigured, and drags along so many operational decisions that it ends up being an infrastructure project with its own operations team. This post covers why TURN is inevitable, why operating it well costs more than it seems, and how OpenVidu turns it into part of the platform instead of that classic server no one touches and everyone says "That service is not my problem, mate!"
 
@@ -87,6 +91,8 @@ At OpenVidu we've applied hardening recommendations while always keeping platfor
 1. **To prevent the TCP-to-peer abuse vector**, peer traffic is restricted to UDP-only relay: TCP allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062)) are disabled by default, though they can be enabled via configuration. By preventing the TURN server from establishing outgoing TCP connections to peers, the door is closed to an attacker using the relay as a TCP proxy toward internal services. This doesn't entirely prevent an attacker with valid credentials from abusing the infrastructure, but it drastically reduces the attack vector.
 1. **Restricting the relay port range.** In cases where OpenVidu is deployed in a NAT environment, the relay only forwards traffic to destination ports within the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.
 1. **Credentials are short-lived** (see the TTL above) and generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.
+
+OpenVidu TURN architecture
 
 ## Conclusion
 

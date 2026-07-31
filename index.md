@@ -1,6 +1,6 @@
 ## Choose the ideal OpenVidu solution for your real-time needs
 
-### 
+### OpenVidu Meet
 
 Ready-to-use videoconferencing solution
 
@@ -14,7 +14,7 @@ For teams, businesses and organizations that need a reliable and secure video co
 
 [Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md)
 
-### 
+### OpenVidu Platform
 
 Developer-oriented SDKs for custom apps
 
@@ -28,19 +28,19 @@ For developers that need complete freedom to build their real-time application u
 
 [Start building with the SDKs](https://openvidu.io/latest/docs/index.md)
 
-|                                                   |                                                        |                                                            |
+|                                                   | OpenVidu Meet                                          | OpenVidu Platform                                          |
 | ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
-| Self-hosted                                       |                                                        |                                                            |
-| AWS & Azure templates                             |                                                        |                                                            |
-| HQ real-time video                                |                                                        |                                                            |
-| Performant, Scalable, Fault-Tolerant & Observable |                                                        |                                                            |
-| Tutorials available                               |                                                        |                                                            |
-| Customer support                                  |                                                        |                                                            |
-| Ready-to-use application                          |                                                        |                                                            |
-| No-code & Low-code options available              |                                                        |                                                            |
-| Low-level SDKs                                    |                                                        |                                                            |
-| High control over real-time features              |                                                        |                                                            |
-| AI agents                                         |                                                        |                                                            |
+| Self-hosted                                       | Yes                                                    | Yes                                                        |
+| AWS & Azure templates                             | Yes                                                    | Yes                                                        |
+| HQ real-time video                                | Yes                                                    | Yes                                                        |
+| Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
+| Tutorials available                               | Yes                                                    | Yes                                                        |
+| Customer support                                  | Yes                                                    | Yes                                                        |
+| Ready-to-use application                          | Yes                                                    | No                                                         |
+| No-code & Low-code options available              | Yes                                                    | No                                                         |
+| Low-level SDKs                                    | No                                                     | Yes                                                        |
+| High control over real-time features              | No                                                     | Yes                                                        |
+| AI agents                                         | In progress                                            | Yes                                                        |
 | Models                                            | Rooms & Meetings                                       | Audio tracks & Video tracks                                |
 | Links                                             | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md) | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
 
@@ -158,10 +158,10 @@ ______________________________________________________________________
 
 [Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/latest/docs/index.md "Build with OpenVidu Platform SDKs")
 
-Not sure which fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/)
+Not sure which fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/)
 
 ______________________________________________________________________
 
 ## Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.
 
-[Talk to an expert](/support/)
+[Talk to an expert](https://openvidu.io/support/)

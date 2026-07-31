@@ -1,5 +1,7 @@
 # Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends
 
+A secure family video call running on your own home server
+
 We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their head in their hands thinking about how complicated it must be.
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
@@ -37,6 +39,8 @@ Before you start, make sure your network setup is ready for hosting a server.
 Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **[CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT)**), and that prevents people from reaching your server.
 
 Quick check: look at the "Internet" / "WAN" IP your **router** reports. Open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
+
+Router label with credentials
 
 Then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com) (or run `curl ifconfig.me`).
 
@@ -78,6 +82,8 @@ Then, in your router's admin page, find **Port forwarding** (usually under *Adva
 | ----- | -------- | ------------- | --------------------------------------------------------- |
 | `80`  | TCP      | `<SERVER_IP>` | Redirects to HTTPS and validates your SSL certificate     |
 | `443` | TCP      | `<SERVER_IP>` | The video app, the secure connection and media TURN relay |
+
+Port forwarding rules in a router admin panel
 
 If your server's Linux firewall is active, open ports 80 and 443 there too. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
 
@@ -128,9 +134,15 @@ The installer takes care of everything (it even installs Docker for you) and ask
 
 **1. Confirm you want to continue.** Choose **Yes**.
 
+The OpenVidu Meet installer asks you to confirm
+
 **2. Enter your domain.** Type the DuckDNS address you created, e.g. `<your-subdomain>.duckdns.org`, and press Enter. OpenVidu automatically requests a free, valid SSL certificate from Let's Encrypt for it, with no extra steps.
 
+Enter your DuckDNS domain name
+
 **3. Confirm to proceed**, then wait a few minutes while it downloads and starts. When it's done, you'll see the address of your new video app and the admin password, so **write these down**.
+
+Installation finished: your URL and admin credentials
 
 That's it. OpenVidu now starts automatically with your machine. You can manage it any time with:
 
@@ -144,13 +156,19 @@ sudo systemctl restart openvidu   # restart
 
 Open `https://<your-subdomain>.duckdns.org/` in your browser. You'll land on your own OpenVidu Meet. Log in with the `admin` user and the password from the installer.
 
+Your OpenVidu Meet dashboard
+
 Click **Create Room**, give it a name, and you get a room with its own shareable link.
+
+A room with its shareable invite link
 
 Now send that link to your family and friends however you like: WhatsApp, email, a text. When they open it they just type their name and join, with **no account and no app to install**, straight from the browser, on a phone, tablet or computer.
 
 Share the link from the copy button, not the address bar
 
 Use the **copy button** next to *"Invite others with this meeting link"*. That link carries a secret token that lets people in. The plain URL from your browser's address bar won't grant access.
+
+A call with family and friends, running on your own server
 
 Inside the call you get exactly what you'd expect from a modern app: HD video, crisp audio, screen sharing and chat, except this time it's all running on the little box in your home.
 
@@ -187,5 +205,7 @@ This guide deploys **OpenVidu Single Node Community**, which is perfect for fami
 And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](https://openvidu.io/latest/meet/deployment/basic/#other-deployment-options).
 
 ______________________________________________________________________
+
+A family video call running on your own home server
 
 That's all it takes. For the price of a tiny computer and a fun weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!

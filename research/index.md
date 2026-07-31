@@ -32,7 +32,7 @@ ______________________________________________________________________
 
 ## [Scalability and Quality of Experience of WebRTC media servers for Large-Scale, Low-Latency Streaming](https://dialnet.unirioja.es/servlet/tesis?codigo=402576)
 
-Iván Chicano-Capelo (Author), Francisco Gortázar (Supervisor), Micael Gallego (Supervisor)
+Iván Chicano-CapeloORCID iD (Author), Francisco GortázarORCID iD (Supervisor), Micael GallegoORCID iD (Supervisor)
 
 PHD Thesis **Universidad Rey Juan Carlos** · 2026 · Doctoral Program in Information and Communication Technologies (International Doctoral School) · [Full text](https://dialnet.unirioja.es/servlet/tesis?codigo=402576&orden=0&info=link)
 
@@ -63,7 +63,7 @@ ______________________________________________________________________
 
 ## [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](https://doi.org/10.1109/ACCESS.2025.3589785)
 
-Iván Chicano-Capelo, Francisco Gortázar, Micael Gallego
+Iván Chicano-CapeloORCID iD, Francisco GortázarORCID iD, Micael GallegoORCID iD
 
 Journal **IEEE Access** · 2025 · [DOI: 10.1109/ACCESS.2025.3589785](https://doi.org/10.1109/ACCESS.2025.3589785)
 
@@ -87,7 +87,7 @@ ______________________________________________________________________
 
 ## [Cost-effective load testing of WebRTC applications](https://doi.org/10.1016/j.jss.2022.111439)
 
-Francisco Gortázar, Micael Gallego, Michel Maes-Bermejo, Iván Chicano-Capelo, Carlos Santos
+Francisco GortázarORCID iD, Micael GallegoORCID iD, Michel Maes-BermejoORCID iD, Iván Chicano-CapeloORCID iD, Carlos Santos
 
 Journal **Journal of Systems and Software** · 2022 · [DOI: 10.1016/j.jss.2022.111439](https://doi.org/10.1016/j.jss.2022.111439)
 
@@ -111,7 +111,7 @@ ______________________________________________________________________
 
 ## [Quality-of-Experience driven configuration of WebRTC services through automated testing](https://doi.org/10.1109/QRS51102.2020.00031)
 
-Antonia Bertolino, Antonello Calabró, Guglielmo De Angelis, Francisco Gortázar, Francesca Lonetti, Michel Maes, Guiomar Tuñón
+Antonia BertolinoORCID iD, Antonello CalabróORCID iD, Guglielmo De AngelisORCID iD, Francisco GortázarORCID iD, Francesca LonettiORCID iD, Michel MaesORCID iD, Guiomar Tuñón
 
 Conference **IEEE 20th International Conference on Software Quality, Reliability and Security (QRS)** · 2020 · [DOI: 10.1109/QRS51102.2020.00031](https://doi.org/10.1109/QRS51102.2020.00031)
 
@@ -134,7 +134,7 @@ ______________________________________________________________________
 
 ## [A Survey of the Selenium Ecosystem](https://doi.org/10.3390/electronics9071067)
 
-Boni García, Micael Gallego, Francisco Gortázar, Mario Munoz-Organero
+Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Mario Munoz-OrganeroORCID iD
 
 Journal **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9071067](https://doi.org/10.3390/electronics9071067)
 
@@ -159,7 +159,7 @@ ______________________________________________________________________
 
 ## [Assessment of QoE for Video and Audio in WebRTC Applications Using Full-Reference Models](https://doi.org/10.3390/electronics9030462)
 
-Boni García, Micael Gallego, Francisco Gortázar, Andrew Hines
+Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Andrew HinesORCID iD
 
 Journal **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9030462](https://doi.org/10.3390/electronics9030462)
 
@@ -184,7 +184,7 @@ ______________________________________________________________________
 
 ## [Understanding and estimating quality of experience in WebRTC applications](https://doi.org/10.1007/s00607-018-0669-7)
 
-Boni García, Micael Gallego, Francisco Gortázar, Antonia Bertolino
+Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Antonia BertolinoORCID iD
 
 Journal **Computing** (Springer) · 2019 · [DOI: 10.1007/s00607-018-0669-7](https://doi.org/10.1007/s00607-018-0669-7)
 
@@ -209,7 +209,7 @@ ______________________________________________________________________
 
 ## [Practical Evaluation of VMAF Perceptual Video Quality for WebRTC Applications](https://doi.org/10.3390/electronics8080854)
 
-Boni García, Luis López-Fernández, Francisco Gortázar, Micael Gallego
+Boni GarcíaORCID iD, Luis López-Fernández, Francisco GortázarORCID iD, Micael GallegoORCID iD
 
 Journal **Electronics** (MDPI) · 2019 · [DOI: 10.3390/electronics8080854](https://doi.org/10.3390/electronics8080854)
 
@@ -234,7 +234,7 @@ ______________________________________________________________________
 
 ## [NUBOMEDIA: The First Open Source WebRTC PaaS](https://doi.org/10.1145/3123266.3129392)
 
-Boni García, Luis López, Francisco Gortázar, Micael Gallego, Giuseppe Antonio Carella
+Boni GarcíaORCID iD, Luis López, Francisco GortázarORCID iD, Micael GallegoORCID iD, Giuseppe Antonio Carella
 
 Conference **ACM International Conference on Multimedia (MM '17)** · 2017 · [DOI: 10.1145/3123266.3129392](https://doi.org/10.1145/3123266.3129392)
 
@@ -257,7 +257,7 @@ ______________________________________________________________________
 
 ## [Kurento: The Swiss Army Knife of WebRTC Media Servers](https://doi.org/10.1109/MCOMSTD.2017.1700006)
 
-Boni García, Luis López, Micael Gallego, Francisco Gortázar
+Boni GarcíaORCID iD, Luis López, Micael GallegoORCID iD, Francisco GortázarORCID iD
 
 Journal **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700006](https://doi.org/10.1109/MCOMSTD.2017.1700006)
 
@@ -282,7 +282,7 @@ ______________________________________________________________________
 
 ## [WebRTC Testing: Challenges and Practical Solutions](https://doi.org/10.1109/MCOMSTD.2017.1700005)
 
-Boni García, Francisco Gortázar, Luis López, Micael Gallego, Miguel Paris
+Boni GarcíaORCID iD, Francisco GortázarORCID iD, Luis López, Micael GallegoORCID iD, Miguel Paris
 
 Journal **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700005](https://doi.org/10.1109/MCOMSTD.2017.1700005)
 
@@ -307,7 +307,7 @@ ______________________________________________________________________
 
 ## [Designing and evaluating the usability of an API for real-time multimedia services in the Internet](https://doi.org/10.1007/s11042-016-3729-z)
 
-Luis López-Fernández, Boni García, Micael Gallego, Francisco Gortázar
+Luis López-Fernández, Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD
 
 Journal **Multimedia Tools and Applications** (Springer) · 2017 · [DOI: 10.1007/s11042-016-3729-z](https://doi.org/10.1007/s11042-016-3729-z)
 
@@ -332,7 +332,7 @@ ______________________________________________________________________
 
 ## [WebRTC Testing: State of the Art](https://doi.org/10.5220/0006442003630371)
 
-Boni García, Micael Gallego, Francisco Gortázar, Eduardo Jiménez
+Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Eduardo Jiménez
 
 Conference **12th International Conference on Software Technologies (ICSOFT)** · 2017 · [DOI: 10.5220/0006442003630371](https://doi.org/10.5220/0006442003630371)
 
@@ -355,7 +355,7 @@ ______________________________________________________________________
 
 ## [Analysis of Video Quality and End-to-End Latency in WebRTC](https://doi.org/10.1109/GLOCOMW.2016.7848838)
 
-Boni García, Luis López-Fernández, Francisco Gortázar, Micael Gallego
+Boni GarcíaORCID iD, Luis López-Fernández, Francisco GortázarORCID iD, Micael GallegoORCID iD
 
 Conference **IEEE Globecom Workshops (GC Wkshps)** · 2016 · [DOI: 10.1109/GLOCOMW.2016.7848838](https://doi.org/10.1109/GLOCOMW.2016.7848838)
 
@@ -378,7 +378,7 @@ ______________________________________________________________________
 
 ## [Kurento: The WebRTC Modular Media Server](https://doi.org/10.1145/2964284.2973798)
 
-Luis López, Miguel París, Santiago Carot, Boni García, Micael Gallego, Francisco Gortázar, Raul Benítez, Jose A. Santos, David Fernández, Radu Tom Vlad, Iván Gracia, Francisco Javier López
+Luis López, Miguel París, Santiago Carot, Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Raul Benítez, Jose A. Santos, David Fernández, Radu Tom Vlad, Iván Gracia, Francisco Javier López
 
 Conference **ACM International Conference on Multimedia (MM '16)** · 2016 · [DOI: 10.1145/2964284.2973798](https://doi.org/10.1145/2964284.2973798)
 
@@ -401,7 +401,7 @@ ______________________________________________________________________
 
 ## [Testing Framework for WebRTC Services](https://dl.acm.org/doi/10.5555/3021385.3021393)
 
-Boni García, Luis López-Fernández, Micael Gallego, Francisco Gortázar
+Boni GarcíaORCID iD, Luis López-Fernández, Micael GallegoORCID iD, Francisco GortázarORCID iD
 
 Conference **9th EAI International Conference on Mobile Multimedia Communications (MobiMedia)** · 2016 · [ACM Digital Library ↗](https://dl.acm.org/doi/10.5555/3021385.3021393)
 
@@ -424,7 +424,7 @@ ______________________________________________________________________
 
 ## [NUBOMEDIA: An Elastic PaaS Enabling the Convergence of Real-Time and Big Data Multimedia](https://doi.org/10.1109/SmartCloud.2016.11)
 
-Boni García, Micael Gallego, Luis López, Giuseppe Antonio Carella, Alice Cheambe
+Boni GarcíaORCID iD, Micael GallegoORCID iD, Luis López, Giuseppe Antonio Carella, Alice Cheambe
 
 Conference **IEEE International Conference on Smart Cloud (SmartCloud)** · 2016 · [DOI: 10.1109/SmartCloud.2016.11](https://doi.org/10.1109/SmartCloud.2016.11)
 
@@ -447,7 +447,7 @@ ______________________________________________________________________
 
 ## [Design and Implementation of a High Performant PaaS Platform for Creating Novel Real-Time Communication Paradigms](https://dl.ifip.org/db/conf/icin/icin2016/1570230514.pdf)
 
-Alice Cheambe, Flavio Murgia, Pasquale Maiorano Picone, Boni García, Micael Gallego, Giuseppe Antonio Carella, Lorenzo Tomasini, Alin Calinciuc, Cristian Spoiala
+Alice Cheambe, Flavio Murgia, Pasquale Maiorano Picone, Boni GarcíaORCID iD, Micael GallegoORCID iD, Giuseppe Antonio Carella, Lorenzo Tomasini, Alin Calinciuc, Cristian Spoiala
 
 Conference **19th IEEE Conference on Innovations in Clouds, Internet and Networks (ICIN)** · 2016 · [Full text](https://dl.ifip.org/db/conf/icin/icin2016/1570230514.pdf)
 
@@ -469,7 +469,7 @@ ______________________________________________________________________
 
 ## [Authentication, Authorization, and Accounting in WebRTC PaaS Infrastructures: The Case of Kurento](https://doi.org/10.1109/MIC.2014.102)
 
-Luis López-Fernández, Micael Gallego, Boni García, David Fernández-López, Francisco Javier López
+Luis López-Fernández, Micael GallegoORCID iD, Boni GarcíaORCID iD, David Fernández-López, Francisco Javier López
 
 Journal **IEEE Internet Computing** · 2014 · [DOI: 10.1109/MIC.2014.102](https://doi.org/10.1109/MIC.2014.102)
 
