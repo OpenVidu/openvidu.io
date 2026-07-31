@@ -170,7 +170,7 @@ The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingre
 
 ### Agents
 
-For AI agents the allocation strategy varies depending if the Agent is an [**OpenVidu agent**](https://openvidu.io/3.6/docs/ai/openvidu-agents/overview/index.md) or a [**custom agent**](https://openvidu.io/3.6/docs/ai/custom-agents/index.md).
+For AI agents the allocation strategy varies depending if the Agent is an [**OpenVidu agent**](https://openvidu.io/3.6/docs/ai/openvidu-agents/overview/index.md) or a [**custom agent**](https://openvidu.io/3.6/docs/ai/custom-agents/).
 
 - For [**OpenVidu agents**](https://openvidu.io/3.6/docs/ai/openvidu-agents/overview/index.md): the agent will be available to process a new request if the CPU load of its Media Node is below a threshold. The default threshold is 70%, but you can change it in the agent's YAML configuration file. For example, for the **Speech Processing Agent**, you can change it in [**`agent-speech-processing.yaml`**](https://openvidu.io/3.6/docs/ai/openvidu-agents/speech-processing-agent/#configuration-reference):
 
@@ -181,7 +181,7 @@ For AI agents the allocation strategy varies depending if the Agent is an [**Ope
   load_threshold: 0.7
   ```
 
-- When developing a [**custom agent**](https://openvidu.io/3.6/docs/ai/custom-agents/index.md): the agent will be available to process a new request if its load does not exceed a specific threshold. Both the load metric and its threshold have the same defaults as for OpenVidu agents (average CPU load must be below 70%), but you can customize them in the `WorkerOptions` when developing your agent:
+- When developing a [**custom agent**](https://openvidu.io/3.6/docs/ai/custom-agents/): the agent will be available to process a new request if its load does not exceed a specific threshold. Both the load metric and its threshold have the same defaults as for OpenVidu agents (average CPU load must be below 70%), but you can customize them in the `WorkerOptions` when developing your agent:
 
   ```python
   # Called to determine the current load of the worker. Must return a value between 0 and 1
@@ -230,8 +230,8 @@ When deploying in a supported **cloud provider** using our official templates, O
 
 Deploy OpenVidu using our official **CloudFormation** template:
 
-- [OpenVidu Elastic in AWS](https://openvidu.io/3.6/docs/self-hosting/elastic/aws/install/index.md)
-- [OpenVidu High Availability in AWS](https://openvidu.io/3.6/docs/self-hosting/ha/aws/install/index.md)
+- [OpenVidu Elastic in AWS](https://openvidu.io/3.6/docs/self-hosting/elastic/aws/install/)
+- [OpenVidu High Availability in AWS](https://openvidu.io/3.6/docs/self-hosting/ha/aws/install/)
 
 The cluster scales automatically thanks to [AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) . You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
 
@@ -243,8 +243,8 @@ The **ScaleTargetCPU** parameter specifies the target CPU utilization to trigger
 
 Deploy OpenVidu using our official **ARM** template:
 
-- [OpenVidu Elastic in Azure](https://openvidu.io/3.6/docs/self-hosting/elastic/azure/install/index.md)
-- [OpenVidu High Availability in Azure](https://openvidu.io/3.6/docs/self-hosting/ha/azure/install/index.md)
+- [OpenVidu Elastic in Azure](https://openvidu.io/3.6/docs/self-hosting/elastic/azure/install/)
+- [OpenVidu High Availability in Azure](https://openvidu.io/3.6/docs/self-hosting/ha/azure/install/)
 
 The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/) . You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Scaling Set Configuration**.
 
@@ -256,8 +256,8 @@ The **Scale Target CPU** parameter specifies the target CPU utilization to trigg
 
 Deploy OpenVidu using our official **Terraform** template:
 
-- [OpenVidu Elastic in GCP](https://openvidu.io/3.6/docs/self-hosting/elastic/gcp/install/index.md)
-- [OpenVidu High Availability in GCP](https://openvidu.io/3.6/docs/self-hosting/ha/gcp/install/index.md)
+- [OpenVidu Elastic in GCP](https://openvidu.io/3.6/docs/self-hosting/elastic/gcp/install/)
+- [OpenVidu High Availability in GCP](https://openvidu.io/3.6/docs/self-hosting/ha/gcp/install/)
 
 The cluster scales automatically thanks to [Managed Instance Groups](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups) . You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
 
@@ -270,8 +270,8 @@ The cluster scales automatically thanks to [Managed Instance Groups](https://clo
 
 Deploy OpenVidu using our official **Terraform** template:
 
-- [OpenVidu Elastic in DigitalOcean](https://openvidu.io/3.6/docs/self-hosting/elastic/digitalocean/install/index.md)
-- [OpenVidu High Availability in DigitalOcean](https://openvidu.io/3.6/docs/self-hosting/ha/digitalocean/install/index.md)
+- [OpenVidu Elastic in DigitalOcean](https://openvidu.io/3.6/docs/self-hosting/elastic/digitalocean/install/)
+- [OpenVidu High Availability in DigitalOcean](https://openvidu.io/3.6/docs/self-hosting/ha/digitalocean/install/)
 
 Right now, there is no autoscaling in DigitalOcean, but you can configure the average number of nodes you want. To find out how, follow the steps of [Configurate Number of Fixed Media Nodes OpenVidu Elastic](https://openvidu.io/3.6/docs/self-hosting/elastic/digitalocean/admin/#change-fixed-number-of-media-nodes) or [Configurate Number of Fixed Media Nodes OpenVidu High Availability](https://openvidu.io/3.6/docs/self-hosting/ha/digitalocean/admin/#change-fixed-number-of-media-nodes) depending on your deployment.
 

@@ -12,18 +12,18 @@ To do so they all define two REST endpoints:
 
 They use the proper [LiveKit Server SDK](https://docs.livekit.io/reference/) for their language, if available.
 
-[**Node.js**](https://openvidu.io/3.6/docs/tutorials/application-server/node/index.md)
+[**Node.js**](https://openvidu.io/3.6/docs/tutorials/application-server/node/)
 
-[**Go**](https://openvidu.io/3.6/docs/tutorials/application-server/go/index.md)
+[**Go**](https://openvidu.io/3.6/docs/tutorials/application-server/go/)
 
-[**Ruby**](https://openvidu.io/3.6/docs/tutorials/application-server/ruby/index.md)
+[**Ruby**](https://openvidu.io/3.6/docs/tutorials/application-server/ruby/)
 
-[**Java**](https://openvidu.io/3.6/docs/tutorials/application-server/java/index.md)
+[**Java**](https://openvidu.io/3.6/docs/tutorials/application-server/java/)
 
-[**Python**](https://openvidu.io/3.6/docs/tutorials/application-server/python/index.md)
+[**Python**](https://openvidu.io/3.6/docs/tutorials/application-server/python/)
 
-[**Rust**](https://openvidu.io/3.6/docs/tutorials/application-server/rust/index.md)
+[**Rust**](https://openvidu.io/3.6/docs/tutorials/application-server/rust/)
 
-[**PHP**](https://openvidu.io/3.6/docs/tutorials/application-server/php/index.md)
+[**PHP**](https://openvidu.io/3.6/docs/tutorials/application-server/php/)
 
-[**.NET**](https://openvidu.io/3.6/docs/tutorials/application-server/dotnet/index.md)
+[**.NET**](https://openvidu.io/3.6/docs/tutorials/application-server/dotnet/)
