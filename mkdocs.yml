@@ -119,6 +119,8 @@ nav:
       - Reference:
           - Access tokens: docs/reference/access-tokens.md
           - Webhooks: docs/reference/webhooks.md
+          - Egress: docs/reference/egress.md
+          - Ingress: docs/reference/ingress.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:

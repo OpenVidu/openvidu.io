@@ -75,7 +75,7 @@ Upon a new Room creation request:
 ### Egress
 
 !!! info
-    Check out the official Egress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/){target="\_blank"}.
+    Check out the official Egress documentation of LiveKit [here](../../reference/egress.md).
 
 The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). 
 
@@ -143,7 +143,7 @@ openvidu:
 ### Ingress
 
 !!! info
-    Check out the official Ingress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){target="\_blank"}.
+    Check out the official Ingress documentation of LiveKit [here](../../reference/ingress.md).
 
 The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 

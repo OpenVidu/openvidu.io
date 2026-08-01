@@ -238,8 +238,8 @@ These operations are only available in the server SDKs, and not in the client SD
 You have here the complete list of the server-side operations, documented for the HTTP Server API. All the LiveKit Server SDKs have the same operations.
 
 - [**RoomService** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}: to manage Rooms and Participants.
-- [**Egress** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/#API){target="\_blank"}: to manage egress operations.
-- [**Ingress** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/#API){target="\_blank"}: to manage ingress operations.
+- [**Egress**](../reference/egress.md): to manage egress operations.
+- [**Ingress**](../reference/ingress.md): to manage ingress operations.
 
 ### Screen Sharing
 
@@ -308,9 +308,9 @@ You can record your Rooms using the Egress module. Egress allows exporting media
 - **Track Composite Egress**: a single video output combining an audio Track and a video Track.
 - **Track Egress**: individual outputs for each Track of a Room.
 
-Visit the LiveKit reference documentation for a detailed explanation of Egress:
+Every Egress type, output format, encoding preset and status value:
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/egress/overview/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/egress.md)
 
 ### Stream ingestion
 
@@ -321,13 +321,13 @@ You can ingest media streams into your Rooms using the Ingress module. It suppor
 - **Media files serve by an HTTP server**: the Ingress module will fetch a media file, transcode it and publish it to the Room.
 - **Media served by an SRT server**: the Ingress module will pull the media from an SRT server, transcode it and publish it to the Room.
 
-Visit the LiveKit reference documentation for a detailed explanation of Ingress:
+Every input type, transcoding option and Ingress state:
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/ingress/overview/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/ingress.md)
 
 ### IP Cameras
 
-With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply use the [Ingress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){target="\_blank"} to create and ingress of input type `URL`, providing the IP camera RTSP URL as value:
+With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply use the [Ingress API](../reference/ingress.md) to create and ingress of input type `URL`, providing the IP camera RTSP URL as value:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
@@ -517,7 +517,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
     If your backend technology does not have its own SDK, you have two different options:
 
-    1. Consume the Ingress API directly: [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/home/ingress/overview/#api){target="\_blank"}
+    1. Consume the Ingress API directly: [:octicons-arrow-right-24: Reference Docs](../reference/ingress.md)
 
     2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
 
