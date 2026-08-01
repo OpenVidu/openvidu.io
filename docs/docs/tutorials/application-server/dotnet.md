@@ -10,7 +10,7 @@ description: "Build a minimal .NET application server for OpenVidu with ASP.NET 
 This is a minimal server application built for .NET with [ASP.NET Core Minimal APIs :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){:target="\_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
+-   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
 It internally uses the [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="\_blank"}.
 
@@ -147,12 +147,12 @@ app.MapPost(
 1. The endpoint obtains a Dictionary from the body request, and check if fields `roomName` and `participantName` are available.
 2. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 3. We set participant's name and identity in the AccessToken.
-4. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
+4. We set the video grants in the AccessToken. `RoomJoin` allows the user to join a room and `RoomName` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 5. Obtain the JWT string from the AccessToken.
 6. Return the token to the client.
 7. Return a `400` error if required fields are not available.
 
-The endpoint obtains a Dictionary from the body request, and check if fields `roomName` and `participantName` are available. If not, it returns a `400` error. If required fields are available, a new `AccessToken` is created with the proper participant's identity, name and video grants. The `RoomJoin` grant allows the user to join a room and the `Room` grant determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="\_blank"}.
+The endpoint obtains a Dictionary from the body request, and check if fields `roomName` and `participantName` are available. If not, it returns a `400` error. If required fields are available, a new `AccessToken` is created with the proper participant's identity, name and video grants. The `RoomJoin` grant allows the user to join a room and the `Room` grant determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 
 Finally, the returned token is sent back to the client.
 
@@ -160,7 +160,7 @@ Finally, the returned token is sent back to the client.
 
 #### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="\_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](../../reference/webhooks.md#events).
 
 ```cs title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/dotnet/Program.cs#L70-L95' target='_blank'>Program.cs</a>" linenums="70"
 app.MapPost(
@@ -191,7 +191,7 @@ app.MapPost(
 );
 ```
 
-1. Initialize the WebhookReceiver using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
+1. Initialize the WebhookReceiver using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events](../../reference/webhooks.md).
 2. The raw string body of the request contains the webhook event.
 3. The `Authorization` header is required to validate the webhook event.
 4. Obtain the `WebhookEvent` object using the `WebhookReceiver#Receive` method. It takes the raw body as a String and the Authorization header of the request.

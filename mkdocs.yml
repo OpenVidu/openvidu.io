@@ -116,6 +116,9 @@ nav:
           - AI Services:
               - docs/tutorials/ai-services/index.md
               - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
+      - Reference:
+          - Access tokens: docs/reference/access-tokens.md
+          - Webhooks: docs/reference/webhooks.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
@@ -537,6 +540,9 @@ plugins:
 
         OpenVidu Platform tutorials — AI services:
         - docs/tutorials/ai-services/*.md
+
+        OpenVidu Platform API reference:
+        - docs/reference/*.md
 
         OpenVidu Platform AI services:
         - docs/ai/*.md
