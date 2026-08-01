@@ -121,6 +121,8 @@ nav:
           - Webhooks: docs/reference/webhooks.md
           - Egress: docs/reference/egress.md
           - Ingress: docs/reference/ingress.md
+          - Server API: docs/reference/server-api.md
+          - Client SDK: docs/reference/client-sdk.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:

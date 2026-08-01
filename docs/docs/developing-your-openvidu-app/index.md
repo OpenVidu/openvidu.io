@@ -28,7 +28,7 @@ The only mandatory task to perform in your application server is:
 
 There are other optional tasks that you can perform from your application server, depending on your requirements:
 
-- **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. This is the official LiveKit documentation with all the available methods of the **[`RoomServiceClient` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}** exposed by the Server API. These methods are also available in all LiveKit Server SDKs.
+- **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. This is the official LiveKit documentation with all the available methods of the **[`RoomServiceClient`](../reference/server-api.md)** exposed by the Server API. These methods are also available in all LiveKit Server SDKs.
 - **Manage Egress and Ingress**: if your application needs some kind of recording, broadcasting or media ingestion, this operations must all be performed by your application server.
 - **Receive Webhook events**: you can also listen to Webhook events in your application backend. In this way you can react to events happening in your Rooms: a Room has started, a Room has finished, a Participant has joined a Room, a Track has been published... See the [webhooks reference](../reference/webhooks.md) for every event and its payload.
 - **Publish Tracks from your backend**: this is only for advanced applications that require server-side media publishing. Publishing media from your backend is possible by using [LiveKit CLI :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"}, [Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){target="\_blank"}, [Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){target="\_blank"}, [Node.js SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/node-sdks){target="\_blank"} or [Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){target="\_blank"}.
@@ -87,7 +87,7 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     If your backend technology does not have its own SDK, you have two different options:
 
-    1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/reference/server/server-apis/){target="\_blank"}
+    1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs](../reference/server-api.md)
 
     2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/livekit-cli){target="\_blank"}
 

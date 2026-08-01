@@ -34,7 +34,7 @@ const room = new Room();
 await room.connect(wsUrl, token);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#connecting-to-a-room){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/client-sdk.md#connecting)
 
 ---
 
@@ -44,7 +44,7 @@ await room.connect(wsUrl, token);
 await room.disconnect();
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/connect/#disconnection){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/client-sdk.md#connecting)
 
 ---
 
@@ -87,7 +87,7 @@ await Promise.all([
 ]);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/tracks/publish/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/client-sdk.md#publishing-and-subscribing)
 
 ---
 
@@ -110,7 +110,7 @@ await track.mute();
 await track.unmute();
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/tracks/publish/#Mute-and-unmute){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/client-sdk.md#publishing-and-subscribing)
 
 ---
 
@@ -132,13 +132,13 @@ The second boolean parameter indicates if the local Track should be stopped. Thi
 
 You can share information between Participants of a Room in different ways.
 
-First of all, you can set Room metadata that will be available for all clients in the `Room` object. You do so in your application server when calling the [`CreateRoom` API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#CreateRoom){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The Room metadata will be available in the client side like this:
+First of all, you can set Room metadata that will be available for all clients in the `Room` object. You do so in your application server when calling the [`CreateRoom` API](../reference/server-api.md) (available for all LiveKit Server SDKs and the HTTP Server API). The Room metadata will be available in the client side like this:
 
 ```typescript
 console.log(room.metadata);
 ```
 
-You can update the Room metadata at any time from your application server with the [`UpdateRoomMetadata` API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#UpdateRoomMetadata){target="\_blank"} (available for all LiveKit Server SDKs and the HTTP Server API). The client side will be notified of the change with the `roomMetadataChanged` event of the `Room` object:
+You can update the Room metadata at any time from your application server with the [`UpdateRoomMetadata` API](../reference/server-api.md) (available for all LiveKit Server SDKs and the HTTP Server API). The client side will be notified of the change with the `roomMetadataChanged` event of the `Room` object:
 
 ```typescript
 room.on("roomMetadataChanged", (metadata) => {
@@ -237,7 +237,7 @@ These operations are only available in the server SDKs, and not in the client SD
 
 You have here the complete list of the server-side operations, documented for the HTTP Server API. All the LiveKit Server SDKs have the same operations.
 
-- [**RoomService** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){target="\_blank"}: to manage Rooms and Participants.
+- [**RoomService**](../reference/server-api.md): to manage Rooms and Participants.
 - [**Egress**](../reference/egress.md): to manage egress operations.
 - [**Ingress**](../reference/ingress.md): to manage ingress operations.
 
@@ -266,7 +266,7 @@ await Promise.all([
 ]);
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/tracks/publish/#Screen-sharing){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](../reference/client-sdk.md#publishing-and-subscribing)
 
 ### Virtual Background
 
