@@ -1,6 +1,6 @@
 ---
-draft: true
-date: 2026-07-03
+draft: false
+date: 2026-08-04
 slug: transcriber-summarizer-agent
 categories:
   - AI
