@@ -184,3 +184,16 @@ redirects:
       for_each: versioned_pages
       match: '^/{item}/(.*)$'
       to: "/latest/{item}/$1"
+
+    - id: removed-ai-tutorials-index
+      description: >
+        The AI services tutorial category had one tutorial and an index page whose whole content
+        was a button pointing at it — a second hub competing with the AI Services overview, which
+        already lists every AI service and links to both the feature page and the tutorial. The
+        index is gone and the tutorial now lives under AI Services in the nav; this sends the
+        removed URL to the overview that replaced it.
+
+        No version gate needed, for the same reason as the other pattern rules: a pattern only
+        runs from the 404 page, so versions that still ship the index serve it.
+      match: '^/([^/]+)/docs/tutorials/ai-services/?$'
+      to: "/$1/docs/ai/overview/"
