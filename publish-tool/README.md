@@ -212,9 +212,25 @@ evaluated with `packaging`, so `3.10` correctly sorts above `3.9` and legacy fol
 version** — an overlap is an error, not a silent first-match-wins, because that would make the
 published redirect depend on the order of the file.
 
-Three rules ship today: the version root, `/X.Y/docs/getting-started/` → `/X.Y/docs/` for 3.4
-and later, and `/X.Y/docs/` → `/X.Y/docs/getting-started/` for 3.0–3.3, which fixes a set of
-URLs that used to be hard 404s.
+Twenty-six rules ship today. Three are structural — the version root, `/X.Y/docs/getting-started/`
+→ `/X.Y/docs/` for 3.4 and later, and `/X.Y/docs/` → `/X.Y/docs/getting-started/` for 3.0–3.3 — and
+the rest each rescue one page that was renamed or removed without a redirect. Those were found two
+ways, and both were needed:
+
+- **A 12-month Search Console export**, checked URL by URL against the live site: 13 `/latest/`
+  URLs answered 404 while still ranking, worth 11,825 impressions a year.
+- **Diffing the version folders**: every page any published `X.Y` folder holds that 3.8 does not.
+  That set is 23, so it found the same 13 plus 10 more. Five of those ten existed in 3.7 only — a
+  URL that lived for one release has had little time to earn impressions, which is exactly why an
+  impressions-ranked list cannot find it.
+
+**A rule's `versions` gate must not be wider than its target's.** Gate a rule at the first version
+that stopped shipping the old page, then check that the *successor* exists in every version from
+there on — those are not always the same release. `moved-meet-features-users` is the case in point:
+`features/users-and-permissions/` stopped being published in 3.7, but its successor
+`features/users/overview/` only arrived in 3.8, so the 3.7 stub needs a `when` override pointing at
+`rooms/access/`, the page 3.7 actually has. Without it the stub redirects into a 404, which is worse
+than the 404 it replaced. `ovweb verify` rejects that now — see the redirect-target check below.
 
 ### Why every target is relative
 
@@ -735,7 +751,14 @@ folder carries a correctly pruned sitemap, every search location is absolute, no
 the root pins the version `latest` points at, no versioned export links to a root-served page
 under its version, no export links to another export that does not exist, every `<lastmod>` in the
 root sitemap is a real date that is not in the future, the unversioned mirror is exactly the set of
-pages the sitemap advertises, and `versions.json` agrees with the folders on disk.
+pages the sitemap advertises, **no generated redirect points at a page that does not exist**, and
+`versions.json` agrees with the folders on disk.
+
+The redirect-target check earns its place: a redirect into a 404 costs the visitor a second hop to
+reach nothing and tells a crawler the content moved somewhere it did not. It found a real one in
+review — a rule gated `>=3.7` whose successor page first shipped in 3.8 — and it is why the
+synthetic tree in [`test_postprocess.py`](tests/unit/test_postprocess.py) materialises every rule's
+target from the rules themselves rather than from a list.
 
 A tree that has just been post-processed verifies clean, which is asserted by
 [`test_verify.py`](tests/unit/test_verify.py). That makes `verify` a real post-publish signal:

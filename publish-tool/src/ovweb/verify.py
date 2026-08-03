@@ -22,6 +22,12 @@ from .versions import alias_target, read_versions_json
 SELF_URL_TAGS = re.compile(r'(?:rel="canonical" href|property="og:url" content)="([^"]+)"')
 RELATIVE_PARENT_HREF = re.compile(r'href="((?:\.\./)+[^"]*)"')
 SITEMAP_LASTMOD = re.compile(r"<lastmod>([^<]*)</lastmod>")
+REFRESH_TARGET = re.compile(r'http-equiv="refresh" content="0; *url=([^"]+)"')
+
+#: A generated redirect page is about 2 KB, while a real page carries the theme chrome and is
+#: never close to this small. Only used to avoid reading every file in the tree before the
+#: `GENERATED_MARKER` check decides what is actually a redirect.
+REDIRECT_MAX_BYTES = 8192
 
 
 @dataclass
@@ -56,6 +62,7 @@ def verify(
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
     findings += _check_unversioned_mirror(tree, config)
+    findings += _check_redirect_targets_resolve(tree, config, published, latest)
     return findings
 
 
@@ -104,6 +111,64 @@ def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
                 "will not offer it",
             )
         )
+    return findings
+
+
+def _check_redirect_targets_resolve(
+    tree: Path, config: SiteConfig, published: list[str], latest: str | None
+) -> list[Finding]:
+    """No generated redirect may point at a page that does not exist.
+
+    A redirect into a 404 is worse than the 404 it replaced: the visitor now takes two hops to
+    reach nothing, and a crawler is told the content moved somewhere that is not there. The way
+    this happens is a rule gated to a version range wider than its target's: a `files` rule for a
+    page that was renamed in 3.8, gated `>=3.7`, materialises in 3.7 as well — where the
+    successor page does not exist yet. That is a real defect this check was written for, caught in
+    review of a rule aimed at `features/users/overview/`, which arrived one release after the
+    page it replaced went away.
+
+    Every rule is resolved per version, so the fix is a `when` override for the older band rather
+    than a wider gate.
+    """
+    directories = [tree / version for version in published]
+    directories += [tree / section for section in config.layout.versioned_pages]
+    findings = []
+
+    for root in directories:
+        if not root.is_dir() or root.is_symlink():
+            continue
+        for path in sorted(root.rglob("*.html")):
+            if path.is_symlink() or path.stat().st_size > REDIRECT_MAX_BYTES:
+                continue
+            text = fsops.read_text(path)
+            if GENERATED_MARKER not in text:
+                continue
+            match = REFRESH_TARGET.search(text)
+            where = str(path.relative_to(tree))
+            if match is None:
+                findings.append(Finding("redirect-target", where, "has no meta refresh target"))
+                continue
+            target = match.group(1)
+            if target.startswith("/"):
+                # Site-absolute, so resolved from the tree root. `latest` is a symlink, which
+                # only resolves on a checkout that has it; name the version instead.
+                relative = target.lstrip("/")
+                if latest is not None:
+                    relative = re.sub(r"^latest/", f"{latest}/", relative)
+                resolved = tree / relative
+            else:
+                resolved = path.parent / target
+            served = resolved / "index.html" if target.endswith("/") else resolved
+            if not served.is_file():
+                findings.append(
+                    Finding(
+                        "redirect-target",
+                        where,
+                        f"redirects to {target!r}, which does not exist in this tree "
+                        f"({served.relative_to(tree)}); the rule's version gate is wider than "
+                        "its target's, so it needs a `when` override for the older versions",
+                    )
+                )
     return findings
 
 

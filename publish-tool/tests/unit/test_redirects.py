@@ -433,3 +433,85 @@ def test_a_disabled_mirror_produces_no_stubs():
 
 def test_an_empty_sitemap_produces_no_stubs():
     assert mirrored() == {}
+
+
+# -- version bands whose target arrived later --------------------------------------------
+
+
+MEET_REORGANISATION_RULES = (
+    "moved-meet-features-users",
+    "moved-meet-features-rooms",
+    "moved-meet-features-live-captions",
+    "moved-meet-features-recordings",
+)
+
+
+def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
+    """The pages these rules replace are still published in a correct 3.7, so a stub installed
+    there would overwrite a real page.
+
+    3.7 *appears* not to have them because the reorganisation reached `main` from `next` on
+    2026-06-23 and a blog-post publish rebuilt the then-current 3.7.0 folder from `main`,
+    sweeping unreleased 3.8 documentation into a released version. The 3.7 folder inherited that
+    when the minor-grouped folders were backfilled. The gate describes the release the change
+    belongs to, not the folder's current contents.
+    """
+    for version in ("3.6", "3.7"):
+        installed = {item.rule_id for item in resolve_file_redirects(config, version)}
+        assert not installed & set(MEET_REORGANISATION_RULES), version
+
+    installed = {item.rule_id for item in resolve_file_redirects(config, "3.8")}
+    assert set(MEET_REORGANISATION_RULES) <= installed
+
+
+def test_both_oracle_tutorial_rules_start_at_3_7(config):
+    """The counter-examples, and why the gates were checked one by one rather than as a batch.
+
+    Neither page comes back when 3.7 is rebuilt. The PRO one was removed before 3.7 shipped
+    (2026-05-18) and its folder was correctly rebuilt without it. The community one was removed
+    as *outdated* during 3.7's life — the deletion only reached `main` with the 3.8 batch, but
+    resurrecting instructions the team had already found wrong is not what fixing 3.7 means, so
+    the rebuild keeps it deleted and this rule covers the URL.
+    """
+    installed = {item.rule_id for item in resolve_file_redirects(config, "3.7")}
+    assert "removed-oracle-install-tutorial-pro" in installed
+    assert "removed-oracle-install-tutorial-community" in installed
+
+
+def test_every_dead_page_of_every_version_has_a_rule(config):
+    """The rules were derived by scanning the version folders for pages 3.8 no longer has, so
+    the newest publish must cover all of them. Restated here as the set the scan produced: a
+    rule quietly dropped from ovweb.yaml would otherwise reinstate a 404 that used to rank."""
+    dead = {
+        # Found by a Search Console export (PR #108).
+        "docs/self-hosting/faq/",
+        "docs/self-hosting/how-to-guides/force-443-tls/",
+        "docs/self-hosting/single-node/oracle/install-tutorial/",
+        "docs/self-hosting/single-node-pro/oracle/install-tutorial/",
+        "meet/embedded/tutorials/direct-link/",
+        "meet/embedded/tutorials/recordings/",
+        "meet/embedded/tutorials/webcomponent/",
+        "meet/embedded/tutorials/webcomponent-advanced/",
+        "meet/embedded/tutorials/webhooks/",
+        "meet/features/live-captions/",
+        "meet/features/recordings/",
+        "meet/features/rooms-and-meetings/",
+        "meet/features/users-and-permissions/",
+        # Found by scanning every version folder for what 3.8 does not serve.
+        "docs/openvidu-call/",
+        "docs/openvidu-call/docs/",
+        "docs/tutorials/advanced-features/recording-advanced/",
+        "docs/tutorials/advanced-features/recording-basic/",
+        "meet/embedded/tutorials/external-members/",
+        "meet/embedded/tutorials/registered-members/",
+        "meet/features/recordings/creation-management/",
+        "meet/features/rooms/appearance/",
+        "meet/features/rooms/creation-management/",
+        "docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html",
+    }
+    installed = set()
+    for item in resolve_file_redirects(config, "3.8"):
+        path = item.path[len("3.8/") :]
+        installed.add(path[: -len("index.html")] if path.endswith("/index.html") else path)
+
+    assert not dead - installed, f"no rule covers {sorted(dead - installed)}"
