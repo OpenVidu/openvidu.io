@@ -9,7 +9,8 @@ The steps fall into four groups, and the order within them matters:
 1. Clean the version folder and rewrite everything that stays inside it.
 2. Either build the site root from this version (when it becomes `latest`), or strip the
    root-served content out of the version folder (when it does not).
-3. Write the redirects, drop what is not published, and sync the release notes.
+3. Write the redirects — including the mirror that answers the versioned pages' unversioned
+   URLs — drop what is not published, and sync the release notes.
 4. Commit.
 
 Group 2 has to precede the redirects, because promoting moves the version's `index.html` out to
@@ -27,7 +28,7 @@ from pathlib import Path
 
 from .. import fsops
 from ..config import SiteConfig
-from ..redirects import render_redirect, resolve_file_redirects
+from ..redirects import MIRROR_RULE_ID, mirror_redirects, render_redirect, resolve_file_redirects
 from ..releases import DestinationRegionError, splice_releases
 from ..report import Reporter
 from ..rewrite import (
@@ -145,6 +146,9 @@ def postprocess(
         result.redirects_written.append(redirect.path)
         report.detail(f"{redirect.path} -> {redirect.to} [{redirect.rule_id}]")
     report.result("install-redirects", written=len(result.redirects_written))
+
+    if update_latest:
+        _mirror_unversioned_pages(tree, config=config, report=report, result=result)
 
     _prune_version_sitemap(tree, version=version, config=config, report=report, result=result)
     _sync_releases(tree, version=version, config=config, report=report, result=result)
@@ -345,6 +349,70 @@ def _promote_search_index(
 
     result.counts["promote-search-index"] = changed
     report.result("promote-search-index", files_changed=changed)
+
+
+def _mirror_unversioned_pages(
+    tree: Path, *, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """Make every versioned page answer at its unversioned URL too, with a redirect page.
+
+    Wiped and rebuilt in full on every latest publish, rather than reconciled page by page. A
+    page that has been renamed or removed leaves a stub pointing at a URL that no longer exists,
+    and a redirect into a 404 is worse than the 404 it replaced; regenerating from this publish's
+    sitemap makes that state unrepresentable instead of something a later check has to notice.
+
+    Runs last of the root-building steps because it reads the promoted root sitemap, and only on
+    a latest publish: the stubs send visitors to `/latest/…`, so re-publishing an older version
+    has nothing to say about them.
+    """
+    rule = config.mirror
+    if rule is None or not rule.enabled:
+        return
+
+    report.step("mirror-unversioned", "Answer the versioned pages' unversioned URLs")
+
+    sections = getattr(config.layout, rule.for_each)
+    removed = 0
+    for section in sections:
+        _guard_mirror(tree / section, section=section)
+        removed += int(fsops.remove(tree / section, required=False))
+
+    redirects = mirror_redirects(fsops.read_text(tree / SITEMAP), config=config)
+    if not redirects:
+        raise PostprocessError(
+            f"the root sitemap named no page under /latest/{{{','.join(sections)}}}/, so the "
+            "unversioned mirror would be empty. That silently reinstates the 404s it exists to "
+            "prevent, so it is treated as a failure: check that the sitemap was promoted before "
+            "this step, and that layout.site_url matches the URLs in it."
+        )
+    for redirect in redirects:
+        fsops.write_text(tree / redirect.path, render_redirect(redirect))
+
+    result.counts["mirror-unversioned"] = len(redirects)
+    report.result("mirror-unversioned", removed=removed, written=len(redirects))
+
+
+def _guard_mirror(path: Path, *, section: str) -> None:
+    """Refuse to wipe a root section folder that this step did not write.
+
+    The step deletes `/docs/` and `/meet/` outright, which is only safe while nothing else can
+    put a file there. Today nothing can — the versioned pages are served from the version folder,
+    and ovweb.yaml forbids a name being both versioned and non-versioned — so this guard is here
+    to fail loudly if that ever stops being true, rather than to handle a case that exists.
+    """
+    if not path.is_dir():
+        return
+    for file in sorted(path.rglob("*")):
+        if file.is_dir():
+            continue
+        head = file.read_bytes()[:512].decode("utf-8", errors="replace")
+        generated = GENERATED_MARKER in head and MIRROR_RULE_ID in head
+        if file.name != "index.html" or not generated:
+            raise PostprocessError(
+                f"{file} is not a generated redirect, so /{section}/ holds content this publish "
+                "did not write and must not delete. Remove it by hand, or take the section out "
+                "of the redirects.mirror rule in ovweb.yaml."
+            )
 
 
 def _repair_export_links(

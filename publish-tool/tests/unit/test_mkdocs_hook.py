@@ -283,6 +283,7 @@ def test_a_view_shape_the_hook_does_not_know_is_left_alone():
 
 def test_the_url_shapes_come_from_the_plugins_own_configuration():
     """Read from the public config, so renaming `category/` in mkdocs.yml keeps working."""
+
     class Options(dict):
         """Stands in for a mkdocs plugin config: dict access plus attributes."""
 
@@ -307,6 +308,9 @@ def test_no_blog_plugin_means_no_view_metadata(tmp_path, monkeypatch):
     """`_blog_url_shapes` returns None and `on_env` must not try to describe anything."""
     item = doc_file("blog/archive/2026/07.md", generated=True)
     monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root: {})
-    on_env("env", {"docs_dir": str(tmp_path / "docs"), "plugins": {}},
-           SimpleNamespace(documentation_pages=lambda: [item]))
+    on_env(
+        "env",
+        {"docs_dir": str(tmp_path / "docs"), "plugins": {}},
+        SimpleNamespace(documentation_pages=lambda: [item]),
+    )
     assert item.page.update_date == "", "still no lastmod, which does not depend on the blog plugin"
