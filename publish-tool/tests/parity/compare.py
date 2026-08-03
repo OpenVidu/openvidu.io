@@ -70,6 +70,10 @@ PROMOTED_FILES = ("index.html", "index.md", *ROOT_FILES)
 #: A path inside a version folder, e.g. "3.8/docs/index.md".
 VERSION_FOLDER = re.compile(r"\d+\.\d+/")
 
+#: A page of the unversioned mirror, e.g. "docs/ai/live-captions/index.html". Anchored outside any
+#: version folder: `3.8/docs/…/index.html` is a real page in both trees.
+MIRROR_PAGE = re.compile(r"(?:" + "|".join(VERSIONED_PAGES) + r")/(?:[^/]+/)*index\.html$")
+
 #: Markdown link or image target that is root-relative, excluding protocol-relative URLs.
 ROOT_RELATIVE_TARGET = re.compile(rb"\]\(/(?!/)")
 BASE_URL = b"https://openvidu.io"
@@ -212,6 +216,14 @@ def expectations(version: str) -> list[Expected]:
             "the build cache is not in a fresh worktree, so it can no longer be committed by "
             "accident",
             lambda path: path.startswith((".cache", "site/")),
+        ),
+        Expected(
+            "every documentation page now answers at its unversioned URL as well, with a real "
+            "redirect page. The shell had only the 404 router for those URLs, which GitHub serves "
+            "with a 404 status — the thing a search engine acts on before it runs any JavaScript. "
+            "No reconciler: these paths exist in ovweb's tree only, so there are no old bytes to "
+            "transform. What they contain is asserted by `ovweb verify` and the unit tests",
+            lambda path: MIRROR_PAGE.fullmatch(path) is not None,
         ),
         # No expectation for <X.Y>/sitemap.xml: the pruning is back, so it must match the shell's
         # output byte for byte. It was briefly deleted instead, which silently turned off the

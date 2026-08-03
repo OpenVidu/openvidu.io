@@ -129,11 +129,22 @@ def _check_config(repo: Git | None) -> list[Check]:
             "config",
             True,
             f"{config.source} — {len(config.file_rules)} file redirect(s), "
-            f"{len(resolve_patterns(config))} 404 pattern(s)",
+            f"{len(resolve_patterns(config))} 404 pattern(s), "
+            f"{_mirror_summary(config)}",
         )
     ]
     checks.append(_check_redirects_resolve(config, repo))
     return checks
+
+
+def _mirror_summary(config: SiteConfig) -> str:
+    """How many stubs the mirror will write is only known at publish time, from the sitemap —
+    so report what it covers instead of a count."""
+    mirror = config.mirror
+    if mirror is None or not mirror.enabled:
+        return "no unversioned mirror"
+    sections = getattr(config.layout, mirror.for_each)
+    return "unversioned mirror of " + ", ".join(f"/{section}/" for section in sections)
 
 
 def _check_redirects_resolve(config: SiteConfig, repo: Git | None) -> Check:

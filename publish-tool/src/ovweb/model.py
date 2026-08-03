@@ -121,6 +121,25 @@ class ResolvedPattern:
 
 
 @dataclass(frozen=True)
+class MirrorRule:
+    """Answer a versioned section's URLs without their version prefix.
+
+    `/docs/self-hosting/` — the URL a human types, and the one our own agent configuration
+    ships in a comment — is not a published page: documentation lives under `/latest/docs/`.
+    The 404 router rescues the visitor, but GitHub serves it with a 404 status, which a crawler
+    acts on before it runs any JavaScript. So the inbound link is thrown away.
+
+    This rule fills the gap with one redirect page per published page of every section named by
+    `for_each`, at the unversioned path. There is no list to maintain: the set is read off the
+    promoted root sitemap, so it is exactly the set of pages the site advertises.
+    """
+
+    for_each: str
+    body: str
+    enabled: bool = True
+
+
+@dataclass(frozen=True)
 class RedirectDefaults:
     """Field values inherited by every redirect rule that does not override them."""
 
@@ -140,6 +159,7 @@ class SiteConfig:
     defaults: RedirectDefaults
     file_rules: tuple[RedirectRule, ...]
     pattern_rules: tuple[PatternRule, ...]
+    mirror: MirrorRule | None = None
     source: str = "<unknown>"
 
 

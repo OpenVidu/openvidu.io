@@ -274,6 +274,8 @@ MkDocs Material uses the [mike](https://github.com/jimporter/mike) tool for vers
 > - **Patch for an old minor** (e.g. `3.7.2`) → commit to branch `3.7` and rebuild that past version (`ovweb publish past 3.7`).
 >
 > Legacy exact-patch URLs (`/3.4.1/...`) are redirected to their minor folder (`/3.4/...`) by the 404 page. That rule, and every other redirect on the site, is declared in [`publish-tool/ovweb.yaml`](publish-tool/ovweb.yaml).
+>
+> Every documentation page also answers at its **unversioned** URL: `/docs/self-hosting/` and `/meet/` redirect to the current version. Those are real redirect pages generated on publish, not the 404 page, because a 404 status is what a search engine acts on — so an unversioned URL is safe to write in a blog post, a config comment or a support answer, and will keep pointing at the current documentation. Prefer a normal relative link inside the docs; this is for links written **outside** this repository.
 
 > [!IMPORTANT]
 > **Releases pages** (`docs/meet/releases.md` and `docs/docs/releases.md`) follow two conventions, because the same release notes are served across **every** documentation version (on publish, the *content* of the latest page — the notes and their table of contents, nothing else — is spliced into every version folder's releases page, so any version shows the full, most-recent notes while keeping its own navigation, links and outdated-version banner):

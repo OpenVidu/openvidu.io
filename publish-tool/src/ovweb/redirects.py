@@ -23,6 +23,18 @@ from .versions import matches
 
 TEMPLATE_NAME = "redirect.html.j2"
 
+#: The alias the mirror sends visitors to. `latest` is the evergreen name for the newest
+#: version folder, and the prefix `promote_root_sitemap` writes into every versioned URL.
+ALIAS = "latest"
+
+#: Every mirror stub is generated under this rule id, which is what the marker comment in the
+#: rendered page names and what `ovweb verify` looks for.
+MIRROR_RULE_ID = "unversioned-page-mirror"
+
+#: One `<loc>` in a sitemap. Whitespace is tolerated inside the element: MkDocs' template
+#: indents the URL onto its own line.
+SITEMAP_LOC = re.compile(r"<loc>\s*([^<\s]+)\s*</loc>")
+
 # A target ends up in an HTML attribute, in a `meta refresh` content value and in a
 # JavaScript string. Rejecting these characters outright is simpler, and easier to reason
 # about, than escaping the same value three different ways.
@@ -160,15 +172,73 @@ def _expand(rule: PatternRule, config: SiteConfig) -> list[ResolvedPattern]:
     ]
 
 
+def mirror_redirects(sitemap: str, *, config: SiteConfig) -> tuple[ResolvedRedirect, ...]:
+    """One redirect page per published page of every mirrored section, at its unversioned path.
+
+    `sitemap` is the **promoted root sitemap**, where versioned pages already read
+    `https://openvidu.io/latest/docs/…`. Deriving the set from it rather than from the tree is
+    what keeps the mirror honest in both directions: everything the site advertises gets a stub,
+    and nothing else does. The three `3.8/docs/*/index.html` files that are not in the sitemap —
+    the generated `getting-started` redirect and two typedoc index pages — are therefore skipped,
+    which is right: mirroring a redirect would publish a chain, and the sitemap is the site's own
+    statement of what a crawler should ask for.
+
+    Order follows the sitemap, so the same input always produces the same files in the same
+    order.
+    """
+    rule = config.mirror
+    if rule is None or not rule.enabled:
+        return ()
+
+    sections = getattr(config.layout, rule.for_each)
+    prefixes = [(f"{config.layout.base_url}/{ALIAS}/{section}/", section) for section in sections]
+
+    resolved: dict[str, ResolvedRedirect] = {}
+    for url in SITEMAP_LOC.findall(sitemap):
+        for prefix, section in prefixes:
+            if not url.startswith(prefix):
+                continue
+            # Every page URL this site publishes ends in a slash (`directory_urls`), and the
+            # stub's own path is built by appending index.html — so a URL naming a file has no
+            # correct mirror path and is left to the 404 router.
+            if not url.endswith("/"):
+                break
+            page = f"{section}/{url[len(prefix) :]}"
+            path = f"{page}index.html"
+            target = f"/{ALIAS}/{page}"
+            _validate_target(MIRROR_RULE_ID, target, relative=False)
+            resolved.setdefault(
+                path,
+                ResolvedRedirect(
+                    rule_id=MIRROR_RULE_ID,
+                    path=path,
+                    to=target,
+                    canonical=url,
+                    title=config.defaults.title,
+                    body=rule.body,
+                    robots=config.defaults.robots,
+                    lang=config.defaults.lang,
+                    # A root-level stub is served from exactly one URL, so there is no `latest`
+                    # symlink to stay inside and nothing to gain from a relative target — an
+                    # absolute one says where it goes without counting `../` segments.
+                    relative=False,
+                    preserve_query_and_hash=config.defaults.preserve_query_and_hash,
+                ),
+            )
+            break
+    return tuple(resolved.values())
+
+
 def render_redirect(redirect: ResolvedRedirect) -> str:
     """Render the redirect page.
 
     Every element earns its place:
 
-    * ``meta http-equiv="refresh"`` with a zero delay and a **relative** URL is the no-JS
-      path. Search engines treat a zero-delay meta refresh as a redirect and pass ranking
-      signals to the target, and relative resolution is what lets one file serve both
-      ``/3.8/`` and ``/latest/``.
+    * ``meta http-equiv="refresh"`` with a zero delay is the no-JS path, and on GitHub Pages the
+      only redirect a search engine can be given at all: it treats a zero-delay meta refresh as
+      a redirect and passes ranking signals to the target. The URL is **relative** for a rule
+      installed inside a version folder, which is what lets one file serve both ``/3.8/`` and
+      ``/latest/``, and site-absolute for the root-level mirror, which is served from one URL.
     * ``robots: noindex, follow`` keeps the stub out of search results while still letting
       link equity flow to the target.
     * An absolute ``canonical`` consolidates every version's copy of the redirect on one
@@ -188,6 +258,7 @@ def render_redirect(redirect: ResolvedRedirect) -> str:
         body=redirect.body,
         to=redirect.to,
         to_js=json.dumps(redirect.to),
+        relative=redirect.relative,
         canonical=redirect.canonical,
         preserve_query_and_hash=redirect.preserve_query_and_hash,
         rule_id=redirect.rule_id,

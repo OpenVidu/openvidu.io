@@ -125,3 +125,40 @@ def test_rejects_a_for_each_that_names_nothing():
         build(
             redirects={"patterns": [{"id": "p", "match": "^/x$", "to": "/y", "for_each": "nope"}]}
         )
+
+
+# -- the unversioned mirror --------------------------------------------------------------
+
+
+def test_the_real_config_mirrors_the_versioned_sections(config):
+    """Both halves of issue 22's fix: /docs/ and /meet/ answer, and nothing else is mirrored."""
+    assert config.mirror is not None
+    assert config.mirror.enabled
+    assert config.mirror.for_each == "versioned_pages"
+
+
+def test_a_mirror_is_optional():
+    assert build(redirects={}).mirror is None
+
+
+def test_rejects_a_mirror_for_each_that_names_nothing():
+    with pytest.raises(ConfigError, match="for_each must name a layout list"):
+        build(redirects={"mirror": {"for_each": "nope", "body": "x"}})
+
+
+def test_rejects_a_mirror_without_a_body():
+    """It is the sentence a visitor whose browser blocks the refresh is left looking at."""
+    with pytest.raises(ConfigError, match="needs a non-empty string 'body'"):
+        build(redirects={"mirror": {"for_each": "versioned_pages"}})
+
+
+def test_rejects_an_unknown_mirror_key():
+    with pytest.raises(ConfigError, match="unknown keys"):
+        build(redirects={"mirror": {"for_each": "versioned_pages", "body": "x", "oops": 1}})
+
+
+def test_rejects_an_unknown_redirects_key():
+    """A misspelled section would otherwise be ignored in full: `mirrors:` instead of `mirror:`
+    publishes a site with no mirror and no complaint."""
+    with pytest.raises(ConfigError, match="unknown 'redirects' keys"):
+        build(redirects={"mirrors": {"for_each": "versioned_pages", "body": "x"}})

@@ -163,3 +163,30 @@ def test_reports_a_link_to_an_export_that_does_not_exist(published, config):
     findings = [f for f in verify(published, config=config) if f.check == "export-link"]
     assert [f.where for f in findings] == [f"{VERSION}/docs/index.md"]
     assert "no-such-page" in findings[0].detail
+
+
+# -- the unversioned mirror --------------------------------------------------------------
+
+
+def test_reports_an_unversioned_url_with_no_redirect_page(published, config):
+    """The defect issue 22 was raised for: the URL a human types 404s for a crawler."""
+    (published / "docs" / "releases" / "index.html").unlink()
+
+    assert findings_by_check(published, config)["mirror"] == ["docs/releases/index.html"]
+
+
+def test_reports_a_stale_redirect_page(published, config):
+    """A page that has been renamed leaves a stub pointing into a 404 — worse than the 404 it
+    replaced, and the reason the publish rebuilds the mirror instead of patching it."""
+    stale = published / "docs" / "gone"
+    stale.mkdir()
+    (stale / "index.html").write_bytes((published / "docs" / "index.html").read_bytes())
+
+    assert findings_by_check(published, config)["mirror"] == ["docs/gone/index.html"]
+
+
+def test_reports_a_real_page_on_a_mirrored_path(published, config):
+    """The next publish deletes everything under /docs/, so anything else there is a trap."""
+    (published / "docs" / "notes.html").write_text("<h1>Notes</h1>", encoding="utf-8")
+
+    assert findings_by_check(published, config)["mirror"] == ["docs/notes.html"]

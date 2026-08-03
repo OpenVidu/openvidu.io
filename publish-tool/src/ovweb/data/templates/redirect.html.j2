@@ -11,11 +11,18 @@
 {% endif %}
 <title>{{ title }}</title>
 <script>
+{% if relative %}
   // The target is relative on purpose. `latest` is a symlink to the newest version folder,
   // so this same file is served at /latest/ and at /<version>/; resolving the target against
   // the document URL keeps the visitor inside whichever path served the page, and never
   // leaks a version number to /latest/. Resolution against location.href is exactly what the
   // meta refresh above does, so both paths agree — including when the URL names index.html.
+{% else %}
+  // The target is site-absolute on purpose: this page is served from exactly one URL, so
+  // there is no second path to stay inside, and naming the destination outright beats
+  // counting `../` segments. Resolution against location.href is what the meta refresh above
+  // does too, so both paths agree.
+{% endif %}
   (function () {
     // `to_js` is JSON-encoded and marked safe deliberately: the content of a <script>
     // element is raw text, where character references are not decoded, so an HTML-escaped

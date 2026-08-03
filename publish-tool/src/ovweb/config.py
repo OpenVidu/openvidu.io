@@ -16,6 +16,7 @@ import yaml
 
 from .model import (
     VERSION_ROOT,
+    MirrorRule,
     PatternRule,
     RedirectDefaults,
     RedirectOverride,
@@ -110,7 +111,14 @@ def parse_site_config(raw: Any, *, source: str = "<memory>") -> SiteConfig:
     if not isinstance(redirects, dict):
         raise ConfigError(f"{source}: 'redirects' must be a mapping")
 
+    unknown_redirects = set(redirects) - {"defaults", "files", "patterns", "mirror"}
+    if unknown_redirects:
+        raise ConfigError(
+            f"{source}: unknown 'redirects' keys: {', '.join(sorted(unknown_redirects))}"
+        )
+
     defaults = _parse_defaults(redirects.get("defaults") or {}, source=source)
+    mirror = _parse_mirror(redirects.get("mirror"), source=source, layout=layout)
     file_rules = tuple(
         _parse_file_rule(entry, source=source, index=index)
         for index, entry in enumerate(redirects.get("files") or [])
@@ -128,6 +136,7 @@ def parse_site_config(raw: Any, *, source: str = "<memory>") -> SiteConfig:
         defaults=defaults,
         file_rules=file_rules,
         pattern_rules=pattern_rules,
+        mirror=mirror,
         source=source,
     )
 
@@ -217,6 +226,29 @@ def _parse_defaults(raw: Any, *, source: str) -> RedirectDefaults:
         preserve_query_and_hash=bool(
             raw.get("preserve_query_and_hash", fallback.preserve_query_and_hash)
         ),
+    )
+
+
+def _parse_mirror(raw: Any, *, source: str, layout: SiteLayout) -> MirrorRule | None:
+    if raw is None:
+        return None
+    where = f"{source}: redirects.mirror"
+    if not isinstance(raw, dict):
+        raise ConfigError(f"{where} must be a mapping")
+    unknown = set(raw) - {"for_each", "body", "enabled", "description"}
+    if unknown:
+        raise ConfigError(f"{where} has unknown keys: {', '.join(sorted(unknown))}")
+
+    for_each = raw.get("for_each")
+    if not isinstance(for_each, str) or not hasattr(layout, for_each):
+        raise ConfigError(f"{where}: for_each must name a layout list, got {for_each!r}")
+    if not isinstance(raw.get("body"), str) or not raw["body"]:
+        raise ConfigError(f"{where} needs a non-empty string 'body'")
+
+    return MirrorRule(
+        for_each=for_each,
+        body=raw["body"],
+        enabled=bool(raw.get("enabled", True)),
     )
 
 
