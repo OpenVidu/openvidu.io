@@ -4,14 +4,14 @@ OpenVidu Single Node COMMUNITY is a production-ready deployment option that prov
 
 Choose your provider:
 
-[**On-premises**](https://openvidu.io/3.7/docs/self-hosting/single-node/on-premises/index.md)
+[**On-premises**](https://openvidu.io/3.7/docs/self-hosting/single-node/on-premises/)
 
-[**AWS**](https://openvidu.io/3.7/docs/self-hosting/single-node/aws/index.md)
+[**AWS**](https://openvidu.io/3.7/docs/self-hosting/single-node/aws/)
 
-[**Azure**](https://openvidu.io/3.7/docs/self-hosting/single-node/azure/index.md)
+[**Azure**](https://openvidu.io/3.7/docs/self-hosting/single-node/azure/)
 
-[**GCP**](https://openvidu.io/3.7/docs/self-hosting/single-node/gcp/index.md)
+[**GCP**](https://openvidu.io/3.7/docs/self-hosting/single-node/gcp/)
 
-[**DigitalOcean**](https://openvidu.io/3.7/docs/self-hosting/single-node/digitalocean/index.md)
+[**DigitalOcean**](https://openvidu.io/3.7/docs/self-hosting/single-node/digitalocean/)
 
-[**OCI**](https://openvidu.io/3.7/docs/self-hosting/single-node/oracle/index.md)
+[**OCI**](https://openvidu.io/3.7/docs/self-hosting/single-node/oracle/)
