@@ -145,8 +145,10 @@ redirects:
       canonical: "{site_url}/latest/docs/"
       body: "Redirecting to the OpenVidu Platform documentation…"
       when:
-        # Versions 3.0–3.3 predate the /docs/ landing page: back then the getting started
-        # guide *was* the Platform documentation index.
+        # Versions 3.0–3.3 predate the /docs/ landing page: back then the getting started guide
+        # *was* the documentation index. They also predate the name "OpenVidu Platform", which
+        # arrived in 3.4 with OpenVidu Meet, when the OpenVidu docs became the Platform docs — so
+        # nothing shown to a visitor of those versions should use it.
         - versions: "<3.4"
           to: "docs/getting-started/"
           body: "Redirecting to the OpenVidu getting started guide…"
@@ -173,7 +175,7 @@ redirects:
       at: "{version}/docs/index.html"
       to: "getting-started/"
       canonical: "{site_url}/latest/docs/"
-      body: "Redirecting to the OpenVidu Platform getting started guide…"
+      body: "Redirecting to the OpenVidu getting started guide…"
       versions: "<3.4"
 
 
