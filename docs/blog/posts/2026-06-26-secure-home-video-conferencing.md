@@ -211,7 +211,7 @@ You've just put a server on the internet, so a few minutes of good habits go a l
 - **Remember it's exposed.** A home server reachable from the internet is convenient and powerful, so treat it with the same care you'd give any device that's online 24/7.
 
 !!! tip "Go further: end-to-end encryption"
-    For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](../../meet/features/meetings/e2e-encryption.md)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
+    For the most private calls, OpenVidu Meet can turn on **[end-to-end encryption (E2EE)](https://openvidu.io/3.8/meet/features/meetings/e2e-encryption/)** on a per-room basis, covering audio, video and chat. With it enabled, only the people in the call can decrypt the media: not even your own server can read it.
 
 ## What to do next?
 
