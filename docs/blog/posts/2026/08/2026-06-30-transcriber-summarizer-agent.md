@@ -1,10 +1,13 @@
 ---
-title: "Building an AI agent for transcribing and summarizing audio calls"
+title: Building an AI agent for transcribing and summarizing audio calls
 draft: false
-date: 2026-08-04
+date: 2026-08-04T00:00:00.000Z
 slug: transcriber-summarizer-agent
-description: "How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch"
-cover_image: /assets/images/blog/YYYY/MM/2026-06-30-transcriber-summarizer-agent/transcriber-summarizer-agent.png
+description: >-
+  How to build an AI agent that transcribes and summarizes audio calls for your
+  OpenVidu deployment from scratch
+cover_image: >-
+  /assets/images/blog/2026/08/2026-06-30-transcriber-summarizer-agent/transcriber-summarizer-agent.png
 categories:
   - AI
   - Implementation
@@ -26,7 +29,7 @@ hide:
 
 # Building an AI agent for transcribing and summarizing audio calls
 
-![Header image: a microphone turning into text inside an audio call](/assets/images/blog/YYYY/MM/2026-06-30-transcriber-summarizer-agent/transcriber-summarizer-agent.png)
+![Header image: a microphone turning into text inside an audio call](/assets/images/blog/2026/08/2026-06-30-transcriber-summarizer-agent/transcriber-summarizer-agent.png)
 
 With the world being flooded with all kinds of agents, bots, and AI services, let's keep things grounded and code something tangible in a few simple steps. Let's build an AI agent that helps people in an audio call. Our agent will:
 
@@ -48,7 +51,7 @@ Three moving parts:
 
 The data flows like this:
 
-![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/YYYY/MM/2026-06-30-transcriber-summarizer-agent/data-flow.png)
+![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/2026-06-30-transcriber-summarizer-agent/data-flow.png)
 
 ## Running the demo
 
@@ -106,7 +109,7 @@ Now simply follow these steps to run the demo locally:
 
 Open [`http://localhost:8080`](http://localhost:8080), type a name, and join. Talk for a bit and watch the transcript fill in. Open the page in a **second tab**, join with a different name, and within a couple of seconds a yellow box appears summarizing what the first tab said. The full timestamped record waits in `transcripts/`.
 
-![Web app screenshot](/assets/images/blog/YYYY/MM/2026-06-30-transcriber-summarizer-agent/web-app-screenshot.png)
+![Web app screenshot](/assets/images/blog/2026/08/2026-06-30-transcriber-summarizer-agent/web-app-screenshot.png)
 
 > **NOTE**: If you are using AWS, make sure that your credentials have the necessary policies to access Amazon Transcribe and Amazon Bedrock:
 > ```
