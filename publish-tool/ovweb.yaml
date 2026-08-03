@@ -149,7 +149,7 @@ redirects:
         # guide *was* the Platform documentation index.
         - versions: "<3.4"
           to: "docs/getting-started/"
-          body: "Redirecting to the OpenVidu Platform getting started guide…"
+          body: "Redirecting to the OpenVidu getting started guide…"
 
     - id: platform-getting-started
       description: >
@@ -250,12 +250,13 @@ redirects:
 
     - id: removed-self-hosting-faq
       description: >
-        The self-hosting FAQ was removed after 3.4. Deployment types is the section's entry
-        point and the closest surviving answer to what that page covered.
+        The self-hosting FAQ was removed after 3.4. The how-to guides are the section closest to
+        it in kind — task-shaped answers to specific self-hosting questions — so they get the
+        traffic rather than the deployment-types overview.
       at: "{version}/docs/self-hosting/faq/index.html"
-      to: "../deployment-types/"
-      canonical: "{site_url}/latest/docs/self-hosting/deployment-types/"
-      body: "Redirecting to OpenVidu deployment types…"
+      to: "../how-to-guides/"
+      canonical: "{site_url}/latest/docs/self-hosting/how-to-guides/"
+      body: "Redirecting to the OpenVidu self-hosting how-to guides…"
       versions: ">=3.5"
 
     # OpenVidu Meet embedded tutorials were grouped into embedding-options/ and
@@ -331,64 +332,21 @@ redirects:
     #
     # The rules above came from a Search Console export, so they are the dead URLs that still
     # earn impressions. This group came from the complement of that: every page under `docs/`
-    # or `meet/` that any published version folder holds and 3.8 does not — 22 paths, of which
-    # the export had found 13. The nine below are the remainder, plus one dropped API export.
+    # or `meet/` that any published version folder held and 3.8 does not.
     #
-    # Five of the nine lived in 3.7 only. A URL that existed for one release has had little
-    # time to accumulate impressions, which is exactly why an impressions-ranked list misses
-    # it — not evidence that nobody follows it.
+    # That scan found 23 paths where the export had found 13, and the ten extra split in two.
+    # Six of them — the External and Registered Members tutorials, rooms/creation-management,
+    # recordings/creation-management, rooms/appearance and an E2eeService API page — get **no**
+    # rule. The first five were never part of a release: they reached the site only through the
+    # 3.7 folder while it was serving mis-branched 3.8 documentation (see the note above), and
+    # 3.8 renamed them before shipping, so redirecting them would be preserving URLs that should
+    # not have existed. The sixth is a generated API page for a class that was deleted, published
+    # for one release.
     #
-    # Each gate is the first version that stopped shipping the page, read off the version
-    # folders rather than guessed, and each target was checked to exist in every version from
-    # that gate onwards. `moved-meet-features-users` above is why that second check matters.
-
-    # OpenVidu Meet's embedded tutorials were regrouped in 3.8 and two were renamed with them.
-    # The successor pages are rewrites of these, near-identical paragraph by paragraph.
-    - id: moved-meet-tutorial-external-members
-      description: >
-        "External members" became "identified guests" in 3.8: a room member with a fixed name
-        and a unique, individually revocable access link that needs no login.
-      at: "{version}/meet/embedded/tutorials/external-members/index.html"
-      to: "../access/identified-guests/"
-      canonical: "{site_url}/latest/meet/embedded/tutorials/access/identified-guests/"
-      body: "Redirecting to the OpenVidu Meet identified guests tutorial…"
-      versions: ">=3.8"
-
-    - id: moved-meet-tutorial-registered-members
-      description: >
-        "Registered members" became "users" in 3.8. Both cover creating OpenVidu Meet users
-        with the Users API and adding them to a room as members.
-      at: "{version}/meet/embedded/tutorials/registered-members/index.html"
-      to: "../access/users/"
-      canonical: "{site_url}/latest/meet/embedded/tutorials/access/users/"
-      body: "Redirecting to the OpenVidu Meet users tutorial…"
-      versions: ">=3.8"
-
-    # The Meet features section was reorganised again in 3.8, dropping "creation-" from the two
-    # management pages and folding room appearance into room management.
-    - id: moved-meet-features-rooms-management
-      at: "{version}/meet/features/rooms/creation-management/index.html"
-      to: "../management/"
-      canonical: "{site_url}/latest/meet/features/rooms/management/"
-      body: "Redirecting to OpenVidu Meet room creation and management…"
-      versions: ">=3.8"
-
-    - id: moved-meet-features-recordings-management
-      at: "{version}/meet/features/recordings/creation-management/index.html"
-      to: "../management/"
-      canonical: "{site_url}/latest/meet/features/recordings/management/"
-      body: "Redirecting to OpenVidu Meet recording management…"
-      versions: ">=3.8"
-
-    - id: moved-meet-features-rooms-appearance
-      description: >
-        Room appearance is no longer a page of its own: 3.8's room management page covers it,
-        which is where every mention of it now lives.
-      at: "{version}/meet/features/rooms/appearance/index.html"
-      to: "../management/"
-      canonical: "{site_url}/latest/meet/features/rooms/management/"
-      body: "Redirecting to OpenVidu Meet room creation and management…"
-      versions: ">=3.8"
+    # The four below are the ones worth keeping alive. Each gate is the first version that
+    # stopped shipping the page, read off the version folders rather than guessed, and each
+    # target was checked to exist in every version from that gate onwards —
+    # `removed-openvidu-call-docs` needs a `when` for 3.4 for exactly that reason.
 
     # OpenVidu Call was the ready-to-use meeting application documented up to 3.3. OpenVidu Meet
     # replaced it, and the timing corroborates the mapping: these two pages disappear in exactly
@@ -403,11 +361,21 @@ redirects:
       versions: ">=3.4"
 
     - id: removed-openvidu-call-docs
+      description: >
+        The page that documented how to run and customise the OpenVidu Call application. Its
+        closest successor is the components demo tutorial, which is the ready-to-run application
+        built from openvidu-components-angular. That tutorial first exists in 3.5, so 3.4 lands on
+        the Angular components tutorials index instead.
       at: "{version}/docs/openvidu-call/docs/index.html"
-      to: "../../../meet/"
-      canonical: "{site_url}/latest/meet/"
-      body: "Redirecting to OpenVidu Meet, which replaced OpenVidu Call…"
+      to: "../../tutorials/angular-components/openvidu-components-demo/"
+      canonical: "{site_url}/latest/docs/tutorials/angular-components/openvidu-components-demo/"
+      body: "Redirecting to the OpenVidu components demo tutorial…"
       versions: ">=3.4"
+      when:
+        - versions: "<3.5"
+          to: "../../tutorials/angular-components/"
+          canonical: "{site_url}/latest/docs/tutorials/angular-components/"
+          body: "Redirecting to the OpenVidu Angular components tutorials…"
 
     # The two recording tutorials were split per storage backend in 3.2. Both originals used
     # S3-compatible storage — MinIO in the local deployment — so the S3 variant is the one that
@@ -429,13 +397,6 @@ redirects:
     # The one dropped API export. E2eeService was published for 3.5 only and the class is gone,
     # so there is no successor page — the library's API index is the nearest thing. Named as a
     # file rather than a directory because typedoc output is not a directory URL.
-    - id: removed-e2ee-service-reference
-      at: "{version}/docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html"
-      to: "../"
-      canonical: "{site_url}/latest/docs/reference-docs/openvidu-components-angular/"
-      body: "Redirecting to the openvidu-components-angular API reference…"
-      versions: ">=3.6"
-
   # Redirects compiled into the 404 router (docs/overrides/404.html). GitHub Pages has no
   # server-side redirects, so a pattern — as opposed to a single known path — can only be
   # handled by the page GitHub serves for an unmatched URL.
