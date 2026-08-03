@@ -1,0 +1,44 @@
+:root:root {
+  --meet-primary-color: rgb(0, 136, 170) !important;
+  --meet-primary-color-rgb: 0, 136, 170 !important;
+  --meet-primary-dark: rgb(0, 57, 71) !important;
+  --meet-primary-dark-rgb: 0, 57, 71 !important;
+  --meet-primary-color-light: rgb(0, 200, 247) !important;
+  --meet-primary-color-light-rgb: 0, 200, 247 !important;
+  --meet-body-color-dark: rgb(0, 34, 43) !important;
+  --meet-body-color-dark-rgb: 0, 34, 43 !important;
+  --md-hue: 225deg !important;
+
+  --md-primary-fg-color: var(--meet-primary-color) !important;
+  --md-primary-fg-color--light: var(--meet-primary-color-light) !important;
+  --md-primary-fg-color--dark: var(--meet-primary-color) !important;
+  --md-primary-bg-color: rgb(255, 255, 255) !important;
+  --md-primary-bg-color--dark: var(--meet-primary-color) !important;
+  --md-accent-fg-color: rgba(var(--meet-primary-color-rgb), 0.8) !important;
+  --md-accent-fg-color--transparent: rgb(129, 129, 129) !important;
+  --md-accent-bg-color: rgb(255, 255, 255) !important;
+  --md-accent-bg-color--light: rgb(255, 255, 255) !important;
+
+  --gradient: conic-gradient(
+    from 60deg at 50% 50%,
+    var(--md-primary-fg-color--light) 0%,
+    var(--md-primary-fg-color--light) 13%,
+    var(--md-primary-fg-color--light) 61%,
+    var(--md-primary-fg-color--light) 99%
+  ) !important;
+
+  --plyr-color-main: var(--meet-primary-color-light);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
+}
+
+[data-md-color-scheme="default"] {
+  --meet-body-color-dark: #f5f5f5;
+}
+
+.platform-header .img-title {
+  width: 100% !important;
+  max-width: 857px !important;
+}
