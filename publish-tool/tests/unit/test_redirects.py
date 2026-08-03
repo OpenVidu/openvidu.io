@@ -438,22 +438,39 @@ def test_an_empty_sitemap_produces_no_stubs():
 # -- version bands whose target arrived later --------------------------------------------
 
 
-def test_the_users_rule_sends_older_versions_to_a_page_those_versions_have(config):
-    """`meet/features/users/overview/` first exists in 3.8, but the rule installs from 3.7,
-    because `features/users-and-permissions/` stopped being published in 3.7. Without the
-    override the 3.7 stub would redirect into a 404 — which is what `ovweb verify`'s
-    redirect-target check now refuses to publish."""
-    by_version = {
-        version: {item.rule_id: item for item in resolve_file_redirects(config, version)}
-        for version in ("3.7", "3.8")
-    }
-    assert by_version["3.7"]["moved-meet-features-users"].to == "../rooms/access/"
-    assert by_version["3.8"]["moved-meet-features-users"].to == "../users/overview/"
-    # The canonical stays on the evergreen successor in both: it says where the content lives
-    # now, while `to` has to name a page the version being published actually has.
-    canonical = "https://openvidu.io/latest/meet/features/users/overview/"
-    assert by_version["3.7"]["moved-meet-features-users"].canonical == canonical
-    assert by_version["3.8"]["moved-meet-features-users"].canonical == canonical
+MEET_REORGANISATION_RULES = (
+    "moved-meet-features-users",
+    "moved-meet-features-rooms",
+    "moved-meet-features-live-captions",
+    "moved-meet-features-recordings",
+    "removed-oracle-install-tutorial-community",
+)
+
+
+def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
+    """The pages these rules replace are still published in a correct 3.7, so a stub installed
+    there would overwrite a real page.
+
+    3.7 *appears* not to have them because the reorganisation reached `main` from `next` on
+    2026-06-23 and a blog-post publish rebuilt the then-current 3.7.0 folder from `main`,
+    sweeping unreleased 3.8 documentation into a released version. The 3.7 folder inherited that
+    when the minor-grouped folders were backfilled. The gate describes the release the change
+    belongs to, not the folder's current contents.
+    """
+    for version in ("3.6", "3.7"):
+        installed = {item.rule_id for item in resolve_file_redirects(config, version)}
+        assert not installed & set(MEET_REORGANISATION_RULES), version
+
+    installed = {item.rule_id for item in resolve_file_redirects(config, "3.8")}
+    assert set(MEET_REORGANISATION_RULES) <= installed
+
+
+def test_the_pro_oracle_tutorial_rule_does_start_at_3_7(config):
+    """The counter-example, and why the gates were checked one by one rather than as a batch:
+    this page really was removed before 3.7 was published (2026-05-18), and the 3.7.0 folder was
+    correctly rebuilt without it. Its successor exists in 3.7 too, so the rule belongs there."""
+    installed = {item.rule_id for item in resolve_file_redirects(config, "3.7")}
+    assert "removed-oracle-install-tutorial-pro" in installed
 
 
 def test_every_dead_page_of_every_version_has_a_rule(config):

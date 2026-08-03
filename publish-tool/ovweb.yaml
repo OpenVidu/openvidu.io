@@ -191,6 +191,24 @@ redirects:
     #
     # Each rule is gated to the first version that no longer ships the old page, so the
     # versions that still hold the real page keep serving it.
+    #
+    # Two things the gate must satisfy, and they are not the same release:
+    #
+    #   1. the version that stopped shipping the OLD page, and
+    #   2. the version that first shipped the SUCCESSOR.
+    #
+    # Gate at the later of the two. `ovweb verify` rejects a redirect whose target does not
+    # exist in the tree, which is what catches getting this wrong.
+    #
+    # Read the gate from the RELEASE a change belongs to, not from the current contents of a
+    # version folder — for the Meet features and the community Oracle tutorial those disagree.
+    # The 3.7 folder holds part of the 3.8 documentation: the reorganisation reached `main` from
+    # `next` on 2026-06-23, and re-publishing the then-current 3.7.0 folder from `main` — which
+    # is how a blog post went live — swept unreleased 3.8 pages into a released version. The
+    # 3.7.0 folder was correct until 2026-06-22 (see the gh-pages history), and the minor-grouped
+    # 3.7 folder inherited the corrupted state when branch 3.7 was cut from `main` at the last
+    # commit that had been deployed to 3.7.0. Those rules are therefore gated `>=3.8`, which is
+    # where the change actually belongs, and a rebuilt 3.7 keeps serving its own pages.
 
     - id: renamed-force-single-port
       description: >
@@ -203,17 +221,20 @@ redirects:
 
     - id: removed-oracle-install-tutorial-community
       description: >
-        The Oracle install tutorial was folded into the install guide after 3.6. 1,978
-        impressions a year.
+        The Oracle install tutorial was folded into the install guide in 3.8. 1,978 impressions
+        a year. A correct 3.7 still has it — the removal reached `main` from `next` with the
+        3.8 batch, so only the corrupted 3.7 folder appears to lack it.
       at: "{version}/docs/self-hosting/single-node/oracle/install-tutorial/index.html"
       to: "../install/"
       canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
       body: "Redirecting to the Oracle Cloud installation guide…"
-      versions: ">=3.7"
+      versions: ">=3.8"
 
     - id: removed-oracle-install-tutorial-pro
       description: >
-        As above for the PRO tree. 1,590 impressions a year.
+        As above for the PRO tree, 1,590 impressions a year — but this one really was removed
+        before 3.7 shipped (2026-05-18) and the 3.7.0 folder was correctly rebuilt without it,
+        so the gate stays at 3.7. The pair is the reason the gates were checked one at a time.
       at: "{version}/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.html"
       to: "../install/"
       canonical: "{site_url}/latest/docs/self-hosting/single-node-pro/oracle/install/"
@@ -267,44 +288,37 @@ redirects:
       body: "Redirecting to the OpenVidu Meet direct link tutorial…"
       versions: ">=3.8"
 
-    # The Meet features section was reorganised per feature area in 3.7. 1,449 impressions
-    # a year across the four.
+    # The Meet features section was reorganised per feature area. 1,449 impressions a year
+    # across the four. The reorganisation shipped in **3.8**, not 3.7: it reached `main`
+    # from `next` on 2026-06-23 and was published into the then-current 3.7.0 folder by a
+    # blog-post deploy, which is why 3.7 appears to hold it. See the note below.
     - id: moved-meet-features-users
-      description: >
-        The rule installs from 3.7, but features/users/ did not exist until 3.8 — in 3.7 the
-        content this page covered (participant roles, and who may manage rooms) lives in
-        rooms/access/, which is where 3.7's role-management page points for the mechanism. The
-        canonical stays on the evergreen successor either way.
       at: "{version}/meet/features/users-and-permissions/index.html"
       to: "../users/overview/"
       canonical: "{site_url}/latest/meet/features/users/overview/"
       body: "Redirecting to OpenVidu Meet users…"
-      versions: ">=3.7"
-      when:
-        - versions: "<3.8"
-          to: "../rooms/access/"
-          body: "Redirecting to OpenVidu Meet room access…"
+      versions: ">=3.8"
 
     - id: moved-meet-features-rooms
       at: "{version}/meet/features/rooms-and-meetings/index.html"
       to: "../rooms/overview/"
       canonical: "{site_url}/latest/meet/features/rooms/overview/"
       body: "Redirecting to OpenVidu Meet rooms…"
-      versions: ">=3.7"
+      versions: ">=3.8"
 
     - id: moved-meet-features-live-captions
       at: "{version}/meet/features/live-captions/index.html"
       to: "../meetings/live-captions/"
       canonical: "{site_url}/latest/meet/features/meetings/live-captions/"
       body: "Redirecting to OpenVidu Meet live captions…"
-      versions: ">=3.7"
+      versions: ">=3.8"
 
     - id: moved-meet-features-recordings
       at: "{version}/meet/features/recordings/index.html"
       to: "overview/"
       canonical: "{site_url}/latest/meet/features/recordings/overview/"
       body: "Redirecting to OpenVidu Meet recordings…"
-      versions: ">=3.7"
+      versions: ">=3.8"
 
     # --- The rest of the same class, found by scanning the version folders ------------------
     #
