@@ -149,7 +149,7 @@ redirects:
         # guide *was* the Platform documentation index.
         - versions: "<3.4"
           to: "docs/getting-started/"
-          body: "Redirecting to the OpenVidu getting started guide…"
+          body: "Redirecting to the OpenVidu Platform getting started guide…"
 
     - id: platform-getting-started
       description: >
