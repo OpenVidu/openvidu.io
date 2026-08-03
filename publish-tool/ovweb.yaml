@@ -201,14 +201,19 @@ redirects:
     # exist in the tree, which is what catches getting this wrong.
     #
     # Read the gate from the RELEASE a change belongs to, not from the current contents of a
-    # version folder — for the Meet features and the community Oracle tutorial those disagree.
-    # The 3.7 folder holds part of the 3.8 documentation: the reorganisation reached `main` from
-    # `next` on 2026-06-23, and re-publishing the then-current 3.7.0 folder from `main` — which
-    # is how a blog post went live — swept unreleased 3.8 pages into a released version. The
-    # 3.7.0 folder was correct until 2026-06-22 (see the gh-pages history), and the minor-grouped
-    # 3.7 folder inherited the corrupted state when branch 3.7 was cut from `main` at the last
-    # commit that had been deployed to 3.7.0. Those rules are therefore gated `>=3.8`, which is
-    # where the change actually belongs, and a rebuilt 3.7 keeps serving its own pages.
+    # version folder — for the Meet features those two disagreed, and it is worth knowing why.
+    #
+    # Unreleased 3.8 documentation lives on `next` until its release. One blog branch was cut
+    # from `next` instead of `main`, so merging that blog PR (2481b7146, 2026-06-23) carried 14
+    # documentation commits into `main` with it — the Meet features reorganisation, the members
+    # tutorials and the Oracle Elastic/HA guides. The next publish of 3.7, which builds from
+    # `main`, then served them inside a released version, and the 3.7 folder kept them until
+    # 2026-08-03. A one-off branching mistake, not a flaw in the release process: `next` had not
+    # been merged to `main`, one branch had simply been taken from the wrong base.
+    #
+    # So a version folder is evidence of what was published, not of what a release contained.
+    # These rules are gated at the release the change belongs to, and the rebuilt 3.7 serves its
+    # own pages again.
 
     - id: renamed-force-single-port
       description: >
@@ -291,9 +296,9 @@ redirects:
       versions: ">=3.8"
 
     # The Meet features section was reorganised per feature area. 1,449 impressions a year
-    # across the four. The reorganisation shipped in **3.8**, not 3.7: it reached `main`
-    # from `next` on 2026-06-23 and was published into the then-current 3.7.0 folder by a
-    # blog-post deploy, which is why 3.7 appears to hold it. See the note below.
+    # across the four. The reorganisation shipped in **3.8**, not 3.7 — the 3.7 folder held it
+    # for six weeks because a blog branch was cut from `next` and merged into `main` with 3.8's
+    # documentation attached. See the note above the group.
     - id: moved-meet-features-users
       at: "{version}/meet/features/users-and-permissions/index.html"
       to: "../users/overview/"
