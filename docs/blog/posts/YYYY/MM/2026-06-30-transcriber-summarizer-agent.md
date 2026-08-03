@@ -2,6 +2,7 @@
 draft: false
 date: 2026-08-04
 slug: transcriber-summarizer-agent
+cover_image: /assets/images/blog/transcriber-summarizer-agent/transcriber-summarizer-agent.png
 categories:
   - AI
   - Implementation
