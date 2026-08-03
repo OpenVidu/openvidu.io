@@ -212,17 +212,25 @@ evaluated with `packaging`, so `3.10` correctly sorts above `3.9` and legacy fol
 version** — an overlap is an error, not a silent first-match-wins, because that would make the
 published redirect depend on the order of the file.
 
-Twenty-six rules ship today. Three are structural — the version root, `/X.Y/docs/getting-started/`
+Twenty rules ship today. Three are structural — the version root, `/X.Y/docs/getting-started/`
 → `/X.Y/docs/` for 3.4 and later, and `/X.Y/docs/` → `/X.Y/docs/getting-started/` for 3.0–3.3 — and
 the rest each rescue one page that was renamed or removed without a redirect. Those were found two
 ways, and both were needed:
 
 - **A 12-month Search Console export**, checked URL by URL against the live site: 13 `/latest/`
   URLs answered 404 while still ranking, worth 11,825 impressions a year.
-- **Diffing the version folders**: every page any published `X.Y` folder holds that 3.8 does not.
-  That set is 23, so it found the same 13 plus 10 more. Five of those ten existed in 3.7 only — a
-  URL that lived for one release has had little time to earn impressions, which is exactly why an
-  impressions-ranked list cannot find it.
+- **Diffing the version folders**: every page any published `X.Y` folder held that 3.8 does not.
+  That set is 23, so it found the same 13 plus 10 more, and an impressions-ranked list could not
+  have found several of them — a URL that lived for one release has had no time to earn
+  impressions.
+
+**Not every dead URL earns a redirect.** Six of the 23 deliberately have none. Five were never part
+of a release: they reached the site only through the 3.7 folder while it was serving mis-branched
+3.8 documentation, and 3.8 renamed them before shipping, so a redirect would preserve URLs that
+should not have existed. The sixth is a generated API page for a class that was deleted. The
+exclusions are pinned in [`test_redirects.py`](tests/unit/test_redirects.py) as
+`DELIBERATELY_UNCOVERED`, which fails both ways — if a listed URL gains a rule, and if an
+unlisted dead URL loses one.
 
 **A rule's `versions` gate must not be wider than its target's.** Gate a rule at the first version
 that stopped shipping the old page, then check that the *successor* exists in every version from

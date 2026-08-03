@@ -478,10 +478,25 @@ def test_both_oracle_tutorial_rules_start_at_3_7(config):
     assert "removed-oracle-install-tutorial-community" in installed
 
 
+#: Dead URLs left without a rule on purpose. The first five were never part of a release —
+#: they reached the site only through the 3.7 folder while it served mis-branched 3.8
+#: documentation, and 3.8 renamed them before shipping — so a redirect would preserve URLs that
+#: should not have existed. The last is a generated API page for a deleted class, one release long.
+DELIBERATELY_UNCOVERED = {
+    "meet/embedded/tutorials/external-members/",
+    "meet/embedded/tutorials/registered-members/",
+    "meet/features/rooms/creation-management/",
+    "meet/features/recordings/creation-management/",
+    "meet/features/rooms/appearance/",
+    "docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html",
+}
+
+
 def test_every_dead_page_of_every_version_has_a_rule(config):
-    """The rules were derived by scanning the version folders for pages 3.8 no longer has, so
-    the newest publish must cover all of them. Restated here as the set the scan produced: a
-    rule quietly dropped from ovweb.yaml would otherwise reinstate a 404 that used to rank."""
+    """The rules were derived by scanning the version folders for pages 3.8 no longer has, so the
+    newest publish must cover all of them bar the exclusions above. Restated here as the set the
+    scan produced: a rule quietly dropped from ovweb.yaml would otherwise reinstate a 404 that
+    used to rank, and an exclusion quietly gaining a rule would revive a URL we chose to retire."""
     dead = {
         # Found by a Search Console export (PR #108).
         "docs/self-hosting/faq/",
@@ -502,16 +517,15 @@ def test_every_dead_page_of_every_version_has_a_rule(config):
         "docs/openvidu-call/docs/",
         "docs/tutorials/advanced-features/recording-advanced/",
         "docs/tutorials/advanced-features/recording-basic/",
-        "meet/embedded/tutorials/external-members/",
-        "meet/embedded/tutorials/registered-members/",
-        "meet/features/recordings/creation-management/",
-        "meet/features/rooms/appearance/",
-        "meet/features/rooms/creation-management/",
-        "docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html",
+        *DELIBERATELY_UNCOVERED,
     }
     installed = set()
     for item in resolve_file_redirects(config, "3.8"):
         path = item.path[len("3.8/") :]
         installed.add(path[: -len("index.html")] if path.endswith("/index.html") else path)
 
-    assert not dead - installed, f"no rule covers {sorted(dead - installed)}"
+    assert not dead - installed - DELIBERATELY_UNCOVERED, (
+        f"no rule covers {sorted(dead - installed - DELIBERATELY_UNCOVERED)}"
+    )
+    revived = installed & DELIBERATELY_UNCOVERED
+    assert not revived, f"these were retired on purpose, not to be redirected: {sorted(revived)}"
