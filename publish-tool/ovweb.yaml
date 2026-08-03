@@ -221,14 +221,16 @@ redirects:
 
     - id: removed-oracle-install-tutorial-community
       description: >
-        The Oracle install tutorial was folded into the install guide in 3.8. 1,978 impressions
-        a year. A correct 3.7 still has it — the removal reached `main` from `next` with the
-        3.8 batch, so only the corrupted 3.7 folder appears to lack it.
+        The Oracle install tutorial was folded into the install guide. 1,978 impressions a year.
+        Gated at 3.7 even though the deletion only reached `main` with the 3.8 batch: the page
+        was removed as outdated *during* 3.7's life (8af6778b8, "remove outdated public IP
+        instructions"), so the rebuilt 3.7 keeps it deleted and redirects instead of resurrecting
+        instructions that were wrong. Its PRO twin below is the same call for the same reason.
       at: "{version}/docs/self-hosting/single-node/oracle/install-tutorial/index.html"
       to: "../install/"
       canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
       body: "Redirecting to the Oracle Cloud installation guide…"
-      versions: ">=3.8"
+      versions: ">=3.7"
 
     - id: removed-oracle-install-tutorial-pro
       description: >

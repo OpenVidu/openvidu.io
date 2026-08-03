@@ -443,7 +443,6 @@ MEET_REORGANISATION_RULES = (
     "moved-meet-features-rooms",
     "moved-meet-features-live-captions",
     "moved-meet-features-recordings",
-    "removed-oracle-install-tutorial-community",
 )
 
 
@@ -465,12 +464,18 @@ def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
     assert set(MEET_REORGANISATION_RULES) <= installed
 
 
-def test_the_pro_oracle_tutorial_rule_does_start_at_3_7(config):
-    """The counter-example, and why the gates were checked one by one rather than as a batch:
-    this page really was removed before 3.7 was published (2026-05-18), and the 3.7.0 folder was
-    correctly rebuilt without it. Its successor exists in 3.7 too, so the rule belongs there."""
+def test_both_oracle_tutorial_rules_start_at_3_7(config):
+    """The counter-examples, and why the gates were checked one by one rather than as a batch.
+
+    Neither page comes back when 3.7 is rebuilt. The PRO one was removed before 3.7 shipped
+    (2026-05-18) and its folder was correctly rebuilt without it. The community one was removed
+    as *outdated* during 3.7's life — the deletion only reached `main` with the 3.8 batch, but
+    resurrecting instructions the team had already found wrong is not what fixing 3.7 means, so
+    the rebuild keeps it deleted and this rule covers the URL.
+    """
     installed = {item.rule_id for item in resolve_file_redirects(config, "3.7")}
     assert "removed-oracle-install-tutorial-pro" in installed
+    assert "removed-oracle-install-tutorial-community" in installed
 
 
 def test_every_dead_page_of_every_version_has_a_rule(config):
