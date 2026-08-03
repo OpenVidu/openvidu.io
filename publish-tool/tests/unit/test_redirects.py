@@ -450,11 +450,11 @@ def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
     """The pages these rules replace are still published in a correct 3.7, so a stub installed
     there would overwrite a real page.
 
-    3.7 *appears* not to have them because the reorganisation reached `main` from `next` on
-    2026-06-23 and a blog-post publish rebuilt the then-current 3.7.0 folder from `main`,
-    sweeping unreleased 3.8 documentation into a released version. The 3.7 folder inherited that
-    when the minor-grouped folders were backfilled. The gate describes the release the change
-    belongs to, not the folder's current contents.
+    For six weeks the 3.7 folder appeared not to have them, which is what made these gates look
+    like 3.7 in the first place. One blog branch had been cut from `next` rather than `main`, so
+    merging it (2481b7146) brought 14 of 3.8's documentation commits into `main`, and the next
+    3.7 publish served them. The gate describes the release a change belongs to; the folder is
+    only evidence of what was published.
     """
     for version in ("3.6", "3.7"):
         installed = {item.rule_id for item in resolve_file_redirects(config, version)}
