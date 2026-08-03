@@ -270,11 +270,20 @@ redirects:
     # The Meet features section was reorganised per feature area in 3.7. 1,449 impressions
     # a year across the four.
     - id: moved-meet-features-users
+      description: >
+        The rule installs from 3.7, but features/users/ did not exist until 3.8 — in 3.7 the
+        content this page covered (participant roles, and who may manage rooms) lives in
+        rooms/access/, which is where 3.7's role-management page points for the mechanism. The
+        canonical stays on the evergreen successor either way.
       at: "{version}/meet/features/users-and-permissions/index.html"
       to: "../users/overview/"
       canonical: "{site_url}/latest/meet/features/users/overview/"
       body: "Redirecting to OpenVidu Meet users…"
       versions: ">=3.7"
+      when:
+        - versions: "<3.8"
+          to: "../rooms/access/"
+          body: "Redirecting to OpenVidu Meet room access…"
 
     - id: moved-meet-features-rooms
       at: "{version}/meet/features/rooms-and-meetings/index.html"
@@ -296,6 +305,115 @@ redirects:
       canonical: "{site_url}/latest/meet/features/recordings/overview/"
       body: "Redirecting to OpenVidu Meet recordings…"
       versions: ">=3.7"
+
+    # --- The rest of the same class, found by scanning the version folders ------------------
+    #
+    # The rules above came from a Search Console export, so they are the dead URLs that still
+    # earn impressions. This group came from the complement of that: every page under `docs/`
+    # or `meet/` that any published version folder holds and 3.8 does not — 22 paths, of which
+    # the export had found 13. The nine below are the remainder, plus one dropped API export.
+    #
+    # Five of the nine lived in 3.7 only. A URL that existed for one release has had little
+    # time to accumulate impressions, which is exactly why an impressions-ranked list misses
+    # it — not evidence that nobody follows it.
+    #
+    # Each gate is the first version that stopped shipping the page, read off the version
+    # folders rather than guessed, and each target was checked to exist in every version from
+    # that gate onwards. `moved-meet-features-users` above is why that second check matters.
+
+    # OpenVidu Meet's embedded tutorials were regrouped in 3.8 and two were renamed with them.
+    # The successor pages are rewrites of these, near-identical paragraph by paragraph.
+    - id: moved-meet-tutorial-external-members
+      description: >
+        "External members" became "identified guests" in 3.8: a room member with a fixed name
+        and a unique, individually revocable access link that needs no login.
+      at: "{version}/meet/embedded/tutorials/external-members/index.html"
+      to: "../access/identified-guests/"
+      canonical: "{site_url}/latest/meet/embedded/tutorials/access/identified-guests/"
+      body: "Redirecting to the OpenVidu Meet identified guests tutorial…"
+      versions: ">=3.8"
+
+    - id: moved-meet-tutorial-registered-members
+      description: >
+        "Registered members" became "users" in 3.8. Both cover creating OpenVidu Meet users
+        with the Users API and adding them to a room as members.
+      at: "{version}/meet/embedded/tutorials/registered-members/index.html"
+      to: "../access/users/"
+      canonical: "{site_url}/latest/meet/embedded/tutorials/access/users/"
+      body: "Redirecting to the OpenVidu Meet users tutorial…"
+      versions: ">=3.8"
+
+    # The Meet features section was reorganised again in 3.8, dropping "creation-" from the two
+    # management pages and folding room appearance into room management.
+    - id: moved-meet-features-rooms-management
+      at: "{version}/meet/features/rooms/creation-management/index.html"
+      to: "../management/"
+      canonical: "{site_url}/latest/meet/features/rooms/management/"
+      body: "Redirecting to OpenVidu Meet room creation and management…"
+      versions: ">=3.8"
+
+    - id: moved-meet-features-recordings-management
+      at: "{version}/meet/features/recordings/creation-management/index.html"
+      to: "../management/"
+      canonical: "{site_url}/latest/meet/features/recordings/management/"
+      body: "Redirecting to OpenVidu Meet recording management…"
+      versions: ">=3.8"
+
+    - id: moved-meet-features-rooms-appearance
+      description: >
+        Room appearance is no longer a page of its own: 3.8's room management page covers it,
+        which is where every mention of it now lives.
+      at: "{version}/meet/features/rooms/appearance/index.html"
+      to: "../management/"
+      canonical: "{site_url}/latest/meet/features/rooms/management/"
+      body: "Redirecting to OpenVidu Meet room creation and management…"
+      versions: ">=3.8"
+
+    # OpenVidu Call was the ready-to-use meeting application documented up to 3.3. OpenVidu Meet
+    # replaced it, and the timing corroborates the mapping: these two pages disappear in exactly
+    # the release that first ships meet/. The release notes link to /3.0/docs/openvidu-call/ on
+    # purpose — those are version-pinned by convention and 3.0 is below the gate, so they keep
+    # resolving to the page they describe.
+    - id: removed-openvidu-call
+      at: "{version}/docs/openvidu-call/index.html"
+      to: "../../meet/"
+      canonical: "{site_url}/latest/meet/"
+      body: "Redirecting to OpenVidu Meet, which replaced OpenVidu Call…"
+      versions: ">=3.4"
+
+    - id: removed-openvidu-call-docs
+      at: "{version}/docs/openvidu-call/docs/index.html"
+      to: "../../../meet/"
+      canonical: "{site_url}/latest/meet/"
+      body: "Redirecting to OpenVidu Meet, which replaced OpenVidu Call…"
+      versions: ">=3.4"
+
+    # The two recording tutorials were split per storage backend in 3.2. Both originals used
+    # S3-compatible storage — MinIO in the local deployment — so the S3 variant is the one that
+    # continues them; the Azure variant was new.
+    - id: split-recording-basic-tutorial
+      at: "{version}/docs/tutorials/advanced-features/recording-basic/index.html"
+      to: "../recording-basic-s3/"
+      canonical: "{site_url}/latest/docs/tutorials/advanced-features/recording-basic-s3/"
+      body: "Redirecting to the basic recording tutorial with S3 storage…"
+      versions: ">=3.2"
+
+    - id: split-recording-advanced-tutorial
+      at: "{version}/docs/tutorials/advanced-features/recording-advanced/index.html"
+      to: "../recording-advanced-s3/"
+      canonical: "{site_url}/latest/docs/tutorials/advanced-features/recording-advanced-s3/"
+      body: "Redirecting to the advanced recording tutorial with S3 storage…"
+      versions: ">=3.2"
+
+    # The one dropped API export. E2eeService was published for 3.5 only and the class is gone,
+    # so there is no successor page — the library's API index is the nearest thing. Named as a
+    # file rather than a directory because typedoc output is not a directory URL.
+    - id: removed-e2ee-service-reference
+      at: "{version}/docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html"
+      to: "../"
+      canonical: "{site_url}/latest/docs/reference-docs/openvidu-components-angular/"
+      body: "Redirecting to the openvidu-components-angular API reference…"
+      versions: ">=3.6"
 
   # Redirects compiled into the 404 router (docs/overrides/404.html). GitHub Pages has no
   # server-side redirects, so a pattern — as opposed to a single known path — can only be

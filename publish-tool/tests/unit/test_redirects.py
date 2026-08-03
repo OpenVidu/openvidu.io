@@ -433,3 +433,63 @@ def test_a_disabled_mirror_produces_no_stubs():
 
 def test_an_empty_sitemap_produces_no_stubs():
     assert mirrored() == {}
+
+
+# -- version bands whose target arrived later --------------------------------------------
+
+
+def test_the_users_rule_sends_older_versions_to_a_page_those_versions_have(config):
+    """`meet/features/users/overview/` first exists in 3.8, but the rule installs from 3.7,
+    because `features/users-and-permissions/` stopped being published in 3.7. Without the
+    override the 3.7 stub would redirect into a 404 — which is what `ovweb verify`'s
+    redirect-target check now refuses to publish."""
+    by_version = {
+        version: {item.rule_id: item for item in resolve_file_redirects(config, version)}
+        for version in ("3.7", "3.8")
+    }
+    assert by_version["3.7"]["moved-meet-features-users"].to == "../rooms/access/"
+    assert by_version["3.8"]["moved-meet-features-users"].to == "../users/overview/"
+    # The canonical stays on the evergreen successor in both: it says where the content lives
+    # now, while `to` has to name a page the version being published actually has.
+    canonical = "https://openvidu.io/latest/meet/features/users/overview/"
+    assert by_version["3.7"]["moved-meet-features-users"].canonical == canonical
+    assert by_version["3.8"]["moved-meet-features-users"].canonical == canonical
+
+
+def test_every_dead_page_of_every_version_has_a_rule(config):
+    """The rules were derived by scanning the version folders for pages 3.8 no longer has, so
+    the newest publish must cover all of them. Restated here as the set the scan produced: a
+    rule quietly dropped from ovweb.yaml would otherwise reinstate a 404 that used to rank."""
+    dead = {
+        # Found by a Search Console export (PR #108).
+        "docs/self-hosting/faq/",
+        "docs/self-hosting/how-to-guides/force-443-tls/",
+        "docs/self-hosting/single-node/oracle/install-tutorial/",
+        "docs/self-hosting/single-node-pro/oracle/install-tutorial/",
+        "meet/embedded/tutorials/direct-link/",
+        "meet/embedded/tutorials/recordings/",
+        "meet/embedded/tutorials/webcomponent/",
+        "meet/embedded/tutorials/webcomponent-advanced/",
+        "meet/embedded/tutorials/webhooks/",
+        "meet/features/live-captions/",
+        "meet/features/recordings/",
+        "meet/features/rooms-and-meetings/",
+        "meet/features/users-and-permissions/",
+        # Found by scanning every version folder for what 3.8 does not serve.
+        "docs/openvidu-call/",
+        "docs/openvidu-call/docs/",
+        "docs/tutorials/advanced-features/recording-advanced/",
+        "docs/tutorials/advanced-features/recording-basic/",
+        "meet/embedded/tutorials/external-members/",
+        "meet/embedded/tutorials/registered-members/",
+        "meet/features/recordings/creation-management/",
+        "meet/features/rooms/appearance/",
+        "meet/features/rooms/creation-management/",
+        "docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html",
+    }
+    installed = set()
+    for item in resolve_file_redirects(config, "3.8"):
+        path = item.path[len("3.8/") :]
+        installed.add(path[: -len("index.html")] if path.endswith("/index.html") else path)
+
+    assert not dead - installed, f"no rule covers {sorted(dead - installed)}"
