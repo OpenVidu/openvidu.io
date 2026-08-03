@@ -169,10 +169,6 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/elastic/aws/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/aws/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -182,10 +178,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/aws/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/elastic/azure/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -201,10 +193,6 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -214,10 +202,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/elastic/gcp/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -233,10 +217,6 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -246,10 +226,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/elastic/oracle/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -269,10 +245,6 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/ha/aws/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/aws/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -282,10 +254,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/aws/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/ha/azure/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -301,10 +269,6 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -314,10 +278,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/ha/gcp/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -350,10 +310,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/on-premises/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/ha/oracle/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -449,7 +405,7 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/aws/</loc>
+         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -461,27 +417,11 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/aws/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/azure/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/azure/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/azure/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -493,27 +433,11 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/gcp/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/gcp/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/gcp/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -525,14 +449,6 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/oracle/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -541,15 +457,11 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node/oracle/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/aws/</loc>
+         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/upgrade/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -561,27 +473,11 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/aws/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/install/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/digitalocean/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -593,27 +489,11 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/digitalocean/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/install/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/on-premises/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -625,23 +505,11 @@
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/on-premises/upgrade/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/admin/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/install/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/upgrade/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
