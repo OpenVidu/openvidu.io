@@ -28,7 +28,7 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 ### 5. Administration and upgrade
 
 - For administration of this OpenVidu Single Node deployment, see the [Administration](./admin.md) section.
-- To upgrade OpenVidu, see the [Upgrade](./upgrade.md) section.
+- To upgrade OpenVidu, see the [Upgrade](../upgrade.md) section.
 
 ## Terraform
 

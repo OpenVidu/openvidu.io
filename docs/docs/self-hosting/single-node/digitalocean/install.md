@@ -89,7 +89,7 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 ### 4. Administration and upgrade
 
 - For administration of this OpenVidu Single Node deployment, see the [On-Premises administration section](../on-premises/admin.md).
-- To upgrade OpenVidu, see the [On-Premises upgrade section](../on-premises/upgrade.md).
+- To upgrade OpenVidu, see the [Upgrade section](../upgrade.md).
 
 ## **Terraform**
 

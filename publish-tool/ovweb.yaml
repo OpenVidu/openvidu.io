@@ -430,3 +430,31 @@ redirects:
       for_each: versioned_pages
       match: '^/{item}/(.*)$'
       to: "/latest/{item}/$1"
+
+    # The next two rules cover pages removed when the self-hosting deployment guides were
+    # consolidated. Neither needs a `versions` gate, and this is why: a pattern rule only ever
+    # runs from the 404 page, so in a version folder that still ships the page GitHub Pages
+    # serves the real file and the router is never reached. The same rule therefore redirects
+    # the URL in the versions where it is gone and leaves it alone in the versions where it is
+    # not — /3.8/…/aws/ keeps working while the current docs redirect.
+    - id: removed-provider-index
+      description: >
+        Each deployment type used to carry one index page per provider whose whole content was
+        a list of links to that provider's install, admin and upgrade guides. The deployment
+        type's own index now links straight to the install guide, and so does this rule.
+        ha/on-premises/ is deliberately still a real page — it resolves the DNS-load-balancing
+        vs network-load-balancer fork — so it is served rather than redirected, by the same
+        mechanism described above.
+      match: '^/([^/]+)/docs/self-hosting/(single-node|single-node-pro|elastic|ha)/(on-premises|aws|azure|gcp|digitalocean|oracle)/?$'
+      to: "/$1/docs/self-hosting/$2/$3/install/"
+
+    - id: merged-single-node-upgrade
+      description: >
+        The six per-provider Single Node upgrade guides of each edition are now one page per
+        edition: five of the six only said "redeploy the template with the new version", and
+        the sixth held the in-place updater procedure that applies to all of them. The hash is
+        carried over by the router, so a link to #upgrading-openvidu-single-node still lands on
+        that section. Elastic and High Availability keep their per-provider upgrade guides,
+        which hold real per-provider procedure.
+      match: '^/([^/]+)/docs/self-hosting/(single-node|single-node-pro)/(on-premises|aws|azure|gcp|digitalocean|oracle)/upgrade/?$'
+      to: "/$1/docs/self-hosting/$2/upgrade/"

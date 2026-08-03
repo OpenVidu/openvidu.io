@@ -3,7 +3,7 @@ title: "Fault tolerance in OpenVidu deployments"
 description: "How OpenVidu survives losing a node: which services are replicated, what happens to a room in progress, and what Elastic and HA each guarantee."
 ---
 
-# Fault Tolerance :material-shield-refresh:
+# Fault tolerance :material-shield-refresh:
 
 Real-time media is particularly sensitive to downtime events, as they directly affect the user experience in a very disruptive way. OpenVidu is designed from the ground up to be fault tolerant in all its services in case of node downtime, especially in its High Availability deployment.
 
