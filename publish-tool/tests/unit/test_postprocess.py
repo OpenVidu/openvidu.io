@@ -8,12 +8,13 @@ from __future__ import annotations
 
 import gzip
 import json
+import posixpath
 from pathlib import Path
 
 import pytest
 
 from ovweb.pipeline.postprocess import PostprocessError, postprocess
-from ovweb.redirects import MIRROR_RULE_ID
+from ovweb.redirects import MIRROR_RULE_ID, resolve_file_redirects
 from ovweb.releases import ARTICLE_MARKER, TOC_MARKER
 from ovweb.report import Reporter
 
@@ -30,11 +31,34 @@ def releases_page(notes: str, chrome: str) -> str:
     )
 
 
-def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None:
+def build_redirect_targets(root: Path, config, version: str) -> None:
+    """Give every redirect rule that applies to `version` a page to point at.
+
+    Derived from the rules rather than listed, for the same reason the rest of the fixture is
+    derived from the layout: a rule added to ovweb.yaml gets its target here automatically, and
+    `ovweb verify` asserts that no generated redirect points at a missing page. Existing files
+    are left alone — several rules target pages this fixture writes properly, and the version
+    root targets `docs/`, whose real content other tests assert on.
+    """
+    for redirect in resolve_file_redirects(config, version):
+        if redirect.to.startswith("/"):
+            target = root / redirect.to.lstrip("/")
+        else:
+            base = posixpath.dirname(redirect.path)
+            target = root / posixpath.normpath(posixpath.join(base, redirect.to))
+        page = target / "index.html" if redirect.to.endswith("/") else target
+        if page.exists():
+            continue
+        page.parent.mkdir(parents=True, exist_ok=True)
+        page.write_text(f"<html><body>target of {redirect.rule_id}</body></html>", encoding="utf-8")
+
+
+def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=None) -> None:
     """Write a folder shaped like raw `mike` output for one version.
 
     Driven by the real layout so the fixture cannot drift from the configuration: adding a
-    page to ovweb.yaml automatically gets one here too.
+    page to ovweb.yaml automatically gets one here too. Pass `config` to also materialise the
+    redirect rules' targets, which a tree has to have for `ovweb verify` to pass on it.
     """
     base = root / version
     (base / "docs" / "releases").mkdir(parents=True)
@@ -147,6 +171,9 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
             (base / feed).write_text(f"https://openvidu.io/{version}/blog/x/", encoding="utf-8")
         (base / "rss.xsl").write_text("<xsl/>", encoding="utf-8")
 
+    if config is not None:
+        build_redirect_targets(root, config, version)
+
 
 @pytest.fixture
 def report():
@@ -154,8 +181,8 @@ def report():
 
 
 @pytest.fixture
-def latest_tree(tmp_path, layout):
-    build_tree(tmp_path, layout, version=VERSION)
+def latest_tree(tmp_path, layout, config):
+    build_tree(tmp_path, layout, version=VERSION, config=config)
     (tmp_path / "versions.json").write_text(
         json.dumps([{"version": VERSION, "aliases": ["latest"]}]), encoding="utf-8"
     )
@@ -368,10 +395,10 @@ def test_root_search_index_points_at_latest_but_the_version_keeps_its_version(
 
 
 @pytest.fixture
-def mixed_tree(tmp_path, layout):
+def mixed_tree(tmp_path, layout, config):
     """The newest version plus an older one built by an older configuration."""
-    build_tree(tmp_path, layout, version=VERSION)
-    build_tree(tmp_path, layout, version=OLD_VERSION, modern=False)
+    build_tree(tmp_path, layout, version=VERSION, config=config)
+    build_tree(tmp_path, layout, version=OLD_VERSION, modern=False, config=config)
     (tmp_path / "versions.json").write_text(
         json.dumps(
             [{"version": VERSION, "aliases": ["latest"]}, {"version": OLD_VERSION, "aliases": []}]
@@ -492,7 +519,9 @@ def test_past_version_gets_the_old_band_redirect(mixed_tree, config, report):
 
     docs_index = mixed_tree / OLD_VERSION / "docs" / "index.html"
     assert '<meta http-equiv="refresh" content="0; url=getting-started/">' in docs_index.read_text()
-    assert not (mixed_tree / OLD_VERSION / "docs" / "getting-started").exists()
+    # And it lands somewhere: the fixture materialises every rule's target, because a redirect
+    # into a 404 is worse than the 404 it replaced and `ovweb verify` now rejects one.
+    assert (mixed_tree / OLD_VERSION / "docs" / "getting-started" / "index.html").is_file()
 
 
 def test_past_version_pulls_the_newest_release_notes_in(mixed_tree, config, report):
