@@ -4,7 +4,7 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 
 Comparing OpenVidu Meet and OpenVidu Platform instead?
 
-This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ## OpenVidu vs LiveKit
 

@@ -20,13 +20,13 @@ OpenVidu Dashboard rooms
 
 #### Room Details
 
-This view is part of OpenVidu [PRO](/pricing/#openvidu-pro) edition.
+This view is part of OpenVidu [PRO](https://openvidu.io/pricing/#openvidu-pro) edition.
 
 Retrieve in-depth information about a specific **room**, including its duration, bandwidth consumption, participants and related events. A chart illustrating the active participants count over time is also provided.
 
 #### Participant Details
 
-This view is part of OpenVidu [PRO](/pricing/#openvidu-pro) edition.
+This view is part of OpenVidu [PRO](https://openvidu.io/pricing/#openvidu-pro) edition.
 
 Obtain detailed insights into each **participant**, covering their duration, bandwidth usage, average audio and video quality score, information about the client they are connecting with, connection stats, published tracks and related events.
 
@@ -42,13 +42,13 @@ OpenVidu Dashboard egress-ingress
 
 #### Egress Details
 
-This view is part of OpenVidu [PRO](/pricing/#openvidu-pro) edition.
+This view is part of OpenVidu [PRO](https://openvidu.io/pricing/#openvidu-pro) edition.
 
 Access comprehensive details about a specific **egress**, including its duration, current status, type, associated room, destinations, status timeline and request information.
 
 #### Ingress Details
 
-This view is part of OpenVidu [PRO](/pricing/#openvidu-pro) edition.
+This view is part of OpenVidu [PRO](https://openvidu.io/pricing/#openvidu-pro) edition.
 
 Explore detailed information about a specific **ingress**, including its total duration, status and a list of all associated rooms.
 
