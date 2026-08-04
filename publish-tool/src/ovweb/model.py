@@ -92,38 +92,87 @@ class ResolvedRedirect:
 
 
 @dataclass(frozen=True)
-class PatternRule:
-    """A regex redirect compiled into the 404 router, before `for_each` expansion."""
+class ExpandFields:
+    """The page fields an expansion rule may override; unset ones fall back to the defaults."""
+
+    title: str | None = None
+    body: str | None = None
+    robots: str | None = None
+    lang: str | None = None
+    preserve_query_and_hash: bool | None = None
+
+
+@dataclass(frozen=True)
+class CrossProductRule:
+    """Many single-page moves that differ only by path segments: one stub per `values` combination.
+
+    `at`, `to`, `canonical` and `body` may use `{version}` and any `values` key. Resolved
+    against the published tree, so a combination whose old path is still a real page, or whose
+    target does not exist, produces no stub.
+    """
 
     id: str
-    match: str
+    at: str
     to: str
-    for_each: str | None = None
+    values: tuple[tuple[str, tuple[str, ...]], ...]
+    canonical: str | None = None
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    versions: str | None = None
     description: str = ""
 
 
 @dataclass(frozen=True)
-class ResolvedPattern:
-    """A single regex redirect, ready to be emitted into the 404 router."""
+class TreeRenameRule:
+    """A directory moved: one stub per page under the new path, at its old path.
+
+    The pages are enumerated from the tree under `to_path`, so every stub has a live target by
+    construction and a page removed in the same release needs its own `files` rule.
+    """
 
     id: str
-    match: str
-    to: str
+    from_path: str
+    to_path: str
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    versions: str | None = None
+    description: str = ""
 
 
 @dataclass(frozen=True)
-class MirrorRule:
-    """Answer a versioned section's URLs without their version prefix.
+class VersionAliasRule:
+    """A retired version folder aliased to its minor: one stub per page of the minor.
 
-    One redirect page per published page of every section named by `for_each`, at the
-    unversioned path. Documentation is served under `/latest/docs/`, so `/docs/self-hosting/`
-    would otherwise be handled by the 404 router — which GitHub serves with a 404 status, the
-    thing a crawler acts on before it runs any JavaScript.
+    `folders` name folders that no longer exist as versions — the pre-regroup exact-patch
+    releases. Each is rebuilt as a mirror of its minor's tree, so `/3.4.1/docs/x/` answers with
+    a redirect to `/3.4/docs/x/`.
     """
 
-    for_each: str
-    body: str
+    id: str
+    folders: tuple[str, ...]
+    fields: ExpandFields = ExpandFields()
     enabled: bool = True
+    description: str = ""
+
+
+@dataclass(frozen=True)
+class UnversionedMirrorRule:
+    """Every versioned page answering at its unversioned URL: `/docs/x/` -> `/latest/docs/x/`.
+
+    Enumerated from the newest version's tree, one stub per page of every section named by
+    `for_each`. GitHub Pages serves `404.html` with a 404 status — the thing a crawler acts on
+    before it runs any JavaScript — so a real page with a meta refresh is the only redirect a
+    crawler can be given for these URLs.
+    """
+
+    id: str
+    for_each: str
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    description: str = ""
+
+
+ExpandRule = CrossProductRule | TreeRenameRule | VersionAliasRule | UnversionedMirrorRule
 
 
 @dataclass(frozen=True)
@@ -145,8 +194,7 @@ class SiteConfig:
     layout: SiteLayout
     defaults: RedirectDefaults
     file_rules: tuple[RedirectRule, ...]
-    pattern_rules: tuple[PatternRule, ...]
-    mirror: MirrorRule | None = None
+    expand_rules: tuple[ExpandRule, ...] = ()
     source: str = "<unknown>"
 
 

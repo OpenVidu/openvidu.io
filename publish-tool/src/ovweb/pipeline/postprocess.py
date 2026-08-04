@@ -27,13 +27,8 @@ from pathlib import Path
 from .. import fsops
 from ..config import SiteConfig
 from ..discovery import latest_in_tree, versions_in_tree
-from ..redirects import (
-    MIRROR_RULE_ID,
-    is_generated_redirect,
-    mirror_redirects,
-    render_redirect,
-    resolve_file_redirects,
-)
+from ..expand import alias_redirects, mirror_redirects, mirror_rule, version_redirects, wipe_owned
+from ..redirects import is_generated_redirect, render_redirect
 from ..releases import DestinationRegionError, splice_releases
 from ..report import Reporter
 from ..rewrite import (
@@ -89,7 +84,6 @@ def postprocess(
             f"{version_dir} does not exist. mike should have created it — has the deploy run?"
         )
 
-    redirects = resolve_file_redirects(config, version)
     result = PostprocessResult(version=version, update_latest=update_latest)
 
     _guard(version_dir, force=force)
@@ -141,15 +135,18 @@ def postprocess(
     # Group 3. The redirects come after promotion, which moves this version's index.html to the
     # root and leaves the version root free for the generated page.
     report.step("install-redirects", "Write the generated redirect pages")
-    for redirect in redirects:
+    for redirect in version_redirects(tree, config, version):
         fsops.write_text(tree / redirect.path, render_redirect(redirect))
         result.redirects_written.append(redirect.path)
         report.detail(f"{redirect.path} -> {redirect.to} [{redirect.rule_id}]")
     report.result("install-redirects", written=len(result.redirects_written))
 
     if update_latest:
-        _mirror_unversioned_pages(tree, config=config, report=report, result=result)
+        _mirror_unversioned_pages(
+            tree, version=version, config=config, report=report, result=result
+        )
 
+    _alias_versions(tree, version=version, config=config, report=report, result=result)
     _prune_version_sitemap(tree, version=version, config=config, report=report, result=result)
     _sync_releases(tree, version=version, config=config, report=report, result=result)
 
@@ -342,37 +339,28 @@ def _promote_search_index(
 
 
 def _mirror_unversioned_pages(
-    tree: Path, *, config: SiteConfig, report: Reporter, result: PostprocessResult
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
 ) -> None:
     """Make every versioned page answer at its unversioned URL too, with a redirect page.
 
     Wiped and rebuilt in full rather than reconciled page by page: a renamed or removed page
-    would otherwise leave a stub redirecting into a 404, which is worse than the 404 it replaced.
-    Regenerating from this publish's sitemap makes that state unrepresentable.
+    would otherwise leave a stub redirecting into a 404, which is worse than the 404 it
+    replaced. Regenerating from this publish's tree makes that state unrepresentable.
 
-    Runs last of the root-building steps because it reads the promoted root sitemap, and only on
-    a latest publish, since the stubs send visitors to `/latest/`.
+    Runs after `install-redirects` so a versioned page that is itself a redirect is mirrored as
+    its final destination, and only on a latest publish, since the stubs send visitors to
+    `/latest/`.
     """
-    rule = config.mirror
-    if rule is None or not rule.enabled:
+    rule = mirror_rule(config)
+    if rule is None:
         return
 
     report.step("mirror-unversioned", "Answer the versioned pages' unversioned URLs")
 
-    sections = getattr(config.layout, rule.for_each)
-    removed = 0
-    for section in sections:
-        _guard_mirror(tree / section, section=section)
-        removed += int(fsops.remove(tree / section, required=False))
-
-    redirects = mirror_redirects(fsops.read_text(tree / SITEMAP), config=config)
-    if not redirects:
-        raise PostprocessError(
-            f"the root sitemap named no page under /latest/{{{','.join(sections)}}}/, so the "
-            "unversioned mirror would be empty. That silently reinstates the 404s it exists to "
-            "prevent, so it is treated as a failure: check that the sitemap was promoted before "
-            "this step, and that layout.site_url matches the URLs in it."
-        )
+    redirects = mirror_redirects(tree, config, latest=version)
+    removed = sum(
+        int(wipe_owned(tree / section)) for section in getattr(config.layout, rule.for_each)
+    )
     for redirect in redirects:
         fsops.write_text(tree / redirect.path, render_redirect(redirect))
 
@@ -380,23 +368,29 @@ def _mirror_unversioned_pages(
     report.result("mirror-unversioned", removed=removed, written=len(redirects))
 
 
-def _guard_mirror(path: Path, *, section: str) -> None:
-    """Refuse to wipe a root section folder holding anything this step did not write.
+def _alias_versions(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """Rebuild the legacy patch-version folders that alias the version being published.
 
-    The step deletes `/docs/` and `/meet/` outright, which is safe only while nothing else can
-    put a file there. Nothing can today, so this exists to fail loudly if that stops being true.
+    `3.4.0` and `3.4.1` mirror whatever `3.4` serves, so they are rebuilt whenever `3.4` is —
+    wiped and regenerated like the unversioned mirror, and for the same reason. Folders aliasing
+    other minors are left as their own publish produced them.
     """
-    if not path.is_dir():
-        return
-    for file in sorted(path.rglob("*")):
-        if file.is_dir():
-            continue
-        if file.name != "index.html" or not is_generated_redirect(file, rule_id=MIRROR_RULE_ID):
-            raise PostprocessError(
-                f"{file} is not a generated redirect, so /{section}/ holds content this publish "
-                "did not write and must not delete. Remove it by hand, or take the section out "
-                "of the redirects.mirror rule in ovweb.yaml."
-            )
+    report.step("alias-versions", "Rebuild the legacy patch-version folders")
+
+    written = 0
+    rebuilt = []
+    for folder, redirects in alias_redirects(tree, config, minors={version}):
+        wipe_owned(tree / folder)
+        for redirect in redirects:
+            fsops.write_text(tree / redirect.path, render_redirect(redirect))
+        written += len(redirects)
+        rebuilt.append(folder)
+        report.detail(f"{folder}/ -> {version}/ ({len(redirects)} pages)")
+
+    result.counts["alias-versions"] = written
+    report.result("alias-versions", folders=len(rebuilt), written=written)
 
 
 def _repair_export_links(

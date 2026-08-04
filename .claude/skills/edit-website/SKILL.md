@@ -61,7 +61,7 @@ One convention for Markdown, a separate one for raw HTML. Full detail in the REA
 
 The two products' docs are **versioned**; everything else is not. URL scheme is version-first: `https://openvidu.io/{version}/meet/...` and `/{version}/docs/...`, with `latest` aliasing the newest release. Non-versioned pages live at the root (`/pricing/`, `/blog/`, ...).
 
-**Versions are grouped by minor release and named `X.Y`** (e.g. `3.8`): one git branch, one `gh-pages` folder, one version-selector entry per minor. Each `X.Y` version's content reflects the **newest patch** of that minor — patch releases do not create new documentation versions (they update the existing `X.Y` in place, adding their section to the releases pages). Legacy exact-patch URLs (`/3.4.1/...`) redirect to the minor folder (`/3.4/...`) via the 404 page, whose rules are generated from `publish-tool/ovweb.yaml`.
+**Versions are grouped by minor release and named `X.Y`** (e.g. `3.8`): one git branch, one `gh-pages` folder, one version-selector entry per minor. Each `X.Y` version's content reflects the **newest patch** of that minor — patch releases do not create new documentation versions (they update the existing `X.Y` in place, adding their section to the releases pages). Legacy exact-patch URLs (`/3.4.1/...`) redirect to the minor folder (`/3.4/...`) through generated redirect pages declared in `publish-tool/ovweb.yaml` — there is no client-side 404 router.
 
 The source tree has no version in paths: `mike` builds the site into a version folder on `gh-pages`, then `ovweb` rewrites links/canonicals/`sitemap.xml`/search index, does the same for the Markdown exports and `llms.txt` (whose links the plugin makes absolute against a versioned `site_url`, so they need their own patterns), moves the non-versioned pages to root, and writes the generated redirect pages (step table in `publish-tool/README.md`, "What a publish does").
 
@@ -71,7 +71,7 @@ The source tree has no version in paths: `mike` builds the site into a version f
 - `ovweb publish latest X.Y` — re-publish current `main` over the latest version (also rebases the version branch). This is how content fixes **and patch releases of the current minor** go live.
 - `ovweb publish past X.Y` — fix an old minor (content fix or patch release): commit changes to the `X.Y` branch first; root pages are untouched.
 
-Add `--dry-run` to any of them to print the resolved plan without building or pushing. Redirects are **not** hand-written HTML: declare them in `publish-tool/ovweb.yaml` (`redirects.files` for a known path, `redirects.patterns` for a shape of path) and the tool generates the page or the 404 rule.
+Add `--dry-run` to any of them to print the resolved plan without building or pushing. Redirects are **not** hand-written HTML: declare them in `publish-tool/ovweb.yaml` (`redirects.files` for a known path — the target may carry an `#anchor` — or a `redirects.expand` rule for anything bulk: a cross-product of moved paths, a directory rename, a legacy version folder, the unversioned mirror) and the tool generates the pages, refusing to shadow a real page, redirect into a 404, or chain redirects.
 
 Consequences when editing: changes to `docs/meet/` and `docs/docs/` are **not live until one of these runs**; past versions are edited on their `X.Y` branches, not `main`.
 

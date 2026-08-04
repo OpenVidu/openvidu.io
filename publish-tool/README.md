@@ -95,9 +95,8 @@ Every page belongs to one of two groups, declared in [`ovweb.yaml`](ovweb.yaml):
 | `pinned_assets`       | `assets`, `javascripts`, `stylesheets`                                                                                                 | Of those, the ones whose root-absolute references inside versioned pages get pinned to the version folder.     |
 | `root_files`          | `index.html`, `index.md`, `404.html`, `robots.txt`, `llms.txt`, the RSS/JSON feeds, `rss.xsl`                          | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
 
-`ovweb.yaml` is the single source of truth for both halves of publishing. The MkDocs build reads
-it too, through [`mkdocs_hook.py`](mkdocs_hook.py), so the 404 router compiles its patterns from
-the same data rather than from a hardcoded list somebody has to remember to update.
+`ovweb.yaml` is the single source of truth for publishing: the layout above, and every redirect
+on the site.
 
 **Adding a page.** If a new page starts a new non-versioned area, add its folder to
 `non_versioned_pages`; if it starts a new versioned section, add it to `versioned_pages`.
@@ -182,15 +181,19 @@ Four consequences worth keeping in mind:
 
 ## Redirects
 
-GitHub Pages has no server-side redirects, so every redirect on the site is client-side. They
-are declared in [`ovweb.yaml`](ovweb.yaml) as data — a `from` and a `to`, optionally scoped to a
-range of versions — in three kinds, separated by what a rule can be: a **known path**, a **shape**
-of path, and one **mirror** rule that expands into a page per published URL.
+GitHub Pages has no server-side redirects, and it serves `404.html` with a **404 status** — the
+thing a crawler acts on before it runs any JavaScript. So every redirect on this site is a real,
+generated HTML page answering 200 with a zero-delay meta refresh, declared as data in
+[`ovweb.yaml`](ovweb.yaml). There is no client-side router.
+
+Two families of rules exist, separated by what has to be written by hand:
+
+- **`redirects.files`** — one rule, one page: a known path and where it goes.
+- **`redirects.expand`** — one rule, many pages, enumerated from the published tree.
 
 ### `redirects.files` — a known path
 
-Materialised as HTML pages in the published tree. A rule says where the page goes (`at`) and
-where it sends the visitor (`to`):
+A rule says where the page goes (`at`) and where it sends the visitor (`to`):
 
 ```yaml
 - id: version-root
@@ -206,28 +209,15 @@ where it sends the visitor (`to`):
       body: "Redirecting to the OpenVidu getting started guide…"
 ```
 
+`to` may carry a fragment (`../how-to-guides/#backup-and-restore`), which is how several pages
+converging into one land on the section that absorbed them. The `canonical` should not repeat
+the fragment: search engines normalise it away.
+
 `versions` (and `when[].versions`) are [PEP 440](https://peps.python.org/pep-0440/) specifiers
 evaluated with `packaging`, so `3.10` correctly sorts above `3.9` and legacy folders like
 `3.0.0-beta1` fall in the range written for them. **At most one `when` entry may match a given
 version** — an overlap is an error, not a silent first-match-wins, because that would make the
 published redirect depend on the order of the file.
-
-Three of the rules are structural — the version root, `/X.Y/docs/getting-started/` → `/X.Y/docs/`
-for 3.4 and later, and `/X.Y/docs/` → `/X.Y/docs/getting-started/` for 3.0–3.3. The rest each
-rescue one page that was renamed or removed without a redirect. Two searches find those, and both
-are needed:
-
-- **A Search Console export**, checked URL by URL against the live site, finds the dead URLs that
-  still earn impressions.
-- **Diffing the version folders** — every page any published `X.Y` folder holds that the newest
-  does not — finds the rest. A URL that lived for one release has had no time to earn impressions,
-  so an impressions-ranked list cannot see it.
-
-**Not every dead URL earns a redirect.** A page that was never part of a release should not have
-its URL preserved, and neither should a generated API page for a class that has been deleted. The
-exclusions are pinned in [`test_redirects.py`](tests/unit/test_redirects.py) as
-`DELIBERATELY_UNCOVERED`, which fails both ways — if a listed URL gains a rule, and if an
-unlisted dead URL loses one.
 
 **A rule's `versions` gate must not be wider than its target's.** Gate a rule at the first version
 that stopped shipping the old page, then check that the *successor* exists in every version from
@@ -236,14 +226,92 @@ override pointing at a page that version really has; without one the stub redire
 which is worse than the 404 it replaced. `ovweb verify` rejects that — see the redirect-target
 check below.
 
-### Why every target is relative
+**Not every dead URL earns a redirect.** A page that was never part of a release should not have
+its URL preserved, and neither should a generated API page for a class that has been deleted. The
+exclusions are pinned in [`test_redirects.py`](tests/unit/test_redirects.py) as
+`DELIBERATELY_UNCOVERED`, which fails both ways — if a listed URL gains a rule, and if an
+unlisted dead URL loses one.
+
+### `redirects.expand` — one rule, many pages
+
+Every kind enumerates its pages from the **published tree** rather than from a list, under three
+filters that make a bulk expansion safe to materialise as files:
+
+- **Never shadow a real page.** A candidate path already holding a page ovweb did not generate is
+  skipped, so an expansion cannot overwrite content — `ha/on-premises/` survives the
+  provider-index rule with no exclusion list to maintain.
+- **Never redirect into a 404.** A candidate whose target does not exist in that tree is skipped.
+- **Never chain.** A target that is itself a generated redirect is followed to its final
+  destination, so every stub answers in one hop.
+
+Four kinds ship:
+
+**`kind: cross-product`** — many single-page moves that differ only by path segments. `at`, `to`,
+`canonical` and `body` may use `{version}` and any `values` key; one candidate per combination:
+
+```yaml
+- id: removed-provider-index
+  kind: cross-product
+  at: "{version}/docs/self-hosting/{edition}/{provider}/index.html"
+  to: "install/"
+  canonical: "{site_url}/latest/docs/self-hosting/{edition}/{provider}/install/"
+  versions: ">=3.8"           # the release the consolidation belongs to
+  values:
+    edition:  [single-node, single-node-pro, elastic, ha]
+    provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+```
+
+Gate it at the release the change belongs to — the filters keep the rule honest *inside* the
+gate, they do not replace it.
+
+**`kind: tree-rename`** — a directory moved. The pages are enumerated from the tree under `to`,
+so every stub has a live target by construction; a page removed in the same release as the rename
+gets no stub and needs its own `files` rule, which is right — its successor is a judgement call,
+not a path substitution:
+
+```yaml
+- id: self-hosting-becomes-deployment
+  kind: tree-rename
+  from: "{version}/docs/self-hosting"
+  to: "{version}/docs/deployment"
+  versions: ">=3.9"
+```
+
+**`kind: version-alias`** — a retired version folder rebuilt as a full mirror of its minor.
+`3.4.1/docs/x/` answers with a redirect to `/3.4/docs/x/`, one stub per page of the minor's tree,
+targets absolute and version-pinned (the folder is not behind the `latest` symlink, and the
+reader asked for that version). A folder is rebuilt whenever its minor is published; creating the
+folders in the first place is `ovweb redirects apply`'s job, since no publish creates them from
+nothing.
+
+**`kind: unversioned-mirror`** — every page of the newest version answering at its unversioned
+URL: `/docs/ai/live-captions/` → `/latest/docs/ai/live-captions/`. Enumerated from the newest
+version's section folders, so it covers the exported `reference-docs/*.html` file URLs too, and a
+versioned page that is itself a redirect is mirrored as its final destination.
+
+### Ownership, and why the bulk scopes are wiped
+
+Everything an expansion writes is **ovweb-owned**: the root section mirrors (`/docs/`, `/meet/`)
+and the alias folders are deleted outright and rebuilt on every publish that touches them, never
+reconciled page by page — a renamed or removed page would otherwise leave a stub redirecting into
+a 404, and rebuilding makes that state unrepresentable. The wipe refuses to delete any file that
+does not carry the generated marker, so it can never reach content. Inside version folders, where
+stubs live next to real pages, `redirects apply` reconciles instead: it deletes generated stubs
+no rule produces any more and rewrites the rest.
+
+`ovweb verify` asserts the wholly-owned scopes as **set equality** against the same functions
+that generate them: a missing stub means a URL 404s for crawlers again, an extra one means it may
+redirect into a 404.
+
+### Why a `files` target is relative
 
 `latest` is a **symlink** to the newest version folder, so one file answers at both `/3.9/` and
 `/latest/`. An absolute target would have to name a version, and would leak `/3.9/` to visitors
 of the stable `/latest/` URL. A relative target is resolved by the browser against the document
 URL, so the same bytes send `/latest/` to `/latest/docs/` and `/3.9/` to `/3.9/docs/` — with no
 JavaScript involved. `ovweb` rejects an absolute target on a rule marked `relative` (the
-default), and `ovweb verify` asserts it on the published bytes.
+default), and `ovweb verify` asserts it on the published bytes. The mirror and alias stubs are
+the exception: each is served from exactly one URL, so their targets are absolute.
 
 ### What the generated page contains
 
@@ -258,73 +326,18 @@ Every element earns its place; see
 | `location.replace(…)` forwarding query and hash  | No history entry, so Back still works, and `?a=1#b` survives the redirect.                                                                          |
 | A real `<a>` in the body                         | Works when the refresh is blocked, and gives crawlers an edge to follow.                                                                            |
 
-### `redirects.patterns` — a shape of path
-
-A pattern cannot be a file, because there is no single path to put it at. These are compiled
-into the 404 router ([`docs/overrides/404.html`](../docs/overrides/404.html)) through
-[`mkdocs_hook.py`](mkdocs_hook.py), which is the page GitHub serves for any URL that matches no
-file. Three families ship today:
-
-- **Legacy exact-patch URLs.** Versions used to be published per patch release (`/3.4.1/…`,
-  `/3.0.0-beta2/…`) and are now grouped by minor, so a first segment with a third component is a
-  legacy URL and goes to the minor folder.
-- **A versioned section without a version.** `/docs/self-hosting/` → `/latest/docs/self-hosting/`.
-  Every *published* page of that shape now also has a real redirect page — see the mirror below —
-  so what this pattern is left to rescue is the remainder: pages that have since been removed, the
-  exported `reference-docs/` pages, and typos.
-- **Pages removed when the self-hosting guides were consolidated.** A pattern needs no `versions`
-  gate for these: it only ever runs from the 404 page, so in a version that still ships the page
-  GitHub serves the real file and the router is never reached.
-
-Patterns are tried in order and the first match wins, so the order in `ovweb.yaml` is behaviour.
-
-### `redirects.mirror` — every page at its unversioned URL
-
-The 404 router rescues **people**, not crawlers. GitHub serves `404.html` with a 404 status, and a
-crawler acts on the status before it runs any JavaScript, so an inbound link to `/docs/…` is
-discarded however well the router works. Those URLs matter: `/docs/` and `/meet/` are what a human
-types, and OpenVidu itself ships one — the speech agent's default configuration carries a comment
-pointing at `https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider`,
-which every user reads in their own deployment.
-
-A 200 page carrying a zero-delay meta refresh is the only redirect a crawler can be handed on
-GitHub Pages. The mirror writes one, for every page:
-
-```yaml
-mirror:
-  for_each: versioned_pages       # /docs/… and /meet/…
-  body: "Redirecting to the current version of this page…"
-```
-
-Two decisions make it maintenance-free:
-
-- **The set comes from the promoted root sitemap**, not from a list and not from the tree, so it is
-  exactly what the site advertises. A page the sitemap does not name is skipped, which is what you
-  want: mirroring a generated redirect would publish a chain.
-- **It is deleted and rebuilt in full on every `latest` publish**, never reconciled. A renamed or
-  removed page cannot leave a stub redirecting into a 404 — a state worse than the 404 it replaced —
-  because the stale stub is gone before the new set is written. The step refuses to delete anything
-  under `/docs/` or `/meet/` that is not one of its own pages, so the wipe can never reach content.
-
-`ovweb verify` asserts the result as **set equality** against the same function that generates it:
-a missing stub means an unversioned URL 404s for crawlers again, an extra one means it redirects
-into a 404.
-
-What the mirror deliberately does **not** cover is the legacy per-patch space (`/3.4.1/…`). Fully
-enumerating it would be thousands of pages across the patch folders that ever existed, nothing in
-the site links there, and those URLs have pointed their `canonical` at `/latest/` since they were
-published, so Google consolidated them long ago. The router keeps handling them for people.
-
-### Inspecting them
+### Inspecting and applying them
 
 ```bash
-ovweb redirects render 3.2      # print the pages that would be installed for a version
+ovweb redirects render 3.2      # print the `files` pages that would be installed for a version
 ovweb redirects check           # every version resolves every rule to exactly one target
-ovweb redirects apply --tree T  # write the file redirects into every version folder of a tree
+ovweb redirects apply --tree T  # reconcile EVERY generated redirect in a tree with the config
 ```
 
-`redirects apply` exists so a rule can reach versions that are not being rebuilt — which is how
-the `/3.0/docs/` dead end gets fixed without republishing 3.0 from its own branch.
+`redirects apply` is the maintenance entry point: it writes the `files` and expansion stubs of
+every version folder (deleting stubs no rule produces any more), rebuilds the unversioned mirror
+and the alias folders, and is how a rule reaches versions that are not being republished. With
+the global `--dry-run` it reports what would change and writes nothing.
 
 ---
 
@@ -390,8 +403,9 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see below.            |
 | `repair-export-links`  | always | Point a link at the HTML page wherever the Markdown export it names does not exist. Checked against the finished tree, not the MkDocs config. |
 | `strip-non-versioned`  | past   | Delete the root-served pages from the version folder instead. Tolerant: an old version may never have built some.     |
-| `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
-| `mirror-unversioned`   | latest | Delete `/docs/` and `/meet/` and rebuild them as one redirect page per URL in the promoted sitemap — see below.        |
+| `install-redirects`    | always | Write the generated redirect pages: the `files` rules plus the tree-resolved expansions, never shadowing a real page. |
+| `mirror-unversioned`   | latest | Delete `/docs/` and `/meet/` and rebuild them as one redirect page per page of the newest version.                     |
+| `alias-versions`       | always | Rebuild the legacy patch-version folders that alias the published minor as mirrors of its tree.                        |
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see below. |
 | `sync-releases`        | always | Splice the newest release notes across versions.                                                                       |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
@@ -451,7 +465,8 @@ lives in the pure layer, which is why that is where the tests are.
 | [`rewrite/search_index.py`](src/ovweb/rewrite/search_index.py) | ✔ | Absolutise search locations.                                                     |
 | [`rewrite/sitemap.py`](src/ovweb/rewrite/sitemap.py)       | ✔     | Root promotion and `<url>` block pruning.                                         |
 | [`releases.py`](src/ovweb/releases.py)                     | ✔     | Splice release notes between versions.                                            |
-| [`redirects.py`](src/ovweb/redirects.py)                   | ✔     | Resolve rules for a version and render the pages.                                 |
+| [`redirects.py`](src/ovweb/redirects.py)                   | ✔     | Resolve the `files` rules and render any redirect page.                            |
+| [`expand.py`](src/ovweb/expand.py)                         | –     | Enumerate the expansion kinds from the published tree, under the three filters.    |
 | [`plan.py`](src/ovweb/plan.py)                             | ✔     | The ordered publish description `--dry-run` prints.                               |
 | [`fsops.py`](src/ovweb/fsops.py)                           | –     | File walking, byte-preserving rewrites, deterministic gzip, moves and copies.     |
 | [`gitrepo.py`](src/ovweb/gitrepo.py)                       | –     | The git facade, including the worktree context manager.                           |
@@ -461,7 +476,7 @@ lives in the pure layer, which is why that is where the tests are.
 | [`pipeline/publish.py`](src/ovweb/pipeline/publish.py)     | –     | Branch preparation, mike, worktree, commit, branch sync.                          |
 | [`verify.py`](src/ovweb/verify.py)                         | –     | Invariants of a published tree.                                                   |
 | [`doctor.py`](src/ovweb/doctor.py)                         | –     | Preflight checks, including the pin agreement.                                    |
-| [`mkdocs_hook.py`](mkdocs_hook.py)                         | –     | Expose `ovweb.yaml` to the MkDocs templates; set `<lastmod>` and llms.txt entries. |
+| [`mkdocs_hook.py`](mkdocs_hook.py)                         | –     | Set each page's `<lastmod>` from git; feed llms.txt the pages' own frontmatter.    |
 
 ---
 
@@ -717,12 +732,14 @@ its root with a relative target, no promoted page claims a versioned URL as its 
 folder carries a correctly pruned sitemap, every search location is absolute, nothing served from
 the root pins the version `latest` points at, no versioned export links to a root-served page
 under its version, no export links to another export that does not exist, every `<lastmod>` in the
-root sitemap is a real date that is not in the future, the unversioned mirror is exactly the set of
-pages the sitemap advertises, no generated redirect points at a page that does not exist, and
-`versions.json` agrees with the folders on disk.
+root sitemap is a real date that is not in the future, the unversioned mirror and every alias
+folder are exactly the sets their rules generate, no generated redirect points at a page that does
+not exist or at another redirect, and `versions.json` agrees with the folders on disk.
 
 The redirect-target check earns its place: a redirect into a 404 costs the visitor a second hop to
-reach nothing and tells a crawler the content moved somewhere it did not.
+reach nothing and tells a crawler the content moved somewhere it did not. The chain half matters
+because the expansions collapse chains at generation time, so one surviving to a published tree
+means a `files` rule was pointed at another rule's stub.
 
 The sitemap check is the one worth understanding, because it guards a feature that fails silently.
 It asserts three things about `<X.Y>/sitemap.xml` — that it exists, that it has the version-root

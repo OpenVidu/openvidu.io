@@ -10,9 +10,10 @@ from pathlib import Path
 
 from .config import ConfigError, SiteConfig, load_site_config
 from .discovery import known_versions
+from .expand import mirror_rule
 from .gitrepo import Git, GitError
 from .mikewrap import Mike
-from .redirects import RedirectError, resolve_file_redirects, resolve_patterns
+from .redirects import RedirectError, resolve_file_redirects
 
 #: The distribution whose version must agree everywhere: the only pinned dependency that is also
 #: named outside Python packaging, as a Docker base-image tag.
@@ -121,7 +122,7 @@ def _check_config(repo: Git | None) -> list[Check]:
             "config",
             True,
             f"{config.source} — {len(config.file_rules)} file redirect(s), "
-            f"{len(resolve_patterns(config))} 404 pattern(s), "
+            f"{len(config.expand_rules)} expansion rule(s), "
             f"{_mirror_summary(config)}",
         )
     ]
@@ -132,10 +133,10 @@ def _check_config(repo: Git | None) -> list[Check]:
 def _mirror_summary(config: SiteConfig) -> str:
     """Which sections the mirror covers.
 
-    Not how many stubs it writes: that is only known at publish time, from the sitemap.
+    Not how many stubs it writes: that is only known at publish time, from the tree.
     """
-    mirror = config.mirror
-    if mirror is None or not mirror.enabled:
+    mirror = mirror_rule(config)
+    if mirror is None:
         return "no unversioned mirror"
     sections = getattr(config.layout, mirror.for_each)
     return "unversioned mirror of " + ", ".join(f"/{section}/" for section in sections)

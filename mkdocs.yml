@@ -343,9 +343,8 @@ theme:
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
-# Exposes publish-tool/ovweb.yaml on `config.extra.ovweb`, so the 404 router
-# (docs/overrides/404.html) compiles its redirect patterns from the same configuration the
-# publishing tool uses instead of hardcoding a list that has to be kept in sync by hand.
+# Sets each page's sitemap <lastmod> from git and feeds the llmstxt plugin every page's own
+# title and description. See publish-tool/mkdocs_hook.py.
 hooks:
   - publish-tool/mkdocs_hook.py
 

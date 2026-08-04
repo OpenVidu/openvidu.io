@@ -7,13 +7,10 @@ the post-processing run in a separate worktree afterwards.
 
 from __future__ import annotations
 
-import os
 import shutil
 import subprocess
 from collections.abc import Sequence
 from pathlib import Path
-
-from .config import CONFIG_ENV_VAR
 
 
 class MikeError(Exception):
@@ -25,12 +22,10 @@ class Mike:
         self,
         root: Path,
         *,
-        config_path: Path | None = None,
         dry_run: bool = False,
         log: object = None,
     ) -> None:
         self.root = root
-        self.config_path = config_path
         self.dry_run = dry_run
         self._log = log
 
@@ -46,25 +41,13 @@ class Mike:
                 '`pip install "./publish-tool[build]"`.'
             )
 
-    def _environment(self) -> dict[str, str]:
-        """The environment mike, and therefore MkDocs, builds under.
-
-        `OVWEB_SITE_CONFIG` is pinned to an absolute path so the MkDocs hook reads the config this
-        run is using, rather than whatever ovweb.yaml is in the checked-out tree — which for a
-        past-version publish is that branch's stale copy.
-        """
-        environment = dict(os.environ)
-        if self.config_path is not None:
-            environment[CONFIG_ENV_VAR] = str(self.config_path.resolve())
-        return environment
-
     def _run(self, args: Sequence[str]) -> None:
         command = ["mike", *args]
         if self._log is not None:
             self._log.command(command, cwd=self.root, skipped=self.dry_run)  # type: ignore[attr-defined]
         if self.dry_run:
             return
-        result = subprocess.run(command, cwd=self.root, env=self._environment(), check=False)
+        result = subprocess.run(command, cwd=self.root, check=False)
         if result.returncode != 0:
             raise MikeError(f"`{' '.join(command)}` failed with exit code {result.returncode}")
 

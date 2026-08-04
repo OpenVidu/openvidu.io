@@ -14,14 +14,30 @@ import typer
 
 from . import __version__, fsops
 from .config import ConfigError, SiteConfig, load_site_config
-from .discovery import known_versions, published_versions, version_branches, version_folders
+from .discovery import (
+    known_versions,
+    latest_in_tree,
+    published_versions,
+    version_branches,
+    version_folders,
+)
 from .doctor import run_checks
+from .expand import (
+    alias_redirects,
+    expand_candidate_paths,
+    mirror_redirects,
+    mirror_rule,
+    scan_tree,
+    version_redirects,
+    wipe_owned,
+)
 from .gitrepo import Git, GitError, open_repository
 from .mikewrap import MikeError
+from .model import CrossProductRule, TreeRenameRule, UnversionedMirrorRule, VersionAliasRule
 from .pipeline.postprocess import PostprocessError, postprocess
 from .pipeline.publish import PublishError, publish
 from .plan import build_plan
-from .redirects import RedirectError, render_redirect, resolve_file_redirects, resolve_patterns
+from .redirects import RedirectError, render_redirect, resolve_file_redirects
 from .releases import RegionError
 from .report import Reporter
 from .rewrite import RewriteError
@@ -375,7 +391,11 @@ def redirects_render(
     version: VersionArgument,
     rule: Annotated[str | None, typer.Option("--rule", help="Render only this rule id.")] = None,
 ) -> None:
-    """Print the redirect pages that would be installed for a version."""
+    """Print the `files` redirect pages that would be installed for a version.
+
+    The `expand` rules resolve against a published tree, so they cannot be rendered from the
+    configuration alone; `redirects apply --tree <copy> --dry-run` shows their outcome.
+    """
     ctx: Context = context.obj
     resolved = resolve_file_redirects(ctx.config, version)
     if rule is not None:
@@ -390,12 +410,30 @@ def redirects_render(
         typer.echo(render_redirect(redirect), nl=False)
 
 
+def _expand_summary(rule) -> str:
+    if isinstance(rule, CrossProductRule):
+        combos = 1
+        for _, options in rule.values:
+            combos *= len(options)
+        gate = f", versions {rule.versions}" if rule.versions else ""
+        return f"cross-product: {combos} candidate(s) per version{gate}"
+    if isinstance(rule, TreeRenameRule):
+        gate = f", versions {rule.versions}" if rule.versions else ""
+        return f"tree-rename: {rule.from_path} -> {rule.to_path}{gate}"
+    if isinstance(rule, VersionAliasRule):
+        return f"version-alias: {len(rule.folders)} folder(s)"
+    if isinstance(rule, UnversionedMirrorRule):
+        return f"unversioned-mirror of {rule.for_each}"
+    return "?"
+
+
 @redirects_app.command("check")
 def redirects_check(context: typer.Context) -> None:
     """Validate every redirect rule against every version that exists.
 
     Fails when a rule is ambiguous for some version, when a target is absolute where it must
-    be relative, or when a canonical URL is not absolute.
+    be relative, when a canonical URL is not absolute, or when a `files` rule and an expansion
+    could claim the same path.
     """
     ctx: Context = context.obj
     config = ctx.config
@@ -419,10 +457,21 @@ def redirects_check(context: typer.Context) -> None:
         rendered = [f"{item.rule_id} -> {item.to}" for item in resolved]
         ctx.report.info(f"{version:8} {', '.join(rendered) if rendered else '(no redirects)'}")
 
-    patterns = resolve_patterns(config)
-    ctx.report.heading("404 patterns")
-    for pattern in patterns:
-        ctx.report.info(f"{pattern.id:38} {pattern.match}  ->  {pattern.to}")
+        candidates = expand_candidate_paths(config, version)
+        for redirect in resolved:
+            claimed = candidates.get(redirect.path)
+            if claimed:
+                ctx.report.error(
+                    f"{version}: {redirect.path} is claimed by both {redirect.rule_id!r} "
+                    f"and {claimed!r}"
+                )
+                problems += 1
+
+    ctx.report.heading("Expansion rules")
+    if not config.expand_rules:
+        ctx.report.info("(none)")
+    for rule in config.expand_rules:
+        ctx.report.info(f"{rule.id:38} {_expand_summary(rule)}")
 
     if problems:
         ctx.report.error(f"{problems} version(s) failed to resolve.")
@@ -438,21 +487,62 @@ def redirects_apply(
         str | None, typer.Option("--version", help="Apply to this version only.")
     ] = None,
 ) -> None:
-    """Write the redirect pages into every version folder of a tree.
+    """Reconcile every generated redirect in a tree with the configuration.
 
-    Lets a rule reach versions that are not being rebuilt — which is how the `/3.0/docs/` class
-    of dead end gets fixed without republishing 3.0 from its own branch.
+    Writes the `files` and expansion stubs of every version folder, deleting generated stubs no
+    rule produces any more; rebuilds the unversioned mirror and the legacy patch-version
+    folders. This is how a rule reaches versions that are not being rebuilt, and how the alias
+    folders come to exist at all — no publish creates them from nothing.
+
+    With the global `--dry-run`, reports what would change and writes nothing.
     """
     ctx: Context = context.obj
     root = tree.resolve()
+    dry = ctx.dry_run
     versions = [only] if only else version_folders(root)
-    written = 0
+    written = removed = 0
+
     for version in versions:
-        for redirect in resolve_file_redirects(ctx.config, version):
-            fsops.write_text(root / redirect.path, render_redirect(redirect))
-            ctx.report.info(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
+        redirects = version_redirects(root, ctx.config, version)
+        resolved_paths = {redirect.path for redirect in redirects}
+        # Reconcile: a generated stub in the folder that no rule produces any more is stale.
+        index = scan_tree(root, (version,))
+        for stale in sorted(set(index.stub_targets) - resolved_paths):
+            ctx.report.info(f"delete {stale} (no rule generates it)")
+            if not dry:
+                fsops.remove(root / stale)
+            removed += 1
+        for redirect in redirects:
+            ctx.report.detail(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
+            if not dry:
+                fsops.write_text(root / redirect.path, render_redirect(redirect))
             written += 1
-    ctx.report.success(f"Wrote {written} redirect page(s) across {len(versions)} version(s).")
+
+    latest = latest_in_tree(root)
+    if mirror_rule(ctx.config) is not None and latest is not None and (only in (None, latest)):
+        redirects = mirror_redirects(root, ctx.config, latest=latest)
+        if not dry:
+            for section in getattr(ctx.config.layout, mirror_rule(ctx.config).for_each):
+                removed += int(wipe_owned(root / section))
+            for redirect in redirects:
+                fsops.write_text(root / redirect.path, render_redirect(redirect))
+        written += len(redirects)
+        ctx.report.info(f"mirror: {len(redirects)} page(s) of {latest} answer unversioned")
+
+    minors = {only} if only else None
+    for folder, redirects in alias_redirects(root, ctx.config, minors=minors):
+        if not dry:
+            wipe_owned(root / folder)
+            for redirect in redirects:
+                fsops.write_text(root / redirect.path, render_redirect(redirect))
+        written += len(redirects)
+        ctx.report.info(f"alias: {folder}/ mirrors {len(redirects)} page(s)")
+
+    outcome = "Would write" if dry else "Wrote"
+    ctx.report.success(
+        f"{outcome} {written} redirect page(s) across {len(versions)} version(s), "
+        f"removing {removed} stale one(s)."
+    )
 
 
 # -- versions --------------------------------------------------------------------------------

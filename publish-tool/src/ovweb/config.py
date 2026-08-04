@@ -1,13 +1,11 @@
 """Load and validate ovweb.yaml into a :class:`~ovweb.model.SiteConfig`.
 
-Pure apart from the single file read in :func:`load_site_config`, and light on imports — only
-stdlib plus PyYAML, because the MkDocs hook goes through this module during a site build, where
-typer and Jinja2 are not necessarily installed.
+Pure apart from the single file read in :func:`load_site_config`.
 """
 
 from __future__ import annotations
 
-import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -15,20 +13,20 @@ import yaml
 
 from .model import (
     VERSION_ROOT,
-    MirrorRule,
-    PatternRule,
+    CrossProductRule,
+    ExpandFields,
     RedirectDefaults,
     RedirectOverride,
     RedirectRule,
     SiteConfig,
     SiteLayout,
+    TreeRenameRule,
+    UnversionedMirrorRule,
+    VersionAliasRule,
 )
+from .versions import MINOR_VERSION, VersionError, minor_of
 
-#: Environment variable holding an absolute path to the config to use. `ovweb` sets it when it
-#: invokes mike, so the site build and the post-processing cannot disagree about the layout.
-CONFIG_ENV_VAR = "OVWEB_SITE_CONFIG"
-
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 _REQUIRED_LAYOUT_KEYS = (
     "site_url",
@@ -48,8 +46,8 @@ class ConfigError(Exception):
 def find_site_config(explicit: Path | str | None = None) -> Path:
     """Locate ovweb.yaml.
 
-    In order: an explicit path, then ``$OVWEB_SITE_CONFIG``, then the copy inside the
-    installed package, then the copy next to this source tree (an uninstalled checkout).
+    In order: an explicit path, then the copy inside the installed package, then the copy next
+    to this source tree (an uninstalled checkout).
     """
     candidates: list[Path] = []
 
@@ -57,13 +55,6 @@ def find_site_config(explicit: Path | str | None = None) -> Path:
         path = Path(explicit).expanduser()
         if not path.is_file():
             raise ConfigError(f"config not found: {path}")
-        return path
-
-    from_env = os.environ.get(CONFIG_ENV_VAR)
-    if from_env:
-        path = Path(from_env).expanduser()
-        if not path.is_file():
-            raise ConfigError(f"{CONFIG_ENV_VAR} points at a missing file: {path}")
         return path
 
     # Installed package: pyproject force-includes ovweb.yaml as ovweb/data/ovweb.yaml.
@@ -78,7 +69,7 @@ def find_site_config(explicit: Path | str | None = None) -> Path:
     raise ConfigError(
         "could not locate ovweb.yaml. Looked at "
         + ", ".join(str(c) for c in candidates)
-        + f". Set {CONFIG_ENV_VAR} to point at it explicitly."
+        + ". Pass --layout to point at it explicitly."
     )
 
 
@@ -108,32 +99,40 @@ def parse_site_config(raw: Any, *, source: str = "<memory>") -> SiteConfig:
     if not isinstance(redirects, dict):
         raise ConfigError(f"{source}: 'redirects' must be a mapping")
 
-    unknown_redirects = set(redirects) - {"defaults", "files", "patterns", "mirror"}
+    for retired, replacement in (
+        ("patterns", "an `expand` rule — the 404 router is gone"),
+        ("mirror", "an `expand` rule of kind `unversioned-mirror`"),
+    ):
+        if retired in redirects:
+            raise ConfigError(
+                f"{source}: 'redirects.{retired}' no longer exists; use {replacement}"
+            )
+    unknown_redirects = set(redirects) - {"defaults", "files", "expand"}
     if unknown_redirects:
         raise ConfigError(
             f"{source}: unknown 'redirects' keys: {', '.join(sorted(unknown_redirects))}"
         )
 
     defaults = _parse_defaults(redirects.get("defaults") or {}, source=source)
-    mirror = _parse_mirror(redirects.get("mirror"), source=source, layout=layout)
     file_rules = tuple(
         _parse_file_rule(entry, source=source, index=index)
         for index, entry in enumerate(redirects.get("files") or [])
     )
-    pattern_rules = tuple(
-        _parse_pattern_rule(entry, source=source, index=index, layout=layout)
-        for index, entry in enumerate(redirects.get("patterns") or [])
+    expand_rules = tuple(
+        _parse_expand_rule(entry, source=source, index=index, layout=layout)
+        for index, entry in enumerate(redirects.get("expand") or [])
     )
+    _validate_expand_rules(expand_rules, source=source)
 
-    _check_unique_ids([rule.id for rule in file_rules], what="redirects.files", source=source)
-    _check_unique_ids([rule.id for rule in pattern_rules], what="redirects.patterns", source=source)
+    _check_unique_ids(
+        [rule.id for rule in (*file_rules, *expand_rules)], what="redirect", source=source
+    )
 
     return SiteConfig(
         layout=layout,
         defaults=defaults,
         file_rules=file_rules,
-        pattern_rules=pattern_rules,
-        mirror=mirror,
+        expand_rules=expand_rules,
         source=source,
     )
 
@@ -226,27 +225,192 @@ def _parse_defaults(raw: Any, *, source: str) -> RedirectDefaults:
     )
 
 
-def _parse_mirror(raw: Any, *, source: str, layout: SiteLayout) -> MirrorRule | None:
-    if raw is None:
-        return None
-    where = f"{source}: redirects.mirror"
+#: Keys every expansion rule accepts, whatever its kind.
+_EXPAND_COMMON_KEYS = {
+    "id",
+    "kind",
+    "title",
+    "body",
+    "robots",
+    "lang",
+    "preserve_query_and_hash",
+    "enabled",
+    "versions",
+    "description",
+}
+
+_EXPAND_KIND_KEYS = {
+    "cross-product": {"at", "to", "canonical", "values"},
+    "tree-rename": {"from", "to"},
+    "version-alias": {"folders"},
+    "unversioned-mirror": {"for_each"},
+}
+
+#: A cross-product value lands in a path and a URL; a slug is the only shape that is safe in
+#: both without escaping.
+_VALUE_SLUG = re.compile(r"^[A-Za-z0-9._-]+$")
+
+
+def _parse_expand_rule(raw: Any, *, source: str, index: int, layout: SiteLayout):
+    where = f"{source}: redirects.expand[{index}]"
     if not isinstance(raw, dict):
         raise ConfigError(f"{where} must be a mapping")
-    unknown = set(raw) - {"for_each", "body", "enabled", "description"}
+
+    kind = raw.get("kind")
+    if kind not in _EXPAND_KIND_KEYS:
+        raise ConfigError(
+            f"{where}: 'kind' must be one of {', '.join(sorted(_EXPAND_KIND_KEYS))}, got {kind!r}"
+        )
+    if not isinstance(raw.get("id"), str) or not raw["id"]:
+        raise ConfigError(f"{where} needs a non-empty string 'id'")
+    where = f"{source}: redirects.expand[{raw['id']}]"
+
+    unknown = set(raw) - _EXPAND_COMMON_KEYS - _EXPAND_KIND_KEYS[kind]
     if unknown:
         raise ConfigError(f"{where} has unknown keys: {', '.join(sorted(unknown))}")
 
+    common = {
+        "id": raw["id"],
+        "fields": ExpandFields(
+            title=raw.get("title"),
+            body=raw.get("body"),
+            robots=raw.get("robots"),
+            lang=raw.get("lang"),
+            preserve_query_and_hash=raw.get("preserve_query_and_hash"),
+        ),
+        "enabled": bool(raw.get("enabled", True)),
+        "description": (raw.get("description") or "").strip(),
+    }
+    gated = {**common, "versions": raw.get("versions")}
+
+    if kind == "cross-product":
+        return _parse_cross_product(raw, where=where, common=gated)
+    if kind == "tree-rename":
+        return _parse_tree_rename(raw, where=where, common=gated)
+    if kind == "version-alias":
+        if raw.get("versions") is not None:
+            raise ConfigError(f"{where}: a version-alias names its folders; drop 'versions'")
+        return _parse_version_alias(raw, where=where, common=common)
+    if raw.get("versions") is not None:
+        raise ConfigError(f"{where}: the mirror always follows `latest`; drop 'versions'")
+    return _parse_unversioned_mirror(raw, where=where, common=common, layout=layout)
+
+
+def _placeholders(template: str) -> set[str]:
+    return set(re.findall(r"\{(\w+)\}", template))
+
+
+def _parse_cross_product(raw: dict, *, where: str, common: dict) -> CrossProductRule:
+    for key in ("at", "to"):
+        if not isinstance(raw.get(key), str) or not raw[key]:
+            raise ConfigError(f"{where} needs a non-empty string '{key}'")
+    at, to = raw["at"], raw["to"]
+    if not at.startswith("{version}/"):
+        raise ConfigError(f"{where}: 'at' must start with '{{version}}/', got {at!r}")
+    if not at.endswith(".html"):
+        raise ConfigError(f"{where}: 'at' must name an HTML file, got {at!r}")
+    if to.startswith("/"):
+        raise ConfigError(
+            f"{where}: 'to' must be relative — the stub lives inside a version folder that "
+            "`latest` also serves"
+        )
+
+    values = raw.get("values")
+    if not isinstance(values, dict) or not values:
+        raise ConfigError(f"{where} needs a non-empty 'values' mapping")
+    parsed_values = []
+    for key, options in values.items():
+        if not isinstance(options, list) or not options:
+            raise ConfigError(f"{where}: values.{key} must be a non-empty list")
+        for option in options:
+            if not isinstance(option, str) or not _VALUE_SLUG.match(option):
+                raise ConfigError(f"{where}: values.{key} entry {option!r} is not a plain slug")
+        if key not in _placeholders(at):
+            raise ConfigError(
+                f"{where}: values key {key!r} does not appear in 'at', so every combination "
+                "would generate the same page"
+            )
+        parsed_values.append((key, tuple(options)))
+
+    allowed = set(values) | {"version"}
+    for name, template in (("at", at), ("to", to), ("body", raw.get("body") or "")):
+        unknown = _placeholders(template) - allowed
+        if unknown:
+            raise ConfigError(
+                f"{where}: '{name}' uses undeclared placeholder(s) {', '.join(sorted(unknown))}"
+            )
+    unknown = _placeholders(raw.get("canonical") or "") - allowed - {"site_url"}
+    if unknown:
+        raise ConfigError(
+            f"{where}: 'canonical' uses undeclared placeholder(s) {', '.join(sorted(unknown))}"
+        )
+
+    return CrossProductRule(
+        at=at, to=to, canonical=raw.get("canonical"), values=tuple(parsed_values), **common
+    )
+
+
+def _parse_tree_rename(raw: dict, *, where: str, common: dict) -> TreeRenameRule:
+    for key in ("from", "to"):
+        if not isinstance(raw.get(key), str) or not raw[key]:
+            raise ConfigError(f"{where} needs a non-empty string '{key}'")
+        if not raw[key].startswith("{version}/"):
+            raise ConfigError(f"{where}: '{key}' must start with '{{version}}/', got {raw[key]!r}")
+    from_path = raw["from"].rstrip("/")
+    to_path = raw["to"].rstrip("/")
+    if from_path == to_path:
+        raise ConfigError(f"{where}: 'from' and 'to' are the same directory")
+    if from_path.startswith(f"{to_path}/") or to_path.startswith(f"{from_path}/"):
+        raise ConfigError(f"{where}: 'from' and 'to' must not nest inside each other")
+    return TreeRenameRule(from_path=from_path, to_path=to_path, **common)
+
+
+def _parse_version_alias(raw: dict, *, where: str, common: dict) -> VersionAliasRule:
+    folders = raw.get("folders")
+    if not isinstance(folders, list) or not folders:
+        raise ConfigError(f"{where} needs a non-empty 'folders' list")
+    for folder in folders:
+        if not isinstance(folder, str) or "/" in folder:
+            raise ConfigError(f"{where}: folder {folder!r} must be a bare directory name")
+        if MINOR_VERSION.match(folder):
+            raise ConfigError(
+                f"{where}: {folder!r} is a minor version name, which is a published folder, "
+                "not an alias"
+            )
+        try:
+            minor_of(folder)
+        except VersionError as error:
+            raise ConfigError(f"{where}: {error}") from error
+    duplicates = sorted({f for f in folders if folders.count(f) > 1})
+    if duplicates:
+        raise ConfigError(f"{where}: duplicate folders: {', '.join(duplicates)}")
+    return VersionAliasRule(folders=tuple(folders), **common)
+
+
+def _parse_unversioned_mirror(
+    raw: dict, *, where: str, common: dict, layout: SiteLayout
+) -> UnversionedMirrorRule:
     for_each = raw.get("for_each")
     if not isinstance(for_each, str) or not hasattr(layout, for_each):
         raise ConfigError(f"{where}: for_each must name a layout list, got {for_each!r}")
-    if not isinstance(raw.get("body"), str) or not raw["body"]:
-        raise ConfigError(f"{where} needs a non-empty string 'body'")
+    return UnversionedMirrorRule(for_each=for_each, **common)
 
-    return MirrorRule(
-        for_each=for_each,
-        body=raw["body"],
-        enabled=bool(raw.get("enabled", True)),
-    )
+
+def _validate_expand_rules(rules: tuple, *, source: str) -> None:
+    mirrors = [rule.id for rule in rules if isinstance(rule, UnversionedMirrorRule)]
+    if len(mirrors) > 1:
+        raise ConfigError(
+            f"{source}: only one unversioned-mirror rule may exist, found: {', '.join(mirrors)}"
+        )
+    folders: dict[str, str] = {}
+    for rule in rules:
+        if isinstance(rule, VersionAliasRule):
+            for folder in rule.folders:
+                other = folders.setdefault(folder, rule.id)
+                if other != rule.id:
+                    raise ConfigError(
+                        f"{source}: folder {folder!r} is claimed by both {other!r} and {rule.id!r}"
+                    )
 
 
 _FILE_RULE_KEYS = {
@@ -332,30 +496,6 @@ def _parse_override(raw: Any, *, source: str, rule: str, index: int) -> Redirect
         relative=raw.get("relative"),
         preserve_query_and_hash=raw.get("preserve_query_and_hash"),
         enabled=raw.get("enabled"),
-    )
-
-
-def _parse_pattern_rule(raw: Any, *, source: str, index: int, layout: SiteLayout) -> PatternRule:
-    where = f"{source}: redirects.patterns[{index}]"
-    if not isinstance(raw, dict):
-        raise ConfigError(f"{where} must be a mapping")
-    unknown = set(raw) - {"id", "match", "to", "for_each", "description"}
-    if unknown:
-        raise ConfigError(f"{where} has unknown keys: {', '.join(sorted(unknown))}")
-    for key in ("id", "match", "to"):
-        if not isinstance(raw.get(key), str) or not raw[key]:
-            raise ConfigError(f"{where} needs a non-empty string '{key}'")
-
-    for_each = raw.get("for_each")
-    if for_each is not None and not hasattr(layout, str(for_each)):
-        raise ConfigError(f"{where}: for_each must name a layout list, got {for_each!r}")
-
-    return PatternRule(
-        id=raw["id"],
-        match=raw["match"],
-        to=raw["to"],
-        for_each=for_each,
-        description=(raw.get("description") or "").strip(),
     )
 
 

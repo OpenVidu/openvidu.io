@@ -1,7 +1,5 @@
-"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Three jobs:
+"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Two jobs:
 
-* `on_config` publishes the layout and the redirect patterns on `config.extra.ovweb`, so the 404
-  router (docs/overrides/404.html) compiles them from the same configuration ovweb publishes with.
 * `on_env` sets every page's `update_date`, so `sitemap.xml` carries a real per-page `<lastmod>`
   rather than the build date on every URL, and gives the blog views the plugin generates a title
   and description, which they have no source file to carry.
@@ -10,8 +8,7 @@
 
 The import shim keeps a plain `mkdocs serve` working in a checkout where the package is not
 installed, including inside the Docker images, which mount the repository rather than installing
-anything. No logic is duplicated: the config loader, the pattern expansion and the source-date
-rules have one implementation, in `ovweb`.
+anything. No logic is duplicated: the source-date rules have one implementation, in `ovweb`.
 """
 
 from __future__ import annotations
@@ -27,9 +24,7 @@ _SRC = Path(__file__).resolve().parent / "src"
 if _SRC.is_dir() and str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
-from ovweb.config import load_site_config  # noqa: E402
 from ovweb.gitrepo import Git, GitError  # noqa: E402
-from ovweb.redirects import resolve_patterns  # noqa: E402
 from ovweb.sources import newest_dates, parse_git_log  # noqa: E402
 
 #: Everything the sitemap dates are read out of, relative to the repository root: the pages
@@ -48,20 +43,6 @@ _VIEW_DESCRIPTIONS = {
 _VIEW_TOPIC = "self-hosted video conferencing and WebRTC engineering"
 
 _log = logging.getLogger(f"mkdocs.hooks.{Path(__file__).stem}")
-
-
-def on_config(config, **kwargs):
-    """Publish the layout and the 404 redirect patterns on `config.extra.ovweb`."""
-    site_config = load_site_config()
-    config["extra"]["ovweb"] = {
-        "versioned_pages": list(site_config.layout.versioned_pages),
-        "non_versioned_pages": list(site_config.layout.non_versioned_pages),
-        "redirect_patterns": [
-            {"id": pattern.id, "match": pattern.match, "to": pattern.to}
-            for pattern in resolve_patterns(site_config)
-        ],
-    }
-    return config
 
 
 def _source_dates(root: Path) -> dict[str, str] | None:

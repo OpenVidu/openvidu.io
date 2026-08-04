@@ -14,17 +14,18 @@ from pathlib import Path
 from . import fsops
 from .config import SiteConfig
 from .discovery import latest_in_tree, version_folders, versions_in_tree
+from .expand import alias_entries, expand_alias, mirror_redirects, mirror_rule, scan_tree
 from .pipeline.postprocess import LLMS_TXT
-from .redirects import MIRROR_RULE_ID, is_generated_redirect, mirror_redirects
+from .redirects import (
+    REDIRECT_MAX_BYTES,
+    REFRESH_TARGET,
+    RedirectError,
+    is_generated_redirect,
+)
 from .rewrite.markdown import SUFFIX as MARKDOWN
 
 SELF_URL_TAGS = re.compile(r'(?:rel="canonical" href|property="og:url" content)="([^"]+)"')
 SITEMAP_LASTMOD = re.compile(r"<lastmod>([^<]*)</lastmod>")
-REFRESH_TARGET = re.compile(r'http-equiv="refresh" content="0; *url=([^"]+)"')
-
-#: A generated redirect page is around 2 KB and a real page carries the theme chrome, so this
-#: skips most of the tree before the marker check decides what is actually a redirect.
-REDIRECT_MAX_BYTES = 8192
 
 
 @dataclass
@@ -56,7 +57,8 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
     findings += _check_root_exports_use_latest(tree, config, latest)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
-    findings += _check_unversioned_mirror(tree, config)
+    findings += _check_unversioned_mirror(tree, config, latest)
+    findings += _check_alias_folders(tree, config)
     findings += _check_redirect_targets_resolve(tree, config, published, latest)
     return findings
 
@@ -85,16 +87,20 @@ def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
 def _check_redirect_targets_resolve(
     tree: Path, config: SiteConfig, published: list[str], latest: str | None
 ) -> list[Finding]:
-    """No generated redirect may point at a page that does not exist.
+    """No generated redirect may point at a page that does not exist, or at another redirect.
 
     A redirect into a 404 is worse than the 404 it replaced: the visitor takes two hops to reach
     nothing, and a crawler is told the content moved somewhere it did not. This happens when a
     rule's `versions` gate is wider than its target's — a rule for a page renamed in 3.8, gated
     `>=3.7`, materialises in 3.7 too, where the successor does not exist yet. The fix is a `when`
     override for the older band rather than a wider gate.
+
+    A redirect into another redirect is a chain: the expansions collapse them at generation
+    time, so one surviving to a published tree means a `files` rule targets another rule's stub.
     """
     directories = [tree / version for version in published]
     directories += [tree / section for section in config.layout.versioned_pages]
+    directories += [tree / folder for _, folder, _ in alias_entries(config)]
     findings = []
 
     for root in directories:
@@ -111,7 +117,10 @@ def _check_redirect_targets_resolve(
             if match is None:
                 findings.append(Finding("redirect-target", where, "has no meta refresh target"))
                 continue
-            target = match.group(1)
+            # The fragment is the browser's business; existence is decided by the path.
+            target = match.group(1).partition("#")[0]
+            if not target:
+                continue
             if target.startswith("/"):
                 # Site-absolute, so resolved from the tree root. `latest` is a symlink, which
                 # only resolves on a checkout that has it; name the version instead.
@@ -130,6 +139,15 @@ def _check_redirect_targets_resolve(
                         f"redirects to {target!r}, which does not exist in this tree "
                         f"({served.relative_to(tree)}); the rule's version gate is wider than "
                         "its target's, so it needs a `when` override for the older versions",
+                    )
+                )
+            elif is_generated_redirect(served):
+                findings.append(
+                    Finding(
+                        "redirect-target",
+                        where,
+                        f"redirects to {target!r}, which is itself a generated redirect; point "
+                        "the rule at the final destination instead of chaining",
                     )
                 )
     return findings
@@ -365,44 +383,88 @@ def _check_root_sitemap_lastmod(tree: Path) -> list[Finding]:
     return findings
 
 
-def _check_unversioned_mirror(tree: Path, config: SiteConfig) -> list[Finding]:
-    """The unversioned mirror must be exactly the set of pages the sitemap advertises.
+def _check_unversioned_mirror(tree: Path, config: SiteConfig, latest: str | None) -> list[Finding]:
+    """The unversioned mirror must be exactly one stub per page of the newest version.
 
     Asserted as set equality against the same function the publish generates it with, which
     catches both failures: a **missing** stub means an unversioned URL 404s for crawlers again,
     an **extra** one means a renamed or removed page now redirects into a 404.
     """
-    rule = config.mirror
-    if rule is None or not rule.enabled:
-        return []
-    sitemap = tree / "sitemap.xml"
-    if not sitemap.is_file():
+    rule = mirror_rule(config)
+    if rule is None or latest is None:
         return []
 
-    text = fsops.read_text(sitemap)
-    expected = {redirect.path for redirect in mirror_redirects(text, config=config)}
+    try:
+        expected = {redirect.path for redirect in mirror_redirects(tree, config, latest=latest)}
+    except RedirectError as error:
+        return [Finding("mirror", str(tree), str(error))]
+
+    return _check_owned_scope(
+        tree,
+        roots=[tree / section for section in getattr(config.layout, rule.for_each)],
+        expected=expected,
+        check="mirror",
+        rebuild="Publish latest, or run `ovweb redirects apply`, to rebuild the mirror",
+    )
+
+
+def _check_alias_folders(tree: Path, config: SiteConfig) -> list[Finding]:
+    """Every legacy patch folder must be exactly one stub per page of the minor it aliases.
+
+    A folder whose minor is not in the tree is skipped, matching how the folders are built.
+    """
+    findings: list[Finding] = []
+    for rule, folder, minor in alias_entries(config):
+        if not (tree / minor).is_dir():
+            continue
+        expected = {
+            redirect.path
+            for redirect in expand_alias(config, rule, folder, minor, scan_tree(tree, (minor,)))
+        }
+        if not (tree / folder).is_dir():
+            findings.append(
+                Finding(
+                    "version-alias",
+                    folder,
+                    f"folder not built, so /{folder}/ URLs answer 404; run `ovweb redirects apply`",
+                )
+            )
+            continue
+        findings += _check_owned_scope(
+            tree,
+            roots=[tree / folder],
+            expected=expected,
+            check="version-alias",
+            rebuild=f"Publish {minor}, or run `ovweb redirects apply`, to rebuild the folder",
+        )
+    return findings
+
+
+def _check_owned_scope(
+    tree: Path, *, roots: list[Path], expected: set[str], check: str, rebuild: str
+) -> list[Finding]:
+    """Set equality over a directory ovweb owns outright: every file a stub, no more, no less."""
     found: set[str] = set()
     findings: list[Finding] = []
 
-    for section in getattr(config.layout, rule.for_each):
-        root = tree / section
+    for root in roots:
         if not root.is_dir():
             continue
         for path in sorted(root.rglob("*")):
             if path.is_dir():
                 continue
             where = path.relative_to(tree).as_posix()
-            if path.name == "index.html" and is_generated_redirect(path, rule_id=MIRROR_RULE_ID):
+            if is_generated_redirect(path):
                 found.add(where)
                 continue
-            # Reported here rather than counted as a stale stub below: the reason it does not
-            # belong is different, it is not a redirect at all.
+            # Reported here rather than counted as stale below: the reason it does not belong
+            # is different, it is not a redirect at all.
             findings.append(
                 Finding(
-                    "mirror",
+                    check,
                     where,
-                    "sits on a mirrored path but is not a generated mirror redirect, so the "
-                    "next publish would delete it",
+                    "sits on a generated path but is not a generated redirect, so the next "
+                    "rebuild would delete it",
                 )
             )
 
@@ -410,21 +472,20 @@ def _check_unversioned_mirror(tree: Path, config: SiteConfig) -> list[Finding]:
     if missing:
         findings.append(
             Finding(
-                "mirror",
+                check,
                 missing[0],
-                f"one of {len(missing)} unversioned URL(s) the sitemap advertises under /latest/ "
-                "with no redirect page: they 404 for a crawler. Publish latest to rebuild the "
-                "mirror",
+                f"one of {len(missing)} URL(s) with no redirect page: they 404 for a crawler. "
+                + rebuild,
             )
         )
     stale = sorted(found - expected)
     if stale:
         findings.append(
             Finding(
-                "mirror",
+                check,
                 stale[0],
-                f"one of {len(stale)} redirect page(s) pointing at a page the sitemap no longer "
-                "lists, so they redirect into a 404. Publish latest to rebuild the mirror",
+                f"one of {len(stale)} redirect page(s) no current page justifies, so they may "
+                "redirect into a 404. " + rebuild,
             )
         )
     return findings

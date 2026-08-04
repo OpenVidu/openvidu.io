@@ -1,19 +1,17 @@
 # Layout and redirect configuration for the openvidu.io website.
 #
-# This is the single source of truth for both halves of publishing:
-#
-#   * `ovweb` reads it to know which parts of the built site are versioned, which are
-#     promoted to the root, and which redirects to materialise.
-#   * The MkDocs build reads it through publish-tool/mkdocs_hook.py, so the 404
-#     router (docs/overrides/404.html) compiles its patterns from the same data instead
-#     of hardcoding a list that has to be kept in sync by hand.
+# `ovweb` reads it to know which parts of the built site are versioned, which are promoted to
+# the root, and which redirects to generate. Every redirect on the site is a real HTML page
+# with a zero-delay meta refresh, declared here — there is no client-side router: GitHub Pages
+# serves 404.html with a 404 status, which a crawler acts on before it runs any JavaScript, so
+# only a 200 page can carry a redirect a search engine follows.
 #
 # `ovweb` always reads the copy inside the *installed* package, never the one in the
 # checked-out branch. Publishing an old version checks out its X.Y branch, which carries
 # its own stale copy of this file; reading that would reintroduce exactly the per-branch
 # divergence this file exists to remove.
 
-schema: 1
+schema: 2
 
 layout:
   site_url: https://openvidu.io
@@ -102,29 +100,7 @@ redirects:
     # and /3.8/ to /3.8/docs/ — with no JavaScript needed.
     relative: true
 
-  # One redirect page per published page of every versioned section, at the same path without
-  # the version prefix: /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/.
-  #
-  # The 404 router below already sends these URLs to the right place, but only for people:
-  # GitHub Pages serves 404.html with a 404 status, and a crawler acts on the status before it
-  # runs any JavaScript, so an inbound link to an unversioned URL is discarded. Those URLs are
-  # worth keeping — they are what a human types, and what OpenVidu itself publishes, since the
-  # speech agent's default configuration carries a comment pointing at
-  # https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider. A 200 page
-  # with a zero-delay meta refresh is the only redirect a crawler can be given here.
-  #
-  # There is no list to maintain and no reconciliation: the set is read off the promoted root
-  # sitemap, and the whole mirror is deleted and rebuilt on every latest publish, so a renamed or
-  # deleted page cannot leave a stub redirecting into a 404.
-  #
-  # `for_each` names a layout list; `body` is the sentence shown to a visitor whose browser blocks
-  # the refresh. The 404 router keeps handling everything the mirror does not cover — the exported
-  # reference-docs pages, pages that have since been removed, and typos.
-  mirror:
-    for_each: versioned_pages
-    body: "Redirecting to the current version of this page…"
-
-  # Redirects materialised as HTML files in the published tree.
+  # Redirects materialised as HTML files in the published tree, one rule per page.
   #
   # `at` is either the named location `version-root` or a path template that may use
   # {version}. `to` is relative to the directory the redirect page lives in. `canonical`
@@ -363,62 +339,77 @@ redirects:
       body: "Redirecting to the advanced recording tutorial with S3 storage…"
       versions: ">=3.2"
 
-  # Redirects compiled into the 404 router (docs/overrides/404.html). GitHub Pages has no
-  # server-side redirects, so a pattern — as opposed to a single known path — can only be
-  # handled by the page GitHub serves for an unmatched URL.
-  #
-  # `match` is a JavaScript regular expression tested against location.pathname, and `to`
-  # is its replacement ($1, $2, ... for capture groups). `for_each: versioned_pages`
-  # expands one rule per versioned page, substituting {item}. Patterns are tried in order
-  # and the first match wins.
-  patterns:
-    # Documentation versions used to be published per patch release ("/3.4.1/...",
-    # "/3.0.0-beta2/..."). They are now grouped by minor ("/3.4/..."). A first path segment
-    # with a third component is therefore a legacy URL: current minor folders never have
-    # one.
-    #
-    # Two rules rather than one optional group: a bare "/3.4.1" must land on "/3.4/", and a
-    # replacement of an unmatched group yields "" in JavaScript, not "/".
-    - id: legacy-patch-version-root
-      match: '^/(\d+\.\d+)\.[^/]+$'
-      to: "/$1/"
-
-    - id: legacy-patch-version-path
-      match: '^/(\d+\.\d+)\.[^/]+(/.*)$'
-      to: "/$1$2"
-
-    - id: unversioned-versioned-page
-      description: >
-        A versioned section requested without a version prefix ("/docs/self-hosting/")
-        goes to the newest version.
-      for_each: versioned_pages
-      match: '^/{item}/(.*)$'
-      to: "/latest/{item}/$1"
-
-    # The next two rules cover pages removed when the self-hosting deployment guides were
-    # consolidated. Neither needs a `versions` gate, and this is why: a pattern rule only ever
-    # runs from the 404 page, so in a version folder that still ships the page GitHub Pages
-    # serves the real file and the router is never reached. The same rule therefore redirects
-    # the URL in the versions where it is gone and leaves it alone in the versions where it is
-    # not — /3.8/…/aws/ keeps working while the current docs redirect.
+  # Rules that generate many redirect pages from one entry. Every kind resolves against the
+  # published tree at publish time (and via `ovweb redirects apply`), under three filters:
+  # a candidate path already holding a real page is skipped, a candidate whose target does not
+  # exist is skipped, and a target that is itself a redirect is followed to its final
+  # destination. So an expansion can never overwrite content, redirect into a 404, or chain.
+  expand:
+    # Each deployment type used to carry one index page per provider whose whole content was a
+    # list of links to that provider's install, admin and upgrade guides; the deployment type's
+    # own index now links straight to the install guide, and so does this rule. Gated at 3.8,
+    # the release that consolidated the self-hosting guides — older versions still publish
+    # these pages for real. ha/on-premises/ is still a real page in 3.8 (it resolves the
+    # DNS-load-balancing vs network-load-balancer fork), so the never-shadow filter leaves it
+    # alone with no exclusion to maintain.
     - id: removed-provider-index
-      description: >
-        Each deployment type used to carry one index page per provider whose whole content was
-        a list of links to that provider's install, admin and upgrade guides. The deployment
-        type's own index now links straight to the install guide, and so does this rule.
-        ha/on-premises/ is deliberately still a real page — it resolves the DNS-load-balancing
-        vs network-load-balancer fork — so it is served rather than redirected, by the same
-        mechanism described above.
-      match: '^/([^/]+)/docs/self-hosting/(single-node|single-node-pro|elastic|ha)/(on-premises|aws|azure|gcp|digitalocean|oracle)/?$'
-      to: "/$1/docs/self-hosting/$2/$3/install/"
+      kind: cross-product
+      at: "{version}/docs/self-hosting/{edition}/{provider}/index.html"
+      to: "install/"
+      canonical: "{site_url}/latest/docs/self-hosting/{edition}/{provider}/install/"
+      body: "Redirecting to the installation guide…"
+      versions: ">=3.8"
+      values:
+        edition: [single-node, single-node-pro, elastic, ha]
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
+    # The six per-provider Single Node upgrade guides of each edition became one page per
+    # edition in 3.8: five of the six only said "redeploy the template with the new version",
+    # and the sixth held the in-place updater procedure that applies to all of them. Elastic
+    # and High Availability keep their per-provider upgrade guides, which hold real
+    # per-provider procedure.
     - id: merged-single-node-upgrade
-      description: >
-        The six per-provider Single Node upgrade guides of each edition are now one page per
-        edition: five of the six only said "redeploy the template with the new version", and
-        the sixth held the in-place updater procedure that applies to all of them. The hash is
-        carried over by the router, so a link to #upgrading-openvidu-single-node still lands on
-        that section. Elastic and High Availability keep their per-provider upgrade guides,
-        which hold real per-provider procedure.
-      match: '^/([^/]+)/docs/self-hosting/(single-node|single-node-pro)/(on-premises|aws|azure|gcp|digitalocean|oracle)/upgrade/?$'
-      to: "/$1/docs/self-hosting/$2/upgrade/"
+      kind: cross-product
+      at: "{version}/docs/self-hosting/{edition}/{provider}/upgrade/index.html"
+      to: "../../upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/{edition}/upgrade/"
+      body: "Redirecting to the upgrade guide…"
+      versions: ">=3.8"
+      values:
+        edition: [single-node, single-node-pro]
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+
+    # Documentation versions used to be published per patch release ("/3.4.1/...",
+    # "/3.0.0-beta2/...") and are now grouped by minor ("/3.4/..."). Google still holds the
+    # per-patch URLs, so each retired folder is rebuilt as a full mirror of its minor: one
+    # redirect page per page of the minor's tree, /3.4.1/docs/x/ -> /3.4/docs/x/. A minor's
+    # alias folders are rebuilt whenever the minor is published.
+    - id: legacy-patch-folders
+      kind: version-alias
+      folders:
+        - 3.0.0-beta1
+        - 3.0.0-beta2
+        - 3.0.0-beta3
+        - 3.0.0
+        - 3.1.0
+        - 3.2.0
+        - 3.3.0
+        - 3.4.0
+        - 3.4.1
+        - 3.5.0
+        - 3.6.0
+        - 3.6.1
+        - 3.7.0
+        - 3.8.0
+      body: "Redirecting to the documentation of this OpenVidu version…"
+
+    # Every page of the newest version answers at its unversioned URL too:
+    # /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/. These URLs are what a human
+    # types, and what OpenVidu itself publishes — the speech agent's default configuration
+    # carries a comment pointing at
+    # https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider.
+    # Deleted and rebuilt in full on every latest publish.
+    - id: unversioned-pages
+      kind: unversioned-mirror
+      for_each: versioned_pages
+      body: "Redirecting to the current version of this page…"

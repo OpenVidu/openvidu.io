@@ -53,12 +53,23 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "Point links at the HTML page where no Markdown export exists",
         "checked against the tree as finally laid out, not against the MkDocs configuration",
     ),
-    ("install-redirects", "always", "Write the generated redirect pages", ""),
+    (
+        "install-redirects",
+        "always",
+        "Write the generated redirect pages",
+        "the `files` rules plus the tree-resolved expansions, never shadowing a real page",
+    ),
     (
         "mirror-unversioned",
         "latest",
         "Answer the versioned pages' unversioned URLs",
-        "one redirect page per URL in the promoted sitemap; deleted and rebuilt in full",
+        "one redirect page per page of the newest version; deleted and rebuilt in full",
+    ),
+    (
+        "alias-versions",
+        "always",
+        "Rebuild the legacy patch-version folders",
+        "folders aliasing the published minor mirror its tree; others are left alone",
     ),
     (
         "prune-version-sitemap",

@@ -7,14 +7,7 @@ import re
 import pytest
 
 from ovweb.config import ConfigError, parse_site_config
-from ovweb.redirects import (
-    MIRROR_RULE_ID,
-    RedirectError,
-    mirror_redirects,
-    render_redirect,
-    resolve_file_redirects,
-    resolve_patterns,
-)
+from ovweb.redirects import RedirectError, render_redirect, resolve_file_redirects
 
 MINIMAL_LAYOUT = {
     "site_url": "https://openvidu.io",
@@ -27,16 +20,13 @@ MINIMAL_LAYOUT = {
 }
 
 
-def build(files=(), patterns=(), defaults=None, mirror=None):
-    redirects = {
-        "defaults": defaults or {},
-        "files": list(files),
-        "patterns": list(patterns),
-    }
-    if mirror is not None:
-        redirects["mirror"] = mirror
+def build(files=(), defaults=None):
     return parse_site_config(
-        {"schema": 1, "layout": MINIMAL_LAYOUT, "redirects": redirects},
+        {
+            "schema": 2,
+            "layout": MINIMAL_LAYOUT,
+            "redirects": {"defaults": defaults or {}, "files": list(files)},
+        },
         source="<test>",
     )
 
@@ -212,6 +202,17 @@ def test_a_target_that_could_break_out_of_its_context_is_rejected(target):
         resolve_file_redirects(config, "3.8")
 
 
+def test_a_target_may_carry_a_fragment():
+    """Converging pages land on the section that absorbed them, not just the page."""
+    config = build([{"id": "r", "at": "{version}/docs/faq/index.html", "to": "../how-to/#backup"}])
+    resolved = only(config, "3.8")
+    assert resolved.to == "../how-to/#backup"
+
+    page = render_redirect(resolved)
+    assert '<meta http-equiv="refresh" content="0; url=../how-to/#backup">' in page
+    assert '<a href="../how-to/#backup">' in page
+
+
 def test_config_rejects_a_non_html_at_path():
     with pytest.raises(ConfigError, match="HTML file"):
         build([{"id": "r", "at": "{version}/docs/", "to": "../"}])
@@ -282,189 +283,6 @@ def only_version_root(config, version):
     return next(
         item for item in resolve_file_redirects(config, version) if item.rule_id == "version-root"
     )
-
-
-# -- 404 patterns ------------------------------------------------------------------------
-
-
-def test_patterns_expand_per_versioned_page(config):
-    ids = [pattern.id for pattern in resolve_patterns(config)]
-    assert "unversioned-versioned-page:docs" in ids
-    assert "unversioned-versioned-page:meet" in ids
-
-
-def test_patterns_keep_config_order(config):
-    """The router stops at the first match, so order is behaviour."""
-    ids = [pattern.id for pattern in resolve_patterns(config)]
-    assert ids.index("legacy-patch-version-root") < ids.index("unversioned-versioned-page:docs")
-
-
-@pytest.mark.parametrize(
-    ("path", "expected"),
-    [
-        ("/3.4.1", "/3.4/"),
-        ("/3.4.1/", "/3.4/"),
-        ("/3.4.1/docs/self-hosting/", "/3.4/docs/self-hosting/"),
-        ("/3.0.0-beta2/docs/", "/3.0/docs/"),
-        ("/docs/self-hosting/", "/latest/docs/self-hosting/"),
-        ("/meet/", "/latest/meet/"),
-    ],
-)
-def test_patterns_produce_the_documented_redirects(config, path, expected):
-    """Evaluated with Python's regex engine, which agrees with JavaScript on these patterns.
-
-    `/3.4.1` with no trailing path needs its own rule: replacing an unmatched group yields "" in
-    JavaScript, so one rule with an optional group would land on "/3.4" rather than "/3.4/".
-    """
-    for pattern in resolve_patterns(config):
-        compiled = re.compile(pattern.match)
-        if compiled.match(path):
-            replacement = re.sub(r"\$(\d)", r"\\\1", pattern.to)
-            assert compiled.sub(replacement, path) == expected
-            return
-    raise AssertionError(f"no pattern matched {path}")
-
-
-@pytest.mark.parametrize("path", ["/", "/pricing/", "/latest/docs/", "/3.8/docs/", "/docs"])
-def test_patterns_leave_valid_paths_alone(config, path):
-    for pattern in resolve_patterns(config):
-        assert not re.compile(pattern.match).match(path), (pattern.id, path)
-
-
-# -- the unversioned mirror --------------------------------------------------------------
-
-MIRROR = {"for_each": "versioned_pages", "body": "Redirecting to the current version…"}
-
-
-def sitemap(*urls: str) -> str:
-    """A sitemap in MkDocs' own shape: the URL indented onto its own line."""
-    entries = "".join(f"    <url>\n         <loc>{url}</loc>\n    </url>\n" for url in urls)
-    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset>\n{entries}</urlset>\n'
-
-
-def mirrored(*urls: str, mirror=MIRROR) -> dict[str, str]:
-    """`{stub path: target}` for a promoted root sitemap holding `urls`."""
-    resolved = mirror_redirects(sitemap(*urls), config=build(mirror=mirror))
-    return {redirect.path: redirect.to for redirect in resolved}
-
-
-def test_a_page_is_mirrored_at_the_same_path_without_the_version():
-    assert mirrored("https://openvidu.io/latest/docs/ai/live-captions/") == {
-        "docs/ai/live-captions/index.html": "/latest/docs/ai/live-captions/"
-    }
-
-
-def test_a_section_root_is_mirrored_too():
-    """`/docs/` and `/meet/` are the two URLs the audit raised: the ones a human types."""
-    assert mirrored("https://openvidu.io/latest/docs/", "https://openvidu.io/latest/meet/") == {
-        "docs/index.html": "/latest/docs/",
-        "meet/index.html": "/latest/meet/",
-    }
-
-
-@pytest.mark.parametrize(
-    "url",
-    [
-        # Served from the root already, so a stub would shadow the real page.
-        "https://openvidu.io/pricing/",
-        # The home page.
-        "https://openvidu.io/",
-        # A version-pinned URL. Only `latest` is mirrored: an unversioned URL means "the current
-        # one", and pinning the mirror to 3.8 would send visitors to a stale page next release.
-        "https://openvidu.io/3.8/docs/",
-        # Another site.
-        "https://example.com/latest/docs/",
-        # A section this site does not have.
-        "https://openvidu.io/latest/blog/",
-    ],
-)
-def test_only_versioned_pages_under_latest_are_mirrored(url):
-    assert mirrored(url) == {}
-
-
-def test_a_url_naming_a_file_is_left_to_the_404_router():
-    """A stub's path is the URL plus `index.html`, which is wrong for a URL naming a file."""
-    assert mirrored("https://openvidu.io/latest/docs/reference/api.html") == {}
-
-
-def test_the_order_follows_the_sitemap():
-    urls = [f"https://openvidu.io/latest/docs/{name}/" for name in ("c", "a", "b")]
-    resolved = mirror_redirects(sitemap(*urls), config=build(mirror=MIRROR))
-    assert [redirect.path for redirect in resolved] == [
-        "docs/c/index.html",
-        "docs/a/index.html",
-        "docs/b/index.html",
-    ]
-
-
-def test_a_repeated_url_yields_one_stub():
-    url = "https://openvidu.io/latest/docs/"
-    assert len(mirror_redirects(sitemap(url, url), config=build(mirror=MIRROR))) == 1
-
-
-def test_the_stub_carries_the_seo_signals_that_make_it_a_redirect():
-    redirect = mirror_redirects(
-        sitemap("https://openvidu.io/latest/docs/"), config=build(mirror=MIRROR)
-    )[0]
-
-    assert redirect.rule_id == MIRROR_RULE_ID
-    assert redirect.canonical == "https://openvidu.io/latest/docs/"
-    assert redirect.robots == "noindex, follow"
-    assert redirect.body == MIRROR["body"]
-    # Absolute, because a root-level stub is served from exactly one URL — unlike the rules
-    # installed inside a version folder, which `latest` makes answer at two.
-    assert redirect.relative is False
-    # The fragment is what the shipped agent-configuration link carries.
-    assert redirect.preserve_query_and_hash is True
-
-
-def test_the_rendered_stub_redirects_and_stays_out_of_the_index():
-    redirect = mirror_redirects(
-        sitemap("https://openvidu.io/latest/meet/embedded/"), config=build(mirror=MIRROR)
-    )[0]
-    page = render_redirect(redirect)
-
-    assert '<meta http-equiv="refresh" content="0; url=/latest/meet/embedded/">' in page
-    assert '<meta name="robots" content="noindex, follow">' in page
-    assert '<a href="/latest/meet/embedded/">' in page
-
-
-def test_no_mirror_is_configured_means_no_stubs():
-    assert mirror_redirects(sitemap("https://openvidu.io/latest/docs/"), config=build()) == ()
-
-
-def test_a_disabled_mirror_produces_no_stubs():
-    assert mirrored("https://openvidu.io/latest/docs/", mirror={**MIRROR, "enabled": False}) == {}
-
-
-def test_an_empty_sitemap_produces_no_stubs():
-    assert mirrored() == {}
-
-
-def test_a_sitemap_with_no_loc_elements_produces_no_stubs():
-    """A promotion that changed shape must not be read as "the site has no pages"."""
-    assert mirror_redirects("<urlset>\n</urlset>\n", config=build(mirror=MIRROR)) == ()
-
-
-def test_the_url_is_read_through_the_whitespace_mkdocs_indents_it_with():
-    """MkDocs' template puts the URL on its own line, indented, inside the element."""
-    text = (
-        "<urlset><url>\n         <loc>\n"
-        "  https://openvidu.io/latest/docs/\n  </loc>\n</url></urlset>"
-    )
-    resolved = mirror_redirects(text, config=build(mirror=MIRROR))
-    assert [redirect.path for redirect in resolved] == ["docs/index.html"]
-
-
-def test_a_deeply_nested_page_keeps_its_whole_path():
-    assert mirrored("https://openvidu.io/latest/meet/embedded/tutorials/webhooks/") == {
-        "meet/embedded/tutorials/webhooks/index.html": "/latest/meet/embedded/tutorials/webhooks/"
-    }
-
-
-def test_a_section_whose_name_is_a_prefix_of_another_is_not_confused():
-    """`docs` and a hypothetical `docs-legacy` share a prefix; the boundary is the slash."""
-    assert mirrored("https://openvidu.io/latest/docsomething/") == {}
 
 
 # -- version bands whose target arrived later --------------------------------------------

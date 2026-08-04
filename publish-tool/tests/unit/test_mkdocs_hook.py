@@ -1,4 +1,4 @@
-"""The MkDocs hook's three jobs: the 404 router's data, llms.txt entries, and `<lastmod>`.
+"""The MkDocs hook's two jobs: llms.txt entries, and the sitemap's `<lastmod>`.
 
 `on_page_content` reaches into two private attributes of `llmstxt` — `_sections` for the
 description and `_md_pages` for the title — which is the one thing here a plugin upgrade could
@@ -26,7 +26,7 @@ from mkdocs_llmstxt._internal.plugin import _MDPageInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import mkdocs_hook
-from mkdocs_hook import on_config, on_env, on_page_content
+from mkdocs_hook import on_env, on_page_content
 
 NAV_LABEL = "Install"
 BUILD_DATE = "2026-07-31"
@@ -54,26 +54,6 @@ def config(sections, md_pages=None, *, plugin: bool = True):
         return {"plugins": {}}
     llmstxt = SimpleNamespace(_sections=sections, _md_pages={} if md_pages is None else md_pages)
     return {"plugins": {"llmstxt": llmstxt}}
-
-
-# -- on_config: what the 404 router compiles its rules from --------------------------------
-
-
-def test_the_layout_and_the_redirect_patterns_reach_the_templates():
-    """docs/overrides/404.html reads these, so the router and the publish share one source."""
-    published = on_config({"extra": {}})["extra"]["ovweb"]
-
-    assert published["versioned_pages"] == ["docs", "meet"]
-    assert "pricing" in published["non_versioned_pages"]
-    assert {"id", "match", "to"} == set(published["redirect_patterns"][0])
-
-
-def test_every_published_pattern_is_a_usable_regular_expression():
-    """They are compiled in the browser with `new RegExp`, where a bad one throws at runtime."""
-    import re
-
-    for pattern in on_config({"extra": {}})["extra"]["ovweb"]["redirect_patterns"]:
-        re.compile(pattern["match"])
 
 
 # -- the description ---------------------------------------------------------------------

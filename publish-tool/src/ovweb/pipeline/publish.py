@@ -8,12 +8,9 @@ keep.
 
 from __future__ import annotations
 
-import shutil
 from contextlib import contextmanager
-from pathlib import Path
-from tempfile import mkdtemp
 
-from ..config import SiteConfig, find_site_config
+from ..config import SiteConfig
 from ..gitrepo import Git, GitError
 from ..mikewrap import Mike
 from ..model import PublishPlan
@@ -55,46 +52,43 @@ def publish(
         + (" and moving `latest` onto it" if plan.update_latest else " (root pages untouched)")
     )
 
-    with _staged_config(report) as config_path:
-        mike = Mike(repo.root, config_path=config_path, dry_run=repo.dry_run, log=report)
+    mike = Mike(repo.root, dry_run=repo.dry_run, log=report)
 
-        try:
-            created_branch = _prepare_branches(repo, plan=plan, gh_branch=gh_branch, report=report)
+    try:
+        created_branch = _prepare_branches(repo, plan=plan, gh_branch=gh_branch, report=report)
 
-            # Everything from here to the gh-pages push is local and reversible.
-            with _rollback_on_failure(repo, branch=gh_branch, report=report):
-                if plan.delete_first:
-                    report.step(
-                        "mike-delete", f"Remove the published {plan.version} before rebuilding"
-                    )
-                    mike.delete(plan.version)
+        # Everything from here to the gh-pages push is local and reversible.
+        with _rollback_on_failure(repo, branch=gh_branch, report=report):
+            if plan.delete_first:
+                report.step("mike-delete", f"Remove the published {plan.version} before rebuilding")
+                mike.delete(plan.version)
 
-                report.step("mike-deploy", f"Build {plan.version} with mike")
-                mike.deploy(plan.version, alias=LATEST_ALIAS if plan.update_latest else None)
+            report.step("mike-deploy", f"Build {plan.version} with mike")
+            mike.deploy(plan.version, alias=LATEST_ALIAS if plan.update_latest else None)
 
-                published = _post_process_gh_pages(
-                    repo,
-                    config=config,
-                    plan=plan,
-                    report=report,
-                    gh_branch=gh_branch,
-                    keep_worktree=keep_worktree,
-                    commit=commit,
-                    force=force,
-                )
+            published = _post_process_gh_pages(
+                repo,
+                config=config,
+                plan=plan,
+                report=report,
+                gh_branch=gh_branch,
+                keep_worktree=keep_worktree,
+                commit=commit,
+                force=force,
+            )
 
-                if published and plan.push:
-                    report.step("push", f"Push {gh_branch}")
-                    repo.push(gh_branch)
-                elif published:
-                    report.info(f"{gh_branch} committed locally; not pushed (--no-push).")
+            if published and plan.push:
+                report.step("push", f"Push {gh_branch}")
+                repo.push(gh_branch)
+            elif published:
+                report.info(f"{gh_branch} committed locally; not pushed (--no-push).")
 
-            # Past this point the site is published. What remains is branch bookkeeping: a
-            # failure there is reported, but gh-pages is left alone.
-            _finish_branches(repo, plan=plan, report=report, created_branch=created_branch)
-        finally:
-            if repo.current_branch() != started_on:
-                repo.switch(started_on)
+        # Past this point the site is published. What remains is branch bookkeeping: a
+        # failure there is reported, but gh-pages is left alone.
+        _finish_branches(repo, plan=plan, report=report, created_branch=created_branch)
+    finally:
+        if repo.current_branch() != started_on:
+            repo.switch(started_on)
 
     if repo.dry_run:
         report.success(
@@ -154,26 +148,6 @@ def _require_clean(repo: Git, *, report: Reporter) -> None:
         report.warn(message)
         return
     raise PublishError(message)
-
-
-@contextmanager
-def _staged_config(report: Reporter):
-    """Copy ovweb.yaml somewhere the branch switching cannot reach.
-
-    The MkDocs hook reads the config through `$OVWEB_SITE_CONFIG`, and the build runs with a
-    different branch checked out. An installed wheel keeps the config outside the repository
-    anyway, but an editable install or a `PYTHONPATH` checkout resolves it inside the working
-    tree, where a past-version publish would replace it with that branch's stale copy.
-    """
-    source = find_site_config()
-    directory = Path(mkdtemp(prefix="ovweb-config-"))
-    staged = directory / source.name
-    shutil.copy2(source, staged)
-    report.detail(f"Config staged at {staged} (from {source})")
-    try:
-        yield staged
-    finally:
-        shutil.rmtree(directory, ignore_errors=True)
 
 
 def _prepare_branches(repo: Git, *, plan: PublishPlan, gh_branch: str, report: Reporter) -> bool:
