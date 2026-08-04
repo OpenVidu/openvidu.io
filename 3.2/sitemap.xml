@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://openvidu.io/3.2/</loc>
-         <lastmod>2026-07-27</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/3.2/docs/comparing-openvidu/</loc>
          <lastmod>2026-07-27</lastmod>
     </url>
@@ -423,5 +419,237 @@
     <url>
          <loc>https://openvidu.io/3.2/docs/ui-components/react-components/</loc>
          <lastmod>2026-07-27</lastmod>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/docs/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/docs/self-hosting/single-node-pro/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/docs/self-hosting/single-node/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/docs/tutorials/advanced-features/recording-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/docs/tutorials/advanced-features/recording-basic/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/deployment/advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/deployment/basic/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/deployment/local/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/deployment/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/deploy-your-app/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/intro/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/reference/api.html</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/reference/direct-link/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/reference/iframe/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/reference/rest-api/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/reference/webcomponent/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/reference/webhooks/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/step-by-step-guide/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/access/anonymous-access/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/access/identified-guests/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/access/users/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/advanced-features/recordings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/advanced-features/webhooks/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/direct-link/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/embedding-options/direct-link/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/embedding-options/webcomponent-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/embedding-options/webcomponent/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/recordings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/webcomponent-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/webcomponent/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/embedded/tutorials/webhooks/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/live-captions/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/e2e-encryption/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/lifecycle/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/live-captions/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/role-management/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/smart-layout/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/meetings/virtual-background/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/recordings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/recordings/configuration/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/recordings/management/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/recordings/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/room-members/management/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/room-members/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/rooms-and-meetings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/rooms/access/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/rooms/management/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/rooms/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/users-and-permissions/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/users/management/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/features/users/overview/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/getting-started/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.2/meet/releases/</loc>
     </url>
 </urlset>

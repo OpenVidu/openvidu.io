@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://openvidu.io/3.8/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/3.8/docs/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
@@ -763,5 +759,221 @@
     <url>
          <loc>https://openvidu.io/3.8/meet/features/users/overview/</loc>
          <lastmod>2026-07-31</lastmod>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/getting-started/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/openvidu-call/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/openvidu-call/docs/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/elastic/aws/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/elastic/azure/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/elastic/digitalocean/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/elastic/gcp/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/elastic/on-premises/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/elastic/oracle/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/faq/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/ha/aws/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/ha/azure/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/ha/digitalocean/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/ha/gcp/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/ha/oracle/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/how-to-guides/force-443-tls/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/aws/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/aws/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/azure/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/azure/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/digitalocean/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/digitalocean/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/gcp/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/gcp/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/on-premises/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/on-premises/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/oracle/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/oracle/install-tutorial/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node-pro/oracle/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/aws/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/aws/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/azure/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/azure/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/digitalocean/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/digitalocean/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/gcp/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/gcp/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/on-premises/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/on-premises/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/oracle/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/oracle/install-tutorial/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/self-hosting/single-node/oracle/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/tutorials/advanced-features/recording-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/docs/tutorials/advanced-features/recording-basic/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/embedded/tutorials/direct-link/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/embedded/tutorials/recordings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/embedded/tutorials/webcomponent-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/embedded/tutorials/webcomponent/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/embedded/tutorials/webhooks/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/features/live-captions/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/features/recordings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/features/rooms-and-meetings/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.8/meet/features/users-and-permissions/</loc>
     </url>
 </urlset>

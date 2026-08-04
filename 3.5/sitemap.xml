@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://openvidu.io/3.5/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/3.5/docs/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/3.5/docs/comparing-openvidu/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/3.5/docs/getting-started/</loc>
          <lastmod>2026-07-31</lastmod>
     </url>
     <url>
@@ -631,5 +623,41 @@
     <url>
          <loc>https://openvidu.io/3.5/meet/getting-started/</loc>
          <lastmod>2026-07-31</lastmod>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/getting-started/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/openvidu-call/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/openvidu-call/docs/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/self-hosting/faq/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/self-hosting/single-node-pro/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/self-hosting/single-node/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/tutorials/advanced-features/recording-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.5/docs/tutorials/advanced-features/recording-basic/</loc>
     </url>
 </urlset>

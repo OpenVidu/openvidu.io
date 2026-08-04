@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://openvidu.io/3.7/</loc>
-         <lastmod>2026-08-03</lastmod>
-    </url>
-    <url>
          <loc>https://openvidu.io/3.7/docs/</loc>
          <lastmod>2026-08-03</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/3.7/docs/comparing-openvidu/</loc>
-         <lastmod>2026-08-03</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/3.7/docs/getting-started/</loc>
          <lastmod>2026-08-03</lastmod>
     </url>
     <url>
@@ -803,5 +795,53 @@
     <url>
          <loc>https://openvidu.io/3.7/meet/getting-started/</loc>
          <lastmod>2026-08-03</lastmod>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/getting-started/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/openvidu-call/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/openvidu-call/docs/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/self-hosting/faq/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/self-hosting/how-to-guides/force-443-tls/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/self-hosting/single-node-pro/oracle/install-tutorial/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/self-hosting/single-node-pro/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/self-hosting/single-node/oracle/install-tutorial/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/self-hosting/single-node/upgrade/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/tutorials/advanced-features/recording-advanced/</loc>
+    </url>
+    <url>
+         <!-- ovweb:stub -->
+         <loc>https://openvidu.io/3.7/docs/tutorials/advanced-features/recording-basic/</loc>
     </url>
 </urlset>
