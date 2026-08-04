@@ -23,9 +23,11 @@ from .redirects import (
     is_generated_redirect,
 )
 from .rewrite.markdown import SUFFIX as MARKDOWN
+from .rewrite.sitemap import stub_loc
 
 SELF_URL_TAGS = re.compile(r'(?:rel="canonical" href|property="og:url" content)="([^"]+)"')
 SITEMAP_LASTMOD = re.compile(r"<lastmod>([^<]*)</lastmod>")
+SITEMAP_LOC = re.compile(r"<loc>([^<]+)</loc>")
 
 
 @dataclass
@@ -57,6 +59,7 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
     findings += _check_root_exports_use_latest(tree, config, latest)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
+    findings += _check_root_sitemap_stub_free(tree)
     findings += _check_unversioned_mirror(tree, config, latest)
     findings += _check_alias_folders(tree, config)
     findings += _check_redirect_targets_resolve(tree, config, published, latest)
@@ -194,17 +197,20 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
 
 
 def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list[Finding]:
-    """A version folder must carry a correctly pruned sitemap.
+    """A version folder must carry a correctly pruned and stub-synced sitemap.
 
     Not for crawlers, but because the theme's version selector fetches it to decide whether the
-    page the reader is on exists in the version they picked. Each of the three assertions below
-    silently turns that off on its own, leaving every switch on the version root:
+    page the reader is on exists in the version they picked. Each of the assertions below
+    silently degrades that on its own:
 
-    * the file is missing, so the fetch fails;
+    * the file is missing, so the fetch fails and every switch lands on the version root;
     * the version-root entry is absent, so the longest common prefix of the remaining URLs is not
       itself an entry, which the selector requires before it resolves anything;
     * a root-served page is still listed, so a reader on `/pricing/` is sent to
-      `/<version>/pricing/`, which is a 404.
+      `/<version>/pricing/`, which is a 404;
+    * a generated redirect is not listed, so a reader switching onto a moved page is dropped on
+      the version root instead of being forwarded;
+    * an entry names a URL nothing serves, so the selector sends a reader into a 404.
     """
     where = f"{version}/sitemap.xml"
     path = tree / version / "sitemap.xml"
@@ -229,6 +235,7 @@ def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list
                 "common prefix of every URL before it will resolve one",
             )
         )
+    root_served = tuple(f"/{version}/{page}/" for page in config.layout.non_versioned_pages)
     for page in config.layout.non_versioned_pages:
         if f"/{version}/{page}/" in text:
             findings.append(
@@ -237,6 +244,70 @@ def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list
                     where,
                     f"lists /{version}/{page}/, which is served only from the site root; the "
                     "version selector would send a reader there and get a 404",
+                )
+            )
+
+    base_url = config.layout.base_url
+    listed = set(SITEMAP_LOC.findall(text))
+    stubs = scan_tree(tree, (version,)).stub_targets
+    missing = sorted({stub_loc(base_url, stub) for stub in stubs} - listed)
+    if missing:
+        findings.append(
+            Finding(
+                "version-sitemap",
+                where,
+                f"{len(missing)} generated redirect(s) not listed (e.g. {missing[0]}), so the "
+                "version selector cannot resolve a reader onto them; run `ovweb redirects apply`",
+            )
+        )
+    prefix = f"{base_url}/"
+    dead = sorted(
+        loc
+        for loc in listed
+        if loc.startswith(prefix)
+        and not any(path in loc for path in root_served)  # already reported above
+        and not (tree / _served_path(loc[len(prefix) :])).is_file()
+    )
+    if dead:
+        findings.append(
+            Finding(
+                "version-sitemap",
+                where,
+                f"lists {len(dead)} URL(s) nothing serves (e.g. {dead[0]}); the version "
+                "selector would send a reader there and get a 404",
+            )
+        )
+    return findings
+
+
+def _served_path(urlpath: str) -> str:
+    """The tree-relative file GitHub serves for a URL path."""
+    return f"{urlpath}index.html" if urlpath.endswith("/") or urlpath == "" else urlpath
+
+
+def _check_root_sitemap_stub_free(tree: Path) -> list[Finding]:
+    """The crawler-facing root sitemap must list pages, never generated redirects.
+
+    A redirect stub is `noindex`; listing one asks crawlers to fetch a URL they are then told
+    to forget, and teaches them to distrust the sitemap. Stubs belong only in the version
+    sitemaps, which exist for the version selector.
+    """
+    path = tree / "sitemap.xml"
+    if not path.is_file():
+        return []
+    findings = []
+    for loc in SITEMAP_LOC.findall(fsops.read_text(path)):
+        _, _, urlpath = loc.partition("//")
+        _, _, urlpath = urlpath.partition("/")
+        served = tree / _served_path(urlpath)
+        if served.is_file() and is_generated_redirect(served):
+            findings.append(
+                Finding(
+                    "root-sitemap",
+                    "sitemap.xml",
+                    f"lists {loc}, which is served by a generated redirect — crawlers are "
+                    "being sent to a noindex page; remove the page from the build or adjust "
+                    "the rule that overwrites it",
                 )
             )
     return findings

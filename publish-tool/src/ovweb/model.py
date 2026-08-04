@@ -140,6 +140,25 @@ class TreeRenameRule:
 
 
 @dataclass(frozen=True)
+class SectionFallbackRule:
+    """A section absent from some versions: every URL it answers elsewhere redirects to `to`.
+
+    Sources are enumerated from the versions outside the `versions` gate — the ones that have
+    the section — so a reader switching into a gated version lands on `to` whatever page of the
+    section they came from. `versions` is required: the gate is what separates the versions
+    that lack the section from the ones that donate its URLs.
+    """
+
+    id: str
+    dir: str
+    to: str
+    versions: str
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    description: str = ""
+
+
+@dataclass(frozen=True)
 class VersionAliasRule:
     """A retired version folder aliased to its minor: one stub per page of the minor.
 
@@ -172,7 +191,13 @@ class UnversionedMirrorRule:
     description: str = ""
 
 
-ExpandRule = CrossProductRule | TreeRenameRule | VersionAliasRule | UnversionedMirrorRule
+ExpandRule = (
+    CrossProductRule
+    | TreeRenameRule
+    | SectionFallbackRule
+    | VersionAliasRule
+    | UnversionedMirrorRule
+)
 
 
 @dataclass(frozen=True)

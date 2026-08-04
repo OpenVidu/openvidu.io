@@ -33,14 +33,20 @@ from .expand import (
 )
 from .gitrepo import Git, GitError, open_repository
 from .mikewrap import MikeError
-from .model import CrossProductRule, TreeRenameRule, UnversionedMirrorRule, VersionAliasRule
+from .model import (
+    CrossProductRule,
+    SectionFallbackRule,
+    TreeRenameRule,
+    UnversionedMirrorRule,
+    VersionAliasRule,
+)
 from .pipeline.postprocess import PostprocessError, postprocess
 from .pipeline.publish import PublishError, publish
 from .plan import build_plan
 from .redirects import RedirectError, render_redirect, resolve_file_redirects
 from .releases import RegionError
 from .report import Reporter
-from .rewrite import RewriteError
+from .rewrite import RewriteError, sync_version_sitemap
 from .verify import verify
 from .versions import VersionError, validate_minor
 
@@ -420,6 +426,8 @@ def _expand_summary(rule) -> str:
     if isinstance(rule, TreeRenameRule):
         gate = f", versions {rule.versions}" if rule.versions else ""
         return f"tree-rename: {rule.from_path} -> {rule.to_path}{gate}"
+    if isinstance(rule, SectionFallbackRule):
+        return f"section-fallback: {rule.dir} -> {rule.to}, versions {rule.versions}"
     if isinstance(rule, VersionAliasRule):
         return f"version-alias: {len(rule.folders)} folder(s)"
     if isinstance(rule, UnversionedMirrorRule):
@@ -490,9 +498,10 @@ def redirects_apply(
     """Reconcile every generated redirect in a tree with the configuration.
 
     Writes the `files` and expansion stubs of every version folder, deleting generated stubs no
-    rule produces any more; rebuilds the unversioned mirror and the legacy patch-version
-    folders. This is how a rule reaches versions that are not being rebuilt, and how the alias
-    folders come to exist at all — no publish creates them from nothing.
+    rule produces any more; lists the stubs in each version's sitemap for the version selector;
+    rebuilds the unversioned mirror and the legacy patch-version folders. This is how a rule
+    reaches versions that are not being rebuilt, and how the alias folders come to exist at
+    all — no publish creates them from nothing.
 
     With the global `--dry-run`, reports what would change and writes nothing.
     """
@@ -517,6 +526,19 @@ def redirects_apply(
             if not dry:
                 fsops.write_text(root / redirect.path, render_redirect(redirect))
             written += 1
+        # The version selector resolves a moved page by looking its URL up in this file, so
+        # the stubs just reconciled have to be listed there.
+        sitemap = root / version / "sitemap.xml"
+        if sitemap.is_file():
+            text = fsops.read_text(sitemap)
+            synced = sync_version_sitemap(
+                text, base_url=ctx.config.layout.base_url, stubs=resolved_paths
+            )
+            if synced != text:
+                ctx.report.info(f"sync {version}/sitemap.xml ({len(resolved_paths)} stub entries)")
+                if not dry:
+                    fsops.write_text(sitemap, synced)
+                    fsops.write_gzip(sitemap)
 
     latest = latest_in_tree(root)
     if mirror_rule(ctx.config) is not None and latest is not None and (only in (None, latest)):

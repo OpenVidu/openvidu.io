@@ -7,6 +7,7 @@ import pytest
 from ovweb.config import ConfigError, find_site_config, load_site_config, parse_site_config
 from ovweb.model import (
     CrossProductRule,
+    SectionFallbackRule,
     TreeRenameRule,
     UnversionedMirrorRule,
     VersionAliasRule,
@@ -223,6 +224,40 @@ def test_parses_the_other_three_kinds():
     assert isinstance(mirror, UnversionedMirrorRule) and mirror.for_each == "versioned_pages"
 
 
+SECTION_FALLBACK = {
+    "id": "meet-fallback",
+    "kind": "section-fallback",
+    "dir": "{version}/meet",
+    "to": "{version}/docs/call/",
+    "versions": "<3.4",
+}
+
+
+def test_parses_a_section_fallback_rule():
+    (rule,) = expand(SECTION_FALLBACK)
+    assert isinstance(rule, SectionFallbackRule)
+    assert rule.dir == "{version}/meet"
+    assert rule.to == "{version}/docs/call/"
+    assert rule.versions == "<3.4"
+
+
+def test_a_section_fallback_requires_a_versions_gate():
+    with pytest.raises(ConfigError, match="needs 'versions'"):
+        expand({**SECTION_FALLBACK, "versions": None})
+
+
+@pytest.mark.parametrize("key", ["dir", "to"])
+def test_a_section_fallback_path_must_be_version_prefixed(key):
+    with pytest.raises(ConfigError, match=r"must start with '\{version\}/'"):
+        expand({**SECTION_FALLBACK, key: "meet"})
+
+
+@pytest.mark.parametrize("to", ["{version}/meet/", "{version}/meet/docs/"])
+def test_a_section_fallback_target_may_not_sit_inside_the_section(to):
+    with pytest.raises(ConfigError, match="outside 'dir'"):
+        expand({**SECTION_FALLBACK, "to": to})
+
+
 def test_rejects_an_unknown_kind():
     with pytest.raises(ConfigError, match="'kind' must be one of"):
         expand({"id": "x", "kind": "wildcard", "at": "a", "to": "b"})
@@ -320,11 +355,13 @@ def test_the_unversioned_kinds_take_no_version_gate(kind):
         expand(rule)
 
 
-def test_the_real_config_declares_the_four_expansions(config):
+def test_the_real_config_declares_the_expansions(config):
     ids = [rule.id for rule in config.expand_rules]
     assert ids == [
         "removed-provider-index",
         "merged-single-node-upgrade",
+        "split-single-node-upgrade",
+        "meet-was-openvidu-call",
         "legacy-patch-folders",
         "unversioned-pages",
     ]

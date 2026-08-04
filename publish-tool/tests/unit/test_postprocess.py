@@ -9,13 +9,14 @@ from __future__ import annotations
 import gzip
 import json
 import posixpath
+import re
 from pathlib import Path
 
 import pytest
 
 from ovweb.pipeline.postprocess import PostprocessError, postprocess
 from ovweb.plan import build_plan
-from ovweb.redirects import RedirectError, resolve_file_redirects
+from ovweb.redirects import RedirectError, is_generated_redirect, resolve_file_redirects
 from ovweb.releases import ARTICLE_MARKER, TOC_MARKER
 from ovweb.report import Reporter
 
@@ -382,6 +383,24 @@ def test_prunes_the_per_version_sitemap(latest_tree, config, report):
     # The .gz is regenerated from the pruned content, not left stale.
     gz = (latest_tree / VERSION / "sitemap.xml.gz").read_bytes()
     assert gzip.decompress(gz).decode() == sitemap
+
+
+def test_lists_the_version_stubs_in_the_per_version_sitemap(latest_tree, config, report):
+    """The version selector resolves a moved page only if its stub is an entry in this file."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    sitemap = (latest_tree / VERSION / "sitemap.xml").read_text()
+    # The version root is a generated redirect after promotion, so it is listed as a stub.
+    assert "<!-- ovweb:stub -->" in sitemap
+    assert f"<loc>https://openvidu.io/{VERSION}/</loc>" in sitemap
+    # Every marked entry names a generated redirect on disk.
+    for urlpath in re.findall(
+        r"<!-- ovweb:stub -->\s*<loc>https://openvidu.io/([^<]+)</loc>", sitemap
+    ):
+        served = latest_tree / (urlpath + "index.html" if urlpath.endswith("/") else urlpath)
+        assert is_generated_redirect(served), urlpath
+    # The crawler-facing root sitemap gained none of them.
+    assert "ovweb:stub" not in (latest_tree / "sitemap.xml").read_text()
 
 
 def test_gzips_the_root_sitemap_from_its_final_content(latest_tree, config, report):

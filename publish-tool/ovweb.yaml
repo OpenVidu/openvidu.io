@@ -337,6 +337,29 @@ redirects:
         edition: [single-node, single-node-pro]
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
+    # Inverse of merged-single-node-upgrade, for the version selector: the merged upgrade page
+    # only exists from 3.8 on, so in older versions its URL answers with the edition index,
+    # which links the per-provider upgrade guides.
+    - id: split-single-node-upgrade
+      kind: cross-product
+      at: "{version}/docs/self-hosting/{edition}/upgrade/index.html"
+      to: "../"
+      canonical: "{site_url}/latest/docs/self-hosting/{edition}/upgrade/"
+      body: "Redirecting to the per-provider upgrade guides…"
+      versions: "<3.8"
+      values:
+        edition: [single-node, single-node-pro]
+
+    # OpenVidu Meet arrived in 3.4; the versions before it documented OpenVidu Call. Every URL
+    # the meet section answers in any newer version redirects to the Call docs here, so the
+    # version selector lands a reader on the predecessor instead of the version root.
+    - id: meet-was-openvidu-call
+      kind: section-fallback
+      dir: "{version}/meet"
+      to: "{version}/docs/openvidu-call/"
+      body: "Redirecting to the OpenVidu Call documentation…"
+      versions: "<3.4"
+
     # Documentation versions used to be published per patch release ("/3.4.1/...",
     # "/3.0.0-beta2/...") and are now grouped by minor ("/3.4/..."). Google still holds the
     # per-patch URLs, so each retired folder is rebuilt as a full mirror of its minor: one

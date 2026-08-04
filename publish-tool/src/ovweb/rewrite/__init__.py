@@ -24,7 +24,7 @@ from .nonversioned import (
     rewrite_non_versioned_file,
 )
 from .search_index import promote_search_index, rewrite_search_index
-from .sitemap import promote_root_sitemap, prune_version_sitemap
+from .sitemap import promote_root_sitemap, prune_version_sitemap, sync_version_sitemap
 from .versioned import rewrite_versioned_file
 
 __all__ = [
@@ -40,4 +40,5 @@ __all__ = [
     "rewrite_search_index",
     "rewrite_versioned_file",
     "rewrite_versioned_markdown",
+    "sync_version_sitemap",
 ]

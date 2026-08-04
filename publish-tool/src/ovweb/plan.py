@@ -77,6 +77,13 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "Drop the root-served pages from this version's sitemap",
         "the version selector fetches it to keep a reader on the same page across a switch",
     ),
+    (
+        "sync-version-sitemap",
+        "always",
+        "List the generated redirects in the version sitemap",
+        "so the version selector resolves a moved page through its stub instead of falling "
+        "back to the version root",
+    ),
     ("sync-releases", "always", "Splice the newest release notes across versions", ""),
     (
         "commit",

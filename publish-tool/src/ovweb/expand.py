@@ -24,10 +24,12 @@ from itertools import product
 from pathlib import Path
 
 from . import fsops
+from .discovery import version_folders
 from .model import (
     CrossProductRule,
     ExpandFields,
     ResolvedRedirect,
+    SectionFallbackRule,
     SiteConfig,
     TreeRenameRule,
     UnversionedMirrorRule,
@@ -193,15 +195,28 @@ def _page_fields(fields: ExpandFields, config: SiteConfig) -> dict:
 
 
 def expand_for_version(
-    config: SiteConfig, version: str, index: TreeIndex
+    config: SiteConfig,
+    version: str,
+    index: TreeIndex,
+    *,
+    fallback_sources: Mapping[str, Iterable[str]] | None = None,
 ) -> tuple[ResolvedRedirect, ...]:
-    """Every stub the in-version expansion kinds produce for `version` against `index`."""
+    """Every stub the in-version expansion kinds produce for `version` against `index`.
+
+    `fallback_sources` carries the section-fallback rules' donor URLs, keyed by rule id — see
+    :func:`section_sources`, which enumerates them from the tree.
+    """
+    sources = fallback_sources or {}
     resolved: list[ResolvedRedirect] = []
     for rule in config.expand_rules:
         if isinstance(rule, CrossProductRule):
             resolved.extend(_cross_product(rule, version, index, config))
         elif isinstance(rule, TreeRenameRule):
             resolved.extend(_tree_rename(rule, version, index, config))
+        elif isinstance(rule, SectionFallbackRule):
+            resolved.extend(
+                _section_fallback(rule, version, index, config, sources.get(rule.id, ()))
+            )
     return tuple(resolved)
 
 
@@ -284,6 +299,68 @@ def _tree_rename(
             )
         )
     return resolved
+
+
+def _section_fallback(
+    rule: SectionFallbackRule,
+    version: str,
+    index: TreeIndex,
+    config: SiteConfig,
+    sources: Iterable[str],
+) -> list[ResolvedRedirect]:
+    if not _applies(rule, version):
+        return []
+
+    mapping = {"version": version}
+    dir_root = _fill(rule.dir, mapping)
+    raw_target = f"/{_fill(rule.to, mapping)}"
+    fields = _page_fields(rule.fields, config)
+
+    resolved = []
+    for source in sorted(sources):
+        at = f"{dir_root}/{source}"
+        outcome = _place(index, at, raw_target)
+        if outcome is None:
+            continue
+        urlpath, fragment = outcome
+        resolved.append(
+            ResolvedRedirect(
+                rule_id=rule.id,
+                path=at,
+                to=_relative_target(at, urlpath, fragment),
+                # Version-pinned: the target has no counterpart under `latest` — that absence
+                # is why the rule exists.
+                canonical=f"{config.layout.base_url}/{urlpath}",
+                relative=True,
+                **fields,
+            )
+        )
+    return resolved
+
+
+def section_sources(tree: Path, config: SiteConfig, version: str) -> dict[str, frozenset[str]]:
+    """Each section-fallback rule's donor URLs for `version`: dir-relative page paths.
+
+    Donors are the version folders outside the rule's gate — the ones that have the section —
+    and only their real pages donate: a stub is a page no reader can be on, so it needs no
+    fallback.
+    """
+    out: dict[str, frozenset[str]] = {}
+    for rule in config.expand_rules:
+        if not isinstance(rule, SectionFallbackRule) or not _applies(rule, version):
+            continue
+        paths: set[str] = set()
+        for donor in version_folders(tree):
+            if donor == version or _applies(rule, donor):
+                continue
+            section = _fill(rule.dir, {"version": donor})
+            donor_index = scan_tree(tree, (section,))
+            paths.update(
+                page[len(section) + 1 :]
+                for page in donor_index.pages - set(donor_index.stub_targets)
+            )
+        out[rule.id] = frozenset(paths)
+    return out
 
 
 def _place(index: TreeIndex, at: str, raw_target: str) -> tuple[str, str] | None:
@@ -413,7 +490,9 @@ def version_redirects(tree: Path, config: SiteConfig, version: str) -> tuple[Res
     """
     files = resolve_file_redirects(config, version)
     index = with_stubs(scan_tree(tree, (version,)), files)
-    expanded = expand_for_version(config, version, index)
+    expanded = expand_for_version(
+        config, version, index, fallback_sources=section_sources(tree, config, version)
+    )
 
     owners: dict[str, str] = {}
     for redirect in (*files, *expanded):

@@ -244,7 +244,7 @@ filters that make a bulk expansion safe to materialise as files:
 - **Never chain.** A target that is itself a generated redirect is followed to its final
   destination, so every stub answers in one hop.
 
-Four kinds ship:
+Five kinds ship:
 
 **`kind: cross-product`** — many single-page moves that differ only by path segments. `at`, `to`,
 `canonical` and `body` may use `{version}` and any `values` key; one candidate per combination:
@@ -275,6 +275,23 @@ not a path substitution:
   from: "{version}/docs/self-hosting"
   to: "{version}/docs/deployment"
   versions: ">=3.9"
+```
+
+**`kind: section-fallback`** — a section absent from some versions: every URL it answers in the
+versions that have it redirects to a single page in the versions that do not. Sources are
+enumerated from the versions **outside** the `versions` gate (which is required — it is what
+separates the versions lacking the section from the ones donating its URLs), so a page added to
+the section in any release gets its fallback everywhere. This exists for the version selector:
+a reader on a `/meet/…` page picking 3.2 lands on the Call docs instead of the version root.
+Targets and canonicals are version-pinned — the fallback page has no counterpart under
+`latest`, which is the whole reason the rule exists:
+
+```yaml
+- id: meet-was-openvidu-call
+  kind: section-fallback
+  dir: "{version}/meet"
+  to: "{version}/docs/openvidu-call/"
+  versions: "<3.4"
 ```
 
 **`kind: version-alias`** — a retired version folder rebuilt as a full mirror of its minor.
@@ -335,9 +352,10 @@ ovweb redirects apply --tree T  # reconcile EVERY generated redirect in a tree w
 ```
 
 `redirects apply` is the maintenance entry point: it writes the `files` and expansion stubs of
-every version folder (deleting stubs no rule produces any more), rebuilds the unversioned mirror
-and the alias folders, and is how a rule reaches versions that are not being republished. With
-the global `--dry-run` it reports what would change and writes nothing.
+every version folder (deleting stubs no rule produces any more), lists the stubs in each
+version's sitemap for the version selector, rebuilds the unversioned mirror and the alias
+folders, and is how a rule reaches versions that are not being republished. With the global
+`--dry-run` it reports what would change and writes nothing.
 
 ---
 
@@ -407,6 +425,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `mirror-unversioned`   | latest | Delete `/docs/` and `/meet/` and rebuild them as one redirect page per page of the newest version.                     |
 | `alias-versions`       | always | Rebuild the legacy patch-version folders that alias the published minor as mirrors of its tree.                        |
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see below. |
+| `sync-version-sitemap` | always | List the version's generated redirects in that same sitemap, so the selector resolves a moved page through its stub — see below. |
 | `sync-releases`        | always | Splice the newest release notes across versions.                                                                       |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
@@ -575,17 +594,27 @@ There are two, and only one of them is for search engines.
 
 | Sitemap | Read by | Contains |
 | --- | --- | --- |
-| `sitemap.xml` | crawlers — `robots.txt` names it, and it is a plain `urlset`, not an index | every URL the site serves, versioned pages as `/latest/…` |
-| `<X.Y>/sitemap.xml` | **the theme's version selector, at runtime** | that version's own pages, plus its version root; *not* the root-served pages |
+| `sitemap.xml` | crawlers — `robots.txt` names it, and it is a plain `urlset`, not an index | every URL the site serves, versioned pages as `/latest/…`; never a redirect stub |
+| `<X.Y>/sitemap.xml` | **the theme's version selector, at runtime** | that version's own pages **and its redirect stubs**, plus its version root; *not* the root-served pages |
 
 The per-version copy is what makes "switch version and keep reading the same page" work. When a
 reader picks another version, Material's `setupVersionSelector` fetches `sitemap.xml` under the
 selected version, strips the current version prefix off the path they are on, and looks the
-remainder up. Found → they land on the same page in the new version. Not found, or the fetch
-failed → they are dropped on the version root, which our generated redirect then sends to the docs
-index.
+remainder up — an **exact-match lookup, nothing else**. Found → they land on that URL in the new
+version, hash and query carried over. Not found, or the fetch failed → they are dropped on the
+version root, which our generated redirect then sends to the docs index.
 
-Two properties of that file are therefore load-bearing, and **both fail silently**:
+That exact-match lookup is why the stubs are listed (`sync-version-sitemap`, and `redirects
+apply` for the versions not being republished): a moved page's old URL is a stub, so listing it
+makes the selector land the reader on the stub, which forwards them in one invisible hop —
+`location.replace`, hash and query preserved. Unlisted, every switch onto a moved page falls
+back to the version root. This is also how the cross-version fallbacks work in both directions:
+a reader on 3.7's `…/aws/upgrade/` picking 3.8 resolves through the merged-upgrade stub, and a
+reader on 3.8's `/meet/…` picking 3.2 resolves through the section-fallback stub onto the Call
+docs. Stub entries carry an `<!-- ovweb:stub -->` marker, which is what lets a later sync drop
+the ones whose stub is gone, and no `<lastmod>` — a redirect has no modification date.
+
+Three properties of that file are therefore load-bearing, and **all fail silently**:
 
 - **The version-root entry must be present.** The selector takes the longest common prefix of
   every URL in the sitemap and requires that prefix to itself be an entry before it resolves
@@ -596,9 +625,10 @@ Two properties of that file are therefore load-bearing, and **both fail silently
   those pages are moved to the root. The selector is shown on root pages too, so a reader on
   `/pricing/` picking 3.6 would be sent to `/3.6/pricing/`, a 404. Pruned, they fall back to the
   version root, which is right: that page has no per-version counterpart.
+- **The generated redirects must be listed** — see above.
 
 Nothing in the built site *links* to this file — the only reference is that `fetch()` in the
-theme's JavaScript, which no link checking or grepping finds. `ovweb verify` asserts all three
+theme's JavaScript, which no link checking or grepping finds. `ovweb verify` asserts all of these
 conditions and [`tests/unit/test_rewrite_sitemap.py`](tests/unit/test_rewrite_sitemap.py) pins
 them.
 
@@ -729,12 +759,13 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
 
 `ovweb verify` asserts the invariants of a published tree: every version folder has a redirect at
 its root with a relative target, no promoted page claims a versioned URL as its own, every version
-folder carries a correctly pruned sitemap, every search location is absolute, nothing served from
-the root pins the version `latest` points at, no versioned export links to a root-served page
-under its version, no export links to another export that does not exist, every `<lastmod>` in the
-root sitemap is a real date that is not in the future, the unversioned mirror and every alias
-folder are exactly the sets their rules generate, no generated redirect points at a page that does
-not exist or at another redirect, and `versions.json` agrees with the folders on disk.
+folder carries a correctly pruned and stub-synced sitemap, every search location is absolute,
+nothing served from the root pins the version `latest` points at, no versioned export links to a
+root-served page under its version, no export links to another export that does not exist, every
+`<lastmod>` in the root sitemap is a real date that is not in the future, the root sitemap lists
+no URL a redirect stub serves, the unversioned mirror and every alias folder are exactly the sets
+their rules generate, no generated redirect points at a page that does not exist or at another
+redirect, and `versions.json` agrees with the folders on disk.
 
 The redirect-target check earns its place: a redirect into a 404 costs the visitor a second hop to
 reach nothing and tells a crawler the content moved somewhere it did not. The chain half matters
@@ -742,12 +773,12 @@ because the expansions collapse chains at generation time, so one surviving to a
 means a `files` rule was pointed at another rule's stub.
 
 The sitemap check is the one worth understanding, because it guards a feature that fails silently.
-It asserts three things about `<X.Y>/sitemap.xml` — that it exists, that it has the version-root
-entry, and that it lists no root-served page — each of which turns the version selector's
-"keep the reader on the same page" behaviour off on its own. `rewrite/sitemap.py` explains why.
-A publish only fixes its own version, so the findings for the others are the to-do list; the fix
-is to publish each version, or to restore the sitemaps from history if they were lost without a
-content change.
+It asserts five things about `<X.Y>/sitemap.xml` — that it exists, that it has the version-root
+entry, that it lists no root-served page, that it lists every generated redirect in the folder,
+and that it lists no URL nothing serves — each of which degrades the version selector's
+"keep the reader on the same page" behaviour on its own. `rewrite/sitemap.py` explains why.
+A publish only fixes its own version, so findings for the others are the to-do list; the fix for
+an unlisted stub is `ovweb redirects apply`, which the finding names.
 
 ---
 

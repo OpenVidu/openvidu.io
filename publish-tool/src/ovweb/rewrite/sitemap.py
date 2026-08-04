@@ -16,12 +16,15 @@ checker or grep will find. Treat it as referenced.
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 
 from ..model import SiteLayout
 
 #: One `<url>…</url>` entry, with the whitespace that separates it from the next one. Captured so
 #: rejoining the kept entries reproduces the original indentation byte for byte.
 URL_ENTRY = re.compile(r"[ \t]*<url>.*?</url>\n?", re.DOTALL)
+
+LOC = re.compile(r"<loc>([^<]+)</loc>")
 
 
 def promote_root_sitemap(text: str, *, version: str, layout: SiteLayout) -> str:
@@ -60,3 +63,43 @@ def prune_version_sitemap(text: str, *, version: str, layout: SiteLayout) -> str
         return "" if any(path in entry for path in dropped) else entry
 
     return URL_ENTRY.sub(keep, text)
+
+
+def stub_loc(base_url: str, stub_path: str) -> str:
+    """The sitemap `<loc>` for a generated redirect: its URL, directory-form for an index.html."""
+    path = stub_path[: -len("index.html")] if stub_path.endswith("index.html") else stub_path
+    return f"{base_url}/{path}"
+
+
+#: Marks an entry this tool added, so a later sync can drop it once its stub is gone. Inside
+#: the `<url>` block, where both the selector's DOM queries and crawlers ignore it.
+STUB_MARK = "<!-- ovweb:stub -->"
+
+
+def sync_version_sitemap(text: str, *, base_url: str, stubs: Iterable[str]) -> str:
+    """List the version's generated redirects so the version selector can resolve moved pages.
+
+    The selector keeps a reader on the page they were reading only if the rebased URL is an
+    entry in this file, so a moved page resolves only through its listed stub — unlisted, every
+    switch onto it drops the reader on the version root.
+
+    Reconciles rather than appends: every marked entry, and every entry naming a current stub,
+    is dropped first and rewritten from `stubs` — the tree-relative `.html` paths of the
+    generated redirects. Stub entries carry no `<lastmod>`: a redirect has no modification date
+    of its own.
+    """
+    locs = {stub_loc(base_url, stub) for stub in stubs}
+
+    def keep(match: re.Match[str]) -> str:
+        entry = match.group(0)
+        if STUB_MARK in entry:
+            return ""
+        found = LOC.search(entry)
+        return "" if found and found.group(1) in locs else entry
+
+    kept = URL_ENTRY.sub(keep, text)
+    entries = "".join(
+        f"    <url>\n         {STUB_MARK}\n         <loc>{loc}</loc>\n    </url>\n"
+        for loc in sorted(locs)
+    )
+    return kept.replace("</urlset>", f"{entries}</urlset>", 1)

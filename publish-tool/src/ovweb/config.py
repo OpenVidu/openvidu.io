@@ -18,6 +18,7 @@ from .model import (
     RedirectDefaults,
     RedirectOverride,
     RedirectRule,
+    SectionFallbackRule,
     SiteConfig,
     SiteLayout,
     TreeRenameRule,
@@ -242,6 +243,7 @@ _EXPAND_COMMON_KEYS = {
 _EXPAND_KIND_KEYS = {
     "cross-product": {"at", "to", "canonical", "values"},
     "tree-rename": {"from", "to"},
+    "section-fallback": {"dir", "to"},
     "version-alias": {"folders"},
     "unversioned-mirror": {"for_each"},
 }
@@ -287,6 +289,8 @@ def _parse_expand_rule(raw: Any, *, source: str, index: int, layout: SiteLayout)
         return _parse_cross_product(raw, where=where, common=gated)
     if kind == "tree-rename":
         return _parse_tree_rename(raw, where=where, common=gated)
+    if kind == "section-fallback":
+        return _parse_section_fallback(raw, where=where, common=gated)
     if kind == "version-alias":
         if raw.get("versions") is not None:
             raise ConfigError(f"{where}: a version-alias names its folders; drop 'versions'")
@@ -363,6 +367,29 @@ def _parse_tree_rename(raw: dict, *, where: str, common: dict) -> TreeRenameRule
     if from_path.startswith(f"{to_path}/") or to_path.startswith(f"{from_path}/"):
         raise ConfigError(f"{where}: 'from' and 'to' must not nest inside each other")
     return TreeRenameRule(from_path=from_path, to_path=to_path, **common)
+
+
+def _parse_section_fallback(raw: dict, *, where: str, common: dict) -> SectionFallbackRule:
+    for key in ("dir", "to"):
+        if not isinstance(raw.get(key), str) or not raw[key]:
+            raise ConfigError(f"{where} needs a non-empty string '{key}'")
+        if not raw[key].startswith("{version}/"):
+            raise ConfigError(f"{where}: '{key}' must start with '{{version}}/', got {raw[key]!r}")
+        unknown = _placeholders(raw[key]) - {"version"}
+        if unknown:
+            raise ConfigError(
+                f"{where}: '{key}' uses undeclared placeholder(s) {', '.join(sorted(unknown))}"
+            )
+    if common["versions"] is None:
+        raise ConfigError(
+            f"{where} needs 'versions' — the versions that lack the section; its URLs are "
+            "enumerated from the versions outside the gate"
+        )
+    directory = raw["dir"].rstrip("/")
+    to = raw["to"]
+    if to.partition("#")[0].rstrip("/") == directory or to.startswith(f"{directory}/"):
+        raise ConfigError(f"{where}: 'to' must point outside 'dir'")
+    return SectionFallbackRule(dir=directory, to=to, **common)
 
 
 def _parse_version_alias(raw: dict, *, where: str, common: dict) -> VersionAliasRule:

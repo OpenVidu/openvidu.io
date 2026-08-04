@@ -21,6 +21,7 @@ LATEST_STEPS = [
     "mirror-unversioned",
     "alias-versions",
     "prune-version-sitemap",
+    "sync-version-sitemap",
     "sync-releases",
     "commit",
 ]
@@ -34,6 +35,7 @@ PAST_STEPS = [
     "install-redirects",
     "alias-versions",
     "prune-version-sitemap",
+    "sync-version-sitemap",
     "sync-releases",
     "commit",
 ]

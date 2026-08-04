@@ -27,7 +27,14 @@ from pathlib import Path
 from .. import fsops
 from ..config import SiteConfig
 from ..discovery import latest_in_tree, versions_in_tree
-from ..expand import alias_redirects, mirror_redirects, mirror_rule, version_redirects, wipe_owned
+from ..expand import (
+    alias_redirects,
+    mirror_redirects,
+    mirror_rule,
+    scan_tree,
+    version_redirects,
+    wipe_owned,
+)
 from ..redirects import is_generated_redirect, render_redirect
 from ..releases import DestinationRegionError, splice_releases
 from ..report import Reporter
@@ -43,6 +50,7 @@ from ..rewrite import (
     rewrite_search_index,
     rewrite_versioned_file,
     rewrite_versioned_markdown,
+    sync_version_sitemap,
 )
 from ..rewrite.markdown import SUFFIX as MARKDOWN
 
@@ -148,6 +156,7 @@ def postprocess(
 
     _alias_versions(tree, version=version, config=config, report=report, result=result)
     _prune_version_sitemap(tree, version=version, config=config, report=report, result=result)
+    _sync_version_sitemap(tree, version=version, config=config, report=report, result=result)
     _sync_releases(tree, version=version, config=config, report=report, result=result)
 
     return result
@@ -482,6 +491,30 @@ def _prune_version_sitemap(
 
     result.counts["prune-version-sitemap"] = changed
     report.result("prune-version-sitemap", files_changed=changed)
+
+
+def _sync_version_sitemap(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """List this version's generated redirects in its sitemap.
+
+    The version selector resolves a reader's page by exact lookup in this file, so a moved
+    page keeps working across a version switch only if its old URL — now a stub — is listed.
+    Runs after the pruning, which this must not disturb, and after every step that writes or
+    removes stubs in the version folder.
+    """
+    report.step("sync-version-sitemap", "List the generated redirects in the version sitemap")
+
+    stubs = scan_tree(tree, (version,)).stub_targets
+    target = tree / version / SITEMAP
+    fsops.rewrite_single(
+        target,
+        lambda text: sync_version_sitemap(text, base_url=config.layout.base_url, stubs=stubs),
+    )
+    fsops.write_gzip(target)
+
+    result.counts["sync-version-sitemap"] = len(stubs)
+    report.result("sync-version-sitemap", listed=len(stubs))
 
 
 def _sync_releases(
