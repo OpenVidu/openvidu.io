@@ -130,9 +130,7 @@ redirects:
 
     - id: platform-getting-started
       description: >
-        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4. Replaces the hand-written
-        JavaScript stub that used to live in docs/docs/getting-started.md, which was
-        indexable, self-canonical and listed in both sitemap.xml and llms.txt.
+        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4.
       at: "{version}/docs/getting-started/index.html"
       to: "../"
       canonical: "{site_url}/latest/docs/"
@@ -144,37 +142,13 @@ redirects:
 
     - id: legacy-docs-index
       description: >
-        /3.0/docs/ … /3.3/docs/ never existed and are hard 404s that the 404 router cannot
-        rescue (they match neither the legacy-patch pattern nor an unversioned path). Point
-        them at the getting started guide, which was that version's documentation index.
+        /3.0/docs/ … /3.3/docs/ never existed and are hard 404s. Point them at
+        the getting started guide, which was that version's documentation index.
       at: "{version}/docs/index.html"
       to: "getting-started/"
       canonical: "{site_url}/latest/docs/"
       body: "Redirecting to the OpenVidu getting started guide…"
       versions: "<3.4"
-
-    # --- Pages that were renamed or restructured without a redirect -----------------------
-    #
-    # These are `files` rather than `patterns` on purpose. A pattern is served by the 404 page,
-    # so the URL keeps answering 404 and Google drops it along with its ranking signal. A
-    # materialised file answers 200 with a zero-delay meta refresh and a canonical, which is
-    # treated as a redirect and passes that signal to the successor page.
-    #
-    # Each rule is gated to the first version that no longer ships the old page, so the versions
-    # that still hold the real page keep serving it. Two things the gate must satisfy, and they
-    # are not always the same release:
-    #
-    #   1. the version that stopped shipping the OLD page, and
-    #   2. the version that first shipped the SUCCESSOR.
-    #
-    # Gate at the later of the two, or give the older band a `when` override pointing at a page
-    # that version really has. `ovweb verify` rejects a redirect whose target does not exist in
-    # the tree, which is what catches getting this wrong.
-    #
-    # Read the gate from the RELEASE a change belongs to, not from the current contents of a
-    # version folder: a folder is evidence of what was published, which is not the same thing.
-    # Unreleased documentation lives on `next`, and a branch taken from the wrong base can carry
-    # it into a published version folder.
 
     - id: renamed-force-single-port
       description: >
@@ -208,8 +182,7 @@ redirects:
     - id: removed-self-hosting-faq
       description: >
         The self-hosting FAQ was removed after 3.4. The how-to guides are the section closest to
-        it in kind — task-shaped answers to specific self-hosting questions — so they get the
-        traffic rather than the deployment-types overview.
+        it in kind — task-shaped answers to specific self-hosting questions.
       at: "{version}/docs/self-hosting/faq/index.html"
       to: "../how-to-guides/"
       canonical: "{site_url}/latest/docs/self-hosting/how-to-guides/"
@@ -283,17 +256,6 @@ redirects:
       body: "Redirecting to OpenVidu Meet recordings…"
       versions: ">=3.8"
 
-    # --- The rest of the same class, found by scanning the version folders ------------------
-    #
-    # The rules above came from a Search Console export, so they cover the dead URLs that still
-    # earn impressions. This group is the complement: every page under `docs/` or `meet/` that a
-    # published version folder holds and the newest does not.
-    #
-    # Not every URL that scan finds gets a rule. A page that was never part of a release should
-    # not have its URL preserved — some reached the site only through a version folder that
-    # briefly served unreleased documentation — and neither should a generated API page for a
-    # class that has been deleted. `tests/unit/test_redirects.py` pins the exclusions.
-
     # OpenVidu Call was the ready-to-use meeting application documented up to 3.3, and OpenVidu
     # Meet replaced it: these two pages disappear in exactly the release that first ships meet/.
     # The release notes link to /3.0/docs/openvidu-call/ on purpose — those are version-pinned by
@@ -347,9 +309,8 @@ redirects:
   expand:
     # Each deployment type used to carry one index page per provider whose whole content was a
     # list of links to that provider's install, admin and upgrade guides; the deployment type's
-    # own index now links straight to the install guide, and so does this rule. Gated at 3.8,
-    # the release that consolidated the self-hosting guides — older versions still publish
-    # these pages for real. ha/on-premises/ is still a real page in 3.8 (it resolves the
+    # own index now links straight to the install guide, and so does this rule.
+    # ha/on-premises/ is still a real page in 3.8 (it resolves the
     # DNS-load-balancing vs network-load-balancer fork), so the never-shadow filter leaves it
     # alone with no exclusion to maintain.
     - id: removed-provider-index
@@ -364,10 +325,7 @@ redirects:
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
     # The six per-provider Single Node upgrade guides of each edition became one page per
-    # edition in 3.8: five of the six only said "redeploy the template with the new version",
-    # and the sixth held the in-place updater procedure that applies to all of them. Elastic
-    # and High Availability keep their per-provider upgrade guides, which hold real
-    # per-provider procedure.
+    # edition in 3.8. Elastic and High Availability keep their per-provider upgrade guides.
     - id: merged-single-node-upgrade
       kind: cross-product
       at: "{version}/docs/self-hosting/{edition}/{provider}/upgrade/index.html"
@@ -404,10 +362,7 @@ redirects:
       body: "Redirecting to the documentation of this OpenVidu version…"
 
     # Every page of the newest version answers at its unversioned URL too:
-    # /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/. These URLs are what a human
-    # types, and what OpenVidu itself publishes — the speech agent's default configuration
-    # carries a comment pointing at
-    # https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider.
+    # /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/.
     # Deleted and rebuilt in full on every latest publish.
     - id: unversioned-pages
       kind: unversioned-mirror
