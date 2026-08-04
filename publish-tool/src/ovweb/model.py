@@ -4,12 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-# Sentinel used to shield author-pinned /X.Y/<versioned page>/ links from the blanket
-# version strip applied to pages that are promoted to the site root. See
-# ovweb.rewrite.nonversioned.
+#: Shields author-pinned /X.Y/<versioned page>/ links from the blanket version strip applied to
+#: pages promoted to the site root. See :mod:`ovweb.rewrite.nonversioned`.
 KEEPVERSION_SENTINEL = "@@KEEPVERSION@@"
 
-# The named location a redirect rule can use instead of a path template.
+#: The named location a redirect rule may use instead of a path template.
 VERSION_ROOT = "version-root"
 
 
@@ -25,20 +24,12 @@ class SiteLayout:
     root_files: tuple[str, ...]
     feeds: tuple[str, ...]
 
-    def versioned_dirs(self, version: str) -> tuple[str, ...]:
-        """`("3.8/docs", "3.8/meet")` — the scope of the versioned-page rewrites."""
-        return tuple(f"{version}/{page}" for page in self.versioned_pages)
-
-    def non_versioned_dirs(self, version: str) -> tuple[str, ...]:
-        """`("3.8/account", "3.8/pricing", ...)` — the scope of the root-page rewrites."""
-        return tuple(f"{version}/{page}" for page in self.non_versioned_pages)
-
     @property
     def files_removed_from_past_version(self) -> tuple[str, ...]:
-        """Root files deleted from a version folder when the root is left untouched.
+        """Root files deleted from a version folder when the site root is left untouched.
 
-        Everything in :attr:`root_files` except ``index.html``, which is not deleted but
-        overwritten by the generated version-root redirect.
+        Everything in :attr:`root_files` except ``index.html``, which is overwritten by the
+        generated version-root redirect rather than deleted.
         """
         return tuple(name for name in self.root_files if name != "index.html")
 
@@ -124,14 +115,10 @@ class ResolvedPattern:
 class MirrorRule:
     """Answer a versioned section's URLs without their version prefix.
 
-    `/docs/self-hosting/` — the URL a human types, and the one our own agent configuration
-    ships in a comment — is not a published page: documentation lives under `/latest/docs/`.
-    The 404 router rescues the visitor, but GitHub serves it with a 404 status, which a crawler
-    acts on before it runs any JavaScript. So the inbound link is thrown away.
-
-    This rule fills the gap with one redirect page per published page of every section named by
-    `for_each`, at the unversioned path. There is no list to maintain: the set is read off the
-    promoted root sitemap, so it is exactly the set of pages the site advertises.
+    One redirect page per published page of every section named by `for_each`, at the
+    unversioned path. Documentation is served under `/latest/docs/`, so `/docs/self-hosting/`
+    would otherwise be handled by the 404 router — which GitHub serves with a 404 status, the
+    thing a crawler acts on before it runs any JavaScript.
     """
 
     for_each: str
@@ -153,7 +140,7 @@ class RedirectDefaults:
 
 @dataclass(frozen=True)
 class SiteConfig:
-    """Everything site.yaml declares."""
+    """Everything ovweb.yaml declares."""
 
     layout: SiteLayout
     defaults: RedirectDefaults

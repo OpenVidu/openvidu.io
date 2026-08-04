@@ -6,8 +6,8 @@ from ovweb.rewrite.sitemap import promote_root_sitemap, prune_version_sitemap
 
 VERSION = "3.8"
 
-# The indentation is the one MkDocs actually emits (4 spaces for <url>, 9 for its children).
-# It is asserted byte for byte, because the parity gate compares the sitemap as bytes.
+# The indentation MkDocs actually emits: 4 spaces for <url>, 9 for its children. Asserted byte for
+# byte, because rejoining the kept entries must not reflow the file.
 SITEMAP = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -82,7 +82,7 @@ def test_pruning_keeps_the_version_root_entry(layout):
 
 
 def test_pruning_preserves_indentation_byte_for_byte(layout):
-    """The parity gate compares this file as bytes, so rejoining must not reflow anything."""
+    """Only the dropped entries may change, so an untouched publish rewrites nothing."""
     pruned = prune_version_sitemap(SITEMAP, version=VERSION, layout=layout)
     assert pruned == (
         '<?xml version="1.0" encoding="UTF-8"?>\n'

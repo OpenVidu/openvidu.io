@@ -1,13 +1,9 @@
 """Drive a full publish: prepare branches, build with mike, post-process, push.
 
-**Nothing reaches the remote until the published tree is correct.** mike's output is only half a
-publish: the version folder it writes still holds the pages that belong at the site root, their
-links resolve nowhere, and there is no redirect at the version root. Pushing at that point would
-put exactly that on the live site.
-
-So every step up to and including the gh-pages commit is local, the push happens once at the end,
-and a failure rolls the local branch back to where it started. The remote is never touched, which
-is why there is nothing to restore from and no backup branch to keep.
+**Nothing reaches the remote until the published tree is correct.** Every step up to and including
+the gh-pages commit is local, the push happens once at the end, and a failure rolls the local
+branch back to where it started — so there is nothing to restore from and no backup branch to
+keep.
 """
 
 from __future__ import annotations
@@ -44,8 +40,8 @@ def publish(
     force: bool = False,
 ) -> None:
     """Publish `plan.version`."""
-    # Under --dry-run these are reported rather than raised: inspecting a plan is exactly the
-    # moment when the full build toolchain may not be installed, or the tree may still be dirty.
+    # Under --dry-run these are reported rather than raised: inspecting a plan is the moment when
+    # the build toolchain may not be installed, or the tree may still be dirty.
     if repo.dry_run:
         if not Mike.is_available():
             report.warn("mike is not installed, so this plan could not actually be run.")
@@ -112,13 +108,10 @@ def publish(
 def _rollback_on_failure(repo: Git, *, branch: str, report: Reporter):
     """Restore `branch` to where it started if the body raises.
 
-    mike commits locally and so do we, so a failure anywhere in the body leaves the local branch
-    carrying a half-finished publish. Resetting it means a retry starts clean instead of stacking
-    a second attempt on top of a broken one — and because nothing was pushed, the live site never
-    saw any of it.
+    mike commits locally and so does the pipeline, so a failure leaves the local branch carrying a
+    half-finished publish; resetting it means a retry starts clean rather than stacking on top.
 
-    `BaseException` rather than `Exception`: a Ctrl-C in the middle of a publish is exactly when
-    a half-written local branch is least wanted.
+    `BaseException` rather than `Exception`, so a Ctrl-C mid-publish rolls back too.
     """
     if repo.dry_run:
         yield
@@ -167,11 +160,10 @@ def _require_clean(repo: Git, *, report: Reporter) -> None:
 def _staged_config(report: Reporter):
     """Copy ovweb.yaml somewhere the branch switching cannot reach.
 
-    The MkDocs hook reads the config through `$OVWEB_SITE_CONFIG`, and the build happens with
-    a different branch checked out than the one this tool was started from. When ovweb runs
-    from an installed wheel the config already lives outside the repository, but an editable
-    install or a `PYTHONPATH` checkout resolves it inside the working tree — where a past
-    version publish would replace it with that branch's stale copy.
+    The MkDocs hook reads the config through `$OVWEB_SITE_CONFIG`, and the build runs with a
+    different branch checked out. An installed wheel keeps the config outside the repository
+    anyway, but an editable install or a `PYTHONPATH` checkout resolves it inside the working
+    tree, where a past-version publish would replace it with that branch's stale copy.
     """
     source = find_site_config()
     directory = Path(mkdtemp(prefix="ovweb-config-"))
@@ -223,10 +215,9 @@ def _finish_branches(
 ) -> None:
     """Push the version branch and, for a latest publish, rebase it onto the source.
 
-    Deliberately after the gh-pages push: these steps record *which source* produced the
-    published site, so they are worthless if the publish failed, and a failure here does not make
-    the published site wrong. Each one reports how to retry rather than aborting with the site
-    already live.
+    After the gh-pages push, because these steps only record *which source* produced the published
+    site: a failure here leaves the site live and correct, so each one reports how to retry rather
+    than aborting.
     """
     if created_branch and plan.push:
         report.step("push-version-branch", f"Push the new branch '{plan.version}'")
@@ -251,9 +242,8 @@ def _finish_branches(
 def _fast_forward_local(repo: Git, branch: str, *, report: Reporter) -> None:
     """Update the local branch from the remote without checking it out.
 
-    The shell did `checkout <branch>; pull; checkout main`, which moved the working tree
-    twice for no reason. A refspec fetch updates the ref in place, and fails rather than
-    merging when the branches have diverged.
+    A refspec fetch updates the ref in place, and fails rather than merging when the branches have
+    diverged.
     """
     try:
         repo.do("fetch", repo.remote, f"{branch}:{branch}")
@@ -329,9 +319,8 @@ def _post_process_gh_pages(
 def _sync_version_branch(repo: Git, *, plan: PublishPlan, report: Reporter) -> None:
     """Rebase the version branch onto main so it carries what was just published.
 
-    Only meaningful when re-publishing the newest version, whose content comes from main.
-    Done in a worktree so the main working tree never moves, and pushed with
-    `--force-with-lease` so a fix somebody else pushed to the branch is not silently dropped.
+    Only meaningful when re-publishing the newest version, whose content comes from main. Done in a
+    worktree so the main working tree never moves.
     """
     report.step("sync-branch", f"Rebase '{plan.version}' onto '{plan.source_branch}'")
     if repo.dry_run:

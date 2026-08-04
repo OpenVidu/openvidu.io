@@ -1,5 +1,3 @@
-
-
 # openvidu-docs
 
 - [Development](#development)
@@ -7,22 +5,17 @@
   - [Branches](#branches)
   - [Adding a new page](#adding-a-new-page)
   - [Adding a new shared snippet](#adding-a-new-shared-snippet)
+  - [Organizing assets](#organizing-assets)
   - [Mkdocs Material tag system](#mkdocs-material-tag-system)
     - [Theme-dependent images/videos](#theme-dependent-imagesvideos)
 - [Versioning](#versioning)
 - [Versioning with GitHub Actions](#versioning-with-github-actions)
-  - [Publishing a new version](#publishing-a-new-version)
-  - [Overwriting the latest version](#overwriting-the-latest-version)
-  - [Overwriting a past version](#overwriting-a-past-version)
 - [Versioning locally](#versioning-locally)
   - [Prerequisites](#prerequisites)
-  - [Publishing a new version](#publishing-a-new-version-1)
-  - [Overwriting the latest version](#overwriting-the-latest-version-1)
-  - [Overwriting a past version](#overwriting-a-past-version-1)
-  - [Understanding the versioning script](#understanding-the-versioning-script)
+  - [Publishing](#publishing)
+  - [Understanding what a publish does](#understanding-what-a-publish-does)
 - [Testing versioning locally](#testing-versioning-locally)
 - [Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_](#sync-changes-between-openviduio-and-livekit-tutorialsopenviduio)
-
 
 ## Development
 
@@ -297,8 +290,8 @@ These configurations get the repository ready for versioning.
 
 Publishing is done by **`ovweb`**, the CLI in [`publish-tool/`](publish-tool/). Its
 [README](publish-tool/README.md) is the authoritative reference: what a publish does step by
-step, how the link rewriting works, how redirects are configured, and how the parity gate proves
-a change to the rewriting logic is safe.
+step, how the link rewriting works, how redirects are configured, and what `ovweb verify` asserts
+about a published tree.
 
 ## Versioning with GitHub Actions
 
@@ -425,5 +418,5 @@ Whenever any changes are made to the tutorials documentation, theses changes mus
 
 To apply changes in the web _livekit-tutorials.openvidu.io_:
 
-- In this repository, push the changes to tutorials documentation to the `main` branch and run GitHub Action to [overwrite the latest version](#overwriting-the-latest-version).
+- In this repository, push the changes to tutorials documentation to the `main` branch and run the [Publish Web action](#versioning-with-github-actions) with command `latest`.
 - In repository [livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs), push the changes to the `main` branch and run action [Publish Web](https://github.com/OpenVidu/livekit-tutorials-docs/actions/workflows/publish-web.yaml) selecting the `main` branch.

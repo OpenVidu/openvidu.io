@@ -13,13 +13,11 @@ description: >
 
 # Recording an embedded-meeting demo with injected camera feeds
 
-This documents how the `blog/crm-meet` post's looping demo video was produced:
-a two-person OpenVidu Meet call embedded in the Lilac CRM, where **both
-participants' cameras are pre-recorded clips**, not real webcams. It also
-records the dead-ends so you don't repeat them.
-
-The end product is a short (~10 s) MP4 that loops: sign in → open an issue →
-click **Join** → a live two-way meeting inside the app.
+Produce a short looping MP4 of a two-person OpenVidu Meet call embedded in an
+app, where **both participants' cameras are pre-recorded clips** rather than
+real webcams. The reference output is the `blog/crm-meet` post's video: sign in
+→ open an issue → click **Join** → a live two-way meeting inside the app, ~10 s,
+looping.
 
 ## The core idea
 
@@ -29,32 +27,33 @@ built from a `<canvas>` you paint video frames onto. Meet publishes it over
 WebRTC as if it were a real camera. Do this once per browser session, one clip
 per "person".
 
-## What did NOT work (avoid these)
+## Do not use these approaches
 
-1. **Feeding a `<video>` element / blob straight into `captureStream()`** —
-   inside the Meet page a `<video src=blob:...>` (or an `http://` src) never
-   left `readyState 0`; the join hung on "Preparing room…". `fetch()` of the
-   same URL succeeded, so it was the media element decode path, not the
-   network. **Fix:** decode frames out-of-band and cycle them on a canvas
-   (below).
-2. **Playwright / headless / headless-shell / snap Chromium** — none could
-   complete the Meet join on this machine; the media pipeline stalls
-   pre-network regardless of sandbox, GPU, WebGL, virtual-background, or wait
-   time. **Fix:** drive the join in the user's **real Chrome** via the
-   `claude-in-chrome` extension. (Headless Playwright is still fine for the
-   static lead-up screenshots — it just can't join a meeting.)
-3. **A backgrounded tab as the second participant** — Chrome throttles/stops
-   compositing hidden tabs, so a canvas `captureStream` in a background tab
-   goes **black**. **Fix:** the second participant must live in its own
-   **visible** window (drag the tab out; small but not minimized/covered).
-4. **Coordinate clicks on the Meet prejoin** — flaky and depend on
-   device-pixel scaling. **Fix:** submit the name form and click Join via
+Each has been tried and fails; use the fix instead.
+
+1. **Do not feed a `<video>` element or blob straight into `captureStream()`.**
+   Inside the Meet page a `<video src=blob:...>` (or an `http://` src) never
+   leaves `readyState 0` and the join hangs on "Preparing room…", while
+   `fetch()` of the same URL succeeds — it is the media element decode path,
+   not the network. **Instead:** decode frames out-of-band and cycle them on a
+   canvas (below).
+2. **Do not drive the join with Playwright, headless Chrome, headless-shell or
+   snap Chromium.** The media pipeline stalls pre-network regardless of sandbox,
+   GPU, WebGL, virtual-background or wait time. **Instead:** drive the join in
+   the user's **real Chrome** via the `claude-in-chrome` extension. Headless
+   Playwright is still the right tool for the static lead-up screenshots.
+3. **Do not leave the second participant in a background tab.** Chrome stops
+   compositing hidden tabs, so its canvas `captureStream` goes **black**.
+   **Instead:** give it its own **visible** window — drag the tab out, small but
+   neither minimized nor covered.
+4. **Do not click the Meet prejoin by coordinates.** It is flaky and depends on
+   device-pixel scaling. **Instead:** submit the name form and click Join via
    in-page JS that pierces shadow DOM (below).
-5. **Rescheduling reuses the same room** — the CRM verifies a cached room with
-   a GET that races the async DELETE. **Fix:** `DELETE` the room, poll until it
-   returns 404, then schedule.
+5. **Do not reschedule into the same room.** The CRM verifies a cached room with
+   a GET that races the async DELETE. **Instead:** `DELETE` the room, poll until
+   it returns 404, then schedule.
 
-## The frame-cycling fake camera (the breakthrough)
+## The frame-cycling fake camera
 
 Extract the clip to JPEGs, load them as `ImageBitmap`s in the page, and paint
 them onto a canvas on a timer. `canvas.captureStream()` on that canvas is a

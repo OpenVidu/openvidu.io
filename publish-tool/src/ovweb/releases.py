@@ -1,27 +1,24 @@
 """Splice the *content* of one built releases page into another version's releases page.
 
-The releases pages (OpenVidu Meet and OpenVidu Platform) list the notes of every release, so
-every documentation version must serve the same, most-recent list. What must NOT travel
-across versions is the rest of the page: header, tabs, navigation, footer, canonical URL,
-asset URLs and Material's runtime config all belong to the version folder they live in.
-Copying the whole built HTML would make an old version's releases page navigate the visitor
-straight out of that version.
+The releases pages list the notes of every release, so every documentation version must serve the
+same, most-recent list. The rest of the page must **not** travel: header, tabs, navigation, footer,
+canonical URL, asset URLs and Material's runtime config all belong to the version folder they live
+in, and copying the whole built HTML would navigate a visitor straight out of the version they
+opened.
 
 So only two regions are spliced:
 
-1. The release notes body: ``<article class="md-content__inner md-typeset">…</article>``.
-   One occurrence per page.
-2. The table of contents:
-   ``<nav class="md-nav md-nav--secondary" aria-label="Table of contents">…</nav>``.
-   Two byte-identical occurrences per page — the right-hand secondary sidebar, and the copy
-   Material embeds under the active primary-navigation item for the mobile drawer. Both are
-   replaced, or the sidebar would keep listing the destination version's own shorter list.
+1. The release notes body, ``<article class="md-content__inner md-typeset">…</article>``: one
+   occurrence per page.
+2. The table of contents,
+   ``<nav class="md-nav md-nav--secondary" aria-label="Table of contents">…</nav>``: two
+   byte-identical occurrences per page, the right-hand sidebar and the copy Material embeds for the
+   mobile drawer. Both are replaced, or the sidebar keeps listing the destination version's own
+   shorter list.
 
-The spliced fragments need no link rewriting: every link inside a release-notes section is
-authored as an absolute, version-pinned URL (a documented convention of these two pages) and
-the table of contents holds only ``#anchor`` links. Both are verified before splicing, so a
-page that breaks the convention is reported instead of being published with links resolving
-against the wrong version folder.
+The fragments need no link rewriting: by convention every link inside a release-notes section is an
+absolute, version-pinned URL, and the table of contents holds only ``#anchor`` links. Both are
+verified before splicing.
 """
 
 from __future__ import annotations
@@ -32,8 +29,8 @@ from dataclasses import dataclass
 ARTICLE_MARKER = '<article class="md-content__inner md-typeset">'
 TOC_MARKER = '<nav class="md-nav md-nav--secondary" aria-label="Table of contents">'
 
-# Any href/src that is not an absolute URL (or a bare "#anchor") resolves against the folder
-# the page lives in, so it would point at the wrong version once the fragment is copied.
+#: Any href/src that is neither an absolute URL nor a bare "#anchor" resolves against the folder the
+#: page lives in, so it would point at the wrong version once the fragment is copied.
 RELOCATABLE_LINK = re.compile(r'(?:href|src)="(?!https?://|mailto:|#)([^"]*)"')
 
 
@@ -44,17 +41,15 @@ class RegionError(Exception):
 class SourceRegionError(RegionError):
     """The problem is in the source page.
 
-    Fatal: the source is the freshly built newest page, so a failure here means the
-    conventions above no longer hold and every copy would be wrong.
+    Fatal: the source is the freshly built newest page, so every copy would be wrong.
     """
 
 
 class DestinationRegionError(RegionError):
     """The problem is in the destination page.
 
-    Recoverable: an old version folder may have been built by a theme version that named
-    these regions differently. The caller warns and leaves that page as built rather than
-    aborting a publish that is already half done.
+    Recoverable: an old version folder may have been built by a theme version that named these
+    regions differently, so the caller warns and leaves that page as built.
     """
 
 
@@ -81,7 +76,7 @@ def splice_releases(source_html: str, destination_html: str) -> SpliceResult:
         raise DestinationRegionError(str(error)) from error
     result = destination_html[:start] + article + destination_html[end:]
 
-    # Every occurrence of the table of contents, wherever the theme placed it.
+    # Every occurrence, wherever the theme placed it.
     replaced = 0
     offset = 0
     while True:
@@ -102,9 +97,9 @@ def splice_releases(source_html: str, destination_html: str) -> SpliceResult:
 def find_region(html: str, marker: str, start: int = 0) -> tuple[int, int]:
     """Return `(start, end)` of the element opened by `marker`, closing tag included.
 
-    The end tag is found by counting nested tags of the same name: the table of contents
-    nests a ``<nav>`` per heading level, so a plain search for the first ``</nav>`` would cut
-    it short.
+    The end tag is found by counting nested tags of the same name: the table of contents nests a
+    ``<nav>`` per heading level, so searching for the first ``</nav>`` would cut it short. Raises
+    :class:`RegionError` when the marker is absent or the element never closes.
     """
     open_at = html.find(marker, start)
     if open_at == -1:

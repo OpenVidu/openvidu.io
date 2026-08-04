@@ -1,14 +1,13 @@
 """Pure link rewriting over the built site.
 
-Every function here takes the text of one built file and returns the rewritten text. This is
-where the behavioural risk of publishing lives — a wrong substitution silently breaks links on
-every page — which is why it is kept free of I/O and covered by tests/unit/test_rewrite_*.py.
+Every function takes the text of one built file and returns the rewritten text. This is where the
+behavioural risk of publishing lives — a wrong substitution silently breaks links on every page —
+so it is kept free of I/O and covered by tests/unit/test_rewrite_*.py.
 
-Within one format a substitution may be applied unconditionally to every in-scope file: none of
-them matches anything it should not, so there is no need to select files first. Across formats it
-cannot: the built tree publishes each page twice, as HTML and as the Markdown export the llmstxt
-plugin writes beside it, and the two need different patterns to express the same rule. `markdown`
-holds that second set, and the pipeline picks between them by suffix.
+Within one format every substitution is safe to apply unconditionally to every in-scope file.
+Across formats it is not: each page is published twice, as HTML and as the Markdown export beside
+it, and the two need different patterns for the same rule. :mod:`ovweb.rewrite.markdown` holds
+that second set, and the pipeline picks between them by suffix.
 """
 
 from __future__ import annotations

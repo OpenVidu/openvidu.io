@@ -1,9 +1,8 @@
 """Load and validate ovweb.yaml into a :class:`~ovweb.model.SiteConfig`.
 
-Pure apart from the single file read in :func:`load_site_config`, and deliberately light on
-imports — only stdlib plus PyYAML. The MkDocs hook (publish-tool/mkdocs_hook.py) goes
-through this module during a site build, where typer and Jinja2 are not necessarily
-installed.
+Pure apart from the single file read in :func:`load_site_config`, and light on imports — only
+stdlib plus PyYAML, because the MkDocs hook goes through this module during a site build, where
+typer and Jinja2 are not necessarily installed.
 """
 
 from __future__ import annotations
@@ -25,10 +24,8 @@ from .model import (
     SiteLayout,
 )
 
-#: Environment variable holding an absolute path to the config to use. `ovweb` sets it when
-#: it invokes mike, so the site build and the post-processing can never disagree about the
-#: layout — even though the build reads the file from the working tree and the
-#: post-processing reads it from the installed package.
+#: Environment variable holding an absolute path to the config to use. `ovweb` sets it when it
+#: invokes mike, so the site build and the post-processing cannot disagree about the layout.
 CONFIG_ENV_VAR = "OVWEB_SITE_CONFIG"
 
 SCHEMA_VERSION = 1
@@ -69,7 +66,7 @@ def find_site_config(explicit: Path | str | None = None) -> Path:
             raise ConfigError(f"{CONFIG_ENV_VAR} points at a missing file: {path}")
         return path
 
-    # Installed package: ovweb.yaml is force-included as ovweb/data/ovweb.yaml.
+    # Installed package: pyproject force-includes ovweb.yaml as ovweb/data/ovweb.yaml.
     candidates.append(Path(__file__).resolve().parent / "data" / "ovweb.yaml")
     # Uninstalled checkout: src/ovweb/config.py -> publish-tool/ovweb.yaml.
     candidates.append(Path(__file__).resolve().parents[2] / "ovweb.yaml")

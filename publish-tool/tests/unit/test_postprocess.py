@@ -14,12 +14,25 @@ from pathlib import Path
 import pytest
 
 from ovweb.pipeline.postprocess import PostprocessError, postprocess
+from ovweb.plan import build_plan
 from ovweb.redirects import MIRROR_RULE_ID, resolve_file_redirects
 from ovweb.releases import ARTICLE_MARKER, TOC_MARKER
 from ovweb.report import Reporter
 
 VERSION = "3.9"
 OLD_VERSION = "3.2"
+
+
+class RecordingReporter(Reporter):
+    """A reporter that remembers the name of every step it was told about."""
+
+    def __init__(self):
+        super().__init__(verbosity=0, color=False)
+        self.steps: list[str] = []
+
+    def step(self, name: str, text: str) -> None:
+        self.steps.append(name)
+        super().step(name, text)
 
 
 def releases_page(notes: str, chrome: str) -> str:
@@ -429,7 +442,7 @@ def test_mirrors_every_advertised_page_at_its_unversioned_url(latest_tree, confi
     assert '<link rel="canonical" href="https://openvidu.io/latest/docs/releases/">' in page
     assert 'content="noindex, follow"' in page
     assert MIRROR_RULE_ID in page
-    # Both sections, and the section roots themselves — the two URLs issue 22 was raised for.
+    # Both sections, and the section roots themselves — the two URLs a human types.
     assert (latest_tree / "docs" / "index.html").is_file()
     assert (latest_tree / "meet" / "index.html").is_file()
 
@@ -572,12 +585,37 @@ def test_only_the_published_version_gets_its_links_rewritten(mixed_tree, config,
     assert f"{VERSION}.0 notes" in untouched
 
 
+# -- the plan matches the work -----------------------------------------------------------
+
+
+@pytest.mark.parametrize("update_latest", [True, False])
+def test_the_planned_steps_are_the_steps_that_run(mixed_tree, config, update_latest):
+    """`--dry-run` prints the plan, so a step the pipeline runs and the plan omits is a lie.
+
+    Compared in order, since the order is behaviour. `commit` is excluded because the pipeline
+    commits from `pipeline/publish.py`, outside the post-processing.
+    """
+    recorder = RecordingReporter()
+    version = VERSION if update_latest else OLD_VERSION
+
+    postprocess(
+        mixed_tree, config=config, version=version, update_latest=update_latest, report=recorder
+    )
+
+    planned = [
+        step.name
+        for step in build_plan(config, version=version, update_latest=update_latest).steps
+        if step.name != "commit"
+    ]
+    assert recorder.steps == planned
+
+
 # -- guards ------------------------------------------------------------------------------
 
 
 def test_refuses_to_run_twice(latest_tree, config, report):
     """A second pass would strip the version out of author-pinned links and fail on the
-    already-moved directories. The shell had no guard for this at all."""
+    already-moved directories."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
     with pytest.raises(PostprocessError, match="already a generated redirect"):

@@ -1,8 +1,7 @@
 """Build the ordered description of what a publish will do.
 
-Pure: :func:`build_plan` decides everything up front, so `--dry-run` can print the exact
-sequence without touching git, mike or the filesystem. The post-processing pipeline walks the
-same step list, which keeps the printed plan honest.
+Pure: :func:`build_plan` decides everything up front, so `--dry-run` prints the exact sequence
+without touching git, mike or the filesystem.
 """
 
 from __future__ import annotations
@@ -11,9 +10,9 @@ from .config import SiteConfig
 from .model import PublishPlan, ResolvedRedirect, Step
 from .redirects import resolve_file_redirects
 
-# The post-processing steps, in execution order. `scope` says
-# whether a step runs always, only when the root pages are refreshed ("latest"), or only when
-# they are left alone ("past").
+#: The post-processing steps, in execution order, as `(name, scope, title, detail)`. `scope` is
+#: `always`, `latest` (only when the root pages are refreshed) or `past` (only when they are
+#: left alone). Kept in step with the pipeline by `tests/unit/test_plan.py`, which runs it.
 POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     ("remove-overrides", "always", "Remove the theme override folder", "<version>/overrides/"),
     (
@@ -55,6 +54,12 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "checked against the tree as finally laid out, not against the MkDocs configuration",
     ),
     ("install-redirects", "always", "Write the generated redirect pages", ""),
+    (
+        "mirror-unversioned",
+        "latest",
+        "Answer the versioned pages' unversioned URLs",
+        "one redirect page per URL in the promoted sitemap; deleted and rebuilt in full",
+    ),
     (
         "prune-version-sitemap",
         "always",

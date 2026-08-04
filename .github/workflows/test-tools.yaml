@@ -2,15 +2,9 @@ name: Test Publishing Tool
 
 # Unit tests and lint for `ovweb` (publish-tool/), the tool that publishes the website.
 #
-# What this does NOT cover is the parity gate — the check that ovweb turns a built tree into
-# the same published tree the shell implementation did. That needs a full `mike` build and is
-# run by hand before a change to the rewriting logic:
-#
-#   pip install "./publish-tool[build,dev]"
-#   LEGACY_REF=<a commit from before the migration> \
-#     publish-tool/tests/parity/run_parity.sh 3.99 latest
-#
-# See publish-tool/README.md, "Testing and parity".
+# What this does NOT cover is the differential build that checks llmstxt_preprocess.py against the
+# plugin's own `autoclean` over the real site: that needs a full MkDocs build and is run by hand
+# after a plugin upgrade or a change to that module. See publish-tool/README.md, "Testing".
 
 on:
   pull_request:

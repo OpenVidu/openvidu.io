@@ -4,7 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from ovweb.config import CONFIG_ENV_VAR, ConfigError, find_site_config, parse_site_config
+from ovweb.config import (
+    CONFIG_ENV_VAR,
+    ConfigError,
+    find_site_config,
+    load_site_config,
+    parse_site_config,
+)
 
 BASE_LAYOUT = {
     "site_url": "https://openvidu.io",
@@ -49,12 +55,19 @@ def test_a_missing_env_var_target_is_an_error(monkeypatch, tmp_path):
         find_site_config()
 
 
+def test_an_explicit_path_that_does_not_exist_is_an_error(tmp_path):
+    with pytest.raises(ConfigError, match="config not found"):
+        load_site_config(tmp_path / "ovweb.yaml")
+
+
+def test_invalid_yaml_is_reported_as_such(tmp_path):
+    path = tmp_path / "ovweb.yaml"
+    path.write_text("schema: 1\nlayout: [unclosed\n", encoding="utf-8")
+    with pytest.raises(ConfigError, match="cannot read"):
+        load_site_config(path)
+
+
 # -- derived helpers ---------------------------------------------------------------------
-
-
-def test_versioned_and_non_versioned_dirs(config):
-    assert config.layout.versioned_dirs("3.8") == ("3.8/docs", "3.8/meet")
-    assert "3.8/pricing" in config.layout.non_versioned_dirs("3.8")
 
 
 def test_index_html_is_not_deleted_from_a_past_version(config):
@@ -75,6 +88,23 @@ def test_base_url_has_no_trailing_slash():
 def test_rejects_an_unknown_schema():
     with pytest.raises(ConfigError, match="unsupported schema"):
         parse_site_config({"schema": 99, "layout": BASE_LAYOUT}, source="<test>")
+
+
+@pytest.mark.parametrize("raw", ["just a string", ["a", "list"], None])
+def test_rejects_a_top_level_that_is_not_a_mapping(raw):
+    with pytest.raises(ConfigError, match="top level must be a mapping"):
+        parse_site_config(raw, source="<test>")
+
+
+def test_rejects_a_missing_schema():
+    with pytest.raises(ConfigError, match="unsupported schema"):
+        parse_site_config({"layout": BASE_LAYOUT}, source="<test>")
+
+
+@pytest.mark.parametrize("section", ["layout", "redirects"])
+def test_rejects_a_section_that_is_not_a_mapping(section):
+    with pytest.raises(ConfigError, match="must be a mapping"):
+        parse_site_config({"schema": 1, "layout": BASE_LAYOUT, section: ["nope"]}, source="<test>")
 
 
 def test_rejects_a_missing_layout_key():
@@ -120,6 +150,49 @@ def test_rejects_an_unknown_rule_key():
         build(redirects={"files": [{"id": "r", "at": "version-root", "to": "a/", "oops": 1}]})
 
 
+def test_rejects_an_unknown_defaults_key():
+    with pytest.raises(ConfigError, match=r"unknown redirects\.defaults keys"):
+        build(redirects={"defaults": {"tittle": "typo"}})
+
+
+@pytest.mark.parametrize("key", ["id", "at", "to"])
+def test_rejects_a_rule_missing_a_required_string(key):
+    rule = {"id": "r", "at": "version-root", "to": "a/"}
+    del rule[key]
+    with pytest.raises(ConfigError, match=f"needs a non-empty string '{key}'"):
+        build(redirects={"files": [rule]})
+
+
+def test_rejects_an_absolute_at_path():
+    with pytest.raises(ConfigError, match="must be relative to the site root"):
+        build(redirects={"files": [{"id": "r", "at": "/x/index.html", "to": "a/"}]})
+
+
+def test_rejects_an_unknown_when_key():
+    with pytest.raises(ConfigError, match="unknown keys"):
+        build(
+            redirects={
+                "files": [
+                    {
+                        "id": "r",
+                        "at": "version-root",
+                        "to": "a/",
+                        "when": [{"versions": "<3.4", "at": "elsewhere"}],
+                    }
+                ]
+            }
+        )
+
+
+def test_rejects_a_when_entry_without_a_version_range():
+    with pytest.raises(ConfigError, match="needs a non-empty 'versions' specifier"):
+        build(
+            redirects={
+                "files": [{"id": "r", "at": "version-root", "to": "a/", "when": [{"to": "b/"}]}]
+            }
+        )
+
+
 def test_rejects_a_for_each_that_names_nothing():
     with pytest.raises(ConfigError, match="for_each must name a layout list"):
         build(
@@ -127,11 +200,24 @@ def test_rejects_a_for_each_that_names_nothing():
         )
 
 
+def test_rejects_duplicate_pattern_ids():
+    """The router emits them in order, so two rules under one id hide each other."""
+    with pytest.raises(ConfigError, match=r"duplicate redirects\.patterns ids"):
+        build(
+            redirects={
+                "patterns": [
+                    {"id": "p", "match": "^/a$", "to": "/1"},
+                    {"id": "p", "match": "^/b$", "to": "/2"},
+                ]
+            }
+        )
+
+
 # -- the unversioned mirror --------------------------------------------------------------
 
 
 def test_the_real_config_mirrors_the_versioned_sections(config):
-    """Both halves of issue 22's fix: /docs/ and /meet/ answer, and nothing else is mirrored."""
+    """Both versioned sections are mirrored, and nothing else is."""
     assert config.mirror is not None
     assert config.mirror.enabled
     assert config.mirror.for_each == "versioned_pages"

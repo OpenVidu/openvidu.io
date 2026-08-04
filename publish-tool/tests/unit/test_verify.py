@@ -97,7 +97,7 @@ def test_a_versioned_export_may_keep_its_own_version_for_versioned_pages(publish
     assert "export-root-page-link" not in findings_by_check(published, config)
 
 
-# -- the checks that predate the exports -------------------------------------------------
+# -- the version folders themselves ------------------------------------------------------
 
 
 def test_reports_a_version_root_that_is_not_a_generated_redirect(published, config):
@@ -106,10 +106,116 @@ def test_reports_a_version_root_that_is_not_a_generated_redirect(published, conf
     assert findings_by_check(published, config)["version-root"] == [f"{VERSION}/index.html"]
 
 
+def test_reports_a_version_folder_missing_from_versions_json(published, config):
+    """It is published but the version selector will not offer it."""
+    (published / "3.5").mkdir()
+
+    assert findings_by_check(published, config)["versions-json"] == ["3.5"]
+
+
+def test_reports_a_version_in_versions_json_with_no_folder(published, config):
+    (published / "versions.json").write_text(
+        json.dumps([{"version": VERSION, "aliases": ["latest"]}, {"version": "3.4"}]),
+        encoding="utf-8",
+    )
+
+    grouped = findings_by_check(published, config)
+    assert grouped["versions-json"] == ["versions.json"]
+
+
+def test_the_folders_stand_in_when_versions_json_is_absent(published, config):
+    """A tree mid-publish has no versions.json yet, and must still be checkable."""
+    (published / "versions.json").unlink()
+
+    assert verify(published, config=config) == []
+
+
+def test_reports_a_versioned_page_linking_to_a_root_file_under_its_version(published, config):
+    """The feeds live at the site root; a version folder keeps no copy, so this is a 404."""
+    (published / VERSION / "docs" / "index.html").write_text(
+        '<link rel="alternate" href="../../feed_rss_created.xml">', encoding="utf-8"
+    )
+
+    grouped = findings_by_check(published, config)
+    assert grouped["versioned-root-file-link"] == [f"{VERSION}/docs/index.html"]
+
+
+def test_reports_a_promoted_page_still_claiming_a_versioned_url(published, config):
+    (published / "pricing" / "index.html").write_text(
+        f'<link rel="canonical" href="https://openvidu.io/{VERSION}/pricing/">', encoding="utf-8"
+    )
+
+    assert findings_by_check(published, config)["root-self-url"] == ["pricing/index.html"]
+
+
+def test_reports_a_relative_location_in_the_root_search_index(published, config):
+    """The root index is served from `/`, so a location relative to it resolves nowhere."""
+    (published / "search" / "search_index.json").write_text(
+        json.dumps({"docs": [{"location": "docs/"}]}, separators=(",", ":")), encoding="utf-8"
+    )
+
+    assert findings_by_check(published, config)["search-index"] == ["search/search_index.json"]
+
+
+def test_reports_a_missing_root_search_index(published, config):
+    (published / "search" / "search_index.json").unlink()
+
+    assert findings_by_check(published, config)["search-index"] == ["search/search_index.json"]
+
+
+# -- the sitemap's <lastmod> --------------------------------------------------------------
+
+
+def lastmod_on_the_pricing_entry(tree, value: str) -> None:
+    """Add a `<lastmod>` to a root page's entry, which the mirror check does not look at."""
+    path = tree / "sitemap.xml"
+    path.write_text(
+        path.read_text().replace(
+            "<loc>https://openvidu.io/pricing/</loc>",
+            f"<loc>https://openvidu.io/pricing/</loc>\n         <lastmod>{value}</lastmod>",
+        ),
+        encoding="utf-8",
+    )
+
+
+def test_reports_a_lastmod_that_is_not_a_date(published, config):
+    lastmod_on_the_pricing_entry(published, "last Tuesday")
+
+    findings = [f for f in verify(published, config=config) if f.check == "sitemap-lastmod"]
+    assert len(findings) == 1
+    assert "not an ISO date" in findings[0].detail
+
+
+def test_reports_a_lastmod_in_the_future(published, config):
+    """A date nothing has happened on yet is a clock or timezone bug, not an edit."""
+    lastmod_on_the_pricing_entry(published, "2999-01-01")
+
+    findings = [f for f in verify(published, config=config) if f.check == "sitemap-lastmod"]
+    assert len(findings) == 1
+    assert "in the future" in findings[0].detail
+
+
+def test_accepts_a_real_lastmod(published, config):
+    lastmod_on_the_pricing_entry(published, "2026-07-22")
+
+    assert verify(published, config=config) == []
+
+
+def test_accepts_every_page_carrying_the_same_lastmod(published, config):
+    """A commit that touches the whole site legitimately dates every page the same day."""
+    path = published / "sitemap.xml"
+    path.write_text(
+        path.read_text().replace("</loc>", "</loc>\n         <lastmod>2026-07-31</lastmod>"),
+        encoding="utf-8",
+    )
+
+    assert verify(published, config=config) == []
+
+
 # -- the version selector ----------------------------------------------------------------
 #
 # Each of these silently turns off "switch version, keep reading the same page" and drops the
-# reader on the version root instead. The middle one is how the feature was lost once already.
+# reader on the version root instead.
 
 
 def test_reports_a_missing_version_sitemap(published, config):
@@ -169,7 +275,7 @@ def test_reports_a_link_to_an_export_that_does_not_exist(published, config):
 
 
 def test_reports_an_unversioned_url_with_no_redirect_page(published, config):
-    """The defect issue 22 was raised for: the URL a human types 404s for a crawler."""
+    """Without a stub, the URL a human types 404s for a crawler."""
     (published / "docs" / "releases" / "index.html").unlink()
 
     assert findings_by_check(published, config)["mirror"] == ["docs/releases/index.html"]

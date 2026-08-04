@@ -109,6 +109,13 @@ def test_path_template_interpolates_the_version():
     assert only(config, "3.8").path == "3.8/docs/x/index.html"
 
 
+def test_an_at_path_without_the_placeholder_is_used_verbatim():
+    """A rule can name one fixed location instead of one per version."""
+    config = build([{"id": "r", "at": "docs/index.html", "to": "latest/docs/", "relative": False}])
+    assert only(config, "3.8").path == "docs/index.html"
+    assert only(config, "3.2").path == "docs/index.html"
+
+
 def test_canonical_interpolates_site_url_and_version():
     config = build(
         [{"id": "r", "at": "version-root", "to": "docs/", "canonical": "{site_url}/{version}/x/"}]
@@ -306,8 +313,8 @@ def test_patterns_keep_config_order(config):
 def test_patterns_produce_the_documented_redirects(config, path, expected):
     """Evaluated with Python's regex engine, which agrees with JavaScript on these patterns.
 
-    `/3.4.1` with no trailing path is the case the single-rule version got wrong: replacing an
-    unmatched group yields "" in JavaScript, so it produced "/3.4" instead of "/3.4/".
+    `/3.4.1` with no trailing path needs its own rule: replacing an unmatched group yields "" in
+    JavaScript, so one rule with an optional group would land on "/3.4" rather than "/3.4/".
     """
     for pattern in resolve_patterns(config):
         compiled = re.compile(pattern.match)
@@ -376,8 +383,7 @@ def test_only_versioned_pages_under_latest_are_mirrored(url):
 
 
 def test_a_url_naming_a_file_is_left_to_the_404_router():
-    """The stub path is the URL plus `index.html`, which is wrong for a file URL. The exported
-    reference-docs pages are the real case, and they are not in the sitemap."""
+    """A stub's path is the URL plus `index.html`, which is wrong for a URL naming a file."""
     assert mirrored("https://openvidu.io/latest/docs/reference/api.html") == {}
 
 
@@ -435,6 +441,32 @@ def test_an_empty_sitemap_produces_no_stubs():
     assert mirrored() == {}
 
 
+def test_a_sitemap_with_no_loc_elements_produces_no_stubs():
+    """A promotion that changed shape must not be read as "the site has no pages"."""
+    assert mirror_redirects("<urlset>\n</urlset>\n", config=build(mirror=MIRROR)) == ()
+
+
+def test_the_url_is_read_through_the_whitespace_mkdocs_indents_it_with():
+    """MkDocs' template puts the URL on its own line, indented, inside the element."""
+    text = (
+        "<urlset><url>\n         <loc>\n"
+        "  https://openvidu.io/latest/docs/\n  </loc>\n</url></urlset>"
+    )
+    resolved = mirror_redirects(text, config=build(mirror=MIRROR))
+    assert [redirect.path for redirect in resolved] == ["docs/index.html"]
+
+
+def test_a_deeply_nested_page_keeps_its_whole_path():
+    assert mirrored("https://openvidu.io/latest/meet/embedded/tutorials/webhooks/") == {
+        "meet/embedded/tutorials/webhooks/index.html": "/latest/meet/embedded/tutorials/webhooks/"
+    }
+
+
+def test_a_section_whose_name_is_a_prefix_of_another_is_not_confused():
+    """`docs` and a hypothetical `docs-legacy` share a prefix; the boundary is the slash."""
+    assert mirrored("https://openvidu.io/latest/docsomething/") == {}
+
+
 # -- version bands whose target arrived later --------------------------------------------
 
 
@@ -447,14 +479,11 @@ MEET_REORGANISATION_RULES = (
 
 
 def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
-    """The pages these rules replace are still published in a correct 3.7, so a stub installed
-    there would overwrite a real page.
+    """The reorganisation shipped in 3.8, and 3.7 still publishes the pages these rules replace,
+    so a stub installed there would overwrite a real page.
 
-    For six weeks the 3.7 folder appeared not to have them, which is what made these gates look
-    like 3.7 in the first place. One blog branch had been cut from `next` rather than `main`, so
-    merging it (2481b7146) brought 14 of 3.8's documentation commits into `main`, and the next
-    3.7 publish served them. The gate describes the release a change belongs to; the folder is
-    only evidence of what was published.
+    A rule's gate follows the release a change belongs to. What a version folder currently holds is
+    evidence of what was published, which is not the same thing.
     """
     for version in ("3.6", "3.7"):
         installed = {item.rule_id for item in resolve_file_redirects(config, version)}
@@ -465,23 +494,21 @@ def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
 
 
 def test_both_oracle_tutorial_rules_start_at_3_7(config):
-    """The counter-examples, and why the gates were checked one by one rather than as a batch.
+    """Neither Oracle install tutorial comes back when 3.7 is rebuilt, so both are redirected.
 
-    Neither page comes back when 3.7 is rebuilt. The PRO one was removed before 3.7 shipped
-    (2026-05-18) and its folder was correctly rebuilt without it. The community one was removed
-    as *outdated* during 3.7's life — the deletion only reached `main` with the 3.8 batch, but
-    resurrecting instructions the team had already found wrong is not what fixing 3.7 means, so
-    the rebuild keeps it deleted and this rule covers the URL.
+    The PRO one was removed before 3.7 shipped. The community one was removed *during* 3.7's life
+    as outdated, and a rebuild keeps it deleted rather than resurrecting instructions the team had
+    already found wrong — which is why the two gates were decided one at a time.
     """
     installed = {item.rule_id for item in resolve_file_redirects(config, "3.7")}
     assert "removed-oracle-install-tutorial-pro" in installed
     assert "removed-oracle-install-tutorial-community" in installed
 
 
-#: Dead URLs left without a rule on purpose. The first five were never part of a release —
-#: they reached the site only through the 3.7 folder while it served mis-branched 3.8
-#: documentation, and 3.8 renamed them before shipping — so a redirect would preserve URLs that
-#: should not have existed. The last is a generated API page for a deleted class, one release long.
+#: Dead URLs left without a rule on purpose. The first five were never part of a release: they
+#: reached the site only through a version folder that briefly served unreleased documentation, and
+#: were renamed before shipping, so redirecting them would preserve URLs that should not have
+#: existed. The last is a generated API page for a class that was deleted.
 DELIBERATELY_UNCOVERED = {
     "meet/embedded/tutorials/external-members/",
     "meet/embedded/tutorials/registered-members/",
@@ -493,12 +520,14 @@ DELIBERATELY_UNCOVERED = {
 
 
 def test_every_dead_page_of_every_version_has_a_rule(config):
-    """The rules were derived by scanning the version folders for pages 3.8 no longer has, so the
-    newest publish must cover all of them bar the exclusions above. Restated here as the set the
-    scan produced: a rule quietly dropped from ovweb.yaml would otherwise reinstate a 404 that
-    used to rank, and an exclusion quietly gaining a rule would revive a URL we chose to retire."""
+    """Every URL a published version folder holds and the newest does not needs a rule, or the
+    exclusion above.
+
+    Fails both ways: a rule quietly dropped from ovweb.yaml reinstates a 404 that used to rank, and
+    an exclusion quietly gaining one revives a URL that was retired on purpose.
+    """
     dead = {
-        # Found by a Search Console export (PR #108).
+        # Found by checking a Search Console export against the live site.
         "docs/self-hosting/faq/",
         "docs/self-hosting/how-to-guides/force-443-tls/",
         "docs/self-hosting/single-node/oracle/install-tutorial/",
@@ -512,7 +541,7 @@ def test_every_dead_page_of_every_version_has_a_rule(config):
         "meet/features/recordings/",
         "meet/features/rooms-and-meetings/",
         "meet/features/users-and-permissions/",
-        # Found by scanning every version folder for what 3.8 does not serve.
+        # Found by scanning every version folder for what the newest does not serve.
         "docs/openvidu-call/",
         "docs/openvidu-call/docs/",
         "docs/tutorials/advanced-features/recording-advanced/",

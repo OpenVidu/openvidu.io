@@ -1,22 +1,17 @@
-"""MkDocs hook: exposes ovweb.yaml to the templates, and makes llms.txt and the sitemap true.
+"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Three jobs:
 
-Wired up through `hooks:` in mkdocs.yml. Three jobs, all of them about keeping one fact in one
-place:
-
-* `on_config` publishes the layout and the redirect patterns on `config.extra.ovweb`, so the
-  404 router (docs/overrides/404.html) compiles them from the same configuration ovweb
-  publishes with instead of hardcoding a list that has to be kept in sync by hand.
-* `on_env` fixes up what a page cannot say about itself: every page's `update_date`, so
-  `sitemap.xml` carries a real per-page `<lastmod>` instead of the build date on every URL, and
-  the title and description of the blog views the plugin generates, which have no source file to
-  carry frontmatter.
+* `on_config` publishes the layout and the redirect patterns on `config.extra.ovweb`, so the 404
+  router (docs/overrides/404.html) compiles them from the same configuration ovweb publishes with.
+* `on_env` sets every page's `update_date`, so `sitemap.xml` carries a real per-page `<lastmod>`
+  rather than the build date on every URL, and gives the blog views the plugin generates a title
+  and description, which they have no source file to carry.
 * `on_page_content` gives the `llmstxt` plugin each page's own `title` and `description`
   frontmatter, so its llms.txt entry is the name and the sentence written on the page.
 
-The import shim below keeps a plain `mkdocs serve` working in a checkout where the package is
-not installed — including inside the Docker images, which mount the repository rather than
-installing anything. It does not duplicate any logic: the config loader, the pattern expansion
-and the source-date rules have exactly one implementation, in `ovweb`.
+The import shim keeps a plain `mkdocs serve` working in a checkout where the package is not
+installed, including inside the Docker images, which mount the repository rather than installing
+anything. No logic is duplicated: the config loader, the pattern expansion and the source-date
+rules have one implementation, in `ovweb`.
 """
 
 from __future__ import annotations
@@ -37,14 +32,13 @@ from ovweb.gitrepo import Git, GitError  # noqa: E402
 from ovweb.redirects import resolve_patterns  # noqa: E402
 from ovweb.sources import newest_dates, parse_git_log  # noqa: E402
 
-#: Anything the sitemap dates can be read out of lives under one of these, relative to the
-#: repository root: the pages themselves, and the snippets they include.
+#: Everything the sitemap dates are read out of, relative to the repository root: the pages
+#: themselves, and the snippets they include.
 _DATED_TREES = ("docs", "shared")
 
 #: Descriptions for the blog views the plugin generates, which have no source file to carry
-#: frontmatter and so fell back to `site_description` — the same defect as issue 7-b, on the pages
-#: 7-b did not enumerate. Written as templates rather than a hard-coded list because a post a week
-#: means a new archive month every month and a new category whenever one is introduced.
+#: frontmatter and would otherwise fall back to `site_description`. Templates rather than a
+#: hard-coded list, because a post a week means a new archive month every month.
 _VIEW_DESCRIPTIONS = {
     "archive": "Every OpenVidu Blog article published in {name}{page}: {posts}, on {topic}.",
     "category": "Every OpenVidu Blog article filed under {name}{page}: {posts}, on {topic}.",
@@ -57,12 +51,7 @@ _log = logging.getLogger(f"mkdocs.hooks.{Path(__file__).stem}")
 
 
 def on_config(config, **kwargs):
-    """Publish the layout and the 404 redirect patterns on `config.extra.ovweb`.
-
-    ovweb sets `$OVWEB_SITE_CONFIG` when it invokes mike, so a publish build and the
-    post-processing that follows it always read the same file — which matters for a past
-    version, whose branch carries its own stale copy of ovweb.yaml.
-    """
+    """Publish the layout and the 404 redirect patterns on `config.extra.ovweb`."""
     site_config = load_site_config()
     config["extra"]["ovweb"] = {
         "versioned_pages": list(site_config.layout.versioned_pages),
@@ -78,15 +67,13 @@ def on_config(config, **kwargs):
 def _source_dates(root: Path) -> dict[str, str] | None:
     """`{repository-relative path: date of its last commit}`, or None when git cannot answer.
 
-    Returning None means "leave MkDocs' build date alone". Three ordinary situations reach it,
-    and none of them may fail the build: a shallow clone (`validate-web.yaml` checks out at the
-    default depth, where `git log` succeeds but reports the fetched commit for every path — wrong
-    data, which is worse than no data), no git binary, and git refusing a repository whose files
-    belong to another user, which is what happens inside the Docker images because they mount the
-    working copy from the host.
+    None means "leave MkDocs' build date alone". Three ordinary situations reach it, none of which
+    may fail the build: a shallow clone (`validate-web.yaml` checks out at the default depth, where
+    `git log` succeeds but reports the fetched commit for every path), no git binary, and git
+    refusing a repository whose files belong to another user, which is what the Docker images do
+    when they mount the working copy from the host.
 
-    Logged at INFO on purpose: `mkdocs build --strict` fails on a WARNING, so warning here would
-    break every PR's validation build.
+    Logged at INFO: `mkdocs build --strict` fails on a WARNING, which would break every PR.
     """
     git = Git(root)
     try:
@@ -105,8 +92,8 @@ def _blog_url_shapes(config) -> dict[str, str] | None:
     """How the blog plugin is configured to build its view URLs, or None if it is not enabled.
 
     Read from the plugin's **public** config rather than by importing its `Archive`/`Category`
-    classes, for two reasons: an internal import that moves breaks the whole build, and these
-    options are what actually decide the paths, so honouring them keeps working if they change.
+    classes: these options are what decide the paths, so honouring them keeps working if the
+    formats change, and no internal import can move underneath the build.
     """
     for plugin in config.get("plugins", {}).values():
         options = getattr(plugin, "config", None)
@@ -129,11 +116,11 @@ def _literal_prefix(url_format: str) -> str:
 
 
 def _view_metadata(page, src_uri: str, shapes: dict[str, str]) -> dict[str, str]:
-    """Title and description for one generated blog view, derived from what the view *is*.
+    """Title and description for one generated blog view, derived from what the view is.
 
-    The view kind comes from its path, the name from its own heading ("July 2026", "AI") and the
-    count from the posts it lists, so a month or a category that does not exist yet is described
-    correctly the first time it appears.
+    The kind comes from its path, the name from its own heading ("July 2026", "AI") and the count
+    from the posts it lists, so a month or category that does not exist yet is described correctly
+    the first time it appears. Returns `{}` for a view shape this hook does not recognise.
     """
     page_pattern = re.compile(
         re.escape(shapes["pagination"]).replace(r"\{page\}", r"(\d+)") + r"(?:/index)?\.md$"
@@ -163,37 +150,32 @@ def _view_metadata(page, src_uri: str, shapes: dict[str, str]) -> dict[str, str]
             topic=_VIEW_TOPIC,
         )
     if paginated:
-        # Otherwise `/blog/page/2/` is a byte-identical <title> to `/blog/`: paginated views are
-        # copies of the view they page, and the plugin has no option to differentiate them.
+        # A paginated view is a copy of the view it pages and the plugin has no option to
+        # differentiate them, so without this `/blog/page/2/` repeats `/blog/`'s title exactly.
         base = (page.meta or {}).get("title") or str(page.title)
         metadata["title"] = f"{base} — page {number}"
     return metadata
 
 
 def on_env(env, config, files, **kwargs):
-    """Fix up what a page cannot say about itself: its `update_date`, and a generated view's meta.
+    """Set each page's `update_date`, and describe the blog views the plugin generates.
 
-    **`update_date`** is what `sitemap.xml` publishes as `<lastmod>`, and MkDocs sets it to the
-    build date for every page — so the sitemap asserted that all 261 URLs changed on every publish.
-    A date computed from the page's sources is both true and useful: it lets a crawler tell an
-    edited page from an untouched one, and it stops the file churning on publishes that changed
-    nothing.
+    **`update_date`** is what `sitemap.xml` publishes as `<lastmod>`. MkDocs sets it to the build
+    date for every page, which asserts that the whole site changed on every publish; a date
+    computed from the page's sources lets a crawler tell an edited page from an untouched one.
 
-    **A generated blog view** (archive, category, or a paginated copy of any view) has no source
-    file, so it carried no frontmatter: all twelve fell back to `site_description`, and
-    `/blog/page/2/` was the site's only duplicate `<title>`, byte-identical to `/blog/`. Both get a
-    description derived from the view itself, and a paginated copy also gets the page number in its
-    title. They still get **no** `<lastmod>`, because there is no source file to date and a
-    made-up one would be the original problem in miniature; `update_date = ""` is falsy and the
-    sitemap template omits the element, which the spec allows per URL.
+    **A generated blog view** — archive, category, or a paginated copy of either — has no source
+    file and so no frontmatter, leaving it with `site_description` and, for a paginated copy, a
+    `<title>` byte-identical to the view it pages. Both are derived from the view itself. They get
+    **no** `<lastmod>` at all, because there is no source file to date: `update_date = ""` is falsy,
+    so the sitemap template omits the element, which the spec allows per URL.
 
-    `on_env` is the only hook that can set `update_date`. MkDocs renders the theme's static
-    templates — `sitemap.xml` among them — *before* it renders the pages, so `on_page_content` and
-    `on_page_context` both run too late. Here every `file.page` already exists, and the work
-    happens once rather than once per page.
+    `on_env` is the only hook that can set `update_date`: MkDocs renders the theme's static
+    templates — `sitemap.xml` among them — *before* the pages, so `on_page_content` and
+    `on_page_context` both run too late. Here every `file.page` exists and the work happens once.
     """
-    # `docs/` and `shared/` are named relative to the project root, which is also the repository
-    # root here, and is what pymdownx.snippets resolves an include against.
+    # `_DATED_TREES` is relative to the project root, which is also the repository root here and
+    # what pymdownx.snippets resolves an include against.
     docs_dir = Path(config["docs_dir"]).resolve()
     root = docs_dir.parent
     shapes = _blog_url_shapes(config)
@@ -258,28 +240,23 @@ def _required(meta, key: str, src_uri: str) -> str:
 def on_page_content(html, page, config, **kwargs):
     """Use the page's own `title` and `description` frontmatter for its llms.txt entry.
 
-    Both halves fix the same class of problem — llms.txt taking its text from somewhere other
-    than the page:
+    Both halves stop llms.txt taking its text from somewhere other than the page:
 
-    * **The description** was the value written beside the path in mkdocs.yml, so the same
-      sentence was maintained twice, and a glob entry could only carry *one* description for
-      every page it matched — the 97 deployment guides all claimed to be the same page.
-    * **The title** is `page.title`, which MkDocs resolves as *the nav label first*, falling back
-      to the frontmatter `title` and then the first H1. Since 183 of this site's nav entries are
-      labelled (`- Install: docs/.../install.md`), 180 entries were rendering as `[Install]`,
-      `[Overview]` or `[Releases]` — labels that are perfectly clear next to their parent in a
-      sidebar and say nothing at all in a flat list. The 66 that already looked right were the
-      section-index and non-nav pages, where `page.title` had nothing to fall back *from*.
+    * **The description** would be the value written beside the path in mkdocs.yml, maintaining the
+      same sentence twice — and a glob entry can only carry *one* description for every page it
+      matches, so every page a glob covers would claim to be the same page.
+    * **The title** would be `page.title`, which MkDocs resolves as the *nav label* first, falling
+      back to the frontmatter `title` and then the first H1. Most of this site's nav entries are
+      labelled, so entries rendered as `[Install]`, `[Overview]` or `[Releases]` — clear beside
+      their parent in a sidebar, useless in a flat list.
 
-    This is a hook rather than a change to `plugin.config.sections` in `on_config` because by
-    the time pages are rendered the plugin has already expanded the globs, and `page.meta` is
-    the frontmatter as MkDocs parsed it — including anything the `meta` plugin injected from a
-    directory-wide `.meta.yml`.
+    A hook rather than a change to `plugin.config.sections` in `on_config`, because by the time
+    pages are rendered the plugin has expanded its globs, and `page.meta` is the frontmatter as
+    MkDocs parsed it, including anything the `meta` plugin injected from a directory `.meta.yml`.
 
-    Ordering is guaranteed, not lucky: `hooks` is validated after `plugins` and appended to the
-    same collection, so a hook's handler for an event always runs after the plugins'. That is
-    what lets this overwrite `_md_pages`, which the plugin fills in during *its* own
-    `on_page_content`.
+    Ordering is guaranteed: `hooks` is validated after `plugins` and appended to the same
+    collection, so a hook's handler for an event always runs after the plugins'. That is what lets
+    this overwrite `_md_pages`, which the plugin fills in during its own `on_page_content`.
     """
     plugin = config["plugins"].get("llmstxt")
     if plugin is None:
@@ -289,8 +266,8 @@ def on_page_content(html, page, config, **kwargs):
     #   `_sections`  {section title: {src_uri: description}}, built in its `on_files`
     #   `_md_pages`  {src_uri: _MDPageInfo(title, path_md, md_url, content)}, built in its
     #                `on_page_content`
-    # Assert their shape rather than skipping quietly: a plugin upgrade that renames either must
-    # fail the build, not silently publish an llms.txt full of nav labels and no descriptions.
+    # Their shape is asserted rather than skipped quietly, so a plugin upgrade that renames either
+    # fails the build instead of publishing an llms.txt full of nav labels and no descriptions.
     sections = getattr(plugin, "_sections", None)
     exported = getattr(plugin, "_md_pages", None)
     if not isinstance(sections, dict) or not isinstance(exported, dict):

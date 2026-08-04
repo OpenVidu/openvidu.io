@@ -1,7 +1,7 @@
 """The `ovweb` command line.
 
-Thin by design: this module parses flags, builds a plan and hands off. Anything that decides
-something belongs in :mod:`ovweb.plan`, :mod:`ovweb.redirects` or :mod:`ovweb.pipeline`.
+Thin by design: parse flags, build a plan, hand off. Anything that decides something belongs in
+:mod:`ovweb.plan`, :mod:`ovweb.redirects` or :mod:`ovweb.pipeline`.
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ import typer
 
 from . import __version__, fsops
 from .config import ConfigError, SiteConfig, load_site_config
-from .discovery import known_versions, published_versions, version_branches
+from .discovery import known_versions, published_versions, version_branches, version_folders
 from .doctor import run_checks
 from .gitrepo import Git, GitError, open_repository
 from .mikewrap import MikeError
@@ -137,8 +137,8 @@ def main_callback(
         as_json=as_json,
         color=color,
     )
-    # The group is invokable without a subcommand so that `--version` works on its own; a bare
-    # `ovweb` is already handled by no_args_is_help, so this only catches options with no command.
+    # The group is invokable without a subcommand so `--version` works on its own. A bare `ovweb`
+    # is handled by no_args_is_help, so this only catches options given with no command.
     if context.invoked_subcommand is None:
         typer.echo(context.get_help())
         raise typer.Exit
@@ -349,11 +349,7 @@ def postprocess_command(
     ] = True,
     force: Annotated[bool, _FORCE] = False,
 ) -> None:
-    """Run only the gh-pages post-processing, on a tree, touching no git and no remote.
-
-    This is the debugging entry point, and the unit the parity gate compares: given the same
-    input tree, it must produce the same output tree.
-    """
+    """Run only the gh-pages post-processing, on a tree, touching no git and no remote."""
     ctx: Context = context.obj
     validate_minor(version)
     result = postprocess(
@@ -444,12 +440,12 @@ def redirects_apply(
 ) -> None:
     """Write the redirect pages into every version folder of a tree.
 
-    Lets a rule reach versions that are not being rebuilt — which is how the `/3.0/docs/`
-    class of dead end gets fixed without republishing 3.0 from its own branch.
+    Lets a rule reach versions that are not being rebuilt — which is how the `/3.0/docs/` class
+    of dead end gets fixed without republishing 3.0 from its own branch.
     """
     ctx: Context = context.obj
     root = tree.resolve()
-    versions = [only] if only else _versions_in_tree(root)
+    versions = [only] if only else version_folders(root)
     written = 0
     for version in versions:
         for redirect in resolve_file_redirects(ctx.config, version):
@@ -457,16 +453,6 @@ def redirects_apply(
             ctx.report.info(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
             written += 1
     ctx.report.success(f"Wrote {written} redirect page(s) across {len(versions)} version(s).")
-
-
-def _versions_in_tree(tree: Path) -> list[str]:
-    import re
-
-    return sorted(
-        entry.name
-        for entry in tree.iterdir()
-        if entry.is_dir() and re.fullmatch(r"\d+\.\d+", entry.name)
-    )
 
 
 # -- versions --------------------------------------------------------------------------------
@@ -506,11 +492,7 @@ def verify_command(
         str, typer.Option(help="Branch to check out when --tree is absent.")
     ] = "gh-pages",
 ) -> None:
-    """Assert the invariants of a published tree.
-
-    Passes on the live site as it stands, so it is also a check that this tool's model of the
-    published layout is correct.
-    """
+    """Assert the invariants of a published tree."""
     ctx: Context = context.obj
     if tree is not None:
         findings = verify(tree.resolve(), config=ctx.config)
@@ -565,12 +547,11 @@ def doctor(
 # -- entry point -----------------------------------------------------------------------------
 
 #: Options declared on the app callback rather than on a command. click only accepts a group's
-#: options *before* the subcommand, so `ovweb publish latest 3.8 --verbose` is a parse error —
-#: which is exactly the shape everybody reaches for, and which broke the publish workflow the
-#: first time it ran. :func:`hoist_global_options` moves them to the front instead of failing.
+#: options *before* the subcommand, so `ovweb publish latest 3.8 --verbose` is a parse error;
+#: :func:`hoist_global_options` moves them to the front instead of failing.
 #:
-#: `tests/unit/test_cli.py` asserts these two sets stay in step with the actual app, and that no
-#: command ever declares a name listed here — which is what makes the rewriting safe.
+#: `tests/unit/test_cli.py` asserts these two sets stay in step with the app, and that no command
+#: ever declares a name listed here — which is what makes the rewriting safe.
 GLOBAL_SWITCHES = frozenset({"--dry-run", "--json", "--color", "--no-color", "--verbose", "-v"})
 GLOBAL_OPTIONS_WITH_VALUE = frozenset({"--repo", "--layout", "--remote"})
 

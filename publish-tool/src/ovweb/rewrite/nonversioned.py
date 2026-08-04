@@ -18,9 +18,8 @@ class RewriteError(Exception):
 def rewrite_404(text: str, *, version: str, layout: SiteLayout) -> str:
     """Strip the version from the 404 page, then send its versioned links to `latest`.
 
-    The 404 page is served for every unmatched URL at the site root, so nothing in it may
-    carry a version — except the links into versioned sections, which must resolve to the
-    newest release.
+    The 404 page is served for every unmatched URL at the site root, so nothing in it may carry a
+    version — except links into versioned sections, which must resolve to the newest release.
     """
     text = text.replace(f"/{version}/", "/")
     text = text.replace(f'"/{version}"', '"/"')
@@ -54,13 +53,12 @@ def _strip_version_from_self_urls(text: str, *, version: str, layout: SiteLayout
     """Remove the version segment from a promoted page's own URLs.
 
     These pages are built under the version folder but served from the root, so the
-    self-referencing URLs the theme generates — `<link rel="canonical">`, `og:url`, and the
-    JSON-LD `@id`/`url`/`mainEntityOfPage` — must not carry a version.
+    self-referencing URLs the theme generates — `<link rel="canonical">`, `og:url`, and the JSON-LD
+    `@id`/`url`/`mainEntityOfPage` — must not carry a version.
 
-    Author-written, version-pinned links to versioned pages (`/3.4/docs/…`, used by the
-    release-notes links in blog posts) MUST survive. A blanket strip would silently break
-    them, so they are shielded behind a sentinel while the version is removed, then
-    restored.
+    Author-written, version-pinned links to versioned pages (`/3.4/docs/…`, as used by the
+    release-notes links in blog posts) must survive, so they are shielded behind a sentinel while
+    the version is removed and restored afterwards.
     """
     if KEEPVERSION_SENTINEL in text:
         raise RewriteError(

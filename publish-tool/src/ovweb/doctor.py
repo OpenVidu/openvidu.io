@@ -1,8 +1,4 @@
-"""Preflight checks: dependencies, pins, git state and configuration.
-
-Cheap to run and safe everywhere, so `--pins` is used as a CI step and the full set is worth
-running before a publish.
-"""
+"""Preflight checks: dependencies, pins, git state and configuration. Read-only."""
 
 from __future__ import annotations
 
@@ -18,9 +14,8 @@ from .gitrepo import Git, GitError
 from .mikewrap import Mike
 from .redirects import RedirectError, resolve_file_redirects, resolve_patterns
 
-#: The distribution whose version must agree everywhere. It is the only pinned dependency
-#: that also appears outside Python packaging (as a Docker base-image tag), which is exactly
-#: how the three-way drift this check exists to prevent came about.
+#: The distribution whose version must agree everywhere: the only pinned dependency that is also
+#: named outside Python packaging, as a Docker base-image tag.
 PINNED_DISTRIBUTION = "mkdocs-material"
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
@@ -57,11 +52,8 @@ def run_checks(
 def check_pins(repo_root: Path) -> list[Check]:
     """Assert that every place naming a mkdocs-material version names the same one.
 
-    Before this package existed the version was written in four places — both workflows and
-    both Dockerfiles — and had drifted to three different values (9.7.6, 9.7.1 and 9.7.0). The
-    workflows now install from pyproject.toml, so the remaining pair to keep honest is the
-    declared pin and the Docker base-image tags. A different theme version builds different
-    markup, and the release-notes splice matches on that markup.
+    The declared pin, the two Docker base-image tags and the installed distribution. A different
+    theme version builds different markup, and the release-notes splice matches on that markup.
     """
     found: dict[str, str] = {}
 
@@ -138,8 +130,10 @@ def _check_config(repo: Git | None) -> list[Check]:
 
 
 def _mirror_summary(config: SiteConfig) -> str:
-    """How many stubs the mirror will write is only known at publish time, from the sitemap —
-    so report what it covers instead of a count."""
+    """Which sections the mirror covers.
+
+    Not how many stubs it writes: that is only known at publish time, from the sitemap.
+    """
     mirror = config.mirror
     if mirror is None or not mirror.enabled:
         return "no unversioned mirror"
@@ -203,8 +197,7 @@ def _check_editable_install(repo: Git) -> Check:
     """Warn when ovweb is being imported from inside the repository it publishes.
 
     Publishing a past version checks out that version's branch, which does not contain this
-    package. An installed wheel is unaffected; an editable install or a PYTHONPATH checkout
-    resolves into the working tree and would disappear mid-run.
+    package, so an editable install or a PYTHONPATH checkout would disappear mid-run.
     """
     from . import __file__ as package_file
 

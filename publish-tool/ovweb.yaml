@@ -105,22 +105,21 @@ redirects:
   # One redirect page per published page of every versioned section, at the same path without
   # the version prefix: /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/.
   #
-  # The 404 router below already sends these URLs to the right place, but only for people.
+  # The 404 router below already sends these URLs to the right place, but only for people:
   # GitHub Pages serves 404.html with a 404 status, and a crawler acts on the status before it
-  # runs any JavaScript, so every inbound link to an unversioned URL is discarded. These URLs
-  # are worth keeping: they are what a human types, and what OpenVidu itself publishes — the
-  # speech agent's default configuration ships a comment pointing at
-  # https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider, which
-  # every user reads in their own deployment. GitHub Pages has no server-side redirects, so a
-  # 200 page carrying a zero-delay meta refresh is the only redirect a crawler can be given.
+  # runs any JavaScript, so an inbound link to an unversioned URL is discarded. Those URLs are
+  # worth keeping — they are what a human types, and what OpenVidu itself publishes, since the
+  # speech agent's default configuration carries a comment pointing at
+  # https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider. A 200 page
+  # with a zero-delay meta refresh is the only redirect a crawler can be given here.
   #
   # There is no list to maintain and no reconciliation: the set is read off the promoted root
-  # sitemap, and the whole mirror is deleted and rebuilt on every latest publish. A renamed or
-  # deleted page therefore cannot leave a stub redirecting into a 404.
+  # sitemap, and the whole mirror is deleted and rebuilt on every latest publish, so a renamed or
+  # deleted page cannot leave a stub redirecting into a 404.
   #
-  # `for_each` names a layout list; `body` is the sentence shown to a visitor whose browser
-  # blocks the refresh. The 404 router keeps handling everything the mirror does not cover —
-  # the exported reference-docs pages, pages that have since been removed, and typos.
+  # `for_each` names a layout list; `body` is the sentence shown to a visitor whose browser blocks
+  # the refresh. The 404 router keeps handling everything the mirror does not cover — the exported
+  # reference-docs pages, pages that have since been removed, and typos.
   mirror:
     for_each: versioned_pages
     body: "Redirecting to the current version of this page…"
@@ -178,48 +177,32 @@ redirects:
       body: "Redirecting to the OpenVidu getting started guide…"
       versions: "<3.4"
 
-
     # --- Pages that were renamed or restructured without a redirect -----------------------
     #
-    # Found 2026-08-02 by checking every URL in a 12-month Search Console export against the
-    # live site: 13 /latest/ URLs answered 404 while still ranking, between them 11,825
-    # impressions a year. Nothing rescued them — the legacy-patch patterns only match
-    # /X.Y.Z/ paths, and the unversioned rule only matches a missing version prefix.
+    # These are `files` rather than `patterns` on purpose. A pattern is served by the 404 page,
+    # so the URL keeps answering 404 and Google drops it along with its ranking signal. A
+    # materialised file answers 200 with a zero-delay meta refresh and a canonical, which is
+    # treated as a redirect and passes that signal to the successor page.
     #
-    # These are `files` rather than `patterns` on purpose. A pattern is served by the 404
-    # page, so the URL keeps answering 404 and Google drops it along with its ranking
-    # signal. A materialised file answers 200 with a zero-delay meta refresh and a canonical,
-    # which is treated as a redirect and passes that signal to the successor page.
-    #
-    # Each rule is gated to the first version that no longer ships the old page, so the
-    # versions that still hold the real page keep serving it.
-    #
-    # Two things the gate must satisfy, and they are not the same release:
+    # Each rule is gated to the first version that no longer ships the old page, so the versions
+    # that still hold the real page keep serving it. Two things the gate must satisfy, and they
+    # are not always the same release:
     #
     #   1. the version that stopped shipping the OLD page, and
     #   2. the version that first shipped the SUCCESSOR.
     #
-    # Gate at the later of the two. `ovweb verify` rejects a redirect whose target does not
-    # exist in the tree, which is what catches getting this wrong.
+    # Gate at the later of the two, or give the older band a `when` override pointing at a page
+    # that version really has. `ovweb verify` rejects a redirect whose target does not exist in
+    # the tree, which is what catches getting this wrong.
     #
     # Read the gate from the RELEASE a change belongs to, not from the current contents of a
-    # version folder — for the Meet features those two disagreed, and it is worth knowing why.
-    #
-    # Unreleased 3.8 documentation lives on `next` until its release. One blog branch was cut
-    # from `next` instead of `main`, so merging that blog PR (2481b7146, 2026-06-23) carried 14
-    # documentation commits into `main` with it — the Meet features reorganisation, the members
-    # tutorials and the Oracle Elastic/HA guides. The next publish of 3.7, which builds from
-    # `main`, then served them inside a released version, and the 3.7 folder kept them until
-    # 2026-08-03. A one-off branching mistake, not a flaw in the release process: `next` had not
-    # been merged to `main`, one branch had simply been taken from the wrong base.
-    #
-    # So a version folder is evidence of what was published, not of what a release contained.
-    # These rules are gated at the release the change belongs to, and the rebuilt 3.7 serves its
-    # own pages again.
+    # version folder: a folder is evidence of what was published, which is not the same thing.
+    # Unreleased documentation lives on `next`, and a branch taken from the wrong base can carry
+    # it into a published version folder.
 
     - id: renamed-force-single-port
       description: >
-        force-443-tls.md was renamed force-single-port.md in 3.6. 2,087 impressions a year.
+        force-443-tls.md was renamed force-single-port.md in 3.6.
       at: "{version}/docs/self-hosting/how-to-guides/force-443-tls/index.html"
       to: "../force-single-port/"
       canonical: "{site_url}/latest/docs/self-hosting/how-to-guides/force-single-port/"
@@ -228,11 +211,9 @@ redirects:
 
     - id: removed-oracle-install-tutorial-community
       description: >
-        The Oracle install tutorial was folded into the install guide. 1,978 impressions a year.
-        Gated at 3.7 even though the deletion only reached `main` with the 3.8 batch: the page
-        was removed as outdated *during* 3.7's life (8af6778b8, "remove outdated public IP
-        instructions"), so the rebuilt 3.7 keeps it deleted and redirects instead of resurrecting
-        instructions that were wrong. Its PRO twin below is the same call for the same reason.
+        The Oracle install tutorial was folded into the install guide. Gated at 3.7 because the
+        page was removed as outdated *during* 3.7's life, so a rebuild of 3.7 keeps it deleted
+        and redirects rather than resurrecting instructions that were wrong.
       at: "{version}/docs/self-hosting/single-node/oracle/install-tutorial/index.html"
       to: "../install/"
       canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
@@ -241,9 +222,7 @@ redirects:
 
     - id: removed-oracle-install-tutorial-pro
       description: >
-        As above for the PRO tree, 1,590 impressions a year — but this one really was removed
-        before 3.7 shipped (2026-05-18) and the 3.7.0 folder was correctly rebuilt without it,
-        so the gate stays at 3.7. The pair is the reason the gates were checked one at a time.
+        As above for the PRO tree, where the page was removed before 3.7 shipped.
       at: "{version}/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.html"
       to: "../install/"
       canonical: "{site_url}/latest/docs/self-hosting/single-node-pro/oracle/install/"
@@ -261,8 +240,8 @@ redirects:
       body: "Redirecting to the OpenVidu self-hosting how-to guides…"
       versions: ">=3.5"
 
-    # OpenVidu Meet embedded tutorials were grouped into embedding-options/ and
-    # advanced-features/ subfolders in 3.8. 4,663 impressions a year across the five.
+    # The OpenVidu Meet embedded tutorials were grouped into embedding-options/ and
+    # advanced-features/ subfolders in 3.8.
     - id: moved-meet-tutorial-recordings
       at: "{version}/meet/embedded/tutorials/recordings/index.html"
       to: "../advanced-features/recordings/"
@@ -298,10 +277,8 @@ redirects:
       body: "Redirecting to the OpenVidu Meet direct link tutorial…"
       versions: ">=3.8"
 
-    # The Meet features section was reorganised per feature area. 1,449 impressions a year
-    # across the four. The reorganisation shipped in **3.8**, not 3.7 — the 3.7 folder held it
-    # for six weeks because a blog branch was cut from `next` and merged into `main` with 3.8's
-    # documentation attached. See the note above the group.
+    # The Meet features section was reorganised per feature area in 3.8. 3.7 still ships the old
+    # pages, so these must not be gated any lower — see the note above the group.
     - id: moved-meet-features-users
       at: "{version}/meet/features/users-and-permissions/index.html"
       to: "../users/overview/"
@@ -332,29 +309,19 @@ redirects:
 
     # --- The rest of the same class, found by scanning the version folders ------------------
     #
-    # The rules above came from a Search Console export, so they are the dead URLs that still
-    # earn impressions. This group came from the complement of that: every page under `docs/`
-    # or `meet/` that any published version folder held and 3.8 does not.
+    # The rules above came from a Search Console export, so they cover the dead URLs that still
+    # earn impressions. This group is the complement: every page under `docs/` or `meet/` that a
+    # published version folder holds and the newest does not.
     #
-    # That scan found 23 paths where the export had found 13, and the ten extra split in two.
-    # Six of them — the External and Registered Members tutorials, rooms/creation-management,
-    # recordings/creation-management, rooms/appearance and an E2eeService API page — get **no**
-    # rule. The first five were never part of a release: they reached the site only through the
-    # 3.7 folder while it was serving mis-branched 3.8 documentation (see the note above), and
-    # 3.8 renamed them before shipping, so redirecting them would be preserving URLs that should
-    # not have existed. The sixth is a generated API page for a class that was deleted, published
-    # for one release.
-    #
-    # The four below are the ones worth keeping alive. Each gate is the first version that
-    # stopped shipping the page, read off the version folders rather than guessed, and each
-    # target was checked to exist in every version from that gate onwards —
-    # `removed-openvidu-call-docs` needs a `when` for 3.4 for exactly that reason.
+    # Not every URL that scan finds gets a rule. A page that was never part of a release should
+    # not have its URL preserved — some reached the site only through a version folder that
+    # briefly served unreleased documentation — and neither should a generated API page for a
+    # class that has been deleted. `tests/unit/test_redirects.py` pins the exclusions.
 
-    # OpenVidu Call was the ready-to-use meeting application documented up to 3.3. OpenVidu Meet
-    # replaced it, and the timing corroborates the mapping: these two pages disappear in exactly
-    # the release that first ships meet/. The release notes link to /3.0/docs/openvidu-call/ on
-    # purpose — those are version-pinned by convention and 3.0 is below the gate, so they keep
-    # resolving to the page they describe.
+    # OpenVidu Call was the ready-to-use meeting application documented up to 3.3, and OpenVidu
+    # Meet replaced it: these two pages disappear in exactly the release that first ships meet/.
+    # The release notes link to /3.0/docs/openvidu-call/ on purpose — those are version-pinned by
+    # convention and 3.0 is below the gate, so they keep resolving to the page they describe.
     - id: removed-openvidu-call
       at: "{version}/docs/openvidu-call/index.html"
       to: "../../meet/"
@@ -396,9 +363,6 @@ redirects:
       body: "Redirecting to the advanced recording tutorial with S3 storage…"
       versions: ">=3.2"
 
-    # The one dropped API export. E2eeService was published for 3.5 only and the class is gone,
-    # so there is no successor page — the library's API index is the nearest thing. Named as a
-    # file rather than a directory because typedoc output is not a directory URL.
   # Redirects compiled into the 404 router (docs/overrides/404.html). GitHub Pages has no
   # server-side redirects, so a pattern — as opposed to a single known path — can only be
   # handled by the page GitHub serves for an unmatched URL.

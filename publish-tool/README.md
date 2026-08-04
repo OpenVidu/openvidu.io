@@ -47,7 +47,7 @@ branch, not `main`, is the source of truth for a past version.
 - [What a publish does](#what-a-publish-does)
 - [How the code is organised](#how-the-code-is-organised)
 - [Link-rewriting reference](#link-rewriting-reference)
-- [Testing and parity](#testing-and-parity)
+- [Testing](#testing)
 - [How it runs in CI](#how-it-runs-in-ci)
 - [Caveats and observations](#caveats-and-observations)
 
@@ -203,7 +203,7 @@ where it sends the visitor (`to`):
     # *was* the Platform documentation index.
     - versions: "<3.4"
       to: "docs/getting-started/"
-      body: "Redirecting to the OpenVidu Platform getting started guide…"
+      body: "Redirecting to the OpenVidu getting started guide…"
 ```
 
 `versions` (and `when[].versions`) are [PEP 440](https://peps.python.org/pep-0440/) specifiers
@@ -212,33 +212,29 @@ evaluated with `packaging`, so `3.10` correctly sorts above `3.9` and legacy fol
 version** — an overlap is an error, not a silent first-match-wins, because that would make the
 published redirect depend on the order of the file.
 
-Twenty rules ship today. Three are structural — the version root, `/X.Y/docs/getting-started/`
-→ `/X.Y/docs/` for 3.4 and later, and `/X.Y/docs/` → `/X.Y/docs/getting-started/` for 3.0–3.3 — and
-the rest each rescue one page that was renamed or removed without a redirect. Those were found two
-ways, and both were needed:
+Three of the rules are structural — the version root, `/X.Y/docs/getting-started/` → `/X.Y/docs/`
+for 3.4 and later, and `/X.Y/docs/` → `/X.Y/docs/getting-started/` for 3.0–3.3. The rest each
+rescue one page that was renamed or removed without a redirect. Two searches find those, and both
+are needed:
 
-- **A 12-month Search Console export**, checked URL by URL against the live site: 13 `/latest/`
-  URLs answered 404 while still ranking, worth 11,825 impressions a year.
-- **Diffing the version folders**: every page any published `X.Y` folder held that 3.8 does not.
-  That set is 23, so it found the same 13 plus 10 more, and an impressions-ranked list could not
-  have found several of them — a URL that lived for one release has had no time to earn
-  impressions.
+- **A Search Console export**, checked URL by URL against the live site, finds the dead URLs that
+  still earn impressions.
+- **Diffing the version folders** — every page any published `X.Y` folder holds that the newest
+  does not — finds the rest. A URL that lived for one release has had no time to earn impressions,
+  so an impressions-ranked list cannot see it.
 
-**Not every dead URL earns a redirect.** Six of the 23 deliberately have none. Five were never part
-of a release: they reached the site only through the 3.7 folder while it was serving mis-branched
-3.8 documentation, and 3.8 renamed them before shipping, so a redirect would preserve URLs that
-should not have existed. The sixth is a generated API page for a class that was deleted. The
+**Not every dead URL earns a redirect.** A page that was never part of a release should not have
+its URL preserved, and neither should a generated API page for a class that has been deleted. The
 exclusions are pinned in [`test_redirects.py`](tests/unit/test_redirects.py) as
 `DELIBERATELY_UNCOVERED`, which fails both ways — if a listed URL gains a rule, and if an
 unlisted dead URL loses one.
 
 **A rule's `versions` gate must not be wider than its target's.** Gate a rule at the first version
 that stopped shipping the old page, then check that the *successor* exists in every version from
-there on — those are not always the same release. `moved-meet-features-users` is the case in point:
-`features/users-and-permissions/` stopped being published in 3.7, but its successor
-`features/users/overview/` only arrived in 3.8, so the 3.7 stub needs a `when` override pointing at
-`rooms/access/`, the page 3.7 actually has. Without it the stub redirects into a 404, which is worse
-than the 404 it replaced. `ovweb verify` rejects that now — see the redirect-target check below.
+there on — those are not always the same release. When they differ, the older band needs a `when`
+override pointing at a page that version really has; without one the stub redirects into a 404,
+which is worse than the 404 it replaced. `ovweb verify` rejects that — see the redirect-target
+check below.
 
 ### Why every target is relative
 
@@ -267,7 +263,7 @@ Every element earns its place; see
 A pattern cannot be a file, because there is no single path to put it at. These are compiled
 into the 404 router ([`docs/overrides/404.html`](../docs/overrides/404.html)) through
 [`mkdocs_hook.py`](mkdocs_hook.py), which is the page GitHub serves for any URL that matches no
-file. Two families ship today:
+file. Three families ship today:
 
 - **Legacy exact-patch URLs.** Versions used to be published per patch release (`/3.4.1/…`,
   `/3.0.0-beta2/…`) and are now grouped by minor, so a first segment with a third component is a
@@ -276,6 +272,9 @@ file. Two families ship today:
   Every *published* page of that shape now also has a real redirect page — see the mirror below —
   so what this pattern is left to rescue is the remainder: pages that have since been removed, the
   exported `reference-docs/` pages, and typos.
+- **Pages removed when the self-hosting guides were consolidated.** A pattern needs no `versions`
+  gate for these: it only ever runs from the 404 page, so in a version that still ships the page
+  GitHub serves the real file and the router is never reached.
 
 Patterns are tried in order and the first match wins, so the order in `ovweb.yaml` is behaviour.
 
@@ -283,14 +282,13 @@ Patterns are tried in order and the first match wins, so the order in `ovweb.yam
 
 The 404 router rescues **people**, not crawlers. GitHub serves `404.html` with a 404 status, and a
 crawler acts on the status before it runs any JavaScript, so an inbound link to `/docs/…` is
-discarded however well the router works. That was measurable: `/docs/` and `/meet/` — the two URLs
-a human types — answered `HTTP/2 404`, and so did
-`https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider`, a URL **OpenVidu
-itself ships** in a comment in the speech agent's default configuration, where every user reads it
-in their own deployment.
+discarded however well the router works. Those URLs matter: `/docs/` and `/meet/` are what a human
+types, and OpenVidu itself ships one — the speech agent's default configuration carries a comment
+pointing at `https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider`,
+which every user reads in their own deployment.
 
-GitHub Pages has no server-side redirect of any kind, so a 200 page carrying a zero-delay meta
-refresh is the only redirect a crawler can be handed. The mirror writes one, for every page:
+A 200 page carrying a zero-delay meta refresh is the only redirect a crawler can be handed on
+GitHub Pages. The mirror writes one, for every page:
 
 ```yaml
 mirror:
@@ -300,10 +298,9 @@ mirror:
 
 Two decisions make it maintenance-free:
 
-- **The set comes from the promoted root sitemap**, not from a list and not from the tree. So it is
-  exactly what the site advertises — 223 pages today. The three `index.html` files under
-  `3.8/docs/` that are *not* in the sitemap are skipped, which is what you want: one of them is
-  itself a generated redirect, and mirroring it would publish a chain.
+- **The set comes from the promoted root sitemap**, not from a list and not from the tree, so it is
+  exactly what the site advertises. A page the sitemap does not name is skipped, which is what you
+  want: mirroring a generated redirect would publish a chain.
 - **It is deleted and rebuilt in full on every `latest` publish**, never reconciled. A renamed or
   removed page cannot leave a stub redirecting into a 404 — a state worse than the 404 it replaced —
   because the stale stub is gone before the new set is written. The step refuses to delete anything
@@ -314,8 +311,8 @@ a missing stub means an unversioned URL 404s for crawlers again, an extra one me
 into a 404.
 
 What the mirror deliberately does **not** cover is the legacy per-patch space (`/3.4.1/…`). Fully
-enumerating it would be ~3,000 pages across the 13 patch folders that ever existed, nothing in the
-site links there, and those URLs have pointed their `canonical` at `/latest/` since they were
+enumerating it would be thousands of pages across the patch folders that ever existed, nothing in
+the site links there, and those URLs have pointed their `canonical` at `/latest/` since they were
 published, so Google consolidated them long ago. The router keeps handling them for people.
 
 ### Inspecting them
@@ -349,9 +346,8 @@ ovweb doctor [--pins]      Dependencies, pins, configuration and git state
 Useful flags. `--dry-run`, `--verbose`/`-v`, `--json`, `--color`/`--no-color`, `--repo`, `--layout`
 and `--remote` are **global** — click requires a group's options before the subcommand, so
 `ovweb --dry-run --verbose publish latest 3.8` is the canonical form. Writing them after the
-subcommand works too: `ovweb` moves them to the front rather than failing, because the parse error
-was neither obvious nor useful (`ovweb publish latest 3.8 --verbose` broke the publish workflow the
-first time it ran). Everything else in the table below belongs to a specific command.
+subcommand works too: `ovweb` moves them to the front rather than failing with a parse error that
+is neither obvious nor useful. Everything else in the table below belongs to a specific command.
 
 | Flag                        | Effect                                                                                                                                                     |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -380,7 +376,8 @@ publish
  └── sync-branch                # `publish latest` only: rebase X.Y onto main, push with --force-with-lease
 ```
 
-The post-processing steps, in order. `--dry-run` prints exactly this list.
+The post-processing steps, in order. `--dry-run` prints exactly this list, and
+[`test_postprocess.py`](tests/unit/test_postprocess.py) asserts that it does.
 
 | Step                   | When   | What                                                                                                                  |
 | ---------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
@@ -396,25 +393,21 @@ The post-processing steps, in order. `--dry-run` prints exactly this list.
 | `install-redirects`    | always | Write the generated redirect pages.                                                                                   |
 | `mirror-unversioned`   | latest | Delete `/docs/` and `/meet/` and rebuild them as one redirect page per URL in the promoted sitemap — see below.        |
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see below. |
-| `sync-releases`        | always | Splice the newest release notes across versions.                                                                      |
+| `sync-releases`        | always | Splice the newest release notes across versions.                                                                       |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
-Steps 1–10 touch no git at all. That is what makes `ovweb postprocess --tree <copy> --no-commit`
-a deterministic unit, and it is what the [parity gate](#testing-and-parity) compares.
+Everything before `commit` touches no git at all, which is what makes
+`ovweb postprocess --tree <copy> --no-commit` a deterministic unit.
 
 ### Nothing is pushed until the tree is correct
 
 `mike` output is only half a publish: the version folder still holds the pages that belong at the
-site root, their relative links resolve nowhere, and there is no redirect at the version root. The
-shell ran `mike deploy --push`, so **that** was what went live, and only then did the
-post-processing start. A failure in between left the broken state published, and recovering meant
-force-pushing a backup branch.
-
+site root, their relative links resolve nowhere, and there is no redirect at the version root. So
 `ovweb` never passes `--push` to mike. Everything — the delete, the build, the post-processing and
 the commit — happens on the local `gh-pages`, and a single push follows once the tree is right. If
 anything fails first, the local branch is reset to where it started (or deleted, if this was the
-first deployment) and the remote is never touched. So there is nothing to restore from, and no
-backup branch to maintain.
+first deployment) and the remote is never touched. There is nothing to restore from, and no backup
+branch to maintain.
 
 Two consequences worth knowing:
 
@@ -426,14 +419,13 @@ Two consequences worth knowing:
 
 ### Why a worktree
 
-Post-processing needs the `gh-pages` content, but checking that branch out in the main working
-tree — what the shell implementation did — has three problems:
+Post-processing needs the `gh-pages` content, and checking that branch out in the main working
+tree has three problems:
 
 - **The tool's own files vanish.** Its sources, config and templates are not on `gh-pages`, and
   for a past version they are not on that version's branch either.
 - **`.gitignore` is a main-only file**, so `site/` and `.cache/` become untracked *and* unignored
-  the moment `gh-pages` is checked out, and `git add .` publishes them. That is how 729 files of
-  build cache ended up committed on `gh-pages`.
+  the moment `gh-pages` is checked out, and `git add .` publishes them.
 - **A failure half-way strands you** on `gh-pages` mid-move.
 
 A throwaway worktree avoids all three, and the main tree never leaves `main`.
@@ -452,6 +444,7 @@ lives in the pure layer, which is why that is where the tests are.
 | [`model.py`](src/ovweb/model.py)                           | ✔     | Frozen value objects.                                                             |
 | [`config.py`](src/ovweb/config.py)                         | ✔     | Load and validate `ovweb.yaml`.                                                   |
 | [`versions.py`](src/ovweb/versions.py)                     | ✔     | `X.Y` names, ordering, specifier matching, `versions.json`.                       |
+| [`sources.py`](src/ovweb/sources.py)                       | ✔     | What a page is made of, for the sitemap's `<lastmod>`.                             |
 | [`rewrite/versioned.py`](src/ovweb/rewrite/versioned.py)   | ✔     | Asset pinning, root links, cookie base URL, `canonical`/`og:url` → `/latest/`.     |
 | [`rewrite/nonversioned.py`](src/ovweb/rewrite/nonversioned.py) | ✔ | Version stripping with the shield, `404.html`, the feeds.                         |
 | [`rewrite/markdown.py`](src/ovweb/rewrite/markdown.py)     | ✔     | The same rules for the Markdown exports and `llms.txt`.                            |
@@ -463,12 +456,12 @@ lives in the pure layer, which is why that is where the tests are.
 | [`fsops.py`](src/ovweb/fsops.py)                           | –     | File walking, byte-preserving rewrites, deterministic gzip, moves and copies.     |
 | [`gitrepo.py`](src/ovweb/gitrepo.py)                       | –     | The git facade, including the worktree context manager.                           |
 | [`mikewrap.py`](src/ovweb/mikewrap.py)                     | –     | `mike deploy` / `mike delete`.                                                    |
-| [`discovery.py`](src/ovweb/discovery.py)                   | –     | Which versions exist, from `versions.json` and the branches.                      |
+| [`discovery.py`](src/ovweb/discovery.py)                   | –     | Which versions exist, from the repository or from a published tree.                |
 | [`pipeline/postprocess.py`](src/ovweb/pipeline/postprocess.py) | – | The step table above.                                                             |
 | [`pipeline/publish.py`](src/ovweb/pipeline/publish.py)     | –     | Branch preparation, mike, worktree, commit, branch sync.                          |
 | [`verify.py`](src/ovweb/verify.py)                         | –     | Invariants of a published tree.                                                   |
 | [`doctor.py`](src/ovweb/doctor.py)                         | –     | Preflight checks, including the pin agreement.                                    |
-| [`mkdocs_hook.py`](mkdocs_hook.py)                         | –     | Expose `ovweb.yaml` to the MkDocs templates.                                      |
+| [`mkdocs_hook.py`](mkdocs_hook.py)                         | –     | Expose `ovweb.yaml` to the MkDocs templates; set `<lastmod>` and llms.txt entries. |
 
 ---
 
@@ -509,8 +502,8 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 ### The Markdown exports and `llms.txt`
 
 Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice: as
-`index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports and
-and they are the site's AI-facing channel.
+`index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports, and together they
+are the site's AI-facing channel.
 
 Neither half of an `llms.txt` entry comes from `mkdocs.yml`. The `on_page_content` half of
 [`mkdocs_hook.py`](mkdocs_hook.py) replaces both with the page's own frontmatter:
@@ -519,8 +512,8 @@ Neither half of an `llms.txt` entry comes from `mkdocs.yml`. The `on_page_conten
   `mkdocs.yml`. That is what lets a `sections` entry be a glob — the plugin's own behaviour is to
   give every page a glob matches the *same* description.
 * the **link text**, which the plugin takes from `page.title`. MkDocs resolves that to the *nav
-  label* when the nav entry has one, so 180 of the 246 entries used to render as `[Install]`,
-  `[Overview]` or `[Releases]` — fine beside a parent in a sidebar, useless in a flat list.
+  label* when the nav entry has one, so most entries would render as `[Install]`, `[Overview]` or
+  `[Releases]` — fine beside a parent in a sidebar, useless in a flat list.
 
 A listed page missing either one fails the build.
 
@@ -534,10 +527,9 @@ so the version-vs-`latest` asymmetry is the same one the two search indexes have
 reason.
 
 There is deliberately **no `llms-full.txt`**. The plugin can concatenate every export into one
-file, and it used to: at 91 exports that was 881 KB, and once `sections` covered every page it
-reached 2.8 MB — roughly 700k tokens, which nothing can load, duplicating content the individual
-exports already serve. `llms.txt` as an index plus on-demand page fetches is the spec's model and
-the one that works at this size.
+file, and once `sections` covered every page that reached 2.8 MB — roughly 700k tokens, which
+nothing can load, duplicating content the individual exports already serve. `llms.txt` as an index
+plus on-demand page fetches is the spec's model and the one that works at this size.
 
 Then two rules apply to *every* export, because they are about the form of a link rather than
 its target — and both exist because the plugin is inconsistent in ways only the publish can settle:
@@ -552,8 +544,7 @@ its target — and both exist because the plugin is inconsistent in ways only th
   pages in its `sections` list get one. Listing more pages shrinks the problem but cannot close
   it: `docs/reference-docs/` is vendored TypeDoc output with no Markdown source, and a JavaScript
   shell like `/account/` would export as a bare heading. The repair reads the real set of exports
-  off the tree, so it needs no list to keep in step. On a `3.99 latest` publish this took the
-  in-scope dead links from **162 to 0**, and the root-relative targets from **302 to 0**.
+  off the tree, so it needs no list to keep in step.
 
 And one deliberate difference from the HTML:
 
@@ -591,23 +582,22 @@ Two properties of that file are therefore load-bearing, and **both fail silently
   `/pricing/` picking 3.6 would be sent to `/3.6/pricing/`, a 404. Pruned, they fall back to the
   version root, which is right: that page has no per-version counterpart.
 
-This is documented at length because the file was once deleted as unreferenced. Nothing in the
-built site *links* to it; the reference is a `fetch()` in the theme's JavaScript, which no
-link-checking or grepping finds. `ovweb verify` now asserts all three conditions, and
-[`tests/unit/test_rewrite_sitemap.py`](tests/unit/test_rewrite_sitemap.py) pins them.
+Nothing in the built site *links* to this file — the only reference is that `fetch()` in the
+theme's JavaScript, which no link checking or grepping finds. `ovweb verify` asserts all three
+conditions and [`tests/unit/test_rewrite_sitemap.py`](tests/unit/test_rewrite_sitemap.py) pins
+them.
 
 #### Where `<lastmod>` comes from
 
 MkDocs initialises `Page.update_date` to the build date for every page and its sitemap template
-emits exactly that, so the field used to claim that all 261 URLs changed on every publish — no
-per-page signal, and false often enough to teach a crawler to ignore the field entirely.
+emits exactly that, so the field would claim that every URL on the site changed on every publish —
+no per-page signal, and false often enough to teach a crawler to ignore the field entirely.
 
 The `on_env` half of [`mkdocs_hook.py`](mkdocs_hook.py) sets `update_date` from git instead, using
 [`sources.py`](src/ovweb/sources.py): one `git log --name-only` pass gives the last commit date of
 every file, and a page's date is the **newest across the page and the transitive closure of the
-`--8<--` snippets it includes**. 101 of the 248 pages assemble their content from `shared/`, so
-without the closure a rewritten shared install step would move no date at all on the up to 34 pages
-that display it.
+`--8<--` snippets it includes**. Most pages assemble their content from `shared/`, so without the
+closure a rewritten shared install step would move no date at all on the pages that display it.
 
 `on_env` is the only hook that can do this: MkDocs renders the theme's static templates —
 `sitemap.xml` among them — *before* it renders the pages, so `on_page_content` runs too late.
@@ -619,10 +609,10 @@ Two deliberate behaviours:
 - **A generated page carries no `<lastmod>` at all.** The blog's archive, category and pagination
   views have no source file, so inventing a date for them would be the same lie in miniature; the
   spec makes the field optional per URL. They do, however, get a **title and description** from the
-  same hook — having no frontmatter left all twelve of them serving `site_description`, and
-  `/blog/page/2/` sharing a byte-identical `<title>` with `/blog/`. Both are derived from the view
-  itself (its own heading, the number of posts it lists, its page number), so a month or category
-  that does not exist yet is described correctly the first time it appears.
+  same hook, since having no frontmatter left them serving `site_description` and a paginated view
+  sharing a byte-identical `<title>` with the view it pages. Both are derived from the view itself
+  (its own heading, the number of posts it lists, its page number), so a month or category that
+  does not exist yet is described correctly the first time it appears.
 - **Anything that stops git answering falls back to the build date, at INFO level.** A shallow
   clone is the important one — `git log` still succeeds there but reports the fetched commit for
   every path, which is silently wrong rather than absent, so it is detected and skipped.
@@ -645,7 +635,7 @@ return 3.8 pages. The root index is a *copy* of the newest version's, so it inhe
 version — and it must not keep it: it is served on the evergreen root pages, `/latest/…` is the
 canonical URL of the page being linked, and a pinned URL goes stale at the next release. Every
 other root-to-versioned reference (page links, the sitemap, `llms.txt`, the canonicals) already
-uses `/latest/`; the search index used to be the one exception.
+uses `/latest/`.
 
 Author-written, version-pinned links to versioned pages (`/3.4/docs/…`, used by the
 release-notes links in blog posts) are **shielded** while the version is stripped from a promoted
@@ -658,7 +648,7 @@ the copied content is rewritten because those links are authored absolute and ve
 
 ---
 
-## Testing and parity
+## Testing
 
 ```bash
 pip install -e "./publish-tool[dev]"
@@ -669,48 +659,19 @@ ruff check . && ruff format --check .
 
 The tests concentrate on the pure layer, with hand-written minimal fixtures rather than captured
 pages: a real built page is ~100 KB of theme chrome, and the substitutions only ever look at a
-few characters around a link. Realism is the parity gate's job.
+few characters around a link.
 
-### The parity gate
+Three of them are worth knowing about, because they are what keeps the rest honest:
 
-The check that `ovweb` turns a built tree into the same published tree the shell implementation
-did. It runs **one** `mike` build and post-processes two copies of it, so nothing that varies
-between builds — timestamps, privacy-plugin downloads, image optimisation — can enter the
-comparison; what is left is purely the post-processing.
-
-```bash
-pip install "./publish-tool[build,dev]"
-
-# LEGACY_REF is a commit from before the migration, where the shell scripts still exist.
-export LEGACY_REF=<sha>
-publish-tool/tests/parity/run_parity.sh 3.99 latest   # a new minor
-publish-tool/tests/parity/run_parity.sh 3.8  latest   # the newest, rebuilt in place
-publish-tool/tests/parity/run_parity.sh 3.2  past     # an old minor, older configuration
-```
-
-[`compare.py`](tests/parity/compare.py) compares the two trees and asserts each intentional
-difference individually rather than filtering a text diff by eye. An expectation that covers more
-than a handful of paths also carries a **reconciler**: a function that transforms the old bytes the
-way the new implementation would and requires the result to be identical, so "223 versioned pages
-differ" is only accepted once each one is shown to differ *solely* by the intended rewrite. Gzip members are compared
-decompressed — the shell's `gzip -k -f` wrote the source mtime into the header, so an unchanged
-sitemap produced a new blob on every publish, and decompressing makes that churn invisible here
-by construction. The expected differences are:
-
-| Difference                                                    | Why                                                                                    |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `<X.Y>/index.html`, `<X.Y>/docs/index.html`, `<X.Y>/docs/getting-started/index.html` | The generated redirects replace the hand-written stub and add two the shell could not express. |
-| `search/search_index.json`                                    | The root index points versioned hits at `/latest/`.                                      |
-| `<X.Y>/{docs,meet}/**/*.html`                                 | The RSS `rel=alternate` links are made root-absolute, where the feeds are actually published. |
-| `<X.Y>/{docs,meet}/**/*.md`                                   | A versioned export no longer links to a root-served page under the version — a hard 404. |
-| `**/*.md` outside a version folder                            | A promoted export reaches versioned documentation at `/latest/`, like every other root file. |
-| `llms.txt`                                                    | Absolute link targets, and dead export links repaired.                                   |
-| `llms-full.txt`                                               | No longer generated: one concatenation of every export reached 2.8 MB, duplicating what the exports already serve. |
-| `.cache/**`, `site/**`                                        | Not in a fresh worktree, so they can no longer be committed by accident.                |
-
-Anything else is a bug. Run the gate before merging a change to the rewriting logic; it is not
-in CI because it needs a full build (see
-[`.github/workflows/test-tools.yaml`](../.github/workflows/test-tools.yaml)).
+- **The synthetic tree is derived from the configuration, not listed.**
+  [`test_postprocess.py`](tests/unit/test_postprocess.py) builds it from the real `ovweb.yaml`
+  layout and materialises every redirect rule's target from the rules themselves, so a page or a
+  rule added to the config is covered without touching the fixture.
+- **A tree that has just been post-processed must `verify` clean**
+  ([`test_verify.py`](tests/unit/test_verify.py)). That makes `verify` a real post-publish signal:
+  anything it reports right after a publish is something the pipeline failed to do.
+- **The printed plan must match the steps that run.** `--dry-run` is only useful if it is the
+  truth, so the pipeline is run against a recording reporter and compared to `plan.py`, in order.
 
 ### The export preprocessor
 
@@ -726,10 +687,10 @@ while the words describing the asset are not.
 
 | Deviation | Why |
 | --- | --- |
-| An `<img>` becomes its `alt` text | 1702 of the site's images carry informative alt text, all of it discarded. Images with no usable alt are still removed, and only one of a Material light/dark pair contributes, or the text appears twice. |
+| An `<img>` becomes its `alt` text | Most of the site's images carry informative alt text, all of which `autoclean` discards. Images with no usable alt are still removed, and only one of a Material light/dark pair contributes, or the text appears twice. |
 | A comparison-table icon becomes `Yes` / `No` / `In progress` | The markup already says which — `class="twemoji compare-table-icon-yes"` — so the table exports as data with no change to the content. |
-| A link whose only content is an image or video becomes that asset's alt text, unlinked | `autoclean` removed an `<a>` around an `<img>` but not around a `<video>`, so markdownify wrote an empty link. That is the `\[[](…mp4)\]` noise. |
-| Tab labels are kept, as a bold line before each tab's block | Without them, 449 tabbed blocks are runs of code blocks with nothing saying which is Linux, Windows or macOS — silently ambiguous rather than visibly missing. |
+| A link whose only content is an image or video becomes that asset's alt text, unlinked | `autoclean` removes an `<a>` around an `<img>` but not around a `<video>`, so markdownify writes an empty link. |
+| Tab labels are kept, as a bold line before each tab's block | Without them a tabbed block is a run of code blocks with nothing saying which is Linux, Windows or macOS — silently ambiguous rather than visibly missing. |
 
 Two layers of checking, because "identical to `autoclean` except on purpose" is the whole promise:
 
@@ -747,30 +708,21 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
   diff -r /tmp/baseline /tmp/withhook
   ```
 
-  Last run: 246 exports on both sides, none added or missing, 102 byte-identical; every difference
-  attributable to a deviation. Empty Markdown links **65 → 0**, no SVG or tabbed-set markup leaked
-  either way, and 34 KB of previously discarded alt text recovered.
+  Run this after a plugin upgrade, or after changing any rule in the module.
 
 ### `verify`
 
 `ovweb verify` asserts the invariants of a published tree: every version folder has a redirect at
-its root with a relative target, no promoted page claims a versioned URL as its own, no version
+its root with a relative target, no promoted page claims a versioned URL as its own, every version
 folder carries a correctly pruned sitemap, every search location is absolute, nothing served from
 the root pins the version `latest` points at, no versioned export links to a root-served page
 under its version, no export links to another export that does not exist, every `<lastmod>` in the
 root sitemap is a real date that is not in the future, the unversioned mirror is exactly the set of
-pages the sitemap advertises, **no generated redirect points at a page that does not exist**, and
+pages the sitemap advertises, no generated redirect points at a page that does not exist, and
 `versions.json` agrees with the folders on disk.
 
 The redirect-target check earns its place: a redirect into a 404 costs the visitor a second hop to
-reach nothing and tells a crawler the content moved somewhere it did not. It found a real one in
-review — a rule gated `>=3.7` whose successor page first shipped in 3.8 — and it is why the
-synthetic tree in [`test_postprocess.py`](tests/unit/test_postprocess.py) materialises every rule's
-target from the rules themselves rather than from a list.
-
-A tree that has just been post-processed verifies clean, which is asserted by
-[`test_verify.py`](tests/unit/test_verify.py). That makes `verify` a real post-publish signal:
-anything it reports right after a publish is something the pipeline failed to do.
+reach nothing and tells a crawler the content moved somewhere it did not.
 
 The sitemap check is the one worth understanding, because it guards a feature that fails silently.
 It asserts three things about `<X.Y>/sitemap.xml` — that it exists, that it has the version-root
@@ -804,10 +756,9 @@ correct](#nothing-is-pushed-until-the-tree-is-correct)).
 [`pyproject.toml`](pyproject.toml) is the single place the publishing dependencies are declared,
 with two extras: `build` (the real publish, including `mkdocs-material[imaging]`) and `validate`
 (the same minus the imaging stack). `mkdocs-material` is also named as the base-image tag of
-[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike); those three had
-drifted to three different values before `ovweb doctor --pins` started failing on disagreement.
-A different theme version builds different markup, and the release-notes splice matches on that
-markup.
+[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), and `ovweb doctor
+--pins` fails when the three disagree. A different theme version builds different markup, and the
+release-notes splice matches on that markup.
 
 ---
 
@@ -818,7 +769,7 @@ markup.
 - **Post-processing is not idempotent.** A second pass would strip the version out of
   author-pinned links (the shield is single-shot) and fail on the already-moved directories.
   `ovweb` refuses to run on a tree whose version root is already a generated redirect; `--force`
-  overrides it. The shell had no guard at all.
+  overrides it.
 - **A publish only touches the version being published.** The one exception is the release-notes
   splice, which reaches into every other version folder. So a change to the rewriting rules
   reaches an old version only when that version is re-published.
@@ -831,10 +782,6 @@ markup.
   `index.html`, but each version's `search/search_index.json` still holds that version's original
   releases text. The page a visitor sees is current; in-version search results for the releases
   page may lag until that version is rebuilt.
-- **The root search index names explicit versions.** It is a copy of the newest version's index,
-  taken after the locations were pinned, so a versioned hit points at `/3.9/docs/…` rather than
-  `/latest/docs/…`. Preserved deliberately from the shell implementation; revisiting it means
-  deciding what a search hit should mean once `latest` moves.
 - **Old branches do not generate `llms.txt` or the RSS feeds.** Their `mkdocs.yml` predates those
   plugins, so the past-version cleanup is tolerant of every root file it removes.
 - **A version can be published without a branch.** `ovweb versions list` flags it; such a version
