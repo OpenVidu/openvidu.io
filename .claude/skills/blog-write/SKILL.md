@@ -26,7 +26,7 @@ If no outline exists yet, use the `blog-plan` skill first.
     - There is no build-level guard against publishing a draft early: a merged draft would go live at its temporary date. The guard is the workflow — **each draft lives on its own branch** and is only merged to `main` when ready.
 - **Publishing a draft:** (1) set the frontmatter `date` to the actual publish date (today), (2) replace the string `YYYY/MM/` with the real `<year>/<month>/` of that date everywhere it appears in the post body's asset refs, (3) `git mv` the post to `docs/blog/posts/YYYY/MM/<slug>.md` and the asset folder to `docs/assets/images/blog/YYYY/MM/<slug>/`. Nothing else inside the post changes — links are root-absolute and the placeholder was designed to be a pure string replacement.
 
-**No `mkdocs.yml` change is needed for a new post.** The `llmstxt` plugin's `Blog:` section is the glob `blog/posts/*/*/*.md`, which matches the placeholder path too, and the entry's description comes from the post's own `description` frontmatter. A post therefore appears in `llms.txt`, and gets its Markdown export, as soon as the file exists — but the build **fails** if it has no `description`.
+**No `mkdocs.yml` change is needed for a new post.** The `llmstxt` plugin's `Blog:` section is the glob `blog/posts/*/*/*.md`, which matches the placeholder path too, and the entry's link text and description come from the post's own `title` and `description` frontmatter. A post therefore appears in `llms.txt`, and gets its Markdown export, as soon as the file exists — but the build **fails** if it lacks either key.
 
 **Before drafting, read one or two recent posts** in `docs/blog/posts/` to match voice, depth, and formatting.
 
@@ -34,6 +34,7 @@ If no outline exists yet, use the `blog-plan` skill first.
 
 ```yaml
 ---
+title: Your post title      # REQUIRED — the build fails without it (llmstxt hook); the page <title>, normally the same as the H1
 draft: false
 date: 2026-07-04            # the actual publish date; while a draft, a temporary real date (the draft's creation day)
 slug: your-post-slug
@@ -119,7 +120,6 @@ Then add a short **Final checks** note confirming:
 - Intro hook + `<!-- more -->` present (when the intro is included).
 - Active/conversational voice held throughout.
 - All commands copy-pasteable; all image placements annotated.
-- Frontmatter has a `description` (required); `cover_image` set when a raster poster exists in the asset folder.
+- Frontmatter has a `title` and a `description` (both required — the build fails without them); `cover_image` set when a raster poster exists in the asset folder.
 - Naming agrees: filename is `<slug>.md` (= frontmatter `slug`); asset folder is `docs/assets/images/blog/YYYY/MM/<slug>/` mirroring the post location; published posts sit in `posts/<year>/<month>/` matching the frontmatter `date`, drafts sit in the literal `posts/YYYY/MM/` placeholder folders with a temporary creation date.
-- Post added to the `llmstxt` `sections` in `mkdocs.yml` from the beginning (placeholder path while a draft).
 - Links follow the rules above (root-absolute internal/assets with the `.md`/file extension; `{:target="_blank"}` external; absolute version-pinned for release posts).

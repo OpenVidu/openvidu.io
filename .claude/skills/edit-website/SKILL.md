@@ -52,7 +52,7 @@ One convention for Markdown, a separate one for raw HTML. Full detail in the REA
    - `hide:` — `navigation`, `toc`, `footer`, `search-bar`, `version-selector`, `footer-prev`, `footer-next` (the non-standard ones are implemented in `overrides/main.html`).
    - **Tag system** (README: "Mkdocs Material tag system") — tags load the JS/CSS a page needs, and each expects a specific HTML structure: `setupwowjs` (wow.js animations, elements with class `wow`), `setupcardglow` (`.feature-cards > .grid.cards`), `setupcarousel` (Flickity, `.carousel > .carousel-cell`), `setupcustomgallery` (GLightbox for **HTML** `<a class="glightbox">` images/videos — NOT needed for plain Markdown images), `copyclipboard`; `Meet`/`Platform` tags load `meet.css`/`platform.css`. If you copy a visual pattern from another page, copy its tags too.
    - **Structured data lives in frontmatter**: `publications:` (research.md) and `faq:` (pricing.md) feed the JSON-LD emitted by `overrides/partials/json-ld.html`. When editing those page sections, update the matching frontmatter entry (anchors must equal heading ids; answers/abstracts must match visible content).
-2. **Theme overrides** (`docs/overrides/`): `main.html` extends the Material base template with Jinja blocks (`extrahead`, `scripts`, `styles`, `outdated`...); `home.html` extends `main.html`; `partials/` adds/overrides partials (`header.html`, `footer.html`, `tabs.html`, `json-ld.html`). Site-wide changes go here — follow the "before/after" comment markers inside the blocks.
+2. **Theme overrides** (`docs/overrides/`): `main.html` extends the Material base template with Jinja blocks (`extrahead`, `scripts`, `styles`, `outdated`...); `home.html` extends `main.html`; `partials/` adds/overrides partials (`header.html`, `footer.html`, `tabs.html`, `json-ld.html`, `og.html`). Site-wide changes go here — follow the "before/after" comment markers inside the blocks.
 3. **Shared snippets**: grep for a snippet's usages before editing it — it may render on several pages (e.g. `shared/meet/meet-vs-platform-table.md` is on the landing page). New snippets: create under `shared/` in the folder matching the consuming docs area/provider (conventions in `shared/README.md`) and include with `--8<-- "shared/<folder>/<file>.md"`.
 4. **HTML-in-Markdown**: pages mix raw HTML and Markdown via `md_in_html` (`<div markdown>`). Layout uses unsemantic-grid classes (`grid-50`, `grid-90`, `tablet-grid-...`). Material features in use: admonitions, `???` collapsible details, content tabs, attr_list (`{ .class }`, `{:target="_blank"}`).
 5. **Theme-dependent images/videos**: Markdown images use the `#only-dark`/`#only-light` suffixes. For custom GLightbox HTML: the suffix goes in the `<img>`/`<video>` `src`, **not** in the parent `<a href>`, each `<a>` element must be a one-liner, and the page needs the `setupcustomgallery` tag.
@@ -89,15 +89,15 @@ The dev image is a custom build of `squidfunk/mkdocs-material` with the repo's e
 
 ```bash
 docker build --pull --no-cache --rm=true -t squidfunk/mkdocs-material .
-docker run --name=mkdocs-old --rm -it -p 9000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+docker run --name=mkdocs --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
 ```
 
-Then open http://localhost:9000. To produce a full build instead: `docker run --rm -it -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build`.
+Then open http://localhost:8000. To produce a full build instead: `docker run --rm -it -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build`.
 
 Notes:
 
 - Run from the repo root. When running non-interactively (scripts, agents), drop `-it`.
-- If host port 9000 is taken (it often is on dev machines), map another one, e.g. `-p 9100:8000` — do not stop whatever holds 9000.
+- If host port 8000 is taken, map another one, e.g. `-p 9100:8000` — do not stop whatever holds it.
 - Watch the console: the build must be **zero `WARNING`s**. Broken links appear as warnings (and CI's `mkdocs build --strict` turns them into hard failures). `INFO` messages about anchors are expected — most are `pymdownx.tabbed` tab-anchor false positives (see Link rules); still scan them for a genuinely renamed/removed heading when you touch headings.
 - The dev server serves a **single unversioned site at the root** (`/meet/`, not `/latest/meet/`) and overrides `site_url`, so canonicals and JSON-LD show `http://0.0.0.0:8000/...` locally. Both are expected; version handling happens at deploy time. To preview the real versioned layout, use `mike serve` against `gh-pages` (see README "Testing versioning locally").
 

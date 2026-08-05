@@ -61,8 +61,8 @@ When creating a new page, follow these steps:
 
    ```yaml
    ---
-   title: Example # Unique title (only required if the title in "mkdocs.yml" is not unique or missing)
-   description: Some description # Unique description, max 160 characters
+   title: Example # Unique title, max ~57 characters. Required on every page: the build fails without it
+   description: Some description # Unique description, max 160 characters. Required on every page: the build fails without it
    ---
    ```
 
@@ -235,6 +235,14 @@ These are the tags currently used:
     ```html
     <a class="glightbox" href="video.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="video.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
     ```
+
+- `copyclipboard`: add this tag to the page if it has inline copy-to-clipboard elements (a `.copy-inline` wrapper whose `.copy-btn` copies its `data-copy` value). Loads [`copy-clipboard.js`](docs/javascripts/copy-clipboard.js).
+
+- `scrolltoversion`: releases pages only — auto-scrolls to the `## X.Y.0` heading of the version being viewed. Loads [`releases-scroll-to-version.js`](docs/javascripts/releases-scroll-to-version.js).
+
+- `dropdown`: groups the page's top-level nav tab into a dropdown menu; read by [`docs/overrides/partials/tabs.html`](docs/overrides/partials/tabs.html) from the nav item's page (or the first child of a nav group).
+
+- `Meet` / `Platform`: load [`meet.css`](docs/stylesheets/meet.css) / [`platform.css`](docs/stylesheets/platform.css) for product-specific styling.
 
 #### Theme-dependent images/videos
 

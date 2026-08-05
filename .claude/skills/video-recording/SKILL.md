@@ -15,9 +15,9 @@ description: >
 
 Produce a short looping MP4 of a two-person OpenVidu Meet call embedded in an
 app, where **both participants' cameras are pre-recorded clips** rather than
-real webcams. The reference output is the `blog/crm-meet` post's video: sign in
-→ open an issue → click **Join** → a live two-way meeting inside the app, ~10 s,
-looping.
+real webcams. The reference output is the video of the
+`building-a-video-enabled-crm-with-an-ai-agent` post: sign in → open an issue →
+click **Join** → a live two-way meeting inside the app, ~10 s, looping.
 
 ## The core idea
 
@@ -123,8 +123,9 @@ findAll('button').find(b => b.offsetParent && b.textContent.trim() === 'Join Mee
 
 ## Full procedure
 
-1. **Bring up the stack** (`deploy/up.sh`) and seed demo data (user, client,
-   issue, a *future* meeting so the **Join** button shows).
+1. **Bring up the stack** — the demo app lives in its own repo, not this one
+   (the CRM demo starts with its `deploy/up.sh`) — and seed demo data (user,
+   client, issue, a *future* meeting so the **Join** button shows).
 2. **Source the clips** — Pexels works well (front-facing, calm, office
    setting; avoid side profiles, big arm-waving, and over-the-shoulder shots
    that read as in-person). Extract each to JPEG frames.
@@ -200,9 +201,12 @@ Embed in the post right after the `<!-- more -->` excerpt marker:
 
 ```html
 <video autoplay muted loop playsinline width="100%" style="border-radius:10px;">
-  <source src="/assets/images/blog/crm-meet/crm-meet-demo.mp4" type="video/mp4">
+  <source src="/assets/images/blog/YYYY/MM/<slug>/crm-meet-demo.mp4" type="video/mp4">
 </video>
 ```
+
+(`YYYY/MM/<slug>` is the post's asset folder — the literal placeholder on a
+draft, the real year/month once published; see the `blog-write` skill.)
 
 ## Honesty / caption
 
