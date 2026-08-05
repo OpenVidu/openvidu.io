@@ -1,13 +1,10 @@
 ---
-title: Building an AI agent for transcribing and summarizing audio calls
+title: "Building an AI agent for transcribing and summarizing audio calls"
 draft: false
-date: 2026-08-04T00:00:00.000Z
+date: 2026-08-04
 slug: transcriber-summarizer-agent
-description: >-
-  How to build an AI agent that transcribes and summarizes audio calls for your
-  OpenVidu deployment from scratch
-cover_image: >-
-  /assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png
+description: "How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch"
+cover_image: transcriber-summarizer-agent.png
 categories:
   - AI
   - Implementation
@@ -95,7 +92,7 @@ Now simply follow these steps to run the demo locally:
 
 4. Run the three components in separate terminals:
 
-      - Terminal 1: install and run OpenVidu locally following the [official instructions](https://openvidu.io/latest/docs/self-hosting/local/).
+      - Terminal 1: install and run OpenVidu locally following the [official instructions](/docs/self-hosting/local.md).
 
       - Terminal 2: Run the transcriber agent
           ```bash
@@ -349,4 +346,4 @@ You now have an agent that scales from a one-on-one to a full meeting: a clean t
 
 It stayed short because **you never built the hard part**. That is: the real-time audio transport, the track subscriptions, the AI provider communication layers. LiveKit Agents and its plugins provides all the building blocks necessary to focus on your agent's logic, not the plumbing.
 
-Taking this idea to production is exactly what OpenVidu is for. It wraps the same LiveKit API compatible core in a battle-tested, self-hosted platform, so the agent you just wrote runs **unchanged** while OpenVidu handles everything that gets hard at scale: autoscaling, high availability, TURN relaying for restrictive networks, recording management, built-in observability... All within your own infrastructure, keeping all data under your control in complete privacy, and with predictable costs avoiding per-minute SaaS bills. Explore the **[OpenVidu documentation](https://openvidu.io/docs/)** to self-host the whole stack, from a one-command local install to a production-grade cluster.
+Taking this idea to production is exactly what OpenVidu is for. It wraps the same LiveKit API compatible core in a battle-tested, self-hosted platform, so the agent you just wrote runs **unchanged** while OpenVidu handles everything that gets hard at scale: autoscaling, high availability, TURN relaying for restrictive networks, recording management, built-in observability... All within your own infrastructure, keeping all data under your control in complete privacy, and with predictable costs avoiding per-minute SaaS bills. Explore the **[OpenVidu documentation](/docs/index.md)** to self-host the whole stack, from a one-command local install to a production-grade cluster.
