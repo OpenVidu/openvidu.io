@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on Azure
-description: Learn how to perform administrative tasks on an Azure OpenVidu Single Node deployment
+title: "Administer OpenVidu Single Node COMMUNITY on Azure"
+description: "Administer OpenVidu Single Node COMMUNITY on Azure: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Azure
@@ -66,7 +66,7 @@ In addition to these, an Azure deployment provides the capability to manage glob
 
 === "Changing configuration through Key Vault secrets"
 
-    1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target=_blank} on Azure.
+    1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed your OpenVidu Single Node Stack.
     3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu deployment.
         <figure markdown>

@@ -1,6 +1,6 @@
 ---
-title: Pricing
-description: Discover OpenVidu's transparent pricing for Community (free) and Pro editions.
+title: "Pricing: Free COMMUNITY & Pay-Per-Core PRO"
+description: "OpenVidu pricing: COMMUNITY edition free forever, PRO from $0.0006 per core per minute. Transparent, pay only for what you use."
 # Structured Q&A metadata for this page's FAQ sections. It feeds the JSON-LD
 # (schema.org FAQPage) emitted by overrides/partials/json-ld.html. Keep in
 # sync with the page content below: 'anchor' must match the heading id, and
@@ -39,8 +39,8 @@ tags:
 <table id="pricing-table" name="big-pricing-table">
   <tr>
     <th></th>
-    <th class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
-    <th colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
+    <th id="openvidu-community" class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
+    <th id="openvidu-pro" colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
   </tr>
   <tr>
     <td class="first-column border-right">Price</td>
@@ -109,7 +109,7 @@ Taking into account the following points:
 
 - You only pay for your OpenVidu Pro cluster(s) for the time they are running. Usage will be registered the moment you start your cluster and will stop as soon as you shut your cluster down. When turned on, your cluster will be charged even in idle state (without active Rooms).
 - You pay for every available core at any given time: if you cluster grows for one hour, that hour you will pay more. If your cluster decreases the next hour, next hour will be cheaper. Master Nodes and Media Nodes have the same core per minute price.
-- Your OpenVidu Pro cluster(s) need to allow outbound traffic to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
+- Your OpenVidu Pro cluster(s) need to allow outbound traffic to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 1em">There is a 15-day free trial period waiting for you!</h2>
@@ -135,9 +135,9 @@ Users must create an [OpenVidu account](account.md) and get an OpenVidu License.
 
 When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a **15-day free trial period** during which you will not be charged at all.
 
-After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](account.md) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe :fontawesome-solid-external-link:{.external-link-icon}](https://stripe.com/){:target=_blank}.
+After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](account.md) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe :fontawesome-solid-external-link:{.external-link-icon}](https://stripe.com/){:target="_blank"}.
 
-OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
+OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
 ## Pricing examples
 
@@ -165,7 +165,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" alt="Diagram of an OpenVidu Elastic deployment with 12 cores in total"/>
 </figure>
 </div>
 
@@ -188,7 +188,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" alt="Diagram of an OpenVidu Elastic deployment with 20 cores in total"/>
 </figure>
 </div>
 
@@ -211,7 +211,7 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" alt="Diagram of an OpenVidu High Availability deployment with 32 cores in total"/>
 </figure>
 </div>
 
@@ -238,7 +238,7 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" />
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" alt="Diagram of an OpenVidu Elastic deployment with a variable number of cores"/>
 </figure>
 </div>
 

@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on-premises
-description: Learn how to deploy OpenVidu Elastic on-premises
+title: "Install OpenVidu Elastic on-premises"
+description: "Deploy OpenVidu Elastic on your own servers with the guided or non-interactive installer, then point your application at the result."
 ---
 
 # OpenVidu Elastic installation: On-premises
@@ -65,7 +65,7 @@ For the Media Nodes, the following services are configured:
     | `stun1.l.google.com`     | `19302` |
 
     !!! info
-        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
+        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
 ## Port rules (Master Node)
 
@@ -216,7 +216,7 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
+- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
 - OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}

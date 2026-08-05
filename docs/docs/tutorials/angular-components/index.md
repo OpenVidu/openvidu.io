@@ -1,6 +1,6 @@
 ---
-title: Angular Components Tutorials
-description: Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
+title: "OpenVidu Angular Components tutorials"
+description: "Customize the video conferencing UI with OpenVidu Angular Components: layouts, toolbars, panels, chat, participant items and your own branding."
 ---
 
 # Angular Components Tutorials

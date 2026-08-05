@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu High Availability on Oracle Cloud Infrastructure
-description: How to upgrade OpenVidu High Availability on Oracle Cloud Infrastructure deployments.
+title: "Upgrade OpenVidu High Availability on Oracle Cloud"
+description: "Upgrade an existing OpenVidu High Availability deployment on Oracle Cloud Infrastructure to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu High Availability: Oracle Cloud Infrastructure

@@ -1,4 +1,5 @@
 ---
+description: "Run video conferencing on your own servers. Deploy the ready-made OpenVidu Meet app, or build your own real-time video product with OpenVidu Platform."
 title: "Self-hosted video conferencing & custom WebRTC"
 template: home.html
 hide:
@@ -11,8 +12,6 @@ tags:
   - setupwowjs
   - setupcardglow
 ---
-
-# Home { .hide }
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
   <h2 id="get-started">
@@ -59,7 +58,7 @@ tags:
           For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
         </p>
         <ul class="product-features">
-          <li>Programmable client and server SDKs for all languages, LiveKit-compatible</li>
+          <li>Programmable client and server SDKs for all languages, from our LiveKit fork</li>
           <li>Build your custom UI from scratch with total freedom</li>
           <li>Low level control of real time media: codecs, protocols, bitrates...</li>
           <li>Precise control of recording and streaming with custom layouts</li>
@@ -74,7 +73,7 @@ tags:
 </div>
 
 <div class="wow animated animatedFadeInUp fadeInUp" style="text-align: center" markdown>
---8<-- "shared/meet/meet-vs-platform-table.md"
+--8<-- "shared/meet-vs-platform-table.md"
 
 *[Learn more about OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)*
 </div>
@@ -82,7 +81,7 @@ tags:
 <hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
+  <h2 id="self-host-platform">
     Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
   </h2>
 </div>
@@ -118,7 +117,7 @@ tags:
 
     ---
 
-    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){target="\_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
+    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
 
 -   :material-chart-timeline-variant-shimmer:{ .feature-icon .padding-icon } __Scalable__{ .feature-name }
 
@@ -144,7 +143,7 @@ tags:
 <hr style="margin: 7em 0;">
 
 <div class="second-slogan wow animated animatedFadeInUp fadeInUp">
-  <h2 id="get-started">
+  <h2 id="all-features">
     All the features you need to quickly build your perfect real-time application
   </h2>
 </div>
@@ -156,13 +155,13 @@ tags:
 
     ---
 
-    Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){target="\_blank"}.
+    Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){:target="_blank"}.
 
 <!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
 
     ---
 
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit](https://livekit.io/){target="\_blank"} and [mediasoup](https://mediasoup.org/){target="\_blank"}-->
+    OpenVidu is built using the best open source WebRTC technologies: [LiveKit](https://livekit.io/){:target="_blank"} and [mediasoup](https://mediasoup.org/){:target="_blank"}-->
 
 -   :octicons-shield-check-16:{ .feature-icon .padding-icon } __Security at all levels__{ .feature-name }
 
@@ -170,7 +169,7 @@ tags:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon"/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon" alt=""/></span> __Multiplatform__{ .feature-name }
 
     ---
 

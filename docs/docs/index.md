@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Platform
-description: Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, AI, live streaming and robotics.
+title: "OpenVidu Platform: Self-Hosted WebRTC SDKs"
+description: "Build real-time video, audio and AI applications on infrastructure you control, with LiveKit-compatible SDKs and a self-hosted media server."
 ---
 
 <div class="logo-header platform-header">
@@ -18,7 +18,7 @@ OpenVidu Platform enables you to build real-time applications. You can build you
 
 OpenVidu is based on WebRTC technology and allows developing any kind of use case you can imagine: one-to-one calls, video conference rooms, massive live-streaming events, management and processing of drones and camera feeds...
 
-OpenVidu gives you **LiveKit-compatible client and server SDKs** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
+OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
 <figure markdown>
   ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .do-not-include-in-gallery }
@@ -28,7 +28,7 @@ OpenVidu gives you **LiveKit-compatible client and server SDKs** for every major
 
 ## Your first lines of code
 
-Real-time video in your app takes a few lines with the LiveKit-compatible SDKs:
+Real-time video in your app takes a few lines with our LiveKit fork's SDKs:
 
 === "Application client (browser)"
 
@@ -81,7 +81,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 </div>
 
 !!! info
-    If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](../meet/index.md){.meet-link-color} may be the perfect solution for you. Give it a try!
+    If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](../meet/index.md){.meet-link-color} may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](../openvidu-meet-vs-openvidu-platform.md).
 
 ### Live-streaming
 

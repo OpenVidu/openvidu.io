@@ -1,8 +1,9 @@
 ---
+title: "Deployment times for WebRTC on five clouds"
 draft: false
 date: 2026-07-07
 slug: deploy-and-scale-in-times-across-clouds
-description: We deployed the same self-hosted WebRTC video platform on AWS, Azure, GCP, Oracle Cloud and DigitalOcean — in single-node, elastic and HA, over and over — and measured how long each takes to stand up. DigitalOcean is fastest, Oracle does the most, and looking at every individual run shows which clouds are actually predictable.
+description: "We deployed the same self-hosted WebRTC platform on AWS, Azure, GCP, Oracle and DigitalOcean, in three architectures each, and timed every single run."
 categories:
   - Technology
   - Research

@@ -1,11 +1,13 @@
 ---
-title: Electron Tutorial
-description: Learn how to build a simple video-call app using Electron with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+title: "Electron video call tutorial"
+description: "Build a desktop video-call app on OpenVidu with Electron and the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to media."
+tags:
+  - setupcustomgallery
 ---
 
 # Electron Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-js){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-js){ .md-button target="_blank" }
 
 This tutorial is a simple video-call application built with **Electron** that allows:
 
@@ -14,7 +16,7 @@ This tutorial is a simple video-call application built with **Electron** that al
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -30,7 +32,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
@@ -41,7 +43,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 This Electron project has been created using **electron-forge**. As an Electron application, the code is divided into two main parts, the **main process** and the **renderer process**. The most important files are located within the `src/` directory:
 
 -   `index.js`: This file is the entry point (main process) for the Electron application. It creates the main window and loads the `index.html` file.
--   `app.js`: This file constitutes the renderer process code, responsible for the application UI and logic. It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+-   `app.js`: This file constitutes the renderer process code, responsible for the application UI and logic. It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 -   `index.html`: This HTML file is responsible for creating the user interface. It contains the form to connect to a video call and the video call layout.
 -   `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
 

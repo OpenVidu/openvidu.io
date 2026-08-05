@@ -1,11 +1,13 @@
 ---
-title: Angular Tutorial
-description: Learn how to build a simple video-call app using Angular with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+title: "Angular video call tutorial"
+description: "Build an Angular video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
+tags:
+  - setupcustomgallery
 ---
 
 # Angular Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-angular){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-angular){ .md-button target="_blank" }
 
 This tutorial is a simple video-call application built with **Angular** that allows:
 
@@ -14,7 +16,7 @@ This tutorial is a simple video-call application built with **Angular** that all
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -30,7 +32,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
@@ -239,7 +241,7 @@ The `joinRoom()` method performs the following actions:
     }
     ```
 
-    This function sends a POST request using [HttpClient :fontawesome-solid-external-link:{.external-link-icon}](https://angular.dev/api/common/http/HttpClient){:target="\_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
+    This function sends a POST request using [HttpClient :fontawesome-solid-external-link:{.external-link-icon}](https://angular.dev/api/common/http/HttpClient){:target="_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
 
 5.  It connects to the room using the LiveKit URL and the token.
 6.  It publishes the camera and microphone tracks to the room using `room.localParticipant.enableCameraAndMicrophone()`, which asks the user for permission to access their camera and microphone at the same time. The local video track is then stored in the `localTrack` variable.

@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Elastic on Azure
-description: How to upgrade OpenVidu Elastic on Azure deployments.
+title: "Upgrade OpenVidu Elastic on Azure"
+description: "Upgrade an existing OpenVidu Elastic deployment on Azure to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: Azure

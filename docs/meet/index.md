@@ -1,5 +1,6 @@
 ---
-title: OpenVidu Meet
+title: "OpenVidu Meet: Self-Hosted Video Conferencing"
+description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your servers in minutes, record meetings and embed video calls in any app."
 tags:
   - setupwowjs
   - setupcardglow
@@ -24,7 +25,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
 <div style="text-align: center; margin: 3em 0;" markdown>
 
-[Deploy Meet in minutes](./getting-started/index.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
+[Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
 [Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
 
 </div>
@@ -232,7 +233,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div style="text-align: center; margin: 3em 0;" markdown>
 
-[Deploy Meet in minutes](./getting-started/index.md){ .md-button .md-button--primary }
+[Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
 [Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
 
 </div>
@@ -494,7 +495,7 @@ Build trust with instant, reliable support through embedded video calls that per
 
 <div style="text-align: center; margin: 3em 0;" markdown>
 
-[Deploy Meet in minutes](./getting-started/index.md){ .md-button .md-button--primary }
+[Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
 [Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
 
 </div>
@@ -518,7 +519,7 @@ It is OpenVidu's **commercial edition** and requires a license. It is meant for 
 OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](../pricing.md) for more details.
 
 <h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
-You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview">deploying OpenVidu Meet</a>.
+You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview/">deploying OpenVidu Meet</a>.
 </h2>
 
 <hr style="margin: 5em 0 2em 0">

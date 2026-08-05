@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Elastic on-premises
-description: How to upgrade OpenVidu Elastic on-premises deployments.
+title: "Upgrade OpenVidu Elastic on-premises"
+description: "Upgrade an existing OpenVidu Elastic deployment on your own servers to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: On-premises

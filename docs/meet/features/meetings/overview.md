@@ -1,6 +1,6 @@
 ---
-title: Meetings in OpenVidu Meet
-description: Learn what a meeting is in OpenVidu Meet and how to join one.
+title: "Meetings in OpenVidu Meet"
+description: "What a meeting is in OpenVidu Meet: the live session held inside a room, when it starts and ends, and how participants join one."
 tags:
     - setupcustomgallery
 ---

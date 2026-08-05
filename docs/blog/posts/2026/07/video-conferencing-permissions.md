@@ -1,11 +1,9 @@
 ---
+title: "3 access models for video conferencing apps"
 draft: false
 date: 2026-07-14
 slug: video-conferencing-permissions
-description: >-
-  Compare the three access models for managing permissions in video conferencing
-  apps — anonymous role links, identified guests and users — with pros, cons and
-  when to use each.
+description: "The three access models for video conferencing apps compared, anonymous role links, identified guests and registered users, and when to use each."
 cover_image: poster.png
 categories:
   - OpenVidu Meet

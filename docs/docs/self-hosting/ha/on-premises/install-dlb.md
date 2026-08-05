@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on-premises with DNS Load Balancing
-description: Learn how to deploy OpenVidu High Availability on-premises with DNS Load Balancing
+title: "Install OpenVidu High Availability with DNS balancing"
+description: "Deploy an OpenVidu High Availability cluster on your own servers, using DNS load balancing across the four Master Nodes."
 ---
 
 # OpenVidu High Availability installation: On-premises with DNS Load Balancing
@@ -81,7 +81,7 @@ For the Media Nodes, the following services are configured:
     | `stun1.l.google.com`     | `19302` |
 
     !!! info
-        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target=_blank}.
+        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
 ## Port rules (Master Nodes)
 
@@ -240,7 +240,7 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
+- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
 - OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
 - MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
 - Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}

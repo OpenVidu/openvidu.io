@@ -1,6 +1,6 @@
 ---
-title: Advanced Features Tutorials
-description: Explore more advanced features of LiveKit with our tutorials on recording and more.
+title: "OpenVidu advanced feature tutorials"
+description: "Tutorials for OpenVidu's advanced features, starting with recording a room and storing the files in S3-compatible storage or Azure Blob Storage."
 ---
 
 # Advanced Features Tutorials

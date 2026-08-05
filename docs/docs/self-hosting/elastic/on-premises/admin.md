@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic administration on-premises
-description: Learn how to perform administrative tasks on an on-premises OpenVidu Elastic deployment
+title: "Administer OpenVidu Elastic on-premises"
+description: "Administer OpenVidu Elastic on your own servers: start and stop services, add Media Nodes, change the configuration and back up its data."
 ---
 
 # OpenVidu Elastic administration: On-premises

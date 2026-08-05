@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Meet Tutorials
-description: Learn how to build a video conferencing application by easily integrating OpenVidu Meet into your web application.
+title: "OpenVidu Meet embedding tutorials"
+description: "Working sample applications that embed OpenVidu Meet, each with a Node.js backend and a plain JavaScript frontend you can run and read."
 ---
 
 # OpenVidu Meet Tutorials

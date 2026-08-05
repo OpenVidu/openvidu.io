@@ -1,11 +1,11 @@
 ---
-title: Create admin dashboard using Angular Components
-description: Learn how to add an admin dashboard to the videoconference using OpenVidu Angular Components.
+title: "Admin dashboard with Angular Components"
+description: "Add an administration dashboard to a video conference built with OpenVidu Angular Components, to review recordings and manage the deployment."
 ---
 
 # Create admin dashboard using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-admin-dashboard){ .md-button target="_blank" }
 
 The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin dashboard to manage the recordings of a videoconference using the OpenVidu Components Angular library.
 
@@ -38,11 +38,11 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 
 #### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 #### 4. Run the openvidu-admin-dashboard tutorial
 
-To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 
@@ -62,7 +62,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
       npm start
     ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
+Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
 --8<-- "shared/tutorials/testing-other-devices.md"
 

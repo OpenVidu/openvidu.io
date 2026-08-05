@@ -6,7 +6,7 @@
 
 ### 1. Create the Compute instance
 
-1. Log in to your [**Oracle Cloud Infrastructure** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/){:target=_blank} account.
+1. Log in to your [**Oracle Cloud Infrastructure** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/){:target="_blank"} account.
 2. Search for **Instances**, open it, and click _"Create instance"_.
 
     <figure markdown>

@@ -1,11 +1,11 @@
 ---
-title: OpenVidu Local installation
-description: Learn how to install OpenVidu locally for development with Docker Compose. Quickly set up a secure environment to test and build your applications.
+title: "Install OpenVidu locally for development"
+description: "Run a full OpenVidu deployment on your own machine with Docker Compose, with certificates that let you test from other devices on your network."
 ---
 
 # OpenVidu Local installation (Development)
 
-For development purposes, we provide an [easy-to-install local deployment :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-local-deployment){:target="\_blank"} based on Docker Compose that automatically configures all the necessary services for OpenVidu, allowing you to develop and test your applications seamlessly.
+For development purposes, we provide an [easy-to-install local deployment :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-local-deployment){:target="_blank"} based on Docker Compose that automatically configures all the necessary services for OpenVidu, allowing you to develop and test your applications seamlessly.
 
 ## Installation instructions
 
@@ -13,16 +13,16 @@ First, make sure you have the following prerequisites:
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="\_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="_blank"}
 
 === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="\_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="_blank"}
 
 === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
-    - Install [Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"}
-    - Install [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"}
+    - Install [Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="_blank"}
+    - Install [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="_blank"}
 
 The installation consists of cloning a repository and running a script to configure your local IP address in the deployment. Then, you can start, stop, and manage your deployment with Docker Compose.
 
@@ -150,12 +150,12 @@ The deployment is ready when you see the following message:
  =========================================
 ```
 
-By visiting [http://localhost:7880](http://localhost:7880){:target="\_blank"} you have the OpenVidu Developer UI available, with a summary of the deployed services and passwords. You can access the following services:
+By visiting [http://localhost:7880](http://localhost:7880){:target="_blank"} you have the OpenVidu Developer UI available, with a summary of the deployed services and passwords. You can access the following services:
 
-- **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="\_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
-- **OpenVidu Dashboard** ([http://localhost:7880/dashboard](http://localhost:7880/dashboard){:target="\_blank"}): a web application interface to visualize your Rooms, Ingress and Egress services.
-- **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="\_blank"}): an S3 storage service for recordings.
-- **OpenVidu Meet** ([http://localhost:9080](http://localhost:9080){:target="\_blank"}): a high-quality video calling service based on OpenVidu.
+- **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
+- **OpenVidu Dashboard** ([http://localhost:7880/dashboard](http://localhost:7880/dashboard){:target="_blank"}): a web application interface to visualize your Rooms, Ingress and Egress services.
+- **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="_blank"}): an S3 storage service for recordings.
+- **OpenVidu Meet** ([http://localhost:9080](http://localhost:9080){:target="_blank"}): a high-quality video calling service based on OpenVidu.
 
 You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](../tutorials/application-client/index.md) for a step-by-step guide to developing your first application using OpenVidu.
 
@@ -163,7 +163,7 @@ You just need to point your OpenVidu and LiveKit applications to `http://localho
 
 ### Configure your Application to use the Local Deployment
 
-To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880){:target="\_blank"} or simply check the `.env` file. All access credentials for all services are defined in this file.
+To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880){:target="_blank"} or simply check the `.env` file. All access credentials for all services are defined in this file.
 
 === "OpenVidu <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
 
@@ -229,7 +229,7 @@ This setup is straightforward, but what if you need to test your app from multip
 1. LiveKit Server open source does not natively support HTTPS. You'll need a reverse proxy to serve LiveKit Server over HTTPS.
 2. Even with HTTPS, your SSL certificate might not be valid for local network addresses. You'll need to accept it in the browser for web apps, and install it on mobile devices.
 
-OpenVidu Local Deployment addresses these issues by providing a magic domain name `openvidu-local.dev` that resolves to any IP specified as a subdomain and provides a valid wildcard certificate for HTTPS. This is similar to services like [nip.io :fontawesome-solid-external-link:{.external-link-icon}](https://nip.io){:target="\_blank"}, [traefik.me](https://traefik.me){:target="\_blank"}, or [localtls](https://github.com/Corollarium/localtls){:target="\_blank}.
+OpenVidu Local Deployment addresses these issues by providing a magic domain name `openvidu-local.dev` that resolves to any IP specified as a subdomain and provides a valid wildcard certificate for HTTPS. This is similar to services like [nip.io :fontawesome-solid-external-link:{.external-link-icon}](https://nip.io){:target="_blank"}, [traefik.me](https://traefik.me){:target="_blank"}, or [localtls](https://github.com/Corollarium/localtls){:target="_blank"}.
 
 When using OpenVidu Local Deployment, you can access OpenVidu Server (which is 100% LiveKit compatible) and your app from any device on your local network with a valid HTTPS certificate. The following table shows the URLs to access the deployment and your application locally and from other devices on your network:
 

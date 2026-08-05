@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on-premises
-description: Learn how to perform administrative tasks on an on-premises OpenVidu Single Node PRO deployment
+title: "Administer OpenVidu Single Node PRO on-premises"
+description: "Administer OpenVidu Single Node PRO on your own servers: check the status of every service, and back up and restore its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: On-premises

@@ -1,19 +1,41 @@
 name: Publish Web
+
+# Publishes a documentation version with `ovweb` (publish-tool/). Pick the command that
+# matches what you are doing:
+#
+#   new     — a brand-new minor release (3.9.0). Publishes 3.9, moves `latest` onto it,
+#             refreshes the pages served from the site root, and creates the 3.9 branch so the
+#             version can be fixed later.
+#   latest  — a content fix, or a patch release of the current minor (3.8.1). Rebuilds the
+#             newest version from main in place, refreshes the root pages, and rebases the
+#             version branch onto main.
+#   past    — a fix or patch release for an older minor (3.7.2). The changes must already be
+#             committed on the 3.7 branch; the site root and `latest` are left alone.
+#
+# Run with dry_run first if you want to see the plan — it resolves everything, prints the
+# ordered steps and the redirects it would install, and touches nothing.
+
 on:
   workflow_dispatch:
     inputs:
-      script:
-        description: "Select the script to execute"
+      command:
+        description: "What to publish"
         required: true
         type: choice
         options:
-          - push-new-version
-          - overwrite-latest-version
-          - overwrite-past-version
+          - new
+          - latest
+          - past
       version:
-        description: "Version to publish"
+        description: "Minor version, e.g. 3.9"
         required: true
         type: string
+      dry_run:
+        description: "Print the plan without building or pushing anything"
+        required: false
+        default: false
+        type: boolean
+
 permissions:
   contents: write
 
@@ -22,33 +44,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # ovweb reads gh-pages and the version branches, and mike commits to gh-pages.
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: 3.x
+          python-version: "3.14"
+
       - name: Install safe-chain
-        uses: OpenVidu/actions/install-safe-chain@040cbfd01320475801d7b12e33769e0d55a737a8 # v1.0.21
+        uses: OpenVidu/actions/install-safe-chain@070fb73fda8fe7a08e28991b1c2d276f12a009ef # v1.0.22
 
       - name: Install dependencies
         run: |
+          # System libraries for mkdocs-material[imaging] (the optimize and privacy plugins).
           sudo apt-get update
-          # We pin the version of pygments to avoid breaking <a> elements as code block titles
-          pip install mike "mkdocs-material[imaging]==9.7.6" "pygments<2.20" mkdocs-glightbox mkdocs-llmstxt mkdocs-rss-plugin
           sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
           sudo apt-get install -y --fix-missing pngquant
+          # Installed NON-editable on purpose: publishing a past version checks out that
+          # version's branch, which does not contain this package. From site-packages the tool
+          # and its configuration survive every branch switch.
+          pip install "./publish-tool[build]"
 
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-      - name: Run selected script
-        working-directory: ./custom-versioning
+      - name: Preflight
+        run: ovweb doctor
+        continue-on-error: true
+
+      - name: Publish
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        # --verbose and --dry-run are global options, so they belong before the subcommand.
+        # ovweb also accepts them after it, but keeping the canonical order here keeps the log
+        # readable as something you can paste into a terminal.
         run: |
-          ./${{ github.event.inputs.script }}.sh ${{ github.event.inputs.version }}
+          ovweb --verbose ${{ inputs.dry_run && '--dry-run' || '' }} \
+            publish ${{ inputs.command }} ${{ inputs.version }}
+
+      - name: Verify the published tree
+        if: ${{ !inputs.dry_run }}
+        run: ovweb verify

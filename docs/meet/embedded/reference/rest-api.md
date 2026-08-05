@@ -1,4 +1,6 @@
 ---
+title: "OpenVidu Meet REST API reference"
+description: "Manage rooms, room members, recordings and users from your backend with the OpenVidu Meet REST API, including API key authentication."
 tags:
     - setupcustomgallery
 ---
@@ -35,7 +37,7 @@ X-API-KEY: your-api-key
 
 You can access the REST API reference documentation at:
 
-- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](api.html){target="_blank"}
+- [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](api.html){:target="_blank"}
 - **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/meet/api/v1/docs/`**{.no-break}
 
 ### Code snippets

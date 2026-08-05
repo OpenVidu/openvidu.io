@@ -1,5 +1,6 @@
 ---
-title: Step by step guide
+description: "Embed OpenVidu Meet in your web app step by step: run the server, create a room, choose an embedding option and deploy your application."
+title: "Embed OpenVidu Meet step by step"
 tags:
   - setupcustomgallery
 ---
@@ -358,7 +359,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 </html>
 ```
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners" alt="OpenVidu Meet meeting embedded in the example support app"/></a>
 
 ### Use an iframe
 
@@ -416,7 +417,7 @@ To show the list of recordings of a room, declare attribute **`show-only-recordi
 
 This will show the list of recordings for the specified room:
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-room-recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-room-recordings.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-room-recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-room-recordings.png" loading="lazy" class="round-corners" alt="List of room recordings embedded in the example support app"/></a>
 
 ### Embed the player for a specific recording
 
@@ -434,7 +435,7 @@ To show the player for a specific recording, replace attribute `room-url` with *
 
 This will show the player for the specified recording:
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-display-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-display-recording.png" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-display-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-display-recording.png" loading="lazy" class="round-corners" alt="Recording player embedded in the example support app"/></a>
 
 ## 6. REST API and Webhooks
 

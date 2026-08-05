@@ -1,6 +1,6 @@
 ---
-title: Production ready
-description: OpenVidu offers a self-hosted, production-ready live-video platform with advanced capabilities, including performance, scalability, fault tolerance and observability.
+title: "Production-ready self-hosted video"
+description: "What makes an OpenVidu deployment production ready: 2x media performance, scalability, fault tolerance, and the observability to see all three."
 ---
 
 # Production ready

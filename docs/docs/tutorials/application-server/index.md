@@ -1,6 +1,6 @@
 ---
-title: Application Server Tutorials
-description: Learn how to build an application server that generates LiveKit tokens and receives webhook events.
+title: "OpenVidu application server tutorials"
+description: "Build the backend of an OpenVidu app in Node.js, Java, Python, Go, .NET, PHP, Ruby or Rust: issue access tokens and receive webhook events."
 ---
 
 # Application Server Tutorials
@@ -8,14 +8,14 @@ description: Learn how to build an application server that generates LiveKit tok
 Every application server below has two specific purposes: 
 
 - Generate LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receive LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
+- Receive LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
 
 To do so they all define two REST endpoints:
 
 - `/token`: takes a room and participant name and returns a token.
 - `/webhook`: for receiving webhook events from LiveKit Server.
 
-They use the proper [LiveKit Server SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){target=\_blank} for their language, if available.
+They use the proper [LiveKit Server SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"} for their language, if available.
 
 <div class="tutorials-container" markdown>
 

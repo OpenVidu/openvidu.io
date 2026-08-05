@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu High Availability on DigitalOcean
-description: How to upgrade OpenVidu High Availability on DigitalOcean deployments.
+title: "Upgrade OpenVidu High Availability on DigitalOcean"
+description: "Upgrade an existing OpenVidu High Availability deployment on DigitalOcean to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu High Availability: DigitalOcean

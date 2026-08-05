@@ -1,6 +1,6 @@
 ---
-title: Changing configuration
-description: Learn how to modify OpenVidu configuration files across different deployment types, including single node, elastic and high availability setups.
+title: "Change OpenVidu configuration"
+description: "Where OpenVidu keeps its configuration files and how to edit them safely on Single Node, Elastic and High Availability deployments."
 ---
 
 # How to change OpenVidu configuration

@@ -1,5 +1,6 @@
 ---
-description: Configure OpenVidu to use an external MongoDB deployment instead of the bundled database instance.
+title: "Use an external MongoDB with OpenVidu"
+description: "Point OpenVidu at a MongoDB deployment you already run instead of the bundled instance, and move the data it keeps there across."
 ---
 
 # Use an External MongoDB with OpenVidu

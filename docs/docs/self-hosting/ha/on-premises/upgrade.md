@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu High Availability on-premises
-description: How to upgrade OpenVidu High Availability on-premises deployments.
+title: "Upgrade OpenVidu High Availability on-premises"
+description: "Upgrade an existing OpenVidu High Availability deployment on your own servers to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu High Availability: On-premises

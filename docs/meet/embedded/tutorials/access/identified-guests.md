@@ -1,13 +1,13 @@
 ---
-title: Identified Guests Tutorial
-description: Learn how to add identified guests with a fixed name and a unique access link to an OpenVidu Meet room using Node.js and JavaScript.
+title: "Identified guests tutorial for OpenVidu Meet"
+description: "Give each guest a fixed name and a personal access link to an OpenVidu Meet room, with a Node.js and Express backend and a JavaScript frontend."
 tags:
     - setupcustomgallery
 ---
 
 # Identified Guests Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/access/meet-identified-guests){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/access/meet-identified-guests){ .md-button target="_blank" }
 
 This tutorial extends the [Anonymous Access tutorial](./anonymous-access.md) to show how to add **identified guests** to an OpenVidu Meet room.
 
@@ -24,7 +24,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to man
 
 !!! info "Anonymous guests vs. explicit members"
 
-    OpenVidu Meet rooms can be accessed either through **shared anonymous links** (the moderator/speaker links from the [Anonymous Access tutorial](./anonymous-access.md)) or by adding **explicit room members** with personalized access and permissions. Identified guests are one of the two kinds of explicit room members (the other being [users](./users.md)). See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../../features/room-members/overview.md){:target="\_blank"} feature for the full picture.
+    OpenVidu Meet rooms can be accessed either through **shared anonymous links** (the moderator/speaker links from the [Anonymous Access tutorial](./anonymous-access.md)) or by adding **explicit room members** with personalized access and permissions. Identified guests are one of the two kinds of explicit room members (the other being [users](./users.md)). See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../../features/room-members/overview.md){:target="_blank"} feature for the full picture.
 
 ## Running this tutorial
 
@@ -40,7 +40,7 @@ git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} (≥ 18) installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} (≥ 18) installed on your device.
 
 1. Navigate into the application directory
 
@@ -60,13 +60,13 @@ npm install
 npm start
 ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}. You should see a screen like this:
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/identified-guests/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/identified-guests/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/identified-guests/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/identified-guests/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/identified-guests/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/identified-guests/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/identified-guests/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/identified-guests/members.png" loading="lazy" class="control-height round-corners" alt="Room members page of the tutorial app"/></a></p></div>
 
 </div>
 
@@ -126,7 +126,7 @@ This endpoint adds the identified guest by sending a `POST` request to the `room
 
 !!! info
 
-    You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/addRoomMember){:target="\_blank"} in the REST API reference for the full list of permissions.
+    You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/addRoomMember){:target="_blank"} in the REST API reference for the full list of permissions.
 
 ---
 

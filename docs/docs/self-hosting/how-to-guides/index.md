@@ -1,6 +1,6 @@
 ---
-title: How To Guides
-description: Explore step-by-step guides to customize your OpenVidu deployment for specific use cases
+title: "OpenVidu how-to guides"
+description: "Step-by-step guides for adapting an OpenVidu deployment to a specific need: storage, databases, proxies, ports, webhooks and backups."
 ---
 
 # How To Guides

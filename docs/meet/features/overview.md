@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Meet Features Overview
-description: A global picture of OpenVidu Meet features - Rooms, Meetings, Users, Room Members and Recordings - and how they relate.
+title: "OpenVidu Meet features overview"
+description: "A global picture of what OpenVidu Meet does: rooms, meetings, users, room members and recordings, and how the five relate to each other."
 ---
 
 # Features Overview
@@ -61,4 +61,4 @@ OpenVidu Meet is organized around a few core concepts. Understanding how they re
 
 !!! info "New to OpenVidu Meet?"
 
-    If you haven't deployed it yet, start with the [Getting started](../getting-started/index.md) guide and try it [locally](../deployment/local.md).
+    If you haven't deployed it yet, start with the [Getting started](../getting-started.md) guide and try it [locally](../deployment/local.md).

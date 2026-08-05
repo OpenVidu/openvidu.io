@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Elastic on AWS
-description: How to upgrade OpenVidu Elastic on AWS deployments.
+title: "Upgrade OpenVidu Elastic on AWS"
+description: "Upgrade an existing OpenVidu Elastic deployment on AWS to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: AWS

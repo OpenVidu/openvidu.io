@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on Oracle Cloud Infrastructure
-description: Learn how to deploy OpenVidu High Availability on Oracle Cloud Infrastructure
+title: "Install OpenVidu High Availability on Oracle Cloud"
+description: "Deploy OpenVidu High Availability on Oracle Cloud Infrastructure with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---
@@ -25,7 +25,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 ## Prerequisites
 
 * An Oracle Cloud Infrastructure account with permissions to create Compute instances, VCNs, Network Load Balancers, Object Storage buckets, Vaults, Functions and IAM resources.
-* [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target=_blank} installed on your machine.
+* [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"} installed on your machine.
 * Git installed on your machine.
 
 === "Architecture overview"
@@ -242,7 +242,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     terraform apply
     ```
 
-4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target=_blank} and wait for the SSH key to appear in your configured cluster-data bucket.
+4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured cluster-data bucket.
 
     !!! note
         A full HA deployment (4 Master Nodes + the Media Node pool forming the cluster) typically completes in about **8 to 10 minutes**.
@@ -280,7 +280,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     ssh -i openvidu_private_ssh_key_<STACK_NAME>.pem ubuntu@MASTER_NODE_PUBLIC_IP
     ```
 
-    You can find the public IPs of the 4 Master Nodes (named `<STACK_NAME>-master-node-1` … `<STACK_NAME>-master-node-4`) on the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} page. User traffic goes through the Network Load Balancer; the per-master public IPs are intended for SSH access only.
+    You can find the public IPs of the 4 Master Nodes (named `<STACK_NAME>-master-node-1` … `<STACK_NAME>-master-node-4`) on the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} page. User traffic goes through the Network Load Balancer; the per-master public IPs are intended for SSH access only.
 
     Then navigate to `/opt/openvidu/config/` where you will find all credentials in the following files:
 

@@ -1,8 +1,9 @@
 ---
+title: "How to scale video conferencing architecture"
 draft: false
 date: 2026-06-02
 slug: scalability-in-videoconferencing-systems
-description: How to scale video conferencing from a single server to a high-availability system — an architecture roadmap covering the elastic media plane, HA control plane, autoscaling and admission control.
+description: "An architecture roadmap for scaling video conferencing from one server to a high-availability system: elastic media plane, HA control plane, autoscaling."
 cover_image: poster.png
 categories:
     - Technology
@@ -285,7 +286,7 @@ The roadmap here is straightforward: start with a single node to move fast, add 
 
 You don't have to build all of this yourself.
 
-At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
+At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
 
 - [**Single Node**](/docs/self-hosting/single-node/index.md) to launch quickly.
 - [**Elastic**](/docs/self-hosting/elastic/index.md) to scale media capacity dynamically.

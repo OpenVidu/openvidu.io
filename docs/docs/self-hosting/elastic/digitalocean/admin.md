@@ -12,7 +12,7 @@ description: Learn how to perform administrative tasks on a DigitalOcean OpenVid
 </div>
 
 
-The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI. The Master Node is a single Droplet, while Media Nodes are plain Droplets created and removed by a [DigitalOcean Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target=_blank} that acts as the autoscaler.
+The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI. The Master Node is a single Droplet, while Media Nodes are plain Droplets created and removed by a [DigitalOcean Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} that acts as the autoscaler.
 
 Internally, the DigitalOcean Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth keeping in mind:
 
@@ -44,7 +44,7 @@ The Master Node is a Droplet that you power off and on, while Media Nodes are ep
             In a deployment with a fixed number of Media Nodes (`fixedNumberOfMediaNodes` greater than 0) there is no autoscaler function. Skip this step and power off the `<STACK_NAME>-media-node-<N>` Droplets the same way as the Master Node in step 4.
 
     2. Drain every Droplet tagged `<STACK_NAME>-media-node-tag` as described in [Removing a Media Node gracefully](#removing-a-media-node-gracefully). Each Media Node waits for its active Rooms to end and then deletes itself.
-    3. After confirming that no Media Node is left, navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank}.
+    3. After confirming that no Media Node is left, navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     4. Select the droplet called `<STACK_NAME>-master-node`. Click on it to go to the Master Node instance, there click on _"Power"_ and then _"Turn off"_ the droplet.
         <figure markdown>
         ![Turn Off Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-off-master-node.png){ .svg-img .dark-img }
@@ -55,7 +55,7 @@ The Master Node is a Droplet that you power off and on, while Media Nodes are ep
 
     To start the cluster, start the Master Node first and then let the autoscaler re-create the Media Nodes.
 
-    1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank}.
+    1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. Select the droplet named `<STACK_NAME>-master-node`, then go to _"Power"_ and then _"Turn on"_ the droplet.
         <figure markdown>
         ![Turn on Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-on-master-node.png){ .svg-img .dark-img }
@@ -79,7 +79,7 @@ Media Nodes are removed through the `<STACK_NAME>-draining` tag. Every Media Nod
 
 === "DigitalOcean console"
 
-    1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank} and click on the Media Node you want to remove. Media Nodes created by the autoscaler are named `<STACK_NAME>-media-<TIMESTAMP>-<RANDOM>`.
+    1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"} and click on the Media Node you want to remove. Media Nodes created by the autoscaler are named `<STACK_NAME>-media-<TIMESTAMP>-<RANDOM>`.
     2. Open the _"Tags"_ section of the droplet and add the tag `<STACK_NAME>-draining`.
     3. In the same section, remove the tag `<STACK_NAME>-media-node-tag` so the autoscaler stops counting this droplet as an active Media Node.
     4. Within two minutes the Media Node starts its graceful shutdown. The droplet disappears once its active Rooms have finished.
@@ -109,7 +109,7 @@ It is possible to change the instance size of both the Master Node and the Media
         !!! info
 
             You can stop only the Master Node droplet to change its droplet size, but it is recommended to stop the whole cluster to avoid any issues.
-    2. Go to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
+    2. Go to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click on _"Upsize"_ and select the Droplet size you desire and click on _"Resize"_
         <figure markdown>
         ![Change droplet size master](../../../../assets/images/platform/self-hosting/elastic/digitalocean/resize-master-node.png){ .svg-img .dark-img }
@@ -235,7 +235,7 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
 
 === "Changing configuration through `secrets.env`"
 
-    1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target=_blank} and click on the bucket that you are using for the deployment.
+    1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and click on the bucket that you are using for the deployment.
     2. Download the `secrets.env` file that is in the bucket.
         <figure markdown>
         ![Secrets.env download](../../../../assets/images/platform/self-hosting/elastic/digitalocean/download-secrets-env.png){ .svg-img .dark-img }

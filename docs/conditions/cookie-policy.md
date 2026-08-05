@@ -1,6 +1,6 @@
 ---
-title: Cookie Policy
-description: TIKAL TECHNOLOGIES SL website uses cookies for functionality and analytics to improve user experience. Learn how to manage or disable cookies here.
+title: "Cookie Policy"
+description: "The cookies openvidu.io sets for functionality and analytics, what each one is for, and how to manage or disable them in your browser."
 hide:
   - navigation
   - toc

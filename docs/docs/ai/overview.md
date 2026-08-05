@@ -1,3 +1,8 @@
+---
+title: "AI services for OpenVidu rooms"
+description: "Catalog of ready-to-use AI services for OpenVidu rooms, from live captions to transcription and translation, provided by pre-configured OpenVidu agents."
+---
+
 # AI Services
 
 OpenVidu offers a catalog of AI services that can be easily integrated into your application to enhance the user experience and add advanced features. These services are provided by **OpenVidu agents**: a set of **pre-configured and ready-to-use AI modules**.

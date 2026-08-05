@@ -1,5 +1,6 @@
 ---
-description: Learn how to enable or disable OpenVidu modules to customize your deployment configuration.
+title: "Enable and disable OpenVidu modules"
+description: "Turn individual OpenVidu modules on or off so a deployment runs only the services it actually needs, and apply the change safely."
 ---
 
 # Enable and disable modules

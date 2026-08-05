@@ -1,6 +1,6 @@
 ---
-title: Privacy Policy
-description: Learn how TIKAL TECHNOLOGIES SL handles your personal data in compliance with EU regulations.
+title: "Privacy Policy"
+description: "How TIKAL TECHNOLOGIES SL collects, stores and processes personal data on openvidu.io, and your rights under EU data protection law."
 hide:
   - navigation
   - toc

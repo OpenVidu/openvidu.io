@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on-premises
-description: Learn how to perform administrative tasks on an on-premises OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on-premises"
+description: "Administer OpenVidu High Availability on your own servers: start and stop services, add Media Nodes, change the configuration and back up its data."
 ---
 
 # OpenVidu High Availability administration: On-premises

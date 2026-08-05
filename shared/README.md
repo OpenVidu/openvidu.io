@@ -14,6 +14,8 @@ Snippets are grouped by the documentation area that consumes them. Before creati
 
 ```
 shared/
+├── meet-vs-platform-table.md → the product comparison table (landing page and the
+│                               meet-vs-platform root page)
 ├── meet/               → OpenVidu Meet docs (docs/meet/**)
 │   └── webcomponent/       → WebComponent API reference (attributes, commands, events)
 ├── self-hosting/       → OpenVidu Platform self-hosting docs (docs/docs/self-hosting/**)

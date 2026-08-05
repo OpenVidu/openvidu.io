@@ -1,3 +1,8 @@
+---
+title: "Scalable and fault-tolerant Meet deployments"
+description: "Compare OpenVidu Meet deployment types and choose Elastic or High Availability when a single server is no longer enough for your user load."
+---
+
 !!! info
     **OpenVidu Meet** is under the hood an **OpenVidu Platform** deployment with a module on top of it. Therefore, all deployment documentation for OpenVidu Platform applies to OpenVidu Meet as well. The information in this page is a summary of the different deployment options and the links to their corresponding OpenVidu Platform documentation.
 

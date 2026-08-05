@@ -87,20 +87,42 @@
       link.href = currentPath.replace(/^\/[^\/]+\//, '/latest/');
     }
 
-    // If the user landed on this older version by following a link from a release notes
-    // page, explain why they were moved here instead of showing the generic warning.
-    let fromReleaseNotes = false;
+    // Split "/3.4/docs/foo/" into its version segment ("3.4") and the rest ("docs/foo/")
+    const splitVersion = (path) => {
+      const segments = path.replace(/^\//, '').split('/');
+      return { version: segments[0], rest: segments.slice(1).join('/') };
+    };
+
+    // Replace the generic warning only when the visitor got here by following a link that
+    // lives inside ANOTHER version's release notes: that version jump is the one thing that
+    // needs explaining. Everything else keeps the generic "old version" warning, and the two
+    // conditions below are what tell them apart:
+    //
+    //   - A DIFFERENT version segment. The navigation menu, tabs, footer and search links
+    //     never leave the version being browsed, so any click on them lands on the same
+    //     version and is ruled out here — including clicks made from a releases page, and
+    //     links inside the release notes that point at their own version.
+    //   - A DIFFERENT path after the version segment. The version selector DOES change the
+    //     version, but it lands on the same page of another version
+    //     (/latest/docs/releases/ -> /3.4/docs/releases/), so it is ruled out here. Release
+    //     notes never link to the same page of another version: their cross-links between
+    //     the two products always change the product too (docs/releases -> meet/releases).
+    let fromOtherVersionReleaseNotes = false;
     try {
       if (document.referrer) {
         const referrer = new URL(document.referrer);
-        fromReleaseNotes =
+        const from = splitVersion(referrer.pathname);
+        const here = splitVersion(currentPath);
+        fromOtherVersionReleaseNotes =
           referrer.origin === window.location.origin &&
-          /\/(meet|docs)\/releases\/?$/.test(referrer.pathname);
+          /^(meet|docs)\/releases\/?$/.test(from.rest) &&
+          from.version !== here.version &&
+          from.rest !== here.rest;
       }
     } catch (e) {}
 
     const warning = document.getElementById('outdated-warning-text');
-    if (warning && fromReleaseNotes && version && version !== 'latest') {
+    if (warning && fromOtherVersionReleaseNotes && version && version !== 'latest') {
       warning.innerHTML =
         `<strong>Warning:</strong> You are viewing the <strong>${version}</strong> version of the docs<br />` +
         `because you followed a link from the ${version}.x release notes<br />`;
@@ -179,17 +201,6 @@
 </style>
 
 {{ super() }}
-
-{% if page and page.url and (page.url.endswith("meet/releases/") or page.url.endswith("docs/releases/")) %}
-<style>
-  /* Release notes pages show every version's notes regardless of the version being
-     browsed, so the "old version" banner is meaningless there — hide it. This style is
-     baked into the built releases page and travels with it when copied to other versions. */
-  [data-md-component="outdated"] {
-    display: none !important;
-  }
-</style>
-{% endif %}
 
 {% if page.meta %}
 {% if page.meta.hide %}

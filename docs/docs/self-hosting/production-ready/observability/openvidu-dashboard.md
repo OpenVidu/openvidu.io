@@ -1,5 +1,8 @@
 ---
-description: Access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses.
+title: "OpenVidu Dashboard: live room monitoring"
+description: "Watch rooms, participants, egresses and ingresses in real time from the OpenVidu Dashboard, and see exactly what a running deployment is doing."
+tags:
+  - setupcustomgallery
 ---
 
 # OpenVidu Dashboard
@@ -20,17 +23,17 @@ Display **graphical analytics** for client SDKs, connection types, bandwidth usa
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" loading="lazy" alt="Analytics page of OpenVidu Dashboard with client SDK and connection charts"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" loading="lazy" alt="Bandwidth usage charts in the OpenVidu Dashboard analytics page"/></a></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" loading="lazy" alt="Participant and room charts in the OpenVidu Dashboard analytics page"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" loading="lazy" alt="Egress charts in the OpenVidu Dashboard analytics page"/></a></p></div>
 
 </div>
 
@@ -50,11 +53,11 @@ Retrieve in-depth information about a specific **room**, including its duration,
 
 <div class="grid-container">
 
-<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" loading="lazy" alt="OpenVidu Dashboard listing with an active room"/></a></p></div>
 
-<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" loading="lazy" alt="Room details page with duration, bandwidth and participants"/></a></p></div>
 
-<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" loading="lazy"/></a></p></div>
+<div class="grid-33"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" loading="lazy" alt="Timeline and related egresses in the room details page"/></a></p></div>
 
 </div>
 
@@ -66,9 +69,9 @@ Obtain detailed insights into each **participant**, covering their duration, ban
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" loading="lazy" alt="Participant details page with duration and bandwidth usage"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" loading="lazy" alt="Audio and video quality scores in the participant details page"/></a></p></div>
 
 </div>
 
@@ -94,9 +97,9 @@ Access comprehensive details about a specific **egress**, including its duration
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" loading="lazy" alt="Egress details page with duration, status and type"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" loading="lazy" alt="Destination and room information in the egress details page"/></a></p></div>
 
 </div>
 

@@ -1,11 +1,11 @@
 ---
-title: Add toggle hand feature using Angular Components
-description: Learn how to add extra features, such as toggle hand, to the videoconference using OpenVidu Angular Components.
+title: "Toggle hand feature with Angular Components"
+description: "Add a raise-hand feature to a video conference built with OpenVidu Angular Components, as an example of extending it with your own behaviour."
 ---
 
 # Add toggle hand feature using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-toggle-hand){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-toggle-hand){ .md-button target="_blank" }
 
 The **openvidu-toggle-hand** tutorial demonstrates how to add a toggle hand feature to the OpenVidu Components Angular library.
 
@@ -33,11 +33,11 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 
 #### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 #### 4. Run the openvidu-toggle-hand tutorial
 
-To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 
@@ -57,7 +57,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
       npm start
     ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
+Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
 <!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
@@ -284,26 +284,3 @@ Once the server is up and running, you can test the application by visiting [`ht
 === "styles.scss"
 
     --8<-- "shared/tutorials/openvidu-components/styles.md"
-
-<!-- ## Deploying openvidu-toggle-hand
-
-#### 1) Build the docker image
-
-Under the root project folder, you can see the `openvidu-components/docker/` directory. Here it is included all the required files yo make it possible the deployment with OpenVidu.
-
-First of all, you will need to create the **openvidu-toggle-hand** docker image. Under `openvidu-components/docker/` directory you will find the `create_image.sh` script. This script will create the docker image with the [openvidu-basic-node](application-server/openvidu-basic-node/) as application server and the static files.
-
-```bash
-./create_image.sh openvidu/openvidu-toggle-hand-demo:X.Y.Z openvidu-toggle-hand
-```
-
-The script needs two parameters:
-
-1. The name of the docker image to create.
-2. The name of the tutorial folder.
-
-This script will create an image named `openvidu/openvidu-toggle-hand-demo:X.Y.Z`. This name will be used in the next step.
-
-#### 2) Deploy the docker image
-
-Time to deploy the docker image. You can follow the [Deploy OpenVidu based application with Docker](/deployment/deploying-openvidu-apps/#with-docker) guide for doing this. -->
