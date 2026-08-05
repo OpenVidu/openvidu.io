@@ -43,7 +43,8 @@ ovweb lint --site /tmp/mkdocs-strict-validation
   `docker run --rm -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build --strict -d /tmp/site`.
 
 If redirect rules or `publish-tool/ovweb.yaml` were touched this session, also run
-`ovweb redirects check`.
+`ovweb redirects check`. If any page was deleted or renamed this session, also run
+`ovweb lint --against origin/main` — every removed page must be claimed by a redirect rule.
 
 ## Report
 

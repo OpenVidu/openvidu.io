@@ -33,6 +33,7 @@ from .expand import (
 )
 from .gitrepo import Git, GitError, open_repository
 from .lint import ERROR, WARN, run_lint
+from .lint.removed import check_removed_pages
 from .lint.site import check_site
 from .mikewrap import MikeError
 from .model import (
@@ -641,6 +642,14 @@ def lint_command(
             "anchor names a real id.",
         ),
     ] = None,
+    against: Annotated[
+        str | None,
+        typer.Option(
+            "--against",
+            help="Also require a redirect rule for every page this revision removed "
+            "relative to REF (e.g. origin/main).",
+        ),
+    ] = None,
 ) -> None:
     """Check the authoring conventions `mkdocs build --strict` cannot see.
 
@@ -649,7 +658,8 @@ def lint_command(
     functional `tags:` contract, and asset placement — over the source tree, in seconds,
     with no build. With `--site DIR` (a `mkdocs build` output), it additionally resolves
     every internal link and anchor against the built HTML, where the tab anchors MkDocs's
-    own validator cannot see really exist.
+    own validator cannot see really exist. With `--against REF`, every page that existed
+    in REF and is gone must be claimed by a redirect rule in ovweb.yaml.
 
     Exit codes: 0 clean, 1 error-severity findings, 2 tool failure.
     """
@@ -659,6 +669,11 @@ def lint_command(
     findings = run_lint(root, layout=ctx.config.layout, paths=only)
     if site is not None:
         findings = [*findings, *check_site(site.resolve())]
+    if against is not None:
+        base_pages = ctx.repo.read(
+            "ls-tree", "-r", "--name-only", against, "--", "docs"
+        ).splitlines()
+        findings = [*findings, *check_removed_pages(base_pages, root=root, config=ctx.config)]
 
     emit = {ERROR: ctx.report.error, WARN: ctx.report.warn}
     counts = {ERROR: 0, WARN: 0, "info": 0}

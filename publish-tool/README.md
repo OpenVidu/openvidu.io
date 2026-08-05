@@ -369,7 +369,7 @@ ovweb deploy         X.Y   The primitive the three presets configure
 
 ovweb postprocess    X.Y   Run ONLY the gh-pages post-processing, on a tree
 ovweb redirects render|check|apply
-ovweb lint [PATHS...] [--site DIR]   Authoring conventions the strict build cannot see
+ovweb lint [PATHS...] [--site DIR] [--against REF]   Authoring conventions the strict build cannot see
 ovweb verify               Assert the invariants of a published tree
 ovweb versions list        What is published, and which version branches exist
 ovweb doctor [--pins]      Dependencies, pins, configuration and git state
@@ -811,6 +811,14 @@ Findings live in code fences, inline code and HTML comments are excluded before 
 documentation example never trips a check. Severity is decided in the checker, not by the
 reader: `error` fails CI (exit 1), `warn` and `info` do not. `ovweb lint PATH…` limits the
 report to the given files.
+
+**`ovweb lint --against REF`** closes the gap none of the other checks can see: a *missing*
+redirect rule. Every page that existed in `REF` (e.g. `origin/main`) and is gone from the
+working tree must be claimed by a rule in `ovweb.yaml` — a `files` rule naming its URL or an
+expansion covering it — because retiring a published URL silently is the 404 class that only
+surfaces months later in Search Console. Blog posts are exempt (their URLs come from
+`date`+`slug`, and drafts move at publish by design). Validate Web runs it on every PR against
+the PR's base branch.
 
 **`ovweb lint --site DIR`** adds the built-site tier over a `mkdocs build` output: every
 internal `href`/`src`/`srcset` — full-domain `https://openvidu.io/…` and `/latest/…` forms
