@@ -413,7 +413,7 @@ live_captions:
   spitch:
     # API key for Spitch. See https://docs.spitch.app/keys
     api_key:
-    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/concepts/languages
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/
     language:
 
   elevenlabs:

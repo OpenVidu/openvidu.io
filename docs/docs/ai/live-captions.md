@@ -132,7 +132,7 @@ The table below lists the cloud providers that can handle the Live Captions serv
 | ![Cartesia](../../assets/images/platform/ai/providers/cartesia.svg){.ai-provider-icon}         | `cartesia`     | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [Cartesia Ink-Whisper :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/ink){:target="\_blank"}                                                                                                                  | :material-close: |
 | ![Soniox](../../assets/images/platform/ai/providers/soniox.svg){.ai-provider-icon}             | `soniox`       | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [Soniox Speech-to-Text API :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/speech-to-text){:target="\_blank"}                                                                                                   | :material-check: |
 | ![Nvidia](../../assets/images/platform/ai/providers/nvidia.svg){.ai-provider-icon}             | `nvidia`       | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [NVIDIA Riva ASR :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/asr/asr-overview.html){:target="\_blank"}  | :material-check: |
-| ![Spitch](../../assets/images/platform/ai/providers/spitch.svg){.ai-provider-icon}             | `spitch`       | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [Spitch Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.spitch.app/api/speech/stt){:target="\_blank"}. Specialized in African languages  | :material-close: |
+| ![Spitch](../../assets/images/platform/ai/providers/spitch.svg){.ai-provider-icon}             | `spitch`       | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [Spitch Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.spitch.app/){:target="\_blank"}. Specialized in African languages  | :material-close: |
 | ![ElevenLabs](../../assets/images/platform/ai/providers/elevenlabs.svg){.ai-provider-icon}             | `elevenlabs`       | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [ElevenLabs Speech To Text API :fontawesome-solid-external-link:{.external-link-icon}](https://elevenlabs.io/speech-to-text){:target="\_blank"} | :material-close: |
 | ![Simplismart](../../assets/images/platform/ai/providers/simplismart.svg){.ai-provider-icon}             | `simplismart`       | `docker.io/openvidu/agent-speech-processing-cloud:3.8.0` | Uses [Simplismart :fontawesome-solid-external-link:{.external-link-icon}](https://simplismart.ai/){:target="\_blank"}  | :material-close: |
 
@@ -767,7 +767,7 @@ live_captions:
   spitch:
     # API key for Spitch. See https://docs.spitch.app/keys
     api_key:
-    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/concepts/languages
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/
     language:
 
   elevenlabs:

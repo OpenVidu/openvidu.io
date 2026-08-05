@@ -13,7 +13,8 @@ timeout = 30
 cache = true
 max_cache_age = "3d"
 
-accept = ["200..=204", "206", "301..=308"]
+# 429 means "slow down", not "broken" — the link is alive.
+accept = ["200..=204", "206", "301..=308", "429"]
 
 exclude = [
     # Placeholders and local-only URLs that appear in copy-pasteable instructions.
@@ -34,4 +35,10 @@ exclude = [
     "^https?://(www\\.)?medium\\.com",
     "^https?://doi\\.org",
     "^https?://dl\\.acm\\.org",
+    "^https?://auth\\.openai\\.com",
+    "^https?://(www\\.)?isocpp\\.org",
+    "^https?://dialnet\\.unirioja\\.es",
+    "^https?://docs\\.spitch\\.app",
+    # Our own demo app filters the GitHub runner IPs; it answers 200 from browsers.
+    "^https?://meet-demo-app\\.openvidu\\.io",
 ]
