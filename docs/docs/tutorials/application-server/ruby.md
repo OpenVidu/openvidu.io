@@ -1,6 +1,8 @@
 ---
 title: "Ruby application server tutorial"
 description: "Build a minimal Ruby application server for OpenVidu with Sinatra and the LiveKit-compatible Ruby SDK: issue access tokens and handle webhooks."
+tags:
+  - setupcustomgallery
 ---
 
 # Ruby Server Tutorial

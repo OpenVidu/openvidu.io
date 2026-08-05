@@ -107,7 +107,7 @@ def test_glightbox_html_pulled_in_by_a_snippet_needs_the_tag_on_the_page(tmp_pat
     (finding,) = findings_of(tmp_path, "tag-contract")
     assert finding.file == "docs/docs/tutorial.md"
     assert "setupcustomgallery" in finding.message
-    assert finding.severity == "warn"
+    assert finding.severity == "error"
 
 
 def test_the_tag_on_the_page_satisfies_the_contract(tmp_path):
@@ -127,6 +127,24 @@ def test_feature_cards_need_setupcardglow(tmp_path):
 
     (finding,) = findings_of(tmp_path, "tag-contract")
     assert "setupcardglow" in finding.message
+
+
+def test_the_class_token_must_match_whole_not_substring(tmp_path):
+    """`ov-meet-commercial-feature-cards` is a custom class, not the glow wrapper."""
+    write(
+        tmp_path,
+        "docs/index.md",
+        '<div class="cards no-border ov-meet-commercial-feature-cards">x</div>',
+    )
+
+    assert findings_of(tmp_path, "tag-contract") == []
+
+
+def test_the_class_token_matches_among_other_classes(tmp_path):
+    write(tmp_path, "docs/index.md", '<a class="dark-img glightbox" href="/x.png">i</a>')
+
+    (finding,) = findings_of(tmp_path, "tag-contract")
+    assert "setupcustomgallery" in finding.message
 
 
 # -- assets ----------------------------------------------------------------------------------

@@ -1,6 +1,8 @@
 ---
 title: "Java application server tutorial"
 description: "Build a minimal Java application server for OpenVidu with Spring Boot and the LiveKit-compatible Kotlin SDK: issue access tokens and handle webhooks."
+tags:
+  - setupcustomgallery
 ---
 
 # Java Server Tutorial

@@ -1,6 +1,8 @@
 ---
 title: "Advanced recording tutorial with Azure"
 description: "Extend the basic Azure recording tutorial with complete recording metadata and real-time recording status notifications pushed to the client."
+tags:
+  - setupcustomgallery
 ---
 
 # Advanced Recording Tutorial Azure

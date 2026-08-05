@@ -1,6 +1,8 @@
 ---
 title: "OpenVidu Dashboard: live room monitoring"
 description: "Watch rooms, participants, egresses and ingresses in real time from the OpenVidu Dashboard, and see exactly what a running deployment is doing."
+tags:
+  - setupcustomgallery
 ---
 
 # OpenVidu Dashboard

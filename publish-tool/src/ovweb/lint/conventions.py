@@ -15,12 +15,22 @@ from .findings import ERROR, WARN, Finding
 ADMONITION = re.compile(r"^[ \t]*(!!!|\?\?\?\+?)(?=[A-Za-z])", re.MULTILINE)
 BLOG_ASSET = re.compile(r"/assets/images/blog/([^/\s\"')]+/[^/\s\"')]+/[^/\s\"')]+)/")
 
-#: HTML markers that only work when the page carries the matching functional tag, which loads
-#: the JS behind them (see README "Mkdocs Material tag system").
+
+def _class_token(token: str) -> re.Pattern[str]:
+    """A class attribute containing `token` as a whole class name.
+
+    Token matching, not substring: `ov-meet-commercial-feature-cards` is a custom class that
+    happens to contain "feature-cards" and must not trip the contract.
+    """
+    return re.compile(rf'class="(?:[^"]* )?{re.escape(token)}( [^"]*)?"')
+
+
+#: HTML class names that only work when the page carries the matching functional tag, which
+#: loads the JS behind them (see README "Mkdocs Material tag system").
 TAG_CONTRACT = (
-    ('class="glightbox"', "setupcustomgallery"),
-    ("feature-cards", "setupcardglow"),
-    ("carousel-cell", "setupcarousel"),
+    (_class_token("glightbox"), "glightbox", "setupcustomgallery"),
+    (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
+    (_class_token("carousel-cell"), "carousel-cell", "setupcarousel"),
 )
 
 
@@ -59,15 +69,15 @@ def check_tag_contract(corpus: Corpus) -> list[Finding]:
         if not isinstance(tags, list):
             tags = []
         effective = _effective_text(page, corpus)
-        for marker, tag in TAG_CONTRACT:
-            if marker in effective and tag not in tags:
+        for pattern, token, tag in TAG_CONTRACT:
+            if pattern.search(effective) and tag not in tags:
                 findings.append(
                     Finding(
                         "tag-contract",
-                        WARN,
+                        ERROR,
                         path,
                         1,
-                        f"page renders `{marker}` content but lacks `tags: [{tag}]`",
+                        f'page renders `class="{token}"` content but lacks `tags: [{tag}]`',
                         "the tag loads the JS behind that markup (possibly pulled in by a "
                         "snippet); without it the element falls back to default behaviour "
                         "or renders inert",
