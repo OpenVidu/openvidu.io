@@ -13,7 +13,8 @@ Authoritative references — read the relevant one before working:
 - [`publish-tool/README.md`](publish-tool/README.md) — the `ovweb` CLI, redirects, what a
   publish does.
 - [`shared/README.md`](shared/README.md) — snippet folder layout.
-- Skills: blog work → `blog-plan`/`blog-write`/`blog-review`; page edits → `edit-website`.
+- Skills: blog work → `blog-plan`/`blog-write`/`blog-review`; page edits → `edit-website`;
+  release-day publishing → `release-version`. Commands: `/check-web`, `/publish-post`, `/serve`.
 
 ## Branches
 
