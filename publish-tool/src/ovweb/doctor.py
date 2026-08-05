@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import shutil
+from collections.abc import Callable
 from dataclasses import dataclass
 from importlib import metadata
 from pathlib import Path
@@ -57,7 +58,9 @@ def run_checks(
     return checks
 
 
-def check_pins(repo_root: Path) -> list[Check]:
+def check_pins(
+    repo_root: Path, *, installed_version: Callable[[str], str | None] | None = None
+) -> list[Check]:
     """Assert that every place naming a pinned distribution names the same version.
 
     The pyproject pins, the Dockerfiles (base-image tag for mkdocs-material, pip install lines
@@ -105,7 +108,7 @@ def check_pins(repo_root: Path) -> list[Check]:
             if match:
                 found[name] = match.group(1)
 
-        installed = _distribution_version(distribution)
+        installed = (installed_version or _distribution_version)(distribution)
         if installed:
             found["installed"] = installed
 

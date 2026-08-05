@@ -38,6 +38,22 @@ def write_repo(root, *, pyproject=PYPROJECT, dockerfile=DOCKERFILE, mike_dockerf
     (root / "Dockerfile.mike").write_text(mike_dockerfile, encoding="utf-8")
 
 
+#: Deterministic stand-in for the running environment, matching the fixture's declared pins.
+#: The real lookup would make the tests depend on whatever this environment has installed.
+INSTALLED = {
+    "mkdocs-material": "9.7.6",
+    "mike": "2.2.0",
+    "mkdocs-glightbox": "0.5.2",
+    "mkdocs-llmstxt": "0.5.0",
+    "mkdocs-rss-plugin": "1.19.0",
+    "pygments": "2.19.2",
+}
+
+
+def pins_of(root, installed=INSTALLED):
+    return check_pins(root, installed_version=installed.get)
+
+
 def by_distribution(checks):
     return {check.detail.split(" ")[0]: check for check in checks}
 
@@ -45,20 +61,26 @@ def by_distribution(checks):
 def test_agreeing_pins_pass_for_every_distribution(tmp_path):
     write_repo(tmp_path)
 
-    checks = check_pins(tmp_path)
+    checks = pins_of(tmp_path)
 
     assert len(checks) == len(PINNED_DISTRIBUTIONS)
-    # The installed environment may add its own version to each set; declared places agree, and
-    # the installed versions come from the same pins, so everything must hold.
-    failures = [check.detail for check in checks if not check.ok]
-    assert failures == []
+    assert [check.detail for check in checks if not check.ok] == []
+
+
+def test_a_drifted_installed_distribution_fails(tmp_path):
+    write_repo(tmp_path)
+
+    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "pygments": "2.21.0"}))
+
+    assert not result["pygments"].ok
+    assert "installed=2.21.0" in result["pygments"].detail
 
 
 def test_a_drifted_dockerfile_pin_fails_that_distribution_only(tmp_path):
     drifted = DOCKERFILE.replace("mkdocs-glightbox==0.5.2", "mkdocs-glightbox==0.6.0")
     write_repo(tmp_path, dockerfile=drifted)
 
-    result = by_distribution(check_pins(tmp_path))
+    result = by_distribution(pins_of(tmp_path))
 
     assert not result["mkdocs-glightbox"].ok
     assert "disagree" in result["mkdocs-glightbox"].detail
@@ -68,7 +90,7 @@ def test_a_drifted_dockerfile_pin_fails_that_distribution_only(tmp_path):
 def test_a_drifted_base_image_tag_fails_mkdocs_material(tmp_path):
     write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":9.7.6", ":9.9.9"))
 
-    result = by_distribution(check_pins(tmp_path))
+    result = by_distribution(pins_of(tmp_path))
 
     assert not result["mkdocs-material"].ok
 
@@ -79,7 +101,7 @@ def test_pyproject_disagreeing_with_itself_fails(tmp_path):
         pyproject=PYPROJECT.replace('"pygments==2.19.2",', '"pygments==2.18.0",', 1),
     )
 
-    result = by_distribution(check_pins(tmp_path))
+    result = by_distribution(pins_of(tmp_path))
 
     assert not result["pygments"].ok
 
@@ -91,7 +113,7 @@ def test_a_distribution_missing_from_pyproject_fails(tmp_path):
         mike_dockerfile=DOCKERFILE,
     )
 
-    result = by_distribution(check_pins(tmp_path))
+    result = by_distribution(pins_of(tmp_path))
 
     assert not result["mike"].ok
     assert "not pinned" in result["mike"].detail
