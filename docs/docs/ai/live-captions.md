@@ -311,7 +311,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.8.
 
     !!! info
 
-        To build a custom Sherpa image [with GPU acceleration](#gpu-support-for-sherpa-provider), just change the FROM line to:
+        To build a custom Sherpa image [with GPU acceleration](#gpu-acceleration-for-sherpa-provider), just change the FROM line to:
         
           - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.8.0`
 
