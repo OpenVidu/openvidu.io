@@ -7,7 +7,7 @@ tags:
 
 # iOS Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-ios){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-ios){ .md-button target="_blank" }
 
 This tutorial is a simple video-call application built for **iOS**, using **Swift**, that allows:
 
@@ -16,7 +16,7 @@ This tutorial is a simple video-call application built for **iOS**, using **Swif
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -135,7 +135,7 @@ If these URLs are left empty, the user will be prompted to enter them when the a
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></a></p></div>
 
 </div>
 
@@ -169,7 +169,7 @@ Before joining a room, the `ConnectView.swift` defines the view for the connecti
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 25%;" alt="Join screen of the iOS tutorial app"/></a></p></div>
 
 </div>
 

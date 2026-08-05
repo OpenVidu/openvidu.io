@@ -86,6 +86,64 @@ def check_tag_contract(corpus: Corpus) -> list[Finding]:
     return findings
 
 
+IMG_TAG = re.compile(r"<img\b[^>]*>")
+
+#: The canonical spelling is `{:target="_blank"}`. The escaped underscore and the unquoted or
+#: colon-less variants render identically, but one spelling keeps greps and reviews sane.
+TARGET_BLANK_FORM = re.compile(r"\\_blank|\{target=|target=_blank")
+
+
+def check_image_alt(corpus: Corpus) -> list[Finding]:
+    """Every raw-HTML image carries an `alt` attribute.
+
+    Markdown images always have one (the bracket text); HTML ones are where it gets forgotten.
+    A screenshot gets a descriptive alt; a purely decorative image gets an explicit `alt=""`.
+    """
+    findings = []
+    sources = [
+        (source.path, source.visible, source)
+        for collection in (corpus.docs, corpus.snippets)
+        for source in collection.values()
+    ]
+    sources += [(path, text, None) for path, text in corpus.overrides.items()]
+
+    for path, text, source in sources:
+        for match in IMG_TAG.finditer(text):
+            if "alt=" in match.group(0):
+                continue
+            offset = match.start()
+            line = source.line_of(offset) if source else text.count("\n", 0, offset) + 1
+            findings.append(
+                Finding(
+                    "img-alt",
+                    ERROR,
+                    path,
+                    line,
+                    "HTML image without an alt attribute",
+                    'screenshots get a descriptive alt; purely decorative images get alt=""',
+                )
+            )
+    return findings
+
+
+def check_target_blank_form(corpus: Corpus) -> list[Finding]:
+    findings = []
+    for collection in (corpus.docs, corpus.snippets):
+        for source in collection.values():
+            for match in TARGET_BLANK_FORM.finditer(source.visible):
+                findings.append(
+                    Finding(
+                        "target-blank-form",
+                        WARN,
+                        source.path,
+                        source.line_of(match.start()),
+                        f'non-canonical target="_blank" spelling ("{match.group(0)}…")',
+                        'write {:target="_blank"}',
+                    )
+                )
+    return findings
+
+
 def check_asset_placement(corpus: Corpus) -> list[Finding]:
     """No files directly at the images/ or videos/ root — every asset lives in a page folder."""
     findings = []

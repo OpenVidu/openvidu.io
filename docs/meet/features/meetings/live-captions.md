@@ -64,10 +64,10 @@ Apply your changes by restarting OpenVidu. This ensures the system recognizes th
 
 ### 5. Enable/Disable Captions for specific Rooms
 
-Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="\_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Room Features** step of the room configuration wizard, using the **Captions** toggle.
+Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Room Features** step of the room configuration wizard, using the **Captions** toggle.
 
-<a class="glightbox" href="/assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark" loading="lazy" class="round-corners" alt="Room wizard step enabling live captions for the room"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light" loading="lazy" class="round-corners" alt="Room wizard step enabling live captions for the room"/></a>
 
 ## Using Live Captions in a Meeting
 

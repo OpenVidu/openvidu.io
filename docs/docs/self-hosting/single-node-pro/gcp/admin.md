@@ -67,7 +67,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
 
 === "Changing configuration through Secrets Manager"
 
-    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target=_blank} on Google Cloud Platform.
+    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .svg-img .dark-img }

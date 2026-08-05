@@ -5,7 +5,7 @@ description: "Replace the default chat panel with a component of your own using 
 
 # Custom chat panel using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-custom-chat-panel){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-custom-chat-panel){ .md-button target="_blank" }
 
 The **openvidu-custom-chat-panel** tutorial demonstrates how to customize the chat panel, providing a more tailored user experience.
 
@@ -35,7 +35,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 
 #### 4. Run the openvidu-custom-chat-panel tutorial
 
-To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 
@@ -55,7 +55,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
       npm start
     ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
+Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
 <!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 

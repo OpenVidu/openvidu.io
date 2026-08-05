@@ -1,4 +1,4 @@
-To run the client application tutorial, you need an HTTP web server installed on your development computer. A great option is [http-server :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/http-party/http-server){:target="\_blank"}. You can install it via [NPM :fontawesome-solid-external-link:{.external-link-icon}](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm){:target="\_blank"}:
+To run the client application tutorial, you need an HTTP web server installed on your development computer. A great option is [http-server :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/http-party/http-server){:target="_blank"}. You can install it via [NPM :fontawesome-solid-external-link:{.external-link-icon}](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm){:target="_blank"}:
 
 ```bash
 npm install -g http-server
@@ -16,13 +16,13 @@ npm install -g http-server
     http-server -p 5080 ./src
     ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}. You should see a screen like this:
+Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}. You should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-js.png" loading="lazy" alt="Join screen of the JavaScript tutorial app"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-js.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-js.png" loading="lazy" alt="Video call room of the JavaScript tutorial app"/></a></p></div>
 
 </div>
 

@@ -147,6 +147,60 @@ def test_the_class_token_matches_among_other_classes(tmp_path):
     assert "setupcustomgallery" in finding.message
 
 
+# -- image alt text --------------------------------------------------------------------------
+
+
+def test_an_html_image_without_alt_is_an_error(tmp_path):
+    write(tmp_path, "docs/guide.md", '<img src="/assets/shot.png" class="x">')
+
+    (finding,) = findings_of(tmp_path, "img-alt")
+    assert finding.severity == "error"
+
+
+def test_descriptive_and_decorative_alts_are_both_fine(tmp_path):
+    write(
+        tmp_path,
+        "docs/guide.md",
+        '<img src="/assets/shot.png" alt="A room with two participants">\n'
+        '<img src="/assets/border.svg" alt="">\n',
+    )
+
+    assert findings_of(tmp_path, "img-alt") == []
+
+
+def test_an_image_inside_a_code_fence_is_not_checked(tmp_path):
+    write(tmp_path, "docs/guide.md", '```html\n<img src="/x.png">\n```\n')
+
+    assert findings_of(tmp_path, "img-alt") == []
+
+
+# -- target=_blank spelling ------------------------------------------------------------------
+
+
+def test_non_canonical_target_blank_spellings_warn(tmp_path):
+    write(
+        tmp_path,
+        "docs/guide.md",
+        '[a](https://x.example){:target="\\_blank"}\n'
+        "[b](https://x.example){target=_blank}\n"
+        '[c](https://x.example){:target="_blank"}\n',
+    )
+
+    findings = findings_of(tmp_path, "target-blank-form")
+    assert len(findings) == 2
+    assert all(finding.severity == "warn" for finding in findings)
+
+
+def test_single_quoted_target_inside_a_fence_title_is_not_flagged(tmp_path):
+    write(
+        tmp_path,
+        "docs/guide.md",
+        "```javascript title=\"<a href='https://x' target='_blank'>app.js</a>\"\ncode\n```\n",
+    )
+
+    assert findings_of(tmp_path, "target-blank-form") == []
+
+
 # -- assets ----------------------------------------------------------------------------------
 
 

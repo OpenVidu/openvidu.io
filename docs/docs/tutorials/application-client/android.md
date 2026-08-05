@@ -7,7 +7,7 @@ tags:
 
 # Android Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-android){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-android){ .md-button target="_blank" }
 
 This tutorial is a simple video-call application built for **Android**, using **Kotlin**, that allows:
 
@@ -16,7 +16,7 @@ This tutorial is a simple video-call application built for **Android**, using **
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -50,7 +50,7 @@ This Android project has been generated with Android Studio. You may come across
 
 The activity layout files are located in the `app/src/main/res/layout` directory.
 
-To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="\_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
+To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
 
 ```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-android/app/build.gradle.kts#L43' target='_blank'>build.gradle.kts</a>"
 dependencies {
@@ -134,13 +134,13 @@ The `Urls.kt` file defines an object that contains the following URLs required f
 -   `applicationServerUrl`: The URL of the application server. This variable is used to make requests to the server to obtain a token for joining the video call room.
 -   `livekitUrl`: The URL of the LiveKit server. This variable is used to connect to the LiveKit server and interact with the video call room.
 
-You should configure these URLs according to your deployment settings. In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){target="\_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+You should configure these URLs according to your deployment settings. In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If these URLs are left empty, the user will be prompted to enter the URLs when the application starts. This configuration is managed in the `ConfigureUrlsActivity.kt` file:
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></a></p></div>
 
 </div>
 
@@ -387,7 +387,7 @@ The `connectToRoom()` method performs the following actions:
     }
     ```
 
-    This method sends a POST request using [Ktor Client :fontawesome-solid-external-link:{.external-link-icon}](https://ktor.io/docs/client-create-and-configure.html){:target="\_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
+    This method sends a POST request using [Ktor Client :fontawesome-solid-external-link:{.external-link-icon}](https://ktor.io/docs/client-create-and-configure.html){:target="_blank"} to the application server's `/token` endpoint. The request body contains the room name and participant name. The server responds with a token that is used to connect to the room.
 
 5.  It connects to the room using the LiveKit URL and the token.
 6.  It publishes the camera and microphone tracks to the room using `setMicrophoneEnabled()` and `setCameraEnabled()` methods from `room.localParticipant`.

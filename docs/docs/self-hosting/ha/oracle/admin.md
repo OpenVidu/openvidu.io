@@ -8,7 +8,7 @@ description: "Administer OpenVidu High Availability on Oracle Cloud Infrastructu
 --8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 
-The deployment of OpenVidu High Availability on Oracle Cloud Infrastructure is automated using the Terraform CLI, with 4 Compute instances as Master Nodes behind an [OCI Network Load Balancer :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/home.htm){:target=_blank}, and any number of Media Nodes managed within an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target=_blank}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
+The deployment of OpenVidu High Availability on Oracle Cloud Infrastructure is automated using the Terraform CLI, with 4 Compute instances as Master Nodes behind an [OCI Network Load Balancer :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/home.htm){:target="_blank"}, and any number of Media Nodes managed within an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
 
 Internally, the Oracle Cloud Infrastructure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Oracle Cloud Infrastructure environment that are worth keeping in mind:
 
@@ -26,7 +26,7 @@ The Master Nodes are 4 individual Compute instances, while the Media Nodes are p
 
         Wait for your active Rooms to finish before stopping the cluster, or SSH into each Media Node and run `/usr/local/bin/graceful_shutdown.sh` to drain it before saving the change.
 
-    1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank}.
+    1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}.
     2. Click into the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
         <figure markdown>
         ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .svg-img .dark-img }
@@ -35,7 +35,7 @@ The Master Nodes are 4 individual Compute instances, while the Media Nodes are p
         <figure markdown>
         ![Set instances to 0](../../../../assets/images/platform/self-hosting/ha/oracle/instances-to-0.png){ .svg-img .dark-img }
         </figure>
-    4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} and stop each Master Node one by one. The Master Nodes are named `<STACK_NAME>-master-node-x`. Click each one and select *"Stop"*.
+    4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and stop each Master Node one by one. The Master Nodes are named `<STACK_NAME>-master-node-x`. Click each one and select *"Stop"*.
         <figure markdown>
         ![Stop Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/stop-master-node.png){ .svg-img .dark-img }
         </figure>
@@ -48,12 +48,12 @@ The Master Nodes are 4 individual Compute instances, while the Media Nodes are p
 
     To start the cluster, first start all 4 Master Nodes and then the Media Nodes.
 
-    1. Navigate to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank}.
+    1. Navigate to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
     2. Select all the instances named `<STACK_NAME>-master-node-x`, then click _"Start"_. Wait until the instances are running.
         <figure markdown>
         ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/start-master-node.png){ .svg-img .dark-img }
         </figure>
-    3. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
+    3. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
         <figure markdown>
         ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .svg-img .dark-img }
         </figure>
@@ -79,7 +79,7 @@ You can change the OCI Compute shape of both the Master Nodes and the Media Node
 
             All 4 Master Nodes must run with the same shape. Changing only some of them will leave the cluster in an inconsistent state.
 
-    2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} and locate the resource named `<STACK_NAME>-master-node-1`. Click on it.
+    2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and locate the resource named `<STACK_NAME>-master-node-1`. Click on it.
     3. Click _"Edit"_ next to the **Shape** field, select the new shape (or adjust OCPUs/Memory for Flex shapes) and click _"Save changes"_.
         <figure markdown>
         ![Change Master Node shape](../../../../assets/images/platform/self-hosting/ha/oracle/change-shape-master.png){ .svg-img .dark-img }
@@ -92,7 +92,7 @@ You can change the OCI Compute shape of both the Master Nodes and the Media Node
     !!! warning
         This will replace the running Media Nodes without graceful shutdown. If you want to drain them gracefully, run `/usr/local/bin/graceful_shutdown.sh` on each Media Node and wait for it to finish before changing the Instance Configuration, since the Instance Pool will terminate existing instances and launch new ones with the updated configuration.
 
-    1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target=_blank}.
+    1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target="_blank"}.
     2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it, open the _"Actions"_ menu and select _"Create duplicate"_. The form opens pre-filled with the current configuration — adjust the shape (or OCPUs/Memory for Flex shapes) and create the new Instance Configuration.
         <figure markdown>
         ![Create Instance Configuration](../../../../assets/images/platform/self-hosting/ha/oracle/create-instance-configuration.png){ .svg-img .dark-img }
@@ -102,7 +102,7 @@ You can change the OCI Compute shape of both the Master Nodes and the Media Node
 
             **Only change the shape** (or OCPUs/Memory for Flex shapes). Do **not** modify any other field — the rest of the configuration must remain identical to the original so the Instance Pool keeps working as expected.
 
-    3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target=_blank}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
+    3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
         <figure markdown>
         ![Change Instance Configuration in Pool](../../../../assets/images/platform/self-hosting/ha/oracle/change-instance-configuration.png){ .svg-img .dark-img }
         </figure>

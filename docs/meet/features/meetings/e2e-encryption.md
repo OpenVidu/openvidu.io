@@ -12,8 +12,8 @@ OpenVidu Meet supports **end-to-end encryption (E2EE)**: audio, video, chat mess
 
 E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), from the **Room Features** step of the configuration wizard.
 
-<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-dark.webp#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-light.webp#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-dark.webp#only-dark" loading="lazy" class="round-corners" alt="Room creation wizard with the end-to-end encryption option enabled"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-light.webp#only-light" loading="lazy" class="round-corners" alt="Room creation wizard with the end-to-end encryption option enabled"/></a>
 
 
 !!! warning "E2EE Limitations"
@@ -59,8 +59,8 @@ Every participant must enter the same **secret passphrase** to join. The encrypt
 
 When a member accesses a E2E-encrypted room, the [Lobby view](lifecycle.md#lobby-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 
-<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-dark.webp#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-light.webp#only-light" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-dark.webp#only-dark" loading="lazy" class="control-height round-corners" alt="Lobby view with the end-to-end encrypted badge and passphrase field"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/lobby-e2ee-light.webp#only-light" loading="lazy" class="control-height round-corners" alt="Lobby view with the end-to-end encrypted badge and passphrase field"/></a>
 
 !!! warning "Share the passphrase through a trusted channel"
 
@@ -77,8 +77,8 @@ A wrong passphrase grants no partial access: the correct key sees everything, a 
 
 The screenshot below shows the meeting **from the perspective of a participant with a wrong passphrase**. The two correctly-keyed participants are chatting, but to this participant they appear only as encryption errors with masked names, and their messages never reach the chat.
 
-<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-dark.webp#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-light.webp#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-dark.webp#only-dark" loading="lazy" class="round-corners" alt="Meeting seen by a participant with a wrong passphrase: remote videos are unreadable"/></a>
+<a class="glightbox" href="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/e2e-encryption/wrong-key-meeting-light.webp#only-light" loading="lazy" class="round-corners" alt="Meeting seen by a participant with a wrong passphrase: remote videos are unreadable"/></a>
 
 A participant who joined with the wrong passphrase can leave and rejoin with the correct one to regain access.
 

@@ -32,15 +32,15 @@ Then choose a **base role** (`Moderator` or `Speaker`) that sets the default [pe
 
 The **"Room Members"** tab lists the room's users and identified guests, showing each member's name, role and type. You can **search** by name and **filter** by base role or by type (user / identified guest).
 
-<a class="glightbox" href="/assets/images/meet/room-members/management/room-members-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/room-members-list-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/room-members/management/room-members-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/room-members-list-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/room-members/management/room-members-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/room-members-list-dark.png#only-dark" loading="lazy" class="round-corners" alt="Room Members tab listing users and identified guests"/></a>
+<a class="glightbox" href="/assets/images/meet/room-members/management/room-members-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/room-members-list-light.png#only-light" loading="lazy" class="round-corners" alt="Room Members tab listing users and identified guests"/></a>
 
 ## Edit a member
 
 Update a member's **base role** or **custom permissions** from the member list. Changes apply **immediately** — even if the member is currently in a meeting, their permissions are updated on the fly.
 
-<a class="glightbox" href="/assets/images/meet/room-members/management/edit-member-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/edit-member-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/room-members/management/edit-member-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/edit-member-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/room-members/management/edit-member-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/edit-member-dark.png#only-dark" loading="lazy" class="round-corners" alt="Member edit dialog with base role and custom permissions"/></a>
+<a class="glightbox" href="/assets/images/meet/room-members/management/edit-member-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/edit-member-light.png#only-light" loading="lazy" class="round-corners" alt="Member edit dialog with base role and custom permissions"/></a>
 
 ## Copy a member's access link
 
@@ -49,8 +49,8 @@ Every member's access link can be copied from the member list:
 - **Identified guests** have a **unique personal access link**. Copy it and deliver it privately to the intended individual.
 - **Users** do not have a personal link, but their link can also be copied from the member list — it is the shared [user access link](../rooms/access.md#member-access-links) that every user of the room logs in through.
 
-<a class="glightbox" href="/assets/images/meet/room-members/management/copy-member-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/copy-member-link-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/room-members/management/copy-member-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/copy-member-link-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/room-members/management/copy-member-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/copy-member-link-dark.png#only-dark" loading="lazy" class="round-corners" alt="Member list with the action to copy a member's access link"/></a>
+<a class="glightbox" href="/assets/images/meet/room-members/management/copy-member-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/copy-member-link-light.png#only-light" loading="lazy" class="round-corners" alt="Member list with the action to copy a member's access link"/></a>
 
 ## Remove members
 
@@ -65,13 +65,13 @@ Members can be removed individually or in bulk from the **"Room Members"** tab.
 
 ## REST API reference { #rest-api-reference }
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="\_blank"} for the full list of available endpoints, request bodies and response schemas.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="_blank"} for the full list of available endpoints, request bodies and response schemas.
 
 | Operation           | HTTP Method | Reference                                                                                                                                                  |
 | ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Add a member        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="\_blank"}         |
-| List members        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMembers){:target="\_blank"}        |
-| Bulk delete members | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRoomMembers){:target="\_blank"} |
-| Get a member        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="\_blank"}         |
-| Update a member     | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomMember){:target="\_blank"}      |
-| Delete a member     | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="\_blank"}      |
+| Add a member        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="_blank"}         |
+| List members        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMembers){:target="_blank"}        |
+| Bulk delete members | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRoomMembers){:target="_blank"} |
+| Get a member        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="_blank"}         |
+| Update a member     | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomMember){:target="_blank"}      |
+| Delete a member     | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="_blank"}      |

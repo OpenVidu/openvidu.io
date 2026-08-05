@@ -45,9 +45,9 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class=
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" loading="lazy" alt="Grafana dashboard with OpenVidu server metrics"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" loading="lazy" alt="Further panels of the OpenVidu server metrics dashboard in Grafana"/></a></p></div>
 
 </div>
 
@@ -85,9 +85,9 @@ another panel to **filter** logs by **room_id** and **participant_id**,
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" loading="lazy" alt="Grafana logs dashboard with filters by room and participant"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" loading="lazy" alt="OpenVidu log entries in the Grafana logs dashboard"/></a></p></div>
 
 </div>
 
@@ -123,17 +123,17 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" loading="lazy" alt="Cluster Nodes Logs dashboard with a row of panels per node"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" loading="lazy" alt="Log panels of a Master Node in the Cluster Nodes Logs dashboard"/></a></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" loading="lazy" alt="Warnings and errors panels of a node in the Cluster Nodes Logs dashboard"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" loading="lazy" alt="Log panels of a Media Node in the Cluster Nodes Logs dashboard"/></a></p></div>
 
 </div>
 
@@ -143,9 +143,9 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" loading="lazy" alt="Node panels with no data for containers running on other nodes"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" loading="lazy" alt="Per-container log panels in the Cluster Nodes Logs dashboard"/></a></p></div>
 
 </div>
 
@@ -165,9 +165,9 @@ First, there is a panel to **filter** logs by **room_id** and **participant_id**
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" loading="lazy" alt="Cluster Services Logs dashboard with filters by room and participant"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" loading="lazy" alt="Per-service log panels in the Cluster Services Logs dashboard"/></a></p></div>
 
 </div>
 

@@ -36,8 +36,8 @@ Users with permission to manage a room or share access links can copy and share 
 
 Participants with the `canShareAccessLinks` permission can share the room access link from the active meeting view.
 
-<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark" loading="lazy" class="round-corners" alt="Sharing the room access link from an active meeting"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-light.png#only-light" loading="lazy" class="round-corners" alt="Sharing the room access link from an active meeting"/></a>
 
 !!! info
 
@@ -45,13 +45,13 @@ Participants with the `canShareAccessLinks` permission can share the room access
 
 #### From the REST API
 
-The anonymous access links are available in the properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"} object.
+The anonymous access links are available in the properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"} object.
 
 ## User and identified guest access { #member-access-links }
 
 Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](../room-members/management.md#rest-api-reference). They access the room through different links:
 
-- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="\_blank"}). They must **log in** with their OpenVidu Meet credentials.
+- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetRoom){:target="_blank"}). They must **log in** with their OpenVidu Meet credentials.
 - **Identified guests** each receive a **unique personal access link** (property `accessUrl` of their member object) that grants access with **no login** and should be delivered privately to that person.
 
 In addition to users added explicitly as room members, other users can also access the room:
@@ -85,4 +85,4 @@ Grants basic participation permissions by default:
 
 !!! info
 
-    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="\_blank"} schema.
+    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"} schema.
