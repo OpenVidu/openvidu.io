@@ -28,6 +28,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [DynDevice built virtual classrooms with OpenVidu](https://openvidu.io/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/index.md): How DynDevice, the eLearning platform by Mega Italia Media, replaced third-party meeting tools with virtual classrooms built into its LMS using OpenVidu.
 - [OpenVidu 3.8.0 release notes](https://openvidu.io/blog/2026/07/09/release-380/index.md): OpenVidu 3.8.0 is out: user accounts, role-based access and fine-grained room members in Meet, plus a mediasoup overhaul and tighter TURN security.
 - [3 access models for video conferencing apps](https://openvidu.io/blog/2026/07/14/video-conferencing-permissions/index.md): The three access models for video conferencing apps compared, anonymous role links, identified guests and registered users, and when to use each.
+- [Building an AI agent for transcribing and summarizing audio calls](https://openvidu.io/blog/2026/08/04/transcriber-summarizer-agent/index.md): How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch
 
 ## OpenVidu Meet
 
