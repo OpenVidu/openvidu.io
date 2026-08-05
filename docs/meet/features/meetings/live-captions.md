@@ -12,7 +12,7 @@ OpenVidu Meet includes a built-in **Live Captions** feature that turns speech in
 
 ## How to Enable Live Captions in OpenVidu Meet
 
-!!!warning "Local Meet Deployment Limitation"
+!!! warning "Local Meet Deployment Limitation"
 
     Live Captions are **not available** in local Meet deployments. You must use either the [OpenVidu Local deployment](../../../docs/self-hosting/local.md) or an [OpenVidu production deployment](../../../docs/self-hosting/deployment-types.md) to enable this feature.
 
@@ -38,13 +38,13 @@ live_captions:
 1. Set `enabled` to `true` to activate the Speech Processing Agent.
 2. Set **processing** to `manual`; participants will activate captions on demand via a toolbar button.
 
-!!!info
+!!! info
 
     By default, the Speech Processing Agent uses a local Vosk model for speech-to-text transcription.
 
     For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](../../../docs/ai/live-captions.md#cloud-providers) for more information.
 
-!!!warning "Default language is English"
+!!! warning "Default language is English"
 
     The Speech Processing Agent uses **English** for speech-to-text transcription by default. To use a different language, you must configure a different Vosk model. See [Vosk models configuration](../../../docs/ai/live-captions.md#vosk) for details on changing the language model.
 

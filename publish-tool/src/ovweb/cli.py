@@ -32,6 +32,7 @@ from .expand import (
     wipe_owned,
 )
 from .gitrepo import Git, GitError, open_repository
+from .lint import ERROR, WARN, run_lint
 from .mikewrap import MikeError
 from .model import (
     CrossProductRule,
@@ -619,6 +620,51 @@ def verify_command(
         ctx.report.error(f"[{finding.check}] {finding.where}: {finding.detail}")
     ctx.report.error(f"{len(findings)} invariant violation(s).")
     raise typer.Exit(1)
+
+
+# -- lint ------------------------------------------------------------------------------------
+
+
+@app.command("lint")
+def lint_command(
+    context: typer.Context,
+    paths: Annotated[
+        list[Path] | None,
+        typer.Argument(help="Report only findings in these files (repo-relative)."),
+    ] = None,
+) -> None:
+    """Check the authoring conventions `mkdocs build --strict` cannot see.
+
+    Covers raw-HTML links and images, link form in the files that move at publish,
+    version-pin discipline, SEO field lengths and uniqueness, admonition syntax, the
+    functional `tags:` contract, and asset placement — over the source tree, in seconds,
+    with no build.
+
+    Exit codes: 0 clean, 1 error-severity findings, 2 tool failure.
+    """
+    ctx: Context = context.obj
+    root = ctx.repo.root
+    only = [path.as_posix() for path in paths] if paths else None
+    findings = run_lint(root, layout=ctx.config.layout, paths=only)
+
+    emit = {ERROR: ctx.report.error, WARN: ctx.report.warn}
+    counts = {ERROR: 0, WARN: 0, "info": 0}
+    for finding in findings:
+        counts[finding.severity] = counts.get(finding.severity, 0) + 1
+        suffix = f" — {finding.hint}" if finding.hint else ""
+        emit.get(finding.severity, ctx.report.info)(
+            f"[{finding.check}] {finding.file}:{finding.line}: {finding.message}{suffix}"
+        )
+
+    if counts[ERROR]:
+        ctx.report.error(
+            f"{counts[ERROR]} error(s), {counts[WARN]} warning(s), {counts['info']} info."
+        )
+        raise typer.Exit(1)
+    ctx.report.success(
+        f"No errors ({counts[WARN]} warning(s), {counts['info']} info) across "
+        f"{len(findings)} finding(s)."
+    )
 
 
 # -- doctor ----------------------------------------------------------------------------------

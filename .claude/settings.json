@@ -9,6 +9,7 @@
       "Bash(pytest:*)",
       "Bash(ruff:*)",
       "Bash(ovweb doctor:*)",
+      "Bash(ovweb lint:*)",
       "Bash(ovweb redirects check:*)",
       "Bash(ovweb --dry-run:*)",
       "Bash(git status:*)",

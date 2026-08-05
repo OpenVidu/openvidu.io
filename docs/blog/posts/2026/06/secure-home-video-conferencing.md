@@ -143,7 +143,7 @@ If both ports show "Success", proceed to Step 3.
 
 If either port fails, your ISP is blocking inbound connections on it. Automatic Let's Encrypt won't work in that case, because validating a certificate requires one of those ports to be reachable from the internet. You won't be able to follow Step 3 as written; use this alternative instead.
 
-Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.

@@ -82,7 +82,7 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
     sudo apt update && sudo apt upgrade -y
     ```
 
-2. Follow the [On-Premises install instructions](../on-premises/install.md/#guided-installation) to install OpenVidu on the instance.
+2. Follow the [On-Premises install instructions](../on-premises/install.md#guided-installation) to install OpenVidu on the instance.
 
 ---
 

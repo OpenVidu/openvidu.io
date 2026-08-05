@@ -369,6 +369,7 @@ ovweb deploy         X.Y   The primitive the three presets configure
 
 ovweb postprocess    X.Y   Run ONLY the gh-pages post-processing, on a tree
 ovweb redirects render|check|apply
+ovweb lint [PATHS...]      Authoring conventions the strict build cannot see
 ovweb verify               Assert the invariants of a published tree
 ovweb versions list        What is published, and which version branches exist
 ovweb doctor [--pins]      Dependencies, pins, configuration and git state
@@ -494,6 +495,7 @@ lives in the pure layer, which is why that is where the tests are.
 | [`pipeline/postprocess.py`](src/ovweb/pipeline/postprocess.py) | – | The step table above.                                                             |
 | [`pipeline/publish.py`](src/ovweb/pipeline/publish.py)     | –     | Branch preparation, mike, worktree, commit, branch sync.                          |
 | [`verify.py`](src/ovweb/verify.py)                         | –     | Invariants of a published tree.                                                   |
+| [`lint/`](src/ovweb/lint)                                  | –     | Authoring conventions over the sources — see [`lint`](#lint).                      |
 | [`doctor.py`](src/ovweb/doctor.py)                         | –     | Preflight checks, including the pin agreement.                                    |
 | [`mkdocs_hook.py`](mkdocs_hook.py)                         | –     | Set each page's `<lastmod>` from git; feed llms.txt the pages' own frontmatter.    |
 
@@ -780,6 +782,36 @@ and that it lists no URL nothing serves — each of which degrades the version s
 A publish only fixes its own version, so findings for the others are the to-do list; the fix for
 an unlisted stub is `ovweb redirects apply`, which the finding names.
 
+### `lint`
+
+Where `verify` asserts a *published* tree, `ovweb lint` checks the *sources* — the authoring
+conventions `mkdocs build --strict` cannot see, in about a second and with no build:
+
+- **Raw-HTML links and images** (`href="/…"`, `src="/…"`): MkDocs never processes HTML, so a
+  broken target there survives every build. Resolved against the source tree, `latest/`-prefixed
+  URLs included; a `.md` path inside HTML is its own finding.
+- **Link form in the files that move at publish**: a relative Markdown link in a blog post
+  (error — it breaks when the post moves) or in a shared snippet (warn — only the sibling links
+  README "Link rules" documents stay relative, and those are recognized), and the
+  `page.md/#anchor` stray-slash form.
+- **Version-pin discipline**: `/X.Y/` links are allowed only on the two releases pages and in
+  `Release` blog posts; the releases pages themselves must never link `latest` (the publish
+  refuses it — lint catches it at PR time instead).
+- **SEO budgets** (warn): `title` over 57 characters (70 for posts), `description` over 160 or
+  not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
+  `mkdocs_hook.py` — a missing field must kill CI, but a long one must not kill `mkdocs serve`.
+- **Page composition**: `!!!warning`-without-space admonitions; the functional `tags:` contract
+  (a page whose content — snippets included, resolved through the same closure `sources.py`
+  uses — carries `glightbox`/`feature-cards`/`carousel` markup should declare the matching
+  tag); files at the `assets/images|videos/` root; unpaired `#only-light`/`#only-dark`; blog
+  posts referencing another post's asset folder; snippet filenames repeating their folder.
+- **Commented-out dead links** (info): janitorial, since MkDocs skips comments too.
+
+Findings live in code fences, inline code and HTML comments are excluded before matching, so a
+documentation example never trips a check. Severity is decided in the checker, not by the
+reader: `error` fails CI (exit 1), `warn` and `info` do not. `ovweb lint PATH…` limits the
+report to the given files.
+
 ---
 
 ## How it runs in CI
@@ -795,7 +827,7 @@ reaches the remote (see [Nothing is pushed until the tree is
 correct](#nothing-is-pushed-until-the-tree-is-correct)).
 
 [`.github/workflows/validate-web.yaml`](../.github/workflows/validate-web.yaml) runs on every PR:
-`ovweb doctor --pins`, `ovweb redirects check`, and `mkdocs build --strict`.
+`ovweb doctor --pins`, `ovweb redirects check`, `ovweb lint`, and `mkdocs build --strict`.
 [`.github/workflows/test-tools.yaml`](../.github/workflows/test-tools.yaml) runs `pytest` and
 `ruff` when anything in this folder changes.
 

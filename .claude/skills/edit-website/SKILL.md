@@ -103,6 +103,7 @@ Notes:
 
 ## Checklist before finishing
 
+0. `ovweb lint` reports no errors (run from the repo root; `pip install -e "./publish-tool[validate]"` if missing). It checks what the strict build cannot see — raw-HTML links, link form in snippets/posts, version-pin discipline, SEO field budgets, the `tags:` contract. CI runs it on every PR. For link-heavy work, run the `/check-web full` command instead.
 1. Working on the right branch (`next` for in-development docs, `main` for fixes to published content).
 2. Page renders correctly locally (both light and dark themes if you touched styling or theme-dependent images).
 3. **Zero `WARNING`s** in the mkdocs console (`mkdocs build --strict` must pass — CI enforces it). Anchor `INFO`s are expected (tab-anchor false positives).

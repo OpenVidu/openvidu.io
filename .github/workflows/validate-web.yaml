@@ -75,6 +75,13 @@ jobs:
         # version range is an error rather than a silent first-match-wins.
         run: ovweb redirects check
 
+      - name: Lint the authoring conventions
+        # What --strict cannot see: raw-HTML links and images (MkDocs never processes HTML),
+        # link form in the files that move at publish, version-pin discipline, and the page
+        # composition conventions. Source-based and fast, so it runs before spending minutes
+        # on the build.
+        run: ovweb lint
+
       - name: Build documentation (strict)
         env:
           GOOGLE_ANALYTICS_KEY: G-XXXXXXXX
