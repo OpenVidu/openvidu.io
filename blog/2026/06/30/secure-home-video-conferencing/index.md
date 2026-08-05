@@ -6,7 +6,7 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/latest/meet/index.md).
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/meet/).
 
 ## Why self-host your video calls?
 

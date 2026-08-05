@@ -75,6 +75,8 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 | **24 hours** (1 day of uninterrupted use)    | $10.37  |
 | **720 hours** (1 month of uninterrupted use) | $311.04 |
 
+Diagram of an OpenVidu Elastic deployment with 12 cores in total
+
 ______________________________________________________________________
 
 ### OpenVidu Elastic with 20 cores in total
@@ -89,6 +91,8 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 | **24 hours** (1 day of uninterrupted use)    | $17.28  |
 | **720 hours** (1 month of uninterrupted use) | $518.40 |
 
+Diagram of an OpenVidu Elastic deployment with 20 cores in total
+
 ______________________________________________________________________
 
 ### OpenVidu High Availability with 32 cores in total
@@ -102,6 +106,8 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 | **8 hours**                                  | $9.21   |
 | **24 hours** (1 day of uninterrupted use)    | $27.65  |
 | **720 hours** (1 month of uninterrupted use) | $829.44 |
+
+Diagram of an OpenVidu High Availability deployment with 32 cores in total
 
 ______________________________________________________________________
 
@@ -120,6 +126,8 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 | **Last 8 hours of the day with low demand** (8 cores in total)   |         |
 | **Total for 1 day**                                              | $9.21   |
 | **Total for 1 month**                                            | $276.30 |
+
+Diagram of an OpenVidu Elastic deployment with a variable number of cores
 
 ______________________________________________________________________
 

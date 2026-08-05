@@ -10,6 +10,8 @@ In the private sector, I have also participated in, directed, and collaborated w
 
 My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](https://openvidu.io/research/index.md).
 
+Portrait of Micael Gallego
+
 ______________________________________________________________________
 
 ## Francisco Gortázar
@@ -22,6 +24,8 @@ I've been involved in many projects in the private sector, mainly related to clo
 
 My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](https://openvidu.io/research/index.md).
 
+Portrait of Francisco Gortázar
+
 ______________________________________________________________________
 
 ## Pablo Fuente
@@ -31,6 +35,8 @@ ______________________________________________________________________
 I have worked with countless languages, technologies and frameworks throughout my career (too many to list them, really!). But as a small glance, my expertise includes real-time communication protocols, media streaming, and scalable, fault-tolerant backend systems. I also understand the importance of good quality documentation and communication: a product is valuable as long as people understand it and use it!
 
 My academic background consists of a Double Degree in Computer Science and Software Engineering from the University of Rey Juan Carlos in Madrid, Spain, in which I graduated with the best academic records of my year. I also completed a Master's Degree in Engineering of Software Systems. I have worked as assistant professor for a cloud-native application development Master's Degree program for two years, and I have also been a speaker in some technical conferences and meetups. This background has laid a solid foundation for a journey that has been both challenging and rewarding. Looking forward to seeing what the future holds!
+
+Portrait of Pablo Fuente
 
 ______________________________________________________________________
 
@@ -42,6 +48,8 @@ I hold a Software Engineering degree and a Master’s in Cloud Apps: Development
 
 My experience centers on Node.js, TypeScript, and Angular, complemented by strong skills in mobile development, frontend architecture, and microservices. I design resilient, fault-tolerant applications that leverage WebSockets and REST APIs for efficient, real-time communication. My focus on automation, observability, and continuous integration ensures maintainable, high-performance systems ready for production.
 
+Portrait of Carlos Santos
+
 ______________________________________________________________________
 
 ## Carlos Ruiz
@@ -51,6 +59,8 @@ ______________________________________________________________________
 I hold a Bachelor’s in Computer Science, a Bachelor’s in Software Engineering, and a Master’s in Software Systems Engineering. As an open-source enthusiast, I actively contribute to OpenVidu and manage my own ones.
 
 My expertise spans backend development (Java, Node.js, Golang), frontend development (JavaScript, Angular), and Linux and virtualization automation and administration (Bash, Python, Docker, Kubernetes).
+
+Portrait of Carlos Ruiz
 
 ______________________________________________________________________
 
@@ -62,6 +72,8 @@ I hold a Double Degree in Computer Engineering and Software Engineering from Uni
 
 I have professional experience mainly with Node.js, TypeScript, and Angular, as well as with Java, Spring Boot, and Go. I also have solid experience with Docker, Kubernetes, and AWS, focusing on automation and observability across development and deployment processes.
 
+Portrait of Juan Carlos Moreno
+
 ______________________________________________________________________
 
 ## Sergio Fernández
@@ -71,6 +83,8 @@ ______________________________________________________________________
 I hold a computer engineer degree from Universidad Rey Juan Carlos.
 
 My experience includes working with the most common public clouds and with their Cloud Formation Languages such as Terraform for GCP and Bicep for Azure.
+
+Portrait of Sergio Fernández
 
 ______________________________________________________________________
 

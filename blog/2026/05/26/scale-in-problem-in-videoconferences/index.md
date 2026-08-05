@@ -94,7 +94,7 @@ GCP logo
 [GCP Managed Instance Groups](https://cloud.google.com/compute/docs/instance-groups) don't provide a native "wait for draining" hook at the level of a single instance in the same way AWS does. OpenVidu's approach here is to sidestep the native scale-in mechanism entirely:
 
 1. The MIG is configured for **scale-out only**. GCP autoscaling can add instances but will never directly terminate one.
-1. A [**Cloud Run Function**](https://cloud.google.com/functions), triggered on a schedule by [Cloud Scheduler](https://cloud.google.com/scheduler/docs), periodically compares the current MIG size with the current recommended size (i.e., how many nodes the autoscaler *would* request given load). If the current count exceeds the target, it calculates the excess instances and removes them from the MIG.
+1. A [**Cloud Run Function**](https://cloud.google.com/functions){:target="*blank"}, triggered on a schedule by [Cloud Scheduler](https://cloud.google.com/scheduler/docs), periodically compares the current MIG size with the current recommended size (i.e., how many nodes the autoscaler \_would* request given load). If the current count exceeds the target, it calculates the excess instances and removes them from the MIG.
 1. Removed instances don't die immediately. Each Media Node runs a **cron job every minute** that checks whether it is still registered in the MIG. If it detects that it has been removed, it invokes the graceful shutdown script.
 1. The shutdown script marks the node as draining, waits for all active Rooms and jobs to complete, and then terminates the process — letting GCP reclaim the VM.
 

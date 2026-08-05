@@ -59,6 +59,10 @@ Cite this publication (BibTeX)
 
 **Conclusions**: The results confirm the initial hypothesis and provide practical guidelines, tools, and datasets for designing scalable WebRTC-based low-latency streaming platforms that scale to large audiences while maintaining acceptable QoE. Characterization of scalability limits and the use of media server interconnection as an expansion mechanism are key for planning efficient LLLS deployments.
 
+Media server scaling architecture from the thesis
+
+Media servers in use during the thesis experiments
+
 ______________________________________________________________________
 
 ## [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](https://doi.org/10.1109/ACCESS.2025.3589785)
@@ -83,6 +87,10 @@ Cite this publication (BibTeX)
 
 Videoconference applications are becoming increasingly popular, and the demand for these applications is growing. The availability of a standard for building videoconference application on the web, the W3C WebRTC standard, boosted the development of such applications. With so many alternatives available, an impact on quality due to an overload of such applications might cause users to leave and choose another service instead. This makes stress testing mandatory in order to understand the limits of these videoconference solutions and how these limits impact the quality of experience (QoE) of the users. However, most testing tools are not designed to calculate QoE, which is essential for real-time videoconference applications, because QoE calculation is complex and a computationally intensive process. This paper focuses on how load impacts QoE for WebRTC applications and presents OpenVidu QoE and Load Testing Tool (OQLT), a load and stress testing tool for WebRTC applications which measures the QoE of users in videoconference applications. In this work, we make use of this tool to help researchers and practitioners understand the impact of server load on the QoE of users in WebRTC applications, by analyzing three different communication systems: Kurento, Mediasoup, and Pion. We study which quality of service (QoS) metrics can be used to prevent an impact on the QoE of users in these servers. We also analyze different session sizes and topologies to understand the impact of server load on the QoE of users under different circumstances. Our findings show that in two of the three media servers (Kurento and Pion), CPU alone is a good indicator of QoE degradation, whereas for Mediasoup, additional WebRTC metrics are needed, because under high CPU usage Mediasoup can still provide a good QoE to its users. We also found that the behavior of the three media servers under load with respect to the QoE perceived by users is different, which might be important for practitioners, and that not all users are impacted equally by an overload on the server, and how users are impacted under such a load depends as well on the media server. From our extensive analysis of the data collected, we provide detailed implications for practitioners when using WebRTC applications.
 
+Quality of Experience results for Pion under load
+
+Quality of Experience results for mediasoup under load
+
 ______________________________________________________________________
 
 ## [Cost-effective load testing of WebRTC applications](https://doi.org/10.1016/j.jss.2022.111439)
@@ -106,6 +114,10 @@ Cite this publication (BibTeX)
 ```
 
 **Background**: Video conference applications and systems implementing the WebRTC W3C standard are becoming more popular and demanded year after year, and load testing them is of paramount importance to ensure they can cope with demand. However, this is an expensive activity, usually involving browsers to emulate users. **Goal**: to propose browser-less alternative strategies for load testing WebRTC services, and to study performance and costs of those strategies when compared with traditional ones. **Method**:(a) Exploring the limits of existing and novel strategies for load testing WebRTC services from a single machine. (b) Comparing the common strategy of using browsers with the best of our proposed strategies in terms of cost in a load testing scenario. **Results**: We observed that, using identical machines, our proposed strategies are able to emulate more users than traditional strategies. We also found a huge saving in expenditure for load testing, as our strategy suppose a saving of 96% with respect to usual browser-based strategies. We also found there are almost no differences between the traditional strategies considered. **Conclusion**: We provide details on scalability of different load testing strategies in terms of users emulated, as well as CPU and memory used. We could reduce the expenditure of load tests of WebRTC applications.
+
+Architecture of the OpenVidu Load Test platform
+
+Results from the OpenVidu Load Test platform
 
 ______________________________________________________________________
 
@@ -155,6 +167,8 @@ Cite this publication (BibTeX)
 
 Selenium is often considered the de-facto standard framework for end-to-end web testing nowadays. It allows practitioners to drive web browsers (such as Chrome, Firefox, Edge, or Opera) in an automated fashion using different language bindings (such as Java, Python, or JavaScript, among others). The term ecosystem, referring to the open-source software domain, includes various components, tools, and other interrelated elements sharing the same technological background. This article presents a descriptive survey aimed to understand how the community uses Selenium and its ecosystem. This survey is structured in seven categories: Selenium foundations, test development, system under test, test infrastructure, other frameworks, community, and personal experience. In light of the current state of Selenium, we analyze future challenges and opportunities around it.
 
+Figure from the Selenium ecosystem survey
+
 ______________________________________________________________________
 
 ## [Assessment of QoE for Video and Audio in WebRTC Applications Using Full-Reference Models](https://doi.org/10.3390/electronics9030462)
@@ -179,6 +193,8 @@ Cite this publication (BibTeX)
 ```
 
 WebRTC is a set of standard technologies that allows exchanging video and audio in real time on the Web. As with other media-related applications, the user-perceived audiovisual quality can be estimated using Quality of Experience (QoE) measurements. This paper analyses the behavior of different objective Full-Reference (FR) models for video and audio in WebRTC applications. FR models calculate the video and audio quality by comparing some original media reference with the degraded signal. To compute these models, we have created an open-source benchmark in which different types of reference media inputs are sent browser to browser while simulating different kinds of network conditions in terms of packet loss and jitter. Our benchmark provides recording capabilities of the impairment WebRTC streams. Then, we use different existing FR metrics for video (VMAF, VIFp, SSIM, MS-SSIM, PSNR, PSNR-HVS, and PSNR-HVS-M) and audio (PESQ, ViSQOL, and POLQA) recordings together with their references. Moreover, we use the same recordings to carry out a subjective analysis in which real users rate the video and audio quality using a Mean Opinion Score (MOS). Finally, we calculate the correlations between the objective and subjective results to find the objective models that better correspond with the subjective outcome, which is considered the ground truth QoE. We find that some of the studied objective models, such as VMAF, VIFp, and POLQA, show a strong correlation with the subjective results in packet loss scenarios.
+
+QoE assessment of video and audio in WebRTC applications
 
 ______________________________________________________________________
 
@@ -205,6 +221,8 @@ Cite this publication (BibTeX)
 
 WebRTC comprises a set of technologies and standards that provide real-time communication with web browsers, simplifying the embedding of voice and video communication in web applications and mobile devices. The perceived quality of WebRTC communication can be measured using quality of experience (QoE) indicators. QoE is defined as the degree of delight or annoyance of the user with an application or service. This paper is focused on the QoE assessment of WebRTC-based applications and its contribution is threefold. First, an analysis of how WebRTC topologies affect the quality perceived by users is provided. Second, a group of Key Performance Indicators for estimating the QoE of WebRTC users is proposed. Finally, a systematic survey of the literature on QoE assessment in the WebRTC arena is presented.
 
+Relationship between QoS parameters and Quality of Experience
+
 ______________________________________________________________________
 
 ## [Practical Evaluation of VMAF Perceptual Video Quality for WebRTC Applications](https://doi.org/10.3390/electronics8080854)
@@ -229,6 +247,10 @@ Cite this publication (BibTeX)
 ```
 
 WebRTC is the umbrella term for several emergent technologies aimed to exchange real-time media in the Web. Like other media-related services, the perceived quality of WebRTC communication can be measured using Quality of Experience (QoE) indicators. QoE assessment methods can be classified as subjective (users’ evaluation scores) or objective (models computed as a function of different parameters). In this paper, we focus on VMAF (Video Multi-method Assessment Fusion), which is an emergent full-reference objective video quality assessment model developed by Netflix. VMAF is typically used to assess video streaming services. This paper evaluates the use of VMAF in a different type of application: WebRTC. To that aim, we present a practical use case built on the top of well-known open source technologies, such as JUnit, Selenium, Docker, and FFmpeg. In addition to VMAF, we also calculate other objective QoE video metrics such as Visual Information Fidelity in the pixel domain (VIFp), Structural Similarity (SSIM), or Peak Signal-to-Noise Ratio (PSNR) applied to a WebRTC communication in different network conditions in terms of packet loss. Finally, we compare these objective results with a subjective evaluation using a Mean Opinion Score (MOS) scale to the same WebRTC streams. As a result, we found a strong correlation of the subjective video quality perceived in WebRTC video calls with the objective results computed with VMAF and VIFp in comparison with SSIM and PSNR and their variants.
+
+Perceptual video quality scores across a WebRTC session
+
+WebRTC video quality against packet loss
 
 ______________________________________________________________________
 
@@ -327,6 +349,10 @@ Cite this publication (BibTeX)
 ```
 
 In the last few years, multimedia technologies in general, and Real-Time multimedia Communications (RTC) in particular, are becoming mainstream among WWW and smartphone developers, who have an increasing interest in richer media capabilities for creating their applications. The engineering literature proposing novel algorithms, protocols and architectures for managing and processing multimedia information is currently overwhelming. However, most of these results do not arrive to applications due to the lack of simple and usable APIs. Interestingly, in this context in which APIs are the critical ingredient for reaching wide developer audiences, the scientific literature about multimedia APIs and their usability is scarce. In this paper we try to contribute to fill this gap by proposing the RTC Media API: a novel type of API designed with the aim of making simple for developers the use of latest trends in RTC multimedia including WebRTC, Video Content Analysis or Augmented Reality. We provide a specification of such API and discuss how it satisfies a set of design requirements including programming-language agnosticism, adaptation to cloud environments, support to multisensory multimedia, etc. After that, we describe an implementation of such an API that has been created in the context of the Kurento open source software project, and present a study evaluating the API usability performed in a group of more than 40 professional developers distributed worldwide. In the light of the obtained results, we conclude that the usability of the API is adequate across the main development activities (i.e. API learning, code creation and code maintenance), with an average usability score of 3.39 over 5 in a Likert scale, and that this result is robust with respect to developers’ profiles, cultures, professional experiences and preferred programming languages.
+
+Kurento API design from the usability study
+
+API usability evaluation results
 
 ______________________________________________________________________
 

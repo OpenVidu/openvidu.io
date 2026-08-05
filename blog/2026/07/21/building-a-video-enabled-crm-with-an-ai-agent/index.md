@@ -4,7 +4,7 @@ OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the partic
 
 What does it take today to go from an empty folder to a working business app with **video meetings embedded in it**? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and **seven prompts**.
 
-We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate [OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/index.md) so that meetings happen *inside* the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.
+We recently ran this experiment: build a small CRM — clients, support issues, scheduled meetings — entirely with an AI agent, then ask the agent to integrate [OpenVidu Meet](https://openvidu.io/meet/embedded/intro/) so that meetings happen *inside* the app instead of in an external tool. Every prompt we typed is preserved in the repository, so this post is a faithful, reproducible walkthrough of the whole journey — including the parts where reality pushed back.
 
 *The result in 10 seconds: sign in, open the client's issue, hit* *Join* *— and the meeting happens right inside the CRM. Real capture of the running app (participant video is stock footage).*
 
