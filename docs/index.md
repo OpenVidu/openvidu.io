@@ -73,7 +73,7 @@ tags:
 </div>
 
 <div class="wow animated animatedFadeInUp fadeInUp" style="text-align: center" markdown>
---8<-- "shared/meet/meet-vs-platform-table.md"
+--8<-- "shared/meet-vs-platform-table.md"
 
 *[Learn more about OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)*
 </div>

@@ -3,7 +3,7 @@ title: "Building an AI agent for transcribing and summarizing audio calls"
 draft: false
 date: 2026-08-04
 slug: transcriber-summarizer-agent
-description: "How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch"
+description: "How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch."
 cover_image: transcriber-summarizer-agent.png
 categories:
   - AI

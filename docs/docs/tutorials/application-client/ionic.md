@@ -32,7 +32,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
