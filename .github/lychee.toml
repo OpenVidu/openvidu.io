@@ -7,7 +7,8 @@ include_mail = false
 max_retries = 3
 # docs.livekit.io alone carries ~190 links; a modest ceiling keeps WAFs from throttling us.
 max_concurrency = 8
-timeout = 20
+# meet-demo-app.openvidu.io cold-starts slowly; 20s produced false timeouts.
+timeout = 30
 
 cache = true
 max_cache_age = "3d"
@@ -19,9 +20,18 @@ exclude = [
     "^https?://localhost",
     "^https?://127\\.0\\.0\\.1",
     "^https?://0\\.0\\.0\\.0",
-    "^https?://(www\\.)?example\\.(com|org|net)",
-    "^https?://.*\\.example\\.(com|org|net)",
+    "^https?://([^/]*\\.)?example\\.[a-z]+",
+    "openvidu-local\\.dev",
+    # Auth-walled consoles: every deep link answers with a login redirect or 403.
+    "^https?://portal\\.azure\\.com",
+    "^https?://console\\.cloud\\.google\\.com",
+    "^https?://cloud\\.oracle\\.com",
+    "^https?://console\\.aws\\.amazon\\.com",
     # Bot-hostile hosts that answer link checkers with 403/999 regardless of link health.
     "^https?://(www\\.)?(twitter|x)\\.com",
     "^https?://(www\\.)?linkedin\\.com",
+    "^https?://(www\\.)?npmjs\\.com",
+    "^https?://(www\\.)?medium\\.com",
+    "^https?://doi\\.org",
+    "^https?://dl\\.acm\\.org",
 ]

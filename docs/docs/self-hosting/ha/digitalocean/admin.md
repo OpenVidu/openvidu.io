@@ -12,7 +12,7 @@ description: "Administer OpenVidu High Availability on DigitalOcean: shut down a
 </div>
 
 
-The OpenVidu High Availability deployment on DigitalOcean is fully automated using the Terraform CLI. It provisions 4 Droplets for the Master Nodes, while Media Nodes are managed through a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/autoscale/){:target=\_blank}.
+The OpenVidu High Availability deployment on DigitalOcean is fully automated using the Terraform CLI. It provisions 4 Droplets for the Master Nodes, while Media Nodes are managed through a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/concepts/autoscale-pools/){:target=\_blank}.
 
 Internally, the DigitalOcean High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth keeping in mind:
 

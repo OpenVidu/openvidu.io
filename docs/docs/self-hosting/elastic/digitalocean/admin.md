@@ -12,7 +12,7 @@ description: "Administer OpenVidu Elastic on DigitalOcean: shut down and start t
 </div>
 
 
-The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI to deploy on DigitalOcean, where Media Nodes are in a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/autoscale/){:target=\_blank}.
+The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI to deploy on DigitalOcean, where Media Nodes are in a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/concepts/autoscale-pools/){:target=\_blank}.
 
 Internally, the DigitalOcean Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth keeping in mind:
 
