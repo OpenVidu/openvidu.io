@@ -1,6 +1,6 @@
 ---
 title: OpenVidu High Availability administration on DigitalOcean
-description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu High Availability deployment
+description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu High Availability deployment.
 ---
 
 # OpenVidu High Availability administration: DigitalOcean

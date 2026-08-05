@@ -1,6 +1,6 @@
 ---
 title: OpenVidu Elastic administration on DigitalOcean
-description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu Elastic deployment
+description: Learn how to perform administrative tasks on a DigitalOcean OpenVidu Elastic deployment.
 ---
 
 # OpenVidu Elastic administration: DigitalOcean
