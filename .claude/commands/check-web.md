@@ -32,11 +32,13 @@ After the fast check passes, also run what CI runs:
 
 ```bash
 CI=false GOOGLE_ANALYTICS_KEY=G-XXXXXXXX mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation
+ovweb lint --site /tmp/mkdocs-strict-validation
 ```
 
 - The build must end with **zero WARNINGs** — any WARNING is a failure to fix.
-- Anchor `INFO` lines are expected noise (~110 `pymdownx.tabbed` false positives). Only scan
-  them for a heading you renamed or removed in this session.
+- Anchor `INFO` lines in the build log are expected noise (~110 `pymdownx.tabbed` false
+  positives) — `ovweb lint --site` is the authoritative anchor check, since it resolves every
+  fragment against the ids actually present in the built HTML.
 - If `mkdocs` is not installed locally, use the Docker image instead:
   `docker run --rm -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build --strict -d /tmp/site`.
 

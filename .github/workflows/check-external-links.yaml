@@ -1,0 +1,90 @@
+name: Check External Links
+
+# Weekly sweep of every external URL the built site carries (~730 links; github.com and
+# docs.livekit.io dominate). Runs over the built HTML so snippet-inlined and raw-HTML links are
+# covered, and only remote URLs are checked — internal links and anchors are validate-web.yaml's
+# job (`ovweb lint --site`).
+#
+# Deliberately NOT a PR gate: a third-party outage must not block merges. The run itself always
+# ends green; findings are reported through a single self-updating issue labelled
+# `broken-links`, which is closed automatically once a clean run happens.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: 3.x
+
+      - name: Install safe-chain
+        uses: OpenVidu/actions/install-safe-chain@070fb73fda8fe7a08e28991b1c2d276f12a009ef # v1.0.22
+
+      - name: Install dependencies
+        run: pip install "./publish-tool[validate]"
+
+      - name: Build documentation
+        env:
+          GOOGLE_ANALYTICS_KEY: G-XXXXXXXX
+          # Fast validation build; the production-only plugins are not needed to enumerate links.
+          CI: "false"
+        run: mkdocs build --strict --site-dir /tmp/site
+
+      - name: Restore the lychee cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ github.run_id }}
+          restore-keys: lychee-cache-
+
+      - name: Check external links
+        id: lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        env:
+          # Authenticated GitHub checks: dissolves rate limiting on the ~640 github.com links.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --config .github/lychee.toml --no-progress --root-dir /tmp/site '/tmp/site/**/*.html'
+          output: /tmp/lychee-report.md
+          fail: false
+
+      - name: Update the broken-links issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+        run: |
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label broken-links --state open \
+            --json number --jq '.[0].number // empty')
+          if [ "$EXIT_CODE" = "0" ]; then
+            if [ -n "$existing" ]; then
+              gh issue close "$existing" --repo "$GITHUB_REPOSITORY" \
+                --comment "The weekly check found no broken external links; closing."
+            fi
+            exit 0
+          fi
+          {
+            echo "The weekly external-link check found broken links."
+            echo ""
+            echo "Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo ""
+            cat /tmp/lychee-report.md
+          } > /tmp/issue-body.md
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --repo "$GITHUB_REPOSITORY" --body-file /tmp/issue-body.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "Broken external links" \
+              --label broken-links --body-file /tmp/issue-body.md
+          fi

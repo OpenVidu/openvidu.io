@@ -130,6 +130,29 @@ def test_root_absolute_and_external_links_in_movable_files_are_fine(tmp_path):
     assert findings_of(tmp_path, "md-relative-in-movable") == []
 
 
+def test_an_md_link_in_a_post_excerpt_is_an_error(tmp_path):
+    """The blog listing pages copy the excerpt without rewriting resolved Markdown links."""
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/08/post.md",
+        "Intro with [a link](/meet/index.md).\n\n<!-- more -->\n\n[fine here](/meet/index.md)\n",
+    )
+
+    (finding,) = findings_of(tmp_path, "md-link-in-excerpt")
+    assert finding.severity == "error"
+    assert finding.line == 1
+
+
+def test_an_html_link_in_a_post_excerpt_is_fine(tmp_path):
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/08/post.md",
+        'Intro with <a href="/meet/">a link</a>.\n\n<!-- more -->\n\nBody.\n',
+    )
+
+    assert findings_of(tmp_path, "md-link-in-excerpt") == []
+
+
 def test_a_stray_slash_before_an_anchor_is_an_error(tmp_path):
     write(tmp_path, "docs/docs/install.md", "[certs](../install.md/#custom-certificates)")
 

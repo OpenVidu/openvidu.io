@@ -20,6 +20,7 @@ VERSION_PIN = re.compile(
     r"https://openvidu\.io/(\d+\.\d+)/|\]\(/(\d+\.\d+)/|(?:href|src)=\"/(\d+\.\d+)/"
 )
 LATEST_LINK = re.compile(r"https://openvidu\.io/latest/|\]\(/latest/|(?:href|src)=\"/latest/")
+MORE_MARKER = re.compile(r"<!--\s*more\s*-->")
 MINOR = re.compile(r"\d+\.\d+")
 
 SKIP_SCHEMES = ("http://", "https://", "mailto:", "tel:", "data:", "javascript:", "//")
@@ -164,6 +165,29 @@ def check_markdown_form(corpus: Corpus) -> list[Finding]:
                             'write "page.md#anchor", not "page.md/#anchor"',
                         )
                     )
+
+    # The blog plugin copies the excerpt (everything before <!-- more -->) onto the listing
+    # pages WITHOUT rewriting resolved Markdown links, so a `.md` target that renders fine on
+    # the post page leaks as a literal dead `/x.md` href on /blog/ and every category page.
+    for path, source in corpus.docs.items():
+        if not path.startswith("docs/blog/posts/"):
+            continue
+        marker = MORE_MARKER.search(source.commented)
+        if marker is None:
+            continue
+        for offset, target in _md_targets(source.visible):
+            if offset < marker.start() and target.partition("#")[0].endswith(".md"):
+                findings.append(
+                    Finding(
+                        "md-link-in-excerpt",
+                        ERROR,
+                        source.path,
+                        source.line_of(offset),
+                        f'Markdown link "{target}" in the excerpt (before <!-- more -->)',
+                        "the blog listing pages copy the excerpt without rewriting it; use "
+                        'the raw-HTML URL form there: <a href="/x/">…</a>',
+                    )
+                )
     return findings
 
 

@@ -39,8 +39,8 @@ tags:
 <table id="pricing-table" name="big-pricing-table">
   <tr>
     <th></th>
-    <th class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
-    <th colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
+    <th id="openvidu-community" class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
+    <th id="openvidu-pro" colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
   </tr>
   <tr>
     <td class="first-column border-right">Price</td>

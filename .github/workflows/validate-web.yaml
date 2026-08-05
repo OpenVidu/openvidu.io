@@ -91,3 +91,10 @@ jobs:
           # real production build runs them in publish-web.yaml.
           CI: "false"
         run: mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation
+
+      - name: Lint the built site
+        # The built HTML is the truth the source lint approximates: snippets inlined, templates
+        # composed, and the pymdownx.tabbed anchor ids present — so every internal link and
+        # every #fragment is resolved here for real, with no false positives. External URLs are
+        # the scheduled check-external-links workflow's job.
+        run: ovweb lint --site /tmp/mkdocs-strict-validation

@@ -1,0 +1,27 @@
+# Configuration for the weekly external-link check (check-external-links.yaml).
+# Internal links are PR CI's job (`ovweb lint --site`); this run covers only remote URLs.
+
+scheme = ["https", "http"]
+include_mail = false
+
+max_retries = 3
+# docs.livekit.io alone carries ~190 links; a modest ceiling keeps WAFs from throttling us.
+max_concurrency = 8
+timeout = 20
+
+cache = true
+max_cache_age = "3d"
+
+accept = ["200..=204", "206", "301..=308"]
+
+exclude = [
+    # Placeholders and local-only URLs that appear in copy-pasteable instructions.
+    "^https?://localhost",
+    "^https?://127\\.0\\.0\\.1",
+    "^https?://0\\.0\\.0\\.0",
+    "^https?://(www\\.)?example\\.(com|org|net)",
+    "^https?://.*\\.example\\.(com|org|net)",
+    # Bot-hostile hosts that answer link checkers with 403/999 regardless of link health.
+    "^https?://(www\\.)?(twitter|x)\\.com",
+    "^https?://(www\\.)?linkedin\\.com",
+]

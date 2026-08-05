@@ -369,7 +369,7 @@ ovweb deploy         X.Y   The primitive the three presets configure
 
 ovweb postprocess    X.Y   Run ONLY the gh-pages post-processing, on a tree
 ovweb redirects render|check|apply
-ovweb lint [PATHS...]      Authoring conventions the strict build cannot see
+ovweb lint [PATHS...] [--site DIR]   Authoring conventions the strict build cannot see
 ovweb verify               Assert the invariants of a published tree
 ovweb versions list        What is published, and which version branches exist
 ovweb doctor [--pins]      Dependencies, pins, configuration and git state
@@ -812,6 +812,18 @@ documentation example never trips a check. Severity is decided in the checker, n
 reader: `error` fails CI (exit 1), `warn` and `info` do not. `ovweb lint PATH…` limits the
 report to the given files.
 
+**`ovweb lint --site DIR`** adds the built-site tier over a `mkdocs build` output: every
+internal `href`/`src`/`srcset` — full-domain `https://openvidu.io/…` and `/latest/…` forms
+included — must resolve within the built tree, and every `#fragment` must name an id actually
+present on the target page. The built HTML carries the `pymdownx.tabbed` ids the MkDocs
+validator cannot see, so this is the authoritative anchor check with none of the ~110 INFO
+false positives. Version-pinned URLs (only production serves those folders), external URLs
+(the scheduled link-check workflow's job), SPA-style `#/…` routing fragments of the OpenAPI
+viewer, and the generated `reference-docs/` trees as sources are all excluded by design. Its
+first run found two live defects: fourteen links to pricing anchors that did not exist, and
+`.md` excerpt links leaking unrewritten onto the blog listing pages (now also guarded at the
+source by `md-link-in-excerpt`).
+
 ---
 
 ## How it runs in CI
@@ -827,7 +839,11 @@ reaches the remote (see [Nothing is pushed until the tree is
 correct](#nothing-is-pushed-until-the-tree-is-correct)).
 
 [`.github/workflows/validate-web.yaml`](../.github/workflows/validate-web.yaml) runs on every PR:
-`ovweb doctor --pins`, `ovweb redirects check`, `ovweb lint`, and `mkdocs build --strict`.
+`ovweb doctor --pins`, `ovweb redirects check`, `ovweb lint`, `mkdocs build --strict`, and
+`ovweb lint --site` over the build it just produced.
+[`.github/workflows/check-external-links.yaml`](../.github/workflows/check-external-links.yaml)
+checks the external URLs weekly with lychee — never on PRs, since third-party outages must not
+block merges — and reports through a single self-updating `broken-links` issue.
 [`.github/workflows/test-tools.yaml`](../.github/workflows/test-tools.yaml) runs `pytest` and
 `ruff` when anything in this folder changes.
 
