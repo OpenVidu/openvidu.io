@@ -15,13 +15,20 @@ from .gitrepo import Git, GitError
 from .mikewrap import Mike
 from .redirects import RedirectError, resolve_file_redirects
 
-#: The distribution whose version must agree everywhere: the only pinned dependency that is also
-#: named outside Python packaging, as a Docker base-image tag.
-PINNED_DISTRIBUTION = "mkdocs-material"
+#: Every distribution that is a build input, pinned from the freeze of a known-good publish
+#: run. Each is named both in pyproject.toml and in the Dockerfiles (mkdocs-material as the
+#: base-image tag, the rest in the pip install lines), so all the places must agree.
+PINNED_DISTRIBUTIONS = (
+    "mkdocs-material",
+    "mike",
+    "mkdocs-glightbox",
+    "mkdocs-llmstxt",
+    "mkdocs-rss-plugin",
+    "pygments",
+)
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
 DOCKER_TAG = re.compile(r"^FROM\s+squidfunk/mkdocs-material:(\S+)", re.MULTILINE)
-PYPROJECT_PIN = re.compile(r"mkdocs-material(?:\[[^\]]*\])?==([^\"'\s]+)")
 
 
 @dataclass
@@ -51,40 +58,67 @@ def run_checks(
 
 
 def check_pins(repo_root: Path) -> list[Check]:
-    """Assert that every place naming a mkdocs-material version names the same one.
+    """Assert that every place naming a pinned distribution names the same version.
 
-    The declared pin, the two Docker base-image tags and the installed distribution. A different
-    theme version builds different markup, and the release-notes splice matches on that markup.
+    The pyproject pins, the Dockerfiles (base-image tag for mkdocs-material, pip install lines
+    for the rest) and the installed environment. A different theme or plugin version builds
+    different markup — which the release-notes splice matches on — so drift is an error, not
+    a warning.
     """
-    found: dict[str, str] = {}
-
     pyproject = repo_root / "publish-tool" / "pyproject.toml"
-    if pyproject.is_file():
-        match = PYPROJECT_PIN.search(pyproject.read_text(encoding="utf-8"))
-        if match:
-            found["publish-tool/pyproject.toml"] = match.group(1)
+    pyproject_text = pyproject.read_text(encoding="utf-8") if pyproject.is_file() else ""
+    dockerfiles = {
+        name: (repo_root / name).read_text(encoding="utf-8")
+        for name in DOCKERFILES
+        if (repo_root / name).is_file()
+    }
 
-    for name in DOCKERFILES:
-        path = repo_root / name
-        if not path.is_file():
+    checks = []
+    for distribution in PINNED_DISTRIBUTIONS:
+        pin = re.compile(rf"\b{re.escape(distribution)}(?:\[[^\]]*\])?==([A-Za-z0-9._-]+)")
+        found: dict[str, str] = {}
+
+        declared = set(pin.findall(pyproject_text))
+        if len(declared) > 1:
+            checks.append(
+                Check(
+                    "pins",
+                    False,
+                    f"{distribution} is pinned to {len(declared)} different versions inside "
+                    "publish-tool/pyproject.toml",
+                )
+            )
             continue
-        match = DOCKER_TAG.search(path.read_text(encoding="utf-8"))
-        if match:
-            found[name] = match.group(1)
+        if pyproject_text and not declared:
+            # The pyproject pin is the source of truth; the other places agree *with it*.
+            checks.append(
+                Check("pins", False, f"{distribution} is not pinned in publish-tool/pyproject.toml")
+            )
+            continue
+        if declared:
+            found["publish-tool/pyproject.toml"] = declared.pop()
 
-    installed = _distribution_version(PINNED_DISTRIBUTION)
-    if installed:
-        found["installed"] = installed
+        for name, text in dockerfiles.items():
+            match = (
+                DOCKER_TAG.search(text) if distribution == "mkdocs-material" else pin.search(text)
+            )
+            if match:
+                found[name] = match.group(1)
 
-    if not found:
-        return [Check("pins", False, f"no {PINNED_DISTRIBUTION} version found anywhere")]
+        installed = _distribution_version(distribution)
+        if installed:
+            found["installed"] = installed
 
-    unique = set(found.values())
-    if len(unique) == 1:
-        return [Check("pins", True, f"{PINNED_DISTRIBUTION} {unique.pop()} everywhere")]
-
-    rendered = ", ".join(f"{where}={version}" for where, version in sorted(found.items()))
-    return [Check("pins", False, f"{PINNED_DISTRIBUTION} versions disagree: {rendered}")]
+        if not found:
+            checks.append(Check("pins", False, f"no {distribution} version found anywhere"))
+            continue
+        unique = set(found.values())
+        if len(unique) == 1:
+            checks.append(Check("pins", True, f"{distribution} {unique.pop()} everywhere"))
+            continue
+        rendered = ", ".join(f"{where}={version}" for where, version in sorted(found.items()))
+        checks.append(Check("pins", False, f"{distribution} versions disagree: {rendered}"))
+    return checks
 
 
 def _distribution_version(name: str) -> str | None:

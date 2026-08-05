@@ -16,28 +16,24 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Everything needed for a real publish build. mkdocs-material and pygments are pinned; the
-# plugins are not.
-#
-# TODO: pin the plugins too. Doing it right needs a `pip freeze` of a known-good CI
-# run — inventing version numbers here would risk breaking the build for no gain.
-# `ovweb doctor --pins` already guards the pin that matters most (mkdocs-material,
-# which must agree across this file and both Dockerfiles).
+# Everything needed for a real publish build. Every build input is pinned, from the freeze of
+# a known-good publish run; `ovweb doctor --pins` asserts these versions agree with the two
+# Dockerfiles and the installed environment.
 build = [
-    "mike",
+    "mike==2.2.0",
     "mkdocs-material[imaging]==9.7.6",
-    "pygments<2.20",
-    "mkdocs-glightbox",
-    "mkdocs-llmstxt",
-    "mkdocs-rss-plugin",
+    "pygments==2.19.2",
+    "mkdocs-glightbox==0.5.2",
+    "mkdocs-llmstxt==0.5.0",
+    "mkdocs-rss-plugin==1.19.0",
 ]
-# Same, minus the imaging extra: the lightweight link-validation build.
+# Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
     "mkdocs-material==9.7.6",
-    "pygments<2.20",
-    "mkdocs-glightbox",
-    "mkdocs-llmstxt",
-    "mkdocs-rss-plugin",
+    "pygments==2.19.2",
+    "mkdocs-glightbox==0.5.2",
+    "mkdocs-llmstxt==0.5.0",
+    "mkdocs-rss-plugin==1.19.0",
 ]
 dev = [
     "pytest>=8",
