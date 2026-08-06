@@ -58,6 +58,8 @@ Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims 
 - OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](./self-hosting/production-ready/observability/index.md).
 - We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](./self-hosting/production-ready/scalability.md#big-videoconferences-and-massive-live-streams-working-on-it).
 
+:octicons-arrow-right-24: **[Read the full OpenVidu vs LiveKit comparison](../openvidu-vs-livekit.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
+
 ## OpenVidu vs SaaS solutions
 
 This includes many services like [Agora :fontawesome-solid-external-link:{.external-link-icon}](https://www.agora.io/){:target="_blank"}, [GetStream :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/){:target="_blank"}, [Daily :fontawesome-solid-external-link:{.external-link-icon}](https://www.daily.co/){:target="_blank"}, [Vonage :fontawesome-solid-external-link:{.external-link-icon}](https://www.vonage.com/communications-apis/video/){:target="_blank"}, [Jitsi as a Service :fontawesome-solid-external-link:{.external-link-icon}](https://jaas.8x8.vc/#/){:target="_blank"}, [Whereby :fontawesome-solid-external-link:{.external-link-icon}](https://whereby.com/){:target="_blank"}, [Zoom SDK :fontawesome-solid-external-link:{.external-link-icon}](https://developers.zoom.us/docs/video-sdk/){:target="_blank"}, [Dolby Millicast :fontawesome-solid-external-link:{.external-link-icon}](https://dolby.io/){:target="_blank"}, [Amazon Chime SDK :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/chime/chime-sdk/){:target="_blank"}.
@@ -83,6 +85,8 @@ SFUs are generally low-level tools. Using them directly to implement real-time a
 [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"} is a [WebRTC SFU](#openvidu-vs-sfus). It is a minimalist media server with a super low level API that allows building custom real-time applications. Compared to other SFUs, mediasoup is well known for its outstanding performance.
 
 OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](./self-hosting/production-ready/performance.md).
+
+:octicons-arrow-right-24: **[Read the full OpenVidu vs mediasoup comparison](../openvidu-vs-mediasoup.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Microsoft Teams, Google Meet, Zoom
 

@@ -28,6 +28,8 @@ layout:
     - pricing
     - support
     - openvidu-meet-vs-openvidu-platform
+    - openvidu-vs-livekit
+    - openvidu-vs-mediasoup
     - conditions
     - blog
     - about-us
