@@ -126,7 +126,7 @@ OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .8e
 
 OpenVidu's headline performance claim comes specifically from the mediasoup engine integration,
 not from marketing copy: the OpenVidu team built its own load-testing tool
-([`openvidu-loadtest`](https://github.com/OpenVidu/openvidu-loadtest)) after finding that
+([`openvidu-loadtest` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}) after finding that
 SDK-simulated clients understate real-world load compared to real browser clients. Benchmarked on
 identical hardware (an AWS `m6in.xlarge`, 4 vCPU), mediasoup handles roughly **2x** the media
 tracks that stock LiveKit (Pion) does on the same server. Concretely:
@@ -165,7 +165,7 @@ ratio.
 
 The OpenVidu team has spent more than 12 years building real-time media services and applications:
 
-- **Low-level media engines.** Some OpenVidu engineers worked on [Kurento Media Server](https://github.com/Kurento/kurento) — the background that made swapping a Go media engine for a C++ one a tractable project rather than a gamble.
+- **Low-level media engines.** Some OpenVidu engineers worked on [Kurento Media Server :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/Kurento/kurento){:target="_blank"} — the background that made swapping a Go media engine for a C++ one a tractable project rather than a gamble.
 - **Developer experience.** We built OpenVidu to make life easier for developers building media services, and that shows in everything shipped around our LiveKit fork: Egress, Ingress, S3-compatible storage, automated deployments for five clouds, and more.
 - **End-user experience.** Ultimately we all want to ship applications our users love, so we put real effort into helping developers get there.
 - **Ready-to-use videoconferencing apps.** We recently released OpenVidu Meet - a standalone, brandable application you can use as-is or embed directly into your own product.

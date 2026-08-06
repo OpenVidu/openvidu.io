@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Elastic on Google Cloud Platform
-description: How to upgrade OpenVidu Elastic on Google Cloud Platform deployments.
+title: "Upgrade OpenVidu Elastic on Google Cloud"
+description: "Upgrade an existing OpenVidu Elastic deployment on Google Cloud to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: Google Cloud Platform

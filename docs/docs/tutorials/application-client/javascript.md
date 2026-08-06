@@ -1,11 +1,13 @@
 ---
-title: JavaScript Tutorial
-description: "Build a video-call app in plain JavaScript, HTML and CSS with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
+title: "JavaScript video call tutorial"
+description: "Build a video-call app on OpenVidu in plain JavaScript, HTML and CSS with the LiveKit-compatible JS SDK: join a room and publish media."
+tags:
+  - setupcustomgallery
 ---
 
 # JavaScript Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-js){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-js){ .md-button target="_blank" }
 
 This tutorial is a simple video-call application built with plain **JavaScript**, **HTML** and **CSS** that allows:
 
@@ -14,7 +16,7 @@ This tutorial is a simple video-call application built with plain **JavaScript**
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -30,7 +32,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
@@ -40,7 +42,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 This application is designed to be beginner-friendly and consists of only three essential files that are located in the `src` directory:
 
--   `app.js`: This is the main JavaScript file for the sample application. It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+-   `app.js`: This is the main JavaScript file for the sample application. It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 -   `index.html`: This HTML file is responsible for creating the user interface. It contains the form to connect to a video call and the video call layout.
 -   `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
 

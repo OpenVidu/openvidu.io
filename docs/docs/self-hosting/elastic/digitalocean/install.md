@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on DigitalOcean
-description: Learn how to deploy OpenVidu Elastic on DigitalOcean
+title: "Install OpenVidu Elastic on DigitalOcean"
+description: "Deploy OpenVidu Elastic on DigitalOcean with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---
@@ -23,8 +23,8 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
 ## Prerequisites
 
-* You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target=_blank}.
-* You need to have installed [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target=_blank}.
+* You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target="_blank"}.
+* You need to have installed [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"}.
 * You need to have installed Git.
 
 === "Architecture overview"
@@ -202,14 +202,14 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     </details>
     !!! warning
 
-        In DigitalOcean, you need [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target=_blank} to create a bucket. If you leave the **spaceName** variable empty, you must configure these keys with full access so a new bucket can be created. [Here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target=_blank}.
+        In DigitalOcean, you need [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target="_blank"} to create a bucket. If you leave the **spaceName** variable empty, you must configure these keys with full access so a new bucket can be created. [Here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target="_blank"}.
         
 1. Use the following commands to deploy with terraform.
   ```bash
   terraform init
   terraform apply
   ```
-1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target=_blank} and wait for the ssh key to appear in the bucket you have configured.   
+1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.

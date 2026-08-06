@@ -1,6 +1,6 @@
 ---
-title: TURN server security
-description: Understand how OpenVidu's embedded TURN server protects relayed media — peer IP allowlist, relay port restriction, disabled TCP relays — and the configuration values that control it.
+title: "TURN server security in OpenVidu"
+description: "How OpenVidu's embedded TURN server protects relayed media with a peer IP allowlist, restricted relay ports and disabled TCP relays."
 ---
 
 # TURN server security

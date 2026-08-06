@@ -1,6 +1,6 @@
 ---
-title: AI Services Tutorials
-description: Learn how to integrate AI services in your OpenVidu applications.
+title: "OpenVidu AI service tutorials"
+description: "Tutorials that add OpenVidu AI services to an application, starting with real-time live captions in a plain JavaScript video call."
 ---
 
 # AI Services Tutorials

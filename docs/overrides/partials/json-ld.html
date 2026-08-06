@@ -18,8 +18,8 @@
   (https://openvidu.io/latest/meet/ and /latest/docs/) so structured data
   always consolidates ranking signals on the canonical URL, never on a
   pinned version. Blog posts use page.canonical_url: they are non-versioned
-  pages, and the deploy script (custom-versioning/push-new-version.sh)
-  already strips the version segment from their HTML.
+  pages, and the publishing tool (publish-tool/, `ovweb`) already
+  strips the version segment from their HTML.
 -#}
 
 {%- macro organization() -%}

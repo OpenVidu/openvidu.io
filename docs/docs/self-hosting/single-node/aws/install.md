@@ -1,6 +1,8 @@
 ---
-title: OpenVidu Single Node installation on AWS
-description: Learn how to deploy OpenVidu Single Node on AWS using CloudFormation
+title: "Install OpenVidu Single Node COMMUNITY on AWS"
+description: "Deploy OpenVidu Single Node COMMUNITY on AWS from a CloudFormation stack, then point your application at the result."
+tags:
+  - setupcustomgallery
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: AWS
@@ -18,7 +20,7 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
 [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
-...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target=_blank} and manually set this S3 URL in the `Specify template` section:
+...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
 
 ```
 https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml
@@ -85,9 +87,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
 
 </div>
 

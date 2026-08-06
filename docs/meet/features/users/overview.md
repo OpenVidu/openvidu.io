@@ -1,6 +1,6 @@
 ---
-title: Users in OpenVidu Meet
-description: Users in OpenVidu Meet - account roles (admin, room_manager, room_member), the root administrator, and how users relate to room access.
+title: "Users in OpenVidu Meet"
+description: "Registered users in OpenVidu Meet: the admin, room_manager and room_member roles, the root administrator, and how each one reaches a room."
 tags:
     - setupcustomgallery
 ---

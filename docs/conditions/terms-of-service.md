@@ -1,6 +1,6 @@
 ---
-title: Terms of Service
-description: Review the terms of service for using TIKAL TECHNOLOGIES SL's website and services, including rights, obligations and privacy guidelines.
+title: "Terms of Service"
+description: "The terms governing use of the openvidu.io website and the OpenVidu services, including your rights, your obligations and the applicable law."
 hide:
   - navigation
   - toc
@@ -97,7 +97,7 @@ TIKAL reserves the right to modify, at any moment, the characteristics, features
 
 ### Tenth. Terms of payment.
 
-1. The price, payment method, billing and payment of the telematics application licensing, object of the present contract, is stipulated in the Current Official Rates Section published on TIKAL´s website ([https://openvidu.io](https://openvidu.io){target="_blank"} at the time of writing), which are considered part of a whole to all intents and purposes.
+1. The price, payment method, billing and payment of the telematics application licensing, object of the present contract, is stipulated in the Current Official Rates Section published on TIKAL´s website ([https://openvidu.io](https://openvidu.io){:target="_blank"} at the time of writing), which are considered part of a whole to all intents and purposes.
 2. The price stipulated in the aforementioned Current Official Rates Section, do not include valued added tax (VAT), nor does it include any other taxes or fees established by law whose current rates shall be applied for the provision of the service when signing the present contract. Therefore, said amounts may be increased according to current tax rates.
 3. Payment will be done monthly and will cover the whole amount of the service consumed during last month period according to the currently published rates from TIKAL.
 4. Monthly payments include both the basic rate for the provision of the service, and the corresponding rate(s) for any optional or additional service hired.
@@ -177,5 +177,5 @@ The present is a business contract regulated by Spanish laws. The parties involv
 
 The present document constitutes the total agreement of the parties in relation to the matters covered in this agreement, thus substitutes all previous obligations, liabilities, and agreements, both written and verbal, existing prior to the signature and execution of this contract. 
 
-The following website ([www.naevatec.com](https://www.naevatec.com/){target="_blank"}) belongs to:  
+The following website ([www.naevatec.com](https://www.naevatec.com/){:target="_blank"}) belongs to:  
 TIKAL TECHNOLOGIES SL TAX ID: B85986669 10 Chile Rd/St 28290 – Las Rozas de Madrid (Madrid City) Spain. Registered in the Madrid´s Trade Register, volume/tome 28043\. Book 0 Section 8th of the Registry Book, Page 37, Sheet M-505315.

@@ -1,4 +1,4 @@
-To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
 1. Navigate into the application client directory:
 
@@ -22,9 +22,9 @@ The application will seamlessly initiate as a native desktop program, adapting i
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-electron.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-electron.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-electron.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-electron.png" loading="lazy" alt="Join screen of the Electron tutorial app"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-electron.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-electron.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-electron.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-electron.png" loading="lazy" alt="Video call room of the Electron tutorial app"/></a></p></div>
 
 </div>
 

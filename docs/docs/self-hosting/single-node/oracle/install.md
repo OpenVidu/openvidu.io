@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node installation on Oracle Cloud Infrastructure
-description: Learn how to deploy OpenVidu Single Node on Oracle Cloud Infrastructure in two ways
+title: "Install OpenVidu Single Node COMMUNITY on Oracle Cloud"
+description: "Deploy OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---
@@ -28,7 +28,7 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 ### 5. Administration and upgrade
 
 - For administration of this OpenVidu Single Node deployment, see the [Administration](./admin.md) section.
-- To upgrade OpenVidu, see the [Upgrade](./upgrade.md) section.
+- To upgrade OpenVidu, see the [Upgrade](../upgrade.md) section.
 
 ## Terraform
 
@@ -182,7 +182,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     terraform apply
     ```
 
-4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target=_blank} and wait for the SSH key to appear in your configured bucket.
+4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured bucket.
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the instance — if exposed, unauthorized users could gain access.

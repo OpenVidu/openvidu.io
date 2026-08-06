@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on Google Cloud Platform
-description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Single Node deployment
+title: "Administer OpenVidu Single Node COMMUNITY on Google Cloud"
+description: "Administer OpenVidu Single Node COMMUNITY on Google Cloud: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Google Cloud Platform
@@ -67,7 +67,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
 
 === "Changing configuration through Secrets Manager"
 
-    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target=_blank} on Google Cloud Platform.
+    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .svg-img .dark-img }

@@ -1,8 +1,9 @@
 ---
+title: "Host your own private video calls at home"
 draft: false
 date: 2026-06-30
 slug: secure-home-video-conferencing
-description: Host your own private, free video conferencing server at home on a Raspberry Pi, old laptop or mini-PC — no accounts, no time limits — in three simple steps with OpenVidu Meet.
+description: "Host a private, free video conferencing server at home on a Raspberry Pi, an old laptop or a mini-PC, with no accounts and no time limits, in three steps."
 cover_image: poster.jpg
 categories:
     - OpenVidu Meet
@@ -30,7 +31,7 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](/meet/index.md){:target="_blank"}.
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/meet/" target="_blank">OpenVidu Meet</a>.
 <!-- more -->
 
 ## Why self-host your video calls?
@@ -142,7 +143,7 @@ If both ports show "Success", proceed to Step 3.
 
 If either port fails, your ISP is blocking inbound connections on it. Automatic Let's Encrypt won't work in that case, because validating a certificate requires one of those ports to be reachable from the internet. You won't be able to follow Step 3 as written; use this alternative instead.
 
-Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md/#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.

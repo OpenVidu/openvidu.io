@@ -1,6 +1,6 @@
 ---
-title: Acknowledgments
-description: Projects and funding that have supported OpenVidu development.
+title: "Acknowledgments and public funding"
+description: "The Spanish and European research projects, LERNIM, EDGEDATA-CM and NewGenVidu, whose public funding has supported OpenVidu's development."
 hide:
   - search-bar
   - version-selector

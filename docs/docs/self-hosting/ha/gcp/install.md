@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability installation on Google Cloud Platform
-description: Learn how to deploy OpenVidu High Availability on Google Cloud Platform using Google Cloud Platform Console
+title: "Install OpenVidu High Availability on Google Cloud"
+description: "Deploy OpenVidu High Availability on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 tags:
   - copyclipboard
 ---
@@ -58,7 +58,7 @@ Once you click the button, you will see this window.
 * Change the **Region** to the one you prefer.
 !!! warning
     
-    If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target=_blank} in the Terraform values.
+    If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target="_blank"} in the Terraform values.
 
 * Leave **Terraform version** as 1.5.7.   
 * For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   

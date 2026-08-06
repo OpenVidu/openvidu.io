@@ -1,6 +1,6 @@
 ---
-title: Try OpenVidu Meet locally
-description: Deploy OpenVidu Meet on your local machine for development and testing purposes using Docker Desktop.
+title: "Try OpenVidu Meet locally"
+description: "Run OpenVidu Meet on your own machine with Docker Desktop to develop and test against it, including access from other devices on your network."
 ---
 # Try OpenVidu Meet locally
 
@@ -30,18 +30,18 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="\_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="_blank"}
 
 === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="\_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="_blank"}
 
 === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/linux-install/){:target="\_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/linux-install/){:target="_blank"}
 
     !!! info 
-        This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="\_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="\_blank"} installed. Make sure they are recent versions: Docker Engine >= **28.4.0** and Docker Compose >= **2.39.4**
+        This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="_blank"} installed. Make sure they are recent versions: Docker Engine >= **28.4.0** and Docker Compose >= **2.39.4**
 
 ## Running OpenVidu Meet Locally
 
@@ -192,7 +192,7 @@ Follow these steps:
 
     === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide :fontawesome-solid-external-link:{.external-link-icon}](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
+        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide :fontawesome-solid-external-link:{.external-link-icon}](https://www.avast.com/c-how-to-find-ip-address){:target="_blank"}. It typically is similar to `192.168.1.100`.
 
         2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
@@ -201,7 +201,7 @@ Follow these steps:
         ```
     === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide :fontawesome-solid-external-link:{.external-link-icon}](https://www.avast.com/c-how-to-find-ip-address){:target="\_blank"}. It typically is similar to `192.168.1.100`.
+        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide :fontawesome-solid-external-link:{.external-link-icon}](https://www.avast.com/c-how-to-find-ip-address){:target="_blank"}. It typically is similar to `192.168.1.100`.
 
         2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 
@@ -211,7 +211,7 @@ Follow these steps:
 
     === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
-        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide :fontawesome-solid-external-link:{.external-link-icon}](https://www.ionos.com/digitalguide/hosting/technical-matters/get-linux-ip-address/){:target="\_blank"}. It typically is similar to `192.168.1.100`.
+        1. Obtain the local IP of the computer where OpenVidu is intalled following [this guide :fontawesome-solid-external-link:{.external-link-icon}](https://www.ionos.com/digitalguide/hosting/technical-matters/get-linux-ip-address/){:target="_blank"}. It typically is similar to `192.168.1.100`.
 
         2. Execute the following command in Docker Desktop (replacing `<YOUR_PRIVATE_IP>` with the IP obtained)
 

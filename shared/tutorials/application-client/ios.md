@@ -1,4 +1,4 @@
-To run the client application tutorial, you need [Xcode :fontawesome-solid-external-link:{.external-link-icon}](https://apps.apple.com/us/app/xcode/id497799835?mt=12){:target="\_blank"} installed on your MacOS.
+To run the client application tutorial, you need [Xcode :fontawesome-solid-external-link:{.external-link-icon}](https://apps.apple.com/us/app/xcode/id497799835?mt=12){:target="_blank"} installed on your MacOS.
 
 1. Launch Xcode and open the `OpenViduIOS.xcodeproj` that you can find under `openvidu-livekit-tutorials/application-client/openvidu-ios`.
 
@@ -14,7 +14,7 @@ The application will initiate as a native iOS application. Once the app is opene
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></a></p></div>
 
 </div>
 
@@ -28,8 +28,8 @@ Once you have configured the URLs, you can join a video call room by providing a
 
 <div class="grid-container">
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 50%;" alt="Join screen of the iOS tutorial app"/></a></p></div>
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ios.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ios.png" loading="lazy" style="width: 50%;" alt="Video call room of the iOS tutorial app"/></a></p></div>
 
 </div>

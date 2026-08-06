@@ -1,13 +1,13 @@
 ---
-title: Anonymous Access Tutorial
-description: Learn how individuals can access an OpenVidu Meet room through anonymous access links (moderator or speaker) using Node.js and JavaScript.
+title: "Anonymous access tutorial for OpenVidu Meet"
+description: "Let anyone join an OpenVidu Meet room through a shared moderator or speaker link, with a Node.js and Express backend and a JavaScript frontend."
 tags:
     - setupcustomgallery
 ---
 
 # Anonymous Access Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-basic){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-basic){ .md-button target="_blank" }
 
 This tutorial shows how individuals can access an OpenVidu Meet room through **anonymous access links**. An anonymous access link is a predefined, shareable URL that lets anyone access a room **without identifying themselves**, with a role fixed by the link: `moderator` or `speaker`. These links can be shared freely with any participant.
 
@@ -17,7 +17,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to cre
 
 !!! info "Anonymous access vs. explicit members"
 
-    Anonymous access links are the simplest way to let people into a room: they are shared, role-based and require no identification. When you need per-individual access, fixed names or custom permissions, you add **explicit room members** instead, as shown in the [Identified Guests](./identified-guests.md) and [Users](./users.md) tutorials. See the [Room Access :fontawesome-solid-external-link:{.external-link-icon}](../../../features/rooms/access.md){:target="\_blank"} feature for the full picture.
+    Anonymous access links are the simplest way to let people into a room: they are shared, role-based and require no identification. When you need per-individual access, fixed names or custom permissions, you add **explicit room members** instead, as shown in the [Identified Guests](./identified-guests.md) and [Users](./users.md) tutorials. See the [Room Access :fontawesome-solid-external-link:{.external-link-icon}](../../../features/rooms/access.md){:target="_blank"} feature for the full picture.
 
 ## Running this tutorial
 
@@ -33,7 +33,7 @@ git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -53,14 +53,14 @@ npm install
 npm start
 ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}. You should see a screen like this:
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></a></p></div>
 
 </div>
 
@@ -81,7 +81,7 @@ These URLs already carry a secret that identifies the role, so anyone who opens 
 
 !!! info
 
-    Anonymous access can be enabled or disabled per role when creating or updating a room. See the [Room Access :fontawesome-solid-external-link:{.external-link-icon}](../../../features/rooms/access.md#anonymous-access){:target="\_blank"} feature for details.
+    Anonymous access can be enabled or disabled per role when creating or updating a room. See the [Room Access :fontawesome-solid-external-link:{.external-link-icon}](../../../features/rooms/access.md#anonymous-access){:target="_blank"} feature for details.
 
 ---
 

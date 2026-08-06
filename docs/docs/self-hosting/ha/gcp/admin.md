@@ -1,6 +1,6 @@
 ---
-title: OpenVidu High Availability administration on Google Cloud Platform
-description: Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu High Availability deployment
+title: "Administer OpenVidu High Availability on Google Cloud"
+description: "Administer OpenVidu High Availability on Google Cloud: shut down and start the cluster, resize instances and tune Media Node autoscaling."
 ---
 
 # OpenVidu High Availability administration: Google Cloud Platform
@@ -12,7 +12,7 @@ description: Learn how to perform administrative tasks on an Google Cloud Platfo
 </div>
 
 
-The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target=\_blank}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
+The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target="_blank"}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
 
@@ -24,7 +24,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     To shut down the cluster, you need to stop the Media Nodes and then stop the Master Nodes.
 
-    1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target=_blank}.
+    1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. Then click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .svg-img .dark-img }
@@ -48,7 +48,7 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     To start the cluster, start the Master Nodes first and then the Media Nodes.
 
-    1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target=_blank}.
+    1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. In _"VM instances"_ tab select the instance called `<STACK_NAME>-master-node-1`, here click on start to start the Master Node 1.
         <figure markdown>
         ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/gcp/start-master-node.png){ .svg-img .dark-img }
@@ -120,7 +120,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
 === "Media Nodes Autoscaling Configuration"
 
-    1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target=_blank}.
+    1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .svg-img .dark-img }
@@ -139,7 +139,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
     !!! info
 
         OpenVidu High Availability is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU usage. However, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [Google Cloud Platform
-        MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target=_blank}.
+        MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target="_blank"}.
 
 ## Fixed Number of Media Nodes
 
@@ -147,7 +147,7 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
 
 === "Set Fixed Number of Media Nodes"
 
-    1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target=_blank}.
+    1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
         <figure markdown>
         ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .svg-img .dark-img }
@@ -166,7 +166,7 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 
 === "Deactivate Cloud Run Function"
 
-    1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target=_blank} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
+    1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
         <figure markdown>
         ![Deactivate Scale In](../../../../assets/images/platform/self-hosting/ha/gcp/scalein-deactivate.png){ .svg-img .dark-img }
         </figure>
@@ -181,7 +181,7 @@ In addition to these, a Google Cloud Platform deployment provides the capability
 
 === "Changing configuration through Secrets Manager"
 
-    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target=_blank} on Google Cloud Platform.
+    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
         <figure markdown>
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .svg-img .dark-img }

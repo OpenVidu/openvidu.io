@@ -1,11 +1,13 @@
 ---
-title: Vue Tutorial
-description: "Build a video-call app in Vue with our LiveKit fork's JS SDK: join a room, publish and subscribe to media."
+title: "Vue video call tutorial"
+description: "Build a Vue video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
+tags:
+  - setupcustomgallery
 ---
 
 # Vue Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-vue){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-client/openvidu-vue){ .md-button target="_blank" }
 
 This tutorial is a simple video-call application built with **Vue** that allows:
 
@@ -14,7 +16,7 @@ This tutorial is a simple video-call application built with **Vue** that allows:
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -30,7 +32,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 

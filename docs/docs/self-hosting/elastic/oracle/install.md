@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Elastic installation on Oracle Cloud Infrastructure
-description: Learn how to deploy OpenVidu Elastic on Oracle Cloud Infrastructure
+title: "Install OpenVidu Elastic on Oracle Cloud"
+description: "Deploy OpenVidu Elastic on Oracle Cloud Infrastructure with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---
@@ -21,7 +21,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 ## Prerequisites
 
 * An Oracle Cloud Infrastructure account with permissions to create Compute instances, VCNs, Object Storage buckets, Vaults, Functions and IAM resources.
-* [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target=_blank} installed on your machine.
+* [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"} installed on your machine.
 * Git installed on your machine.
 
 === "Architecture overview"
@@ -226,7 +226,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     terraform apply
     ```
 
-4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target=_blank} and wait for the SSH key to appear in your configured bucket.
+4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured bucket.
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the Master Node — if exposed, unauthorized users could gain access.

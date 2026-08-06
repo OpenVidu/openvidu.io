@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Elastic on Oracle Cloud Infrastructure
-description: How to upgrade OpenVidu Elastic on Oracle Cloud Infrastructure deployments.
+title: "Upgrade OpenVidu Elastic on Oracle Cloud"
+description: "Upgrade an existing OpenVidu Elastic deployment on Oracle Cloud Infrastructure to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: Oracle Cloud Infrastructure

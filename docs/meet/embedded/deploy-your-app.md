@@ -1,5 +1,6 @@
 ---
-description: Learn how to deploy your custom application built with OpenVidu Meet in production, either alongside your OpenVidu deployment or in a separate environment.
+title: "Deploy your OpenVidu Meet application"
+description: "Take the application you built around OpenVidu Meet to production, either next to your OpenVidu deployment or in an environment of its own."
 ---
 
 # Deploy your OpenVidu Meet application

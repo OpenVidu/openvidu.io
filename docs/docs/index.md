@@ -1,6 +1,6 @@
 ---
 title: "OpenVidu Platform: Self-Hosted WebRTC SDKs"
-description: Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, AI, live streaming and robotics.
+description: "Build real-time video, audio and AI applications on infrastructure you control, with LiveKit-compatible SDKs and a self-hosted media server."
 ---
 
 <div class="logo-header platform-header">

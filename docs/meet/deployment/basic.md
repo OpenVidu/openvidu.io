@@ -1,3 +1,8 @@
+---
+title: "Deploy OpenVidu Meet on a single server"
+description: "Production deployment of OpenVidu Meet on one Linux server: prerequisites, ports, domain and TLS certificates, and the installer command."
+---
+
 This section contains the instructions to deploy a production-ready deployment of OpenVidu Meet in a single server.
 
 !!! info
@@ -75,7 +80,7 @@ OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refe
 
 - [Check the status of services](../../docs/self-hosting/single-node/on-premises/admin.md#checking-the-status-of-services)
 - [Check logs](../../docs/self-hosting/single-node/on-premises/admin.md#checking-logs)
-- [Upgrade OpenVidu Meet to a newer version](../../docs/self-hosting/single-node/on-premises/upgrade.md)
+- [Upgrade OpenVidu Meet to a newer version](../../docs/self-hosting/single-node/upgrade.md)
 - [Uninstall OpenVidu Meet](../../docs/self-hosting/single-node/on-premises/admin.md#uninstalling-openvidu)
 
 ## Other deployment options

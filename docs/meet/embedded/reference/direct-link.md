@@ -1,3 +1,8 @@
+---
+title: "Embed OpenVidu Meet with a direct link"
+description: "Send participants to an OpenVidu Meet room with a plain HTML link, and fetch room access URLs from your backend with the REST API."
+---
+
 # Direct Link
 
 Redirect individuals to OpenVidu Meet using simple HTML links. This is the simplest way to integrate OpenVidu Meet into your application - perfect when you want participants to join meetings in a new browser tab or window with the polished OpenVidu Meet interface.
@@ -15,7 +20,7 @@ When someone clicks the link, they'll be redirected to the OpenVidu Meet room in
 !!! info "A room URL is a room access link"
     The room URL is a [room access link](../../features/rooms/access.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for all of them.
 
-    You can get them programmatically from your backend with the [REST API](api.html#/schemas/MeetRoom){:target="\_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
+    You can get them programmatically from your backend with the [REST API](api.html#/schemas/MeetRoom){:target="_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 

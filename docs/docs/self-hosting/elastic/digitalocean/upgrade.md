@@ -1,6 +1,6 @@
 ---
-title: Upgrade OpenVidu Elastic on DigitalOcean
-description: How to upgrade OpenVidu Elastic on DigitalOcean deployments.
+title: "Upgrade OpenVidu Elastic on DigitalOcean"
+description: "Upgrade an existing OpenVidu Elastic deployment on DigitalOcean to a newer OpenVidu version, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: DigitalOcean

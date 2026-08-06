@@ -1,6 +1,6 @@
 ---
-title: Observability
-description: OpenVidu provides all the tools you need to monitor and analyze your deployment in real-time using OpenVidu Dashboard and a Grafana stack.
+title: "Observability in OpenVidu"
+description: "The two tools OpenVidu gives you to see what a deployment is doing: the OpenVidu Dashboard for live rooms and a Grafana stack for history."
 ---
 
 # Observability :material-microscope:

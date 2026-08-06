@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ovweb"
+version = "1.0.0"
+description = "Build, version and publish the openvidu.io website"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.12",
+    "PyYAML>=6",
+    "Jinja2>=3.1",
+    "packaging>=23",
+]
+
+[project.optional-dependencies]
+# Everything needed for a real publish build. Every build input is pinned, from the freeze of
+# a known-good publish run; `ovweb doctor --pins` asserts these versions agree with the two
+# Dockerfiles and the installed environment.
+build = [
+    "mike==2.2.0",
+    "mkdocs-material[imaging]==9.7.6",
+    "pygments==2.19.2",
+    "mkdocs-glightbox==0.5.2",
+    "mkdocs-llmstxt==0.5.0",
+    "mkdocs-rss-plugin==1.19.0",
+]
+# Same, minus mike and the imaging extra: the lightweight link-validation build.
+validate = [
+    "mkdocs-material==9.7.6",
+    "pygments==2.19.2",
+    "mkdocs-glightbox==0.5.2",
+    "mkdocs-llmstxt==0.5.0",
+    "mkdocs-rss-plugin==1.19.0",
+]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    # The tests for llmstxt_preprocess.py compare it against the plugin's own `autoclean`, imported
+    # for real so the comparison cannot drift, which needs the soup library and the plugin itself.
+    # `mkdocs` is listed because mkdocs-llmstxt does not declare it, yet its package __init__
+    # imports mkdocs.config.
+    "beautifulsoup4",
+    "mkdocs",
+    "mkdocs-llmstxt",
+]
+
+[project.scripts]
+ovweb = "ovweb.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ovweb"]
+
+# ovweb.yaml is edited at the top of this folder but must also ship inside the wheel: the installed
+# package is the single source of truth at publish time, so that checking out gh-pages — or an old
+# X.Y branch, which carries its own stale copy — cannot change the tool's behaviour.
+[tool.hatch.build.targets.wheel.force-include]
+"ovweb.yaml" = "ovweb/data/ovweb.yaml"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
+# RUF001-003 flag "ambiguous" Unicode. They exist to catch homoglyphs in identifiers; here
+# the en dashes, em dashes and ellipses are deliberate typography in prose, matching how the
+# rest of the repository's documentation is written.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

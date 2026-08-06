@@ -1,6 +1,6 @@
 ---
-title: Configuration system in depth
-description: Explore OpenVidu's flexible configuration system, including global and service file settings, variable interpolation, and how to manage clusters efficiently.
+title: "OpenVidu configuration system in depth"
+description: "How OpenVidu configuration works: the global file, per-service files, variable interpolation, and how values propagate across a cluster."
 ---
 
 # OpenVidu configuration system in depth

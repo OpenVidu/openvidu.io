@@ -1,3 +1,8 @@
+---
+title: "Embed OpenVidu Meet in an iframe"
+description: "Embed OpenVidu Meet with a standard HTML iframe, including the permissions the browser needs for camera, microphone and screen sharing."
+---
+
 # Iframe
 
 Embed OpenVidu Meet directly into your application using a traditional HTML iframe. This approach is perfect for applications that cannot use [OpenVidu Meet Web Component](./webcomponent.md) or need a simple integration method.
@@ -28,7 +33,7 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
 !!! info "A room URL is a room access link"
     The room URL is a [room access link](../../features/rooms/access.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for all of them.
 
-    You can get them programmatically from your backend with the [REST API](api.html#/schemas/MeetRoom){:target="\_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
+    You can get them programmatically from your backend with the [REST API](api.html#/schemas/MeetRoom){:target="_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 

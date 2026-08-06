@@ -1,6 +1,6 @@
 ---
-title: OpenVidu Single Node administration on Oracle Cloud Infrastructure
-description: Learn how to perform administrative tasks on an Oracle Cloud Infrastructure OpenVidu Single Node PRO deployment
+title: "Administer OpenVidu Single Node PRO on Oracle Cloud"
+description: "Administer OpenVidu Single Node PRO on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Oracle Cloud Infrastructure
@@ -72,7 +72,7 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
             <figure markdown>
             ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/new-secret-version.png){ .svg-img .dark-img }
             </figure>
-    5. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target=_blank} and click on [_Stop_](#stop-openvidu-single-node-pro) → [_Start_](#start-openvidu-single-node-pro) to apply the changes to the OpenVidu Single Node PRO deployment.
+    5. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click on [_Stop_](#stop-openvidu-single-node-pro) → [_Start_](#start-openvidu-single-node-pro) to apply the changes to the OpenVidu Single Node PRO deployment.
 
     Changes will be applied automatically.
 
