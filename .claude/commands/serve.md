@@ -18,8 +18,8 @@ docker run --name=mkdocs --rm -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-mate
 Known local-server behaviour, all expected — do not "fix" any of it:
 
 - It serves a **single unversioned site at the root** (`/meet/`, not `/latest/meet/`); version
-  handling happens at publish time. To preview the real versioned layout, see the README
-  section "Testing versioning locally" (`mike serve`).
+  handling happens at publish time. To preview the real versioned layout, see
+  `contributing/local-testing.md` (`mike serve`).
 - Canonicals and JSON-LD show `http://0.0.0.0:8000/...`.
 - `--dirtyreload` is on: after editing a shared snippet, touch the including page (or restart)
   to see the change everywhere.

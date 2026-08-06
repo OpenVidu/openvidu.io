@@ -24,7 +24,8 @@ It reports `[check] file:line: message — hint` lines at three severities. Act 
 - **info** — janitorial; mention only if the user asked for a cleanup.
 
 Never silence a finding by weakening the checker (`publish-tool/src/ovweb/lint/`) — the checker
-changes only when a convention itself changes, with the user's agreement.
+changes only when a convention itself changes, with the user's agreement. What each check
+enforces is documented in `contributing/checks.md`.
 
 ## Full check (`full` argument)
 
