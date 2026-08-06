@@ -1,8 +1,9 @@
 |                       | ![OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark){ .compare-table-logo .do-not-include-in-gallery } ![OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light){ .compare-table-logo .do-not-include-in-gallery }    | ![OpenVidu Platform](/assets/images/logos/platform_whitefont_transback.png#only-dark){ .compare-table-logo .do-not-include-in-gallery } ![OpenVidu Platform](/assets/images/logos/platform_greyfont_transback.png#only-light){ .compare-table-logo .do-not-include-in-gallery } |
 | ------------------------ | ---------------- | ----------------- |
 | Self-hosted              | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
-| AWS & Azure templates    | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
-| HQ real-time video | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| Cloud templates for AWS, Azure, GCP, DO, OCI | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| HQ real-time video and crisp audio | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| Recording        | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Performant, Scalable, Fault-Tolerant & Observable | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Tutorials available      | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Customer support         | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
