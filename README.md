@@ -390,8 +390,8 @@ folder, with relative links. `ovweb` then post-processes that output on `gh-page
    root sitemap is for crawlers (`robots.txt` names it, and it is a plain `urlset` rather than an
    index); the version's copy is fetched at runtime by the theme's version selector, which is what
    keeps a reader on the same page when they switch version — see
-   [the two sitemaps](publish-tool/README.md#the-two-sitemaps-and-the-version-selector).
-8. Write the [generated redirect pages](publish-tool/README.md#redirects), so `/X.Y/` and
+   [the two sitemaps](publish-tool/docs/sitemaps-and-search.md).
+8. Write the [generated redirect pages](publish-tool/docs/redirects.md), so `/X.Y/` and
    `/latest/` land on the documentation.
 9. Splice the newest release notes into every other version folder, so any version shows the full
    changelog while keeping its own navigation.

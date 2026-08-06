@@ -15,7 +15,8 @@ the exact sequence CI runs.
 ## `ovweb lint`
 
 Where `ovweb verify` asserts a *published* tree (see
-[`publish-tool/README.md`](../publish-tool/README.md)), `ovweb lint` checks the *sources* — the
+[`publish-tool/docs/testing-and-verify.md`](../publish-tool/docs/testing-and-verify.md)),
+`ovweb lint` checks the *sources* — the
 authoring conventions `mkdocs build --strict` cannot see, in about a second and with no build:
 
 - **Raw-HTML links and images** (`href="/…"`, `src="/…"`): MkDocs never processes HTML, so a

@@ -26,7 +26,7 @@ def _class_token(token: str) -> re.Pattern[str]:
 
 
 #: HTML class names that only work when the page carries the matching functional tag, which
-#: loads the JS behind them (see README "Mkdocs Material tag system").
+#: loads the JS behind them (see contributing/page-composition.md).
 TAG_CONTRACT = (
     (_class_token("glightbox"), "glightbox", "setupcustomgallery"),
     (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
@@ -160,8 +160,8 @@ def check_asset_placement(corpus: Corpus) -> list[Finding]:
                         f"{folder}/{entry.name}",
                         1,
                         f"file sits directly at {folder}/",
-                        "assets live in a folder named after the consuming page; see README "
-                        "'Organizing assets'",
+                        "assets live in a folder named after the consuming page; see "
+                        "contributing/authoring.md 'Organizing assets'",
                     )
                 )
     return findings

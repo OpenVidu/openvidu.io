@@ -55,7 +55,7 @@ def resolves(target: str, corpus: Corpus, layout: SiteLayout) -> bool:
 
 
 def _documented_relative_exception(path: str, target: str) -> bool:
-    """The relative snippet links README "Link rules" documents as deliberate.
+    """The relative snippet links contributing/link-rules.md documents as deliberate.
 
     Snippets in the parallel deployment-type trees keep sibling links relative so each host
     tree resolves its own copy, and links into `reference-docs/` resolve inside whichever
