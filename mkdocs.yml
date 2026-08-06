@@ -287,7 +287,7 @@ validation:
     # validated, and rewritten to relative URLs at build time. This form is what shared
     # snippets use for their links and images: snippets are included in pages at different
     # hierarchy levels, so relative paths would break. Regular pages use relative links
-    # (editor-navigable); see README "Link rules".
+    # (editor-navigable); see contributing/link-rules.md.
     absolute_links: relative_to_docs
     unrecognized_links: warn
     # Kept at "info" (NOT "warn") on purpose. pymdownx.tabbed generates id anchors for tab

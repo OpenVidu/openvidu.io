@@ -6,7 +6,7 @@ Reusable Markdown fragments included in pages (and in other snippets) with the [
 --8<-- "shared/<folder>/<snippet>.md"
 ```
 
-See the main [README](../README.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the **link rules**: links in snippets are root-absolute, except deployment-type-parametric ones).
+See [contributing/authoring.md](../contributing/authoring.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the [**link rules**](../contributing/link-rules.md): links in snippets are root-absolute, except deployment-type-parametric ones).
 
 ## Organization
 

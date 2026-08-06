@@ -8,13 +8,22 @@ changes when the manual [Publish Web workflow](.github/workflows/publish-web.yam
 
 Authoritative references — read the relevant one before working:
 
-- [`README.md`](README.md) — development, page-writing guidelines, link rules, assets, tag
-  system, versioning.
-- [`publish-tool/README.md`](publish-tool/README.md) — the `ovweb` CLI, redirects, what a
-  publish does.
+- [`contributing/`](contributing/) — the canonical contributor docs:
+  [`authoring.md`](contributing/authoring.md) (pages, snippets, assets),
+  [`link-rules.md`](contributing/link-rules.md),
+  [`page-composition.md`](contributing/page-composition.md) (tags, overrides, HTML, light/dark),
+  [`versioning.md`](contributing/versioning.md) (branches, releases pages, publishing),
+  [`local-testing.md`](contributing/local-testing.md),
+  [`checks.md`](contributing/checks.md) (lint, CI).
+- [`publish-tool/README.md`](publish-tool/README.md) — the `ovweb` CLI and what a publish does;
+  design internals in [`publish-tool/docs/`](publish-tool/docs/).
 - [`shared/README.md`](shared/README.md) — snippet folder layout.
-- Skills: blog work → `blog-plan`/`blog-write`/`blog-review`; page edits → `edit-website`;
-  release-day publishing → `release-version`. Commands: `/check-web`, `/publish-post`, `/serve`.
+- [`README.md`](README.md) — the repo index (repository map + full documentation index).
+- Skills: blog work → `blog-plan`/`blog-write`/`blog-review` (conventions in
+  `.claude/skills/blog-write/references/conventions.md`); page edits → `edit-website`;
+  release-day publishing → `release-version`; demo videos → `video-recording`. Commands:
+  `/check-web`, `/publish-post`, `/serve`. Agents: PR review → `pr-reviewer`. A `PostToolUse`
+  hook auto-lints every edit to `docs/`, `shared/` or the overrides — fix what it reports.
 
 ## Branches
 
@@ -38,7 +47,7 @@ try to fix them and do not raise `validation.links.anchors` above `info`.
 | Releases pages + `Release` blog posts | full-domain, version-pinned, never `latest` | `https://openvidu.io/3.8/docs/...` |
 
 Never hardcode a version (`/3.8/...`) outside the releases pages and Release blog posts. Full
-rationale: README "Link rules".
+rationale: [`contributing/link-rules.md`](contributing/link-rules.md).
 
 ## Frontmatter
 
@@ -56,8 +65,9 @@ nearly every page.
   (`versioned_pages`/`non_versioned_pages`).
 - `shared/` snippets render inside many pages — grep for the snippet's `--8<--` usages before
   editing one.
-- The `tags:` frontmatter loads per-page JS/CSS (README "Mkdocs Material tag system"). Copying a
-  visual pattern from another page → copy its tags too.
+- The `tags:` frontmatter loads per-page JS/CSS
+  ([`contributing/page-composition.md`](contributing/page-composition.md)). Copying a visual
+  pattern from another page → copy its tags too.
 - The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
   `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
 
@@ -79,7 +89,7 @@ not use it in copy targeting older versions.
 | Convention lint (what `--strict` can't see: raw-HTML links, link form, version pins, SEO budgets) | `ovweb lint` — or the `/check-web` command |
 | Redirect rules check | `ovweb redirects check` |
 | Published-tree invariants | `ovweb verify` |
-| Versioned-layout preview | `mike serve` — see README "Testing versioning locally" |
+| Versioned-layout preview | `mike serve` — see [`contributing/local-testing.md`](contributing/local-testing.md) |
 
 Non-interactive runs: drop `-it` from docker commands. The dev server serves an unversioned site
 at the root with local canonicals — both expected; version handling happens at publish time.
