@@ -6,12 +6,6 @@ description: "OpenVidu and Jitsi are both open-source, self-hosted video platfor
 # sync with the page content below: 'anchor' must match the heading id, and
 # each answer must summarize the visible content of its section.
 faq:
-  - anchor: is-openvidu-a-fork-of-jitsi
-    question: "Is OpenVidu a fork of Jitsi?"
-    answer: >-
-      No. Unlike its relationship to LiveKit, OpenVidu shares no codebase with Jitsi. Both are
-      independent, open-source, self-hosted video platforms, so this is a peer comparison, not a
-      compatibility one — there's no SDK-level migration path between them.
   - anchor: is-jitsi-free-to-self-host
     question: "Is Jitsi free to self-host?"
     answer: >-
@@ -44,24 +38,17 @@ tags: []
 # OpenVidu vs Jitsi
 
 OpenVidu and Jitsi are both **open-source, self-hosted video platforms** — but built on different
-architectures, with different defaults for what you get out of the box. Jitsi is not a fork or
-derivative of anything OpenVidu uses (unlike [OpenVidu vs LiveKit](openvidu-vs-livekit.md), this is
-a genuine peer comparison), and it's mature enough to have picked up massive real-world scale during
-its COVID-era adoption wave. This page compares the two on architecture, recording, scaling, client
+architectures, with different defaults for what you get out of the box. This page compares the two on architecture, recording, scaling, client
 SDKs and pricing.
 
 <div style="text-align: center; margin: 2em 0;" markdown>
-
-[Get started with Platform](docs/index.md){ .md-button .md-button--primary }
-[Compare Meet vs Platform](openvidu-meet-vs-openvidu-platform.md){ .md-button }
 
 </div>
 
 !!! tip "Jitsi spans both Meet and Platform"
     Jitsi Meet works both as a ready-to-use application and, via its SDKs, as a building block for
     a custom app — the two audiences OpenVidu splits into **OpenVidu Meet** and **OpenVidu
-    Platform**. If you already know which one you need, the comparison below still applies to
-    either: swap in [OpenVidu Meet](meet/index.md) wherever this page says Platform.
+    Platform**.
 
 ## Architecture at a glance
 
@@ -69,13 +56,13 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 
 | | **OpenVidu** | **Jitsi** |
 | --- | --- | --- |
-| Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components |
+| Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> and [OpenVidu Meet](/meet/) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
 | License | Apache 2.0<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> / commercial<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Apache 2.0 |
-| Recording/streaming | [Egress bundled by default](docs/developing-your-openvidu-app/how-to.md), no extra hardware sizing | Jibri: a dedicated headless-Chrome-plus-ffmpeg instance per simultaneous recording |
-| Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span>, one product to configure | Multiple Videobridges plus the Octo relay protocol, configured to match across JVB and Jicofo |
+| Recording/streaming | [Egress bundled by default](docs/developing-your-openvidu-app/how-to.md), no extra hardware sizing | Jibri, can be deployed as an additional bundle |
+| Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span>, one product to configure & one-click deploy for 5 cloud providers | Multiple Videobridges plus the Octo relay protocol, configured to match across JVB and Jicofo |
 | Admin dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span>, per-room and per-participant views<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | None bundled |
-| Ready-to-use app | [OpenVidu Meet](meet/index.md), optionally [embeddable](meet/embedded/intro.md) | Jitsi Meet, embeddable via iframe, lib-jitsi-meet, or native SDKs |
-| Hosted/cloud option | None — self-hosted only, on your own infrastructure | [Jitsi as a Service](https://jaas.8x8.vc/) (8x8), MAU-priced |
+| Ready-to-use app | [OpenVidu Meet](meet/index.md), embeddable via [iframe](/meet/embedded/step-by-step-guide/#use-an-iframe) or [web component](/meet/embedded/step-by-step-guide/#use-the-web-component) | Jitsi Meet, embeddable via iframe, lib-jitsi-meet, or native SDKs |
+| Hosted/cloud option | None — [self-hosted](docs/self-hosting/deployment-types.md) only, on your own infrastructure. One-click deploy for [5 cloud providers](docs/self-hosting/single-node/index.md) | [Jitsi as a Service](https://jaas.8x8.vc/) (8x8), MAU-priced |
 | Pricing | Free<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span>, flat **$0.0006/core/minute**<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Free self-hosted; JaaS from **$0.35/MAU** (decreasing with volume), recording is a separate $0.01/min add-on |
 
 ## Recording: bundled Egress vs Jibri
@@ -134,12 +121,6 @@ recording separately at $0.01/minute. See [worked examples](pricing.md) for Open
 monthly costs at several cluster sizes.
 
 ## Frequently asked questions
-
-### Is OpenVidu a fork of Jitsi?
-
-No. Unlike its relationship to LiveKit, OpenVidu shares no codebase with Jitsi. Both are
-independent, open-source, self-hosted video platforms, so this is a peer comparison, not a
-compatibility one — there's no SDK-level migration path between them.
 
 ### Is Jitsi free to self-host?
 

@@ -88,8 +88,7 @@ That said, Janus ships more out of the box than a bare media engine:
   Android.
 - **No cross-instance clustering.** Each Janus instance is standalone; running several behind a
   single conferencing experience is your own load-balancing and signaling design.
-- **A copyleft license to account for.** Janus is GPL v3 — a real practical difference from
-  OpenVidu's Apache 2.0, worth checking against your own project's licensing model before you build
+- **A copyleft license to account for.** Janus is GPL v3, worth checking against your own project's licensing model before you build
   on it (Meetecho also sells a commercial license if GPL doesn't fit).
 
 ## OpenVidu already built all of this — on top of its own stack
@@ -109,7 +108,7 @@ That said, Janus ships more out of the box than a bare media engine:
 ## When raw Janus is still the right call
 
 To be fair about it: Janus's plugin ecosystem reaches further than conferencing rooms alone — SIP
-gateway integrations, one-to-many streaming, and other topologies its plugins already cover. Teams
+gateway integrations (although that's also possible through [LiveKit's SIP API](https://docs.livekit.io/reference/telephony/sip-api/)), one-to-many streaming, and other topologies its plugins already cover. Teams
 building one of those use cases, or something custom enough that a room-centric platform like
 OpenVidu doesn't fit, get real value from working directly with Janus's core-plus-plugins design.
 
