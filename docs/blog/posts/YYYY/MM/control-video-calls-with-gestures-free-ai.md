@@ -4,7 +4,7 @@ draft: false
 date: 2026-08-06
 slug: control-video-calls-with-gestures-free-ai
 description: "Control your camera, microphone and hand-raise requests with hand gestures, using MediaPipe in the browser, at no cost and without sending video to the cloud."
-cover_image: cover.png
+cover_image: cover.webp
 categories:
   - AI
   - Technology
@@ -24,9 +24,9 @@ hide:
   - version-selector
 ---
 
-# Your video call gets a remote control, thanks to this AI from Google
+# Control your video calls with hand gestures, thanks to a free AI from Google
 
-![Hand gesture recognition in a video call, processed in the browser with free AI](/assets/images/blog/YYYY/MM/control-video-calls-with-gestures-free-ai/cover.png "Control your video call with gestures")
+![Hand gesture recognition in a video call, processed in the browser with free AI](/assets/images/blog/YYYY/MM/control-video-calls-with-gestures-free-ai/cover.webp "Control your video call with gestures")
 
 If you're tired of reaching for the cursor to hit the camera icon every time you want to disappear from the meeting, you're in luck. At **OpenVidu** we've built an open-source prototype that lets you control your video call's features with gestures, like an actual tech shaman.
 
@@ -45,7 +45,7 @@ but no, it's not magic. These gestures are recognized in real time with [MediaPi
 The gestures we've wired up are:
 
 - **✊ Closed fist.** Turns off your camera. Close the fist again and it turns back on.
-- **☝️ Index finger raised.** Turns off your microphone.
+- **☝️ Index finger raised.** Mutes or unmutes your microphone.
 - **✋ Open palm.** Raises your hand — the rest of the room sees a pulsing badge appear on your tile within a second.
 - **✌️ Victory sign.** Shows or hides, only in your own view, the hand-tracking skeleton MediaPipe is reading from your hand at that instant.
 
@@ -121,8 +121,8 @@ The first time I tried the prototype, I did exactly what anyone would do: I clos
 
 Brilliant, I thought. The model recognized the gesture perfectly and turned off the camera... What I didn't think about is that by turning off the camera, the model stopped seeing my hand and recognizing any gesture at all.
 
-<figure markdown="span">
-  ![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2c0OHYyemhvaXZkZDdpb20xZTkxNGNtNnh2bDRqaWNtZjhvdmVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h8HmN0UcEKR0xWnv3R/giphy.gif)
+<figure markdown>
+  ![Confused robot gif representing the model losing hand tracking](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2c0OHYyemhvaXZkZDdpb20xZTkxNGNtNnh2bDRqaWNtZjhvdmVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h8HmN0UcEKR0xWnv3R/giphy.gif)
   <figcaption>What the model thought when I tried this</figcaption>
 </figure>
 
@@ -147,8 +147,7 @@ Measuring the resources needed, on a laptop with an integrated GPU, we can see t
 You'll need [Node.js](https://nodejs.org/en/download){:target="_blank"} and [OpenVidu Local](/docs/self-hosting/local.md) up and running. Then:
 
 ```bash
-
-# Terminal 1 - OpenVidu
+# Terminal 1 — OpenVidu
 git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.8.0
 cd openvidu-local-deployment/community
 ./configure_lan_private_ip_linux.sh
@@ -166,3 +165,9 @@ npm run dev
 ```
 
 Open [`http://localhost:5094`](http://localhost:5094) and start trying out the gestures.
+
+## Where to go from here
+
+Everything in this demo runs on your own machine: MediaPipe never sends a single frame anywhere, and the OpenVidu Local deployment you just spun up runs the call itself on your own infrastructure too. Local AI plus a self-hosted video platform means every byte of video and metadata stays under your control, with no per-minute SaaS bill and no third party watching your calls.
+
+If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a one-command local install to a highly available cluster. The [self-hosting docs](/docs/self-hosting/local.md) are the natural next step.
