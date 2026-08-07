@@ -59,7 +59,7 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 | Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> and [OpenVidu Meet](/meet/) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
 | License | Apache 2.0<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> / commercial<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Apache 2.0 |
 | Recording/streaming | [Egress bundled by default](docs/developing-your-openvidu-app/how-to.md), no extra hardware sizing | Jibri, can be deployed as an additional bundle |
-| Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span>, one product to configure & one-click deploy for 5 cloud providers | Multiple Videobridges plus the Octo relay protocol, configured to match across JVB and Jicofo |
+| Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span>, one product to configure & one-click deploy for 5 cloud providers | Octo relays media across an existing pool of Videobridges; actually growing that pool needs a separate `jitsi-autoscaler` service, supporting only Oracle OCI, DigitalOcean or a custom provider you implement |
 | Admin dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span>, per-room and per-participant views<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | None bundled |
 | Ready-to-use app | [OpenVidu Meet](meet/index.md), embeddable via [iframe](/meet/embedded/step-by-step-guide/#use-an-iframe) or [web component](/meet/embedded/step-by-step-guide/#use-the-web-component) | Jitsi Meet, embeddable via iframe, lib-jitsi-meet, or native SDKs |
 | Hosted/cloud option | None — [self-hosted](docs/self-hosting/deployment-types.md) only, on your own infrastructure. One-click deploy for [5 cloud providers](docs/self-hosting/single-node/index.md) | [Jitsi as a Service](https://jaas.8x8.vc/) (8x8), MAU-priced |
@@ -79,17 +79,25 @@ resource cost: each simultaneous recording needs its own Jibri instance (typical
 separate hardware from the videobridge, since it can degrade conference performance otherwise. Five
 concurrent recordings means five separate Jibri instances to provision and keep healthy.
 
-## Scaling: Elastic/HA vs Octo
+## Scaling: Elastic/HA vs Octo plus a separate autoscaler
 
 Both projects scale horizontally, but the operational shape differs. OpenVidu's
 [Elastic and HA modes](docs/self-hosting/production-ready/scalability.md) are delivered as a
 configured product: you pick a mode and OpenVidu's automated deployments handle the rest.
 
-Jitsi scales by running multiple Videobridge instances connected through **Octo**, a relay protocol
-that lets bridges in different regions forward media to each other so participants connect to their
-nearest bridge within one conference. It's a genuinely capable mechanism — but it's also DIY
-infrastructure: Octo has to be enabled with matching settings on both the Videobridge and Jicofo, or
-bridges crash, and sharding across Prosody/Jicofo/JVB clusters is your own design to get right.
+Jitsi splits the problem into two layers, and it's worth being precise about which one **Octo**
+actually solves. Octo is a relay protocol that lets Videobridge instances forward media to each
+other, so a conference can span bridges in different regions with participants connecting to their
+nearest one — but it only routes media across a pool of bridges that's already running. It doesn't
+decide how many bridges to run: that's Jicofo's job in real time (bridge selection from reported
+load), and it's a fixed pool unless something else grows or shrinks it. Actually autoscaling that
+pool needs a third, separate component — [`jitsi-autoscaler`](https://github.com/jitsi/jitsi-autoscaler),
+its own microservice with sidecars on every Videobridge reporting load to a Redis-backed
+autoscaler, which then launches or kills instances via a cloud-provider integration. It's real, but
+it's DIY: its own deployment, its own Redis, and only Oracle OCI, DigitalOcean or a custom provider
+you write yourself are supported — no AWS/Azure/GCP integration out of the box. On top of that, Octo
+itself has to be enabled with matching settings on both the Videobridge and Jicofo, or bridges
+crash, and sharding across Prosody/Jicofo/JVB clusters is your own design to get right.
 
 ## Client integration: SDKs
 
