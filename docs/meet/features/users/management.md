@@ -22,8 +22,8 @@ From the **"Users"** page, click **"Create User"** and provide a `userId`, a nam
 
 Send the credentials to the user. On their **first login** they are required to change the temporary password before they can use OpenVidu Meet.
 
-<a class="glightbox" href="/assets/images/meet/users/management/force-change-password-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/force-change-password-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/users/management/force-change-password-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/force-change-password-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/force-change-password-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/force-change-password-dark.png#only-dark" loading="lazy" class="round-corners" alt="First-login prompt requiring the temporary password to be changed"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/force-change-password-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/force-change-password-light.png#only-light" loading="lazy" class="round-corners" alt="First-login prompt requiring the temporary password to be changed"/></a>
 
 ## Update a user's role
 
@@ -43,13 +43,13 @@ Generate a new temporary password for a user from the user list (for example, if
 
 The **"Users"** page lists every user with their role and registration date. You can search by name and filter by role.
 
-<a class="glightbox" href="/assets/images/meet/users/management/users-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/users-list-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/users/management/users-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/users-list-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/users-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/users-list-dark.png#only-dark" loading="lazy" class="round-corners" alt="Users page listing users with role and registration date"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/users-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/users-list-light.png#only-light" loading="lazy" class="round-corners" alt="Users page listing users with role and registration date"/></a>
 
 Clicking a user opens their **profile page**, which shows the user's details together with buttons for every action you can perform on them: [update their role](#update-a-users-role), [reset their password](#reset-a-users-password) and [delete the user](#delete-users).
 
-<a class="glightbox" href="/assets/images/meet/users/management/profile-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/profile-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/users/management/profile-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/profile-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/profile-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/profile-dark.png#only-dark" loading="lazy" class="round-corners" alt="User profile page with the available account actions"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/profile-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/profile-light.png#only-light" loading="lazy" class="round-corners" alt="User profile page with the available account actions"/></a>
 
 ## Delete users
 
@@ -65,19 +65,19 @@ Users can be deleted individually or in bulk from the **"Users"** page. The root
 
 Any user can change their own password from their **Profile** page. You are asked to enter your **current password** and then type the **new password twice** to confirm it. Once changed, the new password is required the next time you log in.
 
-<a class="glightbox" href="/assets/images/meet/users/management/change-password-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/change-password-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/users/management/change-password-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/change-password-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/change-password-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/change-password-dark.png#only-dark" loading="lazy" class="round-corners" alt="Change password form in the user profile page"/></a>
+<a class="glightbox" href="/assets/images/meet/users/management/change-password-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/users/management/change-password-light.png#only-light" loading="lazy" class="round-corners" alt="Change password form in the user profile page"/></a>
 
 ## REST API reference { #rest-api-reference }
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="\_blank"} for the full list of available endpoints, request bodies and response schemas.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="_blank"} for the full list of available endpoints, request bodies and response schemas.
 
 | Operation               | HTTP Method | Reference                                                                                                                                              |
 | ----------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Create a user           | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createUser){:target="\_blank"}        |
-| List users              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getUsers){:target="\_blank"}          |
-| Bulk delete users       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteUsers){:target="\_blank"}   |
-| Get a user              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getUser){:target="\_blank"}           |
-| Delete a user           | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteUser){:target="\_blank"}        |
-| Reset a user's password | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/resetUserPassword){:target="\_blank"} |
-| Update a user's role    | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateUserRole){:target="\_blank"}    |
+| Create a user           | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createUser){:target="_blank"}        |
+| List users              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getUsers){:target="_blank"}          |
+| Bulk delete users       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteUsers){:target="_blank"}   |
+| Get a user              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getUser){:target="_blank"}           |
+| Delete a user           | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteUser){:target="_blank"}        |
+| Reset a user's password | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/resetUserPassword){:target="_blank"} |
+| Update a user's role    | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateUserRole){:target="_blank"}    |

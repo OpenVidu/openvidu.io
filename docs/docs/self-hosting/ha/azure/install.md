@@ -20,7 +20,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 To import the template into Azure, click the button below and you will be redirected to Azure.   
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
 </div>
 
 This is what the deployment architecture looks like:
@@ -62,7 +62,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
     ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/azure/openvidu-ha-config.png){ .svg-img .dark-img }
     </figure>
 
-    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target=_blank}.
+    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
     For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 

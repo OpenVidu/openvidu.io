@@ -1,4 +1,8 @@
-"""The publish plan — the contract `--dry-run` prints."""
+"""The publish plan — the contract `--dry-run` prints.
+
+`test_postprocess.py` asserts that these names and their order match the steps the pipeline really
+runs, which is what stops the printed plan drifting from the work.
+"""
 
 from __future__ import annotations
 
@@ -14,7 +18,10 @@ LATEST_STEPS = [
     "promote-search-index",
     "repair-export-links",
     "install-redirects",
+    "mirror-unversioned",
+    "alias-versions",
     "prune-version-sitemap",
+    "sync-version-sitemap",
     "sync-releases",
     "commit",
 ]
@@ -26,18 +33,25 @@ PAST_STEPS = [
     "strip-non-versioned",
     "repair-export-links",
     "install-redirects",
+    "alias-versions",
     "prune-version-sitemap",
+    "sync-version-sitemap",
     "sync-releases",
     "commit",
 ]
 
 
 def test_latest_step_order(config):
-    """Locked down because the order is behaviour: promotion moves index.html out of the
-    version folder, so the redirect must be written after it, and the sitemap is promoted
-    after that."""
+    """Locked down because the order is behaviour: promotion moves index.html out of the version
+    folder, so the redirect must be written after it, and the mirror reads the promoted sitemap."""
     plan = build_plan(config, version="3.9", update_latest=True)
     assert [step.name for step in plan.steps] == LATEST_STEPS
+
+
+def test_the_mirror_is_only_planned_for_the_newest_version(config):
+    """Its stubs point at `/latest/`, so a publish that does not move `latest` must not touch it."""
+    past = {step.name for step in build_plan(config, version="3.7", update_latest=False).steps}
+    assert "mirror-unversioned" not in past
 
 
 def test_past_step_order(config):

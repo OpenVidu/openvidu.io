@@ -12,7 +12,7 @@ description: "Administer OpenVidu Elastic on DigitalOcean: shut down and start t
 </div>
 
 
-The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI to deploy on DigitalOcean, where Media Nodes are in a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/autoscale/){:target=\_blank}.
+The deployment of OpenVidu Elastic on DigitalOcean is automated using Terraform CLI to deploy on DigitalOcean, where Media Nodes are in a [Fixed Droplet Autoscale Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/droplets/concepts/autoscale-pools/){:target="_blank"}.
 
 Internally, the DigitalOcean Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the DigitalOcean environment that are worth keeping in mind:
 
@@ -24,7 +24,7 @@ The Master Node is a Droplet instance, while the Media Nodes are part of a Dropl
 
     To shut down the cluster, you need to stop the Media Nodes and then stop the Master Node.
 
-    1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
+    1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target="_blank"}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
         <figure markdown>
         ![Edit Button Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
@@ -40,7 +40,7 @@ The Master Node is a Droplet instance, while the Media Nodes are part of a Dropl
 
     To start the cluster, start the Master Node first and then the Media Nodes.
 
-    1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank}.
+    1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. Select the droplet named `<STACK_NAME>-master-node`, then go to _"Power"_ and then _"Turn on"_ the droplet.
         <figure markdown>
         ![Turn on Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-on-master-node.png){ .svg-img .dark-img }
@@ -67,7 +67,7 @@ It is possible to change the instance size of both the Master Node and the Media
         !!! info
 
             You can stop only the Master Node droplet to change its droplet size, but it is recommended to stop the whole cluster to avoid any issues.
-    2. Go to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target=_blank} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
+    2. Go to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click on _"Upsize"_ and select the Droplet size you desire and click on _"Resize"_
         <figure markdown>
         ![Change droplet size master](../../../../assets/images/platform/self-hosting/elastic/digitalocean/resize-master-node.png){ .svg-img .dark-img }
@@ -79,7 +79,7 @@ It is possible to change the instance size of both the Master Node and the Media
     !!! warning
         This will delete the media nodes without the graceful delete option. You can manually stop them gracefully by running the `/usr/local/bin/graceful_shutdown.sh` script and waiting for it to finish. You have to do it in all the media nodes because the autoscale pool will delete all media nodes and create new ones.
 
-    1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
+    1. Navigate to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target="_blank"}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Droplet Configuration**.
         <figure markdown>
         ![Edit Droplet Configuration Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-configuration-media-node.png){ .svg-img .dark-img }
@@ -115,7 +115,7 @@ You can change the fixed number of Media Nodes **in case you put a number of fix
 
 === "Change Fixed Number of Media Nodes"
 
-    1. Go to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target=_blank}.
+    1. Go to the [DigitalOcean Autoscale Pools Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets-autoscale){:target="_blank"}.
     2. Click into the Droplet Autoscale Pool resource called `<STACK_NAME>-media-node-pool`, go to _"Settings"_ and click on _"Edit"_ in the **Autoscale Pool Configuration**.
         <figure markdown>
         ![Edit Button Location Autoscale Pool](../../../../assets/images/platform/self-hosting/elastic/digitalocean/edit-fixed-number.png){ .svg-img .dark-img }
@@ -170,7 +170,7 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
 
 === "Changing configuration through `secrets.env`"
 
-    1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target=_blank} and click on the bucket that you are using for the deployment.
+    1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and click on the bucket that you are using for the deployment.
     2. Download the `secrets.env` file that is in the bucket.
         <figure markdown>
         ![Secrets.env download](../../../../assets/images/platform/self-hosting/elastic/digitalocean/download-secrets-env.png){ .svg-img .dark-img }

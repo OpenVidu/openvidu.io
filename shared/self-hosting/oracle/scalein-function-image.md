@@ -1,6 +1,6 @@
 ## Publishing the scale-in function image
 
-The OCI Function that performs graceful Media Node scale-in runs from a container image that must be hosted in an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target=_blank} in the **same region** as the Function. Because of this regional constraint, the **`scale_in_function_image`** parameter is mandatory: you must make the scale-in image available in an OCIR in your deployment's region and point the parameter to it.
+The OCI Function that performs graceful Media Node scale-in runs from a container image that must be hosted in an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target="_blank"} in the **same region** as the Function. Because of this regional constraint, the **`scale_in_function_image`** parameter is mandatory: you must make the scale-in image available in an OCIR in your deployment's region and point the parameter to it.
 
 !!! info
     If you are deploying in the **Madrid** region (`mad.ocir.io`), you can skip this section entirely. OpenVidu already publishes the scale-in image in the Madrid OCIR, so you only need to set `scale_in_function_image = "mad.ocir.io/axp2ice0s7el/openvidu-oci-scalein:3.8.0"` (the value that was previously used as the default). The steps below are only required when deploying in any other region.
@@ -17,15 +17,15 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
         docker pull docker.io/openvidu/openvidu-oci-scalein:3.8.0
         ```
 
-    2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
+    2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target="_blank"} for the user you log in with:
 
         ```bash
         docker login <region-key>.ocir.io -u '<tenancy-namespace>/<username>' -p '<auth-token>'
         ```
 
-        Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
+        Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target="_blank"} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
 
-        Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target=_blank} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
+        Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target="_blank"} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
 
     3. Tag the pulled image for your OCIR. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
 
@@ -55,15 +55,15 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
         cd openvidu-oracle/pro/scalein-function
         ```
 
-    2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target=_blank} for the user you log in with:
+    2. Authenticate Docker against your OCI Registry. You will need an [OCI Auth Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm){:target="_blank"} for the user you log in with:
 
         ```bash
         docker login <region-key>.ocir.io -u '<tenancy-namespace>/<username>' -p '<auth-token>'
         ```
 
-        Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target=_blank} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
+        Replace `<region-key>` with the [OCIR region code :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability){:target="_blank"} (for example `fra` for Frankfurt, `iad` for Ashburn, `mad` for Madrid).
 
-        Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target=_blank} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
+        Replace `<username>` with the value matching your authentication setup — the exact format depends on whether your tenancy uses identity domains, federation with IDCS, or local IAM users. See [Pushing Images Using the Docker CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrypushingimagesusingthedockercli.htm){:target="_blank"} for the exact pattern in each case (typical forms are `<username>`, `<identity-domain>/<username>`, or `oracleidentitycloudservice/<email>`).
 
     3. Build and tag the image. The tag must follow the format `<region-key>.ocir.io/<tenancy-namespace>/<repo>:<tag>`:
 
@@ -84,4 +84,4 @@ OpenVidu publishes a prebuilt scale-in image on Docker Hub, so there are two way
         ```
 
 !!! info
-    Make sure the OCI Function's compartment has the IAM policies needed to pull from the target repository. If the repository lives in a different tenancy from the OCI Function, see [Pulling Images from Repositories in other Tenancies :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionspullingimagescrosstenancy.htm){:target=_blank} for the required Endorse/Admit/Define policy statements.
+    Make sure the OCI Function's compartment has the IAM policies needed to pull from the target repository. If the repository lives in a different tenancy from the OCI Function, see [Pulling Images from Repositories in other Tenancies :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionspullingimagescrosstenancy.htm){:target="_blank"} for the required Endorse/Admit/Define policy statements.

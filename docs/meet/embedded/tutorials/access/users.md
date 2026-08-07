@@ -7,7 +7,7 @@ tags:
 
 # Users Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/access/meet-users){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/access/meet-users){ .md-button target="_blank" }
 
 This tutorial extends the [Identified Guests tutorial](./identified-guests.md) to show how to create **OpenVidu Meet users** with the Users API and add them to a room as **members**.
 
@@ -23,7 +23,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to man
 
 !!! info "Users, identified guests and anonymous guests"
 
-    A room member can be a **user** (a real OpenVidu Meet account that authenticates with its credentials) or an **identified guest** (no account, accesses the room through a unique link). On top of explicit members, a room also accepts **anonymous guests** through the shared moderator/speaker links. See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../../features/room-members/overview.md){:target="\_blank"} feature for the full picture.
+    A room member can be a **user** (a real OpenVidu Meet account that authenticates with its credentials) or an **identified guest** (no account, accesses the room through a unique link). On top of explicit members, a room also accepts **anonymous guests** through the shared moderator/speaker links. See the [Room Members :fontawesome-solid-external-link:{.external-link-icon}](../../../features/room-members/overview.md){:target="_blank"} feature for the full picture.
 
 ## Running this tutorial
 
@@ -39,7 +39,7 @@ git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} (≥ 18) installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} (≥ 18) installed on your device.
 
 1. Navigate into the application directory
 
@@ -59,13 +59,13 @@ npm install
 npm start
 ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}. You should see a screen like this:
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/users/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/users/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/users/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/users/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/users/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/users/members.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/users/members.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/users/members.png" loading="lazy" class="control-height round-corners" alt="Room members page of the tutorial app"/></a></p></div>
 
 </div>
 

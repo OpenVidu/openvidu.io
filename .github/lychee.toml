@@ -1,0 +1,44 @@
+# Configuration for the weekly external-link check (check-external-links.yaml).
+# Internal links are PR CI's job (`ovweb lint --site`); this run covers only remote URLs.
+
+scheme = ["https", "http"]
+include_mail = false
+
+max_retries = 3
+# docs.livekit.io alone carries ~190 links; a modest ceiling keeps WAFs from throttling us.
+max_concurrency = 8
+# meet-demo-app.openvidu.io cold-starts slowly; 20s produced false timeouts.
+timeout = 30
+
+cache = true
+max_cache_age = "3d"
+
+# 429 means "slow down", not "broken" — the link is alive.
+accept = ["200..=204", "206", "301..=308", "429"]
+
+exclude = [
+    # Placeholders and local-only URLs that appear in copy-pasteable instructions.
+    "^https?://localhost",
+    "^https?://127\\.0\\.0\\.1",
+    "^https?://0\\.0\\.0\\.0",
+    "^https?://([^/]*\\.)?example\\.[a-z]+",
+    "openvidu-local\\.dev",
+    # Auth-walled consoles: every deep link answers with a login redirect or 403.
+    "^https?://portal\\.azure\\.com",
+    "^https?://console\\.cloud\\.google\\.com",
+    "^https?://cloud\\.oracle\\.com",
+    "^https?://console\\.aws\\.amazon\\.com",
+    # Bot-hostile hosts that answer link checkers with 403/999 regardless of link health.
+    "^https?://(www\\.)?(twitter|x)\\.com",
+    "^https?://(www\\.)?linkedin\\.com",
+    "^https?://(www\\.)?npmjs\\.com",
+    "^https?://(www\\.)?medium\\.com",
+    "^https?://doi\\.org",
+    "^https?://dl\\.acm\\.org",
+    "^https?://auth\\.openai\\.com",
+    "^https?://(www\\.)?isocpp\\.org",
+    "^https?://dialnet\\.unirioja\\.es",
+    "^https?://docs\\.spitch\\.app",
+    # Our own demo app filters the GitHub runner IPs; it answers 200 from browsers.
+    "^https?://meet-demo-app\\.openvidu\\.io",
+]

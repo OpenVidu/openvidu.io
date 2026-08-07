@@ -1,7 +1,4 @@
-"""Version arithmetic: parsing X.Y names, matching specifiers, reading versions.json.
-
-Pure. The one deliberate dependency is `packaging`, which mkdocs already installs.
-"""
+"""Version arithmetic: parsing X.Y names, matching specifiers, reading versions.json. Pure."""
 
 from __future__ import annotations
 
@@ -68,12 +65,16 @@ def sort_descending(versions: list[str]) -> list[str]:
     return sorted(versions, key=parse, reverse=True)
 
 
-def read_versions_json(text: str) -> tuple[VersionEntry, ...]:
-    """Parse mike's versions.json.
+def minor_of(version: str) -> str:
+    """The `X.Y` minor a version name belongs to: `3.4.1` -> `3.4`, `3.0.0-beta1` -> `3.0`."""
+    release = parse(version).release
+    if len(release) < 2:
+        raise VersionError(f"{version!r} has no minor component")
+    return f"{release[0]}.{release[1]}"
 
-    The bash implementation scraped this with `grep -oE '"version"…' | sed` to avoid a jq
-    dependency; here it is simply JSON.
-    """
+
+def read_versions_json(text: str) -> tuple[VersionEntry, ...]:
+    """Parse mike's versions.json. Raises :class:`VersionError` on anything malformed."""
     try:
         raw = json.loads(text)
     except json.JSONDecodeError as error:

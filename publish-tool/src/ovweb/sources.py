@@ -1,19 +1,14 @@
 """What a page is made of, so `sitemap.xml` can carry a `<lastmod>` that is true.
 
-MkDocs initialises `Page.update_date` to the build date for every page, and its sitemap template
-emits exactly that. The field therefore claimed that all 261 URLs changed on every publish — no
-per-page signal, and false often enough to teach a crawler to ignore it. The fix is to set
-`update_date` from git before the sitemap is rendered; this module is the part of that with no I/O
-in it.
+MkDocs initialises `Page.update_date` to the build date for every page and its sitemap template
+emits exactly that, so the field would claim that every URL changed on every publish. The MkDocs
+hook sets `update_date` from git instead; this module is the part of that with no I/O in it, taking
+the git output and a `read` callable and returning plain data.
 
-A page's date is **not** just its own file's. 101 of the site's 248 pages assemble their content
-from snippets under `shared/` with `--8<-- "path"`, 11 of those snippets include further snippets,
-and the most-included one reaches 34 pages. Dating a page by its own file alone would leave all 34
-untouched when the step they display is rewritten. So a page's date is the newest date across the
-page and the transitive closure of what it includes.
-
-Everything here takes the git output and a `read` callable and returns plain data, which is what
-lets the rules be tested without a repository or a filesystem.
+A page's date is **not** just its own file's. Most pages assemble their content from snippets under
+`shared/` with `--8<-- "path"`, and some of those include further snippets, so a page's date is the
+newest across the page and the transitive closure of what it includes. Otherwise rewriting a shared
+install step would move no date at all on the pages that display it.
 """
 
 from __future__ import annotations
@@ -33,23 +28,22 @@ MARKER = "@@"
 #: it rather than being followed back to content that is no longer at that path.
 LOG_ARGS = ("log", f"--format={MARKER}%cs", "--name-only", "--no-renames")
 
-#: A `pymdownx.snippets` include. The marker has to open the line (indented is fine — many sit
-#: inside admonitions), and this site uses only the quoted-path form: no `path:section`, no
-#: `;optional` prefix and no URLs, across all 472 occurrences.
+#: A `pymdownx.snippets` include. The marker has to open the line — indented is fine, many sit
+#: inside admonitions — and only the quoted-path form is matched, which is the only one this site
+#: uses: no `path:section`, no `;optional` prefix, no URLs.
 SNIPPET = re.compile(r'^[ \t]*--8<--[ \t]*"([^"]+)"[ \t]*$', re.MULTILINE)
 
-#: Reads a repository-relative path, or returns None when there is nothing there. A miss is
-#: normal rather than exceptional: `shared/README.md` documents the include syntax with a
-#: placeholder path inside a code fence, and that is picked up by the regex like any other.
+#: Reads a repository-relative path, or returns None when there is nothing there. A miss is normal:
+#: `shared/README.md` documents the include syntax with a placeholder path inside a code fence,
+#: which the regex picks up like any other.
 Reader = Callable[[str], "str | None"]
 
 
 def parse_git_log(text: str) -> dict[str, str]:
     """Map every path in the log to the date of the most recent commit that touched it.
 
-    `git log` walks newest-first, so the first date seen for a path is the answer and later ones
-    are its history. Paths of files that have since been deleted come through too; they simply
-    never get looked up.
+    `git log` walks newest-first, so the first date seen for a path is the answer. Deleted paths
+    come through as well; they are simply never looked up.
     """
     dates: dict[str, str] = {}
     date = ""
@@ -84,8 +78,8 @@ def sources_of(path: str, read: Reader) -> frozenset[str]:
 def newest_dates(paths: Iterable[str], *, dates: dict[str, str], read: Reader) -> dict[str, str]:
     """The date to publish for each page: the newest across the page and what it includes.
 
-    A page with no dated source at all — nothing in git yet — is left out of the result rather
-    than given a made-up value, so the caller can omit the field for it.
+    A page with no dated source at all — nothing in git yet — is left out of the result rather than
+    given a made-up value, so the caller can omit the field for it.
     """
     cache: dict[str, str | None] = {}
 

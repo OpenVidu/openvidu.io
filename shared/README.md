@@ -6,7 +6,7 @@ Reusable Markdown fragments included in pages (and in other snippets) with the [
 --8<-- "shared/<folder>/<snippet>.md"
 ```
 
-See the main [README](../README.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the **link rules**: links in snippets are root-absolute, except deployment-type-parametric ones).
+See [contributing/authoring.md](../contributing/authoring.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the [**link rules**](../contributing/link-rules.md): links in snippets are root-absolute, except deployment-type-parametric ones).
 
 ## Organization
 
@@ -14,6 +14,8 @@ Snippets are grouped by the documentation area that consumes them. Before creati
 
 ```
 shared/
+├── meet-vs-platform-table.md → the product comparison table (landing page and the
+│                               meet-vs-platform root page)
 ├── meet/               → OpenVidu Meet docs (docs/meet/**)
 │   └── webcomponent/       → WebComponent API reference (attributes, commands, events)
 ├── self-hosting/       → OpenVidu Platform self-hosting docs (docs/docs/self-hosting/**)

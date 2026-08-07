@@ -5,7 +5,7 @@ description: "Run, deploy and customize the OpenVidu Components Demo App, the re
 
 # Demo App using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-demo-app){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-demo-app){ .md-button target="_blank" }
 
 Introducing **OpenVidu Components Demo App**, the premier videoconference application that showcases the full potential of the OpenVidu platform. OpenVidu Components Demo App is not just any videoconferencing tool; it’s the default and flagship app built with the robust and versatile [OpenVidu Components](../../ui-components/angular-components.md).
 
@@ -29,7 +29,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
     !!! info "Configure Webhooks"
 
-        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="\_blank"} section for more information.
+        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="_blank"} section for more information.
 
 
 #### 2. Download the demo code
@@ -81,7 +81,7 @@ Launching another terminal, under the `openvidu-tutorials/openvidu-components-an
     npm run dev:start
     ```
 
-The application will be available at [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
+The application will be available at [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
 
 ## Architecture
@@ -274,7 +274,7 @@ The process to build a Docker image of OpenVidu Components Demo App is really ea
 	openvidu-components-demo-app
 	```
 
-	Once the container is running, you can access the OpenVidu Components Demo App application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}.
+	Once the container is running, you can access the OpenVidu Components Demo App application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}.
 
 ### Package bundle
 

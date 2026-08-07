@@ -179,10 +179,10 @@ systemctl start openvidu
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target=_blank}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
+- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
+- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
+- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
+- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
 
 ## Configure your application to use the deployment
 
