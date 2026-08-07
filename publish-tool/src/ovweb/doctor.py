@@ -1,31 +1,35 @@
-"""Preflight checks: dependencies, pins, git state and configuration.
-
-Cheap to run and safe everywhere, so `--pins` is used as a CI step and the full set is worth
-running before a publish.
-"""
+"""Preflight checks: dependencies, pins, git state and configuration. Read-only."""
 
 from __future__ import annotations
 
 import re
 import shutil
+from collections.abc import Callable
 from dataclasses import dataclass
 from importlib import metadata
 from pathlib import Path
 
 from .config import ConfigError, SiteConfig, load_site_config
 from .discovery import known_versions
+from .expand import mirror_rule
 from .gitrepo import Git, GitError
 from .mikewrap import Mike
-from .redirects import RedirectError, resolve_file_redirects, resolve_patterns
+from .redirects import RedirectError, resolve_file_redirects
 
-#: The distribution whose version must agree everywhere. It is the only pinned dependency
-#: that also appears outside Python packaging (as a Docker base-image tag), which is exactly
-#: how the three-way drift this check exists to prevent came about.
-PINNED_DISTRIBUTION = "mkdocs-material"
+#: Every distribution that is a build input, pinned from the freeze of a known-good publish
+#: run. Each is named both in pyproject.toml and in the Dockerfiles (mkdocs-material as the
+#: base-image tag, the rest in the pip install lines), so all the places must agree.
+PINNED_DISTRIBUTIONS = (
+    "mkdocs-material",
+    "mike",
+    "mkdocs-glightbox",
+    "mkdocs-llmstxt",
+    "mkdocs-rss-plugin",
+    "pygments",
+)
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
 DOCKER_TAG = re.compile(r"^FROM\s+squidfunk/mkdocs-material:(\S+)", re.MULTILINE)
-PYPROJECT_PIN = re.compile(r"mkdocs-material(?:\[[^\]]*\])?==([^\"'\s]+)")
 
 
 @dataclass
@@ -54,44 +58,70 @@ def run_checks(
     return checks
 
 
-def check_pins(repo_root: Path) -> list[Check]:
-    """Assert that every place naming a mkdocs-material version names the same one.
+def check_pins(
+    repo_root: Path, *, installed_version: Callable[[str], str | None] | None = None
+) -> list[Check]:
+    """Assert that every place naming a pinned distribution names the same version.
 
-    Before this package existed the version was written in four places — both workflows and
-    both Dockerfiles — and had drifted to three different values (9.7.6, 9.7.1 and 9.7.0). The
-    workflows now install from pyproject.toml, so the remaining pair to keep honest is the
-    declared pin and the Docker base-image tags. A different theme version builds different
-    markup, and the release-notes splice matches on that markup.
+    The pyproject pins, the Dockerfiles (base-image tag for mkdocs-material, pip install lines
+    for the rest) and the installed environment. A different theme or plugin version builds
+    different markup — which the release-notes splice matches on — so drift is an error, not
+    a warning.
     """
-    found: dict[str, str] = {}
-
     pyproject = repo_root / "publish-tool" / "pyproject.toml"
-    if pyproject.is_file():
-        match = PYPROJECT_PIN.search(pyproject.read_text(encoding="utf-8"))
-        if match:
-            found["publish-tool/pyproject.toml"] = match.group(1)
+    pyproject_text = pyproject.read_text(encoding="utf-8") if pyproject.is_file() else ""
+    dockerfiles = {
+        name: (repo_root / name).read_text(encoding="utf-8")
+        for name in DOCKERFILES
+        if (repo_root / name).is_file()
+    }
 
-    for name in DOCKERFILES:
-        path = repo_root / name
-        if not path.is_file():
+    checks = []
+    for distribution in PINNED_DISTRIBUTIONS:
+        pin = re.compile(rf"\b{re.escape(distribution)}(?:\[[^\]]*\])?==([A-Za-z0-9._-]+)")
+        found: dict[str, str] = {}
+
+        declared = set(pin.findall(pyproject_text))
+        if len(declared) > 1:
+            checks.append(
+                Check(
+                    "pins",
+                    False,
+                    f"{distribution} is pinned to {len(declared)} different versions inside "
+                    "publish-tool/pyproject.toml",
+                )
+            )
             continue
-        match = DOCKER_TAG.search(path.read_text(encoding="utf-8"))
-        if match:
-            found[name] = match.group(1)
+        if pyproject_text and not declared:
+            # The pyproject pin is the source of truth; the other places agree *with it*.
+            checks.append(
+                Check("pins", False, f"{distribution} is not pinned in publish-tool/pyproject.toml")
+            )
+            continue
+        if declared:
+            found["publish-tool/pyproject.toml"] = declared.pop()
 
-    installed = _distribution_version(PINNED_DISTRIBUTION)
-    if installed:
-        found["installed"] = installed
+        for name, text in dockerfiles.items():
+            match = (
+                DOCKER_TAG.search(text) if distribution == "mkdocs-material" else pin.search(text)
+            )
+            if match:
+                found[name] = match.group(1)
 
-    if not found:
-        return [Check("pins", False, f"no {PINNED_DISTRIBUTION} version found anywhere")]
+        installed = (installed_version or _distribution_version)(distribution)
+        if installed:
+            found["installed"] = installed
 
-    unique = set(found.values())
-    if len(unique) == 1:
-        return [Check("pins", True, f"{PINNED_DISTRIBUTION} {unique.pop()} everywhere")]
-
-    rendered = ", ".join(f"{where}={version}" for where, version in sorted(found.items()))
-    return [Check("pins", False, f"{PINNED_DISTRIBUTION} versions disagree: {rendered}")]
+        if not found:
+            checks.append(Check("pins", False, f"no {distribution} version found anywhere"))
+            continue
+        unique = set(found.values())
+        if len(unique) == 1:
+            checks.append(Check("pins", True, f"{distribution} {unique.pop()} everywhere"))
+            continue
+        rendered = ", ".join(f"{where}={version}" for where, version in sorted(found.items()))
+        checks.append(Check("pins", False, f"{distribution} versions disagree: {rendered}"))
+    return checks
 
 
 def _distribution_version(name: str) -> str | None:
@@ -129,11 +159,24 @@ def _check_config(repo: Git | None) -> list[Check]:
             "config",
             True,
             f"{config.source} — {len(config.file_rules)} file redirect(s), "
-            f"{len(resolve_patterns(config))} 404 pattern(s)",
+            f"{len(config.expand_rules)} expansion rule(s), "
+            f"{_mirror_summary(config)}",
         )
     ]
     checks.append(_check_redirects_resolve(config, repo))
     return checks
+
+
+def _mirror_summary(config: SiteConfig) -> str:
+    """Which sections the mirror covers.
+
+    Not how many stubs it writes: that is only known at publish time, from the tree.
+    """
+    mirror = mirror_rule(config)
+    if mirror is None:
+        return "no unversioned mirror"
+    sections = getattr(config.layout, mirror.for_each)
+    return "unversioned mirror of " + ", ".join(f"/{section}/" for section in sections)
 
 
 def _check_redirects_resolve(config: SiteConfig, repo: Git | None) -> Check:
@@ -192,8 +235,7 @@ def _check_editable_install(repo: Git) -> Check:
     """Warn when ovweb is being imported from inside the repository it publishes.
 
     Publishing a past version checks out that version's branch, which does not contain this
-    package. An installed wheel is unaffected; an editable install or a PYTHONPATH checkout
-    resolves into the working tree and would disappear mid-run.
+    package, so an editable install or a PYTHONPATH checkout would disappear mid-run.
     """
     from . import __file__ as package_file
 

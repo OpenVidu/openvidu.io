@@ -16,7 +16,7 @@ tags:
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
 
-To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target=_blank} in the GCP Console. Then follow the next steps and fill in your preferred parameters.
+To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 
 === "Architecture overview"
 
@@ -47,7 +47,7 @@ Once you click the button, you will see this window.
 * Change the **Region** to the one you prefer.
 !!! warning
 
-    If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target=_blank} in the Terraform values.
+    If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target="_blank"} in the Terraform values.
 
 * Leave **Terraform version** as 1.5.7.   
 * For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   
@@ -178,7 +178,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
     </table>
 </div>
 
-For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf){:target=_blank} file to see additional information about the inputs.   
+For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
 
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.

@@ -19,7 +19,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 To use the Azure template, click the button below (you will be redirected to Azure).
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target=_blank}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
 </div>
 
 === "Architecture overview"
@@ -52,7 +52,7 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
     ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png)
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target=_blank}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 

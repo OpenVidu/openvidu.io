@@ -8,16 +8,32 @@ from __future__ import annotations
 
 import gzip
 import json
+import posixpath
+import re
 from pathlib import Path
 
 import pytest
 
 from ovweb.pipeline.postprocess import PostprocessError, postprocess
+from ovweb.plan import build_plan
+from ovweb.redirects import RedirectError, is_generated_redirect, resolve_file_redirects
 from ovweb.releases import ARTICLE_MARKER, TOC_MARKER
 from ovweb.report import Reporter
 
 VERSION = "3.9"
 OLD_VERSION = "3.2"
+
+
+class RecordingReporter(Reporter):
+    """A reporter that remembers the name of every step it was told about."""
+
+    def __init__(self):
+        super().__init__(verbosity=0, color=False)
+        self.steps: list[str] = []
+
+    def step(self, name: str, text: str) -> None:
+        self.steps.append(name)
+        super().step(name, text)
 
 
 def releases_page(notes: str, chrome: str) -> str:
@@ -29,11 +45,35 @@ def releases_page(notes: str, chrome: str) -> str:
     )
 
 
-def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None:
+def build_redirect_targets(root: Path, config, version: str) -> None:
+    """Give every redirect rule that applies to `version` a page to point at.
+
+    Derived from the rules rather than listed, for the same reason the rest of the fixture is
+    derived from the layout: a rule added to ovweb.yaml gets its target here automatically, and
+    `ovweb verify` asserts that no generated redirect points at a missing page. Existing files
+    are left alone — several rules target pages this fixture writes properly, and the version
+    root targets `docs/`, whose real content other tests assert on.
+    """
+    for redirect in resolve_file_redirects(config, version):
+        redirect = redirect.__class__(**{**redirect.__dict__, "to": redirect.to.partition("#")[0]})
+        if redirect.to.startswith("/"):
+            target = root / redirect.to.lstrip("/")
+        else:
+            base = posixpath.dirname(redirect.path)
+            target = root / posixpath.normpath(posixpath.join(base, redirect.to))
+        page = target / "index.html" if redirect.to.endswith("/") else target
+        if page.exists():
+            continue
+        page.parent.mkdir(parents=True, exist_ok=True)
+        page.write_text(f"<html><body>target of {redirect.rule_id}</body></html>", encoding="utf-8")
+
+
+def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=None) -> None:
     """Write a folder shaped like raw `mike` output for one version.
 
     Driven by the real layout so the fixture cannot drift from the configuration: adding a
-    page to ovweb.yaml automatically gets one here too.
+    page to ovweb.yaml automatically gets one here too. Pass `config` to also materialise the
+    redirect rules' targets, which a tree has to have for `ovweb verify` to pass on it.
     """
     base = root / version
     (base / "docs" / "releases").mkdir(parents=True)
@@ -85,6 +125,10 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         encoding="utf-8",
     )
     (base / "docs" / "releases" / "index.md").write_text("# Releases\n", encoding="utf-8")
+    (base / "meet").mkdir()
+    (base / "meet" / "index.html").write_text(
+        f'<link rel="canonical" href="https://openvidu.io/{version}/meet/">', encoding="utf-8"
+    )
     (base / "docs" / "releases" / "index.html").write_text(
         releases_page(f"{version}.0 notes", version), encoding="utf-8"
     )
@@ -117,10 +161,14 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
         ),
         encoding="utf-8",
     )
+    # Both versioned sections and a page below the top of one, so the unversioned mirror has
+    # something to nest, plus a root-served page it must leave alone.
     (base / "sitemap.xml").write_text(
         "<urlset>\n"
         f"    <url>\n         <loc>https://openvidu.io/{version}/</loc>\n    </url>\n"
         f"    <url>\n         <loc>https://openvidu.io/{version}/docs/</loc>\n    </url>\n"
+        f"    <url>\n         <loc>https://openvidu.io/{version}/docs/releases/</loc>\n    </url>\n"
+        f"    <url>\n         <loc>https://openvidu.io/{version}/meet/</loc>\n    </url>\n"
         f"    <url>\n         <loc>https://openvidu.io/{version}/pricing/</loc>\n    </url>\n"
         "</urlset>\n",
         encoding="utf-8",
@@ -142,6 +190,9 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True) -> None
             (base / feed).write_text(f"https://openvidu.io/{version}/blog/x/", encoding="utf-8")
         (base / "rss.xsl").write_text("<xsl/>", encoding="utf-8")
 
+    if config is not None:
+        build_redirect_targets(root, config, version)
+
 
 @pytest.fixture
 def report():
@@ -149,8 +200,8 @@ def report():
 
 
 @pytest.fixture
-def latest_tree(tmp_path, layout):
-    build_tree(tmp_path, layout, version=VERSION)
+def latest_tree(tmp_path, layout, config):
+    build_tree(tmp_path, layout, version=VERSION, config=config)
     (tmp_path / "versions.json").write_text(
         json.dumps([{"version": VERSION, "aliases": ["latest"]}]), encoding="utf-8"
     )
@@ -334,6 +385,24 @@ def test_prunes_the_per_version_sitemap(latest_tree, config, report):
     assert gzip.decompress(gz).decode() == sitemap
 
 
+def test_lists_the_version_stubs_in_the_per_version_sitemap(latest_tree, config, report):
+    """The version selector resolves a moved page only if its stub is an entry in this file."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    sitemap = (latest_tree / VERSION / "sitemap.xml").read_text()
+    # The version root is a generated redirect after promotion, so it is listed as a stub.
+    assert "<!-- ovweb:stub -->" in sitemap
+    assert f"<loc>https://openvidu.io/{VERSION}/</loc>" in sitemap
+    # Every marked entry names a generated redirect on disk.
+    for urlpath in re.findall(
+        r"<!-- ovweb:stub -->\s*<loc>https://openvidu.io/([^<]+)</loc>", sitemap
+    ):
+        served = latest_tree / (urlpath + "index.html" if urlpath.endswith("/") else urlpath)
+        assert is_generated_redirect(served), urlpath
+    # The crawler-facing root sitemap gained none of them.
+    assert "ovweb:stub" not in (latest_tree / "sitemap.xml").read_text()
+
+
 def test_gzips_the_root_sitemap_from_its_final_content(latest_tree, config, report):
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
@@ -363,10 +432,10 @@ def test_root_search_index_points_at_latest_but_the_version_keeps_its_version(
 
 
 @pytest.fixture
-def mixed_tree(tmp_path, layout):
+def mixed_tree(tmp_path, layout, config):
     """The newest version plus an older one built by an older configuration."""
-    build_tree(tmp_path, layout, version=VERSION)
-    build_tree(tmp_path, layout, version=OLD_VERSION, modern=False)
+    build_tree(tmp_path, layout, version=VERSION, config=config)
+    build_tree(tmp_path, layout, version=OLD_VERSION, modern=False, config=config)
     (tmp_path / "versions.json").write_text(
         json.dumps(
             [{"version": VERSION, "aliases": ["latest"]}, {"version": OLD_VERSION, "aliases": []}]
@@ -375,6 +444,90 @@ def mixed_tree(tmp_path, layout):
     )
     (tmp_path / "latest").symlink_to(VERSION)
     return tmp_path
+
+
+# -- the unversioned mirror --------------------------------------------------------------
+
+
+def mirror_stub(target: str) -> str:
+    """A stub shaped like one this step wrote on an earlier publish."""
+    return (
+        '<!-- Generated by ovweb from the "unversioned-pages" rule -->'
+        f'<meta http-equiv="refresh" content="0; url={target}">'
+    )
+
+
+def test_mirrors_every_advertised_page_at_its_unversioned_url(latest_tree, config, report):
+    """The point of the step: /docs/releases/ answers instead of dead-ending on the 404 page."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    page = (latest_tree / "docs" / "releases" / "index.html").read_text()
+    assert 'content="0; url=/latest/docs/releases/"' in page
+    assert '<link rel="canonical" href="https://openvidu.io/latest/docs/releases/">' in page
+    assert 'content="noindex, follow"' in page
+    assert "unversioned-pages" in page
+    # Both sections, and the section roots themselves — the two URLs a human types.
+    assert (latest_tree / "docs" / "index.html").is_file()
+    assert (latest_tree / "meet" / "index.html").is_file()
+
+
+def test_the_mirror_collapses_a_versioned_stub_to_its_destination(latest_tree, config, report):
+    """/docs/getting-started/ answers with one hop, not through the versioned stub."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    page = (latest_tree / "docs" / "getting-started" / "index.html").read_text()
+    assert 'content="0; url=/latest/docs/"' in page
+
+
+def test_the_mirror_leaves_the_root_served_pages_out(latest_tree, config, report):
+    """`/pricing/` is served from the root already, so a stub there would shadow the real page."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert "Generated by ovweb" not in (latest_tree / "pricing" / "index.html").read_text()
+
+
+def test_the_mirror_is_rebuilt_rather_than_reconciled(latest_tree, config, report):
+    """A page that has since been renamed must not leave a stub redirecting into a 404."""
+    (latest_tree / "docs" / "gone").mkdir(parents=True)
+    (latest_tree / "docs" / "gone" / "index.html").write_text(
+        mirror_stub("/latest/docs/gone/"), encoding="utf-8"
+    )
+
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert not (latest_tree / "docs" / "gone").exists()
+    assert (latest_tree / "docs" / "releases" / "index.html").is_file()
+
+
+def test_refuses_to_delete_content_it_did_not_write(latest_tree, config, report):
+    """The step wipes /docs/ outright, so it first proves that everything there is its own."""
+    (latest_tree / "docs").mkdir()
+    (latest_tree / "docs" / "index.html").write_text("a real page", encoding="utf-8")
+
+    with pytest.raises(RedirectError, match="not generated by ovweb"):
+        postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+
+def test_an_empty_mirror_is_a_failure_not_a_silent_skip(latest_tree, config, report):
+    """Sections that scan empty mean the layout and the build disagree. Reinstating the 404s
+    quietly is the one outcome worse than stopping."""
+    from dataclasses import replace
+
+    renamed = replace(config, layout=replace(config.layout, versioned_pages=("nonexistent",)))
+    with pytest.raises(RedirectError, match="mirror would be empty"):
+        postprocess(latest_tree, config=renamed, version=VERSION, update_latest=True, report=report)
+
+
+def test_past_version_leaves_the_mirror_alone(mixed_tree, config, report):
+    """The stubs point at `/latest/`, so a publish that does not move `latest` has no say in
+    them."""
+    stub = mirror_stub("/latest/docs/")
+    (mixed_tree / "docs").mkdir()
+    (mixed_tree / "docs" / "index.html").write_text(stub, encoding="utf-8")
+
+    postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
+
+    assert (mixed_tree / "docs" / "index.html").read_text() == stub
 
 
 def test_past_version_leaves_the_root_alone(mixed_tree, config, report):
@@ -411,7 +564,9 @@ def test_past_version_gets_the_old_band_redirect(mixed_tree, config, report):
 
     docs_index = mixed_tree / OLD_VERSION / "docs" / "index.html"
     assert '<meta http-equiv="refresh" content="0; url=getting-started/">' in docs_index.read_text()
-    assert not (mixed_tree / OLD_VERSION / "docs" / "getting-started").exists()
+    # And it lands somewhere: the fixture materialises every rule's target, because a redirect
+    # into a 404 is worse than the 404 it replaced and `ovweb verify` now rejects one.
+    assert (mixed_tree / OLD_VERSION / "docs" / "getting-started" / "index.html").is_file()
 
 
 def test_past_version_pulls_the_newest_release_notes_in(mixed_tree, config, report):
@@ -462,12 +617,81 @@ def test_only_the_published_version_gets_its_links_rewritten(mixed_tree, config,
     assert f"{VERSION}.0 notes" in untouched
 
 
+# -- the legacy patch-version folders ------------------------------------------------------
+
+
+def test_publishing_a_minor_rebuilds_its_alias_folders(mixed_tree, config, report):
+    """The real config aliases 3.2.0 to 3.2, so a past publish of 3.2 materialises it."""
+    postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
+
+    # The minor's own version root is a stub into the docs, so the alias collapses through it.
+    root = (mixed_tree / "3.2.0" / "index.html").read_text()
+    assert 'content="0; url=/3.2/docs/getting-started/"' in root
+
+    page = (mixed_tree / "3.2.0" / "docs" / "releases" / "index.html").read_text()
+    assert 'content="0; url=/3.2/docs/releases/"' in page
+    assert '<link rel="canonical" href="https://openvidu.io/3.2/docs/releases/">' in page
+
+
+def test_a_publish_leaves_other_minors_alias_folders_alone(mixed_tree, config, report):
+    postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert not (mixed_tree / "3.2.0").exists()
+
+
+def test_a_stale_alias_folder_is_rebuilt_not_patched(mixed_tree, config, report):
+    (mixed_tree / "3.2.0" / "docs" / "gone").mkdir(parents=True)
+    (mixed_tree / "3.2.0" / "docs" / "gone" / "index.html").write_text(
+        mirror_stub("/3.2/docs/gone/"), encoding="utf-8"
+    )
+
+    postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
+
+    assert not (mixed_tree / "3.2.0" / "docs" / "gone").exists()
+    assert (mixed_tree / "3.2.0" / "docs" / "releases" / "index.html").is_file()
+
+
+def test_an_alias_folder_holding_content_stops_the_publish(mixed_tree, config, report):
+    (mixed_tree / "3.2.0").mkdir()
+    (mixed_tree / "3.2.0" / "index.html").write_text("a real page", encoding="utf-8")
+
+    with pytest.raises(RedirectError, match="not generated by ovweb"):
+        postprocess(
+            mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report
+        )
+
+
+# -- the plan matches the work -----------------------------------------------------------
+
+
+@pytest.mark.parametrize("update_latest", [True, False])
+def test_the_planned_steps_are_the_steps_that_run(mixed_tree, config, update_latest):
+    """`--dry-run` prints the plan, so a step the pipeline runs and the plan omits is a lie.
+
+    Compared in order, since the order is behaviour. `commit` is excluded because the pipeline
+    commits from `pipeline/publish.py`, outside the post-processing.
+    """
+    recorder = RecordingReporter()
+    version = VERSION if update_latest else OLD_VERSION
+
+    postprocess(
+        mixed_tree, config=config, version=version, update_latest=update_latest, report=recorder
+    )
+
+    planned = [
+        step.name
+        for step in build_plan(config, version=version, update_latest=update_latest).steps
+        if step.name != "commit"
+    ]
+    assert recorder.steps == planned
+
+
 # -- guards ------------------------------------------------------------------------------
 
 
 def test_refuses_to_run_twice(latest_tree, config, report):
     """A second pass would strip the version out of author-pinned links and fail on the
-    already-moved directories. The shell had no guard for this at all."""
+    already-moved directories."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
     with pytest.raises(PostprocessError, match="already a generated redirect"):

@@ -7,7 +7,7 @@ tags:
 
 # WebComponent Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-basic){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-basic){ .md-button target="_blank" }
 
 This tutorial extends the [Direct Link tutorial](direct-link.md) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -38,7 +38,7 @@ git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -58,14 +58,14 @@ npm install
 npm start
 ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}. You should see a screen like this:
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></a></p></div>
 
 </div>
 

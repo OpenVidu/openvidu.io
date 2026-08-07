@@ -1,11 +1,13 @@
 ---
 title: "Advanced recording tutorial with S3"
 description: "Extend the basic S3 recording tutorial with complete recording metadata and real-time recording status notifications pushed to the client."
+tags:
+  - setupcustomgallery
 ---
 
 # Advanced Recording Tutorial S3
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/advanced-features/openvidu-recording-advanced-node){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/advanced-features/openvidu-recording-advanced-node){ .md-button target="_blank" }
 
 This tutorial improves the [basic recording tutorial](./recording-basic-s3.md) by doing the following:
 
@@ -37,7 +39,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
             Make sure you deploy with at least 4 CPUs in the Virtual Machine of AWS.
 
     2. Point the tutorial to your AWS deployment:
-          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/.env){target="\_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).   
+          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/.env){:target="_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).   
           - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/public/app.js#L3) to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
 
     !!! warning
@@ -56,7 +58,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run the application
 
-To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your device.
+To run this application, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your device.
 
 1. Navigate into the application directory
 
@@ -76,13 +78,13 @@ npm install
 npm start
 ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="\_blank"}. You should see a screen like this:
+Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></a></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy"/></a></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></a></p></div>
 
 </div>
 
@@ -90,7 +92,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application with other devices in your local network very easily without worrying about SSL certificates.
 
-    Access your application client through [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443){target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){target="_blank"}.
+    Access your application client through [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){:target="_blank"}.
 
     **Limitation**: Playing recordings with the `S3` strategy from other devices in your local network is not possible due to MinIO not being exposed. To play recordings from other devices, you need to change the environment variable `RECORDING_PLAYBACK_STRATEGY` to `PROXY`.
 
@@ -581,7 +583,7 @@ This endpoint does the following:
     }
     ```
 
-    This method creates a presigned URL to access the object in the S3 bucket by calling the `getSignedUrl` function from the [@aws-sdk/s3-request-presigner :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-s3-request-presigner/){target="\_blank"} package, indicating the `S3Client`, `GetObjectCommand` and the expiration time in seconds as parameters. In this case, the expiration time is set to 24 hours.
+    This method creates a presigned URL to access the object in the S3 bucket by calling the `getSignedUrl` function from the [@aws-sdk/s3-request-presigner :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-s3-request-presigner/){:target="_blank"} package, indicating the `S3Client`, `GetObjectCommand` and the expiration time in seconds as parameters. In this case, the expiration time is set to 24 hours.
 
     !!! info "Presigned URLs"
 

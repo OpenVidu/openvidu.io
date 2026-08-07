@@ -4,12 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-# Sentinel used to shield author-pinned /X.Y/<versioned page>/ links from the blanket
-# version strip applied to pages that are promoted to the site root. See
-# ovweb.rewrite.nonversioned.
+#: Shields author-pinned /X.Y/<versioned page>/ links from the blanket version strip applied to
+#: pages promoted to the site root. See :mod:`ovweb.rewrite.nonversioned`.
 KEEPVERSION_SENTINEL = "@@KEEPVERSION@@"
 
-# The named location a redirect rule can use instead of a path template.
+#: The named location a redirect rule may use instead of a path template.
 VERSION_ROOT = "version-root"
 
 
@@ -25,20 +24,12 @@ class SiteLayout:
     root_files: tuple[str, ...]
     feeds: tuple[str, ...]
 
-    def versioned_dirs(self, version: str) -> tuple[str, ...]:
-        """`("3.8/docs", "3.8/meet")` — the scope of the versioned-page rewrites."""
-        return tuple(f"{version}/{page}" for page in self.versioned_pages)
-
-    def non_versioned_dirs(self, version: str) -> tuple[str, ...]:
-        """`("3.8/account", "3.8/pricing", ...)` — the scope of the root-page rewrites."""
-        return tuple(f"{version}/{page}" for page in self.non_versioned_pages)
-
     @property
     def files_removed_from_past_version(self) -> tuple[str, ...]:
-        """Root files deleted from a version folder when the root is left untouched.
+        """Root files deleted from a version folder when the site root is left untouched.
 
-        Everything in :attr:`root_files` except ``index.html``, which is not deleted but
-        overwritten by the generated version-root redirect.
+        Everything in :attr:`root_files` except ``index.html``, which is overwritten by the
+        generated version-root redirect rather than deleted.
         """
         return tuple(name for name in self.root_files if name != "index.html")
 
@@ -101,23 +92,112 @@ class ResolvedRedirect:
 
 
 @dataclass(frozen=True)
-class PatternRule:
-    """A regex redirect compiled into the 404 router, before `for_each` expansion."""
+class ExpandFields:
+    """The page fields an expansion rule may override; unset ones fall back to the defaults."""
+
+    title: str | None = None
+    body: str | None = None
+    robots: str | None = None
+    lang: str | None = None
+    preserve_query_and_hash: bool | None = None
+
+
+@dataclass(frozen=True)
+class CrossProductRule:
+    """Many single-page moves that differ only by path segments: one stub per `values` combination.
+
+    `at`, `to`, `canonical` and `body` may use `{version}` and any `values` key. Resolved
+    against the published tree, so a combination whose old path is still a real page, or whose
+    target does not exist, produces no stub.
+    """
 
     id: str
-    match: str
+    at: str
     to: str
-    for_each: str | None = None
+    values: tuple[tuple[str, tuple[str, ...]], ...]
+    canonical: str | None = None
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    versions: str | None = None
     description: str = ""
 
 
 @dataclass(frozen=True)
-class ResolvedPattern:
-    """A single regex redirect, ready to be emitted into the 404 router."""
+class TreeRenameRule:
+    """A directory moved: one stub per page under the new path, at its old path.
+
+    The pages are enumerated from the tree under `to_path`, so every stub has a live target by
+    construction and a page removed in the same release needs its own `files` rule.
+    """
 
     id: str
-    match: str
+    from_path: str
+    to_path: str
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    versions: str | None = None
+    description: str = ""
+
+
+@dataclass(frozen=True)
+class SectionFallbackRule:
+    """A section absent from some versions: every URL it answers elsewhere redirects to `to`.
+
+    Sources are enumerated from the versions outside the `versions` gate — the ones that have
+    the section — so a reader switching into a gated version lands on `to` whatever page of the
+    section they came from. `versions` is required: the gate is what separates the versions
+    that lack the section from the ones that donate its URLs.
+    """
+
+    id: str
+    dir: str
     to: str
+    versions: str
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    description: str = ""
+
+
+@dataclass(frozen=True)
+class VersionAliasRule:
+    """A retired version folder aliased to its minor: one stub per page of the minor.
+
+    `folders` name folders that no longer exist as versions — the pre-regroup exact-patch
+    releases. Each is rebuilt as a mirror of its minor's tree, so `/3.4.1/docs/x/` answers with
+    a redirect to `/3.4/docs/x/`.
+    """
+
+    id: str
+    folders: tuple[str, ...]
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    description: str = ""
+
+
+@dataclass(frozen=True)
+class UnversionedMirrorRule:
+    """Every versioned page answering at its unversioned URL: `/docs/x/` -> `/latest/docs/x/`.
+
+    Enumerated from the newest version's tree, one stub per page of every section named by
+    `for_each`. GitHub Pages serves `404.html` with a 404 status — the thing a crawler acts on
+    before it runs any JavaScript — so a real page with a meta refresh is the only redirect a
+    crawler can be given for these URLs.
+    """
+
+    id: str
+    for_each: str
+    fields: ExpandFields = ExpandFields()
+    enabled: bool = True
+    description: str = ""
+
+
+ExpandRule = (
+    CrossProductRule
+    | TreeRenameRule
+    | SectionFallbackRule
+    | VersionAliasRule
+    | UnversionedMirrorRule
+)
 
 
 @dataclass(frozen=True)
@@ -134,12 +214,12 @@ class RedirectDefaults:
 
 @dataclass(frozen=True)
 class SiteConfig:
-    """Everything site.yaml declares."""
+    """Everything ovweb.yaml declares."""
 
     layout: SiteLayout
     defaults: RedirectDefaults
     file_rules: tuple[RedirectRule, ...]
-    pattern_rules: tuple[PatternRule, ...]
+    expand_rules: tuple[ExpandRule, ...] = ()
     source: str = "<unknown>"
 
 

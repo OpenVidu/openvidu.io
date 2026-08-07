@@ -117,10 +117,10 @@ nav:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
               - docs/self-hosting/production-ready/index.md
-              - Performant: docs/self-hosting/production-ready/performance.md
-              - Scalable: docs/self-hosting/production-ready/scalability.md
-              - Fault Tolerant: docs/self-hosting/production-ready/fault-tolerance.md
-              - Observable:
+              - Performance: docs/self-hosting/production-ready/performance.md
+              - Scalability: docs/self-hosting/production-ready/scalability.md
+              - Fault tolerance: docs/self-hosting/production-ready/fault-tolerance.md
+              - Observability:
                   - docs/self-hosting/production-ready/observability/index.md
                   - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
                   - Grafana Stack: docs/self-hosting/production-ready/observability/grafana-stack.md
@@ -128,96 +128,68 @@ nav:
           - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node:
               - docs/self-hosting/single-node/index.md
               - On Premises:
-                  - docs/self-hosting/single-node/on-premises/index.md
                   - Install: docs/self-hosting/single-node/on-premises/install.md
                   - Administration: docs/self-hosting/single-node/on-premises/admin.md
-                  - Upgrade: docs/self-hosting/single-node/on-premises/upgrade.md
               - AWS:
-                  - docs/self-hosting/single-node/aws/index.md
                   - Install: docs/self-hosting/single-node/aws/install.md
                   - Administration: docs/self-hosting/single-node/aws/admin.md
-                  - Upgrade: docs/self-hosting/single-node/aws/upgrade.md
               - Azure:
-                  - docs/self-hosting/single-node/azure/index.md
                   - Install: docs/self-hosting/single-node/azure/install.md
                   - Administration: docs/self-hosting/single-node/azure/admin.md
-                  - Upgrade: docs/self-hosting/single-node/azure/upgrade.md
               - GCP:
-                  - docs/self-hosting/single-node/gcp/index.md
                   - Install: docs/self-hosting/single-node/gcp/install.md
                   - Administration: docs/self-hosting/single-node/gcp/admin.md
-                  - Upgrade: docs/self-hosting/single-node/gcp/upgrade.md
               - DigitalOcean:
-                  - docs/self-hosting/single-node/digitalocean/index.md
                   - Install: docs/self-hosting/single-node/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node/digitalocean/admin.md
-                  - Upgrade: docs/self-hosting/single-node/digitalocean/upgrade.md
               - Oracle:
-                  - docs/self-hosting/single-node/oracle/index.md
                   - Install: docs/self-hosting/single-node/oracle/install.md
                   - Administration: docs/self-hosting/single-node/oracle/admin.md
-                  - Upgrade: docs/self-hosting/single-node/oracle/upgrade.md
+              - Upgrade: docs/self-hosting/single-node/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node-pro/index.md
               - On Premises:
-                  - docs/self-hosting/single-node-pro/on-premises/index.md
                   - Install: docs/self-hosting/single-node-pro/on-premises/install.md
                   - Administration: docs/self-hosting/single-node-pro/on-premises/admin.md
-                  - Upgrade: docs/self-hosting/single-node-pro/on-premises/upgrade.md
               - AWS:
-                  - docs/self-hosting/single-node-pro/aws/index.md
                   - Install: docs/self-hosting/single-node-pro/aws/install.md
                   - Administration: docs/self-hosting/single-node-pro/aws/admin.md
-                  - Upgrade: docs/self-hosting/single-node-pro/aws/upgrade.md
               - Azure:
-                  - docs/self-hosting/single-node-pro/azure/index.md
                   - Install: docs/self-hosting/single-node-pro/azure/install.md
                   - Administration: docs/self-hosting/single-node-pro/azure/admin.md
-                  - Upgrade: docs/self-hosting/single-node-pro/azure/upgrade.md
               - GCP:
-                  - docs/self-hosting/single-node-pro/gcp/index.md
                   - Install: docs/self-hosting/single-node-pro/gcp/install.md
                   - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
-                  - Upgrade: docs/self-hosting/single-node-pro/gcp/upgrade.md
               - DigitalOcean:
-                  - docs/self-hosting/single-node-pro/digitalocean/index.md
                   - Install: docs/self-hosting/single-node-pro/digitalocean/install.md
                   - Administration: docs/self-hosting/single-node-pro/digitalocean/admin.md
-                  - Upgrade: docs/self-hosting/single-node-pro/digitalocean/upgrade.md
               - Oracle:
-                  - docs/self-hosting/single-node-pro/oracle/index.md
                   - Install: docs/self-hosting/single-node-pro/oracle/install.md
                   - Administration: docs/self-hosting/single-node-pro/oracle/admin.md
-                  - Upgrade: docs/self-hosting/single-node-pro/oracle/upgrade.md
+              - Upgrade: docs/self-hosting/single-node-pro/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
-                  - docs/self-hosting/elastic/on-premises/index.md
                   - Install: docs/self-hosting/elastic/on-premises/install.md
                   - Administration: docs/self-hosting/elastic/on-premises/admin.md
                   - Upgrade: docs/self-hosting/elastic/on-premises/upgrade.md
               - AWS:
-                  - docs/self-hosting/elastic/aws/index.md
                   - Install: docs/self-hosting/elastic/aws/install.md
                   - Administration: docs/self-hosting/elastic/aws/admin.md
                   - Upgrade: docs/self-hosting/elastic/aws/upgrade.md
               - Azure:
-                  - docs/self-hosting/elastic/azure/index.md
                   - Install: docs/self-hosting/elastic/azure/install.md
                   - Administration: docs/self-hosting/elastic/azure/admin.md
                   - Upgrade: docs/self-hosting/elastic/azure/upgrade.md
               - GCP:
-                  - docs/self-hosting/elastic/gcp/index.md
                   - Install: docs/self-hosting/elastic/gcp/install.md
                   - Administration: docs/self-hosting/elastic/gcp/admin.md
                   - Upgrade: docs/self-hosting/elastic/gcp/upgrade.md
               - DigitalOcean:
-                  - docs/self-hosting/elastic/digitalocean/index.md
                   - Install: docs/self-hosting/elastic/digitalocean/install.md
                   - Administration: docs/self-hosting/elastic/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/elastic/digitalocean/upgrade.md
               - Oracle:
-                  - docs/self-hosting/elastic/oracle/index.md
                   - Install: docs/self-hosting/elastic/oracle/install.md
                   - Administration: docs/self-hosting/elastic/oracle/admin.md
                   - Upgrade: docs/self-hosting/elastic/oracle/upgrade.md
@@ -230,27 +202,22 @@ nav:
                   - Administration: docs/self-hosting/ha/on-premises/admin.md
                   - Upgrade: docs/self-hosting/ha/on-premises/upgrade.md
               - AWS:
-                  - docs/self-hosting/ha/aws/index.md
                   - Install: docs/self-hosting/ha/aws/install.md
                   - Administration: docs/self-hosting/ha/aws/admin.md
                   - Upgrade: docs/self-hosting/ha/aws/upgrade.md
               - Azure:
-                  - docs/self-hosting/ha/azure/index.md
                   - Install: docs/self-hosting/ha/azure/install.md
                   - Administration: docs/self-hosting/ha/azure/admin.md
                   - Upgrade: docs/self-hosting/ha/azure/upgrade.md
               - GCP:
-                  - docs/self-hosting/ha/gcp/index.md
                   - Install: docs/self-hosting/ha/gcp/install.md
                   - Administration: docs/self-hosting/ha/gcp/admin.md
                   - Upgrade: docs/self-hosting/ha/gcp/upgrade.md
               - DigitalOcean:
-                  - docs/self-hosting/ha/digitalocean/index.md
                   - Install: docs/self-hosting/ha/digitalocean/install.md
                   - Administration: docs/self-hosting/ha/digitalocean/admin.md
                   - Upgrade: docs/self-hosting/ha/digitalocean/upgrade.md
               - Oracle:
-                  - docs/self-hosting/ha/oracle/index.md
                   - Install: docs/self-hosting/ha/oracle/install.md
                   - Administration: docs/self-hosting/ha/oracle/admin.md
                   - Upgrade: docs/self-hosting/ha/oracle/upgrade.md
@@ -304,6 +271,8 @@ not_in_nav: |
   /account.md
   /acknowledgments.md
   /openvidu-meet-vs-openvidu-platform.md
+  /openvidu-vs-livekit.md
+  /openvidu-vs-mediasoup.md
   /conditions/
 
 validation:
@@ -317,7 +286,7 @@ validation:
     # validated, and rewritten to relative URLs at build time. This form is what shared
     # snippets use for their links and images: snippets are included in pages at different
     # hierarchy levels, so relative paths would break. Regular pages use relative links
-    # (editor-navigable); see README "Link rules".
+    # (editor-navigable); see contributing/link-rules.md.
     absolute_links: relative_to_docs
     unrecognized_links: warn
     # Kept at "info" (NOT "warn") on purpose. pymdownx.tabbed generates id anchors for tab
@@ -373,9 +342,8 @@ theme:
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
-# Exposes publish-tool/ovweb.yaml on `config.extra.ovweb`, so the 404 router
-# (docs/overrides/404.html) compiles its redirect patterns from the same configuration the
-# publishing tool uses instead of hardcoding a list that has to be kept in sync by hand.
+# Sets each page's sitemap <lastmod> from git and feeds the llmstxt plugin every page's own
+# title and description. See publish-tool/mkdocs_hook.py.
 hooks:
   - publish-tool/mkdocs_hook.py
 
@@ -483,6 +451,8 @@ plugins:
         Product and pricing:
         - index.md
         - openvidu-meet-vs-openvidu-platform.md
+        - openvidu-vs-livekit.md
+        - openvidu-vs-mediasoup.md
         - pricing.md
         - support.md
         - about-us.md
@@ -555,9 +525,11 @@ plugins:
         - docs/troubleshooting/*.md
 
         OpenVidu Single Node COMMUNITY deployment guides:
+        - docs/self-hosting/single-node/upgrade.md
         - docs/self-hosting/single-node/*/*.md
 
         OpenVidu Single Node PRO deployment guides:
+        - docs/self-hosting/single-node-pro/upgrade.md
         - docs/self-hosting/single-node-pro/*/*.md
 
         OpenVidu Elastic deployment guides:

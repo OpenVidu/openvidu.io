@@ -50,7 +50,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: 3.x
+          python-version: "3.14"
 
       - name: Install safe-chain
         uses: OpenVidu/actions/install-safe-chain@070fb73fda8fe7a08e28991b1c2d276f12a009ef # v1.0.22
@@ -75,6 +75,21 @@ jobs:
         # version range is an error rather than a silent first-match-wins.
         run: ovweb redirects check
 
+      - name: Lint the authoring conventions
+        # What --strict cannot see: raw-HTML links and images (MkDocs never processes HTML),
+        # link form in the files that move at publish, version-pin discipline, and the page
+        # composition conventions. Source-based and fast, so it runs before spending minutes
+        # on the build. On PRs, additionally: every page the PR removes or renames must be
+        # claimed by a redirect rule in ovweb.yaml — retiring a published URL silently is the
+        # 404 class that only surfaces months later in Search Console.
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --depth=1 origin "+refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
+            ovweb lint --against "origin/${{ github.base_ref }}"
+          else
+            ovweb lint
+          fi
+
       - name: Build documentation (strict)
         env:
           GOOGLE_ANALYTICS_KEY: G-XXXXXXXX
@@ -84,3 +99,10 @@ jobs:
           # real production build runs them in publish-web.yaml.
           CI: "false"
         run: mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation
+
+      - name: Lint the built site
+        # The built HTML is the truth the source lint approximates: snippets inlined, templates
+        # composed, and the pymdownx.tabbed anchor ids present — so every internal link and
+        # every #fragment is resolved here for real, with no false positives. External URLs are
+        # the scheduled check-external-links workflow's job.
+        run: ovweb lint --site /tmp/mkdocs-strict-validation

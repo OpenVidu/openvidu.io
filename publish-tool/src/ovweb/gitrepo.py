@@ -73,28 +73,21 @@ class Git:
     def current_branch(self) -> str:
         return self.read("rev-parse", "--abbrev-ref", "HEAD")
 
-    def rev_parse(self, ref: str) -> str:
-        return self.read("rev-parse", ref)
-
     def is_shallow(self) -> bool:
         """Whether the clone has a truncated history.
 
-        Worth asking before reading dates out of the log: in a shallow clone `git log` still
-        succeeds, but every path looks as if it were last touched by the one commit that was
-        fetched. Silently wrong data is worse than a failure, so callers check this first.
+        Asked before reading dates out of the log: in a shallow clone `git log` succeeds but
+        reports the one fetched commit for every path, which is wrong rather than absent.
         """
         return self.read("rev-parse", "--is-shallow-repository") == "true"
 
     def log_dates_for(self, *paths: str) -> str:
         """Raw `git log` output pairing each commit's date with the paths it touched.
 
-        One pass over the whole history covers every file under `paths`; see
-        `ovweb.sources.parse_git_log`, which owns the format and the walking.
+        One pass covers every file under `paths`. :func:`ovweb.sources.parse_git_log` owns the
+        format and the walking.
         """
         return self.read(*LOG_DATES_ARGS, "HEAD", "--", *paths)
-
-    def is_clean(self, cwd: Path | None = None) -> bool:
-        return self._run(("status", "--porcelain"), cwd=cwd).stdout.strip() == ""
 
     def status_porcelain(self, cwd: Path | None = None) -> str:
         return self._run(("status", "--porcelain"), cwd=cwd).stdout.strip()
@@ -102,24 +95,14 @@ class Git:
     def remote_branch_exists(self, branch: str) -> bool:
         """Whether `branch` exists on the remote.
 
-        Matches the full ref. The shell implementation used
-        `git ls-remote --heads origin 3.0 | grep -q 3.0`, whose substring match is satisfied
-        by `refs/heads/3.0.0-beta1` — so it could report that branch `3.0` exists when it
-        does not, and then fail (or worse, silently use a stale local branch).
+        Matches the full ref, so branch `3.0` is not reported as existing on the strength of
+        `refs/heads/3.0.0-beta1`.
         """
         result = self._run(
             ("ls-remote", "--exit-code", "--heads", self.remote, f"refs/heads/{branch}"),
             check=False,
         )
         return result.returncode == 0
-
-    def local_branch_exists(self, branch: str) -> bool:
-        return (
-            self._run(
-                ("show-ref", "--verify", "--quiet", f"refs/heads/{branch}"), check=False
-            ).returncode
-            == 0
-        )
 
     def local_branches(self) -> list[str]:
         return self.read("for-each-ref", "--format=%(refname:short)", "refs/heads").splitlines()
@@ -143,9 +126,6 @@ class Git:
 
     # -- branch and remote operations --------------------------------------------------
 
-    def fetch(self, branch: str) -> None:
-        self.do("fetch", self.remote, branch)
-
     def switch(self, branch: str) -> None:
         self.do("switch", branch)
 
@@ -155,8 +135,8 @@ class Git:
     def pull_ff_only(self, branch: str, *, cwd: Path | None = None) -> None:
         """Fast-forward `branch` from the remote, refusing to create a merge commit.
 
-        The shell used a plain `git pull`, which would silently merge a diverged branch into
-        the publish. Diverging here is a real problem and should stop the publish.
+        Raises :class:`GitError` when the branches have diverged, rather than merging a tree
+        nobody has reviewed into the publish.
         """
         result = self._run(
             ("pull", "--ff-only", self.remote, branch), cwd=cwd, check=False, mutating=True
@@ -178,10 +158,9 @@ class Git:
         self.do(*args, cwd=cwd)
 
     def push_force_with_lease(self, branch: str, *, cwd: Path | None = None) -> None:
-        """Force-push, but refuse to discard commits the local repo has not seen.
+        """Force-push, refusing to discard commits the local repository has not seen.
 
-        The shell used a bare `git push --force`, which would silently drop a fix someone
-        else had pushed to the version branch.
+        A bare `--force` would silently drop a fix somebody else pushed to the version branch.
         """
         self.do("push", "--force-with-lease", self.remote, branch, cwd=cwd)
 
@@ -194,17 +173,11 @@ class Git:
     def worktree(self, branch: str, *, keep: bool = False):
         """Check `branch` out into a throwaway worktree outside the repository.
 
-        This is how the publish reaches gh-pages, rather than checking it out in the main
-        working tree, for three reasons:
-
-        * The tool's own files would vanish. Its sources, config and templates are not on
-          gh-pages, and for a past version they are not on that version's branch either.
-        * `.gitignore` is a main-only file, so `site/` and `.cache/` would become untracked
-          *and* unignored, and `git add --all` would publish them.
-        * A failure half-way would strand the caller on gh-pages mid-move. Here the main tree
-          never leaves the branch it started on.
-
-        Created after mike has finished, so it sees mike's commit.
+        The publish reaches gh-pages this way rather than checking it out in the main working
+        tree, which would take the tool's own sources, config and templates out of scope (they
+        exist on neither gh-pages nor a version branch), unignore `site/` and `.cache/` for
+        `git add --all` (`.gitignore` is a main-only file), and strand the caller mid-move on a
+        failure.
         """
         path = Path(mkdtemp(prefix=f"ovweb-{branch.replace('/', '-')}-"))
         # mkdtemp already created the directory and `git worktree add` wants to create it.
@@ -234,9 +207,6 @@ class Git:
             return False
         self.do("commit", "--message", message, cwd=cwd)
         return True
-
-    def restore_from(self, branch: str, path: str, *, cwd: Path | None = None) -> None:
-        self.do("restore", "--source", branch, "--", path, cwd=cwd)
 
     def show(self, ref: str, path: str) -> str:
         return self.read("show", f"{ref}:{path}")

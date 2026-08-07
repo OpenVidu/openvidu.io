@@ -11,10 +11,10 @@ from ..model import SiteLayout
 
 
 def rewrite_versioned_file(text: str, *, version: str, layout: SiteLayout) -> str:
-    """Rewrite one built file that lives inside a version's versioned-page folder.
+    """Rewrite one built file inside a version's versioned-page folder.
 
-    No step can undo or trigger another, but the order is fixed so that a step added later
-    inherits the same guarantee.
+    No step can undo or trigger another, but the order is fixed so a step added later inherits the
+    same guarantee.
     """
     text = _pin_asset_references(text, version=version, layout=layout)
     text = _absolutise_non_versioned_links(text, layout=layout)
@@ -27,11 +27,11 @@ def rewrite_versioned_file(text: str, *, version: str, layout: SiteLayout) -> st
 def _pin_asset_references(text: str, *, version: str, layout: SiteLayout) -> str:
     """`src="/assets/x.png"` -> `src="/3.8/assets/x.png"`.
 
-    The root `/assets/` folder always holds the newest publish's assets, so a versioned page has
-    to reference its own copy: its assets may change or disappear in a later release.
+    The root `/assets/` folder always holds the newest publish's assets, so a versioned page has to
+    reference its own copy: its assets may change or disappear in a later release.
 
-    Matches `src="` / `href="` anywhere, so `data-src="/assets/…"` is pinned too, which is what
-    you want — a `data-src` consumed by a script resolves against the same root.
+    Matches `src="` / `href="` anywhere, so `data-src="/assets/…"` is pinned too — a script
+    consuming it resolves against the same root.
     """
     for directory in layout.pinned_assets:
         text = re.sub(
@@ -61,14 +61,12 @@ def _absolutise_non_versioned_links(text: str, *, layout: SiteLayout) -> str:
 def _absolutise_root_file_links(text: str, *, layout: SiteLayout) -> str:
     """`href="../../feed_rss_created.xml"` -> `href="/feed_rss_created.xml"`.
 
-    Same reasoning as the folders above, for the individual files promoted to the root. The
-    theme emits two `<link rel="alternate">` RSS references on every page, relative to the
-    version folder — where the feeds do not survive the publish, because they are moved to the
-    root (or deleted, when an older version is republished). Left alone, every versioned page
-    advertises two URLs that 404.
+    Same reasoning as the folders above, for the individual files promoted to the root. The theme
+    emits two `<link rel="alternate">` RSS references on every page, relative to a version folder
+    that keeps no copy of the feeds, so left alone every versioned page advertises two 404s.
 
     `index.html` and `index.md` are excluded: a link to the home page is a link to `/`, which
-    :func:`_absolutise_home_links` already handles.
+    :func:`_absolutise_home_links` handles.
     """
     for name in layout.root_files:
         if name.startswith("index."):
@@ -89,12 +87,12 @@ def _absolutise_home_links(text: str) -> str:
 def _absolutise_storage_scope(text: str) -> str:
     """`__md_scope = new URL("../..",location)` -> `new URL("/",location)`.
 
-    Material keys its `localStorage`/`sessionStorage` entries by this scope's path — cookie
-    consent among them. Left relative, every version folder would be its own scope and the
-    consent prompt would reappear on each one.
+    Material keys its `localStorage`/`sessionStorage` entries by this scope's path, cookie consent
+    among them, so left relative every version folder would be its own scope and the consent prompt
+    would reappear on each one.
 
-    Note this is *not* Material's `base`, which stays relative in the runtime config and is what
-    makes a versioned page load its own search index and assets.
+    Not Material's `base`, which stays relative and is what makes a versioned page load its own
+    search index and assets.
     """
     return re.sub(r'URL\("(?:\.\./)*\.\.",location\)', 'URL("/",location)', text)
 
@@ -105,10 +103,10 @@ def _point_self_urls_at_latest(text: str, *, version: str, layout: SiteLayout) -
     Ranking signals then consolidate on one evergreen URL per page instead of churning every
     release. These two tags are the only ones carrying `page.canonical_url` for a versioned page:
     the JSON-LD emitted for the two documentation index pages already hardcodes `/latest/` (see
-    docs/overrides/partials/json-ld.html), and no other versioned page emits JSON-LD at all.
+    docs/overrides/partials/json-ld.html), and no other versioned page emits JSON-LD.
 
-    Only these tags are touched. The `/3.8/assets/` pins applied above, and any author-pinned
-    `/X.Y/…` link elsewhere on the page, are deliberately left alone.
+    Nothing else is touched — not the `/3.8/assets/` pins applied above, and not an author-pinned
+    `/X.Y/…` link elsewhere on the page.
     """
     base = re.escape(layout.base_url)
     pinned = re.escape(version)

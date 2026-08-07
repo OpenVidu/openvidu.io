@@ -46,7 +46,7 @@ My main research activities are related to software engineering, software testin
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorMG.jpg" />
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorMG.jpg" alt="Portrait of Micael Gallego"/>
 </figure>
 </div>
 
@@ -73,7 +73,7 @@ My main research activities are related to software testing and real-time commun
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorFG.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorFG.jpg" alt="Portrait of Francisco Gortázar"/>
 </figure>
 </div>
 
@@ -98,7 +98,7 @@ My academic background consists of a Double Degree in Computer Science and Softw
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorPF.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorPF.jpg" alt="Portrait of Pablo Fuente"/>
 </figure>
 </div>
 
@@ -123,7 +123,7 @@ My experience centers on Node.js, TypeScript, and Angular, complemented by stron
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCS.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCS.jpg" alt="Portrait of Carlos Santos"/>
 </figure>
 </div>
 
@@ -151,7 +151,7 @@ My expertise spans backend development (Java, Node.js, Golang), frontend develop
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCR.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCR.jpg" alt="Portrait of Carlos Ruiz"/>
 </figure>
 </div>
 
@@ -176,7 +176,7 @@ I have professional experience mainly with Node.js, TypeScript, and Angular, as 
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorJCM.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorJCM.jpg" alt="Portrait of Juan Carlos Moreno"/>
 </figure>
 </div>
 
@@ -201,7 +201,7 @@ My experience includes working with the most common public clouds and with their
 
 <div class="grid-50 tablet-grid-50">
 <figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorSF.jpg" />
+<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorSF.jpg" alt="Portrait of Sergio Fernández"/>
 </figure>
 </div>
 

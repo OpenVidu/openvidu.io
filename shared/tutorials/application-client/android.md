@@ -1,14 +1,14 @@
-To run the client application tutorial, you need [Android Studio :fontawesome-solid-external-link:{.external-link-icon}](https://developer.android.com/studio){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Android Studio :fontawesome-solid-external-link:{.external-link-icon}](https://developer.android.com/studio){:target="_blank"} installed on your development computer.
 
 1. Open Android Studio and import the project located at `openvidu-livekit-tutorials/application-client/openvidu-android`.
 
-2. Run the application in an emulator or a physical device by clicking the "Run" button in Android Studio. Check out the [official documentation :fontawesome-solid-external-link:{.external-link-icon}](https://developer.android.com/studio/run){:target="\_blank"} for further information.
+2. Run the application in an emulator or a physical device by clicking the "Run" button in Android Studio. Check out the [official documentation :fontawesome-solid-external-link:{.external-link-icon}](https://developer.android.com/studio/run){:target="_blank"} for further information.
 
 The application will initiate as a native Android program. Once the application is opened, you should see a screen like this:
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></a></p></div>
 
 </div>
 
@@ -22,8 +22,8 @@ Once you have configured the URLs, you can join a video call room by providing a
 
 <div class="grid-container">
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-android.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-android.png" loading="lazy" style="width: 50%;" alt="Join screen of the Android tutorial app"/></a></p></div>
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-android.png" loading="lazy" style="width: 50%;"/></a></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-android.png" loading="lazy" style="width: 50%;" alt="Video call room of the Android tutorial app"/></a></p></div>
 
 </div>

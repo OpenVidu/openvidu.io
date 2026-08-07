@@ -5,7 +5,7 @@ description: "Replace the default meeting toolbar with a component of your own u
 
 # Custom toolbar using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target="_blank" }
 
 The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default toolbar with a custom one, providing a more tailored user experience.
 
@@ -31,11 +31,11 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 
 #### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 #### 4. Run the openvidu-custom-toolbar tutorial
 
-To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 
@@ -55,7 +55,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
       npm start
     ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
+Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
 <!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
@@ -219,26 +219,3 @@ export class AppComponent {
 ```
 
 In this code snippet, the `*ov-toolbar` directive is applied to a `div` element that contains two buttons. These buttons are used to toggle the camera and microphone on and off.
-
-<!-- ## Deploying openvidu-custom-toolbar
-
-#### 1) Build the docker image
-
-Under the root project folder, you can see the `openvidu-components/docker/` directory. Here it is included all the required files yo make it possible the deployment with OpenVidu.
-
-First of all, you will need to create the **openvidu-custom-toolbar** docker image. Under `openvidu-components/docker/` directory you will find the `create_image.sh` script. This script will create the docker image with the [openvidu-basic-node](application-server/openvidu-basic-node/) as application server and the static files.
-
-```bash
-./create_image.sh openvidu/openvidu-custom-toolbar-demo:X.Y.Z openvidu-custom-toolbar
-```
-
-The script needs two parameters:
-
-1. The name of the docker image to create.
-2. The name of the tutorial folder.
-
-This script will create an image named `openvidu/openvidu-custom-toolbar-demo:X.Y.Z`. This name will be used in the next step.
-
-#### 2) Deploy the docker image
-
-Time to deploy the docker image. You can follow the [Deploy OpenVidu based application with Docker](/deployment/deploying-openvidu-apps/#with-docker) guide for doing this. -->

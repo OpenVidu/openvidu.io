@@ -7,12 +7,7 @@ import re
 import pytest
 
 from ovweb.config import ConfigError, parse_site_config
-from ovweb.redirects import (
-    RedirectError,
-    render_redirect,
-    resolve_file_redirects,
-    resolve_patterns,
-)
+from ovweb.redirects import RedirectError, render_redirect, resolve_file_redirects
 
 MINIMAL_LAYOUT = {
     "site_url": "https://openvidu.io",
@@ -25,16 +20,12 @@ MINIMAL_LAYOUT = {
 }
 
 
-def build(files=(), patterns=(), defaults=None):
+def build(files=(), defaults=None):
     return parse_site_config(
         {
-            "schema": 1,
+            "schema": 2,
             "layout": MINIMAL_LAYOUT,
-            "redirects": {
-                "defaults": defaults or {},
-                "files": list(files),
-                "patterns": list(patterns),
-            },
+            "redirects": {"defaults": defaults or {}, "files": list(files)},
         },
         source="<test>",
     )
@@ -106,6 +97,13 @@ def test_named_version_root_location():
 def test_path_template_interpolates_the_version():
     config = build([{"id": "r", "at": "{version}/docs/x/index.html", "to": "../"}])
     assert only(config, "3.8").path == "3.8/docs/x/index.html"
+
+
+def test_an_at_path_without_the_placeholder_is_used_verbatim():
+    """A rule can name one fixed location instead of one per version."""
+    config = build([{"id": "r", "at": "docs/index.html", "to": "latest/docs/", "relative": False}])
+    assert only(config, "3.8").path == "docs/index.html"
+    assert only(config, "3.2").path == "docs/index.html"
 
 
 def test_canonical_interpolates_site_url_and_version():
@@ -204,6 +202,17 @@ def test_a_target_that_could_break_out_of_its_context_is_rejected(target):
         resolve_file_redirects(config, "3.8")
 
 
+def test_a_target_may_carry_a_fragment():
+    """Converging pages land on the section that absorbed them, not just the page."""
+    config = build([{"id": "r", "at": "{version}/docs/faq/index.html", "to": "../how-to/#backup"}])
+    resolved = only(config, "3.8")
+    assert resolved.to == "../how-to/#backup"
+
+    page = render_redirect(resolved)
+    assert '<meta http-equiv="refresh" content="0; url=../how-to/#backup">' in page
+    assert '<a href="../how-to/#backup">' in page
+
+
 def test_config_rejects_a_non_html_at_path():
     with pytest.raises(ConfigError, match="HTML file"):
         build([{"id": "r", "at": "{version}/docs/", "to": "../"}])
@@ -276,48 +285,94 @@ def only_version_root(config, version):
     )
 
 
-# -- 404 patterns ------------------------------------------------------------------------
+# -- version bands whose target arrived later --------------------------------------------
 
 
-def test_patterns_expand_per_versioned_page(config):
-    ids = [pattern.id for pattern in resolve_patterns(config)]
-    assert "unversioned-versioned-page:docs" in ids
-    assert "unversioned-versioned-page:meet" in ids
-
-
-def test_patterns_keep_config_order(config):
-    """The router stops at the first match, so order is behaviour."""
-    ids = [pattern.id for pattern in resolve_patterns(config)]
-    assert ids.index("legacy-patch-version-root") < ids.index("unversioned-versioned-page:docs")
-
-
-@pytest.mark.parametrize(
-    ("path", "expected"),
-    [
-        ("/3.4.1", "/3.4/"),
-        ("/3.4.1/", "/3.4/"),
-        ("/3.4.1/docs/self-hosting/", "/3.4/docs/self-hosting/"),
-        ("/3.0.0-beta2/docs/", "/3.0/docs/"),
-        ("/docs/self-hosting/", "/latest/docs/self-hosting/"),
-        ("/meet/", "/latest/meet/"),
-    ],
+MEET_REORGANISATION_RULES = (
+    "moved-meet-features-users",
+    "moved-meet-features-rooms",
+    "moved-meet-features-live-captions",
+    "moved-meet-features-recordings",
 )
-def test_patterns_produce_the_documented_redirects(config, path, expected):
-    """Evaluated with Python's regex engine, which agrees with JavaScript on these patterns.
 
-    `/3.4.1` with no trailing path is the case the single-rule version got wrong: replacing an
-    unmatched group yields "" in JavaScript, so it produced "/3.4" instead of "/3.4/".
+
+def test_the_meet_reorganisation_rules_start_at_3_8_not_3_7(config):
+    """The reorganisation shipped in 3.8, and 3.7 still publishes the pages these rules replace,
+    so a stub installed there would overwrite a real page.
+
+    A rule's gate follows the release a change belongs to. What a version folder currently holds is
+    evidence of what was published, which is not the same thing.
     """
-    for pattern in resolve_patterns(config):
-        compiled = re.compile(pattern.match)
-        if compiled.match(path):
-            replacement = re.sub(r"\$(\d)", r"\\\1", pattern.to)
-            assert compiled.sub(replacement, path) == expected
-            return
-    raise AssertionError(f"no pattern matched {path}")
+    for version in ("3.6", "3.7"):
+        installed = {item.rule_id for item in resolve_file_redirects(config, version)}
+        assert not installed & set(MEET_REORGANISATION_RULES), version
+
+    installed = {item.rule_id for item in resolve_file_redirects(config, "3.8")}
+    assert set(MEET_REORGANISATION_RULES) <= installed
 
 
-@pytest.mark.parametrize("path", ["/", "/pricing/", "/latest/docs/", "/3.8/docs/", "/docs"])
-def test_patterns_leave_valid_paths_alone(config, path):
-    for pattern in resolve_patterns(config):
-        assert not re.compile(pattern.match).match(path), (pattern.id, path)
+def test_both_oracle_tutorial_rules_start_at_3_7(config):
+    """Neither Oracle install tutorial comes back when 3.7 is rebuilt, so both are redirected.
+
+    The PRO one was removed before 3.7 shipped. The community one was removed *during* 3.7's life
+    as outdated, and a rebuild keeps it deleted rather than resurrecting instructions the team had
+    already found wrong — which is why the two gates were decided one at a time.
+    """
+    installed = {item.rule_id for item in resolve_file_redirects(config, "3.7")}
+    assert "removed-oracle-install-tutorial-pro" in installed
+    assert "removed-oracle-install-tutorial-community" in installed
+
+
+#: Dead URLs left without a rule on purpose. The first five were never part of a release: they
+#: reached the site only through a version folder that briefly served unreleased documentation, and
+#: were renamed before shipping, so redirecting them would preserve URLs that should not have
+#: existed. The last is a generated API page for a class that was deleted.
+DELIBERATELY_UNCOVERED = {
+    "meet/embedded/tutorials/external-members/",
+    "meet/embedded/tutorials/registered-members/",
+    "meet/features/rooms/creation-management/",
+    "meet/features/recordings/creation-management/",
+    "meet/features/rooms/appearance/",
+    "docs/reference-docs/openvidu-components-angular/injectables/E2eeService.html",
+}
+
+
+def test_every_dead_page_of_every_version_has_a_rule(config):
+    """Every URL a published version folder holds and the newest does not needs a rule, or the
+    exclusion above.
+
+    Fails both ways: a rule quietly dropped from ovweb.yaml reinstates a 404 that used to rank, and
+    an exclusion quietly gaining one revives a URL that was retired on purpose.
+    """
+    dead = {
+        # Found by checking a Search Console export against the live site.
+        "docs/self-hosting/faq/",
+        "docs/self-hosting/how-to-guides/force-443-tls/",
+        "docs/self-hosting/single-node/oracle/install-tutorial/",
+        "docs/self-hosting/single-node-pro/oracle/install-tutorial/",
+        "meet/embedded/tutorials/direct-link/",
+        "meet/embedded/tutorials/recordings/",
+        "meet/embedded/tutorials/webcomponent/",
+        "meet/embedded/tutorials/webcomponent-advanced/",
+        "meet/embedded/tutorials/webhooks/",
+        "meet/features/live-captions/",
+        "meet/features/recordings/",
+        "meet/features/rooms-and-meetings/",
+        "meet/features/users-and-permissions/",
+        # Found by scanning every version folder for what the newest does not serve.
+        "docs/openvidu-call/",
+        "docs/openvidu-call/docs/",
+        "docs/tutorials/advanced-features/recording-advanced/",
+        "docs/tutorials/advanced-features/recording-basic/",
+        *DELIBERATELY_UNCOVERED,
+    }
+    installed = set()
+    for item in resolve_file_redirects(config, "3.8"):
+        path = item.path[len("3.8/") :]
+        installed.add(path[: -len("index.html")] if path.endswith("/index.html") else path)
+
+    assert not dead - installed - DELIBERATELY_UNCOVERED, (
+        f"no rule covers {sorted(dead - installed - DELIBERATELY_UNCOVERED)}"
+    )
+    revived = installed & DELIBERATELY_UNCOVERED
+    assert not revived, f"these were retired on purpose, not to be redirected: {sorted(revived)}"

@@ -44,8 +44,8 @@ The advanced wizard guides you through the following steps:
 
 Reopen the configuration wizard for an existing room from the **"Rooms"** page or the [room details page](#room-details) to change its **features**, **access** settings and **recording** options, as long as no meeting is currently active.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Room configuration wizard editing an existing room"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Room configuration wizard editing an existing room"/></a>
 
 !!! info
 
@@ -75,8 +75,8 @@ The **"Rooms"** page lists every room available to you, with its owner, status, 
 - [Delete rooms](#delete-rooms) individually or in bulk.
 - Share [room access links](access.md).
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-dark.png#only-dark" loading="lazy" class="round-corners" alt="Rooms page listing rooms with their actions"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-light.png#only-light" loading="lazy" class="round-corners" alt="Rooms page listing rooms with their actions"/></a>
 
 ## Room details { #room-details }
 
@@ -85,8 +85,8 @@ Clicking a room opens its **details page**, which shows the room information and
 - **Recordings**: the [recordings](../recordings/overview.md) generated in this room, with play, download, share and delete actions (subject to [recording permissions](../recordings/overview.md#recording-permissions)).
 - **Room Members**: the [users and identified guests](../room-members/overview.md) explicitly added to the room. See [Room Members › Creation & Management](../room-members/management.md).
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-dark.png#only-dark" loading="lazy" class="round-corners" alt="Recordings tab of a room's detail page"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-light.png#only-light" loading="lazy" class="round-corners" alt="Recordings tab of a room's detail page"/></a>
 
 ## Delete rooms { #delete-rooms }
 
@@ -108,8 +108,8 @@ Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting
 
 Rooms can be configured with an **auto-deletion date**. You can set this date when [creating a room](#create-rooms). This helps keeping OpenVidu Meet clean and organized, avoiding clutter from old rooms that are no longer needed.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Auto-deletion date setting when creating a room"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Auto-deletion date setting when creating a room"/></a>
 
 ### Room auto-deletion policies
 
@@ -122,8 +122,8 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
     - `Force`: the room and all its recordings will be deleted.
     - `Close`: the room will be closed (no more meetings will be allowed in it) instead of deleted, maintaining its recordings.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png#only-dark" loading="lazy" class="control-height round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png#only-light" loading="lazy" class="control-height round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Auto-deletion policy options for the room and its recordings"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Auto-deletion policy options for the room and its recordings"/></a>
 
 ## Room Appearance { #room-appearance }
 
@@ -133,8 +133,8 @@ The visual appearance of your rooms (the color scheme of the meeting view) is co
 
     Room appearance can only be changed by **admin** users from the **"Configuration"** page. Unlike the rest of the room settings, it **cannot** be modified through the REST API.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-dark.png#only-dark" loading="lazy" class="round-corners"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-light.png#only-light" loading="lazy" class="round-corners"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-dark.png#only-dark" loading="lazy" class="round-corners" alt="Room appearance settings in the Configuration page"/></a>
+<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-light.png#only-light" loading="lazy" class="round-corners" alt="Room appearance settings in the Configuration page"/></a>
 
 You can set separately the color of:
 
@@ -148,17 +148,17 @@ You can also choose between a `light` and a `dark` background style, to ensure t
 
 ## REST API reference { #rest-api-reference }
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="\_blank"} for the full list of available endpoints, request bodies and response schemas.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](../../embedded/reference/rest-api.md). See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html){:target="_blank"} for the full list of available endpoints, request bodies and response schemas.
 
 | Operation                           | HTTP Method | Reference                                                                                                                                             |
 | ----------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create a room                       | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="\_blank"}       |
-| List rooms                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="\_blank"}         |
-| Bulk delete rooms                   | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRooms){:target="\_blank"}  |
-| Get a room                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="\_blank"}          |
-| Delete a room                       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoom){:target="\_blank"}       |
-| Get room config                     | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="\_blank"}    |
-| Update room config                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="\_blank"} |
-| Update roles permissions for a room | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomRoles){:target="\_blank"}  |
-| Update room access config           | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomAccess){:target="\_blank"} |
-| Update room status                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomStatus){:target="\_blank"} |
+| Create a room                       | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}       |
+| List rooms                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="_blank"}         |
+| Bulk delete rooms                   | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRooms){:target="_blank"}  |
+| Get a room                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"}          |
+| Delete a room                       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoom){:target="_blank"}       |
+| Get room config                     | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="_blank"}    |
+| Update room config                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="_blank"} |
+| Update roles permissions for a room | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomRoles){:target="_blank"}  |
+| Update room access config           | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomAccess){:target="_blank"} |
+| Update room status                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomStatus){:target="_blank"} |

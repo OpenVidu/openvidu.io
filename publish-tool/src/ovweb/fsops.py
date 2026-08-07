@@ -1,8 +1,6 @@
 """Filesystem primitives used by the post-processing pipeline.
 
-Thin and generic on purpose: the decisions live in the pure modules, this file only carries
-them out. The two subtleties worth knowing about are documented on
-:func:`iter_rewritable_files` and :func:`write_gzip`.
+Thin and generic: the decisions live in the pure modules, this file only carries them out.
 """
 
 from __future__ import annotations
@@ -13,18 +11,17 @@ from collections.abc import Callable, Iterable, Iterator
 from functools import partial
 from pathlib import Path
 
-#: Files above this size are not candidates for link rewriting. The largest text file the
-#: site builds is the search index (~3 MB), so this only ever excludes bundled media that
-#: happens to be UTF-8 decodable.
+#: Files above this size are not candidates for link rewriting. The largest text file the site
+#: builds is the search index at a few MB, so this only excludes bundled media.
 MAX_REWRITE_BYTES = 64 * 1024 * 1024
 
 
 def iter_rewritable_files(root: Path) -> Iterator[Path]:
-    """Yield every file under `root` that link rewriting may touch.
+    """Yield every file under `root` that link rewriting may touch, in sorted order.
 
-    Deliberately no extension allow-list: the built tree mixes .html, .js, .json, .xml, .txt,
-    .md and .css, and an allow-list would silently stop rewriting a new kind of file. Instead a
-    file holding a NUL byte is skipped, so a substitution can never corrupt a font or an image.
+    No extension allow-list: the built tree mixes .html, .js, .json, .xml, .txt, .md and .css,
+    and an allow-list would silently stop rewriting a new kind of file. Binary content is
+    excluded by :func:`rewrite_file` instead.
     """
     for path in sorted(root.rglob("*")):
         if not path.is_file() or path.is_symlink():
@@ -37,10 +34,10 @@ def iter_rewritable_files(root: Path) -> Iterator[Path]:
 def rewrite_file(path: Path, transform: Callable[[str], str]) -> bool:
     """Apply `transform` to one file's text. Returns whether anything changed.
 
-    Reads and writes bytes around a UTF-8 decode so a file that needs no change is not
-    rewritten at all, which also means a file with no trailing newline keeps not having one.
-
-    Returns `False` for a file that is not UTF-8 text, or that holds a NUL byte.
+    Reads and writes bytes around a UTF-8 decode, so a file that needs no change is not
+    rewritten at all and a file with no trailing newline keeps not having one. Returns `False`
+    for a file that holds a NUL byte or is not UTF-8 text, so a substitution can never corrupt
+    a font or an image.
     """
     original = path.read_bytes()
     if b"\x00" in original:
@@ -58,18 +55,12 @@ def rewrite_file(path: Path, transform: Callable[[str], str]) -> bool:
     return True
 
 
-def rewrite_tree(root: Path, transform: Callable[[str], str]) -> int:
-    """Apply `transform` to every rewritable file under `root`. Returns the change count."""
-    return rewrite_tree_per_file(root, lambda _path, text: transform(text))
-
-
 def rewrite_tree_per_file(root: Path, transform: Callable[[Path, str], str]) -> int:
-    """Like :func:`rewrite_tree`, but `transform` also receives each file's path.
+    """Apply `transform` to every rewritable file under `root`. Returns the change count.
 
-    For rewrites that depend on the file's *format* rather than its location. The built tree
-    publishes each page twice — as HTML and as the Markdown export the llmstxt plugin writes
-    beside it — and the same rule needs a different pattern in each, so the transform has to know
-    which one it is looking at.
+    `transform` receives each file's path as well as its text, because the built tree publishes
+    every page twice — as HTML and as the Markdown export beside it — and the same rule needs a
+    different pattern in each. A missing `root` is a no-op.
     """
     if not root.exists():
         return 0
@@ -98,9 +89,9 @@ def write_text(path: Path, text: str) -> None:
 def write_gzip(path: Path) -> Path:
     """Write `path.gz` beside `path`, deterministically.
 
-    gzip stores the source filename and modification time in its header, which would make the
-    output differ on every publish even when the sitemap had not changed. Zeroing the mtime
-    makes it a pure function of the input, so an unchanged sitemap stops churning the history.
+    gzip stores the source mtime in its header, which would make the output differ on every
+    publish even when the content had not changed. Zeroing it makes the blob a pure function of
+    the input, so an unchanged sitemap does not churn the history.
     """
     target = path.with_suffix(path.suffix + ".gz")
     data = path.read_bytes()

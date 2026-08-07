@@ -1,8 +1,7 @@
 """Build the ordered description of what a publish will do.
 
-Pure: :func:`build_plan` decides everything up front, so `--dry-run` can print the exact
-sequence without touching git, mike or the filesystem. The post-processing pipeline walks the
-same step list, which keeps the printed plan honest.
+Pure: :func:`build_plan` decides everything up front, so `--dry-run` prints the exact sequence
+without touching git, mike or the filesystem.
 """
 
 from __future__ import annotations
@@ -11,9 +10,9 @@ from .config import SiteConfig
 from .model import PublishPlan, ResolvedRedirect, Step
 from .redirects import resolve_file_redirects
 
-# The post-processing steps, in execution order. `scope` says
-# whether a step runs always, only when the root pages are refreshed ("latest"), or only when
-# they are left alone ("past").
+#: The post-processing steps, in execution order, as `(name, scope, title, detail)`. `scope` is
+#: `always`, `latest` (only when the root pages are refreshed) or `past` (only when they are
+#: left alone). Kept in step with the pipeline by `tests/unit/test_plan.py`, which runs it.
 POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     ("remove-overrides", "always", "Remove the theme override folder", "<version>/overrides/"),
     (
@@ -54,12 +53,36 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "Point links at the HTML page where no Markdown export exists",
         "checked against the tree as finally laid out, not against the MkDocs configuration",
     ),
-    ("install-redirects", "always", "Write the generated redirect pages", ""),
+    (
+        "install-redirects",
+        "always",
+        "Write the generated redirect pages",
+        "the `files` rules plus the tree-resolved expansions, never shadowing a real page",
+    ),
+    (
+        "mirror-unversioned",
+        "latest",
+        "Answer the versioned pages' unversioned URLs",
+        "one redirect page per page of the newest version; deleted and rebuilt in full",
+    ),
+    (
+        "alias-versions",
+        "always",
+        "Rebuild the legacy patch-version folders",
+        "folders aliasing the published minor mirror its tree; others are left alone",
+    ),
     (
         "prune-version-sitemap",
         "always",
         "Drop the root-served pages from this version's sitemap",
         "the version selector fetches it to keep a reader on the same page across a switch",
+    ),
+    (
+        "sync-version-sitemap",
+        "always",
+        "List the generated redirects in the version sitemap",
+        "so the version selector resolves a moved page through its stub instead of falling "
+        "back to the version root",
     ),
     ("sync-releases", "always", "Splice the newest release notes across versions", ""),
     (

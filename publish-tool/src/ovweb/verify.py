@@ -1,8 +1,7 @@
 """Assert the invariants of a published gh-pages tree.
 
-Deliberately written so it passes on the *live* site as it stands today: that makes it the
-cheapest available check that the tool's understanding of the published layout is right, and
-it turns "the publish worked" into something a machine can answer.
+Written so it passes on the live site as it stands, which makes it both a post-publish signal
+and a check that the tool's model of the published layout is right.
 """
 
 from __future__ import annotations
@@ -14,13 +13,21 @@ from pathlib import Path
 
 from . import fsops
 from .config import SiteConfig
-from .pipeline.postprocess import GENERATED_MARKER, LLMS_TXT
+from .discovery import latest_in_tree, version_folders, versions_in_tree
+from .expand import alias_entries, expand_alias, mirror_redirects, mirror_rule, scan_tree
+from .pipeline.postprocess import LLMS_TXT
+from .redirects import (
+    REDIRECT_MAX_BYTES,
+    REFRESH_TARGET,
+    RedirectError,
+    is_generated_redirect,
+)
 from .rewrite.markdown import SUFFIX as MARKDOWN
-from .versions import alias_target, read_versions_json
+from .rewrite.sitemap import stub_loc
 
 SELF_URL_TAGS = re.compile(r'(?:rel="canonical" href|property="og:url" content)="([^"]+)"')
-RELATIVE_PARENT_HREF = re.compile(r'href="((?:\.\./)+[^"]*)"')
 SITEMAP_LASTMOD = re.compile(r"<lastmod>([^<]*)</lastmod>")
+SITEMAP_LOC = re.compile(r"<loc>([^<]+)</loc>")
 
 
 @dataclass
@@ -30,14 +37,12 @@ class Finding:
     detail: str
 
 
-def verify(
-    tree: Path, *, config: SiteConfig, versions: tuple[str, ...] | None = None
-) -> list[Finding]:
+def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
     """Return every invariant violation found in `tree`. An empty list means it is sound."""
     findings: list[Finding] = []
 
-    published = list(versions) if versions else _published_versions(tree)
-    latest = _latest_version(tree)
+    published = versions_in_tree(tree)
+    latest = latest_in_tree(tree)
 
     findings += _check_versions_json(tree, published)
     for version in published:
@@ -54,29 +59,11 @@ def verify(
     findings += _check_root_exports_use_latest(tree, config, latest)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
+    findings += _check_root_sitemap_stub_free(tree)
+    findings += _check_unversioned_mirror(tree, config, latest)
+    findings += _check_alias_folders(tree, config)
+    findings += _check_redirect_targets_resolve(tree, config, published, latest)
     return findings
-
-
-def _published_versions(tree: Path) -> list[str]:
-    path = tree / "versions.json"
-    if not path.is_file():
-        return [
-            entry.name
-            for entry in sorted(tree.iterdir())
-            if entry.is_dir() and re.fullmatch(r"\d+\.\d+", entry.name)
-        ]
-    return [entry.version for entry in read_versions_json(fsops.read_text(path))]
-
-
-def _latest_version(tree: Path) -> str | None:
-    """Which version `latest` points at. mike materialises the alias as a symlink."""
-    alias = tree / "latest"
-    if alias.is_symlink():
-        return Path(alias.readlink()).name
-    versions = tree / "versions.json"
-    if versions.is_file():
-        return alias_target(read_versions_json(fsops.read_text(versions)), "latest")
-    return None
 
 
 def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
@@ -88,12 +75,7 @@ def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
                 Finding("versions-json", "versions.json", f"{version} has no folder in the tree")
             )
 
-    on_disk = {
-        entry.name
-        for entry in tree.iterdir()
-        if entry.is_dir() and re.fullmatch(r"\d+\.\d+", entry.name)
-    }
-    for orphan in sorted(on_disk - set(published)):
+    for orphan in sorted(set(version_folders(tree)) - set(published)):
         findings.append(
             Finding(
                 "versions-json",
@@ -105,21 +87,87 @@ def _check_versions_json(tree: Path, published: list[str]) -> list[Finding]:
     return findings
 
 
+def _check_redirect_targets_resolve(
+    tree: Path, config: SiteConfig, published: list[str], latest: str | None
+) -> list[Finding]:
+    """No generated redirect may point at a page that does not exist, or at another redirect.
+
+    A redirect into a 404 is worse than the 404 it replaced: the visitor takes two hops to reach
+    nothing, and a crawler is told the content moved somewhere it did not. This happens when a
+    rule's `versions` gate is wider than its target's — a rule for a page renamed in 3.8, gated
+    `>=3.7`, materialises in 3.7 too, where the successor does not exist yet. The fix is a `when`
+    override for the older band rather than a wider gate.
+
+    A redirect into another redirect is a chain: the expansions collapse them at generation
+    time, so one surviving to a published tree means a `files` rule targets another rule's stub.
+    """
+    directories = [tree / version for version in published]
+    directories += [tree / section for section in config.layout.versioned_pages]
+    directories += [tree / folder for _, folder, _ in alias_entries(config)]
+    findings = []
+
+    for root in directories:
+        if not root.is_dir() or root.is_symlink():
+            continue
+        for path in sorted(root.rglob("*.html")):
+            if path.is_symlink() or path.stat().st_size > REDIRECT_MAX_BYTES:
+                continue
+            if not is_generated_redirect(path):
+                continue
+            text = fsops.read_text(path)
+            match = REFRESH_TARGET.search(text)
+            where = str(path.relative_to(tree))
+            if match is None:
+                findings.append(Finding("redirect-target", where, "has no meta refresh target"))
+                continue
+            # The fragment is the browser's business; existence is decided by the path.
+            target = match.group(1).partition("#")[0]
+            if not target:
+                continue
+            if target.startswith("/"):
+                # Site-absolute, so resolved from the tree root. `latest` is a symlink, which
+                # only resolves on a checkout that has it; name the version instead.
+                relative = target.lstrip("/")
+                if latest is not None:
+                    relative = re.sub(r"^latest/", f"{latest}/", relative)
+                resolved = tree / relative
+            else:
+                resolved = path.parent / target
+            served = resolved / "index.html" if target.endswith("/") else resolved
+            if not served.is_file():
+                findings.append(
+                    Finding(
+                        "redirect-target",
+                        where,
+                        f"redirects to {target!r}, which does not exist in this tree "
+                        f"({served.relative_to(tree)}); the rule's version gate is wider than "
+                        "its target's, so it needs a `when` override for the older versions",
+                    )
+                )
+            elif is_generated_redirect(served):
+                findings.append(
+                    Finding(
+                        "redirect-target",
+                        where,
+                        f"redirects to {target!r}, which is itself a generated redirect; point "
+                        "the rule at the final destination instead of chaining",
+                    )
+                )
+    return findings
+
+
 def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Finding]:
     """A bare version root must redirect into the documentation.
 
-    The stricter assertions are the interesting ones: a meta refresh, so it works for a client
-    that does not run JavaScript, and a relative target, because `latest` is a symlink to a
-    version folder and the same file answers at both URLs — an absolute target would leak a
-    version number to visitors of the stable one.
+    Also asserts a meta refresh, so it works without JavaScript, and a relative target, because
+    `latest` is a symlink to a version folder and the same file answers at both URLs.
     """
     where = f"{version}/index.html"
     index = version_dir / "index.html"
     if not index.is_file():
         return [Finding("version-root", where, "missing")]
 
-    text = fsops.read_text(index)
-    if GENERATED_MARKER not in text:
+    if not is_generated_redirect(index):
         return [
             Finding(
                 "version-root",
@@ -129,6 +177,7 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
             )
         ]
 
+    text = fsops.read_text(index)
     findings = []
     if 'http-equiv="refresh"' not in text:
         findings.append(
@@ -148,18 +197,20 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
 
 
 def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list[Finding]:
-    """A version folder must carry a correctly pruned sitemap.
+    """A version folder must carry a correctly pruned and stub-synced sitemap.
 
-    Not for crawlers — nothing links to it and `robots.txt` does not name it — but because the
-    theme's version selector fetches it to decide whether the page the reader is on exists in the
-    version they picked. All three assertions below are things that silently turn the feature off
-    and leave every switch dropping the reader on the version root:
+    Not for crawlers, but because the theme's version selector fetches it to decide whether the
+    page the reader is on exists in the version they picked. Each of the assertions below
+    silently degrades that on its own:
 
-    * the file is missing, so the fetch fails;
+    * the file is missing, so the fetch fails and every switch lands on the version root;
     * the version-root entry is absent, so the longest common prefix of the remaining URLs is not
       itself an entry, which the selector requires before it resolves anything;
     * a root-served page is still listed, so a reader on `/pricing/` is sent to
-      `/<version>/pricing/`, which is a 404.
+      `/<version>/pricing/`, which is a 404;
+    * a generated redirect is not listed, so a reader switching onto a moved page is dropped on
+      the version root instead of being forwarded;
+    * an entry names a URL nothing serves, so the selector sends a reader into a 404.
     """
     where = f"{version}/sitemap.xml"
     path = tree / version / "sitemap.xml"
@@ -184,6 +235,7 @@ def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list
                 "common prefix of every URL before it will resolve one",
             )
         )
+    root_served = tuple(f"/{version}/{page}/" for page in config.layout.non_versioned_pages)
     for page in config.layout.non_versioned_pages:
         if f"/{version}/{page}/" in text:
             findings.append(
@@ -194,6 +246,70 @@ def _check_version_sitemap(tree: Path, version: str, config: SiteConfig) -> list
                     "version selector would send a reader there and get a 404",
                 )
             )
+
+    base_url = config.layout.base_url
+    listed = set(SITEMAP_LOC.findall(text))
+    stubs = scan_tree(tree, (version,)).stub_targets
+    missing = sorted({stub_loc(base_url, stub) for stub in stubs} - listed)
+    if missing:
+        findings.append(
+            Finding(
+                "version-sitemap",
+                where,
+                f"{len(missing)} generated redirect(s) not listed (e.g. {missing[0]}), so the "
+                "version selector cannot resolve a reader onto them; run `ovweb redirects apply`",
+            )
+        )
+    prefix = f"{base_url}/"
+    dead = sorted(
+        loc
+        for loc in listed
+        if loc.startswith(prefix)
+        and not any(path in loc for path in root_served)  # already reported above
+        and not (tree / _served_path(loc[len(prefix) :])).is_file()
+    )
+    if dead:
+        findings.append(
+            Finding(
+                "version-sitemap",
+                where,
+                f"lists {len(dead)} URL(s) nothing serves (e.g. {dead[0]}); the version "
+                "selector would send a reader there and get a 404",
+            )
+        )
+    return findings
+
+
+def _served_path(urlpath: str) -> str:
+    """The tree-relative file GitHub serves for a URL path."""
+    return f"{urlpath}index.html" if urlpath.endswith("/") or urlpath == "" else urlpath
+
+
+def _check_root_sitemap_stub_free(tree: Path) -> list[Finding]:
+    """The crawler-facing root sitemap must list pages, never generated redirects.
+
+    A redirect stub is `noindex`; listing one asks crawlers to fetch a URL they are then told
+    to forget, and teaches them to distrust the sitemap. Stubs belong only in the version
+    sitemaps, which exist for the version selector.
+    """
+    path = tree / "sitemap.xml"
+    if not path.is_file():
+        return []
+    findings = []
+    for loc in SITEMAP_LOC.findall(fsops.read_text(path)):
+        _, _, urlpath = loc.partition("//")
+        _, _, urlpath = urlpath.partition("/")
+        served = tree / _served_path(urlpath)
+        if served.is_file() and is_generated_redirect(served):
+            findings.append(
+                Finding(
+                    "root-sitemap",
+                    "sitemap.xml",
+                    f"lists {loc}, which is served by a generated redirect — crawlers are "
+                    "being sent to a noindex page; remove the page from the build or adjust "
+                    "the rule that overwrites it",
+                )
+            )
     return findings
 
 
@@ -202,9 +318,9 @@ def _check_versioned_pages_reach_root_files(
 ) -> list[Finding]:
     """A versioned page must not link to a root file relative to its own version folder.
 
-    The RSS feeds, `robots.txt` and friends are served from the site root; a version folder does
-    not keep a copy. The theme emits two `<link rel="alternate">` feed references on every page,
-    which resolve inside the version folder unless they are made root-absolute.
+    The RSS feeds, `robots.txt` and friends are served from the site root and a version folder
+    keeps no copy, so the two `<link rel="alternate">` feed references the theme emits on every
+    page resolve nowhere unless they are made root-absolute.
     """
     names = [name for name in config.layout.root_files if not name.startswith("index.")]
     if not names:
@@ -235,9 +351,8 @@ def _check_exports_reach_root_pages(tree: Path, version: str, config: SiteConfig
     """A version's Markdown exports must not link to a root page under the version.
 
     The llmstxt plugin absolutises every link against the build's `site_url`, which mike makes
-    versioned, so a link to a page that is only ever served from the site root comes out as a URL
-    that has never existed. Unlike the stale-version problem this is a hard 404, and it is
-    invisible to a link checker that reads the HTML only.
+    versioned, so a link to a page served only from the site root comes out as a URL that has
+    never existed — a hard 404, and invisible to a link checker that reads the HTML only.
     """
     findings = []
     for page in config.layout.versioned_pages:
@@ -272,13 +387,12 @@ def _check_root_exports_use_latest(
 ) -> list[Finding]:
     """No file served from the root may pin the version `latest` currently points at.
 
-    Covers the site's AI-facing channel: `llms.txt` and the `index.md` export published beside
-    every root page. They are rebuilt from the newest version
-    on every publish, so a URL naming that version is stale the moment the next one ships — and
-    for a page served only from the root, it never resolved at all.
+    Covers the site's AI-facing channel: `llms.txt` and the `index.md` export beside every root
+    page. They are rebuilt from the newest version on every publish, so a URL naming that version
+    is stale the moment the next one ships.
 
     A pin to some *other* version is left alone: that is how a release-notes page links back to
-    the release before it, and the point of publishing versioned documentation.
+    the release before it.
     """
     if latest is None:
         return []
@@ -310,13 +424,11 @@ def _check_root_exports_use_latest(
 def _check_root_sitemap_lastmod(tree: Path) -> list[Finding]:
     """Every `<lastmod>` in the root sitemap must be a real date, and not in the future.
 
-    The values come from each page's last commit (see `ovweb.sources`), which is only useful to a
-    crawler while it stays credible: a malformed value invalidates the entry, and a future one is
-    the signature of a clock or timezone bug rather than of an edit.
+    The values come from each page's last commit (see :mod:`ovweb.sources`). A malformed value
+    invalidates the entry; a future one is the signature of a clock or timezone bug.
 
     Deliberately *not* asserted: that the values differ from each other. A commit that touches
-    every page — a site-wide frontmatter pass, say — legitimately gives all of them the same date,
-    and a check that failed on that would be a check that fails on the truth.
+    every page legitimately gives all of them the same date.
     """
     path = tree / "sitemap.xml"
     if not path.is_file():
@@ -342,6 +454,114 @@ def _check_root_sitemap_lastmod(tree: Path) -> list[Finding]:
     return findings
 
 
+def _check_unversioned_mirror(tree: Path, config: SiteConfig, latest: str | None) -> list[Finding]:
+    """The unversioned mirror must be exactly one stub per page of the newest version.
+
+    Asserted as set equality against the same function the publish generates it with, which
+    catches both failures: a **missing** stub means an unversioned URL 404s for crawlers again,
+    an **extra** one means a renamed or removed page now redirects into a 404.
+    """
+    rule = mirror_rule(config)
+    if rule is None or latest is None:
+        return []
+
+    try:
+        expected = {redirect.path for redirect in mirror_redirects(tree, config, latest=latest)}
+    except RedirectError as error:
+        return [Finding("mirror", str(tree), str(error))]
+
+    return _check_owned_scope(
+        tree,
+        roots=[tree / section for section in getattr(config.layout, rule.for_each)],
+        expected=expected,
+        check="mirror",
+        rebuild="Publish latest, or run `ovweb redirects apply`, to rebuild the mirror",
+    )
+
+
+def _check_alias_folders(tree: Path, config: SiteConfig) -> list[Finding]:
+    """Every legacy patch folder must be exactly one stub per page of the minor it aliases.
+
+    A folder whose minor is not in the tree is skipped, matching how the folders are built.
+    """
+    findings: list[Finding] = []
+    for rule, folder, minor in alias_entries(config):
+        if not (tree / minor).is_dir():
+            continue
+        expected = {
+            redirect.path
+            for redirect in expand_alias(config, rule, folder, minor, scan_tree(tree, (minor,)))
+        }
+        if not (tree / folder).is_dir():
+            findings.append(
+                Finding(
+                    "version-alias",
+                    folder,
+                    f"folder not built, so /{folder}/ URLs answer 404; run `ovweb redirects apply`",
+                )
+            )
+            continue
+        findings += _check_owned_scope(
+            tree,
+            roots=[tree / folder],
+            expected=expected,
+            check="version-alias",
+            rebuild=f"Publish {minor}, or run `ovweb redirects apply`, to rebuild the folder",
+        )
+    return findings
+
+
+def _check_owned_scope(
+    tree: Path, *, roots: list[Path], expected: set[str], check: str, rebuild: str
+) -> list[Finding]:
+    """Set equality over a directory ovweb owns outright: every file a stub, no more, no less."""
+    found: set[str] = set()
+    findings: list[Finding] = []
+
+    for root in roots:
+        if not root.is_dir():
+            continue
+        for path in sorted(root.rglob("*")):
+            if path.is_dir():
+                continue
+            where = path.relative_to(tree).as_posix()
+            if is_generated_redirect(path):
+                found.add(where)
+                continue
+            # Reported here rather than counted as stale below: the reason it does not belong
+            # is different, it is not a redirect at all.
+            findings.append(
+                Finding(
+                    check,
+                    where,
+                    "sits on a generated path but is not a generated redirect, so the next "
+                    "rebuild would delete it",
+                )
+            )
+
+    missing = sorted(expected - found)
+    if missing:
+        findings.append(
+            Finding(
+                check,
+                missing[0],
+                f"one of {len(missing)} URL(s) with no redirect page: they 404 for a crawler. "
+                + rebuild,
+            )
+        )
+    stale = sorted(found - expected)
+    if stale:
+        findings.append(
+            Finding(
+                check,
+                stale[0],
+                f"one of {len(stale)} redirect page(s) no current page justifies, so they may "
+                "redirect into a 404. " + rebuild,
+            )
+        )
+    return findings
+
+
 def _check_export_links_resolve(
     tree: Path, config: SiteConfig, latest: str | None
 ) -> list[Finding]:
@@ -349,11 +569,10 @@ def _check_export_links_resolve(
 
     The llmstxt plugin appends `index.md` to every relative directory link without checking that
     the page has an export, so any page outside its `sections` list is advertised at a URL that
-    404s. The publish repairs those links against the tree; this is the assertion that it did.
+    404s. The publish repairs those links against the tree.
 
-    Only the newest version and the site root are checked. Older folders keep whatever their own
-    last publish produced, so reporting them would be reporting work that a publish of that
-    version — not this check — has to do.
+    Only the newest version and the site root are checked: older folders keep whatever their own
+    last publish produced, which only a publish of that version can change.
     """
     if latest is None:
         return []
@@ -396,8 +615,8 @@ def _check_root_search_index_uses_latest(
     """The root index must not send a searcher to a version-pinned URL.
 
     It is a copy of the newest version's index, so its versioned hits name that version unless
-    they are repointed. Each version's own index keeps its version on purpose, so that searching
-    inside a version returns that version's pages — only the root copy is checked here.
+    they are repointed. Each version's own index keeps its version on purpose, so only the root
+    copy is checked here.
     """
     path = tree / "search" / "search_index.json"
     if not path.is_file():

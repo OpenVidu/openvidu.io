@@ -1,12 +1,11 @@
 """The `mkdocs-llmstxt` preprocess hook, checked against the `autoclean` it replaces.
 
-Two halves, and the split is the point. The first half runs the module and the plugin's own
-`autoclean` over the same markup and requires **identical** output — that is the promise that
-turning `autoclean: false` changed nothing except on purpose. The second half covers the four
-deviations, each of which the first half deliberately excludes.
+Two halves, and the split is the point. The first runs the module and the plugin's own `autoclean`
+over the same markup and requires **identical** output, which is the promise that turning
+`autoclean: false` changed nothing except on purpose. The second covers the four deviations, each of
+which the first half excludes.
 
-The end-to-end proof over the real site is the differential build described in the README
-("Testing and parity").
+The README describes the differential build that proves the same thing over the real site.
 """
 
 from __future__ import annotations
@@ -114,7 +113,7 @@ def test_the_comparison_table_header_recovers_the_product_names():
 
 
 def test_a_link_wrapping_a_video_becomes_its_alt_text_not_an_empty_link():
-    """autoclean left this anchor alone, so markdownify wrote `[](…mp4)` — the \\[[](…)\\] noise."""
+    """`autoclean` leaves this anchor alone, so markdownify writes an empty `[](…mp4)` link."""
     markup = (
         '<p><a class="glightbox" href="/assets/videos/demo.mp4">'
         '<video src="/assets/videos/demo-preview.mp4" poster="/p.jpg"></video></a></p>'

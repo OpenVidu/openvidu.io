@@ -1,17 +1,17 @@
-"""The MkDocs hook's two per-build jobs: llms.txt entries, and the sitemap's `<lastmod>`.
+"""The MkDocs hook's two jobs: llms.txt entries, and the sitemap's `<lastmod>`.
 
 `on_page_content` reaches into two private attributes of `llmstxt` — `_sections` for the
-description and `_md_pages` for the title — which is the one thing there a plugin upgrade could
-break. Those tests pin what matters: both values are taken from the page, a listed page missing
-either fails the build, and a plugin that no longer exposes those attributes fails the build too
-instead of quietly publishing an llms.txt full of nav labels and no descriptions.
+description and `_md_pages` for the title — which is the one thing here a plugin upgrade could
+break. Those tests pin that both values come from the page, that a listed page missing either fails
+the build, and that a plugin no longer exposing those attributes fails the build too rather than
+quietly publishing an llms.txt full of nav labels and no descriptions.
 
 `on_env` sets `page.update_date`, which MkDocs' sitemap template publishes as `<lastmod>`. What is
-pinned there is the part that has to hold on a real build: a generated page gets no date at all,
-and anything that stops git from answering leaves MkDocs' build date in place rather than failing.
+pinned is what has to hold on a real build: a generated page gets no date at all, and anything that
+stops git answering leaves MkDocs' build date in place rather than failing.
 
-`_MDPageInfo` is imported from the plugin rather than restated, so the fixture cannot drift from
-the record the plugin actually writes.
+`_MDPageInfo` is imported from the plugin rather than restated, so the fixture cannot drift from the
+record the plugin writes.
 """
 
 from __future__ import annotations
@@ -283,6 +283,7 @@ def test_a_view_shape_the_hook_does_not_know_is_left_alone():
 
 def test_the_url_shapes_come_from_the_plugins_own_configuration():
     """Read from the public config, so renaming `category/` in mkdocs.yml keeps working."""
+
     class Options(dict):
         """Stands in for a mkdocs plugin config: dict access plus attributes."""
 
@@ -307,6 +308,9 @@ def test_no_blog_plugin_means_no_view_metadata(tmp_path, monkeypatch):
     """`_blog_url_shapes` returns None and `on_env` must not try to describe anything."""
     item = doc_file("blog/archive/2026/07.md", generated=True)
     monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root: {})
-    on_env("env", {"docs_dir": str(tmp_path / "docs"), "plugins": {}},
-           SimpleNamespace(documentation_pages=lambda: [item]))
+    on_env(
+        "env",
+        {"docs_dir": str(tmp_path / "docs"), "plugins": {}},
+        SimpleNamespace(documentation_pages=lambda: [item]),
+    )
     assert item.page.update_date == "", "still no lastmod, which does not depend on the blog plugin"

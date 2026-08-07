@@ -14,7 +14,7 @@ description: "Deploy OpenVidu Single Node PRO on your own servers with the guide
 
 !!! info
     
-    OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target=_blank} to get your license key.
+    OpenVidu Single Node Pro is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on-premises. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
@@ -194,10 +194,10 @@ systemctl start openvidu
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target=_blank}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target=_blank}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target=_blank}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target=_blank}
+- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
+- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
+- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
+- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
 
 ## Configure your application to use the deployment
 

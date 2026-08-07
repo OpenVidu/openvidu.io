@@ -8,6 +8,7 @@ from ovweb.releases import (
     ARTICLE_MARKER,
     TOC_MARKER,
     DestinationRegionError,
+    RegionError,
     SourceRegionError,
     find_region,
     splice_releases,
@@ -59,6 +60,19 @@ def test_counts_nested_navs_rather_than_stopping_at_the_first_close():
     start, end = find_region(nested, TOC_MARKER)
     assert nested[start:end] == nested
     assert nested[end - len("</nav>") : end] == "</nav>"
+
+
+def test_an_element_that_never_closes_is_reported_not_truncated():
+    """Better to leave the page as built than to splice a fragment cut at an arbitrary point."""
+    with pytest.raises(RegionError, match="unbalanced <nav>"):
+        find_region(f'{TOC_MARKER}<nav class="md-nav">', TOC_MARKER)
+
+
+def test_a_marker_can_be_found_after_an_offset():
+    """The table of contents appears twice, and both copies have to be replaced."""
+    text = f"{TOC_MARKER}</nav>{TOC_MARKER}</nav>"
+    first_end = find_region(text, TOC_MARKER)[1]
+    assert find_region(text, TOC_MARKER, first_end) == (first_end, len(text))
 
 
 def test_a_missing_marker_in_the_source_is_fatal():
