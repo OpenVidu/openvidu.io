@@ -56,7 +56,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { AgentDispatchClient } from 'livekit-server-sdk';
@@ -75,7 +75,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
 
     ```go
     import (
@@ -104,7 +104,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
 
     ```ruby
     require 'livekit'
@@ -131,7 +131,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
 
     ```java
     import io.livekit.server.AgentDispatchServiceClient;
@@ -156,7 +156,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 
-    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){target="\_blank"}
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
 
     ```python
     from livekit.api import LiveKitAPI, CreateAgentDispatchRequest
@@ -181,7 +181,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
 
     ```csharp
     using Livekit.Server.Sdk.Dotnet;
@@ -218,11 +218,11 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
              -d '{"agent_name": "AGENT_NAME", "room": "my-room"}'
         ```
 
-        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. Visit LiveKit docs: [Creating a token](../../reference/access-tokens.md#minting-a-token)
+        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. See [Creating a token](../../reference/access-tokens.md#minting-a-token)
 
         <br>
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
 
         ```bash
         export LIVEKIT_URL=https://my-openvidu-host

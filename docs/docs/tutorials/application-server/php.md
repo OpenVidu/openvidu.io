@@ -1,18 +1,20 @@
 ---
 title: "PHP application server tutorial"
 description: "Build a minimal PHP application server for OpenVidu with the LiveKit-compatible PHP SDK: issue access tokens and handle webhook events."
+tags:
+  - setupcustomgallery
 ---
 
 # PHP Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/php){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/php){ .md-button target="_blank" }
 
 This is a minimal server application built for PHP that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="\_blank"}.
+It internally uses [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -32,7 +34,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -118,7 +120,7 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" &
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="\_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}:
 
 1. Create an `AccessTokenOptions` object with the participant's identity.
 2. Create a `VideoGrant` object setting the necessary video grants options. `setRoomJoin` allows the user to join a room and `setRoomName` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).

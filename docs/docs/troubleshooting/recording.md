@@ -25,7 +25,7 @@ Recordings can be started **on-demand** or **automatically**:
     - `StartParticipantEgress`
     - `StartTrackEgress`
     - `StartWebEgress`
-- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](../reference/server-api.md) method: then the room will be automatically recorded during its lifetime. See [auto-egress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/autoegress/){:target="\_blank"} documentation for more details.
+- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](../reference/server-api.md) method: then the room will be automatically recorded during its lifetime. See [auto-egress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/autoegress/){:target="_blank"} documentation for more details.
 
 !!! warning
 
@@ -146,7 +146,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
       auto_create: false
     ```
 
-- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the [`RoomConfiguration`](../reference/server-api.md) in both the [`CreateRoom`](../reference/server-api.md) request and the [participant's access token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/frontends/reference/tokens-grants/#room-configuration){:target="\_blank"}. In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
+- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the [`RoomConfiguration`](../reference/server-api.md) in both the [`CreateRoom`](../reference/server-api.md) request and the [participant's access token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/frontends/reference/tokens-grants/#room-configuration){:target="_blank"}. In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
 - Increase the room timeout properties in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#config-files). This can reduce the probability of rooms being cleaned up before a participant tries to join:
 
     ```yaml

@@ -60,7 +60,7 @@ If you deploy OpenVidu on a cloud provider **without externalizing S3 or MongoDB
     - **Single Node**: snapshot the VM that runs the whole stack.
     - **Elastic & High Availability**: snapshot every master node. Media nodes can be reprovisioned because they do not keep stateful data.
 2. Follow your cloud provider's snapshot workflow:
-    - AWS: Check [EC2 backup and recovery with snapshots and AMIs](https://docs.aws.amazon.com/en_us/prescriptive-guidance/latest/backup-recovery/ec2-backup.html){:target="_blank" rel="noopener"}.
+    - AWS: Check [Amazon EBS snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html){:target="_blank" rel="noopener"} and [Amazon Machine Images (AMIs)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html){:target="_blank" rel="noopener"}.
     - Azure: Check [VM backups from VM settings](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-first-look-arm){:target="_blank" rel="noopener"}.
     - Google Cloud: Check [Backup and DR Service for Compute Engine instances and disks](https://docs.cloud.google.com/backup-disaster-recovery/docs/concepts/backupdr-for-compute-engine?hl=en){:target="_blank" rel="noopener"}.
 3. Automate snapshots using your provider's scheduler (AWS Backup, Azure Automation, Cloud Scheduler) for consistent recovery points.

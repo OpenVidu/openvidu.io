@@ -16,40 +16,32 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Everything needed for a real publish build. mkdocs-material and pygments are pinned; the
-# plugins are not.
-#
-# TODO: pin the plugins too. Doing it right needs a `pip freeze` of a known-good CI
-# run — inventing version numbers here would risk breaking the build for no gain.
-# `ovweb doctor --pins` already guards the pin that matters most (mkdocs-material,
-# which must agree across this file and both Dockerfiles).
+# Everything needed for a real publish build. Every build input is pinned, from the freeze of
+# a known-good publish run; `ovweb doctor --pins` asserts these versions agree with the two
+# Dockerfiles and the installed environment.
 build = [
-    "mike",
+    "mike==2.2.0",
     "mkdocs-material[imaging]==9.7.6",
-    "pygments<2.20",
-    "mkdocs-glightbox",
-    "mkdocs-llmstxt",
-    "mkdocs-rss-plugin",
+    "pygments==2.19.2",
+    "mkdocs-glightbox==0.5.2",
+    "mkdocs-llmstxt==0.5.0",
+    "mkdocs-rss-plugin==1.19.0",
 ]
-# Same, minus the imaging extra: the lightweight link-validation build.
+# Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
     "mkdocs-material==9.7.6",
-    "pygments<2.20",
-    "mkdocs-glightbox",
-    "mkdocs-llmstxt",
-    "mkdocs-rss-plugin",
+    "pygments==2.19.2",
+    "mkdocs-glightbox==0.5.2",
+    "mkdocs-llmstxt==0.5.0",
+    "mkdocs-rss-plugin==1.19.0",
 ]
 dev = [
     "pytest>=8",
     "ruff>=0.6",
-    # llmstxt_preprocess.py replaces the plugin's own `autoclean`, and its tests assert the two
-    # produce identical output wherever we did not deliberately deviate. That needs the soup library
-    # the hook is handed, and the plugin whose function is the reference — imported for real rather
-    # than copied, so the comparison cannot drift from what the plugin actually does.
-    #
-    # `mkdocs` is listed because mkdocs-llmstxt does not declare it (its Requires are only
-    # beautifulsoup4, markdownify, mdformat, mdformat-tables) while its package __init__ imports
-    # mkdocs.config, so importing anything from it without mkdocs present fails.
+    # The tests for llmstxt_preprocess.py compare it against the plugin's own `autoclean`, imported
+    # for real so the comparison cannot drift, which needs the soup library and the plugin itself.
+    # `mkdocs` is listed because mkdocs-llmstxt does not declare it, yet its package __init__
+    # imports mkdocs.config.
     "beautifulsoup4",
     "mkdocs",
     "mkdocs-llmstxt",
@@ -61,10 +53,9 @@ ovweb = "ovweb.cli:main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/ovweb"]
 
-# ovweb.yaml is the human-edited config and lives at the top of this folder, but it must
-# also ship inside the wheel: the installed package is the single source of truth at
-# publish time, precisely so that checking out gh-pages (or an old X.Y branch, which has
-# its own stale copy) cannot change the tool's behaviour.
+# ovweb.yaml is edited at the top of this folder but must also ship inside the wheel: the installed
+# package is the single source of truth at publish time, so that checking out gh-pages — or an old
+# X.Y branch, which carries its own stale copy — cannot change the tool's behaviour.
 [tool.hatch.build.targets.wheel.force-include]
 "ovweb.yaml" = "ovweb/data/ovweb.yaml"
 

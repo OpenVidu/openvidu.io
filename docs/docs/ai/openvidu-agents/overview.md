@@ -7,7 +7,7 @@ description: "How OpenVidu agents work: pre-configured AI modules that run as Do
 
 ## Basic concepts
 
-The modules that provide AI services in OpenVidu are called **OpenVidu agents**. They are **pre-configured and ready-to-use AI modules**. OpenVidu agents interact with your Rooms in real time using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){target="\_blank"}.
+The modules that provide AI services in OpenVidu are called **OpenVidu agents**. They are **pre-configured and ready-to-use AI modules**. OpenVidu agents interact with your Rooms in real time using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){:target="_blank"}.
 
 All OpenVidu agents follow the following general principles:
 

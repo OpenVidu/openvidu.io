@@ -7,7 +7,7 @@ description: "OpenVidu replaces LiveKit's Pion WebRTC engine with mediasoup, dou
 
 OpenVidu is able to handle up to **2x** the load in a single server, doubling the amount of media Tracks that can be transmitted compared to base LiveKit. By not only building upon the giant Open-Source shoulders of LiveKit, but also pushing the bar further, OpenVidu uses the best-in-class technologies to bring considerable performance improvements to the table.
 
-The key element of any WebRTC server solution is the ability to exchange media between participants of a room, in the so-called [WebRTC SFU](../../comparing-openvidu.md#openvidu-vs-sfus). LiveKit implements its own SFU, and that's where OpenVidu makes a different choice by using [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}.
+The key element of any WebRTC server solution is the ability to exchange media between participants of a room, in the so-called [WebRTC SFU](../../comparing-openvidu.md#openvidu-vs-sfus). LiveKit implements its own SFU, and that's where OpenVidu makes a different choice by using [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}.
 
 The key points of how this works are:
 
@@ -18,7 +18,7 @@ The key points of how this works are:
 
 ### Architecture
 
-LiveKit created its own WebRTC SFU, based on the [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc){target="\_blank"} library to route media between participants:
+LiveKit created its own WebRTC SFU, based on the [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc){:target="_blank"} library to route media between participants:
 
 <figure markdown>
   ![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .mkdocs-img }
@@ -36,11 +36,11 @@ In terms of the signaling protocol, API and SDKs, OpenVidu maintains the origina
 
 ### Choice of technology
 
-Both LiveKit and Pion are written in the [Go programming language :fontawesome-solid-external-link:{.external-link-icon}](https://go.dev/){target="\_blank"}, and this has some implications for speed and efficiency. While Go is popular for its simplicity, readability, and approach to concurrency, when it comes to performance other alternatives rank higher in common benchmarks.
+Both LiveKit and Pion are written in the [Go programming language :fontawesome-solid-external-link:{.external-link-icon}](https://go.dev/){:target="_blank"}, and this has some implications for speed and efficiency. While Go is popular for its simplicity, readability, and approach to concurrency, when it comes to performance other alternatives rank higher in common benchmarks.
 
 First and foremost, the two most defining limitations of Go are that it requires quite a heavy runtime that is able to handle all of the low-level features of the language, such as _goroutines_ and memory allocations. Also, speaking of memory management, Go requires a Garbage Collector, which knowledgeable readers will recognize as a hindrance for performance-critical applications.
 
-_mediasoup_, on the other hand, focuses all of its efforts on maximum efficiency. It is written in [C++ :fontawesome-solid-external-link:{.external-link-icon}](https://isocpp.org/){target="\_blank"}, and it is ultra-optimized for the specific task of routing media packets. C++ is a language that provides fully manual management of all resources, and direct access to the hardware, with the benefit of software that is as fast as it can be on any machine.
+_mediasoup_, on the other hand, focuses all of its efforts on maximum efficiency. It is written in [C++ :fontawesome-solid-external-link:{.external-link-icon}](https://isocpp.org/){:target="_blank"}, and it is ultra-optimized for the specific task of routing media packets. C++ is a language that provides fully manual management of all resources, and direct access to the hardware, with the benefit of software that is as fast as it can be on any machine.
 
 We believe that by combining the best of the LiveKit stack with a top-notch WebRTC engine like _mediasoup_, OpenVidu is the best option for those who need a self-hosted and high-performance real-time solution.
 
@@ -48,11 +48,11 @@ We believe that by combining the best of the LiveKit stack with a top-notch WebR
 
 When choosing mediasoup as the WebRTC engine, these are the only differences with respect to pion:
 
-- Audio codec `red` is not supported. REDundant Encoding is available when using pion (see [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/advanced/#audio-red){target="\_blank"}), but mediasoup simply does not implement it yet ([#481 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/issues/481){target="\_blank"}).
+- Audio codec `red` is not supported. REDundant Encoding is available when using pion (see [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/advanced/#audio-red){:target="_blank"}), but mediasoup simply does not implement it yet ([#481 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/issues/481){:target="_blank"}).
 
 ## Benchmarking
 
-Numerous load tests have been performed to determine the true capabilities of OpenVidu on different hardware. To do so we have developed the tool [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"}: an in development project that aims to improve the precision of load and performance tests in WebRTC systems.
+Numerous load tests have been performed to determine the true capabilities of OpenVidu on different hardware. To do so we have developed the tool [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}: an in development project that aims to improve the precision of load and performance tests in WebRTC systems.
 
 We have compared OpenVidu using the original **Pion** WebRTC engine (this is the default LiveKit Open Source implementation) and using **mediasoup** as WebRTC engine. We tested the performance for both cases in the scenario below.
 
@@ -95,7 +95,7 @@ CPU load of the server is also shown with a black marked plot (from 0 to 1, repr
 
 ### Benchmarking technical details
 
-- Each participant sending video and audio to the media server uses the following video in loop: [Video :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview_480p_30fps.y4m){target="\_blank"}. The video is in `YUV4MPEG2` format and with a `640x480` resolution. The audio is in WAV format: [Audio :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview.wav){target="\_blank"}.
+- Each participant sending video and audio to the media server uses the following video in loop: [Video :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview_480p_30fps.y4m){:target="_blank"}. The video is in `YUV4MPEG2` format and with a `640x480` resolution. The audio is in WAV format: [Audio :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu-loadtest-mediafiles.s3.amazonaws.com/interview.wav){:target="_blank"}.
 - All tests were done using AWS EC2 instances. The media server runs with a `m6in.xlarge` instance type, an instance type with 4 vCPUs and better network capabilities compared to other instance types.
 - The workers running the browsers that act as participants ran in `c5.xlarge` instances, an instance type with 4 vCPUs with better computing capabilities.
 
@@ -110,4 +110,4 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 ### About OpenVidu LoadTest
 
-Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){target="\_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.

@@ -1,14 +1,20 @@
-"""Filesystem primitives — the parity-relevant behaviour is byte preservation."""
+"""Filesystem primitives. The behaviour that matters is byte preservation."""
 
 from __future__ import annotations
 
 import gzip
 
+import pytest
+
 from ovweb import fsops
 
 
+def rewrite_tree(root, transform):
+    return fsops.rewrite_tree_per_file(root, lambda _path, text: transform(text))
+
+
 def test_rewrite_file_preserves_a_missing_trailing_newline(tmp_path):
-    """`sed -i` does not add one, so adding one here would diff every file."""
+    """A file the build wrote without one must not gain one, or the publish diffs every file."""
     path = tmp_path / "page.html"
     path.write_bytes(b"<a>old</a>")
     assert fsops.rewrite_file(path, lambda text: text.replace("old", "new"))
@@ -24,7 +30,7 @@ def test_rewrite_file_leaves_an_unchanged_file_untouched(tmp_path):
 
 
 def test_rewrite_file_skips_a_file_holding_a_nul_byte(tmp_path):
-    """The same test `grep` applies before deciding a file is binary."""
+    """There is no extension allow-list, so binary content has to be recognised by content."""
     path = tmp_path / "font.woff2"
     original = b"wOF2\x00\x00assets/x"
     path.write_bytes(original)
@@ -43,11 +49,31 @@ def test_rewrite_file_skips_undecodable_bytes(tmp_path):
 def test_rewrite_tree_walks_every_extension(tmp_path):
     for name in ("a.html", "b.js", "c.json", "d.xml", "e.txt", "f.md", "g.css"):
         (tmp_path / name).write_text("needle", encoding="utf-8")
-    assert fsops.rewrite_tree(tmp_path, lambda text: text.replace("needle", "found")) == 7
+    assert rewrite_tree(tmp_path, lambda text: text.replace("needle", "found")) == 7
+
+
+def test_rewrite_tree_recurses_and_skips_symlinks(tmp_path):
+    (tmp_path / "deep" / "deeper").mkdir(parents=True)
+    (tmp_path / "deep" / "deeper" / "page.html").write_text("needle", encoding="utf-8")
+    (tmp_path / "link.html").symlink_to(tmp_path / "deep" / "deeper" / "page.html")
+
+    assert rewrite_tree(tmp_path, lambda text: text.replace("needle", "found")) == 1
+    assert (tmp_path / "deep" / "deeper" / "page.html").read_text() == "found"
+
+
+def test_rewrite_tree_passes_each_files_path_to_the_transform(tmp_path):
+    """Which rules apply depends on the suffix: every page is published as HTML and as Markdown."""
+    (tmp_path / "page.html").write_text("x", encoding="utf-8")
+    (tmp_path / "page.md").write_text("x", encoding="utf-8")
+
+    fsops.rewrite_tree_per_file(tmp_path, lambda path, text: text + path.suffix)
+
+    assert (tmp_path / "page.html").read_text() == "x.html"
+    assert (tmp_path / "page.md").read_text() == "x.md"
 
 
 def test_rewrite_tree_on_a_missing_directory_is_a_no_op(tmp_path):
-    assert fsops.rewrite_tree(tmp_path / "nope", lambda text: text) == 0
+    assert rewrite_tree(tmp_path / "nope", lambda text: text) == 0
 
 
 def test_rewrite_single_can_tolerate_a_missing_file(tmp_path):
@@ -55,7 +81,7 @@ def test_rewrite_single_can_tolerate_a_missing_file(tmp_path):
 
 
 def test_gzip_output_is_deterministic(tmp_path):
-    """`gzip -k -f` embeds the mtime, so the shell churned a new blob on every publish."""
+    """gzip embeds the source mtime, which would churn a new blob on every publish."""
     path = tmp_path / "sitemap.xml"
     path.write_text("<urlset></urlset>\n", encoding="utf-8")
 
@@ -74,8 +100,33 @@ def test_gzip_records_the_original_filename(tmp_path):
     assert b"sitemap.xml" in data
 
 
+def test_rewrite_single_raises_on_a_missing_file_it_requires(tmp_path):
+    with pytest.raises(FileNotFoundError):
+        fsops.rewrite_single(tmp_path / "sitemap.xml", lambda t: t)
+
+
 def test_remove_is_tolerant_when_asked(tmp_path):
     assert fsops.remove(tmp_path / "nope", required=False) is False
+
+
+def test_remove_raises_on_a_missing_path_it_requires(tmp_path):
+    with pytest.raises(FileNotFoundError):
+        fsops.remove(tmp_path / "nope")
+
+
+def test_remove_deletes_a_dangling_symlink_without_following_it(tmp_path):
+    """`latest` is a symlink; a past-version publish must not delete what it points at."""
+    (tmp_path / "target").write_text("keep", encoding="utf-8")
+    (tmp_path / "link").symlink_to(tmp_path / "target")
+
+    assert fsops.remove(tmp_path / "link") is True
+    assert (tmp_path / "target").read_text() == "keep"
+
+
+def test_remove_all_counts_only_what_it_removed(tmp_path):
+    (tmp_path / "here").write_text("x", encoding="utf-8")
+    paths = [tmp_path / "here", tmp_path / "gone"]
+    assert fsops.remove_all(paths, required=False) == 1
 
 
 def test_move_replaces_the_destination(tmp_path):

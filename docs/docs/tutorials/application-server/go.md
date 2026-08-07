@@ -1,18 +1,20 @@
 ---
 title: "Go application server tutorial"
 description: "Build a minimal Go application server for OpenVidu with Gin and the LiveKit-compatible Go SDK: issue access tokens and handle webhook events."
+tags:
+  - setupcustomgallery
 ---
 
 # Go Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/go){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/go){ .md-button target="_blank" }
 
-This is a minimal server application built for Go with [Gin :fontawesome-solid-external-link:{.external-link-icon}](https://gin-gonic.com/){:target="\_blank"} that allows:
+This is a minimal server application built for Go with [Gin :fontawesome-solid-external-link:{.external-link-icon}](https://gin-gonic.com/){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses the [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="\_blank"}.
+It internally uses the [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -32,7 +34,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -129,7 +131,7 @@ func createToken(context *gin.Context) {
 
 We first load the request body into a struct with `roomName` and `participantName` string fields. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="\_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).

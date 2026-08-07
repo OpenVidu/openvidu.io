@@ -1,18 +1,20 @@
 ---
 title: ".NET application server tutorial"
 description: "Build a minimal .NET application server for OpenVidu with ASP.NET and the LiveKit-compatible .NET SDK: issue access tokens and handle webhooks."
+tags:
+  - setupcustomgallery
 ---
 
 # .NET Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/dotnet){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/dotnet){ .md-button target="_blank" }
 
-This is a minimal server application built for .NET with [ASP.NET Core Minimal APIs :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){:target="\_blank"} that allows:
+This is a minimal server application built for .NET with [ASP.NET Core Minimal APIs :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses the [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="\_blank"}.
+It internally uses the [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -32,11 +34,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
-The application is a simple [ASP.NET Core Minimal APIs :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){target=\_blank} app with a single file `Program.cs` that exports two endpoints:
+The application is a simple [ASP.NET Core Minimal APIs :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio){:target="_blank"} app with a single file `Program.cs` that exports two endpoints:
 
 -   `/token` : generate a token for a given Room name and Participant name.
 -   `/livekit/webhook` : receive LiveKit webhook events.
@@ -82,7 +84,7 @@ var app = builder.Build(); // (10)!
 app.UseCors(MyAllowSpecificOrigins);
 ```
 
-1. Import the [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="\_blank"}.
+1. Import the [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}.
 2. A `WebApplicationBuilder` instance to build the application.
 3. The name of the CORS policy to be used in the application.
 4. A `IConfiguration` instance to load the configuration from the `appsettings.json` file, including the required environment variables.

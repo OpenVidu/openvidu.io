@@ -24,9 +24,8 @@ def test_pins_asset_references(layout, directory, attribute):
 def test_pins_data_attributes_too(layout):
     """`data-src="/assets/…"` is pinned as well.
 
-    The pattern matches `src="` anywhere, which is what the shell did. It is also the right
-    outcome: a script consuming `data-src` resolves it against the same root, so an unpinned
-    value would reach for the newest publish's assets from an old version's page.
+    A script consuming `data-src` resolves it against the same root, so an unpinned value would
+    reach for the newest publish's assets from an old version's page.
     """
     text = '<a class="glightbox" data-src="/assets/images/x.png">'
     assert rewrite(text, layout) == '<a class="glightbox" data-src="/3.8/assets/images/x.png">'
@@ -125,10 +124,7 @@ def test_asset_pinning_runs_before_the_canonical_rewrite(layout):
 
 
 def test_a_dot_in_the_version_is_not_a_wildcard(layout):
-    """The shell interpolated the version straight into a regex, so `3.8` also matched `328`.
-
-    Harmless in practice, but the port escapes it, and this pins that.
-    """
+    """The version reaches a regex, so it has to be escaped: `3.8` must not match `328`."""
     text = '<link rel="canonical" href="https://openvidu.io/328/docs/">'
     assert rewrite(text, layout) == text
 

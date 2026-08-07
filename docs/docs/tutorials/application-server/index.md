@@ -15,7 +15,7 @@ To do so they all define two REST endpoints:
 - `/token`: takes a room and participant name and returns a token.
 - `/webhook`: for receiving webhook events from LiveKit Server.
 
-They use the proper [LiveKit Server SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){target=\_blank} for their language, if available.
+They use the proper [LiveKit Server SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"} for their language, if available.
 
 <div class="tutorials-container" markdown>
 

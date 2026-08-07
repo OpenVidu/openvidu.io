@@ -13,7 +13,7 @@ This page is a collection of the most common operations you may want to perform 
 
 You can use this page as a cheat sheet to know at a glance how to do something, and you have links to the LiveKit reference documentation of each operation for a more detailed explanation.
 
-> All client side operations are exemplified using the [LiveKit JS Client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/modules.html){target="\_blank"}. For other client SDKs, refer to the corresponding LiveKit reference documentation.
+> All client side operations are exemplified using the [LiveKit JS Client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/modules.html){:target="_blank"}. For other client SDKs, refer to the corresponding LiveKit reference documentation.
 
 ### Generate access tokens
 
@@ -124,7 +124,7 @@ await room.localParticipant.unpublishTrack(track, true);
 
 The second boolean parameter indicates if the local Track should be stopped. This usually means freeing the device capturing it (switching off the camera LED, for example).
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#unpublishTrack){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#unpublishTrack){:target="_blank"}
 
 ---
 
@@ -182,7 +182,7 @@ participant.on(
 );
 ```
 
-Finally, you can send messages to Participants in the Room using the [`LocalParticipant.publishData` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#publishData){target="\_blank"} method:
+Finally, you can send messages to Participants in the Room using the [`LocalParticipant.publishData` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/classes/LocalParticipant.html#publishData){:target="_blank"} method:
 
 ```typescript
 const data: Uint8Array = new TextEncoder().encode(JSON.stringify(""));
@@ -193,7 +193,7 @@ room.localParticipant.publishData(data, {
 });
 ```
 
-The [`DataPublishOptions` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/types/DataPublishOptions.html){target="\_blank"} allow setting the reliability of the message (depending on the nature of the message it can be sent as a reliable or lossy message), a topic to easily filter messages, and the participants that will receive the message.
+The [`DataPublishOptions` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/types/DataPublishOptions.html){:target="_blank"} allow setting the reliability of the message (depending on the nature of the message it can be sent as a reliable or lossy message), a topic to easily filter messages, and the participants that will receive the message.
 
 The client side will be notified of the message with the `dataReceived` event of the `Room` and/or `Participant` object:
 
@@ -217,7 +217,7 @@ participant.on(
 );
 ```
 
-> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/data/){target="\_blank"}
+> [:octicons-arrow-right-24: Reference docs](https://docs.livekit.io/home/client/data/){:target="_blank"}
 
 ---
 
@@ -249,7 +249,7 @@ To quickly publish a screen sharing Track:
 await room.localParticipant.setScreenShareEnabled(true);
 ```
 
-You can also create custom screen tracks, for example capturing the audio of the screen and fine-tuning the video capture options (checkout the [ScreenTrackOptions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/interfaces/ScreenShareCaptureOptions.html){target="\_blank"} interface for detailed information):
+You can also create custom screen tracks, for example capturing the audio of the screen and fine-tuning the video capture options (checkout the [ScreenTrackOptions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/interfaces/ScreenShareCaptureOptions.html){:target="_blank"} interface for detailed information):
 
 ```typescript
 const screenTracks = await room.localParticipant.createScreenTracks({
@@ -298,7 +298,7 @@ const image = VirtualBackground("https://picsum.photos/400");
 await videoTrack.setProcessor(image);
 ```
 
-> [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/track-processors-js){target="\_blank"}
+> [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/track-processors-js){:target="_blank"}
 
 ### Recording
 
@@ -331,7 +331,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { IngressClient, IngressInfo, IngressInput } from 'livekit-server-sdk';
@@ -351,7 +351,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){target="\_blank"}
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
 
     ```go
     import (
@@ -379,7 +379,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
 
     ```ruby
     require 'livekit'
@@ -403,7 +403,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
 
     ```java
     import io.livekit.server.IngressServiceClient;
@@ -425,7 +425,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
 
-    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){target="\_blank"}
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
 
     ```python
     from livekit.api import LiveKitAPI
@@ -446,7 +446,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
-    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){target="\_blank"}
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
 
     ```rust
     use livekit_api::services::ingress::*;
@@ -471,7 +471,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
-    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){target="\_blank"}
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
 
     ```php
     <?php
@@ -492,7 +492,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
 
     ```csharp
     using Livekit.Server.Sdk.Dotnet;
@@ -519,7 +519,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
     1. Consume the Ingress API directly: [:octicons-arrow-right-24: Reference Docs](../reference/ingress.md)
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
 
         Create a file at `ingress.json` with the following content:
 

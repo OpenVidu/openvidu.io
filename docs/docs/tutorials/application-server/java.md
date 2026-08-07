@@ -1,18 +1,20 @@
 ---
 title: "Java application server tutorial"
 description: "Build a minimal Java application server for OpenVidu with Spring Boot and the LiveKit-compatible Kotlin SDK: issue access tokens and handle webhooks."
+tags:
+  - setupcustomgallery
 ---
 
 # Java Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/java){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/java){ .md-button target="_blank" }
 
-This is a minimal server application built for Java with [Spring Boot :fontawesome-solid-external-link:{.external-link-icon}](https://spring.io/){:target="\_blank"} that allows:
+This is a minimal server application built for Java with [Spring Boot :fontawesome-solid-external-link:{.external-link-icon}](https://spring.io/){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}.
+It internally uses [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -32,7 +34,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -70,8 +72,8 @@ Starting by the top, the `Controller` class has the following annotations:
 
 Going deeper, the `Controller` class has the following fields:
 
--   `LIVEKIT_API_KEY`: the API key of LiveKit Server. It is injected from the property `livekit.api.key` defined in [`application.properties` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/java/src/main/resources/application.properties#L6){:target="\_blank"} using the `@Value("${livekit.api.key}")` annotation.
--   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server. It is injected from the the property `livekit.api.secret` defined in [`application.properties` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/java/src/main/resources/application.properties#L7){:target="\_blank"} using the `@Value("${livekit.api.secret}")` annotation.
+-   `LIVEKIT_API_KEY`: the API key of LiveKit Server. It is injected from the property `livekit.api.key` defined in [`application.properties` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/java/src/main/resources/application.properties#L6){:target="_blank"} using the `@Value("${livekit.api.key}")` annotation.
+-   `LIVEKIT_API_SECRET`: the API secret of LiveKit Server. It is injected from the the property `livekit.api.secret` defined in [`application.properties` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/java/src/main/resources/application.properties#L7){:target="_blank"} using the `@Value("${livekit.api.secret}")` annotation.
 
 ---
 
@@ -108,7 +110,7 @@ public ResponseEntity<Map<String, String>> createToken(@RequestBody Map<String, 
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="\_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's name and identity in the AccessToken.

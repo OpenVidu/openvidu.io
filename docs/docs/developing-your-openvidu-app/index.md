@@ -31,7 +31,7 @@ There are other optional tasks that you can perform from your application server
 - **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. This is the official LiveKit documentation with all the available methods of the **[`RoomServiceClient`](../reference/server-api.md)** exposed by the Server API. These methods are also available in all LiveKit Server SDKs.
 - **Manage Egress and Ingress**: if your application needs some kind of recording, broadcasting or media ingestion, this operations must all be performed by your application server.
 - **Receive Webhook events**: you can also listen to Webhook events in your application backend. In this way you can react to events happening in your Rooms: a Room has started, a Room has finished, a Participant has joined a Room, a Track has been published... See the [webhooks reference](../reference/webhooks.md) for every event and its payload.
-- **Publish Tracks from your backend**: this is only for advanced applications that require server-side media publishing. Publishing media from your backend is possible by using [LiveKit CLI :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){target="\_blank"}, [Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){target="\_blank"}, [Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){target="\_blank"}, [Node.js SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/node-sdks){target="\_blank"} or [Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){target="\_blank"}.
+- **Publish Tracks from your backend**: this is only for advanced applications that require server-side media publishing. Publishing media from your backend is possible by using [LiveKit CLI :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"}, [Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}, [Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}, [Node.js SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/node-sdks){:target="_blank"} or [Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}.
 
 To get you started, here is a list of all available LiveKit Server SDKs and an application server tutorial using them. These tutorials are all set up to **generate access tokens** and **receive webhook events**, so they are perfect starting points for your application server.
 
@@ -39,49 +39,49 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     [:octicons-arrow-right-24: Node.js Tutorial](../tutorials/application-server/node.md)
 
-    [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+    [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
     [:octicons-arrow-right-24: Go Tutorial](../tutorials/application-server/go.md)
 
-    [:octicons-arrow-right-24: Reference Docs](https://pkg.go.dev/github.com/livekit/server-sdk-go){target="\_blank"}
+    [:octicons-arrow-right-24: Reference Docs](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
     [:octicons-arrow-right-24: Ruby Tutorial](../tutorials/application-server/ruby.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-ruby){target="\_blank"}
+    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
     [:octicons-arrow-right-24: Java Tutorial](../tutorials/application-server/java.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-kotlin){target="\_blank"}
+    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
 
 === ":simple-python:{.icon .lg-icon .tab-icon} Python"
 
     [:octicons-arrow-right-24: Python Tutorial](../tutorials/application-server/python.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/python-sdks){target="\_blank"}
+    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/python-sdks){:target="_blank"}
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
     [:octicons-arrow-right-24: Rust Tutorial](../tutorials/application-server/rust.md)
 
-    [:octicons-arrow-right-24: Reference Docs](https://docs.rs/livekit-api/latest/livekit_api/index.html){target="\_blank"}
+    [:octicons-arrow-right-24: Reference Docs](https://docs.rs/livekit-api/latest/livekit_api/index.html){:target="_blank"}
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
     [:octicons-arrow-right-24: PHP Tutorial](../tutorials/application-server/php.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/agence104/livekit-server-sdk-php){target="\_blank"}
+    [:octicons-arrow-right-24: GitHub Repository](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
     [:octicons-arrow-right-24: .NET Tutorial](../tutorials/application-server/dotnet.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/pabloFuente/livekit-server-sdk-dotnet){target="\_blank"}
+    [:octicons-arrow-right-24: GitHub Repository](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
@@ -89,20 +89,20 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs](../reference/server-api.md)
 
-    2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/livekit-cli){target="\_blank"}
+    2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/livekit-cli){:target="_blank"}
 
 ## 3. Build the UI of your client application
 
 There are two main strategies to build the UI of your client application:
 
 - **Use a high-level UI Components library**: you can use [Angular Components](../ui-components/angular-components.md) and [React Components](../ui-components/react-components.md) to quickly set up your UI with building blocks that manage the events and state of the Room for you.
-- **Use a low-level client SDK**: if you want extensive control and maximum flexibility when designing your UI, use any of the [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){target="\_blank"}.
+- **Use a low-level client SDK**: if you want extensive control and maximum flexibility when designing your UI, use any of the [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"}.
 
 The table below summarizes the key differences between these two strategies to help you make an informed decision:
 
 |  | UI Components  | Low-level client SDKs  |
 |------|--------------------|----------------------------------------------------------|
-| **What is it?** | Frontend libraries offering videoconferencing components to build your own application. There are [Angular Components](../ui-components/angular-components.md) or [React Components](../ui-components/react-components.md) | Integrate OpenVidu from scratch in your web, mobile or desktop application using [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){target="\_blank"} |
+| **What is it?** | Frontend libraries offering videoconferencing components to build your own application. There are [Angular Components](../ui-components/angular-components.md) or [React Components](../ui-components/react-components.md) | Integrate OpenVidu from scratch in your web, mobile or desktop application using [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"} |
 | **Pros** | <ul><li>Very flexible components: adapt, extend or replace any component</li><li>Have your first version running in minutes, work on your customizations from there</li><li>Easily keep your client code up to date with the latest features</li></ul> | <ul><li>Unlimited level of customization: build your own UI from scratch as you please</li><li>Available for all client platforms: browsers, iOS, Android, Flutter, React Native, Unity...</li></ul> |
 | **Cons** | <ul><li>Only available for Angular and React web apps</li></ul>                                                                                                                            | <ul><li>Higher complexity, although there are plenty of tutorials to smooth the learning curve</li></ul>                                                                     |
 | **Tutorials** | [Angular Components tutorials](../tutorials/angular-components/index.md) | [Application client tutorials](../tutorials/application-client/index.md) |
@@ -116,7 +116,7 @@ Whatever strategy you choose to build the UI of your application, most common st
 
 Of course, depending on the use case, this may not be necessary for all users, or other additional steps may need to be taken. For example, in a live-streaming application, only presenters will publish Tracks, while all other viewers will only subscribe to them. Or it is possible that users may need exchange messages through a chat. Each specific application will need to refine its use of the UI Components or client SDKs to meet its requirements.
 
-Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){target="\_blank"}. Below is a list of application client tutorials, which are perfect starting points for your client application.
+Here is the list of all LiveKit Client SDKs: [LiveKit Client SDKs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"}. Below is a list of application client tutorials, which are perfect starting points for your client application.
 
 <div class="tutorials-container" markdown>
 

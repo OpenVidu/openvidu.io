@@ -5,6 +5,8 @@ tags:
     - setupcustomgallery
 ---
 
+# How OpenVidu compares to other solutions
+
 This section compares OpenVidu to other videoconference/streaming solutions, to better understand what it is, what it is not, and what advantages and disadvantages it may have over them.
 
 !!! tip "Comparing OpenVidu Meet and OpenVidu Platform instead?"
@@ -15,16 +17,16 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 First of all, and perhaps the most obvious question, how does OpenVidu differ from LiveKit, and what kind of relationship is there between them? This can be answered with four simple points:
 
 - OpenVidu is a **fork of LiveKit**. It is 100% compatible with LiveKit: any application built for LiveKit is compatible with OpenVidu.
-- OpenVidu is a **superset of LiveKit**. It provides all the open source features of LiveKit and supports all of its SDKs, but it also extends LiveKit with extra features, APIs and internal enhancements, most notably integration with [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}.
+- OpenVidu is a **superset of LiveKit**. It provides all the open source features of LiveKit and supports all of its SDKs, but it also extends LiveKit with extra features, APIs and internal enhancements, most notably integration with [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}.
 - OpenVidu is a **production-ready self-hosted solution**. It offers an easy deployment process to self-host a high performance, fault-tolerant, scalable and observable cluster. OpenVidu provides an interactive installer that manages all the complexities, so you can quickly host a production deployment that would otherwise require advanced DevOps/SRE expertise.
 - OpenVidu is a **support team** for self-hosted deployments. The OpenVidu team is made up of real-time experts with over a decade of experience in the field. We specialize in customer support and are always ready to help you bring your ideas to life.
 
-<a class="glightbox" href="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" loading="lazy" class="mkdocs-img"/></a>
+<a class="glightbox" href="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" loading="lazy" class="mkdocs-img" alt="Diagram comparing an OpenVidu deployment with a LiveKit deployment"/></a>
 /// caption
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your cluster.
 ///
 
-LiveKit comes in two flavors: [LiveKit Open Source :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit){target="\_blank"} and [LiveKit Cloud :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cloud/){target="\_blank"}.
+LiveKit comes in two flavors: [LiveKit Open Source :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit){:target="_blank"} and [LiveKit Cloud :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cloud/){:target="_blank"}.
 
 ### OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</span> vs LiveKit Open Source
 
@@ -35,7 +37,7 @@ What does OpenVidu Community bring over LiveKit Open Source?
 With OpenVidu Community you get a handful of features on top of LiveKit Open Source that will help with the development of your application:
 
 - **Egress and Ingress services already integrated with a Redis instance**: LiveKit allows you to export media from a Room (for example recording it) or import media into a Room (for example ingesting a video file), using [Egress](reference/egress.md) and [Ingress](reference/ingress.md) services respectively. These modules are independent of LiveKit Server and must be correctly configured and connected via a shared Redis. When running OpenVidu Community you will have all these services properly integrated, so you can focus on developing your app without worrying about anything else.
-- **S3 compatible storage for Egress recordings**: OpenVidu Community comes with an S3 compatible storage already configured to store [Egress](reference/egress.md) recordings ([Minio :fontawesome-solid-external-link:{.external-link-icon}](https://min.io/){target="_blank"}).
+- **S3 compatible storage for Egress recordings**: OpenVidu Community comes with an S3 compatible storage already configured to store [Egress](reference/egress.md) recordings ([Minio :fontawesome-solid-external-link:{.external-link-icon}](https://min.io/){:target="_blank"}).
 - **Administration dashboard to monitor your Rooms**: OpenVidu comes with an administration dashboard that allows you to monitor the status of your Rooms. Not only in real time, but also historically: the number of participants, the number of published tracks, Egress and Ingress processes... This is a great tool to have when developing your app, as it can help to spot issues and debugging your application's logic. [See more](./self-hosting/production-ready/observability/openvidu-dashboard.md).
 - **OpenVidu Meet**: a fully-fledged, ready to use videoconference application. [See more](../meet/index.md).
 - **Powerful and easy to use local development environment**: OpenVidu provides a Docker Compose based deployment designed for development and testing devices on your local network. It comes with automatic certificate management that makes it easy to test mobile devices in your LAN. [See more](./self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
@@ -56,9 +58,11 @@ Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims 
 - OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](./self-hosting/production-ready/observability/index.md).
 - We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](./self-hosting/production-ready/scalability.md#big-videoconferences-and-massive-live-streams-working-on-it).
 
+:octicons-arrow-right-24: **[Read the full OpenVidu vs LiveKit comparison](../openvidu-vs-livekit.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
+
 ## OpenVidu vs SaaS solutions
 
-This includes many services like [Agora :fontawesome-solid-external-link:{.external-link-icon}](https://www.agora.io/){target="\_blank"}, [GetStream :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/){target="\_blank"}, [Daily :fontawesome-solid-external-link:{.external-link-icon}](https://www.daily.co/){target="\_blank"}, [Vonage :fontawesome-solid-external-link:{.external-link-icon}](https://www.vonage.com/communications-apis/video/){target="\_blank"}, [Jitsi as a Service :fontawesome-solid-external-link:{.external-link-icon}](https://jaas.8x8.vc/#/){target="\_blank"}, [Whereby :fontawesome-solid-external-link:{.external-link-icon}](https://whereby.com/){target="\_blank"}, [Zoom SDK :fontawesome-solid-external-link:{.external-link-icon}](https://developers.zoom.us/docs/video-sdk/){target="\_blank"}, [Dolby Millicast :fontawesome-solid-external-link:{.external-link-icon}](https://dolby.io/){target="\_blank"}, [Amazon Chime SDK :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/chime/chime-sdk/){target="\_blank"}.
+This includes many services like [Agora :fontawesome-solid-external-link:{.external-link-icon}](https://www.agora.io/){:target="_blank"}, [GetStream :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/){:target="_blank"}, [Daily :fontawesome-solid-external-link:{.external-link-icon}](https://www.daily.co/){:target="_blank"}, [Vonage :fontawesome-solid-external-link:{.external-link-icon}](https://www.vonage.com/communications-apis/video/){:target="_blank"}, [Jitsi as a Service :fontawesome-solid-external-link:{.external-link-icon}](https://jaas.8x8.vc/#/){:target="_blank"}, [Whereby :fontawesome-solid-external-link:{.external-link-icon}](https://whereby.com/){:target="_blank"}, [Zoom SDK :fontawesome-solid-external-link:{.external-link-icon}](https://developers.zoom.us/docs/video-sdk/){:target="_blank"}, [Dolby Millicast :fontawesome-solid-external-link:{.external-link-icon}](https://dolby.io/){:target="_blank"}, [Amazon Chime SDK :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/chime/chime-sdk/){:target="_blank"}.
 
 The main difference between OpenVidu and these services is who owns the infrastructure, and where your users' data flows. All these SaaS solutions provide:
 
@@ -70,17 +74,19 @@ Using a SaaS provider is a great option for some use cases, but not all. **OpenV
 
 ## OpenVidu vs SFUs
 
-This includes projects such as [Kurento :fontawesome-solid-external-link:{.external-link-icon}](https://doc-kurento.readthedocs.io/){target="\_blank"}, [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}, [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://pion.ly/){target="\_blank"}, [Janus :fontawesome-solid-external-link:{.external-link-icon}](https://janus.conf.meetecho.com/){target="\_blank"}, [Jitsi Videobridge :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.org/jitsi-videobridge/){target="\_blank"} or [Medooze :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/medooze/sfu){target="\_blank"}.
+This includes projects such as [Kurento :fontawesome-solid-external-link:{.external-link-icon}](https://doc-kurento.readthedocs.io/){:target="_blank"}, [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}, [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://pion.ly/){:target="_blank"}, [Janus :fontawesome-solid-external-link:{.external-link-icon}](https://janus.conf.meetecho.com/){:target="_blank"}, [Jitsi Videobridge :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.org/jitsi-videobridge/){:target="_blank"} or [Medooze :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/medooze/sfu){:target="_blank"}.
 
 These are all media servers. More specifically, they fall under the umbrella of the so-called **SFUs** (Selective Forwarding Units): they are able to receive media streams from different clients and *selectively forward* them to other clients, usually without transcoding or mixing the media.
 
-SFUs are generally low-level tools. Using them directly to implement real-time applications requires a deep understanding of signaling protocols, codecs, networking and other low-level concepts. **OpenVidu is a higher-level abstraction compared to SFUs**. It internally uses SFUs to rely the media streams (more specifically [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://pion.ly/){target="\_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"}), but hides all complexities to offer a simpler way to develop videoconferencing and live-streaming applications.
+SFUs are generally low-level tools. Using them directly to implement real-time applications requires a deep understanding of signaling protocols, codecs, networking and other low-level concepts. **OpenVidu is a higher-level abstraction compared to SFUs**. It internally uses SFUs to rely the media streams (more specifically [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://pion.ly/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}), but hides all complexities to offer a simpler way to develop videoconferencing and live-streaming applications.
 
 ## OpenVidu vs mediasoup
 
-[mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){target="\_blank"} is a [WebRTC SFU](#openvidu-vs-sfus). It is a minimalist media server with a super low level API that allows building custom real-time applications. Compared to other SFUs, mediasoup is well known for its outstanding performance.
+[mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"} is a [WebRTC SFU](#openvidu-vs-sfus). It is a minimalist media server with a super low level API that allows building custom real-time applications. Compared to other SFUs, mediasoup is well known for its outstanding performance.
 
 OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](./self-hosting/production-ready/performance.md).
+
+:octicons-arrow-right-24: **[Read the full OpenVidu vs mediasoup comparison](../openvidu-vs-mediasoup.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Microsoft Teams, Google Meet, Zoom
 

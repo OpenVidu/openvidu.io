@@ -1,18 +1,20 @@
 ---
 title: "Rust application server tutorial"
 description: "Build a minimal Rust application server for OpenVidu with Axum and the LiveKit-compatible Rust SDK: issue access tokens and handle webhook events."
+tags:
+  - setupcustomgallery
 ---
 
 # Rust Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/rust){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/rust){ .md-button target="_blank" }
 
-This is a minimal server application built for Rust with [Axum :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/tokio-rs/axum){:target="\_blank"} that allows:
+This is a minimal server application built for Rust with [Axum :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/tokio-rs/axum){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses the [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="\_blank"}.
+It internally uses the [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -32,7 +34,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -167,7 +169,7 @@ async fn create_token(payload: Option<Json<Value>>) -> (StatusCode, Json<Value>)
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="\_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's name and identity in the AccessToken.

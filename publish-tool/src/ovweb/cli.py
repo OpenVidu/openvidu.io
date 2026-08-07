@@ -1,7 +1,7 @@
 """The `ovweb` command line.
 
-Thin by design: this module parses flags, builds a plan and hands off. Anything that decides
-something belongs in :mod:`ovweb.plan`, :mod:`ovweb.redirects` or :mod:`ovweb.pipeline`.
+Thin by design: parse flags, build a plan, hand off. Anything that decides something belongs in
+:mod:`ovweb.plan`, :mod:`ovweb.redirects` or :mod:`ovweb.pipeline`.
 """
 
 from __future__ import annotations
@@ -14,17 +14,42 @@ import typer
 
 from . import __version__, fsops
 from .config import ConfigError, SiteConfig, load_site_config
-from .discovery import known_versions, published_versions, version_branches
+from .discovery import (
+    known_versions,
+    latest_in_tree,
+    published_versions,
+    version_branches,
+    version_folders,
+)
 from .doctor import run_checks
+from .expand import (
+    alias_redirects,
+    expand_candidate_paths,
+    mirror_redirects,
+    mirror_rule,
+    scan_tree,
+    version_redirects,
+    wipe_owned,
+)
 from .gitrepo import Git, GitError, open_repository
+from .lint import ERROR, WARN, run_lint
+from .lint.removed import check_removed_pages
+from .lint.site import check_site
 from .mikewrap import MikeError
+from .model import (
+    CrossProductRule,
+    SectionFallbackRule,
+    TreeRenameRule,
+    UnversionedMirrorRule,
+    VersionAliasRule,
+)
 from .pipeline.postprocess import PostprocessError, postprocess
 from .pipeline.publish import PublishError, publish
 from .plan import build_plan
-from .redirects import RedirectError, render_redirect, resolve_file_redirects, resolve_patterns
+from .redirects import RedirectError, render_redirect, resolve_file_redirects
 from .releases import RegionError
 from .report import Reporter
-from .rewrite import RewriteError
+from .rewrite import RewriteError, sync_version_sitemap
 from .verify import verify
 from .versions import VersionError, validate_minor
 
@@ -137,8 +162,8 @@ def main_callback(
         as_json=as_json,
         color=color,
     )
-    # The group is invokable without a subcommand so that `--version` works on its own; a bare
-    # `ovweb` is already handled by no_args_is_help, so this only catches options with no command.
+    # The group is invokable without a subcommand so `--version` works on its own. A bare `ovweb`
+    # is handled by no_args_is_help, so this only catches options given with no command.
     if context.invoked_subcommand is None:
         typer.echo(context.get_help())
         raise typer.Exit
@@ -349,11 +374,7 @@ def postprocess_command(
     ] = True,
     force: Annotated[bool, _FORCE] = False,
 ) -> None:
-    """Run only the gh-pages post-processing, on a tree, touching no git and no remote.
-
-    This is the debugging entry point, and the unit the parity gate compares: given the same
-    input tree, it must produce the same output tree.
-    """
+    """Run only the gh-pages post-processing, on a tree, touching no git and no remote."""
     ctx: Context = context.obj
     validate_minor(version)
     result = postprocess(
@@ -379,7 +400,11 @@ def redirects_render(
     version: VersionArgument,
     rule: Annotated[str | None, typer.Option("--rule", help="Render only this rule id.")] = None,
 ) -> None:
-    """Print the redirect pages that would be installed for a version."""
+    """Print the `files` redirect pages that would be installed for a version.
+
+    The `expand` rules resolve against a published tree, so they cannot be rendered from the
+    configuration alone; `redirects apply --tree <copy> --dry-run` shows their outcome.
+    """
     ctx: Context = context.obj
     resolved = resolve_file_redirects(ctx.config, version)
     if rule is not None:
@@ -394,12 +419,32 @@ def redirects_render(
         typer.echo(render_redirect(redirect), nl=False)
 
 
+def _expand_summary(rule) -> str:
+    if isinstance(rule, CrossProductRule):
+        combos = 1
+        for _, options in rule.values:
+            combos *= len(options)
+        gate = f", versions {rule.versions}" if rule.versions else ""
+        return f"cross-product: {combos} candidate(s) per version{gate}"
+    if isinstance(rule, TreeRenameRule):
+        gate = f", versions {rule.versions}" if rule.versions else ""
+        return f"tree-rename: {rule.from_path} -> {rule.to_path}{gate}"
+    if isinstance(rule, SectionFallbackRule):
+        return f"section-fallback: {rule.dir} -> {rule.to}, versions {rule.versions}"
+    if isinstance(rule, VersionAliasRule):
+        return f"version-alias: {len(rule.folders)} folder(s)"
+    if isinstance(rule, UnversionedMirrorRule):
+        return f"unversioned-mirror of {rule.for_each}"
+    return "?"
+
+
 @redirects_app.command("check")
 def redirects_check(context: typer.Context) -> None:
     """Validate every redirect rule against every version that exists.
 
     Fails when a rule is ambiguous for some version, when a target is absolute where it must
-    be relative, or when a canonical URL is not absolute.
+    be relative, when a canonical URL is not absolute, or when a `files` rule and an expansion
+    could claim the same path.
     """
     ctx: Context = context.obj
     config = ctx.config
@@ -423,10 +468,21 @@ def redirects_check(context: typer.Context) -> None:
         rendered = [f"{item.rule_id} -> {item.to}" for item in resolved]
         ctx.report.info(f"{version:8} {', '.join(rendered) if rendered else '(no redirects)'}")
 
-    patterns = resolve_patterns(config)
-    ctx.report.heading("404 patterns")
-    for pattern in patterns:
-        ctx.report.info(f"{pattern.id:38} {pattern.match}  ->  {pattern.to}")
+        candidates = expand_candidate_paths(config, version)
+        for redirect in resolved:
+            claimed = candidates.get(redirect.path)
+            if claimed:
+                ctx.report.error(
+                    f"{version}: {redirect.path} is claimed by both {redirect.rule_id!r} "
+                    f"and {claimed!r}"
+                )
+                problems += 1
+
+    ctx.report.heading("Expansion rules")
+    if not config.expand_rules:
+        ctx.report.info("(none)")
+    for rule in config.expand_rules:
+        ctx.report.info(f"{rule.id:38} {_expand_summary(rule)}")
 
     if problems:
         ctx.report.error(f"{problems} version(s) failed to resolve.")
@@ -442,30 +498,75 @@ def redirects_apply(
         str | None, typer.Option("--version", help="Apply to this version only.")
     ] = None,
 ) -> None:
-    """Write the redirect pages into every version folder of a tree.
+    """Reconcile every generated redirect in a tree with the configuration.
 
-    Lets a rule reach versions that are not being rebuilt — which is how the `/3.0/docs/`
-    class of dead end gets fixed without republishing 3.0 from its own branch.
+    Writes the `files` and expansion stubs of every version folder, deleting generated stubs no
+    rule produces any more; lists the stubs in each version's sitemap for the version selector;
+    rebuilds the unversioned mirror and the legacy patch-version folders. This is how a rule
+    reaches versions that are not being rebuilt, and how the alias folders come to exist at
+    all — no publish creates them from nothing.
+
+    With the global `--dry-run`, reports what would change and writes nothing.
     """
     ctx: Context = context.obj
     root = tree.resolve()
-    versions = [only] if only else _versions_in_tree(root)
-    written = 0
+    dry = ctx.dry_run
+    versions = [only] if only else version_folders(root)
+    written = removed = 0
+
     for version in versions:
-        for redirect in resolve_file_redirects(ctx.config, version):
-            fsops.write_text(root / redirect.path, render_redirect(redirect))
-            ctx.report.info(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
+        redirects = version_redirects(root, ctx.config, version)
+        resolved_paths = {redirect.path for redirect in redirects}
+        # Reconcile: a generated stub in the folder that no rule produces any more is stale.
+        index = scan_tree(root, (version,))
+        for stale in sorted(set(index.stub_targets) - resolved_paths):
+            ctx.report.info(f"delete {stale} (no rule generates it)")
+            if not dry:
+                fsops.remove(root / stale)
+            removed += 1
+        for redirect in redirects:
+            ctx.report.detail(f"{redirect.path}  ->  {redirect.to}   [{redirect.rule_id}]")
+            if not dry:
+                fsops.write_text(root / redirect.path, render_redirect(redirect))
             written += 1
-    ctx.report.success(f"Wrote {written} redirect page(s) across {len(versions)} version(s).")
+        # The version selector resolves a moved page by looking its URL up in this file, so
+        # the stubs just reconciled have to be listed there.
+        sitemap = root / version / "sitemap.xml"
+        if sitemap.is_file():
+            text = fsops.read_text(sitemap)
+            synced = sync_version_sitemap(
+                text, base_url=ctx.config.layout.base_url, stubs=resolved_paths
+            )
+            if synced != text:
+                ctx.report.info(f"sync {version}/sitemap.xml ({len(resolved_paths)} stub entries)")
+                if not dry:
+                    fsops.write_text(sitemap, synced)
+                    fsops.write_gzip(sitemap)
 
+    latest = latest_in_tree(root)
+    if mirror_rule(ctx.config) is not None and latest is not None and (only in (None, latest)):
+        redirects = mirror_redirects(root, ctx.config, latest=latest)
+        if not dry:
+            for section in getattr(ctx.config.layout, mirror_rule(ctx.config).for_each):
+                removed += int(wipe_owned(root / section))
+            for redirect in redirects:
+                fsops.write_text(root / redirect.path, render_redirect(redirect))
+        written += len(redirects)
+        ctx.report.info(f"mirror: {len(redirects)} page(s) of {latest} answer unversioned")
 
-def _versions_in_tree(tree: Path) -> list[str]:
-    import re
+    minors = {only} if only else None
+    for folder, redirects in alias_redirects(root, ctx.config, minors=minors):
+        if not dry:
+            wipe_owned(root / folder)
+            for redirect in redirects:
+                fsops.write_text(root / redirect.path, render_redirect(redirect))
+        written += len(redirects)
+        ctx.report.info(f"alias: {folder}/ mirrors {len(redirects)} page(s)")
 
-    return sorted(
-        entry.name
-        for entry in tree.iterdir()
-        if entry.is_dir() and re.fullmatch(r"\d+\.\d+", entry.name)
+    outcome = "Would write" if dry else "Wrote"
+    ctx.report.success(
+        f"{outcome} {written} redirect page(s) across {len(versions)} version(s), "
+        f"removing {removed} stale one(s)."
     )
 
 
@@ -506,11 +607,7 @@ def verify_command(
         str, typer.Option(help="Branch to check out when --tree is absent.")
     ] = "gh-pages",
 ) -> None:
-    """Assert the invariants of a published tree.
-
-    Passes on the live site as it stands, so it is also a check that this tool's model of the
-    published layout is correct.
-    """
+    """Assert the invariants of a published tree."""
     ctx: Context = context.obj
     if tree is not None:
         findings = verify(tree.resolve(), config=ctx.config)
@@ -525,6 +622,77 @@ def verify_command(
         ctx.report.error(f"[{finding.check}] {finding.where}: {finding.detail}")
     ctx.report.error(f"{len(findings)} invariant violation(s).")
     raise typer.Exit(1)
+
+
+# -- lint ------------------------------------------------------------------------------------
+
+
+@app.command("lint")
+def lint_command(
+    context: typer.Context,
+    paths: Annotated[
+        list[Path] | None,
+        typer.Argument(help="Report only findings in these files (repo-relative)."),
+    ] = None,
+    site: Annotated[
+        Path | None,
+        typer.Option(
+            "--site",
+            help="Also validate a built site: every internal link resolves and every "
+            "anchor names a real id.",
+        ),
+    ] = None,
+    against: Annotated[
+        str | None,
+        typer.Option(
+            "--against",
+            help="Also require a redirect rule for every page this revision removed "
+            "relative to REF (e.g. origin/main).",
+        ),
+    ] = None,
+) -> None:
+    """Check the authoring conventions `mkdocs build --strict` cannot see.
+
+    Covers raw-HTML links and images, link form in the files that move at publish,
+    version-pin discipline, SEO field lengths and uniqueness, admonition syntax, the
+    functional `tags:` contract, and asset placement — over the source tree, in seconds,
+    with no build. With `--site DIR` (a `mkdocs build` output), it additionally resolves
+    every internal link and anchor against the built HTML, where the tab anchors MkDocs's
+    own validator cannot see really exist. With `--against REF`, every page that existed
+    in REF and is gone must be claimed by a redirect rule in ovweb.yaml.
+
+    Exit codes: 0 clean, 1 error-severity findings, 2 tool failure.
+    """
+    ctx: Context = context.obj
+    root = ctx.repo.root
+    only = [path.as_posix() for path in paths] if paths else None
+    findings = run_lint(root, layout=ctx.config.layout, paths=only)
+    if site is not None:
+        findings = [*findings, *check_site(site.resolve())]
+    if against is not None:
+        base_pages = ctx.repo.read(
+            "ls-tree", "-r", "--name-only", against, "--", "docs"
+        ).splitlines()
+        findings = [*findings, *check_removed_pages(base_pages, root=root, config=ctx.config)]
+
+    emit = {ERROR: ctx.report.error, WARN: ctx.report.warn}
+    counts = {ERROR: 0, WARN: 0, "info": 0}
+    for finding in findings:
+        counts[finding.severity] = counts.get(finding.severity, 0) + 1
+        suffix = f" — {finding.hint}" if finding.hint else ""
+        emit.get(finding.severity, ctx.report.info)(
+            f"[{finding.check}] {finding.file}:{finding.line}: {finding.message}{suffix}"
+        )
+
+    if counts[ERROR]:
+        ctx.report.error(
+            f"{counts[ERROR]} error(s), {counts[WARN]} warning(s), {counts['info']} info."
+        )
+        raise typer.Exit(1)
+    ctx.report.success(
+        f"No errors ({counts[WARN]} warning(s), {counts['info']} info) across "
+        f"{len(findings)} finding(s)."
+    )
 
 
 # -- doctor ----------------------------------------------------------------------------------
@@ -565,12 +733,11 @@ def doctor(
 # -- entry point -----------------------------------------------------------------------------
 
 #: Options declared on the app callback rather than on a command. click only accepts a group's
-#: options *before* the subcommand, so `ovweb publish latest 3.8 --verbose` is a parse error —
-#: which is exactly the shape everybody reaches for, and which broke the publish workflow the
-#: first time it ran. :func:`hoist_global_options` moves them to the front instead of failing.
+#: options *before* the subcommand, so `ovweb publish latest 3.8 --verbose` is a parse error;
+#: :func:`hoist_global_options` moves them to the front instead of failing.
 #:
-#: `tests/unit/test_cli.py` asserts these two sets stay in step with the actual app, and that no
-#: command ever declares a name listed here — which is what makes the rewriting safe.
+#: `tests/unit/test_cli.py` asserts these two sets stay in step with the app, and that no command
+#: ever declares a name listed here — which is what makes the rewriting safe.
 GLOBAL_SWITCHES = frozenset({"--dry-run", "--json", "--color", "--no-color", "--verbose", "-v"})
 GLOBAL_OPTIONS_WITH_VALUE = frozenset({"--repo", "--layout", "--remote"})
 

@@ -5,7 +5,7 @@ description: "Add your own buttons to the meeting toolbar with OpenVidu Angular 
 
 # Add toolbar buttons using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-toolbar-buttons){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-toolbar-buttons){ .md-button target="_blank" }
 
 The **openvidu-toolbar-buttons** tutorial demonstrates how to add custom buttons to the central part of the default toolbar in the OpenVidu Components Angular library.
 
@@ -31,11 +31,11 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 
 #### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/application-server-tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 #### 4. Run the openvidu-toolbar-buttons tutorial
 
-To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="\_blank"} installed on your development computer.
+To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
 1.  Navigate into the application client directory:
 
@@ -55,7 +55,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
       npm start
     ```
 
-Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="\_blank"}.
+Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
 <!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
@@ -229,27 +229,3 @@ export class AppComponent {
 ```
 
 In this code snippet, the `*ovToolbarAdditionalButtons` directive is used to add two buttons to the toolbar. The `mat-icon-button` component from Angular Material is used to create the buttons. The `toggleVideo` and `toggleAudio` methods are called when the buttons are clicked.
-
-<!--
-## Deploying openvidu-toolbar-buttons
-
- #### 1) Build the docker image
-
-Under the root project folder, you can see the `openvidu-components/docker/` directory. Here it is included all the required files yo make it possible the deployment with OpenVidu.
-
-First of all, you will need to create the **openvidu-toolbar-buttons** docker image. Under `openvidu-components/docker/` directory you will find the `create_image.sh` script. This script will create the docker image with the [openvidu-basic-node](application-server/openvidu-basic-node/) as application server and the static files.
-
-```bash
-./create_image.sh openvidu/openvidu-toolbar-buttons-demo:X.Y.Z openvidu-toolbar-buttons
-```
-
-The script needs two parameters:
-
-1. The name of the docker image to create.
-2. The name of the tutorial folder.
-
-This script will create an image named `openvidu/openvidu-toolbar-buttons-demo:X.Y.Z`. This name will be used in the next step.
-
-#### 2) Deploy the docker image
-
-Time to deploy the docker image. You can follow the [Deploy OpenVidu based application with Docker](/deployment/deploying-openvidu-apps/#with-docker) guide for doing this. -->

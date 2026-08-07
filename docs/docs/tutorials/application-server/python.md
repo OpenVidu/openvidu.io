@@ -1,18 +1,20 @@
 ---
 title: "Python application server tutorial"
 description: "Build a minimal Python application server for OpenVidu with Flask and the LiveKit-compatible Python SDK: issue access tokens and handle webhooks."
+tags:
+  - setupcustomgallery
 ---
 
 # Python Server Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/python){ .md-button target=\_blank }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.8.0/application-server/python){ .md-button target="_blank" }
 
-This is a minimal server application built for Python with [Flask :fontawesome-solid-external-link:{.external-link-icon}](https://flask.palletsprojects.com/en/stable/){:target="\_blank"} that allows:
+This is a minimal server application built for Python with [Flask :fontawesome-solid-external-link:{.external-link-icon}](https://flask.palletsprojects.com/en/stable/){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="\_blank"}.
+It internally uses [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -32,7 +34,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/application-client-tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -110,7 +112,7 @@ def create_token():
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="\_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's identity in the AccessToken.
