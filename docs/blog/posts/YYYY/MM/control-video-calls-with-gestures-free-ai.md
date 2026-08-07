@@ -83,6 +83,8 @@ These models are free and open source. Google maintains and updates them under t
 
 MediaPipe isn't the only option, though. If you need more precision or dedicated commercial support instead, [Banuba](https://www.banuba.com/technology/hand-tracking-and-gesture-recognition){:target="_blank"}, a commercial SDK built on its own proprietary neural networks, explicitly marketed for video chats, is worth a look too.
 
+Prefer open source? [HaGRIDv2](https://github.com/hukenovs/hagrid){:target="_blank"} is a solid pick: a million-image gesture dataset built with video calls in mind, and its lightest baseline classifies a frame in 5ms on CPU alone. Just know it only comes as PyTorch checkpoints. MediaPipe already did the "export it for the browser" homework for you; HaGRIDv2 doesn't, yet.
+
 ## Wiring gestures up to OpenVidu
 
 Once gesture detection is solved, all that's left is hooking it up to the video call.
@@ -144,7 +146,7 @@ Measuring the resources needed, on a laptop with an integrated GPU, we can see t
 
 **Repository:** [github.com/openvidu-labs/openvidu-ai-gestures](https://github.com/openvidu-labs/openvidu-ai-gestures){:target="_blank"}
 
-You'll need [Node.js](https://nodejs.org/en/download){:target="_blank"} and [OpenVidu Local](/docs/self-hosting/local.md) up and running. Then:
+You'll need [Node.js](https://nodejs.org/en/download){:target="_blank"} and Docker installed. Then:
 
 ```bash
 # Terminal 1 — OpenVidu
