@@ -142,7 +142,7 @@ Measuring the resources needed, on a laptop with an integrated GPU, we can see t
 
 ## Try it in two minutes
 
-**Repository:** [github.com/openvidu-labs/openvidu-gestures](https://github.com/openvidu-labs/openvidu-gestures){:target="_blank"}
+**Repository:** [github.com/openvidu-labs/openvidu-ai-gestures](https://github.com/openvidu-labs/openvidu-ai-gestures){:target="_blank"}
 
 You'll need [Node.js](https://nodejs.org/en/download){:target="_blank"} and [OpenVidu Local](/docs/self-hosting/local.md) up and running. Then:
 
@@ -170,4 +170,4 @@ Open [`http://localhost:5094`](http://localhost:5094) and start trying out the g
 
 Everything in this demo runs on your own machine: MediaPipe never sends a single frame anywhere, and the OpenVidu Local deployment you just spun up runs the call itself on your own infrastructure too. Local AI plus a self-hosted video platform means every byte of video and metadata stays under your control, with no per-minute SaaS bill and no third party watching your calls.
 
-If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a one-command local install to a highly available cluster. The [self-hosting docs](/docs/self-hosting/local.md) are the natural next step.
+If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a quick local Docker Compose install to a highly available cluster. The [self-hosting docs](/docs/self-hosting/local.md) are the natural next step.
