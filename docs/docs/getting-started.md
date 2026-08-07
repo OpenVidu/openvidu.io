@@ -33,19 +33,19 @@ That is the whole shape of an OpenVidu application, and it does not change when 
 
 !!! info "Prerequisites"
 
-    [Docker and Docker Compose](https://docs.docker.com/get-started/get-docker/){:target="\_blank"}, and [Node.js](https://nodejs.org/){:target="\_blank"} for the example server on this page. The [application server tutorials](./tutorials/application-server/index.md) cover eight other languages.
+    [Docker and Docker Compose](https://docs.docker.com/get-started/get-docker/){:target="_blank"}, and [Node.js](https://nodejs.org/){:target="_blank"} for the example server on this page. The [application server tutorials](./tutorials/application-server/index.md) cover eight other languages.
 
 ## 1. Run OpenVidu locally
 
 --8<-- "shared/tutorials/run-openvidu-locally.md"
 
-Once it is up, open [http://localhost:7880](http://localhost:7880){:target="\_blank"}. That page lists every service in the deployment along with its credentials, and it is where you will find:
+Once it is up, open [http://localhost:7880](http://localhost:7880){:target="_blank"}. That page lists every service in the deployment along with its credentials, and it is where you will find:
 
 | | |
 | --- | --- |
 | **OpenVidu API** | `ws://localhost:7880` — the URL your client connects to |
 | **API key / secret** | `devkey` / `secret` in the local deployment |
-| [**OpenVidu Dashboard**](http://localhost:7880/dashboard){:target="\_blank"} | Watch rooms, participants and tracks appear as you build |
+| [**OpenVidu Dashboard**](http://localhost:7880/dashboard){:target="_blank"} | Watch rooms, participants and tracks appear as you build |
 
 Keep the dashboard open in a tab. It is the fastest way to see whether something worked.
 
@@ -140,13 +140,13 @@ Three things are happening: the page asks **your** server for a token, connects 
 
 Open the page in **two browser tabs** and click Join in both. Each tab publishes its own camera and subscribes to the other's — that is a real two-participant room, with the media routed by the OpenVidu running on your machine.
 
-Now look at the [dashboard](http://localhost:7880/dashboard){:target="\_blank"}: one room, two participants, four tracks.
+Now look at the [dashboard](http://localhost:7880/dashboard){:target="_blank"}: one room, two participants, four tracks.
 
 ??? question "Nothing appears?"
 
     - **No video and no error** — the browser blocked camera access. Check the permission prompt; `enableCameraAndMicrophone` fails silently in some browsers when denied.
     - **The token request fails** — the token server is not running, or CORS is blocking it. The server above enables CORS for everything, which is fine locally and not fine in production.
-    - **Connection fails** — confirm `docker compose up` is still running and [http://localhost:7880](http://localhost:7880){:target="\_blank"} answers.
+    - **Connection fails** — confirm `docker compose up` is still running and [http://localhost:7880](http://localhost:7880){:target="_blank"} answers.
     - **It works in one tab but not two** — some browsers only hand the camera to one tab at a time. Try one normal tab and one incognito window.
 
 ## Where to go next
