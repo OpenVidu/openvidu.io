@@ -8,7 +8,7 @@ description: "Build the backend of an OpenVidu app in Node.js, Java, Python, Go,
 Every application server below has two specific purposes: 
 
 - Generate LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receive LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+- Receive LiveKit [webhook events](../../reference/webhooks.md).
 
 To do so they all define two REST endpoints:
 
