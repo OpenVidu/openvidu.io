@@ -3,6 +3,53 @@
 <!-- Every redirect on the site is a real, generated page (see publish-tool/ovweb.yaml), so a
      URL reaching this template is a genuine 404: GitHub Pages found no file and no redirect
      covers it. -->
+
+<!-- This template is served at arbitrary URL depths, so every link must be root-absolute
+     (link-rules rule 3). MkDocs does not validate them: check targets by hand. -->
+
+{% block htmltitle %}
+  <title>Page not found - OpenVidu</title>
+{% endblock %}
+
 {% block content %}
-  <h1>404 - Not found</h1>
+  <h1>404 - Page not found</h1>
+  <p>
+    The page you are looking for does not exist or may have been moved. Try one of these
+    instead, or use the search bar at the top of the page:
+  </p>
+  <div class="notfound-buttons">
+    <a
+      class="md-button md-button--primary"
+      href="/latest/meet/"
+      title="Get started with OpenVidu Meet"
+      >OpenVidu Meet docs</a
+    >
+    <a
+      class="md-button md-button--primary"
+      href="/latest/docs/"
+      title="Build with OpenVidu Platform SDKs"
+      >OpenVidu Platform docs</a
+    >
+  </div>
+  <ul>
+    <li><a href="/">Home</a>: what OpenVidu offers, at a glance</li>
+    <li>
+      <a href="/openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a>:
+      choose the right product for your use case
+    </li>
+    <li><a href="/blog/">Blog</a>: news, releases and tutorials</li>
+    <li><a href="/support/">Support</a>: get help from the OpenVidu team</li>
+  </ul>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <style>
+    .notfound-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2em 0;
+    }
+  </style>
 {% endblock %}
