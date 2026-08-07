@@ -8,6 +8,8 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 
 - [Self-hosted video conferencing & custom WebRTC](https://openvidu.io/index.md): Run video conferencing on your own servers. Deploy the ready-made OpenVidu Meet app, or build your own real-time video product with OpenVidu Platform.
 - [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md): OpenVidu Meet is a finished video conferencing app you deploy; OpenVidu Platform is the SDK layer you build on. Compare both and pick one.
+- [OpenVidu vs LiveKit: A Self-Hosted LiveKit Fork](https://openvidu.io/openvidu-vs-livekit/index.md): OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled in.
+- [OpenVidu vs mediasoup: Platform vs Raw SFU Library](https://openvidu.io/openvidu-vs-mediasoup/index.md): mediasoup is a low-level SFU library, not a platform. See exactly what OpenVidu already built on top of it — signaling, rooms, auth, recording, API.
 - [Pricing: Free COMMUNITY & Pay-Per-Core PRO](https://openvidu.io/pricing/index.md): OpenVidu pricing: COMMUNITY edition free forever, PRO from $0.0006 per core per minute. Transparent, pay only for what you use.
 - [OpenVidu support and consultancy](https://openvidu.io/support/index.md): Commercial support and consultancy from the OpenVidu team, plus the community channels where COMMUNITY edition users get help with self-hosting.
 - [About the OpenVidu team](https://openvidu.io/about-us/index.md): The engineers and researchers behind OpenVidu, and the open-source and scientific work the project has grown out of.
