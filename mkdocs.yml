@@ -276,6 +276,8 @@ not_in_nav: |
   /openvidu-meet-vs-openvidu-platform.md
   /openvidu-vs-livekit.md
   /openvidu-vs-mediasoup.md
+  /openvidu-vs-jitsi.md
+  /openvidu-vs-janus.md
   /conditions/
 
 validation:
@@ -456,6 +458,8 @@ plugins:
         - openvidu-meet-vs-openvidu-platform.md
         - openvidu-vs-livekit.md
         - openvidu-vs-mediasoup.md
+        - openvidu-vs-jitsi.md
+        - openvidu-vs-janus.md
         - pricing.md
         - support.md
         - about-us.md
