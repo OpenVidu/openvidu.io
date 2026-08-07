@@ -303,6 +303,20 @@ redirects:
       body: "Redirecting to the advanced recording tutorial with S3 storage…"
       versions: ">=3.2"
 
+    - id: removed-ai-tutorials-index
+      description: >
+        The AI services tutorial category had one tutorial and an index page whose whole content
+        was a button pointing at it — a second hub competing with the AI Services overview, which
+        already lists every AI service and links to both the feature page and the tutorial. The
+        index is gone and the tutorial now lives under AI Services in the nav; this sends the
+        removed URL to the overview that replaced it. Gated at 3.8 because the removal ships by
+        re-publishing the current minor; older folders keep serving their real index.
+      at: "{version}/docs/tutorials/ai-services/index.html"
+      to: "../../ai/overview/"
+      canonical: "{site_url}/latest/docs/ai/overview/"
+      body: "Redirecting to the AI Services overview…"
+      versions: ">=3.8"
+
   # Rules that generate many redirect pages from one entry. Every kind resolves against the
   # published tree at publish time (and via `ovweb redirects apply`), under three filters:
   # a candidate path already holding a real page is skipped, a candidate whose target does not

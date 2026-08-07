@@ -65,9 +65,9 @@ nav:
   - OpenVidu Platform:
       - docs/index.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
-      - Developing your OpenVidu app:
+      - Build your app:
           - docs/developing-your-openvidu-app/index.md
-          - How to: docs/developing-your-openvidu-app/how-to.md
+          - Common operations: docs/developing-your-openvidu-app/how-to.md
       - Tutorials:
           - Application Server:
               - docs/tutorials/application-server/index.md
@@ -113,9 +113,6 @@ nav:
               - Toggle Hand: docs/tutorials/angular-components/openvidu-toggle-hand.md
               - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
               - Demo App: docs/tutorials/angular-components/openvidu-components-demo.md
-          - AI Services:
-              - docs/tutorials/ai-services/index.md
-              - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
@@ -241,6 +238,7 @@ nav:
               - Deploy and configure with an external proxy: docs/self-hosting/how-to-guides/deploy-with-external-proxy.md
               - Customize OpenVidu Meet base path: docs/self-hosting/how-to-guides/customize-meet-base-path.md
               - Create AWS certificate for HA: docs/self-hosting/how-to-guides/create-configure-AWS-certificate.md
+              - Troubleshoot recordings: docs/troubleshooting/recording.md
       - AI Services:
           - Overview: docs/ai/overview.md
           - Live captions: docs/ai/live-captions.md
@@ -249,11 +247,10 @@ nav:
               - Speech Processing agent: docs/ai/openvidu-agents/speech-processing-agent.md
               - Agent dispatch: docs/ai/openvidu-agents/agent-dispatch.md
           - Custom agents: docs/ai/custom-agents.md
+          - Live captions tutorial: docs/tutorials/ai-services/openvidu-live-captions.md
       - UI Components:
           - Angular Components: docs/ui-components/angular-components.md
           - React Components: docs/ui-components/react-components.md
-      - Troubleshooting:
-          - Recording: docs/troubleshooting/recording.md
       - Releases: docs/releases.md
   - Blog:
       - blog/index.md
@@ -505,11 +502,9 @@ plugins:
         OpenVidu Platform tutorials — advanced features:
         - docs/tutorials/advanced-features/*.md
 
-        OpenVidu Platform tutorials — AI services:
-        - docs/tutorials/ai-services/*.md
-
         OpenVidu Platform AI services:
         - docs/ai/*.md
+        - docs/tutorials/ai-services/*.md
 
         OpenVidu Platform self-hosting:
         - docs/self-hosting/deployment-types.md
