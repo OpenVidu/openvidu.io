@@ -30,6 +30,8 @@ layout:
     - openvidu-meet-vs-openvidu-platform
     - openvidu-vs-livekit
     - openvidu-vs-mediasoup
+    - openvidu-vs-jitsi
+    - openvidu-vs-janus
     - conditions
     - blog
     - about-us
