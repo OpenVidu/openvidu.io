@@ -305,22 +305,17 @@ redirects:
 
     - id: removed-ai-tutorials-index
       description: >
-        The AI services tutorial category had an index page whose whole content was a button
-        pointing at the one tutorial in it. The index is gone; the tutorials stay where they are,
-        so the removed URL lands on that tutorial rather than on a different section. Gated at 3.8
-        because the removal ships by re-publishing the current minor; older folders keep serving
-        their real index.
+        The AI services tutorials index was a link-only page, removed in 3.8. Its URL lands on
+        the tutorial it pointed at.
       at: "{version}/docs/tutorials/ai-services/index.html"
       to: "openvidu-live-captions/"
       canonical: "{site_url}/latest/docs/tutorials/ai-services/openvidu-live-captions/"
       body: "Redirecting to the Live Captions tutorial…"
       versions: ">=3.8"
 
-    # The section and its one guide were renamed to the names the nav had always shown:
-    # "Developing your OpenVidu app" / "How to" were the folder and file names, "Build your app" /
-    # "Common operations" what a reader saw. Both gated at 3.8 because the rename ships by
-    # re-publishing the current minor; older folders keep serving the old paths as real pages.
     - id: renamed-build-your-app
+      description: >
+        developing-your-openvidu-app/ was renamed build-your-app/ in 3.8, after the nav name.
       at: "{version}/docs/developing-your-openvidu-app/index.html"
       to: "../build-your-app/"
       canonical: "{site_url}/latest/docs/build-your-app/"
@@ -328,6 +323,8 @@ redirects:
       versions: ">=3.8"
 
     - id: renamed-common-operations
+      description: >
+        how-to.md in that folder was renamed common-operations.md in 3.8, after the nav name.
       at: "{version}/docs/developing-your-openvidu-app/how-to/index.html"
       to: "../../build-your-app/common-operations/"
       canonical: "{site_url}/latest/docs/build-your-app/common-operations/"

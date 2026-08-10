@@ -1,9 +1,9 @@
 ---
-title: "OpenVidu how-to quick reference"
-description: "A quick reference for the operations you need most while building an OpenVidu app, from creating rooms and tokens to publishing and recording tracks."
+title: "Common operations"
+description: "The operations you need most often in an OpenVidu app: create rooms, mint tokens, publish and subscribe to tracks, record, and receive webhooks."
 ---
 
-# How to develop your OpenVidu application
+# Common operations
 
 This page is a collection of the most common operations you may want to perform in your application while integrating OpenVidu. Depending on the scope of the operation, these operations will be performed on the client side using a LiveKit Client SDK, or on the server side using a LiveKit Server SDK (or directly using the HTTP server API). Consider the architecture of an OpenVidu application:
 

@@ -1,9 +1,9 @@
 ---
-title: "Developing your OpenVidu application"
-description: "The pieces of an OpenVidu application and the order to build them in: the application server, the client, and the deployment they both talk to."
+title: "Build your app"
+description: "Build your OpenVidu app in the right order: launch a deployment, mint access tokens in your application server, then build the client UI."
 ---
 
-# Developing your OpenVidu application
+# Build your app
 
 Here's a high-level overview of the steps involved in building an OpenVidu application:
 
