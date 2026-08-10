@@ -178,6 +178,10 @@
 
 <!-- Add scripts that need to run afterwards here -->
 
+{% if page.meta and page.meta.tags and "openviduregister" in page.meta.tags %}
+<script src="{{ 'javascripts/openvidu-register/openvidu-register.js' | url }}"></script>
+{% endif %}
+
 {% endblock %}
 
 {% block styles %}
@@ -244,6 +248,11 @@
 
 {% if page.meta.tags and "Meet" in page.meta.tags %}
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
+{% endif %}
+
+{% if page.meta.tags and "openviduregister" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
+<link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
 {% endif %}
 
 {% endif %}

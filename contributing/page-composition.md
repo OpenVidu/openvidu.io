@@ -82,6 +82,13 @@ copy its tags too.** These are the tags currently used:
   being viewed. Loads
   [`releases-scroll-to-version.js`](../docs/javascripts/releases-scroll-to-version.js).
 
+- `openviduregister`: the page embeds the `<openvidu-register>` Amplify sign-in web component
+  (only [`account.md`](../docs/account.md)). Loads the ~4.4 MB `openvidu-register.js` bundle plus
+  `openvidu-register.css` and `amplify.css` — never load these site-wide; every other page gets
+  its Sign In/Sign Out header button from a small inline script in
+  [`partials/header.html`](../docs/overrides/partials/header.html) that reads the Cognito session
+  from `localStorage`.
+
 - `dropdown`: groups the page's top-level nav tab into a dropdown menu; read by
   [`docs/overrides/partials/tabs.html`](../docs/overrides/partials/tabs.html) from the nav item's
   page (or the first child of a nav group).
