@@ -124,8 +124,10 @@
         <div class="footer-column footer-products-gap grid-20 tablet-grid-50 mobile-grid-100">
           <h4>PRODUCTS</h4>
           <div class="footer-conditions-list">
-            <a href="{{ base_url }}/latest/meet/">OpenVidu Meet</a>
-            <a href="{{ base_url }}/latest/docs/">OpenVidu Platform</a>
+            {# Absolute, not base_url-relative: `latest` sits outside the version folder,
+               so no relative path from a versioned page can reach it. #}
+            <a href="/latest/meet/">OpenVidu Meet</a>
+            <a href="/latest/docs/">OpenVidu Platform</a>
             <a href="{{ base_url }}/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
           </div>
         </div>

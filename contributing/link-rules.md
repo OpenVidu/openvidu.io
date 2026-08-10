@@ -84,7 +84,17 @@ see [checks.md](checks.md).
 
 Links from HTML to **versioned** pages (rare) still use relative-to-built-folder paths: a page
 `performance.md` builds to `performance/index.html`, so add one extra `../` compared to the
-Markdown path (unless linking from an `index.md`).
+Markdown path (unless linking from an `index.md`). This works only **within one version**, where
+source and target share the version folder.
+
+> [!WARNING]
+> **A link to `/latest/…` must be absolute — never relative, never `{{ base_url }}`-based.**
+> `latest` is a sibling of the version folders, not a page inside one, so no relative path from a
+> versioned page reaches it: MkDocs computes the depth without knowing the version segment mike
+> adds later, and nothing rewrites it at publish time (`_absolutise_non_versioned_links` only
+> covers `non_versioned_pages`). `{{ base_url }}/latest/meet/` renders as
+> `../../latest/meet/`, which on `/3.8/docs/x/` resolves to the 404 `/3.8/latest/meet/`. The
+> theme footer's two product links are the site-wide instance of this.
 
 ## 4. Releases pages are the one exception
 
