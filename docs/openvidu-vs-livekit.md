@@ -95,7 +95,7 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.
 | Media engine | Pion<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> or [**mediasoup**](docs/self-hosting/production-ready/performance.md) (~2x more efficient)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Pion |
 | Autoscaling | Yes: [Elastic](docs/self-hosting/elastic/index.md) & [HA](docs/self-hosting/ha/index.md) modes<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Autoscaling is yours to build and operate |
 | License | Apache 2.0<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> / commercial<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Apache 2.0 |
-| Egress/Ingress | [Bundled by default](docs/developing-your-openvidu-app/how-to.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> | Separate services you deploy and operate yourself |
+| Egress/Ingress | [Bundled by default](docs/build-your-app/common-operations.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> | Separate services you deploy and operate yourself |
 | AI agents | [OpenVidu Agents](docs/ai/overview.md) (on top of LiveKit's Agent framework), speech-processing agent bundled | LiveKit's Agent framework, DIY (no agent bundled) |
 | High-level integrations | [OpenVidu Meet](meet/index.md), a ready-to-use videoconferencing application, optionally [embeddable in your own app](meet/embedded/intro.md) | None |
 | Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span>, with detailed per-room and per-participant views<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | No |
@@ -116,7 +116,7 @@ simply don't work until it's wired up.
 
 OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</span> ships all of it pre-integrated by default:
 
-- [**Egress and Ingress**](docs/developing-your-openvidu-app/how-to.md) — no separate deployment step.
+- [**Egress and Ingress**](docs/build-your-app/common-operations.md) — no separate deployment step.
 - [**S3-compatible storage for recordings**](docs/tutorials/advanced-features/recording-basic-s3.md), pre-configured (MinIO) out of the box.
 - [**An admin dashboard**](docs/self-hosting/production-ready/observability/openvidu-dashboard.md) to monitor Room status in real time and historically — participants, published tracks, Egress/Ingress activity.
 - [**A Docker Compose local development environment**](docs/self-hosting/local.md) with automatic certificate management, so you can test on real mobile devices on your LAN without extra setup.

@@ -18,4 +18,3 @@ OpenVidu deployments are installed with sane defaults, but you may want to custo
 - [How to deploy and configure OpenVidu with an existing external proxy](./deploy-with-external-proxy.md)
 - [Customize OpenVidu Meet base path](./customize-meet-base-path.md)
 - [Create and configure an AWS certificate for HA deployment](./create-configure-AWS-certificate.md)
-- [Troubleshoot recordings: missing files, 503s and Egress CPU pressure](../../troubleshooting/recording.md)

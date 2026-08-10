@@ -305,16 +305,33 @@ redirects:
 
     - id: removed-ai-tutorials-index
       description: >
-        The AI services tutorial category had one tutorial and an index page whose whole content
-        was a button pointing at it — a second hub competing with the AI Services overview, which
-        already lists every AI service and links to both the feature page and the tutorial. The
-        index is gone and the tutorial now lives under AI Services in the nav; this sends the
-        removed URL to the overview that replaced it. Gated at 3.8 because the removal ships by
-        re-publishing the current minor; older folders keep serving their real index.
+        The AI services tutorial category had an index page whose whole content was a button
+        pointing at the one tutorial in it. The index is gone; the tutorials stay where they are,
+        so the removed URL lands on that tutorial rather than on a different section. Gated at 3.8
+        because the removal ships by re-publishing the current minor; older folders keep serving
+        their real index.
       at: "{version}/docs/tutorials/ai-services/index.html"
-      to: "../../ai/overview/"
-      canonical: "{site_url}/latest/docs/ai/overview/"
-      body: "Redirecting to the AI Services overview…"
+      to: "openvidu-live-captions/"
+      canonical: "{site_url}/latest/docs/tutorials/ai-services/openvidu-live-captions/"
+      body: "Redirecting to the Live Captions tutorial…"
+      versions: ">=3.8"
+
+    # The section and its one guide were renamed to the names the nav had always shown:
+    # "Developing your OpenVidu app" / "How to" were the folder and file names, "Build your app" /
+    # "Common operations" what a reader saw. Both gated at 3.8 because the rename ships by
+    # re-publishing the current minor; older folders keep serving the old paths as real pages.
+    - id: renamed-build-your-app
+      at: "{version}/docs/developing-your-openvidu-app/index.html"
+      to: "../build-your-app/"
+      canonical: "{site_url}/latest/docs/build-your-app/"
+      body: "Redirecting to Build your app…"
+      versions: ">=3.8"
+
+    - id: renamed-common-operations
+      at: "{version}/docs/developing-your-openvidu-app/how-to/index.html"
+      to: "../../build-your-app/common-operations/"
+      canonical: "{site_url}/latest/docs/build-your-app/common-operations/"
+      body: "Redirecting to Common operations…"
       versions: ">=3.8"
 
   # Rules that generate many redirect pages from one entry. Every kind resolves against the

@@ -299,7 +299,7 @@ Then look for a new `mediaTrack published` from the same participant identity in
 
 The recorder connects and subscribes to the track successfully, but the recording pipeline never starts because no media ever arrives from the publisher. When the track finally closes, the egress aborts having recorded nothing.
 
-This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](../developing-your-openvidu-app/how-to.md#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
+This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](../build-your-app/common-operations.md#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
 
 It is **not** a network, egress-node or capacity problem. The same peer connection's other tracks (for example the microphone) typically record fine at the same time, which proves the media path works; there is simply no video being sent.
 
