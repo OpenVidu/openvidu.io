@@ -611,13 +611,8 @@ extra_css:
   - stylesheets/extra.css
   - stylesheets/unsemantic-grid.css
   - stylesheets/livekit-tutorials.css
-  - stylesheets/amplify.css
   - stylesheets/home.css
   - stylesheets/openvidu-call.css
-  - javascripts/openvidu-register/openvidu-register.css
-
-extra_javascript:
-  - javascripts/openvidu-register/openvidu-register.js
 
 copyright: >
   2025 &copy; OpenVidu<br>

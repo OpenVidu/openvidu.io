@@ -161,11 +161,77 @@
 
     <div class="md-typeset log-in-div">
       {% if page.title != "Account" %}
-      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
+      <a href="/account" class="md-button sign-btn-in-styles" id="sign-in-button">Sign In</a>
       {% else %}
       <div id="login-loader" class="lds-ripple"><div></div><div></div></div>
       {% endif %}
     </div>
+    {% if not page or not page.file or page.file.src_uri != "account.md" %}
+    <script>
+      /* Reflects the Amplify (Cognito) session of the /account app by reading the
+         localStorage keys it maintains, so the 4.4 MB widget bundle only loads there. */
+      (function () {
+        var btn = document.getElementById("sign-in-button");
+        if (!btn) return;
+        var PREFIX = "CognitoIdentityServiceProvider.";
+        function authKeys() {
+          var keys = [];
+          try {
+            for (var i = 0; i < localStorage.length; i++) {
+              var k = localStorage.key(i);
+              if (k.indexOf(PREFIX) === 0 || k.indexOf("amplify-") === 0) keys.push(k);
+            }
+          } catch (e) {}
+          return keys;
+        }
+        function session() {
+          var keys = authKeys();
+          for (var i = 0; i < keys.length; i++) {
+            var m = keys[i].match(/^CognitoIdentityServiceProvider\.([^.]+)\.LastAuthUser$/);
+            if (!m) continue;
+            var user = localStorage.getItem(keys[i]);
+            var base = PREFIX + m[1] + "." + user + ".";
+            if (!localStorage.getItem(base + "idToken")) continue;
+            var email = user.indexOf("@") !== -1 ? user : "";
+            try {
+              JSON.parse(localStorage.getItem(base + "userData")).UserAttributes.forEach(function (a) {
+                if (a.Name === "email") email = a.Value;
+              });
+            } catch (e) {}
+            return { email: email };
+          }
+          return null;
+        }
+        function showSignedOut() {
+          btn.innerText = "Sign In";
+          btn.onclick = null;
+          btn.classList.remove("sign-btn-out-styles");
+          btn.classList.add("sign-btn-in-styles");
+          var chip = document.getElementById("account-btn");
+          if (chip) chip.parentNode.removeChild(chip);
+        }
+        var s = session();
+        if (!s) return;
+        btn.innerText = "Sign Out";
+        btn.classList.remove("sign-btn-in-styles");
+        btn.classList.add("sign-btn-out-styles");
+        btn.onclick = function (e) {
+          e.preventDefault();
+          authKeys().forEach(function (k) {
+            try { localStorage.removeItem(k); } catch (e) {}
+          });
+          showSignedOut();
+        };
+        if (!document.getElementById("account-btn")) {
+          btn.insertAdjacentHTML(
+            "beforebegin",
+            '<a id="account-btn" class="social-icon active" href="/account"><span class="material-symbols-outlined">account_circle</span><div class="user-name"></div></a>'
+          );
+          document.querySelector("#account-btn .user-name").textContent = s.email || "Account";
+        }
+      })();
+    </script>
+    {% endif %}
 
   </nav>
 

@@ -7,13 +7,14 @@ hide:
   - footer
   - search-bar
   - version-selector
+tags:
+  - openviduregister
 ---
 <style>
   .md-typeset h1 {
     display: none;
   }
 </style>
-<link rel="stylesheet" type="text/css" href="../javascripts/openvidu-register/openvidu-register.css">
 <script>
 window.amplifyActive = true;
 </script>
