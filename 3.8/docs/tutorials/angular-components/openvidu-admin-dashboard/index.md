@@ -306,7 +306,7 @@ Access your application client through [`https://xxx-yyy-zzz-www.openvidu-local.
 
 This tutorial is an Angular project generated with Angular CLI tool. Therefore, you will see many configuration files and other components that are not the primary focus of this tutorial. We will concentrate on the following files in the `src` directory:
 
-- `main.ts`: This file defines the root application component. It imports the `OpenViduComponentsModule`, where we configure the [OpenVidu Components Angular](https://openvidu.io/3.8/docs/reference-docs/openvidu-components-angular/index.md) library.
+- `main.ts`: This file defines the root application component. It imports the `OpenViduComponentsModule`, where we configure the [OpenVidu Components Angular](https://openvidu.io/3.8/docs/reference-docs/openvidu-components-angular/) library.
 - `app/app.component.ts`: This file defines the **AppComponent**, the primary and sole component of the application. It is responsible for requesting the OpenVidu token and passing it to the videoconference component, facilitating the connection to the OpenVidu Room.
 - `styles.scss`: This file defines the global styles of the application. Here, you can customize the UI of the OpenVidu Components Angular library.
 

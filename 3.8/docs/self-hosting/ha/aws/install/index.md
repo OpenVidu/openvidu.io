@@ -4,7 +4,7 @@ AWS
 
 Info
 
-OpenVidu High Availability is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu High Availability is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu High Availability deployment on AWS. The deployed services are the same as in the [On Premises High Availability installation](https://openvidu.io/3.8/docs/self-hosting/ha/on-premises/install-nlb/index.md), but the process is automated through AWS CloudFormation.
 
@@ -68,7 +68,7 @@ Parameters of this section look like this:
 
 OpenVidu HA Configuration
 
-Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/3.8/account/index.md).
+Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/).
 
 For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md).
 
