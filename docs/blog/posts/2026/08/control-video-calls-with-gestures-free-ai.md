@@ -48,7 +48,7 @@ but no, it's not magic. These gestures are recognized in real time with [MediaPi
 The gestures we've wired up are:
 
 - **✊ Closed fist.** Turns off your camera. Close the fist again and it turns back on.
-- **☝️ Index finger raised.** Mutes or unmutes your microphone.
+- **☝️ Pointing up.** Mutes or unmutes your microphone.
 - **✋ Open palm.** Raises your hand: the rest of the room sees a pulsing badge appear on your tile within a second.
 - **✌️ Victory sign.** Shows or hides, only in your own view, the hand-tracking skeleton MediaPipe is reading from your hand at that instant.
 
@@ -63,7 +63,7 @@ And no, it's not complex to install and set up:
 ```ts
 import * as vision from '@mediapipe/tasks-vision';
 
-// Vendored locally (see the repo's scripts/vendor-mediapipe.sh, wired to run
+// Vendored locally (see the repo's client/scripts/vendor-mediapipe.sh, wired to run
 // on `npm install`) and served same-origin, so joining a call never fires a
 // request to jsDelivr or Google Cloud Storage.
 const WASM_FILESET_URL = '/mediapipe/wasm';
