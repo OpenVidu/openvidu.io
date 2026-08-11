@@ -48,7 +48,7 @@ but no, it's not magic. These gestures are recognized in real time with [MediaPi
 The gestures we've wired up are:
 
 - **✊ Closed fist.** Turns off your camera. Close the fist again and it turns back on.
-- **☝️ Index finger raised.** Mutes or unmutes your microphone.
+- **☝️ Pointing up.** Mutes or unmutes your microphone.
 - **✋ Open palm.** Raises your hand: the rest of the room sees a pulsing badge appear on your tile within a second.
 - **✌️ Victory sign.** Shows or hides, only in your own view, the hand-tracking skeleton MediaPipe is reading from your hand at that instant.
 
@@ -63,7 +63,7 @@ And no, it's not complex to install and set up:
 ```ts
 import * as vision from '@mediapipe/tasks-vision';
 
-// Vendored locally (see the repo's scripts/vendor-mediapipe.sh, wired to run
+// Vendored locally (see the repo's client/scripts/vendor-mediapipe.sh, wired to run
 // on `npm install`) and served same-origin, so joining a call never fires a
 // request to jsDelivr or Google Cloud Storage.
 const WASM_FILESET_URL = '/mediapipe/wasm';
@@ -177,4 +177,4 @@ Open [`http://localhost:5094`](http://localhost:5094) and start trying out the g
 
 Everything in this demo runs on your own machine: the gesture model reads your camera locally and never uploads a video frame anywhere, and the OpenVidu Local deployment you just spun up runs the call itself on your own infrastructure too. That combination (local gesture recognition plus a self-hosted video platform) means your video and call metadata stay on infrastructure you control, with no per-minute SaaS bill. It doesn't mean *zero* data leaves the browser, or that you're off the hook on consent: see the previous section.
 
-If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a quick local Docker Compose install to a highly available cluster. The [self-hosting docs](/docs/self-hosting/local.md) are the natural next step.
+If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/latest/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a quick local Docker Compose install to a highly available cluster. The [self-hosting docs](/latest/docs/self-hosting/local.md) are the natural next step.
