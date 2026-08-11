@@ -49,7 +49,7 @@ The gestures we've wired up are:
 
 - **✊ Closed fist.** Turns off your camera. Close the fist again and it turns back on.
 - **☝️ Index finger raised.** Mutes or unmutes your microphone.
-- **✋ Open palm.** Raises your hand — the rest of the room sees a pulsing badge appear on your tile within a second.
+- **✋ Open palm.** Raises your hand: the rest of the room sees a pulsing badge appear on your tile within a second.
 - **✌️ Victory sign.** Shows or hides, only in your own view, the hand-tracking skeleton MediaPipe is reading from your hand at that instant.
 
 Each gesture has to be held steady for a period of time (650 ms) for the action to fire, which keeps an unintentional gesture from triggering the action.
@@ -58,18 +58,16 @@ Each gesture has to be held steady for a period of time (650 ms) for the action 
 
 [MediaPipe](https://developers.google.com/edge/mediapipe){:target="_blank"} is Google's family of computer vision models, built to run on your own device instead of on a server.
 
-And no, it's not complex to install and set up. Using it is as straightforward as this:
+And no, it's not complex to install and set up:
 
 ```ts
 import * as vision from '@mediapipe/tasks-vision';
 
-const TASKS_VISION_VERSION = '0.10.14';
-
-const WASM_FILESET_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${TASKS_VISION_VERSION}/wasm`;
-
-const MODEL_URL =
-  'https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task';
-
+// Vendored locally (see the repo's scripts/vendor-mediapipe.sh, wired to run
+// on `npm install`) and served same-origin, so joining a call never fires a
+// request to jsDelivr or Google Cloud Storage.
+const WASM_FILESET_URL = '/mediapipe/wasm';
+const MODEL_URL = '/mediapipe/models/gesture_recognizer.task';
 
 const fileSet = await vision.FilesetResolver.forVisionTasks(WASM_FILESET_URL);
 this.recognizer = await vision.GestureRecognizer.createFromOptions(fileSet, {
@@ -82,11 +80,15 @@ this.recognizer = await vision.GestureRecognizer.createFromOptions(fileSet, {
 });
 ```
 
-These models are free and open source. Google maintains and updates them under the Apache 2.0 license, and you can use them in your own project at no cost at all. You can check MediaPipe's privacy policy [here](https://github.com/google-ai-edge/mediapipe#privacy-notice){:target="_blank"}.
+MediaPipe's own quick-start snippet points `WASM_FILESET_URL` and `MODEL_URL` straight at jsDelivr and Google Cloud Storage instead. That's fine for trying something out, but it means every participant's browser calls out to both on every single call. We vendor both locally and serve them from our own origin.
+
+The MediaPipe *library* is free and open source, maintained by Google under the Apache 2.0 license. The pretrained models it ships, including the gesture recognizer, come with their own [model card](https://storage.googleapis.com/mediapipe-assets/gesture_recognizer/model_card_hand_gesture_classification_with_faireness_2022.pdf){:target="_blank"} and aren't necessarily covered by that same license, so it's worth checking before you redistribute a model binary yourself. MediaPipe's [privacy notice](https://github.com/google-ai-edge/mediapipe#privacy-notice){:target="_blank"} is also worth reading closely: your video frames stay on-device, but MediaPipe can still send usage metrics to Google, and getting informed consent from your users for that is on you, not Google.
 
 MediaPipe isn't the only option, though. If you need more precision or dedicated commercial support instead, [Banuba](https://www.banuba.com/technology/hand-tracking-and-gesture-recognition){:target="_blank"}, a commercial SDK built on its own proprietary neural networks, explicitly marketed for video chats, is worth a look too.
 
-Prefer open source? [HaGRIDv2](https://github.com/hukenovs/hagrid){:target="_blank"} is a solid pick: a million-image gesture dataset built with video calls in mind, and its lightest baseline classifies a frame in 5ms on CPU alone. Just know it only comes as PyTorch checkpoints. MediaPipe already did the "export it for the browser" homework for you; HaGRIDv2 doesn't, yet.
+Want to inspect the training data yourself instead of trusting a black box? [HaGRIDv2](https://github.com/hukenovs/hagrid){:target="_blank"} is a million-plus-image gesture dataset built with video calls in mind, with a lightest baseline that classifies a frame in 5ms on CPU alone.
+
+It isn't open source, though. Its own [license file](https://github.com/hukenovs/hagrid/blob/master/license/en_us.pdf){:target="_blank"} states outright that it's "not a Creative Commons license": it's a bespoke, share-alike-style license, explicitly non-sublicensable, published by SaluteDevices (part of Russia's Sber group) and defined under Russian civil law for its database rights. Read it yourself before building anything commercial on it, a non-sublicensable share-alike license is a real obstacle to shipping a derived product, not a formality. It also only ships as PyTorch checkpoints; MediaPipe already did the "export it for the browser" homework for you, HaGRIDv2 doesn't, yet.
 
 ## Wiring gestures up to OpenVidu
 
@@ -139,8 +141,8 @@ Measuring the resources needed, on a laptop with an integrated GPU, we can see t
 
 | Resource | Measured figure |
 |---|---|
-| Per-frame inference, GPU | ≈ 9.2 ms on average — 11% of the 83 ms budget per cycle at 12 Hz |
-| Per-frame inference, CPU (no GPU available) | ≈ 35 ms on average — 3.8× slower than GPU, but still 42% of the budget, comfortably real-time |
+| Per-frame inference, GPU | ≈ 9.2 ms on average (11% of the 83 ms budget per cycle at 12 Hz) |
+| Per-frame inference, CPU (no GPU available) | ≈ 35 ms on average (3.8× slower than GPU, but still 42% of the budget, comfortably real-time) |
 | Memory (JS heap) per recognizer instance | ≈ 32 MB |
 
 **You don't need a dedicated GPU.** The GPU delegate uses WebGL2, supported on practically any desktop or mobile browser today, including integrated GPUs from a decade ago.
@@ -152,18 +154,18 @@ Measuring the resources needed, on a laptop with an integrated GPU, we can see t
 You'll need [Node.js](https://nodejs.org/en/download){:target="_blank"} and Docker installed. Then:
 
 ```bash
-# Terminal 1 — OpenVidu
+# Terminal 1: OpenVidu
 git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.8.0
 cd openvidu-local-deployment/community
 ./configure_lan_private_ip_linux.sh
 docker compose up
 
-# Terminal 2 — token server
+# Terminal 2: token server
 cd server
 npm install
 npm start   # serves POST /token on port 6084
 
-# Terminal 3 — client
+# Terminal 3: client
 cd client
 npm install
 npm run dev
@@ -173,6 +175,6 @@ Open [`http://localhost:5094`](http://localhost:5094) and start trying out the g
 
 ## Where to go from here
 
-Everything in this demo runs on your own machine: MediaPipe never sends a single frame anywhere, and the OpenVidu Local deployment you just spun up runs the call itself on your own infrastructure too. Local AI plus a self-hosted video platform means every byte of video and metadata stays under your control, with no per-minute SaaS bill and no third party watching your calls.
+Everything in this demo runs on your own machine: the gesture model reads your camera locally and never uploads a video frame anywhere, and the OpenVidu Local deployment you just spun up runs the call itself on your own infrastructure too. That combination (local gesture recognition plus a self-hosted video platform) means your video and call metadata stay on infrastructure you control, with no per-minute SaaS bill. It doesn't mean *zero* data leaves the browser, or that you're off the hook on consent: see the previous section.
 
 If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a quick local Docker Compose install to a highly available cluster. The [self-hosting docs](/docs/self-hosting/local.md) are the natural next step.
