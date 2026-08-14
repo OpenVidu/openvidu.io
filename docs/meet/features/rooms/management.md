@@ -1,8 +1,9 @@
 ---
 title: "Room creation and management in OpenVidu Meet"
 description: "Create, edit, list and delete OpenVidu Meet rooms from the application, configure auto-deletion and appearance, or do it all from the REST API."
-tags:
-    - setupcustomgallery
+page_features:
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Creation & Management
@@ -20,8 +21,8 @@ Create a new room from the **"Rooms"** page with the **"Create Room"** button. T
 - **Basic creation**: just give the room a name and create it immediately with default settings.
 - **Advanced creation**: open the configuration **wizard** to fine-tune the room before creating it.
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The advanced wizard guides you through the following steps:
 
@@ -33,8 +34,8 @@ The advanced wizard guides you through the following steps:
 | **Recording Settings** | Enable recording and choose whether to enable anonymous access to individual recordings.                                                                                                                     |
 | **Recording Layout**   | The visual [layout](../recordings/configuration.md#recording-layouts) of the recordings.                                                                                                                     |
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! info
 
@@ -44,8 +45,8 @@ The advanced wizard guides you through the following steps:
 
 Reopen the configuration wizard for an existing room from the **"Rooms"** page or the [room details page](#room-details) to change its **features**, **access** settings and **recording** options, as long as no meeting is currently active.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Room configuration wizard editing an existing room"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Room configuration wizard editing an existing room"/></a>
+![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 !!! info
 
@@ -61,8 +62,8 @@ Every room has a status that controls whether it can host meetings:
 
 Managers can **close** or **reopen** a room at any time from the **"Rooms"** page or the [room details page](#room-details).
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/update-room-status-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/update-room-status-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/update-room-status-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/update-room-status-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## List & filter rooms { #list-rooms }
 
@@ -75,8 +76,8 @@ The **"Rooms"** page lists every room available to you, with its owner, status, 
 - [Delete rooms](#delete-rooms) individually or in bulk.
 - Share [room access links](access.md).
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-dark.png#only-dark" loading="lazy" class="round-corners" alt="Rooms page listing rooms with their actions"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-light.png#only-light" loading="lazy" class="round-corners" alt="Rooms page listing rooms with their actions"/></a>
+![Rooms page listing rooms with their actions](../../../assets/images/meet/rooms/management/room-list-dark.png#only-dark){ .round-corners loading=lazy }
+![Rooms page listing rooms with their actions](../../../assets/images/meet/rooms/management/room-list-light.png#only-light){ .round-corners loading=lazy }
 
 ## Room details { #room-details }
 
@@ -85,15 +86,15 @@ Clicking a room opens its **details page**, which shows the room information and
 - **Recordings**: the [recordings](../recordings/overview.md) generated in this room, with play, download, share and delete actions (subject to [recording permissions](../recordings/overview.md#recording-permissions)).
 - **Room Members**: the [users and identified guests](../room-members/overview.md) explicitly added to the room. See [Room Members › Creation & Management](../room-members/management.md).
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-dark.png#only-dark" loading="lazy" class="round-corners" alt="Recordings tab of a room's detail page"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-light.png#only-light" loading="lazy" class="round-corners" alt="Recordings tab of a room's detail page"/></a>
+![Recordings tab of a room's detail page](../../../assets/images/meet/rooms/management/room-details-dark.png#only-dark){ .round-corners loading=lazy }
+![Recordings tab of a room's detail page](../../../assets/images/meet/rooms/management/room-details-light.png#only-light){ .round-corners loading=lazy }
 
 ## Delete rooms { #delete-rooms }
 
 Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting a room removes it and all associated data (meetings, members and recordings).
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/delete-room-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/management/delete-room-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/delete-room-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/delete-room-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! warning
 
@@ -108,8 +109,8 @@ Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting
 
 Rooms can be configured with an **auto-deletion date**. You can set this date when [creating a room](#create-rooms). This helps keeping OpenVidu Meet clean and organized, avoiding clutter from old rooms that are no longer needed.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Auto-deletion date setting when creating a room"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Auto-deletion date setting when creating a room"/></a>
+![Auto-deletion date setting when creating a room](../../../assets/images/meet/rooms/management/room-auto-deletion-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Auto-deletion date setting when creating a room](../../../assets/images/meet/rooms/management/room-auto-deletion-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 ### Room auto-deletion policies
 
@@ -122,8 +123,8 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
     - `Force`: the room and all its recordings will be deleted.
     - `Close`: the room will be closed (no more meetings will be allowed in it) instead of deleted, maintaining its recordings.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Auto-deletion policy options for the room and its recordings"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Auto-deletion policy options for the room and its recordings"/></a>
+![Auto-deletion policy options for the room and its recordings](../../../assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Auto-deletion policy options for the room and its recordings](../../../assets/images/meet/rooms/management/room-auto-deletion-policies-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 ## Room Appearance { #room-appearance }
 
@@ -133,8 +134,8 @@ The visual appearance of your rooms (the color scheme of the meeting view) is co
 
     Room appearance can only be changed by **admin** users from the **"Configuration"** page. Unlike the rest of the room settings, it **cannot** be modified through the REST API.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-dark.png#only-dark" loading="lazy" class="round-corners" alt="Room appearance settings in the Configuration page"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-light.png#only-light" loading="lazy" class="round-corners" alt="Room appearance settings in the Configuration page"/></a>
+![Room appearance settings in the Configuration page](../../../assets/images/meet/rooms/management/room-appearance-dark.png#only-dark){ .round-corners loading=lazy }
+![Room appearance settings in the Configuration page](../../../assets/images/meet/rooms/management/room-appearance-light.png#only-light){ .round-corners loading=lazy }
 
 You can set separately the color of:
 

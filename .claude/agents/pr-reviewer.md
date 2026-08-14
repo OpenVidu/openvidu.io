@@ -14,10 +14,10 @@ for the caller.
    Check out nothing; review the diff, reading surrounding context of changed files from the
    working tree with Read where needed (note: the working tree holds the base branch, not the
    PR — quote the diff, not the tree, for changed lines).
-2. Read `CLAUDE.md` and, for content changes, the "Link rules", "Adding a new page" and
-   "Organizing assets" sections of `README.md`. For blog changes read
+2. Read `CLAUDE.md` and, for content changes, `contributing/link-rules.md` and
+   `contributing/authoring.md`. For blog changes read
    `.claude/skills/blog-write/references/conventions.md`. For redirect/publish-tool changes
-   read the relevant `publish-tool/README.md` section.
+   read `publish-tool/docs/redirects.md` (or the relevant `publish-tool/README.md` section).
 3. Verify against the conventions, in this order of importance:
    - **Link form by context**: relative-with-`.md` in regular pages; root-absolute-with-`.md`
      in snippets and posts (raw-HTML URL form in post excerpts); absolute URL form in raw
@@ -31,8 +31,8 @@ for the caller.
      in pairs; no files at the `images/`/`videos/` root.
    - **Snippets**: edits to `shared/` files affect every including page — grep the snippet's
      usages and say which pages change.
-   - **Tags contract**: copied visual patterns (glightbox HTML, feature-cards, carousels)
-     carry the matching `tags:` entry.
+   - **Feature-key contract**: copied visual patterns (glightbox HTML, feature-cards,
+     carousels, lazy videos) carry the matching `page_features:` entry.
 4. If the PR branch is available locally (`gh pr checkout` is NOT allowed — instead use
    `git fetch origin pull/<number>/head` and `git diff`/`git show` against FETCH_HEAD), run
    `ovweb lint` on the changed files from FETCH_HEAD content only when it can be done without

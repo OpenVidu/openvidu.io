@@ -1,7 +1,7 @@
 ---
 title: "Grafana stack for OpenVidu metrics and logs"
 description: "The Grafana, Prometheus, Mimir and Loki stack bundled with OpenVidu, and the dashboards it ships for deployment metrics and cluster logs."
-tags:
+page_features:
   - setupcustomgallery
 ---
 
@@ -10,20 +10,16 @@ tags:
 OpenVidu also provides different **Grafana dashboards** to monitor **metrics** from **OpenVidu Server** and **logs** from your **cluster**.
 
 <div>
-<a class="glightbox" href="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer-preview.mp4" poster="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
 Grafana is available at [https://your.domain/grafana/]() and can be accessed using your **Grafana admin credentials**.
 
-<figure markdown>
-  ![Grafana login](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/login.png){ .mkdocs-img }
-</figure>
+  ![Grafana login](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/login.png){ .mkdocs-img loading=lazy }
 
 Dashboards can be found in the **OpenVidu** folder at [https://your.domain/grafana/dashboards/f/openvidu-dashboards/openvidu]().
 
-<figure markdown>
-  ![Grafana dashboards folder](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/dashboards_folder.png){ .mkdocs-img }
-</figure>
+  ![Grafana dashboards folder](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/dashboards_folder.png){ .mkdocs-img loading=lazy }
 
 ### Services
 
@@ -45,9 +41,9 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class=
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" loading="lazy" alt="Grafana dashboard with OpenVidu server metrics"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" loading="lazy" alt="Grafana dashboard with OpenVidu server metrics"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" loading="lazy" alt="Further panels of the OpenVidu server metrics dashboard in Grafana"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" loading="lazy" alt="Further panels of the OpenVidu server metrics dashboard in Grafana"/></p></div>
 
 </div>
 
@@ -59,17 +55,13 @@ This dashboard provides the same **metrics** as the [OpenVidu Server Metrics](#o
 
 You can select the **Media Node** you want to see metrics from in the **media_node** dropdown. You will see different charts in the same panel according to the selected **Media Nodes**.
 
-<figure markdown>
-  ![Media Node dropdown](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics2.png){ .mkdocs-img }
-</figure>
+  ![Media Node dropdown](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics2.png){ .mkdocs-img loading=lazy }
 
 !!! info
     
     If you add new Media Nodes to your OpenVidu deployment, you will have to refresh the page in order to see the new Media Nodes in the dropdown.
 
-<figure markdown>
-  ![Media Node metrics](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics1.png){ .mkdocs-img }
-</figure>
+  ![Media Node metrics](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics1.png){ .mkdocs-img loading=lazy }
 
 #### OpenVidu Logs
 
@@ -77,35 +69,27 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-community"><span 
 
 There is a panel showing **all containers** logs,
 
-<figure markdown>
-  ![Single Node logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs1.png){ .mkdocs-img }
-</figure>
+  ![Single Node logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs1.png){ .mkdocs-img loading=lazy }
 
 another panel to **filter** logs by **room_id** and **participant_id**,
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" loading="lazy" alt="Grafana logs dashboard with filters by room and participant"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" loading="lazy" alt="Grafana logs dashboard with filters by room and participant"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" loading="lazy" alt="OpenVidu log entries in the Grafana logs dashboard"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" loading="lazy" alt="OpenVidu log entries in the Grafana logs dashboard"/></p></div>
 
 </div>
 
 and one row for each selected **service**, containing **all logs**, **warnings** and **errors** from that service.
 
-<figure markdown>
-  ![Single Node select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs2.png){ .mkdocs-img }
-</figure>
+  ![Single Node select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs2.png){ .mkdocs-img loading=lazy }
 
-<figure markdown>
-  ![Single Node service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs6.png){ .mkdocs-img }
-</figure>
+  ![Single Node service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs6.png){ .mkdocs-img loading=lazy }
 
 You can also filter logs containing a specific **text** by using the **filter search box**.
 
-<figure markdown>
-  ![Single Node filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs5.png){ .mkdocs-img }
-</figure>
+  ![Single Node filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs5.png){ .mkdocs-img loading=lazy }
 
 #### OpenVidu Cluster Nodes Logs
 
@@ -115,25 +99,23 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class=
 
 First, there is a panel showing **all containers'** logs from all nodes.
 
-<figure markdown>
-  ![Cluster logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs1.png){ .mkdocs-img }
-</figure>
+  ![Cluster logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs1.png){ .mkdocs-img loading=lazy }
 
 Then, there is a row for each selected **node**, containing **all logs**, **warnings** and **errors** from that node. Additionally, each row contains a panel for each selected container, showing all its logs.
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" loading="lazy" alt="Cluster Nodes Logs dashboard with a row of panels per node"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" loading="lazy" alt="Cluster Nodes Logs dashboard with a row of panels per node"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" loading="lazy" alt="Log panels of a Master Node in the Cluster Nodes Logs dashboard"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" loading="lazy" alt="Log panels of a Master Node in the Cluster Nodes Logs dashboard"/></p></div>
 
 </div>
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" loading="lazy" alt="Warnings and errors panels of a node in the Cluster Nodes Logs dashboard"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" loading="lazy" alt="Warnings and errors panels of a node in the Cluster Nodes Logs dashboard"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" loading="lazy" alt="Log panels of a Media Node in the Cluster Nodes Logs dashboard"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" loading="lazy" alt="Log panels of a Media Node in the Cluster Nodes Logs dashboard"/></p></div>
 
 </div>
 
@@ -143,17 +125,15 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" loading="lazy" alt="Node panels with no data for containers running on other nodes"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" loading="lazy" alt="Node panels with no data for containers running on other nodes"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" loading="lazy" alt="Per-container log panels in the Cluster Nodes Logs dashboard"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" loading="lazy" alt="Per-container log panels in the Cluster Nodes Logs dashboard"/></p></div>
 
 </div>
 
 You can also filter logs containing a specific **text** by using the **filter search box**.
 
-<figure markdown>
-  ![Cluter filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs8.png){ .mkdocs-img }
-</figure>
+  ![Cluter filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs8.png){ .mkdocs-img loading=lazy }
 
 #### OpenVidu Cluster Services Logs
 
@@ -165,21 +145,17 @@ First, there is a panel to **filter** logs by **room_id** and **participant_id**
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" loading="lazy" alt="Cluster Services Logs dashboard with filters by room and participant"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" loading="lazy" alt="Cluster Services Logs dashboard with filters by room and participant"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" loading="lazy" alt="Per-service log panels in the Cluster Services Logs dashboard"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" loading="lazy" alt="Per-service log panels in the Cluster Services Logs dashboard"/></p></div>
 
 </div>
 
 Then, there is a row for each selected **service**, containing **all logs**, **warnings** and **errors** from that service.
 
-<figure markdown>
-  ![Cluster select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs1.png){ .mkdocs-img }
-</figure>
+  ![Cluster select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs1.png){ .mkdocs-img loading=lazy }
 
-<figure markdown>
-  ![Cluster service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs2.png){ .mkdocs-img }
-</figure>
+  ![Cluster service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs2.png){ .mkdocs-img loading=lazy }
 
 ### Limitations
 

@@ -112,14 +112,6 @@
   }
 }
 
-.red-color {
-  color: #ff5252;
-}
-
-.green-color {
-  color: #2b9b46;
-}
-
 /* Audience-routed CTA buttons (hero and end of features grid): each product's
    identity color (same as its product card's Get Started button) in both
    themes, so green=Meet / blue=Platform routing is consistent page-wide. */

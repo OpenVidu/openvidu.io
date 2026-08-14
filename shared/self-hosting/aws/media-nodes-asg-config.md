@@ -2,7 +2,7 @@
 
     Parameters in this section look like this:
 
-    ![Media Nodes Autoscaling Group Configuration](/assets/images/platform/self-hosting/shared/aws/media-nodes-asg-config.png)
+    ![Media Nodes Autoscaling Group Configuration](/assets/images/platform/self-hosting/shared/aws/media-nodes-asg-config.png){ loading=lazy }
 
     The **InitialNumberOfMediaNodes** parameter specifies the initial number of Media Nodes to deploy. The **MinNumberOfMediaNodes** and **MaxNumberOfMediaNodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 

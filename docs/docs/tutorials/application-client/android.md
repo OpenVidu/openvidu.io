@@ -1,7 +1,7 @@
 ---
 title: "Android video call tutorial"
 description: "Build an Android video-call app on OpenVidu in Kotlin with the LiveKit-compatible Android SDK: join a room, publish your camera and subscribe."
-tags:
+page_features:
   - setupcustomgallery
 ---
 
@@ -22,7 +22,7 @@ It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.exter
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +32,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "shared/tutorials/application-client/android.md"
+--8<-- "tutorials/application-client/android.md"
 
 ## Understanding the code
 
@@ -140,7 +140,7 @@ If these URLs are left empty, the user will be prompted to enter the URLs when t
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></a></p></div>
+<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></p></div>
 
 </div>
 

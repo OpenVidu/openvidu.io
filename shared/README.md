@@ -1,12 +1,12 @@
 # Shared snippets
 
-Reusable Markdown fragments included in pages (and in other snippets) with the [`pymdownx.snippets`](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/) syntax, where the path is always relative to the **repository root**:
+Reusable Markdown fragments included in pages (and in other snippets) with the [`pymdownx.snippets`](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/) syntax, where the path is always relative to **this `shared/` folder** (the configured `base_path`, independent of the build directory):
 
 ```markdown
---8<-- "shared/<folder>/<snippet>.md"
+--8<-- "<folder>/<snippet>.md"
 ```
 
-See the main [README](../README.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the **link rules**: links in snippets are root-absolute, except deployment-type-parametric ones).
+See [contributing/authoring.md](../contributing/authoring.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the [**link rules**](../contributing/link-rules.md): links in snippets are root-absolute, except deployment-type-parametric ones).
 
 ## Organization
 

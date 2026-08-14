@@ -3,12 +3,14 @@ description: "Run video conferencing on your own servers. Deploy the ready-made 
 title: "Self-hosted video conferencing & custom WebRTC"
 template: home.html
 hide:
+  - feedback
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
-tags:
+page_features:
+  - homestyles
   - setupwowjs
   - setupcardglow
 ---
@@ -24,8 +26,8 @@ tags:
     <div class="product-card openvidu-meet">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
-          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
+          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
         </h3>
         <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
       </div>
@@ -48,8 +50,8 @@ tags:
     <div class="product-card openvidu-platform">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
-          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
+          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
         </h3>
         <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
       </div>
@@ -73,7 +75,7 @@ tags:
 </div>
 
 <div class="wow animated animatedFadeInUp fadeInUp" style="text-align: center" markdown>
---8<-- "shared/meet-vs-platform-table.md"
+--8<-- "meet-vs-platform-table.md"
 
 *[Learn more about OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)*
 </div>
@@ -169,7 +171,7 @@ tags:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="do-not-include-in-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon" alt=""/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon"><img class="skip-gallery custom-svg-icon feature-icon" src="/assets/images/home/multiplatform.svg" loading="lazy" alt=""/></span> __Multiplatform__{ .feature-name }
 
     ---
 

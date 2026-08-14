@@ -1,7 +1,8 @@
-"""Page-composition conventions: admonitions, the `tags:` contract, assets and snippets.
+"""Page-composition conventions: admonitions, the `page_features:` contract, assets and snippets.
 
-The `tags:` contract is include-aware: a page's snippets are inlined before checking, because
-the HTML that requires a tag usually lives in a snippet while the tag must sit on the page.
+The `page_features:` contract is include-aware: a page's snippets are inlined before
+checking, because the HTML that requires a feature key usually lives in a snippet while
+the key must sit on the page.
 """
 
 from __future__ import annotations
@@ -26,11 +27,12 @@ def _class_token(token: str) -> re.Pattern[str]:
 
 
 #: HTML class names that only work when the page carries the matching functional tag, which
-#: loads the JS behind them (see README "Mkdocs Material tag system").
+#: loads the JS behind them (see contributing/page-composition.md).
 TAG_CONTRACT = (
     (_class_token("glightbox"), "glightbox", "setupcustomgallery"),
     (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
-    (_class_token("carousel-cell"), "carousel-cell", "setupcarousel"),
+    (_class_token("splide"), "splide", "setupcarousel"),
+    (_class_token("lazy-video"), "lazy-video", "lazyvideo"),
 )
 
 
@@ -65,22 +67,23 @@ def _effective_text(page: Source, corpus: Corpus) -> str:
 def check_tag_contract(corpus: Corpus) -> list[Finding]:
     findings = []
     for path, page in corpus.docs.items():
-        tags = page.meta.get("tags") or []
-        if not isinstance(tags, list):
-            tags = []
+        features = page.meta.get("page_features") or []
+        if not isinstance(features, list):
+            features = []
         effective = _effective_text(page, corpus)
-        for pattern, token, tag in TAG_CONTRACT:
-            if pattern.search(effective) and tag not in tags:
+        for pattern, token, feature in TAG_CONTRACT:
+            if pattern.search(effective) and feature not in features:
                 findings.append(
                     Finding(
                         "tag-contract",
                         ERROR,
                         path,
                         1,
-                        f'page renders `class="{token}"` content but lacks `tags: [{tag}]`',
-                        "the tag loads the JS behind that markup (possibly pulled in by a "
-                        "snippet); without it the element falls back to default behaviour "
-                        "or renders inert",
+                        f'page renders `class="{token}"` content but lacks '
+                        f"`page_features: [{feature}]`",
+                        "the feature key loads the JS behind that markup (possibly pulled in "
+                        "by a snippet); without it the element falls back to default "
+                        "behaviour or renders inert",
                     )
                 )
     return findings
@@ -160,8 +163,8 @@ def check_asset_placement(corpus: Corpus) -> list[Finding]:
                         f"{folder}/{entry.name}",
                         1,
                         f"file sits directly at {folder}/",
-                        "assets live in a folder named after the consuming page; see README "
-                        "'Organizing assets'",
+                        "assets live in a folder named after the consuming page; see "
+                        "contributing/authoring.md 'Organizing assets'",
                     )
                 )
     return findings

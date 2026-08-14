@@ -46,9 +46,7 @@ The Master Node is a Droplet that you power off and on, while Media Nodes are ep
     2. Drain every Droplet tagged `<STACK_NAME>-media-node-tag` as described in [Removing a Media Node gracefully](#removing-a-media-node-gracefully). Each Media Node waits for its active Rooms to end and then deletes itself.
     3. After confirming that no Media Node is left, navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     4. Select the droplet called `<STACK_NAME>-master-node`. Click on it to go to the Master Node instance, there click on _"Power"_ and then _"Turn off"_ the droplet.
-        <figure markdown>
-        ![Turn Off Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-off-master-node.png){ .svg-img .dark-img }
-        </figure>
+        ![Turn Off Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-off-master-node.png){ .svg-img .dark-img loading=lazy }
 
 
 === "Starting up the cluster"
@@ -57,9 +55,7 @@ The Master Node is a Droplet that you power off and on, while Media Nodes are ep
 
     1. Navigate to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
     2. Select the droplet named `<STACK_NAME>-master-node`, then go to _"Power"_ and then _"Turn on"_ the droplet.
-        <figure markdown>
-        ![Turn on Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-on-master-node.png){ .svg-img .dark-img }
-        </figure>
+        ![Turn on Master Node](../../../../assets/images/platform/self-hosting/elastic/digitalocean/turn-on-master-node.png){ .svg-img .dark-img loading=lazy }
     3. Wait until the instance is running.
     4. Redeploy the autoscaler from the directory containing your Terraform state:
 
@@ -111,9 +107,7 @@ It is possible to change the instance size of both the Master Node and the Media
             You can stop only the Master Node droplet to change its droplet size, but it is recommended to stop the whole cluster to avoid any issues.
     2. Go to the [DigitalOcean Droplet Web :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click on _"Upsize"_ and select the Droplet size you desire and click on _"Resize"_
-        <figure markdown>
-        ![Change droplet size master](../../../../assets/images/platform/self-hosting/elastic/digitalocean/resize-master-node.png){ .svg-img .dark-img }
-        </figure>
+        ![Change droplet size master](../../../../assets/images/platform/self-hosting/elastic/digitalocean/resize-master-node.png){ .svg-img .dark-img loading=lazy }
     4. [Start the cluster](#starting-up-the-cluster).
 
 === "Media Nodes"
@@ -149,9 +143,7 @@ You can modify the autoscaling configuration of the Media Nodes via `terraform.t
     terraform apply
     ```
     3. Confirm the change that Terraform proposes (it will redeploy the autoscaler function with the new values), and the changes will take effect. The function is invoked once right after being redeployed, so the new limits apply without waiting for the next scheduled run. Running Media Nodes are not affected.
-        <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-autoscale-change.png){ .svg-img .dark-img }
-        </figure>
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-autoscale-change.png){ .svg-img .dark-img loading=lazy }
 
 !!! info "How the autoscaler uses these values"
 
@@ -199,9 +191,7 @@ You can activate or deactivate the scale in when you decide you need autoscale o
     terraform apply
     ```
     3. Confirm the change that Terraform proposes (it will destroy the fixed media nodes and deploy the autoscaler function), and the changes will take effect. The autoscaler is invoked right after being deployed and creates `max(minNumberOfMediaNodes, initialNumberOfMediaNodes)` Media Nodes.
-        <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-activate-scalein.png){ .svg-img .dark-img }
-        </figure>
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-activate-scalein.png){ .svg-img .dark-img loading=lazy }
 
     !!! warning
 
@@ -217,9 +207,7 @@ You can activate or deactivate the scale in when you decide you need autoscale o
     terraform apply
     ```
     3. Confirm the change that Terraform proposes. Terraform removes the autoscaler function (trigger, function and namespace), deletes every Droplet tagged `<STACK_NAME>-media-node-tag` or `<STACK_NAME>-draining`, and creates the `<STACK_NAME>-media-node-<N>` Droplets. When the apply finishes, check in the Droplets console that the expected number of Media Nodes is running.
-        <figure markdown>
-        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-deactivate-scalein.png){ .svg-img .dark-img }
-        </figure>
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/digitalocean/terraform-output-deactivate-scalein.png){ .svg-img .dark-img loading=lazy }
 
     !!! warning
 
@@ -237,17 +225,11 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
 
     1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and click on the bucket that you are using for the deployment.
     2. Download the `secrets.env` file that is in the bucket.
-        <figure markdown>
-        ![Secrets.env download](../../../../assets/images/platform/self-hosting/elastic/digitalocean/download-secrets-env.png){ .svg-img .dark-img }
-        </figure>
+        ![Secrets.env download](../../../../assets/images/platform/self-hosting/elastic/digitalocean/download-secrets-env.png){ .svg-img .dark-img loading=lazy }
     3. Open it and edit the values of the credential of your choice.
     4. Upload the edited `secrets.env` to the bucket, select private file and replace it.
-        <figure markdown>
-        ![Secrets.env upload](../../../../assets/images/platform/self-hosting/elastic/digitalocean/upload-secrets-env.png){ .svg-img .dark-img }
-        </figure>
-        <figure markdown>
-        ![Secrets.env replace](../../../../assets/images/platform/self-hosting/elastic/digitalocean/replace-secrets-env.png){ .svg-img .dark-img }
-        </figure>
+        ![Secrets.env upload](../../../../assets/images/platform/self-hosting/elastic/digitalocean/upload-secrets-env.png){ .svg-img .dark-img loading=lazy }
+        ![Secrets.env replace](../../../../assets/images/platform/self-hosting/elastic/digitalocean/replace-secrets-env.png){ .svg-img .dark-img loading=lazy }
     5. Restart the Master Node by shutting it down and then starting it again. Changes will be applied automatically in all the nodes of your OpenVidu Elastic deployment.
 
 ## Backup and Restore

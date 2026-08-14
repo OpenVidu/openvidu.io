@@ -66,7 +66,7 @@ def check_seo_fields(corpus: Corpus) -> list[Finding]:
                         path,
                         1,
                         "description does not end in a full stop",
-                        "descriptions are full sentences; see README 'Adding a new page'",
+                        "descriptions are full sentences; see contributing/authoring.md",
                     )
                 )
 

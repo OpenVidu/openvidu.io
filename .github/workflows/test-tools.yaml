@@ -4,7 +4,7 @@ name: Test Publishing Tool
 #
 # What this does NOT cover is the differential build that checks llmstxt_preprocess.py against the
 # plugin's own `autoclean` over the real site: that needs a full MkDocs build and is run by hand
-# after a plugin upgrade or a change to that module. See publish-tool/README.md, "Testing".
+# after a plugin upgrade or a change to that module. See publish-tool/docs/testing-and-verify.md.
 
 on:
   pull_request:

@@ -231,7 +231,7 @@ When deploying in a supported **cloud provider** using our official templates, O
 
     The cluster scales automatically thanks to [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"}. You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
 
-    --8<-- "shared/self-hosting/aws/media-nodes-asg-config.md"
+    --8<-- "self-hosting/aws/media-nodes-asg-config.md"
   
 === ":material-microsoft-azure:{.icon .lg-icon .tab-icon} Azure"
 
@@ -242,7 +242,7 @@ When deploying in a supported **cloud provider** using our official templates, O
   
     The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target="_blank"}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
-    --8<-- "shared/self-hosting/azure/media-nodes-asg-config.md"
+    --8<-- "self-hosting/azure/media-nodes-asg-config.md"
 
 === ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
 
@@ -252,35 +252,12 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
 
     The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
-        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-            <tr>
-              <th>Input Value</th>
-              <th>Default Value</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-                <td>initialNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Number of initial media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>minNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Minimum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>maxNumberOfMediaNodes</td>
-                <td>5</td>
-                <td>Maximum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>scaleTargetCPU</td>
-                <td>50</td>
-                <td>Target CPU percentage to scale out or in.</td>
-            </tr>
-        </table>
-    </div>
+    | Input Value | Default Value | Description |
+|---|---|---|
+| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
 
 === ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
 
@@ -290,40 +267,13 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
     The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
-        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-            <tr>
-              <th>Input Value</th>
-              <th>Default Value</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-                <td>initialNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes &gt; 0.</td>
-            </tr>
-            <tr>
-                <td>minNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Minimum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>maxNumberOfMediaNodes</td>
-                <td>5</td>
-                <td>Maximum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>scaleTargetCPU</td>
-                <td>50</td>
-                <td>Target CPU percentage to scale up or down.</td>
-            </tr>
-            <tr>
-                <td>fixedNumberOfMediaNodes</td>
-                <td>0</td>
-                <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
-            </tr>
-        </table>
-    </div>
+    | Input Value | Default Value | Description |
+|---|---|---|
+| initialNumberOfMediaNodes | 1 | Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes > 0. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
+| fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
 
 === ":custom-oracle-cloud-infrastructure:{.icon .lg-icon .tab-icon} OCI"
 
@@ -333,40 +283,13 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in Oracle Cloud Infrastructure](../ha/oracle/install.md)
 
     The cluster scales automatically thanks to an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} for scale-out, combined with an [OCI Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm){:target="_blank"} that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](../elastic/oracle/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
-        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-            <tr>
-              <th>Input Value</th>
-              <th>Default Value</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-                <td>initialNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Number of initial media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>minNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Minimum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>maxNumberOfMediaNodes</td>
-                <td>5</td>
-                <td>Maximum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>scaleTargetCPU</td>
-                <td>50</td>
-                <td>Target CPU percentage to scale up or down.</td>
-            </tr>
-            <tr>
-                <td>fixedNumberOfMediaNodes</td>
-                <td>0</td>
-                <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
-            </tr>
-        </table>
-    </div>
+    | Input Value | Default Value | Description |
+|---|---|---|
+| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
+| fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
 
 ### Autoscaling On Premises
 

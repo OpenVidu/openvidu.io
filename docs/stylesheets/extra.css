@@ -24,6 +24,24 @@
   vertical-align: top;
 }
 
+/* Product tag inside a heading */
+.openvidu-tag.openvidu-tag-heading {
+  font-size: 0.6em;
+}
+
+/* Layout utilities (replace the recurring inline style="" attributes) */
+.nowrap {
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-8em {
+  width: 8em;
+}
+
 .openvidu-community-tag {
   background-color: #868686;
 }
@@ -53,10 +71,6 @@ span:has(> .openvidu-tag) {
 
 span:has(> a > .openvidu-tag) {
   display: inline-block;
-}
-
-.features-grid {
-  margin-bottom: 10px;
 }
 
 .md-grid {
@@ -176,14 +190,25 @@ span:has(> a > .openvidu-tag) {
 
 @font-face {
   font-family: "Arciform";
-  src: url("/assets/fonts/Arciform.eot");
-  /* IE9 Compat Modes */
-  src: url("/assets/fonts/Arciform.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */ url("/assets/fonts/Arciform.woff") format("woff"),
-    /* Modern Browsers */ url("/assets/fonts/Arciform.ttf") format("truetype"),
-    /* Safari, Android, iOS */ url("/assets/fonts/Arciform.svg#svgFontName")
-      format("svg");
-  /* Legacy iOS */
+  src: url("/assets/fonts/Arciform.woff2") format("woff2"),
+    url("/assets/fonts/Arciform.woff") format("woff");
+  font-display: swap;
+}
+
+/* theme.font is false (the header loads the one self-hosted Google Fonts
+   stylesheet), so Material's font variables are declared here instead. */
+:root {
+  --md-text-font: "Tomorrow";
+  --md-code-font: "Roboto Mono";
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Amazon Ember"),
+    url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
+  font-display: swap;
 }
 
 img.mkdocs-img {
@@ -195,13 +220,27 @@ img.svg-img {
   border-radius: 7px;
 }
 
-.node-img {
-  width: 80%;
+/* Shared card/image utilities (moved from the retired openvidu-call.css) */
+.ov-call-docs-icon {
+  font-size: 1.5em;
 }
 
-.grid-nodes {
-  display: flex;
-  align-items: center;
+.no-border,
+.no-border li {
+  border: none !important;
+}
+.no-shadow,
+.no-shadow li {
+  box-shadow: none !important;
+}
+.round-corners {
+  border-radius: 14px;
+}
+.three-cols {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 12rem), 1fr)
+  ) !important;
 }
 
 .gslide-image img {
@@ -346,49 +385,6 @@ p:has(> a.glightbox) {
   vertical-align: middle;
 }
 
-.features-list:after {
-  clear: both;
-  content: "";
-  display: block;
-}
-
-.feature-info {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.feature-title {
-  display: flex;
-  min-height: 50px;
-  align-items: center;
-  justify-content: center;
-}
-
-.feature-title-livekit {
-  align-items: flex-end;
-  padding-bottom: 12.5px;
-}
-
-.feature-title h4 {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.home-icon {
-  width: 3em;
-  margin-right: 8px;
-}
-
-.livekit-icon {
-  width: 110px;
-  margin-right: 12px;
-  flex-shrink: 0.1;
-}
-
-.livekit-title {
-  line-height: 1;
-}
-
 .md-header__title {
   line-height: 2.6rem;
 }
@@ -399,12 +395,6 @@ p:has(> a.glightbox) {
   line-height: 10px !important;
 }
 
-@media (min-width: 1220px) {
-  #home-markdown hr {
-    margin: 4em -4em !important;
-  }
-}
-
 @media (max-width: 1219px) {
   .top-home-section {
     min-height: calc(100vh - 2.4rem);
@@ -413,8 +403,6 @@ p:has(> a.glightbox) {
 }
 
 /* Tablet */
-@media (min-width: 960px) and (max-width: 1219px) {
-}
 
 /* Mobile */
 @media (max-width: 959px) {
@@ -453,6 +441,11 @@ p:has(> a.glightbox) {
   [dir="ltr"] .md-version__current {
     margin-left: 0.8rem !important;
   }
+  /* The full "3.8 latest" button overflows the narrow mobile title box and
+     collides with the palette toggle; the version number alone fits. */
+  .md-version__alias {
+    display: none;
+  }
   /* Outdated warning */
   .outdated-warning-text {
     display: none;
@@ -475,7 +468,8 @@ p:has(> a.glightbox) {
   }
 }
 
-/* Animation */
+/* Reveal-on-scroll. Hiding is gated on html.js-reveal (added only by the
+   reveal script), so with JS off the content simply stays visible. */
 
 @keyframes fadeInUp {
   from {
@@ -488,36 +482,43 @@ p:has(> a.glightbox) {
   }
 }
 
-@-webkit-keyframes fadeInUp {
-  from {
-    transform: translate3d(0, 30px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+html.js-reveal .wow {
+  visibility: hidden;
 }
 
-.wow {
-  visibility: hidden;
+html.js-reveal .wow.revealed {
+  visibility: visible;
+}
+
+html.js-reveal .animatedFadeInUp {
+  opacity: 0;
 }
 
 .animated {
   animation-duration: 0.5s;
   animation-fill-mode: both;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-fill-mode: both;
-}
-
-.animatedFadeInUp {
-  opacity: 0;
 }
 
 .fadeInUp {
-  opacity: 0;
+  animation-name: none;
+}
+
+html.js-reveal .revealed.fadeInUp {
   animation-name: fadeInUp;
-  -webkit-animation-name: fadeInUp;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal .wow {
+    visibility: visible;
+  }
+
+  html.js-reveal .animatedFadeInUp {
+    opacity: 1;
+  }
+
+  html.js-reveal .revealed.fadeInUp {
+    animation: none;
+  }
 }
 
 video::-internal-media-controls-overlay-cast-button {
@@ -632,16 +633,6 @@ nav .md-tabs__item {
   font-weight: 500;
 }
 
-#home-markdown {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#home-markdown hr {
-  margin: 4em 0;
-}
-
 .hide {
   display: none;
 }
@@ -670,10 +661,6 @@ nav .md-tabs__item {
 
 .large-icon {
   --md-icon-size: 1.5em !important;
-}
-
-p:has(> a.centered-button) {
-  text-align: center;
 }
 
 .use-case-img {
@@ -735,8 +722,6 @@ div[data-md-component="outdated"] aside {
   max-width: fit-content;
   margin: auto;
 }
-
-@import url("https://fonts.cdnfonts.com/css/amazon-ember");
 
 .deploy-button.deploy-to-aws-btn {
   background-color: #ff9900;
@@ -826,12 +811,6 @@ h1.meetplatform-slogan {
   border-radius: 5px;
 }
 
-.nav-open-new-tab {
-  float: right !important;
-  font-size: 0.8rem !important;
-  margin-left: 0.7rem !important;
-}
-
 .control-height {
   max-height: 50vh;
 }
@@ -877,10 +856,6 @@ h1.meetplatform-slogan {
   color: var(--md-accent-bg-color) !important;
   font-weight: bold;
   background-color: var(--md-primary-fg-color);
-}
-
-.code-margin-left {
-  margin-left: 2em;
 }
 
 .external-link-icon {
@@ -964,9 +939,22 @@ h1.meetplatform-slogan {
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 
-.md-tabs__item--dropdown:hover .md-tabs__dropdown {
+.md-tabs__item--dropdown:hover .md-tabs__dropdown,
+.md-tabs__item--dropdown:focus-within .md-tabs__dropdown {
   visibility: visible;
   opacity: 1;
+}
+
+/* The toggle is a real <button> (keyboard/touch operable); strip UA styles so
+   it renders like the sibling tab links. */
+button.md-tabs__dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
 
 .md-tabs__dropdown-link {
@@ -1010,12 +998,14 @@ h1.meetplatform-slogan {
   mask-size: contain;
 }
 
-.md-tabs__item--dropdown:hover .dropdown-caret {
+.md-tabs__item--dropdown:hover .dropdown-caret,
+.md-tabs__item--dropdown:focus-within .dropdown-caret {
   transform: rotate(270deg);
 }
 
-/* Keep parent link highlighted when hovering dropdown */
-.md-tabs__item--dropdown:hover .md-tabs__link {
+/* Keep parent link highlighted while the dropdown is open */
+.md-tabs__item--dropdown:hover .md-tabs__link,
+.md-tabs__item--dropdown:focus-within .md-tabs__link {
   opacity: 1;
 }
 
@@ -1023,35 +1013,151 @@ h1.meetplatform-slogan {
   max-height: 500px;
 }
 
+/* Tutorial cards, provider buttons/chips (merged from livekit-tutorials.css) */
 
-/* BEGIN TODO: REMOVE WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM */
-.md-tabs__link:has(.md-tabs__new-badge) {
-  opacity: 1;
+.icon {
+  margin: 5px;
 }
 
-.md-tabs__link-text {
-  opacity: 0.7;
+.lg-icon {
+  font-size: 1.5rem;
 }
 
-.md-tabs__item--active .md-tabs__link-text,
-.md-tabs__link:hover .md-tabs__link-text {
-  opacity: 1;
+.tab-icon {
+  display: block !important;
 }
 
-.md-tabs__new-badge {
-  display: inline-block;
-  margin-left: 4px;
-  padding: 0px 5px;
-  font-size: 0.58em;
-  font-weight: 800;
-  line-height: 2em;
-  color: black;
-  background-color: #ffcc00;
-  border-radius: 3px;
+.tutorials-container,
+.topic-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.tutorial-link {
+  flex: 1;
+  height: 100px;
+  width: 162px;
+  padding: 10px !important;
+}
+
+.no-width {
+  width: inherit;
+}
+
+.provider-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.provider-buttons p {
+  margin: 0;
+}
+
+.provider-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 18px 16px !important;
+  min-height: 88px;
+  max-height: 103px;
+  border-radius: 10px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-size: 1.04rem;
+  text-align: left;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.provider-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.provider-link .provider-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: 2.55rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.provider-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 14px;
+  padding: 6px 12px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 999px;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1;
+  user-select: none;
+}
+
+.provider-chip p {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+}
+
+.provider-chip-icon {
+  font-size: 1.58rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
   vertical-align: middle;
-  pointer-events: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-/* END TODO */
+/* intro */
+
+.card {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--md-primary-fg-color);
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  vertical-align: middle;
+  vertical-align: -webkit-baseline-middle;
+}
+
+/* Styles for mobile devices */
+@media screen and (max-width: 480px) {
+  .provider-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Styles for tablets in portrait orientation */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .provider-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media screen and (min-width: 769px) {
+  .provider-buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
