@@ -365,6 +365,15 @@ theme:
 hooks:
   - publish-tool/mkdocs_hook.py
 
+# `mkdocs serve` only auto-watches docs_dir, the config file and the theme; a snippet or
+# hook edit triggered no rebuild at all before these.
+watch:
+  - shared
+  - overrides
+  - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_preprocess.py
+  - publish-tool/src/ovweb
+
 plugins:
   - meta
   - search
