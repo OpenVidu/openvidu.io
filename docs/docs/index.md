@@ -4,8 +4,8 @@ description: "Build real-time video, audio and AI applications on infrastructure
 ---
 
 <div class="logo-header platform-header">
-<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title do-not-include-in-gallery not-selectable" alt="">
-<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title do-not-include-in-gallery not-selectable" alt="">
+<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title skip-gallery not-selectable" alt="">
+<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title skip-gallery not-selectable" alt="">
 </div>
 
 <h1 class="meetplatform-slogan">
@@ -21,8 +21,8 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
 <figure markdown>
-  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .do-not-include-in-gallery }
-  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .do-not-include-in-gallery }
+  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .skip-gallery }
+  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .skip-gallery }
   <figcaption style="max-width: 27rem">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" />
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -98,7 +98,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" />
 </div>
 
 </div>
@@ -108,7 +108,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-40 tablet-grid-40">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" />
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
@@ -136,7 +136,7 @@ The future lies in the integration of cameras and sensors in all kinds of device
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="do-not-include-in-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" />
 </div>
 
 </div>

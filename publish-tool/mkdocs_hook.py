@@ -218,6 +218,29 @@ def _required(meta, key: str, src_uri: str) -> str:
     return _one_line(value)
 
 
+_GLIGHTBOX_JS = re.compile(r'<script src="([^"]*glightbox\.min\.js)"></script>')
+_GLIGHTBOX_INIT = '<script id="init-glightbox">'
+
+
+def on_post_page(output, page, config, **kwargs):
+    """Move glightbox.min.js out of <head> to just before its init script.
+
+    The glightbox plugin injects its ~57 KB library as a synchronous head script on every page
+    with lightbox content, blocking first paint. The library is only needed by the
+    `#init-glightbox` script the plugin appends at the end of <body>, so it loads there instead.
+    Runs after the plugin's own `on_post_page` (hooks run after plugins for the same event).
+    """
+    match = _GLIGHTBOX_JS.search(output)
+    if match is None:
+        return None
+    init_pos = output.find(_GLIGHTBOX_INIT)
+    if init_pos == -1:
+        return None
+    output = output[: match.start()] + output[match.end() :]
+    init_pos = output.find(_GLIGHTBOX_INIT)
+    return output[:init_pos] + match.group(0) + output[init_pos:]
+
+
 def on_page_content(html, page, config, **kwargs):
     """Use the page's own `title` and `description` frontmatter for its llms.txt entry.
 
