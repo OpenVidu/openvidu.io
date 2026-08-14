@@ -176,14 +176,25 @@ span:has(> a > .openvidu-tag) {
 
 @font-face {
   font-family: "Arciform";
-  src: url("/assets/fonts/Arciform.eot");
-  /* IE9 Compat Modes */
-  src: url("/assets/fonts/Arciform.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */ url("/assets/fonts/Arciform.woff") format("woff"),
-    /* Modern Browsers */ url("/assets/fonts/Arciform.ttf") format("truetype"),
-    /* Safari, Android, iOS */ url("/assets/fonts/Arciform.svg#svgFontName")
-      format("svg");
-  /* Legacy iOS */
+  src: url("/assets/fonts/Arciform.woff2") format("woff2"),
+    url("/assets/fonts/Arciform.woff") format("woff");
+  font-display: swap;
+}
+
+/* theme.font is false (the header loads the one self-hosted Google Fonts
+   stylesheet), so Material's font variables are declared here instead. */
+:root {
+  --md-text-font: "Tomorrow";
+  --md-code-font: "Roboto Mono";
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Amazon Ember"),
+    url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
+  font-display: swap;
 }
 
 img.mkdocs-img {

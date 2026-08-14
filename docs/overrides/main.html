@@ -220,16 +220,6 @@
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
 {% endif %}
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
-  }
-</style>
-
 {{ super() }}
 
 {% if page.meta %}
@@ -263,6 +253,12 @@
 {% endif %}
 
 {% if page.meta.page_features and "openviduregister" in page.meta.page_features %}
+<!-- Material Symbols is only consumed by the signed-in account chip the register
+     bundle injects on this page -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
 <link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
 <link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
 {% endif %}

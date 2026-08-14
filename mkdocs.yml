@@ -329,9 +329,9 @@ theme:
     - search.suggest
     - search.highlight
     - announce.dismiss
-  font:
-    text: Tomorrow
-    code: Roboto Mono
+  # The single font stylesheet is loaded by the header override (Tomorrow + Roboto Mono,
+  # exactly the weights the CSS uses); --md-text-font/--md-code-font live in extra.css.
+  font: false
   # Three-way toggle. The first entry whose `media` matches is the first-visit default,
   # and the bare (prefers-color-scheme) always matches, so the auto entry goes first and
   # the OS preference decides. Each entry's toggle activates the NEXT entry:

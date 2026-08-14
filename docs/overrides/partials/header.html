@@ -30,29 +30,17 @@
   {% set class = class ~ " md-header--shadow" %}
 {% endif %}
 
+<!-- The site's single font stylesheet (theme.font is false): every Tomorrow weight the
+     CSS uses plus the code font. Self-hosted at build time by the privacy plugin. -->
 <link
     rel="preload"
-    href="https://fonts.googleapis.com/css?family=Tomorrow:100,200,300,400,500,600"
+    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
     as="style"
     onload="this.onload=null;this.rel='stylesheet'"
 />
 <noscript>
     <link
-        href="https://fonts.googleapis.com/css?family=Tomorrow:100,200,300,400,500,600"
-        rel="stylesheet"
-        type="text/css"
-    />
-</noscript>
-
-<link
-    rel="preload"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-/>
-<noscript>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
         rel="stylesheet"
         type="text/css"
     />
