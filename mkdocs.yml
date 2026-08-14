@@ -355,6 +355,8 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
@@ -645,6 +647,7 @@ extra_css:
   - stylesheets/livekit-tutorials.css
   - stylesheets/home.css
 
+# {year} is replaced with the build year by publish-tool/mkdocs_hook.py
 copyright: >
-  2026 &copy; OpenVidu<br>
+  {year} &copy; OpenVidu<br>
   <a href="#__consent">Change cookie settings</a>

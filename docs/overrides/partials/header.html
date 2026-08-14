@@ -124,8 +124,10 @@
       {% include "partials/alternate.html" %}
     {% endif %}
 
-    <!-- Button to open search modal -->
-    {% if "material/search" in config.plugins %}
+    <!-- Button to open search modal. `hide: search-bar` skips the whole search UI
+         (the version-selector hide stays CSS-based in main.html: that widget is
+         injected client-side and has no template markup to skip). -->
+    {% if "material/search" in config.plugins and not (page.meta and page.meta.hide and "search-bar" in page.meta.hide) %}
       {% set search = config.plugins["material/search"] | attr("config") %}
 
       <!-- Check if search is actually enabled - see https://t.ly/DT_0V -->

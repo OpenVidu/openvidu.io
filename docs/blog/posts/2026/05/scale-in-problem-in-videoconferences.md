@@ -14,10 +14,6 @@ tags:
  - Scale-In
 authors:
  - sergio
-hide:
- - navigation
- - search-bar
- - version-selector
 ---
 
 # Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.

@@ -19,10 +19,6 @@ tags:
  - AI Startup Ideas
 authors:
  - csantosm
-hide:
- - navigation
- - search-bar
- - version-selector
 ---
 
 # 5 conversational AI app ideas you can build this weekend

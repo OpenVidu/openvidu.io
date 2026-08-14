@@ -224,17 +224,6 @@
 
 {% if page.meta %}
 {% if page.meta.hide %}
-{% if "search-bar" in page.meta.hide %}
-<style>
-  div.md-search {
-    display: none;
-  }
-
-  label.md-header__button.md-icon[for="__search"] {
-    display: none;
-  }
-</style>
-{% endif %}
 {% if "version-selector" in page.meta.hide %}
 <style>
   div.md-version {

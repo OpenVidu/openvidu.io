@@ -21,10 +21,6 @@ tags:
   - Computer Vision
 authors:
   - csantosm
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Control your video calls with hand gestures, thanks to a free AI from Google

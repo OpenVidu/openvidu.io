@@ -17,10 +17,6 @@ tags:
     - Raspberry Pi
 authors:
     - carlosRuiz
-hide:
-    - navigation
-    - search-bar
-    - version-selector
 ---
 
 # Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends

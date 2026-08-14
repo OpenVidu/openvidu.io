@@ -13,10 +13,6 @@ tags:
     - Video Conferencing
 authors:
     - juanCarlos
-hide:
-    - navigation
-    - search-bar
-    - version-selector
 ---
 
 # The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System

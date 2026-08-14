@@ -16,10 +16,6 @@ tags:
   - NAT traversal
 authors:
   - carlosRuiz
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN

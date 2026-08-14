@@ -15,10 +15,6 @@ tags:
   - Benchmarks
 authors:
   - sergio
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason

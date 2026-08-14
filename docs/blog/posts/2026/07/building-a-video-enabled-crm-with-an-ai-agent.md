@@ -20,10 +20,6 @@ page_features:
   - lazyvideo
 authors:
   - patxi
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Building a video-enabled CRM with an AI agent and OpenVidu Meet

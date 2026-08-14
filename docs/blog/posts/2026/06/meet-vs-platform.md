@@ -13,10 +13,6 @@ tags:
   - low-code
 authors:
   - patxi
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform

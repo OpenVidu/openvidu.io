@@ -48,12 +48,12 @@ tags:
     - WebRTC                # free-form, 4-8 technical tags — taxonomy only, NEVER a page_features key
 authors:
     - carlosRuiz            # keys must exist in docs/blog/.authors.yml
-hide:
-    - navigation
-    - search-bar
-    - version-selector
 ---
 ```
+
+Do **not** add a `hide:` block: posts inherit `hide: [navigation, search-bar,
+version-selector]` from `docs/blog/posts/.meta.yml` (plus `path`/`feedback` from
+`docs/blog/.meta.yml`).
 
 Tag rules:
 

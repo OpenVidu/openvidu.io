@@ -17,10 +17,6 @@ tags:
   - Video Conferencing
 authors:
   - juanCarlos
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Managing Permissions in Video Conferencing Apps: 3 Access Models

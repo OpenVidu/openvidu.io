@@ -13,6 +13,7 @@ anything. No logic is duplicated: the source-date rules have one implementation,
 
 from __future__ import annotations
 
+import datetime
 import logging
 import re
 import sys
@@ -136,6 +137,16 @@ def _view_metadata(page, src_uri: str, shapes: dict[str, str]) -> dict[str, str]
         base = (page.meta or {}).get("title") or str(page.title)
         metadata["title"] = f"{base} — page {number}"
     return metadata
+
+
+def on_config(config, **kwargs):
+    """Replace {year} in the footer copyright with the build year.
+
+    The year was hand-edited every January (see commit 772076997); the build stamps it.
+    """
+    if config.copyright and "{year}" in config.copyright:
+        config.copyright = config.copyright.replace("{year}", str(datetime.date.today().year))
+    return config
 
 
 def on_env(env, config, files, **kwargs):

@@ -18,10 +18,6 @@ tags:
   - WebRTC
 authors:
   - pabloFuente
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Building an AI agent for transcribing and summarizing audio calls

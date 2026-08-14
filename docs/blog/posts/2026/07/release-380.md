@@ -14,10 +14,6 @@ tags:
     - Video Conferencing
 authors:
     - pabloFuente
-hide:
-    - navigation
-    - search-bar
-    - version-selector
 ---
 
 # OpenVidu 3.8.0 is now available

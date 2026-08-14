@@ -14,10 +14,6 @@ tags:
   - Development
 authors:
   - csantosm
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # 5 React video call platforms in 2026: Is SaaS still the right choice?
