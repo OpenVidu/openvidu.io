@@ -265,11 +265,11 @@ You may need your DigitalOcean credentials to configure your OpenVidu applicatio
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/digitalocean/credentials-general.md"
+--8<-- "self-hosting/digitalocean/credentials-general.md"
 
 ### Troubleshooting initial DigitalOcean deployment creation
 
---8<-- "shared/self-hosting/digitalocean/troubleshooting.md"
+--8<-- "self-hosting/digitalocean/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

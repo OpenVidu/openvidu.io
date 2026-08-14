@@ -3,6 +3,10 @@ site_url: https://openvidu.io/
 site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
+# Absolute on purpose: edit links must point at THIS repo and branch, not repo_url.
+# The content.action.edit feature is currently off, so this emits nothing today.
+# A branch cut from another must update it (see contributing/versioning.md).
+edit_uri: https://github.com/OpenVidu/openvidu.io/edit/main/docs/
 
 nav:
   - Home: index.md
@@ -310,32 +314,23 @@ theme:
     - content.code.annotate
     - content.tooltips
     - navigation.tabs
-    # - navigation.tabs.sticky
     - navigation.tracking
     - navigation.footer
-    # - navigation.expand
-    # - navigation.path
-    # - navigation.sections
     - navigation.top
     - navigation.indexes
-    # - toc.follow
-    # - toc.integrate
     - search.suggest
     - search.highlight
-    # - header.autohide
     - announce.dismiss
   font:
-    text: Tomorrow # Nunito Sans, Rubik, Barlow, Raleway, Open Sans, Tomorrow, IBM Plex Sans
+    text: Tomorrow
     code: Roboto Mono
   palette:
-    # Palette toggle for dark mode
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-    # Palette toggle for light mode
     - scheme: default
       primary: custom
       accent: custom
@@ -355,7 +350,6 @@ plugins:
   - search
   - blog:
       post_excerpt: required
-      draft: false
       draft_if_future_date: true
       archive_date_format: MMMM yyyy
       archive_url_date_format: yyyy/MM
@@ -370,7 +364,7 @@ plugins:
         - Implementation
         - OpenVidu How-to
         - OpenVidu Meet
-        - Openvidu Implementation
+        - OpenVidu Implementation
         - OpenVidu
         - OpenVidu comparison
         - OpenVidu Platform
@@ -400,7 +394,7 @@ plugins:
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
-      image: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
+      image: https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
         - tags
@@ -547,7 +541,6 @@ markdown_extensions:
   - toc:
       permalink: "#"
       permalink_title: Anchor link to this section for reference
-  - footnotes
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
@@ -559,8 +552,11 @@ markdown_extensions:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
+  # Includes resolve against shared/ only (never the CWD), so `--8<-- "x.md"` means
+  # `<repo>/shared/x.md` from any build directory; check_paths makes a missed path a
+  # hard build error.
   - pymdownx.snippets:
-      url_download: true
+      base_path: [!relative $config_dir/shared]
       check_paths: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji

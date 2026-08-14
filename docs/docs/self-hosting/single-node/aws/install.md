@@ -44,9 +44,9 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
 Depending on your needs, you need to fill the following CloudFormation parameters:
 
---8<-- "shared/self-hosting/aws/ssl-domain.md"
+--8<-- "self-hosting/aws/ssl-domain.md"
 
---8<-- "shared/self-hosting/aws/meet.md"
+--8<-- "self-hosting/aws/meet.md"
 
 ### EC2 Instance Configuration
 
@@ -62,9 +62,9 @@ You need to specify some properties for the EC2 instance that will be created.
 
     By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
---8<-- "shared/self-hosting/aws/single-elastic-s3.md"
+--8<-- "self-hosting/aws/single-elastic-s3.md"
 
---8<-- "shared/self-hosting/aws/additional-flags.md"
+--8<-- "self-hosting/aws/additional-flags.md"
 
 ## Deploying the stack
 
@@ -92,11 +92,11 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
---8<-- "shared/self-hosting/aws/credentials-general.md"
+--8<-- "self-hosting/aws/credentials-general.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "shared/self-hosting/aws/troubleshooting.md"
+--8<-- "self-hosting/aws/troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

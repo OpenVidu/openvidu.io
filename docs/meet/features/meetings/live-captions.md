@@ -21,7 +21,7 @@ OpenVidu Meet includes a built-in **Live Captions** feature that turns speech in
 
 SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
 
---8<-- "shared/self-hosting/common/ssh-openvidu-deployment.md"
+--8<-- "self-hosting/common/ssh-openvidu-deployment.md"
 
 ### 2. Enable the Speech Processing Agent
 
@@ -61,7 +61,7 @@ MEET_CAPTIONS_ENABLED=true
 
 Apply your changes by restarting OpenVidu. This ensures the system recognizes the new live captioning capabilities.
 
---8<-- "shared/self-hosting/common/restart-openvidu-deployment.md"
+--8<-- "self-hosting/common/restart-openvidu-deployment.md"
 
 ### 5. Enable/Disable Captions for specific Rooms
 

@@ -22,7 +22,7 @@ It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.exter
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +32,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "shared/tutorials/application-client/android.md"
+--8<-- "tutorials/application-client/android.md"
 
 ## Understanding the code
 

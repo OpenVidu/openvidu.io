@@ -150,7 +150,7 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
 sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh)
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -205,8 +205,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/on-premises/credentials-general.md"
---8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "self-hosting/on-premises/credentials-general.md"
+--8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -218,7 +218,7 @@ docker run --pull always --rm -it \
     --deployment-type=single_node_pro
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 This is going to generate a command like this, but it may vary depending on the answers you provide. Here are three examples of the command you can run depending on the certificate type you choose:
 
@@ -251,7 +251,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -283,7 +283,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -318,7 +318,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -351,7 +351,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -389,7 +389,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.

@@ -11,7 +11,7 @@ This step-by-step guide explains how to embed OpenVidu Meet into your web applic
 
 ## 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-meet.md"
+--8<-- "tutorials/run-openvidu-meet.md"
 
 ## 2. Create a room
 

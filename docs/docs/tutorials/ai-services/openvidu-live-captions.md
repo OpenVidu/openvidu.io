@@ -15,7 +15,7 @@ This tutorial is a simple variation of the [JavaScript client](../application-cl
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server-speech-agent.md"
+--8<-- "tutorials/run-openvidu-server-speech-agent.md"
 
 ### 2. Download the tutorial code
 
@@ -25,7 +25,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
@@ -57,7 +57,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 </div>
 
---8<-- "shared/tutorials/testing-other-devices.md"
+--8<-- "tutorials/testing-other-devices.md"
 
 
 ## Understanding the code

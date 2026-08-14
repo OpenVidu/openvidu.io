@@ -5,10 +5,10 @@ description: "Deploy OpenVidu High Availability on Oracle Cloud Infrastructure w
 
 # OpenVidu High Availability installation: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle/provider-chip.md"
+--8<-- "self-hosting/oracle/provider-chip.md"
 
 
---8<-- "shared/self-hosting/common/ha-license-intro.md"
+--8<-- "self-hosting/common/ha-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu High Availability cluster on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
@@ -45,7 +45,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     - Because there are 4 Master Nodes, each one runs the scale-in invoker on a cron, but only one master should call the function per cycle. Coordination is done through a `scalein.lock` object stored in the cluster-data Object Storage bucket: the master that wins an atomic compare-and-swap (ETag-based) on this object is the one that invokes the function that cycle. The lock has a 3-minute TTL, so if the master holding it crashes, a peer claims it on the next cycle. Using an Object Storage lock instead of an OCI Vault secret avoids consuming a new secret version on every cycle.
     - Each Media Node runs a `systemd` daemon that periodically checks whether the instance has been marked as "draining". If so, the graceful shutdown script is triggered, which waits for all active Rooms on that node to end before shutting the instance down.
 
---8<-- "shared/self-hosting/oracle/scalein-function-image.md"
+--8<-- "self-hosting/oracle/scalein-function-image.md"
 
 ## Deployment details
 
@@ -61,12 +61,12 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
   <details>
     <summary>Information about parameters</summary>
 
---8<-- "shared/self-hosting/oracle/mandatory-params-pro.md"
+--8<-- "self-hosting/oracle/mandatory-params-pro.md"
     <tr>
     <td style="white-space: nowrap;"><code>scale_in_function_image</code></td>
     <td>OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See <a href="#publishing-the-scale-in-function-image">Publishing the scale-in function image</a>. Ignored when <code>fixedNumberOfMediaNodes &gt; 0</code>.</td>
     </tr>
---8<-- "shared/self-hosting/oracle/mandatory-params-pro-end.md"
+--8<-- "self-hosting/oracle/mandatory-params-pro-end.md"
 
     <h4>Optional Parameters</h4>
 
@@ -243,7 +243,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
 5. Set the correct permissions on the SSH key so it can be used.
 
---8<-- "shared/self-hosting/oracle/ssh-key-permissions.md"
+--8<-- "self-hosting/oracle/ssh-key-permissions.md"
 
 ### Access OpenVidu
 
@@ -282,11 +282,11 @@ To configure your OpenVidu application, you will need your OCI credentials. You 
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/oracle/credentials-general.md"
+--8<-- "self-hosting/oracle/credentials-general.md"
 
 ### Troubleshooting initial Oracle Cloud Infrastructure deployment
 
---8<-- "shared/self-hosting/oracle/troubleshooting.md"
+--8<-- "self-hosting/oracle/troubleshooting.md"
 
 3. If everything appears to be in order, check the [status](../on-premises/admin.md#checking-the-status-of-services) and [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services on all Master Nodes and Media Nodes.
 

@@ -31,6 +31,6 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 <div style="text-align: center" markdown>
 
---8<-- "shared/meet-vs-platform-table.md"
+--8<-- "meet-vs-platform-table.md"
 
 </div>

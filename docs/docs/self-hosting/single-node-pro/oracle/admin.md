@@ -5,7 +5,7 @@ description: "Administer OpenVidu Single Node PRO on Oracle Cloud Infrastructure
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle/provider-chip.md"
+--8<-- "self-hosting/oracle/provider-chip.md"
 
 Oracle Cloud Infrastructure OpenVidu Single Node PRO deployments are internally identical to On Premises Single Node PRO deployments, so you can follow the same instructions from [On Premises Single Node PRO](../on-premises/admin.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
 
@@ -66,4 +66,4 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
 
     Changes will be applied automatically.
 
---8<-- "shared/self-hosting/oracle/backup-and-restore.md"
+--8<-- "self-hosting/oracle/backup-and-restore.md"

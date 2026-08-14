@@ -25,7 +25,7 @@ For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob 
 
 === "Run OpenVidu locally"
 
-    --8<-- "shared/tutorials/run-openvidu-locally-azure.md"
+    --8<-- "tutorials/run-openvidu-locally-azure.md"
 
 === "Deploy OpenVidu in Azure"
 

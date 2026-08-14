@@ -1,47 +1,47 @@
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    --8<-- "shared/tutorials/application-server/node.md"
+    --8<-- "tutorials/application-server/node.md"
 
     For more information, check the [Node.js tutorial](/docs/tutorials/application-server/node.md){:target="_blank"}.
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    --8<-- "shared/tutorials/application-server/go.md"
+    --8<-- "tutorials/application-server/go.md"
 
     For more information, check the [Go tutorial](/docs/tutorials/application-server/go.md){:target="_blank"}.
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    --8<-- "shared/tutorials/application-server/ruby.md"
+    --8<-- "tutorials/application-server/ruby.md"
 
     For more information, check the [Ruby tutorial](/docs/tutorials/application-server/ruby.md){:target="_blank"}.
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    --8<-- "shared/tutorials/application-server/java.md"
+    --8<-- "tutorials/application-server/java.md"
 
     For more information, check the [Java tutorial](/docs/tutorials/application-server/java.md){:target="_blank"}.
 
 === ":simple-python:{.icon .lg-icon .tab-icon} Python"
 
-    --8<-- "shared/tutorials/application-server/python.md"
+    --8<-- "tutorials/application-server/python.md"
 
     For more information, check the [Python tutorial](/docs/tutorials/application-server/python.md){:target="_blank"}.
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
-    --8<-- "shared/tutorials/application-server/rust.md"
+    --8<-- "tutorials/application-server/rust.md"
 
     For more information, check the [Rust tutorial](/docs/tutorials/application-server/rust.md){:target="_blank"}.
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
-    --8<-- "shared/tutorials/application-server/php.md"
+    --8<-- "tutorials/application-server/php.md"
 
     For more information, check the [PHP tutorial](/docs/tutorials/application-server/php.md){:target="_blank"}.
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    --8<-- "shared/tutorials/application-server/dotnet.md"
+    --8<-- "tutorials/application-server/dotnet.md"
 
     For more information, check the [.NET tutorial](/docs/tutorials/application-server/dotnet.md){:target="_blank"}.

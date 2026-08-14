@@ -22,4 +22,4 @@ There are two ways to upgrade an OpenVidu Single Node deployment:
 
 If you prefer not to redeploy, the in-place procedure below works on all of these providers too.
 
---8<-- "shared/self-hosting/on-premises/single-node/upgrade.md"
+--8<-- "self-hosting/on-premises/single-node/upgrade.md"

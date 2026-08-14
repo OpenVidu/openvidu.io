@@ -18,7 +18,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 === "Run OpenVidu locally"
 
-    --8<-- "shared/tutorials/run-openvidu-locally.md"
+    --8<-- "tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 

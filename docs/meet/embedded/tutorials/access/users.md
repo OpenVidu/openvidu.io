@@ -29,7 +29,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to man
 
 #### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-meet.md"
+--8<-- "tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -452,8 +452,8 @@ function accessAsUser() {
 
 ## Accessing this tutorial from other computers or phones
 
---8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+--8<-- "tutorials/access-tutorial-from-other-devices.md"
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
---8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"
+--8<-- "tutorials/connect-tutorial-to-production-deployment.md"

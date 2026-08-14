@@ -24,7 +24,7 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
 
 ## Deployment details
 
---8<-- "shared/self-hosting/gcp/info-deployment.md"
+--8<-- "self-hosting/gcp/info-deployment.md"
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
@@ -192,7 +192,7 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
 
 ## Deploying the stack
 
---8<-- "shared/self-hosting/gcp/deploying-stack.md"
+--8<-- "self-hosting/gcp/deploying-stack.md"
 
 ## Configure your application to use the deployment 
 
@@ -200,11 +200,11 @@ You need the secret outputs from Google Cloud Platform to configure your OpenVid
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/gcp/credentials-general.md"
+--8<-- "self-hosting/gcp/credentials-general.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
---8<-- "shared/self-hosting/gcp/troubleshooting.md"
+--8<-- "self-hosting/gcp/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

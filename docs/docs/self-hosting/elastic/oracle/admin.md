@@ -5,7 +5,7 @@ description: "Administer OpenVidu Elastic on Oracle Cloud Infrastructure: shut d
 
 # OpenVidu Elastic administration: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle/provider-chip.md"
+--8<-- "self-hosting/oracle/provider-chip.md"
 
 
 The deployment of OpenVidu Elastic on Oracle Cloud Infrastructure is automated using the Terraform CLI, where Media Nodes are part of an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
@@ -173,4 +173,4 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
 
     Changes will be applied automatically on all nodes of your OpenVidu Elastic deployment.
 
---8<-- "shared/self-hosting/oracle/backup-and-restore.md"
+--8<-- "self-hosting/oracle/backup-and-restore.md"

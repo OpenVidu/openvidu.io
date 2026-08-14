@@ -16,7 +16,7 @@ The OpenVidu installer offers an easy way to deploy OpenVidu Single Node <span c
 
 This section provides details on configuration parameters and common administrative tasks for this deployment.
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-start-stop.md"
+--8<-- "self-hosting/on-premises/single-node/admin-start-stop.md"
 
 ## Checking the status of services
 
@@ -46,11 +46,11 @@ alloy        docker.io/grafana/alloy                      "/usr/bin/alloy -…" 
 redis        docker.io/redis                              "docker-entrypoint.s…"   redis        19 seconds ago   Up 15 seconds
 ```
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-checking-logs.md"
+--8<-- "self-hosting/on-premises/single-node/admin-checking-logs.md"
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-change-config.md"
+--8<-- "self-hosting/on-premises/single-node/admin-change-config.md"
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-uninstall.md"
+--8<-- "self-hosting/on-premises/single-node/admin-uninstall.md"
 
 ## Backup and Restore
 

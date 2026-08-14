@@ -231,7 +231,7 @@ When deploying in a supported **cloud provider** using our official templates, O
 
     The cluster scales automatically thanks to [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"}. You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
 
-    --8<-- "shared/self-hosting/aws/media-nodes-asg-config.md"
+    --8<-- "self-hosting/aws/media-nodes-asg-config.md"
   
 === ":material-microsoft-azure:{.icon .lg-icon .tab-icon} Azure"
 
@@ -242,7 +242,7 @@ When deploying in a supported **cloud provider** using our official templates, O
   
     The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target="_blank"}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
-    --8<-- "shared/self-hosting/azure/media-nodes-asg-config.md"
+    --8<-- "self-hosting/azure/media-nodes-asg-config.md"
 
 === ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
 

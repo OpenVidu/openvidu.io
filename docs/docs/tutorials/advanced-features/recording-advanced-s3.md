@@ -28,7 +28,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 === "Run OpenVidu locally"
 
-    --8<-- "shared/tutorials/run-openvidu-locally.md"
+    --8<-- "tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 

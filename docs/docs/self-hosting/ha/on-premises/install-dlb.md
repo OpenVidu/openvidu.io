@@ -144,7 +144,7 @@ docker run --pull always --rm -it \
     --deployment-type=ha
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -185,7 +185,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -217,7 +217,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -256,8 +256,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/on-premises/credentials-general.md"
---8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "self-hosting/on-premises/credentials-general.md"
+--8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -299,7 +299,7 @@ Each installation command for each type of node looks like this:
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         Notes:
 
@@ -337,7 +337,7 @@ Each installation command for each type of node looks like this:
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -378,7 +378,7 @@ Each installation command for each type of node looks like this:
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
@@ -397,7 +397,7 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
     - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.

@@ -12,7 +12,7 @@ description: "Deploy OpenVidu High Availability on DigitalOcean with Terraform, 
 </div>
 
 
---8<-- "shared/self-hosting/common/ha-license-intro.md"
+--8<-- "self-hosting/common/ha-license-intro.md"
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on DigitalOcean. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but provisioned as DigitalOcean resources and automated using Terraform CLI.
 
@@ -39,7 +39,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
 
 
---8<-- "shared/self-hosting/digitalocean/custom-scale-in.md"
+--8<-- "self-hosting/digitalocean/custom-scale-in.md"
 
 ## Deployment details
 1. Clone the OpenVidu repository with the terraform files:
@@ -263,12 +263,12 @@ You may need your Digital Ocean credentials to configure your OpenVidu applicati
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/digitalocean/credentials-general.md"
---8<-- "shared/self-hosting/digitalocean/credentials-v2compatibility.md"
+--8<-- "self-hosting/digitalocean/credentials-general.md"
+--8<-- "self-hosting/digitalocean/credentials-v2compatibility.md"
 
 ### Troubleshooting initial DigitalOcean deployment creation
 
---8<-- "shared/self-hosting/digitalocean/troubleshooting.md"
+--8<-- "self-hosting/digitalocean/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

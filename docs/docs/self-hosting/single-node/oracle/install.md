@@ -5,7 +5,7 @@ description: "Deploy OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructu
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle/provider-chip.md"
+--8<-- "self-hosting/oracle/provider-chip.md"
 
 This section describes two ways to install OpenVidu Single Node on Oracle Cloud Infrastructure:
 
@@ -17,7 +17,7 @@ This section describes two ways to install OpenVidu Single Node on Oracle Cloud 
 
 This page explains how to create a Compute instance in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for an OpenVidu Single Node On-Premises installation. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
 
---8<-- "shared/self-hosting/oracle/single-node/webconsole-steps.md"
+--8<-- "self-hosting/oracle/single-node/webconsole-steps.md"
 
 6. Follow the [On-Premises install instructions](../on-premises/install.md) to install OpenVidu on the instance.
 
@@ -32,7 +32,7 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Oracle Cloud Infrastructure. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
 
---8<-- "shared/self-hosting/oracle/single-node/terraform-architecture.md"
+--8<-- "self-hosting/oracle/single-node/terraform-architecture.md"
 
 ### Deployment details
 
@@ -188,8 +188,8 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
 5. Set the correct permissions on the SSH key so it can be used.
 
---8<-- "shared/self-hosting/oracle/ssh-key-permissions.md"
+--8<-- "self-hosting/oracle/ssh-key-permissions.md"
 
---8<-- "shared/self-hosting/oracle/single-node/access-openvidu.md"
+--8<-- "self-hosting/oracle/single-node/access-openvidu.md"
 
---8<-- "shared/self-hosting/oracle/single-node/configure-app.md"
+--8<-- "self-hosting/oracle/single-node/configure-app.md"

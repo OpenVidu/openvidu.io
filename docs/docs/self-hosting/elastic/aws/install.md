@@ -14,7 +14,7 @@ tags:
 </div>
 
 
---8<-- "shared/self-hosting/common/elastic-license-intro.md"
+--8<-- "self-hosting/common/elastic-license-intro.md"
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on AWS. The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
@@ -51,7 +51,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 Depending on your needs, you need to fill in the following CloudFormation parameters:
 
---8<-- "shared/self-hosting/aws/ssl-domain.md"
+--8<-- "self-hosting/aws/ssl-domain.md"
 
 ### OpenVidu Elastic Configuration
 
@@ -67,7 +67,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 
---8<-- "shared/self-hosting/aws/meet.md"
+--8<-- "self-hosting/aws/meet.md"
 
 ### EC2 Instance Configuration
 
@@ -87,9 +87,9 @@ You need to specify some properties for the EC2 instances that will be created.
 
 The number of Media Nodes can scale up or down based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up or down.
 
---8<-- "shared/self-hosting/aws/media-nodes-asg-config.md"
+--8<-- "self-hosting/aws/media-nodes-asg-config.md"
 
---8<-- "shared/self-hosting/aws/single-elastic-s3.md"
+--8<-- "self-hosting/aws/single-elastic-s3.md"
 
 ### VPC Configuration
 
@@ -135,12 +135,12 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
---8<-- "shared/self-hosting/aws/credentials-general.md"
---8<-- "shared/self-hosting/aws/credentials-v2compatibility.md"
+--8<-- "self-hosting/aws/credentials-general.md"
+--8<-- "self-hosting/aws/credentials-v2compatibility.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "shared/self-hosting/aws/troubleshooting.md"
+--8<-- "self-hosting/aws/troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in the Master Node and Media Nodes.
 

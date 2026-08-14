@@ -131,7 +131,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Notes:
 
@@ -142,7 +142,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **4. Configure the external proxy**
 
-    --8<-- "shared/self-hosting/common/proxy-nginx-advanced.md"
+    --8<-- "self-hosting/common/proxy-nginx-advanced.md"
 
     Notes:
 
@@ -262,7 +262,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         Notes:
 
@@ -284,14 +284,14 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --redis-password='xxxxx'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - The `--master-node-private-ip` is the private IP of the Master Node. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
         - The `--redis-password` is the password used to connect to the Redis service. Replace `xxxxx` with the same password used in the Master Node installation.
 
     **4. Configure the external proxy**
 
-    --8<-- "shared/self-hosting/common/proxy-nginx-advanced-elastic.md"
+    --8<-- "self-hosting/common/proxy-nginx-advanced-elastic.md"
 
     Notes:
 
