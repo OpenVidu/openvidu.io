@@ -28,9 +28,19 @@ if _SRC.is_dir() and str(_SRC) not in sys.path:
 from ovweb.gitrepo import Git, GitError  # noqa: E402
 from ovweb.sources import newest_dates, parse_git_log  # noqa: E402
 
-#: Everything the sitemap dates are read out of, relative to the repository root: the pages
-#: themselves, and the snippets they include.
-_DATED_TREES = ("docs", "shared")
+
+def _dated_trees(config) -> tuple[str, ...]:
+    """Everything the sitemap dates are read out of, relative to the repository root.
+
+    The pages tree comes from `docs_dir`; the snippets tree from the `pymdownx.snippets`
+    `base_path`, so a relocation of either follows the config instead of drifting.
+    """
+    trees = [Path(config["docs_dir"]).resolve().name]
+    snippets = (config.get("mdx_configs") or {}).get("pymdownx.snippets") or {}
+    for base in snippets.get("base_path") or ():
+        trees.append(Path(base).resolve().name)
+    return tuple(dict.fromkeys(trees))
+
 
 #: Descriptions for the blog views the plugin generates, which have no source file to carry
 #: frontmatter and would otherwise fall back to `site_description`. Templates rather than a
@@ -46,7 +56,7 @@ _VIEW_TOPIC = "self-hosted video conferencing and WebRTC engineering"
 _log = logging.getLogger(f"mkdocs.hooks.{Path(__file__).stem}")
 
 
-def _source_dates(root: Path) -> dict[str, str] | None:
+def _source_dates(root: Path, trees: tuple[str, ...]) -> dict[str, str] | None:
     """`{repository-relative path: date of its last commit}`, or None when git cannot answer.
 
     None means "leave MkDocs' build date alone". Three ordinary situations reach it, none of which
@@ -62,7 +72,7 @@ def _source_dates(root: Path) -> dict[str, str] | None:
         if git.is_shallow():
             _log.info("Shallow clone: sitemap <lastmod> falls back to the build date.")
             return None
-        return parse_git_log(git.log_dates_for(*_DATED_TREES))
+        return parse_git_log(git.log_dates_for(*trees))
     except (GitError, OSError) as error:
         _log.info(
             "Could not read dates from git (%s): <lastmod> falls back to the build date.", error
@@ -86,6 +96,13 @@ def _blog_url_shapes(config) -> dict[str, str] | None:
                 "category": options["categories_url_format"],
                 "pagination": options["pagination_url_format"],
             }
+    if "material/blog" in config.get("plugins", {}):
+        # Same strictness as the llmstxt path: a plugin update that renames these options
+        # must fail the build, not silently publish undescribed blog views.
+        raise PluginError(
+            "the blog plugin no longer exposes its URL-format options, so the generated views "
+            "cannot be described. Update publish-tool/mkdocs_hook.py to the new API."
+        )
     return None
 
 
@@ -166,8 +183,6 @@ def on_env(env, config, files, **kwargs):
     templates — `sitemap.xml` among them — *before* the pages, so `on_page_content` and
     `on_page_context` both run too late. Here every `file.page` exists and the work happens once.
     """
-    # `_DATED_TREES` is relative to the project root, which is also the repository root here and
-    # what pymdownx.snippets resolves an include against.
     docs_dir = Path(config["docs_dir"]).resolve()
     root = docs_dir.parent
     shapes = _blog_url_shapes(config)
@@ -188,7 +203,7 @@ def on_env(env, config, files, **kwargs):
 
     _log.info("Described %d of %d generated blog views from the view itself.", described, generated)
 
-    dates = _source_dates(root)
+    dates = _source_dates(root, _dated_trees(config))
     if dates is None:
         return env
 

@@ -169,7 +169,7 @@ def doc_file(src_uri: str, *, generated: bool = False):
 
 def env_call(tmp_path: Path, monkeypatch, files, dates):
     """Run `on_env` over `files` with `dates` standing in for the git log."""
-    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root: dates)
+    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root, trees: dates)
     cfg = {"docs_dir": str(tmp_path / "docs"), "plugins": {}}
     return on_env("env", cfg, SimpleNamespace(documentation_pages=lambda: files))
 
@@ -307,7 +307,7 @@ def test_the_url_shapes_come_from_the_plugins_own_configuration():
 def test_no_blog_plugin_means_no_view_metadata(tmp_path, monkeypatch):
     """`_blog_url_shapes` returns None and `on_env` must not try to describe anything."""
     item = doc_file("blog/archive/2026/07.md", generated=True)
-    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root: {})
+    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root, trees: {})
     on_env(
         "env",
         {"docs_dir": str(tmp_path / "docs"), "plugins": {}},
