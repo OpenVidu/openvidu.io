@@ -390,7 +390,10 @@ plugins:
       auto_themed: true
       background: none
       shadow: false
+  # rss follows the same CI profile as optimize: feeds are a publish artifact, and the
+  # plugin walks git history for dates (which also breaks builds outside the repo root).
   - rss:
+      enabled: !ENV [CI, false]
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
