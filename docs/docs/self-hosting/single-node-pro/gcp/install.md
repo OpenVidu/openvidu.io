@@ -90,26 +90,11 @@ Finally, click Continue.
 In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
-<div class="text-center">
-    <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-      <tr>
-        <th>Input Value</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td>projectId</td>
-        <td>GCP project id where the resources will be created.</td>
-      </tr>
-      <tr>
-        <td>stackName</td>
-        <td>Stack name for OpenVidu deployment.</td>
-      </tr>
-      <tr>
-        <td>openviduLicense</td>
-        <td>Your OpenVidu License. Get one <a href="https://openvidu.io/account" target="_blank" rel="noopener">here</a> if you don't have one.</td>
-      </tr>
-    </table>
-</div>
+| Input Value | Description |
+|---|---|
+| projectId | GCP project id where the resources will be created. |
+| stackName | Stack name for OpenVidu deployment. |
+| openviduLicense | Your OpenVidu License. Get one [here](https://openvidu.io/account) if you don't have one. |
 
 ### Optional Parameters
 <div class="text-center">
