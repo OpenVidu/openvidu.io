@@ -186,10 +186,6 @@
 
 {% block styles %}
 
-{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
-<link rel="stylesheet" href="{{ 'stylesheets/animate.min.css' | url }}" />
-{% endif %}
-
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
 <link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
 {% endif %}
