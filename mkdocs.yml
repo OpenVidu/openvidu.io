@@ -422,10 +422,12 @@ plugins:
       auto_themed: true
       background: none
       shadow: false
-  # rss follows the same CI profile as optimize: feeds are a publish artifact, and the
-  # plugin walks git history for dates (which also breaks builds outside the repo root).
+  # Always enabled: Material emits feed <link rel="alternate"> tags on every page as soon
+  # as the plugin is registered, so the feeds must exist in every profile. Only the
+  # git-history walk (updated dates) is publish-only - locally and in the validation
+  # build it would tie the build to the repo-root CWD and warn on shallow clones.
   - rss:
-      enabled: !ENV [CI, false]
+      use_git: !ENV [CI, false]
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
