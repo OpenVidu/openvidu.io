@@ -70,7 +70,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
+| Protocol    | Ports          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -95,7 +95,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |

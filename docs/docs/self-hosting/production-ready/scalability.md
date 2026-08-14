@@ -252,7 +252,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
 
     The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
+    <div class="text-center">
         <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
             <tr>
               <th>Input Value</th>
@@ -290,7 +290,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
     The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
+    <div class="text-center">
         <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
             <tr>
               <th>Input Value</th>
@@ -333,7 +333,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in Oracle Cloud Infrastructure](../ha/oracle/install.md)
 
     The cluster scales automatically thanks to an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} for scale-out, combined with an [OCI Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm){:target="_blank"} that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](../elastic/oracle/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
+    <div class="text-center">
         <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
             <tr>
               <th>Input Value</th>

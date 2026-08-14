@@ -5,7 +5,7 @@ page_features:
   - setupcustomgallery
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: AWS
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> installation: AWS
 
 <div class="provider-chip" markdown>
 

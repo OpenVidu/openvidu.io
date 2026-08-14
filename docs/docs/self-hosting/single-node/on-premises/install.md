@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node COMMUNITY on-premises"
 description: "Deploy OpenVidu Single Node COMMUNITY on your own servers with the guided installer, non-interactively or with plain Docker Compose."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: On-premises
 
 <div class="provider-chip" markdown>
 
@@ -46,7 +46,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 
 **Inbound port rules**:
 
-| Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+| Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |

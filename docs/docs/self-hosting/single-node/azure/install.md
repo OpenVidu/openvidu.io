@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node COMMUNITY on Azure"
 description: "Deploy OpenVidu Single Node COMMUNITY on Azure from an Azure Resource Manager template spec, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Azure
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: Azure
 
 <div class="provider-chip" markdown>
 

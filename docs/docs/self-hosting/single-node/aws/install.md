@@ -5,7 +5,7 @@ page_features:
   - setupcustomgallery
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: AWS
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: AWS
 
 <div class="provider-chip" markdown>
 

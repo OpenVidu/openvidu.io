@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node COMMUNITY on-premises"
 description: "Administer OpenVidu Single Node COMMUNITY on your own servers: check the status of every service, and back up and restore its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: On-premises
 
 <div class="provider-chip" markdown>
 

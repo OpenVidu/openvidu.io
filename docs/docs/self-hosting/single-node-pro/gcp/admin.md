@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on Google Cloud"
 description: "Administer OpenVidu Single Node PRO on Google Cloud: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Google Cloud Platform
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 

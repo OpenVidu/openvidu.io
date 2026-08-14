@@ -82,7 +82,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         <div class="grid-container">
 
-        <div class="grid-100"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></p></div>
+        <div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></p></div>
 
         </div>
 
@@ -92,8 +92,8 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         <div class="grid-container">
 
-        <div class="grid-50"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/join-ionic-device.png" loading="lazy" style="width: 50%;" alt="Join screen of the Ionic tutorial app on a mobile device"/></p></div>
+        <div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/join-ionic-device.png" loading="lazy" style="width: 50%;" alt="Join screen of the Ionic tutorial app on a mobile device"/></p></div>
 
-        <div class="grid-50"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/room-ionic-device.png" loading="lazy" style="width: 50%;" alt="Video call room of the Ionic tutorial app on a mobile device"/></p></div>
+        <div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/room-ionic-device.png" loading="lazy" style="width: 50%;" alt="Video call room of the Ionic tutorial app on a mobile device"/></p></div>
 
         </div>

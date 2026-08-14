@@ -71,26 +71,9 @@
   font-weight: 500 !important;
 }
 
-.meet-features {
-  margin-top: 5rem;
-  margin-bottom: 4rem;
-}
-
 .meet-header .img-title {
   width: 100% !important;
   max-width: 750px !important;
-}
-
-.openvidu-call-features-cards > ul {
-  display: block !important;
-}
-
-.ov-meet-commercial-img {
-  max-width: 100% !important; /* Default for small screens */
-  width: auto;
-  height: auto;
-  margin: auto;
-  text-align: center;
 }
 
 .feature-cards .two-columns li {
@@ -104,19 +87,6 @@
 .ov-meet-commercial-feature-cards {
   padding: 0 25px !important;
   text-align: center !important;
-}
-.ov-meet-commercial-title {
-  text-align: center !important;
-  font-size: 3em !important;
-  font-weight: bold !important;
-  margin: 0 !important;
-}
-
-.ov-meet-commercial-features-title {
-  text-align: center !important;
-  font-size: 2em !important;
-  font-weight: bold !important;
-  /* margin: 0 0 2rem 0 !important; */
 }
 
 .ov-meet-commercial-icon {
@@ -161,13 +131,7 @@
   background-color: #C74634;
 }
 
-.ov-meet-footer-btn-container p {
-  text-align: center;
-}
-
 /* Dark mode */
-body[data-md-color-scheme="slate"] .ov-meet-commercial-icon {
-}
 
 /* Light mode */
 body[data-md-color-scheme="default"] {
@@ -185,36 +149,6 @@ body[data-md-color-scheme="default"] {
   display: flex !important;
   justify-content: space-between;
   flex-direction: column;
-}
-
-@media (min-width: 576px) {
-  .ov-meet-commercial-img {
-    max-width: 80vw !important; /* Small devices (landscape phones, 576px and up) */
-  }
-}
-
-@media (min-width: 768px) {
-  .ov-meet-commercial-img {
-    max-width: 70vw !important; /* Medium devices (tablets, 768px and up) */
-  }
-}
-
-@media (min-width: 992px) {
-  .ov-meet-commercial-img {
-    max-width: 60vw !important; /* Large devices (desktops, 992px and up) */
-  }
-}
-
-@media (min-width: 1200px) {
-  .ov-meet-commercial-img {
-    max-width: 50vw !important; /* Extra large devices (large desktops, 1200px and up) */
-  }
-}
-
-@media (min-width: 1400px) {
-  .ov-meet-commercial-img {
-    max-width: 48vw !important; /* XX-Large devices (very large desktops, 1400px and up) */
-  }
 }
 
 .ov-meet-commercial-card-title {

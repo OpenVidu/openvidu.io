@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node PRO on Google Cloud"
 description: "Deploy OpenVidu Single Node PRO on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Google Cloud Platform
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> installation: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -90,7 +90,7 @@ Finally, click Continue.
 In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
-<div style="text-align: center;">
+<div class="text-center">
     <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
       <tr>
         <th>Input Value</th>
@@ -112,7 +112,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 </div>
 
 ### Optional Parameters
-<div style="text-align: center;">
+<div class="text-center">
     <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
       <tr>
         <th>Input Value</th>

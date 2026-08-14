@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on-premises"
 description: "Administer OpenVidu Single Node PRO on your own servers: check the status of every service, and back up and restore its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: On-premises
 
 <div class="provider-chip" markdown>
 

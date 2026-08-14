@@ -24,6 +24,24 @@
   vertical-align: top;
 }
 
+/* Product tag inside a heading */
+.openvidu-tag.openvidu-tag-heading {
+  font-size: 0.6em;
+}
+
+/* Layout utilities (replace the recurring inline style="" attributes) */
+.nowrap {
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-8em {
+  width: 8em;
+}
+
 .openvidu-community-tag {
   background-color: #868686;
 }
@@ -53,10 +71,6 @@ span:has(> .openvidu-tag) {
 
 span:has(> a > .openvidu-tag) {
   display: inline-block;
-}
-
-.features-grid {
-  margin-bottom: 10px;
 }
 
 .md-grid {
@@ -229,15 +243,6 @@ img.svg-img {
   ) !important;
 }
 
-.node-img {
-  width: 80%;
-}
-
-.grid-nodes {
-  display: flex;
-  align-items: center;
-}
-
 .gslide-image img {
   background: transparent !important;
 }
@@ -380,49 +385,6 @@ p:has(> a.glightbox) {
   vertical-align: middle;
 }
 
-.features-list:after {
-  clear: both;
-  content: "";
-  display: block;
-}
-
-.feature-info {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.feature-title {
-  display: flex;
-  min-height: 50px;
-  align-items: center;
-  justify-content: center;
-}
-
-.feature-title-livekit {
-  align-items: flex-end;
-  padding-bottom: 12.5px;
-}
-
-.feature-title h4 {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.home-icon {
-  width: 3em;
-  margin-right: 8px;
-}
-
-.livekit-icon {
-  width: 110px;
-  margin-right: 12px;
-  flex-shrink: 0.1;
-}
-
-.livekit-title {
-  line-height: 1;
-}
-
 .md-header__title {
   line-height: 2.6rem;
 }
@@ -433,12 +395,6 @@ p:has(> a.glightbox) {
   line-height: 10px !important;
 }
 
-@media (min-width: 1220px) {
-  #home-markdown hr {
-    margin: 4em -4em !important;
-  }
-}
-
 @media (max-width: 1219px) {
   .top-home-section {
     min-height: calc(100vh - 2.4rem);
@@ -447,8 +403,6 @@ p:has(> a.glightbox) {
 }
 
 /* Tablet */
-@media (min-width: 960px) and (max-width: 1219px) {
-}
 
 /* Mobile */
 @media (max-width: 959px) {
@@ -679,16 +633,6 @@ nav .md-tabs__item {
   font-weight: 500;
 }
 
-#home-markdown {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#home-markdown hr {
-  margin: 4em 0;
-}
-
 .hide {
   display: none;
 }
@@ -717,10 +661,6 @@ nav .md-tabs__item {
 
 .large-icon {
   --md-icon-size: 1.5em !important;
-}
-
-p:has(> a.centered-button) {
-  text-align: center;
 }
 
 .use-case-img {
@@ -871,12 +811,6 @@ h1.meetplatform-slogan {
   border-radius: 5px;
 }
 
-.nav-open-new-tab {
-  float: right !important;
-  font-size: 0.8rem !important;
-  margin-left: 0.7rem !important;
-}
-
 .control-height {
   max-height: 50vh;
 }
@@ -922,10 +856,6 @@ h1.meetplatform-slogan {
   color: var(--md-accent-bg-color) !important;
   font-weight: bold;
   background-color: var(--md-primary-fg-color);
-}
-
-.code-margin-left {
-  margin-left: 2em;
 }
 
 .external-link-icon {
@@ -1093,10 +1023,6 @@ button.md-tabs__dropdown-toggle {
   font-size: 1.5rem;
 }
 
-.xl-icon {
-  font-size: 2.5rem;
-}
-
 .tab-icon {
   display: block !important;
 }
@@ -1118,14 +1044,6 @@ button.md-tabs__dropdown-toggle {
 
 .no-width {
   width: inherit;
-}
-
-.no-height {
-  height: inherit;
-}
-
-.responsive-card {
-  flex: 0 32%;
 }
 
 .provider-buttons {
@@ -1172,18 +1090,6 @@ button.md-tabs__dropdown-toggle {
   flex-shrink: 0;
 }
 
-a.provider-link-coming-soon {
-  pointer-events: none !important;
-  cursor: default !important;
-  opacity: 0.8;
-  filter: grayscale(90%);
-}
-
-.provider-coming-soon {
-  display: inline-block;
-  font-style: italic;
-}
-
 .provider-chip {
   display: inline-flex;
   align-items: center;
@@ -1218,10 +1124,6 @@ a.provider-link-coming-soon {
   vertical-align: middle;
 }
 
-.do-not-break-line {
-  white-space: nowrap;
-}
-
 /* intro */
 
 .card {
@@ -1238,11 +1140,6 @@ a.provider-link-coming-soon {
   vertical-align: -webkit-baseline-middle;
 }
 
-.card-action-button {
-  width: 75%;
-  margin-top: 5px;
-}
-
 /* Styles for mobile devices */
 @media screen and (max-width: 480px) {
   .provider-buttons {
@@ -1256,9 +1153,6 @@ a.provider-link-coming-soon {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .responsive-card {
-    flex: 0 100% !important;
-  }
 }
 
 @media screen and (min-width: 769px) {
@@ -1266,7 +1160,4 @@ a.provider-link-coming-soon {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .responsive-card {
-    flex: 0 100% !important;
-  }
 }

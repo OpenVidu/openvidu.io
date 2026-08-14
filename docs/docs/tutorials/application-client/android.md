@@ -140,7 +140,7 @@ If these URLs are left empty, the user will be prompted to enter the URLs when t
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></p></div>
+<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></p></div>
 
 </div>
 

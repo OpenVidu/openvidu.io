@@ -48,7 +48,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880           | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 5349           | External proxy | TURN with TLS. |
@@ -68,7 +68,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
         | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
@@ -181,7 +181,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880           | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 5349           | External Proxy | TURN with TLS. |
@@ -203,7 +203,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+        | Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
         | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
@@ -223,7 +223,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         And the inbound rules for the proxy server would be as follows:
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
         | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |

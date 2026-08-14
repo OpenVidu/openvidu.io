@@ -41,8 +41,8 @@ page_features:
 <table id="pricing-table" name="big-pricing-table">
   <tr>
     <th></th>
-    <th id="openvidu-community" class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
-    <th id="openvidu-pro" colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
+    <th id="openvidu-community" class="border-right border-left title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
+    <th id="openvidu-pro" colspan="3" class="title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
   </tr>
   <tr>
     <td class="first-column border-right">Price</td>
@@ -66,7 +66,7 @@ page_features:
   <tr>
     <td class="first-column border-right">Features</td>
     <td class="border-right">Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability</td>
-    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong style="white-space: nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
+    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong class="nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
     <td class="border-right">Same benefits as OpenVidu Single Node PRO plus <strong>scalability</strong></td>
     <td>Same benefits as OpenVidu Elastic plus <strong>fault tolerance</strong></td>
   </tr>
@@ -90,10 +90,10 @@ page_features:
 
 OpenVidu offers two editions:
 
-- <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
-- <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
 
-OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
 
 </div>
 

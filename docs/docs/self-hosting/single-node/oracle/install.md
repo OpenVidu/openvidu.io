@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node COMMUNITY on Oracle Cloud"
 description: "Deploy OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Oracle Cloud Infrastructure
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: Oracle Cloud Infrastructure
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
@@ -60,19 +60,19 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     </thead>
     <tbody>
     <tr>
-    <td style="white-space: nowrap;"><code>tenancy_ocid</code></td>
+    <td class="nowrap"><code>tenancy_ocid</code></td>
     <td>OCI Tenancy OCID. Required for the Object Storage namespace.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>compartment_ocid</code></td>
+    <td class="nowrap"><code>compartment_ocid</code></td>
     <td>OCI Compartment OCID where resources will be created.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>user_ocid</code></td>
+    <td class="nowrap"><code>user_ocid</code></td>
     <td>OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>stackName</code></td>
+    <td class="nowrap"><code>stackName</code></td>
     <td>Stack name for the OpenVidu deployment.</td>
     </tr>
     </tbody>
@@ -92,79 +92,79 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     </thead>
     <tbody>
     <tr>
-    <td style="white-space: nowrap;"><code>region</code></td>
-    <td style="white-space: nowrap;"><code>"eu-frankfurt-1"</code></td>
+    <td class="nowrap"><code>region</code></td>
+    <td class="nowrap"><code>"eu-frankfurt-1"</code></td>
     <td>OCI region where resources will be created.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>availability_domain</code></td>
-    <td style="white-space: nowrap;"><code>1</code></td>
+    <td class="nowrap"><code>availability_domain</code></td>
+    <td class="nowrap"><code>1</code></td>
     <td>Availability Domain number (1, 2, or 3) to use for resources.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>instanceType</code></td>
-    <td style="white-space: nowrap;"><code>"VM.Standard.E4.Flex"</code></td>
+    <td class="nowrap"><code>instanceType</code></td>
+    <td class="nowrap"><code>"VM.Standard.E4.Flex"</code></td>
     <td>OCI Compute shape for the OpenVidu instance.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>instanceOCPUs</code></td>
-    <td style="white-space: nowrap;"><code>4</code></td>
+    <td class="nowrap"><code>instanceOCPUs</code></td>
+    <td class="nowrap"><code>4</code></td>
     <td>Number of OCPUs for the instance (applies to Flex shapes only).</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>instanceMemory</code></td>
-    <td style="white-space: nowrap;"><code>4</code></td>
+    <td class="nowrap"><code>instanceMemory</code></td>
+    <td class="nowrap"><code>4</code></td>
     <td>Memory in GB for the instance (applies to Flex shapes only).</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>certificateType</code></td>
-    <td style="white-space: nowrap;"><code>"letsencrypt"</code></td>
+    <td class="nowrap"><code>certificateType</code></td>
+    <td class="nowrap"><code>"letsencrypt"</code></td>
     <td>Certificate type for the OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li><code>owncert</code> - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li><code>letsencrypt</code> - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
     </td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>domainName</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>domainName</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>ownPublicCertificate</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate in base64 format.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>ownPrivateCertificate</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>ownPrivateCertificate</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate in base64 format.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>initialMeetAdminPassword</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>initialMeetAdminPassword</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>initialMeetApiKey</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>initialMeetApiKey</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>bucketName</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>bucketName</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>vault_ocid</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>vault_ocid</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>key_ocid</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>key_ocid</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>OCI KMS Key OCID for secrets management. If left empty, a new key will be created.</td>
     </tr>
     <tr>
-    <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
+    <td class="nowrap"><code>additionalInstallFlags</code></td>
+    <td class="nowrap"><code>(none)</code></td>
     <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., <code>--flag1=value, --flag2</code>).</td>
     </tr>
     </tbody>

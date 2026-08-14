@@ -98,8 +98,8 @@ Finally, click Continue.
 In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
-<div style="text-align: center;">
-    <div style="text-align: center;">
+<div class="text-center">
+    <div class="text-center">
         <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
             <tr>
                 <th>Input Value</th>
@@ -122,7 +122,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 </div>
 
 ### Optional Parameters
-<div style="text-align: center;">
+<div class="text-center">
     <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
       <tr>
         <th>Input Value</th>

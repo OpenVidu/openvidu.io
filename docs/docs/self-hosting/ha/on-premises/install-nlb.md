@@ -89,7 +89,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol | <div style="width:8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
+| Protocol | <div class="w-8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 1945        | Load Balancer             | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP      | 5349        | Load Balancer             | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -118,7 +118,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |

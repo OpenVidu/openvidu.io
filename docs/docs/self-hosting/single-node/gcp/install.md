@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node COMMUNITY on Google Cloud"
 description: "Deploy OpenVidu Single Node COMMUNITY on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -89,7 +89,7 @@ Finally, click Continue.
 In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters declared in our Terraform files into the console, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
-<div style="text-align: center;">
+<div class="text-center">
     <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
       <tr>
         <th>Input Value</th>
@@ -107,7 +107,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 </div>
 
 ### Optional Parameters
-<div style="text-align: center;">
+<div class="text-center">
     <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
       <tr>
         <th>Input Value</th>

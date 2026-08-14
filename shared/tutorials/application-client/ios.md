@@ -14,7 +14,7 @@ The application will initiate as a native iOS application. Once the app is opene
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></p></div>
+<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></p></div>
 
 </div>
 
@@ -28,8 +28,8 @@ Once you have configured the URLs, you can join a video call room by providing a
 
 <div class="grid-container">
 
-<div class="grid-50"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 50%;" alt="Join screen of the iOS tutorial app"/></p></div>
+<div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 50%;" alt="Join screen of the iOS tutorial app"/></p></div>
 
-<div class="grid-50"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/room-ios.png" loading="lazy" style="width: 50%;" alt="Video call room of the iOS tutorial app"/></p></div>
+<div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/room-ios.png" loading="lazy" style="width: 50%;" alt="Video call room of the iOS tutorial app"/></p></div>
 
 </div>
