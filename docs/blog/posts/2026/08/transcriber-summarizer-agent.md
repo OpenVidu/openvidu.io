@@ -8,20 +8,16 @@ cover_image: transcriber-summarizer-agent.png
 categories:
   - AI
   - Implementation
-  - Livekit
+  - LiveKit
   - Technology
 tags:
-  - AI Agents
+  - AI agents
   - STT
   - Transcription
   - LiveKit
   - WebRTC
 authors:
   - pabloFuente
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Building an AI agent for transcribing and summarizing audio calls
@@ -48,7 +44,7 @@ Three moving parts:
 
 The data flows like this:
 
-![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow.png)
+![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow.png){ loading=lazy }
 
 ## Running the demo
 
@@ -106,7 +102,7 @@ Now simply follow these steps to run the demo locally:
 
 Open [`http://localhost:8080`](http://localhost:8080), type a name, and join. Talk for a bit and watch the transcript fill in. Open the page in a **second tab**, join with a different name, and within a couple of seconds a yellow box appears summarizing what the first tab said. The full timestamped record waits in `transcripts/`.
 
-![Web app screenshot](/assets/images/blog/2026/08/transcriber-summarizer-agent/web-app-screenshot.png)
+![Web app screenshot](/assets/images/blog/2026/08/transcriber-summarizer-agent/web-app-screenshot.png){ loading=lazy }
 
 > **NOTE**: If you are using AWS, make sure that your credentials have the necessary policies to access Amazon Transcribe and Amazon Bedrock:
 > ```

@@ -2,8 +2,9 @@
 title: "Live captions in OpenVidu Meet"
 description: "Turn on real-time speech-to-text captions in an OpenVidu Meet meeting to make it accessible, and choose the language each participant reads."
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
-tags:
-    - setupcustomgallery
+page_features:
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Live Captions
@@ -20,7 +21,7 @@ OpenVidu Meet includes a built-in **Live Captions** feature that turns speech in
 
 SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
 
---8<-- "shared/self-hosting/common/ssh-openvidu-deployment.md"
+--8<-- "self-hosting/common/ssh-openvidu-deployment.md"
 
 ### 2. Enable the Speech Processing Agent
 
@@ -60,18 +61,18 @@ MEET_CAPTIONS_ENABLED=true
 
 Apply your changes by restarting OpenVidu. This ensures the system recognizes the new live captioning capabilities.
 
---8<-- "shared/self-hosting/common/restart-openvidu-deployment.md"
+--8<-- "self-hosting/common/restart-openvidu-deployment.md"
 
 ### 5. Enable/Disable Captions for specific Rooms
 
 Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Room Features** step of the room configuration wizard, using the **Captions** toggle.
 
-<a class="glightbox" href="/assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark" loading="lazy" class="round-corners" alt="Room wizard step enabling live captions for the room"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light" loading="lazy" class="round-corners" alt="Room wizard step enabling live captions for the room"/></a>
+![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .round-corners loading=lazy }
+![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .round-corners loading=lazy }
 
 ## Using Live Captions in a Meeting
 
 Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.
 
-<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" preload="none" muted playsinline loop></video></a>

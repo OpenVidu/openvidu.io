@@ -17,10 +17,6 @@ tags:
   - Build vs buy
 authors:
   - patxi
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # How DynDevice Built Virtual Classrooms Into Its LMS with OpenVidu

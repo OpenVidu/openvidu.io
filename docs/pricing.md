@@ -19,12 +19,14 @@ faq:
     answer: >-
       You need an OpenVidu account and an OpenVidu License to deploy an OpenVidu Pro cluster (OpenVidu Elastic or OpenVidu High Availability). When purchasing a license you indicate your billing address and a credit card, and you receive a 15-day free trial period during which you are not charged at all. After the trial, a monthly billing cycle charges your expenses to your credit card and you receive an invoice each month. The entire billing process is securely done via Stripe and no credit card data is stored. OpenVidu Pro clusters automatically report their usage, which requires outbound access to accounts.openvidu.io on port 443.
 hide:
+  - feedback
+  - path
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
-tags:
+page_features:
   - setupwowjs
 ---
 
@@ -39,8 +41,8 @@ tags:
 <table id="pricing-table" name="big-pricing-table">
   <tr>
     <th></th>
-    <th id="openvidu-community" class="border-right border-left title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
-    <th id="openvidu-pro" colspan="3" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
+    <th id="openvidu-community" class="border-right border-left title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></strong></th>
+    <th id="openvidu-pro" colspan="3" class="title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>
   </tr>
   <tr>
     <td class="first-column border-right">Price</td>
@@ -64,7 +66,7 @@ tags:
   <tr>
     <td class="first-column border-right">Features</td>
     <td class="border-right">Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability</td>
-    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong style="white-space: nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
+    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong class="nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
     <td class="border-right">Same benefits as OpenVidu Single Node PRO plus <strong>scalability</strong></td>
     <td>Same benefits as OpenVidu Elastic plus <strong>fault tolerance</strong></td>
   </tr>
@@ -88,10 +90,10 @@ tags:
 
 OpenVidu offers two editions:
 
-- <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
-- <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
 
-OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
 
 </div>
 
@@ -164,9 +166,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" alt="Diagram of an OpenVidu Elastic deployment with 12 cores in total"/>
-</figure>
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" alt="Diagram of an OpenVidu Elastic deployment with 12 cores in total" loading="lazy"/>
 </div>
 
 ---
@@ -187,9 +187,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" alt="Diagram of an OpenVidu Elastic deployment with 20 cores in total"/>
-</figure>
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" alt="Diagram of an OpenVidu Elastic deployment with 20 cores in total" loading="lazy"/>
 </div>
 
 ---
@@ -210,9 +208,7 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" alt="Diagram of an OpenVidu High Availability deployment with 32 cores in total"/>
-</figure>
+<img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" alt="Diagram of an OpenVidu High Availability deployment with 32 cores in total" loading="lazy"/>
 </div>
 
 ---
@@ -237,9 +233,7 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" alt="Diagram of an OpenVidu Elastic deployment with a variable number of cores"/>
-</figure>
+<img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" alt="Diagram of an OpenVidu Elastic deployment with a variable number of cores" loading="lazy"/>
 </div>
 
 </div>

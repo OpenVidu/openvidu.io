@@ -36,6 +36,7 @@ faq:
       the LiveKit stack (SDKs, API, token model) unchanged. OpenVidu's own benchmarks show roughly double
       the media-track capacity per server as a result.
 hide:
+  - feedback
   - navigation
   - toc
   - footer

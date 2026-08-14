@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on DigitalOcean"
 description: "Administer OpenVidu Single Node PRO on DigitalOcean: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: DigitalOcean
+# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: DigitalOcean
 
 <div class="provider-chip" markdown>
 
@@ -26,9 +26,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
     3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .svg-img .dark-img }
-    </figure>
+    ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .svg-img .dark-img loading=lazy }
 
 === "Start OpenVidu Single Node PRO"
 
@@ -36,9 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce-pro`.
     3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .svg-img .dark-img }
-    </figure>
+    ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .svg-img .dark-img loading=lazy }
 
 ## Change the droplet size
 
@@ -51,9 +47,7 @@ You can change the droplet size of the OpenVidu Single Node PRO to adapt it to y
 
     === "Change droplet size"
 
-        <figure markdown>
-        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet-pro.png){ .svg-img .dark-img }
-        </figure>
+        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet-pro.png){ .svg-img .dark-img loading=lazy }
 
 ## Administration and configuration
 

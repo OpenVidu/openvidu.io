@@ -1,8 +1,9 @@
 ---
 title: "Room access in OpenVidu Meet"
 description: "The four ways into an OpenVidu Meet room: shared anonymous links, registered users and identified guests, each with a Moderator or Speaker role."
-tags:
-    - setupcustomgallery
+page_features:
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Room Access
@@ -29,15 +30,15 @@ These links can be shared freely with anyone, unless anonymous access for that r
 
 Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
 
-<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 #### From an active meeting
 
 Participants with the `canShareAccessLinks` permission can share the room access link from the active meeting view.
 
-<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark" loading="lazy" class="round-corners" alt="Sharing the room access link from an active meeting"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-light.png#only-light" loading="lazy" class="round-corners" alt="Sharing the room access link from an active meeting"/></a>
+![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark){ .round-corners loading=lazy }
+![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
 

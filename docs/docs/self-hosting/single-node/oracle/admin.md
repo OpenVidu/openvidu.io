@@ -3,9 +3,9 @@ title: "Administer OpenVidu Single Node COMMUNITY on Oracle Cloud"
 description: "Administer OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Oracle Cloud Infrastructure
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle/provider-chip.md"
+--8<-- "self-hosting/oracle/provider-chip.md"
 
 Oracle Cloud Infrastructure OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
 
@@ -21,9 +21,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Compute instance that runs OpenVidu.
     3. Click the three-dots action menu next to the instance and select _"Stop"_ to stop the instance (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance.png){ .svg-img .dark-img }
-    </figure>
+    ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance.png){ .svg-img .dark-img loading=lazy }
 
 === "Start OpenVidu Single Node"
 
@@ -31,9 +29,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Compute instance that runs OpenVidu.
     3. Click the three-dots action menu next to the instance and select _"Start"_ to start the instance (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance.png){ .svg-img .dark-img }
-    </figure>
+    ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance.png){ .svg-img .dark-img loading=lazy }
 
 ## Change the instance shape
 
@@ -46,9 +42,7 @@ You can change the shape (instance type) of the OpenVidu Single Node instance to
 
     === "Change instance shape"
 
-        <figure markdown>
-        ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape.png){ .svg-img .dark-img }
-        </figure>
+        ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape.png){ .svg-img .dark-img loading=lazy }
 
 5. Confirm the new shape and [start](#start-openvidu-single-node) the instance again.
 
@@ -65,15 +59,11 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click on the desired secret you want to change.
     3. Scroll down to _"Versions"_ and click on _"Create secret version"_ to add a new version with the updated value.
-            <figure markdown>
-            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/create-secret-version.png){ .svg-img .dark-img }
-            </figure>
+            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/create-secret-version.png){ .svg-img .dark-img loading=lazy }
     4. Enter the new secret value and click on _"Create secret version"_.
-            <figure markdown>
-            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/new-secret-version.png){ .svg-img .dark-img }
-            </figure>
+            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/new-secret-version.png){ .svg-img .dark-img loading=lazy }
     5. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click on [_Stop_](#stop-openvidu-single-node) → [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
 
     Changes will be applied automatically.
 
---8<-- "shared/self-hosting/oracle/backup-and-restore.md"
+--8<-- "self-hosting/oracle/backup-and-restore.md"

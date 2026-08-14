@@ -1,7 +1,7 @@
 ---
 title: "OpenVidu Meet release notes"
 description: "Release notes for every OpenVidu Meet version, with the changelog of new features, breaking changes and upgrade notes."
-tags:
+page_features:
   - scrolltoversion
 ---
 

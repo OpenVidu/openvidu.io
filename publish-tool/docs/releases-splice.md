@@ -21,7 +21,7 @@ rest of the newest page along with them. Two complementary parts achieve that:
    `#350`). It lives in
    [`docs/javascripts/releases-scroll-to-version.js`](../../docs/javascripts/releases-scroll-to-version.js)
    and is loaded only on the releases pages, via the `scrolltoversion` tag in their front matter
-   (wired in [`docs/overrides/main.html`](../../docs/overrides/main.html)). It is a no-op when the
+   (wired in [`overrides/main.html`](../../overrides/main.html)). It is a no-op when the
    URL already has an anchor (so cross-page `#380` links are respected) or when there is no
    matching section (the `latest` alias stays at the top, newest first).
 

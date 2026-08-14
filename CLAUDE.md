@@ -11,7 +11,7 @@ Authoritative references — read the relevant one before working:
 - [`contributing/`](contributing/) — the canonical contributor docs:
   [`authoring.md`](contributing/authoring.md) (pages, snippets, assets),
   [`link-rules.md`](contributing/link-rules.md),
-  [`page-composition.md`](contributing/page-composition.md) (tags, overrides, HTML, light/dark),
+  [`page-composition.md`](contributing/page-composition.md) (page features, overrides, HTML, light/dark),
   [`versioning.md`](contributing/versioning.md) (branches, releases pages, publishing),
   [`local-testing.md`](contributing/local-testing.md),
   [`checks.md`](contributing/checks.md) (lint, CI).
@@ -65,9 +65,9 @@ nearly every page.
   (`versioned_pages`/`non_versioned_pages`).
 - `shared/` snippets render inside many pages — grep for the snippet's `--8<--` usages before
   editing one.
-- The `tags:` frontmatter loads per-page JS/CSS
+- The `page_features:` frontmatter loads per-page JS/CSS
   ([`contributing/page-composition.md`](contributing/page-composition.md)). Copying a visual
-  pattern from another page → copy its tags too.
+  pattern from another page → copy its feature keys too. `tags:` is blog taxonomy only.
 - The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
   `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
 

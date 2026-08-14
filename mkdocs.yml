@@ -3,6 +3,10 @@ site_url: https://openvidu.io/
 site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
+# Absolute on purpose: edit links must point at THIS repo and branch, not repo_url.
+# The content.action.edit feature is currently off, so this emits nothing today.
+# A branch cut from another must update it (see contributing/versioning.md).
+edit_uri: https://github.com/OpenVidu/openvidu.io/edit/main/docs/
 
 nav:
   - Home: index.md
@@ -302,7 +306,7 @@ validation:
 
 theme:
   name: material
-  custom_dir: docs/overrides
+  custom_dir: overrides
   language: en
   features:
     - content.code.copy
@@ -310,38 +314,49 @@ theme:
     - content.code.annotate
     - content.tooltips
     - navigation.tabs
-    # - navigation.tabs.sticky
     - navigation.tracking
     - navigation.footer
-    # - navigation.expand
-    # - navigation.path
-    # - navigation.sections
+    # Breadcrumbs on meet/** + docs/** only: the sectioned marketing pages and the blog
+    # opt out per page/folder with `hide: - path`.
+    - navigation.path
+    # Every page embeds only its own nav branch instead of all ~250 entries.
+    # Incompatible with navigation.expand; navigation.instant must also stay off
+    # (the per-feature inline scripts in main.html would not re-run across
+    # instant navigations).
+    - navigation.prune
     - navigation.top
     - navigation.indexes
-    # - toc.follow
-    # - toc.integrate
     - search.suggest
     - search.highlight
-    # - header.autohide
     - announce.dismiss
-  font:
-    text: Tomorrow # Nunito Sans, Rubik, Barlow, Raleway, Open Sans, Tomorrow, IBM Plex Sans
-    code: Roboto Mono
+  # The single font stylesheet is loaded by the header override (Tomorrow + Roboto Mono,
+  # exactly the weights the CSS uses); --md-text-font/--md-code-font live in extra.css.
+  font: false
+  # Three-way toggle. The first entry whose `media` matches is the first-visit default,
+  # and the bare (prefers-color-scheme) always matches, so the auto entry goes first and
+  # the OS preference decides. Each entry's toggle activates the NEXT entry:
+  # auto -> light -> dark -> auto.
   palette:
-    # Palette toggle for dark mode
-    - scheme: slate
-      primary: custom
-      accent: custom
+    - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/brightness-4
+        icon: material/brightness-auto
         name: Switch to light mode
-    # Palette toggle for light mode
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
@@ -350,12 +365,20 @@ theme:
 hooks:
   - publish-tool/mkdocs_hook.py
 
+# `mkdocs serve` only auto-watches docs_dir, the config file and the theme; a snippet or
+# hook edit triggered no rebuild at all before these.
+watch:
+  - shared
+  - overrides
+  - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_preprocess.py
+  - publish-tool/src/ovweb
+
 plugins:
   - meta
   - search
   - blog:
       post_excerpt: required
-      draft: false
       draft_if_future_date: true
       archive_date_format: MMMM yyyy
       archive_url_date_format: yyyy/MM
@@ -363,14 +386,14 @@ plugins:
         - Comparison
         - How-to
         - Research
-        - Livekit
+        - LiveKit
         - Technology
         - Vertical
         - Success story
         - Implementation
         - OpenVidu How-to
         - OpenVidu Meet
-        - Openvidu Implementation
+        - OpenVidu Implementation
         - OpenVidu
         - OpenVidu comparison
         - OpenVidu Platform
@@ -389,26 +412,26 @@ plugins:
       enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
+      # Never recompress the vendored compodoc bundle (reference docs ship as-is)
+      optimize_exclude:
+        - docs/reference-docs/*
   - glightbox:
-      touchNavigation: true
-      loop: false
-      effect: zoom
-      slide_effect: slide
       width: 100%
-      height: auto
-      zoomable: true
-      draggable: true
       skip_classes:
-        - do-not-include-in-gallery
-      auto_caption: false
-      caption_position: bottom
+        - skip-gallery
+      auto_themed: true
       background: none
       shadow: false
+  # Always enabled: Material emits feed <link rel="alternate"> tags on every page as soon
+  # as the plugin is registered, so the feeds must exist in every profile. Only the
+  # git-history walk (updated dates) is publish-only - locally and in the validation
+  # build it would tie the build to the repo-root CWD and warn on shallow clones.
   - rss:
+      use_git: !ENV [CI, false]
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
-      image: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
+      image: https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
         - tags
@@ -555,7 +578,6 @@ markdown_extensions:
   - toc:
       permalink: "#"
       permalink_title: Anchor link to this section for reference
-  - footnotes
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
@@ -567,21 +589,40 @@ markdown_extensions:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
+  # Includes resolve against shared/ only (never the CWD), so `--8<-- "x.md"` means
+  # `<repo>/shared/x.md` from any build directory; check_paths makes a missed path a
+  # hard build error.
   - pymdownx.snippets:
-      url_download: true
+      base_path: [!relative $config_dir/shared]
       check_paths: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
       options:
         custom_icons:
-          - docs/overrides/.icons
+          - overrides/.icons
   - pymdownx.blocks.caption
 
 extra:
   analytics:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
+    # Renders only after the visitor accepts the analytics cookie (enforced by the
+    # consent template) - invisible to consent-rejecting visitors by design.
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            <a href="https://github.com/OpenVidu/openvidu/issues/new?labels=documentation&amp;title=Docs%20feedback:%20{title}&amp;body=Feedback%20about%20https://openvidu.io{url}%0A%0A(Tell%20us%20what%20you%20were%20looking%20for)" target="_blank" rel="noopener">opening a quick GitHub issue</a>.
   version:
     provider: mike
     default: latest
@@ -614,10 +655,8 @@ extra_css:
   - stylesheets/colors.css
   - stylesheets/extra.css
   - stylesheets/unsemantic-grid.css
-  - stylesheets/livekit-tutorials.css
-  - stylesheets/home.css
-  - stylesheets/openvidu-call.css
 
+# {year} is replaced with the build year by publish-tool/mkdocs_hook.py
 copyright: >
-  2026 &copy; OpenVidu<br>
+  {year} &copy; OpenVidu<br>
   <a href="#__consent">Change cookie settings</a>

@@ -1,8 +1,9 @@
 ---
 title: "Virtual background in OpenVidu Meet"
 description: "Blur the background or replace it with an image in one click, so an OpenVidu Meet participant can join from anywhere without showing the room."
-tags:
-    - setupcustomgallery
+page_features:
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Virtual Background
@@ -15,8 +16,8 @@ This feature works both before joining a meeting and while already inside one, g
 
 Virtual backgrounds can be enabled or disabled per room when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing room managers to decide when and where the feature is available.
 
-<a class="glightbox" href="/assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark" loading="lazy" class="round-corners" alt="Room wizard step enabling virtual backgrounds for the room"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light" loading="lazy" class="round-corners" alt="Room wizard step enabling virtual backgrounds for the room"/></a>
+![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark){ .round-corners loading=lazy }
+![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light){ .round-corners loading=lazy }
 
 ## Key Benefits
 
@@ -50,8 +51,8 @@ Replace your environment with a ready-to-use image selected to match different m
 2. Select a blur level or background image — changes apply instantly in the preview
 3. Your last selection is automatically remembered for future meetings
 
-<a class="glightbox" href="/assets/images/meet/meetings/virtual-background/virtual-bg-prejoin-dark.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/virtual-background/virtual-bg-prejoin-dark.webp#only-dark" loading="lazy" class="round-corners" alt="Virtual background selection before joining the meeting"/></a>
-<a class="glightbox" href="/assets/images/meet/meetings/virtual-background/virtual-bg-prejoin-light.webp" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/meetings/virtual-background/virtual-bg-prejoin-light.webp#only-light" loading="lazy" class="round-corners" alt="Virtual background selection before joining the meeting"/></a>
+![Virtual background selection before joining the meeting](../../../assets/images/meet/meetings/virtual-background/virtual-bg-prejoin-dark.webp#only-dark){ .round-corners loading=lazy }
+![Virtual background selection before joining the meeting](../../../assets/images/meet/meetings/virtual-background/virtual-bg-prejoin-light.webp#only-light){ .round-corners loading=lazy }
 
 ### During a meeting
 
@@ -59,7 +60,7 @@ Replace your environment with a ready-to-use image selected to match different m
 2. Select **Virtual Background**
 3. Choose an effect to apply it instantly
 
-<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The background options will be disabled when the camera is turned off.
