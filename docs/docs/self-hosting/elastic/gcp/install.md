@@ -1,8 +1,6 @@
 ---
 title: "Install OpenVidu Elastic on Google Cloud"
 description: "Deploy OpenVidu Elastic on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
-tags:
-  - copyclipboard
 ---
 
 # OpenVidu Elastic installation: Google Cloud Platform
@@ -82,9 +80,23 @@ Once you click the button, you will see this window.
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
 
-* Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
-* Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/pro/elastic/gcp"><code>openvidu-deployment/pro/elastic/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
-* For the **Git ref**, use <span class="copy-inline" data-copy="v3.8.0"><code>v3.8.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
+* Fill **Git repository** with this link, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located:
+
+    ```
+    https://github.com/OpenVidu/openvidu.git
+    ```
+
+* Fill the **Git directory** with the following path:
+
+    ```
+    openvidu-deployment/pro/elastic/gcp
+    ```
+
+* For the **Git ref**, use the version you want to deploy:
+
+    ```
+    v3.8.0
+    ```
 
 Finally, click Continue.
 
