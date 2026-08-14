@@ -24,8 +24,8 @@ tags:
     <div class="product-card openvidu-meet">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" alt="OpenVidu Meet" />
-          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet" />
+          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet" />
         </h3>
         <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
       </div>
@@ -48,8 +48,8 @@ tags:
     <div class="product-card openvidu-platform">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" alt="OpenVidu Platform" />
-          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform" />
+          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform" />
         </h3>
         <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
       </div>
@@ -169,7 +169,7 @@ tags:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="skip-gallery custom-svg-icon" src="/assets/images/home/multiplatform.svg" class="feature-icon" alt=""/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon"><img class="skip-gallery custom-svg-icon feature-icon" src="/assets/images/home/multiplatform.svg" loading="lazy" alt=""/></span> __Multiplatform__{ .feature-name }
 
     ---
 
