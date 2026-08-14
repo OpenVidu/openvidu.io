@@ -200,9 +200,11 @@ img.svg-img {
   font-size: 1.5em;
 }
 
+.no-border,
 .no-border li {
   border: none !important;
 }
+.no-shadow,
 .no-shadow li {
   box-shadow: none !important;
 }
