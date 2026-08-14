@@ -11,7 +11,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 
 <figure markdown>
-  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
+  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .round-corners .mkdocs-img}
   <figcaption>OpenVidu Components Demo App</figcaption>
 </figure>
 

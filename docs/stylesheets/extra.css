@@ -195,6 +195,27 @@ img.svg-img {
   border-radius: 7px;
 }
 
+/* Shared card/image utilities (moved from the retired openvidu-call.css) */
+.ov-call-docs-icon {
+  font-size: 1.5em;
+}
+
+.no-border li {
+  border: none !important;
+}
+.no-shadow li {
+  box-shadow: none !important;
+}
+.round-corners {
+  border-radius: 14px;
+}
+.three-cols {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 12rem), 1fr)
+  ) !important;
+}
+
 .node-img {
   width: 80%;
 }

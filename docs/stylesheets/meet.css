@@ -204,21 +204,17 @@ body[data-md-color-scheme="default"] {
   }
 }
 
-.no-border li {
-  border: none !important;
+.ov-call-commercial-feature-cards {
+  padding: 0 25px !important;
+  text-align: center !important;
 }
-.no-shadow li {
-  box-shadow: none !important;
+
+.ov-call-commercial-feature-cards > ul > li {
+  display: flex !important;
+  justify-content: space-between;
+  flex-direction: column;
 }
-.round-corners {
-  border-radius: 14px;
-}
-.three-cols {
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 12rem), 1fr)
-  ) !important;
-}
+
 @media (min-width: 576px) {
   .ov-meet-commercial-img {
     max-width: 80vw !important; /* Small devices (landscape phones, 576px and up) */

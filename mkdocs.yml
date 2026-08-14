@@ -616,7 +616,6 @@ extra_css:
   - stylesheets/unsemantic-grid.css
   - stylesheets/livekit-tutorials.css
   - stylesheets/home.css
-  - stylesheets/openvidu-call.css
 
 copyright: >
   2026 &copy; OpenVidu<br>
