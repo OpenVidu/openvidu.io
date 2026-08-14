@@ -233,12 +233,20 @@
 {% endif %}
 {% endif %}
 
+{% if page.meta.page_features and ("Meet" in page.meta.page_features or "Platform" in page.meta.page_features) %}
+<link rel="stylesheet" href="{{ 'stylesheets/product.css' | url }}" />
+{% endif %}
+
 {% if page.meta.page_features and "Platform" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/platform.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "Meet" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "homestyles" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "openviduregister" in page.meta.page_features %}

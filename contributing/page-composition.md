@@ -93,8 +93,12 @@ page, copy its feature keys too.** These are the keys currently used:
   [`docs/overrides/partials/tabs.html`](../docs/overrides/partials/tabs.html) from the nav item's
   page (or the first child of a nav group).
 
+- `homestyles`: loads [`home.css`](../docs/stylesheets/home.css) (the landing and Meet landing
+  pages only).
+
 - `Meet` / `Platform`: load [`meet.css`](../docs/stylesheets/meet.css) /
-  [`platform.css`](../docs/stylesheets/platform.css) for product-specific styling. These are
+  [`platform.css`](../docs/stylesheets/platform.css) (each on top of the shared
+  [`product.css`](../docs/stylesheets/product.css) palette mapping) for product-specific styling. These are
   **not written per page**: they come from folder-level metadata —
   [`docs/meet/.meta.yml`](../docs/meet/.meta.yml) and [`docs/docs/.meta.yml`](../docs/docs/.meta.yml)
   each declare `page_features:` that the `meta` plugin (enabled in `mkdocs.yml`) merges into

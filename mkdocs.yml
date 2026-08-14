@@ -644,7 +644,6 @@ extra_css:
   - stylesheets/colors.css
   - stylesheets/extra.css
   - stylesheets/unsemantic-grid.css
-  - stylesheets/home.css
 
 # {year} is replaced with the build year by publish-tool/mkdocs_hook.py
 copyright: >

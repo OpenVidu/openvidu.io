@@ -2,6 +2,7 @@
 title: "OpenVidu Meet: Self-Hosted Video Conferencing"
 description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your servers in minutes, record meetings and embed video calls in any app."
 page_features:
+  - homestyles
   - lazyvideo
   - setupwowjs
   - setupcardglow

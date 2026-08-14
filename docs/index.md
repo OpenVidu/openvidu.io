@@ -10,6 +10,7 @@ hide:
   - search-bar
   - version-selector
 page_features:
+  - homestyles
   - setupwowjs
   - setupcardglow
 ---
