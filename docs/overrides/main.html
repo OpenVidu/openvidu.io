@@ -11,6 +11,10 @@
 {% endblock %} #}
 
 {% block site_meta %}
+{{ super() }}
+
+<!-- Anti-clickjacking frame buster: GitHub Pages cannot send frame-ancestors /
+     X-Frame-Options headers, so this JS guard is the only available defense. -->
 <style id="antiClickjack">body{display:none !important;}</style>
 <script>
   if (self === top) {
@@ -20,8 +24,7 @@
     top.location = self.location;
   }
 </script>
-
-{{ super() }}
+<noscript><style>body{display:block !important;}</style></noscript>
 
 {% endblock %}
 
