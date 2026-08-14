@@ -270,7 +270,7 @@ validation:
 
 theme:
   name: material
-  custom_dir: docs/overrides
+  custom_dir: overrides
   language: en
   features:
     - content.code.copy
@@ -421,7 +421,7 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
       options:
         custom_icons:
-          - docs/overrides/.icons
+          - overrides/.icons
   - pymdownx.blocks.caption
 
 extra:
