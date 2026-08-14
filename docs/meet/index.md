@@ -334,8 +334,10 @@ Check out the <a href="./deployment/overview"><strong>deployment documentation</
 
 ## Use cases
 
-<div class="carousel wow animated animatedFadeInUp fadeInUp" data-flickity='{ "wrapAround": true, "adaptiveHeight": true, "hash": true }' markdown>
-<div class="carousel-cell" markdown>
+<div class="splide wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="splide__track" markdown>
+<div class="splide__list" markdown>
+<div class="splide__slide" markdown>
 <div class="carousel-cell-content" markdown>
 Team meetings
 {.fake-title}
@@ -375,7 +377,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 </div>
 </div>
 
-<div class="carousel-cell" markdown>
+<div class="splide__slide" markdown>
 <div class="carousel-cell-content" markdown>
 e-Learning
 {.fake-title}
@@ -414,7 +416,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 </div>
 </div>
 
-<div class="carousel-cell" markdown>
+<div class="splide__slide" markdown>
 <div class="carousel-cell-content" markdown>
 Telehealth
 {.fake-title}
@@ -453,7 +455,7 @@ The most secure videoconference platform is the one you host on your own servers
 </div>
 </div>
 
-<div class="carousel-cell" markdown>
+<div class="splide__slide" markdown>
 <div class="carousel-cell-content" markdown>
 Customer support
 {.fake-title}
@@ -492,6 +494,8 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 </div>
 
+</div>
+</div>
 </div>
 
 <div style="text-align: center; margin: 3em 0;" markdown>

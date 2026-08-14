@@ -50,6 +50,21 @@
   };
 </script>
 
+<!-- Use-cases carousel (Splide) -->
+<script>
+  window.setupCarousel = function () {
+    document.querySelectorAll(".splide").forEach((el) => {
+      new Splide(el, {
+        type: "loop",
+        autoWidth: true,
+        autoHeight: true,
+        focus: "center",
+        gap: "4%",
+      }).mount();
+    });
+  };
+</script>
+
 <!-- Card glow effect -->
 <script>
   window.openviduCardGlowRetries = 0;
@@ -171,7 +186,10 @@
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
-<script src="{{ 'javascripts/flickity.pkgd.min.js' | url }}"></script>
+<script src="{{ 'javascripts/splide.min.js' | url }}"></script>
+<script>
+  window.setupCarousel();
+</script>
 {% endif %}
 
 {% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
@@ -199,7 +217,7 @@
 {% block styles %}
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
-<link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
+<link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
 {% endif %}
 
 <style>

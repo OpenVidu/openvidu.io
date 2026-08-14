@@ -50,14 +50,20 @@ copy its tags too.** These are the tags currently used:
   </div>
   ```
 
-- `setupcarousel`: the page has [Flickity carousels](https://flickity.metafizzy.co/):
+- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/):
 
   ```html
-  <div class="carousel">
-    <div class="carousel-cell">
-      ...
+  <div class="splide" markdown>
+    <div class="splide__track" markdown>
+      <ul class="splide__list" markdown>
+        <li class="splide__slide" markdown>
+          <div class="carousel-cell-content" markdown>
+          ...
+          </div>
+        </li>
+        ...
+      </ul>
     </div>
-    ...
   </div>
   ```
 

@@ -250,13 +250,19 @@ body[data-md-color-scheme="default"] {
   font-weight: 500 !important;
 }
 
-.carousel {
+.splide {
   margin-top: 3em;
+  margin-bottom: 4em;
 }
 
-.carousel-cell {
+.splide__slide {
   width: 85%;
-  margin-right: 4%;
+  transition: opacity 0.4s;
+  opacity: 0.3;
+}
+
+.splide__slide.is-active {
+  opacity: 1;
 }
 
 .carousel-cell-content {
@@ -268,27 +274,17 @@ body[data-md-color-scheme="default"] {
   transition: box-shadow 0.4s ease;
 }
 
-.carousel-cell.is-selected .carousel-cell-content {
+.splide__slide.is-active .carousel-cell-content {
   box-shadow: var(--md-shadow-z2);
   height: 100%;
 }
 
-.carousel-cell {
-  transition: opacity 0.4s;
-  opacity: 0.3;
-}
-
-.carousel-cell.is-selected {
-  opacity: 1;
-  height: calc(100% - 12px) !important;
-}
-
-.carousel-cell p {
+.splide__slide p {
   margin-top: 0.5em !important;
   font-size: 1.1em !important;
 }
 
-.carousel-cell .fake-title {
+.splide__slide .fake-title {
   font-size: 1.3em !important;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -297,44 +293,49 @@ body[data-md-color-scheme="default"] {
   margin-top: 0 !important;
 }
 
-.flickity-viewport {
+.splide__track {
   transition: height 0.2s;
 }
 
-/* no circle */
-.flickity-button {
+/* transparent, big arrow buttons */
+button.splide__arrow {
   background: transparent;
   transition: background-color 0.3s ease !important;
-}
-/* big previous & next buttons */
-.flickity-prev-next-button {
   width: 60px;
   height: 60px;
 }
-/* icon color */
-.flickity-button-icon {
+
+button.splide__arrow svg {
   fill: var(--md-primary-fg-color--light) !important;
-}
-/* hide disabled button */
-.flickity-button:disabled {
-  display: none;
+  width: 2.2em;
+  height: 2.2em;
 }
 
-.flickity-button:hover {
+button.splide__arrow:hover {
   background: rgba(var(--meet-primary-color-rgb), 0.08) !important;
 }
 
-/* position dots at top */
-ol.flickity-page-dots {
-  bottom: -50px;
+button.splide__arrow:disabled {
+  display: none;
 }
 
-/* dots are lines */
-ol.flickity-page-dots li.dot {
+/* dots are lines, below the carousel */
+ul.splide__pagination {
+  bottom: -30px;
+}
+
+.splide__pagination__page {
   height: 4px;
   width: 40px;
   margin: 0 !important;
   border-radius: 0;
+  background: var(--md-primary-fg-color--light);
+  opacity: 0.25;
+}
+
+.splide__pagination__page.is-active {
+  opacity: 1;
+  transform: none;
   background: var(--md-primary-fg-color--light);
 }
 
