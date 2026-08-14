@@ -82,9 +82,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></p></div>
 
 </div>
 

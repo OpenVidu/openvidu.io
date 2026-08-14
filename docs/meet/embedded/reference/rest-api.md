@@ -46,9 +46,9 @@ The reference documentation provides code snippets for each REST API method. You
 
 <div class="grid cards no-border no-shadow two-columns" markdown>
 
-<a class="glightbox" href="/assets/images/meet/embedded/reference/rest-snippets-1.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/rest-snippets-1.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
+![OpenVidu Meet Prejoin](../../../assets/images/meet/embedded/reference/rest-snippets-1.png){ .round-corners loading=lazy }
 
-<a class="glightbox" href="/assets/images/meet/embedded/reference/rest-snippets-2.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/rest-snippets-2.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
+![OpenVidu Meet Prejoin](../../../assets/images/meet/embedded/reference/rest-snippets-2.png){ .round-corners loading=lazy }
 
 </div>
 

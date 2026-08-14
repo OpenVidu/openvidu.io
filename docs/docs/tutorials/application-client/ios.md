@@ -135,7 +135,7 @@ If these URLs are left empty, the user will be prompted to enter them when the a
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></p></div>
 
 </div>
 
@@ -169,7 +169,7 @@ Before joining a room, the `ConnectView.swift` defines the view for the connecti
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 25%;" alt="Join screen of the iOS tutorial app"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 25%;" alt="Join screen of the iOS tutorial app"/></p></div>
 
 </div>
 

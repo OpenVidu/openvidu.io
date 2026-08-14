@@ -494,15 +494,11 @@ Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_bla
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" style="padding: 10px; background-color: white;" src="/assets/images/research/thesis-webrtc-scaling-architecture-alg-C.png" alt="Media server scaling architecture from the thesis"/>
-</figure>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" style="padding: 10px; background-color: white;" src="/assets/images/research/thesis-servers-in-use.png" alt="Media servers in use during the thesis experiments"/>
-</figure>
 </div>
 
 ---
@@ -533,15 +529,11 @@ Videoconference applications are becoming increasingly popular, and the demand f
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/qoe-pion.png" alt="Quality of Experience results for Pion under load"/>
-</figure>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/qoe-mediasoup.png" alt="Quality of Experience results for mediasoup under load"/>
-</figure>
 </div>
 
 ---
@@ -576,15 +568,11 @@ Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blan
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/ovlt-arch.png" alt="Architecture of the OpenVidu Load Test platform"/>
-</figure>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/ovlt-results.png" alt="Results from the OpenVidu Load Test platform"/>
-</figure>
 </div>
 
 ---
@@ -642,9 +630,7 @@ Selenium is often considered the de-facto standard framework for end-to-end web 
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/selenium.png" alt="Figure from the Selenium ecosystem survey"/>
-</figure>
 </div>
 
 ---
@@ -676,9 +662,7 @@ WebRTC is a set of standard technologies that allows exchanging video and audio 
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/qoe-assessment.png" alt="QoE assessment of video and audio in WebRTC applications"/>
-</figure>
 </div>
 
 ---
@@ -710,9 +694,7 @@ WebRTC comprises a set of technologies and standards that provide real-time comm
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/qos-qoe.png" alt="Relationship between QoS parameters and Quality of Experience"/>
-</figure>
 </div>
 
 ---
@@ -744,15 +726,11 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/qoe-session.png" alt="Perceptual video quality scores across a WebRTC session"/>
-</figure>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/webrtc-qoe-vs-packet-loss.png" alt="WebRTC video quality against packet loss"/>
-</figure>
 </div>
 
 ---
@@ -866,15 +844,11 @@ In the last few years, multimedia technologies in general, and Real-Time multime
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/kurento-api.png" alt="Kurento API design from the usability study"/>
-</figure>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/research/api-eval.png" alt="API usability evaluation results"/>
-</figure>
 </div>
 
 ---

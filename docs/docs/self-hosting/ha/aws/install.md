@@ -40,10 +40,7 @@ This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
-    <figure markdown>
     ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability AWS Architecture</figcaption>
-    </figure>
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
@@ -170,9 +167,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/ha/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/ha/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/ha/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></p></div>
 
 </div>
 

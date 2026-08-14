@@ -26,10 +26,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     This is what the architecture of the deployment looks like:
 
-    <figure markdown>
     ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node On Premises Architecture with External Proxy</figcaption>
-    </figure>
 
     **1. Prerequisites**
 
@@ -162,10 +159,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     This is what the architecture of the deployment looks like:
 
-    <figure markdown>
     ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Elastic On Premises Architecture with External Proxy</figcaption>
-    </figure>
 
     **1. Prerequisites**
 

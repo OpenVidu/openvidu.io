@@ -26,9 +26,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
     3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
-    <figure markdown>
     ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet.png){ .svg-img .dark-img }
-    </figure>
 
 === "Start OpenVidu Single Node"
 
@@ -36,9 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
     3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
-    <figure markdown>
     ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet.png){ .svg-img .dark-img }
-    </figure>
 
 ## Change the droplet size
 
@@ -51,9 +47,7 @@ You can change the droplet size of the OpenVidu Single Node to adapt it to your 
 
     === "Change droplet size"
 
-        <figure markdown>
         ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet.png){ .svg-img .dark-img }
-        </figure>
 
 ## Administration and configuration
 

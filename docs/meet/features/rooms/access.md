@@ -36,8 +36,8 @@ Users with permission to manage a room or share access links can copy and share 
 
 Participants with the `canShareAccessLinks` permission can share the room access link from the active meeting view.
 
-<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark" loading="lazy" class="round-corners" alt="Sharing the room access link from an active meeting"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/access/meeting-share-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/access/meeting-share-link-light.png#only-light" loading="lazy" class="round-corners" alt="Sharing the room access link from an active meeting"/></a>
+![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark){ .round-corners loading=lazy }
+![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
 

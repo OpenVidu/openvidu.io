@@ -20,10 +20,7 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
     ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node Google Cloud Platform Architecture</figcaption>
-    </figure>
 
 ## Deployment details
 
@@ -31,15 +28,11 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
-<figure markdown>
 ![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .svg-img .dark-img }
-</figure>
 
 Once you click the button, you will see this window.
 
-<figure markdown>
 ![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .svg-img .dark-img }
-</figure>
 
 * Fill **Deployment ID** with any name you prefer (for example, openvidu-singlenode-deployment).   
 * Change the **Region** to the one you prefer.
@@ -195,9 +188,7 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
 
-    <figure markdown>
     ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .svg-img .dark-img }
-    </figure>
 
 ## Deploying the stack
 

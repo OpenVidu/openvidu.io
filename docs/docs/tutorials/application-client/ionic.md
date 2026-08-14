@@ -184,7 +184,7 @@ If you leave them empty and app is launched in a mobile device, the user will be
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></a></p></div>
+<div class="grid-100"><p style="text-align: center;"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></p></div>
 
 </div>
 

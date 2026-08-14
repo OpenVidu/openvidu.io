@@ -44,8 +44,8 @@ The advanced wizard guides you through the following steps:
 
 Reopen the configuration wizard for an existing room from the **"Rooms"** page or the [room details page](#room-details) to change its **features**, **access** settings and **recording** options, as long as no meeting is currently active.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Room configuration wizard editing an existing room"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/edit-room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/edit-room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Room configuration wizard editing an existing room"/></a>
+![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 !!! info
 
@@ -75,8 +75,8 @@ The **"Rooms"** page lists every room available to you, with its owner, status, 
 - [Delete rooms](#delete-rooms) individually or in bulk.
 - Share [room access links](access.md).
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-dark.png#only-dark" loading="lazy" class="round-corners" alt="Rooms page listing rooms with their actions"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-list-light.png#only-light" loading="lazy" class="round-corners" alt="Rooms page listing rooms with their actions"/></a>
+![Rooms page listing rooms with their actions](../../../assets/images/meet/rooms/management/room-list-dark.png#only-dark){ .round-corners loading=lazy }
+![Rooms page listing rooms with their actions](../../../assets/images/meet/rooms/management/room-list-light.png#only-light){ .round-corners loading=lazy }
 
 ## Room details { #room-details }
 
@@ -85,8 +85,8 @@ Clicking a room opens its **details page**, which shows the room information and
 - **Recordings**: the [recordings](../recordings/overview.md) generated in this room, with play, download, share and delete actions (subject to [recording permissions](../recordings/overview.md#recording-permissions)).
 - **Room Members**: the [users and identified guests](../room-members/overview.md) explicitly added to the room. See [Room Members › Creation & Management](../room-members/management.md).
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-dark.png#only-dark" loading="lazy" class="round-corners" alt="Recordings tab of a room's detail page"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-details-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-details-light.png#only-light" loading="lazy" class="round-corners" alt="Recordings tab of a room's detail page"/></a>
+![Recordings tab of a room's detail page](../../../assets/images/meet/rooms/management/room-details-dark.png#only-dark){ .round-corners loading=lazy }
+![Recordings tab of a room's detail page](../../../assets/images/meet/rooms/management/room-details-light.png#only-light){ .round-corners loading=lazy }
 
 ## Delete rooms { #delete-rooms }
 
@@ -108,8 +108,8 @@ Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting
 
 Rooms can be configured with an **auto-deletion date**. You can set this date when [creating a room](#create-rooms). This helps keeping OpenVidu Meet clean and organized, avoiding clutter from old rooms that are no longer needed.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Auto-deletion date setting when creating a room"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Auto-deletion date setting when creating a room"/></a>
+![Auto-deletion date setting when creating a room](../../../assets/images/meet/rooms/management/room-auto-deletion-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Auto-deletion date setting when creating a room](../../../assets/images/meet/rooms/management/room-auto-deletion-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 ### Room auto-deletion policies
 
@@ -122,8 +122,8 @@ When the auto-deletion date is reached, the room will be deleted. The **Auto-del
     - `Force`: the room and all its recordings will be deleted.
     - `Close`: the room will be closed (no more meetings will be allowed in it) instead of deleted, maintaining its recordings.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Auto-deletion policy options for the room and its recordings"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-auto-deletion-policies-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Auto-deletion policy options for the room and its recordings"/></a>
+![Auto-deletion policy options for the room and its recordings](../../../assets/images/meet/rooms/management/room-auto-deletion-policies-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Auto-deletion policy options for the room and its recordings](../../../assets/images/meet/rooms/management/room-auto-deletion-policies-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 ## Room Appearance { #room-appearance }
 
@@ -133,8 +133,8 @@ The visual appearance of your rooms (the color scheme of the meeting view) is co
 
     Room appearance can only be changed by **admin** users from the **"Configuration"** page. Unlike the rest of the room settings, it **cannot** be modified through the REST API.
 
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-dark.png#only-dark" loading="lazy" class="round-corners" alt="Room appearance settings in the Configuration page"/></a>
-<a class="glightbox" href="/assets/images/meet/rooms/management/room-appearance-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/rooms/management/room-appearance-light.png#only-light" loading="lazy" class="round-corners" alt="Room appearance settings in the Configuration page"/></a>
+![Room appearance settings in the Configuration page](../../../assets/images/meet/rooms/management/room-appearance-dark.png#only-dark){ .round-corners loading=lazy }
+![Room appearance settings in the Configuration page](../../../assets/images/meet/rooms/management/room-appearance-light.png#only-light){ .round-corners loading=lazy }
 
 You can set separately the color of:
 

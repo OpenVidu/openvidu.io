@@ -51,9 +51,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-js.png" loading="lazy" alt="Join screen of the JavaScript tutorial app"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/join-js.png" loading="lazy" alt="Join screen of the JavaScript tutorial app"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-js.png" loading="lazy" alt="Video call room of the JavaScript tutorial app"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/room-js.png" loading="lazy" alt="Video call room of the JavaScript tutorial app"/></p></div>
 
 </div>
 

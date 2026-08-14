@@ -40,10 +40,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
     ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node AWS Architecture</figcaption>
-    </figure>
 
 ## CloudFormation Parameters
 
@@ -104,9 +101,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></p></div>
 
 </div>
 

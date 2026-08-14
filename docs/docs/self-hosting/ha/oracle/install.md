@@ -27,10 +27,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
     The deployment architecture is as follows:
 
-    <figure markdown>
     ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability Oracle Cloud Infrastructure Architecture</figcaption>
-    </figure>
 
     - The Network Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Network Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
@@ -242,9 +239,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access all 4 Master Nodes — if exposed, unauthorized users could gain access.
 
-    <figure markdown>
     ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/ha/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
-    </figure>
 
 5. Set the correct permissions on the SSH key so it can be used.
 
@@ -258,9 +253,7 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click the secret you want to view.
     3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
-        <figure markdown>
         ![View Secret](../../../../assets/images/platform/self-hosting/shared/oracle/view-secret.png){ .svg-img .dark-img }
-        </figure>
 
         !!! warning
             Click _"Show decoded Base64 digit"_ to see the actual value of the secret.

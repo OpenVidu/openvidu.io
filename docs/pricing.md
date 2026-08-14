@@ -164,9 +164,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" alt="Diagram of an OpenVidu Elastic deployment with 12 cores in total"/>
-</figure>
 </div>
 
 ---
@@ -187,9 +185,7 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" alt="Diagram of an OpenVidu Elastic deployment with 20 cores in total"/>
-</figure>
 </div>
 
 ---
@@ -210,9 +206,7 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" alt="Diagram of an OpenVidu High Availability deployment with 32 cores in total"/>
-</figure>
 </div>
 
 ---
@@ -237,9 +231,7 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<figure>
 <img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" alt="Diagram of an OpenVidu Elastic deployment with a variable number of cores"/>
-</figure>
 </div>
 
 </div>

@@ -49,9 +49,9 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
 
 __Integrate OpenVidu Meet into your own UI and business logic__{ .ov-meet-commercial-card-title }
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners" alt="Use case Education"/></a>
+![Use case Education](../../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy }
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/telehealth.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/telehealth.png" loading="lazy" class="round-corners" alt="Use case Telehealth"/></a>
+![Use case Telehealth](../../assets/images/meet/embedded/use-cases/telehealth.png){ .round-corners loading=lazy }
 
 </div>
 

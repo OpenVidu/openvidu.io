@@ -40,10 +40,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
     This is how the architecture of the deployment looks:
 
-    <figure markdown>
     ![OpenVidu Elastic AWS Architecture](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Elastic AWS Architecture</figcaption>
-    </figure>
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -130,9 +127,9 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 
 <div class="grid-container">
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></p></div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/elastic/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/elastic/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/elastic/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></p></div>
 
 </div>
 

@@ -18,9 +18,7 @@ There are three possible scenarios for this section:
 
     Then, fill in the following parameters:
 
-    <figure markdown>
     ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/azure/letsencrypt.png){ .svg-img .dark-img }
-    </figure>
 
     As you can see, specify **Public IP Address** with the Public IP that the domain points to, **Domain Name** with your FQDN, and **Lets Encrypt Email** with your email address for Let’s Encrypt notifications. These parameters are mandatory.
 
@@ -32,9 +30,7 @@ There are three possible scenarios for this section:
 
     The configured parameters would look like this:
     
-    <figure markdown>
     ![Custom certificates](/assets/images/platform/self-hosting/shared/azure/owncert.png){ .svg-img .dark-img }
-    </figure>
 
     
     Specify the certificate files in base64 in **Own Public Certificate** and **Own Private Certificate**. The **Domain Name** and **Public IP Address** parameters are mandatory.
@@ -54,8 +50,6 @@ There are three possible scenarios for this section:
 
     These are the parameters needed in this section to use self-signed certificates:
     
-    <figure markdown>
     ![Self-signed certificates](/assets/images/platform/self-hosting/shared/azure/selfsigned.png){ .svg-img .dark-img }
-    </figure>
     
     You don’t need to specify any parameters; just select the **CertificateType** as _self-signed_. The domain name used will be an Azure-generated one.

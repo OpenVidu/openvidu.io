@@ -41,10 +41,7 @@ The next page will display the certificate status. Here you will need to create 
 
 === "Create record in Route 53"
 
-    <figure markdown>
     ![Create record in Route 53](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-record-route53.png){ .png-img .dark-img }
-    <figcaption>Create record in Route 53</figcaption>
-    </figure>
 
     You need to click the button called **`Create records in Route 53`**. This will lead you to the next page, where you just click Create records and that's it.
 
@@ -63,10 +60,7 @@ Finally, when deploying the HA stack in CloudFormation, follow these steps:
 === "Configuration of Load Balancer"
 
 
-    <figure markdown>
     ![Load Balancer configuration](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/load-balancer-config.png){ .png-img .dark-img }
-    <figcaption>Load balancer configuration</figcaption>
-    </figure>
 
     These are parameters related to the certificate you just created.
 
@@ -83,10 +77,7 @@ When everything is up and running, you will need to create a new record in the H
 
 === "Associating the Load Balancer"
 
-    <figure markdown>
     ![Create Load Balancer record](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-lbrecord.png){ .png-img .dark-img }
-    <figcaption>Create Load Balancer record</figcaption>
-    </figure>
 
     Note that Alias is checked.
 

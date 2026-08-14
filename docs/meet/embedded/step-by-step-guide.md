@@ -359,7 +359,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 </html>
 ```
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-meeting.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-meeting.png" loading="lazy" class="round-corners" alt="OpenVidu Meet meeting embedded in the example support app"/></a>
+![OpenVidu Meet meeting embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy }
 
 ### Use an iframe
 
@@ -417,7 +417,7 @@ To show the list of recordings of a room, declare attribute **`show-only-recordi
 
 This will show the list of recordings for the specified room:
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-room-recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-room-recordings.png" loading="lazy" class="round-corners" alt="List of room recordings embedded in the example support app"/></a>
+![List of room recordings embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-room-recordings.png){ .round-corners loading=lazy }
 
 ### Embed the player for a specific recording
 
@@ -435,7 +435,7 @@ To show the player for a specific recording, replace attribute `room-url` with *
 
 This will show the player for the specified recording:
 
-<a class="glightbox" href="/assets/images/meet/embedded/use-cases/support-display-recording.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/use-cases/support-display-recording.png" loading="lazy" class="round-corners" alt="Recording player embedded in the example support app"/></a>
+![Recording player embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-display-recording.png){ .round-corners loading=lazy }
 
 ## 6. REST API and Webhooks
 

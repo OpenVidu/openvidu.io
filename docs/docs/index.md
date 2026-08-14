@@ -20,11 +20,9 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
-<figure markdown>
   ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .skip-gallery }
   ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .skip-gallery }
   <figcaption style="max-width: 27rem">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</figcaption>
-</figure>
 
 ## Your first lines of code
 
@@ -170,10 +168,8 @@ With these three concepts you can build any kind of real-time application you ca
 <div style="display: flex; align-items: start; justify-content: center;" markdown>
 
 <div class="grid-45 tablet-grid-45" markdown>
-<figure markdown>
   ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){.basic-concepts-img-1}
   <figcaption style="margin-top: 3em">Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" and "Mic" and is receiving Track "Screen" from "Bob". "Bob" is publishing Track "Screen" and receiving Tracks "Webcam" and "Mic" from "Alice".</figcaption>
-</figure>
 </div>
 
 <div class="grid-55 tablet-grid-55" markdown>

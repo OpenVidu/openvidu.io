@@ -34,10 +34,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is how the architecture of the deployment looks:
 
-    <figure markdown>
     ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability Architecture with Network Load Balancer</figcaption>
-    </figure>
 
     - The Load Balancer must be a Network Load Balancer that supports TCP and UDP traffic.
     - The Load Balancer distributes traffic across all Master Nodes.
