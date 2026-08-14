@@ -498,7 +498,8 @@ p:has(> a.glightbox) {
   }
 }
 
-/* Animation */
+/* Reveal-on-scroll. Hiding is gated on html.js-reveal (added only by the
+   reveal script), so with JS off the content simply stays visible. */
 
 @keyframes fadeInUp {
   from {
@@ -511,36 +512,43 @@ p:has(> a.glightbox) {
   }
 }
 
-@-webkit-keyframes fadeInUp {
-  from {
-    transform: translate3d(0, 30px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+html.js-reveal .wow {
+  visibility: hidden;
 }
 
-.wow {
-  visibility: hidden;
+html.js-reveal .wow.revealed {
+  visibility: visible;
+}
+
+html.js-reveal .animatedFadeInUp {
+  opacity: 0;
 }
 
 .animated {
   animation-duration: 0.5s;
   animation-fill-mode: both;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-fill-mode: both;
-}
-
-.animatedFadeInUp {
-  opacity: 0;
 }
 
 .fadeInUp {
-  opacity: 0;
+  animation-name: none;
+}
+
+html.js-reveal .revealed.fadeInUp {
   animation-name: fadeInUp;
-  -webkit-animation-name: fadeInUp;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal .wow {
+    visibility: visible;
+  }
+
+  html.js-reveal .animatedFadeInUp {
+    opacity: 1;
+  }
+
+  html.js-reveal .revealed.fadeInUp {
+    animation: none;
+  }
 }
 
 video::-internal-media-controls-overlay-cast-button {

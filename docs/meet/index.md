@@ -20,7 +20,7 @@ tags:
 OpenVidu Meet: self-hosted video conferencing, ready in minutes
 </h1>
 
-<div class="wow animated animatedFadeInUp fadeInUp">
+<div>
     <a class="glightbox" href="/assets/videos/meet/home/demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/home/demo-preview.mp4" poster="/assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 

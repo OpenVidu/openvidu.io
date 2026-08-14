@@ -30,11 +30,23 @@
 
 {% block libs %}
 
-<!-- wow.js -->
+<!-- Reveal-on-scroll (in-house wow.js replacement). Hiding is gated on the
+     html.js-reveal class this function adds, so JS-off visitors see content. -->
 <script>
   window.setupWowJs = function () {
-    new WOW().init();
-    console.debug("WOW.js initialized");
+    document.documentElement.classList.add("js-reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
   };
 </script>
 
@@ -147,7 +159,6 @@
 <!-- Add scripts that need to run before here -->
 
 {% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
-<script src="{{ 'javascripts/wow.min.js' | url }}"></script>
 <script>
   window.setupWowJs();
 </script>
