@@ -757,8 +757,6 @@ div[data-md-component="outdated"] aside {
   margin: auto;
 }
 
-@import url("https://fonts.cdnfonts.com/css/amazon-ember");
-
 .deploy-button.deploy-to-aws-btn {
   background-color: #ff9900;
   border: none;

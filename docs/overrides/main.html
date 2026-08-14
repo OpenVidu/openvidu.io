@@ -37,16 +37,16 @@
 
 <!-- Card glow effect -->
 <script>
+  window.openviduCardGlowRetries = 0;
   window.setupCardGlow = function () {
     console.debug("starting card glow setup");
     const cards = document.querySelectorAll(
       ".feature-cards .grid.cards > ul > li"
     );
     const maxRetries = 10;
-    let retryCount = 0;
-    if (cards.length === 0 && retryCount < maxRetries) {
+    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
       console.debug("No cards found, retrying in 100ms");
-      retryCount++;
+      window.openviduCardGlowRetries++;
       setTimeout(() => {
         window.setupCardGlow();
       }, 100);
@@ -165,11 +165,11 @@
 {% endif %}
 
 {% if page.meta and page.meta.tags and "copyclipboard" in page.meta.tags %}
-<script src="/javascripts/copy-clipboard.js"></script>
+<script src="{{ 'javascripts/copy-clipboard.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}
-<script src="/javascripts/releases-scroll-to-version.js"></script>
+<script src="{{ 'javascripts/releases-scroll-to-version.js' | url }}"></script>
 {% endif %}
 
 {{ super() }}
