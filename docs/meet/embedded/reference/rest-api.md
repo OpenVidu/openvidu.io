@@ -2,7 +2,8 @@
 title: "OpenVidu Meet REST API reference"
 description: "Manage rooms, room members, recordings and users from your backend with the OpenVidu Meet REST API, including API key authentication."
 tags:
-    - setupcustomgallery
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 ## Overview
@@ -30,8 +31,8 @@ X-API-KEY: your-api-key
 2. Navigate to the **"Embedded"** page.
 3. Click on **"Generate API Key"** button.
 
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark" preload="none" muted playsinline loop style="margin-bottom: 2em"></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light" preload="none" muted playsinline loop style="margin-bottom: 2em"></video></a>
 
 ## Reference
 
@@ -58,4 +59,4 @@ When accessing the REST API documentation from your own OpenVidu Meet deployment
 
 Just configure a valid API key in the `X-API-KEY` header input.
 
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" preload="none" muted playsinline loop></video></a>

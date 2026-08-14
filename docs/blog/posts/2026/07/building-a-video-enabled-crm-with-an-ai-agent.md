@@ -9,6 +9,7 @@ categories:
   - OpenVidu Meet
   - AI
 tags:
+  - lazyvideo
   - AI agents
   - Claude Code
   - OpenVidu Meet
@@ -36,9 +37,7 @@ We recently ran this experiment: build a small CRM — clients, support issues, 
 
 <!-- more -->
 
-<video autoplay muted loop playsinline width="100%" style="border-radius: 10px; margin: 0.5em 0 1em 0;">
-  <source src="/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" type="video/mp4">
-</video>
+<video class="round-corners lazy-video" src="/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" preload="none" muted playsinline loop width="100%" style="margin: 0.5em 0 1em 0;"></video>
 
 *The result in 10 seconds: sign in, open the client's issue, hit **Join** — and the meeting happens right inside the CRM. Real capture of the running app (participant video is stock footage).*
 

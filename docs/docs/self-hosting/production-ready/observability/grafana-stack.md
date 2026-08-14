@@ -10,7 +10,7 @@ tags:
 OpenVidu also provides different **Grafana dashboards** to monitor **metrics** from **OpenVidu Server** and **logs** from your **cluster**.
 
 <div>
-<a class="glightbox" href="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer-preview.mp4" poster="/assets/videos/platform/self-hosting/production-ready/observability/grafana_trailer-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
 Grafana is available at [https://your.domain/grafana/]() and can be accessed using your **Grafana admin credentials**.

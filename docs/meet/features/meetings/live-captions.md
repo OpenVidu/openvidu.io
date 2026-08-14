@@ -3,7 +3,8 @@ title: "Live captions in OpenVidu Meet"
 description: "Turn on real-time speech-to-text captions in an OpenVidu Meet meeting to make it accessible, and choose the language each participant reads."
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
 tags:
-    - setupcustomgallery
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Live Captions
@@ -73,5 +74,5 @@ Captions are enabled by default when a room is [created](../rooms/management.md#
 
 Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.
 
-<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" preload="none" muted playsinline loop></video></a>

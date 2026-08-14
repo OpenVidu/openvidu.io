@@ -2,7 +2,8 @@
 title: "Room member management in OpenVidu Meet"
 description: "Add, edit, list and remove the users and identified guests of an OpenVidu Meet room, from the application or the Room Members REST API."
 tags:
-    - setupcustomgallery
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Creation & Management
@@ -25,8 +26,8 @@ From the room's **"Room Members"** tab, click **"Add Member"** and choose the me
 
 Then choose a **base role** (`Moderator` or `Speaker`) that sets the default [permissions](../rooms/access.md#predefined-roles), and optionally fine-tune them with **custom permissions**.
 
-<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/add-member-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/add-member-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/add-member-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/add-member-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## List & filter members
 
@@ -56,8 +57,8 @@ Every member's access link can be copied from the member list:
 
 Members can be removed individually or in bulk from the **"Room Members"** tab.
 
-<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/remove-member-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/remove-member-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! warning
 
