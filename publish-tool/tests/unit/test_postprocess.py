@@ -144,7 +144,6 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
         f'<a href="/{version}">h</a>',
         encoding="utf-8",
     )
-    (base / "robots.txt").write_text("Allow: /\n", encoding="utf-8")
     # The blog additionally holds an author-pinned release-notes link, which must survive the
     # version strip applied to the rest of the page.
     (base / "blog" / "index.html").write_text(
@@ -214,14 +213,12 @@ def test_promotes_pages_and_files_to_the_root(latest_tree, config, report):
 
     assert (latest_tree / "pricing" / "index.html").is_file()
     assert (latest_tree / "blog" / "index.html").is_file()
-    assert (latest_tree / "robots.txt").is_file()
     assert (latest_tree / "llms.txt").is_file()
     # No llms-full.txt: a single concatenation of every export reached 2.8 MB, which no model
     # can load, and duplicated content the exports already serve.
     assert not (latest_tree / "llms-full.txt").exists()
     # Moved, so gone from the version folder.
     assert not (latest_tree / VERSION / "pricing").exists()
-    assert not (latest_tree / VERSION / "robots.txt").exists()
 
 
 def test_copies_assets_but_keeps_the_version_copy(latest_tree, config, report):
@@ -544,7 +541,6 @@ def test_past_version_strips_its_root_served_pages(mixed_tree, config, report):
     postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
 
     assert not (mixed_tree / OLD_VERSION / "pricing").exists()
-    assert not (mixed_tree / OLD_VERSION / "robots.txt").exists()
     assert not (mixed_tree / OLD_VERSION / "index.md").exists()
 
 
