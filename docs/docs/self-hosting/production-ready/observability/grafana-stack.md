@@ -1,7 +1,7 @@
 ---
 title: "Grafana stack for OpenVidu metrics and logs"
 description: "The Grafana, Prometheus, Mimir and Loki stack bundled with OpenVidu, and the dashboards it ships for deployment metrics and cluster logs."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

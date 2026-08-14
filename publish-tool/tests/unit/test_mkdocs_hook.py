@@ -204,7 +204,7 @@ def test_git_being_unable_to_answer_leaves_every_date_alone(tmp_path, monkeypatc
 def test_an_included_snippet_is_read_from_disk_and_can_move_the_date(tmp_path, monkeypatch):
     (tmp_path / "docs").mkdir()
     (tmp_path / "shared").mkdir()
-    (tmp_path / "docs" / "install.md").write_text('--8<-- "shared/version.md"', encoding="utf8")
+    (tmp_path / "docs" / "install.md").write_text('--8<-- "version.md"', encoding="utf8")
     (tmp_path / "shared" / "version.md").write_text("3.8.0", encoding="utf8")
     page = doc_file("install.md")
     env_call(

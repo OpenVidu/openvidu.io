@@ -1,7 +1,7 @@
 ---
 title: "PHP application server tutorial"
 description: "Build a minimal PHP application server for OpenVidu with the LiveKit-compatible PHP SDK: issue access tokens and handle webhook events."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

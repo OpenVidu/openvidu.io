@@ -1,7 +1,7 @@
 ---
 title: "Ionic video call tutorial"
 description: "Build a mobile video-call app on OpenVidu with Ionic, Angular and the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

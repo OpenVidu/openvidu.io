@@ -1,7 +1,7 @@
 ---
 title: "JavaScript video call tutorial"
 description: "Build a video-call app on OpenVidu in plain JavaScript, HTML and CSS with the LiveKit-compatible JS SDK: join a room and publish media."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

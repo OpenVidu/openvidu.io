@@ -7,7 +7,7 @@ hide:
   - footer
   - search-bar
   - version-selector
-tags:
+page_features:
   - dropdown
 # Structured metadata for the publications listed on this page. It feeds the
 # JSON-LD (schema.org ScholarlyArticle/Thesis) emitted by

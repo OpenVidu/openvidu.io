@@ -1,7 +1,7 @@
 ---
 title: "OpenVidu Meet REST API reference"
 description: "Manage rooms, room members, recordings and users from your backend with the OpenVidu Meet REST API, including API key authentication."
-tags:
+page_features:
   - lazyvideo
   - setupcustomgallery
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Angular video call tutorial"
 description: "Build an Angular video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

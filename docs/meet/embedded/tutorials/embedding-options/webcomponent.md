@@ -1,8 +1,8 @@
 ---
 title: "Web Component tutorial for OpenVidu Meet"
 description: "Embed the OpenVidu Meet Web Component in a video conferencing app, with a Node.js and Express backend and a plain JavaScript frontend."
-tags:
-    - setupcustomgallery
+page_features:
+  - setupcustomgallery
 ---
 
 # WebComponent Tutorial

@@ -1,8 +1,8 @@
 ---
 title: "Users tutorial for OpenVidu Meet"
 description: "Create registered users with the OpenVidu Meet Users API and add them to a room as members, with a Node.js backend and a JavaScript frontend."
-tags:
-    - setupcustomgallery
+page_features:
+  - setupcustomgallery
 ---
 
 # Users Tutorial

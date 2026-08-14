@@ -2,7 +2,7 @@
 title: "Live captions in OpenVidu Meet"
 description: "Turn on real-time speech-to-text captions in an OpenVidu Meet meeting to make it accessible, and choose the language each participant reads."
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
-tags:
+page_features:
   - lazyvideo
   - setupcustomgallery
 ---

@@ -9,7 +9,6 @@ categories:
   - OpenVidu Meet
   - AI
 tags:
-  - lazyvideo
   - AI agents
   - Claude Code
   - OpenVidu Meet
@@ -18,6 +17,8 @@ tags:
   - WebRTC
   - Video Conferencing
   - CRM
+page_features:
+  - lazyvideo
 authors:
   - patxi
 hide:

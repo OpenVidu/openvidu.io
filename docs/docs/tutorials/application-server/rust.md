@@ -1,7 +1,7 @@
 ---
 title: "Rust application server tutorial"
 description: "Build a minimal Rust application server for OpenVidu with Axum and the LiveKit-compatible Rust SDK: issue access tokens and handle webhook events."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

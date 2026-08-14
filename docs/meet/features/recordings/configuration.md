@@ -1,7 +1,7 @@
 ---
 title: "Recording configuration in OpenVidu Meet"
 description: "Configure recording per OpenVidu Meet room: enable it, pick the layout and resolution, choose the trigger and allow anonymous sharing."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

@@ -35,9 +35,9 @@
       {% set ns = namespace(dropdown_items=[]) %}
       {% for nav_item in nav.items %}
         {% set is_dropdown = false %}
-        {% if nav_item.meta and nav_item.meta.tags and "dropdown" in nav_item.meta.tags %}
+        {% if nav_item.meta and nav_item.meta.page_features and "dropdown" in nav_item.meta.page_features %}
             {% set is_dropdown = true %}
-        {% elif nav_item.children and nav_item.children[0].meta and nav_item.children[0].meta.tags and "dropdown" in nav_item.children[0].meta.tags %}
+        {% elif nav_item.children and nav_item.children[0].meta and nav_item.children[0].meta.page_features and "dropdown" in nav_item.children[0].meta.page_features %}
             {% set is_dropdown = true %}
         {% endif %}
 

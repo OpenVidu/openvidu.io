@@ -1,7 +1,7 @@
 ---
 title: ".NET application server tutorial"
 description: "Build a minimal .NET application server for OpenVidu with ASP.NET and the LiveKit-compatible .NET SDK: issue access tokens and handle webhooks."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

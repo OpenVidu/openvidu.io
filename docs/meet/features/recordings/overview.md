@@ -1,7 +1,7 @@
 ---
 title: "Recordings in OpenVidu Meet"
 description: "How recording works in OpenVidu Meet: what gets captured, where the files are stored, and who is allowed to play or share them afterwards."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

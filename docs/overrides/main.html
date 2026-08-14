@@ -173,34 +173,34 @@
 
 <!-- Add scripts that need to run before here -->
 
-{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
 <script>
   window.setupWowJs();
 </script>
 {% endif %}
 
-{% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "setupcardglow" in page.meta.page_features %}
 <script>
   window.setupCardGlow();
 </script>
 {% endif %}
 
-{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <script src="{{ 'javascripts/splide.min.js' | url }}"></script>
 <script>
   window.setupCarousel();
 </script>
 {% endif %}
 
-{% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "setupcustomgallery" in page.meta.page_features %}
 <script src="{{ 'javascripts/glightbox-custom-gallery.js' | url }}"></script>
 {% endif %}
 
-{% if page.meta and page.meta.tags and "lazyvideo" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "lazyvideo" in page.meta.page_features %}
 <script src="{{ 'javascripts/lazy-video.js' | url }}"></script>
 {% endif %}
 
-{% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "scrolltoversion" in page.meta.page_features %}
 <script src="{{ 'javascripts/releases-scroll-to-version.js' | url }}"></script>
 {% endif %}
 
@@ -208,7 +208,7 @@
 
 <!-- Add scripts that need to run afterwards here -->
 
-{% if page.meta and page.meta.tags and "openviduregister" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "openviduregister" in page.meta.page_features %}
 <script src="{{ 'javascripts/openvidu-register/openvidu-register.js' | url }}"></script>
 {% endif %}
 
@@ -216,7 +216,7 @@
 
 {% block styles %}
 
-{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+{% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
 {% endif %}
 
@@ -254,15 +254,15 @@
 {% endif %}
 {% endif %}
 
-{% if page.meta.tags and "Platform" in page.meta.tags %}
+{% if page.meta.page_features and "Platform" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/platform.css' | url }}" />
 {% endif %}
 
-{% if page.meta.tags and "Meet" in page.meta.tags %}
+{% if page.meta.page_features and "Meet" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
-{% if page.meta.tags and "openviduregister" in page.meta.tags %}
+{% if page.meta.page_features and "openviduregister" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
 <link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
 {% endif %}

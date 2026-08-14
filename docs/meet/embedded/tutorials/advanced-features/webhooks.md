@@ -1,8 +1,8 @@
 ---
 title: "Webhooks tutorial for OpenVidu Meet"
 description: "Keep a video conferencing app up to date in real time with OpenVidu Meet webhooks and Server-Sent Events, on a Node.js and JavaScript stack."
-tags:
-    - setupcustomgallery
+page_features:
+  - setupcustomgallery
 ---
 
 # Webhooks Tutorial

@@ -1,8 +1,8 @@
 ---
 title: "Meeting lifecycle in OpenVidu Meet"
 description: "The views a participant moves through during an OpenVidu Meet meeting, from the Join and Device views to the Meeting, Recording and End views."
-tags:
-    - setupcustomgallery
+page_features:
+  - setupcustomgallery
 ---
 
 # Meeting lifecycle

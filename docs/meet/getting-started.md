@@ -1,7 +1,7 @@
 ---
 description: "Take a guided tour of OpenVidu Meet: log in, create a room, invite participants, run a meeting and find the recording afterwards."
 title: "Getting started with OpenVidu Meet"
-tags:
+page_features:
   - lazyvideo
   - setupcustomgallery
 ---

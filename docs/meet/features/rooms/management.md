@@ -1,7 +1,7 @@
 ---
 title: "Room creation and management in OpenVidu Meet"
 description: "Create, edit, list and delete OpenVidu Meet rooms from the application, configure auto-deletion and appearance, or do it all from the REST API."
-tags:
+page_features:
   - lazyvideo
   - setupcustomgallery
 ---

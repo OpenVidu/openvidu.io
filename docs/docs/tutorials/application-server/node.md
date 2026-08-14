@@ -1,7 +1,7 @@
 ---
 title: "Node.js application server tutorial"
 description: "Build a minimal Node.js application server for OpenVidu with Express and the LiveKit-compatible JS SDK: issue access tokens and handle webhooks."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

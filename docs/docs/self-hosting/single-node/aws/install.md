@@ -1,7 +1,7 @@
 ---
 title: "Install OpenVidu Single Node COMMUNITY on AWS"
 description: "Deploy OpenVidu Single Node COMMUNITY on AWS from a CloudFormation stack, then point your application at the result."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

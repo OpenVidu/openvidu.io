@@ -1,7 +1,7 @@
 ---
 title: "Electron video call tutorial"
 description: "Build a desktop video-call app on OpenVidu with Electron and the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to media."
-tags:
+page_features:
   - setupcustomgallery
 ---
 

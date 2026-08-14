@@ -1,7 +1,8 @@
 """Authoring-convention checks that `mkdocs build --strict` cannot see.
 
 MkDocs validates Markdown links, but never looks inside raw HTML, never compares a page against
-the conventions (version-pin discipline, SEO field lengths, the `tags:` contract), and reports
+the conventions (version-pin discipline, SEO field lengths, the `page_features:` contract),
+and reports
 broken anchors at INFO where ~110 `pymdownx.tabbed` false positives bury them. Each check here
 covers one of those blind spots, over the *source* tree — no build needed, so the whole run
 takes a second or two.

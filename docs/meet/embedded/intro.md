@@ -1,7 +1,7 @@
 ---
 description: "Add video calls to your own application with a single line of HTML: a direct link, an iframe or the OpenVidu Meet Web Component."
 title: "Embed OpenVidu Meet in your application"
-tags:
+page_features:
   - setupcustomgallery
 ---
 

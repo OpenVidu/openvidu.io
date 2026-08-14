@@ -1,7 +1,7 @@
 ---
 title: "Install OpenVidu High Availability on AWS"
 description: "Deploy OpenVidu High Availability on AWS from a CloudFormation stack, then point your application at the result."
-tags:
+page_features:
   - setupcustomgallery
 ---
 
