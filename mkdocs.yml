@@ -396,6 +396,9 @@ plugins:
       enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
+      # Never recompress the vendored compodoc bundle (reference docs ship as-is)
+      optimize_exclude:
+        - docs/reference-docs/*
   - glightbox:
       width: 100%
       skip_classes:
