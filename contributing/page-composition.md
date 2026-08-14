@@ -61,22 +61,15 @@ copy its tags too.** These are the tags currently used:
   </div>
   ```
 
-- `setupcustomgallery`: the page has custom [GLightbox](https://biati-digital.github.io/glightbox/)
-  elements. A page with only Markdown images (`![x](image.jpg)`) does **not** need it (the
-  mkdocs-glightbox plugin handles those automatically); a page with HTML images or videos marked
-  with the `glightbox` class **does**:
+- `setupcustomgallery`: the page has **video** lightbox anchors (hand-written
+  `<a class="glightbox" data-type="video">` — see the video patterns below). The script
+  re-initializes [GLightbox](https://biati-digital.github.io/glightbox/) with the video player
+  options (autoplaying plyr slides). Pages with only images never need it: Markdown images are
+  wrapped by the mkdocs-glightbox plugin automatically.
 
-  ```html
-  <a class="glightbox" href="image.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="image.png" loading="lazy" class="control-height" alt="Image description"/></a>
-  ```
-
-  ```html
-  <a class="glightbox" href="video.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="video.mp4" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-  ```
-
-- `copyclipboard`: the page has inline copy-to-clipboard elements (a `.copy-inline` wrapper whose
-  `.copy-btn` copies its `data-copy` value). Loads
-  [`copy-clipboard.js`](../docs/javascripts/copy-clipboard.js).
+- `lazyvideo`: the page has below-the-fold videos (`<video class="lazy-video">`, the default
+  video pattern below). Loads [`lazy-video.js`](../docs/javascripts/lazy-video.js), which plays
+  each video only while it is on screen and never downloads the hidden theme variant.
 
 - `scrolltoversion`: releases pages only — auto-scrolls to the `## X.Y.0` heading of the version
   being viewed. Loads
@@ -104,29 +97,57 @@ The `tags:`↔HTML contract is checked by `ovweb lint` (a page whose content car
 glightbox/feature-cards/carousel markup must declare the matching tag) — see
 [checks.md](checks.md).
 
-### Theme-dependent images/videos
+### Images
 
-For images using the default Mkdocs Material syntax (the `#only-dark` and `#only-light`
-suffixes):
+Write images as plain Markdown with a **relative** path — never hand-write
+`<a class="glightbox">` wrappers around images (the mkdocs-glightbox plugin generates the
+lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#only-*` suffix):
 
 ```markdown
-![Image description](image-dark.png#only-dark)
-![Image description](image-light.png#only-light)
+![Image description](../assets/images/x.png){ .round-corners loading=lazy }
 ```
 
-For images/videos using the custom GLightbox syntax, apart from having tag `setupcustomgallery`
-in its page, this must be the HTML structure:
+- Theme variants use the `#only-dark` / `#only-light` suffixes, always in pairs:
+
+  ```markdown
+  ![Image description](image-dark.png#only-dark){ .round-corners loading=lazy }
+  ![Image description](image-light.png#only-light){ .round-corners loading=lazy }
+  ```
+
+- Every image below the first viewport takes `loading=lazy`.
+- Resize sources to their rendered size **before** committing them — the `optimize` plugin
+  recompresses but never resizes, so oversized sources ship oversized.
+- To keep an image out of the lightbox, add the `skip-gallery` class.
+
+### Videos
+
+Two canonical patterns — nothing else. `<video>` never takes `defer`, `async` or `loading`
+(those attributes do not exist for videos and silently do nothing).
+
+**Below the fold (the default).** No `autoplay`; the video downloads and plays only when
+scrolled into view. Requires the `lazyvideo` page tag:
 
 ```html
-<a class="glightbox" href="image-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="image-dark.png#only-dark" loading="lazy" class="round-corners" alt="Image description"/></a>
-<a class="glightbox" href="image-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="image-light.png#only-light" loading="lazy" class="round-corners" alt="Image description"/></a>
+<a class="glightbox" href="/assets/videos/x-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/x-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/x-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/x-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 ```
 
-> - The `#only-dark` and `#only-light` suffixes must be present in the `src` attribute of the
->   `<img>` or `<video>` elements, but **NOT** in the `href` attribute of the `<a>` parent
->   element.
-> - It is important that each HTML `<a>` element is a **one-liner**. There are some strange
->   behaviors when they are not.
+**Above the fold (showcase heroes only).** `autoplay` is allowed, but the inline `src` must be a
+small downscaled `-preview.mp4` with a `poster`; the full-size file appears only in the lightbox
+`href` (see `docs/meet/index.md` for the reference):
+
+```html
+<a class="glightbox" href="/assets/videos/full.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
+```
+
+Rules for both patterns:
+
+> - Theme-variant videos carry the `#only-dark`/`#only-light` suffix in the `src` attribute (in
+>   pairs), **never** in the `href` of the `<a>` parent, and declare `data-gallery="dark"` /
+>   `data-gallery="light"` so each theme's lightbox gallery only contains its own variants.
+>   Videos without theme variants share any per-page gallery name (e.g. `gallery1`).
+> - Each HTML `<a>` element is a **one-liner**. There are some strange behaviors when it is not.
+> - Video lightbox anchors need the `setupcustomgallery` page tag.
 
 ## Theme overrides
 
