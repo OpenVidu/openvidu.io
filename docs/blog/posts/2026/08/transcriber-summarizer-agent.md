@@ -8,10 +8,10 @@ cover_image: transcriber-summarizer-agent.png
 categories:
   - AI
   - Implementation
-  - Livekit
+  - LiveKit
   - Technology
 tags:
-  - AI Agents
+  - AI agents
   - STT
   - Transcription
   - LiveKit

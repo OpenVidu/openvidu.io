@@ -9,7 +9,7 @@ categories:
     - OpenVidu Meet
     - Technology
 tags:
-    - self-hosted
+    - Self-hosted
     - Video Conferencing
     - Security
     - WebRTC

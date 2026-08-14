@@ -11,7 +11,7 @@ cover_image: cover.webp
 categories:
   - AI
   - Technology
-  - Livekit
+  - LiveKit
 tags:
   - MediaPipe
   - Gestures

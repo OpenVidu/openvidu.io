@@ -10,7 +10,7 @@ categories:
 tags:
   - React
   - Development
-  - webRTC
+  - WebRTC
   - Development
 authors:
   - csantosm

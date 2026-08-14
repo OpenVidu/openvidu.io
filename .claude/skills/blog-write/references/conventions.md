@@ -45,7 +45,7 @@ cover_image: poster.jpg     # recommended; raster only (png/jpg/webp, NOT svg), 
 categories:
     - OpenVidu Meet         # 1-2 values, MUST be in categories_allowed — read the list from mkdocs.yml (plugins.blog.categories_allowed); an unlisted value breaks the build
 tags:
-    - WebRTC                # free-form, 4-8 technical tags
+    - WebRTC                # free-form, 4-8 technical tags — taxonomy only, NEVER a page_features key
 authors:
     - carlosRuiz            # keys must exist in docs/blog/.authors.yml
 hide:
@@ -54,6 +54,16 @@ hide:
     - version-selector
 ---
 ```
+
+Tag rules:
+
+- **Reuse an existing spelling before inventing one** — grep other posts first. Canonical
+  spellings for the recurring ones: `WebRTC`, `Self-hosted`, `AI agents`, `LiveKit`.
+- **New multi-word tags are sentence case** (`Voice agents`, not `Voice Agents`). Older posts
+  still carry Title-Case tags; their normalization is a pending follow-up, not license to add
+  more.
+- **Don't repeat a category as a tag** (e.g. a post in the `Release` or `OpenVidu Meet`
+  category doesn't also tag it) — the category page already collects those posts.
 
 `<!-- more -->` on its own line right after the intro is **mandatory** (`post_excerpt:
 required` — a missing tag breaks the build). Exactly one.

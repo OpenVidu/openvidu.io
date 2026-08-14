@@ -11,7 +11,6 @@ categories:
 tags:
   - AI agents
   - Claude Code
-  - OpenVidu Meet
   - Embedded video
   - WebComponent
   - WebRTC

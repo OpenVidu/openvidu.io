@@ -7,7 +7,6 @@ description: "OpenVidu 3.8.0 is out: user accounts, role-based access and fine-g
 categories:
     - Release
 tags:
-    - Release
     - WebRTC
     - mediasoup
     - Security

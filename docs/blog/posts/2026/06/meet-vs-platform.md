@@ -9,7 +9,7 @@ categories:
   - OpenVidu Meet
   - OpenVidu Platform
 tags:
-  - self-hosted
+  - Self-hosted
   - low-code
 authors:
   - patxi
