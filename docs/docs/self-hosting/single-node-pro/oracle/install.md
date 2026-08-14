@@ -1,8 +1,6 @@
 ---
 title: "Install OpenVidu Single Node PRO on Oracle Cloud"
 description: "Deploy OpenVidu Single Node PRO on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
-tags:
-  - copyclipboard
 ---
 
 # OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> installation: Oracle Cloud Infrastructure

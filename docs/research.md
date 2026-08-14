@@ -9,7 +9,6 @@ hide:
   - version-selector
 tags:
   - dropdown
-  - setupwowjs
 # Structured metadata for the publications listed on this page. It feeds the
 # JSON-LD (schema.org ScholarlyArticle/Thesis) emitted by
 # overrides/partials/json-ld.html. Keep in sync with the page content below:

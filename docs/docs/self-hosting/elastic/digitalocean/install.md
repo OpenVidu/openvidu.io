@@ -1,8 +1,6 @@
 ---
 title: "Install OpenVidu Elastic on DigitalOcean"
 description: "Deploy OpenVidu Elastic on DigitalOcean with Terraform, then point your application at the result."
-tags:
-  - copyclipboard
 ---
 
 # OpenVidu Elastic installation: DigitalOcean
