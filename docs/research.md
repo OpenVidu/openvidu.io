@@ -2,6 +2,7 @@
 title: "OpenVidu research publications"
 description: "Peer-reviewed papers and PhD theses on WebRTC media server scalability and quality of experience under load, published by the OpenVidu team."
 hide:
+  - path
   - navigation
   - toc
   - footer

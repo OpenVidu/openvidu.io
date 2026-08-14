@@ -316,6 +316,9 @@ theme:
     - navigation.tabs
     - navigation.tracking
     - navigation.footer
+    # Breadcrumbs on meet/** + docs/** only: the sectioned marketing pages and the blog
+    # opt out per page/folder with `hide: - path`.
+    - navigation.path
     - navigation.top
     - navigation.indexes
     - search.suggest
