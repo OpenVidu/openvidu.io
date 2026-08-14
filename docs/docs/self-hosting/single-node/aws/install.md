@@ -38,7 +38,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 ## CloudFormation Parameters
 
@@ -56,7 +56,7 @@ You need to specify some properties for the EC2 instance that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png){ loading=lazy }
 
     Simply select the type of instance you want to deploy at **InstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
@@ -74,7 +74,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png){ loading=lazy }
 
 ## Configure your application to use the deployment
 

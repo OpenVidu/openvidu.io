@@ -17,8 +17,8 @@ OpenVidu offers two different products:
 - **OpenVidu Meet**: a complete, high-quality video calling service designed to be self-hosted. Ideal for teams, businesses and organizations that need a reliable, secure and customizable video conferencing solution running on their servers.
 - **OpenVidu Platform**: a solution comprised of a self-hosted deployment and a set of SDKs and APIs that greatly simplifies the development of any type of real-time application.
 
-![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-light.svg#only-light){ .skip-gallery }
-![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-dark.svg#only-dark){ .skip-gallery }
+![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-light.svg#only-light){ .skip-gallery loading=lazy }
+![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-dark.svg#only-dark){ .skip-gallery loading=lazy }
 /// caption
 ///
 

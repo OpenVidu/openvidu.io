@@ -29,7 +29,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Elastic DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/elastic/digitalocean/elastic-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Elastic DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/elastic/digitalocean/elastic-architecture.svg){ .svg-img .dark-img loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -208,7 +208,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
-    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/elastic/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
+    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/elastic/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img loading=lazy }
 
 2. Give the SSH Key the necessary permissions for it to work.
 
@@ -231,7 +231,7 @@ To verify that your OpenVidu deployment works correctly wait for the `secrets.en
 
 === "View OpenVidu credentials in the Web"
     Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
-    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/elastic/digitalocean/secrets-env.png){ .svg-img .dark-img }
+    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/elastic/digitalocean/secrets-env.png){ .svg-img .dark-img loading=lazy }
 
 
 === "View OpenVidu credentials in the instance"

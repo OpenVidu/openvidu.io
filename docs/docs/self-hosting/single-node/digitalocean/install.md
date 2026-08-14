@@ -31,12 +31,12 @@ This page explains how to create a Droplet (VM) in DigitalOcean, configure netwo
 
 1. Log in to your [**DigitalOcean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/) account.
 2. Search for **Droplets**, click it, and then click _"Create Droplet"_.
-    ![Create Droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/create-droplet.png){ .svg-img .dark-img }
+    ![Create Droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/create-droplet.png){ .svg-img .dark-img loading=lazy }
 3. Choose a region and then change the image to Ubuntu _"24.04 (LTS) x64"_ if it is not selected yet.
-    ![OS Selection](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/os-version-selection.png){ .svg-img .dark-img }
+    ![OS Selection](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/os-version-selection.png){ .svg-img .dark-img loading=lazy }
 4. Select the size for your OpenVidu server. We recommend **4 CPUs or more and at least 4 GB of RAM** for OpenVidu to run correctly.
 5. Scroll down to Authentication Method and choose the one you prefer. This will be used to connect to the instance via terminal. If you want to use an SSH key, follow the instructions shown when you click New SSH Key.
-    ![Create New SSH Key](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/new-ssh-key.png){ .svg-img .dark-img }
+    ![Create New SSH Key](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/new-ssh-key.png){ .svg-img .dark-img loading=lazy }
 6. Review the configuration and click _"Create Droplet"_, you can change the hostname of the droplet if you want (for example, `openvidu-singlenode`).
 
 ---
@@ -48,15 +48,15 @@ OpenVidu and WebRTC require specific inbound rules on the Firewall network secur
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the Firewall rules.
 
 1. Click the droplet, then go to _"Networking"_, scroll down and click on _"Edit"_ in **Firewall** section.
-    ![Edit Firewall Rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .svg-img .dark-img }
+    ![Edit Firewall Rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .svg-img .dark-img loading=lazy }
 2. Now click on _"Create Firewall"_ and in **Inbound Rules** add the following rules.
-    ![Inbound rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/inbound-rules.png){ .svg-img .dark-img }
+    ![Inbound rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/inbound-rules.png){ .svg-img .dark-img loading=lazy }
 
     !!! warning
         It is important that you make sure the protocol is the one that is shown in the image.
 
 3. Name the firewall, then scroll to the bottom and search for your Droplet by name. Select it to apply the firewall rules to it.
-    ![Firewall apply to droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/firewall-to-droplet.png){ .svg-img .dark-img }
+    ![Firewall apply to droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/firewall-to-droplet.png){ .svg-img .dark-img loading=lazy }
 ---
 
 ### 3. SSH access and OpenVidu installation
@@ -90,7 +90,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 ### Deployment details
 
@@ -223,7 +223,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
-    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img }
+    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img loading=lazy }
 
 2. Give the SSH Key the necessary permissions for it to work.
 
@@ -246,7 +246,7 @@ To verify that your OpenVidu deployment works correctly wait for the `secrets.en
 
 === "View OpenVidu credentials in the Web"
     - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
-    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/secrets-env.png){ .svg-img .dark-img }
+    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/secrets-env.png){ .svg-img .dark-img loading=lazy }
 
 === "View OpenVidu credentials in the instance"
 

@@ -4,8 +4,8 @@ description: "Build real-time video, audio and AI applications on infrastructure
 ---
 
 <div class="logo-header platform-header">
-<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title skip-gallery not-selectable" alt="">
-<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title skip-gallery not-selectable" alt="">
+<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title skip-gallery not-selectable" alt="" loading="lazy">
+<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title skip-gallery not-selectable" alt="" loading="lazy">
 </div>
 
 <h1 class="meetplatform-slogan">
@@ -20,8 +20,8 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
-  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .skip-gallery }
-  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .skip-gallery }
+  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .skip-gallery loading=lazy }
+  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .skip-gallery loading=lazy }
   <figcaption style="max-width: 27rem">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</figcaption>
 
 ## Your first lines of code
@@ -64,7 +64,7 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" loading="lazy"/>
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -96,7 +96,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" loading="lazy"/>
 </div>
 
 </div>
@@ -106,7 +106,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
 <div class="grid-40 tablet-grid-40">
-<img class="skip-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" loading="lazy"/>
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
@@ -134,14 +134,14 @@ The future lies in the integration of cameras and sensors in all kinds of device
 </div>
 
 <div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" />
+<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" loading="lazy"/>
 </div>
 
 </div>
 
 ## OpenVidu application architecture
 
-![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg)
+![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg){ loading=lazy }
 
 Every OpenVidu application consists of 3 main components:
 
@@ -168,13 +168,13 @@ With these three concepts you can build any kind of real-time application you ca
 <div style="display: flex; align-items: start; justify-content: center;" markdown>
 
 <div class="grid-45 tablet-grid-45" markdown>
-  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){.basic-concepts-img-1}
+  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){.basic-concepts-img-1 loading=lazy }
   <figcaption style="margin-top: 3em">Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" and "Mic" and is receiving Track "Screen" from "Bob". "Bob" is publishing Track "Screen" and receiving Tracks "Webcam" and "Mic" from "Alice".</figcaption>
 </div>
 
 <div class="grid-55 tablet-grid-55" markdown>
 <figure markdown>
-  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){.basic-concepts-img-2}
+  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){.basic-concepts-img-2 loading=lazy }
    <figcaption>Room "Remote support" has 3 Participants: Participant "Dan" is not publishing any Track, but receiving all Tracks in the Room. Participant "Erin" is only receiving Track "Mic" from Participant "Carol", but not Track "Screen".</figcaption>
 </figure>
 </div>

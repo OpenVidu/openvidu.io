@@ -45,8 +45,8 @@ Along the way, you'll also learn how to build an autoscaling loop that reacts be
 
 Most successful platforms start with a single machine. In a single-node deployment, one server runs signaling, media processing, persistence, and API logic together. For many teams, that's the right call — it maximizes speed of learning and minimizes operational overhead while you figure out whether the product has legs.
 
-![Single-node architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-light.svg#only-light)
-![Single-node architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-dark.svg#only-dark)
+![Single-node architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-light.svg#only-light){ loading=lazy }
+![Single-node architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/single-node-dark.svg#only-dark){ loading=lazy }
 
 ### Why the Single Node Works Early
 
@@ -96,8 +96,8 @@ When these signals appear consistently, throwing a bigger machine at the problem
 
 At this point, larger machines cost more and help less. What you actually need is a role-based architecture where media execution and orchestration scale independently.
 
-![Elastic media plane architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-light.svg#only-light)
-![Elastic media plane architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-dark.svg#only-dark)
+![Elastic media plane architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-light.svg#only-light){ loading=lazy }
+![Elastic media plane architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/elastic-dark.svg#only-dark){ loading=lazy }
 
 The split looks like this:
 
@@ -194,8 +194,8 @@ You can run 100 media nodes and still fail like a prototype if your orchestratio
 
 When orchestration goes down, new joins fail, placement stops, and recovery becomes a manual process. Phase 2 hardened the media plane. Phase 3 is about making sure the rest of the system can survive a failure too — because HA at this stage means hardening the support cluster, not adding more media nodes.
 
-![High-availability architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-light.svg#only-light)
-![High-availability architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-dark.svg#only-dark)
+![High-availability architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-light.svg#only-light){ loading=lazy }
+![High-availability architecture](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/ha-dark.svg#only-dark){ loading=lazy }
 
 ### Remove Single Points of Failure
 

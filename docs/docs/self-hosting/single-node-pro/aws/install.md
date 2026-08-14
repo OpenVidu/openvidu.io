@@ -40,7 +40,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 ## CloudFormation Parameters
 
@@ -56,7 +56,7 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
     Parameters of this section look like this:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-pro-config.png)
+    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-pro-config.png){ loading=lazy }
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
@@ -73,7 +73,7 @@ You need to specify some properties for the EC2 instance that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png){ loading=lazy }
 
     Simply select the type of instance you want to deploy at **InstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
@@ -91,7 +91,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png){ loading=lazy }
 
 ## Configure your application to use the deployment
 

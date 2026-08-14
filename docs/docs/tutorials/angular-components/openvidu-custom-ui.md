@@ -55,7 +55,6 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
-<!-- ![OpenVidu Angular Components - Custom UI](../../../assets/images/platform/tutorials/angular-components/custom-ui.png){ loading=lazy } -->
 
 --8<-- "shared/tutorials/testing-other-devices.md"
 

@@ -19,14 +19,14 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 To use the Azure template, click the button below (you will be redirected to Azure).
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
 </div>
 
 === "Architecture overview"
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .svg-img .dark-img }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 ## Template Parameters
 
@@ -47,7 +47,7 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
     Parameters of this section look like this:
 
-    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png)
+    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png){ loading=lazy }
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
@@ -61,7 +61,7 @@ Specify properties for the Azure instance that will host Openvidu.
 
     Parameters in this section look like this:
 
-    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/single-node/azure/instance-config.png){ .svg-img .dark-img }
+    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/single-node/azure/instance-config.png){ .svg-img .dark-img loading=lazy }
 
     Simply select the type of instance you want to deploy in **Type of Instance**. Fill in **Admin Username**, which will be set as the admin username on the instance. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instance.
 
@@ -85,15 +85,15 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img loading=lazy }
 
     3. Click the secret you want to inspect, then click the current version of that secret.
 
-        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .svg-img .dark-img }
+        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .svg-img .dark-img loading=lazy }
 
     4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .svg-img .dark-img }
+        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .svg-img .dark-img loading=lazy }
 
 === "Check deployment outputs in the instance"
 

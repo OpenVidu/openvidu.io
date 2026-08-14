@@ -86,7 +86,7 @@ Here are five solutions developers commonly evaluate in 2026.
 
 ### **[Agora.io](https://www.agora.io/en/)**
 
-![React video call platforms in 2026 — Agora.io](/assets/images/blog/2026/05/5-react-video-call-platforms/agora.png "Agora.io")
+![React video call platforms in 2026 — Agora.io](/assets/images/blog/2026/05/5-react-video-call-platforms/agora.png "Agora.io"){ loading=lazy }
 
 Cloud-based video API with a globally distributed low-latency network and advanced real-time engagement features.
 
@@ -148,7 +148,7 @@ Product teams that want a fully managed, globally distributed video layer and ar
 
 ### **[Zoom](https://www.zoom.com/)**
 
-![React video call platforms in 2026 — Zoom](/assets/images/blog/2026/05/5-react-video-call-platforms/zoom.png "Zoom")
+![React video call platforms in 2026 — Zoom](/assets/images/blog/2026/05/5-react-video-call-platforms/zoom.png "Zoom"){ loading=lazy }
 
 Zoom’s Video SDK allows developers to build custom video applications using Zoom’s underlying infrastructure, but with full control over the user interface and experience.
 
@@ -217,8 +217,8 @@ Enterprise or B2B apps that want Zoom-grade reliability and compliance while emb
 
 ### **[Stream](https://getstream.io/video/)**
 
-![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-light.png#only-dark "Stream")
-![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-dark.png#only-light "Stream")
+![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-light.png#only-dark "Stream"){ loading=lazy }
+![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-dark.png#only-light "Stream"){ loading=lazy }
 
 Developer-focused video API designed to integrate real-time video and collaboration features directly into modern web and mobile applications.
 
@@ -277,7 +277,7 @@ Product teams building collaborative applications that combine **chat, notificat
 
 ### **[LiveKit](https://livekit.io/)**
 
-![React video call platforms in 2026 — LiveKit](/assets/images/blog/2026/05/5-react-video-call-platforms/livekit.png "LiveKit")
+![React video call platforms in 2026 — LiveKit](/assets/images/blog/2026/05/5-react-video-call-platforms/livekit.png "LiveKit"){ loading=lazy }
 
 Open source WebRTC stack with self-host or cloud options for highly customizable real-time video applications.
 
@@ -329,8 +329,8 @@ Engineering-heavy teams that want ownership and deep customization of real-time 
 
 ### **[OpenVidu Meet](https://openvidu.io/)**
 
-![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet")
-![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet")
+![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet"){ loading=lazy }
+![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet"){ loading=lazy }
 
 
 

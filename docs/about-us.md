@@ -45,7 +45,7 @@ My main research activities are related to software engineering, software testin
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorMG.jpg" alt="Portrait of Micael Gallego"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorMG.jpg" alt="Portrait of Micael Gallego" loading="lazy" width="752" height="1000"/>
 </div>
 
 ---
@@ -70,7 +70,7 @@ My main research activities are related to software testing and real-time commun
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorFG.jpg" alt="Portrait of Francisco Gortázar"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorFG.jpg" alt="Portrait of Francisco Gortázar" loading="lazy" width="752" height="1000"/>
 </div>
 
 ---
@@ -93,7 +93,7 @@ My academic background consists of a Double Degree in Computer Science and Softw
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorPF.jpg" alt="Portrait of Pablo Fuente"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorPF.jpg" alt="Portrait of Pablo Fuente" loading="lazy" width="752" height="1000"/>
 </div>
 
 ---
@@ -116,7 +116,7 @@ My experience centers on Node.js, TypeScript, and Angular, complemented by stron
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCS.jpg" alt="Portrait of Carlos Santos"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorCS.jpg" alt="Portrait of Carlos Santos" loading="lazy" width="752" height="1000"/>
 </div>
 
 ---
@@ -142,7 +142,7 @@ My expertise spans backend development (Java, Node.js, Golang), frontend develop
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCR.jpg" alt="Portrait of Carlos Ruiz"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorCR.jpg" alt="Portrait of Carlos Ruiz" loading="lazy" width="752" height="1000"/>
 </div>
 
 ---
@@ -165,7 +165,7 @@ I have professional experience mainly with Node.js, TypeScript, and Angular, as 
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorJCM.jpg" alt="Portrait of Juan Carlos Moreno"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorJCM.jpg" alt="Portrait of Juan Carlos Moreno" loading="lazy" width="750" height="1000"/>
 </div>
 
 ---
@@ -188,7 +188,7 @@ My experience includes working with the most common public clouds and with their
 </div>
 
 <div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorSF.jpg" alt="Portrait of Sergio Fernández"/>
+<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorSF.jpg" alt="Portrait of Sergio Fernández" loading="lazy" width="1200" height="1478"/>
 </div>
 
 </div>

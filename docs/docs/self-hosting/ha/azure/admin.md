@@ -32,13 +32,13 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} and go to the Resource Group where you deployed OpenVidu HA.
     2. Click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, then click on _"Scaling"_ option.
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img }
+        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
     3. On this tab, modify the _"Instance Limits"_ to 0.
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-edit-media-ss-to-stop.png){ .svg-img .dark-img }
+        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-edit-media-ss-to-stop.png){ .svg-img .dark-img loading=lazy }
     4. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/ha/azure/admin-instance-tab.png){ .svg-img .dark-img }
+        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/ha/azure/admin-instance-tab.png){ .svg-img .dark-img loading=lazy }
     5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource called _"stackName-VM-MasterNode1"_. Click on it to go to the Master Node 1 instance. There, click on _"Stop"_ to stop the instance.
-        ![Delete Deployment Stack](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-stop-master.png){ .svg-img .dark-img }
+        ![Delete Deployment Stack](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-stop-master.png){ .svg-img .dark-img loading=lazy }
     6. Repeat step 5 for all the Master Nodes.
 
 === "Startup the Cluster"
@@ -47,15 +47,15 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} and go to the Resource Group where you deployed OpenVidu HA.
     2. In the resource group click on the resource called _"stackName-VM-MasterNode1"_ and click on start to start the Master Node 1.
-        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-start-master.png){ .svg-img .dark-img }
+        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-start-master.png){ .svg-img .dark-img loading=lazy }
     3. Wait until the instance is running.
     4. Repeat step 2 and 3 for all the Master Nodes until they are all up and running.
     5. Go back to the Resource Group, and there click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, then click the _"Scaling"_ option.
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img }
+        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
     6. On this tab, modify the _"Instance Limits"_ to your desired values.
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-edit-media-ss-to-start.png){ .svg-img .dark-img }
+        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-edit-media-ss-to-start.png){ .svg-img .dark-img loading=lazy }
     7. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/ha/azure/admin-instance-tab.png){ .svg-img .dark-img }
+        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/ha/azure/admin-instance-tab.png){ .svg-img .dark-img loading=lazy }
 
 
 ## Change the instance type
@@ -71,7 +71,7 @@ It is possible to change the instance type of both the Master Node and the Media
     1. [Shutdown the cluster](#shutdown-the-cluster).
     2. Go to the Azure Resource Group where you deployed and locate the resource with the name _"stackName-VM-MasterNode1"_ and click on it.
     3. On the left panel click on _"Availability + scale"_ tab and inside click on _"Size"_ tab. Then select the size you desire and click on _"Resize"_
-        ![Change instance type master](../../../../assets/images/platform/self-hosting/ha/azure/instance-type-master.png){ .svg-img .dark-img }
+        ![Change instance type master](../../../../assets/images/platform/self-hosting/ha/azure/instance-type-master.png){ .svg-img .dark-img loading=lazy }
     4. Repeat steps 2 and 3 for all the Master Nodes just in case you want to resize all of them, if not just do it for the ones you want.
     4. [Start the cluster](#startup-the-cluster).
 
@@ -85,7 +85,7 @@ It is possible to change the instance type of both the Master Node and the Media
     2. Select the Resource Group where you deployed OpenVidu High Availability.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_. Click on it to go to the Virtual Machine Scale Set.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Size"_.
-        ![Change instance type media](../../../../assets/images/platform/self-hosting/ha/azure/instance-type-media.png){ .svg-img .dark-img }
+        ![Change instance type media](../../../../assets/images/platform/self-hosting/ha/azure/instance-type-media.png){ .svg-img .dark-img loading=lazy }
     5. Select the new instance type and click on _"Resize"_.
 
 ## Media Nodes Autoscaling Configuration
@@ -98,24 +98,24 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
     2. Select the Resource Group where you deployed OpenVidu High Availability.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Scaling"_ option.
-        ![Select scaling option](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img }
+        ![Select scaling option](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
     5. In the _"Default"_ box you will find a section called _"Rules"_. Here you can add new rules or modify existing ones.
         
         !!! warning
 
             Currently there is only one rule to scale out. We are actively working on providing a graceful scale-in process for Media Nodes to avoid active Rooms disruption.
 
-        ![Rules section](../../../../assets/images/platform/self-hosting/ha/azure/rules-section-ss.png){ .svg-img .dark-img }
+        ![Rules section](../../../../assets/images/platform/self-hosting/ha/azure/rules-section-ss.png){ .svg-img .dark-img loading=lazy }
 
     === "Modify existing rules"
         
         Click on the rule you want to modify and change the **Criteria** as desired. To accept the changes click on _"Update_".
-        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/ha/azure/rules-modify-rule-ss.png){ .svg-img .dark-img }
+        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/ha/azure/rules-modify-rule-ss.png){ .svg-img .dark-img loading=lazy }
 
     === "Add a new rule"
 
         Click on _"Add a rule"_ option and fill the **Criteria** as desired. To add the rule click on _"Add"_.
-        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/ha/azure/rules-add-rule-ss.png){ .svg-img .dark-img }
+        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/ha/azure/rules-add-rule-ss.png){ .svg-img .dark-img loading=lazy }
 
     !!! info
         
@@ -130,11 +130,11 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
     1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed OpenVidu High Availability, locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it
     3. On the left panel click on _"Availability + scale"_ and then in _"Scaling"_ tab.
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img }
+        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
     4. On this tab, go to the very bottom and modify the _"Instance Limits"_ to the fixed number of Media Nodes you want. In this case, it is set to 2.
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-edit-media-ss-fixed.png){ .svg-img .dark-img }
+        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/ha/azure/ha-admin-edit-media-ss-fixed.png){ .svg-img .dark-img loading=lazy }
     5. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/ha/azure/admin-instance-tab.png){ .svg-img .dark-img }
+        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/ha/azure/admin-instance-tab.png){ .svg-img .dark-img loading=lazy }
 
 
 ## Administration and configuration
@@ -150,13 +150,13 @@ In addition to these, an Azure deployment provides the capability to manage glob
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed your OpenVidu HA Stack.
     3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu HA deployment.
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img loading=lazy }
     4. Click on the desired secret you want to change and click on _"New Version"_.
-        ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .svg-img .dark-img }
+        ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .svg-img .dark-img loading=lazy }
     5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
-        ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .svg-img .dark-img }
+        ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .svg-img .dark-img loading=lazy }
     6. Go to the Master Node resource whose secrets you want to change and click on _"Restart"_ to apply the changes to the OpenVidu HA deployment.
-        ![Reboot Instance](../../../../assets/images/platform/self-hosting/ha/azure/reboot-instance.png){ .svg-img .dark-img }
+        ![Reboot Instance](../../../../assets/images/platform/self-hosting/ha/azure/reboot-instance.png){ .svg-img .dark-img loading=lazy }
 
     Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.
 

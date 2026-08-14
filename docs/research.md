@@ -464,7 +464,7 @@ The table below lists our publications from newest to oldest. Select any title t
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Scalability and Quality of Experience of WebRTC media servers for Large-Scale, Low-Latency Streaming](https://dialnet.unirioja.es/servlet/tesis?codigo=402576){:target="_blank"}
 
-Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_blank" aria-label="View ORCID record - 0000-0003-1857-9615"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a> (Author), Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a> (Supervisor), Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a> (Supervisor)
+Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_blank" aria-label="View ORCID record - 0000-0003-1857-9615"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a> (Author), Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a> (Supervisor), Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a> (Supervisor)
 
 <span class="pub-badge pub-phdthesis">PHD Thesis</span> **Universidad Rey Juan Carlos** · 2026 · Doctoral Program in Information and Communication Technologies (International Doctoral School) · [Full text :fontawesome-regular-file-pdf:](https://dialnet.unirioja.es/servlet/tesis?codigo=402576&orden=0&info=link){:target="_blank"}
 
@@ -494,11 +494,11 @@ Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_bla
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" style="padding: 10px; background-color: white;" src="/assets/images/research/thesis-webrtc-scaling-architecture-alg-C.png" alt="Media server scaling architecture from the thesis"/>
+<img class="dark-img svg-img" style="padding: 10px; background-color: white;" src="/assets/images/research/thesis-webrtc-scaling-architecture-alg-C.png" alt="Media server scaling architecture from the thesis" loading="lazy" width="2130" height="706"/>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" style="padding: 10px; background-color: white;" src="/assets/images/research/thesis-servers-in-use.png" alt="Media servers in use during the thesis experiments"/>
+<img class="dark-img svg-img" style="padding: 10px; background-color: white;" src="/assets/images/research/thesis-servers-in-use.png" alt="Media servers in use during the thesis experiments" loading="lazy" width="1600" height="800"/>
 </div>
 
 ---
@@ -506,7 +506,7 @@ Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_bla
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](https://doi.org/10.1109/ACCESS.2025.3589785){:target="_blank"}
 
-Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_blank" aria-label="View ORCID record - 0000-0003-1857-9615"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_blank" aria-label="View ORCID record - 0000-0003-1857-9615"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **IEEE Access** · 2025 · [DOI: 10.1109/ACCESS.2025.3589785](https://doi.org/10.1109/ACCESS.2025.3589785){:target="_blank"}
 
@@ -529,11 +529,11 @@ Videoconference applications are becoming increasingly popular, and the demand f
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/qoe-pion.png" alt="Quality of Experience results for Pion under load"/>
+<img class="dark-img svg-img" src="/assets/images/research/qoe-pion.png" alt="Quality of Experience results for Pion under load" loading="lazy" width="820" height="562"/>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/qoe-mediasoup.png" alt="Quality of Experience results for mediasoup under load"/>
+<img class="dark-img svg-img" src="/assets/images/research/qoe-mediasoup.png" alt="Quality of Experience results for mediasoup under load" loading="lazy" width="820" height="562"/>
 </div>
 
 ---
@@ -541,7 +541,7 @@ Videoconference applications are becoming increasingly popular, and the demand f
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Cost-effective load testing of WebRTC applications](https://doi.org/10.1016/j.jss.2022.111439){:target="_blank"}
 
-Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Michel Maes-Bermejo<a href="https://orcid.org/0000-0002-8138-9702" target="_blank" aria-label="View ORCID record - 0000-0002-8138-9702"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_blank" aria-label="View ORCID record - 0000-0003-1857-9615"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Carlos Santos
+Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Michel Maes-Bermejo<a href="https://orcid.org/0000-0002-8138-9702" target="_blank" aria-label="View ORCID record - 0000-0002-8138-9702"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Iván Chicano-Capelo<a href="https://orcid.org/0000-0003-1857-9615" target="_blank" aria-label="View ORCID record - 0000-0003-1857-9615"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Carlos Santos
 
 <span class="pub-badge pub-journal">Journal</span> **Journal of Systems and Software** · 2022 · [DOI: 10.1016/j.jss.2022.111439](https://doi.org/10.1016/j.jss.2022.111439){:target="_blank"}
 
@@ -568,11 +568,11 @@ Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blan
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/ovlt-arch.png" alt="Architecture of the OpenVidu Load Test platform"/>
+<img class="dark-img svg-img" src="/assets/images/research/ovlt-arch.png" alt="Architecture of the OpenVidu Load Test platform" loading="lazy" width="706" height="566"/>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/ovlt-results.png" alt="Results from the OpenVidu Load Test platform"/>
+<img class="dark-img svg-img" src="/assets/images/research/ovlt-results.png" alt="Results from the OpenVidu Load Test platform" loading="lazy" width="706" height="472"/>
 </div>
 
 ---
@@ -580,7 +580,7 @@ Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blan
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Quality-of-Experience driven configuration of WebRTC services through automated testing](https://doi.org/10.1109/QRS51102.2020.00031){:target="_blank"}
 
-Antonia Bertolino<a href="https://orcid.org/0000-0001-8749-1356" target="_blank" aria-label="View ORCID record - 0000-0001-8749-1356"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Antonello Calabró<a href="https://orcid.org/0000-0001-5502-303X" target="_blank" aria-label="View ORCID record - 0000-0001-5502-303X"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Guglielmo De Angelis<a href="https://orcid.org/0000-0002-1076-0076" target="_blank" aria-label="View ORCID record - 0000-0002-1076-0076"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francesca Lonetti<a href="https://orcid.org/0000-0002-4864-2219" target="_blank" aria-label="View ORCID record - 0000-0002-4864-2219"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Michel Maes<a href="https://orcid.org/0000-0002-8138-9702" target="_blank" aria-label="View ORCID record - 0000-0002-8138-9702"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Guiomar Tuñón
+Antonia Bertolino<a href="https://orcid.org/0000-0001-8749-1356" target="_blank" aria-label="View ORCID record - 0000-0001-8749-1356"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Antonello Calabró<a href="https://orcid.org/0000-0001-5502-303X" target="_blank" aria-label="View ORCID record - 0000-0001-5502-303X"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Guglielmo De Angelis<a href="https://orcid.org/0000-0002-1076-0076" target="_blank" aria-label="View ORCID record - 0000-0002-1076-0076"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francesca Lonetti<a href="https://orcid.org/0000-0002-4864-2219" target="_blank" aria-label="View ORCID record - 0000-0002-4864-2219"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Michel Maes<a href="https://orcid.org/0000-0002-8138-9702" target="_blank" aria-label="View ORCID record - 0000-0002-8138-9702"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Guiomar Tuñón
 
 <span class="pub-badge pub-conference">Conference</span> **IEEE 20th International Conference on Software Quality, Reliability and Security (QRS)** · 2020 · [DOI: 10.1109/QRS51102.2020.00031](https://doi.org/10.1109/QRS51102.2020.00031){:target="_blank"}
 
@@ -606,7 +606,7 @@ Quality of Experience (QoE) refers to the end users level of satisfaction with a
 <div class="grid-90 tablet-grid-90" markdown>
 ## [A Survey of the Selenium Ecosystem](https://doi.org/10.3390/electronics9071067){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Mario Munoz-Organero<a href="https://orcid.org/0000-0003-4199-2002" target="_blank" aria-label="View ORCID record - 0000-0003-4199-2002"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Mario Munoz-Organero<a href="https://orcid.org/0000-0003-4199-2002" target="_blank" aria-label="View ORCID record - 0000-0003-4199-2002"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9071067](https://doi.org/10.3390/electronics9071067){:target="_blank"}
 
@@ -630,7 +630,7 @@ Selenium is often considered the de-facto standard framework for end-to-end web 
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/selenium.png" alt="Figure from the Selenium ecosystem survey"/>
+<img class="dark-img svg-img" src="/assets/images/research/selenium.png" alt="Figure from the Selenium ecosystem survey" loading="lazy" width="1600" height="963"/>
 </div>
 
 ---
@@ -638,7 +638,7 @@ Selenium is often considered the de-facto standard framework for end-to-end web 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Assessment of QoE for Video and Audio in WebRTC Applications Using Full-Reference Models](https://doi.org/10.3390/electronics9030462){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Andrew Hines<a href="https://orcid.org/0000-0001-9636-2556" target="_blank" aria-label="View ORCID record - 0000-0001-9636-2556"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Andrew Hines<a href="https://orcid.org/0000-0001-9636-2556" target="_blank" aria-label="View ORCID record - 0000-0001-9636-2556"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9030462](https://doi.org/10.3390/electronics9030462){:target="_blank"}
 
@@ -662,7 +662,7 @@ WebRTC is a set of standard technologies that allows exchanging video and audio 
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/qoe-assessment.png" alt="QoE assessment of video and audio in WebRTC applications"/>
+<img class="dark-img svg-img" src="/assets/images/research/qoe-assessment.png" alt="QoE assessment of video and audio in WebRTC applications" loading="lazy" width="1600" height="973"/>
 </div>
 
 ---
@@ -670,7 +670,7 @@ WebRTC is a set of standard technologies that allows exchanging video and audio 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Understanding and estimating quality of experience in WebRTC applications](https://doi.org/10.1007/s00607-018-0669-7){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Antonia Bertolino<a href="https://orcid.org/0000-0001-8749-1356" target="_blank" aria-label="View ORCID record - 0000-0001-8749-1356"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Antonia Bertolino<a href="https://orcid.org/0000-0001-8749-1356" target="_blank" aria-label="View ORCID record - 0000-0001-8749-1356"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **Computing** (Springer) · 2019 · [DOI: 10.1007/s00607-018-0669-7](https://doi.org/10.1007/s00607-018-0669-7){:target="_blank"}
 
@@ -694,7 +694,7 @@ WebRTC comprises a set of technologies and standards that provide real-time comm
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/qos-qoe.png" alt="Relationship between QoS parameters and Quality of Experience"/>
+<img class="dark-img svg-img" src="/assets/images/research/qos-qoe.png" alt="Relationship between QoS parameters and Quality of Experience" loading="lazy" width="1381" height="491"/>
 </div>
 
 ---
@@ -702,7 +702,7 @@ WebRTC comprises a set of technologies and standards that provide real-time comm
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Practical Evaluation of VMAF Perceptual Video Quality for WebRTC Applications](https://doi.org/10.3390/electronics8080854){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López-Fernández, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López-Fernández, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **Electronics** (MDPI) · 2019 · [DOI: 10.3390/electronics8080854](https://doi.org/10.3390/electronics8080854){:target="_blank"}
 
@@ -726,11 +726,11 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/qoe-session.png" alt="Perceptual video quality scores across a WebRTC session"/>
+<img class="dark-img svg-img" src="/assets/images/research/qoe-session.png" alt="Perceptual video quality scores across a WebRTC session" loading="lazy" width="1600" height="1571"/>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/webrtc-qoe-vs-packet-loss.png" alt="WebRTC video quality against packet loss"/>
+<img class="dark-img svg-img" src="/assets/images/research/webrtc-qoe-vs-packet-loss.png" alt="WebRTC video quality against packet loss" loading="lazy" width="2887" height="1577"/>
 </div>
 
 ---
@@ -738,7 +738,7 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [NUBOMEDIA: The First Open Source WebRTC PaaS](https://doi.org/10.1145/3123266.3129392){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Giuseppe Antonio Carella
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Giuseppe Antonio Carella
 
 <span class="pub-badge pub-conference">Conference</span> **ACM International Conference on Multimedia (MM '17)** · 2017 · [DOI: 10.1145/3123266.3129392](https://doi.org/10.1145/3123266.3129392){:target="_blank"}
 
@@ -764,7 +764,7 @@ In this paper, we introduce NUBOMEDIA, an open source elastic cloud Platform as 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Kurento: The Swiss Army Knife of WebRTC Media Servers](https://doi.org/10.1109/MCOMSTD.2017.1700006){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700006](https://doi.org/10.1109/MCOMSTD.2017.1700006){:target="_blank"}
 
@@ -792,7 +792,7 @@ In this article we introduce Kurento, an open source WebRTC media server and a s
 <div class="grid-90 tablet-grid-90" markdown>
 ## [WebRTC Testing: Challenges and Practical Solutions](https://doi.org/10.1109/MCOMSTD.2017.1700005){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Miguel Paris
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Miguel Paris
 
 <span class="pub-badge pub-journal">Journal</span> **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700005](https://doi.org/10.1109/MCOMSTD.2017.1700005){:target="_blank"}
 
@@ -820,7 +820,7 @@ WebRTC comprises a set of novel technologies and standards that provide Real-Tim
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Designing and evaluating the usability of an API for real-time multimedia services in the Internet](https://doi.org/10.1007/s11042-016-3729-z){:target="_blank"}
 
-Luis López-Fernández, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Luis López-Fernández, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-journal">Journal</span> **Multimedia Tools and Applications** (Springer) · 2017 · [DOI: 10.1007/s11042-016-3729-z](https://doi.org/10.1007/s11042-016-3729-z){:target="_blank"}
 
@@ -844,11 +844,11 @@ In the last few years, multimedia technologies in general, and Real-Time multime
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/kurento-api.png" alt="Kurento API design from the usability study"/>
+<img class="dark-img svg-img" src="/assets/images/research/kurento-api.png" alt="Kurento API design from the usability study" loading="lazy" width="472" height="390"/>
 </div>
 
 <div class="grid-40 tablet-grid-40">
-<img class="dark-img svg-img" src="/assets/images/research/api-eval.png" alt="API usability evaluation results"/>
+<img class="dark-img svg-img" src="/assets/images/research/api-eval.png" alt="API usability evaluation results" loading="lazy" width="378" height="247"/>
 </div>
 
 ---
@@ -856,7 +856,7 @@ In the last few years, multimedia technologies in general, and Real-Time multime
 <div class="grid-90 tablet-grid-90" markdown>
 ## [WebRTC Testing: State of the Art](https://doi.org/10.5220/0006442003630371){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Eduardo Jiménez
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Eduardo Jiménez
 
 <span class="pub-badge pub-conference">Conference</span> **12th International Conference on Software Technologies (ICSOFT)** · 2017 · [DOI: 10.5220/0006442003630371](https://doi.org/10.5220/0006442003630371){:target="_blank"}
 
@@ -882,7 +882,7 @@ WebRTC is the umbrella term for a number of emerging technologies that extends t
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Analysis of Video Quality and End-to-End Latency in WebRTC](https://doi.org/10.1109/GLOCOMW.2016.7848838){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López-Fernández, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López-Fernández, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-conference">Conference</span> **IEEE Globecom Workshops (GC Wkshps)** · 2016 · [DOI: 10.1109/GLOCOMW.2016.7848838](https://doi.org/10.1109/GLOCOMW.2016.7848838){:target="_blank"}
 
@@ -908,7 +908,7 @@ WebRTC is a set of emerging technologies that extends the web browsing model to 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Kurento: The WebRTC Modular Media Server](https://doi.org/10.1145/2964284.2973798){:target="_blank"}
 
-Luis López, Miguel París, Santiago Carot, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Raul Benítez, Jose A. Santos, David Fernández, Radu Tom Vlad, Iván Gracia, Francisco Javier López
+Luis López, Miguel París, Santiago Carot, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Raul Benítez, Jose A. Santos, David Fernández, Radu Tom Vlad, Iván Gracia, Francisco Javier López
 
 <span class="pub-badge pub-conference">Conference</span> **ACM International Conference on Multimedia (MM '16)** · 2016 · [DOI: 10.1145/2964284.2973798](https://doi.org/10.1145/2964284.2973798){:target="_blank"}
 
@@ -934,7 +934,7 @@ In this paper we introduce Kurento Media Server: an open source WebRTC Media Ser
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Testing Framework for WebRTC Services](https://dl.acm.org/doi/10.5555/3021385.3021393){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López-Fernández, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López-Fernández, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Francisco Gortázar<a href="https://orcid.org/0000-0002-2183-0869" target="_blank" aria-label="View ORCID record - 0000-0002-2183-0869"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>
 
 <span class="pub-badge pub-conference">Conference</span> **9th EAI International Conference on Mobile Multimedia Communications (MobiMedia)** · 2016 · [ACM Digital Library ↗](https://dl.acm.org/doi/10.5555/3021385.3021393){:target="_blank"}
 
@@ -960,7 +960,7 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [NUBOMEDIA: An Elastic PaaS Enabling the Convergence of Real-Time and Big Data Multimedia](https://doi.org/10.1109/SmartCloud.2016.11){:target="_blank"}
 
-Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Luis López, Giuseppe Antonio Carella, Alice Cheambe
+Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Luis López, Giuseppe Antonio Carella, Alice Cheambe
 
 <span class="pub-badge pub-conference">Conference</span> **IEEE International Conference on Smart Cloud (SmartCloud)** · 2016 · [DOI: 10.1109/SmartCloud.2016.11](https://doi.org/10.1109/SmartCloud.2016.11){:target="_blank"}
 
@@ -986,7 +986,7 @@ The increasing acceptance of Network Function Virtualization (NFV) and Software 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Design and Implementation of a High Performant PaaS Platform for Creating Novel Real-Time Communication Paradigms](https://dl.ifip.org/db/conf/icin/icin2016/1570230514.pdf){:target="_blank"}
 
-Alice Cheambe, Flavio Murgia, Pasquale Maiorano Picone, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Giuseppe Antonio Carella, Lorenzo Tomasini, Alin Calinciuc, Cristian Spoiala
+Alice Cheambe, Flavio Murgia, Pasquale Maiorano Picone, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Giuseppe Antonio Carella, Lorenzo Tomasini, Alin Calinciuc, Cristian Spoiala
 
 <span class="pub-badge pub-conference">Conference</span> **19th IEEE Conference on Innovations in Clouds, Internet and Networks (ICIN)** · 2016 · [Full text :fontawesome-regular-file-pdf:](https://dl.ifip.org/db/conf/icin/icin2016/1570230514.pdf){:target="_blank"}
 
@@ -1011,7 +1011,7 @@ This paper presents the design and implementation of a Real Time Communication a
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Authentication, Authorization, and Accounting in WebRTC PaaS Infrastructures: The Case of Kurento](https://doi.org/10.1109/MIC.2014.102){:target="_blank"}
 
-Luis López-Fernández, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD"/></a>, David Fernández-López, Francisco Javier López
+Luis López-Fernández, Micael Gallego<a href="https://orcid.org/0000-0002-2875-7342" target="_blank" aria-label="View ORCID record - 0000-0002-2875-7342"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, Boni García<a href="https://orcid.org/0000-0003-1808-8410" target="_blank" aria-label="View ORCID record - 0000-0003-1808-8410"> <img src="/assets/images/research/ORCID-iD_icon_16x16.png" alt="ORCID iD" loading="lazy" width="16" height="16"/></a>, David Fernández-López, Francisco Javier López
 
 <span class="pub-badge pub-journal">Journal</span> **IEEE Internet Computing** · 2014 · [DOI: 10.1109/MIC.2014.102](https://doi.org/10.1109/MIC.2014.102){:target="_blank"}
 

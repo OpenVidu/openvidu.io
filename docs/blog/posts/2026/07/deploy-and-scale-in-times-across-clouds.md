@@ -75,8 +75,8 @@ But before the "why," there's a "how reliably" — and it matters just as much.
 
 Averages are comforting and occasionally dishonest. Here's every individual run:
 
-![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-light.svg#only-light)
-![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-dark.svg#only-dark)
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-light.svg#only-light){ loading=lazy }
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-dark.svg#only-dark){ loading=lazy }
 
 Three things this shows that the table can't:
 

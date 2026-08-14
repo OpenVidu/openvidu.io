@@ -41,7 +41,7 @@ This open-source demo lets you control your own video call with four hand gestur
 
 I'll confess it: you'll feel like Harry Potter on his first day of class...
 
-![OpenVidu gesture control](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXBvdmlnMjF4a2phc3ZnejI1dndsemhuZjR0dzhuNWF4MmZsMG9ydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/N7aCOnWxcmMSlOy2eH/giphy.gif)
+![OpenVidu gesture control](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXBvdmlnMjF4a2phc3ZnejI1dndsemhuZjR0dzhuNWF4MmZsMG9ydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/N7aCOnWxcmMSlOy2eH/giphy.gif){ loading=lazy }
 
 but no, it's not magic. These gestures are recognized in real time with [MediaPipe Gesture Recognizer](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer){:target="_blank"}, a **free** AI model that runs in the browser itself and lets you detect gestures without sending video to the cloud. We can pair these gestures with real actions in the video call, like turning off the camera, muting the microphone, and so on.
 
@@ -129,7 +129,7 @@ The first time I tried the prototype, I did exactly what anyone would do: I clos
 Brilliant, I thought. The model recognized the gesture perfectly and turned off the camera... What I didn't think about is that by turning off the camera, the model stopped seeing my hand and recognizing any gesture at all.
 
 <figure markdown>
-  ![Confused robot gif representing the model losing hand tracking](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2c0OHYyemhvaXZkZDdpb20xZTkxNGNtNnh2bDRqaWNtZjhvdmVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h8HmN0UcEKR0xWnv3R/giphy.gif)
+  ![Confused robot gif representing the model losing hand tracking](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2c0OHYyemhvaXZkZDdpb20xZTkxNGNtNnh2bDRqaWNtZjhvdmVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h8HmN0UcEKR0xWnv3R/giphy.gif){ loading=lazy }
   <figcaption>What the model thought when I tried this</figcaption>
 </figure>
 
