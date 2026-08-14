@@ -45,7 +45,8 @@
     <span class="home-under-cta-sep">·</span>
     <a
       title="Start a tour"
-      onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
+      href="#get-started"
+      onclick="event.preventDefault(); event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
     >
       Start a tour
     </a>

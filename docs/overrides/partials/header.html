@@ -77,7 +77,9 @@
       {% include ".icons/" ~ icon ~ ".svg" %}
     </label>
 
-    <!-- Header title -->
+    <!-- Header title. The first topic span is deliberately empty (the logo already
+         carries the wordmark; the version selector is injected here client-side);
+         its twin shows the page title on scroll, rendered in Arciform. -->
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
@@ -88,19 +90,9 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             {% if page.meta and page.meta.title %}
-              {% if page.meta.title == "openVidu" %}
-              {% elif page.meta.title == "OpenVidu Meet" %}
-                Index
-              {% elif page.meta.title == "OpenVidu Platform" %}
-                Index
-              {% else %}
-                {{ page.meta.title }}
-              {% endif %}
+              {{ page.meta.title }}
             {% else %}
-              {% if page.title == "openVidu" %}
-              {% else %}
-                {{ page.title }}
-              {% endif %}
+              {{ page.title }}
             {% endif %}
           </span>
         </div>
@@ -149,12 +141,10 @@
       </div>
     {% endif %}
 
+    <!-- Static on every page; on /account/ the openvidu-register bundle relabels it
+         after sign-in (a loading placeholder belongs to that app's modernization). -->
     <div class="md-typeset log-in-div">
-      {% if page.title != "Account" %}
       <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
-      {% else %}
-      <div id="login-loader" class="lds-ripple"><div></div><div></div></div>
-      {% endif %}
     </div>
 
   </nav>

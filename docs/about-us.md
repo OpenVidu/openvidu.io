@@ -12,6 +12,7 @@ hide:
 page_features:
   - dropdown
   - setupwowjs
+dropdown_label: Team
 ---
 
 <style>

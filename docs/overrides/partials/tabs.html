@@ -49,17 +49,23 @@
       {% for nav_item in nav.items %}
         {% if nav_item in ns.dropdown_items %}
             {% if nav_item == ns.dropdown_items[0] %}
-                {% set ns.team_active = false %}
+                {% set ns.dropdown_active = false %}
                 {% for drop_item in ns.dropdown_items %}
                     {% if drop_item.active %}
-                        {% set ns.team_active = true %}
+                        {% set ns.dropdown_active = true %}
                     {% endif %}
                 {% endfor %}
-                <li class="md-tabs__item md-tabs__item--dropdown{% if ns.team_active %} md-tabs__item--active{% endif %}">
-                    <a href="#" class="md-tabs__link{% if ns.team_active %} md-tabs__link--active{% endif %}">
-                        Team
+                <!-- The label comes from the first grouped item's dropdown_label
+                     frontmatter (falling back to its title). A <button> plus the
+                     :focus-within CSS keeps the menu keyboard- and touch-operable. -->
+                {% set first_drop = ns.dropdown_items[0] %}
+                {% set drop_meta = first_drop.meta or (first_drop.children and first_drop.children[0].meta) or {} %}
+                {% set drop_label = drop_meta.dropdown_label or first_drop.title %}
+                <li class="md-tabs__item md-tabs__item--dropdown{% if ns.dropdown_active %} md-tabs__item--active{% endif %}">
+                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle{% if ns.dropdown_active %} md-tabs__link--active{% endif %}" aria-haspopup="true">
+                        {{ drop_label }}
                         <span class="dropdown-caret"></span>
-                    </a>
+                    </button>
                     <div class="md-tabs__dropdown">
                         {% for drop_item in ns.dropdown_items %}
                             {{ item.render_dropdown_link(drop_item) }}

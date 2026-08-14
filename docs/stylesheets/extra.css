@@ -487,6 +487,11 @@ p:has(> a.glightbox) {
   [dir="ltr"] .md-version__current {
     margin-left: 0.8rem !important;
   }
+  /* The full "3.8 latest" button overflows the narrow mobile title box and
+     collides with the palette toggle; the version number alone fits. */
+  .md-version__alias {
+    display: none;
+  }
   /* Outdated warning */
   .outdated-warning-text {
     display: none;
@@ -1004,9 +1009,22 @@ h1.meetplatform-slogan {
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 
-.md-tabs__item--dropdown:hover .md-tabs__dropdown {
+.md-tabs__item--dropdown:hover .md-tabs__dropdown,
+.md-tabs__item--dropdown:focus-within .md-tabs__dropdown {
   visibility: visible;
   opacity: 1;
+}
+
+/* The toggle is a real <button> (keyboard/touch operable); strip UA styles so
+   it renders like the sibling tab links. */
+button.md-tabs__dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
 
 .md-tabs__dropdown-link {
@@ -1050,12 +1068,14 @@ h1.meetplatform-slogan {
   mask-size: contain;
 }
 
-.md-tabs__item--dropdown:hover .dropdown-caret {
+.md-tabs__item--dropdown:hover .dropdown-caret,
+.md-tabs__item--dropdown:focus-within .dropdown-caret {
   transform: rotate(270deg);
 }
 
-/* Keep parent link highlighted when hovering dropdown */
-.md-tabs__item--dropdown:hover .md-tabs__link {
+/* Keep parent link highlighted while the dropdown is open */
+.md-tabs__item--dropdown:hover .md-tabs__link,
+.md-tabs__item--dropdown:focus-within .md-tabs__link {
   opacity: 1;
 }
 
@@ -1064,34 +1084,3 @@ h1.meetplatform-slogan {
 }
 
 
-/* BEGIN TODO: REMOVE WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM */
-.md-tabs__link:has(.md-tabs__new-badge) {
-  opacity: 1;
-}
-
-.md-tabs__link-text {
-  opacity: 0.7;
-}
-
-.md-tabs__item--active .md-tabs__link-text,
-.md-tabs__link:hover .md-tabs__link-text {
-  opacity: 1;
-}
-
-.md-tabs__new-badge {
-  display: inline-block;
-  margin-left: 4px;
-  padding: 0px 5px;
-  font-size: 0.58em;
-  font-weight: 800;
-  line-height: 2em;
-  color: black;
-  background-color: #ffcc00;
-  border-radius: 3px;
-  vertical-align: middle;
-  pointer-events: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* END TODO */
