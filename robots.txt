@@ -1,21 +1,4 @@
-# Every page on the site is crawlable. That includes the old version folders
-# (/3.0/ … /3.7/): they must stay crawlable so Google can read their
-# rel="canonical" pointing at /latest/ and consolidate the duplicates. Blocking
-# them would be counterproductive — a blocked URL can still be indexed from
-# links, just without the canonical ever being read.
-
 User-agent: *
-
-# The only exception, and it is not a page. Each version folder carries its own
-# sitemap.xml, which exists solely for MkDocs Material's version selector: it
-# fetches <version>/sitemap.xml to work out whether the page you are reading
-# also exists in the version you picked, so it can keep you on it. Those files
-# list version-pinned URLs whose canonical is /latest/, so there is nothing in
-# them for a crawler. The selector is unaffected — it runs in the visitor's
-# browser, and browsers ignore robots.txt.
-#
-# Matches /3.6/sitemap.xml and /latest/sitemap.xml (and their .gz), but not the
-# root /sitemap.xml, which has no preceding path segment.
 Disallow: /*/sitemap.xml
 
 Sitemap: https://openvidu.io/sitemap.xml
