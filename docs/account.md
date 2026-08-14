@@ -2,6 +2,7 @@
 title: "OpenVidu account: sign up or log in"
 description: "Create an OpenVidu PRO account, or log in to the account you already have."
 hide:
+  - feedback
   - navigation
   - toc
   - footer

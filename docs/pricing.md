@@ -19,6 +19,7 @@ faq:
     answer: >-
       You need an OpenVidu account and an OpenVidu License to deploy an OpenVidu Pro cluster (OpenVidu Elastic or OpenVidu High Availability). When purchasing a license you indicate your billing address and a credit card, and you receive a 15-day free trial period during which you are not charged at all. After the trial, a monthly billing cycle charges your expenses to your credit card and you receive an invoice each month. The entire billing process is securely done via Stripe and no credit card data is stored. OpenVidu Pro clusters automatically report their usage, which requires outbound access to accounts.openvidu.io on port 443.
 hide:
+  - feedback
   - path
   - navigation
   - toc

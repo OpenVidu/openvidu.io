@@ -586,6 +586,22 @@ extra:
   analytics:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
+    # Renders only after the visitor accepts the analytics cookie (enforced by the
+    # consent template) - invisible to consent-rejecting visitors by design.
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            <a href="https://github.com/OpenVidu/openvidu/issues/new?labels=documentation&amp;title=Docs%20feedback:%20{title}&amp;body=Feedback%20about%20https://openvidu.io{url}%0A%0A(Tell%20us%20what%20you%20were%20looking%20for)" target="_blank" rel="noopener">opening a quick GitHub issue</a>.
   version:
     provider: mike
     default: latest

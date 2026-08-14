@@ -2,6 +2,7 @@
 title: "OpenVidu Meet vs OpenVidu Platform"
 description: "OpenVidu Meet is a finished video conferencing app you deploy; OpenVidu Platform is the SDK layer you build on. Compare both and pick one."
 hide:
+  - feedback
   - navigation
   - toc
   - footer

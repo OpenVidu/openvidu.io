@@ -2,6 +2,7 @@
 title: "OpenVidu support and consultancy"
 description: "Commercial support and consultancy from the OpenVidu team, plus the community channels where COMMUNITY edition users get help with self-hosting."
 hide:
+  - feedback
   - path
   - navigation
   - toc

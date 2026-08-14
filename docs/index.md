@@ -3,6 +3,7 @@ description: "Run video conferencing on your own servers. Deploy the ready-made 
 title: "Self-hosted video conferencing & custom WebRTC"
 template: home.html
 hide:
+  - feedback
   - navigation
   - toc
   - footer

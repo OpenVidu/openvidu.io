@@ -2,6 +2,7 @@
 title: "About the OpenVidu team"
 description: "The engineers and researchers behind OpenVidu, and the open-source and scientific work the project has grown out of."
 hide:
+  - feedback
   - path
   - navigation
   - toc

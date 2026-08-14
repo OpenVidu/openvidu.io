@@ -2,6 +2,7 @@
 title: "Acknowledgments and public funding"
 description: "The Spanish and European research projects, LERNIM, EDGEDATA-CM and NewGenVidu, whose public funding has supported OpenVidu's development."
 hide:
+  - feedback
   - search-bar
   - version-selector
 ---
