@@ -135,7 +135,7 @@ validation:
 
 theme:
   name: material
-  custom_dir: docs/overrides
+  custom_dir: overrides
   language: en
   features:
     - content.code.copy
