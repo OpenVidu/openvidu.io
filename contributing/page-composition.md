@@ -5,9 +5,9 @@
 - `title`, `description` — required SEO fields; budgets and uniqueness in
   [authoring.md](authoring.md).
 - `template: home.html` — the landing page uses a custom template.
-- `hide:` — `navigation`, `toc`, `footer`, `search-bar`, `version-selector`, `footer-prev`,
-  `footer-next`. The non-standard ones (`search-bar`, `version-selector`, `footer-prev`,
-  `footer-next`) are implemented in [`docs/overrides/main.html`](../docs/overrides/main.html).
+- `hide:` — `navigation`, `toc`, `footer`, `search-bar`, `version-selector`. The non-standard
+  ones (`search-bar`, `version-selector`) are implemented in
+  [`docs/overrides/main.html`](../docs/overrides/main.html).
 - **Structured data lives in frontmatter**: `publications:` (`research.md`) and `faq:`
   (`pricing.md`) feed the JSON-LD emitted by
   [`docs/overrides/partials/json-ld.html`](../docs/overrides/partials/json-ld.html). When editing

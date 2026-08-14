@@ -202,20 +202,6 @@
 
 {% if page.meta %}
 {% if page.meta.hide %}
-{% if "footer-prev" in page.meta.hide %}
-<style>
-  .md-footer__link--prev {
-    display: none;
-  }
-</style>
-{% endif %}
-{% if "footer-next" in page.meta.hide %}
-<style>
-  .md-footer__link--next {
-    display: none;
-  }
-</style>
-{% endif %}
 {% if "search-bar" in page.meta.hide %}
 <style>
   div.md-search {

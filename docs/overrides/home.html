@@ -4,21 +4,6 @@
 
 {{ super() }}
 
-<script defer>
-  window.openviduPreviousUrl = "";
-  if (!window.openviduObserver) {
-    window.openviduObserver = new MutationObserver(function (mutations) {
-      if (location.pathname !== window.openviduPreviousUrl) {
-        window.openviduPreviousUrl = location.pathname;
-      }
-    });
-    window.openviduObserver.observe(document, {
-      subtree: true,
-      childList: true,
-    });
-  }
-</script>
-
 <section class="top-home-section md-grid md-typeset">
   <div class="center-align">
     <img
