@@ -77,7 +77,6 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
     """
     base = root / version
     (base / "docs" / "releases").mkdir(parents=True)
-    (base / "overrides").mkdir()
     for asset in layout.assets:
         (base / asset).mkdir()
     for page in layout.non_versioned_pages:
@@ -98,7 +97,6 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
             encoding="utf-8",
         )
 
-    (base / "overrides" / "main.html").write_text("theme source", encoding="utf-8")
     (base / "assets" / "logo.png").write_bytes(b"\x89PNG\x00binary")
     (base / "javascripts" / "app.js").write_text('fetch("/assets/x.json")', encoding="utf-8")
     (base / "stylesheets" / "extra.css").write_text("body{}", encoding="utf-8")
@@ -234,9 +232,11 @@ def test_copies_assets_but_keeps_the_version_copy(latest_tree, config, report):
     assert (latest_tree / VERSION / "assets" / "logo.png").is_file()
 
 
-def test_removes_the_theme_override_folder(latest_tree, config, report):
+def test_removes_a_stray_site_folder(latest_tree, config, report):
+    (latest_tree / "site").mkdir()
+    (latest_tree / "site" / "index.html").write_text("stale", encoding="utf8")
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
-    assert not (latest_tree / VERSION / "overrides").exists()
+    assert not (latest_tree / "site").exists()
 
 
 def test_rewrites_the_versioned_pages(latest_tree, config, report):

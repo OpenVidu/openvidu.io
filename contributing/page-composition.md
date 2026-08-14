@@ -7,10 +7,10 @@
 - `template: home.html` — the landing page uses a custom template.
 - `hide:` — `navigation`, `toc`, `footer`, `search-bar`, `version-selector`. The non-standard
   ones (`search-bar`, `version-selector`) are implemented in
-  [`docs/overrides/main.html`](../docs/overrides/main.html).
+  [`overrides/main.html`](../overrides/main.html).
 - **Structured data lives in frontmatter**: `publications:` (`research.md`) and `faq:`
   (`pricing.md`) feed the JSON-LD emitted by
-  [`docs/overrides/partials/json-ld.html`](../docs/overrides/partials/json-ld.html). When editing
+  [`overrides/partials/json-ld.html`](../overrides/partials/json-ld.html). When editing
   those page sections, update the matching frontmatter entry (anchors must equal heading ids;
   answers/abstracts must match visible content).
 - `page_features:` — the feature-key system below.
@@ -19,7 +19,7 @@
 ## Page features (per-page JS/CSS)
 
 Frontmatter `page_features:` determines which JS/CSS gets included and run for each page (wired
-in [`docs/overrides/main.html`](../docs/overrides/main.html)):
+in [`overrides/main.html`](../overrides/main.html)):
 
 ```yaml
 ---
@@ -56,14 +56,14 @@ page, copy its feature keys too.** These are the keys currently used:
   ```html
   <div class="splide" markdown>
     <div class="splide__track" markdown>
-      <ul class="splide__list" markdown>
-        <li class="splide__slide" markdown>
+      <div class="splide__list" markdown>
+        <div class="splide__slide" markdown>
           <div class="carousel-cell-content" markdown>
           ...
           </div>
-        </li>
+        </div>
         ...
-      </ul>
+      </div>
     </div>
   </div>
   ```
@@ -86,11 +86,11 @@ page, copy its feature keys too.** These are the keys currently used:
   (only [`account.md`](../docs/account.md)). Loads the ~4.4 MB `openvidu-register.js` bundle plus
   `openvidu-register.css` and `amplify.css` — never load these site-wide. On every other page the
   header account button is a static "OpenVidu Pro account" link to `/account/`
-  ([`partials/header.html`](../docs/overrides/partials/header.html)); only the account page
+  ([`partials/header.html`](../overrides/partials/header.html)); only the account page
   itself, where the bundle runs, relabels it.
 
 - `dropdown`: groups the page's top-level nav tab into a dropdown menu; read by
-  [`docs/overrides/partials/tabs.html`](../docs/overrides/partials/tabs.html) from the nav item's
+  [`overrides/partials/tabs.html`](../overrides/partials/tabs.html) from the nav item's
   page (or the first child of a nav group).
 
 - `homestyles`: loads [`home.css`](../docs/stylesheets/home.css) (the landing and Meet landing
@@ -163,7 +163,7 @@ Rules for both patterns:
 
 ## Theme overrides
 
-Material theme customization lives in [`docs/overrides/`](../docs/overrides) (`custom_dir`):
+Material theme customization lives in [`overrides/`](../overrides) (`custom_dir`):
 
 - `main.html` extends the Material base template with Jinja blocks (`extrahead`, `scripts`,
   `styles`, `outdated`...).
