@@ -68,11 +68,6 @@
   width: var(--md-icon-size);
 }
 
-img.mediasoup-icon {
-  max-width: 7rem !important;
-  margin: 0 0.5rem -5px 0.5rem;
-}
-
 [data-md-color-scheme="slate"] {
   .custom-svg-icon {
     filter: brightness(0) saturate(100%) invert(85%) sepia(10%) saturate(115%)
@@ -81,9 +76,6 @@ img.mediasoup-icon {
 }
 
 [data-md-color-scheme="default"] {
-  img.mediasoup-icon {
-    filter: brightness(0.5) saturate(2.5);
-  }
   .custom-svg-icon {
     filter: brightness(0) saturate(100%) invert(30%) sepia(0%) saturate(6%)
       hue-rotate(190deg) brightness(98%) contrast(97%);
@@ -174,16 +166,6 @@ img.mediasoup-icon {
 .product-header {
   text-align: center;
   margin-bottom: 0.8rem;
-}
-
-.product-icon {
-  margin-bottom: 1rem;
-}
-
-.product-icon img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
 }
 
 h3.product-title {

@@ -4,7 +4,7 @@ Azure
 
 Info
 
-OpenVidu High Availability is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu High Availability is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Azure. The deployed services are equivalent to those in the [On Premises High Availability installation](https://openvidu.io/3.8/docs/self-hosting/ha/on-premises/install-nlb/index.md), but are provisioned as Azure resources and automated through an ARM Template Spec.
 
@@ -131,7 +131,7 @@ Parameters of this section look like this:
 
 OpenVidu HA Configuration
 
-Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/3.8/account/index.md).
+Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/).
 
 For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md).
 

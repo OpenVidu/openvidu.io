@@ -4,7 +4,7 @@ On-premises
 
 Info
 
-OpenVidu Single Node Pro is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu Single Node Pro is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node PRO deployment on-premises. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
 
@@ -278,7 +278,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **Self-signed certificates**
@@ -312,7 +312,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **With Domain Name**
@@ -349,7 +349,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **Self-signed certificates**
@@ -384,7 +384,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **Custom certificates**
@@ -425,7 +425,7 @@ Note
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
 - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 You can run that command in a CI/CD pipeline or in a script to automate the installation process.

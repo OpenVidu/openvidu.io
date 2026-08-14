@@ -4,7 +4,7 @@ On-premises
 
 Info
 
-OpenVidu Elastic is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu Elastic is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to workload.
 
@@ -126,7 +126,7 @@ A wizard will guide you through the installation process. You will be asked for 
 
 Info
 
-If you don't have a license key for OpenVidu PRO, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+If you don't have a license key for OpenVidu PRO, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 
 - **Domain name** (Optional): The domain name for your deployment. If left empty, the public IP is used as the domain name, and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) certificate is issued for it. For production environments, it's recommended to provide your own FQDN.
 
@@ -307,7 +307,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -344,7 +344,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -388,7 +388,7 @@ In case you want to deploy a specific version, just replace `latest` with the de
 
 Notes:
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -426,7 +426,7 @@ Note
 
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
@@ -470,7 +470,7 @@ Note
 In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.8.0`.
 
 - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
 
