@@ -324,19 +324,29 @@ theme:
   font:
     text: Tomorrow
     code: Roboto Mono
+  # Three-way toggle. The first entry whose `media` matches is the first-visit default,
+  # and the bare (prefers-color-scheme) always matches, so the auto entry goes first and
+  # the OS preference decides. Each entry's toggle activates the NEXT entry:
+  # auto -> light -> dark -> auto.
   palette:
-    - scheme: slate
-      primary: custom
-      accent: custom
+    - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/brightness-4
+        icon: material/brightness-auto
         name: Switch to light mode
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
